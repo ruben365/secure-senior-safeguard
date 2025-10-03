@@ -5,9 +5,10 @@ import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
 import TestimonialCard from "@/components/TestimonialCard";
 import CTASection from "@/components/CTASection";
+import ThreePathsForward from "@/components/ThreePathsForward";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Heart, FileText, MessageSquare, Users, StopCircle, Search, Phone, DollarSign, FileCheck, Shield, Laptop, Bot, CheckCircle, AlertTriangle } from "lucide-react";
+import { Heart, FileText, MessageSquare, Users, StopCircle, Search, Phone, DollarSign, FileCheck, Shield, CheckCircle } from "lucide-react";
 import heroImage from "@/assets/hero-homepage.jpg";
 import testimonial1 from "@/assets/testimonial-1.jpg";
 import testimonial2 from "@/assets/testimonial-2.jpg";
@@ -96,57 +97,7 @@ const Index = () => {
       </section>
 
       {/* Three Paths Forward */}
-      <section className="py-20 bg-muted">
-        <div className="container mx-auto px-4">
-          <h2 className="text-center mb-12">Three Paths Forward</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="p-8 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950 dark:to-blue-900 hover:shadow-large transition-all">
-              <div className="flex justify-center mb-6">
-                <Laptop className="w-16 h-16 text-accent" />
-              </div>
-              <h3 className="text-2xl mb-3 text-center">Learn & Train</h3>
-              <p className="text-muted-foreground text-center mb-4">
-                Live Zoom classes & in-person training. Spot deepfakes, verify identities, handle urgent calls.
-              </p>
-              <p className="text-center text-xl font-bold mb-6">Starting at $149</p>
-              <Button asChild variant="default" className="w-full">
-                <Link to="/training">BOOK TRAINING</Link>
-              </Button>
-            </Card>
-
-            <Card className="p-8 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950 dark:to-green-900 hover:shadow-large transition-all border-2 border-accent">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-accent-foreground px-4 py-1 rounded-full text-sm font-bold">
-                MOST POPULAR
-              </div>
-              <div className="flex justify-center mb-6">
-                <Shield className="w-16 h-16 text-accent" />
-              </div>
-              <h3 className="text-2xl mb-3 text-center">Family Scam Shield</h3>
-              <p className="text-muted-foreground text-center mb-4">
-                Forward suspicious emails, texts, links, QR codes. Get expert analysis within 24-48 hours.
-              </p>
-              <p className="text-center text-xl font-bold mb-6">Starting at $49/month</p>
-              <Button asChild variant="gold" className="w-full">
-                <Link to="/scam-shield">START SCAM SHIELD</Link>
-              </Button>
-            </Card>
-
-            <Card className="p-8 bg-gradient-to-br from-amber-50 to-amber-100 dark:from-amber-950 dark:to-amber-900 hover:shadow-large transition-all">
-              <div className="flex justify-center mb-6">
-                <Bot className="w-16 h-16 text-accent" />
-              </div>
-              <h3 className="text-2xl mb-3 text-center">AI for Business</h3>
-              <p className="text-muted-foreground text-center mb-4">
-                Custom AI receptionists, automation, and pre-purchase vetting. Don't waste $5k+ on wrong tools.
-              </p>
-              <p className="text-center text-xl font-bold mb-6">Starting at $5,000</p>
-              <Button asChild variant="default" className="w-full">
-                <Link to="/business">TALK TO AN EXPERT</Link>
-              </Button>
-            </Card>
-          </div>
-        </div>
-      </section>
+      <ThreePathsForward />
 
       {/* The 60-Second Pause Protocol */}
       <section className="py-20 bg-background">
