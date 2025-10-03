@@ -1,12 +1,310 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { Link } from "react-router-dom";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import Hero from "@/components/Hero";
+import TrustBar from "@/components/TrustBar";
+import TestimonialCard from "@/components/TestimonialCard";
+import CTASection from "@/components/CTASection";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Heart, FileText, MessageSquare, Users, StopCircle, Search, Phone, DollarSign, FileCheck, Shield, Laptop, Bot, CheckCircle, AlertTriangle } from "lucide-react";
+import heroImage from "@/assets/hero-homepage.jpg";
+import testimonial1 from "@/assets/testimonial-1.jpg";
+import testimonial2 from "@/assets/testimonial-2.jpg";
+import testimonial3 from "@/assets/testimonial-3.jpg";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen">
+      <Navigation />
+      
+      {/* Hero Section */}
+      <Hero
+        backgroundImage={heroImage}
+        headline="Protect Your Family from AI-Powered Scams"
+        subheadline="Simple, respectful training for adults 40+ and families. Learn to spot deepfakes, phishing, and AI fraud—no tech degree required."
+      >
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Button asChild variant="gold" size="xl">
+            <Link to="/training">BOOK TRAINING</Link>
+          </Button>
+          <Button asChild variant="outlineGold" size="xl">
+            <Link to="/scam-shield">START SCAM SHIELD</Link>
+          </Button>
+          <Button asChild variant="outlineGold" size="xl">
+            <Link to="/contact">TALK TO AN EXPERT</Link>
+          </Button>
+        </div>
+      </Hero>
+
+      <TrustBar />
+
+      {/* Why Families Trust InVision Network */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center mb-12">Why Families Trust InVision Network</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <Card className="p-6 hover:shadow-medium transition-shadow">
+              <div className="flex justify-center mb-4">
+                <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center">
+                  <Heart className="w-8 h-8 text-accent" />
+                </div>
+              </div>
+              <h3 className="text-xl mb-3 text-center">Privacy-First Protocols</h3>
+              <p className="text-muted-foreground text-center">
+                We NEVER ask for passwords, bank info, or Social Security numbers. Your data stays 100% private. No recording, no data selling.
+              </p>
+            </Card>
+
+            <Card className="p-6 hover:shadow-medium transition-shadow">
+              <div className="flex justify-center mb-4">
+                <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center">
+                  <MessageSquare className="w-8 h-8 text-accent" />
+                </div>
+              </div>
+              <h3 className="text-xl mb-3 text-center">Plain-English Teaching</h3>
+              <p className="text-muted-foreground text-center">
+                No jargon, no condescension. Real-world examples, step-by-step guidance. If you can use email, you can master our training.
+              </p>
+            </Card>
+
+            <Card className="p-6 hover:shadow-medium transition-shadow">
+              <div className="flex justify-center mb-4">
+                <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center">
+                  <FileText className="w-8 h-8 text-accent" />
+                </div>
+              </div>
+              <h3 className="text-xl mb-3 text-center">Emergency-Ready Scripts</h3>
+              <p className="text-muted-foreground text-center">
+                Walk away with word-for-word scripts for bank fraud, IRS scams, and family emergency cons. The 60-Second Pause Protocol™ that works.
+              </p>
+            </Card>
+
+            <Card className="p-6 hover:shadow-medium transition-shadow">
+              <div className="flex justify-center mb-4">
+                <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center">
+                  <Users className="w-8 h-8 text-accent" />
+                </div>
+              </div>
+              <h3 className="text-xl mb-3 text-center">Senior-Friendly Design</h3>
+              <p className="text-muted-foreground text-center">
+                Large text, clear buttons, patient instructors. Designed WITH seniors, not just FOR them. Ages 40-90 welcome.
+              </p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Three Paths Forward */}
+      <section className="py-20 bg-muted">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center mb-12">Three Paths Forward</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="p-8 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950 dark:to-blue-900 hover:shadow-large transition-all">
+              <div className="flex justify-center mb-6">
+                <Laptop className="w-16 h-16 text-accent" />
+              </div>
+              <h3 className="text-2xl mb-3 text-center">Learn & Train</h3>
+              <p className="text-muted-foreground text-center mb-4">
+                Live Zoom classes & in-person training. Spot deepfakes, verify identities, handle urgent calls.
+              </p>
+              <p className="text-center text-xl font-bold mb-6">Starting at $149</p>
+              <Button asChild variant="default" className="w-full">
+                <Link to="/training">BOOK TRAINING</Link>
+              </Button>
+            </Card>
+
+            <Card className="p-8 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950 dark:to-green-900 hover:shadow-large transition-all border-2 border-accent">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-accent-foreground px-4 py-1 rounded-full text-sm font-bold">
+                MOST POPULAR
+              </div>
+              <div className="flex justify-center mb-6">
+                <Shield className="w-16 h-16 text-accent" />
+              </div>
+              <h3 className="text-2xl mb-3 text-center">Family Scam Shield</h3>
+              <p className="text-muted-foreground text-center mb-4">
+                Forward suspicious emails, texts, links, QR codes. Get expert analysis within 24-48 hours.
+              </p>
+              <p className="text-center text-xl font-bold mb-6">Starting at $49/month</p>
+              <Button asChild variant="gold" className="w-full">
+                <Link to="/scam-shield">START SCAM SHIELD</Link>
+              </Button>
+            </Card>
+
+            <Card className="p-8 bg-gradient-to-br from-amber-50 to-amber-100 dark:from-amber-950 dark:to-amber-900 hover:shadow-large transition-all">
+              <div className="flex justify-center mb-6">
+                <Bot className="w-16 h-16 text-accent" />
+              </div>
+              <h3 className="text-2xl mb-3 text-center">AI for Business</h3>
+              <p className="text-muted-foreground text-center mb-4">
+                Custom AI receptionists, automation, and pre-purchase vetting. Don't waste $5k+ on wrong tools.
+              </p>
+              <p className="text-center text-xl font-bold mb-6">Starting at $5,000</p>
+              <Button asChild variant="default" className="w-full">
+                <Link to="/business">TALK TO AN EXPERT</Link>
+              </Button>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* The 60-Second Pause Protocol */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="mb-4">The 60-Second Pause Protocol™</h2>
+            <p className="text-xl text-muted-foreground">Stop Scams Before They Start</p>
+          </div>
+
+          <div className="max-w-4xl mx-auto space-y-6">
+            {[
+              { icon: StopCircle, title: "STOP & BREATHE", desc: "Don't act immediately. Scammers create urgency to bypass your judgment." },
+              { icon: Search, title: "VERIFY IDENTITY", desc: "Ask specific questions only the real person would know. Demand full name, department, callback number." },
+              { icon: Phone, title: "CALL BACK OFFICIAL NUMBER", desc: "Use the number on your bank card, official website, or phone book—NEVER the number they give you." },
+              { icon: Users, title: "USE FAMILY SAFE-WORD", desc: "Establish a secret word/phrase with family. No safe-word? No action." },
+              { icon: DollarSign, title: "DOUBLE-CHECK MONEY REQUESTS", desc: "If anyone asks for money, gift cards, wire transfers—verify through a SECOND channel (text, in-person, trusted number)." },
+              { icon: FileCheck, title: "DOCUMENT & REPORT", desc: "Write down details: time, caller info, what they said. Report to FTC, your bank, and local police if needed." },
+              { icon: Shield, title: "FORWARD TO INVISION (MEMBERS)", desc: "Scam Shield members: Send us the suspicious item for professional analysis." },
+            ].map((step, index) => (
+              <Card key={index} className="p-6 hover:shadow-medium transition-shadow">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <step.icon className="w-6 h-6 text-accent" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-2">
+                      Step {index + 1}: {step.title}
+                    </h3>
+                    <p className="text-muted-foreground">{step.desc}</p>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Comparison Table */}
+      <section className="py-20 bg-muted">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center mb-12">What Makes Us Different from Free Resources</h2>
+          <div className="max-w-5xl mx-auto overflow-x-auto">
+            <table className="w-full bg-card rounded-lg shadow-medium">
+              <thead>
+                <tr className="border-b border-border">
+                  <th className="p-4 text-left font-bold">What You Need</th>
+                  <th className="p-4 text-left font-bold">Free Resources</th>
+                  <th className="p-4 text-left font-bold bg-accent/10">InVision Network</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { need: "Personalized Training", free: "Generic articles", invision: "Live Zoom classes tailored to YOUR situation" },
+                  { need: "Hands-On Practice", free: "Read and hope", invision: "Practice spotting deepfakes & phishing in real-time" },
+                  { need: "Ongoing Support", free: "One-time info", invision: "Monthly helpline to verify suspicious items" },
+                  { need: "Emergency Scripts", free: "Vague advice", invision: "Word-for-word scripts you can read during a scam call" },
+                  { need: "AI-Specific Training", free: "Limited", invision: "Deepfake voice detection, AI image recognition, QR safety" },
+                  { need: "Family Plans", free: "Generic", invision: "Spouse included FREE in some plans" },
+                  { need: "Certificate", free: "None", invision: "Digital certificate proving you're trained" },
+                ].map((row, index) => (
+                  <tr key={index} className="border-b border-border last:border-0">
+                    <td className="p-4 font-medium">{row.need}</td>
+                    <td className="p-4 text-muted-foreground">{row.free}</td>
+                    <td className="p-4 bg-accent/5">
+                      <div className="flex items-start gap-2">
+                        <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                        <span>{row.invision}</span>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="text-center mt-8">
+            <Button asChild variant="default" size="lg">
+              <Link to="/training">COMPARE OUR TRAINING PROGRAMS</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center mb-12">What Our Clients Say</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <TestimonialCard
+              name="Mary Thompson"
+              age="68"
+              location="Columbus, OH"
+              quote="I almost fell for a deepfake 'grandson in jail' call. Thanks to InVision's 60-Second Pause Protocol, I stopped, verified, and realized it was a scam. This training saved me $8,000!"
+              image={testimonial1}
+            />
+            <TestimonialCard
+              name="Robert & Linda K."
+              age="72 & 70"
+              location="Dayton, OH"
+              quote="My husband and I took the Flexible Zoom class. The instructor was patient, clear, and funny. We feel 100% safer online now. Worth every penny."
+              image={testimonial2}
+            />
+            <TestimonialCard
+              name="James Patterson"
+              location="Cincinnati"
+              quote="As a small business owner, InVision's pre-purchase consulting saved me from a $7,000 mistake on an AI chatbot. They recommended a better solution at half the cost."
+              image={testimonial3}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Teaser */}
+      <section className="py-20 bg-muted">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center mb-12">Common Questions</h2>
+          <div className="max-w-3xl mx-auto space-y-4">
+            {[
+              {
+                q: "Is this only for seniors?",
+                a: "Not at all! While we specialize in adults 40+, anyone who wants AI scam protection is welcome. We've trained ages 35-85.",
+              },
+              {
+                q: "Do you ask for my passwords?",
+                a: "NEVER. We teach verification techniques without ever requesting sensitive data. If anyone claiming to be InVision asks for passwords, it's a scam.",
+              },
+              {
+                q: "What if I'm not tech-savvy?",
+                a: "Perfect! Our training assumes zero technical knowledge. If you can use email, you're ready.",
+              },
+            ].map((faq, index) => (
+              <Card key={index} className="p-6">
+                <h3 className="text-xl font-bold mb-2">{faq.q}</h3>
+                <p className="text-muted-foreground">{faq.a}</p>
+              </Card>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <Link to="/resources#faq" className="text-accent hover:text-accent/80 font-semibold text-lg">
+              VIEW ALL FAQ →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <CTASection headline="Ready to Protect Your Family?" variant="gold">
+        <Button asChild variant="default" size="xl">
+          <Link to="/training">BOOK TRAINING</Link>
+        </Button>
+        <Button asChild variant="outline" size="xl">
+          <Link to="/scam-shield">START SCAM SHIELD</Link>
+        </Button>
+        <Button asChild variant="outline" size="xl">
+          <Link to="/resources">GET FREE SECURITY CHECKLIST</Link>
+        </Button>
+      </CTASection>
+
+      <Footer />
     </div>
   );
 };

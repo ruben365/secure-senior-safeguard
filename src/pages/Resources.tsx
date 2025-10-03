@@ -1,0 +1,223 @@
+import { Link } from "react-router-dom";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Download, Shield, Wifi, KeyRound, Heart, FileText, ShoppingCart } from "lucide-react";
+
+const Resources = () => {
+  const guides = [
+    { icon: Shield, title: "Scam-Proof Playbook", desc: "Complete emergency scripts & protocols" },
+    { icon: Heart, title: "Caregivers' Security Guide", desc: "Protect vulnerable loved ones from scams" },
+    { icon: Wifi, title: "Home Wi-Fi Safety", desc: "Secure your network in 15 minutes" },
+    { icon: KeyRound, title: "Password Creation Notebook Template", desc: "Offline password storage system" },
+    { icon: FileText, title: "Grandparent-Text 101", desc: "Spot fake 'emergency' family texts" },
+    { icon: Shield, title: "60-Second Pause Protocol Poster", desc: "Print and post on your fridge" },
+  ];
+
+  const products = [
+    { name: "USB Data Blocker (2-pack)", price: "$12.99" },
+    { name: "Webcam Privacy Covers (3-pack)", price: "$8.99" },
+    { name: "RFID-Blocking Card Sleeves (5-pack)", price: "$14.99" },
+    { name: "Password Notebook (Hardcover)", price: "$16.99" },
+    { name: "Complete Security Kit (Bundle)", price: "$44.99" },
+  ];
+
+  const blogArticles = [
+    {
+      title: "How to Spot a Deepfake Voice Call in 5 Seconds",
+      image: "https://images.unsplash.com/photo-1589254065878-42c9da997008?w=800&h=400&fit=crop",
+    },
+    {
+      title: "The New QR Code Scam Targeting Seniors",
+      image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&h=400&fit=crop",
+    },
+    {
+      title: "What to Do If You Think You've Been Scammed",
+      image: "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=800&h=400&fit=crop",
+    },
+  ];
+
+  const faqs = [
+    {
+      q: "Is this only for seniors?",
+      a: "Not at all! While we specialize in adults 40+, anyone who wants AI scam protection is welcome. We've trained ages 35-85.",
+    },
+    {
+      q: "Do you ask for my passwords?",
+      a: "NEVER. We teach verification techniques without ever requesting sensitive data. If anyone claiming to be InVision asks for passwords, it's a scam.",
+    },
+    {
+      q: "What if I'm not tech-savvy?",
+      a: "Perfect! Our training assumes zero technical knowledge. If you can use email, you're ready.",
+    },
+    {
+      q: "Can family members join my training?",
+      a: "Yes! Our Family Small Group plan includes your spouse FREE. Priority Private sessions can include up to 3 people.",
+    },
+    {
+      q: "Do you record Zoom sessions?",
+      a: "No. We do NOT record classes to protect your privacy. No login required to attend.",
+    },
+    {
+      q: "What are your rescheduling terms?",
+      a: "Single Small Group: Not available. Family Small Group: One free reschedule (14 days notice). Priority Private: Easy reschedule (24hr notice).",
+    },
+    {
+      q: "Do you provide certificates?",
+      a: "Yes! Every training includes a digital certificate of completion you can print or share.",
+    },
+    {
+      q: "Do you travel for in-person training?",
+      a: "Yes! We serve Dayton metro locally and offer nationwide in-person training. InVision covers all trainer travel costs.",
+    },
+    {
+      q: "How do military/veteran discounts work?",
+      a: "Veterans and active military receive 20% off all training. Cancer patients receive 25% off. Contact us with verification.",
+    },
+    {
+      q: "What's your refund policy?",
+      a: "We offer a 7-day satisfaction guarantee. If you're not satisfied with your training, contact us within 7 days for a full refund.",
+    },
+    {
+      q: "How long does Scam Shield analysis take?",
+      a: "Standard Plan: ≤ 48 hours. Premium Plan: ≤ 24 hours. Unlimited Plan: ≤ 12 hours.",
+    },
+    {
+      q: "Can I submit items in Spanish or French?",
+      a: "Yes! We analyze items in English, Spanish, and French. Other languages may take longer.",
+    },
+  ];
+
+  return (
+    <div className="min-h-screen">
+      <Navigation />
+
+      {/* Hero */}
+      <section className="bg-primary text-primary-foreground py-20">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="mb-6">Free Resources & Tools</h1>
+          <p className="text-xl md:text-2xl max-w-3xl mx-auto">
+            Downloadable guides, security tools, and answers to your questions—everything you need to stay safe.
+          </p>
+        </div>
+      </section>
+
+      {/* Free Guides */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center mb-12">Free Downloadable Guides</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {guides.map((guide, index) => (
+              <Card key={index} className="p-6 hover:shadow-medium transition-shadow">
+                <div className="flex justify-center mb-4">
+                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center">
+                    <guide.icon className="w-8 h-8 text-accent" />
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-center">{guide.title}</h3>
+                <p className="text-muted-foreground text-center mb-4">{guide.desc}</p>
+                <Button asChild className="w-full" variant="outline">
+                  <Link to="/contact">
+                    <Download className="w-4 h-4 mr-2" />
+                    DOWNLOAD FREE
+                  </Link>
+                </Button>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Security Tools Shop */}
+      <section className="py-20 bg-muted">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center mb-4">Security Tools Shop</h2>
+          <p className="text-center text-muted-foreground mb-12 text-lg">
+            All profits fund free training for seniors in need.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+            {products.map((product, index) => (
+              <Card key={index} className="p-6 hover:shadow-medium transition-shadow flex flex-col">
+                <div className="flex justify-center mb-4">
+                  <ShoppingCart className="w-12 h-12 text-accent" />
+                </div>
+                <h3 className="font-bold mb-2 text-center flex-grow">{product.name}</h3>
+                <p className="text-2xl font-bold text-accent text-center mb-4">{product.price}</p>
+                <Button asChild className="w-full">
+                  <Link to="/contact">BUY NOW</Link>
+                </Button>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Blog */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center mb-12">Recent Articles</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {blogArticles.map((article, index) => (
+              <Card key={index} className="overflow-hidden hover:shadow-medium transition-shadow">
+                <img src={article.image} alt={article.title} className="w-full h-48 object-cover" />
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-4">{article.title}</h3>
+                  <Link to="/contact" className="text-accent hover:text-accent/80 font-semibold">
+                    READ MORE →
+                  </Link>
+                </div>
+              </Card>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <Button asChild variant="outline" size="lg">
+              <Link to="/contact">VIEW ALL ARTICLES</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-20 bg-muted" id="faq">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center mb-12">Frequently Asked Questions</h2>
+          <div className="max-w-4xl mx-auto">
+            <Accordion type="single" collapsible className="space-y-4">
+              {faqs.map((faq, index) => (
+                <AccordionItem key={index} value={`item-${index}`} className="bg-card rounded-lg px-6">
+                  <AccordionTrigger className="text-lg font-bold hover:text-accent">
+                    {faq.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground text-base leading-relaxed">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-20 bg-accent">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-accent-foreground mb-8">Still Have Questions?</h2>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button asChild variant="default" size="xl">
+              <Link to="/contact">CONTACT US</Link>
+            </Button>
+            <Button asChild variant="outline" size="xl">
+              <Link to="/training">BOOK TRAINING</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default Resources;
