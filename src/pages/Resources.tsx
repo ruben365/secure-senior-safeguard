@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import Hero from "@/components/Hero";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Download, Shield, Wifi, KeyRound, Heart, FileText, ShoppingCart } from "lucide-react";
+import heroImage from "@/assets/hero-resources.jpg";
 
 const Resources = () => {
   const guides = [
@@ -95,14 +97,11 @@ const Resources = () => {
       <Navigation />
 
       {/* Hero */}
-      <section className="bg-gradient-hero-primary text-primary-foreground py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="mb-6">Free Resources & Tools</h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto">
-            Downloadable guides, security tools, and answers to your questions—everything you need to stay safe.
-          </p>
-        </div>
-      </section>
+      <Hero
+        backgroundImage={heroImage}
+        headline="Free Resources & Tools"
+        subheadline="Downloadable guides, security tools, and answers to your questions—everything you need to stay safe."
+      />
 
       {/* Free Guides */}
       <section className="py-20 bg-background">
