@@ -13,6 +13,9 @@ import heroImage from "@/assets/hero-homepage.jpg";
 import testimonial1 from "@/assets/testimonial-1.jpg";
 import testimonial2 from "@/assets/testimonial-2.jpg";
 import testimonial3 from "@/assets/testimonial-3.jpg";
+import testimonial5 from "@/assets/testimonial-5.jpg";
+import testimonial6 from "@/assets/testimonial-6.jpg";
+import testimonial7 from "@/assets/testimonial-7.jpg";
 
 const Index = () => {
   return (
@@ -198,7 +201,7 @@ const Index = () => {
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-center mb-12 animate-fade-in-up">What Our Clients Say</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="animate-fade-in-up" style={{ animationDelay: '0ms' }}>
               <TestimonialCard
                 name="Mary Thompson"
@@ -223,6 +226,33 @@ const Index = () => {
                 location="Cincinnati"
                 quote="As a small business owner, InVision's pre-purchase consulting saved me from a $7,000 mistake on an AI chatbot. They recommended a better solution at half the cost."
                 image={testimonial3}
+              />
+            </div>
+            <div className="animate-fade-in-up" style={{ animationDelay: '450ms' }}>
+              <TestimonialCard
+                name="Susan Martinez"
+                age="65"
+                location="Toledo, OH"
+                quote="The Scam Shield service caught a phishing email that looked exactly like my bank. I would have clicked it without thinking. Now I forward anything suspicious before taking action."
+                image={testimonial5}
+              />
+            </div>
+            <div className="animate-fade-in-up" style={{ animationDelay: '600ms' }}>
+              <TestimonialCard
+                name="William Chen"
+                age="78"
+                location="Akron, OH"
+                quote="I'm not tech-savvy, but the in-person training made everything click. They taught me how to spot AI voice clones and fake videos. My daughter finally stopped worrying about me!"
+                image={testimonial6}
+              />
+            </div>
+            <div className="animate-fade-in-up" style={{ animationDelay: '750ms' }}>
+              <TestimonialCard
+                name="Jennifer Wallace"
+                age="58"
+                location="Cleveland, OH"
+                quote="After my mother nearly lost $15,000 to a scammer, I signed our whole family up for training. It's been a lifesaver. Everyone knows the 60-Second Pause Protocol now."
+                image={testimonial7}
               />
             </div>
           </div>
