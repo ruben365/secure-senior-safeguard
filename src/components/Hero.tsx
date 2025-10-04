@@ -1,8 +1,10 @@
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import TransitioningBackground from "./TransitioningBackground";
 
 interface HeroProps {
-  backgroundImage: string;
+  backgroundImage?: string;
+  useTransitioningBackground?: boolean;
   headline: string;
   subheadline?: string;
   children?: ReactNode;
@@ -10,14 +12,18 @@ interface HeroProps {
   overlay?: boolean;
 }
 
-const Hero = ({ backgroundImage, headline, subheadline, children, className, overlay = true }: HeroProps) => {
+const Hero = ({ backgroundImage, useTransitioningBackground = false, headline, subheadline, children, className, overlay = true }: HeroProps) => {
   return (
     <div className={cn("relative min-h-[90vh] flex items-center overflow-hidden", className)}>
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-      />
+      {/* Background */}
+      {useTransitioningBackground ? (
+        <TransitioningBackground />
+      ) : (
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${backgroundImage})` }}
+        />
+      )}
       
       {/* Animated Gradient Overlay */}
       {overlay && (

@@ -24,7 +24,7 @@ const Index = () => {
       
       {/* Hero Section */}
       <Hero
-        backgroundImage={heroImage}
+        useTransitioningBackground={true}
         headline="Protect Your Family from AI-Powered Scams"
         subheadline="Simple, respectful training for adults 40+ and families. Learn to spot deepfakes, phishing, and AI fraud—no tech degree required."
       >
