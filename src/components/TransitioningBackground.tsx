@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import forestImage from '@/assets/nature-forest.jpg';
-import oceanImage from '@/assets/nature-ocean.jpg';
-import mountainsImage from '@/assets/nature-mountains.jpg';
+import eldersHero1 from '@/assets/elders-hero-1.jpg';
+import eldersHero2 from '@/assets/elders-hero-2.jpg';
+import eldersHero3 from '@/assets/elders-hero-3.jpg';
 
-const images = [forestImage, oceanImage, mountainsImage];
+const images = [eldersHero1, eldersHero2, eldersHero3];
 
 interface TransitioningBackgroundProps {
   interval?: number; // milliseconds between transitions
