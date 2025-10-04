@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
 import TestimonialCard from "@/components/TestimonialCard";
 import CTASection from "@/components/CTASection";
+import FlowingWaves from "@/components/FlowingWaves";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Upload, UserCheck, Shield, Mail, Link as LinkIcon, QrCode, Mic, Image as ImageIcon, MessageSquare, CheckCircle, AlertTriangle } from "lucide-react";
@@ -31,8 +32,9 @@ const ScamShield = () => {
       <TrustBar />
 
       {/* How Scam Shield Works */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-background relative">
+        <FlowingWaves variant="full" opacity={0.12} />
+        <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-center mb-12">How Scam Shield Works</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <Card className="p-8 text-center hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50">

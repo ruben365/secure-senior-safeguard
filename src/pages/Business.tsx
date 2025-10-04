@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
 import TestimonialCard from "@/components/TestimonialCard";
 import CTASection from "@/components/CTASection";
+import FlowingWaves from "@/components/FlowingWaves";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Phone, Mail, MessageSquare, Calendar, CheckCircle, Search, Shield } from "lucide-react";
@@ -30,8 +31,9 @@ const Business = () => {
       <TrustBar />
 
       {/* Use Cases */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-background relative">
+        <FlowingWaves variant="full" opacity={0.12} />
+        <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-center mb-12">AI for Business & Web Design</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <Card className="p-8 hover:shadow-medium transition-shadow">

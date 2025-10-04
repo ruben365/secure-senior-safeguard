@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import FlowingWaves from "@/components/FlowingWaves";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -29,8 +30,10 @@ const Contact = () => {
         subheadline="Whether you have questions, need training, or want to protect your family—we're ready to assist you."
       />
 
-      <div className="container mx-auto px-4 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <section className="relative py-20">
+        <FlowingWaves variant="full" opacity={0.12} />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <div>
             <h2 className="mb-8">Send Us a Message</h2>
@@ -217,7 +220,8 @@ const Contact = () => {
             </div>
           </div>
         </div>
-      </div>
+        </div>
+      </section>
 
       <Footer />
     </div>
