@@ -297,7 +297,7 @@ const ScamShield = () => {
 
       {/* Final CTA */}
       <section className="relative py-20 overflow-hidden">
-        <TransitioningBackground opacity={0.5} />
+        <TransitioningBackground opacity={0.2} />
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-white mb-8">Get Protection Starting Today</h2>
           <Button asChild variant="gold" size="xl">

@@ -222,7 +222,7 @@ const Contact = () => {
 
       {/* Final CTA with Nature Background */}
       <section className="relative py-20 overflow-hidden">
-        <TransitioningBackground opacity={0.5} />
+        <TransitioningBackground opacity={0.2} />
         <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-white mb-8">Ready to Get Started?</h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
