@@ -44,7 +44,7 @@ const Navigation = () => {
               <Link
                 key={link.name}
                 to={link.href}
-                className="text-foreground/80 hover:text-foreground font-medium transition-colors duration-200 text-sm"
+                className="text-foreground/80 hover:text-foreground font-bold transition-colors duration-200 text-base"
               >
                 {link.name}
               </Link>
@@ -87,7 +87,7 @@ const Navigation = () => {
                 <Link
                   key={link.name}
                   to={link.href}
-                  className="text-foreground/80 hover:text-foreground py-2 transition-colors font-medium"
+                  className="text-foreground/80 hover:text-foreground py-2 transition-colors font-bold text-base"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.name}
