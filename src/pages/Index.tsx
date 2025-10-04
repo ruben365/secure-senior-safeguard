@@ -29,10 +29,10 @@ const Index = () => {
           <Button asChild variant="default" size="xl">
             <Link to="/training">BOOK TRAINING</Link>
           </Button>
-          <Button asChild variant="outline" size="xl">
+          <Button asChild variant="outlineLight" size="xl">
             <Link to="/scam-shield">START SCAM SHIELD</Link>
           </Button>
-          <Button asChild variant="outline" size="xl">
+          <Button asChild variant="outlineLight" size="xl">
             <Link to="/contact">TALK TO AN EXPERT</Link>
           </Button>
         </div>
@@ -247,10 +247,10 @@ const Index = () => {
         <Button asChild variant="gold" size="xl">
           <Link to="/training">BOOK TRAINING</Link>
         </Button>
-        <Button asChild variant="outline" size="xl">
+        <Button asChild variant="outlineLight" size="xl">
           <Link to="/scam-shield">START SCAM SHIELD</Link>
         </Button>
-        <Button asChild variant="outline" size="xl">
+        <Button asChild variant="outlineLight" size="xl">
           <Link to="/resources">GET FREE SECURITY CHECKLIST</Link>
         </Button>
       </CTASection>
