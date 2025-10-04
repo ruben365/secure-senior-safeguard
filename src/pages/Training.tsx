@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
 import TestimonialCard from "@/components/TestimonialCard";
 import CTASection from "@/components/CTASection";
+import TransitioningBackground from "@/components/TransitioningBackground";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, FileText, Award, MessageSquare, Users, Home } from "lucide-react";
@@ -285,6 +286,11 @@ const Training = () => {
           <Link to="/resources">DOWNLOAD FREE SECURITY CHECKLIST</Link>
         </Button>
       </CTASection>
+
+      {/* Nature Background Section */}
+      <section className="relative h-64 overflow-hidden">
+        <TransitioningBackground opacity={0.25} />
+      </section>
 
       <Footer />
     </div>

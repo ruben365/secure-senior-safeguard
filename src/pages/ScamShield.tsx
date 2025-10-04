@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
 import TestimonialCard from "@/components/TestimonialCard";
 import CTASection from "@/components/CTASection";
+import TransitioningBackground from "@/components/TransitioningBackground";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Upload, UserCheck, Shield, Mail, Link as LinkIcon, QrCode, Mic, Image as ImageIcon, MessageSquare, CheckCircle, AlertTriangle } from "lucide-react";
@@ -304,6 +305,11 @@ const ScamShield = () => {
           🔒 Cancel anytime • 7-day money-back guarantee • No setup fees
         </p>
       </CTASection>
+
+      {/* Nature Background Section */}
+      <section className="relative h-64 overflow-hidden">
+        <TransitioningBackground opacity={0.25} />
+      </section>
 
       <Footer />
     </div>

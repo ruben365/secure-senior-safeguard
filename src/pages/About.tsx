@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import TransitioningBackground from "@/components/TransitioningBackground";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Heart, Lock, BookOpen, Users2, Shield, DollarSign, Award, MapPin } from "lucide-react";
@@ -266,6 +267,11 @@ const About = () => {
             Questions? Call <a href="tel:9375551234" className="underline hover:text-white font-semibold">(937) 555-1234</a>
           </p>
         </div>
+      </section>
+
+      {/* Nature Background Section */}
+      <section className="relative h-64 overflow-hidden">
+        <TransitioningBackground opacity={0.25} />
       </section>
 
       <Footer />

@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
 import TestimonialCard from "@/components/TestimonialCard";
 import CTASection from "@/components/CTASection";
+import TransitioningBackground from "@/components/TransitioningBackground";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Phone, Mail, MessageSquare, Calendar, CheckCircle, Search, Shield } from "lucide-react";
@@ -705,6 +706,11 @@ const Business = () => {
         </Button>
         <p className="text-accent-foreground text-sm mt-4">15-minute call to discuss your needs—no sales pressure.</p>
       </CTASection>
+
+      {/* Nature Background Section */}
+      <section className="relative h-64 overflow-hidden">
+        <TransitioningBackground opacity={0.25} />
+      </section>
 
       <Footer />
     </div>

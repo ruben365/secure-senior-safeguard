@@ -1,6 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import TransitioningBackground from "@/components/TransitioningBackground";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -217,6 +218,11 @@ const Contact = () => {
           </div>
         </div>
       </div>
+
+      {/* Nature Background Section */}
+      <section className="relative h-64 overflow-hidden">
+        <TransitioningBackground opacity={0.25} />
+      </section>
 
       <Footer />
     </div>
