@@ -16,7 +16,7 @@ const Navigation = () => {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 glass-effect border-b border-border/50 shadow-medium backdrop-blur-lg">
+    <nav className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
@@ -39,12 +39,12 @@ const Navigation = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-6">
+          <div className="hidden lg:flex items-center space-x-8">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.href}
-                className="text-foreground font-semibold transition-all duration-300 relative after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary after:to-accent after:-translate-x-1/2 after:transition-all hover:after:w-4/5 hover:text-primary"
+                className="text-foreground/80 hover:text-foreground font-medium transition-colors duration-200 text-sm"
               >
                 {link.name}
               </Link>
@@ -52,26 +52,26 @@ const Navigation = () => {
           </div>
 
           {/* Right Side - Language & Phone & CTA */}
-          <div className="flex items-center space-x-3">
-            <div className="hidden md:flex items-center space-x-2 text-sm">
+          <div className="flex items-center space-x-4">
+            <div className="hidden md:flex items-center space-x-2 text-sm text-muted-foreground">
               <Globe className="w-4 h-4" />
-              <span className="text-primary-foreground/80">EN | FR | ES</span>
+              <span>EN | FR | ES</span>
             </div>
             <a
               href="tel:9375551234"
-              className="hidden md:flex items-center space-x-2 text-sm hover:text-accent transition-colors"
+              className="hidden md:flex items-center space-x-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               <Phone className="w-4 h-4" />
-              <span>(937) 555-1234</span>
+              <span className="font-medium">(937) 555-1234</span>
             </a>
-            <Button asChild variant="default" size="sm" className="hidden md:inline-flex">
+            <Button asChild variant="default" size="sm" className="hidden md:inline-flex font-semibold">
               <Link to="/training">BOOK TRAINING</Link>
             </Button>
 
             {/* Mobile menu button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 text-primary-foreground hover:bg-primary-foreground/10 rounded-md transition-colors"
+              className="lg:hidden p-2 text-foreground hover:bg-muted rounded-md transition-colors"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -81,19 +81,19 @@ const Navigation = () => {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-primary-foreground/20">
+          <div className="lg:hidden py-4 border-t border-border">
             <div className="flex flex-col space-y-3">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.href}
-                  className="text-primary-foreground/90 hover:text-primary-foreground py-2 transition-colors"
+                  className="text-foreground/80 hover:text-foreground py-2 transition-colors font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.name}
                 </Link>
               ))}
-              <div className="pt-2 border-t border-primary-foreground/20">
+              <div className="pt-2 border-t border-border">
                 <Button asChild variant="default" className="w-full mb-2">
                   <Link to="/training" onClick={() => setMobileMenuOpen(false)}>
                     BOOK TRAINING
@@ -101,10 +101,10 @@ const Navigation = () => {
                 </Button>
                 <a
                   href="tel:9375551234"
-                  className="flex items-center justify-center space-x-2 text-primary-foreground py-2"
+                  className="flex items-center justify-center space-x-2 text-foreground py-2"
                 >
                   <Phone className="w-4 h-4" />
-                  <span>(937) 555-1234</span>
+                  <span className="font-medium">(937) 555-1234</span>
                 </a>
               </div>
             </div>

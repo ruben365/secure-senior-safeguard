@@ -5,7 +5,7 @@ import Hero from "@/components/Hero";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Heart, Lock, BookOpen, Users2, Shield, DollarSign, Award, MapPin } from "lucide-react";
-import heroImage from "@/assets/hero-about.jpg";
+import heroImage from "@/assets/hero-about-new.jpg";
 
 const About = () => {
   return (
@@ -19,10 +19,10 @@ const About = () => {
       />
 
       {/* Our Story */}
-      <section className="py-20 bg-background">
+      <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-center mb-8">Our Story</h2>
+            <h2 className="text-center mb-12">Our Story</h2>
             <div className="space-y-6 text-lg leading-relaxed text-muted-foreground">
               <p>
                 InVision Network was born from a close call. When our founder's mother nearly wired $10,000 to a scammer using a
@@ -40,10 +40,10 @@ const About = () => {
       </section>
 
       {/* Our Mission */}
-      <section className="py-20 bg-muted">
+      <section className="py-24 bg-muted">
         <div className="container mx-auto px-4">
-          <Card className="max-w-4xl mx-auto p-12 bg-gradient-to-br from-accent/10 to-accent/5">
-            <blockquote className="text-3xl md:text-4xl font-bold text-center leading-relaxed">
+          <Card className="max-w-4xl mx-auto p-12 bg-gradient-to-br from-primary/5 to-accent/5 border-2 border-primary/10 shadow-medium">
+            <blockquote className="text-2xl md:text-3xl font-bold text-center leading-relaxed text-foreground">
               "To empower 100,000 families with the knowledge and confidence to outsmart AI scammers—and help businesses use AI safely
               and effectively."
             </blockquote>
@@ -52,9 +52,9 @@ const About = () => {
       </section>
 
       {/* Our Values */}
-      <section className="py-20 bg-background">
+      <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
-          <h2 className="text-center mb-12">Our Values</h2>
+          <h2 className="text-center mb-16">Our Values</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <Card className="p-8 hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50">
               <div className="flex items-start gap-4">
@@ -116,9 +116,9 @@ const About = () => {
       </section>
 
       {/* Our Impact */}
-      <section className="py-20 bg-muted">
+      <section className="py-24 bg-muted">
         <div className="container mx-auto px-4">
-          <h2 className="text-center mb-12">Our Community Impact</h2>
+          <h2 className="text-center mb-16">Our Community Impact</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <Card className="p-8 text-center hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50">
               <div className="flex justify-center mb-4">
@@ -171,9 +171,9 @@ const About = () => {
       </section>
 
       {/* Certifications & Partnerships */}
-      <section className="py-20 bg-background">
+      <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
-          <h2 className="text-center mb-12">Our Certifications & Partnerships</h2>
+          <h2 className="text-center mb-16">Our Certifications & Partnerships</h2>
           <div className="flex flex-wrap justify-center items-center gap-8">
             <Card className="p-6 hover:shadow-medium transition-shadow">
               <div className="flex items-center gap-3">
@@ -198,9 +198,9 @@ const About = () => {
       </section>
 
       {/* Service Areas */}
-      <section className="py-20 bg-muted">
+      <section className="py-24 bg-muted">
         <div className="container mx-auto px-4">
-          <h2 className="text-center mb-12">Service Areas</h2>
+          <h2 className="text-center mb-16">Service Areas</h2>
           <div className="max-w-4xl mx-auto">
             <Card className="p-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -248,22 +248,22 @@ const About = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 bg-gradient-to-r from-primary to-accent">
+      <section className="py-24 bg-gradient-to-r from-primary to-accent">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-accent-foreground mb-8">Want to Join Our Mission?</h2>
+          <h2 className="text-white mb-8">Want to Join Our Mission?</h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button asChild variant="gold" size="xl">
               <Link to="/training">BOOK TRAINING</Link>
             </Button>
-            <Button asChild variant="outline" size="xl">
+            <Button asChild variant="outlineLight" size="xl">
               <Link to="/contact">PARTNER WITH US</Link>
             </Button>
-            <Button asChild variant="outline" size="xl">
+            <Button asChild variant="outlineLight" size="xl">
               <Link to="/donate">DONATE A TRAINING SEAT</Link>
             </Button>
           </div>
-          <p className="mt-6 text-accent-foreground/80">
-            Questions? Call <a href="tel:9375551234" className="underline hover:text-accent-foreground">(937) 555-1234</a>
+          <p className="mt-6 text-white/90 text-lg">
+            Questions? Call <a href="tel:9375551234" className="underline hover:text-white font-semibold">(937) 555-1234</a>
           </p>
         </div>
       </section>
