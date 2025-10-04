@@ -5,7 +5,6 @@ import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
 import TestimonialCard from "@/components/TestimonialCard";
 import CTASection from "@/components/CTASection";
-import BlobBackground from "@/components/BlobBackground";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, FileText, Award, MessageSquare, Users, Home } from "lucide-react";
@@ -31,12 +30,11 @@ const Training = () => {
       <TrustBar />
 
       {/* What You'll Master */}
-      <section className="py-24 bg-gradient-to-b from-background to-muted/30 relative overflow-hidden">
-        <BlobBackground variant="purple" position="top-right" />
-        <div className="container mx-auto px-4 relative z-10">
-          <h2 className="text-center mb-16 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">What You'll Master</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
-            <div className="space-y-5">
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center mb-12">What You'll Master</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+            <div className="space-y-4">
               {[
                 "Identity Verification & Callback Drills",
                 "Deepfake Voice & Video Red Flags",
@@ -47,20 +45,17 @@ const Training = () => {
                 "Family Safe-Word System Setup",
                 "Emergency Response Checklist",
               ].map((skill, index) => (
-                <div key={index} className="flex items-start gap-4 group animate-fade-in" style={{ animationDelay: `${index * 50}ms` }}>
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-success to-success/70 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                    <CheckCircle className="w-5 h-5 text-white" />
-                  </div>
-                  <span className="text-lg font-medium leading-relaxed">{skill}</span>
+                <div key={index} className="flex items-start gap-3">
+                  <CheckCircle className="w-6 h-6 text-success flex-shrink-0 mt-1" />
+                  <span className="text-lg">{skill}</span>
                 </div>
               ))}
             </div>
-            <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all"></div>
+            <div className="bg-muted/50 rounded-lg p-8">
               <img
                 src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=600&fit=crop"
                 alt="Person confidently reviewing security documents"
-                className="rounded-2xl shadow-strong relative z-10 group-hover:scale-[1.02] transition-transform"
+                className="rounded-lg shadow-medium"
               />
             </div>
           </div>
@@ -68,110 +63,140 @@ const Training = () => {
       </section>
 
       {/* Pricing Table */}
-      <section className="py-24 bg-gradient-to-b from-muted/30 to-muted relative overflow-hidden">
-        <BlobBackground variant="teal" position="bottom-left" />
-        <div className="container mx-auto px-4 relative z-10">
-          <h2 className="text-center mb-20 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Training Programs & Pricing</h2>
-          <div className="overflow-x-auto">
-            <div className="min-w-[900px] max-w-5xl mx-auto">
-              <div className="grid grid-cols-4 gap-6">
-                {/* Header Row */}
-                <div className="bg-gradient-to-br from-card to-muted/50 p-8 rounded-t-2xl font-bold text-lg shadow-soft border-2 border-border/50">
-                  Program Features
-                </div>
-                <div className="bg-card p-8 rounded-t-2xl text-center shadow-soft border-2 border-border/50 hover:shadow-medium transition-shadow">
-                  <h3 className="text-2xl font-bold mb-2 text-foreground">Single Small Group</h3>
-                  <p className="text-sm text-muted-foreground font-medium">15-25 participants</p>
-                </div>
-                <div className="bg-gradient-to-br from-primary/10 via-accent/5 to-primary/10 p-8 rounded-t-2xl text-center border-3 border-primary/30 relative shadow-strong hover:shadow-[0_20px_60px_rgba(139,92,246,0.3)] transition-all transform hover:scale-[1.02]">
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-white px-6 py-2 rounded-full text-xs font-bold tracking-wider shadow-medium">
-                    ⭐ MOST POPULAR
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center mb-16">Training Programs & Pricing</h2>
+          
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              {/* Program Features Column */}
+              <Card className="bg-card/50 border-border/50 rounded-xl p-6">
+                <h3 className="text-xl font-bold mb-8">Program Features</h3>
+                <div className="space-y-8">
+                  <div className="py-4">
+                    <p className="font-semibold text-foreground">Format</p>
                   </div>
-                  <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Family Small Group</h3>
-                  <p className="text-sm text-muted-foreground font-medium">8-12 participants</p>
+                  <div className="py-4">
+                    <p className="font-semibold text-foreground">Ideal For</p>
+                  </div>
+                  <div className="py-4">
+                    <p className="font-semibold text-foreground">Group Size</p>
+                  </div>
+                  <div className="py-4">
+                    <p className="font-semibold text-foreground">Languages</p>
+                  </div>
+                  <div className="py-4 pt-8">
+                    <p className="font-semibold text-foreground">Price</p>
+                  </div>
                 </div>
-                <div className="bg-card p-8 rounded-t-2xl text-center shadow-soft border-2 border-border/50 hover:shadow-medium transition-shadow">
-                  <h3 className="text-2xl font-bold mb-2 text-foreground">Priority Private</h3>
-                  <p className="text-sm text-muted-foreground font-medium">1-3 people</p>
-                </div>
+              </Card>
 
-                {/* Format */}
-                <div className="bg-gradient-to-br from-card to-muted/50 p-6 font-bold text-sm border-x-2 border-border/50">Format</div>
-                <div className="bg-card p-6 text-center text-sm border-x-2 border-border/50">Zoom, 60-90 min</div>
-                <div className="bg-gradient-to-br from-primary/10 via-accent/5 to-primary/10 p-6 text-center text-sm font-medium border-x-3 border-primary/30">Zoom, limited seats</div>
-                <div className="bg-card p-6 text-center text-sm border-x-2 border-border/50">Zoom or In-Person</div>
+              {/* Single Small Group */}
+              <Card className="bg-card border-border/50 rounded-xl p-6 hover:shadow-medium transition-shadow">
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-bold mb-2">Single Small Group</h3>
+                  <p className="text-muted-foreground">15-25 participants</p>
+                </div>
+                <div className="space-y-8">
+                  <div className="py-4 text-center">
+                    <p className="text-foreground">Zoom, 60-90 min</p>
+                  </div>
+                  <div className="py-4 text-center">
+                    <p className="text-foreground">Individual learner</p>
+                  </div>
+                  <div className="py-4 text-center">
+                    <p className="text-foreground">15-25 participants</p>
+                  </div>
+                  <div className="py-4 text-center">
+                    <p className="text-foreground">EN / FR / ES</p>
+                  </div>
+                  <div className="py-4 pt-8 text-center">
+                    <p className="text-5xl font-bold text-accent mb-2">$149</p>
+                    <p className="text-sm text-muted-foreground">per person</p>
+                  </div>
+                </div>
+                <Button asChild variant="default" size="lg" className="w-full mt-6">
+                  <Link to="/contact">Book Now</Link>
+                </Button>
+              </Card>
 
-                {/* Ideal For */}
-                <div className="bg-gradient-to-br from-card to-muted/50 p-6 font-bold text-sm border-x-2 border-border/50">Ideal For</div>
-                <div className="bg-card p-6 text-center text-sm border-x-2 border-border/50">Individual learner</div>
-                <div className="bg-gradient-to-br from-primary/10 via-accent/5 to-primary/10 p-6 text-center text-sm font-medium border-x-3 border-primary/30">Couples & families</div>
-                <div className="bg-card p-6 text-center text-sm border-x-2 border-border/50">High-risk / urgent needs</div>
+              {/* Family Small Group - Most Popular */}
+              <Card className="bg-card border-2 border-accent rounded-xl p-6 shadow-medium hover:shadow-strong transition-shadow relative">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-white px-4 py-1 rounded-full text-xs font-bold">
+                  MOST POPULAR
+                </div>
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-bold mb-2">Family Small Group</h3>
+                  <p className="text-muted-foreground">8-12 participants</p>
+                </div>
+                <div className="space-y-8">
+                  <div className="py-4 text-center">
+                    <p className="text-foreground">Zoom, limited seats</p>
+                  </div>
+                  <div className="py-4 text-center">
+                    <p className="text-foreground">Couples & families</p>
+                  </div>
+                  <div className="py-4 text-center">
+                    <p className="text-foreground">8-12 participants</p>
+                  </div>
+                  <div className="py-4 text-center">
+                    <p className="text-foreground">EN / FR / ES</p>
+                  </div>
+                  <div className="py-4 pt-8 text-center">
+                    <p className="text-5xl font-bold text-accent mb-2">$299</p>
+                    <p className="text-sm text-muted-foreground mb-2">per session</p>
+                    <p className="text-sm font-semibold text-success">Spouse FREE</p>
+                  </div>
+                </div>
+                <Button asChild variant="default" size="lg" className="w-full mt-6 bg-accent hover:bg-accent/90">
+                  <Link to="/contact">Book Now</Link>
+                </Button>
+              </Card>
 
-                {/* Group Size */}
-                <div className="bg-gradient-to-br from-card to-muted/50 p-6 font-bold text-sm border-x-2 border-border/50">Group Size</div>
-                <div className="bg-card p-6 text-center text-sm border-x-2 border-border/50">15-25 participants</div>
-                <div className="bg-gradient-to-br from-primary/10 via-accent/5 to-primary/10 p-6 text-center text-sm font-medium border-x-3 border-primary/30">8-12 participants</div>
-                <div className="bg-card p-6 text-center text-sm border-x-2 border-border/50">Private (1-3 people)</div>
-
-                {/* Languages */}
-                <div className="bg-gradient-to-br from-card to-muted/50 p-6 font-bold text-sm border-x-2 border-border/50">Languages</div>
-                <div className="bg-card p-6 text-center text-sm border-x-2 border-border/50">EN / FR / ES</div>
-                <div className="bg-gradient-to-br from-primary/10 via-accent/5 to-primary/10 p-6 text-center text-sm font-medium border-x-3 border-primary/30">EN / FR / ES</div>
-                <div className="bg-card p-6 text-center text-sm border-x-2 border-border/50">EN / FR / ES</div>
-
-                {/* Price */}
-                <div className="bg-gradient-to-br from-card to-muted/50 p-8 font-bold text-base rounded-b-2xl border-x-2 border-b-2 border-border/50 shadow-soft">Price</div>
-                <div className="bg-card p-8 text-center rounded-b-2xl border-x-2 border-b-2 border-border/50 shadow-soft hover:shadow-medium transition-shadow">
-                  <p className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">$149</p>
-                  <p className="text-sm text-muted-foreground font-medium">per person</p>
+              {/* Priority Private */}
+              <Card className="bg-card border-border/50 rounded-xl p-6 hover:shadow-medium transition-shadow">
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-bold mb-2">Priority Private</h3>
+                  <p className="text-muted-foreground">1-3 people</p>
                 </div>
-                <div className="bg-gradient-to-br from-primary/10 via-accent/5 to-primary/10 p-8 text-center rounded-b-2xl border-x-3 border-b-3 border-primary/30 shadow-strong">
-                  <p className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">$299</p>
-                  <p className="text-sm text-muted-foreground font-medium mb-3">per session</p>
-                  <p className="text-sm font-bold text-white bg-gradient-to-r from-success to-success/80 px-4 py-2 rounded-full inline-block shadow-soft">✓ Spouse FREE</p>
+                <div className="space-y-8">
+                  <div className="py-4 text-center">
+                    <p className="text-foreground">Zoom or In-Person</p>
+                  </div>
+                  <div className="py-4 text-center">
+                    <p className="text-foreground">High-risk / urgent needs</p>
+                  </div>
+                  <div className="py-4 text-center">
+                    <p className="text-foreground">Private (1-3 people)</p>
+                  </div>
+                  <div className="py-4 text-center">
+                    <p className="text-foreground">EN / FR / ES</p>
+                  </div>
+                  <div className="py-4 pt-8 text-center">
+                    <p className="text-5xl font-bold text-accent mb-2">$399</p>
+                    <p className="text-sm text-muted-foreground">Zoom</p>
+                    <p className="text-xs text-muted-foreground/70 mt-1">In-Person: Custom Quote</p>
+                  </div>
                 </div>
-                <div className="bg-card p-8 text-center rounded-b-2xl border-x-2 border-b-2 border-border/50 shadow-soft hover:shadow-medium transition-shadow">
-                  <p className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">$399</p>
-                  <p className="text-sm text-muted-foreground font-medium">Zoom</p>
-                  <p className="text-sm text-muted-foreground/70 mt-1">In-Person: Custom</p>
-                </div>
-
-                {/* CTA Buttons */}
-                <div></div>
-                <div className="p-4">
-                  <Button asChild variant="default" size="lg" className="w-full font-bold text-base hover:scale-105 transition-transform shadow-soft">
-                    <Link to="/contact">Book Now</Link>
-                  </Button>
-                </div>
-                <div className="p-4">
-                  <Button asChild variant="default" size="lg" className="w-full font-bold text-base bg-gradient-to-r from-primary to-accent hover:opacity-90 hover:scale-105 transition-all shadow-medium">
-                    <Link to="/contact">Book Now</Link>
-                  </Button>
-                </div>
-                <div className="p-4">
-                  <Button asChild variant="default" size="lg" className="w-full font-bold text-base hover:scale-105 transition-transform shadow-soft">
-                    <Link to="/contact">Schedule</Link>
-                  </Button>
-                </div>
-              </div>
+                <Button asChild variant="default" size="lg" className="w-full mt-6">
+                  <Link to="/contact">Schedule</Link>
+                </Button>
+              </Card>
             </div>
           </div>
-          <p className="text-center text-muted-foreground mt-10 text-sm max-w-3xl mx-auto">
+
+          <p className="text-center text-muted-foreground mt-12 text-sm max-w-3xl mx-auto">
             We do not record classes to protect your privacy. No login required to attend. Certificate of completion provided.
           </p>
         </div>
       </section>
-
       {/* In-Person Training */}
-      <section className="py-24 bg-gradient-to-b from-muted to-background relative overflow-hidden">
-        <BlobBackground variant="gold" position="center" />
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-5xl mx-auto">
-            <Card className="p-10 bg-gradient-to-br from-accent/10 via-card to-accent/5 shadow-strong border-2 border-accent/20 hover:shadow-[0_20px_60px_rgba(139,92,246,0.2)] transition-all">
-              <div className="flex items-start gap-8">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-accent to-accent/70 flex items-center justify-center flex-shrink-0 shadow-medium">
-                  <Home className="w-10 h-10 text-white" />
-                </div>
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <Card className="p-8 bg-gradient-to-br from-primary/5 to-primary/10 border-border">
+              <div className="flex items-start gap-6">
+                <Home className="w-16 h-16 text-accent flex-shrink-0" />
                 <div>
                   <h3 className="text-2xl font-bold mb-3">White-Glove In-Person Training</h3>
                   <p className="text-muted-foreground mb-6">
@@ -206,10 +231,9 @@ const Training = () => {
       </section>
 
       {/* What's Included */}
-      <section className="py-24 bg-gradient-to-b from-background to-muted/50 relative overflow-hidden">
-        <BlobBackground variant="purple" position="bottom-left" />
-        <div className="container mx-auto px-4 relative z-10">
-          <h2 className="text-center mb-16 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">What's Included in Every Training</h2>
+      <section className="py-20 bg-muted">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center mb-12">What's Included in Every Training</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             {[
               { icon: FileText, title: "Scam-Proof Playbook", desc: "Downloadable PDF with all scripts, checklists, and emergency protocols" },
@@ -217,14 +241,12 @@ const Training = () => {
               { icon: MessageSquare, title: "Live Q&A", desc: "Ask questions specific to YOUR situation" },
               { icon: Users, title: "Private Support Group", desc: "Join our Facebook community for ongoing tips" },
             ].map((item, index) => (
-              <Card key={index} className="p-8 text-center hover:shadow-strong hover:-translate-y-2 transition-all bg-gradient-to-br from-card to-muted/30 border-2 border-border/50 group">
-                <div className="flex justify-center mb-6">
-                  <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all">
-                    <item.icon className="w-8 h-8 text-accent" />
-                  </div>
+              <Card key={index} className="p-6 text-center hover:shadow-medium transition-shadow">
+                <div className="flex justify-center mb-4">
+                  <item.icon className="w-12 h-12 text-accent" />
                 </div>
-                <h3 className="text-xl font-bold mb-4 group-hover:text-primary transition-colors">{item.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
+                <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+                <p className="text-muted-foreground">{item.desc}</p>
               </Card>
             ))}
           </div>
@@ -232,10 +254,9 @@ const Training = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-24 bg-gradient-to-b from-muted/50 to-background relative overflow-hidden">
-        <BlobBackground variant="teal" position="top-right" />
-        <div className="container mx-auto px-4 relative z-10">
-          <h2 className="text-center mb-16 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">What Our Students Say</h2>
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center mb-12">What Our Students Say</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <TestimonialCard
               name="Dorothy & Frank M."
