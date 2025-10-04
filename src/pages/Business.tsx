@@ -130,14 +130,62 @@ const Business = () => {
             </Card>
 
             <Card className="p-8">
-...
+              <h3 className="text-2xl font-bold mb-4">Follow-Up & Reminders</h3>
+              <p className="text-muted-foreground mb-6">Automated email/SMS campaigns, lead nurturing</p>
+              <p className="text-4xl font-bold text-accent mb-6">$10,000</p>
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>Consent flows</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>Custom templates</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>Metrics dashboard</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>CRM sync</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>30-day stabilization</span>
+                </li>
+              </ul>
               <Button asChild variant="default" className="w-full">
                 <Link to="/contact">GET STARTED</Link>
               </Button>
             </Card>
 
             <Card className="p-8 border-2 border-accent">
-...
+              <h3 className="text-2xl font-bold mb-4">Custom Automation Suite</h3>
+              <p className="text-muted-foreground mb-6">Multi-system operations</p>
+              <p className="text-4xl font-bold text-accent mb-6">$15,000+</p>
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>Full discovery & design</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>Build, train, deploy</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>Security audit</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>Team training</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>90-day support</span>
+                </li>
+              </ul>
               <Button asChild variant="default" className="w-full">
                 <Link to="/contact">GET STARTED</Link>
               </Button>
