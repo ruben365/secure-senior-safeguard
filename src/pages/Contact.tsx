@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import Hero from "@/components/Hero";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -8,6 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Card } from "@/components/ui/card";
 import { Phone, Mail, MapPin, Clock, MessageSquare } from "lucide-react";
 import { toast } from "sonner";
+import heroImage from "@/assets/hero-contact.jpg";
 
 const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
@@ -20,14 +22,11 @@ const Contact = () => {
       <Navigation />
 
       {/* Hero */}
-      <section className="bg-gradient-hero-primary text-primary-foreground py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="mb-6">Let's Talk. We're Here to Help.</h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto">
-            Whether you have questions, need training, or want to protect your family—we're ready to assist you.
-          </p>
-        </div>
-      </section>
+      <Hero
+        backgroundImage={heroImage}
+        headline="Let's Talk. We're Here to Help."
+        subheadline="Whether you have questions, need training, or want to protect your family—we're ready to assist you."
+      />
 
       <div className="container mx-auto px-4 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
