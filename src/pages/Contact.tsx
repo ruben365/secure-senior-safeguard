@@ -70,6 +70,7 @@ const Contact = () => {
                       <SelectItem value="scam-shield">Family Scam Shield Membership</SelectItem>
                       <SelectItem value="business">Business AI Consulting / Agent Development</SelectItem>
                       <SelectItem value="vetting">Pre-Purchase AI Vetting</SelectItem>
+                      <SelectItem value="insurance">AI Services Insurance</SelectItem>
                       <SelectItem value="in-person">In-Person Training Quote</SelectItem>
                       <SelectItem value="bulk">Bulk/Group Training (10+ people)</SelectItem>
                       <SelectItem value="partnership">Partnership Opportunity</SelectItem>
