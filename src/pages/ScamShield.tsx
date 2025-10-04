@@ -120,8 +120,36 @@ const ScamShield = () => {
                 MOST POPULAR
               </div>
               <h3 className="text-2xl font-bold mb-4">Premium Plan</h3>
-...
-              <Button asChild variant="gold" className="w-full">
+              <p className="text-4xl font-bold gradient-text-primary mb-6">
+                $99<span className="text-lg text-muted-foreground">/month</span>
+              </p>
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>Up to 30 submissions per month</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>≤ 24 hour response time</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>Everything + audio/voice notes, videos</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>Detailed analysis + source tracking</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>Email + Phone support</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>Monthly tips + Quarterly threat briefing call</span>
+                </li>
+              </ul>
+              <Button asChild variant="default" className="w-full">
                 <Link to="/contact">START PREMIUM</Link>
               </Button>
             </Card>
