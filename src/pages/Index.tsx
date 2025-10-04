@@ -3,7 +3,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
-import TrustBadges from "@/components/TrustBadges";
+
 import TestimonialCard from "@/components/TestimonialCard";
 import CTASection from "@/components/CTASection";
 import ThreePathsForward from "@/components/ThreePathsForward";
@@ -45,8 +45,6 @@ const Index = () => {
       </Hero>
 
       <TrustBar />
-
-      <TrustBadges />
 
       {/* Why Families Trust InVision Network */}
       <section className="py-20 bg-background relative overflow-hidden">
