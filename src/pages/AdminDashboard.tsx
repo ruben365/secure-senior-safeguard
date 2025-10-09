@@ -1,23 +1,20 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { supabase } from '@/integrations/supabase/client';
-import { useAuth } from '@/hooks/useAuth';
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { LogOut, Users, CreditCard, Video, ShoppingCart, Mail } from 'lucide-react';
-import { toast } from 'sonner';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
+import { Users, DollarSign, Video, Mail, LogOut } from "lucide-react";
 
 interface Subscription {
   id: string;
-  user_id: string;
   plan_name: string;
   status: string;
+  amount: number;
   start_date: string;
   end_date: string | null;
-  amount: number | null;
 }
 
 interface ZoomClass {
@@ -32,7 +29,6 @@ interface ZoomClass {
 
 interface Buyer {
   id: string;
-  user_id: string;
   product_name: string;
   purchase_date: string;
   amount: number;
@@ -49,110 +45,167 @@ interface Subscriber {
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
-  const { user, isAdmin, isLoading, signOut } = useAuth();
+  const { toast } = useToast();
+  const { user, signOut, isAdmin } = useAuth();
+  const [loading, setLoading] = useState(true);
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [zoomClasses, setZoomClasses] = useState<ZoomClass[]>([]);
   const [buyers, setBuyers] = useState<Buyer[]>([]);
   const [subscribers, setSubscribers] = useState<Subscriber[]>([]);
-  const [dataLoading, setDataLoading] = useState(true);
 
   useEffect(() => {
-    if (!isLoading && (!user || !isAdmin)) {
-      navigate('/login');
+    checkAuth();
+  }, [user]);
+
+  const checkAuth = async () => {
+    if (!user) {
+      navigate("/login");
       return;
     }
 
-    if (user && isAdmin) {
-      fetchData();
-    }
-  }, [user, isAdmin, isLoading, navigate]);
-
-  const fetchData = async () => {
-    setDataLoading(true);
     try {
-      const [subsData, classesData, buyersData, subscribersData] = await Promise.all([
-        supabase.from('subscriptions').select('*').order('created_at', { ascending: false }),
-        supabase.from('zoom_classes').select('*').order('scheduled_date', { ascending: true }),
-        supabase.from('buyers').select('*').order('purchase_date', { ascending: false }),
-        supabase.from('subscribers').select('*').order('subscribed_at', { ascending: false }),
+      const adminStatus = await isAdmin();
+      
+      if (!adminStatus) {
+        toast({
+          title: "Access Denied",
+          description: "You don't have admin permissions",
+          variant: "destructive",
+        });
+        navigate("/");
+        return;
+      }
+
+      await loadData();
+    } catch (error) {
+      console.error("Auth check error:", error);
+      navigate("/login");
+    }
+  };
+
+  const loadData = async () => {
+    setLoading(true);
+    try {
+      const [subsResult, classesResult, buyersResult, subscribersResult] = await Promise.all([
+        supabase.from("subscriptions").select("*").order("created_at", { ascending: false }),
+        supabase.from("zoom_classes").select("*").order("scheduled_date", { ascending: true }),
+        supabase.from("buyers").select("*").order("purchase_date", { ascending: false }),
+        supabase.from("subscribers").select("*").order("subscribed_at", { ascending: false }),
       ]);
 
-      if (subsData.error) throw subsData.error;
-      if (classesData.error) throw classesData.error;
-      if (buyersData.error) throw buyersData.error;
-      if (subscribersData.error) throw subscribersData.error;
-
-      setSubscriptions(subsData.data || []);
-      setZoomClasses(classesData.data || []);
-      setBuyers(buyersData.data || []);
-      setSubscribers(subscribersData.data || []);
-    } catch (error: any) {
-      toast.error(error.message || 'Failed to load data');
+      if (subsResult.data) setSubscriptions(subsResult.data);
+      if (classesResult.data) setZoomClasses(classesResult.data);
+      if (buyersResult.data) setBuyers(buyersResult.data);
+      if (subscribersResult.data) setSubscribers(subscribersResult.data);
+    } catch (error) {
+      console.error("Error loading data:", error);
+      toast({
+        title: "Error",
+        description: "Failed to load dashboard data",
+        variant: "destructive",
+      });
     } finally {
-      setDataLoading(false);
+      setLoading(false);
     }
   };
 
-  const handleSignOut = async () => {
+  const handleLogout = async () => {
     await signOut();
-    navigate('/');
+    navigate("/login");
   };
 
-  if (isLoading || dataLoading) {
+  if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-muted-foreground">Loading dashboard...</p>
-        </div>
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <p className="text-muted-foreground">Loading dashboard...</p>
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
-      
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-bold">Admin Dashboard</h1>
-          <Button onClick={handleSignOut} variant="outline">
+      <nav className="bg-card border-b border-border shadow-sm">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <h1 className="text-2xl font-bold gradient-text-primary">Admin Dashboard</h1>
+          <Button onClick={handleLogout} variant="outline" size="sm">
             <LogOut className="w-4 h-4 mr-2" />
-            Sign Out
+            Logout
           </Button>
         </div>
+      </nav>
 
-        <Tabs defaultValue="subscriptions" className="space-y-8">
+      <div className="container mx-auto px-4 py-8">
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <Card className="p-6">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                <DollarSign className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Subscriptions</p>
+                <p className="text-2xl font-bold">{subscriptions.length}</p>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="p-6">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
+                <Video className="w-6 h-6 text-accent" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Zoom Classes</p>
+                <p className="text-2xl font-bold">{zoomClasses.length}</p>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="p-6">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-success/10 rounded-lg flex items-center justify-center">
+                <Users className="w-6 h-6 text-success" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Buyers</p>
+                <p className="text-2xl font-bold">{buyers.length}</p>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="p-6">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                <Mail className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Subscribers</p>
+                <p className="text-2xl font-bold">{subscribers.length}</p>
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        {/* Data Tables */}
+        <Tabs defaultValue="subscriptions" className="space-y-6">
           <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="subscriptions">
-              <CreditCard className="w-4 h-4 mr-2" />
-              Subscriptions ({subscriptions.length})
-            </TabsTrigger>
-            <TabsTrigger value="classes">
-              <Video className="w-4 h-4 mr-2" />
-              Zoom Classes ({zoomClasses.length})
-            </TabsTrigger>
-            <TabsTrigger value="buyers">
-              <ShoppingCart className="w-4 h-4 mr-2" />
-              Buyers ({buyers.length})
-            </TabsTrigger>
-            <TabsTrigger value="subscribers">
-              <Mail className="w-4 h-4 mr-2" />
-              Subscribers ({subscribers.length})
-            </TabsTrigger>
+            <TabsTrigger value="subscriptions">Subscriptions</TabsTrigger>
+            <TabsTrigger value="classes">Zoom Classes</TabsTrigger>
+            <TabsTrigger value="buyers">Buyers</TabsTrigger>
+            <TabsTrigger value="subscribers">Subscribers</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="subscriptions" className="space-y-4">
+          <TabsContent value="subscriptions">
             <Card className="p-6">
-              <h2 className="text-2xl font-bold mb-4">Active Subscriptions</h2>
+              <h2 className="text-xl font-bold mb-4">Subscriptions</h2>
               {subscriptions.length === 0 ? (
-                <p className="text-muted-foreground">No subscriptions found</p>
+                <p className="text-muted-foreground text-center py-8">No subscriptions yet</p>
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
                       <tr className="border-b">
-                        <th className="text-left p-2">Plan</th>
+                        <th className="text-left p-2">Plan Name</th>
                         <th className="text-left p-2">Status</th>
                         <th className="text-left p-2">Amount</th>
                         <th className="text-left p-2">Start Date</th>
@@ -161,18 +214,16 @@ const AdminDashboard = () => {
                     </thead>
                     <tbody>
                       {subscriptions.map((sub) => (
-                        <tr key={sub.id} className="border-b hover:bg-muted/50">
+                        <tr key={sub.id} className="border-b">
                           <td className="p-2">{sub.plan_name}</td>
                           <td className="p-2">
-                            <span className={`px-2 py-1 rounded text-xs ${
-                              sub.status === 'active' ? 'bg-success/20 text-success' : 'bg-muted text-muted-foreground'
-                            }`}>
+                            <span className={`px-2 py-1 rounded text-xs ${sub.status === 'active' ? 'bg-success/10 text-success' : 'bg-muted text-muted-foreground'}`}>
                               {sub.status}
                             </span>
                           </td>
-                          <td className="p-2">${sub.amount?.toFixed(2) || '0.00'}</td>
+                          <td className="p-2">${sub.amount}</td>
                           <td className="p-2">{new Date(sub.start_date).toLocaleDateString()}</td>
-                          <td className="p-2">{sub.end_date ? new Date(sub.end_date).toLocaleDateString() : 'Ongoing'}</td>
+                          <td className="p-2">{sub.end_date ? new Date(sub.end_date).toLocaleDateString() : 'N/A'}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -182,59 +233,71 @@ const AdminDashboard = () => {
             </Card>
           </TabsContent>
 
-          <TabsContent value="classes" className="space-y-4">
+          <TabsContent value="classes">
             <Card className="p-6">
-              <h2 className="text-2xl font-bold mb-4">Scheduled Zoom Classes</h2>
+              <h2 className="text-xl font-bold mb-4">Zoom Classes</h2>
               {zoomClasses.length === 0 ? (
-                <p className="text-muted-foreground">No classes scheduled</p>
-              ) : (
-                <div className="space-y-4">
-                  {zoomClasses.map((cls) => (
-                    <Card key={cls.id} className="p-4 hover:shadow-md transition-shadow">
-                      <h3 className="font-bold text-lg mb-2">{cls.title}</h3>
-                      {cls.description && <p className="text-muted-foreground mb-2">{cls.description}</p>}
-                      <div className="grid grid-cols-2 gap-2 text-sm">
-                        <p><strong>Date:</strong> {new Date(cls.scheduled_date).toLocaleString()}</p>
-                        <p><strong>Duration:</strong> {cls.duration_minutes} minutes</p>
-                        <p><strong>Max Participants:</strong> {cls.max_participants || 'Unlimited'}</p>
-                        <p><strong>Link:</strong> <a href={cls.zoom_link} className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">Join Class</a></p>
-                      </div>
-                    </Card>
-                  ))}
-                </div>
-              )}
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="buyers" className="space-y-4">
-            <Card className="p-6">
-              <h2 className="text-2xl font-bold mb-4">Recent Buyers</h2>
-              {buyers.length === 0 ? (
-                <p className="text-muted-foreground">No purchases found</p>
+                <p className="text-muted-foreground text-center py-8">No zoom classes scheduled</p>
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
                       <tr className="border-b">
-                        <th className="text-left p-2">Product</th>
+                        <th className="text-left p-2">Title</th>
+                        <th className="text-left p-2">Scheduled Date</th>
+                        <th className="text-left p-2">Duration (min)</th>
+                        <th className="text-left p-2">Max Participants</th>
+                        <th className="text-left p-2">Zoom Link</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {zoomClasses.map((cls) => (
+                        <tr key={cls.id} className="border-b">
+                          <td className="p-2 font-medium">{cls.title}</td>
+                          <td className="p-2">{new Date(cls.scheduled_date).toLocaleString()}</td>
+                          <td className="p-2">{cls.duration_minutes}</td>
+                          <td className="p-2">{cls.max_participants || 'Unlimited'}</td>
+                          <td className="p-2">
+                            <a href={cls.zoom_link} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                              Join
+                            </a>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="buyers">
+            <Card className="p-6">
+              <h2 className="text-xl font-bold mb-4">Buyers</h2>
+              {buyers.length === 0 ? (
+                <p className="text-muted-foreground text-center py-8">No buyers yet</p>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b">
+                        <th className="text-left p-2">Product Name</th>
+                        <th className="text-left p-2">Purchase Date</th>
                         <th className="text-left p-2">Amount</th>
                         <th className="text-left p-2">Status</th>
-                        <th className="text-left p-2">Purchase Date</th>
                       </tr>
                     </thead>
                     <tbody>
                       {buyers.map((buyer) => (
-                        <tr key={buyer.id} className="border-b hover:bg-muted/50">
+                        <tr key={buyer.id} className="border-b">
                           <td className="p-2">{buyer.product_name}</td>
-                          <td className="p-2">${buyer.amount.toFixed(2)}</td>
+                          <td className="p-2">{new Date(buyer.purchase_date).toLocaleDateString()}</td>
+                          <td className="p-2">${buyer.amount}</td>
                           <td className="p-2">
-                            <span className={`px-2 py-1 rounded text-xs ${
-                              buyer.status === 'completed' ? 'bg-success/20 text-success' : 'bg-muted text-muted-foreground'
-                            }`}>
+                            <span className={`px-2 py-1 rounded text-xs ${buyer.status === 'completed' ? 'bg-success/10 text-success' : 'bg-warning/10 text-warning'}`}>
                               {buyer.status}
                             </span>
                           </td>
-                          <td className="p-2">{new Date(buyer.purchase_date).toLocaleDateString()}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -244,35 +307,33 @@ const AdminDashboard = () => {
             </Card>
           </TabsContent>
 
-          <TabsContent value="subscribers" className="space-y-4">
+          <TabsContent value="subscribers">
             <Card className="p-6">
-              <h2 className="text-2xl font-bold mb-4">Email Subscribers</h2>
+              <h2 className="text-xl font-bold mb-4">Email Subscribers</h2>
               {subscribers.length === 0 ? (
-                <p className="text-muted-foreground">No subscribers found</p>
+                <p className="text-muted-foreground text-center py-8">No subscribers yet</p>
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
                       <tr className="border-b">
-                        <th className="text-left p-2">Email</th>
                         <th className="text-left p-2">Name</th>
+                        <th className="text-left p-2">Email</th>
+                        <th className="text-left p-2">Subscribed At</th>
                         <th className="text-left p-2">Status</th>
-                        <th className="text-left p-2">Subscribed</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {subscribers.map((sub) => (
-                        <tr key={sub.id} className="border-b hover:bg-muted/50">
-                          <td className="p-2">{sub.email}</td>
-                          <td className="p-2">{sub.name || 'N/A'}</td>
+                      {subscribers.map((subscriber) => (
+                        <tr key={subscriber.id} className="border-b">
+                          <td className="p-2">{subscriber.name || 'N/A'}</td>
+                          <td className="p-2">{subscriber.email}</td>
+                          <td className="p-2">{new Date(subscriber.subscribed_at).toLocaleDateString()}</td>
                           <td className="p-2">
-                            <span className={`px-2 py-1 rounded text-xs ${
-                              sub.status === 'active' ? 'bg-success/20 text-success' : 'bg-muted text-muted-foreground'
-                            }`}>
-                              {sub.status}
+                            <span className={`px-2 py-1 rounded text-xs ${subscriber.status === 'active' ? 'bg-success/10 text-success' : 'bg-muted text-muted-foreground'}`}>
+                              {subscriber.status}
                             </span>
                           </td>
-                          <td className="p-2">{new Date(sub.subscribed_at).toLocaleDateString()}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -283,8 +344,6 @@ const AdminDashboard = () => {
           </TabsContent>
         </Tabs>
       </div>
-
-      <Footer />
     </div>
   );
 };
