@@ -3,6 +3,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import FlowingWaves from "@/components/FlowingWaves";
+import AIPartnersCarousel from "@/components/AIPartnersCarousel";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -217,6 +218,8 @@ const Resources = () => {
           </div>
         </div>
       </section>
+
+      <AIPartnersCarousel />
 
       <Footer />
     </div>

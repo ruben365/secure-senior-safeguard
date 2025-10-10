@@ -2,6 +2,7 @@ import { ExternalLink } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
+import AIPartnersCarousel from '@/components/AIPartnersCarousel';
 import { Button } from '@/components/ui/button';
 
 interface Partner {
@@ -147,6 +148,8 @@ const Partners = () => {
             </div>
           </div>
         </section>
+
+      <AIPartnersCarousel />
 
       <Footer />
     </div>

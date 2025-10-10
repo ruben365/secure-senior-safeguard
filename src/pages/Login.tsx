@@ -7,6 +7,8 @@ import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
+import AIPartnersCarousel from '@/components/AIPartnersCarousel';
+import Footer from '@/components/Footer';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -232,6 +234,9 @@ const Login = () => {
           animation: gradient-shift 3s ease infinite;
         }
       `}</style>
+
+      <AIPartnersCarousel />
+      <Footer />
     </div>
   );
 };

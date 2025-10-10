@@ -6,6 +6,7 @@ import TrustBar from "@/components/TrustBar";
 import TestimonialCard from "@/components/TestimonialCard";
 import CTASection from "@/components/CTASection";
 import FlowingWaves from "@/components/FlowingWaves";
+import AIPartnersCarousel from "@/components/AIPartnersCarousel";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, FileText, Award, MessageSquare, Users, Home } from "lucide-react";
@@ -288,6 +289,8 @@ const Training = () => {
           <Link to="/resources">DOWNLOAD FREE SECURITY CHECKLIST</Link>
         </Button>
       </CTASection>
+
+      <AIPartnersCarousel />
 
       <Footer />
     </div>

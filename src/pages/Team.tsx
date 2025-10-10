@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
+import AIPartnersCarousel from '@/components/AIPartnersCarousel';
 import teamRuben from '@/assets/team-ruben.jpg';
 import teamCorine from '@/assets/team-corine.jpg';
 import teamDavid from '@/assets/team-david.jpg';
@@ -193,6 +194,8 @@ const Team = () => {
             </div>
           </div>
         </section>
+
+      <AIPartnersCarousel />
 
       <Footer />
 

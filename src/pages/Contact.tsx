@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import FlowingWaves from "@/components/FlowingWaves";
 import LiveChat from "@/components/LiveChat";
+import AIPartnersCarousel from "@/components/AIPartnersCarousel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -223,6 +224,8 @@ const Contact = () => {
         </div>
         </div>
       </section>
+
+      <AIPartnersCarousel />
 
       <Footer />
     </div>
