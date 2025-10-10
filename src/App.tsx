@@ -14,6 +14,9 @@ import Contact from "./pages/Contact";
 import Team from "./pages/Team";
 import Careers from "./pages/Careers";
 import Auth from "./pages/Auth";
+import EnhancedAuth from "./pages/EnhancedAuth";
+import AdminDashboardNew from "./pages/AdminDashboardNew";
+import WorkerDashboardNew from "./pages/WorkerDashboardNew";
 import PasswordReset from "./pages/PasswordReset";
 import AdminDashboard from "./pages/AdminDashboard";
 import StaffDashboard from "./pages/StaffDashboard";
@@ -46,9 +49,10 @@ const App = () => (
             <Route path="/signup" element={<Auth />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/password-reset" element={<PasswordReset />} />
-            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin" element={<AdminDashboardNew />} />
             <Route path="/staff" element={<StaffDashboard />} />
-            <Route path="/worker" element={<WorkerDashboard />} />
+            <Route path="/worker" element={<WorkerDashboardNew />} />
+            <Route path="/enhanced-auth" element={<EnhancedAuth />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
