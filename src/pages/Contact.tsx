@@ -3,6 +3,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import FlowingWaves from "@/components/FlowingWaves";
+import LiveChat from "@/components/LiveChat";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -31,14 +32,14 @@ const Contact = () => {
         showScrollIndicator={true}
       />
 
-      <section className="relative py-20">
+      <section className="relative py-12">
         <FlowingWaves variant="full" opacity={0.12} />
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Contact Form */}
           <div>
-            <h2 className="mb-8">Send Us a Message</h2>
-            <Card className="p-8">
+            <h2 className="mb-6">Send Us a Message</h2>
+            <Card className="p-6">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-semibold mb-2">
@@ -123,12 +124,12 @@ const Contact = () => {
           </div>
 
           {/* Contact Info */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             <div>
-              <h2 className="mb-8">Other Ways to Reach Us</h2>
+              <h2 className="mb-6">Other Ways to Reach Us</h2>
 
-              <div className="space-y-6">
-                <Card className="p-6 hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50">
+              <div className="space-y-4">
+                <Card className="p-5 hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
                       <Phone className="w-6 h-6 text-primary" />
@@ -213,7 +214,7 @@ const Contact = () => {
                     <div>
                       <h3 className="text-xl font-bold mb-2">Live Chat</h3>
                       <p className="text-muted-foreground mb-3">We typically respond within 5 minutes during business hours.</p>
-                      <Button variant="default">OPEN CHAT</Button>
+                      <LiveChat />
                     </div>
                   </div>
                 </Card>

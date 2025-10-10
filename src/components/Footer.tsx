@@ -6,9 +6,9 @@ import { Input } from "@/components/ui/input";
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-br from-[hsl(260,70%,25%)] to-[hsl(260,65%,35%)] text-primary-foreground">
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-8">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-6">
           {/* Column 1: Quick Links */}
           <div>
             <h3 className="font-bold text-lg mb-4">Quick Links</h3>
@@ -158,9 +158,9 @@ const Footer = () => {
         </div>
 
         {/* Newsletter Signup */}
-        <div className="bg-primary-foreground/10 rounded-lg p-6 mb-8">
-          <h3 className="font-bold text-xl mb-2">Monthly AI Safety Tips</h3>
-          <p className="text-primary-foreground/80 mb-4 text-base">Stay informed about the latest scams and protection strategies.</p>
+        <div className="bg-primary-foreground/10 rounded-lg p-5 mb-6">
+          <h3 className="font-bold text-lg mb-2">Monthly AI Safety Tips</h3>
+          <p className="text-primary-foreground/80 mb-3 text-sm">Stay informed about the latest scams and protection strategies.</p>
           <form className="flex flex-col sm:flex-row gap-3">
             <Input
               type="email"
@@ -174,7 +174,7 @@ const Footer = () => {
         </div>
 
         {/* Social Media */}
-        <div className="flex justify-center space-x-6 mb-8">
+        <div className="flex justify-center space-x-6 mb-6">
           <a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors" aria-label="Facebook">
             <Facebook className="w-6 h-6" />
           </a>
@@ -190,7 +190,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-primary-foreground/20 pt-8 pb-4">
+        <div className="border-t border-primary-foreground/20 pt-6 pb-3">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-primary-foreground/80 text-sm text-center md:text-left">
               © 2025 InVision Network | Veteran-Owned | Based in Dayton, OH | Serving Families Nationwide
@@ -208,7 +208,7 @@ const Footer = () => {
           </div>
 
           {/* Legal Disclaimer */}
-          <p className="text-primary-foreground/60 text-xs mt-6 max-w-4xl mx-auto text-center leading-relaxed">
+          <p className="text-primary-foreground/60 text-xs mt-4 max-w-4xl mx-auto text-center leading-relaxed">
             InVision Network provides educational services only. We are not legal, financial, tax, or licensed cybersecurity professionals. In case of active fraud, identity theft, or criminal activity, contact local law enforcement (911), your bank's fraud department immediately using official phone numbers, and report to FTC at IdentityTheft.gov. We never request passwords, 2FA codes, bank account information, or Social Security numbers.
           </p>
         </div>

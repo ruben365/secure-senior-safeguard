@@ -27,7 +27,7 @@ const Hero = ({ backgroundImage, useTransitioningBackground = false, headline, s
   }, []);
 
   return (
-    <div className={cn("relative min-h-[90vh] flex items-center overflow-hidden", className)}>
+    <div className={cn("relative min-h-[80vh] flex items-center overflow-hidden", className)}>
       {/* Background */}
       <div 
         className="absolute inset-0"
@@ -53,19 +53,19 @@ const Hero = ({ backgroundImage, useTransitioningBackground = false, headline, s
       
       {/* Floating Particles */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="floating-orb" style={{ width: '150px', height: '150px', top: '20%', left: '10%', animationDelay: '0s' }} />
-        <div className="floating-orb" style={{ width: '100px', height: '100px', top: '60%', right: '15%', animationDelay: '4s' }} />
-        <div className="floating-orb" style={{ width: '120px', height: '120px', bottom: '25%', left: '40%', animationDelay: '8s' }} />
+        <div className="floating-orb" style={{ width: '120px', height: '120px', top: '20%', left: '10%', animationDelay: '0s' }} />
+        <div className="floating-orb" style={{ width: '80px', height: '80px', top: '60%', right: '15%', animationDelay: '4s' }} />
+        <div className="floating-orb" style={{ width: '100px', height: '100px', bottom: '25%', left: '40%', animationDelay: '8s' }} />
       </div>
       
       {/* Content */}
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-10 py-16">
         <div className="max-w-3xl">
-          <h1 className="text-white mb-6 animate-fade-in-up [text-shadow:0_4px_20px_rgba(139,92,246,0.4)] leading-tight transition-opacity duration-500">
+          <h1 className="text-white mb-4 animate-fade-in-up [text-shadow:0_4px_20px_rgba(139,92,246,0.4)] leading-tight transition-opacity duration-500">
             {headline}
           </h1>
           {subheadline && (
-            <p className="text-white/90 text-xl md:text-2xl mb-8 leading-relaxed animate-fade-in-up stagger-1 transition-opacity duration-500">
+            <p className="text-white/90 text-xl md:text-2xl mb-6 leading-relaxed animate-fade-in-up stagger-1 transition-opacity duration-500">
               {subheadline}
             </p>
           )}

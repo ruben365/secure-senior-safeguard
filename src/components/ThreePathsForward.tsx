@@ -36,15 +36,15 @@ const paths = [
 
 const ThreePathsForward = () => {
   return (
-    <section className="py-20 relative overflow-hidden bg-gradient-to-br from-[hsl(250,20%,96%)] via-white to-[hsl(180,50%,98%)]">
+    <section className="py-12 relative overflow-hidden bg-gradient-to-br from-[hsl(250,20%,96%)] via-white to-[hsl(180,50%,98%)]">
       {/* Background blobs */}
       <div className="absolute top-[-100px] left-[-100px] w-[400px] h-[400px] rounded-full bg-gradient-to-br from-primary to-accent opacity-10 blur-[80px] animate-blob-morph" />
       <div className="absolute bottom-[-80px] right-[-80px] w-[350px] h-[350px] rounded-full bg-gradient-to-br from-accent to-[hsl(180,75%,50%)] opacity-10 blur-[80px] animate-float-slow" style={{ animationDelay: '5s', animationDirection: 'reverse' }} />
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16 animate-fade-in-up">
-          <h2 className="text-5xl font-extrabold mb-4 gradient-text-primary">
+        <div className="text-center mb-10 animate-fade-in-up">
+          <h2 className="text-5xl font-extrabold mb-3 gradient-text-primary">
             Three Paths Forward
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -53,14 +53,14 @@ const ThreePathsForward = () => {
         </div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {paths.map((path, index) => {
             const Icon = path.icon;
             return (
               <Card
                 key={path.id}
                 className={`
-                  relative p-12 flex flex-col items-center text-center
+                  relative p-8 flex flex-col items-center text-center
                   transition-all duration-600 ease-out rounded-3xl
                   bg-white
                   ${path.featured 
@@ -87,7 +87,7 @@ const ThreePathsForward = () => {
                 )}
 
                 {/* Icon Container - purple/teal gradient */}
-                <div className="relative w-[100px] h-[100px] rounded-3xl mb-7
+                <div className="relative w-[80px] h-[80px] rounded-3xl mb-5
                   bg-gradient-to-br from-primary to-accent
                   shadow-[0_8px_24px_rgba(139,92,246,0.4)]
                   flex items-center justify-center
@@ -97,19 +97,19 @@ const ThreePathsForward = () => {
                   after:border-2 after:border-primary/40
                   after:animate-[pulse-ring_3s_ease-out_infinite]
                 ">
-                  <Icon className="w-14 h-14 text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.2)] transition-transform duration-500" />
+                  <Icon className="w-10 h-10 text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.2)] transition-transform duration-500" />
                 </div>
 
                 {/* Content */}
-                <h3 className="text-[28px] font-extrabold mb-4 text-foreground tracking-tight transition-colors duration-300 group-hover:text-primary">
+                <h3 className="text-2xl font-extrabold mb-3 text-foreground tracking-tight transition-colors duration-300 group-hover:text-primary">
                   {path.title}
                 </h3>
-                <p className="text-base text-muted-foreground mb-7 flex-grow leading-relaxed">
+                <p className="text-base text-muted-foreground mb-5 flex-grow leading-relaxed">
                   {path.description}
                 </p>
 
                 {/* Pricing */}
-                <div className="text-xl font-extrabold gradient-text-primary mb-6 px-6 py-3 rounded-xl 
+                <div className="text-lg font-extrabold gradient-text-primary mb-4 px-5 py-2 rounded-xl 
                   bg-primary/10
                   border border-primary/20
                   transition-all duration-500

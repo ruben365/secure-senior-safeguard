@@ -4,11 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { MessageSquare, Mail, BookOpen, Video, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import LiveChat from "./LiveChat";
 
 const HelpDialog = () => {
   const [open, setOpen] = useState(false);
+  const [liveChatOpen, setLiveChatOpen] = useState(false);
 
   return (
+    <>
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" size="sm" className="fixed bottom-6 right-6 rounded-full shadow-elegant z-40">
@@ -23,7 +26,13 @@ const HelpDialog = () => {
         </DialogHeader>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-          <Card className="p-6 hover:shadow-medium transition-all cursor-pointer group">
+          <Card 
+            className="p-6 hover:shadow-medium transition-all cursor-pointer group"
+            onClick={() => {
+              setOpen(false);
+              setLiveChatOpen(true);
+            }}
+          >
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                 <MessageSquare className="w-6 h-6 text-primary" />
@@ -108,6 +117,9 @@ const HelpDialog = () => {
         </div>
       </DialogContent>
     </Dialog>
+
+      <LiveChat open={liveChatOpen} onOpenChange={setLiveChatOpen} />
+    </>
   );
 };
 
