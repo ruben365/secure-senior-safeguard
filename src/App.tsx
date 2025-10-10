@@ -18,6 +18,7 @@ import Auth from "./pages/Auth";
 import PasswordReset from "./pages/PasswordReset";
 import AdminDashboard from "./pages/AdminDashboard";
 import StaffDashboard from "./pages/StaffDashboard";
+import WorkerDashboard from "./pages/WorkerDashboard";
 import NotFound from "./pages/NotFound";
 import CookieConsent from "./components/CookieConsent";
 import HelpDialog from "./components/HelpDialog";
@@ -49,6 +50,7 @@ const App = () => (
             <Route path="/password-reset" element={<PasswordReset />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/staff" element={<StaffDashboard />} />
+            <Route path="/worker" element={<WorkerDashboard />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

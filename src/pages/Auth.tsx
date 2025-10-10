@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 import AIPartnersCarousel from '@/components/AIPartnersCarousel';
 import Footer from '@/components/Footer';
 
@@ -41,9 +42,25 @@ const Auth = () => {
   const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
 
   useEffect(() => {
-    if (user) {
-      navigate('/staff');
-    }
+    const redirectUser = async () => {
+      if (user) {
+        // Check user role and redirect accordingly
+        const { data: roleData } = await supabase
+          .from('user_roles')
+          .select('role')
+          .eq('user_id', user.id)
+          .single();
+
+        if (roleData?.role === 'admin' || roleData?.role === 'staff') {
+          navigate('/admin');
+        } else if (roleData?.role === 'worker') {
+          navigate('/worker');
+        } else {
+          navigate('/');
+        }
+      }
+    };
+    redirectUser();
   }, [user, navigate]);
 
   const handleSignupChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,7 +84,21 @@ const Auth = () => {
       if (rememberMe) {
         localStorage.setItem('rememberMe', 'true');
       }
-      navigate('/staff');
+      
+      // Check user role and redirect accordingly
+      const { data: roleData } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', user?.id)
+        .single();
+
+      if (roleData?.role === 'admin' || roleData?.role === 'staff') {
+        navigate('/admin');
+      } else if (roleData?.role === 'worker') {
+        navigate('/worker');
+      } else {
+        navigate('/');
+      }
     } catch (error) {
       // Error handled in useAuth
     } finally {
@@ -108,7 +139,24 @@ const Auth = () => {
     setIsLoading(true);
     try {
       await signUp(signupData.email, signupData.password, `${signupData.firstName} ${signupData.lastName}`);
-      navigate('/staff');
+      
+      // Get current user after signup
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      // Check user role and redirect accordingly
+      const { data: roleData } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', user?.id)
+        .single();
+
+      if (roleData?.role === 'admin' || roleData?.role === 'staff') {
+        navigate('/admin');
+      } else if (roleData?.role === 'worker') {
+        navigate('/worker');
+      } else {
+        navigate('/');
+      }
     } catch (error) {
       // Error handled in useAuth
     } finally {

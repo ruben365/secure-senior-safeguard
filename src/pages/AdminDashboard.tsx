@@ -1,363 +1,282 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useToast } from "@/hooks/use-toast";
-import { useAuth } from "@/hooks/useAuth";
-import { Users, DollarSign, Video, Mail, LogOut, Calendar } from "lucide-react";
-import { WorkersCalendar } from "@/components/admin/WorkersCalendar";
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { supabase } from '@/integrations/supabase/client';
+import { useUserRole } from '@/hooks/useUserRole';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { 
+  Users, 
+  Calendar, 
+  FileText, 
+  MessageSquare, 
+  Settings,
+  Bell,
+  UserPlus,
+  ClipboardList,
+  TrendingUp,
+  LogOut
+} from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 
-interface Subscription {
-  id: string;
-  plan_name: string;
-  status: string;
-  amount: number;
-  start_date: string;
-  end_date: string | null;
-}
-
-interface ZoomClass {
-  id: string;
-  title: string;
-  description: string | null;
-  zoom_link: string;
-  scheduled_date: string;
-  duration_minutes: number;
-  max_participants: number | null;
-}
-
-interface Buyer {
-  id: string;
-  product_name: string;
-  purchase_date: string;
-  amount: number;
-  status: string;
-}
-
-interface Subscriber {
-  id: string;
-  email: string;
-  name: string | null;
-  subscribed_at: string;
-  status: string;
-}
-
-const AdminDashboard = () => {
+export default function AdminDashboard() {
   const navigate = useNavigate();
-  const { toast } = useToast();
-  const { user, signOut, isAdmin } = useAuth();
+  const { isAdminOrStaff, loading: roleLoading } = useUserRole();
+  const [stats, setStats] = useState({
+    pendingRequests: 0,
+    activeJobs: 0,
+    availableWorkers: 0,
+    monthRevenue: 0,
+    totalClients: 0,
+    totalWorkers: 0,
+  });
   const [loading, setLoading] = useState(true);
-  const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
-  const [zoomClasses, setZoomClasses] = useState<ZoomClass[]>([]);
-  const [buyers, setBuyers] = useState<Buyer[]>([]);
-  const [subscribers, setSubscribers] = useState<Subscriber[]>([]);
 
   useEffect(() => {
-    checkAuth();
-  }, [user]);
-
-  const checkAuth = async () => {
-    if (!user) {
-      navigate("/auth");
-      return;
+    if (!roleLoading && !isAdminOrStaff) {
+      navigate('/auth');
+    } else if (isAdminOrStaff) {
+      loadDashboardStats();
     }
+  }, [isAdminOrStaff, roleLoading, navigate]);
 
+  const loadDashboardStats = async () => {
     try {
-      const adminStatus = await isAdmin();
-      
-      if (!adminStatus) {
-        toast({
-          title: "Access Denied",
-          description: "You don't have admin permissions",
-          variant: "destructive",
-        });
-        navigate("/");
-        return;
-      }
-
-      await loadData();
-    } catch (error) {
-      console.error("Auth check error:", error);
-      navigate("/auth");
-    }
-  };
-
-  const loadData = async () => {
-    setLoading(true);
-    try {
-      const [subsResult, classesResult, buyersResult, subscribersResult] = await Promise.all([
-        supabase.from("subscriptions").select("*").order("created_at", { ascending: false }),
-        supabase.from("zoom_classes").select("*").order("scheduled_date", { ascending: true }),
-        supabase.from("buyers").select("*").order("purchase_date", { ascending: false }),
-        supabase.from("subscribers").select("*").order("subscribed_at", { ascending: false }),
+      const [requestsData, appointmentsData, workersData, clientsData, allWorkersData] = await Promise.all([
+        supabase.from('client_requests').select('*', { count: 'exact', head: true }).eq('status', 'new'),
+        supabase.from('appointments').select('*', { count: 'exact', head: true }).eq('status', 'confirmed').gte('scheduled_start', new Date().toISOString().split('T')[0]),
+        supabase.from('workers').select('*', { count: 'exact', head: true }).eq('current_status', 'available'),
+        supabase.from('clients').select('*', { count: 'exact', head: true }),
+        supabase.from('workers').select('*', { count: 'exact', head: true }),
       ]);
 
-      if (subsResult.data) setSubscriptions(subsResult.data);
-      if (classesResult.data) setZoomClasses(classesResult.data);
-      if (buyersResult.data) setBuyers(buyersResult.data);
-      if (subscribersResult.data) setSubscribers(subscribersResult.data);
-    } catch (error) {
-      console.error("Error loading data:", error);
-      toast({
-        title: "Error",
-        description: "Failed to load dashboard data",
-        variant: "destructive",
+      setStats({
+        pendingRequests: requestsData.count || 0,
+        activeJobs: appointmentsData.count || 0,
+        availableWorkers: workersData.count || 0,
+        monthRevenue: 0,
+        totalClients: clientsData.count || 0,
+        totalWorkers: allWorkersData.count || 0,
       });
+    } catch (error) {
+      console.error('Error loading dashboard stats:', error);
     } finally {
       setLoading(false);
     }
   };
 
   const handleLogout = async () => {
-    await signOut();
-    navigate("/auth");
+    await supabase.auth.signOut();
+    navigate('/auth');
   };
 
-  if (loading) {
+  if (loading || roleLoading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <p className="text-muted-foreground">Loading dashboard...</p>
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-4 text-muted-foreground">Loading dashboard...</p>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-background">
-      <nav className="bg-card border-b border-border shadow-sm">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold gradient-text-primary">Admin Dashboard</h1>
-          <Button onClick={handleLogout} variant="outline" size="sm">
-            <LogOut className="w-4 h-4 mr-2" />
-            Logout
-          </Button>
+      <header className="border-b bg-card">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold">InVision Network</h1>
+            <p className="text-sm text-muted-foreground">Admin Portal</p>
+          </div>
+          <div className="flex items-center gap-4">
+            <Button variant="ghost" size="icon" className="relative">
+              <Bell className="h-5 w-5" />
+              {stats.pendingRequests > 0 && (
+                <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0">
+                  {stats.pendingRequests}
+                </Badge>
+              )}
+            </Button>
+            <Button variant="outline" onClick={handleLogout}>
+              <LogOut className="h-4 w-4 mr-2" />
+              Logout
+            </Button>
+          </div>
         </div>
-      </nav>
+      </header>
 
-      <div className="container mx-auto px-4 py-8">
-        {/* Stats Cards */}
+      <main className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                <DollarSign className="w-6 h-6 text-primary" />
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium">Pending Requests</CardTitle>
+              <ClipboardList className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center justify-between">
+                <div className="text-2xl font-bold">{stats.pendingRequests}</div>
+                {stats.pendingRequests > 5 && (
+                  <Badge variant="destructive">High</Badge>
+                )}
               </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Subscriptions</p>
-                <p className="text-2xl font-bold">{subscriptions.length}</p>
-              </div>
-            </div>
+            </CardContent>
           </Card>
 
-          <Card className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
-                <Video className="w-6 h-6 text-accent" />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Zoom Classes</p>
-                <p className="text-2xl font-bold">{zoomClasses.length}</p>
-              </div>
-            </div>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium">Active Jobs Today</CardTitle>
+              <Calendar className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.activeJobs}</div>
+            </CardContent>
           </Card>
 
-          <Card className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-success/10 rounded-lg flex items-center justify-center">
-                <Users className="w-6 h-6 text-success" />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Buyers</p>
-                <p className="text-2xl font-bold">{buyers.length}</p>
-              </div>
-            </div>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium">Available Workers</CardTitle>
+              <Users className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.availableWorkers}</div>
+              <p className="text-xs text-muted-foreground">of {stats.totalWorkers} total</p>
+            </CardContent>
           </Card>
 
-          <Card className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                <Mail className="w-6 h-6 text-primary" />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Subscribers</p>
-                <p className="text-2xl font-bold">{subscribers.length}</p>
-              </div>
-            </div>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium">Total Clients</CardTitle>
+              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.totalClients}</div>
+            </CardContent>
           </Card>
         </div>
 
-        {/* Data Tables */}
-        <Tabs defaultValue="calendar" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="calendar">
-              <Calendar className="w-4 h-4 mr-2" />
-              Calendar
-            </TabsTrigger>
-            <TabsTrigger value="subscriptions">Subscriptions</TabsTrigger>
-            <TabsTrigger value="buyers">Buyers & Donors</TabsTrigger>
-            <TabsTrigger value="subscribers">Subscribers</TabsTrigger>
-            <TabsTrigger value="classes">Zoom Classes</TabsTrigger>
+        <Tabs defaultValue="overview" className="space-y-6">
+          <TabsList className="grid w-full grid-cols-2 lg:grid-cols-6">
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="clients">Clients</TabsTrigger>
+            <TabsTrigger value="workers">Workers</TabsTrigger>
+            <TabsTrigger value="schedule">Schedule</TabsTrigger>
+            <TabsTrigger value="messages">Messages</TabsTrigger>
+            <TabsTrigger value="reports">Reports</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="calendar">
-            <WorkersCalendar zoomClasses={zoomClasses} />
-          </TabsContent>
+          <TabsContent value="overview" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Quick Actions</CardTitle>
+                <CardDescription>Common administrative tasks</CardDescription>
+              </CardHeader>
+              <CardContent className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <Button className="h-20 flex flex-col gap-2">
+                  <UserPlus className="h-6 w-6" />
+                  Assign New Job
+                </Button>
+                <Button variant="outline" className="h-20 flex flex-col gap-2">
+                  <MessageSquare className="h-6 w-6" />
+                  Message Workers
+                </Button>
+                <Button variant="outline" className="h-20 flex flex-col gap-2">
+                  <FileText className="h-6 w-6" />
+                  View Reports
+                </Button>
+                <Button variant="outline" className="h-20 flex flex-col gap-2">
+                  <Users className="h-6 w-6" />
+                  Add New Client
+                </Button>
+              </CardContent>
+            </Card>
 
-          <TabsContent value="subscriptions">
-            <Card className="p-6">
-              <h2 className="text-xl font-bold mb-4">Subscriptions</h2>
-              {subscriptions.length === 0 ? (
-                <p className="text-muted-foreground text-center py-8">No subscriptions yet</p>
-              ) : (
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr className="border-b">
-                        <th className="text-left p-2">Plan Name</th>
-                        <th className="text-left p-2">Status</th>
-                        <th className="text-left p-2">Amount</th>
-                        <th className="text-left p-2">Start Date</th>
-                        <th className="text-left p-2">End Date</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {subscriptions.map((sub) => (
-                        <tr key={sub.id} className="border-b">
-                          <td className="p-2">{sub.plan_name}</td>
-                          <td className="p-2">
-                            <span className={`px-2 py-1 rounded text-xs ${sub.status === 'active' ? 'bg-success/10 text-success' : 'bg-muted text-muted-foreground'}`}>
-                              {sub.status}
-                            </span>
-                          </td>
-                          <td className="p-2">${sub.amount}</td>
-                          <td className="p-2">{new Date(sub.start_date).toLocaleDateString()}</td>
-                          <td className="p-2">{sub.end_date ? new Date(sub.end_date).toLocaleDateString() : 'N/A'}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+            <Card>
+              <CardHeader>
+                <CardTitle>Recent Activity</CardTitle>
+                <CardDescription>Latest system events</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <p className="text-sm text-muted-foreground text-center py-8">
+                    No recent activity to display
+                  </p>
                 </div>
-              )}
+              </CardContent>
             </Card>
           </TabsContent>
 
-          <TabsContent value="classes">
-            <Card className="p-6">
-              <h2 className="text-xl font-bold mb-4">Zoom Classes</h2>
-              {zoomClasses.length === 0 ? (
-                <p className="text-muted-foreground text-center py-8">No zoom classes scheduled</p>
-              ) : (
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr className="border-b">
-                        <th className="text-left p-2">Title</th>
-                        <th className="text-left p-2">Scheduled Date</th>
-                        <th className="text-left p-2">Duration (min)</th>
-                        <th className="text-left p-2">Max Participants</th>
-                        <th className="text-left p-2">Zoom Link</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {zoomClasses.map((cls) => (
-                        <tr key={cls.id} className="border-b">
-                          <td className="p-2 font-medium">{cls.title}</td>
-                          <td className="p-2">{new Date(cls.scheduled_date).toLocaleString()}</td>
-                          <td className="p-2">{cls.duration_minutes}</td>
-                          <td className="p-2">{cls.max_participants || 'Unlimited'}</td>
-                          <td className="p-2">
-                            <a href={cls.zoom_link} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                              Join
-                            </a>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
+          <TabsContent value="clients">
+            <Card>
+              <CardHeader>
+                <CardTitle>Client Management</CardTitle>
+                <CardDescription>Manage client requests and communications</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground text-center py-8">
+                  Client management interface coming soon
+                </p>
+              </CardContent>
             </Card>
           </TabsContent>
 
-          <TabsContent value="buyers">
-            <Card className="p-6">
-              <h2 className="text-xl font-bold mb-4">Buyers & Donors</h2>
-              <p className="text-sm text-muted-foreground mb-4">
-                Track all purchases, donations, and service payments
-              </p>
-              {buyers.length === 0 ? (
-                <p className="text-muted-foreground text-center py-8">No buyers yet</p>
-              ) : (
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr className="border-b">
-                        <th className="text-left p-2">Product Name</th>
-                        <th className="text-left p-2">Purchase Date</th>
-                        <th className="text-left p-2">Amount</th>
-                        <th className="text-left p-2">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {buyers.map((buyer) => (
-                        <tr key={buyer.id} className="border-b">
-                          <td className="p-2">{buyer.product_name}</td>
-                          <td className="p-2">{new Date(buyer.purchase_date).toLocaleDateString()}</td>
-                          <td className="p-2">${buyer.amount}</td>
-                          <td className="p-2">
-                            <span className={`px-2 py-1 rounded text-xs ${buyer.status === 'completed' ? 'bg-success/10 text-success' : 'bg-warning/10 text-warning'}`}>
-                              {buyer.status}
-                            </span>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
+          <TabsContent value="workers">
+            <Card>
+              <CardHeader>
+                <CardTitle>Worker Management</CardTitle>
+                <CardDescription>Manage worker schedules and availability</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground text-center py-8">
+                  Worker management interface coming soon
+                </p>
+              </CardContent>
             </Card>
           </TabsContent>
 
-          <TabsContent value="subscribers">
-            <Card className="p-6">
-              <h2 className="text-xl font-bold mb-4">Email Subscribers</h2>
-              {subscribers.length === 0 ? (
-                <p className="text-muted-foreground text-center py-8">No subscribers yet</p>
-              ) : (
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr className="border-b">
-                        <th className="text-left p-2">Name</th>
-                        <th className="text-left p-2">Email</th>
-                        <th className="text-left p-2">Subscribed At</th>
-                        <th className="text-left p-2">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {subscribers.map((subscriber) => (
-                        <tr key={subscriber.id} className="border-b">
-                          <td className="p-2">{subscriber.name || 'N/A'}</td>
-                          <td className="p-2">{subscriber.email}</td>
-                          <td className="p-2">{new Date(subscriber.subscribed_at).toLocaleDateString()}</td>
-                          <td className="p-2">
-                            <span className={`px-2 py-1 rounded text-xs ${subscriber.status === 'active' ? 'bg-success/10 text-success' : 'bg-muted text-muted-foreground'}`}>
-                              {subscriber.status}
-                            </span>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
+          <TabsContent value="schedule">
+            <Card>
+              <CardHeader>
+                <CardTitle>Schedule Management</CardTitle>
+                <CardDescription>View and manage appointments</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground text-center py-8">
+                  Schedule management interface coming soon
+                </p>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="messages">
+            <Card>
+              <CardHeader>
+                <CardTitle>Internal Messages</CardTitle>
+                <CardDescription>Communication with workers</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground text-center py-8">
+                  Messaging interface coming soon
+                </p>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="reports">
+            <Card>
+              <CardHeader>
+                <CardTitle>Reports & Analytics</CardTitle>
+                <CardDescription>Business insights and performance metrics</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground text-center py-8">
+                  Reports interface coming soon
+                </p>
+              </CardContent>
             </Card>
           </TabsContent>
         </Tabs>
-      </div>
+      </main>
     </div>
   );
-};
-
-export default AdminDashboard;
+}
