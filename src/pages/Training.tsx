@@ -10,8 +10,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, FileText, Award, MessageSquare, Users, Home } from "lucide-react";
 import heroImage from "@/assets/hero-training.jpg";
-import testimonial2 from "@/assets/testimonial-2.jpg";
-import testimonial4 from "@/assets/testimonial-4.jpg";
+import testimonial11 from "@/assets/testimonial-11.jpg";
+import testimonial13 from "@/assets/testimonial-13.jpg";
 
 const Training = () => {
   return (
@@ -262,18 +262,18 @@ const Training = () => {
           <h2 className="text-center mb-12">What Our Students Say</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <TestimonialCard
-              name="Dorothy & Frank M."
-              age="74 & 76"
+              name="Elena G."
+              age="69"
               location="Springfield"
               quote="The instructor made everything so simple. We practiced spotting fake emails together and now feel confident. Best $299 we ever spent!"
-              image={testimonial2}
+              image={testimonial11}
             />
             <TestimonialCard
-              name="Susan R."
+              name="Angela R."
               age="52"
               location="Kettering"
-              quote="I brought my daughter to the Priority Private session. The trainer customized scenarios for our family—including my mom's romance scam experience. Invaluable."
-              image={testimonial4}
+              quote="I brought my daughter to the Priority Private session. The trainer customized scenarios for our family—including my mother's romance scam experience. Invaluable."
+              image={testimonial13}
             />
           </div>
         </div>

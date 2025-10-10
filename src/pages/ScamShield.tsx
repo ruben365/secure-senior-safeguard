@@ -11,8 +11,8 @@ import { Card } from "@/components/ui/card";
 import { Upload, UserCheck, Shield, Mail, Link as LinkIcon, QrCode, Mic, Image as ImageIcon, MessageSquare, CheckCircle, AlertTriangle } from "lucide-react";
 import heroImage from "@/assets/hero-scamshield-new.jpg";
 import testimonial4 from "@/assets/testimonial-4.jpg";
-import testimonial1 from "@/assets/testimonial-1.jpg";
-import testimonial2 from "@/assets/testimonial-2.jpg";
+import testimonial10 from "@/assets/testimonial-10.jpg";
+import testimonial12 from "@/assets/testimonial-12.jpg";
 
 const ScamShield = () => {
   return (
@@ -281,18 +281,18 @@ const ScamShield = () => {
               image={testimonial4}
             />
             <TestimonialCard
-              name="Rachel K."
-              age="48"
+              name="Patricia M."
+              age="63"
               location="Dayton"
-              quote="My mom was targeted with a fake 'Medicare card update' email. We submitted it to Scam Shield within minutes and got confirmation it was a scam in 18 hours. Saved her from identity theft."
-              image={testimonial1}
+              quote="My elderly father was targeted with a fake 'Medicare card update' email. We submitted it to Scam Shield within minutes and got confirmation it was a scam in 18 hours. Saved him from identity theft."
+              image={testimonial10}
             />
             <TestimonialCard
-              name="Tom & Jennifer S."
-              age="55 & 53"
+              name="Omar & Hassan A."
+              age="58 & 55"
               location="Centerville"
-              quote="Premium Plan is our family's insurance policy. Between my parents, in-laws, and us, we submit 20+ items a month. The 24-hour turnaround is perfect."
-              image={testimonial2}
+              quote="Premium Plan is our family's insurance policy. Between our parents, in-laws, and us, we submit 20+ items a month. The 24-hour turnaround is perfect."
+              image={testimonial12}
             />
           </div>
         </div>

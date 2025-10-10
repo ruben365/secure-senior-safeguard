@@ -10,8 +10,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Phone, Mail, MessageSquare, Calendar, CheckCircle, Search, Shield } from "lucide-react";
 import heroImage from "@/assets/hero-business-new.jpg";
-import testimonial3 from "@/assets/testimonial-3.jpg";
-import testimonial4 from "@/assets/testimonial-4.jpg";
+import testimonial8 from "@/assets/testimonial-8.jpg";
+import testimonial9 from "@/assets/testimonial-9.jpg";
 
 const Business = () => {
   return (
@@ -689,13 +689,13 @@ const Business = () => {
               name="Marcus Williams"
               location="Williams HVAC, Dayton"
               quote="InVision built our AI receptionist in 3 weeks. It handles 80% of our inbound calls now. ROI paid for itself in 4 months. Highly recommend."
-              image={testimonial3}
+              image={testimonial8}
             />
             <TestimonialCard
               name="Dr. Sarah Chen"
               location="Family Medicine, Cincinnati"
               quote="Their pre-purchase consulting saved us from buying a $12,000 'AI medical scribe' that would have violated HIPAA. They found a compliant alternative for $3,000."
-              image={testimonial4}
+              image={testimonial9}
             />
           </div>
         </div>
