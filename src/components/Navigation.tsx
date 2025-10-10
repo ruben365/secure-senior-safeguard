@@ -122,7 +122,7 @@ const Navigation = () => {
               </Button>
             ) : (
               <Button asChild variant="outline" size="sm" className="hidden md:inline-flex font-semibold">
-                <Link to="/auth" aria-label="Login to admin panel">LOGIN</Link>
+                <Link to="/enhanced-auth" aria-label="Login to admin panel">LOGIN</Link>
               </Button>
             )}
             <Button asChild variant="default" size="sm" className="hidden md:inline-flex font-semibold">
@@ -192,7 +192,7 @@ const Navigation = () => {
                   </Button>
                 ) : (
                   <Button asChild variant="outline" className="w-full">
-                    <Link to="/auth" onClick={() => setMobileMenuOpen(false)} aria-label="Login to admin panel">
+                    <Link to="/enhanced-auth" onClick={() => setMobileMenuOpen(false)} aria-label="Login to admin panel">
                       LOGIN
                     </Link>
                   </Button>
