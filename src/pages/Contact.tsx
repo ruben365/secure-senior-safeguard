@@ -12,7 +12,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Card } from "@/components/ui/card";
 import { Phone, Mail, MapPin, Clock, MessageSquare } from "lucide-react";
 import { toast } from "sonner";
-import heroImage from "@/assets/hero-contact.jpg";
 
 const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
@@ -26,7 +25,7 @@ const Contact = () => {
 
       {/* Hero */}
       <Hero
-        backgroundImage={heroImage}
+        useTransitioningBackground={true}
         headline="Let's Talk. We're Here to Help."
         subheadline="Whether you have questions, need training, or want to protect your family—we're ready to assist you."
         showScrollIndicator={true}

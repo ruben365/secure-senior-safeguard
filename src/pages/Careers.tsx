@@ -18,7 +18,6 @@ import {
   Upload,
   Loader2 
 } from "lucide-react";
-import heroImage from "@/assets/hero-about.jpg";
 
 const openPositions = [
   {
@@ -99,7 +98,7 @@ const Careers = () => {
       <Navigation />
       
       <Hero
-        backgroundImage={heroImage}
+        useTransitioningBackground={true}
         headline="Join Our Mission"
         subheadline="Help protect families from AI-powered scams and digital fraud"
       />

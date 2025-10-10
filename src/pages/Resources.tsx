@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Download, Shield, Wifi, KeyRound, Heart, FileText, ShoppingCart } from "lucide-react";
-import heroImage from "@/assets/hero-resources.jpg";
 
 const Resources = () => {
   const guides = [
@@ -99,7 +98,7 @@ const Resources = () => {
 
       {/* Hero */}
       <Hero
-        backgroundImage={heroImage}
+        useTransitioningBackground={true}
         headline="Free Resources & Tools"
         subheadline="Downloadable guides, security tools, and answers to your questions—everything you need to stay safe."
         showScrollIndicator={true}

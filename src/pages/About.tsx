@@ -6,7 +6,6 @@ import FlowingWaves from "@/components/FlowingWaves";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Heart, Lock, BookOpen, Users2, Shield, DollarSign, Award, MapPin } from "lucide-react";
-import heroImage from "@/assets/hero-about-new.jpg";
 
 const About = () => {
   return (
@@ -14,7 +13,7 @@ const About = () => {
       <Navigation />
 
       <Hero
-        backgroundImage={heroImage}
+        useTransitioningBackground={true}
         headline="Founded by Families, For Families"
         subheadline="After watching loved ones nearly lose thousands to AI-powered scams, we built InVision Network—the protection system we wish existed."
         showScrollIndicator={true}

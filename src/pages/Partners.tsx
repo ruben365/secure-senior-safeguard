@@ -1,6 +1,7 @@
 import { ExternalLink } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import Hero from '@/components/Hero';
 import { Button } from '@/components/ui/button';
 
 interface Partner {
@@ -80,20 +81,16 @@ const aiPartners: Partner[] = [
 
 const Partners = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-background/95 to-primary/5">
+    <div className="min-h-screen">
         <Navigation />
         
         {/* Hero Section */}
-        <section className="pt-32 pb-16 px-4">
-          <div className="container mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-              AI Partners & Technology
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-              Collaborating with industry-leading AI companies to deliver safe, responsible, and accessible AI education.
-            </p>
-          </div>
-        </section>
+        <Hero
+          useTransitioningBackground={true}
+          headline="AI Partners & Technology"
+          subheadline="We collaborate with the world's leading AI and security platforms to deliver cutting-edge protection and training solutions."
+          showScrollIndicator={true}
+        />
 
         {/* Partners Grid */}
         <section className="pb-16 px-4">

@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import Hero from '@/components/Hero';
 import teamRuben from '@/assets/team-ruben.jpg';
 import teamCorine from '@/assets/team-corine.jpg';
 import teamDavid from '@/assets/team-david.jpg';
@@ -122,20 +123,16 @@ const Team = () => {
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-background/95 to-primary/5">
+    <div className="min-h-screen">
         <Navigation />
         
         {/* Hero Section */}
-        <section className="pt-32 pb-16 px-4">
-          <div className="container mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-              Meet the InVision Network Team
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-              Passionate experts dedicated to AI safety education and empowering families to navigate the digital age securely.
-            </p>
-          </div>
-        </section>
+        <Hero
+          useTransitioningBackground={true}
+          headline="Meet the InVision Network Team"
+          subheadline="Dedicated professionals protecting families from AI-powered scams with expertise, empathy, and unwavering commitment."
+          showScrollIndicator={true}
+        />
 
         {/* Team Grid */}
         <section className="pb-24 px-4">
