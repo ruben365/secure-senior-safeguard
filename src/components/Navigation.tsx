@@ -64,46 +64,48 @@ const Navigation = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex flex-1 items-center justify-center">
-            <NavigationMenu>
-              <NavigationMenuList className="space-x-6">
-                {/* AI Business Dropdown */}
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-foreground/80 hover:text-foreground font-bold transition-colors duration-200 text-base">
-                    AI Business
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[250px] gap-1 p-2">
-                      {businessSubLinks.map((link) => (
-                        <li key={link.name}>
-                          <NavigationMenuLink asChild>
-                            <Link
-                              to={link.href}
-                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                            >
-                              <div className="text-sm font-bold leading-none">{link.name}</div>
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                      ))}
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-
-                {/* Regular Links */}
-                {navLinks.map((link) => (
-                  <NavigationMenuItem key={link.name}>
-                    <Link
-                      to={link.href}
-                      className="text-foreground/80 hover:text-foreground font-bold transition-colors duration-200 text-base whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2 py-1"
-                    >
-                      {link.name}
-                    </Link>
+          {!user && (
+            <div className="hidden lg:flex flex-1 items-center justify-center">
+              <NavigationMenu>
+                <NavigationMenuList className="space-x-6">
+                  {/* AI Business Dropdown */}
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="text-foreground/80 hover:text-foreground font-bold transition-colors duration-200 text-base">
+                      AI Business
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[250px] gap-1 p-2">
+                        {businessSubLinks.map((link) => (
+                          <li key={link.name}>
+                            <NavigationMenuLink asChild>
+                              <Link
+                                to={link.href}
+                                className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                              >
+                                <div className="text-sm font-bold leading-none">{link.name}</div>
+                              </Link>
+                            </NavigationMenuLink>
+                          </li>
+                        ))}
+                      </ul>
+                    </NavigationMenuContent>
                   </NavigationMenuItem>
-                ))}
-              </NavigationMenuList>
-            </NavigationMenu>
-          </div>
+
+                  {/* Regular Links */}
+                  {navLinks.map((link) => (
+                    <NavigationMenuItem key={link.name}>
+                      <Link
+                        to={link.href}
+                        className="text-foreground/80 hover:text-foreground font-bold transition-colors duration-200 text-base whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2 py-1"
+                      >
+                        {link.name}
+                      </Link>
+                    </NavigationMenuItem>
+                  ))}
+                </NavigationMenuList>
+              </NavigationMenu>
+            </div>
+          )}
 
           {/* Right Side - Phone & CTA */}
           <div className="flex items-center gap-4">
@@ -143,42 +145,46 @@ const Navigation = () => {
         {mobileMenuOpen && (
           <div className="lg:hidden py-4 border-t border-border" role="navigation" aria-label="Mobile navigation">
             <div className="flex flex-col gap-3">
-              {/* AI Business Dropdown */}
-              <div>
-                <button
-                  onClick={() => setMobileBusinessOpen(!mobileBusinessOpen)}
-                  className="flex items-center justify-between w-full text-foreground/80 hover:text-foreground py-2 transition-colors font-bold text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2"
-                >
-                  <span>AI Business</span>
-                  <ChevronDown className={`w-4 h-4 transition-transform ${mobileBusinessOpen ? 'rotate-180' : ''}`} />
-                </button>
-                {mobileBusinessOpen && (
-                  <div className="pl-4 mt-2 space-y-2">
-                    {businessSubLinks.map((link) => (
-                      <Link
-                        key={link.name}
-                        to={link.href}
-                        className="block text-foreground/80 hover:text-foreground py-2 transition-colors text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        {link.name}
-                      </Link>
-                    ))}
+              {!user && (
+                <>
+                  {/* AI Business Dropdown */}
+                  <div>
+                    <button
+                      onClick={() => setMobileBusinessOpen(!mobileBusinessOpen)}
+                      className="flex items-center justify-between w-full text-foreground/80 hover:text-foreground py-2 transition-colors font-bold text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2"
+                    >
+                      <span>AI Business</span>
+                      <ChevronDown className={`w-4 h-4 transition-transform ${mobileBusinessOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileBusinessOpen && (
+                      <div className="pl-4 mt-2 space-y-2">
+                        {businessSubLinks.map((link) => (
+                          <Link
+                            key={link.name}
+                            to={link.href}
+                            className="block text-foreground/80 hover:text-foreground py-2 transition-colors text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            {link.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
 
-              {/* Regular Links */}
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.href}
-                  className="text-foreground/80 hover:text-foreground py-2 transition-colors font-bold text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              ))}
+                  {/* Regular Links */}
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.name}
+                      to={link.href}
+                      className="text-foreground/80 hover:text-foreground py-2 transition-colors font-bold text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                </>
+              )}
 
               <div className="pt-2 border-t border-border flex flex-col gap-3">
                 {user ? (
