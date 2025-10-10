@@ -32,7 +32,7 @@ const Business = () => {
       <TrustBar />
 
       {/* Use Cases */}
-      <section className="py-20 bg-background relative">
+      <section className="py-10 bg-background relative">
         <FlowingWaves variant="full" opacity={0.12} />
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-center mb-12">AI for Business & Web Design</h2>
@@ -97,7 +97,7 @@ const Business = () => {
       </section>
 
       {/* Package Pricing */}
-      <section className="py-20 bg-muted">
+      <section className="py-10 bg-muted">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-12">Package Pricing</h2>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -198,7 +198,7 @@ const Business = () => {
       </section>
 
       {/* Web Design Services */}
-      <section className="py-20 bg-background">
+      <section className="py-10 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <div className="inline-block px-6 py-2 bg-primary/10 rounded-full text-sm font-bold text-primary mb-4 uppercase tracking-wider">
@@ -373,7 +373,7 @@ const Business = () => {
       </section>
 
       {/* AI Services Insurance */}
-      <section className="py-20 bg-background">
+      <section className="py-10 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <div className="inline-block px-6 py-2 bg-primary/10 rounded-full text-sm font-bold text-primary mb-4 uppercase tracking-wider">
@@ -548,7 +548,7 @@ const Business = () => {
       </section>
 
       {/* Why InVision */}
-      <section className="py-20 bg-muted">
+      <section className="py-10 bg-muted">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-12">Why InVision for Your AI</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
@@ -606,7 +606,7 @@ const Business = () => {
       </section>
 
       {/* Pre-Purchase Consulting */}
-      <section className="py-20 bg-muted">
+      <section className="py-10 bg-muted">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <Card className="p-8 bg-gradient-to-br from-accent/10 to-accent/5">
@@ -644,7 +644,7 @@ const Business = () => {
       </section>
 
       {/* AI Security Audit */}
-      <section className="py-20 bg-background">
+      <section className="py-10 bg-background">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <Card className="p-8 bg-gradient-to-br from-amber-100 to-amber-50 dark:from-amber-950 dark:to-amber-900">
@@ -681,7 +681,7 @@ const Business = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-muted">
+      <section className="py-10 bg-muted">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-12">Business Testimonials</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">

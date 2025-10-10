@@ -14,17 +14,17 @@ const partners = [
 
 const AIPartnersCarousel = () => {
   return (
-    <section className="py-16 bg-muted/50 overflow-hidden">
+    <section className="py-8 bg-muted/50 overflow-hidden">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-3">
           Powered by Industry-Leading AI Partners
         </h2>
-        <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">
+        <p className="text-muted-foreground text-center mb-6 max-w-2xl mx-auto">
           We partner with the world's most trusted AI platforms to deliver cutting-edge security and training solutions
         </p>
 
         {/* Logo Carousel */}
-        <div className="relative mb-8">
+        <div className="relative mb-6">
           <div className="flex animate-scroll space-x-12 items-center">
             {/* Duplicate partners array for seamless loop */}
             {[...partners, ...partners].map((partner, index) => (

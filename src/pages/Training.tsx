@@ -32,7 +32,7 @@ const Training = () => {
       <TrustBar />
 
       {/* What You'll Master */}
-      <section className="py-20 bg-background relative">
+      <section className="py-10 bg-background relative">
         <FlowingWaves variant="full" opacity={0.12} />
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-center mb-12">What You'll Master</h2>
@@ -66,7 +66,7 @@ const Training = () => {
       </section>
 
       {/* Pricing Table */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-10 bg-muted/30">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-16">Training Programs & Pricing</h2>
           
@@ -194,7 +194,7 @@ const Training = () => {
         </div>
       </section>
       {/* In-Person Training */}
-      <section className="py-20 bg-background">
+      <section className="py-10 bg-background">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <Card className="p-8 bg-gradient-to-br from-primary/5 to-primary/10 border-border">
@@ -234,7 +234,7 @@ const Training = () => {
       </section>
 
       {/* What's Included */}
-      <section className="py-20 bg-muted">
+      <section className="py-10 bg-muted">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-12">What's Included in Every Training</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
@@ -257,7 +257,7 @@ const Training = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-background">
+      <section className="py-10 bg-background">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-12">What Our Students Say</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">

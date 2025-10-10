@@ -33,7 +33,7 @@ const ScamShield = () => {
       <TrustBar />
 
       {/* How Scam Shield Works */}
-      <section className="py-20 bg-background relative">
+      <section className="py-10 bg-background relative">
         <FlowingWaves variant="full" opacity={0.12} />
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-center mb-12">How Scam Shield Works</h2>
@@ -78,7 +78,7 @@ const ScamShield = () => {
       </section>
 
       {/* Membership Plans */}
-      <section className="py-20 bg-muted">
+      <section className="py-10 bg-muted">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-12">Membership Plans</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -164,7 +164,7 @@ const ScamShield = () => {
       </section>
 
       {/* What We Analyze */}
-      <section className="py-20 bg-background">
+      <section className="py-10 bg-background">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-12">What We Analyze</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -193,7 +193,7 @@ const ScamShield = () => {
       </section>
 
       {/* Important Boundaries */}
-      <section className="py-20 bg-amber-50 dark:bg-amber-950">
+      <section className="py-10 bg-amber-50 dark:bg-amber-950">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-start gap-4 mb-6">
@@ -269,7 +269,7 @@ const ScamShield = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-background">
+      <section className="py-10 bg-background">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-12">Member Testimonials</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

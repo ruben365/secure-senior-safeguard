@@ -105,7 +105,7 @@ const Careers = () => {
       />
 
       {/* Why Work With Us */}
-      <section className="py-20 bg-background">
+      <section className="py-10 bg-background">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-12 animate-fade-in-up">Why Work With InVision Network</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
@@ -153,7 +153,7 @@ const Careers = () => {
       </section>
 
       {/* Open Positions */}
-      <section className="py-20 bg-muted">
+      <section className="py-10 bg-muted">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-12">Open Positions</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
@@ -190,7 +190,7 @@ const Careers = () => {
       </section>
 
       {/* Application Form */}
-      <section id="application-form" className="py-20 bg-background">
+      <section id="application-form" className="py-10 bg-background">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">

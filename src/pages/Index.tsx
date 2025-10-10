@@ -296,7 +296,7 @@ const Index = () => {
       <VideoTestimonials />
 
       {/* FAQ Teaser */}
-      <section className="py-20 bg-muted relative overflow-hidden">
+      <section className="py-10 bg-muted relative overflow-hidden">
 ...
       </section>
 

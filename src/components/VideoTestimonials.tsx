@@ -27,14 +27,14 @@ const videoTestimonials = [
 
 const VideoTestimonials = () => {
   return (
-    <section className="py-20 bg-muted relative overflow-hidden">
+    <section className="py-10 bg-muted relative overflow-hidden">
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s' }} />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-12 animate-fade-in-up">
-          <h2 className="mb-4">Video Testimonials</h2>
+        <div className="text-center mb-8 animate-fade-in-up">
+          <h2 className="mb-3">Video Testimonials</h2>
           <p className="text-xl text-muted-foreground">
             Hear directly from families we've protected
           </p>
@@ -72,7 +72,7 @@ const VideoTestimonials = () => {
           ))}
         </div>
 
-        <div className="text-center mt-8">
+        <div className="text-center mt-6">
           <p className="text-sm text-muted-foreground">
             Replace these placeholder videos with your actual testimonial videos
           </p>

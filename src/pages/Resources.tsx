@@ -106,7 +106,7 @@ const Resources = () => {
       />
 
       {/* Free Guides */}
-      <section className="py-20 bg-background relative">
+      <section className="py-10 bg-background relative">
         <FlowingWaves variant="full" opacity={0.12} />
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-center mb-12">Free Downloadable Guides</h2>
@@ -133,7 +133,7 @@ const Resources = () => {
       </section>
 
       {/* Security Tools Shop */}
-      <section className="py-20 bg-muted">
+      <section className="py-10 bg-muted">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-4">Security Tools Shop</h2>
           <p className="text-center text-muted-foreground mb-12 text-lg">
@@ -159,7 +159,7 @@ const Resources = () => {
       </section>
 
       {/* Blog */}
-      <section className="py-20 bg-background">
+      <section className="py-10 bg-background">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-12">Recent Articles</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -184,7 +184,7 @@ const Resources = () => {
       </section>
 
       {/* FAQ */}
-      <section className="py-20 bg-muted" id="faq">
+      <section className="py-10 bg-muted" id="faq">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-12">Frequently Asked Questions</h2>
           <div className="max-w-4xl mx-auto">
@@ -205,7 +205,7 @@ const Resources = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 bg-gradient-to-r from-primary to-accent">
+      <section className="py-10 bg-gradient-to-r from-primary to-accent">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-accent-foreground mb-8">Still Have Questions?</h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

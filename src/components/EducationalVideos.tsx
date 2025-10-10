@@ -39,7 +39,7 @@ const educationalVideos = [
 
 const EducationalVideos = () => {
   return (
-    <section className="py-20 bg-background relative overflow-hidden">
+    <section className="py-10 bg-background relative overflow-hidden">
       <div className="absolute inset-0 opacity-20">
         <div className="absolute bottom-20 right-1/4 w-80 h-80 bg-accent/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '7s' }} />
       </div>
