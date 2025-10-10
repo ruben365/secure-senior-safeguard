@@ -25,6 +25,7 @@ const Navigation = () => {
   ];
 
   const businessSubLinks = [
+    { name: "AI Business Overview", href: "/business" },
     { name: "Family ScamShield", href: "/scam-shield" },
     { name: "Learn & Train", href: "/training" },
   ];
