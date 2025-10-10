@@ -59,7 +59,7 @@ const AdminDashboard = () => {
 
   const checkAuth = async () => {
     if (!user) {
-      navigate("/login");
+      navigate("/auth");
       return;
     }
 
@@ -79,7 +79,7 @@ const AdminDashboard = () => {
       await loadData();
     } catch (error) {
       console.error("Auth check error:", error);
-      navigate("/login");
+      navigate("/auth");
     }
   };
 
@@ -111,7 +111,7 @@ const AdminDashboard = () => {
 
   const handleLogout = async () => {
     await signOut();
-    navigate("/login");
+    navigate("/auth");
   };
 
   if (loading) {

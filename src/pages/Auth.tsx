@@ -12,7 +12,7 @@ import Footer from '@/components/Footer';
 
 const Auth = () => {
   const navigate = useNavigate();
-  const { signIn, signUp, resetPassword, user } = useAuth();
+  const { signIn, signUp, resetPassword, user, isAdmin } = useAuth();
   const { toast } = useToast();
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -67,7 +67,14 @@ const Auth = () => {
       if (rememberMe) {
         localStorage.setItem('rememberMe', 'true');
       }
-      navigate('/');
+      
+      // Check if user is admin and redirect accordingly
+      const adminStatus = await isAdmin();
+      if (adminStatus) {
+        navigate('/admin');
+      } else {
+        navigate('/');
+      }
     } catch (error) {
       // Error handled in useAuth
     } finally {
