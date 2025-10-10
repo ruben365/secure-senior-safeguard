@@ -6,7 +6,8 @@ import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
-import { Users, DollarSign, Video, Mail, LogOut } from "lucide-react";
+import { Users, DollarSign, Video, Mail, LogOut, Calendar } from "lucide-react";
+import { WorkersCalendar } from "@/components/admin/WorkersCalendar";
 
 interface Subscription {
   id: string;
@@ -187,13 +188,21 @@ const AdminDashboard = () => {
         </div>
 
         {/* Data Tables */}
-        <Tabs defaultValue="subscriptions" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
+        <Tabs defaultValue="calendar" className="space-y-6">
+          <TabsList className="grid w-full grid-cols-5">
+            <TabsTrigger value="calendar">
+              <Calendar className="w-4 h-4 mr-2" />
+              Calendar
+            </TabsTrigger>
             <TabsTrigger value="subscriptions">Subscriptions</TabsTrigger>
-            <TabsTrigger value="classes">Zoom Classes</TabsTrigger>
-            <TabsTrigger value="buyers">Buyers</TabsTrigger>
+            <TabsTrigger value="buyers">Buyers & Donors</TabsTrigger>
             <TabsTrigger value="subscribers">Subscribers</TabsTrigger>
+            <TabsTrigger value="classes">Zoom Classes</TabsTrigger>
           </TabsList>
+
+          <TabsContent value="calendar">
+            <WorkersCalendar zoomClasses={zoomClasses} />
+          </TabsContent>
 
           <TabsContent value="subscriptions">
             <Card className="p-6">
@@ -273,7 +282,10 @@ const AdminDashboard = () => {
 
           <TabsContent value="buyers">
             <Card className="p-6">
-              <h2 className="text-xl font-bold mb-4">Buyers</h2>
+              <h2 className="text-xl font-bold mb-4">Buyers & Donors</h2>
+              <p className="text-sm text-muted-foreground mb-4">
+                Track all purchases, donations, and service payments
+              </p>
               {buyers.length === 0 ? (
                 <p className="text-muted-foreground text-center py-8">No buyers yet</p>
               ) : (
