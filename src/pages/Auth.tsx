@@ -42,7 +42,7 @@ const Auth = () => {
 
   useEffect(() => {
     if (user) {
-      navigate('/');
+      navigate('/staff');
     }
   }, [user, navigate]);
 
@@ -67,14 +67,7 @@ const Auth = () => {
       if (rememberMe) {
         localStorage.setItem('rememberMe', 'true');
       }
-      
-      // Check if user is admin and redirect accordingly
-      const adminStatus = await isAdmin();
-      if (adminStatus) {
-        navigate('/admin');
-      } else {
-        navigate('/');
-      }
+      navigate('/staff');
     } catch (error) {
       // Error handled in useAuth
     } finally {
@@ -115,7 +108,7 @@ const Auth = () => {
     setIsLoading(true);
     try {
       await signUp(signupData.email, signupData.password, `${signupData.firstName} ${signupData.lastName}`);
-      navigate('/');
+      navigate('/staff');
     } catch (error) {
       // Error handled in useAuth
     } finally {
