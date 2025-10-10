@@ -117,72 +117,9 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-[45%_55%] relative">
-      {/* Left Panel - Hero */}
-      <div className="hidden lg:flex flex-col justify-center p-16 bg-gradient-to-br from-primary via-primary/95 to-accent relative overflow-hidden">
-        {/* Animated background elements */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-10 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-white rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-        </div>
-        
-        <div className="max-w-lg relative z-10">
-          <div className="mb-12 animate-fade-in-up">
-            <div className="w-24 h-24 bg-white/20 backdrop-blur-md rounded-3xl flex items-center justify-center mb-8 shadow-2xl border border-white/20">
-              <Shield className="w-14 h-14 text-white" />
-            </div>
-            <h1 className="text-6xl font-bold mb-6 leading-tight text-white">
-              {isLogin ? (
-                <>Welcome to<br />InVision Network</>
-              ) : (
-                <>Join the<br />InVision Network</>
-              )}
-            </h1>
-            <p className="text-xl mb-10 text-white/90 leading-relaxed">
-              {isLogin 
-                ? "Advanced AI security and protection solutions for modern families and businesses."
-                : "Start your journey to AI safety and security. Protect yourself and your loved ones from digital threats."
-              }
-            </p>
-          </div>
-          
-          <div className="space-y-6 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
-            <div className="flex items-start gap-5 group">
-              <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center flex-shrink-0 border border-white/30 group-hover:scale-110 transition-transform duration-300">
-                <Sparkles className="w-7 h-7 text-white" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold mb-2 text-white">Enterprise-Grade Security</h3>
-                <p className="text-white/80 leading-relaxed">Bank-level encryption protecting your sensitive data 24/7</p>
-              </div>
-            </div>
-            
-            <div className="flex items-start gap-5 group">
-              <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center flex-shrink-0 border border-white/30 group-hover:scale-110 transition-transform duration-300">
-                <Zap className="w-7 h-7 text-white" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold mb-2 text-white">AI-Powered Protection</h3>
-                <p className="text-white/80 leading-relaxed">Real-time threat detection and automated security responses</p>
-              </div>
-            </div>
-            
-            <div className="flex items-start gap-5 group">
-              <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center flex-shrink-0 border border-white/30 group-hover:scale-110 transition-transform duration-300">
-                <Shield className="w-7 h-7 text-white" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold mb-2 text-white">Compliance Ready</h3>
-                <p className="text-white/80 leading-relaxed">Full GDPR, CCPA, and SOC 2 compliance out of the box</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Right Panel - Auth Forms */}
-      <div className="flex items-center justify-center p-8 lg:p-16 bg-background relative overflow-y-auto">
+    <div className="min-h-screen flex flex-col relative">
+      {/* Auth Forms */}
+      <div className="flex-1 flex items-center justify-center p-8 lg:p-16 bg-background relative overflow-y-auto">
         <div className="w-full max-w-md space-y-8">
           {/* Mobile Logo */}
           <div className="flex justify-center mb-8 lg:hidden animate-fade-in-up">
