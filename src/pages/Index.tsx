@@ -9,7 +9,7 @@ import ThreePathsForward from "@/components/ThreePathsForward";
 import FlowingWaves from "@/components/FlowingWaves";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Heart, FileText, MessageSquare, Users, StopCircle, Search, Phone, DollarSign, FileCheck, Shield, CheckCircle } from "lucide-react";
+import { Heart, FileText, MessageSquare, Users, StopCircle, Search, Phone, DollarSign, FileCheck, Shield, CheckCircle, ExternalLink } from "lucide-react";
 import { useRotatingText } from "@/hooks/useRotatingText";
 import heroImage from "@/assets/hero-homepage.jpg";
 import testimonial1 from "@/assets/testimonial-1.jpg";
@@ -290,38 +290,49 @@ const Index = () => {
 
       {/* FAQ Teaser */}
       <section className="py-20 bg-muted relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-1/3 left-20 w-64 h-64 bg-primary/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s' }} />
-          <div className="absolute bottom-1/4 right-20 w-72 h-72 bg-accent/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '7s' }} />
-        </div>
-        <div className="container mx-auto px-4 relative z-10">
-          <h2 className="text-center mb-12 animate-fade-in-up">Common Questions</h2>
-          <div className="max-w-3xl mx-auto space-y-4">
+...
+      </section>
+
+      {/* AI Partners Section */}
+      <section className="py-24 px-4 bg-gradient-to-b from-background to-primary/5">
+        <div className="container mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Trusted AI Technology Partners
+          </h2>
+          <p className="text-muted-foreground mb-12 max-w-2xl mx-auto">
+            Collaborating with industry leaders to deliver safe, responsible AI education
+          </p>
+
+          <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-8 mb-12">
             {[
-              {
-                q: "Is this only for seniors?",
-                a: "Not at all! While we specialize in adults 40+, anyone who wants AI scam protection is welcome. We've trained ages 35-85.",
-              },
-              {
-                q: "Do you ask for my passwords?",
-                a: "NEVER. We teach verification techniques without ever requesting sensitive data. If anyone claiming to be InVision asks for passwords, it's a scam.",
-              },
-              {
-                q: "What if I'm not tech-savvy?",
-                a: "Perfect! Our training assumes zero technical knowledge. If you can use email, you're ready.",
-              },
-            ].map((faq, index) => (
-              <Card key={index} className="p-6 rounded-2xl hover:shadow-strong transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] border-border/50 group animate-fade-in-up bg-gradient-to-br from-card to-card/50" style={{ animationDelay: `${index * 100}ms` }}>
-                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-300">{faq.q}</h3>
-                <p className="text-muted-foreground">{faq.a}</p>
-              </Card>
+              { name: "Anthropic — Claude", logo: "/placeholder.svg" },
+              { name: "OpenAI", logo: "/placeholder.svg" },
+              { name: "Microsoft Azure AI", logo: "/placeholder.svg" },
+              { name: "Google Cloud AI", logo: "/placeholder.svg" },
+              { name: "Hugging Face", logo: "/placeholder.svg" },
+              { name: "Stripe", logo: "/placeholder.svg" }
+            ].map((partner, index) => (
+              <div 
+                key={index}
+                className="flex items-center justify-center p-4 bg-card rounded-xl shadow-subtle hover:shadow-strong transition-all duration-300 grayscale hover:grayscale-0 group"
+              >
+                <img 
+                  src={partner.logo} 
+                  alt={`${partner.name} logo`}
+                  className="max-w-full h-12 object-contain"
+                  loading="lazy"
+                />
+              </div>
             ))}
           </div>
-          <div className="text-center mt-8 animate-fade-in-up" style={{ animationDelay: '300ms' }}>
-            <Link to="/resources#faq" className="text-primary hover:text-primary/80 font-semibold text-lg inline-flex items-center gap-2 hover:gap-4 transition-all duration-300 hover:scale-105">
-              VIEW ALL FAQ →
-            </Link>
-          </div>
+
+          <a 
+            href="/partners"
+            className="inline-flex items-center gap-2 text-primary hover:underline font-semibold"
+          >
+            View All Partners
+            <ExternalLink className="w-4 h-4" />
+          </a>
         </div>
       </section>
 
