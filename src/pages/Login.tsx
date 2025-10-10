@@ -157,8 +157,15 @@ const Login = () => {
                   </Link>
                 </div>
 
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? 'Signing in...' : 'Sign In'}
+                <Button 
+                  type="submit" 
+                  className="w-full group relative overflow-hidden transition-all duration-300 hover:shadow-glow-purple" 
+                  disabled={isLoading}
+                >
+                  <span className="relative z-10">
+                    {isLoading ? 'Signing in...' : 'Sign In'}
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] animate-gradient-shift opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Button>
               </form>
             </TabsContent>
@@ -182,8 +189,15 @@ const Login = () => {
                   </p>
                 </div>
 
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? 'Sending...' : 'Send Magic Link'}
+                <Button 
+                  type="submit" 
+                  className="w-full group relative overflow-hidden transition-all duration-300 hover:shadow-glow-purple" 
+                  disabled={isLoading}
+                >
+                  <span className="relative z-10">
+                    {isLoading ? 'Sending...' : 'Send Magic Link'}
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] animate-gradient-shift opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Button>
               </form>
             </TabsContent>
@@ -210,6 +224,23 @@ const Login = () => {
           </div>
         </div>
       </div>
+
+      <style>{`
+        @keyframes gradient-shift {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+        .animate-gradient-shift {
+          animation: gradient-shift 3s ease infinite;
+        }
+      `}</style>
     </div>
   );
 };

@@ -16,6 +16,7 @@ import Partners from "./pages/Partners";
 import Careers from "./pages/Careers";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import EnhancedSignUp from "./pages/EnhancedSignUp";
 import PasswordReset from "./pages/PasswordReset";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
@@ -44,7 +45,7 @@ const App = () => (
             <Route path="/partners" element={<Partners />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signup" element={<EnhancedSignUp />} />
             <Route path="/password-reset" element={<PasswordReset />} />
             <Route path="/admin" element={<AdminDashboard />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

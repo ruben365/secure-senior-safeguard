@@ -10,6 +10,7 @@ import FlowingWaves from "@/components/FlowingWaves";
 import NewsletterSubscribe from "@/components/NewsletterSubscribe";
 import VideoTestimonials from "@/components/VideoTestimonials";
 import EducationalVideos from "@/components/EducationalVideos";
+import AIPartnersCarousel from "@/components/AIPartnersCarousel";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Heart, FileText, MessageSquare, Users, StopCircle, Search, Phone, DollarSign, FileCheck, Shield, CheckCircle, ExternalLink } from "lucide-react";
@@ -311,48 +312,8 @@ const Index = () => {
 ...
       </section>
 
-      {/* AI Partners Section */}
-      <section className="py-24 px-4 bg-gradient-to-b from-background to-primary/5">
-        <div className="container mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Trusted AI Technology Partners
-          </h2>
-          <p className="text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Collaborating with industry leaders to deliver safe, responsible AI education
-          </p>
-
-          <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-8 mb-12">
-            {[
-              { name: "Anthropic — Claude", logo: "/placeholder.svg" },
-              { name: "OpenAI", logo: "/placeholder.svg" },
-              { name: "Microsoft Azure AI", logo: "/placeholder.svg" },
-              { name: "Google Cloud AI", logo: "/placeholder.svg" },
-              { name: "Hugging Face", logo: "/placeholder.svg" },
-              { name: "Stripe", logo: "/placeholder.svg" }
-            ].map((partner, index) => (
-              <div 
-                key={index}
-                className="flex items-center justify-center p-4 bg-card rounded-xl shadow-subtle hover:shadow-strong transition-all duration-300 grayscale hover:grayscale-0 group"
-              >
-                <img 
-                  src={partner.logo} 
-                  alt={`${partner.name} logo`}
-                  className="max-w-full h-12 object-contain"
-                  loading="lazy"
-                />
-              </div>
-            ))}
-          </div>
-
-          <a 
-            href="/partners"
-            className="inline-flex items-center gap-2 text-primary hover:underline font-semibold"
-          >
-            View All Partners
-            <ExternalLink className="w-4 h-4" />
-          </a>
-        </div>
-      </section>
+      {/* AI Partners Carousel */}
+      <AIPartnersCarousel />
 
       {/* Final CTA */}
       <CTASection headline="Ready to Protect Your Family?" variant="gold">
