@@ -612,6 +612,7 @@ export type Database = {
           status: Database["public"]["Enums"]["event_status"]
           title: string
           updated_at: string
+          visibility: string | null
         }
         Insert: {
           assigned_to?: string | null
@@ -626,6 +627,7 @@ export type Database = {
           status?: Database["public"]["Enums"]["event_status"]
           title: string
           updated_at?: string
+          visibility?: string | null
         }
         Update: {
           assigned_to?: string | null
@@ -640,6 +642,7 @@ export type Database = {
           status?: Database["public"]["Enums"]["event_status"]
           title?: string
           updated_at?: string
+          visibility?: string | null
         }
         Relationships: [
           {
@@ -671,6 +674,7 @@ export type Database = {
           read_at: string | null
           recipient_id: string | null
           sender_id: string | null
+          sender_role: string | null
           subject: string | null
         }
         Insert: {
@@ -685,6 +689,7 @@ export type Database = {
           read_at?: string | null
           recipient_id?: string | null
           sender_id?: string | null
+          sender_role?: string | null
           subject?: string | null
         }
         Update: {
@@ -699,6 +704,7 @@ export type Database = {
           read_at?: string | null
           recipient_id?: string | null
           sender_id?: string | null
+          sender_role?: string | null
           subject?: string | null
         }
         Relationships: []
@@ -766,6 +772,62 @@ export type Database = {
           },
         ]
       }
+      jobs: {
+        Row: {
+          assigned_worker_ids: string[] | null
+          client_id: string | null
+          created_at: string
+          created_by: string | null
+          description: string | null
+          end_at: string
+          id: string
+          location: string | null
+          priority: string
+          start_at: string
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          assigned_worker_ids?: string[] | null
+          client_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          end_at: string
+          id?: string
+          location?: string | null
+          priority?: string
+          start_at: string
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          assigned_worker_ids?: string[] | null
+          client_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          end_at?: string
+          id?: string
+          location?: string | null
+          priority?: string
+          start_at?: string
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "jobs_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       notifications: {
         Row: {
           created_at: string
@@ -820,6 +882,33 @@ export type Database = {
           id?: string
           updated_at?: string | null
           username?: string
+        }
+        Relationships: []
+      }
+      reports_snapshots: {
+        Row: {
+          created_at: string
+          date_range_end: string
+          date_range_start: string
+          id: string
+          kpis: Json
+          period: string
+        }
+        Insert: {
+          created_at?: string
+          date_range_end: string
+          date_range_start: string
+          id?: string
+          kpis?: Json
+          period: string
+        }
+        Update: {
+          created_at?: string
+          date_range_end?: string
+          date_range_start?: string
+          id?: string
+          kpis?: Json
+          period?: string
         }
         Relationships: []
       }
@@ -1160,13 +1249,17 @@ export type Database = {
           emergency_contact_name: string | null
           emergency_contact_phone: string | null
           first_name: string
+          hire_date: string | null
           hourly_rate: number | null
           id: string
           last_name: string
+          notes: string | null
           phone: string | null
+          position: string | null
           profile_photo_url: string | null
           skills: string[] | null
           updated_at: string
+          worker_id: string | null
         }
         Insert: {
           address?: string | null
@@ -1177,13 +1270,17 @@ export type Database = {
           emergency_contact_name?: string | null
           emergency_contact_phone?: string | null
           first_name: string
+          hire_date?: string | null
           hourly_rate?: number | null
           id: string
           last_name: string
+          notes?: string | null
           phone?: string | null
+          position?: string | null
           profile_photo_url?: string | null
           skills?: string[] | null
           updated_at?: string
+          worker_id?: string | null
         }
         Update: {
           address?: string | null
@@ -1194,13 +1291,17 @@ export type Database = {
           emergency_contact_name?: string | null
           emergency_contact_phone?: string | null
           first_name?: string
+          hire_date?: string | null
           hourly_rate?: number | null
           id?: string
           last_name?: string
+          notes?: string | null
           phone?: string | null
+          position?: string | null
           profile_photo_url?: string | null
           skills?: string[] | null
           updated_at?: string
+          worker_id?: string | null
         }
         Relationships: []
       }
@@ -1272,6 +1373,10 @@ export type Database = {
     }
     Functions: {
       generate_request_number: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
+      generate_worker_id: {
         Args: Record<PropertyKey, never>
         Returns: string
       }
