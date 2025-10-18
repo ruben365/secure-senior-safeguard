@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -19,11 +19,20 @@ import {
   LogOut,
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { useUserRole } from "@/hooks/useUserRole";
 
 const AdminDashboardNew = () => {
   const [activeTab, setActiveTab] = useState("overview");
   const navigate = useNavigate();
   const { signOut } = useAuth();
+  const { isAdminOrStaff, loading: roleLoading } = useUserRole();
+
+  // Redirect if not admin or staff
+  useEffect(() => {
+    if (!roleLoading && !isAdminOrStaff) {
+      navigate("/enhanced-auth");
+    }
+  }, [isAdminOrStaff, roleLoading, navigate]);
 
   // Fetch KPIs
   const { data: pendingJobs } = useQuery({
@@ -76,6 +85,23 @@ const AdminDashboardNew = () => {
     await signOut();
     navigate("/enhanced-auth");
   };
+
+  // Show loading while checking role
+  if (roleLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-4 text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // If not authorized, don't render (redirect handles this)
+  if (!isAdminOrStaff) {
+    return null;
+  }
 
   const kpiCards = [
     {

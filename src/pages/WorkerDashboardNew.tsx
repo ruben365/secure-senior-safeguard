@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -17,12 +17,21 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { useUserRole } from "@/hooks/useUserRole";
 import { format } from "date-fns";
 
 const WorkerDashboardNew = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
+  const { isWorker, loading: roleLoading } = useUserRole();
+
+  // Redirect if not a worker
+  useEffect(() => {
+    if (!roleLoading && !isWorker) {
+      navigate("/enhanced-auth");
+    }
+  }, [isWorker, roleLoading, navigate]);
 
   // Fetch worker data
   const { data: workerData } = useQuery({
@@ -84,6 +93,23 @@ const WorkerDashboardNew = () => {
     };
     return colors[status] || "bg-gray-500/10 text-gray-700 border-gray-500/20";
   };
+
+  // Show loading while checking role
+  if (roleLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-4 text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // If not authorized, don't render (redirect handles this)
+  if (!isWorker) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/10 to-background">

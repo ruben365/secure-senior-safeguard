@@ -11,11 +11,13 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { useAuth } from "@/hooks/useAuth";
+import { useUserRole } from "@/hooks/useUserRole";
 
 const Navigation = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileBusinessOpen, setMobileBusinessOpen] = useState(false);
   const { user, signOut } = useAuth();
+  const { role, loading: roleLoading } = useUserRole();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -117,9 +119,28 @@ const Navigation = () => {
               <span className="font-medium">(937) 555-1234</span>
             </a>
             {user ? (
-              <Button onClick={handleLogout} variant="outline" size="sm" className="hidden md:inline-flex font-semibold">
-                LOGOUT
-              </Button>
+              <>
+                {role && (
+                  <Button 
+                    asChild 
+                    variant="outline" 
+                    size="sm" 
+                    className="hidden md:inline-flex font-semibold"
+                  >
+                    <Link to={
+                      role === 'admin' ? '/admin-dashboard-new' :
+                      role === 'staff' ? '/staff-dashboard' :
+                      role === 'worker' ? '/worker-dashboard-new' :
+                      '/enhanced-auth'
+                    }>
+                      DASHBOARD
+                    </Link>
+                  </Button>
+                )}
+                <Button onClick={handleLogout} variant="outline" size="sm" className="hidden md:inline-flex font-semibold">
+                  LOGOUT
+                </Button>
+              </>
             ) : (
               <Button asChild variant="outline" size="sm" className="hidden md:inline-flex font-semibold">
                 <Link to="/enhanced-auth" aria-label="Login to admin panel">LOGIN</Link>
@@ -187,9 +208,30 @@ const Navigation = () => {
 
               <div className="pt-2 border-t border-border flex flex-col gap-3">
                 {user ? (
-                  <Button onClick={handleLogout} variant="outline" className="w-full">
-                    LOGOUT
-                  </Button>
+                  <>
+                    {role && (
+                      <Button 
+                        asChild 
+                        variant="outline" 
+                        className="w-full"
+                      >
+                        <Link 
+                          to={
+                            role === 'admin' ? '/admin-dashboard-new' :
+                            role === 'staff' ? '/staff-dashboard' :
+                            role === 'worker' ? '/worker-dashboard-new' :
+                            '/enhanced-auth'
+                          }
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          DASHBOARD
+                        </Link>
+                      </Button>
+                    )}
+                    <Button onClick={handleLogout} variant="outline" className="w-full">
+                      LOGOUT
+                    </Button>
+                  </>
                 ) : (
                   <Button asChild variant="outline" className="w-full">
                     <Link to="/enhanced-auth" onClick={() => setMobileMenuOpen(false)} aria-label="Login to admin panel">
