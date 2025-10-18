@@ -10,6 +10,7 @@ interface AuthContextType {
   signUp: (email: string, password: string, username: string) => Promise<void>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
+  updatePassword: (newPassword: string) => Promise<void>;
   isAdmin: () => Promise<boolean>;
 }
 
@@ -60,6 +61,32 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const signUp = async (email: string, password: string, username: string) => {
+    // Check if password has been leaked in a data breach
+    try {
+      const { data: breachData, error: breachError } = await supabase.functions.invoke('check-password-breach', {
+        body: { password }
+      });
+
+      if (breachError) {
+        console.error('Password breach check failed:', breachError);
+        // Continue with sign-up even if breach check fails (fail open)
+      } else if (breachData?.isBreached) {
+        toast({
+          title: 'Insecure Password',
+          description: `This password has been exposed in ${breachData.breachCount?.toLocaleString()} data breaches. Please choose a different password.`,
+          variant: 'destructive',
+        });
+        throw new Error('Password has been compromised in a data breach');
+      }
+    } catch (breachCheckError) {
+      // If it's the "password compromised" error, re-throw it
+      if (breachCheckError instanceof Error && breachCheckError.message.includes('compromised')) {
+        throw breachCheckError;
+      }
+      // Otherwise, log and continue (fail open)
+      console.error('Password breach check error:', breachCheckError);
+    }
+
     const redirectUrl = `${window.location.origin}/`;
     
     const { data, error } = await supabase.auth.signUp({
@@ -120,6 +147,52 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     });
   };
 
+  const updatePassword = async (newPassword: string) => {
+    // Check if new password has been leaked in a data breach
+    try {
+      const { data: breachData, error: breachError } = await supabase.functions.invoke('check-password-breach', {
+        body: { password: newPassword }
+      });
+
+      if (breachError) {
+        console.error('Password breach check failed:', breachError);
+        // Continue with password update even if breach check fails (fail open)
+      } else if (breachData?.isBreached) {
+        toast({
+          title: 'Insecure Password',
+          description: `This password has been exposed in ${breachData.breachCount?.toLocaleString()} data breaches. Please choose a different password.`,
+          variant: 'destructive',
+        });
+        throw new Error('Password has been compromised in a data breach');
+      }
+    } catch (breachCheckError) {
+      // If it's the "password compromised" error, re-throw it
+      if (breachCheckError instanceof Error && breachCheckError.message.includes('compromised')) {
+        throw breachCheckError;
+      }
+      // Otherwise, log and continue (fail open)
+      console.error('Password breach check error:', breachCheckError);
+    }
+
+    const { error } = await supabase.auth.updateUser({
+      password: newPassword
+    });
+
+    if (error) {
+      toast({
+        title: 'Error',
+        description: error.message,
+        variant: 'destructive',
+      });
+      throw error;
+    }
+
+    toast({
+      title: 'Success',
+      description: 'Password updated successfully!',
+    });
+  };
+
   const isAdmin = async (): Promise<boolean> => {
     if (!user) return false;
 
@@ -142,6 +215,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         signUp,
         signOut,
         resetPassword,
+        updatePassword,
         isAdmin,
       }}
     >
