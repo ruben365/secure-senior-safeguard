@@ -1,10 +1,12 @@
 import heroHomepage from "@/assets/hero-homepage.jpg";
-import heroAbout from "@/assets/hero-about-new.jpg";
+import heroAbout from "@/assets/hero-about-company.jpg";
 import heroScamShield from "@/assets/hero-scamshield-new.jpg";
-import heroBusiness from "@/assets/hero-business-new.jpg";
+import heroBusiness from "@/assets/hero-business-ai.jpg";
 import heroTraining from "@/assets/hero-training.jpg";
-import heroResources from "@/assets/hero-resources.jpg";
-import heroContact from "@/assets/hero-contact.jpg";
+import heroResources from "@/assets/hero-resources-new.jpg";
+import heroContact from "@/assets/hero-contact-new.jpg";
+import heroTeam from "@/assets/hero-team.jpg";
+import heroCareers from "@/assets/hero-careers.jpg";
 import eldersHero1 from "@/assets/elders-hero-1.jpg";
 import eldersHero2 from "@/assets/elders-hero-2.jpg";
 import eldersHero3 from "@/assets/elders-hero-3.jpg";
@@ -67,6 +69,16 @@ export const heroImages: Record<string, HeroImageConfig> = {
   '/contact': {
     type: 'contact',
     images: [heroContact],
+    interval: 5000,
+  },
+  '/team': {
+    type: 'team',
+    images: [heroTeam],
+    interval: 5000,
+  },
+  '/careers': {
+    type: 'careers',
+    images: [heroCareers],
     interval: 5000,
   },
 };

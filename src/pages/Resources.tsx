@@ -99,7 +99,7 @@ const Resources = () => {
 
       {/* Hero */}
       <Hero
-        useTransitioningBackground={true}
+        useRouteBasedImages={true}
         headline="Free Resources & Tools"
         subheadline="Downloadable guides, security tools, and answers to your questions—everything you need to stay safe."
         showScrollIndicator={true}

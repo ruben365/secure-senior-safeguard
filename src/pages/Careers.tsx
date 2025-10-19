@@ -147,7 +147,7 @@ const Careers = () => {
       <Navigation />
       
       <Hero
-        useTransitioningBackground={true}
+        useRouteBasedImages={true}
         headline="Join Our Mission"
         subheadline="Help protect families from AI-powered scams and digital fraud"
       />

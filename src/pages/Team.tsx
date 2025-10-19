@@ -129,7 +129,7 @@ const Team = () => {
         
         {/* Hero Section */}
         <Hero
-          useTransitioningBackground={true}
+          useRouteBasedImages={true}
           headline="Meet the InVision Network Team"
           subheadline="Dedicated professionals protecting families from AI-powered scams with expertise, empathy, and unwavering commitment."
           showScrollIndicator={true}

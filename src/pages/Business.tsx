@@ -20,7 +20,7 @@ const Business = () => {
       <Navigation />
 
       <Hero
-        backgroundImage={heroImage}
+        useRouteBasedImages={true}
         headline="AI That Actually Works for Your Business"
         subheadline="Custom AI receptionists, follow-up systems, and automation—built secure, trained properly, and guaranteed to save you time. Starting at $5,000."
         showScrollIndicator={true}

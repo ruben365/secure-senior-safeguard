@@ -84,7 +84,7 @@ const Contact = () => {
 
       {/* Hero */}
       <Hero
-        useTransitioningBackground={true}
+        useRouteBasedImages={true}
         headline="Let's Talk. We're Here to Help."
         subheadline="Whether you have questions, need training, or want to protect your family—we're ready to assist you."
         showScrollIndicator={true}
