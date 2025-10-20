@@ -7,21 +7,13 @@ import heroResources from "@/assets/hero-resources-new.jpg";
 import heroContact from "@/assets/hero-contact-new.jpg";
 import heroTeam from "@/assets/hero-team.jpg";
 import heroCareers from "@/assets/hero-careers.jpg";
-import eldersHero1 from "@/assets/elders-hero-1.jpg";
-import eldersHero2 from "@/assets/elders-hero-2.jpg";
-import eldersHero3 from "@/assets/elders-hero-3.jpg";
-import eldersHero4 from "@/assets/elders-hero-4.jpg";
-import eldersHero5 from "@/assets/elders-hero-5.jpg";
-import eldersHero6 from "@/assets/elders-hero-6.jpg";
-import eldersHero7 from "@/assets/elders-hero-7.jpg";
-import eldersHero8 from "@/assets/elders-hero-8.jpg";
-import eldersHero9 from "@/assets/elders-hero-9.jpg";
-import eldersHero10 from "@/assets/elders-hero-10.jpg";
-import eldersHero11 from "@/assets/elders-hero-11.jpg";
-import eldersHero12 from "@/assets/elders-hero-12.jpg";
-import eldersHero13 from "@/assets/elders-hero-13.jpg";
-import eldersHero14 from "@/assets/elders-hero-14.jpg";
-import eldersHero15 from "@/assets/elders-hero-15.jpg";
+import heroBusiness1 from "@/assets/hero-business-1.jpg";
+import heroBusiness2 from "@/assets/hero-business-2.jpg";
+import heroBusiness3 from "@/assets/hero-business-3.jpg";
+import heroBusiness4 from "@/assets/hero-business-4.jpg";
+import heroBusiness5 from "@/assets/hero-business-5.jpg";
+import heroBusiness6 from "@/assets/hero-business-6.jpg";
+import heroBusiness7 from "@/assets/hero-business-7.jpg";
 
 export interface HeroImageConfig {
   type: string;
@@ -33,23 +25,15 @@ export const heroImages: Record<string, HeroImageConfig> = {
   '/': {
     type: 'default',
     images: [
-      eldersHero1,
-      eldersHero2,
-      eldersHero3,
-      eldersHero4,
-      eldersHero5,
-      eldersHero6,
-      eldersHero7,
-      eldersHero8,
-      eldersHero9,
-      eldersHero10,
-      eldersHero11,
-      eldersHero12,
-      eldersHero13,
-      eldersHero14,
-      eldersHero15,
+      heroBusiness1,
+      heroBusiness2,
+      heroBusiness3,
+      heroBusiness4,
+      heroBusiness5,
+      heroBusiness6,
+      heroBusiness7,
     ],
-    interval: 8000,
+    interval: 5000,
   },
   '/about': {
     type: 'about',
