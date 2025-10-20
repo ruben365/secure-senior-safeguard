@@ -30,6 +30,7 @@ const ServiceHero = ({
   const [currentImage, setCurrentImage] = useState("");
   const [nextImage, setNextImage] = useState("");
   const [showNext, setShowNext] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
   
   // Get service-specific image or use elders images for homepage
   const getServiceImage = (index: number) => {
@@ -56,13 +57,32 @@ const ServiceHero = ({
     return config.images[0];
   };
 
-  // Initialize images
+  // Preload all images and initialize
   useEffect(() => {
-    setCurrentImage(getServiceImage(imageIndex));
+    const isHome = typeof window !== 'undefined' && window.location?.pathname === '/';
+    const route = isHome ? '/' : '/';
+    const config = getHeroConfig(route);
+    
+    // Preload all homepage images
+    const imagePromises = config.images.map(src => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = resolve;
+        img.onerror = reject;
+        img.src = src;
+      });
+    });
+    
+    Promise.all(imagePromises).then(() => {
+      setCurrentImage(getServiceImage(imageIndex));
+      setImagesLoaded(true);
+    });
   }, []);
 
   // Handle image transitions with improved timing
   useEffect(() => {
+    if (!imagesLoaded) return;
+    
     const newImage = getServiceImage(imageIndex);
     if (newImage !== currentImage) {
       setNextImage(newImage);
@@ -72,11 +92,11 @@ const ServiceHero = ({
       const timer = setTimeout(() => {
         setCurrentImage(newImage);
         setShowNext(false);
-      }, 1500); // Longer delay to ensure smooth transition
+      }, 1500);
       
       return () => clearTimeout(timer);
     }
-  }, [imageIndex]);
+  }, [imageIndex, imagesLoaded]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -96,24 +116,23 @@ const ServiceHero = ({
           transform: `translateY(${scrollY * 0.5}px)`
         }}
       >
-        {/* Current Image */}
+        {/* Base Image Layer - Always visible */}
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-[1500ms] ease-in-out"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ 
             backgroundImage: `url(${currentImage})`,
-            opacity: showNext ? 0 : 1,
-            transform: 'translateZ(0)',
-            willChange: 'opacity'
+            transform: 'translateZ(0)'
           }}
         />
-        {/* Next Image (crossfades in) */}
+        {/* Overlay Image Layer - Fades in on top */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-[1500ms] ease-in-out"
           style={{ 
-            backgroundImage: `url(${nextImage})`,
+            backgroundImage: showNext ? `url(${nextImage})` : 'none',
             opacity: showNext ? 1 : 0,
             transform: 'translateZ(0)',
-            willChange: 'opacity'
+            willChange: 'opacity',
+            pointerEvents: 'none'
           }}
         />
       </div>
