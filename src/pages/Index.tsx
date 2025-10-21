@@ -14,7 +14,6 @@ import AIPartnersCarousel from "@/components/AIPartnersCarousel";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Heart, FileText, MessageSquare, Users, StopCircle, Search, Phone, DollarSign, FileCheck, Shield, CheckCircle, ExternalLink } from "lucide-react";
-import { useServiceRotation } from "@/hooks/useServiceRotation";
 import ServiceHero from "@/components/ServiceHero";
 import heroImage from "@/assets/hero-homepage.jpg";
 import testimonial1 from "@/assets/testimonial-1.jpg";
@@ -24,57 +23,13 @@ import testimonial5 from "@/assets/testimonial-5.jpg";
 import testimonial6 from "@/assets/testimonial-6.jpg";
 import testimonial7 from "@/assets/testimonial-7.jpg";
 
-const heroMessages = [
-  {
-    headline: "Protect Your Family from AI-Powered Scams",
-    subheadline: "Simple, respectful training for adults 40+ and families. Learn to spot deepfakes, phishing, and AI fraud—no tech degree required.",
-    service: "scamshield"
-  },
-  {
-    headline: "Live Training That Actually Empowers You",
-    subheadline: "Interactive Zoom sessions with real-world practice. Master deepfake detection, voice clone recognition, and emergency protocols with expert instructors.",
-    service: "training"
-  },
-  {
-    headline: "AI That Works for Your Business, Not Against It",
-    subheadline: "Custom AI receptionists, smart automation, and secure systems designed for small businesses. Professional implementation starting at $5,000.",
-    service: "business"
-  },
-  {
-    headline: "Monthly Protection with Scam Shield",
-    subheadline: "Forward suspicious emails, texts, and calls to our experts. Get professional analysis within 24 hours. Your personal fraud prevention team.",
-    service: "scamshield"
-  },
-  {
-    headline: "Expert Resources at Your Fingertips",
-    subheadline: "Free downloadable guides, security checklists, and step-by-step tutorials. Everything you need to stay safe in the digital age.",
-    service: "resources"
-  },
-  {
-    headline: "Talk to a Real Human Who Cares",
-    subheadline: "No sales pressure, no jargon. Just honest answers about protecting your family from digital fraud. Schedule a free 15-minute consultation.",
-    service: "contact"
-  },
-  {
-    headline: "Trusted by 500+ Families Across Ohio",
-    subheadline: "Join our community of empowered families who stopped scams before losing a dollar. Real training, real results, real peace of mind.",
-    service: "about"
-  }
-];
-
 const Index = () => {
-  const { currentMessage, currentIndex, isVisible } = useServiceRotation(heroMessages, 5000);
   return (
     <div className="min-h-screen">
       <Navigation />
       
       {/* Hero Section */}
       <ServiceHero
-        headline={currentMessage.headline}
-        subheadline={currentMessage.subheadline}
-        serviceType={currentMessage.service}
-        imageIndex={currentIndex}
-        isVisible={isVisible}
         showScrollIndicator={true}
       >
         <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center sm:justify-start">

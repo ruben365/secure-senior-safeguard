@@ -1,94 +1,76 @@
 import { ReactNode, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import ScrollIndicator from "./ScrollIndicator";
 import { getHeroConfig } from "@/data/heroImages";
 
 interface ServiceHeroProps {
-  headline: string;
-  subheadline?: string;
   children?: ReactNode;
   className?: string;
   overlay?: boolean;
   showScrollIndicator?: boolean;
-  serviceType?: string;
-  imageIndex?: number;
-  isVisible?: boolean;
 }
 
 const ServiceHero = ({ 
-  headline, 
-  subheadline, 
   children, 
   className, 
   overlay = true, 
-  showScrollIndicator = false,
-  serviceType = "default",
-  imageIndex = 0,
-  isVisible = true
+  showScrollIndicator = false
 }: ServiceHeroProps) => {
+  const location = useLocation();
   const [scrollY, setScrollY] = useState(0);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [currentImage, setCurrentImage] = useState("");
   const [nextImage, setNextImage] = useState("");
   const [showNext, setShowNext] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   
-  // Get service-specific image or use elders images for homepage
-  const getServiceImage = (index: number) => {
-    const serviceRoutes: Record<string, string> = {
-      'training': '/training',
-      'business': '/business',
-      'scamshield': '/scamshield',
-      'resources': '/resources',
-      'contact': '/contact',
-      'about': '/about',
-      'default': '/'
-    };
+  const config = getHeroConfig(location.pathname);
+  const currentSlide = config.slides[currentSlideIndex];
 
-    // On the homepage, always rotate through the homepage image set
-    const isHome = typeof window !== 'undefined' && window.location?.pathname === '/';
-    const route = isHome ? '/' : (serviceRoutes[serviceType] || '/');
-    const config = getHeroConfig(route);
-
-    // For homepage, use the index to cycle through multiple images
-    if (route === '/' && config.images.length > 1) {
-      return config.images[index % config.images.length];
-    }
-
-    return config.images[0];
-  };
-
-  // Preload all images and initialize
+  // Preload all images
   useEffect(() => {
-    const isHome = typeof window !== 'undefined' && window.location?.pathname === '/';
-    const route = isHome ? '/' : '/';
-    const config = getHeroConfig(route);
-    
-    // Preload all homepage images
-    const imagePromises = config.images.map(src => {
+    const imagePromises = config.slides.map(slide => {
       return new Promise((resolve, reject) => {
         const img = new Image();
         img.onload = resolve;
         img.onerror = reject;
-        img.src = src;
+        img.src = slide.image;
       });
     });
     
     Promise.all(imagePromises).then(() => {
-      setCurrentImage(getServiceImage(imageIndex));
+      setCurrentImage(config.slides[0].image);
       setImagesLoaded(true);
     });
-  }, []);
+  }, [location.pathname]);
 
-  // Handle image transitions with improved timing
+  // Auto-rotate slides
+  useEffect(() => {
+    if (!imagesLoaded || config.slides.length <= 1) return;
+    
+    const interval = setInterval(() => {
+      setIsVisible(false);
+      
+      setTimeout(() => {
+        setCurrentSlideIndex((prev) => (prev + 1) % config.slides.length);
+        setIsVisible(true);
+      }, 500);
+    }, config.interval || 5000);
+
+    return () => clearInterval(interval);
+  }, [imagesLoaded, config.slides.length, config.interval]);
+
+  // Handle image transitions
   useEffect(() => {
     if (!imagesLoaded) return;
     
-    const newImage = getServiceImage(imageIndex);
+    const newImage = config.slides[currentSlideIndex].image;
     if (newImage !== currentImage) {
       setNextImage(newImage);
       setShowNext(true);
       
-      // Wait for crossfade to complete, then swap
       const timer = setTimeout(() => {
         setCurrentImage(newImage);
         setShowNext(false);
@@ -96,7 +78,7 @@ const ServiceHero = ({
       
       return () => clearTimeout(timer);
     }
-  }, [imageIndex, imagesLoaded]);
+  }, [currentSlideIndex, imagesLoaded]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -164,16 +146,16 @@ const ServiceHero = ({
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             )}
           >
-            {headline}
+            {currentSlide.headline}
           </h1>
-          {subheadline && (
+          {currentSlide.subheadline && (
             <p 
               className={cn(
                 "text-white/90 text-xl md:text-2xl mb-6 leading-relaxed transition-all duration-700 delay-100",
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               )}
             >
-              {subheadline}
+              {currentSlide.subheadline}
             </p>
           )}
           {children && (

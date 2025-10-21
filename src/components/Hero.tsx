@@ -48,9 +48,9 @@ const Hero = ({
         className="absolute inset-0"
         style={{ transform: `translateY(${scrollY * 0.5}px)` }}
       >
-        {useRouteBasedImages && heroConfig ? (
+      {useRouteBasedImages && heroConfig ? (
           <TransitioningBackground 
-            images={heroConfig.images}
+            images={heroConfig.slides.map(slide => slide.image)}
             interval={heroConfig.interval}
           />
         ) : useTransitioningBackground ? (
