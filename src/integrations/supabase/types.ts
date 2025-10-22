@@ -47,6 +47,60 @@ export type Database = {
         }
         Relationships: []
       }
+      affiliate_referrals: {
+        Row: {
+          affiliate_id: string
+          commission_earned: number | null
+          conversion_value: number | null
+          created_at: string
+          id: string
+          metadata: Json | null
+          order_id: string | null
+          referral_code: string
+          referral_source: string | null
+          referred_user_id: string | null
+        }
+        Insert: {
+          affiliate_id: string
+          commission_earned?: number | null
+          conversion_value?: number | null
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          order_id?: string | null
+          referral_code: string
+          referral_source?: string | null
+          referred_user_id?: string | null
+        }
+        Update: {
+          affiliate_id?: string
+          commission_earned?: number | null
+          conversion_value?: number | null
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          order_id?: string | null
+          referral_code?: string
+          referral_source?: string | null
+          referred_user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "affiliate_referrals_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "partners"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "affiliate_referrals_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "partner_orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       appointments: {
         Row: {
           actual_end: string | null
@@ -370,6 +424,62 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      commission_payouts: {
+        Row: {
+          amount: number
+          commission_ids: string[]
+          created_at: string
+          id: string
+          notes: string | null
+          partner_id: string
+          payment_details: Json | null
+          payment_method: string
+          payout_number: string
+          processed_at: string | null
+          processed_by: string | null
+          status: Database["public"]["Enums"]["partner_payment_status"]
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          commission_ids: string[]
+          created_at?: string
+          id?: string
+          notes?: string | null
+          partner_id: string
+          payment_details?: Json | null
+          payment_method: string
+          payout_number: string
+          processed_at?: string | null
+          processed_by?: string | null
+          status?: Database["public"]["Enums"]["partner_payment_status"]
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          commission_ids?: string[]
+          created_at?: string
+          id?: string
+          notes?: string | null
+          partner_id?: string
+          payment_details?: Json | null
+          payment_method?: string
+          payout_number?: string
+          processed_at?: string | null
+          processed_by?: string | null
+          status?: Database["public"]["Enums"]["partner_payment_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "commission_payouts_partner_id_fkey"
+            columns: ["partner_id"]
+            isOneToOne: false
+            referencedRelation: "partners"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       companies: {
         Row: {
@@ -748,6 +858,66 @@ export type Database = {
         }
         Relationships: []
       }
+      inventory_movements: {
+        Row: {
+          created_at: string
+          id: string
+          movement_type: string
+          new_quantity: number
+          notes: string | null
+          performed_by: string | null
+          previous_quantity: number
+          product_id: string
+          quantity: number
+          reference_id: string | null
+          reference_type: string | null
+          variant_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          movement_type: string
+          new_quantity: number
+          notes?: string | null
+          performed_by?: string | null
+          previous_quantity: number
+          product_id: string
+          quantity: number
+          reference_id?: string | null
+          reference_type?: string | null
+          variant_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          movement_type?: string
+          new_quantity?: number
+          notes?: string | null
+          performed_by?: string | null
+          previous_quantity?: number
+          product_id?: string
+          quantity?: number
+          reference_id?: string | null
+          reference_type?: string | null
+          variant_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "inventory_movements_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "inventory_movements_variant_id_fkey"
+            columns: ["variant_id"]
+            isOneToOne: false
+            referencedRelation: "product_variants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       invoices: {
         Row: {
           amount: number
@@ -941,6 +1111,538 @@ export type Database = {
           user_id?: string | null
         }
         Relationships: []
+      }
+      order_items: {
+        Row: {
+          created_at: string
+          discount_amount: number | null
+          id: string
+          metadata: Json | null
+          order_id: string
+          product_id: string
+          product_name: string
+          product_sku: string
+          quantity: number
+          subtotal: number
+          tax_amount: number | null
+          total: number
+          unit_price: number
+          variant_id: string | null
+          variant_name: string | null
+        }
+        Insert: {
+          created_at?: string
+          discount_amount?: number | null
+          id?: string
+          metadata?: Json | null
+          order_id: string
+          product_id: string
+          product_name: string
+          product_sku: string
+          quantity: number
+          subtotal: number
+          tax_amount?: number | null
+          total: number
+          unit_price: number
+          variant_id?: string | null
+          variant_name?: string | null
+        }
+        Update: {
+          created_at?: string
+          discount_amount?: number | null
+          id?: string
+          metadata?: Json | null
+          order_id?: string
+          product_id?: string
+          product_name?: string
+          product_sku?: string
+          quantity?: number
+          subtotal?: number
+          tax_amount?: number | null
+          total?: number
+          unit_price?: number
+          variant_id?: string | null
+          variant_name?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "partner_orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "order_items_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "order_items_variant_id_fkey"
+            columns: ["variant_id"]
+            isOneToOne: false
+            referencedRelation: "product_variants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partner_commissions: {
+        Row: {
+          amount: number
+          approved_at: string | null
+          approved_by: string | null
+          base_amount: number | null
+          commission_type: string
+          created_at: string
+          description: string | null
+          id: string
+          metadata: Json | null
+          order_id: string | null
+          paid_at: string | null
+          partner_id: string
+          rate: number | null
+          status: Database["public"]["Enums"]["commission_status"]
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          approved_at?: string | null
+          approved_by?: string | null
+          base_amount?: number | null
+          commission_type: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          metadata?: Json | null
+          order_id?: string | null
+          paid_at?: string | null
+          partner_id: string
+          rate?: number | null
+          status?: Database["public"]["Enums"]["commission_status"]
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          approved_at?: string | null
+          approved_by?: string | null
+          base_amount?: number | null
+          commission_type?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          metadata?: Json | null
+          order_id?: string | null
+          paid_at?: string | null
+          partner_id?: string
+          rate?: number | null
+          status?: Database["public"]["Enums"]["commission_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_commissions_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "partner_orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_commissions_partner_id_fkey"
+            columns: ["partner_id"]
+            isOneToOne: false
+            referencedRelation: "partners"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partner_orders: {
+        Row: {
+          billing_address: Json | null
+          cancelled_at: string | null
+          commission_amount: number | null
+          commission_rate: number | null
+          created_at: string
+          customer_email: string
+          customer_id: string | null
+          customer_name: string
+          customer_phone: string | null
+          delivered_at: string | null
+          discount_amount: number | null
+          id: string
+          metadata: Json | null
+          notes: string | null
+          order_number: string
+          partner_id: string
+          payment_method: string | null
+          payment_status: Database["public"]["Enums"]["partner_payment_status"]
+          payment_transaction_id: string | null
+          shipped_at: string | null
+          shipping_address: Json
+          shipping_amount: number | null
+          status: Database["public"]["Enums"]["order_status"]
+          subtotal: number
+          tax_amount: number | null
+          total_amount: number
+          tracking_number: string | null
+          updated_at: string
+        }
+        Insert: {
+          billing_address?: Json | null
+          cancelled_at?: string | null
+          commission_amount?: number | null
+          commission_rate?: number | null
+          created_at?: string
+          customer_email: string
+          customer_id?: string | null
+          customer_name: string
+          customer_phone?: string | null
+          delivered_at?: string | null
+          discount_amount?: number | null
+          id?: string
+          metadata?: Json | null
+          notes?: string | null
+          order_number: string
+          partner_id: string
+          payment_method?: string | null
+          payment_status?: Database["public"]["Enums"]["partner_payment_status"]
+          payment_transaction_id?: string | null
+          shipped_at?: string | null
+          shipping_address: Json
+          shipping_amount?: number | null
+          status?: Database["public"]["Enums"]["order_status"]
+          subtotal: number
+          tax_amount?: number | null
+          total_amount: number
+          tracking_number?: string | null
+          updated_at?: string
+        }
+        Update: {
+          billing_address?: Json | null
+          cancelled_at?: string | null
+          commission_amount?: number | null
+          commission_rate?: number | null
+          created_at?: string
+          customer_email?: string
+          customer_id?: string | null
+          customer_name?: string
+          customer_phone?: string | null
+          delivered_at?: string | null
+          discount_amount?: number | null
+          id?: string
+          metadata?: Json | null
+          notes?: string | null
+          order_number?: string
+          partner_id?: string
+          payment_method?: string | null
+          payment_status?: Database["public"]["Enums"]["partner_payment_status"]
+          payment_transaction_id?: string | null
+          shipped_at?: string | null
+          shipping_address?: Json
+          shipping_amount?: number | null
+          status?: Database["public"]["Enums"]["order_status"]
+          subtotal?: number
+          tax_amount?: number | null
+          total_amount?: number
+          tracking_number?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_orders_partner_id_fkey"
+            columns: ["partner_id"]
+            isOneToOne: false
+            referencedRelation: "partners"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partners: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          business_address: string | null
+          business_email: string
+          business_name: string
+          business_phone: string | null
+          commission_rate: number | null
+          created_at: string
+          description: string | null
+          id: string
+          logo_url: string | null
+          metadata: Json | null
+          partner_type: Database["public"]["Enums"]["partner_type"]
+          rating: number | null
+          status: Database["public"]["Enums"]["partner_status"]
+          tax_id: string | null
+          total_commission: number | null
+          total_products: number | null
+          total_sales: number | null
+          updated_at: string
+          user_id: string
+          website_url: string | null
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          business_address?: string | null
+          business_email: string
+          business_name: string
+          business_phone?: string | null
+          commission_rate?: number | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          logo_url?: string | null
+          metadata?: Json | null
+          partner_type: Database["public"]["Enums"]["partner_type"]
+          rating?: number | null
+          status?: Database["public"]["Enums"]["partner_status"]
+          tax_id?: string | null
+          total_commission?: number | null
+          total_products?: number | null
+          total_sales?: number | null
+          updated_at?: string
+          user_id: string
+          website_url?: string | null
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          business_address?: string | null
+          business_email?: string
+          business_name?: string
+          business_phone?: string | null
+          commission_rate?: number | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          logo_url?: string | null
+          metadata?: Json | null
+          partner_type?: Database["public"]["Enums"]["partner_type"]
+          rating?: number | null
+          status?: Database["public"]["Enums"]["partner_status"]
+          tax_id?: string | null
+          total_commission?: number | null
+          total_products?: number | null
+          total_sales?: number | null
+          updated_at?: string
+          user_id?: string
+          website_url?: string | null
+        }
+        Relationships: []
+      }
+      product_categories: {
+        Row: {
+          created_at: string
+          description: string | null
+          display_order: number | null
+          id: string
+          image_url: string | null
+          is_active: boolean | null
+          name: string
+          parent_id: string | null
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          name: string
+          parent_id?: string | null
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          name?: string
+          parent_id?: string | null
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_categories_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "product_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      product_variants: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean | null
+          metadata: Json | null
+          name: string
+          price_adjustment: number | null
+          product_id: string
+          sku: string
+          stock_quantity: number | null
+          updated_at: string
+          variant_type: string
+          variant_value: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          metadata?: Json | null
+          name: string
+          price_adjustment?: number | null
+          product_id: string
+          sku: string
+          stock_quantity?: number | null
+          updated_at?: string
+          variant_type: string
+          variant_value: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          metadata?: Json | null
+          name?: string
+          price_adjustment?: number | null
+          product_id?: string
+          sku?: string
+          stock_quantity?: number | null
+          updated_at?: string
+          variant_type?: string
+          variant_value?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_variants_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      products: {
+        Row: {
+          base_price: number
+          category_id: string | null
+          cost_price: number | null
+          created_at: string
+          description: string | null
+          dimensions: Json | null
+          features: Json | null
+          id: string
+          images: Json | null
+          is_featured: boolean | null
+          low_stock_threshold: number | null
+          metadata: Json | null
+          name: string
+          partner_id: string
+          published_at: string | null
+          rating_average: number | null
+          rating_count: number | null
+          sale_price: number | null
+          sales_count: number | null
+          short_description: string | null
+          sku: string
+          slug: string
+          specifications: Json | null
+          status: Database["public"]["Enums"]["product_status"]
+          stock_quantity: number | null
+          tags: string[] | null
+          updated_at: string
+          views_count: number | null
+          weight: number | null
+        }
+        Insert: {
+          base_price: number
+          category_id?: string | null
+          cost_price?: number | null
+          created_at?: string
+          description?: string | null
+          dimensions?: Json | null
+          features?: Json | null
+          id?: string
+          images?: Json | null
+          is_featured?: boolean | null
+          low_stock_threshold?: number | null
+          metadata?: Json | null
+          name: string
+          partner_id: string
+          published_at?: string | null
+          rating_average?: number | null
+          rating_count?: number | null
+          sale_price?: number | null
+          sales_count?: number | null
+          short_description?: string | null
+          sku: string
+          slug: string
+          specifications?: Json | null
+          status?: Database["public"]["Enums"]["product_status"]
+          stock_quantity?: number | null
+          tags?: string[] | null
+          updated_at?: string
+          views_count?: number | null
+          weight?: number | null
+        }
+        Update: {
+          base_price?: number
+          category_id?: string | null
+          cost_price?: number | null
+          created_at?: string
+          description?: string | null
+          dimensions?: Json | null
+          features?: Json | null
+          id?: string
+          images?: Json | null
+          is_featured?: boolean | null
+          low_stock_threshold?: number | null
+          metadata?: Json | null
+          name?: string
+          partner_id?: string
+          published_at?: string | null
+          rating_average?: number | null
+          rating_count?: number | null
+          sale_price?: number | null
+          sales_count?: number | null
+          short_description?: string | null
+          sku?: string
+          slug?: string
+          specifications?: Json | null
+          status?: Database["public"]["Enums"]["product_status"]
+          stock_quantity?: number | null
+          tags?: string[] | null
+          updated_at?: string
+          views_count?: number | null
+          weight?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "products_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "product_categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "products_partner_id_fkey"
+            columns: ["partner_id"]
+            isOneToOne: false
+            referencedRelation: "partners"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
@@ -1475,6 +2177,7 @@ export type Database = {
         | "completed"
         | "cancelled"
       booking_status: "pending" | "confirmed" | "completed" | "cancelled"
+      commission_status: "pending" | "approved" | "paid" | "rejected"
       contact_status: "lead" | "prospect" | "customer" | "inactive"
       deal_stage:
         | "prospecting"
@@ -1494,7 +2197,19 @@ export type Database = {
         | "appointment_reminder"
         | "time_off_response"
         | "system"
+      order_status:
+        | "pending"
+        | "confirmed"
+        | "processing"
+        | "shipped"
+        | "delivered"
+        | "cancelled"
+        | "refunded"
+      partner_payment_status: "pending" | "processing" | "completed" | "failed"
+      partner_status: "pending" | "active" | "suspended" | "inactive"
+      partner_type: "vendor" | "affiliate" | "distributor"
       payment_status: "pending" | "completed" | "failed" | "refunded"
+      product_status: "draft" | "active" | "inactive" | "out_of_stock"
       request_status: "new" | "assigned" | "completed" | "cancelled"
       service_category:
         | "training"
@@ -1643,6 +2358,7 @@ export const Constants = {
         "cancelled",
       ],
       booking_status: ["pending", "confirmed", "completed", "cancelled"],
+      commission_status: ["pending", "approved", "paid", "rejected"],
       contact_status: ["lead", "prospect", "customer", "inactive"],
       deal_stage: [
         "prospecting",
@@ -1664,7 +2380,20 @@ export const Constants = {
         "time_off_response",
         "system",
       ],
+      order_status: [
+        "pending",
+        "confirmed",
+        "processing",
+        "shipped",
+        "delivered",
+        "cancelled",
+        "refunded",
+      ],
+      partner_payment_status: ["pending", "processing", "completed", "failed"],
+      partner_status: ["pending", "active", "suspended", "inactive"],
+      partner_type: ["vendor", "affiliate", "distributor"],
       payment_status: ["pending", "completed", "failed", "refunded"],
+      product_status: ["draft", "active", "inactive", "out_of_stock"],
       request_status: ["new", "assigned", "completed", "cancelled"],
       service_category: [
         "training",
