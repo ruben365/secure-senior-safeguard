@@ -2152,6 +2152,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      generate_order_number: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
+      generate_payout_number: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
       generate_request_number: {
         Args: Record<PropertyKey, never>
         Returns: string
@@ -2169,7 +2177,7 @@ export type Database = {
       }
     }
     Enums: {
-      app_role: "admin" | "user" | "staff" | "worker"
+      app_role: "admin" | "user" | "staff" | "worker" | "partner"
       appointment_status:
         | "pending"
         | "confirmed"
@@ -2349,7 +2357,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "user", "staff", "worker"],
+      app_role: ["admin", "user", "staff", "worker", "partner"],
       appointment_status: [
         "pending",
         "confirmed",
