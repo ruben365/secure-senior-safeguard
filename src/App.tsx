@@ -11,7 +11,6 @@ import About from "./pages/About";
 import Resources from "./pages/Resources";
 import Contact from "./pages/Contact";
 import Team from "./pages/Team";
-import Careers from "./pages/Careers";
 import Auth from "./pages/Auth";
 import EnhancedAuth from "./pages/EnhancedAuth";
 import AdminDashboardNew from "./pages/AdminDashboardNew";
@@ -50,7 +49,6 @@ const App = () => (
             <Route path="/resources" element={<Resources />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/team" element={<Team />} />
-            <Route path="/careers" element={<Careers />} />
             <Route path="/login" element={<Auth />} />
             <Route path="/signup" element={<Auth />} />
             <Route path="/auth" element={<Auth />} />
