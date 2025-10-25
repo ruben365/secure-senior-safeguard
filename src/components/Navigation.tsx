@@ -25,7 +25,7 @@ const Navigation = () => {
   };
 
   const navLinks = [
-    { name: "Team", href: "/team" },
+    { name: "Team & Career", href: "/team" },
     { name: "Resources", href: "/resources" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },

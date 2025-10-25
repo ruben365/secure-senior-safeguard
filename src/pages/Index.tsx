@@ -140,26 +140,6 @@ const Index = () => {
           <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center sm:justify-start">
             <Button
               asChild
-              variant="default"
-              size="xl"
-              className="w-full sm:w-auto text-lg font-semibold min-h-[60px] hover:scale-105 transition-transform focus:ring-4 focus:ring-primary/50"
-            >
-              <Link to="/training" aria-label="Book a training session to learn scam prevention">
-                BOOK TRAINING
-              </Link>
-            </Button>
-            <Button
-              asChild
-              variant="outlineLight"
-              size="xl"
-              className="w-full sm:w-auto text-lg font-semibold min-h-[60px] hover:scale-105 transition-transform focus:ring-4 focus:ring-primary/50"
-            >
-              <Link to="/training" aria-label="Start using Scam Shield service for real-time protection">
-                START SCAM SHIELD
-              </Link>
-            </Button>
-            <Button
-              asChild
               variant="outlineLight"
               size="xl"
               className="w-full sm:w-auto text-lg font-semibold min-h-[60px] hover:scale-105 transition-transform focus:ring-4 focus:ring-primary/50"
@@ -656,26 +636,6 @@ const Index = () => {
         {/* Final CTA with improved accessibility */}
         <CTASection headline="Ready to Protect Your Family?" variant="gold" aria-label="Final call to action section">
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              asChild
-              variant="gold"
-              size="xl"
-              className="w-full sm:w-auto text-lg font-semibold min-h-[60px] hover:scale-105 transition-transform focus:ring-4 focus:ring-primary/50"
-            >
-              <Link to="/training" aria-label="Book a training session now">
-                BOOK TRAINING
-              </Link>
-            </Button>
-            <Button
-              asChild
-              variant="outlineLight"
-              size="xl"
-              className="w-full sm:w-auto text-lg font-semibold min-h-[60px] hover:scale-105 transition-transform focus:ring-4 focus:ring-primary/50"
-            >
-              <Link to="/scam-shield" aria-label="Start using Scam Shield service">
-                START SCAM SHIELD
-              </Link>
-            </Button>
             <Button
               asChild
               variant="outlineLight"
