@@ -52,13 +52,17 @@ const Hero = ({
           <TransitioningBackground 
             images={heroImages.map(img => img.url)}
             interval={5000}
+            opacity={0.3}
           />
         ) : useTransitioningBackground ? (
-          <TransitioningBackground />
+          <TransitioningBackground opacity={0.3} />
         ) : (
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${backgroundImage})` }}
+            style={{ 
+              backgroundImage: `url(${backgroundImage})`,
+              opacity: 0.3
+            }}
           />
         )}
       </div>

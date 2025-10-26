@@ -23,7 +23,7 @@ const Training = () => {
       <Navigation />
 
       <Hero
-        backgroundImage={heroImage}
+        useRouteBasedImages={true}
         headline="Learn to Outsmart AI Scammers—No Tech Skills Required"
         subheadline="Master deepfake detection, phishing defense, and emergency protocols in plain English. Walk away with ready-to-use scripts and lifetime confidence."
         showScrollIndicator={true}
