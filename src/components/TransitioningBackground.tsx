@@ -71,8 +71,8 @@ const TransitioningBackground = ({ images = defaultImages, interval = 10000, cla
       />
       
       {/* Enhanced Multi-layer Overlay for depth and readability */}
-      <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/85 to-background/75" style={{ opacity }} />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/30" style={{ opacity }} />
+      <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/80 to-background/70" style={{ opacity }} />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/20" style={{ opacity }} />
     </div>
   );
 };
