@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Suspense, lazy } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -16,8 +15,6 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 import { z } from "zod";
-
-const WaveBackground = lazy(() => import("@/components/WaveBackground"));
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
@@ -80,11 +77,7 @@ const About = () => {
   };
 
   return (
-    <div className="min-h-screen relative">
-      <Suspense fallback={null}>
-        <WaveBackground />
-      </Suspense>
-      
+    <div className="min-h-screen">
       <Navigation />
 
       <Hero

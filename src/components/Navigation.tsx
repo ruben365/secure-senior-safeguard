@@ -30,13 +30,9 @@ const Navigation = () => {
     { name: "About", href: "/about" },
   ];
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   const mainLinks = [
-    { name: "AI Business", href: "/", onClick: scrollToTop },
-    { name: "Learn & Train", href: "/", onClick: scrollToTop },
+    { name: "AI Business", href: "/business" },
+    { name: "Learn & Train", href: "/training" },
   ];
 
   return (
@@ -74,7 +70,6 @@ const Navigation = () => {
                     <NavigationMenuItem key={link.name}>
                       <Link
                         to={link.href}
-                        onClick={link.onClick}
                         className="text-foreground/80 hover:text-foreground font-bold transition-colors duration-200 text-base whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2 py-1"
                       >
                         {link.name}
@@ -163,10 +158,7 @@ const Navigation = () => {
                       key={link.name}
                       to={link.href}
                       className="text-foreground/80 hover:text-foreground py-2 transition-colors font-bold text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2"
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        link.onClick?.();
-                      }}
+                      onClick={() => setMobileMenuOpen(false)}
                     >
                       {link.name}
                     </Link>

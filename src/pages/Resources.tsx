@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Suspense, lazy } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -9,8 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Download, Shield, Wifi, KeyRound, Heart, FileText, ShoppingCart } from "lucide-react";
-
-const WaveBackground = lazy(() => import("@/components/WaveBackground"));
 
 const Resources = () => {
   const guides = [
@@ -97,11 +94,7 @@ const Resources = () => {
   ];
 
   return (
-    <div className="min-h-screen relative">
-      <Suspense fallback={null}>
-        <WaveBackground />
-      </Suspense>
-      
+    <div className="min-h-screen">
       <Navigation />
 
       {/* Hero */}
