@@ -108,7 +108,10 @@ const Resources = () => {
       <section className="py-16 bg-background relative">
         <FlowingWaves variant="full" opacity={0.12} />
         <div className="container mx-auto px-4 relative z-10">
-          <h2 className="text-center mb-10">Downloadable Guides</h2>
+          <h2 className="text-center mb-3">Professional Security Guides & Books</h2>
+          <p className="text-center text-muted-foreground mb-10">
+            Expert-written resources to protect yourself and your loved ones
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {guides.map((guide, index) => (
               <Card key={index} className="p-6 hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl">

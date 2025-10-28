@@ -206,9 +206,6 @@ const Careers = () => {
           <Button size="lg" asChild>
             <a href="#positions">View Open Positions</a>
           </Button>
-          <Button size="lg" variant="outline" asChild>
-            <a href="#culture">Our Culture</a>
-          </Button>
         </div>
       </Hero>
 
