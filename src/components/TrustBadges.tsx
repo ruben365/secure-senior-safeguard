@@ -9,6 +9,11 @@ const TrustBadges = () => {
     },
     {
       icon: Award,
+      title: "HIPAA Compliant",
+      description: "Healthcare Data Protected"
+    },
+    {
+      icon: Award,
       title: "Expert Training",
       description: "Cybersecurity Professional-Led"
     },
@@ -37,7 +42,7 @@ const TrustBadges = () => {
           <p className="text-muted-foreground">Your security and privacy are our top priorities</p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 max-w-7xl mx-auto">
           {badges.map((badge, index) => (
             <div
               key={index}

@@ -35,12 +35,6 @@ const Index = () => {
           <Button asChild variant="default" size="xl" className="w-full sm:w-auto">
             <Link to="/training" aria-label="Learn to spot scams">Learn to Spot Scams</Link>
           </Button>
-          <Button asChild variant="outlineLight" size="xl" className="w-full sm:w-auto">
-            <Link to="/training" aria-label="Get ScamShield Protection">Get ScamShield Protection</Link>
-          </Button>
-          <Button asChild variant="outlineLight" size="xl" className="w-full sm:w-auto">
-            <Link to="/business" aria-label="AI for Business">AI for Business</Link>
-          </Button>
         </div>
       </Hero>
 
