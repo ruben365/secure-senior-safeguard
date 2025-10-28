@@ -192,7 +192,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-2 text-xs">
                 <Shield className="w-4 h-4 text-accent" />
-                <span className="text-primary-foreground/80">Veteran-Owned</span>
+                <span className="text-primary-foreground/80">Veteran Support</span>
               </div>
             </div>
           </div>

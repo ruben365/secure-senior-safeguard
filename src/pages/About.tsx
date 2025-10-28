@@ -172,7 +172,7 @@ const About = () => {
             <Card className="p-6 hover:shadow-medium transition-shadow">
               <div className="flex items-center gap-3">
                 <Award className="w-8 h-8 text-accent" />
-                <span className="font-bold">Veteran-Owned Certified</span>
+                <span className="font-bold">Veteran Support Certified</span>
               </div>
             </Card>
             <Card className="p-6 hover:shadow-medium transition-shadow">
