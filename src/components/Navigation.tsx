@@ -24,19 +24,17 @@ const Navigation = () => {
     navigate("/");
   };
 
-  const navLinks = [
-    { name: "Team & Career", href: "/team" },
+  const mainLinks = [
+    { name: "Learn & Train", href: "/training" },
+    { name: "ScamShield", href: "/scamshield" },
+    { name: "AI for Business", href: "/business" },
     { name: "Resources", href: "/resources" },
     { name: "About", href: "/about" },
-  ];
-
-  const mainLinks = [
-    { name: "AI Business", href: "/business" },
-    { name: "Learn & Train", href: "/training" },
+    { name: "Contact", href: "/contact" },
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-sm">
+    <nav className="sticky top-0 z-50 bg-background/98 backdrop-blur-md border-b border-border shadow-md transition-shadow duration-300">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
@@ -48,7 +46,7 @@ const Navigation = () => {
             }}
             className="flex items-center gap-3 hover:scale-105 transition-transform duration-300 cursor-pointer"
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center shadow-glow-purple relative">
+            <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center shadow-glow-navy relative">
               <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-primary to-accent opacity-5 animate-pulse-wave" />
               <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-primary to-accent opacity-0 animate-pulse-wave-delayed" />
               <svg
@@ -59,37 +57,28 @@ const Navigation = () => {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="w-6 h-6 text-primary-foreground relative z-10"
+                className="w-7 h-7 text-primary-foreground relative z-10"
               >
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
             </div>
-            <span className="text-xl font-bold gradient-text-primary leading-none">InVision Network</span>
+            <div className="flex flex-col leading-tight">
+              <span className="text-xl font-bold text-primary">InVision Network</span>
+              <span className="text-xs text-muted-foreground font-medium">Dayton, Ohio</span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
           {!user && (
             <div className="hidden lg:flex flex-1 items-center justify-center">
               <NavigationMenu>
-                <NavigationMenuList className="space-x-6">
+                <NavigationMenuList className="space-x-2">
                   {/* Main Links */}
                   {mainLinks.map((link) => (
                     <NavigationMenuItem key={link.name}>
                       <Link
                         to={link.href}
-                        className="text-foreground/80 hover:text-foreground font-bold transition-colors duration-200 text-base whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2 py-1"
-                      >
-                        {link.name}
-                      </Link>
-                    </NavigationMenuItem>
-                  ))}
-
-                  {/* Regular Links */}
-                  {navLinks.map((link) => (
-                    <NavigationMenuItem key={link.name}>
-                      <Link
-                        to={link.href}
-                        className="text-foreground/80 hover:text-foreground font-bold transition-colors duration-200 text-base whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2 py-1"
+                        className="text-foreground/80 hover:text-primary font-semibold transition-colors duration-200 text-base whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-3 py-2"
                       >
                         {link.name}
                       </Link>
@@ -138,8 +127,8 @@ const Navigation = () => {
                 <Link to="/enhanced-auth" aria-label="Login to admin panel">LOGIN</Link>
               </Button>
             )}
-            <Button asChild variant="default" size="sm" className="hidden md:inline-flex font-semibold">
-              <Link to="/training" aria-label="Book a training session">BOOK TRAINING</Link>
+            <Button asChild variant="default" size="sm" className="hidden md:inline-flex font-semibold bg-secondary hover:bg-secondary/90 text-secondary-foreground shadow-glow-gold">
+              <Link to="/contact" aria-label="Get protected with InVision Network">GET PROTECTED</Link>
             </Button>
 
             {/* Mobile menu button */}
@@ -161,18 +150,6 @@ const Navigation = () => {
                 <>
                   {/* Main Links */}
                   {mainLinks.map((link) => (
-                    <Link
-                      key={link.name}
-                      to={link.href}
-                      className="text-foreground/80 hover:text-foreground py-2 transition-colors font-bold text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {link.name}
-                    </Link>
-                  ))}
-
-                  {/* Regular Links */}
-                  {navLinks.map((link) => (
                     <Link
                       key={link.name}
                       to={link.href}
@@ -218,9 +195,9 @@ const Navigation = () => {
                     </Link>
                   </Button>
                 )}
-                <Button asChild variant="default" className="w-full">
-                  <Link to="/training" onClick={() => setMobileMenuOpen(false)} aria-label="Book a training session">
-                    BOOK TRAINING
+                <Button asChild variant="default" className="w-full font-semibold bg-secondary hover:bg-secondary/90 text-secondary-foreground">
+                  <Link to="/contact" onClick={() => setMobileMenuOpen(false)} aria-label="Get protected with InVision Network">
+                    GET PROTECTED
                   </Link>
                 </Button>
                 <a

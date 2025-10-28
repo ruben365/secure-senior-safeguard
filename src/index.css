@@ -9,76 +9,80 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   :root {
     /* Base colors */
     --background: 0 0% 100%;
-    --foreground: 260 30% 15%;
+    --foreground: 217 64% 20%;
     
-    /* Deep Purple - Primary brand color (Trust, creativity, innovation) */
-    --primary: 260 70% 35%;
+    /* Deep Navy Blue - Primary brand color (Trust, security, professionalism) */
+    --primary: 217 64% 33%;
     --primary-foreground: 0 0% 100%;
     
-    /* Bright Teal - Accent color (Modern, fresh, dynamic) */
-    --accent: 180 80% 45%;
+    /* Warm Gold - Secondary/CTA color (Premium, attention, warmth) */
+    --secondary: 38 92% 50%;
+    --secondary-foreground: 217 64% 20%;
+    
+    /* Teal - Accent color (Modern, tech-forward, calm) */
+    --accent: 174 80% 40%;
     --accent-foreground: 0 0% 100%;
     
     /* Success Green - Safety, verification */
-    --success: 158 64% 52%;
+    --success: 158 84% 39%;
     --success-foreground: 0 0% 100%;
     
     /* Alert Red - Danger, urgency */
-    --destructive: 0 84% 60%;
+    --destructive: 0 78% 51%;
     --destructive-foreground: 0 0% 100%;
     
     /* Neutral colors */
     --card: 0 0% 100%;
-    --card-foreground: 260 30% 15%;
+    --card-foreground: 217 64% 20%;
     
     --popover: 0 0% 100%;
-    --popover-foreground: 260 30% 15%;
+    --popover-foreground: 217 64% 20%;
     
-    --secondary: 250 20% 96%;
-    --secondary-foreground: 260 70% 35%;
+    --muted: 214 32% 95%;
+    --muted-foreground: 217 20% 47%;
     
-    --muted: 250 20% 96%;
-    --muted-foreground: 250 10% 47%;
-    
-    --border: 250 15% 91%;
-    --input: 250 15% 91%;
-    --ring: 260 70% 35%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 217 64% 33%;
     
   --radius: 0.5rem;
   
   /* Shadows */
   --shadow-subtle: 0 2px 8px -2px hsl(var(--foreground) / 0.05);
   --shadow-strong: 0 8px 24px -4px hsl(var(--foreground) / 0.1);
-  --shadow-glow-purple: 0 0 20px hsl(var(--primary) / 0.3);
+  --shadow-glow-navy: 0 0 20px hsl(var(--primary) / 0.3);
+  --shadow-glow-gold: 0 0 20px hsl(var(--secondary) / 0.3);
   
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  --gradient-primary: linear-gradient(135deg, hsl(217 64% 33%), hsl(174 80% 40%));
+  --gradient-hero: linear-gradient(135deg, hsl(217 64% 25%) 0%, hsl(217 60% 35%) 50%, hsl(174 80% 40%) 100%);
   
   /* Animations */
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     
-    /* Extended Color Palette for Premium Design */
-    --purple-900: 260 70% 25%;
-    --purple-700: 260 65% 35%;
-    --purple-500: 260 60% 50%;
+    /* Extended Color Palette for InVision Network */
+    --navy-900: 217 70% 20%;
+    --navy-700: 217 64% 33%;
+    --navy-500: 217 60% 45%;
     
-    /* Teal variants - Full intensity */
-    --teal-600: 180 80% 40%;
-    --teal-500: 180 75% 45%;
-    --teal-400: 180 70% 55%;
-    --teal-300: 180 60% 75%;
-    --teal-100: 180 50% 98%;
+    /* Gold variants */
+    --gold-600: 38 95% 45%;
+    --gold-500: 38 92% 50%;
+    --gold-400: 38 90% 60%;
     
-    /* Cyan variants for accents */
-    --cyan-600: 190 85% 45%;
-    --cyan-500: 190 80% 50%;
-    --cyan-400: 190 75% 60%;
+    /* Teal variants */
+    --teal-600: 174 85% 35%;
+    --teal-500: 174 80% 40%;
+    --teal-400: 174 75% 50%;
+    --teal-300: 174 60% 70%;
+    --teal-100: 174 50% 98%;
     
     /* Premium Shadows */
     --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     --shadow-strong: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    --shadow-glow-purple: 0 0 20px rgba(109, 40, 217, 0.3);
+    --shadow-glow-navy: 0 0 20px rgba(30, 58, 138, 0.3);
+    --shadow-glow-gold: 0 0 20px rgba(245, 158, 11, 0.3);
     --shadow-glow-teal: 0 0 20px rgba(20, 184, 166, 0.3);
     
     --sidebar-background: 0 0% 98%;
@@ -92,25 +96,25 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   }
 
   .dark {
-    --background: 260 70% 15%;
+    --background: 217 70% 12%;
     --foreground: 0 0% 100%;
-    --card: 260 70% 20%;
+    --card: 217 65% 18%;
     --card-foreground: 0 0% 100%;
-    --popover: 260 70% 20%;
+    --popover: 217 65% 18%;
     --popover-foreground: 0 0% 100%;
-    --primary: 0 0% 100%;
-    --primary-foreground: 260 70% 35%;
-    --secondary: 260 60% 25%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 260 60% 25%;
-    --muted-foreground: 250 10% 76%;
-    --accent: 180 80% 45%;
+    --primary: 217 64% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 38 92% 50%;
+    --secondary-foreground: 217 64% 20%;
+    --muted: 217 50% 22%;
+    --muted-foreground: 217 20% 70%;
+    --accent: 174 80% 40%;
     --accent-foreground: 0 0% 100%;
-    --destructive: 0 63% 31%;
+    --destructive: 0 78% 45%;
     --destructive-foreground: 0 0% 100%;
-    --border: 260 50% 30%;
-    --input: 260 50% 30%;
-    --ring: 0 0% 100%;
+    --border: 217 50% 25%;
+    --input: 217 50% 25%;
+    --ring: 217 64% 50%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -178,15 +182,22 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   }
   
   /* Gradient Text */
-  .gradient-text-teal {
-    background: linear-gradient(135deg, hsl(180, 80%, 40%), hsl(180, 75%, 50%));
+  .gradient-text-navy {
+    background: linear-gradient(135deg, hsl(217, 64%, 33%), hsl(217, 60%, 45%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   
   .gradient-text-primary {
-    background: linear-gradient(135deg, hsl(260, 70%, 35%), hsl(260, 60%, 55%));
+    background: linear-gradient(135deg, hsl(217, 64%, 33%), hsl(174, 80%, 40%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .gradient-text-gold {
+    background: linear-gradient(135deg, hsl(38, 92%, 50%), hsl(38, 90%, 60%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -194,15 +205,23 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   
   /* Gradient Backgrounds */
   .gradient-hero-primary {
-    background: linear-gradient(135deg, hsl(260, 70%, 25%) 0%, hsl(260, 65%, 35%) 50%, hsl(260, 60%, 50%) 100%);
+    background: linear-gradient(135deg, hsl(217, 64%, 25%) 0%, hsl(217, 60%, 35%) 50%, hsl(174, 80%, 40%) 100%);
+  }
+  
+  .gradient-hero-navy {
+    background: linear-gradient(135deg, hsl(217, 70%, 20%) 0%, hsl(217, 64%, 33%) 100%);
   }
   
   .gradient-hero-teal {
-    background: linear-gradient(135deg, hsl(180, 80%, 40%) 0%, hsl(180, 75%, 45%) 50%, hsl(180, 70%, 55%) 100%);
+    background: linear-gradient(135deg, hsl(174, 85%, 35%) 0%, hsl(174, 80%, 40%) 50%, hsl(174, 75%, 50%) 100%);
   }
   
   .gradient-card {
-    background: linear-gradient(135deg, hsl(0, 0%, 100%) 0%, hsl(250, 20%, 96%) 100%);
+    background: linear-gradient(135deg, hsl(0, 0%, 100%) 0%, hsl(214, 32%, 95%) 100%);
+  }
+  
+  .gradient-gold {
+    background: linear-gradient(135deg, hsl(38, 95%, 45%) 0%, hsl(38, 92%, 50%) 100%);
   }
   
   /* Floating Orb Animations */
@@ -220,7 +239,16 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   .floating-orb {
     position: absolute;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(109, 40, 217, 0.3) 0%, rgba(109, 40, 217, 0) 70%);
+    background: radial-gradient(circle, rgba(30, 58, 138, 0.3) 0%, rgba(30, 58, 138, 0) 70%);
+    filter: blur(40px);
+    animation: float 15s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  .floating-orb-gold {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.3) 0%, rgba(245, 158, 11, 0) 70%);
     filter: blur(40px);
     animation: float 15s ease-in-out infinite;
     pointer-events: none;
@@ -447,10 +475,17 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   /* Gradient Mesh Background */
   .gradient-mesh {
     background: 
-      linear-gradient(135deg, hsl(250, 20%, 96%) 0%, hsl(0, 0%, 100%) 100%),
-      radial-gradient(at 20% 30%, rgba(109, 40, 217, 0.05) 0%, transparent 50%),
+      linear-gradient(135deg, hsl(214, 32%, 95%) 0%, hsl(0, 0%, 100%) 100%),
+      radial-gradient(at 20% 30%, rgba(30, 58, 138, 0.05) 0%, transparent 50%),
       radial-gradient(at 80% 70%, rgba(20, 184, 166, 0.05) 0%, transparent 50%);
     background-blend-mode: normal, screen, screen;
+  }
+  
+  /* Tech Pattern Background */
+  .tech-pattern {
+    background-image: 
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.03) 4px),
+      repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.03) 4px);
   }
 
   /* Heartbeat Animation */

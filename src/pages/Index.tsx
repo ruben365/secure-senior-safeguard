@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import React, { Suspense, lazy, useState, useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import Hero from "@/components/Hero";
+import HeroHome from "@/components/HeroHome";
 import TrustBar from "@/components/TrustBar";
 import TestimonialCard from "@/components/TestimonialCard";
 import CTASection from "@/components/CTASection";
@@ -27,7 +27,6 @@ import {
   AlertTriangle,
   Loader2,
 } from "lucide-react";
-import ServiceHero from "@/components/ServiceHero";
 
 // Lazy load heavy components for better performance
 const VideoTestimonials = lazy(() => import("@/components/VideoTestimonials"));
@@ -132,23 +131,60 @@ const Index = () => {
 
       <main id="main-content" tabIndex={-1}>
         {/* Hero Section with improved accessibility */}
-        <ServiceHero
-          showScrollIndicator={true}
-          aria-label="Welcome to Secure Senior Safeguard - Protecting seniors from online scams"
-        >
-          <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center sm:justify-start">
+        <HeroHome>
+          <div className="flex flex-col sm:flex-row gap-6 flex-wrap justify-center items-center max-w-4xl mx-auto">
+            <Button
+              asChild
+              variant="gold"
+              size="xl"
+              className="w-full sm:w-auto text-lg font-bold min-h-[60px] px-10"
+            >
+              <Link to="/training" aria-label="Learn to spot scams with expert training">
+                Learn to Spot Scams
+              </Link>
+            </Button>
+            <Button
+              asChild
+              variant="teal"
+              size="xl"
+              className="w-full sm:w-auto text-lg font-bold min-h-[60px] px-10"
+            >
+              <Link to="/contact" aria-label="Get ScamShield 24/7 protection">
+                Get ScamShield Protection
+              </Link>
+            </Button>
             <Button
               asChild
               variant="outlineLight"
               size="xl"
-              className="w-full sm:w-auto text-lg font-semibold min-h-[60px] hover:scale-105 transition-transform focus:ring-4 focus:ring-primary/50"
+              className="w-full sm:w-auto text-lg font-bold min-h-[60px] px-10"
             >
-              <Link to="/contact" aria-label="Contact an expert for personalized consultation">
-                TALK TO AN EXPERT
+              <Link to="/business" aria-label="Explore AI solutions for business">
+                AI for Business
               </Link>
             </Button>
           </div>
-        </ServiceHero>
+          
+          {/* Trust Badges */}
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto text-center text-white/90">
+            <div className="animate-fade-in-up stagger-3">
+              <div className="text-3xl font-bold text-white mb-1">500+</div>
+              <div className="text-sm font-medium">Families Protected</div>
+            </div>
+            <div className="animate-fade-in-up stagger-4">
+              <div className="text-3xl font-bold text-white mb-1">🏢</div>
+              <div className="text-sm font-medium">Ohio Based & Trusted</div>
+            </div>
+            <div className="animate-fade-in-up stagger-5">
+              <div className="text-3xl font-bold text-white mb-1">🛡️</div>
+              <div className="text-sm font-medium">Expert Cybersecurity</div>
+            </div>
+            <div className="animate-fade-in-up stagger-5">
+              <div className="text-3xl font-bold text-white mb-1">🌐</div>
+              <div className="text-sm font-medium">English • Français • Español</div>
+            </div>
+          </div>
+        </HeroHome>
 
         <TrustBar />
 
