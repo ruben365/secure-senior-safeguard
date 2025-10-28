@@ -8,6 +8,7 @@ const Navigation = () => {
 
   const navLinks = [
     { name: "Learn & Train", href: "/training" },
+    { name: "ScamShield", href: "/scam-shield" },
     { name: "AI for Business", href: "/business" },
     { name: "Resources", href: "/resources" },
     { name: "About", href: "/about" },
