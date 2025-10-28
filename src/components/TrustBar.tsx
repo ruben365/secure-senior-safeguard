@@ -3,9 +3,9 @@ import { Shield, Star, Award, Lock, Globe } from "lucide-react";
 const TrustBar = () => {
   const trustIndicators = [
     { icon: Shield, text: "500+ Families Protected" },
-    { icon: Star, text: "4.9/5 Star Rating" },
-    { icon: Award, text: "Cybersecurity Expert-Founded" },
-    { icon: Lock, text: "Privacy-First" },
+    { icon: Globe, text: "Ohio Based & Trusted" },
+    { icon: Award, text: "Expert Cybersecurity Team" },
+    { icon: Globe, text: "Available in English • Français • Español" },
   ];
 
   return (
