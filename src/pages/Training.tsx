@@ -25,7 +25,7 @@ import {
   Image as ImageIcon,
 } from "lucide-react";
 
-const ScamShield = () => {
+const LearnAndTrain = () => {
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -33,8 +33,8 @@ const ScamShield = () => {
       {/* Hero Section */}
       <Hero
         useTransitioningBackground={true}
-        headline="Your Personal Cybersecurity Team - On Demand"
-        subheadline="Forward suspicious emails, texts, calls, or links. Get expert analysis within 24 hours."
+        headline="Learn & Train with InVision Network"
+        subheadline="Expert cybersecurity training and 24/7 scam protection services to keep you and your loved ones safe."
         showScrollIndicator={true}
       >
         <div className="mb-6 inline-block">
@@ -45,12 +45,122 @@ const ScamShield = () => {
         </div>
         <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center sm:justify-start">
           <Button asChild variant="default" size="xl" className="w-full sm:w-auto">
-            <Link to="#pricing" aria-label="Start your free trial">
-              Start Your Free Trial
+            <Link to="#training" aria-label="Explore training options">
+              Explore Training
+            </Link>
+          </Button>
+          <Button asChild variant="secondary" size="xl" className="w-full sm:w-auto">
+            <Link to="#scamshield" aria-label="View ScamShield protection">
+              ScamShield Protection
             </Link>
           </Button>
         </div>
       </Hero>
+
+      {/* Training Section */}
+      <section id="training" className="py-16 bg-background relative overflow-hidden">
+        <FlowingWaves variant="full" opacity={0.12} />
+        <div className="container mx-auto px-4 relative z-10">
+          <h2 className="text-center mb-4 animate-fade-in-up">Cybersecurity Training Sessions</h2>
+          <p className="text-center text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
+            Interactive group training sessions to help you recognize and avoid online scams
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
+            {[
+              {
+                name: "Standard Group",
+                price: "$79",
+                duration: "90 minutes",
+                size: "Up to 25 participants",
+                features: [
+                  "Live Zoom session",
+                  "Interactive Q&A",
+                  "Digital handouts",
+                  "Certificate of completion",
+                  "Email follow-up",
+                ],
+              },
+              {
+                name: "Family Small Group",
+                price: "$149",
+                duration: "90 minutes",
+                size: "Up to 12 participants",
+                popular: true,
+                features: [
+                  "Intimate group setting",
+                  "More personal attention",
+                  "Extended Q&A time",
+                  "Certificates for all",
+                  "Safe word setup guide",
+                  "Family action plan",
+                ],
+              },
+              {
+                name: "Priority Private",
+                price: "$399",
+                duration: "120 minutes",
+                size: "1-5 participants",
+                features: [
+                  "One-on-one or family session",
+                  "Customized content",
+                  "Device security review",
+                  "Personalized action plan",
+                  "30-day email support",
+                  "Priority scheduling",
+                ],
+              },
+            ].map((plan, index) => (
+              <Card
+                key={index}
+                className={`p-8 hover:shadow-strong transition-all duration-500 hover:-translate-y-2 rounded-2xl animate-fade-in-up bg-gradient-to-br from-card to-card/50 ${
+                  plan.popular ? "border-primary border-2 scale-105" : "border-border/50"
+                }`}
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                    <span className="bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-bold">
+                      MOST POPULAR
+                    </span>
+                  </div>
+                )}
+                <h3 className="text-2xl font-bold mb-2 text-center">{plan.name}</h3>
+                <div className="text-center mb-2">
+                  <span className="text-4xl font-bold text-primary">{plan.price}</span>
+                  <span className="text-muted-foreground">/session</span>
+                </div>
+                <p className="text-center text-sm text-muted-foreground mb-2">{plan.duration}</p>
+                <p className="text-center text-sm text-accent font-semibold mb-6">{plan.size}</p>
+
+                <div className="space-y-3 mb-8">
+                  {plan.features.map((feature, idx) => (
+                    <div key={idx} className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                      <span className="text-foreground text-sm">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <Button asChild variant={plan.popular ? "default" : "outline"} size="lg" className="w-full">
+                  <Link to="/contact">Book Session</Link>
+                </Button>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <section id="scamshield" className="py-8 bg-muted">
+        <div className="container mx-auto px-4 text-center">
+          <div className="inline-flex items-center justify-center gap-4 px-8 py-4 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 rounded-full">
+            <Shield className="w-8 h-8 text-primary" />
+            <h2 className="text-3xl font-bold">ScamShield Protection</h2>
+            <Shield className="w-8 h-8 text-primary" />
+          </div>
+        </div>
+      </section>
 
       {/* How ScamShield Works Section */}
       <section className="py-16 bg-background relative overflow-hidden">
@@ -485,4 +595,4 @@ const ScamShield = () => {
   );
 };
 
-export default ScamShield;
+export default LearnAndTrain;
