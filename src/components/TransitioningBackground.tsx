@@ -10,16 +10,15 @@ import eldersHero8 from '@/assets/elders-hero-8.jpg';
 import eldersHero9 from '@/assets/elders-hero-9.jpg';
 import eldersHero10 from '@/assets/elders-hero-10.jpg';
 
-const defaultImages = [eldersHero1, eldersHero2, eldersHero3, eldersHero4, eldersHero5, eldersHero6, eldersHero7, eldersHero8, eldersHero9, eldersHero10];
+const images = [eldersHero1, eldersHero2, eldersHero3, eldersHero4, eldersHero5, eldersHero6, eldersHero7, eldersHero8, eldersHero9, eldersHero10];
 
 interface TransitioningBackgroundProps {
-  images?: string[]; // array of image URLs to transition between
   interval?: number; // milliseconds between transitions
   className?: string;
   opacity?: number; // opacity level (0-1), default 1
 }
 
-const TransitioningBackground = ({ images = defaultImages, interval = 10000, className = '', opacity = 0.25 }: TransitioningBackgroundProps) => {
+const TransitioningBackground = ({ interval = 10000, className = '', opacity = 1 }: TransitioningBackgroundProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [nextIndex, setNextIndex] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -28,54 +27,38 @@ const TransitioningBackground = ({ images = defaultImages, interval = 10000, cla
     const timer = setInterval(() => {
       setIsTransitioning(true);
       
-      // Wait for fade transition to complete before updating indices
       setTimeout(() => {
         setCurrentIndex(nextIndex);
         setNextIndex((nextIndex + 1) % images.length);
         setIsTransitioning(false);
-      }, 800); // Match the CSS transition duration
+      }, 2000); // Smooth 2-second transition
     }, interval);
 
     return () => clearInterval(timer);
-  }, [interval, nextIndex, images.length]);
+  }, [interval, nextIndex]);
 
   return (
     <div className={`absolute inset-0 overflow-hidden ${className}`}>
-      {/* Current Image - fades out during transition */}
+      {/* Current Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center"
+        className="absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out"
         style={{
           backgroundImage: `url(${images[currentIndex]})`,
           opacity: isTransitioning ? 0 : opacity,
-          transform: 'scale(1.05)',
-          filter: 'brightness(1.15) contrast(1.1) saturate(1.2)',
-          transition: 'opacity 0.8s ease-in-out',
-          willChange: 'opacity',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
-          zIndex: 1,
         }}
       />
       
-      {/* Next Image - fades in during transition */}
+      {/* Next Image (for smooth transition) */}
       <div
-        className="absolute inset-0 bg-cover bg-center"
+        className="absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out"
         style={{
           backgroundImage: `url(${images[nextIndex]})`,
           opacity: isTransitioning ? opacity : 0,
-          transform: 'scale(1.05)',
-          filter: 'brightness(1.15) contrast(1.1) saturate(1.2)',
-          transition: 'opacity 0.8s ease-in-out',
-          willChange: 'opacity',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
-          zIndex: 2,
         }}
       />
       
-      {/* Enhanced Multi-layer Overlay for depth and readability */}
-      <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/80 to-background/70" style={{ opacity, zIndex: 3 }} />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/20" style={{ opacity, zIndex: 3 }} />
+      {/* Overlay for better text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50" style={{ opacity }} />
     </div>
   );
 };

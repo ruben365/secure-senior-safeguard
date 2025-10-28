@@ -25,7 +25,7 @@ const TrustBadges = () => {
   ];
 
   return (
-    <section className="py-8 bg-background/50 backdrop-blur-sm border-y border-border/50 relative overflow-hidden" role="region" aria-label="Trust and certifications">
+    <section className="py-16 bg-background/50 backdrop-blur-sm border-y border-border/50 relative overflow-hidden" role="region" aria-label="Trust and certifications">
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-10 left-20 w-64 h-64 bg-primary/30 rounded-full blur-3xl" />
         <div className="absolute bottom-10 right-20 w-72 h-72 bg-accent/30 rounded-full blur-3xl" />

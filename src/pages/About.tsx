@@ -3,171 +3,38 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import FlowingWaves from "@/components/FlowingWaves";
-import AIPartnersCarousel from "@/components/AIPartnersCarousel";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Card } from "@/components/ui/card";
-import { Heart, Lock, BookOpen, Users2, Shield, DollarSign, Award, MapPin, Phone, Mail, Clock } from "lucide-react";
-import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
-import { useState } from "react";
-import { z } from "zod";
-
-const contactSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
-  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
-  phone: z.string().trim().regex(/^\+?[1-9]\d{0,14}$/, "Invalid phone number format").max(20).optional().or(z.literal("")),
-  inquiry_type: z.string().min(1, "Please select an inquiry type"),
-  message: z.string().trim().min(10, "Message must be at least 10 characters").max(2000, "Message must be less than 2000 characters"),
-  language: z.string().min(1)
-});
+import { Heart, Lock, BookOpen, Users2, Shield, DollarSign, Award, MapPin } from "lucide-react";
+import heroImage from "@/assets/hero-about-new.jpg";
 
 const About = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    const formData = new FormData(e.target as HTMLFormElement);
-    const rawData = {
-      name: formData.get("name") as string,
-      email: formData.get("email") as string,
-      phone: formData.get("phone") as string || "",
-      inquiry_type: formData.get("interest") as string,
-      message: formData.get("message") as string,
-      language: formData.get("language") as string
-    };
-
-    try {
-      const validated = contactSchema.parse(rawData);
-      
-      const data = {
-        name: validated.name,
-        email: validated.email,
-        phone: validated.phone || null,
-        inquiry_type: validated.inquiry_type,
-        message: validated.message,
-        metadata: {
-          language: validated.language
-        }
-      };
-
-      const { error } = await supabase
-        .from("website_inquiries")
-        .insert([data]);
-
-      if (error) throw error;
-
-      toast.success("Thank you! We'll get back to you within 24 hours.");
-      (e.target as HTMLFormElement).reset();
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        toast.error(error.errors[0].message);
-      } else {
-        console.error("Error submitting contact form:", error);
-        toast.error("Failed to submit form. Please try again.");
-      }
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
     <div className="min-h-screen">
       <Navigation />
 
       <Hero
-        useRouteBasedImages={true}
+        backgroundImage={heroImage}
         headline="Founded by Families, For Families"
         subheadline="After watching loved ones nearly lose thousands to AI-powered scams, we built InVision Network—the protection system we wish existed."
-        showScrollIndicator={true}
       />
 
       {/* Our Story */}
-      <section className="py-6 bg-background relative">
+      <section className="py-24 bg-background relative">
         <FlowingWaves variant="full" opacity={0.12} />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-center mb-6">The Story Behind InVision Network</h2>
+            <h2 className="text-center mb-12">Our Story</h2>
             <div className="space-y-6 text-lg leading-relaxed text-muted-foreground">
-              <p className="text-xl font-semibold text-foreground">
-                It started with a phone call that nearly cost a family $10,000—and changed everything.
-              </p>
-              
               <p>
-                On a quiet Tuesday morning in 2022, our founder Ruben Mukala's 78-year-old mother received a frantic call from her "grandson." The voice was unmistakable—the same inflections, the same laugh, even the childhood nickname only family knew. He claimed he'd been in a car accident in Canada, was in jail, and desperately needed $10,000 for bail. The lawyers couldn't accept credit cards. It had to be a wire transfer. Today. Right now.
+                InVision Network was born from a close call. When our founder's mother nearly wired $10,000 to a scammer using a
+                deepfake "grandson voice," we realized seniors weren't falling for old scams—they were being targeted by artificial
+                intelligence so sophisticated it could mimic family members perfectly.
               </p>
-              
               <p>
-                She was moments away from walking into Western Union when her actual grandson called from his office downtown. The scammer had used AI voice-cloning technology, training it on just 30 seconds of audio from social media videos. The voice was so perfect that even Ruben himself, when he listened to the recording later, couldn't immediately tell it was fake.
-              </p>
-              
-              <p className="text-xl font-semibold text-foreground">
-                This wasn't an isolated incident. It was a preview of what was coming.
-              </p>
-              
-              <p>
-                Ruben spent the next six months researching the explosion of AI-powered scams targeting seniors and small businesses. What he found was alarming: deepfake technology that once cost millions and required Hollywood-level expertise was now available for $20/month. Voice cloning that could fool family members. Video manipulation so sophisticated that grandparents couldn't tell if they were actually on a video call with their grandchild or a computer-generated fake.
-              </p>
-              
-              <p>
-                But when he looked for resources to help protect his mother and others like her, he found only three options: generic "be careful online" articles written for tech-savvy millennials, condescending "seniors are vulnerable" programs that treated elderly adults like children, or overly technical cybersecurity courses that required a computer science degree to understand.
-              </p>
-              
-              <p className="text-xl font-semibold text-foreground">
-                There was nothing built FOR seniors, BY people who respected their intelligence and lived experience.
-              </p>
-              
-              <p>
-                InVision Network was born from that gap. Ruben assembled a team of cybersecurity experts, adult educators, and community advocates who shared a common belief: seniors aren't falling for scams because they're "not tech-savvy"—they're being targeted by billion-dollar criminal organizations using AI technology that didn't exist three years ago.
-              </p>
-              
-              <p>
-                Our first pilot program trained 30 families in Dayton, Ohio. We taught them the "60-Second Pause Protocol"—a simple framework for spotting AI-generated scams before sending money. We showed them how to identify deepfake voices, how to verify urgent requests, and how to establish family safe-words for real emergencies.
-              </p>
-              
-              <p className="text-xl font-semibold text-foreground">
-                Within three months, those families prevented over $150,000 in attempted fraud.
-              </p>
-              
-              <p>
-                One participant, a 72-year-old retired teacher named Margaret, used what she learned to stop a QR code scam at her local grocery store. She noticed that the QR codes on donation canisters looked like stickers placed over the original codes. She called the store manager, who discovered the fraudulent codes were draining donations meant for a children's cancer charity to a scammer's personal Venmo account.
-              </p>
-              
-              <p>
-                Another graduate, 81-year-old Robert, received a fake text from his "bank" asking him to verify his account by clicking a link. He recognized the urgency language we'd taught him to watch for, called his bank using the official number on his card, and learned it was a phishing attempt. The bank estimated he would have lost access to $45,000 in savings.
-              </p>
-              
-              <p className="text-xl font-semibold text-foreground">
-                Today, we've trained over 500 families and prevented more than $2 million in fraud attempts.
-              </p>
-              
-              <p>
-                But we're not stopping there. For every 10 paid training sessions, we sponsor 1 FREE seat for a senior in need through partnerships with senior centers, churches, and veterans organizations. We've provided 50+ free sessions for veterans and 30+ scholarships for cancer patients and their caregivers.
-              </p>
-              
-              <p>
-                We've also expanded into business AI consulting because we saw small business owners making the same mistakes with AI automation: buying expensive tools without understanding the security implications, implementing "solutions" that leaked customer data, and falling for slick sales pitches from vendors who disappeared when problems arose.
-              </p>
-              
-              <p className="text-xl font-semibold text-foreground">
-                Our mission is simple: Empower 100,000 families with the knowledge and confidence to outsmart AI scammers—and help businesses use AI safely and effectively.
-              </p>
-              
-              <p>
-                Every member of our team has been personally affected by fraud. We're not just teaching this because it's our job—we're teaching it because we wish someone had taught us before our families became targets. We know what it feels like to get that call, to feel that panic, to wonder if you can trust your own eyes and ears anymore.
-              </p>
-              
-              <p>
-                That's why we do this work with respect, not condescension. That's why we teach actionable skills, not vague warnings. That's why we never ask for passwords, never use scare tactics, and never talk down to our clients. Because the people we serve deserve better than fear-mongering and generic advice.
-              </p>
-              
-              <p className="text-xl font-semibold text-foreground">
-                They deserve protection. They deserve confidence. They deserve InVision Network.
+                The resources available? Either too technical, too condescending, or just generic "be careful" warnings. No real tools.
+                No step-by-step scripts. No one treating seniors like the intelligent adults they are. So we created InVision Network:
+                respectful education, actionable tools, and ongoing support—without the tech jargon.
               </p>
             </div>
           </div>
@@ -175,7 +42,7 @@ const About = () => {
       </section>
 
       {/* Our Mission */}
-      <section className="py-6 bg-muted">
+      <section className="py-24 bg-muted">
         <div className="container mx-auto px-4">
           <Card className="max-w-4xl mx-auto p-12 bg-gradient-to-br from-primary/5 to-accent/5 border-2 border-primary/10 shadow-medium">
             <blockquote className="text-2xl md:text-3xl font-bold text-center leading-relaxed text-foreground">
@@ -186,80 +53,12 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-6 bg-background">
+      {/* Our Values */}
+      <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="mb-4">Meet the Team Behind</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Our Core Values
-            </p>
-          </div>
-          <p className="text-center text-lg text-muted-foreground max-w-4xl mx-auto mb-16">
-            At InVision Network, we believe in empowering families through education, innovation, and authentic relationships. Our team brings diverse expertise together to transform how people approach digital safety and protection against AI-powered fraud.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-12">
-            <Card className="p-6 hover:shadow-medium transition-all duration-300 hover:-translate-y-1 rounded-2xl border-border/50">
-              <div className="flex flex-col items-center text-center gap-4">
-                <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center">
-                  <Heart className="w-10 h-10 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-3">Authentic Leadership</h3>
-                  <p className="text-muted-foreground text-sm">
-                    We lead by example, with transparency and integrity in everything we do.
-                  </p>
-                </div>
-              </div>
-            </Card>
-
-            <Card className="p-6 hover:shadow-medium transition-all duration-300 hover:-translate-y-1 rounded-2xl border-border/50">
-              <div className="flex flex-col items-center text-center gap-4">
-                <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center">
-                  <BookOpen className="w-10 h-10 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-3">Continuous Growth</h3>
-                  <p className="text-muted-foreground text-sm">
-                    We believe in constant learning and evolution to stay ahead of industry changes.
-                  </p>
-                </div>
-              </div>
-            </Card>
-
-            <Card className="p-6 hover:shadow-medium transition-all duration-300 hover:-translate-y-1 rounded-2xl border-border/50">
-              <div className="flex flex-col items-center text-center gap-4">
-                <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center">
-                  <Users2 className="w-10 h-10 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-3">Client Success</h3>
-                  <p className="text-muted-foreground text-sm">
-                    Your success is our success. We're committed to measurable results for our clients.
-                  </p>
-                </div>
-              </div>
-            </Card>
-
-            <Card className="p-6 hover:shadow-medium transition-all duration-300 hover:-translate-y-1 rounded-2xl border-border/50">
-              <div className="flex flex-col items-center text-center gap-4">
-                <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center">
-                  <Shield className="w-10 h-10 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-3">Innovation</h3>
-                  <p className="text-muted-foreground text-sm">
-                    We continuously explore new strategies and technologies to drive better outcomes.
-                  </p>
-                </div>
-              </div>
-            </Card>
-          </div>
-
-          <h2 className="text-center mb-12">Our Values</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            <Card className="p-8 hover:shadow-medium transition-all duration-300 hover:-translate-y-1 rounded-2xl border-border/50">
+          <h2 className="text-center mb-16">Our Values</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <Card className="p-8 hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50">
               <div className="flex items-start gap-4">
                 <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
                   <Heart className="w-8 h-8 text-primary" />
@@ -273,7 +72,7 @@ const About = () => {
               </div>
             </Card>
 
-            <Card className="p-8 hover:shadow-medium transition-all duration-300 hover:-translate-y-1 rounded-2xl border-border/50">
+            <Card className="p-8 hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50">
               <div className="flex items-start gap-4">
                 <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
                   <Lock className="w-8 h-8 text-primary" />
@@ -287,7 +86,7 @@ const About = () => {
               </div>
             </Card>
 
-            <Card className="p-8 hover:shadow-medium transition-all duration-300 hover:-translate-y-1 rounded-2xl border-border/50">
+            <Card className="p-8 hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50">
               <div className="flex items-start gap-4">
                 <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
                   <BookOpen className="w-8 h-8 text-primary" />
@@ -301,7 +100,7 @@ const About = () => {
               </div>
             </Card>
 
-            <Card className="p-8 hover:shadow-medium transition-all duration-300 hover:-translate-y-1 rounded-2xl border-border/50">
+            <Card className="p-8 hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50">
               <div className="flex items-start gap-4">
                 <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
                   <Users2 className="w-8 h-8 text-primary" />
@@ -319,11 +118,11 @@ const About = () => {
       </section>
 
       {/* Our Impact */}
-      <section className="py-6 bg-muted">
+      <section className="py-24 bg-muted">
         <div className="container mx-auto px-4">
-          <h2 className="text-center mb-8">Our Community Impact</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Card className="p-4 text-center hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50">
+          <h2 className="text-center mb-16">Our Community Impact</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <Card className="p-8 text-center hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50">
               <div className="flex justify-center mb-4">
                 <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
                   <Shield className="w-6 h-6 text-white" />
@@ -450,176 +249,26 @@ const About = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="relative py-24 bg-background">
-        <FlowingWaves variant="full" opacity={0.12} />
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="mb-4">Get In Touch</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Whether you have questions, need training, or want to partner with us—we're ready to help.
-            </p>
+      {/* Final CTA */}
+      <section className="py-24 bg-gradient-to-r from-primary to-accent">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-white mb-8">Want to Join Our Mission?</h2>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button asChild variant="gold" size="xl">
+              <Link to="/training">BOOK TRAINING</Link>
+            </Button>
+            <Button asChild variant="outlineLight" size="xl">
+              <Link to="/contact">PARTNER WITH US</Link>
+            </Button>
+            <Button asChild variant="outlineLight" size="xl">
+              <Link to="/donate">DONATE A TRAINING SEAT</Link>
+            </Button>
           </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
-            {/* Contact Form */}
-            <Card className="p-8 shadow-medium hover:shadow-strong transition-shadow">
-              <h3 className="text-2xl font-bold mb-6">Send Us a Message</h3>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-semibold mb-2">
-                    Full Name *
-                  </label>
-                  <Input id="name" name="name" required placeholder="Your full name" />
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-sm font-semibold mb-2">
-                    Email Address *
-                  </label>
-                  <Input id="email" name="email" type="email" required placeholder="your@email.com" />
-                </div>
-
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-semibold mb-2">
-                    Phone Number (Optional)
-                  </label>
-                  <Input id="phone" name="phone" type="tel" placeholder="(937) 555-1234" />
-                </div>
-
-                <div>
-                  <label htmlFor="interest" className="block text-sm font-semibold mb-2">
-                    I'm Interested In: *
-                  </label>
-                  <Select name="interest" required>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select an option" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="training">AI Security Training for My Family</SelectItem>
-                      <SelectItem value="scam-shield">Family Scam Shield Membership</SelectItem>
-                      <SelectItem value="business">Business AI Consulting / Agent Development</SelectItem>
-                      <SelectItem value="partnership">Partnership Opportunity</SelectItem>
-                      <SelectItem value="press">Press/Media Inquiry</SelectItem>
-                      <SelectItem value="general">General Question</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div>
-                  <label htmlFor="language" className="block text-sm font-semibold mb-2">
-                    Preferred Language:
-                  </label>
-                  <Select name="language" defaultValue="english">
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="english">English</SelectItem>
-                      <SelectItem value="french">Français</SelectItem>
-                      <SelectItem value="spanish">Español</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-semibold mb-2">
-                    Message *
-                  </label>
-                  <Textarea id="message" name="message" required rows={6} placeholder="Tell us how we can help you..." />
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <Checkbox id="disclaimer" required />
-                  <label htmlFor="disclaimer" className="text-sm text-muted-foreground leading-relaxed">
-                    I understand InVision provides educational services only and does not offer legal/financial/tax advice.
-                  </label>
-                </div>
-
-                <Button type="submit" variant="default" size="lg" className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? "SENDING..." : "SEND MESSAGE"}
-                </Button>
-              </form>
-            </Card>
-
-            {/* Contact Info */}
-            <div className="space-y-6">
-              <Card className="p-8 hover:shadow-medium transition-all">
-                <div className="flex items-start gap-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-8 h-8 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold mb-3">Phone</h3>
-                    <a href="tel:9375551234" className="text-accent hover:text-accent/80 text-xl font-semibold block mb-3">
-                      (937) 555-1234
-                    </a>
-                    <div className="flex items-start gap-2 text-muted-foreground">
-                      <Clock className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                      <div className="text-sm">
-                        <p>Monday-Friday: 9am-6pm ET</p>
-                        <p>Saturday: 10am-3pm ET</p>
-                        <p>Sunday: Closed</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-
-              <Card className="p-8 hover:shadow-medium transition-all">
-                <div className="flex items-start gap-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-8 h-8 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold mb-3">Email</h3>
-                    <div className="space-y-2 text-sm">
-                      <p>
-                        <span className="font-semibold">General:</span>{" "}
-                        <a href="mailto:hello@invisionnetwork.com" className="text-accent hover:text-accent/80">
-                          hello@invisionnetwork.com
-                        </a>
-                      </p>
-                      <p>
-                        <span className="font-semibold">Training:</span>{" "}
-                        <a href="mailto:training@invisionnetwork.com" className="text-accent hover:text-accent/80">
-                          training@invisionnetwork.com
-                        </a>
-                      </p>
-                      <p>
-                        <span className="font-semibold">Business:</span>{" "}
-                        <a href="mailto:consulting@invisionnetwork.com" className="text-accent hover:text-accent/80">
-                          consulting@invisionnetwork.com
-                        </a>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-
-              <Card className="p-8 hover:shadow-medium transition-all">
-                <div className="flex items-start gap-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-8 h-8 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold mb-3">Office</h3>
-                    <p className="text-muted-foreground">
-                      InVision Network
-                      <br />
-                      123 Main Street
-                      <br />
-                      Dayton, OH 45402
-                    </p>
-                  </div>
-                </div>
-              </Card>
-            </div>
-          </div>
+          <p className="mt-6 text-white/90 text-lg">
+            Questions? Call <a href="tel:9375551234" className="underline hover:text-white font-semibold">(937) 555-1234</a>
+          </p>
         </div>
       </section>
-
-      <AIPartnersCarousel />
 
       <Footer />
     </div>

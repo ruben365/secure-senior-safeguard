@@ -14,9 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        inter: ['Inter', 'sans-serif'],
-        poppins: ['Poppins', 'sans-serif'],
-        sans: ['Inter', 'Poppins', 'sans-serif'],
+        outfit: ['Outfit', 'sans-serif'],
+        sans: ['Outfit', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -55,12 +54,6 @@ export default {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
-        },
-        neon: {
-          pink: "hsl(330 100% 50%)",
-          orange: "hsl(28 100% 60%)",
-          purple: "hsl(275 70% 63%)",
-          cyan: "hsl(180 100% 45%)",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
@@ -135,20 +128,18 @@ export default {
         "shimmer": "shimmer 2s infinite linear",
       },
       backgroundImage: {
-        "gradient-hero-primary": "linear-gradient(135deg, hsl(222 47% 5%) 0%, hsl(260 40% 8%) 50%, hsl(275 40% 10%) 100%)",
-        "gradient-hero-broadcast": "linear-gradient(135deg, hsl(222 47% 5%) 0%, hsl(275 50% 8%) 100%)",
-        "gradient-card-dark": "linear-gradient(135deg, hsl(222 40% 8%) 0%, hsl(260 40% 10%) 100%)",
-        "gradient-neon-pink": "linear-gradient(135deg, hsl(330 100% 50%) 0%, hsl(340 90% 55%) 100%)",
-        "gradient-neon-orange": "linear-gradient(135deg, hsl(28 100% 60%) 0%, hsl(38 95% 65%) 100%)",
+        "gradient-hero-primary": "linear-gradient(135deg, hsl(260 70% 25%) 0%, hsl(260 65% 35%) 50%, hsl(260 60% 50%) 100%)",
+        "gradient-hero-teal": "linear-gradient(135deg, hsl(180 80% 40%) 0%, hsl(180 75% 45%) 50%, hsl(180 70% 55%) 100%)",
+        "gradient-hero-cyan": "linear-gradient(135deg, hsl(190 85% 45%) 0%, hsl(190 80% 50%) 50%, hsl(190 75% 60%) 100%)",
+        "gradient-card": "linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(250 20% 96%) 100%)",
+        "gradient-mesh": "linear-gradient(135deg, hsl(250 20% 96%) 0%, hsl(0 0% 100%) 100%)",
       },
       boxShadow: {
-        soft: "0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2)",
-        medium: "0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3)",
-        strong: "0 20px 25px -5px rgba(255, 0, 122, 0.3), 0 10px 10px -5px rgba(255, 0, 122, 0.2)",
-        "glow-pink": "0 0 30px rgba(255, 0, 122, 0.6), 0 0 60px rgba(255, 0, 122, 0.3)",
-        "glow-orange": "0 0 30px rgba(255, 167, 51, 0.6), 0 0 60px rgba(255, 167, 51, 0.3)",
-        "glow-purple": "0 0 30px rgba(163, 72, 244, 0.6), 0 0 60px rgba(163, 72, 244, 0.3)",
-        "glow-cyan": "0 0 30px rgba(0, 230, 230, 0.6), 0 0 60px rgba(0, 230, 230, 0.3)",
+        soft: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+        medium: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+        strong: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+        "glow-purple": "0 0 20px rgba(109, 40, 217, 0.3)",
+        "glow-teal": "0 0 20px rgba(20, 184, 166, 0.3)",
       },
       backdropBlur: {
         xs: "2px",

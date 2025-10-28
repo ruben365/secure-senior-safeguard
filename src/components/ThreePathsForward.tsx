@@ -20,7 +20,7 @@ const paths = [
     pricing: "Starting at $49/month",
     icon: Shield,
     featured: true,
-    link: "/training",
+    link: "/scam-shield",
     cta: "Start Scam Shield"
   },
   {
@@ -36,98 +36,92 @@ const paths = [
 
 const ThreePathsForward = () => {
   return (
-    <section className="py-20 bg-gradient-to-b from-background via-muted/30 to-background relative overflow-hidden">
-      {/* Decorative Background Elements */}
-      <div className="absolute inset-0 pointer-events-none opacity-50">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-      </div>
+    <section className="py-20 relative overflow-hidden bg-gradient-to-br from-[hsl(250,20%,96%)] via-white to-[hsl(180,50%,98%)]">
+      {/* Background blobs */}
+      <div className="absolute top-[-100px] left-[-100px] w-[400px] h-[400px] rounded-full bg-gradient-to-br from-primary to-accent opacity-10 blur-[80px] animate-blob-morph" />
+      <div className="absolute bottom-[-80px] right-[-80px] w-[350px] h-[350px] rounded-full bg-gradient-to-br from-accent to-[hsl(180,75%,50%)] opacity-10 blur-[80px] animate-float-slow" style={{ animationDelay: '5s', animationDirection: 'reverse' }} />
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16 animate-fade-in">
-          <div className="inline-block mb-4">
-            <span className="text-sm font-semibold tracking-wider uppercase text-primary bg-primary/10 px-4 py-2 rounded-full">
-              Your Protection Options
-            </span>
-          </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+        <div className="text-center mb-16 animate-fade-in-up">
+          <h2 className="text-5xl font-extrabold mb-4 gradient-text-primary">
             Three Paths Forward
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Choose the protection and empowerment that fits your needs—from personal AI security training to business automation solutions.
           </p>
         </div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
           {paths.map((path, index) => {
             const Icon = path.icon;
             return (
               <Card
                 key={path.id}
                 className={`
-                  relative p-8 flex flex-col items-center text-center
-                  transition-all duration-500 group
+                  relative p-12 flex flex-col items-center text-center
+                  transition-all duration-600 ease-out rounded-3xl
+                  bg-white
                   ${path.featured 
-                    ? 'border-2 border-primary shadow-2xl shadow-primary/20 scale-105 bg-gradient-to-b from-card to-card/50 backdrop-blur-sm' 
-                    : 'border border-border/50 shadow-lg bg-gradient-to-b from-card to-background hover:shadow-xl hover:shadow-primary/10'}
-                  hover:-translate-y-3 hover:border-primary/50
-                  animate-fade-in
-                  overflow-hidden
+                    ? 'border-[3px] border-primary shadow-[0_8px_30px_rgba(139,92,246,0.2)]' 
+                    : 'border-2 border-border shadow-soft'}
+                  hover:-translate-y-4 hover:scale-[1.02] ${path.featured ? 'hover:shadow-[0_16px_50px_rgba(139,92,246,0.3)]' : 'hover:shadow-medium'}
+                  hover:border-primary hover:rotate-1
+                  animate-fade-in-up
+                  before:absolute before:top-0 before:left-0 before:w-full before:h-1 before:rounded-t-3xl
+                  before:bg-gradient-to-r before:from-primary before:via-accent before:to-primary
+                  before:scale-x-0 before:origin-left before:transition-transform before:duration-500
+                  hover:before:scale-x-100
+                  after:absolute after:inset-0 after:rounded-3xl after:opacity-0
+                  after:bg-gradient-to-br after:from-primary/5 after:to-accent/5
+                  hover:after:opacity-100 after:transition-opacity after:duration-500
                 `}
-                style={{ animationDelay: `${index * 100}ms` }}
+                style={{ animationDelay: `${index * 150}ms` }}
               >
-                {/* Card Glow Effect */}
-                <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${path.featured ? 'bg-gradient-to-br from-primary/5 to-accent/5' : 'bg-gradient-to-br from-primary/3 to-transparent'}`} />
-                
                 {/* Featured Badge */}
                 {path.featured && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary via-accent to-primary text-primary-foreground px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg shadow-primary/30 animate-pulse">
-                    <span className="relative z-10">Most Popular</span>
+                  <div className="absolute -top-[18px] left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-white px-7 py-2.5 rounded-full text-[13px] font-extrabold tracking-[1.5px] shadow-[0_6px_20px_rgba(139,92,246,0.4)] animate-[badge-float_3s_ease-in-out_infinite]">
+                    MOST POPULAR
                   </div>
                 )}
 
-                {/* Icon */}
-                <div className={`
-                  relative w-20 h-20 rounded-full mb-6
+                {/* Icon Container - purple/teal gradient */}
+                <div className="relative w-[100px] h-[100px] rounded-3xl mb-7
+                  bg-gradient-to-br from-primary to-accent
+                  shadow-[0_8px_24px_rgba(139,92,246,0.4)]
                   flex items-center justify-center
-                  ${path.featured 
-                    ? 'bg-gradient-to-br from-primary via-accent to-primary shadow-lg shadow-primary/30' 
-                    : 'bg-gradient-to-br from-primary/10 to-primary/5'}
-                  transition-all duration-500 group-hover:scale-110 group-hover:rotate-6
-                  z-10
-                `}>
-                  {/* Icon Ring Effect */}
-                  <div className={`absolute inset-0 rounded-full ${path.featured ? 'border-2 border-primary-foreground/20' : 'border border-primary/20'} group-hover:scale-125 transition-transform duration-500`} />
-                  <Icon className={`w-10 h-10 relative z-10 ${path.featured ? 'text-primary-foreground' : 'text-primary'} transition-transform duration-300 group-hover:scale-110`} />
+                  transition-all duration-600 ease-out hover:scale-[1.2] hover:rotate-[-10deg]
+                  hover:shadow-[0_12px_35px_rgba(139,92,246,0.6)]
+                  after:absolute after:inset-[-8px] after:rounded-[28px]
+                  after:border-2 after:border-primary/40
+                  after:animate-[pulse-ring_3s_ease-out_infinite]
+                ">
+                  <Icon className="w-14 h-14 text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.2)] transition-transform duration-500" />
                 </div>
 
                 {/* Content */}
-                <h3 className="text-2xl font-bold mb-3 text-foreground relative z-10 group-hover:text-primary transition-colors duration-300">
+                <h3 className="text-[28px] font-extrabold mb-4 text-foreground tracking-tight transition-colors duration-300 group-hover:text-primary">
                   {path.title}
                 </h3>
-                <p className="text-muted-foreground mb-6 leading-relaxed flex-grow relative z-10 text-base">
+                <p className="text-base text-muted-foreground mb-7 flex-grow leading-relaxed">
                   {path.description}
                 </p>
 
                 {/* Pricing */}
-                <div className="relative z-10 mb-6 px-4 py-2 rounded-lg bg-primary/10 border border-primary/20">
-                  <p className="text-sm text-muted-foreground uppercase tracking-wide mb-1">Starting at</p>
-                  <div className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                    {path.pricing.replace('Starting at ', '')}
-                  </div>
+                <div className="text-xl font-extrabold gradient-text-primary mb-6 px-6 py-3 rounded-xl 
+                  bg-primary/10
+                  border border-primary/20
+                  transition-all duration-500
+                  hover:bg-primary/15 hover:scale-105">
+                  {path.pricing}
                 </div>
 
                 {/* CTA Button */}
                 <Button
                   asChild
                   variant={path.featured ? "default" : "outline"}
-                  size="lg"
-                  className={`
-                    w-full font-semibold relative z-10 group-hover:shadow-lg transition-all duration-300
-                    ${path.featured ? 'shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40' : 'hover:border-primary hover:text-primary'}
-                  `}
+                  className="w-full text-base font-bold uppercase tracking-wide"
                 >
                   <Link to={path.link}>
                     {path.cta}

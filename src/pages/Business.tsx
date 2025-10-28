@@ -6,14 +6,12 @@ import TrustBar from "@/components/TrustBar";
 import TestimonialCard from "@/components/TestimonialCard";
 import CTASection from "@/components/CTASection";
 import FlowingWaves from "@/components/FlowingWaves";
-import AIPartnersCarousel from "@/components/AIPartnersCarousel";
-import BusinessImageCarousel from "@/components/BusinessImageCarousel";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Phone, Mail, MessageSquare, Calendar, CheckCircle, Search, Shield } from "lucide-react";
 import heroImage from "@/assets/hero-business-new.jpg";
-import testimonial8 from "@/assets/testimonial-8.jpg";
-import testimonial9 from "@/assets/testimonial-9.jpg";
+import testimonial3 from "@/assets/testimonial-3.jpg";
+import testimonial4 from "@/assets/testimonial-4.jpg";
 
 const Business = () => {
   return (
@@ -21,10 +19,9 @@ const Business = () => {
       <Navigation />
 
       <Hero
-        useRouteBasedImages={true}
+        backgroundImage={heroImage}
         headline="AI That Actually Works for Your Business"
         subheadline="Custom AI receptionists, follow-up systems, and automation—built secure, trained properly, and guaranteed to save you time. Starting at $5,000."
-        showScrollIndicator={true}
       >
         <Button asChild variant="default" size="xl">
           <Link to="/contact">SCHEDULE FREE DISCOVERY CALL</Link>
@@ -34,12 +31,12 @@ const Business = () => {
       <TrustBar />
 
       {/* Use Cases */}
-      <section className="py-4 bg-background relative">
+      <section className="py-20 bg-background relative">
         <FlowingWaves variant="full" opacity={0.12} />
         <div className="container mx-auto px-4 relative z-10">
-          <h2 className="text-center mb-6">AI for Business & Web Design</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Card className="p-4 hover:shadow-medium transition-shadow">
+          <h2 className="text-center mb-12">AI for Business & Web Design</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Card className="p-8 hover:shadow-medium transition-shadow">
               <div className="flex items-start gap-4">
                 <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
                   <Phone className="w-8 h-8 text-accent" />
@@ -99,11 +96,11 @@ const Business = () => {
       </section>
 
       {/* Package Pricing */}
-      <section className="py-4 bg-muted">
+      <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
-          <h2 className="text-center mb-6">Package Pricing</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <Card className="p-4">
+          <h2 className="text-center mb-12">Package Pricing</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <Card className="p-8">
               <h3 className="text-2xl font-bold mb-4">Receptionist / Intake Agent</h3>
               <p className="text-muted-foreground mb-6">Answer calls/chats, route inquiries, book appointments</p>
               <p className="text-4xl font-bold text-accent mb-6">$5,000</p>
@@ -200,9 +197,9 @@ const Business = () => {
       </section>
 
       {/* Web Design Services */}
-      <section className="py-4 bg-background">
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-6">
+          <div className="text-center mb-12">
             <div className="inline-block px-6 py-2 bg-primary/10 rounded-full text-sm font-bold text-primary mb-4 uppercase tracking-wider">
               Web Design
             </div>
@@ -212,7 +209,7 @@ const Business = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
             {/* Landing Page */}
             <Card className="p-8 rounded-2xl hover:shadow-medium transition-all hover:-translate-y-1">
               <h3 className="text-2xl font-bold mb-4">Landing Page</h3>
@@ -251,8 +248,8 @@ const Business = () => {
 
             {/* Business Website - Featured */}
             <Card className="p-8 border-2 border-primary relative rounded-2xl shadow-[0_8px_30px_rgba(139,92,246,0.15)] hover:shadow-[0_12px_40px_rgba(139,92,246,0.2)] transition-all">
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-primary-foreground px-8 py-3 rounded-full text-lg font-extrabold shadow-[0_8px_20px_rgba(139,92,246,0.5)] ring-4 ring-primary/20 scale-110">
-                MOST AFFORDABLE
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-primary-foreground px-4 py-1 rounded-full text-sm font-bold shadow-[0_4px_12px_rgba(139,92,246,0.3)]">
+                MOST POPULAR
               </div>
               <h3 className="text-2xl font-bold mb-4">Business Website</h3>
               <p className="text-muted-foreground mb-6">5-10 page professional website with custom features</p>
@@ -375,7 +372,7 @@ const Business = () => {
       </section>
 
       {/* AI Services Insurance */}
-      <section className="py-10 bg-background">
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <div className="inline-block px-6 py-2 bg-primary/10 rounded-full text-sm font-bold text-primary mb-4 uppercase tracking-wider">
@@ -550,7 +547,7 @@ const Business = () => {
       </section>
 
       {/* Why InVision */}
-      <section className="py-10 bg-muted">
+      <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-12">Why InVision for Your AI</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
@@ -596,17 +593,19 @@ const Business = () => {
               </div>
             </div>
 
-            <div className="flex items-center justify-center">
-              <div className="w-full max-w-2xl h-[400px]">
-                <BusinessImageCarousel />
-              </div>
+            <div className="flex items-center">
+              <img
+                src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop"
+                alt="Business professional reviewing AI dashboard"
+                className="rounded-lg shadow-large"
+              />
             </div>
           </div>
         </div>
       </section>
 
       {/* Pre-Purchase Consulting */}
-      <section className="py-10 bg-muted">
+      <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <Card className="p-8 bg-gradient-to-br from-accent/10 to-accent/5">
@@ -644,7 +643,7 @@ const Business = () => {
       </section>
 
       {/* AI Security Audit */}
-      <section className="py-10 bg-background">
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <Card className="p-8 bg-gradient-to-br from-amber-100 to-amber-50 dark:from-amber-950 dark:to-amber-900">
@@ -681,7 +680,7 @@ const Business = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-10 bg-muted">
+      <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-12">Business Testimonials</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -689,13 +688,13 @@ const Business = () => {
               name="Marcus Williams"
               location="Williams HVAC, Dayton"
               quote="InVision built our AI receptionist in 3 weeks. It handles 80% of our inbound calls now. ROI paid for itself in 4 months. Highly recommend."
-              image={testimonial8}
+              image={testimonial3}
             />
             <TestimonialCard
               name="Dr. Sarah Chen"
               location="Family Medicine, Cincinnati"
               quote="Their pre-purchase consulting saved us from buying a $12,000 'AI medical scribe' that would have violated HIPAA. They found a compliant alternative for $3,000."
-              image={testimonial9}
+              image={testimonial4}
             />
           </div>
         </div>
@@ -708,8 +707,6 @@ const Business = () => {
         </Button>
         <p className="text-accent-foreground text-sm mt-4">15-minute call to discuss your needs—no sales pressure.</p>
       </CTASection>
-
-      <AIPartnersCarousel />
 
       <Footer />
     </div>
