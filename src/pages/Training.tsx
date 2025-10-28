@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -18,34 +19,38 @@ import testimonial12 from "@/assets/testimonial-12.jpg";
 import testimonial13 from "@/assets/testimonial-13.jpg";
 
 const Training = () => {
+  useEffect(() => {
+    document.title = "ScamShield Training - Expert AI Scam Defense + 24/7 Protection | InVision Network";
+  }, []);
+
   return (
     <div className="min-h-screen">
       <Navigation />
 
       <Hero
         useRouteBasedImages={true}
-        headline="Learn & Train + ScamShield Protection"
-        subheadline="Expert training classes + 24/7 scam monitoring. Master AI defense skills and get round-the-clock protection for Ohio families. Available in English, Français, and Español."
+        headline="ScamShield Training"
+        subheadline="Master AI scam defense with expert classes + get 24/7 protection monitoring. Complete training and round-the-clock security for Ohio families. Available in English, Français, and Español."
         showScrollIndicator={true}
       >
         <div className="flex flex-col sm:flex-row gap-4">
           <Button asChild variant="gold" size="xl">
-            <Link to="/contact">BOOK TRAINING NOW</Link>
+            <Link to="/contact">BOOK TRAINING</Link>
           </Button>
           <Button asChild variant="teal" size="xl">
-            <Link to="/contact">GET SCAMSHIELD</Link>
+            <Link to="/contact">GET 24/7 PROTECTION</Link>
           </Button>
         </div>
       </Hero>
 
       <TrustBar />
 
-      {/* ScamShield 24/7 Protection Features */}
+      {/* 24/7 Protection Features */}
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
-          <h2 className="text-center mb-4">ScamShield 24/7 Protection</h2>
+          <h2 className="text-center mb-4">24/7 Protection Monitoring</h2>
           <p className="text-center text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
-            Round-the-clock security monitoring and expert support for Ohio families
+            Round-the-clock security monitoring and expert support included with your training
           </p>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">

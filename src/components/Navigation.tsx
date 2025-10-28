@@ -25,8 +25,7 @@ const Navigation = () => {
   };
 
   const mainLinks = [
-    { name: "Learn & Train", href: "/training" },
-    { name: "ScamShield", href: "/scamshield" },
+    { name: "ScamShield Training", href: "/training" },
     { name: "AI for Business", href: "/business" },
     { name: "Resources", href: "/resources" },
     { name: "About", href: "/about" },
