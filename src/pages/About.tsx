@@ -92,17 +92,82 @@ const About = () => {
         <FlowingWaves variant="full" opacity={0.12} />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-center mb-6">Our Story</h2>
+            <h2 className="text-center mb-6">The Story Behind InVision Network</h2>
             <div className="space-y-6 text-lg leading-relaxed text-muted-foreground">
-              <p>
-                InVision Network was born from a close call. When our founder's mother nearly wired $10,000 to a scammer using a
-                deepfake "grandson voice," we realized seniors weren't falling for old scams—they were being targeted by artificial
-                intelligence so sophisticated it could mimic family members perfectly.
+              <p className="text-xl font-semibold text-foreground">
+                It started with a phone call that nearly cost a family $10,000—and changed everything.
               </p>
+              
               <p>
-                The resources available? Either too technical, too condescending, or just generic "be careful" warnings. No real tools.
-                No step-by-step scripts. No one treating seniors like the intelligent adults they are. So we created InVision Network:
-                respectful education, actionable tools, and ongoing support—without the tech jargon.
+                On a quiet Tuesday morning in 2022, our founder Ruben Mukala's 78-year-old mother received a frantic call from her "grandson." The voice was unmistakable—the same inflections, the same laugh, even the childhood nickname only family knew. He claimed he'd been in a car accident in Canada, was in jail, and desperately needed $10,000 for bail. The lawyers couldn't accept credit cards. It had to be a wire transfer. Today. Right now.
+              </p>
+              
+              <p>
+                She was moments away from walking into Western Union when her actual grandson called from his office downtown. The scammer had used AI voice-cloning technology, training it on just 30 seconds of audio from social media videos. The voice was so perfect that even Ruben himself, when he listened to the recording later, couldn't immediately tell it was fake.
+              </p>
+              
+              <p className="text-xl font-semibold text-foreground">
+                This wasn't an isolated incident. It was a preview of what was coming.
+              </p>
+              
+              <p>
+                Ruben spent the next six months researching the explosion of AI-powered scams targeting seniors and small businesses. What he found was alarming: deepfake technology that once cost millions and required Hollywood-level expertise was now available for $20/month. Voice cloning that could fool family members. Video manipulation so sophisticated that grandparents couldn't tell if they were actually on a video call with their grandchild or a computer-generated fake.
+              </p>
+              
+              <p>
+                But when he looked for resources to help protect his mother and others like her, he found only three options: generic "be careful online" articles written for tech-savvy millennials, condescending "seniors are vulnerable" programs that treated elderly adults like children, or overly technical cybersecurity courses that required a computer science degree to understand.
+              </p>
+              
+              <p className="text-xl font-semibold text-foreground">
+                There was nothing built FOR seniors, BY people who respected their intelligence and lived experience.
+              </p>
+              
+              <p>
+                InVision Network was born from that gap. Ruben assembled a team of cybersecurity experts, adult educators, and community advocates who shared a common belief: seniors aren't falling for scams because they're "not tech-savvy"—they're being targeted by billion-dollar criminal organizations using AI technology that didn't exist three years ago.
+              </p>
+              
+              <p>
+                Our first pilot program trained 30 families in Dayton, Ohio. We taught them the "60-Second Pause Protocol"—a simple framework for spotting AI-generated scams before sending money. We showed them how to identify deepfake voices, how to verify urgent requests, and how to establish family safe-words for real emergencies.
+              </p>
+              
+              <p className="text-xl font-semibold text-foreground">
+                Within three months, those families prevented over $150,000 in attempted fraud.
+              </p>
+              
+              <p>
+                One participant, a 72-year-old retired teacher named Margaret, used what she learned to stop a QR code scam at her local grocery store. She noticed that the QR codes on donation canisters looked like stickers placed over the original codes. She called the store manager, who discovered the fraudulent codes were draining donations meant for a children's cancer charity to a scammer's personal Venmo account.
+              </p>
+              
+              <p>
+                Another graduate, 81-year-old Robert, received a fake text from his "bank" asking him to verify his account by clicking a link. He recognized the urgency language we'd taught him to watch for, called his bank using the official number on his card, and learned it was a phishing attempt. The bank estimated he would have lost access to $45,000 in savings.
+              </p>
+              
+              <p className="text-xl font-semibold text-foreground">
+                Today, we've trained over 500 families and prevented more than $2 million in fraud attempts.
+              </p>
+              
+              <p>
+                But we're not stopping there. For every 10 paid training sessions, we sponsor 1 FREE seat for a senior in need through partnerships with senior centers, churches, and veterans organizations. We've provided 50+ free sessions for veterans and 30+ scholarships for cancer patients and their caregivers.
+              </p>
+              
+              <p>
+                We've also expanded into business AI consulting because we saw small business owners making the same mistakes with AI automation: buying expensive tools without understanding the security implications, implementing "solutions" that leaked customer data, and falling for slick sales pitches from vendors who disappeared when problems arose.
+              </p>
+              
+              <p className="text-xl font-semibold text-foreground">
+                Our mission is simple: Empower 100,000 families with the knowledge and confidence to outsmart AI scammers—and help businesses use AI safely and effectively.
+              </p>
+              
+              <p>
+                Every member of our team has been personally affected by fraud. We're not just teaching this because it's our job—we're teaching it because we wish someone had taught us before our families became targets. We know what it feels like to get that call, to feel that panic, to wonder if you can trust your own eyes and ears anymore.
+              </p>
+              
+              <p>
+                That's why we do this work with respect, not condescension. That's why we teach actionable skills, not vague warnings. That's why we never ask for passwords, never use scare tactics, and never talk down to our clients. Because the people we serve deserve better than fear-mongering and generic advice.
+              </p>
+              
+              <p className="text-xl font-semibold text-foreground">
+                They deserve protection. They deserve confidence. They deserve InVision Network.
               </p>
             </div>
           </div>

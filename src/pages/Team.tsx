@@ -260,8 +260,9 @@ const Team = () => {
         />
 
         {/* Team Grid */}
-        <section className="pb-8 px-4">
+        <section className="pb-4 px-4">
           <div className="container mx-auto">
+            <h2 className="text-center mb-8">Our Team of Experts</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
               {teamMembers.map((member, index) => (
                 <article 
@@ -333,7 +334,6 @@ const Team = () => {
                   Make a real difference protecting vulnerable populations from digital fraud
                 </p>
               </Card>
-
               <Card className="p-6 text-center hover:shadow-lg transition-all duration-300">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Users className="w-8 h-8 text-primary" />
@@ -343,7 +343,6 @@ const Team = () => {
                   Work with passionate professionals dedicated to digital safety education
                 </p>
               </Card>
-
               <Card className="p-6 text-center hover:shadow-lg transition-all duration-300">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <TrendingUp className="w-8 h-8 text-primary" />
@@ -353,7 +352,6 @@ const Team = () => {
                   Expand your skills in AI safety, cybersecurity, and education
                 </p>
               </Card>
-
               <Card className="p-6 text-center hover:shadow-lg transition-all duration-300">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Briefcase className="w-8 h-8 text-primary" />
@@ -370,7 +368,10 @@ const Team = () => {
         {/* Open Positions */}
         <section className="py-6 bg-background">
           <div className="container mx-auto px-4">
-            <h2 className="text-center mb-6">Open Positions</h2>
+            <h2 className="text-center mb-6">Current Opportunities</h2>
+            <p className="text-center text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Explore our current openings and find the role that matches your passion for protecting families
+            </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-5xl mx-auto">
               {openPositions.map((position, index) => (
                 <Card key={index} className="p-6 hover:shadow-lg transition-all duration-300">
@@ -529,6 +530,8 @@ const Team = () => {
             </div>
           </div>
         </section>
+
+        {/* Member Bio Dialog */}
 
       <AIPartnersCarousel />
 

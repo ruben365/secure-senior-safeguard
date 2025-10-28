@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import FlowingWaves from "@/components/FlowingWaves";
 import AIPartnersCarousel from "@/components/AIPartnersCarousel";
 import ExpandableArticle from "@/components/ExpandableArticle";
+import TrendingScamsSection from "@/components/TrendingScamsSection";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -457,6 +458,9 @@ Remember: Taking action quickly is your best defense. Don't let embarrassment st
           </div>
         </div>
       </section>
+
+      {/* Trending Scam News */}
+      <TrendingScamsSection />
 
       {/* FAQ */}
       <section className="py-4 bg-muted" id="faq">

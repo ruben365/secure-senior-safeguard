@@ -488,7 +488,7 @@ const Index = () => {
                     age="68"
                     location="Columbus, OH"
                     quote="I almost fell for a deepfake 'grandson in jail' call. Thanks to the 60-Second Pause Protocol, I stopped, verified, and realized it was a scam. This training saved me $8,000!"
-                    image="/assets/testimonial-1.jpg"
+                    image="/src/assets/testimonial-profile-1.jpg"
                   />
                 </div>
               </ErrorBoundary>
@@ -500,7 +500,7 @@ const Index = () => {
                     age="72 & 70"
                     location="Dayton, OH"
                     quote="My husband and I took the Flexible Zoom class. The instructor was patient, clear, and funny. We feel 100% safer online now. Worth every penny."
-                    image="/assets/testimonial-2.jpg"
+                    image="/src/assets/testimonial-profile-2.jpg"
                   />
                 </div>
               </ErrorBoundary>
@@ -511,7 +511,7 @@ const Index = () => {
                     name="James Patterson"
                     location="Cincinnati"
                     quote="As a small business owner, the pre-purchase consulting saved me from a $7,000 mistake on an AI chatbot. They recommended a better solution at half the cost."
-                    image="/assets/testimonial-3.jpg"
+                    image="/src/assets/testimonial-profile-3.jpg"
                   />
                 </div>
               </ErrorBoundary>
@@ -523,7 +523,7 @@ const Index = () => {
                     age="65"
                     location="Toledo, OH"
                     quote="The Scam Shield service caught a phishing email that looked exactly like my bank. I would have clicked it without thinking. Now I forward anything suspicious before taking action."
-                    image="/assets/testimonial-5.jpg"
+                    image="/src/assets/testimonial-profile-4.jpg"
                   />
                 </div>
               </ErrorBoundary>
@@ -535,7 +535,7 @@ const Index = () => {
                     age="78"
                     location="Akron, OH"
                     quote="I'm not tech-savvy, but the in-person training made everything click. They taught me how to spot AI voice clones and fake videos. My daughter finally stopped worrying about me!"
-                    image="/assets/testimonial-6.jpg"
+                    image="/src/assets/testimonial-profile-5.jpg"
                   />
                 </div>
               </ErrorBoundary>
@@ -547,7 +547,7 @@ const Index = () => {
                     age="58"
                     location="Cleveland, OH"
                     quote="After my mother nearly lost $15,000 to a scammer, I signed our whole family up for training. It's been a lifesaver. Everyone knows the 60-Second Pause Protocol now."
-                    image="/assets/testimonial-7.jpg"
+                    image="/src/assets/testimonial-profile-6.jpg"
                   />
                 </div>
               </ErrorBoundary>
