@@ -15,6 +15,31 @@ import heroBusiness5 from "@/assets/hero-about-updated.jpg";
 import heroBusiness6 from "@/assets/hero-team-updated.jpg";
 import heroBusiness7 from "@/assets/hero-business-updated.jpg";
 
+// New enhanced business images
+import heroBusinessAI1 from "@/assets/hero-business-ai-1.jpg";
+import heroBusinessAI2 from "@/assets/hero-business-ai-2.jpg";
+import heroBusinessAI3 from "@/assets/hero-business-ai-3.jpg";
+
+// New training images
+import heroTrainingClass1 from "@/assets/hero-training-class-1.jpg";
+import heroTrainingClass2 from "@/assets/hero-training-class-2.jpg";
+import heroTrainingClass3 from "@/assets/hero-training-class-3.jpg";
+
+// New team images
+import heroTeamProfessionals1 from "@/assets/hero-team-professionals-1.jpg";
+import heroTeamProfessionals2 from "@/assets/hero-team-professionals-2.jpg";
+import heroTeamProfessionals3 from "@/assets/hero-team-professionals-3.jpg";
+
+// New resources images
+import heroResourcesLibrary1 from "@/assets/hero-resources-library-1.jpg";
+import heroResourcesLibrary2 from "@/assets/hero-resources-library-2.jpg";
+import heroResourcesLibrary3 from "@/assets/hero-resources-library-3.jpg";
+
+// New about images
+import heroAboutCompany1 from "@/assets/hero-about-company-1.jpg";
+import heroAboutCompany2 from "@/assets/hero-about-company-2.jpg";
+import heroAboutCompany3 from "@/assets/hero-about-company-3.jpg";
+
 export interface HeroImage {
   type: string;
   url: string;
@@ -72,6 +97,24 @@ const heroImages: HeroImage[] = [
     subheadline: "Your trusted partner in digital safety and AI empowerment",
   },
   {
+    type: 'about',
+    url: heroAboutCompany1,
+    headline: "Our Mission & Values",
+    subheadline: "Building a safer digital future for families and businesses",
+  },
+  {
+    type: 'about',
+    url: heroAboutCompany2,
+    headline: "Community-Focused Protection",
+    subheadline: "Empowering families with knowledge and support",
+  },
+  {
+    type: 'about',
+    url: heroAboutCompany3,
+    headline: "Professional Excellence",
+    subheadline: "Dedicated to your digital safety and peace of mind",
+  },
+  {
     type: 'scamshield',
     url: heroScamShield,
     headline: "Scam Shield Protection",
@@ -84,16 +127,70 @@ const heroImages: HeroImage[] = [
     subheadline: "Transform your business with custom AI implementation",
   },
   {
+    type: 'business',
+    url: heroBusinessAI1,
+    headline: "Smart AI for Modern Business",
+    subheadline: "Collaborative AI solutions that enhance your team's productivity",
+  },
+  {
+    type: 'business',
+    url: heroBusinessAI2,
+    headline: "24/7 AI Customer Support",
+    subheadline: "Never miss a customer inquiry with intelligent automation",
+  },
+  {
+    type: 'business',
+    url: heroBusinessAI3,
+    headline: "Business AI Integration",
+    subheadline: "Seamless AI implementation for growing companies",
+  },
+  {
     type: 'training',
     url: heroTraining,
     headline: "Professional Training Programs",
     subheadline: "Live, interactive sessions to protect yourself from digital threats",
   },
   {
+    type: 'training',
+    url: heroTrainingClass1,
+    headline: "Engaging Cybersecurity Training",
+    subheadline: "Learn from expert instructors in welcoming classroom environments",
+  },
+  {
+    type: 'training',
+    url: heroTrainingClass2,
+    headline: "Technology Training for All Ages",
+    subheadline: "Comfortable learning environments designed for seniors and families",
+  },
+  {
+    type: 'training',
+    url: heroTrainingClass3,
+    headline: "Interactive Online Sessions",
+    subheadline: "Join our virtual training from the comfort of your home",
+  },
+  {
     type: 'resources',
     url: heroResources,
     headline: "Expert Resources",
     subheadline: "Free guides and tools to enhance your digital safety",
+  },
+  {
+    type: 'resources',
+    url: heroResourcesLibrary1,
+    headline: "Digital Security Library",
+    subheadline: "Comprehensive guides and resources at your fingertips",
+  },
+  {
+    type: 'resources',
+    url: heroResourcesLibrary2,
+    headline: "Professional Resources",
+    subheadline: "Organized materials and documentation for your security needs",
+  },
+  {
+    type: 'resources',
+    url: heroResourcesLibrary3,
+    headline: "Modern Information Center",
+    subheadline: "Access cutting-edge security information and tips",
   },
   {
     type: 'contact',
@@ -106,6 +203,24 @@ const heroImages: HeroImage[] = [
     url: heroTeam,
     headline: "Meet Our Team",
     subheadline: "Dedicated professionals committed to your digital safety",
+  },
+  {
+    type: 'team',
+    url: heroTeamProfessionals1,
+    headline: "Expert Security Professionals",
+    subheadline: "Collaborative team dedicated to protecting families",
+  },
+  {
+    type: 'team',
+    url: heroTeamProfessionals2,
+    headline: "Passionate About Your Safety",
+    subheadline: "Friendly experts working together for your peace of mind",
+  },
+  {
+    type: 'team',
+    url: heroTeamProfessionals3,
+    headline: "Join Our Growing Team",
+    subheadline: "Building careers in digital safety and protection",
   },
   {
     type: 'careers',
