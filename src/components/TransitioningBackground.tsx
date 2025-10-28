@@ -28,19 +28,20 @@ const TransitioningBackground = ({ images = defaultImages, interval = 10000, cla
     const timer = setInterval(() => {
       setIsTransitioning(true);
       
+      // Wait for fade transition to complete before updating indices
       setTimeout(() => {
         setCurrentIndex(nextIndex);
         setNextIndex((nextIndex + 1) % images.length);
         setIsTransitioning(false);
-      }, 1500); // Smooth 1.5-second fade transition
+      }, 800); // Match the CSS transition duration
     }, interval);
 
     return () => clearInterval(timer);
-  }, [interval, nextIndex]);
+  }, [interval, nextIndex, images.length]);
 
   return (
     <div className={`absolute inset-0 overflow-hidden ${className}`}>
-      {/* Current Image */}
+      {/* Current Image - fades out during transition */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
@@ -48,14 +49,15 @@ const TransitioningBackground = ({ images = defaultImages, interval = 10000, cla
           opacity: isTransitioning ? 0 : opacity,
           transform: 'scale(1.05)',
           filter: 'brightness(1.15) contrast(1.1) saturate(1.2)',
-          transition: 'opacity 1500ms cubic-bezier(0.4, 0, 0.2, 1)',
+          transition: 'opacity 0.8s ease-in-out',
           willChange: 'opacity',
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
+          zIndex: 1,
         }}
       />
       
-      {/* Next Image (for smooth transition) */}
+      {/* Next Image - fades in during transition */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
@@ -63,16 +65,17 @@ const TransitioningBackground = ({ images = defaultImages, interval = 10000, cla
           opacity: isTransitioning ? opacity : 0,
           transform: 'scale(1.05)',
           filter: 'brightness(1.15) contrast(1.1) saturate(1.2)',
-          transition: 'opacity 1500ms cubic-bezier(0.4, 0, 0.2, 1)',
+          transition: 'opacity 0.8s ease-in-out',
           willChange: 'opacity',
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
+          zIndex: 2,
         }}
       />
       
       {/* Enhanced Multi-layer Overlay for depth and readability */}
-      <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/80 to-background/70" style={{ opacity }} />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/20" style={{ opacity }} />
+      <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/80 to-background/70" style={{ opacity, zIndex: 3 }} />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/20" style={{ opacity, zIndex: 3 }} />
     </div>
   );
 };
