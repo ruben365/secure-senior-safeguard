@@ -128,9 +128,9 @@ export default {
         "shimmer": "shimmer 2s infinite linear",
       },
       backgroundImage: {
-        "gradient-hero-primary": "linear-gradient(135deg, hsl(260 70% 25%) 0%, hsl(260 65% 35%) 50%, hsl(174 80% 40%) 100%)",
-        "gradient-hero-teal": "linear-gradient(135deg, hsl(180 80% 40%) 0%, hsl(180 75% 45%) 50%, hsl(180 70% 55%) 100%)",
-        "gradient-hero-cyan": "linear-gradient(135deg, hsl(190 85% 45%) 0%, hsl(190 80% 50%) 50%, hsl(190 75% 60%) 100%)",
+        "gradient-hero-primary": "linear-gradient(135deg, hsl(260 70% 25%) 0%, hsl(260 65% 35%) 50%, hsl(260 50% 60%) 100%)",
+        "gradient-hero-teal": "linear-gradient(135deg, hsl(260 55% 45%) 0%, hsl(260 50% 50%) 50%, hsl(260 45% 60%) 100%)",
+        "gradient-hero-cyan": "linear-gradient(135deg, hsl(260 60% 40%) 0%, hsl(260 55% 45%) 50%, hsl(260 50% 55%) 100%)",
         "gradient-card": "linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(260 20% 96%) 100%)",
         "gradient-mesh": "linear-gradient(135deg, hsl(260 20% 96%) 0%, hsl(0 0% 100%) 100%)",
       },
