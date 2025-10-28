@@ -648,7 +648,7 @@ const Business = () => {
                     ))}
                   </ul>
                   <p className="text-2xl font-bold mb-6">
-                    $500 <span className="text-lg font-normal text-muted-foreground">for full vetting report</span>
+                    $1,799 <span className="text-lg font-normal text-muted-foreground">for full vetting report</span>
                   </p>
                   <p className="text-sm text-muted-foreground mb-6">(Saves you thousands on bad purchases)</p>
                   <Button asChild variant="default">
@@ -685,7 +685,7 @@ const Business = () => {
                     ))}
                   </ul>
                   <p className="text-2xl font-bold mb-4">
-                    Starting at <span className="text-accent">$2,500</span>
+                    Starting at <span className="text-accent">$3,499</span>
                   </p>
                   <p className="text-sm text-muted-foreground mb-6">Deliverable: Security report + implementation roadmap</p>
                   <Button asChild variant="default">
