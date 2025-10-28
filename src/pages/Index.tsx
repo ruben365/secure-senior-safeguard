@@ -132,15 +132,16 @@ const Index = () => {
       <main id="main-content" tabIndex={-1}>
         {/* Hero Section with improved accessibility */}
         <HeroHome>
-          <div className="flex justify-center">
+          <div className="flex justify-center gap-4">
             <Button
               asChild
-              variant="gold"
+              variant="neon"
               size="xl"
-              className="text-lg font-bold min-h-[60px] px-12 shadow-glow-gold"
+              className="text-lg font-bold min-h-[60px] px-12 group"
             >
-              <Link to="/training" aria-label="Start Your ScamShield Training">
-                START YOUR TRAINING
+              <Link to="/training" aria-label="Start Scam Shield Protection" className="flex items-center gap-2">
+                Start Scam Shield
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
               </Link>
             </Button>
           </div>

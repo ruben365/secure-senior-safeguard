@@ -19,6 +19,7 @@ const buttonVariants = cva(
         secondary: "bg-muted text-foreground hover:bg-muted/80 hover:shadow-soft hover:-translate-y-0.5 hover:scale-[1.02] transition-all duration-300 ease-out",
         ghost: "hover:bg-primary/10 hover:text-primary relative after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary after:to-accent after:-translate-x-1/2 after:transition-all after:duration-300 after:ease-out hover:after:w-3/4 hover:scale-[1.02]",
         link: "text-primary underline-offset-4 hover:underline hover:scale-[1.02] transition-all duration-200 ease-out",
+        neon: "border-2 border-primary bg-transparent text-primary font-bold hover:bg-primary hover:text-primary-foreground hover:-translate-y-1 hover:scale-[1.03] shadow-[0_0_20px_hsl(var(--primary)/0.5),0_0_40px_hsl(var(--primary)/0.3)] hover:shadow-[0_0_30px_hsl(var(--primary)/0.8),0_0_60px_hsl(var(--primary)/0.5)] before:absolute before:inset-0 before:bg-gradient-to-r before:from-primary before:to-accent before:-z-10 before:translate-x-[-100%] hover:before:translate-x-0 before:transition-transform before:duration-500 before:ease-out",
       },
       size: {
         default: "h-12 px-6 py-3 text-base",
