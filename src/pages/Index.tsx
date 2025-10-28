@@ -50,16 +50,6 @@ const Index = () => {
               Learn to Spot Scams
             </Link>
           </Button>
-          <Button asChild variant="secondary" size="xl" className="w-full sm:w-auto">
-            <Link to="/scam-shield" aria-label="Get ScamShield protection">
-              Get ScamShield Protection
-            </Link>
-          </Button>
-          <Button asChild variant="outline" size="xl" className="w-full sm:w-auto">
-            <Link to="/ai-business" aria-label="AI for business solutions">
-              AI for Business
-            </Link>
-          </Button>
         </div>
       </Hero>
 
