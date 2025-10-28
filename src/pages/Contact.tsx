@@ -69,16 +69,12 @@ const Contact = () => {
                       <SelectValue placeholder="Select an option" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="training">AI Security Training for My Family</SelectItem>
-                      <SelectItem value="scam-shield">Family Scam Shield Membership</SelectItem>
-                      <SelectItem value="business">Business AI Consulting / Agent Development</SelectItem>
-                      <SelectItem value="vetting">Pre-Purchase AI Vetting</SelectItem>
-                      <SelectItem value="insurance">AI Services Insurance</SelectItem>
-                      <SelectItem value="in-person">In-Person Training Quote</SelectItem>
-                      <SelectItem value="bulk">Bulk/Group Training (10+ people)</SelectItem>
-                      <SelectItem value="partnership">Partnership Opportunity</SelectItem>
-                      <SelectItem value="press">Press/Media Inquiry</SelectItem>
-                      <SelectItem value="general">General Question</SelectItem>
+                      <SelectItem value="training">ScamShield Protection</SelectItem>
+                      <SelectItem value="scam-shield">Training Program</SelectItem>
+                      <SelectItem value="business">AI Agent Development</SelectItem>
+                      <SelectItem value="website">Website Design</SelectItem>
+                      <SelectItem value="insurance">AI Insurance</SelectItem>
+                      <SelectItem value="general">General Inquiry</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -134,8 +130,8 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="text-xl font-bold mb-2">Phone</h3>
-                      <a href="tel:9375551234" className="text-accent hover:text-accent/80 text-lg font-semibold block mb-2">
-                        (937) 555-1234
+                      <a href="tel:9375550199" className="text-accent hover:text-accent/80 text-lg font-semibold block mb-2">
+                        (937) 555-0199
                       </a>
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Clock className="w-4 h-4" />
@@ -194,11 +190,9 @@ const Contact = () => {
                     <div>
                       <h3 className="text-xl font-bold mb-2">Office</h3>
                       <p className="text-muted-foreground">
-                        InVision Network
+                        Dayton, Ohio 45402
                         <br />
-                        123 Main Street
-                        <br />
-                        Dayton, OH 45402
+                        Serving Ohio & Nationwide
                       </p>
                     </div>
                   </div>

@@ -15,8 +15,8 @@ const About = () => {
 
       <Hero
         backgroundImage={heroImage}
-        headline="Founded by Families, For Families"
-        subheadline="After watching loved ones nearly lose thousands to AI-powered scams, we built InVision Network—the protection system we wish existed."
+        headline="Protecting Families & Businesses in the AI Age"
+        subheadline="Based in Ohio, serving nationwide"
       />
 
       {/* Our Story */}
@@ -24,17 +24,10 @@ const About = () => {
         <FlowingWaves variant="full" opacity={0.12} />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-center mb-12">Our Story</h2>
+            <h2 className="text-center mb-12">Born from a Personal Experience</h2>
             <div className="space-y-6 text-lg leading-relaxed text-muted-foreground">
               <p>
-                InVision Network was born from a close call. When our founder's mother nearly wired $10,000 to a scammer using a
-                deepfake "grandson voice," we realized seniors weren't falling for old scams—they were being targeted by artificial
-                intelligence so sophisticated it could mimic family members perfectly.
-              </p>
-              <p>
-                The resources available? Either too technical, too condescending, or just generic "be careful" warnings. No real tools.
-                No step-by-step scripts. No one treating seniors like the intelligent adults they are. So we created InVision Network:
-                respectful education, actionable tools, and ongoing support—without the tech jargon.
+                InVision Network was founded when our founder witnessed his own grandmother nearly fall victim to an AI voice-cloning scam. The sophistication of these new AI-powered threats made it clear that traditional fraud prevention wasn't enough. We set out to create comprehensive protection that combines expert training, real-time threat analysis, and innovative AI business solutions - all with a security-first mindset.
               </p>
             </div>
           </div>
@@ -46,8 +39,7 @@ const About = () => {
         <div className="container mx-auto px-4">
           <Card className="max-w-4xl mx-auto p-12 bg-gradient-to-br from-primary/5 to-accent/5 border-2 border-primary/10 shadow-medium">
             <blockquote className="text-2xl md:text-3xl font-bold text-center leading-relaxed text-foreground">
-              "To empower 100,000 families with the knowledge and confidence to outsmart AI scammers—and help businesses use AI safely
-              and effectively."
+              "Empowering families and businesses to safely navigate the AI age through education, protection, and innovation."
             </blockquote>
           </Card>
         </div>
@@ -106,9 +98,9 @@ const About = () => {
                   <Users2 className="w-8 h-8 text-primary" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold mb-3">Community First</h3>
+  <h3 className="text-2xl font-bold mb-3">INTEGRITY</h3>
                   <p className="text-muted-foreground">
-                    20% of profits go to free training for veterans, cancer patients, and underserved communities.
+                    Transparent, honest, ethical
                   </p>
                 </div>
               </div>
@@ -163,12 +155,6 @@ const About = () => {
             </Card>
           </div>
 
-          <div className="max-w-3xl mx-auto mt-12 text-center">
-            <p className="text-lg text-muted-foreground">
-              <strong>Our Mission:</strong> For every 10 training enrollments, we sponsor 1 FREE training seat for a senior in need
-              through partnerships with local senior centers and churches.
-            </p>
-          </div>
         </div>
       </section>
 
@@ -264,8 +250,8 @@ const About = () => {
               <Link to="/donate">DONATE A TRAINING SEAT</Link>
             </Button>
           </div>
-          <p className="mt-6 text-white/90 text-lg">
-            Questions? Call <a href="tel:9375551234" className="underline hover:text-white font-semibold">(937) 555-1234</a>
+            <p className="mt-6 text-white/90 text-lg">
+            Questions? Call <a href="tel:9375550199" className="underline hover:text-white font-semibold">(937) 555-0199</a>
           </p>
         </div>
       </section>
