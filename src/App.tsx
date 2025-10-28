@@ -12,6 +12,7 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
 import Portal from "./pages/Portal";
+import AdminDashboard from "./pages/admin/Dashboard";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
@@ -36,6 +37,14 @@ const App = () => (
             element={
               <ProtectedRoute>
                 <Portal />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/portal/admin" 
+            element={
+              <ProtectedRoute requiredRole="administrator">
+                <AdminDashboard />
               </ProtectedRoute>
             } 
           />

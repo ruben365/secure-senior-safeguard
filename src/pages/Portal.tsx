@@ -1,7 +1,7 @@
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
-import { useNavigate } from 'react-router-dom';
-import { LogOut, User, Calendar, MessageSquare, Bell, HelpCircle } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
+import { LogOut, User, Calendar, MessageSquare, Bell, HelpCircle, LayoutDashboard } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   DropdownMenu,
@@ -214,7 +214,12 @@ const Portal = () => {
                 As an administrator, you have full access to all portal features.
               </p>
               <div className="flex flex-wrap gap-2">
-                <Button variant="destructive">Manage Users</Button>
+                <Link to="/portal/admin">
+                  <Button variant="destructive">
+                    <LayoutDashboard className="mr-2 h-4 w-4" />
+                    Admin Dashboard
+                  </Button>
+                </Link>
                 <Button variant="outline">View Reports</Button>
                 <Button variant="outline">System Settings</Button>
               </div>
