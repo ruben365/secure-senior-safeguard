@@ -25,7 +25,7 @@ const TrustBar = () => {
           
           {/* Main content */}
           <div className="relative bg-gradient-to-r from-primary to-accent rounded-3xl py-6 px-4 sm:px-8 shadow-[0_12px_40px_rgba(139,92,246,0.4)] backdrop-blur-sm border border-accent/30 group-hover/trust:shadow-[0_20px_60px_rgba(139,92,246,0.6)] group-hover/trust:scale-[1.02] transition-all duration-500">
-            <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 md:gap-10">
+            <div className="flex justify-center items-center gap-3 sm:gap-4 md:gap-6 lg:gap-10 overflow-x-auto scrollbar-hide">
             {trustIndicators.map((item, index) => (
               <div key={index} className="flex items-center gap-2 sm:gap-3 group animate-fade-in-up" style={{ animationDelay: `${index * 100}ms` }} role="listitem">
                 <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white/30 backdrop-blur-sm flex items-center justify-center group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 group-hover:bg-white/40" aria-hidden="true">
