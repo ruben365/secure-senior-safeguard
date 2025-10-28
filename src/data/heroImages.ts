@@ -19,26 +19,36 @@ import heroBusiness7 from "@/assets/hero-business-updated.jpg";
 import heroBusinessAI1 from "@/assets/hero-business-ai-1.jpg";
 import heroBusinessAI2 from "@/assets/hero-business-ai-2.jpg";
 import heroBusinessAI3 from "@/assets/hero-business-ai-3.jpg";
+import heroBusinessAI4 from "@/assets/hero-business-ai-4.jpg";
+import heroBusinessAI5 from "@/assets/hero-business-ai-5.jpg";
 
 // New training images
 import heroTrainingClass1 from "@/assets/hero-training-class-1.jpg";
 import heroTrainingClass2 from "@/assets/hero-training-class-2.jpg";
 import heroTrainingClass3 from "@/assets/hero-training-class-3.jpg";
+import heroTrainingClass4 from "@/assets/hero-training-class-4.jpg";
+import heroTrainingClass5 from "@/assets/hero-training-class-5.jpg";
 
 // New team images
 import heroTeamProfessionals1 from "@/assets/hero-team-professionals-1.jpg";
 import heroTeamProfessionals2 from "@/assets/hero-team-professionals-2.jpg";
 import heroTeamProfessionals3 from "@/assets/hero-team-professionals-3.jpg";
+import heroTeamProfessionals4 from "@/assets/hero-team-professionals-4.jpg";
+import heroTeamProfessionals5 from "@/assets/hero-team-professionals-5.jpg";
 
 // New resources images
 import heroResourcesLibrary1 from "@/assets/hero-resources-library-1.jpg";
 import heroResourcesLibrary2 from "@/assets/hero-resources-library-2.jpg";
 import heroResourcesLibrary3 from "@/assets/hero-resources-library-3.jpg";
+import heroResourcesLibrary4 from "@/assets/hero-resources-library-4.jpg";
+import heroResourcesLibrary5 from "@/assets/hero-resources-library-5.jpg";
 
 // New about images
 import heroAboutCompany1 from "@/assets/hero-about-company-1.jpg";
 import heroAboutCompany2 from "@/assets/hero-about-company-2.jpg";
 import heroAboutCompany3 from "@/assets/hero-about-company-3.jpg";
+import heroAboutCompany4 from "@/assets/hero-about-company-4.jpg";
+import heroAboutCompany5 from "@/assets/hero-about-company-5.jpg";
 
 export interface HeroImage {
   type: string;
@@ -115,6 +125,18 @@ const heroImages: HeroImage[] = [
     subheadline: "Dedicated to your digital safety and peace of mind",
   },
   {
+    type: 'about',
+    url: heroAboutCompany4,
+    headline: "Our Vision for the Future",
+    subheadline: "State-of-the-art facilities supporting global security",
+  },
+  {
+    type: 'about',
+    url: heroAboutCompany5,
+    headline: "Culture of Excellence",
+    subheadline: "A team united by passion for protecting what matters most",
+  },
+  {
     type: 'scamshield',
     url: heroScamShield,
     headline: "Scam Shield Protection",
@@ -145,6 +167,18 @@ const heroImages: HeroImage[] = [
     subheadline: "Seamless AI implementation for growing companies",
   },
   {
+    type: 'business',
+    url: heroBusinessAI4,
+    headline: "Data-Driven Business Intelligence",
+    subheadline: "Make informed decisions with AI-powered analytics",
+  },
+  {
+    type: 'business',
+    url: heroBusinessAI5,
+    headline: "Collaborative AI Excellence",
+    subheadline: "Empower your team with cutting-edge AI tools",
+  },
+  {
     type: 'training',
     url: heroTraining,
     headline: "Professional Training Programs",
@@ -169,6 +203,18 @@ const heroImages: HeroImage[] = [
     subheadline: "Join our virtual training from the comfort of your home",
   },
   {
+    type: 'training',
+    url: heroTrainingClass4,
+    headline: "Professional Cybersecurity Education",
+    subheadline: "Industry-certified instructors teaching modern security practices",
+  },
+  {
+    type: 'training',
+    url: heroTrainingClass5,
+    headline: "Collaborative Learning Experience",
+    subheadline: "Engage with peers in dynamic, hands-on workshops",
+  },
+  {
     type: 'resources',
     url: heroResources,
     headline: "Expert Resources",
@@ -191,6 +237,18 @@ const heroImages: HeroImage[] = [
     url: heroResourcesLibrary3,
     headline: "Modern Information Center",
     subheadline: "Access cutting-edge security information and tips",
+  },
+  {
+    type: 'resources',
+    url: heroResourcesLibrary4,
+    headline: "Digital Learning Hub",
+    subheadline: "Explore our curated library of security resources",
+  },
+  {
+    type: 'resources',
+    url: heroResourcesLibrary5,
+    headline: "Expert-Curated Content",
+    subheadline: "Professional materials to keep you safe online",
   },
   {
     type: 'contact',
@@ -221,6 +279,18 @@ const heroImages: HeroImage[] = [
     url: heroTeamProfessionals3,
     headline: "Join Our Growing Team",
     subheadline: "Building careers in digital safety and protection",
+  },
+  {
+    type: 'team',
+    url: heroTeamProfessionals4,
+    headline: "Diverse Talent, Unified Mission",
+    subheadline: "A collaborative team working together for your security",
+  },
+  {
+    type: 'team',
+    url: heroTeamProfessionals5,
+    headline: "Mentorship & Career Growth",
+    subheadline: "Fostering excellence through continuous development",
   },
   {
     type: 'careers',
