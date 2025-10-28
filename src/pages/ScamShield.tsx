@@ -21,12 +21,17 @@ const ScamShield = () => {
 
       <Hero
         backgroundImage={heroImage}
-        headline="Not Sure If It's a Scam? Ask the Experts."
-        subheadline="Forward suspicious emails, texts, links, voice messages, and QR codes. Get a professional risk assessment before you act."
+        headline="Your Personal Cybersecurity Team - On Demand"
+        subheadline="Forward suspicious emails, texts, calls, or links. Get expert analysis within 24 hours."
       >
-        <Button asChild variant="default" size="xl">
-          <Link to="/contact">START SCAM SHIELD</Link>
-        </Button>
+        <div className="flex flex-col gap-3 items-start">
+          <div className="inline-block px-4 py-2 bg-accent/20 rounded-full text-sm font-bold text-accent-foreground backdrop-blur-sm border border-accent/30">
+            14-DAY FREE TRIAL • No Credit Card Required
+          </div>
+          <Button asChild variant="default" size="xl">
+            <Link to="/contact">START YOUR FREE TRIAL</Link>
+          </Button>
+        </div>
       </Hero>
 
       <TrustBar />
@@ -35,7 +40,7 @@ const ScamShield = () => {
       <section className="py-20 bg-background relative">
         <FlowingWaves variant="full" opacity={0.12} />
         <div className="container mx-auto px-4 relative z-10">
-          <h2 className="text-center mb-12">How Scam Shield Works</h2>
+          <h2 className="text-center mb-12">Simple Protection in 4 Steps</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <Card className="p-8 text-center hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50">
               <div className="flex justify-center mb-6">
@@ -43,9 +48,9 @@ const ScamShield = () => {
                   <Upload className="w-8 h-8 text-primary" />
                 </div>
               </div>
-              <h3 className="text-2xl font-bold mb-4">1. Forward Suspicious Item</h3>
+              <h3 className="text-2xl font-bold mb-4">1. You Receive Something Suspicious</h3>
               <p className="text-muted-foreground">
-                Email, text screenshot, link, audio file, QR code, image—anything that feels "off."
+                Strange text, urgent email, odd call, suspicious link
               </p>
             </Card>
 
@@ -55,9 +60,9 @@ const ScamShield = () => {
                   <UserCheck className="w-8 h-8 text-primary" />
                 </div>
               </div>
-              <h3 className="text-2xl font-bold mb-4">2. Expert Analysis</h3>
+              <h3 className="text-2xl font-bold mb-4">2. Forward It to Our Team</h3>
               <p className="text-muted-foreground">
-                Our AI security analysts review for red flags: fake domains, deepfake signatures, known scam patterns.
+                Email, text, upload screenshot, or call our hotline. Response time: 24 hours (Premium: 4 hours)
               </p>
             </Card>
 
@@ -67,9 +72,21 @@ const ScamShield = () => {
                   <Shield className="w-8 h-8 text-primary" />
                 </div>
               </div>
-              <h3 className="text-2xl font-bold mb-4">3. Get Clear Verdict</h3>
+              <h3 className="text-2xl font-bold mb-4">3. Expert Analysis</h3>
               <p className="text-muted-foreground">
-                Receive written risk assessment: "SAFE" / "SUSPICIOUS - Avoid" / "CONFIRMED SCAM - Report." Plus recommended next steps.
+                Our team examines: Message content, Sender verification, Link destination, Voice/audio analysis, AI-generated detection
+              </p>
+            </Card>
+
+            <Card className="p-8 text-center hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50">
+              <div className="flex justify-center mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center">
+                  <Shield className="w-8 h-8 text-primary" />
+                </div>
+              </div>
+              <h3 className="text-2xl font-bold mb-4">4. Get Clear Guidance</h3>
+              <p className="text-muted-foreground">
+                You receive: Risk level (Safe/Caution/Danger/CRITICAL), Detailed explanation, Recommended actions, Emergency scripts if needed
               </p>
             </Card>
           </div>
@@ -79,41 +96,42 @@ const ScamShield = () => {
       {/* Membership Plans */}
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
-          <h2 className="text-center mb-12">Membership Plans</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <h2 className="text-center mb-12">Choose Your Protection Level</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <Card className="p-8 rounded-2xl shadow-soft hover:shadow-medium transition-all hover:-translate-y-1 border-border/50">
-              <h3 className="text-2xl font-bold mb-4">Standard Plan</h3>
+              <h3 className="text-2xl font-bold mb-4">Starter Plan</h3>
               <p className="text-4xl font-bold gradient-text-primary mb-6">
-                $49<span className="text-lg text-muted-foreground">/month</span>
+                $39<span className="text-lg text-muted-foreground">/month</span>
               </p>
+              <p className="text-muted-foreground mb-6">Perfect for: Individuals</p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>Up to 10 submissions per month</span>
+                  <span>Unlimited threat submissions</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>≤ 48 hour response time</span>
+                  <span>24-hour expert analysis</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>Emails, texts, links, screenshots, QR codes</span>
+                  <span>Email & text support</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>Standard risk assessment</span>
+                  <span>Risk assessment reports</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>Email support only</span>
+                  <span>Monthly scam trend updates</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>Monthly security tips</span>
+                  <span>60-day money-back guarantee</span>
                 </li>
               </ul>
               <Button asChild variant="default" className="w-full">
-                <Link to="/contact">START STANDARD</Link>
+                <Link to="/contact">START FREE TRIAL</Link>
               </Button>
             </Card>
 
@@ -121,43 +139,81 @@ const ScamShield = () => {
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-accent to-[hsl(180,70%,55%)] text-accent-foreground px-4 py-1 rounded-full text-sm font-bold shadow-[0_4px_12px_rgba(20,184,166,0.3)]">
                 MOST POPULAR
               </div>
-              <h3 className="text-2xl font-bold mb-4">Premium Plan</h3>
+              <h3 className="text-2xl font-bold mb-4">Family Plan</h3>
               <p className="text-4xl font-bold gradient-text-primary mb-6">
-                $99<span className="text-lg text-muted-foreground">/month</span>
+                $79<span className="text-lg text-muted-foreground">/month</span>
               </p>
+              <p className="text-muted-foreground mb-6">Perfect for: Families & couples</p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>Up to 30 submissions per month</span>
+                  <span>Protect up to 5 family members</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>≤ 24 hour response time</span>
+                  <span>12-hour priority response</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>Everything + audio/voice notes, videos</span>
+                  <span>Phone support included</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>Detailed analysis + source tracking</span>
+                  <span>Family Safety Vault (secure storage)</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>Email + Phone support</span>
+                  <span>Shared safe-word system</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>Monthly tips + Quarterly threat briefing call</span>
+                  <span>Training discounts (20% off)</span>
                 </li>
               </ul>
               <Button asChild variant="default" className="w-full">
-                <Link to="/contact">START PREMIUM</Link>
+                <Link to="/contact">START FREE TRIAL</Link>
+              </Button>
+            </Card>
+
+            <Card className="p-8 rounded-2xl shadow-soft hover:shadow-medium transition-all hover:-translate-y-1 border-border/50">
+              <h3 className="text-2xl font-bold mb-4">Premium Plan</h3>
+              <p className="text-4xl font-bold gradient-text-primary mb-6">
+                $129<span className="text-lg text-muted-foreground">/month</span>
+              </p>
+              <p className="text-muted-foreground mb-6">Perfect for: High-risk individuals</p>
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>4-hour emergency response</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>AI deepfake voice detection</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>"Call Me Now" verification service</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>Dedicated security advisor</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>24/7 emergency hotline</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>Monthly 1-on-1 check-ins</span>
+                </li>
+              </ul>
+              <Button asChild variant="default" className="w-full">
+                <Link to="/contact">START FREE TRIAL</Link>
               </Button>
             </Card>
           </div>
           <p className="text-center mt-8 text-muted-foreground">
-            Need more than 30 submissions? Upgrade to <span className="font-bold">Unlimited Plan</span> for $149/month (12-hour response time).
+            All plans include 14-day free trial. Cancel anytime. No contracts.
           </p>
         </div>
       </section>

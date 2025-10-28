@@ -27,19 +27,19 @@ const Index = () => {
       {/* Hero Section */}
       <Hero
         useTransitioningBackground={true}
-        headline="Protect Your Family from AI-Powered Scams"
-        subheadline="Simple, respectful training for adults 40+ and families. Learn to spot deepfakes, phishing, and AI fraud—no tech degree required."
+        headline="Stop AI Scammers Before They Strike"
+        subheadline="Expert training & 24/7 protection for Ohio families and businesses"
         showScrollIndicator={true}
       >
         <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center sm:justify-start">
           <Button asChild variant="default" size="xl" className="w-full sm:w-auto">
-            <Link to="/training" aria-label="Book a training session">BOOK TRAINING</Link>
+            <Link to="/training" aria-label="Learn to spot scams">Learn to Spot Scams</Link>
           </Button>
           <Button asChild variant="outlineLight" size="xl" className="w-full sm:w-auto">
-            <Link to="/scam-shield" aria-label="Start using Scam Shield service">START SCAM SHIELD</Link>
+            <Link to="/scam-shield" aria-label="Get ScamShield Protection">Get ScamShield Protection</Link>
           </Button>
           <Button asChild variant="outlineLight" size="xl" className="w-full sm:w-auto">
-            <Link to="/contact" aria-label="Contact an expert for consultation">TALK TO AN EXPERT</Link>
+            <Link to="/business" aria-label="AI for Business">AI for Business</Link>
           </Button>
         </div>
       </Hero>

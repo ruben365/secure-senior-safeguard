@@ -38,7 +38,10 @@ const Navigation = () => {
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
             </div>
-            <span className="text-xl font-bold gradient-text-primary leading-none">InVision Network</span>
+            <div className="flex flex-col leading-tight">
+              <span className="text-xl font-bold gradient-text-primary">InVision Network</span>
+              <span className="text-[10px] text-muted-foreground hidden lg:block">AI Scam Protection & Business Solutions</span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -57,15 +60,15 @@ const Navigation = () => {
           {/* Right Side - Phone & CTA */}
           <div className="flex items-center gap-4">
             <a
-              href="tel:9375551234"
+              href="tel:9375550199"
               className="hidden md:flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2 py-1"
-              aria-label="Call us at 937-555-1234"
+              aria-label="Call us at 937-555-0199"
             >
               <Phone className="w-4 h-4" aria-hidden="true" />
-              <span className="font-medium">(937) 555-1234</span>
+              <span className="font-medium">(937) 555-0199</span>
             </a>
             <Button asChild variant="default" size="sm" className="hidden md:inline-flex font-semibold">
-              <Link to="/training" aria-label="Book a training session">BOOK TRAINING</Link>
+              <Link to="/contact" aria-label="Get protected">GET PROTECTED</Link>
             </Button>
 
             {/* Mobile menu button */}
@@ -95,17 +98,17 @@ const Navigation = () => {
               ))}
               <div className="pt-2 border-t border-border flex flex-col gap-3">
                 <Button asChild variant="default" className="w-full">
-                  <Link to="/training" onClick={() => setMobileMenuOpen(false)} aria-label="Book a training session">
-                    BOOK TRAINING
+                  <Link to="/contact" onClick={() => setMobileMenuOpen(false)} aria-label="Get protected">
+                    GET PROTECTED
                   </Link>
                 </Button>
                 <a
-                  href="tel:9375551234"
+                  href="tel:9375550199"
                   className="flex items-center justify-center gap-2 text-foreground py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md"
-                  aria-label="Call us at 937-555-1234"
+                  aria-label="Call us at 937-555-0199"
                 >
                   <Phone className="w-4 h-4" aria-hidden="true" />
-                  <span className="font-medium">(937) 555-1234</span>
+                  <span className="font-medium">(937) 555-0199</span>
                 </a>
               </div>
             </div>

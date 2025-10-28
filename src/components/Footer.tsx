@@ -183,7 +183,7 @@ const Footer = () => {
         <div className="border-t border-primary-foreground/20 pt-8 pb-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-primary-foreground/80 text-sm text-center md:text-left">
-              © 2025 InVision Network | Veteran-Owned | Based in Dayton, OH | Serving Families Nationwide
+              © 2025 InVision Network. All rights reserved.
             </p>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2 text-xs">
@@ -201,6 +201,13 @@ const Footer = () => {
           <p className="text-primary-foreground/60 text-xs mt-6 max-w-4xl mx-auto text-center leading-relaxed">
             InVision Network provides educational services only. We are not legal, financial, tax, or licensed cybersecurity professionals. In case of active fraud, identity theft, or criminal activity, contact local law enforcement (911), your bank's fraud department immediately using official phone numbers, and report to FTC at IdentityTheft.gov. We never request passwords, 2FA codes, bank account information, or Social Security numbers.
           </p>
+          <div className="text-center mt-4">
+            <Link to="/privacy" className="text-primary-foreground/60 text-xs hover:text-primary-foreground transition-colors mx-2">Privacy Policy</Link>
+            <span className="text-primary-foreground/40">|</span>
+            <Link to="/terms" className="text-primary-foreground/60 text-xs hover:text-primary-foreground transition-colors mx-2">Terms of Service</Link>
+            <span className="text-primary-foreground/40">|</span>
+            <Link to="/cookie-policy" className="text-primary-foreground/60 text-xs hover:text-primary-foreground transition-colors mx-2">Cookie Policy</Link>
+          </div>
         </div>
       </div>
     </footer>

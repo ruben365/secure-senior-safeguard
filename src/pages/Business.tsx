@@ -20,12 +20,20 @@ const Business = () => {
 
       <Hero
         backgroundImage={heroImage}
-        headline="AI That Actually Works for Your Business"
-        subheadline="Custom AI receptionists, follow-up systems, and automation—built secure, trained properly, and guaranteed to save you time. Starting at $5,000."
+        headline="AI Solutions Built for Security, Performance & Growth"
+        subheadline="From AI agents to professional websites to the world's first AI Service Insurance"
       >
-        <Button asChild variant="default" size="xl">
-          <Link to="/contact">SCHEDULE FREE DISCOVERY CALL</Link>
-        </Button>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Button asChild variant="default" size="xl">
+            <Link to="/contact">BUILD AN AI AGENT</Link>
+          </Button>
+          <Button asChild variant="outlineLight" size="xl">
+            <Link to="/contact">DESIGN A WEBSITE</Link>
+          </Button>
+          <Button asChild variant="outlineLight" size="xl">
+            <Link to="/contact">PROTECT MY AI</Link>
+          </Button>
+        </div>
       </Hero>
 
       <TrustBar />
@@ -34,7 +42,7 @@ const Business = () => {
       <section className="py-20 bg-background relative">
         <FlowingWaves variant="full" opacity={0.12} />
         <div className="container mx-auto px-4 relative z-10">
-          <h2 className="text-center mb-12">AI for Business & Web Design</h2>
+          <h2 className="text-center mb-12">What We Build</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <Card className="p-8 hover:shadow-medium transition-shadow">
               <div className="flex items-start gap-4">
@@ -98,20 +106,25 @@ const Business = () => {
       {/* Package Pricing */}
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
-          <h2 className="text-center mb-12">Package Pricing</h2>
+          <h2 className="text-center mb-12">AI Agents & Automation Pricing</h2>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <Card className="p-8">
-              <h3 className="text-2xl font-bold mb-4">Receptionist / Intake Agent</h3>
-              <p className="text-muted-foreground mb-6">Answer calls/chats, route inquiries, book appointments</p>
-              <p className="text-4xl font-bold text-accent mb-6">$5,000</p>
+              <h3 className="text-2xl font-bold mb-4">AI Receptionist & Intake Agent</h3>
+              <p className="text-muted-foreground mb-6">Answer calls/chats 24/7, book appointments</p>
+              <p className="text-4xl font-bold text-accent mb-6">$9,500</p>
+              <p className="text-sm text-muted-foreground mb-4">Perfect for: Medical practices, law firms, salons</p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>Voice & chat agent</span>
+                  <span>Answers calls 24/7 in natural language</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>Custom knowledge base</span>
+                  <span>Books appointments automatically</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>Qualifies leads using your criteria</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
@@ -119,11 +132,11 @@ const Business = () => {
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>30-day optimization</span>
+                  <span>30-day optimization period</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>Security baseline audit</span>
+                  <span>Security audit & 90-day support</span>
                 </li>
               </ul>
               <Button asChild variant="default" className="w-full">
@@ -132,29 +145,34 @@ const Business = () => {
             </Card>
 
             <Card className="p-8">
-              <h3 className="text-2xl font-bold mb-4">Follow-Up & Reminders</h3>
+              <h3 className="text-2xl font-bold mb-4">Follow-Up Automation System</h3>
               <p className="text-muted-foreground mb-6">Automated email/SMS campaigns, lead nurturing</p>
-              <p className="text-4xl font-bold text-accent mb-6">$10,000</p>
+              <p className="text-4xl font-bold text-accent mb-6">$12,500</p>
+              <p className="text-sm text-muted-foreground mb-4">Perfect for: E-commerce, real estate, coaching, B2B</p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>Consent flows</span>
+                  <span>Automated email sequences</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>Custom templates</span>
+                  <span>SMS reminder campaigns</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>Metrics dashboard</span>
+                  <span>Lead nurturing workflows</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>CRM sync</span>
+                  <span>Performance analytics dashboard</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>30-day stabilization</span>
+                  <span>CRM synchronization</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <span>60-day optimization</span>
                 </li>
               </ul>
               <Button asChild variant="default" className="w-full">
@@ -165,7 +183,8 @@ const Business = () => {
             <Card className="p-8 border-2 border-accent">
               <h3 className="text-2xl font-bold mb-4">Custom Automation Suite</h3>
               <p className="text-muted-foreground mb-6">Multi-system operations</p>
-              <p className="text-4xl font-bold text-accent mb-6">$15,000+</p>
+              <p className="text-4xl font-bold text-accent mb-6">$25,000+</p>
+              <p className="text-sm text-muted-foreground mb-4">Perfect for: Growing businesses, enterprises</p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-2">
                   <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />

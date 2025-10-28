@@ -20,11 +20,11 @@ const Training = () => {
 
       <Hero
         backgroundImage={heroImage}
-        headline="Learn to Outsmart AI Scammers—No Tech Skills Required"
-        subheadline="Master deepfake detection, phishing defense, and emergency protocols in plain English. Walk away with ready-to-use scripts and lifetime confidence."
+        headline="Master AI Scam Defense in One Session"
+        subheadline="Live Zoom classes taught by cybersecurity experts. Walk away with scripts, strategies, and lifetime confidence."
       >
         <Button asChild variant="default" size="xl">
-          <Link to="/contact">BOOK TRAINING NOW</Link>
+          <Link to="/contact">VIEW TRAINING SCHEDULE</Link>
         </Button>
       </Hero>
 
@@ -38,14 +38,14 @@ const Training = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
             <div className="space-y-4">
               {[
-                "Identity Verification & Callback Drills",
-                "Deepfake Voice & Video Red Flags",
-                "Link/QR Code Hygiene & Device Basics",
-                "Urgent Money Request Handling",
-                "Bank/IRS/Tech-Support/Romance Scam Scripts",
-                "The 60-Second Pause Protocol™",
-                "Family Safe-Word System Setup",
-                "Emergency Response Checklist",
+                "Identify deepfake voices and videos",
+                "Spot AI-generated phishing emails",
+                "Verify urgent caller identities",
+                "Scan QR codes safely",
+                "Recognize romance scams",
+                "Protect your banking information",
+                "Set up family safe-word systems",
+                "Execute the 60-Second Pause Protocol™",
               ].map((skill, index) => (
                 <div key={index} className="flex items-start gap-3">
                   <CheckCircle className="w-6 h-6 text-success flex-shrink-0 mt-1" />
@@ -93,10 +93,10 @@ const Training = () => {
                 </div>
               </Card>
 
-              {/* Single Small Group */}
+              {/* Standard Group Class */}
               <Card className="bg-card border-border/50 rounded-xl p-6 hover:shadow-medium transition-shadow">
                 <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold mb-2">Single Small Group</h3>
+                  <h3 className="text-2xl font-bold mb-2">Standard Group Class</h3>
                   <p className="text-muted-foreground">15-25 participants</p>
                 </div>
                 <div className="space-y-8">
@@ -113,12 +113,12 @@ const Training = () => {
                     <p className="text-foreground">EN / FR / ES</p>
                   </div>
                   <div className="py-4 pt-8 text-center">
-                    <p className="text-5xl font-bold text-accent mb-2">$149</p>
+                    <p className="text-5xl font-bold text-accent mb-2">$89</p>
                     <p className="text-sm text-muted-foreground">per person</p>
                   </div>
                 </div>
                 <Button asChild variant="default" size="lg" className="w-full mt-6">
-                  <Link to="/contact">Book Now</Link>
+                  <Link to="/contact">BOOK NOW</Link>
                 </Button>
               </Card>
 
@@ -145,13 +145,13 @@ const Training = () => {
                     <p className="text-foreground">EN / FR / ES</p>
                   </div>
                   <div className="py-4 pt-8 text-center">
-                    <p className="text-5xl font-bold text-accent mb-2">$299</p>
+                    <p className="text-5xl font-bold text-accent mb-2">$249</p>
                     <p className="text-sm text-muted-foreground mb-2">per session</p>
                     <p className="text-sm font-semibold text-success">Spouse FREE</p>
                   </div>
                 </div>
                 <Button asChild variant="default" size="lg" className="w-full mt-6 bg-accent hover:bg-accent/90">
-                  <Link to="/contact">Book Now</Link>
+                  <Link to="/contact">BOOK NOW</Link>
                 </Button>
               </Card>
 
@@ -181,7 +181,7 @@ const Training = () => {
                   </div>
                 </div>
                 <Button asChild variant="default" size="lg" className="w-full mt-6">
-                  <Link to="/contact">Schedule</Link>
+                  <Link to="/contact">SCHEDULE CONSULTATION</Link>
                 </Button>
               </Card>
             </div>
@@ -200,17 +200,19 @@ const Training = () => {
               <div className="flex items-start gap-6">
                 <Home className="w-16 h-16 text-accent flex-shrink-0" />
                 <div>
-                  <h3 className="text-2xl font-bold mb-3">White-Glove In-Person Training</h3>
+                  <h3 className="text-2xl font-bold mb-3">White-Glove In-Home Training</h3>
                   <p className="text-muted-foreground mb-6">
-                    Our certified trainer comes to your home (Dayton metro or nationwide) for hands-on family security setup.
+                    Certified trainer comes to your home (Dayton metro area, nationwide available). 2-hour session.
                   </p>
                   <ul className="space-y-2 mb-6">
                     {[
-                      "4-hour session for entire family",
-                      "Secure all devices (phones, computers, tablets)",
-                      "Install security tools & password managers",
-                      "Physical security kit included",
-                      "60-day post-visit support",
+                      "Everything from Priority Private training",
+                      "Hands-on device security setup",
+                      "Set up 2FA, password manager",
+                      "Configure privacy settings",
+                      "Family Safety Vault setup",
+                      "Printed emergency response guide",
+                      "60-day follow-up support",
                     ].map((item, index) => (
                       <li key={index} className="flex items-start gap-2">
                         <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
@@ -219,9 +221,9 @@ const Training = () => {
                     ))}
                   </ul>
                   <p className="text-2xl font-bold mb-4">
-                    Starting at <span className="text-accent">$899</span>
+                    Starting at <span className="text-accent">$599</span>
                   </p>
-                  <p className="text-sm text-muted-foreground mb-4">(InVision covers all trainer travel costs)</p>
+                  <p className="text-sm text-muted-foreground mb-4">(Dayton Metro Area, nationwide rates vary)</p>
                   <Button asChild variant="default">
                     <Link to="/contact">REQUEST IN-PERSON QUOTE</Link>
                   </Button>
