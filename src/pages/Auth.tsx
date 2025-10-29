@@ -113,176 +113,183 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex relative overflow-hidden">
-      {/* Animated Background Decorations */}
+    <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-4">
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/5 to-accent/10" />
+      
+      {/* Floating Orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute -top-20 -right-20 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
       </div>
 
-      {/* Left Side - Decorative Image Panel */}
-      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden animate-fade-in">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/80 to-accent/90 z-10" />
-        <img 
-          src={heroImage} 
-          alt="InVision Network Security" 
-          className="object-cover w-full h-full"
-        />
-        <div className="absolute inset-0 z-20 flex flex-col justify-between p-12 text-white">
-          {/* Top Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Shield className="w-7 h-7 text-white" />
+      {/* Grid Pattern Overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.05)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)]" />
+
+      {/* Main Content */}
+      <div className="relative z-10 w-full max-w-6xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-16 items-center animate-fade-in">
+        
+        {/* Left Side - Branding & Info */}
+        <div className="hidden lg:flex flex-col gap-8 animate-scale-in">
+          {/* Logo */}
+          <Link to="/" className="inline-flex items-center gap-3 group w-fit">
+            <div className="w-14 h-14 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center shadow-glow-purple group-hover:scale-110 transition-all duration-300">
+              <Shield className="w-8 h-8 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold">InVision Network</h1>
-              <p className="text-sm text-white/80">AI Scam Protection</p>
+              <h1 className="text-2xl font-bold gradient-text-primary">InVision Network</h1>
+              <p className="text-sm text-muted-foreground">AI Scam Protection</p>
             </div>
           </Link>
 
-          {/* Center Content */}
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
-                <Sparkles className="w-4 h-4" />
-                <span className="text-sm font-medium">Secure Portal Access</span>
+          {/* Hero Content */}
+          <div className="space-y-6">
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 backdrop-blur-sm rounded-full border border-primary/20">
+                <Sparkles className="w-4 h-4 text-primary" />
+                <span className="text-sm font-medium text-foreground">Secure Portal Access</span>
               </div>
-              <h2 className="text-4xl font-bold leading-tight">
-                Protecting Ohio Families from AI-Powered Scams
+              <h2 className="text-5xl font-bold leading-tight">
+                Protecting <span className="gradient-text-primary">Ohio Families</span> from Digital Threats
               </h2>
-              <p className="text-lg text-white/90">
-                Join our team of experts dedicated to keeping communities safe from emerging digital threats.
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Join our mission to keep communities safe from AI-powered scams with enterprise-grade security.
               </p>
             </div>
 
-            {/* Features */}
-            <div className="space-y-4">
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-4 pt-6">
               {[
-                "Role-based dashboard access",
-                "Real-time threat monitoring",
-                "Secure team collaboration",
-                "24/7 system availability"
+                { value: "500+", label: "Protected" },
+                { value: "24/7", label: "Support" },
+                { value: "100%", label: "Secure" }
+              ].map((stat, i) => (
+                <div key={i} className="space-y-1 p-4 bg-card/50 backdrop-blur-sm rounded-xl border border-border/50 hover:border-primary/50 transition-colors">
+                  <div className="text-3xl font-bold gradient-text-primary">{stat.value}</div>
+                  <div className="text-xs text-muted-foreground">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Features */}
+            <div className="grid grid-cols-2 gap-3 pt-4">
+              {[
+                { icon: CheckCircle2, text: "Role-based access" },
+                { icon: CheckCircle2, text: "Real-time monitoring" },
+                { icon: CheckCircle2, text: "Team collaboration" },
+                { icon: CheckCircle2, text: "24/7 availability" }
               ].map((feature, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <div className="w-6 h-6 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
-                    <CheckCircle2 className="w-4 h-4 text-white" />
+                <div key={i} className="flex items-center gap-2 text-sm">
+                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <feature.icon className="w-3 h-3 text-primary" />
                   </div>
-                  <span className="text-white/90">{feature}</span>
+                  <span className="text-muted-foreground">{feature.text}</span>
                 </div>
               ))}
             </div>
           </div>
-
-          {/* Bottom Stats */}
-          <div className="grid grid-cols-3 gap-6">
-            <div className="space-y-1">
-              <div className="text-3xl font-bold">500+</div>
-              <div className="text-sm text-white/80">Families Protected</div>
-            </div>
-            <div className="space-y-1">
-              <div className="text-3xl font-bold">24/7</div>
-              <div className="text-sm text-white/80">Support Available</div>
-            </div>
-            <div className="space-y-1">
-              <div className="text-3xl font-bold">100%</div>
-              <div className="text-sm text-white/80">Secure Platform</div>
-            </div>
-          </div>
         </div>
-      </div>
 
-      {/* Right Side - Auth Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 relative z-10">
-        <div className="w-full max-w-md space-y-8 animate-scale-in">
+        {/* Right Side - Auth Form */}
+        <div className="w-full max-w-md mx-auto lg:mx-0 animate-scale-in" style={{ animationDelay: '0.1s' }}>
           {/* Mobile Logo */}
-          <div className="lg:hidden text-center animate-fade-in">
-            <Link to="/" className="inline-flex items-center justify-center gap-3 mb-4 group">
-              <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center shadow-glow-purple group-hover:scale-110 transition-transform">
-                <Shield className="w-7 h-7 text-white" />
-              </div>
-            </Link>
-            <h1 className="text-2xl font-bold gradient-text-primary">InVision Network</h1>
-            <p className="text-muted-foreground">Staff Portal</p>
-          </div>
+          <Link to="/" className="lg:hidden flex items-center justify-center gap-3 mb-8 group">
+            <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center shadow-glow-purple group-hover:scale-110 transition-transform">
+              <Shield className="w-7 h-7 text-white" />
+            </div>
+            <div className="text-left">
+              <h1 className="text-xl font-bold gradient-text-primary">InVision Network</h1>
+              <p className="text-xs text-muted-foreground">Staff Portal</p>
+            </div>
+          </Link>
 
-          <Card className="p-8 shadow-xl border-2 bg-card/95 backdrop-blur-xl hover:shadow-2xl transition-all duration-300">
+          <Card className="p-8 lg:p-10 shadow-2xl border-2 bg-card/80 backdrop-blur-2xl hover:border-primary/50 transition-all duration-500 group">
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Header */}
-              <div className="text-center space-y-2 animate-fade-in">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-glow-purple animate-pulse-subtle">
-                  <Lock className="w-8 h-8 text-white" />
+              <div className="space-y-2">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center shadow-glow-purple group-hover:scale-110 transition-transform">
+                    <Lock className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold">
+                      {isLogin ? "Welcome Back" : "Create Account"}
+                    </h2>
+                    <p className="text-sm text-muted-foreground">
+                      {isLogin ? "Sign in to continue" : "Join our team today"}
+                    </p>
+                  </div>
                 </div>
-                <h2 className="text-3xl font-bold gradient-text-primary">
-                  {isLogin ? "Welcome Back" : "Join Our Team"}
-                </h2>
-                <p className="text-muted-foreground">
-                  {isLogin 
-                    ? "Sign in to access your secure dashboard" 
-                    : "Create your account to get started"}
-                </p>
               </div>
-
-              <Separator />
 
               {/* Name Fields for Signup */}
               {!isLogin && (
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="firstName" className="flex items-center gap-2">
-                      <User className="w-4 h-4" />
+                    <Label htmlFor="firstName" className="text-sm font-medium">
                       First Name
                     </Label>
-                    <Input
-                      id="firstName"
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                      required
-                      disabled={isLoading}
-                      placeholder="John"
-                      className="h-11"
-                    />
+                    <div className="relative">
+                      <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                      <Input
+                        id="firstName"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        required
+                        disabled={isLoading}
+                        placeholder="John"
+                        className="h-12 pl-10 bg-background/50"
+                      />
+                    </div>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="lastName">Last Name</Label>
-                    <Input
-                      id="lastName"
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                      required
-                      disabled={isLoading}
-                      placeholder="Doe"
-                      className="h-11"
-                    />
+                    <Label htmlFor="lastName" className="text-sm font-medium">
+                      Last Name
+                    </Label>
+                    <div className="relative">
+                      <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                      <Input
+                        id="lastName"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        required
+                        disabled={isLoading}
+                        placeholder="Doe"
+                        className="h-12 pl-10 bg-background/50"
+                      />
+                    </div>
                   </div>
                 </div>
               )}
 
               {/* Email Field */}
               <div className="space-y-2">
-                <Label htmlFor="email" className="flex items-center gap-2">
-                  <Mail className="w-4 h-4" />
+                <Label htmlFor="email" className="text-sm font-medium">
                   Email Address
                 </Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  disabled={isLoading}
-                  placeholder="name@company.com"
-                  className="h-11"
-                />
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <Input
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    disabled={isLoading}
+                    placeholder="name@company.com"
+                    className="h-12 pl-10 bg-background/50"
+                  />
+                </div>
               </div>
 
               {/* Password Field */}
               <div className="space-y-2">
-                <Label htmlFor="password" className="flex items-center gap-2">
-                  <Lock className="w-4 h-4" />
+                <Label htmlFor="password" className="text-sm font-medium">
                   Password
                 </Label>
                 <div className="relative">
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
@@ -291,12 +298,12 @@ const Auth = () => {
                     required
                     disabled={isLoading}
                     placeholder="••••••••"
-                    className="h-11 pr-10"
+                    className="h-12 pl-10 pr-12 bg-background/50"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors p-1"
                   >
                     {showPassword ? (
                       <EyeOff className="w-4 h-4" />
@@ -306,8 +313,9 @@ const Auth = () => {
                   </button>
                 </div>
                 {!isLogin && (
-                  <p className="text-xs text-muted-foreground">
-                    Must be at least 6 characters long
+                  <p className="text-xs text-muted-foreground flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3 h-3" />
+                    At least 6 characters required
                   </p>
                 )}
               </div>
@@ -357,7 +365,7 @@ const Auth = () => {
               {/* Submit Button */}
               <Button 
                 type="submit" 
-                className="w-full h-12 text-lg font-semibold bg-gradient-to-r from-primary to-accent hover:shadow-glow-purple transition-all duration-300" 
+                className="w-full h-13 text-base font-semibold bg-gradient-to-r from-primary to-accent hover:shadow-glow-purple hover:scale-[1.02] transition-all duration-300" 
                 disabled={isLoading}
               >
                 {isLoading ? (
@@ -367,15 +375,13 @@ const Auth = () => {
                   </>
                 ) : (
                   <>
-                    {isLogin ? "Sign In" : "Create Account"}
+                    {isLogin ? "Sign In to Portal" : "Create Account"}
                   </>
                 )}
               </Button>
 
-              <Separator />
-
               {/* Toggle Login/Signup */}
-              <div className="text-center">
+              <div className="text-center pt-4">
                 <p className="text-sm text-muted-foreground">
                   {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
                   <button
@@ -387,31 +393,25 @@ const Auth = () => {
                       setFirstName("");
                       setLastName("");
                     }}
-                    className="text-primary font-semibold hover:underline"
+                    className="text-primary font-semibold hover:underline transition-colors"
                     disabled={isLoading}
                   >
-                    {isLogin ? "Sign up" : "Sign in"}
+                    {isLogin ? "Sign up free" : "Sign in"}
                   </button>
                 </p>
-              </div>
-
-              {/* Back to Home */}
-              <div className="text-center pt-4">
-                <Button asChild variant="ghost" size="sm">
-                  <Link to="/" className="gap-2 text-muted-foreground">
-                    <Home className="w-4 h-4" />
-                    Back to Home
-                  </Link>
-                </Button>
               </div>
             </form>
           </Card>
 
-          {/* Security Badge */}
-          <div className="text-center animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-card/80 backdrop-blur-sm rounded-full border border-border/50 text-sm text-muted-foreground hover:border-primary/50 transition-colors">
-              <Shield className="w-4 h-4 text-primary" />
-              <span>Secured with enterprise-grade encryption</span>
+          {/* Footer Links */}
+          <div className="flex items-center justify-between text-xs text-muted-foreground pt-4">
+            <Link to="/" className="flex items-center gap-1.5 hover:text-foreground transition-colors">
+              <Home className="w-3.5 h-3.5" />
+              <span>Back to Home</span>
+            </Link>
+            <div className="flex items-center gap-1.5">
+              <Shield className="w-3.5 h-3.5 text-primary" />
+              <span>Enterprise Security</span>
             </div>
           </div>
         </div>
