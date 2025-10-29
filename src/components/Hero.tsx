@@ -75,7 +75,7 @@ const Hero = ({
       )}
       
       {/* Content Container - Centered */}
-      <div className="w-full max-w-7xl mx-auto px-6 relative z-20 text-center">
+      <div className="w-full px-6 relative z-20 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 animate-fade-in-up [text-shadow:0_4px_20px_rgba(0,0,0,0.5)] leading-tight">
             {headline}
