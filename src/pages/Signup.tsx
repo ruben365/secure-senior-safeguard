@@ -28,7 +28,9 @@ import {
   Stethoscope,
   BarChart3,
   GraduationCap,
-  Code
+  Code,
+  XCircle,
+  AlertCircle
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { z } from "zod";
@@ -48,6 +50,16 @@ const Signup = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
+
+  // Validation states
+  const [emailValid, setEmailValid] = useState<boolean | null>(null);
+  const [phoneValid, setPhoneValid] = useState<boolean | null>(null);
+  const [passwordValid, setPasswordValid] = useState<boolean | null>(null);
+  const [passwordMatch, setPasswordMatch] = useState<boolean | null>(null);
+  const [emailError, setEmailError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [passwordMatchError, setPasswordMatchError] = useState("");
 
   // Step 2 - Basic Information
   const [firstName, setFirstName] = useState("");
@@ -120,6 +132,77 @@ const Signup = () => {
 
   const totalSteps = 4;
   const progress = (step / totalSteps) * 100;
+
+  // Real-time email validation
+  const validateEmail = (value: string) => {
+    if (!value) {
+      setEmailValid(null);
+      setEmailError("");
+      return;
+    }
+    try {
+      emailSchema.parse(value);
+      setEmailValid(true);
+      setEmailError("");
+    } catch (error: any) {
+      setEmailValid(false);
+      setEmailError("Please enter a valid email address");
+    }
+  };
+
+  // Real-time phone validation
+  const validatePhone = (value: string) => {
+    if (!value) {
+      setPhoneValid(null);
+      setPhoneError("");
+      return;
+    }
+    try {
+      phoneSchema.parse(value);
+      setPhoneValid(true);
+      setPhoneError("");
+    } catch (error: any) {
+      setPhoneValid(false);
+      setPhoneError("Format: XXX-XXX-XXXX");
+    }
+  };
+
+  // Real-time password validation
+  const validatePassword = (value: string) => {
+    if (!value) {
+      setPasswordValid(null);
+      setPasswordError("");
+      return;
+    }
+    try {
+      passwordSchema.parse(value);
+      setPasswordValid(true);
+      setPasswordError("");
+    } catch (error: any) {
+      setPasswordValid(false);
+      if (error.errors && error.errors[0]) {
+        setPasswordError(error.errors[0].message);
+      } else {
+        setPasswordError("8+ chars, uppercase, number, special character");
+      }
+    }
+  };
+
+  // Real-time password match validation
+  const validatePasswordMatch = (confirmValue: string) => {
+    if (!confirmValue) {
+      setPasswordMatch(null);
+      setPasswordMatchError("");
+      return;
+    }
+    if (password === confirmValue) {
+      setPasswordMatch(true);
+      setPasswordMatchError("");
+    } else {
+      setPasswordMatch(false);
+      setPasswordMatchError("Passwords do not match");
+    }
+  };
 
   const validateStep2 = () => {
     try {
@@ -288,8 +371,18 @@ const Signup = () => {
         },
       });
 
-      if (authError) throw authError;
-      if (!authData.user) throw new Error("User creation failed");
+      if (authError) {
+        // Handle specific Supabase auth errors
+        if (authError.message.includes("already registered")) {
+          throw new Error("EMAIL_EXISTS");
+        } else if (authError.message.includes("Password")) {
+          throw new Error("PASSWORD_INVALID");
+        } else if (authError.message.includes("Email")) {
+          throw new Error("EMAIL_INVALID");
+        }
+        throw authError;
+      }
+      if (!authData.user) throw new Error("ACCOUNT_CREATION_FAILED");
 
       // Create profile
       const { error: profileError } = await supabase
@@ -392,24 +485,38 @@ const Signup = () => {
 
       navigate(`/application-pending?ref=${appRef}`);
     } catch (error: any) {
-      let errorMessage = "An error occurred during signup";
-      let errorTitle = "❌ Signup Failed";
+      let errorMessage = "An unexpected error occurred. Please try again.";
+      let errorTitle = "Application Error";
       
-      // Handle specific error types
-      if (error.message?.includes("User already registered")) {
-        errorTitle = "📧 Email Already Registered";
-        errorMessage = "This email is already registered. Please try logging in instead.";
-      } else if (error.message?.includes("Password")) {
-        errorTitle = "🔒 Password Error";
-        errorMessage = "Password must be at least 8 characters with uppercase, number, and special character.";
-      } else if (error.message?.includes("Email")) {
-        errorTitle = "📧 Invalid Email";
-        errorMessage = "Please enter a valid email address.";
-      } else if (error.message?.includes("duplicate key")) {
-        errorTitle = "⚠️ Application Already Exists";
-        errorMessage = "An application with this information already exists. Please contact support.";
-      } else if (error.message) {
-        errorMessage = error.message;
+      // Handle specific error codes
+      switch (error.message) {
+        case "EMAIL_EXISTS":
+          errorTitle = "📧 Email Already Registered";
+          errorMessage = "This email is already in use. Please login or use a different email.";
+          break;
+        case "PASSWORD_INVALID":
+          errorTitle = "🔒 Invalid Password";
+          errorMessage = "Password must be 8+ characters with uppercase, number, and special character.";
+          break;
+        case "EMAIL_INVALID":
+          errorTitle = "📧 Invalid Email";
+          errorMessage = "Please enter a valid email address.";
+          break;
+        case "ACCOUNT_CREATION_FAILED":
+          errorTitle = "⚠️ Account Creation Failed";
+          errorMessage = "We couldn't create your account. Please try again or contact support.";
+          break;
+        default:
+          if (error.message?.includes("duplicate key")) {
+            errorTitle = "⚠️ Duplicate Application";
+            errorMessage = "An application with this information already exists. Contact support if this is an error.";
+          } else if (error.message?.includes("address_city")) {
+            errorTitle = "📝 Missing Address Information";
+            errorMessage = "Please fill in all address fields completely.";
+          } else if (error.message) {
+            errorTitle = "⚠️ Validation Error";
+            errorMessage = error.message;
+          }
       }
       
       toast({
@@ -577,23 +684,121 @@ const Signup = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="email">Email Address *</Label>
-                <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                <div className="relative">
+                  <Input 
+                    id="email" 
+                    type="email" 
+                    value={email} 
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      validateEmail(e.target.value);
+                    }}
+                    className={`pr-10 ${emailValid === true ? 'border-green-500' : emailValid === false ? 'border-red-500' : ''}`}
+                    required 
+                  />
+                  {emailValid === true && (
+                    <CheckCircle2 className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-green-500" />
+                  )}
+                  {emailValid === false && (
+                    <XCircle className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-red-500" />
+                  )}
+                </div>
+                {emailError && (
+                  <p className="text-xs text-red-500 flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3" />
+                    {emailError}
+                  </p>
+                )}
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="phone">Phone Number * (XXX-XXX-XXXX)</Label>
-                <Input id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="555-555-5555" required />
+                <div className="relative">
+                  <Input 
+                    id="phone" 
+                    value={phone} 
+                    onChange={(e) => {
+                      setPhone(e.target.value);
+                      validatePhone(e.target.value);
+                    }}
+                    placeholder="555-555-5555"
+                    className={`pr-10 ${phoneValid === true ? 'border-green-500' : phoneValid === false ? 'border-red-500' : ''}`}
+                    required 
+                  />
+                  {phoneValid === true && (
+                    <CheckCircle2 className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-green-500" />
+                  )}
+                  {phoneValid === false && (
+                    <XCircle className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-red-500" />
+                  )}
+                </div>
+                {phoneError && (
+                  <p className="text-xs text-red-500 flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3" />
+                    {phoneError}
+                  </p>
+                )}
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="password">Password *</Label>
-                  <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                  <p className="text-xs text-muted-foreground">Min 8 chars, 1 uppercase, 1 number, 1 special character</p>
+                  <div className="relative">
+                    <Input 
+                      id="password" 
+                      type="password" 
+                      value={password} 
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                        validatePassword(e.target.value);
+                        if (confirmPassword) validatePasswordMatch(confirmPassword);
+                      }}
+                      className={`pr-10 ${passwordValid === true ? 'border-green-500' : passwordValid === false ? 'border-red-500' : ''}`}
+                      required 
+                    />
+                    {passwordValid === true && (
+                      <CheckCircle2 className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-green-500" />
+                    )}
+                    {passwordValid === false && (
+                      <XCircle className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-red-500" />
+                    )}
+                  </div>
+                  {passwordError ? (
+                    <p className="text-xs text-red-500 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" />
+                      {passwordError}
+                    </p>
+                  ) : (
+                    <p className="text-xs text-muted-foreground">Min 8 chars, 1 uppercase, 1 number, 1 special character</p>
+                  )}
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="confirmPassword">Confirm Password *</Label>
-                  <Input id="confirmPassword" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+                  <div className="relative">
+                    <Input 
+                      id="confirmPassword" 
+                      type="password" 
+                      value={confirmPassword} 
+                      onChange={(e) => {
+                        setConfirmPassword(e.target.value);
+                        validatePasswordMatch(e.target.value);
+                      }}
+                      className={`pr-10 ${passwordMatch === true ? 'border-green-500' : passwordMatch === false ? 'border-red-500' : ''}`}
+                      required 
+                    />
+                    {passwordMatch === true && (
+                      <CheckCircle2 className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-green-500" />
+                    )}
+                    {passwordMatch === false && (
+                      <XCircle className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-red-500" />
+                    )}
+                  </div>
+                  {passwordMatchError && (
+                    <p className="text-xs text-red-500 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" />
+                      {passwordMatchError}
+                    </p>
+                  )}
                 </div>
               </div>
 
