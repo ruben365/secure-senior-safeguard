@@ -16,7 +16,20 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, Shield, CheckCircle2, Upload, ArrowLeft, ArrowRight } from "lucide-react";
+import { 
+  Loader2, 
+  Shield, 
+  CheckCircle2, 
+  Upload, 
+  ArrowLeft, 
+  ArrowRight,
+  Users,
+  Heart,
+  Stethoscope,
+  BarChart3,
+  GraduationCap,
+  Code
+} from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { z } from "zod";
 
@@ -353,32 +366,102 @@ const Signup = () => {
         <Card className="p-8 lg:p-10 shadow-2xl border-2 bg-card/80 backdrop-blur-2xl">
           {/* Step 1: Role Selection */}
           {step === 1 && (
-            <div className="space-y-6">
-              <div>
-                <h2 className="text-2xl font-bold mb-2">Select Your Role</h2>
-                <p className="text-muted-foreground">Choose the role that best describes you</p>
+            <div className="space-y-8">
+              <div className="text-center">
+                <h2 className="text-3xl font-bold mb-3 gradient-text-primary">Select Your Role</h2>
+                <p className="text-muted-foreground text-lg">Choose the role that best describes you</p>
               </div>
 
-              <RadioGroup value={selectedRole} onValueChange={setSelectedRole}>
-                <div className="grid gap-4">
-                  {[
-                    { value: "senior", label: "Senior/Family Member", desc: "Individual or family seeking care services" },
-                    { value: "caregiver", label: "Caregiver/Staff", desc: "Professional caregiver providing care services" },
-                    { value: "healthcare", label: "Healthcare Professional", desc: "Medical professional (Doctor, Nurse, etc.)" },
-                    { value: "analyst", label: "Analyst", desc: "Data analyst or quality assurance specialist" },
-                    { value: "trainer", label: "Trainer", desc: "Training and education specialist" },
-                    { value: "developer", label: "Developer/IT", desc: "Software developer or IT professional" },
-                  ].map((role) => (
-                    <div key={role.value} className="flex items-center space-x-3 p-4 border rounded-lg hover:border-primary/50 transition-colors cursor-pointer">
-                      <RadioGroupItem value={role.value} id={role.value} />
-                      <Label htmlFor={role.value} className="flex-1 cursor-pointer">
-                        <div className="font-semibold">{role.label}</div>
-                        <div className="text-sm text-muted-foreground">{role.desc}</div>
-                      </Label>
-                    </div>
-                  ))}
-                </div>
-              </RadioGroup>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  { 
+                    value: "senior", 
+                    label: "Senior/Family Member", 
+                    desc: "Individual or family seeking care services",
+                    icon: Users,
+                    gradient: "from-blue-500/20 to-cyan-500/20",
+                    iconBg: "from-blue-500 to-cyan-500"
+                  },
+                  { 
+                    value: "caregiver", 
+                    label: "Caregiver/Staff", 
+                    desc: "Professional caregiver providing care services",
+                    icon: Heart,
+                    gradient: "from-pink-500/20 to-rose-500/20",
+                    iconBg: "from-pink-500 to-rose-500"
+                  },
+                  { 
+                    value: "healthcare", 
+                    label: "Healthcare Professional", 
+                    desc: "Medical professional (Doctor, Nurse, etc.)",
+                    icon: Stethoscope,
+                    gradient: "from-green-500/20 to-emerald-500/20",
+                    iconBg: "from-green-500 to-emerald-500"
+                  },
+                  { 
+                    value: "analyst", 
+                    label: "Analyst", 
+                    desc: "Data analyst or quality assurance specialist",
+                    icon: BarChart3,
+                    gradient: "from-purple-500/20 to-violet-500/20",
+                    iconBg: "from-purple-500 to-violet-500"
+                  },
+                  { 
+                    value: "trainer", 
+                    label: "Trainer", 
+                    desc: "Training and education specialist",
+                    icon: GraduationCap,
+                    gradient: "from-orange-500/20 to-amber-500/20",
+                    iconBg: "from-orange-500 to-amber-500"
+                  },
+                  { 
+                    value: "developer", 
+                    label: "Developer/IT", 
+                    desc: "Software developer or IT professional",
+                    icon: Code,
+                    gradient: "from-indigo-500/20 to-blue-500/20",
+                    iconBg: "from-indigo-500 to-blue-500"
+                  },
+                ].map((role) => {
+                  const Icon = role.icon;
+                  const isSelected = selectedRole === role.value;
+                  
+                  return (
+                    <Card
+                      key={role.value}
+                      className={`relative p-6 cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group ${
+                        isSelected 
+                          ? 'border-2 border-primary shadow-glow-purple bg-gradient-to-br ' + role.gradient
+                          : 'border hover:border-primary/50'
+                      }`}
+                      onClick={() => setSelectedRole(role.value)}
+                    >
+                      {/* Selection Indicator */}
+                      <div className={`absolute top-3 right-3 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${
+                        isSelected 
+                          ? 'border-primary bg-primary' 
+                          : 'border-muted-foreground/30 bg-transparent'
+                      }`}>
+                        {isSelected && <CheckCircle2 className="w-4 h-4 text-white" />}
+                      </div>
+
+                      {/* Icon */}
+                      <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${role.iconBg} mb-4 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform`}>
+                        <Icon className="w-7 h-7 text-white" />
+                      </div>
+
+                      {/* Content */}
+                      <div>
+                        <h3 className="text-xl font-bold mb-2">{role.label}</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{role.desc}</p>
+                      </div>
+
+                      {/* Hover Effect */}
+                      <div className={`absolute inset-0 rounded-lg bg-gradient-to-br ${role.gradient} opacity-0 group-hover:opacity-100 transition-opacity -z-10`} />
+                    </Card>
+                  );
+                })}
+              </div>
             </div>
           )}
 
