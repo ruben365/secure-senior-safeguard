@@ -12,6 +12,8 @@ import Resources from "./pages/Resources";
 import Contact from "./pages/Contact";
 import Careers from "./pages/Careers";
 import Auth from "./pages/Auth";
+import Signup from "./pages/Signup";
+import ApplicationPending from "./pages/ApplicationPending";
 import Portal from "./pages/Portal";
 import AdminDashboard from "./pages/portal/AdminDashboard";
 import AnalystDashboard from "./pages/portal/AnalystDashboard";
@@ -49,6 +51,8 @@ const App = () => {
             <Route path="/contact" element={<Contact />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/application-pending" element={<ApplicationPending />} />
             <Route path="/portal" element={<ProtectedRoute><Portal /></ProtectedRoute>} />
             <Route path="/portal/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
             <Route path="/portal/analyst" element={<ProtectedRoute><AnalystDashboard /></ProtectedRoute>} />

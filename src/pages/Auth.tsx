@@ -66,7 +66,54 @@ const Auth = () => {
 
         if (error) throw error;
 
-        if (data.session) {
+        if (data.session && data.user) {
+          // Check account status
+          const { data: profileData, error: profileError } = await supabase
+            .from("profiles")
+            .select("account_status, application_reference")
+            .eq("id", data.user.id)
+            .single();
+
+          if (profileError && profileError.code !== 'PGRST116') {
+            console.error("Profile check error:", profileError);
+          }
+
+          // If account is pending approval
+          if (profileData && profileData.account_status === "pending") {
+            await supabase.auth.signOut();
+            toast({
+              title: "Account Pending Approval",
+              description: `Your account is awaiting admin approval. Reference: ${profileData.application_reference || 'N/A'}`,
+              variant: "destructive",
+            });
+            setIsLoading(false);
+            return;
+          }
+
+          // If account is rejected
+          if (profileData && profileData.account_status === "rejected") {
+            await supabase.auth.signOut();
+            toast({
+              title: "Account Rejected",
+              description: "Your application was not approved. Please contact support for more information.",
+              variant: "destructive",
+            });
+            setIsLoading(false);
+            return;
+          }
+
+          // If account is suspended
+          if (profileData && profileData.account_status === "suspended") {
+            await supabase.auth.signOut();
+            toast({
+              title: "Account Suspended",
+              description: "Your account has been suspended. Please contact support.",
+              variant: "destructive",
+            });
+            setIsLoading(false);
+            return;
+          }
+
           toast({
             title: "Welcome back!",
             description: "You've successfully logged in.",
@@ -74,32 +121,8 @@ const Auth = () => {
           navigate("/portal");
         }
       } else {
-        // Validate names for signup
-        if (!firstName.trim() || !lastName.trim()) {
-          throw new Error("First name and last name are required");
-        }
-
-        const { data, error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            emailRedirectTo: `${window.location.origin}/portal`,
-            data: {
-              first_name: firstName,
-              last_name: lastName,
-            },
-          },
-        });
-
-        if (error) throw error;
-
-        if (data.user) {
-          toast({
-            title: "Account created!",
-            description: "Welcome to InVision Network Portal.",
-          });
-          navigate("/portal");
-        }
+        // Redirect to signup page instead
+        navigate("/signup");
       }
     } catch (error: any) {
       toast({
@@ -426,20 +449,12 @@ const Auth = () => {
               <div className="text-center pt-4">
                 <p className="text-sm text-muted-foreground">
                   {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setIsLogin(!isLogin);
-                      setEmail("");
-                      setPassword("");
-                      setFirstName("");
-                      setLastName("");
-                    }}
+                  <Link
+                    to={isLogin ? "/signup" : "/auth"}
                     className="text-primary font-semibold hover:underline transition-colors"
-                    disabled={isLoading}
                   >
                     {isLogin ? "Sign up free" : "Sign in"}
-                  </button>
+                  </Link>
                 </p>
               </div>
             </form>
