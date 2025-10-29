@@ -11,12 +11,12 @@ import {
   Users,
   GraduationCap,
   Code,
-  Palette,
   UserCog,
-  LayoutDashboard,
+  Heart,
+  Stethoscope,
 } from "lucide-react";
 
-type UserRole = "admin" | "staff" | "analyst" | "trainer" | "developer";
+type UserRole = "admin" | "staff" | "analyst" | "trainer" | "developer" | "senior" | "caregiver" | "healthcare";
 
 interface Profile {
   first_name: string;
@@ -54,15 +54,40 @@ const Portal = () => {
         setProfile(profileData);
       }
 
-      // Load roles
+      // Load roles from user_roles table
       const { data: rolesData } = await supabase
         .from("user_roles")
         .select("role")
         .eq("user_id", user.id);
 
-      if (rolesData) {
-        setRoles(rolesData.map((r) => r.role as UserRole));
-      }
+      const userRoles: UserRole[] = rolesData?.map((r) => r.role as UserRole) || [];
+
+      // Check for profile-specific roles
+      const { data: seniorProfile } = await supabase
+        .from("senior_client_profiles")
+        .select("id")
+        .eq("user_id", user.id)
+        .maybeSingle();
+      
+      if (seniorProfile) userRoles.push("senior");
+
+      const { data: caregiverProfile } = await supabase
+        .from("caregiver_profiles")
+        .select("id")
+        .eq("user_id", user.id)
+        .maybeSingle();
+      
+      if (caregiverProfile) userRoles.push("caregiver");
+
+      const { data: healthcareProfile } = await supabase
+        .from("healthcare_professional_profiles")
+        .select("id")
+        .eq("user_id", user.id)
+        .maybeSingle();
+      
+      if (healthcareProfile) userRoles.push("healthcare");
+
+      setRoles(userRoles);
     } catch (error: any) {
       console.error("Error loading user data:", error);
     } finally {
@@ -97,12 +122,36 @@ const Portal = () => {
       color: "from-red-500 to-orange-500",
     },
     {
+      role: "senior" as UserRole,
+      title: "Senior/Family Portal",
+      description: "Manage care, appointments, ScamShield protection",
+      icon: Heart,
+      path: "/portal/senior",
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      role: "caregiver" as UserRole,
+      title: "Caregiver Portal",
+      description: "Schedule, clients, training, documentation",
+      icon: Heart,
+      path: "/portal/caregiver",
+      color: "from-pink-500 to-rose-500",
+    },
+    {
+      role: "healthcare" as UserRole,
+      title: "Healthcare Professional Portal",
+      description: "Patient care, medical records, consultations",
+      icon: Stethoscope,
+      path: "/portal/healthcare",
+      color: "from-green-500 to-emerald-500",
+    },
+    {
       role: "analyst" as UserRole,
       title: "Threat Analyst Dashboard",
       description: "Review ScamShield cases, analyze threats",
       icon: Shield,
       path: "/portal/analyst",
-      color: "from-blue-500 to-cyan-500",
+      color: "from-purple-500 to-violet-500",
     },
     {
       role: "trainer" as UserRole,
@@ -110,7 +159,7 @@ const Portal = () => {
       description: "Manage training sessions, student progress",
       icon: GraduationCap,
       path: "/portal/trainer",
-      color: "from-green-500 to-emerald-500",
+      color: "from-orange-500 to-amber-500",
     },
     {
       role: "developer" as UserRole,
@@ -118,7 +167,7 @@ const Portal = () => {
       description: "Manage AI projects, client implementations",
       icon: Code,
       path: "/portal/developer",
-      color: "from-purple-500 to-pink-500",
+      color: "from-indigo-500 to-blue-500",
     },
     {
       role: "staff" as UserRole,
@@ -189,7 +238,7 @@ const Portal = () => {
 
           {availableRoles.length === 0 ? (
             <Card className="p-12 text-center">
-              <LayoutDashboard className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
+              <Shield className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
               <h3 className="text-xl font-semibold mb-2">No Role Assigned</h3>
               <p className="text-muted-foreground mb-6">
                 Please contact your administrator to assign you a role.

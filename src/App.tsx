@@ -20,6 +20,9 @@ import AnalystDashboard from "./pages/portal/AnalystDashboard";
 import TrainerDashboard from "./pages/portal/TrainerDashboard";
 import DeveloperDashboard from "./pages/portal/DeveloperDashboard";
 import StaffDashboard from "./pages/portal/StaffDashboard";
+import SeniorDashboard from "./pages/portal/SeniorDashboard";
+import CaregiverDashboard from "./pages/portal/CaregiverDashboard";
+import HealthcareDashboard from "./pages/portal/HealthcareDashboard";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import { ProtectedRoute } from "./components/ProtectedRoute";
@@ -62,6 +65,9 @@ const App = () => {
             <Route path="/portal/trainer" element={<ProtectedRoute><TrainerDashboard /></ProtectedRoute>} />
             <Route path="/portal/developer" element={<ProtectedRoute><DeveloperDashboard /></ProtectedRoute>} />
             <Route path="/portal/staff" element={<ProtectedRoute><StaffDashboard /></ProtectedRoute>} />
+            <Route path="/portal/senior" element={<ProtectedRoute><SeniorDashboard /></ProtectedRoute>} />
+            <Route path="/portal/caregiver" element={<ProtectedRoute><CaregiverDashboard /></ProtectedRoute>} />
+            <Route path="/portal/healthcare" element={<ProtectedRoute><HealthcareDashboard /></ProtectedRoute>} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

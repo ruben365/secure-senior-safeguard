@@ -460,8 +460,7 @@ const Signup = () => {
             <div className="space-y-8">
               <div className="text-center">
                 <h2 className="text-3xl font-bold mb-3 gradient-text-primary">Select Your Role</h2>
-                <p className="text-muted-foreground text-lg mb-2">Choose the role that best describes you</p>
-                <p className="text-sm text-primary font-semibold">✓ Anyone can apply • Admin approval required</p>
+                <p className="text-muted-foreground text-lg">Choose the role that best describes you</p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
