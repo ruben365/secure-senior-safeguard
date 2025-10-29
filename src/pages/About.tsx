@@ -13,8 +13,8 @@ const About = () => {
       <Navigation />
 
       <Hero
-        headline="Protecting Families & Businesses in the AI Age"
-        subheadline="Based in Ohio, serving nationwide"
+        headline="Your Partner in AI Safety and Security"
+        subheadline="Locally owned in Ohio, protecting families and businesses nationwide"
       />
 
       {/* Our Story */}
@@ -22,10 +22,13 @@ const About = () => {
         <FlowingWaves variant="full" opacity={0.12} />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-center mb-12">Born from a Personal Experience</h2>
+            <h2 className="text-center mb-12">Founded on a Personal Mission</h2>
             <div className="space-y-6 text-lg leading-relaxed text-muted-foreground">
               <p>
-                InVision Network was founded when our founder witnessed his own grandmother nearly fall victim to an AI voice-cloning scam. The sophistication of these new AI-powered threats made it clear that traditional fraud prevention wasn't enough. We set out to create comprehensive protection that combines expert training, real-time threat analysis, and innovative AI business solutions - all with a security-first mindset.
+                InVision Network was born from a personal experience when our founder witnessed his own grandmother nearly fall victim to a sophisticated AI voice-cloning scam. The caller sounded exactly like her grandson, claiming he was in jail and desperately needed money. It was only by asking a specific question that she realized something was wrong.
+              </p>
+              <p>
+                That moment changed everything. We realized that traditional fraud prevention methods weren't enough to combat these new AI-powered threats. So we created InVision Network - a comprehensive solution that combines expert training, real-time threat analysis, and innovative AI business solutions, all built on a foundation of security and trust.
               </p>
             </div>
           </div>

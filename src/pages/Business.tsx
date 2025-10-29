@@ -18,18 +18,18 @@ const Business = () => {
       <Navigation />
 
       <Hero
-        headline="AI Solutions Built for Security, Performance & Growth"
-        subheadline="From AI agents to professional websites to the world's first AI Service Insurance"
+        headline="Grow Your Business with Secure AI Solutions"
+        subheadline="Custom AI automation, professional websites, and industry-leading AI Service Insurance"
       >
         <div className="flex flex-col sm:flex-row gap-4">
           <Button asChild variant="default" size="xl">
-            <Link to="/contact">BUILD AN AI AGENT</Link>
+            <Link to="/contact">Build AI Automation</Link>
           </Button>
           <Button asChild variant="outlineLight" size="xl">
-            <Link to="/contact">DESIGN A WEBSITE</Link>
+            <Link to="/contact">Design My Website</Link>
           </Button>
           <Button asChild variant="outlineLight" size="xl">
-            <Link to="/contact">PROTECT MY AI</Link>
+            <Link to="/contact">Get AI Insurance</Link>
           </Button>
         </div>
       </Hero>

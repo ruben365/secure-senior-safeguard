@@ -33,19 +33,19 @@ const LearnAndTrain = () => {
       {/* Hero Section */}
       <Hero
         useTransitioningBackground={true}
-        headline="Learn & Train with InVision Network"
-        subheadline="Expert cybersecurity training and 24/7 scam protection services to keep you and your loved ones safe."
+        headline="Learn How to Recognize and Stop Scams"
+        subheadline="Professional training programs and 24/7 protection services designed for real-world safety"
         showScrollIndicator={true}
       >
         <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center sm:justify-start">
           <Button asChild variant="default" size="xl" className="w-full sm:w-auto">
             <Link to="#training" aria-label="Explore training options">
-              Explore Training
+              View Training Programs
             </Link>
           </Button>
           <Button asChild variant="secondary" size="xl" className="w-full sm:w-auto">
             <Link to="#scamshield" aria-label="View ScamShield protection">
-              ScamShield Protection
+              Learn About ScamShield
             </Link>
           </Button>
         </div>
@@ -55,9 +55,9 @@ const LearnAndTrain = () => {
       <section id="training" className="py-16 bg-background relative overflow-hidden">
         <FlowingWaves variant="full" opacity={0.12} />
         <div className="container mx-auto px-4 relative z-10">
-          <h2 className="text-center mb-4 animate-fade-in-up">Cybersecurity Training Sessions</h2>
+          <h2 className="text-center mb-4 animate-fade-in-up">Scam Prevention Training Programs</h2>
           <p className="text-center text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
-            Interactive group training sessions to help you recognize and avoid online scams
+            Interactive training sessions that teach you practical skills to recognize and stop AI-powered scams
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">

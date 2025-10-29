@@ -40,14 +40,14 @@ const Index = () => {
       {/* Hero Section */}
       <Hero
         useTransitioningBackground={true}
-        headline="Stop AI Scammers Before They Strike"
-        subheadline="Expert training & 24/7 protection for Ohio families and businesses"
+        headline="Protect Your Family from AI-Powered Scams"
+        subheadline="Ohio's trusted source for scam prevention training and 24/7 protection services"
         showScrollIndicator={true}
       >
         <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center sm:justify-start">
           <Button asChild variant="default" size="xl" className="w-full sm:w-auto">
             <Link to="/training" aria-label="Learn to spot scams">
-              Learn to Spot Scams
+              Get Protection Now
             </Link>
           </Button>
         </div>
@@ -299,7 +299,7 @@ const Index = () => {
 
           <div className="text-center mt-10 animate-fade-in-up" style={{ animationDelay: "700ms" }}>
             <Button asChild variant="default" size="xl">
-              <Link to="/resources">DOWNLOAD FREE PROTOCOL CARD</Link>
+              <Link to="/resources">Download Free Protection Guide</Link>
             </Button>
           </div>
         </div>
@@ -347,7 +347,7 @@ const Index = () => {
 
           <div className="text-center mt-10 animate-fade-in-up" style={{ animationDelay: "400ms" }}>
             <Button asChild variant="default" size="xl">
-              <Link to="/training">VIEW TRAINING PROGRAMS</Link>
+              <Link to="/training">View Training Options</Link>
             </Button>
           </div>
         </div>
@@ -369,55 +369,55 @@ const Index = () => {
           <h2 className="text-center mb-10 animate-fade-in-up">Trusted by 500+ Ohio Families</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="animate-fade-in-up" style={{ animationDelay: "0ms" }}>
-              <TestimonialCard
+            <TestimonialCard
                 name="Margaret R."
                 age="68"
                 location="Columbus, OH"
-                quote="After taking the training, I spotted a deepfake call from 'my grandson' asking for bail money. InVision saved me from losing $5,000."
+                quote="I received a call from someone claiming to be my grandson, saying he was in jail and needed bail money immediately. Thanks to InVision's training, I recognized it as a deepfake scam. They saved me from losing $5,000."
                 image={testimonial1}
               />
             </div>
             <div className="animate-fade-in-up" style={{ animationDelay: "150ms" }}>
-              <TestimonialCard
+            <TestimonialCard
                 name="James K."
                 location="Cleveland, OH"
-                quote="Our business uses three AI tools now. InVision's AI Insurance gives us peace of mind that we're protected."
+                quote="As a small business owner, I was worried about using AI tools. InVision's AI Service Insurance gives us complete peace of mind. Now we can innovate confidently knowing we're protected."
                 image={testimonial3}
               />
             </div>
             <div className="animate-fade-in-up" style={{ animationDelay: "300ms" }}>
-              <TestimonialCard
+            <TestimonialCard
                 name="Patricia L."
                 age="71"
                 location="Dayton, OH"
-                quote="The ScamShield service caught a sophisticated phishing email that looked exactly like my bank. Worth every penny."
+                quote="I forwarded a suspicious email to ScamShield that looked exactly like my bank asking me to verify my account. Within hours, they confirmed it was a sophisticated phishing scam and told me exactly what to do. This service is worth every penny."
                 image={testimonial5}
               />
             </div>
             <div className="animate-fade-in-up" style={{ animationDelay: "450ms" }}>
-              <TestimonialCard
+            <TestimonialCard
                 name="Robert & Linda K."
                 age="72 & 70"
                 location="Dayton, OH"
-                quote="My husband and I took the Family Small Group class. The instructor was patient, clear, and funny. We feel 100% safer online now."
+                quote="My husband and I attended the Family Small Group training session. The instructor was incredibly patient and explained everything in plain English without talking down to us. We learned how to spot AI voice clones, verify urgent messages, and set up our family safe-word system. We finally feel confident using technology safely."
                 image={testimonial2}
               />
             </div>
             <div className="animate-fade-in-up" style={{ animationDelay: "600ms" }}>
-              <TestimonialCard
+            <TestimonialCard
                 name="William Chen"
                 age="78"
                 location="Akron, OH"
-                quote="I'm not tech-savvy, but the in-home training made everything click. They taught me how to spot AI voice clones. My daughter finally stopped worrying!"
+                quote="I'll be honest - I'm not comfortable with technology. But the trainer came to my home and patiently walked me through everything step by step. They showed me real examples of AI voice clones and taught me simple questions to ask when someone calls asking for money. My daughter can finally sleep at night knowing I'm protected."
                 image={testimonial6}
               />
             </div>
             <div className="animate-fade-in-up" style={{ animationDelay: "750ms" }}>
-              <TestimonialCard
+            <TestimonialCard
                 name="Jennifer Wallace"
                 age="58"
                 location="Cleveland, OH"
-                quote="After my mother nearly lost $15,000 to a scammer, I signed our whole family up for training. It's been a lifesaver. Everyone knows the protocol now."
+                quote="After my 82-year-old mother nearly lost $15,000 to a 'grandparent scam,' I knew we needed professional help. I enrolled our entire family in the training program. Now everyone knows the 60-Second Pause Protocol, we have a family safe-word, and Mom forwards anything suspicious to ScamShield before taking action. This has been a lifesaver for our peace of mind."
                 image={testimonial7}
               />
             </div>
@@ -478,22 +478,22 @@ const Index = () => {
       </section>
 
       {/* Final CTA */}
-      <CTASection headline="Don't Wait Until You're Targeted" variant="gold">
-        <p className="text-xl text-white/90 mb-8">Join 500+ protected families in Ohio. Get started risk-free today.</p>
+      <CTASection headline="Protect What Matters Most" variant="gold">
+        <p className="text-xl text-white/90 mb-8">Join 500+ Ohio families who sleep better knowing they're protected from AI scams.</p>
         <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center">
           <Button asChild variant="gold" size="xl" className="w-full sm:w-auto">
             <Link to="/training" aria-label="Book free training call">
-              BOOK FREE TRAINING CALL
+              Schedule Free Consultation
             </Link>
           </Button>
           <Button asChild variant="secondary" size="xl" className="w-full sm:w-auto">
-            <Link to="/scam-shield" aria-label="Start 14-day Shield trial">
-              START 14-DAY SHIELD TRIAL
+            <Link to="/training" aria-label="Start 14-day Shield trial">
+              Start 14-Day Free Trial
             </Link>
           </Button>
           <Button asChild variant="outlineLight" size="xl" className="w-full sm:w-auto">
-            <Link to="/ai-business" aria-label="Request business quote">
-              REQUEST BUSINESS QUOTE
+            <Link to="/business" aria-label="Request business quote">
+              Get Business Quote
             </Link>
           </Button>
         </div>
