@@ -29,8 +29,8 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/scam-shield" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                  Family Scam Shield
+                <Link to="/services" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                  ScamShield Protection
                 </Link>
               </li>
               <li>
@@ -98,7 +98,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/scam-shield#submit" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                <Link to="/contact" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                   Submit Suspicious Item
                 </Link>
               </li>
@@ -120,12 +120,12 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/refund" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                <Link to="/contact" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                   Refund Policy
                 </Link>
               </li>
               <li>
-                <Link to="/disclaimer" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                <Link to="/contact" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                   Disclaimer
                 </Link>
               </li>
@@ -139,12 +139,12 @@ const Footer = () => {
               <li className="text-primary-foreground/80">20% Military Discount</li>
               <li className="text-primary-foreground/80">25% Cancer Patient Discount</li>
               <li>
-                <Link to="/partnerships" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                <Link to="/contact" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                   Church Partnerships
                 </Link>
               </li>
               <li>
-                <Link to="/donate" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                <Link to="/contact" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                   Donate Training
                 </Link>
               </li>
@@ -170,16 +170,40 @@ const Footer = () => {
 
         {/* Social Media */}
         <div className="flex justify-center space-x-6 mb-8">
-          <a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors" aria-label="Facebook">
+          <a 
+            href="https://facebook.com" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-primary-foreground/80 hover:text-accent transition-colors transform hover:scale-110 duration-200" 
+            aria-label="Follow us on Facebook"
+          >
             <Facebook className="w-6 h-6" />
           </a>
-          <a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors" aria-label="LinkedIn">
+          <a 
+            href="https://linkedin.com" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-primary-foreground/80 hover:text-accent transition-colors transform hover:scale-110 duration-200" 
+            aria-label="Connect with us on LinkedIn"
+          >
             <Linkedin className="w-6 h-6" />
           </a>
-          <a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors" aria-label="YouTube">
+          <a 
+            href="https://youtube.com" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-primary-foreground/80 hover:text-accent transition-colors transform hover:scale-110 duration-200" 
+            aria-label="Subscribe to our YouTube channel"
+          >
             <Youtube className="w-6 h-6" />
           </a>
-          <a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors" aria-label="Instagram">
+          <a 
+            href="https://instagram.com" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-primary-foreground/80 hover:text-accent transition-colors transform hover:scale-110 duration-200" 
+            aria-label="Follow us on Instagram"
+          >
             <Instagram className="w-6 h-6" />
           </a>
         </div>
@@ -188,7 +212,7 @@ const Footer = () => {
         <div className="border-t border-primary-foreground/20 pt-8 pb-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-primary-foreground/80 text-sm text-center md:text-left">
-              © 2025 InVision Network. All rights reserved.
+              © {new Date().getFullYear()} InVision Network. All rights reserved.
             </p>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2 text-xs">
@@ -211,7 +235,7 @@ const Footer = () => {
             <span className="text-primary-foreground/40">|</span>
             <Link to="/terms-of-service" className="text-primary-foreground/60 text-xs hover:text-primary-foreground transition-colors mx-2">Terms of Service</Link>
             <span className="text-primary-foreground/40">|</span>
-            <Link to="/cookie-policy" className="text-primary-foreground/60 text-xs hover:text-primary-foreground transition-colors mx-2">Cookie Policy</Link>
+            <Link to="/contact" className="text-primary-foreground/60 text-xs hover:text-primary-foreground transition-colors mx-2">Cookie Policy</Link>
           </div>
         </div>
       </div>
