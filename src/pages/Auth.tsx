@@ -5,9 +5,23 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, Home, Shield } from "lucide-react";
+import { 
+  Loader2, 
+  Home, 
+  Shield, 
+  Lock, 
+  Mail, 
+  User, 
+  Eye, 
+  EyeOff,
+  CheckCircle2,
+  Sparkles
+} from "lucide-react";
 import { z } from "zod";
+import heroImage from "@/assets/hero-about-3d.jpg";
 
 const emailSchema = z.string().email("Invalid email address");
 const passwordSchema = z.string().min(6, "Password must be at least 6 characters");
@@ -19,6 +33,8 @@ const Auth = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -97,124 +113,300 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/10 via-background to-accent/10 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <Link to="/" className="inline-flex items-center justify-center gap-3 mb-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
+    <div className="min-h-screen bg-background flex">
+      {/* Left Side - Decorative Image Panel */}
+      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/80 to-accent/90 z-10" />
+        <img 
+          src={heroImage} 
+          alt="InVision Network Security" 
+          className="object-cover w-full h-full"
+        />
+        <div className="absolute inset-0 z-20 flex flex-col justify-between p-12 text-white">
+          {/* Top Logo */}
+          <Link to="/" className="flex items-center gap-3 group">
+            <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
               <Shield className="w-7 h-7 text-white" />
             </div>
+            <div>
+              <h1 className="text-2xl font-bold">InVision Network</h1>
+              <p className="text-sm text-white/80">AI Scam Protection</p>
+            </div>
           </Link>
-          <h1 className="text-3xl font-bold mb-2">InVision Network</h1>
-          <p className="text-muted-foreground">Staff Portal Access</p>
-        </div>
 
-        <Card className="p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold mb-2">
-                {isLogin ? "Sign In" : "Create Account"}
+          {/* Center Content */}
+          <div className="space-y-8">
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
+                <Sparkles className="w-4 h-4" />
+                <span className="text-sm font-medium">Secure Portal Access</span>
+              </div>
+              <h2 className="text-4xl font-bold leading-tight">
+                Protecting Ohio Families from AI-Powered Scams
               </h2>
-              <p className="text-sm text-muted-foreground">
-                {isLogin ? "Welcome back! Please sign in to continue" : "Join our team portal"}
+              <p className="text-lg text-white/90">
+                Join our team of experts dedicated to keeping communities safe from emerging digital threats.
               </p>
             </div>
 
-            {!isLogin && (
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="firstName">First Name</Label>
-                  <Input
-                    id="firstName"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    required
-                    disabled={isLoading}
-                    placeholder="John"
-                  />
+            {/* Features */}
+            <div className="space-y-4">
+              {[
+                "Role-based dashboard access",
+                "Real-time threat monitoring",
+                "Secure team collaboration",
+                "24/7 system availability"
+              ].map((feature, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
+                    <CheckCircle2 className="w-4 h-4 text-white" />
+                  </div>
+                  <span className="text-white/90">{feature}</span>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="lastName">Last Name</Label>
-                  <Input
-                    id="lastName"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    required
-                    disabled={isLoading}
-                    placeholder="Doe"
-                  />
-                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Bottom Stats */}
+          <div className="grid grid-cols-3 gap-6">
+            <div className="space-y-1">
+              <div className="text-3xl font-bold">500+</div>
+              <div className="text-sm text-white/80">Families Protected</div>
+            </div>
+            <div className="space-y-1">
+              <div className="text-3xl font-bold">24/7</div>
+              <div className="text-sm text-white/80">Support Available</div>
+            </div>
+            <div className="space-y-1">
+              <div className="text-3xl font-bold">100%</div>
+              <div className="text-sm text-white/80">Secure Platform</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Right Side - Auth Form */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
+        <div className="w-full max-w-md space-y-8">
+          {/* Mobile Logo */}
+          <div className="lg:hidden text-center">
+            <Link to="/" className="inline-flex items-center justify-center gap-3 mb-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
+                <Shield className="w-7 h-7 text-white" />
               </div>
-            )}
+            </Link>
+            <h1 className="text-2xl font-bold">InVision Network</h1>
+            <p className="text-muted-foreground">Staff Portal</p>
+          </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                disabled={isLoading}
-                placeholder="name@company.com"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                disabled={isLoading}
-                placeholder="••••••••"
-              />
-              {!isLogin && (
-                <p className="text-xs text-muted-foreground">
-                  Password must be at least 6 characters
+          <Card className="p-8 shadow-xl border-2 animate-fade-in">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Header */}
+              <div className="text-center space-y-2">
+                <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <Lock className="w-8 h-8 text-white" />
+                </div>
+                <h2 className="text-3xl font-bold">
+                  {isLogin ? "Welcome Back" : "Join Our Team"}
+                </h2>
+                <p className="text-muted-foreground">
+                  {isLogin 
+                    ? "Sign in to access your secure dashboard" 
+                    : "Create your account to get started"}
                 </p>
-              )}
-            </div>
+              </div>
 
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  {isLogin ? "Signing in..." : "Creating account..."}
-                </>
-              ) : (
-                <>{isLogin ? "Sign In" : "Create Account"}</>
-              )}
-            </Button>
+              <Separator />
 
-            <div className="text-center">
-              <button
-                type="button"
-                onClick={() => {
-                  setIsLogin(!isLogin);
-                  setEmail("");
-                  setPassword("");
-                  setFirstName("");
-                  setLastName("");
-                }}
-                className="text-sm text-primary hover:underline"
+              {/* Name Fields for Signup */}
+              {!isLogin && (
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="firstName" className="flex items-center gap-2">
+                      <User className="w-4 h-4" />
+                      First Name
+                    </Label>
+                    <Input
+                      id="firstName"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      required
+                      disabled={isLoading}
+                      placeholder="John"
+                      className="h-11"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="lastName">Last Name</Label>
+                    <Input
+                      id="lastName"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      required
+                      disabled={isLoading}
+                      placeholder="Doe"
+                      className="h-11"
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* Email Field */}
+              <div className="space-y-2">
+                <Label htmlFor="email" className="flex items-center gap-2">
+                  <Mail className="w-4 h-4" />
+                  Email Address
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  disabled={isLoading}
+                  placeholder="name@company.com"
+                  className="h-11"
+                />
+              </div>
+
+              {/* Password Field */}
+              <div className="space-y-2">
+                <Label htmlFor="password" className="flex items-center gap-2">
+                  <Lock className="w-4 h-4" />
+                  Password
+                </Label>
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    disabled={isLoading}
+                    placeholder="••••••••"
+                    className="h-11 pr-10"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                  >
+                    {showPassword ? (
+                      <EyeOff className="w-4 h-4" />
+                    ) : (
+                      <Eye className="w-4 h-4" />
+                    )}
+                  </button>
+                </div>
+                {!isLogin && (
+                  <p className="text-xs text-muted-foreground">
+                    Must be at least 6 characters long
+                  </p>
+                )}
+              </div>
+
+              {/* Remember Me & Forgot Password */}
+              {isLogin && (
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox 
+                      id="remember" 
+                      checked={rememberMe}
+                      onCheckedChange={(checked) => setRememberMe(checked as boolean)}
+                    />
+                    <Label 
+                      htmlFor="remember" 
+                      className="text-sm cursor-pointer"
+                    >
+                      Remember me
+                    </Label>
+                  </div>
+                  <Link 
+                    to="/contact" 
+                    className="text-sm text-primary hover:underline"
+                  >
+                    Forgot password?
+                  </Link>
+                </div>
+              )}
+
+              {/* Terms for Signup */}
+              {!isLogin && (
+                <div className="flex items-start space-x-2">
+                  <Checkbox id="terms" required />
+                  <Label htmlFor="terms" className="text-sm text-muted-foreground cursor-pointer leading-relaxed">
+                    I agree to the{" "}
+                    <Link to="/terms-of-service" className="text-primary hover:underline">
+                      Terms of Service
+                    </Link>{" "}
+                    and{" "}
+                    <Link to="/privacy-policy" className="text-primary hover:underline">
+                      Privacy Policy
+                    </Link>
+                  </Label>
+                </div>
+              )}
+
+              {/* Submit Button */}
+              <Button 
+                type="submit" 
+                className="w-full h-12 text-lg font-semibold" 
                 disabled={isLoading}
               >
-                {isLogin ? "Don't have an account? Sign up" : "Already have an account? Sign in"}
-              </button>
-            </div>
-          </form>
-        </Card>
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    {isLogin ? "Signing in..." : "Creating account..."}
+                  </>
+                ) : (
+                  <>
+                    {isLogin ? "Sign In" : "Create Account"}
+                  </>
+                )}
+              </Button>
 
-        <div className="mt-6 text-center">
-          <Button asChild variant="ghost" size="sm">
-            <Link to="/" className="gap-2">
-              <Home className="w-4 h-4" />
-              Back to Home
-            </Link>
-          </Button>
+              <Separator />
+
+              {/* Toggle Login/Signup */}
+              <div className="text-center">
+                <p className="text-sm text-muted-foreground">
+                  {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsLogin(!isLogin);
+                      setEmail("");
+                      setPassword("");
+                      setFirstName("");
+                      setLastName("");
+                    }}
+                    className="text-primary font-semibold hover:underline"
+                    disabled={isLoading}
+                  >
+                    {isLogin ? "Sign up" : "Sign in"}
+                  </button>
+                </p>
+              </div>
+
+              {/* Back to Home */}
+              <div className="text-center pt-4">
+                <Button asChild variant="ghost" size="sm">
+                  <Link to="/" className="gap-2 text-muted-foreground">
+                    <Home className="w-4 h-4" />
+                    Back to Home
+                  </Link>
+                </Button>
+              </div>
+            </form>
+          </Card>
+
+          {/* Security Badge */}
+          <div className="text-center">
+            <div className="inline-flex items-center gap-2 text-sm text-muted-foreground">
+              <Shield className="w-4 h-4" />
+              <span>Secured with enterprise-grade encryption</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
