@@ -25,6 +25,7 @@ import TermsOfService from "./pages/TermsOfService";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 import { AIChat } from "./components/AIChat";
+import { AIChatProvider } from "./contexts/AIChatContext";
 
 const queryClient = new QueryClient();
 
@@ -42,7 +43,8 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        <AIChatProvider>
+          <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/training" element={<Training />} />
@@ -67,6 +69,7 @@ const App = () => {
           </Routes>
           <AIChat />
         </BrowserRouter>
+        </AIChatProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );

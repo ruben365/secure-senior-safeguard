@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
+import { useAIChat } from "@/contexts/AIChatContext";
 import { 
   MessageSquare, 
   Send, 
@@ -25,7 +26,7 @@ interface Message {
 type AIMode = "chat" | "sentiment" | "summary" | "translation" | "document_qa";
 
 export const AIChat = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, openChat, closeChat } = useAIChat();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -156,7 +157,7 @@ export const AIChat = () => {
   if (!isOpen) {
     return (
       <Button
-        onClick={() => setIsOpen(true)}
+        onClick={openChat}
         className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg z-50"
         size="icon"
       >
@@ -175,7 +176,7 @@ export const AIChat = () => {
         <Button
           variant="ghost"
           size="icon"
-          onClick={() => setIsOpen(false)}
+          onClick={closeChat}
         >
           <X className="h-4 w-4" />
         </Button>

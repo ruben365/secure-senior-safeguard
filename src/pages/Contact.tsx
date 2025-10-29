@@ -14,6 +14,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 import { z } from "zod";
+import { useAIChat } from "@/contexts/AIChatContext";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
@@ -24,6 +25,7 @@ const contactSchema = z.object({
 });
 
 const Contact = () => {
+  const { openChat } = useAIChat();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -314,7 +316,7 @@ const Contact = () => {
                     <div>
                       <h3 className="text-xl font-bold mb-2">Live Chat</h3>
                       <p className="text-muted-foreground mb-3">We typically respond within 5 minutes during business hours.</p>
-                      <Button variant="default">OPEN CHAT</Button>
+                      <Button variant="default" onClick={openChat}>OPEN CHAT</Button>
                     </div>
                   </div>
                 </Card>
