@@ -1,19 +1,23 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Calendar } from "@/components/ui/calendar";
 import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
 import {
   ArrowLeft,
   GraduationCap,
   Users,
   Calendar as CalendarIcon,
   Award,
+  LogOut,
 } from "lucide-react";
 
 const TrainerDashboard = () => {
+  const navigate = useNavigate();
+  const { toast } = useToast();
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [tasks, setTasks] = useState<any[]>([]);
   const [events, setEvents] = useState<any[]>([]);
@@ -21,6 +25,20 @@ const TrainerDashboard = () => {
   useEffect(() => {
     loadData();
   }, []);
+
+  const handleSignOut = async () => {
+    try {
+      await supabase.auth.signOut();
+      toast({ title: "Signed out successfully" });
+      navigate("/auth");
+    } catch (error: any) {
+      toast({
+        title: "Error signing out",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
+  };
 
   const loadData = async () => {
     const { data: { user } } = await supabase.auth.getUser();
@@ -50,17 +68,23 @@ const TrainerDashboard = () => {
     <div className="min-h-screen bg-background">
       <header className="border-b bg-card">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center gap-4">
-            <Button asChild variant="ghost" size="sm">
-              <Link to="/portal">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back
-              </Link>
-            </Button>
-            <div>
-              <h1 className="text-2xl font-bold">Trainer Dashboard</h1>
-              <p className="text-sm text-muted-foreground">Training sessions and student management</p>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <Button asChild variant="ghost" size="sm">
+                <Link to="/portal">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back
+                </Link>
+              </Button>
+              <div>
+                <h1 className="text-2xl font-bold">Trainer Dashboard</h1>
+                <p className="text-sm text-muted-foreground">Training sessions and student management</p>
+              </div>
             </div>
+            <Button variant="outline" size="sm" onClick={handleSignOut}>
+              <LogOut className="w-4 h-4 mr-2" />
+              Sign Out
+            </Button>
           </div>
         </div>
       </header>
