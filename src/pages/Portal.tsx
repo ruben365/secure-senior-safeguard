@@ -74,13 +74,14 @@ const Portal = () => {
     try {
       await supabase.auth.signOut();
       toast({
-        title: "Signed out successfully",
+        title: "👋 Signed Out Successfully",
+        description: "You've been securely logged out. See you next time!",
       });
       navigate("/auth");
     } catch (error: any) {
       toast({
-        title: "Error signing out",
-        description: error.message,
+        title: "❌ Sign Out Failed",
+        description: error.message || "Unable to sign out. Please try again.",
         variant: "destructive",
       });
     }

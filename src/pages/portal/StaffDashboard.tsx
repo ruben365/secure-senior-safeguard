@@ -29,7 +29,10 @@ const StaffDashboard = () => {
   const handleSignOut = async () => {
     try {
       await supabase.auth.signOut();
-      toast({ title: "Signed out successfully" });
+      toast({ 
+        title: "👋 Signed Out Successfully",
+        description: "You've been securely logged out. See you next time!"
+      });
       navigate("/auth");
     } catch (error: any) {
       toast({

@@ -128,16 +128,38 @@ const Signup = () => {
       passwordSchema.parse(password);
       
       if (password !== confirmPassword) {
-        toast({ title: "Error", description: "Passwords do not match", variant: "destructive" });
+        toast({ 
+          title: "🔒 Password Mismatch", 
+          description: "Passwords do not match. Please check and try again.", 
+          variant: "destructive" 
+        });
         return false;
       }
       if (!firstName || !lastName || !dateOfBirth || !addressStreet || !addressCity || !addressState || !addressZip) {
-        toast({ title: "Error", description: "Please fill all required fields", variant: "destructive" });
+        toast({ 
+          title: "📝 Missing Information", 
+          description: "Please fill in all required fields to continue", 
+          variant: "destructive" 
+        });
         return false;
       }
       return true;
     } catch (error: any) {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      let errorTitle = "❌ Validation Error";
+      let errorMessage = error.message;
+      
+      if (error.message?.includes("email")) {
+        errorTitle = "📧 Invalid Email";
+        errorMessage = "Please enter a valid email address";
+      } else if (error.message?.includes("phone")) {
+        errorTitle = "📞 Invalid Phone";
+        errorMessage = "Phone must be in format XXX-XXX-XXXX";
+      } else if (error.message?.includes("password")) {
+        errorTitle = "🔒 Password Requirements";
+        errorMessage = "Password must be 8+ characters with uppercase, number, and special character";
+      }
+      
+      toast({ title: errorTitle, description: errorMessage, variant: "destructive" });
       return false;
     }
   };
@@ -145,34 +167,58 @@ const Signup = () => {
   const validateStep3 = () => {
     if (selectedRole === "senior") {
       if (!relationship || !emergencyContactName || !emergencyContactPhone) {
-        toast({ title: "Error", description: "Please fill all required fields", variant: "destructive" });
+        toast({ 
+          title: "⚠️ Missing Information", 
+          description: "Please fill in all required fields for senior/family member role", 
+          variant: "destructive" 
+        });
         return false;
       }
     } else if (selectedRole === "caregiver") {
       if (!certificationNumber || !certificationType || !yearsExperience || !availableHours ||
           !reference1Name || !reference1Phone || !reference1Email ||
           !reference2Name || !reference2Phone || !reference2Email || !backgroundCheckConsent) {
-        toast({ title: "Error", description: "Please fill all required fields and consent to background check", variant: "destructive" });
+        toast({ 
+          title: "⚠️ Missing Information", 
+          description: "Please complete all caregiver requirements including references and background check consent", 
+          variant: "destructive" 
+        });
         return false;
       }
     } else if (selectedRole === "healthcare") {
       if (!licenseNumber || !licenseType || !medicalSpecialty || !yearsInPractice) {
-        toast({ title: "Error", description: "Please fill all required fields", variant: "destructive" });
+        toast({ 
+          title: "⚠️ Missing Information", 
+          description: "Please provide all healthcare professional credentials", 
+          variant: "destructive" 
+        });
         return false;
       }
     } else if (selectedRole === "analyst") {
       if (!department || !specialization || !educationLevel) {
-        toast({ title: "Error", description: "Please fill all required fields", variant: "destructive" });
+        toast({ 
+          title: "⚠️ Missing Information", 
+          description: "Please fill in all required analyst information", 
+          variant: "destructive" 
+        });
         return false;
       }
     } else if (selectedRole === "trainer") {
       if (!trainingSpecialization || !certifications || !yearsTrainingExperience) {
-        toast({ title: "Error", description: "Please fill all required fields", variant: "destructive" });
+        toast({ 
+          title: "⚠️ Missing Information", 
+          description: "Please provide all trainer qualifications", 
+          variant: "destructive" 
+        });
         return false;
       }
     } else if (selectedRole === "developer") {
       if (!developerRole || techStack.length === 0 || !developerYearsExperience) {
-        toast({ title: "Error", description: "Please fill all required fields", variant: "destructive" });
+        toast({ 
+          title: "⚠️ Missing Information", 
+          description: "Please complete all developer/IT requirements", 
+          variant: "destructive" 
+        });
         return false;
       }
     }
@@ -181,11 +227,24 @@ const Signup = () => {
 
   const handleNext = () => {
     if (step === 1 && !selectedRole) {
-      toast({ title: "Error", description: "Please select a role", variant: "destructive" });
+      toast({ 
+        title: "⚠️ Role Required", 
+        description: "Please select a role to continue", 
+        variant: "destructive" 
+      });
       return;
     }
     if (step === 2 && !validateStep2()) return;
     if (step === 3 && !validateStep3()) return;
+    
+    // Success notification for completing a step
+    if (step < totalSteps - 1) {
+      toast({
+        title: "✓ Progress Saved",
+        description: `Step ${step} completed successfully`,
+      });
+    }
+    
     setStep(step + 1);
   };
 
@@ -193,12 +252,20 @@ const Signup = () => {
 
   const handleSubmit = async () => {
     if (!agreeTerms || !agreePrivacy) {
-      toast({ title: "Error", description: "Please agree to Terms and Privacy Policy", variant: "destructive" });
+      toast({ 
+        title: "⚠️ Agreement Required", 
+        description: "Please agree to Terms and Privacy Policy to continue", 
+        variant: "destructive" 
+      });
       return;
     }
 
     if ((selectedRole === "caregiver" || selectedRole === "healthcare") && !agreeBackgroundCheck) {
-      toast({ title: "Error", description: "Background check consent required for this role", variant: "destructive" });
+      toast({ 
+        title: "⚠️ Consent Required", 
+        description: "Background check consent is required for this role", 
+        variant: "destructive" 
+      });
       return;
     }
 
@@ -319,15 +386,35 @@ const Signup = () => {
       await supabase.auth.signOut();
 
       toast({
-        title: "Application Submitted!",
-        description: "Your application has been submitted for review.",
+        title: "🎉 Application Submitted!",
+        description: `Your application (${appRef}) has been submitted for admin review. Check your email for updates!`,
       });
 
       navigate(`/application-pending?ref=${appRef}`);
     } catch (error: any) {
+      let errorMessage = "An error occurred during signup";
+      let errorTitle = "❌ Signup Failed";
+      
+      // Handle specific error types
+      if (error.message?.includes("User already registered")) {
+        errorTitle = "📧 Email Already Registered";
+        errorMessage = "This email is already registered. Please try logging in instead.";
+      } else if (error.message?.includes("Password")) {
+        errorTitle = "🔒 Password Error";
+        errorMessage = "Password must be at least 8 characters with uppercase, number, and special character.";
+      } else if (error.message?.includes("Email")) {
+        errorTitle = "📧 Invalid Email";
+        errorMessage = "Please enter a valid email address.";
+      } else if (error.message?.includes("duplicate key")) {
+        errorTitle = "⚠️ Application Already Exists";
+        errorMessage = "An application with this information already exists. Please contact support.";
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      
       toast({
-        title: "Error",
-        description: error.message || "An error occurred during signup",
+        title: errorTitle,
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {

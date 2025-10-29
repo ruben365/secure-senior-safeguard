@@ -82,7 +82,7 @@ const Auth = () => {
           if (profileData && profileData.account_status === "pending") {
             await supabase.auth.signOut();
             toast({
-              title: "Account Pending Approval",
+              title: "⏳ Account Pending Approval",
               description: `Your account is awaiting admin approval. Reference: ${profileData.application_reference || 'N/A'}`,
               variant: "destructive",
             });
@@ -94,7 +94,7 @@ const Auth = () => {
           if (profileData && profileData.account_status === "rejected") {
             await supabase.auth.signOut();
             toast({
-              title: "Account Rejected",
+              title: "❌ Account Rejected",
               description: "Your application was not approved. Please contact support for more information.",
               variant: "destructive",
             });
@@ -106,7 +106,7 @@ const Auth = () => {
           if (profileData && profileData.account_status === "suspended") {
             await supabase.auth.signOut();
             toast({
-              title: "Account Suspended",
+              title: "🚫 Account Suspended",
               description: "Your account has been suspended. Please contact support.",
               variant: "destructive",
             });
@@ -115,8 +115,8 @@ const Auth = () => {
           }
 
           toast({
-            title: "Welcome back!",
-            description: "You've successfully logged in.",
+            title: "✨ Welcome back!",
+            description: `Successfully signed in as ${email}`,
           });
           navigate("/portal");
         }
@@ -125,9 +125,26 @@ const Auth = () => {
         navigate("/signup");
       }
     } catch (error: any) {
+      let errorMessage = "An error occurred during sign in";
+      let errorTitle = "❌ Sign In Failed";
+      
+      // Handle specific error types
+      if (error.message?.includes("Invalid login credentials")) {
+        errorTitle = "🔒 Invalid Credentials";
+        errorMessage = "Email or password is incorrect. Please try again.";
+      } else if (error.message?.includes("Email not confirmed")) {
+        errorTitle = "📧 Email Not Confirmed";
+        errorMessage = "Please check your email and confirm your account.";
+      } else if (error.message?.includes("Too many requests")) {
+        errorTitle = "⏱️ Too Many Attempts";
+        errorMessage = "Too many login attempts. Please wait a moment and try again.";
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      
       toast({
-        title: "Error",
-        description: error.message || "An error occurred",
+        title: errorTitle,
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
