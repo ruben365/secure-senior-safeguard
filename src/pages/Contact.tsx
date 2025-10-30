@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card } from "@/components/ui/card";
-import { Phone, Mail, MapPin, Clock, MessageSquare, Loader2 } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, MessageSquare, Loader2, Shield, CheckCircle, Users, Zap } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
@@ -42,10 +42,8 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Validate form data
       const validatedData = contactSchema.parse(formData);
 
-      // Submit to Supabase
       const { error } = await supabase.from("website_inquiries").insert({
         inquiry_type: validatedData.interest,
         name: validatedData.name,
@@ -59,7 +57,6 @@ const Contact = () => {
 
       toast.success("Thank you! We'll get back to you within 24 hours.");
       
-      // Reset form
       setFormData({
         name: "",
         email: "",
@@ -83,174 +80,255 @@ const Contact = () => {
     <div className="min-h-screen">
       <Navigation />
 
-      {/* Hero */}
       <Hero
         useTransitioningBackground={true}
-        headline="Let's Talk. We're Here to Help."
-        subheadline="Whether you have questions, need training, or want to protect your family—we're ready to assist you."
-      />
+        headline="Let's Protect Your Family Together"
+        subheadline="Expert guidance is just a message away. We respond within 24 hours."
+      >
+        <div className="flex flex-col sm:flex-row gap-4 justify-center sm:justify-start">
+          <Button 
+            onClick={openChat}
+            variant="default" 
+            size="xl"
+          >
+            <MessageSquare className="w-5 h-5 mr-2" />
+            Start Live Chat
+          </Button>
+          <Button asChild variant="outlineLight" size="xl">
+            <a href="tel:9375550199">
+              <Phone className="w-5 h-5 mr-2" />
+              Call Now
+            </a>
+          </Button>
+        </div>
+      </Hero>
 
       <TrustBar />
 
-      <section className="relative py-20">
-        {/* Animated Background */}
+      {/* Why Contact Us Section */}
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center mb-12">How We Can Help You Today</h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {[
+              {
+                icon: Shield,
+                title: "Scam Protection",
+                desc: "Get immediate guidance on suspicious messages, calls, or emails"
+              },
+              {
+                icon: Users,
+                title: "Family Training",
+                desc: "Schedule personalized training sessions for your entire family"
+              },
+              {
+                icon: Zap,
+                title: "Business Solutions",
+                desc: "Explore AI automation and website design services"
+              },
+              {
+                icon: CheckCircle,
+                title: "General Inquiries",
+                desc: "Questions about our services, pricing, or partnerships"
+              }
+            ].map((item, index) => (
+              <Card key={index} className="p-6 text-center hover:shadow-strong transition-all hover:-translate-y-2">
+                <div className="flex justify-center mb-4">
+                  <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center">
+                    <item.icon className="w-8 h-8 text-primary" />
+                  </div>
+                </div>
+                <h3 className="font-bold mb-2">{item.title}</h3>
+                <p className="text-sm text-muted-foreground">{item.desc}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Main Contact Section */}
+      <section className="relative py-20 bg-muted">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-20 left-20 w-96 h-96 bg-primary/30 rounded-full blur-3xl animate-pulse" style={{ animationDuration: "4s" }} />
           <div className="absolute bottom-20 right-20 w-72 h-72 bg-accent/30 rounded-full blur-3xl animate-pulse" style={{ animationDuration: "6s" }} />
-          <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-primary/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: "5s" }} />
         </div>
         <FlowingWaves variant="full" opacity={0.12} />
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <div className="animate-fade-in-up" style={{ animationDelay: "0ms" }}>
-            <h2 className="mb-8">Send Us a Message</h2>
-            <Card className="p-8 shadow-xl border-2">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-semibold mb-2">
-                    Full Name *
-                  </label>
-                  <Input
-                    id="name"
-                    required
-                    placeholder="Your full name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    disabled={isSubmitting}
-                  />
-                </div>
+            {/* Contact Form */}
+            <div className="animate-fade-in-up">
+              <h2 className="mb-4">Send Us a Message</h2>
+              <p className="text-muted-foreground mb-8">Fill out the form below and we'll get back to you within 24 hours.</p>
+              <Card className="p-8 shadow-xl border-2 bg-card/80 backdrop-blur-sm">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-semibold mb-2">
+                      Full Name *
+                    </label>
+                    <Input
+                      id="name"
+                      required
+                      placeholder="John Doe"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      disabled={isSubmitting}
+                      className="h-12"
+                    />
+                  </div>
 
-                <div>
-                  <label htmlFor="email" className="block text-sm font-semibold mb-2">
-                    Email Address *
-                  </label>
-                  <Input
-                    id="email"
-                    type="email"
-                    required
-                    placeholder="your@email.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    disabled={isSubmitting}
-                  />
-                </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-semibold mb-2">
+                      Email Address *
+                    </label>
+                    <Input
+                      id="email"
+                      type="email"
+                      required
+                      placeholder="john@example.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      disabled={isSubmitting}
+                      className="h-12"
+                    />
+                  </div>
 
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-semibold mb-2">
-                    Phone Number (Optional)
-                  </label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    placeholder="(937) 555-1234"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    disabled={isSubmitting}
-                  />
-                </div>
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-semibold mb-2">
+                      Phone Number (Optional)
+                    </label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      placeholder="(937) 555-1234"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      disabled={isSubmitting}
+                      className="h-12"
+                    />
+                  </div>
 
-                <div>
-                  <label htmlFor="interest" className="block text-sm font-semibold mb-2">
-                    I'm Interested In: *
-                  </label>
-                  <Select
-                    required
-                    value={formData.interest}
-                    onValueChange={(value) => setFormData({ ...formData, interest: value })}
-                    disabled={isSubmitting}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select an option" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="training">ScamShield Protection</SelectItem>
-                      <SelectItem value="scam-shield">Training Program</SelectItem>
-                      <SelectItem value="business">AI Agent Development</SelectItem>
-                      <SelectItem value="website">Website Design</SelectItem>
-                      <SelectItem value="insurance">AI Insurance</SelectItem>
-                      <SelectItem value="general">General Inquiry</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+                  <div>
+                    <label htmlFor="interest" className="block text-sm font-semibold mb-2">
+                      I'm Interested In: *
+                    </label>
+                    <Select
+                      required
+                      value={formData.interest}
+                      onValueChange={(value) => setFormData({ ...formData, interest: value })}
+                      disabled={isSubmitting}
+                    >
+                      <SelectTrigger className="h-12">
+                        <SelectValue placeholder="Select an option" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="scam-shield">ScamShield Protection</SelectItem>
+                        <SelectItem value="training">Training Program</SelectItem>
+                        <SelectItem value="business">AI Agent Development</SelectItem>
+                        <SelectItem value="website">Website Design</SelectItem>
+                        <SelectItem value="insurance">AI Insurance</SelectItem>
+                        <SelectItem value="partnership">Partnership Opportunities</SelectItem>
+                        <SelectItem value="donation">Donation or Sponsorship</SelectItem>
+                        <SelectItem value="general">General Inquiry</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-                <div>
-                  <label htmlFor="language" className="block text-sm font-semibold mb-2">
-                    Preferred Language:
-                  </label>
-                  <Select
-                    value={formData.language}
-                    onValueChange={(value) => setFormData({ ...formData, language: value })}
-                    disabled={isSubmitting}
-                  >
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="english">English</SelectItem>
-                      <SelectItem value="french">Français</SelectItem>
-                      <SelectItem value="spanish">Español</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+                  <div>
+                    <label htmlFor="language" className="block text-sm font-semibold mb-2">
+                      Preferred Language:
+                    </label>
+                    <Select
+                      value={formData.language}
+                      onValueChange={(value) => setFormData({ ...formData, language: value })}
+                      disabled={isSubmitting}
+                    >
+                      <SelectTrigger className="h-12">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="english">English 🇺🇸</SelectItem>
+                        <SelectItem value="french">Français 🇫🇷</SelectItem>
+                        <SelectItem value="spanish">Español 🇪🇸</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-                <div>
-                  <label htmlFor="message" className="block text-sm font-semibold mb-2">
-                    Message *
-                  </label>
-                  <Textarea
-                    id="message"
-                    required
-                    rows={6}
-                    placeholder="Tell us how we can help you..."
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    disabled={isSubmitting}
-                  />
-                </div>
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-semibold mb-2">
+                      Your Message *
+                    </label>
+                    <Textarea
+                      id="message"
+                      required
+                      rows={6}
+                      placeholder="Tell us how we can help you..."
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      disabled={isSubmitting}
+                    />
+                  </div>
 
-                <div className="flex items-start gap-3">
-                  <Checkbox id="disclaimer" required disabled={isSubmitting} />
-                  <label htmlFor="disclaimer" className="text-sm text-muted-foreground leading-relaxed">
-                    I understand InVision provides educational services only and does not offer legal/financial/tax advice. In
-                    emergencies, I will contact authorities and my bank directly.
-                  </label>
-                </div>
+                  <div className="flex items-start gap-3">
+                    <Checkbox id="disclaimer" required disabled={isSubmitting} />
+                    <label htmlFor="disclaimer" className="text-sm text-muted-foreground leading-relaxed">
+                      I understand InVision provides educational services only and does not offer legal/financial/tax advice. In emergencies, I will contact authorities and my bank directly.
+                    </label>
+                  </div>
 
-                <Button type="submit" variant="default" size="lg" className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Sending...
-                    </>
-                  ) : (
-                    "SEND MESSAGE"
-                  )}
-                </Button>
-              </form>
-            </Card>
-          </div>
+                  <Button type="submit" variant="default" size="lg" className="w-full h-12" disabled={isSubmitting}>
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Mail className="mr-2 h-4 w-4" />
+                        Send Message
+                      </>
+                    )}
+                  </Button>
+                </form>
+              </Card>
+            </div>
 
-          {/* Contact Info */}
-          <div className="space-y-8">
-            <div>
-              <h2 className="mb-8">Other Ways to Reach Us</h2>
+            {/* Contact Info */}
+            <div className="space-y-6">
+              <div>
+                <h2 className="mb-4">Quick Contact Options</h2>
+                <p className="text-muted-foreground mb-8">
+                  Choose the method that works best for you. We're here to help!
+                </p>
+              </div>
 
-              <div className="space-y-6">
-                <Card className="p-6 hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50">
+              <div className="space-y-4">
+                <Card className="p-6 hover:shadow-strong transition-all hover:-translate-y-1 rounded-2xl border-primary/30 bg-gradient-to-br from-primary/5 to-accent/5 cursor-pointer" onClick={openChat}>
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
-                      <Phone className="w-6 h-6 text-primary" />
+                    <div className="w-14 h-14 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
+                      <MessageSquare className="w-7 h-7 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold mb-2">Live Chat</h3>
+                      <p className="text-muted-foreground mb-3">Instant responses during business hours</p>
+                      <Button variant="default" size="sm">Start Chat Now</Button>
+                    </div>
+                  </div>
+                </Card>
+
+                <Card className="p-6 hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50 bg-card/80 backdrop-blur-sm">
+                  <div className="flex items-start gap-4">
+                    <div className="w-14 h-14 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Phone className="w-7 h-7 text-primary" />
                     </div>
                     <div>
                       <h3 className="text-xl font-bold mb-2">Phone</h3>
-                      <a href="tel:9375550199" className="text-accent hover:text-accent/80 text-lg font-semibold block mb-2">
+                      <a href="tel:9375550199" className="text-accent hover:text-accent/80 text-xl font-semibold block mb-3">
                         (937) 555-0199
                       </a>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Clock className="w-4 h-4" />
+                      <div className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <Clock className="w-4 h-4 mt-0.5 flex-shrink-0" />
                         <div>
-                          <p>Monday-Friday: 9am-6pm ET</p>
+                          <p className="font-semibold">Monday-Friday: 9am-6pm ET</p>
                           <p>Saturday: 10am-3pm ET</p>
                           <p>Sunday: Closed</p>
                         </div>
@@ -259,70 +337,55 @@ const Contact = () => {
                   </div>
                 </Card>
 
-                <Card className="p-6 hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50">
+                <Card className="p-6 hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50 bg-card/80 backdrop-blur-sm">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
-                      <Mail className="w-6 h-6 text-primary" />
+                    <div className="w-14 h-14 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Mail className="w-7 h-7 text-primary" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold mb-2">Email</h3>
-                      <div className="space-y-1 text-sm">
-                        <p>
-                          <span className="font-semibold">General:</span>{" "}
+                      <h3 className="text-xl font-bold mb-3">Email</h3>
+                      <div className="space-y-2 text-sm">
+                        <div className="flex items-center gap-2">
+                          <span className="font-semibold w-20">General:</span>
                           <a href="mailto:hello@invisionnetwork.org" className="text-accent hover:text-accent/80">
                             hello@invisionnetwork.org
                           </a>
-                        </p>
-                        <p>
-                          <span className="font-semibold">Training:</span>{" "}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-semibold w-20">Training:</span>
                           <a href="mailto:training@invisionnetwork.org" className="text-accent hover:text-accent/80">
                             training@invisionnetwork.org
                           </a>
-                        </p>
-                        <p>
-                          <span className="font-semibold">Business:</span>{" "}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-semibold w-20">Business:</span>
                           <a href="mailto:consulting@invisionnetwork.org" className="text-accent hover:text-accent/80">
                             consulting@invisionnetwork.org
                           </a>
-                        </p>
-                        <p>
-                          <span className="font-semibold">Members:</span>{" "}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-semibold w-20">Members:</span>
                           <a href="mailto:support@invisionnetwork.org" className="text-accent hover:text-accent/80">
                             support@invisionnetwork.org
                           </a>
-                        </p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </Card>
 
-                <Card className="p-6 hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50">
+                <Card className="p-6 hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50 bg-card/80 backdrop-blur-sm">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-6 h-6 text-primary" />
+                    <div className="w-14 h-14 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-7 h-7 text-primary" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold mb-2">Office</h3>
-                      <p className="text-muted-foreground">
-                        850 Euclid Ave Ste 819 #4685
-                        <br />
-                        Cleveland, OH 44114
-                        <br />
-                        Serving Ohio & Nationwide
+                      <h3 className="text-xl font-bold mb-2">Office Location</h3>
+                      <p className="text-muted-foreground leading-relaxed">
+                        850 Euclid Ave Ste 819 #4685<br />
+                        Cleveland, OH 44114<br />
+                        <span className="font-semibold text-foreground mt-2 block">Serving Ohio & Nationwide</span>
                       </p>
-                    </div>
-                  </div>
-                </Card>
-
-                <Card className="p-6 bg-gradient-to-br from-primary/5 to-accent/5 hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-primary/30">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center flex-shrink-0">
-                      <MessageSquare className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold mb-2">Live Chat</h3>
-                      <p className="text-muted-foreground mb-3">We typically respond within 5 minutes during business hours.</p>
-                      <Button variant="default" onClick={openChat}>OPEN CHAT</Button>
                     </div>
                   </div>
                 </Card>
@@ -330,6 +393,31 @@ const Contact = () => {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Response Time Guarantee */}
+      <section className="py-12 bg-gradient-to-r from-primary/10 to-accent/10">
+        <div className="container mx-auto px-4">
+          <Card className="p-8 bg-card/50 backdrop-blur-sm border-primary/20 max-w-3xl mx-auto text-center">
+            <h3 className="text-2xl font-bold mb-4">Our Response Time Guarantee</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+              <div>
+                <div className="text-3xl font-bold text-primary mb-2">5 min</div>
+                <p className="text-sm text-muted-foreground">Average Live Chat Response</p>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-primary mb-2">24 hrs</div>
+                <p className="text-sm text-muted-foreground">Email & Form Responses</p>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-primary mb-2">Same Day</div>
+                <p className="text-sm text-muted-foreground">Phone Call Returns</p>
+              </div>
+            </div>
+            <p className="text-muted-foreground">
+              Your safety is our priority. We're committed to responding quickly and providing the guidance you need.
+            </p>
+          </Card>
         </div>
       </section>
 

@@ -48,7 +48,7 @@ const Index = () => {
       >
         <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center sm:justify-start">
           <Button asChild variant="default" size="xl" className="w-full sm:w-auto">
-            <Link to="/training" aria-label="Learn to spot scams">
+            <Link to="/training#pricing" aria-label="View protection plans">
               Get Protection Now
             </Link>
           </Button>
@@ -368,60 +368,121 @@ const Index = () => {
           />
         </div>
         <div className="container mx-auto px-4 relative z-10">
-          <h2 className="text-center mb-10 animate-fade-in-up">Trusted by 500+ Ohio Families</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="animate-fade-in-up" style={{ animationDelay: "0ms" }}>
-            <TestimonialCard
-                name="Margaret R."
-                age="68"
-                location="Columbus, OH"
-                quote="I received a call from someone claiming to be my grandson, saying he was in jail and needed bail money immediately. Thanks to InVision's training, I recognized it as a deepfake scam. They saved me from losing $5,000."
-                image={testimonial1}
-              />
+          <h2 className="text-center mb-4 animate-fade-in-up">Trusted by 500+ Ohio Families</h2>
+          <p className="text-center text-muted-foreground mb-10 max-w-2xl mx-auto">
+            Real stories from real people protected by InVision Network
+          </p>
+
+          {/* Video Testimonials Section */}
+          <div className="mb-12">
+            <h3 className="text-2xl font-bold text-center mb-6">Video Testimonials</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {[
+                { title: "Margaret's Grandparent Scam Story", videoId: "placeholder1" },
+                { title: "Small Business Success with AI", videoId: "placeholder2" },
+                { title: "Family Training Experience", videoId: "placeholder3" },
+              ].map((video, index) => (
+                <Card key={index} className="overflow-hidden hover:shadow-strong transition-all hover:-translate-y-1">
+                  <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+                    <p className="text-sm text-muted-foreground px-4 text-center">
+                      Video: {video.title}
+                      <br />
+                      <span className="text-xs">(Link to be added)</span>
+                    </p>
+                  </div>
+                  <div className="p-4">
+                    <p className="font-semibold text-sm">{video.title}</p>
+                  </div>
+                </Card>
+              ))}
             </div>
-            <div className="animate-fade-in-up" style={{ animationDelay: "150ms" }}>
-            <TestimonialCard
-                name="James K."
-                location="Cleveland, OH"
-                quote="As a small business owner, I was worried about using AI tools. InVision's AI Service Insurance gives us complete peace of mind. Now we can innovate confidently knowing we're protected."
-                image={testimonial3}
-              />
+          </div>
+
+          {/* Text Testimonials - Compact Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="animate-fade-in-up" style={{ animationDelay: "0ms" }}>
+              <Card className="p-4 h-full hover:shadow-medium transition-all hover:-translate-y-1">
+                <div className="flex items-center gap-3 mb-3">
+                  <img src={testimonial1} alt="Margaret R." className="w-12 h-12 rounded-full object-cover" />
+                  <div>
+                    <p className="font-bold text-sm">Margaret R., 68</p>
+                    <p className="text-xs text-muted-foreground">Columbus, OH</p>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground line-clamp-4">
+                  "Thanks to InVision's training, I recognized a deepfake scam call. They saved me from losing $5,000."
+                </p>
+              </Card>
+            </div>
+            <div className="animate-fade-in-up" style={{ animationDelay: "100ms" }}>
+              <Card className="p-4 h-full hover:shadow-medium transition-all hover:-translate-y-1">
+                <div className="flex items-center gap-3 mb-3">
+                  <img src={testimonial3} alt="James K." className="w-12 h-12 rounded-full object-cover" />
+                  <div>
+                    <p className="font-bold text-sm">James K.</p>
+                    <p className="text-xs text-muted-foreground">Cleveland, OH</p>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground line-clamp-4">
+                  "InVision's AI Service Insurance gives us complete peace of mind. We can innovate confidently."
+                </p>
+              </Card>
+            </div>
+            <div className="animate-fade-in-up" style={{ animationDelay: "200ms" }}>
+              <Card className="p-4 h-full hover:shadow-medium transition-all hover:-translate-y-1">
+                <div className="flex items-center gap-3 mb-3">
+                  <img src={testimonial5} alt="Patricia L." className="w-12 h-12 rounded-full object-cover" />
+                  <div>
+                    <p className="font-bold text-sm">Patricia L., 71</p>
+                    <p className="text-xs text-muted-foreground">Dayton, OH</p>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground line-clamp-4">
+                  "ScamShield confirmed a sophisticated phishing scam within hours. This service is worth every penny."
+                </p>
+              </Card>
             </div>
             <div className="animate-fade-in-up" style={{ animationDelay: "300ms" }}>
-            <TestimonialCard
-                name="Patricia L."
-                age="71"
-                location="Dayton, OH"
-                quote="I forwarded a suspicious email to ScamShield that looked exactly like my bank asking me to verify my account. Within hours, they confirmed it was a sophisticated phishing scam and told me exactly what to do. This service is worth every penny."
-                image={testimonial5}
-              />
+              <Card className="p-4 h-full hover:shadow-medium transition-all hover:-translate-y-1">
+                <div className="flex items-center gap-3 mb-3">
+                  <img src={testimonial2} alt="Robert & Linda K." className="w-12 h-12 rounded-full object-cover" />
+                  <div>
+                    <p className="font-bold text-sm">Robert & Linda K.</p>
+                    <p className="text-xs text-muted-foreground">Dayton, OH</p>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground line-clamp-4">
+                  "Incredibly patient training. We learned to spot AI voice clones and set up our family safe-word system."
+                </p>
+              </Card>
             </div>
-            <div className="animate-fade-in-up" style={{ animationDelay: "450ms" }}>
-            <TestimonialCard
-                name="Robert & Linda K."
-                age="72 & 70"
-                location="Dayton, OH"
-                quote="My husband and I attended the Family Small Group training session. The instructor was incredibly patient and explained everything in plain English without talking down to us. We learned how to spot AI voice clones, verify urgent messages, and set up our family safe-word system. We finally feel confident using technology safely."
-                image={testimonial2}
-              />
+            <div className="animate-fade-in-up" style={{ animationDelay: "400ms" }}>
+              <Card className="p-4 h-full hover:shadow-medium transition-all hover:-translate-y-1">
+                <div className="flex items-center gap-3 mb-3">
+                  <img src={testimonial6} alt="William Chen" className="w-12 h-12 rounded-full object-cover" />
+                  <div>
+                    <p className="font-bold text-sm">William Chen, 78</p>
+                    <p className="text-xs text-muted-foreground">Akron, OH</p>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground line-clamp-4">
+                  "They came to my home and patiently walked me through everything. My daughter can finally sleep at night."
+                </p>
+              </Card>
             </div>
-            <div className="animate-fade-in-up" style={{ animationDelay: "600ms" }}>
-            <TestimonialCard
-                name="William Chen"
-                age="78"
-                location="Akron, OH"
-                quote="I'll be honest - I'm not comfortable with technology. But the trainer came to my home and patiently walked me through everything step by step. They showed me real examples of AI voice clones and taught me simple questions to ask when someone calls asking for money. My daughter can finally sleep at night knowing I'm protected."
-                image={testimonial6}
-              />
-            </div>
-            <div className="animate-fade-in-up" style={{ animationDelay: "750ms" }}>
-            <TestimonialCard
-                name="Jennifer Wallace"
-                age="58"
-                location="Cleveland, OH"
-                quote="After my 82-year-old mother nearly lost $15,000 to a 'grandparent scam,' I knew we needed professional help. I enrolled our entire family in the training program. Now everyone knows the 60-Second Pause Protocol, we have a family safe-word, and Mom forwards anything suspicious to ScamShield before taking action. This has been a lifesaver for our peace of mind."
-                image={testimonial7}
-              />
+            <div className="animate-fade-in-up" style={{ animationDelay: "500ms" }}>
+              <Card className="p-4 h-full hover:shadow-medium transition-all hover:-translate-y-1">
+                <div className="flex items-center gap-3 mb-3">
+                  <img src={testimonial7} alt="Jennifer Wallace" className="w-12 h-12 rounded-full object-cover" />
+                  <div>
+                    <p className="font-bold text-sm">Jennifer Wallace, 58</p>
+                    <p className="text-xs text-muted-foreground">Cleveland, OH</p>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground line-clamp-4">
+                  "Enrolled our entire family. Now everyone knows the 60-Second Pause Protocol. A lifesaver for peace of mind."
+                </p>
+              </Card>
             </div>
           </div>
         </div>
