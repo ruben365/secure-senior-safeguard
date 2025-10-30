@@ -34,11 +34,11 @@ interface TransitioningBackgroundProps {
 }
 
 const TransitioningBackground = ({ interval = 5000, className = '', opacity = 1 }: TransitioningBackgroundProps) => {
-  const [indexA, setIndexA] = useState(0);
-  const [indexB, setIndexB] = useState(1);
-  const [showA, setShowA] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [nextIndex, setNextIndex] = useState(1);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Preload images to avoid flashes on swap
+  // Preload all images immediately to prevent flashing
   useEffect(() => {
     images.forEach((src) => {
       const img = new Image();
@@ -48,43 +48,39 @@ const TransitioningBackground = ({ interval = 5000, className = '', opacity = 1 
 
   useEffect(() => {
     const id = setInterval(() => {
-      const current = showA ? indexA : indexB;
-      const next = (current + 1) % images.length;
-
-      if (showA) {
-        setIndexB(next); // prepare hidden layer
-      } else {
-        setIndexA(next);
-      }
-
-      // Use rAF to ensure style commit before toggling opacity
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => setShowA(!showA));
-      });
+      // Start transition
+      setIsTransitioning(true);
+      
+      // After transition completes, update indices
+      setTimeout(() => {
+        setCurrentIndex(nextIndex);
+        setNextIndex((nextIndex + 1) % images.length);
+        setIsTransitioning(false);
+      }, 1000); // Match transition duration
     }, interval);
 
     return () => clearInterval(id);
-  }, [interval, showA, indexA, indexB]);
+  }, [interval, nextIndex]);
 
   return (
     <div className={`absolute inset-0 overflow-hidden ${className}`}>
-      {/* Layer A */}
+      {/* Current Image Layer - Always visible */}
       <div
-        className="absolute inset-0 bg-cover bg-center pointer-events-none transition-opacity duration-[2500ms] ease-in-out"
+        className="absolute inset-0 bg-cover bg-center pointer-events-none transition-opacity duration-1000 ease-in-out"
         style={{
-          backgroundImage: `url(${images[indexA]})`,
-          opacity: showA ? opacity : 0,
+          backgroundImage: `url(${images[currentIndex]})`,
+          opacity: isTransitioning ? 0 : opacity,
           willChange: 'opacity',
           transform: 'translateZ(0)',
         }}
       />
 
-      {/* Layer B */}
+      {/* Next Image Layer - Fades in during transition */}
       <div
-        className="absolute inset-0 bg-cover bg-center pointer-events-none transition-opacity duration-[2500ms] ease-in-out"
+        className="absolute inset-0 bg-cover bg-center pointer-events-none transition-opacity duration-1000 ease-in-out"
         style={{
-          backgroundImage: `url(${images[indexB]})`,
-          opacity: showA ? 0 : opacity,
+          backgroundImage: `url(${images[nextIndex]})`,
+          opacity: isTransitioning ? opacity : 0,
           willChange: 'opacity',
           transform: 'translateZ(0)',
         }}
