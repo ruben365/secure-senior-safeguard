@@ -23,6 +23,13 @@ const Business = () => {
     price?: number;
   } | null>(null);
 
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -34,35 +41,25 @@ const Business = () => {
       >
         <div className="flex flex-col sm:flex-row gap-4">
           <Button 
-            onClick={() => {
-              setSelectedService({
-                type: 'business',
-                name: 'AI Automation',
-                price: 9500
-              });
-              setModalOpen(true);
-            }}
+            onClick={() => scrollToSection('automation-pricing')}
             variant="default" 
             size="xl"
           >
             Build AI Automation
           </Button>
           <Button 
-            onClick={() => {
-              setSelectedService({
-                type: 'website',
-                name: 'Professional Website Design',
-                price: 4500
-              });
-              setModalOpen(true);
-            }}
+            onClick={() => scrollToSection('website-design')}
             variant="outlineLight" 
             size="xl"
           >
             Design My Website
           </Button>
-          <Button asChild variant="outlineLight" size="xl">
-            <Link to="#insurance">Get AI Insurance</Link>
+          <Button 
+            onClick={() => scrollToSection('insurance')}
+            variant="outlineLight" 
+            size="xl"
+          >
+            Get AI Insurance
           </Button>
         </div>
       </Hero>
@@ -157,7 +154,7 @@ const Business = () => {
       </section>
 
       {/* Package Pricing */}
-      <section className="py-20 bg-muted">
+      <section id="automation-pricing" className="py-20 bg-muted">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-12">AI Agents & Automation Pricing</h2>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -302,7 +299,7 @@ const Business = () => {
       </section>
 
       {/* Web Design Services */}
-      <section className="py-20 bg-background">
+      <section id="website-design" className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <div className="inline-block px-6 py-2 bg-primary/10 rounded-full text-sm font-bold text-primary mb-4 uppercase tracking-wider">
@@ -513,7 +510,7 @@ const Business = () => {
       </section>
 
       {/* AI Services Insurance */}
-      <section className="py-20 bg-background">
+      <section id="insurance" className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <div className="inline-block px-6 py-2 bg-primary/10 rounded-full text-sm font-bold text-primary mb-4 uppercase tracking-wider">
@@ -525,138 +522,226 @@ const Business = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-12">
             {/* Basic Care */}
-            <Card className="p-8 rounded-2xl border-border/50 hover:shadow-medium transition-all hover:-translate-y-1">
-              <h3 className="text-2xl font-bold mb-4">Basic Care</h3>
-              <p className="text-4xl font-bold gradient-text-primary mb-2">
-                $149<span className="text-lg text-muted-foreground">/month</span>
+            <Card className="p-6 rounded-2xl border-border/50 hover:shadow-medium transition-all hover:-translate-y-1">
+              <h3 className="text-xl font-bold mb-3">Basic Care</h3>
+              <p className="text-3xl font-bold gradient-text-primary mb-2">
+                $149<span className="text-base text-muted-foreground">/month</span>
               </p>
-              <ul className="space-y-3 mb-8 mt-6">
+              <p className="text-sm text-success mb-4">
+                $1,696/year (save 5%)
+              </p>
+              <ul className="space-y-2 mb-6 text-sm">
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
                   <span>Monthly health checks</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
                   <span>Security patch updates</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
                   <span>Performance monitoring</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
                   <span>Email support (48hr response)</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
                   <span>Basic bug fixes</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
                   <span>Quarterly reports</span>
                 </li>
               </ul>
-              <Button asChild variant="default" className="w-full">
-                <Link to="/contact">GET BASIC CARE</Link>
+              <Button 
+                onClick={() => {
+                  setSelectedService({
+                    type: 'business',
+                    name: 'AI Services Insurance',
+                    tier: 'Basic Care - Monthly: $149 or Yearly: $1,696 (save 5%)',
+                    price: 149
+                  });
+                  setModalOpen(true);
+                }}
+                variant="default" 
+                className="w-full"
+              >
+                GET BASIC CARE
               </Button>
             </Card>
 
             {/* Standard Care - Featured */}
-            <Card className="p-8 border-2 border-primary relative rounded-2xl shadow-[0_8px_30px_rgba(139,92,246,0.15)] hover:shadow-[0_12px_40px_rgba(139,92,246,0.2)] transition-all">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-primary-foreground px-4 py-1 rounded-full text-sm font-bold shadow-[0_4px_12px_rgba(139,92,246,0.3)]">
+            <Card className="p-6 border-2 border-primary relative rounded-2xl shadow-[0_8px_30px_rgba(139,92,246,0.15)] hover:shadow-[0_12px_40px_rgba(139,92,246,0.2)] transition-all">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-primary-foreground px-3 py-1 rounded-full text-xs font-bold shadow-[0_4px_12px_rgba(139,92,246,0.3)]">
                 MOST POPULAR
               </div>
-              <h3 className="text-2xl font-bold mb-4">Standard Care</h3>
-              <p className="text-4xl font-bold gradient-text-primary mb-2">
-                $399<span className="text-lg text-muted-foreground">/month</span>
+              <h3 className="text-xl font-bold mb-3">Standard Care</h3>
+              <p className="text-3xl font-bold gradient-text-primary mb-2">
+                $399<span className="text-base text-muted-foreground">/month</span>
               </p>
-              <ul className="space-y-3 mb-8 mt-6">
+              <p className="text-sm text-success mb-4">
+                $4,544/year (save 5%)
+              </p>
+              <ul className="space-y-2 mb-6 text-sm">
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
                   <span>Everything in Basic Care</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
                   <span>Weekly health checks</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>Priority bug fixes (24hr response)</span>
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
+                  <span>Priority bug fixes (24hr)</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
                   <span>Knowledge base updates</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
                   <span>Minor feature adjustments</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
                   <span>Phone + email support</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
                   <span>Up to 4 hours repair/month</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>Integration compatibility checks</span>
-                </li>
               </ul>
-              <Button asChild variant="default" className="w-full">
-                <Link to="/contact">GET STANDARD CARE</Link>
+              <Button 
+                onClick={() => {
+                  setSelectedService({
+                    type: 'business',
+                    name: 'AI Services Insurance',
+                    tier: 'Standard Care - Monthly: $399 or Yearly: $4,544 (save 5%)',
+                    price: 399
+                  });
+                  setModalOpen(true);
+                }}
+                variant="default" 
+                className="w-full"
+              >
+                GET STANDARD CARE
               </Button>
             </Card>
 
             {/* Premium Care */}
-            <Card className="p-8 rounded-2xl border-border/50 hover:shadow-medium transition-all hover:-translate-y-1">
-              <h3 className="text-2xl font-bold mb-4">Premium Care</h3>
-              <p className="text-4xl font-bold gradient-text-primary mb-2">
-                $799<span className="text-lg text-muted-foreground">/month</span>
+            <Card className="p-6 rounded-2xl border-border/50 hover:shadow-medium transition-all hover:-translate-y-1">
+              <h3 className="text-xl font-bold mb-3">Premium Care</h3>
+              <p className="text-3xl font-bold gradient-text-primary mb-2">
+                $799<span className="text-base text-muted-foreground">/month</span>
               </p>
-              <ul className="space-y-3 mb-8 mt-6">
+              <p className="text-sm text-success mb-4">
+                $9,104/year (save 5%)
+              </p>
+              <ul className="space-y-2 mb-6 text-sm">
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
                   <span>Everything in Standard Care</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
                   <span>24/7 monitoring & alerts</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>Critical issue response (4hr SLA)</span>
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
+                  <span>Critical issue response (4hr)</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
                   <span>Custom modifications included</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
                   <span>Up to 12 hours repair/month</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
                   <span>Dedicated support engineer</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
                   <span>Quarterly optimization reviews</span>
                 </li>
+              </ul>
+              <Button 
+                onClick={() => {
+                  setSelectedService({
+                    type: 'business',
+                    name: 'AI Services Insurance',
+                    tier: 'Premium Care - Monthly: $799 or Yearly: $9,104 (save 5%)',
+                    price: 799
+                  });
+                  setModalOpen(true);
+                }}
+                variant="default" 
+                className="w-full"
+              >
+                GET PREMIUM CARE
+              </Button>
+            </Card>
+
+            {/* Customized Insurance */}
+            <Card className="p-6 rounded-2xl border-accent/50 hover:shadow-medium transition-all hover:-translate-y-1 bg-gradient-to-br from-accent/5 to-accent/10">
+              <h3 className="text-xl font-bold mb-3">Customized Insurance</h3>
+              <p className="text-3xl font-bold gradient-text-primary mb-2">
+                Custom<span className="text-base text-muted-foreground"> pricing</span>
+              </p>
+              <p className="text-sm text-muted-foreground mb-4">
+                Tailored for your needs
+              </p>
+              <ul className="space-y-2 mb-6 text-sm">
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>Compliance & security audits</span>
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
+                  <span>Custom SLA agreements</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                  <span>Vendor liaison services</span>
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
+                  <span>Multi-location support</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
+                  <span>Enterprise-grade security</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
+                  <span>Unlimited repair hours</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
+                  <span>Dedicated account manager</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
+                  <span>Custom integration support</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
+                  <span>Proactive monitoring</span>
                 </li>
               </ul>
-              <Button asChild variant="default" className="w-full">
-                <Link to="/contact">GET PREMIUM CARE</Link>
+              <Button 
+                onClick={() => {
+                  setSelectedService({
+                    type: 'business',
+                    name: 'AI Services Insurance',
+                    tier: 'Customized Insurance'
+                  });
+                  setModalOpen(true);
+                }}
+                variant="default" 
+                className="w-full"
+              >
+                REQUEST QUOTE
               </Button>
             </Card>
           </div>
@@ -773,8 +858,18 @@ const Business = () => {
                     $1,799 <span className="text-lg font-normal text-muted-foreground">for full vetting report</span>
                   </p>
                   <p className="text-sm text-muted-foreground mb-6">(Saves you thousands on bad purchases)</p>
-                  <Button asChild variant="default">
-                    <Link to="/contact">REQUEST VETTING</Link>
+                  <Button 
+                    onClick={() => {
+                      setSelectedService({
+                        type: 'business',
+                        name: 'Pre-Purchase AI Tool Vetting',
+                        price: 1799
+                      });
+                      setModalOpen(true);
+                    }}
+                    variant="default"
+                  >
+                    REQUEST VETTING
                   </Button>
                 </div>
               </div>
@@ -810,8 +905,18 @@ const Business = () => {
                     Starting at <span className="text-accent">$3,499</span>
                   </p>
                   <p className="text-sm text-muted-foreground mb-6">Deliverable: Security report + implementation roadmap</p>
-                  <Button asChild variant="default">
-                    <Link to="/contact">REQUEST AUDIT</Link>
+                  <Button 
+                    onClick={() => {
+                      setSelectedService({
+                        type: 'business',
+                        name: 'AI Security Audit',
+                        price: 3499
+                      });
+                      setModalOpen(true);
+                    }}
+                    variant="default"
+                  >
+                    REQUEST AUDIT
                   </Button>
                 </div>
               </div>
@@ -824,19 +929,46 @@ const Business = () => {
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-12">Business Testimonials</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-12">
             <TestimonialCard
               name="Marcus Williams"
               location="Williams HVAC, Dayton"
-              quote="InVision built our AI receptionist in 3 weeks. It handles 80% of our inbound calls now. ROI paid for itself in 4 months. Highly recommend."
+              quote="InVision built our AI receptionist in 3 weeks. It handles 80% of our inbound calls now."
               image={testimonial3}
             />
             <TestimonialCard
               name="Dr. Sarah Chen"
               location="Family Medicine, Cincinnati"
-              quote="Their pre-purchase consulting saved us from buying a $12,000 'AI medical scribe' that would have violated HIPAA. They found a compliant alternative for $3,000."
+              quote="Their pre-purchase consulting saved us from buying a $12,000 'AI medical scribe' that would have violated HIPAA."
               image={testimonial4}
             />
+            <TestimonialCard
+              name="James Mitchell"
+              location="Mitchell Law Firm, Columbus"
+              quote="The AI intake agent has transformed our lead qualification process. We've doubled our consultation bookings."
+              image={testimonial3}
+            />
+            <TestimonialCard
+              name="Linda Rodriguez"
+              location="Rodriguez Dental, Toledo"
+              quote="AI Services Insurance gives us peace of mind. Our chatbot stays up-to-date and secure without any effort from us."
+              image={testimonial4}
+            />
+          </div>
+
+          {/* Video Testimonials Section */}
+          <div className="mt-16">
+            <h3 className="text-2xl font-bold text-center mb-8">Video Testimonials</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {[1, 2, 3].map((i) => (
+                <Card key={i} className="p-6 text-center">
+                  <div className="aspect-video bg-muted/50 rounded-lg mb-4 flex items-center justify-center">
+                    <p className="text-sm text-muted-foreground">Video Testimonial {i}</p>
+                  </div>
+                  <p className="text-sm text-muted-foreground">Coming soon - Customer success story</p>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
       </section>
