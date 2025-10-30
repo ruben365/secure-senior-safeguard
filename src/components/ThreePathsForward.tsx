@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { BookOpen, Shield, Briefcase } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
@@ -52,17 +51,20 @@ const paths: PathConfig[] = [
 ];
 
 const ThreePathsForward = () => {
-  const getPathLink = (serviceType: string) => {
-    switch(serviceType) {
-      case 'training':
-        return '/training';
-      case 'scamshield':
-        return '/training#pricing';
-      case 'business':
-        return '/business';
-      default:
-        return '/training';
-    }
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState<{
+    type: 'training' | 'scamshield' | 'business';
+    name: string;
+    basePrice: number;
+  } | null>(null);
+
+  const handleBookingClick = (path: PathConfig) => {
+    setSelectedService({
+      type: path.serviceType as 'training' | 'scamshield' | 'business',
+      name: path.title,
+      basePrice: path.basePrice,
+    });
+    setIsBookingModalOpen(true);
   };
 
   return (
@@ -149,19 +151,31 @@ const ThreePathsForward = () => {
 
                 {/* CTA Button */}
                 <Button
-                  asChild
+                  onClick={() => handleBookingClick(path)}
                   variant={path.featured ? "default" : "outline"}
                   className="w-full text-base font-bold uppercase tracking-wide"
                 >
-                  <Link to={getPathLink(path.serviceType)}>
-                    {path.cta}
-                  </Link>
+                  {path.cta}
                 </Button>
               </Card>
             );
           })}
         </div>
       </div>
+
+      {/* Booking Modal */}
+      {selectedService && (
+        <BookingModal
+          open={isBookingModalOpen}
+          onOpenChange={(open) => {
+            setIsBookingModalOpen(open);
+            if (!open) setSelectedService(null);
+          }}
+          serviceType={selectedService.type}
+          serviceName={selectedService.name}
+          basePrice={selectedService.basePrice}
+        />
+      )}
     </section>
   );
 };
