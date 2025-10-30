@@ -571,6 +571,17 @@ const Signup = () => {
                 <p className="text-muted-foreground text-lg">Choose the role that best describes you</p>
               </div>
 
+              {/* Veterans Discount Banner */}
+              <Card className="p-4 bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20">
+                <div className="flex items-center gap-3 text-sm">
+                  <div className="flex-shrink-0 text-2xl">🇺🇸</div>
+                  <div className="flex-1">
+                    <p className="font-semibold">Veterans & First Responders: 10% OFF</p>
+                    <p className="text-xs text-muted-foreground">Active duty, veterans, reservists, and first responders receive automatic discount at checkout</p>
+                  </div>
+                </div>
+              </Card>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
                   { 

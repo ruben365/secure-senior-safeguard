@@ -231,6 +231,28 @@ const LearnAndTrain = () => {
         </div>
       </section>
 
+      {/* Veterans Discount Banner */}
+      <section className="py-8 bg-gradient-to-r from-primary/10 to-accent/10">
+        <div className="container mx-auto px-4">
+          <Card className="p-6 bg-card/50 backdrop-blur-sm border-primary/20 max-w-3xl mx-auto">
+            <div className="flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
+              <div className="flex-shrink-0">
+                <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-2xl">
+                  🇺🇸
+                </div>
+              </div>
+              <div className="flex-1">
+                <h3 className="text-xl font-bold mb-1">Veterans & First Responders</h3>
+                <p className="text-muted-foreground text-sm">Active duty, veterans, reservists, and first responders receive 10% OFF all training and protection plans</p>
+              </div>
+              <Button variant="default" asChild>
+                <Link to="/signup">Claim Discount</Link>
+              </Button>
+            </div>
+          </Card>
+        </div>
+      </section>
+
       {/* Pricing Section */}
       <section id="pricing" className="py-16 bg-muted relative overflow-hidden">
         <div className="absolute inset-0 opacity-20">
