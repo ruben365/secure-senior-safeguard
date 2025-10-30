@@ -30,7 +30,7 @@ const Hero = ({ backgroundImage, useTransitioningBackground = false, headline, s
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowDisclaimer(false);
-    }, 5000);
+    }, 10000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -88,7 +88,7 @@ const Hero = ({ backgroundImage, useTransitioningBackground = false, headline, s
           <div className="glass-effect px-5 py-3 rounded-xl border border-white/20 shadow-elegant backdrop-blur-md">
             <p className="text-white text-sm font-medium leading-relaxed">
               <span className="inline-block mr-2 opacity-80">🔒</span>
-              Visual assets are AI-generated to safeguard client confidentiality and uphold our unwavering commitment to privacy.
+              We do not use client or customer photos for advertising. Privacy is our primary feature—all visuals are AI-generated.
             </p>
           </div>
         </div>
