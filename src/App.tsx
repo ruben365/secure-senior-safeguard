@@ -29,8 +29,6 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 import { AIChat } from "./components/AIChat";
 import { AIChatProvider } from "./contexts/AIChatContext";
-import Layout from "./components/Layout";
-import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -50,34 +48,31 @@ const App = () => {
         <Sonner />
         <AIChatProvider>
           <BrowserRouter>
-            <ScrollToTop />
-            <Layout>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/training" element={<Training />} />
-              <Route path="/business" element={<Business />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/resources" element={<Resources />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/careers" element={<Careers />} />
-              <Route path="/auth" element={<Auth />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/application-pending" element={<ApplicationPending />} />
-              <Route path="/portal" element={<ProtectedRoute><Portal /></ProtectedRoute>} />
-              <Route path="/portal/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
-              <Route path="/portal/analyst" element={<ProtectedRoute><AnalystDashboard /></ProtectedRoute>} />
-              <Route path="/portal/trainer" element={<ProtectedRoute><TrainerDashboard /></ProtectedRoute>} />
-              <Route path="/portal/developer" element={<ProtectedRoute><DeveloperDashboard /></ProtectedRoute>} />
-              <Route path="/portal/staff" element={<ProtectedRoute><StaffDashboard /></ProtectedRoute>} />
-              <Route path="/portal/senior" element={<ProtectedRoute><SeniorDashboard /></ProtectedRoute>} />
-              <Route path="/portal/caregiver" element={<ProtectedRoute><CaregiverDashboard /></ProtectedRoute>} />
-              <Route path="/portal/healthcare" element={<ProtectedRoute><HealthcareDashboard /></ProtectedRoute>} />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/terms-of-service" element={<TermsOfService />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Layout>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/training" element={<Training />} />
+            <Route path="/business" element={<Business />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/resources" element={<Resources />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/application-pending" element={<ApplicationPending />} />
+            <Route path="/portal" element={<ProtectedRoute><Portal /></ProtectedRoute>} />
+            <Route path="/portal/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+            <Route path="/portal/analyst" element={<ProtectedRoute><AnalystDashboard /></ProtectedRoute>} />
+            <Route path="/portal/trainer" element={<ProtectedRoute><TrainerDashboard /></ProtectedRoute>} />
+            <Route path="/portal/developer" element={<ProtectedRoute><DeveloperDashboard /></ProtectedRoute>} />
+            <Route path="/portal/staff" element={<ProtectedRoute><StaffDashboard /></ProtectedRoute>} />
+            <Route path="/portal/senior" element={<ProtectedRoute><SeniorDashboard /></ProtectedRoute>} />
+            <Route path="/portal/caregiver" element={<ProtectedRoute><CaregiverDashboard /></ProtectedRoute>} />
+            <Route path="/portal/healthcare" element={<ProtectedRoute><HealthcareDashboard /></ProtectedRoute>} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
           <AIChat />
         </BrowserRouter>
         </AIChatProvider>

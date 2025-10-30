@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import FlowingWaves from "@/components/FlowingWaves";
@@ -92,7 +93,9 @@ const Resources = () => {
   ];
 
   return (
-    <>
+    <div className="min-h-screen">
+      <Navigation />
+
       {/* Hero */}
       <Hero
         headline="Resources & Tools"
@@ -217,7 +220,7 @@ const Resources = () => {
       </section>
 
       <Footer />
-    </>
+    </div>
   );
 };
 

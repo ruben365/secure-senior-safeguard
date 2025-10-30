@@ -1,9 +1,12 @@
+import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 
 const TermsOfService = () => {
   return (
-    <>
+    <div className="min-h-screen">
+      <Navigation />
+
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
@@ -233,7 +236,7 @@ const TermsOfService = () => {
       </section>
 
       <Footer />
-    </>
+    </div>
   );
 };
 
