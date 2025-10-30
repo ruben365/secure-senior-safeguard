@@ -7,6 +7,12 @@ import heroHomepage from '@/assets/hero-homepage-3d.jpg';
 
 const images = [eldersHero1, eldersHero2, eldersHero3, eldersHero4, heroHomepage];
 
+// Preload all images to prevent flashing
+images.forEach((src) => {
+  const img = new Image();
+  img.src = src;
+});
+
 interface TransitioningBackgroundProps {
   interval?: number; // milliseconds between transitions
   className?: string;
@@ -15,7 +21,6 @@ interface TransitioningBackgroundProps {
 
 const TransitioningBackground = ({ interval = 8000, className = '', opacity = 1 }: TransitioningBackgroundProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [nextIndex, setNextIndex] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
@@ -23,38 +28,33 @@ const TransitioningBackground = ({ interval = 8000, className = '', opacity = 1 
       setIsTransitioning(true);
       
       setTimeout(() => {
-        setCurrentIndex(nextIndex);
-        setNextIndex((nextIndex + 1) % images.length);
+        setCurrentIndex((prev) => (prev + 1) % images.length);
         setIsTransitioning(false);
-      }, 2000); // Extended 2-second transition for ultra-smooth effect
+      }, 2000);
     }, interval);
 
     return () => clearInterval(timer);
-  }, [interval, nextIndex]);
+  }, [interval]);
+
+  const nextIndex = (currentIndex + 1) % images.length;
 
   return (
     <div className={`absolute inset-0 overflow-hidden ${className}`}>
-      {/* Current Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out will-change-opacity"
-        style={{
-          backgroundImage: `url(${images[currentIndex]})`,
-          opacity: isTransitioning ? 0 : opacity,
-          transform: 'translateZ(0)',
-          backfaceVisibility: 'hidden',
-        }}
-      />
-      
-      {/* Next Image (for smooth transition) */}
-      <div
-        className="absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out will-change-opacity"
-        style={{
-          backgroundImage: `url(${images[nextIndex]})`,
-          opacity: isTransitioning ? opacity : 0,
-          transform: 'translateZ(0)',
-          backfaceVisibility: 'hidden',
-        }}
-      />
+      {/* All images stacked - only one visible at a time */}
+      {images.map((image, index) => (
+        <div
+          key={index}
+          className="absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out"
+          style={{
+            backgroundImage: `url(${image})`,
+            opacity: index === currentIndex ? opacity : 0,
+            transform: 'translate3d(0, 0, 0)',
+            willChange: 'opacity',
+            backfaceVisibility: 'hidden',
+            WebkitBackfaceVisibility: 'hidden',
+          }}
+        />
+      ))}
       
       {/* Overlay for better text readability - separate layer to prevent transition artifacts */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50 pointer-events-none" />
