@@ -1,17 +1,31 @@
+import { useState } from "react";
 import { BookOpen, Shield, Briefcase } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
-import { Link } from "react-router-dom";
+import { BookingModal } from "./BookingModal";
 
-const paths = [
+interface PathConfig {
+  id: number;
+  title: string;
+  description: string;
+  pricing: string;
+  icon: typeof BookOpen;
+  featured?: boolean;
+  cta: string;
+  serviceType: 'training' | 'scamshield' | 'business';
+  basePrice: number;
+}
+
+const paths: PathConfig[] = [
   {
     id: 1,
     title: "Learn & Train",
     description: "Live Zoom classes & in-person training. Spot deepfakes, verify identities, handle urgent calls with confidence.",
     pricing: "Starting at $149",
     icon: BookOpen,
-    link: "/training",
-    cta: "Book Training"
+    cta: "Book Training",
+    serviceType: 'training',
+    basePrice: 149,
   },
   {
     id: 2,
@@ -20,8 +34,9 @@ const paths = [
     pricing: "Starting at $49/month",
     icon: Shield,
     featured: true,
-    link: "/training",
-    cta: "Start Scam Shield"
+    cta: "Start Scam Shield",
+    serviceType: 'scamshield',
+    basePrice: 49,
   },
   {
     id: 3,
@@ -29,13 +44,23 @@ const paths = [
     description: "Custom AI receptionists, automation, and pre-purchase vetting. Don't waste $5k+ on wrong tools.",
     pricing: "Starting at $5,000",
     icon: Briefcase,
-    link: "/contact",
-    cta: "Talk to an Expert"
+    cta: "Talk to an Expert",
+    serviceType: 'business',
+    basePrice: 5000,
   }
 ];
 
 const ThreePathsForward = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedPath, setSelectedPath] = useState<PathConfig | null>(null);
+
+  const handleOpenModal = (path: PathConfig) => {
+    setSelectedPath(path);
+    setModalOpen(true);
+  };
+
   return (
+    <>
     <section className="py-20 relative overflow-hidden bg-gradient-to-br from-[hsl(250,20%,96%)] via-white to-[hsl(180,50%,98%)]">
       {/* Background blobs */}
       <div className="absolute top-[-100px] left-[-100px] w-[400px] h-[400px] rounded-full bg-gradient-to-br from-primary to-accent opacity-10 blur-[80px] animate-blob-morph" />
@@ -119,20 +144,31 @@ const ThreePathsForward = () => {
 
                 {/* CTA Button */}
                 <Button
-                  asChild
+                  onClick={() => handleOpenModal(path)}
                   variant={path.featured ? "default" : "outline"}
                   className="w-full text-base font-bold uppercase tracking-wide"
                 >
-                  <Link to={path.link}>
-                    {path.cta}
-                  </Link>
+                  {path.cta}
                 </Button>
               </Card>
             );
           })}
         </div>
       </div>
+      
+      {/* Booking Modal */}
+      {selectedPath && (
+        <BookingModal
+          open={modalOpen}
+          onOpenChange={setModalOpen}
+          serviceType={selectedPath.serviceType}
+          serviceName={selectedPath.title}
+          basePrice={selectedPath.basePrice}
+          veteranDiscountPercent={10}
+        />
+      )}
     </section>
+    </>
   );
 };
 

@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { BookingModal } from "@/components/BookingModal";
 import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
 import CTASection from "@/components/CTASection";
@@ -27,6 +29,14 @@ import {
 } from "lucide-react";
 
 const LearnAndTrain = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState<{
+    type: 'training' | 'scamshield';
+    name: string;
+    tier?: string;
+    price?: number;
+  } | null>(null);
+
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -139,8 +149,21 @@ const LearnAndTrain = () => {
                   ))}
                 </div>
 
-                <Button asChild variant={plan.popular ? "default" : "outline"} size="lg" className="w-full">
-                  <Link to="/contact">Book Session</Link>
+                <Button 
+                  onClick={() => {
+                    setSelectedService({
+                      type: 'training',
+                      name: plan.name,
+                      tier: plan.name,
+                      price: parseFloat(plan.price.replace('$', ''))
+                    });
+                    setModalOpen(true);
+                  }}
+                  variant={plan.popular ? "default" : "outline"} 
+                  size="lg" 
+                  className="w-full"
+                >
+                  Book Session
                 </Button>
               </Card>
             ))}
@@ -610,6 +633,18 @@ const LearnAndTrain = () => {
       </CTASection>
 
       <Footer />
+      
+      {selectedService && (
+        <BookingModal
+          open={modalOpen}
+          onOpenChange={setModalOpen}
+          serviceType={selectedService.type}
+          serviceName={selectedService.name}
+          serviceTier={selectedService.tier}
+          basePrice={selectedService.price}
+          veteranDiscountPercent={10}
+        />
+      )}
     </div>
   );
 };

@@ -303,6 +303,81 @@ export type Database = {
           },
         ]
       }
+      booking_requests: {
+        Row: {
+          admin_notes: string | null
+          base_price: number | null
+          created_at: string
+          discount_amount: number | null
+          email: string
+          final_price: number | null
+          full_name: string
+          id: string
+          is_veteran: boolean | null
+          message: string | null
+          metadata: Json | null
+          phone: string | null
+          preferred_dates: string | null
+          request_number: string
+          service_name: string
+          service_tier: string | null
+          service_type: string
+          status: string
+          updated_at: string
+          user_id: string | null
+          veteran_id_last4: string | null
+          veteran_type: string | null
+        }
+        Insert: {
+          admin_notes?: string | null
+          base_price?: number | null
+          created_at?: string
+          discount_amount?: number | null
+          email: string
+          final_price?: number | null
+          full_name: string
+          id?: string
+          is_veteran?: boolean | null
+          message?: string | null
+          metadata?: Json | null
+          phone?: string | null
+          preferred_dates?: string | null
+          request_number?: string
+          service_name: string
+          service_tier?: string | null
+          service_type: string
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+          veteran_id_last4?: string | null
+          veteran_type?: string | null
+        }
+        Update: {
+          admin_notes?: string | null
+          base_price?: number | null
+          created_at?: string
+          discount_amount?: number | null
+          email?: string
+          final_price?: number | null
+          full_name?: string
+          id?: string
+          is_veteran?: boolean | null
+          message?: string | null
+          metadata?: Json | null
+          phone?: string | null
+          preferred_dates?: string | null
+          request_number?: string
+          service_name?: string
+          service_tier?: string | null
+          service_type?: string
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+          veteran_id_last4?: string | null
+          veteran_type?: string | null
+        }
+        Relationships: []
+      }
       bookings: {
         Row: {
           contact_id: string

@@ -37,8 +37,8 @@ const MakingADifference = () => {
               <p className="text-sm text-muted-foreground">
                 Verify status at checkout
               </p>
-              <Button className="w-full" size="lg">
-                Claim Discount
+              <Button className="w-full" size="lg" asChild>
+                <a href="/contact">Claim Discount</a>
               </Button>
             </CardContent>
           </Card>
