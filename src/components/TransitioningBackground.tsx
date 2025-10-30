@@ -46,7 +46,7 @@ const TransitioningBackground = ({ interval = 5000, className = '', opacity = 1 
         setCurrentIndex(nextIndex);
         setNextIndex((nextIndex + 1) % images.length);
         setIsTransitioning(false);
-      }, 1500); // Smooth 1.5-second transition
+      }, 2000); // Match transition duration exactly
     }, interval);
 
     return () => clearInterval(timer);
@@ -56,24 +56,26 @@ const TransitioningBackground = ({ interval = 5000, className = '', opacity = 1 
     <div className={`absolute inset-0 overflow-hidden ${className}`}>
       {/* Current Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center transition-opacity duration-[1500ms] ease-in-out"
+        className="absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out"
         style={{
           backgroundImage: `url(${images[currentIndex]})`,
           opacity: isTransitioning ? 0 : opacity,
+          willChange: 'opacity',
         }}
       />
       
       {/* Next Image (for smooth transition) */}
       <div
-        className="absolute inset-0 bg-cover bg-center transition-opacity duration-[1500ms] ease-in-out"
+        className="absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out"
         style={{
           backgroundImage: `url(${images[nextIndex]})`,
           opacity: isTransitioning ? opacity : 0,
+          willChange: 'opacity',
         }}
       />
       
       {/* Overlay for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50" style={{ opacity }} />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50" />
     </div>
   );
 };
