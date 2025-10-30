@@ -1,10 +1,22 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Shield, Heart, Gift, Users, DollarSign, Building2 } from "lucide-react";
+import { DonationModal } from "./DonationModal";
 
 const MakingADifference = () => {
+  const [donationModalOpen, setDonationModalOpen] = useState(false);
+  const [donationType, setDonationType] = useState<'sponsor' | 'monthly' | 'corporate' | 'general'>('general');
+
+  const openDonationModal = (type: 'sponsor' | 'monthly' | 'corporate' | 'general') => {
+    setDonationType(type);
+    setDonationModalOpen(true);
+  };
+
   return (
+    <>
     <section className="py-20 bg-gradient-to-b from-background to-muted/30">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -61,12 +73,18 @@ const MakingADifference = () => {
               <p className="text-muted-foreground">
                 Sponsor training seats for caregivers and provide specialized scam‑prevention resources during hospital stays.
               </p>
-              <div className="flex gap-2">
-                <Button variant="outline" className="flex-1">
-                  Refer a Family
+              <div className="flex flex-col gap-2">
+                <Button 
+                  onClick={() => openDonationModal('general')}
+                  className="w-full"
+                >
+                  Donate
                 </Button>
-                <Button variant="outline" className="flex-1">
-                  Partner with Us
+                <Button variant="outline" className="w-full" asChild>
+                  <Link to="/contact">Partner with Us</Link>
+                </Button>
+                <Button variant="outline" className="w-full" asChild>
+                  <Link to="/contact">Contact Us</Link>
                 </Button>
               </div>
             </CardContent>
@@ -90,8 +108,12 @@ const MakingADifference = () => {
               <p className="text-muted-foreground">
                 100% of donations fund scholarships, caregiver training programs, and community safety workshops.
               </p>
-              <Button className="w-full" size="lg">
-                Get Started
+              <Button 
+                onClick={() => openDonationModal('general')}
+                className="w-full" 
+                size="lg"
+              >
+                Donate Now
               </Button>
             </CardContent>
           </Card>
@@ -99,9 +121,12 @@ const MakingADifference = () => {
 
         {/* Donation Options */}
         <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          <Card className="text-center hover:border-primary transition-colors">
+          <Card 
+            className="text-center hover:border-primary transition-colors cursor-pointer group"
+            onClick={() => openDonationModal('sponsor')}
+          >
             <CardHeader>
-              <div className="mx-auto p-3 rounded-xl bg-primary/10 w-fit mb-2">
+              <div className="mx-auto p-3 rounded-xl bg-primary/10 w-fit mb-2 group-hover:scale-110 transition-transform">
                 <Users className="h-6 w-6 text-primary" />
               </div>
               <CardTitle className="text-lg">Sponsor a Seat</CardTitle>
@@ -109,12 +134,16 @@ const MakingADifference = () => {
             <CardContent>
               <p className="text-2xl font-bold text-primary mb-2">$100</p>
               <p className="text-sm text-muted-foreground">= one complete class</p>
+              <Button variant="outline" className="mt-4 w-full">Select</Button>
             </CardContent>
           </Card>
 
-          <Card className="text-center hover:border-primary transition-colors">
+          <Card 
+            className="text-center hover:border-primary transition-colors cursor-pointer group"
+            onClick={() => openDonationModal('monthly')}
+          >
             <CardHeader>
-              <div className="mx-auto p-3 rounded-xl bg-accent/10 w-fit mb-2">
+              <div className="mx-auto p-3 rounded-xl bg-accent/10 w-fit mb-2 group-hover:scale-110 transition-transform">
                 <DollarSign className="h-6 w-6 text-accent" />
               </div>
               <CardTitle className="text-lg">Monthly Ally</CardTitle>
@@ -122,23 +151,35 @@ const MakingADifference = () => {
             <CardContent>
               <p className="text-2xl font-bold text-accent mb-2">$25/mo</p>
               <p className="text-sm text-muted-foreground">sustains outreach</p>
+              <Button variant="outline" className="mt-4 w-full">Select</Button>
             </CardContent>
           </Card>
 
-          <Card className="text-center hover:border-primary transition-colors">
+          <Card 
+            className="text-center hover:border-primary transition-colors cursor-pointer group"
+            onClick={() => openDonationModal('corporate')}
+          >
             <CardHeader>
-              <div className="mx-auto p-3 rounded-xl bg-secondary/10 w-fit mb-2">
+              <div className="mx-auto p-3 rounded-xl bg-secondary/10 w-fit mb-2 group-hover:scale-110 transition-transform">
                 <Building2 className="h-6 w-6 text-secondary-foreground" />
               </div>
               <CardTitle className="text-lg">Corporate Partner</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground mt-6">Bulk training programs</p>
+              <p className="text-sm text-muted-foreground">Bulk training programs</p>
+              <Button variant="outline" className="mt-4 w-full">Contact Us</Button>
             </CardContent>
           </Card>
         </div>
       </div>
+
+      <DonationModal
+        open={donationModalOpen}
+        onOpenChange={setDonationModalOpen}
+        type={donationType}
+      />
     </section>
+    </>
   );
 };
 

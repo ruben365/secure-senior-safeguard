@@ -49,15 +49,25 @@ const LearnAndTrain = () => {
         showScrollIndicator={true}
       >
         <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center sm:justify-start">
-          <Button asChild variant="default" size="xl" className="w-full sm:w-auto">
-            <Link to="#training" aria-label="Explore training options">
-              View Training Programs
-            </Link>
+          <Button 
+            onClick={() => {
+              document.getElementById('training')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            variant="default" 
+            size="xl" 
+            className="w-full sm:w-auto"
+          >
+            View Training Programs
           </Button>
-          <Button asChild variant="secondary" size="xl" className="w-full sm:w-auto">
-            <Link to="#scamshield" aria-label="View ScamShield protection">
-              Learn About ScamShield
-            </Link>
+          <Button 
+            onClick={() => {
+              document.getElementById('scamshield')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            variant="secondary" 
+            size="xl" 
+            className="w-full sm:w-auto"
+          >
+            Learn About ScamShield
           </Button>
         </div>
       </Hero>
@@ -278,6 +288,7 @@ const LearnAndTrain = () => {
 
       {/* Pricing Section */}
       <section id="pricing" className="py-16 bg-muted relative overflow-hidden">
+        <FlowingWaves variant="full" opacity={0.12} />
         <div className="absolute inset-0 opacity-20">
           <div
             className="absolute top-1/4 right-20 w-64 h-64 bg-accent/30 rounded-full blur-3xl animate-pulse"
@@ -285,7 +296,10 @@ const LearnAndTrain = () => {
           />
         </div>
         <div className="container mx-auto px-4 relative z-10">
-          <h2 className="text-center mb-10 animate-fade-in-up">Choose Your Protection Level</h2>
+          <h2 className="text-center mb-4 animate-fade-in-up">Choose Your Protection Level</h2>
+          <p className="text-center text-lg text-muted-foreground mb-10 max-w-2xl mx-auto">
+            Subscribe monthly or save 5% with yearly plans. All plans include veteran discounts.
+          </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Starter Plan */}
@@ -299,9 +313,12 @@ const LearnAndTrain = () => {
                 </div>
               </div>
               <h3 className="text-2xl font-bold mb-2 text-center">Starter Plan</h3>
-              <div className="text-center mb-6">
+              <div className="text-center mb-2">
                 <span className="text-4xl font-bold text-primary">$39</span>
                 <span className="text-muted-foreground">/month</span>
+              </div>
+              <div className="text-center mb-6">
+                <p className="text-sm text-muted-foreground">or $444/year (save 5%)</p>
               </div>
               <p className="text-center text-sm text-muted-foreground mb-6">Perfect for: Individuals</p>
 
@@ -345,7 +362,7 @@ const LearnAndTrain = () => {
                 size="lg" 
                 className="w-full"
               >
-                START TRIAL
+                Get Started
               </Button>
             </Card>
 
@@ -365,9 +382,12 @@ const LearnAndTrain = () => {
                 </div>
               </div>
               <h3 className="text-2xl font-bold mb-2 text-center">Family Plan</h3>
-              <div className="text-center mb-6">
+              <div className="text-center mb-2">
                 <span className="text-4xl font-bold text-primary">$79</span>
                 <span className="text-muted-foreground">/month</span>
+              </div>
+              <div className="text-center mb-6">
+                <p className="text-sm text-muted-foreground">or $900/year (save 5%)</p>
               </div>
               <p className="text-center text-sm text-muted-foreground mb-6">Perfect for: Families & couples</p>
 
@@ -414,7 +434,7 @@ const LearnAndTrain = () => {
                 size="lg" 
                 className="w-full"
               >
-                START TRIAL
+                Get Started
               </Button>
             </Card>
 
@@ -429,9 +449,12 @@ const LearnAndTrain = () => {
                 </div>
               </div>
               <h3 className="text-2xl font-bold mb-2 text-center">Premium Plan</h3>
-              <div className="text-center mb-6">
+              <div className="text-center mb-2">
                 <span className="text-4xl font-bold text-primary">$129</span>
                 <span className="text-muted-foreground">/month</span>
+              </div>
+              <div className="text-center mb-6">
+                <p className="text-sm text-muted-foreground">or $1,470/year (save 5%)</p>
               </div>
               <p className="text-center text-sm text-muted-foreground mb-6">
                 Perfect for: High-risk individuals, business owners
@@ -482,7 +505,7 @@ const LearnAndTrain = () => {
                 size="lg" 
                 className="w-full"
               >
-                START TRIAL
+                Get Started
               </Button>
             </Card>
           </div>
@@ -653,10 +676,15 @@ const LearnAndTrain = () => {
       <CTASection headline="Sleep Better Tonight" variant="gold">
         <p className="text-xl text-white/90 mb-8">Join 500+ families who trust ScamShield</p>
         <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center">
-          <Button asChild variant="gold" size="xl" className="w-full sm:w-auto">
-            <Link to="#pricing" aria-label="Start trial">
-              START TRIAL
-            </Link>
+          <Button 
+            onClick={() => {
+              document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            variant="gold" 
+            size="xl" 
+            className="w-full sm:w-auto"
+          >
+            Get Started
           </Button>
           <Button asChild variant="secondary" size="xl" className="w-full sm:w-auto">
             <Link to="/training" aria-label="Compare plans">

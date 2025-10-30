@@ -492,8 +492,8 @@ const Index = () => {
             </Link>
           </Button>
           <Button asChild variant="secondary" size="xl" className="w-full sm:w-auto">
-            <Link to="/training" aria-label="Start 14-day Shield trial">
-              Start 14-Day Trial
+            <Link to="/training#pricing" aria-label="View protection plans">
+              Get Protection Now
             </Link>
           </Button>
           <Button asChild variant="outlineLight" size="xl" className="w-full sm:w-auto">

@@ -33,14 +33,36 @@ const Business = () => {
         subheadline="Custom AI automation, professional websites, and industry-leading AI Service Insurance"
       >
         <div className="flex flex-col sm:flex-row gap-4">
-          <Button asChild variant="default" size="xl">
-            <Link to="/contact">Build AI Automation</Link>
+          <Button 
+            onClick={() => {
+              setSelectedService({
+                type: 'business',
+                name: 'AI Automation',
+                price: 9500
+              });
+              setModalOpen(true);
+            }}
+            variant="default" 
+            size="xl"
+          >
+            Build AI Automation
+          </Button>
+          <Button 
+            onClick={() => {
+              setSelectedService({
+                type: 'website',
+                name: 'Professional Website Design',
+                price: 4500
+              });
+              setModalOpen(true);
+            }}
+            variant="outlineLight" 
+            size="xl"
+          >
+            Design My Website
           </Button>
           <Button asChild variant="outlineLight" size="xl">
-            <Link to="/contact">Design My Website</Link>
-          </Button>
-          <Button asChild variant="outlineLight" size="xl">
-            <Link to="/contact">Get AI Insurance</Link>
+            <Link to="#insurance">Get AI Insurance</Link>
           </Button>
         </div>
       </Hero>

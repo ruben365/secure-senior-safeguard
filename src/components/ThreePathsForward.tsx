@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { BookOpen, Shield, Briefcase } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
@@ -21,28 +22,28 @@ const paths: PathConfig[] = [
     id: 1,
     title: "Learn & Train",
     description: "Live Zoom classes & in-person training. Spot deepfakes, verify identities, handle urgent calls with confidence.",
-    pricing: "Starting at $149",
+    pricing: "Starting at $79",
     icon: BookOpen,
     cta: "Book Training",
     serviceType: 'training',
-    basePrice: 149,
+    basePrice: 79,
   },
   {
     id: 2,
     title: "Family Scam Shield",
     description: "Forward suspicious emails, texts, links, QR codes. Get expert analysis within 24-48 hours.",
-    pricing: "Starting at $49/month",
+    pricing: "Starting at $39/month",
     icon: Shield,
     featured: true,
-    cta: "Start Scam Shield",
+    cta: "Get Protection",
     serviceType: 'scamshield',
-    basePrice: 49,
+    basePrice: 39,
   },
   {
     id: 3,
     title: "AI for Business",
     description: "Custom AI receptionists, automation, and pre-purchase vetting. Don't waste $5k+ on wrong tools.",
-    pricing: "Starting at $5,000",
+    pricing: "Custom Pricing",
     icon: Briefcase,
     cta: "Talk to an Expert",
     serviceType: 'business',
