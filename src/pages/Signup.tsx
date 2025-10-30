@@ -248,10 +248,10 @@ const Signup = () => {
 
   const validateStep3 = () => {
     if (selectedRole === "senior") {
-      if (!relationship || !emergencyContactName || !emergencyContactPhone) {
+      if (!relationship || !specialization) {
         toast({ 
           title: "⚠️ Missing Information", 
-          description: "Please fill in all required fields for client account", 
+          description: "Please select organization type and industry", 
           variant: "destructive" 
         });
         return false;
@@ -832,34 +832,39 @@ const Signup = () => {
               {selectedRole === "senior" && (
                 <div className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="relationship">Account Type *</Label>
+                    <Label htmlFor="relationship">Organization Type *</Label>
                     <Select value={relationship} onValueChange={setRelationship}>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select account type" />
+                        <SelectValue placeholder="Select organization type" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="self">Individual</SelectItem>
-                        <SelectItem value="spouse">Family Account</SelectItem>
-                        <SelectItem value="child">Small Business</SelectItem>
-                        <SelectItem value="other">Enterprise</SelectItem>
+                        <SelectItem value="spouse">Small Business (1-50 employees)</SelectItem>
+                        <SelectItem value="child">Medium Business (51-500 employees)</SelectItem>
+                        <SelectItem value="other">Enterprise (500+ employees)</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="emergencyContactName">Secondary Contact Name *</Label>
-                    <Input id="emergencyContactName" value={emergencyContactName} onChange={(e) => setEmergencyContactName(e.target.value)} required />
+                    <Label htmlFor="specialization">Industry/Sector *</Label>
+                    <Input id="specialization" value={specialization} onChange={(e) => setSpecialization(e.target.value)} placeholder="e.g., Healthcare, Finance, Retail, Technology" required />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="emergencyContactPhone">Secondary Contact Phone *</Label>
-                    <Input id="emergencyContactPhone" value={emergencyContactPhone} onChange={(e) => setEmergencyContactPhone(e.target.value)} required />
+                    <Label htmlFor="medicalConditions">Primary Security Concerns (Optional)</Label>
+                    <Textarea id="medicalConditions" value={medicalConditions} onChange={(e) => setMedicalConditions(e.target.value)} rows={3} placeholder="e.g., Phishing attacks, AI scams, data protection, employee training needs" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="medicalConditions">Security Concerns / Specific Needs (Optional)</Label>
-                    <Textarea id="medicalConditions" value={medicalConditions} onChange={(e) => setMedicalConditions(e.target.value)} rows={3} placeholder="Describe any specific cybersecurity concerns or protection needs..." />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="preferredLanguage">Preferred Language</Label>
-                    <Input id="preferredLanguage" value={preferredLanguage} onChange={(e) => setPreferredLanguage(e.target.value)} />
+                    <Label htmlFor="preferredLanguage">Preferred Communication Language</Label>
+                    <Select value={preferredLanguage} onValueChange={setPreferredLanguage}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select language" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="English">English</SelectItem>
+                        <SelectItem value="Español">Español</SelectItem>
+                        <SelectItem value="Français">Français</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
               )}
