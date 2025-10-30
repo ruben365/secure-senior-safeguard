@@ -32,6 +32,7 @@ import testimonial3 from "@/assets/testimonial-3.jpg";
 import testimonial5 from "@/assets/testimonial-5.jpg";
 import testimonial6 from "@/assets/testimonial-6.jpg";
 import testimonial7 from "@/assets/testimonial-7.jpg";
+import heroHomepage from "@/assets/hero-homepage-new.jpg";
 
 const Index = () => {
   return (
@@ -40,6 +41,7 @@ const Index = () => {
 
       {/* Hero Section */}
       <Hero
+        backgroundImage={heroHomepage}
         headline="Protect Your Family from AI-Powered Scams"
         subheadline="Ohio's trusted source for scam prevention training and 24/7 protection services"
         showScrollIndicator={true}

@@ -15,6 +15,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 import { z } from "zod";
 import { useAIChat } from "@/contexts/AIChatContext";
+import heroContact from "@/assets/hero-contact-new.jpg";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
@@ -84,6 +85,7 @@ const Contact = () => {
 
       {/* Hero */}
       <Hero
+        backgroundImage={heroContact}
         headline="Let's Talk. We're Here to Help."
         subheadline="Whether you have questions, need training, or want to protect your family—we're ready to assist you."
       />

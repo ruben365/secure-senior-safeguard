@@ -11,6 +11,7 @@ import { Card } from "@/components/ui/card";
 import { Phone, Mail, MessageSquare, Calendar, CheckCircle, Search, Shield } from "lucide-react";
 import testimonial3 from "@/assets/testimonial-3.jpg";
 import testimonial4 from "@/assets/testimonial-4.jpg";
+import heroBusiness from "@/assets/hero-business-professional.jpg";
 
 const Business = () => {
   return (
@@ -18,6 +19,7 @@ const Business = () => {
       <Navigation />
 
       <Hero
+        backgroundImage={heroBusiness}
         headline="Grow Your Business with Secure AI Solutions"
         subheadline="Custom AI automation, professional websites, and industry-leading AI Service Insurance"
       >

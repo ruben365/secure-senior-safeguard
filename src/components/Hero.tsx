@@ -30,7 +30,7 @@ const Hero = ({ backgroundImage, useTransitioningBackground = false, headline, s
     <div className={cn("relative min-h-[90vh] flex items-center overflow-hidden", className)}>
       {/* Background */}
       <div 
-        className="absolute inset-0"
+        className="absolute inset-0 animate-fade-in"
         style={{ transform: `translateY(${scrollY * 0.5}px)` }}
       >
         {useTransitioningBackground ? (
