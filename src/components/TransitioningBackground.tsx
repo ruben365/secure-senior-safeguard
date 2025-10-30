@@ -35,42 +35,50 @@ interface TransitioningBackgroundProps {
 
 const TransitioningBackground = ({ interval = 5000, className = '', opacity = 1 }: TransitioningBackgroundProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [nextIndex, setNextIndex] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
+  // Preload all images once to prevent flicker on first paint
   useEffect(() => {
+    images.forEach((src) => {
+      const img = new Image();
+      img.src = typeof src === 'string' ? src : '';
+    });
+  }, []);
+
+  useEffect(() => {
+    const transitionDuration = 1200; // keep in sync with CSS below
     const timer = setInterval(() => {
       setIsTransitioning(true);
-      
       setTimeout(() => {
-        setCurrentIndex(nextIndex);
-        setNextIndex((nextIndex + 1) % images.length);
+        setCurrentIndex((prev) => (prev + 1) % images.length);
         setIsTransitioning(false);
-      }, 1500); // Smooth transition timing
+      }, transitionDuration);
     }, interval);
 
     return () => clearInterval(timer);
-  }, [interval, nextIndex]);
+  }, [interval]);
+
+  const upcomingIndex = (currentIndex + 1) % images.length;
 
   return (
     <div className={`absolute inset-0 overflow-hidden ${className}`}>
       {/* Current Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center transition-all duration-[1500ms] ease-in-out"
+className="absolute inset-0 bg-cover bg-center transition-all duration-[1200ms] ease-in-out"
         style={{
           backgroundImage: `url(${images[currentIndex]})`,
           opacity: isTransitioning ? 0 : opacity,
-          transform: isTransitioning ? 'scale(1.05)' : 'scale(1)',
+          transform: isTransitioning ? 'scale(1.02)' : 'scale(1)',
         }}
       />
       
       {/* Next Image (for smooth transition) */}
       <div
-        className="absolute inset-0 bg-cover bg-center transition-all duration-[1500ms] ease-in-out"
+className="absolute inset-0 bg-cover bg-center transition-all duration-[1200ms] ease-in-out"
         style={{
-          backgroundImage: `url(${images[nextIndex]})`,
+          backgroundImage: `url(${images[upcomingIndex]})`,
           opacity: isTransitioning ? opacity : 0,
-          transform: isTransitioning ? 'scale(1)' : 'scale(1.05)',
+          transform: isTransitioning ? 'scale(1)' : 'scale(1.02)',
         }}
       />
       
