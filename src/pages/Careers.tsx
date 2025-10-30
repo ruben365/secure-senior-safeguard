@@ -244,32 +244,31 @@ const Careers = () => {
       {/* Open Positions - Compact Layout */}
       <section id="positions" className="py-12 bg-background">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-8">
+          <div className="text-center mb-6">
             <h2 className="mb-2">Open Positions</h2>
-            <p className="text-muted-foreground">Join our growing team and make a real difference</p>
+            <p className="text-sm text-muted-foreground">Join our growing team and make a real difference</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
             {positions.map((position, index) => (
-              <Card key={index} className="p-6 hover:shadow-lg transition-all hover:-translate-y-1">
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <position.icon className="w-6 h-6 text-primary" />
+              <Card key={index} className="p-4 hover:shadow-lg transition-all hover:-translate-y-1">
+                <div className="flex items-start gap-3 mb-3">
+                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <position.icon className="w-5 h-5 text-primary" />
                   </div>
                   <div className="flex-grow">
-                    <h3 className="text-xl font-bold mb-1">{position.title}</h3>
-                    <div className="flex flex-wrap gap-2 text-xs text-muted-foreground mb-2">
-                      <Badge variant="secondary">{position.type}</Badge>
-                      <Badge variant="outline">{position.location}</Badge>
+                    <h3 className="text-lg font-bold mb-1">{position.title}</h3>
+                    <div className="flex flex-wrap gap-1 text-xs">
+                      <Badge variant="secondary" className="text-xs">{position.type}</Badge>
                     </div>
                   </div>
                 </div>
                 
-                <p className="text-sm text-muted-foreground mb-4">{position.description}</p>
+                <p className="text-xs text-muted-foreground mb-3 line-clamp-2">{position.description}</p>
                 
                 <Button asChild className="w-full" size="sm">
                   <a href="#apply">
-                    Apply Now <ArrowRight className="ml-2 w-4 h-4" />
+                    Apply Now <ArrowRight className="ml-1 w-3 h-3" />
                   </a>
                 </Button>
               </Card>
