@@ -124,6 +124,20 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     zoom: 0.75;
   }
   
+  /* Smooth page transitions - prevent flicker */
+  html {
+    @apply scroll-smooth;
+  }
+  
+  #root {
+    @apply min-h-screen;
+  }
+  
+  /* Prevent image flicker on load */
+  img {
+    @apply block;
+  }
+  
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold;
     line-height: 1.2;

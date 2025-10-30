@@ -35,7 +35,8 @@ interface TransitioningBackgroundProps {
 
 const TransitioningBackground = ({ interval = 5000, className = '', opacity = 1 }: TransitioningBackgroundProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [nextIndex, setNextIndex] = useState(1);
+  const [isVisible, setIsVisible] = useState(true);
 
   // Preload all images once to prevent flicker on first paint
   useEffect(() => {
@@ -46,39 +47,37 @@ const TransitioningBackground = ({ interval = 5000, className = '', opacity = 1 
   }, []);
 
   useEffect(() => {
-    const transitionDuration = 1200; // keep in sync with CSS below
     const timer = setInterval(() => {
-      setIsTransitioning(true);
+      // Start fade transition
+      setIsVisible(false);
+      
+      // After fade completes, update indices
       setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % images.length);
-        setIsTransitioning(false);
-      }, transitionDuration);
+        setCurrentIndex(nextIndex);
+        setNextIndex((nextIndex + 1) % images.length);
+        setIsVisible(true);
+      }, 1500); // Match CSS transition duration
     }, interval);
 
     return () => clearInterval(timer);
-  }, [interval]);
-
-  const upcomingIndex = (currentIndex + 1) % images.length;
+  }, [interval, nextIndex]);
 
   return (
     <div className={`absolute inset-0 overflow-hidden ${className}`}>
-      {/* Current Image */}
+      {/* Base Image (always visible) */}
       <div
-className="absolute inset-0 bg-cover bg-center transition-all duration-[1200ms] ease-in-out"
+        className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage: `url(${images[currentIndex]})`,
-          opacity: isTransitioning ? 0 : opacity,
-          transform: isTransitioning ? 'scale(1.02)' : 'scale(1)',
         }}
       />
       
-      {/* Next Image (for smooth transition) */}
+      {/* Crossfade Image */}
       <div
-className="absolute inset-0 bg-cover bg-center transition-all duration-[1200ms] ease-in-out"
+        className="absolute inset-0 bg-cover bg-center transition-opacity duration-[1500ms] ease-in-out"
         style={{
-          backgroundImage: `url(${images[upcomingIndex]})`,
-          opacity: isTransitioning ? opacity : 0,
-          transform: isTransitioning ? 'scale(1)' : 'scale(1.02)',
+          backgroundImage: `url(${images[nextIndex]})`,
+          opacity: isVisible ? 0 : opacity,
         }}
       />
       
