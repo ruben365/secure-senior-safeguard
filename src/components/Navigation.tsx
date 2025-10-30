@@ -15,16 +15,17 @@ const Navigation = () => {
     { name: "Contact", href: "/contact" },
   ];
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <nav className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 hover:scale-105 transition-transform duration-300">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center shadow-glow-purple relative animate-heartbeat">
-              {/* Radiating waves */}
-              <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-primary to-accent opacity-10 animate-pulse-wave" />
-              <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-primary to-accent opacity-5 animate-pulse-wave-delayed" />
+          <Link to="/" className="flex items-center gap-3 hover:scale-105 transition-transform duration-300" onClick={scrollToTop}>
+            <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center shadow-glow-purple relative">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -50,6 +51,7 @@ const Navigation = () => {
               <Link
                 key={link.name}
                 to={link.href}
+                onClick={scrollToTop}
                 className="text-foreground/80 hover:text-foreground font-bold transition-colors duration-200 text-lg whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2 py-1"
               >
                 {link.name}
@@ -70,7 +72,7 @@ const Navigation = () => {
             <Button asChild variant="outline" size="default" className="hidden md:inline-flex font-bold">
               <Link to="/portal" aria-label="Login to your account">Login</Link>
             </Button>
-            <Button asChild variant="default" size="default" className="hidden md:inline-flex font-bold bg-gradient-to-r from-primary to-accent hover:shadow-glow-purple transition-all duration-300 animate-pulse-subtle">
+            <Button asChild variant="default" size="default" className="hidden md:inline-flex font-bold bg-gradient-to-r from-primary to-accent hover:shadow-glow-purple transition-all duration-300">
               <Link to="/contact" aria-label="Get protected">GET PROTECTED</Link>
             </Button>
 
@@ -94,7 +96,10 @@ const Navigation = () => {
                   key={link.name}
                   to={link.href}
                   className="text-foreground/80 hover:text-foreground py-2 transition-colors font-bold text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    scrollToTop();
+                  }}
                 >
                   {link.name}
                 </Link>

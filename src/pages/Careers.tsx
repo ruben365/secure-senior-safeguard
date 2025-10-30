@@ -293,70 +293,71 @@ const Careers = () => {
       </section>
 
       {/* Open Positions */}
-      <section id="positions" className="py-16 bg-muted">
+      <section id="positions" className="py-12 bg-muted">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="mb-4">Open Positions</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <div className="text-center mb-8">
+            <h2 className="mb-3 text-3xl">Open Positions</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Join our growing team and make a real difference in people's lives
             </p>
           </div>
 
-          <div className="space-y-6 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-4 max-w-6xl mx-auto">
             {positions.map((position, index) => (
-              <Card key={index} className="p-8 hover:shadow-lg transition-shadow">
-                <div className="flex items-start gap-6">
+              <Card key={index} className="p-5 hover:shadow-lg transition-shadow">
+                <div className="flex items-start gap-4 mb-3">
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center">
-                      <position.icon className="w-8 h-8 text-primary" />
+                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <position.icon className="w-6 h-6 text-primary" />
                     </div>
                   </div>
-                  <div className="flex-grow">
-                    <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
-                      <div>
-                        <h3 className="text-2xl font-bold mb-2">{position.title}</h3>
-                        <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
-                          <span className="flex items-center gap-1">
-                            <Users className="w-4 h-4" />
-                            {position.department}
-                          </span>
-                          <span>•</span>
-                          <span>{position.type}</span>
-                          <span>•</span>
-                          <span>{position.location}</span>
-                        </div>
-                      </div>
-                      <Button asChild>
-                        <a href="#apply">Apply Now</a>
-                      </Button>
+                  <div className="flex-grow min-w-0">
+                    <h3 className="text-lg font-bold mb-1">{position.title}</h3>
+                    <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
+                      <span>{position.type}</span>
+                      <span>•</span>
+                      <span>{position.location}</span>
                     </div>
+                  </div>
+                  <Button asChild size="sm">
+                    <a href="#apply">Apply</a>
+                  </Button>
+                </div>
 
-                    <p className="text-muted-foreground mb-6">{position.description}</p>
+                <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{position.description}</p>
 
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div>
-                        <h4 className="font-semibold mb-3">Key Responsibilities:</h4>
-                        <ul className="space-y-2">
-                          {position.responsibilities.map((resp, idx) => (
-                            <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
-                              <span className="text-primary mt-1">•</span>
-                              <span>{resp}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold mb-3">Qualifications:</h4>
-                        <ul className="space-y-2">
-                          {position.qualifications.map((qual, idx) => (
-                            <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
-                              <span className="text-primary mt-1">•</span>
-                              <span>{qual}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
+                <div className="space-y-3">
+                  <div>
+                    <h4 className="text-sm font-semibold mb-2">Key Responsibilities:</h4>
+                    <ul className="space-y-1">
+                      {position.responsibilities.slice(0, 3).map((resp, idx) => (
+                        <li key={idx} className="text-xs text-muted-foreground flex items-start gap-1.5">
+                          <span className="text-primary mt-0.5">•</span>
+                          <span className="line-clamp-1">{resp}</span>
+                        </li>
+                      ))}
+                      {position.responsibilities.length > 3 && (
+                        <li className="text-xs text-muted-foreground italic">
+                          +{position.responsibilities.length - 3} more...
+                        </li>
+                      )}
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-semibold mb-2">Qualifications:</h4>
+                    <ul className="space-y-1">
+                      {position.qualifications.slice(0, 3).map((qual, idx) => (
+                        <li key={idx} className="text-xs text-muted-foreground flex items-start gap-1.5">
+                          <span className="text-primary mt-0.5">•</span>
+                          <span className="line-clamp-1">{qual}</span>
+                        </li>
+                      ))}
+                      {position.qualifications.length > 3 && (
+                        <li className="text-xs text-muted-foreground italic">
+                          +{position.qualifications.length - 3} more...
+                        </li>
+                      )}
+                    </ul>
                   </div>
                 </div>
               </Card>
