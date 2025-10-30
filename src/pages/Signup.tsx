@@ -25,7 +25,6 @@ import {
   ArrowRight,
   Users,
   Heart,
-  Stethoscope,
   BarChart3,
   GraduationCap,
   Code,
@@ -252,7 +251,7 @@ const Signup = () => {
       if (!relationship || !emergencyContactName || !emergencyContactPhone) {
         toast({ 
           title: "⚠️ Missing Information", 
-          description: "Please fill in all required fields for senior/family member role", 
+          description: "Please fill in all required fields for client account", 
           variant: "destructive" 
         });
         return false;
@@ -263,7 +262,7 @@ const Signup = () => {
           !reference2Name || !reference2Phone || !reference2Email || !backgroundCheckConsent) {
         toast({ 
           title: "⚠️ Missing Information", 
-          description: "Please complete all caregiver requirements including references and background check consent", 
+          description: "Please complete all support specialist requirements including references and background check consent", 
           variant: "destructive" 
         });
         return false;
@@ -272,7 +271,7 @@ const Signup = () => {
       if (!licenseNumber || !licenseType || !medicalSpecialty || !yearsInPractice) {
         toast({ 
           title: "⚠️ Missing Information", 
-          description: "Please provide all healthcare professional credentials", 
+          description: "Please provide all security specialist credentials", 
           variant: "destructive" 
         });
         return false;
@@ -829,34 +828,34 @@ const Signup = () => {
                 <p className="text-muted-foreground">Role-specific details</p>
               </div>
 
-              {/* Senior/Family Fields */}
+              {/* Client/Customer Fields */}
               {selectedRole === "senior" && (
                 <div className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="relationship">Relationship *</Label>
+                    <Label htmlFor="relationship">Account Type *</Label>
                     <Select value={relationship} onValueChange={setRelationship}>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select relationship" />
+                        <SelectValue placeholder="Select account type" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="self">Self</SelectItem>
-                        <SelectItem value="spouse">Spouse</SelectItem>
-                        <SelectItem value="child">Child</SelectItem>
-                        <SelectItem value="other">Other Family</SelectItem>
+                        <SelectItem value="self">Individual</SelectItem>
+                        <SelectItem value="spouse">Family Account</SelectItem>
+                        <SelectItem value="child">Small Business</SelectItem>
+                        <SelectItem value="other">Enterprise</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="emergencyContactName">Emergency Contact Name *</Label>
+                    <Label htmlFor="emergencyContactName">Secondary Contact Name *</Label>
                     <Input id="emergencyContactName" value={emergencyContactName} onChange={(e) => setEmergencyContactName(e.target.value)} required />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="emergencyContactPhone">Emergency Contact Phone *</Label>
+                    <Label htmlFor="emergencyContactPhone">Secondary Contact Phone *</Label>
                     <Input id="emergencyContactPhone" value={emergencyContactPhone} onChange={(e) => setEmergencyContactPhone(e.target.value)} required />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="medicalConditions">Medical Conditions (Optional)</Label>
-                    <Textarea id="medicalConditions" value={medicalConditions} onChange={(e) => setMedicalConditions(e.target.value)} rows={3} />
+                    <Label htmlFor="medicalConditions">Security Concerns / Specific Needs (Optional)</Label>
+                    <Textarea id="medicalConditions" value={medicalConditions} onChange={(e) => setMedicalConditions(e.target.value)} rows={3} placeholder="Describe any specific cybersecurity concerns or protection needs..." />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="preferredLanguage">Preferred Language</Label>
@@ -865,25 +864,25 @@ const Signup = () => {
                 </div>
               )}
 
-              {/* Caregiver Fields */}
+              {/* Support Specialist Fields */}
               {selectedRole === "caregiver" && (
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="certificationNumber">Certification Number *</Label>
+                      <Label htmlFor="certificationNumber">Certification ID/Number *</Label>
                       <Input id="certificationNumber" value={certificationNumber} onChange={(e) => setCertificationNumber(e.target.value)} required />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="certificationType">Certification Type *</Label>
+                      <Label htmlFor="certificationType">IT Certification Type *</Label>
                       <Select value={certificationType} onValueChange={setCertificationType}>
                         <SelectTrigger>
                           <SelectValue placeholder="Select type" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="CNA">CNA</SelectItem>
-                          <SelectItem value="LPN">LPN</SelectItem>
-                          <SelectItem value="RN">RN</SelectItem>
-                          <SelectItem value="HHA">HHA</SelectItem>
+                          <SelectItem value="CompTIA A+">CompTIA A+</SelectItem>
+                          <SelectItem value="ITIL">ITIL Foundation</SelectItem>
+                          <SelectItem value="HDI">HDI Support Center</SelectItem>
+                          <SelectItem value="Microsoft">Microsoft Certified</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -942,46 +941,40 @@ const Signup = () => {
                 </div>
               )}
 
-              {/* Healthcare Professional Fields */}
+              {/* Security Specialist Fields */}
               {selectedRole === "healthcare" && (
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="licenseNumber">License Number *</Label>
+                      <Label htmlFor="licenseNumber">Certification ID *</Label>
                       <Input id="licenseNumber" value={licenseNumber} onChange={(e) => setLicenseNumber(e.target.value)} required />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="licenseType">License Type *</Label>
+                      <Label htmlFor="licenseType">Security Certification *</Label>
                       <Select value={licenseType} onValueChange={setLicenseType}>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select type" />
+                          <SelectValue placeholder="Select certification" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="MD">MD</SelectItem>
-                          <SelectItem value="NP">NP</SelectItem>
-                          <SelectItem value="PA">PA</SelectItem>
-                          <SelectItem value="RN">RN</SelectItem>
+                          <SelectItem value="CISSP">CISSP</SelectItem>
+                          <SelectItem value="CEH">CEH (Certified Ethical Hacker)</SelectItem>
+                          <SelectItem value="Security+">CompTIA Security+</SelectItem>
+                          <SelectItem value="CISM">CISM</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="medicalSpecialty">Medical Specialty *</Label>
-                    <Input id="medicalSpecialty" value={medicalSpecialty} onChange={(e) => setMedicalSpecialty(e.target.value)} required />
+                    <Label htmlFor="medicalSpecialty">Security Specialization *</Label>
+                    <Input id="medicalSpecialty" value={medicalSpecialty} onChange={(e) => setMedicalSpecialty(e.target.value)} placeholder="e.g., Network Security, AI Safety, Penetration Testing" required />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="hospitalAffiliation">Hospital/Clinic Affiliation</Label>
-                    <Input id="hospitalAffiliation" value={hospitalAffiliation} onChange={(e) => setHospitalAffiliation(e.target.value)} />
+                    <Label htmlFor="hospitalAffiliation">Current/Previous Organization</Label>
+                    <Input id="hospitalAffiliation" value={hospitalAffiliation} onChange={(e) => setHospitalAffiliation(e.target.value)} placeholder="Company or institution name" />
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="deaNumber">DEA Number</Label>
-                      <Input id="deaNumber" value={deaNumber} onChange={(e) => setDeaNumber(e.target.value)} />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="yearsInPractice">Years in Practice *</Label>
-                      <Input id="yearsInPractice" type="number" value={yearsInPractice} onChange={(e) => setYearsInPractice(e.target.value)} required />
-                    </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="yearsInPractice">Years of Experience *</Label>
+                    <Input id="yearsInPractice" type="number" value={yearsInPractice} onChange={(e) => setYearsInPractice(e.target.value)} required />
                   </div>
                 </div>
               )}
@@ -996,15 +989,15 @@ const Signup = () => {
                         <SelectValue placeholder="Select department" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="data-analytics">Data Analytics</SelectItem>
-                        <SelectItem value="quality-assurance">Quality Assurance</SelectItem>
-                        <SelectItem value="research">Research</SelectItem>
+                        <SelectItem value="data-analytics">AI/ML Analytics</SelectItem>
+                        <SelectItem value="quality-assurance">Security Quality Assurance</SelectItem>
+                        <SelectItem value="research">Threat Research</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="specialization">Specialization *</Label>
-                    <Input id="specialization" value={specialization} onChange={(e) => setSpecialization(e.target.value)} required />
+                    <Input id="specialization" value={specialization} onChange={(e) => setSpecialization(e.target.value)} placeholder="e.g., AI Security, Scam Detection, Data Analysis" required />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="educationLevel">Education Level *</Label>
@@ -1031,11 +1024,11 @@ const Signup = () => {
                 <div className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="trainingSpecialization">Training Specialization *</Label>
-                    <Input id="trainingSpecialization" value={trainingSpecialization} onChange={(e) => setTrainingSpecialization(e.target.value)} placeholder="e.g., First Aid, CPR, Dementia Care" required />
+                    <Input id="trainingSpecialization" value={trainingSpecialization} onChange={(e) => setTrainingSpecialization(e.target.value)} placeholder="e.g., Cybersecurity, AI Safety, Scam Prevention" required />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="certifications">Certifications * (comma-separated)</Label>
-                    <Input id="certifications" value={certifications} onChange={(e) => setCertifications(e.target.value)} placeholder="e.g., CPR, First Aid" required />
+                    <Input id="certifications" value={certifications} onChange={(e) => setCertifications(e.target.value)} placeholder="e.g., CISSP, CEH, Security+" required />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="yearsTrainingExperience">Years of Training Experience *</Label>
@@ -1043,7 +1036,7 @@ const Signup = () => {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="availableTrainingDates">Available Training Dates</Label>
-                    <Textarea id="availableTrainingDates" value={availableTrainingDates} onChange={(e) => setAvailableTrainingDates(e.target.value)} rows={3} />
+                    <Textarea id="availableTrainingDates" value={availableTrainingDates} onChange={(e) => setAvailableTrainingDates(e.target.value)} rows={3} placeholder="List your availability for conducting training sessions" />
                   </div>
                 </div>
               )}
