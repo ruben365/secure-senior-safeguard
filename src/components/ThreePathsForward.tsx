@@ -103,10 +103,10 @@ const ThreePathsForward = () => {
                   animate-fade-in-up
                   before:absolute before:top-0 before:left-0 before:w-full before:h-1 before:rounded-t-3xl
                   before:bg-gradient-to-r before:from-primary before:via-accent before:to-primary
-                  before:scale-x-0 before:origin-left before:transition-transform before:duration-500
+                  before:scale-x-0 before:origin-left before:transition-transform before:duration-500 before:pointer-events-none
                   hover:before:scale-x-100
                   after:absolute after:inset-0 after:rounded-3xl after:opacity-0
-                  after:bg-gradient-to-br after:from-primary/5 after:to-accent/5
+                  after:bg-gradient-to-br after:from-primary/5 after:to-accent/5 after:pointer-events-none
                   hover:after:opacity-100 after:transition-opacity after:duration-500
                 `}
                 style={{ animationDelay: `${index * 150}ms` }}
