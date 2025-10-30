@@ -56,21 +56,23 @@ const TransitioningBackground = ({ interval = 5000, className = '', opacity = 1 
     <div className={`absolute inset-0 overflow-hidden ${className}`}>
       {/* Current Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out"
+        className="absolute inset-0 bg-cover bg-center transition-all duration-[2500ms] ease-out"
         style={{
           backgroundImage: `url(${images[currentIndex]})`,
           opacity: isTransitioning ? 0 : opacity,
-          willChange: 'opacity',
+          transform: isTransitioning ? 'scale(1.1)' : 'scale(1)',
+          willChange: 'opacity, transform',
         }}
       />
       
       {/* Next Image (for smooth transition) */}
       <div
-        className="absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out"
+        className="absolute inset-0 bg-cover bg-center transition-all duration-[2500ms] ease-out"
         style={{
           backgroundImage: `url(${images[nextIndex]})`,
           opacity: isTransitioning ? opacity : 0,
-          willChange: 'opacity',
+          transform: isTransitioning ? 'scale(1)' : 'scale(1.1)',
+          willChange: 'opacity, transform',
         }}
       />
       
