@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Layout from "@/components/Layout";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import FlowingWaves from "@/components/FlowingWaves";
@@ -93,7 +92,7 @@ const Resources = () => {
   ];
 
   return (
-    <Layout>
+    <>
       {/* Hero */}
       <Hero
         headline="Resources & Tools"
@@ -218,7 +217,7 @@ const Resources = () => {
       </section>
 
       <Footer />
-    </Layout>
+    </>
   );
 };
 

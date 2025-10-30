@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Layout from "@/components/Layout";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import FlowingWaves from "@/components/FlowingWaves";
@@ -9,8 +8,7 @@ import { Heart, Lock, BookOpen, Users2, Shield, DollarSign, Award, MapPin } from
 
 const About = () => {
   return (
-    <Layout>
-
+    <>
       <Hero
         headline="Your Partner in AI Safety and Security"
         subheadline="Locally owned in Ohio, protecting families and businesses nationwide"
@@ -257,7 +255,7 @@ const About = () => {
       </section>
 
       <Footer />
-    </Layout>
+    </>
   );
 };
 

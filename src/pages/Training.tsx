@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Layout from "@/components/Layout";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import CTASection from "@/components/CTASection";
@@ -27,8 +26,7 @@ import {
 
 const LearnAndTrain = () => {
   return (
-    <Layout>
-
+    <>
       {/* Hero Section */}
       <Hero
         headline="Learn How to Recognize and Stop Scams"
@@ -583,7 +581,7 @@ const LearnAndTrain = () => {
       </CTASection>
 
       <Footer />
-    </Layout>
+    </>
   );
 };
 

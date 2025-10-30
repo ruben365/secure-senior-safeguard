@@ -1,10 +1,9 @@
-import Layout from "@/components/Layout";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 
 const TermsOfService = () => {
   return (
-    <Layout>
+    <>
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
@@ -234,7 +233,7 @@ const TermsOfService = () => {
       </section>
 
       <Footer />
-    </Layout>
+    </>
   );
 };
 

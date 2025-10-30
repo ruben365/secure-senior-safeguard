@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Layout from "@/components/Layout";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import CTASection from "@/components/CTASection";
@@ -168,7 +167,7 @@ const Careers = () => {
   ];
 
   return (
-    <Layout>
+    <>
       <Hero
         headline="Join Our Team"
         subheadline="Help protect Ohio families and empower local businesses with technology"
@@ -321,7 +320,7 @@ const Careers = () => {
       </CTASection>
 
       <Footer />
-    </Layout>
+    </>
   );
 };
 

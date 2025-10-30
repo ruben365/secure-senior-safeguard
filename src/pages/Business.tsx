@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Layout from "@/components/Layout";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import TestimonialCard from "@/components/TestimonialCard";
@@ -13,7 +12,7 @@ import testimonial4 from "@/assets/testimonial-4.jpg";
 
 const Business = () => {
   return (
-    <Layout>
+    <>
       <Hero
         headline="Grow Your Business with Secure AI Solutions"
         subheadline="Custom AI automation, professional websites, and industry-leading AI Service Insurance"
@@ -721,7 +720,7 @@ const Business = () => {
       </CTASection>
 
       <Footer />
-    </Layout>
+    </>
   );
 };
 

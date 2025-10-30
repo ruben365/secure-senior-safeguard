@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Layout from "@/components/Layout";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import TestimonialCard from "@/components/TestimonialCard";
@@ -34,7 +33,7 @@ import testimonial7 from "@/assets/testimonial-7.jpg";
 
 const Index = () => {
   return (
-    <Layout>
+    <>
       {/* Hero Section */}
       <Hero
         headline="Protect Your Family from AI-Powered Scams"
@@ -638,7 +637,7 @@ const Index = () => {
       </CTASection>
 
       <Footer />
-    </Layout>
+    </>
   );
 };
 
