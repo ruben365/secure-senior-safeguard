@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import eldersHero1 from '@/assets/elders-hero-1.jpg';
 import eldersHero2 from '@/assets/elders-hero-2.jpg';
 import eldersHero3 from '@/assets/elders-hero-3.jpg';
@@ -34,53 +34,61 @@ interface TransitioningBackgroundProps {
 }
 
 const TransitioningBackground = ({ interval = 5000, className = '', opacity = 1 }: TransitioningBackgroundProps) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [nextIndex, setNextIndex] = useState(1);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [activeLayer, setActiveLayer] = useState<'A' | 'B'>('A');
+  const [imageA, setImageA] = useState(0);
+  const [imageB, setImageB] = useState(1);
+  const preloadedRef = useRef(false);
 
   // Preload all images immediately to prevent flashing
   useEffect(() => {
-    images.forEach((src) => {
-      const img = new Image();
-      img.src = typeof src === 'string' ? src : '';
-    });
+    if (!preloadedRef.current) {
+      images.forEach((src) => {
+        const img = new Image();
+        img.src = typeof src === 'string' ? src : '';
+      });
+      preloadedRef.current = true;
+    }
   }, []);
 
   useEffect(() => {
     const id = setInterval(() => {
-      // Start transition
-      setIsTransitioning(true);
-      
-      // After transition completes, update indices
-      setTimeout(() => {
-        setCurrentIndex(nextIndex);
-        setNextIndex((nextIndex + 1) % images.length);
-        setIsTransitioning(false);
-      }, 1000); // Match transition duration
+      if (activeLayer === 'A') {
+        // Layer A is visible, prepare Layer B with next image then fade to it
+        const nextImageIndex = (imageA + 1) % images.length;
+        setImageB(nextImageIndex);
+        // Wait a tick for the image to be set, then transition
+        setTimeout(() => setActiveLayer('B'), 50);
+      } else {
+        // Layer B is visible, prepare Layer A with next image then fade to it
+        const nextImageIndex = (imageB + 1) % images.length;
+        setImageA(nextImageIndex);
+        // Wait a tick for the image to be set, then transition
+        setTimeout(() => setActiveLayer('A'), 50);
+      }
     }, interval);
 
     return () => clearInterval(id);
-  }, [interval, nextIndex]);
+  }, [interval, activeLayer, imageA, imageB]);
 
   return (
     <div className={`absolute inset-0 overflow-hidden ${className}`}>
-      {/* Current Image Layer - Always visible */}
+      {/* Layer A */}
       <div
         className="absolute inset-0 bg-cover bg-center pointer-events-none transition-opacity duration-1000 ease-in-out"
         style={{
-          backgroundImage: `url(${images[currentIndex]})`,
-          opacity: isTransitioning ? 0 : opacity,
+          backgroundImage: `url(${images[imageA]})`,
+          opacity: activeLayer === 'A' ? opacity : 0,
           willChange: 'opacity',
           transform: 'translateZ(0)',
         }}
       />
 
-      {/* Next Image Layer - Fades in during transition */}
+      {/* Layer B */}
       <div
         className="absolute inset-0 bg-cover bg-center pointer-events-none transition-opacity duration-1000 ease-in-out"
         style={{
-          backgroundImage: `url(${images[nextIndex]})`,
-          opacity: isTransitioning ? opacity : 0,
+          backgroundImage: `url(${images[imageB]})`,
+          opacity: activeLayer === 'B' ? opacity : 0,
           willChange: 'opacity',
           transform: 'translateZ(0)',
         }}
