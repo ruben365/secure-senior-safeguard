@@ -389,6 +389,7 @@ const Signup = () => {
       const { error: profileError } = await supabase
         .from("profiles")
         .update({
+          username: email,
           first_name: firstName,
           last_name: lastName,
           phone,
@@ -575,32 +576,32 @@ const Signup = () => {
                 {[
                   { 
                     value: "senior", 
-                    label: "Senior/Family Member", 
-                    desc: "Individual or family seeking care services",
+                    label: "Client/Customer", 
+                    desc: "Individual or organization seeking AI protection services",
                     icon: Users,
                     gradient: "from-blue-500/20 to-cyan-500/20",
                     iconBg: "from-blue-500 to-cyan-500"
                   },
                   { 
                     value: "caregiver", 
-                    label: "Caregiver/Staff", 
-                    desc: "Professional caregiver providing care services",
+                    label: "Support Specialist", 
+                    desc: "Technical support and customer service professional",
                     icon: Heart,
                     gradient: "from-pink-500/20 to-rose-500/20",
                     iconBg: "from-pink-500 to-rose-500"
                   },
                   { 
                     value: "healthcare", 
-                    label: "Healthcare Professional", 
-                    desc: "Medical professional (Doctor, Nurse, etc.)",
-                    icon: Stethoscope,
+                    label: "Security Specialist", 
+                    desc: "Cybersecurity and AI safety professional",
+                    icon: Shield,
                     gradient: "from-green-500/20 to-emerald-500/20",
                     iconBg: "from-green-500 to-emerald-500"
                   },
                   { 
                     value: "analyst", 
-                    label: "Analyst", 
-                    desc: "Data analyst or quality assurance specialist",
+                    label: "Data Analyst", 
+                    desc: "AI/ML specialist and quality assurance analyst",
                     icon: BarChart3,
                     gradient: "from-purple-500/20 to-violet-500/20",
                     iconBg: "from-purple-500 to-violet-500"
@@ -608,7 +609,7 @@ const Signup = () => {
                   { 
                     value: "trainer", 
                     label: "Trainer", 
-                    desc: "Training and education specialist",
+                    desc: "AI security and cybersecurity training specialist",
                     icon: GraduationCap,
                     gradient: "from-orange-500/20 to-amber-500/20",
                     iconBg: "from-orange-500 to-amber-500"
