@@ -47,7 +47,7 @@ const Index = () => {
         showPrivacyDisclaimer={true}
       >
         <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center sm:justify-start">
-          <Button asChild variant="default" size="xl" className="w-full sm:w-auto">
+          <Button asChild variant="default" size="xl" className="w-full sm:w-auto text-base md:text-lg">
             <Link to="/training#pricing" aria-label="View protection plans">
               Get Protection Now
             </Link>

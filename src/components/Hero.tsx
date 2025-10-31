@@ -39,7 +39,7 @@ const Hero = ({ backgroundImage, useTransitioningBackground = false, useTransiti
   }, []);
 
   return (
-    <div className={cn("relative min-h-[90vh] flex items-center overflow-hidden", className)}>
+    <div className={cn("relative min-h-[80vh] md:min-h-[90vh] flex items-center overflow-hidden", className)}>
       {/* Background */}
       <div 
         className="absolute inset-0"
@@ -64,15 +64,15 @@ const Hero = ({ backgroundImage, useTransitioningBackground = false, useTransiti
       )}
       
       {/* Floating Particles */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none hidden md:block">
         <div className="floating-orb" style={{ width: '150px', height: '150px', top: '20%', left: '10%', animationDelay: '0s' }} />
         <div className="floating-orb" style={{ width: '100px', height: '100px', top: '60%', right: '15%', animationDelay: '4s' }} />
         <div className="floating-orb" style={{ width: '120px', height: '120px', bottom: '25%', left: '40%', animationDelay: '8s' }} />
       </div>
       
       {/* Content */}
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl">
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
+        <div className="max-w-3xl mx-auto md:mx-0">
           {useTransitioningText ? (
             <TransitioningHeroText />
           ) : (
@@ -95,9 +95,9 @@ const Hero = ({ backgroundImage, useTransitioningBackground = false, useTransiti
       
       {/* Privacy Disclaimer - Homepage Only */}
       {showPrivacyDisclaimer && showDisclaimer && (
-        <div className="absolute top-24 right-6 z-20 max-w-sm animate-fade-in">
-          <div className="glass-effect px-5 py-3.5 rounded-xl border border-white/20 shadow-elegant backdrop-blur-md">
-            <p className="text-white text-sm font-medium leading-relaxed">
+        <div className="absolute top-20 md:top-24 right-4 left-4 md:left-auto md:right-6 z-20 md:max-w-sm animate-fade-in">
+          <div className="glass-effect px-4 md:px-5 py-3 md:py-3.5 rounded-xl border border-white/20 shadow-elegant backdrop-blur-md">
+            <p className="text-white text-xs md:text-sm font-medium leading-relaxed">
               <span className="inline-block mr-2 opacity-90">🔒</span>
               Safeguarding your privacy: We never utilize client photographs in our marketing materials. All imagery is exclusively AI-generated to protect confidentiality.
             </p>
