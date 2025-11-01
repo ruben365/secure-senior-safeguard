@@ -17,7 +17,7 @@ interface HeroProps {
   showPrivacyDisclaimer?: boolean;
 }
 
-const Hero = ({ backgroundImage, useTransitioningBackground = false, useTransitioningText = false, headline, subheadline, children, className, overlay = true, showScrollIndicator = false, showPrivacyDisclaimer = false }: HeroProps) => {
+const Hero = ({ backgroundImage, useTransitioningBackground = false, useTransitioningText = false, headline, subheadline, children, className, overlay = false, showScrollIndicator = false, showPrivacyDisclaimer = false }: HeroProps) => {
   const [scrollY, setScrollY] = useState(0);
   const [showDisclaimer, setShowDisclaimer] = useState(true);
 
@@ -39,7 +39,7 @@ const Hero = ({ backgroundImage, useTransitioningBackground = false, useTransiti
   }, []);
 
   return (
-    <div className={cn("relative min-h-[80vh] md:min-h-[90vh] flex items-center overflow-hidden animate-fade-in", className)}>
+    <div className={cn("relative min-h-[80vh] md:min-h-[90vh] flex items-center overflow-hidden", className)}>
       {/* Background */}
       <div 
         className="absolute inset-0"
@@ -55,13 +55,6 @@ const Hero = ({ backgroundImage, useTransitioningBackground = false, useTransiti
         ) : null}
       </div>
       
-      {/* Animated Gradient Overlay */}
-      {overlay && (
-        <div 
-          className="absolute inset-0 bg-gradient-hero-primary opacity-40"
-          style={{ backgroundSize: '400% 400%', animation: 'gradient-shift 15s ease infinite' }}
-        />
-      )}
       
       {/* Floating Particles */}
       <div className="absolute inset-0 pointer-events-none hidden md:block">

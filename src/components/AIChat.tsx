@@ -168,7 +168,8 @@ export const AIChat = () => {
     return (
       <Button
         onClick={openChat}
-        className="fixed bottom-6 right-6 h-16 w-16 rounded-full shadow-lg z-50 p-0 overflow-hidden"
+        variant="ghost"
+        className="fixed bottom-6 right-6 h-16 w-16 rounded-full shadow-lg z-50 p-0 overflow-hidden bg-transparent"
         size="icon"
       >
         <Avatar className="h-full w-full">
