@@ -37,15 +37,25 @@ const TransitioningBackground = ({ interval = 5000, className = '', opacity = 1 
   const [activeLayer, setActiveLayer] = useState<'A' | 'B'>('A');
   const [imageA, setImageA] = useState(0);
   const [imageB, setImageB] = useState(1);
+  const [isReady, setIsReady] = useState(false);
   const preloadedRef = useRef(false);
 
   // Preload all images immediately to prevent flashing
   useEffect(() => {
     if (!preloadedRef.current) {
-      images.forEach((src) => {
-        const img = new Image();
-        img.src = typeof src === 'string' ? src : '';
+      const promises = images.map((src) => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.onload = resolve;
+          img.onerror = resolve;
+          img.src = typeof src === 'string' ? src : '';
+        });
       });
+      
+      Promise.all(promises).then(() => {
+        setIsReady(true);
+      });
+      
       preloadedRef.current = true;
     }
   }, []);
@@ -74,10 +84,10 @@ const TransitioningBackground = ({ interval = 5000, className = '', opacity = 1 
     <div className={`absolute inset-0 overflow-hidden ${className}`}>
       {/* Layer A */}
       <div
-        className="absolute inset-0 bg-cover bg-center pointer-events-none transition-opacity duration-1000 ease-in-out"
+        className="absolute inset-0 bg-cover bg-center pointer-events-none transition-opacity duration-[1500ms] ease-in-out"
         style={{
           backgroundImage: `url(${images[imageA]})`,
-          opacity: activeLayer === 'A' ? opacity : 0,
+          opacity: isReady && activeLayer === 'A' ? opacity : (isReady ? 0 : opacity),
           willChange: 'opacity',
           transform: 'translateZ(0)',
         }}
@@ -85,10 +95,10 @@ const TransitioningBackground = ({ interval = 5000, className = '', opacity = 1 
 
       {/* Layer B */}
       <div
-        className="absolute inset-0 bg-cover bg-center pointer-events-none transition-opacity duration-1000 ease-in-out"
+        className="absolute inset-0 bg-cover bg-center pointer-events-none transition-opacity duration-[1500ms] ease-in-out"
         style={{
           backgroundImage: `url(${images[imageB]})`,
-          opacity: activeLayer === 'B' ? opacity : 0,
+          opacity: isReady && activeLayer === 'B' ? opacity : 0,
           willChange: 'opacity',
           transform: 'translateZ(0)',
         }}

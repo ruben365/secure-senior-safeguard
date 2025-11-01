@@ -33,10 +33,10 @@ const About = () => {
             <h2 className="text-center mb-12">Founded on a Personal Mission</h2>
             <div className="space-y-6 text-lg leading-relaxed text-muted-foreground">
               <p>
-                InVision Network was born from a personal experience when our founder witnessed his own grandmother nearly fall victim to a sophisticated AI voice-cloning scam. The caller sounded exactly like her grandson, claiming he was in jail and desperately needed money. It was only by asking a specific question that she realized something was wrong.
+                InVision Network was born from a personal experience when <strong>Ruben Nkulu</strong>, engineer in cybersecurity who's the founder and CEO of the company, witnessed his own grandmother nearly fall victim to a sophisticated AI voice-cloning scam. The caller sounded exactly like her grandson, claiming he was in jail and desperately needed money. It was only by asking a specific question that she realized something was wrong.
               </p>
               <p>
-                That moment changed everything. We realized that traditional fraud prevention methods weren't enough to combat these new AI-powered threats. So we created InVision Network - a comprehensive solution that combines expert training, real-time threat analysis, and innovative AI business solutions, all built on a foundation of security and trust.
+                That moment changed everything. Ruben realized that traditional fraud prevention methods weren't enough to combat these new AI-powered threats. So he created InVision Network - a comprehensive solution that combines expert training, real-time threat analysis, and innovative AI business solutions, all built on a foundation of security and trust.
               </p>
               <p>
                 <strong>Giving Back to Our Community:</strong> At InVision Network, we believe in supporting those who've served and protected us. We proudly offer special support programs for veterans, active duty military, first responders, and individuals battling cancer. Through discounted services, free training sessions, and scholarship programs, we're committed to protecting and empowering those who've given so much to our communities.

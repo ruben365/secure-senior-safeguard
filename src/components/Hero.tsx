@@ -39,7 +39,7 @@ const Hero = ({ backgroundImage, useTransitioningBackground = false, useTransiti
   }, []);
 
   return (
-    <div className={cn("relative min-h-[80vh] md:min-h-[90vh] flex items-center overflow-hidden", className)}>
+    <div className={cn("relative min-h-[80vh] md:min-h-[90vh] flex items-center overflow-hidden animate-fade-in", className)}>
       {/* Background */}
       <div 
         className="absolute inset-0"
@@ -49,7 +49,7 @@ const Hero = ({ backgroundImage, useTransitioningBackground = false, useTransiti
           <TransitioningBackground />
         ) : backgroundImage ? (
           <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-500"
             style={{ backgroundImage: `url(${backgroundImage})` }}
           />
         ) : null}

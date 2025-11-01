@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useToast } from "@/hooks/use-toast";
 import { useAIChat } from "@/contexts/AIChatContext";
 import { 
@@ -17,6 +18,7 @@ import {
   Loader2,
   X
 } from "lucide-react";
+import loraAvatar from "@/assets/lora-avatar.jpeg";
 
 interface Message {
   role: "user" | "assistant";
@@ -166,20 +168,29 @@ export const AIChat = () => {
     return (
       <Button
         onClick={openChat}
-        className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg z-50"
+        className="fixed bottom-6 right-6 h-16 w-16 rounded-full shadow-lg z-50 p-0 overflow-hidden"
         size="icon"
       >
-        <Sparkles className="h-6 w-6" />
+        <Avatar className="h-full w-full">
+          <AvatarImage src={loraAvatar} alt="Lora AI Assistant" className="object-cover" />
+          <AvatarFallback>LA</AvatarFallback>
+        </Avatar>
       </Button>
     );
   }
 
   return (
-    <Card className="fixed bottom-6 right-6 w-[400px] h-[600px] shadow-2xl z-50 flex flex-col">
-      <div className="flex items-center justify-between p-4 border-b">
-        <div className="flex items-center gap-2">
-          <Sparkles className="h-5 w-5 text-primary" />
-          <h3 className="font-semibold">AI Assistant</h3>
+    <Card className="fixed bottom-6 right-6 w-full max-w-[400px] h-[600px] shadow-2xl z-50 flex flex-col mx-4 sm:mx-0">
+      <div className="flex items-center justify-between p-4 border-b bg-gradient-to-r from-primary/5 to-accent/5">
+        <div className="flex items-center gap-3">
+          <Avatar className="h-10 w-10 border-2 border-primary/20">
+            <AvatarImage src={loraAvatar} alt="Lora AI Assistant" className="object-cover" />
+            <AvatarFallback>LA</AvatarFallback>
+          </Avatar>
+          <div>
+            <h3 className="font-semibold text-base">Lora</h3>
+            <p className="text-xs text-muted-foreground">AI Assistant</p>
+          </div>
         </div>
         <Button
           variant="ghost"
@@ -220,10 +231,16 @@ export const AIChat = () => {
             ) : (
               <div className="space-y-4">
                 {messages.map((msg, idx) => (
-                  <div
+                   <div
                     key={idx}
-                    className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                    className={`flex gap-2 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                   >
+                    {msg.role === "assistant" && (
+                      <Avatar className="h-8 w-8 flex-shrink-0">
+                        <AvatarImage src={loraAvatar} alt="Lora" className="object-cover" />
+                        <AvatarFallback>LA</AvatarFallback>
+                      </Avatar>
+                    )}
                     <div
                       className={`max-w-[80%] rounded-lg p-3 ${
                         msg.role === "user"
@@ -231,7 +248,7 @@ export const AIChat = () => {
                           : "bg-muted"
                       }`}
                     >
-                      <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
+                      <p className="text-sm whitespace-pre-wrap break-words">{msg.content}</p>
                     </div>
                   </div>
                 ))}
