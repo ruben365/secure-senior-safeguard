@@ -18,7 +18,7 @@ import {
   Loader2,
   X
 } from "lucide-react";
-import loraAvatar from "@/assets/lora-avatar.jpeg";
+import loraAvatar from "@/assets/lora-avatar.png";
 
 interface Message {
   role: "user" | "assistant";

@@ -21,7 +21,6 @@ import {
   Sparkles
 } from "lucide-react";
 import { z } from "zod";
-import heroImage from "@/assets/hero-about-3d.jpg";
 
 const emailSchema = z.string().email("Invalid email address");
 const passwordSchema = z.string().min(6, "Password must be at least 6 characters");
