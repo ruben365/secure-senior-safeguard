@@ -82,29 +82,33 @@ const TransitioningBackground = ({ interval = 5000, className = '', opacity = 1 
 
   return (
     <div className={`absolute inset-0 overflow-hidden ${className}`}>
-      {/* Layer A - Smooth crossfade with longer duration */}
+      {/* Layer A - Ultra-smooth crossfade with no blinking */}
       <div
         className="absolute inset-0 bg-cover bg-center pointer-events-none"
         style={{
           backgroundImage: `url(${images[imageA]})`,
           opacity: isReady && activeLayer === 'A' ? opacity : (isReady ? 0 : opacity),
-          transition: 'opacity 1000ms ease-in-out',
+          transition: 'opacity 1500ms cubic-bezier(0.4, 0, 0.2, 1)',
           willChange: 'opacity',
-          transform: 'translateZ(0)',
+          transform: 'translate3d(0, 0, 0)',
           backfaceVisibility: 'hidden',
+          WebkitBackfaceVisibility: 'hidden',
+          imageRendering: 'crisp-edges',
         }}
       />
 
-      {/* Layer B - Smooth crossfade with longer duration */}
+      {/* Layer B - Ultra-smooth crossfade with no blinking */}
       <div
         className="absolute inset-0 bg-cover bg-center pointer-events-none"
         style={{
           backgroundImage: `url(${images[imageB]})`,
           opacity: isReady && activeLayer === 'B' ? opacity : 0,
-          transition: 'opacity 1000ms ease-in-out',
+          transition: 'opacity 1500ms cubic-bezier(0.4, 0, 0.2, 1)',
           willChange: 'opacity',
-          transform: 'translateZ(0)',
+          transform: 'translate3d(0, 0, 0)',
           backfaceVisibility: 'hidden',
+          WebkitBackfaceVisibility: 'hidden',
+          imageRendering: 'crisp-edges',
         }}
       />
 

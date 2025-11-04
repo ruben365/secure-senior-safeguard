@@ -83,15 +83,15 @@ const ThreePathsForward = () => {
           </p>
         </div>
 
-        {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+        {/* Cards Grid - With proper spacing for badges */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 pt-8">
           {paths.map((path, index) => {
             const Icon = path.icon;
             return (
               <Card
                 key={path.id}
                 className={`
-                  relative p-12 flex flex-col items-center text-center
+                  relative p-12 flex flex-col items-center text-center overflow-visible
                   transition-all duration-600 ease-out rounded-3xl
                   bg-white
                   ${path.featured 
@@ -110,9 +110,9 @@ const ThreePathsForward = () => {
                 `}
                 style={{ animationDelay: `${index * 150}ms` }}
               >
-                {/* Featured Badge */}
+                {/* Featured Badge - More visible */}
                 {path.featured && (
-                  <div className="absolute -top-[18px] left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-white px-7 py-2.5 rounded-full text-[13px] font-extrabold tracking-[1.5px] shadow-[0_6px_20px_rgba(139,92,246,0.4)] animate-[badge-float_3s_ease-in-out_infinite]">
+                  <div className="absolute -top-[20px] left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-white px-8 py-3 rounded-full text-sm font-extrabold tracking-[2px] shadow-[0_8px_30px_rgba(139,92,246,0.6)] animate-[badge-float_3s_ease-in-out_infinite] z-20">
                     MOST POPULAR
                   </div>
                 )}

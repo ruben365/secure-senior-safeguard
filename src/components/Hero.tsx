@@ -96,14 +96,11 @@ const Hero = ({ backgroundImage, useTransitioningBackground = false, useTransiti
       {/* Scroll Indicator */}
       {showScrollIndicator && <ScrollIndicator />}
       
-      {/* Privacy Disclaimer - Bottom of viewport */}
+      {/* AI Disclaimer - Small badge at bottom-left of hero image */}
       {showPrivacyDisclaimer && showDisclaimer && (
-        <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-20 animate-fade-in px-4 max-w-2xl w-full"
-             style={{ animationDelay: '1s' }}>
-          <div className="bg-black/80 backdrop-blur-md px-6 py-3 rounded-lg border border-white/10 shadow-xl">
-            <p className="text-white text-xs text-center font-medium leading-relaxed">
-              Some images on this site may be AI-generated
-            </p>
+        <div className="absolute bottom-6 left-6 z-10 animate-fade-in" style={{ animationDelay: '1s' }}>
+          <div className="bg-black/70 backdrop-blur-sm text-white/90 text-[10px] px-3 py-1.5 rounded-md">
+            AI-generated imagery
           </div>
         </div>
       )}
