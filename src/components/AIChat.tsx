@@ -238,8 +238,8 @@ export const AIChat = () => {
   }
 
   return (
-    <Card className="fixed bottom-6 right-6 w-[90vw] sm:w-full sm:max-w-[400px] h-[600px] max-h-[80vh] 
-                     shadow-2xl z-50 flex flex-col mx-4 sm:mx-0 animate-slide-up">
+    <Card className="fixed bottom-6 right-6 w-[90vw] sm:w-full sm:max-w-[400px] h-[600px] max-h-[calc(100vh-3rem)] 
+                     shadow-2xl z-50 flex flex-col animate-slide-up">
       <div className="flex items-center justify-between p-4 border-b bg-gradient-to-r from-primary/10 to-accent/10">
         <div className="flex items-center gap-3">
           <Avatar className={`h-10 w-10 border-2 border-primary/20 transition-all duration-300 ${

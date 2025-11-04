@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SearchBar } from "@/components/SearchBar";
 
 const Navigation = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -47,20 +46,20 @@ const Navigation = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex flex-1 items-center justify-between ml-8" role="navigation" aria-label="Main navigation">
+          <div className="hidden lg:flex flex-1 items-center justify-center ml-8" role="navigation" aria-label="Main navigation">
             <div className="flex items-center space-x-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.href}
                   onClick={scrollToTop}
-                  className="text-foreground/80 hover:text-foreground font-bold transition-colors duration-200 text-lg whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2 py-1"
+                  className="relative text-foreground/80 hover:text-foreground font-bold transition-all duration-300 text-lg whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2 py-1 group"
                 >
                   {link.name}
+                  <span className="absolute inset-0 rounded-full bg-primary/5 scale-0 group-hover:scale-100 transition-transform duration-300 -z-10" />
                 </Link>
               ))}
             </div>
-            <SearchBar />
           </div>
 
           {/* Right Side - Phone & Login */}
@@ -111,8 +110,7 @@ const Navigation = () => {
                 </Link>
               ))}
               <div className="pt-2 border-t border-border flex flex-col gap-3">
-                <SearchBar />
-                <Button 
+                <Button
                   asChild 
                   className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-full"
                 >

@@ -148,21 +148,19 @@ const LearnAndTrain = () => {
                 ],
               },
             ].map((plan, index) => (
-              <Card
-                key={index}
-                className={`p-8 hover:shadow-strong transition-all duration-500 hover:-translate-y-2 rounded-2xl animate-fade-in-up bg-gradient-to-br from-card to-card/50 ${
-                  plan.popular ? "border-primary border-2 scale-105" : "border-border/50"
-                }`}
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
+              <div key={index} className="relative">
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-bold">
-                      MOST POPULAR
-                    </span>
+                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-primary-foreground px-6 py-2 rounded-full text-xs font-bold tracking-wider shadow-lg z-20">
+                    MOST POPULAR
                   </div>
                 )}
-                <h3 className="text-2xl font-bold mb-2 text-center">{plan.name}</h3>
+                <Card
+                  className={`p-8 hover:shadow-strong transition-all duration-500 hover:-translate-y-2 rounded-2xl animate-fade-in-up bg-gradient-to-br from-card to-card/50 ${
+                    plan.popular ? "border-primary border-2" : "border-border/50"
+                  }`}
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <h3 className="text-2xl font-bold mb-2 text-center">{plan.name}</h3>
                 <div className="text-center mb-2">
                   <span className="text-4xl font-bold text-primary">{plan.price}</span>
                   <span className="text-muted-foreground">/session</span>
@@ -196,6 +194,7 @@ const LearnAndTrain = () => {
                   Book Session
                 </Button>
               </Card>
+              </div>
             ))}
           </div>
         </div>
@@ -413,16 +412,15 @@ const LearnAndTrain = () => {
             </Card>
 
             {/* Family Plan - MOST POPULAR */}
-            <Card
-              className="p-8 hover:shadow-strong transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] rounded-2xl border-primary border-2 animate-fade-in-up bg-gradient-to-br from-card to-card/50 relative"
-              style={{ animationDelay: "100ms" }}
-            >
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <span className="bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-bold">
-                  MOST POPULAR
-                </span>
+            <div className="relative">
+              <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-primary-foreground px-6 py-2 rounded-full text-xs font-bold tracking-wider shadow-lg z-20">
+                MOST POPULAR
               </div>
-              <div className="flex justify-center mb-6">
+              <Card
+                className="p-8 hover:shadow-strong transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] rounded-2xl border-primary border-2 animate-fade-in-up bg-gradient-to-br from-card to-card/50"
+                style={{ animationDelay: "100ms" }}
+              >
+                <div className="flex justify-center mb-6">
                 <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center">
                   <Users className="w-10 h-10 text-primary" />
                 </div>
@@ -485,6 +483,7 @@ const LearnAndTrain = () => {
                 Get Started
               </Button>
             </Card>
+            </div>
 
             {/* Premium Plan */}
             <Card

@@ -88,34 +88,28 @@ const ThreePathsForward = () => {
           {paths.map((path, index) => {
             const Icon = path.icon;
             return (
-              <Card
-                key={path.id}
-                className={`
-                  relative p-12 flex flex-col items-center text-center overflow-visible
-                  transition-all duration-600 ease-out rounded-3xl
-                  bg-white
-                  ${path.featured 
-                    ? 'border-[3px] border-primary shadow-[0_8px_30px_rgba(139,92,246,0.2)]' 
-                    : 'border-2 border-border shadow-soft'}
-                  hover:-translate-y-4 hover:scale-[1.02] ${path.featured ? 'hover:shadow-[0_16px_50px_rgba(139,92,246,0.3)]' : 'hover:shadow-medium'}
-                  hover:border-primary hover:rotate-1
-                  animate-fade-in-up
-                  before:absolute before:top-0 before:left-0 before:w-full before:h-1 before:rounded-t-3xl
-                  before:bg-gradient-to-r before:from-primary before:via-accent before:to-primary
-                  before:scale-x-0 before:origin-left before:transition-transform before:duration-500 before:pointer-events-none
-                  hover:before:scale-x-100
-                  after:absolute after:inset-0 after:rounded-3xl after:opacity-0
-                  after:bg-gradient-to-br after:from-primary/5 after:to-accent/5 after:pointer-events-none
-                  hover:after:opacity-100 after:transition-opacity after:duration-500
-                `}
-                style={{ animationDelay: `${index * 150}ms` }}
-              >
-                {/* Featured Badge - More visible */}
+              <div key={path.id} className="relative">
+                {/* Featured Badge - Above the card */}
                 {path.featured && (
-                  <div className="absolute -top-[20px] left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-white px-8 py-3 rounded-full text-sm font-extrabold tracking-[2px] shadow-[0_8px_30px_rgba(139,92,246,0.6)] animate-[badge-float_3s_ease-in-out_infinite] z-20">
+                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-white px-6 py-2 rounded-full text-xs font-bold tracking-wider shadow-lg z-20">
                     MOST POPULAR
                   </div>
                 )}
+                <Card
+                  className={`
+                    relative p-12 flex flex-col items-center text-center overflow-visible
+                    transition-all duration-600 ease-out rounded-3xl
+                    bg-white
+                    ${path.featured 
+                      ? 'border-[3px] border-primary shadow-[0_8px_30px_rgba(139,92,246,0.2)]' 
+                      : 'border-2 border-border shadow-soft'}
+                    hover:-translate-y-4 hover:scale-[1.02] ${path.featured ? 'hover:shadow-[0_16px_50px_rgba(139,92,246,0.3)]' : 'hover:shadow-medium'}
+                    hover:border-primary hover:rotate-1
+                    animate-fade-in-up
+                    hover:after:opacity-100 after:transition-opacity after:duration-500
+                  `}
+                  style={{ animationDelay: `${index * 150}ms` }}
+                >
 
                 {/* Icon Container - purple/teal gradient */}
                 <div className="relative w-[100px] h-[100px] rounded-3xl mb-7
@@ -157,6 +151,7 @@ const ThreePathsForward = () => {
                   {path.cta}
                 </Button>
               </Card>
+              </div>
             );
           })}
         </div>
