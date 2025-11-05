@@ -22,6 +22,12 @@ interface HeroProps {
 const Hero = ({ backgroundImage, useTransitioningBackground = false, useTransitioningText = false, headline, subheadline, children, className, overlay = false, showScrollIndicator = false, showPrivacyDisclaimer = false }: HeroProps) => {
   const [scrollY, setScrollY] = useState(0);
   const [showDisclaimer, setShowDisclaimer] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    // Trigger animations on mount
+    setIsLoaded(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,10 +48,13 @@ const Hero = ({ backgroundImage, useTransitioningBackground = false, useTransiti
 
   return (
     <div className={cn("relative min-h-[80vh] md:min-h-[90vh] flex items-center overflow-hidden", className)}>
-      {/* Background with Parallax */}
+      {/* Background with Parallax - disabled on mobile for performance */}
       <div 
         className="absolute inset-0"
-        style={{ transform: `translateY(${scrollY * 0.5}px)` }}
+        style={{ 
+          transform: window.innerWidth > 768 ? `translateY(${scrollY * 0.3}px)` : 'none',
+          willChange: 'transform'
+        }}
       >
         {useTransitioningBackground ? (
           <TransitioningBackground />
@@ -56,7 +65,10 @@ const Hero = ({ backgroundImage, useTransitioningBackground = false, useTransiti
           />
         ) : null}
         
-        {/* Overlay - ensure it covers entire background */}
+        {/* Animated Gradient Overlay - dark to transparent */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent animate-gradient-shift" />
+        
+        {/* Additional overlay for better text contrast */}
         {overlay && (
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/50" />
         )}
@@ -83,18 +95,51 @@ const Hero = ({ backgroundImage, useTransitioningBackground = false, useTransiti
           ) : (
             <>
               {headline && (
-                <h1 className="text-white mb-6 animate-fade-in-up [text-shadow:0_4px_20px_rgba(139,92,246,0.4)] leading-tight">
+                <h1 
+                  className={cn(
+                    "text-white mb-6 [text-shadow:0_4px_20px_rgba(139,92,246,0.4)] leading-tight",
+                    "transition-all duration-800 ease-out",
+                    isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                  )}
+                  style={{ 
+                    transitionDelay: '0.8s',
+                    willChange: 'opacity, transform'
+                  }}
+                >
                   {headline}
                 </h1>
               )}
               {subheadline && (
-                <p className="text-white/90 text-xl md:text-2xl mb-8 leading-relaxed animate-fade-in-up stagger-1">
+                <p 
+                  className={cn(
+                    "text-white/90 text-xl md:text-2xl mb-8 leading-relaxed",
+                    "transition-all duration-800 ease-out",
+                    isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                  )}
+                  style={{ 
+                    transitionDelay: '1s',
+                    willChange: 'opacity, transform'
+                  }}
+                >
                   {subheadline}
                 </p>
               )}
             </>
           )}
-          {children && <div className="animate-fade-in-up stagger-2">{children}</div>}
+          {children && (
+            <div 
+              className={cn(
+                "transition-all duration-800 ease-out",
+                isLoaded ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95"
+              )}
+              style={{ 
+                transitionDelay: '1.2s',
+                willChange: 'opacity, transform'
+              }}
+            >
+              {children}
+            </div>
+          )}
         </div>
       </div>
       
