@@ -585,11 +585,23 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     scroll-behavior: smooth;
   }
 
-  /* Better text wrapping for chat */
+  /* Better text wrapping for chat and all content */
   .overflow-wrap-anywhere {
     overflow-wrap: anywhere;
     word-wrap: anywhere;
     word-break: break-word;
+  }
+
+  /* Ensure all text content wraps properly */
+  p, span, li, div {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  /* Prevent text overflow in cards */
+  .card-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   /* Gradient Text Animation */
