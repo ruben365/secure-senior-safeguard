@@ -22,9 +22,9 @@ const Navigation = () => {
   return (
     <nav className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-soft">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 md:gap-3 hover:scale-105 transition-transform duration-300 group flex-shrink-0" onClick={scrollToTop}>
+          <Link to="/" className="flex items-center gap-2 md:gap-3 hover:scale-105 transition-transform duration-300 group flex-shrink-0 no-underline" onClick={scrollToTop}>
             <div className="w-9 h-9 md:w-10 md:h-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center shadow-glow-purple relative group-hover:shadow-glow-teal transition-all duration-300">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -47,16 +47,15 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex flex-1 items-center justify-center ml-8" role="navigation" aria-label="Main navigation">
-            <div className="flex items-center space-x-8">
+            <div className="flex items-center space-x-6">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.href}
                   onClick={scrollToTop}
-                  className="relative text-foreground/80 hover:text-foreground font-bold transition-all duration-300 text-lg whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2 py-1 group"
+                  className="relative text-foreground/80 hover:text-foreground font-bold transition-all duration-300 text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2 py-1 group no-underline"
                 >
                   {link.name}
-                  <span className="absolute inset-0 rounded-full bg-primary/5 scale-0 group-hover:scale-100 transition-transform duration-300 -z-10" />
                 </Link>
               ))}
             </div>
@@ -74,9 +73,7 @@ const Navigation = () => {
             </a>
             <Button 
               asChild 
-              className="hidden md:inline-flex font-bold bg-primary hover:bg-primary/90 text-primary-foreground
-                         rounded-full px-8 hover:-translate-y-0.5 hover:shadow-glow-purple 
-                         transition-all duration-300 ripple-effect"
+              className="hidden md:inline-flex font-bold bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-6 py-2 text-sm hover:-translate-y-0.5 hover:shadow-glow-purple transition-all duration-300 ripple-effect"
             >
               <Link to="/portal" aria-label="Login to your account">Login</Link>
             </Button>
@@ -100,7 +97,7 @@ const Navigation = () => {
                 <Link
                   key={link.name}
                   to={link.href}
-                  className="text-foreground/80 hover:text-foreground py-2 transition-colors font-bold text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2"
+                  className="text-foreground/80 hover:text-foreground py-2 transition-colors font-bold text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2 no-underline"
                   onClick={() => {
                     setMobileMenuOpen(false);
                     scrollToTop();

@@ -177,7 +177,7 @@ export const PurchaseModal = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl border border-border/50 bg-gradient-to-b from-card to-card/80 shadow-2xl">
         <DialogHeader>
           <DialogTitle className="text-2xl">{isPWYW ? "Name Your Price" : "Purchase"} - {itemName}</DialogTitle>
           <DialogDescription>

@@ -62,7 +62,7 @@ const TrustBar = () => {
   return (
     <div ref={counterRef} className="relative z-10 px-4 -mt-10" role="complementary" aria-label="Trust indicators">
       <div className="container mx-auto">
-        <div className="relative mx-auto max-w-5xl group/trust">
+        <div className="relative mx-auto max-w-7xl group/trust">
           {/* Glow effect */}
           <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary/20 to-accent/20 blur-xl opacity-50 group-hover/trust:opacity-75 transition-opacity duration-500" />
           
@@ -101,7 +101,7 @@ const TrustBar = () => {
                   >
                     <item.icon className="w-4 h-4 sm:w-5 sm:h-5 text-white drop-shadow-lg group-hover/badge:scale-110 transition-transform duration-300" />
                   </div>
-                  <span className="text-xs md:text-sm lg:text-base font-bold text-white whitespace-nowrap drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)] group-hover/badge:scale-105 transition-transform duration-300">
+                  <span className="text-xs md:text-sm lg:text-base font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)] group-hover/badge:scale-105 transition-transform duration-300">
                     {item.text}
                   </span>
                 </div>
