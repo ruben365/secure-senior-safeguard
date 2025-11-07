@@ -21,11 +21,11 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-soft">
+    <nav className="sticky top-0 z-50 bg-card/95 backdrop-blur-md shadow-soft">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between py-4">
+        <div className="flex items-center justify-between py-3">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 hover:scale-105 transition-transform duration-300 group flex-shrink-0" onClick={scrollToTop}>
+          <Link to="/" className="flex items-center gap-2 hover:scale-105 transition-transform duration-300 group flex-shrink-0 no-underline" onClick={scrollToTop}>
             <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center shadow-glow-purple relative group-hover:shadow-glow-teal transition-all duration-300">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +56,7 @@ const Navigation = () => {
                     key={link.name}
                     to={link.href}
                     onClick={scrollToTop}
-                    className={`relative text-base font-bold whitespace-nowrap transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-3 py-2 ${
+                    className={`relative text-base font-bold whitespace-nowrap transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2.5 py-1.5 no-underline hover:no-underline ${
                       isActive 
                         ? 'text-foreground bg-primary/10 shadow-[0_0_20px_rgba(139,92,246,0.3)]' 
                         : 'text-foreground/70 hover:text-foreground hover:bg-primary/5'
