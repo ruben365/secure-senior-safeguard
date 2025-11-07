@@ -8,7 +8,7 @@ import TestimonialCard from "@/components/TestimonialCard";
 import CTASection from "@/components/CTASection";
 import FlowingWaves from "@/components/FlowingWaves";
 import { EnterpriseContactForm } from "@/components/EnterpriseContactForm";
-import { FAQButton } from "@/components/FAQButton";
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
@@ -1164,7 +1164,7 @@ const Business = () => {
 
       <Footer />
       
-      <FAQButton />
+      
 
       {/* Enterprise Contact Dialog */}
       <Dialog open={enterpriseDialogOpen} onOpenChange={setEnterpriseDialogOpen}>
