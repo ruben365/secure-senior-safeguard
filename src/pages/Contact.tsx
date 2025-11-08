@@ -96,6 +96,7 @@ const Contact = () => {
         useTransitioningBackground={true}
         headline="Let's Protect Your Family Together"
         subheadline="Expert guidance is just a message away. We respond within 24 hours."
+        showScrollIndicator={true}
       >
         <div className="flex flex-col sm:flex-row gap-4 justify-center sm:justify-start">
           <Button 

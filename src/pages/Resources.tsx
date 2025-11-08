@@ -111,6 +111,7 @@ const Resources = () => {
         useTransitioningBackground={true}
         headline="Resources & Tools"
         subheadline="Guides, security products, and answers to your questions."
+        showScrollIndicator={true}
       />
 
       <TrustBar />

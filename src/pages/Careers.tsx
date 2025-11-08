@@ -202,7 +202,7 @@ const Careers = () => {
         useTransitioningBackground={true}
         headline="Join Our Team"
         subheadline="Help protect Ohio families and empower local businesses with technology"
-        showScrollIndicator
+        showScrollIndicator={true}
       >
         <div className="flex flex-col sm:flex-row gap-4">
           <Button size="lg" asChild>

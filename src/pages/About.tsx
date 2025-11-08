@@ -21,6 +21,7 @@ const About = () => {
         useTransitioningBackground={true}
         headline="Your Partner in AI Safety and Security"
         subheadline="Locally owned in Ohio, protecting families and businesses nationwide"
+        showScrollIndicator={true}
       />
 
       <TrustBar />
