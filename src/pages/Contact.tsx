@@ -172,10 +172,10 @@ const Contact = () => {
             <div className="animate-fade-in-up">
               <h2 className="mb-4">Send Us a Message</h2>
               <p className="text-muted-foreground mb-8">Fill out the form below and we'll get back to you within 24 hours.</p>
-              <Card className="p-8 shadow-xl border-2 bg-card/80 backdrop-blur-sm">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-semibold mb-2">
+              <Card className="p-10 shadow-2xl border-2 border-border/50 bg-gradient-to-b from-card to-card/80 backdrop-blur-xl rounded-3xl">
+                <form onSubmit={handleSubmit} className="space-y-7">
+                  <div className="space-y-2">
+                    <label htmlFor="name" className="block text-sm font-bold text-foreground">
                       Full Name *
                     </label>
                     <Input
@@ -185,43 +185,45 @@ const Contact = () => {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       disabled={isSubmitting}
-                      className="h-12"
+                      className="h-14 text-base border-2 focus:border-primary/50 rounded-xl"
                     />
                   </div>
 
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-semibold mb-2">
-                      Email Address *
-                    </label>
-                    <Input
-                      id="email"
-                      type="email"
-                      required
-                      placeholder="john@example.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      disabled={isSubmitting}
-                      className="h-12"
-                    />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label htmlFor="email" className="block text-sm font-bold text-foreground">
+                        Email Address *
+                      </label>
+                      <Input
+                        id="email"
+                        type="email"
+                        required
+                        placeholder="john@example.com"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        disabled={isSubmitting}
+                        className="h-14 text-base border-2 focus:border-primary/50 rounded-xl"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <label htmlFor="phone" className="block text-sm font-bold text-foreground">
+                        Phone Number (Optional)
+                      </label>
+                      <Input
+                        id="phone"
+                        type="tel"
+                        placeholder="(937) 555-1234"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        disabled={isSubmitting}
+                        className="h-14 text-base border-2 focus:border-primary/50 rounded-xl"
+                      />
+                    </div>
                   </div>
 
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-semibold mb-2">
-                      Phone Number (Optional)
-                    </label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      placeholder="(937) 555-1234"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      disabled={isSubmitting}
-                      className="h-12"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="interest" className="block text-sm font-semibold mb-2">
+                  <div className="space-y-2">
+                    <label htmlFor="interest" className="block text-sm font-bold text-foreground">
                       I'm Interested In: *
                     </label>
                     <Select
@@ -230,7 +232,7 @@ const Contact = () => {
                       onValueChange={(value) => setFormData({ ...formData, interest: value })}
                       disabled={isSubmitting}
                     >
-                      <SelectTrigger className="h-12">
+                      <SelectTrigger className="h-14 text-base border-2 rounded-xl">
                         <SelectValue placeholder="Select an option" />
                       </SelectTrigger>
                       <SelectContent>
@@ -246,61 +248,61 @@ const Contact = () => {
                     </Select>
                   </div>
 
-                  <div>
-                    <label htmlFor="language" className="block text-sm font-semibold mb-2">
-                      Preferred Language:
-                    </label>
-                    <Select
-                      value={formData.language}
-                      onValueChange={(value) => setFormData({ ...formData, language: value })}
-                      disabled={isSubmitting}
-                    >
-                      <SelectTrigger className="h-12">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="english">English 🇺🇸</SelectItem>
-                        <SelectItem value="french">Français 🇫🇷</SelectItem>
-                        <SelectItem value="spanish">Español 🇪🇸</SelectItem>
-                      </SelectContent>
-                    </Select>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label htmlFor="language" className="block text-sm font-bold text-foreground">
+                        Preferred Language
+                      </label>
+                      <Select
+                        value={formData.language}
+                        onValueChange={(value) => setFormData({ ...formData, language: value })}
+                        disabled={isSubmitting}
+                      >
+                        <SelectTrigger className="h-14 text-base border-2 rounded-xl">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="english">English 🇺🇸</SelectItem>
+                          <SelectItem value="french">Français 🇫🇷</SelectItem>
+                          <SelectItem value="spanish">Español 🇪🇸</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label htmlFor="preferredDate" className="block text-sm font-bold text-foreground">
+                        Preferred Call/Meeting Date
+                      </label>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant="outline"
+                            className={cn(
+                              "w-full h-14 justify-start text-left font-normal border-2 rounded-xl text-base",
+                              !selectedDate && "text-muted-foreground"
+                            )}
+                            disabled={isSubmitting}
+                          >
+                            <CalendarIcon className="mr-2 h-5 w-5" />
+                            {selectedDate ? format(selectedDate, "PPP") : "Pick a date"}
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={selectedDate}
+                            onSelect={setSelectedDate}
+                            disabled={(date) => date < new Date()}
+                            initialFocus
+                            className={cn("p-3 pointer-events-auto")}
+                          />
+                        </PopoverContent>
+                      </Popover>
+                    </div>
                   </div>
 
-                  <div>
-                    <label htmlFor="preferredDate" className="block text-sm font-semibold mb-2">
-                      Preferred Call/Meeting Date (Optional)
-                    </label>
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <Button
-                          variant="outline"
-                          className={cn(
-                            "w-full h-12 justify-start text-left font-normal",
-                            !selectedDate && "text-muted-foreground"
-                          )}
-                          disabled={isSubmitting}
-                        >
-                          <CalendarIcon className="mr-2 h-4 w-4" />
-                          {selectedDate ? format(selectedDate, "PPP") : "Pick a date"}
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={selectedDate}
-                          onSelect={setSelectedDate}
-                          disabled={(date) => date < new Date()}
-                          initialFocus
-                        />
-                      </PopoverContent>
-                    </Popover>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      Help us schedule a call or meeting at your convenience
-                    </p>
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-semibold mb-2">
+                  <div className="space-y-2">
+                    <label htmlFor="message" className="block text-sm font-bold text-foreground">
                       Your Message *
                     </label>
                     <Textarea
@@ -311,25 +313,32 @@ const Contact = () => {
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       disabled={isSubmitting}
+                      className="text-base border-2 focus:border-primary/50 rounded-xl resize-none"
                     />
                   </div>
 
-                  <div className="flex items-start gap-3">
-                    <Checkbox id="disclaimer" required disabled={isSubmitting} />
-                    <label htmlFor="disclaimer" className="text-sm text-muted-foreground leading-relaxed">
+                  <div className="flex items-start gap-3 p-4 bg-muted/50 rounded-xl border border-border/50">
+                    <Checkbox id="disclaimer" required disabled={isSubmitting} className="mt-0.5" />
+                    <label htmlFor="disclaimer" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
                       I understand InVision provides educational services only and does not offer legal/financial/tax advice. In emergencies, I will contact authorities and my bank directly.
                     </label>
                   </div>
 
-                  <Button type="submit" variant="default" size="lg" className="w-full h-12" disabled={isSubmitting}>
+                  <Button 
+                    type="submit" 
+                    variant="default" 
+                    size="lg" 
+                    className="w-full h-16 text-lg font-bold bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-xl rounded-xl" 
+                    disabled={isSubmitting}
+                  >
                     {isSubmitting ? (
                       <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Sending...
+                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                        Sending Message...
                       </>
                     ) : (
                       <>
-                        <Mail className="mr-2 h-4 w-4" />
+                        <Mail className="mr-2 h-5 w-5" />
                         Send Message
                       </>
                     )}
