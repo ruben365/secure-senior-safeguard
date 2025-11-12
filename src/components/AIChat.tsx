@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
 import { useAIChat } from "@/contexts/AIChatContext";
 import { 
@@ -47,6 +48,24 @@ export const AIChat = () => {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ctrl+L to open chat
+      if ((e.ctrlKey || e.metaKey) && e.key === "l") {
+        e.preventDefault();
+        openChat();
+      }
+      // Esc to close chat
+      if (e.key === "Escape" && isOpen) {
+        closeChat();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, openChat, closeChat]);
 
   // Initialize speech recognition
   useEffect(() => {
@@ -319,6 +338,19 @@ export const AIChat = () => {
                       </div>
                     </div>
                   ))}
+                  {isLoading && (
+                    <div className="flex gap-2 justify-start animate-fade-in">
+                      <Avatar className="h-8 w-8 flex-shrink-0">
+                        <AvatarImage src={loraAvatar} alt="Lora" className="object-cover" />
+                        <AvatarFallback>LA</AvatarFallback>
+                      </Avatar>
+                      <div className="max-w-[80%] rounded-xl p-3 bg-muted/80 backdrop-blur-sm space-y-2">
+                        <Skeleton className="h-4 w-48 bg-muted-foreground/20" />
+                        <Skeleton className="h-4 w-36 bg-muted-foreground/20" />
+                        <Skeleton className="h-4 w-40 bg-muted-foreground/20" />
+                      </div>
+                    </div>
+                  )}
                   <div ref={messagesEndRef} />
                 </div>
               )}
@@ -374,9 +406,14 @@ export const AIChat = () => {
                 )}
               </Button>
             </div>
-            <p className="text-xs text-muted-foreground mt-2 text-center">
-              Powered by Lovable AI
-            </p>
+            <div className="flex items-center justify-between mt-2">
+              <p className="text-xs text-muted-foreground">
+                Powered by Lovable AI
+              </p>
+              <p className="text-xs text-muted-foreground/60">
+                Press <kbd className="px-1.5 py-0.5 rounded bg-muted text-muted-foreground text-[10px] font-mono">Ctrl+L</kbd> to open · <kbd className="px-1.5 py-0.5 rounded bg-muted text-muted-foreground text-[10px] font-mono">Esc</kbd> to close
+              </p>
+            </div>
           </form>
         </TabsContent>
       </Tabs>

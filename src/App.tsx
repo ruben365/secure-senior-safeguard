@@ -31,6 +31,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 import { AIChat } from "./components/AIChat";
 import { AIChatProvider } from "./contexts/AIChatContext";
+import { FloatingActionButton } from "./components/FloatingActionButton";
 
 const queryClient = new QueryClient();
 
@@ -78,6 +79,7 @@ const App = () => {
             <Route path="*" element={<NotFound />} />
           </Routes>
           <AIChat />
+          <FloatingActionButton />
         </BrowserRouter>
         </AIChatProvider>
       </TooltipProvider>
