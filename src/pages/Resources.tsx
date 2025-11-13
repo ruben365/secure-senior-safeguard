@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { PurchaseModal } from "@/components/PurchaseModal";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Download, Shield, Wifi, KeyRound, Heart, FileText, ShoppingCart, Loader2 } from "lucide-react";
+import { Download, Shield, Wifi, KeyRound, Heart, FileText, ShoppingCart } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import heroResources from "@/assets/hero-resources-new.jpg";
 
@@ -20,18 +20,7 @@ function Resources() {
     name: string;
     price?: number;
   } | null>(null);
-  const [loadingButton, setLoadingButton] = useState<string | null>(null);
   const [activeProductImages, setActiveProductImages] = useState<{ [key: string]: number }>({});
-  const navigate = useNavigate();
-
-  const handlePurchaseClick = (slug: string, price: number) => {
-    setLoadingButton(slug);
-    // Simulate brief loading before navigation
-    setTimeout(() => {
-      navigate(`/contact?service=purchase&item=${slug}&price=${price}`);
-      setLoadingButton(null);
-    }, 300);
-  };
 
   const guides = [
     { icon: Shield, title: "Scam-Proof Playbook", desc: "Complete emergency scripts & protocols", price: 29, slug: "scam-proof-playbook" },
@@ -201,22 +190,14 @@ function Resources() {
                 <p className="text-muted-foreground text-center mb-4">{guide.desc}</p>
                 {guide.slug && guide.price ? (
                   <Button 
-                    onClick={() => handlePurchaseClick(guide.slug!, guide.price!)}
-                    disabled={loadingButton === guide.slug}
+                    asChild
                     className="w-full group/btn transition-all duration-300 hover:brightness-90" 
                     variant="outline"
                   >
-                    {loadingButton === guide.slug ? (
-                      <>
-                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                        LOADING...
-                      </>
-                    ) : (
-                      <>
-                        <Download className="w-4 h-4 mr-2 transition-transform duration-300 group-hover/btn:animate-[bounce-down_0.6s_ease-in-out_infinite]" />
-                        PURCHASE
-                      </>
-                    )}
+                    <Link to={`/contact?service=purchase&item=${guide.slug}&price=${guide.price}`}>
+                      <Download className="w-4 h-4 mr-2 transition-transform duration-300 group-hover/btn:animate-[bounce-down_0.6s_ease-in-out_infinite]" />
+                      PURCHASE
+                    </Link>
                   </Button>
                 ) : (
                   <Button 
@@ -323,22 +304,14 @@ function Resources() {
                     ${product.price.toFixed(2)}
                   </p>
                   <Button 
-                    onClick={() => handlePurchaseClick(product.slug, product.price)}
-                    disabled={loadingButton === product.slug}
+                    asChild
                     variant="default" 
                     className={`w-full group ${isBundle ? 'h-12 text-base shadow-[0_0_15px_rgba(20,184,166,0.4)] hover:shadow-[0_0_25px_rgba(20,184,166,0.6)]' : ''}`}
                   >
-                    {loadingButton === product.slug ? (
-                      <>
-                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                        LOADING...
-                      </>
-                    ) : (
-                      <>
-                        <span className="mr-2 transition-transform duration-300 group-hover:animate-[bounce_0.5s_ease-in-out_infinite]">🛒</span>
-                        BUY NOW
-                      </>
-                    )}
+                    <Link to={`/contact?service=purchase&item=${product.slug}&price=${product.price}`}>
+                      <span className="mr-2 transition-transform duration-300 group-hover:animate-[bounce_0.5s_ease-in-out_infinite]">🛒</span>
+                      BUY NOW
+                    </Link>
                   </Button>
                 </Card>
               );

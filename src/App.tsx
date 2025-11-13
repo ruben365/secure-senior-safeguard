@@ -213,14 +213,78 @@ const NotFound = lazy(() => {
   });
 });
 
-// Loading fallback component
+// Loading fallback component with enhanced skeleton
 const PageLoader = () => (
   <div className="min-h-screen bg-background">
-    <Skeleton className="h-20 w-full" />
-    <div className="container mx-auto px-4 py-8 space-y-4">
-      <Skeleton className="h-96 w-full" />
-      <Skeleton className="h-32 w-full" />
-      <Skeleton className="h-32 w-full" />
+    {/* Navigation skeleton */}
+    <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-20">
+          <Skeleton className="h-10 w-48" />
+          <div className="hidden md:flex gap-6">
+            <Skeleton className="h-6 w-20" />
+            <Skeleton className="h-6 w-24" />
+            <Skeleton className="h-6 w-20" />
+            <Skeleton className="h-6 w-16" />
+          </div>
+          <Skeleton className="h-10 w-24" />
+        </div>
+      </div>
+    </div>
+    
+    {/* Hero section skeleton */}
+    <div className="relative">
+      <Skeleton className="h-[500px] w-full" />
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="text-center space-y-4 px-4">
+          <Skeleton className="h-12 w-96 mx-auto" />
+          <Skeleton className="h-6 w-64 mx-auto" />
+          <div className="flex gap-4 justify-center mt-8">
+            <Skeleton className="h-12 w-40" />
+            <Skeleton className="h-12 w-40" />
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    {/* Content sections skeleton */}
+    <div className="container mx-auto px-4 py-16 space-y-16">
+      <div className="space-y-4">
+        <Skeleton className="h-10 w-64 mx-auto" />
+        <Skeleton className="h-6 w-96 mx-auto" />
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="space-y-4">
+            <Skeleton className="h-48 w-full rounded-2xl" />
+            <Skeleton className="h-6 w-3/4" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-5/6" />
+          </div>
+        ))}
+      </div>
+      
+      <div className="space-y-4">
+        <Skeleton className="h-32 w-full rounded-2xl" />
+        <Skeleton className="h-32 w-full rounded-2xl" />
+      </div>
+    </div>
+    
+    {/* Footer skeleton */}
+    <div className="bg-muted py-8 mt-16">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="space-y-3">
+              <Skeleton className="h-6 w-32" />
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-5/6" />
+              <Skeleton className="h-4 w-4/6" />
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   </div>
 );
