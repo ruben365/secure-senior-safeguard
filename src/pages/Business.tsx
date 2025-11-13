@@ -367,17 +367,20 @@ const Business = () => {
               </ul>
               <Button 
                 onClick={() => {
-                  setSelectedService({
-                    type: 'business',
-                    name: 'Custom Automation Suite',
-                    price: 25000
-                  });
-                  setModalOpen(true);
+                  setIsNavigating(true);
+                  setTimeout(() => {
+                    navigate('/contact?service=custom&plan=25000');
+                  }, 300);
                 }}
                 variant="default" 
-                className="w-full"
+                className="w-full transition-all duration-300 hover:bg-primary/90 hover:shadow-[0_12px_28px_rgba(109,40,217,0.25)] hover:scale-[1.02]"
+                disabled={isNavigating}
               >
-                GET STARTED
+                {isNavigating ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  'GET STARTED'
+                )}
               </Button>
             </Card>
           </div>
