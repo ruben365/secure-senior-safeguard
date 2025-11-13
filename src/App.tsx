@@ -15,6 +15,7 @@ import { BreadcrumbNav } from "./components/BreadcrumbNav";
 import { PageTransition } from "./components/PageTransition";
 import { Skeleton } from "@/components/ui/skeleton";
 import { performanceMonitor } from "./utils/performanceMonitor";
+import ScrollProgressBar from "./components/ScrollProgressBar";
 
 // Lazy load all pages for code splitting
 const Index = lazy(() => {
@@ -401,6 +402,7 @@ function App() {
       <Sonner />
       <AIChatProvider>
         <BrowserRouter>
+          <ScrollProgressBar />
           <RouteTracker />
           <ErrorBoundary>
             <BreadcrumbNav />

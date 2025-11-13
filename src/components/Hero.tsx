@@ -5,6 +5,8 @@ import ScrollIndicator from "./ScrollIndicator";
 import { ParticleBackground } from "./ParticleBackground";
 import { FloatingShapes } from "./FloatingShapes";
 import { useImagePreload } from "@/hooks/useImagePreload";
+import { motion } from "framer-motion";
+import { useParallax } from "@/hooks/useParallax";
 
 interface HeroProps {
   backgroundImage?: string;
@@ -19,6 +21,7 @@ interface HeroProps {
 
 const Hero = ({ backgroundImage, headline, subheadline, children, className, overlay = false, showScrollIndicator = false, showPrivacyDisclaimer = false }: HeroProps) => {
   const [showDisclaimer, setShowDisclaimer] = useState(true);
+  const { ref, y, opacity } = useParallax({ speed: 0.5 });
   
   // Preload background image
   const imagePreloaded = useImagePreload(backgroundImage ? [backgroundImage] : []);
@@ -32,16 +35,25 @@ const Hero = ({ backgroundImage, headline, subheadline, children, className, ove
   }, []);
 
   return (
-    <div className={cn("relative min-h-[80vh] md:min-h-[90vh] flex items-center overflow-hidden", className)}>
-      {/* Static Background - no parallax for performance */}
-      <div className="absolute inset-0">
+    <div 
+      ref={ref}
+      className={cn("relative min-h-[80vh] md:min-h-[90vh] flex items-center overflow-hidden", className)}
+    >
+      {/* Background with Parallax */}
+      <motion.div 
+        className="absolute inset-0"
+        style={{ y }}
+      >
         {backgroundImage && (
-          <div
+          <motion.div
             className={cn(
               "absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-300",
               imagePreloaded ? "opacity-100" : "opacity-0"
             )}
-            style={{ backgroundImage: `url(${backgroundImage})` }}
+            style={{ 
+              backgroundImage: `url(${backgroundImage})`,
+              opacity
+            }}
           />
         )}
         
@@ -52,7 +64,7 @@ const Hero = ({ backgroundImage, headline, subheadline, children, className, ove
         {overlay && (
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/50" />
         )}
-      </div>
+      </motion.div>
       
       {/* Particle Network Background */}
       <ParticleBackground />
@@ -67,23 +79,37 @@ const Hero = ({ backgroundImage, headline, subheadline, children, className, ove
         <div className="floating-orb" style={{ width: '120px', height: '120px', bottom: '25%', left: '40%', animationDelay: '8s' }} />
       </div>
       
-      {/* Content */}
+      {/* Content with Stagger Animation */}
       <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
         <div className="max-w-3xl mx-auto md:mx-0">
           {headline && (
-            <h1 className="text-white mb-6 [text-shadow:0_4px_20px_rgba(139,92,246,0.4)] leading-tight">
+            <motion.h1 
+              className="text-white mb-6 [text-shadow:0_4px_20px_rgba(139,92,246,0.4)] leading-tight"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
               {headline}
-            </h1>
+            </motion.h1>
           )}
           {subheadline && (
-            <p className="text-white/90 text-xl md:text-2xl mb-8 leading-relaxed">
+            <motion.p 
+              className="text-white/90 text-xl md:text-2xl mb-8 leading-relaxed"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            >
               {subheadline}
-            </p>
+            </motion.p>
           )}
           {children && (
-            <div>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+            >
               {children}
-            </div>
+            </motion.div>
           )}
         </div>
       </div>
