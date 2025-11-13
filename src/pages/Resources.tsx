@@ -138,9 +138,12 @@ const Resources = () => {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {guides.map((guide, index) => (
-              <Card key={index} className="p-6 hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl">
-                <div className="flex justify-center mb-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center">
+              <Card 
+                key={index} 
+                className="p-6 transition-all duration-[400ms] ease-in-out hover:-translate-y-1.5 hover:shadow-[0_15px_35px_rgba(0,0,0,0.12)] hover:border-[#14B8A6] hover:border-2 rounded-2xl group"
+              >
+                <div className="flex justify-center mb-4 overflow-hidden rounded-full">
+                  <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center transition-transform duration-[400ms] ease-in-out group-hover:scale-105">
                     <guide.icon className="w-8 h-8 text-primary" />
                   </div>
                 </div>
@@ -150,7 +153,7 @@ const Resources = () => {
                   <Button 
                     onClick={() => handlePurchaseClick(guide.slug!, guide.price!)}
                     disabled={loadingButton === guide.slug}
-                    className="w-full group transition-all duration-300 hover:brightness-90" 
+                    className="w-full group/btn transition-all duration-300 hover:brightness-90" 
                     variant="outline"
                   >
                     {loadingButton === guide.slug ? (
@@ -160,7 +163,7 @@ const Resources = () => {
                       </>
                     ) : (
                       <>
-                        <Download className="w-4 h-4 mr-2 transition-transform duration-300 group-hover:animate-[bounce-down_0.6s_ease-in-out_infinite]" />
+                        <Download className="w-4 h-4 mr-2 transition-transform duration-300 group-hover/btn:animate-[bounce-down_0.6s_ease-in-out_infinite]" />
                         PURCHASE
                       </>
                     )}
