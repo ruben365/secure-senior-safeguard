@@ -25,8 +25,10 @@ interface ArticleData {
   title: string;
   slug: string;
   content: string;
-  category: string;
+  categories: string[];
   status: "draft" | "scheduled" | "published";
+  visibility: "public" | "password" | "private";
+  password?: string;
   featuredImage?: string;
   excerpt?: string;
   author: string;
@@ -47,8 +49,9 @@ export default function ArticleEditor() {
     title: "",
     slug: "",
     content: "",
-    category: "AI Scams",
+    categories: [],
     status: "draft",
+    visibility: "public",
     author: "Current User",
     tags: [],
   });
