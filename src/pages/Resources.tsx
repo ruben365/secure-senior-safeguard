@@ -13,7 +13,7 @@ import { Download, Shield, Wifi, KeyRound, Heart, FileText, ShoppingCart, Loader
 import { ScrollReveal } from "@/components/ScrollReveal";
 import heroResources from "@/assets/hero-resources-new.jpg";
 
-const Resources = () => {
+function Resources() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<{
     type: 'guide' | 'product';

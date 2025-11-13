@@ -26,7 +26,7 @@ import teamCollaboration from "@/assets/team-collaboration.jpg";
 import heroCareers from "@/assets/hero-careers-new.jpg";
 import customerSupport from "@/assets/customer-support.jpg";
 
-const Careers = () => {
+function Careers() {
   const positions = [
     {
       title: "Threat Analyst",

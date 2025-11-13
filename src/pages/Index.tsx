@@ -34,7 +34,7 @@ import heroBusinessProfessional from "@/assets/hero-business-professional.jpg";
 import { useImagePreload } from "@/hooks/useImagePreload";
 import { useCounterAnimation } from "@/hooks/useCounterAnimation";
 
-const Index = () => {
+function Index() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   

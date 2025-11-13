@@ -46,7 +46,7 @@ const passwordSchema = z.string()
 const emailSchema = z.string().email("Invalid email address");
 const phoneSchema = z.string().regex(/^\d{3}-\d{3}-\d{4}$/, "Phone must be in format XXX-XXX-XXXX");
 
-const Signup = () => {
+function Signup() {
   const [step, setStep] = useState(1);
   const [selectedRole, setSelectedRole] = useState("");
   const [isLoading, setIsLoading] = useState(false);

@@ -7,6 +7,7 @@ import { lazy, Suspense, useEffect } from "react";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AIChat } from "./components/AIChat";
 import { AIChatProvider } from "./contexts/AIChatContext";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import { Skeleton } from "@/components/ui/skeleton";
 
 // Lazy load all pages for code splitting
@@ -66,8 +67,9 @@ const App = () => {
         <Sonner />
         <AIChatProvider>
           <BrowserRouter>
-            <Suspense fallback={<PageLoader />}>
-              <Routes>
+            <ErrorBoundary>
+              <Suspense fallback={<PageLoader />}>
+                <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/training" element={<Training />} />
                 <Route path="/business" element={<Business />} />
@@ -95,6 +97,7 @@ const App = () => {
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
+            </ErrorBoundary>
             <AIChat />
           </BrowserRouter>
         </AIChatProvider>

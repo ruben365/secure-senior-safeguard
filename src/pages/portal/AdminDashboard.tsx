@@ -30,7 +30,7 @@ import {
   Star,
 } from "lucide-react";
 
-const AdminDashboard = () => {
+function AdminDashboard() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [date, setDate] = useState<Date | undefined>(new Date());

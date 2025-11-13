@@ -15,7 +15,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 
-const SeniorDashboard = () => {
+function SeniorDashboard() {
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
