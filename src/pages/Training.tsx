@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { BookingModal } from "@/components/BookingModal";
@@ -28,13 +28,16 @@ import {
   QrCode,
   FileCheck,
   Image as ImageIcon,
+  Loader2,
 } from "lucide-react";
 import trainingSession from "@/assets/training-session.jpg";
 import heroTraining from "@/assets/hero-training-new.jpg";
 
 const LearnAndTrain = () => {
+  const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   const [isYearly, setIsYearly] = useState(false);
+  const [loadingButton, setLoadingButton] = useState<string | null>(null);
   const [selectedService, setSelectedService] = useState<{
     type: 'training' | 'scamshield';
     name: string;
@@ -108,7 +111,9 @@ const LearnAndTrain = () => {
             {[
               {
                 name: "Standard Group",
+                type: "standard",
                 price: "$79",
+                priceNum: 79,
                 duration: "90 minutes",
                 size: "Up to 25 participants",
                 features: [
@@ -121,7 +126,9 @@ const LearnAndTrain = () => {
               },
               {
                 name: "Family Small Group",
+                type: "family",
                 price: "$149",
+                priceNum: 149,
                 duration: "90 minutes",
                 size: "Up to 12 participants",
                 popular: true,
@@ -136,7 +143,9 @@ const LearnAndTrain = () => {
               },
               {
                 name: "Priority Private",
+                type: "private",
                 price: "$399",
+                priceNum: 399,
                 duration: "120 minutes",
                 size: "1-5 participants",
                 features: [
@@ -180,19 +189,22 @@ const LearnAndTrain = () => {
 
                 <Button 
                   onClick={() => {
-                    setSelectedService({
-                      type: 'training',
-                      name: plan.name,
-                      tier: plan.name,
-                      price: parseFloat(plan.price.replace('$', ''))
-                    });
-                    setModalOpen(true);
+                    setLoadingButton(plan.type);
+                    navigate(`/contact?service=training&type=${plan.type}&price=${plan.priceNum}`);
                   }}
+                  disabled={loadingButton === plan.type}
                   variant={plan.popular ? "default" : "outline"} 
                   size="lg" 
                   className="w-full"
                 >
-                  Book Session
+                  {loadingButton === plan.type ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                      Loading...
+                    </>
+                  ) : (
+                    'Book Session'
+                  )}
                 </Button>
               </Card>
               </div>
