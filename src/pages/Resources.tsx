@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { PurchaseModal } from "@/components/PurchaseModal";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Download, Shield, Wifi, KeyRound, Heart, FileText, ShoppingCart } from "lucide-react";
+import { Download, Shield, Wifi, KeyRound, Heart, FileText, ShoppingCart, Loader2 } from "lucide-react";
 import heroResources from "@/assets/hero-resources-new.jpg";
 
 const Resources = () => {
@@ -19,14 +19,25 @@ const Resources = () => {
     name: string;
     price?: number;
   } | null>(null);
+  const [loadingButton, setLoadingButton] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  const handlePurchaseClick = (slug: string, price: number) => {
+    setLoadingButton(slug);
+    // Simulate brief loading before navigation
+    setTimeout(() => {
+      navigate(`/contact?service=purchase&item=${slug}&price=${price}`);
+      setLoadingButton(null);
+    }, 300);
+  };
 
   const guides = [
     { icon: Shield, title: "Scam-Proof Playbook", desc: "Complete emergency scripts & protocols", price: 29, slug: "scam-proof-playbook" },
     { icon: Heart, title: "Caregivers' Security Guide", desc: "Protect vulnerable loved ones from scams", price: 24, slug: "caregivers-security-guide" },
     { icon: Wifi, title: "Home Wi-Fi Safety", desc: "Secure your network in 15 minutes", price: 19, slug: "home-wifi-safety" },
-    { icon: KeyRound, title: "Password Creation Notebook Template", desc: "Offline password storage system" },
-    { icon: FileText, title: "Grandparent-Text 101", desc: "Spot fake 'emergency' family texts" },
-    { icon: Shield, title: "60-Second Pause Protocol Poster", desc: "Print and post on your fridge" },
+    { icon: KeyRound, title: "Password Creation Notebook Template", desc: "Offline password storage system", price: 15, slug: "password-creation-notebook" },
+    { icon: FileText, title: "Grandparent-Text 101", desc: "Spot fake 'emergency' family texts", price: 12, slug: "grandparent-text-101" },
+    { icon: Shield, title: "60-Second Pause Protocol Poster", desc: "Print and post on your fridge", price: 9, slug: "pause-protocol-poster" },
   ];
 
   const products = [
@@ -137,14 +148,22 @@ const Resources = () => {
                 <p className="text-muted-foreground text-center mb-4">{guide.desc}</p>
                 {guide.slug && guide.price ? (
                   <Button 
-                    asChild
+                    onClick={() => handlePurchaseClick(guide.slug!, guide.price!)}
+                    disabled={loadingButton === guide.slug}
                     className="w-full group transition-all duration-300 hover:brightness-90" 
                     variant="outline"
                   >
-                    <Link to={`/contact?service=purchase&item=${guide.slug}&price=${guide.price}`}>
-                      <Download className="w-4 h-4 mr-2 transition-transform duration-300 group-hover:animate-[bounce-down_0.6s_ease-in-out_infinite]" />
-                      PURCHASE
-                    </Link>
+                    {loadingButton === guide.slug ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        LOADING...
+                      </>
+                    ) : (
+                      <>
+                        <Download className="w-4 h-4 mr-2 transition-transform duration-300 group-hover:animate-[bounce-down_0.6s_ease-in-out_infinite]" />
+                        PURCHASE
+                      </>
+                    )}
                   </Button>
                 ) : (
                   <Button 
