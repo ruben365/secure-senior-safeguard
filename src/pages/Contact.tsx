@@ -789,18 +789,25 @@ const Contact = () => {
                   </div>
                 </Card>
 
-                <Card className="p-6 hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50 bg-card/80 backdrop-blur-sm">
+                <Card className="p-6 hover:shadow-strong transition-all hover:-translate-y-1 rounded-2xl border-2 border-border/50 bg-card/80 backdrop-blur-sm">
                   <div className="flex items-start gap-4">
                     <div className="w-14 h-14 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
                       <MapPin className="w-7 h-7 text-primary" />
                     </div>
-                    <div>
-                      <h3 className="text-xl font-bold mb-2">Office Location</h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        850 Euclid Ave Ste 819 #4685<br />
-                        Cleveland, OH 44114<br />
-                        <span className="font-semibold text-foreground mt-2 block">Serving Ohio & Nationwide</span>
-                      </p>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold mb-3">Office Location</h3>
+                      <div className="space-y-2">
+                        <div className="flex items-start gap-2">
+                          <span className="text-xl mt-0.5">📍</span>
+                          <div className="text-base text-[#6B7280] leading-relaxed">
+                            <p className="font-semibold text-foreground">Serving Dayton, Kettering & Greater Miami Valley</p>
+                            <p className="mt-1">Nationwide Training Available</p>
+                          </div>
+                        </div>
+                        <p className="text-sm text-muted-foreground italic ml-7">
+                          In-person meetings by appointment
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </Card>
