@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
 import { useImagePreload } from "@/hooks/useImagePreload";
 
 interface TransitioningHeroBackgroundProps {
@@ -35,31 +36,49 @@ const TransitioningHeroBackground = ({
     return () => clearInterval(interval);
   }, [imagesPreloaded, images.length, nextIndex, transitionDuration]);
 
-  if (!imagesPreloaded) {
-    return (
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/10" />
-    );
-  }
-
   return (
     <div className="absolute inset-0">
-      {/* Current Image */}
+      {/* First Image - display immediately, even before full preload */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000"
+        className={cn(
+          "absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000",
+          imagesPreloaded ? "" : "opacity-100"
+        )}
         style={{
-          backgroundImage: `url(${images[currentIndex]})`,
-          opacity: isTransitioning ? 0 : 1,
+          backgroundImage: `url(${images[0]})`,
+          opacity: currentIndex === 0 && !isTransitioning ? 1 : 0,
         }}
       />
       
-      {/* Next Image (for smooth crossfade) */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000"
-        style={{
-          backgroundImage: `url(${images[nextIndex]})`,
-          opacity: isTransitioning ? 1 : 0,
-        }}
-      />
+      {/* Other Images - only render after preload */}
+      {imagesPreloaded && (
+        <>
+          {images.slice(1).map((image, idx) => {
+            const imageIndex = idx + 1;
+            return (
+              <div
+                key={imageIndex}
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000"
+                style={{
+                  backgroundImage: `url(${image})`,
+                  opacity: currentIndex === imageIndex && !isTransitioning ? 1 : 0,
+                }}
+              />
+            );
+          })}
+          
+          {/* Next Image for crossfade effect */}
+          {nextIndex !== 0 && (
+            <div
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000"
+              style={{
+                backgroundImage: `url(${images[nextIndex]})`,
+                opacity: isTransitioning ? 1 : 0,
+              }}
+            />
+          )}
+        </>
+      )}
     </div>
   );
 };

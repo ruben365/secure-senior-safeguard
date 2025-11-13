@@ -1,10 +1,20 @@
-const CACHE_NAME = 'invision-network-v1';
+const CACHE_NAME = 'invision-network-v2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/src/main.tsx',
   '/src/index.css',
-  '/src/assets/hero-business-professional.jpg',
+  // Preload hero images for instant display
+  '/src/assets/hero-family-park.jpg',
+  '/src/assets/hero-family-market.jpg',
+  '/src/assets/hero-family-community.jpg',
+  '/src/assets/hero-family-gathering.jpg',
+  '/src/assets/hero-business-team.jpg',
+  '/src/assets/hero-business-modern.jpg',
+  '/src/assets/hero-business-meeting.jpg',
+  '/src/assets/hero-training-workshop.jpg',
+  '/src/assets/hero-training-learning.jpg',
+  '/src/assets/hero-training-hands-on.jpg',
 ];
 
 // Install event - cache static assets
@@ -31,23 +41,61 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Fetch event - serve from cache, fallback to network
+// Fetch event - Network first for HTML, cache first for assets
 self.addEventListener('fetch', (event) => {
+  const { request } = event;
+  const url = new URL(request.url);
+
+  // Network first for HTML pages
+  if (request.headers.get('accept')?.includes('text/html')) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          const responseClone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(request, responseClone);
+          });
+          return response;
+        })
+        .catch(() => caches.match(request))
+    );
+    return;
+  }
+
+  // Cache first for images and static assets
+  if (request.destination === 'image' || 
+      url.pathname.match(/\.(jpg|jpeg|png|gif|webp|svg|css|js)$/)) {
+    event.respondWith(
+      caches.match(request).then((cachedResponse) => {
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+        return fetch(request).then((response) => {
+          if (response.status === 200) {
+            const responseClone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(request, responseClone);
+            });
+          }
+          return response;
+        });
+      })
+    );
+    return;
+  }
+
+  // Default: network first
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      if (response) {
-        return response;
-      }
-      return fetch(event.request).then((response) => {
-        // Cache successful responses
+    fetch(request)
+      .then((response) => {
         if (response.status === 200) {
           const responseClone = response.clone();
           caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseClone);
+            cache.put(request, responseClone);
           });
         }
         return response;
-      });
-    })
+      })
+      .catch(() => caches.match(request))
   );
 });
