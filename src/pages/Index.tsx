@@ -32,6 +32,7 @@ import {
 } from "lucide-react";
 import heroBusinessProfessional from "@/assets/hero-business-professional.jpg";
 import { useImagePreload } from "@/hooks/useImagePreload";
+import { useCounterAnimation } from "@/hooks/useCounterAnimation";
 
 const Index = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -39,6 +40,12 @@ const Index = () => {
   
   // Preload hero image
   useImagePreload([heroBusinessProfessional]);
+
+  // Counter animations for statistics
+  const stat1 = useCounterAnimation({ end: 3.4, duration: 2000, prefix: "$", suffix: "B" });
+  const stat2 = useCounterAnimation({ end: 11, duration: 2000, suffix: "%" });
+  const stat3 = useCounterAnimation({ end: 50, duration: 2000, suffix: "%" });
+  const stat4 = useCounterAnimation({ end: 400, duration: 2000, suffix: "%" });
 
   useEffect(() => {
     checkAdminStatus();
@@ -123,6 +130,7 @@ const Index = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card
+              ref={stat1.ref}
               className="p-6 hover:shadow-strong transition-all duration-500 hover:-translate-y-2 hover:scale-105 rounded-2xl border-border/50 group animate-fade-in-up bg-gradient-to-br from-card to-card/50 backdrop-blur-sm"
               style={{ animationDelay: "0ms" }}
             >
@@ -131,11 +139,14 @@ const Index = () => {
                   <DollarSign className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-500" />
                 </div>
               </div>
-              <h3 className="text-4xl font-bold mb-2 text-center text-primary">$3.4B</h3>
+              <h3 className={`text-4xl font-bold mb-2 text-center text-primary transition-all duration-300 ${stat1.count === 3.4 ? 'animate-pulse' : ''}`}>
+                {stat1.displayValue}
+              </h3>
               <p className="text-muted-foreground text-center">Lost to elder fraud in 2023</p>
             </Card>
 
             <Card
+              ref={stat2.ref}
               className="p-6 hover:shadow-strong transition-all duration-500 hover:-translate-y-2 hover:scale-105 rounded-2xl border-border/50 group animate-fade-in-up bg-gradient-to-br from-card to-card/50 backdrop-blur-sm"
               style={{ animationDelay: "100ms" }}
             >
@@ -144,11 +155,14 @@ const Index = () => {
                   <TrendingUp className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-500" />
                 </div>
               </div>
-              <h3 className="text-4xl font-bold mb-2 text-center text-primary">11%</h3>
+              <h3 className={`text-4xl font-bold mb-2 text-center text-primary transition-all duration-300 ${stat2.count === 11 ? 'animate-pulse' : ''}`}>
+                {stat2.displayValue}
+              </h3>
               <p className="text-muted-foreground text-center">AI scams increased this year</p>
             </Card>
 
             <Card
+              ref={stat3.ref}
               className="p-6 hover:shadow-strong transition-all duration-500 hover:-translate-y-2 hover:scale-105 rounded-2xl border-border/50 group animate-fade-in-up bg-gradient-to-br from-card to-card/50 backdrop-blur-sm"
               style={{ animationDelay: "200ms" }}
             >
@@ -157,11 +171,14 @@ const Index = () => {
                   <UserX className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-500" />
                 </div>
               </div>
-              <h3 className="text-4xl font-bold mb-2 text-center text-primary">50%</h3>
+              <h3 className={`text-4xl font-bold mb-2 text-center text-primary transition-all duration-300 ${stat3.count === 50 ? 'animate-pulse' : ''}`}>
+                {stat3.displayValue}
+              </h3>
               <p className="text-muted-foreground text-center">Of fraud victims are seniors</p>
             </Card>
 
             <Card
+              ref={stat4.ref}
               className="p-6 hover:shadow-strong transition-all duration-500 hover:-translate-y-2 hover:scale-105 rounded-2xl border-border/50 group animate-fade-in-up bg-gradient-to-br from-card to-card/50 backdrop-blur-sm"
               style={{ animationDelay: "300ms" }}
             >
@@ -170,7 +187,9 @@ const Index = () => {
                   <Bot className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-500" />
                 </div>
               </div>
-              <h3 className="text-4xl font-bold mb-2 text-center text-primary">400%</h3>
+              <h3 className={`text-4xl font-bold mb-2 text-center text-primary transition-all duration-300 ${stat4.count === 400 ? 'animate-pulse' : ''}`}>
+                {stat4.displayValue}
+              </h3>
               <p className="text-muted-foreground text-center">Rise in voice cloning scams</p>
             </Card>
           </div>
