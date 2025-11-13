@@ -394,7 +394,12 @@ const Index = () => {
           </div>
 
           <div className="text-center mt-10 animate-fade-in-up" style={{ animationDelay: "400ms" }}>
-            <Button asChild variant="default" size="xl">
+            <Button 
+              asChild 
+              variant="outline" 
+              size="xl"
+              className="border-2 hover:border-[3px] hover:bg-primary/10 transition-all duration-300 cursor-pointer"
+            >
               <Link to="/training">View Training Options</Link>
             </Button>
           </div>
