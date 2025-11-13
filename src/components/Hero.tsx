@@ -75,17 +75,17 @@ const Hero = ({ backgroundImage, backgroundImages, headline, subheadline, childr
       <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
         <div className="max-w-3xl mx-auto md:mx-0">
           {headline && (
-            <h1 className="text-white mb-6 [text-shadow:0_4px_20px_rgba(139,92,246,0.4)] leading-tight">
+            <h1 className="text-white mb-4 md:mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl [text-shadow:0_4px_20px_rgba(139,92,246,0.4)] leading-tight font-bold">
               {headline}
             </h1>
           )}
           {subheadline && (
-            <p className="text-white/90 text-xl md:text-2xl mb-8 leading-relaxed">
+            <p className="text-white/90 text-base sm:text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 leading-relaxed">
               {subheadline}
             </p>
           )}
           {children && (
-            <div>
+            <div className="space-y-3 md:space-y-0">
               {children}
             </div>
           )}
