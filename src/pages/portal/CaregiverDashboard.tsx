@@ -15,7 +15,7 @@ import {
   FileText,
 } from "lucide-react";
 
-const CaregiverDashboard = () => {
+function CaregiverDashboard() {
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();

@@ -2,7 +2,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 
-const TermsOfService = () => {
+function TermsOfService() {
   return (
     <div className="min-h-screen">
       <Navigation />

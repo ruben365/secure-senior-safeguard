@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/card";
 import { Lock, FileText, Users, Shield, CheckCircle, FileCheck, MessageSquare, Globe } from "lucide-react";
 import heroContact from "@/assets/hero-contact-new.jpg";
 
-const SafetyVault = () => {
+function SafetyVault() {
   return (
     <div className="min-h-screen">
       <Navigation />

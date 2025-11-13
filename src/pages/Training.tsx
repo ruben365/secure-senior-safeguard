@@ -37,7 +37,7 @@ import {
 import trainingSession from "@/assets/training-session.jpg";
 import heroTraining from "@/assets/hero-training-new.jpg";
 
-const ResponseTimeCallout = () => {
+function ResponseTimeCallout() {
   const { count: standardCount, ref: standardRef } = useCounterAnimation({ 
     end: 24, 
     start: 48, 
@@ -192,9 +192,9 @@ const TrainingCard = ({ plan, index, loadingButton, setLoadingButton, navigate }
       </div>
     </ScrollReveal>
   );
-};
+}
 
-const LearnAndTrain = () => {
+function LearnAndTrain() {
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   const [isYearly, setIsYearly] = useState(false);
@@ -1033,6 +1033,6 @@ const LearnAndTrain = () => {
       )}
     </div>
   );
-};
+}
 
 export default LearnAndTrain;

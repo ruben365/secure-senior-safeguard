@@ -2,7 +2,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 
-const PrivacyPolicy = () => {
+function PrivacyPolicy() {
   return (
     <div className="min-h-screen">
       <Navigation />

@@ -549,7 +549,7 @@ Remember: Your inbox is like your front door. You wouldn't let just anyone in, s
   },
 ];
 
-const Articles = () => {
+function Articles() {
   const [expandedArticle, setExpandedArticle] = useState<number | null>(null);
 
   const toggleArticle = (id: number) => {
