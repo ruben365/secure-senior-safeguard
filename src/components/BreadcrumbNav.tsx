@@ -28,6 +28,9 @@ const routeNameMap: Record<string, string> = {
   "/portal/senior": "Senior Dashboard",
   "/portal/caregiver": "Caregiver Dashboard",
   "/portal/healthcare": "Healthcare Dashboard",
+  "/admin": "Dashboard",
+  "/admin/content": "Content",
+  "/admin/content/testimonials": "Testimonials",
 };
 
 export const BreadcrumbNav = () => {
