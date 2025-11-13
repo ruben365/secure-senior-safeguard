@@ -40,7 +40,7 @@ const paths: PathConfig[] = [
   },
   {
     id: 3,
-    title: "AI for Business",
+    title: "AI&BUSINESS",
     description: "Custom AI receptionists, automation, and pre-purchase vetting. Don't waste $5k+ on wrong tools.",
     pricing: "Custom Pricing",
     icon: Briefcase,

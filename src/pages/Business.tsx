@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -28,6 +29,42 @@ const Business = () => {
     tier?: string;
     price?: number;
   } | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    checkAdminStatus();
+  }, []);
+
+  const checkAdminStatus = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) {
+        setIsAdmin(false);
+        setIsLoading(false);
+        return;
+      }
+
+      const { data: roles, error } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", user.id)
+        .in("role", ["admin", "staff"]);
+
+      if (error) {
+        console.error("Error checking admin status:", error);
+        setIsAdmin(false);
+      } else {
+        setIsAdmin(roles && roles.length > 0);
+      }
+    } catch (error) {
+      console.error("Error in checkAdminStatus:", error);
+      setIsAdmin(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -980,47 +1017,19 @@ const Business = () => {
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-12">Business Testimonials</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-12">
-            <TestimonialCard
-              name="Marcus Williams"
-              location="Williams HVAC, Dayton"
-              quote="InVision built our AI receptionist in 3 weeks. It handles 80% of our inbound calls now."
-              image={testimonial3}
-            />
-            <TestimonialCard
-              name="Dr. Sarah Chen"
-              location="Family Medicine, Cincinnati"
-              quote="Their pre-purchase consulting saved us from buying a $12,000 'AI medical scribe' that would have violated HIPAA."
-              image={testimonial4}
-            />
-            <TestimonialCard
-              name="James Mitchell"
-              location="Mitchell Law Firm, Columbus"
-              quote="The AI intake agent has transformed our lead qualification process. We've doubled our consultation bookings."
-              image={testimonial3}
-            />
-            <TestimonialCard
-              name="Linda Rodriguez"
-              location="Rodriguez Dental, Toledo"
-              quote="AI Services Insurance gives us peace of mind. Our chatbot stays up-to-date and secure without any effort from us."
-              image={testimonial4}
-            />
-          </div>
-
-          {/* Video Testimonials Section */}
-          <div className="mt-16">
-            <h3 className="text-2xl font-bold text-center mb-8">Video Testimonials</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              {[1, 2, 3].map((i) => (
-                <Card key={i} className="p-6 text-center">
-                  <div className="aspect-video bg-muted/50 rounded-lg mb-4 flex items-center justify-center">
-                    <p className="text-sm text-muted-foreground">Video Testimonial {i}</p>
-                  </div>
-                  <p className="text-sm text-muted-foreground">Coming soon - Customer success story</p>
-                </Card>
-              ))}
+          {isAdmin && !isLoading && (
+            <div className="max-w-2xl mx-auto">
+              <Card className="p-12 border-2 border-dashed border-primary/50 bg-primary/5">
+                <div className="flex flex-col items-center text-center gap-4">
+                  <div className="text-5xl" style={{ fontSize: '48px' }}>💼</div>
+                  <h3 className="text-2xl font-bold">Business Testimonials</h3>
+                  <p className="text-muted-foreground">
+                    Add client testimonials via Admin Dashboard
+                  </p>
+                </div>
+              </Card>
             </div>
-          </div>
+          )}
         </div>
       </section>
 

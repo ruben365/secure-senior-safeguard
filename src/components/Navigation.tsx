@@ -7,7 +7,7 @@ const Navigation = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: "AI for Business", href: "/business" },
+    { name: "AI&BUSINESS", href: "/business" },
     { name: "Learn & Train", href: "/training" },
     { name: "Resources", href: "/resources" },
     { name: "About", href: "/about" },
