@@ -684,6 +684,33 @@ a[role="button"]:active {
   animation: shimmer 2s infinite linear;
 }
 
+/* Smooth content loading transitions */
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in-content {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.loading-fade-out {
+  animation: fade-out 0.2s ease-out forwards;
+}
+
+.content-fade-in {
+  animation: fade-in-content 0.3s ease-out forwards;
+}
+
 /* Floating label animation */
 .floating-label-container {
   position: relative;
