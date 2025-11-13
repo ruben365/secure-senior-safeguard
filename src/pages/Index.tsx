@@ -13,6 +13,7 @@ import { TestimonialForm } from "@/components/TestimonialForm";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
+import { ScrollRevealSection } from "@/components/ScrollRevealSection";
 import {
   Heart,
   Shield,
@@ -124,11 +125,14 @@ function Index() {
           />
         </div>
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-10 animate-fade-in-up">
-            <h2 className="mb-4">The Growing Threat of AI-Powered Scams</h2>
-          </div>
+          <ScrollRevealSection>
+            <div className="text-center mb-10">
+              <h2 className="mb-4">The Growing Threat of AI-Powered Scams</h2>
+            </div>
+          </ScrollRevealSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <ScrollRevealSection staggerChildren={true}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card
               ref={stat1.ref}
               className="p-6 hover:shadow-strong transition-all duration-500 hover:-translate-y-2 hover:scale-105 rounded-2xl border-border/50 group animate-fade-in-up bg-gradient-to-br from-card to-card/50 backdrop-blur-sm"
@@ -193,10 +197,13 @@ function Index() {
               <p className="text-muted-foreground text-center">Rise in voice cloning scams</p>
             </Card>
           </div>
+          </ScrollRevealSection>
 
-          <div className="text-center mt-10 animate-fade-in-up" style={{ animationDelay: "400ms" }}>
-            <p className="text-2xl font-bold text-foreground">Don't become a statistic. Get protected today.</p>
-          </div>
+          <ScrollRevealSection>
+            <div className="text-center mt-10">
+              <p className="text-2xl font-bold text-foreground">Don't become a statistic. Get protected today.</p>
+            </div>
+          </ScrollRevealSection>
         </div>
       </section>
 
@@ -217,8 +224,11 @@ function Index() {
           />
         </div>
         <div className="container mx-auto px-4 relative z-10">
-          <h2 className="text-center mb-10 animate-fade-in-up">Why Families Trust InVision Network</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <ScrollRevealSection>
+            <h2 className="text-center mb-10">Why Families Trust InVision Network</h2>
+          </ScrollRevealSection>
+          <ScrollRevealSection staggerChildren={true}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card
               className="p-6 hover:shadow-strong transition-all duration-500 hover:-translate-y-2 hover:scale-105 rounded-2xl border-border/50 group animate-fade-in-up bg-gradient-to-br from-card to-card/50 backdrop-blur-sm"
               style={{ animationDelay: "0ms" }}
@@ -287,6 +297,7 @@ function Index() {
               </p>
             </Card>
           </div>
+          </ScrollRevealSection>
         </div>
       </section>
 
@@ -381,8 +392,11 @@ function Index() {
           />
         </div>
         <div className="container mx-auto px-4 relative z-10">
-          <h2 className="text-center mb-10 animate-fade-in-up">What You'll Master in Our Training</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <ScrollRevealSection>
+            <h2 className="text-center mb-10">What You'll Master in Our Training</h2>
+          </ScrollRevealSection>
+          <ScrollRevealSection staggerChildren={true}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               "Identify deepfake voices and videos",
               "Spot AI-generated phishing emails",
@@ -411,17 +425,20 @@ function Index() {
               </Card>
             ))}
           </div>
+          </ScrollRevealSection>
 
-          <div className="text-center mt-10 animate-fade-in-up" style={{ animationDelay: "400ms" }}>
-            <Button 
-              asChild 
-              variant="outline" 
-              size="xl"
-              className="border-2 hover:border-[3px] hover:bg-primary/10 transition-all duration-300 cursor-pointer"
-            >
+          <ScrollRevealSection>
+            <div className="text-center mt-10">
+              <Button 
+                asChild 
+                variant="outline" 
+                size="xl"
+                className="border-2 hover:border-[3px] hover:bg-primary/10 transition-all duration-300 cursor-pointer"
+              >
               <Link to="/training">View Training Options</Link>
             </Button>
           </div>
+          </ScrollRevealSection>
         </div>
       </section>
 
