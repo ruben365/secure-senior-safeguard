@@ -110,10 +110,10 @@ const About = () => {
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-16">Our Values</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <Card className="p-8 hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto" style={{ perspective: '1000px' }}>
+            <Card className="p-8 rounded-2xl border-border/50 value-card opacity-0 animate-[flip-in_0.7s_ease-out_0s_forwards] group hover:-translate-y-1.5 hover:shadow-strong transition-all duration-300">
               <div className="flex items-start gap-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:animate-[bounce_0.5s_ease-in-out]">
                   <Heart className="w-8 h-8 text-primary" />
                 </div>
                 <div>
@@ -125,9 +125,9 @@ const About = () => {
               </div>
             </Card>
 
-            <Card className="p-8 hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50">
+            <Card className="p-8 rounded-2xl border-border/50 value-card opacity-0 animate-[flip-in_0.7s_ease-out_0.15s_forwards] group hover:-translate-y-1.5 hover:shadow-strong transition-all duration-300">
               <div className="flex items-start gap-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:animate-[bounce_0.5s_ease-in-out]">
                   <Lock className="w-8 h-8 text-primary" />
                 </div>
                 <div>
@@ -139,9 +139,9 @@ const About = () => {
               </div>
             </Card>
 
-            <Card className="p-8 hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50">
+            <Card className="p-8 rounded-2xl border-border/50 value-card opacity-0 animate-[flip-in_0.7s_ease-out_0.3s_forwards] group hover:-translate-y-1.5 hover:shadow-strong transition-all duration-300">
               <div className="flex items-start gap-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:animate-[bounce_0.5s_ease-in-out]">
                   <BookOpen className="w-8 h-8 text-primary" />
                 </div>
                 <div>
@@ -153,13 +153,13 @@ const About = () => {
               </div>
             </Card>
 
-            <Card className="p-8 hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl border-border/50">
+            <Card className="p-8 rounded-2xl border-border/50 value-card opacity-0 animate-[flip-in_0.7s_ease-out_0.45s_forwards] group hover:-translate-y-1.5 hover:shadow-strong transition-all duration-300">
               <div className="flex items-start gap-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:animate-[bounce_0.5s_ease-in-out]">
                   <Users2 className="w-8 h-8 text-primary" />
                 </div>
                 <div>
-  <h3 className="text-2xl font-bold mb-3">INTEGRITY</h3>
+                  <h3 className="text-2xl font-bold mb-3">INTEGRITY</h3>
                   <p className="text-muted-foreground">
                     Transparent, honest, ethical
                   </p>

@@ -498,6 +498,22 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   will-change: transform, opacity;
 }
 
+/* 3D Flip animation for value cards */
+@keyframes flip-in {
+  0% {
+    opacity: 0;
+    transform: rotateY(-90deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateY(0);
+  }
+}
+
+.value-card {
+  transform-style: preserve-3d;
+}
+
 .scroll-reveal-slide-left {
   opacity: 0;
   transform: translateX(-50px);
