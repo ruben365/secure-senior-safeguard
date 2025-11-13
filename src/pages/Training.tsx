@@ -158,15 +158,17 @@ const LearnAndTrain = () => {
                 ],
               },
             ].map((plan, index) => (
-              <div key={index} className="relative">
+              <div key={index} className={`relative ${plan.popular ? 'scale-105' : ''}`}>
                 {plan.popular && (
-                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-primary-foreground px-6 py-2 rounded-full text-xs font-bold tracking-wider shadow-lg z-20">
+                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-[#14B8A6] text-white px-6 py-2 rounded-full text-xs font-bold tracking-wider shadow-lg z-20 animate-[pulse_2s_ease-in-out_infinite]">
                     MOST POPULAR
                   </div>
                 )}
                 <Card
-                  className={`p-8 hover:shadow-strong transition-all duration-500 hover:-translate-y-2 rounded-2xl animate-fade-in-up bg-gradient-to-br from-card to-card/50 ${
-                    plan.popular ? "border-primary border-2" : "border-border/50"
+                  className={`p-8 transition-all duration-500 hover:-translate-y-2 rounded-2xl animate-fade-in-up bg-gradient-to-br from-card to-card/50 ${
+                    plan.popular 
+                      ? "border-[#14B8A6] border-[3px] shadow-[0_10px_30px_rgba(20,184,166,0.15)] hover:shadow-[0_20px_40px_rgba(20,184,166,0.25)]" 
+                      : "border-border/50 hover:shadow-strong"
                   }`}
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
@@ -195,7 +197,7 @@ const LearnAndTrain = () => {
                   disabled={loadingButton === plan.type}
                   variant={plan.popular ? "default" : "outline"} 
                   size="lg" 
-                  className="w-full"
+                  className={`w-full ${plan.popular ? 'bg-[#14B8A6] hover:bg-[#0F9A8A] text-white' : ''}`}
                 >
                   {loadingButton === plan.type ? (
                     <>
