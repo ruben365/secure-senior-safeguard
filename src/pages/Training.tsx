@@ -394,11 +394,11 @@ const LearnAndTrain = () => {
               </div>
               <h3 className="text-2xl font-bold mb-2 text-center">Starter Plan</h3>
               <div className="text-center mb-2">
-                <span className="text-4xl font-bold text-primary">{getPlanPrice(39).display}</span>
+                <span key={isYearly ? 'yearly-39' : 'monthly-39'} className="text-4xl font-bold text-primary price-flip inline-block">{getPlanPrice(39).display}</span>
                 <span className="text-muted-foreground">{getPlanPrice(39).period}</span>
               </div>
               {isYearly && (
-                <div className="text-center mb-2">
+                <div className="text-center mb-2 fade-in-savings">
                   <p className="text-sm text-success font-semibold">{getPlanPrice(39).savings}</p>
                 </div>
               )}
@@ -467,11 +467,11 @@ const LearnAndTrain = () => {
               </div>
               <h3 className="text-2xl font-bold mb-2 text-center">Family Plan</h3>
               <div className="text-center mb-2">
-                <span className="text-4xl font-bold text-primary">{getPlanPrice(79).display}</span>
+                <span key={isYearly ? 'yearly-79' : 'monthly-79'} className="text-4xl font-bold text-primary price-flip inline-block">{getPlanPrice(79).display}</span>
                 <span className="text-muted-foreground">{getPlanPrice(79).period}</span>
               </div>
               {isYearly && (
-                <div className="text-center mb-2">
+                <div className="text-center mb-2 fade-in-savings">
                   <p className="text-sm text-success font-semibold">{getPlanPrice(79).savings}</p>
                 </div>
               )}
@@ -540,11 +540,11 @@ const LearnAndTrain = () => {
               </div>
               <h3 className="text-2xl font-bold mb-2 text-center">Premium Plan</h3>
               <div className="text-center mb-2">
-                <span className="text-4xl font-bold text-primary">{getPlanPrice(129).display}</span>
+                <span key={isYearly ? 'yearly-129' : 'monthly-129'} className="text-4xl font-bold text-primary price-flip inline-block">{getPlanPrice(129).display}</span>
                 <span className="text-muted-foreground">{getPlanPrice(129).period}</span>
               </div>
               {isYearly && (
-                <div className="text-center mb-2">
+                <div className="text-center mb-2 fade-in-savings">
                   <p className="text-sm text-success font-semibold">{getPlanPrice(129).savings}</p>
                 </div>
               )}

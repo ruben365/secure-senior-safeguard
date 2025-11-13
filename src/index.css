@@ -670,6 +670,22 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   animation: price-flip 0.5s ease-in-out;
 }
 
+/* Fade in animation for savings text */
+@keyframes fade-in-savings {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-savings {
+  animation: fade-in-savings 0.5s ease-out;
+}
+
 /* Gentle rotate animation for icons */
 @keyframes gentle-rotate {
   0%, 100% {
