@@ -289,19 +289,19 @@ const About = () => {
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-16">Our Certifications & Partnerships</h2>
           <div className="flex flex-wrap justify-center items-center gap-8">
-            <Card className="p-6 hover:shadow-medium transition-shadow">
+            <Card className="p-6 transition-all duration-300 hover:scale-110 hover:rotate-[5deg] hover:shadow-[0_10px_30px_rgba(0,0,0,0.15)] grayscale hover:grayscale-0 cursor-pointer">
               <div className="flex items-center gap-3">
                 <Shield className="w-8 h-8 text-accent" />
                 <span className="font-bold">BBB Accredited</span>
               </div>
             </Card>
-            <Card className="p-6 hover:shadow-medium transition-shadow">
+            <Card className="p-6 transition-all duration-300 hover:scale-110 hover:rotate-[5deg] hover:shadow-[0_10px_30px_rgba(0,0,0,0.15)] grayscale hover:grayscale-0 cursor-pointer">
               <div className="flex items-center gap-3">
                 <Award className="w-8 h-8 text-accent" />
                 <span className="font-bold">Veteran Support Certified</span>
               </div>
             </Card>
-            <Card className="p-6 hover:shadow-medium transition-shadow">
+            <Card className="p-6 transition-all duration-300 hover:scale-110 hover:rotate-[5deg] hover:shadow-[0_10px_30px_rgba(0,0,0,0.15)] grayscale hover:grayscale-0 cursor-pointer">
               <div className="flex items-center gap-3">
                 <Users2 className="w-8 h-8 text-accent" />
                 <span className="font-bold">Ohio Small Business Association</span>
