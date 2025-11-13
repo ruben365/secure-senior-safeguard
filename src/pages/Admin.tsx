@@ -3,6 +3,7 @@ import { AdminSidebar } from "@/components/AdminSidebar";
 import { AdminTopBar } from "@/components/AdminTopBar";
 import { DashboardStats } from "@/components/admin/DashboardStats";
 import { RevenueChart } from "@/components/admin/RevenueChart";
+import { RecentActivity } from "@/components/admin/RecentActivity";
 import { Card } from "@/components/ui/card";
 
 export default function Admin() {
@@ -32,8 +33,15 @@ export default function Admin() {
           {/* Dashboard Stats Cards */}
           <DashboardStats />
 
-          {/* Revenue Overview Chart */}
-          <RevenueChart />
+          {/* Revenue Overview Chart & Recent Activity */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2">
+              <RevenueChart />
+            </div>
+            <div className="lg:col-span-1">
+              <RecentActivity />
+            </div>
+          </div>
 
           {/* Additional Content Area */}
           <Card className="p-6">
