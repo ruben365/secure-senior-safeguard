@@ -785,17 +785,21 @@ const LearnAndTrain = () => {
 
       {/* Family Safety Vault Section */}
       <section className="py-16 bg-muted relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0 opacity-20 animate-gradient-shift">
           <div
             className="absolute top-20 right-1/4 w-96 h-96 bg-accent/25 rounded-full blur-3xl animate-pulse"
             style={{ animationDuration: "8s" }}
+          />
+          <div
+            className="absolute bottom-20 left-1/4 w-96 h-96 bg-primary/25 rounded-full blur-3xl animate-pulse"
+            style={{ animationDuration: "10s" }}
           />
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <Card className="max-w-4xl mx-auto p-8 hover:shadow-strong transition-all duration-500 rounded-2xl border-accent border-2 animate-fade-in-up bg-gradient-to-br from-card to-card/50">
             <div className="text-center">
               <div className="flex justify-center mb-6">
-                <div className="w-24 h-24 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center">
+                <div className="w-24 h-24 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center animate-[shield-pulse_3s_ease-in-out_infinite]">
                   <Lock className="w-12 h-12 text-primary" />
                 </div>
               </div>
@@ -822,8 +826,15 @@ const LearnAndTrain = () => {
                 Security: Bank-grade encryption, multi-factor auth, access sharing
               </p>
 
-              <Button asChild variant="default" size="lg">
-                <Link to="/safety-vault">EXPLORE SAFETY VAULT</Link>
+              <Button 
+                asChild 
+                className="bg-[#14B8A6] hover:bg-[#0F9A8A] text-white group" 
+                size="lg"
+              >
+                <Link to="/vault" className="flex items-center gap-2">
+                  <span className="text-xl group-hover:animate-[lock-shake_0.5s_ease-in-out]">🔒</span>
+                  EXPLORE SAFETY VAULT
+                </Link>
               </Button>
             </div>
           </Card>

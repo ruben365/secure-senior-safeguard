@@ -740,6 +740,31 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   }
 }
 
+/* Shield pulse animation */
+@keyframes shield-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px 10px rgba(20, 184, 166, 0.1);
+  }
+}
+
+/* Lock shake animation */
+@keyframes lock-shake {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+}
+
 /* Gentle rotate animation for icons */
 @keyframes gentle-rotate {
   0%, 100% {
