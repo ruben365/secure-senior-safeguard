@@ -27,7 +27,6 @@ import CaregiverDashboard from "./pages/portal/CaregiverDashboard";
 import HealthcareDashboard from "./pages/portal/HealthcareDashboard";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
-import InstallApp from "./pages/InstallApp";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 import { AIChat } from "./components/AIChat";
@@ -63,7 +62,6 @@ const App = () => {
             <Route path="/careers" element={<Careers />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/install" element={<InstallApp />} />
             <Route path="/application-pending" element={<ApplicationPending />} />
             <Route path="/portal" element={<ProtectedRoute><Portal /></ProtectedRoute>} />
             <Route path="/portal/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />

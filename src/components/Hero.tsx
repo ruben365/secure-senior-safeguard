@@ -5,11 +5,9 @@ import ScrollIndicator from "./ScrollIndicator";
 import { ParticleBackground } from "./ParticleBackground";
 import { FloatingShapes } from "./FloatingShapes";
 import { useImagePreload } from "@/hooks/useImagePreload";
-import TransitioningHeroBackground from "./TransitioningHeroBackground";
 
 interface HeroProps {
   backgroundImage?: string;
-  backgroundImages?: string[]; // For transitioning backgrounds
   headline?: string;
   subheadline?: string;
   children?: ReactNode;
@@ -19,11 +17,11 @@ interface HeroProps {
   showPrivacyDisclaimer?: boolean;
 }
 
-const Hero = ({ backgroundImage, backgroundImages, headline, subheadline, children, className, overlay = false, showScrollIndicator = false, showPrivacyDisclaimer = false }: HeroProps) => {
+const Hero = ({ backgroundImage, headline, subheadline, children, className, overlay = false, showScrollIndicator = false, showPrivacyDisclaimer = false }: HeroProps) => {
   const [showDisclaimer, setShowDisclaimer] = useState(true);
   
-  // Preload single background image if not using transitioning
-  const imagePreloaded = useImagePreload(backgroundImage && !backgroundImages ? [backgroundImage] : []);
+  // Preload background image
+  const imagePreloaded = useImagePreload(backgroundImage ? [backgroundImage] : []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -35,11 +33,9 @@ const Hero = ({ backgroundImage, backgroundImages, headline, subheadline, childr
 
   return (
     <div className={cn("relative min-h-[80vh] md:min-h-[90vh] flex items-center overflow-hidden", className)}>
-      {/* Background - static or transitioning */}
+      {/* Static Background - no parallax for performance */}
       <div className="absolute inset-0">
-        {backgroundImages && backgroundImages.length > 0 ? (
-          <TransitioningHeroBackground images={backgroundImages} transitionDuration={8} />
-        ) : backgroundImage ? (
+        {backgroundImage && (
           <div
             className={cn(
               "absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-300",
@@ -47,7 +43,7 @@ const Hero = ({ backgroundImage, backgroundImages, headline, subheadline, childr
             )}
             style={{ backgroundImage: `url(${backgroundImage})` }}
           />
-        ) : null}
+        )}
         
         {/* Gradient Overlay - dark to transparent */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
@@ -75,17 +71,17 @@ const Hero = ({ backgroundImage, backgroundImages, headline, subheadline, childr
       <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
         <div className="max-w-3xl mx-auto md:mx-0">
           {headline && (
-            <h1 className="text-white mb-4 md:mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl [text-shadow:0_4px_20px_rgba(139,92,246,0.4)] leading-tight font-bold">
+            <h1 className="text-white mb-6 [text-shadow:0_4px_20px_rgba(139,92,246,0.4)] leading-tight">
               {headline}
             </h1>
           )}
           {subheadline && (
-            <p className="text-white/90 text-base sm:text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 leading-relaxed">
+            <p className="text-white/90 text-xl md:text-2xl mb-8 leading-relaxed">
               {subheadline}
             </p>
           )}
           {children && (
-            <div className="space-y-3 md:space-y-0">
+            <div>
               {children}
             </div>
           )}

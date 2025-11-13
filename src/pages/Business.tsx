@@ -19,10 +19,6 @@ import businessCollaboration from "@/assets/business-collaboration.jpg";
 import teamCollaboration from "@/assets/team-collaboration.jpg";
 import heroBusiness from "@/assets/hero-business-professional.jpg";
 
-import heroBusinessCollab1 from "@/assets/hero-business-collab-1.jpg";
-import heroBusinessCollab2 from "@/assets/hero-business-collab-2.jpg";
-import heroBusinessCollab3 from "@/assets/hero-business-collab-3.jpg";
-
 const Business = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [isYearly, setIsYearly] = useState(false);
@@ -32,12 +28,6 @@ const Business = () => {
     tier?: string;
     price?: number;
   } | null>(null);
-  
-  const businessHeroImages = [
-    heroBusinessCollab1,
-    heroBusinessCollab2,
-    heroBusinessCollab3,
-  ];
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -67,7 +57,7 @@ const Business = () => {
       <Navigation />
 
       <Hero
-        backgroundImages={businessHeroImages}
+        backgroundImage={heroBusiness}
         headline="Grow Your Business with Secure AI Solutions"
         subheadline="Custom AI automation, professional websites, and industry-leading AI Service Insurance"
         showScrollIndicator={true}

@@ -33,17 +33,12 @@ import testimonial3 from "@/assets/testimonial-3.jpg";
 import testimonial5 from "@/assets/testimonial-5.jpg";
 import testimonial6 from "@/assets/testimonial-6.jpg";
 import testimonial7 from "@/assets/testimonial-7.jpg";
-import heroGrandparentsDiverse1 from "@/assets/hero-grandparents-diverse-1.jpg";
-import heroGrandparentsDiverse2 from "@/assets/hero-grandparents-diverse-2.jpg";
-import heroGrandparentsDiverse3 from "@/assets/hero-grandparents-diverse-3.jpg";
+import heroBusinessProfessional from "@/assets/hero-business-professional.jpg";
 import { useImagePreload } from "@/hooks/useImagePreload";
 
 const Index = () => {
-  const heroImages = [
-    heroGrandparentsDiverse1,
-    heroGrandparentsDiverse2,
-    heroGrandparentsDiverse3,
-  ];
+  // Preload hero image
+  useImagePreload([heroBusinessProfessional]);
 
   return (
     <div className="min-h-screen">
@@ -51,7 +46,7 @@ const Index = () => {
 
       {/* Hero Section */}
       <Hero
-        backgroundImages={heroImages}
+        backgroundImage={heroBusinessProfessional}
         headline="Protect Your Family from AI-Powered Scams"
         subheadline="Ohio's trusted source for scam prevention training and 24/7 protection services"
         showScrollIndicator={true}
