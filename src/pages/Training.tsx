@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { BookingModal } from "@/components/BookingModal";
@@ -130,7 +130,7 @@ const ScamExampleCard = ({ example, index }: { example: any; index: number }) =>
   );
 };
 
-const TrainingCard = ({ plan, index, loadingButton, setLoadingButton, navigate }: any) => {
+const TrainingCard = ({ plan, index }: { plan: any; index: number }) => {
   const { count, ref } = useCounterAnimation({ end: plan.priceNum, duration: 1000 });
   
   return (
@@ -170,23 +170,14 @@ const TrainingCard = ({ plan, index, loadingButton, setLoadingButton, navigate }
           </div>
 
           <Button 
-            onClick={() => {
-              setLoadingButton(plan.type);
-              navigate(`/contact?service=training&type=${plan.type}&price=${plan.priceNum}`);
-            }}
-            disabled={loadingButton === plan.type}
+            asChild
             variant={plan.popular ? "default" : "outline"} 
             size="lg" 
             className={`w-full ${plan.popular ? 'bg-[#14B8A6] hover:bg-[#0F9A8A] text-white' : ''}`}
           >
-            {loadingButton === plan.type ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin mr-2" />
-                Loading...
-              </>
-            ) : (
-              'Book Session'
-            )}
+            <Link to={`/contact?service=training&type=${plan.type}&price=${plan.priceNum}`}>
+              Book Session
+            </Link>
           </Button>
         </Card>
       </div>
@@ -195,10 +186,8 @@ const TrainingCard = ({ plan, index, loadingButton, setLoadingButton, navigate }
 }
 
 function LearnAndTrain() {
-  const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   const [isYearly, setIsYearly] = useState(false);
-  const [loadingButton, setLoadingButton] = useState<string | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [selectedService, setSelectedService] = useState<{
     type: 'training' | 'scamshield';
@@ -353,9 +342,6 @@ function LearnAndTrain() {
                 key={index}
                 plan={plan}
                 index={index}
-                loadingButton={loadingButton}
-                setLoadingButton={setLoadingButton}
-                navigate={navigate}
               />
             ))}
           </div>
@@ -584,23 +570,14 @@ function LearnAndTrain() {
               </div>
 
               <Button 
-                onClick={() => {
-                  setLoadingButton('starter');
-                  navigate(`/contact?service=protection&plan=starter&price=${isYearly ? Math.round(39 * 12 * 0.95) : 39}`);
-                }}
-                disabled={loadingButton === 'starter'}
+                asChild
                 variant="default" 
                 size="lg" 
                 className="w-full"
               >
-                {loadingButton === 'starter' ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin mr-2" />
-                    Loading...
-                  </>
-                ) : (
-                  'Get Started'
-                )}
+                <Link to={`/contact?service=protection&plan=starter&price=${isYearly ? Math.round(39 * 12 * 0.95) : 39}`}>
+                  Get Started
+                </Link>
               </Button>
             </Card>
 
@@ -660,23 +637,14 @@ function LearnAndTrain() {
               </div>
 
               <Button 
-                onClick={() => {
-                  setLoadingButton('family');
-                  navigate(`/contact?service=protection&plan=family&price=${isYearly ? Math.round(79 * 12 * 0.95) : 79}`);
-                }}
-                disabled={loadingButton === 'family'}
+                asChild
                 variant="default" 
                 size="lg" 
                 className="w-full"
               >
-                {loadingButton === 'family' ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin mr-2" />
-                    Loading...
-                  </>
-                ) : (
-                  'Get Started'
-                )}
+                <Link to={`/contact?service=protection&plan=family&price=${isYearly ? Math.round(79 * 12 * 0.95) : 79}`}>
+                  Get Started
+                </Link>
               </Button>
             </Card>
             </div>
@@ -737,23 +705,14 @@ function LearnAndTrain() {
               </div>
 
               <Button 
-                onClick={() => {
-                  setLoadingButton('premium');
-                  navigate(`/contact?service=protection&plan=premium&price=${isYearly ? Math.round(129 * 12 * 0.95) : 129}`);
-                }}
-                disabled={loadingButton === 'premium'}
+                asChild
                 variant="default" 
                 size="lg" 
                 className="w-full"
               >
-                {loadingButton === 'premium' ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin mr-2" />
-                    Loading...
-                  </>
-                ) : (
-                  'Get Started'
-                )}
+                <Link to={`/contact?service=protection&plan=premium&price=${isYearly ? Math.round(129 * 12 * 0.95) : 129}`}>
+                  Get Started
+                </Link>
               </Button>
             </Card>
 
@@ -802,23 +761,14 @@ function LearnAndTrain() {
               </div>
 
               <Button 
-                onClick={() => {
-                  setLoadingButton('customized');
-                  navigate('/contact?subject=Custom Protection Plan');
-                }}
-                disabled={loadingButton === 'customized'}
+                asChild
                 variant="outline" 
                 size="lg" 
                 className="w-full text-primary border-primary hover:bg-primary hover:text-white transition-all duration-300"
               >
-                {loadingButton === 'customized' ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin mr-2" />
-                    Loading...
-                  </>
-                ) : (
-                  'Request Quote'
-                )}
+                <Link to="/contact?subject=Custom Protection Plan">
+                  Request Quote
+                </Link>
               </Button>
             </Card>
           </div>
