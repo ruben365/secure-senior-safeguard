@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -8,8 +9,45 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Heart, Lock, BookOpen, Users2, Shield, DollarSign, Award, MapPin } from "lucide-react";
 import heroAbout from "@/assets/hero-about-professional.jpg";
+import { supabase } from "@/integrations/supabase/client";
 
 const About = () => {
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    checkAdminStatus();
+  }, []);
+
+  const checkAdminStatus = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) {
+        setIsAdmin(false);
+        setIsLoading(false);
+        return;
+      }
+
+      const { data: roles, error } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", user.id);
+
+      if (error) {
+        console.error("Error checking admin status:", error);
+        setIsAdmin(false);
+      } else {
+        setIsAdmin(roles && roles.length > 0);
+      }
+    } catch (error) {
+      console.error("Error in checkAdminStatus:", error);
+      setIsAdmin(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -180,7 +218,31 @@ const About = () => {
           <p className="text-center text-xl text-muted-foreground mb-16 max-w-3xl mx-auto">
             Dedicated professionals committed to protecting families and empowering businesses
           </p>
-          {/* Team members will be added here */}
+          
+          {!isLoading && isAdmin && (
+            <div className="max-w-4xl mx-auto animate-fade-in">
+              <Card 
+                className="border-[3px] border-dashed border-[#6D28D9] bg-[#6D28D9]/5 rounded-2xl p-10 min-h-[300px] flex items-center justify-center"
+                style={{ animationDelay: '0.2s' }}
+              >
+                <div className="flex flex-col items-center text-center gap-6">
+                  <div className="text-[64px] leading-none">👥</div>
+                  <div>
+                    <h3 className="text-3xl font-bold mb-2">Your Team</h3>
+                    <p className="text-lg text-muted-foreground mb-6">
+                      Add team members to showcase your expert staff
+                    </p>
+                    <Button size="lg" className="mb-4">
+                      Add Team Member
+                    </Button>
+                    <p className="text-sm text-muted-foreground italic">
+                      Current team: <span className="font-semibold text-foreground">Ruben Nkulu (Founder)</span>
+                    </p>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          )}
         </div>
       </section>
 
