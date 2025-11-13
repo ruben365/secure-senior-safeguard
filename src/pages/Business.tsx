@@ -143,9 +143,9 @@ const Business = () => {
           <h2 className="text-center mb-12">What We Build</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <ScrollReveal animation="fade-up" delay={0}>
-              <Card className="p-8 hover:shadow-medium transition-shadow">
+              <Card className="group p-8 transition-all duration-400 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(109,40,217,0.15)]">
                 <div className="flex items-start gap-4">
-                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-400 group-hover:rotate-[5deg]">
                     <Phone className="w-8 h-8 text-accent" />
                   </div>
                   <div>
@@ -159,9 +159,9 @@ const Business = () => {
             </ScrollReveal>
 
             <ScrollReveal animation="fade-up" delay={150}>
-              <Card className="p-8 hover:shadow-medium transition-shadow">
+              <Card className="group p-8 transition-all duration-400 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(109,40,217,0.15)]">
                 <div className="flex items-start gap-4">
-                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-400 group-hover:rotate-[5deg]">
                     <Mail className="w-8 h-8 text-accent" />
                   </div>
                   <div>
@@ -175,9 +175,9 @@ const Business = () => {
             </ScrollReveal>
 
             <ScrollReveal animation="fade-up" delay={300}>
-              <Card className="p-8 hover:shadow-medium transition-shadow">
+              <Card className="group p-8 transition-all duration-400 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(109,40,217,0.15)]">
                 <div className="flex items-start gap-4">
-                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-400 group-hover:rotate-[5deg]">
                     <MessageSquare className="w-8 h-8 text-accent" />
                   </div>
                   <div>
@@ -191,9 +191,9 @@ const Business = () => {
             </ScrollReveal>
 
             <ScrollReveal animation="fade-up" delay={450}>
-              <Card className="p-8 hover:shadow-medium transition-shadow">
+              <Card className="group p-8 transition-all duration-400 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(109,40,217,0.15)]">
                 <div className="flex items-start gap-4">
-                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-400 group-hover:rotate-[5deg]">
                     <Calendar className="w-8 h-8 text-accent" />
                   </div>
                   <div>
