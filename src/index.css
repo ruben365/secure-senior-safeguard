@@ -614,3 +614,22 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
 .gentle-rotate {
   animation: gentle-rotate 3s ease-in-out infinite;
 }
+
+/* Checkmark pop-in animation */
+@keyframes checkmark-pop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.checkmark-pop {
+  animation: checkmark-pop 0.4s ease-out forwards;
+}

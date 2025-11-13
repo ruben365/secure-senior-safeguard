@@ -831,45 +831,53 @@ const Business = () => {
           <h2 className="text-center mb-12">Why InVision for Your AI</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
             <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <CheckCircle className="w-6 h-6 text-success flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="text-xl font-bold mb-2">Security-First Design</h3>
-                  <p className="text-muted-foreground">
-                    We audit data flows, enforce least-privilege access, and vet vendors. Your customer data stays protected.
-                  </p>
+              <ScrollReveal animation="slide-left" delay={0} threshold={0.2}>
+                <div className="flex items-start gap-4">
+                  <CheckCircle className="w-6 h-6 text-success flex-shrink-0 mt-1 checkmark-pop" style={{ animationDelay: '0.6s' }} />
+                  <div>
+                    <h3 className="text-xl font-bold mb-2">Security-First Design</h3>
+                    <p className="text-muted-foreground">
+                      We audit data flows, enforce least-privilege access, and vet vendors. Your customer data stays protected.
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </ScrollReveal>
 
-              <div className="flex items-start gap-4">
-                <CheckCircle className="w-6 h-6 text-success flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="text-xl font-bold mb-2">Actually Trained</h3>
-                  <p className="text-muted-foreground">
-                    We don't just "set it and forget it." We train your AI on YOUR business, test thoroughly, and optimize for 30 days.
-                  </p>
+              <ScrollReveal animation="slide-left" delay={100} threshold={0.2}>
+                <div className="flex items-start gap-4">
+                  <CheckCircle className="w-6 h-6 text-success flex-shrink-0 mt-1 checkmark-pop" style={{ animationDelay: '0.7s' }} />
+                  <div>
+                    <h3 className="text-xl font-bold mb-2">Actually Trained</h3>
+                    <p className="text-muted-foreground">
+                      We don't just "set it and forget it." We train your AI on YOUR business, test thoroughly, and optimize for 30 days.
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </ScrollReveal>
 
-              <div className="flex items-start gap-4">
-                <CheckCircle className="w-6 h-6 text-success flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="text-xl font-bold mb-2">No Vendor Lock-In</h3>
-                  <p className="text-muted-foreground">
-                    We build on open standards. If you want to take it in-house later, you can.
-                  </p>
+              <ScrollReveal animation="slide-left" delay={200} threshold={0.2}>
+                <div className="flex items-start gap-4">
+                  <CheckCircle className="w-6 h-6 text-success flex-shrink-0 mt-1 checkmark-pop" style={{ animationDelay: '0.8s' }} />
+                  <div>
+                    <h3 className="text-xl font-bold mb-2">No Vendor Lock-In</h3>
+                    <p className="text-muted-foreground">
+                      We build on open standards. If you want to take it in-house later, you can.
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </ScrollReveal>
 
-              <div className="flex items-start gap-4">
-                <CheckCircle className="w-6 h-6 text-success flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="text-xl font-bold mb-2">Plain-English Handoff</h3>
-                  <p className="text-muted-foreground">
-                    Your team gets documentation they can actually understand—no tech jargon required.
-                  </p>
+              <ScrollReveal animation="slide-left" delay={300} threshold={0.2}>
+                <div className="flex items-start gap-4">
+                  <CheckCircle className="w-6 h-6 text-success flex-shrink-0 mt-1 checkmark-pop" style={{ animationDelay: '0.9s' }} />
+                  <div>
+                    <h3 className="text-xl font-bold mb-2">Plain-English Handoff</h3>
+                    <p className="text-muted-foreground">
+                      Your team gets documentation they can actually understand—no tech jargon required.
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </ScrollReveal>
             </div>
 
             <div className="flex items-center">
