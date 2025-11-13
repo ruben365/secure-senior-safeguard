@@ -34,7 +34,8 @@ const contactSchema = z.object({
   email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
   phone: z.string().max(20, "Phone number must be less than 20 characters").optional(),
   interest: z.string().min(1, "Please select your interest"),
-  message: z.string().trim().min(1, "Message is required").max(1000, "Message must be less than 1000 characters"),
+  language: z.string().optional(),
+  message: z.string().trim().min(10, "Message must be at least 10 characters").max(1000, "Message must be less than 1000 characters"),
 });
 
 const Contact = () => {
@@ -49,7 +50,6 @@ const Contact = () => {
     interest: "",
     language: "english",
     message: "",
-    preferredDate: "",
   });
 
   // Pre-select service based on query parameter
@@ -110,7 +110,6 @@ const Contact = () => {
         interest: "",
         language: "english",
         message: "",
-        preferredDate: "",
       });
       setSelectedDate(undefined);
     } catch (error: any) {
@@ -272,7 +271,7 @@ const Contact = () => {
                       <SelectTrigger className="h-14 text-base border-2 rounded-xl">
                         <SelectValue placeholder="Select an option" />
                       </SelectTrigger>
-                      <SelectContent>
+                    <SelectContent>
                         <SelectItem value="training" disabled>Select an option</SelectItem>
                         <SelectItem value="scam-protection-training">Scam Protection Training</SelectItem>
                         <SelectItem value="family-training">Family Training Session</SelectItem>
@@ -286,57 +285,62 @@ const Contact = () => {
                     </Select>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label htmlFor="language" className="block text-sm font-bold text-foreground">
-                        Preferred Language
-                      </label>
-                      <Select
-                        value={formData.language}
-                        onValueChange={(value) => setFormData({ ...formData, language: value })}
-                        disabled={isSubmitting}
-                      >
-                        <SelectTrigger className="h-14 text-base border-2 rounded-xl">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="english">English 🇺🇸</SelectItem>
-                          <SelectItem value="french">Français 🇫🇷</SelectItem>
-                          <SelectItem value="spanish">Español 🇪🇸</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
+                  <div className="space-y-2">
+                    <label htmlFor="language" className="block text-sm font-bold text-foreground">
+                      Preferred Language
+                    </label>
+                    <Select
+                      value={formData.language}
+                      onValueChange={(value) => setFormData({ ...formData, language: value })}
+                      disabled={isSubmitting}
+                    >
+                      <SelectTrigger id="language" className="h-14 text-base border-2 focus:border-primary/50 rounded-xl">
+                        <SelectValue placeholder="Select language" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="english">🇺🇸 English</SelectItem>
+                        <SelectItem value="french">🇫🇷 Français</SelectItem>
+                        <SelectItem value="spanish">🇪🇸 Español</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-                    <div className="space-y-2">
-                      <label htmlFor="preferredDate" className="block text-sm font-bold text-foreground">
-                        Preferred Call/Meeting Date
-                      </label>
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <Button
-                            variant="outline"
-                            className={cn(
-                              "w-full h-14 justify-start text-left font-normal border-2 rounded-xl text-base",
-                              !selectedDate && "text-muted-foreground"
-                            )}
-                            disabled={isSubmitting}
-                          >
-                            <CalendarIcon className="mr-2 h-5 w-5" />
-                            {selectedDate ? format(selectedDate, "PPP") : "Pick a date"}
-                          </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
-                          <Calendar
-                            mode="single"
-                            selected={selectedDate}
-                            onSelect={setSelectedDate}
-                            disabled={(date) => date < new Date()}
-                            initialFocus
-                            className={cn("p-3 pointer-events-auto")}
-                          />
-                        </PopoverContent>
-                      </Popover>
-                    </div>
+                  <div className="space-y-2">
+                    <label htmlFor="preferredDate" className="block text-sm font-bold text-foreground">
+                      Preferred Call/Meeting Date
+                    </label>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          id="preferredDate"
+                          variant="outline"
+                          disabled={isSubmitting}
+                          className={cn(
+                            "h-14 w-full justify-start text-left font-normal text-base border-2 hover:border-primary/50 rounded-xl",
+                            !selectedDate && "text-muted-foreground"
+                          )}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {selectedDate ? format(selectedDate, "PPP") : <span>Pick a date</span>}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={selectedDate}
+                          onSelect={setSelectedDate}
+                          disabled={(date) => {
+                            const today = new Date();
+                            today.setHours(0, 0, 0, 0);
+                            const maxDate = new Date();
+                            maxDate.setDate(maxDate.getDate() + 60);
+                            return date < today || date > maxDate;
+                          }}
+                          initialFocus
+                          className={cn("p-3 pointer-events-auto")}
+                        />
+                      </PopoverContent>
+                    </Popover>
                   </div>
 
                   <div className="space-y-2">
@@ -346,13 +350,17 @@ const Contact = () => {
                     <Textarea
                       id="message"
                       required
-                      rows={6}
                       placeholder="Tell us how we can help you..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       disabled={isSubmitting}
+                      rows={5}
+                      maxLength={1000}
                       className="text-base border-2 focus:border-primary/50 rounded-xl resize-none"
                     />
+                    <p className="text-sm text-muted-foreground text-right">
+                      {formData.message.length}/1000 characters
+                    </p>
                   </div>
 
                   <div className="flex items-start gap-3 p-4 bg-muted/50 rounded-xl border border-border/50">
