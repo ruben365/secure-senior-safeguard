@@ -255,45 +255,15 @@ const About = () => {
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-16">Service Areas</h2>
           <div className="max-w-4xl mx-auto">
-            <Card className="p-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <MapPin className="w-8 h-8 text-accent" />
-                    <h3 className="text-2xl font-bold">Headquarters</h3>
-                  </div>
-                  <p className="text-xl mb-4">850 Euclid Ave Ste 819 #4685</p>
-                  <p className="text-xl mb-4">Cleveland, OH 44114</p>
-                  <p className="text-muted-foreground mb-4">Service Areas:</p>
-                  <ul className="space-y-2 text-muted-foreground">
-                    <li>• Cleveland Metro</li>
-                    <li>• Akron</li>
-                    <li>• Canton</li>
-                    <li>• Youngstown</li>
-                    <li>• Columbus</li>
-                    <li>• Nationwide Service Available</li>
-                  </ul>
+            <Card className="p-12 text-center">
+              <div className="space-y-4">
+                <div className="flex items-center justify-center gap-2 text-lg text-gray-700">
+                  <MapPin className="w-5 h-5" />
+                  <span>Serving Dayton, Kettering & Greater Miami Valley</span>
                 </div>
-
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <Shield className="w-8 h-8 text-accent" />
-                    <h3 className="text-2xl font-bold">Nationwide Service</h3>
-                  </div>
-                  <ul className="space-y-4 text-muted-foreground">
-                    <li className="flex items-start gap-2">
-                      <span className="text-accent">✓</span>
-                      <span>Live Zoom training available to all 50 states</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-accent">✓</span>
-                      <span>In-person training available nationwide (travel covered by InVision)</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-accent">✓</span>
-                      <span>Family Scam Shield available anywhere</span>
-                    </li>
-                  </ul>
+                <div className="flex items-center justify-center gap-2 text-lg text-gray-700">
+                  <MapPin className="w-5 h-5" />
+                  <span>Nationwide training available via Zoom</span>
                 </div>
               </div>
             </Card>
