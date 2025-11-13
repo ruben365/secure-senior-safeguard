@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -11,6 +12,7 @@ import MakingADifference from "@/components/MakingADifference";
 import { TestimonialForm } from "@/components/TestimonialForm";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Heart,
   Shield,
@@ -32,8 +34,46 @@ import heroBusinessProfessional from "@/assets/hero-business-professional.jpg";
 import { useImagePreload } from "@/hooks/useImagePreload";
 
 const Index = () => {
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  
   // Preload hero image
   useImagePreload([heroBusinessProfessional]);
+
+  useEffect(() => {
+    checkAdminStatus();
+  }, []);
+
+  const checkAdminStatus = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) {
+        setIsAdmin(false);
+        setIsLoading(false);
+        return;
+      }
+
+      // Check if user has admin or staff role
+      const { data: roles, error } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", user.id)
+        .in("role", ["admin", "staff"]);
+
+      if (error) {
+        console.error("Error checking admin status:", error);
+        setIsAdmin(false);
+      } else {
+        setIsAdmin(roles && roles.length > 0);
+      }
+    } catch (error) {
+      console.error("Error in checkAdminStatus:", error);
+      setIsAdmin(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen">
@@ -399,10 +439,18 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Text Testimonials - Empty State */}
-          <div className="py-5">
-            <TestimonialForm />
-          </div>
+          {/* Text Testimonials - Conditional Visibility */}
+          {!isLoading && isAdmin ? (
+            <div className="py-5">
+              <div className="border-2 border-dashed border-primary rounded-2xl p-12 text-center">
+                <div className="text-5xl mb-4">📝</div>
+                <p className="text-muted-foreground" style={{ fontSize: "16px" }}>Real testimonials coming soon</p>
+                <p className="text-[#666] italic mt-4" style={{ fontSize: "12px" }}>
+                  Add testimonials via Dashboard → Testimonials
+                </p>
+              </div>
+            </div>
+          ) : null}
         </div>
       </section>
 
