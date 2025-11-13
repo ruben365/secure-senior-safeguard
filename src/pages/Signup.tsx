@@ -47,6 +47,7 @@ const Signup = () => {
   const [step, setStep] = useState(1);
   const [selectedRole, setSelectedRole] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isFlipping, setIsFlipping] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -330,6 +331,17 @@ const Signup = () => {
     setStep(step + 1);
   };
 
+  const handleRoleSelect = (role: string) => {
+    setSelectedRole(role);
+    setIsFlipping(true);
+    
+    // Flip animation then proceed
+    setTimeout(() => {
+      setStep(2);
+      setIsFlipping(false);
+    }, 800);
+  };
+
   const handleBack = () => setStep(step - 1);
 
   const handleSubmit = async () => {
@@ -573,99 +585,131 @@ const Signup = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Business Account Card */}
-                <Card
-                  className={`relative p-10 cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group ${
-                    selectedRole === "senior" 
-                      ? 'border-2 border-purple-600 shadow-[0_0_30px_rgba(168,85,247,0.4)] bg-gradient-to-br from-purple-500/10 to-purple-600/10'
-                      : 'border-2 border-border hover:border-purple-600/50'
-                  }`}
-                  onClick={() => setSelectedRole("senior")}
+                <div 
+                  className="relative h-[400px] cursor-pointer"
+                  style={{ perspective: '1000px' }}
+                  onClick={() => handleRoleSelect("senior")}
                 >
-                  {/* Selection Indicator */}
-                  <div className={`absolute top-4 right-4 w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all ${
-                    selectedRole === "senior" 
-                      ? 'border-purple-600 bg-purple-600' 
-                      : 'border-muted-foreground/30 bg-transparent'
-                  }`}>
-                    {selectedRole === "senior" && <CheckCircle2 className="w-5 h-5 text-white" />}
-                  </div>
-
-                  {/* Icon */}
-                  <div className="flex justify-center mb-6">
-                    <div className="text-7xl">💼</div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="text-center space-y-3">
-                    <h3 className="text-2xl font-bold">Business Account</h3>
-                    <p className="text-muted-foreground">
-                      Get AI solutions, websites, or insurance for your business
-                    </p>
-                  </div>
-
-                  {/* Button */}
-                  <Button
-                    type="button"
-                    className={`w-full mt-6 h-12 text-base font-semibold transition-all ${
-                      selectedRole === "senior"
-                        ? 'bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800'
-                        : 'bg-muted hover:bg-muted/80'
+                  <div 
+                    className={`relative w-full h-full transition-all duration-600 ${
+                      isFlipping && selectedRole === "senior" ? '[transform:rotateY(180deg)]' : ''
                     }`}
-                    onClick={() => setSelectedRole("senior")}
+                    style={{ 
+                      transformStyle: 'preserve-3d',
+                      transition: 'transform 0.6s'
+                    }}
                   >
-                    Create Business Account
-                  </Button>
-                </Card>
+                    {/* Front of card */}
+                    <Card
+                      className={`absolute w-full h-full p-10 border-2 border-border transition-all duration-300 hover:scale-105 hover:shadow-[0_20px_50px_rgba(168,85,247,0.5)] hover:border-purple-600 hover:border-2 group`}
+                      style={{ backfaceVisibility: 'hidden' }}
+                    >
+                      {/* Icon */}
+                      <div className="flex justify-center mb-6">
+                        <div className="text-7xl group-hover:animate-bounce transition-all">💼</div>
+                      </div>
+
+                      {/* Content */}
+                      <div className="text-center space-y-3">
+                        <h3 className="text-2xl font-bold">Business Account</h3>
+                        <p className="text-muted-foreground">
+                          Get AI solutions, websites, or insurance for your business
+                        </p>
+                      </div>
+
+                      {/* Button */}
+                      <Button
+                        type="button"
+                        className="w-full mt-6 h-12 text-base font-semibold bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 transition-all"
+                      >
+                        Create Business Account
+                      </Button>
+
+                      {/* Glow effect */}
+                      <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity bg-purple-600/10 -z-10" />
+                    </Card>
+
+                    {/* Back of card */}
+                    <Card
+                      className="absolute w-full h-full p-10 border-2 border-purple-600 bg-gradient-to-br from-purple-500/20 to-purple-600/20 flex items-center justify-center"
+                      style={{ 
+                        backfaceVisibility: 'hidden',
+                        transform: 'rotateY(180deg)'
+                      }}
+                    >
+                      <div className="text-center">
+                        <Loader2 className="w-12 h-12 text-purple-600 animate-spin mx-auto mb-4" />
+                        <p className="text-lg font-semibold text-purple-600">Loading...</p>
+                      </div>
+                    </Card>
+                  </div>
+                </div>
 
                 {/* Staff/Partner Account Card */}
-                <Card
-                  className={`relative p-10 cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group ${
-                    selectedRole === "staff" 
-                      ? 'border-2 border-teal-600 shadow-[0_0_30px_rgba(20,184,166,0.4)] bg-gradient-to-br from-teal-500/10 to-teal-600/10'
-                      : 'border-2 border-border hover:border-teal-600/50'
-                  }`}
-                  onClick={() => setSelectedRole("staff")}
+                <div 
+                  className="relative h-[400px] cursor-pointer"
+                  style={{ perspective: '1000px' }}
+                  onClick={() => handleRoleSelect("staff")}
                 >
-                  {/* Selection Indicator */}
-                  <div className={`absolute top-4 right-4 w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all ${
-                    selectedRole === "staff" 
-                      ? 'border-teal-600 bg-teal-600' 
-                      : 'border-muted-foreground/30 bg-transparent'
-                  }`}>
-                    {selectedRole === "staff" && <CheckCircle2 className="w-5 h-5 text-white" />}
-                  </div>
-
-                  {/* Icon */}
-                  <div className="flex justify-center mb-6">
-                    <div className="text-7xl">👤</div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="text-center space-y-3">
-                    <h3 className="text-2xl font-bold">Staff Access</h3>
-                    <p className="text-muted-foreground">
-                      Request access to InVision Network internal systems
-                    </p>
-                  </div>
-
-                  {/* Button */}
-                  <Button
-                    type="button"
-                    className={`w-full mt-6 h-12 text-base font-semibold transition-all ${
-                      selectedRole === "staff"
-                        ? 'bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800'
-                        : 'bg-muted hover:bg-muted/80'
+                  <div 
+                    className={`relative w-full h-full transition-all duration-600 ${
+                      isFlipping && selectedRole === "staff" ? '[transform:rotateY(180deg)]' : ''
                     }`}
-                    onClick={() => setSelectedRole("staff")}
+                    style={{ 
+                      transformStyle: 'preserve-3d',
+                      transition: 'transform 0.6s'
+                    }}
                   >
-                    Request Staff Access
-                  </Button>
+                    {/* Front of card */}
+                    <Card
+                      className={`absolute w-full h-full p-10 border-2 border-border transition-all duration-300 hover:scale-105 hover:shadow-[0_20px_50px_rgba(20,184,166,0.5)] hover:border-teal-600 hover:border-2 group`}
+                      style={{ backfaceVisibility: 'hidden' }}
+                    >
+                      {/* Icon */}
+                      <div className="flex justify-center mb-6">
+                        <div className="text-7xl group-hover:animate-bounce transition-all">👤</div>
+                      </div>
 
-                  {/* Note */}
-                  <p className="text-xs text-muted-foreground text-center mt-3 italic">
-                    Requires admin approval
-                  </p>
-                </Card>
+                      {/* Content */}
+                      <div className="text-center space-y-3">
+                        <h3 className="text-2xl font-bold">Staff Access</h3>
+                        <p className="text-muted-foreground">
+                          Request access to InVision Network internal systems
+                        </p>
+                      </div>
+
+                      {/* Button */}
+                      <Button
+                        type="button"
+                        className="w-full mt-6 h-12 text-base font-semibold bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 transition-all"
+                      >
+                        Request Staff Access
+                      </Button>
+
+                      {/* Note */}
+                      <p className="text-xs text-muted-foreground text-center mt-3 italic">
+                        Requires admin approval
+                      </p>
+
+                      {/* Glow effect */}
+                      <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity bg-teal-600/10 -z-10" />
+                    </Card>
+
+                    {/* Back of card */}
+                    <Card
+                      className="absolute w-full h-full p-10 border-2 border-teal-600 bg-gradient-to-br from-teal-500/20 to-teal-600/20 flex items-center justify-center"
+                      style={{ 
+                        backfaceVisibility: 'hidden',
+                        transform: 'rotateY(180deg)'
+                      }}
+                    >
+                      <div className="text-center">
+                        <Loader2 className="w-12 h-12 text-teal-600 animate-spin mx-auto mb-4" />
+                        <p className="text-lg font-semibold text-teal-600">Loading...</p>
+                      </div>
+                    </Card>
+                  </div>
+                </div>
               </div>
             </div>
           )}
