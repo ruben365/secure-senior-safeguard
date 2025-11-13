@@ -21,6 +21,7 @@ import { useAIChat } from "@/contexts/AIChatContext";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import customerSupport from "@/assets/customer-support.jpg";
+import heroContact from "@/assets/hero-contact-new.jpg";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
@@ -93,7 +94,7 @@ const Contact = () => {
       <Navigation />
 
       <Hero
-        useTransitioningBackground={true}
+        backgroundImage={heroContact}
         headline="Let's Protect Your Family Together"
         subheadline="Expert guidance is just a message away. We respond within 24 hours."
         showScrollIndicator={true}

@@ -30,6 +30,7 @@ import {
   Image as ImageIcon,
 } from "lucide-react";
 import trainingSession from "@/assets/training-session.jpg";
+import heroTraining from "@/assets/hero-training-new.jpg";
 
 const LearnAndTrain = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -63,7 +64,7 @@ const LearnAndTrain = () => {
 
       {/* Hero Section */}
       <Hero
-        useTransitioningBackground={true}
+        backgroundImage={heroTraining}
         headline="Learn How to Recognize and Stop Scams"
         subheadline="Professional training programs and 24/7 protection services designed for real-world safety"
         showScrollIndicator={true}

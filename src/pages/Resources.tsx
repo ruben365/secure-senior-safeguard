@@ -10,6 +10,7 @@ import { Card } from "@/components/ui/card";
 import { PurchaseModal } from "@/components/PurchaseModal";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Download, Shield, Wifi, KeyRound, Heart, FileText, ShoppingCart } from "lucide-react";
+import heroResources from "@/assets/hero-resources-new.jpg";
 
 const Resources = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -108,7 +109,7 @@ const Resources = () => {
 
       {/* Hero */}
       <Hero
-        useTransitioningBackground={true}
+        backgroundImage={heroResources}
         headline="Resources & Tools"
         subheadline="Guides, security products, and answers to your questions."
         showScrollIndicator={true}

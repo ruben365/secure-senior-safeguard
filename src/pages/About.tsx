@@ -11,6 +11,7 @@ import teamMember1 from "@/assets/team-member-1.jpg";
 import teamMember2 from "@/assets/team-member-2.jpg";
 import teamMember3 from "@/assets/team-member-3.jpg";
 import teamMember4 from "@/assets/team-member-4.jpg";
+import heroAbout from "@/assets/hero-about-professional.jpg";
 
 const About = () => {
   return (
@@ -18,7 +19,7 @@ const About = () => {
       <Navigation />
 
       <Hero
-        useTransitioningBackground={true}
+        backgroundImage={heroAbout}
         headline="Your Partner in AI Safety and Security"
         subheadline="Locally owned in Ohio, protecting families and businesses nationwide"
         showScrollIndicator={true}

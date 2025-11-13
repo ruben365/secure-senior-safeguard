@@ -17,6 +17,7 @@ import testimonial3 from "@/assets/testimonial-3.jpg";
 import testimonial4 from "@/assets/testimonial-4.jpg";
 import businessCollaboration from "@/assets/business-collaboration.jpg";
 import teamCollaboration from "@/assets/team-collaboration.jpg";
+import heroBusiness from "@/assets/hero-business-professional.jpg";
 
 const Business = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -56,7 +57,7 @@ const Business = () => {
       <Navigation />
 
       <Hero
-        useTransitioningBackground={true}
+        backgroundImage={heroBusiness}
         headline="Grow Your Business with Secure AI Solutions"
         subheadline="Custom AI automation, professional websites, and industry-leading AI Service Insurance"
         showScrollIndicator={true}

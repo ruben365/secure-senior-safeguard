@@ -1,14 +1,12 @@
 import { ReactNode, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Shield } from "lucide-react";
-import TransitioningBackground from "./TransitioningBackground";
 import ScrollIndicator from "./ScrollIndicator";
 import { ParticleBackground } from "./ParticleBackground";
 import { FloatingShapes } from "./FloatingShapes";
 
 interface HeroProps {
   backgroundImage?: string;
-  useTransitioningBackground?: boolean;
   headline?: string;
   subheadline?: string;
   children?: ReactNode;
@@ -18,7 +16,7 @@ interface HeroProps {
   showPrivacyDisclaimer?: boolean;
 }
 
-const Hero = ({ backgroundImage, useTransitioningBackground = false, headline, subheadline, children, className, overlay = false, showScrollIndicator = false, showPrivacyDisclaimer = false }: HeroProps) => {
+const Hero = ({ backgroundImage, headline, subheadline, children, className, overlay = false, showScrollIndicator = false, showPrivacyDisclaimer = false }: HeroProps) => {
   const [scrollY, setScrollY] = useState(0);
   const [showDisclaimer, setShowDisclaimer] = useState(true);
 
@@ -49,14 +47,12 @@ const Hero = ({ backgroundImage, useTransitioningBackground = false, headline, s
           willChange: 'transform'
         }}
       >
-        {useTransitioningBackground ? (
-          <TransitioningBackground />
-        ) : backgroundImage ? (
+        {backgroundImage && (
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${backgroundImage})` }}
           />
-        ) : null}
+        )}
         
         {/* Gradient Overlay - dark to transparent */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />

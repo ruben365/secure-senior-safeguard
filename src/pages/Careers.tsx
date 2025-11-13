@@ -23,6 +23,7 @@ import {
   Award,
 } from "lucide-react";
 import teamCollaboration from "@/assets/team-collaboration.jpg";
+import heroCareers from "@/assets/hero-careers-new.jpg";
 import customerSupport from "@/assets/customer-support.jpg";
 
 const Careers = () => {
@@ -199,7 +200,7 @@ const Careers = () => {
       <Navigation />
 
       <Hero
-        useTransitioningBackground={true}
+        backgroundImage={heroCareers}
         headline="Join Our Team"
         subheadline="Help protect Ohio families and empower local businesses with technology"
         showScrollIndicator={true}
