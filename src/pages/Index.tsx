@@ -414,10 +414,41 @@ const Index = () => {
             Real stories from real people protected by InVision Network
           </p>
 
-          {/* Video Testimonials Section */}
-          <div className="mb-12">
-            <h3 className="text-2xl font-bold text-center mb-6">Video Testimonials</h3>
-          </div>
+          {/* Video Testimonials Section - Admin Only */}
+          {!isLoading && isAdmin && (
+            <div className="mb-12">
+              <h3 className="text-2xl font-bold text-center mb-6">Video Testimonials</h3>
+              <div 
+                className="w-full flex flex-col items-center justify-center text-center"
+                style={{
+                  minHeight: "200px",
+                  border: "4px dashed #6D28D9",
+                  borderRadius: "12px",
+                  backgroundColor: "rgba(243, 232, 255, 0.5)",
+                  padding: "40px 20px"
+                }}
+              >
+                <div className="text-[64px] mb-4">🎥</div>
+                <h4 className="text-2xl font-bold mb-3" style={{ color: "#6D28D9" }}>
+                  Video Testimonials
+                </h4>
+                <p className="text-base text-muted-foreground mb-6 max-w-md">
+                  Upload customer video testimonials to showcase on your homepage
+                </p>
+                <Button 
+                  style={{ 
+                    backgroundColor: "#6D28D9",
+                    color: "white",
+                    padding: "12px 24px",
+                    borderRadius: "8px"
+                  }}
+                  className="hover:opacity-90"
+                >
+                  Upload First Video
+                </Button>
+              </div>
+            </div>
+          )}
 
           {/* Text Testimonials - Conditional Visibility */}
           {!isLoading && isAdmin ? (
