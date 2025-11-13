@@ -16,6 +16,8 @@ import {
   AreaChart,
 } from "recharts";
 import { motion } from "framer-motion";
+import { useSkeletonTransition } from "@/hooks/useSkeletonTransition";
+import { ChartSkeleton } from "./ChartSkeleton";
 
 type TimeFrame = "6months" | "12months" | "alltime";
 
@@ -35,6 +37,7 @@ export function RevenueChart() {
     highest: { amount: 0, month: "" },
   });
   const { toast } = useToast();
+  const { showSkeleton, showContent } = useSkeletonTransition({ isLoading: loading });
 
   useEffect(() => {
     fetchRevenueData();
@@ -215,11 +218,18 @@ export function RevenueChart() {
         </div>
 
         {/* Chart */}
-        {loading ? (
-          <div className="h-80 flex items-center justify-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-          </div>
-        ) : chartData.length > 0 ? (
+        <div className="h-80 relative">
+          {/* Skeleton state */}
+          {showSkeleton && (
+            <div className={`absolute inset-0 ${!loading ? 'loading-fade-out' : ''}`}>
+              <ChartSkeleton />
+            </div>
+          )}
+
+          {/* Real content */}
+          {showContent && (
+            <div className="content-fade-in">
+              {chartData.length > 0 ? (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -278,12 +288,15 @@ export function RevenueChart() {
                 />
               </AreaChart>
             </ResponsiveContainer>
-          </motion.div>
-        ) : (
-          <div className="h-80 flex items-center justify-center text-muted-foreground">
-            No revenue data available for this period
-          </div>
-        )}
+              </motion.div>
+              ) : (
+                <div className="h-80 flex items-center justify-center text-muted-foreground">
+                  No revenue data available for this period
+                </div>
+              )}
+            </div>
+          )}
+        </div>
 
         {/* Data Summary */}
         {!loading && chartData.length > 0 && (

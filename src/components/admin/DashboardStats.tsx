@@ -3,6 +3,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { DashboardStatCard } from "./DashboardStatCard";
 import { Users, DollarSign, RefreshCw, AlertTriangle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useSkeletonTransition } from "@/hooks/useSkeletonTransition";
+import { StatsCardSkeleton } from "@/components/StatsCardSkeleton";
 
 interface DashboardData {
   totalClients: number;
@@ -26,6 +28,7 @@ export function DashboardStats() {
   });
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
+  const { showSkeleton, showContent } = useSkeletonTransition({ isLoading: loading });
 
   useEffect(() => {
     fetchDashboardData();
@@ -135,21 +138,20 @@ export function DashboardStats() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {[...Array(4)].map((_, i) => (
-          <div
-            key={i}
-            className="h-48 rounded-xl bg-muted/50 animate-pulse"
-          />
-        ))}
-      </div>
-    );
-  }
-
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+      {/* Skeleton state */}
+      {showSkeleton && (
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 absolute inset-0 ${!loading ? 'loading-fade-out' : ''}`}>
+          {[...Array(4)].map((_, i) => (
+            <StatsCardSkeleton key={i} />
+          ))}
+        </div>
+      )}
+
+      {/* Real content */}
+      {showContent && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 content-fade-in">
       <DashboardStatCard
         icon={Users}
         iconBgColor="bg-gradient-to-br from-accent/80 to-accent"
@@ -204,6 +206,8 @@ export function DashboardStats() {
         isPulsing={data.pendingActions > 0}
         link="/admin/pending"
       />
+        </div>
+      )}
     </div>
   );
 }

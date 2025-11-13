@@ -7,6 +7,8 @@ import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { formatDistanceToNow } from "date-fns";
+import { useSkeletonTransition } from "@/hooks/useSkeletonTransition";
+import { ActivityFeedSkeleton } from "./ActivityFeedSkeleton";
 
 interface Activity {
   id: string;
@@ -25,6 +27,7 @@ export function RecentActivity() {
   const [newActivityIds, setNewActivityIds] = useState<Set<string>>(new Set());
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { showSkeleton, showContent } = useSkeletonTransition({ isLoading: loading });
 
   useEffect(() => {
     fetchActivities();
@@ -224,21 +227,18 @@ export function RecentActivity() {
         </div>
 
         {/* Activity Feed */}
-        <div className="max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
-          {loading ? (
-            // Loading skeleton with shimmer
-            <div className="space-y-0">
-              {[...Array(5)].map((_, i) => (
-                <div key={i} className="flex items-start gap-3 py-3 border-b border-border">
-                  <div className="w-10 h-10 rounded-full bg-muted shimmer" />
-                  <div className="flex-1 space-y-2">
-                    <div className="h-4 bg-muted rounded w-3/4 shimmer" />
-                    <div className="h-3 bg-muted rounded w-1/4 shimmer" />
-                  </div>
-                </div>
-              ))}
+        <div className="max-h-[500px] overflow-y-auto pr-2 custom-scrollbar relative">
+          {/* Skeleton state */}
+          {showSkeleton && (
+            <div className={!loading ? 'loading-fade-out' : ''}>
+              <ActivityFeedSkeleton />
             </div>
-          ) : activities.length > 0 ? (
+          )}
+
+          {/* Real content */}
+          {showContent && (
+            <div className="content-fade-in">
+              {activities.length > 0 ? (
             <AnimatePresence mode="popLayout">
               {activities.map((activity, index) => {
                 const isNew = newActivityIds.has(activity.id);
@@ -287,15 +287,17 @@ export function RecentActivity() {
                 );
               })}
             </AnimatePresence>
-          ) : (
-            <div className="text-center py-12">
-              <div className="text-5xl mb-3">📊</div>
-              <p className="text-sm font-medium text-muted-foreground mb-1">
-                No recent activity
-              </p>
-              <p className="text-sm text-muted-foreground">
-                All caught up! 🎉
-              </p>
+              ) : (
+                <div className="text-center py-12">
+                  <div className="text-5xl mb-3">📊</div>
+                  <p className="text-sm font-medium text-muted-foreground mb-1">
+                    No recent activity
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    All caught up! 🎉
+                  </p>
+                </div>
+              )}
             </div>
           )}
         </div>
