@@ -41,11 +41,11 @@ const Resources = () => {
   ];
 
   const products = [
-    { name: "USB Data Blocker (2-pack)", price: "$12.99" },
-    { name: "Webcam Privacy Covers (3-pack)", price: "$8.99" },
-    { name: "RFID-Blocking Card Sleeves (5-pack)", price: "$14.99" },
-    { name: "Password Notebook (Hardcover)", price: "$16.99" },
-    { name: "Complete Security Kit (Bundle)", price: "$44.99" },
+    { name: "USB Data Blocker (2-pack)", price: 12.99, slug: "usb-data-blocker-2pack" },
+    { name: "Webcam Privacy Covers (3-pack)", price: 8.99, slug: "webcam-privacy-covers-3pack" },
+    { name: "RFID-Blocking Card Sleeves (5-pack)", price: 14.99, slug: "rfid-blocking-card-sleeves-5pack" },
+    { name: "Password Notebook (Hardcover)", price: 16.99, slug: "password-notebook-hardcover" },
+    { name: "Complete Security Kit (Bundle)", price: 44.99, slug: "complete-security-kit-bundle" },
   ];
 
   const blogArticles = [
@@ -228,20 +228,24 @@ const Resources = () => {
                   </div>
                 </div>
                 <h3 className="font-bold mb-2 text-center flex-grow">{product.name}</h3>
-                <p className="text-2xl font-bold gradient-text-primary text-center mb-4">{product.price}</p>
+                <p className="text-2xl font-bold gradient-text-primary text-center mb-4">${product.price.toFixed(2)}</p>
                 <Button 
-                  onClick={() => {
-                    setSelectedItem({
-                      type: 'product',
-                      name: product.name,
-                      price: parseFloat(product.price.replace('$', ''))
-                    });
-                    setModalOpen(true);
-                  }}
+                  onClick={() => handlePurchaseClick(product.slug, product.price)}
+                  disabled={loadingButton === product.slug}
                   variant="default" 
-                  className="w-full"
+                  className="w-full group"
                 >
-                  BUY NOW
+                  {loadingButton === product.slug ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      LOADING...
+                    </>
+                  ) : (
+                    <>
+                      <span className="mr-2 transition-transform duration-300 group-hover:animate-[bounce_0.5s_ease-in-out_infinite]">🛒</span>
+                      BUY NOW
+                    </>
+                  )}
                 </Button>
               </Card>
             ))}
