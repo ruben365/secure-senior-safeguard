@@ -1,7 +1,8 @@
 import { BookOpen, Shield, Briefcase } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 interface PathConfig {
   id: number;
@@ -11,7 +12,7 @@ interface PathConfig {
   icon: typeof BookOpen;
   featured?: boolean;
   cta: string;
-  serviceType: 'training' | 'scamshield' | 'business';
+  link: string;
   basePrice: number;
 }
 
@@ -23,7 +24,7 @@ const paths: PathConfig[] = [
     pricing: "Starting at $79",
     icon: BookOpen,
     cta: "Book Training",
-    serviceType: 'training',
+    link: '/training#book',
     basePrice: 79,
   },
   {
@@ -34,36 +35,42 @@ const paths: PathConfig[] = [
     icon: Shield,
     featured: true,
     cta: "Get Protection",
-    serviceType: 'scamshield',
+    link: '/training#scamshield',
     basePrice: 39,
   },
   {
     id: 3,
-    title: "AI for Business",
+    title: "AI&BUSINESS",
     description: "Custom AI receptionists, automation, and pre-purchase vetting. Don't waste $5k+ on wrong tools.",
     pricing: "Custom Pricing",
     icon: Briefcase,
     cta: "Talk to an Expert",
-    serviceType: 'business',
+    link: '/contact?service=business',
     basePrice: 5000,
   }
 ];
 
 const ThreePathsForward = () => {
-  const navigate = useNavigate();
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.2 });
 
-  const handlePathClick = (path: PathConfig) => {
-    switch (path.serviceType) {
-      case 'training':
-        navigate('/training#training');
-        break;
-      case 'scamshield':
-        navigate('/training#pricing');
-        break;
-      case 'business':
-        navigate('/business');
-        break;
+  const getAnimationClass = (index: number) => {
+    const baseClasses = "transition-all duration-[600ms] ease-out";
+    
+    if (!isVisible) {
+      // Starting state based on card position
+      if (index === 0) return `${baseClasses} opacity-0 -translate-x-[30px]`; // from left
+      if (index === 1) return `${baseClasses} opacity-0 translate-y-[30px]`; // from bottom
+      if (index === 2) return `${baseClasses} opacity-0 translate-x-[30px]`; // from right
     }
+    
+    // Ending state
+    return `${baseClasses} opacity-100 translate-x-0 translate-y-0`;
+  };
+
+  const getAnimationDelay = (index: number) => {
+    if (index === 1) return '200ms';
+    if (index === 2) return '400ms';
+    return '0ms';
   };
 
   return (
@@ -84,11 +91,15 @@ const ThreePathsForward = () => {
         </div>
 
         {/* Cards Grid - With proper spacing for badges */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 pt-8">
+        <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 pt-8">
           {paths.map((path, index) => {
             const Icon = path.icon;
             return (
-              <div key={path.id} className="relative">
+              <div 
+                key={path.id} 
+                className={`relative ${getAnimationClass(index)}`}
+                style={{ transitionDelay: getAnimationDelay(index) }}
+              >
                 {/* Featured Badge - Above the card */}
                 {path.featured && (
                   <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-white px-6 py-2 rounded-full text-xs font-bold tracking-wider shadow-lg z-20">
@@ -105,10 +116,8 @@ const ThreePathsForward = () => {
                       : 'border-2 border-border shadow-soft'}
                     hover:-translate-y-4 hover:scale-[1.02] ${path.featured ? 'hover:shadow-[0_16px_50px_rgba(139,92,246,0.3)]' : 'hover:shadow-medium'}
                     hover:border-primary hover:rotate-1
-                    animate-fade-in-up
                     hover:after:opacity-100 after:transition-opacity after:duration-500
                   `}
-                  style={{ animationDelay: `${index * 150}ms` }}
                 >
 
                 {/* Icon Container - purple/teal gradient */}
@@ -144,11 +153,13 @@ const ThreePathsForward = () => {
 
                 {/* CTA Button */}
                 <Button
-                  onClick={() => handlePathClick(path)}
+                  asChild
                   variant={path.featured ? "default" : "outline"}
-                  className="w-full text-base font-bold uppercase tracking-wide"
+                  className="w-full text-base font-bold uppercase tracking-wide transition-transform duration-300 ease-out hover:-translate-y-[2px] hover:shadow-lg active:translate-y-[1px]"
                 >
-                  {path.cta}
+                  <Link to={path.link}>
+                    {path.cta}
+                  </Link>
                 </Button>
               </Card>
               </div>

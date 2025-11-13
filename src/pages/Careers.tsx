@@ -23,15 +23,16 @@ import {
   Award,
 } from "lucide-react";
 import teamCollaboration from "@/assets/team-collaboration.jpg";
+import heroCareers from "@/assets/hero-careers-new.jpg";
 import customerSupport from "@/assets/customer-support.jpg";
 
-const Careers = () => {
+function Careers() {
   const positions = [
     {
       title: "Threat Analyst",
       department: "ScamShield Protection",
       type: "Full-Time",
-      location: "Cleveland, OH / Remote",
+      location: "Dayton-Kettering, OH / Remote",
       icon: Shield,
       description: "Analyze suspicious emails, texts, calls, and documents to protect our clients from scams and fraud.",
       responsibilities: [
@@ -53,7 +54,7 @@ const Careers = () => {
       title: "Trainer / Instructor",
       department: "Education & Training",
       type: "Part-Time / Contract",
-      location: "Cleveland, OH / Remote",
+      location: "Dayton-Kettering, OH / Remote",
       icon: GraduationCap,
       description: "Deliver engaging cybersecurity training sessions to individuals, families, and groups.",
       responsibilities: [
@@ -75,7 +76,7 @@ const Careers = () => {
       title: "AI Developer",
       department: "Business Solutions",
       type: "Full-Time",
-      location: "Cleveland, OH / Hybrid",
+      location: "Dayton-Kettering, OH / Hybrid",
       icon: Code,
       description: "Build custom AI agents and automation solutions for business clients.",
       responsibilities: [
@@ -119,7 +120,7 @@ const Careers = () => {
       title: "Customer Support Specialist",
       department: "Client Services",
       type: "Full-Time",
-      location: "Cleveland, OH / Remote",
+      location: "Dayton-Kettering, OH / Remote",
       icon: Headphones,
       description: "Provide exceptional support to clients across all InVision Network services.",
       responsibilities: [
@@ -141,7 +142,7 @@ const Careers = () => {
       title: "Sales Consultant",
       department: "Business Development",
       type: "Full-Time",
-      location: "Cleveland, OH / Hybrid",
+      location: "Dayton-Kettering, OH / Hybrid",
       icon: TrendingUp,
       description: "Connect businesses with AI solutions and help families protect themselves from scams.",
       responsibilities: [
@@ -199,7 +200,7 @@ const Careers = () => {
       <Navigation />
 
       <Hero
-        useTransitioningBackground={true}
+        backgroundImage={heroCareers}
         headline="Join Our Team"
         subheadline="Help protect Ohio families and empower local businesses with technology"
         showScrollIndicator={true}

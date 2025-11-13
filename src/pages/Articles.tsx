@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
+import heroResources from "@/assets/hero-resources-new.jpg";
 
 interface Article {
   id: number;
@@ -548,7 +549,7 @@ Remember: Your inbox is like your front door. You wouldn't let just anyone in, s
   },
 ];
 
-const Articles = () => {
+function Articles() {
   const [expandedArticle, setExpandedArticle] = useState<number | null>(null);
 
   const toggleArticle = (id: number) => {
@@ -560,7 +561,7 @@ const Articles = () => {
       <Navigation />
 
       <Hero
-        useTransitioningBackground={true}
+        backgroundImage={heroResources}
         headline="Scam Prevention Articles & News"
         subheadline="Stay informed about the latest scam threats and protection strategies"
       />
