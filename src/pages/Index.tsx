@@ -88,8 +88,13 @@ const Index = () => {
         showPrivacyDisclaimer={true}
       >
         <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center sm:justify-start">
-          <Button asChild variant="default" size="xl" className="w-full sm:w-auto text-base md:text-lg">
-            <Link to="/training#pricing" aria-label="View protection plans">
+          <Button 
+            asChild 
+            variant="default" 
+            size="xl" 
+            className="w-full sm:w-auto text-base md:text-lg transition-all duration-300 ease-out hover:scale-105 active:scale-98 hover:shadow-[0_10px_25px_rgba(109,40,217,0.3)]"
+          >
+            <Link to="/contact?service=family-shield" aria-label="Get family protection plan">
               Get Protection Now
             </Link>
           </Button>

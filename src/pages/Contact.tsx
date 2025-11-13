@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -15,7 +15,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Phone, Mail, MapPin, Clock, MessageSquare, Loader2, Shield, CheckCircle, Users, Zap, CalendarIcon } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { z } from "zod";
 import { useAIChat } from "@/contexts/AIChatContext";
 import { cn } from "@/lib/utils";
@@ -33,6 +33,7 @@ const contactSchema = z.object({
 
 const Contact = () => {
   const { openChat } = useAIChat();
+  const [searchParams] = useSearchParams();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date>();
   const [formData, setFormData] = useState({
@@ -44,6 +45,14 @@ const Contact = () => {
     message: "",
     preferredDate: "",
   });
+
+  // Pre-select service based on query parameter
+  useEffect(() => {
+    const serviceParam = searchParams.get("service");
+    if (serviceParam === "family-shield") {
+      setFormData(prev => ({ ...prev, interest: "scam-shield" }));
+    }
+  }, [searchParams]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
