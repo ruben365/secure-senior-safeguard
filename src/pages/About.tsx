@@ -24,22 +24,27 @@ const About = () => {
       <TrustBar />
 
       {/* Our Story */}
-      <section className="py-24 bg-background relative">
-        <FlowingWaves variant="full" opacity={0.12} />
+      <section className="py-32 bg-background relative overflow-hidden">
+        <FlowingWaves variant="full" opacity={0.15} />
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-center mb-12">Founded on a Personal Mission</h2>
-            <div className="space-y-6 text-lg leading-relaxed text-muted-foreground">
-              <p>
-                InVision Network was born from a personal experience when <strong>Ruben Nkulu</strong>, engineer in cybersecurity who's the founder and CEO of the company, witnessed his own grandmother nearly fall victim to a sophisticated AI voice-cloning scam. The caller sounded exactly like her grandson, claiming he was in jail and desperately needed money. It was only by asking a specific question that she realized something was wrong.
-              </p>
-              <p>
-                That moment changed everything. Ruben realized that traditional fraud prevention methods weren't enough to combat these new AI-powered threats. So he created InVision Network - a comprehensive solution that combines expert training, real-time threat analysis, and innovative AI business solutions, all built on a foundation of security and trust.
-              </p>
-              <p>
-                <strong>Giving Back to Our Community:</strong> At InVision Network, we believe in supporting those who've served and protected us. We proudly offer special support programs for veterans, active duty military, first responders, and individuals battling cancer. Through discounted services, free training sessions, and scholarship programs, we're committed to protecting and empowering those who've given so much to our communities.
-              </p>
-            </div>
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-center mb-16 animate-fade-in text-4xl md:text-5xl">Founded on a Personal Mission</h2>
+            <Card className="p-8 md:p-12 bg-gradient-to-br from-background/80 to-muted/30 backdrop-blur-sm border-2 border-primary/10 shadow-strong">
+              <div className="space-y-8 text-xl leading-relaxed">
+                <p className="animate-fade-in" style={{ animationDelay: '0.1s' }}>
+                  InVision Network was born from a personal experience when <span className="text-foreground font-bold text-2xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Ruben Nkulu</span>, <span className="text-foreground font-semibold">Founder and CEO</span> and engineer in cybersecurity, witnessed his own grandmother nearly fall victim to a <span className="text-foreground font-semibold">sophisticated AI voice-cloning scam</span>. The caller <em>sounded exactly like her grandson</em>, claiming he was in jail and desperately needed money. It was only by asking a specific question that she realized something was wrong.
+                </p>
+                <p className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                  <span className="text-foreground font-bold text-2xl">That moment changed everything.</span> Ruben realized that traditional fraud prevention methods weren't enough to combat these new AI-powered threats. So he created <span className="text-foreground font-semibold">InVision Network</span> - a comprehensive solution that combines <span className="text-primary font-semibold">expert training</span>, <span className="text-primary font-semibold">real-time threat analysis</span>, and <span className="text-primary font-semibold">innovative AI business solutions</span>, all built on a foundation of security and trust.
+                </p>
+                <div className="pt-6 border-t-2 border-primary/20 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+                  <p>
+                    <span className="text-foreground font-bold text-2xl block mb-4">Giving Back to Our Community:</span>
+                    <span className="text-lg">At InVision Network, we believe in supporting those who've served and protected us. We proudly offer <span className="text-foreground font-semibold">special support programs for veterans, active duty military, first responders, and individuals battling cancer</span>. Through discounted services, free training sessions, and scholarship programs, we're committed to protecting and empowering those who've given so much to our communities.</span>
+                  </p>
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
       </section>
