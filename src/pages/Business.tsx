@@ -1007,6 +1007,32 @@ const Business = () => {
         </div>
       </section>
 
+      {/* Video Testimonials */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center mb-12">Video Testimonials</h2>
+          {isAdmin && !isLoading && (
+            <div className="max-w-2xl mx-auto">
+              <Card className="p-12 border-2 border-dashed border-primary/50 bg-primary/5">
+                <div className="flex flex-col items-center text-center gap-4">
+                  <div className="text-5xl" style={{ fontSize: '48px' }}>🎥</div>
+                  <h3 className="text-2xl font-bold">Business Video Testimonials</h3>
+                  <p className="text-muted-foreground">
+                    Upload customer success stories and video testimonials
+                  </p>
+                  <Button 
+                    variant="default"
+                    className="mt-4"
+                  >
+                    Upload Video
+                  </Button>
+                </div>
+              </Card>
+            </div>
+          )}
+        </div>
+      </section>
+
       {/* Final CTA */}
       <CTASection headline="Ready to Deploy AI Safely?" variant="gold">
         <Button asChild variant="gold" size="xl">
