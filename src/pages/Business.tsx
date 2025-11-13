@@ -101,25 +101,34 @@ const Business = () => {
       >
         <div className="flex flex-col sm:flex-row gap-4">
           <Button 
-            onClick={() => scrollToSection('automation-pricing')}
+            asChild
             variant="default" 
             size="xl"
+            className="transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:brightness-110"
           >
-            Build AI Automation
+            <Link to="/contact?service=ai-automation">
+              Build AI Automation
+            </Link>
           </Button>
           <Button 
-            onClick={() => scrollToSection('website-design')}
+            asChild
             variant="outlineLight" 
             size="xl"
+            className="transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:brightness-110"
           >
-            Design My Website
+            <Link to="/contact?service=web-design">
+              Design My Website
+            </Link>
           </Button>
           <Button 
-            onClick={() => scrollToSection('insurance')}
+            asChild
             variant="outlineLight" 
             size="xl"
+            className="transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:brightness-110"
           >
-            Get AI Insurance
+            <Link to="/contact?service=ai-insurance">
+              Get AI Insurance
+            </Link>
           </Button>
         </div>
       </Hero>
