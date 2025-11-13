@@ -20,6 +20,7 @@ const Resources = () => {
     price?: number;
   } | null>(null);
   const [loadingButton, setLoadingButton] = useState<string | null>(null);
+  const [activeProductImages, setActiveProductImages] = useState<{ [key: string]: number }>({});
   const navigate = useNavigate();
 
   const handlePurchaseClick = (slug: string, price: number) => {
@@ -41,11 +42,53 @@ const Resources = () => {
   ];
 
   const products = [
-    { name: "USB Data Blocker (2-pack)", price: 12.99, slug: "usb-data-blocker-2pack" },
-    { name: "Webcam Privacy Covers (3-pack)", price: 8.99, slug: "webcam-privacy-covers-3pack" },
-    { name: "RFID-Blocking Card Sleeves (5-pack)", price: 14.99, slug: "rfid-blocking-card-sleeves-5pack" },
-    { name: "Password Notebook (Hardcover)", price: 16.99, slug: "password-notebook-hardcover" },
-    { name: "Complete Security Kit (Bundle)", price: 44.99, slug: "complete-security-kit-bundle" },
+    { 
+      name: "USB Data Blocker (2-pack)", 
+      price: 12.99, 
+      slug: "usb-data-blocker-2pack",
+      images: [
+        "https://images.unsplash.com/photo-1625948515291-69613efd103f?w=400&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1591370874773-6702e8f12fd8?w=400&h=300&fit=crop"
+      ]
+    },
+    { 
+      name: "Webcam Privacy Covers (3-pack)", 
+      price: 8.99, 
+      slug: "webcam-privacy-covers-3pack",
+      images: [
+        "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1484788984921-03950022c9ef?w=400&h=300&fit=crop"
+      ]
+    },
+    { 
+      name: "RFID-Blocking Card Sleeves (5-pack)", 
+      price: 14.99, 
+      slug: "rfid-blocking-card-sleeves-5pack",
+      images: [
+        "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=400&h=300&fit=crop"
+      ]
+    },
+    { 
+      name: "Password Notebook (Hardcover)", 
+      price: 16.99, 
+      slug: "password-notebook-hardcover",
+      images: [
+        "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=400&h=300&fit=crop"
+      ]
+    },
+    { 
+      name: "Complete Security Kit (Bundle)", 
+      price: 44.99, 
+      slug: "complete-security-kit-bundle",
+      images: [
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=300&fit=crop"
+      ]
+    },
   ];
 
   const blogArticles = [
@@ -222,6 +265,7 @@ const Resources = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
             {products.map((product, index) => {
               const isBundle = product.slug === "complete-security-kit-bundle";
+              const currentImageIndex = activeProductImages[product.slug] || 0;
               return (
                 <Card 
                   key={index} 
@@ -230,15 +274,43 @@ const Resources = () => {
                   }`}
                 >
                   {isBundle && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-accent to-primary text-white px-4 py-1 rounded-full text-xs font-bold shadow-md">
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-accent to-primary text-white px-4 py-1 rounded-full text-xs font-bold shadow-md z-10">
                       BEST VALUE
                     </div>
                   )}
-                  <div className="flex justify-center mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center">
-                      <ShoppingCart className="w-6 h-6 text-white" />
+                  
+                  {/* Image Gallery */}
+                  <div className="mb-4">
+                    <div className="relative overflow-hidden rounded-xl group/image aspect-[4/3] mb-2">
+                      <img 
+                        src={product.images[currentImageIndex]} 
+                        alt={product.name}
+                        className="w-full h-full object-cover transition-all duration-500 group-hover/image:scale-115"
+                      />
+                      <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover/image:opacity-100 transition-opacity duration-300">
+                        <span className="text-white font-semibold text-sm">Quick View</span>
+                      </div>
                     </div>
+                    
+                    {/* Thumbnail Dots */}
+                    {product.images.length > 1 && (
+                      <div className="flex justify-center gap-2">
+                        {product.images.map((_, imgIndex) => (
+                          <button
+                            key={imgIndex}
+                            onClick={() => setActiveProductImages(prev => ({ ...prev, [product.slug]: imgIndex }))}
+                            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                              currentImageIndex === imgIndex 
+                                ? 'bg-primary w-6' 
+                                : 'bg-muted-foreground/30 hover:bg-muted-foreground/60'
+                            }`}
+                            aria-label={`View image ${imgIndex + 1}`}
+                          />
+                        ))}
+                      </div>
+                    )}
                   </div>
+
                   <h3 className="font-bold mb-2 text-center flex-grow">{product.name}</h3>
                   <p className={`font-bold gradient-text-primary text-center mb-4 ${isBundle ? 'text-3xl' : 'text-2xl'}`}>
                     ${product.price.toFixed(2)}
