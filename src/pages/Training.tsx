@@ -73,6 +73,61 @@ const ResponseTimeCallout = () => {
   );
 };
 
+const ScamExampleCard = ({ example, index }: { example: any; index: number }) => {
+  const savedAmount = example.saved.replace(/[^0-9]/g, '');
+  const isNumeric = savedAmount !== '';
+  
+  const { count, ref } = useCounterAnimation({ 
+    end: isNumeric ? parseInt(savedAmount) : 0, 
+    duration: 2000 
+  });
+
+  const getBadgeColor = (badge: string) => {
+    const colors: Record<string, string> = {
+      "Grandparent Scam": "bg-red-500/20 text-red-700 border border-red-500/30",
+      "Bank Phishing": "bg-blue-500/20 text-blue-700 border border-blue-500/30",
+      "Tech Support Scam": "bg-orange-500/20 text-orange-700 border border-orange-500/30",
+      "Romance Scam": "bg-pink-500/20 text-pink-700 border border-pink-500/30",
+    };
+    return colors[badge] || "bg-accent/20 text-accent-foreground border border-accent/30";
+  };
+
+  return (
+    <ScrollReveal animation="scale-in" delay={index * 100} threshold={0.2}>
+      <Card
+        className="p-4 hover:shadow-strong transition-all duration-500 hover:-translate-y-1 rounded-xl border-border/50 bg-gradient-to-br from-card to-card/50"
+      >
+        <div className="mb-3">
+          <span className={`text-xs font-bold px-2 py-1 rounded-full ${getBadgeColor(example.badge)}`}>
+            {example.badge}
+          </span>
+        </div>
+        <div className="space-y-2">
+          <div>
+            <p className="text-xs font-semibold text-muted-foreground mb-1">WHAT THEY RECEIVED:</p>
+            <p className="text-foreground text-xs italic line-clamp-2">{example.received}</p>
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-muted-foreground mb-1">OUR ANALYSIS:</p>
+            <p className="text-foreground text-xs line-clamp-2">{example.analysis}</p>
+          </div>
+          <div ref={ref as any}>
+            <p className="text-xs font-semibold text-muted-foreground mb-1">SAVED:</p>
+            {isNumeric ? (
+              <p className="text-lg font-bold text-success">
+                <span className="inline-block animate-[dollar-scale_2s_ease-out]">$</span>
+                {Math.round(count).toLocaleString()}
+              </p>
+            ) : (
+              <p className="text-lg font-bold text-success">{example.saved}</p>
+            )}
+          </div>
+        </div>
+      </Card>
+    </ScrollReveal>
+  );
+};
+
 const TrainingCard = ({ plan, index, loadingButton, setLoadingButton, navigate }: any) => {
   const { count, ref } = useCounterAnimation({ end: plan.priceNum, duration: 1000 });
   
@@ -879,31 +934,7 @@ const LearnAndTrain = () => {
                 saved: "$15,000",
               },
             ].map((example, index) => (
-              <Card
-                key={index}
-                className="p-4 hover:shadow-strong transition-all duration-500 hover:-translate-y-1 rounded-xl border-border/50 animate-fade-in-up bg-gradient-to-br from-card to-card/50"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="mb-3">
-                  <span className="text-xs font-bold bg-accent text-accent-foreground px-2 py-1 rounded-full">
-                    {example.badge}
-                  </span>
-                </div>
-                <div className="space-y-2">
-                  <div>
-                    <p className="text-xs font-semibold text-muted-foreground mb-1">WHAT THEY RECEIVED:</p>
-                    <p className="text-foreground text-xs italic line-clamp-2">{example.received}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-muted-foreground mb-1">OUR ANALYSIS:</p>
-                    <p className="text-foreground text-xs line-clamp-2">{example.analysis}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-muted-foreground mb-1">SAVED:</p>
-                    <p className="text-lg font-bold text-primary">{example.saved}</p>
-                  </div>
-                </div>
-              </Card>
+              <ScamExampleCard key={index} example={example} index={index} />
             ))}
           </div>
 

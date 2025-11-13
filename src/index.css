@@ -765,6 +765,25 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   }
 }
 
+/* Dollar sign scale animation */
+@keyframes dollar-scale {
+  0% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(1.3);
+  }
+  20% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.2);
+  }
+  40%, 100% {
+    transform: scale(1);
+  }
+}
+
 /* Gentle rotate animation for icons */
 @keyframes gentle-rotate {
   0%, 100% {
