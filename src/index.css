@@ -714,6 +714,16 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   }
 }
 
+/* Clock rotation animation */
+@keyframes clock-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 /* Gentle rotate animation for icons */
 @keyframes gentle-rotate {
   0%, 100% {

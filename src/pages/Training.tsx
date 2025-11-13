@@ -21,7 +21,7 @@ import {
   Search,
   Shield,
   Users,
-  Clock,
+  Clock as ClockIcon,
   Award,
   Lock,
   FileText,
@@ -34,6 +34,44 @@ import {
 } from "lucide-react";
 import trainingSession from "@/assets/training-session.jpg";
 import heroTraining from "@/assets/hero-training-new.jpg";
+
+const ResponseTimeCallout = () => {
+  const { count: standardCount, ref: standardRef } = useCounterAnimation({ 
+    end: 24, 
+    start: 48, 
+    duration: 1500 
+  });
+  
+  const { count: premiumCount, ref: premiumRef } = useCounterAnimation({ 
+    end: 4, 
+    start: 24, 
+    duration: 1500 
+  });
+
+  return (
+    <div 
+      ref={standardRef as any}
+      className="mt-4 p-4 bg-gradient-to-r from-[#14B8A6] to-[#0F9A8A] rounded-lg text-white"
+    >
+      <div className="flex items-center gap-3">
+        <span 
+          className="text-2xl animate-[clock-rotate_1s_ease-in-out_0.5s]"
+          style={{ display: 'inline-block' }}
+        >
+          ⏱️
+        </span>
+        <div className="flex-1 text-sm font-semibold">
+          <div>
+            Response time: <span className="text-lg font-bold" ref={premiumRef as any}>{Math.round(standardCount)}</span> hours
+          </div>
+          <div className="text-white/90 text-xs mt-1">
+            Premium: <span className="text-base font-bold">{Math.round(premiumCount)}</span> hours
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const TrainingCard = ({ plan, index, loadingButton, setLoadingButton, navigate }: any) => {
   const { count, ref } = useCounterAnimation({ end: plan.priceNum, duration: 1000 });
@@ -299,7 +337,7 @@ const LearnAndTrain = () => {
                   step: "STEP 2",
                   title: "Forward It to Our Team",
                   desc: "Email, text, upload screenshot, or call our hotline",
-                  subtext: "Response time: 24 hours (Premium: 4 hours)",
+                  hasResponseTime: true,
                 },
                 {
                   icon: Search,
@@ -339,7 +377,7 @@ const LearnAndTrain = () => {
                       {step.title}
                     </h3>
                     <p className="text-muted-foreground text-center text-sm">{step.desc}</p>
-                    {step.subtext && <p className="text-accent text-center text-xs mt-2 font-semibold">{step.subtext}</p>}
+                    {step.hasResponseTime && <ResponseTimeCallout />}
                   </Card>
                 </ScrollReveal>
               ))}
