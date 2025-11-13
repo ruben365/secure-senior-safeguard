@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -14,7 +14,7 @@ import { Card } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { BookingModal } from "@/components/BookingModal";
-import { Phone, Mail, MessageSquare, Calendar, CheckCircle, Search, Shield } from "lucide-react";
+import { Phone, Mail, MessageSquare, Calendar, CheckCircle, Search, Shield, Loader2 } from "lucide-react";
 import testimonial3 from "@/assets/testimonial-3.jpg";
 import testimonial4 from "@/assets/testimonial-4.jpg";
 import businessCollaboration from "@/assets/business-collaboration.jpg";
@@ -22,6 +22,7 @@ import teamCollaboration from "@/assets/team-collaboration.jpg";
 import heroBusiness from "@/assets/hero-business-professional.jpg";
 
 const Business = () => {
+  const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   const [isYearly, setIsYearly] = useState(false);
   const [selectedService, setSelectedService] = useState<{
@@ -32,6 +33,7 @@ const Business = () => {
   } | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isNavigating, setIsNavigating] = useState(false);
 
   useEffect(() => {
     checkAdminStatus();
@@ -269,17 +271,20 @@ const Business = () => {
               </ul>
               <Button 
                 onClick={() => {
-                  setSelectedService({
-                    type: 'business',
-                    name: 'AI Receptionist & Intake Agent',
-                    price: 9500
-                  });
-                  setModalOpen(true);
+                  setIsNavigating(true);
+                  setTimeout(() => {
+                    navigate('/contact?service=ai-receptionist&plan=9500');
+                  }, 300);
                 }}
                 variant="default" 
-                className="w-full"
+                className="w-full transition-all duration-300 hover:bg-primary/90 hover:shadow-[0_12px_28px_rgba(109,40,217,0.25)] hover:scale-[1.02]"
+                disabled={isNavigating}
               >
-                GET STARTED
+                {isNavigating ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  'GET STARTED'
+                )}
               </Button>
             </Card>
 
