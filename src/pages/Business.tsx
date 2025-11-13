@@ -14,6 +14,7 @@ import { Card } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { BookingModal } from "@/components/BookingModal";
+import { useCounterAnimation } from "@/hooks/useCounterAnimation";
 import { Phone, Mail, MessageSquare, Calendar, CheckCircle, Search, Shield, Loader2 } from "lucide-react";
 import testimonial3 from "@/assets/testimonial-3.jpg";
 import testimonial4 from "@/assets/testimonial-4.jpg";
@@ -34,6 +35,11 @@ const Business = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isNavigating, setIsNavigating] = useState(false);
+
+  // Counter animations for pricing cards
+  const price1Counter = useCounterAnimation({ end: 9500, duration: 1500, prefix: '$' });
+  const price2Counter = useCounterAnimation({ end: 12500, duration: 1500, prefix: '$' });
+  const price3Counter = useCounterAnimation({ end: 25000, duration: 1500, prefix: '$', suffix: '+' });
 
   useEffect(() => {
     checkAdminStatus();
@@ -241,7 +247,9 @@ const Business = () => {
             <Card className="p-8">
               <h3 className="text-2xl font-bold mb-4">AI Receptionist & Intake Agent</h3>
               <p className="text-muted-foreground mb-6">Answer calls/chats 24/7, book appointments</p>
-              <p className="text-4xl font-bold text-accent mb-6">$9,500</p>
+              <p ref={price1Counter.ref} className="text-4xl font-bold text-accent mb-6">
+                {price1Counter.displayValue}
+              </p>
               <p className="text-sm text-muted-foreground mb-4">Perfect for: Medical practices, law firms, salons</p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-2">
@@ -291,7 +299,9 @@ const Business = () => {
             <Card className="p-8">
               <h3 className="text-2xl font-bold mb-4">Follow-Up Automation System</h3>
               <p className="text-muted-foreground mb-6">Automated email/SMS campaigns, lead nurturing</p>
-              <p className="text-4xl font-bold text-accent mb-6">$12,500</p>
+              <p ref={price2Counter.ref} className="text-4xl font-bold text-accent mb-6">
+                {price2Counter.displayValue}
+              </p>
               <p className="text-sm text-muted-foreground mb-4">Perfect for: E-commerce, real estate, coaching, B2B</p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-2">
@@ -341,7 +351,9 @@ const Business = () => {
             <Card className="p-8 border-2 border-accent">
               <h3 className="text-2xl font-bold mb-4">Custom Automation Suite</h3>
               <p className="text-muted-foreground mb-6">Multi-system operations</p>
-              <p className="text-4xl font-bold text-accent mb-6">$25,000+</p>
+              <p ref={price3Counter.ref} className="text-4xl font-bold text-accent mb-6">
+                {price3Counter.displayValue}
+              </p>
               <p className="text-sm text-muted-foreground mb-4">Perfect for: Growing businesses, enterprises</p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-2">
