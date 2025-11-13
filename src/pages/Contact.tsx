@@ -12,7 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Card } from "@/components/ui/card";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Phone, Mail, MapPin, Clock, MessageSquare, Loader2, Shield, CheckCircle, Users, Zap, CalendarIcon } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, MessageSquare, Loader2, Shield, CheckCircle, Users, Zap, CalendarIcon, Check, X } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useState, useEffect } from "react";
@@ -51,6 +51,18 @@ const Contact = () => {
     language: "english",
     message: "",
   });
+  const [touched, setTouched] = useState({
+    name: false,
+    email: false,
+    phone: false,
+    message: false,
+  });
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
 
   // Pre-select service based on query parameter
   useEffect(() => {
@@ -78,6 +90,67 @@ const Contact = () => {
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatPhoneNumber(e.target.value);
     setFormData({ ...formData, phone: formatted });
+    if (touched.phone) {
+      validateField("phone", formatted);
+    }
+  };
+
+  // Validation functions
+  const validateField = (field: string, value: string) => {
+    let error = "";
+    
+    switch (field) {
+      case "name":
+        if (!value.trim()) {
+          error = "Name is required";
+        } else if (value.split(' ').filter(word => word.length > 0).length < 2) {
+          error = "Please enter your full name (first and last name)";
+        }
+        break;
+      case "email":
+        if (!value.trim()) {
+          error = "Email is required";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          error = "Please enter a valid email address";
+        }
+        break;
+      case "phone":
+        // Phone is optional, only validate if entered
+        if (value && value.length > 0 && value.replace(/\D/g, '').length < 10) {
+          error = "Please enter a valid phone number";
+        }
+        break;
+      case "message":
+        if (!value.trim()) {
+          error = "Message is required";
+        } else if (value.trim().length < 10) {
+          error = "Message must be at least 10 characters";
+        }
+        break;
+    }
+    
+    setErrors(prev => ({ ...prev, [field]: error }));
+    return error === "";
+  };
+
+  const isFieldValid = (field: keyof typeof formData) => {
+    if (!touched[field as keyof typeof touched]) return null;
+    
+    const value = formData[field];
+    
+    switch (field) {
+      case "name":
+        return value.trim() && value.split(' ').filter(word => word.length > 0).length >= 2;
+      case "email":
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+      case "phone":
+        // Phone is optional
+        return !value || value.replace(/\D/g, '').length >= 10;
+      case "message":
+        return value.trim().length >= 10;
+      default:
+        return null;
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -213,15 +286,42 @@ const Contact = () => {
                     <label htmlFor="name" className="block text-sm font-bold text-foreground">
                       Full Name *
                     </label>
-                    <Input
-                      id="name"
-                      required
-                      placeholder="John Doe"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      disabled={isSubmitting}
-                      className="h-14 text-base border-2 focus:border-primary/50 rounded-xl"
-                    />
+                    <div className="relative">
+                      <Input
+                        id="name"
+                        required
+                        placeholder="John Doe"
+                        value={formData.name}
+                        onChange={(e) => {
+                          setFormData({ ...formData, name: e.target.value });
+                          if (touched.name) {
+                            validateField("name", e.target.value);
+                          }
+                        }}
+                        onBlur={() => {
+                          setTouched(prev => ({ ...prev, name: true }));
+                          validateField("name", formData.name);
+                        }}
+                        disabled={isSubmitting}
+                        className={cn(
+                          "h-14 text-base border-2 rounded-xl pr-12 transition-colors",
+                          isFieldValid("name") === true && "border-green-500 focus:border-green-500",
+                          isFieldValid("name") === false && "border-red-500 focus:border-red-500"
+                        )}
+                      />
+                      {isFieldValid("name") !== null && (
+                        <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                          {isFieldValid("name") ? (
+                            <Check className="w-5 h-5 text-green-500" />
+                          ) : (
+                            <X className="w-5 h-5 text-red-500" />
+                          )}
+                        </div>
+                      )}
+                    </div>
+                    {touched.name && errors.name && (
+                      <p className="text-red-500 text-[13px] animate-fade-in">{errors.name}</p>
+                    )}
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -229,32 +329,81 @@ const Contact = () => {
                       <label htmlFor="email" className="block text-sm font-bold text-foreground">
                         Email Address *
                       </label>
-                      <Input
-                        id="email"
-                        type="email"
-                        required
-                        placeholder="john@example.com"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        disabled={isSubmitting}
-                        className="h-14 text-base border-2 focus:border-primary/50 rounded-xl"
-                      />
+                      <div className="relative">
+                        <Input
+                          id="email"
+                          type="email"
+                          required
+                          placeholder="john@example.com"
+                          value={formData.email}
+                          onChange={(e) => {
+                            setFormData({ ...formData, email: e.target.value });
+                            if (touched.email) {
+                              validateField("email", e.target.value);
+                            }
+                          }}
+                          onBlur={() => {
+                            setTouched(prev => ({ ...prev, email: true }));
+                            validateField("email", formData.email);
+                          }}
+                          disabled={isSubmitting}
+                          className={cn(
+                            "h-14 text-base border-2 rounded-xl pr-12 transition-colors",
+                            isFieldValid("email") === true && "border-green-500 focus:border-green-500",
+                            isFieldValid("email") === false && "border-red-500 focus:border-red-500"
+                          )}
+                        />
+                        {isFieldValid("email") !== null && (
+                          <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                            {isFieldValid("email") ? (
+                              <Check className="w-5 h-5 text-green-500" />
+                            ) : (
+                              <X className="w-5 h-5 text-red-500" />
+                            )}
+                          </div>
+                        )}
+                      </div>
+                      {touched.email && errors.email && (
+                        <p className="text-red-500 text-[13px] animate-fade-in">{errors.email}</p>
+                      )}
                     </div>
 
                     <div className="space-y-2">
                       <label htmlFor="phone" className="block text-sm font-bold text-foreground">
                         Phone Number
                       </label>
-                      <Input
-                        id="phone"
-                        type="tel"
-                        placeholder="(937) 555-1234"
-                        value={formData.phone}
-                        onChange={handlePhoneChange}
-                        disabled={isSubmitting}
-                        maxLength={14}
-                        className="h-14 text-base border-2 focus:border-primary/50 rounded-xl"
-                      />
+                      <div className="relative">
+                        <Input
+                          id="phone"
+                          type="tel"
+                          placeholder="(937) 555-1234"
+                          value={formData.phone}
+                          onChange={handlePhoneChange}
+                          onBlur={() => {
+                            setTouched(prev => ({ ...prev, phone: true }));
+                            validateField("phone", formData.phone);
+                          }}
+                          disabled={isSubmitting}
+                          maxLength={14}
+                          className={cn(
+                            "h-14 text-base border-2 rounded-xl pr-12 transition-colors",
+                            isFieldValid("phone") === true && formData.phone && "border-green-500 focus:border-green-500",
+                            isFieldValid("phone") === false && "border-red-500 focus:border-red-500"
+                          )}
+                        />
+                        {formData.phone && isFieldValid("phone") !== null && (
+                          <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                            {isFieldValid("phone") ? (
+                              <Check className="w-5 h-5 text-green-500" />
+                            ) : (
+                              <X className="w-5 h-5 text-red-500" />
+                            )}
+                          </div>
+                        )}
+                      </div>
+                      {touched.phone && errors.phone && (
+                        <p className="text-red-500 text-[13px] animate-fade-in">{errors.phone}</p>
+                      )}
                     </div>
                   </div>
 
@@ -347,17 +496,44 @@ const Contact = () => {
                     <label htmlFor="message" className="block text-sm font-bold text-foreground">
                       Your Message *
                     </label>
-                    <Textarea
-                      id="message"
-                      required
-                      placeholder="Tell us how we can help you..."
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      disabled={isSubmitting}
-                      rows={5}
-                      maxLength={1000}
-                      className="text-base border-2 focus:border-primary/50 rounded-xl resize-none"
-                    />
+                    <div className="relative">
+                      <Textarea
+                        id="message"
+                        required
+                        placeholder="Tell us how we can help you..."
+                        value={formData.message}
+                        onChange={(e) => {
+                          setFormData({ ...formData, message: e.target.value });
+                          if (touched.message) {
+                            validateField("message", e.target.value);
+                          }
+                        }}
+                        onBlur={() => {
+                          setTouched(prev => ({ ...prev, message: true }));
+                          validateField("message", formData.message);
+                        }}
+                        disabled={isSubmitting}
+                        rows={5}
+                        maxLength={1000}
+                        className={cn(
+                          "text-base border-2 rounded-xl resize-none pr-12 transition-colors",
+                          isFieldValid("message") === true && "border-green-500 focus:border-green-500",
+                          isFieldValid("message") === false && "border-red-500 focus:border-red-500"
+                        )}
+                      />
+                      {isFieldValid("message") !== null && (
+                        <div className="absolute right-4 top-4">
+                          {isFieldValid("message") ? (
+                            <Check className="w-5 h-5 text-green-500" />
+                          ) : (
+                            <X className="w-5 h-5 text-red-500" />
+                          )}
+                        </div>
+                      )}
+                    </div>
+                    {touched.message && errors.message && (
+                      <p className="text-red-500 text-[13px] animate-fade-in">{errors.message}</p>
+                    )}
                     <p className="text-sm text-muted-foreground text-right">
                       {formData.message.length}/1000 characters
                     </p>
