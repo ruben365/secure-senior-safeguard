@@ -17,6 +17,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { performanceMonitor } from "./utils/performanceMonitor";
 import ScrollProgressBar from "./components/ScrollProgressBar";
 import { NavigationProgress } from "./components/NavigationProgress";
+import { ScrollToTop } from "./components/ScrollToTop";
+import { useSmoothAnchorScroll } from "./hooks/useSmoothAnchorScroll";
 
 // Lazy load all pages for code splitting
 const Index = lazy(() => {
@@ -390,6 +392,8 @@ function AnimatedRoutes() {
 
 function App() {
   // Add smooth scroll behavior for anchor links
+  useSmoothAnchorScroll();
+  
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
     return () => {
@@ -404,6 +408,7 @@ function App() {
       <AIChatProvider>
         <BrowserRouter>
           <NavigationProgress />
+          <ScrollToTop />
           <ScrollProgressBar />
           <RouteTracker />
           <ErrorBoundary>
