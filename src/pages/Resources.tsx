@@ -10,6 +10,7 @@ import { Card } from "@/components/ui/card";
 import { PurchaseModal } from "@/components/PurchaseModal";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Download, Shield, Wifi, KeyRound, Heart, FileText, ShoppingCart, Loader2 } from "lucide-react";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import heroResources from "@/assets/hero-resources-new.jpg";
 
 const Resources = () => {
@@ -351,33 +352,41 @@ const Resources = () => {
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-10">Recent Articles</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {blogArticles.map((article, index) => (
-              <Card key={index} className="overflow-hidden hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl">
-                <div className="relative">
-                  <img 
-                    src={article.image} 
-                    alt={article.title} 
-                    className="w-full h-[200px] object-cover" 
-                    loading="lazy" 
-                  />
-                  <div className="absolute top-3 left-3 bg-primary/90 text-white px-3 py-1 rounded-md text-sm font-semibold">
-                    {article.date}
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-3 leading-tight">{article.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-4 line-clamp-2 leading-relaxed">
-                    {article.excerpt}
-                  </p>
-                  <Link 
-                    to="/articles" 
-                    className="text-[#14B8A6] hover:text-[#14B8A6]/80 font-semibold inline-flex items-center gap-1 transition-colors"
-                  >
-                    READ MORE →
-                  </Link>
-                </div>
-              </Card>
-            ))}
+            {blogArticles.map((article, index) => {
+              const animations = ['fade-in-bottom-left', 'fade-in-bottom', 'fade-in-bottom-right'];
+              const delays = [0, 150, 300];
+              const animationClass = `animate-[${animations[index]}_0.6s_ease-out_${delays[index]}ms_both]`;
+              
+              return (
+                <ScrollReveal key={index} threshold={0.3}>
+                  <Card className={`overflow-hidden hover:shadow-medium transition-all hover:-translate-y-1 rounded-2xl ${animationClass}`}>
+                    <div className="relative">
+                      <img 
+                        src={article.image} 
+                        alt={article.title} 
+                        className="w-full h-[200px] object-cover" 
+                        loading="lazy" 
+                      />
+                      <div className="absolute top-3 left-3 bg-primary/90 text-white px-3 py-1 rounded-md text-sm font-semibold">
+                        {article.date}
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold mb-3 leading-tight">{article.title}</h3>
+                      <p className="text-muted-foreground text-sm mb-4 line-clamp-2 leading-relaxed">
+                        {article.excerpt}
+                      </p>
+                      <Link 
+                        to="/articles" 
+                        className="text-[#14B8A6] hover:text-[#14B8A6]/80 font-semibold inline-flex items-center gap-1 transition-colors"
+                      >
+                        READ MORE →
+                      </Link>
+                    </div>
+                  </Card>
+                </ScrollReveal>
+              );
+            })}
           </div>
           <div className="text-center mt-8">
             <Button asChild variant="outline" size="lg">
