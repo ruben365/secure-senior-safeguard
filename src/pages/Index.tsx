@@ -27,9 +27,6 @@ import {
   Bot,
   ArrowRight,
 } from "lucide-react";
-import testimonial2 from "@/assets/testimonial-2.jpg";
-import testimonial6 from "@/assets/testimonial-6.jpg";
-import testimonial7 from "@/assets/testimonial-7.jpg";
 import heroBusinessProfessional from "@/assets/hero-business-professional.jpg";
 import { useImagePreload } from "@/hooks/useImagePreload";
 
@@ -401,51 +398,11 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Text Testimonials - Compact Grid */}
+          {/* Text Testimonials - Empty State */}
           <div className="py-5">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="animate-fade-in-up" style={{ animationDelay: "0ms" }}>
-              <Card className="p-4 h-full hover:shadow-medium transition-all hover:-translate-y-1">
-                <div className="flex items-center gap-3 mb-3">
-                  <img src={testimonial2} alt="Robert & Linda K." className="w-12 h-12 rounded-full object-cover" loading="lazy" />
-                  <div>
-                    <p className="font-bold text-sm">Robert & Linda K.</p>
-                    <p className="text-xs text-muted-foreground">Dayton, OH</p>
-                  </div>
-                </div>
-                <p className="text-sm text-muted-foreground line-clamp-4">
-                  "Incredibly patient training. We learned to spot AI voice clones and set up our family safe-word system."
-                </p>
-              </Card>
-            </div>
-              <div className="animate-fade-in-up" style={{ animationDelay: "100ms" }}>
-                <Card className="p-4 h-full hover:shadow-medium transition-all hover:-translate-y-1">
-                  <div className="flex items-center gap-3 mb-3">
-                    <img src={testimonial6} alt="William Chen" className="w-12 h-12 rounded-full object-cover" loading="lazy" />
-                    <div>
-                      <p className="font-bold text-sm">William Chen, 78</p>
-                      <p className="text-xs text-muted-foreground">Akron, OH</p>
-                    </div>
-                  </div>
-                  <p className="text-sm text-muted-foreground line-clamp-4">
-                    "They came to my home and patiently walked me through everything. My daughter can finally sleep at night."
-                  </p>
-                </Card>
-              </div>
-              <div className="animate-fade-in-up" style={{ animationDelay: "200ms" }}>
-                <Card className="p-4 h-full hover:shadow-medium transition-all hover:-translate-y-1">
-                  <div className="flex items-center gap-3 mb-3">
-                    <img src={testimonial7} alt="Jennifer Wallace" className="w-12 h-12 rounded-full object-cover" loading="lazy" />
-                    <div>
-                      <p className="font-bold text-sm">Jennifer Wallace, 58</p>
-                      <p className="text-xs text-muted-foreground">Cleveland, OH</p>
-                    </div>
-                  </div>
-                  <p className="text-sm text-muted-foreground line-clamp-4">
-                    "Enrolled our entire family. Now everyone knows the 60-Second Pause Protocol. A lifesaver for peace of mind."
-                  </p>
-                </Card>
-              </div>
+            <div className="border-2 border-dashed border-primary rounded-2xl p-12 text-center">
+              <div className="text-5xl mb-4">📝</div>
+              <p className="text-muted-foreground" style={{ fontSize: "16px" }}>Real testimonials coming soon</p>
             </div>
           </div>
         </div>
