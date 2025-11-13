@@ -699,10 +699,21 @@ const Contact = () => {
                     <div className="w-14 h-14 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
                       <Phone className="w-7 h-7 text-primary" />
                     </div>
-                    <div>
+                    <div className="flex-1">
                       <h3 className="text-xl font-bold mb-2">Phone</h3>
-                      <a href="tel:9375550199" className="text-accent hover:text-accent/80 text-xl font-semibold block mb-3">
-                        (937) 555-0199
+                      <a 
+                        href="tel:9375550199" 
+                        className="group block mb-3"
+                      >
+                        <div className="flex items-center gap-2">
+                          <span className="text-2xl group-hover:rotate-[5deg] transition-transform duration-300">📞</span>
+                          <span className="text-foreground group-hover:text-teal-500 text-xl font-semibold transition-colors duration-300">
+                            (937) 555-0199
+                          </span>
+                        </div>
+                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm text-teal-500 font-semibold mt-1">
+                          Call Now
+                        </div>
                       </a>
                       <div className="flex items-start gap-2 text-sm text-muted-foreground">
                         <Clock className="w-4 h-4 mt-0.5 flex-shrink-0" />
