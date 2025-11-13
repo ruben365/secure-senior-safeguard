@@ -220,35 +220,50 @@ const Resources = () => {
             Profits support training for seniors in need.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
-            {products.map((product, index) => (
-              <Card key={index} className="p-6 hover:shadow-medium transition-all hover:-translate-y-1 flex flex-col rounded-2xl">
-                <div className="flex justify-center mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center">
-                    <ShoppingCart className="w-6 h-6 text-white" />
-                  </div>
-                </div>
-                <h3 className="font-bold mb-2 text-center flex-grow">{product.name}</h3>
-                <p className="text-2xl font-bold gradient-text-primary text-center mb-4">${product.price.toFixed(2)}</p>
-                <Button 
-                  onClick={() => handlePurchaseClick(product.slug, product.price)}
-                  disabled={loadingButton === product.slug}
-                  variant="default" 
-                  className="w-full group"
+            {products.map((product, index) => {
+              const isBundle = product.slug === "complete-security-kit-bundle";
+              return (
+                <Card 
+                  key={index} 
+                  className={`p-6 hover:shadow-medium transition-all hover:-translate-y-1 flex flex-col rounded-2xl relative ${
+                    isBundle ? 'border-2 border-accent shadow-[0_0_20px_rgba(20,184,166,0.3)]' : ''
+                  }`}
                 >
-                  {loadingButton === product.slug ? (
-                    <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      LOADING...
-                    </>
-                  ) : (
-                    <>
-                      <span className="mr-2 transition-transform duration-300 group-hover:animate-[bounce_0.5s_ease-in-out_infinite]">🛒</span>
-                      BUY NOW
-                    </>
+                  {isBundle && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-accent to-primary text-white px-4 py-1 rounded-full text-xs font-bold shadow-md">
+                      BEST VALUE
+                    </div>
                   )}
-                </Button>
-              </Card>
-            ))}
+                  <div className="flex justify-center mb-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center">
+                      <ShoppingCart className="w-6 h-6 text-white" />
+                    </div>
+                  </div>
+                  <h3 className="font-bold mb-2 text-center flex-grow">{product.name}</h3>
+                  <p className={`font-bold gradient-text-primary text-center mb-4 ${isBundle ? 'text-3xl' : 'text-2xl'}`}>
+                    ${product.price.toFixed(2)}
+                  </p>
+                  <Button 
+                    onClick={() => handlePurchaseClick(product.slug, product.price)}
+                    disabled={loadingButton === product.slug}
+                    variant="default" 
+                    className={`w-full group ${isBundle ? 'h-12 text-base shadow-[0_0_15px_rgba(20,184,166,0.4)] hover:shadow-[0_0_25px_rgba(20,184,166,0.6)]' : ''}`}
+                  >
+                    {loadingButton === product.slug ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        LOADING...
+                      </>
+                    ) : (
+                      <>
+                        <span className="mr-2 transition-transform duration-300 group-hover:animate-[bounce_0.5s_ease-in-out_infinite]">🛒</span>
+                        BUY NOW
+                      </>
+                    )}
+                  </Button>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
