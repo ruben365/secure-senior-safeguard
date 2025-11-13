@@ -41,8 +41,11 @@ const Index = () => {
 
       {/* Hero Section */}
       <Hero
-        useTransitioningBackground={true}
-        useTransitioningText={true}
+        useTransitioningBackground={false}
+        useTransitioningText={false}
+        backgroundImage="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=2000&q=80"
+        headline="Protect Your Family from AI-Powered Scams"
+        subheadline="Ohio's trusted source for scam prevention training and 24/7 protection services"
         showScrollIndicator={true}
         showPrivacyDisclaimer={true}
       >
