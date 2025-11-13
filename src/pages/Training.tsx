@@ -32,6 +32,10 @@ import {
 import trainingSession from "@/assets/training-session.jpg";
 import heroTraining from "@/assets/hero-training-new.jpg";
 
+import heroTrainingWorkshop from "@/assets/hero-training-workshop.jpg";
+import heroTrainingLearning from "@/assets/hero-training-learning.jpg";
+import heroTrainingHandsOn from "@/assets/hero-training-hands-on.jpg";
+
 const LearnAndTrain = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [isYearly, setIsYearly] = useState(false);
@@ -41,6 +45,12 @@ const LearnAndTrain = () => {
     tier?: string;
     price?: number;
   } | null>(null);
+  
+  const trainingHeroImages = [
+    heroTrainingWorkshop,
+    heroTrainingLearning,
+    heroTrainingHandsOn,
+  ];
 
   const getPlanPrice = (monthlyPrice: number) => {
     if (isYearly) {
@@ -64,7 +74,7 @@ const LearnAndTrain = () => {
 
       {/* Hero Section */}
       <Hero
-        backgroundImage={heroTraining}
+        backgroundImages={trainingHeroImages}
         headline="Learn How to Recognize and Stop Scams"
         subheadline="Professional training programs and 24/7 protection services designed for real-world safety"
         showScrollIndicator={true}
