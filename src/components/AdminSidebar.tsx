@@ -48,45 +48,45 @@ const menuItems: MenuItem[] = [
     title: "Content",
     icon: FileText,
     children: [
-      { title: "Pages", href: "/admin/pages" },
-      { title: "Testimonials", href: "/admin/testimonials" },
-      { title: "Articles", href: "/admin/articles" },
-      { title: "Team", href: "/admin/team" },
+      { title: "Pages", href: "/admin/content/pages" },
+      { title: "Testimonials", href: "/admin/content/testimonials" },
+      { title: "Articles", href: "/admin/content/articles" },
+      { title: "Team", href: "/admin/content/team" },
     ],
   },
   {
     title: "Clients",
     icon: Users,
     children: [
-      { title: "Businesses", href: "/admin/businesses" },
-      { title: "Individuals", href: "/admin/individuals" },
-      { title: "Messages", href: "/admin/messages" },
+      { title: "Businesses", href: "/admin/clients/businesses" },
+      { title: "Individuals", href: "/admin/clients/individuals" },
+      { title: "Messages", href: "/admin/clients/messages" },
     ],
   },
   {
     title: "E-Commerce",
     icon: ShoppingCart,
     children: [
-      { title: "Products", href: "/admin/products" },
-      { title: "Orders", href: "/admin/orders" },
-      { title: "Inventory", href: "/admin/inventory" },
+      { title: "Products", href: "/admin/ecommerce/products" },
+      { title: "Orders", href: "/admin/ecommerce/orders" },
+      { title: "Inventory", href: "/admin/ecommerce/inventory" },
     ],
   },
   {
     title: "Communications",
     icon: Mail,
     children: [
-      { title: "Inbox", href: "/admin/inbox" },
-      { title: "Newsletter", href: "/admin/newsletter" },
+      { title: "Inbox", href: "/admin/communications/inbox" },
+      { title: "Newsletter", href: "/admin/communications/newsletter" },
     ],
   },
   {
     title: "Settings",
     icon: Settings,
     children: [
-      { title: "Site Settings", href: "/admin/site-settings" },
-      { title: "Users", href: "/admin/users" },
-      { title: "Billing", href: "/admin/billing" },
+      { title: "Site Settings", href: "/admin/settings/site" },
+      { title: "Users", href: "/admin/settings/users" },
+      { title: "Billing", href: "/admin/settings/billing" },
     ],
   },
 ];
@@ -128,19 +128,19 @@ export const AdminSidebar = ({ isOpen }: AdminSidebarProps) => {
                 key={item.title}
                 to={item.href!}
                 className={cn(
-                  "flex items-center gap-3 px-4 py-3 mx-2 rounded-lg transition-all duration-300",
+                  "flex items-center gap-3 px-4 py-3 mx-2 rounded-lg transition-all duration-300 ease-out",
                   "hover:bg-[#2A2540] group relative",
                   isActive(item.href!) && "bg-[#2A2540]"
                 )}
                 onClick={() => setMobileOpen(false)}
               >
                 {isActive(item.href!) && (
-                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-[hsl(var(--accent))] rounded-r-full" />
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-teal-500 rounded-r-full" />
                 )}
                 <Icon
                   className={cn(
-                    "h-5 w-5 text-white flex-shrink-0",
-                    collapsed && "mx-auto"
+                    "h-5 w-5 text-white flex-shrink-0 transition-opacity duration-300",
+                    collapsed && "mx-auto opacity-70"
                   )}
                 />
                 {!collapsed && (
@@ -160,18 +160,18 @@ export const AdminSidebar = ({ isOpen }: AdminSidebarProps) => {
             >
               <CollapsibleTrigger
                 className={cn(
-                  "flex items-center gap-3 w-full px-4 py-3 mx-2 rounded-lg transition-all duration-300",
+                  "flex items-center gap-3 w-full px-4 py-3 mx-2 rounded-lg transition-all duration-300 ease-out",
                   "hover:bg-[#2A2540] group relative",
                   parentActive && "bg-[#2A2540]"
                 )}
               >
                 {parentActive && (
-                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-[hsl(var(--accent))] rounded-r-full" />
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-teal-500 rounded-r-full" />
                 )}
                 <Icon
                   className={cn(
-                    "h-5 w-5 text-white flex-shrink-0",
-                    collapsed && "mx-auto"
+                    "h-5 w-5 text-white flex-shrink-0 transition-opacity duration-300",
+                    collapsed && "mx-auto opacity-70"
                   )}
                 />
                 {!collapsed && (
@@ -180,9 +180,9 @@ export const AdminSidebar = ({ isOpen }: AdminSidebarProps) => {
                       {item.title}
                     </span>
                     {isMenuOpen ? (
-                      <ChevronDown className="h-4 w-4 text-white/70" />
+                      <ChevronDown className="h-4 w-4 text-white/70 transition-transform duration-300" />
                     ) : (
-                      <ChevronRight className="h-4 w-4 text-white/70" />
+                      <ChevronRight className="h-4 w-4 text-white/70 transition-transform duration-300" />
                     )}
                   </>
                 )}
@@ -194,16 +194,16 @@ export const AdminSidebar = ({ isOpen }: AdminSidebarProps) => {
                       key={child.href}
                       to={child.href}
                       className={cn(
-                        "flex items-center gap-3 pl-[52px] pr-4 py-2 mx-2 rounded-lg transition-all duration-300",
+                        "flex items-center gap-3 pl-12 pr-4 py-2 mx-2 rounded-lg transition-all duration-300 ease-out",
                         "hover:bg-[#2A2540] relative",
                         isActive(child.href) && "bg-[#2A2540]"
                       )}
                       onClick={() => setMobileOpen(false)}
                     >
                       {isActive(child.href) && (
-                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-[hsl(var(--accent))] rounded-r-full" />
+                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-teal-500 rounded-r-full" />
                       )}
-                      <span className="text-white/90 text-sm">
+                      <span className="text-white/90 text-xs">
                         {child.title}
                       </span>
                     </Link>
