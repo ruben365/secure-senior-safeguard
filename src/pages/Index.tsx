@@ -417,26 +417,6 @@ const Index = () => {
           {/* Video Testimonials Section */}
           <div className="mb-12">
             <h3 className="text-2xl font-bold text-center mb-6">Video Testimonials</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              {[
-                { title: "Margaret's Grandparent Scam Story", videoId: "placeholder1" },
-                { title: "Small Business Success with AI", videoId: "placeholder2" },
-                { title: "Family Training Experience", videoId: "placeholder3" },
-              ].map((video, index) => (
-                <Card key={index} className="overflow-hidden hover:shadow-strong transition-all hover:-translate-y-1">
-                  <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                    <p className="text-sm text-muted-foreground px-4 text-center">
-                      Video: {video.title}
-                      <br />
-                      <span className="text-xs">(Link to be added)</span>
-                    </p>
-                  </div>
-                  <div className="p-4">
-                    <p className="font-semibold text-sm">{video.title}</p>
-                  </div>
-                </Card>
-              ))}
-            </div>
           </div>
 
           {/* Text Testimonials - Conditional Visibility */}
