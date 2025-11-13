@@ -93,6 +93,16 @@ const Signup = () => {
   const [businessEmail, setBusinessEmail] = useState("");
   const [businessPhone, setBusinessPhone] = useState("");
   const [businessAddress, setBusinessAddress] = useState("");
+  
+  // Business service interests
+  const [serviceAIReceptionist, setServiceAIReceptionist] = useState(false);
+  const [serviceWebsite, setServiceWebsite] = useState(false);
+  const [serviceInsurance, setServiceInsurance] = useState(false);
+  const [serviceCybersecurity, setServiceCybersecurity] = useState(false);
+  const [servicePhysicalSecurity, setServicePhysicalSecurity] = useState(false);
+  const [serviceOther, setServiceOther] = useState(false);
+  const [serviceOtherText, setServiceOtherText] = useState("");
+  const [referralSource, setReferralSource] = useState("");
 
   // Caregiver fields
   const [certificationNumber, setCertificationNumber] = useState("");
@@ -369,6 +379,46 @@ const Signup = () => {
     return true;
   };
 
+  const validateStep4 = () => {
+    if (selectedRole === "senior") {
+      // Validate at least one service is selected
+      const hasService = serviceAIReceptionist || serviceWebsite || serviceInsurance || 
+                        serviceCybersecurity || servicePhysicalSecurity || serviceOther;
+      
+      if (!hasService) {
+        toast({ 
+          title: "⚠️ No Service Selected", 
+          description: "Please select at least one service you're interested in", 
+          variant: "destructive" 
+        });
+        return false;
+      }
+      
+      // If "Other" is checked, require text input
+      if (serviceOther && !serviceOtherText.trim()) {
+        toast({ 
+          title: "⚠️ Missing Details", 
+          description: "Please describe the other service you're interested in", 
+          variant: "destructive" 
+        });
+        return false;
+      }
+      
+      // Validate referral source
+      if (!referralSource) {
+        toast({ 
+          title: "⚠️ Missing Information", 
+          description: "Please tell us how you heard about us", 
+          variant: "destructive" 
+        });
+        return false;
+      }
+      
+      return true;
+    }
+    return true;
+  };
+
   const handleNext = () => {
     if (step === 1 && !selectedRole) {
       toast({ 
@@ -380,6 +430,7 @@ const Signup = () => {
     }
     if (step === 2 && !validateStep2()) return;
     if (step === 3 && !validateStep3()) return;
+    if (step === 4 && !validateStep4()) return;
     
     // Success notification for completing a step
     if (step < totalSteps - 1) {
@@ -1028,6 +1079,121 @@ const Signup = () => {
                   rows={3}
                   className="resize-none"
                 />
+              </div>
+            </div>
+          )}
+
+          {/* Step 4: Service Interest (Business only) */}
+          {step === 4 && selectedRole === "senior" && (
+            <div className="space-y-6 form-content">
+              <div>
+                <h2 className="text-2xl font-bold mb-2">What services are you interested in?</h2>
+                <p className="text-muted-foreground">Select all that apply</p>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-start space-x-3">
+                  <Checkbox 
+                    id="serviceAIReceptionist" 
+                    checked={serviceAIReceptionist} 
+                    onCheckedChange={(checked) => setServiceAIReceptionist(checked as boolean)} 
+                  />
+                  <Label htmlFor="serviceAIReceptionist" className="text-base cursor-pointer leading-tight">
+                    <span className="font-semibold">AI Receptionist</span>
+                    <span className="text-muted-foreground ml-2">($149/month)</span>
+                  </Label>
+                </div>
+
+                <div className="flex items-start space-x-3">
+                  <Checkbox 
+                    id="serviceWebsite" 
+                    checked={serviceWebsite} 
+                    onCheckedChange={(checked) => setServiceWebsite(checked as boolean)} 
+                  />
+                  <Label htmlFor="serviceWebsite" className="text-base cursor-pointer leading-tight">
+                    <span className="font-semibold">Website Design</span>
+                    <span className="text-muted-foreground ml-2">(from $1,500)</span>
+                  </Label>
+                </div>
+
+                <div className="flex items-start space-x-3">
+                  <Checkbox 
+                    id="serviceInsurance" 
+                    checked={serviceInsurance} 
+                    onCheckedChange={(checked) => setServiceInsurance(checked as boolean)} 
+                  />
+                  <Label htmlFor="serviceInsurance" className="text-base cursor-pointer leading-tight">
+                    <span className="font-semibold">AI Insurance</span>
+                    <span className="text-muted-foreground ml-2">($199-799/month)</span>
+                  </Label>
+                </div>
+
+                <div className="flex items-start space-x-3">
+                  <Checkbox 
+                    id="serviceCybersecurity" 
+                    checked={serviceCybersecurity} 
+                    onCheckedChange={(checked) => setServiceCybersecurity(checked as boolean)} 
+                  />
+                  <Label htmlFor="serviceCybersecurity" className="text-base cursor-pointer leading-tight">
+                    <span className="font-semibold">Cybersecurity Training</span>
+                    <span className="text-muted-foreground ml-2">($79-399/session)</span>
+                  </Label>
+                </div>
+
+                <div className="flex items-start space-x-3">
+                  <Checkbox 
+                    id="servicePhysicalSecurity" 
+                    checked={servicePhysicalSecurity} 
+                    onCheckedChange={(checked) => setServicePhysicalSecurity(checked as boolean)} 
+                  />
+                  <Label htmlFor="servicePhysicalSecurity" className="text-base cursor-pointer leading-tight">
+                    <span className="font-semibold">Physical Security Products</span>
+                  </Label>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex items-start space-x-3">
+                    <Checkbox 
+                      id="serviceOther" 
+                      checked={serviceOther} 
+                      onCheckedChange={(checked) => setServiceOther(checked as boolean)} 
+                    />
+                    <Label htmlFor="serviceOther" className="text-base cursor-pointer leading-tight font-semibold">
+                      Other:
+                    </Label>
+                  </div>
+                  {serviceOther && (
+                    <Input 
+                      placeholder="Please describe the service you're interested in"
+                      value={serviceOtherText}
+                      onChange={(e) => setServiceOtherText(e.target.value)}
+                      className="ml-8"
+                    />
+                  )}
+                </div>
+              </div>
+
+              <div className="space-y-2 pt-4 border-t">
+                <Label htmlFor="referralSource">How did you hear about us? *</Label>
+                <Select value={referralSource} onValueChange={setReferralSource} required>
+                  <SelectTrigger id="referralSource" className="h-12">
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="google">Google Search</SelectItem>
+                    <SelectItem value="social-media">Social Media</SelectItem>
+                    <SelectItem value="referral">Referral</SelectItem>
+                    <SelectItem value="advertisement">Advertisement</SelectItem>
+                    <SelectItem value="other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
+                <p className="text-sm text-muted-foreground flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
+                  <span><strong>No payment required now.</strong> We'll contact you with a custom quote based on your selections.</span>
+                </p>
               </div>
             </div>
           )}
