@@ -52,12 +52,7 @@ export default function BusinessClientDetail() {
 
   return (
     <div className="space-y-6">
-      <BreadcrumbNav items={[
-        { label: "Dashboard", href: "/admin" },
-        { label: "Clients", href: "/admin/clients" },
-        { label: "Businesses", href: "/admin/clients/businesses" },
-        { label: mockClient.companyName },
-      ]} />
+      <BreadcrumbNav />
 
       <div className="sticky top-0 z-10 bg-background border-b pb-6">
         <div className="flex items-start gap-6">

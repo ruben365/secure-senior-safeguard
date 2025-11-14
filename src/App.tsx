@@ -173,6 +173,22 @@ const TeamAdmin = lazy(() => {
   });
 });
 
+const BusinessClients = lazy(() => {
+  performanceMonitor.startTracking('BusinessClients');
+  return import("./pages/admin/BusinessClients").then(module => {
+    performanceMonitor.endTracking('BusinessClients');
+    return module;
+  });
+});
+
+const BusinessClientDetail = lazy(() => {
+  performanceMonitor.startTracking('BusinessClientDetail');
+  return import("./pages/admin/BusinessClientDetail").then(module => {
+    performanceMonitor.endTracking('BusinessClientDetail');
+    return module;
+  });
+});
+
 const Portal = lazy(() => {
   performanceMonitor.startTracking('Portal');
   return import("./pages/Portal").then(module => {
@@ -373,6 +389,8 @@ function AnimatedRoutes() {
         <Route path="/admin/content/articles/:id" element={<PageTransition><AdminRoute><ArticleEditor /></AdminRoute></PageTransition>} />
         <Route path="/admin/articles/preview" element={<PageTransition><AdminRoute><ArticlePreview /></AdminRoute></PageTransition>} />
         <Route path="/admin/content/team" element={<PageTransition><AdminRoute><TeamAdmin /></AdminRoute></PageTransition>} />
+        <Route path="/admin/clients/businesses" element={<PageTransition><AdminRoute><BusinessClients /></AdminRoute></PageTransition>} />
+        <Route path="/admin/clients/businesses/:id" element={<PageTransition><AdminRoute><BusinessClientDetail /></AdminRoute></PageTransition>} />
         <Route path="/portal" element={<PageTransition><ProtectedRoute><Portal /></ProtectedRoute></PageTransition>} />
         <Route path="/portal/admin" element={<PageTransition><ProtectedRoute><AdminDashboard /></ProtectedRoute></PageTransition>} />
         <Route path="/portal/analyst" element={<PageTransition><ProtectedRoute><AnalystDashboard /></ProtectedRoute></PageTransition>} />
