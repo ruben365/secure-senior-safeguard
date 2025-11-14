@@ -187,6 +187,16 @@ export function initPerformanceMonitoring() {
 export function initPerformanceOptimizations() {
   if (typeof window === 'undefined') return;
 
+  // Add loaded class to body to make content visible
+  window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+  });
+  
+  // Also add it immediately in case load event already fired
+  if (document.readyState === 'complete') {
+    document.body.classList.add('loaded');
+  }
+
   // Preload critical assets
   const fontLink = document.createElement('link');
   fontLink.rel = 'preload';
