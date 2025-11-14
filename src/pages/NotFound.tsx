@@ -45,11 +45,11 @@ function NotFound() {
           </div>
 
           {/* Headline */}
-          <h2 className="text-3xl font-bold mb-4">Oops! Page Not Found</h2>
+          <h2 className="text-4xl font-bold mb-4">Page Not Found</h2>
           
           {/* Message */}
           <p className="text-muted-foreground text-lg mb-8 max-w-md mx-auto leading-relaxed">
-            The page you're looking for doesn't exist or has been moved. Don't worry—we'll help you find what you need!
+            This page is under protection! The content you're looking for may have been moved or deleted. Let's get you back on track.
           </p>
 
           {/* Search Bar */}
@@ -88,12 +88,12 @@ function NotFound() {
             </div>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button asChild size="lg" className="gap-2">
+          {/* CTA Button - Large and Prominent */}
+          <div className="flex justify-center">
+            <Button asChild size="lg" className="h-14 px-8 text-lg font-semibold gap-2 bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all">
               <Link to="/">
-                <Home className="h-4 w-4" />
-                Go to Homepage
+                <Home className="h-5 w-5" />
+                Take Me Home
               </Link>
             </Button>
           </div>
