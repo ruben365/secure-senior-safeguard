@@ -134,11 +134,7 @@ export default function BusinessClients() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Business Clients</h1>
-          <BreadcrumbNav items={[
-            { label: "Dashboard", href: "/admin" },
-            { label: "Clients", href: "/admin/clients" },
-            { label: "Businesses" },
-          ]} />
+          <BreadcrumbNav />
         </div>
         <Button onClick={() => navigate("/admin/clients/businesses/new")}>
           <Plus className="mr-2 h-4 w-4" />
