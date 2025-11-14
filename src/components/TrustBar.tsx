@@ -108,25 +108,25 @@ const TrustBar = () => {
               ))}
             </div>
 
-            {/* Mobile: Vertical stack */}
-            <div className="flex flex-col sm:hidden gap-3">
+            {/* Mobile: 2x2 grid, vertical on very small screens */}
+            <div className="flex sm:hidden flex-col gap-3">
               {trustIndicators.map((item, index) => (
                 <div 
                   key={index} 
-                  className="flex items-center gap-3 group/badge opacity-0 animate-trust-badge-in min-h-[44px] px-3 py-2 rounded-xl hover:bg-white/10 transition-all duration-300" 
+                  className="flex items-center gap-3 group/badge opacity-0 animate-trust-badge-in min-h-[44px] px-3 py-2 rounded-xl active:bg-white/10 transition-all duration-300" 
                   style={{ 
                     animationDelay: `${index * 200 + 300}ms`,
                     animationFillMode: 'forwards'
                   }}
                   role="listitem"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-white/25 backdrop-blur-sm flex items-center justify-center flex-shrink-0 group-hover/badge:scale-110 group-hover/badge:bg-white/35 transition-all duration-300 animate-icon-pulse" 
+                  <div className="w-10 h-10 rounded-xl bg-white/25 backdrop-blur-sm flex items-center justify-center flex-shrink-0 group-active/badge:scale-110 group-active/badge:bg-white/35 transition-all duration-300 animate-icon-pulse" 
                     style={{ animationDelay: `${index * 200 + 500}ms` }}
                     aria-hidden="true"
                   >
                     <item.icon className="w-5 h-5 text-white drop-shadow-lg" />
                   </div>
-                  <span className="text-sm font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)] flex-1 min-w-[180px]">
+                  <span className="text-sm font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)] flex-1">
                     {item.useCounter ? `${item.count}+ Families Protected` : item.text}
                   </span>
                 </div>

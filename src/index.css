@@ -190,15 +190,15 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   }
   
   h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
   }
   
   h2 {
-    @apply text-3xl md:text-4xl lg:text-5xl;
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
   }
   
   h3 {
-    @apply text-2xl md:text-3xl;
+    @apply text-xl sm:text-2xl md:text-3xl;
   }
   
   /* Ensure minimum tap targets for accessibility */
@@ -708,6 +708,8 @@ a[role="button"]:active {
 .form-input {
   border: 1px solid hsl(var(--border));
   transition: all 0.3s ease-out;
+  min-height: 48px;
+  font-size: 16px; /* Prevents iOS zoom */
 }
 
 .form-input:focus {
@@ -727,6 +729,33 @@ a[role="button"]:active {
 .form-input.success {
   border: 2px solid hsl(142, 76%, 36%);
   box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* Mobile-specific form enhancements */
+@media (max-width: 768px) {
+  /* Ensure checkboxes and radio buttons are touch-friendly */
+  input[type="checkbox"],
+  input[type="radio"] {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Remove hover effects on mobile, use active instead */
+  .hover-scale:active {
+    transform: scale(0.95);
+  }
+
+  .hover-scale:hover {
+    transform: none;
+  }
+
+  /* Ensure all interactive elements have proper touch targets */
+  button, 
+  a[role="button"],
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }
 
 /* Shake animation for validation errors */

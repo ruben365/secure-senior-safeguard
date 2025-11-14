@@ -37,7 +37,7 @@ const Hero = ({ backgroundImage, headline, subheadline, children, className, ove
   return (
     <div 
       ref={ref}
-      className={cn("relative min-h-[80vh] md:min-h-[90vh] flex items-center overflow-hidden", className)}
+      className={cn("relative min-h-[70vh] sm:min-h-[80vh] md:min-h-[90vh] flex items-center overflow-hidden", className)}
     >
       {/* Background with Parallax */}
       <motion.div 
@@ -80,11 +80,11 @@ const Hero = ({ backgroundImage, headline, subheadline, children, className, ove
       </div>
       
       {/* Content with Stagger Animation */}
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
+      <div className="container mx-auto px-4 py-8 sm:py-12 md:px-6 lg:px-8 relative z-10">
         <div className="max-w-3xl mx-auto md:mx-0">
           {headline && (
             <motion.h1 
-              className="text-white mb-6 [text-shadow:0_4px_20px_rgba(139,92,246,0.4)] leading-tight"
+              className="text-white mb-4 md:mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl [text-shadow:0_4px_20px_rgba(139,92,246,0.4)] leading-tight"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
@@ -94,7 +94,7 @@ const Hero = ({ backgroundImage, headline, subheadline, children, className, ove
           )}
           {subheadline && (
             <motion.p 
-              className="text-white/90 text-xl md:text-2xl mb-8 leading-relaxed"
+              className="text-white/90 text-base sm:text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 leading-relaxed"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
