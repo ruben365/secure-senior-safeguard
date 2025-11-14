@@ -353,6 +353,30 @@ const NotFound = lazy(() => {
   });
 });
 
+const SystemHealthDashboard = lazy(() => {
+  performanceMonitor.startTracking('SystemHealthDashboard');
+  return import("./pages/admin/SystemHealthDashboard").then(module => {
+    performanceMonitor.endTracking('SystemHealthDashboard');
+    return module;
+  });
+});
+
+const TestingChecklist = lazy(() => {
+  performanceMonitor.startTracking('TestingChecklist');
+  return import("./pages/admin/TestingChecklist").then(module => {
+    performanceMonitor.endTracking('TestingChecklist');
+    return module;
+  });
+});
+
+const Maintenance = lazy(() => {
+  performanceMonitor.startTracking('Maintenance');
+  return import("./pages/Maintenance").then(module => {
+    performanceMonitor.endTracking('Maintenance');
+    return module;
+  });
+});
+
 // Loading fallback component with enhanced skeleton
 const PageLoader = () => (
   <div className="min-h-screen bg-background">
@@ -467,7 +491,10 @@ function AnimatedRoutes() {
         <Route path="/admin/ecommerce/orders" element={<PageTransition><AdminRoute><OrdersList /></AdminRoute></PageTransition>} />
         <Route path="/admin/ecommerce/orders/:id" element={<PageTransition><AdminRoute><OrderDetail /></AdminRoute></PageTransition>} />
         <Route path="/admin/ecommerce/inventory" element={<PageTransition><AdminRoute><InventoryManagement /></AdminRoute></PageTransition>} />
+        <Route path="/admin/testing" element={<PageTransition><AdminRoute><SystemHealthDashboard /></AdminRoute></PageTransition>} />
+        <Route path="/admin/testing/checklist" element={<PageTransition><AdminRoute><TestingChecklist /></AdminRoute></PageTransition>} />
         <Route path="/admin/settings/*" element={<PageTransition><AdminRoute><Settings /></AdminRoute></PageTransition>} />
+        <Route path="/maintenance" element={<PageTransition><Maintenance /></PageTransition>} />
         <Route path="/portal" element={<PageTransition><ProtectedRoute><Portal /></ProtectedRoute></PageTransition>} />
         <Route path="/portal/admin" element={<PageTransition><ProtectedRoute><AdminDashboard /></ProtectedRoute></PageTransition>} />
         <Route path="/portal/analyst" element={<PageTransition><ProtectedRoute><AnalystDashboard /></ProtectedRoute></PageTransition>} />
