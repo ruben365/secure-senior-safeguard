@@ -132,69 +132,69 @@ function Index() {
           </ScrollRevealSection>
 
           <ScrollRevealSection staggerChildren={true}>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             <Card
               ref={stat1.ref}
-              className="p-6 hover:shadow-strong transition-all duration-500 hover:-translate-y-2 hover:scale-105 rounded-2xl border-border/50 group animate-fade-in-up bg-gradient-to-br from-card to-card/50 backdrop-blur-sm"
+              className="p-4 sm:p-6 active:scale-95 md:hover:shadow-strong transition-all duration-500 md:hover:-translate-y-2 md:hover:scale-105 rounded-2xl border-border/50 group animate-fade-in-up bg-gradient-to-br from-card to-card/50 backdrop-blur-sm"
               style={{ animationDelay: "0ms" }}
             >
-              <div className="flex justify-center mb-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
-                  <DollarSign className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-500" />
+              <div className="flex justify-center mb-3 sm:mb-4">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center md:group-hover:scale-110 md:group-hover:rotate-12 transition-all duration-500">
+                  <DollarSign className="w-6 h-6 sm:w-8 sm:h-8 text-primary md:group-hover:scale-110 transition-transform duration-500" />
                 </div>
               </div>
-              <h3 className={`text-4xl font-bold mb-2 text-center text-primary transition-all duration-300 ${stat1.count === 3.4 ? 'animate-pulse' : ''}`}>
+              <h3 className={`text-3xl sm:text-4xl font-bold mb-2 text-center text-primary transition-all duration-300 ${stat1.count === 3.4 ? 'animate-pulse' : ''}`}>
                 {stat1.displayValue}
               </h3>
-              <p className="text-muted-foreground text-center">Lost to elder fraud in 2023</p>
+              <p className="text-muted-foreground text-center text-sm sm:text-base">Lost to elder fraud in 2023</p>
             </Card>
 
             <Card
               ref={stat2.ref}
-              className="p-6 hover:shadow-strong transition-all duration-500 hover:-translate-y-2 hover:scale-105 rounded-2xl border-border/50 group animate-fade-in-up bg-gradient-to-br from-card to-card/50 backdrop-blur-sm"
+              className="p-4 sm:p-6 active:scale-95 md:hover:shadow-strong transition-all duration-500 md:hover:-translate-y-2 md:hover:scale-105 rounded-2xl border-border/50 group animate-fade-in-up bg-gradient-to-br from-card to-card/50 backdrop-blur-sm"
               style={{ animationDelay: "100ms" }}
             >
-              <div className="flex justify-center mb-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
-                  <TrendingUp className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-500" />
+              <div className="flex justify-center mb-3 sm:mb-4">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center md:group-hover:scale-110 md:group-hover:rotate-12 transition-all duration-500">
+                  <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 text-primary md:group-hover:scale-110 transition-transform duration-500" />
                 </div>
               </div>
-              <h3 className={`text-4xl font-bold mb-2 text-center text-primary transition-all duration-300 ${stat2.count === 11 ? 'animate-pulse' : ''}`}>
+              <h3 className={`text-3xl sm:text-4xl font-bold mb-2 text-center text-primary transition-all duration-300 ${stat2.count === 11 ? 'animate-pulse' : ''}`}>
                 {stat2.displayValue}
               </h3>
-              <p className="text-muted-foreground text-center">AI scams increased this year</p>
+              <p className="text-muted-foreground text-center text-sm sm:text-base">AI scams increased this year</p>
             </Card>
 
             <Card
               ref={stat3.ref}
-              className="p-6 hover:shadow-strong transition-all duration-500 hover:-translate-y-2 hover:scale-105 rounded-2xl border-border/50 group animate-fade-in-up bg-gradient-to-br from-card to-card/50 backdrop-blur-sm"
+              className="p-4 sm:p-6 active:scale-95 md:hover:shadow-strong transition-all duration-500 md:hover:-translate-y-2 md:hover:scale-105 rounded-2xl border-border/50 group animate-fade-in-up bg-gradient-to-br from-card to-card/50 backdrop-blur-sm"
               style={{ animationDelay: "200ms" }}
             >
-              <div className="flex justify-center mb-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
-                  <UserX className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-500" />
+              <div className="flex justify-center mb-3 sm:mb-4">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center md:group-hover:scale-110 md:group-hover:rotate-12 transition-all duration-500">
+                  <UserX className="w-6 h-6 sm:w-8 sm:h-8 text-primary md:group-hover:scale-110 transition-transform duration-500" />
                 </div>
               </div>
-              <h3 className={`text-4xl font-bold mb-2 text-center text-primary transition-all duration-300 ${stat3.count === 50 ? 'animate-pulse' : ''}`}>
+              <h3 className={`text-3xl sm:text-4xl font-bold mb-2 text-center text-primary transition-all duration-300 ${stat3.count === 50 ? 'animate-pulse' : ''}`}>
                 {stat3.displayValue}
               </h3>
-              <p className="text-muted-foreground text-center">Of fraud victims are seniors</p>
+              <p className="text-muted-foreground text-center text-sm sm:text-base">Of fraud victims are seniors</p>
             </Card>
 
             <Card
               ref={stat4.ref}
-              className="p-6 hover:shadow-strong transition-all duration-500 hover:-translate-y-2 hover:scale-105 rounded-2xl border-border/50 group animate-fade-in-up bg-gradient-to-br from-card to-card/50 backdrop-blur-sm"
+              className="p-4 sm:p-6 active:scale-95 md:hover:shadow-strong transition-all duration-500 md:hover:-translate-y-2 md:hover:scale-105 rounded-2xl border-border/50 group animate-fade-in-up bg-gradient-to-br from-card to-card/50 backdrop-blur-sm"
               style={{ animationDelay: "300ms" }}
             >
-              <div className="flex justify-center mb-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
-                  <Bot className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-500" />
+              <div className="flex justify-center mb-3 sm:mb-4">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center md:group-hover:scale-110 md:group-hover:rotate-12 transition-all duration-500">
+                  <Bot className="w-6 h-6 sm:w-8 sm:h-8 text-primary md:group-hover:scale-110 transition-transform duration-500" />
                 </div>
               </div>
-              <h3 className={`text-4xl font-bold mb-2 text-center text-primary transition-all duration-300 ${stat4.count === 400 ? 'animate-pulse' : ''}`}>
+              <h3 className={`text-3xl sm:text-4xl font-bold mb-2 text-center text-primary transition-all duration-300 ${stat4.count === 400 ? 'animate-pulse' : ''}`}>
                 {stat4.displayValue}
               </h3>
-              <p className="text-muted-foreground text-center">Rise in voice cloning scams</p>
+              <p className="text-muted-foreground text-center text-sm sm:text-base">Rise in voice cloning scams</p>
             </Card>
           </div>
           </ScrollRevealSection>
