@@ -337,6 +337,14 @@ const TermsOfService = lazy(() => {
   });
 });
 
+const FAQ = lazy(() => {
+  performanceMonitor.startTracking('FAQ');
+  return import("./pages/FAQ").then(module => {
+    performanceMonitor.endTracking('FAQ');
+    return module;
+  });
+});
+
 const NotFound = lazy(() => {
   performanceMonitor.startTracking('NotFound');
   return import("./pages/NotFound").then(module => {
@@ -471,6 +479,7 @@ function AnimatedRoutes() {
         <Route path="/portal/healthcare" element={<PageTransition><ProtectedRoute><HealthcareDashboard /></ProtectedRoute></PageTransition>} />
         <Route path="/privacy-policy" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
         <Route path="/terms-of-service" element={<PageTransition><TermsOfService /></PageTransition>} />
+        <Route path="/faq" element={<PageTransition><FAQ /></PageTransition>} />
         <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
       </Routes>
     </AnimatePresence>

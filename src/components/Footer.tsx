@@ -97,18 +97,18 @@ const Footer = () => {
             <h3 className="font-bold text-lg mb-4">Support</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/resources#faq" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                <Link to="/faq" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link to="/resources#scripts" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                  Emergency Scripts
+                <Link to="/contact" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                  Contact Support
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                  Submit Suspicious Item
+                <Link to="/resources" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                  Resources
                 </Link>
               </li>
             </ul>
