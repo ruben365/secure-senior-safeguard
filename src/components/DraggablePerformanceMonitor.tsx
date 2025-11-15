@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 export function DraggablePerformanceMonitor() {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(import.meta.env.DEV);
   const [position, setPosition] = useState({ x: 20, y: 100 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
@@ -89,7 +89,7 @@ export function DraggablePerformanceMonitor() {
     };
   }, [isDragging, dragOffset]);
 
-  if (!isVisible) return null;
+  if (!isVisible || !import.meta.env.DEV) return null;
 
   return (
     <Card

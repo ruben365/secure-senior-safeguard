@@ -14,47 +14,48 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Phone, Mail, MessageCircle, MapPin, Clock, CheckCircle, Shield, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 import heroContact from "@/assets/hero-contact-new.jpg";
 
 const contactMethods = [
   {
     icon: Phone,
     title: "Phone Support",
-    detail: "(555) 123-4567",
+    detail: "(614) 555-0100",
     hours: "Mon-Fri: 9am-6pm EST",
-    action: "tel:+15551234567",
+    action: "tel:+16145550100",
     actionText: "Call Now",
     badge: "Avg. 2min wait",
     badgeVariant: "default" as const
   },
   {
     icon: Mail,
-    title: "Email Support",
-    detail: "support@invisionnetwork.org",
+    title: "General Inquiries",
+    detail: "info@invisionnetwork.org",
     hours: "Response within 4 hours",
-    action: "mailto:support@invisionnetwork.org",
+    action: "mailto:info@invisionnetwork.org",
     actionText: "Send Email",
     badge: "95% same-day",
     badgeVariant: "default" as const
   },
   {
-    icon: MessageCircle,
-    title: "Live Chat",
-    detail: "Chat with our team",
-    hours: "Mon-Fri: 9am-8pm EST",
-    action: "#",
-    actionText: "Start Chat",
-    badge: "Online Now",
-    badgeVariant: "success" as const
+    icon: Mail,
+    title: "Support Team",
+    detail: "support@invisionnetwork.org",
+    hours: "Response within 2 hours",
+    action: "mailto:support@invisionnetwork.org",
+    actionText: "Send Email",
+    badge: "Priority Support",
+    badgeVariant: "premium" as const
   },
   {
-    icon: MapPin,
-    title: "Office Visit",
-    detail: "Columbus, Ohio",
-    hours: "By appointment only",
-    action: "#",
-    actionText: "Get Directions",
-    badge: "Free parking",
+    icon: Mail,
+    title: "Business Inquiries",
+    detail: "business@invisionnetwork.org",
+    hours: "Response within 4 hours",
+    action: "mailto:business@invisionnetwork.org",
+    actionText: "Send Email",
+    badge: "B2B Services",
     badgeVariant: "default" as const
   }
 ];
@@ -76,26 +77,43 @@ function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    toast.success("Message sent! We'll respond within 4 hours.");
-    
-    // Reset form
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        fullName: "",
-        email: "",
-        phone: "",
-        subject: "",
-        message: "",
-        hearAbout: "",
-        contactMethod: "email"
+    try {
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: { 
+          name: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          interest: formData.subject,
+          message: formData.message,
+          hearAbout: formData.hearAbout,
+          contactMethod: formData.contactMethod
+        }
       });
-    }, 3000);
+
+      if (error) throw error;
+
+      setIsSubmitted(true);
+      toast.success("Message sent! We'll respond within 4 hours.");
+      
+      // Reset form after 3 seconds
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({
+          fullName: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+          hearAbout: "",
+          contactMethod: "email"
+        });
+      }, 3000);
+    } catch (error) {
+      console.error("Contact form error:", error);
+      toast.error("Failed to send message. Please try again or email us directly at info@invisionnetwork.org");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const messageLength = formData.message.length;
