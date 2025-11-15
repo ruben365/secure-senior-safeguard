@@ -98,12 +98,12 @@ function Index() {
         showScrollIndicator={true}
         showPrivacyDisclaimer={true}
       >
-        <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center sm:justify-start">
+        <div className="flex flex-col sm:flex-row gap-3 md:gap-4 flex-wrap justify-center sm:justify-start">
           <Button 
             asChild 
             variant="default" 
             size="xl" 
-            className="w-full sm:w-auto text-base md:text-lg transition-all duration-300 ease-out hover:scale-105 active:scale-98 hover:shadow-[0_10px_25px_rgba(109,40,217,0.3)]"
+            className="w-full sm:w-auto text-sm md:text-base lg:text-lg px-6 md:px-8 py-3 md:py-4 min-h-[48px] transition-all duration-300 ease-out hover:scale-105 active:scale-98 hover:shadow-[0_10px_25px_rgba(109,40,217,0.3)]"
           >
             <Link to="/contact?service=family-shield" aria-label="Get family protection plan">
               Get Protection Now
