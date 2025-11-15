@@ -275,23 +275,33 @@ function Business() {
             </ScrollReveal>
 
             <ScrollReveal animation="scale-in" delay={200}>
-              <Card className="p-6 md:p-8 active:scale-98">
-                <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">Follow-Up Automation System</h3>
-                <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6">Automated email/SMS campaigns, lead nurturing</p>
-                <p ref={price2Counter.ref} className="text-3xl md:text-4xl font-bold text-accent mb-4 md:mb-6">
-                  {price2Counter.displayValue}
-                </p>
-...
-                <Button 
-                  asChild
-                  variant="default" 
-                  className="w-full transition-all duration-300 md:hover:bg-primary/90 md:hover:shadow-[0_12px_28px_rgba(109,40,217,0.25)] md:hover:scale-[1.02] active:scale-95 h-11 md:h-10"
-                >
-                  <Link to="/contact?service=automation&plan=12500">
-                    GET STARTED
-                  </Link>
-                </Button>
-              </Card>
+              <div className="relative">
+                <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-primary-foreground px-6 py-2 rounded-full text-xs font-bold tracking-wider shadow-lg z-20">
+                  MOST POPULAR
+                </div>
+                <Card className="p-6 md:p-8 active:scale-98 border-2 border-primary shadow-[0_8px_30px_rgba(139,92,246,0.15)] hover:shadow-[0_12px_40px_rgba(139,92,246,0.2)] transition-all">
+                  <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 mt-2">Follow-Up Automation System</h3>
+                  <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6">Automated email/SMS campaigns, lead nurturing</p>
+                  <p ref={price2Counter.ref} className="text-3xl md:text-4xl font-bold text-accent mb-4 md:mb-6">
+                    {price2Counter.displayValue}
+                  </p>
+                  <ul className="space-y-2 md:space-y-3 mb-6 md:mb-8">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-success flex-shrink-0 mt-0.5" />
+                      <span className="text-sm md:text-base">Multi-channel campaigns</span>
+                    </li>
+                  </ul>
+                  <Button 
+                    asChild
+                    variant="default" 
+                    className="w-full transition-all duration-300 md:hover:bg-primary/90 md:hover:shadow-[0_12px_28px_rgba(109,40,217,0.25)] md:hover:scale-[1.02] active:scale-95 h-11 md:h-10"
+                  >
+                    <Link to="/contact?service=automation&plan=12500">
+                      GET STARTED
+                    </Link>
+                  </Button>
+                </Card>
+              </div>
             </ScrollReveal>
 
             <ScrollReveal animation="slide-right" delay={400}>
