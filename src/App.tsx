@@ -8,6 +8,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AdminRoute } from "./components/AdminRoute";
 import { AIChat } from "./components/AIChat";
 import { AIChatProvider } from "./contexts/AIChatContext";
+import { CartProvider } from "./contexts/CartContext";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { PerformanceDashboard } from "./components/PerformanceDashboard";
 import { RouteTracker } from "./components/RouteTracker";
@@ -546,25 +547,27 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Toaster />
       <Sonner />
-      <AIChatProvider>
-        <BrowserRouter>
-          <SkipToContent />
-          <NavigationProgress />
-          <ScrollToTop />
-          <ScrollProgressBar />
-          <RouteTracker />
-          <AnalyticsTracker />
-          <ErrorBoundary>
-            <Breadcrumb />
-            <Suspense fallback={<PageLoader />}>
-              <AnimatedRoutes />
-            </Suspense>
-          </ErrorBoundary>
-          <AIChat />
-          <CookieConsent />
-          <PerformanceDashboard />
-        </BrowserRouter>
-      </AIChatProvider>
+      <CartProvider>
+        <AIChatProvider>
+          <BrowserRouter>
+            <SkipToContent />
+            <NavigationProgress />
+            <ScrollToTop />
+            <ScrollProgressBar />
+            <RouteTracker />
+            <AnalyticsTracker />
+            <ErrorBoundary>
+              <Breadcrumb />
+              <Suspense fallback={<PageLoader />}>
+                <AnimatedRoutes />
+              </Suspense>
+            </ErrorBoundary>
+            <AIChat />
+            <CookieConsent />
+            <PerformanceDashboard />
+          </BrowserRouter>
+        </AIChatProvider>
+      </CartProvider>
     </QueryClientProvider>
   );
 }

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PrefetchLink } from "@/components/PrefetchLink";
+import { ShoppingCart } from "@/components/ShoppingCart";
 import invisionLogo from "@/assets/invision-logo.png";
 
 const Navigation = () => {
@@ -54,6 +55,7 @@ const Navigation = () => {
 
           {/* Right Side - Phone & Login */}
           <div className="flex items-center gap-2 xl:gap-3">
+            <ShoppingCart />
             <a
               href="tel:9375550199"
               className="hidden md:flex items-center gap-2 text-xs xl:text-sm text-foreground/80 font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-md px-2 py-2 no-underline whitespace-nowrap"
