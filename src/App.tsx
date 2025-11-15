@@ -13,6 +13,7 @@ import { SubscriptionProvider } from "./contexts/SubscriptionContext";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { PerformanceDashboard } from "./components/PerformanceDashboard";
 import { RouteTracker } from "./components/RouteTracker";
+import { DraggablePerformanceMonitor } from "./components/DraggablePerformanceMonitor";
 
 import { PageTransition } from "./components/PageTransition";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -569,6 +570,7 @@ function App() {
               <AIChat />
               <CookieConsent />
               <PerformanceDashboard />
+              <DraggablePerformanceMonitor />
             </BrowserRouter>
           </AIChatProvider>
         </CartProvider>
