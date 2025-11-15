@@ -105,8 +105,6 @@ function Index() {
         subheadline="Serving Ohio's diverse communities with compassionate scam prevention training, 24/7 support, and personalized protection services for every family"
         showScrollIndicator={true}
         showPrivacyDisclaimer={true}
-        showProtectionBadge={true}
-        badgeText="500+ Families Protected"
         overlay={true}
       >
         <div className="flex flex-col sm:flex-row gap-3 md:gap-4 flex-wrap justify-center sm:justify-start">

@@ -1704,3 +1704,26 @@ video {
   h3 { font-size: 1.25rem; }
 }
 
+/* Horizontal scrolling animation - right to left */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-left {
+  animation: scroll-left 30s linear infinite;
+}
+
+.animate-scroll-left:hover {
+  animation-play-state: paused;
+}
+
+/* Brightness utility for hero images */
+.brightness-115 {
+  filter: brightness(1.15);
+}
+

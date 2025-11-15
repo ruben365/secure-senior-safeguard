@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Search, ThumbsUp, ThumbsDown, Phone, MessageCircle, ChevronDown, Mail, TrendingUp, Copy, Check } from "lucide-react";
+import { Search, ThumbsUp, ThumbsDown, Phone, MessageCircle, ChevronDown, Mail, TrendingUp, Copy, Check, Zap, Brain, Cloud, Database, Lock, Globe, Cpu, Shield } from "lucide-react";
 import { ScrollRevealSection } from "@/components/ScrollRevealSection";
 import { CategoryTabs } from "@/components/CategoryTabs";
 import { FloatingHelpButton } from "@/components/FloatingHelpButton";
@@ -26,6 +26,17 @@ interface FAQ {
   answer: string;
   category: string;
 }
+
+const logos = [
+  { name: "OpenAI", icon: Zap, description: "GPT Models", color: "text-emerald-600 dark:text-emerald-400" },
+  { name: "Google AI", icon: Brain, description: "Gemini", color: "text-blue-600 dark:text-blue-400" },
+  { name: "Microsoft Azure", icon: Cloud, description: "Cloud Infrastructure", color: "text-sky-600 dark:text-sky-400" },
+  { name: "AWS", icon: Database, description: "Secure Hosting", color: "text-orange-600 dark:text-orange-400" },
+  { name: "IBM Watson", icon: Cpu, description: "Enterprise AI", color: "text-indigo-600 dark:text-indigo-400" },
+  { name: "Anthropic", icon: Lock, description: "Claude Models", color: "text-amber-600 dark:text-amber-400" },
+  { name: "Hugging Face", icon: Globe, description: "ML Models", color: "text-yellow-600 dark:text-yellow-400" },
+  { name: "TensorFlow", icon: Brain, description: "ML Framework", color: "text-red-600 dark:text-red-400" },
+];
 
 const faqs: FAQ[] = [
   // Getting Started
@@ -363,7 +374,7 @@ export default function FAQ() {
       <Navigation />
       <main id="main-content">
         {/* Header Section */}
-        <section className="bg-gradient-to-br from-primary/10 via-accent/5 to-background py-16 sm:py-20">
+        <section className="bg-gradient-to-br from-primary/10 via-accent/5 to-background py-12 sm:py-16">
           <div className="container mx-auto px-4">
             <ScrollRevealSection>
               <div className="max-w-3xl mx-auto text-center">
@@ -382,7 +393,7 @@ export default function FAQ() {
                     placeholder="Search FAQs..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-12 pr-4 h-14 text-lg"
+                    className="pl-12 pr-4 h-12 text-lg"
                     aria-label="Search frequently asked questions"
                   />
                 </div>
@@ -417,16 +428,16 @@ export default function FAQ() {
         </section>
 
         {/* FAQ Accordion */}
-        <section className="py-8 sm:py-10">
+        <section className="py-6 sm:py-8">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               {filteredFAQs.length > 0 ? (
-                <Accordion type="single" collapsible className="space-y-2">
+                <Accordion type="single" collapsible className="space-y-1.5">
                   {filteredFAQs.map((faq) => (
                     <ScrollRevealSection key={faq.id}>
                       <Card className="overflow-hidden">
                         <AccordionItem value={faq.id} className="border-none">
-                          <AccordionTrigger className="px-6 py-4 text-left hover:bg-muted/50 transition-colors text-lg font-semibold hover:no-underline">
+                          <AccordionTrigger className="px-5 py-3 text-left hover:bg-muted/50 transition-colors text-lg font-semibold hover:no-underline">
                             <span className="pr-4">{faq.question}</span>
                           </AccordionTrigger>
                           <AccordionContent className="px-6 pb-6">
@@ -500,8 +511,79 @@ export default function FAQ() {
           </div>
         </section>
 
+        {/* Trusted Tech Partners - Horizontal Scroll */}
+        <section className="py-12 bg-gradient-to-b from-background to-muted/20 border-y border-border/40 overflow-hidden">
+          <div className="container mx-auto px-4 mb-8">
+            <div className="text-center">
+              <Badge variant="outline" className="mb-3">
+                <Shield className="w-3 h-3 mr-1" />
+                Enterprise-Grade AI
+              </Badge>
+              <h3 className="text-2xl font-semibold text-foreground/90 mb-2">
+                Powered By Industry Leaders
+              </h3>
+              <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
+                Our AI protection combines the best models from trusted providers
+              </p>
+            </div>
+          </div>
+          
+          {/* Infinite horizontal scroll animation */}
+          <div className="relative">
+            <div className="flex animate-scroll-left">
+              {/* First set of logos */}
+              {logos.map((logo, index) => {
+                const IconComponent = logo.icon;
+                return (
+                  <div
+                    key={`set1-${index}`}
+                    className="flex-shrink-0 mx-4 w-48 h-32 bg-card border border-border/40 rounded-xl p-4 flex flex-col items-center justify-center hover:border-primary/40 hover:shadow-lg transition-all duration-300"
+                  >
+                    <div className={`mb-2 ${logo.color}`}>
+                      <IconComponent className="w-10 h-10" />
+                    </div>
+                    <div className="text-sm font-semibold text-foreground/80 text-center">
+                      {logo.name}
+                    </div>
+                    <div className="text-xs text-muted-foreground text-center">
+                      {logo.description}
+                    </div>
+                  </div>
+                );
+              })}
+              {/* Duplicate set for seamless loop */}
+              {logos.map((logo, index) => {
+                const IconComponent = logo.icon;
+                return (
+                  <div
+                    key={`set2-${index}`}
+                    className="flex-shrink-0 mx-4 w-48 h-32 bg-card border border-border/40 rounded-xl p-4 flex flex-col items-center justify-center hover:border-primary/40 hover:shadow-lg transition-all duration-300"
+                  >
+                    <div className={`mb-2 ${logo.color}`}>
+                      <IconComponent className="w-10 h-10" />
+                    </div>
+                    <div className="text-sm font-semibold text-foreground/80 text-center">
+                      {logo.name}
+                    </div>
+                    <div className="text-xs text-muted-foreground text-center">
+                      {logo.description}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          
+          {/* Trust indicator */}
+          <div className="text-center mt-8">
+            <p className="text-xs text-muted-foreground">
+              SOC 2 Compliant • GDPR Ready • Bank-Level Encryption
+            </p>
+          </div>
+        </section>
+
         {/* Still Have Questions CTA */}
-        <section className="py-16 sm:py-20 bg-gradient-to-br from-primary/10 via-accent/5 to-background">
+        <section className="py-12 sm:py-16 bg-gradient-to-br from-primary/10 via-accent/5 to-background">
           <div className="container mx-auto px-4">
             <ScrollRevealSection>
               <Card className="max-w-2xl mx-auto p-8 sm:p-12 text-center">
