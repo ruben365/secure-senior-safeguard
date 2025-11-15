@@ -14,6 +14,8 @@ import AnimatedCounter from "@/components/AnimatedCounter";
 import { useCounterAnimation } from "@/hooks/useCounterAnimation";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { TimelineVisualization } from "@/components/TimelineVisualization";
+import { InspirationalVerses } from "@/components/InspirationalVerses";
+import { OhioServiceMap } from "@/components/OhioServiceMap";
 import heroAboutNew from "@/assets/hero-about-new.jpg";
 import founderRuben from "@/assets/founder-ruben.jpg";
 import founderCorine from "@/assets/founder-corine.jpg";
@@ -217,7 +219,7 @@ function About() {
                 </div>
                 <h3 className="text-2xl md:text-3xl font-bold mb-2">Ruben</h3>
                 <p className="text-base md:text-lg text-muted-foreground mb-4">
-                  Former cybersecurity consultant with 12+ years protecting Fortune 500 companies. After his grandmother's near-scam experience, Ruben dedicated his career to making enterprise-level security accessible to everyday families.
+                  Cybersecurity Analyst with 12 years of experience protecting organizations and families. After he and his wife Corinne fell victim to a sophisticated scam that exposed their passwords and emails—with criminals demanding payment to delete their data—Ruben embraced a deeper mission: making enterprise-level security accessible to everyone.
                 </p>
                 <blockquote className="border-l-4 border-primary pl-4 italic text-sm md:text-base text-muted-foreground">
                   "Everyone deserves to feel safe online, regardless of their technical knowledge."
@@ -237,7 +239,7 @@ function About() {
                 </div>
                 <h3 className="text-2xl md:text-3xl font-bold mb-2">Corine</h3>
                 <p className="text-base md:text-lg text-muted-foreground mb-4">
-                  Educator and community organizer with a passion for senior advocacy. Corine designed our training methodology to be accessible, empowering, and trauma-informed—meeting people where they are.
+                  Registered Nurse with 3 years of clinical experience and a heart for community wellness. After experiencing identity theft alongside her husband, Corinne channeled her compassionate care approach into designing trauma-informed cybersecurity training that meets people where they are—especially seniors and vulnerable populations.
                 </p>
                 <blockquote className="border-l-4 border-primary pl-4 italic text-sm md:text-base text-muted-foreground">
                   "Technology should empower, not intimidate. We're here to bridge that gap."
@@ -333,32 +335,11 @@ function About() {
         </div>
       </section>
 
-      {/* Service Areas */}
-      <section className="py-12 md:py-20 lg:py-32 bg-background">
-        <div className="container mx-auto px-4">
-          <ScrollReveal>
-            <div className="text-center mb-12 md:mb-16">
-              <Badge className="mb-4 text-base md:text-lg px-4 md:px-6 py-2" variant="secondary">
-                <MapPin className="w-4 h-4 mr-2" />
-                Service Areas
-              </Badge>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
-                Proudly Serving Ohio Families
-              </h2>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 md:mb-12">
-                Based in Cleveland, serving communities across the state
-              </p>
-              <div className="flex flex-wrap gap-3 md:gap-4 justify-center">
-                {["Cleveland", "Columbus", "Cincinnati", "Toledo", "Akron", "Dayton"].map((city) => (
-                  <Badge key={city} variant="outline" className="text-base md:text-lg px-4 md:px-6 py-2 md:py-3">
-                    {city}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+      {/* Inspirational Verses */}
+      <InspirationalVerses />
+
+      {/* Service Areas with Interactive Map */}
+      <OhioServiceMap />
 
       {/* CTA */}
       <div id="cta">
