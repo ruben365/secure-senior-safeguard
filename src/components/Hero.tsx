@@ -62,7 +62,7 @@ const Hero = ({ backgroundImage, backgroundImages, headline, subheadline, childr
         ) : backgroundImage && (
           <motion.div
             className={cn(
-              "absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-300",
+              "absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-300 brightness-115",
               singleImagePreloaded ? "opacity-100" : "opacity-0"
             )}
             style={{ 
@@ -72,12 +72,12 @@ const Hero = ({ backgroundImage, backgroundImages, headline, subheadline, childr
           />
         )}
         
-        {/* Gradient Overlay - dark to transparent */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+        {/* Gradient Overlay - lighter for better image visibility */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent" />
         
-        {/* Additional overlay for better text contrast */}
+        {/* Additional overlay - reduced opacity */}
         {overlay && (
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/50" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/15 to-black/25" />
         )}
       </motion.div>
       
@@ -139,40 +139,33 @@ const Hero = ({ backgroundImage, backgroundImages, headline, subheadline, childr
       {/* Scroll Indicator */}
       {showScrollIndicator && <ScrollIndicator />}
       
-      {/* Privacy trust badge */}
+      {/* Privacy trust badge - compact and subtle */}
       {showPrivacyDisclaimer && showDisclaimer && (
-        <div className="absolute bottom-6 left-6 z-10 group">
-          <div className="relative bg-gradient-to-br from-primary/95 to-accent/95 backdrop-blur-xl text-white px-5 py-3 rounded-xl border border-white/20 shadow-2xl max-w-sm transition-all duration-300 hover:scale-105">
-            {/* Decorative corner accent */}
-            <div className="absolute -top-1 -right-1 w-8 h-8 bg-accent rounded-full opacity-50 blur-sm animate-pulse" />
-            
-            <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm">
-                <Shield className="w-5 h-5 text-white" />
+        <div className="absolute bottom-4 left-4 z-10 group max-w-xs">
+          <div className="relative bg-gradient-to-br from-primary/80 to-accent/80 backdrop-blur-xl text-white px-3 py-2 rounded-lg border border-white/10 shadow-2xl drop-shadow-lg transition-all duration-300 hover:scale-105">
+            <div className="flex items-start gap-2">
+              <div className="flex-shrink-0 w-6 h-6 rounded-full bg-white/15 flex items-center justify-center backdrop-blur-sm">
+                <Shield className="w-3 h-3 text-white" />
               </div>
               <div className="flex-1">
-                <p className="font-bold text-sm mb-1 flex items-center gap-2">
-                  Privacy-Protected Imagery
-                  <Badge variant="secondary" className="text-[10px] px-2 py-0 bg-white/20">
-                    100% Safe
+                <p className="font-semibold text-xs mb-0.5 flex items-center gap-1.5">
+                  Privacy-Protected
+                  <Badge variant="secondary" className="text-[8px] px-1.5 py-0 bg-white/15">
+                    Safe
                   </Badge>
                 </p>
-                <p className="text-xs text-white/90 leading-relaxed">
-                  We use AI-generated illustrations to represent our services with complete privacy.
-                  <span className="font-semibold"> Zero personal data. Zero risk.</span>
+                <p className="text-[10px] text-white/85 leading-snug">
+                  AI-generated imagery. Zero personal data.
                 </p>
               </div>
               <button
                 onClick={() => setShowDisclaimer(false)}
-                className="text-white/70 hover:text-white transition-colors flex-shrink-0 ml-2"
+                className="text-white/60 hover:text-white transition-colors flex-shrink-0 text-xs"
                 aria-label="Dismiss privacy notice"
               >
                 ✕
               </button>
             </div>
-            
-            {/* Bottom accent line */}
-            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-white/0 via-white/40 to-white/0 rounded-b-xl" />
           </div>
         </div>
       )}
