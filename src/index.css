@@ -164,21 +164,8 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     overflow-x: hidden;
     width: 100%;
     position: relative;
-  }
-  
-  /* Reset scaling on mobile/tablet */
-  @media (max-width: 1279px) {
-    body {
-      zoom: 1;
-      transform: none;
-    }
-  }
-  
-  /* Apply desktop zoom scaling only on large screens */
-  @media (min-width: 1280px) {
-    body {
-      zoom: var(--site-scale);
-    }
+    /* Desktop zoom scaling */
+    zoom: var(--site-scale);
   }
   
   @media (min-width: 768px) {
@@ -265,13 +252,11 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     width: 100%;
   }
   
-  /* Fallback for browsers that don't support zoom - only on large screens */
+  /* Fallback for browsers that don't support zoom */
   @supports not (zoom: 1) {
-    @media (min-width: 1280px) {
-      body {
-        transform: scale(var(--site-scale));
-        transform-origin: top left;
-      }
+    body {
+      transform: scale(var(--site-scale));
+      transform-origin: top left;
     }
   }
   
