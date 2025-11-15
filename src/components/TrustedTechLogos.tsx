@@ -59,7 +59,7 @@ const TrustedTechLogos = () => {
     <section className="section-spacing-tight bg-gradient-to-b from-muted/30 to-background border-y border-border/40 overflow-hidden">
       <div className="container-padding">
         {/* Refined header */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-6">
           <Badge variant="outline" className="mb-3">
             <Shield className="w-3 h-3 mr-1" />
             Enterprise-Grade AI
