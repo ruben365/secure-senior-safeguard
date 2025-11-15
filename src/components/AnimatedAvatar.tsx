@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import loraAvatar from "@/assets/lora-avatar-animated.png";
 
 interface AnimatedAvatarProps {
   isTalking?: boolean;
@@ -43,7 +44,7 @@ export const AnimatedAvatar = ({
         }}
       >
         <motion.img
-          src="/src/assets/lora-avatar-animated.png"
+          src={loraAvatar}
           alt="Lora AI Assistant"
           className={cn(
             "w-16 h-16 rounded-full object-cover shadow-lg",
