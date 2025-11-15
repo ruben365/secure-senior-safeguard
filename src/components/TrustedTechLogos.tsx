@@ -56,7 +56,7 @@ const logos = [
 
 const TrustedTechLogos = () => {
   return (
-    <section className="section-spacing-tight bg-gradient-to-b from-muted/30 to-background border-y border-border/40">
+    <section className="section-spacing-tight bg-gradient-to-b from-muted/30 to-background border-y border-border/40 overflow-hidden">
       <div className="container-padding">
         {/* Refined header */}
         <div className="text-center mb-10">
@@ -72,40 +72,60 @@ const TrustedTechLogos = () => {
           </p>
         </div>
         
-        {/* Logo grid - clean and professional */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
-          {logos.map((logo, index) => {
-            const IconComponent = logo.icon;
-            return (
-              <Card
-                key={index}
-                className="group relative flex flex-col items-center justify-center p-6 transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:-translate-y-1"
-              >
-                {/* Icon */}
-                <div className={`mb-3 group-hover:scale-110 transition-transform duration-300 ${logo.color}`}>
-                  <IconComponent className="w-10 h-10" />
+        {/* Floating logos - continuous left to right animation */}
+        <div className="relative">
+          <div className="flex animate-scroll-right gap-8">
+            {/* First set of logos */}
+            {logos.map((logo, index) => {
+              const IconComponent = logo.icon;
+              return (
+                <div
+                  key={`set1-${index}`}
+                  className="flex-shrink-0 flex flex-col items-center justify-center transition-all duration-300 hover:scale-110"
+                >
+                  {/* Icon floating in air - no background */}
+                  <div className={`mb-2 ${logo.color}`}>
+                    <IconComponent className="w-8 h-8" />
+                  </div>
+                  
+                  {/* Logo name */}
+                  <div className="text-xs font-semibold text-foreground/80 text-center whitespace-nowrap">
+                    {logo.name}
+                  </div>
+                  
+                  {/* Description */}
+                  <div className="text-[10px] text-muted-foreground text-center whitespace-nowrap">
+                    {logo.description}
+                  </div>
                 </div>
-                
-                {/* Logo name */}
-                <div className="text-base font-semibold text-foreground/80 group-hover:text-primary transition-colors text-center">
-                  {logo.name}
+              );
+            })}
+            {/* Duplicate set for seamless loop */}
+            {logos.map((logo, index) => {
+              const IconComponent = logo.icon;
+              return (
+                <div
+                  key={`set2-${index}`}
+                  className="flex-shrink-0 flex flex-col items-center justify-center transition-all duration-300 hover:scale-110"
+                >
+                  {/* Icon floating in air - no background */}
+                  <div className={`mb-2 ${logo.color}`}>
+                    <IconComponent className="w-8 h-8" />
+                  </div>
+                  
+                  {/* Logo name */}
+                  <div className="text-xs font-semibold text-foreground/80 text-center whitespace-nowrap">
+                    {logo.name}
+                  </div>
+                  
+                  {/* Description */}
+                  <div className="text-[10px] text-muted-foreground text-center whitespace-nowrap">
+                    {logo.description}
+                  </div>
                 </div>
-                
-                {/* Description */}
-                <div className="text-xs text-muted-foreground mt-1 text-center">
-                  {logo.description}
-                </div>
-                
-                {/* Trust badge */}
-                <Badge variant="secondary" className="mt-3 text-[10px]">
-                  Trusted
-                </Badge>
-                
-                {/* Hover underline accent */}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-accent group-hover:w-3/4 transition-all duration-300" />
-              </Card>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
         
         {/* Trust indicator */}
