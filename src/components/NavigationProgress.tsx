@@ -47,15 +47,25 @@ export const NavigationProgress = () => {
           transition={{ duration: 0.2 }}
         >
           <motion.div
-            className="h-full bg-gradient-to-r from-[#6D28D9] to-[#14B8A6]"
+            className="h-full bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%]"
             style={{
-              boxShadow: "0 2px 4px rgba(109, 40, 217, 0.3)",
+              boxShadow: "0 0 20px hsl(var(--primary) / 0.5), 0 2px 8px hsl(var(--accent) / 0.3)",
             }}
             initial={{ width: "0%" }}
-            animate={{ width: `${progress}%` }}
+            animate={{ 
+              width: `${progress}%`,
+              backgroundPosition: [`0% 50%`, `100% 50%`, `0% 50%`]
+            }}
             transition={{
-              duration: progress < 70 ? 0.3 : progress < 90 ? 0.5 : 0.1,
-              ease: progress < 70 ? "easeOut" : "linear",
+              width: {
+                duration: progress < 70 ? 0.3 : progress < 90 ? 0.5 : 0.1,
+                ease: progress < 70 ? [0.22, 1, 0.36, 1] : "linear",
+              },
+              backgroundPosition: {
+                duration: 2,
+                repeat: Infinity,
+                ease: "linear"
+              }
             }}
           />
         </motion.div>
