@@ -59,35 +59,35 @@ export function InspirationalVerses() {
   const currentVerse = verses[currentIndex];
 
   return (
-    <section className="py-12 md:py-20 bg-gradient-to-b from-background to-secondary/20">
+    <section className="py-8 md:py-12 lg:py-20 bg-gradient-to-b from-background to-secondary/20">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-8">
-          <Badge className="mb-4 text-base md:text-lg px-4 md:px-6 py-2" variant="secondary">
-            <Quote className="w-4 h-4 mr-2" />
+        <div className="text-center mb-6 md:mb-8">
+          <Badge className="mb-3 md:mb-4 text-sm md:text-base lg:text-lg px-3 md:px-4 lg:px-6 py-1.5 md:py-2" variant="secondary">
+            <Quote className="w-3 h-3 md:w-4 md:h-4 mr-2" />
             Words of Encouragement
           </Badge>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 md:mb-4 px-2">
             Faith & Protection
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto px-2">
             Finding strength and courage in times of digital uncertainty
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto relative">
-          <Card className="p-8 md:p-12 bg-gradient-to-br from-primary/5 to-accent/5 border-2 border-primary/20">
-            <div className="flex items-start gap-4 mb-6">
-              <Quote className="w-12 h-12 text-primary/40 flex-shrink-0" />
-              <div>
-                <p className="text-xl md:text-2xl lg:text-3xl font-serif italic text-foreground leading-relaxed mb-6">
+        <div className="max-w-4xl mx-auto relative px-2 sm:px-0">
+          <Card className="p-4 sm:p-6 md:p-8 lg:p-12 bg-gradient-to-br from-primary/5 to-accent/5 border-2 border-primary/20">
+            <div className="flex items-start gap-2 sm:gap-3 md:gap-4 mb-4 md:mb-6">
+              <Quote className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-primary/40 flex-shrink-0" />
+              <div className="flex-1 min-w-0">
+                <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-serif italic text-foreground leading-relaxed mb-4 md:mb-6">
                   "{currentVerse.text}"
                 </p>
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                   <div>
-                    <p className="text-lg md:text-xl font-semibold text-primary">
+                    <p className="text-base sm:text-lg md:text-xl font-semibold text-primary">
                       — {currentVerse.reference}
                     </p>
-                    <Badge variant="outline" className="mt-2">
+                    <Badge variant="outline" className="mt-2 text-xs sm:text-sm">
                       {currentVerse.theme}
                     </Badge>
                   </div>
@@ -96,18 +96,18 @@ export function InspirationalVerses() {
             </div>
 
             {/* Navigation Controls */}
-            <div className="flex items-center justify-center gap-4 mt-8">
+            <div className="flex items-center justify-center gap-2 sm:gap-3 md:gap-4 mt-6 md:mt-8">
               <Button
                 variant="outline"
                 size="icon"
                 onClick={goToPrevious}
-                className="rounded-full"
+                className="rounded-full h-8 w-8 sm:h-10 sm:w-10"
               >
-                <ChevronLeft className="w-5 h-5" />
+                <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
               
               {/* Dots indicator */}
-              <div className="flex gap-2">
+              <div className="flex gap-1.5 sm:gap-2">
                 {verses.map((_, index) => (
                   <button
                     key={index}
@@ -115,10 +115,10 @@ export function InspirationalVerses() {
                       setCurrentIndex(index);
                       setIsAutoPlaying(false);
                     }}
-                    className={`w-2 h-2 rounded-full transition-all ${
+                    className={`h-1.5 sm:h-2 rounded-full transition-all ${
                       index === currentIndex 
-                        ? "bg-primary w-8" 
-                        : "bg-primary/30 hover:bg-primary/50"
+                        ? "bg-primary w-6 sm:w-8" 
+                        : "w-1.5 sm:w-2 bg-primary/30 hover:bg-primary/50"
                     }`}
                   />
                 ))}
@@ -128,9 +128,9 @@ export function InspirationalVerses() {
                 variant="outline"
                 size="icon"
                 onClick={goToNext}
-                className="rounded-full"
+                className="rounded-full h-8 w-8 sm:h-10 sm:w-10"
               >
-                <ChevronRight className="w-5 h-5" />
+                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
             </div>
           </Card>

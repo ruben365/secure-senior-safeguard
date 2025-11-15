@@ -351,26 +351,25 @@ export const AIChat = () => {
   }
 
   return (
-    <Card className="fixed bottom-6 right-6 w-[90vw] sm:w-full sm:max-w-[420px] h-[650px] max-h-[calc(100vh-3rem)] 
-                     shadow-2xl z-50 flex flex-col animate-slide-up border-2 border-primary/20 backdrop-blur-xl">
+    <Card className="fixed bottom-4 right-4 left-4 sm:bottom-6 sm:right-6 sm:left-auto sm:w-full sm:max-w-[420px] h-[85vh] sm:h-[650px] max-h-[calc(100vh-2rem)] shadow-2xl z-50 flex flex-col animate-slide-up border-2 border-primary/20 backdrop-blur-xl">
       {/* Futuristic Header with Tech Grid Background */}
       <div className="relative overflow-hidden border-b border-border/50">
         {/* Animated gradient background */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/10 to-purple-500/10" />
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDIwIEwgMjAgMCBNIDAgMCBMIDIwIDIwIiBzdHJva2U9ImhzbCh2YXIoLS1wcmltYXJ5KSkiIHN0cm9rZS13aWR0aD0iMC41IiBvcGFjaXR5PSIwLjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-30" />
         
-        <div className="relative p-6 text-center">
+        <div className="relative p-4 sm:p-6 text-center">
           {/* Avatar with holographic rings */}
           <div className="relative mb-4 inline-block">
             {/* Holographic rings */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-24 h-24 rounded-full border-2 border-primary/30 animate-ping" style={{ animationDuration: '3s' }} />
-              <div className="absolute w-20 h-20 rounded-full border-2 border-accent/40 animate-ping" style={{ animationDuration: '2s', animationDelay: '0.5s' }} />
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 border-primary/30 animate-ping" style={{ animationDuration: '3s' }} />
+              <div className="absolute w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-accent/40 animate-ping" style={{ animationDuration: '2s', animationDelay: '0.5s' }} />
             </div>
             
             {/* Avatar with glow effect */}
             <div className="relative z-10">
-              <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-primary/20 via-accent/20 to-purple-500/20 p-1 shadow-lg shadow-primary/50">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full bg-gradient-to-br from-primary/20 via-accent/20 to-purple-500/20 p-1 shadow-lg shadow-primary/50">
                 <img 
                   src={loraAvatar3D}
                   alt="Lora AI Assistant"
@@ -392,22 +391,22 @@ export const AIChat = () => {
             </div>
           </div>
           
-          <h3 className="text-2xl font-bold bg-gradient-to-r from-primary via-accent to-purple-500 bg-clip-text text-transparent mb-2">
+          <h3 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-primary via-accent to-purple-500 bg-clip-text text-transparent mb-2">
             Lora AI Assistant
           </h3>
-          <p className="text-sm text-muted-foreground mb-3">
+          <p className="text-xs sm:text-sm text-muted-foreground mb-3">
             Powered by Advanced AI Technology
           </p>
           
           {/* Tech specs badges */}
-          <div className="flex gap-2 justify-center mb-4">
-            <Badge variant="outline" className="text-xs">
+          <div className="flex gap-1.5 sm:gap-2 justify-center mb-4 flex-wrap">
+            <Badge variant="outline" className="text-[10px] sm:text-xs">
               24/7 Available
             </Badge>
-            <Badge variant="outline" className="text-xs">
+            <Badge variant="outline" className="text-[10px] sm:text-xs">
               Multi-Language
             </Badge>
-            <Badge variant="outline" className="text-xs">
+            <Badge variant="outline" className="text-[10px] sm:text-xs">
               Voice Enabled
             </Badge>
           </div>
@@ -568,7 +567,7 @@ export const AIChat = () => {
           </div>
 
           {/* Futuristic Input Area */}
-          <form onSubmit={handleSubmit} className="p-4 border-t border-border/50 bg-gradient-to-r from-background via-accent/5 to-background">
+          <form onSubmit={handleSubmit} className="p-2 sm:p-4 border-t border-border/50 bg-gradient-to-r from-background via-accent/5 to-background">
             {/* Input with cyber border */}
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-purple-500/20 rounded-lg blur-sm" />

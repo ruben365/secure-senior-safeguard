@@ -18,24 +18,24 @@ const serviceCities = [
 
 export function OhioServiceMap() {
   return (
-    <section className="py-12 md:py-20 lg:py-32 bg-background">
+    <section className="py-8 md:py-12 lg:py-20 xl:py-32 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12 md:mb-16">
-          <Badge className="mb-4 text-base md:text-lg px-4 md:px-6 py-2" variant="secondary">
-            <MapPin className="w-4 h-4 mr-2" />
+        <div className="text-center mb-8 md:mb-12 lg:mb-16">
+          <Badge className="mb-3 md:mb-4 text-sm md:text-base lg:text-lg px-3 md:px-4 lg:px-6 py-1.5 md:py-2" variant="secondary">
+            <MapPin className="w-3 h-3 md:w-4 md:h-4 mr-2" />
             Service Areas
           </Badge>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 md:mb-4 lg:mb-6 px-2">
             Proudly Serving Ohio Families
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 md:mb-12">
+          <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto mb-6 md:mb-8 lg:mb-12 px-2">
             Based in Cleveland, serving communities across the state
           </p>
         </div>
 
         {/* Ohio Map Visualization */}
-        <div className="max-w-5xl mx-auto mb-8">
-          <div className="relative w-full aspect-[4/3] bg-gradient-to-br from-primary/5 to-accent/5 rounded-2xl border-4 border-primary/20 shadow-2xl overflow-hidden">
+        <div className="max-w-5xl mx-auto mb-6 md:mb-8 px-2 sm:px-0">
+          <div className="relative w-full aspect-[3/4] sm:aspect-[4/3] bg-gradient-to-br from-primary/5 to-accent/5 rounded-xl md:rounded-2xl border-2 md:border-4 border-primary/20 shadow-xl md:shadow-2xl overflow-hidden">
             {/* Ohio state outline using SVG */}
             <svg 
               viewBox="0 0 800 600" 
@@ -76,13 +76,13 @@ export function OhioServiceMap() {
                      style={{ animationDelay: `${index * 0.2}s`, animationDuration: '2s' }} />
                 
                 {/* City marker */}
-                <div className="relative w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-primary to-accent border-3 border-background shadow-lg flex items-center justify-center transition-transform hover:scale-125">
-                  <MapPin className="w-4 h-4 md:w-5 md:h-5 text-primary-foreground" />
+                <div className="relative w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-primary to-accent border-2 sm:border-3 border-background shadow-md sm:shadow-lg flex items-center justify-center transition-transform hover:scale-125">
+                  <MapPin className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-primary-foreground" />
                 </div>
 
                 {/* City label tooltip */}
-                <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-background/95 backdrop-blur-sm border border-primary/30 rounded-lg px-3 py-1.5 shadow-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
-                  <p className="text-sm font-semibold text-foreground">{city.name}</p>
+                <div className="absolute top-full mt-1 sm:mt-2 left-1/2 -translate-x-1/2 bg-background/95 backdrop-blur-sm border border-primary/30 rounded-md sm:rounded-lg px-2 sm:px-3 py-1 sm:py-1.5 shadow-lg sm:shadow-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
+                  <p className="text-xs sm:text-sm font-semibold text-foreground">{city.name}</p>
                   <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-[-1px]">
                     <div className="border-4 border-transparent border-b-background/95" />
                   </div>
@@ -101,12 +101,12 @@ export function OhioServiceMap() {
         </div>
 
         {/* City badges */}
-        <div className="flex flex-wrap gap-3 md:gap-4 justify-center">
+        <div className="flex flex-wrap gap-2 md:gap-3 lg:gap-4 justify-center px-2">
           {serviceCities.map((city) => (
             <Badge 
               key={city.name} 
               variant="outline" 
-              className="text-base md:text-lg px-4 md:px-6 py-2 md:py-3 hover:bg-primary/10 transition-colors cursor-pointer hover:border-primary"
+              className="text-xs sm:text-sm md:text-base lg:text-lg px-2 sm:px-3 md:px-4 lg:px-6 py-1 sm:py-1.5 md:py-2 lg:py-3 hover:bg-primary/10 transition-colors cursor-pointer hover:border-primary"
             >
               {city.name}
             </Badge>

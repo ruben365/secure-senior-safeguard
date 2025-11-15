@@ -41,7 +41,7 @@ const Hero = ({ backgroundImage, backgroundImages, headline, subheadline, childr
   return (
     <div 
       ref={ref}
-      className={cn("relative min-h-[600px] md:min-h-[700px] lg:min-h-[800px] flex items-center overflow-hidden hero-mobile", className)}
+      className={cn("relative min-h-[450px] sm:min-h-[550px] md:min-h-[700px] lg:min-h-[800px] flex items-center overflow-hidden hero-mobile", className)}
     >
       {/* Background with Parallax */}
       <motion.div 
@@ -93,7 +93,7 @@ const Hero = ({ backgroundImage, backgroundImages, headline, subheadline, childr
       </div>
       
       {/* Content with Stagger Animation */}
-      <div className="container mx-auto px-4 py-6 sm:py-8 md:px-6 lg:px-8 relative z-10">
+      <div className="container mx-auto px-4 py-4 sm:py-6 md:py-8 md:px-6 lg:px-8 relative z-10">
         <div className="max-w-3xl mx-auto md:mx-0">
           {headline && (
             <motion.h1 

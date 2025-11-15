@@ -50,15 +50,15 @@ const Navigation = () => {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16 md:h-20 lg:h-24">
             {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 md:gap-3 lg:gap-4 hover:scale-105 transition-transform duration-300 group flex-shrink-0 no-underline" onClick={scrollToTop}>
+          <Link to="/" className="flex items-center gap-2 md:gap-3 lg:gap-4 hover:scale-105 transition-transform duration-300 group flex-shrink-0 no-underline max-w-[70%] sm:max-w-none" onClick={scrollToTop}>
             <img 
               src={invisionLogo} 
               alt="InVision Network Shield Logo" 
-              className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 group-hover:scale-110 transition-transform duration-300"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 group-hover:scale-110 transition-transform duration-300 flex-shrink-0"
             />
-            <div className="flex flex-col leading-tight">
-              <span className="text-base md:text-lg lg:text-2xl font-bold gradient-text-primary group-hover:scale-105 transition-transform duration-300">InVision Network</span>
-              <span className="text-[10px] md:text-xs lg:text-sm text-muted-foreground hidden sm:block">AI Scam Protection & Business Solutions</span>
+            <div className="flex flex-col leading-tight min-w-0">
+              <span className="text-sm sm:text-base md:text-lg lg:text-2xl font-bold gradient-text-primary group-hover:scale-105 transition-transform duration-300 truncate">InVision Network</span>
+              <span className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-muted-foreground hidden sm:block truncate">AI Scam Protection & Business Solutions</span>
             </div>
           </Link>
 
