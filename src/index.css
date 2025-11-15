@@ -1714,8 +1714,22 @@ video {
   }
 }
 
+@keyframes scroll-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
 .animate-scroll-left {
   animation: scroll-left 25s linear infinite;
+  will-change: transform;
+}
+
+.animate-scroll-right {
+  animation: scroll-right 30s linear infinite;
   will-change: transform;
 }
 
