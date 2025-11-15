@@ -241,8 +241,11 @@ function Business() {
                 <h3 className="text-xl font-bold mb-1">Veterans & First Responders</h3>
                 <p className="text-muted-foreground text-sm">Active duty, veterans, reservists, and first responders receive 10% OFF all services</p>
               </div>
-              <Button variant="default" asChild>
-                <Link to="/contact">Claim Discount</Link>
+              <Button variant="default" size="sm" className="w-fit" asChild>
+                <Link to="/contact">
+                  <Shield className="w-4 h-4 mr-2" />
+                  Claim Discount
+                </Link>
               </Button>
             </div>
           </Card>

@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 
-export function NewsletterSignup() {
+export function NewsletterSignup({ compact = false }: { compact?: boolean }) {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -43,7 +43,27 @@ export function NewsletterSignup() {
     }
   };
 
-  return (
+  return compact ? (
+    <form onSubmit={handleSubmit} className="flex gap-1">
+      <Input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        disabled={isSubmitting}
+        required
+        className="bg-primary-foreground/20 border-primary-foreground/30 text-primary-foreground placeholder:text-primary-foreground/50 h-6 text-[9px]"
+      />
+      <Button 
+        variant="default" 
+        className="bg-accent hover:bg-accent/90 h-6 whitespace-nowrap text-[9px] font-semibold px-2"
+        type="submit"
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? <Loader2 className="h-3 w-3 animate-spin" /> : "Subscribe"}
+      </Button>
+    </form>
+  ) : (
     <div className="bg-primary-foreground/10 rounded-lg p-1.5 md:p-2.5 mb-2 md:mb-3">
       <h3 className="font-semibold text-xs md:text-sm mb-0.5">Monthly AI Safety Tips</h3>
       <p className="text-primary-foreground/80 mb-1.5 text-[10px] md:text-[11px] leading-tight">
