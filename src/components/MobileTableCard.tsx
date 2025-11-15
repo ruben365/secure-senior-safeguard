@@ -40,7 +40,7 @@ export function MobileCardField({ label, value, className }: MobileCardFieldProp
   return (
     <div className={cn("mb-3 last:mb-0", className)}>
       <div className="text-xs text-muted-foreground mb-1 font-medium">{label}</div>
-      <div className="text-sm text-foreground">{value}</div>
+      <div className="text-sm text-foreground break-words">{value}</div>
     </div>
   );
 }
@@ -62,7 +62,7 @@ export function MobileCardHeader({ title, subtitle, avatar, badge }: MobileCardH
           {badge && <div className="flex-shrink-0">{badge}</div>}
         </div>
         {subtitle && (
-          <p className="text-sm text-muted-foreground mt-1">{subtitle}</p>
+          <p className="text-sm text-muted-foreground mt-1 break-words">{subtitle}</p>
         )}
       </div>
     </div>
@@ -77,7 +77,7 @@ interface MobileCardActionsProps {
 export function MobileCardActions({ children, className }: MobileCardActionsProps) {
   return (
     <div className={cn(
-      "flex gap-2 mt-4 pt-4 border-t border-border",
+      "flex gap-2 mt-4 pt-4 border-t border-border flex-wrap",
       className
     )}>
       {children}
