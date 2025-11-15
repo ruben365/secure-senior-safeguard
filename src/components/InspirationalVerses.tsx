@@ -40,8 +40,8 @@ export function InspirationalVerses() {
       setTimeout(() => {
         setCurrentIndex((prev) => (prev + 1) % verses.length);
         setIsVisible(true);
-      }, 1000);
-    }, 6000);
+      }, 1500);
+    }, 12000);
 
     return () => clearInterval(interval);
   }, []);
