@@ -25,7 +25,7 @@ import {
   ExternalLink
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import loraAvatar from "@/assets/lora-avatar.png";
+import { AnimatedAvatar } from "./AnimatedAvatar";
 
 interface Message {
   role: "user" | "assistant";
@@ -306,10 +306,11 @@ export const AIChat = () => {
         size="icon"
       >
         <div className="h-full w-full rounded-full bg-gradient-to-br from-primary/20 to-accent/20 backdrop-blur-sm flex items-center justify-center border-2 border-primary/30">
-          <Avatar className="h-20 w-20">
-            <AvatarImage src={loraAvatar} alt="Lora AI Assistant" className="object-cover" />
-            <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-primary-foreground text-2xl">LA</AvatarFallback>
-          </Avatar>
+          <AnimatedAvatar 
+            isTalking={isTalking || isSpeaking}
+            isLoading={isLoading}
+            className="h-20 w-20"
+          />
         </div>
       </Button>
     );
@@ -321,14 +322,11 @@ export const AIChat = () => {
       <div className="flex items-center justify-between p-5 border-b bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 backdrop-blur-sm">
         <div className="flex items-center gap-3">
           <div className="relative">
-            <Avatar className={`h-12 w-12 border-2 transition-all duration-300 ${
-              isTalking || isSpeaking 
-                ? 'border-primary animate-talking-pulse scale-110 shadow-lg shadow-primary/50' 
-                : 'border-primary/30 animate-gentle-pulse'
-            }`}>
-              <AvatarImage src={loraAvatar} alt="Lora AI Assistant" className="object-cover" />
-              <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-primary-foreground text-lg">LA</AvatarFallback>
-            </Avatar>
+            <AnimatedAvatar 
+              isTalking={isTalking || isSpeaking}
+              isLoading={isLoading}
+              className="h-12 w-12"
+            />
             <div className={`absolute -bottom-1 -right-1 h-4 w-4 rounded-full border-2 border-background transition-all duration-300 ${
               isTalking || isSpeaking ? 'bg-primary animate-pulse' : 'bg-muted'
             }`} />
@@ -402,10 +400,10 @@ export const AIChat = () => {
                       className={`flex gap-3 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                     >
                       {msg.role === "assistant" && (
-                        <Avatar className="h-9 w-9 flex-shrink-0 border border-primary/20">
-                          <AvatarImage src={loraAvatar} alt="Lora" className="object-cover" />
-                          <AvatarFallback className="bg-gradient-to-br from-primary/20 to-accent/20">LA</AvatarFallback>
-                        </Avatar>
+                        <AnimatedAvatar 
+                          isTalking={false}
+                          className="h-9 w-9"
+                        />
                       )}
                       <div
                         className={`max-w-[80%] rounded-2xl p-4 animate-fade-in ${
@@ -422,10 +420,11 @@ export const AIChat = () => {
                   ))}
                   {isLoading && (
                     <div className="flex gap-3 justify-start animate-fade-in">
-                      <Avatar className="h-9 w-9 flex-shrink-0 animate-gentle-pulse border border-primary/20">
-                        <AvatarImage src={loraAvatar} alt="Lora" className="object-cover" />
-                        <AvatarFallback className="bg-gradient-to-br from-primary/20 to-accent/20">LA</AvatarFallback>
-                      </Avatar>
+                      <AnimatedAvatar 
+                        isTalking={isTalking}
+                        isLoading={true}
+                        className="h-9 w-9"
+                      />
                       <div className="max-w-[80%] rounded-2xl p-4 bg-muted/80 backdrop-blur-sm border border-primary/10">
                         <div className="flex items-center gap-3">
                           <span className="text-sm text-muted-foreground font-medium">Lora is typing</span>

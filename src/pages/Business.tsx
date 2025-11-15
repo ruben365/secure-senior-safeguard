@@ -19,7 +19,7 @@ import { useCounterAnimation } from "@/hooks/useCounterAnimation";
 import { Phone, Mail, MessageSquare, Calendar, CheckCircle, Search, Shield } from "lucide-react";
 import businessCollaboration from "@/assets/business-collaboration.jpg";
 import teamCollaboration from "@/assets/team-collaboration.jpg";
-import heroBusiness from "@/assets/hero-business-professional.jpg";
+import heroBusiness from "@/assets/business-diverse-1.jpg";
 
 function Business() {
   const [modalOpen, setModalOpen] = useState(false);

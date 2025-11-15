@@ -36,7 +36,7 @@ import {
   Video,
 } from "lucide-react";
 import trainingSession from "@/assets/training-session.jpg";
-import heroTraining from "@/assets/hero-training-new.jpg";
+import heroTraining from "@/assets/training-diverse-1.jpg";
 
 function ResponseTimeCallout() {
   const { count: standardCount, ref: standardRef } = useCounterAnimation({ 

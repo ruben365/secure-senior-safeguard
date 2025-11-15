@@ -22,7 +22,7 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import confetti from "canvas-confetti";
 import customerSupport from "@/assets/customer-support.jpg";
-import heroContact from "@/assets/hero-contact-new.jpg";
+import heroContact from "@/assets/support-diverse-1.jpg";
 
 const contactSchema = z.object({
   name: z.string()
