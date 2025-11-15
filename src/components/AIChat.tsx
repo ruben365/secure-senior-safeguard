@@ -322,77 +322,132 @@ export const AIChat = () => {
 
   if (!isOpen) {
     return (
-      <Button
-        onClick={openChat}
-        variant="ghost"
-        className="fixed bottom-6 right-6 h-24 w-24 rounded-full shadow-2xl z-50 p-0 overflow-hidden 
-                   bg-transparent hover:scale-110 transition-all duration-300
-                   animate-gentle-pulse"
-        size="icon"
-      >
-        <div className="h-full w-full rounded-full bg-gradient-to-br from-primary/20 to-accent/20 backdrop-blur-sm flex items-center justify-center border-2 border-primary/30">
-          <AnimatedAvatar 
-            isTalking={isTalking || isSpeaking}
-            isLoading={isLoading}
-            className="h-20 w-20"
-          />
+      <div className="fixed bottom-4 right-4 z-50 group">
+        {/* Pulsing rings */}
+        <div className="absolute inset-0 rounded-full bg-primary/20 animate-ping" style={{ animationDuration: '2s' }} />
+        <div className="absolute inset-0 rounded-full bg-accent/30 animate-ping" style={{ animationDuration: '3s', animationDelay: '0.5s' }} />
+        
+        {/* Button */}
+        <Button
+          onClick={openChat}
+          size="lg"
+          className="relative rounded-full w-16 h-16 bg-gradient-to-br from-primary via-accent to-purple-500 hover:scale-110 transition-transform shadow-2xl shadow-primary/50"
+        >
+          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/20 to-transparent" />
+          <MessageSquare className="w-8 h-8 relative z-10" />
+        </Button>
+        
+        {/* Tooltip */}
+        <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+          <div className="bg-foreground text-background text-sm px-3 py-2 rounded-lg whitespace-nowrap shadow-xl">
+            Chat with Lora AI
+            <div className="absolute top-full right-4 -mt-1">
+              <div className="border-8 border-transparent border-t-foreground" />
+            </div>
+          </div>
         </div>
-      </Button>
+      </div>
     );
   }
 
   return (
     <Card className="fixed bottom-6 right-6 w-[90vw] sm:w-full sm:max-w-[420px] h-[650px] max-h-[calc(100vh-3rem)] 
                      shadow-2xl z-50 flex flex-col animate-slide-up border-2 border-primary/20 backdrop-blur-xl">
-      <div className="flex items-center justify-between p-5 border-b bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 backdrop-blur-sm">
-        <div className="flex items-center gap-3">
-          <div className="relative">
-            <img 
-              src={loraAvatar3D} 
-              alt="Lora AI Assistant" 
-              className="h-12 w-12 rounded-full object-cover shadow-lg"
-            />
-            <div className={`absolute -bottom-1 -right-1 h-4 w-4 rounded-full border-2 border-background transition-all duration-300 ${
-              isTalking || isSpeaking ? 'bg-primary animate-pulse' : 'bg-muted'
-            }`} />
+      {/* Futuristic Header with Tech Grid Background */}
+      <div className="relative overflow-hidden border-b border-border/50">
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/10 to-purple-500/10" />
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDIwIEwgMjAgMCBNIDAgMCBMIDIwIDIwIiBzdHJva2U9ImhzbCh2YXIoLS1wcmltYXJ5KSkiIHN0cm9rZS13aWR0aD0iMC41IiBvcGFjaXR5PSIwLjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-30" />
+        
+        <div className="relative p-6 text-center">
+          {/* Avatar with holographic rings */}
+          <div className="relative mb-4 inline-block">
+            {/* Holographic rings */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-24 h-24 rounded-full border-2 border-primary/30 animate-ping" style={{ animationDuration: '3s' }} />
+              <div className="absolute w-20 h-20 rounded-full border-2 border-accent/40 animate-ping" style={{ animationDuration: '2s', animationDelay: '0.5s' }} />
+            </div>
+            
+            {/* Avatar with glow effect */}
+            <div className="relative z-10">
+              <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-primary/20 via-accent/20 to-purple-500/20 p-1 shadow-lg shadow-primary/50">
+                <img 
+                  src={loraAvatar3D}
+                  alt="Lora AI Assistant"
+                  className="w-full h-full rounded-full object-cover"
+                />
+              </div>
+            </div>
+            
+            {/* Status indicator */}
+            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2">
+              <div className="flex items-center gap-2 bg-background/95 backdrop-blur-sm border border-primary/30 rounded-full px-3 py-1">
+                <div className={`w-2 h-2 rounded-full transition-all ${
+                  isTalking || isSpeaking ? 'bg-primary animate-pulse' : 'bg-green-500 animate-pulse'
+                }`} />
+                <span className="text-xs font-medium">
+                  {isTalking ? "Thinking..." : isSpeaking ? "Speaking..." : "Online"}
+                </span>
+              </div>
+            </div>
           </div>
-          <div>
-            <h3 className="font-bold text-lg bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Lora
-            </h3>
-            <p className="text-xs text-muted-foreground font-medium">
-              {isTalking ? "🤔 Thinking..." : isSpeaking ? "🗣️ Speaking..." : "✨ AI Assistant"}
-            </p>
+          
+          <h3 className="text-2xl font-bold bg-gradient-to-r from-primary via-accent to-purple-500 bg-clip-text text-transparent mb-2">
+            Lora AI Assistant
+          </h3>
+          <p className="text-sm text-muted-foreground mb-3">
+            Powered by Advanced AI Technology
+          </p>
+          
+          {/* Tech specs badges */}
+          <div className="flex gap-2 justify-center mb-4">
+            <Badge variant="outline" className="text-xs">
+              24/7 Available
+            </Badge>
+            <Badge variant="outline" className="text-xs">
+              Multi-Language
+            </Badge>
+            <Badge variant="outline" className="text-xs">
+              Voice Enabled
+            </Badge>
           </div>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={isSpeaking ? stopSpeaking : undefined}
-            disabled={!isSpeaking}
-            className={`rounded-full transition-all ${isSpeaking ? 'text-primary hover:text-primary/80 bg-primary/10' : 'text-muted-foreground'}`}
-          >
-            {isSpeaking ? <Volume2 className="h-4 w-4 animate-pulse" /> : <VolumeX className="h-4 w-4" />}
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={closeChat}
-            className="rounded-full hover:bg-destructive/10 hover:text-destructive transition-all"
-          >
-            <X className="h-4 w-4" />
-          </Button>
+
+          {/* Close and voice controls */}
+          <div className="flex items-center justify-center gap-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={isSpeaking ? stopSpeaking : undefined}
+              disabled={!isSpeaking}
+              className={`rounded-full transition-all ${isSpeaking ? 'text-primary hover:text-primary/80 bg-primary/10' : 'text-muted-foreground'}`}
+            >
+              {isSpeaking ? <Volume2 className="h-4 w-4 animate-pulse" /> : <VolumeX className="h-4 w-4" />}
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={closeChat}
+              className="rounded-full hover:bg-destructive/10 hover:text-destructive transition-all"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
       </div>
 
       <Tabs value={mode} onValueChange={(v) => setMode(v as AIMode)} className="flex-1 flex flex-col">
-        <TabsList className="mx-4 mt-3 bg-muted/50 backdrop-blur-sm">
-          <TabsTrigger value="chat" className="text-sm data-[state=active]:bg-gradient-to-br data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-primary-foreground">
+        <TabsList className="mx-4 mt-3 bg-accent/10 border border-accent/20">
+          <TabsTrigger 
+            value="chat" 
+            className="text-sm data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-primary-foreground"
+          >
             <MessageSquare className="h-4 w-4 mr-2" />
-            Chat
+            Chat Mode
           </TabsTrigger>
-          <TabsTrigger value="translation" className="text-sm data-[state=active]:bg-gradient-to-br data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-primary-foreground">
+          <TabsTrigger 
+            value="translation"
+            className="text-sm data-[state=active]:bg-gradient-to-r data-[state=active]:from-accent data-[state=active]:to-purple-500 data-[state=active]:text-primary-foreground"
+          >
             <Languages className="h-4 w-4 mr-2" />
             Translate
           </TabsTrigger>
@@ -425,22 +480,37 @@ export const AIChat = () => {
                       className={`flex gap-3 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                     >
                       {msg.role === "assistant" && (
-                        <AnimatedAvatar 
-                          isTalking={false}
-                          className="h-9 w-9"
-                        />
+                        <div className="relative">
+                          <Avatar className="ring-2 ring-accent/30 ring-offset-2 h-9 w-9">
+                            <AvatarImage src={loraAvatar3D} />
+                            <AvatarFallback className="bg-gradient-to-br from-accent/20 to-purple-500/20">LA</AvatarFallback>
+                          </Avatar>
+                          {(isTalking || isSpeaking) && idx === messages.length - 1 && (
+                            <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-background animate-pulse" />
+                          )}
+                        </div>
                       )}
-                      <div
-                        className={`max-w-[80%] rounded-2xl p-4 animate-fade-in ${
-                          msg.role === "user"
-                            ? "bg-gradient-to-br from-primary to-accent text-primary-foreground shadow-lg"
-                            : "bg-muted/80 backdrop-blur-sm border border-primary/10"
-                        }`}
-                      >
-                        <p className="text-sm whitespace-pre-wrap break-words leading-relaxed">
-                          {msg.content}
-                        </p>
+                      <div className="group max-w-[80%]">
+                        <div
+                          className={`rounded-2xl px-4 py-3 shadow-lg hover:shadow-xl transition-all backdrop-blur-sm ${
+                            msg.role === "user"
+                              ? "rounded-tr-sm bg-gradient-to-br from-primary to-primary/80 text-primary-foreground ml-auto"
+                              : "rounded-tl-sm bg-gradient-to-br from-accent/10 to-purple-500/10 border border-accent/20"
+                          }`}
+                        >
+                          <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">{msg.content}</p>
+                        </div>
+                        <span className="text-xs text-muted-foreground mt-1 block opacity-0 group-hover:opacity-100 transition-opacity">
+                          {msg.role === "assistant" ? "AI Response" : "Just now"}
+                        </span>
                       </div>
+                      {msg.role === "user" && (
+                        <Avatar className="ring-2 ring-primary/20 h-9 w-9">
+                          <AvatarFallback className="bg-primary/10 text-primary font-semibold text-xs">
+                            You
+                          </AvatarFallback>
+                        </Avatar>
+                      )}
                     </div>
                   ))}
                   {isLoading && (
@@ -497,14 +567,17 @@ export const AIChat = () => {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="p-4 border-t bg-gradient-to-t from-background/50 via-primary/5 to-transparent backdrop-blur-sm">
-            <div className="flex gap-3">
-              <div className="relative flex-1">
+          {/* Futuristic Input Area */}
+          <form onSubmit={handleSubmit} className="p-4 border-t border-border/50 bg-gradient-to-r from-background via-accent/5 to-background">
+            {/* Input with cyber border */}
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-purple-500/20 rounded-lg blur-sm" />
+              <div className="relative flex gap-2 items-end bg-background/95 backdrop-blur-sm border-2 border-primary/20 rounded-lg p-2">
                 <Textarea
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder={getModePlaceholder()}
-                  className="min-h-[80px] max-h-[160px] resize-none pr-14 rounded-2xl border-2 border-primary/20 focus:border-primary/50 transition-all bg-background/50 backdrop-blur-sm"
+                  className="min-h-[60px] max-h-[120px] resize-none border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
                   disabled={isLoading || isRecording}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && !e.shiftKey) {
@@ -513,39 +586,36 @@ export const AIChat = () => {
                     }
                   }}
                 />
-                <Button
-                  type="button"
-                  size="icon"
-                  variant="ghost"
-                  onClick={toggleVoiceRecording}
-                  disabled={isLoading}
-                  className={`absolute right-2 top-2 h-11 w-11 rounded-full transition-all duration-300 ${
-                    isRecording 
-                      ? 'bg-destructive text-destructive-foreground animate-pulse shadow-lg' 
-                      : 'hover:bg-primary/10 hover:text-primary'
-                  }`}
-                >
-                  {isRecording ? (
-                    <MicOff className="h-5 w-5" />
-                  ) : (
-                    <Mic className="h-5 w-5" />
-                  )}
-                </Button>
+                
+                {/* Action buttons */}
+                <div className="flex flex-col gap-2">
+                  {/* Voice button */}
+                  <Button
+                    type="button"
+                    size="icon"
+                    variant={isRecording ? "default" : "outline"}
+                    onClick={toggleVoiceRecording}
+                    disabled={isLoading}
+                    className={isRecording ? "bg-red-500 hover:bg-red-600 animate-pulse" : ""}
+                  >
+                    {isRecording ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
+                  </Button>
+                  
+                  {/* Send button */}
+                  <Button
+                    type="submit"
+                    size="icon"
+                    disabled={!input.trim() || isLoading}
+                    className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90"
+                  >
+                    {isLoading ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <Send className="h-4 w-4" />
+                    )}
+                  </Button>
+                </div>
               </div>
-              <Button
-                type="submit"
-                size="icon"
-                disabled={isLoading || !input.trim()}
-                className="h-[80px] w-[80px] rounded-2xl bg-gradient-to-br from-primary to-accent 
-                           hover:shadow-lg hover:shadow-primary/50 hover:scale-105 transition-all duration-300
-                           disabled:opacity-50 disabled:hover:scale-100"
-              >
-                {isLoading ? (
-                  <Loader2 className="h-5 w-5 animate-spin" />
-                ) : (
-                  <Send className="h-5 w-5" />
-                )}
-              </Button>
             </div>
             <div className="flex items-center justify-between mt-3 px-1">
               <p className="text-xs text-muted-foreground font-medium">
