@@ -1,71 +1,121 @@
-const TrustedTechLogos = () => {
-  const logos = [
-    { name: "OpenAI", color: "text-[#10a37f]" },
-    { name: "Google AI", color: "text-[#4285f4]" },
-    { name: "Microsoft Azure", color: "text-[#0078d4]" },
-    { name: "AWS", color: "text-[#ff9900]" },
-    { name: "IBM Watson", color: "text-[#0f62fe]" },
-    { name: "Anthropic", color: "text-[#d4a574]" },
-    { name: "Hugging Face", color: "text-[#ffbe0b]" },
-    { name: "TensorFlow", color: "text-[#ff6f00]" },
-  ];
+import { Shield, Zap, Brain, Cloud, Database, Lock, Globe, Cpu } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { TrustIndicator } from "@/components/TrustIndicator";
 
+const logos = [
+  { 
+    name: "OpenAI", 
+    icon: Zap,
+    description: "GPT Models",
+    color: "text-emerald-600 dark:text-emerald-400"
+  },
+  { 
+    name: "Google AI", 
+    icon: Brain,
+    description: "Gemini",
+    color: "text-blue-600 dark:text-blue-400"
+  },
+  { 
+    name: "Microsoft Azure", 
+    icon: Cloud,
+    description: "Cloud Infrastructure",
+    color: "text-sky-600 dark:text-sky-400"
+  },
+  { 
+    name: "AWS", 
+    icon: Database,
+    description: "Secure Hosting",
+    color: "text-orange-600 dark:text-orange-400"
+  },
+  { 
+    name: "IBM Watson", 
+    icon: Cpu,
+    description: "Enterprise AI",
+    color: "text-indigo-600 dark:text-indigo-400"
+  },
+  { 
+    name: "Anthropic", 
+    icon: Lock,
+    description: "Claude Models",
+    color: "text-amber-600 dark:text-amber-400"
+  },
+  { 
+    name: "Hugging Face", 
+    icon: Globe,
+    description: "ML Models",
+    color: "text-yellow-600 dark:text-yellow-400"
+  },
+  { 
+    name: "TensorFlow", 
+    icon: Brain,
+    description: "ML Framework",
+    color: "text-red-600 dark:text-red-400"
+  },
+];
+
+const TrustedTechLogos = () => {
   return (
-    <section className="py-8 bg-gradient-to-r from-muted/50 via-background/80 to-muted/50 border-t border-border/50 relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-32 h-32 bg-primary/20 rounded-full blur-2xl animate-pulse" style={{ animationDuration: '4s' }} />
-        <div className="absolute bottom-0 right-1/4 w-40 h-40 bg-accent/20 rounded-full blur-2xl animate-pulse" style={{ animationDuration: '5s', animationDelay: '1s' }} />
-      </div>
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-6">
-          <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+    <section className="section-spacing-tight bg-gradient-to-b from-muted/30 to-background border-y border-border/40">
+      <div className="container-padding">
+        {/* Refined header */}
+        <div className="text-center mb-10">
+          <Badge variant="outline" className="mb-3">
+            <Shield className="w-3 h-3 mr-1" />
+            Enterprise-Grade AI
+          </Badge>
+          <h3 className="text-xl font-semibold text-foreground/90 mb-2">
             Powered By Industry Leaders
-          </p>
-          <h3 className="text-2xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-            Trusted AI & Technology Partners
           </h3>
+          <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
+            Our AI protection combines the best models from trusted providers to keep you safe
+          </p>
         </div>
         
-        {/* Floating logo animation container */}
-        <div className="relative h-24 flex items-center justify-center">
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
-            {logos.map((logo, index) => (
-              <div
+        {/* Logo grid - clean and professional */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+          {logos.map((logo, index) => {
+            const IconComponent = logo.icon;
+            return (
+              <Card
                 key={index}
-                className="group relative hover:scale-110 transition-all duration-500"
-                style={{ 
-                  animation: `float ${3 + (index % 3)}s ease-in-out infinite ${index * 0.5}s`
-                }}
+                className="group relative flex flex-col items-center justify-center p-6 transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:-translate-y-1"
               >
-                {/* Glow effect on hover */}
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Icon */}
+                <div className={`mb-3 group-hover:scale-110 transition-transform duration-300 ${logo.color}`}>
+                  <IconComponent className="w-10 h-10" />
+                </div>
                 
-                {/* Logo text */}
-                <div className={`relative px-4 py-2 font-bold text-sm md:text-base ${logo.color} group-hover:scale-110 transition-transform duration-300`}>
+                {/* Logo name */}
+                <div className="text-base font-semibold text-foreground/80 group-hover:text-primary transition-colors text-center">
                   {logo.name}
                 </div>
                 
-                {/* Animated underline */}
-                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-accent group-hover:w-full transition-all duration-500" />
-              </div>
-            ))}
-          </div>
+                {/* Description */}
+                <div className="text-xs text-muted-foreground mt-1 text-center">
+                  {logo.description}
+                </div>
+                
+                {/* Trust badge */}
+                <Badge variant="secondary" className="mt-3 text-[10px]">
+                  Trusted
+                </Badge>
+                
+                {/* Hover underline accent */}
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-accent group-hover:w-3/4 transition-all duration-300" />
+              </Card>
+            );
+          })}
+        </div>
+        
+        {/* Trust indicator */}
+        <div className="text-center mt-8">
+          <p className="text-xs text-muted-foreground flex items-center justify-center gap-2">
+            <TrustIndicator type="shield" size="sm" />
+            SOC 2 Compliant • GDPR Ready • Bank-Level Encryption
+          </p>
         </div>
       </div>
-
-      {/* Add floating animation keyframes */}
-      <style>{`
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-10px);
-          }
-        }
-      `}</style>
     </section>
   );
 };

@@ -28,6 +28,32 @@ interface FAQ {
 }
 
 const faqs: FAQ[] = [
+  // Getting Started
+  {
+    id: "gs-1",
+    category: "Getting Started",
+    question: "How do I get started with InVision Network?",
+    answer: "Choose your plan, complete a quick signup, and you'll receive your secure access link via email within minutes. No downloads or installations required.",
+  },
+  {
+    id: "gs-2",
+    category: "Getting Started",
+    question: "Do I need technical skills to use your services?",
+    answer: "Not at all! Our platform is designed for everyone, including those who aren't tech-savvy. We offer free onboarding sessions and 24/7 support to help you get started.",
+  },
+  {
+    id: "gs-3",
+    category: "Getting Started",
+    question: "What happens after I sign up?",
+    answer: "Within minutes, you'll receive a welcome email with your secure access link. Click it to access your personalized dashboard. We'll also send you a getting started guide and offer a free 15-minute onboarding call.",
+  },
+  {
+    id: "gs-4",
+    category: "Getting Started",
+    question: "Can I try it before I buy?",
+    answer: "Yes! We offer a 7-day free trial on all plans. No credit card required. Cancel anytime during the trial at no charge.",
+  },
+
   // Family Shield
   {
     id: "fs-1",
@@ -201,10 +227,89 @@ const faqs: FAQ[] = [
     question: "How do I upgrade my plan?",
     answer: "Log into your portal, go to Plan & Billing, click 'Upgrade,' choose new plan. Changes take effect immediately, and we'll prorate the difference.",
   },
+  {
+    id: "aa-5",
+    category: "Account & Access",
+    question: "Can I downgrade my plan?",
+    answer: "Yes, you can downgrade at any time. Changes take effect at the start of your next billing cycle. You'll keep full access to current features until then.",
+  },
+  {
+    id: "aa-6",
+    category: "Account & Access",
+    question: "Can I cancel my subscription anytime?",
+    answer: "Yes, you can cancel your subscription at any time with no penalties or fees. Your service will continue until the end of your current billing period.",
+  },
+
+  // Privacy & Security
+  {
+    id: "ps-1",
+    category: "Privacy & Security",
+    question: "How do you protect my personal information?",
+    answer: "We use bank-level encryption (256-bit SSL/TLS) and never store sensitive data. All communications are encrypted end-to-end. We're GDPR compliant and SOC 2 certified.",
+  },
+  {
+    id: "ps-2",
+    category: "Privacy & Security",
+    question: "Do you share my data with third parties?",
+    answer: "Never. We don't sell, rent, or share your information. Your privacy is non-negotiable. We only use your data to provide services you've requested.",
+  },
+  {
+    id: "ps-3",
+    category: "Privacy & Security",
+    question: "Where is my data stored?",
+    answer: "All data is stored in secure, encrypted data centers in the United States with redundant backups. We use AWS and Microsoft Azure infrastructure with strict access controls.",
+  },
+  {
+    id: "ps-4",
+    category: "Privacy & Security",
+    question: "Can I delete my data?",
+    answer: "Yes, you can request complete data deletion at any time. We'll permanently remove all your personal information within 30 days, as required by GDPR.",
+  },
+  {
+    id: "ps-5",
+    category: "Privacy & Security",
+    question: "How do you handle suspicious messages I submit?",
+    answer: "Submitted messages are analyzed by our AI in a secure, isolated environment. Personal information is redacted and never shared. Messages are deleted after 90 days unless you save them.",
+  },
+
+  // Veterans & Seniors
+  {
+    id: "vs-1",
+    category: "Veterans & Seniors",
+    question: "Do you offer discounts for veterans or seniors?",
+    answer: "Yes! We offer 20% off all services for veterans, active military, and seniors 65+. Contact us with proof of service or age to apply your discount.",
+  },
+  {
+    id: "vs-2",
+    category: "Veterans & Seniors",
+    question: "Is this service easy for seniors to use?",
+    answer: "Absolutely. We specifically designed our platform for seniors with large text, simple navigation, and clear instructions. We also offer free one-on-one training sessions.",
+  },
+  {
+    id: "vs-3",
+    category: "Veterans & Seniors",
+    question: "Do you offer in-person training for seniors?",
+    answer: "Yes, in select areas including Columbus, OH. We offer free in-person training sessions at senior centers and community centers. Contact us to schedule.",
+  },
+  {
+    id: "vs-4",
+    category: "Veterans & Seniors",
+    question: "Can my adult children manage my account?",
+    answer: "Yes! You can add authorized family members who can access your account, view alerts, and help manage your protection. Perfect for families looking out for elderly parents.",
+  },
+  {
+    id: "vs-5",
+    category: "Veterans & Seniors",
+    question: "What if I'm not comfortable with technology?",
+    answer: "That's exactly who we built this for! We offer phone support, step-by-step guides with pictures, and patient 1-on-1 training. Many of our senior users had never used a computer before.",
+  },
 ];
 
 const categories = [
   "All Questions",
+  "Getting Started",
+  "Privacy & Security",
+  "Veterans & Seniors",
   "Family Shield",
   "Business Services",
   "AI Insurance",
