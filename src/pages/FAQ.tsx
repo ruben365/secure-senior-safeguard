@@ -6,15 +6,19 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Search, ThumbsUp, ThumbsDown, Phone, MessageCircle, ChevronDown } from "lucide-react";
+import { Search, ThumbsUp, ThumbsDown, Phone, MessageCircle, ChevronDown, Mail, TrendingUp, Copy, Check } from "lucide-react";
 import { ScrollRevealSection } from "@/components/ScrollRevealSection";
+import { CategoryTabs } from "@/components/CategoryTabs";
+import { FloatingHelpButton } from "@/components/FloatingHelpButton";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import heroFaqModern from "@/assets/hero-faq-modern.jpg";
 
 interface FAQ {
   id: string;
