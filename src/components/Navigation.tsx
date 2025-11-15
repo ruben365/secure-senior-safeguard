@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PrefetchLink } from "@/components/PrefetchLink";
+import invisionLogo from "@/assets/invision-logo.png";
 
 const Navigation = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -27,20 +28,11 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16 md:h-20 lg:h-24">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 md:gap-3 lg:gap-4 hover:scale-105 transition-transform duration-300 group flex-shrink-0 no-underline" onClick={scrollToTop}>
-            <div className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center shadow-glow-purple relative group-hover:shadow-glow-teal transition-all duration-300">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-5 h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 text-primary-foreground relative z-10 group-hover:scale-110 transition-transform duration-300"
-              >
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-              </svg>
-            </div>
+            <img 
+              src={invisionLogo} 
+              alt="InVision Network Shield Logo" 
+              className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 group-hover:scale-110 transition-transform duration-300"
+            />
             <div className="flex flex-col leading-tight">
               <span className="text-base md:text-lg lg:text-2xl font-bold gradient-text-primary group-hover:scale-105 transition-transform duration-300">InVision Network</span>
               <span className="text-[10px] md:text-xs lg:text-sm text-muted-foreground hidden sm:block">AI Scam Protection & Business Solutions</span>
