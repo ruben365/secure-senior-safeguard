@@ -217,11 +217,11 @@ const Services = () => {
   ];
 
   const servicesHeroImages = [
-    { src: heroBusinessProfessional, alt: "Professional services for your business" },
-    { src: officeWorkspace, alt: "Modern workspace solutions" },
-    { src: businessCollaboration, alt: "Collaborative service delivery" },
-    { src: teamMember1, alt: "Expert team member ready to assist" },
-    { src: heroBusinessNew, alt: "Innovative service offerings" }
+    { src: heroServices1, alt: "Professional services for your business" },
+    { src: heroServices2, alt: "Modern workspace solutions" },
+    { src: heroServices3, alt: "Collaborative service delivery" },
+    { src: heroServices4, alt: "Expert team member ready to assist" },
+    { src: heroServices5, alt: "Innovative service offerings" }
   ];
 
   return (
