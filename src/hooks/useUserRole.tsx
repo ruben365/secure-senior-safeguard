@@ -11,7 +11,7 @@ export interface RoleConfig {
   redirectTo: string;
 }
 
-const ROLE_CONFIGS: Record<UserRole, RoleConfig> = {
+export const ROLE_CONFIGS: Record<UserRole, RoleConfig> = {
   'admin': {
     role: 'admin',
     displayName: 'Administrator',
