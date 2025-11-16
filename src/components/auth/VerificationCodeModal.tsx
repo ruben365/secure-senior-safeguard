@@ -6,14 +6,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Shield } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-const ROLE_REDIRECTS: Record<string, string> = {
-  'ruben@invisionnetwork.org': '/admin',
-  'hello@invisionnetwork.org': '/admin/clients',
-  'training@invisionnetwork.org': '/admin/articles',
-  'consulting@invisionnetwork.org': '/admin/business-clients',
-  'support@invisionnetwork.org': '/admin'
-};
+import { ROLE_CONFIGS } from "@/hooks/useUserRole";
 
 interface VerificationCodeModalProps {
   open: boolean;
@@ -105,6 +98,7 @@ export function VerificationCodeModal({ open, onClose, email, rememberMe }: Veri
     setIsVerifying(true);
 
     try {
+      // Step 1: Verify the 2FA code
       const { data, error } = await supabase.functions.invoke("verify-code", {
         body: { email, code: verificationCode },
       });
@@ -117,17 +111,74 @@ export function VerificationCodeModal({ open, onClose, email, rememberMe }: Veri
         return;
       }
 
-      // Redirect based on user role
-      const normalizedEmail = email.toLowerCase().trim();
-      const redirectPath = ROLE_REDIRECTS[normalizedEmail] || '/admin';
+      // Step 2: Sign in the user with OTP
+      const { error: authError } = await supabase.auth.signInWithOtp({
+        email: email,
+        options: {
+          shouldCreateUser: false,
+        },
+      });
+
+      if (authError) {
+        toast.error("Authentication failed. Please try logging in again.");
+        setIsVerifying(false);
+        return;
+      }
+
+      // Step 3: Wait for session to be established
+      const { data: sessionData } = await supabase.auth.getSession();
       
-      toast.success("Verification successful! Redirecting...");
-      navigate(redirectPath);
-      onClose();
+      if (!sessionData.session?.user) {
+        toast.error("Session creation failed. Please try logging in again.");
+        setIsVerifying(false);
+        return;
+      }
+
+      const userId = sessionData.session.user.id;
+
+      // Step 4: Query user_roles table to get their role
+      const { data: roleData, error: roleError } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', userId)
+        .single();
+
+      if (roleError || !roleData) {
+        // No role assigned yet - redirect to pending approval page
+        toast.success("Verification successful!");
+        navigate('/application-pending');
+        onClose();
+        setIsVerifying(false);
+        return;
+      }
+
+      // Step 5: Get redirect path from ROLE_CONFIGS
+      const userRole = roleData.role;
+      const roleConfig = ROLE_CONFIGS[userRole];
+      
+      if (!roleConfig) {
+        // Fallback if role not found in configs
+        toast.warning("Role configuration not found. Redirecting to home.");
+        navigate('/');
+        onClose();
+        setIsVerifying(false);
+        return;
+      }
+
+      // Step 6: Redirect to role-specific dashboard
+      const redirectPath = roleConfig.redirectTo;
+      toast.success(`Welcome! Redirecting to your ${roleConfig.displayName} dashboard...`);
+      
+      // Small delay to show the success message
+      setTimeout(() => {
+        navigate(redirectPath);
+        onClose();
+        setIsVerifying(false);
+      }, 500);
+
     } catch (error: any) {
       console.error("Verification error:", error);
-      toast.error("Verification failed. Please try again.");
-    } finally {
+      toast.error("An unexpected error occurred. Please try again.");
       setIsVerifying(false);
     }
   };
