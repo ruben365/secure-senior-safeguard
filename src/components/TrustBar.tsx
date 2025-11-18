@@ -63,28 +63,29 @@ const TrustBar = () => {
     <div ref={counterRef} className="relative z-10 px-4 -mt-10" role="complementary" aria-label="Trust indicators">
       <div className="container mx-auto">
         {/* Section Heading */}
-        <div className="text-center mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-gradient-x">
             Serving 500+ Families in Greater Dayton Since 2024
           </h2>
         </div>
         <div className="relative mx-auto max-w-7xl group/trust">
-          {/* Glow effect */}
-          <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary/20 to-accent/20 blur-xl opacity-50 group-hover/trust:opacity-75 transition-opacity duration-500" />
+          {/* Enhanced multi-layer glow effect */}
+          <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary/30 via-accent/30 to-primary/30 blur-2xl opacity-60 group-hover/trust:opacity-90 transition-opacity duration-700 animate-pulse-slow" />
+          <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-400/20 to-purple-400/20 blur-xl opacity-40 group-hover/trust:opacity-70 transition-opacity duration-700" />
           
-          {/* Animated rolling light border */}
-          <div className="absolute inset-0 rounded-3xl overflow-hidden">
+          {/* Animated shimmer border effect */}
+          <div className="absolute inset-0 rounded-3xl overflow-hidden opacity-40 group-hover/trust:opacity-70 transition-opacity duration-500">
             <div 
-              className="absolute inset-[-2px] rounded-3xl opacity-75"
+              className="absolute inset-[-3px] rounded-3xl"
               style={{
-                background: 'conic-gradient(from 0deg, transparent 0%, transparent 70%, rgba(255,255,255,0.8) 85%, rgba(255,255,255,0.4) 90%, transparent 100%)',
-                animation: 'spin 3s linear infinite',
+                background: 'conic-gradient(from 180deg, transparent 0%, transparent 60%, rgba(59, 130, 246, 0.8) 70%, rgba(147, 51, 234, 0.8) 80%, transparent 90%, transparent 100%)',
+                animation: 'spin 4s linear infinite',
               }}
             />
           </div>
           
-          {/* Main content with light gray background */}
-          <div className="relative bg-[#f9fafb] rounded-3xl py-3 px-4 sm:px-5 md:px-8 shadow-lg backdrop-blur-sm border-t-2 border-b-2 border-primary/30 group-hover/trust:shadow-xl transition-all duration-500">
+          {/* Main content card with enhanced styling */}
+          <div className="relative bg-gradient-to-br from-white via-gray-50 to-white rounded-3xl py-4 sm:py-5 md:py-6 px-4 sm:px-6 md:px-10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] backdrop-blur-sm border-2 border-white/50 group-hover/trust:shadow-[0_20px_60px_rgb(0,0,0,0.2)] group-hover/trust:border-primary/20 transition-all duration-500">
             {/* Desktop: Horizontal layout */}
             <div className="hidden sm:flex justify-center items-center gap-2 md:gap-4 lg:gap-6">
               {trustIndicators.map((item, index) => (
@@ -101,13 +102,15 @@ const TrustBar = () => {
                   onMouseLeave={() => setHoveredIndex(null)}
                   role="listitem"
                 >
-                  <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-xl bg-primary/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0 group-hover/badge:scale-110 group-hover/badge:rotate-6 group-hover/badge:bg-primary/30 group-hover/badge:shadow-[0_8px_20px_rgba(59,130,246,0.3)] transition-all duration-300 animate-icon-pulse" 
+                  <div className="relative w-10 h-10 sm:w-11 sm:h-11 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br from-primary/25 via-accent/20 to-primary/25 backdrop-blur-md flex items-center justify-center flex-shrink-0 group-hover/badge:scale-110 group-hover/badge:rotate-3 transition-all duration-500 shadow-[0_4px_20px_rgba(59,130,246,0.25)] group-hover/badge:shadow-[0_8px_30px_rgba(59,130,246,0.5)] border border-white/30 group-hover/badge:border-primary/30" 
                     style={{ animationDelay: `${index * 200 + 500}ms` }}
                     aria-hidden="true"
                   >
-                    <item.icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary drop-shadow-lg group-hover/badge:scale-110 transition-transform duration-300" />
+                    {/* Icon glow effect */}
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-primary/30 to-accent/30 blur-md opacity-0 group-hover/badge:opacity-100 transition-opacity duration-500" />
+                    <item.icon className="relative w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-primary drop-shadow-[0_2px_8px_rgba(59,130,246,0.6)] group-hover/badge:scale-110 group-hover/badge:drop-shadow-[0_4px_12px_rgba(59,130,246,0.8)] transition-all duration-500" />
                   </div>
-                  <span className="text-xs md:text-sm lg:text-base font-bold text-foreground drop-shadow-sm group-hover/badge:scale-105 transition-transform duration-300 min-w-[160px] sm:min-w-[180px] md:min-w-[200px]">
+                  <span className="text-xs md:text-sm lg:text-base font-bold text-foreground drop-shadow-sm group-hover/badge:scale-105 group-hover/badge:text-primary transition-all duration-300 min-w-[160px] sm:min-w-[180px] md:min-w-[200px]">
                     {item.useCounter ? `${item.count}+ Families Protected` : item.text}
                   </span>
                 </div>
@@ -126,11 +129,13 @@ const TrustBar = () => {
                   }}
                   role="listitem"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-primary/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0 group-active/badge:scale-110 group-active/badge:bg-primary/30 transition-all duration-300 animate-icon-pulse" 
+                  <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/25 via-accent/20 to-primary/25 backdrop-blur-md flex items-center justify-center flex-shrink-0 group-active/badge:scale-110 transition-all duration-500 shadow-[0_4px_20px_rgba(59,130,246,0.25)] group-active/badge:shadow-[0_8px_30px_rgba(59,130,246,0.5)] border border-white/30 group-active/badge:border-primary/30" 
                     style={{ animationDelay: `${index * 200 + 500}ms` }}
                     aria-hidden="true"
                   >
-                    <item.icon className="w-5 h-5 text-primary drop-shadow-lg" />
+                    {/* Icon glow effect */}
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-primary/30 to-accent/30 blur-md opacity-0 group-active/badge:opacity-100 transition-opacity duration-500" />
+                    <item.icon className="relative w-6 h-6 text-primary drop-shadow-[0_2px_8px_rgba(59,130,246,0.6)] group-active/badge:scale-110 group-active/badge:drop-shadow-[0_4px_12px_rgba(59,130,246,0.8)] transition-all duration-500" />
                   </div>
                   <span className="text-sm font-bold text-foreground drop-shadow-sm flex-1">
                     {item.useCounter ? `${item.count}+ Families Protected` : item.text}
