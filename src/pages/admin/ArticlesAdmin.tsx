@@ -96,7 +96,7 @@ export default function ArticlesAdmin() {
   const { toast } = useToast();
 
   // Fetch articles from database
-  const { data: articlesData, isLoading } = useQuery({
+  const { data: articlesData, isLoading, refetch } = useQuery({
     queryKey: ["articles"],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -127,6 +127,20 @@ export default function ArticlesAdmin() {
       }));
     }
   });
+
+  // Add realtime updates
+  useEffect(() => {
+    const channel = supabase
+      .channel('articles-updates')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'articles' }, () => {
+        refetch();
+      })
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [refetch]);
 
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [articles, setArticles] = useState<Article[]>([]);

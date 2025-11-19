@@ -149,6 +149,15 @@ export const BookingModal = ({
 
       if (error) throw error;
 
+      // Track analytics
+      const { trackFormSubmit, trackConversion } = await import("@/utils/analyticsTracker");
+      trackFormSubmit("booking_form", { 
+        serviceType, 
+        serviceName, 
+        isVeteran: data.isVeteran 
+      });
+      trackConversion("booking_submission", finalPrice);
+
       toast({
         title: "Booking Request Submitted!",
         description: `Your request #${requestNumber} has been received. We'll contact you soon.`,

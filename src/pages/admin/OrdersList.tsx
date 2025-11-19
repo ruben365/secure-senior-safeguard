@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Package, Printer, Eye, MoreVertical, Download, TrendingUp, DollarSign, ShoppingCart, AlertTriangle } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
@@ -42,7 +42,7 @@ const OrdersList = () => {
   const [activeTab, setActiveTab] = useState("all");
 
   // Fetch orders from database
-  const { data: orders = [], isLoading } = useQuery({
+  const { data: orders = [], isLoading, refetch } = useQuery({
     queryKey: ["orders"],
     queryFn: async () => {
       const { data: ordersData, error: ordersError } = await supabase
@@ -51,7 +51,7 @@ const OrdersList = () => {
           *,
           customer:profiles(first_name, last_name, email)
         `)
-        .order("created_at", { ascending: false });
+        .order("created_at", { ascending: false});
 
       if (ordersError) throw ordersError;
 
@@ -84,6 +84,23 @@ const OrdersList = () => {
       return ordersWithItems;
     }
   });
+
+  // Add realtime updates
+  useEffect(() => {
+    const channel = supabase
+      .channel('orders-updates')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'partner_orders' }, () => {
+        refetch();
+      })
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'order_items' }, () => {
+        refetch();
+      })
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [refetch]);
 
   const getPaymentStatusBadge = (status: string) => {
     const variants: Record<string, { variant: any; icon: string; label: string }> = {
