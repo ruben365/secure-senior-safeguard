@@ -271,6 +271,14 @@ export const ApplicationForm = ({ positions }: ApplicationFormProps) => {
 
       console.log('Application saved:', application.id);
 
+      // Track analytics
+      const { trackFormSubmit, trackConversion } = await import("@/utils/analyticsTracker");
+      trackFormSubmit("job_application_form", { 
+        position: data.position,
+        isVeteran 
+      });
+      trackConversion("job_application_submission");
+
       // Encode data for WhatsApp message
       const message = `New Job Application:
 

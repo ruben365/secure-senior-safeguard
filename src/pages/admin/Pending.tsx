@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -45,12 +45,32 @@ export default function Pending() {
       const { data, error } = await supabase
         .from("website_inquiries")
         .select("*")
-        .eq("status", "pending")
+        .in("status", ["new", "pending"])
         .order("created_at", { ascending: false });
       if (error) throw error;
       return data;
     },
   });
+
+  // Add realtime updates
+  useEffect(() => {
+    const channel = supabase
+      .channel('pending-updates')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'testimonials' }, () => {
+        refetchTestimonials();
+      })
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'booking_requests' }, () => {
+        refetchBookings();
+      })
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'website_inquiries' }, () => {
+        refetchInquiries();
+      })
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [refetchTestimonials, refetchBookings, refetchInquiries]);
 
   const handleTestimonialAction = async (id: string, status: "approved" | "rejected") => {
     setUpdatingId(id);

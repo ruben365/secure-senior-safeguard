@@ -53,6 +53,11 @@ export const TestimonialForm = () => {
 
       if (error) throw error;
 
+      // Track analytics
+      const { trackFormSubmit, trackConversion } = await import("@/utils/analyticsTracker");
+      trackFormSubmit("testimonial_form", { rating: data.rating });
+      trackConversion("testimonial_submission");
+
       toast({
         title: "Thank you for your testimonial!",
         description: "Your testimonial has been submitted and is pending review. We'll notify you once it's approved.",
