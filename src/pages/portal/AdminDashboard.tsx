@@ -89,10 +89,21 @@ function AdminDashboard() {
 
     if (eventsData) setEvents(eventsData);
 
-    // TODO: Load actual stats from database
+    // Count staff members from user_roles table
+    const { count: staffCount } = await supabase
+      .from("user_roles")
+      .select("*", { count: "exact", head: true })
+      .in("role", ["staff", "trainer", "developer", "analyst", "healthcare", "caregiver"]);
+
+    // Count active jobs as projects
+    const { count: projectsCount } = await supabase
+      .from("jobs")
+      .select("*", { count: "exact", head: true })
+      .in("status", ["Pending", "In Progress"]);
+
     setStats({
-      totalStaff: 12,
-      activeProjects: 8,
+      totalStaff: staffCount || 0,
+      activeProjects: projectsCount || 0,
       pendingTasks: tasksData?.length || 0,
       upcomingEvents: eventsData?.length || 0,
     });
