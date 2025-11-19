@@ -44,16 +44,22 @@ export default function Login() {
         if (rolesData && rolesData.length > 0) {
           const userRole = rolesData[0].role;
           const roleRedirects: Record<string, string> = {
-            'admin': '/portal/admin',
-            'secretary': '/admin/clients/businesses',
-            'training_coordinator': '/portal/trainer',
-            'business_consultant': '/admin/clients/businesses',
-            'support_specialist': '/portal/staff',
-            'staff': '/portal/staff',
-            'moderator': '/admin',
-            'user': '/portal'
+            admin: "/portal/admin",
+            secretary: "/admin/clients/businesses",
+            training_coordinator: "/portal/trainer",
+            business_consultant: "/admin/clients/businesses",
+            support_specialist: "/portal/staff",
+            staff: "/portal/staff",
+            moderator: "/admin",
+            senior: "/portal/senior",
+            caregiver: "/portal/caregiver",
+            healthcare: "/portal/healthcare",
+            developer: "/portal/developer",
+            analyst: "/portal/analyst",
+            trainer: "/portal/trainer",
+            user: "/portal",
           };
-          const redirectPath = roleRedirects[userRole] || '/portal';
+          const redirectPath = roleRedirects[userRole] || "/portal";
           navigate(redirectPath);
         } else {
           navigate("/portal");

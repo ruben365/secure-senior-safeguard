@@ -62,13 +62,21 @@ function Portal() {
         return;
       }
 
-      // Load profile
-      console.log("Portal: Loading profile");
-      const { data: profileData, error: profileError } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("id", user.id)
-        .single();
+      // Parallelize all database queries for faster loading
+      console.log("Portal: Loading all data in parallel");
+      const [
+        { data: profileData, error: profileError },
+        { data: rolesData, error: rolesError },
+        { data: seniorProfile },
+        { data: caregiverProfile },
+        { data: healthcareProfile },
+      ] = await Promise.all([
+        supabase.from("profiles").select("*").eq("id", user.id).single(),
+        supabase.from("user_roles").select("role").eq("user_id", user.id),
+        supabase.from("senior_client_profiles").select("id").eq("user_id", user.id).maybeSingle(),
+        supabase.from("caregiver_profiles").select("id").eq("user_id", user.id).maybeSingle(),
+        supabase.from("healthcare_professional_profiles").select("id").eq("user_id", user.id).maybeSingle(),
+      ]);
 
       if (profileError) {
         console.error("Portal: Error loading profile", profileError);
@@ -77,13 +85,6 @@ function Portal() {
         setProfile(profileData);
       }
 
-      // Load roles from user_roles table
-      console.log("Portal: Loading roles from user_roles table");
-      const { data: rolesData, error: rolesError } = await supabase
-        .from("user_roles")
-        .select("role")
-        .eq("user_id", user.id);
-
       if (rolesError) {
         console.error("Portal: Error loading roles", rolesError);
       }
@@ -91,55 +92,42 @@ function Portal() {
       const userRoles: UserRole[] = rolesData?.map((r) => r.role as UserRole) || [];
       console.log("Portal: Roles from user_roles table", userRoles);
 
-      // Check for profile-specific roles
-      console.log("Portal: Checking for profile-specific roles");
-      try {
-        const { data: seniorProfile } = await supabase
-          .from("senior_client_profiles")
-          .select("id")
-          .eq("user_id", user.id)
-          .maybeSingle();
-        
-        if (seniorProfile) {
-          console.log("Portal: Senior profile found");
-          userRoles.push("senior");
-        }
-      } catch (err) {
-        console.error("Portal: Error checking senior profile", err);
+      // Add profile-specific roles
+      if (seniorProfile) {
+        console.log("Portal: Senior profile found");
+        userRoles.push("senior");
       }
-
-      try {
-        const { data: caregiverProfile } = await supabase
-          .from("caregiver_profiles")
-          .select("id")
-          .eq("user_id", user.id)
-          .maybeSingle();
-        
-        if (caregiverProfile) {
-          console.log("Portal: Caregiver profile found");
-          userRoles.push("caregiver");
-        }
-      } catch (err) {
-        console.error("Portal: Error checking caregiver profile", err);
+      if (caregiverProfile) {
+        console.log("Portal: Caregiver profile found");
+        userRoles.push("caregiver");
       }
-
-      try {
-        const { data: healthcareProfile } = await supabase
-          .from("healthcare_professional_profiles")
-          .select("id")
-          .eq("user_id", user.id)
-          .maybeSingle();
-        
-        if (healthcareProfile) {
-          console.log("Portal: Healthcare profile found");
-          userRoles.push("healthcare");
-        }
-      } catch (err) {
-        console.error("Portal: Error checking healthcare profile", err);
+      if (healthcareProfile) {
+        console.log("Portal: Healthcare profile found");
+        userRoles.push("healthcare");
       }
 
       console.log("Portal: Final roles array", userRoles);
       setRoles(userRoles);
+
+      // Auto-redirect if user has only one role
+      if (userRoles.length === 1) {
+        const roleRedirects: Record<string, string> = {
+          admin: "/portal/admin",
+          secretary: "/admin/clients/businesses",
+          training_coordinator: "/portal/trainer",
+          business_consultant: "/admin/clients/businesses",
+          support_specialist: "/portal/staff",
+          staff: "/portal/staff",
+          moderator: "/admin",
+          senior: "/portal/senior",
+          caregiver: "/portal/caregiver",
+          healthcare: "/portal/healthcare",
+        };
+        const redirectPath = roleRedirects[userRoles[0]] || "/portal";
+        console.log("Portal: Auto-redirecting single-role user to", redirectPath);
+        navigate(redirectPath);
+        return;
+      }
     } catch (error: any) {
       console.error("Portal: Critical error loading user data:", error);
       toast({
@@ -249,13 +237,21 @@ function Portal() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-          <p className="mt-4 text-muted-foreground">Loading portal...</p>
-          <p className="mt-2 text-xs text-muted-foreground">
-            This should only take a moment
-          </p>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-primary/5 to-accent/10">
+        <div className="text-center space-y-6">
+          <div className="relative">
+            <div className="absolute inset-0 bg-primary/20 rounded-full blur-2xl animate-pulse" />
+            <Shield className="relative w-16 h-16 text-primary mx-auto animate-pulse" />
+          </div>
+          <div className="space-y-2">
+            <h3 className="text-xl font-semibold text-foreground">Loading Your Dashboard</h3>
+            <p className="text-sm text-muted-foreground">Please wait while we prepare everything for you...</p>
+          </div>
+          <div className="flex justify-center gap-2">
+            <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+            <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+            <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+          </div>
         </div>
       </div>
     );
