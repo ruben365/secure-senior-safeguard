@@ -41,12 +41,15 @@ import { useCounterAnimation } from "@/hooks/useCounterAnimation";
 import { RotatingHeroText } from "@/components/RotatingHeroText";
 import HeroValueCards from "@/components/HeroValueCards";
 
-// New professional hero images
-import heroSlideshow1 from "@/assets/hero-home-diverse-community.jpg";
-import heroSlideshow2 from "@/assets/hero-home-veteran-family.jpg";
-import heroSlideshow3 from "@/assets/hero-home-helping-parents.jpg";
-import heroSlideshow4 from "@/assets/hero-home-church-workshop.jpg";
-import heroSlideshow5 from "@/assets/hero-home-st-jude-volunteers.jpg";
+// Placeholder imports for hero slideshow images
+// Replace these with your actual generated/sourced images
+import heroSlideshow1 from "@/assets/hero-home-1.jpg";
+import heroSlideshow2 from "@/assets/hero-home-2.jpg";
+import heroSlideshow3 from "@/assets/hero-home-3.jpg";
+import heroSlideshow4 from "@/assets/hero-home-4.jpg";
+import heroSlideshow5 from "@/assets/hero-home-5.jpg";
+import heroSlideshow6 from "@/assets/hero-business-1.jpg";
+import heroSlideshow7 from "@/assets/hero-training-1.jpg";
 
 function Index() {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -58,23 +61,31 @@ function Index() {
   const heroImages = [
     { 
       src: heroSlideshow1, 
-      alt: "Diverse elderly group learning digital safety in community center" 
+      alt: "Multigenerational family learning scam prevention together" 
     },
     { 
       src: heroSlideshow2, 
-      alt: "Veteran grandfather protected from scams with family support" 
+      alt: "Veteran protected from online scams" 
     },
     { 
       src: heroSlideshow3, 
-      alt: "Daughter teaching elderly parents about online safety" 
+      alt: "Diverse community workshop on cybersecurity" 
     },
     { 
       src: heroSlideshow4, 
-      alt: "Community workshop on scam prevention at local church" 
+      alt: "Grandfather and granddaughter using technology safely" 
     },
     { 
       src: heroSlideshow5, 
-      alt: "Volunteers teaching seniors digital safety, supporting St. Jude mission" 
+      alt: "Couple receiving emergency scam assistance" 
+    },
+    { 
+      src: heroSlideshow6, 
+      alt: "Veteran woman business owner with AI protection" 
+    },
+    { 
+      src: heroSlideshow7, 
+      alt: "Youth teaching seniors about online safety" 
     }
   ];
 
@@ -82,22 +93,6 @@ function Index() {
     {
       headline: "Protecting Ohio Families from AI-Powered Scams",
       subheadline: "Your parents didn't grow up with technology. Don't let scammers take advantage of that."
-    },
-    {
-      headline: "Veteran Families Deserve Extra Protection",
-      subheadline: "15% discount for those who served. Because protecting our protectors is our mission."
-    },
-    {
-      headline: "Teach Your Parents Digital Safety",
-      subheadline: "Free family training sessions to keep your loved ones safe from online fraud."
-    },
-    {
-      headline: "Community-Powered Scam Prevention",
-      subheadline: "Join hundreds of Ohio families learning to outsmart scammers together."
-    },
-    {
-      headline: "Every Plan Supports St. Jude Children's Hospital",
-      subheadline: "Protect your family while helping fight childhood cancer. 10% of profits donated."
     }
   ];
 
@@ -175,7 +170,7 @@ function Index() {
         showScrollIndicator={true}
         overlay={true}
       >
-        <RotatingHeroText messages={rotatingMessages} interval={5000} />
+        <RotatingHeroText messages={rotatingMessages} interval={6000} />
       </Hero>
 
       <TrustBar />
