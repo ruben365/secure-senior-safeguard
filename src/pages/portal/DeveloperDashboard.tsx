@@ -43,6 +43,12 @@ function DeveloperDashboard() {
     }
   };
 
+  const [stats, setStats] = useState({
+    activeProjects: 0,
+    inDevelopment: 0,
+    completed: 0,
+  });
+
   const loadData = async () => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
@@ -65,6 +71,30 @@ function DeveloperDashboard() {
       .limit(5);
 
     if (eventsData) setEvents(eventsData);
+
+    // Count jobs by status
+    const { count: activeCount } = await supabase
+      .from("jobs")
+      .select("*", { count: "exact", head: true })
+      .in("status", ["Pending", "In Progress"]);
+
+    const { count: inDevCount } = await supabase
+      .from("jobs")
+      .select("*", { count: "exact", head: true })
+      .eq("status", "In Progress")
+      .contains("assigned_worker_ids", [user.id]);
+
+    const { count: completedCount } = await supabase
+      .from("jobs")
+      .select("*", { count: "exact", head: true })
+      .eq("status", "Completed")
+      .contains("assigned_worker_ids", [user.id]);
+
+    setStats({
+      activeProjects: activeCount || 0,
+      inDevelopment: inDevCount || 0,
+      completed: completedCount || 0,
+    });
   };
 
   return (
@@ -93,12 +123,11 @@ function DeveloperDashboard() {
       </header>
 
       <main className="container mx-auto px-4 py-8">
-        <div className="grid md:grid-cols-4 gap-6 mb-8">
+        <div className="grid md:grid-cols-3 gap-6 mb-8">
           {[
-            { label: "Active Projects", value: 6, icon: Code, color: "text-blue-600" },
-            { label: "In Development", value: 4, icon: GitBranch, color: "text-purple-600" },
-            { label: "Deployed", value: 8, icon: Rocket, color: "text-green-600" },
-            { label: "Completed", value: 15, icon: CheckCircle, color: "text-amber-600" },
+            { label: "Active Projects", value: stats.activeProjects, icon: Code, color: "text-blue-600" },
+            { label: "In Development", value: stats.inDevelopment, icon: GitBranch, color: "text-purple-600" },
+            { label: "Completed", value: stats.completed, icon: CheckCircle, color: "text-green-600" },
           ].map((stat) => {
             const Icon = stat.icon;
             return (

@@ -43,6 +43,12 @@ function TrainerDashboard() {
     }
   };
 
+  const [stats, setStats] = useState({
+    upcomingSessions: 0,
+    totalStudents: 0,
+    activeCourses: 0,
+  });
+
   const loadData = async () => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
@@ -65,6 +71,30 @@ function TrainerDashboard() {
       .limit(5);
 
     if (eventsData) setEvents(eventsData);
+
+    // Count upcoming training sessions
+    const { count: sessionsCount } = await supabase
+      .from("zoom_classes")
+      .select("*", { count: "exact", head: true })
+      .gte("scheduled_date", new Date().toISOString())
+      .eq("instructor_id", user.id);
+
+    // Count total students (zoom enrollments)
+    const { count: studentsCount } = await supabase
+      .from("zoom_class_enrollments")
+      .select("*", { count: "exact", head: true });
+
+    // Count active courses
+    const { count: coursesCount } = await supabase
+      .from("courses")
+      .select("*", { count: "exact", head: true })
+      .eq("active", true);
+
+    setStats({
+      upcomingSessions: sessionsCount || 0,
+      totalStudents: studentsCount || 0,
+      activeCourses: coursesCount || 0,
+    });
   };
 
   return (
@@ -93,12 +123,11 @@ function TrainerDashboard() {
       </header>
 
       <main className="container mx-auto px-4 py-8">
-        <div className="grid md:grid-cols-4 gap-6 mb-8">
+        <div className="grid md:grid-cols-3 gap-6 mb-8">
           {[
-            { label: "Upcoming Sessions", value: 5, icon: CalendarIcon, color: "text-blue-600" },
-            { label: "Total Students", value: 48, icon: Users, color: "text-green-600" },
-            { label: "Certificates Issued", value: 12, icon: Award, color: "text-amber-600" },
-            { label: "This Week", value: 3, icon: GraduationCap, color: "text-purple-600" },
+            { label: "Upcoming Sessions", value: stats.upcomingSessions, icon: CalendarIcon, color: "text-blue-600" },
+            { label: "Total Students", value: stats.totalStudents, icon: Users, color: "text-green-600" },
+            { label: "Active Courses", value: stats.activeCourses, icon: GraduationCap, color: "text-purple-600" },
           ].map((stat) => {
             const Icon = stat.icon;
             return (

@@ -43,6 +43,13 @@ function StaffDashboard() {
     }
   };
 
+  const [stats, setStats] = useState({
+    activeClients: 0,
+    openTickets: 0,
+    unreadMessages: 0,
+    todaysMeetings: 0,
+  });
+
   const loadData = async () => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
@@ -65,6 +72,44 @@ function StaffDashboard() {
       .limit(5);
 
     if (eventsData) setEvents(eventsData);
+
+    // Count active clients
+    const { count: clientsCount } = await supabase
+      .from("clients")
+      .select("*", { count: "exact", head: true });
+
+    // Count open tickets
+    const { count: ticketsCount } = await supabase
+      .from("tickets")
+      .select("*", { count: "exact", head: true })
+      .eq("status", "open");
+
+    // Count unread messages
+    const { count: messagesCount } = await supabase
+      .from("internal_messages")
+      .select("*", { count: "exact", head: true })
+      .eq("recipient_id", user.id)
+      .eq("is_read", false);
+
+    // Count today's appointments
+    const startOfToday = new Date();
+    startOfToday.setHours(0, 0, 0, 0);
+    const endOfToday = new Date();
+    endOfToday.setHours(23, 59, 59, 999);
+
+    const { count: meetingsCount } = await supabase
+      .from("appointments")
+      .select("*", { count: "exact", head: true })
+      .gte("scheduled_start", startOfToday.toISOString())
+      .lte("scheduled_start", endOfToday.toISOString())
+      .eq("worker_id", user.id);
+
+    setStats({
+      activeClients: clientsCount || 0,
+      openTickets: ticketsCount || 0,
+      unreadMessages: messagesCount || 0,
+      todaysMeetings: meetingsCount || 0,
+    });
   };
 
   return (
@@ -95,10 +140,10 @@ function StaffDashboard() {
       <main className="container mx-auto px-4 py-8">
         <div className="grid md:grid-cols-4 gap-6 mb-8">
           {[
-            { label: "Active Clients", value: 24, icon: Users, color: "text-blue-600" },
-            { label: "Open Tickets", value: 8, icon: Headphones, color: "text-amber-600" },
-            { label: "Messages", value: 15, icon: MessageSquare, color: "text-green-600" },
-            { label: "Today's Meetings", value: 3, icon: CalendarIcon, color: "text-purple-600" },
+            { label: "Active Clients", value: stats.activeClients, icon: Users, color: "text-blue-600" },
+            { label: "Open Tickets", value: stats.openTickets, icon: Headphones, color: "text-amber-600" },
+            { label: "Messages", value: stats.unreadMessages, icon: MessageSquare, color: "text-green-600" },
+            { label: "Today's Meetings", value: stats.todaysMeetings, icon: CalendarIcon, color: "text-purple-600" },
           ].map((stat) => {
             const Icon = stat.icon;
             return (

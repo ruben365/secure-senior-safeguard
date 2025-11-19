@@ -62,31 +62,6 @@ export default function Admin() {
 
           {/* Upcoming Tasks */}
           <UpcomingTasks />
-
-          {/* Additional Content Area */}
-          <Card className="p-6">
-            <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between py-2 border-b">
-                <div>
-                  <div className="font-medium">New user registration</div>
-                  <div className="text-sm text-muted-foreground">5 minutes ago</div>
-                </div>
-              </div>
-              <div className="flex items-center justify-between py-2 border-b">
-                <div>
-                  <div className="font-medium">Order #1234 completed</div>
-                  <div className="text-sm text-muted-foreground">15 minutes ago</div>
-                </div>
-              </div>
-              <div className="flex items-center justify-between py-2">
-                <div>
-                  <div className="font-medium">New testimonial submitted</div>
-                  <div className="text-sm text-muted-foreground">1 hour ago</div>
-                </div>
-              </div>
-            </div>
-          </Card>
         </div>
       </main>
     </div>

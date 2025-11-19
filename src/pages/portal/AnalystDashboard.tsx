@@ -43,6 +43,12 @@ function AnalystDashboard() {
     }
   };
 
+  const [stats, setStats] = useState({
+    openCases: 0,
+    critical: 0,
+    resolvedToday: 0,
+  });
+
   const loadData = async () => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
@@ -65,6 +71,34 @@ function AnalystDashboard() {
       .limit(5);
 
     if (eventsData) setEvents(eventsData);
+
+    // Count open tickets
+    const { count: openCount } = await supabase
+      .from("tickets")
+      .select("*", { count: "exact", head: true })
+      .eq("status", "open");
+
+    // Count critical tickets
+    const { count: criticalCount } = await supabase
+      .from("tickets")
+      .select("*", { count: "exact", head: true })
+      .eq("priority", "urgent");
+
+    // Count tickets resolved today
+    const startOfToday = new Date();
+    startOfToday.setHours(0, 0, 0, 0);
+
+    const { count: resolvedCount } = await supabase
+      .from("tickets")
+      .select("*", { count: "exact", head: true })
+      .eq("status", "closed")
+      .gte("resolved_at", startOfToday.toISOString());
+
+    setStats({
+      openCases: openCount || 0,
+      critical: criticalCount || 0,
+      resolvedToday: resolvedCount || 0,
+    });
   };
 
   return (
@@ -93,12 +127,11 @@ function AnalystDashboard() {
       </header>
 
       <main className="container mx-auto px-4 py-8">
-        <div className="grid md:grid-cols-4 gap-6 mb-8">
+        <div className="grid md:grid-cols-3 gap-6 mb-8">
           {[
-            { label: "Open Cases", value: 12, icon: Shield, color: "text-blue-600" },
-            { label: "Critical", value: 3, icon: AlertTriangle, color: "text-red-600" },
-            { label: "Resolved Today", value: 8, icon: CheckCircle, color: "text-green-600" },
-            { label: "Avg Response", value: "2.5h", icon: Clock, color: "text-amber-600" },
+            { label: "Open Cases", value: stats.openCases, icon: Shield, color: "text-blue-600" },
+            { label: "Critical", value: stats.critical, icon: AlertTriangle, color: "text-red-600" },
+            { label: "Resolved Today", value: stats.resolvedToday, icon: CheckCircle, color: "text-green-600" },
           ].map((stat) => {
             const Icon = stat.icon;
             return (
