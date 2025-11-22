@@ -99,7 +99,7 @@ const TrustBar = () => {
                     }}
                     aria-hidden="true"
                   >
-                    <item.icon className="relative w-6 h-6 md:w-7 md:h-7 text-white drop-shadow-[0_3px_16px_rgba(255,255,255,0.9)] group-hover/badge:scale-110 group-hover/badge:drop-shadow-[0_5px_20px_rgba(255,255,255,1)] transition-all duration-500 relative z-10 filter brightness-110" />
+                    <item.icon className="w-6 h-6 md:w-7 md:h-7 text-white drop-shadow-[0_3px_16px_rgba(255,255,255,0.9)] group-hover/badge:scale-110 group-hover/badge:drop-shadow-[0_5px_20px_rgba(255,255,255,1)] transition-all duration-500 z-10 filter brightness-110" />
                   </div>
                   <span className="text-xs md:text-sm font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)] group-hover/badge:scale-105 transition-all duration-300 group-hover/badge:drop-shadow-[0_2px_12px_rgba(255,255,255,0.5)] filter brightness-105">
                     {item.useCounter ? `${item.count}+ Families Protected` : item.text}
@@ -137,7 +137,7 @@ const TrustBar = () => {
                     }}
                     aria-hidden="true"
                   >
-                    <item.icon className="relative w-6 h-6 text-white drop-shadow-[0_3px_16px_rgba(255,255,255,0.9)] group-active/badge:scale-110 group-active/badge:drop-shadow-[0_5px_20px_rgba(255,255,255,1)] transition-all duration-500 z-10 filter brightness-110" />
+                    <item.icon className="w-6 h-6 text-white drop-shadow-[0_3px_16px_rgba(255,255,255,0.9)] group-active/badge:scale-110 group-active/badge:drop-shadow-[0_5px_20px_rgba(255,255,255,1)] transition-all duration-500 z-10 filter brightness-110" />
                   </div>
                   <span className="text-sm font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)] flex-1 transition-all duration-300 filter brightness-105">
                     {item.useCounter ? `${item.count}+ Families Protected` : item.text}
