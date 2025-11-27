@@ -16,13 +16,13 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   
   /* Professional smooth scrolling with hardware acceleration */
   html {
-    scroll-behavior: auto; /* Override default, we use custom smooth scroll */
+    scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   
   body {
-    scroll-behavior: auto; /* Override default, we use custom smooth scroll */
+    scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch; /* Momentum scrolling on iOS */
   }
 
@@ -171,10 +171,11 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   }
 
   html {
+    scroll-behavior: smooth;
     overflow-x: hidden;
     width: 100%;
-    overscroll-behavior-y: auto;
-    touch-action: pan-y pinch-zoom;
+    overscroll-behavior-y: none;
+    touch-action: pan-y;
   }
   
   body {
@@ -183,13 +184,14 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     font-size: 16px;
     line-height: 1.7;
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: scroll;
     width: 100%;
     position: relative;
     /* Desktop zoom scaling */
     zoom: var(--site-scale);
-    overscroll-behavior-y: auto;
+    overscroll-behavior-y: none;
     -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
   }
   
   @media (min-width: 768px) {
@@ -284,12 +286,18 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   /* Optimize scroll performance - remove any resistance */
   * {
     -webkit-tap-highlight-color: transparent;
-    overscroll-behavior: contain;
   }
   
   /* Ensure smooth momentum scrolling on all touch devices */
   html, body, #root {
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior: none;
+  }
+  
+  /* High performance scrolling */
+  #root {
+    scroll-behavior: smooth;
+    will-change: scroll-position;
   }
   
   #root {
