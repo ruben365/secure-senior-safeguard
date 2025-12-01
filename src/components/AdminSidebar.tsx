@@ -26,6 +26,9 @@ import {
   Globe,
   CreditCard,
   CheckCircle2,
+  Clock,
+  Briefcase,
+  Shield,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -50,6 +53,11 @@ const menuItems: MenuItem[] = [
     href: "/admin",
   },
   {
+    title: "Pending Actions",
+    icon: Clock,
+    href: "/admin/pending",
+  },
+  {
     title: "Content",
     icon: FileText,
     children: [
@@ -67,6 +75,16 @@ const menuItems: MenuItem[] = [
       { title: "Individuals", href: "/admin/clients/individuals", permission: "view_individual_clients" },
       { title: "Messages", href: "/admin/clients/messages", permission: "view_messages" },
     ],
+  },
+  {
+    title: "Service Inquiries",
+    icon: Briefcase,
+    href: "/admin/service-inquiries",
+  },
+  {
+    title: "Scam Reports",
+    icon: Shield,
+    href: "/admin/scam-reports",
   },
   {
     title: "E-Commerce",

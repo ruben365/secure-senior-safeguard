@@ -260,6 +260,22 @@ const TeamAdmin = lazy(() => {
   });
 });
 
+const ServiceInquiries = lazy(() => {
+  performanceMonitor.startTracking('ServiceInquiries');
+  return import("./pages/admin/ServiceInquiries").then(module => {
+    performanceMonitor.endTracking('ServiceInquiries');
+    return module;
+  });
+});
+
+const ScamReports = lazy(() => {
+  performanceMonitor.startTracking('ScamReports');
+  return import("./pages/admin/ScamReports").then(module => {
+    performanceMonitor.endTracking('ScamReports');
+    return module;
+  });
+});
+
 const EmailCampaigns = lazy(() => {
   performanceMonitor.startTracking('EmailCampaigns');
   return import("./pages/admin/EmailCampaigns").then(module => {
@@ -604,6 +620,8 @@ function AnimatedRoutes() {
         <Route path="/admin/articles/preview" element={<PageTransition><AdminRoute><ArticlePreview /></AdminRoute></PageTransition>} />
         <Route path="/admin/content/team" element={<PageTransition><AdminRoute><TeamAdmin /></AdminRoute></PageTransition>} />
         <Route path="/admin/pending" element={<PageTransition><AdminRoute><Pending /></AdminRoute></PageTransition>} />
+        <Route path="/admin/service-inquiries" element={<PageTransition><AdminRoute><ServiceInquiries /></AdminRoute></PageTransition>} />
+        <Route path="/admin/scam-reports" element={<PageTransition><AdminRoute><ScamReports /></AdminRoute></PageTransition>} />
         <Route path="/admin/content/pages" element={<PageTransition><AdminRoute><PagesManagement /></AdminRoute></PageTransition>} />
         <Route path="/admin/clients/messages" element={<PageTransition><AdminRoute><ClientMessages /></AdminRoute></PageTransition>} />
         <Route path="/admin/communications/inbox" element={<PageTransition><AdminRoute><CommunicationsInbox /></AdminRoute></PageTransition>} />
@@ -628,7 +646,7 @@ function AnimatedRoutes() {
         <Route path="/maintenance" element={<PageTransition><Maintenance /></PageTransition>} />
         <Route path="/reset-password" element={<PageTransition><ResetPassword /></PageTransition>} />
         <Route path="/portal" element={<PageTransition><ProtectedRoute><Portal /></ProtectedRoute></PageTransition>} />
-        <Route path="/portal/admin" element={<PageTransition><ProtectedRoute><AdminDashboard /></ProtectedRoute></PageTransition>} />
+        <Route path="/portal/admin" element={<Navigate to="/admin" replace />} />
         <Route path="/portal/analyst" element={<PageTransition><ProtectedRoute><AnalystDashboard /></ProtectedRoute></PageTransition>} />
         <Route path="/portal/trainer" element={<PageTransition><ProtectedRoute><TrainerDashboard /></ProtectedRoute></PageTransition>} />
         <Route path="/portal/developer" element={<PageTransition><ProtectedRoute><DeveloperDashboard /></ProtectedRoute></PageTransition>} />
