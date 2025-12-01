@@ -4,7 +4,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { SubscriptionStatus } from "@/components/SubscriptionStatus";
+import { BookingModal } from "@/components/BookingModal";
 import { useToast } from "@/hooks/use-toast";
+import { format } from "date-fns";
 import {
   LogOut,
   Home,
@@ -18,12 +20,15 @@ import {
 
 function SeniorDashboard() {
   const [profile, setProfile] = useState<any>(null);
+  const [appointments, setAppointments] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
   useEffect(() => {
     loadProfile();
+    loadAppointments();
   }, []);
 
   const loadProfile = async () => {
@@ -51,6 +56,26 @@ function SeniorDashboard() {
       console.error("Error loading profile:", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const loadAppointments = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data, error } = await supabase
+        .from("appointments")
+        .select("*")
+        .eq("client_id", user.id)
+        .gte("scheduled_start", new Date().toISOString())
+        .order("scheduled_start", { ascending: true })
+        .limit(5);
+
+      if (error) throw error;
+      setAppointments(data || []);
+    } catch (error: any) {
+      console.error("Error loading appointments:", error);
     }
   };
 
@@ -162,8 +187,26 @@ function SeniorDashboard() {
                 <p className="text-sm text-muted-foreground">Schedule & manage</p>
               </div>
             </div>
-            <p className="text-sm text-muted-foreground mb-3">No upcoming appointments</p>
-            <Button size="sm" className="w-full" variant="default">
+            {appointments.length === 0 ? (
+              <p className="text-sm text-muted-foreground mb-3">No upcoming appointments</p>
+            ) : (
+              <div className="space-y-2 mb-3">
+                {appointments.slice(0, 2).map((apt) => (
+                  <div key={apt.id} className="p-2 bg-muted/50 rounded text-sm">
+                    <div className="font-semibold">{apt.title}</div>
+                    <div className="text-xs text-muted-foreground">
+                      {format(new Date(apt.scheduled_start), "PPp")}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            <Button 
+              size="sm" 
+              className="w-full" 
+              variant="default"
+              onClick={() => setBookingModalOpen(true)}
+            >
               <Calendar className="w-4 h-4 mr-2" />
               Book Appointment
             </Button>
@@ -224,6 +267,14 @@ function SeniorDashboard() {
           </Card>
         </div>
       </main>
+
+      <BookingModal
+        open={bookingModalOpen}
+        onOpenChange={setBookingModalOpen}
+        serviceType="training"
+        serviceName="Personal Consultation"
+        basePrice={79}
+      />
     </div>
   );
 };

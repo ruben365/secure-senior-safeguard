@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useCart } from "@/contexts/CartContext";
+import { useToast } from "@/hooks/use-toast";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -20,6 +21,8 @@ import { supabase } from "@/integrations/supabase/client";
 
 function Resources() {
   const { addItem } = useCart();
+  const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
 
   // Fetch products from database
   const { data: products, isLoading, error } = useQuery({
@@ -45,19 +48,44 @@ function Resources() {
     p.tags?.some((tag: string) => ['physical', 'device', 'hardware', 'kit', 'equipment'].includes(tag.toLowerCase()))
   ) || [];
 
-  const handleAddToCart = (product: any) => {
-    addItem({
-      id: `product-${product.id}`,
-      productId: product.id,
-      name: product.name,
-      price: product.sale_price || product.base_price,
-      image: product.images?.[0] || undefined
-    });
-    
-    // Track product add to cart
-    import("@/utils/analyticsTracker").then(({ trackButtonClick }) => {
-      trackButtonClick(`Add to Cart: ${product.name}`, "Resources Page");
-    });
+  const handleBuyNow = async (product: any) => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session) {
+        toast({
+          title: "Authentication Required",
+          description: "Please sign in to purchase products",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      setLoading(true);
+      
+      const { data, error } = await supabase.functions.invoke('create-product-payment', {
+        body: { productId: product.id, quantity: 1 }
+      });
+
+      if (error) throw error;
+
+      if (data?.url) {
+        window.open(data.url, '_blank');
+        toast({
+          title: "Redirecting to Checkout",
+          description: "Opening secure payment page...",
+        });
+      }
+    } catch (error: any) {
+      console.error('Payment error:', error);
+      toast({
+        title: "Payment Error",
+        description: error.message || "Failed to create checkout session",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const resourcesHeroImages = [
@@ -193,11 +221,16 @@ function Resources() {
                       </div>
                       <Button 
                         size="lg"
-                        onClick={() => handleAddToCart(product)}
+                        onClick={() => handleBuyNow(product)}
+                        disabled={loading}
                         className="w-full sm:w-auto group-hover:scale-110 transition-transform duration-300 shadow-lg text-sm md:text-base"
                       >
-                        <ShoppingCart className="w-4 h-4 mr-2" />
-                        Get Access
+                        {loading ? (
+                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        ) : (
+                          <ShoppingCart className="w-4 h-4 mr-2" />
+                        )}
+                        Buy Now
                       </Button>
                     </div>
                   </Card>
@@ -295,11 +328,16 @@ function Resources() {
                           )}
                         </div>
                         <Button 
-                          onClick={() => handleAddToCart(product)}
+                          onClick={() => handleBuyNow(product)}
+                          disabled={loading}
                           className="w-full sm:w-auto group-hover:scale-110 transition-transform duration-300 text-sm md:text-base"
                         >
-                          <ShoppingCart className="w-4 h-4 mr-2" />
-                          Add to Cart
+                          {loading ? (
+                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                          ) : (
+                            <ShoppingCart className="w-4 h-4 mr-2" />
+                          )}
+                          Buy Now
                         </Button>
                       </div>
                     </div>
