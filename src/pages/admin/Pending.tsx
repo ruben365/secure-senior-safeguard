@@ -130,11 +130,12 @@ export default function Pending() {
   };
 
   return (
-    <div className="container mx-auto p-6 space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Pending Actions</h1>
-        <p className="text-muted-foreground">Review and manage items requiring attention</p>
-      </div>
+    <AdminLayout>
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-3xl font-bold">Pending Actions</h1>
+          <p className="text-muted-foreground">Review and manage items requiring attention</p>
+        </div>
 
       <Tabs defaultValue="testimonials" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
@@ -353,6 +354,7 @@ export default function Pending() {
           </Card>
         </TabsContent>
       </Tabs>
-    </div>
+      </div>
+    </AdminLayout>
   );
 }

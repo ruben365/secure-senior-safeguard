@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { AdminSidebar } from "@/components/AdminSidebar";
-import { AdminTopBar } from "@/components/AdminTopBar";
+import { AdminLayout } from "@/components/AdminLayout";
 import { VideoTestimonialUpload } from "@/components/admin/VideoTestimonialUpload";
 
 import { AddTestimonialModal } from "@/components/admin/AddTestimonialModal";
@@ -302,22 +301,9 @@ export default function TestimonialsAdmin() {
   const paginatedTestimonials = filteredTestimonials.slice(startIndex, endIndex);
 
   return (
-    <div className="flex min-h-screen bg-background">
-      <AdminSidebar isOpen={sidebarOpen} />
-      <AdminTopBar
-        sidebarOpen={sidebarOpen}
-        toggleSidebar={() => setSidebarOpen(!sidebarOpen)}
-      />
-
-      <main
-        className={`flex-1 transition-all duration-300 pt-16 ${
-          sidebarOpen ? "md:ml-[260px]" : "md:ml-[70px]"
-        }`}
-      >
-        <div className="p-8">
-          {/* Header */}
-          <div className="mb-6">
-            <div className="flex items-center justify-between mt-4">
+    <AdminLayout>
+      <div className="mb-6">
+        <div className="flex items-center justify-between mt-4">
               <h1 className="text-3xl font-bold text-foreground">Testimonials</h1>
               <Button onClick={() => setAddModalOpen(true)}>
                 <Plus className="h-4 w-4 mr-2" />
@@ -639,6 +625,6 @@ export default function TestimonialsAdmin() {
         onOpenChange={setVideoUploadOpen}
         onSuccess={fetchTestimonials}
       />
-    </div>
+    </AdminLayout>
   );
 }

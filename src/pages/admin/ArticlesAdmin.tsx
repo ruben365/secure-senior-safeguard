@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { AdminSidebar } from "@/components/AdminSidebar";
-import { AdminTopBar } from "@/components/AdminTopBar";
+import { AdminLayout } from "@/components/AdminLayout";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -344,22 +343,10 @@ export default function ArticlesAdmin() {
   const categoryCounts = getCategoryCounts();
 
   return (
-    <div className="flex min-h-screen bg-background">
-      <AdminSidebar isOpen={sidebarOpen} />
-      <AdminTopBar
-        sidebarOpen={sidebarOpen}
-        toggleSidebar={() => setSidebarOpen(!sidebarOpen)}
-      />
-
-      <main
-        className={`flex-1 transition-all duration-300 pt-16 ${
-          sidebarOpen ? "md:ml-[260px]" : "md:ml-[70px]"
-        }`}
-      >
-        <div className="p-8">
-          {/* Header */}
-          <div className="mb-6">
-            <div className="flex items-center justify-between mt-4">
+    <AdminLayout>
+      {/* Header */}
+      <div className="mb-6">
+        <div className="flex items-center justify-between mt-4">
               <h1 className="text-3xl font-bold text-foreground">Blog Articles</h1>
               <Button
                 size="lg"
@@ -369,11 +356,11 @@ export default function ArticlesAdmin() {
                 <PenSquare className="h-5 w-5 mr-2" />
                 Create Article
               </Button>
-            </div>
           </div>
+        </div>
 
-          {/* Quick Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
+        {/* Quick Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
             <Card>
               <CardContent className="p-4 flex items-center gap-3">
                 <div className="p-2 rounded-lg bg-primary/10">
@@ -846,34 +833,32 @@ export default function ArticlesAdmin() {
                     >
                       <ChevronRight className="h-4 w-4" />
                     </Button>
-                  </div>
                 </div>
               </div>
             </>
           )}
         </div>
-      </main>
 
-      {/* Delete Confirmation Dialog */}
-      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-            <AlertDialogDescription>
-              This will permanently delete this article. This action cannot be undone.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={() => articleToDelete && handleDelete(articleToDelete)}
-              className="bg-red-500 hover:bg-red-600"
-            >
-              Delete
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    </div>
+        {/* Delete Confirmation Dialog */}
+        <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This will permanently delete this article. This action cannot be undone.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={() => articleToDelete && handleDelete(articleToDelete)}
+                className="bg-red-500 hover:bg-red-600"
+              >
+                Delete
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+    </AdminLayout>
   );
 }
