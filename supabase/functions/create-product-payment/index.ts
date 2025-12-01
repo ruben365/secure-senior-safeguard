@@ -40,6 +40,10 @@ serve(async (req) => {
       throw new Error("Product not found");
     }
 
+    if (!product.stripe_price_id) {
+      throw new Error("Product does not have a Stripe price configured");
+    }
+
     const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", {
       apiVersion: "2025-08-27.basil",
     });
@@ -53,24 +57,13 @@ serve(async (req) => {
       }
     }
 
-    const unitPrice = product.sale_price || product.base_price;
-    const totalAmount = unitPrice * quantity;
-
-    // Create checkout session
+    // Create checkout session using the stored Stripe price ID
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       customer_email: customerId ? undefined : user?.email,
       line_items: [
         {
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: product.name,
-              description: product.description,
-              images: product.images?.length > 0 ? [product.images[0]] : undefined,
-            },
-            unit_amount: Math.round(unitPrice * 100), // Convert to cents
-          },
+          price: product.stripe_price_id,
           quantity: quantity,
         },
       ],

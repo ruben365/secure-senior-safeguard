@@ -2391,6 +2391,7 @@ export type Database = {
           specifications: Json | null
           status: Database["public"]["Enums"]["product_status"]
           stock_quantity: number | null
+          stripe_price_id: string | null
           tags: string[] | null
           updated_at: string
           views_count: number | null
@@ -2422,6 +2423,7 @@ export type Database = {
           specifications?: Json | null
           status?: Database["public"]["Enums"]["product_status"]
           stock_quantity?: number | null
+          stripe_price_id?: string | null
           tags?: string[] | null
           updated_at?: string
           views_count?: number | null
@@ -2453,6 +2455,7 @@ export type Database = {
           specifications?: Json | null
           status?: Database["public"]["Enums"]["product_status"]
           stock_quantity?: number | null
+          stripe_price_id?: string | null
           tags?: string[] | null
           updated_at?: string
           views_count?: number | null
