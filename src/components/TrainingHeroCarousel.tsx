@@ -43,6 +43,7 @@ const slides: HeroSlide[] = [
 
 export const TrainingHeroCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [nextIndex, setNextIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   useEffect(() => {
@@ -74,20 +75,28 @@ export const TrainingHeroCarousel = () => {
   };
 
   return (
-    <div className="relative w-full h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden">
-      <AnimatePresence mode="wait">
+    <div className="relative w-full h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden bg-background">
+      {/* Preload next image to prevent blank moments */}
+      <div className="hidden">
+        <img src={slides[(currentIndex + 1) % slides.length].image} alt="preload" />
+      </div>
+      
+      <AnimatePresence initial={false} mode="sync">
         <motion.div
           key={currentIndex}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.7, ease: "easeInOut" }}
+          transition={{ duration: 1, ease: "easeInOut" }}
           className="absolute inset-0"
         >
           {/* Background Image */}
           <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${slides[currentIndex].image})` }}
+            style={{ 
+              backgroundImage: `url(${slides[currentIndex].image})`,
+              backgroundColor: '#ffffff'
+            }}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
           </div>
@@ -99,13 +108,13 @@ export const TrainingHeroCarousel = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -30 }}
-                transition={{ duration: 0.7, delay: 0.2 }}
+                transition={{ duration: 1, delay: 0.1 }}
                 className="max-w-3xl"
               >
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight drop-shadow-lg">
                   {slides[currentIndex].title}
                 </h1>
-                <p className="text-lg md:text-xl lg:text-2xl text-white/90 leading-relaxed">
+                <p className="text-lg md:text-xl lg:text-2xl text-white/90 leading-relaxed drop-shadow-md">
                   {slides[currentIndex].subtitle}
                 </p>
               </motion.div>
