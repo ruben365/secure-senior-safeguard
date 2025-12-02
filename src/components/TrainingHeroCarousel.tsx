@@ -107,27 +107,29 @@ export const TrainingHeroCarousel = () => {
           {/* Additional overlay for depth */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/30" />
 
-          {/* Content with Stagger Animation */}
-          <div className="container mx-auto px-4 py-6 sm:py-8 md:py-12 lg:py-16 relative z-10">
-            <div className="max-w-3xl mx-auto md:mx-0">
-              <motion.h1 
-                className="text-white mb-3 sm:mb-4 md:mb-6 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl [text-shadow:0_4px_20px_rgba(139,92,246,0.4)] leading-tight"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -30 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-              >
-                {slides[currentIndex].title}
-              </motion.h1>
-              <motion.p 
-                className="text-white/90 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mb-6 md:mb-8 leading-relaxed"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -30 }}
-                transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              >
-                {slides[currentIndex].subtitle}
-              </motion.p>
+          {/* Content with Stagger Animation - Vertically Centered */}
+          <div className="absolute inset-0 flex items-center z-10">
+            <div className="container mx-auto px-4 py-6 sm:py-8 md:py-12 lg:py-16">
+              <div className="max-w-3xl mx-auto md:mx-0">
+                <motion.h1 
+                  className="text-white mb-3 sm:mb-4 md:mb-6 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl [text-shadow:0_4px_20px_rgba(139,92,246,0.4)] leading-tight"
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -30 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                >
+                  {slides[currentIndex].title}
+                </motion.h1>
+                <motion.p 
+                  className="text-white/90 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mb-6 md:mb-8 leading-relaxed"
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -30 }}
+                  transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                >
+                  {slides[currentIndex].subtitle}
+                </motion.p>
+              </div>
             </div>
           </div>
         </motion.div>
