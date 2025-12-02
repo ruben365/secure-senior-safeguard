@@ -181,7 +181,7 @@ function Business() {
         showScrollIndicator={true}
       >
         <div className="flex flex-col sm:flex-row gap-4">
-          <Button 
+          <Button
             asChild
             variant="default" 
             size="xl"

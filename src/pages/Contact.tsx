@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -167,6 +168,7 @@ function Contact() {
         subheadline="We're here to help protect your family"
         showProtectionBadge
         badgeText="Response within 4 hours"
+        showScrollIndicator={true}
       />
       <TrustBar />
       
@@ -216,15 +218,20 @@ function Contact() {
               <Card className="shadow-2xl">
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
-                    <CardTitle className="text-2xl">Send Us a Message</CardTitle>
+                    <CardTitle className="text-2xl md:text-3xl">Send Us a Message</CardTitle>
                     <Badge variant="outline" className="gap-1">
                       <Shield className="w-3 h-3" />
                       Secure
                     </Badge>
                   </div>
-                  <CardDescription>
-                    Fill out the form below and we'll get back to you within 4 hours during business hours
+                  <CardDescription className="text-base">
+                    Fill out the form below and we'll get back to you within 4 hours during business hours (Mon-Fri, 9am-6pm EST). For urgent matters, please call us directly at <a href="tel:+16145550100" className="text-primary font-semibold hover:underline">(614) 555-0100</a>.
                   </CardDescription>
+                  <div className="mt-4 p-4 bg-primary/5 rounded-lg border border-primary/10">
+                    <p className="text-sm text-foreground">
+                      <strong className="text-primary">Why contact us?</strong> Whether you need help with scam protection, want to learn about our training programs, or have questions about our AI business solutions, our team is here to help you stay safe online.
+                    </p>
+                  </div>
                 </CardHeader>
                 <CardContent>
                   {isSubmitted ? (
@@ -424,16 +431,25 @@ function Contact() {
                         {isSubmitting ? (
                           <>
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                            Sending...
+                            Sending your message...
                           </>
                         ) : (
-                          <>Send Message</>
+                          <>
+                            <Mail className="mr-2 h-4 w-4" />
+                            Send Message
+                          </>
                         )}
                       </Button>
 
-                      <p className="text-xs text-center text-muted-foreground">
-                        Your message is encrypted and secure. We never share your information.
-                      </p>
+                      <div className="text-center space-y-2">
+                        <p className="text-xs text-muted-foreground">
+                          <Shield className="w-3 h-3 inline mr-1" />
+                          Your message is encrypted and secure. We never share your information.
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          By submitting this form, you agree to our <Link to="/privacy-policy" className="text-primary hover:underline">Privacy Policy</Link> and <Link to="/terms-of-service" className="text-primary hover:underline">Terms of Service</Link>.
+                        </p>
+                      </div>
                     </form>
                   )}
                 </CardContent>

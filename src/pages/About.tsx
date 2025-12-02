@@ -133,6 +133,7 @@ function About() {
         backgroundImages={aboutHeroImages}
         headline="Protecting Families, One Story at a Time"
         subheadline="Founded from personal experience, driven by community impact"
+        showScrollIndicator={true}
       />
 
       <TrustBar />

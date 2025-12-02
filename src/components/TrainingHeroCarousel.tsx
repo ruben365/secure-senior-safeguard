@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import trainingHero1 from "@/assets/hero-training-1.jpg";
 import trainingHero2 from "@/assets/hero-training-2.jpg";
 import trainingHero3 from "@/assets/hero-training-3.jpg";
@@ -75,7 +75,7 @@ export const TrainingHeroCarousel = () => {
   };
 
   return (
-    <div className="relative w-full h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden bg-background">
+    <div className="relative w-full h-[600px] md:h-[700px] lg:h-[850px] xl:h-[950px] overflow-hidden bg-background">
       {/* Preload next image to prevent blank moments */}
       <div className="hidden">
         <img src={slides[(currentIndex + 1) % slides.length].image} alt="preload" />
@@ -114,7 +114,7 @@ export const TrainingHeroCarousel = () => {
                 <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight drop-shadow-lg">
                   {slides[currentIndex].title}
                 </h1>
-                <p className="text-lg md:text-xl lg:text-2xl text-white/90 leading-relaxed drop-shadow-md">
+                <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl text-white/90 leading-relaxed drop-shadow-md">
                   {slides[currentIndex].subtitle}
                 </p>
               </motion.div>
@@ -153,6 +153,20 @@ export const TrainingHeroCarousel = () => {
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
+      </div>
+
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-10 animate-smooth-bounce md:bottom-24">
+        <button
+          onClick={() => window.scrollTo({ top: window.innerHeight - 80, behavior: 'smooth' })}
+          className="flex flex-col items-center gap-2 text-white/80 hover:text-white transition-colors duration-300"
+          aria-label="Scroll down to see more content"
+        >
+          <span className="text-sm font-medium tracking-wider">SCROLL</span>
+          <div className="w-8 h-8 rounded-full border-2 border-white/50 hover:border-white flex items-center justify-center">
+            <ChevronDown className="w-5 h-5" />
+          </div>
+        </button>
       </div>
     </div>
   );
