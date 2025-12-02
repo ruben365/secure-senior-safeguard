@@ -510,12 +510,13 @@ function Auth() {
               <div className="text-center pt-4">
                 <p className="text-sm text-muted-foreground">
                   {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
-                  <Link
-                    to={isLogin ? "/signup" : "/auth"}
-                    className="text-primary font-semibold hover:underline transition-colors"
+                  <button
+                    type="button"
+                    onClick={() => navigate(isLogin ? "/signup" : "/auth")}
+                    className="text-primary font-semibold hover:underline transition-colors cursor-pointer bg-transparent border-none p-0 inline"
                   >
                     {isLogin ? "Apply now" : "Sign in"}
-                  </Link>
+                  </button>
                 </p>
                 {isLogin && (
                   <p className="text-xs text-muted-foreground mt-2">
@@ -527,8 +528,8 @@ function Auth() {
           </Card>
 
           {/* Footer Links */}
-          <div className="mt-8 pt-6 border-t border-border/50">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
+          <div className="mt-8">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground pb-4">
               <Link to="/" className="flex items-center gap-1.5 hover:text-foreground transition-colors group">
                 <Home className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
                 <span>Back to Home</span>
@@ -545,48 +546,6 @@ function Auth() {
                   <span>Enterprise Security</span>
                 </div>
               </div>
-            </div>
-            
-            {/* Additional Footer Content */}
-            <div className="mt-6 pt-6 border-t border-border/30">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center sm:text-left">
-                <div>
-                  <h4 className="font-semibold text-foreground text-sm mb-2">Contact Us</h4>
-                  <a href="tel:9375550199" className="text-xs text-muted-foreground hover:text-foreground transition-colors block">
-                    (937) 555-0199
-                  </a>
-                  <a href="mailto:support@invisionnetwork.org" className="text-xs text-muted-foreground hover:text-foreground transition-colors block mt-1">
-                    support@invisionnetwork.org
-                  </a>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-foreground text-sm mb-2">Quick Links</h4>
-                  <Link to="/resources" className="text-xs text-muted-foreground hover:text-foreground transition-colors block">
-                    Resources
-                  </Link>
-                  <Link to="/about" className="text-xs text-muted-foreground hover:text-foreground transition-colors block mt-1">
-                    About Us
-                  </Link>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-foreground text-sm mb-2">Support</h4>
-                  <Link to="/contact" className="text-xs text-muted-foreground hover:text-foreground transition-colors block">
-                    Help Center
-                  </Link>
-                  <Link to="/training" className="text-xs text-muted-foreground hover:text-foreground transition-colors block mt-1">
-                    Training
-                  </Link>
-                </div>
-              </div>
-            </div>
-            
-            <div className="text-center mt-6 pt-4 border-t border-border/30">
-              <p className="text-xs text-muted-foreground">
-                © 2025 InVision Network. All rights reserved.
-              </p>
-              <p className="text-xs text-muted-foreground mt-2">
-                Protecting Ohio families from AI-powered digital threats
-              </p>
             </div>
           </div>
         </div>
