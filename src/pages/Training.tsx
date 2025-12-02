@@ -62,7 +62,7 @@ function ResponseTimeCallout() {
   return (
     <div 
       ref={standardRef as any}
-      className="mt-4 p-4 bg-gradient-to-r from-[#14B8A6] to-[#0F9A8A] rounded-lg text-white"
+      className="mt-4 p-4 bg-gradient-to-r from-primary to-accent rounded-lg text-white"
     >
       <div className="flex items-center gap-3">
         <span 
@@ -150,14 +150,14 @@ const TrainingCard = ({ plan, index }: { plan: any; index: number }) => {
     >
       <div className={`relative ${plan.popular ? 'scale-105' : ''}`}>
         {plan.popular && (
-          <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-[#14B8A6] text-white px-6 py-2 rounded-full text-xs font-bold tracking-wider shadow-lg z-20 animate-[pulse_2s_ease-in-out_infinite]">
+          <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-white px-6 py-2 rounded-full text-xs font-bold tracking-wider shadow-lg z-20 animate-[pulse_2s_ease-in-out_infinite]">
             MOST POPULAR
           </div>
         )}
         <Card
           className={`p-8 transition-all duration-500 hover:-translate-y-2 rounded-2xl bg-gradient-to-br from-card to-card/50 ${
             plan.popular 
-              ? "border-[#14B8A6] border-[3px] shadow-[0_10px_30px_rgba(20,184,166,0.15)] hover:shadow-[0_20px_40px_rgba(20,184,166,0.25)]" 
+              ? "border-primary border-[3px] shadow-[0_10px_30px_rgba(139,92,246,0.15)] hover:shadow-[0_20px_40px_rgba(139,92,246,0.25)]" 
               : "border-border/50 hover:shadow-strong"
           }`}
         >
@@ -182,7 +182,7 @@ const TrainingCard = ({ plan, index }: { plan: any; index: number }) => {
             asChild
             variant={plan.popular ? "default" : "outline"} 
             size="lg" 
-            className={`w-full ${plan.popular ? 'bg-[#14B8A6] hover:bg-[#0F9A8A] text-white' : ''}`}
+            className="w-full"
           >
             <Link to={`/contact?service=training&type=${plan.type}&price=${plan.priceNum}`}>
               Book Session
@@ -449,12 +449,14 @@ function LearnAndTrain() {
                 {
                   icon: MessageSquare,
                   step: "STEP 1",
+                  stepNumber: "01",
                   title: "You Receive Something Suspicious",
                   desc: "Strange text, urgent email, odd call, suspicious link",
                 },
                 {
                   icon: Upload,
                   step: "STEP 2",
+                  stepNumber: "02",
                   title: "Forward It to Our Team",
                   desc: "Email, text, upload screenshot, or call our hotline",
                   hasResponseTime: true,
@@ -462,41 +464,52 @@ function LearnAndTrain() {
                 {
                   icon: Search,
                   step: "STEP 3",
+                  stepNumber: "03",
                   title: "Expert Analysis",
                   desc: "Our team examines: Message content, sender verification, link destination, voice/audio analysis, AI-generated detection",
                 },
                 {
                   icon: FileCheck,
                   step: "STEP 4",
+                  stepNumber: "04",
                   title: "Get Clear Guidance",
                   desc: "Risk level (Safe/Caution/Danger/CRITICAL), detailed explanation, recommended actions, emergency scripts if needed",
                 },
               ].map((step, index) => (
                 <ScrollReveal key={index} animation="scale-in" delay={index * 200} threshold={0.3}>
                   <Card
-                    className="p-6 hover:shadow-strong transition-all duration-500 hover:-translate-y-2 hover:scale-105 rounded-2xl border-border/50 group bg-gradient-to-br from-card to-card/50 backdrop-blur-sm"
+                    className="p-6 hover:shadow-strong transition-all duration-500 hover:-translate-y-2 hover:scale-105 rounded-2xl border-border/50 group bg-gradient-to-br from-card to-card/50 backdrop-blur-sm relative overflow-hidden"
                   >
-                    <div className="flex justify-center mb-4">
+                    {/* Large Step Number Badge */}
+                    <div className="absolute -top-3 -right-3 w-20 h-20 bg-gradient-to-br from-primary to-accent opacity-10 rounded-full flex items-center justify-center">
+                      <span className="text-5xl font-black text-primary/30">{step.stepNumber}</span>
+                    </div>
+
+                    <div className="flex justify-center mb-4 relative z-10">
                       <div 
-                        className="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center group-hover:scale-110 group-hover:rotate-12 transition-all duration-500"
+                        className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg"
                         style={{
                           animation: `step-icon-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards`,
                           animationDelay: `${0.5 + index * 0.2}s`,
                           transform: 'scale(0)'
                         }}
                       >
-                        <step.icon className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-500" />
+                        <step.icon className="w-10 h-10 text-white group-hover:scale-110 transition-transform duration-500" />
                       </div>
                     </div>
-                    <div className="text-center mb-2">
-                      <span className="text-xs font-bold text-primary bg-primary/10 px-3 py-1 rounded-full">
+                    
+                    <div className="text-center mb-2 relative z-10">
+                      <span className="text-xs font-bold text-white bg-gradient-to-r from-primary to-accent px-4 py-1.5 rounded-full shadow-md">
                         {step.step}
                       </span>
                     </div>
-                    <h3 className="text-lg font-bold mb-3 text-center group-hover:text-primary transition-colors duration-300">
+                    
+                    <h3 className="text-xl font-bold mb-3 text-center group-hover:text-primary transition-colors duration-300 relative z-10">
                       {step.title}
                     </h3>
-                    <p className="text-muted-foreground text-center text-sm">{step.desc}</p>
+                    
+                    <p className="text-muted-foreground text-center text-sm relative z-10">{step.desc}</p>
+                    
                     {step.hasResponseTime && <ResponseTimeCallout />}
                   </Card>
                 </ScrollReveal>
