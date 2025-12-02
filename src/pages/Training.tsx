@@ -24,8 +24,8 @@ import {
   Play,
   Mail
 } from "lucide-react";
-import { Navigation } from "@/components/Navigation";
-import { Footer } from "@/components/Footer";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { TrustIndicator } from "@/components/TrustIndicator";
 import { BookingModal } from "@/components/BookingModal";
@@ -58,7 +58,13 @@ const LearnAndTrain = () => {
   };
 
   const handleSubscribe = (plan: any) => {
-    setSelectedSubscription(plan);
+    // Transform plan data to match SubscriptionDialog props
+    setSelectedSubscription({
+      priceId: plan.priceId || 'price_placeholder', // This should be set with actual Stripe price IDs
+      serviceName: 'ScamShield Protection',
+      planTier: plan.name,
+      amount: parseFloat(plan.price.replace('$', '')) * 100 // Convert to cents
+    });
     setSubscriptionDialogOpen(true);
   };
 
@@ -797,15 +803,21 @@ const LearnAndTrain = () => {
 
       <BookingModal 
         open={modalOpen}
-        onClose={() => setModalOpen(false)}
-        selectedService={selectedService}
+        onOpenChange={setModalOpen}
+        serviceType="training"
+        serviceName={selectedService}
       />
 
-      <SubscriptionDialog
-        open={subscriptionDialogOpen}
-        onOpenChange={setSubscriptionDialogOpen}
-        subscriptionData={selectedSubscription}
-      />
+      {selectedSubscription && (
+        <SubscriptionDialog
+          open={subscriptionDialogOpen}
+          onOpenChange={setSubscriptionDialogOpen}
+          priceId={selectedSubscription.priceId}
+          serviceName={selectedSubscription.serviceName}
+          planTier={selectedSubscription.planTier}
+          amount={selectedSubscription.amount}
+        />
+      )}
 
       {selectedVideo && (
         <VideoLightbox
