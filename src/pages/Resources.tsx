@@ -87,6 +87,7 @@ function Resources() {
         backgroundImages={resourcesHeroImages}
         headline="Your Digital Safety Arsenal"
         subheadline="Premium guides, tools, and products to protect what matters most"
+        showScrollIndicator={true}
       />
 
       <TrustBar />
