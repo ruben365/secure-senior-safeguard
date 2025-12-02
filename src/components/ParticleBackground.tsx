@@ -27,13 +27,24 @@ export const ParticleBackground = () => {
     if (!ctx) return;
 
     const resizeCanvas = () => {
-      const parent = canvas.parentElement;
-      canvas.width = parent?.clientWidth || window.innerWidth;
-      canvas.height = parent?.clientHeight || window.innerHeight;
+      // Use RAF to batch layout reads and prevent forced reflows
+      requestAnimationFrame(() => {
+        const parent = canvas.parentElement;
+        canvas.width = parent?.clientWidth || window.innerWidth;
+        canvas.height = parent?.clientHeight || window.innerHeight;
+      });
     };
 
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    
+    // Debounce resize events to reduce reflow frequency
+    let resizeTimeout: ReturnType<typeof setTimeout>;
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(resizeCanvas, 150);
+    };
+    
+    window.addEventListener('resize', handleResize, { passive: true });
 
     // Reduce particle count on low-end devices
     const particleDensity = isLowEnd ? 25000 : 15000;
@@ -114,7 +125,7 @@ export const ParticleBackground = () => {
     animationFrameRef.current = requestAnimationFrame(animate);
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('resize', handleResize);
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
