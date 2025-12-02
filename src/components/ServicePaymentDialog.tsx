@@ -156,9 +156,9 @@ function PaymentForm({
         return;
       }
 
-      // Process payment via edge function
+      // Process payment via dedicated service payment edge function
       const { data: paymentData, error: paymentError } = await supabase.functions.invoke(
-        'process-payment',
+        'process-service-payment',
         {
           body: {
             paymentMethodId: paymentMethod.id,
@@ -168,13 +168,15 @@ function PaymentForm({
               name: fullName,
               email: email,
               phone: phone,
+              companyName: companyName,
             },
+            serviceType: serviceType,
+            serviceName: serviceName,
+            inquiryId: inquiryData.id,
             metadata: {
-              service_type: serviceType,
-              service_name: serviceName,
-              inquiry_id: inquiryData.id,
               is_veteran: isVeteran,
               veteran_discount: discountAmount,
+              project_details: projectDetails,
             }
           }
         }
@@ -188,8 +190,13 @@ function PaymentForm({
       }
 
       if (paymentData?.success) {
-        toast.success("Payment successful! We'll contact you within 24 hours.");
-        onSuccess();
+        toast.success("Payment successful! Check your email for confirmation.");
+        
+        // Redirect to success page with service info
+        const successUrl = `/payment-success?type=service&service=${encodeURIComponent(serviceName)}&inquiry=${paymentData.inquiryId}`;
+        setTimeout(() => {
+          window.location.href = successUrl;
+        }, 1500);
       } else {
         toast.error(paymentData?.error || "Payment failed");
         setLoading(false);
@@ -210,7 +217,41 @@ function PaymentForm({
           <p className="text-sm text-muted-foreground">{serviceDescription}</p>
         )}
         
-        {/* Detailed Service Information for AI Consultation Services */}
+        {/* Detailed Service Information */}
+        {serviceType === 'website-design' && serviceName.includes('Landing Page') && (
+          <div className="mt-4 pt-4 border-t space-y-2">
+            <p className="font-semibold text-sm">What's Included:</p>
+            <ul className="text-xs space-y-1 text-muted-foreground">
+              <li>✓ Single high-converting page design</li>
+              <li>✓ Mobile-responsive layout</li>
+              <li>✓ Lead capture form integration</li>
+              <li>✓ SEO optimization basics</li>
+              <li>✓ Hosting setup assistance</li>
+              <li>✓ 2 rounds of revisions included</li>
+              <li>✓ Professional copywriting support</li>
+              <li>✓ Fast 5-7 day turnaround</li>
+            </ul>
+          </div>
+        )}
+        
+        {serviceType === 'website-design' && serviceName.includes('Business Website') && (
+          <div className="mt-4 pt-4 border-t space-y-2">
+            <p className="font-semibold text-sm">What's Included:</p>
+            <ul className="text-xs space-y-1 text-muted-foreground">
+              <li>✓ Up to 5 custom-designed pages</li>
+              <li>✓ Mobile-responsive layout</li>
+              <li>✓ Contact form integration</li>
+              <li>✓ Basic SEO setup</li>
+              <li>✓ Blog/News section</li>
+              <li>✓ Social media integration</li>
+              <li>✓ Google Analytics setup</li>
+              <li>✓ 3 rounds of revisions</li>
+              <li>✓ Professional design consultation</li>
+              <li>✓ 2-3 week project timeline</li>
+            </ul>
+          </div>
+        )}
+        
         {serviceType === 'ai-consultation' && serviceName.includes('Thinking of Buying') && (
           <div className="mt-4 pt-4 border-t space-y-2">
             <p className="font-semibold text-sm">What you'll receive:</p>
