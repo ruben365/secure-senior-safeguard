@@ -505,7 +505,7 @@ function Index() {
                 size="xl"
                 className="border-2 hover:border-[3px] hover:bg-primary/10 transition-all duration-300 cursor-pointer"
               >
-              <Link to="/training">View Training Options</Link>
+              <Link to="/training#training">View Training Options</Link>
             </Button>
           </div>
           </ScrollRevealSection>
