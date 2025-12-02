@@ -189,6 +189,7 @@ const LearnAndTrain = () => {
       badge: "STARTER",
       price: "$9.99",
       period: "/month",
+      priceId: "price_1SZl2WJ8osfwYbX7LYuxv6br",
       description: "Essential protection for individuals",
       features: [
         "Basic threat monitoring",
@@ -205,6 +206,7 @@ const LearnAndTrain = () => {
       badge: "FAMILY",
       price: "$24.99",
       period: "/month",
+      priceId: "price_1SZl2WJ8osfwYbX7LI2Ig8j5",
       description: "Comprehensive protection for up to 5 family members",
       features: [
         "Everything in Starter",
@@ -222,6 +224,7 @@ const LearnAndTrain = () => {
       badge: "PREMIUM",
       price: "$49.99",
       period: "/month",
+      priceId: "price_1SZl2XJ8osfwYbX7F81TLOM8",
       description: "Maximum protection with white-glove service",
       features: [
         "Everything in Family",
