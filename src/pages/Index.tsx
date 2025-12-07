@@ -42,6 +42,7 @@ import {
 import { useCounterAnimation } from "@/hooks/useCounterAnimation";
 import { RotatingHeroText } from "@/components/RotatingHeroText";
 import HeroValueCards from "@/components/HeroValueCards";
+import { HomeIntroSection } from "@/components/HomeIntroSection";
 
 // Placeholder imports for hero slideshow images
 // Replace these with your actual generated/sourced images
@@ -177,6 +178,9 @@ function Index() {
       </Hero>
 
       <TrustBar />
+
+      {/* Introduction Section - Welcome to InVision */}
+      <HomeIntroSection />
 
       {/* The Growing Threat Section */}
       <section className="section-spacing bg-muted relative overflow-hidden">
