@@ -13,8 +13,8 @@ export const EnhancedPageLoader = ({ message = "Loading..." }: EnhancedPageLoade
       transition={{ duration: 0.3 }}
       className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden"
       style={{
-        backdropFilter: "blur(20px)",
-        WebkitBackdropFilter: "blur(20px)",
+        backdropFilter: "blur(8px)",
+        WebkitBackdropFilter: "blur(8px)",
       }}
     >
       {/* Blurry gradient background */}
@@ -26,8 +26,8 @@ export const EnhancedPageLoader = ({ message = "Loading..." }: EnhancedPageLoade
         <motion.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full"
           style={{
-            background: "radial-gradient(circle at 30% 30%, hsl(var(--primary) / 0.4), hsl(var(--accent) / 0.2), transparent 70%)",
-            filter: "blur(60px)",
+            background: "radial-gradient(circle at 30% 30%, hsl(var(--primary) / 0.3), hsl(var(--accent) / 0.15), transparent 70%)",
+            filter: "blur(40px)",
           }}
           animate={{
             scale: [1, 1.2, 1],
@@ -46,8 +46,8 @@ export const EnhancedPageLoader = ({ message = "Loading..." }: EnhancedPageLoade
         <motion.div
           className="absolute top-[20%] left-[20%] w-[300px] h-[300px] rounded-full"
           style={{
-            background: "radial-gradient(circle at 50% 50%, hsl(var(--accent) / 0.3), transparent 70%)",
-            filter: "blur(50px)",
+            background: "radial-gradient(circle at 50% 50%, hsl(var(--accent) / 0.2), transparent 70%)",
+            filter: "blur(30px)",
           }}
           animate={{
             scale: [1, 1.3, 1],
@@ -66,8 +66,8 @@ export const EnhancedPageLoader = ({ message = "Loading..." }: EnhancedPageLoade
         <motion.div
           className="absolute bottom-[20%] right-[20%] w-[250px] h-[250px] rounded-full"
           style={{
-            background: "radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.25), transparent 70%)",
-            filter: "blur(40px)",
+            background: "radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.18), transparent 70%)",
+            filter: "blur(25px)",
           }}
           animate={{
             scale: [1, 1.4, 1],
