@@ -16,6 +16,8 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { TimelineVisualization } from "@/components/TimelineVisualization";
 import { InspirationalVerses } from "@/components/InspirationalVerses";
 import { OhioServiceMap } from "@/components/OhioServiceMap";
+import { AchievementsShowcase } from "@/components/AchievementsShowcase";
+import { AIImageDisclaimer } from "@/components/AIImageDisclaimer";
 import { trackButtonClick } from "@/utils/analyticsTracker";
 import heroAboutNew from "@/assets/hero-about-new.jpg";
 import heroAboutProfessional from "@/assets/hero-about-professional.jpg";
@@ -355,6 +357,18 @@ function About() {
 
       {/* Inspirational Verses */}
       <InspirationalVerses />
+
+      {/* Achievements Showcase */}
+      <AchievementsShowcase />
+
+      {/* AI Image Disclaimer */}
+      <section className="py-12 bg-muted/20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <AIImageDisclaimer />
+          </div>
+        </div>
+      </section>
 
       {/* Service Areas with Interactive Map */}
       <OhioServiceMap />

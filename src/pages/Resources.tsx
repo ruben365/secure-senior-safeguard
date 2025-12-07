@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Download, Shield, ShoppingCart, Star, TrendingUp, Loader2, Zap, Award, CheckCircle, Lock, Sparkles, Gift, Clock } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { AIImageDisclaimer } from "@/components/AIImageDisclaimer";
 import heroResourcesMarketplace from "@/assets/hero-resources-marketplace.jpg";
 import heroResourcesNew from "@/assets/hero-resources-new.jpg";
 import heroResources from "@/assets/hero-resources.jpg";
@@ -463,6 +464,15 @@ function Resources() {
               </Link>
             </div>
           </ScrollReveal>
+        </div>
+      </section>
+
+      {/* AI Image Disclaimer */}
+      <section className="py-12 bg-muted/20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <AIImageDisclaimer />
+          </div>
         </div>
       </section>
 

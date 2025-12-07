@@ -8,8 +8,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Search, ThumbsUp, ThumbsDown, Phone, MessageCircle, ChevronDown, Mail, TrendingUp, Copy, Check, Shield, HelpCircle, Lightbulb, DollarSign, MessageSquare } from "lucide-react";
+import { Search, ThumbsUp, ThumbsDown, Phone, MessageCircle, ChevronDown, Mail, TrendingUp, Copy, Check, Shield, HelpCircle, Lightbulb, DollarSign, MessageSquare, BookOpen } from "lucide-react";
 import { ScrollRevealSection } from "@/components/ScrollRevealSection";
+import { PlatformGuide } from "@/components/PlatformGuide";
+import { AIImageDisclaimer } from "@/components/AIImageDisclaimer";
 
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
@@ -385,6 +387,25 @@ export default function FAQ() {
 
         <TrustBar />
 
+        {/* Platform Guide Section */}
+        <section className="py-12 bg-gradient-to-b from-primary/5 to-background">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto text-center">
+              <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
+                <BookOpen className="w-3 h-3 mr-1" />
+                New to InVision?
+              </Badge>
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">
+                Learn How to Use Our Platform
+              </h2>
+              <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+                Get step-by-step guidance on purchasing, subscribing, submitting scam reports, and more
+              </p>
+              <PlatformGuide />
+            </div>
+          </div>
+        </section>
+
         {/* Search & Filter Section - Redesigned */}
         <section className="py-10 bg-gradient-to-b from-muted/30 to-background">
           <div className="container mx-auto px-4">
@@ -573,6 +594,15 @@ export default function FAQ() {
                 </div>
               </Card>
             </ScrollRevealSection>
+          </div>
+        </section>
+
+        {/* AI Image Disclaimer */}
+        <section className="py-12 bg-muted/20">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <AIImageDisclaimer />
+            </div>
           </div>
         </section>
 

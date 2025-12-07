@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Heart, Users, Zap, Target, MapPin, Clock, DollarSign, Briefcase, Star, TrendingUp, Shield, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
+import { AIImageDisclaimer } from "@/components/AIImageDisclaimer";
 import heroCareersNew from "@/assets/hero-careers-new.jpg";
 import heroCareers3d from "@/assets/hero-careers-3d.jpg";
 import teamCollaboration from "@/assets/team-collaboration.jpg";
@@ -439,6 +440,15 @@ function Careers() {
                 </p>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* AI Image Disclaimer */}
+      <section className="py-12 bg-muted/20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <AIImageDisclaimer />
           </div>
         </div>
       </section>
