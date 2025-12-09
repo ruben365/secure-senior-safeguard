@@ -5,11 +5,16 @@ import { Label } from '@/components/ui/label';
 
 interface QuickVeteranToggleProps {
   isVeteran: boolean;
-  onToggle: (value: boolean) => void;
+  onToggle?: (value: boolean) => void;
+  onVeteranChange?: (value: boolean) => void;
   discountPercent?: number;
 }
 
-export function QuickVeteranToggle({ isVeteran, onToggle, discountPercent = 10 }: QuickVeteranToggleProps) {
+export function QuickVeteranToggle({ isVeteran, onToggle, onVeteranChange, discountPercent = 10 }: QuickVeteranToggleProps) {
+  const handleToggle = (value: boolean) => {
+    onToggle?.(value);
+    onVeteranChange?.(value);
+  };
   return (
     <motion.div 
       className={`flex items-center justify-between p-3 rounded-xl border transition-all duration-300 ${
@@ -48,7 +53,7 @@ export function QuickVeteranToggle({ isVeteran, onToggle, discountPercent = 10 }
         <Switch 
           id="veteran-toggle"
           checked={isVeteran}
-          onCheckedChange={onToggle}
+          onCheckedChange={handleToggle}
         />
       </div>
     </motion.div>
