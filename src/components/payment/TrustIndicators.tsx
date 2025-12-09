@@ -1,6 +1,19 @@
-import { Shield, Lock, RefreshCw, Clock } from 'lucide-react';
+import { Shield, Lock, RefreshCw } from 'lucide-react';
 
-export function TrustIndicators() {
+interface TrustIndicatorsProps {
+  compact?: boolean;
+}
+
+export function TrustIndicators({ compact = false }: TrustIndicatorsProps) {
+  if (compact) {
+    return (
+      <div className="flex items-center justify-center gap-3 text-xs text-muted-foreground">
+        <Lock className="h-3 w-3" />
+        <span>Secure & Encrypted</span>
+      </div>
+    );
+  }
+
   return (
     <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground pt-2">
       <div className="flex items-center gap-1">
