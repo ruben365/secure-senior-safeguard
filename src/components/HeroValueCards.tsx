@@ -1,224 +1,163 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { 
-  Shield, 
-  GraduationCap, 
-  Building2, 
-  ArrowRight, 
-  Check,
-  Sparkles,
-  Award,
-  Users
-} from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const HeroValueCards = () => {
-  const offerings = [
+  const plans = [
     {
-      id: "scamshield",
-      icon: Shield,
-      badge: "Most Popular",
-      badgeColor: "bg-primary",
-      title: "ScamShield Protection",
-      subtitle: "Personal & Family Plans",
-      price: "$39",
-      priceLabel: "/month",
-      description: "Comprehensive AI-powered monitoring and protection against scams, phishing, and digital threats.",
+      id: "starter",
+      name: "Starter",
+      audience: "For individuals",
+      price: "39",
+      description: "Essential protection for personal digital security.",
       features: [
-        "24/7 Real-time threat detection",
+        "Real-time threat detection",
         "Suspicious content analysis",
-        "Family member coverage",
         "Monthly security reports",
-        "Priority support access"
+        "Email support"
       ],
       href: "/training#pricing",
-      ctaText: "Get Protected",
-      highlight: true
+      featured: false
     },
     {
-      id: "training",
-      icon: GraduationCap,
-      badge: "Veteran Discount",
-      badgeColor: "bg-success",
-      title: "Prevention Training",
-      subtitle: "Individual & Group Sessions",
-      price: "$89",
-      priceLabel: "one-time",
-      description: "Expert-led training programs designed to help you recognize and prevent all types of scams.",
+      id: "family",
+      name: "Family",
+      audience: "Most popular",
+      price: "79",
+      description: "Comprehensive coverage for your entire household.",
       features: [
-        "Certified cybersecurity trainers",
-        "Hands-on practice scenarios",
-        "Take-home reference materials",
-        "Certificate of completion",
-        "10% veteran discount"
+        "Everything in Starter",
+        "Up to 5 family members",
+        "Priority 24/7 support",
+        "Quarterly security review",
+        "Identity monitoring"
       ],
-      href: "/training#training",
-      ctaText: "Start Learning",
-      highlight: false
+      href: "/training#pricing",
+      featured: true
     },
     {
-      id: "business",
-      icon: Building2,
-      badge: "Enterprise",
-      badgeColor: "bg-accent",
-      title: "Business Solutions",
-      subtitle: "Custom AI & Security",
-      price: "$1,500",
-      priceLabel: "starting",
-      description: "Tailored solutions including AI automation, security audits, and professional consulting.",
+      id: "premium",
+      name: "Premium",
+      audience: "Maximum protection",
+      price: "129",
+      description: "Advanced security with dedicated support.",
       features: [
-        "Custom AI automation",
-        "Security vulnerability audits",
-        "Employee training programs",
-        "Dedicated account manager",
-        "Flexible payment options"
+        "Everything in Family",
+        "Unlimited family members",
+        "Dedicated security advisor",
+        "Monthly consultation calls",
+        "Recovery assistance"
       ],
-      href: "/business",
-      ctaText: "Get Quote",
-      highlight: false
+      href: "/training#pricing",
+      featured: false
     }
   ];
 
   return (
-    <section className="relative py-24 lg:py-32 overflow-hidden bg-muted/30">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
-      </div>
-
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Section Header */}
+    <section className="relative py-32 lg:py-40 bg-muted/30">
+      <div className="container mx-auto px-4">
+        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto text-center mb-16"
+          className="max-w-2xl mx-auto text-center mb-20"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/20 bg-accent/5 mb-6">
-            <Sparkles className="w-4 h-4 text-accent" />
-            <span className="text-sm font-medium text-accent">Choose Your Protection Level</span>
-          </div>
-          
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-            Three Paths to Digital Safety
+          <span className="inline-block text-xs font-semibold tracking-[0.2em] text-primary uppercase mb-6">
+            Protection Plans
+          </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6">
+            Choose your level of protection
           </h2>
-          
           <p className="text-lg text-muted-foreground">
-            Whether you need personal protection, expert training, or enterprise solutions — 
-            we have a plan designed for you.
+            All plans include our core ScamShield technology. Cancel anytime.
           </p>
         </motion.div>
 
-        {/* Pricing Cards */}
-        <div className="grid lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
-          {offerings.map((offer, index) => (
+        {/* Pricing grid */}
+        <div className="grid lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {plans.map((plan, index) => (
             <motion.div
-              key={offer.id}
+              key={plan.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`relative ${offer.highlight ? 'lg:-mt-4 lg:mb-4' : ''}`}
+              className={`relative ${plan.featured ? 'lg:-mt-6 lg:mb-6' : ''}`}
             >
-              {/* Card */}
-              <div className={`relative h-full rounded-2xl border transition-all duration-500 hover:shadow-2xl ${
-                offer.highlight 
-                  ? 'bg-gradient-to-b from-primary/5 to-card border-primary/30 shadow-xl shadow-primary/10' 
-                  : 'bg-card border-border/50 hover:border-primary/20'
+              <div className={`h-full rounded-2xl p-8 lg:p-10 transition-all duration-300 ${
+                plan.featured 
+                  ? 'bg-foreground text-background ring-1 ring-foreground' 
+                  : 'bg-card ring-1 ring-border hover:ring-primary/30'
               }`}>
-                {/* Badge */}
-                <div className="absolute -top-3 left-6">
-                  <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-white ${offer.badgeColor}`}>
-                    {offer.badge === "Most Popular" && <Award className="w-3 h-3" />}
-                    {offer.badge}
+                {/* Header */}
+                <div className="mb-8">
+                  <span className={`text-xs font-medium tracking-wide uppercase ${
+                    plan.featured ? 'text-primary-foreground/70' : 'text-muted-foreground'
+                  }`}>
+                    {plan.audience}
                   </span>
+                  <h3 className="text-2xl font-bold mt-1">{plan.name}</h3>
                 </div>
 
-                <div className="p-8 pt-10">
-                  {/* Header */}
-                  <div className="flex items-start gap-4 mb-6">
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                      offer.highlight 
-                        ? 'bg-primary text-primary-foreground' 
-                        : 'bg-gradient-to-br from-primary/10 to-accent/10'
-                    }`}>
-                      <offer.icon className={`w-6 h-6 ${offer.highlight ? '' : 'text-primary'}`} />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold">{offer.title}</h3>
-                      <p className="text-sm text-muted-foreground">{offer.subtitle}</p>
-                    </div>
+                {/* Price */}
+                <div className="mb-8">
+                  <div className="flex items-baseline">
+                    <span className="text-5xl font-bold tracking-tight">${plan.price}</span>
+                    <span className={`ml-2 ${plan.featured ? 'text-primary-foreground/70' : 'text-muted-foreground'}`}>
+                      /month
+                    </span>
                   </div>
-
-                  {/* Price */}
-                  <div className="mb-6">
-                    <div className="flex items-baseline gap-1">
-                      <span className="text-4xl font-bold">{offer.price}</span>
-                      <span className="text-muted-foreground">{offer.priceLabel}</span>
-                    </div>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-sm text-muted-foreground mb-6">
-                    {offer.description}
+                  <p className={`mt-3 text-sm ${plan.featured ? 'text-primary-foreground/70' : 'text-muted-foreground'}`}>
+                    {plan.description}
                   </p>
-
-                  {/* Features */}
-                  <ul className="space-y-3 mb-8">
-                    {offer.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-3 text-sm">
-                        <Check className="w-4 h-4 text-success shrink-0 mt-0.5" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* CTA */}
-                  <Button 
-                    asChild 
-                    className={`w-full gap-2 ${offer.highlight ? '' : 'variant-outline'}`}
-                    variant={offer.highlight ? 'default' : 'outline'}
-                    size="lg"
-                  >
-                    <Link to={offer.href}>
-                      {offer.ctaText}
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </Button>
                 </div>
+
+                {/* Features */}
+                <ul className="space-y-4 mb-10">
+                  {plan.features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <Check className={`w-5 h-5 shrink-0 mt-0.5 ${
+                        plan.featured ? 'text-primary' : 'text-primary'
+                      }`} />
+                      <span className="text-sm">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* CTA */}
+                <Button 
+                  asChild 
+                  className="w-full"
+                  variant={plan.featured ? 'secondary' : 'default'}
+                  size="lg"
+                >
+                  <Link to={plan.href}>
+                    Get Started
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
+                </Button>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Bottom CTA */}
-        <motion.div
+        {/* Footer note */}
+        <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-center mt-16"
+          className="text-center text-sm text-muted-foreground mt-12"
         >
-          <div className="inline-flex flex-col sm:flex-row items-center gap-4 p-6 rounded-2xl bg-card border border-border/50">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                <Users className="w-5 h-5 text-primary" />
-              </div>
-              <div className="text-left">
-                <p className="font-medium">Not sure which plan is right?</p>
-                <p className="text-sm text-muted-foreground">Get a free consultation</p>
-              </div>
-            </div>
-            <Button asChild variant="outline" className="gap-2">
-              <Link to="/contact?service=consultation">
-                Schedule Free Call
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </Button>
-          </div>
-        </motion.div>
+          All prices in USD. Veterans receive 10% discount on all plans.{" "}
+          <Link to="/contact" className="text-primary hover:underline">
+            Contact us
+          </Link>{" "}
+          for custom enterprise solutions.
+        </motion.p>
       </div>
     </section>
   );
