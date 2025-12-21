@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import Hero from "@/components/Hero";
+import { HeroHomepage } from "@/components/HeroHomepage";
 import TrustBar from "@/components/TrustBar";
 import TestimonialCard from "@/components/TestimonialCard";
 import CTASection from "@/components/CTASection";
@@ -46,19 +46,9 @@ import {
   Sparkles,
 } from "lucide-react";
 import { useCounterAnimation } from "@/hooks/useCounterAnimation";
-import { RotatingHeroText } from "@/components/RotatingHeroText";
 import { motion } from "framer-motion";
 import { HomeIntroSection } from "@/components/HomeIntroSection";
 import HeroValueCards from "@/components/HeroValueCards";
-
-// Hero images
-import heroSlideshow1 from "@/assets/hero-home-1.jpg";
-import heroSlideshow2 from "@/assets/hero-home-2.jpg";
-import heroSlideshow3 from "@/assets/hero-home-3.jpg";
-import heroSlideshow4 from "@/assets/hero-home-4.jpg";
-import heroSlideshow5 from "@/assets/hero-home-5.jpg";
-import heroSlideshow6 from "@/assets/hero-business-1.jpg";
-import heroSlideshow7 from "@/assets/hero-training-1.jpg";
 
 function Index() {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -67,38 +57,6 @@ function Index() {
   const [selectedVideo, setSelectedVideo] = useState<{ src: string; title: string } | null>(null);
   const [scamShieldOpen, setScamShieldOpen] = useState(false);
 
-  const heroImages = [
-    { src: heroSlideshow1, alt: "Multigenerational family learning scam prevention together" },
-    { src: heroSlideshow2, alt: "Veteran protected from online scams" },
-    { src: heroSlideshow3, alt: "Diverse community workshop on cybersecurity" },
-    { src: heroSlideshow4, alt: "Grandfather and granddaughter using technology safely" },
-    { src: heroSlideshow5, alt: "Couple receiving emergency scam assistance" },
-    { src: heroSlideshow6, alt: "Veteran woman business owner with AI protection" },
-    { src: heroSlideshow7, alt: "Youth teaching seniors about online safety" }
-  ];
-
-  const rotatingMessages = [
-    {
-      headline: "Protecting Ohio Families from AI-Powered Scams",
-      subheadline: "Your parents didn't grow up with technology. Don't let scammers take advantage of that."
-    },
-    {
-      headline: "Don't Let Scammers Steal Your Life Savings",
-      subheadline: "Seniors lose $28.3 billion to scams every year. We're here to stop that."
-    },
-    {
-      headline: "Expert Cybersecurity for Seniors & Families",
-      subheadline: "Veteran-owned, Ohio-based protection you can trust."
-    },
-    {
-      headline: "AI-Powered Protection, Human-Powered Care",
-      subheadline: "Technology that protects. People who care. Results that matter."
-    },
-    {
-      headline: "Veteran-Owned. Ohio-Based. Family-Focused.",
-      subheadline: "Serving Dayton & Miami Valley with 24-hour response times."
-    }
-  ];
 
   // Counter animations
   const stat1 = useCounterAnimation({ end: 28.3, duration: 2500, prefix: "$", suffix: "B" });
@@ -175,13 +133,7 @@ function Index() {
       <main id="main-content">
 
         {/* Hero Section */}
-        <Hero
-          backgroundImages={heroImages}
-          showScrollIndicator={true}
-          overlay={true}
-        >
-          <RotatingHeroText messages={rotatingMessages} interval={6000} />
-        </Hero>
+        <HeroHomepage />
 
         <TrustBar />
 
