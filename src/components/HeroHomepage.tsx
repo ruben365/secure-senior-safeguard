@@ -2,8 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Shield, ArrowRight, CheckCircle, Play } from "lucide-react";
+import { Shield, ArrowRight, Lock, Eye, Fingerprint, ShieldCheck, Zap, Globe } from "lucide-react";
 import heroSecurityCamera from "@/assets/hero-security-camera.jpg";
 import heroHome1 from "@/assets/hero-home-1.jpg";
 import heroAbout1 from "@/assets/hero-about-1.jpg";
@@ -14,6 +13,13 @@ const heroImages = [
   { src: heroHome1, alt: "Family protection" },
   { src: heroAbout1, alt: "Professional security" },
   { src: heroBusiness1, alt: "Business security" },
+];
+
+const securityFeatures = [
+  { icon: Lock, label: "End-to-End Encryption", delay: 0 },
+  { icon: Eye, label: "24/7 Threat Monitoring", delay: 0.1 },
+  { icon: Fingerprint, label: "Identity Protection", delay: 0.2 },
+  { icon: ShieldCheck, label: "Scam Prevention", delay: 0.3 },
 ];
 
 export const HeroHomepage = () => {
@@ -28,7 +34,7 @@ export const HeroHomepage = () => {
 
   return (
     <section className="relative min-h-[700px] sm:min-h-[750px] md:min-h-[850px] lg:min-h-[900px] overflow-hidden">
-      {/* Transitioning Background Images */}
+      {/* Transitioning Background Images - NO OVERLAY */}
       <div className="absolute inset-0">
         <AnimatePresence mode="wait">
           <motion.div
@@ -46,45 +52,44 @@ export const HeroHomepage = () => {
             />
           </motion.div>
         </AnimatePresence>
-        {/* Gradient overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/60" />
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-transparent to-primary/40" />
+        {/* Subtle gradient for text readability only */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
       </div>
 
-      {/* Floating decorative elements */}
+      {/* Animated cyber grid background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 opacity-10" style={{
+          backgroundImage: `
+            linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px)
+          `,
+          backgroundSize: '50px 50px'
+        }} />
+        
+        {/* Floating cyber particles */}
         <motion.div 
-          className="absolute top-20 left-[10%] w-64 h-64 bg-accent/20 rounded-full blur-3xl"
+          className="absolute top-20 left-[10%] w-2 h-2 bg-cyan-400 rounded-full shadow-[0_0_20px_rgba(0,255,255,0.8)]"
           animate={{ 
-            x: [0, 50, 0],
-            y: [0, -30, 0],
-            scale: [1, 1.2, 1]
+            y: [0, -100, 0],
+            opacity: [0.3, 1, 0.3]
           }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div 
-          className="absolute bottom-20 right-[20%] w-96 h-96 bg-primary-foreground/10 rounded-full blur-3xl"
+          className="absolute top-40 right-[30%] w-1.5 h-1.5 bg-purple-400 rounded-full shadow-[0_0_15px_rgba(168,85,247,0.8)]"
           animate={{ 
-            x: [0, -40, 0],
-            y: [0, 40, 0],
+            y: [0, -80, 0],
+            opacity: [0.2, 1, 0.2]
           }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        />
-        {/* Geometric shapes */}
-        <motion.div 
-          className="absolute top-1/3 left-[5%] w-20 h-20 border-2 border-white/20 rounded-full"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
         <motion.div 
-          className="absolute bottom-1/4 right-[10%] w-16 h-16 border border-accent/30 rotate-45"
-          animate={{ rotate: 405 }}
-          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-        />
-        <motion.div 
-          className="absolute top-1/2 right-[30%] w-4 h-4 bg-accent rounded-full"
-          animate={{ y: [0, -20, 0], opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-40 left-[20%] w-3 h-3 bg-accent rounded-full shadow-[0_0_25px_rgba(var(--accent),0.8)]"
+          animate={{ 
+            y: [0, -60, 0],
+            x: [0, 20, 0]
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         />
       </div>
       
@@ -148,8 +153,7 @@ export const HeroHomepage = () => {
               </Button>
               <Button asChild variant="outline" size="lg" className="group border-white/30 text-white hover:bg-white/10 px-8 py-6 text-lg backdrop-blur-sm">
                 <Link to="/about">
-                  <Play className="mr-2 w-5 h-5" />
-                  Watch Video
+                  Learn More
                 </Link>
               </Button>
             </motion.div>
@@ -175,66 +179,122 @@ export const HeroHomepage = () => {
             </motion.div>
           </motion.div>
           
-          {/* Right Content - Quote Form Card */}
+          {/* Right Content - Cybersecurity Visual */}
           <motion.div 
             className="order-1 lg:order-2 flex justify-center lg:justify-end"
             initial={{ opacity: 0, x: 50, y: 20 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
           >
-            <div className="relative w-full max-w-md">
-              {/* Glowing background effect */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-accent/20 via-primary/20 to-accent/20 rounded-3xl blur-2xl opacity-60" />
-              
-              {/* Quote Form Card */}
-              <div className="relative bg-card/95 backdrop-blur-xl rounded-3xl shadow-2xl p-8 lg:p-10 border border-white/10">
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary rounded-t-3xl" />
+            <div className="relative w-full max-w-lg">
+              {/* Central Shield Icon */}
+              <motion.div 
+                className="relative mx-auto w-48 h-48 md:w-64 md:h-64"
+                animate={{ 
+                  rotateY: [0, 360],
+                }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              >
+                {/* Outer rotating ring */}
+                <motion.div 
+                  className="absolute inset-0 rounded-full border-2 border-dashed border-cyan-400/30"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                />
                 
-                <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-2">Request A Quote</h2>
-                <p className="text-muted-foreground mb-8">Get your free consultation today</p>
+                {/* Middle pulsing ring */}
+                <motion.div 
+                  className="absolute inset-4 rounded-full border border-accent/50"
+                  animate={{ 
+                    scale: [1, 1.1, 1],
+                    opacity: [0.5, 1, 0.5]
+                  }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                />
                 
-                <form className="space-y-5">
-                  <Input 
-                    type="text" 
-                    placeholder="Your Name*" 
-                    className="h-14 bg-muted/50 border-border/50 rounded-xl text-base focus:border-accent focus:ring-accent"
-                  />
-                  <Input 
-                    type="email" 
-                    placeholder="Email Address*" 
-                    className="h-14 bg-muted/50 border-border/50 rounded-xl text-base focus:border-accent focus:ring-accent"
-                  />
-                  <Input 
-                    type="tel" 
-                    placeholder="Phone Number*" 
-                    className="h-14 bg-muted/50 border-border/50 rounded-xl text-base focus:border-accent focus:ring-accent"
-                  />
-                  <Input 
-                    type="text" 
-                    placeholder="How can we help?" 
-                    className="h-14 bg-muted/50 border-border/50 rounded-xl text-base focus:border-accent focus:ring-accent"
-                  />
-                  
-                  <Button type="button" className="w-full h-14 text-lg group rounded-xl" size="lg" asChild>
-                    <Link to="/contact">
-                      Request A Consultation
-                      <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </Button>
-                </form>
+                {/* Inner glow */}
+                <div className="absolute inset-8 rounded-full bg-gradient-to-br from-primary/80 to-accent/60 blur-lg" />
                 
-                {/* Trust indicators */}
-                <div className="mt-8 pt-6 border-t border-border/50 flex items-center gap-6">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle className="w-5 h-5 text-success" />
-                    <span>Free consultation</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle className="w-5 h-5 text-success" />
-                    <span>No obligation</span>
-                  </div>
+                {/* Shield icon center */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <motion.div 
+                    className="relative"
+                    animate={{ 
+                      scale: [1, 1.05, 1],
+                    }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <Shield className="w-20 h-20 md:w-28 md:h-28 text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.5)]" />
+                    <motion.div 
+                      className="absolute inset-0 flex items-center justify-center"
+                      animate={{ opacity: [0.5, 1, 0.5] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      <Lock className="w-8 h-8 md:w-10 md:h-10 text-accent" />
+                    </motion.div>
+                  </motion.div>
                 </div>
+              </motion.div>
+
+              {/* Floating feature badges */}
+              <div className="absolute inset-0">
+                {securityFeatures.map((feature, index) => {
+                  const positions = [
+                    { top: '0%', left: '50%', transform: 'translateX(-50%)' },
+                    { top: '50%', right: '-10%', transform: 'translateY(-50%)' },
+                    { bottom: '0%', left: '50%', transform: 'translateX(-50%)' },
+                    { top: '50%', left: '-10%', transform: 'translateY(-50%)' },
+                  ];
+                  return (
+                    <motion.div
+                      key={feature.label}
+                      className="absolute"
+                      style={positions[index]}
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.5 + feature.delay, duration: 0.5 }}
+                    >
+                      <motion.div 
+                        className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-xl rounded-full border border-white/20 shadow-lg"
+                        whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.2)' }}
+                        animate={{ 
+                          y: [0, -5, 0],
+                        }}
+                        transition={{ 
+                          y: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: index * 0.5 }
+                        }}
+                      >
+                        <feature.icon className="w-4 h-4 text-accent" />
+                        <span className="text-xs md:text-sm text-white font-medium whitespace-nowrap">{feature.label}</span>
+                      </motion.div>
+                    </motion.div>
+                  );
+                })}
               </div>
+
+              {/* Stats below */}
+              <motion.div 
+                className="mt-20 grid grid-cols-3 gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1, duration: 0.5 }}
+              >
+                {[
+                  { icon: Globe, value: "500+", label: "Protected" },
+                  { icon: Zap, value: "24/7", label: "Support" },
+                  { icon: ShieldCheck, value: "99.9%", label: "Success" },
+                ].map((stat, index) => (
+                  <motion.div 
+                    key={stat.label}
+                    className="text-center p-3 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10"
+                    whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.1)' }}
+                  >
+                    <stat.icon className="w-5 h-5 text-accent mx-auto mb-1" />
+                    <div className="text-xl md:text-2xl font-bold text-white">{stat.value}</div>
+                    <div className="text-xs text-white/60">{stat.label}</div>
+                  </motion.div>
+                ))}
+              </motion.div>
             </div>
           </motion.div>
           
