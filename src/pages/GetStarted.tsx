@@ -92,9 +92,13 @@ function GetStarted() {
   const isAiAgents = serviceType === "ai-agents";
   const isWebsiteDesign = serviceType === "website-design";
   
+  // Get the correct plan based on service type
   const currentPlan = isAiAgents 
-    ? AI_AGENT_PLANS[plan as keyof typeof AI_AGENT_PLANS] || AI_AGENT_PLANS.STARTER
-    : WEBSITE_PLANS[plan as keyof typeof WEBSITE_PLANS] || WEBSITE_PLANS.BASIC;
+    ? (AI_AGENT_PLANS[plan as keyof typeof AI_AGENT_PLANS] ?? AI_AGENT_PLANS.STARTER)
+    : (WEBSITE_PLANS[plan as keyof typeof WEBSITE_PLANS] ?? WEBSITE_PLANS.BASIC);
+  
+  // Debug log
+  console.log("GetStarted - serviceType:", serviceType, "plan:", plan, "isAiAgents:", isAiAgents, "currentPlan:", currentPlan);
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
