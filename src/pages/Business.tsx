@@ -21,11 +21,13 @@ import { useCounterAnimation } from "@/hooks/useCounterAnimation";
 import { trackButtonClick, trackConversion } from "@/utils/analyticsTracker";
 import { Phone, Mail, MessageSquare, Calendar, CheckCircle, Search, Shield, Lock, Sparkles, FileText } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import heroBusinessDiverse1 from "@/assets/hero-business-diverse-1.jpg";
+import heroBusinessDiverse1 from "@/assets/hero-business-diverse-meeting.jpg";
 import heroBusinessDiverse2 from "@/assets/hero-business-diverse-2.jpg";
 import heroBusinessDiverse3 from "@/assets/hero-business-diverse-3.jpg";
 import heroBusinessDiverse4 from "@/assets/hero-business-diverse-4.jpg";
 import heroBusinessDiverse5 from "@/assets/hero-business-diverse-5.jpg";
+import aiSecurityShield from "@/assets/ai-security-shield-3d.png";
+import aiBrainHologram from "@/assets/ai-brain-hologram.png";
 import { VideoLightbox } from "@/components/VideoLightbox";
 import { SEO } from "@/components/SEO";
 
@@ -833,6 +835,10 @@ function Business() {
       {/* Website Insurance Section */}
       <section id="website-insurance" className="py-20 bg-muted relative overflow-hidden">
         <FlowingWaves variant="full" opacity={0.08} />
+        {/* Decorative Shield */}
+        <div className="absolute top-1/2 -translate-y-1/2 -right-20 w-80 h-80 opacity-10 pointer-events-none hidden xl:block">
+          <img src={aiSecurityShield} alt="" className="w-full h-full object-contain" />
+        </div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-success/10 text-success border border-success/20 rounded-full text-sm font-medium mb-4">
@@ -1047,8 +1053,16 @@ function Business() {
       </section>
 
       {/* AI Services Insurance */}
-      <section id="insurance" className="py-20 bg-background">
-        <div className="container mx-auto px-4">
+      <section id="insurance" className="py-20 bg-background relative overflow-hidden">
+        {/* Decorative Elements */}
+        <div className="absolute top-10 right-10 w-64 h-64 opacity-20 pointer-events-none hidden lg:block">
+          <img src={aiSecurityShield} alt="" className="w-full h-full object-contain animate-pulse" style={{ animationDuration: '4s' }} />
+        </div>
+        <div className="absolute bottom-10 left-10 w-48 h-48 opacity-15 pointer-events-none hidden lg:block">
+          <img src={aiBrainHologram} alt="" className="w-full h-full object-contain animate-pulse" style={{ animationDuration: '5s' }} />
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
             <div className="inline-block px-6 py-2 bg-primary/10 rounded-full text-sm font-bold text-primary mb-4 uppercase tracking-wider">
               Protection & Maintenance
@@ -1382,11 +1396,13 @@ function Business() {
               </ScrollReveal>
             </div>
 
-            <div className="flex items-center">
+            <div className="flex items-center relative">
+              <div className="absolute -top-4 -left-4 w-24 h-24 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full blur-2xl" />
+              <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-gradient-to-br from-success/20 to-emerald-500/20 rounded-full blur-2xl" />
               <img
-                src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop"
-                alt="Business professional reviewing AI dashboard"
-                className="rounded-lg shadow-large"
+                src={heroBusinessDiverse1}
+                alt="Diverse team collaborating on AI solutions"
+                className="rounded-2xl shadow-xl relative z-10 hover:scale-[1.02] transition-transform duration-500"
               />
             </div>
           </div>
