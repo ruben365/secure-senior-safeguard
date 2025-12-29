@@ -19,11 +19,11 @@ import { useCounterAnimation } from "@/hooks/useCounterAnimation";
 import { trackButtonClick, trackConversion } from "@/utils/analyticsTracker";
 import { Phone, Mail, MessageSquare, Calendar, CheckCircle, Search, Shield, Lock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import heroBusinessAiNew1 from "@/assets/hero-business-ai-new-1.jpg";
-import heroBusinessAiNew2 from "@/assets/hero-business-ai-new-2.jpg";
-import heroBusinessAiNew3 from "@/assets/hero-business-ai-new-3.jpg";
-import heroBusinessAiNew4 from "@/assets/hero-business-ai-new-4.jpg";
-import heroBusinessAiNew5 from "@/assets/hero-business-ai-new-5.jpg";
+import businessCollaboration from "@/assets/business-collaboration.jpg";
+import teamCollaboration from "@/assets/team-collaboration.jpg";
+import businessDiverse1 from "@/assets/business-diverse-1.jpg";
+import heroBusinessNew from "@/assets/hero-business-new.jpg";
+import heroBusinessProfessional from "@/assets/hero-business-professional.jpg";
 import { VideoLightbox } from "@/components/VideoLightbox";
 import { SEO } from "@/components/SEO";
 
@@ -131,11 +131,11 @@ function Business() {
   };
 
   const businessHeroImages = [
-    { src: heroBusinessAiNew1, alt: "Executive team collaborating with AI holographic displays" },
-    { src: heroBusinessAiNew2, alt: "Modern data center with AI neural network visualization" },
-    { src: heroBusinessAiNew3, alt: "AI automation dashboard with floating holographic screens" },
-    { src: heroBusinessAiNew4, alt: "Abstract AI brain neural network visualization" },
-    { src: heroBusinessAiNew5, alt: "Corporate AI security operations center" }
+    { src: businessDiverse1, alt: "Diverse business team collaborating on AI solutions" },
+    { src: heroBusinessNew, alt: "Modern office workspace with technology" },
+    { src: heroBusinessProfessional, alt: "Professional business consultation meeting" },
+    { src: businessCollaboration, alt: "Team working together on digital transformation" },
+    { src: teamCollaboration, alt: "Business professionals in collaborative workspace" }
   ];
 
   return (
