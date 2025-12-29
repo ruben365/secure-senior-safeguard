@@ -19,11 +19,11 @@ import { useCounterAnimation } from "@/hooks/useCounterAnimation";
 import { trackButtonClick, trackConversion } from "@/utils/analyticsTracker";
 import { Phone, Mail, MessageSquare, Calendar, CheckCircle, Search, Shield, Lock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import businessCollaboration from "@/assets/business-collaboration.jpg";
-import teamCollaboration from "@/assets/team-collaboration.jpg";
-import businessDiverse1 from "@/assets/business-diverse-1.jpg";
-import heroBusinessNew from "@/assets/hero-business-new.jpg";
-import heroBusinessProfessional from "@/assets/hero-business-professional.jpg";
+import heroBusinessReal1 from "@/assets/hero-business-real-1.jpg";
+import heroBusinessReal2 from "@/assets/hero-business-real-2.jpg";
+import heroBusinessReal3 from "@/assets/hero-business-real-3.jpg";
+import heroBusinessReal4 from "@/assets/hero-business-real-4.jpg";
+import heroBusinessReal5 from "@/assets/hero-business-real-5.jpg";
 import { VideoLightbox } from "@/components/VideoLightbox";
 import { SEO } from "@/components/SEO";
 
@@ -131,11 +131,11 @@ function Business() {
   };
 
   const businessHeroImages = [
-    { src: businessDiverse1, alt: "Diverse business team collaborating on AI solutions" },
-    { src: heroBusinessNew, alt: "Modern office workspace with technology" },
-    { src: heroBusinessProfessional, alt: "Professional business consultation meeting" },
-    { src: businessCollaboration, alt: "Team working together on digital transformation" },
-    { src: teamCollaboration, alt: "Business professionals in collaborative workspace" }
+    { src: heroBusinessReal1, alt: "Business team brainstorming with digital whiteboard" },
+    { src: heroBusinessReal2, alt: "Diverse team collaborating in modern office" },
+    { src: heroBusinessReal3, alt: "Professionals working together on project" },
+    { src: heroBusinessReal4, alt: "Creative team strategy meeting" },
+    { src: heroBusinessReal5, alt: "Technology team working on laptops" }
   ];
 
   return (
