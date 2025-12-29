@@ -131,11 +131,11 @@ function Business() {
   };
 
   const businessHeroImages = [
-    { src: businessDiverse1, alt: "Diverse business team collaborating on AI solutions" },
-    { src: heroBusinessNew, alt: "Modern office workspace with technology" },
-    { src: heroBusinessProfessional, alt: "Professional business consultation meeting" },
-    { src: businessCollaboration, alt: "Team working together on digital transformation" },
-    { src: heroBusiness3d, alt: "3D visualization of business technology solutions" }
+    { src: heroBusinessAiNew1, alt: "Executive team collaborating with AI holographic displays" },
+    { src: heroBusinessAiNew2, alt: "Modern data center with AI neural network visualization" },
+    { src: heroBusinessAiNew3, alt: "AI automation dashboard with floating holographic screens" },
+    { src: heroBusinessAiNew4, alt: "Abstract AI brain neural network visualization" },
+    { src: heroBusinessAiNew5, alt: "Corporate AI security operations center" }
   ];
 
   return (
