@@ -1626,7 +1626,7 @@ function Business() {
         backgroundImage={natureParkSerene}
         description="Take the first step towards protecting your business with AI-powered security solutions."
       >
-        <Button asChild size="xl" className="bg-white text-slate-900 hover:bg-white/90 font-bold shadow-xl shadow-black/20">
+        <Button asChild size="xl" className="bg-primary hover:bg-primary/90 text-white font-bold shadow-xl shadow-black/20">
           <Link 
             to="/contact"
             onClick={() => trackButtonClick('Schedule Discovery Call', 'Business CTA')}
