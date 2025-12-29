@@ -24,12 +24,9 @@ import { Badge } from "@/components/ui/badge";
 import heroBusinessEliteMeeting from "@/assets/hero-business-elite-meeting.jpg";
 import heroBusinessDiverse2 from "@/assets/hero-business-diverse-2.jpg";
 import heroBusinessDiverse3 from "@/assets/hero-business-diverse-3.jpg";
-import heroBusinessDiverse4 from "@/assets/hero-business-diverse-4.jpg";
 import heroBusinessDiverse5 from "@/assets/hero-business-diverse-5.jpg";
 import aiSecurityShield from "@/assets/ai-security-shield-3d.png";
 import aiBrainHologram from "@/assets/ai-brain-hologram.png";
-import securityNetworkIcon from "@/assets/security-network-icon.png";
-import automationGearsIcon from "@/assets/automation-gears-icon.png";
 import { VideoLightbox } from "@/components/VideoLightbox";
 import { SEO } from "@/components/SEO";
 
@@ -149,7 +146,6 @@ function Business() {
     { src: heroBusinessEliteMeeting, alt: "Diverse executives smiling in luxury corporate boardroom meeting" },
     { src: heroBusinessDiverse2, alt: "Business professionals shaking hands on trading floor" },
     { src: heroBusinessDiverse3, alt: "Muslim businesswoman leading happy diverse team in boardroom" },
-    { src: heroBusinessDiverse4, alt: "Successful Middle Eastern businessman with AI technology in luxury office" },
     { src: heroBusinessDiverse5, alt: "Multicultural executive team in modern glass corporate headquarters" }
   ];
 
@@ -304,20 +300,6 @@ function Business() {
       {/* Package Pricing */}
       <section id="automation-pricing" className="py-20 bg-muted relative overflow-hidden">
         <FlowingWaves variant="full" opacity={0.08} />
-        {/* Decorative floating icons */}
-        <img 
-          src={automationGearsIcon} 
-          alt="" 
-          className="absolute top-20 right-10 w-20 h-20 opacity-30 blur-[1px] animate-float pointer-events-none hidden lg:block" 
-          aria-hidden="true"
-        />
-        <img 
-          src={securityNetworkIcon} 
-          alt="" 
-          className="absolute bottom-20 left-10 w-24 h-24 opacity-25 blur-[1px] animate-float pointer-events-none hidden lg:block" 
-          style={{ animationDelay: '2s' }}
-          aria-hidden="true"
-        />
         <div className="container mx-auto px-4 relative z-10">
           {/* Section Header with Trust */}
           <div className="text-center mb-12">
@@ -541,16 +523,8 @@ function Business() {
       </section>
 
       {/* Web Design Services */}
-      <section id="website-design" className="py-20 bg-background relative overflow-hidden">
-        {/* Decorative floating icons */}
-        <img 
-          src={securityNetworkIcon} 
-          alt="" 
-          className="absolute top-32 right-8 w-16 h-16 opacity-20 blur-[1px] animate-float pointer-events-none hidden lg:block" 
-          style={{ animationDelay: '1s' }}
-          aria-hidden="true"
-        />
-        <div className="container mx-auto px-4 relative z-10">
+      <section id="website-design" className="py-20 bg-background">
+        <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <div className="inline-block px-6 py-2 bg-primary/10 rounded-full text-sm font-bold text-primary mb-4 uppercase tracking-wider">
               Web Design
