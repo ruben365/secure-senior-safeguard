@@ -720,7 +720,7 @@ function Business() {
 
                 {/* AI Chatbot Integration */}
                 <Card className="p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-background to-blue-500/5 border-blue-500/20 group relative overflow-hidden">
-                  <div className="absolute -top-2 -right-2 px-2 py-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-[10px] font-bold rounded-full">
+                  <div className="absolute top-2 right-2 px-2 py-1 bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-[10px] font-bold rounded-full shadow-md z-10">
                     POPULAR
                   </div>
                   <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -734,7 +734,7 @@ function Business() {
 
                 {/* Domain & Hosting */}
                 <Card className="p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-background to-emerald-500/5 border-emerald-500/20 group relative overflow-hidden">
-                  <div className="absolute -top-2 -right-2 px-2 py-0.5 bg-gradient-to-r from-emerald-500 to-green-500 text-white text-[10px] font-bold rounded-full">
+                  <div className="absolute top-2 right-2 px-2 py-1 bg-gradient-to-r from-emerald-500 to-green-500 text-white text-[10px] font-bold rounded-full shadow-md z-10">
                     INCLUDED
                   </div>
                   <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br from-emerald-500/20 to-green-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -794,13 +794,13 @@ function Business() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto mb-10">
             {/* Essential Plan */}
             <ScrollReveal animation="fade-up" delay={0}>
-              <Card className="p-6 rounded-2xl hover:shadow-medium transition-all hover:-translate-y-1 relative">
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wider shadow-lg">
+              <Card className="p-6 rounded-2xl hover:shadow-medium transition-all hover:-translate-y-1 relative overflow-visible pt-8">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wider shadow-lg z-20">
                   ESSENTIAL
                 </div>
-                <div className="text-center pt-4">
+                <div className="text-center">
                   <h3 className="text-xl font-bold mb-2">Essential</h3>
-                  <p className="text-3xl font-bold text-primary mb-1">$79<span className="text-sm text-muted-foreground font-normal">/mo</span></p>
+                  <p className="text-3xl font-bold text-primary mb-1">$29<span className="text-sm text-muted-foreground font-normal">/mo</span></p>
                   <p className="text-xs text-muted-foreground mb-4">Basic protection for small sites</p>
                 </div>
                 <ul className="space-y-2 mb-6 text-sm">
@@ -825,24 +825,24 @@ function Business() {
                   variant="outline" 
                   className="w-full"
                   onClick={() => {
-                    trackButtonClick('Get Started - Website Insurance Essential', 'Website Insurance');
+                    trackButtonClick('Subscribe Now - Website Insurance Essential', 'Website Insurance');
                     setWebsiteInsuranceOpen(true);
                   }}
                 >
-                  Get Started
+                  Subscribe Now
                 </Button>
               </Card>
             </ScrollReveal>
 
             {/* Professional Plan */}
             <ScrollReveal animation="fade-up" delay={150}>
-              <Card className="p-6 rounded-2xl border-2 border-primary shadow-[0_8px_30px_rgba(139,92,246,0.15)] hover:shadow-[0_12px_40px_rgba(139,92,246,0.2)] transition-all relative">
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wider shadow-lg animate-pulse" style={{ animationDuration: '3s' }}>
+              <Card className="p-6 rounded-2xl border-2 border-primary shadow-[0_8px_30px_rgba(139,92,246,0.15)] hover:shadow-[0_12px_40px_rgba(139,92,246,0.2)] transition-all relative overflow-visible pt-8">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wider shadow-lg animate-pulse z-20" style={{ animationDuration: '3s' }}>
                   ⭐ MOST POPULAR
                 </div>
-                <div className="text-center pt-4">
+                <div className="text-center">
                   <h3 className="text-xl font-bold mb-2">Professional</h3>
-                  <p className="text-3xl font-bold text-primary mb-1">$199<span className="text-sm text-muted-foreground font-normal">/mo</span></p>
+                  <p className="text-3xl font-bold text-primary mb-1">$49<span className="text-sm text-muted-foreground font-normal">/mo</span></p>
                   <p className="text-xs text-muted-foreground mb-4">Complete business protection</p>
                 </div>
                 <ul className="space-y-2 mb-6 text-sm">
@@ -875,24 +875,24 @@ function Business() {
                   variant="default" 
                   className="w-full"
                   onClick={() => {
-                    trackButtonClick('Get Started - Website Insurance Professional', 'Website Insurance');
+                    trackButtonClick('Subscribe Now - Website Insurance Professional', 'Website Insurance');
                     setWebsiteInsuranceOpen(true);
                   }}
                 >
-                  Get Started
+                  Subscribe Now
                 </Button>
               </Card>
             </ScrollReveal>
 
             {/* Enterprise Plan */}
             <ScrollReveal animation="fade-up" delay={300}>
-              <Card className="p-6 rounded-2xl border-2 border-accent hover:shadow-medium transition-all hover:-translate-y-1 relative">
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wider shadow-lg">
+              <Card className="p-6 rounded-2xl border-2 border-accent hover:shadow-medium transition-all hover:-translate-y-1 relative overflow-visible pt-8">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wider shadow-lg z-20">
                   👑 ENTERPRISE
                 </div>
-                <div className="text-center pt-4">
+                <div className="text-center">
                   <h3 className="text-xl font-bold mb-2">Enterprise</h3>
-                  <p className="text-3xl font-bold text-primary mb-1">$500<span className="text-sm text-muted-foreground font-normal">/mo</span></p>
+                  <p className="text-3xl font-bold text-primary mb-1">$99<span className="text-sm text-muted-foreground font-normal">/mo</span></p>
                   <p className="text-xs text-muted-foreground mb-4">Maximum protection & support</p>
                 </div>
                 <ul className="space-y-2 mb-6 text-sm">
@@ -929,31 +929,59 @@ function Business() {
                   variant="default" 
                   className="w-full"
                   onClick={() => {
-                    trackButtonClick('Get Started - Website Insurance Enterprise', 'Website Insurance');
+                    trackButtonClick('Subscribe Now - Website Insurance Enterprise', 'Website Insurance');
                     setWebsiteInsuranceOpen(true);
                   }}
                 >
-                  Get Started
+                  Subscribe Now
                 </Button>
               </Card>
             </ScrollReveal>
           </div>
 
-          {/* Custom Build CTA */}
-          <div className="text-center">
-            <Card className="inline-flex items-center gap-4 px-6 py-4 bg-card/80 backdrop-blur-sm">
-              <div className="text-left">
-                <p className="font-semibold">Need a custom package?</p>
-                <p className="text-sm text-muted-foreground">Build your own coverage with only the features you need</p>
-              </div>
-              <Button 
-                variant="outline"
-                onClick={() => setWebsiteInsuranceOpen(true)}
-              >
-                Build Custom Plan
-              </Button>
-            </Card>
-          </div>
+          {/* Custom Plan Card */}
+          <ScrollReveal animation="fade-up" delay={400}>
+            <div className="max-w-md mx-auto">
+              <Card className="p-6 rounded-2xl border-2 border-dashed border-primary/40 hover:border-primary transition-all hover:-translate-y-1 relative overflow-visible pt-8 bg-gradient-to-br from-background to-primary/5">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary via-accent to-primary text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wider shadow-lg z-20">
+                  ✨ CUSTOMIZABLE
+                </div>
+                <div className="text-center">
+                  <h3 className="text-xl font-bold mb-2">Custom Plan</h3>
+                  <p className="text-3xl font-bold text-primary mb-1">From $29<span className="text-sm text-muted-foreground font-normal">/mo</span></p>
+                  <p className="text-xs text-muted-foreground mb-4">Build your perfect coverage</p>
+                </div>
+                <ul className="space-y-2 mb-6 text-sm">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-success flex-shrink-0" />
+                    <span>Select only features you need</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-success flex-shrink-0" />
+                    <span>Mix security, backup & support</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-success flex-shrink-0" />
+                    <span>Flexible pricing tiers</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-success flex-shrink-0" />
+                    <span>Upgrade anytime</span>
+                  </li>
+                </ul>
+                <Button 
+                  variant="default" 
+                  className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90"
+                  onClick={() => {
+                    trackButtonClick('Subscribe Now - Website Insurance Custom', 'Website Insurance');
+                    setWebsiteInsuranceOpen(true);
+                  }}
+                >
+                  Build Your Plan
+                </Button>
+              </Card>
+            </div>
+          </ScrollReveal>
 
           {/* Trust Badges */}
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
