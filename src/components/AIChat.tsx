@@ -220,19 +220,21 @@ export const AIChat = () => {
         
         for (const line of lines) {
           if (line.startsWith('data: ')) {
-            const data = line.slice(6);
+            const data = line.slice(6).trim();
             if (data === '[DONE]') {
               continue;
             }
             
             try {
               const parsed = JSON.parse(data);
-              if (parsed.content) {
-                assistantMessage += parsed.content;
+              // Handle Lovable AI gateway format (OpenAI compatible)
+              const content = parsed.choices?.[0]?.delta?.content;
+              if (content) {
+                assistantMessage += content;
                 setMessages([...newMessages, { role: "assistant", content: assistantMessage }]);
               }
             } catch (e) {
-              console.error("Error parsing chunk:", e);
+              // Ignore partial JSON chunks
             }
           }
         }
