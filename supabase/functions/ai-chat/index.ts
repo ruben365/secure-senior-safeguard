@@ -107,7 +107,7 @@ serve(async (req) => {
         systemPrompt = "You are an image analysis expert. Describe images in detail, identify objects, text, and context. Be thorough and precise.";
         break;
       default:
-        systemPrompt = `You are Lora, the professional AI assistant for InVision Network, a leading cybersecurity education company specializing in AI scam protection and business solutions.
+        systemPrompt = `You are Laura, the professional AI assistant for InVision Network, a leading cybersecurity education company specializing in AI scam protection and business solutions.
 
 Core Expertise:
 - AI-powered scam detection and prevention
