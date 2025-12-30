@@ -66,7 +66,7 @@ const TypewriterText = ({ words, className }: { words: string[]; className?: str
 export const HeroHomepage = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
 
-  return <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-background via-background to-purple-100/30">
+  return <section className="relative min-h-[100vh] lg:min-h-[110vh] overflow-hidden bg-gradient-to-br from-background via-background to-purple-100/30">
       {/* Animated gradient background */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div 
@@ -88,7 +88,7 @@ export const HeroHomepage = () => {
         />
       </div>
 
-      {/* Video Background */}
+      {/* Video Background - Full width */}
       <div className="absolute inset-0">
         {/* Video element */}
         <video
@@ -102,25 +102,25 @@ export const HeroHomepage = () => {
           <source src={heroVideo} type="video/mp4" />
         </video>
         
-        {/* Premium gradient overlay - harmonious purple tones */}
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-transparent" />
+        {/* Premium gradient overlay - softer for wider feel */}
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-purple-900/10" />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
       </div>
 
       {/* Premium animated grid with brand colors */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-[0.015]">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-[0.02]">
         <div className="absolute inset-0" style={{
         backgroundImage: `linear-gradient(hsl(var(--primary) / 0.3) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary) / 0.3) 1px, transparent 1px)`,
-        backgroundSize: '80px 80px'
+        backgroundSize: '100px 100px'
       }} />
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-screen py-32 lg:py-0">
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-16 items-center min-h-[100vh] py-24 lg:py-0">
           
-          {/* Left Content */}
-          <motion.div className="order-2 lg:order-1" initial={{
+          {/* Left Content - Takes 3 columns */}
+          <motion.div className="lg:col-span-3 order-2 lg:order-1" initial={{
           opacity: 0
         }} animate={{
           opacity: 1
@@ -143,8 +143,8 @@ export const HeroHomepage = () => {
               <span className="text-sm font-semibold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Veteran-Owned • Ohio-Based • Trusted</span>
             </motion.div>
             
-            {/* Headline with Typing Effect */}
-            <motion.h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-8 tracking-tight" initial={{
+            {/* Headline with Typing Effect - Larger for wider layout */}
+            <motion.h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-[0.9] mb-8 tracking-tight" initial={{
             opacity: 0,
             y: 40
           }} animate={{
@@ -162,11 +162,11 @@ export const HeroHomepage = () => {
                 />
               </span>
               <span className="block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">Protection</span>
-              <span className="block font-light text-muted-foreground/80 text-4xl sm:text-5xl md:text-6xl lg:text-7xl mt-2">Starts Here</span>
+              <span className="block font-light text-muted-foreground/80 text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-3">Starts Here</span>
             </motion.h1>
             
-            {/* Description */}
-            <motion.p className="text-lg sm:text-xl text-muted-foreground max-w-xl mb-12 leading-relaxed" initial={{
+            {/* Description - Wider */}
+            <motion.p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mb-12 leading-relaxed" initial={{
             opacity: 0,
             y: 30
           }} animate={{
@@ -206,8 +206,8 @@ export const HeroHomepage = () => {
 
           </motion.div>
           
-          {/* Right Content - Premium Security Visual */}
-          <motion.div className="order-1 lg:order-2 flex justify-center lg:justify-end" initial={{
+          {/* Right Content - Premium Security Visual - Takes 2 columns */}
+          <motion.div className="lg:col-span-2 order-1 lg:order-2 flex justify-center lg:justify-end" initial={{
           opacity: 0,
           scale: 0.95
         }} animate={{
@@ -218,7 +218,7 @@ export const HeroHomepage = () => {
           ease: [0.22, 1, 0.36, 1],
           delay: 0.2
         }}>
-            <div className="relative w-full max-w-lg">
+            <div className="relative w-full max-w-md lg:max-w-lg">
               {/* Main visual container */}
               <div className="relative">
                 {/* Outer glow ring - premium gradient */}

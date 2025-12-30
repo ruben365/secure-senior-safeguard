@@ -11,7 +11,7 @@ import { TestimonialQuote } from "@/components/home/TestimonialQuote";
 import { SecuritySolutions } from "@/components/home/SecuritySolutions";
 import { BlogPreview } from "@/components/home/BlogPreview";
 import { ScamAlertsSection } from "@/components/home/ScamAlertsSection";
-import { ProtectionComparison } from "@/components/home/ProtectionComparison";
+import { CompanyIntroSection } from "@/components/home/CompanyIntroSection";
 import { FAQPreview } from "@/components/home/FAQPreview";
 import { OhioImpactSection } from "@/components/home/OhioImpactSection";
 import TrustBar from "@/components/TrustBar";
@@ -87,9 +87,9 @@ function Index() {
             <AboutSection />
           </section>
 
-          {/* Protection Plans Comparison */}
-          <section id="plans">
-            <ProtectionComparison />
+          {/* Company Introduction - Who We Are & Why You Need Us */}
+          <section id="intro">
+            <CompanyIntroSection />
           </section>
 
           {/* Services Showcase - Team of Experts */}
