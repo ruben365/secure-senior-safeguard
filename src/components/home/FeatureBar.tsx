@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Lightbulb, Award, Shield, GraduationCap } from "lucide-react";
+import communityTraining from "@/assets/community-training.jpg";
+import securityExpert from "@/assets/security-expert.jpg";
 
 const features = [
   {
@@ -41,23 +43,45 @@ export const FeatureBar = () => {
       <div className="absolute top-1/2 right-1/4 w-16 h-16 rounded-full bg-primary/10" />
       
       <div className="container mx-auto px-4 relative z-10">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="text-primary font-semibold text-sm uppercase tracking-wider mb-4 block">Why Choose Us</span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Why Will You Choose{" "}
-            <span className="text-primary">Our Services?</span>
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Experience the difference of professional, veteran-owned cybersecurity services.
-          </p>
-        </motion.div>
+        {/* Section Header with Images */}
+        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="text-primary font-semibold text-sm uppercase tracking-wider mb-4 block">Why Choose Us</span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+              Why Will You Choose{" "}
+              <span className="text-primary">Our Services?</span>
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              Experience the difference of professional, veteran-owned cybersecurity services.
+            </p>
+          </motion.div>
+          
+          {/* Image Grid */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="flex gap-4"
+          >
+            <div className="relative flex-1">
+              <div className="rounded-2xl overflow-hidden shadow-xl">
+                <img src={communityTraining} alt="Community Training" className="w-full h-48 object-cover" />
+              </div>
+              <div className="absolute -bottom-2 -right-2 w-6 h-6 rounded-full bg-accent" />
+            </div>
+            <div className="relative flex-1 mt-8">
+              <div className="rounded-2xl overflow-hidden shadow-xl">
+                <img src={securityExpert} alt="Security Expert" className="w-full h-48 object-cover" />
+              </div>
+              <div className="absolute -top-2 -left-2 w-5 h-5 rounded-full bg-primary" />
+            </div>
+          </motion.div>
+        </div>
 
         {/* Feature Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
