@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Shield, Users, Brain, Heart, ArrowRight, CheckCircle, Sparkles, Lock, Eye, Zap, Building2, GraduationCap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import teamCollaborationBg from "@/assets/team-collaboration-bg.jpg";
+import securityTeamStatsBg from "@/assets/security-team-stats-bg.jpg";
 
 const coreValues = [
   {
@@ -119,41 +119,41 @@ export const CompanyIntroSection = () => {
           ))}
         </div>
 
-        {/* Why You Need Us Section - With Background Image and blur */}
+        {/* Why You Need Us Section - With Background Image and blur - no purple */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="relative rounded-3xl overflow-hidden"
         >
-          {/* Background image with blur effect */}
+          {/* Background image with blur effect - no color overlay */}
           <div className="absolute inset-0">
             <img 
-              src={teamCollaborationBg} 
+              src={securityTeamStatsBg} 
               alt="" 
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 backdrop-blur-md bg-background/70" />
+            <div className="absolute inset-0 backdrop-blur-md bg-black/50" />
           </div>
           
-          <div className="relative z-10 p-8 md:p-12 border border-primary/20 rounded-3xl">
+          <div className="relative z-10 p-8 md:p-12 border border-white/10 rounded-3xl">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Left: Message */}
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-6">
-                  <Lock className="w-3.5 h-3.5 text-accent" />
-                  <span className="text-xs font-semibold text-accent uppercase tracking-wider">Why Protection Matters</span>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 mb-6">
+                  <Lock className="w-3.5 h-3.5 text-white" />
+                  <span className="text-xs font-semibold text-white uppercase tracking-wider">Why Protection Matters</span>
                 </div>
                 
-                <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4" style={{ textShadow: '1px 1px 4px rgba(0,0,0,0.5)' }}>
                   The Threats Are Real.<br />
-                  <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Your Defense Should Be Too.</span>
+                  <span className="text-amber-300">Your Defense Should Be Too.</span>
                 </h3>
                 
-                <p className="text-muted-foreground mb-6 leading-relaxed">
+                <p className="text-white/90 mb-6 leading-relaxed" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.4)' }}>
                   Every 11 seconds, someone becomes a victim of identity theft. AI-powered scams are growing 
                   300% year over year. Seniors lose an average of $9,000 per scam incident. 
-                  <strong className="text-foreground"> Don't become a statistic.</strong>
+                  <strong className="text-white"> Don't become a statistic.</strong>
                 </p>
 
                 <div className="grid grid-cols-2 gap-3 mb-8">
@@ -166,13 +166,13 @@ export const CompanyIntroSection = () => {
                       transition={{ delay: index * 0.05 }}
                       className="flex items-center gap-2"
                     >
-                      <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
-                      <span className="text-sm text-foreground">{point}</span>
+                      <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                      <span className="text-sm text-white">{point}</span>
                     </motion.div>
                   ))}
                 </div>
 
-                <Button asChild size="lg" className="rounded-full">
+                <Button asChild size="lg" className="rounded-full bg-white text-foreground hover:bg-white/90">
                   <Link to="/services">
                     Start Your Protection
                     <ArrowRight className="ml-2 w-4 h-4" />
@@ -180,13 +180,13 @@ export const CompanyIntroSection = () => {
                 </Button>
               </div>
 
-              {/* Right: Visual Stats - Redesigned with blurry glassmorphism */}
+              {/* Right: Visual Stats - Glassmorphism on dark background */}
               <div className="grid grid-cols-2 gap-4">
                 {[
                   { icon: Eye, value: "24/7", label: "Monitoring", gradient: "from-blue-500 to-indigo-500" },
                   { icon: Zap, value: "< 1s", label: "Response Time", gradient: "from-amber-500 to-orange-500" },
                   { icon: Shield, value: "99.9%", label: "Success Rate", gradient: "from-emerald-500 to-teal-500" },
-                  { icon: Users, value: "500+", label: "Families Protected", gradient: "from-purple-500 to-pink-500" },
+                  { icon: Users, value: "500+", label: "Families Protected", gradient: "from-rose-500 to-pink-500" },
                 ].map((stat, index) => (
                   <motion.div
                     key={index}
@@ -195,15 +195,15 @@ export const CompanyIntroSection = () => {
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
                     whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-                    className="backdrop-blur-xl bg-card/80 rounded-2xl p-6 border border-border/50 hover:border-primary/30 transition-all text-center shadow-lg"
+                    className="backdrop-blur-xl bg-white/10 rounded-2xl p-6 border border-white/20 hover:border-white/40 transition-all text-center shadow-lg"
                   >
                     <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${stat.gradient} flex items-center justify-center mx-auto mb-3`}>
                       <stat.icon className="w-7 h-7 text-white" />
                     </div>
-                    <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                    <div className="text-2xl md:text-3xl font-bold text-white">
                       {stat.value}
                     </div>
-                    <div className="text-xs text-muted-foreground font-medium mt-1">{stat.label}</div>
+                    <div className="text-xs text-white/70 font-medium mt-1">{stat.label}</div>
                   </motion.div>
                 ))}
               </div>

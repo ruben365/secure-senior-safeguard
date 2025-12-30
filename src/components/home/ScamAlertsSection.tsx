@@ -8,24 +8,27 @@ import teamCollaborationBg from "@/assets/team-collaboration-bg.jpg";
 const scamAlerts = [
   {
     icon: Phone,
-    title: "AI Voice Clone Scams",
-    description: "Scammers using AI to clone family members' voices asking for emergency money.",
+    title: "AI Voice Impersonation",
+    description: "Criminals clone voices of loved ones using AI to request emergency funds.",
     trend: "+340%",
-    tip: "Always verify with a callback to a known number.",
+    tip: "Verify any urgent request by calling back on a known number.",
+    severity: "critical",
   },
   {
     icon: Mail,
-    title: "Fake IRS/SSA Emails",
-    description: "Phishing emails claiming tax issues or benefit problems.",
+    title: "Government Impersonation",
+    description: "Fraudulent emails mimicking IRS, SSA, or Medicare demanding immediate action.",
     trend: "+180%",
-    tip: "The IRS never initiates contact via email.",
+    tip: "Government agencies never request payments via email or phone.",
+    severity: "high",
   },
   {
     icon: CreditCard,
-    title: "Gift Card Payment Requests",
-    description: "Any legitimate organization will never ask for payment in gift cards.",
+    title: "Untraceable Payment Demands",
+    description: "Requests for gift cards, wire transfers, or cryptocurrency are always scams.",
     trend: "+95%",
-    tip: "This is always a scam - hang up immediately.",
+    tip: "No legitimate business accepts gift cards as payment.",
+    severity: "high",
   },
 ];
 
@@ -48,21 +51,24 @@ export const ScamAlertsSection = () => {
 
   return (
     <section className="py-24 relative overflow-hidden bg-background">
-      {/* Clean white background with subtle gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-background to-muted/30" />
+      {/* Seamless fade from hero - gradient top edge */}
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-[1]" />
+      
+      {/* Clean white background */}
+      <div className="absolute inset-0 bg-background" />
       
       {/* Subtle floating particles */}
       {[...Array(4)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-2 h-2 rounded-full bg-primary/20"
+          className="absolute w-2 h-2 rounded-full bg-primary/10"
           style={{
             left: `${15 + i * 20}%`,
             top: `${20 + (i % 3) * 25}%`,
           }}
           animate={{
-            y: [0, -20, 0],
-            opacity: [0.2, 0.4, 0.2],
+            y: [0, -15, 0],
+            opacity: [0.1, 0.25, 0.1],
           }}
           transition={{
             duration: 4 + i * 0.5,
@@ -197,23 +203,23 @@ export const ScamAlertsSection = () => {
               </div>
             </div>
 
-            {/* CTA - With blurry background image */}
+            {/* CTA - With blurry background image, no purple */}
             <div className="relative rounded-2xl overflow-hidden">
-              {/* Background image with blur */}
+              {/* Background image with blur - no purple overlay */}
               <div className="absolute inset-0">
                 <img 
                   src={teamCollaborationBg} 
                   alt="" 
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 backdrop-blur-md bg-primary/60" />
+                <div className="absolute inset-0 backdrop-blur-sm bg-black/40" />
               </div>
               
               <div className="relative z-10 p-8 text-center">
-                <h3 className="text-xl font-bold text-white mb-3">
+                <h3 className="text-xl font-bold text-white mb-3" style={{ textShadow: '1px 1px 4px rgba(0,0,0,0.5)' }}>
                   Take Action Now
                 </h3>
-                <p className="text-white/90 mb-6">
+                <p className="text-white/90 mb-6" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.4)' }}>
                   Get protected before scammers find you
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">

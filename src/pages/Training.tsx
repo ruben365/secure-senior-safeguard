@@ -44,7 +44,7 @@ import {
 import heroTrainingPro1 from "@/assets/hero-training-pro-1.jpg";
 import heroTrainingPro2 from "@/assets/hero-training-pro-2.jpg";
 import heroTrainingPro3 from "@/assets/hero-training-pro-3.jpg";
-import sleepBetter3d from "@/assets/sleep-better-3d.jpg";
+import peacefulGrassRelaxation from "@/assets/peaceful-grass-relaxation.jpg";
 import TestimonialCard from "@/components/TestimonialCard";
 import { VideoLightbox } from "@/components/VideoLightbox";
 import { SEO } from "@/components/SEO";
@@ -1629,19 +1629,20 @@ function LearnAndTrain() {
         </section>
       )}
 
-      {/* Final CTA with Library Background */}
+      {/* Final CTA with Peaceful Grass Background */}
       <section className="py-20 relative overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{ 
-            backgroundImage: `url(${sleepBetter3d})`,
+            backgroundImage: `url(${peacefulGrassRelaxation})`,
           }}
         />
-        {/* No overlay - just the image */}
+        {/* Subtle dark gradient for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/40" />
         <div className="container mx-auto px-4 relative z-10 text-center">
           <ScrollReveal>
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.6)' }}>Sleep Better Tonight</h2>
-            <p className="text-xl text-white mb-8 max-w-2xl mx-auto" style={{ textShadow: '1px 1px 6px rgba(0,0,0,0.8), 0 0 15px rgba(0,0,0,0.5)' }}>Join 500+ families who trust ScamShield</p>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.6), 0 0 15px rgba(0,0,0,0.4)' }}>Sleep Better Tonight</h2>
+            <p className="text-xl text-white mb-8 max-w-2xl mx-auto" style={{ textShadow: '1px 1px 5px rgba(0,0,0,0.6), 0 0 10px rgba(0,0,0,0.4)' }}>Join 500+ families who trust ScamShield</p>
             <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center">
               <Button 
                 onClick={() => {
