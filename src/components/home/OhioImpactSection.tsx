@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { MapPin, Users, Shield, Heart, Building2, Star, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import ohioLandscapeBg from "@/assets/ohio-landscape-bg.jpg";
 
 const impactStats = [
   { icon: Users, value: "500+", label: "Ohio Families Protected" },
@@ -49,11 +50,14 @@ export const OhioImpactSection = () => {
   }, []);
 
   return (
-    <section className="py-24 bg-muted/30 relative overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute top-20 left-10 w-40 h-40 rounded-full bg-primary/5" />
-      <div className="absolute bottom-20 right-20 w-32 h-32 rounded-full bg-accent/10" />
-      <div className="absolute top-1/2 left-1/4 w-20 h-20 rounded-full bg-primary/10" />
+    <section className="py-24 relative overflow-hidden">
+      {/* Background Image with Blur Effect */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${ohioLandscapeBg})` }}
+      />
+      {/* Blur & Dark Overlay for readability */}
+      <div className="absolute inset-0 backdrop-blur-sm bg-background/85" />
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
