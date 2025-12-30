@@ -498,6 +498,55 @@ function LearnAndTrain() {
               ))}
             </div>
           </div>
+
+          {/* Our Safety Pledge & Always Verify */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto mt-16">
+            {/* Our Safety Pledge */}
+            <Card className="p-6 bg-gradient-to-br from-emerald-500/5 to-teal-500/5 border-emerald-500/20 rounded-xl">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-10 h-10 bg-emerald-500/10 rounded-lg flex items-center justify-center">
+                  <Shield className="w-5 h-5 text-emerald-600" />
+                </div>
+                <h3 className="text-lg font-bold">Our Safety Pledge</h3>
+              </div>
+              <ul className="space-y-3">
+                {[
+                  { text: "Educational focus: We teach techniques, never take control of devices" },
+                  { text: "Privacy first: Minimal data collection, maximum respect for your privacy" },
+                  { text: "Clear guidance: Simple scripts and checklists you can follow confidently" },
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-foreground text-sm">{item.text}</span>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+
+            {/* Always Verify */}
+            <Card className="p-6 bg-gradient-to-br from-amber-500/5 to-orange-500/5 border-amber-500/20 rounded-xl">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-10 h-10 bg-amber-500/10 rounded-lg flex items-center justify-center">
+                  <span className="text-xl">⚠️</span>
+                </div>
+                <h3 className="text-lg font-bold">Always Verify</h3>
+              </div>
+              <ul className="space-y-3">
+                {[
+                  { text: "Never trust unsolicited pictures, videos, voice notes, or links" },
+                  { text: "Always call your bank using the official number on your card" },
+                  { text: "When in doubt, contact InVision Network for expert review" },
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-3">
+                    <div className="w-5 h-5 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="text-white text-xs font-bold">!</span>
+                    </div>
+                    <span className="text-foreground text-sm">{item.text}</span>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          </div>
         </div>
       </section>
 
