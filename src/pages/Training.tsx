@@ -344,6 +344,163 @@ function LearnAndTrain() {
 
       <TrustBar />
 
+      {/* Why Families Trust InVision Network Section */}
+      <section className="py-16 bg-muted relative overflow-hidden">
+        <FlowingWaves variant="full" opacity={0.08} />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-10">
+            <Badge className="mb-4 bg-gradient-to-r from-primary to-accent text-white text-sm px-4 py-1.5">
+              <Shield className="w-4 h-4 mr-1" /> TRUSTED BY FAMILIES
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Families Trust InVision Network</h2>
+            <p className="text-lg text-foreground max-w-3xl mx-auto">
+              Clear teaching, privacy-first protocols, and real scripts your family can use in any emergency situation.
+            </p>
+          </div>
+
+          {/* Trust Pillars */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-12">
+            {[
+              {
+                icon: "📚",
+                title: "Clear, Respectful Teaching",
+                desc: "Senior-friendly pace, real-world examples, no jargon. We explain everything step-by-step."
+              },
+              {
+                icon: "🔒",
+                title: "Privacy-First Guarantee",
+                desc: "We never ask for passwords, OTPs, or banking information. Your data stays private."
+              },
+              {
+                icon: "📋",
+                title: "Actionable Playbooks",
+                desc: "Ready-to-use scripts for bank, IRS, romance, and tech-support scam scenarios."
+              },
+              {
+                icon: "🏆",
+                title: "Industry-Leading Expertise",
+                desc: "Years of experience defending seniors against the latest AI-enabled fraud techniques."
+              },
+            ].map((item, index) => (
+              <ScrollReveal key={index} animation="scale-in" delay={index * 100}>
+                <Card className="p-6 h-full bg-gradient-to-br from-card to-card/50 border-border/50 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 rounded-xl">
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+                      <span className="text-2xl">{item.icon}</span>
+                    </div>
+                    <h3 className="text-lg font-bold mb-2">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground">{item.desc}</p>
+                  </div>
+                </Card>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          {/* Emergency Protocol & Verification Script */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {/* Emergency Pause Protocol */}
+            <Card className="p-6 bg-gradient-to-br from-red-500/5 to-orange-500/5 border-red-500/20 rounded-xl">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-red-500/10 rounded-lg flex items-center justify-center">
+                  <span className="text-xl">🚨</span>
+                </div>
+                <h3 className="text-lg font-bold">Emergency? Use the 60-Second Pause Protocol</h3>
+              </div>
+              <ol className="space-y-3">
+                {[
+                  { step: "Stop immediately.", detail: "Hang up / stop replying. Take a breath." },
+                  { step: "Verify independently.", detail: "Call back using the official number on your card." },
+                  { step: "Use your safeword", detail: "with family before taking any action." },
+                  { step: "Double-check money requests", detail: "with a second family member." },
+                  { step: "Report and document", detail: "the attempt (we provide templates)." },
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-3">
+                    <span className="w-6 h-6 bg-red-500/20 text-red-600 dark:text-red-400 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">{idx + 1}</span>
+                    <div>
+                      <span className="font-semibold text-foreground">{item.step}</span>{" "}
+                      <span className="text-muted-foreground text-sm">{item.detail}</span>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </Card>
+
+            {/* Identity Verification Script */}
+            <Card className="p-6 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 border-blue-500/20 rounded-xl">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center">
+                  <span className="text-xl">🔍</span>
+                </div>
+                <h3 className="text-lg font-bold">Identity Verification Script</h3>
+              </div>
+              <ul className="space-y-3">
+                {[
+                  { action: "Demand specifics:", detail: "Full name, department, callback number, case number." },
+                  { action: "Always say:", detail: '"I\'ll call you back through the main line."' },
+                  { action: "Never share:", detail: "Codes, passwords, or download any software." },
+                  { action: "Forward suspicious items", detail: "to our help line for expert review." },
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-semibold text-foreground">{item.action}</span>{" "}
+                      <span className="text-muted-foreground text-sm">{item.detail}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          </div>
+
+          {/* Getting Started - How It Works */}
+          <div className="max-w-5xl mx-auto mt-16">
+            <div className="text-center mb-10">
+              <Badge className="mb-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm px-4 py-1.5">
+                GETTING STARTED
+              </Badge>
+              <h3 className="text-2xl md:text-3xl font-bold mb-2">How It Works</h3>
+              <p className="text-muted-foreground">Three simple steps to build calm, repeatable safety habits that protect you and your family.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                {
+                  step: "1",
+                  icon: "📅",
+                  title: "Book Your Session",
+                  desc: "Choose a convenient Zoom class time, request a Priority Group session, or schedule private in-person coaching for your organization."
+                },
+                {
+                  step: "2",
+                  icon: "🎓",
+                  title: "Learn & Practice",
+                  desc: "Master identity verification, spot deepfakes, and handle urgent 'bank' or 'family emergency' messages with confidence through hands-on practice."
+                },
+                {
+                  step: "3",
+                  icon: "🛡️",
+                  title: "Get Ongoing Support",
+                  desc: "Add our monthly help line service to forward suspicious messages for expert review before you click, pay, or reply."
+                },
+              ].map((item, index) => (
+                <ScrollReveal key={index} animation="scale-in" delay={index * 150}>
+                  <Card className="p-6 h-full bg-gradient-to-br from-card to-card/50 border-border/50 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 rounded-xl text-center relative overflow-hidden">
+                    <div className="absolute -top-2 -right-2 w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-bl-2xl flex items-center justify-center">
+                      <span className="text-white font-bold">{item.step}</span>
+                    </div>
+                    <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                      <span className="text-3xl">{item.icon}</span>
+                    </div>
+                    <h4 className="text-lg font-bold mb-2">{item.title}</h4>
+                    <p className="text-sm text-muted-foreground">{item.desc}</p>
+                  </Card>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Training Section */}
       <section id="training" className="py-16 bg-background relative overflow-hidden">
         <FlowingWaves variant="full" opacity={0.12} />
@@ -1092,57 +1249,41 @@ function LearnAndTrain() {
               { 
                 icon: Mail, 
                 title: "Phishing Emails",
-                emoji: "📧",
-                color: "from-red-500 to-rose-500",
                 description: "Received a suspicious email? Forward it to us! We check sender authenticity, analyze links, and identify fake logos. Don't click any links — just forward and we'll tell you if it's safe."
               },
               { 
                 icon: MessageSquare, 
                 title: "SMS Scams",
-                emoji: "💬",
-                color: "from-purple-500 to-pink-500",
                 description: "Any text message with suspicious links or urgent demands for money — screenshot it and send to us. We trace the sender and verify if the message is legitimate or a scam attempt."
               },
               { 
                 icon: Phone, 
                 title: "Voice Calls",
-                emoji: "📞",
-                color: "from-blue-500 to-cyan-500",
                 description: "Someone called claiming to be from the IRS, bank, or a relative in trouble? Tell us what they said. We can identify common voice scam patterns and AI-generated voices."
               },
               { 
                 icon: FileText, 
                 title: "Voice Messages",
-                emoji: "🎤",
-                color: "from-orange-500 to-amber-500",
                 description: "Voicemails can be AI-cloned to sound like loved ones. Send us the recording and we'll analyze it for signs of artificial generation and verify authenticity."
               },
               { 
                 icon: LinkIcon, 
                 title: "Suspicious Links",
-                emoji: "🔗",
-                color: "from-emerald-500 to-green-500",
                 description: "Before clicking any link, send it to us first! We safely scan the URL, check for malware, verify the destination, and tell you if it's safe or dangerous."
               },
               { 
                 icon: QrCode, 
                 title: "QR Codes",
-                emoji: "📱",
-                color: "from-indigo-500 to-violet-500",
                 description: "QR codes can hide malicious links. Send us a photo and we'll decode it safely to tell you where it really leads. Never scan unknown QR codes directly!"
               },
               { 
                 icon: FileCheck, 
                 title: "Documents",
-                emoji: "📄",
-                color: "from-teal-500 to-cyan-500",
                 description: "Suspicious PDFs, contracts, or attachments can contain malware or fake information. Upload them to us for safe analysis — we'll check for hidden threats."
               },
               { 
                 icon: ImageIcon, 
                 title: "Social Media",
-                emoji: "📲",
-                color: "from-pink-500 to-rose-500",
                 description: "Fake profiles, suspicious friend requests, or scam messages on Facebook, Instagram, or other platforms — screenshot and send to us for verification."
               },
             ].map((threat, index) => (
@@ -1151,13 +1292,13 @@ function LearnAndTrain() {
                   onClick={() => setExpandedThreat(expandedThreat === threat.title ? null : threat.title)}
                   className={`p-5 cursor-pointer transition-all duration-300 rounded-2xl border-2 group bg-gradient-to-br from-card to-card/50 backdrop-blur-sm hover:shadow-xl hover:-translate-y-1 ${
                     expandedThreat === threat.title 
-                      ? `border-primary shadow-lg bg-gradient-to-br ${threat.color.replace('from-', 'from-').replace('to-', 'to-')}/10` 
+                      ? 'border-primary shadow-lg bg-primary/5' 
                       : 'border-border/50 hover:border-primary/50'
                   }`}
                 >
                   <div className="flex flex-col items-center text-center">
-                    <div className={`w-16 h-16 bg-gradient-to-br ${threat.color} rounded-2xl flex items-center justify-center transition-all duration-300 mb-3 group-hover:scale-110 shadow-lg`}>
-                      <span className="text-2xl">{threat.emoji}</span>
+                    <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center transition-all duration-300 mb-3 group-hover:scale-110 group-hover:bg-primary/20">
+                      <threat.icon className="w-8 h-8 text-primary" />
                     </div>
                     <h3 className="text-sm font-bold group-hover:text-primary transition-colors duration-300 mb-1">
                       {threat.title}
@@ -1182,13 +1323,11 @@ function LearnAndTrain() {
             ))}
           </div>
           
-          {/* Bottom Note */}
+          {/* Bottom Note - Simplified */}
           <div className="max-w-2xl mx-auto mt-10 text-center">
-            <Card className="p-6 bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20">
-              <p className="text-base text-foreground">
-                <strong>See something not listed?</strong> We analyze <em>everything</em>. If it feels suspicious, send it to us. Better safe than sorry!
-              </p>
-            </Card>
+            <p className="text-base text-muted-foreground">
+              <strong className="text-foreground">See something not listed?</strong> We analyze <em>everything</em>. If it feels suspicious, send it to us. Better safe than sorry!
+            </p>
           </div>
         </div>
       </section>
@@ -1296,20 +1435,9 @@ function LearnAndTrain() {
                 ))}
               </div>
 
-              <p className="text-sm text-muted-foreground mb-6">
+              <p className="text-sm text-muted-foreground">
                 🔒 Bank-grade encryption • Multi-factor authentication • Secure family sharing
               </p>
-
-              <Button 
-                asChild 
-                className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white group" 
-                size="lg"
-              >
-                <Link to="/vault" className="flex items-center gap-2">
-                  <span className="text-xl group-hover:animate-[lock-shake_0.5s_ease-in-out]">🔒</span>
-                  EXPLORE SAFETY VAULT
-                </Link>
-              </Button>
             </div>
           </Card>
         </div>
