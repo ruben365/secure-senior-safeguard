@@ -118,63 +118,49 @@ export const AIChat = () => {
   }, [toast]);
 
   const speakText = async (text: string) => {
-    if (!autoSpeak || isGeneratingAudio) return;
+    if (!autoSpeak || isSpeaking) return;
     
     try {
-      setIsGeneratingAudio(true);
+      setIsSpeaking(true);
       
-      const response = await fetch(TTS_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "apikey": import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
-          "Authorization": `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
-        },
-        body: JSON.stringify({ text, voice: "Laura" }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to generate speech");
-      }
-
-      const data = await response.json();
-      
-      if (data.audioContent) {
-        // Stop any currently playing audio
-        if (audioRef.current) {
-          audioRef.current.pause();
+      // Use browser's built-in speech synthesis
+      if ('speechSynthesis' in window) {
+        // Cancel any ongoing speech
+        window.speechSynthesis.cancel();
+        
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 0.9; // Slightly slower for elderly users
+        utterance.pitch = 1.0;
+        utterance.volume = 1.0;
+        
+        // Try to find a female voice
+        const voices = window.speechSynthesis.getVoices();
+        const femaleVoice = voices.find(v => 
+          v.name.toLowerCase().includes('female') || 
+          v.name.toLowerCase().includes('samantha') ||
+          v.name.toLowerCase().includes('victoria') ||
+          v.name.toLowerCase().includes('karen')
+        );
+        if (femaleVoice) {
+          utterance.voice = femaleVoice;
         }
         
-        // Use data URI for playback
-        const audioUrl = `data:audio/mpeg;base64,${data.audioContent}`;
-        const audio = new Audio(audioUrl);
-        audioRef.current = audio;
+        utterance.onend = () => setIsSpeaking(false);
+        utterance.onerror = () => setIsSpeaking(false);
         
-        audio.onplay = () => setIsSpeaking(true);
-        audio.onended = () => {
-          setIsSpeaking(false);
-          setIsGeneratingAudio(false);
-        };
-        audio.onerror = () => {
-          setIsSpeaking(false);
-          setIsGeneratingAudio(false);
-        };
-        
-        await audio.play();
+        window.speechSynthesis.speak(utterance);
       }
     } catch (error) {
       console.error("TTS error:", error);
-      setIsGeneratingAudio(false);
+      setIsSpeaking(false);
     }
   };
 
   const stopSpeaking = () => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current = null;
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
     }
     setIsSpeaking(false);
-    setIsGeneratingAudio(false);
   };
 
   const streamChat = async (userMessage: string) => {
