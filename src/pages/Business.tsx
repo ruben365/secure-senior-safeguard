@@ -296,231 +296,6 @@ function Business() {
         </div>
       </section>
 
-      {/* Package Pricing */}
-      <section id="automation-pricing" className="py-20 bg-muted relative overflow-hidden">
-        <FlowingWaves variant="full" opacity={0.08} />
-        <div className="container mx-auto px-4 relative z-10">
-          {/* Section Header with Trust */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-success/10 text-success border border-success/20 rounded-full text-sm font-medium mb-4">
-              <Shield className="w-4 h-4" />
-              Trusted by 100+ Ohio Businesses
-            </div>
-            <h2 className="mb-4">AI Agents & Automation Pricing</h2>
-            <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground mb-6">
-              <span className="inline-flex items-center gap-1.5">
-                <CheckCircle className="w-4 h-4 text-success" />
-                30-Day Guarantee
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <Lock className="w-4 h-4 text-success" />
-                Secure Setup
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <Phone className="w-4 h-4 text-primary" />
-                24/7 Support
-              </span>
-            </div>
-            <div className="max-w-4xl mx-auto bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-primary/20 rounded-2xl p-6">
-              <p className="text-base text-foreground leading-relaxed">
-                <strong className="text-primary">Stop losing customers to missed calls and slow follow-ups.</strong> Our AI agents work around the clock — answering calls, booking appointments, and following up with leads while you sleep. In today's competitive market, <strong>businesses that respond faster win more customers</strong>. With InVision AI, you never miss an opportunity. <span className="text-accent font-semibold">Your competitors are already using AI — can you afford to fall behind?</span>
-              </p>
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-stretch">
-            <ScrollReveal animation="slide-left" delay={0}>
-              <div className="relative">
-                <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-2 rounded-full text-xs font-bold tracking-wider shadow-lg z-20">
-                  🎯 START HERE
-                </div>
-                <Card className="p-6 md:p-8 active:scale-98 hover:shadow-strong transition-all hover:-translate-y-2 h-full flex flex-col">
-                  <div className="flex items-center justify-center gap-1.5 mb-4 text-xs text-success">
-                    <CheckCircle className="w-3.5 h-3.5" />
-                    <span className="font-medium">Quick 2-Week Setup</span>
-                  </div>
-                  <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">AI Receptionist & Intake Agent</h3>
-                  <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6">Answer calls/chats 24/7, book appointments, route leads to the right person</p>
-                  <p ref={price1Counter.ref} className="text-3xl md:text-4xl font-bold text-accent mb-4 md:mb-6">
-                    {price1Counter.displayValue}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-medium rounded-full">
-                      ⚡ 24/7 Active
-                    </span>
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-success/10 text-success text-[10px] font-medium rounded-full">
-                      ✓ Includes Training
-                    </span>
-                  </div>
-                  <ul className="space-y-2 mb-6 text-sm flex-1">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
-                      <span>24/7 call & chat handling</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
-                      <span>Appointment booking</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
-                      <span>Lead qualification</span>
-                    </li>
-                  </ul>
-                  <Button 
-                    variant="default" 
-                    className="w-full mt-auto transition-all duration-300 md:hover:bg-primary/90 md:hover:shadow-[0_12px_28px_rgba(109,40,217,0.25)] md:hover:scale-[1.02] active:scale-95 h-11 md:h-10"
-                    onClick={() => {
-                      trackButtonClick('Get Started - AI Receptionist', 'Business Pricing');
-                      setSelectedInquiry({
-                        name: 'AI Receptionist & Intake Agent',
-                        price: 9500,
-                        tier: 'START HERE',
-                        description: 'Answer calls/chats 24/7, book appointments, route to the right person, and never miss a lead.'
-                      });
-                      setInquiryDialogOpen(true);
-                    }}
-                  >
-                    GET STARTED →
-                  </Button>
-                </Card>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal animation="scale-in" delay={200}>
-              <div className="relative h-full">
-                <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-primary-foreground px-6 py-2 rounded-full text-xs font-bold tracking-wider shadow-lg z-20 animate-pulse" style={{ animationDuration: '3s' }}>
-                  ⭐ MOST POPULAR
-                </div>
-                <Card className="p-6 md:p-8 active:scale-98 border-2 border-primary shadow-[0_8px_30px_rgba(139,92,246,0.15)] hover:shadow-[0_12px_40px_rgba(139,92,246,0.2)] transition-all hover:-translate-y-2 h-full flex flex-col">
-                  <div className="flex items-center justify-center gap-1.5 mb-4 text-xs text-success">
-                    <CheckCircle className="w-3.5 h-3.5" />
-                    <span className="font-medium">Most ROI</span>
-                  </div>
-                  <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 mt-2">Follow-Up Automation System</h3>
-                  <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6">Automated email/SMS campaigns, lead nurturing to convert more prospects</p>
-                  <p ref={price2Counter.ref} className="text-3xl md:text-4xl font-bold text-accent mb-4 md:mb-6">
-                    {price2Counter.displayValue}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-medium rounded-full">
-                      🚀 10x Leads
-                    </span>
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-success/10 text-success text-[10px] font-medium rounded-full">
-                      ✓ Multi-Channel
-                    </span>
-                  </div>
-                  <ul className="space-y-2 mb-6 text-sm flex-1">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
-                      <span>Email & SMS campaigns</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
-                      <span>Lead nurturing flows</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
-                      <span>Analytics dashboard</span>
-                    </li>
-                  </ul>
-                  <Button 
-                    variant="default" 
-                    className="w-full mt-auto transition-all duration-300 md:hover:bg-primary/90 md:hover:shadow-[0_12px_28px_rgba(109,40,217,0.25)] md:hover:scale-[1.02] active:scale-95 h-11 md:h-10"
-                    onClick={() => {
-                      trackButtonClick('Get Started - Full Automation', 'Business Pricing');
-                      setSelectedInquiry({
-                        name: 'Follow-Up Automation System',
-                        price: 12500,
-                        tier: 'MOST POPULAR',
-                        description: 'Automated email/SMS campaigns, lead nurturing, and multi-channel follow-ups to 10x your leads.'
-                      });
-                      setInquiryDialogOpen(true);
-                    }}
-                  >
-                    GET STARTED →
-                  </Button>
-                </Card>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal animation="slide-right" delay={400}>
-              <div className="relative h-full">
-                <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-2 rounded-full text-xs font-bold tracking-wider shadow-lg z-20">
-                  👑 ENTERPRISE
-                </div>
-                <Card className="p-6 md:p-8 border-2 border-accent active:scale-98 hover:shadow-strong transition-all hover:-translate-y-2 h-full flex flex-col">
-                  <div className="flex items-center justify-center gap-1.5 mb-4 text-xs text-success">
-                    <CheckCircle className="w-3.5 h-3.5" />
-                    <span className="font-medium">Full Customization</span>
-                  </div>
-                  <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">Custom Automation Suite</h3>
-                  <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6">Multi-system operations with enterprise-grade integrations</p>
-                  <p ref={price3Counter.ref} className="text-3xl md:text-4xl font-bold text-accent mb-4 md:mb-6">
-                    {price3Counter.displayValue}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-accent/10 text-accent text-[10px] font-medium rounded-full">
-                      🔧 Custom Built
-                    </span>
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-success/10 text-success text-[10px] font-medium rounded-full">
-                      ✓ Priority Support
-                    </span>
-                  </div>
-                  <ul className="space-y-2 mb-6 text-sm flex-1">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
-                      <span>Multi-system integration</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
-                      <span>Custom workflows</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
-                      <span>Dedicated support team</span>
-                    </li>
-                  </ul>
-                  <Button 
-                    variant="default" 
-                    className="w-full mt-auto transition-all duration-300 md:hover:bg-primary/90 md:hover:shadow-[0_12px_28px_rgba(109,40,217,0.25)] md:hover:scale-[1.02] active:scale-95 h-11 md:h-10"
-                    onClick={() => {
-                      trackButtonClick('Get Started - Custom Solution', 'Business Pricing');
-                      setSelectedInquiry({
-                        name: 'Custom Automation Suite',
-                        price: 25000,
-                        tier: 'ENTERPRISE',
-                        description: 'Full custom-built AI automation for multi-system operations with priority support and complete customization.'
-                      });
-                      setInquiryDialogOpen(true);
-                    }}
-                  >
-                    GET STARTED →
-                  </Button>
-                </Card>
-              </div>
-            </ScrollReveal>
-          </div>
-          
-          {/* Trust Section Below Pricing */}
-          <div className="mt-12 text-center">
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-primary/5 border border-primary/20 rounded-full text-xs">
-                <Lock className="w-3.5 h-3.5 text-primary" />
-                <span className="text-primary font-medium">Secure Payment</span>
-              </div>
-              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-success/5 border border-success/20 rounded-full text-xs">
-                <Shield className="w-3.5 h-3.5 text-success" />
-                <span className="text-success font-medium">30-Day Guarantee</span>
-              </div>
-              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-accent/5 border border-accent/20 rounded-full text-xs">
-                <CheckCircle className="w-3.5 h-3.5 text-accent" />
-                <span className="text-accent font-medium">Free Consultation</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Web Design Services */}
       <section id="website-design" className="py-20 bg-background">
         <div className="container mx-auto px-4">
@@ -1040,6 +815,231 @@ function Business() {
             <div className="flex items-center gap-2 px-4 py-2 bg-background/80 rounded-full border">
               <CheckCircle className="w-4 h-4 text-success" />
               <span className="text-sm font-medium">Cancel Anytime</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Package Pricing - AI Agents & Automation */}
+      <section id="automation-pricing" className="py-20 bg-background relative overflow-hidden">
+        <FlowingWaves variant="full" opacity={0.08} />
+        <div className="container mx-auto px-4 relative z-10">
+          {/* Section Header with Trust */}
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-success/10 text-success border border-success/20 rounded-full text-sm font-medium mb-4">
+              <Shield className="w-4 h-4" />
+              Trusted by 100+ Ohio Businesses
+            </div>
+            <h2 className="mb-4">AI Agents & Automation Pricing</h2>
+            <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground mb-6">
+              <span className="inline-flex items-center gap-1.5">
+                <CheckCircle className="w-4 h-4 text-success" />
+                30-Day Guarantee
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <Lock className="w-4 h-4 text-success" />
+                Secure Setup
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <Phone className="w-4 h-4 text-primary" />
+                24/7 Support
+              </span>
+            </div>
+            <div className="max-w-4xl mx-auto bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-primary/20 rounded-2xl p-6">
+              <p className="text-base text-foreground leading-relaxed">
+                <strong className="text-primary">Stop losing customers to missed calls and slow follow-ups.</strong> Our AI agents work around the clock — answering calls, booking appointments, and following up with leads while you sleep. In today's competitive market, <strong>businesses that respond faster win more customers</strong>. With InVision AI, you never miss an opportunity. <span className="text-accent font-semibold">Your competitors are already using AI — can you afford to fall behind?</span>
+              </p>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-stretch">
+            <ScrollReveal animation="slide-left" delay={0}>
+              <div className="relative">
+                <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-2 rounded-full text-xs font-bold tracking-wider shadow-lg z-20">
+                  🎯 START HERE
+                </div>
+                <Card className="p-6 md:p-8 active:scale-98 hover:shadow-strong transition-all hover:-translate-y-2 h-full flex flex-col">
+                  <div className="flex items-center justify-center gap-1.5 mb-4 text-xs text-success">
+                    <CheckCircle className="w-3.5 h-3.5" />
+                    <span className="font-medium">Quick 2-Week Setup</span>
+                  </div>
+                  <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">AI Receptionist & Intake Agent</h3>
+                  <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6">Answer calls/chats 24/7, book appointments, route leads to the right person</p>
+                  <p ref={price1Counter.ref} className="text-3xl md:text-4xl font-bold text-accent mb-4 md:mb-6">
+                    {price1Counter.displayValue}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-medium rounded-full">
+                      ⚡ 24/7 Active
+                    </span>
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-success/10 text-success text-[10px] font-medium rounded-full">
+                      ✓ Includes Training
+                    </span>
+                  </div>
+                  <ul className="space-y-2 mb-6 text-sm flex-1">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
+                      <span>24/7 call & chat handling</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
+                      <span>Appointment booking</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
+                      <span>Lead qualification</span>
+                    </li>
+                  </ul>
+                  <Button 
+                    variant="default" 
+                    className="w-full mt-auto transition-all duration-300 md:hover:bg-primary/90 md:hover:shadow-[0_12px_28px_rgba(109,40,217,0.25)] md:hover:scale-[1.02] active:scale-95 h-11 md:h-10"
+                    onClick={() => {
+                      trackButtonClick('Get Started - AI Receptionist', 'Business Pricing');
+                      setSelectedInquiry({
+                        name: 'AI Receptionist & Intake Agent',
+                        price: 9500,
+                        tier: 'START HERE',
+                        description: 'Answer calls/chats 24/7, book appointments, route to the right person, and never miss a lead.'
+                      });
+                      setInquiryDialogOpen(true);
+                    }}
+                  >
+                    GET STARTED →
+                  </Button>
+                </Card>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal animation="scale-in" delay={200}>
+              <div className="relative h-full">
+                <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-accent text-primary-foreground px-6 py-2 rounded-full text-xs font-bold tracking-wider shadow-lg z-20 animate-pulse" style={{ animationDuration: '3s' }}>
+                  ⭐ MOST POPULAR
+                </div>
+                <Card className="p-6 md:p-8 active:scale-98 border-2 border-primary shadow-[0_8px_30px_rgba(139,92,246,0.15)] hover:shadow-[0_12px_40px_rgba(139,92,246,0.2)] transition-all hover:-translate-y-2 h-full flex flex-col">
+                  <div className="flex items-center justify-center gap-1.5 mb-4 text-xs text-success">
+                    <CheckCircle className="w-3.5 h-3.5" />
+                    <span className="font-medium">Most ROI</span>
+                  </div>
+                  <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 mt-2">Follow-Up Automation System</h3>
+                  <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6">Automated email/SMS campaigns, lead nurturing to convert more prospects</p>
+                  <p ref={price2Counter.ref} className="text-3xl md:text-4xl font-bold text-accent mb-4 md:mb-6">
+                    {price2Counter.displayValue}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-medium rounded-full">
+                      🚀 10x Leads
+                    </span>
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-success/10 text-success text-[10px] font-medium rounded-full">
+                      ✓ Multi-Channel
+                    </span>
+                  </div>
+                  <ul className="space-y-2 mb-6 text-sm flex-1">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
+                      <span>Email & SMS campaigns</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
+                      <span>Lead nurturing flows</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
+                      <span>Analytics dashboard</span>
+                    </li>
+                  </ul>
+                  <Button 
+                    variant="default" 
+                    className="w-full mt-auto transition-all duration-300 md:hover:bg-primary/90 md:hover:shadow-[0_12px_28px_rgba(109,40,217,0.25)] md:hover:scale-[1.02] active:scale-95 h-11 md:h-10"
+                    onClick={() => {
+                      trackButtonClick('Get Started - Full Automation', 'Business Pricing');
+                      setSelectedInquiry({
+                        name: 'Follow-Up Automation System',
+                        price: 12500,
+                        tier: 'MOST POPULAR',
+                        description: 'Automated email/SMS campaigns, lead nurturing, and multi-channel follow-ups to 10x your leads.'
+                      });
+                      setInquiryDialogOpen(true);
+                    }}
+                  >
+                    GET STARTED →
+                  </Button>
+                </Card>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal animation="slide-right" delay={400}>
+              <div className="relative h-full">
+                <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-2 rounded-full text-xs font-bold tracking-wider shadow-lg z-20">
+                  👑 ENTERPRISE
+                </div>
+                <Card className="p-6 md:p-8 border-2 border-accent active:scale-98 hover:shadow-strong transition-all hover:-translate-y-2 h-full flex flex-col">
+                  <div className="flex items-center justify-center gap-1.5 mb-4 text-xs text-success">
+                    <CheckCircle className="w-3.5 h-3.5" />
+                    <span className="font-medium">Full Customization</span>
+                  </div>
+                  <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">Custom Automation Suite</h3>
+                  <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6">Multi-system operations with enterprise-grade integrations</p>
+                  <p ref={price3Counter.ref} className="text-3xl md:text-4xl font-bold text-accent mb-4 md:mb-6">
+                    {price3Counter.displayValue}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-accent/10 text-accent text-[10px] font-medium rounded-full">
+                      🔧 Custom Built
+                    </span>
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-success/10 text-success text-[10px] font-medium rounded-full">
+                      ✓ Priority Support
+                    </span>
+                  </div>
+                  <ul className="space-y-2 mb-6 text-sm flex-1">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
+                      <span>Multi-system integration</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
+                      <span>Custom workflows</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
+                      <span>Dedicated support team</span>
+                    </li>
+                  </ul>
+                  <Button 
+                    variant="default" 
+                    className="w-full mt-auto transition-all duration-300 md:hover:bg-primary/90 md:hover:shadow-[0_12px_28px_rgba(109,40,217,0.25)] md:hover:scale-[1.02] active:scale-95 h-11 md:h-10"
+                    onClick={() => {
+                      trackButtonClick('Get Started - Custom Solution', 'Business Pricing');
+                      setSelectedInquiry({
+                        name: 'Custom Automation Suite',
+                        price: 25000,
+                        tier: 'ENTERPRISE',
+                        description: 'Full custom-built AI automation for multi-system operations with priority support and complete customization.'
+                      });
+                      setInquiryDialogOpen(true);
+                    }}
+                  >
+                    GET STARTED →
+                  </Button>
+                </Card>
+              </div>
+            </ScrollReveal>
+          </div>
+          
+          {/* Trust Section Below Pricing */}
+          <div className="mt-12 text-center">
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-primary/5 border border-primary/20 rounded-full text-xs">
+                <Lock className="w-3.5 h-3.5 text-primary" />
+                <span className="text-primary font-medium">Secure Payment</span>
+              </div>
+              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-success/5 border border-success/20 rounded-full text-xs">
+                <Shield className="w-3.5 h-3.5 text-success" />
+                <span className="text-success font-medium">30-Day Guarantee</span>
+              </div>
+              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-accent/5 border border-accent/20 rounded-full text-xs">
+                <CheckCircle className="w-3.5 h-3.5 text-accent" />
+                <span className="text-accent font-medium">Free Consultation</span>
+              </div>
             </div>
           </div>
         </div>
