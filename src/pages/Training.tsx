@@ -40,10 +40,10 @@ import {
   Star,
 } from "lucide-react";
 import trainingSession from "@/assets/training-session.jpg";
-import trainingDiverse1 from "@/assets/training-diverse-1.jpg";
+import heroTrainingSeniorsNew from "@/assets/hero-training-seniors-new.jpg";
 import heroTrainingNew from "@/assets/hero-training-new.jpg";
 import trainingDiverse2 from "@/assets/training-diverse-2.jpg";
-import heroTraining3d from "@/assets/hero-training-3d.jpg";
+import heroTrainingWorkshop from "@/assets/hero-training-workshop.jpg";
 import TestimonialCard from "@/components/TestimonialCard";
 import { VideoLightbox } from "@/components/VideoLightbox";
 import { SEO } from "@/components/SEO";
@@ -300,11 +300,10 @@ function LearnAndTrain() {
   };
 
   const trainingHeroImages = [
-    { src: trainingDiverse1, alt: "Diverse participants in cybersecurity training" },
+    { src: heroTrainingSeniorsNew, alt: "Professional cybersecurity training for seniors" },
     { src: heroTrainingNew, alt: "Modern training facilities and programs" },
     { src: trainingDiverse2, alt: "Interactive learning environment" },
-    { src: trainingSession, alt: "Active training session in progress" },
-    { src: heroTraining3d, alt: "Virtual reality training experiences" }
+    { src: heroTrainingWorkshop, alt: "Hands-on digital security workshop" }
   ];
 
   return (

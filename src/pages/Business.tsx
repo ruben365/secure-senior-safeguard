@@ -21,8 +21,8 @@ import { useCounterAnimation } from "@/hooks/useCounterAnimation";
 import { trackButtonClick, trackConversion } from "@/utils/analyticsTracker";
 import { Phone, Mail, MessageSquare, Calendar, CheckCircle, Search, Shield, Lock, Sparkles, FileText } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import heroBusinessEliteMeeting from "@/assets/hero-business-elite-meeting.jpg";
-import heroBusinessDiverse2 from "@/assets/hero-business-diverse-2.jpg";
+import heroBusinessSuccess1 from "@/assets/hero-business-success-1.jpg";
+import heroBusinessSuccess2 from "@/assets/hero-business-success-2.jpg";
 import heroBusinessDiverse3 from "@/assets/hero-business-diverse-3.jpg";
 import heroBusinessDiverse5 from "@/assets/hero-business-diverse-5.jpg";
 import natureParkSerene from "@/assets/nature-park-serene.jpg";
@@ -142,8 +142,8 @@ function Business() {
   };
 
   const businessHeroImages = [
-    { src: heroBusinessEliteMeeting, alt: "Diverse executives smiling in luxury corporate boardroom meeting" },
-    { src: heroBusinessDiverse2, alt: "Business professionals shaking hands on trading floor" },
+    { src: heroBusinessSuccess1, alt: "Diverse executives smiling in luxury corporate boardroom meeting" },
+    { src: heroBusinessSuccess2, alt: "Happy business professionals celebrating success" },
     { src: heroBusinessDiverse3, alt: "Muslim businesswoman leading happy diverse team in boardroom" },
     { src: heroBusinessDiverse5, alt: "Multicultural executive team in modern glass corporate headquarters" }
   ];
