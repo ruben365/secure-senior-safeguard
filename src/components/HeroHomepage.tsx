@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Shield, ArrowRight, Lock, Eye, Fingerprint, ShieldCheck, Zap, Globe, Play } from "lucide-react";
-import heroSecurityCamera from "@/assets/hero-security-camera.jpg";
-import heroHome1 from "@/assets/hero-home-1.jpg";
+import heroHomeFamilySafe from "@/assets/hero-home-family-safe.jpg";
+import heroHomeSecurityConsult from "@/assets/hero-home-security-consult.jpg";
 import heroAbout1 from "@/assets/hero-about-1.jpg";
 import heroBusiness1 from "@/assets/hero-business-1.jpg";
 const heroImages = [{
-  src: heroSecurityCamera,
-  alt: "Security monitoring"
+  src: heroHomeFamilySafe,
+  alt: "Happy family protected together"
 }, {
-  src: heroHome1,
-  alt: "Family protection"
+  src: heroHomeSecurityConsult,
+  alt: "Security consultation meeting"
 }, {
   src: heroAbout1,
   alt: "Professional security"

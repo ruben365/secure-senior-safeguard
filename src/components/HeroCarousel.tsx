@@ -143,47 +143,9 @@ export const HeroCarousel = ({
         </motion.div>
       </AnimatePresence>
 
-      {/* Pause/Play Button */}
-      <motion.button
-        onClick={() => setIsPaused(!isPaused)}
-        className="absolute top-3 right-3 z-20 bg-white/10 hover:bg-white/25 backdrop-blur-md rounded-full p-2.5 transition-all duration-300 border border-white/20 shadow-lg"
-        aria-label={isPaused ? "Play slideshow" : "Pause slideshow"}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        {isPaused ? <Play className="w-4 h-4 text-white" /> : <Pause className="w-4 h-4 text-white" />}
-      </motion.button>
-
       {/* Screen Reader Announcement */}
       <div className="sr-only" aria-live="polite" aria-atomic="true">
         Showing image {currentIndex + 1} of {images.length}: {images[currentIndex]?.alt}
-      </div>
-
-      {/* Progress Indicators */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-        {images.map((_, index) => (
-          <motion.button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`relative h-2 rounded-full transition-all duration-400 overflow-hidden ${
-              index === currentIndex 
-                ? "w-8 bg-white shadow-lg" 
-                : "w-2 bg-white/40 hover:bg-white/60"
-            }`}
-            aria-label={`Go to image ${index + 1}`}
-            whileHover={{ scale: 1.15 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            {index === currentIndex && !isPaused && (
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-accent to-primary rounded-full"
-                initial={{ scaleX: 0, originX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: interval / 1000, ease: "linear" }}
-              />
-            )}
-          </motion.button>
-        ))}
       </div>
     </div>
   );
