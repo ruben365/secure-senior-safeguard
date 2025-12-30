@@ -4,12 +4,16 @@ import heroServices1 from "@/assets/hero-services-1.jpg";
 import heroServices2 from "@/assets/hero-services-2.jpg";
 import heroServices3 from "@/assets/hero-services-3.jpg";
 import heroServices4 from "@/assets/hero-services-4.jpg";
+import communityTraining from "@/assets/community-training.jpg";
+import securityExpert from "@/assets/security-expert.jpg";
 
 const portfolioImages = [
   { src: heroServices1, alt: "Security Assessment", category: "Assessment" },
   { src: heroServices2, alt: "Family Training", category: "Training" },
   { src: heroServices3, alt: "Device Protection", category: "Protection" },
   { src: heroServices4, alt: "Monitoring Services", category: "Monitoring" },
+  { src: communityTraining, alt: "Community Workshops", category: "Workshops" },
+  { src: securityExpert, alt: "Expert Consultation", category: "Consultation" },
 ];
 
 export const SecuritySolutions = () => {
@@ -40,7 +44,7 @@ export const SecuritySolutions = () => {
         </motion.div>
 
         {/* Portfolio Grid with Circular Images */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {portfolioImages.map((image, index) => (
             <motion.div
               key={index}
