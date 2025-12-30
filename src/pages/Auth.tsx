@@ -15,12 +15,13 @@ import {
   Mail, 
   Eye, 
   EyeOff,
+  ArrowRight,
   CheckCircle2,
-  Sparkles,
-  ArrowRight
+  Sparkles
 } from "lucide-react";
 import { z } from "zod";
 import invisionLogo from "@/assets/shield-logo.png";
+import authBackgroundVideo from "@/assets/auth-background-video.mp4";
 import { Session, User } from "@supabase/supabase-js";
 
 const emailSchema = z.string().email("Please enter a valid email address");
@@ -36,6 +37,7 @@ function Auth() {
   const [user, setUser] = useState<User | null>(null);
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [videoLoaded, setVideoLoaded] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -216,35 +218,50 @@ function Auth() {
 
   return (
     <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-4">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/5 to-accent/10" />
-      
-      {/* Floating Orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-20 -right-20 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+      {/* Video Background */}
+      <div className="absolute inset-0 z-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          onLoadedData={() => setVideoLoaded(true)}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
+        >
+          <source src={authBackgroundVideo} type="video/mp4" />
+        </video>
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
       </div>
 
-      {/* Grid Pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.03)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)]" />
+      {/* Fallback gradient while video loads */}
+      {!videoLoaded && (
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/10 to-accent/10 z-0" />
+      )}
+
+      {/* Floating Orbs - decorative */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-[1]">
+        <div className="absolute -top-20 -right-20 w-72 h-72 bg-primary/15 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-accent/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+      </div>
 
       {/* Main Content */}
-      <div className="relative z-10 w-full max-w-md mx-auto">
+      <div className="relative z-10 w-full max-w-md mx-auto animate-fade-in">
         {/* Logo */}
         <Link to="/" className="flex items-center justify-center gap-3 mb-8 group">
           <img 
             src={invisionLogo} 
             alt="InVision Network" 
-            className="w-12 h-12 group-hover:scale-110 transition-transform duration-300"
+            className="w-12 h-12 group-hover:scale-110 transition-transform duration-300 drop-shadow-lg"
           />
           <div className="flex flex-col leading-tight">
-            <span className="text-xl font-bold text-foreground">InVision Network</span>
+            <span className="text-xl font-bold text-foreground drop-shadow-sm">InVision Network</span>
             <span className="text-xs text-muted-foreground">Secure Portal Access</span>
           </div>
         </Link>
 
         {/* Login Card */}
-        <Card className="p-8 shadow-2xl border bg-card/90 backdrop-blur-xl">
+        <Card className="p-8 shadow-2xl border bg-card/95 backdrop-blur-xl animate-scale-in">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Header */}
             <div className="text-center space-y-2">
@@ -339,7 +356,7 @@ function Auth() {
             {/* Submit Button */}
             <Button 
               type="submit" 
-              className="w-full h-12 text-base font-semibold" 
+              className="w-full h-12 text-base font-semibold hover:scale-[1.02] transition-transform" 
               disabled={isLoading}
             >
               {isLoading ? (
@@ -369,6 +386,24 @@ function Auth() {
             </div>
           </form>
         </Card>
+
+        {/* Quick Stats */}
+        <div className="mt-6 grid grid-cols-3 gap-3">
+          {[
+            { icon: Shield, value: "500+", label: "Protected" },
+            { icon: CheckCircle2, value: "24/7", label: "Support" },
+            { icon: Sparkles, value: "100%", label: "Secure" },
+          ].map((stat, i) => (
+            <div 
+              key={i} 
+              className="flex flex-col items-center p-3 bg-card/60 backdrop-blur-sm rounded-xl border border-border/50 hover:border-primary/50 transition-colors"
+            >
+              <stat.icon className="w-4 h-4 text-primary mb-1" />
+              <span className="text-sm font-bold text-foreground">{stat.value}</span>
+              <span className="text-xs text-muted-foreground">{stat.label}</span>
+            </div>
+          ))}
+        </div>
 
         {/* Footer */}
         <div className="mt-6 text-center space-y-3">
