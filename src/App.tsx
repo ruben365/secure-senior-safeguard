@@ -447,6 +447,38 @@ const TermsOfService = lazy(() => {
   });
 });
 
+const RefundPolicy = lazy(() => {
+  performanceMonitor.startTracking('RefundPolicy');
+  return import("./pages/RefundPolicy").then(module => {
+    performanceMonitor.endTracking('RefundPolicy');
+    return module;
+  });
+});
+
+const CookiePolicy = lazy(() => {
+  performanceMonitor.startTracking('CookiePolicy');
+  return import("./pages/CookiePolicy").then(module => {
+    performanceMonitor.endTracking('CookiePolicy');
+    return module;
+  });
+});
+
+const AcceptableUse = lazy(() => {
+  performanceMonitor.startTracking('AcceptableUse');
+  return import("./pages/AcceptableUse").then(module => {
+    performanceMonitor.endTracking('AcceptableUse');
+    return module;
+  });
+});
+
+const Disclaimer = lazy(() => {
+  performanceMonitor.startTracking('Disclaimer');
+  return import("./pages/Disclaimer").then(module => {
+    performanceMonitor.endTracking('Disclaimer');
+    return module;
+  });
+});
+
 const FAQ = lazy(() => {
   performanceMonitor.startTracking('FAQ');
   return import("./pages/FAQ").then(module => {
@@ -579,6 +611,10 @@ function AnimatedRoutes() {
         <Route path="/portal/healthcare" element={<PageTransition><ProtectedRoute><HealthcareDashboard /></ProtectedRoute></PageTransition>} />
         <Route path="/privacy-policy" element={<PageTransition variant="fade"><PrivacyPolicy /></PageTransition>} />
         <Route path="/terms-of-service" element={<PageTransition variant="fade"><TermsOfService /></PageTransition>} />
+        <Route path="/refund-policy" element={<PageTransition variant="fade"><RefundPolicy /></PageTransition>} />
+        <Route path="/cookie-policy" element={<PageTransition variant="fade"><CookiePolicy /></PageTransition>} />
+        <Route path="/acceptable-use" element={<PageTransition variant="fade"><AcceptableUse /></PageTransition>} />
+        <Route path="/disclaimer" element={<PageTransition variant="fade"><Disclaimer /></PageTransition>} />
         <Route path="/faq" element={<PageTransition variant="auto"><FAQ /></PageTransition>} />
         <Route path="*" element={<PageTransition variant="fade"><NotFound /></PageTransition>} />
       </Routes>

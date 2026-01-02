@@ -132,7 +132,10 @@ const Footer = () => {
               <ul className="space-y-2">
                 <li><Link to="/privacy-policy" className="text-sm text-white/50 hover:text-white transition-colors">Privacy Policy</Link></li>
                 <li><Link to="/terms-of-service" className="text-sm text-white/50 hover:text-white transition-colors">Terms of Service</Link></li>
-                <li><Link to="/contact" className="text-sm text-white/50 hover:text-white transition-colors">Refund Policy</Link></li>
+                <li><Link to="/refund-policy" className="text-sm text-white/50 hover:text-white transition-colors">Refund Policy</Link></li>
+                <li><Link to="/cookie-policy" className="text-sm text-white/50 hover:text-white transition-colors">Cookie Policy</Link></li>
+                <li><Link to="/acceptable-use" className="text-sm text-white/50 hover:text-white transition-colors">Acceptable Use</Link></li>
+                <li><Link to="/disclaimer" className="text-sm text-white/50 hover:text-white transition-colors">Disclaimer</Link></li>
               </ul>
             </div>
           </div>
