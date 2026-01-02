@@ -44,15 +44,15 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     --foreground: 260 45% 15%;
     
     /* Royal Purple - Primary brand color (Professional, trustworthy) */
-    --primary: 260 55% 40%;
+    --primary: 265 55% 45%;
     --primary-foreground: 0 0% 100%;
     
-    /* Deep Violet - Accent color (Complementary, elegant) */
-    --accent: 270 50% 50%;
+    /* Teal Accent - Fresh, vibrant complement to purple */
+    --accent: 170 60% 40%;
     --accent-foreground: 0 0% 100%;
     
     /* Success Green - Safety, verification */
-    --success: 145 65% 35%;
+    --success: 160 65% 38%;
     --success-foreground: 0 0% 100%;
     
     /* Alert Red - Danger, urgency */
@@ -68,7 +68,7 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     
     /* Light purple secondary */
     --secondary: 260 20% 95%;
-    --secondary-foreground: 260 55% 40%;
+    --secondary-foreground: 265 55% 45%;
     
     /* Muted tones - high contrast for readability */
     --muted: 260 15% 92%;
@@ -76,7 +76,7 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     
     --border: 260 20% 85%;
     --input: 260 20% 88%;
-    --ring: 260 55% 40%;
+    --ring: 265 55% 45%;
     
     --radius: 0.5rem;
     
