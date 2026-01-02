@@ -418,7 +418,7 @@ function Auth() {
           </div>
           
           <p className="text-xs text-muted-foreground">
-            © 2025 InVision Network
+            © 2026 InVision Network
           </p>
         </div>
       </div>

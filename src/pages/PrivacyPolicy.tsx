@@ -69,8 +69,8 @@ function PrivacyPolicy() {
                   <p className="text-muted-foreground mb-4">Questions about privacy?</p>
                   <div className="space-y-2 text-muted-foreground">
                     <p><strong>Email:</strong> <a href="mailto:privacy@invisionnetwork.org" className="text-primary">privacy@invisionnetwork.org</a></p>
-                    <p><strong>Phone:</strong> (937) 555-0199</p>
-                    <p><strong>Mail:</strong> InVision Network, Dayton, OH</p>
+                    <p><strong>Phone:</strong> (937) 301-8749</p>
+                    <p><strong>Mail:</strong> InVision Network, Greater Dayton Area, OH</p>
                   </div>
                 </section>
               </div>

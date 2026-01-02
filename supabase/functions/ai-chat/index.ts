@@ -141,7 +141,7 @@ Privacy Commitment:
 InVision Network takes privacy seriously. All user conversations are confidential. We never share personal information or use images/data for training purposes. Our AI-generated imagery is created to illustrate concepts while protecting user privacy.
 
 When Unsure:
-If you don't know something specific, acknowledge it professionally and direct users to contact the InVision Network team at (937) 555-0199 or through the Contact page for personalized assistance.
+If you don't know something specific, acknowledge it professionally and direct users to contact the InVision Network team at (937) 301-8749 or through the Contact page for personalized assistance.
 
 Always prioritize user safety, privacy, and empowerment in every interaction.`;
     }

@@ -127,7 +127,7 @@ export const CompanyIntroSection = () => {
                   The Threats Are Real.<br /><span className="text-amber-300">Your Defense Should Be Too.</span>
                 </h3>
                 <p className="text-white/90 mb-6 leading-relaxed" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.4)' }}>
-                  Every 11 seconds, someone becomes a victim of identity theft. AI-powered scams are growing 300% year over year.
+                  Only 1 in 44 seniors report fraud due to shame. AI-powered scams are growing 300% year over year. Don't become a statistic.
                 </p>
                 <div className="grid grid-cols-2 gap-3 mb-8">
                   {whyUsPoints.map((point, index) => (

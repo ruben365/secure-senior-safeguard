@@ -54,7 +54,7 @@ const TrustBar = () => {
 
   const trustIndicators = [
     { icon: Shield, text: "500+ Families Protected", useCounter: true, count: familiesCount },
-    { icon: MapPin, text: "Based in Kettering, Ohio" },
+    { icon: MapPin, text: "Serving Greater Dayton Area" },
     { icon: Award, text: "Veteran Supportive Business" },
     { icon: UserCheck, text: "Expert Cybersecurity Team" },
   ];
