@@ -129,7 +129,7 @@ export const PAGE_SEO = {
         "addressRegion": "OH",
         "addressCountry": "US"
       },
-      "telephone": "(937) 555-0199",
+      "telephone": "(937) 301-8749",
       "url": "https://invisionnetwork.com",
       "priceRange": "$$",
       "aggregateRating": {
@@ -166,7 +166,7 @@ export const PAGE_SEO = {
   },
   contact: {
     title: "Contact Us",
-    description: "Get in touch with InVision Network for AI scam protection services. Based in Dayton, Ohio. Call (937) 555-0199 or fill out our contact form.",
+    description: "Get in touch with InVision Network for AI scam protection services. Serving the Greater Dayton Area. Call (937) 301-8749 or fill out our contact form.",
     keywords: "contact InVision Network, Dayton cybersecurity contact, AI protection inquiry",
   },
   resources: {

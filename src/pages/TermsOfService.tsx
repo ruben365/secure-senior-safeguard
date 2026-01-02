@@ -32,7 +32,7 @@ function TermsOfService() {
                   <h2 className="text-2xl font-bold mb-4">20. Contact</h2>
                   <div className="space-y-2 text-muted-foreground">
                     <p><strong>Email:</strong> <a href="mailto:legal@invisionnetwork.org" className="text-primary">legal@invisionnetwork.org</a></p>
-                    <p><strong>Phone:</strong> (937) 555-0199</p>
+                    <p><strong>Phone:</strong> (937) 301-8749</p>
                   </div>
                 </section>
               </div>

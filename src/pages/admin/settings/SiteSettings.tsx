@@ -11,7 +11,7 @@ const SiteSettings = () => {
     siteName: "InVision Network",
     tagline: "AI Scam Protection & Business Solutions",
     description: "Empowering seniors and businesses with cutting-edge technology solutions and cybersecurity protection.",
-    phone: "(937) 555-0199",
+    phone: "(937) 301-8749",
     primaryEmail: "hello@invisionnetwork.org",
     supportEmail: "support@invisionnetwork.org",
     businessEmail: "consulting@invisionnetwork.org",

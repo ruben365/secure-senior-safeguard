@@ -42,7 +42,7 @@ const Footer = () => {
               </p>
               <div className="flex flex-wrap gap-4">
                 <span className="flex items-center gap-2 text-sm text-white/50">
-                  <MapPin className="w-4 h-4" />Kettering, Ohio
+                  <MapPin className="w-4 h-4" />Serving the Greater Dayton Area
                 </span>
                 <span className="flex items-center gap-2 text-sm text-white/50">
                   <Mail className="w-4 h-4" />hello@invisionnetwork.org

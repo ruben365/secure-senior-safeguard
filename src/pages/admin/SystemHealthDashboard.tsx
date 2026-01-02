@@ -60,9 +60,9 @@ function SystemHealthDashboard() {
       icon: CheckCircle2,
       status: "pass",
       items: [
-        { label: "Phone: (937) 555-0199 ✓", status: "pass" },
+        { label: "Phone: (937) 301-8749 ✓", status: "pass" },
         { label: "Email: working@domain.com ✓", status: "pass" },
-        { label: "Address: Dayton, OH ✓", status: "pass" },
+        { label: "Address: Greater Dayton Area, OH ✓", status: "pass" },
         { label: "Business hours: Set ✓", status: "pass" },
       ],
       action: {

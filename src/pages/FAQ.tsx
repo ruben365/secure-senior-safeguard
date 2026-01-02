@@ -201,7 +201,7 @@ const faqs: FAQ[] = [
     id: "ts-2",
     category: "Technical Support",
     question: "How do I contact support?",
-    answer: "Email: support@invisionnetwork.org, Phone: (937) 555-0199, Live chat: on our website, or submit ticket through your portal.",
+    answer: "Email: support@invisionnetwork.org, Phone: (937) 301-8749, Live chat: on our website, or submit ticket through your portal.",
   },
   {
     id: "ts-3",
@@ -585,9 +585,9 @@ export default function FAQ() {
                     </Link>
                   </Button>
                   <Button size="lg" variant="outline" asChild className="gap-2">
-                    <a href="tel:9375550199">
+                    <a href="tel:9373018749">
                       <Phone className="w-5 h-5" />
-                      Call (937) 555-0199
+                      Call (937) 301-8749
                     </a>
                   </Button>
                 </div>

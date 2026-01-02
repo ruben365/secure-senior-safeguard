@@ -209,7 +209,7 @@ export const PlatformGuide = ({ triggerButton }: PlatformGuideProps) => {
             </h4>
             <div className="grid sm:grid-cols-3 gap-3">
               <Button variant="outline" size="sm" className="gap-2" asChild>
-                <a href="tel:937-555-0199">
+                <a href="tel:937-301-8749">
                   <Phone className="w-4 h-4" />
                   Call Us
                 </a>
