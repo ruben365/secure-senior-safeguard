@@ -24,50 +24,51 @@ const AIReceptionist = () => {
   const features = [
     {
       icon: Phone,
-      title: "24/7 Call Answering",
-      description: "Never miss a call. Our AI answers every call professionally, day or night, holidays included."
+      title: "Answers Calls 24/7",
+      description: "Your AI never sleeps. Every call gets answered professionally—nights, weekends, holidays. No more lost customers to voicemail."
     },
     {
       icon: Calendar,
-      title: "Smart Scheduling",
-      description: "Automatically book appointments, check availability, and send confirmations without human intervention."
+      title: "Books Appointments Automatically",
+      description: "The AI checks your real-time availability, books directly into your calendar, and sends confirmation texts—all without you lifting a finger."
     },
     {
       icon: MessageSquare,
-      title: "Natural Conversations",
-      description: "Advanced AI that understands context, handles complex inquiries, and sounds genuinely human."
+      title: "Sounds Human, Not Robotic",
+      description: "Advanced conversational AI that handles complex questions naturally. Callers often don't realize they're talking to AI."
     },
     {
       icon: Shield,
-      title: "HIPAA Compliant",
-      description: "Enterprise-grade security for healthcare, legal, and financial services requiring strict compliance."
+      title: "Filters Spam & Telemarketers",
+      description: "Stop wasting time on junk calls. Our AI screens every caller so you only talk to real customers and genuine opportunities."
     },
     {
       icon: Zap,
-      title: "Instant Lead Capture",
-      description: "Capture caller information, qualify leads, and route urgent matters to the right team member."
+      title: "Captures Every Lead",
+      description: "Get instant text/email notifications with caller details. Urgent matters get routed to you immediately. Nothing falls through the cracks."
     },
     {
       icon: Users,
-      title: "Multi-Language Support",
-      description: "Serve diverse communities with AI that speaks English, Spanish, and other languages fluently."
+      title: "Speaks Their Language",
+      description: "Serve the diverse Dayton community. Fluent in English and Spanish with more languages available on request."
     }
   ];
 
   const benefits = [
-    "Save $3,000-5,000/month on receptionist costs",
-    "Capture 40% more leads from after-hours calls",
-    "Reduce no-shows with automated reminders",
-    "Scale without adding headcount",
-    "Professional image 24/7/365"
+    "Save $3,000-5,000/month compared to a human receptionist",
+    "Capture 40% more leads from after-hours calls you were missing",
+    "Reduce no-shows by 60% with automated appointment reminders",
+    "Handle unlimited concurrent calls—no busy signals ever",
+    "Project a Fortune 500 image on a small business budget"
   ];
 
   const useCases = [
-    { industry: "Medical Offices", example: "Patient intake, appointment scheduling, prescription refill requests" },
-    { industry: "Law Firms", example: "Client intake, case status updates, appointment booking" },
-    { industry: "Real Estate", example: "Property inquiries, showing scheduling, lead qualification" },
-    { industry: "Home Services", example: "Service requests, emergency dispatch, quote scheduling" },
-    { industry: "Restaurants", example: "Reservation management, order inquiries, hours/location info" }
+    { industry: "Medical & Dental Offices", example: "Patient intake, appointment scheduling, prescription refill requests, insurance verification" },
+    { industry: "Law Firms & Legal", example: "New client intake, case status updates, consultation booking, after-hours emergencies" },
+    { industry: "Real Estate Agents", example: "Property inquiries, showing scheduling, lead qualification, market updates" },
+    { industry: "HVAC & Home Services", example: "Service requests, emergency dispatch, quote scheduling, follow-up calls" },
+    { industry: "Auto Shops & Dealerships", example: "Service appointments, parts inquiries, recall notifications, estimate requests" },
+    { industry: "Restaurants & Hospitality", example: "Reservations, catering inquiries, event booking, hours and directions" }
   ];
 
   return (
@@ -104,27 +105,33 @@ const AIReceptionist = () => {
               <div className="max-w-4xl mx-auto text-center">
                 <Badge variant="outline" className="mb-6 px-4 py-2 text-sm border-primary/30 bg-primary/5">
                   <Bot className="w-4 h-4 mr-2" />
-                  AI Business Automation
+                  Trusted by Dayton Businesses
                 </Badge>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                  <span className="gradient-text-primary">AI Receptionist</span>
-                  <br />& Virtual Intake Agent
+                  <span className="gradient-text-primary">Stop Missing Calls.</span>
+                  <br />Let AI Run Your Front Desk.
                 </h1>
                 <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                  Your 24/7 virtual front desk. Never miss a call, automatically schedule appointments, 
-                  and capture every lead—even at 3 AM.
+                  Our AI answers calls 24/7, sounds human, filters spam, and books appointments 
+                  directly into your calendar—while you sleep. Never lose another customer to voicemail.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button asChild size="xl" variant="gold">
                     <Link to="/contact">
-                      Schedule Demo
+                      Get Your AI Receptionist
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </Link>
                   </Button>
                   <Button asChild size="xl" variant="outline">
-                    <Link to="/business">View All Services</Link>
+                    <a href="tel:9373018749">
+                      <Phone className="mr-2 h-5 w-5" />
+                      Hear It In Action
+                    </a>
                   </Button>
                 </div>
+                <p className="text-sm text-muted-foreground mt-6">
+                  ✓ Setup in 48 hours ✓ No contracts ✓ Cancel anytime
+                </p>
               </div>
             </div>
           </section>
@@ -158,10 +165,11 @@ const AIReceptionist = () => {
             <div className="container mx-auto px-4">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                  Everything You Need in a Virtual Receptionist
+                  Your AI Receptionist Does It All
                 </h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto">
-                  Powerful AI capabilities that handle your calls professionally while you focus on your business.
+                  Everything a $50,000/year receptionist does—plus things they can't. 
+                  Available 24/7, never calls in sick, never takes vacation.
                 </p>
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -188,11 +196,11 @@ const AIReceptionist = () => {
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
                   <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                    Why Businesses Choose Our AI Receptionist
+                    The Math is Simple: You're Losing Money Right Now
                   </h2>
                   <p className="text-muted-foreground mb-8">
-                    Stop losing calls to voicemail. Our AI receptionist ensures every caller gets 
-                    immediate, professional attention—transforming missed opportunities into booked appointments.
+                    Every missed call is a missed customer. Research shows 80% of callers who reach 
+                    voicemail hang up and call your competitor instead. How many calls did you miss last month?
                   </p>
                   <ul className="space-y-4">
                     {benefits.map((benefit, index) => (
@@ -207,26 +215,30 @@ const AIReceptionist = () => {
                   <Card className="p-8 bg-gradient-to-br from-primary/5 to-accent/5 border-primary/20">
                     <div className="text-center">
                       <TrendingUp className="w-16 h-16 text-primary mx-auto mb-4" />
-                      <h3 className="text-2xl font-bold mb-2">ROI Calculator</h3>
+                      <h3 className="text-2xl font-bold mb-2">Your Savings Calculator</h3>
                       <p className="text-muted-foreground mb-6">
-                        See how much you could save with AI
+                        What a Dayton business owner saves annually
                       </p>
                       <div className="space-y-4 text-left">
                         <div className="flex justify-between py-3 border-b border-border">
-                          <span>Current receptionist cost</span>
-                          <span className="font-semibold">$4,000/mo</span>
+                          <span>Full-time receptionist salary</span>
+                          <span className="font-semibold">$35,000/yr</span>
                         </div>
                         <div className="flex justify-between py-3 border-b border-border">
-                          <span>AI Receptionist cost</span>
-                          <span className="font-semibold text-success">$792/mo*</span>
+                          <span>Benefits, taxes, training</span>
+                          <span className="font-semibold">$12,000/yr</span>
                         </div>
-                        <div className="flex justify-between py-3 text-xl">
-                          <span className="font-bold">Monthly Savings</span>
-                          <span className="font-bold text-success">$3,208</span>
+                        <div className="flex justify-between py-3 border-b border-border">
+                          <span>AI Receptionist (one-time)</span>
+                          <span className="font-semibold text-success">$9,500</span>
+                        </div>
+                        <div className="flex justify-between py-3 text-xl bg-success/10 px-4 rounded-lg">
+                          <span className="font-bold">First Year Savings</span>
+                          <span className="font-bold text-success">$37,500+</span>
                         </div>
                       </div>
-                      <p className="text-xs text-muted-foreground mt-4">
-                        *Based on one-time setup of $9,500 amortized over 12 months
+                      <p className="text-sm text-muted-foreground mt-4">
+                        Plus: Capture leads 24/7, not just 9-5. No sick days. No vacations.
                       </p>
                     </div>
                   </Card>
@@ -240,15 +252,16 @@ const AIReceptionist = () => {
             <div className="container mx-auto px-4">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                  Perfect For Every Industry
+                  Built for Dayton Businesses Like Yours
                 </h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto">
-                  Our AI receptionist adapts to your industry's specific needs and terminology.
+                  Our AI learns your business, your terminology, and your processes. 
+                  Callers get the same quality experience as talking to your best employee.
                 </p>
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {useCases.map((useCase, index) => (
-                  <Card key={index} className="border-border/50">
+                  <Card key={index} className="border-border/50 hover:border-primary/30 transition-colors">
                     <CardHeader>
                       <CardTitle className="text-lg">{useCase.industry}</CardTitle>
                     </CardHeader>
@@ -261,29 +274,46 @@ const AIReceptionist = () => {
             </div>
           </section>
 
+          {/* Urgency Section */}
+          <section className="py-16 bg-primary/5 border-y border-primary/20">
+            <div className="container mx-auto px-4 text-center">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4">
+                While You Read This, How Many Calls Went to Voicemail?
+              </h3>
+              <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
+                The average small business misses 6 calls per day. At $200 per new customer, 
+                that's $36,000 in lost revenue every month walking straight to your competitors.
+              </p>
+            </div>
+          </section>
+
           {/* CTA Section */}
           <section className="py-20 bg-gradient-to-br from-primary/10 via-background to-accent/10">
             <div className="container mx-auto px-4 text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Ready to Never Miss a Call Again?
+                Get Your AI Receptionist Running in 48 Hours
               </h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Schedule a free demo to see how our AI receptionist can transform your business communications.
+                Call us right now. Our AI will answer (so you can hear it for yourself), 
+                then a real human will call you back to discuss your business needs.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="xl" variant="gold">
                   <Link to="/contact">
-                    Get Started Today
+                    Schedule My Free Demo
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
                 <Button asChild size="xl" variant="outline">
                   <a href="tel:9373018749">
                     <Phone className="mr-2 h-5 w-5" />
-                    Call (937) 301-8749
+                    Call (937) 301-8749 Now
                   </a>
                 </Button>
               </div>
+              <p className="text-sm text-muted-foreground mt-6">
+                Serving Dayton, Columbus, Cincinnati & all of Ohio
+              </p>
             </div>
           </section>
         </main>
