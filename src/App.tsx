@@ -29,6 +29,7 @@ import { CookieConsent } from "./components/CookieConsent";
 import { SkipToContent } from "./components/SkipToContent";
 import ScrollProgressBar from "./components/ScrollProgressBar";
 import BackToTop from "./components/BackToTop";
+import MobileCallButton from "./components/MobileCallButton";
 
 import { AnalyticsTracker } from "./components/AnalyticsTracker";
 
@@ -607,6 +608,7 @@ function App() {
                   <NavigationProgress />
                   <ScrollToTop />
                   <BackToTop />
+                  <MobileCallButton />
                   
                   <RouteTracker />
                   <AnalyticsTracker />
