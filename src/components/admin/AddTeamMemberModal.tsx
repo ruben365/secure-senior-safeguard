@@ -558,7 +558,7 @@ export function AddTeamMemberModal({
                   type="tel"
                   value={formData.phone}
                   onChange={(e) => handlePhoneChange(e.target.value)}
-                  placeholder="(555) 123-4567"
+                  placeholder="(937) 000-0000"
                 />
                 <div className="flex items-center justify-between">
                   <Label htmlFor="displayPhone" className="text-sm font-normal">

@@ -309,7 +309,7 @@ function Contact() {
                             type="tel"
                             value={formData.phone}
                             onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                            placeholder="(555) 123-4567"
+                            placeholder="(937) 000-0000"
                             className="h-12 bg-background/50 border-border/50 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
                           />
                         </div>

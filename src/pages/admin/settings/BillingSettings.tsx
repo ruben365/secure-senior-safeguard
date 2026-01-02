@@ -90,7 +90,7 @@ export default function BillingSettings() {
                   id="companyPhone"
                   value={settings.companyPhone}
                   onChange={(e) => setSettings({ ...settings, companyPhone: e.target.value })}
-                  placeholder="(555) 123-4567"
+                  placeholder="(937) 000-0000"
                 />
               </div>
               <div className="space-y-2">
