@@ -39,135 +39,135 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   }
 
   :root {
-    /* Base colors - Soft off-white for elegance */
-    --background: 250 30% 99%;
-    --foreground: 250 40% 12%;
+    /* Base colors - Clean white for trust & readability (seniors) */
+    --background: 0 0% 100%;
+    --foreground: 220 60% 15%;
     
-    /* Royal Indigo - Primary brand color (Premium, trust, sophistication) */
-    --primary: 255 65% 42%;
+    /* Navy Blue - Primary brand color (Bank-like trust, easy to read) */
+    --primary: 220 70% 35%;
     --primary-foreground: 0 0% 100%;
     
-    /* Electric Violet - Accent color (Energy, innovation, modern) */
-    --accent: 270 85% 60%;
+    /* Teal - Accent color (Friendly, safe, approachable) */
+    --accent: 175 70% 35%;
     --accent-foreground: 0 0% 100%;
     
-    /* Success Emerald - Safety, verification */
-    --success: 160 70% 45%;
+    /* Success Green - Safety, verification */
+    --success: 145 65% 35%;
     --success-foreground: 0 0% 100%;
     
-    /* Alert Crimson - Danger, urgency */
-    --destructive: 0 75% 55%;
+    /* Alert Red - Danger, urgency */
+    --destructive: 0 70% 45%;
     --destructive-foreground: 0 0% 100%;
     
-    /* Card & Surface colors */
-    --card: 0 0% 100%;
-    --card-foreground: 250 40% 12%;
+    /* Card & Surface colors - Slightly off-white for depth */
+    --card: 210 25% 98%;
+    --card-foreground: 220 60% 15%;
     
     --popover: 0 0% 100%;
-    --popover-foreground: 250 40% 12%;
+    --popover-foreground: 220 60% 15%;
     
-    /* Soft lavender secondary */
-    --secondary: 255 25% 96%;
-    --secondary-foreground: 255 65% 42%;
+    /* Light blue-gray secondary */
+    --secondary: 210 30% 95%;
+    --secondary-foreground: 220 70% 35%;
     
-    /* Muted tones */
-    --muted: 250 20% 94%;
-    --muted-foreground: 250 15% 45%;
+    /* Muted tones - high contrast for readability */
+    --muted: 210 20% 92%;
+    --muted-foreground: 220 25% 35%;
     
-    --border: 250 20% 90%;
-    --input: 250 20% 90%;
-    --ring: 255 65% 42%;
+    --border: 210 25% 85%;
+    --input: 210 25% 88%;
+    --ring: 220 70% 35%;
     
     --radius: 0.5rem;
     
-    /* Extended Color Palette - Harmonious Purple-Violet Spectrum */
-    --purple-900: 255 70% 20%;
-    --purple-700: 255 65% 35%;
-    --purple-500: 255 60% 50%;
-    --purple-400: 255 55% 60%;
-    --purple-300: 255 50% 75%;
-    --purple-200: 255 40% 88%;
-    --purple-100: 255 35% 96%;
+    /* Extended Color Palette - Navy Blue Spectrum */
+    --purple-900: 220 65% 18%;
+    --purple-700: 220 60% 28%;
+    --purple-500: 220 55% 40%;
+    --purple-400: 220 50% 50%;
+    --purple-300: 220 45% 65%;
+    --purple-200: 220 35% 80%;
+    --purple-100: 220 30% 94%;
     
-    /* Violet accents for highlights */
-    --violet-600: 270 80% 50%;
-    --violet-500: 270 75% 58%;
-    --violet-400: 270 70% 68%;
-    --violet-300: 270 60% 80%;
+    /* Teal accents for highlights */
+    --violet-600: 175 65% 30%;
+    --violet-500: 175 60% 38%;
+    --violet-400: 175 55% 48%;
+    --violet-300: 175 45% 65%;
     
-    /* Slate neutrals for balance */
-    --slate-900: 250 25% 15%;
-    --slate-700: 250 15% 35%;
-    --slate-500: 250 10% 50%;
-    --slate-300: 250 10% 80%;
-    --slate-100: 250 15% 95%;
+    /* Slate neutrals - higher contrast */
+    --slate-900: 220 40% 12%;
+    --slate-700: 220 30% 28%;
+    --slate-500: 220 20% 45%;
+    --slate-300: 220 15% 72%;
+    --slate-100: 220 20% 95%;
     
     /* Gold accent for premium touches */
-    --gold-500: 40 85% 55%;
-    --gold-400: 40 80% 65%;
+    --gold-500: 40 80% 45%;
+    --gold-400: 40 75% 55%;
     
-    /* Legacy teal/cyan - mapped to violet spectrum for harmony */
-    --teal-600: 270 70% 45%;
-    --teal-500: 270 65% 55%;
-    --teal-400: 270 60% 65%;
-    --teal-300: 270 50% 78%;
-    --teal-100: 270 40% 96%;
+    /* Teal spectrum for trust */
+    --teal-600: 175 70% 28%;
+    --teal-500: 175 65% 35%;
+    --teal-400: 175 60% 45%;
+    --teal-300: 175 50% 60%;
+    --teal-100: 175 40% 92%;
     
-    --cyan-600: 280 75% 48%;
-    --cyan-500: 280 70% 55%;
-    --cyan-400: 280 65% 65%;
+    --cyan-600: 185 70% 32%;
+    --cyan-500: 185 65% 40%;
+    --cyan-400: 185 60% 52%;
     
-    /* Premium Shadows with brand colors */
-    --shadow-soft: 0 4px 6px -1px hsl(255 65% 42% / 0.08), 0 2px 4px -1px hsl(255 65% 42% / 0.04);
-    --shadow-medium: 0 10px 15px -3px hsl(255 65% 42% / 0.1), 0 4px 6px -2px hsl(255 65% 42% / 0.05);
-    --shadow-strong: 0 20px 25px -5px hsl(255 65% 42% / 0.15), 0 10px 10px -5px hsl(255 65% 42% / 0.08);
-    --shadow-glow-primary: 0 0 30px hsl(255 65% 42% / 0.25);
-    --shadow-glow-accent: 0 0 30px hsl(270 85% 60% / 0.25);
+    /* Premium Shadows - subtle and professional */
+    --shadow-soft: 0 4px 6px -1px hsl(220 60% 15% / 0.06), 0 2px 4px -1px hsl(220 60% 15% / 0.03);
+    --shadow-medium: 0 10px 15px -3px hsl(220 60% 15% / 0.08), 0 4px 6px -2px hsl(220 60% 15% / 0.04);
+    --shadow-strong: 0 20px 25px -5px hsl(220 60% 15% / 0.1), 0 10px 10px -5px hsl(220 60% 15% / 0.06);
+    --shadow-glow-primary: 0 0 30px hsl(220 70% 35% / 0.2);
+    --shadow-glow-accent: 0 0 30px hsl(175 70% 35% / 0.2);
     
     /* Radial gradients for background orbs */
     --gradient-radial: radial-gradient(circle, var(--tw-gradient-stops));
     
-    --sidebar-background: 255 30% 98%;
-    --sidebar-foreground: 250 30% 20%;
-    --sidebar-primary: 255 65% 42%;
+    --sidebar-background: 210 25% 98%;
+    --sidebar-foreground: 220 60% 15%;
+    --sidebar-primary: 220 70% 35%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 255 25% 94%;
-    --sidebar-accent-foreground: 255 65% 42%;
-    --sidebar-border: 250 20% 90%;
-    --sidebar-ring: 255 65% 42%;
+    --sidebar-accent: 210 30% 92%;
+    --sidebar-accent-foreground: 220 70% 35%;
+    --sidebar-border: 210 25% 85%;
+    --sidebar-ring: 220 70% 35%;
     
     /* Global site scale for desktop browsers */
     --site-scale: 0.78;
   }
 
   .dark {
-    --background: 255 50% 8%;
+    --background: 220 50% 8%;
     --foreground: 0 0% 98%;
-    --card: 255 45% 12%;
+    --card: 220 45% 12%;
     --card-foreground: 0 0% 98%;
-    --popover: 255 45% 12%;
+    --popover: 220 45% 12%;
     --popover-foreground: 0 0% 98%;
-    --primary: 270 80% 65%;
-    --primary-foreground: 255 50% 8%;
-    --secondary: 255 40% 18%;
+    --primary: 210 80% 55%;
+    --primary-foreground: 220 50% 8%;
+    --secondary: 220 40% 18%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 255 35% 20%;
-    --muted-foreground: 250 15% 65%;
-    --accent: 270 85% 60%;
+    --muted: 220 35% 20%;
+    --muted-foreground: 210 15% 65%;
+    --accent: 175 70% 45%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 100%;
-    --border: 255 35% 22%;
-    --input: 255 35% 22%;
-    --ring: 270 80% 65%;
-    --sidebar-background: 255 50% 6%;
+    --border: 220 35% 22%;
+    --input: 220 35% 22%;
+    --ring: 210 80% 55%;
+    --sidebar-background: 220 50% 6%;
     --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 270 80% 65%;
-    --sidebar-primary-foreground: 255 50% 8%;
-    --sidebar-accent: 255 40% 15%;
+    --sidebar-primary: 210 80% 55%;
+    --sidebar-primary-foreground: 220 50% 8%;
+    --sidebar-accent: 220 40% 15%;
     --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 255 35% 18%;
-    --sidebar-ring: 270 80% 65%;
+    --sidebar-border: 220 35% 18%;
+    --sidebar-ring: 210 80% 55%;
   }
 }
 
@@ -185,8 +185,8 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Outfit', sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
+    font-size: 18px;
+    line-height: 1.8;
     overflow-x: hidden;
     width: 100%;
     position: relative;
@@ -196,7 +196,8 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   
   @media (min-width: 768px) {
     body {
-      font-size: 18px;
+      font-size: 20px;
+      line-height: 1.75;
     }
   }
 

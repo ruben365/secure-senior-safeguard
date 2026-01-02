@@ -166,12 +166,12 @@ export default {
         "shimmer": "shimmer 2s infinite linear",
       },
       backgroundImage: {
-        "gradient-hero-primary": "linear-gradient(135deg, hsl(255 70% 20%) 0%, hsl(255 65% 38%) 50%, hsl(270 80% 55%) 100%)",
-        "gradient-hero-accent": "linear-gradient(135deg, hsl(270 85% 55%) 0%, hsl(280 80% 60%) 50%, hsl(290 75% 65%) 100%)",
-        "gradient-premium": "linear-gradient(135deg, hsl(255 65% 42%) 0%, hsl(270 80% 55%) 100%)",
-        "gradient-card": "linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(255 25% 98%) 100%)",
-        "gradient-mesh": "linear-gradient(135deg, hsl(255 25% 98%) 0%, hsl(0 0% 100%) 100%)",
-        "gradient-subtle": "linear-gradient(180deg, hsl(255 30% 99%) 0%, hsl(255 25% 96%) 100%)",
+        "gradient-hero-primary": "linear-gradient(135deg, hsl(220 65% 25%) 0%, hsl(220 60% 35%) 50%, hsl(210 70% 45%) 100%)",
+        "gradient-hero-accent": "linear-gradient(135deg, hsl(175 65% 30%) 0%, hsl(175 60% 40%) 50%, hsl(185 55% 50%) 100%)",
+        "gradient-premium": "linear-gradient(135deg, hsl(220 65% 35%) 0%, hsl(210 70% 45%) 100%)",
+        "gradient-card": "linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(210 25% 98%) 100%)",
+        "gradient-mesh": "linear-gradient(135deg, hsl(210 25% 98%) 0%, hsl(0 0% 100%) 100%)",
+        "gradient-subtle": "linear-gradient(180deg, hsl(210 30% 99%) 0%, hsl(210 25% 96%) 100%)",
       },
       boxShadow: {
         soft: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
