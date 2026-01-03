@@ -18,9 +18,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Download, Shield, ShoppingCart, Star, Loader2, Zap, Award, CheckCircle, Gift, BookOpen, Package, Sparkles, Users, TrendingUp, Heart, Headphones, Clock, Lock, FileText, Video, Podcast, Globe } from "lucide-react";
 import { EmbeddedPaymentModal } from "@/components/payment/EmbeddedPaymentModal";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import heroResourcesOffice from "@/assets/hero-resources-office.jpg";
-import heroResourcesReading from "@/assets/hero-resources-reading.jpg";
-import heroResourcesProducts from "@/assets/hero-resources-products.jpg";
+import heroResourcesDesk from "@/assets/resources-hero-desk.png";
+import heroResourcesSecurityProducts from "@/assets/resources-hero-security-products.png";
+import heroResourcesFamily from "@/assets/resources-hero-family.png";
 import bookAiFundamentals from "@/assets/book-ai-fundamentals.jpg";
 import bookBeingRealAi from "@/assets/book-being-real-ai.jpg";
 import bookAuthPersonalities from "@/assets/book-auth-personalities.jpg";
@@ -196,9 +196,9 @@ function Resources() {
   };
 
   const resourcesHeroImages = [
-    { src: heroResourcesOffice, alt: "Modern home office with security books" },
-    { src: heroResourcesReading, alt: "Family reading safety guides together" },
-    { src: heroResourcesProducts, alt: "Security gadgets and safety products" }
+    { src: heroResourcesDesk, alt: "Professional security office with expert protection resources" },
+    { src: heroResourcesSecurityProducts, alt: "Premium security devices and protection products" },
+    { src: heroResourcesFamily, alt: "Grandmother reading cyber awareness book with grandchildren" }
   ];
 
   return (
