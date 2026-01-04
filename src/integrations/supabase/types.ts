@@ -466,6 +466,13 @@ export type Database = {
             referencedRelation: "profiles_limited"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "articles_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "profiles_safe"
+            referencedColumns: ["id"]
+          },
         ]
       }
       auth_audit_logs: {
@@ -4121,6 +4128,48 @@ export type Database = {
         }
         Relationships: []
       }
+      profiles_safe: {
+        Row: {
+          account_status: string | null
+          created_at: string | null
+          department: string | null
+          email: string | null
+          first_name: string | null
+          id: string | null
+          last_name: string | null
+          position: string | null
+          profile_photo_url: string | null
+          updated_at: string | null
+          username: string | null
+        }
+        Insert: {
+          account_status?: string | null
+          created_at?: string | null
+          department?: string | null
+          email?: string | null
+          first_name?: string | null
+          id?: string | null
+          last_name?: string | null
+          position?: string | null
+          profile_photo_url?: string | null
+          updated_at?: string | null
+          username?: string | null
+        }
+        Update: {
+          account_status?: string | null
+          created_at?: string | null
+          department?: string | null
+          email?: string | null
+          first_name?: string | null
+          id?: string | null
+          last_name?: string | null
+          position?: string | null
+          profile_photo_url?: string | null
+          updated_at?: string | null
+          username?: string | null
+        }
+        Relationships: []
+      }
       testimonials_public: {
         Row: {
           created_at: string | null
@@ -4174,10 +4223,23 @@ export type Database = {
         }
         Returns: undefined
       }
+      check_contact_bulk_access: {
+        Args: never
+        Returns: {
+          access_count: number
+          is_suspicious: boolean
+          user_id: string
+          window_minutes: number
+        }[]
+      }
       generate_order_number: { Args: never; Returns: string }
       generate_payout_number: { Args: never; Returns: string }
       generate_request_number: { Args: never; Returns: string }
       generate_worker_id: { Args: never; Returns: string }
+      get_profile_sensitive_data: {
+        Args: { target_user_id: string }
+        Returns: Json
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]

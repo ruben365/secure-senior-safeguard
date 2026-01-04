@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { AlertTriangle, Shield, Activity, Users, Lock, Eye } from "lucide-react";
+import { AlertTriangle, Shield, Activity, Users, Lock, Eye, Database, UserCheck } from "lucide-react";
 import { toast } from "sonner";
 
 interface SecurityEvent {
@@ -25,21 +25,39 @@ interface ActivityLog {
   created_at: string;
 }
 
+interface ContactAccessLog {
+  id: string;
+  user_id: string | null;
+  action: string;
+  entity_id: string | null;
+  details: {
+    contact_email?: string;
+    contact_name?: string;
+    operation?: string;
+  } | null;
+  created_at: string;
+}
+
 interface SecurityStats {
   totalAuthEvents: number;
   failedLogins: number;
   suspiciousActivity: number;
   activeUsers: number;
+  contactAccesses: number;
+  sensitiveProfileAccesses: number;
 }
 
 export const SecurityMonitor = () => {
   const [authEvents, setAuthEvents] = useState<SecurityEvent[]>([]);
   const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
+  const [contactAccessLogs, setContactAccessLogs] = useState<ContactAccessLog[]>([]);
   const [stats, setStats] = useState<SecurityStats>({
     totalAuthEvents: 0,
     failedLogins: 0,
     suspiciousActivity: 0,
     activeUsers: 0,
+    contactAccesses: 0,
+    sensitiveProfileAccesses: 0,
   });
   const [loading, setLoading] = useState(true);
 
@@ -93,12 +111,23 @@ export const SecurityMonitor = () => {
         .select('*')
         .gte('created_at', new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString())
         .order('created_at', { ascending: false })
-        .limit(20);
+        .limit(50);
 
       if (activityError) throw activityError;
 
+      // Filter contact access logs separately
+      const contactLogs = (activityData || []).filter(
+        log => log.entity_type === 'contacts'
+      ) as unknown as ContactAccessLog[];
+      
+      // Filter sensitive profile access logs
+      const sensitiveProfileLogs = (activityData || []).filter(
+        log => log.action === 'VIEW_SENSITIVE_PROFILE'
+      );
+
       setAuthEvents(authData || []);
       setActivityLogs(activityData || []);
+      setContactAccessLogs(contactLogs);
 
       // Calculate stats
       const failedLogins = (authData || []).filter(
@@ -124,11 +153,18 @@ export const SecurityMonitor = () => {
         failedLogins,
         suspiciousActivity,
         activeUsers,
+        contactAccesses: contactLogs.length,
+        sensitiveProfileAccesses: sensitiveProfileLogs.length,
       });
 
       // Alert if suspicious activity detected
       if (suspiciousActivity > 0) {
         toast.error(`⚠️ ${suspiciousActivity} suspicious IP(s) detected with multiple failed logins!`);
+      }
+      
+      // Alert if high contact access detected (potential harvesting)
+      if (contactLogs.length > 30) {
+        toast.warning(`⚠️ High contact access volume: ${contactLogs.length} accesses in 24h`);
       }
 
     } catch (error) {
@@ -218,11 +254,33 @@ export const SecurityMonitor = () => {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Active Users</CardTitle>
-            <Users className="h-4 w-4 text-success" />
+            <Users className="h-4 w-4 text-primary" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-success">{stats.activeUsers}</div>
+            <div className="text-2xl font-bold text-primary">{stats.activeUsers}</div>
             <p className="text-xs text-muted-foreground">Unique users today</p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Contact Accesses</CardTitle>
+            <Database className="h-4 w-4 text-blue-500" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-blue-500">{stats.contactAccesses}</div>
+            <p className="text-xs text-muted-foreground">CRM data operations</p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Sensitive Profile Access</CardTitle>
+            <UserCheck className="h-4 w-4 text-orange-500" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-orange-500">{stats.sensitiveProfileAccesses}</div>
+            <p className="text-xs text-muted-foreground">PII data requests</p>
           </CardContent>
         </Card>
       </div>
@@ -271,12 +329,62 @@ export const SecurityMonitor = () => {
         </CardContent>
       </Card>
 
-      {/* Activity Logs */}
+      {/* Contact Access Audit Log */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Database className="h-5 w-5" />
+            Contact Data Access Log
+            {contactAccessLogs.length > 20 && (
+              <Badge variant="destructive" className="ml-2">High Volume</Badge>
+            )}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-3">
+            {contactAccessLogs.length === 0 ? (
+              <p className="text-center text-muted-foreground py-4">No contact access logged in the last 24 hours</p>
+            ) : (
+              contactAccessLogs.slice(0, 15).map((log) => (
+                <div
+                  key={log.id}
+                  className="flex items-center justify-between p-3 rounded-lg border bg-card"
+                >
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-lg">{getActionIcon(log.action)}</span>
+                      <Badge variant={log.action === 'DELETE' ? 'destructive' : 'outline'}>
+                        {log.action}
+                      </Badge>
+                      {log.details?.contact_name && (
+                        <span className="font-medium">{log.details.contact_name}</span>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <span>By: {log.user_id?.substring(0, 8) || 'System'}</span>
+                      <span>•</span>
+                      <span>{new Date(log.created_at).toLocaleString()}</span>
+                      {log.details?.contact_email && (
+                        <>
+                          <span>•</span>
+                          <span>{log.details.contact_email}</span>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* General Activity Logs */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Eye className="h-5 w-5" />
-            Sensitive Data Access Log
+            All Activity Log
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -284,7 +392,7 @@ export const SecurityMonitor = () => {
             {activityLogs.length === 0 ? (
               <p className="text-center text-muted-foreground py-4">No activity logged in the last 24 hours</p>
             ) : (
-              activityLogs.map((log) => (
+              activityLogs.slice(0, 20).map((log) => (
                 <div
                   key={log.id}
                   className="flex items-center justify-between p-3 rounded-lg border bg-card"
