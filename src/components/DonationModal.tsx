@@ -140,6 +140,10 @@ export const DonationModal = ({ open, onOpenChange, type = 'general', cause }: D
 
       if (insertError) throw insertError;
 
+      // Save for future auto-fill
+      localStorage.setItem('checkout_email', data.email);
+      localStorage.setItem('checkout_name', data.donor_name);
+
       const { data: paymentData, error: paymentError } = await supabase.functions.invoke('process-donation', {
         body: {
           donorName: data.donor_name,
@@ -157,7 +161,7 @@ export const DonationModal = ({ open, onOpenChange, type = 'general', cause }: D
         window.open(paymentData.url, '_blank');
         toast({
           title: "💖 Thank You!",
-          description: "Redirecting to secure payment...",
+          description: "Redirecting to secure payment. You'll receive a confirmation email after payment.",
         });
         onOpenChange(false);
         form.reset();

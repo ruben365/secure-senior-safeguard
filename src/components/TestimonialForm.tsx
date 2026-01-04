@@ -58,9 +58,22 @@ export const TestimonialForm = () => {
       trackFormSubmit("testimonial_form", { rating: data.rating });
       trackConversion("testimonial_submission");
 
+      // Send thank-you email
+      try {
+        await supabase.functions.invoke('send-testimonial-thankyou', {
+          body: {
+            email: data.email,
+            name: data.name,
+            rating: data.rating
+          }
+        });
+      } catch (emailError) {
+        console.error('Failed to send thank-you email:', emailError);
+      }
+
       toast({
-        title: "Thank you for your testimonial!",
-        description: "Your testimonial has been submitted and is pending review. We'll notify you once it's approved.",
+        title: "Thank you for your testimonial! 💜",
+        description: "Check your email for a special thank-you message. We'll notify you once it's approved.",
       });
 
       form.reset();
