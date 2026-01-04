@@ -603,94 +603,92 @@ function LearnAndTrain() {
       <section id="training" className="py-16 bg-background relative overflow-hidden">
         <FlowingWaves variant="full" opacity={0.12} />
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-6">
-            <Badge className="mb-4 bg-gradient-to-r from-primary to-accent text-white text-sm px-4 py-1.5">
+          <div className="text-center mb-8">
+            <Badge className="mb-4 bg-gradient-to-r from-primary to-accent text-white text-lg px-6 py-2">
               🛡️ PROTECTING FAMILIES TOGETHER
             </Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-in-up">Scam Prevention Training Programs</h2>
-            <p className="text-base md:text-lg text-muted-foreground mb-4 max-w-4xl mx-auto">
-              <strong>Empower yourself and your loved ones with knowledge.</strong> AI technology is evolving rapidly, 
-              and so are the tactics used to deceive. Our friendly, step-by-step training helps you stay one step ahead — 
-              <strong>no coding or technical skills required.</strong>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in-up">Scam Prevention Training</h2>
+            <p className="text-xl md:text-2xl text-foreground mb-4 max-w-3xl mx-auto font-medium">
+              Learn to spot scams before they hurt you or your family.
             </p>
-            <p className="text-sm text-accent font-semibold max-w-3xl mx-auto">
-              🎓 Perfect for seniors, parents, grandparents, and anyone who wants to protect their family with confidence and peace of mind.
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Simple, friendly classes — no tech skills needed. Perfect for seniors, parents, and grandparents.
             </p>
           </div>
 
           {/* Veteran Discount Notification - Compact */}
-          <div className="flex justify-center mb-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-900/10 to-red-900/10 border border-blue-500/20 rounded-full text-sm">
+          <div className="flex justify-center mb-8">
+            <div className="inline-flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-blue-900/10 to-red-900/10 border border-blue-500/20 rounded-full text-base">
               <span>🇺🇸</span>
-              <Star className="w-3 h-3 text-yellow-500 fill-yellow-500" />
-              <span className="font-medium">Veterans & First Responders Save 10%</span>
-              <Star className="w-3 h-3 text-yellow-500 fill-yellow-500" />
-              <span className="text-muted-foreground text-xs">• Applied at checkout</span>
+              <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+              <span className="font-semibold">Veterans & First Responders Save 10%</span>
+              <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+              <span className="text-muted-foreground">• Applied at checkout</span>
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-6xl mx-auto mb-12">
             {[
               {
-                name: "Standard Group",
+                name: "Group Class",
                 type: "standard",
                 price: "$79",
                 priceNum: 79,
                 duration: "90 min",
                 size: "Up to 25 people",
-                description: "Join a live group session with other couples and individuals. Learn to identify AI voice cloning, phishing emails, and fake tech support calls.",
+                description: "Join others in a live online class. Learn to spot fake calls, emails, and texts.",
                 features: [
-                  "Live Zoom session",
-                  "Interactive Q&A",
-                  "Digital handouts",
-                  "Certificate included",
+                  "✓ Live Zoom session",
+                  "✓ Ask questions anytime",
+                  "✓ Easy-to-follow handouts",
+                  "✓ Certificate included",
                 ],
               },
               {
-                name: "Family Small Group",
+                name: "Small Family Group",
                 type: "family",
                 price: "$149",
                 priceNum: 149,
                 duration: "90 min",
                 size: "Up to 12 people",
                 popular: true,
-                description: "Intimate couples-focused setting with extended personal attention. Perfect for spouses who want to protect each other from scams.",
+                description: "Smaller class with more personal attention. Great for couples and close friends.",
                 features: [
-                  "Smaller group setting",
-                  "Extended Q&A time",
-                  "Safe word setup",
-                  "Family action plan",
+                  "✓ Smaller, cozy setting",
+                  "✓ More time for your questions",
+                  "✓ Create a family safe word",
+                  "✓ Take-home action plan",
                 ],
               },
               {
-                name: "Priority Private",
+                name: "Private Family Session",
                 type: "private",
                 price: "$399",
                 priceNum: 399,
                 duration: "2 hours",
-                size: "Up to 5 family",
-                description: "One-on-one family session — bring up to 5 family members (parents, children, grandparents). In-person or virtual options available.",
+                size: "5 Family Members",
+                description: "Just your family — parents, kids, grandparents. We come to you or meet online.",
                 features: [
-                  "Private family session",
-                  "In-person or virtual",
-                  "Device security review",
-                  "30-day email support",
+                  "✓ Your family only (up to 5)",
+                  "✓ In-person or video call",
+                  "✓ Check your devices for safety",
+                  "✓ 30 days of email help",
                 ],
               },
               {
-                name: "Customizable Group",
+                name: "Large Group Training",
                 type: "custom",
                 price: "$510",
                 priceNum: 510,
                 pricePrefix: "+",
                 duration: "2-3 hours",
                 size: "10-100+ people",
-                description: "Tailored training for churches, schools, senior centers, and organizations. Price varies based on audience size and location.",
+                description: "For churches, senior centers, or community groups. We customize it for you.",
                 features: [
-                  "On-site or virtual",
-                  "Custom curriculum",
-                  "Bulk certificates",
-                  "Dedicated support",
+                  "✓ We come to your location",
+                  "✓ Training made for your group",
+                  "✓ Certificates for everyone",
+                  "✓ Ongoing support included",
                 ],
               },
             ].map((plan, index) => (
