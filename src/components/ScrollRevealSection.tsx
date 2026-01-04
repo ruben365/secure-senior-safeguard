@@ -10,33 +10,25 @@ interface ScrollRevealSectionProps {
   animation?: 'fade' | 'blur' | 'sweep' | 'cascade';
 }
 
+// Simplified wrapper component for backward compatibility
 export const ScrollRevealSection = ({ 
   children, 
   className = "",
   staggerChildren = false,
   threshold = 0.08,
-  animation = 'blur'
 }: ScrollRevealSectionProps) => {
   const { ref, isVisible } = useScrollReveal({ 
     threshold,
     triggerOnce: true,
-    rootMargin: '40px 0px 0px 0px'
   });
-
-  const animationClasses = {
-    'fade': 'section-reveal-fade',
-    'blur': 'section-reveal-blur',
-    'sweep': 'section-reveal-sweep',
-    'cascade': 'section-reveal-cascade',
-  };
 
   return (
     <div
       ref={ref}
       className={cn(
-        animationClasses[animation],
+        "scroll-fade-up scroll-duration-normal",
         staggerChildren && "stagger-cascade",
-        isVisible && "section-visible",
+        isVisible && "scroll-visible section-visible",
         className
       )}
     >
