@@ -149,9 +149,26 @@ export const BookingModal = ({
 
       if (error) throw error;
 
+      // Send confirmation email
+      try {
+        await supabase.functions.invoke('send-booking-confirmation', {
+          body: {
+            email: data.email,
+            name: data.fullName,
+            serviceName,
+            requestNumber,
+            preferredDate: data.preferredDates,
+            serviceType
+          }
+        });
+      } catch (emailError) {
+        console.error('Failed to send confirmation email:', emailError);
+        // Don't fail the submission if email fails
+      }
+
       toast({
         title: "🎉 Booking Request Submitted!",
-        description: `Reference #${requestNumber}. We'll contact you within 24 hours.`,
+        description: `Reference #${requestNumber}. Check your email for confirmation.`,
       });
 
       onOpenChange(false);

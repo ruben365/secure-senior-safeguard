@@ -155,11 +155,27 @@ export const ServiceInquiryDialog = ({
 
       if (error) throw error;
 
+      // Send confirmation email
+      try {
+        await supabase.functions.invoke('send-inquiry-confirmation', {
+          body: {
+            email: data.email,
+            name: data.fullName,
+            serviceName,
+            inquiryNumber,
+            servicePrice,
+            companyName: data.companyName
+          }
+        });
+      } catch (emailError) {
+        console.error('Failed to send confirmation email:', emailError);
+      }
+
       trackConversion(`inquiry_${serviceTier.toLowerCase()}`, finalPrice);
 
       toast({
         title: "🎉 Inquiry Submitted Successfully!",
-        description: `Reference #${inquiryNumber}. Our team will contact you within 24 hours to discuss your ${serviceName} project.`,
+        description: `Reference #${inquiryNumber}. Check your email for confirmation details.`,
       });
 
       onOpenChange(false);

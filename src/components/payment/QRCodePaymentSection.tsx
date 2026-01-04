@@ -131,6 +131,22 @@ export function QRCodePaymentSection({
             origin: { y: 0.6 },
           });
           
+          // Call complete-payment to finalize and send emails
+          try {
+            await supabase.functions.invoke('complete-payment', {
+              body: {
+                paymentType: 'product',
+                paymentIntentId: data.paymentIntentId,
+                customerEmail,
+                customerName,
+                amount,
+                productName,
+              }
+            });
+          } catch (completeErr) {
+            console.error('Failed to complete payment processing:', completeErr);
+          }
+          
           toast.success("Payment received!");
           onSuccess();
         }

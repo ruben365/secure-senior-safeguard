@@ -71,3 +71,15 @@ verify_jwt = false
 
 [functions.verify-payment-link]
 verify_jwt = false
+
+[functions.complete-payment]
+verify_jwt = false
+
+[functions.send-booking-confirmation]
+verify_jwt = false
+
+[functions.send-testimonial-thankyou]
+verify_jwt = false
+
+[functions.send-inquiry-confirmation]
+verify_jwt = false

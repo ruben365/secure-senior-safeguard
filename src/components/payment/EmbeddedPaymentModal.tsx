@@ -142,9 +142,25 @@ function PaymentForm({
     }
   };
 
-  const handlePaymentSuccess = () => {
+  const handlePaymentSuccess = async () => {
     setStep("success");
     toast.success("Payment successful!");
+    
+    // Call complete-payment to update records and send emails
+    try {
+      await supabase.functions.invoke('complete-payment', {
+        body: {
+          paymentType: mode === 'subscription' ? 'subscription' : 'product',
+          customerEmail: email,
+          customerName: name,
+          amount: finalAmount,
+          productName,
+        }
+      });
+    } catch (err) {
+      console.error('Failed to complete payment processing:', err);
+    }
+    
     onSuccess?.();
   };
 
