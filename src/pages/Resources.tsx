@@ -63,61 +63,314 @@ import { supabase } from "@/integrations/supabase/client";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
 
 // Static book products with covers (20 books)
-const staticBooks = [
-  { id: 'book-ai-fundamentals', name: 'AI Fundamentals', description: 'Master AI basics and protection strategies', price: 29.99, image: bookAiFundamentals, tag: 'Best Seller', stripe_price_id: 'price_1SjwOGJ8osfwYbX7UnEPLRMz' },
-  { id: 'book-scam-prevention', name: 'Scam Prevention Guide', description: 'Comprehensive guide to avoiding scams', price: 39.99, image: bookScamPrevention, tag: 'Featured', stripe_price_id: 'price_1SjwOIJ8osfwYbX74jTfNxcW' },
-  { id: 'book-family-safety', name: 'Family Safety Toolkit', description: 'Practical family safety protocols', price: 24.99, image: bookFamilySafety, tag: 'Family', stripe_price_id: 'price_1SjwOKJ8osfwYbX7GcmhErnQ' },
-  { id: 'book-senior-tech', name: 'Senior Tech Handbook', description: 'Tech safety for seniors', price: 27.99, image: bookSeniorTechSafety, tag: 'Seniors', stripe_price_id: 'price_1SjwOLJ8osfwYbX7mV3J5LtX' },
-  { id: 'book-digital-privacy', name: 'Digital Privacy Mastery', description: 'Protect your online privacy', price: 34.99, image: bookDigitalPrivacy, tag: 'Popular', stripe_price_id: 'price_1SjwOMJ8osfwYbX7ExCFG5R9' },
-  { id: 'book-deepfake', name: 'Deepfake Detection', description: 'Spot AI fakes and imposters', price: 32.99, image: bookDeepfakeDetection, tag: 'New', stripe_price_id: 'price_1SjwOOJ8osfwYbX7HUJrBIas' },
-  { id: 'book-password', name: 'Password Security', description: 'Secure all your accounts', price: 22.99, image: bookPasswordSecurity, tag: 'Essential', stripe_price_id: 'price_1SjwOPJ8osfwYbX7meUEbp3H' },
-  { id: 'book-social-media', name: 'Social Media Safety', description: 'Stay safe on social platforms', price: 26.99, image: bookSocialMediaSafety, tag: 'Trending', stripe_price_id: 'price_1SjwORJ8osfwYbX7e2gUB45e' },
-  { id: 'book-online-shopping', name: 'Online Shopping Guide', description: 'Shop safely anywhere', price: 24.99, image: bookOnlineShopping, tag: 'Practical', stripe_price_id: 'price_1SjwOTJ8osfwYbX7lPLOGwFE' },
-  { id: 'book-identity-theft', name: 'Identity Theft Prevention', description: 'Protect your identity', price: 36.99, image: bookIdentityTheft, tag: 'Critical', stripe_price_id: 'price_1SjwOUJ8osfwYbX7qlhBavay' },
-  { id: 'book-business-cyber', name: 'Business Cybersecurity', description: 'Enterprise security strategies', price: 49.99, image: bookBusinessCyber, tag: 'Professional', stripe_price_id: 'price_1SjwOYJ8osfwYbX7yBrF06h5' },
-  { id: 'book-ai-management', name: 'AI Management Guide', description: 'Manage AI tools securely', price: 34.99, image: bookAiManagement, tag: 'Business', stripe_price_id: 'price_1SjwOaJ8osfwYbX7hc4XzTHo' },
-  { id: 'book-being-real-ai', name: 'Being Real in AI World', description: 'Authenticity in the AI age', price: 27.99, image: bookBeingRealAi, tag: 'Philosophy', stripe_price_id: 'price_1SjwObJ8osfwYbX7SMFj8psB' },
-  { id: 'book-auth-personalities', name: 'Auth of Personalities', description: 'Advanced identity verification', price: 32.99, image: bookAuthPersonalities, tag: 'Advanced', stripe_price_id: 'price_1SjwOdJ8osfwYbX7MPe7VAm2' },
-  { id: 'book-auth-friendship-v2', name: 'Auth of Friendship V2', description: 'Verify social connections', price: 29.99, image: bookAuthFriendshipV2, tag: 'Volume 2', stripe_price_id: 'price_1SjwOfJ8osfwYbX7WKUTFPZz' },
-  { id: 'book-cyber-kids', name: 'Cyber Awareness for Kids', description: 'Teach children internet safety', price: 19.99, image: bookCyberKids, tag: 'Kids', stripe_price_id: 'price_1SjwOgJ8osfwYbX7BFT7VyBl' },
-  { id: 'book-smart-home', name: 'Smart Home Security', description: 'Protect IoT devices at home', price: 28.99, image: bookSmartHome, tag: 'IoT', stripe_price_id: 'price_1SjwOiJ8osfwYbX7crdnnxDP' },
-  { id: 'book-phishing-defense', name: 'Email Phishing Defense', description: 'Recognize and block phishing', price: 25.99, image: bookPhishingDefense, tag: 'Email', stripe_price_id: 'price_1SjwOjJ8osfwYbX7QoqGc9FQ' },
-  { id: 'book-banking-safety', name: 'Banking & Financial Safety', description: 'Secure your finances online', price: 31.99, image: bookBankingSafety, tag: 'Finance', stripe_price_id: 'price_1SjwOlJ8osfwYbX7jMwpmurh' },
-  { id: 'book-mobile-security', name: 'Mobile Phone Security', description: 'Keep your smartphone safe', price: 23.99, image: bookMobileSecurity, tag: 'Mobile', stripe_price_id: 'price_1SjwOmJ8osfwYbX7mo35N9ap' },
-];
+const staticBooks = [{
+  id: 'book-ai-fundamentals',
+  name: 'AI Fundamentals',
+  description: 'Master AI basics and protection strategies',
+  price: 29.99,
+  image: bookAiFundamentals,
+  tag: 'Best Seller',
+  stripe_price_id: 'price_1SjwOGJ8osfwYbX7UnEPLRMz'
+}, {
+  id: 'book-scam-prevention',
+  name: 'Scam Prevention Guide',
+  description: 'Comprehensive guide to avoiding scams',
+  price: 39.99,
+  image: bookScamPrevention,
+  tag: 'Featured',
+  stripe_price_id: 'price_1SjwOIJ8osfwYbX74jTfNxcW'
+}, {
+  id: 'book-family-safety',
+  name: 'Family Safety Toolkit',
+  description: 'Practical family safety protocols',
+  price: 24.99,
+  image: bookFamilySafety,
+  tag: 'Family',
+  stripe_price_id: 'price_1SjwOKJ8osfwYbX7GcmhErnQ'
+}, {
+  id: 'book-senior-tech',
+  name: 'Senior Tech Handbook',
+  description: 'Tech safety for seniors',
+  price: 27.99,
+  image: bookSeniorTechSafety,
+  tag: 'Seniors',
+  stripe_price_id: 'price_1SjwOLJ8osfwYbX7mV3J5LtX'
+}, {
+  id: 'book-digital-privacy',
+  name: 'Digital Privacy Mastery',
+  description: 'Protect your online privacy',
+  price: 34.99,
+  image: bookDigitalPrivacy,
+  tag: 'Popular',
+  stripe_price_id: 'price_1SjwOMJ8osfwYbX7ExCFG5R9'
+}, {
+  id: 'book-deepfake',
+  name: 'Deepfake Detection',
+  description: 'Spot AI fakes and imposters',
+  price: 32.99,
+  image: bookDeepfakeDetection,
+  tag: 'New',
+  stripe_price_id: 'price_1SjwOOJ8osfwYbX7HUJrBIas'
+}, {
+  id: 'book-password',
+  name: 'Password Security',
+  description: 'Secure all your accounts',
+  price: 22.99,
+  image: bookPasswordSecurity,
+  tag: 'Essential',
+  stripe_price_id: 'price_1SjwOPJ8osfwYbX7meUEbp3H'
+}, {
+  id: 'book-social-media',
+  name: 'Social Media Safety',
+  description: 'Stay safe on social platforms',
+  price: 26.99,
+  image: bookSocialMediaSafety,
+  tag: 'Trending',
+  stripe_price_id: 'price_1SjwORJ8osfwYbX7e2gUB45e'
+}, {
+  id: 'book-online-shopping',
+  name: 'Online Shopping Guide',
+  description: 'Shop safely anywhere',
+  price: 24.99,
+  image: bookOnlineShopping,
+  tag: 'Practical',
+  stripe_price_id: 'price_1SjwOTJ8osfwYbX7lPLOGwFE'
+}, {
+  id: 'book-identity-theft',
+  name: 'Identity Theft Prevention',
+  description: 'Protect your identity',
+  price: 36.99,
+  image: bookIdentityTheft,
+  tag: 'Critical',
+  stripe_price_id: 'price_1SjwOUJ8osfwYbX7qlhBavay'
+}, {
+  id: 'book-business-cyber',
+  name: 'Business Cybersecurity',
+  description: 'Enterprise security strategies',
+  price: 49.99,
+  image: bookBusinessCyber,
+  tag: 'Professional',
+  stripe_price_id: 'price_1SjwOYJ8osfwYbX7yBrF06h5'
+}, {
+  id: 'book-ai-management',
+  name: 'AI Management Guide',
+  description: 'Manage AI tools securely',
+  price: 34.99,
+  image: bookAiManagement,
+  tag: 'Business',
+  stripe_price_id: 'price_1SjwOaJ8osfwYbX7hc4XzTHo'
+}, {
+  id: 'book-being-real-ai',
+  name: 'Being Real in AI World',
+  description: 'Authenticity in the AI age',
+  price: 27.99,
+  image: bookBeingRealAi,
+  tag: 'Philosophy',
+  stripe_price_id: 'price_1SjwObJ8osfwYbX7SMFj8psB'
+}, {
+  id: 'book-auth-personalities',
+  name: 'Auth of Personalities',
+  description: 'Advanced identity verification',
+  price: 32.99,
+  image: bookAuthPersonalities,
+  tag: 'Advanced',
+  stripe_price_id: 'price_1SjwOdJ8osfwYbX7MPe7VAm2'
+}, {
+  id: 'book-auth-friendship-v2',
+  name: 'Auth of Friendship V2',
+  description: 'Verify social connections',
+  price: 29.99,
+  image: bookAuthFriendshipV2,
+  tag: 'Volume 2',
+  stripe_price_id: 'price_1SjwOfJ8osfwYbX7WKUTFPZz'
+}, {
+  id: 'book-cyber-kids',
+  name: 'Cyber Awareness for Kids',
+  description: 'Teach children internet safety',
+  price: 19.99,
+  image: bookCyberKids,
+  tag: 'Kids',
+  stripe_price_id: 'price_1SjwOgJ8osfwYbX7BFT7VyBl'
+}, {
+  id: 'book-smart-home',
+  name: 'Smart Home Security',
+  description: 'Protect IoT devices at home',
+  price: 28.99,
+  image: bookSmartHome,
+  tag: 'IoT',
+  stripe_price_id: 'price_1SjwOiJ8osfwYbX7crdnnxDP'
+}, {
+  id: 'book-phishing-defense',
+  name: 'Email Phishing Defense',
+  description: 'Recognize and block phishing',
+  price: 25.99,
+  image: bookPhishingDefense,
+  tag: 'Email',
+  stripe_price_id: 'price_1SjwOjJ8osfwYbX7QoqGc9FQ'
+}, {
+  id: 'book-banking-safety',
+  name: 'Banking & Financial Safety',
+  description: 'Secure your finances online',
+  price: 31.99,
+  image: bookBankingSafety,
+  tag: 'Finance',
+  stripe_price_id: 'price_1SjwOlJ8osfwYbX7jMwpmurh'
+}, {
+  id: 'book-mobile-security',
+  name: 'Mobile Phone Security',
+  description: 'Keep your smartphone safe',
+  price: 23.99,
+  image: bookMobileSecurity,
+  tag: 'Mobile',
+  stripe_price_id: 'price_1SjwOmJ8osfwYbX7mo35N9ap'
+}];
 
 // Static physical products (15 products) with real images
-const staticPhysicalProducts = [
-  { id: 'prod-usb-key', name: 'Security USB Key', description: 'Hardware 2FA authentication device', price: 49.99, image: productUsbKey, tag: 'Best Seller', stripe_price_id: 'price_1SjwOrJ8osfwYbX7oO8UOr4W' },
-  { id: 'prod-privacy-screen', name: 'Privacy Screen 15"', description: 'Anti-spy screen protector for laptops', price: 39.99, image: productPrivacyScreen, tag: 'Popular', stripe_price_id: 'price_1SjwOtJ8osfwYbX7spllhrec' },
-  { id: 'prod-webcam-cover', name: 'Webcam Cover Pack (6)', description: 'Sliding webcam privacy covers', price: 9.99, image: productWebcamCover, tag: 'Essential', stripe_price_id: 'price_1SjwOvJ8osfwYbX7W5QIZvWH' },
-  { id: 'prod-rfid-wallet', name: 'RFID Blocking Wallet', description: 'Protect cards from wireless theft', price: 24.99, image: productRfidWallet, tag: 'Protection', stripe_price_id: 'price_1SjwOwJ8osfwYbX7vhgkd632' },
-  { id: 'prod-faraday-bag', name: 'Faraday Phone Bag', description: 'Block all signals to your phone', price: 19.99, image: productFaradayBag, tag: 'Privacy', stripe_price_id: 'price_1SjwOyJ8osfwYbX7SXOyTNh8' },
-  { id: 'prod-password-book', name: 'Password Organizer', description: 'Secure offline password storage', price: 14.99, image: productPasswordBook, tag: 'Practical', stripe_price_id: 'price_1SjwP0J8osfwYbX7S24wIUAP' },
-  { id: 'prod-shredder', name: 'Document Shredder Mini', description: 'Compact cross-cut shredder', price: 69.99, image: productShredder, tag: 'Office', stripe_price_id: 'price_1SjwP2J8osfwYbX7BA1stBmY' },
-  { id: 'prod-safe-box', name: 'Fireproof Document Safe', description: 'Protect important documents', price: 99.99, image: productSafeBox, tag: 'Premium', stripe_price_id: 'price_1SjwP4J8osfwYbX7gQDVgihH' },
-  { id: 'prod-cable-lock', name: 'Laptop Cable Lock', description: 'Secure your laptop anywhere', price: 18.99, image: productCableLock, tag: 'Travel', stripe_price_id: 'price_1SjwP6J8osfwYbX7e9ZikXHu' },
-  { id: 'prod-vpn-router', name: 'VPN Home Router', description: 'Whole-home privacy protection', price: 149.99, image: productVpnRouter, tag: 'Advanced', stripe_price_id: 'price_1SjwP8J8osfwYbX7y81Bmklz' },
-  { id: 'prod-privacy-filter', name: 'Phone Privacy Filter', description: 'Anti-spy screen for phones', price: 12.99, image: productPhonePrivacy, tag: 'Mobile', stripe_price_id: 'price_1SjwPCJ8osfwYbX7VAzAQrH3' },
-  { id: 'prod-usb-blocker', name: 'USB Data Blocker', description: 'Safe charging, no data theft', price: 8.99, image: productUsbBlocker, tag: 'Charging', stripe_price_id: 'price_1SjwPEJ8osfwYbX7iIQpVXm3' },
-  { id: 'prod-tracker-detector', name: 'GPS Tracker Detector', description: 'Find hidden tracking devices', price: 34.99, image: productTrackerDetector, tag: 'Detection', stripe_price_id: 'price_1SjwPFJ8osfwYbX7KmSpLGIU' },
-  { id: 'prod-rfid-sleeves', name: 'RFID Card Sleeves (10)', description: 'Credit card protection sleeves', price: 7.99, image: productRfidSleeves, tag: 'Budget', stripe_price_id: 'price_1SjwPHJ8osfwYbX7Gefquqfa' },
-  { id: 'prod-security-cam', name: 'Indoor Security Camera', description: 'WiFi camera with encryption', price: 59.99, image: productSecurityCam, tag: 'Monitoring', stripe_price_id: 'price_1SjwPJJ8osfwYbX7vEPLPml1' },
-  { id: 'prod-wifi-extender', name: 'WiFi Signal Extender', description: 'Extend secure WiFi coverage', price: 44.99, image: productWifiExtender, tag: 'Coverage', stripe_price_id: 'price_1SjwPJJ8osfwYbX7vEPLPml1' },
-];
+const staticPhysicalProducts = [{
+  id: 'prod-usb-key',
+  name: 'Security USB Key',
+  description: 'Hardware 2FA authentication device',
+  price: 49.99,
+  image: productUsbKey,
+  tag: 'Best Seller',
+  stripe_price_id: 'price_1SjwOrJ8osfwYbX7oO8UOr4W'
+}, {
+  id: 'prod-privacy-screen',
+  name: 'Privacy Screen 15"',
+  description: 'Anti-spy screen protector for laptops',
+  price: 39.99,
+  image: productPrivacyScreen,
+  tag: 'Popular',
+  stripe_price_id: 'price_1SjwOtJ8osfwYbX7spllhrec'
+}, {
+  id: 'prod-webcam-cover',
+  name: 'Webcam Cover Pack (6)',
+  description: 'Sliding webcam privacy covers',
+  price: 9.99,
+  image: productWebcamCover,
+  tag: 'Essential',
+  stripe_price_id: 'price_1SjwOvJ8osfwYbX7W5QIZvWH'
+}, {
+  id: 'prod-rfid-wallet',
+  name: 'RFID Blocking Wallet',
+  description: 'Protect cards from wireless theft',
+  price: 24.99,
+  image: productRfidWallet,
+  tag: 'Protection',
+  stripe_price_id: 'price_1SjwOwJ8osfwYbX7vhgkd632'
+}, {
+  id: 'prod-faraday-bag',
+  name: 'Faraday Phone Bag',
+  description: 'Block all signals to your phone',
+  price: 19.99,
+  image: productFaradayBag,
+  tag: 'Privacy',
+  stripe_price_id: 'price_1SjwOyJ8osfwYbX7SXOyTNh8'
+}, {
+  id: 'prod-password-book',
+  name: 'Password Organizer',
+  description: 'Secure offline password storage',
+  price: 14.99,
+  image: productPasswordBook,
+  tag: 'Practical',
+  stripe_price_id: 'price_1SjwP0J8osfwYbX7S24wIUAP'
+}, {
+  id: 'prod-shredder',
+  name: 'Document Shredder Mini',
+  description: 'Compact cross-cut shredder',
+  price: 69.99,
+  image: productShredder,
+  tag: 'Office',
+  stripe_price_id: 'price_1SjwP2J8osfwYbX7BA1stBmY'
+}, {
+  id: 'prod-safe-box',
+  name: 'Fireproof Document Safe',
+  description: 'Protect important documents',
+  price: 99.99,
+  image: productSafeBox,
+  tag: 'Premium',
+  stripe_price_id: 'price_1SjwP4J8osfwYbX7gQDVgihH'
+}, {
+  id: 'prod-cable-lock',
+  name: 'Laptop Cable Lock',
+  description: 'Secure your laptop anywhere',
+  price: 18.99,
+  image: productCableLock,
+  tag: 'Travel',
+  stripe_price_id: 'price_1SjwP6J8osfwYbX7e9ZikXHu'
+}, {
+  id: 'prod-vpn-router',
+  name: 'VPN Home Router',
+  description: 'Whole-home privacy protection',
+  price: 149.99,
+  image: productVpnRouter,
+  tag: 'Advanced',
+  stripe_price_id: 'price_1SjwP8J8osfwYbX7y81Bmklz'
+}, {
+  id: 'prod-privacy-filter',
+  name: 'Phone Privacy Filter',
+  description: 'Anti-spy screen for phones',
+  price: 12.99,
+  image: productPhonePrivacy,
+  tag: 'Mobile',
+  stripe_price_id: 'price_1SjwPCJ8osfwYbX7VAzAQrH3'
+}, {
+  id: 'prod-usb-blocker',
+  name: 'USB Data Blocker',
+  description: 'Safe charging, no data theft',
+  price: 8.99,
+  image: productUsbBlocker,
+  tag: 'Charging',
+  stripe_price_id: 'price_1SjwPEJ8osfwYbX7iIQpVXm3'
+}, {
+  id: 'prod-tracker-detector',
+  name: 'GPS Tracker Detector',
+  description: 'Find hidden tracking devices',
+  price: 34.99,
+  image: productTrackerDetector,
+  tag: 'Detection',
+  stripe_price_id: 'price_1SjwPFJ8osfwYbX7KmSpLGIU'
+}, {
+  id: 'prod-rfid-sleeves',
+  name: 'RFID Card Sleeves (10)',
+  description: 'Credit card protection sleeves',
+  price: 7.99,
+  image: productRfidSleeves,
+  tag: 'Budget',
+  stripe_price_id: 'price_1SjwPHJ8osfwYbX7Gefquqfa'
+}, {
+  id: 'prod-security-cam',
+  name: 'Indoor Security Camera',
+  description: 'WiFi camera with encryption',
+  price: 59.99,
+  image: productSecurityCam,
+  tag: 'Monitoring',
+  stripe_price_id: 'price_1SjwPJJ8osfwYbX7vEPLPml1'
+}, {
+  id: 'prod-wifi-extender',
+  name: 'WiFi Signal Extender',
+  description: 'Extend secure WiFi coverage',
+  price: 44.99,
+  image: productWifiExtender,
+  tag: 'Coverage',
+  stripe_price_id: 'price_1SjwPJJ8osfwYbX7vEPLPml1'
+}];
 
 // Rotating hero headlines
-const heroHeadlines = [
-  "Your Digital Safety Arsenal",
-  "Premium Guides & Resources",
-  "Expert Security Tools",
-  "Products to Protect What Matters Most"
-];
-
+const heroHeadlines = ["Your Digital Safety Arsenal", "Premium Guides & Resources", "Expert Security Tools", "Products to Protect What Matters Most"];
 function Resources() {
-  const { addItem, lastClearReason, hadItemsBeforeClear, itemCount } = useCart();
-  const { toast } = useToast();
-  const { triggerEmptyCartHelp } = useCartFeedback();
+  const {
+    addItem,
+    lastClearReason,
+    hadItemsBeforeClear,
+    itemCount
+  } = useCart();
+  const {
+    toast
+  } = useToast();
+  const {
+    triggerEmptyCartHelp
+  } = useCartFeedback();
   const [loading, setLoading] = useState<string | null>(null);
   const [currentHeadlineIndex, setCurrentHeadlineIndex] = useState(0);
   const [embeddedPaymentOpen, setEmbeddedPaymentOpen] = useState(false);
@@ -143,44 +396,46 @@ function Resources() {
   // Rotate headlines
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentHeadlineIndex((prev) => (prev + 1) % heroHeadlines.length);
+      setCurrentHeadlineIndex(prev => (prev + 1) % heroHeadlines.length);
     }, 4000);
     return () => clearInterval(interval);
   }, []);
 
   // Fetch products from database
-  const { data: products, isLoading, error } = useQuery({
+  const {
+    data: products,
+    isLoading,
+    error
+  } = useQuery({
     queryKey: ['marketplace-products'],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from('products')
-        .select('*')
-        .eq('status', 'active')
-        .order('is_featured', { ascending: false })
-        .order('created_at', { ascending: false });
-      
+      const {
+        data,
+        error
+      } = await supabase.from('products').select('*').eq('status', 'active').order('is_featured', {
+        ascending: false
+      }).order('created_at', {
+        ascending: false
+      });
       if (error) throw error;
       return data || [];
-    },
+    }
   });
 
   // Separate physical products
-  const physicalProducts = products?.filter(p => 
-    p.tags?.some((tag: string) => ['physical', 'device', 'hardware', 'kit', 'equipment'].includes(tag.toLowerCase()))
-  ) || [];
-
+  const physicalProducts = products?.filter(p => p.tags?.some((tag: string) => ['physical', 'device', 'hardware', 'kit', 'equipment'].includes(tag.toLowerCase()))) || [];
   const handleBuyNow = (product: typeof staticBooks[0] | typeof staticPhysicalProducts[0]) => {
     // Use embedded payment modal instead of redirect
     setEmbeddedPaymentConfig({
       mode: "payment",
       priceId: product.stripe_price_id,
       productName: product.name,
-      amount: Math.round(product.price * 100), // Convert to cents
+      amount: Math.round(product.price * 100),
+      // Convert to cents
       description: product.description
     });
     setEmbeddedPaymentOpen(true);
   };
-
   const handleAddToCart = (book: typeof staticBooks[0]) => {
     addItem({
       id: book.id,
@@ -192,30 +447,24 @@ function Resources() {
     });
     toast({
       title: "Added to Cart",
-      description: `${book.name} has been added to your cart.`,
+      description: `${book.name} has been added to your cart.`
     });
   };
-
-  const resourcesHeroImages = [
-    { src: heroResourcesDesk, alt: "Professional security office with expert protection resources" },
-    { src: heroResourcesSecurityProducts, alt: "Premium security devices and protection products" },
-    { src: heroResourcesFamily, alt: "Grandmother reading cyber awareness book with grandchildren" }
-  ];
-
-  return (
-    <PageTransition variant="fade">
-      <SEO 
-        title="Resources & Marketplace - Digital Guides & Security Products"
-        description="Browse our curated collection of scam prevention guides and physical security products. Everything you need to protect yourself and your loved ones."
-      />
+  const resourcesHeroImages = [{
+    src: heroResourcesDesk,
+    alt: "Professional security office with expert protection resources"
+  }, {
+    src: heroResourcesSecurityProducts,
+    alt: "Premium security devices and protection products"
+  }, {
+    src: heroResourcesFamily,
+    alt: "Grandmother reading cyber awareness book with grandchildren"
+  }];
+  return <PageTransition variant="fade">
+      <SEO title="Resources & Marketplace - Digital Guides & Security Products" description="Browse our curated collection of scam prevention guides and physical security products. Everything you need to protect yourself and your loved ones." />
       <Navigation />
       
-      <Hero
-        backgroundImages={resourcesHeroImages}
-        headline=""
-        subheadline=""
-        showScrollIndicator={true}
-      >
+      <Hero backgroundImages={resourcesHeroImages} headline="" subheadline="" showScrollIndicator={true}>
         {/* Transitioning Headlines */}
         <div className="text-center mb-6">
           <RotatingHeadlines headlines={heroHeadlines} />
@@ -271,18 +520,27 @@ function Resources() {
       <section className="py-6 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border-y border-primary/20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            {[
-              { value: "20+", label: "Digital Guides", icon: BookOpen },
-              { value: "15+", label: "Security Products", icon: Shield },
-              { value: "100+", label: "Happy Customers", icon: Heart },
-              { value: "24/7", label: "Support Available", icon: Headphones },
-            ].map((stat, index) => (
-              <div key={index} className="flex flex-col items-center gap-1">
+            {[{
+            value: "20+",
+            label: "Digital Guides",
+            icon: BookOpen
+          }, {
+            value: "15+",
+            label: "Security Products",
+            icon: Shield
+          }, {
+            value: "100+",
+            label: "Happy Customers",
+            icon: Heart
+          }, {
+            value: "24/7",
+            label: "Support Available",
+            icon: Headphones
+          }].map((stat, index) => <div key={index} className="flex flex-col items-center gap-1">
                 <stat.icon className="w-5 h-5 text-primary mb-1" />
                 <span className="text-2xl font-bold text-foreground">{stat.value}</span>
                 <span className="text-xs text-muted-foreground">{stat.label}</span>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </section>
@@ -306,8 +564,7 @@ function Resources() {
           </ScrollReveal>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-3">
-            {staticBooks.map((book, index) => (
-              <ScrollReveal key={book.id} delay={index * 50}>
+            {staticBooks.map((book, index) => <ScrollReveal key={book.id} delay={index * 50}>
                 <Card className="group p-3 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-border/50 hover:border-primary/30 relative overflow-hidden bg-card h-full flex flex-col">
                   {/* Tag Badge */}
                   <Badge className="absolute top-2 right-2 text-[9px] px-1.5 py-0.5 bg-gradient-to-r from-primary to-accent text-white z-10">
@@ -317,11 +574,7 @@ function Resources() {
                   {/* Book Cover Image */}
                   <div className="relative mb-3 rounded-lg overflow-hidden bg-secondary/30">
                     <div className="aspect-[3/4]">
-                      <img 
-                        src={book.image} 
-                        alt={book.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
+                      <img src={book.image} alt={book.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
                   </div>
                   
@@ -335,9 +588,7 @@ function Resources() {
                   
                   {/* Rating */}
                   <div className="flex items-center gap-1 mb-2">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />
-                    ))}
+                    {[...Array(5)].map((_, i) => <Star key={i} className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />)}
                     <span className="text-[9px] text-muted-foreground ml-1">5.0</span>
                   </div>
 
@@ -348,28 +599,18 @@ function Resources() {
                       <span className="text-[8px] text-success font-medium">🎖️ Vets 10% OFF</span>
                     </div>
                     <div className="grid grid-cols-2 gap-1.5">
-                      <Button 
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleAddToCart(book)}
-                        className="text-[10px] h-7 px-2"
-                      >
+                      <Button variant="outline" size="sm" onClick={() => handleAddToCart(book)} className="text-[10px] h-7 px-2">
                         <ShoppingCart className="w-3 h-3 mr-1" />
                         Cart
                       </Button>
-                      <Button 
-                        size="sm"
-                        onClick={() => handleBuyNow(book)}
-                        className="text-[10px] h-7 px-2"
-                      >
+                      <Button size="sm" onClick={() => handleBuyNow(book)} className="text-[10px] h-7 px-2">
                         <Zap className="w-3 h-3 mr-1" />
                         Buy
                       </Button>
                     </div>
                   </div>
                 </Card>
-              </ScrollReveal>
-            ))}
+              </ScrollReveal>)}
           </div>
 
           {/* Upsell Banner */}
@@ -388,114 +629,7 @@ function Resources() {
 
       {/* Premier Protection - Insurance Section */}
       <section id="insurance" className="py-12 bg-gradient-to-b from-background to-primary/5">
-        <div className="container mx-auto px-4">
-          <ScrollReveal>
-            <div className="text-center mb-10">
-              <Badge className="mb-3 text-sm px-4 py-1.5 bg-gradient-to-r from-primary to-accent text-white">
-                <Shield className="w-3.5 h-3.5 mr-1.5" />
-                Premier Protection
-              </Badge>
-              <h2 className="text-2xl md:text-3xl font-bold mb-3">
-                Insurance Coverage for Complete Peace of Mind
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                Protect your family and business with comprehensive cyber liability and identity theft coverage
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {/* Cyber Liability Insurance */}
-            <ScrollReveal delay={100}>
-              <Card className="relative h-full p-6 hover:shadow-xl transition-all duration-300 border-primary/20 hover:border-primary/40">
-                <div className="absolute top-4 right-4">
-                  <Badge variant="secondary" className="bg-blue-500/10 text-blue-600">
-                    Business
-                  </Badge>
-                </div>
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 flex items-center justify-center mb-4">
-                  <Globe className="w-7 h-7 text-blue-600" />
-                </div>
-                <h3 className="text-xl font-bold mb-2">Cyber Liability Insurance</h3>
-                <p className="text-muted-foreground text-sm mb-4">
-                  Protect your business from data breaches, cyber attacks, and digital threats. Coverage includes legal fees, notification costs, and recovery expenses.
-                </p>
-                <ul className="space-y-2 mb-6 text-sm">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-success flex-shrink-0" />
-                    <span>Data breach response coverage</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-success flex-shrink-0" />
-                    <span>Business interruption protection</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-success flex-shrink-0" />
-                    <span>Ransomware & extortion defense</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-success flex-shrink-0" />
-                    <span>Legal & regulatory support</span>
-                  </li>
-                </ul>
-                <div className="flex items-center justify-between pt-4 border-t border-border">
-                  <div>
-                    <span className="text-2xl font-bold text-primary">From $49</span>
-                    <span className="text-muted-foreground text-sm">/month</span>
-                  </div>
-                  <Button asChild variant="gold">
-                    <Link to="/contact">Get Quote</Link>
-                  </Button>
-                </div>
-              </Card>
-            </ScrollReveal>
-
-            {/* Identity Theft Insurance */}
-            <ScrollReveal delay={200}>
-              <Card className="relative h-full p-6 hover:shadow-xl transition-all duration-300 border-accent/20 hover:border-accent/40">
-                <div className="absolute top-4 right-4">
-                  <Badge variant="secondary" className="bg-purple-500/10 text-purple-600">
-                    Personal
-                  </Badge>
-                </div>
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-600/20 flex items-center justify-center mb-4">
-                  <Lock className="w-7 h-7 text-purple-600" />
-                </div>
-                <h3 className="text-xl font-bold mb-2">Identity Theft Protection</h3>
-                <p className="text-muted-foreground text-sm mb-4">
-                  Comprehensive identity monitoring and recovery services. Get alerts, prevention tools, and expert support if your identity is compromised.
-                </p>
-                <ul className="space-y-2 mb-6 text-sm">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-success flex-shrink-0" />
-                    <span>24/7 identity monitoring</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-success flex-shrink-0" />
-                    <span>Up to $1M recovery coverage</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-success flex-shrink-0" />
-                    <span>Dark web surveillance</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-success flex-shrink-0" />
-                    <span>Dedicated recovery specialist</span>
-                  </li>
-                </ul>
-                <div className="flex items-center justify-between pt-4 border-t border-border">
-                  <div>
-                    <span className="text-2xl font-bold text-primary">From $19</span>
-                    <span className="text-muted-foreground text-sm">/month</span>
-                  </div>
-                  <Button asChild variant="gold">
-                    <Link to="/contact">Get Quote</Link>
-                  </Button>
-                </div>
-              </Card>
-            </ScrollReveal>
-          </div>
-        </div>
+        
       </section>
 
       {/* Emergency Scripts Section */}
@@ -517,37 +651,31 @@ function Resources() {
           </ScrollReveal>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
-            {[
-              {
-                title: "IRS/Tax Scam Script",
-                description: "What to say when someone claims to be from the IRS demanding immediate payment",
-                icon: FileText,
-                color: "from-red-500/20 to-red-600/20",
-                textColor: "text-red-600"
-              },
-              {
-                title: "Tech Support Scam Script",
-                description: "Responses for fake Microsoft, Apple, or antivirus callers",
-                icon: Headphones,
-                color: "from-blue-500/20 to-blue-600/20",
-                textColor: "text-blue-600"
-              },
-              {
-                title: "Grandparent Scam Script",
-                description: "Verification questions when someone claims a family emergency",
-                icon: Heart,
-                color: "from-pink-500/20 to-pink-600/20",
-                textColor: "text-pink-600"
-              },
-              {
-                title: "Bank Fraud Alert Script",
-                description: "How to verify if a bank fraud alert is legitimate",
-                icon: Lock,
-                color: "from-green-500/20 to-green-600/20",
-                textColor: "text-green-600"
-              }
-            ].map((script, index) => (
-              <ScrollReveal key={script.title} delay={index * 100}>
+            {[{
+            title: "IRS/Tax Scam Script",
+            description: "What to say when someone claims to be from the IRS demanding immediate payment",
+            icon: FileText,
+            color: "from-red-500/20 to-red-600/20",
+            textColor: "text-red-600"
+          }, {
+            title: "Tech Support Scam Script",
+            description: "Responses for fake Microsoft, Apple, or antivirus callers",
+            icon: Headphones,
+            color: "from-blue-500/20 to-blue-600/20",
+            textColor: "text-blue-600"
+          }, {
+            title: "Grandparent Scam Script",
+            description: "Verification questions when someone claims a family emergency",
+            icon: Heart,
+            color: "from-pink-500/20 to-pink-600/20",
+            textColor: "text-pink-600"
+          }, {
+            title: "Bank Fraud Alert Script",
+            description: "How to verify if a bank fraud alert is legitimate",
+            icon: Lock,
+            color: "from-green-500/20 to-green-600/20",
+            textColor: "text-green-600"
+          }].map((script, index) => <ScrollReveal key={script.title} delay={index * 100}>
                 <Card className="p-5 h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col">
                   <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${script.color} flex items-center justify-center mb-4`}>
                     <script.icon className={`w-6 h-6 ${script.textColor}`} />
@@ -559,8 +687,7 @@ function Resources() {
                     Download PDF
                   </Button>
                 </Card>
-              </ScrollReveal>
-            ))}
+              </ScrollReveal>)}
           </div>
 
           <ScrollReveal delay={400}>
@@ -569,10 +696,7 @@ function Resources() {
                 📞 <strong>Remember:</strong> Legitimate organizations will never pressure you for immediate payment or personal info over the phone.
               </p>
               <Button asChild variant="default" className="gap-2">
-                <Link to="/training">
-                  <BookOpen className="w-4 h-4" />
-                  Learn More Safety Tips
-                </Link>
+                
               </Button>
             </div>
           </ScrollReveal>
@@ -598,8 +722,7 @@ function Resources() {
           </ScrollReveal>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
-            {staticPhysicalProducts.map((product, index) => (
-              <ScrollReveal key={product.id} delay={index * 50}>
+            {staticPhysicalProducts.map((product, index) => <ScrollReveal key={product.id} delay={index * 50}>
                 <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-border/50 hover:border-primary/30 overflow-hidden h-full flex flex-col">
                   {/* Tag Badge */}
                   <Badge className="absolute top-2 right-2 text-[9px] px-1.5 py-0.5 bg-gradient-to-r from-primary to-accent text-white z-10">
@@ -608,11 +731,7 @@ function Resources() {
                   
                   {/* Image */}
                   <div className="aspect-square bg-gradient-to-br from-secondary/50 to-secondary/20 relative overflow-hidden">
-                    <img 
-                      src={product.image} 
-                      alt={product.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
+                    <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   
                   {/* Content */}
@@ -635,9 +754,7 @@ function Resources() {
                     
                     {/* Rating */}
                     <div className="flex items-center gap-0.5 mb-1">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-2 h-2 fill-amber-400 text-amber-400" />
-                      ))}
+                      {[...Array(5)].map((_, i) => <Star key={i} className="w-2 h-2 fill-amber-400 text-amber-400" />)}
                       <span className="text-[7px] text-muted-foreground ml-1">5.0</span>
                     </div>
 
@@ -647,31 +764,26 @@ function Resources() {
                         <span className="text-sm font-bold text-primary">${product.price}</span>
                         <span className="text-[7px] text-success">🎖️ Vets 10%</span>
                       </div>
-                      <Button 
-                        size="sm"
-                        className="w-full text-[9px] h-6"
-                        onClick={() => {
-                          addItem({
-                            id: product.id,
-                            productId: product.id,
-                            name: product.name,
-                            price: product.price,
-                            image: product.image
-                          });
-                          toast({
-                            title: "Added to Cart",
-                            description: `${product.name} has been added to your cart.`,
-                          });
-                        }}
-                      >
+                      <Button size="sm" className="w-full text-[9px] h-6" onClick={() => {
+                    addItem({
+                      id: product.id,
+                      productId: product.id,
+                      name: product.name,
+                      price: product.price,
+                      image: product.image
+                    });
+                    toast({
+                      title: "Added to Cart",
+                      description: `${product.name} has been added to your cart.`
+                    });
+                  }}>
                         <ShoppingCart className="w-2.5 h-2.5 mr-1" />
                         Add to Cart
                       </Button>
                     </div>
                   </div>
                 </Card>
-              </ScrollReveal>
-            ))}
+              </ScrollReveal>)}
           </div>
         </div>
       </section>
@@ -682,27 +794,14 @@ function Resources() {
       <CartAbandonmentNotification />
       
       {/* Embedded Payment Modal */}
-      {embeddedPaymentConfig && (
-        <EmbeddedPaymentModal
-          open={embeddedPaymentOpen}
-          onOpenChange={setEmbeddedPaymentOpen}
-          mode={embeddedPaymentConfig.mode}
-          priceId={embeddedPaymentConfig.priceId}
-          productName={embeddedPaymentConfig.productName}
-          amount={embeddedPaymentConfig.amount}
-          description={embeddedPaymentConfig.description}
-          onSuccess={() => {
-            toast({
-              title: "Purchase Complete!",
-              description: "Check your email for your download link.",
-            });
-          }}
-        />
-      )}
+      {embeddedPaymentConfig && <EmbeddedPaymentModal open={embeddedPaymentOpen} onOpenChange={setEmbeddedPaymentOpen} mode={embeddedPaymentConfig.mode} priceId={embeddedPaymentConfig.priceId} productName={embeddedPaymentConfig.productName} amount={embeddedPaymentConfig.amount} description={embeddedPaymentConfig.description} onSuccess={() => {
+      toast({
+        title: "Purchase Complete!",
+        description: "Check your email for your download link."
+      });
+    }} />}
       
       <Footer />
-    </PageTransition>
-  );
+    </PageTransition>;
 }
-
 export default Resources;
