@@ -549,32 +549,16 @@ export function EmbeddedPaymentModal({
           </DialogDescription>
         </DialogHeader>
 
-        <Elements
-          stripe={stripePromise}
-          options={{
-            mode: mode === "subscription" ? "subscription" : "payment",
-            amount,
-            currency: "usd",
-            appearance: {
-              theme: "stripe",
-              variables: {
-                borderRadius: "8px",
-                colorPrimary: "#6D28D9",
-              },
-            },
-          }}
-        >
-          <PaymentForm
-            mode={mode}
-            priceId={priceId}
-            productName={productName}
-            amount={amount}
-            description={description}
-            features={features}
-            onSuccess={onSuccess}
-            onClose={handleClose}
-          />
-        </Elements>
+        <PaymentForm
+          mode={mode}
+          priceId={priceId}
+          productName={productName}
+          amount={amount}
+          description={description}
+          features={features}
+          onSuccess={onSuccess}
+          onClose={handleClose}
+        />
       </DialogContent>
     </Dialog>
   );
