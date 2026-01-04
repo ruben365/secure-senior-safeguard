@@ -431,6 +431,7 @@ function PaymentElementWrapper({
   const stripe = useStripe();
   const elements = useElements();
   const [isLoading, setIsLoading] = useState(false);
+  const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async () => {
@@ -468,12 +469,21 @@ function PaymentElementWrapper({
 
   return (
     <div className="space-y-4">
-      <PaymentElement
-        options={{
-          layout: "tabs",
-          paymentMethodOrder: ["card", "apple_pay", "google_pay"],
-        }}
-      />
+      {!isReady && (
+        <div className="flex items-center justify-center py-8">
+          <Loader2 className="w-6 h-6 animate-spin text-primary" />
+          <span className="ml-2 text-sm text-muted-foreground">Loading payment form...</span>
+        </div>
+      )}
+      <div className={!isReady ? "opacity-0 h-0 overflow-hidden" : ""}>
+        <PaymentElement
+          onReady={() => setIsReady(true)}
+          options={{
+            layout: "tabs",
+            paymentMethodOrder: ["card", "apple_pay", "google_pay"],
+          }}
+        />
+      </div>
 
       {error && (
         <div className="p-3 bg-destructive/10 text-destructive rounded-lg text-sm">
@@ -488,7 +498,7 @@ function PaymentElementWrapper({
         </Button>
         <Button
           onClick={handleSubmit}
-          disabled={isLoading || !stripe || !elements}
+          disabled={isLoading || !stripe || !elements || !isReady}
           className="flex-1"
           size="lg"
         >
