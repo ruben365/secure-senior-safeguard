@@ -762,38 +762,15 @@ export const SubscriptionDialog = ({
         </div>
 
         <div className="p-6">
-          {stripePromise ? (
-            <Elements
-              stripe={stripePromise}
-              options={{
-                mode: "subscription",
-                amount: displayAmount,
-                currency: "usd",
-                appearance: {
-                  theme: "stripe",
-                  variables: {
-                    colorPrimary: "#7c3aed",
-                    borderRadius: "8px",
-                  },
-                },
-              }}
-            >
-              <SubscriptionForm
-                priceId={priceId}
-                serviceName={serviceName}
-                planTier={planTier}
-                amount={amount}
-                features={features}
-                variant={variant}
-                onClose={handleClose}
-              />
-            </Elements>
-          ) : (
-            <div className="text-center py-8">
-              <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4 text-primary" />
-              <p className="text-muted-foreground">Loading payment form...</p>
-            </div>
-          )}
+          <SubscriptionForm
+            priceId={priceId}
+            serviceName={serviceName}
+            planTier={planTier}
+            amount={amount}
+            features={features}
+            variant={variant}
+            onClose={handleClose}
+          />
         </div>
       </DialogContent>
     </Dialog>
