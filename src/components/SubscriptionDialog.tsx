@@ -27,6 +27,141 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || "");
 
+// Inner PaymentForm component with its own stripe/elements hooks
+interface PaymentFormProps {
+  clientSecret: string;
+  finalAmount: number;
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
+  error: string | null;
+  setError: (error: string | null) => void;
+  onSuccess: () => void;
+  onBack: () => void;
+  email: string;
+  serviceName: string;
+  planTier: string;
+  styles: any;
+}
+
+function PaymentForm({
+  clientSecret,
+  finalAmount,
+  loading,
+  setLoading,
+  error,
+  setError,
+  onSuccess,
+  onBack,
+  email,
+  serviceName,
+  planTier,
+  styles,
+}: PaymentFormProps) {
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const handleSubmit = async () => {
+    if (!stripe || !elements || !clientSecret) {
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const { error: submitError } = await elements.submit();
+      if (submitError) {
+        throw submitError;
+      }
+
+      const { error: confirmError, paymentIntent } = await stripe.confirmPayment({
+        elements,
+        clientSecret,
+        confirmParams: {
+          return_url: `${window.location.origin}/payment-success`,
+          receipt_email: email,
+        },
+        redirect: "if_required",
+      });
+
+      if (confirmError) {
+        throw confirmError;
+      }
+
+      if (paymentIntent?.status === "succeeded" || paymentIntent?.status === "processing") {
+        trackConversion(`subscription_${planTier.toLowerCase().replace(/\s+/g, '_')}`, finalAmount / 100);
+        onSuccess();
+        toast.success("Subscription activated!");
+      }
+    } catch (err: any) {
+      console.error("Payment error:", err);
+      setError(err.message || "Payment failed");
+      toast.error(err.message || "Payment failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      <PaymentElement
+        options={{
+          layout: "tabs",
+          paymentMethodOrder: ["card", "apple_pay", "google_pay"],
+        }}
+      />
+      
+      {error && (
+        <div className="p-3 bg-destructive/10 text-destructive rounded-lg text-sm">
+          {error}
+        </div>
+      )}
+
+      {/* Trust Indicators */}
+      <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground">
+        <div className="flex items-center gap-1">
+          <Lock className="w-3 h-3" />
+          <span>Secure Payment</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <CreditCard className="w-3 h-3" />
+          <span>256-bit Encryption</span>
+        </div>
+      </div>
+
+      <div className="flex gap-3">
+        <Button
+          variant="outline"
+          onClick={onBack}
+          disabled={loading}
+          className="flex-1"
+        >
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Back
+        </Button>
+        <Button
+          onClick={handleSubmit}
+          disabled={loading || !stripe || !elements}
+          className={`flex-1 text-white ${styles.buttonStyle}`}
+          size="lg"
+        >
+          {loading ? (
+            <>
+              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+              Processing...
+            </>
+          ) : (
+            <>
+              <Lock className="w-4 h-4 mr-2" />
+              Pay ${(finalAmount / 100).toFixed(2)}
+            </>
+          )}
+        </Button>
+      </div>
+    </div>
+  );
+}
+
 interface SubscriptionDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -255,47 +390,6 @@ function SubscriptionForm({
     }
   };
 
-  const handlePaymentSubmit = async () => {
-    if (!stripe || !elements || !clientSecret) {
-      return;
-    }
-
-    setLoading(true);
-    setError(null);
-
-    try {
-      const { error: submitError } = await elements.submit();
-      if (submitError) {
-        throw submitError;
-      }
-
-      const { error: confirmError, paymentIntent } = await stripe.confirmPayment({
-        elements,
-        clientSecret,
-        confirmParams: {
-          return_url: `${window.location.origin}/payment-success`,
-          receipt_email: email,
-        },
-        redirect: "if_required",
-      });
-
-      if (confirmError) {
-        throw confirmError;
-      }
-
-      if (paymentIntent?.status === "succeeded" || paymentIntent?.status === "processing") {
-        trackConversion(`subscription_${planTier.toLowerCase().replace(/\s+/g, '_')}`, finalAmount / 100);
-        setStep("success");
-        toast.success("Subscription activated!");
-      }
-    } catch (err: any) {
-      console.error("Payment error:", err);
-      setError(err.message || "Payment failed");
-      toast.error(err.message || "Payment failed. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div className="space-y-5">
@@ -532,7 +626,7 @@ function SubscriptionForm({
             {/* Order Summary */}
             <div className={`bg-gradient-to-r ${styles.headerGradient} rounded-xl p-4 border ${styles.accentBorder}`}>
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-muted-foreground">Subscription Total:</span>
+                <span className="text-sm text-muted-foreground">Order Total:</span>
                 <span className={`text-xl font-bold ${styles.priceColor}`}>
                   ${(finalAmount / 100).toFixed(2)}/mo
                 </span>
@@ -545,62 +639,36 @@ function SubscriptionForm({
               )}
             </div>
 
-            {/* Stripe Payment Element */}
+            {/* Stripe Payment Element - wrapped with clientSecret */}
             <div className="bg-background rounded-xl p-4 border">
-              <PaymentElement
+              <Elements
+                stripe={stripePromise}
                 options={{
-                  layout: "tabs",
-                  paymentMethodOrder: ["card", "apple_pay", "google_pay"],
+                  clientSecret,
+                  appearance: {
+                    theme: "stripe",
+                    variables: {
+                      colorPrimary: "#7c3aed",
+                      borderRadius: "8px",
+                    },
+                  },
                 }}
-              />
-            </div>
-
-            {error && (
-              <div className="p-3 bg-destructive/10 text-destructive rounded-lg text-sm">
-                {error}
-              </div>
-            )}
-
-            {/* Trust Indicators */}
-            <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground">
-              <div className="flex items-center gap-1">
-                <Lock className="w-3 h-3" />
-                <span>Secure Payment</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <CreditCard className="w-3 h-3" />
-                <span>256-bit Encryption</span>
-              </div>
-            </div>
-
-            <div className="flex gap-3">
-              <Button
-                variant="outline"
-                onClick={() => setStep("info")}
-                disabled={loading}
-                className="flex-1"
               >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back
-              </Button>
-              <Button
-                onClick={handlePaymentSubmit}
-                disabled={loading || !stripe || !elements}
-                className={`flex-1 text-white ${styles.buttonStyle}`}
-                size="lg"
-              >
-                {loading ? (
-                  <>
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    Processing...
-                  </>
-                ) : (
-                  <>
-                    <Lock className="w-4 h-4 mr-2" />
-                    Subscribe ${(finalAmount / 100).toFixed(2)}/mo
-                  </>
-                )}
-              </Button>
+                <PaymentForm
+                  clientSecret={clientSecret}
+                  finalAmount={finalAmount}
+                  loading={loading}
+                  setLoading={setLoading}
+                  error={error}
+                  setError={setError}
+                  onSuccess={() => setStep("success")}
+                  onBack={() => setStep("info")}
+                  email={email}
+                  serviceName={serviceName}
+                  planTier={planTier}
+                  styles={styles}
+                />
+              </Elements>
             </div>
           </motion.div>
         )}
