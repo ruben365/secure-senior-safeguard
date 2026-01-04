@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Quote, Star, ChevronLeft, ChevronRight } from "lucide-react";
 import testimonialImage from "@/assets/testimonial-1.jpg";
 import testimonialImage2 from "@/assets/testimonial-2.jpg";
-import testimonialImage3 from "@/assets/testimonial-3.jpg";
+import corineImage from "@/assets/corine-testimonial.jpg";
 import { GeometricCorner, DottedPattern, GridPattern, FloatingShapes } from "@/components/ui/GeometricDecorations";
 
 const testimonials = [
@@ -21,9 +21,9 @@ const testimonials = [
   },
   {
     quote: "The best investment we've made for our family's digital safety. Professional, patient, and incredibly knowledgeable. They made cybersecurity accessible for my elderly parents.",
-    name: "Sarah Williams",
-    location: "Cleveland, Ohio",
-    image: testimonialImage3,
+    name: "Corine M.",
+    location: "Nurse at Kettering Hospital",
+    image: corineImage,
   },
 ];
 
