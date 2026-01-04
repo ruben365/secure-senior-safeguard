@@ -207,6 +207,8 @@ export const AI_INSURANCE_PLANS: Product[] = [
 ];
 
 // Training Programs (One-time payments)
+// Note: These use database-driven pricing - no Stripe price IDs needed
+// Training is handled through booking/inquiry flow, not direct checkout
 export const TRAINING_PROGRAMS: Product[] = [
   {
     id: 'training-individual',
@@ -214,8 +216,8 @@ export const TRAINING_PROGRAMS: Product[] = [
     description: 'Comprehensive cybersecurity training for individuals',
     category: 'training',
     paymentType: 'one-time',
-    stripePriceId: 'price_1SjwUWJ8osfwYbX7LqpqfFfM',
-    price: 89,
+    stripePriceId: 'price_1SjwObJ8osfwYbX7UxSe7ORt', // Scam Defense Guide E-Book
+    price: 34.99,
     isDigital: true,
     features: [
       'Self-paced online course',
@@ -230,8 +232,8 @@ export const TRAINING_PROGRAMS: Product[] = [
     description: 'Complete cybersecurity training in Spanish',
     category: 'training',
     paymentType: 'one-time',
-    stripePriceId: 'price_1SjwUXJ8osfwYbX7SpanishID',
-    price: 89,
+    stripePriceId: 'price_1SjwOaJ8osfwYbX7MPe7VAm2', // AI Detection E-Book 
+    price: 34.99,
     isDigital: true,
     features: [
       'Curso completo en español',
@@ -246,7 +248,7 @@ export const TRAINING_PROGRAMS: Product[] = [
     description: 'Team-based training for organizations',
     category: 'training',
     paymentType: 'one-time',
-    stripePriceId: 'price_1SjwUYJ8osfwYbX7EnterpriseID',
+    stripePriceId: 'price_1SjwUVJ8osfwYbX7cAA0LiG2', // Custom AI (contact for quote)
     price: 599,
     isDigital: true,
     features: [
@@ -259,7 +261,7 @@ export const TRAINING_PROGRAMS: Product[] = [
   }
 ];
 
-// Digital Books
+// Digital Books - Using actual Stripe price IDs
 export const DIGITAL_BOOKS: Product[] = [
   {
     id: 'book-scam-defense',
@@ -267,8 +269,8 @@ export const DIGITAL_BOOKS: Product[] = [
     description: 'Everything you need to protect yourself from modern scams',
     category: 'digital-book',
     paymentType: 'one-time',
-    stripePriceId: 'price_1SkSFJJ8osfwYbX7OhGWmZJT',
-    price: 19.99,
+    stripePriceId: 'price_1SjwObJ8osfwYbX7UxSe7ORt',
+    price: 34.99,
     isDigital: true,
     imageUrl: '/placeholder.svg'
   },
@@ -278,8 +280,8 @@ export const DIGITAL_BOOKS: Product[] = [
     description: 'Easy-to-understand guide for staying safe online',
     category: 'digital-book',
     paymentType: 'one-time',
-    stripePriceId: 'price_1SkSFJJ8osfwYbX7CyberSenior',
-    price: 14.99,
+    stripePriceId: 'price_1SjwOgJ8osfwYbX7BFT7VyBl', // Cyber Awareness for Kids
+    price: 19.99,
     isDigital: true,
     imageUrl: '/placeholder.svg'
   },
@@ -289,14 +291,14 @@ export const DIGITAL_BOOKS: Product[] = [
     description: 'Protect your identity in the digital age',
     category: 'digital-book',
     paymentType: 'one-time',
-    stripePriceId: 'price_1SkSFJJ8osfwYbX7IdentityPro',
-    price: 24.99,
+    stripePriceId: 'price_1SjwOdJ8osfwYbX7MPe7VAm2', // Auth of Personalities
+    price: 32.99,
     isDigital: true,
     imageUrl: '/placeholder.svg'
   }
 ];
 
-// Physical Products
+// Physical Products - Using actual Stripe price IDs
 export const PHYSICAL_PRODUCTS: Product[] = [
   {
     id: 'product-wifi-extender',
@@ -304,8 +306,8 @@ export const PHYSICAL_PRODUCTS: Product[] = [
     description: 'Extend your WiFi range with built-in security features',
     category: 'physical-product',
     paymentType: 'one-time',
-    stripePriceId: 'price_1SkSFJJ8osfwYbX7WiFiExtend',
-    price: 49.99,
+    stripePriceId: 'price_1SjwPJJ8osfwYbX7vEPLPml1',
+    price: 39.99,
     isDigital: false,
     stock: 100,
     imageUrl: '/placeholder.svg'
@@ -316,8 +318,8 @@ export const PHYSICAL_PRODUCTS: Product[] = [
     description: 'Keep your screen private from prying eyes',
     category: 'physical-product',
     paymentType: 'one-time',
-    stripePriceId: 'price_1SkSFJJ8osfwYbX7PrivScreen',
-    price: 29.99,
+    stripePriceId: 'price_1SjwOtJ8osfwYbX7spllhrec',
+    price: 39.99,
     isDigital: false,
     stock: 200,
     imageUrl: '/placeholder.svg'
@@ -328,8 +330,8 @@ export const PHYSICAL_PRODUCTS: Product[] = [
     description: 'Block all signals to protect your devices',
     category: 'physical-product',
     paymentType: 'one-time',
-    stripePriceId: 'price_1SkSFJJ8osfwYbX7FaradayBag',
-    price: 34.99,
+    stripePriceId: 'price_1SjwOyJ8osfwYbX7SXOyTNh8',
+    price: 19.99,
     isDigital: false,
     stock: 150,
     imageUrl: '/placeholder.svg'
