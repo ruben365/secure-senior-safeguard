@@ -11,21 +11,34 @@ export function useAnalyticsTracking() {
   }, []);
 
   useEffect(() => {
-    // Defer tracking to avoid blocking critical rendering path
+    // Defer tracking aggressively to avoid extending network dependency chain
     const deferTracking = () => {
       trackPageView(location.pathname + location.search, document.title);
     };
     
-    // Use requestIdleCallback if available, otherwise setTimeout
-    const scheduleTracking = 'requestIdleCallback' in window
-      ? (window as any).requestIdleCallback(deferTracking, { timeout: 2000 })
-      : setTimeout(deferTracking, 100);
+    // Wait for page to fully load before tracking analytics
+    let scheduleTracking: number | ReturnType<typeof setTimeout>;
+    
+    const startTracking = () => {
+      if ('requestIdleCallback' in window) {
+        scheduleTracking = (window as any).requestIdleCallback(deferTracking, { timeout: 10000 });
+      } else {
+        scheduleTracking = setTimeout(deferTracking, 3000);
+      }
+    };
+    
+    // Only start tracking after load event (ensures LCP is complete)
+    if (document.readyState === 'complete') {
+      setTimeout(startTracking, 1000); // Additional 1s delay after load
+    } else {
+      window.addEventListener('load', () => setTimeout(startTracking, 1000), { once: true });
+    }
     
     const cancelTracking = () => {
-      if ('requestIdleCallback' in window) {
+      if ('requestIdleCallback' in window && typeof scheduleTracking === 'number') {
         (window as any).cancelIdleCallback(scheduleTracking);
       } else {
-        clearTimeout(scheduleTracking);
+        clearTimeout(scheduleTracking as ReturnType<typeof setTimeout>);
       }
     };
 

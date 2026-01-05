@@ -11,15 +11,12 @@ export function useStripeKey() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Defer Stripe initialization to avoid blocking critical rendering path
-    const timeoutId = setTimeout(() => initStripe(), 100);
-    
+    // Defer Stripe initialization until after page load to avoid blocking LCP
     const initStripe = async () => {
       // First try VITE env variable (fastest)
       const envKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
       
       if (envKey && envKey.trim() !== '') {
-        console.log('[Stripe] Using env key');
         if (!stripePromiseCache) {
           stripePromiseCache = loadStripe(envKey);
         }
@@ -30,7 +27,6 @@ export function useStripeKey() {
 
       // If cached key exists, use it
       if (cachedKey) {
-        console.log('[Stripe] Using cached key');
         if (!stripePromiseCache) {
           stripePromiseCache = loadStripe(cachedKey);
         }
@@ -39,9 +35,8 @@ export function useStripeKey() {
         return;
       }
 
-      // Fetch key from edge function
+      // Fetch key from edge function - only when actually needed
       try {
-        console.log('[Stripe] Fetching key from edge function');
         const { data, error: fnError } = await supabase.functions.invoke('get-stripe-key');
         
         if (fnError) throw fnError;
@@ -50,19 +45,26 @@ export function useStripeKey() {
           cachedKey = data.publishableKey;
           stripePromiseCache = loadStripe(data.publishableKey);
           setStripePromise(stripePromiseCache);
-          console.log('[Stripe] Key loaded from edge function');
         } else {
           throw new Error('No publishable key returned');
         }
       } catch (err: any) {
-        console.error('[Stripe] Failed to load key:', err);
         setError(err.message || 'Failed to initialize payment system');
       } finally {
         setLoading(false);
       }
     };
 
-    return () => clearTimeout(timeoutId);
+    // Use requestIdleCallback for non-critical initialization (defers until browser is idle)
+    let timeoutId: ReturnType<typeof setTimeout>;
+    if ('requestIdleCallback' in window) {
+      const idleId = (window as any).requestIdleCallback(initStripe, { timeout: 5000 });
+      return () => (window as any).cancelIdleCallback(idleId);
+    } else {
+      // Fallback: defer by 2 seconds to avoid blocking LCP
+      timeoutId = setTimeout(initStripe, 2000);
+      return () => clearTimeout(timeoutId);
+    }
   }, []);
 
   return { stripePromise, loading, error };
