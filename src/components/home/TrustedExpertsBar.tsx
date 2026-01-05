@@ -1,29 +1,32 @@
 import { Star } from "lucide-react";
 
-const avatars = [
-  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face",
+// Static placeholder avatars - no external image loading
+const avatarColors = [
+  "bg-primary/20 text-primary",
+  "bg-accent/20 text-accent", 
+  "bg-emerald-500/20 text-emerald-600",
+  "bg-amber-500/20 text-amber-600",
+  "bg-rose-500/20 text-rose-600",
 ];
+
+const initials = ["MC", "SW", "DP", "JR", "AL"];
 
 export const TrustedExpertsBar = () => {
   return (
     <section className="py-8 bg-background">
       <div className="container mx-auto px-4">
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-          {/* Avatar Stack */}
+          {/* Avatar Stack - CSS only, no external images */}
           <div className="flex items-center">
             <div className="flex -space-x-3">
-              {avatars.map((src, i) => (
-                <img
+              {initials.map((initial, i) => (
+                <div
                   key={i}
-                  src={src}
-                  alt={`Client ${i + 1}`}
-                  className="w-10 h-10 rounded-full border-2 border-background object-cover"
-                  style={{ zIndex: avatars.length - i }}
-                />
+                  className={`w-10 h-10 rounded-full border-2 border-background flex items-center justify-center text-xs font-semibold ${avatarColors[i]}`}
+                  style={{ zIndex: initials.length - i }}
+                >
+                  {initial}
+                </div>
               ))}
             </div>
             <div className="ml-4 flex items-center gap-1">
