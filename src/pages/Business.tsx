@@ -38,6 +38,7 @@ import { PAGE_NATURE_IMAGES, natureSummer2 } from "@/config/natureHeroImages";
 import { VideoLightbox } from "@/components/VideoLightbox";
 import { SEO } from "@/components/SEO";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
+import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 
 function Business() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -239,7 +240,13 @@ function Business() {
             </Link>
           </Button>
         </div>
+        
+        {/* Floating Stats Bar */}
+        <HeroFloatingStats />
       </Hero>
+
+      {/* Spacer to account for floating stats bar */}
+      <div className="h-12" />
 
       <TrustBar />
 
