@@ -90,6 +90,7 @@ export const CommunityImpact = () => {
             alt="Ohio community and nature"
             width={1310}
             height={400}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
             loading="lazy"
             decoding="async"
             className="w-full h-[400px] object-cover"

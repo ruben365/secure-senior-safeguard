@@ -94,6 +94,7 @@ export const WorkshopsPromo = () => {
                 alt="Seniors learning in a workshop" 
                 width={700}
                 height={394}
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 loading="lazy"
                 decoding="async"
                 className="w-full h-auto object-cover aspect-[16/10]"

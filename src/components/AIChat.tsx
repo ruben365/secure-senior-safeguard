@@ -340,6 +340,7 @@ export const AIChat = () => {
             alt="Laura AI Assistant" 
             width={56}
             height={56}
+            sizes="56px"
             loading="lazy"
             decoding="async"
             className="w-full h-full object-cover object-top"
@@ -365,7 +366,7 @@ export const AIChat = () => {
         <div className="flex items-center justify-between p-3 border-b border-border bg-card shrink-0">
           <div className="flex items-center gap-2">
             <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
-              <img src={lauraAvatar} alt="Laura" width={40} height={40} loading="lazy" decoding="async" className="w-full h-full object-cover object-top" />
+              <img src={lauraAvatar} alt="Laura" width={40} height={40} sizes="40px" loading="lazy" decoding="async" className="w-full h-full object-cover object-top" />
               <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-card" />
             </div>
             <div>
