@@ -2,28 +2,17 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { trackPageView, trackScroll, getSessionId } from "@/utils/analyticsTracker";
 
-// Defer analytics to idle time to avoid blocking critical path
-const scheduleIdleTask = (callback: () => void) => {
-  if ('requestIdleCallback' in window) {
-    (window as any).requestIdleCallback(callback, { timeout: 3000 });
-  } else {
-    setTimeout(callback, 1000);
-  }
-};
-
 export function useAnalyticsTracking() {
   const location = useLocation();
 
   useEffect(() => {
-    // Initialize session - defer to idle (runs once on mount)
-    scheduleIdleTask(() => getSessionId());
+    // Initialize session
+    getSessionId();
   }, []);
 
   useEffect(() => {
-    // Defer page view tracking to idle time (out of critical path)
-    scheduleIdleTask(() => {
-      trackPageView(location.pathname + location.search, document.title);
-    });
+    // Track page view on route change
+    trackPageView(location.pathname + location.search, document.title);
 
     // Track scroll depth
     let maxScroll = 0;

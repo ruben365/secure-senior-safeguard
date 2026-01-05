@@ -13,9 +13,7 @@ import { CartProvider } from "./contexts/CartContext";
 import { CartFeedbackProvider, CartFeedbackNotifications } from "./components/CartFeedbackNotifications";
 import { SubscriptionProvider } from "./contexts/SubscriptionContext";
 import { CheckoutProvider } from "./contexts/CheckoutContext";
-
-// Lazy load payment dialog to code-split Stripe.js out of main bundle
-const UnifiedCheckoutDialog = lazy(() => import("./components/payment/UnifiedCheckoutDialog"));
+import UnifiedCheckoutDialog from "./components/payment/UnifiedCheckoutDialog";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { RouteTracker } from "./components/RouteTracker";
 import { DraggablePerformanceMonitor } from "./components/DraggablePerformanceMonitor";
@@ -237,9 +235,7 @@ function App() {
                     <AIChat />
                     <CookieConsent />
                     <CartFeedbackNotifications />
-                    <Suspense fallback={null}>
-                      <UnifiedCheckoutDialog />
-                    </Suspense>
+                    <UnifiedCheckoutDialog />
                     <DraggablePerformanceMonitor />
                   </BrowserRouter>
                 </AIChatProvider>

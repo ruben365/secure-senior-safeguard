@@ -52,16 +52,10 @@ export const TeamShowcase = () => {
               <p className="text-sm text-muted-foreground">{member.bio}</p>
               
               <div className="flex justify-center gap-3 mt-4">
-                <button 
-                  className="p-2 rounded-full bg-muted hover:bg-muted/80 transition-colors"
-                  aria-label={`View ${member.name}'s LinkedIn profile`}
-                >
+                <button className="p-2 rounded-full bg-muted hover:bg-muted/80 transition-colors">
                   <Linkedin className="w-4 h-4" />
                 </button>
-                <button 
-                  className="p-2 rounded-full bg-muted hover:bg-muted/80 transition-colors"
-                  aria-label={`Email ${member.name}`}
-                >
+                <button className="p-2 rounded-full bg-muted hover:bg-muted/80 transition-colors">
                   <Mail className="w-4 h-4" />
                 </button>
               </div>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Shield, ArrowRight, Lock, Eye, Fingerprint, ShieldCheck, Zap, Globe, Play } from "lucide-react";
-import heroVideo from "@/assets/hero-video.mp4";
+import heroVideo from "@/assets/people-studying-video.mp4";
 
 const securityFeatures = [{
   icon: Lock,
@@ -90,13 +90,12 @@ export const HeroHomepage = () => {
 
       {/* Video Background - Full width */}
       <div className="absolute inset-0">
-        {/* Video element with preload for faster LCP */}
+        {/* Video element */}
         <video
           autoPlay
           loop
           muted
           playsInline
-          preload="auto"
           onLoadedData={() => setVideoLoaded(true)}
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
         >

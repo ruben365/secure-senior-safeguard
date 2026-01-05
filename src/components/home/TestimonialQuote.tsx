@@ -118,17 +118,15 @@ export const TestimonialQuote = () => {
                 <ChevronLeft className="w-5 h-5 text-foreground" />
               </button>
               
-              <div className="flex gap-2" role="tablist" aria-label="Testimonial navigation">
-                {testimonials.map((t, index) => (
+              <div className="flex gap-2">
+                {testimonials.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentIndex(index)}
                     className={`h-2 rounded-full transition-all duration-200 ${
                       index === currentIndex ? "bg-primary w-8" : "bg-muted w-2 hover:bg-primary/30"
                     }`}
-                    role="tab"
-                    aria-selected={index === currentIndex}
-                    aria-label={`Go to testimonial from ${t.name}`}
+                    aria-label={`Go to testimonial ${index + 1}`}
                   />
                 ))}
               </div>

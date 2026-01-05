@@ -4,15 +4,9 @@ import App from "./App.tsx";
 import "./index.css";
 import { initPerformanceOptimizations } from "./utils/performanceOptimization";
 
-// Initialize performance optimizations (deferred to not block FCP)
+// Initialize performance optimizations
 if (typeof window !== 'undefined') {
-  // Use requestIdleCallback to defer non-critical initialization
-  const initWhenIdle = () => initPerformanceOptimizations();
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(initWhenIdle, { timeout: 2000 });
-  } else {
-    setTimeout(initWhenIdle, 100);
-  }
+  initPerformanceOptimizations();
 }
 
 // Register service worker only in production
