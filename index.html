@@ -3,6 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     
+    <!-- CSS async loader - MUST be first to intercept Vite CSS before it blocks -->
+    <script>
+      (function(){
+        // MutationObserver intercepts stylesheets as Vite injects them
+        var observer = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            mutation.addedNodes.forEach(function(node) {
+              if (node.nodeName === 'LINK' && 
+                  node.rel === 'stylesheet' && 
+                  node.href && 
+                  node.href.includes('/assets/')) {
+                // Convert to async loading pattern
+                node.media = 'print';
+                node.onload = function() { this.media = 'all'; };
+              }
+            });
+          });
+        });
+        observer.observe(document.head, { childList: true });
+        // Stop observing after DOMContentLoaded to avoid memory leaks
+        document.addEventListener('DOMContentLoaded', function() {
+          observer.disconnect();
+        });
+      })();
+    </script>
+    
     <!-- Preconnect hints MUST be early in head for maximum benefit -->
     <link rel="preconnect" href="https://avoafweoebstkgjnbadv.supabase.co">
     <link rel="preconnect" href="https://avoafweoebstkgjnbadv.supabase.co" crossorigin="anonymous">
@@ -42,7 +68,7 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
-    <title>InVision Network - AI Scam Protection Training for Families &amp;amp;amp; Seniors</title>
+    <title>InVision Network - AI Scam Protection Training for Families &amp; Seniors</title>
     <meta name="description" content="Protect your family from AI-powered scams. Expert training, deepfake detection, and 24/7 scam analysis. Trusted by 500+ families. Based in Dayton, OH. EN/FR/ES.">
     <meta name="author" content="InVision Network" />
     <meta name="keywords" content="AI scam protection, deepfake detection, senior scam training, family cybersecurity, phishing defense, Dayton Ohio">
@@ -113,33 +139,15 @@
     }
     </script>
     
-  
-  
-  
-  
-  
-  
-  
-  <link rel="icon" type="image/x-icon" href="https://storage.googleapis.com/gpt-engineer-file-uploads/UpYpYr7MTVdr1jgHmL94ALNUlk93/uploads/1761862729082-shield_purpleb.png">
-  <meta property="og:title" content="InVision Network - AI Scam Protection Training for Families &amp;amp;amp; Seniors">
-  <meta name="twitter:title" content="InVision Network - AI Scam Protection Training for Families &amp;amp;amp; Seniors">
-  <meta property="og:description" content="Protect your family from AI-powered scams. Expert training, deepfake detection, and 24/7 scam analysis. Trusted by 500+ families. Based in Dayton, OH. EN/FR/ES.">
-  <meta name="twitter:description" content="Protect your family from AI-powered scams. Expert training, deepfake detection, and 24/7 scam analysis. Trusted by 500+ families. Based in Dayton, OH. EN/FR/ES.">
-</head>
+    <link rel="icon" type="image/x-icon" href="https://storage.googleapis.com/gpt-engineer-file-uploads/UpYpYr7MTVdr1jgHmL94ALNUlk93/uploads/1761862729082-shield_purpleb.png">
+    <meta property="og:title" content="InVision Network - AI Scam Protection Training for Families &amp; Seniors">
+    <meta name="twitter:title" content="InVision Network - AI Scam Protection Training for Families &amp; Seniors">
+    <meta property="og:description" content="Protect your family from AI-powered scams. Expert training, deepfake detection, and 24/7 scam analysis. Trusted by 500+ families. Based in Dayton, OH. EN/FR/ES.">
+    <meta name="twitter:description" content="Protect your family from AI-powered scams. Expert training, deepfake detection, and 24/7 scam analysis. Trusted by 500+ families. Based in Dayton, OH. EN/FR/ES.">
+  </head>
 
   <body>
     <div id="root"></div>
-    
-    <!-- Async CSS loader - converts Vite-injected CSS to non-render-blocking -->
-    <script>
-      (function(){
-        var links=document.querySelectorAll('link[rel="stylesheet"][href*="/assets/"]');
-        links.forEach(function(link){
-          link.media='print';
-          link.onload=function(){this.media='all'};
-        });
-      })();
-    </script>
     
     <!-- Service Worker Registration - deferred to reduce main-thread blocking -->
     <script>
