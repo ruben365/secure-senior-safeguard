@@ -108,17 +108,9 @@ const Hero = ({
           />
         )}
         
-        {/* Premium Purple Gradient Overlay - enhanced for text visibility */}
-        {/* GPU-optimized purple animated overlay */}
-        {!disablePurpleOverlay && <HeroPurpleOverlay />}
-        
-        {/* Fallback gradient for homepage or when purple overlay disabled */}
-        {disablePurpleOverlay && (
-          <>
-            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/50" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
-          </>
-        )}
+        {/* Simple gradient overlay for text visibility */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
         
         {/* Additional overlay */}
         {overlay && (
