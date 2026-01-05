@@ -298,18 +298,42 @@ function About() {
 
       {/* Community Impact with Group Photo */}
       <section className="py-12 md:py-16 lg:py-20 xl:py-32 relative overflow-hidden">
+        {/* Background image with subtle animation */}
         <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${communityImpact4k})` }}
+          className="absolute inset-0 bg-cover bg-center transform scale-105 animate-slow-zoom"
+          style={{ 
+            backgroundImage: `url(${protectedCommunity4k})`,
+            filter: 'saturate(1.1) contrast(1.05)'
+          }}
         />
-        {/* No overlay - clear image */}
-        <div className="container mx-auto px-4 relative z-10 text-white" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.6)' }}>
+        
+        {/* Professional gradient overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/70 via-primary/50 to-accent/60" />
+        
+        {/* Geometric accent patterns */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {/* Floating orbs */}
+          <div className="absolute top-10 left-10 w-32 h-32 bg-white/5 rounded-full blur-2xl animate-float-slow" />
+          <div className="absolute bottom-20 right-20 w-40 h-40 bg-accent/10 rounded-full blur-3xl animate-float-delayed" />
+          <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-white/5 rounded-full blur-xl animate-pulse" />
+          
+          {/* Grid pattern overlay */}
+          <div 
+            className="absolute inset-0 opacity-5"
+            style={{
+              backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+              backgroundSize: '40px 40px'
+            }}
+          />
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10 text-white">
           <ScrollReveal>
             <div className="text-center mb-8 md:mb-12 lg:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 md:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 md:mb-6 drop-shadow-lg">
                 Our Community Impact
               </h2>
-              <p className="text-base sm:text-lg md:text-xl opacity-90 max-w-3xl mx-auto px-4">
+              <p className="text-base sm:text-lg md:text-xl opacity-95 max-w-3xl mx-auto px-4 drop-shadow-md">
                 Real numbers, real families, real protection
               </p>
             </div>
@@ -317,35 +341,35 @@ function About() {
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
             <ScrollReveal delay={100}>
-              <div className="text-center" ref={stat1.ref}>
-                <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 md:mb-4">
+              <div className="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-white/20 hover:bg-white/15 transition-all duration-300" ref={stat1.ref}>
+                <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 md:mb-4 drop-shadow-lg">
                   <AnimatedCounter end={stat1.count} />+
                 </div>
-                <div className="text-sm sm:text-base md:text-lg opacity-90">Families Trained</div>
+                <div className="text-sm sm:text-base md:text-lg opacity-95 font-medium">Families Trained</div>
               </div>
             </ScrollReveal>
             <ScrollReveal delay={200}>
-              <div className="text-center" ref={stat2.ref}>
-                <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 md:mb-4">
+              <div className="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-white/20 hover:bg-white/15 transition-all duration-300" ref={stat2.ref}>
+                <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 md:mb-4 drop-shadow-lg">
                   <AnimatedCounter end={stat2.count} />%
                 </div>
-                <div className="text-sm sm:text-base md:text-lg opacity-90">Scams Prevented</div>
+                <div className="text-sm sm:text-base md:text-lg opacity-95 font-medium">Scams Prevented</div>
               </div>
             </ScrollReveal>
             <ScrollReveal delay={300}>
-              <div className="text-center" ref={stat3.ref}>
-                <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 md:mb-4">
+              <div className="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-white/20 hover:bg-white/15 transition-all duration-300" ref={stat3.ref}>
+                <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 md:mb-4 drop-shadow-lg">
                   $<AnimatedCounter end={stat3.count} />+
                 </div>
-                <div className="text-sm sm:text-base md:text-lg opacity-90">Fraud Prevented</div>
+                <div className="text-sm sm:text-base md:text-lg opacity-95 font-medium">Fraud Prevented</div>
               </div>
             </ScrollReveal>
             <ScrollReveal delay={400}>
-              <div className="text-center" ref={stat4.ref}>
-                <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 md:mb-4">
+              <div className="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-white/20 hover:bg-white/15 transition-all duration-300" ref={stat4.ref}>
+                <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 md:mb-4 drop-shadow-lg">
                   <AnimatedCounter end={stat4.count} />%
                 </div>
-                <div className="text-sm sm:text-base md:text-lg opacity-90">Satisfaction Rate</div>
+                <div className="text-sm sm:text-base md:text-lg opacity-95 font-medium">Satisfaction Rate</div>
               </div>
             </ScrollReveal>
           </div>
@@ -353,20 +377,20 @@ function About() {
           {/* Additional Info */}
           <ScrollReveal delay={500}>
             <div className="grid md:grid-cols-3 gap-6 mt-12 max-w-4xl mx-auto">
-              <div className="text-center p-4 bg-white/10 rounded-xl backdrop-blur-sm">
-                <div className="text-2xl mb-2">🏠</div>
-                <div className="font-bold">Ohio-Based</div>
-                <div className="text-sm opacity-80">Serving local communities</div>
+              <div className="text-center p-5 bg-white/15 rounded-2xl backdrop-blur-md border border-white/25 hover:bg-white/20 transition-all duration-300 hover:-translate-y-1">
+                <div className="text-3xl mb-3">🏠</div>
+                <div className="font-bold text-lg">Ohio-Based</div>
+                <div className="text-sm opacity-90">Serving local communities</div>
               </div>
-              <div className="text-center p-4 bg-white/10 rounded-xl backdrop-blur-sm">
-                <div className="text-2xl mb-2">🎖️</div>
-                <div className="font-bold">Veteran-Owned</div>
-                <div className="text-sm opacity-80">Military values drive us</div>
+              <div className="text-center p-5 bg-white/15 rounded-2xl backdrop-blur-md border border-white/25 hover:bg-white/20 transition-all duration-300 hover:-translate-y-1">
+                <div className="text-3xl mb-3">🎖️</div>
+                <div className="font-bold text-lg">Veteran-Owned</div>
+                <div className="text-sm opacity-90">Military values drive us</div>
               </div>
-              <div className="text-center p-4 bg-white/10 rounded-xl backdrop-blur-sm">
-                <div className="text-2xl mb-2">💙</div>
-                <div className="font-bold">Mission-Driven</div>
-                <div className="text-sm opacity-80">Protection over profit</div>
+              <div className="text-center p-5 bg-white/15 rounded-2xl backdrop-blur-md border border-white/25 hover:bg-white/20 transition-all duration-300 hover:-translate-y-1">
+                <div className="text-3xl mb-3">💙</div>
+                <div className="font-bold text-lg">Mission-Driven</div>
+                <div className="text-sm opacity-90">Protection over profit</div>
               </div>
             </div>
           </ScrollReveal>
