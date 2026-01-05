@@ -14,174 +14,163 @@ import { Heart, Users, Zap, Target, MapPin, Clock, DollarSign, Briefcase, Star, 
 import { Link } from "react-router-dom";
 import { AIImageDisclaimer } from "@/components/AIImageDisclaimer";
 import { PAGE_NATURE_IMAGES } from "@/config/natureHeroImages";
-
-const jobPositions = [
-  {
-    id: 1,
-    title: "Senior AI Engineer",
-    department: "Engineering",
-    location: "Remote",
-    type: "Full-time",
-    salary: "$120k - $160k",
-    description: "Build AI systems that protect families from scams.",
-    featured: true
-  },
-  {
-    id: 2,
-    title: "Customer Success Manager",
-    department: "Support",
-    location: "Columbus, OH / Hybrid",
-    type: "Full-time",
-    salary: "$60k - $80k",
-    description: "Help families feel safe and supported with our platform.",
-    featured: false
-  },
-  {
-    id: 3,
-    title: "Content Writer",
-    department: "Marketing",
-    location: "Remote",
-    type: "Full-time",
-    salary: "$50k - $70k",
-    description: "Create educational content about scam prevention.",
-    featured: false
-  },
-  {
-    id: 4,
-    title: "Business Development Rep",
-    department: "Sales",
-    location: "Columbus, OH",
-    type: "Full-time",
-    salary: "$50k + Commission",
-    description: "Help businesses discover our AI solutions.",
-    featured: false
-  },
-  {
-    id: 5,
-    title: "UI/UX Designer",
-    department: "Design",
-    location: "Remote",
-    type: "Full-time",
-    salary: "$80k - $110k",
-    description: "Design accessible interfaces that seniors love.",
-    featured: true
-  },
-  {
-    id: 6,
-    title: "Scam Analyst",
-    department: "Operations",
-    location: "Remote",
-    type: "Full-time",
-    salary: "$55k - $75k",
-    description: "Analyze scam patterns and update protection algorithms.",
-    featured: false
-  },
-  {
-    id: 7,
-    title: "Part-Time Trainer",
-    department: "Training",
-    location: "Columbus, OH",
-    type: "Part-time",
-    salary: "$25-$35/hour",
-    description: "Teach seniors how to stay safe online.",
-    featured: false
-  },
-  {
-    id: 8,
-    title: "Full Stack Developer",
-    department: "Engineering",
-    location: "Remote",
-    type: "Full-time",
-    salary: "$100k - $140k",
-    description: "Build and maintain our protection platform.",
-    featured: true
-  },
-  {
-    id: 9,
-    title: "Marketing Manager",
-    department: "Marketing",
-    location: "Remote / Hybrid",
-    type: "Full-time",
-    salary: "$70k - $95k",
-    description: "Lead marketing campaigns to reach more families.",
-    featured: false
-  },
-  {
-    id: 10,
-    title: "Security Researcher",
-    department: "Security",
-    location: "Remote",
-    type: "Full-time",
-    salary: "$90k - $130k",
-    description: "Research emerging threats and protect our users.",
-    featured: true
-  }
-];
-
-const companyValues = [
-  {
-    icon: Heart,
-    title: "Mission-Driven",
-    description: "Every feature we build protects families. Our work has real-world impact every day."
-  },
-  {
-    icon: Users,
-    title: "Empathy First",
-    description: "We build for seniors and vulnerable users. Compassion guides every decision."
-  },
-  {
-    icon: Zap,
-    title: "Innovation",
-    description: "Cutting-edge AI meets practical solutions. We're solving problems that matter."
-  },
-  {
-    icon: Target,
-    title: "Inclusivity",
-    description: "Diverse teams build better products. We welcome all backgrounds and perspectives."
-  }
-];
-
-const benefits = [
-  { category: "Health", items: ["Medical, Dental, Vision", "Mental health support", "Wellness stipend"] },
-  { category: "Financial", items: ["401(k) match", "Stock options", "Performance bonuses"] },
-  { category: "Work-Life", items: ["Unlimited PTO", "Remote-first", "Flexible hours"] },
-  { category: "Growth", items: ["Learning budget", "Conference attendance", "Mentorship"] },
-  { category: "Family", items: ["Parental leave", "Family scam protection", "Childcare stipend"] },
-  { category: "Perks", items: ["Home office setup", "Team retreats", "Free snacks"] }
-];
-
-const applicationSteps = [
-  { step: "1", title: "Apply", description: "Submit your application (10 min)", duration: "10 min" },
-  { step: "2", title: "Screen", description: "Brief phone call with our team", duration: "20 min" },
-  { step: "3", title: "Interview", description: "Meet the team and discuss the role", duration: "1 hour" },
-  { step: "4", title: "Offer", description: "Receive your offer within 3 days", duration: "3 days" }
-];
-
+const jobPositions = [{
+  id: 1,
+  title: "Senior AI Engineer",
+  department: "Engineering",
+  location: "Remote",
+  type: "Full-time",
+  salary: "$120k - $160k",
+  description: "Build AI systems that protect families from scams.",
+  featured: true
+}, {
+  id: 2,
+  title: "Customer Success Manager",
+  department: "Support",
+  location: "Columbus, OH / Hybrid",
+  type: "Full-time",
+  salary: "$60k - $80k",
+  description: "Help families feel safe and supported with our platform.",
+  featured: false
+}, {
+  id: 3,
+  title: "Content Writer",
+  department: "Marketing",
+  location: "Remote",
+  type: "Full-time",
+  salary: "$50k - $70k",
+  description: "Create educational content about scam prevention.",
+  featured: false
+}, {
+  id: 4,
+  title: "Business Development Rep",
+  department: "Sales",
+  location: "Columbus, OH",
+  type: "Full-time",
+  salary: "$50k + Commission",
+  description: "Help businesses discover our AI solutions.",
+  featured: false
+}, {
+  id: 5,
+  title: "UI/UX Designer",
+  department: "Design",
+  location: "Remote",
+  type: "Full-time",
+  salary: "$80k - $110k",
+  description: "Design accessible interfaces that seniors love.",
+  featured: true
+}, {
+  id: 6,
+  title: "Scam Analyst",
+  department: "Operations",
+  location: "Remote",
+  type: "Full-time",
+  salary: "$55k - $75k",
+  description: "Analyze scam patterns and update protection algorithms.",
+  featured: false
+}, {
+  id: 7,
+  title: "Part-Time Trainer",
+  department: "Training",
+  location: "Columbus, OH",
+  type: "Part-time",
+  salary: "$25-$35/hour",
+  description: "Teach seniors how to stay safe online.",
+  featured: false
+}, {
+  id: 8,
+  title: "Full Stack Developer",
+  department: "Engineering",
+  location: "Remote",
+  type: "Full-time",
+  salary: "$100k - $140k",
+  description: "Build and maintain our protection platform.",
+  featured: true
+}, {
+  id: 9,
+  title: "Marketing Manager",
+  department: "Marketing",
+  location: "Remote / Hybrid",
+  type: "Full-time",
+  salary: "$70k - $95k",
+  description: "Lead marketing campaigns to reach more families.",
+  featured: false
+}, {
+  id: 10,
+  title: "Security Researcher",
+  department: "Security",
+  location: "Remote",
+  type: "Full-time",
+  salary: "$90k - $130k",
+  description: "Research emerging threats and protect our users.",
+  featured: true
+}];
+const companyValues = [{
+  icon: Heart,
+  title: "Mission-Driven",
+  description: "Every feature we build protects families. Our work has real-world impact every day."
+}, {
+  icon: Users,
+  title: "Empathy First",
+  description: "We build for seniors and vulnerable users. Compassion guides every decision."
+}, {
+  icon: Zap,
+  title: "Innovation",
+  description: "Cutting-edge AI meets practical solutions. We're solving problems that matter."
+}, {
+  icon: Target,
+  title: "Inclusivity",
+  description: "Diverse teams build better products. We welcome all backgrounds and perspectives."
+}];
+const benefits = [{
+  category: "Health",
+  items: ["Medical, Dental, Vision", "Mental health support", "Wellness stipend"]
+}, {
+  category: "Financial",
+  items: ["401(k) match", "Stock options", "Performance bonuses"]
+}, {
+  category: "Work-Life",
+  items: ["Unlimited PTO", "Remote-first", "Flexible hours"]
+}, {
+  category: "Growth",
+  items: ["Learning budget", "Conference attendance", "Mentorship"]
+}, {
+  category: "Family",
+  items: ["Parental leave", "Family scam protection", "Childcare stipend"]
+}, {
+  category: "Perks",
+  items: ["Home office setup", "Team retreats", "Free snacks"]
+}];
+const applicationSteps = [{
+  step: "1",
+  title: "Apply",
+  description: "Submit your application (10 min)",
+  duration: "10 min"
+}, {
+  step: "2",
+  title: "Screen",
+  description: "Brief phone call with our team",
+  duration: "20 min"
+}, {
+  step: "3",
+  title: "Interview",
+  description: "Meet the team and discuss the role",
+  duration: "1 hour"
+}, {
+  step: "4",
+  title: "Offer",
+  description: "Receive your offer within 3 days",
+  duration: "3 days"
+}];
 function Careers() {
   const [selectedDepartment, setSelectedDepartment] = useState("all");
-
   const departments = ["all", ...Array.from(new Set(jobPositions.map(job => job.department)))];
-
-  const filteredJobs = selectedDepartment === "all" 
-    ? jobPositions 
-    : jobPositions.filter(job => job.department === selectedDepartment);
-
+  const filteredJobs = selectedDepartment === "all" ? jobPositions : jobPositions.filter(job => job.department === selectedDepartment);
   const careersHeroImages = PAGE_NATURE_IMAGES.careers;
-
-  return (
-    <PageTransition variant="fade">
-      <SEO 
-        title="Careers - Join Our Mission" 
-        description="Join InVision Network and help protect families from AI-powered scams. Remote-first culture, competitive benefits, meaningful work. Open positions in engineering, support, design, and more."
-      />
+  return <PageTransition variant="fade">
+      <SEO title="Careers - Join Our Mission" description="Join InVision Network and help protect families from AI-powered scams. Remote-first culture, competitive benefits, meaningful work. Open positions in engineering, support, design, and more." />
       <Navigation />
-      <Hero 
-        backgroundImages={careersHeroImages} 
-        headline="Join Our Mission" 
-        subheadline="Help us protect families from AI-powered scams"
-        showProtectionBadge
-        badgeText="We're Hiring"
-      />
+      <Hero backgroundImages={careersHeroImages} headline="Join Our Mission" subheadline="Help us protect families from AI-powered scams" showProtectionBadge badgeText="We're Hiring" />
       <TrustBar />
       
       {/* Why InVision */}
@@ -199,9 +188,8 @@ function Careers() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {companyValues.map((value, index) => {
-              const IconComponent = value.icon;
-              return (
-                <ScrollReveal key={index} delay={index * 100}>
+            const IconComponent = value.icon;
+            return <ScrollReveal key={index} delay={index * 100}>
                   <Card className="text-center hover:shadow-lg transition-shadow h-full">
                     <CardHeader>
                       <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
@@ -213,9 +201,8 @@ function Careers() {
                       <p className="text-sm text-muted-foreground">{value.description}</p>
                     </CardContent>
                   </Card>
-                </ScrollReveal>
-              );
-            })}
+                </ScrollReveal>;
+          })}
           </div>
         </div>
       </section>
@@ -235,18 +222,15 @@ function Careers() {
           {/* Department Tabs */}
           <Tabs value={selectedDepartment} onValueChange={setSelectedDepartment} className="mb-8">
             <TabsList className="flex flex-wrap justify-center gap-2 h-auto bg-transparent">
-              {departments.map(dept => (
-                <TabsTrigger key={dept} value={dept} className="capitalize">
+              {departments.map(dept => <TabsTrigger key={dept} value={dept} className="capitalize">
                   {dept === "all" ? "All Departments" : dept}
-                </TabsTrigger>
-              ))}
+                </TabsTrigger>)}
             </TabsList>
           </Tabs>
 
           {/* Job Cards - Simplified */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
-            {filteredJobs.map(job => (
-              <Card key={job.id} className={`p-5 hover:shadow-xl transition-all hover:-translate-y-1 ${job.featured ? 'border-primary border-2' : ''}`}>
+            {filteredJobs.map(job => <Card key={job.id} className={`p-5 hover:shadow-xl transition-all hover:-translate-y-1 ${job.featured ? 'border-primary border-2' : ''}`}>
                 <div className="flex items-start justify-between mb-3">
                   <div>
                     <h3 className="font-bold text-lg mb-1">{job.title}</h3>
@@ -261,12 +245,10 @@ function Careers() {
                       </Badge>
                     </div>
                   </div>
-                  {job.featured && (
-                    <Badge variant="default" className="gap-1 text-xs">
+                  {job.featured && <Badge variant="default" className="gap-1 text-xs">
                       <Star className="w-3 h-3" />
                       Hot
-                    </Badge>
-                  )}
+                    </Badge>}
                 </div>
                 
                 <p className="text-sm text-muted-foreground mb-3">{job.description}</p>
@@ -285,8 +267,7 @@ function Careers() {
                 <Button className="w-full mt-4" size="sm" asChild>
                   <Link to="/portal">Apply Now →</Link>
                 </Button>
-              </Card>
-            ))}
+              </Card>)}
           </div>
 
           {/* Don't see your role CTA */}
@@ -317,23 +298,19 @@ function Careers() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {benefits.map((category, index) => (
-              <Card key={index}>
+            {benefits.map((category, index) => <Card key={index}>
                 <CardHeader>
                   <CardTitle className="text-lg">{category.category}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
-                    {category.items.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm">
+                    {category.items.map((item, i) => <li key={i} className="flex items-start gap-2 text-sm">
                         <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
                         <span>{item}</span>
-                      </li>
-                    ))}
+                      </li>)}
                   </ul>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -349,8 +326,7 @@ function Careers() {
           </div>
 
           <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
-            {applicationSteps.map((step, index) => (
-              <div key={index} className="relative">
+            {applicationSteps.map((step, index) => <div key={index} className="relative">
                 <Card className="text-center hover:shadow-lg transition-shadow h-full">
                   <CardHeader>
                     <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center mx-auto mb-3 text-xl font-bold">
@@ -366,13 +342,10 @@ function Careers() {
                     </Badge>
                   </CardContent>
                 </Card>
-                {index < applicationSteps.length - 1 && (
-                  <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 text-muted-foreground">
+                {index < applicationSteps.length - 1 && <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 text-muted-foreground">
                     →
-                  </div>
-                )}
-              </div>
-            ))}
+                  </div>}
+              </div>)}
           </div>
         </div>
       </section>
@@ -436,16 +409,10 @@ function Careers() {
 
       {/* AI Image Disclaimer */}
       <section className="py-12 bg-muted/20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <AIImageDisclaimer />
-          </div>
-        </div>
+        
       </section>
 
       <Footer />
-    </PageTransition>
-  );
+    </PageTransition>;
 }
-
 export default Careers;
