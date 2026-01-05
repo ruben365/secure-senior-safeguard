@@ -38,7 +38,7 @@ const coreValues = [
 
 const whyUsPoints = [
   "24/7 real-time threat monitoring",
-  "Veteran-owned, Ohio-based company",
+  "Veteran-supporting, Ohio-based company",
   "Enterprise AI technology made simple",
   "Personal support, not chatbots",
   "60-day money-back guarantee",

@@ -18,11 +18,11 @@ const faqs = [
   },
   {
     question: "Is my personal data safe with InVision Network?",
-    answer: "Absolutely. We use military-grade encryption and never sell your data. As a veteran-owned company, we take security personally. Your information is stored securely and only used to protect you from scams.",
+    answer: "Absolutely. We use military-grade encryption and never sell your data. As a company that supports veterans, we take security personally. Your information is stored securely and only used to protect you from scams.",
   },
   {
     question: "What makes you different from other companies?",
-    answer: "We're local (Ohio-based), veteran-owned, and focused specifically on protecting families and seniors from AI-powered scams. We don't just provide software—we provide education, support, and a personal relationship with our clients.",
+    answer: "We're local (Ohio-based), veteran-supporting, and focused specifically on protecting families and seniors from AI-powered scams. We don't just provide software—we provide education, support, and a personal relationship with our clients.",
   },
   {
     question: "Can I protect my elderly parents who aren't tech-savvy?",

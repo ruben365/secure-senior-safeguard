@@ -386,8 +386,8 @@ function About() {
               </div>
               <div className="text-center p-5 bg-white/15 rounded-2xl backdrop-blur-md border border-white/25 hover:bg-white/20 transition-all duration-300 hover:-translate-y-1">
                 <div className="text-3xl mb-3">🎖️</div>
-                <div className="font-bold text-lg">Veteran-Owned</div>
-                <div className="text-sm opacity-90">Military values drive us</div>
+                <div className="font-bold text-lg">Veteran-Supporting</div>
+                <div className="text-sm opacity-90">Honoring those who served</div>
               </div>
               <div className="text-center p-5 bg-white/15 rounded-2xl backdrop-blur-md border border-white/25 hover:bg-white/20 transition-all duration-300 hover:-translate-y-1">
                 <div className="text-3xl mb-3">💙</div>
