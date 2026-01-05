@@ -12,6 +12,17 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     sourcemap: true,
+    cssCodeSplit: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+        },
+      },
+    },
+  },
+  css: {
+    devSourcemap: true,
   },
   plugins: [
     react(),
