@@ -20,6 +20,7 @@ import { AchievementsShowcase } from "@/components/AchievementsShowcase";
 import { AIImageDisclaimer } from "@/components/AIImageDisclaimer";
 import { trackButtonClick } from "@/utils/analyticsTracker";
 import { PAGE_NATURE_IMAGES } from "@/config/natureHeroImages";
+import { PAGE_3D_IMAGES } from "@/config/hero3DImages";
 // Team and culture photos
 import teamDiverse1 from "@/assets/team-diverse-1.jpg";
 import businessCollaboration from "@/assets/business-collaboration.jpg";
@@ -72,7 +73,8 @@ function About() {
     }
   ];
 
-  const aboutHeroImages = PAGE_NATURE_IMAGES.about;
+  // Use 3D object-based images for About page (fingerprint, chess piece, pillar)
+  const aboutHeroImages = PAGE_3D_IMAGES.about;
 
   const values = [
     {

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Phone, Calendar, Bot, Globe, ArrowRight, Sparkles, Shield, Clock, TrendingUp } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { aiHelpingPeople } from "@/config/warmHeroImages";
+import { aiNodes } from "@/config/hero3DImages";
 
 const services = [
   {
@@ -58,17 +58,20 @@ export const AIBusinessPromo = () => {
         {/* Mobile-first: Stack vertically, Desktop: Side by side */}
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           
-          {/* Image Side - Shows first on mobile */}
+          {/* Image Side - Shows first on mobile with floating animation */}
           <ScrollReveal animation="fade-up" className="order-1 lg:order-2 w-full">
-            <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)]">
-              <img 
-                src={aiHelpingPeople} 
-                alt="AI technology helping people with clean geometric shapes" 
-                className="w-full h-auto object-contain sm:object-cover sm:aspect-[16/10] bg-muted/30"
-                loading="lazy"
-              />
-              {/* Overlay gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 sm:from-black/40 via-transparent to-transparent pointer-events-none" />
+            <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] bg-slate-900/50">
+              {/* Floating 3D image with animation */}
+              <div className="animate-float-subtle">
+                <img 
+                  src={aiNodes} 
+                  alt="3D interconnected nodes and gears representing AI automation" 
+                  className="w-full h-auto object-contain aspect-[16/10]"
+                  loading="lazy"
+                />
+              </div>
+              {/* Subtle glow overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-accent/10 via-transparent to-primary/5 pointer-events-none" />
 
               {/* Floating stats */}
               <div className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-white/95 backdrop-blur-sm rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2 sm:py-3 shadow-lg">

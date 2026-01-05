@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { FileText, Shield, BookOpen, ArrowRight, Sparkles, Download, Lock, Gift, ShoppingBag, Usb, CreditCard, Phone, Percent } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { resourcesArchive } from "@/config/hero3DImages";
 
 const resources = [
   {
@@ -145,8 +146,22 @@ export const ResourcesPromo = () => {
             </div>
           </ScrollReveal>
 
-          {/* Cards Side - Shows first on mobile */}
+          {/* Cards Side with 3D Hero Image - Shows first on mobile */}
           <ScrollReveal animation="fade-up" delay={100} className="order-1 lg:order-2 space-y-4 sm:space-y-5 w-full">
+            {/* 3D Resources Archive Image */}
+            <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] bg-slate-900/50 mb-6">
+              <div className="animate-float-medium">
+                <img 
+                  src={resourcesArchive} 
+                  alt="3D stylized library archive with holographic files and telescope" 
+                  className="w-full h-auto object-contain aspect-video"
+                  loading="lazy"
+                />
+              </div>
+              {/* Subtle glow overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-accent/10 via-transparent to-primary/5 pointer-events-none" />
+            </div>
+            
             {resources.map((resource, index) => (
               <ScrollReveal
                 key={index}

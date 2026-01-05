@@ -170,6 +170,25 @@ export default {
           "0%": { transform: "scale(1.05)" },
           "100%": { transform: "scale(1.15)" },
         },
+        // 3D Object floating animations
+        "float-subtle": {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-8px)" },
+        },
+        "float-medium": {
+          "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
+          "25%": { transform: "translateY(-12px) rotate(0.5deg)" },
+          "75%": { transform: "translateY(-6px) rotate(-0.5deg)" },
+        },
+        "float-strong": {
+          "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
+          "33%": { transform: "translateY(-16px) rotate(1deg)" },
+          "66%": { transform: "translateY(-8px) rotate(-1deg)" },
+        },
+        "rotate-slow": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -184,6 +203,11 @@ export default {
         "blob-morph": "blob-morph 20s ease-in-out infinite",
         "shimmer": "shimmer 2s infinite linear",
         "slow-zoom": "slow-zoom 30s ease-in-out infinite alternate",
+        // 3D Object floating animations
+        "float-subtle": "float-subtle 4s ease-in-out infinite",
+        "float-medium": "float-medium 6s ease-in-out infinite",
+        "float-strong": "float-strong 8s ease-in-out infinite",
+        "rotate-slow": "rotate-slow 30s linear infinite",
       },
       backgroundImage: {
         "gradient-hero-primary": "linear-gradient(135deg, hsl(260 50% 25%) 0%, hsl(260 45% 35%) 50%, hsl(270 50% 45%) 100%)",
