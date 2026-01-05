@@ -24,6 +24,8 @@ interface HeroProps {
   showProtectionBadge?: boolean;
   badgeText?: string;
   showTrustIndicators?: boolean;
+  /** Disable the purple overlay for homepage */
+  disablePurpleOverlay?: boolean;
 }
 
 const Hero = ({ 
@@ -38,6 +40,7 @@ const Hero = ({
   showScrollIndicator = false, 
   showProtectionBadge = false, 
   badgeText,
+  disablePurpleOverlay = false,
 }: HeroProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -104,9 +107,89 @@ const Hero = ({
           />
         )}
         
-        {/* Premium Gradient Overlay - cinematic effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/50" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
+        {/* Premium Purple Gradient Overlay - enhanced for text visibility */}
+        {!disablePurpleOverlay && (
+          <>
+            {/* Primary purple-tinted gradient from left */}
+            <div 
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: 'linear-gradient(135deg, rgba(88, 28, 135, 0.75) 0%, rgba(124, 58, 237, 0.5) 25%, rgba(139, 92, 246, 0.35) 50%, transparent 75%)'
+              }}
+            />
+            
+            {/* Secondary gradient for depth */}
+            <div 
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: 'linear-gradient(to right, rgba(15, 23, 42, 0.7) 0%, rgba(30, 27, 75, 0.5) 40%, transparent 70%)'
+              }}
+            />
+            
+            {/* Top-to-bottom gradient for vertical text contrast */}
+            <div 
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: 'linear-gradient(to bottom, rgba(88, 28, 135, 0.4) 0%, transparent 30%, transparent 70%, rgba(15, 23, 42, 0.6) 100%)'
+              }}
+            />
+            
+            {/* Subtle geometric pattern overlay */}
+            <div 
+              className="absolute inset-0 pointer-events-none opacity-[0.08]"
+              style={{
+                backgroundImage: `
+                  radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.4) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 70%, rgba(124, 58, 237, 0.3) 0%, transparent 40%)
+                `
+              }}
+            />
+            
+            {/* Animated floating orbs for visual interest */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+              <div 
+                className="absolute w-[600px] h-[600px] rounded-full blur-[120px] opacity-20 animate-float-slow"
+                style={{
+                  background: 'radial-gradient(circle, rgba(139, 92, 246, 0.6) 0%, transparent 70%)',
+                  top: '-10%',
+                  left: '-10%',
+                }}
+              />
+              <div 
+                className="absolute w-[400px] h-[400px] rounded-full blur-[100px] opacity-15 animate-float-delayed"
+                style={{
+                  background: 'radial-gradient(circle, rgba(124, 58, 237, 0.5) 0%, transparent 70%)',
+                  bottom: '10%',
+                  right: '5%',
+                }}
+              />
+            </div>
+            
+            {/* Diagonal accent lines */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.06]">
+              <div 
+                className="absolute w-[200%] h-[1px] bg-gradient-to-r from-transparent via-purple-400 to-transparent"
+                style={{ top: '25%', left: '-50%', transform: 'rotate(-15deg)' }}
+              />
+              <div 
+                className="absolute w-[200%] h-[1px] bg-gradient-to-r from-transparent via-violet-400 to-transparent"
+                style={{ top: '45%', left: '-50%', transform: 'rotate(-15deg)' }}
+              />
+              <div 
+                className="absolute w-[200%] h-[1px] bg-gradient-to-r from-transparent via-purple-300 to-transparent"
+                style={{ top: '65%', left: '-50%', transform: 'rotate(-15deg)' }}
+              />
+            </div>
+          </>
+        )}
+        
+        {/* Fallback gradient for homepage or when purple overlay disabled */}
+        {disablePurpleOverlay && (
+          <>
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/50" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
+          </>
+        )}
         
         {/* Additional overlay */}
         {overlay && (
@@ -136,12 +219,12 @@ const Hero = ({
       <div className="w-full max-w-[1920px] mx-auto px-6 sm:px-10 md:px-16 lg:px-20 xl:px-32 py-20 sm:py-24 md:py-28 lg:py-32 relative z-10">
         <div className="max-w-6xl">
           {headline && (
-            <h1 className="text-white mb-4 sm:mb-6 md:mb-8 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl [text-shadow:0_4px_30px_rgba(139,92,246,0.5)] leading-tight font-bold animate-fade-in">
+            <h1 className="text-white mb-4 sm:mb-6 md:mb-8 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl [text-shadow:0_4px_30px_rgba(139,92,246,0.5),0_2px_10px_rgba(0,0,0,0.5)] leading-tight font-bold animate-fade-in">
               {headline}
             </h1>
           )}
           {subheadline && (
-            <p className="text-white/90 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl mb-8 md:mb-10 leading-relaxed max-w-3xl animate-fade-in" style={{ animationDelay: '0.1s' }}>
+            <p className="text-white/95 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl mb-8 md:mb-10 leading-relaxed max-w-3xl animate-fade-in [text-shadow:0_2px_15px_rgba(0,0,0,0.4)]" style={{ animationDelay: '0.1s' }}>
               {subheadline}
             </p>
           )}
