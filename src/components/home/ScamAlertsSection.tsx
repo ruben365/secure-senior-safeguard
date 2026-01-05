@@ -151,6 +151,7 @@ export const ScamAlertsSection = () => {
                   alt="" 
                   width={634}
                   height={357}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   loading="lazy"
                   decoding="async"
                   className="w-full h-full object-cover"
