@@ -24,8 +24,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { PAGE_NATURE_IMAGES } from "@/config/natureHeroImages";
-import { PAGE_WARM_IMAGES } from "@/config/warmHeroImages";
-import { PAGE_3D_IMAGES } from "@/config/hero3DImages";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 
 interface FAQ {
@@ -361,8 +359,8 @@ export default function FAQ() {
     );
   };
 
-  // Use 3D object-based images for FAQ page (question marks, magnifying glass)
-  const faqHeroImages = PAGE_3D_IMAGES.faq;
+  // Use Nature imagery for FAQ page - zen calm representing clarity
+  const faqHeroImages = PAGE_NATURE_IMAGES.faq;
 
   return (
     <PageTransition variant="fade">

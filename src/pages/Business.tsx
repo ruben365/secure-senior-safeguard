@@ -34,7 +34,7 @@ const businessHeadlines = [
   "Professional Website Design & Development",
   "Industry-Leading AI Service Insurance"
 ];
-import { PAGE_NATURE_IMAGES, natureSummer2 } from "@/config/natureHeroImages";
+import { PAGE_NATURE_IMAGES, natureAiRoots } from "@/config/natureHeroImages";
 import { PAGE_WARM_IMAGES } from "@/config/warmHeroImages";
 import { PAGE_3D_IMAGES } from "@/config/hero3DImages";
 import { VideoLightbox } from "@/components/VideoLightbox";
@@ -140,8 +140,8 @@ function Business() {
     setEmbeddedPaymentOpen(true);
   };
 
-  // Use 3D object-based images for Business page (no people, cybersecurity aesthetic)
-  const businessHeroImages = PAGE_3D_IMAGES.business;
+  // Use Nature imagery for Business page - interconnected roots representing AI networks
+  const businessHeroImages = PAGE_NATURE_IMAGES.business;
 
   return (
     <PageTransition variant="fade">
@@ -2090,7 +2090,7 @@ function Business() {
       <CTASection 
         headline="Ready to Deploy AI Safely?" 
         variant="image"
-        backgroundImage={natureSummer2}
+        backgroundImage={natureAiRoots}
         description="Take the first step towards protecting your business with AI-powered security solutions. Book a free discovery call to discuss your AI automation needs."
       >
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

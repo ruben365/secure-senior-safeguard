@@ -45,7 +45,7 @@ import {
   Zap,
   Star,
 } from "lucide-react";
-import { PAGE_NATURE_IMAGES, natureWinter3 } from "@/config/natureHeroImages";
+import { PAGE_NATURE_IMAGES, natureGrowthPath } from "@/config/natureHeroImages";
 import { PAGE_WARM_IMAGES } from "@/config/warmHeroImages";
 import { PAGE_3D_IMAGES } from "@/config/hero3DImages";
 import TestimonialCard from "@/components/TestimonialCard";
@@ -307,8 +307,8 @@ function LearnAndTrain() {
     setEmbeddedPaymentOpen(true);
   };
 
-  // Use 3D object-based images for Training page (books, lightbulb, puzzle pieces)
-  const trainingHeroImages = PAGE_3D_IMAGES.training;
+  // Use Nature imagery for Training page - growth paths and seedlings
+  const trainingHeroImages = PAGE_NATURE_IMAGES.training;
 
   return (
     <PageTransition variant="fade">
@@ -1674,7 +1674,7 @@ function LearnAndTrain() {
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{ 
-            backgroundImage: `url(${natureWinter3})`,
+            backgroundImage: `url(${natureGrowthPath})`,
           }}
         />
         {/* Subtle dark gradient for text readability */}
