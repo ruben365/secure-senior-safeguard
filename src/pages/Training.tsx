@@ -46,6 +46,7 @@ import {
   Star,
 } from "lucide-react";
 import { PAGE_NATURE_IMAGES, natureWinter3 } from "@/config/natureHeroImages";
+import { PAGE_WARM_IMAGES } from "@/config/warmHeroImages";
 import TestimonialCard from "@/components/TestimonialCard";
 import { VideoLightbox } from "@/components/VideoLightbox";
 import { SEO } from "@/components/SEO";
@@ -305,7 +306,8 @@ function LearnAndTrain() {
     setEmbeddedPaymentOpen(true);
   };
 
-  const trainingHeroImages = PAGE_NATURE_IMAGES.training;
+  // Use warm, human-centric images for Training page
+  const trainingHeroImages = PAGE_WARM_IMAGES.training;
 
   return (
     <PageTransition variant="fade">
@@ -354,6 +356,7 @@ function LearnAndTrain() {
           headline=""
           subheadline=""
           showScrollIndicator={true}
+          lightOverlay
         >
           <div className="text-center md:text-left mb-8">
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4">

@@ -24,6 +24,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { PAGE_NATURE_IMAGES } from "@/config/natureHeroImages";
+import { PAGE_WARM_IMAGES } from "@/config/warmHeroImages";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 
 interface FAQ {
@@ -359,7 +360,8 @@ export default function FAQ() {
     );
   };
 
-  const faqHeroImages = PAGE_NATURE_IMAGES.faq;
+  // Use warm, human-centric images for FAQ page
+  const faqHeroImages = PAGE_WARM_IMAGES.faq;
 
   return (
     <PageTransition variant="fade">
@@ -380,6 +382,7 @@ export default function FAQ() {
               subheadline="Get instant answers to your questions about our AI scam protection services, training programs, and security solutions"
               overlay={true}
               showScrollIndicator={false}
+              lightOverlay
             />
             
             {/* Floating Stats Bar - Outside Hero to stay static */}
