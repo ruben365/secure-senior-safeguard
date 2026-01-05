@@ -9,7 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import supportAgent from "@/assets/support-agent.jpg";
-import natureCTABg from "@/assets/nature-cta-bg.jpg";
+import { natureZenCalm } from "@/config/natureHeroImages";
 import { GeometricCorner, GridPattern } from "@/components/ui/GeometricDecorations";
 
 const faqs = [
@@ -148,7 +148,7 @@ export const FAQPreview = () => {
           <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden">
             <div className="absolute inset-0">
               <img 
-                src={natureCTABg} 
+                src={natureZenCalm} 
                 alt="Beautiful nature landscape" 
                 className="w-full h-full object-cover"
                 loading="lazy"

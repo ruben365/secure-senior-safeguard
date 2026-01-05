@@ -25,9 +25,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { contactFormSchema, formatPhoneNumber } from "@/utils/formValidation";
 import { z } from "zod";
 import { useConfetti } from "@/hooks/useConfetti";
-import { PAGE_NATURE_IMAGES } from "@/config/natureHeroImages";
-import { PAGE_WARM_IMAGES, friendlySupportAgent, teamTabletCollaboration } from "@/config/warmHeroImages";
-import { PAGE_3D_IMAGES } from "@/config/hero3DImages";
+import { PAGE_NATURE_IMAGES, natureZenCalm } from "@/config/natureHeroImages";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 
 const contactMethods = [
@@ -139,8 +137,8 @@ function Contact() {
   const messageLength = formData.message.length;
   const maxLength = 500;
 
-  // Use 3D object-based images for Contact page (envelope, phone, satellite)
-  const contactHeroImages = PAGE_3D_IMAGES.contact;
+  // Use Nature imagery for Contact page - zen calm for clarity and approachability
+  const contactHeroImages = PAGE_NATURE_IMAGES.contact;
 
   return (
     <PageTransition variant="fade">
@@ -533,7 +531,7 @@ function Contact() {
                   {/* Team Photo */}
                   <div className="relative rounded-xl overflow-hidden mb-4 group">
                     <img 
-                      src={friendlySupportAgent} 
+                      src={natureZenCalm} 
                       alt="Our friendly support team member" 
                       className="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-105"
                     />
