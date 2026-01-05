@@ -26,7 +26,8 @@ const securityFeatures = [{
 // Typing animation component
 const TypewriterText = ({ words, className }: { words: string[]; className?: string }) => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [currentText, setCurrentText] = useState("");
+  // Initialize with full first word to optimize LCP - prevents empty render delay
+  const [currentText, setCurrentText] = useState(words[0] || "");
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
