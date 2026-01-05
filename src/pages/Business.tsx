@@ -1240,10 +1240,10 @@ function Business() {
                     {price3Counter.displayValue}
                   </p>
                   <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-accent/10 text-accent text-[10px] font-medium rounded-full">
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-accent/10 text-emerald-900 text-[10px] font-medium rounded-full">
                       🔧 Custom Built
                     </span>
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-success/10 text-success text-[10px] font-medium rounded-full">
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-success/10 text-emerald-900 text-[10px] font-medium rounded-full">
                       ✓ Priority Support
                     </span>
                   </div>
