@@ -53,7 +53,7 @@ serve(async (req) => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        from: "InVision Network <onboarding@resend.dev>",
+        from: "InVision Network <hello@invisionnetwork.org>",
         to: [email],
         subject: `Inquiry Received - ${serviceName} | InVision Network`,
         html: `
@@ -116,7 +116,7 @@ serve(async (req) => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        from: "InVision Network <onboarding@resend.dev>",
+        from: "InVision Network <hello@invisionnetwork.org>",
         to: ["hello@invisionnetwork.org"],
         subject: `📋 New Inquiry - ${requestNumber}`,
         html: `

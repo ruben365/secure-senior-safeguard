@@ -105,7 +105,7 @@ const handler = async (req: Request): Promise<Response> => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        from: "InVision Network <onboarding@resend.dev>",
+        from: "InVision Network <hello@invisionnetwork.org>",
         to: ["hello@invisionnetwork.org"],
         subject: `New Contact Form Submission - ${interest}`,
         html: `
@@ -142,7 +142,7 @@ const handler = async (req: Request): Promise<Response> => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        from: "InVision Network <onboarding@resend.dev>",
+        from: "InVision Network <hello@invisionnetwork.org>",
         to: [email],
         subject: "We received your message - InVision Network",
         html: `

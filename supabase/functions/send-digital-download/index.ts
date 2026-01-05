@@ -68,7 +68,7 @@ serve(async (req) => {
 
     // Send email with download links
     const emailResponse = await resend.emails.send({
-      from: "InVision Network <onboarding@resend.dev>",
+      from: "InVision Network <hello@invisionnetwork.org>",
       to: [customer_email],
       subject: "Your Digital Products Are Ready! 📦",
       html: `

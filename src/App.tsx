@@ -105,6 +105,9 @@ const TestingChecklist = lazy(() => import("./pages/admin/TestingChecklist"));
 const Maintenance = lazy(() => import("./pages/Maintenance"));
 const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
 const PaymentCanceled = lazy(() => import("./pages/PaymentCanceled"));
+const DonationsList = lazy(() => import("./pages/admin/DonationsList"));
+const ServiceInquiriesList = lazy(() => import("./pages/admin/ServiceInquiriesList"));
+const BookingsList = lazy(() => import("./pages/admin/BookingsList"));
 
 // Premium loading fallback with beautiful bubble animation
 const PageLoader = () => <EnhancedPageLoader message="Loading..." />;
@@ -167,6 +170,9 @@ function AnimatedRoutes() {
         <Route path="/admin/testing/checklist" element={<PageTransition><AdminRoute><TestingChecklist /></AdminRoute></PageTransition>} />
         <Route path="/admin/settings/*" element={<PageTransition><AdminRoute><Settings /></AdminRoute></PageTransition>} />
         <Route path="/admin/subscriptions" element={<PageTransition><AdminRoute><Subscriptions /></AdminRoute></PageTransition>} />
+        <Route path="/admin/donations" element={<PageTransition><AdminRoute><DonationsList /></AdminRoute></PageTransition>} />
+        <Route path="/admin/service-inquiries" element={<PageTransition><AdminRoute><ServiceInquiriesList /></AdminRoute></PageTransition>} />
+        <Route path="/admin/bookings" element={<PageTransition><AdminRoute><BookingsList /></AdminRoute></PageTransition>} />
         <Route path="/maintenance" element={<PageTransition><Maintenance /></PageTransition>} />
         <Route path="/reset-password" element={<PageTransition><ResetPassword /></PageTransition>} />
         <Route path="/portal" element={<PageTransition><ProtectedRoute><Portal /></ProtectedRoute></PageTransition>} />
