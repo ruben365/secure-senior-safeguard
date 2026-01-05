@@ -13,7 +13,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Heart, Users, Zap, Target, MapPin, Clock, DollarSign, Briefcase, Star, TrendingUp, Shield, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AIImageDisclaimer } from "@/components/AIImageDisclaimer";
-import { PAGE_NATURE_IMAGES } from "@/config/natureHeroImages";
+import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 import teamCollaboration from "@/assets/team-collaboration.jpg";
 import supportAgent from "@/assets/support-agent.jpg";
@@ -169,7 +169,7 @@ function Careers() {
   const [selectedDepartment, setSelectedDepartment] = useState("all");
   const departments = ["all", ...Array.from(new Set(jobPositions.map(job => job.department)))];
   const filteredJobs = selectedDepartment === "all" ? jobPositions : jobPositions.filter(job => job.department === selectedDepartment);
-  const careersHeroImages = PAGE_NATURE_IMAGES.careers;
+  const careersHeroImages = PROFESSIONAL_HERO_IMAGES.careers;
   return <PageTransition variant="fade">
       <SEO title="Careers - Join Our Mission" description="Join InVision Network and help protect families from AI-powered scams. Remote-first culture, competitive benefits, meaningful work. Open positions in engineering, support, design, and more." />
       <Navigation />

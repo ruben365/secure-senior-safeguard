@@ -34,7 +34,8 @@ const businessHeadlines = [
   "Professional Website Design & Development",
   "Industry-Leading AI Service Insurance"
 ];
-import { PAGE_NATURE_IMAGES, natureSummer2 } from "@/config/natureHeroImages";
+import { natureSummer2 } from "@/config/natureHeroImages";
+import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import { VideoLightbox } from "@/components/VideoLightbox";
 import { SEO } from "@/components/SEO";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
@@ -138,7 +139,7 @@ function Business() {
     setEmbeddedPaymentOpen(true);
   };
 
-  const businessHeroImages = PAGE_NATURE_IMAGES.business;
+  const businessHeroImages = PROFESSIONAL_HERO_IMAGES.business;
 
   return (
     <PageTransition variant="fade">

@@ -18,7 +18,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Download, Shield, ShoppingCart, Star, Loader2, Zap, Award, CheckCircle, Gift, BookOpen, Package, Sparkles, Users, TrendingUp, Heart, Headphones, Clock, Lock, FileText, Video, Podcast, Globe } from "lucide-react";
 import { EmbeddedPaymentModal } from "@/components/payment/EmbeddedPaymentModal";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { PAGE_NATURE_IMAGES } from "@/config/natureHeroImages";
+import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import bookAiFundamentals from "@/assets/book-ai-fundamentals.jpg";
 import bookBeingRealAi from "@/assets/book-being-real-ai.jpg";
 import bookAuthPersonalities from "@/assets/book-auth-personalities.jpg";
@@ -449,7 +449,7 @@ function Resources() {
       description: `${book.name} has been added to your cart.`
     });
   };
-  const resourcesHeroImages = PAGE_NATURE_IMAGES.resources;
+  const resourcesHeroImages = PROFESSIONAL_HERO_IMAGES.resources;
   return <PageTransition variant="fade">
       <SEO title="Resources & Marketplace - Digital Guides & Security Products" description="Browse our curated collection of scam prevention guides and physical security products. Everything you need to protect yourself and your loved ones." />
       <Navigation />

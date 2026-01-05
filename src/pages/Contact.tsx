@@ -25,7 +25,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { contactFormSchema, formatPhoneNumber } from "@/utils/formValidation";
 import { z } from "zod";
 import { useConfetti } from "@/hooks/useConfetti";
-import { PAGE_NATURE_IMAGES } from "@/config/natureHeroImages";
+import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 import supportAgentPhoto from "@/assets/support-agent.jpg";
 import familyGathering from "@/assets/family-gathering.jpg";
@@ -139,7 +139,7 @@ function Contact() {
   const messageLength = formData.message.length;
   const maxLength = 500;
 
-  const contactHeroImages = PAGE_NATURE_IMAGES.contact;
+  const contactHeroImages = PROFESSIONAL_HERO_IMAGES.contact;
 
   return (
     <PageTransition variant="fade">
