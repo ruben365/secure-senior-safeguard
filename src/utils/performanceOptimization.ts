@@ -188,12 +188,13 @@ export function initPerformanceOptimizations() {
   if (typeof window === 'undefined') return;
 
   // Add loaded class to body to make content visible
-  window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
-  });
-  
-  // Also add it immediately in case load event already fired
-  if (document.readyState === 'complete') {
+  // Use DOMContentLoaded instead of load for faster LCP
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.classList.add('loaded');
+    });
+  } else {
+    // DOM already ready, add immediately
     document.body.classList.add('loaded');
   }
 
