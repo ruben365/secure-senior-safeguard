@@ -8,7 +8,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import supportAgent from "@/assets/support-agent.jpg";
-import protectedFamilyBg from "@/assets/protected-family-bg.jpg";
+import natureCTABg from "@/assets/nature-cta-bg.jpg";
 import { GeometricCorner, GridPattern } from "@/components/ui/GeometricDecorations";
 
 const faqs = [
@@ -143,8 +143,8 @@ export const FAQPreview = () => {
         <div className="mt-20 relative rounded-3xl overflow-hidden">
           <div className="absolute inset-0">
             <img 
-              src={protectedFamilyBg} 
-              alt="Protected family" 
+              src={natureCTABg} 
+              alt="Beautiful nature landscape" 
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
