@@ -45,7 +45,8 @@ import {
   Zap,
   Star,
 } from "lucide-react";
-import { PAGE_NATURE_IMAGES, natureWinter3 } from "@/config/natureHeroImages";
+import { natureWinter3 } from "@/config/natureHeroImages";
+import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import TestimonialCard from "@/components/TestimonialCard";
 import { VideoLightbox } from "@/components/VideoLightbox";
 import { SEO } from "@/components/SEO";
@@ -305,7 +306,7 @@ function LearnAndTrain() {
     setEmbeddedPaymentOpen(true);
   };
 
-  const trainingHeroImages = PAGE_NATURE_IMAGES.training;
+  const trainingHeroImages = PROFESSIONAL_HERO_IMAGES.training;
 
   return (
     <PageTransition variant="fade">

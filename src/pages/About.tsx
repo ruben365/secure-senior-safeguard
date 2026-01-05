@@ -19,7 +19,7 @@ import { OhioServiceMap } from "@/components/OhioServiceMap";
 import { AchievementsShowcase } from "@/components/AchievementsShowcase";
 import { AIImageDisclaimer } from "@/components/AIImageDisclaimer";
 import { trackButtonClick } from "@/utils/analyticsTracker";
-import { PAGE_NATURE_IMAGES } from "@/config/natureHeroImages";
+import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 // Team and culture photos
 import teamDiverse1 from "@/assets/team-diverse-1.jpg";
 import businessCollaboration from "@/assets/business-collaboration.jpg";
@@ -72,7 +72,7 @@ function About() {
     }
   ];
 
-  const aboutHeroImages = PAGE_NATURE_IMAGES.about;
+  const aboutHeroImages = PROFESSIONAL_HERO_IMAGES.about;
 
   const values = [
     {

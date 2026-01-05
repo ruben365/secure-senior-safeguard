@@ -23,7 +23,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { PAGE_NATURE_IMAGES } from "@/config/natureHeroImages";
+import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 
 interface FAQ {
@@ -359,7 +359,7 @@ export default function FAQ() {
     );
   };
 
-  const faqHeroImages = PAGE_NATURE_IMAGES.faq;
+  const faqHeroImages = PROFESSIONAL_HERO_IMAGES.faq;
 
   return (
     <PageTransition variant="fade">
