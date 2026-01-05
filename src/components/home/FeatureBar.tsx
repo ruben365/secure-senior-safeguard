@@ -202,42 +202,7 @@ export const FeatureBar = () => {
           clipPath: "polygon(100% 0, 100% 100%, 0 100%)"
         }} />
           
-          <div className="bg-primary rounded-2xl p-8 md:p-12 relative overflow-hidden">
-            {/* Decorative diagonal lines inside */}
-            <div className="absolute top-0 right-0 w-40 h-full opacity-10">
-              <div className="absolute top-0 right-8 w-0.5 h-full bg-white transform -skew-x-12" />
-              <div className="absolute top-0 right-16 w-0.5 h-full bg-white transform -skew-x-12" />
-              <div className="absolute top-0 right-24 w-0.5 h-full bg-white transform -skew-x-12" />
-            </div>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 relative z-10">
-              {stats.map((stat, index) => <motion.div key={index} initial={{
-              opacity: 0,
-              scale: 0.9
-            }} whileInView={{
-              opacity: 1,
-              scale: 1
-            }} viewport={{
-              once: true
-            }} transition={{
-              duration: 0.4,
-              delay: index * 0.1
-            }} className="text-center relative">
-                  {/* Plus sign decoration */}
-                  {index < stats.length - 1 && <div className="hidden md:block absolute -right-4 top-1/2 -translate-y-1/2 w-2 h-2">
-                      <div className="absolute top-1/2 left-0 w-full h-0.5 bg-white/30 -translate-y-1/2" />
-                      <div className="absolute left-1/2 top-0 w-0.5 h-full bg-white/30 -translate-x-1/2" />
-                    </div>}
-                  
-                  <div className="text-4xl md:text-5xl font-bold text-primary-foreground mb-2">
-                    {stat.value}
-                  </div>
-                  <div className="text-primary-foreground/80 text-sm font-medium">
-                    {stat.label}
-                  </div>
-                </motion.div>)}
-            </div>
-          </div>
+          
         </motion.div>
       </div>
     </section>;

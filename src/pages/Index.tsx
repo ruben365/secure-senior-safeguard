@@ -30,13 +30,13 @@ import { TrustedExpertsBar } from "@/components/home/TrustedExpertsBar";
 import { NumberedFeatures } from "@/components/home/NumberedFeatures";
 import { ImpactStatsRow } from "@/components/home/ImpactStatsRow";
 import { TeamShowcase } from "@/components/home/TeamShowcase";
-
 function Index() {
-  const { isAdmin, isLoading } = useAdminStatus();
+  const {
+    isAdmin,
+    isLoading
+  } = useAdminStatus();
   const [scamShieldOpen, setScamShieldOpen] = useState(false);
-  
-  return (
-    <PageTransition variant="fade">
+  return <PageTransition variant="fade">
       <div className="min-h-screen bg-background">
         <SEO {...PAGE_SEO.home} />
         <Navigation />
@@ -51,7 +51,7 @@ function Index() {
           <TrustedExpertsBar />
           
           {/* Numbered Features - NEW */}
-          <NumberedFeatures />
+          
           
           {/* Current Scam Alerts - Immediate Value */}
           <section id="alerts">
@@ -72,7 +72,7 @@ function Index() {
           </section>
 
           {/* Impact Stats Row - NEW */}
-          <ImpactStatsRow />
+          
 
           {/* Services Showcase - Team of Experts */}
           <section id="services">
@@ -112,11 +112,7 @@ function Index() {
           </section>
 
           {/* Final CTA with Image Background */}
-          <CTASection 
-            headline="Protect What Matters Most" 
-            variant="image"
-            backgroundImage={heroProtectionFamily}
-          >
+          <CTASection headline="Protect What Matters Most" variant="image" backgroundImage={heroProtectionFamily}>
             <p className="text-xl text-white/90 mb-8">Join 100+ Ohio families who sleep better knowing they're protected from AI scams.</p>
             <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center">
               <Button asChild variant="gold" size="xl" className="w-full sm:w-auto">
@@ -139,8 +135,6 @@ function Index() {
           <ScamShieldSubmission open={scamShieldOpen} onOpenChange={setScamShieldOpen} />
         </main>
       </div>
-    </PageTransition>
-  );
+    </PageTransition>;
 }
-
 export default Index;
