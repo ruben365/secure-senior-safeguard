@@ -18,66 +18,89 @@ export function useAnalytics() {
     const title = document.title;
     trackPageView(location.pathname + location.search, title);
 
-    // Track scroll depth
+    // Track scroll depth - deferred to avoid forced reflow during initial paint
     let scrollDepth = 0;
     let ticking = false;
+    let listenerAdded = false;
     
     const updateScrollDepth = () => {
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      const scrollPercent = Math.round(
-        (scrollTop / (documentHeight - windowHeight)) * 100
-      );
+      requestAnimationFrame(() => {
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const scrollPercent = Math.round(
+          (scrollTop / (documentHeight - windowHeight)) * 100
+        );
 
-      // Track at 25%, 50%, 75%, 100%
-      if (
-        scrollPercent >= 25 &&
-        scrollDepth < 25 &&
-        scrollPercent < 50
-      ) {
-        scrollDepth = 25;
-        if (window.gtag) {
-          window.gtag("event", "scroll_depth", { percentage: 25 });
+        // Track at 25%, 50%, 75%, 100%
+        if (
+          scrollPercent >= 25 &&
+          scrollDepth < 25 &&
+          scrollPercent < 50
+        ) {
+          scrollDepth = 25;
+          if (window.gtag) {
+            window.gtag("event", "scroll_depth", { percentage: 25 });
+          }
+        } else if (
+          scrollPercent >= 50 &&
+          scrollDepth < 50 &&
+          scrollPercent < 75
+        ) {
+          scrollDepth = 50;
+          if (window.gtag) {
+            window.gtag("event", "scroll_depth", { percentage: 50 });
+          }
+        } else if (
+          scrollPercent >= 75 &&
+          scrollDepth < 75 &&
+          scrollPercent < 100
+        ) {
+          scrollDepth = 75;
+          if (window.gtag) {
+            window.gtag("event", "scroll_depth", { percentage: 75 });
+          }
+        } else if (scrollPercent >= 99 && scrollDepth < 100) {
+          scrollDepth = 100;
+          if (window.gtag) {
+            window.gtag("event", "scroll_depth", { percentage: 100 });
+          }
         }
-      } else if (
-        scrollPercent >= 50 &&
-        scrollDepth < 50 &&
-        scrollPercent < 75
-      ) {
-        scrollDepth = 50;
-        if (window.gtag) {
-          window.gtag("event", "scroll_depth", { percentage: 50 });
-        }
-      } else if (
-        scrollPercent >= 75 &&
-        scrollDepth < 75 &&
-        scrollPercent < 100
-      ) {
-        scrollDepth = 75;
-        if (window.gtag) {
-          window.gtag("event", "scroll_depth", { percentage: 75 });
-        }
-      } else if (scrollPercent >= 99 && scrollDepth < 100) {
-        scrollDepth = 100;
-        if (window.gtag) {
-          window.gtag("event", "scroll_depth", { percentage: 100 });
-        }
-      }
-      ticking = false;
+        ticking = false;
+      });
     };
     
     const handleScroll = () => {
       if (!ticking) {
-        requestAnimationFrame(updateScrollDepth);
         ticking = true;
+        updateScrollDepth();
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Defer adding scroll listener until after initial paint to avoid forced reflow
+    const scheduleListener = () => {
+      if (!listenerAdded) {
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        listenerAdded = true;
+      }
+    };
+    
+    let idleId: number | ReturnType<typeof setTimeout>;
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      idleId = (window as any).requestIdleCallback(scheduleListener, { timeout: 2000 });
+    } else {
+      idleId = setTimeout(scheduleListener, 500);
+    }
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      if (typeof window !== 'undefined' && 'requestIdleCallback' in window && typeof idleId === 'number') {
+        (window as any).cancelIdleCallback(idleId);
+      } else {
+        clearTimeout(idleId as ReturnType<typeof setTimeout>);
+      }
+      if (listenerAdded) {
+        window.removeEventListener("scroll", handleScroll);
+      }
     };
   }, [location]);
 }

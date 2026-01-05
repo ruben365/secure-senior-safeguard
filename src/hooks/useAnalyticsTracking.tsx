@@ -42,37 +42,60 @@ export function useAnalyticsTracking() {
       }
     };
 
-    // Track scroll depth
+    // Track scroll depth - deferred to avoid forced reflow during initial paint
     let maxScroll = 0;
     let ticking = false;
+    let scrollListenerAdded = false;
     
     const updateScrollDepth = () => {
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      const scrollPercent = Math.round(
-        (scrollTop / (documentHeight - windowHeight)) * 100
-      );
+      requestAnimationFrame(() => {
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const scrollPercent = Math.round(
+          (scrollTop / (documentHeight - windowHeight)) * 100
+        );
 
-      if (scrollPercent > maxScroll && [25, 50, 75, 100].includes(scrollPercent)) {
-        maxScroll = scrollPercent;
-        trackScroll(scrollPercent);
-      }
-      ticking = false;
+        if (scrollPercent > maxScroll && [25, 50, 75, 100].includes(scrollPercent)) {
+          maxScroll = scrollPercent;
+          trackScroll(scrollPercent);
+        }
+        ticking = false;
+      });
     };
     
     const handleScroll = () => {
       if (!ticking) {
-        requestAnimationFrame(updateScrollDepth);
         ticking = true;
+        updateScrollDepth();
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Defer adding scroll listener until after initial paint
+    const addScrollListener = () => {
+      if (!scrollListenerAdded) {
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        scrollListenerAdded = true;
+      }
+    };
+    
+    let scrollIdleId: number | ReturnType<typeof setTimeout>;
+    if ('requestIdleCallback' in window) {
+      scrollIdleId = (window as any).requestIdleCallback(addScrollListener, { timeout: 2000 });
+    } else {
+      scrollIdleId = setTimeout(addScrollListener, 500);
+    }
 
     return () => {
       cancelTracking();
-      window.removeEventListener("scroll", handleScroll);
+      if ('requestIdleCallback' in window && typeof scrollIdleId === 'number') {
+        (window as any).cancelIdleCallback(scrollIdleId);
+      } else {
+        clearTimeout(scrollIdleId as ReturnType<typeof setTimeout>);
+      }
+      if (scrollListenerAdded) {
+        window.removeEventListener("scroll", handleScroll);
+      }
     };
   }, [location]);
 }
