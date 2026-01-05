@@ -146,6 +146,15 @@ export default {
           "0%, 100%": { transform: "translateY(0px) translateX(0px)" },
           "50%": { transform: "translateY(-30px) translateX(20px)" },
         },
+        "float-slow": {
+          "0%, 100%": { transform: "translateY(0px) scale(1)" },
+          "50%": { transform: "translateY(-20px) scale(1.05)" },
+        },
+        "float-delayed": {
+          "0%, 100%": { transform: "translateY(0px) translateX(0px)" },
+          "33%": { transform: "translateY(-15px) translateX(10px)" },
+          "66%": { transform: "translateY(-5px) translateX(-10px)" },
+        },
         "blob-morph": {
           "0%": { borderRadius: "30% 70% 70% 30% / 30% 30% 70% 70%" },
           "25%": { borderRadius: "58% 42% 75% 25% / 76% 46% 54% 24%" },
@@ -166,6 +175,8 @@ export default {
         "scale-in": "scale-in 0.3s ease-out",
         "gradient-shift": "gradient-shift 10s ease infinite",
         "float": "float 15s ease-in-out infinite",
+        "float-slow": "float-slow 12s ease-in-out infinite",
+        "float-delayed": "float-delayed 18s ease-in-out infinite 3s",
         "blob-morph": "blob-morph 20s ease-in-out infinite",
         "shimmer": "shimmer 2s infinite linear",
       },
