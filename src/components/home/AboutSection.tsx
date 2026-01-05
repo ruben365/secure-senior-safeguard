@@ -87,7 +87,7 @@ export const AboutSection = () => {
             </h2>
 
             <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-              InVision Network is a veteran-owned cybersecurity company dedicated to 
+              InVision Network is a veteran-supporting cybersecurity company dedicated to 
               protecting seniors and families from the rising threat of AI-powered scams. 
               Our mission is to make digital safety accessible to everyone in Ohio.
             </p>

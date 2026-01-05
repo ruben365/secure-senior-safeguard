@@ -81,7 +81,7 @@ export const FeatureBar = () => {
               <span className="text-primary">Our Services?</span>
             </h2>
             <p className="text-muted-foreground text-lg">
-              Experience the difference of professional, veteran-owned cybersecurity services.
+              Experience the difference of professional, veteran-supporting cybersecurity services.
             </p>
             
             {/* Dotted line decoration */}

@@ -49,7 +49,7 @@ export const HomeIntroSection = () => {
   const whyChooseUs = [
     { icon: Lock, text: "Military-grade security protocols" },
     { icon: Zap, text: "24-hour response time guarantee" },
-    { icon: Heart, text: "Veteran-owned & operated" },
+    { icon: Heart, text: "Veteran-supporting company" },
     { icon: Globe, text: "Multilingual support (EN, ES, FR)" },
     { icon: Award, text: "100+ families protected" },
     { icon: Sparkles, text: "AI-powered threat detection" }
@@ -114,7 +114,7 @@ export const HomeIntroSection = () => {
                 </div>
                 <div className="flex items-center gap-1.5 px-3 py-1.5 bg-background/80 rounded-full border border-border/50">
                   <CheckCircle2 className="w-4 h-4 text-primary" />
-                  <span className="text-xs font-medium">Veteran-Owned</span>
+                  <span className="text-xs font-medium">Veteran-Supporting</span>
                 </div>
                 <div className="flex items-center gap-1.5 px-3 py-1.5 bg-background/80 rounded-full border border-border/50">
                   <CheckCircle2 className="w-4 h-4 text-primary" />
