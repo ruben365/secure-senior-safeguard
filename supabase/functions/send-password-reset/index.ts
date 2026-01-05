@@ -88,7 +88,7 @@ serve(async (req) => {
       method: "POST",
       headers: { "Authorization": `Bearer ${resendApiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
-        from: "InVision Network <onboarding@resend.dev>",
+        from: "InVision Network <hello@invisionnetwork.org>",
         to: [email],
         subject: "Password Reset - InVision Network",
         html: `<h1>Reset Your Password</h1><p><a href="${resetUrl}">Click here to reset</a></p><p>Link expires in 1 hour.</p>`,

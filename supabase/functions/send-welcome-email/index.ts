@@ -95,7 +95,7 @@ serve(async (req) => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        from: "InVision Network <onboarding@resend.dev>",
+        from: "InVision Network <hello@invisionnetwork.org>",
         to: [email],
         subject: "Welcome to InVision Network - Your Account is Ready",
         html: htmlContent,

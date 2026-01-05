@@ -69,7 +69,7 @@ serve(async (req) => {
     }
 
     const emailResponse = await resend.emails.send({
-      from: "InVision <onboarding@resend.dev>",
+      from: "InVision Network <hello@invisionnetwork.org>",
       to: [email],
       subject,
       html,

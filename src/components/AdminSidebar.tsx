@@ -26,6 +26,9 @@ import {
   Globe,
   CreditCard,
   CheckCircle2,
+  Heart,
+  Briefcase,
+  Calendar,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -76,6 +79,16 @@ const menuItems: MenuItem[] = [
       { title: "Products", href: "/admin/ecommerce/products" },
       { title: "Orders", href: "/admin/ecommerce/orders" },
       { title: "Inventory", href: "/admin/ecommerce/inventory" },
+      { title: "Donations", href: "/admin/donations" },
+    ],
+  },
+  {
+    title: "Requests",
+    icon: Briefcase,
+    children: [
+      { title: "Service Inquiries", href: "/admin/service-inquiries" },
+      { title: "Bookings", href: "/admin/bookings" },
+      { title: "Subscriptions", href: "/admin/subscriptions" },
     ],
   },
   {

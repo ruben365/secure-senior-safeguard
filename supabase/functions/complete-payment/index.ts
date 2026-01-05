@@ -36,7 +36,7 @@ async function sendEmail(to: string, subject: string, html: string) {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      from: "InVision Network <onboarding@resend.dev>",
+      from: "InVision Network <hello@invisionnetwork.org>",
       to: [to],
       subject,
       html,
@@ -61,7 +61,7 @@ async function sendAdminNotification(subject: string, html: string) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        from: "InVision Network <onboarding@resend.dev>",
+        from: "InVision Network <hello@invisionnetwork.org>",
         to: ["hello@invisionnetwork.org"],
         subject,
         html,
