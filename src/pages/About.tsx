@@ -72,7 +72,6 @@ function About() {
     }
   ];
 
-  // Use Nature imagery for About page - ancient stability representing solid foundation
   const aboutHeroImages = PAGE_NATURE_IMAGES.about;
 
   const values = [

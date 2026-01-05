@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, ArrowRight } from "lucide-react";
-import { aboutIdentity } from "@/config/hero3DImages";
+import heroAbout from "@/assets/hero-about-1.jpg";
 import natureSecurityBg from "@/assets/nature-security-services.jpg";
 import { HexagonIcon, GeometricCorner, GridPattern } from "@/components/ui/GeometricDecorations";
 
@@ -42,15 +42,13 @@ export const AboutSection = () => {
               <div className="absolute -top-6 -left-6 w-full h-full rounded-full border-2 border-primary/20" />
               <div className="absolute -top-3 -left-3 w-full h-full rounded-full border-2 border-accent/30" />
               
-              {/* Main image container with 3D floating animation */}
-              <div className="relative rounded-full overflow-hidden aspect-square border-4 border-background shadow-2xl shadow-primary/10 bg-slate-900/50">
-                <div className="animate-float-subtle">
-                  <img
-                    src={aboutIdentity}
-                    alt="3D fingerprint with chess piece representing identity and strategy"
-                    className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
+              {/* Main image container */}
+              <div className="relative rounded-full overflow-hidden aspect-square border-4 border-background shadow-2xl shadow-primary/10">
+                <img
+                  src={heroAbout}
+                  alt="About InVision Network - Family Protection"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                />
               </div>
               
               {/* Corner triangle accent */}

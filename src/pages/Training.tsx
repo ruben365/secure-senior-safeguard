@@ -45,9 +45,7 @@ import {
   Zap,
   Star,
 } from "lucide-react";
-import { PAGE_NATURE_IMAGES, trainingSeedlings } from "@/config/natureHeroImages";
-import { PAGE_WARM_IMAGES } from "@/config/warmHeroImages";
-import { PAGE_3D_IMAGES } from "@/config/hero3DImages";
+import { PAGE_NATURE_IMAGES, natureWinter3 } from "@/config/natureHeroImages";
 import TestimonialCard from "@/components/TestimonialCard";
 import { VideoLightbox } from "@/components/VideoLightbox";
 import { SEO } from "@/components/SEO";
@@ -307,7 +305,6 @@ function LearnAndTrain() {
     setEmbeddedPaymentOpen(true);
   };
 
-  // Use Nature imagery for Training page - growth paths and seedlings
   const trainingHeroImages = PAGE_NATURE_IMAGES.training;
 
   return (
@@ -357,7 +354,6 @@ function LearnAndTrain() {
           headline=""
           subheadline=""
           showScrollIndicator={true}
-          lightOverlay
         >
           <div className="text-center md:text-left mb-8">
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
@@ -1674,7 +1670,7 @@ function LearnAndTrain() {
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{ 
-            backgroundImage: `url(${trainingSeedlings})`,
+            backgroundImage: `url(${natureWinter3})`,
           }}
         />
         {/* Subtle dark gradient for text readability */}

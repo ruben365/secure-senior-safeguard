@@ -25,8 +25,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { contactFormSchema, formatPhoneNumber } from "@/utils/formValidation";
 import { z } from "zod";
 import { useConfetti } from "@/hooks/useConfetti";
-import { PAGE_NATURE_IMAGES, contactBridgingTrees } from "@/config/natureHeroImages";
+import { PAGE_NATURE_IMAGES } from "@/config/natureHeroImages";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
+import supportAgentPhoto from "@/assets/support-agent.jpg";
+import familyGathering from "@/assets/family-gathering.jpg";
 
 const contactMethods = [
   {
@@ -137,7 +139,6 @@ function Contact() {
   const messageLength = formData.message.length;
   const maxLength = 500;
 
-  // Use Nature imagery for Contact page - zen calm for clarity and approachability
   const contactHeroImages = PAGE_NATURE_IMAGES.contact;
 
   return (
@@ -155,7 +156,6 @@ function Contact() {
           subheadline="We're here to help protect your family"
           showProtectionBadge
           badgeText="Response within 4 hours"
-          lightOverlay
         >
           <FloatingShapes />
         </Hero>
@@ -196,11 +196,6 @@ function Contact() {
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-          
-          {/* Decorative 3D Question Marks - Visual engagement */}
-          <div className="hidden lg:block absolute top-40 right-20 text-8xl font-bold text-primary/5 transform rotate-12">?</div>
-          <div className="hidden lg:block absolute bottom-40 left-16 text-6xl font-bold text-accent/5 transform -rotate-12">@</div>
-          <div className="hidden lg:block absolute top-1/3 right-1/4 text-4xl font-bold text-primary/3 transform rotate-6">✉</div>
         </div>
         
         <div className="container-padding relative z-10">
@@ -244,7 +239,7 @@ function Contact() {
             })}
           </div>
 
-          {/* Main Contact Form Section - With decorative side image */}
+          {/* Main Contact Form Section */}
           <div className="grid lg:grid-cols-5 gap-8 max-w-7xl mx-auto">
             {/* Premium Contact Form - 60% */}
             <div className="lg:col-span-3">
@@ -536,7 +531,7 @@ function Contact() {
                   {/* Team Photo */}
                   <div className="relative rounded-xl overflow-hidden mb-4 group">
                     <img 
-                      src={contactBridgingTrees} 
+                      src={supportAgentPhoto} 
                       alt="Our friendly support team member" 
                       className="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-105"
                     />

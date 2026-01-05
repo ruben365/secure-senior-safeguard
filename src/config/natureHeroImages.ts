@@ -1,201 +1,107 @@
 // Centralized Nature Hero Images Configuration
-// 40 stunning nature images for hero sections with "Organic Security" theme
-// 5 images per page
+// 10 stunning seasonal nature images for hero carousels
 
-// HOME - Protection/Shielded Landscape imagery
-import homeOakShelter from "@/assets/nature/home-oak-shelter.jpg";
-import homeMountainFortress from "@/assets/nature/home-mountain-fortress.jpg";
-import homeForestCanopy from "@/assets/nature/home-forest-canopy.jpg";
-import homeValleyProtected from "@/assets/nature/home-valley-protected.jpg";
-import homeRedwoodSanctuary from "@/assets/nature/home-redwood-sanctuary.jpg";
+// Spring
+import natureSpring1 from "@/assets/nature-spring-1.jpg";
+import natureSpring2 from "@/assets/nature-spring-2.jpg";
+import natureSpring3 from "@/assets/nature-spring-3.jpg";
 
-// BUSINESS - Interconnected Nature/AI Networks imagery
-import businessNeuralRoots from "@/assets/nature/business-neural-roots.jpg";
-import businessWebNetwork from "@/assets/nature/business-web-network.jpg";
-import businessConstellation from "@/assets/nature/business-constellation.jpg";
-import businessMycelium from "@/assets/nature/business-mycelium.jpg";
-import businessLeafVeins from "@/assets/nature/business-leaf-veins.jpg";
+// Summer
+import natureSummer1 from "@/assets/nature-summer-1.jpg";
+import natureSummer2 from "@/assets/nature-summer-2.jpg";
+import natureSummer3 from "@/assets/nature-summer-3.jpg";
 
-// TRAINING - Growth/Learning Journey imagery
-import trainingSeedlings from "@/assets/nature/training-seedlings.jpg";
-import trainingForestPath from "@/assets/nature/training-forest-path.jpg";
-import trainingButterfly from "@/assets/nature/training-butterfly.jpg";
-import trainingBambooGrowth from "@/assets/nature/training-bamboo-growth.jpg";
-import trainingSummitPath from "@/assets/nature/training-summit-path.jpg";
+// Autumn
+import natureAutumn1 from "@/assets/nature-autumn-1.jpg";
+import natureAutumn2 from "@/assets/nature-autumn-2.jpg";
+import natureAutumn3 from "@/assets/nature-autumn-3.jpg";
 
-// RESOURCES - Water/Source of Knowledge imagery
-import resourcesMountainStream from "@/assets/nature/resources-mountain-stream.jpg";
-import resourcesAlpineLake from "@/assets/nature/resources-alpine-lake.jpg";
-import resourcesWaterfall from "@/assets/nature/resources-waterfall.jpg";
-import resourcesSpring from "@/assets/nature/resources-spring.jpg";
-import resourcesRiverDelta from "@/assets/nature/resources-river-delta.jpg";
-
-// ABOUT - Stability/Foundation imagery
-import aboutAncientSequoia from "@/assets/nature/about-ancient-sequoia.jpg";
-import aboutBalancedRocks from "@/assets/nature/about-balanced-rocks.jpg";
-import aboutCoastalCliff from "@/assets/nature/about-coastal-cliff.jpg";
-import aboutGraniteMountain from "@/assets/nature/about-granite-mountain.jpg";
-import aboutBristlecone from "@/assets/nature/about-bristlecone.jpg";
-
-// CAREERS - Horizon/Opportunity imagery
-import careersGoldenSunrise from "@/assets/nature/careers-golden-sunrise.jpg";
-import careersOpenMeadow from "@/assets/nature/careers-open-meadow.jpg";
-import careersSoaringEagle from "@/assets/nature/careers-soaring-eagle.jpg";
-import careersAutumnRoad from "@/assets/nature/careers-autumn-road.jpg";
-import careersSummitView from "@/assets/nature/careers-summit-view.jpg";
-
-// FAQ - Calm/Clarity imagery
-import faqZenGarden from "@/assets/nature/faq-zen-garden.jpg";
-import faqStillLake from "@/assets/nature/faq-still-lake.jpg";
-import faqClearSky from "@/assets/nature/faq-clear-sky.jpg";
-import faqRiverStones from "@/assets/nature/faq-river-stones.jpg";
-import faqLotus from "@/assets/nature/faq-lotus.jpg";
-
-// CONTACT - Connection/Communication imagery
-import contactBridgingTrees from "@/assets/nature/contact-bridging-trees.jpg";
-import contactConfluence from "@/assets/nature/contact-confluence.jpg";
-import contactForestWelcome from "@/assets/nature/contact-forest-welcome.jpg";
-import contactPeacefulBay from "@/assets/nature/contact-peaceful-bay.jpg";
-import contactRainbowValley from "@/assets/nature/contact-rainbow-valley.jpg";
+// Winter
+import natureWinter1 from "@/assets/nature-winter-1.jpg";
+import natureWinter2 from "@/assets/nature-winter-2.jpg";
+import natureWinter3 from "@/assets/nature-winter-3.jpg";
 
 export interface HeroImage {
   src: string;
   alt: string;
 }
 
-// Page-specific nature images for "Organic Security" theme - 5 per page
-export const PAGE_NATURE_IMAGES: Record<string, HeroImage[]> = {
-  // Home: Shielded landscape - protection symbolism
-  home: [
-    { src: homeOakShelter, alt: "Majestic oak tree with golden sunlight sheltering plants below" },
-    { src: homeMountainFortress, alt: "Dramatic mountain peak fortress against stormy clouds" },
-    { src: homeForestCanopy, alt: "Dense protective forest canopy from below" },
-    { src: homeValleyProtected, alt: "Misty valley protected by surrounding mountains" },
-    { src: homeRedwoodSanctuary, alt: "Ancient redwood forest sanctuary with morning fog" },
-  ],
-  // Business: Interconnected nature - AI networks naturally
-  business: [
-    { src: businessNeuralRoots, alt: "Bioluminescent tree root system representing neural networks" },
-    { src: businessWebNetwork, alt: "Spider web with dew drops at golden sunrise" },
-    { src: businessConstellation, alt: "Milky Way with connected constellation patterns" },
-    { src: businessMycelium, alt: "Glowing mycelium fungal network connecting trees" },
-    { src: businessLeafVeins, alt: "Intricate leaf vein patterns showing natural networks" },
-  ],
-  // Training: Growth imagery - education and journey
-  training: [
-    { src: trainingSeedlings, alt: "Young seedlings emerging from rich soil with morning dew" },
-    { src: trainingForestPath, alt: "Winding autumn forest path with golden leaves" },
-    { src: trainingButterfly, alt: "Butterfly emerging from chrysalis symbolizing transformation" },
-    { src: trainingBambooGrowth, alt: "Tall bamboo grove reaching skyward" },
-    { src: trainingSummitPath, alt: "Mountain hiking trail switchbacks to summit" },
-  ],
-  // Resources: Water imagery - source of knowledge
-  resources: [
-    { src: resourcesMountainStream, alt: "Crystal clear mountain stream flowing over rocks" },
-    { src: resourcesAlpineLake, alt: "Pristine alpine lake reflecting snow-capped mountains" },
-    { src: resourcesWaterfall, alt: "Powerful waterfall cascading with rainbow mist" },
-    { src: resourcesSpring, alt: "Underground spring emerging from cave" },
-    { src: resourcesRiverDelta, alt: "Aerial view of branching river delta" },
-  ],
-  // About: Stability imagery - solid foundation
-  about: [
-    { src: aboutAncientSequoia, alt: "Ancient giant sequoia trunk with deep textured bark" },
-    { src: aboutBalancedRocks, alt: "Dramatic balanced rock formation at sunset" },
-    { src: aboutCoastalCliff, alt: "Coastal cliff standing strong against ocean waves" },
-    { src: aboutGraniteMountain, alt: "Massive granite mountain face in dramatic light" },
-    { src: aboutBristlecone, alt: "Ancient bristlecone pine twisted by time still standing" },
-  ],
-  // Careers: Horizon imagery - opportunity and future
-  careers: [
-    { src: careersGoldenSunrise, alt: "Breathtaking golden sunrise over rolling green hills" },
-    { src: careersOpenMeadow, alt: "Vast open meadow with wildflowers leading to mountains" },
-    { src: careersSoaringEagle, alt: "Eagle soaring above mountain peaks at dawn" },
-    { src: careersAutumnRoad, alt: "Winding road through beautiful autumn forest" },
-    { src: careersSummitView, alt: "Mountain summit view at sunrise above clouds" },
-  ],
-  // FAQ: Calm/Clarity imagery
-  faq: [
-    { src: faqZenGarden, alt: "Japanese zen garden with raked sand and smooth pebbles" },
-    { src: faqStillLake, alt: "Perfectly still lake at dawn reflecting sky" },
-    { src: faqClearSky, alt: "Clear blue sky with single peaceful white cloud" },
-    { src: faqRiverStones, alt: "Smooth river stones in crystal clear shallow water" },
-    { src: faqLotus, alt: "Lotus flower floating on peaceful pond" },
-  ],
-  // Contact: Connection/Communication imagery
-  contact: [
-    { src: contactBridgingTrees, alt: "Two trees with intertwined branches forming natural bridge" },
-    { src: contactConfluence, alt: "Stream meeting calm lake in peaceful nature scene" },
-    { src: contactForestWelcome, alt: "Warm sunrise through forest clearing welcoming light" },
-    { src: contactPeacefulBay, alt: "Peaceful bay with gentle waves reaching sandy shore" },
-    { src: contactRainbowValley, alt: "Rainbow after storm over green valley" },
-  ],
-};
-
-// All nature images combined
-export const ALL_NATURE_IMAGES: HeroImage[] = [
-  ...PAGE_NATURE_IMAGES.home,
-  ...PAGE_NATURE_IMAGES.business,
-  ...PAGE_NATURE_IMAGES.training,
-  ...PAGE_NATURE_IMAGES.resources,
-  ...PAGE_NATURE_IMAGES.about,
-  ...PAGE_NATURE_IMAGES.careers,
-  ...PAGE_NATURE_IMAGES.faq,
-  ...PAGE_NATURE_IMAGES.contact,
+// All 10 nature images in seasonal order
+export const NATURE_HERO_IMAGES: HeroImage[] = [
+  { src: natureSpring1, alt: "Cherry blossoms in spring morning with rolling hills and mountains" },
+  { src: natureSummer1, alt: "Lavender fields stretching to the horizon under blue sky" },
+  { src: natureAutumn1, alt: "Autumn forest path with red and gold foliage" },
+  { src: natureWinter1, alt: "Serene winter forest with snow-covered pine trees" },
+  { src: natureSpring2, alt: "Spring lake reflection with blooming trees and mountains" },
+  { src: natureSummer2, alt: "Dramatic summer sunset over coastal cliffs" },
+  { src: natureAutumn2, alt: "Golden autumn vineyard in Tuscan countryside" },
+  { src: natureWinter2, alt: "Northern lights aurora over snowy winter landscape" },
+  { src: natureSpring3, alt: "English countryside with yellow rapeseed fields" },
+  { src: natureSummer3, alt: "Tropical paradise beach with turquoise water and palm trees" },
 ];
 
-// Helper to get page images
-export const getPageNatureImages = (page: keyof typeof PAGE_NATURE_IMAGES): HeroImage[] => {
-  return PAGE_NATURE_IMAGES[page] || PAGE_NATURE_IMAGES.home;
+// Additional images for variety
+export const NATURE_BONUS_IMAGES: HeroImage[] = [
+  { src: natureAutumn3, alt: "Japanese garden with red maples and koi pond in autumn" },
+  { src: natureWinter3, alt: "Cozy winter cabin in snowy mountain forest" },
+];
+
+// Combined all 12 images for extended carousels
+export const ALL_NATURE_IMAGES: HeroImage[] = [
+  ...NATURE_HERO_IMAGES,
+  ...NATURE_BONUS_IMAGES,
+];
+
+// Unique non-repeating image sets for each page - NO DUPLICATION
+// Each page gets 2 unique images that no other page uses
+export const PAGE_NATURE_IMAGES: Record<string, HeroImage[]> = {
+  business: [
+    { src: natureSpring1, alt: "Cherry blossoms in spring morning with rolling hills and mountains" },
+    { src: natureSummer1, alt: "Lavender fields stretching to the horizon under blue sky" },
+  ],
+  training: [
+    { src: natureAutumn1, alt: "Autumn forest path with red and gold foliage" },
+    { src: natureWinter1, alt: "Serene winter forest with snow-covered pine trees" },
+  ],
+  resources: [
+    { src: natureSpring2, alt: "Spring lake reflection with blooming trees and mountains" },
+    { src: natureSummer2, alt: "Dramatic summer sunset over coastal cliffs" },
+  ],
+  about: [
+    { src: natureAutumn2, alt: "Golden autumn vineyard in Tuscan countryside" },
+    { src: natureWinter2, alt: "Northern lights aurora over snowy winter landscape" },
+  ],
+  careers: [
+    { src: natureSpring3, alt: "English countryside with yellow rapeseed fields" },
+    { src: natureSummer3, alt: "Tropical paradise beach with turquoise water and palm trees" },
+  ],
+  faq: [
+    { src: natureAutumn3, alt: "Japanese garden with red maples and koi pond in autumn" },
+    { src: natureWinter3, alt: "Cozy winter cabin in snowy mountain forest" },
+  ],
+  contact: [
+    { src: natureSpring1, alt: "Cherry blossoms in spring morning" },
+    { src: natureAutumn1, alt: "Autumn forest path with red and gold foliage" },
+  ],
 };
 
-// Export individual images for use in other components
+// Helper to get page images as array
+export const getPageNatureImages = (page: keyof typeof PAGE_NATURE_IMAGES): HeroImage[] => {
+  return PAGE_NATURE_IMAGES[page] || [];
+};
+
+// Export individual images for CTA sections and other uses
 export {
-  // Home
-  homeOakShelter,
-  homeMountainFortress,
-  homeForestCanopy,
-  homeValleyProtected,
-  homeRedwoodSanctuary,
-  // Business
-  businessNeuralRoots,
-  businessWebNetwork,
-  businessConstellation,
-  businessMycelium,
-  businessLeafVeins,
-  // Training
-  trainingSeedlings,
-  trainingForestPath,
-  trainingButterfly,
-  trainingBambooGrowth,
-  trainingSummitPath,
-  // Resources
-  resourcesMountainStream,
-  resourcesAlpineLake,
-  resourcesWaterfall,
-  resourcesSpring,
-  resourcesRiverDelta,
-  // About
-  aboutAncientSequoia,
-  aboutBalancedRocks,
-  aboutCoastalCliff,
-  aboutGraniteMountain,
-  aboutBristlecone,
-  // Careers
-  careersGoldenSunrise,
-  careersOpenMeadow,
-  careersSoaringEagle,
-  careersAutumnRoad,
-  careersSummitView,
-  // FAQ
-  faqZenGarden,
-  faqStillLake,
-  faqClearSky,
-  faqRiverStones,
-  faqLotus,
-  // Contact
-  contactBridgingTrees,
-  contactConfluence,
-  contactForestWelcome,
-  contactPeacefulBay,
-  contactRainbowValley,
+  natureSpring1,
+  natureSpring2,
+  natureSpring3,
+  natureSummer1,
+  natureSummer2,
+  natureSummer3,
+  natureAutumn1,
+  natureAutumn2,
+  natureAutumn3,
+  natureWinter1,
+  natureWinter2,
+  natureWinter3,
 };

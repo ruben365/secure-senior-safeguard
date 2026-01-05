@@ -449,7 +449,6 @@ function Resources() {
       description: `${book.name} has been added to your cart.`
     });
   };
-  // Use Nature imagery for Resources page - flowing river representing source of knowledge
   const resourcesHeroImages = PAGE_NATURE_IMAGES.resources;
   return <PageTransition variant="fade">
       <SEO title="Resources & Marketplace - Digital Guides & Security Products" description="Browse our curated collection of scam prevention guides and physical security products. Everything you need to protect yourself and your loved ones." />

@@ -359,7 +359,6 @@ export default function FAQ() {
     );
   };
 
-  // Use Nature imagery for FAQ page - zen calm representing clarity
   const faqHeroImages = PAGE_NATURE_IMAGES.faq;
 
   return (
@@ -381,7 +380,6 @@ export default function FAQ() {
               subheadline="Get instant answers to your questions about our AI scam protection services, training programs, and security solutions"
               overlay={true}
               showScrollIndicator={false}
-              lightOverlay
             />
             
             {/* Floating Stats Bar - Outside Hero to stay static */}
@@ -412,16 +410,9 @@ export default function FAQ() {
           </div>
         </section>
 
-        {/* Search & Filter Section - Redesigned with decorative elements */}
-        <section className="py-8 bg-gradient-to-b from-muted/30 to-background relative overflow-hidden">
-          {/* Decorative 3D Question Mark icons */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="hidden lg:block absolute top-10 right-20 text-8xl font-bold text-primary/5 transform rotate-12 animate-float-subtle">?</div>
-            <div className="hidden lg:block absolute bottom-10 left-16 text-6xl font-bold text-accent/5 transform -rotate-12 animate-float-medium">?</div>
-            <div className="hidden lg:block absolute top-1/2 right-1/3 text-4xl font-bold text-primary/3">💡</div>
-          </div>
-          
-          <div className="container mx-auto px-4 relative z-10">
+        {/* Search & Filter Section - Redesigned */}
+        <section className="py-8 bg-gradient-to-b from-muted/30 to-background">
+          <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               {/* Search Bar - Enhanced */}
               <div className="relative mb-8">

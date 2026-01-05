@@ -14,8 +14,9 @@ import { Heart, Users, Zap, Target, MapPin, Clock, DollarSign, Briefcase, Star, 
 import { Link } from "react-router-dom";
 import { AIImageDisclaimer } from "@/components/AIImageDisclaimer";
 import { PAGE_NATURE_IMAGES } from "@/config/natureHeroImages";
-import { PAGE_WARM_IMAGES, teamCultureLifestyle, workshopLearningEnvironment } from "@/config/warmHeroImages";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
+import teamCollaboration from "@/assets/team-collaboration.jpg";
+import supportAgent from "@/assets/support-agent.jpg";
 const jobPositions = [{
   id: 1,
   title: "Senior AI Engineer",
@@ -168,14 +169,13 @@ function Careers() {
   const [selectedDepartment, setSelectedDepartment] = useState("all");
   const departments = ["all", ...Array.from(new Set(jobPositions.map(job => job.department)))];
   const filteredJobs = selectedDepartment === "all" ? jobPositions : jobPositions.filter(job => job.department === selectedDepartment);
-  // Use Nature imagery for Careers page - horizon sunrise representing opportunity
   const careersHeroImages = PAGE_NATURE_IMAGES.careers;
   return <PageTransition variant="fade">
       <SEO title="Careers - Join Our Mission" description="Join InVision Network and help protect families from AI-powered scams. Remote-first culture, competitive benefits, meaningful work. Open positions in engineering, support, design, and more." />
       <Navigation />
       {/* Hero wrapper for floating stats */}
       <div className="relative">
-        <Hero backgroundImages={careersHeroImages} headline="Join Our Mission" subheadline="Help us protect families from AI-powered scams" showProtectionBadge badgeText="We're Hiring" lightOverlay />
+        <Hero backgroundImages={careersHeroImages} headline="Join Our Mission" subheadline="Help us protect families from AI-powered scams" showProtectionBadge badgeText="We're Hiring" />
         
         {/* Floating Stats Bar - Outside Hero to stay static */}
         <HeroFloatingStats />
@@ -379,8 +379,8 @@ function Careers() {
             <ScrollReveal>
               <div className="relative rounded-3xl overflow-hidden shadow-2xl group">
                 <img 
-                  src={teamCultureLifestyle} 
-                  alt="Diverse creative team laughing together in modern office" 
+                  src={teamCollaboration} 
+                  alt="Our team collaborating in a meeting" 
                   className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
@@ -394,8 +394,8 @@ function Careers() {
             <ScrollReveal delay={200}>
               <div className="relative rounded-3xl overflow-hidden shadow-2xl group">
                 <img 
-                  src={workshopLearningEnvironment} 
-                  alt="Professionals learning together in bright workshop" 
+                  src={supportAgent} 
+                  alt="Support team member helping customers" 
                   className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-accent/80 via-transparent to-transparent" />
