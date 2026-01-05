@@ -1,13 +1,7 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Card } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useToast } from "@/hooks/use-toast";
 import { useAIChat } from "@/contexts/AIChatContext";
-import { supabase } from "@/integrations/supabase/client";
 import { 
   MessageSquare, 
   Send, 
@@ -15,14 +9,12 @@ import {
   X,
   Mic,
   MicOff,
-  Phone,
-  Mail,
-  ExternalLink,
   Volume2,
   VolumeX,
-  Loader2
+  Loader2,
+  Square,
+  ChevronDown
 } from "lucide-react";
-import { Link } from "react-router-dom";
 import lauraAvatar from "@/assets/laura-avatar-new.png";
 
 interface Message {
@@ -40,26 +32,35 @@ export const AIChat = () => {
   const [mode, setMode] = useState<AIMode>("chat");
   const [isRecording, setIsRecording] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [isGeneratingAudio, setIsGeneratingAudio] = useState(false);
   const [autoSpeak, setAutoSpeak] = useState(true);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const [showScrollButton, setShowScrollButton] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<any>(null);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
   const { toast } = useToast();
 
   const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ai-chat`;
-  const TTS_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/text-to-speech`;
+
+  // Auto-scroll to bottom when new messages arrive
+  const scrollToBottom = useCallback((behavior: ScrollBehavior = "smooth") => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior, block: "end" });
+    }
+  }, []);
 
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ 
-        behavior: "smooth", 
-        block: "end",
-        inline: "nearest"
-      });
+    scrollToBottom();
+  }, [messages, scrollToBottom]);
+
+  // Check if scrolled to bottom
+  const handleScroll = useCallback(() => {
+    if (scrollContainerRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = scrollContainerRef.current;
+      const isNearBottom = scrollHeight - scrollTop - clientHeight < 100;
+      setShowScrollButton(!isNearBottom);
     }
-  }, [messages]);
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -76,6 +77,7 @@ export const AIChat = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, openChat, closeChat]);
 
+  // Initialize speech recognition
   useEffect(() => {
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
@@ -87,7 +89,6 @@ export const AIChat = () => {
       recognitionRef.current.onresult = async (event: any) => {
         const transcript = event.results[0][0].transcript;
         setIsRecording(false);
-        // Auto-submit voice input
         if (transcript.trim()) {
           setInput("");
           await streamChat(transcript.trim());
@@ -110,36 +111,42 @@ export const AIChat = () => {
     }
 
     return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
+      stopSpeaking();
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
       }
     };
   }, [toast]);
 
-  const speakText = async (text: string) => {
-    if (!autoSpeak || isSpeaking) return;
+  // Immediate stop speaking - cancel all speech
+  const stopSpeaking = useCallback(() => {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+    setIsSpeaking(false);
+  }, []);
+
+  // Speak text using browser synthesis
+  const speakText = useCallback(async (text: string) => {
+    if (!autoSpeak) return;
+    
+    // Stop any current speech first
+    stopSpeaking();
     
     try {
       setIsSpeaking(true);
       
-      // Use browser's built-in speech synthesis
       if ('speechSynthesis' in window) {
-        // Cancel any ongoing speech
-        window.speechSynthesis.cancel();
-        
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = 0.9; // Slightly slower for elderly users
+        utterance.rate = 0.95;
         utterance.pitch = 1.0;
         utterance.volume = 1.0;
         
-        // Try to find a female voice
+        // Get voices and find a good female voice
         const voices = window.speechSynthesis.getVoices();
+        const preferredVoices = ['samantha', 'victoria', 'karen', 'female', 'zira', 'google us english female'];
         const femaleVoice = voices.find(v => 
-          v.name.toLowerCase().includes('female') || 
-          v.name.toLowerCase().includes('samantha') ||
-          v.name.toLowerCase().includes('victoria') ||
-          v.name.toLowerCase().includes('karen')
+          preferredVoices.some(pv => v.name.toLowerCase().includes(pv))
         );
         if (femaleVoice) {
           utterance.voice = femaleVoice;
@@ -154,23 +161,33 @@ export const AIChat = () => {
       console.error("TTS error:", error);
       setIsSpeaking(false);
     }
-  };
+  }, [autoSpeak, stopSpeaking]);
 
-  const stopSpeaking = () => {
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
+  // Stop current response generation
+  const stopGeneration = useCallback(() => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+      abortControllerRef.current = null;
     }
-    setIsSpeaking(false);
-  };
+    setIsLoading(false);
+    stopSpeaking();
+  }, [stopSpeaking]);
 
   const streamChat = async (userMessage: string) => {
+    // Cancel any ongoing request
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+    
+    // Create new abort controller
+    abortControllerRef.current = new AbortController();
+    
     try {
       const newMessages = [...messages, { role: "user" as const, content: userMessage }];
       setMessages(newMessages);
       setIsLoading(true);
+      stopSpeaking();
 
-      console.log("Sending chat request to:", CHAT_URL);
-      
       const response = await fetch(CHAT_URL, {
         method: "POST",
         headers: {
@@ -179,11 +196,10 @@ export const AIChat = () => {
         },
         body: JSON.stringify({
           messages: newMessages.map(m => ({ role: m.role, content: m.content })),
-          type: mode // Edge function expects 'type', not 'mode'
+          type: mode
         }),
+        signal: abortControllerRef.current.signal,
       });
-
-      console.log("Response status:", response.status);
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -204,13 +220,11 @@ export const AIChat = () => {
       while (true) {
         const { done, value } = await reader.read();
         
-        if (done) {
-          break;
-        }
+        if (done) break;
 
         textBuffer += decoder.decode(value, { stream: true });
         
-        // Process line-by-line
+        // Process line-by-line for SSE format
         let newlineIndex: number;
         while ((newlineIndex = textBuffer.indexOf("\n")) !== -1) {
           let line = textBuffer.slice(0, newlineIndex);
@@ -256,12 +270,17 @@ export const AIChat = () => {
       }
 
       setIsLoading(false);
+      abortControllerRef.current = null;
       
-      // Auto-speak the response for elderly users
+      // Auto-speak the response
       if (assistantMessage && autoSpeak) {
         await speakText(assistantMessage);
       }
     } catch (error: any) {
+      if (error.name === 'AbortError') {
+        console.log("Request was cancelled");
+        return;
+      }
       console.error("Chat error:", error);
       setIsLoading(false);
       toast({
@@ -295,8 +314,8 @@ export const AIChat = () => {
       recognitionRef.current.stop();
       setIsRecording(false);
     } else {
-      // Stop any playing audio before recording
       stopSpeaking();
+      stopGeneration();
       recognitionRef.current.start();
       setIsRecording(true);
       toast({
@@ -306,34 +325,24 @@ export const AIChat = () => {
     }
   };
 
-  const getModePlaceholder = () => {
-    switch (mode) {
-      case "translation": return "Enter French text to translate to Spanish...";
-      default: return "Type or tap the mic to talk to Laura...";
-    }
-  };
-
+  // Closed state - just show floating button
   if (!isOpen) {
     return (
-      <div className="fixed bottom-6 right-6 z-50 group">
-        {/* Main button with Laura avatar - transparent background */}
+      <div className="fixed bottom-6 right-6 z-[9998] group">
         <button
           onClick={openChat}
-          className="relative w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden"
+          className="relative w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden ring-2 ring-primary/20"
         >
           <img 
             src={lauraAvatar} 
             alt="Laura AI Assistant" 
             className="w-full h-full object-cover object-top"
           />
-          
-          {/* Online indicator */}
           <div className="absolute bottom-0.5 right-0.5 w-3 h-3 rounded-full bg-green-500 border-2 border-white" />
         </button>
         
-        {/* Tooltip */}
         <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none">
-          <div className="bg-white text-gray-800 text-xs font-medium px-3 py-1.5 rounded-lg whitespace-nowrap shadow-md">
+          <div className="bg-card text-foreground text-xs font-medium px-3 py-1.5 rounded-lg whitespace-nowrap shadow-md border border-border">
             Talk to Laura
           </div>
         </div>
@@ -342,174 +351,235 @@ export const AIChat = () => {
   }
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 sm:bottom-6 sm:right-6">
-      {/* Clean, compact white chat panel */}
-      <div className="bg-white rounded-2xl shadow-2xl w-[320px] max-h-[480px] flex flex-col overflow-hidden border border-gray-100">
-        {/* Compact Header */}
-        <div className="flex items-center justify-between p-3 border-b border-gray-100 bg-white">
+    <div className="fixed bottom-4 right-4 z-[9998] sm:bottom-6 sm:right-6">
+      {/* Enhanced chat panel with better dimensions */}
+      <div className="bg-card rounded-2xl shadow-2xl w-[360px] sm:w-[400px] h-[560px] flex flex-col overflow-hidden border border-border">
+        
+        {/* Header */}
+        <div className="flex items-center justify-between p-3 border-b border-border bg-card shrink-0">
           <div className="flex items-center gap-2">
-            <div className="relative w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
+            <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
               <img src={lauraAvatar} alt="Laura" className="w-full h-full object-cover object-top" />
-              <div className="absolute bottom-0 right-0 w-2 h-2 bg-green-500 rounded-full border border-white" />
+              <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-card" />
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-gray-800">Laura</h3>
-              <p className="text-[10px] text-gray-400">AI Assistant</p>
+              <h3 className="text-sm font-semibold text-foreground">Laura</h3>
+              <p className="text-[10px] text-muted-foreground">
+                {isSpeaking ? "Speaking..." : isLoading ? "Thinking..." : "AI Assistant"}
+              </p>
             </div>
           </div>
           
-          <div className="flex items-center gap-0.5">
+          <div className="flex items-center gap-1">
+            {/* Stop button - visible when speaking or loading */}
+            {(isSpeaking || isLoading) && (
+              <button
+                onClick={() => {
+                  stopSpeaking();
+                  stopGeneration();
+                }}
+                className="p-2 rounded-full bg-destructive/10 text-destructive hover:bg-destructive/20 transition-all"
+                title="Stop Laura"
+              >
+                <Square className="w-4 h-4 fill-current" />
+              </button>
+            )}
+            
             <button
               onClick={() => setAutoSpeak(!autoSpeak)}
-              className={`p-1.5 rounded-full transition-all ${autoSpeak ? 'text-primary bg-primary/10' : 'text-gray-400 hover:bg-gray-100'}`}
-              title={autoSpeak ? "Voice on" : "Voice off"}
+              className={`p-2 rounded-full transition-all ${autoSpeak ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:bg-muted'}`}
+              title={autoSpeak ? "Voice enabled" : "Voice disabled"}
             >
-              {autoSpeak ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
+              {autoSpeak ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
             </button>
+            
             <button
               onClick={() => setMode(mode === "chat" ? "translation" : "chat")}
-              className={`p-1.5 rounded-full transition-all ${mode === "translation" ? 'text-accent bg-accent/10' : 'text-gray-400 hover:bg-gray-100'}`}
+              className={`p-2 rounded-full transition-all ${mode === "translation" ? 'text-accent bg-accent/10' : 'text-muted-foreground hover:bg-muted'}`}
               title={mode === "chat" ? "Chat mode" : "Translation mode"}
             >
-              <Languages className="w-3.5 h-3.5" />
+              <Languages className="w-4 h-4" />
             </button>
+            
             <button
               onClick={closeChat}
-              className="p-1.5 rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-all"
+              className="p-2 rounded-full text-muted-foreground hover:bg-muted hover:text-foreground transition-all"
             >
-              <X className="w-3.5 h-3.5" />
+              <X className="w-4 h-4" />
             </button>
           </div>
         </div>
 
-        {/* Messages Area */}
-        <ScrollArea className="flex-1 px-3 h-[280px]" ref={scrollRef}>
-          <div className="py-3 space-y-3">
-            {messages.length === 0 && (
-              <div className="text-center py-4 space-y-2">
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full overflow-hidden">
+        {/* Messages Area with visible scrollbar */}
+        <div 
+          ref={scrollContainerRef}
+          onScroll={handleScroll}
+          className="flex-1 overflow-y-auto px-4 py-3 space-y-3 scroll-smooth"
+          style={{ 
+            scrollbarWidth: 'thin',
+            scrollbarColor: 'hsl(var(--primary) / 0.3) transparent'
+          }}
+        >
+          {messages.length === 0 && (
+            <div className="text-center py-6 space-y-3">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full overflow-hidden ring-2 ring-primary/20">
+                <img src={lauraAvatar} alt="Laura" className="w-full h-full object-cover object-top" />
+              </div>
+              <div className="space-y-2">
+                <p className="text-base font-semibold text-foreground">Hi, I'm Laura!</p>
+                <p className="text-muted-foreground text-sm px-4 leading-relaxed">
+                  {mode === "chat" 
+                    ? "Your AI assistant for cybersecurity questions. Ask me anything about staying safe online!"
+                    : "Enter French text to translate to Spanish."
+                  }
+                </p>
+              </div>
+              {mode === "chat" && (
+                <div className="flex flex-wrap justify-center gap-2 pt-2">
+                  <button 
+                    onClick={() => setInput("How do I spot a scam?")}
+                    className="px-3 py-1.5 bg-muted hover:bg-muted/80 text-foreground text-xs rounded-full transition-all"
+                  >
+                    🔍 Spot a scam
+                  </button>
+                  <button 
+                    onClick={() => setInput("What services do you offer?")}
+                    className="px-3 py-1.5 bg-muted hover:bg-muted/80 text-foreground text-xs rounded-full transition-all"
+                  >
+                    📋 Services
+                  </button>
+                  <button 
+                    onClick={() => setInput("Tell me about the 60-Second Pause Protocol")}
+                    className="px-3 py-1.5 bg-muted hover:bg-muted/80 text-foreground text-xs rounded-full transition-all"
+                  >
+                    ⏱️ Pause Protocol
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+          
+          {messages.map((msg, idx) => (
+            <div
+              key={idx}
+              className={`flex gap-2 ${msg.role === "assistant" ? "justify-start" : "justify-end"}`}
+            >
+              {msg.role === "assistant" && (
+                <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
                   <img src={lauraAvatar} alt="Laura" className="w-full h-full object-cover object-top" />
                 </div>
-                <div className="space-y-1">
-                  <p className="text-sm font-medium text-gray-800">Hi, I'm Laura!</p>
-                  <p className="text-gray-500 text-xs px-2 leading-relaxed">
-                    {mode === "chat" 
-                      ? "Ask me anything about staying safe online, or tap the mic to talk!"
-                      : "Enter French text to translate to Spanish."
-                    }
-                  </p>
-                </div>
-                {mode === "chat" && (
-                  <div className="flex flex-wrap justify-center gap-1.5 pt-1">
-                    <button 
-                      onClick={() => setInput("How do I spot a scam?")}
-                      className="px-2.5 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-[11px] rounded-full transition-all"
-                    >
-                      Spot a scam
-                    </button>
-                    <button 
-                      onClick={() => setInput("Tell me about your services")}
-                      className="px-2.5 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-[11px] rounded-full transition-all"
-                    >
-                      Services
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
-            
-            {messages.map((msg, idx) => (
+              )}
+              
               <div
-                key={idx}
-                className={`flex gap-2 ${msg.role === "assistant" ? "justify-start" : "justify-end"}`}
+                className={`rounded-2xl px-4 py-2.5 max-w-[85%] ${
+                  msg.role === "assistant"
+                    ? "bg-muted text-foreground"
+                    : "bg-primary text-primary-foreground"
+                }`}
               >
-                {msg.role === "assistant" && (
-                  <div className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0">
-                    <img src={lauraAvatar} alt="Laura" className="w-full h-full object-cover object-top" />
-                  </div>
-                )}
-                
-                <div
-                  className={`rounded-xl px-3 py-2 max-w-[80%] ${
-                    msg.role === "assistant"
-                      ? "bg-gray-100 text-gray-800"
-                      : "bg-primary text-white"
-                  }`}
-                >
-                  <p className="text-xs leading-relaxed whitespace-pre-wrap break-words">{msg.content}</p>
-                  {msg.role === "assistant" && !isLoading && (
+                <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">{msg.content}</p>
+                {msg.role === "assistant" && !isLoading && idx === messages.length - 1 && (
+                  <div className="mt-2 flex items-center gap-2">
                     <button
                       onClick={() => speakText(msg.content)}
-                      className="mt-1 flex items-center gap-1 text-[10px] text-gray-500 hover:text-primary transition-colors"
-                      disabled={isGeneratingAudio}
+                      disabled={isSpeaking}
+                      className="flex items-center gap-1 text-xs text-muted-foreground hover:text-primary transition-colors disabled:opacity-50"
                     >
-                      {isGeneratingAudio ? (
-                        <Loader2 className="w-2.5 h-2.5 animate-spin" />
-                      ) : isSpeaking ? (
-                        <VolumeX className="w-2.5 h-2.5" onClick={(e) => { e.stopPropagation(); stopSpeaking(); }} />
-                      ) : (
-                        <Volume2 className="w-2.5 h-2.5" />
-                      )}
-                      {isSpeaking ? "Stop" : "Listen"}
+                      <Volume2 className="w-3 h-3" />
+                      <span>Listen</span>
                     </button>
-                  )}
-                </div>
-              </div>
-            ))}
-            
-            {isLoading && (
-              <div className="flex gap-2 justify-start">
-                <div className="w-7 h-7 rounded-full overflow-hidden flex-shrink-0">
-                  <img src={lauraAvatar} alt="Laura" className="w-full h-full object-cover object-top" />
-                </div>
-                <div className="rounded-xl px-3 py-2 bg-gray-100">
-                  <div className="flex gap-1">
-                    <div className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <div className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <div className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce" style={{ animationDelay: '300ms' }} />
+                    {isSpeaking && (
+                      <button
+                        onClick={stopSpeaking}
+                        className="flex items-center gap-1 text-xs text-destructive hover:text-destructive/80 transition-colors"
+                      >
+                        <Square className="w-3 h-3 fill-current" />
+                        <span>Stop</span>
+                      </button>
+                    )}
                   </div>
+                )}
+              </div>
+            </div>
+          ))}
+          
+          {isLoading && (
+            <div className="flex gap-2 justify-start">
+              <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+                <img src={lauraAvatar} alt="Laura" className="w-full h-full object-cover object-top" />
+              </div>
+              <div className="rounded-2xl px-4 py-3 bg-muted">
+                <div className="flex gap-1.5">
+                  <div className="w-2 h-2 rounded-full bg-muted-foreground animate-bounce" style={{ animationDelay: '0ms' }} />
+                  <div className="w-2 h-2 rounded-full bg-muted-foreground animate-bounce" style={{ animationDelay: '150ms' }} />
+                  <div className="w-2 h-2 rounded-full bg-muted-foreground animate-bounce" style={{ animationDelay: '300ms' }} />
                 </div>
               </div>
-            )}
-            
-            <div ref={messagesEndRef} />
-          </div>
-        </ScrollArea>
+            </div>
+          )}
+          
+          <div ref={messagesEndRef} />
+        </div>
 
-        {/* Speaking indicator */}
-        {(isSpeaking || isGeneratingAudio) && (
-          <div className="px-3 py-1.5 bg-primary/5 border-t border-gray-100">
-            <div className="flex items-center justify-center gap-1.5 text-xs text-primary">
-              {isGeneratingAudio ? (
+        {/* Scroll to bottom button */}
+        {showScrollButton && (
+          <button
+            onClick={() => scrollToBottom()}
+            className="absolute bottom-24 left-1/2 -translate-x-1/2 p-2 rounded-full bg-primary text-primary-foreground shadow-lg hover:bg-primary/90 transition-all"
+          >
+            <ChevronDown className="w-4 h-4" />
+          </button>
+        )}
+
+        {/* Speaking/Loading indicator bar */}
+        {(isSpeaking || isRecording) && (
+          <div className="px-4 py-2 bg-primary/5 border-t border-border shrink-0">
+            <div className="flex items-center justify-center gap-2 text-sm">
+              {isRecording ? (
                 <>
-                  <Loader2 className="w-3 h-3 animate-spin" />
-                  <span>Preparing...</span>
+                  <Mic className="w-4 h-4 text-destructive animate-pulse" />
+                  <span className="text-destructive font-medium">Listening...</span>
+                  <button 
+                    onClick={() => {
+                      recognitionRef.current?.stop();
+                      setIsRecording(false);
+                    }}
+                    className="text-xs text-muted-foreground hover:text-foreground underline"
+                  >
+                    Cancel
+                  </button>
                 </>
               ) : (
                 <>
-                  <Volume2 className="w-3 h-3 animate-pulse" />
-                  <span>Speaking...</span>
-                  <button onClick={stopSpeaking} className="ml-1 underline hover:no-underline">Stop</button>
+                  <Volume2 className="w-4 h-4 text-primary animate-pulse" />
+                  <span className="text-primary font-medium">Laura is speaking...</span>
+                  <button 
+                    onClick={stopSpeaking}
+                    className="text-xs text-muted-foreground hover:text-foreground underline"
+                  >
+                    Interrupt
+                  </button>
                 </>
               )}
             </div>
           </div>
         )}
 
-        {/* Input */}
-        <div className="p-2.5 bg-white border-t border-gray-100">
+        {/* Input area */}
+        <div className="p-3 bg-card border-t border-border shrink-0">
           <form onSubmit={handleSubmit} className="flex gap-2">
             <button
               type="button"
               onClick={toggleVoiceRecording}
-              className={`h-10 w-10 flex-shrink-0 rounded-full flex items-center justify-center transition-all ${
+              className={`h-11 w-11 flex-shrink-0 rounded-full flex items-center justify-center transition-all ${
                 isRecording 
-                  ? 'bg-red-500 text-white animate-pulse' 
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  ? 'bg-destructive text-destructive-foreground animate-pulse' 
+                  : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground'
               }`}
               disabled={isLoading}
+              title={isRecording ? "Stop recording" : "Start voice input"}
             >
-              {isRecording ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
+              {isRecording ? <MicOff className="h-5 w-5" /> : <Mic className="h-5 w-5" />}
             </button>
             
             <input
@@ -517,7 +587,7 @@ export const AIChat = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={mode === "chat" ? "Type a message..." : "French text..."}
-              className="flex-1 bg-gray-100 rounded-full px-3 py-2 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30"
+              className="flex-1 bg-muted rounded-full px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30"
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
                   e.preventDefault();
@@ -529,17 +599,15 @@ export const AIChat = () => {
             <button
               type="submit"
               disabled={!input.trim() || isLoading}
-              className="h-10 w-10 flex-shrink-0 rounded-full bg-primary text-white flex items-center justify-center hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="h-11 w-11 flex-shrink-0 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <Send className="h-4 w-4" />
+              {isLoading ? (
+                <Loader2 className="h-5 w-5 animate-spin" />
+              ) : (
+                <Send className="h-5 w-5" />
+              )}
             </button>
           </form>
-          
-          {isRecording && (
-            <p className="text-center text-[10px] text-primary mt-1.5 animate-pulse">
-              🎤 Listening...
-            </p>
-          )}
         </div>
       </div>
     </div>
