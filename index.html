@@ -130,6 +130,17 @@
   <body>
     <div id="root"></div>
     
+    <!-- Async CSS loader - converts Vite-injected CSS to non-render-blocking -->
+    <script>
+      (function(){
+        var links=document.querySelectorAll('link[rel="stylesheet"][href*="/assets/"]');
+        links.forEach(function(link){
+          link.media='print';
+          link.onload=function(){this.media='all'};
+        });
+      })();
+    </script>
+    
     <!-- Service Worker Registration - deferred to reduce main-thread blocking -->
     <script>
       // Use requestIdleCallback to defer SW registration out of critical path
