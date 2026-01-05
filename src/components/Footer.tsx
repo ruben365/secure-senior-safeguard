@@ -30,7 +30,7 @@ const Footer = () => {
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 <div className="p-2 rounded-xl bg-white/10 border border-white/10">
-                  <img src={invisionLogo} alt="InVision Network" className="h-8 w-8 brightness-0 invert" />
+                  <img src={invisionLogo} alt="InVision Network" className="h-8 w-8 object-contain brightness-0 invert" />
                 </div>
                 <div>
                   <h2 className="text-xl font-bold">InVision Network</h2>
