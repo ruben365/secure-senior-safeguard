@@ -26,9 +26,8 @@ import { contactFormSchema, formatPhoneNumber } from "@/utils/formValidation";
 import { z } from "zod";
 import { useConfetti } from "@/hooks/useConfetti";
 import { PAGE_NATURE_IMAGES } from "@/config/natureHeroImages";
+import { PAGE_WARM_IMAGES, friendlySupportAgent, teamTabletCollaboration } from "@/config/warmHeroImages";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
-import supportAgentPhoto from "@/assets/support-agent.jpg";
-import familyGathering from "@/assets/family-gathering.jpg";
 
 const contactMethods = [
   {
@@ -139,7 +138,8 @@ function Contact() {
   const messageLength = formData.message.length;
   const maxLength = 500;
 
-  const contactHeroImages = PAGE_NATURE_IMAGES.contact;
+  // Use warm, human-centric images for Contact page
+  const contactHeroImages = PAGE_WARM_IMAGES.contact;
 
   return (
     <PageTransition variant="fade">
@@ -156,6 +156,7 @@ function Contact() {
           subheadline="We're here to help protect your family"
           showProtectionBadge
           badgeText="Response within 4 hours"
+          lightOverlay
         >
           <FloatingShapes />
         </Hero>
@@ -531,7 +532,7 @@ function Contact() {
                   {/* Team Photo */}
                   <div className="relative rounded-xl overflow-hidden mb-4 group">
                     <img 
-                      src={supportAgentPhoto} 
+                      src={friendlySupportAgent} 
                       alt="Our friendly support team member" 
                       className="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-105"
                     />

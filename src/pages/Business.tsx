@@ -35,6 +35,7 @@ const businessHeadlines = [
   "Industry-Leading AI Service Insurance"
 ];
 import { PAGE_NATURE_IMAGES, natureSummer2 } from "@/config/natureHeroImages";
+import { PAGE_WARM_IMAGES } from "@/config/warmHeroImages";
 import { VideoLightbox } from "@/components/VideoLightbox";
 import { SEO } from "@/components/SEO";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
@@ -138,7 +139,8 @@ function Business() {
     setEmbeddedPaymentOpen(true);
   };
 
-  const businessHeroImages = PAGE_NATURE_IMAGES.business;
+  // Use warm, human-centric images for Business page
+  const businessHeroImages = PAGE_WARM_IMAGES.business;
 
   return (
     <PageTransition variant="fade">
@@ -190,6 +192,7 @@ function Business() {
           headline=""
           subheadline=""
           showScrollIndicator={true}
+          lightOverlay
         >
           {/* Transitioning Headlines */}
           <div className="text-center mb-6">

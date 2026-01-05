@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Users, Clock, Award, Shield, ArrowRight, Sparkles, Play, BookOpen, Star, DollarSign } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import workshopSeniorsLearning from "@/assets/workshop-seniors-learning.jpg";
+import { workshopLearningEnvironment } from "@/config/warmHeroImages";
 
 const benefits = [
   { icon: Shield, text: "60-Second Pause Protocol" },
@@ -67,7 +67,7 @@ export const WorkshopsPromo = () => {
             <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)]">
               {/* Image with mobile-optimized display */}
               <img 
-                src={workshopSeniorsLearning} 
+                src={workshopLearningEnvironment} 
                 alt="Seniors learning in a friendly workshop environment" 
                 className="w-full h-auto object-contain sm:object-cover sm:aspect-[16/10] bg-muted/30"
                 loading="lazy"

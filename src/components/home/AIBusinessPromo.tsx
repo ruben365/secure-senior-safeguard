@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Phone, Calendar, Bot, Globe, ArrowRight, Sparkles, Shield, Clock, TrendingUp } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import businessProfessionalsOffice from "@/assets/business-professionals-office.jpg";
+import { aiHelpingPeople } from "@/config/warmHeroImages";
 
 const services = [
   {
@@ -62,8 +62,8 @@ export const AIBusinessPromo = () => {
           <ScrollReveal animation="fade-up" className="order-1 lg:order-2 w-full">
             <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)]">
               <img 
-                src={businessProfessionalsOffice} 
-                alt="Business professionals collaborating in modern office" 
+                src={aiHelpingPeople} 
+                alt="AI technology helping people with clean geometric shapes" 
                 className="w-full h-auto object-contain sm:object-cover sm:aspect-[16/10] bg-muted/30"
                 loading="lazy"
               />
