@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Users, Clock, Award, Shield, CheckCircle, ArrowRight, Sparkles, Play, BookOpen, Star, DollarSign, Brain, Eye, AlertTriangle, Lock, Target, Briefcase } from "lucide-react";
-import workshopTrainingSession from "@/assets/workshop-training-session.jpg";
+import workshopSeniorsLearning from "@/assets/workshop-seniors-learning.jpg";
 import learningBg from "@/assets/learning-bg.jpg";
 
 const benefits = [
@@ -90,7 +90,7 @@ export const WorkshopsPromo = () => {
           >
             <div className="relative rounded-3xl overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)]">
               <img 
-                src={workshopTrainingSession} 
+                src={workshopSeniorsLearning}
                 alt="Training workshop session"
                 width={700}
                 height={394}
