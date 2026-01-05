@@ -190,7 +190,9 @@ function Business() {
       >
         {/* Transitioning Headlines */}
         <div className="text-center mb-6">
-          <RotatingHeadlines headlines={businessHeadlines} />
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+            <RotatingHeadlines headlines={businessHeadlines} className="" />
+          </h1>
           <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
             Transform your business with AI-powered solutions, professional websites, and expert security
           </p>

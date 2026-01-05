@@ -456,7 +456,9 @@ function Resources() {
       <Hero backgroundImages={resourcesHeroImages} headline="" subheadline="" showScrollIndicator={true}>
         {/* Transitioning Headlines */}
         <div className="text-center mb-6">
-          <RotatingHeadlines headlines={heroHeadlines} />
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+            <RotatingHeadlines headlines={heroHeadlines} className="" />
+          </h1>
           <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
             Expert-curated guides, tools, and products designed to keep you and your family safe
           </p>

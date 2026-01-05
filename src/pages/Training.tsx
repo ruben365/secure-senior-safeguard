@@ -354,7 +354,9 @@ function LearnAndTrain() {
         showScrollIndicator={true}
       >
         <div className="text-center md:text-left mb-8">
-          <RotatingHeadlines headlines={trainingHeadlines} />
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+            <RotatingHeadlines headlines={trainingHeadlines} className="" />
+          </h1>
           <p className="text-lg md:text-xl lg:text-2xl text-white/90 max-w-4xl">
             Expert-led training and 24/7 protection services designed for families and seniors
           </p>
