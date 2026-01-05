@@ -34,7 +34,7 @@ const businessHeadlines = [
   "Professional Website Design & Development",
   "Industry-Leading AI Service Insurance"
 ];
-import { PAGE_NATURE_IMAGES, natureAiRoots } from "@/config/natureHeroImages";
+import { PAGE_NATURE_IMAGES, businessNeuralRoots } from "@/config/natureHeroImages";
 import { PAGE_WARM_IMAGES } from "@/config/warmHeroImages";
 import { PAGE_3D_IMAGES } from "@/config/hero3DImages";
 import { VideoLightbox } from "@/components/VideoLightbox";
@@ -2090,7 +2090,7 @@ function Business() {
       <CTASection 
         headline="Ready to Deploy AI Safely?" 
         variant="image"
-        backgroundImage={natureAiRoots}
+        backgroundImage={businessNeuralRoots}
         description="Take the first step towards protecting your business with AI-powered security solutions. Book a free discovery call to discuss your AI automation needs."
       >
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
