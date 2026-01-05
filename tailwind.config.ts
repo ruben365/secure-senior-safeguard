@@ -166,6 +166,10 @@ export default {
           "0%": { backgroundPosition: "-1000px 0" },
           "100%": { backgroundPosition: "1000px 0" },
         },
+        "slow-zoom": {
+          "0%": { transform: "scale(1.05)" },
+          "100%": { transform: "scale(1.15)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -179,6 +183,7 @@ export default {
         "float-delayed": "float-delayed 18s ease-in-out infinite 3s",
         "blob-morph": "blob-morph 20s ease-in-out infinite",
         "shimmer": "shimmer 2s infinite linear",
+        "slow-zoom": "slow-zoom 30s ease-in-out infinite alternate",
       },
       backgroundImage: {
         "gradient-hero-primary": "linear-gradient(135deg, hsl(260 50% 25%) 0%, hsl(260 45% 35%) 50%, hsl(270 50% 45%) 100%)",

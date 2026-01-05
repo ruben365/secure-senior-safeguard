@@ -41,6 +41,7 @@ function AdminDashboard() {
     activeProjects: 0,
     pendingTasks: 0,
     upcomingEvents: 0,
+    newsletterSubscribers: 0,
   });
 
   useEffect(() => {
@@ -101,17 +102,23 @@ function AdminDashboard() {
       .select("*", { count: "exact", head: true })
       .in("status", ["Pending", "In Progress"]);
 
+    // Count newsletter subscribers
+    const { count: subscriberCount } = await supabase
+      .from("newsletter_subscribers")
+      .select("*", { count: "exact", head: true });
+
     setStats({
       totalStaff: staffCount || 0,
       activeProjects: projectsCount || 0,
       pendingTasks: tasksData?.length || 0,
       upcomingEvents: eventsData?.length || 0,
+      newsletterSubscribers: subscriberCount || 0,
     });
   };
 
   const statCards = [
     { label: "Total Staff", value: stats.totalStaff, icon: Users, color: "text-blue-600" },
-    { label: "Active Projects", value: stats.activeProjects, icon: TrendingUp, color: "text-green-600" },
+    { label: "Newsletter Subscribers", value: stats.newsletterSubscribers, icon: MessageSquare, color: "text-green-600", link: "/admin/newsletter" },
     { label: "Pending Tasks", value: stats.pendingTasks, icon: CheckSquare, color: "text-amber-600" },
     { label: "Upcoming Events", value: stats.upcomingEvents, icon: CalendarIcon, color: "text-purple-600" },
   ];
@@ -148,8 +155,8 @@ function AdminDashboard() {
         <div className="grid md:grid-cols-4 gap-6 mb-8">
           {statCards.map((stat) => {
             const Icon = stat.icon;
-            return (
-              <Card key={stat.label} className="p-6">
+            const cardContent = (
+              <Card key={stat.label} className={`p-6 ${stat.link ? 'cursor-pointer hover:shadow-lg transition-shadow' : ''}`}>
                 <div className="flex items-center justify-between mb-4">
                   <div className={`w-12 h-12 ${stat.color} bg-primary/10 rounded-lg flex items-center justify-center`}>
                     <Icon className="w-6 h-6" />
@@ -158,6 +165,11 @@ function AdminDashboard() {
                 </div>
                 <p className="text-sm text-muted-foreground">{stat.label}</p>
               </Card>
+            );
+            return stat.link ? (
+              <Link key={stat.label} to={stat.link}>{cardContent}</Link>
+            ) : (
+              <div key={stat.label}>{cardContent}</div>
             );
           })}
         </div>
