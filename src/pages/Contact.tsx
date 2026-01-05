@@ -27,6 +27,7 @@ import { z } from "zod";
 import { useConfetti } from "@/hooks/useConfetti";
 import { PAGE_NATURE_IMAGES } from "@/config/natureHeroImages";
 import { PAGE_WARM_IMAGES, friendlySupportAgent, teamTabletCollaboration } from "@/config/warmHeroImages";
+import { PAGE_3D_IMAGES } from "@/config/hero3DImages";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 
 const contactMethods = [
@@ -138,8 +139,8 @@ function Contact() {
   const messageLength = formData.message.length;
   const maxLength = 500;
 
-  // Use warm, human-centric images for Contact page
-  const contactHeroImages = PAGE_WARM_IMAGES.contact;
+  // Use 3D object-based images for Contact page (envelope, phone, satellite)
+  const contactHeroImages = PAGE_3D_IMAGES.contact;
 
   return (
     <PageTransition variant="fade">

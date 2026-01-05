@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/accordion";
 import { PAGE_NATURE_IMAGES } from "@/config/natureHeroImages";
 import { PAGE_WARM_IMAGES } from "@/config/warmHeroImages";
+import { PAGE_3D_IMAGES } from "@/config/hero3DImages";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 
 interface FAQ {
@@ -360,8 +361,8 @@ export default function FAQ() {
     );
   };
 
-  // Use warm, human-centric images for FAQ page
-  const faqHeroImages = PAGE_WARM_IMAGES.faq;
+  // Use 3D object-based images for FAQ page (question marks, magnifying glass)
+  const faqHeroImages = PAGE_3D_IMAGES.faq;
 
   return (
     <PageTransition variant="fade">

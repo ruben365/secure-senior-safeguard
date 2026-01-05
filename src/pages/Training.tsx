@@ -47,6 +47,7 @@ import {
 } from "lucide-react";
 import { PAGE_NATURE_IMAGES, natureWinter3 } from "@/config/natureHeroImages";
 import { PAGE_WARM_IMAGES } from "@/config/warmHeroImages";
+import { PAGE_3D_IMAGES } from "@/config/hero3DImages";
 import TestimonialCard from "@/components/TestimonialCard";
 import { VideoLightbox } from "@/components/VideoLightbox";
 import { SEO } from "@/components/SEO";
@@ -306,8 +307,8 @@ function LearnAndTrain() {
     setEmbeddedPaymentOpen(true);
   };
 
-  // Use warm, human-centric images for Training page
-  const trainingHeroImages = PAGE_WARM_IMAGES.training;
+  // Use 3D object-based images for Training page (books, lightbulb, puzzle pieces)
+  const trainingHeroImages = PAGE_3D_IMAGES.training;
 
   return (
     <PageTransition variant="fade">

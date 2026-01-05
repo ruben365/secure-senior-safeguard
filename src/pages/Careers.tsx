@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import { AIImageDisclaimer } from "@/components/AIImageDisclaimer";
 import { PAGE_NATURE_IMAGES } from "@/config/natureHeroImages";
 import { PAGE_WARM_IMAGES, teamCultureLifestyle, workshopLearningEnvironment } from "@/config/warmHeroImages";
+import { PAGE_3D_IMAGES } from "@/config/hero3DImages";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 const jobPositions = [{
   id: 1,
@@ -168,8 +169,8 @@ function Careers() {
   const [selectedDepartment, setSelectedDepartment] = useState("all");
   const departments = ["all", ...Array.from(new Set(jobPositions.map(job => job.department)))];
   const filteredJobs = selectedDepartment === "all" ? jobPositions : jobPositions.filter(job => job.department === selectedDepartment);
-  // Use warm, human-centric images for Careers page
-  const careersHeroImages = PAGE_WARM_IMAGES.careers;
+  // Use 3D object-based images for Careers page (ladder, open door, desk)
+  const careersHeroImages = PAGE_3D_IMAGES.careers;
   return <PageTransition variant="fade">
       <SEO title="Careers - Join Our Mission" description="Join InVision Network and help protect families from AI-powered scams. Remote-first culture, competitive benefits, meaningful work. Open positions in engineering, support, design, and more." />
       <Navigation />

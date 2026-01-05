@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Users, Clock, Award, Shield, ArrowRight, Sparkles, Play, BookOpen, Star, DollarSign } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { workshopLearningEnvironment } from "@/config/warmHeroImages";
+import { learningObjects } from "@/config/hero3DImages";
 
 const benefits = [
   { icon: Shield, text: "60-Second Pause Protocol" },
@@ -62,25 +62,20 @@ export const WorkshopsPromo = () => {
         {/* Mobile-first: Stack vertically, Desktop: Side by side */}
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           
-          {/* Image Side - Shows first on mobile */}
+          {/* Image Side - Shows first on mobile with floating animation */}
           <ScrollReveal animation="fade-up" className="order-1 lg:order-1 w-full">
-            <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)]">
-              {/* Image with mobile-optimized display */}
-              <img 
-                src={workshopLearningEnvironment} 
-                alt="Seniors learning in a friendly workshop environment" 
-                className="w-full h-auto object-contain sm:object-cover sm:aspect-[16/10] bg-muted/30"
-                loading="lazy"
-              />
-              {/* Overlay gradient - lighter on mobile */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 sm:from-black/40 via-transparent to-transparent pointer-events-none" />
-              
-              {/* Play button overlay - smaller on mobile */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-14 h-14 sm:w-20 sm:h-20 bg-white/90 rounded-full flex items-center justify-center shadow-xl hover:scale-105 transition-transform cursor-pointer">
-                  <Play className="w-6 h-6 sm:w-8 sm:h-8 text-primary ml-1" fill="currentColor" />
-                </div>
+            <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] bg-slate-900/50">
+              {/* Floating 3D image with animation */}
+              <div className="animate-float-medium">
+                <img 
+                  src={learningObjects} 
+                  alt="3D floating books and lightbulb representing learning" 
+                  className="w-full h-auto object-contain aspect-[16/10]"
+                  loading="lazy"
+                />
               </div>
+              {/* Subtle glow overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-accent/5 pointer-events-none" />
 
               {/* Stats overlay - responsive sizing */}
               <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 flex gap-2 sm:gap-3">

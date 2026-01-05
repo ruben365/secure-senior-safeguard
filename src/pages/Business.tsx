@@ -36,6 +36,7 @@ const businessHeadlines = [
 ];
 import { PAGE_NATURE_IMAGES, natureSummer2 } from "@/config/natureHeroImages";
 import { PAGE_WARM_IMAGES } from "@/config/warmHeroImages";
+import { PAGE_3D_IMAGES } from "@/config/hero3DImages";
 import { VideoLightbox } from "@/components/VideoLightbox";
 import { SEO } from "@/components/SEO";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
@@ -139,8 +140,8 @@ function Business() {
     setEmbeddedPaymentOpen(true);
   };
 
-  // Use warm, human-centric images for Business page
-  const businessHeroImages = PAGE_WARM_IMAGES.business;
+  // Use 3D object-based images for Business page (no people, cybersecurity aesthetic)
+  const businessHeroImages = PAGE_3D_IMAGES.business;
 
   return (
     <PageTransition variant="fade">

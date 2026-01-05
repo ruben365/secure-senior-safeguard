@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Heart, Shield, Users, Ribbon, ArrowRight, MapPin } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import ohioNatureImpact from "@/assets/ohio-nature-impact.jpg";
+import { shieldHero } from "@/config/hero3DImages";
 
 const impacts = [
   {
@@ -73,19 +73,22 @@ export const CommunityImpact = () => {
           </div>
         </ScrollReveal>
 
-        {/* Main Image with overlay - Full width on mobile */}
+        {/* Main 3D Image with floating animation */}
         <ScrollReveal animation="scale" className="mb-8 sm:mb-12 lg:mb-16">
-          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)]">
-            <img
-              src={ohioNatureImpact}
-              alt="Ohio community and nature"
-              className="w-full h-48 sm:h-64 md:h-80 lg:h-[400px] object-cover"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
+          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] bg-slate-900/50">
+            <div className="animate-float-subtle">
+              <img
+                src={shieldHero}
+                alt="3D digital shield with holographic patterns representing protection"
+                className="w-full h-48 sm:h-64 md:h-80 lg:h-[400px] object-contain"
+                loading="lazy"
+              />
+            </div>
+            {/* Subtle glow overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-accent/10 pointer-events-none" />
             <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 lg:p-10 text-center text-white">
-              <h3 className="text-lg sm:text-2xl lg:text-3xl font-bold mb-1 sm:mb-3">Proudly Serving Ohio Communities</h3>
-              <p className="text-white/80 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto">
+              <h3 className="text-lg sm:text-2xl lg:text-3xl font-bold mb-1 sm:mb-3 drop-shadow-lg">Proudly Serving Ohio Communities</h3>
+              <p className="text-white/90 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto drop-shadow-md">
                 From Dayton to Columbus to Cincinnati—protecting families across the Buckeye State
               </p>
             </div>
