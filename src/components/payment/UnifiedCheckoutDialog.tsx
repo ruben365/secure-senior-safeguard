@@ -19,9 +19,9 @@ import {
   Smartphone,
   RefreshCw
 } from 'lucide-react';
-import { loadStripe } from '@stripe/stripe-js';
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useCheckout } from '@/contexts/CheckoutContext';
+import { useStripeKey } from '@/hooks/useStripeKey';
 import { usePaymentFlow } from '@/hooks/usePaymentFlow';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
@@ -513,24 +513,13 @@ const OrderSummary: React.FC = () => {
 // Main Dialog Component
 const UnifiedCheckoutDialog: React.FC = () => {
   const { state, closeCheckout, setStep, resetCheckout } = useCheckout();
-  const [stripePromise, setStripePromise] = useState<ReturnType<typeof loadStripe> | null>(null);
+  const { stripePromise, initializeStripe } = useStripeKey();
 
   useEffect(() => {
-    const initStripe = async () => {
-      try {
-        const { data } = await supabase.functions.invoke('get-stripe-key');
-        if (data?.publishableKey) {
-          setStripePromise(loadStripe(data.publishableKey));
-        }
-      } catch (err) {
-        console.error('Failed to load Stripe:', err);
-      }
-    };
-
     if (state.isOpen) {
-      initStripe();
+      initializeStripe();
     }
-  }, [state.isOpen]);
+  }, [state.isOpen, initializeStripe]);
 
   const handleClose = () => {
     if (state.step === 'success') {

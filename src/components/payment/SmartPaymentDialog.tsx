@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { loadStripe } from "@stripe/stripe-js";
 import {
   Elements,
   PaymentElement,
