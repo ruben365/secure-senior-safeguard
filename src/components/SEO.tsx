@@ -13,11 +13,11 @@ interface SEOProps {
 }
 
 const DEFAULT_SEO = {
-  title: "AI Scam Protection & Business Solutions | InVision Network",
-  description: "Protect your family from AI scams and grow your business with secure AI solutions. Expert cybersecurity training in Dayton, Ohio.",
+  title: "Cybersecurity & AI Protection in Ohio | InVision Network",
+  description: "InVision Network provides expert cybersecurity training and AI protection for Ohio families and businesses. Protect your identity and data from online scams.",
   image: "https://storage.googleapis.com/gpt-engineer-file-uploads/UpYpYr7MTVdr1jgHmL94ALNUlk93/social-images/social-1761862743436-shield_purpleb.png",
   type: "website",
-  keywords: "AI scam protection, deepfake detection, senior scam training, family cybersecurity, phishing defense, Dayton Ohio",
+  keywords: "cybersecurity Ohio, AI scam protection, deepfake detection, senior scam training, family cybersecurity, phishing defense, Dayton Ohio",
 };
 
 export function SEO({
