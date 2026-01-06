@@ -36,6 +36,14 @@
       .lcp-text{font-size:clamp(1rem,2vw,1.5rem);color:#64748b;line-height:1.6;margin:0 0 2rem}
     </style>
     
+    <!-- CSS async loader - makes main CSS non-render-blocking -->
+    <script>
+      (function(){
+        var l=function(h){var s=document.createElement('link');s.rel='stylesheet';s.href=h;s.media='print';s.onload=function(){this.media='all'};document.head.appendChild(s)};
+        window.__loadCSS=l;
+      })();
+    </script>
+    
     <!-- Modulepreload for main bundle - reduces chain latency -->
     <link rel="modulepreload" href="/src/main.tsx">
     
