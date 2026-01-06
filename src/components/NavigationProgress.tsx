@@ -11,19 +11,21 @@ export const NavigationProgress = () => {
     setIsVisible(true);
     setProgress(0);
 
-    // Ultra-fast completion
-    const timer1 = setTimeout(() => setProgress(90), 10);
-    const timer2 = setTimeout(() => {
+    // Smooth progress animation
+    const timer1 = setTimeout(() => setProgress(40), 20);
+    const timer2 = setTimeout(() => setProgress(80), 80);
+    const timer3 = setTimeout(() => {
       setProgress(100);
       setTimeout(() => {
         setIsVisible(false);
         setProgress(0);
-      }, 50);
-    }, 60);
+      }, 100);
+    }, 150);
 
     return () => {
       clearTimeout(timer1);
       clearTimeout(timer2);
+      clearTimeout(timer3);
     };
   }, [location.pathname]);
 
@@ -31,17 +33,17 @@ export const NavigationProgress = () => {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="fixed top-0 left-0 right-0 h-[2px] z-[9999]"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          className="fixed top-0 left-0 right-0 h-[3px] z-[9999]"
+          initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.1 }}
+          transition={{ duration: 0.15 }}
         >
           <motion.div
-            className="h-full bg-primary"
+            className="h-full bg-gradient-to-r from-primary via-accent to-primary"
             initial={{ width: "0%" }}
             animate={{ width: `${progress}%` }}
-            transition={{ duration: 0.1, ease: "linear" }}
+            transition={{ duration: 0.15, ease: "easeOut" }}
+            style={{ boxShadow: "0 0 8px hsl(var(--primary) / 0.6)" }}
           />
         </motion.div>
       )}
