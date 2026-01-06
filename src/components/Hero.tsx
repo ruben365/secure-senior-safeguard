@@ -101,7 +101,7 @@ const Hero = ({
         ) : !useVideo && backgroundImage && (
           <div
             className={cn(
-              "absolute inset-0 bg-cover bg-center bg-no-repeat brightness-115 transition-opacity duration-500",
+              "absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-500",
               singleImagePreloaded ? "opacity-100" : "opacity-0"
             )}
             style={{ backgroundImage: `url(${backgroundImage})` }}
@@ -123,12 +123,12 @@ const Hero = ({
       <div className="w-full max-w-[1920px] mx-auto px-6 sm:px-10 md:px-16 lg:px-20 xl:px-32 py-20 sm:py-24 md:py-28 lg:py-32 relative z-10">
         <div className="max-w-6xl">
           {headline && (
-            <h1 className="text-white mb-4 sm:mb-6 md:mb-8 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl [text-shadow:0_4px_30px_rgba(139,92,246,0.5),0_2px_10px_rgba(0,0,0,0.5)] leading-tight font-bold animate-fade-in">
+            <h1 className="text-white mb-4 sm:mb-6 md:mb-8 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight font-bold">
               {headline}
             </h1>
           )}
           {subheadline && (
-            <p className="text-white/95 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl mb-8 md:mb-10 leading-relaxed max-w-3xl animate-fade-in [text-shadow:0_2px_15px_rgba(0,0,0,0.4)]" style={{ animationDelay: '0.1s' }}>
+            <p className="text-white/95 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl mb-8 md:mb-10 leading-relaxed max-w-3xl">
               {subheadline}
             </p>
           )}
