@@ -14,7 +14,7 @@
     <link rel="dns-prefetch" href="https://js.stripe.com">
     <link rel="dns-prefetch" href="https://m.stripe.network">
     
-    <!-- Critical CSS inlined for FCP -->
+    <!-- Critical CSS inlined for FCP/LCP -->
     <style>
       *,*::before,*::after{box-sizing:border-box;border-width:0;border-style:solid}
       html{line-height:1.5;-webkit-text-size-adjust:100%;font-family:Outfit,ui-sans-serif,system-ui,sans-serif}
@@ -26,6 +26,11 @@
       .overflow-hidden{overflow:hidden}.z-50{z-index:50}
       .bg-primary{background-color:#7c3aed}.text-white{color:#fff}
       .bg-background{background-color:#fff}
+      /* Hero LCP styles - ensure fast text paint */
+      h1{font-weight:700;line-height:.95;letter-spacing:-.025em}
+      @media(min-width:640px){h1{font-size:2.25rem}}
+      @media(min-width:768px){h1{font-size:3rem}}
+      @media(min-width:1024px){h1{font-size:3.75rem}}
     </style>
     
     <!-- Font loading - non-blocking -->
