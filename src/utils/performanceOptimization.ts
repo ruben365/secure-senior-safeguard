@@ -187,54 +187,40 @@ export function initPerformanceMonitoring() {
 export function initPerformanceOptimizations() {
   if (typeof window === 'undefined') return;
 
-  // Add loaded class to body to make content visible
-  // Use DOMContentLoaded instead of load for faster LCP
+  // Add loaded class immediately - critical for LCP
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
       document.body.classList.add('loaded');
     });
   } else {
-    // DOM already ready, add immediately
     document.body.classList.add('loaded');
   }
 
-  // Preload critical assets
-  const fontLink = document.createElement('link');
-  fontLink.rel = 'preload';
-  fontLink.as = 'font';
-  fontLink.type = 'font/woff2';
-  fontLink.crossOrigin = 'anonymous';
-  document.head.appendChild(fontLink);
-
-  // Setup prefetch on hover
-  const prefetchedUrls = new Set<string>();
-  document.addEventListener('mouseover', (e) => {
-    const target = e.target as HTMLElement;
-    const link = target.closest('a');
-    
-    if (link && link.href && !prefetchedUrls.has(link.href)) {
-      if (link.href.startsWith(window.location.origin)) {
-        prefetchResource(link.href, 'fetch');
-        prefetchedUrls.add(link.href);
+  // Defer all non-critical operations to avoid blocking TTI
+  runWhenIdle(() => {
+    // Setup prefetch on hover (deferred)
+    const prefetchedUrls = new Set<string>();
+    document.addEventListener('mouseover', (e) => {
+      const target = e.target as HTMLElement;
+      const link = target.closest('a');
+      
+      if (link && link.href && !prefetchedUrls.has(link.href)) {
+        if (link.href.startsWith(window.location.origin)) {
+          prefetchResource(link.href, 'fetch');
+          prefetchedUrls.add(link.href);
+        }
       }
-    }
-  }, { passive: true, capture: true });
+    }, { passive: true, capture: true });
 
-  // Add instant button feedback
-  document.addEventListener('click', (e) => {
-    const target = e.target as HTMLElement;
-    const button = target.closest('button, a');
-    
-    if (button) {
-      button.classList.add('active-press');
-      setTimeout(() => button.classList.remove('active-press'), 100);
-    }
-  }, { passive: true });
-
-  // Log performance metrics in development
-  if (import.meta.env.DEV) {
-    logPerformanceMetrics();
-  }
-
-  console.log('⚡ Performance optimizations initialized');
+    // Add instant button feedback (deferred)
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      const button = target.closest('button, a');
+      
+      if (button) {
+        button.classList.add('active-press');
+        setTimeout(() => button.classList.remove('active-press'), 100);
+      }
+    }, { passive: true });
+  }, { timeout: 3000 });
 }
