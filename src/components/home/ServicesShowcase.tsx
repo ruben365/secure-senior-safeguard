@@ -83,8 +83,19 @@ export const ServicesShowcase = () => {
                     </span>
                   </div>
                   
-                  {/* Image - Physical Photo Effect */}
+                  {/* Image - Physical Photo Effect with Illustrations */}
                   <div className="relative p-6 pb-0 pt-12">
+                    {/* Decorative floating shapes */}
+                    <div className="absolute top-6 right-4 w-8 h-8 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full opacity-60 group-hover:scale-125 transition-transform duration-500" />
+                    <div className="absolute top-16 right-8 w-4 h-4 bg-accent/30 rotate-45 opacity-50 group-hover:rotate-90 transition-transform duration-500" />
+                    <div className="absolute bottom-8 left-2 w-6 h-6 border-2 border-primary/30 rounded-full opacity-50 group-hover:scale-110 transition-transform duration-500" />
+                    
+                    {/* Decorative lines */}
+                    <svg className="absolute top-8 left-4 w-12 h-12 opacity-30 group-hover:opacity-50 transition-opacity" viewBox="0 0 48 48">
+                      <path d="M4 24 C 16 8, 32 8, 44 24" stroke="currentColor" strokeWidth="2" fill="none" className="text-primary" />
+                      <circle cx="8" cy="20" r="2" className="fill-accent" />
+                    </svg>
+                    
                     <div className="relative">
                       <div className="rounded-2xl overflow-hidden aspect-square border border-white/50 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)]">
                         <img
@@ -94,6 +105,13 @@ export const ServicesShowcase = () => {
                         />
                       </div>
                       <div className="absolute -inset-2 border-2 border-dashed border-primary/20 rounded-2xl" />
+                      
+                      {/* Corner accent illustration */}
+                      <div className="absolute -bottom-2 -right-2 w-8 h-8">
+                        <svg viewBox="0 0 32 32" className="w-full h-full opacity-60">
+                          <path d="M4 28 L28 28 L28 4" stroke="currentColor" strokeWidth="3" fill="none" className="text-primary" strokeLinecap="round" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
                   
