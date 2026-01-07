@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Briefcase, HelpCircle, MessageCircle, ArrowRight, Users, Heart, Star, Sparkles } from "lucide-react";
+import { Briefcase, HelpCircle, MessageCircle, ArrowRight, Users, Heart, Star, Sparkles, Shield, Lock, Zap } from "lucide-react";
 
 const quickLinks = [
   {
@@ -23,7 +23,7 @@ const quickLinks = [
 ];
 
 const careerHighlights = [
-  { icon: Heart, text: "Veteran-Supporting Company" },
+  { icon: Heart, text: "Veteran-Supporting" },
   { icon: Users, text: "Growing Team" },
   { icon: Star, text: "Meaningful Work" },
 ];
@@ -31,7 +31,47 @@ const careerHighlights = [
 export const QuickLinksSection = () => {
   return (
     <section className="py-16 bg-gradient-to-b from-muted/20 to-background relative overflow-hidden">
-      <div className="container mx-auto px-4">
+      {/* Decorative Background Elements */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Shield Icon - Top Left */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 0.08, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="absolute top-10 left-10"
+        >
+          <Shield className="w-32 h-32 text-primary" />
+        </motion.div>
+        
+        {/* Lock Icon - Top Right */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 0.06, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="absolute top-20 right-16"
+        >
+          <Lock className="w-24 h-24 text-accent" />
+        </motion.div>
+        
+        {/* Zap Icon - Bottom Left */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 0.07, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="absolute bottom-20 left-20"
+        >
+          <Zap className="w-28 h-28 text-primary" />
+        </motion.div>
+        
+        {/* Decorative Circles */}
+        <div className="absolute top-1/4 right-1/4 w-64 h-64 rounded-full bg-gradient-to-br from-primary/5 to-accent/5 blur-3xl" />
+        <div className="absolute bottom-1/4 left-1/3 w-48 h-48 rounded-full bg-gradient-to-br from-accent/5 to-primary/5 blur-2xl" />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -47,7 +87,7 @@ export const QuickLinksSection = () => {
           </p>
         </motion.div>
 
-        {/* Quick Links Grid */}
+        {/* Quick Links Grid - Same Height Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {/* FAQ & Contact Cards */}
           {quickLinks.map((item, index) => (
@@ -57,17 +97,18 @@ export const QuickLinksSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
+              className="h-full"
             >
-              <Link to={item.link} className="block group">
-                <div className="bg-white rounded-3xl p-6 border border-border/50 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-2 h-full">
+              <Link to={item.link} className="block group h-full">
+                <div className="bg-white rounded-3xl p-6 border border-border/50 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-2 h-full min-h-[280px] flex flex-col">
                   <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
                     <item.icon className="w-7 h-7 text-white" />
                   </div>
                   <h3 className="font-bold text-xl text-foreground mb-2 group-hover:text-primary transition-colors">
                     {item.title}
                   </h3>
-                  <p className="text-muted-foreground mb-4">{item.description}</p>
-                  <div className="flex items-center text-primary font-semibold">
+                  <p className="text-muted-foreground mb-4 flex-grow">{item.description}</p>
+                  <div className="flex items-center text-primary font-semibold mt-auto">
                     {item.cta}
                     <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-2 transition-transform" />
                   </div>
@@ -82,9 +123,10 @@ export const QuickLinksSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
+            className="h-full"
           >
-            <Link to="/careers" className="block group">
-              <div className="bg-gradient-to-br from-primary/5 to-accent/5 rounded-3xl p-6 border border-primary/20 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-2 h-full">
+            <Link to="/careers" className="block group h-full">
+              <div className="bg-gradient-to-br from-primary/5 to-accent/5 rounded-3xl p-6 border border-primary/20 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-2 h-full min-h-[280px] flex flex-col">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
                     <Briefcase className="w-7 h-7 text-white" />
@@ -97,8 +139,8 @@ export const QuickLinksSection = () => {
                 <h3 className="font-bold text-xl text-foreground mb-2 group-hover:text-primary transition-colors">
                   Join Our Team
                 </h3>
-                <p className="text-muted-foreground mb-4">
-                  Be part of a mission-driven team protecting families and businesses from AI threats. We're growing and looking for passionate individuals.
+                <p className="text-muted-foreground mb-4 flex-grow">
+                  Be part of a mission-driven team protecting families and businesses from AI threats.
                 </p>
                 
                 {/* Career Highlights */}
@@ -111,7 +153,7 @@ export const QuickLinksSection = () => {
                   ))}
                 </div>
 
-                <div className="flex items-center text-primary font-semibold">
+                <div className="flex items-center text-primary font-semibold mt-auto">
                   View Open Positions
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-2 transition-transform" />
                 </div>
