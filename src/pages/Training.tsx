@@ -181,7 +181,7 @@ const TrainingCard = ({ plan, index, onBook }: { plan: any; index: number; onBoo
           {badge.label}
         </div>
         
-        <Card className={`relative p-6 md:p-8 h-full flex flex-col transition-all duration-300 hover:-translate-y-2 rounded-2xl bg-gradient-to-br from-card to-card/50 min-h-[480px] ${
+        <Card className={`relative p-6 md:p-8 flex flex-col transition-all duration-300 hover:-translate-y-2 rounded-2xl bg-gradient-to-br from-card to-card/50 h-[560px] ${
           plan.popular 
             ? "border-primary border-2 shadow-xl" 
             : "border-border/50 hover:shadow-lg"
@@ -195,8 +195,8 @@ const TrainingCard = ({ plan, index, onBook }: { plan: any; index: number; onBoo
             <p className="text-center text-base text-muted-foreground mb-1">{plan.duration}</p>
             <p className="text-center text-base text-accent font-semibold mb-4">{plan.size}</p>
             
-            {/* Description - Fixed height */}
-            <p className="text-center text-base text-muted-foreground mb-5 min-h-[56px] leading-relaxed">
+            {/* Description - Single line friendly */}
+            <p className="text-center text-base text-muted-foreground mb-5 min-h-[48px] leading-relaxed">
               {plan.description}
             </p>
 
@@ -204,7 +204,7 @@ const TrainingCard = ({ plan, index, onBook }: { plan: any; index: number; onBoo
               {plan.features.slice(0, 4).map((feature: string, idx: number) => (
                 <div key={idx} className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                  <span className="text-foreground text-base">{feature}</span>
+                  <span className="text-foreground text-base whitespace-nowrap">{feature}</span>
                 </div>
               ))}
             </div>
@@ -377,7 +377,7 @@ function LearnAndTrain() {
                 size="xl" 
                 className="relative w-full sm:w-auto bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white border-0 shadow-xl text-lg md:text-xl px-8 py-6"
               >
-                <span className="mr-2 text-2xl">🎓</span>
+                <Shield className="w-6 h-6 mr-2" />
                 Learn & Train Workshops
               </Button>
             </div>
@@ -391,7 +391,7 @@ function LearnAndTrain() {
                 className="relative w-full sm:w-auto bg-gradient-to-r from-purple-600 to-primary hover:from-purple-500 hover:to-primary/90 text-white border-0 shadow-xl text-lg md:text-xl px-8 py-6"
               >
                 <Link to="/business">
-                  <span className="mr-2 text-2xl">🤖</span>
+                  <Zap className="w-6 h-6 mr-2" />
                   AI & Business Solutions
                 </Link>
               </Button>
@@ -399,18 +399,18 @@ function LearnAndTrain() {
           </div>
 
           {/* Decorative floating graphics */}
-          <div className="hidden lg:flex gap-6 mt-8 opacity-90">
-            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full px-5 py-2.5 border border-white/20">
-              <Shield className="w-5 h-5 text-emerald-400" />
-              <span className="text-white/90 text-base font-medium">Family Protection</span>
+          <div className="hidden lg:flex gap-8 mt-8">
+            <div className="flex items-center gap-3 bg-white/20 backdrop-blur-md rounded-full px-6 py-3 border-2 border-white/40 shadow-lg">
+              <Shield className="w-7 h-7 text-emerald-300" />
+              <span className="text-white text-lg font-bold">Family Protection</span>
             </div>
-            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full px-5 py-2.5 border border-white/20">
-              <Users className="w-5 h-5 text-cyan-400" />
-              <span className="text-white/90 text-base font-medium">Expert-Led Training</span>
+            <div className="flex items-center gap-3 bg-white/20 backdrop-blur-md rounded-full px-6 py-3 border-2 border-white/40 shadow-lg">
+              <Users className="w-7 h-7 text-cyan-300" />
+              <span className="text-white text-lg font-bold">Expert-Led Training</span>
             </div>
-            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full px-5 py-2.5 border border-white/20">
-              <Award className="w-5 h-5 text-amber-400" />
-              <span className="text-white/90 text-base font-medium">24/7 Support</span>
+            <div className="flex items-center gap-3 bg-white/20 backdrop-blur-md rounded-full px-6 py-3 border-2 border-white/40 shadow-lg">
+              <Award className="w-7 h-7 text-amber-300" />
+              <span className="text-white text-lg font-bold">24/7 Support</span>
             </div>
           </div>
         </Hero>
@@ -540,25 +540,25 @@ function LearnAndTrain() {
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">Three simple steps to build calm, repeatable safety habits that protect you and your family.</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
                 {
                   step: "1",
                   icon: "📅",
                   title: "Book Your Session",
-                  desc: "Choose a convenient Zoom class time, request a Priority Group session, or schedule private in-person coaching for your organization."
+                  desc: "Choose a convenient Zoom class time, request a Priority Group session, or schedule private in-person coaching."
                 },
                 {
                   step: "2",
                   icon: "🎓",
                   title: "Learn & Practice",
-                  desc: "Master identity verification, spot deepfakes, and handle urgent 'bank' or 'family emergency' messages with confidence through hands-on practice."
+                  desc: "Master identity verification, spot deepfakes, and handle urgent messages with confidence through hands-on practice."
                 },
                 {
                   step: "3",
                   icon: "🛡️",
                   title: "Get Ongoing Support",
-                  desc: "Add our monthly help line service to forward suspicious messages for expert review before you click, pay, or reply."
+                  desc: "Add our monthly help line to forward suspicious messages for expert review before you click, pay, or reply."
                 },
               ].map((item, index) => (
                 <ScrollReveal key={index} animation="scale-in" delay={index * 150}>
@@ -681,10 +681,10 @@ function LearnAndTrain() {
                 duration: "90 min",
                 size: "Up to 12 people",
                 popular: true,
-                description: "Smaller class with more personal attention. Great for couples and close friends.",
+                description: "More personal attention for couples and close friends.",
                 features: [
                   "✓ Smaller, cozy setting",
-                  "✓ More time for your questions",
+                  "✓ Time for your questions",
                   "✓ Create a family safe word",
                   "✓ Take-home action plan",
                 ],
@@ -696,11 +696,11 @@ function LearnAndTrain() {
                 priceNum: 399,
                 duration: "2 hours",
                 size: "5 Family Members",
-                description: "Just your family — parents, kids, grandparents. We come to you or meet online.",
+                description: "Parents, kids, grandparents — we come to you.",
                 features: [
                   "✓ Your family only (up to 5)",
                   "✓ In-person or video call",
-                  "✓ Check your devices for safety",
+                  "✓ Device safety check",
                   "✓ 30 days of email help",
                 ],
               },
@@ -712,10 +712,10 @@ function LearnAndTrain() {
                 pricePrefix: "+",
                 duration: "2-3 hours",
                 size: "10-100+ people",
-                description: "For churches, senior centers, or community groups. We customize it for you.",
+                description: "Churches, senior centers, and communities.",
                 features: [
                   "✓ We come to your location",
-                  "✓ Training made for your group",
+                  "✓ Custom training for you",
                   "✓ Certificates for everyone",
                   "✓ Ongoing support included",
                 ],
@@ -766,43 +766,43 @@ function LearnAndTrain() {
             </p>
           </div>
 
-          <div className="max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 {
                   step: "01",
                   title: "Something Suspicious?",
-                  desc: "Received a strange text, email, phone call, or link that doesn't feel right? AI scammers are getting smarter — trust your instincts!",
+                  desc: "Received a strange text, email, or call? AI scammers are getting smarter — trust your instincts!",
                   color: "from-blue-500 to-cyan-500",
                   bgColor: "from-blue-500/10 to-cyan-500/10",
                   borderColor: "border-blue-500/30",
                   image: "📱",
-                  action: "Don't click — send it to us first"
+                  action: "Don't click — send it to us"
                 },
                 {
                   step: "02",
                   title: "Forward to Us",
-                  desc: "Simply forward the email, screenshot the text, or describe the call. We make it easy to submit anything suspicious.",
+                  desc: "Forward the email, screenshot the text, or describe the call. We make it easy!",
                   color: "from-purple-500 to-pink-500",
                   bgColor: "from-purple-500/10 to-pink-500/10",
                   borderColor: "border-purple-500/30",
                   image: "📤",
-                  action: "Email, upload, or call us"
+                  action: "Email, upload, or call"
                 },
                 {
                   step: "03",
                   title: "Expert Analysis",
-                  desc: "Our team combines advanced AI detection with human expertise to identify deepfakes, voice clones, and sophisticated scams.",
+                  desc: "Our team uses AI detection with human expertise to identify deepfakes and scams.",
                   color: "from-orange-500 to-red-500",
                   bgColor: "from-orange-500/10 to-red-500/10",
                   borderColor: "border-orange-500/30",
                   image: "🔍",
-                  action: "AI + Human expert review"
+                  action: "AI + Human review"
                 },
                 {
                   step: "04",
                   title: "Clear Guidance",
-                  desc: "We'll tell you exactly what we found and what to do next. Safe? Great! Dangerous? We'll guide you step by step.",
+                  desc: "We tell you exactly what we found and guide you step by step on what to do.",
                   color: "from-green-500 to-emerald-500",
                   bgColor: "from-green-500/10 to-emerald-500/10",
                   borderColor: "border-green-500/30",
@@ -812,7 +812,7 @@ function LearnAndTrain() {
               ].map((step, index) => (
                 <ScrollReveal key={index} animation="scale-in" delay={index * 100} threshold={0.3}>
                   <Card
-                    className={`relative p-6 md:p-8 h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-2 rounded-2xl border-2 ${step.borderColor} group bg-gradient-to-br ${step.bgColor} overflow-hidden min-h-[340px] flex flex-col`}
+                    className={`relative p-6 md:p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 rounded-2xl border-2 ${step.borderColor} group bg-gradient-to-br ${step.bgColor} overflow-hidden h-[380px] flex flex-col`}
                   >
                     {/* Step Number Badge */}
                     <div className={`absolute top-0 right-0 w-16 h-16 bg-gradient-to-br ${step.color} rounded-bl-3xl flex items-center justify-center`}>
@@ -1564,8 +1564,17 @@ function LearnAndTrain() {
           </div>
 
           {/* Family Safety Vault Card */}
-          <Card className="max-w-4xl mx-auto mt-10 p-8 hover:shadow-xl transition-all duration-500 rounded-2xl border-accent border-2 bg-gradient-to-br from-card to-card/50">
-            <div className="text-center">
+          <Card className="max-w-4xl mx-auto mt-10 p-8 hover:shadow-xl transition-all duration-500 rounded-2xl border-accent border-2 relative overflow-hidden">
+            {/* Background Image */}
+            <div 
+              className="absolute inset-0 bg-cover bg-center opacity-10"
+              style={{ 
+                backgroundImage: 'url("https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=1920&q=80")',
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-card via-card/95 to-card/90" />
+            
+            <div className="text-center relative z-10">
               <div className="flex justify-center mb-6">
                 <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center animate-[shield-pulse_3s_ease-in-out_infinite]">
                   <Lock className="w-10 h-10 text-primary" />
@@ -1583,7 +1592,7 @@ function LearnAndTrain() {
                   { icon: "🔐", feature: "Account recovery info" },
                   { icon: "✈️", feature: "Travel itineraries" },
                 ].map((item, index) => (
-                  <div key={index} className="flex items-center gap-3 p-3 bg-background/50 rounded-xl">
+                  <div key={index} className="flex items-center gap-3 p-3 bg-background/70 rounded-xl backdrop-blur-sm">
                     <span className="text-xl">{item.icon}</span>
                     <span className="text-sm font-medium text-foreground">{item.feature}</span>
                   </div>
