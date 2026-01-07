@@ -49,8 +49,16 @@ export const SecuritySolutions = () => {
               style={{ animationDelay: `${index * 50}ms` }}
             >
               <Link to="/about" className="block">
-                {/* Image container - Physical Photo Effect */}
+                {/* Image container - Physical Photo Effect with Illustrations */}
                 <div className="relative mb-4 mx-auto w-fit">
+                  {/* Decorative corner accents */}
+                  <div className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-primary/40 rounded-tl-lg opacity-60 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-accent/40 rounded-br-lg opacity-60 group-hover:opacity-100 transition-opacity" />
+                  
+                  {/* Floating dots */}
+                  <div className="absolute -top-3 right-4 w-2 h-2 bg-primary/40 rounded-full group-hover:scale-150 transition-transform" />
+                  <div className="absolute top-4 -right-3 w-1.5 h-1.5 bg-accent/50 rounded-full group-hover:scale-150 transition-transform delay-75" />
+                  
                   {/* Static decorative ring */}
                   <div className="absolute -inset-3 rounded-2xl border-2 border-primary/20 group-hover:border-primary/40 transition-colors duration-300" />
                   
@@ -64,6 +72,11 @@ export const SecuritySolutions = () => {
                       decoding="async"
                     />
                   </div>
+                  
+                  {/* Small decorative illustration */}
+                  <svg className="absolute -bottom-1 -left-1 w-6 h-6 opacity-40 group-hover:opacity-70 transition-opacity" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="2" fill="none" className="text-primary" strokeDasharray="4 2" />
+                  </svg>
                 </div>
                 
                 {/* Category label */}
