@@ -299,6 +299,117 @@ export const FloatingShapes = ({
   );
 };
 
+// Light orbs / glowing circles
+export const LightOrbs = ({
+  className = ""
+}: {
+  className?: string;
+}) => {
+  return (
+    <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>
+      {/* Primary glow orb - top right */}
+      <div className="absolute -top-20 -right-20 w-80 h-80 bg-primary/10 rounded-full blur-3xl" />
+      
+      {/* Accent glow orb - bottom left */}
+      <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-accent/10 rounded-full blur-3xl" />
+      
+      {/* Small floating lights */}
+      <div className="absolute top-1/4 right-1/4 w-3 h-3 bg-primary/30 rounded-full blur-sm" />
+      <div className="absolute bottom-1/3 left-1/3 w-2 h-2 bg-accent/40 rounded-full blur-sm" />
+      <div className="absolute top-1/2 right-1/3 w-4 h-4 bg-primary/20 rounded-full blur-md" />
+    </div>
+  );
+};
+
+// Decorative illustration lines
+export const IllustrationLines = ({
+  variant = "wave",
+  className = ""
+}: {
+  variant?: "wave" | "circuit" | "abstract";
+  className?: string;
+}) => {
+  if (variant === "wave") {
+    return (
+      <svg className={`absolute pointer-events-none ${className}`} width="200" height="60" viewBox="0 0 200 60">
+        <path 
+          d="M0 30 Q 25 10, 50 30 T 100 30 T 150 30 T 200 30" 
+          stroke="hsl(var(--primary) / 0.2)" 
+          strokeWidth="2" 
+          fill="none"
+          strokeLinecap="round"
+        />
+        <path 
+          d="M0 40 Q 25 20, 50 40 T 100 40 T 150 40 T 200 40" 
+          stroke="hsl(var(--accent) / 0.15)" 
+          strokeWidth="1.5" 
+          fill="none"
+          strokeLinecap="round"
+        />
+      </svg>
+    );
+  }
+
+  if (variant === "circuit") {
+    return (
+      <svg className={`absolute pointer-events-none ${className}`} width="120" height="120" viewBox="0 0 120 120">
+        <path 
+          d="M10 60 L 40 60 L 50 40 L 70 40 L 80 60 L 110 60" 
+          stroke="hsl(var(--primary) / 0.25)" 
+          strokeWidth="2" 
+          fill="none"
+          strokeLinecap="round"
+        />
+        <circle cx="40" cy="60" r="4" fill="hsl(var(--primary) / 0.3)" />
+        <circle cx="80" cy="60" r="4" fill="hsl(var(--primary) / 0.3)" />
+        <path 
+          d="M60 10 L 60 40" 
+          stroke="hsl(var(--accent) / 0.2)" 
+          strokeWidth="1.5" 
+          fill="none"
+        />
+        <circle cx="60" cy="40" r="3" fill="hsl(var(--accent) / 0.25)" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg className={`absolute pointer-events-none ${className}`} width="100" height="100" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="30" stroke="hsl(var(--primary) / 0.15)" strokeWidth="1" fill="none" />
+      <circle cx="50" cy="50" r="20" stroke="hsl(var(--accent) / 0.2)" strokeWidth="1" fill="none" strokeDasharray="4 4" />
+      <line x1="20" y1="50" x2="35" y2="50" stroke="hsl(var(--primary) / 0.3)" strokeWidth="2" />
+      <line x1="65" y1="50" x2="80" y2="50" stroke="hsl(var(--primary) / 0.3)" strokeWidth="2" />
+      <line x1="50" y1="20" x2="50" y2="35" stroke="hsl(var(--accent) / 0.3)" strokeWidth="2" />
+      <line x1="50" y1="65" x2="50" y2="80" stroke="hsl(var(--accent) / 0.3)" strokeWidth="2" />
+    </svg>
+  );
+};
+
+// Sparkle/star decorations
+export const Sparkles = ({
+  className = ""
+}: {
+  className?: string;
+}) => {
+  return (
+    <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>
+      {/* 4-point stars */}
+      <svg className="absolute top-[15%] left-[12%] w-4 h-4 text-primary/40" viewBox="0 0 24 24">
+        <path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="currentColor" />
+      </svg>
+      <svg className="absolute top-[25%] right-[18%] w-3 h-3 text-accent/30" viewBox="0 0 24 24">
+        <path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="currentColor" />
+      </svg>
+      <svg className="absolute bottom-[20%] left-[25%] w-5 h-5 text-primary/25" viewBox="0 0 24 24">
+        <path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="currentColor" />
+      </svg>
+      <svg className="absolute bottom-[35%] right-[10%] w-3 h-3 text-accent/35" viewBox="0 0 24 24">
+        <path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="currentColor" />
+      </svg>
+    </div>
+  );
+};
+
 export default {
   DiagonalStripes,
   HexagonIcon,
@@ -309,4 +420,7 @@ export default {
   CircularRing,
   GridPattern,
   FloatingShapes,
+  LightOrbs,
+  IllustrationLines,
+  Sparkles,
 };

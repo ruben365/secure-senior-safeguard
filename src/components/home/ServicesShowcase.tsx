@@ -5,7 +5,7 @@ import serviceScamshield from "@/assets/service-scamshield.jpg";
 import serviceTraining from "@/assets/service-training.jpg";
 import serviceAiBusiness from "@/assets/service-ai-business.jpg";
 import serviceFamilySafety from "@/assets/service-family-safety.jpg";
-import { HexagonIcon, GeometricCorner, GridPattern } from "@/components/ui/GeometricDecorations";
+import { HexagonIcon, GeometricCorner, GridPattern, LightOrbs, Sparkles, IllustrationLines } from "@/components/ui/GeometricDecorations";
 
 const services = [
   {
@@ -47,6 +47,16 @@ export const ServicesShowcase = () => {
     <section className="py-16 relative overflow-hidden">
       {/* Subtle grid pattern */}
       <GridPattern className="opacity-50" />
+      
+      {/* Light orbs */}
+      <LightOrbs />
+      
+      {/* Sparkle decorations */}
+      <Sparkles />
+      
+      {/* Illustration lines */}
+      <IllustrationLines variant="wave" className="top-20 left-10 opacity-60" />
+      <IllustrationLines variant="circuit" className="bottom-20 right-10 opacity-50" />
       
       {/* Geometric corner accents */}
       <GeometricCorner position="top-left" variant="triangles" />
