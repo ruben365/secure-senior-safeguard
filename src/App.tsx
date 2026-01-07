@@ -208,68 +208,14 @@ function App() {
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
     
-    // Preload hero video with high priority
-    const heroVideo = document.createElement('video');
-    heroVideo.preload = 'auto';
-    heroVideo.muted = true;
-    
-    // Also add a preload link to the head for high priority
-    const preloadLink = document.createElement('link');
-    preloadLink.rel = 'preload';
-    preloadLink.as = 'video';
-    
-    const minDuration = 1500; // Minimum splash duration
-    
-    let videoReady = false;
-    let minTimeElapsed = false;
-    
-    const tryHideSplash = () => {
-      if (videoReady && minTimeElapsed) {
-        setShowSplash(false);
-      }
-    };
-    
-    // Import hero video dynamically and preload it
-    import("@/assets/hero-video.mp4").then((module) => {
-      const videoSrc = module.default;
-      heroVideo.src = videoSrc;
-      preloadLink.href = videoSrc;
-      document.head.appendChild(preloadLink);
-      heroVideo.load();
-    });
-    
-    // Wait for video to be ready to play
-    heroVideo.oncanplaythrough = () => {
-      videoReady = true;
-      tryHideSplash();
-    };
-    
-    // Also listen for loadeddata as fallback
-    heroVideo.onloadeddata = () => {
-      videoReady = true;
-      tryHideSplash();
-    };
-    
-    // Fallback: mark video ready after 4s even if not loaded
-    const videoTimeout = setTimeout(() => {
-      videoReady = true;
-      tryHideSplash();
-    }, 4000);
-    
-    // Minimum duration timer
-    const minTimer = setTimeout(() => {
-      minTimeElapsed = true;
-      tryHideSplash();
-    }, minDuration);
+    // Simple timer-based splash - hero handles its own fade-in
+    const timer = setTimeout(() => {
+      setShowSplash(false);
+    }, 800);
     
     return () => {
       document.documentElement.style.scrollBehavior = "auto";
-      clearTimeout(minTimer);
-      clearTimeout(videoTimeout);
-      // Clean up preload link
-      if (preloadLink.parentNode) {
-        preloadLink.parentNode.removeChild(preloadLink);
-      }
+      clearTimeout(timer);
     };
   }, []);
 
