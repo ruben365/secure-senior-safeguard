@@ -1,5 +1,6 @@
 import { ReactNode, useEffect, useState, useRef, Children, isValidElement, memo } from "react";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 import ScrollIndicator from "./ScrollIndicator";
 import { ProtectionBadge } from "./ProtectionBadge";
 import { useImagePreload } from "@/hooks/useImagePreload";
@@ -28,6 +29,23 @@ interface HeroProps {
   /** Disable the purple overlay for homepage */
   disablePurpleOverlay?: boolean;
 }
+
+// Animation variants
+const fadeSlideUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0 },
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
+};
 
 const Hero = ({ 
   backgroundImage, 
@@ -116,21 +134,38 @@ const Hero = ({
         </div>
       )}
       
-      {/* Content */}
+      {/* Content with Entry Animations */}
       <div className="w-full max-w-[1920px] mx-auto px-6 sm:px-10 md:px-16 lg:px-20 xl:px-32 py-20 sm:py-24 md:py-28 lg:py-32 relative z-10">
-        <div className="max-w-6xl">
+        <motion.div 
+          className="max-w-6xl"
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+        >
           {headline && (
-            <h1 className="text-white mb-4 sm:mb-6 md:mb-8 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight font-bold">
+            <motion.h1 
+              variants={fadeSlideUp}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="text-white mb-4 sm:mb-6 md:mb-8 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight font-bold"
+            >
               {headline}
-            </h1>
+            </motion.h1>
           )}
           {subheadline && (
-            <p className="text-white/95 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl mb-8 md:mb-10 leading-relaxed max-w-3xl">
+            <motion.p 
+              variants={fadeSlideUp}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="text-white/95 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl mb-8 md:mb-10 leading-relaxed max-w-3xl"
+            >
               {subheadline}
-            </p>
+            </motion.p>
           )}
           {children && (
-            <div className="flex flex-wrap gap-4 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <motion.div 
+              variants={fadeSlideUp}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="flex flex-wrap gap-4"
+            >
               {Children.map(children, (child) =>
                 isValidElement(child) ? (
                   <MagneticWrapper strength={0.3}>{child}</MagneticWrapper>
@@ -138,9 +173,9 @@ const Hero = ({
                   child
                 )
               )}
-            </div>
+            </motion.div>
           )}
-        </div>
+        </motion.div>
       </div>
       
       {/* Bottom gradient removed for clean hero edge */}
