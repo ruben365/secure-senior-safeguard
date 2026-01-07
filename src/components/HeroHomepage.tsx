@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Shield, ArrowRight, Lock, Eye, Fingerprint, ShieldCheck, Zap, Globe } from "lucide-react";
 import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 import heroVideo from "@/assets/hero-video.mp4";
 
 const securityFeatures = [{
@@ -36,8 +37,46 @@ const staggerContainer = {
 };
 
 export const HeroHomepage = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) {
+      // Fallback: show content after short delay if no video
+      const timer = setTimeout(() => setIsLoaded(true), 300);
+      return () => clearTimeout(timer);
+    }
+
+    const handleReady = () => setIsLoaded(true);
+    
+    // Check if already ready
+    if (video.readyState >= 3) {
+      setIsLoaded(true);
+      return;
+    }
+
+    video.addEventListener('canplaythrough', handleReady);
+    video.addEventListener('loadeddata', handleReady);
+    
+    // Fallback timeout
+    const timeout = setTimeout(() => setIsLoaded(true), 2000);
+
+    return () => {
+      video.removeEventListener('canplaythrough', handleReady);
+      video.removeEventListener('loadeddata', handleReady);
+      clearTimeout(timeout);
+    };
+  }, []);
+
   return (
-    <section className="relative min-h-[100vh] lg:min-h-[110vh] overflow-hidden bg-gradient-to-br from-background via-background to-purple-100/30">
+    <section 
+      className="relative min-h-[100vh] lg:min-h-[110vh] overflow-hidden transition-opacity duration-500 ease-out"
+      style={{ 
+        backgroundColor: '#F3F0FF',
+        opacity: isLoaded ? 1 : 0 
+      }}
+    >
       {/* Static gradient background */}
       <div className="absolute inset-0 overflow-hidden">
         <div 
@@ -48,18 +87,17 @@ export const HeroHomepage = () => {
         />
       </div>
 
-      {/* Video Background - Full mobile support */}
-      {/* Safety background: dark purple/grey to prevent white flash */}
-      <div className="absolute inset-0" style={{ backgroundColor: '#1a1625' }}>
+      {/* Video Background with eager loading */}
+      <div className="absolute inset-0" style={{ backgroundColor: '#F3F0FF' }}>
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted
           playsInline
           preload="auto"
-          poster=""
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ backgroundColor: '#1a1625' }}
+          style={{ backgroundColor: '#F3F0FF' }}
         >
           <source src={heroVideo} type="video/mp4" />
         </video>
