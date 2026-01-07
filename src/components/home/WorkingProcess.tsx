@@ -1,6 +1,6 @@
 import { FileText, Search, Shield, Smile } from "lucide-react";
 import workingProcessScreenshot from "@/assets/working-process-screenshot.png";
-import { GeometricCorner, GridPattern } from "@/components/ui/GeometricDecorations";
+import { GeometricCorner, GridPattern, LightOrbs, IllustrationLines, Sparkles } from "@/components/ui/GeometricDecorations";
 
 const steps = [
   {
@@ -42,6 +42,15 @@ export const WorkingProcess = () => {
     <section className="py-16 relative overflow-hidden">
       {/* Grid pattern */}
       <GridPattern />
+      
+      {/* Light orbs for ambient glow */}
+      <LightOrbs className="opacity-70" />
+      
+      {/* Sparkle decorations */}
+      <Sparkles className="opacity-80" />
+      
+      {/* Abstract illustration */}
+      <IllustrationLines variant="abstract" className="top-10 right-20 opacity-50" />
       
       {/* Geometric corner accents */}
       <GeometricCorner position="top-right" variant="lines" />

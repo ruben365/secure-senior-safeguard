@@ -15,11 +15,22 @@ const portfolioImages = [
   { src: securityExpert, alt: "Expert Consultation", category: "Consultation" },
 ];
 
+import { LightOrbs, Sparkles, IllustrationLines } from "@/components/ui/GeometricDecorations";
+
 export const SecuritySolutions = () => {
   return (
     <section className="py-16 relative overflow-hidden">
       {/* Simple gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 pointer-events-none" />
+      
+      {/* Light orbs */}
+      <LightOrbs className="opacity-60" />
+      
+      {/* Sparkles */}
+      <Sparkles className="opacity-70" />
+      
+      {/* Wave illustration */}
+      <IllustrationLines variant="wave" className="bottom-10 left-1/4 opacity-40" />
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
