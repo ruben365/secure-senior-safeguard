@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { User, Session } from "@supabase/supabase-js";
-import { Loader2 } from "lucide-react";
+import { AIPulseLoader } from "@/components/AIPulseLoader";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -50,14 +50,7 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   }, []);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <Loader2 className="h-8 w-8 animate-spin mx-auto text-primary" />
-          <p className="mt-4 text-muted-foreground">Loading...</p>
-        </div>
-      </div>
-    );
+    return <AIPulseLoader message="Verifying Security..." />;
   }
 
   if (!user || !session) {
