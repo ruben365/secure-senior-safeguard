@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FileText, Search, Shield, Smile } from "lucide-react";
 import workingProcessScreenshot from "@/assets/working-process-screenshot.png";
@@ -39,24 +38,7 @@ const steps = [
   },
 ];
 
-// Array of screenshots to cycle through (simulating different pages)
-const screenshotPages = [
-  { transform: "translateY(0%)", label: "Home" },
-  { transform: "translateY(-15%)", label: "Training" },
-  { transform: "translateY(-30%)", label: "Resources" },
-  { transform: "translateY(-45%)", label: "Business" },
-];
-
 export const WorkingProcess = () => {
-  const [currentPage, setCurrentPage] = useState(0);
-
-  // Auto-scroll through "pages" in the laptop
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentPage((prev) => (prev + 1) % screenshotPages.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <section className="py-16 relative overflow-hidden">
@@ -106,40 +88,33 @@ export const WorkingProcess = () => {
                   transition={{ duration: 2, repeat: Infinity }}
                   className="absolute top-1.5 left-1/2 -translate-x-1/2 w-2 h-2 bg-green-500 rounded-full"
                 />
-                {/* Screen */}
+                {/* Screen - Static with subtle glow animation */}
                 <div className="relative rounded-lg overflow-hidden bg-white h-[280px]">
-                  <motion.img 
+                  <motion.div
+                    animate={{ 
+                      boxShadow: [
+                        "inset 0 0 20px rgba(124, 58, 237, 0.1)",
+                        "inset 0 0 40px rgba(124, 58, 237, 0.2)",
+                        "inset 0 0 20px rgba(124, 58, 237, 0.1)"
+                      ]
+                    }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute inset-0 z-10 pointer-events-none"
+                  />
+                  <img 
                     src={workingProcessScreenshot}
                     alt="InVision Network training platform interface"
-                    className="w-full object-cover object-top"
-                    animate={{ 
-                      y: currentPage * -50
-                    }}
-                    transition={{ 
-                      duration: 1.5, 
-                      ease: "easeInOut"
-                    }}
+                    className="w-full h-full object-cover object-top"
                     loading="lazy"
                   />
-                  {/* Scan line effect */}
+                  {/* Subtle ambient glow overlay */}
                   <motion.div 
-                    animate={{ y: ["0%", "100%", "0%"] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                    className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent pointer-events-none"
+                    animate={{ 
+                      opacity: [0.3, 0.5, 0.3]
+                    }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-primary/20 to-transparent pointer-events-none"
                   />
-                </div>
-                
-                {/* Page indicator dots */}
-                <div className="flex justify-center gap-2 mt-2 pb-1">
-                  {screenshotPages.map((_, idx) => (
-                    <motion.div
-                      key={idx}
-                      className={`w-1.5 h-1.5 rounded-full transition-colors ${
-                        idx === currentPage ? "bg-primary" : "bg-gray-600"
-                      }`}
-                      animate={{ scale: idx === currentPage ? 1.2 : 1 }}
-                    />
-                  ))}
                 </div>
               </div>
               {/* Laptop base */}

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Heart, Shield, Users, Ribbon, ArrowRight, Award, MapPin, GraduationCap, DollarSign } from "lucide-react";
 import ohioNatureImpact from "@/assets/ohio-nature-impact.jpg";
 import veteranSupport from "@/assets/veteran-support.jpg";
-import communityGivingReal from "@/assets/community-giving-real.jpg";
+import communityGivingAbstract from "@/assets/community-giving-abstract.jpg";
 import paidWorkshopTraining from "@/assets/paid-workshop-training.jpg";
 
 const impacts = [
@@ -139,8 +139,8 @@ export const CommunityImpact = () => {
             className="relative rounded-2xl overflow-hidden shadow-lg group"
           >
             <img
-              src={communityGivingReal}
-              alt="Community giving back"
+              src={communityGivingAbstract}
+              alt="Community giving and support"
               className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
             />
