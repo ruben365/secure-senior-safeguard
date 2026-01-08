@@ -145,6 +145,15 @@ function AnimatedRoutes() {
         <Route path="/setup" element={<PageTransition><Setup /></PageTransition>} />
         <Route path="/application-pending" element={<PageTransition><ApplicationPending /></PageTransition>} />
         <Route path="/admin" element={<PageTransition><AdminRoute><Admin /></AdminRoute></PageTransition>} />
+        <Route path="/admin/threats" element={<PageTransition><AdminRoute><ThreatMonitor /></AdminRoute></PageTransition>} />
+        <Route path="/admin/devices" element={<PageTransition><AdminRoute><FamilyDevices /></AdminRoute></PageTransition>} />
+        <Route path="/admin/users" element={<PageTransition><AdminRoute><CyberUserManagement /></AdminRoute></PageTransition>} />
+        <Route path="/admin/activity" element={<PageTransition><AdminRoute><ActivityLog /></AdminRoute></PageTransition>} />
+        <Route path="/admin/database" element={<PageTransition><AdminRoute><DatabaseView /></AdminRoute></PageTransition>} />
+        <Route path="/admin/notifications" element={<PageTransition><AdminRoute><CyberNotifications /></AdminRoute></PageTransition>} />
+        <Route path="/admin/security" element={<PageTransition><AdminRoute><SecuritySettings /></AdminRoute></PageTransition>} />
+        <Route path="/admin/reports" element={<PageTransition><AdminRoute><CyberAnalytics /></AdminRoute></PageTransition>} />
+        <Route path="/admin/insights" element={<PageTransition><AdminRoute><CyberAnalytics /></AdminRoute></PageTransition>} />
         <Route path="/admin/content/testimonials" element={<PageTransition><AdminRoute><TestimonialsAdmin /></AdminRoute></PageTransition>} />
         <Route path="/admin/content/articles" element={<PageTransition><AdminRoute><ArticlesAdmin /></AdminRoute></PageTransition>} />
         <Route path="/admin/content/articles/new" element={<PageTransition><AdminRoute><ArticleEditor /></AdminRoute></PageTransition>} />
