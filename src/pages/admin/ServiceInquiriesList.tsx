@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
@@ -17,6 +18,8 @@ import {
   ExternalLink,
   ArrowRight,
 } from "lucide-react";
+
+import { AdminLayout } from "@/components/admin/AdminLayout";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -173,28 +176,27 @@ const ServiceInquiriesList = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container mx-auto px-6 py-4">
-          <div className="mt-4 flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold flex items-center gap-2">
-                <Briefcase className="h-8 w-8 text-primary" />
-                Service Inquiries
-              </h1>
-              <p className="text-muted-foreground">Manage B2B service leads and custom projects</p>
-            </div>
-            <Button variant="outline" onClick={() => refetch()}>
-              <RefreshCw className="mr-2 h-4 w-4" />
-              Refresh
+    <AdminLayout
+      title="Service Inquiries"
+      subtitle="Manage B2B service leads and custom projects"
+      searchPlaceholder="Search inquiries..."
+      headerActions={
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={() => refetch()} className="border-slate-700 hover:bg-slate-800">
+            <RefreshCw className="mr-2 h-4 w-4" />
+            Refresh
+          </Button>
+          <Link to="/admin">
+            <Button className="bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] text-white">
+              Back to Dashboard
             </Button>
-          </div>
+          </Link>
         </div>
-      </div>
-
-      <div className="container mx-auto px-6 py-8">
+      }
+    >
+      <div className="space-y-6">
         {/* Stats Cards */}
-        <div className="mb-6 grid gap-4 md:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-4">
           <Card className="border-l-4 border-l-blue-500">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
@@ -479,7 +481,7 @@ const ServiceInquiriesList = () => {
           </Table>
         </Card>
       </div>
-    </div>
+    </AdminLayout>
   );
 };
 

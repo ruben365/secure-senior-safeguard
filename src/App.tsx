@@ -82,6 +82,7 @@ const ProductEditor = lazy(() => import("./pages/admin/ProductEditor"));
 const OrdersList = lazy(() => import("./pages/admin/OrdersList"));
 const OrderDetail = lazy(() => import("./pages/admin/OrderDetail"));
 const InventoryManagement = lazy(() => import("./pages/admin/InventoryManagement"));
+const JobApplicationsList = lazy(() => import("./pages/admin/JobApplicationsList"));
 const Settings = lazy(() => import("./pages/admin/Settings"));
 const Portal = lazy(() => import("./pages/Portal"));
 const AdminDashboard = lazy(() => import("./pages/portal/AdminDashboard"));
@@ -195,6 +196,7 @@ function AnimatedRoutes() {
         <Route path="/admin/donations" element={<PageTransition><AdminRoute><DonationsList /></AdminRoute></PageTransition>} />
         <Route path="/admin/service-inquiries" element={<PageTransition><AdminRoute><ServiceInquiriesList /></AdminRoute></PageTransition>} />
         <Route path="/admin/bookings" element={<PageTransition><AdminRoute><BookingsList /></AdminRoute></PageTransition>} />
+        <Route path="/admin/job-applications" element={<PageTransition><AdminRoute><JobApplicationsList /></AdminRoute></PageTransition>} />
         <Route path="/maintenance" element={<PageTransition><Maintenance /></PageTransition>} />
         <Route path="/reset-password" element={<PageTransition><ResetPassword /></PageTransition>} />
         <Route path="/portal" element={<PageTransition><ProtectedRoute><Portal /></ProtectedRoute></PageTransition>} />
