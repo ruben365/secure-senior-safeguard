@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { AdminLayout } from "@/components/admin/AdminLayout";
+
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -162,11 +162,12 @@ export default function IndividualClients() {
   };
 
   return (
-    <AdminLayout
-      title="Individual Clients"
-      subtitle="Family Shield Protection Subscribers"
-      searchPlaceholder="Search clients..."
-      headerActions={
+    <div className="p-6 max-w-7xl mx-auto space-y-6">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-bold text-[#F9FAFB]">Individual Clients</h1>
+          <p className="text-[#9CA3AF]">Family Shield Protection Subscribers</p>
+        </div>
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
             <Button className="bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] text-white">
@@ -246,8 +247,7 @@ export default function IndividualClients() {
             </DialogFooter>
           </DialogContent>
         </Dialog>
-      }
-    >
+      </div>
       <div className="space-y-6">
         {selectedClients.length > 0 && (
           <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 flex items-center justify-between">
@@ -405,6 +405,6 @@ export default function IndividualClients() {
           </>
         )}
       </div>
-    </AdminLayout>
+    </div>
   );
 }

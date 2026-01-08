@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Mail, Send, Pause, Play, Plus, TrendingUp, Users, Clock } from "lucide-react";
 import { toast } from "sonner";
-import { AdminLayout } from "@/components/admin/AdminLayout";
+
 
 interface EmailCampaign {
   id: string;
@@ -110,24 +110,17 @@ const EmailCampaigns = () => {
   };
 
   return (
-    <AdminLayout
-      title="Email Campaigns"
-      subtitle="Manage automated email campaigns and monitor performance"
-      searchPlaceholder="Search campaigns..."
-      headerActions={
-        <div className="flex gap-2">
-          <Button size="lg" className="gap-2 bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] text-white">
-            <Plus className="h-5 w-5" />
-            New Campaign
-          </Button>
-          <Link to="/admin">
-            <Button className="border-slate-700 hover:bg-slate-800" variant="outline">
-              Back to Dashboard
-            </Button>
-          </Link>
+    <div className="p-6 max-w-7xl mx-auto space-y-6">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-bold text-[#F9FAFB]">Email Campaigns</h1>
+          <p className="text-[#9CA3AF]">Manage automated email campaigns and monitor performance</p>
         </div>
-      }
-    >
+        <Button size="lg" className="gap-2 bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] text-white">
+          <Plus className="h-5 w-5" />
+          New Campaign
+        </Button>
+      </div>
       <div className="space-y-6">
         {/* Stats Cards */}
         <div className="grid gap-6 md:grid-cols-4">
@@ -266,7 +259,7 @@ const EmailCampaigns = () => {
           </CardContent>
         </Card>
       </div>
-    </AdminLayout>
+    </div>
   );
 };
 

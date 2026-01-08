@@ -14,7 +14,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 
-import { AdminLayout } from "@/components/admin/AdminLayout";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -133,22 +133,23 @@ const DonationsList = () => {
   };
 
   return (
-    <AdminLayout 
-      title="Donations" 
-      subtitle="Manage and track all donations"
-      actions={
+    <div className="p-6 max-w-7xl mx-auto space-y-6">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-bold text-[#F9FAFB]">Donations</h1>
+          <p className="text-[#9CA3AF]">Manage and track all donations</p>
+        </div>
         <div className="flex gap-2">
-          <Button variant="outline" onClick={() => refetch()} className="border-slate-700">
+          <Button variant="outline" onClick={() => refetch()} className="border-gray-700 hover:bg-gray-800">
             <RefreshCw className="mr-2 h-4 w-4" />
             Refresh
           </Button>
-          <Button variant="outline" onClick={exportToCSV} className="border-slate-700">
+          <Button variant="outline" onClick={exportToCSV} className="border-gray-700 hover:bg-gray-800">
             <Download className="mr-2 h-4 w-4" />
             Export CSV
           </Button>
         </div>
-      }
-    >
+      </div>
       {/* Stats Cards */}
       <div className="mb-6 grid gap-4 md:grid-cols-4">
         <Card className="bg-slate-800/50 border-slate-700">
@@ -322,7 +323,7 @@ const DonationsList = () => {
           </TableBody>
         </Table>
       </Card>
-    </AdminLayout>
+    </div>
   );
 };
 
