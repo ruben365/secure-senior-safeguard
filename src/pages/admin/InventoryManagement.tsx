@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
-import { AdminLayout } from "@/components/admin/AdminLayout";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -131,22 +131,23 @@ const InventoryManagement = () => {
   );
 
   return (
-    <AdminLayout 
-      title="Inventory Management" 
-      subtitle="Track and manage product stock levels"
-      actions={
+    <div className="p-6 max-w-7xl mx-auto space-y-6">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-bold text-[#F9FAFB]">Inventory Management</h1>
+          <p className="text-[#9CA3AF]">Track and manage product stock levels</p>
+        </div>
         <div className="flex gap-2">
-          <Button variant="outline" className="border-slate-700">
+          <Button variant="outline" className="border-gray-700 hover:bg-gray-800">
             <Upload className="mr-2 h-4 w-4" />
             Import CSV
           </Button>
-          <Button variant="outline" className="border-slate-700">
+          <Button variant="outline" className="border-gray-700 hover:bg-gray-800">
             <Download className="mr-2 h-4 w-4" />
             Export
           </Button>
         </div>
-      }
-    >
+      </div>
       {/* Low Stock Alert */}
       {lowStockProducts.length > 0 && (
         <Alert className="mb-6 border-yellow-500/50 bg-yellow-500/10">
@@ -431,7 +432,7 @@ const InventoryManagement = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </AdminLayout>
+    </div>
   );
 };
 

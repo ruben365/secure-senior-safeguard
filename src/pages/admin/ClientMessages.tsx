@@ -13,7 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { toast } from "sonner";
 import { RefreshCw, Send, Mail, MailOpen, MessageSquare, Users, Clock } from "lucide-react";
 import { format, formatDistanceToNow } from "date-fns";
-import { AdminLayout } from "@/components/admin/AdminLayout";
+
 
 export default function ClientMessages() {
   const [selectedMessage, setSelectedMessage] = useState<any>(null);
@@ -81,11 +81,12 @@ export default function ClientMessages() {
   };
 
   return (
-    <AdminLayout
-      title="Client Messages"
-      subtitle="Internal communication with clients"
-      searchPlaceholder="Search messages..."
-      headerActions={
+    <div className="p-6 max-w-7xl mx-auto space-y-6">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-bold text-[#F9FAFB]">Client Messages</h1>
+          <p className="text-[#9CA3AF]">Internal communication with clients</p>
+        </div>
         <Dialog>
           <DialogTrigger asChild>
             <Button className="bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] text-white">
@@ -142,8 +143,7 @@ export default function ClientMessages() {
             </div>
           </DialogContent>
         </Dialog>
-      }
-    >
+      </div>
       {/* Stats Cards */}
       <div className="grid gap-4 md:grid-cols-3 mb-8">
         <Card className="bg-[#111827] border-gray-800">
@@ -278,6 +278,6 @@ export default function ClientMessages() {
           )}
         </CardContent>
       </Card>
-    </AdminLayout>
+    </div>
   );
 }

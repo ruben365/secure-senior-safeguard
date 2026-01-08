@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { RefreshCw, Mail, Archive, Inbox, Clock, CheckCircle } from "lucide-react";
 import { format, formatDistanceToNow } from "date-fns";
-import { AdminLayout } from "@/components/admin/AdminLayout";
+
 
 export default function CommunicationsInbox() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -99,12 +99,12 @@ export default function CommunicationsInbox() {
   };
 
   return (
-    <AdminLayout
-      title="Communications Inbox"
-      subtitle="Manage website inquiries and contact form submissions"
-      searchPlaceholder="Search inquiries..."
-      onSearch={setSearchTerm}
-      headerActions={
+    <div className="p-6 max-w-7xl mx-auto space-y-6">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-bold text-[#F9FAFB]">Communications Inbox</h1>
+          <p className="text-[#9CA3AF]">Manage website inquiries and contact form submissions</p>
+        </div>
         <Select value={statusFilter} onValueChange={setStatusFilter}>
           <SelectTrigger className="w-[160px] bg-[#1F2937] border-gray-700 text-[#F9FAFB]">
             <SelectValue placeholder="Status" />
@@ -116,8 +116,7 @@ export default function CommunicationsInbox() {
             <SelectItem value="archived">Archived</SelectItem>
           </SelectContent>
         </Select>
-      }
-    >
+      </div>
       {/* Stats Cards */}
       <div className="grid gap-4 md:grid-cols-3 mb-8">
         <Card className="bg-[#111827] border-gray-800">
@@ -262,6 +261,6 @@ export default function CommunicationsInbox() {
           )}
         </CardContent>
       </Card>
-    </AdminLayout>
+    </div>
   );
 }

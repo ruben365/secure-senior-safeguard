@@ -19,7 +19,7 @@ import {
   MoreHorizontal,
 } from "lucide-react";
 
-import { AdminLayout } from "@/components/admin/AdminLayout";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -177,7 +177,11 @@ const JobApplicationsList = () => {
   };
 
   return (
-    <AdminLayout title="Job Applications" subtitle="Review and manage job applications">
+    <div className="p-6 max-w-7xl mx-auto space-y-6">
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold text-[#F9FAFB]">Job Applications</h1>
+        <p className="text-[#9CA3AF]">Review and manage job applications</p>
+      </div>
       {/* Stats Cards */}
       <div className="grid gap-4 md:grid-cols-6 mb-6">
         <Card className="bg-slate-800/50 border-slate-700">
@@ -500,7 +504,7 @@ const JobApplicationsList = () => {
           )}
         </DialogContent>
       </Dialog>
-    </AdminLayout>
+    </div>
   );
 };
 

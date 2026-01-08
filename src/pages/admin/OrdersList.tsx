@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Package, Printer, Eye, MoreVertical, Download, TrendingUp, DollarSign, ShoppingCart, AlertTriangle } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { AdminLayout } from "@/components/admin/AdminLayout";
+
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -153,16 +153,17 @@ const OrdersList = () => {
   const avgOrderValue = orders.length > 0 ? todaysRevenue / todaysOrders : 0;
 
   return (
-    <AdminLayout
-      title="Orders"
-      subtitle="Manage and fulfill customer orders"
-      headerActions={
-        <Button variant="outline">
+    <div className="p-6 max-w-7xl mx-auto space-y-6">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-bold text-[#F9FAFB]">Orders</h1>
+          <p className="text-[#9CA3AF]">Manage and fulfill customer orders</p>
+        </div>
+        <Button variant="outline" className="border-gray-700 hover:bg-gray-800">
           <Package className="mr-2 h-4 w-4" />
           Create Manual Order
         </Button>
-      }
-    >
+      </div>
       <div className="space-y-6">
         {/* Low Stock Alert */}
         <Alert className="mb-6 border-yellow-500">
@@ -459,7 +460,7 @@ const OrdersList = () => {
           </TabsContent>
         </Tabs>
       </div>
-    </AdminLayout>
+    </div>
   );
 };
 

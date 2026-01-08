@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { AdminLayout } from "@/components/admin/AdminLayout";
+
 
 
 import { Button } from "@/components/ui/button";
@@ -165,16 +165,17 @@ export default function TeamAdmin() {
   };
 
   return (
-    <AdminLayout
-      title="Team Members"
-      subtitle="Manage your team members and their display settings"
-      headerActions={
+    <div className="p-6 max-w-7xl mx-auto space-y-6">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-bold text-[#F9FAFB]">Team Members</h1>
+          <p className="text-[#9CA3AF]">Manage your team members and their display settings</p>
+        </div>
         <Button size="lg" className="gap-2 bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] text-white" onClick={() => setAddModalOpen(true)}>
           <Plus className="h-5 w-5" />
           Add Team Member
         </Button>
-      }
-    >
+      </div>
       <div className="space-y-6">
         {/* Controls Bar */}
         <div className="flex items-center justify-between gap-4">
@@ -459,6 +460,6 @@ export default function TeamAdmin() {
           editMember={editingMember}
         />
       </div>
-    </AdminLayout>
+    </div>
   );
 }

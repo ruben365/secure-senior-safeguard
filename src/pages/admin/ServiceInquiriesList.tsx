@@ -19,7 +19,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-import { AdminLayout } from "@/components/admin/AdminLayout";
+
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -176,24 +176,17 @@ const ServiceInquiriesList = () => {
   };
 
   return (
-    <AdminLayout
-      title="Service Inquiries"
-      subtitle="Manage B2B service leads and custom projects"
-      searchPlaceholder="Search inquiries..."
-      headerActions={
-        <div className="flex gap-2">
-          <Button variant="outline" onClick={() => refetch()} className="border-slate-700 hover:bg-slate-800">
-            <RefreshCw className="mr-2 h-4 w-4" />
-            Refresh
-          </Button>
-          <Link to="/admin">
-            <Button className="bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] text-white">
-              Back to Dashboard
-            </Button>
-          </Link>
+    <div className="p-6 max-w-7xl mx-auto space-y-6">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-bold text-[#F9FAFB]">Service Inquiries</h1>
+          <p className="text-[#9CA3AF]">Manage B2B service leads and custom projects</p>
         </div>
-      }
-    >
+        <Button variant="outline" onClick={() => refetch()} className="border-gray-700 hover:bg-gray-800">
+          <RefreshCw className="mr-2 h-4 w-4" />
+          Refresh
+        </Button>
+      </div>
       <div className="space-y-6">
         {/* Stats Cards */}
         <div className="grid gap-4 md:grid-cols-4">
@@ -481,7 +474,7 @@ const ServiceInquiriesList = () => {
           </Table>
         </Card>
       </div>
-    </AdminLayout>
+    </div>
   );
 };
 

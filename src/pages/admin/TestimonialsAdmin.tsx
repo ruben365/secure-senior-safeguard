@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { AdminLayout } from "@/components/admin/AdminLayout";
+
 import { VideoTestimonialUpload } from "@/components/admin/VideoTestimonialUpload";
 
 import { AddTestimonialModal } from "@/components/admin/AddTestimonialModal";
@@ -300,16 +300,17 @@ export default function TestimonialsAdmin() {
   const paginatedTestimonials = filteredTestimonials.slice(startIndex, endIndex);
 
   return (
-    <AdminLayout
-      title="Testimonials"
-      subtitle="Manage customer testimonials and reviews"
-      headerActions={
-        <Button onClick={() => setAddModalOpen(true)}>
+    <div className="p-6 max-w-7xl mx-auto space-y-6">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-bold text-[#F9FAFB]">Testimonials</h1>
+          <p className="text-[#9CA3AF]">Manage customer testimonials and reviews</p>
+        </div>
+        <Button onClick={() => setAddModalOpen(true)} className="bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] text-white">
           <Plus className="h-4 w-4 mr-2" />
           Add New Testimonial
         </Button>
-      }
-    >
+      </div>
       <div className="space-y-6">
           <div className="bg-background border rounded-lg p-4 mb-6">
             <div className="flex flex-col md:flex-row gap-4">
@@ -622,6 +623,6 @@ export default function TestimonialsAdmin() {
         onOpenChange={setVideoUploadOpen}
         onSuccess={fetchTestimonials}
       />
-    </AdminLayout>
+    </div>
   );
 }

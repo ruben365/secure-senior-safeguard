@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Plus, Download, Trash2, Search, RefreshCw, Mail, TrendingUp, Users } from "lucide-react";
 import { format } from "date-fns";
-import { AdminLayout } from "@/components/admin/AdminLayout";
+
 
 export default function NewsletterManagement() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -108,12 +108,12 @@ export default function NewsletterManagement() {
   };
 
   return (
-    <AdminLayout
-      title="Newsletter Management"
-      subtitle="Manage newsletter subscribers and campaigns"
-      searchPlaceholder="Search subscribers..."
-      onSearch={setSearchTerm}
-      headerActions={
+    <div className="p-6 max-w-7xl mx-auto space-y-6">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-bold text-[#F9FAFB]">Newsletter Management</h1>
+          <p className="text-[#9CA3AF]">Manage newsletter subscribers and campaigns</p>
+        </div>
         <div className="flex items-center gap-2">
           <Dialog>
             <DialogTrigger asChild>
@@ -148,8 +148,7 @@ export default function NewsletterManagement() {
             Export
           </Button>
         </div>
-      }
-    >
+      </div>
       {/* Stats Cards */}
       <div className="grid gap-4 md:grid-cols-3 mb-8">
         <Card className="bg-[#111827] border-gray-800">
@@ -253,6 +252,6 @@ export default function NewsletterManagement() {
           )}
         </CardContent>
       </Card>
-    </AdminLayout>
+    </div>
   );
 }
