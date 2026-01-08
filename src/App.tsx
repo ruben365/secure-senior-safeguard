@@ -111,6 +111,16 @@ const DonationsList = lazy(() => import("./pages/admin/DonationsList"));
 const ServiceInquiriesList = lazy(() => import("./pages/admin/ServiceInquiriesList"));
 const BookingsList = lazy(() => import("./pages/admin/BookingsList"));
 
+// Cyber dashboard pages
+const ThreatMonitor = lazy(() => import("./pages/admin/cyber/ThreatMonitor"));
+const FamilyDevices = lazy(() => import("./pages/admin/cyber/FamilyDevices"));
+const CyberUserManagement = lazy(() => import("./pages/admin/cyber/UserManagement"));
+const ActivityLog = lazy(() => import("./pages/admin/cyber/ActivityLog"));
+const DatabaseView = lazy(() => import("./pages/admin/cyber/DatabaseView"));
+const CyberNotifications = lazy(() => import("./pages/admin/cyber/Notifications"));
+const SecuritySettings = lazy(() => import("./pages/admin/cyber/SecuritySettings"));
+const CyberAnalytics = lazy(() => import("./pages/admin/cyber/CyberAnalytics"));
+
 // Premium loading fallback with pulsing radar animation
 import { AIPulseLoader } from "./components/AIPulseLoader";
 const PageLoader = () => <AIPulseLoader message="Loading..." fullScreen={true} />;
