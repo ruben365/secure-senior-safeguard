@@ -502,13 +502,14 @@ function Auth() {
                       required
                       disabled={isLoading}
                       placeholder="••••••••"
-                      className={`${inputClassName} pr-12 ${passwordError ? 'border-destructive focus:border-destructive' : ''}`}
+                      className={`${inputClassName} pr-11 ${passwordError ? 'border-destructive focus:border-destructive' : ''}`}
                       autoComplete="current-password"
+                      minLength={8}
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8 rounded-md text-muted-foreground hover:text-foreground hover:bg-slate-100 transition-colors"
+                      className="absolute right-0 top-0 h-full px-3 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
                       tabIndex={-1}
                       aria-label={showPassword ? "Hide password" : "Show password"}
                     >
@@ -662,13 +663,14 @@ function Auth() {
                       required
                       disabled={isLoading}
                       placeholder="••••••••"
-                      className={`${inputClassName} pr-12`}
+                      className={`${inputClassName} pr-11`}
                       autoComplete="new-password"
+                      minLength={8}
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8 rounded-md text-muted-foreground hover:text-foreground hover:bg-slate-100 transition-colors"
+                      className="absolute right-0 top-0 h-full px-3 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
                       tabIndex={-1}
                       aria-label={showPassword ? "Hide password" : "Show password"}
                     >
@@ -695,13 +697,14 @@ function Auth() {
                       required
                       disabled={isLoading}
                       placeholder="••••••••"
-                      className={`${inputClassName} pr-12`}
+                      className={`${inputClassName} pr-11`}
                       autoComplete="new-password"
+                      minLength={8}
                     />
                     <button
                       type="button"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8 rounded-md text-muted-foreground hover:text-foreground hover:bg-slate-100 transition-colors"
+                      className="absolute right-0 top-0 h-full px-3 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
                       tabIndex={-1}
                       aria-label={showConfirmPassword ? "Hide password" : "Show password"}
                     >
@@ -740,9 +743,9 @@ function Auth() {
 
         {/* Bottom Links */}
         <div className="mt-6 flex items-center justify-center gap-4 text-xs text-muted-foreground">
-          <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
+          <Link to="/privacy-policy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
           <span className="text-slate-300">•</span>
-          <Link to="/terms" className="hover:text-foreground transition-colors">Terms</Link>
+          <Link to="/terms-of-service" className="hover:text-foreground transition-colors">Terms of Service</Link>
           <span className="text-slate-300">•</span>
           <span>© {new Date().getFullYear()} InVision Network</span>
         </div>
