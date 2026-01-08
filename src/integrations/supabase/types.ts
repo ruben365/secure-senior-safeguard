@@ -47,6 +47,42 @@ export type Database = {
         }
         Relationships: []
       }
+      admin_audit_logs: {
+        Row: {
+          action_type: string
+          admin_user_id: string
+          created_at: string
+          details: Json | null
+          entity_id: string | null
+          entity_type: string
+          id: string
+          ip_address: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          action_type: string
+          admin_user_id: string
+          created_at?: string
+          details?: Json | null
+          entity_id?: string | null
+          entity_type: string
+          id?: string
+          ip_address?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          action_type?: string
+          admin_user_id?: string
+          created_at?: string
+          details?: Json | null
+          entity_id?: string | null
+          entity_type?: string
+          id?: string
+          ip_address?: string | null
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       admin_events: {
         Row: {
           created_at: string | null
@@ -1142,6 +1178,42 @@ export type Database = {
           price?: number | null
           start_date?: string | null
           title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      dashboard_health: {
+        Row: {
+          created_at: string
+          dashboard_name: string
+          dashboard_url: string
+          error_message: string | null
+          id: string
+          last_check: string | null
+          response_time_ms: number | null
+          status: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          dashboard_name: string
+          dashboard_url: string
+          error_message?: string | null
+          id?: string
+          last_check?: string | null
+          response_time_ms?: number | null
+          status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          dashboard_name?: string
+          dashboard_url?: string
+          error_message?: string | null
+          id?: string
+          last_check?: string | null
+          response_time_ms?: number | null
+          status?: string | null
           updated_at?: string
         }
         Relationships: []
@@ -2581,10 +2653,12 @@ export type Database = {
           base_price: number
           category_id: string | null
           cost_price: number | null
+          cover_image_url: string | null
           created_at: string
           description: string | null
           dimensions: Json | null
           features: Json | null
+          file_url: string | null
           id: string
           images: Json | null
           is_featured: boolean | null
@@ -2592,6 +2666,7 @@ export type Database = {
           metadata: Json | null
           name: string
           partner_id: string
+          product_type: string | null
           published_at: string | null
           rating_average: number | null
           rating_count: number | null
@@ -2613,10 +2688,12 @@ export type Database = {
           base_price: number
           category_id?: string | null
           cost_price?: number | null
+          cover_image_url?: string | null
           created_at?: string
           description?: string | null
           dimensions?: Json | null
           features?: Json | null
+          file_url?: string | null
           id?: string
           images?: Json | null
           is_featured?: boolean | null
@@ -2624,6 +2701,7 @@ export type Database = {
           metadata?: Json | null
           name: string
           partner_id: string
+          product_type?: string | null
           published_at?: string | null
           rating_average?: number | null
           rating_count?: number | null
@@ -2645,10 +2723,12 @@ export type Database = {
           base_price?: number
           category_id?: string | null
           cost_price?: number | null
+          cover_image_url?: string | null
           created_at?: string
           description?: string | null
           dimensions?: Json | null
           features?: Json | null
+          file_url?: string | null
           id?: string
           images?: Json | null
           is_featured?: boolean | null
@@ -2656,6 +2736,7 @@ export type Database = {
           metadata?: Json | null
           name?: string
           partner_id?: string
+          product_type?: string | null
           published_at?: string | null
           rating_average?: number | null
           rating_count?: number | null
@@ -4361,6 +4442,15 @@ export type Database = {
       has_worker_role: {
         Args: { _role: string; _user_id: string }
         Returns: boolean
+      }
+      log_admin_action: {
+        Args: {
+          p_action_type: string
+          p_details?: Json
+          p_entity_id?: string
+          p_entity_type: string
+        }
+        Returns: string
       }
       update_service_heartbeat: {
         Args: {
