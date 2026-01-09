@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Shield, ArrowRight, Lock, Eye, Fingerprint, ShieldCheck, Zap, Globe } from "lucide-react";
-import { motion } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
+import { useRef } from "react";
 import heroVideo from "@/assets/hero-video.mp4";
 
 const securityFeatures = [{
@@ -19,68 +18,8 @@ const securityFeatures = [{
   label: "AI Protection",
 }];
 
-// Animation variants - LCP-optimized (no initial hidden state for critical elements)
-const fadeSlideUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0 },
-};
-
-// Non-blocking container - no delays for LCP
-const staggerContainer = {
-  hidden: { opacity: 1 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0,
-    },
-  },
-};
-
 export const HeroHomepage = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [showContent, setShowContent] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    
-    const showAll = () => {
-      setIsLoaded(true);
-      // Delay showing content slightly to ensure background is painted first
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setShowContent(true);
-        });
-      });
-    };
-    
-    if (!video) {
-      // Fallback: show content after short delay if no video
-      const timer = setTimeout(showAll, 300);
-      return () => clearTimeout(timer);
-    }
-
-    const handleReady = () => showAll();
-    
-    // Check if already ready
-    if (video.readyState >= 3) {
-      showAll();
-      return;
-    }
-
-    video.addEventListener('canplaythrough', handleReady);
-    video.addEventListener('loadeddata', handleReady);
-    
-    // Fallback timeout - show after 1.5s max
-    const timeout = setTimeout(showAll, 1500);
-
-    return () => {
-      video.removeEventListener('canplaythrough', handleReady);
-      video.removeEventListener('loadeddata', handleReady);
-      clearTimeout(timeout);
-    };
-  }, []);
 
   return (
     <section 
@@ -131,22 +70,13 @@ export const HeroHomepage = () => {
       >
         <div className="flex flex-col lg:grid lg:grid-cols-5 gap-8 lg:gap-20 xl:gap-28 items-center min-h-[100vh] py-16 sm:py-20 lg:py-0">
           
-          {/* Left Content */}
-          <motion.div 
-            className="lg:col-span-3 order-2 lg:order-1 w-full"
-            variants={staggerContainer}
-            initial="visible"
-            animate="visible"
-          >
+          {/* Left Content - No motion wrappers for LCP-critical elements */}
+          <div className="lg:col-span-3 order-2 lg:order-1 w-full">
             {/* Premium Badge */}
-            <motion.div 
-              variants={fadeSlideUp}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 mb-6 sm:mb-10 shadow-sm"
-            >
+            <div className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 mb-6 sm:mb-10 shadow-sm">
               <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-gradient-to-r from-primary to-accent shadow-sm" />
               <span className="text-xs sm:text-sm font-semibold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Veteran-Supporting • Ohio-Based</span>
-            </motion.div>
+            </div>
             
             {/* Headline - rendered immediately for LCP */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold leading-[0.95] mb-6 sm:mb-8 tracking-tight">
@@ -163,11 +93,7 @@ export const HeroHomepage = () => {
             </p>
             
             {/* CTAs */}
-            <motion.div 
-              variants={fadeSlideUp}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4 relative z-30"
-            >
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 relative z-30">
               <Button asChild size="lg" className="group h-12 sm:h-14 px-6 sm:px-8 text-sm sm:text-base font-semibold rounded-xl bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-accent/90 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/35 transition-all duration-300 border-0 w-full sm:w-auto">
                 <Link to="/training">
                   <Shield className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
@@ -182,8 +108,8 @@ export const HeroHomepage = () => {
                   <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
           
           {/* Right Content - Security Visual */}
           <div className="lg:col-span-2 order-1 lg:order-2 flex justify-center lg:justify-end w-full">
