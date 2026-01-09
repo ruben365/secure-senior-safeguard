@@ -178,15 +178,21 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     @apply border-border;
   }
 
-  /* === CANVAS SEAL: Prevent white flashes at browser level === */
+  /* ============================================
+     EMERGENCY STABILIZATION: CANVAS SEAL
+     Prevents white flash at browser level
+  ============================================ */
+  html, body, #root {
+    background-color: #0B0F19 !important;
+    min-height: 100vh !important;
+  }
+
   html {
     @apply scroll-smooth;
     overflow-x: hidden;
     width: 100%;
-    min-height: 100vh;
     scroll-behavior: smooth;
     scrollbar-gutter: stable;
-    background-color: #0B0F19 !important;
   }
   
   body {
@@ -196,7 +202,6 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     line-height: 1.8;
     overflow-x: hidden;
     width: 100%;
-    min-height: 100vh;
     position: relative;
     /* Desktop zoom scaling */
     zoom: var(--site-scale);
@@ -212,17 +217,24 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   body:has([data-admin-layout]) {
     background-color: #0B0F19 !important;
     background-image: none !important;
-    min-height: 100vh;
   }
 
-  /* === ZERO-DISTRACTION: Disable ALL animations in admin === */
+  /* ============================================
+     EMERGENCY STABILIZATION: KILL ALL ANIMATIONS
+     Disables all transitions and animations globally
+     for admin layout to prevent layout shifts
+  ============================================ */
   [data-admin-layout],
-  [data-admin-layout] * {
+  [data-admin-layout] *,
+  [data-admin-layout] *::before,
+  [data-admin-layout] *::after {
     transition-property: none !important;
     transition-duration: 0ms !important;
+    transition-delay: 0ms !important;
     animation: none !important;
     animation-duration: 0ms !important;
     animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
   }
   
   @media (min-width: 768px) {
@@ -328,7 +340,6 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     @apply min-h-screen;
     overflow-x: hidden;
     width: 100%;
-    min-height: 100vh;
     background-color: #0B0F19 !important;
   }
   
