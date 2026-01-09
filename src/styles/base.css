@@ -178,14 +178,15 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     @apply border-border;
   }
 
-  /* === CANVAS SEAL: Prevent white flashes === */
+  /* === CANVAS SEAL: Prevent white flashes at browser level === */
   html {
     @apply scroll-smooth;
     overflow-x: hidden;
     width: 100%;
+    min-height: 100vh;
     scroll-behavior: smooth;
     scrollbar-gutter: stable;
-    background-color: #0B0F19;
+    background-color: #0B0F19 !important;
   }
   
   body {
@@ -195,10 +196,11 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     line-height: 1.8;
     overflow-x: hidden;
     width: 100%;
+    min-height: 100vh;
     position: relative;
     /* Desktop zoom scaling */
     zoom: var(--site-scale);
-    /* Soft Modern - subtle off-white with very gentle gradient */
+    /* Default: Soft Modern - subtle off-white with very gentle gradient */
     background-color: hsl(220 14% 96%);
     background-image: 
       radial-gradient(ellipse at 20% 0%, hsl(265 55% 42% / 0.015) 0%, transparent 60%),
@@ -206,19 +208,21 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     background-attachment: fixed;
   }
 
-  /* Admin/Dashboard pages get the dark theme base */
+  /* Admin/Dashboard pages get the dark theme base - sealed at body level */
   body:has([data-admin-layout]) {
     background-color: #0B0F19 !important;
     background-image: none !important;
+    min-height: 100vh;
   }
 
-  /* === ZERO-DISTRACTION: Disable all animations in admin === */
+  /* === ZERO-DISTRACTION: Disable ALL animations in admin === */
   [data-admin-layout],
   [data-admin-layout] * {
     transition-property: none !important;
+    transition-duration: 0ms !important;
     animation: none !important;
     animation-duration: 0ms !important;
-    transition-duration: 0ms !important;
+    animation-delay: 0ms !important;
   }
   
   @media (min-width: 768px) {
@@ -324,7 +328,8 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     @apply min-h-screen;
     overflow-x: hidden;
     width: 100%;
-    background-color: #0B0F19;
+    min-height: 100vh;
+    background-color: #0B0F19 !important;
   }
   
   /* Fallback for browsers that don't support zoom */
