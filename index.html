@@ -4,7 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
     
-    <!-- Google Analytics -->
+    <!-- Preconnect hints FIRST - before any scripts for maximum effectiveness -->
+    <link rel="preconnect" href="https://avoafweoebstkgjnbadv.supabase.co">
+    <link rel="preconnect" href="https://avoafweoebstkgjnbadv.supabase.co" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    
+    <!-- DNS prefetch as fallback -->
+    <link rel="dns-prefetch" href="https://avoafweoebstkgjnbadv.supabase.co">
+    <link rel="dns-prefetch" href="https://js.stripe.com">
+    <link rel="dns-prefetch" href="https://m.stripe.network">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    
+    <!-- Google Analytics - moved after preconnect hints -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-B1MKM2FPV7"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -12,17 +25,6 @@
       gtag('js', new Date());
       gtag('config', 'G-B1MKM2FPV7');
     </script>
-    
-    <!-- Preconnect hints IMMEDIATELY after meta tags - no scripts before -->
-    <link rel="preconnect" href="https://avoafweoebstkgjnbadv.supabase.co">
-    <link rel="preconnect" href="https://avoafweoebstkgjnbadv.supabase.co" crossorigin>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- DNS prefetch as fallback -->
-    <link rel="dns-prefetch" href="https://avoafweoebstkgjnbadv.supabase.co">
-    <link rel="dns-prefetch" href="https://js.stripe.com">
-    <link rel="dns-prefetch" href="https://m.stripe.network">
     
     <!-- Critical CSS inlined for FCP/LCP -->
     <style>
