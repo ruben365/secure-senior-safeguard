@@ -52,7 +52,7 @@ import { VideoLightbox } from "@/components/VideoLightbox";
 import { SEO } from "@/components/SEO";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
-import heroVault from "@/assets/hero-vault-1.jpg";
+
 
 // Rotating hero headlines for Training page
 const trainingHeadlines = [
@@ -648,7 +648,7 @@ function LearnAndTrain() {
 
           {/* Veteran Discount Notification - Enhanced Visibility */}
           <div className="flex justify-center mb-10">
-            <div className="inline-flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-blue-900/15 to-red-900/15 border-2 border-blue-500/30 rounded-2xl text-lg md:text-xl">
+            <div className="inline-flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-gray-500/15 to-gray-600/15 border-2 border-gray-500/30 rounded-2xl text-lg md:text-xl">
               <span className="text-2xl">🇺🇸</span>
               <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
               <span className="font-bold">Veterans & First Responders Save 10%</span>
@@ -1009,9 +1009,9 @@ function LearnAndTrain() {
                   {[
                     "Up to 5 family members",
                     "12-hour AI response time",
-                    "Family Safety Vault access",
                     "Safe word setup system",
                     "Phone support available",
+                    "Priority email support",
                   ].map((feature, index) => (
                     <div key={index} className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
@@ -1035,7 +1035,7 @@ function LearnAndTrain() {
                     handleSubscribe('price_1SjwUIJ8osfwYbX7Ynjt7gMq', 'ScamShield', 'Family', 7900, [
                       "Up to 5 family members",
                       "12-hour response time",
-                      "Family Safety Vault access",
+                      "Safe word setup system",
                       "Phone support available",
                       "25 credits/month"
                     ]);
@@ -1550,8 +1550,7 @@ function LearnAndTrain() {
                     {[
                       "Family safe words to verify real emergencies instantly",
                       "24/7 expert analysis — just forward anything suspicious",
-                      "Proactive alerts when new scam patterns emerge",
-                      "Secure vault for important family documents"
+                      "Proactive alerts when new scam patterns emerge"
                     ].map((item, idx) => (
                       <li key={idx} className="flex items-start gap-3 text-base md:text-lg text-foreground">
                         <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
@@ -1564,49 +1563,6 @@ function LearnAndTrain() {
             </Card>
           </div>
 
-          {/* Family Safety Vault Card */}
-          <Card className="max-w-4xl mx-auto mt-10 p-8 md:p-10 hover:shadow-xl transition-all duration-500 rounded-2xl border-accent border-2 relative overflow-hidden">
-            {/* Background Image - Vault themed */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ 
-                backgroundImage: `url(${heroVault})`,
-              }}
-            />
-            {/* Dark overlay for text readability - significantly enhanced */}
-            <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/80 to-black/75" />
-            <div className="absolute inset-0 backdrop-blur-[1px]" />
-            
-            <div className="text-center relative z-10">
-              <div className="flex justify-center mb-6">
-                <div className="w-20 h-20 bg-gradient-to-br from-primary/60 to-accent/60 rounded-full flex items-center justify-center animate-[shield-pulse_3s_ease-in-out_infinite] shadow-lg border-2 border-white/30">
-                  <Lock className="w-10 h-10 text-white" />
-                </div>
-              </div>
-              <h3 className="text-2xl md:text-3xl font-bold mb-3 text-white drop-shadow-lg">Family Safety Vault</h3>
-              <p className="text-white/90 mb-6 text-base md:text-lg font-medium drop-shadow-md">Included with Family & Premium Plans — keep everything secure</p>
-
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8 text-left max-w-2xl mx-auto">
-                {[
-                  { icon: "🔑", feature: "Family safe words" },
-                  { icon: "📞", feature: "Trusted caller list" },
-                  { icon: "🆘", feature: "Emergency contacts" },
-                  { icon: "📄", feature: "Encrypted documents" },
-                  { icon: "🔐", feature: "Account recovery info" },
-                  { icon: "✈️", feature: "Travel itineraries" },
-                ].map((item, index) => (
-                  <div key={index} className="flex items-center gap-3 p-3 bg-white/95 rounded-xl border border-white/20 shadow-lg">
-                    <span className="text-xl">{item.icon}</span>
-                    <span className="text-sm md:text-base font-semibold text-foreground">{item.feature}</span>
-                  </div>
-                ))}
-              </div>
-
-              <p className="text-base md:text-lg text-white font-semibold drop-shadow-md">
-                🔒 Bank-grade encryption • Multi-factor authentication • Secure family sharing
-              </p>
-            </div>
-          </Card>
         </div>
       </section>
 
