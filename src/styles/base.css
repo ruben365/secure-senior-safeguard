@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ===== ZERO-DISTRACTION PROTOCOL - Dashboard Stability ===== */
+/* Force instant transitions - no animations anywhere in admin */
+.admin-no-animations,
+.admin-no-animations * {
+  transition-property: none !important;
+  animation: none !important;
+  animation-duration: 0ms !important;
+  transition-duration: 0ms !important;
+}
+
 /* InVision Network Design System - "Liquid Trust" Premium Visual Design
 All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid animations. */
 
