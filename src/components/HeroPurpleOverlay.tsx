@@ -5,11 +5,8 @@ import { memo } from "react";
  * 30% opacity black tint - no animations, no colors, just readability
  */
 const HeroPurpleOverlay = memo(() => {
-  return (
-    <div 
-      className="absolute inset-0 pointer-events-none bg-black/30"
-    />
-  );
+  // Overlay disabled - no dark tint on hero sections
+  return null;
 });
 
 HeroPurpleOverlay.displayName = 'HeroPurpleOverlay';
