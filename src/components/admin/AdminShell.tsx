@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Outlet, useNavigate, Navigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+// Framer Motion removed for Zero-Distraction protocol
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 import { CyberSidebar } from "@/components/admin/neon/CyberSidebar";
@@ -138,7 +138,7 @@ export function AdminShell() {
   }
 
   return (
-    <div className="flex min-h-screen bg-[#0B0F19] w-full overflow-x-hidden">
+    <div className="admin-no-animations flex min-h-screen bg-[#0B0F19] w-full overflow-x-hidden">
       {/* Persistent Sidebar - Never re-renders on navigation */}
       <CyberSidebar 
         isOpen={sidebarOpen} 
@@ -148,7 +148,7 @@ export function AdminShell() {
       
       {/* Persistent Top Header Bar */}
       <header className={`fixed top-0 right-0 left-0 h-16 bg-[#111827]/95 backdrop-blur-xl border-b border-gray-800 z-40 
-        transition-all duration-300 ${sidebarOpen ? 'md:left-[260px]' : 'md:left-[70px]'}`}>
+        ${sidebarOpen ? 'md:left-[260px]' : 'md:left-[70px]'}`}>
         <div className="flex items-center justify-between h-full px-4 lg:px-6">
           {/* Left - Menu Toggle + Nav + Search */}
           <div className="flex items-center gap-4 flex-1">
@@ -271,20 +271,11 @@ export function AdminShell() {
         </div>
       </header>
       
-      {/* Main Content Area - Only this area transitions */}
-      <main className={`flex-1 transition-all duration-300 pt-16 w-full ${sidebarOpen ? 'md:ml-[260px]' : 'md:ml-[70px]'}`}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={location.pathname}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15, ease: "easeOut" }}
-            className="min-h-[calc(100vh-4rem)]"
-          >
-            <Outlet />
-          </motion.div>
-        </AnimatePresence>
+      {/* Main Content Area - Instant transitions, no animations */}
+      <main className={`flex-1 pt-16 w-full ${sidebarOpen ? 'md:ml-[260px]' : 'md:ml-[70px]'}`}>
+        <div className="min-h-[calc(100vh-4rem)]">
+          <Outlet />
+        </div>
       </main>
     </div>
   );
