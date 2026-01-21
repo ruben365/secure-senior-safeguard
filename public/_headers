@@ -2,36 +2,44 @@
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
+# Cache JavaScript files for 1 year
+/assets/*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache CSS files for 1 year
+/assets/*.css
+  Cache-Control: public, max-age=31536000, immutable
+
 # Cache images for 1 year
-/*.jpg
+/assets/*.jpg
   Cache-Control: public, max-age=31536000, immutable
-/*.jpeg
+/assets/*.jpeg
   Cache-Control: public, max-age=31536000, immutable
-/*.png
+/assets/*.png
   Cache-Control: public, max-age=31536000, immutable
-/*.webp
+/assets/*.webp
   Cache-Control: public, max-age=31536000, immutable
-/*.avif
+/assets/*.avif
   Cache-Control: public, max-age=31536000, immutable
-/*.gif
+/assets/*.gif
   Cache-Control: public, max-age=31536000, immutable
-/*.svg
+/assets/*.svg
   Cache-Control: public, max-age=31536000, immutable
 
 # Cache videos for 1 year
-/*.mp4
+/assets/*.mp4
   Cache-Control: public, max-age=31536000, immutable
-/*.webm
+/assets/*.webm
   Cache-Control: public, max-age=31536000, immutable
 
 # Cache fonts for 1 year
-/*.woff
+/assets/*.woff
   Cache-Control: public, max-age=31536000, immutable
-/*.woff2
+/assets/*.woff2
   Cache-Control: public, max-age=31536000, immutable
-/*.ttf
+/assets/*.ttf
   Cache-Control: public, max-age=31536000, immutable
-/*.otf
+/assets/*.otf
   Cache-Control: public, max-age=31536000, immutable
 
 # HTML files should not be cached long-term
