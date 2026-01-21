@@ -21,7 +21,6 @@ import { useAnalyticsTracking } from "./hooks/useAnalyticsTracking";
 
 import { PageTransition } from "./components/PageTransition";
 
-import { NavigationProgress } from "./components/NavigationProgress";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { useSmoothAnchorScroll } from "./hooks/useSmoothAnchorScroll";
 import { CookieConsent } from "./components/CookieConsent";
@@ -119,8 +118,23 @@ const Maintenance = lazy(() => import("./pages/Maintenance"));
 const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
 const PaymentCanceled = lazy(() => import("./pages/PaymentCanceled"));
 
-import { AIPulseLoader } from "./components/AIPulseLoader";
-const PageLoader = () => <AIPulseLoader message="Loading..." fullScreen={true} />;
+// Single unified loader - NeuralShieldLoader handles all loading states
+const PageLoader = () => (
+  <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-background/95 backdrop-blur-md">
+    <div className="relative flex flex-col items-center justify-center">
+      <div className="absolute h-40 w-40 rounded-[100%] border-[3px] border-primary/20 animate-[spin_3s_linear_infinite]" />
+      <div className="absolute h-36 w-36 rounded-full border-t-2 border-primary border-r-transparent border-b-transparent border-l-transparent animate-[spin_1s_ease-in-out_infinite]" />
+      <div className="absolute h-24 w-24 rounded-full bg-primary/5 shadow-[0_0_30px_hsl(var(--primary)/0.2)] animate-pulse" />
+      <div className="relative z-10 h-20 w-20 flex items-center justify-center rounded-full bg-background shadow-xl p-4 border border-primary/10">
+        <div className="h-8 w-8 text-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+);
 const queryClient = new QueryClient();
 
 function PublicRoutes() {
@@ -269,7 +283,6 @@ function App() {
                     <BrowserRouter>
                       <SkipToContent />
                       <ScrollProgressBar />
-                      <NavigationProgress />
                       <ScrollToTop />
                       <BackToTop />
                       <MobileCallButton />
