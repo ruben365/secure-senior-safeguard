@@ -36,6 +36,11 @@
       .overflow-hidden{overflow:hidden}.z-50{z-index:50}
       .bg-primary{background-color:#7c3aed}.text-white{color:#fff}
       .bg-background{background-color:#fff}
+      /* LCP element - gradient text for nav brand (critical for immediate paint) */
+      .gradient-text-primary{background:linear-gradient(135deg,hsl(260,70%,35%),hsl(260,60%,55%));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+      /* Navigation critical styles */
+      .sticky{position:sticky}.top-0{top:0}.bg-card{background-color:#fff}.border-b{border-bottom-width:1px}.border-border{border-color:#e2e8f0}.shadow-lg{box-shadow:0 10px 15px -3px rgba(0,0,0,.1)}
+      nav{z-index:9999}
       /* Hero LCP styles - ensure fast text paint */
       h1{font-weight:700;line-height:.95;letter-spacing:-.025em}
       @media(min-width:640px){h1{font-size:2.25rem}}
