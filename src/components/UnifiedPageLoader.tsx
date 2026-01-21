@@ -6,7 +6,7 @@ interface UnifiedPageLoaderProps {
   message?: string;
 }
 
-export const UnifiedPageLoader = ({ isLoading, message = "Loading..." }: UnifiedPageLoaderProps) => {
+export const UnifiedPageLoader = ({ isLoading, message = "System Initializing" }: UnifiedPageLoaderProps) => {
   return (
     <AnimatePresence>
       {isLoading && (
@@ -14,97 +14,34 @@ export const UnifiedPageLoader = ({ isLoading, message = "Loading..." }: Unified
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-6"
-          style={{ backgroundColor: '#F8F9FC' }}
+          transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-white/80 backdrop-blur-md"
         >
-          {/* Glassmorphism Shield Loader */}
-          <div className="relative flex items-center justify-center">
-            {/* Outer breathing glow */}
-            <motion.div
-              className="absolute w-36 h-36 rounded-full"
-              animate={{
-                scale: [1, 1.15, 1],
-                opacity: [0.25, 0.45, 0.25],
-              }}
-              transition={{
-                duration: 2.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              style={{
-                background: 'radial-gradient(circle, hsl(var(--primary) / 0.4) 0%, transparent 70%)',
-                filter: 'blur(16px)',
-              }}
-            />
-
-            {/* Ripple ring */}
-            <motion.div
-              className="absolute w-28 h-28 rounded-full border-2"
-              style={{ borderColor: 'hsl(var(--primary) / 0.3)' }}
-              initial={{ scale: 0.5, opacity: 0.6 }}
-              animate={{ scale: 1.5, opacity: 0 }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeOut",
-              }}
-            />
-
-            {/* Glassmorphism shield container */}
-            <motion.div
-              className="relative w-20 h-20 rounded-2xl flex items-center justify-center"
-              animate={{
-                scale: [1, 1.05, 1],
-              }}
-              transition={{
-                duration: 2.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              style={{
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 100%)',
-                backdropFilter: 'blur(20px)',
-                WebkitBackdropFilter: 'blur(20px)',
-                border: '1px solid rgba(255,255,255,0.8)',
-                boxShadow: `
-                  0 8px 32px rgba(139, 92, 246, 0.25),
-                  0 0 50px rgba(139, 92, 246, 0.12),
-                  inset 0 1px 0 rgba(255,255,255,0.9)
-                `,
-              }}
+          {/* Animation Wrapper */}
+          <div className="relative flex flex-col items-center justify-center">
+            
+            {/* Outer Orbit Ring (Spinning slowly) */}
+            <div className="absolute h-32 w-32 rounded-full border border-primary/20 animate-[spin_3s_linear_infinite]" />
+            
+            {/* Middle Pulsing Ring (The "Oval" effect) */}
+            <div className="absolute h-24 w-24 rounded-full border-2 border-t-primary border-r-transparent border-b-primary border-l-transparent animate-[spin_1.5s_ease-in-out_infinite]" />
+            
+            {/* Inner Glowing Core (The "AI Bubble") */}
+            <div 
+              className="h-16 w-16 rounded-full bg-gradient-to-tr from-primary to-accent flex items-center justify-center animate-pulse"
+              style={{ boxShadow: '0 0 30px hsl(var(--primary) / 0.5)' }}
             >
-              {/* Shield icon with purple glow */}
-              <motion.div
-                animate={{
-                  filter: [
-                    'drop-shadow(0 0 6px hsl(var(--primary) / 0.5))',
-                    'drop-shadow(0 0 16px hsl(var(--primary) / 0.7))',
-                    'drop-shadow(0 0 6px hsl(var(--primary) / 0.5))',
-                  ],
-                }}
-                transition={{
-                  duration: 2.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                <Shield 
-                  className="w-10 h-10 text-primary" 
-                  strokeWidth={1.5}
-                />
-              </motion.div>
-            </motion.div>
-          </div>
+              <Shield className="w-8 h-8 text-white" strokeWidth={1.5} />
+            </div>
 
-          {/* Loading text */}
-          <motion.span
-            className="text-sm font-medium text-muted-foreground tracking-wide"
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-          >
-            {message}
-          </motion.span>
+            {/* Professional Loading Text */}
+            <div className="mt-24 text-center">
+              <p className="text-sm font-medium tracking-[0.2em] text-primary uppercase animate-pulse">
+                {message}
+              </p>
+            </div>
+            
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
