@@ -1,5 +1,5 @@
 // Professional Hero Images Configuration
-// Clean, modern professional images for each page - InVision Network branded
+// Natural, photorealistic images for each page
 
 import heroBrandedBusiness from "@/assets/hero-nature-business.jpg";
 import heroBrandedTraining from "@/assets/hero-nature-training.jpg";
