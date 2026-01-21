@@ -15,10 +15,10 @@ export const SplashScreen = ({ isVisible }: SplashScreenProps) => {
     if (wasVisible.current && !isVisible) {
       // Start fade out
       setIsFadingOut(true);
-      // Remove from DOM after 800ms fade animation completes
+      // Remove from DOM after 500ms fade animation completes
       const timer = setTimeout(() => {
         setShouldRender(false);
-      }, 800);
+      }, 500);
       return () => clearTimeout(timer);
     }
     wasVisible.current = isVisible;
@@ -36,91 +36,73 @@ export const SplashScreen = ({ isVisible }: SplashScreenProps) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-white/80 backdrop-blur-md"
       style={{ 
-        backgroundColor: '#F8F9FC',
         opacity: isFadingOut ? 0 : 1,
-        transition: 'opacity 800ms ease-out',
+        transition: 'opacity 500ms ease-out',
         pointerEvents: isFadingOut ? 'none' : 'auto',
       }}
     >
-      {/* Glassmorphism Shield Loader */}
-      <div className="relative flex items-center justify-center">
-        {/* Outer breathing glow */}
+      {/* Animation Wrapper */}
+      <div className="relative flex flex-col items-center justify-center">
+        
+        {/* Outer Orbit Ring (Spinning slowly) */}
         <div
-          className="absolute w-40 h-40 rounded-full animate-pulse"
-          style={{
-            background: 'radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, transparent 70%)',
-            filter: 'blur(20px)',
-            animation: 'breathe 2.5s ease-in-out infinite',
-          }}
-        />
-
-        {/* Ripple ring 1 */}
-        <div
-          className="absolute w-32 h-32 rounded-full border-2"
+          className="absolute h-32 w-32 rounded-full border"
           style={{ 
-            borderColor: 'rgba(139, 92, 246, 0.3)',
-            animation: 'ripple 2.5s ease-out infinite',
+            borderColor: 'hsl(var(--primary) / 0.2)',
+            animation: 'spin 3s linear infinite' 
           }}
         />
-
-        {/* Ripple ring 2 (delayed) */}
+        
+        {/* Middle Pulsing Ring */}
         <div
-          className="absolute w-32 h-32 rounded-full border-2"
+          className="absolute h-24 w-24 rounded-full border-2"
           style={{ 
-            borderColor: 'rgba(139, 92, 246, 0.2)',
-            animation: 'ripple 2.5s ease-out infinite 0.8s',
+            borderTopColor: 'hsl(var(--primary))',
+            borderRightColor: 'transparent',
+            borderBottomColor: 'hsl(var(--primary))',
+            borderLeftColor: 'transparent',
+            animation: 'spin 1.5s ease-in-out infinite' 
           }}
         />
-
-        {/* Glassmorphism shield container */}
+        
+        {/* Inner Glowing Core */}
         <div
-          className="relative w-24 h-24 rounded-2xl flex items-center justify-center"
+          className="h-16 w-16 rounded-full flex items-center justify-center"
           style={{
-            background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 100%)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-            border: '1px solid rgba(255,255,255,0.8)',
-            boxShadow: `
-              0 8px 32px rgba(139, 92, 246, 0.25),
-              0 0 60px rgba(139, 92, 246, 0.15),
-              inset 0 1px 0 rgba(255,255,255,0.9)
-            `,
-            animation: 'pulse-scale 2.5s ease-in-out infinite',
+            background: 'linear-gradient(to top right, hsl(var(--primary)), hsl(var(--accent)))',
+            boxShadow: '0 0 30px hsl(var(--primary) / 0.5)',
+            animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
           }}
         >
-          {/* Shield icon with purple glow */}
-          <div
-            style={{
-              animation: 'glow-pulse 2.5s ease-in-out infinite',
+          <Shield className="w-8 h-8 text-white" strokeWidth={1.5} />
+        </div>
+
+        {/* Professional Loading Text */}
+        <div className="mt-24 text-center">
+          <p 
+            className="text-sm font-medium tracking-[0.2em] uppercase"
+            style={{ 
+              color: 'hsl(var(--primary))',
+              animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite' 
             }}
           >
-            <Shield 
-              className="w-12 h-12 text-primary" 
-              strokeWidth={1.5}
-            />
-          </div>
+            System Initializing
+          </p>
         </div>
+        
       </div>
 
       {/* CSS Keyframes */}
       <style>{`
-        @keyframes breathe {
-          0%, 100% { transform: scale(1); opacity: 0.3; }
-          50% { transform: scale(1.2); opacity: 0.5; }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
-        @keyframes ripple {
-          0% { transform: scale(0.5); opacity: 0.6; }
-          100% { transform: scale(1.8); opacity: 0; }
-        }
-        @keyframes pulse-scale {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.05); }
-        }
-        @keyframes glow-pulse {
-          0%, 100% { filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.5)); }
-          50% { filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.7)); }
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.6; }
         }
       `}</style>
     </div>
