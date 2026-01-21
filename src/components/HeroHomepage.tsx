@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Shield, ArrowRight, Lock, Eye, Fingerprint, ShieldCheck, Zap, Globe } from "lucide-react";
-import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import heroVideo from "@/assets/hero-video.mp4";
 
@@ -19,45 +18,19 @@ const securityFeatures = [{
   label: "AI Protection",
 }];
 
-// Animation variants
-const fadeSlideUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0 },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
-    },
-  },
-};
-
 export const HeroHomepage = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const video = videoRef.current;
     
-    const showAll = () => {
-      setIsLoaded(true);
-      // Delay showing content slightly to ensure background is painted first
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setShowContent(true);
-        });
-      });
-    };
+    const showAll = () => setShowContent(true);
     
     if (!video) {
-      // Fallback: show content after short delay if no video
-      const timer = setTimeout(showAll, 300);
-      return () => clearTimeout(timer);
+      // Show content immediately if no video
+      showAll();
+      return;
     }
 
     const handleReady = () => showAll();
@@ -71,8 +44,8 @@ export const HeroHomepage = () => {
     video.addEventListener('canplaythrough', handleReady);
     video.addEventListener('loadeddata', handleReady);
     
-    // Fallback timeout - show after 1.5s max
-    const timeout = setTimeout(showAll, 1500);
+    // Faster fallback - show after 500ms max
+    const timeout = setTimeout(showAll, 500);
 
     return () => {
       video.removeEventListener('canplaythrough', handleReady);
@@ -84,9 +57,7 @@ export const HeroHomepage = () => {
   return (
     <section 
       className="relative min-h-[100vh] lg:min-h-[110vh] overflow-hidden"
-      style={{ 
-        backgroundColor: '#1a1625',
-      }}
+      style={{ backgroundColor: '#1a1625' }}
     >
       {/* Static gradient background */}
       <div className="absolute inset-0 overflow-hidden">
@@ -126,72 +97,50 @@ export const HeroHomepage = () => {
       </div>
       
       <div 
-        className="w-full max-w-[1800px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 relative z-10 transition-opacity duration-500"
-        style={{ opacity: showContent ? 1 : 0 }}
+        className={`w-full max-w-[1800px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 relative z-10 transition-opacity duration-300 ${showContent ? 'opacity-100' : 'opacity-0'}`}
       >
         <div className="flex flex-col lg:grid lg:grid-cols-5 gap-8 lg:gap-20 xl:gap-28 items-center min-h-[100vh] py-16 sm:py-20 lg:py-0">
           
-          {/* Left Content */}
-          <motion.div 
-            className="lg:col-span-3 order-2 lg:order-1 w-full"
-            variants={staggerContainer}
-            initial="hidden"
-            animate={showContent ? "visible" : "hidden"}
-          >
+          {/* Left Content - No framer-motion, using CSS animations */}
+          <div className={`lg:col-span-3 order-2 lg:order-1 w-full ${showContent ? 'animate-fade-in' : ''}`}>
             {/* Premium Badge */}
-            <motion.div 
-              variants={fadeSlideUp}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 mb-6 sm:mb-10 shadow-sm"
-            >
+            <div className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 mb-6 sm:mb-10 shadow-sm">
               <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-gradient-to-r from-primary to-accent shadow-sm" />
               <span className="text-xs sm:text-sm font-semibold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Veteran-Supporting • Ohio-Based</span>
-            </motion.div>
+            </div>
             
-            {/* Headline with Fade In + Slide Up */}
-            <motion.h1 
-              variants={fadeSlideUp}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold leading-[0.95] mb-6 sm:mb-8 tracking-tight"
-            >
+            {/* Headline - Renders immediately */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold leading-[0.95] mb-6 sm:mb-8 tracking-tight">
               <span className="block text-foreground">InVision</span>
               <span className="block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">Network</span>
               <span className="block font-light text-muted-foreground/80 text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl mt-2 sm:mt-3">
                 Protection • Education • Innovation
               </span>
-            </motion.h1>
+            </h1>
             
             {/* Description */}
-            <motion.p 
-              variants={fadeSlideUp}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-2xl mb-8 sm:mb-12 leading-relaxed"
-            >
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-2xl mb-8 sm:mb-12 leading-relaxed">
               Empowering families with AI scam protection. Transforming businesses with cutting-edge automation solutions.
-            </motion.p>
+            </p>
             
             {/* CTAs */}
-            <motion.div 
-              variants={fadeSlideUp}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4 relative z-30"
-            >
-              <Button asChild size="lg" className="group h-12 sm:h-14 px-6 sm:px-8 text-sm sm:text-base font-semibold rounded-xl bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-accent/90 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/35 transition-all duration-300 border-0 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 relative z-30">
+              <Button asChild size="lg" className="group h-12 sm:h-14 px-6 sm:px-8 text-sm sm:text-base font-semibold rounded-xl bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-accent/90 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/35 transition-all duration-200 border-0 w-full sm:w-auto">
                 <Link to="/training">
                   <Shield className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
                   Protect My Family
                   <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
-              <Button asChild size="lg" className="group h-12 sm:h-14 px-6 sm:px-8 text-sm sm:text-base font-semibold rounded-xl bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-primary/90 shadow-lg shadow-accent/25 hover:shadow-xl hover:shadow-accent/35 transition-all duration-300 border-0 text-accent-foreground w-full sm:w-auto">
+              <Button asChild size="lg" className="group h-12 sm:h-14 px-6 sm:px-8 text-sm sm:text-base font-semibold rounded-xl bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-primary/90 shadow-lg shadow-accent/25 hover:shadow-xl hover:shadow-accent/35 transition-all duration-200 border-0 text-accent-foreground w-full sm:w-auto">
                 <Link to="/business">
                   <Zap className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
                   Automate My Business
                   <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
           
           {/* Right Content - Security Visual */}
           <div className="lg:col-span-2 order-1 lg:order-2 flex justify-center lg:justify-end w-full">
@@ -209,9 +158,7 @@ export const HeroHomepage = () => {
                 {/* Central Shield Container */}
                 <div className="relative mx-auto w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72">
                   {/* Outer ring */}
-                  <div 
-                    className="absolute inset-0 rounded-full hidden sm:block border border-dashed border-primary/40"
-                  />
+                  <div className="absolute inset-0 rounded-full hidden sm:block border border-dashed border-primary/40" />
                   
                   {/* Second ring */}
                   <div className="absolute inset-4 sm:inset-6 rounded-full border border-accent/25 hidden sm:block" />
@@ -244,7 +191,7 @@ export const HeroHomepage = () => {
                         className="absolute"
                         style={pos}
                       >
-                        <div className="flex items-center gap-2.5 px-4 py-2.5 bg-card/95 rounded-full border border-primary/15 shadow-lg shadow-primary/10">
+                        <div className="flex items-center gap-2.5 px-4 py-2.5 bg-card/95 rounded-full border border-primary/15 shadow-lg shadow-primary/10 hover:scale-105 transition-transform duration-200">
                           <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary/15 to-accent/15 flex items-center justify-center">
                             <feature.icon className="w-4 h-4 text-primary" />
                           </div>
@@ -280,7 +227,7 @@ export const HeroHomepage = () => {
                 ].map((stat) => (
                   <div
                     key={stat.label}
-                    className="text-center p-2 sm:p-4 bg-card/60 rounded-xl sm:rounded-2xl border border-primary/10 hover:border-primary/25 transition-colors duration-300"
+                    className="text-center p-2 sm:p-4 bg-card/60 rounded-xl sm:rounded-2xl border border-primary/10 hover:border-primary/25 transition-colors duration-200"
                   >
                     <stat.icon className="w-4 h-4 sm:w-5 sm:h-5 text-accent mx-auto mb-1 sm:mb-2" />
                     <div className="text-[10px] sm:text-xs text-muted-foreground font-medium">{stat.label}</div>

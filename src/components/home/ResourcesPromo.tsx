@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { FileText, Shield, BookOpen, ArrowRight, Sparkles, Download, Lock, Gift, ShoppingBag, Usb, CreditCard, Phone, Package, Star, Percent, CheckCircle, Eye, AlertTriangle } from "lucide-react";
@@ -72,13 +71,7 @@ export const ResourcesPromo = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           {/* Content Side */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-8"
-          >
+          <div className="space-y-8 animate-fade-in">
             <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-50 rounded-2xl border border-emerald-200">
               <Sparkles className="w-5 h-5 text-emerald-800" />
               <span className="font-bold text-emerald-800">Resources & Tools</span>
@@ -157,39 +150,28 @@ export const ResourcesPromo = () => {
               </h3>
               {/* Product Photos */}
               <div className="grid grid-cols-2 gap-3 mb-4">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  className="relative rounded-xl overflow-hidden shadow-md"
-                >
+                <div className="relative rounded-xl overflow-hidden shadow-md hover:scale-[1.02] transition-transform duration-200">
                   <img 
                     src={productRfidWallet}
-                    alt="RFID protection wallet"
+                    alt="InVision Network RFID protection wallet"
                     className="w-full h-24 object-cover"
                     loading="lazy"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-black/60 px-2 py-1">
                     <span className="text-white text-xs font-medium">RFID Wallets</span>
                   </div>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 }}
-                  className="relative rounded-xl overflow-hidden shadow-md"
-                >
+                </div>
+                <div className="relative rounded-xl overflow-hidden shadow-md hover:scale-[1.02] transition-transform duration-200">
                   <img 
                     src={productUsbKey}
-                    alt="Security USB key"
+                    alt="InVision Network Security USB key"
                     className="w-full h-24 object-cover"
                     loading="lazy"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-black/60 px-2 py-1">
                     <span className="text-white text-xs font-medium">Security USB Keys</span>
                   </div>
-                </motion.div>
+                </div>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 {products.map((product, index) => (
@@ -214,26 +196,15 @@ export const ResourcesPromo = () => {
                 </Link>
               </Button>
             </div>
-          </motion.div>
+          </div>
 
           {/* Cards Side */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-5"
-          >
+          <div className="space-y-5 animate-fade-in" style={{ animationDelay: '0.1s' }}>
             {/* Hero Photo for Resources */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="relative rounded-3xl overflow-hidden shadow-lg"
-            >
+            <div className="relative rounded-3xl overflow-hidden shadow-lg">
               <img 
                 src={libraryLearning}
-                alt="Learning resources and guides"
+                alt="InVision Network learning resources and guides"
                 className="w-full h-48 object-cover"
                 loading="lazy"
               />
@@ -245,19 +216,16 @@ export const ResourcesPromo = () => {
                 </div>
                 <p className="text-sm text-white/80">20+ guides, scripts, and tools for complete protection</p>
               </div>
-            </motion.div>
+            </div>
 
             {resources.map((resource, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.15 }}
                 className="group"
+                style={{ animationDelay: `${(index + 1) * 0.1}s` }}
               >
                 <Link to="/resources" className="block">
-                  <div className="bg-white rounded-3xl p-6 border border-border/50 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12)] transition-all duration-300 flex items-start gap-5 hover:-translate-y-2 relative overflow-hidden">
+                  <div className="bg-white rounded-3xl p-6 border border-border/50 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12)] transition-all duration-200 flex items-start gap-5 hover:-translate-y-2 relative overflow-hidden">
                     {/* Badge */}
                     {resource.badge && (
                       <div className="absolute top-4 right-4 px-3 py-1 bg-primary/10 rounded-full">
@@ -265,7 +233,7 @@ export const ResourcesPromo = () => {
                       </div>
                     )}
                     
-                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${resource.color} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-lg`}>
+                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${resource.color} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-200 shadow-lg`}>
                       <resource.icon className="w-8 h-8 text-white" />
                     </div>
                     <div className="flex-1">
@@ -279,10 +247,10 @@ export const ResourcesPromo = () => {
                       </div>
                       <p className="text-muted-foreground leading-relaxed">{resource.description}</p>
                     </div>
-                    <ArrowRight className="w-6 h-6 text-muted-foreground group-hover:text-primary group-hover:translate-x-2 transition-all flex-shrink-0 mt-2" />
+                    <ArrowRight className="w-6 h-6 text-muted-foreground group-hover:text-primary group-hover:translate-x-2 transition-all duration-200 flex-shrink-0 mt-2" />
                   </div>
                 </Link>
-              </motion.div>
+              </div>
             ))}
 
             {/* Free Resources Banner */}
@@ -295,7 +263,7 @@ export const ResourcesPromo = () => {
                   <h3 className="font-bold text-lg">Free Emergency Anti-Scam Scripts</h3>
                   <p className="text-white/80 text-sm">IRS • Tech Support • Grandparent • Bank Fraud</p>
                 </div>
-                <Link to="/resources" className="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-full text-sm font-bold transition-colors">
+                <Link to="/resources" className="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-full text-sm font-bold transition-colors duration-200">
                   Get Free →
                 </Link>
               </div>
@@ -316,7 +284,7 @@ export const ResourcesPromo = () => {
                 <span className="text-sm font-medium">30-Day Guarantee</span>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

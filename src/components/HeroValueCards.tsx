@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { Shield, GraduationCap, Building2, ArrowRight, Star, Users, Zap } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -48,12 +47,7 @@ const HeroValueCards = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
+        <div className="text-center mb-12 animate-fade-in">
           <Badge variant="outline" className="mb-4 px-4 py-1.5">
             <Zap className="w-3.5 h-3.5 mr-1.5" />
             3 Ways to Get Protected
@@ -64,20 +58,18 @@ const HeroValueCards = () => {
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Whether you need personal protection, family training, or business security — we've got you covered
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {paths.map((path, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.15 }}
+              className="animate-fade-in"
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <Card className="relative h-full min-h-[420px] p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 bg-card/80 backdrop-blur-sm group overflow-hidden flex flex-col">
+              <Card className="relative h-full min-h-[420px] p-6 hover:shadow-xl transition-all duration-200 hover:-translate-y-2 border-0 bg-card/80 backdrop-blur-sm group overflow-hidden flex flex-col">
                 {/* Gradient overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
                 {/* Badge */}
                 <Badge 
@@ -91,7 +83,7 @@ const HeroValueCards = () => {
 
                 <div className="relative z-10 flex flex-col h-full">
                   {/* Icon */}
-                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${path.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}>
+                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${path.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200 flex-shrink-0`}>
                     <path.icon className="w-7 h-7 text-white" />
                   </div>
 
@@ -126,22 +118,17 @@ const HeroValueCards = () => {
                   <Button asChild className="w-full group/btn flex-shrink-0">
                     <Link to={path.href} className="inline-flex items-center justify-center gap-2">
                       Get Started
-                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
                     </Link>
                   </Button>
                 </div>
               </Card>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center mt-10"
-        >
+        <div className="text-center mt-10 animate-fade-in" style={{ animationDelay: '0.3s' }}>
           <p className="text-muted-foreground mb-4">
             Not sure which option is right for you?
           </p>
@@ -151,7 +138,7 @@ const HeroValueCards = () => {
               Schedule a Free Consultation
             </Link>
           </Button>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { 
   Shield, 
   Users, 
@@ -74,15 +73,10 @@ export const HomeIntroSection = () => {
         {/* Welcome Header - Compact */}
         <ScrollRevealSection>
           <div className="text-center mb-10">
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-4"
-            >
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-4 animate-fade-in">
               <Sparkles className="w-3.5 h-3.5 text-primary" />
               <span className="text-xs font-medium text-primary">Welcome to InVision Network</span>
-            </motion.div>
+            </div>
             
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
               Your Trusted Partner in Digital Safety
@@ -134,9 +128,9 @@ export const HomeIntroSection = () => {
               {features.map((feature, index) => (
                 <Card 
                   key={index}
-                  className="p-4 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 rounded-xl border-border/50 group bg-gradient-to-br from-card to-card/50"
+                  className="p-4 hover:shadow-lg transition-all duration-200 hover:-translate-y-1 rounded-xl border-border/50 group bg-gradient-to-br from-card to-card/50"
                 >
-                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
+                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-200`}>
                     <feature.icon className="w-5 h-5 text-white" />
                   </div>
                   <h4 className="text-sm font-bold mb-1 group-hover:text-primary transition-colors">
@@ -162,7 +156,7 @@ export const HomeIntroSection = () => {
                   key={index}
                   className="p-3 text-center hover:shadow-md transition-all duration-200 rounded-lg border-border/50 group bg-card/80"
                 >
-                  <div className="w-9 h-9 mx-auto rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+                  <div className="w-9 h-9 mx-auto rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center mb-2 group-hover:scale-105 transition-transform duration-200">
                     <item.icon className="w-4 h-4 text-primary" />
                   </div>
                   <p className="text-[10px] md:text-xs font-medium text-foreground leading-tight">
@@ -185,8 +179,8 @@ export const HomeIntroSection = () => {
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
               {quickLinks.map((link, index) => (
                 <Link key={index} to={link.href} className="group">
-                  <Card className="p-4 h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 rounded-xl border-border/50 bg-gradient-to-br from-card to-card/50">
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+                  <Card className="p-4 h-full hover:shadow-lg transition-all duration-200 hover:-translate-y-1 hover:border-primary/50 rounded-xl border-border/50 bg-gradient-to-br from-card to-card/50">
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform duration-200">
                       <link.icon className="w-5 h-5 text-primary" />
                     </div>
                     
