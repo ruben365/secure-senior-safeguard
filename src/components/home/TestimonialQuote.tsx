@@ -126,9 +126,9 @@ export const TestimonialQuote = () => {
                 <div className="relative">
                   <div className="absolute -inset-3 rounded-2xl border-2 border-primary/20" />
                   <div className="w-40 h-40 md:w-48 md:h-48 rounded-2xl overflow-hidden border border-white/50 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)]">
-                    {currentTestimonial.photo_url ? (
+                    {currentTestimonial.primary_media_url ? (
                       <img
-                        src={currentTestimonial.photo_url}
+                        src={currentTestimonial.primary_media_url}
                         alt={currentTestimonial.name}
                         className="w-full h-full object-cover"
                       />

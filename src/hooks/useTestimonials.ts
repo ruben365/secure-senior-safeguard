@@ -7,17 +7,17 @@ export interface Testimonial {
   story: string;
   location: string | null;
   rating: number | null;
-  photo_url: string | null;
+  primary_media_url: string | null;
 }
 
 export const useTestimonials = (limit: number = 10) => {
   return useQuery({
     queryKey: ["testimonials", limit],
     queryFn: async () => {
+      // Use the public view that excludes email addresses for security
       const { data, error } = await supabase
-        .from("testimonials")
-        .select("id, name, story, location, rating, photo_url")
-        .eq("status", "approved")
+        .from("testimonials_public" as any)
+        .select("id, name, story, location, rating, primary_media_url")
         .order("created_at", { ascending: false })
         .limit(limit);
 
