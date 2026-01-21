@@ -157,15 +157,12 @@ export const DonationModal = ({ open, onOpenChange, type = 'general', cause }: D
       if (paymentError) throw paymentError;
 
       if (paymentData?.url) {
-        window.open(paymentData.url, '_blank');
         toast({
-          title: "💖 Thank You!",
-          description: "Redirecting to secure payment. You'll receive a confirmation email after payment.",
+          title: "💖 Redirecting to Payment",
+          description: "You'll be taken to our secure payment page.",
         });
-        onOpenChange(false);
-        form.reset();
-        setSelectedAmount(null);
-        setCustomAmount('');
+        // Use location.href for reliable redirect (window.open can be blocked)
+        window.location.href = paymentData.url;
       }
     } catch (error: any) {
       toast({
