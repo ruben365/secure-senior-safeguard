@@ -245,7 +245,7 @@ function App() {
     
     const timer = setTimeout(() => {
       setShowSplash(false);
-    }, 800);
+    }, 1500);
     
     return () => {
       document.documentElement.style.scrollBehavior = "auto";
