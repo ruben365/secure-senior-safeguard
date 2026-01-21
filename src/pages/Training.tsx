@@ -175,37 +175,37 @@ const TrainingCard = ({ plan, index, onBook }: { plan: any; index: number; onBoo
       delay={index * 100}
       threshold={0.2}
     >
-      <div className="relative pt-5 h-full">
+      <div className="relative pt-6 h-full">
         {/* Badge - On top of card, outside */}
-        <div className={`absolute -top-0 left-1/2 -translate-x-1/2 bg-gradient-to-r ${badge.gradient} text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wide shadow-lg z-30 whitespace-nowrap border border-white/20`}>
-          <span className="mr-1">{badge.emoji}</span>
+        <div className={`absolute -top-0 left-1/2 -translate-x-1/2 bg-gradient-to-r ${badge.gradient} text-white px-5 py-2 rounded-full text-sm font-bold tracking-wide shadow-lg z-30 whitespace-nowrap border border-white/20`}>
+          <span className="mr-1.5">{badge.emoji}</span>
           {badge.label}
         </div>
         
-        <Card className={`relative p-4 md:p-5 flex flex-col transition-all duration-300 hover:-translate-y-2 rounded-2xl bg-gradient-to-br from-card to-card/50 h-[480px] ${
+        <Card className={`relative p-6 md:p-7 flex flex-col transition-all duration-300 hover:-translate-y-2 rounded-2xl bg-gradient-to-br from-card to-card/50 min-h-[520px] ${
           plan.popular 
             ? "border-primary border-2 shadow-xl" 
             : "border-border/50 hover:shadow-lg"
         }`}>
-          <div className="pt-2 flex flex-col h-full">
-            <h3 className="text-base md:text-lg font-bold mb-1.5 text-center leading-tight">{plan.name}</h3>
-            <div className="text-center mb-1" ref={ref}>
-              <span className="text-2xl md:text-3xl font-bold text-primary">${Math.round(count)}{plan.pricePrefix || ''}</span>
-              <span className="text-muted-foreground text-xs ml-1">/session</span>
+          <div className="pt-3 flex flex-col h-full">
+            <h3 className="text-xl md:text-2xl font-bold mb-2 text-center leading-tight">{plan.name}</h3>
+            <div className="text-center mb-2" ref={ref}>
+              <span className="text-4xl md:text-5xl font-bold text-primary">${Math.round(count)}{plan.pricePrefix || ''}</span>
+              <span className="text-muted-foreground text-base ml-2">/session</span>
             </div>
-            <p className="text-center text-xs text-muted-foreground">{plan.duration}</p>
-            <p className="text-center text-xs text-accent font-semibold mb-2">{plan.size}</p>
+            <p className="text-center text-base text-muted-foreground">{plan.duration}</p>
+            <p className="text-center text-base text-accent font-semibold mb-3">{plan.size}</p>
             
             {/* Description */}
-            <p className="text-center text-xs text-muted-foreground mb-3 leading-relaxed line-clamp-2">
+            <p className="text-center text-sm md:text-base text-muted-foreground mb-4 leading-relaxed min-h-[60px]">
               {plan.description}
             </p>
 
-            <div className="space-y-1.5 mb-4 flex-1">
+            <div className="space-y-2.5 mb-6 flex-1">
               {plan.features.slice(0, 4).map((feature: string, idx: number) => (
-                <div key={idx} className="flex items-start gap-1.5">
-                  <CheckCircle className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
-                  <span className="text-foreground text-xs leading-snug">{feature}</span>
+                <div key={idx} className="flex items-start gap-2">
+                  <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-foreground text-base leading-snug">{feature}</span>
                 </div>
               ))}
             </div>
@@ -213,8 +213,8 @@ const TrainingCard = ({ plan, index, onBook }: { plan: any; index: number; onBoo
             <Button 
               onClick={() => onBook(plan)}
               variant={plan.popular ? "default" : "outline"} 
-              size="sm" 
-              className={`w-full mt-auto text-sm py-4 ${plan.popular ? 'bg-primary hover:bg-primary/90 text-primary-foreground' : ''}`}
+              size="lg" 
+              className={`w-full mt-auto text-base py-5 ${plan.popular ? 'bg-primary hover:bg-primary/90 text-primary-foreground' : ''}`}
             >
               Book Now →
             </Button>
@@ -657,7 +657,7 @@ function LearnAndTrain() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-[1100px] mx-auto mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 max-w-[1200px] mx-auto mb-12">
             {[
               {
                 name: "Group Class",
