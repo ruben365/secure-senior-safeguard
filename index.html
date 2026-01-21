@@ -4,13 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B1MKM2FPV7"></script>
+    <!-- Google Analytics - deferred to reduce unused JS impact -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-B1MKM2FPV7');
+      gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied'});
+      
+      // Defer GA loading until after critical content
+      function loadGA() {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-B1MKM2FPV7';
+        document.head.appendChild(s);
+        gtag('js', new Date());
+        gtag('config', 'G-B1MKM2FPV7', {send_page_view: false});
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadGA, {timeout: 4000});
+      } else {
+        setTimeout(loadGA, 2000);
+      }
     </script>
     
     <!-- Preconnect hints IMMEDIATELY after meta tags - no scripts before -->
