@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Briefcase, HelpCircle, MessageCircle, ArrowRight, Users, Heart, Star, Sparkles, Shield, Lock, Zap } from "lucide-react";
@@ -31,40 +30,22 @@ const careerHighlights = [
 export const QuickLinksSection = () => {
   return (
     <section className="py-16 bg-gradient-to-b from-muted/20 to-background relative overflow-hidden">
-      {/* Decorative Background Elements */}
+      {/* Decorative Background Elements - CSS only */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Shield Icon - Top Left */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 0.08, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="absolute top-10 left-10"
-        >
+        <div className="absolute top-10 left-10 opacity-[0.08]">
           <Shield className="w-32 h-32 text-primary" />
-        </motion.div>
+        </div>
         
         {/* Lock Icon - Top Right */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 0.06, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="absolute top-20 right-16"
-        >
+        <div className="absolute top-20 right-16 opacity-[0.06]">
           <Lock className="w-24 h-24 text-accent" />
-        </motion.div>
+        </div>
         
         {/* Zap Icon - Bottom Left */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 0.07, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="absolute bottom-20 left-20"
-        >
+        <div className="absolute bottom-20 left-20 opacity-[0.07]">
           <Zap className="w-28 h-28 text-primary" />
-        </motion.div>
+        </div>
         
         {/* Decorative Circles */}
         <div className="absolute top-1/4 right-1/4 w-64 h-64 rounded-full bg-gradient-to-br from-primary/5 to-accent/5 blur-3xl" />
@@ -73,35 +54,27 @@ export const QuickLinksSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
+        <div className="text-center mb-12 animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Ready to Get Started?
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Whether you have questions or want to join our team, we're here to help.
           </p>
-        </motion.div>
+        </div>
 
         {/* Quick Links Grid - Same Height Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {/* FAQ & Contact Cards */}
           {quickLinks.map((item, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="h-full"
+              className="h-full animate-fade-in"
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
               <Link to={item.link} className="block group h-full">
-                <div className="bg-white rounded-3xl p-6 border border-border/50 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-2 h-full min-h-[280px] flex flex-col">
-                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
+                <div className="bg-white rounded-3xl p-6 border border-border/50 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12)] transition-all duration-200 hover:-translate-y-2 h-full min-h-[280px] flex flex-col">
+                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200 shadow-lg`}>
                     <item.icon className="w-7 h-7 text-white" />
                   </div>
                   <h3 className="font-bold text-xl text-foreground mb-2 group-hover:text-primary transition-colors">
@@ -110,25 +83,22 @@ export const QuickLinksSection = () => {
                   <p className="text-muted-foreground mb-4 flex-grow">{item.description}</p>
                   <div className="flex items-center text-primary font-semibold mt-auto">
                     {item.cta}
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-2 transition-transform" />
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-2 transition-transform duration-200" />
                   </div>
                 </div>
               </Link>
-            </motion.div>
+            </div>
           ))}
 
           {/* Careers Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="h-full"
+          <div
+            className="h-full animate-fade-in"
+            style={{ animationDelay: '0.2s' }}
           >
             <Link to="/careers" className="block group h-full">
-              <div className="bg-gradient-to-br from-primary/5 to-accent/5 rounded-3xl p-6 border border-primary/20 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-2 h-full min-h-[280px] flex flex-col">
+              <div className="bg-gradient-to-br from-primary/5 to-accent/5 rounded-3xl p-6 border border-primary/20 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12)] transition-all duration-200 hover:-translate-y-2 h-full min-h-[280px] flex flex-col">
                 <div className="flex items-center gap-2 mb-4">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center group-hover:scale-110 transition-transform duration-200 shadow-lg">
                     <Briefcase className="w-7 h-7 text-white" />
                   </div>
                   <div className="flex items-center gap-1 px-3 py-1 bg-primary/10 rounded-full">
@@ -155,25 +125,22 @@ export const QuickLinksSection = () => {
 
                 <div className="flex items-center text-primary font-semibold mt-auto">
                   View Open Positions
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-2 transition-transform" />
+                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-2 transition-transform duration-200" />
                 </div>
               </div>
             </Link>
-          </motion.div>
+          </div>
         </div>
 
         {/* Bottom Trust Signal */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="text-center mt-10"
+        <div
+          className="text-center mt-10 animate-fade-in"
+          style={{ animationDelay: '0.4s' }}
         >
           <p className="text-muted-foreground">
             <span className="font-medium">Ohio-Based</span> • <span className="font-medium">Veteran-Supporting</span> • <span className="font-medium">Trusted by 500+ Families</span>
           </p>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -1,5 +1,5 @@
 // Professional Hero Images Configuration
-// Clean, modern professional images for each page
+// Clean, modern professional images for each page - InVision Network branded
 
 import heroProBusiness from "@/assets/hero-pro-business.jpg";
 import heroProTraining from "@/assets/hero-pro-training.jpg";
@@ -14,28 +14,28 @@ export interface HeroImage {
   alt: string;
 }
 
-// Professional hero images for each page
+// Professional hero images for each page - InVision Network branded
 export const PROFESSIONAL_HERO_IMAGES: Record<string, HeroImage[]> = {
   business: [
-    { src: heroProBusiness, alt: "Professional business team collaborating in modern office" },
+    { src: heroProBusiness, alt: "InVision Network professional business team collaborating on AI automation solutions" },
   ],
   training: [
-    { src: heroProTraining, alt: "Professional cybersecurity training workshop with diverse professionals learning digital protection" },
+    { src: heroProTraining, alt: "InVision Network cybersecurity training workshop with diverse professionals learning digital protection" },
   ],
   resources: [
-    { src: heroProResources, alt: "Modern library with digital resources and learning materials" },
+    { src: heroProResources, alt: "InVision Network digital library with security resources and learning materials" },
   ],
   about: [
-    { src: heroProAbout, alt: "Professional diverse team in modern corporate environment" },
+    { src: heroProAbout, alt: "InVision Network diverse team dedicated to protecting Ohio families and businesses" },
   ],
   careers: [
-    { src: heroProCareers, alt: "Creative modern workspace with collaborative team" },
+    { src: heroProCareers, alt: "InVision Network creative workspace where mission-driven professionals make a difference" },
   ],
   faq: [
-    { src: heroProFaq, alt: "Friendly customer support representative ready to help" },
+    { src: heroProFaq, alt: "InVision Network friendly customer support team ready to answer your questions" },
   ],
   contact: [
-    { src: heroProContact, alt: "Welcoming reception area with friendly staff" },
+    { src: heroProContact, alt: "InVision Network welcoming Ohio-based team ready to help protect your family" },
   ],
 };
 
