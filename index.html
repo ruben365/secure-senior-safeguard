@@ -36,6 +36,13 @@
     <!-- Preload LCP image (Laura avatar) - stable public URL for discovery -->
     <link rel="preload" href="/laura-avatar.png" as="image" fetchpriority="high">
     
+    <!-- Preload critical hero images for instant page rendering -->
+    <link rel="preload" href="/src/assets/hero-video-poster.jpg" as="image" fetchpriority="high">
+    <link rel="preload" href="/src/assets/hero-nature-business.jpg" as="image">
+    <link rel="preload" href="/src/assets/hero-nature-training.jpg" as="image">
+    <link rel="preload" href="/src/assets/hero-branded-resources.jpg" as="image">
+    <link rel="preload" href="/src/assets/hero-branded-about.jpg" as="image">
+    
     <!-- Critical CSS inlined for FCP/LCP -->
     <style>
       /* System font stack for instant text paint, then swap to Outfit */

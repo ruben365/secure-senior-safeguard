@@ -81,9 +81,13 @@ const Hero = ({
         {!useVideo && useCarousel ? (
           <HeroCarousel images={backgroundImages} />
         ) : !useVideo && backgroundImage && (
-          <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${backgroundImage})` }}
+          <img
+            src={backgroundImage}
+            alt="Hero background"
+            fetchPriority="high"
+            loading="eager"
+            decoding="sync"
+            className="absolute inset-0 w-full h-full object-cover"
           />
         )}
         

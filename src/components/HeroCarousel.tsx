@@ -39,14 +39,17 @@ export const HeroCarousel = ({
   if (images.length === 0) return null;
 
   // For single image, render immediately without any state tracking
+  // Single image: use native <img> for instant browser discovery
   if (images.length === 1) {
     return (
       <div className="absolute inset-0 overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${images[0].src})` }}
-          role="img"
-          aria-label={images[0].alt}
+        <img
+          src={images[0].src}
+          alt={images[0].alt}
+          fetchPriority="high"
+          loading="eager"
+          decoding="sync"
+          className="absolute inset-0 w-full h-full object-cover"
         />
       </div>
     );
