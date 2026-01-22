@@ -70,9 +70,6 @@
     <link rel="dns-prefetch" href="https://js.stripe.com">
     <link rel="dns-prefetch" href="https://m.stripe.network">
     
-    <!-- Preload main entry to reduce critical chain -->
-    <link rel="modulepreload" href="/src/main.tsx">
-    
     <!-- Google Analytics - deferred to reduce main-thread impact -->
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -229,27 +226,16 @@
       </div></div></div></div>
     </div>
     
-    <!-- EMERGENCY: Clear all stale service workers and caches FIRST -->
+    <!-- One-time cache cleanup for users with stale data -->
     <script>
-      (function() {
-        // Immediately unregister all service workers and clear caches
-        if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.getRegistrations().then(function(registrations) {
-            for (var i = 0; i < registrations.length; i++) {
-              registrations[i].unregister();
-              console.log('[Cache Clear] SW unregistered:', registrations[i].scope);
-            }
-          });
-        }
+      if (!sessionStorage.getItem('cache-cleaned-v10')) {
         if ('caches' in window) {
           caches.keys().then(function(names) {
-            for (var i = 0; i < names.length; i++) {
-              caches.delete(names[i]);
-              console.log('[Cache Clear] Cache deleted:', names[i]);
-            }
+            names.forEach(function(name) { caches.delete(name); });
           });
         }
-      })();
+        sessionStorage.setItem('cache-cleaned-v10', 'true');
+      }
     </script>
     
     <!-- Service Worker Registration - deferred to reduce main-thread blocking -->

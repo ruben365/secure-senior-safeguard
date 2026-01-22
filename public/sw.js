@@ -1,77 +1,54 @@
-// Version 9 - Force complete reset to fix stale cache issues
-const CACHE_NAME = 'invision-network-v9';
-const IMAGE_CACHE = 'invision-images-v7';
+// Version 10 - Fix production path issue
+const CACHE_NAME = 'invision-network-v10';
+const IMAGE_CACHE = 'invision-images-v8';
 
-// On install, clear ALL caches immediately to force fresh content
+// On install, clear all old caches
 self.addEventListener('install', (event) => {
-  console.log('[SW] Installing v9 - clearing all caches');
+  console.log('[SW] Installing v10');
   event.waitUntil(
     caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((name) => {
-          console.log('[SW] Deleting cache:', name);
-          return caches.delete(name);
-        })
-      );
+      return Promise.all(cacheNames.map((name) => caches.delete(name)));
     })
   );
   self.skipWaiting();
 });
 
-// On activate, take control immediately and clear caches again
+// On activate, take control immediately
 self.addEventListener('activate', (event) => {
-  console.log('[SW] Activating v9 - taking control');
+  console.log('[SW] Activating v10');
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
-        cacheNames.map((name) => {
-          console.log('[SW] Clearing cache on activate:', name);
-          return caches.delete(name);
-        })
+        cacheNames
+          .filter(name => name !== CACHE_NAME && name !== IMAGE_CACHE)
+          .map(name => caches.delete(name))
       );
     }).then(() => self.clients.claim())
   );
 });
 
-// TEMPORARILY bypass all caching for navigation/document requests to force fresh content
+// Fetch handler - network-first for HTML, cache fallback for assets
 self.addEventListener('fetch', (event) => {
-  // Skip non-GET requests
   if (event.request.method !== 'GET') return;
   
-  // Skip caching entirely for navigation requests - always get fresh HTML
-  if (event.request.mode === 'navigate') {
-    console.log('[SW] Navigation request - bypassing cache:', event.request.url);
-    return; // Let the browser fetch fresh from network
+  // Always get fresh HTML - never cache navigation
+  if (event.request.mode === 'navigate' || event.request.destination === 'document') {
+    return; // Let browser fetch from network
   }
   
-  // Skip caching for HTML documents
-  if (event.request.destination === 'document') {
-    console.log('[SW] Document request - bypassing cache:', event.request.url);
-    return; // Let the browser fetch fresh from network
-  }
-  
-  // Skip Vite dev server and HMR in development
+  // Skip dev server paths entirely
   const url = new URL(event.request.url);
-  if (url.pathname.includes('/@vite') || 
+  if (url.pathname.startsWith('/src/') || 
+      url.pathname.includes('/@vite') ||
       url.pathname.includes('__vite') ||
-      url.pathname.includes('.hot-update') ||
-      url.pathname.startsWith('/@') ||
-      url.pathname.startsWith('/src/') ||
       url.searchParams.has('t')) {
     return;
   }
   
-  // For other resources, use network-first strategy during this fix period
-  // This ensures fresh assets are always fetched
+  // Network-first with cache fallback for other assets
   event.respondWith(
     fetch(event.request)
-      .then((response) => {
-        // Don't cache anything during this reset period
-        return response;
-      })
-      .catch(() => {
-        // If network fails, try cache as last resort
-        return caches.match(event.request);
-      })
+      .then(response => response)
+      .catch(() => caches.match(event.request))
   );
 });
