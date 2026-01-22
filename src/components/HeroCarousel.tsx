@@ -54,18 +54,20 @@ export const HeroCarousel = ({
 
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* Stack all images, show active one with z-index */}
+      {/* Stack all images - first image instant, others transition */}
       {images.map((image, index) => (
-        <div
+        <img
           key={image.src}
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700"
+          src={image.src}
+          alt={image.alt}
+          fetchPriority={index === 0 ? "high" : "low"}
+          loading={index === 0 ? "eager" : "lazy"}
+          decoding={index === 0 ? "sync" : "async"}
+          className={`absolute inset-0 w-full h-full object-cover ${index === 0 ? '' : 'transition-opacity duration-700'}`}
           style={{ 
-            backgroundImage: `url(${image.src})`,
             opacity: index === currentIndex ? 1 : 0,
             zIndex: index === currentIndex ? 1 : 0
           }}
-          role="img"
-          aria-label={image.alt}
         />
       ))}
       <div className="sr-only" aria-live="polite" aria-atomic="true">
