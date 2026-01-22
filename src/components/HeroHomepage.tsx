@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Shield, ArrowRight, Lock, Eye, Fingerprint, ShieldCheck, Zap, Globe } from "lucide-react";
 import { useRef } from "react";
 import heroVideo from "@/assets/hero-video.mp4";
+import heroVideoPoster from "@/assets/hero-video-poster.jpg";
 
 const securityFeatures = [{
   icon: Lock,
@@ -36,8 +37,18 @@ export const HeroHomepage = () => {
         />
       </div>
 
-      {/* Video Background with eager loading */}
+      {/* Video Background with poster for instant display */}
       <div className="absolute inset-0" style={{ backgroundColor: '#F3F0FF' }}>
+        {/* Poster image shows instantly while video loads */}
+        <img
+          src={heroVideoPoster}
+          alt="Hero background"
+          fetchPriority="high"
+          loading="eager"
+          decoding="sync"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        {/* Video loads on top and plays when ready */}
         <video
           ref={videoRef}
           autoPlay
@@ -45,8 +56,8 @@ export const HeroHomepage = () => {
           muted
           playsInline
           preload="auto"
+          poster={heroVideoPoster}
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ backgroundColor: '#F3F0FF' }}
         >
           <source src={heroVideo} type="video/mp4" />
         </video>
