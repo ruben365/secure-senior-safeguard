@@ -361,6 +361,15 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   }
 }
 
+/* Hero GPU acceleration for instant rendering */
+.hero-mobile,
+.hero-instant {
+  will-change: auto;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  contain: layout style paint;
+}
+
 /* ===== Premium Button Ripple Effect ===== */
 .ripple {
   position: absolute;

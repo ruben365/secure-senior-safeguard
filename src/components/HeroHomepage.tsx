@@ -64,12 +64,12 @@ export const HeroHomepage = () => {
       </div>
       
       <div 
-        className="w-full max-w-[1800px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 relative z-10"
+        className="w-full max-w-[1800px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 relative z-10 hero-instant"
       >
         <div className="flex flex-col lg:grid lg:grid-cols-5 gap-8 lg:gap-20 xl:gap-28 items-center min-h-[100vh] py-16 sm:py-20 lg:py-0">
           
-          {/* Left Content - No framer-motion, using CSS animations */}
-          <div className="lg:col-span-3 order-2 lg:order-1 w-full animate-fade-in">
+          {/* Left Content - Instant render, no animation delay */}
+          <div className="lg:col-span-3 order-2 lg:order-1 w-full">
             {/* Premium Badge */}
             <div className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 mb-6 sm:mb-10 shadow-sm">
               <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-gradient-to-r from-primary to-accent shadow-sm" />
