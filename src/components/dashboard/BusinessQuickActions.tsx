@@ -5,7 +5,9 @@ import {
   FileText,
   Phone,
   Headphones,
-  Rocket
+  Rocket,
+  GraduationCap,
+  Calendar
 } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -32,18 +34,18 @@ export function BusinessQuickActions() {
       action: () => navigate("/business/ai-automation")
     },
     {
-      icon: BarChart3,
-      label: "View Analytics",
-      description: "Performance reports",
+      icon: GraduationCap,
+      label: "My Courses",
+      description: "Training & learning",
       color: "from-blue-500 to-cyan-600",
-      action: () => {}
+      action: () => navigate("/portal/my-courses")
     },
     {
-      icon: Phone,
-      label: "Test Receptionist",
-      description: "Make a test call",
+      icon: Calendar,
+      label: "My Bookings",
+      description: "View appointments",
       color: "from-green-500 to-emerald-600",
-      action: () => {}
+      action: () => navigate("/portal/my-bookings")
     },
     {
       icon: FileText,
