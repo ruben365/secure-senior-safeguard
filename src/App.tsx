@@ -48,6 +48,8 @@ const Articles = lazy(() => import("./pages/Articles"));
 const ArticleDetail = lazy(() => import("./pages/ArticleDetail"));
 const MyCourses = lazy(() => import("./pages/portal/MyCourses"));
 const MyBookings = lazy(() => import("./pages/portal/MyBookings"));
+const CourseDetail = lazy(() => import("./pages/portal/CourseDetail"));
+const ScamCheckResult = lazy(() => import("./pages/portal/ScamCheckResult"));
 const Services = lazy(() => import("./pages/Services"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Careers = lazy(() => import("./pages/Careers"));
@@ -171,6 +173,8 @@ function PublicRoutes() {
         <Route path="/portal/healthcare" element={<PageTransition><ProtectedRoute><HealthcareDashboard /></ProtectedRoute></PageTransition>} />
         <Route path="/portal/my-courses" element={<PageTransition><ProtectedRoute><MyCourses /></ProtectedRoute></PageTransition>} />
         <Route path="/portal/my-bookings" element={<PageTransition><ProtectedRoute><MyBookings /></ProtectedRoute></PageTransition>} />
+        <Route path="/portal/courses/:id" element={<PageTransition><ProtectedRoute><CourseDetail /></ProtectedRoute></PageTransition>} />
+        <Route path="/portal/scam-check/:id" element={<PageTransition><ProtectedRoute><ScamCheckResult /></ProtectedRoute></PageTransition>} />
         
         {/* Legal Pages */}
         <Route path="/privacy-policy" element={<PageTransition variant="fade"><PrivacyPolicy /></PageTransition>} />

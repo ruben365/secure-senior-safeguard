@@ -88,7 +88,7 @@ function BusinessDashboard() {
       />
 
       <main className="container mx-auto px-4 py-6 space-y-6">
-        {/* Hero Automation Status */}
+        {/* Hero Automation Status - No fake data, shows setup state */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -96,20 +96,20 @@ function BusinessDashboard() {
         >
           <AutomationStatusHero 
             planName="AI Automation Suite"
-            status="active"
-            automationScore={87}
-            tasksAutomated={1247}
-            hoursSaved={156}
+            status="none"
+            automationScore={null}
+            tasksAutomated={null}
+            hoursSaved={null}
           />
         </motion.div>
 
-        {/* Metrics Grid */}
+        {/* Metrics Grid - No fake data, shows setup state */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
         >
-          <BusinessMetricsGrid />
+          <BusinessMetricsGrid hasActiveAutomation={false} />
         </motion.div>
 
         {/* Main Grid */}
