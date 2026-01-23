@@ -195,7 +195,7 @@ export default function BusinessClientDetail() {
         </TabsContent>
 
         <TabsContent value="messages" className="mt-6">
-          <ClientMessagesTab clientId={parseInt(client.id) || 0} />
+          <ClientMessagesTab clientId={client.id} />
         </TabsContent>
 
         <TabsContent value="portal" className="mt-6">
@@ -203,7 +203,7 @@ export default function BusinessClientDetail() {
         </TabsContent>
 
         <TabsContent value="notes" className="mt-6">
-          <ClientNotesTab clientId={parseInt(client.id) || 0} />
+          <ClientNotesTab clientId={client.id} />
         </TabsContent>
       </Tabs>
     </div>
