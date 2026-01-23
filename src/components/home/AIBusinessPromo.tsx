@@ -56,170 +56,174 @@ const roiFacts = [
 
 export const AIBusinessPromo = () => {
   return (
-    <section className="py-16 bg-gradient-to-b from-muted/30 via-background to-muted/20 relative overflow-hidden">
-      {/* Background Image with blur overlay */}
-      <div className="absolute inset-0">
-        <img 
-          src={businessTechBg} 
-          alt="" 
-          className="w-full h-full object-cover opacity-15"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
+    <section className="py-20 bg-gradient-to-b from-muted/20 via-background to-muted/10 relative overflow-hidden">
+      {/* Premium gradient orbs */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-20 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px]" />
       </div>
 
-      {/* Decorative elements */}
-      <div className="absolute top-40 left-20 w-[400px] h-[400px] bg-accent/5 rounded-full blur-[100px]" />
-      <div className="absolute bottom-40 right-20 w-[300px] h-[300px] bg-primary/5 rounded-full blur-[80px]" />
+      {/* Subtle grid pattern */}
+      <div className="absolute inset-0 opacity-[0.015]" style={{
+        backgroundImage: 'linear-gradient(hsl(var(--accent)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--accent)) 1px, transparent 1px)',
+        backgroundSize: '60px 60px'
+      }} />
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           {/* Content Side */}
-          <div className="space-y-4 animate-fade-in">
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl border-2 border-primary/30">
-              <Bot className="w-5 h-5 text-primary" />
+          <div className="space-y-5 animate-fade-in">
+            <div className="inline-flex items-center gap-2.5 px-6 py-3 bg-gradient-to-r from-primary/15 to-accent/15 rounded-2xl border-2 border-primary/40 shadow-[0_4px_20px_-6px_hsl(var(--primary)/0.2)]">
+              <Bot className="w-6 h-6 text-primary" />
               <span className="font-bold text-primary text-lg">AI & Business Solutions</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground leading-[0.95]">
               Stop Missing Calls.{" "}
-              <span className="text-foreground/80">Let AI Run Your Front Desk.</span>
+              <span className="text-foreground/70">Let AI Run Your Front Desk.</span>
             </h2>
             
             <p className="text-xl md:text-2xl text-foreground/80 leading-relaxed font-medium">
               Transform your business with AI-powered automation. We build solutions that work 24/7 so you never miss an opportunity.
             </p>
 
-            {/* Combined ROI + Premium Section */}
-            <div className="grid grid-cols-2 gap-3">
+            {/* Combined ROI + Premium Section - Glass cards */}
+            <div className="grid grid-cols-2 gap-4">
               {/* ROI Card */}
-              <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl p-4 text-white relative overflow-hidden hover:scale-[1.02] transition-transform">
-                <div className="absolute -top-4 -right-4 w-20 h-20 border-2 border-white/10 rounded-full animate-spin" style={{ animationDuration: "20s" }} />
+              <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl p-5 text-white relative overflow-hidden hover:scale-[1.02] transition-all duration-300 shadow-[0_15px_40px_-10px_rgba(16,185,129,0.35)]">
+                <div className="absolute -top-6 -right-6 w-24 h-24 border-2 border-white/10 rounded-full animate-spin" style={{ animationDuration: "20s" }} />
                 <div className="relative z-10">
-                  <div className="flex items-center gap-2 mb-2">
-                    <TrendingUp className="w-5 h-5" />
-                    <span className="text-sm font-medium opacity-90">Average ROI</span>
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                      <TrendingUp className="w-5 h-5" />
+                    </div>
+                    <span className="text-base font-semibold opacity-90">Average ROI</span>
                   </div>
-                  <div className="text-4xl font-black mb-1">340%</div>
-                  <div className="flex items-center gap-1 text-xs opacity-80">
-                    <Rocket className="w-3 h-3" />
+                  <div className="text-5xl font-black mb-1">340%</div>
+                  <div className="flex items-center gap-1.5 text-sm opacity-80">
+                    <Rocket className="w-4 h-4" />
                     <span>Within 6 months</span>
                   </div>
                 </div>
               </div>
 
               {/* Premium Services Card */}
-              <div className="bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl p-4 text-white">
-                <div className="flex items-center gap-2 mb-2">
-                  <Zap className="w-5 h-5" />
-                  <span className="text-sm font-bold">Premium</span>
+              <div className="bg-gradient-to-br from-violet-500 to-purple-600 rounded-3xl p-5 text-white shadow-[0_15px_40px_-10px_rgba(139,92,246,0.35)]">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <Zap className="w-5 h-5" />
+                  </div>
+                  <span className="text-base font-bold">Premium</span>
                 </div>
-                <div className="space-y-1.5">
+                <div className="space-y-2">
                   {premiumAddons.map((addon, i) => (
                     <div 
                       key={i}
-                      className="flex items-center gap-2 text-xs bg-white/10 rounded-lg px-2 py-1"
+                      className="flex items-center gap-2.5 text-sm bg-white/15 backdrop-blur-sm rounded-xl px-3 py-2"
                     >
-                      <addon.icon className="w-3 h-3" />
-                      <span>{addon.name}</span>
+                      <addon.icon className="w-4 h-4" />
+                      <span className="font-medium">{addon.name}</span>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
 
-            {/* AI Service Insurance */}
-            <div className="bg-gradient-to-r from-amber-500/15 via-amber-400/15 to-yellow-500/15 border-2 border-amber-500/40 rounded-2xl p-4 relative overflow-hidden hover:scale-[1.01] transition-transform">
-              <div className="absolute top-2 right-2">
-                <Star className="w-5 h-5 text-amber-500" />
+            {/* AI Service Insurance - Premium glass */}
+            <div className="bg-gradient-to-r from-amber-500/10 via-amber-400/10 to-yellow-500/10 border-2 border-amber-500/40 rounded-3xl p-5 relative overflow-hidden hover:scale-[1.01] transition-all duration-300 shadow-[0_8px_30px_-10px_rgba(245,158,11,0.15)] backdrop-blur-md">
+              <div className="absolute top-3 right-3">
+                <Star className="w-6 h-6 text-amber-500" />
               </div>
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-yellow-500 flex items-center justify-center flex-shrink-0 shadow-lg shadow-amber-500/30">
-                  <Shield className="w-5 h-5 text-white" />
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-yellow-500 flex items-center justify-center flex-shrink-0 shadow-lg shadow-amber-500/30">
+                  <Shield className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <div className="flex items-center gap-2 mb-1 flex-wrap">
-                    <h3 className="font-bold text-foreground">AI Service Insurance</h3>
-                    <span className="px-2 py-0.5 bg-amber-500 text-amber-950 text-[10px] font-bold rounded-full">INDUSTRY FIRST</span>
+                  <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                    <h3 className="font-bold text-foreground text-lg">AI Service Insurance</h3>
+                    <span className="px-3 py-1 bg-amber-500 text-amber-950 text-xs font-bold rounded-full">INDUSTRY FIRST</span>
                   </div>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-sm text-muted-foreground">
                     First-ever AI insurance—protecting your investment with ongoing support & updates.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* ROI Facts */}
-            <div className="flex gap-2">
+            {/* ROI Facts - Glass cards */}
+            <div className="flex gap-3">
               {roiFacts.map((fact, index) => (
                 <div 
                   key={index}
-                  className="flex-1 bg-white rounded-xl p-3 border border-border/50 shadow-sm text-center hover:-translate-y-1 transition-transform"
+                  className="flex-1 bg-card/70 backdrop-blur-md rounded-2xl p-4 border border-border/30 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)] text-center hover:-translate-y-2 hover:shadow-[0_15px_40px_-10px_rgba(0,0,0,0.12)] transition-all duration-300"
                 >
-                  <div className="w-8 h-8 mx-auto mb-1 rounded-full bg-muted flex items-center justify-center">
-                    <fact.icon className={`w-4 h-4 ${fact.color}`} />
+                  <div className="w-10 h-10 mx-auto mb-2 rounded-xl bg-muted/80 flex items-center justify-center">
+                    <fact.icon className={`w-5 h-5 ${fact.color}`} />
                   </div>
-                  <div className={`text-lg font-black ${fact.color}`}>{fact.stat}</div>
-                  <div className="text-[10px] text-muted-foreground">{fact.desc}</div>
+                  <div className={`text-xl font-black ${fact.color}`}>{fact.stat}</div>
+                  <div className="text-sm text-muted-foreground">{fact.desc}</div>
                 </div>
               ))}
             </div>
 
-            {/* Services Grid */}
-            <div className="grid grid-cols-2 gap-2">
+            {/* Services Grid - Glass cards */}
+            <div className="grid grid-cols-2 gap-3">
               {services.map((service, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-xl p-3 border border-border/50 shadow-sm group cursor-pointer hover:scale-[1.03] hover:-translate-y-1 transition-transform"
+                  className="bg-card/70 backdrop-blur-md rounded-2xl p-4 border border-border/30 shadow-[0_8px_30px_-10px_rgba(0,0,0,0.08)] group cursor-pointer hover:scale-[1.03] hover:-translate-y-2 hover:shadow-[0_15px_40px_-10px_rgba(0,0,0,0.12)] transition-all duration-300"
                 >
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${service.color} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform`}>
-                      <service.icon className="w-4 h-4 text-white" />
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-lg`}>
+                      <service.icon className="w-5 h-5 text-white" />
                     </div>
                   </div>
-                  <h3 className="font-bold text-foreground text-sm">{service.title}</h3>
-                  <p className="text-[10px] text-muted-foreground mb-1">{service.description}</p>
+                  <h3 className="font-bold text-foreground text-base">{service.title}</h3>
+                  <p className="text-sm text-muted-foreground mb-2">{service.description}</p>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">{service.price}</span>
-                    <span className="text-[8px] text-emerald-700 font-semibold bg-emerald-50 px-1.5 py-0.5 rounded">{service.highlight}</span>
+                    <span className="text-lg font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">{service.price}</span>
+                    <span className="text-xs text-emerald-700 font-semibold bg-emerald-50 px-2 py-1 rounded-lg">{service.highlight}</span>
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* CTAs - Larger buttons */}
-            <div className="flex flex-wrap gap-4">
-              <Button asChild size="lg" className="h-14 px-8 text-lg font-bold rounded-2xl shadow-xl shadow-primary/30 group">
+            {/* CTAs - Premium buttons */}
+            <div className="flex flex-wrap gap-4 pt-2">
+              <Button asChild size="lg" className="h-16 px-10 text-lg font-bold rounded-2xl shadow-[0_8px_40px_-8px_hsl(var(--primary)/0.4)] hover:shadow-[0_12px_50px_-8px_hsl(var(--primary)/0.5)] hover:-translate-y-1 transition-all duration-300 group">
                 <Link to="/business">
-                  <Rocket className="mr-2 w-5 h-5 group-hover:animate-bounce" />
+                  <Rocket className="mr-2 w-6 h-6 group-hover:scale-110 transition-transform" />
                   Explore Solutions
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-2 transition-transform" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="h-14 px-8 text-lg font-bold rounded-2xl border-2 group">
+              <Button asChild variant="outline" size="lg" className="h-16 px-10 text-lg font-bold rounded-2xl border-2 border-primary/40 hover:bg-primary/10 hover:border-primary shadow-[0_4px_20px_-6px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_30px_-8px_rgba(0,0,0,0.12)] hover:-translate-y-1 transition-all duration-300 group">
                 <Link to="/contact?service=ai-automation">
-                  <DollarSign className="mr-2 w-5 h-5" />
+                  <DollarSign className="mr-2 w-6 h-6" />
                   Get Quote
                 </Link>
               </Button>
             </div>
           </div>
 
-          {/* Image Side with Decorative Elements */}
-          <div className="relative space-y-4 animate-fade-in" style={{ animationDelay: "100ms" }}>
-            {/* Inspirational Quote */}
-            <div className="bg-gradient-to-r from-accent/10 to-primary/10 rounded-2xl p-4 border border-accent/20">
-              <div className="flex items-start gap-3">
-                <Lightbulb className="w-8 h-8 text-accent/60 flex-shrink-0" />
+          {/* Image Side with Premium Elements */}
+          <div className="relative space-y-5 animate-fade-in" style={{ animationDelay: "100ms" }}>
+            {/* Inspirational Quote - Glass card */}
+            <div className="bg-card/60 backdrop-blur-xl rounded-3xl p-5 border border-border/30 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.08)]">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center flex-shrink-0">
+                  <Lightbulb className="w-6 h-6 text-accent/80" />
+                </div>
                 <div>
-                  <p className="text-sm italic text-foreground leading-relaxed">
+                  <p className="text-base italic text-foreground/90 leading-relaxed font-medium">
                     "Every missed call is a missed opportunity. Let AI handle the front desk while you focus on growth."
                   </p>
-                  <p className="text-xs text-muted-foreground mt-1 font-medium">— Business Automation Insight</p>
+                  <p className="text-sm text-muted-foreground mt-2 font-semibold">— Business Automation Insight</p>
                 </div>
               </div>
             </div>
 
-            <div className="relative rounded-3xl overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)]">
+            <div className="relative rounded-3xl overflow-hidden shadow-[0_25px_80px_-20px_rgba(0,0,0,0.15)] ring-1 ring-border/20">
               <img 
                 src={businessProfessionalsOffice} 
                 alt="Business professionals collaborating" 
@@ -230,40 +234,40 @@ export const AIBusinessPromo = () => {
                 decoding="async"
                 className="w-full h-auto object-cover aspect-[16/10]"
               />
-              {/* Overlay gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+              {/* Premium overlay gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-foreground/5" />
 
-              {/* Floating stats */}
-              <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm rounded-xl px-3 py-2 shadow-lg">
-                <div className="flex items-center gap-2">
-                  <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />
-                  <span className="text-xs font-bold text-foreground">AI Active 24/7</span>
+              {/* Floating status badge with glass effect */}
+              <div className="absolute top-4 right-4 bg-card/90 backdrop-blur-md rounded-2xl px-4 py-2.5 shadow-lg border border-border/30">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-3 h-3 bg-success rounded-full animate-pulse shadow-lg shadow-success/50" />
+                  <span className="text-sm font-bold text-foreground">AI Active 24/7</span>
                 </div>
               </div>
             </div>
 
-            {/* Feature Highlights Bar */}
-            <div className="grid grid-cols-3 gap-2">
-              <div className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl p-3 text-white text-center hover:scale-[1.03] transition-transform">
-                <div className="w-8 h-8 mx-auto mb-1 rounded-full bg-white/20 flex items-center justify-center">
-                  <Clock className="w-4 h-4" />
+            {/* Feature Highlights Bar - Premium gradient cards */}
+            <div className="grid grid-cols-3 gap-3">
+              <div className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl p-4 text-white text-center hover:scale-[1.03] hover:-translate-y-1 transition-all duration-300 shadow-lg">
+                <div className="w-10 h-10 mx-auto mb-2 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                  <Clock className="w-5 h-5" />
                 </div>
-                <div className="text-xs font-bold">24/7</div>
-                <div className="text-[9px] opacity-80">Always On</div>
+                <div className="text-base font-bold">24/7</div>
+                <div className="text-xs opacity-80">Always On</div>
               </div>
-              <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl p-3 text-white text-center hover:scale-[1.03] transition-transform">
-                <div className="w-8 h-8 mx-auto mb-1 rounded-full bg-white/20 flex items-center justify-center">
-                  <Shield className="w-4 h-4" />
+              <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl p-4 text-white text-center hover:scale-[1.03] hover:-translate-y-1 transition-all duration-300 shadow-lg">
+                <div className="w-10 h-10 mx-auto mb-2 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                  <Shield className="w-5 h-5" />
                 </div>
-                <div className="text-xs font-bold">HIPAA</div>
-                <div className="text-[9px] opacity-80">Compliant</div>
+                <div className="text-base font-bold">HIPAA</div>
+                <div className="text-xs opacity-80">Compliant</div>
               </div>
-              <div className="bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl p-3 text-white text-center hover:scale-[1.03] transition-transform">
-                <div className="w-8 h-8 mx-auto mb-1 rounded-full bg-white/20 flex items-center justify-center">
-                  <Award className="w-4 h-4" />
+              <div className="bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl p-4 text-white text-center hover:scale-[1.03] hover:-translate-y-1 transition-all duration-300 shadow-lg">
+                <div className="w-10 h-10 mx-auto mb-2 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                  <Award className="w-5 h-5" />
                 </div>
-                <div className="text-xs font-bold">Veteran</div>
-                <div className="text-[9px] opacity-80">10% Off</div>
+                <div className="text-base font-bold">Veteran</div>
+                <div className="text-xs opacity-80">10% Off</div>
               </div>
             </div>
 
@@ -300,15 +304,15 @@ export const AIBusinessPromo = () => {
               </div>
             </div>
 
-            {/* Trust Badges */}
-            <div className="flex flex-wrap gap-2 justify-center">
-              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-full border border-border/50 shadow-sm">
-                <Shield className="w-3.5 h-3.5 text-primary" />
-                <span className="text-xs font-medium">Enterprise Ready</span>
+            {/* Trust Badges - Premium glass pills */}
+            <div className="flex flex-wrap gap-3 justify-center">
+              <div className="flex items-center gap-2 px-4 py-2.5 bg-card/80 backdrop-blur-md rounded-full border border-primary/20 shadow-[0_4px_20px_-6px_rgba(0,0,0,0.08)] hover:scale-105 transition-transform">
+                <Shield className="w-4 h-4 text-primary" />
+                <span className="text-sm font-semibold">Enterprise Ready</span>
               </div>
-              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-full border border-border/50 shadow-sm">
-                <Star className="w-3.5 h-3.5 text-amber-500" />
-                <span className="text-xs font-medium">Ohio Business Certified</span>
+              <div className="flex items-center gap-2 px-4 py-2.5 bg-card/80 backdrop-blur-md rounded-full border border-amber-500/30 shadow-[0_4px_20px_-6px_rgba(0,0,0,0.08)] hover:scale-105 transition-transform">
+                <Star className="w-4 h-4 text-amber-500" />
+                <span className="text-sm font-semibold">Ohio Business Certified</span>
               </div>
             </div>
           </div>
