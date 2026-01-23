@@ -4,6 +4,12 @@ import App from "./App.tsx";
 import "./index.css";
 import { initPerformanceOptimizations } from "./utils/performanceOptimization";
 
+// Clean up refresh parameter from URL after cache-bust reload
+if (typeof window !== 'undefined' && window.location.search.includes('refresh=')) {
+  const cleanUrl = window.location.pathname;
+  window.history.replaceState({}, '', cleanUrl);
+}
+
 // Initialize performance optimizations
 if (typeof window !== 'undefined') {
   initPerformanceOptimizations();

@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { PrefetchLink } from "@/components/PrefetchLink";
 import { ShoppingCart } from "@/components/ShoppingCart";
 import { useAuth } from "@/contexts/AuthContext";
+import { clearAllCachesAndReload } from "@/utils/cacheUtils";
+import { toast } from "sonner";
 import invisionLogo from "@/assets/shield-logo.png";
 
 const Navigation = () => {
@@ -42,6 +44,16 @@ const Navigation = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleBrandClick = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    toast.info("Refreshing for optimal performance...", { duration: 1500 });
+    
+    // Small delay to show toast before reload
+    setTimeout(async () => {
+      await clearAllCachesAndReload();
+    }, 300);
+  };
+
   // Check if current path matches nav link
   const isActiveLink = (href: string) => {
     return location.pathname === href || location.pathname.startsWith(href + '/');
@@ -63,7 +75,7 @@ const Navigation = () => {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16 md:h-20 lg:h-24">
             {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 md:gap-3 lg:gap-4 hover:scale-105 transition-transform duration-300 group flex-shrink-0 no-underline max-w-[70%] sm:max-w-none" onClick={scrollToTop}>
+          <a href="/" className="flex items-center gap-2 md:gap-3 lg:gap-4 hover:scale-105 transition-transform duration-300 group flex-shrink-0 no-underline max-w-[70%] sm:max-w-none cursor-pointer" onClick={handleBrandClick}>
             <img 
               src={invisionLogo} 
               alt="InVision Network Shield Logo" 
@@ -78,7 +90,7 @@ const Navigation = () => {
               <span className="text-sm sm:text-base md:text-lg lg:text-2xl font-bold gradient-text-primary group-hover:scale-105 transition-transform duration-300 truncate">InVision Network</span>
               <span className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-muted-foreground hidden sm:block truncate">AI Scam Protection & Business Solutions</span>
             </div>
-          </Link>
+          </a>
 
           <div className="hidden lg:flex items-center gap-2 flex-1 justify-center max-w-3xl mx-auto">
             {navLinks.map((link) => {
