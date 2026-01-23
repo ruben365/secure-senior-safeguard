@@ -94,6 +94,18 @@ export const PORTAL_ROUTES: NavRoute[] = [
     path: '/portal/developer',
     name: 'Developer Dashboard',
     protected: true
+  },
+  {
+    path: '/portal/my-courses',
+    name: 'My Courses',
+    description: 'View your enrolled courses and training progress',
+    protected: true
+  },
+  {
+    path: '/portal/my-bookings',
+    name: 'My Bookings',
+    description: 'View and manage your service bookings',
+    protected: true
   }
 ];
 

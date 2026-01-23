@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { BookingModal } from "@/components/BookingModal";
 import { useToast } from "@/hooks/use-toast";
 import { useSubscription } from "@/contexts/SubscriptionContext";
+import { useDashboardMetrics } from "@/hooks/useDashboardMetrics";
 
 // Dashboard Components
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
@@ -22,6 +23,7 @@ function SeniorDashboard() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { subscriptions } = useSubscription();
+  const { data: metrics } = useDashboardMetrics();
 
   useEffect(() => {
     loadProfile();
@@ -124,7 +126,9 @@ function SeniorDashboard() {
           <ProtectionStatusHero 
             planName={planName}
             status={protectionStatus}
-            protectionScore={94}
+            protectionScore={metrics?.protectionScore || 0}
+            threatsBlocked={metrics?.threatsBlocked || 0}
+            daysProtected={metrics?.daysProtected || 0}
           />
         </div>
 
@@ -132,12 +136,12 @@ function SeniorDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Left Column - Threat Activity */}
           <div className="lg:col-span-2">
-            <ThreatActivityTimeline />
+            <ThreatActivityTimeline userId={profile?.id} />
           </div>
 
           {/* Right Column - Training Progress */}
           <div>
-            <TrainingProgressCard />
+            <TrainingProgressCard userId={profile?.id} />
           </div>
         </div>
 
