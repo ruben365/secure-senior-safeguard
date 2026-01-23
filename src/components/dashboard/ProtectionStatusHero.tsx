@@ -1,4 +1,4 @@
-import { Shield, CheckCircle, Activity, Zap } from "lucide-react";
+import { Shield, CheckCircle, Activity, Zap, AlertCircle } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { motion } from "framer-motion";
@@ -7,14 +7,26 @@ interface ProtectionStatusHeroProps {
   planName?: string;
   status?: "active" | "inactive" | "pending";
   protectionScore?: number;
+  threatsBlocked?: number;
+  daysProtected?: number;
 }
 
 export function ProtectionStatusHero({ 
   planName = "ScamShield", 
   status = "active",
-  protectionScore = 94 
+  protectionScore = 0,
+  threatsBlocked = 0,
+  daysProtected = 0
 }: ProtectionStatusHeroProps) {
   const isActive = status === "active";
+  const isPending = status === "pending";
+
+  // Calculate a meaningful protection score based on real data
+  const calculatedScore = isActive 
+    ? Math.min(100, 50 + (threatsBlocked > 0 ? 20 : 0) + (daysProtected > 7 ? 20 : daysProtected * 2) + 10)
+    : 0;
+  
+  const displayScore = protectionScore > 0 ? protectionScore : calculatedScore;
 
   return (
     <Card className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-primary/5 to-background border-primary/20">
@@ -35,7 +47,9 @@ export function ProtectionStatusHero({
               className={`w-20 h-20 rounded-full flex items-center justify-center ${
                 isActive 
                   ? "bg-gradient-to-br from-green-500 to-emerald-600" 
-                  : "bg-muted"
+                  : isPending
+                    ? "bg-gradient-to-br from-yellow-500 to-orange-500"
+                    : "bg-muted"
               }`}
               animate={isActive ? { scale: [1, 1.05, 1] } : {}}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
@@ -52,6 +66,16 @@ export function ProtectionStatusHero({
                 <CheckCircle className="w-4 h-4 text-white" />
               </motion.div>
             )}
+            {isPending && (
+              <motion.div
+                className="absolute -top-1 -right-1 w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center border-2 border-background"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                <AlertCircle className="w-4 h-4 text-white" />
+              </motion.div>
+            )}
           </div>
 
           {/* Status Info */}
@@ -61,16 +85,20 @@ export function ProtectionStatusHero({
               <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
                 isActive 
                   ? "bg-green-500/20 text-green-600" 
-                  : "bg-muted text-muted-foreground"
+                  : isPending
+                    ? "bg-yellow-500/20 text-yellow-600"
+                    : "bg-muted text-muted-foreground"
               }`}>
-                {isActive ? "Active Protection" : "Inactive"}
+                {isActive ? "Active Protection" : isPending ? "Setup Required" : "Inactive"}
               </span>
             </div>
             
             <p className="text-muted-foreground">
               {isActive 
                 ? "Your family is protected from AI-powered scams, phishing, and fraud attempts."
-                : "Activate your protection to secure your family."}
+                : isPending
+                  ? "Complete your profile setup to activate full protection."
+                  : "Activate your protection to secure your family."}
             </p>
 
             {/* Protection Score */}
@@ -80,9 +108,9 @@ export function ProtectionStatusHero({
                   <Activity className="w-4 h-4 text-primary" />
                   Protection Score
                 </span>
-                <span className="font-semibold text-primary">{protectionScore}%</span>
+                <span className="font-semibold text-primary">{displayScore}%</span>
               </div>
-              <Progress value={protectionScore} className="h-2" />
+              <Progress value={displayScore} className="h-2" />
             </div>
           </div>
 
@@ -94,7 +122,7 @@ export function ProtectionStatusHero({
               </div>
               <div>
                 <p className="text-xs text-muted-foreground">Threats Blocked</p>
-                <p className="font-bold text-lg">247</p>
+                <p className="font-bold text-lg">{threatsBlocked}</p>
               </div>
             </div>
             <div className="flex items-center gap-2 bg-card/80 rounded-lg p-3">
@@ -103,7 +131,7 @@ export function ProtectionStatusHero({
               </div>
               <div>
                 <p className="text-xs text-muted-foreground">Days Protected</p>
-                <p className="font-bold text-lg">32</p>
+                <p className="font-bold text-lg">{daysProtected}</p>
               </div>
             </div>
           </div>

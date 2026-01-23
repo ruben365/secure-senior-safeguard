@@ -45,6 +45,9 @@ const WebsiteInsurance = lazy(() => import("./pages/business/WebsiteInsurance"))
 const About = lazy(() => import("./pages/About"));
 const Resources = lazy(() => import("./pages/Resources"));
 const Articles = lazy(() => import("./pages/Articles"));
+const ArticleDetail = lazy(() => import("./pages/ArticleDetail"));
+const MyCourses = lazy(() => import("./pages/portal/MyCourses"));
+const MyBookings = lazy(() => import("./pages/portal/MyBookings"));
 const Services = lazy(() => import("./pages/Services"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Careers = lazy(() => import("./pages/Careers"));
@@ -143,6 +146,7 @@ function PublicRoutes() {
         <Route path="/payment-canceled" element={<PageTransition variant="fade"><PaymentCanceled /></PageTransition>} />
         
         <Route path="/articles" element={<PageTransition variant="auto"><Articles /></PageTransition>} />
+        <Route path="/articles/:slug" element={<PageTransition variant="auto"><ArticleDetail /></PageTransition>} />
         <Route path="/contact" element={<PageTransition variant="auto"><Contact /></PageTransition>} />
         <Route path="/careers" element={<PageTransition variant="auto"><Careers /></PageTransition>} />
         <Route path="/auth" element={<PageTransition variant="auto"><Auth /></PageTransition>} />
@@ -165,6 +169,8 @@ function PublicRoutes() {
         <Route path="/portal/business" element={<PageTransition><ProtectedRoute><BusinessDashboard /></ProtectedRoute></PageTransition>} />
         <Route path="/portal/caregiver" element={<PageTransition><ProtectedRoute><CaregiverDashboard /></ProtectedRoute></PageTransition>} />
         <Route path="/portal/healthcare" element={<PageTransition><ProtectedRoute><HealthcareDashboard /></ProtectedRoute></PageTransition>} />
+        <Route path="/portal/my-courses" element={<PageTransition><ProtectedRoute><MyCourses /></ProtectedRoute></PageTransition>} />
+        <Route path="/portal/my-bookings" element={<PageTransition><ProtectedRoute><MyBookings /></ProtectedRoute></PageTransition>} />
         
         {/* Legal Pages */}
         <Route path="/privacy-policy" element={<PageTransition variant="fade"><PrivacyPolicy /></PageTransition>} />
