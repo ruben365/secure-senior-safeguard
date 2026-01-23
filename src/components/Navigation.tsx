@@ -69,9 +69,9 @@ const Navigation = () => {
         />
       )}
 
-      <nav className="sticky top-0 z-[9999] bg-card border-b border-border shadow-lg">
-        {/* Solid background layer for mobile */}
-        <div className="absolute inset-0 bg-card" />
+      <nav className="sticky top-0 z-[9999] bg-card/80 backdrop-blur-xl border-b border-border/50 shadow-[0_4px_30px_-4px_rgba(0,0,0,0.1)]">
+        {/* Glassmorphism background layer */}
+        <div className="absolute inset-0 bg-gradient-to-r from-card/95 via-card/90 to-card/95 backdrop-blur-xl" />
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16 md:h-20 lg:h-24">
             {/* Logo */}
@@ -92,24 +92,20 @@ const Navigation = () => {
             </div>
           </a>
 
-          <div className="hidden lg:flex items-center gap-2 flex-1 justify-center max-w-3xl mx-auto">
+          <div className="hidden lg:flex items-center gap-1 flex-1 justify-center max-w-3xl mx-auto bg-muted/30 rounded-2xl p-1.5 border border-border/30">
             {navLinks.map((link) => {
               const isActive = isActiveLink(link.href);
               return (
                 <PrefetchLink
                   key={link.name}
                   to={link.href}
-                  className={`relative text-sm xl:text-base transition-all duration-300 font-medium px-3 py-2 rounded-lg whitespace-nowrap ${
+                  className={`relative text-sm xl:text-base transition-all duration-300 font-semibold px-4 py-2.5 rounded-xl whitespace-nowrap ${
                     isActive 
-                      ? 'text-primary bg-primary/10 border border-primary/30' 
-                      : 'text-muted-foreground hover:text-primary hover:bg-primary/5'
+                      ? 'text-primary-foreground bg-gradient-to-r from-primary to-accent shadow-lg shadow-primary/25' 
+                      : 'text-muted-foreground hover:text-foreground hover:bg-card/80'
                   }`}
                 >
                   {link.name}
-                  {/* Active indicator bar */}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 bg-primary rounded-full" />
-                  )}
                 </PrefetchLink>
               );
             })}
@@ -143,7 +139,7 @@ const Navigation = () => {
             </a>
             <Button 
               asChild 
-              className="h-[44px] px-6 bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white font-semibold rounded-2xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_30px_-8px_rgba(0,0,0,0.2)] hover:-translate-y-1 transition-all duration-300"
+              className="h-[44px] px-6 bg-gradient-to-r from-primary via-primary to-accent hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-bold rounded-2xl shadow-[0_8px_30px_-6px_hsl(var(--primary)/0.4)] hover:shadow-[0_12px_40px_-8px_hsl(var(--primary)/0.5)] hover:-translate-y-0.5 transition-all duration-300 border border-primary-foreground/10"
             >
               {isAdminOrStaff ? (
                 <Link to="/admin" aria-label="Go to Dashboard" className="flex items-center gap-2">

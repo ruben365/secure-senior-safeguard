@@ -57,14 +57,22 @@ export const HeroHomepage = () => {
   return (
     <section 
       className="relative min-h-[100vh] lg:min-h-[110vh] overflow-hidden"
-      style={{ backgroundColor: '#1a1625' }}
+      style={{ backgroundColor: 'hsl(260 40% 6%)' }}
     >
-      {/* Static gradient background */}
-      <div className="absolute inset-0 overflow-hidden">
+      {/* Premium gradient orbs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div 
-          className="absolute inset-0 opacity-30"
+          className="absolute top-0 left-0 w-[800px] h-[800px] opacity-40"
           style={{
-            background: 'radial-gradient(circle at 0% 0%, hsl(var(--primary) / 0.3) 0%, transparent 50%)'
+            background: 'radial-gradient(circle at center, hsl(var(--primary) / 0.4) 0%, transparent 60%)',
+            filter: 'blur(80px)'
+          }}
+        />
+        <div 
+          className="absolute bottom-0 right-0 w-[600px] h-[600px] opacity-30"
+          style={{
+            background: 'radial-gradient(circle at center, hsl(var(--accent) / 0.35) 0%, transparent 60%)',
+            filter: 'blur(100px)'
           }}
         />
       </div>
@@ -84,8 +92,9 @@ export const HeroHomepage = () => {
           <source src={heroVideo} type="video/mp4" />
         </video>
         
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/40" />
+        {/* Premium gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-background/85 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/50 via-transparent to-transparent" />
       </div>
 
       {/* Grid pattern */}
@@ -103,17 +112,17 @@ export const HeroHomepage = () => {
           
           {/* Left Content - No framer-motion, using CSS animations */}
           <div className={`lg:col-span-3 order-2 lg:order-1 w-full ${showContent ? 'animate-fade-in' : ''}`}>
-            {/* Premium Badge */}
-            <div className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 mb-6 sm:mb-10 shadow-sm">
-              <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-gradient-to-r from-primary to-accent shadow-sm" />
-              <span className="text-xs sm:text-sm font-semibold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Veteran-Supporting • Ohio-Based</span>
+            {/* Premium Badge with glassmorphism */}
+            <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full bg-card/10 backdrop-blur-md border border-primary/30 mb-6 sm:mb-10 shadow-[0_8px_32px_-8px_hsl(var(--primary)/0.3)]">
+              <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-gradient-to-r from-primary to-accent shadow-lg shadow-primary/50 animate-pulse" />
+              <span className="text-sm sm:text-base font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">Veteran-Supporting • Ohio-Based</span>
             </div>
             
-            {/* Headline - Renders immediately - LARGE for elderly readability */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold leading-[0.95] mb-6 sm:mb-8 tracking-tight">
-              <span className="block text-foreground">InVision</span>
-              <span className="block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">Network</span>
-              <span className="block font-medium text-muted-foreground text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl mt-2 sm:mt-3">
+            {/* Headline - Premium typography */}
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-black leading-[0.9] mb-6 sm:mb-8 tracking-tight">
+              <span className="block text-foreground drop-shadow-sm">InVision</span>
+              <span className="block bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_auto] animate-gradient-shift bg-clip-text text-transparent">Network</span>
+              <span className="block font-semibold text-foreground/60 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl mt-3 sm:mt-4 tracking-normal">
                 Protection • Education • Innovation
               </span>
             </h1>
@@ -123,20 +132,20 @@ export const HeroHomepage = () => {
               Empowering families with AI scam protection. Transforming businesses with cutting-edge automation solutions.
             </p>
             
-            {/* CTAs - Larger, more prominent buttons */}
+            {/* CTAs - Premium glass buttons */}
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 relative z-30">
-              <Button asChild size="lg" className="group h-14 sm:h-16 px-8 sm:px-10 text-base sm:text-lg font-bold rounded-2xl bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-accent/90 shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-200 border-0 w-full sm:w-auto">
+              <Button asChild size="lg" className="group h-14 sm:h-16 px-8 sm:px-12 text-base sm:text-lg font-bold rounded-2xl bg-gradient-to-r from-primary via-primary to-accent hover:from-accent hover:via-primary hover:to-primary shadow-[0_8px_40px_-8px_hsl(var(--primary)/0.5)] hover:shadow-[0_12px_50px_-8px_hsl(var(--primary)/0.6)] hover:-translate-y-1 transition-all duration-300 border border-primary-foreground/20 w-full sm:w-auto">
                 <Link to="/training">
                   <Shield className="mr-2 w-5 h-5 sm:w-6 sm:h-6" />
                   Protect My Family
-                  <ArrowRight className="ml-2 w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="ml-2 w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-2 transition-transform duration-300" />
                 </Link>
               </Button>
-              <Button asChild size="lg" className="group h-14 sm:h-16 px-8 sm:px-10 text-base sm:text-lg font-bold rounded-2xl bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-primary/90 shadow-xl shadow-accent/30 hover:shadow-2xl hover:shadow-accent/40 transition-all duration-200 border-0 text-accent-foreground w-full sm:w-auto">
+              <Button asChild size="lg" className="group h-14 sm:h-16 px-8 sm:px-12 text-base sm:text-lg font-bold rounded-2xl bg-card/10 backdrop-blur-md border-2 border-primary/40 text-foreground hover:bg-primary/20 hover:border-primary shadow-[0_8px_30px_-8px_hsl(var(--primary)/0.2)] hover:shadow-[0_12px_40px_-8px_hsl(var(--primary)/0.35)] hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto">
                 <Link to="/business">
-                  <Zap className="mr-2 w-5 h-5 sm:w-6 sm:h-6" />
+                  <Zap className="mr-2 w-5 h-5 sm:w-6 sm:h-6 text-accent" />
                   Automate My Business
-                  <ArrowRight className="ml-2 w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="ml-2 w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-2 transition-transform duration-300" />
                 </Link>
               </Button>
             </div>
