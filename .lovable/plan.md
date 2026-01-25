@@ -1,160 +1,180 @@
 
+# Payment System Audit & Connection Plan
 
-# Hero Images & Decorative Photos Enhancement Plan
+## Executive Summary
 
-## Overview
-Update 3 hero images with better InVision Network branding and add natural, high-quality decorative photos throughout the Training and Business pages.
-
----
-
-## Section 1: Hero Images to Generate/Update
-
-### 1.1 Contact Page Hero
-**Current Issue:** The "InVision Network" branding on the wall is not clearly visible
-
-**Generation Prompt:**
-```
-Professional African American woman with curly hair at a welcoming reception desk, 
-warm smile, modern office lobby with frosted glass wall prominently displaying 
-"InVision Network" logo, warm golden hour lighting, photorealistic DSLR quality, 
-16:9 aspect ratio
-```
-
-### 1.2 Business Page Hero  
-**Current Issue:** Too "cyber" looking, needs to be more natural and professional
-
-**Generation Prompt:**
-```
-Diverse group of business professionals collaborating around a conference table 
-with laptops and tablets, modern bright office with large windows and natural light, 
-subtle "InVision Network" signage visible on glass partition, warm authentic smiles, 
-photorealistic DSLR quality, no futuristic/sci-fi elements, 16:9 aspect ratio
-```
-
-### 1.3 Training Page Hero
-**Current Issue:** Needs a nicer, more inspiring image for the learning context
-
-**Generation Prompt:**
-```
-Seniors and family members learning together in a bright community center classroom, 
-natural sunlight through windows, instructor demonstrating on whiteboard, 
-genuine expressions of engagement and curiosity, warm hopeful atmosphere, 
-subtle InVision Network banner visible, photorealistic DSLR quality, 16:9 aspect ratio
-```
+After analyzing your Stripe account and codebase, I found that **your core payment infrastructure is already well-connected**, but there are several issues that need to be fixed to ensure all payments work without errors.
 
 ---
 
-## Section 2: Decorative Photos for Training Page
+## Current Stripe Account Status ✅
 
-Add 4 natural, high-quality decorative photos throughout the Training page sections:
+Your Stripe account has **46 products** and **47 prices** properly configured, including:
 
-| Location | Existing Asset to Use | Purpose |
-|----------|----------------------|---------|
-| Why Families Trust Section | `community-training.jpg` | Right-side floating accent |
-| How It Works Section | `workshop-instructor.jpg` | Left-side background decoration |
-| Scam Prevention Workshops | `workshop-seniors-learning.jpg` | Background pattern |
-| Trust Pillars Grid | `senior-learning.jpg` | Corner accent image |
-
-**Implementation Style:**
-- Use `opacity-20` for subtle background accents
-- Apply `hidden lg:block` to show only on desktop (keep mobile clean)
-- Use `aria-hidden="true"` for accessibility
-- Round corners with `rounded-2xl overflow-hidden`
+| Category | Products | Status |
+|----------|----------|--------|
+| ScamShield Plans | 3 (Starter, Family, Premium) | ✅ Connected |
+| AI Business Services | 3 (Receptionist, Follow-Up, Custom) | ✅ Connected |
+| AI Service Insurance | 3 (Basic, Standard, Premium) | ✅ Connected |
+| Digital Books | 20+ E-Books | ⚠️ 10 have invalid IDs |
+| Physical Products | 16 Products | ✅ Connected |
 
 ---
 
-## Section 3: Decorative Photos for Business Page
+## Issues Found
 
-Add 4 natural, professional photos throughout the Business page:
+### 1. Invalid Stripe Price IDs (10 Books)
 
-| Location | Existing Asset to Use | Purpose |
-|----------|----------------------|---------|
-| What We Build Section | `business-professionals-office.jpg` | Right-side accent |
-| Website Insurance Section | `security-expert.jpg` | Left floating decoration |
-| AI Services Section | `team-collaboration.jpg` | Background element |
-| AI Insurance Section | `business-team-office.jpg` | Section divider accent |
+The Resources page has **10 books** with placeholder/invalid Stripe price IDs that will cause payment failures:
 
-**Implementation Style:**
-- Same opacity and visibility rules as Training page
-- Positioned with `absolute` within section containers
-- Natural photos only - no AI-generated or cyber/futuristic imagery
+```
+- book-crypto-defense: price_1SjwPnJ8osfwYbX7crypto01 ❌
+- book-romance-scam: price_1SjwPnJ8osfwYbX7romance02 ❌
+- book-voice-clone: price_1SjwPnJ8osfwYbX7voice03 ❌
+- book-medicare-fraud: price_1SjwPnJ8osfwYbX7medicare04 ❌
+- book-email-safety: price_1SjwPnJ8osfwYbX7email05 ❌
+- book-tax-scam: price_1SjwPnJ8osfwYbX7tax06 ❌
+- book-tech-support: price_1SjwPnJ8osfwYbX7tech07 ❌
+- book-grandparent-scam: price_1SjwPnJ8osfwYbX7grandp08 ❌
+- book-investment-fraud: price_1SjwPnJ8osfwYbX7invest09 ❌
+- book-charity-scam: price_1SjwPnJ8osfwYbX7charity10 ❌
+```
+
+These IDs follow a fake pattern (crypto01, romance02, etc.) and will fail when processed.
+
+### 2. Edge Function Config Missing
+
+The `create-cart-checkout` edge function is not listed in `supabase/config.toml`, which may prevent it from being deployed properly.
+
+### 3. Training Payment Modal Uses Wrong Edge Function
+
+The training payment flow uses `create-training-payment` but some training products share price IDs with other product categories, which could cause confusion.
 
 ---
 
-## Section 4: File Changes Summary
+## Implementation Plan
 
-### New Assets to Generate
-| File | Description |
-|------|-------------|
-| `hero-branded-contact-new.jpg` | Replace with new reception scene |
-| `hero-branded-business-new.jpg` | Replace with natural office scene |
-| `hero-nature-training.jpg` | Replace with new community learning scene |
+### Phase 1: Create Missing Stripe Products (10 Books)
+
+Create the 10 missing book products in Stripe with proper prices:
+
+| Book Name | Price | To Create |
+|-----------|-------|-----------|
+| Crypto Scam Defense | $34.99 | Product + Price |
+| Romance Scam Awareness | $28.99 | Product + Price |
+| Voice Clone Detection | $31.99 | Product + Price |
+| Medicare Fraud Protection | $26.99 | Product + Price |
+| Email Safety Essentials | $22.99 | Product + Price |
+| Tax Scam Prevention | $29.99 | Product + Price |
+| Tech Support Fraud Defense | $25.99 | Product + Price |
+| Grandparent Scam Defense | $24.99 | Product + Price |
+| Investment Fraud Guide | $36.99 | Product + Price |
+| Charity Scam Awareness | $21.99 | Product + Price |
+
+### Phase 2: Update Resources.tsx with New Price IDs
+
+Replace the placeholder price IDs in `src/pages/Resources.tsx` with the newly created valid Stripe price IDs.
+
+### Phase 3: Add Missing Edge Function Config
+
+Add `create-cart-checkout` to `supabase/config.toml`:
+
+```toml
+[functions.create-cart-checkout]
+verify_jwt = false
+```
+
+### Phase 4: Payment Flow Validation
+
+Verify all payment edge functions are properly configured:
+
+- `create-payment-intent` ✅
+- `create-cart-payment-intent` ✅
+- `create-subscription-checkout` ✅
+- `create-training-payment` ✅
+- `create-product-payment` ✅
+- `process-donation` ✅
+- `generate-payment-link` ✅
+- `verify-payment` ✅
+- `complete-payment` ✅
+- `create-cart-checkout` ⚠️ (needs config)
+
+### Phase 5: Update products.ts Config
+
+Sync the centralized product config (`src/config/products.ts`) with all valid Stripe price IDs for consistency.
+
+---
+
+## Technical Details
 
 ### Files to Modify
 
-**`src/pages/Training.tsx`**
-- Add imports for 4 decorative images
-- Insert decorative image components in 4 sections:
-  - Lines ~440: "Why Families Trust" section
-  - Lines ~543: "How It Works" section  
-  - Lines ~632: "Scam Prevention Workshops" section
-  - Lines ~580: Trust pillars area
+1. **`src/pages/Resources.tsx`** (lines 240-315)
+   - Replace 10 invalid `stripe_price_id` values with real Stripe price IDs
 
-**`src/pages/Business.tsx`**
-- Add imports for 4 decorative images
-- Insert decorative image components in 4 sections:
-  - Lines ~257: "What We Build" section
-  - Lines ~877: "Website Insurance" section
-  - Lines ~1200: "AI Services" section
-  - Lines ~1339: "AI Insurance" section
+2. **`supabase/config.toml`**
+   - Add `create-cart-checkout` function configuration
 
-**`src/config/professionalHeroImages.ts`**
-- Update alt text for new hero images
+3. **`src/config/products.ts`**
+   - Update TRAINING_PROGRAMS to use unique price IDs (currently shares IDs with books)
+   - Add new books to DIGITAL_BOOKS array for consistency
 
----
+### Payment Flow Architecture
 
-## Section 5: Technical Implementation Details
-
-### Decorative Image Component Pattern
-```tsx
-{/* Decorative Image - Desktop Only */}
-<div className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 w-64 h-64 rounded-2xl overflow-hidden opacity-20 pointer-events-none">
-  <img 
-    src={decorativeImage} 
-    alt="" 
-    className="w-full h-full object-cover"
-    aria-hidden="true"
-  />
-</div>
-```
-
-### Image Import Pattern
-```tsx
-import communityTraining from "@/assets/community-training.jpg";
-import workshopInstructor from "@/assets/workshop-instructor.jpg";
-import seniorLearning from "@/assets/senior-learning.jpg";
-import workshopSeniorsLearning from "@/assets/workshop-seniors-learning.jpg";
+```text
+┌─────────────────────────────────────────────────────────────────┐
+│                      FRONTEND COMPONENTS                         │
+├─────────────────────────────────────────────────────────────────┤
+│ EmbeddedPaymentModal ──► create-payment-intent ──► Stripe       │
+│ SubscriptionDialog ──► create-payment-intent ──► Stripe         │
+│ TrainingPaymentModal ──► create-training-payment ──► Stripe     │
+│ CheckoutDialog ──► create-cart-payment-intent ──► Stripe        │
+│ QRCodePaymentSection ──► generate-payment-link ──► Stripe       │
+│ DonationModal ──► process-donation ──► Stripe                   │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                      POST-PAYMENT FLOW                           │
+├─────────────────────────────────────────────────────────────────┤
+│ verify-payment ──► Update order status                          │
+│ complete-payment ──► Send confirmation emails                   │
+│ send-digital-download ──► Deliver digital products              │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Section 6: Image Selection Criteria
+## Verification Steps After Implementation
 
-All decorative photos will meet these requirements:
-- Natural, photorealistic appearance (NOT AI-generated looking)
-- Warm, authentic human expressions
-- Good lighting and composition
-- Professional but approachable
-- Diverse representation
-- No cyber/futuristic/sci-fi elements
-- Subtle InVision Network branding where appropriate
+1. Test each ScamShield subscription tier purchase
+2. Test AI Service one-time payments
+3. Test Insurance subscription purchases
+4. Test all 30 digital book purchases
+5. Test all 16 physical product purchases
+6. Test training session bookings
+7. Test donation flows (one-time and monthly)
+8. Verify QR code payment flow works
 
 ---
 
-## Section 7: Expected Outcomes
+## Risk Assessment
 
-1. **Contact Page:** Clear, prominent InVision Network branding on reception wall
-2. **Business Page:** Professional, warm office environment (not cyber/tech heavy)
-3. **Training Page:** Inspiring learning environment with hope and empowerment
-4. **Both Pages:** Enhanced visual richness with tasteful decorative photos that add depth without distraction
+| Risk | Severity | Mitigation |
+|------|----------|------------|
+| Creating wrong Stripe products | Low | Use Stripe tools to create products with exact names/prices |
+| Missing price ID updates | Medium | Double-check all 10 books are updated |
+| Edge function deployment | Low | Config.toml update is straightforward |
+
+---
+
+## Estimated Work
+
+- Create 10 Stripe products: 10 tool calls
+- Update Resources.tsx: 1 file edit (10 price IDs)
+- Update config.toml: 1 line addition
+- Update products.ts: 1 file edit for consistency
+- Deploy edge functions: Automatic
+
+**Total: ~15-20 minutes of implementation**
 
