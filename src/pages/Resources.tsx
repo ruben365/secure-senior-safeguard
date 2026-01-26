@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Download, Shield, ShoppingCart, Star, Loader2, Zap, Award, CheckCircle, Gift, BookOpen, Package, Sparkles, Users, TrendingUp, Heart, Headphones, Clock, Lock, FileText, Video, Podcast, Globe, Library } from "lucide-react";
+import { Download, Shield, ShoppingCart, Star, Loader2, Zap, Award, CheckCircle, Gift, BookOpen, Package, Sparkles, Users, TrendingUp, Heart, Headphones, Clock, Lock, FileText, Video, Podcast, Globe } from "lucide-react";
 import { EmbeddedPaymentModal } from "@/components/payment/EmbeddedPaymentModal";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
@@ -557,28 +557,6 @@ function Resources() {
     setBookModalOpen(true);
   };
 
-  // Calculate batch purchase total
-  const totalBooksPrice = staticBooks.reduce((sum, book) => sum + book.price, 0);
-  const batchDiscount = 0.25; // 25% off for complete library
-  const batchPrice = totalBooksPrice * (1 - batchDiscount);
-
-  const handleBatchPurchase = () => {
-    // Add all books to cart
-    staticBooks.forEach(book => {
-      addItem({
-        id: book.id,
-        productId: book.id,
-        name: book.name,
-        price: book.price * (1 - batchDiscount), // Apply discount
-        image: book.image,
-        stripe_price_id: book.stripe_price_id
-      });
-    });
-    toast({
-      title: "Complete Library Added!",
-      description: `All ${staticBooks.length} e-books added to cart with 25% discount.`
-    });
-  };
 
   // Track when cart is manually emptied to show help
   useEffect(() => {
@@ -763,38 +741,17 @@ function Resources() {
             </div>
           </ScrollReveal>
 
-          {/* Batch Purchase Banner */}
-          <ScrollReveal>
-            <div className="mb-6 p-4 bg-gradient-to-r from-primary/15 via-accent/10 to-primary/15 rounded-xl border-2 border-primary/30">
-              <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-                <div className="text-center md:text-left">
-                  <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
-                    <Library className="w-5 h-5 text-primary" />
-                    <h3 className="font-bold text-lg">Complete E-Book Library</h3>
-                    <Badge className="bg-gradient-to-r from-primary to-accent text-primary-foreground">25% OFF</Badge>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    Get all {staticBooks.length} e-books for <span className="line-through">${totalBooksPrice.toFixed(2)}</span>{" "}
-                    <span className="text-primary font-bold text-lg">${batchPrice.toFixed(2)}</span>
-                  </p>
-                </div>
-                <Button 
-                  size="lg" 
-                  onClick={handleBatchPurchase}
-                  className="bg-gradient-to-r from-primary to-accent hover:opacity-90 text-primary-foreground shadow-lg"
-                >
-                  <ShoppingCart className="w-4 h-4 mr-2" />
-                  Add All to Cart
-                </Button>
-              </div>
-            </div>
-          </ScrollReveal>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-3">
             {staticBooks.map((book, index) => (
               <ScrollReveal key={book.id} delay={index * 50}>
                 <Card className="group p-3 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-border/50 hover:border-primary/30 relative overflow-hidden bg-card h-full flex flex-col">
-                  {/* Tag Badge */}
+                  {/* eBook Badge - Top Left */}
+                  <Badge className="absolute top-2 left-2 text-[9px] px-1.5 py-0.5 bg-primary/90 text-primary-foreground z-10 shadow-sm">
+                    📘 eBook
+                  </Badge>
+                  
+                  {/* Tag Badge - Top Right */}
                   <Badge className="absolute top-2 right-2 text-[9px] px-1.5 py-0.5 bg-gradient-to-r from-primary to-accent text-primary-foreground z-10">
                     {book.tag}
                   </Badge>
@@ -815,7 +772,7 @@ function Resources() {
                     {/* Hover overlay */}
                     <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-300 flex items-center justify-center">
                       <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-background/90 text-foreground text-xs px-3 py-1.5 rounded-full font-medium shadow-lg">
-                        Click to Enlarge
+                        👁️ View Details
                       </span>
                     </div>
                   </button>
