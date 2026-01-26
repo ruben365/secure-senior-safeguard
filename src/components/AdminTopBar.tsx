@@ -88,7 +88,7 @@ export function AdminTopBar({ sidebarOpen, toggleSidebar }: AdminTopBarProps) {
           </div>
           
           <div className="flex items-center gap-2 min-w-0">
-            <img src={invisionLogo} alt="InVision Network Logo" className="h-7 w-7 sm:h-8 sm:w-8 flex-shrink-0" />
+            <img src={invisionLogo} alt="InVision Network Logo" width={32} height={32} loading="eager" decoding="async" className="h-7 w-7 sm:h-8 sm:w-8 flex-shrink-0" />
             <span className="text-base sm:text-lg font-semibold hidden sm:inline truncate">InVision Network</span>
           </div>
         </div>

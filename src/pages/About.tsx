@@ -370,6 +370,10 @@ function About() {
                 <img 
                   src={seniorLearning} 
                   alt="Senior learning to use technology with instructor" 
+                  width={600}
+                  height={320}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-accent/90 via-accent/40 to-transparent" />
