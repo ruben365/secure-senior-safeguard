@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Download, Shield, ShoppingCart, Star, Loader2, Zap, Award, CheckCircle, Gift, BookOpen, Package, Sparkles, Users, TrendingUp, Heart, Headphones, Clock, Lock, FileText, Video, Podcast, Globe } from "lucide-react";
+import { Download, Shield, ShoppingCart, Star, Loader2, Zap, Award, CheckCircle, Gift, BookOpen, Package, Sparkles, Users, TrendingUp, Heart, Headphones, Clock, Lock, FileText, Video, Podcast, Globe, Mail } from "lucide-react";
 import { EmbeddedPaymentModal } from "@/components/payment/EmbeddedPaymentModal";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
@@ -832,13 +832,34 @@ function Resources() {
 
           {/* Bundle Info Banner */}
           <ScrollReveal>
-            <div className="mt-8 p-4 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 rounded-xl border border-primary/20 text-center">
-              <p className="text-sm font-medium mb-2">
-                📖 <strong>Click any book cover</strong> to view full details and enlarged cover image
-              </p>
-              <p className="text-xs text-muted-foreground">
-                All digital products are delivered instantly to your email. Written by InVision Network experts.
-              </p>
+            <div className="mt-8 space-y-4">
+              <div className="p-4 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 rounded-xl border border-primary/20 text-center">
+                <p className="text-sm font-medium mb-2">
+                  📖 <strong>Click any book cover</strong> to view full details and enlarged cover image
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  All digital products are delivered instantly to your email. Written by InVision Network experts.
+                </p>
+              </div>
+
+              {/* Language Request Note */}
+              <div className="p-4 bg-gradient-to-r from-accent/10 via-primary/5 to-accent/10 rounded-xl border border-accent/20 text-center">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <Globe className="w-4 h-4 text-accent" />
+                  <span className="font-semibold text-sm">Need a Book in a Different Language?</span>
+                </div>
+                <p className="text-sm text-muted-foreground mb-3">
+                  We offer translations in Spanish, French, German, Chinese, and more. 
+                  <br className="hidden md:block" />
+                  Simply contact us with your request and we'll prepare your copy within <strong>1-3 business days</strong>.
+                </p>
+                <Button variant="outline" size="sm" asChild>
+                  <Link to="/contact" className="inline-flex items-center gap-2">
+                    <Mail className="w-4 h-4" />
+                    Request Translation
+                  </Link>
+                </Button>
+              </div>
             </div>
           </ScrollReveal>
         </div>

@@ -48,6 +48,7 @@ import { natureWinter3 } from "@/config/natureHeroImages";
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import TestimonialCard from "@/components/TestimonialCard";
 import { VideoLightbox } from "@/components/VideoLightbox";
+import { InstructorShowcase } from "@/components/training/InstructorShowcase";
 import { SEO } from "@/components/SEO";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
@@ -747,6 +748,9 @@ function LearnAndTrain() {
           </div>
         </div>
       </section>
+
+      {/* Instructor Showcase */}
+      <InstructorShowcase />
 
       {/* Simple Protection in 4 Steps */}
       <section className="py-20 bg-muted relative overflow-hidden">
