@@ -27,9 +27,9 @@ const AccentDecoration = lazy(() => import("@/components/ui/AccentDecoration").t
 
 // Loading placeholders with reserved height to prevent CLS
 // Heights match actual section heights to prevent layout shifts
-const SectionLoader = () => <div className="min-h-[600px]" aria-hidden="true" style={{ contain: 'layout style' }} />;
+const SectionLoader = () => <div className="min-h-[600px]" aria-hidden="true" style={{ contain: 'layout style paint' }} />;
 // WorkshopsPromo section is exactly 4899px on desktop - reserve exact space to prevent CLS
-const LargeSectionLoader = () => <div className="min-h-[4000px] lg:min-h-[4899px]" aria-hidden="true" style={{ contain: 'layout style', height: 'auto' }} />;
+const LargeSectionLoader = () => <div style={{ contain: 'layout style paint', minHeight: '4000px', height: '4899px' }} aria-hidden="true" />;
 const Index = () => {
   const [scamShieldOpen, setScamShieldOpen] = useState(false);
   
