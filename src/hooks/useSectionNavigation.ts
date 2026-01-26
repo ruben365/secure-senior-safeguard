@@ -74,14 +74,13 @@ export const useSectionNavigation = (sections: Section[]) => {
     };
 
     // Defer initial calculation to avoid forced reflow during paint
-    // Using longer delay ensures layout is fully stable
+    // Use double-rAF to ensure we're past layout phase
+    let rafId: number;
     const timeoutId = setTimeout(() => {
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(updateAndScroll, { timeout: 500 });
-      } else {
+      rafId = requestAnimationFrame(() => {
         requestAnimationFrame(updateAndScroll);
-      }
-    }, 300);
+      });
+    }, 500);
 
     // Update bounds on resize (throttled)
     let resizeTimeout: ReturnType<typeof setTimeout>;
@@ -100,6 +99,7 @@ export const useSectionNavigation = (sections: Section[]) => {
       window.removeEventListener("resize", handleResize);
       clearTimeout(timeoutId);
       clearTimeout(resizeTimeout);
+      if (rafId) cancelAnimationFrame(rafId);
     };
   }, [sections, updateSectionBounds]);
 
