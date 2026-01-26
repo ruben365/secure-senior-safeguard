@@ -5,32 +5,11 @@ interface Section {
   label: string;
 }
 
-interface SectionBounds {
-  id: string;
-  top: number;
-  bottom: number;
-}
-
 export const useSectionNavigation = (sections: Section[]) => {
   const [activeSection, setActiveSection] = useState<string>("");
-  const sectionBoundsRef = useRef<SectionBounds[]>([]);
+  const observersRef = useRef<IntersectionObserver[]>([]);
 
-  // Cache section positions to avoid forced reflows during scroll
-  const updateSectionBounds = useCallback(() => {
-    // Batch all reads together before any writes
-    const bounds: SectionBounds[] = [];
-    for (const section of sections) {
-      const element = document.getElementById(section.id);
-      if (element) {
-        const top = element.offsetTop;
-        const height = element.offsetHeight;
-        bounds.push({ id: section.id, top, bottom: top + height });
-      }
-    }
-    sectionBoundsRef.current = bounds;
-  }, [sections]);
-
-  // Scroll to section with smooth behavior
+  // Scroll to section with smooth behavior - uses getBoundingClientRect only on user action (click)
   const scrollToSection = useCallback((sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -45,63 +24,40 @@ export const useSectionNavigation = (sections: Section[]) => {
     }
   }, []);
 
-  // Track active section based on scroll position using cached bounds
+  // Use IntersectionObserver instead of offset measurements to avoid forced reflows
   useEffect(() => {
-    let ticking = false;
-    
-    const handleScroll = () => {
-      if (ticking) return;
-      
-      ticking = true;
-      requestAnimationFrame(() => {
-        const scrollPosition = window.scrollY + 150; // Offset for detection
-        const bounds = sectionBoundsRef.current;
+    // Disconnect any existing observers
+    observersRef.current.forEach(obs => obs.disconnect());
+    observersRef.current = [];
 
-        for (const section of bounds) {
-          if (scrollPosition >= section.top && scrollPosition < section.bottom) {
+    const observerOptions = {
+      root: null,
+      // rootMargin accounts for fixed nav and provides better detection
+      rootMargin: "-100px 0px -50% 0px",
+      threshold: 0
+    };
+
+    sections.forEach((section) => {
+      const element = document.getElementById(section.id);
+      if (!element) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
             setActiveSection(section.id);
-            break;
           }
-        }
-        ticking = false;
-      });
-    };
+        });
+      }, observerOptions);
 
-    // Update bounds after layout is stable
-    const updateAndScroll = () => {
-      updateSectionBounds();
-      handleScroll();
-    };
-
-    // Defer initial calculation to avoid forced reflow during paint
-    // Use double-rAF to ensure we're past layout phase
-    let rafId: number;
-    const timeoutId = setTimeout(() => {
-      rafId = requestAnimationFrame(() => {
-        requestAnimationFrame(updateAndScroll);
-      });
-    }, 500);
-
-    // Update bounds on resize (throttled)
-    let resizeTimeout: ReturnType<typeof setTimeout>;
-    const handleResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        requestAnimationFrame(updateSectionBounds);
-      }, 150);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleResize, { passive: true });
+      observer.observe(element);
+      observersRef.current.push(observer);
+    });
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleResize);
-      clearTimeout(timeoutId);
-      clearTimeout(resizeTimeout);
-      if (rafId) cancelAnimationFrame(rafId);
+      observersRef.current.forEach(obs => obs.disconnect());
+      observersRef.current = [];
     };
-  }, [sections, updateSectionBounds]);
+  }, [sections]);
 
   return { activeSection, scrollToSection };
 };
