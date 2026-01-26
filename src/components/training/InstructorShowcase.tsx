@@ -35,7 +35,7 @@ const instructors: Instructor[] = [
     specialty: "AI & Deepfake Detection",
     image: instructorMichael,
     shortBio: "Former FBI cyber analyst with 25+ years protecting families from digital threats.",
-    fullBio: "Dr. Michael Thompson spent over two decades with the FBI's Cyber Division, specializing in fraud prevention and digital forensics. After retiring, he dedicated his career to educating families about emerging cyber threats. His approachable teaching style makes complex security concepts easy to understand for people of all ages. He's passionate about protecting seniors from scams and has developed several of our most popular training programs.",
+    fullBio: "Dr. Michael Thompson spent over two decades with the FBI's Cyber Division, specializing in fraud prevention and digital forensics. After retiring, he dedicated his career to educating families about emerging cyber threats. His approachable teaching style makes complex security concepts easy to understand for people of all ages. He's passionate about protecting seniors from scams and has developed several of our most popular workshop programs.",
     achievements: [
       "FBI Distinguished Service Medal",
       "Author of 'Digital Defense for Families'",
@@ -103,7 +103,7 @@ const instructors: Instructor[] = [
     specialty: "AI Scams & Modern Threats",
     image: instructorAlex,
     shortBio: "Expert on cutting-edge AI scams, voice cloning, and next-generation threats.",
-    fullBio: "At 35, David Anderson represents the next generation of cybersecurity educators. With hands-on experience tracking emerging threats and a finger on the pulse of new scam tactics, David brings fresh perspectives to our training programs. Having grown up in the digital age, he uniquely understands both the opportunities and risks of modern technology. His workshops on AI-powered scams, voice cloning detection, and cryptocurrency fraud are among our most requested sessions.",
+    fullBio: "At 35, David Anderson represents the next generation of cybersecurity educators. With hands-on experience tracking emerging threats and a finger on the pulse of new scam tactics, David brings fresh perspectives to our workshop programs. Having grown up in the digital age, he uniquely understands both the opportunities and risks of modern technology. His workshops on AI-powered scams, voice cloning detection, and cryptocurrency fraud are among our most requested sessions.",
     achievements: [
       "Certified Ethical Hacker (CEH)",
       "Contributor to WIRED Magazine",

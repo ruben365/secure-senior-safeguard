@@ -184,7 +184,7 @@ const TrainingCard = ({ plan, index, onBook }: { plan: any; index: number; onBoo
           {badge.label}
         </div>
         
-        <Card className={`relative p-6 md:p-7 flex flex-col transition-all duration-300 hover:-translate-y-2 rounded-2xl bg-gradient-to-br from-card to-card/50 min-h-[520px] ${
+        <Card className={`relative p-6 md:p-7 h-full flex flex-col transition-all duration-300 hover:-translate-y-2 rounded-2xl bg-gradient-to-br from-card to-card/50 min-h-[520px] ${
           plan.popular 
             ? "border-primary border-2 shadow-xl" 
             : "border-border/50 hover:shadow-lg"
@@ -712,7 +712,7 @@ function LearnAndTrain() {
                 ],
               },
               {
-                name: "Large Group Training",
+                name: "Large Group Workshop",
                 type: "custom",
                 price: "$510",
                 priceNum: 510,
@@ -722,7 +722,7 @@ function LearnAndTrain() {
                 description: "Churches, senior centers, and communities.",
                 features: [
                   "✓ We come to your location",
-                  "✓ Custom training for you",
+                  "✓ Custom workshop for you",
                   "✓ Certificates for everyone",
                   "✓ Ongoing support included",
                 ],
