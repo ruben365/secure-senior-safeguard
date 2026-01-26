@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { SplashScreen } from "./components/SplashScreen";
 import { ProtectedRoute } from "./components/ProtectedRoute";
-import { AIChat } from "./components/AIChat";
+import { LazyAIChat } from "./components/LazyAIChat";
 import { AIChatProvider } from "./contexts/AIChatContext";
 import { AuthProvider } from "./contexts/AuthContext";
 import { CartProvider } from "./contexts/CartContext";
@@ -287,7 +287,7 @@ function App() {
                           <PublicRoutes />
                         </Suspense>
                       </ErrorBoundary>
-                      <AIChat />
+                      <LazyAIChat />
                       <CookieConsent />
                       <CartFeedbackNotifications />
                       <CheckoutDialogLoader />
