@@ -30,6 +30,13 @@ export default defineConfig(({ mode }) => ({
   },
   css: {
     devSourcemap: true,
+    postcss: {
+      plugins: [],
+    },
+  },
+  esbuild: {
+    legalComments: 'none',
+    treeShaking: true,
   },
   plugins: [
     react(),
