@@ -92,14 +92,21 @@ export function QuickActions() {
   });
 
   const handleClick = (action: QuickAction, event: React.MouseEvent<HTMLButtonElement>) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+    const clientX = event.clientX;
+    const clientY = event.clientY;
+    const target = event.currentTarget;
     
-    setRipples((prev) => ({
-      ...prev,
-      [action.id]: { x, y, id: Date.now() },
-    }));
+    // Defer geometry read to next frame to avoid forced reflow
+    requestAnimationFrame(() => {
+      const rect = target.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+      
+      setRipples((prev) => ({
+        ...prev,
+        [action.id]: { x, y, id: Date.now() },
+      }));
+    });
 
     setTimeout(() => {
       setRipples((prev) => ({
