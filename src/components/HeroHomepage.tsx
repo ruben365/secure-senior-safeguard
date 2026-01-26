@@ -55,9 +55,11 @@ export const HeroHomepage = () => {
     return () => clearTimeout(timer);
   }, []);
   
-  return <section className="relative min-h-[100vh] lg:min-h-[110vh] overflow-hidden" style={{
+  return <section className="relative overflow-hidden" style={{
     backgroundColor: '#1a1625',
-    contain: 'layout style paint'
+    contain: 'strict',
+    height: '100vh',
+    minHeight: '100vh'
   }}>
       {/* Video Background - lazy preload for faster initial paint */}
       <div className="absolute inset-0">
@@ -94,11 +96,11 @@ export const HeroHomepage = () => {
       }} />
       </div>
       
-      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 relative z-10 hero-instant" style={{ contain: 'strict', minHeight: 'calc(100vh - 64px)', height: 'calc(100vh - 64px)' }}>
-        <div className="flex flex-col lg:grid lg:grid-cols-5 gap-8 lg:gap-20 xl:gap-28 items-center py-16 sm:py-20 lg:py-0" style={{ contain: 'strict', minHeight: 'calc(100vh - 64px)', height: 'calc(100vh - 64px)' }}>
+      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 relative z-10 hero-instant" style={{ contain: 'strict', height: 'calc(100vh - 64px)' }}>
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-20 xl:gap-28 items-center" style={{ contain: 'strict', height: 'calc(100vh - 64px)' }}>
           
           {/* Left Content - Instant render, no animation delay - LCP element */}
-          <div className="lg:col-span-3 order-2 lg:order-1 w-full" style={{ contain: 'strict', minHeight: '400px', height: 'auto' }}>
+          <div className="lg:col-span-3 order-2 lg:order-1 w-full" style={{ contain: 'layout style paint' }}>
             {/* Premium Badge */}
             <div className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 mb-6 sm:mb-10 shadow-sm">
               <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-gradient-to-r from-primary to-accent shadow-sm" />
@@ -139,7 +141,7 @@ export const HeroHomepage = () => {
           </div>
           
           {/* Right Content - Security Visual */}
-          <div className="lg:col-span-2 order-1 lg:order-2 flex justify-center lg:justify-end w-full" style={{ contain: 'layout style paint' }}>
+          <div className="lg:col-span-2 order-1 lg:order-2 flex justify-center lg:justify-end w-full" style={{ contain: 'strict' }}>
             <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-xl xl:max-w-2xl">
               {/* Main visual container */}
               <div className="relative">
