@@ -1,11 +1,24 @@
 import { lazy, Suspense, useState, useEffect } from "react";
 
-// Lazy load the heavy AIChat component
 const AIChat = lazy(() => import("./AIChat").then(m => ({ default: m.AIChat })));
 
 /**
- * Deferred AIChat loader - only loads after page is idle
- * This prevents the 622-line AIChat component from blocking initial render
+ * Placeholder FAB that reserves space to prevent CLS while AIChat loads
+ * Matches exact dimensions and position of the real button
+ */
+const ChatFABPlaceholder = () => (
+  <div className="fixed bottom-6 right-6 z-[9998]">
+    <div 
+      className="relative w-14 h-14 rounded-full shadow-lg overflow-hidden ring-2 ring-primary/20 bg-muted animate-pulse"
+      aria-hidden="true"
+    />
+  </div>
+);
+
+/**
+ * LazyAIChat - Defers AIChat loading until browser is idle
+ * This reduces initial main-thread work by not loading the 622-line AIChat component immediately
+ * Shows a placeholder to prevent CLS (Cumulative Layout Shift)
  */
 export const LazyAIChat = () => {
   const [shouldLoad, setShouldLoad] = useState(false);
@@ -24,10 +37,11 @@ export const LazyAIChat = () => {
     }
   }, []);
 
-  if (!shouldLoad) return null;
+  // Show placeholder with reserved space to prevent CLS
+  if (!shouldLoad) return <ChatFABPlaceholder />;
 
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<ChatFABPlaceholder />}>
       <AIChat />
     </Suspense>
   );
