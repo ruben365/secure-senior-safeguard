@@ -25,8 +25,9 @@ const SectionDivider = lazy(() => import("@/components/ui/SectionDivider").then(
 const FloatingGraphics = lazy(() => import("@/components/ui/FloatingGraphics").then(m => ({ default: m.FloatingGraphics })));
 const AccentDecoration = lazy(() => import("@/components/ui/AccentDecoration").then(m => ({ default: m.AccentDecoration })));
 
-// Minimal loading placeholder for sections
-const SectionLoader = () => <div className="min-h-[200px]" />;
+// Loading placeholders with reserved height to prevent CLS
+const SectionLoader = () => <div className="min-h-[600px]" />;
+const LargeSectionLoader = () => <div className="min-h-[800px]" />;
 const Index = () => {
   const [scamShieldOpen, setScamShieldOpen] = useState(false);
   
@@ -46,7 +47,7 @@ const Index = () => {
           <TrustedExpertsBar />
           
           {/* Workshops Promo - Learn & Train Introduction */}
-          <Suspense fallback={<SectionLoader />}>
+          <Suspense fallback={<LargeSectionLoader />}>
             <section id="workshops" className="relative">
               <FloatingGraphics variant="shields" intensity="light" />
               <AccentDecoration variant="shield3d" position="top-right" className="opacity-40" />
