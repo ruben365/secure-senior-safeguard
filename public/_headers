@@ -2,6 +2,37 @@
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
+# JavaScript files in assets
+/assets/*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# CSS files in assets
+/assets/*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+# Image files in assets
+/assets/*.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*.jpeg
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*.svg
+  Cache-Control: public, max-age=31536000, immutable
+
+# Font files
+/assets/*.woff
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
 # HTML files should not be cached long-term (SPA routing)
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
@@ -9,3 +40,11 @@
 # Root document
 /
   Cache-Control: public, max-age=0, must-revalidate
+
+# Service worker - no cache
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Manifest
+/manifest.json
+  Cache-Control: public, max-age=86400
