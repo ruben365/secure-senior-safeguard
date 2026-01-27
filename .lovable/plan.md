@@ -1,130 +1,107 @@
 
-# Complete Loading Screen Removal & Website Restoration Plan
+# Fix Broken Page on Publish - FOUC (Flash of Unstyled Content)
 
-## Problem Analysis
+## Root Cause
 
-When you reload the website, you see a **spinning loader screen** (purple rings with a shield icon and "Loading..." text). This is the `AIPulseLoader` component being used as React's `Suspense` fallback while lazy-loaded pages are fetching.
+When you publish and reload the page, you see broken styling (dark text on dark background, misaligned layout) for a brief moment before it fixes itself. This is caused by a **race condition**:
 
-The issue is that **every page reload** triggers this full-screen loading animation because:
-1. All pages are lazy-loaded via `React.lazy()`
-2. The `Suspense` boundary in `App.tsx` shows `AIPulseLoader` as the fallback
-3. This creates an unprofessional "loading screen" experience on every navigation
+1. **Problem 1**: The `async-css-plugin` in `vite.config.ts` makes CSS load asynchronously using `media="print"` trick
+2. **Problem 2**: The async CSS loader script in `index.html` (lines 24-42) does the same thing - double async loading
+3. **Problem 3**: The `body.loaded` class is added via `requestIdleCallback` in `main.tsx` - which can fire BEFORE CSS loads
+4. **Result**: The page becomes visible (`opacity: 1`) before Tailwind/CSS classes are applied
 
----
-
-## Solution: Instant Page Load Without Loader Screens
-
-### Strategy
-Instead of showing a full-screen loader, we'll:
-1. **Replace the fullscreen loader with `null`** - Pages will render instantly as they load
-2. **Keep the pre-rendered HTML in `index.html`** - This ensures users see content immediately
-3. **Delete all unused loader components** - Clean up the codebase
-4. **Restore Laura (AI Assistant)** - Remove the 2-second delay so she appears immediately
-5. **Ensure the correct logo is used everywhere**
+The page looks broken because React renders HTML with CSS class names, but the actual CSS definitions haven't loaded yet.
 
 ---
 
-## Files to Modify
+## Solution
 
-### 1. `src/App.tsx` - Remove Full-Screen Loader
-**Change the Suspense fallback from AIPulseLoader to `null`:**
-```tsx
-// Line 126: Change from:
-const PageLoader = () => <AIPulseLoader message="Loading..." fullScreen={true} />;
+Remove the aggressive async CSS loading that's causing the broken initial render. The CSS should load normally (render-blocking) to ensure proper styling on first paint.
 
-// To: (delete this line entirely, use null as fallback)
-```
+---
 
-**Update line 266:**
-```tsx
-// From:
-<Suspense fallback={<PageLoader />}>
+## Changes Required
 
-// To:
-<Suspense fallback={null}>
-```
+### 1. Remove the async-css-plugin from vite.config.ts
 
-**Remove the import on line 125:**
-```tsx
-import { AIPulseLoader } from "./components/AIPulseLoader";
-```
+**File**: `vite.config.ts`
 
-### 2. `src/components/ProtectedRoute.tsx` - Minimal Auth Check Loader
-For protected routes, we still need to verify the user is logged in. We'll use a minimal, non-intrusive loading state instead of the full-screen spinner:
-
-```tsx
-// Line 52-54: Change from:
-if (loading) {
-  return <AIPulseLoader message="Verifying Security..." />;
-}
-
-// To: (use a minimal inline loader)
-if (loading) {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="animate-pulse text-muted-foreground">Verifying...</div>
-    </div>
-  );
-}
-```
-
-### 3. `src/components/LazyAIChat.tsx` - Remove Loading Delay for Laura
-Remove the 2-second `requestIdleCallback` delay so Laura appears immediately:
-
-```tsx
-// Lines 37-49: Change from:
-useEffect(() => {
-  if ('requestIdleCallback' in window) {
-    const idleId = (window as any).requestIdleCallback(
-      () => setShouldLoad(true),
-      { timeout: 2000 }
+Remove lines 44-52 (the production CSS async plugin):
+```typescript
+// DELETE THIS ENTIRE BLOCK:
+mode === "production" && {
+  name: 'async-css-plugin',
+  transformIndexHtml(html: string) {
+    return html.replace(
+      /<link rel="stylesheet"([^>]*) href="([^"]*\.css[^"]*)"([^>]*)>/g,
+      '<link rel="stylesheet"$1 href="$2"$3 media="print" onload="this.media=\'all\'">'
     );
-    return () => (window as any).cancelIdleCallback(idleId);
-  } else {
-    const timeoutId = setTimeout(() => setShouldLoad(true), 1000);
-    return () => clearTimeout(timeoutId);
   }
-}, []);
-
-// To: (load immediately)
-useEffect(() => {
-  setShouldLoad(true);
-}, []);
+},
 ```
 
-### 4. Delete Unused Loader Components
-These components are no longer needed:
-- `src/components/AIPulseLoader.tsx` - Delete
-- `src/components/BrandedLoader.tsx` - Delete  
-- `src/components/UnifiedPageLoader.tsx` - Delete
+### 2. Remove the async CSS loader script from index.html
+
+**File**: `index.html`
+
+Remove lines 24-42 (the MutationObserver script that makes CSS async):
+```html
+<!-- DELETE THIS ENTIRE BLOCK: -->
+<script>
+  (function(){
+    function makeAsync(link){...}
+    var obs=new MutationObserver(...);
+    ...
+  })();
+</script>
+```
+
+### 3. Add body.loaded class immediately instead of deferred
+
+**File**: `main.tsx`
+
+Move the `body.loaded` class addition to happen immediately (not deferred):
+```typescript
+// Add IMMEDIATELY after imports, before render
+document.body.classList.add('loaded');
+
+// Then mount
+createRoot(document.getElementById("root")!).render(<App />);
+```
+
+### 4. Simplify the FOUC prevention CSS
+
+**File**: `src/styles/base.css`
+
+The CSS is fine but we should ensure it works with immediate loading:
+```css
+/* Keep as-is - the loaded class will be added immediately now */
+body:not(.loaded) {
+  opacity: 0;
+}
+
+body.loaded {
+  opacity: 1;
+  transition: opacity 0.3s ease-out;
+}
+```
 
 ---
 
-## Implementation Summary
+## Summary of Files to Modify
 
-| File | Action | Change |
-|------|--------|--------|
-| `src/App.tsx` | Edit | Remove AIPulseLoader import, use `null` as Suspense fallback |
-| `src/components/ProtectedRoute.tsx` | Edit | Replace AIPulseLoader with minimal text-only loader |
-| `src/components/LazyAIChat.tsx` | Edit | Remove requestIdleCallback delay, load Laura immediately |
-| `src/components/AIPulseLoader.tsx` | Delete | No longer used anywhere |
-| `src/components/BrandedLoader.tsx` | Delete | Duplicate unused component |
-| `src/components/UnifiedPageLoader.tsx` | Delete | Already marked for deletion in previous plan |
+| File | Action | Purpose |
+|------|--------|---------|
+| `vite.config.ts` | Remove async-css-plugin | Stop making CSS non-render-blocking in production |
+| `index.html` | Remove async CSS script | Stop the MutationObserver that delays CSS |
+| `src/main.tsx` | Add loaded class immediately | Ensure body visible only after CSS is ready |
 
 ---
 
-## Expected Outcome
+## Expected Result
 
 After these changes:
-- **No more loading screens** on page reload - content appears instantly
-- **Laura (AI Assistant)** appears immediately in the bottom-right corner
-- **Correct purple/gray shield logo** already in place from previous changes
-- **Clean codebase** with no unused loader components
-- **Professional appearance** from the first frame
-- **Pre-rendered HTML** in `index.html` provides instant visual content while React hydrates
-
----
-
-## Technical Note
-
-The pre-rendered hero content in `index.html` (lines 255-281) ensures users see the homepage content immediately. React will then "hydrate" this content, replacing it with the interactive version without any visible flash or loader.
+- CSS loads synchronously (render-blocking) ensuring styles are ready before first paint
+- No more FOUC or broken styling on page load
+- The page displays correctly from the very first frame
+- Slightly slower FCP (First Contentful Paint) but correct appearance - this is the right tradeoff for user experience
