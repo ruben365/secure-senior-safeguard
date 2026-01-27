@@ -98,8 +98,8 @@ export const HeroHomepage = () => {
       }} />
       </div>
       
-      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 relative z-10 hero-instant" style={{ contain: 'strict', height: '100%', minHeight: '100%' }}>
-        <div className="grid lg:grid-cols-5 gap-8 lg:gap-20 xl:gap-28 items-center" style={{ contain: 'strict', height: '100%', minHeight: '100%' }}>
+      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 relative z-10 hero-instant flex items-center" style={{ contain: 'layout style paint', minHeight: 'calc(100vh - var(--nav-height, 64px))' }}>
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-20 xl:gap-28 items-center w-full" style={{ contain: 'layout style paint' }}>
           
           {/* Left Content - Instant render, no animation delay - LCP element */}
           <div className="lg:col-span-3 order-2 lg:order-1 w-full" style={{ contain: 'layout style paint' }}>
