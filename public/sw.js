@@ -1,4 +1,4 @@
-const CACHE_NAME = 'invision-network-v5';
+const CACHE_NAME = 'invision-network-v6';
 const IMAGE_CACHE = 'invision-images-v3';
 const STATIC_ASSETS = [
   '/',
@@ -93,10 +93,10 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // HTML navigation: network-first with cache fallback
+  // HTML navigation: network-only with cache fallback for offline only
   if (request.mode === 'navigate') {
     event.respondWith(
-      fetch(request)
+      fetch(request, { cache: 'no-store' })
         .then((response) => {
           const responseClone = response.clone();
           caches.open(CACHE_NAME).then((cache) => {
@@ -105,6 +105,7 @@ self.addEventListener('fetch', (event) => {
           return response;
         })
         .catch(() => {
+          // Only use cache when truly offline
           return caches.match('/').then((cached) => {
             return cached || caches.match('/index.html');
           });
