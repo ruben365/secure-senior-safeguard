@@ -2,8 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { lazy, Suspense, useEffect, useState } from "react";
-import { SplashScreen } from "./components/SplashScreen";
+import { lazy, Suspense, useEffect } from "react";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { LazyAIChat } from "./components/LazyAIChat";
 import { AIChatProvider } from "./contexts/AIChatContext";
@@ -234,41 +233,17 @@ function PublicRoutes() {
 }
 
 function App() {
-  const [showSplash, setShowSplash] = useState(true);
-  
   useSmoothAnchorScroll();
   
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
-    
-    // Remove initial splash immediately to prevent CLS
-    const initialSplash = document.getElementById('initial-splash');
-    if (initialSplash) {
-      initialSplash.classList.add('fade-out');
-      // Use requestAnimationFrame for smooth removal without CLS
-      requestAnimationFrame(() => {
-        setTimeout(() => {
-          initialSplash.remove();
-        }, 300);
-      });
-    }
-    
-    // Hide React splash faster
-    const timer = setTimeout(() => {
-      setShowSplash(false);
-    }, 400);
-    
     return () => {
       document.documentElement.style.scrollBehavior = "auto";
-      clearTimeout(timer);
     };
   }, []);
 
   return (
-    <>
-      <SplashScreen isVisible={showSplash} />
-      
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <Toaster />
           <Sonner />
@@ -305,7 +280,6 @@ function App() {
           </SubscriptionProvider>
         </AuthProvider>
       </QueryClientProvider>
-    </>
   );
 }
 

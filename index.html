@@ -250,24 +250,7 @@
   </head>
 
   <body>
-    <!-- Hardcoded Splash Screen - Uses contain:strict to prevent CLS -->
-    <div id="initial-splash" style="position:fixed;top:0;left:0;width:100%;height:100%;background-color:#F3F0FF;z-index:99999;display:flex;justify-content:center;align-items:center;transition:opacity 0.3s ease-out;contain:strict;will-change:opacity;">
-      <div style="display:flex;flex-direction:column;align-items:center;gap:1.5rem;contain:layout style paint;">
-        <!-- Shield Icon - no animation for performance -->
-        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          <path d="m9 12 2 2 4-4" stroke="#7c3aed" stroke-width="2"/>
-        </svg>
-        <!-- Brand text -->
-        <div style="text-align:center;">
-          <div style="font-family:Outfit,system-ui,sans-serif;font-size:1.5rem;font-weight:700;color:#7c3aed;">InVision Network</div>
-          <div style="font-family:Outfit,system-ui,sans-serif;font-size:0.875rem;color:#64748b;margin-top:0.25rem;">Protection • Education • Innovation</div>
-        </div>
-      </div>
-    </div>
-    <style>
-      #initial-splash.fade-out { opacity: 0; pointer-events: none; }
-    </style>
+    <!-- App root - instant load, no splash screen -->
     
     <div id="root">
       <!-- Critical Hero Content for LCP - matches React DOM structure exactly -->
