@@ -1,5 +1,5 @@
 import { lazy, Suspense, useState, useEffect } from "react";
-import lauraAvatar from "@/assets/laura-avatar-new.png";
+import lauraAvatar from "@/assets/laura-avatar-sm.webp";
 
 const AIChat = lazy(() => import("./AIChat").then(m => ({ default: m.AIChat })));
 
