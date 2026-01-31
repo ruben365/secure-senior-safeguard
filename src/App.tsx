@@ -2,17 +2,17 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
+import { SplashScreen } from "./components/SplashScreen";
 import { ProtectedRoute } from "./components/ProtectedRoute";
-import { LazyAIChat } from "./components/LazyAIChat";
+import { AIChat } from "./components/AIChat";
 import { AIChatProvider } from "./contexts/AIChatContext";
 import { AuthProvider } from "./contexts/AuthContext";
 import { CartProvider } from "./contexts/CartContext";
 import { CartFeedbackProvider, CartFeedbackNotifications } from "./components/CartFeedbackNotifications";
 import { SubscriptionProvider } from "./contexts/SubscriptionContext";
 import { CheckoutProvider } from "./contexts/CheckoutContext";
-// Checkout dialog uses a conditional loader to prevent Stripe SDK from loading until needed
-import { CheckoutDialogLoader } from "./components/payment/CheckoutDialogLoader";
+const UnifiedCheckoutDialog = lazy(() => import("./components/payment/UnifiedCheckoutDialog"));
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { RouteTracker } from "./components/RouteTracker";
 import { DraggablePerformanceMonitor } from "./components/DraggablePerformanceMonitor";
@@ -122,7 +122,8 @@ const Maintenance = lazy(() => import("./pages/Maintenance"));
 const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
 const PaymentCanceled = lazy(() => import("./pages/PaymentCanceled"));
 
-// No full-screen loader - pages render instantly
+import { AIPulseLoader } from "./components/AIPulseLoader";
+const PageLoader = () => <AIPulseLoader message="Loading..." fullScreen={true} />;
 const queryClient = new QueryClient();
 
 // Direct routes without AnimatePresence - instant transitions
@@ -232,17 +233,36 @@ function PublicRoutes() {
 }
 
 function App() {
+  const [showSplash, setShowSplash] = useState(true);
+  
   useSmoothAnchorScroll();
   
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
+    
+    const initialSplash = document.getElementById('initial-splash');
+    if (initialSplash) {
+      initialSplash.classList.add('fade-out');
+      setTimeout(() => {
+        initialSplash.remove();
+      }, 500);
+    }
+    
+    const timer = setTimeout(() => {
+      setShowSplash(false);
+    }, 800);
+    
     return () => {
       document.documentElement.style.scrollBehavior = "auto";
+      clearTimeout(timer);
     };
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
+      <SplashScreen isVisible={showSplash} />
+      
+      <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <Toaster />
           <Sonner />
@@ -251,7 +271,7 @@ function App() {
               <CheckoutProvider>
                 <CartFeedbackProvider>
                   <AIChatProvider>
-                    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+                    <BrowserRouter>
                       <SkipToContent />
                       <ScrollProgressBar />
                       <NavigationProgress />
@@ -262,14 +282,16 @@ function App() {
                       <RouteTracker />
                       <AnalyticsTracker />
                       <ErrorBoundary>
-                        <Suspense fallback={null}>
+                        <Suspense fallback={<PageLoader />}>
                           <PublicRoutes />
                         </Suspense>
                       </ErrorBoundary>
-                      <LazyAIChat />
+                      <AIChat />
                       <CookieConsent />
                       <CartFeedbackNotifications />
-                      <CheckoutDialogLoader />
+                      <Suspense fallback={null}>
+                        <UnifiedCheckoutDialog />
+                      </Suspense>
                       <DraggablePerformanceMonitor />
                     </BrowserRouter>
                   </AIChatProvider>
@@ -279,6 +301,7 @@ function App() {
           </SubscriptionProvider>
         </AuthProvider>
       </QueryClientProvider>
+    </>
   );
 }
 

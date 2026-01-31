@@ -13,50 +13,32 @@ export default defineConfig(({ mode }) => ({
   build: {
     sourcemap: true,
     cssCodeSplit: true,
-    minify: 'esbuild',
-    target: 'es2020',
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom'],
-          motion: ['framer-motion'],
-          supabase: ['@supabase/supabase-js'],
-          stripe: ['@stripe/react-stripe-js', '@stripe/stripe-js'],
-          query: ['@tanstack/react-query'],
-          ui: ['sonner', 'lucide-react'],
         },
       },
     },
   },
   css: {
     devSourcemap: true,
-    postcss: {
-      plugins: [],
-    },
-  },
-  esbuild: {
-    legalComments: 'none',
-    treeShaking: true,
   },
   plugins: [
     react(),
     mode === "development" && componentTagger(),
-    // Make CSS non-render-blocking in production
     ViteImageOptimizer({
       jpg: {
-        quality: 75,
-        progressive: true,
+        quality: 80,
       },
       jpeg: {
-        quality: 75,
-        progressive: true,
+        quality: 80,
       },
       png: {
-        quality: 70,
-        compressionLevel: 9,
+        quality: 80,
       },
       webp: {
-        quality: 75,
+        quality: 80,
       },
     }),
   ].filter(Boolean),

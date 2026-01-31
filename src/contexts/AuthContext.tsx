@@ -122,74 +122,42 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    let subscription: { unsubscribe: () => void } | null = null;
-    let cancelled = false;
-
-    const initializeAuth = () => {
-      if (cancelled) return;
-      
-      // Set up auth state listener
-      const { data } = supabase.auth.onAuthStateChange(
-        (event, session) => {
-          if (cancelled) return;
-          setSession(session);
-          setUser(session?.user ?? null);
-          
-          if (session?.user) {
-            // Defer Supabase calls with setTimeout to prevent deadlock
-            setTimeout(() => {
-              if (!cancelled) fetchUserRole(session.user);
-            }, 0);
-          } else {
-            setRoleConfig(null);
-            setLoading(false);
-            setInitialized(true);
-          }
-        }
-      );
-      subscription = data.subscription;
-
-      // Check for existing session
-      supabase.auth.getSession().then(({ data: { session } }) => {
-        if (cancelled) return;
+    // Set up auth state listener FIRST
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
         setSession(session);
         setUser(session?.user ?? null);
         
         if (session?.user) {
-          fetchUserRole(session.user).finally(() => {
-            if (!cancelled) {
-              setLoading(false);
-              setInitialized(true);
-            }
-          });
+          // Defer Supabase calls with setTimeout to prevent deadlock
+          setTimeout(() => {
+            fetchUserRole(session.user);
+          }, 0);
         } else {
+          setRoleConfig(null);
           setLoading(false);
           setInitialized(true);
         }
-      });
-    };
+      }
+    );
 
-    // Defer auth initialization to reduce main-thread work during initial load
-    // Auth is not critical for initial page render
-    if ('requestIdleCallback' in window) {
-      const idleId = (window as Window & { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback(
-        initializeAuth,
-        { timeout: 3000 }
-      );
-      return () => {
-        cancelled = true;
-        (window as Window & { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(idleId);
-        subscription?.unsubscribe();
-      };
-    } else {
-      // Fallback: defer with short timeout
-      const timeoutId = setTimeout(initializeAuth, 500);
-      return () => {
-        cancelled = true;
-        clearTimeout(timeoutId);
-        subscription?.unsubscribe();
-      };
-    }
+    // THEN check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      
+      if (session?.user) {
+        fetchUserRole(session.user).finally(() => {
+          setLoading(false);
+          setInitialized(true);
+        });
+      } else {
+        setLoading(false);
+        setInitialized(true);
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, [fetchUserRole]);
 
   const hasPermission = useCallback((permission: string): boolean => {

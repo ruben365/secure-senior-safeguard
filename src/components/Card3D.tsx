@@ -1,6 +1,7 @@
 import { ReactNode, useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { throttle } from "@/utils/performanceOptimization";
 
 interface Card3DProps {
   children: ReactNode;
@@ -10,63 +11,50 @@ interface Card3DProps {
 
 const Card3D = ({ children, className = "", intensity = 10 }: Card3DProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  const boundsRef = useRef<{ width: number; height: number; left: number; top: number } | null>(null);
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
 
-  // Cache bounds on mouse enter with rAF to avoid forced reflows
-  const handleMouseEnter = useCallback(() => {
-    if (!ref.current) return;
-    
-    const element = ref.current;
-    setIsHovering(true);
-    
-    // Defer geometry read to next frame to avoid forced reflow
-    requestAnimationFrame(() => {
-      const rect = element.getBoundingClientRect();
-      boundsRef.current = {
-        width: rect.width,
-        height: rect.height,
-        left: rect.left,
-        top: rect.top,
-      };
-    });
-  }, []);
-
-  // Use cached bounds - no layout reads during mouse move
+  // Throttled mouse move handler to reduce forced reflows
   const handleMouseMove = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      if (!boundsRef.current) return;
+    throttle((e: React.MouseEvent<HTMLDivElement>) => {
+      if (!ref.current) return;
 
-      const x = e.clientX - boundsRef.current.left;
-      const y = e.clientY - boundsRef.current.top;
+      requestAnimationFrame(() => {
+        if (!ref.current) return;
+        const rect = ref.current.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
 
-      const centerX = boundsRef.current.width / 2;
-      const centerY = boundsRef.current.height / 2;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
 
-      const rotateXValue = ((y - centerY) / centerY) * -intensity;
-      const rotateYValue = ((x - centerX) / centerX) * intensity;
+        const rotateXValue = ((y - centerY) / centerY) * -intensity;
+        const rotateYValue = ((x - centerX) / centerX) * intensity;
 
-      setRotateX(rotateXValue);
-      setRotateY(rotateYValue);
-    },
+        setRotateX(rotateXValue);
+        setRotateY(rotateYValue);
+      });
+    }, 16),
     [intensity]
   );
 
-  const handleMouseLeave = useCallback(() => {
+  const handleMouseLeave = () => {
     setRotateX(0);
     setRotateY(0);
     setIsHovering(false);
-    boundsRef.current = null;
-  }, []);
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovering(true);
+  };
 
   return (
     <motion.div
       ref={ref}
-      onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onMouseEnter={handleMouseEnter}
       animate={{
         rotateX,
         rotateY,

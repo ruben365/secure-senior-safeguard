@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -19,8 +19,7 @@ import {
   Smartphone,
   RefreshCw
 } from 'lucide-react';
-// Lazy load Stripe Elements to prevent 155KB from loading on page start
-const LazyStripeElements = lazy(() => import('./LazyStripeElements'));
+import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useCheckout } from '@/contexts/CheckoutContext';
 import { useStripeKey } from '@/hooks/useStripeKey';
 import { usePaymentFlow } from '@/hooks/usePaymentFlow';
@@ -28,9 +27,6 @@ import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import confetti from 'canvas-confetti';
 import { motion, AnimatePresence } from 'framer-motion';
-
-// Lazy load Stripe hooks and components - only imported when payment step is reached
-const LazyPaymentFormStep = lazy(() => import('./LazyPaymentFormStep'));
 
 // Step 1: Customer Information Form
 const CustomerInfoStep: React.FC<{
@@ -177,7 +173,7 @@ const QRCodePaymentStep: React.FC<{
           onSuccess();
         }
       } catch (err) {
-        if (import.meta.env.DEV) console.log('Payment check:', err);
+        console.log('Payment check:', err);
       } finally {
         setChecking(false);
       }
@@ -210,10 +206,10 @@ const QRCodePaymentStep: React.FC<{
         setQrCodeUrl(qrUrl);
         setPaymentLinkId(data.id);
         setTimeLeft(240);
-        if (import.meta.env.DEV) console.log('[QR Payment] Generated:', { id: data.id, requestId: data.requestId });
+        console.log('[QR Payment] Generated:', { id: data.id, requestId: data.requestId });
       }
     } catch (error: any) {
-      if (import.meta.env.DEV) console.error('[QR Payment] Error:', error);
+      console.error('[QR Payment] Error:', error);
       toast.error('Failed to generate QR code');
     } finally {
       setLoading(false);
@@ -292,7 +288,124 @@ const QRCodePaymentStep: React.FC<{
   );
 };
 
-// PaymentFormStep is now lazy-loaded from LazyPaymentFormStep.tsx
+// Step 2: Payment Form (Stripe)
+const PaymentFormStep: React.FC<{
+  onSuccess: () => void;
+  onBack: () => void;
+}> = ({ onSuccess, onBack }) => {
+  const stripe = useStripe();
+  const elements = useElements();
+  const { state, setLoading, setError, setOrderId } = useCheckout();
+  const { verifyPayment, sendDigitalDownload } = usePaymentFlow();
+  const [processing, setProcessing] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!stripe || !elements) {
+      return;
+    }
+
+    setProcessing(true);
+    setError(null);
+
+    try {
+      const { error: submitError } = await elements.submit();
+      if (submitError) {
+        throw new Error(submitError.message);
+      }
+
+      const { error: confirmError, paymentIntent } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: `${window.location.origin}/payment-success`,
+          receipt_email: state.customerInfo.email
+        },
+        redirect: 'if_required'
+      });
+
+      if (confirmError) {
+        throw new Error(confirmError.message);
+      }
+
+      if (paymentIntent?.status === 'succeeded') {
+        // Trigger confetti
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+
+        // Verify payment and send digital downloads if applicable
+        const digitalItems = state.items.filter(item => item.product.isDigital);
+        if (digitalItems.length > 0) {
+          await sendDigitalDownload(
+            paymentIntent.id,
+            state.customerInfo.email,
+            digitalItems.map(item => item.productId)
+          );
+        }
+
+        setOrderId(paymentIntent.id);
+        onSuccess();
+      }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Payment failed';
+      setError(message);
+      toast.error(message);
+    } finally {
+      setProcessing(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <Button
+        type="button"
+        variant="ghost"
+        size="sm"
+        onClick={onBack}
+        className="mb-2"
+      >
+        <ArrowLeft className="mr-2 h-4 w-4" />
+        Back to details
+      </Button>
+
+      <div className="border rounded-lg p-4">
+        <PaymentElement 
+          options={{
+            layout: 'tabs'
+          }}
+        />
+      </div>
+
+      {state.error && (
+        <div className="flex items-center gap-2 p-3 bg-destructive/10 text-destructive rounded-lg">
+          <AlertCircle className="h-4 w-4" />
+          <span className="text-sm">{state.error}</span>
+        </div>
+      )}
+
+      <Button type="submit" className="w-full" disabled={!stripe || processing}>
+        {processing ? (
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            Processing payment...
+          </>
+        ) : (
+          <>
+            <ShieldCheck className="mr-2 h-4 w-4" />
+            Pay ${useCheckout().total.toFixed(2)}
+          </>
+        )}
+      </Button>
+
+      <p className="text-xs text-center text-muted-foreground">
+        Your payment is secured with 256-bit SSL encryption
+      </p>
+    </form>
+  );
+};
 
 // Step 3: Success
 const SuccessStep: React.FC<{
@@ -455,37 +568,35 @@ const UnifiedCheckoutDialog: React.FC = () => {
                 </TabsList>
                 
                 <TabsContent value="card">
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setStep('info')}
+                    className="mb-2"
+                  >
+                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    Back to details
+                  </Button>
+                  
                   {stripePromise && state.clientSecret ? (
-                    <Suspense fallback={
-                      <div className="flex items-center justify-center py-8">
-                        <Loader2 className="w-6 h-6 animate-spin text-primary" />
-                        <span className="ml-2 text-sm text-muted-foreground">Loading payment form...</span>
-                      </div>
-                    }>
-                      <LazyStripeElements
-                        stripePromise={stripePromise}
-                        options={{
-                          clientSecret: state.clientSecret,
-                          appearance: {
-                            theme: 'stripe',
-                            variables: {
-                              colorPrimary: 'hsl(var(--primary))'
-                            }
+                    <Elements
+                      stripe={stripePromise}
+                      options={{
+                        clientSecret: state.clientSecret,
+                        appearance: {
+                          theme: 'stripe',
+                          variables: {
+                            colorPrimary: 'hsl(var(--primary))'
                           }
-                        }}
-                      >
-                        <Suspense fallback={
-                          <div className="flex items-center justify-center py-4">
-                            <Loader2 className="w-5 h-5 animate-spin text-primary" />
-                          </div>
-                        }>
-                          <LazyPaymentFormStep
-                            onSuccess={() => setStep('success')}
-                            onBack={() => setStep('info')}
-                          />
-                        </Suspense>
-                      </LazyStripeElements>
-                    </Suspense>
+                        }
+                      }}
+                    >
+                      <PaymentFormStep
+                        onSuccess={() => setStep('success')}
+                        onBack={() => setStep('info')}
+                      />
+                    </Elements>
                   ) : (
                     <div className="flex items-center justify-center py-8">
                       <Loader2 className="w-6 h-6 animate-spin text-primary" />

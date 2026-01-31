@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { User, Session } from "@supabase/supabase-js";
+import { AIPulseLoader } from "@/components/AIPulseLoader";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -49,11 +50,7 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   }, []);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="animate-pulse text-muted-foreground text-sm">Verifying...</div>
-      </div>
-    );
+    return <AIPulseLoader message="Verifying Security..." />;
   }
 
   if (!user || !session) {

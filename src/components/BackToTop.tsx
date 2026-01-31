@@ -36,7 +36,7 @@ export const BackToTop = () => {
           : 'opacity-0 translate-y-4 pointer-events-none'
       }`}
       aria-label="Scroll to top"
-      tabIndex={isVisible ? 0 : -1}
+      aria-hidden={!isVisible}
     >
       <ChevronUp className="w-6 h-6" />
     </button>

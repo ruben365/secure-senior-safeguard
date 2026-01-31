@@ -87,10 +87,10 @@ export const CommunityImpact = () => {
             decoding="async"
             className="w-full h-[320px] object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 p-8 text-center">
-            <h3 className="text-2xl font-bold mb-2 text-white drop-shadow-lg">Proudly Serving Ohio Communities</h3>
-            <p className="text-white/90 max-w-2xl mx-auto drop-shadow-md">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 p-8 text-center text-white">
+            <h3 className="text-2xl font-bold mb-2">Proudly Serving Ohio Communities</h3>
+            <p className="text-white/80 max-w-2xl mx-auto">
               From Dayton to Columbus to Cincinnati—protecting families across the Buckeye State
             </p>
           </div>
@@ -102,19 +102,16 @@ export const CommunityImpact = () => {
             <img
               src={veteranSupport}
               alt="InVision Network supporting veterans"
-              width={400}
-              height={192}
               className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
               loading="lazy"
-              decoding="async"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/85 via-slate-900/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
             <div className="absolute bottom-3 left-3 right-3">
-              <div className="flex items-center gap-2">
-                <Shield className="w-4 h-4 text-white" />
-                <span className="text-sm font-bold text-white drop-shadow-md">Veteran Support</span>
+              <div className="flex items-center gap-2 text-white">
+                <Shield className="w-4 h-4" />
+                <span className="text-sm font-bold">Veteran Support</span>
               </div>
-              <p className="text-white/90 text-xs mt-1 drop-shadow-sm">17% discount for those who served</p>
+              <p className="text-white/80 text-xs mt-1">17% discount for those who served</p>
             </div>
           </div>
           
@@ -125,19 +122,16 @@ export const CommunityImpact = () => {
             <img
               src={communityGivingAbstract}
               alt="InVision Network community giving and support"
-              width={400}
-              height={192}
               className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
               loading="lazy"
-              decoding="async"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/85 via-slate-900/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
             <div className="absolute bottom-3 left-3 right-3">
-              <div className="flex items-center gap-2">
-                <Heart className="w-4 h-4 text-white" />
-                <span className="text-sm font-bold text-white drop-shadow-md">Giving Back</span>
+              <div className="flex items-center gap-2 text-white">
+                <Heart className="w-4 h-4" />
+                <span className="text-sm font-bold">Giving Back</span>
               </div>
-              <p className="text-white/90 text-xs mt-1 drop-shadow-sm">Supporting families in need</p>
+              <p className="text-white/80 text-xs mt-1">Supporting families in need</p>
             </div>
           </div>
           
@@ -148,21 +142,18 @@ export const CommunityImpact = () => {
             <img
               src={paidWorkshopTraining}
               alt="InVision Network professional training workshops"
-              width={400}
-              height={192}
               className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
               loading="lazy"
-              decoding="async"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/85 via-slate-900/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
             <div className="absolute bottom-3 left-3 right-3">
-              <div className="flex items-center gap-2">
-                <GraduationCap className="w-4 h-4 text-white" />
-                <span className="text-sm font-bold text-white drop-shadow-md">Professional Workshops</span>
+              <div className="flex items-center gap-2 text-white">
+                <GraduationCap className="w-4 h-4" />
+                <span className="text-sm font-bold">Professional Workshops</span>
               </div>
               <div className="flex items-center gap-2 mt-1">
                 <DollarSign className="w-3 h-3 text-emerald-400" />
-                <p className="text-white/90 text-xs drop-shadow-sm">Affordable expert-led training</p>
+                <p className="text-white/80 text-xs">Affordable expert-led training</p>
               </div>
             </div>
           </div>

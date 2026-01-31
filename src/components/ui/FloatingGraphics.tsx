@@ -258,23 +258,20 @@ export const FloatingGraphics = ({ variant = "orbs", className = "", intensity =
   }
 
   if (variant === "circuits") {
-    // Use CSS animations instead of framer-motion pathLength to avoid SVG d attribute errors
     return (
       <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>
-        {/* Circuit lines - using CSS stroke-dashoffset animation */}
+        {/* Circuit lines */}
         <svg className={`absolute inset-0 w-full h-full ${baseOpacity}`}>
-          {/* Horizontal circuit line with CSS animation */}
-          <path
+          {/* Horizontal circuit line */}
+          <motion.path
             d="M0 100 L100 100 L120 80 L200 80 L220 100 L350 100"
             stroke="hsl(var(--primary))"
             strokeWidth="1.5"
             fill="none"
             opacity="0.3"
-            className="animate-circuit-draw"
-            style={{
-              strokeDasharray: 500,
-              strokeDashoffset: 500,
-            }}
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
           />
           {/* Nodes */}
           <circle cx="100" cy="100" r="4" fill="hsl(var(--primary))" opacity="0.4" />
@@ -310,23 +307,32 @@ export const FloatingGraphics = ({ variant = "orbs", className = "", intensity =
   }
 
   if (variant === "waves") {
-    // Use CSS animations instead of framer-motion path morphing to avoid SVG d attribute errors
     return (
       <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>
         <svg className={`absolute bottom-0 left-0 w-full h-40 ${baseOpacity}`} viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path
+          <motion.path
             d="M0,60 C200,100 400,20 600,60 C800,100 1000,20 1200,60 L1200,120 L0,120 Z"
             fill="hsl(var(--primary))"
             opacity="0.1"
-            className="animate-wave-slow"
+            animate={{ d: [
+              "M0,60 C200,100 400,20 600,60 C800,100 1000,20 1200,60 L1200,120 L0,120 Z",
+              "M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 L1200,120 L0,120 Z",
+              "M0,60 C200,100 400,20 600,60 C800,100 1000,20 1200,60 L1200,120 L0,120 Z",
+            ]}}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
           />
         </svg>
         <svg className={`absolute bottom-0 left-0 w-full h-32 ${baseOpacity}`} viewBox="0 0 1200 100" preserveAspectRatio="none">
-          <path
+          <motion.path
             d="M0,50 C150,80 350,20 500,50 C650,80 850,20 1000,50 C1100,70 1150,40 1200,50 L1200,100 L0,100 Z"
             fill="hsl(var(--accent))"
             opacity="0.08"
-            className="animate-wave-medium"
+            animate={{ d: [
+              "M0,50 C150,80 350,20 500,50 C650,80 850,20 1000,50 C1100,70 1150,40 1200,50 L1200,100 L0,100 Z",
+              "M0,50 C150,20 350,80 500,50 C650,20 850,80 1000,50 C1100,30 1150,60 1200,50 L1200,100 L0,100 Z",
+              "M0,50 C150,80 350,20 500,50 C650,80 850,20 1000,50 C1100,70 1150,40 1200,50 L1200,100 L0,100 Z",
+            ]}}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
           />
         </svg>
       </div>

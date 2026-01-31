@@ -153,10 +153,6 @@ function About() {
                 <img 
                   src={teamDiverse1} 
                   alt="InVision Network team working together"
-                  width={600}
-                  height={400}
-                  loading="lazy"
-                  decoding="async"
                   className="rounded-2xl shadow-2xl w-full h-auto border-4 border-primary/20"
                 />
                 <div className="absolute -bottom-4 sm:-bottom-6 -right-4 sm:-right-6 bg-primary text-primary-foreground p-4 sm:p-6 md:p-8 rounded-xl shadow-xl">
@@ -374,10 +370,6 @@ function About() {
                 <img 
                   src={seniorLearning} 
                   alt="Senior learning to use technology with instructor" 
-                  width={600}
-                  height={320}
-                  loading="lazy"
-                  decoding="async"
                   className="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-accent/90 via-accent/40 to-transparent" />

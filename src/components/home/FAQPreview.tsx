@@ -46,7 +46,7 @@ export const FAQPreview = () => {
           <div className="lg:sticky lg:top-24 space-y-8">
             <div>
               <div 
-                className="inline-flex items-center gap-2 px-6 py-2.5 bg-primary text-white text-base font-bold uppercase tracking-wider mb-6"
+                className="inline-flex items-center gap-2 px-6 py-2.5 bg-primary text-primary-foreground text-base font-bold uppercase tracking-wider mb-6"
                 style={{ clipPath: "polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%)" }}
               >
                 FAQ
@@ -70,15 +70,11 @@ export const FAQPreview = () => {
                     <img
                       src={supportAgent}
                       alt="Support specialist"
-                      width={80}
-                      height={80}
-                      loading="lazy"
-                      decoding="async"
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="absolute -bottom-1 -right-1 w-7 h-7 bg-emerald-600 rounded-full border-2 border-background flex items-center justify-center shadow-md">
-                    <span className="text-[11px] text-white font-bold drop-shadow-sm">ON</span>
+                  <div className="absolute -bottom-1 -right-1 w-7 h-7 bg-green-900 rounded-full border-2 border-background flex items-center justify-center">
+                    <span className="text-[11px] text-white font-bold">ON</span>
                   </div>
                 </div>
                 <div>
@@ -149,13 +145,9 @@ export const FAQPreview = () => {
             <img 
               src={natureCTABg} 
               alt="Beautiful nature landscape" 
-              width={1920}
-              height={1080}
               className="w-full h-full object-cover"
-              loading="lazy"
-              decoding="async"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
           </div>
           
           <div className="relative z-10 p-12 md:p-20 text-center">
@@ -173,7 +165,7 @@ export const FAQPreview = () => {
                   <ArrowRight className="ml-2 w-6 h-6" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="h-16 px-10 text-xl font-bold rounded-full bg-white/15 border-2 border-white/50 text-white hover:bg-white/25 drop-shadow-md">
+              <Button asChild variant="outline" size="lg" className="h-16 px-10 text-xl font-bold rounded-full bg-white/10 border-2 border-white/40 text-white hover:bg-white/20">
                 <Link to="/contact">
                   Talk to an Expert
                 </Link>

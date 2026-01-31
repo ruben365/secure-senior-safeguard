@@ -103,11 +103,7 @@ const BookCoverModal = ({ isOpen, onClose, book, onAddToCart, onBuyNow }: BookCo
                 <img 
                   src={book.image} 
                   alt={book.name}
-                  width={260}
-                  height={347}
                   className="w-full h-full object-cover"
-                  loading="lazy"
-                  decoding="async"
                 />
               </div>
               

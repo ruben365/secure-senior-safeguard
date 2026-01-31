@@ -25,28 +25,6 @@ export const HeroHomepage = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const selectedVideo = useMemo(() => heroVideos[Math.floor(Math.random() * heroVideos.length)], []);
   const [showDisclaimer, setShowDisclaimer] = useState(false);
-  const [videoFailed, setVideoFailed] = useState(false);
-  const [videoReady, setVideoReady] = useState(false);
-
-  // Pre-validate video URL before mounting to prevent console errors
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      // Use HEAD request to validate video exists without downloading it
-      fetch(selectedVideo, { method: 'HEAD', mode: 'cors' })
-        .then(response => {
-          if (response.ok) {
-            setVideoReady(true);
-          } else {
-            setVideoFailed(true);
-          }
-        })
-        .catch(() => {
-          // Silently fail - no video will be shown, no console error
-          setVideoFailed(true);
-        });
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, [selectedVideo]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -55,41 +33,22 @@ export const HeroHomepage = () => {
     return () => clearTimeout(timer);
   }, []);
   
-  // Use CSS variable for responsive nav height - defined in base.css
-  // 64px mobile, 80px tablet, 96px desktop
-  // Use fixed min-height to prevent CLS - 600px minimum ensures stable layout
-  return <section 
-    id="hero"
-    className="relative overflow-hidden bg-background"
-    style={{
-      minHeight: 'max(600px, calc(100vh - 96px))',
-      height: 'auto',
-      contain: 'layout style paint'
-    }}
-  >
+  return <section className="relative min-h-[100vh] lg:min-h-[110vh] overflow-hidden" style={{
+    backgroundColor: '#1a1625'
+  }}>
       {/* Video Background - lazy preload for faster initial paint */}
       <div className="absolute inset-0">
-        {videoReady && !videoFailed && (
-          <video 
-            ref={videoRef} 
-            autoPlay 
-            loop 
-            muted 
-            playsInline 
-            preload="none"
-            className="absolute inset-0 w-full h-full object-cover"
-            onError={() => setVideoFailed(true)}
-          >
-            <source 
-              src={selectedVideo} 
-              type="video/mp4" 
-              onError={(e) => {
-                e.stopPropagation();
-                setVideoFailed(true);
-              }}
-            />
-          </video>
-        )}
+        <video 
+          ref={videoRef} 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          preload="none"
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src={selectedVideo} type="video/mp4" />
+        </video>
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/40" />
       </div>
@@ -102,15 +61,15 @@ export const HeroHomepage = () => {
       }} />
       </div>
       
-      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 relative z-10 hero-instant flex items-center py-8 md:py-12 lg:py-16" style={{ minHeight: 'max(500px, calc(100vh - 160px))', contain: 'layout style paint' }}>
-        <div className="grid lg:grid-cols-5 gap-8 lg:gap-20 xl:gap-28 items-center w-full" style={{ contain: 'layout style paint' }}>
+      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 relative z-10 hero-instant">
+        <div className="flex flex-col lg:grid lg:grid-cols-5 gap-8 lg:gap-20 xl:gap-28 items-center min-h-[100vh] py-16 sm:py-20 lg:py-0">
           
-          {/* Left Content - Instant render, no animation delay - LCP element */}
+          {/* Left Content - Instant render, no animation delay */}
           <div className="lg:col-span-3 order-2 lg:order-1 w-full">
             {/* Premium Badge */}
-            <div className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full bg-primary/10 border border-primary/20 mb-6 sm:mb-10 shadow-sm">
+            <div className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 mb-6 sm:mb-10 shadow-sm">
               <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-gradient-to-r from-primary to-accent shadow-sm" />
-              <span className="text-xs sm:text-sm font-semibold text-foreground">Veteran-Supporting • Ohio-Based</span>
+              <span className="text-xs sm:text-sm font-semibold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Veteran-Supporting • Ohio-Based</span>
             </div>
             
             {/* Headline - Renders immediately - LARGE for elderly readability */}
@@ -123,13 +82,13 @@ export const HeroHomepage = () => {
             </h1>
             
             {/* Description - Larger for readability */}
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-2xl mb-8 sm:mb-12 leading-relaxed font-medium">
+            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-foreground/80 max-w-2xl mb-8 sm:mb-12 leading-relaxed font-medium">
               Empowering families with AI scam protection. Transforming businesses with cutting-edge automation solutions.
             </p>
             
             {/* CTAs - Larger, more prominent buttons */}
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 relative z-30">
-              <Button asChild size="lg" className="group h-14 sm:h-16 px-8 sm:px-10 text-base sm:text-lg font-bold rounded-2xl bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-accent/90 shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-200 border-0 w-full sm:w-auto text-primary-foreground">
+              <Button asChild size="lg" className="group h-14 sm:h-16 px-8 sm:px-10 text-base sm:text-lg font-bold rounded-2xl bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-accent/90 shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-200 border-0 w-full sm:w-auto">
                 <Link to="/training">
                   <Shield className="mr-2 w-5 h-5 sm:w-6 sm:h-6" />
                   Protect My Family
@@ -164,6 +123,9 @@ export const HeroHomepage = () => {
                   {/* Second ring */}
                   <div className="absolute inset-4 sm:inset-6 rounded-full border border-accent/25 hidden sm:block" />
                   
+                  {/* Pulsing glow */}
+                  
+                  
                   {/* Inner solid circle */}
                   <div className="absolute inset-10 sm:inset-16 rounded-full bg-gradient-to-br from-primary via-primary to-accent/80 shadow-2xl shadow-primary/40" />
                   
@@ -195,11 +157,11 @@ export const HeroHomepage = () => {
                   }];
                   const pos = positions[index];
                   return <div key={feature.label} className="absolute" style={pos}>
-                        <div className="flex items-center gap-2.5 px-4 py-2.5 bg-card rounded-full border border-border shadow-lg shadow-primary/10 hover:scale-105 transition-transform duration-200">
-                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center">
+                        <div className="flex items-center gap-2.5 px-4 py-2.5 bg-card/95 rounded-full border border-primary/15 shadow-lg shadow-primary/10 hover:scale-105 transition-transform duration-200">
+                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary/15 to-accent/15 flex items-center justify-center">
                             <feature.icon className="w-4 h-4 text-primary" />
                           </div>
-                          <span className="text-sm text-card-foreground font-medium whitespace-nowrap">{feature.label}</span>
+                          <span className="text-sm text-foreground font-medium whitespace-nowrap">{feature.label}</span>
                         </div>
                       </div>;
                 })}
@@ -208,11 +170,11 @@ export const HeroHomepage = () => {
 
               {/* Feature badges grid - Mobile only */}
               <div className="grid grid-cols-2 gap-2 mt-6 md:hidden">
-                {securityFeatures.map(feature => <div key={feature.label} className="flex items-center gap-2 px-3 py-2 bg-card rounded-lg border border-border shadow-sm">
-                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center flex-shrink-0">
+                {securityFeatures.map(feature => <div key={feature.label} className="flex items-center gap-2 px-3 py-2 bg-card/90 rounded-lg border border-primary/10 shadow-sm">
+                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary/15 to-accent/15 flex items-center justify-center flex-shrink-0">
                       <feature.icon className="w-3 h-3 text-primary" />
                     </div>
-                    <span className="text-xs text-card-foreground font-medium leading-tight">{feature.label}</span>
+                    <span className="text-xs text-foreground font-medium leading-tight">{feature.label}</span>
                   </div>)}
               </div>
 
@@ -227,7 +189,7 @@ export const HeroHomepage = () => {
               }, {
                 icon: ShieldCheck,
                 label: "Veteran-Supporting"
-              }].map(stat => <div key={stat.label} className="text-center p-2 sm:p-4 bg-secondary/50 rounded-xl sm:rounded-2xl border border-border hover:border-primary/40 transition-colors duration-200">
+              }].map(stat => <div key={stat.label} className="text-center p-2 sm:p-4 bg-card/60 rounded-xl sm:rounded-2xl border border-primary/10 hover:border-primary/25 transition-colors duration-200">
                     <stat.icon className="w-4 h-4 sm:w-5 sm:h-5 text-accent mx-auto mb-1 sm:mb-2" />
                     <div className="text-[10px] sm:text-xs text-muted-foreground font-medium">{stat.label}</div>
                   </div>)}
@@ -243,14 +205,14 @@ export const HeroHomepage = () => {
 
       {/* AI Image Disclaimer - fades in after 7 seconds */}
       <div 
-        className={`absolute bottom-4 left-1/2 -translate-x-1/2 z-20 transition-opacity duration-1000 ${
-          showDisclaimer ? 'opacity-100' : 'opacity-0'
+        className={`absolute bottom-4 left-1/2 -translate-x-1/2 z-20 transition-all duration-1000 ${
+          showDisclaimer ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
         }`}
       >
-        <div className="flex items-center gap-2 px-4 py-2 bg-card backdrop-blur-sm rounded-full border border-border shadow-lg">
+        <div className="flex items-center gap-2 px-4 py-2 bg-card/90 backdrop-blur-sm rounded-full border border-primary/20 shadow-lg">
           <Camera className="w-3.5 h-3.5 text-primary" />
           <span className="text-xs text-muted-foreground">
-            <strong className="text-card-foreground">Privacy Notice:</strong> Images are AI-generated to protect member identities
+            <strong className="text-foreground">Privacy Notice:</strong> Images are AI-generated to protect member identities
           </span>
         </div>
       </div>

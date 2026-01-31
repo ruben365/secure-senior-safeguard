@@ -7,9 +7,8 @@ if (window.location.search.includes('r=')) {
   window.history.replaceState({}, '', window.location.pathname);
 }
 
-// Mount app - CSS is synchronously loaded via render-blocking stylesheet
-const root = document.getElementById("root")!;
-createRoot(root).render(<App />);
+// Mount immediately
+createRoot(document.getElementById("root")!).render(<App />);
 
 // Defer non-critical initialization
 if ('requestIdleCallback' in window) {

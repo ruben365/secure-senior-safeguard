@@ -2,12 +2,9 @@ import { ChevronDown } from "lucide-react";
 
 const ScrollIndicator = () => {
   const scrollToContent = () => {
-    // Use rAF to avoid forced reflow from innerHeight read
-    requestAnimationFrame(() => {
-      window.scrollTo({
-        top: window.innerHeight - 80, // Account for navbar height
-        behavior: 'smooth'
-      });
+    window.scrollTo({
+      top: window.innerHeight - 80, // Account for navbar height
+      behavior: 'smooth'
     });
   };
 

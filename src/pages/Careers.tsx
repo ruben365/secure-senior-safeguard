@@ -380,11 +380,7 @@ function Careers() {
               <div className="relative rounded-3xl overflow-hidden shadow-2xl group">
                 <img 
                   src={teamCollaboration} 
-                  alt="Our team collaborating in a meeting"
-                  width={600}
-                  height={320}
-                  loading="lazy"
-                  decoding="async"
+                  alt="Our team collaborating in a meeting" 
                   className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
@@ -399,11 +395,7 @@ function Careers() {
               <div className="relative rounded-3xl overflow-hidden shadow-2xl group">
                 <img 
                   src={supportAgent} 
-                  alt="Support team member helping customers"
-                  width={600}
-                  height={320}
-                  loading="lazy"
-                  decoding="async"
+                  alt="Support team member helping customers" 
                   className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-accent/80 via-transparent to-transparent" />

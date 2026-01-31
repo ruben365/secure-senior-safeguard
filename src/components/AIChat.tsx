@@ -15,7 +15,7 @@ import {
   Square,
   ChevronDown
 } from "lucide-react";
-import lauraAvatar from "@/assets/laura-avatar-nav.webp";
+import lauraAvatar from "@/assets/laura-avatar-new.png";
 
 interface Message {
   role: "user" | "assistant";
@@ -333,8 +333,7 @@ export const AIChat = () => {
       <div className="fixed bottom-6 right-6 z-[9998] group">
         <button
           onClick={openChat}
-          className="relative rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden ring-2 ring-primary/20"
-          style={{ width: 56, height: 56, contain: 'strict' }}
+          className="relative w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden ring-2 ring-primary/20"
         >
           <img 
             src={lauraAvatar} 
@@ -344,8 +343,8 @@ export const AIChat = () => {
             sizes="56px"
             loading="eager"
             decoding="async"
-            fetchPriority="high"
-            style={{ width: 56, height: 56, objectFit: 'cover', objectPosition: 'top' }}
+            className="w-full h-full object-cover object-top"
+            style={{ fetchPriority: 'high' } as React.CSSProperties}
           />
           <div className="absolute bottom-0.5 right-0.5 w-3 h-3 rounded-full bg-green-500 border-2 border-white" />
         </button>
@@ -432,7 +431,7 @@ export const AIChat = () => {
           {messages.length === 0 && (
             <div className="text-center py-6 space-y-3">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full overflow-hidden ring-2 ring-primary/20">
-                <img src={lauraAvatar} alt="Laura" width={64} height={64} sizes="64px" loading="lazy" decoding="async" className="w-full h-full object-cover object-top" />
+                <img src={lauraAvatar} alt="Laura" width={64} height={64} loading="lazy" decoding="async" className="w-full h-full object-cover object-top" />
               </div>
               <div className="space-y-2">
                 <p className="text-base font-semibold text-foreground">Hi, I'm Laura!</p>
@@ -475,7 +474,7 @@ export const AIChat = () => {
             >
               {msg.role === "assistant" && (
                 <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
-                  <img src={lauraAvatar} alt="Laura" width={32} height={32} sizes="32px" loading="lazy" decoding="async" className="w-full h-full object-cover object-top" />
+                  <img src={lauraAvatar} alt="Laura" width={32} height={32} loading="lazy" decoding="async" className="w-full h-full object-cover object-top" />
                 </div>
               )}
               
