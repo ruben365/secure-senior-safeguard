@@ -57,12 +57,14 @@ export const HeroHomepage = () => {
   
   // Use CSS variable for responsive nav height - defined in base.css
   // 64px mobile, 80px tablet, 96px desktop
+  // Use fixed min-height to prevent CLS - 600px minimum ensures stable layout
   return <section 
     id="hero"
     className="relative overflow-hidden bg-background"
     style={{
-      minHeight: 'calc(100svh - var(--nav-height, 64px))',
-      height: 'auto'
+      minHeight: 'max(600px, calc(100svh - 96px))',
+      height: 'auto',
+      contain: 'layout style'
     }}
   >
       {/* Video Background - lazy preload for faster initial paint */}
@@ -100,8 +102,8 @@ export const HeroHomepage = () => {
       }} />
       </div>
       
-      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 relative z-10 hero-instant flex items-center py-8 md:py-12 lg:py-16" style={{ minHeight: 'calc(100svh - var(--nav-height, 64px) - 4rem)' }}>
-        <div className="grid lg:grid-cols-5 gap-8 lg:gap-20 xl:gap-28 items-center w-full">
+      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 xl:px-24 relative z-10 hero-instant flex items-center py-8 md:py-12 lg:py-16" style={{ minHeight: 'max(500px, calc(100svh - 160px))', contain: 'layout style' }}>
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-20 xl:gap-28 items-center w-full" style={{ contain: 'layout style' }}>
           
           {/* Left Content - Instant render, no animation delay - LCP element */}
           <div className="lg:col-span-3 order-2 lg:order-1 w-full">
