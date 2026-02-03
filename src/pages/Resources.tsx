@@ -50,6 +50,15 @@ import bookTechSupport from "@/assets/book-tech-support.jpg";
 import bookGrandparentScam from "@/assets/book-grandparent-scam.jpg";
 import bookInvestmentFraud from "@/assets/book-investment-fraud.jpg";
 import bookCharityScam from "@/assets/book-charity-scam.jpg";
+// Kids and Gen Z book covers
+import bookDigitalHeroesKids from "@/assets/book-digital-heroes-kids.jpg";
+import bookNocapGenz from "@/assets/book-nocap-genz.jpg";
+import bookGamerSafety from "@/assets/book-gamer-safety.jpg";
+import bookFirstCyberKids from "@/assets/book-first-cyber-kids.jpg";
+import bookCryptoVibesGenz from "@/assets/book-crypto-vibes-genz.jpg";
+import bookCyberbullyShield from "@/assets/book-cyberbully-shield.jpg";
+import bookDmDangers from "@/assets/book-dm-dangers.jpg";
+import bookSafeSurfingSafari from "@/assets/book-safe-surfing-safari.jpg";
 import { SEO } from "@/components/SEO";
 import { supabase } from "@/integrations/supabase/client";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
@@ -370,6 +379,88 @@ const staticBooks: BookItem[] = [
     image: bookCharityScam,
     tag: 'Giving',
     stripe_price_id: 'price_1StJn2J8osfwYbX7i25vJA5t',
+    author: BOOK_AUTHOR
+  },
+  // Kids Books
+  {
+    id: 'book-digital-heroes-kids',
+    name: 'Digital Heroes: Internet Safety',
+    description: 'Fun superhero guide for kids ages 8-12',
+    price: 14.99,
+    image: bookDigitalHeroesKids,
+    tag: 'Kids 8-12',
+    stripe_price_id: 'price_1StKidsJ8osfwYbX7heroes01',
+    author: BOOK_AUTHOR
+  },
+  {
+    id: 'book-first-cyber-kids',
+    name: 'My First Cyber Safety Book',
+    description: 'Friendly robots teach internet basics',
+    price: 12.99,
+    image: bookFirstCyberKids,
+    tag: 'Kids 5-8',
+    stripe_price_id: 'price_1StKidsJ8osfwYbX7first02',
+    author: BOOK_AUTHOR
+  },
+  {
+    id: 'book-safe-surfing-safari',
+    name: 'Safe Surfing Safari',
+    description: 'Animal friends explore the web safely',
+    price: 11.99,
+    image: bookSafeSurfingSafari,
+    tag: 'Kids 5-8',
+    stripe_price_id: 'price_1StKidsJ8osfwYbX7safari03',
+    author: BOOK_AUTHOR
+  },
+  {
+    id: 'book-cyberbully-shield',
+    name: 'Cyberbully Shield',
+    description: 'Stand strong against online bullying',
+    price: 16.99,
+    image: bookCyberbullyShield,
+    tag: 'Tweens 10-13',
+    stripe_price_id: 'price_1StKidsJ8osfwYbX7bully04',
+    author: BOOK_AUTHOR
+  },
+  // Gen Z Books
+  {
+    id: 'book-nocap-genz',
+    name: 'No Cap: Social Scam Survival',
+    description: 'Real talk about social media scams',
+    price: 19.99,
+    image: bookNocapGenz,
+    tag: 'Gen Z',
+    stripe_price_id: 'price_1StGenzJ8osfwYbX7nocap01',
+    author: BOOK_AUTHOR
+  },
+  {
+    id: 'book-gamer-safety',
+    name: "Gamer's Guide to Online Safety",
+    description: 'Level up your gaming security',
+    price: 18.99,
+    image: bookGamerSafety,
+    tag: 'Gen Z',
+    stripe_price_id: 'price_1StGenzJ8osfwYbX7gamer02',
+    author: BOOK_AUTHOR
+  },
+  {
+    id: 'book-crypto-vibes-genz',
+    name: 'Crypto Vibes: Protect Your Bag',
+    description: 'Keep your digital assets safe',
+    price: 21.99,
+    image: bookCryptoVibesGenz,
+    tag: 'Gen Z',
+    stripe_price_id: 'price_1StGenzJ8osfwYbX7crypto03',
+    author: BOOK_AUTHOR
+  },
+  {
+    id: 'book-dm-dangers',
+    name: 'DM Dangers: Spotting Fake Friends',
+    description: 'Recognize catfish and scammers',
+    price: 17.99,
+    image: bookDmDangers,
+    tag: 'Teens',
+    stripe_price_id: 'price_1StGenzJ8osfwYbX7dmdang04',
     author: BOOK_AUTHOR
   }
 ];
