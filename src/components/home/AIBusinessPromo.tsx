@@ -2,8 +2,9 @@
  import { Button } from "@/components/ui/button";
 import { Phone, Calendar, Bot, Globe, ArrowRight, TrendingUp, Zap, CheckCircle, Award, Sparkles } from "lucide-react";
  import { motion } from "framer-motion";
-import aiBusinessPromo from "@/assets/ai-business-promo.jpg";
-import businessTeam from "@/assets/business-team-office.jpg";
+ import businessStrategyMeeting from "@/assets/business-strategy-meeting.jpg";
+ import consultingTeamDiscussion from "@/assets/consulting-team-discussion.jpg";
+ import expertTeamWorking from "@/assets/expert-team-working.jpg";
  
  const services = [
    { icon: Phone, title: "AI Receptionist", desc: "Never miss a call", highlight: "24/7" },
@@ -165,11 +166,11 @@ import businessTeam from "@/assets/business-team-office.jpg";
               <div className="absolute -inset-4 rounded-[40px] bg-gradient-to-br from-lavender-200/40 via-coral-100/30 to-white opacity-90" />
               
               <div className="relative grid grid-cols-2 gap-4">
-                {/* Main Image - Natural Photo */}
+                 {/* Main Image - Strategy Meeting */}
                 <div className="col-span-2 rounded-3xl overflow-hidden aspect-[16/9] shadow-2xl shadow-lavender-400/20 border-4 border-white">
                   <img 
-                    src={aiBusinessPromo}
-                    alt="AI-powered business automation"
+                     src={businessStrategyMeeting}
+                     alt="Business strategy meeting with team"
                     width={600}
                     height={338}
                     loading="lazy"
@@ -180,23 +181,30 @@ import businessTeam from "@/assets/business-team-office.jpg";
                   <div className="absolute inset-0 bg-gradient-to-t from-[#18305A]/30 via-transparent to-transparent" />
                </div>
                
-                {/* Smaller Image - Natural Photo */}
-                <div className="rounded-2xl overflow-hidden aspect-square shadow-xl border-3 border-white">
+                 {/* Consulting Team Discussion */}
+                 <div className="rounded-2xl overflow-hidden aspect-[4/3] shadow-xl border-3 border-white">
                   <img 
-                    src={businessTeam}
-                    alt="Business team collaboration"
+                     src={consultingTeamDiscussion}
+                     alt="Consulting team in discussion"
                     width={200}
-                    height={200}
+                     height={150}
                     loading="lazy"
                     decoding="async"
                     className="w-full h-full object-cover"
                   />
                </div>
                 
-                {/* Icon Card */}
-                <div className="rounded-2xl overflow-hidden aspect-square flex items-center justify-center shadow-xl border-3 border-white"
-                  style={{ background: 'linear-gradient(135deg, hsl(var(--lavender-400)) 0%, hsl(var(--coral-400)) 100%)' }}>
-                 <Award className="w-12 h-12 text-white" />
+                 {/* Expert Team Working */}
+                 <div className="rounded-2xl overflow-hidden aspect-[4/3] shadow-xl border-3 border-white">
+                   <img 
+                     src={expertTeamWorking}
+                     alt="Expert consulting team at work"
+                     width={200}
+                     height={150}
+                     loading="lazy"
+                     decoding="async"
+                     className="w-full h-full object-cover"
+                   />
                </div>
              </div>
  

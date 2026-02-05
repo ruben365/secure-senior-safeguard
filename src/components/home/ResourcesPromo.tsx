@@ -2,6 +2,7 @@
  import { Button } from "@/components/ui/button";
 import { FileText, Shield, BookOpen, ArrowRight, Download, Sparkles } from "lucide-react";
  import { motion } from "framer-motion";
+ import cyberProtectionTools from "@/assets/cybersecurity-protection-tools.jpg";
 
  const resources = [
    {
@@ -123,8 +124,53 @@ export const ResourcesPromo = () => {
           </Button>
         </motion.div>
 
-        {/* Resources Grid - Premium Button Cards */}
-        <div className="grid md:grid-cols-3 gap-6">
+        {/* Two Column Layout - Image + Resources */}
+        <div className="grid lg:grid-cols-2 gap-10 mb-12">
+          {/* Left - Featured Image */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <div className="relative rounded-[40px] overflow-hidden shadow-2xl shadow-coral-400/20 border-4 border-white">
+              <img 
+                src={cyberProtectionTools}
+                alt="Cybersecurity protection tools and resources"
+                width={600}
+                height={450}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover aspect-[4/3]"
+              />
+              {/* Premium Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#18305A]/40 via-transparent to-transparent" />
+              
+              {/* Floating Badge */}
+              <motion.div 
+                className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-xl rounded-2xl p-5 border border-coral-200/50 shadow-xl"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                viewport={{ once: true }}
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="text-sm font-medium text-foreground/60 mb-1">Resources Available</div>
+                    <div className="text-3xl font-black text-[#18305A]" style={{ fontFamily: "'Clash Display', sans-serif" }}>50+</div>
+                  </div>
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg"
+                    style={{ background: 'linear-gradient(135deg, #F8926A 0%, #BB81B5 100%)' }}>
+                    <Shield className="w-7 h-7 text-white" />
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+          
+          {/* Right - Resources Grid */}
+          <div className="grid gap-5">
           {resources.map((resource, i) => (
             <motion.div
               key={resource.title}
@@ -134,45 +180,43 @@ export const ResourcesPromo = () => {
               viewport={{ once: true }}
             >
              <Link to="/resources" className="group block">
-                 <div className="h-full p-8 rounded-3xl border-2 shadow-lg hover:shadow-2xl hover:-translate-y-3 transition-all duration-300 cursor-pointer"
+                  <div className="h-full p-6 rounded-2xl border-2 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer flex items-center gap-5"
                    style={{ 
                      background: 'linear-gradient(135deg, #ffffff 0%, #faf9f7 100%)',
                      borderColor: resource.color,
                    }}>
-                   <div className="flex items-start justify-between mb-6">
-                     <div className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-xl transition-transform group-hover:scale-110 group-hover:rotate-3"
+                    <div className="flex-shrink-0">
+                      <div className="w-14 h-14 rounded-xl flex items-center justify-center shadow-lg transition-transform group-hover:scale-110"
                        style={{ background: `linear-gradient(135deg, ${resource.color} 0%, ${resource.color}dd 100%)` }}>
-                       <resource.icon className="w-8 h-8 text-white" />
+                        <resource.icon className="w-7 h-7 text-white" />
                      </div>
-                     <span className="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm"
-                       style={{ 
-                         background: `linear-gradient(135deg, ${resource.color}15 0%, ${resource.color}25 100%)`,
-                         color: resource.color,
-                         border: `2px solid ${resource.color}40`
-                       }}>
-                       {resource.tag}
-                     </span>
                    </div>
                    
-                   <h3 className="text-2xl font-black mb-3 transition-colors group-hover:text-coral-600"
-                     style={{ fontFamily: "'Clash Display', sans-serif", color: '#18305A' }}>
-                     {resource.title}
-                   </h3>
-                   
-                   <p className="leading-relaxed mb-6 text-base" style={{ color: 'rgba(24, 48, 90, 0.65)' }}>{resource.description}</p>
-                   
-                   {/* Button CTA */}
-                   <div className="flex items-center gap-2">
-                     <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white text-sm font-bold shadow-lg transition-all group-hover:scale-105 group-hover:shadow-xl"
-                       style={{ background: `linear-gradient(135deg, ${resource.color} 0%, ${resource.color}cc 100%)` }}>
-                       <span>Explore</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h3 className="text-lg font-bold transition-colors group-hover:text-coral-600"
+                          style={{ fontFamily: "'Clash Display', sans-serif", color: '#18305A' }}>
+                          {resource.title}
+                        </h3>
+                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase"
+                          style={{ 
+                            background: `${resource.color}20`,
+                            color: resource.color,
+                          }}>
+                          {resource.tag}
+                        </span>
+                      </div>
+                      <p className="text-sm leading-relaxed" style={{ color: 'rgba(24, 48, 90, 0.65)' }}>{resource.description}</p>
+                    </div>
+                    
+                    <div className="flex-shrink-0">
                        <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-                     </div>
                    </div>
                  </div>
                </Link>
             </motion.div>
           ))}
+          </div>
         </div>
         
         {/* Free download banner - Premium */}

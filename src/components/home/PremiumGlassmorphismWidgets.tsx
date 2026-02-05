@@ -1,5 +1,5 @@
  import { motion } from "framer-motion";
- import { Star, Shield, Users, TrendingUp, Award, Heart, Quote, ArrowRight, CheckCircle, Sparkles } from "lucide-react";
+ import { Star, Shield, Users, TrendingUp, Award, Heart, Quote, ArrowRight, CheckCircle, Sparkles, Lock, Eye, Bell, Zap, Target, Clock } from "lucide-react";
  import { Link } from "react-router-dom";
  import familyLivingRoom from "@/assets/family-living-room-natural.jpg";
  import grandmotherGrandchildren from "@/assets/grandmother-grandchildren-sofa.jpg";
@@ -30,6 +30,12 @@
   { icon: Shield, value: "1K+", label: "Threats Analyzed", color: "#BB81B5" },
    { icon: TrendingUp, value: "99.8%", label: "Success Rate", color: "#18305A" },
    { icon: Award, value: "4+", label: "Years Active", color: "#F8926A" },
+ ];
+ 
+ const securityFeatures = [
+   { icon: Lock, title: "End-to-End Protection", desc: "Comprehensive security", gradient: "from-coral-400 to-coral-600" },
+   { icon: Eye, title: "24/7 Monitoring", desc: "Always watching", gradient: "from-lavender-400 to-lavender-600" },
+   { icon: Bell, title: "Instant Alerts", desc: "Real-time notifications", gradient: "from-blue-400 to-blue-600" },
  ];
  
  export const PremiumGlassmorphismWidgets = () => {
@@ -185,6 +191,31 @@
              </div>
  
              {/* Testimonials */}
+             {/* Enhanced Security Feature Widgets */}
+             <div className="grid grid-cols-3 gap-4">
+               {securityFeatures.map((feature, i) => (
+                 <motion.div
+                   key={feature.title}
+                   initial={{ opacity: 0, scale: 0.9 }}
+                   whileInView={{ opacity: 1, scale: 1 }}
+                   transition={{ delay: 0.1 + i * 0.1 }}
+                   viewport={{ once: true }}
+                   className="group relative bg-white/80 backdrop-blur-xl rounded-2xl p-5 border border-white/50 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-center overflow-hidden"
+                 >
+                   <motion.div 
+                     className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
+                   />
+                   
+                   <div className={`w-12 h-12 mx-auto rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center shadow-lg mb-3 group-hover:scale-110 transition-transform duration-300`}>
+                     <feature.icon className="w-6 h-6 text-white" />
+                   </div>
+                   <h4 className="font-bold text-sm text-[#18305A] mb-1">{feature.title}</h4>
+                   <p className="text-xs text-foreground/50">{feature.desc}</p>
+                 </motion.div>
+               ))}
+             </div>
+ 
+             {/* Testimonials */}
              <div className="grid md:grid-cols-2 gap-6">
                {testimonials.map((testimonial, i) => (
                  <motion.div
@@ -232,6 +263,42 @@
                  </motion.div>
                ))}
              </div>
+ 
+             {/* CTA Card */}
+             {/* Trust Metrics Widget */}
+             <motion.div
+               initial={{ opacity: 0, y: 20 }}
+               whileInView={{ opacity: 1, y: 0 }}
+               transition={{ delay: 0.35 }}
+               viewport={{ once: true }}
+               className="relative bg-white/80 backdrop-blur-xl rounded-3xl p-6 border border-white/50 shadow-lg overflow-hidden"
+             >
+               <div className="flex items-center justify-between mb-4">
+                 <h4 className="font-bold text-lg text-[#18305A]">Live Protection Status</h4>
+                 <div className="flex items-center gap-2">
+                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                   <span className="text-xs font-medium text-emerald-600">Active</span>
+                 </div>
+               </div>
+               
+               <div className="grid grid-cols-3 gap-4">
+                 <div className="text-center p-3 rounded-xl bg-gradient-to-br from-coral-50 to-coral-100 border border-coral-200/50">
+                   <Target className="w-6 h-6 mx-auto text-coral-500 mb-2" />
+                   <div className="text-xl font-black text-[#18305A]">98%</div>
+                   <div className="text-[10px] text-foreground/50 uppercase font-medium">Accuracy</div>
+                 </div>
+                 <div className="text-center p-3 rounded-xl bg-gradient-to-br from-lavender-50 to-lavender-100 border border-lavender-200/50">
+                   <Zap className="w-6 h-6 mx-auto text-lavender-500 mb-2" />
+                   <div className="text-xl font-black text-[#18305A]">&lt;1s</div>
+                   <div className="text-[10px] text-foreground/50 uppercase font-medium">Response</div>
+                 </div>
+                 <div className="text-center p-3 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-100 border border-blue-200/50">
+                   <Clock className="w-6 h-6 mx-auto text-blue-500 mb-2" />
+                   <div className="text-xl font-black text-[#18305A]">24/7</div>
+                   <div className="text-[10px] text-foreground/50 uppercase font-medium">Uptime</div>
+                 </div>
+               </div>
+             </motion.div>
  
              {/* CTA Card */}
              <motion.div
