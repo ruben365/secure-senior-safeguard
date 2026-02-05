@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Shield, Users, Award, CheckCircle } from "lucide-react";
 
 const stats = [
@@ -16,67 +15,53 @@ const trustPoints = [
 
 export const FamilyTrustSection = () => {
   return (
-    <section className="py-12 lg:py-16 bg-gradient-to-br from-white via-lavender-50/30 to-coral-50/20">
+    <section className="py-10 lg:py-14 bg-gradient-to-br from-white via-lavender-50/30 to-coral-50/20" aria-labelledby="trust-heading">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-10"
-        >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#18305A] leading-tight mb-3"
+        <div className="text-center mb-8">
+          <p className="text-lg md:text-xl font-bold text-coral-500 mb-2">Real Protection, Real Results</p>
+          <h2 id="trust-heading" className="text-3xl md:text-4xl font-black text-[#18305A] leading-tight mb-3"
             style={{ fontFamily: "'Clash Display', 'DM Sans', sans-serif" }}>
             Why Families{" "}
             <span className="bg-gradient-to-r from-coral-500 to-lavender-500 bg-clip-text text-transparent">
               Trust Us
             </span>
           </h2>
-          <p className="text-lg text-foreground/60 max-w-2xl mx-auto">
-            Real Protection, Real Results — Join thousands of Ohio families who trust us with their digital safety every day.
+          <p className="text-base text-foreground/60 max-w-2xl mx-auto">
+            Join thousands of Ohio families who trust us with their digital safety every day.
           </p>
-        </motion.div>
+        </div>
 
         {/* Stats Row */}
-        <div className="grid md:grid-cols-3 gap-6 mb-10">
+        <div className="grid md:grid-cols-3 gap-5 mb-8" role="list" aria-label="Trust statistics">
           {stats.map((stat, i) => (
-            <motion.div
+            <div
               key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-shadow"
+              role="listitem"
+              className="bg-white rounded-xl p-5 shadow-md border border-gray-100 text-center hover:shadow-lg transition-shadow"
             >
-              <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-gradient-to-br from-coral-100 to-lavender-100 flex items-center justify-center">
-                <stat.icon className="w-6 h-6 text-coral-500" />
+              <div className="w-10 h-10 mx-auto mb-3 rounded-lg bg-gradient-to-br from-coral-100 to-lavender-100 flex items-center justify-center" aria-hidden="true">
+                <stat.icon className="w-5 h-5 text-coral-500" />
               </div>
-              <div className="text-3xl font-black text-[#18305A] mb-1" style={{ fontFamily: "'Clash Display', sans-serif" }}>
+              <div className="text-2xl font-black text-[#18305A] mb-1" style={{ fontFamily: "'Clash Display', sans-serif" }}>
                 {stat.value}
               </div>
-              <div className="text-sm text-foreground/60">{stat.label}</div>
-            </motion.div>
+              <div className="text-sm text-foreground/60" aria-label={`${stat.value} ${stat.label}`}>{stat.label}</div>
+            </div>
           ))}
         </div>
 
         {/* Trust Points */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          viewport={{ once: true }}
-          className="bg-gradient-to-r from-[#18305A] to-[#2a4a7a] rounded-2xl p-6 lg:p-8"
-        >
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="bg-gradient-to-r from-[#18305A] to-[#2a4a7a] rounded-xl p-5 lg:p-6" role="list" aria-label="Trust guarantees">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {trustPoints.map((point, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <CheckCircle className="w-5 h-5 text-coral-400 flex-shrink-0" />
+              <div key={i} className="flex items-center gap-2" role="listitem">
+                <CheckCircle className="w-4 h-4 text-coral-400 flex-shrink-0" aria-hidden="true" />
                 <span className="text-white/90 text-sm font-medium">{point}</span>
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
