@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Shield, Eye, AlertTriangle, Target, CheckCircle, Sparkles } from "lucide-react";
+import { ArrowRight, Shield, Eye, AlertTriangle, Target, CheckCircle, Sparkles, Play } from "lucide-react";
 import { motion } from "framer-motion";
 import seniorLearning from "@/assets/senior-learning.jpg";
  
@@ -12,6 +13,46 @@ import seniorLearning from "@/assets/senior-learning.jpg";
  ];
  
  export const WorkshopsPromo = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleCanPlay = () => {
+      setVideoLoaded(true);
+      video.play().catch(() => {
+        // Autoplay blocked, show play button
+        setVideoError(true);
+      });
+    };
+
+    const handleError = () => {
+      setVideoError(true);
+    };
+
+    video.addEventListener('canplay', handleCanPlay);
+    video.addEventListener('error', handleError);
+
+    // Try to play immediately
+    video.load();
+
+    return () => {
+      video.removeEventListener('canplay', handleCanPlay);
+      video.removeEventListener('error', handleError);
+    };
+  }, []);
+
+  const handlePlayClick = () => {
+    const video = videoRef.current;
+    if (video) {
+      video.play().catch(console.error);
+      setVideoError(false);
+    }
+  };
+
    return (
     <section className="relative py-12 lg:py-16 bg-white overflow-hidden">
        {/* Decorative Elements */}
@@ -51,24 +92,44 @@ import seniorLearning from "@/assets/senior-learning.jpg";
                 <div className="absolute -inset-6 rounded-[48px] bg-gradient-to-br from-coral-200/40 via-lavender-100/30 to-white opacity-90" />
                
                 {/* Primary Photo - Workshop Training */}
-                <div className="relative aspect-[4/3] rounded-[32px] overflow-hidden shadow-2xl shadow-coral-400/20 border-4 border-white bg-black">
+                <div className="relative aspect-[4/3] rounded-[32px] overflow-hidden shadow-2xl shadow-coral-400/20 border-4 border-white bg-gradient-to-br from-navy-800 to-navy-900">
+                  {/* Fallback image while video loads */}
+                  {!videoLoaded && (
+                    <img 
+                      src={seniorLearning}
+                      alt="Protection Training Workshop"
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  )}
+                  
                   <video 
+                    ref={videoRef}
                     autoPlay
                     muted
                     loop
                     playsInline
                    preload="auto"
                    controls={false}
-                    className="w-full h-full object-cover"
-                   ref={(el) => {
-                     if (el) {
-                       el.muted = true;
-                       el.play().catch(() => {});
-                     }
-                   }}
+                    className={`w-full h-full object-cover transition-opacity duration-500 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
                   >
-                    <source src="https://videos.pexels.com/video-files/7579962/7579962-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+                    {/* Using a more reliable CDN video source */}
+                    <source src="https://cdn.pixabay.com/video/2020/05/25/40130-424930032_large.mp4" type="video/mp4" />
+                    <source src="https://videos.pexels.com/video-files/7579962/7579962-hd_1920_1080_25fps.mp4" type="video/mp4" />
                   </video>
+                  
+                  {/* Play button overlay if autoplay fails */}
+                  {videoError && (
+                    <button
+                      onClick={handlePlayClick}
+                      className="absolute inset-0 flex items-center justify-center bg-black/30 transition-colors hover:bg-black/40"
+                      aria-label="Play video"
+                    >
+                      <div className="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center shadow-2xl">
+                        <Play className="w-8 h-8 text-coral-500 ml-1" fill="currentColor" />
+                      </div>
+                    </button>
+                  )}
+                  
                   {/* Premium overlay gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#18305A]/20 via-transparent to-transparent" />
                </div>
