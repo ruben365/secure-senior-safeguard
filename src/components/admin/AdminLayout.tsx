@@ -4,7 +4,7 @@ import { Menu, Search, ChevronDown, ChevronLeft, ChevronRight, User, Settings, L
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { CyberSidebar } from "@/components/admin/neon/CyberSidebar";
+import { PremiumSidebar } from "@/components/admin/PremiumSidebar";
 import { NotificationBell } from "@/components/NotificationBell";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -121,16 +121,22 @@ export function AdminLayout({
   };
 
   return (
-    <div className="flex min-h-screen bg-[#0B0F19] w-full">
-      <CyberSidebar 
+    <div className="flex min-h-screen bg-[#050508] w-full">
+      {/* Premium background effects */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-violet-500/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[100px]" />
+      </div>
+      
+      <PremiumSidebar 
         isOpen={sidebarOpen} 
         isMobileOpen={mobileSidebarOpen}
         onMobileClose={() => setMobileSidebarOpen(false)}
       />
       
       {/* Top Header Bar */}
-      <header className={`fixed top-0 right-0 left-0 h-16 bg-[#111827]/95 backdrop-blur-xl border-b border-gray-800 z-40 
-        transition-all duration-300 ${sidebarOpen ? 'md:left-[260px]' : 'md:left-[70px]'}`}>
+      <header className={`fixed top-0 right-0 left-0 h-16 bg-[#0a0a0f]/90 backdrop-blur-2xl border-b border-white/[0.06] z-40 
+        transition-all duration-500 ${sidebarOpen ? 'md:left-[260px]' : 'md:left-[70px]'}`}>
         <div className="flex items-center justify-between h-full px-4 lg:px-6">
           {/* Left Section: Menu, Nav, Search */}
           <div className="flex items-center gap-4 flex-1">
@@ -138,7 +144,7 @@ export function AdminLayout({
               variant="ghost"
               size="icon"
               onClick={() => window.innerWidth < 768 ? setMobileSidebarOpen(!mobileSidebarOpen) : setSidebarOpen(!sidebarOpen)}
-              className="text-[#9CA3AF] hover:text-[#F9FAFB] hover:bg-gray-800"
+              className="text-white/60 hover:text-white hover:bg-white/10 rounded-xl"
             >
               <Menu className="w-5 h-5" />
             </Button>
@@ -149,7 +155,7 @@ export function AdminLayout({
                 variant="ghost" 
                 size="icon" 
                 onClick={() => window.history.back()} 
-                className="text-[#9CA3AF] hover:text-[#F9FAFB] hover:bg-gray-800 h-9 w-9"
+                className="text-white/60 hover:text-white hover:bg-white/10 h-9 w-9 rounded-xl"
               >
                 <ChevronLeft className="h-5 w-5" />
               </Button>
@@ -157,7 +163,7 @@ export function AdminLayout({
                 variant="ghost" 
                 size="icon" 
                 onClick={() => window.history.forward()} 
-                className="text-[#9CA3AF] hover:text-[#F9FAFB] hover:bg-gray-800 h-9 w-9"
+                className="text-white/60 hover:text-white hover:bg-white/10 h-9 w-9 rounded-xl"
               >
                 <ChevronRight className="h-5 w-5" />
               </Button>
@@ -165,12 +171,12 @@ export function AdminLayout({
             
             {/* Search */}
             <div className="relative hidden sm:block max-w-md flex-1">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF]" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40" />
               <Input 
                 type="text" 
                 placeholder={searchPlaceholder} 
                 onChange={(e) => onSearch?.(e.target.value)}
-                className="pl-10 bg-[#374151] border-gray-700 text-[#F9FAFB] placeholder:text-[#9CA3AF] h-10 rounded-lg" 
+                className="pl-10 bg-white/[0.06] border-white/[0.08] text-white placeholder:text-white/40 h-10 rounded-xl focus:bg-white/[0.08] focus:border-white/[0.12] transition-all" 
               />
             </div>
           </div>
@@ -181,7 +187,7 @@ export function AdminLayout({
               variant="ghost"
               size="icon"
               onClick={() => navigate("/")}
-              className="text-[#9CA3AF] hover:text-[#F9FAFB] hover:bg-gray-800 h-9 w-9"
+              className="text-white/60 hover:text-white hover:bg-white/10 h-9 w-9 rounded-xl"
               title="Go to Home"
             >
               <Home className="h-5 w-5" />
@@ -193,44 +199,47 @@ export function AdminLayout({
             <div className="relative" ref={profileRef}>
               <Button 
                 variant="ghost" 
-                className="flex items-center gap-2 h-10 text-[#9CA3AF] hover:text-[#F9FAFB] hover:bg-gray-800" 
+                className="flex items-center gap-2 h-10 text-white/60 hover:text-white hover:bg-white/10 rounded-xl" 
                 onClick={() => setProfileOpen(!profileOpen)}
               >
-                <Avatar className="h-8 w-8 bg-gradient-to-br from-[#3B82F6] to-[#06B6D4]">
-                  <AvatarFallback className="bg-transparent text-white text-sm font-medium">
+                <Avatar className="h-8 w-8 bg-gradient-to-br from-violet-500 to-fuchsia-500 shadow-lg shadow-violet-500/25">
+                  <AvatarFallback className="bg-transparent text-white text-xs font-semibold">
                     {getInitials(adminName)}
                   </AvatarFallback>
                 </Avatar>
-                <span className="hidden md:inline text-sm font-medium text-[#F9FAFB]">{adminName}</span>
-                <ChevronDown className="h-4 w-4 hidden sm:block" />
+                <span className="hidden md:inline text-sm font-medium text-white">{adminName}</span>
+                <ChevronDown className="h-4 w-4 hidden sm:block text-white/40" />
               </Button>
 
               {profileOpen && (
-                <div className="absolute right-0 top-full mt-2 w-64 bg-[#1F2937] border border-gray-700 rounded-lg shadow-xl z-50">
-                  <div className="p-4 border-b border-gray-700">
-                    <p className="font-medium text-[#F9FAFB]">{adminName}</p>
-                    <p className="text-xs text-[#9CA3AF]">{adminEmail}</p>
+                <div className="absolute right-0 top-full mt-2 w-64 bg-[#0f0f14]/95 backdrop-blur-2xl border border-white/[0.08] rounded-2xl shadow-2xl shadow-black/50 z-50 overflow-hidden">
+                  {/* Decorative glow */}
+                  <div className="absolute -top-10 -right-10 w-32 h-32 bg-violet-500/20 rounded-full blur-3xl pointer-events-none" />
+                  
+                  <div className="relative p-4 border-b border-white/[0.06]">
+                    <p className="font-medium text-white">{adminName}</p>
+                    <p className="text-xs text-white/50">{adminEmail}</p>
                   </div>
-                  <div className="p-2">
+                  <div className="relative p-2">
                     <Button 
                       variant="ghost" 
-                      className="w-full justify-start text-[#9CA3AF] hover:text-[#F9FAFB] hover:bg-gray-800" 
+                      className="w-full justify-start text-white/70 hover:text-white hover:bg-white/10 rounded-xl" 
                       onClick={() => { navigate("/admin/settings"); setProfileOpen(false); }}
                     >
                       <User className="mr-2 h-4 w-4" />Profile
                     </Button>
                     <Button 
                       variant="ghost" 
-                      className="w-full justify-start text-[#9CA3AF] hover:text-[#F9FAFB] hover:bg-gray-800" 
+                      className="w-full justify-start text-white/70 hover:text-white hover:bg-white/10 rounded-xl" 
                       onClick={() => { navigate("/admin/settings"); setProfileOpen(false); }}
                     >
                       <Settings className="mr-2 h-4 w-4" />Settings
                     </Button>
                   </div>
-                  <div className="p-2 border-t border-gray-700">
+                  <div className="relative p-2 border-t border-white/[0.06]">
                     <Button 
                       variant="ghost" 
-                      className="w-full justify-start text-red-400 hover:text-red-300 hover:bg-red-500/10" 
+                      className="w-full justify-start text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 rounded-xl" 
                       onClick={handleSignOut}
                     >
                       <LogOut className="mr-2 h-4 w-4" />Sign Out
@@ -244,14 +253,14 @@ export function AdminLayout({
       </header>
 
       {/* Main Content Area */}
-      <main className={`flex-1 transition-all duration-300 pt-16 w-full ${sidebarOpen ? 'md:ml-[260px]' : 'md:ml-[70px]'}`}>
+      <main className={`relative flex-1 transition-all duration-500 pt-16 w-full ${sidebarOpen ? 'md:ml-[260px]' : 'md:ml-[70px]'}`}>
         <div className="p-6 lg:p-8">
           {/* Page Header */}
           {(title || headerActions) && (
             <div className="flex items-center justify-between mb-8">
               <div>
-                {title && <h1 className="text-3xl font-bold text-[#F9FAFB]">{title}</h1>}
-                {subtitle && <p className="text-[#9CA3AF]">{subtitle}</p>}
+                {title && <h1 className="text-3xl font-bold text-white">{title}</h1>}
+                {subtitle && <p className="text-white/50">{subtitle}</p>}
               </div>
               {headerActions}
             </div>
