@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { Shield, ArrowRight, TrendingUp, Phone, Mail, CreditCard, AlertTriangle, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import teamCollaborationBg from "@/assets/team-collaboration-bg.jpg";
- import threatAnalysisScreen from "@/assets/threat-analysis-screen.jpg";
- import seniorPhoneProtection from "@/assets/senior-phone-protection.jpg";
+import threatAnalysisScreen from "@/assets/threat-analysis-screen.jpg";
+import seniorPhoneProtection from "@/assets/senior-phone-protection.jpg";
 
 const scamAlerts = [
   {
@@ -52,136 +51,106 @@ export const ScamAlertsSection = () => {
   }, []);
 
   return (
-     <section className="py-12 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #ffffff 0%, #faf9f7 50%, #fff5f0 100%)' }}>
-       {/* Decorative Gradient Orbs */}
-       <div className="absolute top-32 left-[5%] w-[350px] h-[350px] opacity-25 pointer-events-none"
-         style={{
-           background: 'radial-gradient(circle at center, rgba(248,146,106,0.4) 0%, transparent 60%)',
-           filter: 'blur(100px)',
-         }}
-       />
-       <div className="absolute bottom-20 right-[10%] w-[300px] h-[300px] opacity-20 pointer-events-none"
-         style={{
-           background: 'radial-gradient(circle at center, rgba(187,129,181,0.5) 0%, transparent 60%)',
-           filter: 'blur(80px)',
-         }}
-       />
-      {/* Seamless fade from hero */}
-       {/* Seamless fade from hero */}
-       <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white to-transparent z-[1]" />
+     <section className="py-10 lg:py-14" style={{ background: 'linear-gradient(135deg, #ffffff 0%, #faf9f7 50%, #fff5f0 100%)' }} aria-labelledby="alerts-heading">
       
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Header - Toned Down / Muted Theme */}
-        <div className="text-center mb-16">
-           <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/80 backdrop-blur-md border border-coral-200/50 shadow-lg mb-6">
-             <Shield className="w-5 h-5 text-coral-500" />
-             <span className="text-base font-semibold text-[#18305A]">Active Threat Intelligence</span>
+      <div className="container mx-auto px-4">
+        {/* Header */}
+        <div className="text-center mb-10">
+           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 backdrop-blur-xl border border-white/40 shadow-lg mb-4">
+             <Shield className="w-4 h-4 text-coral-500" aria-hidden="true" />
+             <span className="text-sm font-semibold text-[#18305A]">Active Threat Intelligence</span>
           </div>
           
-           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#18305A] mb-6" style={{ fontFamily: "'Clash Display', 'DM Sans', sans-serif" }}>
-             Know the <span className="bg-gradient-to-r from-coral-500 to-lavender-500 bg-clip-text text-transparent">Threats</span>, Stay <span className="bg-gradient-to-r from-lavender-500 to-[#18305A] bg-clip-text text-transparent">Ahead</span>
+           <h2 id="alerts-heading" className="text-3xl md:text-4xl font-black text-[#18305A] mb-3" style={{ fontFamily: "'Clash Display', 'DM Sans', sans-serif" }}>
+             Know the <span className="bg-gradient-to-r from-coral-500 to-lavender-500 bg-clip-text text-transparent">Threats</span>, Stay Ahead
           </h2>
-          <p className="text-foreground/80 text-xl md:text-2xl max-w-2xl mx-auto font-medium leading-relaxed">
+          <p className="text-foreground/70 text-base max-w-xl mx-auto">
             Real-time intelligence on scams targeting your community right now.
           </p>
         </div>
 
         {/* Featured Image Row */}
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="relative"
-          >
+        <div className="grid md:grid-cols-2 gap-4 mb-10">
+          <div className="relative">
             <img 
               src={threatAnalysisScreen}
               alt="Threat analysis and monitoring"
-              className="h-64 shadow-2xl shadow-coral-400/20 border-4 border-white rounded-3xl w-full object-cover"
+              className="h-52 shadow-lg border-2 border-white rounded-xl w-full object-cover"
               width={600}
               height={400}
               loading="lazy"
               decoding="async"
             />
-            <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3 z-20">
-              <div className="w-10 h-10 rounded-xl bg-coral-500 flex items-center justify-center">
-                <TrendingUp className="w-5 h-5 text-white" />
+            <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2 bg-white/70 backdrop-blur-xl rounded-lg p-2 border border-white/50">
+              <div className="w-8 h-8 rounded-lg bg-coral-500 flex items-center justify-center" aria-hidden="true">
+                <TrendingUp className="w-4 h-4 text-white" />
               </div>
               <div>
-                <div className="text-white font-bold text-sm">Real-Time Monitoring</div>
-                <div className="text-white/70 text-xs">24/7 Threat Detection</div>
+                <div className="text-[#18305A] font-bold text-xs">Real-Time Monitoring</div>
+                <div className="text-foreground/50 text-xs">24/7 Threat Detection</div>
               </div>
             </div>
-          </motion.div>
+          </div>
           
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="relative"
-          >
+          <div className="relative">
             <img 
               src={seniorPhoneProtection}
               alt="Senior using phone safely"
-              className="h-64 shadow-2xl shadow-lavender-400/20 border-4 border-white rounded-3xl w-full object-cover"
+              className="h-52 shadow-lg border-2 border-white rounded-xl w-full object-cover"
               width={600}
               height={400}
               loading="lazy"
               decoding="async"
             />
-            <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3 z-20">
-              <div className="w-10 h-10 rounded-xl bg-lavender-500 flex items-center justify-center">
-                <Shield className="w-5 h-5 text-white" />
+            <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2 bg-white/70 backdrop-blur-xl rounded-lg p-2 border border-white/50">
+              <div className="w-8 h-8 rounded-lg bg-lavender-500 flex items-center justify-center" aria-hidden="true">
+                <Shield className="w-4 h-4 text-white" />
               </div>
               <div>
-                <div className="text-white font-bold text-sm">Family Protection</div>
-                <div className="text-white/70 text-xs">Safe Digital Communication</div>
+                <div className="text-[#18305A] font-bold text-xs">Family Protection</div>
+                <div className="text-foreground/50 text-xs">Safe Digital Communication</div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Left - Alert Cards - Soft Modern */}
-          <div className="space-y-4">
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
+          {/* Left - Alert Cards */}
+          <div className="space-y-3" role="list" aria-label="Current scam alerts">
             {scamAlerts.map((alert, index) => (
               <div
                 key={index}
+                role="listitem"
                 onClick={() => setActiveAlert(index)}
-                style={{ transform: index === activeAlert ? 'translateY(-4px)' : 'translateY(0)' }}
-                 className={`p-6 rounded-3xl cursor-pointer transition-all duration-300 will-change-transform ${
+                 className={`p-4 rounded-xl cursor-pointer transition-shadow ${
                   index === activeAlert
-                     ? "bg-white/90 backdrop-blur-xl border border-coral-200/50 shadow-2xl"
-                     : "bg-white/70 backdrop-blur-md border border-white/50 shadow-lg hover:shadow-xl hover:bg-white/80"
+                     ? "bg-white/80 backdrop-blur-xl border border-coral-200/50 shadow-lg"
+                     : "bg-white/60 backdrop-blur-md border border-white/40 shadow-md hover:shadow-lg"
                 }`}
               >
                 <div className="flex items-start gap-4">
-                  {/* Icon */}
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 ${
-                    index === activeAlert ? "bg-primary/20" : "bg-muted"
-                  }`}>
-                    <alert.icon className={`w-7 h-7 ${
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${
+                    index === activeAlert ? "bg-coral-100" : "bg-muted"
+                  }`} aria-hidden="true">
+                    <alert.icon className={`w-5 h-5 ${
                       index === activeAlert ? "text-primary" : "text-muted-foreground"
                     }`} />
                   </div>
                   
-                  {/* Content */}
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-bold text-xl text-foreground">{alert.title}</h3>
-                      <span className="text-emerald-700 dark:text-emerald-400 text-base font-bold flex items-center gap-1">
-                        <TrendingUp className="w-5 h-5" />
+                      <h3 className="font-bold text-base text-foreground">{alert.title}</h3>
+                      <span className="text-emerald-600 text-sm font-bold flex items-center gap-1">
+                        <TrendingUp className="w-4 h-4" aria-hidden="true" />
                         {alert.trend}
                       </span>
                     </div>
-                    <p className="text-foreground/70 text-base mb-3 leading-relaxed">{alert.description}</p>
+                    <p className="text-foreground/70 text-sm mb-2">{alert.description}</p>
                     
                     {index === activeAlert && (
-                      <div className="pt-3 border-t border-border/30">
-                        <p className="text-sm text-primary font-medium flex items-center gap-2">
-                          <AlertTriangle className="w-4 h-4" />
+                      <div className="pt-2 border-t border-border/30">
+                        <p className="text-xs text-primary font-medium flex items-center gap-2">
+                          <AlertTriangle className="w-3 h-3" aria-hidden="true" />
                           Tip: {alert.tip}
                         </p>
                       </div>
@@ -192,38 +161,36 @@ export const ScamAlertsSection = () => {
             ))}
           </div>
 
-          {/* Right - Quick Tips & CTA - Soft Modern */}
-          <div className="space-y-8">
-            {/* Quick Tips Card */}
-             <div className="bg-white/80 backdrop-blur-xl rounded-3xl p-8 border border-white/50 shadow-lg">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                  <Shield className="w-6 h-6 text-primary" />
+          {/* Right - Quick Tips & CTA */}
+          <div className="space-y-5">
+             <div className="bg-white/70 backdrop-blur-xl rounded-xl p-5 border border-white/50 shadow-md">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center" aria-hidden="true">
+                  <Shield className="w-5 h-5 text-primary" />
                 </div>
-                <h3 className="text-2xl font-bold text-foreground">Quick Protection Tips</h3>
+                <h3 className="text-lg font-bold text-foreground">Quick Protection Tips</h3>
               </div>
               
-              <div className="space-y-5">
+              <div className="space-y-3" role="list" aria-label="Protection tips">
                 {quickTips.map((tip, index) => (
-                  <div key={index} className="flex items-center gap-4">
-                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0">
-                      <CheckCircle className="w-4 h-4 text-primary-foreground" />
+                  <div key={index} className="flex items-center gap-3" role="listitem">
+                    <div className="w-5 h-5 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0" aria-hidden="true">
+                      <CheckCircle className="w-3 h-3 text-primary-foreground" />
                     </div>
-                    <span className="text-foreground/80 text-lg font-medium">{tip}</span>
+                    <span className="text-foreground/80 text-sm font-medium">{tip}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* CTA - Soft Modern with Physical Photo */}
-            <div className="relative rounded-3xl overflow-hidden shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] border border-white/50">
+            {/* CTA */}
+            <div className="relative rounded-xl overflow-hidden shadow-lg border border-white/50">
               <div className="absolute inset-0">
                 <img 
                   src={teamCollaborationBg} 
                   alt="" 
-                  width={634}
-                  height={357}
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  width={600}
+                  height={300}
                   loading="lazy"
                   decoding="async"
                   className="w-full h-full object-cover"
@@ -231,17 +198,17 @@ export const ScamAlertsSection = () => {
                 <div className="absolute inset-0 bg-black/50" />
               </div>
               
-              <div className="relative z-10 p-10 text-center">
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              <div className="relative z-10 p-6 text-center">
+                <h3 className="text-xl font-bold text-white mb-2">
                   Take Action Now
                 </h3>
-                <p className="text-white/90 mb-8 text-lg md:text-xl font-medium">
+                <p className="text-white/90 mb-4 text-sm">
                   Get protected before scammers find you
                 </p>
-                <Button asChild variant="secondary" size="lg" className="h-14 px-8 text-lg font-bold rounded-2xl">
+                <Button asChild variant="secondary" size="lg" className="h-10 px-5 text-sm font-bold rounded-full">
                   <Link to="/training#pricing">
                     Get Protected Now
-                    <ArrowRight className="ml-2 w-5 h-5" />
+                    <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
                   </Link>
                 </Button>
               </div>

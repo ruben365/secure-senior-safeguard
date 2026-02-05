@@ -6,7 +6,6 @@
  import { WorkshopsPromo } from "@/components/home/WorkshopsPromo";
  import { AIBusinessPromo } from "@/components/home/AIBusinessPromo";
  import { ResourcesPromo } from "@/components/home/ResourcesPromo";
- import { CommunityImpact } from "@/components/home/CommunityImpact";
  import { WorkingProcess } from "@/components/home/WorkingProcess";
  import { ScamAlertsSection } from "@/components/home/ScamAlertsSection";
  import { FAQPreview } from "@/components/home/FAQPreview";
@@ -18,7 +17,6 @@
  import { SEO, PAGE_SEO } from "@/components/SEO";
  import { SectionNav } from "@/components/SectionNav";
  import seniorCoupleActive from "@/assets/senior-couple-active.jpg";
-import { SkeuomorphicSection } from "@/components/backgrounds/SkeuomorphicSection";
 import { FamilyTrustSection } from "@/components/home/FamilyTrustSection";
  
  const Index = () => {
@@ -37,64 +35,59 @@ import { FamilyTrustSection } from "@/components/home/FamilyTrustSection";
            </section>
            
            {/* Workshops Promo - Learn & Train Introduction */}
-          <SkeuomorphicSection id="workshops" className="py-0" variant="coral">
-             <WorkshopsPromo />
-          </SkeuomorphicSection>
+          <section id="workshops">
+            <WorkshopsPromo />
+          </section>
            
            {/* AI & Business Promo */}
-          <SkeuomorphicSection id="business" className="py-0" variant="lavender">
-             <AIBusinessPromo />
-          </SkeuomorphicSection>
+          <section id="business">
+            <AIBusinessPromo />
+          </section>
            
            {/* Current Scam Alerts - Immediate Value */}
-          <SkeuomorphicSection id="alerts" className="py-0" variant="coral">
-             <ScamAlertsSection />
-          </SkeuomorphicSection>
+          <section id="alerts">
+            <ScamAlertsSection />
+          </section>
            
            {/* Resources Promo */}
-          <SkeuomorphicSection id="resources" className="py-0" variant="mixed">
-             <ResourcesPromo />
-          </SkeuomorphicSection>
+          <section id="resources">
+            <ResourcesPromo />
+          </section>
           
           {/* Why Families Trust Us */}
           <section id="trust">
             <FamilyTrustSection />
           </section>
-           
-           {/* Community Impact - Veteran Support, Cancer Children, etc. */}
-          <SkeuomorphicSection id="community" className="py-0" variant="coral">
-             <CommunityImpact />
-          </SkeuomorphicSection>
  
            {/* Working Process - How It Works */}
-          <SkeuomorphicSection id="process" className="py-0" variant="mixed">
-             <WorkingProcess />
-          </SkeuomorphicSection>
+          <section id="process">
+            <WorkingProcess />
+          </section>
  
            {/* FAQ Section */}
-          <SkeuomorphicSection id="faq" className="py-0" variant="lavender">
-             <FAQPreview />
-          </SkeuomorphicSection>
+          <section id="faq">
+            <FAQPreview />
+          </section>
  
            {/* Quick Links - FAQ, Contact, Careers */}
-          <SkeuomorphicSection id="quick-links" className="py-0" variant="neutral">
-             <QuickLinksSection />
-          </SkeuomorphicSection>
+          <section id="quick-links">
+            <QuickLinksSection />
+          </section>
  
            {/* Final CTA with Senior Couple Image */}
            <CTASection headline="Join Our Protected Community" variant="image" backgroundImage={seniorCoupleActive}>
-             <p className="text-xl text-white/90 mb-8">Join families across Ohio who live confidently, knowing they're protected from AI scams.</p>
+            <p className="text-lg text-white/90 mb-6">Join families across Ohio who live confidently, knowing they're protected from AI scams.</p>
              <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center">
                <Button asChild size="lg" 
-                 className="h-14 px-8 text-base font-bold rounded-full"
+                className="h-12 px-6 text-sm font-bold rounded-full"
                  style={{ background: 'linear-gradient(135deg, #F8926A 0%, #BB81B5 100%)' }}>
                  <Link to="/training#pricing" className="text-white">Get Protected Today</Link>
                </Button>
-               <Button asChild variant="outline" size="lg" className="h-14 px-8 text-base font-bold rounded-full border-2 border-white/30 text-white hover:bg-white/10">
+              <Button asChild variant="outline" size="lg" className="h-12 px-6 text-sm font-bold rounded-full border-2 border-white/30 text-white hover:bg-white/10">
                  <Link to="/business">Business Solutions</Link>
                </Button>
              </div>
-             <p className="text-white/80 mt-6 text-sm">
+            <p className="text-white/80 mt-4 text-sm">
                ✓ 10% Veteran Discount ✓ HIPAA Compliant ✓ 30-Day Money-Back Guarantee
              </p>
            </CTASection>
