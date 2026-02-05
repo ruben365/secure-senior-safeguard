@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
+ import { motion } from "framer-motion";
 import { Shield, ArrowRight, TrendingUp, Phone, Mail, CreditCard, AlertTriangle, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import teamCollaborationBg from "@/assets/team-collaboration-bg.jpg";
+ import threatAnalysisScreen from "@/assets/threat-analysis-screen.jpg";
+ import seniorPhoneProtection from "@/assets/senior-phone-protection.jpg";
 
 const scamAlerts = [
   {
@@ -81,6 +84,65 @@ export const ScamAlertsSection = () => {
           <p className="text-foreground/80 text-xl md:text-2xl max-w-2xl mx-auto font-medium leading-relaxed">
             Real-time intelligence on scams targeting your community right now.
           </p>
+        </div>
+
+        {/* Featured Image Row */}
+        <div className="grid md:grid-cols-2 gap-6 mb-12">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="relative rounded-3xl overflow-hidden shadow-2xl shadow-coral-400/20 border-4 border-white"
+          >
+            <img 
+              src={threatAnalysisScreen}
+              alt="Threat analysis and monitoring"
+              width={600}
+              height={400}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-64 object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#18305A]/50 via-transparent to-transparent" />
+            <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-coral-500 flex items-center justify-center">
+                <TrendingUp className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <div className="text-white font-bold text-sm">Real-Time Monitoring</div>
+                <div className="text-white/70 text-xs">24/7 Threat Detection</div>
+              </div>
+            </div>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="relative rounded-3xl overflow-hidden shadow-2xl shadow-lavender-400/20 border-4 border-white"
+          >
+            <img 
+              src={seniorPhoneProtection}
+              alt="Senior using phone safely"
+              width={600}
+              height={400}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-64 object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#18305A]/50 via-transparent to-transparent" />
+            <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-lavender-500 flex items-center justify-center">
+                <Shield className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <div className="text-white font-bold text-sm">Family Protection</div>
+                <div className="text-white/70 text-xs">Safe Digital Communication</div>
+              </div>
+            </div>
+          </motion.div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">
