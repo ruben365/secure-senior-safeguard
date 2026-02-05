@@ -18,7 +18,6 @@
  import { SEO, PAGE_SEO } from "@/components/SEO";
  import { SectionNav } from "@/components/SectionNav";
  import seniorCoupleActive from "@/assets/senior-couple-active.jpg";
- import { TrustedExpertsBar } from "@/components/home/TrustedExpertsBar";
  import { PremiumGlassmorphismWidgets } from "@/components/home/PremiumGlassmorphismWidgets";
  
  const Index = () => {
@@ -35,9 +34,6 @@
            <section id="hero">
              <HeroHomepage />
            </section>
-           
-           {/* Trusted Experts Bar - Social Proof */}
-           <TrustedExpertsBar />
            
            {/* Workshops Promo - Learn & Train Introduction */}
            <section id="workshops">
