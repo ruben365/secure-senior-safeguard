@@ -44,20 +44,103 @@ export const HeroHomepage = () => {
           />
         </div>
         
-        {/* Right - CLEAN Hero Image - NO Glassmorphism Effects */}
+        {/* Right - PREMIUM Animated Hero Image */}
         <div className="relative hidden lg:block overflow-hidden">
-          <img 
-            src={heroSeniorsProtected} 
-            alt="Protected seniors using technology safely"
-            width={800}
-            height={600}
-            loading="eager"
-            decoding="async"
-            className="w-full h-full object-cover"
+          {/* Ken Burns Animated Photo */}
+          <motion.div
+            animate={{ 
+              scale: [1, 1.08, 1.04, 1.1, 1],
+              x: [0, -15, 10, -5, 0],
+              y: [0, -10, 5, -8, 0]
+            }}
+            transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute inset-0"
+          >
+            <img 
+              src={heroSeniorsProtected} 
+              alt="Protected seniors using technology safely"
+              width={800}
+              height={600}
+              loading="eager"
+              decoding="async"
+              className="w-full h-full object-cover scale-110"
+            />
+          </motion.div>
+          
+          {/* Animated Gradient Overlay */}
+          <motion.div 
+            animate={{ 
+              opacity: [0.3, 0.5, 0.3],
+              backgroundPosition: ['0% 0%', '100% 100%', '0% 0%']
+            }}
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/25"
+            style={{ backgroundSize: '200% 200%' }}
           />
-          {/* Minimal blending overlays - NO blur/glass */}
+          
+          {/* Floating Light Particles */}
+          {[...Array(6)].map((_, i) => (
+            <motion.div
+              key={i}
+              animate={{
+                y: [-20, -100, -20],
+                x: [0, (i % 2 === 0 ? 30 : -30), 0],
+                opacity: [0, 0.8, 0],
+                scale: [0.5, 1, 0.5]
+              }}
+              transition={{
+                duration: 6 + i * 1.5,
+                repeat: Infinity,
+                delay: i * 1.2,
+                ease: "easeInOut"
+              }}
+              className="absolute w-2 h-2 rounded-full bg-white/60 blur-[2px] pointer-events-none"
+              style={{
+                left: `${20 + i * 12}%`,
+                bottom: `${10 + (i % 3) * 15}%`
+              }}
+            />
+          ))}
+          
+          {/* Premium Shimmer Effect */}
+          <motion.div
+            animate={{
+              x: ['-100%', '200%'],
+              opacity: [0, 0.4, 0]
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              repeatDelay: 5,
+              ease: "easeInOut"
+            }}
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 pointer-events-none"
+          />
+          
+          {/* Ambient Glow Orbs */}
+          <motion.div
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.15, 0.35, 0.15]
+            }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-[20%] right-[20%] w-40 h-40 rounded-full bg-gradient-to-br from-primary/40 to-accent/40 blur-3xl pointer-events-none"
+          />
+          <motion.div
+            animate={{
+              scale: [1.2, 1, 1.2],
+              opacity: [0.2, 0.4, 0.2]
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            className="absolute bottom-[30%] left-[10%] w-32 h-32 rounded-full bg-gradient-to-br from-accent/30 to-primary/30 blur-3xl pointer-events-none"
+          />
+          
+          {/* Edge Blending Overlays */}
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/20 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-background/30 via-transparent to-transparent" />
+          
+          {/* Vignette Effect */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,hsl(var(--background)/0.4)_100%)] pointer-events-none" />
         </div>
       </div>
 
