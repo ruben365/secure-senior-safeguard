@@ -49,23 +49,34 @@ export const ScamAlertsSection = () => {
   }, []);
 
   return (
-    <section className="py-24 relative overflow-hidden bg-background">
+     <section className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #ffffff 0%, #faf9f7 50%, #fff5f0 100%)' }}>
+       {/* Decorative Gradient Orbs */}
+       <div className="absolute top-32 left-[5%] w-[350px] h-[350px] opacity-25 pointer-events-none"
+         style={{
+           background: 'radial-gradient(circle at center, rgba(248,146,106,0.4) 0%, transparent 60%)',
+           filter: 'blur(100px)',
+         }}
+       />
+       <div className="absolute bottom-20 right-[10%] w-[300px] h-[300px] opacity-20 pointer-events-none"
+         style={{
+           background: 'radial-gradient(circle at center, rgba(187,129,181,0.5) 0%, transparent 60%)',
+           filter: 'blur(80px)',
+         }}
+       />
       {/* Seamless fade from hero */}
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-[1]" />
-      
-      {/* Clean white background */}
-      <div className="absolute inset-0 bg-background" />
+       {/* Seamless fade from hero */}
+       <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white to-transparent z-[1]" />
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Header - Toned Down / Muted Theme */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-muted border border-border mb-6">
-            <Shield className="w-5 h-5 text-muted-foreground" />
-            <span className="text-base font-semibold text-muted-foreground">Active Threat Intelligence</span>
+           <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/80 backdrop-blur-md border border-coral-200/50 shadow-lg mb-6">
+             <Shield className="w-5 h-5 text-coral-500" />
+             <span className="text-base font-semibold text-[#18305A]">Active Threat Intelligence</span>
           </div>
           
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-            Know the <span className="text-foreground/70">Threats</span>, Stay <span className="text-foreground/80">Ahead</span>
+           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#18305A] mb-6" style={{ fontFamily: "'Clash Display', 'DM Sans', sans-serif" }}>
+             Know the <span className="bg-gradient-to-r from-coral-500 to-lavender-500 bg-clip-text text-transparent">Threats</span>, Stay <span className="bg-gradient-to-r from-lavender-500 to-[#18305A] bg-clip-text text-transparent">Ahead</span>
           </h2>
           <p className="text-foreground/80 text-xl md:text-2xl max-w-2xl mx-auto font-medium leading-relaxed">
             Real-time intelligence on scams targeting your community right now.
@@ -80,10 +91,10 @@ export const ScamAlertsSection = () => {
                 key={index}
                 onClick={() => setActiveAlert(index)}
                 style={{ transform: index === activeAlert ? 'translateY(-4px)' : 'translateY(0)' }}
-                className={`p-6 rounded-3xl border cursor-pointer transition-[box-shadow,background-color,border-color] duration-300 will-change-transform ${
+                 className={`p-6 rounded-3xl cursor-pointer transition-all duration-300 will-change-transform ${
                   index === activeAlert
-                    ? "bg-white border-white/50 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12)]"
-                    : "bg-white/80 border-white/50 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12)]"
+                     ? "bg-white/90 backdrop-blur-xl border border-coral-200/50 shadow-2xl"
+                     : "bg-white/70 backdrop-blur-md border border-white/50 shadow-lg hover:shadow-xl hover:bg-white/80"
                 }`}
               >
                 <div className="flex items-start gap-4">
@@ -124,7 +135,7 @@ export const ScamAlertsSection = () => {
           {/* Right - Quick Tips & CTA - Soft Modern */}
           <div className="space-y-8">
             {/* Quick Tips Card */}
-            <div className="bg-white rounded-3xl p-8 border border-white/50 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)]">
+             <div className="bg-white/80 backdrop-blur-xl rounded-3xl p-8 border border-white/50 shadow-lg">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
                   <Shield className="w-6 h-6 text-primary" />

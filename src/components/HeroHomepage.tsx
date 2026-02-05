@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play, CheckCircle2, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
-import heroFamilySafe from "@/assets/hero-home-family-safe.jpg";
-import communityImpact from "@/assets/community-impact-4k.jpg";
+ import heroFamilySafe from "@/assets/hero-home-family-safe.jpg";
+ import familyLivingRoom from "@/assets/family-living-room-natural.jpg";
+ import grandmotherGrandchildren from "@/assets/grandmother-grandchildren-sofa.jpg";
  
  export const HeroHomepage = () => {
    return (
@@ -138,65 +139,67 @@ import communityImpact from "@/assets/community-impact-4k.jpg";
                   <div className="absolute inset-0 bg-gradient-to-t from-[#18305A]/30 via-transparent to-transparent" />
                 </div>
 
-                {/* Secondary Photo - Floating */}
+                {/* Secondary Photo - Floating with Glassmorphism */}
                 <motion.div 
-                  className="absolute -bottom-8 -left-8 w-40 h-40 rounded-2xl overflow-hidden shadow-2xl border-4 border-white"
+                  className="absolute -bottom-8 -left-8 w-44 h-44 rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-white/20 backdrop-blur-sm"
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.5 }}
                 >
                   <img 
-                    src={communityImpact} 
-                    alt="Community protection and support"
-                    width={160}
-                    height={160}
+                    src={grandmotherGrandchildren} 
+                    alt="Grandmother with grandchildren - Protected family"
+                    width={176}
+                    height={176}
                     loading="eager"
                     decoding="async"
                     className="w-full h-full object-cover"
                   />
+                  {/* Glassmorphism overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#18305A]/20 via-transparent to-transparent" />
                 </motion.div>
 
-                {/* Floating Stats Card */}
+                {/* Floating Stats Card - Enhanced Glassmorphism */}
                 <motion.div 
-                  className="absolute -bottom-4 right-4 bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-4 border border-coral-200/50"
+                  className="absolute -bottom-4 right-4 bg-white/80 backdrop-blur-xl rounded-2xl shadow-2xl p-5 border border-white/50"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg"
+                      <div className="w-14 h-14 rounded-xl flex items-center justify-center shadow-lg"
                       style={{ background: 'linear-gradient(135deg, #F8926A 0%, #BB81B5 100%)' }}>
-                      <span className="text-white font-black text-lg">4+</span>
+                      <span className="text-white font-black text-xl">4+</span>
                     </div>
                     <div>
-                      <div className="text-xl font-black text-[#18305A]">Years</div>
-                      <div className="text-xs text-foreground/50 font-medium">Of Excellence</div>
+                      <div className="text-xl font-black text-[#18305A]" style={{ fontFamily: "'Clash Display', sans-serif" }}>Years</div>
+                      <div className="text-xs text-foreground/50 font-semibold">Of Excellence</div>
                     </div>
                   </div>
                 </motion.div>
 
-                {/* Premium Badge */}
+                {/* Premium Badge - Enhanced */}
                 <motion.div 
-                  className="absolute top-6 -right-2 bg-white/95 backdrop-blur-sm rounded-full shadow-xl px-4 py-2 border border-coral-200/50"
+                  className="absolute top-6 -right-2 bg-white/80 backdrop-blur-xl rounded-full shadow-xl px-5 py-2.5 border border-white/50"
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.7 }}
                 >
                   <div className="flex items-center gap-2">
                     <Sparkles className="w-4 h-4 text-coral-500" />
-                    <span className="text-sm font-bold text-[#18305A]">Ohio's #1</span>
+                    <span className="text-sm font-bold" style={{ background: 'linear-gradient(135deg, #18305A 0%, #BB81B5 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Ohio's #1</span>
                   </div>
                 </motion.div>
 
-                {/* Video Play Button */}
+                {/* Video Play Button - Premium Glassmorphism */}
                 <motion.button 
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-white/90 backdrop-blur-sm shadow-2xl flex items-center justify-center group hover:scale-110 transition-transform border-2 border-coral-200/50"
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full bg-white/70 backdrop-blur-xl shadow-2xl flex items-center justify-center group hover:scale-110 transition-transform border border-white/50"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <div className="w-14 h-14 rounded-full flex items-center justify-center shadow-lg"
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center shadow-xl"
                     style={{ background: 'linear-gradient(135deg, #F8926A 0%, #BB81B5 100%)' }}>
-                    <Play className="w-6 h-6 text-white fill-white ml-0.5" />
+                    <Play className="w-7 h-7 text-white fill-white ml-1" />
                   </div>
                 </motion.button>
               </div>

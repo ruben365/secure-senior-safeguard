@@ -1,7 +1,9 @@
  import { Link } from "react-router-dom";
  import { Button } from "@/components/ui/button";
- import { Heart, Shield, Users, Ribbon, ArrowRight, CheckCircle } from "lucide-react";
+ import { Heart, Shield, Users, Ribbon, ArrowRight, CheckCircle, Sparkles } from "lucide-react";
  import { motion } from "framer-motion";
+ import teamExpertsLobby from "@/assets/team-experts-lobby.jpg";
+ import businessTeamMeeting from "@/assets/business-team-meeting-natural.jpg";
  
  const values = [
    { icon: Shield, title: "Treating you with respect and courtesy" },
@@ -10,14 +12,14 @@
  ];
  
  const teamMembers = [
-   { name: "Brandon Joe", role: "Founder & CEO", color: "from-coral-400 to-lavender-500" },
-   { name: "Laura Wilson", role: "Security Lead", color: "from-lavender-500 to-[#18305A]" },
-   { name: "Jackson Mills", role: "Training Director", color: "from-[#18305A] to-coral-400" },
+   { name: "Brandon Joe", role: "Founder & CEO", image: teamExpertsLobby },
+   { name: "Laura Wilson", role: "Security Lead", image: businessTeamMeeting },
+   { name: "Jackson Mills", role: "Training Director", image: teamExpertsLobby },
  ];
  
  export const CommunityImpact = () => {
    return (
-     <section className="relative py-24 lg:py-32 bg-white overflow-hidden">
+     <section className="relative py-24 lg:py-32 overflow-hidden" style={{ background: 'linear-gradient(135deg, #ffffff 0%, #faf9f7 50%, #fff5f0 100%)' }}>
        {/* Decorative Gradient */}
        <div className="absolute top-0 left-0 w-[400px] h-[400px] opacity-20 pointer-events-none"
          style={{
@@ -36,9 +38,9 @@
            viewport={{ once: true }}
            className="text-center mb-16"
          >
-           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-coral-50 to-lavender-50 border border-coral-200/50 mb-6">
-             <span className="w-2 h-2 rounded-full bg-coral-400" />
-             <span className="text-sm font-semibold text-foreground/80 uppercase tracking-wide">Our Team</span>
+           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-md border border-coral-200/50 shadow-lg mb-6">
+             <Sparkles className="w-4 h-4 text-coral-500" />
+             <span className="text-sm font-semibold text-[#18305A] uppercase tracking-wide">Our Team</span>
            </div>
            <h2 className="text-4xl md:text-5xl font-black text-[#18305A] leading-tight mb-4"
              style={{ fontFamily: "'Clash Display', 'DM Sans', sans-serif" }}>
@@ -57,21 +59,26 @@
                viewport={{ once: true }}
                className="group"
              >
-               {/* Photo Placeholder */}
-               <div className={`relative aspect-[4/5] rounded-3xl overflow-hidden bg-gradient-to-br ${member.color} mb-4 group-hover:scale-[1.02] transition-transform`}>
-                 <div className="absolute inset-0 flex items-center justify-center">
-                   <Users className="w-20 h-20 text-white/50" />
+               {/* Real Photo */}
+                 <div className="relative aspect-[4/5] rounded-3xl overflow-hidden mb-4 group-hover:scale-[1.02] transition-transform shadow-xl border-4 border-white">
+                   <img 
+                     src={member.image}
+                     alt={member.name}
+                     width={300}
+                     height={375}
+                     loading="lazy"
+                     decoding="async"
+                     className="w-full h-full object-cover"
+                   />
+                   {/* Premium overlay */}
+                   <div className="absolute inset-0 bg-gradient-to-t from-[#18305A]/40 via-transparent to-transparent" />
+                   
+                   {/* Glassmorphism name card */}
+                   <div className="absolute bottom-4 left-4 right-4 bg-white/20 backdrop-blur-xl rounded-2xl p-3 border border-white/30">
+                     <div className="text-white font-bold">{member.name}</div>
+                     <div className="text-white/70 text-sm">{member.role}</div>
+                   </div>
                  </div>
-                 {/* Decorative Pattern */}
-                 <div className="absolute inset-0 opacity-10"
-                   style={{
-                     backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
-                     backgroundSize: '16px 16px'
-                   }}
-                 />
-               </div>
-               <h3 className="text-xl font-bold text-[#18305A]">{member.name}</h3>
-               <p className="text-foreground/50">{member.role}</p>
              </motion.div>
            ))}
          </div>
@@ -86,8 +93,18 @@
              viewport={{ once: true }}
              className="relative"
            >
-             <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-gradient-to-br from-coral-400 via-lavender-400 to-[#18305A] flex items-center justify-center">
-               <Heart className="w-24 h-24 text-white/70" />
+             <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+               <img 
+                 src={businessTeamMeeting}
+                 alt="Team collaboration"
+                 width={600}
+                 height={450}
+                 loading="lazy"
+                 decoding="async"
+                 className="w-full h-full object-cover"
+               />
+               {/* Premium overlay */}
+               <div className="absolute inset-0 bg-gradient-to-t from-[#18305A]/30 via-transparent to-transparent" />
              </div>
              
              {/* Floating Badge */}
@@ -111,9 +128,9 @@
              viewport={{ once: true }}
              className="space-y-6"
            >
-             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-coral-50 to-lavender-50 border border-coral-200/50">
-               <span className="w-2 h-2 rounded-full bg-coral-400" />
-               <span className="text-sm font-semibold text-foreground/80 uppercase tracking-wide">Our Commitment</span>
+             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-md border border-coral-200/50 shadow-lg">
+               <Sparkles className="w-4 h-4 text-coral-500" />
+               <span className="text-sm font-semibold text-[#18305A] uppercase tracking-wide">Our Commitment</span>
              </div>
              
              <h3 className="text-3xl md:text-4xl font-black text-[#18305A] leading-tight"
@@ -137,7 +154,7 @@
                    viewport={{ once: true }}
                    className="flex items-center gap-4 group"
                  >
-                   <div className="w-12 h-12 rounded-full bg-gradient-to-br from-coral-100 to-lavender-100 flex items-center justify-center group-hover:scale-110 transition-transform">
+                   <div className="w-12 h-12 rounded-full bg-white/80 backdrop-blur-md border border-coral-200/50 shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                      <value.icon className="w-5 h-5 text-coral-500" />
                    </div>
                    <span className="font-medium text-[#18305A]">{value.title}</span>

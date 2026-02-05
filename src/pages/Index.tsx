@@ -19,6 +19,7 @@
  import { SectionNav } from "@/components/SectionNav";
  import seniorCoupleActive from "@/assets/senior-couple-active.jpg";
  import { TrustedExpertsBar } from "@/components/home/TrustedExpertsBar";
+ import { PremiumGlassmorphismWidgets } from "@/components/home/PremiumGlassmorphismWidgets";
  
  const Index = () => {
    const [scamShieldOpen, setScamShieldOpen] = useState(false);
@@ -58,6 +59,12 @@
              <ResourcesPromo />
            </section>
            
+ 
+           {/* Premium Glassmorphism Widgets */}
+           <section id="trust-widgets">
+             <PremiumGlassmorphismWidgets />
+           </section>
+ 
            {/* Community Impact - Veteran Support, Cancer Children, etc. */}
            <section id="community">
              <CommunityImpact />

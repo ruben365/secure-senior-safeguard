@@ -40,8 +40,21 @@ const steps = [
 
 export const WorkingProcess = () => {
 
-  return (
-    <section className="py-16 relative overflow-hidden">
+   return (
+     <section className="py-20 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #ffffff 0%, #faf9f7 50%, #fff5f0 100%)' }}>
+       {/* Decorative Gradient Orbs */}
+       <div className="absolute top-20 right-[10%] w-[400px] h-[400px] opacity-30 pointer-events-none"
+         style={{
+           background: 'radial-gradient(circle at center, rgba(248,146,106,0.4) 0%, transparent 60%)',
+           filter: 'blur(100px)',
+         }}
+       />
+       <div className="absolute bottom-10 left-[5%] w-[300px] h-[300px] opacity-25 pointer-events-none"
+         style={{
+           background: 'radial-gradient(circle at center, rgba(187,129,181,0.5) 0%, transparent 60%)',
+           filter: 'blur(80px)',
+         }}
+       />
       {/* Grid pattern */}
       <GridPattern />
       
@@ -138,15 +151,15 @@ export const WorkingProcess = () => {
             className="order-1 lg:order-2"
           >
             <div 
-              className="inline-flex items-center gap-2 px-5 py-2 bg-primary text-primary-foreground text-sm font-semibold uppercase tracking-wider mb-4"
-              style={{ clipPath: "polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%)" }}
+             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/80 backdrop-blur-md border border-coral-200/50 shadow-lg text-sm font-semibold uppercase tracking-wider mb-4"
             >
-              How It Works
+             <span className="w-2 h-2 rounded-full bg-gradient-to-r from-coral-400 to-lavender-500 animate-pulse" />
+             <span className="text-[#18305A]">How It Works</span>
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-              Get Protected in{" "}
-              <span className="text-primary">Four Simple Steps</span>
-            </h2>
+             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#18305A] mb-4" style={{ fontFamily: "'Clash Display', 'DM Sans', sans-serif" }}>
+               Get Protected in{" "}
+               <span className="bg-gradient-to-r from-coral-500 to-lavender-500 bg-clip-text text-transparent">Four Simple Steps</span>
+             </h2>
             <p className="text-muted-foreground text-lg">
               Our streamlined process makes getting protected easy and stress-free.
             </p>
@@ -172,7 +185,7 @@ export const WorkingProcess = () => {
                 <div className="relative inline-block mb-6">
                   <div className={`absolute inset-0 rounded-3xl ${step.bgGlow} blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 scale-110`} />
                   
-                  <div className="relative w-28 h-28 rounded-3xl bg-white border border-border/50 flex items-center justify-center shadow-lg mx-auto transition-all duration-300 group-hover:translate-y-[-6px] group-hover:shadow-xl overflow-hidden">
+                   <div className="relative w-28 h-28 rounded-3xl bg-white/80 backdrop-blur-md border border-white/50 flex items-center justify-center shadow-lg mx-auto transition-all duration-300 group-hover:translate-y-[-6px] group-hover:shadow-2xl overflow-hidden">
                     <div className={`absolute inset-0 bg-gradient-to-br ${step.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
                     
                     <div className={`relative w-14 h-14 rounded-2xl bg-gradient-to-br ${step.gradient} flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300`}>
