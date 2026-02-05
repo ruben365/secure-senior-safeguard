@@ -157,7 +157,7 @@ import seniorLearning from "@/assets/senior-learning.jpg";
              </h2>
              
              <p className="text-lg text-foreground/60 leading-relaxed">
-               Scammers now use deepfakes and voice cloning. Our expert-led workshops teach you to recognize and stop these sophisticated threats—protecting your family from AI-powered scams.
+                Scammers now use deepfakes and voice cloning. Our expert-led workshops teach you to recognize and stop these sophisticated threats, protecting your family from AI-powered scams.
              </p>
  
              {/* Stats Row */}

@@ -274,7 +274,7 @@ const Services = () => {
                   Why Choose InVision Network?
                 </h2>
                 <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-                  We're not just a service provider—we're your partners in digital safety.
+                  We're not just a service provider. We're your partners in digital safety.
                 </p>
               </div>
             </ScrollReveal>
@@ -436,28 +436,28 @@ const Services = () => {
                           {row.scamshield ? (
                             <CheckCircle className="h-5 w-5 text-success mx-auto" />
                           ) : (
-                            <span className="text-muted-foreground">—</span>
+                            <span className="text-muted-foreground"></span>
                           )}
                         </td>
                         <td className="text-center py-4 px-4">
                           {row.business ? (
                             <CheckCircle className="h-5 w-5 text-success mx-auto" />
                           ) : (
-                            <span className="text-muted-foreground">—</span>
+                            <span className="text-muted-foreground"></span>
                           )}
                         </td>
                         <td className="text-center py-4 px-4">
                           {row.training ? (
                             <CheckCircle className="h-5 w-5 text-success mx-auto" />
                           ) : (
-                            <span className="text-muted-foreground">—</span>
+                            <span className="text-muted-foreground"></span>
                           )}
                         </td>
                         <td className="text-center py-4 px-4">
                           {row.vault ? (
                             <CheckCircle className="h-5 w-5 text-success mx-auto" />
                           ) : (
-                            <span className="text-muted-foreground">—</span>
+                            <span className="text-muted-foreground"></span>
                           )}
                         </td>
                       </tr>

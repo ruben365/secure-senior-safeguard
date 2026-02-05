@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Phone, LayoutDashboard } from "lucide-react";
+import { Menu, X, Phone, LayoutDashboard, ShoppingCart as CartIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PrefetchLink } from "@/components/PrefetchLink";
 import { ShoppingCart } from "@/components/ShoppingCart";
@@ -44,10 +44,7 @@ const Navigation = () => {
 
   const handleBrandClick = async (e: React.MouseEvent) => {
     e.preventDefault();
-    toast.info("Refreshing for optimal performance...", { duration: 1500 });
-    setTimeout(async () => {
-      await clearAllCachesAndReload();
-    }, 300);
+    window.location.href = '/';
   };
 
   const isActiveLink = (href: string) => {
@@ -64,27 +61,27 @@ const Navigation = () => {
         />
       )}
 
-      <nav className="sticky top-0 z-[9999] bg-white border-b border-border">
-        <div className="container mx-auto px-4 lg:px-6">
+      <nav className="sticky top-0 z-[9999] bg-white/95 backdrop-blur-sm border-b border-gray-100">
+        <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-center justify-between h-14 md:h-16">
             {/* Logo */}
             <a 
               href="/" 
-              className="flex items-center gap-2.5 hover:opacity-90 transition-opacity duration-150 flex-shrink-0 no-underline" 
+              className="flex items-center gap-3 hover:opacity-90 transition-opacity duration-150 flex-shrink-0 no-underline" 
               onClick={handleBrandClick}
             >
               <img 
                 src={invisionLogo} 
                 alt="InVision Network Shield Logo" 
-                width={48}
-                height={48}
+                width={44}
+                height={44}
                 loading="eager"
                 decoding="async"
-                className="w-9 h-9 md:w-10 md:h-10 object-contain flex-shrink-0"
+                className="w-10 h-10 md:w-11 md:h-11 object-contain flex-shrink-0"
               />
               <div className="flex flex-col leading-tight min-w-0">
                 <span 
-                  className="text-base md:text-lg font-bold tracking-tight"
+                  className="text-lg md:text-xl font-bold tracking-tight"
                   style={{
                     background: 'linear-gradient(135deg, #18305A 0%, #BB81B5 100%)',
                     WebkitBackgroundClip: 'text',
@@ -100,16 +97,16 @@ const Navigation = () => {
             </a>
 
             {/* Desktop Navigation Links */}
-            <div className="hidden lg:flex items-center gap-1">
+            <div className="hidden lg:flex items-center gap-0.5">
               {navLinks.map((link) => {
                 const isActive = isActiveLink(link.href);
                 return (
                   <PrefetchLink
                     key={link.name}
                     to={link.href}
-                    className={`relative text-sm transition-colors duration-150 font-medium px-3 py-2 rounded-md whitespace-nowrap ${
+                    className={`relative text-[13px] transition-colors duration-150 font-medium px-3 py-2 rounded-md whitespace-nowrap ${
                       isActive 
-                        ? 'text-primary font-semibold bg-primary/5' 
+                        ? 'text-primary font-semibold' 
                         : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                     }`}
                   >
@@ -120,19 +117,19 @@ const Navigation = () => {
             </div>
 
             {/* Right Side - Cart, Phone & Login */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 md:gap-3">
               <ShoppingCart />
 
               {/* Phone */}
               <a
                 href="tel:9373018749"
-                className="hidden md:flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors duration-150 no-underline"
+                className="hidden md:flex items-center gap-2 text-foreground hover:text-primary transition-colors duration-150 no-underline"
                 aria-label="Call us at (937) 301-8749"
               >
-                <div className="w-8 h-8 rounded-lg bg-muted/50 flex items-center justify-center">
-                  <Phone className="w-4 h-4 text-primary" />
+                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Phone className="w-4 h-4 text-primary" fill="currentColor" />
                 </div>
-                <span className="text-sm font-medium whitespace-nowrap">
+                <span className="text-sm font-semibold whitespace-nowrap text-foreground">
                   (937) 301-8749
                 </span>
               </a>
@@ -140,8 +137,8 @@ const Navigation = () => {
               {/* Login/Dashboard Button */}
               <Button 
                 asChild 
-                className="h-9 px-4 text-white font-medium"
-                style={{ background: 'linear-gradient(135deg, hsl(18 92% 62%) 0%, hsl(308 28% 61%) 100%)' }}
+                className="h-9 px-5 text-white font-semibold rounded-full shadow-sm"
+                style={{ background: 'linear-gradient(135deg, #F8926A 0%, #BB81B5 100%)' }}
               >
                 {isAdminOrStaff ? (
                   <Link to="/admin" aria-label="Go to Dashboard" className="flex items-center gap-2">
@@ -156,7 +153,7 @@ const Navigation = () => {
               {/* Mobile menu button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 rounded-lg hover:bg-muted/50 transition-colors duration-150 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                className="lg:hidden p-2 rounded-md hover:bg-muted/50 transition-colors duration-150 min-w-[44px] min-h-[44px] flex items-center justify-center"
                 aria-label="Toggle menu"
               >
                 {mobileMenuOpen ? (
@@ -199,8 +196,8 @@ const Navigation = () => {
                 {/* Mobile Login/Dashboard Button */}
                 <Button
                   asChild 
-                  className="w-full h-11 text-base font-medium text-white"
-                  style={{ background: 'linear-gradient(135deg, hsl(18 92% 62%) 0%, hsl(308 28% 61%) 100%)' }}
+                  className="w-full h-11 text-base font-semibold text-white rounded-full"
+                  style={{ background: 'linear-gradient(135deg, #F8926A 0%, #BB81B5 100%)' }}
                 >
                   {isAdminOrStaff ? (
                     <Link to="/admin" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center gap-2">
