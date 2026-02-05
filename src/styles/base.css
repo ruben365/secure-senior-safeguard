@@ -133,11 +133,11 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     --cyan-500: 188 60% 42%;
     --cyan-400: 188 55% 52%;
 
-    /* Refined Shadows - subtle, clean separation */
-    --shadow-xs: 0 1px 2px hsl(220 20% 20% / 0.04);
-    --shadow-sm: 0 1px 3px hsl(220 20% 20% / 0.05);
-    --shadow-md: 0 2px 8px -2px hsl(220 20% 20% / 0.06);
-    --shadow-lg: 0 4px 16px -4px hsl(220 20% 20% / 0.08);
+    /* Minimal Shadows - performance optimized */
+    --shadow-xs: 0 1px 2px hsl(220 20% 20% / 0.03);
+    --shadow-sm: 0 1px 2px hsl(220 20% 20% / 0.04);
+    --shadow-md: 0 2px 4px hsl(220 20% 20% / 0.05);
+    --shadow-lg: 0 4px 8px hsl(220 20% 20% / 0.06);
 
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 230 35% 12%;
@@ -210,10 +210,9 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     @apply scroll-smooth;
     overflow-x: hidden;
     width: 100%;
-    scroll-behavior: smooth;
     scrollbar-gutter: stable;
   }
-  
+
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'DM Sans', 'Outfit', sans-serif;
@@ -223,9 +222,7 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     overflow-x: hidden;
     width: 100%;
     position: relative;
-    /* Desktop zoom scaling */
     zoom: var(--site-scale);
-    /* Clean warm cream background */
     background-color: hsl(30 25% 97%);
   }
 
@@ -249,16 +246,12 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     top: 1rem;
   }
 
-  /* Accessibility - Focus visible styles */
   *:focus-visible {
     @apply outline-2 outline-offset-2 outline-primary;
   }
 
-  /* Accessibility - Reduced motion */
   @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
+    *, *::before, *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
@@ -266,7 +259,6 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     }
   }
 
-  /* Screen reader only content */
   .sr-only {
     position: absolute;
     width: 1px;
@@ -279,34 +271,19 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     border-width: 0;
   }
 
-  .sr-only:focus,
-  .sr-only:active {
-    position: static;
-    width: auto;
-    height: auto;
-    overflow: visible;
-    clip: auto;
-    white-space: normal;
-  }
 
-  /* Custom scrollbar for activity feed and other scrollable elements */
   .custom-scrollbar::-webkit-scrollbar {
     width: 4px;
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
     background: hsl(var(--muted));
-    border-radius: 2px;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: hsl(var(--muted-foreground) / 0.25);
-    border-radius: 2px;
+    background: hsl(var(--muted-foreground) / 0.2);
   }
 
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--muted-foreground) / 0.5);
-  }
 
   #root {
     @apply min-h-screen;
@@ -314,7 +291,6 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     width: 100%;
   }
 
-  /* Fallback for browsers that don't support zoom */
   @supports not (zoom: 1) {
     body {
       transform: scale(var(--site-scale));
@@ -322,7 +298,6 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     }
   }
 
-  /* Prevent image flicker on load */
   img {
     @apply block;
   }
@@ -345,14 +320,9 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     @apply text-xl sm:text-2xl md:text-3xl;
   }
 
-  /* Minimum tap targets for accessibility */
   button, a {
     min-height: 44px;
     min-width: 44px;
   }
 }
 
-/* Global transition timing - fast and subtle */
-* {
-  transition-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
-}

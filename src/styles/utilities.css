@@ -1,40 +1,6 @@
 /* Utility Classes */
 
-/* ===== PREMIUM TEXTURE & VISUAL ACCENTS ===== */
-
-/* Premium noise texture overlay */
-.texture-noise {
-  position: relative;
-}
-
-.texture-noise::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: 0.018;
-  pointer-events: none;
-  mix-blend-mode: overlay;
-  z-index: 1;
-}
-
-/* Premium gradient mesh background */
-.bg-premium-mesh {
-  background: 
-    radial-gradient(ellipse 80% 50% at 20% -10%, hsl(265 55% 42% / 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 40% at 85% 110%, hsl(170 60% 38% / 0.06) 0%, transparent 50%),
-    radial-gradient(ellipse 40% 60% at 50% 50%, hsl(40 80% 55% / 0.03) 0%, transparent 60%),
-    hsl(var(--background));
-}
-
-/* Silky smooth sections */
-.section-premium {
-  position: relative;
-  background: linear-gradient(180deg, 
-    hsl(var(--background)) 0%, 
-    hsl(40 20% 96%) 50%,
-    hsl(var(--background)) 100%);
-}
+/* ===== LIGHTWEIGHT UTILITY CLASSES ===== */
 
 /* Gradient text accent */
 .text-gradient-accent {
@@ -51,131 +17,6 @@
   background-clip: text;
 }
 
-/* Glow accent on elements */
-.glow-accent {
-  box-shadow: 0 0 20px hsl(var(--primary) / 0.15), 
-              0 0 40px hsl(var(--accent) / 0.08);
-}
-
-.glow-accent-strong {
-  box-shadow: 0 0 30px hsl(var(--primary) / 0.25), 
-              0 0 60px hsl(var(--accent) / 0.12);
-}
-
-/* Premium glass card */
-.glass-premium {
-  background: hsl(var(--background) / 0.85);
-  backdrop-filter: blur(20px) saturate(1.8);
-  -webkit-backdrop-filter: blur(20px) saturate(1.8);
-  border: 1px solid hsl(var(--border) / 0.5);
-  box-shadow: 
-    0 4px 24px -4px hsl(260 30% 20% / 0.08),
-    inset 0 1px 0 hsl(0 0% 100% / 0.6);
-}
-
-/* Border gradient accent */
-.border-gradient-accent {
-  position: relative;
-  border: 1px solid transparent;
-  background: linear-gradient(hsl(var(--background)), hsl(var(--background))) padding-box,
-              linear-gradient(135deg, hsl(var(--primary) / 0.4), hsl(var(--accent) / 0.4)) border-box;
-}
-
-/* Floating accent dot */
-.accent-dot {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
-  box-shadow: 0 0 12px hsl(var(--primary) / 0.35);
-}
-
-/* Accent line */
-.accent-line {
-  height: 2px;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    hsl(var(--primary) / 0.4) 20%, 
-    hsl(var(--accent)) 50%, 
-    hsl(var(--primary) / 0.4) 80%, 
-    transparent 100%);
-}
-
-/* Corner accent */
-.accent-corner {
-  position: relative;
-}
-
-.accent-corner::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, hsl(var(--accent) / 0.12), transparent 70%);
-  pointer-events: none;
-}
-
-/* Subtle background patterns */
-.bg-pattern-dots {
-  background-image: radial-gradient(hsl(var(--primary) / 0.06) 1px, transparent 1px);
-  background-size: 28px 28px;
-}
-
-.bg-pattern-grid {
-  background-image: 
-    linear-gradient(hsl(var(--primary) / 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, hsl(var(--primary) / 0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
-
-/* Shimmer overlay */
-.shimmer-overlay {
-  position: relative;
-  overflow: hidden;
-}
-
-.shimmer-overlay::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    hsl(var(--primary) / 0.08) 50%,
-    transparent 100%
-  );
-  animation: shimmer-slide 3s ease-in-out infinite;
-}
-
-@keyframes shimmer-slide {
-  0% { left: -100%; }
-  50%, 100% { left: 200%; }
-}
-
-/* Premium card elevation */
-.card-elevated {
-  box-shadow: 
-    0 1px 2px hsl(var(--primary) / 0.04),
-    0 4px 8px hsl(var(--primary) / 0.04),
-    0 8px 16px hsl(var(--primary) / 0.04),
-    0 16px 32px hsl(var(--primary) / 0.02);
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-.card-elevated:hover {
-  box-shadow: 
-    0 2px 4px hsl(var(--primary) / 0.06),
-    0 8px 16px hsl(var(--primary) / 0.06),
-    0 16px 32px hsl(var(--primary) / 0.06),
-    0 24px 48px hsl(var(--primary) / 0.04);
-  transform: translateY(-2px);
-}
 
 /* Text wrapping */
 .overflow-wrap-anywhere {
@@ -198,17 +39,8 @@ p, span, li, div {
   @apply py-4 md:py-6 lg:py-8;
 }
 
-.section-spacing-loose {
-  @apply py-8 md:py-10 lg:py-12;
-}
-
-/* Compact section spacing */
 .section-compact {
   @apply py-4 md:py-6;
-}
-
-.section-tight {
-  @apply py-3 md:py-4;
 }
 
 .container-padding {
@@ -223,121 +55,10 @@ p, span, li, div {
   @apply gap-3 md:gap-4;
 }
 
-/* Tight grid spacing */
 .grid-tight {
   @apply gap-2 md:gap-3;
 }
 
-.grid-compact {
-  @apply gap-1.5 md:gap-2;
-}
-
-/* Brightness utility for hero images */
-.brightness-115 {
-  filter: brightness(1.15);
-}
-
-/* Responsive Container Utilities */
-.container-responsive {
-  width: 100%;
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-@media (min-width: 640px) {
-  .container-responsive {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container-responsive {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-}
-
-/* Responsive Grid Utilities */
-.grid-responsive {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 640px) {
-  .grid-responsive {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .grid-responsive {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-  }
-}
-
-/* Mobile Card Utilities */
-.card-mobile {
-  padding: 1rem;
-}
-
-@media (min-width: 640px) {
-  .card-mobile {
-    padding: 1.5rem;
-  }
-}
-
-/* Touch Target Utilities */
-.touch-target {
-  min-height: 44px;
-  min-width: 44px;
-  padding: 0.75rem 1rem;
-}
-
-/* Text Responsive Utilities */
-.text-responsive-h1 {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
-
-@media (min-width: 768px) {
-  .text-responsive-h1 {
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .text-responsive-h1 {
-    font-size: 3rem;
-    line-height: 1;
-  }
-}
-
-.text-responsive-h2 {
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
-
-@media (min-width: 768px) {
-  .text-responsive-h2 {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .text-responsive-h2 {
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-  }
-}
 
 /* Prevent Horizontal Overflow */
 body {
@@ -351,18 +72,6 @@ video {
   height: auto;
 }
 
-/* Mobile Table Scroll */
-.table-scroll-mobile {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-@media (max-width: 639px) {
-  .table-scroll-mobile table {
-    min-width: 600px;
-  }
-}
-
 /* Hide elements on mobile */
 @media (max-width: 768px) {
   .hide-mobile {
@@ -370,7 +79,6 @@ video {
   }
 }
 
-/* Show elements only on mobile */
 @media (min-width: 769px) {
   .show-mobile {
     display: none !important;
