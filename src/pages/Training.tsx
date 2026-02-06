@@ -49,6 +49,7 @@ import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import TestimonialCard from "@/components/TestimonialCard";
 import { VideoLightbox } from "@/components/VideoLightbox";
 import { InstructorShowcase } from "@/components/training/InstructorShowcase";
+import { GuestScannerSection } from "@/components/training/GuestScannerSection";
 import { SEO } from "@/components/SEO";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
@@ -351,7 +352,7 @@ function LearnAndTrain() {
         />
         <Navigation />
 
-      {/* Hero Section with wrapper for floating stats */}
+      {/* Hero Section - Streamlined */}
       <div className="relative">
         <Hero
           backgroundImages={trainingHeroImages}
@@ -359,71 +360,62 @@ function LearnAndTrain() {
           subheadline=""
           showScrollIndicator={true}
         >
-          <div className="text-center md:text-left mb-8">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+          <div className="text-center md:text-left mb-6">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3">
               <RotatingHeadlines headlines={trainingHeadlines} className="" />
             </h1>
-            <p className="text-lg md:text-xl lg:text-2xl text-white/90 max-w-4xl">
-              Expert-led training and 24/7 protection services designed for families and seniors
+            <p className="text-lg md:text-xl text-white/90 max-w-3xl">
+              Expert-led workshops & instant file scanning for families and seniors
             </p>
           </div>
 
-          {/* Distinct CTA Buttons with Visual Separation */}
-          <div className="flex flex-col sm:flex-row gap-6 flex-wrap justify-center md:justify-start">
-            {/* Learn & Train Workshops - Primary Featured */}
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 rounded-xl blur-md opacity-75 group-hover:opacity-100 transition-opacity duration-300" />
-              <Button 
-                onClick={() => {
-                  document.getElementById('training')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                size="xl" 
-                className="relative w-full sm:w-auto bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white border-0 shadow-xl text-lg md:text-xl px-8 py-6"
-              >
-                <Shield className="w-6 h-6 mr-2" />
-                Learn & Train Workshops
-              </Button>
-            </div>
+          {/* CTA Buttons - Compact */}
+          <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center md:justify-start">
+            <Button 
+              onClick={() => {
+                document.getElementById('training')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              size="lg" 
+              className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white border-0 shadow-xl text-base px-6 py-5"
+            >
+              <Shield className="w-5 h-5 mr-2" />
+              Learn & Train Workshops
+            </Button>
             
-            {/* AI & Business Solutions - Secondary Style */}
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 via-primary to-accent rounded-xl blur-md opacity-50 group-hover:opacity-75 transition-opacity duration-300" />
-              <Button 
-                asChild
-                size="xl" 
-                className="relative w-full sm:w-auto bg-gradient-to-r from-purple-600 to-primary hover:from-purple-500 hover:to-primary/90 text-white border-0 shadow-xl text-lg md:text-xl px-8 py-6"
-              >
-                <Link to="/business">
-                  <Zap className="w-6 h-6 mr-2" />
-                  AI & Business Solutions
-                </Link>
-              </Button>
-            </div>
-          </div>
+            <Button 
+              onClick={() => {
+                document.getElementById('guest-scanner')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              size="lg" 
+              className="bg-gradient-to-r from-primary to-accent hover:opacity-90 text-white border-0 shadow-xl text-base px-6 py-5"
+            >
+              <Upload className="w-5 h-5 mr-2" />
+              Quick File Scan
+            </Button>
 
-          {/* Decorative floating graphics */}
-          <div className="hidden lg:flex gap-8 mt-8">
-            <div className="flex items-center gap-3 bg-white/20 backdrop-blur-md rounded-full px-6 py-3 border-2 border-white/40 shadow-lg">
-              <Shield className="w-7 h-7 text-emerald-300" />
-              <span className="text-white text-lg font-bold">Family Protection</span>
-            </div>
-            <div className="flex items-center gap-3 bg-white/20 backdrop-blur-md rounded-full px-6 py-3 border-2 border-white/40 shadow-lg">
-              <Users className="w-7 h-7 text-cyan-300" />
-              <span className="text-white text-lg font-bold">Expert-Led Training</span>
-            </div>
-            <div className="flex items-center gap-3 bg-white/20 backdrop-blur-md rounded-full px-6 py-3 border-2 border-white/40 shadow-lg">
-              <Award className="w-7 h-7 text-amber-300" />
-              <span className="text-white text-lg font-bold">24/7 Support</span>
-            </div>
+            <Button 
+              asChild
+              size="lg" 
+              variant="outline"
+              className="bg-white/15 backdrop-blur-md text-white border-white/30 hover:bg-white/25 text-base px-6 py-5"
+            >
+              <Link to="/business">
+                <Zap className="w-5 h-5 mr-2" />
+                AI & Business Solutions
+              </Link>
+            </Button>
           </div>
         </Hero>
         
-        {/* Floating Stats Bar - Outside Hero to stay static */}
+        {/* Floating Stats Bar */}
         <HeroFloatingStats />
       </div>
 
-      {/* Spacer for floating stats bar */}
+      {/* Spacer */}
       <div className="h-6" />
+
+      {/* ===== GUEST FILE SCANNER SECTION ===== */}
+      <GuestScannerSection />
 
       {/* Why Families Trust InVision Network Section */}
       <section className="py-8 bg-muted relative overflow-hidden">

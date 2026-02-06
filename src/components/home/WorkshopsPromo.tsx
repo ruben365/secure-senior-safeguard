@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Eye, AlertTriangle, Target, CheckCircle, Sparkles, Play } from "lucide-react";
-import seniorLearning from "@/assets/senior-learning.jpg";
-import trainingVideo from "@/assets/people-studying-video.mp4";
+import seniorLearning from "@/assets/protection-training-workshop.jpg";
+import trainingVideo from "@/assets/training-workshop-video.mp4";
  
  const services = [
    { icon: AlertTriangle, title: "Scam Prevention", desc: "Identify AI-powered scams before they strike" },

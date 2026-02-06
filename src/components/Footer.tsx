@@ -60,15 +60,15 @@ const Footer = () => {
       <TrustedTechLogos />
 
       {/* Main Footer */}
-      <div className="bg-gradient-to-b from-[#2a0b12] via-[#1c0a11] to-[#12060a] text-white relative overflow-hidden glass-dark">
+      <div className="bg-gradient-to-b from-[#0a1628] via-[#101d3a] to-[#1a1040] text-white relative overflow-hidden glass-dark">
         {/* Background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute inset-0 opacity-[0.02]" style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
             backgroundSize: '40px 40px'
           }} />
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#5b1623]/25 rounded-full blur-[120px]" />
-          <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[#7a2030]/20 rounded-full blur-[100px]" />
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#3b2d8e]/25 rounded-full blur-[120px]" />
+          <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[#1a3a7a]/20 rounded-full blur-[100px]" />
         </div>
 
         <div className="container mx-auto px-4 py-12 relative z-10">
