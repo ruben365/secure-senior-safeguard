@@ -22,7 +22,6 @@ import { LiveSecurityStats } from "@/components/home/LiveSecurityStats";
 import { LiveProtectionStatus } from "@/components/LiveProtectionStatus";
 import { SocialProofTicker } from "@/components/SocialProofTicker";
 import { ScrollProgressIndicator } from "@/components/ScrollProgressIndicator";
-import { QuickHelpFAB } from "@/components/QuickHelpFAB";
 
 const Index = () => {
   const [scamShieldOpen, setScamShieldOpen] = useState(false);
@@ -38,7 +37,6 @@ const Index = () => {
         {/* Floating widgets */}
         <LiveProtectionStatus />
         <SocialProofTicker />
-        <QuickHelpFAB />
 
         <main id="main-content">
           {/* Hero Section */}

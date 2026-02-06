@@ -92,11 +92,30 @@
   to { height: 0; opacity: 0; }
 }
 
+@keyframes glass-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes glass-orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes glass-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
 /* ===== UTILITY CLASSES ===== */
 
 .animate-fade-in { animation: fade-in 0.15s cubic-bezier(0.2, 0, 0.2, 1) forwards; }
 .accordion-down { animation: accordion-expand 0.15s cubic-bezier(0.2, 0, 0.2, 1); }
 .accordion-up { animation: accordion-collapse 0.15s cubic-bezier(0.2, 0, 0.2, 1); }
+.glass-float { animation: glass-float 2.6s ease-in-out infinite; }
+.glass-orbit { animation: glass-orbit 6s linear infinite; }
+.glass-orbit-slow { animation: glass-orbit 12s linear infinite; }
+.glass-pulse { animation: glass-pulse 1.8s ease-in-out infinite; }
 
 .skeleton {
   background: linear-gradient(90deg, hsl(var(--muted)) 0%, hsl(var(--muted-foreground) / 0.15) 50%, hsl(var(--muted)) 100%);

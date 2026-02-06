@@ -152,7 +152,7 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     --sidebar-ring: 220 58% 22%;
 
     /* Global site scale for desktop browsers */
-    --site-scale: 0.78;
+    --site-scale: 1;
   }
 
   .dark {
@@ -250,7 +250,7 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     @apply bg-background text-foreground antialiased;
     font-family: 'DM Sans', 'Outfit', sans-serif;
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.55;
     letter-spacing: -0.01em;
     overflow-x: hidden;
     width: 100%;
@@ -263,8 +263,8 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
 
   @media (min-width: 768px) {
     body {
-      font-size: 17px;
-      line-height: 1.65;
+      font-size: 16px;
+      line-height: 1.55;
     }
   }
 
@@ -366,21 +366,25 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   }
 
   h1 {
-    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
+    font-size: 2.25rem;
   }
 
   h2 {
-    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
+    font-size: 1.875rem;
   }
 
   h3 {
-    @apply text-xl sm:text-2xl md:text-3xl;
+    font-size: 1.5rem;
   }
 
   /* Minimum tap targets for accessibility */
   button, a {
     min-height: 44px;
     min-width: 44px;
+  }
+
+  button {
+    font-size: 1rem;
   }
   
   /* ===== SKEUOMORPHISM 2.0 GLOBAL EFFECTS ===== */

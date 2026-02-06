@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Eye, AlertTriangle, Target, CheckCircle, Sparkles, Play } from "lucide-react";
 import seniorLearning from "@/assets/senior-learning.jpg";
+import trainingVideo from "@/assets/people-studying-video.mp4";
  
  const services = [
    { icon: AlertTriangle, title: "Scam Prevention", desc: "Identify AI-powered scams before they strike" },
@@ -11,21 +12,55 @@ import seniorLearning from "@/assets/senior-learning.jpg";
    { icon: Eye, title: "Threat Analysis", desc: "Real-time monitoring and alerts" },
  ];
  
- export const WorkshopsPromo = () => {
+export const WorkshopsPromo = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const mediaRef = useRef<HTMLDivElement>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoError, setVideoError] = useState(false);
 
   useEffect(() => {
+    const target = mediaRef.current;
+    if (!target) {
+      setShouldLoad(true);
+      return;
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      setShouldLoad(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "150px" },
+    );
+
+    observer.observe(target);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!shouldLoad) return;
+    setVideoError(false);
+
     const video = videoRef.current;
     if (!video) return;
 
     const handleCanPlay = () => {
       setVideoLoaded(true);
-      video.play().catch(() => {
-        // Autoplay blocked, show play button
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (prefersReducedMotion) {
         setVideoError(true);
-      });
+        return;
+      }
+      video.play().catch(() => setVideoError(true));
     };
 
     const handleError = () => {
@@ -42,7 +77,7 @@ import seniorLearning from "@/assets/senior-learning.jpg";
       video.removeEventListener('canplay', handleCanPlay);
       video.removeEventListener('error', handleError);
     };
-  }, []);
+  }, [shouldLoad]);
 
   const handlePlayClick = () => {
     const video = videoRef.current;
@@ -58,7 +93,7 @@ import seniorLearning from "@/assets/senior-learning.jpg";
        <div className="container mx-auto px-4 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-center">
            {/* Left - Image/Video Area */}
-           <div className="relative">
+           <div className="relative" ref={mediaRef}>
              {/* Main Visual Container with 3D depth */}
              <div className="relative depth-layers">
                 <div className="absolute -inset-4 rounded-2xl glass-light" aria-hidden="true" />
@@ -66,26 +101,31 @@ import seniorLearning from "@/assets/senior-learning.jpg";
                 {/* Primary Photo - Workshop Training */}
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-3d-lg border-2 border-white bg-gradient-to-br from-navy-800 to-navy-900 hover-img-zoom">
                   {/* Fallback image while video loads */}
-                  {!videoLoaded && (
+                  {(!shouldLoad || !videoLoaded) && (
                     <img 
                       src={seniorLearning}
                       alt="Protection Training Workshop"
                       className="absolute inset-0 w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
                     />
                   )}
                   
-                  <video 
-                    ref={videoRef}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                   preload="auto"
-                   controls={false}
-                    className={`w-full h-full object-cover transition-opacity duration-500 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
-                  >
-                    <source src="https://cdn.pixabay.com/video/2020/05/25/40130-424930032_large.mp4" type="video/mp4" />
-                  </video>
+                  {shouldLoad && (
+                    <video 
+                      ref={videoRef}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                      controls={false}
+                      poster={seniorLearning}
+                      className={`w-full h-full object-cover transition-opacity duration-500 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
+                    >
+                      <source src={trainingVideo} type="video/mp4" />
+                    </video>
+                  )}
                   
                   {/* Play button overlay if autoplay fails */}
                   {videoError && (

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { User, Session } from "@supabase/supabase-js";
-import { AIPulseLoader } from "@/components/AIPulseLoader";
+import { GlassmorphismLoader } from "@/components/GlassmorphismLoader";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -50,7 +50,7 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   }, []);
 
   if (loading) {
-    return <AIPulseLoader message="Verifying Security..." />;
+    return <GlassmorphismLoader message="Verifying Security..." />;
   }
 
   if (!user || !session) {

@@ -31,6 +31,7 @@ const Navigation = () => {
   const navLinks = [
     { name: "AI & Business", href: "/business" },
     { name: "Learn & Train", href: "/training" },
+    { name: "Guest Scanner", href: "/guest-scanner" },
     { name: "Resources", href: "/resources" },
     { name: "About", href: "/about" },
     { name: "Careers", href: "/careers" },

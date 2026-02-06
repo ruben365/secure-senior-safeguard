@@ -252,6 +252,11 @@ export const PAGE_SEO = {
     description: "Free resources, guides, and articles about AI scam protection, deepfake detection, and cybersecurity. Stay informed and stay safe.",
     keywords: "scam protection resources, AI security guides, cybersecurity articles, deepfake information",
   },
+  guestScanner: {
+    title: "Guest File Scanner",
+    description: "Scan a file without creating an account. Pay per use and get instant threat analysis with automatic deletion.",
+    keywords: "guest file scanner, pay per scan, phishing detection, malware scan, deepfake detection",
+  },
   careers: {
     title: "Careers",
     description: "Join the InVision Network team. We're hiring cybersecurity professionals, trainers, and AI specialists in Dayton, Ohio.",

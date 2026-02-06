@@ -342,7 +342,7 @@ a[role="button"]:active {
 .form-input {
   border: 1px solid hsl(var(--border));
   transition: all 0.3s ease-out;
-  min-height: 48px;
+  min-height: 44px;
   font-size: 16px; /* Prevents iOS zoom */
 }
 

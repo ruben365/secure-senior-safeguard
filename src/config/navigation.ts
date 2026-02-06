@@ -27,6 +27,12 @@ export const MAIN_NAV_ROUTES: NavRoute[] = [
     showInNav: true
   },
   {
+    path: '/guest-scanner',
+    name: 'Guest Scanner',
+    description: 'Scan a file without creating an account',
+    showInNav: true
+  },
+  {
     path: '/business',
     name: 'AI & Business',
     description: 'AI automation services and business solutions',

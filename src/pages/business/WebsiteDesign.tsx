@@ -437,7 +437,7 @@ const WebsiteDesign = () => {
                         Most Popular
                       </Badge>
                     )}
-                    <Card className={`flex flex-col h-[460px] bg-white/85 dark:bg-card/85 backdrop-blur-2xl border-white/60 shadow-2xl transition-all duration-300 ${pkg.popular ? 'ring-2 ring-primary/40 shadow-primary/20' : ''}`}>
+                    <Card className={`flex flex-col h-[460px] glass-heavy glass-cursor-overlay card-shine border-white/60 shadow-2xl transition-all duration-300 ${pkg.popular ? 'ring-2 ring-primary/40 shadow-primary/20' : ''}`}>
                       <CardHeader className="text-center pt-6 pb-3">
                         <CardTitle className="text-lg">{pkg.name}</CardTitle>
                         <motion.div 
@@ -507,7 +507,7 @@ const WebsiteDesign = () => {
                     whileHover={{ y: -8, scale: 1.03, rotateX: 5, rotateY: -5 }}
                     style={{ transformStyle: 'preserve-3d', perspective: 1000 }}
                   >
-                    <Card className="bg-white/85 dark:bg-card/85 backdrop-blur-2xl border-white/60 shadow-2xl hover:shadow-3xl transition-all duration-300 h-full">
+                    <Card className="glass-heavy glass-cursor-overlay card-shine border-white/60 shadow-2xl hover:shadow-3xl transition-all duration-300 h-full">
                       <CardHeader>
                         <motion.div 
                           whileHover={{ rotate: 10, scale: 1.1 }}
@@ -551,7 +551,7 @@ const WebsiteDesign = () => {
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
                     whileHover={{ scale: 1.08, y: -8, rotateY: 10 }}
-                    className="text-center bg-white/85 dark:bg-card/85 backdrop-blur-2xl border border-white/60 rounded-2xl p-6 shadow-2xl"
+                    className="text-center glass-heavy glass-cursor-overlay card-shine border border-white/60 rounded-2xl p-6 shadow-2xl"
                     style={{ transformStyle: 'preserve-3d', perspective: 1000 }}
                   >
                     <motion.div 
@@ -582,7 +582,7 @@ const WebsiteDesign = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="bg-white/80 dark:bg-card/80 backdrop-blur-2xl border border-white/60 rounded-3xl p-12 shadow-2xl max-w-3xl mx-auto"
+                className="glass-heavy glass-cursor-overlay card-shine shimmer-overlay border border-white/60 rounded-3xl p-12 shadow-2xl max-w-3xl mx-auto"
               >
                 <motion.h2 
                   initial={{ opacity: 0, y: 20 }}

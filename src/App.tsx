@@ -4,8 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { ProtectedRoute } from "./components/ProtectedRoute";
-import { AIChat } from "./components/AIChat";
-import { AIChatProvider } from "./contexts/AIChatContext";
+import { LauraAIAssistant } from "./components/chat/LauraAIAssistant";
 import { AuthProvider } from "./contexts/AuthContext";
 import { CartProvider } from "./contexts/CartContext";
 import { CartFeedbackProvider, CartFeedbackNotifications } from "./components/CartFeedbackNotifications";
@@ -53,6 +52,7 @@ const Careers = lazy(() => import("./pages/Careers"));
 const Auth = lazy(() => import("./pages/Auth"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 const ApplicationPending = lazy(() => import("./pages/ApplicationPending"));
+const GuestScanner = lazy(() => import("./pages/GuestScanner"));
 
 // Admin pages - content only (shell is handled by AdminShell)
 const AdminDashboardContent = lazy(() => import("./pages/admin/AdminDashboardContent"));
@@ -121,8 +121,8 @@ const Maintenance = lazy(() => import("./pages/Maintenance"));
 const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
 const PaymentCanceled = lazy(() => import("./pages/PaymentCanceled"));
 
-import { AIPulseLoader } from "./components/AIPulseLoader";
-const PageLoader = () => <AIPulseLoader message="Loading..." fullScreen={true} />;
+import { GlassmorphismLoader } from "./components/GlassmorphismLoader";
+const PageLoader = () => <GlassmorphismLoader message="Loading..." fullScreen={true} />;
 const queryClient = new QueryClient();
 
 // Direct routes without AnimatePresence - instant transitions
@@ -154,6 +154,7 @@ function PublicRoutes() {
         <Route path="/application-pending" element={<PageTransition><ApplicationPending /></PageTransition>} />
         <Route path="/maintenance" element={<PageTransition><Maintenance /></PageTransition>} />
         <Route path="/reset-password" element={<PageTransition><ResetPassword /></PageTransition>} />
+        <Route path="/guest-scanner" element={<PageTransition variant="auto"><GuestScanner /></PageTransition>} />
         
         {/* Portal Routes */}
         <Route path="/portal" element={<PageTransition><ProtectedRoute><Portal /></ProtectedRoute></PageTransition>} />
@@ -260,31 +261,29 @@ function App() {
             <CartProvider>
               <CheckoutProvider>
                 <CartFeedbackProvider>
-                  <AIChatProvider>
-                    <BrowserRouter>
-                      <SkipToContent />
-                      <ScrollProgressBar />
-                      <NavigationProgress />
-                      <ScrollToTop />
-                      <BackToTop />
-                      <MobileCallButton />
-                      
-                      <RouteTracker />
-                      <AnalyticsTracker />
-                      <ErrorBoundary>
-                        <Suspense fallback={<PageLoader />}>
-                          <PublicRoutes />
-                        </Suspense>
-                      </ErrorBoundary>
-                      <AIChat />
-                      <CookieConsent />
-                      <CartFeedbackNotifications />
-                      <Suspense fallback={null}>
-                        <UnifiedCheckoutDialog />
+                  <BrowserRouter>
+                    <SkipToContent />
+                    <ScrollProgressBar />
+                    <NavigationProgress />
+                    <ScrollToTop />
+                    <BackToTop />
+                    <MobileCallButton />
+                    
+                    <RouteTracker />
+                    <AnalyticsTracker />
+                    <ErrorBoundary>
+                      <Suspense fallback={<PageLoader />}>
+                        <PublicRoutes />
                       </Suspense>
-                      <DraggablePerformanceMonitor />
-                    </BrowserRouter>
-                  </AIChatProvider>
+                    </ErrorBoundary>
+                    <LauraAIAssistant />
+                    <CookieConsent />
+                    <CartFeedbackNotifications />
+                    <Suspense fallback={null}>
+                      <UnifiedCheckoutDialog />
+                    </Suspense>
+                    <DraggablePerformanceMonitor />
+                  </BrowserRouter>
                 </CartFeedbackProvider>
               </CheckoutProvider>
             </CartProvider>
