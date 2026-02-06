@@ -154,7 +154,7 @@ function PublicRoutes() {
         <Route path="/application-pending" element={<PageTransition><ApplicationPending /></PageTransition>} />
         <Route path="/maintenance" element={<PageTransition><Maintenance /></PageTransition>} />
         <Route path="/reset-password" element={<PageTransition><ResetPassword /></PageTransition>} />
-        <Route path="/guest-scanner" element={<PageTransition variant="auto"><GuestScanner /></PageTransition>} />
+        <Route path="/guest-scanner" element={<Navigate to="/training#guest-scanner" replace />} />
         
         {/* Portal Routes */}
         <Route path="/portal" element={<PageTransition><ProtectedRoute><Portal /></ProtectedRoute></PageTransition>} />

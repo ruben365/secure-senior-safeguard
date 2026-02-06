@@ -148,15 +148,17 @@ export const LauraAIAssistant = () => {
       <div className="fixed bottom-6 right-6 z-[9998]">
         <button
           onClick={() => setIsOpen(true)}
-          className="relative w-14 h-14 rounded-full shadow-lg overflow-hidden ring-2 ring-primary/20 bg-white"
+          className="group relative w-16 h-16 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.15)] overflow-hidden bg-gradient-to-br from-primary/90 to-accent/80 backdrop-blur-xl border border-white/30 transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_30px_rgba(0,0,0,0.2)]"
           aria-label="Open Laura assistant"
         >
           <img
             src={lauraAvatar}
             alt="Laura"
-            className="w-full h-full object-cover object-top"
+            className="w-full h-full object-cover object-top scale-110"
           />
-          <span className="absolute -top-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-white animate-pulse" />
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent" />
+          <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-emerald-400 rounded-full border-2 border-white shadow-[0_0_8px_rgba(52,211,153,0.6)] animate-pulse" />
+          <span className="absolute bottom-0 left-0 right-0 text-[9px] font-bold text-white/90 text-center pb-0.5 tracking-wide">LAURA</span>
         </button>
       </div>
     );

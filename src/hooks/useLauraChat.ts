@@ -78,13 +78,13 @@ export const useLauraChat = () => {
       if (isDisallowed(trimmed) || !isAllowedTopic(trimmed)) {
         setMessages((prev) => [
           ...prev,
-          { role: "user", content: trimmed },
-          { role: "assistant", content: fallbackResponse },
+          { role: "user" as const, content: trimmed },
+          { role: "assistant" as const, content: fallbackResponse },
         ]);
         return;
       }
 
-      const updated = [...messages, { role: "user", content: trimmed }];
+      const updated: LauraMessage[] = [...messages, { role: "user" as const, content: trimmed }];
       setMessages(updated);
       setIsLoading(true);
 
@@ -136,7 +136,7 @@ export const useLauraChat = () => {
               const delta = parsed.choices?.[0]?.delta?.content;
               if (delta) {
                 assistantMessage += delta;
-                setMessages([...updated, { role: "assistant", content: assistantMessage }]);
+                setMessages([...updated, { role: "assistant" as const, content: assistantMessage }]);
               }
             } catch {
               // Ignore partial chunks
@@ -145,11 +145,11 @@ export const useLauraChat = () => {
         }
 
         if (!assistantMessage) {
-          setMessages([...updated, { role: "assistant", content: fallbackResponse }]);
+          setMessages([...updated, { role: "assistant" as const, content: fallbackResponse }]);
         }
       } catch (err: any) {
         if (err?.name === "AbortError") return;
-        setMessages([...updated, { role: "assistant", content: fallbackResponse }]);
+        setMessages([...updated, { role: "assistant" as const, content: fallbackResponse }]);
       } finally {
         setIsLoading(false);
       }
