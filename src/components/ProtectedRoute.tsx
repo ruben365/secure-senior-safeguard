@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { User, Session } from "@supabase/supabase-js";
-import { GlassmorphismLoader } from "@/components/GlassmorphismLoader";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -50,7 +49,7 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   }, []);
 
   if (loading) {
-    return <GlassmorphismLoader message="Verifying Security..." />;
+    return null;
   }
 
   if (!user || !session) {

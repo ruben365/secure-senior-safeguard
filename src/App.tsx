@@ -16,6 +16,7 @@ import { RouteTracker } from "./components/RouteTracker";
 import { DraggablePerformanceMonitor } from "./components/DraggablePerformanceMonitor";
 import { useAnalyticsTracking } from "./hooks/useAnalyticsTracking";
 import { PageTransition } from "./components/PageTransition";
+import { MotionConfig } from "framer-motion";
 
 import { NavigationProgress } from "./components/NavigationProgress";
 import { ScrollToTop } from "./components/ScrollToTop";
@@ -121,8 +122,7 @@ const Maintenance = lazy(() => import("./pages/Maintenance"));
 const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
 const PaymentCanceled = lazy(() => import("./pages/PaymentCanceled"));
 
-import { GlassmorphismLoader } from "./components/GlassmorphismLoader";
-const PageLoader = () => <GlassmorphismLoader message="Loading..." fullScreen={true} />;
+const PageLoader = () => null;
 const queryClient = new QueryClient();
 
 // Direct routes without AnimatePresence - instant transitions
@@ -238,14 +238,6 @@ function App() {
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
     
-    const initialSplash = document.getElementById('initial-splash');
-    if (initialSplash) {
-      initialSplash.classList.add('fade-out');
-      setTimeout(() => {
-        initialSplash.remove();
-      }, 500);
-    }
-    
     return () => {
       document.documentElement.style.scrollBehavior = "auto";
     };
@@ -255,39 +247,41 @@ function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <Toaster />
-          <Sonner />
-          <SubscriptionProvider>
-            <CartProvider>
-              <CheckoutProvider>
-                <CartFeedbackProvider>
-                  <BrowserRouter>
-                    <SkipToContent />
-                    <ScrollProgressBar />
-                    <NavigationProgress />
-                    <ScrollToTop />
-                    <BackToTop />
-                    <MobileCallButton />
-                    
-                    <RouteTracker />
-                    <AnalyticsTracker />
-                    <ErrorBoundary>
-                      <Suspense fallback={<PageLoader />}>
-                        <PublicRoutes />
+          <MotionConfig reducedMotion="always">
+            <Toaster />
+            <Sonner />
+            <SubscriptionProvider>
+              <CartProvider>
+                <CheckoutProvider>
+                  <CartFeedbackProvider>
+                    <BrowserRouter>
+                      <SkipToContent />
+                      <ScrollProgressBar />
+                      <NavigationProgress />
+                      <ScrollToTop />
+                      <BackToTop />
+                      <MobileCallButton />
+                      
+                      <RouteTracker />
+                      <AnalyticsTracker />
+                      <ErrorBoundary>
+                        <Suspense fallback={<PageLoader />}>
+                          <PublicRoutes />
+                        </Suspense>
+                      </ErrorBoundary>
+                      <LauraAIAssistant />
+                      <CookieConsent />
+                      <CartFeedbackNotifications />
+                      <Suspense fallback={null}>
+                        <UnifiedCheckoutDialog />
                       </Suspense>
-                    </ErrorBoundary>
-                    <LauraAIAssistant />
-                    <CookieConsent />
-                    <CartFeedbackNotifications />
-                    <Suspense fallback={null}>
-                      <UnifiedCheckoutDialog />
-                    </Suspense>
-                    <DraggablePerformanceMonitor />
-                  </BrowserRouter>
-                </CartFeedbackProvider>
-              </CheckoutProvider>
-            </CartProvider>
-          </SubscriptionProvider>
+                      <DraggablePerformanceMonitor />
+                    </BrowserRouter>
+                  </CartFeedbackProvider>
+                </CheckoutProvider>
+              </CartProvider>
+            </SubscriptionProvider>
+          </MotionConfig>
         </AuthProvider>
       </QueryClientProvider>
     </>
