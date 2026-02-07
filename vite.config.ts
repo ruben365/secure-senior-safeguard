@@ -74,7 +74,7 @@ export default defineConfig(({ mode, command }) => ({
         ],
         renderer: "@prerenderer/renderer-puppeteer",
         rendererOptions: {
-          renderAfterTime: 2500,
+          renderAfterDocumentEvent: "prerender-ready",
         },
       }),
   ].filter(Boolean),

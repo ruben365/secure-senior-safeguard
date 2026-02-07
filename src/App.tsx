@@ -271,6 +271,38 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+
+    let cancelled = false;
+    const firePrerenderReady = () => {
+      if (cancelled) return;
+      document.dispatchEvent(new Event("prerender-ready"));
+    };
+
+    const onReady = () => {
+      const fonts = (document as Document & { fonts?: FontFaceSet }).fonts;
+      if (fonts?.ready) {
+        fonts.ready.then(firePrerenderReady).catch(firePrerenderReady);
+      } else {
+        firePrerenderReady();
+      }
+    };
+
+    if (document.readyState === "complete") {
+      onReady();
+      return () => {
+        cancelled = true;
+      };
+    }
+
+    window.addEventListener("load", onReady, { once: true });
+    return () => {
+      cancelled = true;
+      window.removeEventListener("load", onReady);
+    };
+  }, []);
+
   return (
     <>
       <QueryClientProvider client={queryClient}>
