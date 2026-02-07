@@ -44,8 +44,8 @@ const testimonials = [
    { icon: Globe, label: "Protected Devices", value: "1.2K", color: "#18305A", trend: "+15%" },
  ];
  
- export const PremiumGlassmorphismWidgets = () => {
-   return (
+export const PremiumGlassmorphismWidgets = () => {
+  return (
     <section className="relative py-12 overflow-hidden" style={{ background: 'linear-gradient(135deg, #ffffff 0%, #faf9f7 30%, #fff5f0 60%, #faf5fa 100%)' }}>
        {/* Decorative Gradient Orbs */}
        <motion.div 
@@ -411,5 +411,7 @@ const testimonials = [
          </div>
        </div>
      </section>
-   );
- };
+  );
+};
+
+export default PremiumGlassmorphismWidgets;
