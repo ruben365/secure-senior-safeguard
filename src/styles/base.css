@@ -152,9 +152,9 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     --sidebar-ring: 220 58% 22%;
 
     /* Global site scale for desktop browsers */
-    --site-scale: 0.8;
+    --site-scale: 1;
     /* Global text scale (rem-based) */
-    --text-scale: 1;
+    --text-scale: 1.04;
   }
 
   .dark {
@@ -253,8 +253,8 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     @apply bg-background text-foreground antialiased;
     font-family: 'DM Sans', 'Outfit', sans-serif;
     font-size: 1rem;
-    line-height: 1.6;
-    letter-spacing: -0.005em;
+    line-height: 1.7;
+    letter-spacing: -0.002em;
     text-rendering: optimizeLegibility;
     font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
     font-kerning: normal;
@@ -276,7 +276,13 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   @media (min-width: 768px) {
     body {
       font-size: 1rem;
-      line-height: 1.6;
+      line-height: 1.7;
+    }
+  }
+
+  @media (max-width: 768px) {
+    :root {
+      --text-scale: 1.02;
     }
   }
 
