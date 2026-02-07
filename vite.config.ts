@@ -124,6 +124,7 @@ export default defineConfig(async ({ mode, command }) => {
           },
         }),
       command === "build" &&
+        mode === "production" &&
         !isPreviewBuild &&
         !disablePrerender &&
         prerender({
