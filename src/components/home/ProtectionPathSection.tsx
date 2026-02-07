@@ -13,10 +13,12 @@ const formatPrice = (price: number, interval?: string) => {
 
 export const ProtectionPathSection = () => {
   return (
-    <section id="get-protected" className="py-16 lg:py-20 bg-gradient-to-b from-background via-background to-muted/30">
+    <section id="get-protected" className="py-16 lg:py-20 bg-gradient-to-b from-background via-background to-muted/30 dynamic-gradient-overlay">
+      <div className="absolute -top-16 right-10 w-40 h-40 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 blur-3xl opacity-60 fluid-motion" />
+      <div className="absolute bottom-0 left-16 w-32 h-32 rounded-full bg-gradient-to-br from-accent/20 to-primary/20 blur-3xl opacity-50 fluid-motion" />
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center mb-10">
-          <Badge className="mb-4 px-4 py-1.5 text-xs tracking-wide bg-primary/10 text-primary border border-primary/20">
+          <Badge className="mb-4 px-4 py-1.5 text-xs tracking-wide bg-primary/10 text-primary border border-primary/20 skeuo-badge">
             <ShieldCheck className="w-4 h-4 mr-2" />
             Choose Your Protection Level
           </Badge>
@@ -32,7 +34,7 @@ export const ProtectionPathSection = () => {
           {SCAMSHIELD_PLANS.map((plan) => (
             <Card
               key={plan.id}
-              className={`relative overflow-hidden border border-white/30 bg-white/60 dark:bg-card/60 backdrop-blur-xl shadow-xl transition-transform duration-300 hover:-translate-y-1 ${
+              className={`relative overflow-hidden border border-white/30 bg-white/60 dark:bg-card/60 backdrop-blur-xl shadow-xl transition-transform duration-300 hover:-translate-y-1 neumorphism-card micro-tilt-3d subtle-3d-surface ${
                 plan.popular ? "ring-2 ring-primary/40" : ""
               }`}
             >
@@ -62,7 +64,7 @@ export const ProtectionPathSection = () => {
                 </ul>
 
                 <div className="mt-auto flex flex-col gap-3">
-                  <Button asChild size="lg" className="rounded-full">
+                  <Button asChild size="lg" className="rounded-full tactile-button">
                     <Link to="/training#pricing">Choose {plan.name.split(" ")[1]}</Link>
                   </Button>
                   <p className="text-xs text-muted-foreground text-center">
@@ -75,7 +77,7 @@ export const ProtectionPathSection = () => {
         </div>
 
         <div className="text-center mt-8">
-          <Button variant="outline" asChild className="rounded-full">
+          <Button variant="outline" asChild className="rounded-full tactile-button">
             <Link to="/contact">Not sure? Talk to an expert</Link>
           </Button>
         </div>

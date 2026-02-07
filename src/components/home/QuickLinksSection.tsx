@@ -33,11 +33,11 @@ export const QuickLinksSection = () => {
   const [checklistOpen, setChecklistOpen] = useState(false);
 
   return (
-    <section className="py-10 bg-gradient-to-b from-muted/20 to-background relative overflow-hidden">
+    <section className="py-10 bg-gradient-to-b from-muted/20 to-background relative overflow-hidden dynamic-gradient-overlay">
       {/* Decorative Background Elements - CSS only */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Shield Icon - Top Left */}
-        <div className="absolute top-10 left-10 opacity-[0.08]">
+        <div className="absolute top-10 left-10 opacity-[0.08] fluid-motion">
           <Shield className="w-32 h-32 text-primary" />
         </div>
         
@@ -47,12 +47,12 @@ export const QuickLinksSection = () => {
         </div>
         
         {/* Zap Icon - Bottom Left */}
-        <div className="absolute bottom-20 left-20 opacity-[0.07]">
+        <div className="absolute bottom-20 left-20 opacity-[0.07] fluid-motion">
           <Zap className="w-28 h-28 text-primary" />
         </div>
         
         {/* Decorative Circles */}
-        <div className="absolute top-1/4 right-1/4 w-64 h-64 rounded-full bg-gradient-to-br from-primary/5 to-accent/5 blur-3xl" />
+        <div className="absolute top-1/4 right-1/4 w-64 h-64 rounded-full bg-gradient-to-br from-primary/5 to-accent/5 blur-3xl fluid-motion" />
         <div className="absolute bottom-1/4 left-1/3 w-48 h-48 rounded-full bg-gradient-to-br from-accent/5 to-primary/5 blur-2xl" />
       </div>
 
@@ -77,7 +77,7 @@ export const QuickLinksSection = () => {
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <Link to={item.link} className="block group h-full">
-                <div className="bg-white rounded-3xl p-6 border border-border/50 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12)] transition-all duration-200 hover:-translate-y-2 h-full min-h-[280px] flex flex-col">
+                <div className="bg-white rounded-3xl p-6 border border-border/50 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12)] transition-all duration-200 hover:-translate-y-2 h-full min-h-[280px] flex flex-col micro-tilt-3d subtle-3d-surface">
                   <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200 shadow-lg`}>
                     <item.icon className="w-7 h-7 text-white" />
                   </div>
@@ -100,12 +100,12 @@ export const QuickLinksSection = () => {
             style={{ animationDelay: '0.2s' }}
           >
             <Link to="/careers" className="block group h-full">
-              <div className="bg-gradient-to-br from-primary/5 to-accent/5 rounded-3xl p-6 border border-primary/20 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12)] transition-all duration-200 hover:-translate-y-2 h-full min-h-[280px] flex flex-col">
+              <div className="bg-gradient-to-br from-primary/5 to-accent/5 rounded-3xl p-6 border border-primary/20 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12)] transition-all duration-200 hover:-translate-y-2 h-full min-h-[280px] flex flex-col micro-tilt-3d subtle-3d-surface">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center group-hover:scale-110 transition-transform duration-200 shadow-lg">
                     <Briefcase className="w-7 h-7 text-white" />
                   </div>
-                  <div className="flex items-center gap-1 px-3 py-1 bg-primary/10 rounded-full">
+                  <div className="flex items-center gap-1 px-3 py-1 bg-primary/10 rounded-full skeuo-badge">
                     <Sparkles className="w-3 h-3 text-primary" />
                     <span className="text-xs font-bold text-primary">We're Hiring!</span>
                   </div>
@@ -141,7 +141,7 @@ export const QuickLinksSection = () => {
             style={{ animationDelay: '0.3s' }}
           >
             <div className="block group h-full">
-              <div className="bg-white/80 backdrop-blur-xl rounded-3xl p-6 border border-white/50 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12)] transition-all duration-200 hover:-translate-y-2 h-full min-h-[280px] flex flex-col">
+              <div className="bg-white/80 backdrop-blur-xl rounded-3xl p-6 border border-white/50 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12)] transition-all duration-200 hover:-translate-y-2 h-full min-h-[280px] flex flex-col micro-tilt-3d subtle-3d-surface">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-200 shadow-lg">
                     <AlertTriangle className="w-7 h-7 text-white" />
@@ -161,7 +161,7 @@ export const QuickLinksSection = () => {
                 <Button
                   type="button"
                   onClick={() => setChecklistOpen(true)}
-                  className="w-full rounded-full"
+                  className="w-full rounded-full tactile-button"
                 >
                   Open Checklist
                   <ArrowRight className="ml-2 w-4 h-4" />

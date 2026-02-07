@@ -547,7 +547,7 @@ function Resources() {
             <Button
               size="xl"
               onClick={() => scrollToSection("guides")}
-              className="transition-all duration-300 hover:scale-[1.03]"
+              className="transition-all duration-300 hover:scale-[1.03] tactile-button"
             >
               Shop Digital Guides
             </Button>
@@ -555,7 +555,7 @@ function Resources() {
               size="xl"
               variant="outlineLight"
               asChild
-              className="transition-all duration-300 hover:scale-[1.03]"
+              className="transition-all duration-300 hover:scale-[1.03] tactile-button"
             >
               <Link to="/training#pricing">Get Protection Plan</Link>
             </Button>

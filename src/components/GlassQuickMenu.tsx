@@ -20,7 +20,7 @@ export const GlassQuickMenu = () => {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="fixed bottom-32 right-6 z-50 hidden md:flex items-center gap-2 glass-heavy rounded-full px-4 py-3 shadow-3d hover:shadow-3d-lg transition-all duration-300 border border-white/30"
+        className="fixed bottom-32 right-6 z-50 hidden md:flex items-center gap-2 glass-heavy rounded-full px-4 py-3 shadow-3d hover:shadow-3d-lg transition-all duration-300 border border-white/30 micro-tilt-3d tactile-button"
         aria-label="Open quick menu"
       >
         <Sparkles className="w-4 h-4 text-primary" />

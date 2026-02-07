@@ -257,7 +257,7 @@ export const HeroHomepage = () => {
                 >
                   <a 
                     href="#get-protected"
-                    className="group inline-flex items-center justify-center gap-2.5 h-14 px-10 rounded-full font-bold text-base tracking-wide text-white shadow-[0_10px_30px_-8px_hsl(var(--primary)/0.5)] hover:shadow-[0_16px_45px_-8px_hsl(var(--primary)/0.65)] transition-all duration-300"
+                    className="group inline-flex items-center justify-center gap-2.5 h-14 px-10 rounded-full font-bold text-base tracking-wide text-white shadow-[0_10px_30px_-8px_hsl(var(--primary)/0.5)] hover:shadow-[0_16px_45px_-8px_hsl(var(--primary)/0.65)] transition-all duration-300 tactile-button"
                     style={{ 
                       background: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%)',
                     }}

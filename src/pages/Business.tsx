@@ -219,7 +219,7 @@ function Business() {
               variant="default"
               size="xl"
               onClick={openStrategyCall}
-              className="transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:brightness-110"
+              className="transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:brightness-110 tactile-button"
             >
               Book Strategy Call
             </Button>
@@ -230,7 +230,7 @@ function Business() {
                 scrollToSection("services");
                 trackButtonClick("Explore Services", "Business Hero");
               }}
-              className="transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:brightness-110"
+              className="transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] hover:brightness-110 tactile-button"
             >
               Explore Services
             </Button>
