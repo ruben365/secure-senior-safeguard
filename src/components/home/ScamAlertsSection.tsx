@@ -65,7 +65,7 @@ export const ScamAlertsSection = ({ onSubmitThreat }: ScamAlertsSectionProps) =>
              <span className="text-sm font-semibold text-[#18305A]">Active Threat Intelligence</span>
           </div>
           
-           <h2 id="alerts-heading" className="text-3xl md:text-4xl font-black text-[#18305A] mb-3" style={{ fontFamily: "'Clash Display', 'DM Sans', sans-serif" }}>
+           <h2 id="alerts-heading" className="text-3xl md:text-4xl font-black text-[#18305A] mb-3" style={{ fontFamily: "'Lora', 'Rubik', serif" }}>
              Know the <span className="bg-gradient-to-r from-coral-500 to-lavender-500 bg-clip-text text-transparent">Threats</span>, Stay Ahead
           </h2>
           <p className="text-foreground/70 text-base max-w-xl mx-auto">

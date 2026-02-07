@@ -165,7 +165,7 @@ export const WorkshopsPromo = () => {
              
              {/* Headline */}
              <h2 id="workshops-heading" className="text-3xl md:text-4xl font-black text-[#18305A] leading-tight"
-               style={{ fontFamily: "'Clash Display', 'DM Sans', sans-serif" }}>
+               style={{ fontFamily: "'Lora', 'Rubik', serif" }}>
                Reason For Choosing Our{" "}
                <span className="bg-gradient-to-r from-coral-500 to-lavender-500 bg-clip-text text-transparent">
                  Protection Training
@@ -179,12 +179,12 @@ export const WorkshopsPromo = () => {
              {/* Stats Row */}
              <div className="flex items-center gap-6 py-2">
                <div className="text-center">
-                  <div className="text-3xl font-black text-[#18305A]" style={{ fontFamily: "'Clash Display', sans-serif" }}>100+</div>
+                  <div className="text-3xl font-black text-[#18305A]" style={{ fontFamily: "'Lora', serif" }}>100+</div>
                  <div className="text-sm text-foreground/50">Families Protected</div>
                </div>
                <div className="h-10 w-px bg-gray-200" aria-hidden="true" />
                <div className="text-center">
-                 <div className="text-3xl font-black text-coral-500" style={{ fontFamily: "'Clash Display', sans-serif" }}>100%</div>
+                 <div className="text-3xl font-black text-coral-500" style={{ fontFamily: "'Lora', serif" }}>100%</div>
                  <div className="text-sm text-foreground/50">Satisfaction Rate</div>
                </div>
              </div>

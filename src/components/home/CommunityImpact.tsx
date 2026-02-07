@@ -29,7 +29,7 @@ const teamMembers = [
             <span className="text-sm font-semibold text-[#18305A] uppercase tracking-wide">Our Team</span>
           </div>
           <h2 id="team-heading" className="text-3xl md:text-4xl font-black text-[#18305A] leading-tight mb-3"
-            style={{ fontFamily: "'Clash Display', 'DM Sans', sans-serif" }}>
+            style={{ fontFamily: "'Lora', 'Rubik', serif" }}>
             Dedicated Consulting <span className="bg-gradient-to-r from-coral-500 to-lavender-500 bg-clip-text text-transparent">Team</span>
           </h2>
         </div>
@@ -98,7 +98,7 @@ const teamMembers = [
              </div>
              
             <h3 className="text-2xl md:text-3xl font-black text-[#18305A] leading-tight"
-               style={{ fontFamily: "'Clash Display', 'DM Sans', sans-serif" }}>
+               style={{ fontFamily: "'Lora', 'Rubik', serif" }}>
                Committed to Giving you{" "}
                <span className="bg-gradient-to-r from-coral-500 to-lavender-500 bg-clip-text text-transparent">True Value.</span>
              </h3>

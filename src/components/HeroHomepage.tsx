@@ -204,7 +204,7 @@ export const HeroHomepage = () => {
                     animate={reduceMotion ? { opacity: 1 } : { opacity: [0.85, 1, 0.85] }}
                     transition={reduceMotion ? { duration: 0 } : { duration: 4, repeat: Infinity }}
                     className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-foreground leading-[1.1] tracking-[-0.02em] mb-3"
-                    style={{ fontFamily: "'Clash Display', 'DM Sans', sans-serif" }}>
+                    style={{ fontFamily: "'Lora', 'Rubik', serif" }}>
                     Uncompromising
                   </motion.span>
                   <motion.span 
@@ -214,7 +214,7 @@ export const HeroHomepage = () => {
                     transition={reduceMotion ? { duration: 0 } : { duration: 6, repeat: Infinity, ease: "easeInOut" }}
                     className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.95] tracking-[-0.02em]"
                     style={{ 
-                      fontFamily: "'Clash Display', 'DM Sans', sans-serif",
+                      fontFamily: "'Lora', 'Rubik', serif",
                       background: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 25%, hsl(265 55% 42%) 50%, hsl(var(--primary)) 75%, hsl(var(--accent)) 100%)',
                       backgroundSize: '200% 200%',
                       WebkitBackgroundClip: 'text',

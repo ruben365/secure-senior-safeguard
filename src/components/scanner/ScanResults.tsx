@@ -62,7 +62,7 @@ export const ScanResults = ({ analysis, file, expiresAt, onExpired, onRestart }:
         <head>
           <title>InVision Network Scan Report</title>
           <style>
-            body { font-family: "DM Sans", Arial, sans-serif; padding: 32px; color: #0f172a; }
+            body { font-family: "Rubik", Arial, sans-serif; padding: 32px; color: #0f172a; }
             h1 { font-size: 24px; margin-bottom: 8px; }
             h2 { font-size: 18px; margin-top: 24px; }
             .meta { font-size: 14px; color: #475569; }

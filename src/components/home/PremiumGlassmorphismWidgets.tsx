@@ -95,7 +95,7 @@ export const PremiumGlassmorphismWidgets = () => {
              <span className="text-sm font-semibold text-[#18305A] uppercase tracking-wide">Why Families Trust Us</span>
            </div>
            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#18305A] leading-tight mb-4"
-             style={{ fontFamily: "'Clash Display', 'DM Sans', sans-serif" }}>
+             style={{ fontFamily: "'Lora', 'Rubik', serif" }}>
              Real <span className="bg-gradient-to-r from-coral-500 to-lavender-500 bg-clip-text text-transparent">Protection</span>,{" "}
              Real <span className="bg-gradient-to-r from-lavender-500 to-[#18305A] bg-clip-text text-transparent">Results</span>
            </h2>
@@ -138,7 +138,7 @@ export const PremiumGlassmorphismWidgets = () => {
                  <div className="flex items-center justify-between">
                    <div>
                      <div className="text-white/90 text-sm font-medium mb-1">Protected Families</div>
-                     <div className="text-white text-3xl font-black" style={{ fontFamily: "'Clash Display', sans-serif" }}>100+</div>
+                     <div className="text-white text-3xl font-black" style={{ fontFamily: "'Lora', serif" }}>100+</div>
                    </div>
                    <div className="w-14 h-14 rounded-2xl bg-white/30 backdrop-blur-md flex items-center justify-center">
                      <Heart className="w-7 h-7 text-white" />
@@ -195,7 +195,7 @@ export const PremiumGlassmorphismWidgets = () => {
                      >
                         <stat.icon className="w-7 h-7" style={{ color: stat.color }} />
                      </div>
-                      <div className="text-3xl font-black text-[#18305A] mb-1" style={{ fontFamily: "'Clash Display', sans-serif" }}>
+                      <div className="text-3xl font-black text-[#18305A] mb-1" style={{ fontFamily: "'Lora', serif" }}>
                        {stat.value}
                      </div>
                       <div className="text-xs text-foreground/60 font-semibold uppercase tracking-wide">{stat.label}</div>
@@ -263,7 +263,7 @@ export const PremiumGlassmorphismWidgets = () => {
                         <div className="w-12 h-12 mx-auto rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center mb-2 border border-white/20">
                           <metric.icon className="w-6 h-6" style={{ color: metric.color }} />
                         </div>
-                        <div className="text-2xl font-black text-white mb-0.5" style={{ fontFamily: "'Clash Display', sans-serif" }}>
+                        <div className="text-2xl font-black text-white mb-0.5" style={{ fontFamily: "'Lora', serif" }}>
                           {metric.value}
                         </div>
                         <div className="text-[10px] text-white/60 uppercase tracking-wide mb-1">{metric.label}</div>
@@ -383,7 +383,7 @@ export const PremiumGlassmorphismWidgets = () => {
                
                <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
                  <div>
-                   <h3 className="text-2xl font-black text-white mb-2" style={{ fontFamily: "'Clash Display', sans-serif" }}>
+                   <h3 className="text-2xl font-black text-white mb-2" style={{ fontFamily: "'Lora', serif" }}>
                      Ready to Protect Your Family?
                    </h3>
                    <div className="flex items-center gap-4 text-white/70">

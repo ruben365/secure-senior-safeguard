@@ -24,7 +24,7 @@ export const FamilyTrustSection = () => {
             <span className="text-sm font-bold text-primary uppercase tracking-wide">Real Protection, Real Results</span>
           </div>
           <h2 id="trust-heading" className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground leading-tight mb-4"
-            style={{ fontFamily: "'Clash Display', 'DM Sans', sans-serif" }}>
+            style={{ fontFamily: "'Lora', 'Rubik', serif" }}>
             Why Families{" "}
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Trust Us

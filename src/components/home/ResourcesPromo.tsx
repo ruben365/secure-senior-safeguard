@@ -44,7 +44,7 @@ export const ResourcesPromo = () => {
             </div>
             
             <h2 id="resources-heading" className="text-3xl md:text-4xl font-black leading-tight mb-3"
-              style={{ fontFamily: "'Clash Display', 'DM Sans', sans-serif" }}>
+              style={{ fontFamily: "'Lora', 'Rubik', serif" }}>
               <span className="text-[#18305A]">Tools For </span>
               <span className="bg-gradient-to-r from-coral-500 to-lavender-500 bg-clip-text text-transparent">Protection</span>
             </h2>
@@ -85,7 +85,7 @@ export const ResourcesPromo = () => {
               <div className="flex items-center justify-between gap-3">
                 <div>
                   <div className="text-xs font-medium text-foreground/60 mb-0.5">Resources Available</div>
-                  <div className="text-2xl font-black text-[#18305A]" style={{ fontFamily: "'Clash Display', sans-serif" }}>50+</div>
+                  <div className="text-2xl font-black text-[#18305A]" style={{ fontFamily: "'Lora', serif" }}>50+</div>
                 </div>
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-3d"
                   style={{ background: 'linear-gradient(135deg, #F8926A 0%, #BB81B5 100%)' }} aria-hidden="true">
@@ -110,7 +110,7 @@ export const ResourcesPromo = () => {
                 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-0.5">
-                    <h3 className="text-base font-bold text-[#18305A]" style={{ fontFamily: "'Clash Display', sans-serif" }}>
+                    <h3 className="text-base font-bold text-[#18305A]" style={{ fontFamily: "'Lora', serif" }}>
                       {resource.title}
                     </h3>
                     <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase glass-subtle"

@@ -14,9 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        outfit: ['DM Sans', 'Outfit', 'sans-serif'],
-        sans: ['DM Sans', 'Outfit', 'sans-serif'],
-        display: ['Clash Display', 'DM Sans', 'sans-serif'],
+        outfit: ['Rubik', 'sans-serif'],
+        sans: ['Rubik', 'sans-serif'],
+        display: ['Lora', 'Rubik', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",

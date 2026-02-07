@@ -41,7 +41,7 @@ export const WorkingProcess = () => {
             <span className="w-2 h-2 rounded-full bg-gradient-to-r from-coral-400 to-lavender-500" aria-hidden="true" />
             <span className="text-[#18305A]">How It Works</span>
           </div>
-          <h2 id="process-heading" className="text-3xl md:text-4xl font-black text-[#18305A] mb-3" style={{ fontFamily: "'Clash Display', 'DM Sans', sans-serif" }}>
+          <h2 id="process-heading" className="text-3xl md:text-4xl font-black text-[#18305A] mb-3" style={{ fontFamily: "'Lora', 'Rubik', serif" }}>
             Get Protected in{" "}
             <span className="bg-gradient-to-r from-coral-500 to-lavender-500 bg-clip-text text-transparent">Four Simple Steps</span>
           </h2>

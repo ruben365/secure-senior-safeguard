@@ -29,7 +29,7 @@ export const AIBusinessPromo = () => {
               <span className="text-sm font-semibold text-foreground uppercase tracking-wide">AI & Business</span>
            </div>
          <h2 id="business-heading" className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground leading-tight mb-3"
-             style={{ fontFamily: "'Clash Display', 'DM Sans', sans-serif" }}>
+             style={{ fontFamily: "'Lora', 'Rubik', serif" }}>
              Choice Business <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Needs</span>
            </h2>
          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
@@ -70,7 +70,7 @@ export const AIBusinessPromo = () => {
            {/* Left - Content */}
           <div className="space-y-4">
             <h3 className="text-2xl md:text-3xl font-black text-[#18305A] leading-tight"
-               style={{ fontFamily: "'Clash Display', 'DM Sans', sans-serif" }}>
+               style={{ fontFamily: "'Lora', 'Rubik', serif" }}>
               Our Team{" "}
               <span className="bg-gradient-to-r from-lavender-500 to-coral-500 bg-clip-text text-transparent">—</span>{" "}
                Choosing Our Strike{" "}
@@ -84,7 +84,7 @@ export const AIBusinessPromo = () => {
  
              {/* Experience Badge */}
             <div className="flex items-end gap-3 py-2">
-              <div className="text-5xl font-black text-[#18305A] leading-none" style={{ fontFamily: "'Clash Display', sans-serif" }}>
+              <div className="text-5xl font-black text-[#18305A] leading-none" style={{ fontFamily: "'Lora', serif" }}>
                  4<span className="text-coral-500">+</span>
                </div>
               <div className="pb-1">
@@ -164,7 +164,7 @@ export const AIBusinessPromo = () => {
  
              {/* Floating ROI Card */}
             <div className="absolute -bottom-2 -left-2 widget-premium micro-scale">
-              <div className="text-xl font-black text-coral-500" style={{ fontFamily: "'Clash Display', sans-serif" }}>
+              <div className="text-xl font-black text-coral-500" style={{ fontFamily: "'Lora', serif" }}>
                  340%
                </div>
               <div className="text-xs text-foreground/50 font-medium">Avg. ROI</div>

@@ -251,7 +251,7 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'DM Sans', 'Outfit', sans-serif;
+    font-family: 'Rubik', sans-serif;
     font-size: 1rem;
     line-height: 1.7;
     letter-spacing: -0.002em;
@@ -400,6 +400,7 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold;
+    font-family: 'Lora', 'Rubik', serif;
     line-height: 1.15;
     letter-spacing: -0.02em;
   }

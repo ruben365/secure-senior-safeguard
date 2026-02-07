@@ -140,7 +140,7 @@ const badges = [
                 className="px-6 py-3 rounded-xl bg-white border border-[#1a1a2e]/5 shadow-sm hover:shadow-md hover:border-[#7C3AED]/20 transition-all cursor-default"
                >
                 <span className="text-base font-bold text-[#18305A]/50 hover:text-[#7C3AED] transition-colors"
-                  style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                  style={{ fontFamily: "'Rubik', sans-serif" }}>
                    {logo}
                  </span>
                </motion.div>
@@ -164,7 +164,7 @@ const badges = [
                </div>
               <div className="text-4xl lg:text-5xl font-black mb-2"
                  style={{ 
-                   fontFamily: "'Clash Display', 'DM Sans', sans-serif",
+                   fontFamily: "'Lora', 'Rubik', serif",
                   background: 'linear-gradient(135deg, #1a1a2e 0%, #7C3AED 100%)',
                    WebkitBackgroundClip: 'text',
                    WebkitTextFillColor: 'transparent',
