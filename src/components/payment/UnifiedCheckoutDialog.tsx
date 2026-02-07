@@ -295,7 +295,7 @@ const PaymentFormStep: React.FC<{
 }> = ({ onSuccess, onBack }) => {
   const stripe = useStripe();
   const elements = useElements();
-  const { state, setLoading, setError, setOrderId } = useCheckout();
+  const { state, setLoading, setError, setOrderId, total } = useCheckout();
   const { verifyPayment, sendDigitalDownload } = usePaymentFlow();
   const [processing, setProcessing] = useState(false);
 
@@ -395,7 +395,7 @@ const PaymentFormStep: React.FC<{
         ) : (
           <>
             <ShieldCheck className="mr-2 h-4 w-4" />
-            Pay ${useCheckout().total.toFixed(2)}
+            Pay ${total.toFixed(2)}
           </>
         )}
       </Button>
