@@ -30,6 +30,7 @@ import { SkipToContent } from "./components/SkipToContent";
 import BackToTop from "./components/BackToTop";
 import MobileCallButton from "./components/MobileCallButton";
 import { AnalyticsTracker } from "./components/AnalyticsTracker";
+import GlassQuickMenu from "./components/GlassQuickMenu";
 
 // Admin Shell - persistent layout wrapper
 import { AdminShell } from "./components/admin/AdminShell";
@@ -285,6 +286,7 @@ function App() {
                       <SkipToContent />
                       <ScrollToTop />
                       <BackToTop />
+                      <GlassQuickMenu />
                       <MobileCallButton />
                       
                       <RouteTracker />
