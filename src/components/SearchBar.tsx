@@ -122,6 +122,7 @@ export const SearchBar = () => {
             onClick={clearSearch}
             variant="ghost"
             size="icon"
+            aria-label="Clear search"
             className="absolute right-12 top-1/2 -translate-y-1/2 h-7 w-7 rounded-full hover:bg-muted"
           >
             <X className="h-4 w-4" />
@@ -130,6 +131,7 @@ export const SearchBar = () => {
         <Button
           type="submit"
           size="icon"
+          aria-label="Search"
           disabled={isSearching}
           className="absolute right-1 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full 
                      bg-gradient-to-r from-primary to-accent hover:shadow-glow-purple

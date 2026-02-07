@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { AlertTriangle, Shield, Phone, ExternalLink } from "lucide-react";
 import { SEO } from "@/components/SEO";
+import { SITE } from "@/config/site";
 
 function Disclaimer() {
   return (
@@ -204,9 +205,9 @@ function Disclaimer() {
                     If you have any questions about this disclaimer, please contact us:
                   </p>
                   <div className="space-y-2 text-muted-foreground">
-                    <p><strong>Email:</strong> <a href="mailto:legal@invisionnetwork.org" className="text-primary hover:underline">legal@invisionnetwork.org</a></p>
-                    <p><strong>Phone:</strong> (937) 301-8749</p>
-                    <p><strong>Address:</strong> InVision Network LLC, Greater Dayton Area, OH</p>
+                    <p><strong>Email:</strong> <a href={`mailto:${SITE.emails.legal}`} className="text-primary hover:underline">{SITE.emails.legal}</a></p>
+                    <p><strong>Phone:</strong> <a href={SITE.phone.tel} className="text-primary hover:underline">{SITE.phone.display}</a></p>
+                    <p><strong>Address:</strong> {SITE.name} LLC, {SITE.location.areaLabel}, {SITE.location.region}</p>
                   </div>
                 </section>
               </div>

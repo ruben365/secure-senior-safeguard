@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Cookie, Settings, BarChart3, Shield } from "lucide-react";
 import { SEO } from "@/components/SEO";
+import { SITE } from "@/config/site";
 
 function CookiePolicy() {
   return (
@@ -260,8 +261,8 @@ function CookiePolicy() {
                     If you have any questions about our use of cookies, please contact us:
                   </p>
                   <div className="space-y-2 text-muted-foreground">
-                    <p><strong>Email:</strong> <a href="mailto:privacy@invisionnetwork.org" className="text-primary hover:underline">privacy@invisionnetwork.org</a></p>
-                    <p><strong>Phone:</strong> (937) 301-8749</p>
+                    <p><strong>Email:</strong> <a href={`mailto:${SITE.emails.privacy}`} className="text-primary hover:underline">{SITE.emails.privacy}</a></p>
+                    <p><strong>Phone:</strong> <a href={SITE.phone.tel} className="text-primary hover:underline">{SITE.phone.display}</a></p>
                   </div>
                 </section>
               </div>

@@ -473,11 +473,11 @@ export const ServiceInquiryDialog = ({
                   />
                   <label htmlFor="terms" className="text-sm leading-tight cursor-pointer">
                     I agree to the{" "}
-                    <a href="/terms-of-service" className="text-primary underline" target="_blank">
+                    <a href="/terms-of-service" className="text-primary underline" target="_blank" rel="noopener noreferrer">
                       Terms of Service
                     </a>{" "}
                     and{" "}
-                    <a href="/privacy-policy" className="text-primary underline" target="_blank">
+                    <a href="/privacy-policy" className="text-primary underline" target="_blank" rel="noopener noreferrer">
                       Privacy Policy
                     </a>
                   </label>

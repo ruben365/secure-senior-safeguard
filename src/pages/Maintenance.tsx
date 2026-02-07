@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { SITE } from "@/config/site";
 
 interface MaintenanceData {
   expectedCompletion: Date;
@@ -164,13 +165,13 @@ function Maintenance() {
           <Card className="p-6 bg-muted/50 space-y-3">
             <h3 className="font-semibold text-foreground">Need Immediate Help?</h3>
             <div className="flex flex-col gap-2 text-sm text-muted-foreground">
-              <a href="mailto:support@invisionnetwork.org" className="flex items-center gap-2 hover:text-primary transition-colors">
+              <a href={`mailto:${SITE.emails.support}`} className="flex items-center gap-2 hover:text-primary transition-colors">
                 <Mail className="h-4 w-4" />
-                support@invisionnetwork.org
+                {SITE.emails.support}
               </a>
-              <a href="tel:+19373018749" className="flex items-center gap-2 hover:text-primary transition-colors">
+              <a href={SITE.phone.tel} className="flex items-center gap-2 hover:text-primary transition-colors">
                 <Phone className="h-4 w-4" />
-                (937) 301-8749
+                {SITE.phone.display}
               </a>
             </div>
             <p className="text-xs text-muted-foreground">For urgent issues only</p>

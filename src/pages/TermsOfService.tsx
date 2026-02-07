@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import ReadingProgressBar from "@/components/ReadingProgressBar";
 import { SEO } from "@/components/SEO";
+import { SITE } from "@/config/site";
 
 function TermsOfService() {
   const scrollToSection = (id: string) => {
@@ -186,7 +187,7 @@ function TermsOfService() {
                     <li>Refund processed within 10 business days of receiving return</li>
                   </ul>
                   <p className="text-muted-foreground">
-                    To request a refund, contact <a href="mailto:support@invisionnetwork.org" className="text-primary hover:underline">support@invisionnetwork.org</a> with your order number and reason for the request.
+                    To request a refund, contact <a href={`mailto:${SITE.emails.support}`} className="text-primary hover:underline">{SITE.emails.support}</a> with your order number and reason for the request.
                   </p>
                 </section>
 
@@ -359,7 +360,7 @@ function TermsOfService() {
                   </p>
                   <h3 className="text-lg font-semibold mb-2">Informal Resolution</h3>
                   <p className="text-muted-foreground mb-4">
-                    Before filing any claim, you agree to attempt to resolve any dispute by contacting us at <a href="mailto:legal@invisionnetwork.org" className="text-primary">legal@invisionnetwork.org</a>. We will attempt to resolve the dispute informally within 60 days.
+                    Before filing any claim, you agree to attempt to resolve any dispute by contacting us at <a href={`mailto:${SITE.emails.legal}`} className="text-primary">{SITE.emails.legal}</a>. We will attempt to resolve the dispute informally within 60 days.
                   </p>
                   <h3 className="text-lg font-semibold mb-2">Binding Arbitration</h3>
                   <p className="text-muted-foreground mb-4">
@@ -397,9 +398,9 @@ function TermsOfService() {
                     If you have any questions about these Terms of Service, please contact us:
                   </p>
                   <div className="space-y-2 text-muted-foreground">
-                    <p><strong>Email:</strong> <a href="mailto:legal@invisionnetwork.org" className="text-primary hover:underline">legal@invisionnetwork.org</a></p>
-                    <p><strong>Phone:</strong> (937) 301-8749</p>
-                    <p><strong>Address:</strong> InVision Network LLC, Greater Dayton Area, OH</p>
+                    <p><strong>Email:</strong> <a href={`mailto:${SITE.emails.legal}`} className="text-primary hover:underline">{SITE.emails.legal}</a></p>
+                    <p><strong>Phone:</strong> <a href={SITE.phone.tel} className="text-primary hover:underline">{SITE.phone.display}</a></p>
+                    <p><strong>Address:</strong> {SITE.name} LLC, {SITE.location.areaLabel}, {SITE.location.region}</p>
                   </div>
                 </section>
               </div>

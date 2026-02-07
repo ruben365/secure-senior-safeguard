@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { SITE } from "@/config/site";
 
 function NotFound() {
   const location = useLocation();
@@ -107,10 +108,10 @@ function NotFound() {
               </Button>
               <span className="text-muted-foreground text-sm">or call us</span>
               <a 
-                href="tel:+19373018749" 
+                href={SITE.phone.tel} 
                 className="text-primary hover:text-primary/80 font-medium text-sm"
               >
-                (937) 301-8749
+                {SITE.phone.display}
               </a>
             </div>
           </Card>

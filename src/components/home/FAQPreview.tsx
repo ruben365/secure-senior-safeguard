@@ -1,6 +1,7 @@
 import { HelpCircle, ArrowRight, MessageCircle, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { SITE } from "@/config/site";
 import {
   Accordion,
   AccordionContent,
@@ -109,7 +110,7 @@ export const FAQPreview = () => {
                   </Link>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="w-full h-14 text-lg font-bold rounded-2xl border-2">
-                  <a href="tel:+19373018749">
+                  <a href={SITE.phone.tel}>
                     <Phone className="mr-2 w-5 h-5" />
                     Call Now
                   </a>

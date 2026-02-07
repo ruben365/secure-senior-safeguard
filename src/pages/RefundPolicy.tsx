@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, Clock, XCircle, AlertCircle } from "lucide-react";
 import { SEO } from "@/components/SEO";
+import { SITE } from "@/config/site";
 
 function RefundPolicy() {
   return (
@@ -159,7 +160,7 @@ function RefundPolicy() {
 
                   <h3 className="text-lg font-semibold mb-2">Return Process</h3>
                   <ol className="list-decimal list-inside space-y-2 text-muted-foreground ml-4 mb-4">
-                    <li>Contact <a href="mailto:returns@invisionnetwork.org" className="text-primary hover:underline">returns@invisionnetwork.org</a> with your order number</li>
+                    <li>Contact <a href={`mailto:${SITE.emails.returns}`} className="text-primary hover:underline">{SITE.emails.returns}</a> with your order number</li>
                     <li>Receive return authorization and shipping label (for defective items)</li>
                     <li>Ship item back within 14 days of authorization</li>
                     <li>Refund processed within 10 business days of receiving return</li>
@@ -201,10 +202,10 @@ function RefundPolicy() {
                   <div className="mt-6 p-6 bg-primary/5 rounded-lg border border-primary/20">
                     <h3 className="font-semibold mb-2">Contact Information</h3>
                     <p className="text-muted-foreground mb-2">
-                      <strong>Email:</strong> <a href="mailto:support@invisionnetwork.org" className="text-primary hover:underline">support@invisionnetwork.org</a>
+                      <strong>Email:</strong> <a href={`mailto:${SITE.emails.support}`} className="text-primary hover:underline">{SITE.emails.support}</a>
                     </p>
                     <p className="text-muted-foreground mb-2">
-                      <strong>Phone:</strong> (937) 301-8749
+                      <strong>Phone:</strong> <a href={SITE.phone.tel} className="text-primary hover:underline">{SITE.phone.display}</a>
                     </p>
                     <p className="text-muted-foreground text-sm">
                       Response time: 1-2 business days

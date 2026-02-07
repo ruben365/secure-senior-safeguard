@@ -35,6 +35,7 @@ export function TermsCheckbox({ checked, onCheckedChange, error }: TermsCheckbox
         <a 
           href="/terms-of-service" 
           target="_blank" 
+          rel="noopener noreferrer"
           className="text-primary hover:underline font-medium"
           onClick={(e) => e.stopPropagation()}
         >
@@ -44,6 +45,7 @@ export function TermsCheckbox({ checked, onCheckedChange, error }: TermsCheckbox
         <a 
           href="/privacy-policy" 
           target="_blank" 
+          rel="noopener noreferrer"
           className="text-primary hover:underline font-medium"
           onClick={(e) => e.stopPropagation()}
         >

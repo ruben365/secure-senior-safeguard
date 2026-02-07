@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { SEO } from "@/components/SEO";
 import { supabase } from "@/integrations/supabase/client";
 import confetti from "canvas-confetti";
+import { SITE } from "@/config/site";
 
 interface PaymentVerification {
   verified: boolean;
@@ -368,8 +369,8 @@ export default function PaymentSuccess() {
                     <div className="border-t pt-6">
                       <p className="text-sm text-muted-foreground">
                         Questions about your order? Contact us at{" "}
-                        <a href="mailto:hello@invisionnetwork.org" className="text-primary hover:underline">
-                          hello@invisionnetwork.org
+                        <a href={`mailto:${SITE.emails.hello}`} className="text-primary hover:underline">
+                          {SITE.emails.hello}
                         </a>
                       </p>
                     </div>

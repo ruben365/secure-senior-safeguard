@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Shield, Phone, BookOpen, MessageSquare, Building2 } from "lucide-react";
+import { SITE } from "@/config/site";
 
 const HIDDEN_PATH_PREFIXES = ["/admin", "/portal"];
 
@@ -67,9 +68,9 @@ export const GlassQuickMenu = () => {
               </Link>
             </Button>
             <Button asChild variant="ghost" className="h-12 justify-start gap-3 rounded-xl">
-              <a href="tel:+19373018749">
+              <a href={SITE.phone.tel}>
                 <Phone className="w-4 h-4" />
-                Call (937) 301-8749
+                Call {SITE.phone.display}
               </a>
             </Button>
           </div>

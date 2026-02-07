@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import ReadingProgressBar from "@/components/ReadingProgressBar";
 import { SEO } from "@/components/SEO";
+import { SITE } from "@/config/site";
 
 function PrivacyPolicy() {
   const scrollToSection = (id: string) => {
@@ -185,7 +186,7 @@ function PrivacyPolicy() {
                     <li><strong>Withdraw Consent:</strong> Withdraw consent where processing is based on consent</li>
                   </ul>
                   <p className="text-muted-foreground mt-4">
-                    To exercise any of these rights, contact us at <a href="mailto:privacy@invisionnetwork.org" className="text-primary hover:underline">privacy@invisionnetwork.org</a>. We will respond within 30 days.
+                    To exercise any of these rights, contact us at <a href={`mailto:${SITE.emails.privacy}`} className="text-primary hover:underline">{SITE.emails.privacy}</a>. We will respond within 30 days.
                   </p>
                 </section>
 
@@ -252,7 +253,7 @@ function PrivacyPolicy() {
                     Our Services are not directed to individuals under the age of 13. We do not knowingly collect personal information from children under 13.
                   </p>
                   <p className="text-muted-foreground mb-4">
-                    If you are a parent or guardian and believe your child has provided us with personal information, please contact us at <a href="mailto:privacy@invisionnetwork.org" className="text-primary hover:underline">privacy@invisionnetwork.org</a>, and we will take steps to delete such information.
+                    If you are a parent or guardian and believe your child has provided us with personal information, please contact us at <a href={`mailto:${SITE.emails.privacy}`} className="text-primary hover:underline">{SITE.emails.privacy}</a>, and we will take steps to delete such information.
                   </p>
                   <p className="text-muted-foreground">
                     For users between 13 and 18, parental consent is required to use our Services.
@@ -284,7 +285,7 @@ function PrivacyPolicy() {
                     <strong>Categories of Information Collected:</strong> Identifiers, commercial information, internet activity, geolocation data, and professional information.
                   </p>
                   <p className="text-muted-foreground">
-                    To submit a CCPA request, contact us at <a href="mailto:privacy@invisionnetwork.org" className="text-primary hover:underline">privacy@invisionnetwork.org</a> or call (937) 301-8749.
+                    To submit a CCPA request, contact us at <a href={`mailto:${SITE.emails.privacy}`} className="text-primary hover:underline">{SITE.emails.privacy}</a> or call <a href={SITE.phone.tel} className="text-primary hover:underline">{SITE.phone.display}</a>.
                   </p>
                 </section>
 
@@ -337,8 +338,8 @@ function PrivacyPolicy() {
                     If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:
                   </p>
                   <div className="space-y-2 text-muted-foreground">
-                    <p><strong>Email:</strong> <a href="mailto:privacy@invisionnetwork.org" className="text-primary hover:underline">privacy@invisionnetwork.org</a></p>
-                    <p><strong>Phone:</strong> (937) 301-8749</p>
+                    <p><strong>Email:</strong> <a href={`mailto:${SITE.emails.privacy}`} className="text-primary hover:underline">{SITE.emails.privacy}</a></p>
+                    <p><strong>Phone:</strong> <a href={SITE.phone.tel} className="text-primary hover:underline">{SITE.phone.display}</a></p>
                     <p><strong>Mail:</strong> InVision Network LLC, Privacy Office, Greater Dayton Area, OH</p>
                   </div>
                   <p className="text-muted-foreground mt-4">

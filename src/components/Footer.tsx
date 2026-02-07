@@ -4,6 +4,7 @@ import { Facebook, Linkedin, Youtube, Instagram, Shield, Mail, MapPin, ArrowRigh
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import TrustedTechLogos from "./TrustedTechLogos";
+import { SITE } from "@/config/site";
 import invisionLogo from "@/assets/shield-logo.png";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -88,10 +89,10 @@ const Footer = () => {
             </p>
               <div className="flex flex-wrap gap-4">
                 <span className="flex items-center gap-2 text-sm text-white/50">
-                  <MapPin className="w-4 h-4" />Serving the Greater Dayton Area
+                  <MapPin className="w-4 h-4" />Serving the {SITE.location.areaLabel}
                 </span>
                 <span className="flex items-center gap-2 text-sm text-white/50">
-                  <Mail className="w-4 h-4" />hello@invisionnetwork.org
+                  <Mail className="w-4 h-4" />{SITE.emails.hello}
                 </span>
               </div>
             </div>

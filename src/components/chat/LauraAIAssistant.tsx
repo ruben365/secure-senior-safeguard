@@ -17,6 +17,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useLauraChat } from "@/hooks/useLauraChat";
 import lauraAvatar from "@/assets/laura-avatar-new.png";
+import { SITE } from "@/config/site";
 
 const quickActions = [
   "How do I scan a file?",
@@ -58,7 +59,7 @@ export const LauraAIAssistant = () => {
       icon: Phone,
       label: "Call Us",
       description: "Speak with a security expert",
-      action: () => window.open("tel:9373018749", "_self"),
+      action: () => window.open(SITE.phone.tel, "_self"),
       color: "from-emerald-500 to-green-600",
     },
     {
@@ -87,7 +88,7 @@ export const LauraAIAssistant = () => {
       icon: Mail,
       label: "Email Support",
       description: "We respond within 24 hours",
-      action: () => window.open("mailto:hello@invisionnetwork.org", "_self"),
+      action: () => window.open(`mailto:${SITE.emails.hello}`, "_self"),
       color: "from-amber-500 to-yellow-500",
     },
   ];

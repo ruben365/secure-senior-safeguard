@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, XCircle, AlertTriangle } from "lucide-react";
 import { SEO } from "@/components/SEO";
+import { SITE } from "@/config/site";
 
 function AcceptableUse() {
   return (
@@ -157,8 +158,8 @@ function AcceptableUse() {
                     If you become aware of any violation of this policy, please report it to us immediately:
                   </p>
                   <div className="space-y-2 text-muted-foreground">
-                    <p><strong>Email:</strong> <a href="mailto:abuse@invisionnetwork.org" className="text-primary hover:underline">abuse@invisionnetwork.org</a></p>
-                    <p><strong>Phone:</strong> (937) 301-8749</p>
+                    <p><strong>Email:</strong> <a href={`mailto:${SITE.emails.abuse}`} className="text-primary hover:underline">{SITE.emails.abuse}</a></p>
+                    <p><strong>Phone:</strong> <a href={SITE.phone.tel} className="text-primary hover:underline">{SITE.phone.display}</a></p>
                   </div>
                   <p className="text-muted-foreground mt-4">
                     Please include as much detail as possible, including screenshots, URLs, and dates of the violation.

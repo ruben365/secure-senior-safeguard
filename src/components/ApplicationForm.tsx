@@ -19,6 +19,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Loader2, Upload, CheckCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
+import { SITE } from "@/config/site";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 const ACCEPTED_FILE_TYPES = [
@@ -294,7 +295,7 @@ ${encodeURIComponent(data.coverLetter)}
 Resume: ${encodeURIComponent(resumeFile.name)}`;
 
       // Open WhatsApp with pre-filled message
-      const whatsappUrl = `https://wa.me/19373018749?text=${message}`;
+      const whatsappUrl = `https://wa.me/${SITE.phone.whatsapp}?text=${message}`;
       window.open(whatsappUrl, "_blank");
 
       setIsSubmitted(true);

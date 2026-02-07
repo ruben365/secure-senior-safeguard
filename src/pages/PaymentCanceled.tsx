@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { SEO } from "@/components/SEO";
+import { SITE } from "@/config/site";
 
 export default function PaymentCanceled() {
   return (
@@ -52,11 +53,11 @@ export default function PaymentCanceled() {
                     <ul className="space-y-2 ml-4">
                       <li className="flex items-center gap-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                        <span>Email us at <a href="mailto:hello@invisionnetwork.org" className="text-primary hover:underline">hello@invisionnetwork.org</a></span>
+                        <span>Email us at <a href={`mailto:${SITE.emails.hello}`} className="text-primary hover:underline">{SITE.emails.hello}</a></span>
                       </li>
                       <li className="flex items-center gap-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                        <span>Call us at <a href="tel:+19373018749" className="text-primary hover:underline">(937) 301-8749</a></span>
+                        <span>Call us at <a href={SITE.phone.tel} className="text-primary hover:underline">{SITE.phone.display}</a></span>
                       </li>
                       <li className="flex items-center gap-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-primary" />

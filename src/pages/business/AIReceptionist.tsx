@@ -7,6 +7,7 @@ import Hero from "@/components/Hero";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { SITE } from "@/config/site";
 import { 
   Phone, 
   Clock, 
@@ -119,7 +120,7 @@ const AIReceptionist = () => {
                 </Link>
               </Button>
               <Button asChild size="xl" variant="outlineLight">
-                <a href="tel:9373018749">
+                <a href={SITE.phone.tel}>
                   <Phone className="mr-2 h-5 w-5" />
                   Hear It In Action
                 </a>
@@ -299,9 +300,9 @@ const AIReceptionist = () => {
                   </Link>
                 </Button>
                 <Button asChild size="xl" variant="outline">
-                  <a href="tel:9373018749">
+                  <a href={SITE.phone.tel}>
                     <Phone className="mr-2 h-5 w-5" />
-                    Call (937) 301-8749 Now
+                    Call {SITE.phone.display} Now
                   </a>
                 </Button>
               </div>

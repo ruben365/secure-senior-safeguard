@@ -22,6 +22,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { SITE } from "@/config/site";
 
 const guides = [
   {
@@ -141,7 +142,7 @@ export const PlatformGuide = ({ triggerButton }: PlatformGuideProps) => {
               </div>
               <div className="flex items-start gap-2">
                 <CheckCircle className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                <span>Veterans get 10% off everything</span>
+                <span>Veterans get {SITE.veteranDiscountPercent}% off everything</span>
               </div>
               <div className="flex items-start gap-2">
                 <CheckCircle className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
@@ -149,7 +150,7 @@ export const PlatformGuide = ({ triggerButton }: PlatformGuideProps) => {
               </div>
               <div className="flex items-start gap-2">
                 <CheckCircle className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                <span>30-day money-back guarantee</span>
+                <span>{SITE.moneyBackGuaranteeDays}-day money-back guarantee</span>
               </div>
             </div>
           </Card>
@@ -209,13 +210,13 @@ export const PlatformGuide = ({ triggerButton }: PlatformGuideProps) => {
             </h4>
             <div className="grid sm:grid-cols-3 gap-3">
               <Button variant="outline" size="sm" className="gap-2" asChild>
-                <a href="tel:937-301-8749">
+                <a href={SITE.phone.tel}>
                   <Phone className="w-4 h-4" />
                   Call Us
                 </a>
               </Button>
               <Button variant="outline" size="sm" className="gap-2" asChild>
-                <a href="mailto:support@invisionnetwork.org">
+                <a href={`mailto:${SITE.emails.support}`}>
                   <Mail className="w-4 h-4" />
                   Email
                 </a>

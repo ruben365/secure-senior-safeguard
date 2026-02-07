@@ -22,6 +22,7 @@ import { FamilyTrustSection } from "@/components/home/FamilyTrustSection";
 const LiveSecurityStats = lazy(() => import("@/components/home/LiveSecurityStats"));
 const LiveProtectionStatus = lazy(() => import("@/components/LiveProtectionStatus"));
 const SocialProofTicker = lazy(() => import("@/components/SocialProofTicker"));
+const PremiumGlassmorphismWidgets = lazy(() => import("@/components/home/PremiumGlassmorphismWidgets"));
 
 const Index = () => {
   const [scamShieldOpen, setScamShieldOpen] = useState(false);
@@ -122,6 +123,17 @@ const Index = () => {
           {/* Current Scam Alerts - Immediate Value */}
           <section id="alerts">
             <ScamAlertsSection onSubmitThreat={() => setScamShieldOpen(true)} />
+          </section>
+
+          {/* Premium Glass Widgets */}
+          <section id="widgets">
+            {enableLiveWidgets ? (
+              <Suspense fallback={<div className="min-h-[420px]" aria-hidden="true" />}>
+                <PremiumGlassmorphismWidgets />
+              </Suspense>
+            ) : (
+              <div className="min-h-[420px]" aria-hidden="true" />
+            )}
           </section>
 
           {/* Resources Promo */}

@@ -20,6 +20,7 @@ import { useCheckout } from "@/contexts/CheckoutContext";
 import { supabase } from "@/integrations/supabase/client";
 import { trackButtonClick, trackConversion } from "@/utils/analyticsTracker";
 import { SCAMSHIELD_PLANS } from "@/config/products";
+import { SITE } from "@/config/site";
 import {
   CheckCircle,
   Mail,
@@ -526,7 +527,7 @@ function LearnAndTrain() {
               "addressRegion": "OH",
               "addressCountry": "US"
             },
-            "telephone": "(937) 301-8749",
+            "telephone": SITE.phone.e164,
             "offers": [
               {
                 "@type": "Offer",

@@ -571,7 +571,7 @@ export const WebsiteInsuranceDialog = ({
                     Terms & Conditions
                   </button>
                   {' '}and{' '}
-                  <a href="/privacy-policy" className="text-primary hover:underline" target="_blank">
+                  <a href="/privacy-policy" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
                     Privacy Policy
                   </a>
                 </label>

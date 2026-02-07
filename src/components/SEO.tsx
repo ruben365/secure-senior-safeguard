@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { SITE } from "@/config/site";
 
 interface SEOProps {
   title?: string;
@@ -121,15 +122,15 @@ export const PAGE_SEO = {
     structuredData: {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
-      "name": "InVision Network",
-      "description": "AI Scam Protection & Business Solutions",
+      "name": SITE.name,
+      "description": SITE.tagline,
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Dayton",
-        "addressRegion": "OH",
-        "addressCountry": "US"
+        "addressLocality": SITE.location.city,
+        "addressRegion": SITE.location.region,
+        "addressCountry": SITE.location.country
       },
-      "telephone": "(937) 301-8749",
+      "telephone": SITE.phone.e164,
       "url": "https://invisionnetwork.org",
       "priceRange": "$$"
     }
@@ -146,11 +147,11 @@ export const PAGE_SEO = {
       "url": "https://invisionnetwork.org/training",
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Dayton",
-        "addressRegion": "OH",
-        "addressCountry": "US"
+        "addressLocality": SITE.location.city,
+        "addressRegion": SITE.location.region,
+        "addressCountry": SITE.location.country
       },
-      "telephone": "(937) 301-8749",
+      "telephone": SITE.phone.e164,
       "offers": [
         {
           "@type": "Offer",
@@ -239,7 +240,7 @@ export const PAGE_SEO = {
   },
   contact: {
     title: "Contact Us",
-    description: "Get in touch with InVision Network for AI scam protection services. Serving the Greater Dayton Area. Call (937) 301-8749 or fill out our contact form.",
+    description: `Get in touch with ${SITE.name} for AI scam protection services. Serving the ${SITE.location.areaLabel}. Call ${SITE.phone.display} or fill out our contact form.`,
     keywords: "contact InVision Network, Dayton cybersecurity contact, AI protection inquiry",
   },
   resources: {

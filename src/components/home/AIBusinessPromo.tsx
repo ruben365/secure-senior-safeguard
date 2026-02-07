@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Phone, Calendar, Bot, Globe, ArrowRight, TrendingUp, Zap, CheckCircle, Award, Sparkles } from "lucide-react";
+import { SITE } from "@/config/site";
 import consultingTeamStrategy from "@/assets/consulting-team-strategy.jpg";
 import teamOfficeDiscussion from "@/assets/team-office-discussion.jpg";
  
@@ -117,7 +118,7 @@ export const AIBusinessPromo = () => {
                  </Link>
                </Button>
                <div className="text-foreground/50 text-sm">
-                 <span className="font-medium text-[#18305A]">+1 (937) 301-8749</span>
+                 <span className="font-medium text-[#18305A]">+1 {SITE.phone.display}</span>
                </div>
              </div>
           </div>

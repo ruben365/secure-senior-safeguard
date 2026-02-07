@@ -29,14 +29,15 @@ import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 import supportAgentPhoto from "@/assets/support-agent.jpg";
 import familyGathering from "@/assets/family-gathering.jpg";
+import { SITE } from "@/config/site";
 
 const contactMethods = [
   {
     icon: Phone,
     title: "Phone Support",
-    detail: "(937) 301-8749",
+    detail: SITE.phone.display,
     hours: "Mon-Fri: 9am-6pm EST",
-    action: "tel:+19373018749",
+    action: SITE.phone.tel,
     actionText: "Call Now",
     badge: "Avg. 2min wait",
     badgeVariant: "default" as const
@@ -44,9 +45,9 @@ const contactMethods = [
   {
     icon: Mail,
     title: "General Inquiries",
-    detail: "info@invisionnetwork.org",
+    detail: SITE.emails.info,
     hours: "Response within 4 hours",
-    action: "mailto:info@invisionnetwork.org",
+    action: `mailto:${SITE.emails.info}`,
     actionText: "Send Email",
     badge: "95% same-day",
     badgeVariant: "default" as const
@@ -54,9 +55,9 @@ const contactMethods = [
   {
     icon: Mail,
     title: "Support Team",
-    detail: "support@invisionnetwork.org",
+    detail: SITE.emails.support,
     hours: "Response within 2 hours",
-    action: "mailto:support@invisionnetwork.org",
+    action: `mailto:${SITE.emails.support}`,
     actionText: "Send Email",
     badge: "Priority Support",
     badgeVariant: "premium" as const
@@ -64,9 +65,9 @@ const contactMethods = [
   {
     icon: Mail,
     title: "Business Inquiries",
-    detail: "business@invisionnetwork.org",
+    detail: SITE.emails.business,
     hours: "Response within 4 hours",
-    action: "mailto:business@invisionnetwork.org",
+    action: `mailto:${SITE.emails.business}`,
     actionText: "Send Email",
     badge: "B2B Services",
     badgeVariant: "default" as const
@@ -130,7 +131,7 @@ function Contact() {
       }, 3000);
     } catch (error) {
       console.error("Contact form error:", error);
-      toast.error("Failed to send message. Please try again or email us directly at info@invisionnetwork.org");
+      toast.error(`Failed to send message. Please try again or email us directly at ${SITE.emails.info}`);
     } finally {
       setIsSubmitting(false);
     }

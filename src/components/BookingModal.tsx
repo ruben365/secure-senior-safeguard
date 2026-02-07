@@ -25,6 +25,7 @@ import { TrustIndicators } from "@/components/payment/TrustIndicators";
 import { TermsCheckbox } from "@/components/payment/TermsCheckbox";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { SITE } from "@/config/site";
 
 interface BookingModalProps {
   open: boolean;
@@ -485,7 +486,7 @@ export const BookingModal = ({
                     </span>
                   </AccordionTrigger>
                   <AccordionContent className="text-sm text-muted-foreground">
-                    We typically respond within 24 hours. For urgent requests, call us at <a href="tel:+19373018749" className="text-primary hover:underline">(937) 301-8749</a>.
+                    We typically respond within 24 hours. For urgent requests, call us at <a href={SITE.phone.tel} className="text-primary hover:underline">{SITE.phone.display}</a>.
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="cancellation" className="border-b-0">

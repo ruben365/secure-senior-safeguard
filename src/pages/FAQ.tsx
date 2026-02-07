@@ -14,6 +14,7 @@ import { Search, ThumbsUp, ThumbsDown, Phone, MessageCircle, ChevronDown, Mail, 
 import { ScrollRevealSection } from "@/components/ScrollRevealSection";
 import { PlatformGuide } from "@/components/PlatformGuide";
 import { AIImageDisclaimer } from "@/components/AIImageDisclaimer";
+import { SITE } from "@/config/site";
 
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
@@ -83,7 +84,7 @@ const faqs: FAQ[] = [
     id: "fs-4",
     category: "Family Shield",
     question: "What happens if I lose my access link?",
-    answer: "Simply email us at support@invisionnetwork.org and we'll resend your link immediately. You can also request a new link from your original confirmation email.",
+    answer: `Simply email us at ${SITE.emails.support} and we'll resend your link immediately. You can also request a new link from your original confirmation email.`,
   },
   {
     id: "fs-5",
@@ -199,7 +200,7 @@ const faqs: FAQ[] = [
     id: "ts-2",
     category: "Technical Support",
     question: "How do I contact support?",
-    answer: "Email: support@invisionnetwork.org, Phone: (937) 301-8749, Live chat: on our website, or submit ticket through your portal.",
+    answer: `Email: ${SITE.emails.support}, Phone: ${SITE.phone.display}, Live chat: on our website, or submit ticket through your portal.`,
   },
   {
     id: "ts-3",
@@ -585,12 +586,12 @@ export default function FAQ() {
                       Contact Support
                     </Link>
                   </Button>
-                  <Button size="lg" variant="outline" asChild className="gap-2">
-                    <a href="tel:9373018749">
-                      <Phone className="w-5 h-5" />
-                      Call (937) 301-8749
-                    </a>
-                  </Button>
+                    <Button size="lg" variant="outline" asChild className="gap-2">
+                      <a href={SITE.phone.tel}>
+                        <Phone className="w-5 h-5" />
+                        Call {SITE.phone.display}
+                      </a>
+                    </Button>
                 </div>
 
                 <div className="mt-8 pt-8 border-t border-border">

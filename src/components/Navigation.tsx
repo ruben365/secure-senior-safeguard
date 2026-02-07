@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { PrefetchLink } from "@/components/PrefetchLink";
 import { ShoppingCart } from "@/components/ShoppingCart";
 import { useAuth } from "@/contexts/AuthContext";
+import { SITE } from "@/config/site";
 import { clearAllCachesAndReload } from "@/utils/cacheUtils";
 import { toast } from "sonner";
 import invisionLogo from "@/assets/shield-logo.png";
@@ -122,15 +123,15 @@ const Navigation = () => {
 
               {/* Phone */}
               <a
-                href="tel:9373018749"
+                href={SITE.phone.tel}
                 className="hidden md:flex items-center gap-2 text-foreground hover:text-primary transition-colors duration-150 no-underline"
-                aria-label="Call us at (937) 301-8749"
+                aria-label={`Call us at ${SITE.phone.display}`}
               >
                 <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                   <Phone className="w-4 h-4 text-primary" fill="currentColor" />
                 </div>
                 <span className="text-sm font-semibold whitespace-nowrap text-foreground">
-                  (937) 301-8749
+                  {SITE.phone.display}
                 </span>
               </a>
 
@@ -211,12 +212,12 @@ const Navigation = () => {
 
                 {/* Mobile Phone Link */}
                 <a
-                  href="tel:9373018749"
+                  href={SITE.phone.tel}
                   className="flex items-center justify-center gap-2 text-base text-muted-foreground font-medium px-4 py-3 rounded-lg hover:bg-muted/50 transition-colors duration-150"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <Phone className="h-5 w-5" />
-                  (937) 301-8749
+                  {SITE.phone.display}
                 </a>
               </div>
             </div>
