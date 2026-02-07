@@ -7,7 +7,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import { CartAbandonmentNotification } from "@/components/CartAbandonmentNotification";
-import { useCartFeedback } from "@/components/CartFeedbackNotifications";
+import { useCartFeedback } from "@/contexts/CartFeedbackContext";
 import TrustBar from "@/components/TrustBar";
 import { PageTransition } from "@/components/PageTransition";
 import { Button } from "@/components/ui/button";

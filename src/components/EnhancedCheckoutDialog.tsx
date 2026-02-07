@@ -16,7 +16,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { QuickVeteranToggle } from '@/components/payment/QuickVeteranToggle';
 import { TrustIndicators } from '@/components/payment/TrustIndicators';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useCartFeedback } from './CartFeedbackNotifications';
+import { useCartFeedback } from '@/contexts/CartFeedbackContext';
 import { useStripeKey } from '@/hooks/useStripeKey';
 import { useConfetti } from '@/hooks/useConfetti';
 

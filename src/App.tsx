@@ -6,7 +6,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AuthProvider } from "./contexts/AuthContext";
 import { CartProvider } from "./contexts/CartContext";
-import { CartFeedbackProvider } from "./components/CartFeedbackNotifications";
+import { CartFeedbackProvider } from "./contexts/CartFeedbackContext";
 import { SubscriptionProvider } from "./contexts/SubscriptionContext";
 import { CheckoutProvider } from "./contexts/CheckoutContext";
 import { GlassmorphismLoader } from "./components/GlassmorphismLoader";

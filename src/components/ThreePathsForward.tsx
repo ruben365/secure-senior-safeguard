@@ -70,7 +70,7 @@ const ThreePathsForward = () => {
   const { ref, isVisible } = useScrollReveal({ threshold: 0.2 });
 
   const getAnimationClass = (index: number) => {
-    const baseClasses = "transition-all duration-[600ms] ease-out";
+    const baseClasses = "transition-all [transition-duration:600ms] ease-out";
     
     if (!isVisible) {
       if (index === 0) return `${baseClasses} opacity-0 -translate-x-[30px]`;
