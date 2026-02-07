@@ -20,32 +20,32 @@ import { SectionNav } from "@/components/SectionNav";
 import seniorCoupleActive from "@/assets/senior-couple-active.jpg";
 import { FamilyTrustSection } from "@/components/home/FamilyTrustSection";
 import { SITE } from "@/config/site";
-
 const LiveSecurityStats = lazy(() => import("@/components/home/LiveSecurityStats"));
 const LiveProtectionStatus = lazy(() => import("@/components/LiveProtectionStatus"));
 const SocialProofTicker = lazy(() => import("@/components/SocialProofTicker"));
 const PremiumGlassmorphismWidgets = lazy(() => import("@/components/home/PremiumGlassmorphismWidgets"));
-
 const Index = () => {
   const [scamShieldOpen, setScamShieldOpen] = useState(false);
   const [enableLiveWidgets, setEnableLiveWidgets] = useState(false);
   const [enableStats, setEnableStats] = useState(false);
   const statsRef = useRef<HTMLElement | null>(null);
-
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const saveData = "connection" in navigator && (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+    const saveData = "connection" in navigator && (navigator as Navigator & {
+      connection?: {
+        saveData?: boolean;
+      };
+    }).connection?.saveData;
     if (prefersReducedMotion || saveData) return;
-
     const enableWidgets = () => setEnableLiveWidgets(true);
     let idleId: number | ReturnType<typeof setTimeout>;
-
     if ("requestIdleCallback" in window) {
-      idleId = (window as any).requestIdleCallback(enableWidgets, { timeout: 2000 });
+      idleId = (window as any).requestIdleCallback(enableWidgets, {
+        timeout: 2000
+      });
     } else {
       idleId = setTimeout(enableWidgets, 1500);
     }
-
     return () => {
       if ("cancelIdleCallback" in window && typeof idleId === "number") {
         (window as any).cancelIdleCallback(idleId);
@@ -54,46 +54,40 @@ const Index = () => {
       }
     };
   }, []);
-
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const saveData = "connection" in navigator && (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+    const saveData = "connection" in navigator && (navigator as Navigator & {
+      connection?: {
+        saveData?: boolean;
+      };
+    }).connection?.saveData;
     if (prefersReducedMotion || saveData) return;
     const element = statsRef.current;
     if (!element) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0]?.isIntersecting) {
-          setEnableStats(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "200px" }
-    );
-
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0]?.isIntersecting) {
+        setEnableStats(true);
+        observer.disconnect();
+      }
+    }, {
+      rootMargin: "200px"
+    });
     observer.observe(element);
     return () => observer.disconnect();
   }, []);
-
-  return (
-    <PageTransition variant="fade">
+  return <PageTransition variant="fade">
       <div className="min-h-screen bg-background">
         <SEO {...PAGE_SEO.home} />
         <Navigation />
         <SectionNav />
 
         {/* Floating widgets */}
-        {enableLiveWidgets && (
-          <Suspense fallback={null}>
+        {enableLiveWidgets && <Suspense fallback={null}>
             <LiveProtectionStatus />
-          </Suspense>
-        )}
-        {enableLiveWidgets && (
-          <Suspense fallback={null}>
+          </Suspense>}
+        {enableLiveWidgets && <Suspense fallback={null}>
             <SocialProofTicker />
-          </Suspense>
-        )}
+          </Suspense>}
 
         <main>
           {/* Hero Section */}
@@ -101,17 +95,13 @@ const Index = () => {
             <HeroHomepage />
           </section>
 
-          <ProtectionPathSection />
+          
 
           {/* Live Security Stats - NEW */}
           <section id="stats" ref={statsRef}>
-            {enableStats ? (
-              <Suspense fallback={<div className="min-h-[320px]" aria-hidden="true" />}>
+            {enableStats ? <Suspense fallback={<div className="min-h-[320px]" aria-hidden="true" />}>
                 <LiveSecurityStats />
-              </Suspense>
-            ) : (
-              <div className="min-h-[320px]" aria-hidden="true" />
-            )}
+              </Suspense> : <div className="min-h-[320px]" aria-hidden="true" />}
           </section>
 
           {/* Workshops Promo - Learn & Train Introduction */}
@@ -131,13 +121,9 @@ const Index = () => {
 
           {/* Premium Glass Widgets */}
           <section id="widgets">
-            {enableLiveWidgets ? (
-              <Suspense fallback={<div className="min-h-[420px]" aria-hidden="true" />}>
+            {enableLiveWidgets ? <Suspense fallback={<div className="min-h-[420px]" aria-hidden="true" />}>
                 <PremiumGlassmorphismWidgets />
-              </Suspense>
-            ) : (
-              <div className="min-h-[420px]" aria-hidden="true" />
-            )}
+              </Suspense> : <div className="min-h-[420px]" aria-hidden="true" />}
           </section>
 
           {/* Resources Promo */}
@@ -166,31 +152,19 @@ const Index = () => {
           </section>
 
           {/* Final CTA with Senior Couple Image */}
-          <CTASection
-            headline="Join Our Protected Community"
-            variant="image"
-            backgroundImage={seniorCoupleActive}
-          >
+          <CTASection headline="Join Our Protected Community" variant="image" backgroundImage={seniorCoupleActive}>
             <p className="text-lg text-white/90 mb-6">
               Join families across Ohio who live confidently, knowing they're protected from AI scams.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center">
-              <Button
-                asChild
-                size="lg"
-                className="h-12 px-6 text-sm font-bold rounded-full"
-                style={{ background: 'linear-gradient(135deg, #F8926A 0%, #BB81B5 100%)' }}
-              >
+              <Button asChild size="lg" className="h-12 px-6 text-sm font-bold rounded-full" style={{
+              background: 'linear-gradient(135deg, #F8926A 0%, #BB81B5 100%)'
+            }}>
                 <Link to="/training#pricing" className="text-white">
                   Get Protected Today
                 </Link>
               </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="h-12 px-6 text-sm font-bold rounded-full border-2 border-white/30 text-white hover:bg-white/10"
-              >
+              <Button asChild variant="outline" size="lg" className="h-12 px-6 text-sm font-bold rounded-full border-2 border-white/30 text-white hover:bg-white/10">
                 <Link to="/business">Business Solutions</Link>
               </Button>
             </div>
@@ -204,8 +178,6 @@ const Index = () => {
           <ScamShieldSubmission open={scamShieldOpen} onOpenChange={setScamShieldOpen} />
         </main>
       </div>
-    </PageTransition>
-  );
+    </PageTransition>;
 };
-
 export default Index;
