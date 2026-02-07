@@ -3,6 +3,7 @@ import { LucideIcon } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { useCounterAnimation } from "@/hooks/useCounterAnimation";
+import { KeyboardEvent } from "react";
 
 interface DashboardStatCardProps {
   icon: LucideIcon;
@@ -47,6 +48,14 @@ export function DashboardStatCard({
     }
   };
 
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (!link) return;
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      handleClick();
+    }
+  };
+
   const subtitleColorClass = {
     success: "text-success",
     warning: "text-yellow-600",
@@ -65,6 +74,10 @@ export function DashboardStatCard({
       whileHover={{ y: -4 }}
       whileTap={{ scale: 0.98 }}
       onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      role={link ? "button" : undefined}
+      tabIndex={link ? 0 : undefined}
+      aria-label={link ? `${title} details` : undefined}
       className={link ? "cursor-pointer" : ""}
     >
       <Card

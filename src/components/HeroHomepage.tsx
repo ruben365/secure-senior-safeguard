@@ -183,7 +183,7 @@ export const HeroHomepage = () => {
                     className="w-14 h-1 rounded-full bg-gradient-to-r from-primary via-accent to-primary"
                   />
                   <span className="text-[11px] font-bold tracking-[0.2em] text-foreground/60 uppercase">
-                    Est. 2020 | Ohio
+                    Est. 2024 | Ohio
                   </span>
                 </div>
               </motion.div>
@@ -234,7 +234,7 @@ export const HeroHomepage = () => {
                     animate={{ opacity: [0.75, 1, 0.75] }}
                     transition={{ duration: 2.5, repeat: Infinity }}
                     className="text-foreground font-medium bg-gradient-to-r from-primary/15 to-accent/15 px-2 py-1 rounded-lg mx-1 backdrop-blur-sm"
-                  >over 500 families</motion.span>
+                  >over 100 families</motion.span>
                   and businesses from evolving digital threats.
                 </p>
               </motion.div>
@@ -387,7 +387,7 @@ export const HeroHomepage = () => {
               <div className="flex flex-wrap items-center gap-4">
                 {[
                   { num: "01", icon: Shield, label: "Verified Experts" },
-                  { num: "02", icon: Award, label: "Ohio Certified" },
+                  { num: "02", icon: Award, label: "Ohio Based" },
                   { num: "03", icon: Star, label: "Top Rated" }
                 ].map((badge, i) => (
                   <motion.div 
@@ -405,7 +405,7 @@ export const HeroHomepage = () => {
               {/* Stats */}
               <div className="hidden xl:flex items-center gap-8">
                 {[
-                  { value: "17%", label: "Veteran Discount", gradient: true },
+                  { value: "10%", label: "Veteran Discount", gradient: true },
                   { value: "60", label: "Day Guarantee", gradient: false }
                 ].map((stat, i) => (
                   <motion.div 

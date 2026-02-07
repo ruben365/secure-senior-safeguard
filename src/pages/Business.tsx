@@ -500,7 +500,7 @@ function Business() {
                   <Card className="p-4 bg-gradient-to-br from-success/5 to-transparent">
                     <h4 className="font-bold text-sm mb-2 flex items-center gap-2">
                       <Lock className="w-4 h-4 text-success" />
-                      HIPAA Compliant
+                        Privacy-Conscious Handling
                     </h4>
                     <p className="text-muted-foreground text-xs">
                       Secure data handling for healthcare, legal, and financial industries. All information encrypted and protected.

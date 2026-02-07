@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import ReadingProgressBar from "@/components/ReadingProgressBar";
+import { SEO } from "@/components/SEO";
 
 function TermsOfService() {
   const scrollToSection = (id: string) => {
@@ -10,6 +11,10 @@ function TermsOfService() {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Terms of Service"
+        description="Review the terms and conditions for using InVision Network services."
+      />
       <ReadingProgressBar />
       <Navigation />
       <section className="py-24 bg-background">

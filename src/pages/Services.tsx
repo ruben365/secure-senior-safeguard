@@ -390,9 +390,9 @@ const Services = () => {
                   checked={!isMonthly}
                   onCheckedChange={(checked) => setIsMonthly(!checked)}
                 />
-                <Label htmlFor="billing-toggle" className={!isMonthly ? "font-semibold" : ""}>
-                  Annual <Badge variant="success" className="ml-2">Save up to 20%</Badge>
-                </Label>
+                  <Label htmlFor="billing-toggle" className={!isMonthly ? "font-semibold" : ""}>
+                    Annual <Badge variant="success" className="ml-2">Save 10%</Badge>
+                  </Label>
               </div>
             </ScrollReveal>
           </div>

@@ -165,7 +165,7 @@ const WebsiteInsurance = () => {
         />
         <Navigation />
         
-        <main id="main-content">
+        <main>
           {/* Hero Section */}
           <section className="relative py-20 lg:py-32 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-success/10 via-background to-primary/10" />

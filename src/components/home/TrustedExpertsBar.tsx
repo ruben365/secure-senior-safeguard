@@ -5,8 +5,8 @@ import { Star, Shield, Award, Users, TrendingUp, Sparkles, CheckCircle } from "l
  const stats = [
    { label: "Happy Clients", value: "100+", icon: Users },
    { label: "Success Rate", value: "99.8%", icon: TrendingUp },
-   { label: "Years Active", value: "4+", icon: Award },
-   { label: "Expert Rating", value: "5.0", icon: Star },
+   { label: "Years Active", value: "2+", icon: Award },
+   { label: "Client Feedback", value: "Top", icon: Star },
  ];
  
 // TODO: Replace with real partner logos when available
@@ -16,7 +16,7 @@ const logos = [
  
 const badges = [
   { num: "01", icon: Shield, label: "Verified Experts" },
-  { num: "02", icon: Award, label: "Ohio Certified" },
+  { num: "02", icon: Award, label: "Ohio Based" },
   { num: "03", icon: Star, label: "Top Rated" },
 ];
 
@@ -105,7 +105,7 @@ const badges = [
                 background: 'linear-gradient(135deg, #22C55E 0%, #10B981 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent'
-              }}>17%</div>
+              }}>10%</div>
               <div className="text-[10px] text-[#1a1a2e]/50 uppercase tracking-wider font-semibold">Veteran Discount</div>
             </div>
             <div className="text-center">
@@ -127,7 +127,7 @@ const badges = [
              <span className="text-sm font-semibold text-[#18305A] uppercase tracking-wide">Our Impact</span>
           </motion.div>
           <p className="text-sm font-medium text-[#1a1a2e]/40 uppercase tracking-[0.2em] mb-6">
-             Trusted by Leading Organizations
+             Community Partners & Providers
            </p>
           <div className="flex items-center justify-center gap-4 lg:gap-6 flex-wrap">
              {logos.map((logo, i) => (

@@ -281,7 +281,9 @@ function App() {
                       <AnalyticsTracker />
                       <ErrorBoundary>
                         <Suspense fallback={<PageLoader />}>
-                          <PublicRoutes />
+                          <div id="main-content" tabIndex={-1} role="main">
+                            <PublicRoutes />
+                          </div>
                         </Suspense>
                       </ErrorBoundary>
                       {showDeferredUI && (

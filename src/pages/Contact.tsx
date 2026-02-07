@@ -506,7 +506,7 @@ function Contact() {
                     <p className="text-sm font-semibold text-foreground mb-1">InVision Network HQ</p>
                     <p className="text-sm text-muted-foreground">
                       123 Tech Boulevard<br />
-                      Columbus, OH 43215
+                      Dayton, OH 45402
                     </p>
                   </div>
                   <div className="bg-gradient-to-br from-muted/50 to-muted/20 rounded-xl h-40 flex items-center justify-center text-muted-foreground text-sm mb-4 border border-border/30">

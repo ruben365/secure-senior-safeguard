@@ -112,7 +112,7 @@ const CustomerInfoStep: React.FC<{
             <span>I am a Veteran or First Responder</span>
           </Label>
           <p className="text-xs text-muted-foreground mt-1">
-            Save 10-17% on your purchase
+            Save 10% on your purchase
           </p>
         </div>
       </div>

@@ -79,7 +79,7 @@ const AIReceptionist = () => {
       <div className="min-h-screen bg-background">
         <SEO 
           title="AI Receptionist & Virtual Intake Agent"
-          description="24/7 AI-powered phone answering and appointment scheduling. Never miss a call again. Save $3,000-5,000/month on receptionist costs. HIPAA compliant."
+          description="24/7 AI-powered phone answering and appointment scheduling. Never miss a call again. Save $3,000-5,000/month on receptionist costs. Privacy-conscious workflows."
           keywords="AI receptionist, virtual receptionist, automated phone answering, appointment scheduling AI, business phone automation, Dayton Ohio"
           structuredData={{
             "@context": "https://schema.org",
@@ -100,7 +100,7 @@ const AIReceptionist = () => {
         />
         <Navigation />
         
-        <main id="main-content">
+        <main>
           {/* Hero Section with Nature Image */}
           <Hero
             backgroundImages={[

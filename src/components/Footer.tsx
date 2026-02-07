@@ -215,7 +215,7 @@ const Footer = () => {
                 </p>
                 <div className="flex items-center gap-4">
                   <span className="flex items-center gap-1.5 text-sm text-white/60">
-                    <Shield className="w-5 h-5 text-emerald-500/80" />BBB Accredited
+                    <Shield className="w-5 h-5 text-emerald-500/80" />Community Trusted
                   </span>
                   <span className="flex items-center gap-1.5 text-sm text-white/60">
                     <Shield className="w-5 h-5 text-amber-500/80" />Supports Veterans

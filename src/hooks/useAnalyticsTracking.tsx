@@ -1,16 +1,30 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { trackPageView, trackScroll, getSessionId } from "@/utils/analyticsTracker";
+import { trackPageView, trackScroll, getSessionId, isAnalyticsAllowed } from "@/utils/analyticsTracker";
 
 export function useAnalyticsTracking() {
   const location = useLocation();
+  const [analyticsEnabled, setAnalyticsEnabled] = useState(isAnalyticsAllowed());
 
   useEffect(() => {
-    // Initialize session
-    getSessionId();
+    const handleConsentUpdate = () => {
+      setAnalyticsEnabled(isAnalyticsAllowed());
+    };
+
+    window.addEventListener("cookie-consent-updated", handleConsentUpdate);
+    return () => window.removeEventListener("cookie-consent-updated", handleConsentUpdate);
   }, []);
 
   useEffect(() => {
+    if (!analyticsEnabled) return;
+
+    // Initialize session
+    getSessionId();
+  }, [analyticsEnabled]);
+
+  useEffect(() => {
+    if (!analyticsEnabled) return;
+
     // Defer tracking aggressively to avoid extending network dependency chain
     // Use 5 second delay to ensure it's well outside Lighthouse's critical chain measurement
     const deferTracking = () => {
@@ -91,5 +105,5 @@ export function useAnalyticsTracking() {
         window.removeEventListener("scroll", handleScroll);
       }
     };
-  }, [location]);
+  }, [location, analyticsEnabled]);
 }

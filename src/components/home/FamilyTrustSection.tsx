@@ -1,9 +1,9 @@
 import { Shield, Users, Award, CheckCircle, TrendingUp, Clock } from "lucide-react";
 
 const stats = [
-  { icon: Users, value: "5,000+", label: "Ohio Families Protected", color: "from-primary/20 to-lavender-200/30" },
-  { icon: Shield, value: "99.2%", label: "Threat Detection Rate", color: "from-accent/20 to-coral-200/30" },
-  { icon: Award, value: "4.9/5", label: "Customer Rating", color: "from-success/20 to-teal-200/30" },
+  { icon: Users, value: "100+", label: "Ohio Families Protected", color: "from-primary/20 to-lavender-200/30" },
+  { icon: Shield, value: "24/7", label: "Monitoring & Alerts", color: "from-accent/20 to-coral-200/30" },
+  { icon: Award, value: "Client-Reviewed", label: "Trusted Feedback", color: "from-success/20 to-teal-200/30" },
 ];
 
 const trustPoints = [
@@ -31,7 +31,7 @@ export const FamilyTrustSection = () => {
             </span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Join thousands of Ohio families who trust us with their digital safety every day.
+            Join Ohio families who trust us with their digital safety every day.
           </p>
         </div>
 
@@ -46,7 +46,7 @@ export const FamilyTrustSection = () => {
               <TrendingUp className="w-8 h-8 text-primary" />
             </div>
             <div className="widget-stat">
-              <span className="stat-value text-5xl">5,000+</span>
+              <span className="stat-value text-5xl">100+</span>
               <span className="stat-label text-base mt-2">Ohio Families Protected</span>
             </div>
             <p className="text-sm text-muted-foreground mt-4 max-w-xs">

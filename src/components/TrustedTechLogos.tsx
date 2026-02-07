@@ -48,7 +48,7 @@ const TrustedTechLogos = () => {
         <div className="text-center mt-4">
           <p className="text-[10px] text-slate-500 tracking-widest uppercase flex items-center justify-center gap-2">
             <Shield className="w-3 h-3" />
-            <span>Enterprise Security • SOC 2 • Bank-Level Encryption</span>
+            <span>Security-First Practices • Privacy-First Approach</span>
           </p>
         </div>
       </div>

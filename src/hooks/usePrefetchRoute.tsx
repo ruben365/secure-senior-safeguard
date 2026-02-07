@@ -21,6 +21,10 @@ export const usePrefetchRoute = (path: string) => {
 
   const prefetch = () => {
     if (prefetchedRoutes.has(path)) return;
+    const connection = (navigator as any).connection;
+    if (connection?.saveData || ["slow-2g", "2g"].includes(connection?.effectiveType)) {
+      return;
+    }
 
     prefetchTimerRef.current = setTimeout(() => {
       // Preload professional hero images for the route

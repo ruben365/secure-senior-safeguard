@@ -24,7 +24,7 @@ const HeroValueCards = () => {
       href: "/training#training",
       color: "from-accent to-accent/70",
       badge: "10% VETERAN DISCOUNT",
-      features: ["Certified trainers", "Hands-on practice", "Certificate included"]
+      features: ["Expert trainers", "Hands-on practice", "Certificate included"]
     },
     {
       icon: Building2,

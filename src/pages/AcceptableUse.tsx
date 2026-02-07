@@ -2,10 +2,15 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, XCircle, AlertTriangle } from "lucide-react";
+import { SEO } from "@/components/SEO";
 
 function AcceptableUse() {
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Acceptable Use Policy"
+        description="Review the acceptable and prohibited uses of InVision Network services."
+      />
       <Navigation />
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4">

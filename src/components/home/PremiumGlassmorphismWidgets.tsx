@@ -29,11 +29,11 @@
   { icon: Users, value: "100+", label: "Families Protected", color: "#F8926A" },
   { icon: Shield, value: "1K+", label: "Threats Analyzed", color: "#BB81B5" },
    { icon: TrendingUp, value: "99.8%", label: "Success Rate", color: "#18305A" },
-   { icon: Award, value: "4+", label: "Years Active", color: "#F8926A" },
+   { icon: Award, value: "2+", label: "Years Active", color: "#F8926A" },
  ];
  
  const securityFeatures = [
-   { icon: Lock, title: "End-to-End Protection", desc: "Bank-grade encryption", gradient: "from-coral-400 to-coral-600", stat: "256-bit" },
+   { icon: Lock, title: "End-to-End Protection", desc: "Industry-standard encryption", gradient: "from-coral-400 to-coral-600", stat: "TLS" },
    { icon: Eye, title: "24/7 Monitoring", desc: "Always vigilant", gradient: "from-lavender-400 to-lavender-600", stat: "Real-time" },
    { icon: Bell, title: "Instant Alerts", desc: "Immediate response", gradient: "from-blue-400 to-blue-600", stat: "<1 sec" },
    { icon: Fingerprint, title: "Identity Shield", desc: "Personal protection", gradient: "from-emerald-400 to-emerald-600", stat: "Active" },
@@ -101,7 +101,7 @@
              Real <span className="bg-gradient-to-r from-lavender-500 to-[#18305A] bg-clip-text text-transparent">Results</span>
            </h2>
            <p className="text-lg text-foreground/60 max-w-2xl mx-auto">
-             Join thousands of Ohio families who trust us with their digital safety every day.
+             Join Ohio families who trust us with their digital safety every day.
            </p>
          </motion.div>
  
@@ -139,7 +139,7 @@
                  <div className="flex items-center justify-between">
                    <div>
                      <div className="text-white/90 text-sm font-medium mb-1">Protected Families</div>
-                     <div className="text-white text-3xl font-black" style={{ fontFamily: "'Clash Display', sans-serif" }}>500+</div>
+                     <div className="text-white text-3xl font-black" style={{ fontFamily: "'Clash Display', sans-serif" }}>100+</div>
                    </div>
                    <div className="w-14 h-14 rounded-2xl bg-white/30 backdrop-blur-md flex items-center justify-center">
                      <Heart className="w-7 h-7 text-white" />

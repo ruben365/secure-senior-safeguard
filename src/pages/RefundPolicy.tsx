@@ -2,10 +2,15 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, Clock, XCircle, AlertCircle } from "lucide-react";
+import { SEO } from "@/components/SEO";
 
 function RefundPolicy() {
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Refund Policy"
+        description="Understand refund eligibility, timelines, and the 30-day satisfaction guarantee."
+      />
       <Navigation />
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4">

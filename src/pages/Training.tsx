@@ -515,7 +515,7 @@ function LearnAndTrain() {
             "@type": "EducationalOrganization",
             "name": "InVision Network Training Academy",
             "description": "Comprehensive AI scam protection training for families, seniors, and businesses",
-            "url": "https://invisionnetwork.com/training",
+            "url": "https://invisionnetwork.org/training",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Dayton",
@@ -603,7 +603,7 @@ function LearnAndTrain() {
               <ScrollReveal>
                 <Badge className="mb-4 bg-gradient-to-r from-primary to-accent text-white text-base px-6 py-2 rounded-full">
                   <Heart className="w-4 h-4 mr-2" />
-                  TRUSTED BY 500+ FAMILIES
+                  TRUSTED BY 100+ FAMILIES
                 </Badge>
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent">
                   Why Families Trust Us
@@ -647,7 +647,7 @@ function LearnAndTrain() {
                         <GraduationCap className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <p className="text-3xl font-black text-foreground">500+</p>
+                        <p className="text-3xl font-black text-foreground">100+</p>
                         <p className="text-sm text-muted-foreground">Graduates</p>
                       </div>
                     </div>
@@ -1390,7 +1390,7 @@ function LearnAndTrain() {
                 Sleep Better Tonight
               </h2>
               <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto" style={{ textShadow: '1px 1px 5px rgba(0,0,0,0.5)' }}>
-                Join 500+ families who trust InVision Network for their digital safety
+                Join 100+ families who trust InVision Network for their digital safety
               </p>
               <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center">
                 <Button

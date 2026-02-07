@@ -10,7 +10,7 @@ const features = [{
   description: "Learn to identify and prevent AI-powered scams with our hands-on workshops."
 }, {
   icon: Award,
-  title: "Certified Protection",
+  title: "Proven Protection",
   description: "Industry-recognized security solutions backed by certified cybersecurity professionals."
 }, {
   icon: Shield,

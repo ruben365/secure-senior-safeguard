@@ -130,7 +130,7 @@ const AIAutomation = () => {
         />
         <Navigation />
         
-        <main id="main-content">
+        <main>
           {/* Hero Section with Nature Image */}
           <Hero
             backgroundImages={[

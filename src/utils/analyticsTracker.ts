@@ -1,6 +1,24 @@
 import { supabase } from "@/integrations/supabase/client";
 
 let sessionId: string | null = null;
+const COOKIE_CONSENT_KEY = "invision-cookie-consent";
+const COOKIE_PREFERENCES_KEY = "invision-cookie-preferences";
+
+export const isAnalyticsAllowed = (): boolean => {
+  if (typeof window === "undefined") return false;
+  const consent = localStorage.getItem(COOKIE_CONSENT_KEY);
+  if (!consent) return false;
+
+  const prefsRaw = localStorage.getItem(COOKIE_PREFERENCES_KEY);
+  if (!prefsRaw) return false;
+
+  try {
+    const prefs = JSON.parse(prefsRaw);
+    return !!prefs.analytics;
+  } catch {
+    return false;
+  }
+};
 
 // Generate or retrieve session ID
 export const getSessionId = (): string => {
@@ -31,6 +49,10 @@ export const trackEvent = async ({
   pageUrl,
   pageTitle,
 }: TrackEventParams) => {
+  if (!isAnalyticsAllowed()) {
+    return;
+  }
+
   try {
     // Use AbortController for timeout to prevent hanging requests
     const controller = new AbortController();

@@ -4,15 +4,15 @@ const TrustBadges = () => {
   const badges = [
     {
       icon: Shield,
-      title: "Privacy Certified",
-      description: "100% Privacy-First Protocol",
+      title: "Privacy-First",
+      description: "Privacy-by-design practices",
       emoji: "🔐",
       gradient: "from-primary/20 to-purple-500/20"
     },
     {
       icon: Award,
-      title: "HIPAA Compliant",
-      description: "Healthcare Data Protected",
+      title: "Privacy-Conscious",
+      description: "Sensitive data handled safely",
       emoji: "🏥",
       gradient: "from-blue-500/20 to-cyan-500/20"
     },
@@ -33,7 +33,7 @@ const TrustBadges = () => {
     {
       icon: Lock,
       title: "Secure Platform",
-      description: "Bank-Level Security",
+      description: "Industry-standard security",
       emoji: "🔒",
       gradient: "from-accent/20 to-teal-500/20"
     }
@@ -50,9 +50,9 @@ const TrustBadges = () => {
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-success/10 text-success border border-success/20 rounded-full text-sm font-medium mb-4">
             <CheckCircle className="w-4 h-4" />
-            Verified & Certified
+            Trusted & Verified
           </div>
-          <h2 className="text-3xl font-bold mb-2">Trusted & Certified</h2>
+          <h2 className="text-3xl font-bold mb-2">Trusted & Proven</h2>
           <p className="text-muted-foreground">Your security and privacy are our top priorities</p>
         </div>
         
@@ -95,7 +95,7 @@ const TrustBadges = () => {
           </span>
           <span className="inline-flex items-center gap-1.5">
             <Star className="w-4 h-4 text-amber-500" />
-            5-Star Rated
+            Highly Rated
           </span>
         </div>
       </div>

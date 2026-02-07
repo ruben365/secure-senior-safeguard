@@ -17,7 +17,7 @@ export const TeamShowcase = () => {
               <Shield className="w-8 h-8 text-primary" />
             </div>
             <h3 className="font-semibold text-lg">Security Experts</h3>
-            <p className="text-sm text-muted-foreground">Certified professionals protecting families from digital threats</p>
+            <p className="text-sm text-muted-foreground">Experienced professionals protecting families from digital threats</p>
           </div>
           
           <div className="bg-card rounded-xl p-6 text-center border hover:shadow-lg transition-shadow">

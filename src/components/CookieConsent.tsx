@@ -22,7 +22,7 @@ interface CookiePreferences {
 const COOKIE_CONSENT_KEY = "invision-cookie-consent";
 const COOKIE_PREFERENCES_KEY = "invision-cookie-preferences";
 const PAGE_VISIT_COUNT_KEY = "invision-page-visit-count";
-const VISIT_THRESHOLD = 3; // Show banner after 3 visits
+const VISIT_THRESHOLD = 1; // Show banner on first visit
 
 export function CookieConsent() {
   const [showBanner, setShowBanner] = useState(false);
@@ -79,6 +79,7 @@ export function CookieConsent() {
     localStorage.setItem(COOKIE_PREFERENCES_KEY, JSON.stringify(prefs));
     setPreferences(prefs);
     applyPreferences(prefs);
+    window.dispatchEvent(new Event("cookie-consent-updated"));
   };
 
   const applyPreferences = (prefs: CookiePreferences) => {

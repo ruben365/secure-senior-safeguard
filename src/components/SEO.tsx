@@ -130,13 +130,8 @@ export const PAGE_SEO = {
         "addressCountry": "US"
       },
       "telephone": "(937) 301-8749",
-      "url": "https://invisionnetwork.com",
-      "priceRange": "$$",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "500"
-      }
+      "url": "https://invisionnetwork.org",
+      "priceRange": "$$"
     }
   },
   training: {
@@ -148,7 +143,7 @@ export const PAGE_SEO = {
       "@type": "EducationalOrganization",
       "name": "InVision Network Training Academy",
       "description": "Comprehensive AI scam protection training for families, seniors, and businesses",
-      "url": "https://invisionnetwork.com/training",
+      "url": "https://invisionnetwork.org/training",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Dayton",

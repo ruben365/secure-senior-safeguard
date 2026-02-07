@@ -2,13 +2,15 @@ import { useSectionNavigation } from "@/hooks/useSectionNavigation";
 
 const sections = [
   { id: "hero", label: "Home" },
-  { id: "features", label: "Features" },
-  { id: "about", label: "About" },
-  { id: "services", label: "Services" },
-  { id: "portfolio", label: "Portfolio" },
+  { id: "stats", label: "Stats" },
+  { id: "workshops", label: "Workshops" },
+  { id: "business", label: "Business" },
+  { id: "alerts", label: "Alerts" },
+  { id: "resources", label: "Resources" },
+  { id: "trust", label: "Trust" },
   { id: "process", label: "Process" },
-  { id: "testimonials", label: "Testimonials" },
-  { id: "blog", label: "Blog" },
+  { id: "faq", label: "FAQ" },
+  { id: "quick-links", label: "Quick Links" },
 ];
 
 export const SectionNav = () => {
@@ -22,6 +24,7 @@ export const SectionNav = () => {
           onClick={() => scrollToSection(section.id)}
           className="group relative flex items-center justify-end gap-3"
           aria-label={`Scroll to ${section.label}`}
+          aria-current={activeSection === section.id ? "true" : undefined}
         >
           {/* Label tooltip */}
           <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-sm font-medium text-foreground bg-card/90 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-border/50 shadow-lg whitespace-nowrap">

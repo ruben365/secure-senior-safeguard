@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -18,35 +18,91 @@ import { SEO, PAGE_SEO } from "@/components/SEO";
 import { SectionNav } from "@/components/SectionNav";
 import seniorCoupleActive from "@/assets/senior-couple-active.jpg";
 import { FamilyTrustSection } from "@/components/home/FamilyTrustSection";
-import { LiveSecurityStats } from "@/components/home/LiveSecurityStats";
-import { LiveProtectionStatus } from "@/components/LiveProtectionStatus";
-import { SocialProofTicker } from "@/components/SocialProofTicker";
-import { ScrollProgressIndicator } from "@/components/ScrollProgressIndicator";
+
+const LiveSecurityStats = lazy(() => import("@/components/home/LiveSecurityStats"));
+const LiveProtectionStatus = lazy(() => import("@/components/LiveProtectionStatus"));
+const SocialProofTicker = lazy(() => import("@/components/SocialProofTicker"));
 
 const Index = () => {
   const [scamShieldOpen, setScamShieldOpen] = useState(false);
+  const [enableLiveWidgets, setEnableLiveWidgets] = useState(false);
+  const [enableStats, setEnableStats] = useState(false);
+  const statsRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
+    const enableWidgets = () => setEnableLiveWidgets(true);
+    let idleId: number | ReturnType<typeof setTimeout>;
+
+    if ("requestIdleCallback" in window) {
+      idleId = (window as any).requestIdleCallback(enableWidgets, { timeout: 2000 });
+    } else {
+      idleId = setTimeout(enableWidgets, 1500);
+    }
+
+    return () => {
+      if ("cancelIdleCallback" in window && typeof idleId === "number") {
+        (window as any).cancelIdleCallback(idleId);
+      } else {
+        clearTimeout(idleId as ReturnType<typeof setTimeout>);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const element = statsRef.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setEnableStats(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <PageTransition variant="fade">
       <div className="min-h-screen bg-background">
         <SEO {...PAGE_SEO.home} />
-        <ScrollProgressIndicator />
         <Navigation />
         <SectionNav />
 
         {/* Floating widgets */}
-        <LiveProtectionStatus />
-        <SocialProofTicker />
+        {enableLiveWidgets && (
+          <Suspense fallback={null}>
+            <LiveProtectionStatus />
+          </Suspense>
+        )}
+        {enableLiveWidgets && (
+          <Suspense fallback={null}>
+            <SocialProofTicker />
+          </Suspense>
+        )}
 
-        <main id="main-content">
+        <main>
           {/* Hero Section */}
           <section id="hero">
             <HeroHomepage />
           </section>
 
           {/* Live Security Stats - NEW */}
-          <section id="stats">
-            <LiveSecurityStats />
+          <section id="stats" ref={statsRef}>
+            {enableStats ? (
+              <Suspense fallback={<div className="min-h-[320px]" aria-hidden="true" />}>
+                <LiveSecurityStats />
+              </Suspense>
+            ) : (
+              <div className="min-h-[320px]" aria-hidden="true" />
+            )}
           </section>
 
           {/* Workshops Promo - Learn & Train Introduction */}
@@ -119,7 +175,7 @@ const Index = () => {
               </Button>
             </div>
             <p className="text-white/80 mt-4 text-sm">
-              ✓ 10% Veteran Discount ✓ HIPAA Compliant ✓ 30-Day Money-Back Guarantee
+              ✓ 10% Veteran Discount ✓ Privacy-First Practices ✓ 30-Day Money-Back Guarantee
             </p>
           </CTASection>
 

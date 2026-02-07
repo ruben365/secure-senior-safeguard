@@ -178,7 +178,7 @@ const WebsiteDesign = () => {
         />
         <Navigation />
         
-        <main id="main-content">
+        <main>
           {/* Hero Section - 3D Glassmorphism */}
           <section className="relative py-24 lg:py-36 overflow-hidden min-h-[95vh] flex items-center">
             {/* Premium Background Effects */}

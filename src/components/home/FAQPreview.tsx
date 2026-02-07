@@ -169,7 +169,7 @@ export const FAQPreview = () => {
               Ready to Get Protected?
             </h3>
             <p className="text-white/90 text-xl md:text-2xl max-w-3xl mx-auto mb-10 drop-shadow-md font-medium leading-relaxed">
-              Join thousands of families who trust us with their digital safety. 
+              Join Ohio families who trust us with their digital safety. 
               Start your protection journey today.
             </p>
             <div className="flex flex-col sm:flex-row gap-5 justify-center">

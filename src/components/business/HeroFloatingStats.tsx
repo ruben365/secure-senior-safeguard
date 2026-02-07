@@ -5,7 +5,7 @@ import { Shield, Star, Award, Lock } from "lucide-react";
 const HeroFloatingStats = () => {
   const stats = [
     { icon: Shield, text: "100+ Families Protected", iconBg: "bg-coral-100", iconColor: "text-coral-600" },
-    { icon: Star, text: "4.9/5 Star Rating", iconBg: "bg-amber-100", iconColor: "text-amber-600" },
+    { icon: Star, text: "Client-Reviewed", iconBg: "bg-amber-100", iconColor: "text-amber-600" },
     { icon: Award, text: "Cybersecurity Expert-Founded", iconBg: "bg-violet-100", iconColor: "text-violet-600" },
     { icon: Lock, text: "Privacy-First", iconBg: "bg-sky-100", iconColor: "text-sky-600" },
   ];

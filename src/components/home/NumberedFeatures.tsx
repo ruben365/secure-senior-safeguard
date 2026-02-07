@@ -4,7 +4,7 @@ const features = [
   { num: "01", title: "Expert Training", icon: Shield },
   { num: "02", title: "24/7 Protection", icon: Clock },
   { num: "03", title: "Family Support", icon: Users },
-  { num: "04", title: "Certified Team", icon: Award },
+  { num: "04", title: "Expert Team", icon: Award },
 ];
 
 export const NumberedFeatures = () => {

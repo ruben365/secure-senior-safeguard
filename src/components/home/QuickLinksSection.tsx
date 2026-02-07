@@ -138,7 +138,7 @@ export const QuickLinksSection = () => {
           style={{ animationDelay: '0.4s' }}
         >
           <p className="text-muted-foreground">
-            <span className="font-medium">Ohio-Based</span> • <span className="font-medium">Veteran-Supporting</span> • <span className="font-medium">Trusted by 500+ Families</span>
+            <span className="font-medium">Ohio-Based</span> • <span className="font-medium">Veteran-Supporting</span> • <span className="font-medium">Trusted by 100+ Families</span>
           </p>
         </div>
       </div>

@@ -1,7 +1,6 @@
-const CACHE_NAME = 'invision-network-v5';
-const IMAGE_CACHE = 'invision-images-v3';
+const CACHE_NAME = 'invision-network-v6';
+const IMAGE_CACHE = 'invision-images-v4';
 const STATIC_ASSETS = [
-  '/',
   '/index.html',
   '/favicon.ico',
   '/robots.txt',
@@ -96,19 +95,7 @@ self.addEventListener('fetch', (event) => {
   // HTML navigation: network-first with cache fallback
   if (request.mode === 'navigate') {
     event.respondWith(
-      fetch(request)
-        .then((response) => {
-          const responseClone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put('/', responseClone);
-          });
-          return response;
-        })
-        .catch(() => {
-          return caches.match('/').then((cached) => {
-            return cached || caches.match('/index.html');
-          });
-        })
+      fetch(request).catch(() => caches.match('/index.html'))
     );
     return;
   }

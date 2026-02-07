@@ -2,10 +2,15 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Cookie, Settings, BarChart3, Shield } from "lucide-react";
+import { SEO } from "@/components/SEO";
 
 function CookiePolicy() {
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Cookie Policy"
+        description="Learn how InVision Network uses cookies and how to manage your preferences."
+      />
       <Navigation />
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4">

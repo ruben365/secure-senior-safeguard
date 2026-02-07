@@ -9,7 +9,7 @@ export interface SitemapPage {
   lastmod?: string;
 }
 
-const SITE_URL = "https://invisionnetwork.com";
+const SITE_URL = "https://invisionnetwork.org";
 
 export const SITEMAP_PAGES: SitemapPage[] = [
   // High priority pages
@@ -30,7 +30,6 @@ export const SITEMAP_PAGES: SitemapPage[] = [
   { path: "/services", priority: 0.7, changefreq: "weekly" },
   { path: "/faq", priority: 0.7, changefreq: "monthly" },
   { path: "/articles", priority: 0.7, changefreq: "weekly" },
-  { path: "/safety-vault", priority: 0.7, changefreq: "weekly" },
   { path: "/careers", priority: 0.6, changefreq: "monthly" },
   
   // Legal pages
@@ -41,6 +40,26 @@ export const SITEMAP_PAGES: SitemapPage[] = [
   },
   {
     path: "/terms-of-service",
+    priority: 0.3,
+    changefreq: "yearly",
+  },
+  {
+    path: "/refund-policy",
+    priority: 0.3,
+    changefreq: "yearly",
+  },
+  {
+    path: "/cookie-policy",
+    priority: 0.3,
+    changefreq: "yearly",
+  },
+  {
+    path: "/acceptable-use",
+    priority: 0.3,
+    changefreq: "yearly",
+  },
+  {
+    path: "/disclaimer",
     priority: 0.3,
     changefreq: "yearly",
   },

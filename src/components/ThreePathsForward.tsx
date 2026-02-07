@@ -112,7 +112,7 @@ const ThreePathsForward = () => {
           <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground">
             <span className="inline-flex items-center gap-1.5">
               <Lock className="w-4 h-4 text-success" />
-              Bank-Level Security
+              Industry-Standard Security
             </span>
             <span className="inline-flex items-center gap-1.5">
               <CheckCircle className="w-4 h-4 text-success" />

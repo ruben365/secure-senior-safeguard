@@ -272,8 +272,8 @@ export const LiveSecurityStats = () => {
         >
           {[
             { icon: Globe, text: "Protecting all 88 Ohio counties" },
-            { icon: CheckCircle2, text: "SOC 2 Type II Compliant" },
-            { icon: Shield, text: "Bank-level encryption" },
+            { icon: CheckCircle2, text: "Security-first practices" },
+            { icon: Shield, text: "Industry-standard encryption" },
           ].map((item, i) => (
             <motion.div
               key={i}

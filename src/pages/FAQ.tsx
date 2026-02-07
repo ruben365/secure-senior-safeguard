@@ -185,7 +185,7 @@ const faqs: FAQ[] = [
     id: "bp-5",
     category: "Billing & Pricing",
     question: "Do you offer discounts?",
-    answer: "Yes! Veterans: 10% off everything. Cancer patients: 25% off. Churches/nonprofits: custom pricing. Bundled services: save 15%.",
+    answer: "Yes! Veterans and first responders receive 10% off. Nonprofits and bundled services can request custom pricing.",
   },
   
   // Technical Support
@@ -251,7 +251,7 @@ const faqs: FAQ[] = [
     id: "ps-1",
     category: "Privacy & Security",
     question: "How do you protect my personal information?",
-    answer: "We use bank-level encryption (256-bit SSL/TLS) and never store sensitive data. All communications are encrypted end-to-end. We're GDPR compliant and SOC 2 certified.",
+    answer: "We use industry-standard encryption (TLS) and never sell your data. Sensitive details are handled with privacy-by-design practices and access controls.",
   },
   {
     id: "ps-2",
@@ -269,7 +269,7 @@ const faqs: FAQ[] = [
     id: "ps-4",
     category: "Privacy & Security",
     question: "Can I delete my data?",
-    answer: "Yes, you can request complete data deletion at any time. We'll permanently remove all your personal information within 30 days, as required by GDPR.",
+    answer: "Yes. You can request complete data deletion at any time. We aim to permanently remove personal information within 30 days.",
   },
   {
     id: "ps-5",
@@ -283,7 +283,7 @@ const faqs: FAQ[] = [
     id: "vs-1",
     category: "Veterans & Seniors",
     question: "Do you offer discounts for veterans or seniors?",
-    answer: "Yes! We offer 20% off all services for veterans, active military, and seniors 65+. Contact us with proof of service or age to apply your discount.",
+    answer: "Yes! We offer 10% off for veterans and first responders. Contact us with proof of service to apply your discount.",
   },
   {
     id: "vs-2",
@@ -371,7 +371,7 @@ export default function FAQ() {
         />
         <Navigation />
 
-        <main id="main-content">
+        <main>
           {/* Hero wrapper for floating stats */}
           <div className="relative">
             <Hero

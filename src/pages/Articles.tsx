@@ -12,6 +12,7 @@ import heroResourcesNew from "@/assets/hero-resources-new.jpg";
 import heroResources from "@/assets/hero-resources.jpg";
 import heroResourcesMarketplace from "@/assets/hero-resources-marketplace.jpg";
 import { useArticles } from "@/hooks/useArticles";
+import { SEO } from "@/components/SEO";
 
 function Articles() {
   const [page, setPage] = useState(0);
@@ -31,6 +32,18 @@ function Articles() {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Scam Prevention Articles & News"
+        description="Read practical guidance on scam prevention, AI threats, and digital safety. Updated articles and resources from InVision Network."
+        keywords="scam prevention articles, AI scam news, digital safety guides, cybersecurity tips"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "name": "Scam Prevention Articles & News",
+          "description": "Practical guidance on scam prevention, AI threats, and digital safety.",
+          "url": "https://invisionnetwork.org/articles"
+        }}
+      />
       <Navigation />
 
       <Hero
@@ -74,6 +87,8 @@ function Articles() {
                       src={article.featured_image_url}
                       alt={article.title}
                       className="w-full h-64 object-cover"
+                      loading="lazy"
+                      decoding="async"
                     />
                   )}
                   <div className="p-8">

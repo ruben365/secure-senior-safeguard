@@ -204,7 +204,7 @@ export const HomeIntroSection = () => {
               <h3 className="text-lg md:text-xl font-bold">Your Security is Our Priority</h3>
             </div>
             <p className="text-sm text-muted-foreground max-w-xl mx-auto mb-4">
-              Bank-level encryption, trained cybersecurity professionals, and your complete trust.
+              Industry-standard encryption, trained cybersecurity professionals, and your complete trust.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Button asChild size="sm" className="gap-1.5">

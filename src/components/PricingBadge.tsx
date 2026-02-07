@@ -137,11 +137,11 @@ export function SecurityBadges() {
     <div className="flex flex-wrap items-center justify-center gap-3 mt-4">
       <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/60 backdrop-blur-xl border border-white/40 rounded-full text-xs shadow-sm">
         <Lock className="w-3.5 h-3.5 text-primary" />
-        <span className="text-primary font-medium">256-bit SSL</span>
+        <span className="text-primary font-medium">TLS Encryption</span>
       </div>
       <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/60 backdrop-blur-xl border border-white/40 rounded-full text-xs shadow-sm">
         <Shield className="w-3.5 h-3.5 text-success" />
-        <span className="text-success font-medium">HIPAA Compliant</span>
+        <span className="text-success font-medium">Privacy-First</span>
       </div>
       <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/60 backdrop-blur-xl border border-white/40 rounded-full text-xs shadow-sm">
         <Users className="w-3.5 h-3.5 text-accent" />

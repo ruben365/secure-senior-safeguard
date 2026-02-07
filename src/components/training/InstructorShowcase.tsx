@@ -181,7 +181,7 @@ export const InstructorShowcase = () => {
           <ScrollReveal delay={500}>
             <div className="mt-10 text-center">
               <p className="text-sm text-muted-foreground">
-                All instructors are background-checked and certified in their specialties. 
+                All instructors are vetted and experienced in their specialties. 
                 <br className="hidden md:block" />
                 <span className="text-primary font-medium">Combined experience: 80+ years • Students helped: 140,000+</span>
               </p>

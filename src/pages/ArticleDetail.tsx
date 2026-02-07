@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { useArticleBySlug, useFeaturedArticles } from "@/hooks/useArticles";
@@ -7,12 +7,12 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Calendar, Clock, ArrowLeft, ArrowRight, Eye, Share2 } from "lucide-react";
+import { Calendar, ArrowLeft, ArrowRight, Eye, Share2 } from "lucide-react";
 import { motion } from "framer-motion";
+import { SEO } from "@/components/SEO";
 
 function ArticleDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
   const { data: article, isLoading, error } = useArticleBySlug(slug || "");
   const { data: relatedArticles } = useFeaturedArticles(3);
 
@@ -35,6 +35,7 @@ function ArticleDetail() {
   if (isLoading) {
     return (
       <div className="min-h-screen">
+        <SEO title="Loading Article" description="Loading article content." noindex />
         <Navigation />
         <div className="container mx-auto px-4 py-16 max-w-4xl">
           <Skeleton className="h-8 w-32 mb-4" />
@@ -55,6 +56,7 @@ function ArticleDetail() {
   if (error || !article) {
     return (
       <div className="min-h-screen">
+        <SEO title="Article Not Found" description="The article you're looking for doesn't exist or has been removed." noindex />
         <Navigation />
         <div className="container mx-auto px-4 py-16 text-center">
           <h1 className="text-4xl font-bold mb-4">Article Not Found</h1>
@@ -75,9 +77,36 @@ function ArticleDetail() {
 
   // Filter out current article from related
   const otherArticles = relatedArticles?.filter(a => a.id !== article.id).slice(0, 2);
+  const articleUrl = `https://invisionnetwork.org/articles/${article.slug}`;
+  const articleDescription = article.seo_description || article.excerpt || "Read the latest scam prevention guidance from InVision Network.";
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title={article.seo_title || article.title}
+        description={articleDescription}
+        image={article.featured_image_url || undefined}
+        type="article"
+        canonical={articleUrl}
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": articleUrl,
+          "headline": article.seo_title || article.title,
+          "description": articleDescription,
+          "image": article.featured_image_url ? [article.featured_image_url] : undefined,
+          "datePublished": article.published_at || article.created_at || undefined,
+          "dateModified": article.updated_at || article.published_at || article.created_at || undefined,
+          "publisher": {
+            "@type": "Organization",
+            "name": "InVision Network",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://invisionnetwork.org/favicon.png"
+            }
+          }
+        }}
+      />
       <Navigation />
 
       <article className="container mx-auto px-4 py-16 max-w-4xl">
@@ -174,28 +203,33 @@ function ArticleDetail() {
             <h2 className="text-2xl font-bold mb-8">Related Articles</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               {otherArticles.map((related) => (
-                <Card
+                <Link
                   key={related.id}
-                  className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
-                  onClick={() => navigate(`/articles/${related.slug}`)}
+                  to={`/articles/${related.slug}`}
+                  className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-2xl"
+                  aria-label={`Read article: ${related.title}`}
                 >
-                  {related.featured_image_url && (
-                    <img
-                      src={related.featured_image_url}
-                      alt={related.title}
-                      className="w-full h-48 object-cover"
-                    />
-                  )}
-                  <div className="p-6">
-                    <Badge variant="secondary" className="mb-2">
-                      {related.category}
-                    </Badge>
-                    <h3 className="text-lg font-semibold mb-2">{related.title}</h3>
-                    <p className="text-sm text-muted-foreground line-clamp-2">
-                      {related.excerpt}
-                    </p>
-                  </div>
-                </Card>
+                  <Card className="overflow-hidden hover:shadow-lg transition-shadow">
+                    {related.featured_image_url && (
+                      <img
+                        src={related.featured_image_url}
+                        alt={related.title}
+                        className="w-full h-48 object-cover"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    )}
+                    <div className="p-6">
+                      <Badge variant="secondary" className="mb-2">
+                        {related.category}
+                      </Badge>
+                      <h3 className="text-lg font-semibold mb-2">{related.title}</h3>
+                      <p className="text-sm text-muted-foreground line-clamp-2">
+                        {related.excerpt}
+                      </p>
+                    </div>
+                  </Card>
+                </Link>
               ))}
             </div>
           </div>

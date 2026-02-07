@@ -2,10 +2,15 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { AlertTriangle, Shield, Phone, ExternalLink } from "lucide-react";
+import { SEO } from "@/components/SEO";
 
 function Disclaimer() {
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Disclaimer"
+        description="Important information about the nature and limitations of InVision Network services."
+      />
       <Navigation />
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4">

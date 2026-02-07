@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import ReadingProgressBar from "@/components/ReadingProgressBar";
+import { SEO } from "@/components/SEO";
 
 function PrivacyPolicy() {
   const scrollToSection = (id: string) => {
@@ -12,6 +13,10 @@ function PrivacyPolicy() {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Privacy Policy"
+        description="Learn how InVision Network collects, uses, and protects your information."
+      />
       <ReadingProgressBar />
       <Navigation />
       <section className="py-24 bg-background">
