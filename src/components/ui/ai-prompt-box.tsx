@@ -9,8 +9,8 @@ import {
   StopCircle,
   Mic,
   Globe,
-  BrainCog,
-  FolderCode,
+  Settings,
+  Image as ImageIcon,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -478,9 +478,16 @@ interface PromptInputBoxProps {
   isLoading?: boolean;
   placeholder?: string;
   className?: string;
+  variant?: "default" | "minimal";
 }
 export const PromptInputBox = React.forwardRef((props: PromptInputBoxProps, ref: React.Ref<HTMLDivElement>) => {
-  const { onSend = () => {}, isLoading = false, placeholder = "Type your message here...", className } = props;
+  const {
+    onSend = () => {},
+    isLoading = false,
+    placeholder = "Type your message here...",
+    className,
+    variant = "default",
+  } = props;
   const [input, setInput] = React.useState("");
   const [files, setFiles] = React.useState<File[]>([]);
   const [filePreviews, setFilePreviews] = React.useState<{ [key: string]: string }>({});
@@ -493,6 +500,7 @@ export const PromptInputBox = React.forwardRef((props: PromptInputBoxProps, ref:
   const promptBoxRef = React.useRef<HTMLDivElement>(null);
 
   usePromptBoxStyles();
+  const isMinimal = variant === "minimal";
 
   const handleToggleChange = (value: string) => {
     if (value === "search") {
@@ -593,6 +601,23 @@ export const PromptInputBox = React.forwardRef((props: PromptInputBoxProps, ref:
   };
 
   const hasContent = input.trim() !== "" || files.length > 0;
+  const containerClassName = cn(
+    "w-full transition-all duration-300 ease-in-out",
+    isMinimal
+      ? "rounded-[26px] bg-[#1d1e22] border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.35)] p-3"
+      : "bg-[#1F2023] border-[#444444] shadow-[0_8px_30px_rgba(0,0,0,0.24)]",
+    isRecording && "border-red-500/70",
+    className
+  );
+  const iconButtonClass = cn(
+    "flex h-8 w-8 items-center justify-center rounded-full transition-colors",
+    isMinimal
+      ? "text-white/70 hover:text-white hover:bg-white/10"
+      : "text-[#9CA3AF] hover:bg-gray-600/30 hover:text-[#D1D5DB]"
+  );
+  const toggleButtonBase = isMinimal
+    ? "rounded-full transition-all flex items-center gap-1 px-2 py-1 border h-8 border-transparent text-white/70 hover:text-white"
+    : "rounded-full transition-all flex items-center gap-1 px-2 py-1 border h-8";
 
   return (
     <>
@@ -601,11 +626,7 @@ export const PromptInputBox = React.forwardRef((props: PromptInputBoxProps, ref:
         onValueChange={setInput}
         isLoading={isLoading}
         onSubmit={handleSubmit}
-        className={cn(
-          "w-full bg-[#1F2023] border-[#444444] shadow-[0_8px_30px_rgba(0,0,0,0.24)] transition-all duration-300 ease-in-out",
-          isRecording && "border-red-500/70",
-          className
-        )}
+        className={containerClassName}
         disabled={isLoading || isRecording}
         ref={ref || promptBoxRef}
         onDragOver={handleDragOver}
@@ -658,7 +679,7 @@ export const PromptInputBox = React.forwardRef((props: PromptInputBoxProps, ref:
                 ? "Create on canvas..."
                 : placeholder
             }
-            className="text-base"
+            className={cn("text-base", isMinimal && "text-[15px] text-white/90 placeholder:text-white/60")}
           />
         </div>
 
@@ -678,7 +699,7 @@ export const PromptInputBox = React.forwardRef((props: PromptInputBoxProps, ref:
             <PromptInputAction tooltip="Upload image">
               <button
                 onClick={() => uploadInputRef.current?.click()}
-                className="flex h-8 w-8 text-[#9CA3AF] cursor-pointer items-center justify-center rounded-full transition-colors hover:bg-gray-600/30 hover:text-[#D1D5DB]"
+                className={iconButtonClass}
                 disabled={isRecording}
               >
                 <Paperclip className="h-5 w-5 transition-colors" />
@@ -700,9 +721,11 @@ export const PromptInputBox = React.forwardRef((props: PromptInputBoxProps, ref:
                 type="button"
                 onClick={() => handleToggleChange("search")}
                 className={cn(
-                  "rounded-full transition-all flex items-center gap-1 px-2 py-1 border h-8",
+                  toggleButtonBase,
                   showSearch
                     ? "bg-[#1EAEDB]/15 border-[#1EAEDB] text-[#1EAEDB]"
+                    : isMinimal
+                    ? "bg-transparent border-transparent"
                     : "bg-transparent border-transparent text-[#9CA3AF] hover:text-[#D1D5DB]"
                 )}
               >
@@ -715,30 +738,34 @@ export const PromptInputBox = React.forwardRef((props: PromptInputBoxProps, ref:
                     <Globe className={cn("w-4 h-4", showSearch ? "text-[#1EAEDB]" : "text-inherit")} />
                   </motion.div>
                 </div>
-                <AnimatePresence>
-                  {showSearch && (
-                    <motion.span
-                      initial={{ width: 0, opacity: 0 }}
-                      animate={{ width: "auto", opacity: 1 }}
-                      exit={{ width: 0, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="text-xs overflow-hidden whitespace-nowrap text-[#1EAEDB] flex-shrink-0"
-                    >
-                      Search
-                    </motion.span>
-                  )}
-                </AnimatePresence>
+                {!isMinimal && (
+                  <AnimatePresence>
+                    {showSearch && (
+                      <motion.span
+                        initial={{ width: 0, opacity: 0 }}
+                        animate={{ width: "auto", opacity: 1 }}
+                        exit={{ width: 0, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="text-xs overflow-hidden whitespace-nowrap text-[#1EAEDB] flex-shrink-0"
+                      >
+                        Search
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                )}
               </button>
 
-              <CustomDivider />
+              {isMinimal ? <span className="h-4 w-px bg-white/10 mx-2" /> : <CustomDivider />}
 
               <button
                 type="button"
                 onClick={() => handleToggleChange("think")}
                 className={cn(
-                  "rounded-full transition-all flex items-center gap-1 px-2 py-1 border h-8",
+                  toggleButtonBase,
                   showThink
                     ? "bg-[#8B5CF6]/15 border-[#8B5CF6] text-[#8B5CF6]"
+                    : isMinimal
+                    ? "bg-transparent border-transparent"
                     : "bg-transparent border-transparent text-[#9CA3AF] hover:text-[#D1D5DB]"
                 )}
               >
@@ -748,33 +775,37 @@ export const PromptInputBox = React.forwardRef((props: PromptInputBoxProps, ref:
                     whileHover={{ rotate: showThink ? 360 : 15, scale: 1.1, transition: { type: "spring", stiffness: 300, damping: 10 } }}
                     transition={{ type: "spring", stiffness: 260, damping: 25 }}
                   >
-                    <BrainCog className={cn("w-4 h-4", showThink ? "text-[#8B5CF6]" : "text-inherit")} />
+                    <Settings className={cn("w-4 h-4", showThink ? "text-[#8B5CF6]" : "text-inherit")} />
                   </motion.div>
                 </div>
-                <AnimatePresence>
-                  {showThink && (
-                    <motion.span
-                      initial={{ width: 0, opacity: 0 }}
-                      animate={{ width: "auto", opacity: 1 }}
-                      exit={{ width: 0, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="text-xs overflow-hidden whitespace-nowrap text-[#8B5CF6] flex-shrink-0"
-                    >
-                      Think
-                    </motion.span>
-                  )}
-                </AnimatePresence>
+                {!isMinimal && (
+                  <AnimatePresence>
+                    {showThink && (
+                      <motion.span
+                        initial={{ width: 0, opacity: 0 }}
+                        animate={{ width: "auto", opacity: 1 }}
+                        exit={{ width: 0, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="text-xs overflow-hidden whitespace-nowrap text-[#8B5CF6] flex-shrink-0"
+                      >
+                        Think
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                )}
               </button>
 
-              <CustomDivider />
+              {isMinimal ? <span className="h-4 w-px bg-white/10 mx-2" /> : <CustomDivider />}
 
               <button
                 type="button"
                 onClick={handleCanvasToggle}
                 className={cn(
-                  "rounded-full transition-all flex items-center gap-1 px-2 py-1 border h-8",
+                  toggleButtonBase,
                   showCanvas
                     ? "bg-[#F97316]/15 border-[#F97316] text-[#F97316]"
+                    : isMinimal
+                    ? "bg-transparent border-transparent"
                     : "bg-transparent border-transparent text-[#9CA3AF] hover:text-[#D1D5DB]"
                 )}
               >
@@ -784,22 +815,24 @@ export const PromptInputBox = React.forwardRef((props: PromptInputBoxProps, ref:
                     whileHover={{ rotate: showCanvas ? 360 : 15, scale: 1.1, transition: { type: "spring", stiffness: 300, damping: 10 } }}
                     transition={{ type: "spring", stiffness: 260, damping: 25 }}
                   >
-                    <FolderCode className={cn("w-4 h-4", showCanvas ? "text-[#F97316]" : "text-inherit")} />
+                    <ImageIcon className={cn("w-4 h-4", showCanvas ? "text-[#F97316]" : "text-inherit")} />
                   </motion.div>
                 </div>
-                <AnimatePresence>
-                  {showCanvas && (
-                    <motion.span
-                      initial={{ width: 0, opacity: 0 }}
-                      animate={{ width: "auto", opacity: 1 }}
-                      exit={{ width: 0, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="text-xs overflow-hidden whitespace-nowrap text-[#F97316] flex-shrink-0"
-                    >
-                      Canvas
-                    </motion.span>
-                  )}
-                </AnimatePresence>
+                {!isMinimal && (
+                  <AnimatePresence>
+                    {showCanvas && (
+                      <motion.span
+                        initial={{ width: 0, opacity: 0 }}
+                        animate={{ width: "auto", opacity: 1 }}
+                        exit={{ width: 0, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="text-xs overflow-hidden whitespace-nowrap text-[#F97316] flex-shrink-0"
+                      >
+                        Canvas
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                )}
               </button>
             </div>
           </div>
@@ -823,7 +856,9 @@ export const PromptInputBox = React.forwardRef((props: PromptInputBoxProps, ref:
                 isRecording
                   ? "bg-transparent hover:bg-gray-600/30 text-red-500 hover:text-red-400"
                   : hasContent
-                  ? "bg-white hover:bg-white/80 text-[#1F2023]"
+                  ? "bg-white hover:bg-white/80 text-[#1F2023] shadow-md"
+                  : isMinimal
+                  ? "bg-white hover:bg-white/90 text-[#1F2023] shadow-md"
                   : "bg-transparent hover:bg-gray-600/30 text-[#9CA3AF] hover:text-[#D1D5DB]"
               )}
               onClick={() => {
@@ -840,7 +875,7 @@ export const PromptInputBox = React.forwardRef((props: PromptInputBoxProps, ref:
               ) : hasContent ? (
                 <ArrowUp className="h-4 w-4 text-[#1F2023]" />
               ) : (
-                <Mic className="h-5 w-5 text-[#1F2023] transition-colors" />
+                <Mic className={cn("h-5 w-5 transition-colors", isMinimal ? "text-[#1F2023]" : "text-[#1F2023]")} />
               )}
             </Button>
           </PromptInputAction>
