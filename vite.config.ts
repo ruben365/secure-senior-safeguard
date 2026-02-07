@@ -59,6 +59,7 @@ export default defineConfig(({ mode, command }) => ({
           "/contact",
           "/careers",
           "/faq",
+          "/application-pending",
           "/privacy-policy",
           "/terms-of-service",
           "/refund-policy",
@@ -68,10 +69,12 @@ export default defineConfig(({ mode, command }) => ({
           "/maintenance",
           "/payment-success",
           "/payment-canceled",
+          // Auth/dynamic pages intentionally excluded:
+          // /auth, /login, /signup, /reset-password, /portal/*, /admin/*, /articles/:slug
         ],
         renderer: "@prerenderer/renderer-puppeteer",
         rendererOptions: {
-          renderAfterTime: 2000,
+          renderAfterTime: 2500,
         },
       }),
   ].filter(Boolean),
