@@ -1,15 +1,50 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { PageTransition } from "@/components/PageTransition";
-import { PromptInputBox } from "@/components/ui/ai-prompt-box";
-import { GuestScannerSection } from "@/components/training/GuestScannerSection";
+import { PaymentDialog } from "@/components/scanner/PaymentDialog";
+import { ScanResults } from "@/components/scanner/ScanResults";
+import { SmartScanConsole } from "@/components/training/SmartScanConsole";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
 import { usePrerenderReady } from "@/contexts/PrerenderContext";
+import { useGuestScanner } from "@/hooks/useGuestScanner";
 import { SITE } from "@/config/site";
-import { Bookmark, Code2, LayoutGrid, Moon, MoreHorizontal, RefreshCw } from "lucide-react";
+import { Bookmark, Code2, LayoutGrid, Loader2, Moon, MoreHorizontal, RefreshCw } from "lucide-react";
 
 export default function TrainingAiAnalysis() {
   usePrerenderReady(true);
+  const [paymentOpen, setPaymentOpen] = useState(false);
+
+  const {
+    file,
+    cost,
+    analysis,
+    status,
+    error,
+    progress,
+    expiresAt,
+    prepareFile,
+    clearFile,
+    startScan,
+    restartScan,
+    markExpired,
+  } = useGuestScanner();
+
+  const isProcessing = status === "uploading" || status === "analyzing";
+  const canPay = file && status === "ready";
+
+  const handlePaymentSuccess = (payload: { scanId: string; filePath: string; paymentIntentId: string }) => {
+    setPaymentOpen(false);
+    startScan({ scanId: payload.scanId, filePath: payload.filePath });
+  };
+
+  const handleRequestPayment = () => {
+    if (!canPay || isProcessing) return;
+    setPaymentOpen(true);
+  };
 
   return (
     <PageTransition variant="fade">
@@ -71,21 +106,75 @@ export default function TrainingAiAnalysis() {
               </div>
             </div>
 
-            <div className="w-full max-w-xl">
-              <PromptInputBox
-                variant="minimal"
-                placeholder="Type your message here..."
-                onSend={(message, files) => console.log("AI prompt:", message, files)}
+            <div className="w-full max-w-4xl">
+              <SmartScanConsole
+                file={file}
+                status={status}
+                onFileSelect={prepareFile}
+                onClearFile={clearFile}
+                onRequestPayment={handleRequestPayment}
+                onSendText={(message) => console.log("AI prompt:", message)}
               />
             </div>
           </div>
 
           <div className="bg-background">
-            <GuestScannerSection />
+            <section className="py-12">
+              <div id="guest-scanner" aria-hidden="true" />
+              <div className="container mx-auto px-6">
+                <div className="space-y-6">
+                  {isProcessing && (
+                    <Card className="premium-3d-card premium-shadow-depth max-w-5xl mx-auto p-6 glass-light">
+                      <div className="flex items-center gap-3 mb-4">
+                        <Loader2 className="w-5 h-5 text-primary animate-spin" />
+                        <div>
+                          <p className="font-semibold text-foreground">Analyzing your file...</p>
+                          <p className="text-sm text-muted-foreground">This usually takes less than 60 seconds.</p>
+                        </div>
+                      </div>
+                      <Progress value={progress} className="h-2" />
+                    </Card>
+                  )}
+
+                  {error && (
+                    <Card className="premium-3d-card premium-shadow-depth max-w-5xl mx-auto p-6 border border-destructive/30 bg-destructive/5 space-y-3">
+                      <p className="text-sm text-destructive">{error}</p>
+                      <Button variant="outline" onClick={restartScan} className="w-fit">Try again</Button>
+                    </Card>
+                  )}
+
+                  {analysis && file && status === "completed" && expiresAt && (
+                    <div className="max-w-5xl mx-auto">
+                      <ScanResults
+                        analysis={analysis}
+                        file={file}
+                        expiresAt={expiresAt}
+                        onExpired={markExpired}
+                        onRestart={restartScan}
+                      />
+                    </div>
+                  )}
+
+                  {status === "expired" && (
+                    <Card className="premium-3d-card premium-shadow-depth max-w-5xl mx-auto p-6 border border-emerald-200 bg-emerald-50/60 text-emerald-700">
+                      Your data has been permanently deleted. We do not store your files or results.
+                    </Card>
+                  )}
+                </div>
+              </div>
+            </section>
             <Footer />
           </div>
         </main>
       </div>
+
+      <PaymentDialog
+        open={paymentOpen}
+        onOpenChange={setPaymentOpen}
+        file={file}
+        amount={cost}
+        onPaymentSuccess={handlePaymentSuccess}
+      />
     </PageTransition>
   );
 }
