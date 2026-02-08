@@ -117,8 +117,10 @@ export default function TrainingAiAnalysis() {
     setDarkMode(next);
     document.documentElement.classList.toggle("dark", next);
     const bg = next ? "#1a1a2e" : "#B8B9D1";
+    const textColor = next ? "#e2e8f0" : "";
     document.body.style.backgroundColor = bg;
     document.documentElement.style.backgroundColor = bg;
+    document.body.style.color = textColor;
   };
   const handleRefresh = () => {
     window.location.reload();
@@ -127,7 +129,7 @@ export default function TrainingAiAnalysis() {
     setShowBookmarks(!showBookmarks);
   };
   return <PageTransition variant="fade">
-      <div className="min-h-screen bg-[#B8B9D1]">
+      <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-[#1a1a2e] text-slate-200' : 'bg-[#B8B9D1] text-foreground'}`}>
         <SEO title="AI Analysis & Secure File Scan" description="Run instant AI analysis on suspicious files, messages, and screenshots. Secure guest scan workflow with automatic deletion in 10 minutes." keywords="AI analysis, file scan, scam detection, document scanning, secure analysis" structuredData={{
         "@context": "https://schema.org",
         "@type": "WebPage",
@@ -141,7 +143,7 @@ export default function TrainingAiAnalysis() {
         }
       }} />
 
-        <main className="relative min-h-screen overflow-hidden flex flex-col bg-[#B8B9D1]">
+        <main className={`relative min-h-screen overflow-hidden flex flex-col transition-colors duration-300 ${darkMode ? 'bg-[#1a1a2e]' : 'bg-[#B8B9D1]'}`}>
 
           <div className="relative flex-1 flex flex-col px-6 py-6">
             {/* Top Navigation Bar */}
@@ -214,7 +216,7 @@ export default function TrainingAiAnalysis() {
             <AIFooter />
           </div>
 
-          <div className="bg-[#B8B9D1]">
+          <div className={`transition-colors duration-300 ${darkMode ? 'bg-[#1a1a2e]' : 'bg-[#B8B9D1]'}`}>
             <section className="py-16">
               <div id="guest-scanner" aria-hidden="true" />
               <div className="container mx-auto px-6">
