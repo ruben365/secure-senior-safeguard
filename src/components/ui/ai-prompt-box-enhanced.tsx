@@ -1,7 +1,7 @@
 import React from "react";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { ArrowUp, Paperclip, Square, X, StopCircle, Mic, MicOff, Globe, Settings, ShieldCheck, Folder } from "lucide-react";
+import { ArrowUp, Paperclip, Square, X, StopCircle, Mic, MicOff, Globe, Settings, ShieldCheck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
@@ -511,13 +511,6 @@ export const EnhancedPromptInputBox = React.forwardRef<HTMLDivElement, EnhancedP
                 </button>
               </PromptInputAction>
 
-              {/* Folder */}
-              <PromptInputAction tooltip="Browse files">
-                <button type="button" className="text-white/60 hover:text-white/90 hover:bg-white/10 transition h-8 w-8 rounded-full flex items-center justify-center" onClick={() => uploadInputRef.current?.click()} disabled={isRecording}>
-                  <Folder className="h-[18px] w-[18px]" />
-                </button>
-              </PromptInputAction>
-
               {/* Web Search */}
               <PromptInputAction tooltip="Web search (coming soon)">
                 <button type="button" className="text-white/60 hover:text-white/90 hover:bg-white/10 transition h-8 w-8 rounded-full flex items-center justify-center" onClick={() => toast.info("Web search feature coming soon!")} disabled={isRecording}>
@@ -533,11 +526,11 @@ export const EnhancedPromptInputBox = React.forwardRef<HTMLDivElement, EnhancedP
               </PromptInputAction>
             </div>
 
-            <PromptInputAction tooltip={isLoading ? "Stop generation" : isRecording ? "Stop recording" : hasFile && canAnalyze ? "Scan file" : hasContent ? "Send message" : "Voice message"}>
+            <PromptInputAction tooltip={isLoading ? "Stop generation" : isRecording ? "Stop recording" : hasFile && canAnalyze ? "Scan file" : hasContent ? "Send message" : "Send"}>
               <button type="button" onClick={() => {
-            if (isRecording) setIsRecording(false);else if (hasContent) handleSubmit();else setIsRecording(true);
-          }} disabled={isLoading && !hasContent} className={cn("h-9 w-9 rounded-full transition-all duration-200 flex items-center justify-center", isRecording ? "bg-transparent hover:bg-white/10 text-red-500 hover:text-red-400" : hasContent ? "bg-[#4ADE80] text-[#121212] shadow-[0_0_18px_rgba(74,222,128,0.55)]" : "bg-transparent hover:bg-white/10 text-white/60 hover:text-white/90")}>
-                {isLoading ? <Square className="h-4 w-4 fill-current animate-pulse" /> : isRecording ? <StopCircle className="h-5 w-5" /> : hasFile && canAnalyze ? <ShieldCheck className="h-4 w-4" /> : hasContent ? <ArrowUp className="h-4 w-4" /> : <Mic className="h-5 w-5" />}
+            if (isRecording) setIsRecording(false);else if (hasContent) handleSubmit();
+          }} disabled={(isLoading && !hasContent) || !hasContent} className={cn("h-9 w-9 rounded-full transition-all duration-200 flex items-center justify-center", isRecording ? "bg-transparent hover:bg-white/10 text-red-500 hover:text-red-400" : hasContent ? "bg-[#4ADE80] text-[#121212] shadow-[0_0_18px_rgba(74,222,128,0.55)]" : "bg-transparent text-white/30 cursor-not-allowed")}>
+                {isLoading ? <Square className="h-4 w-4 fill-current animate-pulse" /> : isRecording ? <StopCircle className="h-5 w-5" /> : hasFile && canAnalyze ? <ShieldCheck className="h-4 w-4" /> : <ArrowUp className="h-4 w-4" />}
               </button>
             </PromptInputAction>
           </PromptInputActions>
