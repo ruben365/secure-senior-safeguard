@@ -71,7 +71,7 @@ export default function TrainingAiAnalysis() {
           <div className="absolute inset-0 bg-[linear-gradient(180deg,#b9c8ea_0%,#c9c3e3_30%,#d8b8d6_55%,#e5b7b4_70%,#f0b36e_85%,#e59f5a_100%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(235,134,60,0.45)_0%,rgba(0,0,0,0)_65%)]" />
 
-          <div className="relative min-h-[80vh] flex items-center justify-center px-6">
+          <div className="relative min-h-[88vh] flex items-center justify-center px-8">
             <div className="absolute top-6 left-6 flex items-center gap-3">
               <div className="flex items-center gap-2 rounded-full bg-black/45 backdrop-blur-md border border-white/10 px-3 py-2 shadow-xl">
                 <button className="h-8 w-8 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 transition">
@@ -106,7 +106,7 @@ export default function TrainingAiAnalysis() {
               </div>
             </div>
 
-            <div className="w-full max-w-4xl">
+            <div className="w-full max-w-6xl">
               <SmartScanConsole
                 file={file}
                 status={status}
@@ -119,12 +119,12 @@ export default function TrainingAiAnalysis() {
           </div>
 
           <div className="bg-background">
-            <section className="py-12">
+            <section className="py-16">
               <div id="guest-scanner" aria-hidden="true" />
               <div className="container mx-auto px-6">
                 <div className="space-y-6">
                   {isProcessing && (
-                    <Card className="premium-3d-card premium-shadow-depth max-w-5xl mx-auto p-6 glass-light">
+                    <Card className="premium-3d-card premium-shadow-depth max-w-6xl mx-auto p-6 glass-light">
                       <div className="flex items-center gap-3 mb-4">
                         <Loader2 className="w-5 h-5 text-primary animate-spin" />
                         <div>
@@ -137,14 +137,14 @@ export default function TrainingAiAnalysis() {
                   )}
 
                   {error && (
-                    <Card className="premium-3d-card premium-shadow-depth max-w-5xl mx-auto p-6 border border-destructive/30 bg-destructive/5 space-y-3">
+                    <Card className="premium-3d-card premium-shadow-depth max-w-6xl mx-auto p-6 border border-destructive/30 bg-destructive/5 space-y-3">
                       <p className="text-sm text-destructive">{error}</p>
                       <Button variant="outline" onClick={restartScan} className="w-fit">Try again</Button>
                     </Card>
                   )}
 
                   {analysis && file && status === "completed" && expiresAt && (
-                    <div className="max-w-5xl mx-auto">
+                    <div className="max-w-6xl mx-auto">
                       <ScanResults
                         analysis={analysis}
                         file={file}
@@ -156,7 +156,7 @@ export default function TrainingAiAnalysis() {
                   )}
 
                   {status === "expired" && (
-                    <Card className="premium-3d-card premium-shadow-depth max-w-5xl mx-auto p-6 border border-emerald-200 bg-emerald-50/60 text-emerald-700">
+                    <Card className="premium-3d-card premium-shadow-depth max-w-6xl mx-auto p-6 border border-emerald-200 bg-emerald-50/60 text-emerald-700">
                       Your data has been permanently deleted. We do not store your files or results.
                     </Card>
                   )}
