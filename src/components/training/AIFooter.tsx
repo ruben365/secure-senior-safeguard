@@ -1,0 +1,56 @@
+import { motion } from "framer-motion";
+
+export const AIFooter = () => {
+  return (
+    <motion.footer
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.2 }}
+      className="relative w-full py-6 px-6 mt-auto"
+    >
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
+          {/* Anthropic */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-black/20 backdrop-blur-sm border border-white/10"
+          >
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center">
+                <span className="text-white text-xs font-bold">A</span>
+              </div>
+              <span className="text-sm font-medium text-white/80">
+                Powered by <span className="text-white font-semibold">Anthropic</span>
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Separator */}
+          <div className="hidden sm:block w-px h-6 bg-white/10" />
+
+          {/* Malwarebytes */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-black/20 backdrop-blur-sm border border-white/10"
+          >
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center">
+                <span className="text-white text-xs font-bold">M</span>
+              </div>
+              <span className="text-sm font-medium text-white/80">
+                Secured by <span className="text-white font-semibold">Malwarebytes</span>
+              </span>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Subtle tagline */}
+        <p className="text-center mt-4 text-xs text-white/40">
+          Advanced AI protection for your digital safety
+        </p>
+      </div>
+    </motion.footer>
+  );
+};
+
+export default AIFooter;

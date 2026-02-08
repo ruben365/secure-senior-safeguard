@@ -6,6 +6,7 @@ import { PaymentDialog } from "@/components/scanner/PaymentDialog";
 import { ScanResults } from "@/components/scanner/ScanResults";
 import { SmartCommandCenter } from "@/components/training/SmartCommandCenter";
 import { PremiumChatHistory } from "@/components/training/PremiumChatHistory";
+import { AIFooter } from "@/components/training/AIFooter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -186,6 +187,9 @@ export default function TrainingAiAnalysis() {
                 onSendText={sendMessage}
               />
             </div>
+
+            {/* Footer with Anthropic and Malwarebytes signatures */}
+            <AIFooter />
           </div>
 
           <div className="bg-background">

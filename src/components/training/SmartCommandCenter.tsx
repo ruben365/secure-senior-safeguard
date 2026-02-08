@@ -11,12 +11,15 @@ import {
   Folder,
   Globe,
   Loader2,
+  Mic,
+  MicOff,
   Paperclip,
   Settings,
   ShieldCheck,
   X,
 } from "lucide-react";
 import type { GuestScanStatus } from "@/hooks/useGuestScanner";
+import { toast } from "sonner";
 
 const ACCEPTED_FILE_TYPES =
   ".pdf,.jpg,.jpeg,.png,.mp4,.mp3,.wav,application/pdf,image/jpeg,image/png,video/mp4,audio/mpeg,audio/mp3,audio/wav,audio/x-wav";
@@ -41,7 +44,9 @@ export const SmartCommandCenter = ({
   const [input, setInput] = useState("");
   const [isDragging, setIsDragging] = useState(false);
   const [validationError, setValidationError] = useState<string | null>(null);
+  const [isListening, setIsListening] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const recognitionRef = useRef<any>(null);
 
   const isProcessing = status === "uploading" || status === "analyzing";
   const isPaying = status === "paying";
@@ -134,6 +139,63 @@ export const SmartCommandCenter = ({
 
   const openFileDialog = () => fileInputRef.current?.click();
 
+  // Initialize speech recognition
+  useEffect(() => {
+    if (typeof window !== "undefined" && ("webkitSpeechRecognition" in window || "SpeechRecognition" in window)) {
+      const SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
+      const recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = "en-US";
+
+      recognition.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript;
+        setInput(transcript);
+        setIsListening(false);
+        toast.success("Voice captured successfully!");
+      };
+
+      recognition.onerror = (event: any) => {
+        console.error("Speech recognition error:", event.error);
+        setIsListening(false);
+        toast.error("Voice recognition failed. Please try again.");
+      };
+
+      recognition.onend = () => {
+        setIsListening(false);
+      };
+
+      recognitionRef.current = recognition;
+    }
+
+    return () => {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
+    };
+  }, []);
+
+  const toggleVoiceInput = () => {
+    if (!recognitionRef.current) {
+      toast.error("Voice recognition is not supported in this browser.");
+      return;
+    }
+
+    if (isListening) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+    } else {
+      try {
+        recognitionRef.current.start();
+        setIsListening(true);
+        toast.info("Listening... Speak now!");
+      } catch (error) {
+        console.error("Failed to start recognition:", error);
+        toast.error("Failed to start voice recognition.");
+      }
+    }
+  };
+
   return (
     <div className="flex flex-col items-center">
       <div
@@ -178,6 +240,19 @@ export const SmartCommandCenter = ({
 
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
+            <button
+              type="button"
+              className={cn(
+                "text-white/60 hover:text-white transition",
+                isListening && "text-[#4ADE80] animate-pulse"
+              )}
+              onClick={toggleVoiceInput}
+              aria-label={isListening ? "Stop listening" : "Voice input"}
+              disabled={isBusy}
+              title={isListening ? "Stop listening" : "Voice input"}
+            >
+              {isListening ? <MicOff className="h-[18px] w-[18px]" /> : <Mic className="h-[18px] w-[18px]" />}
+            </button>
             <button
               type="button"
               className="text-white/60 hover:text-white transition"
