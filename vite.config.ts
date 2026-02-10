@@ -92,13 +92,25 @@ export default defineConfig(async ({ mode, command }) => {
     build: {
       sourcemap: true,
       cssCodeSplit: true,
+      minify: 'esbuild',
+      target: 'es2015',
+      cssMinify: true,
       rollupOptions: {
         output: {
           manualChunks: {
-            vendor: ['react', 'react-dom', 'react-router-dom'],
+            'react-vendor': ['react', 'react-dom'],
+            'router': ['react-router-dom'],
+            'animation': ['framer-motion'],
+            'ui': ['lucide-react', '@radix-ui/react-dialog', '@radix-ui/react-slot'],
           },
+          // Optimize chunk file names for caching
+          chunkFileNames: 'assets/js/[name]-[hash].js',
+          entryFileNames: 'assets/js/[name]-[hash].js',
+          assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
         },
       },
+      // Enable chunk size warnings
+      chunkSizeWarningLimit: 1000,
     },
     css: {
       devSourcemap: true,
