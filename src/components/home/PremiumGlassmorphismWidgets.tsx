@@ -102,7 +102,7 @@ export const PremiumGlassmorphismWidgets = () => {
                <div className="absolute inset-0 bg-gradient-to-t from-[#18305A]/40 via-transparent to-transparent" />
 
                {/* Glassmorphism Stats Card - Mobile Optimized */}
-               <motion.div className="absolute bottom-3 left-3 right-3 sm:bottom-6 sm:left-6 sm:right-6 glass-enhanced sm:rounded-3xl p-4 sm:p-6 shadow-float rounded-sm opacity-85 mx-[110px] my-0 pb-0 pr-[90px] py-0 px-[10px]" initial={{
+               <motion.div className="absolute bottom-3 left-3 right-3 sm:bottom-6 sm:left-6 sm:right-6 glass-enhanced sm:rounded-3xl p-4 sm:p-6 shadow-float rounded-sm opacity-85 mx-[110px] pb-0 pr-[90px] py-0 px-[10px] my-[68px]" initial={{
               opacity: 0,
               y: 20
             }} whileInView={{
