@@ -49,7 +49,7 @@ const CTASection = ({
   if (variant === "image" && backgroundImage) {
     return (
       <section 
-        className={cn("py-14 md:py-20 lg:py-24 relative overflow-hidden", className)} 
+        className={cn("py-10 md:py-14 lg:py-16 relative overflow-hidden", className)} 
         role="region" 
         aria-label="Call to action"
       >
