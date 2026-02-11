@@ -23,6 +23,8 @@ import { SITE } from "@/config/site";
 const LiveSecurityStats = lazy(() => import("@/components/home/LiveSecurityStats"));
 const SocialProofTicker = lazy(() => import("@/components/SocialProofTicker"));
 const PremiumGlassmorphismWidgets = lazy(() => import("@/components/home/PremiumGlassmorphismWidgets"));
+const ProfessionalShowcase = lazy(() => import("@/components/home/ProfessionalShowcase"));
+const ProfessionalHero = lazy(() => import("@/components/home/ProfessionalHero"));
 const Index = () => {
   const [scamShieldOpen, setScamShieldOpen] = useState(false);
   const [enableLiveWidgets, setEnableLiveWidgets] = useState(false);
