@@ -71,7 +71,7 @@ serve(async (req) => {
       amountInCents 
     });
 
-    const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" });
+    const stripe = new Stripe(stripeKey, { apiVersion: "2024-11-20.acacia" });
 
     // Check if customer exists
     const customers = await stripe.customers.list({ email: customerEmail, limit: 1 });

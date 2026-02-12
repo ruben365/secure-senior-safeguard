@@ -129,7 +129,7 @@ serve(async (req) => {
       );
     }
 
-    const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" });
+    const stripe = new Stripe(stripeKey, { apiVersion: "2024-11-20.acacia" });
     const paymentIntent = await stripe.paymentIntents.retrieve(scan.stripe_payment_id);
 
     if (paymentIntent.status !== "succeeded" && paymentIntent.status !== "processing") {

@@ -44,7 +44,7 @@ serve(async (req) => {
     
     logStep("Verifying session", { session_id });
 
-    const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" });
+    const stripe = new Stripe(stripeKey, { apiVersion: "2024-11-20.acacia" });
     
     // Retrieve the checkout session with expanded line items
     const session = await stripe.checkout.sessions.retrieve(session_id, {

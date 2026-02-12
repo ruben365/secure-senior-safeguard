@@ -52,7 +52,7 @@ serve(async (req) => {
     logStep("Using email for checkout", { email: userEmail });
 
     const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", {
-      apiVersion: "2025-08-27.basil",
+      apiVersion: "2024-11-20.acacia",
     });
 
     // Check if customer exists

@@ -35,7 +35,7 @@ serve(async (req) => {
     }
     logStep(`Request ${requestId} - Stripe key verified`);
 
-    const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" });
+    const stripe = new Stripe(stripeKey, { apiVersion: "2024-11-20.acacia" });
 
     const body = await req.json();
     const { amount, items = [], customerEmail, customerName } = body;

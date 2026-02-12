@@ -98,7 +98,7 @@ serve(async (req) => {
     const sanitized = sanitizeFileName(fileName);
     const filePath = `guest/${scanId}/${sanitized}`;
 
-    const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" });
+    const stripe = new Stripe(stripeKey, { apiVersion: "2024-11-20.acacia" });
     const paymentIntent = await stripe.paymentIntents.create({
       amount: Math.round(cost * 100),
       currency: "usd",

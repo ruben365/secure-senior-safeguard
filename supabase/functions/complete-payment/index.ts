@@ -35,7 +35,7 @@ async function verifyStripePayment(stripeKey: string, paymentIntentId?: string, 
   }
 
   try {
-    const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" });
+    const stripe = new Stripe(stripeKey, { apiVersion: "2024-11-20.acacia" });
     
     if (sessionId) {
       const session = await stripe.checkout.sessions.retrieve(sessionId);
