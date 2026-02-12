@@ -79,10 +79,10 @@ export function AdminTopBar({ sidebarOpen, toggleSidebar }: AdminTopBarProps) {
           
           {/* Back/Forward Navigation */}
           <div className="flex items-center gap-1">
-            <Button variant="ghost" size="icon" onClick={handleBack} className="h-9 w-9">
+            <Button variant="ghost" size="icon" onClick={handleBack} className="h-11 w-11 md:h-9 md:w-9">
               <ChevronLeft className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon" onClick={handleForward} className="h-9 w-9">
+            <Button variant="ghost" size="icon" onClick={handleForward} className="h-11 w-11 md:h-9 md:w-9">
               <ChevronRight className="h-5 w-5" />
             </Button>
           </div>

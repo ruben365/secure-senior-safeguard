@@ -123,7 +123,7 @@ export const SearchBar = () => {
             variant="ghost"
             size="icon"
             aria-label="Clear search"
-            className="absolute right-12 top-1/2 -translate-y-1/2 h-7 w-7 rounded-full hover:bg-muted"
+            className="absolute right-12 top-1/2 -translate-y-1/2 h-11 w-11 md:h-7 md:w-7 rounded-full hover:bg-muted"
           >
             <X className="h-4 w-4" />
           </Button>
@@ -133,7 +133,7 @@ export const SearchBar = () => {
           size="icon"
           aria-label="Search"
           disabled={isSearching}
-          className="absolute right-1 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full 
+          className="absolute right-1 top-1/2 -translate-y-1/2 h-11 w-11 md:h-9 md:w-9 rounded-full
                      bg-gradient-to-r from-primary to-accent hover:shadow-glow-purple
                      transition-all duration-300 hover:scale-105"
         >

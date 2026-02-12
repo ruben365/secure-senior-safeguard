@@ -59,12 +59,12 @@ const Navigation = () => {
       {/* Mobile backdrop overlay */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/40 z-[9998] lg:hidden"
+          className="fixed inset-0 bg-black/40 z-modal-overlay lg:hidden"
           onClick={() => setMobileMenuOpen(false)}
         />
       )}
 
-      <nav className="sticky top-0 z-[9999] relative glass-heavy border-b border-white/20 premium-shadow-depth premium-shine-sweep">
+      <nav className="sticky top-0 z-navigation relative glass-heavy border-b border-white/20 premium-shadow-depth premium-shine-sweep">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-center justify-between h-14 md:h-16">
             {/* Logo */}
@@ -182,7 +182,7 @@ const Navigation = () => {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden fixed top-14 md:top-16 left-0 right-0 bottom-0 bg-background/80 backdrop-blur-2xl border-t border-border z-[9999] overflow-y-auto">
+          <div className="lg:hidden fixed top-14 md:top-16 left-0 right-0 bottom-0 bg-background/80 backdrop-blur-2xl border-t border-border z-navigation overflow-y-auto">
             <div className="container mx-auto px-4 py-6 space-y-2">
               {navLinks.map((link) => {
                 const isActive = isActiveLink(link.href);

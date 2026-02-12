@@ -154,10 +154,31 @@
     max-width: 200px;
     gap: 6px;
   }
-  
+
   .xs-small\:grid-cols-3 input {
     min-width: 44px !important;
     min-height: 44px !important;
     font-size: 16px !important;
+  }
+}
+
+/* iOS Safe Area Insets - Critical for notch and home indicator */
+@supports (padding: env(safe-area-inset-bottom)) {
+  /* Fixed bottom elements need safe area padding */
+  .fixed.bottom-0,
+  .fixed.bottom-4,
+  .fixed.bottom-6,
+  .fixed.bottom-8,
+  .fixed.bottom-20 {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  /* Adjust specific bottom values to account for safe area */
+  @media (max-width: 768px) {
+    .mobile-call-btn,
+    .cookie-consent,
+    .fab-button {
+      padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+    }
   }
 }
