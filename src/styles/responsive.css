@@ -172,6 +172,7 @@
   .fixed.bottom-20,
   .fixed.bottom-24,
   .fixed.bottom-28,
+  .fixed.bottom-36,
   .fixed.bottom-48 {
     padding-bottom: env(safe-area-inset-bottom);
   }
