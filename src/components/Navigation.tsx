@@ -12,7 +12,8 @@ import { toast } from "sonner";
 import invisionLogo from "@/assets/shield-logo.png";
 import { DonationModal } from "@/components/DonationModal";
 
-const Navigation = () => {
+// Memoized for performance - prevents re-renders when parent components update
+const Navigation = React.memo(() => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [donateOpen, setDonateOpen] = useState(false);
   const location = useLocation();
@@ -244,6 +245,6 @@ const Navigation = () => {
       <DonationModal open={donateOpen} onOpenChange={setDonateOpen} type="general" />
     </>
   );
-};
+});
 
 export default Navigation;

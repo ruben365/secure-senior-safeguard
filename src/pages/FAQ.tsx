@@ -351,6 +351,15 @@ export default function FAQ() {
     return filtered;
   }, [searchQuery, activeCategory]);
 
+  // Pre-compute category counts for performance (avoids O(n²) filtering on every render)
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = { "All Questions": faqs.length };
+    faqs.forEach(faq => {
+      counts[faq.category] = (counts[faq.category] || 0) + 1;
+    });
+    return counts;
+  }, []); // Empty deps - faqs array is static
+
   const handleHelpful = (faqId: string, isHelpful: boolean) => {
     setHelpfulVotes((prev) => ({ ...prev, [faqId]: isHelpful }));
     toast.success(
@@ -474,7 +483,7 @@ export default function FAQ() {
               </ScrollReveal>
               <div className="flex flex-wrap gap-2 justify-center">
                 {categories.map((category, index) => {
-                  const count = faqs.filter(faq => faq.category === category).length;
+                  const count = categoryCounts[category] || 0;
                   return (
                     <ScrollReveal key={category} delay={index * 50} animation="scale-in">
                       <Button

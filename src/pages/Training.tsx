@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo, memo } from "react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -83,8 +83,36 @@ const trainingHeadlines = [
   "Protection Services for Real-World Safety"
 ];
 
-// Premium Training Card Component — clean style matching Business page
-const PremiumTrainingCard = ({ plan, index, onBook }: { plan: any; index: number; onBook: (plan: any) => void }) => {
+// Trust pillars data (extracted for performance - prevents recreation on every render)
+const TRUST_PILLARS = [
+  {
+    icon: BookOpen,
+    title: "Clear, Respectful Teaching",
+    desc: "Senior-friendly pace, real-world examples, no jargon. We explain everything step-by-step.",
+    color: "from-blue-500 to-cyan-500"
+  },
+  {
+    icon: Lock,
+    title: "Privacy-First Guarantee",
+    desc: "We never ask for passwords, OTPs, or banking information. Your data stays private.",
+    color: "from-emerald-500 to-teal-500"
+  },
+  {
+    icon: FileText,
+    title: "Actionable Playbooks",
+    desc: "Ready-to-use scripts for bank, IRS, romance, and tech-support scam scenarios.",
+    color: "from-purple-500 to-pink-500"
+  },
+  {
+    icon: Award,
+    title: "Industry-Leading Expertise",
+    desc: "Years of experience defending seniors against the latest AI-enabled fraud techniques.",
+    color: "from-amber-500 to-orange-500"
+  },
+];
+
+// Premium Training Card Component — clean style matching Business page (memoized for performance)
+const PremiumTrainingCard = memo(({ plan, index, onBook }: { plan: any; index: number; onBook: (plan: any) => void }) => {
   return (
     <ScrollReveal animation="fade-up" delay={index * 100} threshold={0.2}>
       <div className="relative h-full pt-5">
@@ -139,7 +167,7 @@ const PremiumTrainingCard = ({ plan, index, onBook }: { plan: any; index: number
       </div>
     </ScrollReveal>
   );
-};
+});
 
 // Scam Example Card — clean style, no animated counter
 const ScamExampleCard = ({ example, index }: { example: any; index: number }) => {
@@ -238,7 +266,8 @@ function LearnAndTrain() {
   };
   usePrerenderBlocker(isTestimonialsLoading);
 
-  const handleSubscribe = (priceId: string, serviceName: string, planTier: string, amount: number, features?: string[]) => {
+  // Memoized handlers for performance
+  const handleSubscribe = useCallback((priceId: string, serviceName: string, planTier: string, amount: number, features?: string[]) => {
     trackButtonClick(`Subscribe ${planTier} Plan`, 'Training Page');
     setEmbeddedPaymentConfig({
       mode: "subscription",
@@ -249,7 +278,19 @@ function LearnAndTrain() {
       features
     });
     setEmbeddedPaymentOpen(true);
-  };
+  }, []);
+
+  const handleBookTraining = useCallback((plan: any) => {
+    setSelectedService({
+      type: 'training',
+      name: plan.name,
+      tier: plan.type,
+      price: plan.priceNum,
+      features: plan.features,
+      duration: plan.duration
+    });
+    setTrainingPaymentOpen(true);
+  }, []);
 
   const trainingHeroImages = PROFESSIONAL_HERO_IMAGES.training;
 
@@ -616,32 +657,7 @@ function LearnAndTrain() {
               {/* Right: Trust pillars */}
               <ScrollReveal animation="slide-left">
                 <div className="space-y-6">
-                  {[
-                    {
-                      icon: BookOpen,
-                      title: "Clear, Respectful Teaching",
-                      desc: "Senior-friendly pace, real-world examples, no jargon. We explain everything step-by-step.",
-                      color: "from-blue-500 to-cyan-500"
-                    },
-                    {
-                      icon: Lock,
-                      title: "Privacy-First Guarantee",
-                      desc: "We never ask for passwords, OTPs, or banking information. Your data stays private.",
-                      color: "from-emerald-500 to-teal-500"
-                    },
-                    {
-                      icon: FileText,
-                      title: "Actionable Playbooks",
-                      desc: "Ready-to-use scripts for bank, IRS, romance, and tech-support scam scenarios.",
-                      color: "from-purple-500 to-pink-500"
-                    },
-                    {
-                      icon: Award,
-                      title: "Industry-Leading Expertise",
-                      desc: "Years of experience defending seniors against the latest AI-enabled fraud techniques.",
-                      color: "from-amber-500 to-orange-500"
-                    },
-                  ].map((item, index) => (
+                  {TRUST_PILLARS.map((item, index) => (
                     <div
                       key={index}
                       className="group flex gap-5 p-5 rounded-2xl bg-white/80 dark:bg-card/80 backdrop-blur-xl border border-border/50 hover:shadow-xl hover:border-primary/30 transition-all duration-300"
@@ -879,17 +895,7 @@ function LearnAndTrain() {
                   key={index}
                   plan={plan}
                   index={index}
-                  onBook={(p) => {
-                    setSelectedService({
-                      type: 'training',
-                      name: p.name,
-                      tier: p.type,
-                      price: p.priceNum,
-                      features: p.features,
-                      duration: p.duration
-                    });
-                    setTrainingPaymentOpen(true);
-                  }}
+                  onBook={handleBookTraining}
                 />
               ))}
             </div>
@@ -999,17 +1005,7 @@ function LearnAndTrain() {
                   key={index}
                   plan={plan}
                   index={index}
-                  onBook={(p) => {
-                    setSelectedService({
-                      type: 'training',
-                      name: p.name,
-                      tier: p.type,
-                      price: p.priceNum,
-                      features: p.features,
-                      duration: p.duration
-                    });
-                    setTrainingPaymentOpen(true);
-                  }}
+                  onBook={handleBookTraining}
                 />
               ))}
             </div>

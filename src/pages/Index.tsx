@@ -28,6 +28,8 @@ const Index = () => {
   const [enableLiveWidgets, setEnableLiveWidgets] = useState(false);
   const [enableStats, setEnableStats] = useState(false);
   const statsRef = useRef<HTMLElement | null>(null);
+
+  // Combined effect for performance optimization - handles both widget loading and stats observer
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const saveData = "connection" in navigator && (navigator as Navigator & {
@@ -35,44 +37,41 @@ const Index = () => {
         saveData?: boolean;
       };
     }).connection?.saveData;
+
     if (prefersReducedMotion || saveData) return;
+
+    // Setup lazy widget loading
     const enableWidgets = () => setEnableLiveWidgets(true);
     let idleId: number | ReturnType<typeof setTimeout>;
     if ("requestIdleCallback" in window) {
-      idleId = (window as any).requestIdleCallback(enableWidgets, {
-        timeout: 2000
-      });
+      idleId = (window as any).requestIdleCallback(enableWidgets, { timeout: 2000 });
     } else {
       idleId = setTimeout(enableWidgets, 1500);
     }
+
+    // Setup stats intersection observer
+    const element = statsRef.current;
+    let observer: IntersectionObserver | null = null;
+
+    if (element) {
+      observer = new IntersectionObserver(entries => {
+        if (entries[0]?.isIntersecting) {
+          setEnableStats(true);
+          observer?.disconnect();
+        }
+      }, { rootMargin: "200px" });
+      observer.observe(element);
+    }
+
+    // Cleanup both
     return () => {
       if ("cancelIdleCallback" in window && typeof idleId === "number") {
         (window as any).cancelIdleCallback(idleId);
       } else {
         clearTimeout(idleId as ReturnType<typeof setTimeout>);
       }
+      observer?.disconnect();
     };
-  }, []);
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const saveData = "connection" in navigator && (navigator as Navigator & {
-      connection?: {
-        saveData?: boolean;
-      };
-    }).connection?.saveData;
-    if (prefersReducedMotion || saveData) return;
-    const element = statsRef.current;
-    if (!element) return;
-    const observer = new IntersectionObserver(entries => {
-      if (entries[0]?.isIntersecting) {
-        setEnableStats(true);
-        observer.disconnect();
-      }
-    }, {
-      rootMargin: "200px"
-    });
-    observer.observe(element);
-    return () => observer.disconnect();
   }, []);
   return <PageTransition variant="fade">
       <div className="min-h-screen bg-background">

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
@@ -100,14 +100,15 @@ function Business() {
     setBusinessTestimonials(data || []);
   };
 
-  const scrollToSection = (id: string) => {
+  // Memoized handlers for performance
+  const scrollToSection = useCallback((id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-  };
+  }, []);
 
-  const getInsurancePrice = (monthlyPrice: number) => {
+  const getInsurancePrice = useCallback((monthlyPrice: number) => {
     if (isYearly) {
       const yearlyPrice = monthlyPrice * 12 * 0.9; // 10% discount
       return {
@@ -121,9 +122,9 @@ function Business() {
       period: '/month',
       savings: ''
     };
-  };
+  }, [isYearly]);
 
-  const openStrategyCall = () => {
+  const openStrategyCall = useCallback(() => {
     setSelectedInquiry({
       name: "Business Strategy Call",
       price: 0,
@@ -132,9 +133,9 @@ function Business() {
     });
     setInquiryDialogOpen(true);
     trackButtonClick("Book Strategy Call", "Business Hero");
-  };
+  }, []);
 
-  const handleSubscribe = (priceId: string, serviceName: string, planTier: string, amount: number, variant?: 'default' | 'buying' | 'existing', features?: string[]) => {
+  const handleSubscribe = useCallback((priceId: string, serviceName: string, planTier: string, amount: number, variant?: 'default' | 'buying' | 'existing', features?: string[]) => {
     // Use embedded payment modal for subscriptions
     setEmbeddedPaymentConfig({
       mode: "subscription",
@@ -145,7 +146,7 @@ function Business() {
       features
     });
     setEmbeddedPaymentOpen(true);
-  };
+  }, []);
 
   const businessHeroImages = PROFESSIONAL_HERO_IMAGES.business;
 
