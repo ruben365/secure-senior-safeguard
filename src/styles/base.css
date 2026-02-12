@@ -152,7 +152,7 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     --sidebar-ring: 220 58% 22%;
 
     /* Global text scale (rem-based) */
-    --text-scale: 1.12;
+    --text-scale: 0.9;
   }
 
   .dark {
@@ -245,6 +245,8 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     scroll-behavior: smooth;
     scrollbar-gutter: stable;
     font-size: calc(16px * var(--text-scale));
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
   
   body {
@@ -278,7 +280,7 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
 
   @media (max-width: 768px) {
     :root {
-      --text-scale: 1.02;
+      --text-scale: 0.9;
     }
   }
 

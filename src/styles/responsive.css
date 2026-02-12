@@ -193,3 +193,41 @@
     }
   }
 }
+
+/* Mobile performance trims - reduce heavy blur/shadows/animations */
+@media (max-width: 768px) {
+  .glass,
+  .glass-light,
+  .glass-heavy,
+  .glass-subtle,
+  .glass-colored,
+  .premium-crystal,
+  .premium-glass-refraction,
+  .premium-frosted-dark {
+    backdrop-filter: blur(18px) saturate(1.2) brightness(1.02);
+    -webkit-backdrop-filter: blur(18px) saturate(1.2) brightness(1.02);
+    box-shadow: 0 10px 24px -16px hsl(220 20% 20% / 0.2);
+  }
+
+  .premium-shadow-depth,
+  .shadow-3d,
+  .shadow-3d-lg {
+    box-shadow: 0 8px 20px -14px hsl(220 20% 20% / 0.18);
+  }
+
+  .premium-shine-sweep::after,
+  .premium-border-glow::before,
+  .premium-holographic::before,
+  .premium-aurora::before {
+    animation: none;
+  }
+
+  .premium-orb,
+  .blob,
+  .float,
+  .float-delayed,
+  .float-slow,
+  .premium-float-spring {
+    animation: none;
+  }
+}

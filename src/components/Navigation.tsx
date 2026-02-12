@@ -60,7 +60,7 @@ const Navigation = React.memo(() => {
       {/* Mobile backdrop overlay */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/40 z-modal-overlay lg:hidden"
+          className="fixed inset-0 bg-black/40 z-[10000] lg:hidden"
           onClick={() => setMobileMenuOpen(false)}
         />
       )}
@@ -183,7 +183,7 @@ const Navigation = React.memo(() => {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden fixed top-14 md:top-16 left-0 right-0 bottom-0 bg-background/80 backdrop-blur-2xl border-t border-border z-navigation overflow-y-auto">
+          <div className="lg:hidden fixed top-14 md:top-16 left-0 right-0 bottom-0 bg-background/95 backdrop-blur-lg border-t border-border z-[10001] overflow-y-auto overscroll-contain pb-[calc(env(safe-area-inset-bottom)+1.25rem)] [-webkit-overflow-scrolling:touch]">
             <div className="container mx-auto px-4 py-6 space-y-2">
               {navLinks.map((link) => {
                 const isActive = isActiveLink(link.href);
