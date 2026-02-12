@@ -15,7 +15,7 @@ import {
 import { donationFormSchema, formatPhoneNumber } from "@/utils/formValidation";
 import { z } from "zod";
 import { Badge } from "@/components/ui/badge";
-import { TrustIndicators } from "@/components/payment/TrustIndicators";
+import { TrustIndicators, AcceptedCards } from "@/components/payment/TrustIndicators";
 
 interface DonationModalProps {
   open: boolean;
@@ -348,11 +348,14 @@ export const DonationModal = ({ open, onOpenChange, type = 'general', cause }: D
                 )}
               </Button>
 
-              <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
-                <CreditCard className="w-4 h-4" />
-                <span>Secure payment via Stripe</span>
-                <Shield className="w-4 h-4 ml-2" />
-                <span>100% goes to the cause</span>
+              {/* Trust Indicators */}
+              <div className="space-y-3 pt-2">
+                <TrustIndicators />
+                <AcceptedCards />
+                <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
+                  <Shield className="w-4 h-4" />
+                  <span>100% goes to the cause • Secure payment via Stripe</span>
+                </div>
               </div>
             </form>
           </Form>
