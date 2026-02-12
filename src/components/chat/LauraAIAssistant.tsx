@@ -146,7 +146,7 @@ export const LauraAIAssistant = () => {
 
   if (!isOpen) {
     return (
-      <div className="fixed bottom-6 left-6 z-fab">
+      <div className="fixed bottom-6 right-6 z-fab">
         <button
           onClick={() => setIsOpen(true)}
           className="group relative flex flex-col items-center justify-center w-20 h-20 rounded-3xl shadow-3d-lg overflow-hidden bg-gradient-to-br from-primary to-accent backdrop-blur-xl border-2 border-white/40 transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_40px_rgba(0,0,0,0.25)] hover:-translate-y-1"
@@ -182,7 +182,7 @@ export const LauraAIAssistant = () => {
   }
 
   return (
-    <div className="fixed bottom-4 left-4 z-fab w-[360px] sm:w-[400px]">
+    <div className="fixed bottom-4 right-4 z-fab w-[360px] sm:w-[400px]">
       <div className="rounded-3xl border border-border/60 glass-heavy card-shine shadow-2xl overflow-hidden">
         <div className="flex items-center justify-between p-4 border-b border-white/40 bg-white/70 backdrop-blur-xl">
           <div className="flex items-center gap-3">
