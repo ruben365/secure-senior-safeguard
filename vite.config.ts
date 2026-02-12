@@ -53,10 +53,11 @@ export default defineConfig(({ mode }) => {
       !isPreviewBuild &&
         !disableImageOptimizer &&
         ViteImageOptimizer({
-          jpg: { quality: 80 },
-          jpeg: { quality: 80 },
-          png: { quality: 80 },
-          webp: { quality: 80 },
+          jpg: { quality: 65, progressive: true },
+          jpeg: { quality: 65, progressive: true },
+          png: { quality: 70, compressionLevel: 9 },
+          webp: { quality: 70 },
+          avif: { quality: 60 },
         }),
     ].filter(Boolean),
     resolve: {
