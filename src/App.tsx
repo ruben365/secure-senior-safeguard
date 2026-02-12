@@ -30,7 +30,6 @@ import { SkipToContent } from "./components/SkipToContent";
 import BackToTop from "./components/BackToTop";
 import MobileCallButton from "./components/MobileCallButton";
 import { AnalyticsTracker } from "./components/AnalyticsTracker";
-import GlassQuickMenu from "./components/GlassQuickMenu";
 import { MagnificentDonateButton } from "./components/MagnificentDonateButton";
 import { PrerenderProvider } from "./contexts/PrerenderContext";
 
@@ -285,7 +284,6 @@ function App() {
                         <SkipToContent />
                         <ScrollToTop />
                         <BackToTop />
-                        <GlassQuickMenu />
                         <MagnificentDonateButton />
                         <MobileCallButton />
                         
