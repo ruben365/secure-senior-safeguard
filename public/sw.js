@@ -1,5 +1,5 @@
-const CACHE_NAME = "invision-network-v6";
-const IMAGE_CACHE = "invision-images-v4";
+const CACHE_NAME = "invision-network-v7";
+const IMAGE_CACHE = "invision-images-v5";
 const STATIC_ASSETS = [
   "/index.html",
   "/favicon.ico",
