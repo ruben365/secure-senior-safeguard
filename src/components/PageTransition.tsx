@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { cn } from "@/lib/utils";
 
 interface PageTransitionProps {
   children: ReactNode;
@@ -8,10 +7,7 @@ interface PageTransitionProps {
 
 export const PageTransition = ({
   children,
-  variant = "auto",
+  variant: _variant = "auto",
 }: PageTransitionProps) => {
-  const variantClass =
-    variant === "fade" ? "animate-fade-in" : "animate-slide-up";
-
-  return <div className={cn(variantClass)}>{children}</div>;
+  return <div>{children}</div>;
 };
