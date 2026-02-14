@@ -72,9 +72,9 @@ export const FeaturesShowcase = () => {
         </AnimatedSection>
 
         {/* Interactive Feature Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-start mb-12 md:mb-16">
           {/* Feature Selector - Left Side */}
-          <div className="space-y-4">
+          <div className="space-y-3 md:space-y-4">
             {features.map((feature, index) => (
               <AnimatedSection
                 key={feature.id}
@@ -83,32 +83,32 @@ export const FeaturesShowcase = () => {
               >
                 <button
                   onClick={() => setActiveFeature(feature.id)}
-                  className={`w-full text-left glass-card rounded-2xl p-6 transition-all duration-300 ${
+                  className={`w-full text-left glass-card rounded-xl md:rounded-2xl p-4 md:p-6 transition-all duration-300 ${
                     activeFeature === feature.id
-                      ? 'ring-2 ring-primary shadow-xl scale-105'
-                      : 'hover:scale-102'
+                      ? 'ring-2 ring-primary shadow-xl scale-[1.02] md:scale-105'
+                      : 'hover:scale-[1.01] md:hover:scale-102'
                   }`}
                 >
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start gap-3 md:gap-4">
                     <div
-                      className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center flex-shrink-0 transition-transform ${
+                      className={`w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center flex-shrink-0 transition-transform ${
                         activeFeature === feature.id ? 'scale-110' : ''
                       }`}
                     >
-                      <feature.icon className="w-6 h-6 text-white" />
+                      <feature.icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
                     </div>
 
-                    <div className="flex-grow">
-                      <h3 className="text-lg font-bold text-foreground mb-1">
+                    <div className="flex-grow min-w-0">
+                      <h3 className="text-base md:text-lg font-bold text-foreground mb-1">
                         {feature.title}
                       </h3>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs md:text-sm text-muted-foreground">
                         {feature.shortDesc}
                       </p>
                     </div>
 
                     {activeFeature === feature.id && (
-                      <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 animate-scale-in" />
+                      <CheckCircle2 className="w-5 h-5 md:w-6 md:h-6 text-primary flex-shrink-0 animate-scale-in" />
                     )}
                   </div>
                 </button>
@@ -119,31 +119,31 @@ export const FeaturesShowcase = () => {
           {/* Feature Detail - Right Side */}
           <div className="lg:sticky lg:top-24">
             <AnimatedSection animation="scale-up" key={activeFeature}>
-              <div className="glass-heavy rounded-3xl card-padding-xl specular-highlight">
+              <div className="glass-heavy rounded-2xl md:rounded-3xl p-6 md:card-padding-xl specular-highlight">
                 <div
-                  className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${active.color} flex items-center justify-center mb-6`}
+                  className={`w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-gradient-to-br ${active.color} flex items-center justify-center mb-4 md:mb-6`}
                 >
-                  <active.icon className="w-8 h-8 text-white" />
+                  <active.icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
                 </div>
 
-                <h3 className="text-3xl font-bold text-foreground mb-4">
+                <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-3 md:mb-4">
                   {active.title}
                 </h3>
 
-                <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+                <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-6 md:mb-8">
                   {active.fullDesc}
                 </p>
 
                 {/* Stat */}
-                <div className="glass-widget rounded-2xl p-6 text-center">
-                  <div className="text-5xl font-black text-primary mb-2">
+                <div className="glass-widget rounded-xl md:rounded-2xl p-4 md:p-6 text-center">
+                  <div className="text-4xl md:text-5xl font-black text-primary mb-2">
                     <AnimatedCounter
                       end={active.stats.value}
                       suffix={active.stats.suffix}
                       duration={2000}
                     />
                   </div>
-                  <div className="text-sm text-muted-foreground font-semibold uppercase tracking-wider">
+                  <div className="text-xs md:text-sm text-muted-foreground font-semibold uppercase tracking-wider">
                     {active.stats.label}
                   </div>
                 </div>
@@ -154,8 +154,8 @@ export const FeaturesShowcase = () => {
 
         {/* Bottom Stats Bar */}
         <AnimatedSection animation="fade-up">
-          <div className="glass-card rounded-3xl card-padding-lg">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div className="glass-card rounded-2xl md:rounded-3xl p-4 md:card-padding-lg">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center">
               <div>
                 <div className="flex items-center justify-center gap-1 mb-2">
                   <Smartphone className="w-5 h-5 text-primary" />

@@ -52,14 +52,14 @@ export const TestimonialsShowcase = () => {
         </AnimatedSection>
 
         {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12">
           {testimonials.map((testimonial, index) => (
             <AnimatedSection
               key={testimonial.name}
               animation="fade-up"
               delay={index * 100}
             >
-              <div className="glass-card rounded-3xl card-padding-xl h-full flex flex-col transition-all duration-300 hover:scale-105 group">
+              <div className="glass-card rounded-2xl md:rounded-3xl p-6 md:card-padding-xl h-full flex flex-col transition-all duration-300 hover:scale-105 group">
                 {/* Quote Icon */}
                 <div className="mb-6">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -108,8 +108,8 @@ export const TestimonialsShowcase = () => {
 
         {/* Trust Stats */}
         <AnimatedSection animation="scale-up">
-          <div className="glass-heavy rounded-3xl card-padding-xl specular-highlight">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div className="glass-heavy rounded-2xl md:rounded-3xl p-6 md:card-padding-xl specular-highlight">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center">
               <div>
                 <div className="text-4xl md:text-5xl font-black text-primary mb-2">
                   4.9

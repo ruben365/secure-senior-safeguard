@@ -46,12 +46,12 @@ export const QuickWinsSection = () => {
               </span>
             </div>
 
-            <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
               What Happens After You{' '}
               <span className="gradient-text-primary">Sign Up</span>
             </h2>
 
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto">
               Protection starts immediately, and benefits stack up fast. Here's your first month:
             </p>
           </div>
@@ -82,26 +82,26 @@ export const QuickWinsSection = () => {
                         index % 2 === 0 ? 'md:text-right md:pr-12' : 'md:col-start-2 md:pl-12'
                       }`}
                     >
-                      <div className="glass-card rounded-2xl card-padding-lg hover:scale-105 transition-all duration-300">
-                        <div className="flex items-start gap-4 md:block">
+                      <div className="glass-card rounded-xl md:rounded-2xl p-4 md:card-padding-lg hover:scale-105 transition-all duration-300">
+                        <div className="flex items-start gap-3 md:gap-4 md:block">
                           <div
-                            className={`w-14 h-14 rounded-xl bg-gradient-to-br ${win.color} flex items-center justify-center mb-4 md:${
-                              index % 2 === 0 ? 'ml-auto' : 'mr-auto'
+                            className={`w-12 h-12 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-gradient-to-br ${win.color} flex items-center justify-center flex-shrink-0 mb-0 md:mb-4 ${
+                              index % 2 === 0 ? 'md:ml-auto md:mr-0' : 'md:mr-auto md:ml-0'
                             }`}
                           >
-                            <win.icon className="w-7 h-7 text-white" />
+                            <win.icon className="w-6 h-6 md:w-7 md:h-7 text-white" />
                           </div>
 
                           <div className="flex-grow">
-                            <div className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-3">
+                            <div className="inline-block px-2 md:px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] md:text-xs font-bold uppercase tracking-wider mb-2 md:mb-3">
                               {win.time}
                             </div>
 
-                            <h3 className="text-2xl font-bold text-foreground mb-3">
+                            <h3 className="text-lg md:text-2xl font-bold text-foreground mb-2 md:mb-3">
                               {win.title}
                             </h3>
 
-                            <p className="text-muted-foreground leading-relaxed">
+                            <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
                               {win.description}
                             </p>
                           </div>
@@ -125,15 +125,15 @@ export const QuickWinsSection = () => {
 
         {/* Bottom CTA */}
         <AnimatedSection animation="scale-up" delay={400}>
-          <div className="mt-16 text-center">
-            <div className="glass-heavy rounded-3xl card-padding-xl max-w-3xl mx-auto specular-highlight">
-              <h3 className="text-2xl font-bold text-foreground mb-4">
+          <div className="mt-12 md:mt-16 text-center">
+            <div className="glass-heavy rounded-2xl md:rounded-3xl p-6 md:card-padding-xl max-w-3xl mx-auto specular-highlight">
+              <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3 md:mb-4">
                 Ready to Start Your Protection Journey?
               </h3>
-              <p className="text-lg text-muted-foreground mb-6">
+              <p className="text-base md:text-lg text-muted-foreground mb-4 md:mb-6">
                 Join 5,000+ families who are already sleeping better at night
               </p>
-              <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground">
+              <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 text-xs md:text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                   <span>Setup in 5 minutes</span>

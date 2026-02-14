@@ -73,23 +73,23 @@ export const ComparisonSection = () => {
         {/* Comparison Table */}
         <AnimatedSection animation="fade-up" delay={100}>
           <div className="max-w-4xl mx-auto">
-            <div className="glass-card rounded-3xl overflow-hidden">
+            <div className="glass-card rounded-2xl md:rounded-3xl overflow-hidden">
               {/* Table Header */}
-              <div className="grid grid-cols-3 gap-4 p-6 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border-b border-border/50">
-                <div className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+              <div className="grid grid-cols-3 gap-2 md:gap-4 p-3 md:p-6 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border-b border-border/50">
+                <div className="text-[10px] md:text-sm font-semibold text-muted-foreground uppercase tracking-wider">
                   Feature
                 </div>
                 <div className="text-center">
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary to-accent">
-                    <span className="text-sm font-bold text-white uppercase tracking-wider">
-                      {SITE.name}
+                  <div className="inline-flex items-center gap-1 md:gap-2 px-2 md:px-4 py-1 md:py-2 rounded-full bg-gradient-to-r from-primary to-accent">
+                    <span className="text-[10px] md:text-sm font-bold text-white uppercase tracking-wider">
+                      Us
                     </span>
                   </div>
                 </div>
                 <div className="text-center">
-                  <div className="inline-block px-4 py-2 rounded-full bg-muted">
-                    <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-                      Other Companies
+                  <div className="inline-block px-2 md:px-4 py-1 md:py-2 rounded-full bg-muted">
+                    <span className="text-[10px] md:text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+                      Others
                     </span>
                   </div>
                 </div>
@@ -100,22 +100,22 @@ export const ComparisonSection = () => {
                 {comparisonData.map((item, index) => (
                   <div
                     key={item.feature}
-                    className="grid grid-cols-3 gap-4 p-6 items-center hover:bg-muted/30 transition-colors animate-fade-in"
+                    className="grid grid-cols-3 gap-2 md:gap-4 p-3 md:p-6 items-center hover:bg-muted/30 transition-colors animate-fade-in"
                     style={{ animationDelay: `${index * 0.05}s` }}
                   >
                     {/* Feature Name */}
-                    <div className="font-medium text-foreground">
+                    <div className="text-xs md:text-base font-medium text-foreground">
                       {item.feature}
                     </div>
 
                     {/* Us */}
                     <div className="text-center">
                       {item.us === true ? (
-                        <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/10">
-                          <Check className="w-6 h-6 text-primary" strokeWidth={3} />
+                        <div className="inline-flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full bg-primary/10">
+                          <Check className="w-4 h-4 md:w-6 md:h-6 text-primary" strokeWidth={3} />
                         </div>
                       ) : (
-                        <span className="text-sm font-semibold text-primary">
+                        <span className="text-[10px] md:text-sm font-semibold text-primary">
                           {item.us}
                         </span>
                       )}
@@ -124,11 +124,11 @@ export const ComparisonSection = () => {
                     {/* Others */}
                     <div className="text-center">
                       {item.others === false ? (
-                        <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-muted">
-                          <X className="w-6 h-6 text-muted-foreground" strokeWidth={2} />
+                        <div className="inline-flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full bg-muted">
+                          <X className="w-4 h-4 md:w-6 md:h-6 text-muted-foreground" strokeWidth={2} />
                         </div>
                       ) : (
-                        <span className="text-sm text-muted-foreground">
+                        <span className="text-[10px] md:text-sm text-muted-foreground">
                           {item.others}
                         </span>
                       )}
