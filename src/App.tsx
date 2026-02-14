@@ -125,6 +125,7 @@ import Maintenance from "./pages/Maintenance";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentCanceled from "./pages/PaymentCanceled";
 import GlassmorphismTrustHeroDemo from "./pages/GlassmorphismTrustHeroDemo";
+import StyleShowcase from "./pages/StyleShowcase";
 
 const queryClient = new QueryClient();
 
@@ -145,6 +146,7 @@ function PublicRoutes() {
       <Route path="/payment-success" element={<PageTransition variant="fade"><PaymentSuccess /></PageTransition>} />
       <Route path="/payment-canceled" element={<PageTransition variant="fade"><PaymentCanceled /></PageTransition>} />
       <Route path="/demo/glassmorphism-hero" element={<PageTransition variant="auto"><GlassmorphismTrustHeroDemo /></PageTransition>} />
+      <Route path="/style-showcase" element={<PageTransition variant="auto"><StyleShowcase /></PageTransition>} />
       <Route path="/articles" element={<PageTransition variant="auto"><Articles /></PageTransition>} />
       <Route path="/articles/:slug" element={<PageTransition variant="auto"><ArticleDetail /></PageTransition>} />
       <Route path="/contact" element={<PageTransition variant="auto"><Contact /></PageTransition>} />
