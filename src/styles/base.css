@@ -258,19 +258,23 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: "Rubik", sans-serif;
+    font-family: "Rubik", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-size: 1rem;
-    line-height: 1.62;
-    letter-spacing: -0.001em;
+    line-height: 1.65;
+    letter-spacing: -0.011em;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings:
       "kern" 1,
       "liga" 1,
-      "calt" 1;
+      "calt" 1,
+      "case" 1,
+      "tnum" 1;
     font-kerning: normal;
     font-optical-sizing: auto;
+    font-synthesis: none;
+    font-variant-ligatures: common-ligatures;
     overflow-x: hidden;
     width: 100%;
     position: relative;
@@ -283,6 +287,7 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
       hsl(var(--background)) 100%);
     background-size: 400% 400%;
     animation: gradientShift 20s ease infinite;
+    will-change: background-position;
   }
 
   @keyframes gradientShift {
@@ -384,12 +389,20 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     width: 100%;
   }
 
-  /* Prevent image flicker on load */
+  /* Prevent image flicker and layout shift */
   img {
     @apply block;
+    max-width: 100%;
+    height: auto;
     image-rendering: -webkit-optimize-contrast;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  /* Lazy loaded images */
+  img[loading="lazy"] {
+    content-visibility: auto;
   }
 
   a {
@@ -410,49 +423,92 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   h5,
   h6 {
     @apply font-bold;
-    font-family: "Rubik", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-    line-height: 1.08;
-    letter-spacing: -0.022em;
+    font-family: "Rubik", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
     text-wrap: balance;
+    font-weight: 700;
+    color: hsl(var(--foreground));
+    margin: 0;
   }
 
   h1 {
-    font-size: clamp(2rem, 3.6vw, 3.6rem);
-    letter-spacing: -0.03em;
+    font-size: clamp(2.25rem, 4vw + 1rem, 3.75rem);
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+    font-weight: 800;
   }
 
   h2 {
-    font-size: clamp(1.72rem, 2.8vw, 2.9rem);
-    letter-spacing: -0.026em;
+    font-size: clamp(1.875rem, 3vw + 0.5rem, 3rem);
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+    font-weight: 700;
   }
 
   h3 {
-    font-size: clamp(1.36rem, 2.15vw, 2.2rem);
-    letter-spacing: -0.018em;
+    font-size: clamp(1.5rem, 2.5vw + 0.5rem, 2.25rem);
+    letter-spacing: -0.022em;
+    line-height: 1.2;
+    font-weight: 700;
   }
 
   h4 {
-    font-size: clamp(1.2rem, 1.65vw, 1.74rem);
+    font-size: clamp(1.25rem, 2vw + 0.25rem, 1.875rem);
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+    font-weight: 600;
   }
 
   h5 {
-    font-size: clamp(1.08rem, 1.35vw, 1.42rem);
+    font-size: clamp(1.125rem, 1.5vw + 0.25rem, 1.5rem);
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+    font-weight: 600;
   }
 
   h6 {
-    font-size: clamp(1rem, 1.2vw, 1.2rem);
-    letter-spacing: -0.01em;
+    font-size: clamp(1rem, 1vw + 0.125rem, 1.25rem);
+    letter-spacing: -0.005em;
+    line-height: 1.5;
+    font-weight: 600;
   }
 
-  p,
-  li,
-  label {
-    letter-spacing: 0;
+  p {
+    font-size: 1rem;
+    line-height: 1.75;
+    letter-spacing: -0.011em;
+    margin: 0 0 1rem;
+    color: hsl(var(--foreground) / 0.9);
+    max-width: 70ch;
   }
 
-  p,
   li {
-    line-height: 1.68;
+    line-height: 1.7;
+    letter-spacing: -0.008em;
+    margin-bottom: 0.5rem;
+  }
+
+  label {
+    letter-spacing: -0.005em;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  strong,
+  b {
+    font-weight: 600;
+    color: hsl(var(--foreground));
+  }
+
+  em,
+  i {
+    font-style: italic;
+  }
+
+  small {
+    font-size: 0.875rem;
+    line-height: 1.6;
   }
 
   /* Minimum tap targets for accessibility */

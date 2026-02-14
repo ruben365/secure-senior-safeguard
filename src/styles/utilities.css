@@ -621,3 +621,54 @@ video {
   animation: shimmer-slide 3s ease-in-out infinite;
   pointer-events: none;
 }
+
+/* ===== PERFORMANCE UTILITIES ===== */
+
+/* Prevent layout shifts */
+.aspect-ratio-16-9 {
+  aspect-ratio: 16 / 9;
+}
+
+.aspect-ratio-4-3 {
+  aspect-ratio: 4 / 3;
+}
+
+.aspect-ratio-1-1 {
+  aspect-ratio: 1 / 1;
+}
+
+/* GPU acceleration */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Content visibility optimization */
+.lazy-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+
+/* Prevent font flash */
+.font-loaded {
+  font-family: "Rubik", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Reduce CLS */
+.reserve-space {
+  min-height: 1px;
+}
+
+/* Optimize repaints */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Remove will-change after animation */
+.animation-complete {
+  will-change: auto;
+}
