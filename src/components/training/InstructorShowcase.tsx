@@ -105,7 +105,7 @@ export const InstructorShowcase = () => {
 
   return (
     <>
-      <section className="py-20 bg-muted/30">
+      <section className="py-10 sm:py-16 md:py-20 bg-muted/30">
         <div className="container mx-auto px-4 lg:px-12">
           <ScrollReveal>
             <div className="text-center mb-14">
