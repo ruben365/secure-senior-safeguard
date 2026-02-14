@@ -488,7 +488,7 @@ function LearnAndTrain() {
             subheadline=""
             showScrollIndicator={true}
           >
-            <div className="text-center md:text-left mb-6">
+            <div className="text-center md:text-left mb-4 sm:mb-6">
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3 glow-text">
                 <RotatingHeadlines headlines={trainingHeadlines} className="" />
               </h1>
@@ -527,7 +527,7 @@ function LearnAndTrain() {
         </div>
 
         {/* ══════════ SECTION 1: WHY FAMILIES TRUST US ══════════ */}
-        <section className="py-20 bg-background">
+        <section className="py-10 sm:py-16 md:py-20 bg-background">
           <div className="container mx-auto px-4 lg:px-12">
             <div className="text-center mb-14">
               <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
@@ -627,7 +627,7 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 2: HOW IT WORKS ══════════ */}
-        <section id="book" className="py-20 bg-muted/30">
+        <section id="book" className="py-10 sm:py-16 md:py-20 bg-muted/30">
           <div className="container mx-auto px-4 lg:px-12">
             <div className="text-center mb-14">
               <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
@@ -665,7 +665,7 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 3: SCAM PREVENTION WORKSHOPS ══════════ */}
-        <section id="training" className="py-20 bg-background">
+        <section id="training" className="py-10 sm:py-16 md:py-20 bg-background">
           <div className="container mx-auto px-4 lg:px-12">
             <div className="text-center mb-14">
               <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
@@ -681,13 +681,13 @@ function LearnAndTrain() {
             </div>
 
             {/* Veterans banner */}
-            <div className="flex justify-center mb-10">
-              <div className="inline-flex items-center gap-3 px-6 py-3 bg-card border border-border/60 rounded-full shadow-sm">
-                <span className="text-xl">🇺🇸</span>
-                <span className="font-bold text-foreground text-sm">
+            <div className="flex justify-center mb-8 sm:mb-10 px-2">
+              <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2.5 sm:py-3 bg-card border border-border/60 rounded-full shadow-sm text-center flex-wrap justify-center">
+                <span className="text-lg sm:text-xl">🇺🇸</span>
+                <span className="font-bold text-foreground text-xs sm:text-sm">
                   Veterans & First Responders Save 10%
                 </span>
-                <span className="text-xs text-muted-foreground">
+                <span className="text-[10px] sm:text-xs text-muted-foreground">
                   · Applied at checkout
                 </span>
               </div>
@@ -705,7 +705,7 @@ function LearnAndTrain() {
         <InstructorShowcase />
 
         {/* ══════════ SECTION 4: SIMPLE PROTECTION IN 4 STEPS ══════════ */}
-        <section className="py-20 bg-muted/30">
+        <section className="py-10 sm:py-16 md:py-20 bg-muted/30">
           <div className="container mx-auto px-4 lg:px-12">
             <div className="text-center mb-14">
               <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-accent bg-accent/10 px-4 py-1.5 rounded-full mb-4">
@@ -745,7 +745,7 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 5: THREAT ANALYSIS ══════════ */}
-        <section className="py-20 bg-background">
+        <section className="py-10 sm:py-16 md:py-20 bg-background">
           <div className="container mx-auto px-4 lg:px-12">
             <div className="text-center mb-14">
               <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-accent bg-accent/10 px-4 py-1.5 rounded-full mb-4">
@@ -759,7 +759,7 @@ function LearnAndTrain() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto">
               {threats.map((threat, index) => (
                 <ScrollReveal key={index} animation="fade-up" delay={index * 50}>
                   <div
@@ -794,7 +794,7 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 6: AI PROFESSIONAL TRAINING ══════════ */}
-        <section id="ai-pro-training" className="py-20 bg-muted/30">
+        <section id="ai-pro-training" className="py-10 sm:py-16 md:py-20 bg-muted/30">
           <div className="container mx-auto px-4 lg:px-12">
             <div className="text-center mb-14">
               <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
@@ -845,7 +845,7 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 7: SECURE YOUR FAMILY ══════════ */}
-        <section className="py-20 bg-background">
+        <section className="py-10 sm:py-16 md:py-20 bg-background">
           <div className="container mx-auto px-4 lg:px-12">
             <div className="text-center mb-14">
               <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
@@ -910,14 +910,14 @@ function LearnAndTrain() {
             </div>
 
             {/* Family Safety Vault */}
-            <div className="max-w-4xl mx-auto bg-card border border-border/60 rounded-2xl p-8 md:p-10 shadow-sm">
+            <div className="max-w-4xl mx-auto bg-card border border-border/60 rounded-2xl p-5 sm:p-8 md:p-10 shadow-sm">
               <div className="text-center">
                 <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
                   <Lock className="w-8 h-8 text-primary" />
                 </div>
                 <h3 className="text-2xl font-black text-foreground mb-3">Family Safety Vault</h3>
                 <p className="text-muted-foreground mb-6">Included with Family & Premium Plans</p>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-3 max-w-2xl mx-auto">
+                <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-3 max-w-2xl mx-auto">
                   {[
                     { icon: "🔑", feature: "Family safe words" },
                     { icon: "📞", feature: "Trusted caller list" },
@@ -938,7 +938,7 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 8: SCAMS WE'VE CAUGHT ══════════ */}
-        <section className="py-20 bg-muted/30">
+        <section className="py-10 sm:py-16 md:py-20 bg-muted/30">
           <div className="container mx-auto px-4 lg:px-12">
             <div className="text-center mb-14">
               <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
@@ -1025,7 +1025,7 @@ function LearnAndTrain() {
         )}
 
         {/* ══════════ FINAL CTA ══════════ */}
-        <section className="py-24 relative overflow-hidden">
+        <section className="py-16 sm:py-20 md:py-24 relative overflow-hidden">
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${seniorCouple})` }}
@@ -1044,7 +1044,7 @@ function LearnAndTrain() {
                   document.getElementById("training")?.scrollIntoView({ behavior: "smooth" })
                 }
                 size="lg"
-                className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-lg font-bold"
+                className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-bold w-full sm:w-auto"
               >
                 Get Started
                 <ArrowRight className="w-5 h-5 ml-2" />
@@ -1053,7 +1053,7 @@ function LearnAndTrain() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="rounded-full bg-white/10 backdrop-blur-md text-white border-white/30 hover:bg-white/20 px-8 py-6 text-lg font-bold"
+                className="rounded-full bg-white/10 backdrop-blur-md text-white border-white/30 hover:bg-white/20 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-bold w-full sm:w-auto"
               >
                 <Link to="/contact">
                   <Headphones className="w-5 h-5 mr-2" />
