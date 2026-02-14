@@ -41,7 +41,7 @@ const faqs = [
 
 export const FAQPreview = () => {
   return (
-    <section className="py-6 lg:py-8 relative overflow-hidden bg-gradient-to-br from-background via-white to-muted/20 dynamic-gradient-overlay">
+    <section className="py-4 lg:py-6 relative overflow-hidden">
       {/* Grid pattern */}
       <GridPattern />
 
