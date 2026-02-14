@@ -24,17 +24,17 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   }
 
   :root {
-    /* Base colors - warm peach-cream background */
-    --background: 24 40% 96%;
-    --foreground: 240 20% 16%;
+    /* Base colors - warm blush-cream background */
+    --background: 330 28% 96%;
+    --foreground: 270 22% 14%;
 
-    /* Deep Violet Primary (from #493C62) */
-    --primary: 258 25% 31%;
+    /* Rich Violet Primary (inspired by #5B3765 / #493C62) */
+    --primary: 288 30% 30%;
     --primary-foreground: 0 0% 100%;
 
     /* Coral-Peach Accent (from #F8926A) */
-    --accent: 18 92% 69%;
-    --accent-foreground: 258 25% 16%;
+    --accent: 18 90% 69%;
+    --accent-foreground: 288 30% 14%;
 
     /* Success - warm sage */
     --success: 152 48% 45%;
@@ -44,24 +44,24 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     --destructive: 8 70% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Card & Surface - warm peachy white */
-    --card: 28 30% 98%;
-    --card-foreground: 258 20% 15%;
+    /* Card & Surface - soft lavender-white */
+    --card: 310 22% 98%;
+    --card-foreground: 288 22% 14%;
 
-    --popover: 28 30% 98%;
-    --popover-foreground: 258 20% 15%;
+    --popover: 310 22% 98%;
+    --popover-foreground: 288 22% 14%;
 
-    /* Secondary - soft peach-lavender tint */
-    --secondary: 18 28% 93%;
-    --secondary-foreground: 258 25% 31%;
+    /* Secondary - pastel blush-lavender */
+    --secondary: 320 24% 93%;
+    --secondary-foreground: 288 30% 30%;
 
-    /* Muted - warm peach-blush */
-    --muted: 20 20% 92%;
-    --muted-foreground: 258 12% 42%;
+    /* Muted - warm mauve */
+    --muted: 310 18% 92%;
+    --muted-foreground: 288 14% 40%;
 
-    --border: 20 22% 88%;
-    --input: 24 24% 94%;
-    --ring: 258 25% 31%;
+    --border: 310 18% 87%;
+    --input: 320 20% 94%;
+    --ring: 288 30% 30%;
 
     /* Standardized radius - 8px base */
     --radius: 0.5rem;
@@ -77,14 +77,14 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     --navy-200: 210 24% 78%;
     --navy-100: 210 20% 93%;
 
-    /* Lavender/Purple spectrum (from #BB81B5 to #493C62) */
-    --lavender-700: 258 25% 31%;
-    --lavender-600: 275 28% 40%;
-    --lavender-500: 308 28% 61%;
-    --lavender-400: 310 38% 72%;
-    --lavender-300: 315 42% 82%;
-    --lavender-200: 320 48% 90%;
-    --lavender-100: 330 40% 96%;
+    /* Lavender/Purple spectrum (richer, from palette #9E6899 → #5B3765) */
+    --lavender-700: 288 30% 30%;
+    --lavender-600: 295 28% 38%;
+    --lavender-500: 308 30% 55%;
+    --lavender-400: 316 40% 68%;
+    --lavender-300: 325 48% 80%;
+    --lavender-200: 330 52% 89%;
+    --lavender-100: 335 45% 95%;
 
     /* Coral/Peach spectrum (from #F8926A) */
     --coral-600: 15 85% 52%;
@@ -94,17 +94,17 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     --coral-200: 22 85% 88%;
     --coral-100: 25 75% 95%;
 
-    /* Blush Pink (from #F6D7DD) */
-    --blush-500: 348 55% 88%;
-    --blush-400: 348 60% 92%;
-    --blush-300: 348 65% 95%;
+    /* Blush Pink (from #F3CCDE / #F6D7DD) */
+    --blush-500: 330 58% 87%;
+    --blush-400: 332 62% 91%;
+    --blush-300: 335 68% 95%;
 
-    /* Neutral slate tones - warmer */
-    --slate-900: 258 22% 12%;
-    --slate-700: 258 16% 28%;
-    --slate-500: 258 10% 45%;
-    --slate-300: 258 8% 72%;
-    --slate-100: 340 12% 96%;
+    /* Neutral slate tones - warmer purple-tinted */
+    --slate-900: 288 22% 12%;
+    --slate-700: 288 16% 26%;
+    --slate-500: 288 10% 42%;
+    --slate-300: 300 8% 70%;
+    --slate-100: 330 14% 96%;
 
     /* Gold accent for premium touches */
     --gold-600: 35 90% 45%;
@@ -112,19 +112,19 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     --gold-400: 42 88% 60%;
     --gold-300: 45 85% 72%;
 
-    /* Purple/violet for legacy compatibility */
-    --purple-900: 258 40% 18%;
-    --purple-700: 258 35% 28%;
-    --purple-500: 258 30% 38%;
-    --purple-400: 258 28% 48%;
-    --purple-300: 275 25% 62%;
-    --purple-200: 290 22% 78%;
-    --purple-100: 310 18% 93%;
+    /* Purple/violet - richer spectrum (#F3CCDE → #BA88AE → #5B3765) */
+    --purple-900: 288 40% 18%;
+    --purple-700: 288 35% 26%;
+    --purple-500: 290 30% 36%;
+    --purple-400: 295 28% 45%;
+    --purple-300: 308 28% 58%;
+    --purple-200: 316 30% 74%;
+    --purple-100: 330 35% 92%;
 
-    --violet-600: 308 32% 40%;
-    --violet-500: 308 28% 50%;
-    --violet-400: 310 30% 60%;
-    --violet-300: 312 35% 72%;
+    --violet-600: 295 35% 38%;
+    --violet-500: 300 30% 48%;
+    --violet-400: 308 32% 58%;
+    --violet-300: 316 38% 70%;
 
     --teal-600: 168 55% 35%;
     --teal-500: 168 50% 42%;
@@ -137,52 +137,52 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     --cyan-400: 188 45% 55%;
 
     /* Refined Shadows - warm ombre tint */
-    --shadow-xs: 0 1px 2px hsl(258 20% 20% / 0.04);
-    --shadow-sm: 0 1px 3px hsl(258 20% 20% / 0.05);
-    --shadow-md: 0 2px 8px -2px hsl(258 20% 20% / 0.06);
-    --shadow-lg: 0 4px 16px -4px hsl(258 20% 20% / 0.08);
+    --shadow-xs: 0 1px 2px hsl(288 20% 20% / 0.04);
+    --shadow-sm: 0 1px 3px hsl(288 20% 20% / 0.05);
+    --shadow-md: 0 2px 8px -2px hsl(288 20% 20% / 0.06);
+    --shadow-lg: 0 4px 16px -4px hsl(288 20% 20% / 0.08);
 
-    --sidebar-background: 348 20% 99%;
-    --sidebar-foreground: 258 20% 15%;
-    --sidebar-primary: 258 25% 31%;
+    --sidebar-background: 330 20% 99%;
+    --sidebar-foreground: 288 20% 14%;
+    --sidebar-primary: 288 30% 30%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 310 18% 94%;
-    --sidebar-accent-foreground: 258 25% 31%;
-    --sidebar-border: 310 14% 89%;
-    --sidebar-ring: 258 25% 31%;
+    --sidebar-accent: 320 20% 94%;
+    --sidebar-accent-foreground: 288 30% 30%;
+    --sidebar-border: 316 16% 89%;
+    --sidebar-ring: 288 30% 30%;
 
     /* Global text scale (rem-based) */
     --text-scale: 1;
   }
 
   .dark {
-    --background: 258 35% 7%;
-    --foreground: 340 15% 95%;
-    --card: 258 30% 11%;
-    --card-foreground: 340 15% 95%;
-    --popover: 258 30% 11%;
-    --popover-foreground: 340 15% 95%;
-    --primary: 18 85% 68%;
-    --primary-foreground: 258 35% 7%;
-    --secondary: 275 22% 20%;
-    --secondary-foreground: 340 15% 95%;
-    --muted: 258 18% 18%;
-    --muted-foreground: 310 10% 65%;
+    --background: 288 35% 7%;
+    --foreground: 330 18% 95%;
+    --card: 288 30% 11%;
+    --card-foreground: 330 18% 95%;
+    --popover: 288 30% 11%;
+    --popover-foreground: 330 18% 95%;
+    --primary: 316 45% 68%;
+    --primary-foreground: 288 35% 7%;
+    --secondary: 295 22% 18%;
+    --secondary-foreground: 330 18% 95%;
+    --muted: 288 18% 16%;
+    --muted-foreground: 316 12% 65%;
     --accent: 18 88% 65%;
     --accent-foreground: 0 0% 100%;
     --destructive: 8 70% 55%;
     --destructive-foreground: 0 0% 100%;
-    --border: 258 22% 22%;
-    --input: 258 22% 22%;
-    --ring: 18 85% 68%;
-    --sidebar-background: 258 35% 6%;
-    --sidebar-foreground: 340 12% 95%;
-    --sidebar-primary: 18 85% 68%;
-    --sidebar-primary-foreground: 258 35% 7%;
-    --sidebar-accent: 275 22% 18%;
-    --sidebar-accent-foreground: 340 12% 95%;
-    --sidebar-border: 258 22% 18%;
-    --sidebar-ring: 18 85% 68%;
+    --border: 288 22% 20%;
+    --input: 288 22% 20%;
+    --ring: 316 45% 68%;
+    --sidebar-background: 288 35% 6%;
+    --sidebar-foreground: 330 14% 95%;
+    --sidebar-primary: 316 45% 68%;
+    --sidebar-primary-foreground: 288 35% 7%;
+    --sidebar-accent: 295 22% 16%;
+    --sidebar-accent-foreground: 330 14% 95%;
+    --sidebar-border: 288 22% 16%;
+    --sidebar-ring: 316 45% 68%;
   }
 }
 
@@ -195,20 +195,20 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   :root {
     /* Skeuomorphic shadow layers - warm ombre tint */
     --skeuo-shadow-raised:
-      0 1px 2px hsl(258 25% 20% / 0.04),
-      0 2px 4px hsl(310 20% 30% / 0.03),
+      0 1px 2px hsl(288 25% 20% / 0.04),
+      0 2px 4px hsl(316 20% 30% / 0.03),
       0 4px 8px hsl(18 30% 40% / 0.02);
-    --skeuo-shadow-pressed: inset 0 1px 2px hsl(258 20% 15% / 0.08);
+    --skeuo-shadow-pressed: inset 0 1px 2px hsl(288 20% 15% / 0.08);
     --skeuo-shadow-floating:
-      0 2px 8px hsl(258 25% 20% / 0.04),
-      0 8px 24px hsl(310 20% 30% / 0.06);
+      0 2px 8px hsl(288 25% 20% / 0.04),
+      0 8px 24px hsl(316 20% 30% / 0.06);
     --skeuo-highlight: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0.25) 0%,
       transparent 50%
     );
     --skeuo-inset:
-      inset 0 1px 2px hsl(258 20% 15% / 0.06),
+      inset 0 1px 2px hsl(288 20% 15% / 0.06),
       inset 0 -1px 1px rgba(255, 255, 255, 0.5);
 
     /* Warm ombre shadows - coral → lavender → violet */
@@ -223,27 +223,27 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     --skeuo-shadow-mixed:
       0 2px 4px hsl(var(--coral-400) / 0.08),
       0 6px 12px hsl(var(--lavender-400) / 0.07),
-      0 12px 24px hsl(258 25% 31% / 0.05);
+      0 12px 24px hsl(288 30% 30% / 0.05);
 
     /* Widget ombre shadow - the signature warm glow */
     --skeuo-shadow-ombre:
       0 2px 6px hsl(var(--coral-400) / 0.08),
       0 6px 16px hsl(var(--lavender-400) / 0.06),
-      0 12px 28px hsl(258 30% 30% / 0.05),
+      0 12px 28px hsl(288 30% 30% / 0.05),
       inset 0 1px 0 hsl(0 0% 100% / 0.9);
 
     /* Glassmorphism + Skeuomorphism hybrid backgrounds */
     --skeuo-glass-bg: linear-gradient(
       135deg,
-      hsl(348 20% 99% / 0.92) 0%,
-      hsl(310 15% 97% / 0.68) 50%,
-      hsl(348 20% 99% / 0.85) 100%
+      hsl(330 22% 99% / 0.92) 0%,
+      hsl(316 18% 96% / 0.68) 50%,
+      hsl(330 22% 99% / 0.85) 100%
     );
-    --skeuo-glass-border: hsl(310 20% 92% / 0.65);
+    --skeuo-glass-border: hsl(316 22% 90% / 0.65);
     --skeuo-glass-blur: blur(28px) saturate(1.8) brightness(1.05);
     --skeuo-glass-shadow:
-      0 12px 32px -16px hsl(258 25% 25% / 0.15),
-      0 4px 12px -6px hsl(310 20% 30% / 0.08),
+      0 12px 32px -16px hsl(288 25% 25% / 0.15),
+      0 4px 12px -6px hsl(316 20% 30% / 0.08),
       inset 0 1px 0 hsl(0 0% 100% / 0.92);
 
     /* Premium coral-lavender gradient for accents */
@@ -294,11 +294,12 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     position: relative;
     /* Uniform warm background - visible peach-lavender warmth */
     background: linear-gradient(160deg,
-      hsl(24 40% 96%) 0%,
-      hsl(18 50% 94% / 0.6) 30%,
-      hsl(var(--coral-100) / 0.4) 50%,
-      hsl(var(--lavender-100) / 0.35) 70%,
-      hsl(24 40% 96%) 100%);
+      hsl(330 28% 96%) 0%,
+      hsl(335 32% 94% / 0.6) 25%,
+      hsl(var(--blush-300) / 0.4) 45%,
+      hsl(var(--lavender-100) / 0.5) 65%,
+      hsl(var(--purple-100) / 0.3) 80%,
+      hsl(330 28% 96%) 100%);
   }
 
   @media (min-width: 768px) {
