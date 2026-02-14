@@ -177,8 +177,8 @@ export const WorkshopsPromo = () => {
               </div>
 
               {/* Floating Stats Badge - Widget Premium Style */}
-              <div className="absolute -bottom-3 -right-3 widget-premium micro-scale">
-                <div className="flex items-center gap-2">
+              <div className="absolute -bottom-3 -right-3 glass-widget rounded-xl card-padding-sm micro-scale border border-white/30">
+                <div className="flex items-center spacing-sm">
                   <div
                     className="w-10 h-10 rounded-lg flex items-center justify-center shadow-3d bg-gradient-to-br from-primary to-accent"
                     aria-hidden="true"

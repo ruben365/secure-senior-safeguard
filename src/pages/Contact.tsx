@@ -243,12 +243,12 @@ function Contact() {
 
         <div className="container-padding relative z-10">
           {/* Contact Methods Grid with Premium Styling */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 spacing-md mb-8">
             {contactMethods.map((method, index) => {
               const IconComponent = method.icon;
               return (
                 <ScrollReveal key={index} delay={index * 100}>
-                  <div className="group relative bg-card/80 backdrop-blur-sm rounded-2xl border border-border/50 p-6 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden h-full">
+                  <div className="group relative glass-card rounded-2xl border-white/30 card-padding-md transition-all duration-500 hover:-translate-y-2 overflow-hidden h-full">
                     {/* Gradient border effect on hover */}
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
 

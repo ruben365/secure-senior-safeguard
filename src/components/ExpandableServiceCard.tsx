@@ -30,12 +30,12 @@ export const ExpandableServiceCard = ({
     >
       <Card
         className={cn(
-          "group transition-all duration-400 hover:shadow-[0_20px_40px_rgba(109,40,217,0.15)] overflow-hidden cursor-pointer",
-          isExpanded && "shadow-lg border-primary/30",
+          "glass-card group transition-all duration-400 overflow-hidden cursor-pointer border-white/30",
+          isExpanded && "glass-active border-white/40",
         )}
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        <div className="p-5 min-h-[120px] flex items-center">
+        <div className="card-padding-md min-h-[120px] flex items-center">
           <div className="flex items-center gap-3 w-full">
             <div className="w-11 h-11 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-400 group-hover:rotate-[5deg]">
               {icon}

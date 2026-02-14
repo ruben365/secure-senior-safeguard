@@ -22,7 +22,7 @@ const TestimonialCard = ({
   onVideoClick,
 }: TestimonialCardProps) => {
   return (
-    <div className="premium-3d-card premium-shadow-depth premium-shine-sweep bg-gradient-card rounded-2xl p-8 shadow-soft relative overflow-hidden border-none group card-enhanced">
+    <div className="glass-card rounded-2xl card-padding-lg border border-white/30 relative overflow-hidden group transition-all duration-300 hover:scale-[1.02]">
       {/* Large gradient quote mark background */}
       <div className="absolute -top-4 left-6 text-[120px] font-bold gradient-text-primary opacity-10 leading-none pointer-events-none select-none group-hover:opacity-20 transition-opacity duration-500">
         "

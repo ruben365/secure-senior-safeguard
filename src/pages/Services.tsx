@@ -328,10 +328,10 @@ const Services = () => {
               </div>
             </ScrollReveal>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 spacing-lg">
               {benefits.map((benefit, index) => (
                 <ScrollReveal key={index} delay={index * 100}>
-                  <Card className="h-full hover:shadow-strong transition-all duration-300">
+                  <Card className="h-full glass-card border-white/30 transition-all duration-300">
                     <CardHeader>
                       <div
                         className={`w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-4`}
@@ -366,11 +366,11 @@ const Services = () => {
               </div>
             </ScrollReveal>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 spacing-lg max-w-6xl mx-auto">
               {services.map((service, index) => (
                 <ScrollReveal key={index} delay={index * 100}>
                   <Card
-                    className={`h-full flex flex-col relative overflow-hidden ${service.popular ? "border-primary shadow-strong" : ""}`}
+                    className={`h-full flex flex-col relative overflow-hidden ${service.popular ? "glass-heavy border-primary/40" : "glass-card border-white/30"}`}
                   >
                     {service.popular && (
                       <div className="absolute top-4 right-4">
