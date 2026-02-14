@@ -51,7 +51,7 @@ export const CompellingCTA = ({ variant = 'primary', className = '' }: Compellin
                 >
                   <Link to="/contact">
                     <Phone className="mr-2 w-5 h-5" />
-                    Call: {SITE.contact.phone}
+                    Call: {SITE.phone.display}
                   </Link>
                 </Button>
               </div>
