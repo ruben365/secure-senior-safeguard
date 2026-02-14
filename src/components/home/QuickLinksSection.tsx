@@ -5,8 +5,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Briefcase, HelpCircle, MessageCircle, ArrowRight, Heart, Users, Star, Sparkles, AlertTriangle, CheckCircle } from "lucide-react";
 
 const quickLinks = [
-  { icon: HelpCircle, title: "Frequently Asked Questions", description: "Get answers to common questions about our services, pricing, and protection methods.", cta: "View FAQ", link: "/faq", gradient: "from-primary to-accent" },
-  { icon: MessageCircle, title: "Contact Us", description: "Have a question? Our Ohio-based team is ready to help you with personalized support.", cta: "Get in Touch", link: "/contact", gradient: "from-accent to-primary" },
+  { icon: HelpCircle, title: "Frequently Asked Questions", description: "Get answers to common questions about our services, pricing, and protection methods.", cta: "View FAQ", link: "/faq" },
+  { icon: MessageCircle, title: "Contact Us", description: "Have a question? Our Ohio-based team is ready to help you with personalized support.", cta: "Get in Touch", link: "/contact" },
 ];
 
 const careerHighlights = [
@@ -19,21 +19,21 @@ export const QuickLinksSection = () => {
   const [checklistOpen, setChecklistOpen] = useState(false);
 
   return (
-    <section className="py-16 lg:py-20">
-      <div className="container mx-auto px-4 lg:px-8">
+    <section className="py-16 lg:py-24">
+      <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-black text-foreground mb-3">Ready to Get Started?</h2>
           <p className="text-muted-foreground text-base max-w-2xl mx-auto">
-            Whether you have questions or want to join our team, we're here to help.
+            Whether you have questions or want to join our team, we are here to help.
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {quickLinks.map((item, index) => (
             <Link key={index} to={item.link} className="group block h-full">
-              <div className="bg-card rounded-2xl border border-border/60 p-6 h-full flex flex-col hover:border-primary/30 hover:shadow-lg transition-all duration-300">
-                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center mb-5 group-hover:scale-105 transition-transform shadow-md`}>
-                  <item.icon className="w-7 h-7 text-white" />
+              <div className="bg-card rounded-2xl border border-border/60 p-6 h-full flex flex-col hover:border-primary/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                  <item.icon className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="font-bold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">{item.title}</h3>
                 <p className="text-sm text-muted-foreground mb-4 flex-grow">{item.description}</p>
@@ -46,13 +46,13 @@ export const QuickLinksSection = () => {
 
           {/* Careers */}
           <Link to="/careers" className="group block h-full">
-            <div className="bg-primary/5 rounded-2xl border border-primary/20 p-6 h-full flex flex-col hover:border-primary/40 hover:shadow-lg transition-all duration-300">
+            <div className="bg-gradient-to-br from-primary/5 to-accent/5 rounded-2xl border border-primary/20 p-6 h-full flex flex-col hover:border-primary/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
-                  <Briefcase className="w-7 h-7 text-white" />
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Briefcase className="w-6 h-6 text-white" />
                 </div>
                 <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-primary/10 rounded-full text-xs font-bold text-primary">
-                  <Sparkles className="w-3 h-3" /> Hiring!
+                  <Sparkles className="w-3 h-3" /> Hiring
                 </span>
               </div>
               <h3 className="font-bold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">Join Our Team</h3>
@@ -72,10 +72,10 @@ export const QuickLinksSection = () => {
 
           {/* Checklist */}
           <div className="h-full">
-            <div className="bg-card rounded-2xl border border-border/60 p-6 h-full flex flex-col hover:border-primary/30 hover:shadow-lg transition-all duration-300">
+            <div className="bg-card rounded-2xl border border-border/60 p-6 h-full flex flex-col hover:border-primary/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-md">
-                  <AlertTriangle className="w-7 h-7 text-white" />
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center">
+                  <AlertTriangle className="w-6 h-6 text-white" />
                 </div>
                 <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-amber-500/10 rounded-full text-xs font-bold text-amber-700">
                   <Sparkles className="w-3 h-3" /> Checklist
@@ -92,7 +92,7 @@ export const QuickLinksSection = () => {
 
         <div className="text-center mt-10">
           <p className="text-muted-foreground text-sm">
-            <span className="font-semibold">Ohio-Based</span> • <span className="font-semibold">Veteran-Supporting</span> • <span className="font-semibold">Trusted by 100+ Families</span>
+            <span className="font-semibold">Ohio-Based</span> · <span className="font-semibold">Veteran-Supporting</span> · <span className="font-semibold">Trusted by 100+ Families</span>
           </p>
         </div>
       </div>

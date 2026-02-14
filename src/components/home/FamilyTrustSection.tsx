@@ -1,13 +1,14 @@
 import { Shield, Users, Award, CheckCircle, TrendingUp, Clock } from "lucide-react";
 
 const stats = [
-  { icon: TrendingUp, value: "100+", label: "Ohio Families Protected", description: "Growing every day with trusted protection" },
-  { icon: Shield, value: "24/7", label: "Monitoring & Alerts", description: "Round-the-clock protection" },
-  { icon: Award, value: "Client-Reviewed", label: "Trusted Feedback", description: "Real testimonials from real families" },
+  { value: "100+", label: "Ohio Families Protected" },
+  { value: "24/7", label: "Monitoring & Alerts" },
+  { value: "99%", label: "Client Satisfaction" },
+  { value: "30-Day", label: "Money-Back Guarantee" },
 ];
 
 const trustPoints = [
-  { text: "24/7 Real-time monitoring & alerts", icon: Clock },
+  { text: "24/7 Real-time monitoring and alerts", icon: Clock },
   { text: "Dedicated Ohio-based support team", icon: Users },
   { text: "10% Veteran discount on all services", icon: Shield },
   { text: "30-day money-back guarantee", icon: CheckCircle },
@@ -15,44 +16,35 @@ const trustPoints = [
 
 export const FamilyTrustSection = () => {
   return (
-    <section className="py-16 lg:py-20" aria-labelledby="trust-heading">
-      <div className="container mx-auto px-4 lg:px-8">
-        {/* Header */}
+    <section className="py-16 lg:py-24" aria-labelledby="trust-heading">
+      <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 mb-5">
-            <span className="w-2 h-2 rounded-full bg-gradient-to-r from-primary to-accent" />
-            <span className="text-xs font-bold uppercase tracking-[0.15em] text-primary">Real Protection, Real Results</span>
-          </div>
-          <h2 id="trust-heading" className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground leading-tight mb-3">
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-4 block">Real Protection, Real Results</span>
+          <h2 id="trust-heading" className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] mb-3">
             Why Families{" "}
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Trust Us</span>
           </h2>
           <p className="text-muted-foreground text-base max-w-2xl mx-auto">
-            Join Ohio families who trust us with their digital safety every day.
+            Join Ohio families who rely on us for their digital safety every day.
           </p>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid md:grid-cols-3 gap-6 mb-10 max-w-4xl mx-auto" role="list" aria-label="Trust statistics">
+        {/* Stats row - numbers-focused */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
           {stats.map((stat) => (
-            <div key={stat.label} role="listitem"
-              className="bg-card rounded-2xl border border-border/60 p-6 text-center hover:border-primary/30 hover:shadow-lg transition-all duration-300">
-              <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-primary/8 flex items-center justify-center">
-                <stat.icon className="w-7 h-7 text-primary" />
-              </div>
-              <div className="text-3xl font-black text-foreground mb-1">{stat.value}</div>
-              <div className="text-sm font-bold text-foreground mb-1">{stat.label}</div>
-              <p className="text-xs text-muted-foreground">{stat.description}</p>
+            <div key={stat.label} className="text-center p-6 rounded-2xl bg-card border border-border/60 hover:border-primary/30 hover:shadow-lg transition-all duration-300">
+              <div className="text-3xl md:text-4xl font-black text-foreground mb-1 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">{stat.value}</div>
+              <div className="text-sm font-medium text-muted-foreground">{stat.label}</div>
             </div>
           ))}
         </div>
 
-        {/* Trust Points */}
-        <div className="max-w-4xl mx-auto bg-card rounded-2xl border border-border/60 p-6 lg:p-8" role="list" aria-label="Trust guarantees">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Trust points - horizontal strip */}
+        <div className="bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 rounded-2xl border border-border/40 p-6 lg:p-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" role="list" aria-label="Trust guarantees">
             {trustPoints.map((point, i) => (
-              <div key={i} role="listitem" className="flex items-center gap-3 p-3 rounded-xl bg-muted/30 hover:bg-primary/5 transition-colors">
-                <div className="w-10 h-10 rounded-xl bg-primary/8 flex items-center justify-center flex-shrink-0">
+              <div key={i} role="listitem" className="flex items-center gap-3 p-3 rounded-xl hover:bg-card/80 transition-colors">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <point.icon className="w-5 h-5 text-primary" />
                 </div>
                 <span className="text-sm font-medium text-foreground/90">{point.text}</span>
