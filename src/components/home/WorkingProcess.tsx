@@ -35,11 +35,7 @@ const steps = [
 export const WorkingProcess = () => {
   return (
     <section
-      className="py-6 lg:py-8 dynamic-gradient-overlay"
-      style={{
-        background:
-          "linear-gradient(135deg, #ffffff 0%, #faf9f7 50%, #fff5f0 100%)",
-      }}
+      className="py-6 lg:py-8"
       aria-labelledby="process-heading"
     >
       <div className="container mx-auto px-4">
