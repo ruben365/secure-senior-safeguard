@@ -126,6 +126,9 @@ const ServiceInquiriesList = lazy(
   () => import("./pages/admin/ServiceInquiriesList"),
 );
 const BookingsList = lazy(() => import("./pages/admin/BookingsList"));
+const GraphicDesignAdmin = lazy(() => import("./pages/admin/GraphicDesignAdmin"));
+const Portfolio = lazy(() => import("./pages/Portfolio"));
+const PortfolioDetail = lazy(() => import("./pages/PortfolioDetail"));
 
 // Cyber dashboard pages
 const ThreatMonitor = lazy(() => import("./pages/admin/cyber/ThreatMonitor"));
@@ -321,6 +324,22 @@ function PublicRoutes() {
         element={
           <PageTransition variant="auto">
             <Contact />
+          </PageTransition>
+        }
+      />
+      <Route
+        path="/portfolio"
+        element={
+          <PageTransition variant="auto">
+            <Portfolio />
+          </PageTransition>
+        }
+      />
+      <Route
+        path="/portfolio/:slug"
+        element={
+          <PageTransition variant="auto">
+            <PortfolioDetail />
           </PageTransition>
         }
       />
@@ -623,6 +642,7 @@ function PublicRoutes() {
         <Route path="service-inquiries" element={<ServiceInquiriesList />} />
         <Route path="bookings" element={<BookingsList />} />
         <Route path="job-applications" element={<JobApplicationsList />} />
+        <Route path="content/portfolio" element={<GraphicDesignAdmin />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />
