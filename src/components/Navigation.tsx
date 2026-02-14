@@ -71,9 +71,9 @@ const Navigation = React.memo(() => {
         />
       )}
 
-      <nav className="sticky top-0 z-navigation relative border-b border-white/20 bg-white/90 backdrop-blur-sm shadow-sm">
+      <nav className="sticky top-0 z-[9999] relative border-b border-white/20 bg-white/90 backdrop-blur-sm shadow-sm">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="flex items-center justify-between h-14 md:h-16">
+          <div className="flex items-center justify-between h-16 md:h-16">
             {/* Logo */}
             <a
               href="/"
@@ -194,7 +194,7 @@ const Navigation = React.memo(() => {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden fixed top-14 md:top-16 left-0 right-0 bottom-0 bg-white/95 backdrop-blur-sm border-t border-border shadow-lg z-[10001] overflow-y-auto overscroll-contain pb-[calc(env(safe-area-inset-bottom)+1.25rem)] [-webkit-overflow-scrolling:touch]">
+          <div className="lg:hidden fixed top-16 left-0 right-0 bottom-0 bg-white/95 backdrop-blur-sm border-t border-border shadow-lg z-[10001] overflow-y-auto overscroll-contain pb-[calc(env(safe-area-inset-bottom)+1.25rem)] [-webkit-overflow-scrolling:touch]">
             <div className="container mx-auto px-4 py-6 space-y-2">
               {navLinks.map((link) => {
                 const isActive = isActiveLink(link.href);
