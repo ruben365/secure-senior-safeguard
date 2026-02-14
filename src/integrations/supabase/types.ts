@@ -2029,6 +2029,175 @@ export type Database = {
         }
         Relationships: []
       }
+      graphic_design_categories: {
+        Row: {
+          created_at: string
+          description: string | null
+          display_order: number | null
+          id: string
+          name: string
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          name: string
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          name?: string
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      graphic_design_project_tags: {
+        Row: {
+          project_id: string
+          tag_id: string
+        }
+        Insert: {
+          project_id: string
+          tag_id: string
+        }
+        Update: {
+          project_id?: string
+          tag_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "graphic_design_project_tags_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "graphic_design_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "graphic_design_project_tags_tag_id_fkey"
+            columns: ["tag_id"]
+            isOneToOne: false
+            referencedRelation: "graphic_design_tags"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      graphic_design_projects: {
+        Row: {
+          category_id: string | null
+          client_name: string | null
+          created_at: string
+          created_by: string | null
+          full_description: string | null
+          gallery: Json | null
+          hero_image_url: string | null
+          id: string
+          is_featured: boolean | null
+          live_link: string | null
+          project_year: number | null
+          seo_meta_description: string | null
+          seo_title: string | null
+          short_description: string | null
+          slug: string
+          status: string
+          thumbnail_url: string | null
+          title: string
+          tools_used: string | null
+          updated_at: string
+        }
+        Insert: {
+          category_id?: string | null
+          client_name?: string | null
+          created_at?: string
+          created_by?: string | null
+          full_description?: string | null
+          gallery?: Json | null
+          hero_image_url?: string | null
+          id?: string
+          is_featured?: boolean | null
+          live_link?: string | null
+          project_year?: number | null
+          seo_meta_description?: string | null
+          seo_title?: string | null
+          short_description?: string | null
+          slug: string
+          status?: string
+          thumbnail_url?: string | null
+          title: string
+          tools_used?: string | null
+          updated_at?: string
+        }
+        Update: {
+          category_id?: string | null
+          client_name?: string | null
+          created_at?: string
+          created_by?: string | null
+          full_description?: string | null
+          gallery?: Json | null
+          hero_image_url?: string | null
+          id?: string
+          is_featured?: boolean | null
+          live_link?: string | null
+          project_year?: number | null
+          seo_meta_description?: string | null
+          seo_title?: string | null
+          short_description?: string | null
+          slug?: string
+          status?: string
+          thumbnail_url?: string | null
+          title?: string
+          tools_used?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "graphic_design_projects_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "graphic_design_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      graphic_design_tags: {
+        Row: {
+          category_id: string | null
+          created_at: string
+          id: string
+          name: string
+          slug: string
+        }
+        Insert: {
+          category_id?: string | null
+          created_at?: string
+          id?: string
+          name: string
+          slug: string
+        }
+        Update: {
+          category_id?: string | null
+          created_at?: string
+          id?: string
+          name?: string
+          slug?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "graphic_design_tags_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "graphic_design_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       healthcare_professional_profiles: {
         Row: {
           created_at: string
