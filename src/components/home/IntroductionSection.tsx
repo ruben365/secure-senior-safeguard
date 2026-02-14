@@ -3,6 +3,12 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { SITE } from "@/config/site";
+import {
+  AIMonitoringImage,
+  WorkshopTrainingImage,
+  CustomerSupportImage,
+  HappyFamilyImage,
+} from "@/components/home/ImagePlaceholders";
 
 const pillars = [
   {
@@ -101,6 +107,7 @@ export const IntroductionSection = () => {
                 <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">
                   1
                 </div>
+                <AIMonitoringImage className="mb-6" />
                 <h4 className="text-xl font-bold text-foreground mb-4">We Watch for Threats</h4>
                 <p className="text-muted-foreground leading-relaxed">
                   Our AI-powered system scans for scams 24/7—deepfakes, voice clones,
@@ -113,6 +120,7 @@ export const IntroductionSection = () => {
                 <div className="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">
                   2
                 </div>
+                <WorkshopTrainingImage className="mb-6" />
                 <h4 className="text-xl font-bold text-foreground mb-4">We Teach You</h4>
                 <p className="text-muted-foreground leading-relaxed">
                   Friendly, hands-on workshops (in-person or online) show you exactly
@@ -125,6 +133,7 @@ export const IntroductionSection = () => {
                 <div className="w-16 h-16 rounded-full bg-gradient-to-br from-violet-500 to-indigo-500 flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">
                   3
                 </div>
+                <CustomerSupportImage className="mb-6" />
                 <h4 className="text-xl font-bold text-foreground mb-4">We're Here to Help</h4>
                 <p className="text-muted-foreground leading-relaxed">
                   Got a suspicious email? Not sure if something's a scam? Call or text us anytime.
@@ -191,6 +200,68 @@ export const IntroductionSection = () => {
                   </Link>
                 </AnimatedSection>
               ))}
+            </div>
+          </div>
+        </AnimatedSection>
+
+        {/* Visual Impact Section - Happy Families */}
+        <AnimatedSection animation="fade-up">
+          <div className="max-w-6xl mx-auto mb-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              {/* Image */}
+              <div className="order-2 lg:order-1">
+                <HappyFamilyImage className="w-full" />
+              </div>
+
+              {/* Content */}
+              <div className="order-1 lg:order-2">
+                <div className="glass-widget inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6">
+                  <Heart className="w-4 h-4 text-accent" />
+                  <span className="text-sm font-semibold">Real Families, Real Protection</span>
+                </div>
+
+                <h3 className="text-3xl lg:text-4xl font-bold text-foreground mb-6">
+                  Thousands of Ohio Families Feel Safer Every Day
+                </h3>
+
+                <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                  From young parents learning to protect their kids online, to seniors who
+                  want to video call grandchildren safely, to veterans securing their
+                  benefits—we help real people stay safe from real threats.
+                </p>
+
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+                    <div>
+                      <div className="font-semibold text-foreground mb-1">Protected Over 5,000 Families</div>
+                      <div className="text-sm text-muted-foreground">
+                        Across {SITE.location.areaLabel} and beyond
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+                    <div>
+                      <div className="font-semibold text-foreground mb-1">Stopped 10,000+ Scam Attempts</div>
+                      <div className="text-sm text-muted-foreground">
+                        And counting—our AI never sleeps
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+                    <div>
+                      <div className="font-semibold text-foreground mb-1">4.9/5 Star Reviews</div>
+                      <div className="text-sm text-muted-foreground">
+                        Our families love the peace of mind
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </AnimatedSection>
