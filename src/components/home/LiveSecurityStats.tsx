@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
-import { Shield, Users, Clock, Activity, TrendingUp, ArrowUpRight } from "lucide-react";
+import { Shield, Users, Clock, Activity, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface Stat {
@@ -10,14 +10,13 @@ interface Stat {
   suffix?: string;
   prefix?: string;
   label: string;
-  description: string;
 }
 
 const stats: Stat[] = [
-  { id: "threats", icon: Shield, value: 12847, label: "Threats Blocked", description: "This month" },
-  { id: "families", icon: Users, value: 523, suffix: "+", label: "Families Protected", description: "Across Ohio" },
-  { id: "response", icon: Clock, value: 0.3, suffix: "s", prefix: "<", label: "Response Time", description: "Average mitigation" },
-  { id: "uptime", icon: Activity, value: 99.97, suffix: "%", label: "System Uptime", description: "Service reliability" },
+  { id: "threats", icon: Shield, value: 12847, label: "Threats Blocked" },
+  { id: "families", icon: Users, value: 523, suffix: "+", label: "Families Protected" },
+  { id: "response", icon: Clock, value: 0.3, suffix: "s", prefix: "<", label: "Response Time" },
+  { id: "uptime", icon: Activity, value: 99.97, suffix: "%", label: "System Uptime" },
 ];
 
 const AnimatedCounter = ({ value, prefix = "", suffix = "", duration = 1.8 }: { value: number; prefix?: string; suffix?: string; duration?: number }) => {
@@ -49,7 +48,6 @@ const AnimatedCounter = ({ value, prefix = "", suffix = "", duration = 1.8 }: { 
 export const LiveSecurityStats = () => {
   const [liveStats, setLiveStats] = useState(stats);
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -63,51 +61,43 @@ export const LiveSecurityStats = () => {
   }, []);
 
   return (
-    <section className="py-16 lg:py-20" ref={containerRef}>
+    <section className="py-12 lg:py-16" ref={containerRef}>
       <div className="container mx-auto px-4 lg:px-8">
-        {/* Section Label */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 mb-5">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-xs font-bold uppercase tracking-[0.15em] text-primary">Live Protection Stats</span>
-          </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground leading-tight mb-3">
-            Real-Time Security{" "}
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Metrics</span>
-          </h2>
-          <p className="text-muted-foreground text-base max-w-xl mx-auto">
-            Monitor our protection infrastructure performance in real time.
-          </p>
-        </div>
+        <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl border border-white/10 p-8 lg:p-12 relative overflow-hidden">
+          {/* Decorative glow */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent/10 rounded-full blur-[100px] pointer-events-none" />
 
-        {/* Stats Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-          {liveStats.map((stat) => (
-            <div
-              key={stat.id}
-              className="group relative bg-card rounded-2xl border border-border/60 p-6 text-center hover:border-primary/30 hover:shadow-lg transition-all duration-300"
-            >
-              <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-primary/8 flex items-center justify-center group-hover:bg-primary/12 transition-colors">
-                <stat.icon className="w-7 h-7 text-primary" />
+          <div className="relative z-10">
+            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10">
+              <div>
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">Live Protection</span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-black text-white leading-tight">
+                  Real-Time Security Metrics
+                </h2>
               </div>
-              <div className="text-3xl md:text-4xl font-black text-foreground mb-1">
-                <AnimatedCounter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
-              </div>
-              <div className="text-sm font-bold text-foreground mb-1">{stat.label}</div>
-              <div className="text-xs text-muted-foreground">{stat.description}</div>
+              <Link to="/portal" className="inline-flex items-center gap-2 text-sm font-semibold text-white/60 hover:text-white transition-colors">
+                Full Dashboard <ArrowUpRight className="w-4 h-4" />
+              </Link>
             </div>
-          ))}
-        </div>
 
-        {/* Bottom CTA */}
-        <div className="text-center mt-10">
-          <Link
-            to="/portal"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-accent transition-colors"
-          >
-            View Full Dashboard
-            <ArrowUpRight className="w-4 h-4" />
-          </Link>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {liveStats.map((stat) => (
+                <div key={stat.id} className="group bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-6 hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/30 to-accent/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <stat.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="text-3xl md:text-4xl font-black text-white mb-1">
+                    <AnimatedCounter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
+                  </div>
+                  <div className="text-sm font-medium text-white/50">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
