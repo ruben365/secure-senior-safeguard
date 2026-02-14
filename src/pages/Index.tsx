@@ -24,6 +24,9 @@ const FAQPreview = lazy(() => import("@/components/home/FAQPreview").then(m => (
 const TestimonialsShowcase = lazy(() => import("@/components/home/TestimonialsShowcase").then(m => ({ default: m.TestimonialsShowcase })));
 const TrustBadgesSection = lazy(() => import("@/components/home/TrustBadgesSection").then(m => ({ default: m.TrustBadgesSection })));
 const CompellingCTA = lazy(() => import("@/components/home/CompellingCTA").then(m => ({ default: m.CompellingCTA })));
+const FeaturesShowcase = lazy(() => import("@/components/home/FeaturesShowcase").then(m => ({ default: m.FeaturesShowcase })));
+const ComparisonSection = lazy(() => import("@/components/home/ComparisonSection").then(m => ({ default: m.ComparisonSection })));
+const QuickWinsSection = lazy(() => import("@/components/home/QuickWinsSection").then(m => ({ default: m.QuickWinsSection })));
 
 const LazySection = ({ children }: { children: React.ReactNode }) => (
   <Suspense fallback={null}>{children}</Suspense>
@@ -104,13 +107,22 @@ const Index = () => {
           {/* Testimonials Showcase */}
           <LazySection><TestimonialsShowcase /></LazySection>
 
+          {/* Interactive Features Showcase */}
+          <LazySection><FeaturesShowcase /></LazySection>
+
           {/* AI Analysis CTA */}
           <AnimatedSection animation="fade-up">
             <LazySection><AiAnalysisCTA /></LazySection>
           </AnimatedSection>
 
+          {/* Quick Wins Timeline */}
+          <LazySection><QuickWinsSection /></LazySection>
+
           {/* Mid-Page CTA - Secondary Variant */}
           <LazySection><CompellingCTA variant="secondary" /></LazySection>
+
+          {/* Comparison Section */}
+          <LazySection><ComparisonSection /></LazySection>
 
           {/* Scam Alerts */}
           <section id="alerts">
