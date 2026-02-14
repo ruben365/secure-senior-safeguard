@@ -47,7 +47,7 @@ export const HeroBackgroundImage = ({ className = '' }: ImagePlaceholderProps) =
 // Step 1: AI Monitoring Image
 export const AIMonitoringImage = ({ className = '' }: ImagePlaceholderProps) => {
   return (
-    <div className={`glass-card rounded-2xl p-8 flex items-center justify-center ${className}`}>
+    <div className={`bg-muted/30 rounded-2xl p-8 flex items-center justify-center ${className}`}>
       {/*
         REPLACE WITH YOUR IMAGE:
         - AI monitoring dashboard (clean, modern)
@@ -58,10 +58,9 @@ export const AIMonitoringImage = ({ className = '' }: ImagePlaceholderProps) => 
         Format: PNG or WebP (transparent background works well)
       */}
       <div className="text-center">
-        <Shield className="w-24 h-24 mx-auto mb-4 text-primary opacity-20" />
-        <p className="text-sm text-muted-foreground">
-          AI Monitoring Image<br />
-          <span className="text-xs">(400x300px recommended)</span>
+        <Shield className="w-20 h-20 mx-auto mb-3 text-primary opacity-30" />
+        <p className="text-xs text-muted-foreground font-medium">
+          AI Monitoring
         </p>
       </div>
     </div>
@@ -71,7 +70,7 @@ export const AIMonitoringImage = ({ className = '' }: ImagePlaceholderProps) => 
 // Step 2: Workshop Training Image
 export const WorkshopTrainingImage = ({ className = '' }: ImagePlaceholderProps) => {
   return (
-    <div className={`glass-card rounded-2xl p-8 flex items-center justify-center ${className}`}>
+    <div className={`bg-muted/30 rounded-2xl p-8 flex items-center justify-center ${className}`}>
       {/*
         REPLACE WITH YOUR IMAGE:
         - Friendly instructor teaching seniors
@@ -82,10 +81,9 @@ export const WorkshopTrainingImage = ({ className = '' }: ImagePlaceholderProps)
         Format: JPG or WebP
       */}
       <div className="text-center">
-        <GraduationCap className="w-24 h-24 mx-auto mb-4 text-emerald-500 opacity-20" />
-        <p className="text-sm text-muted-foreground">
-          Workshop Training Image<br />
-          <span className="text-xs">(400x300px recommended)</span>
+        <GraduationCap className="w-20 h-20 mx-auto mb-3 text-emerald-500 opacity-30" />
+        <p className="text-xs text-muted-foreground font-medium">
+          Training Workshop
         </p>
       </div>
     </div>
@@ -95,7 +93,7 @@ export const WorkshopTrainingImage = ({ className = '' }: ImagePlaceholderProps)
 // Step 3: Customer Support Image
 export const CustomerSupportImage = ({ className = '' }: ImagePlaceholderProps) => {
   return (
-    <div className={`glass-card rounded-2xl p-8 flex items-center justify-center ${className}`}>
+    <div className={`bg-muted/30 rounded-2xl p-8 flex items-center justify-center ${className}`}>
       {/*
         REPLACE WITH YOUR IMAGE:
         - Friendly customer support representative
@@ -106,10 +104,9 @@ export const CustomerSupportImage = ({ className = '' }: ImagePlaceholderProps) 
         Format: JPG or WebP
       */}
       <div className="text-center">
-        <Phone className="w-24 h-24 mx-auto mb-4 text-violet-500 opacity-20" />
-        <p className="text-sm text-muted-foreground">
-          Customer Support Image<br />
-          <span className="text-xs">(400x300px recommended)</span>
+        <Phone className="w-20 h-20 mx-auto mb-3 text-violet-500 opacity-30" />
+        <p className="text-xs text-muted-foreground font-medium">
+          Customer Support
         </p>
       </div>
     </div>
@@ -189,12 +186,11 @@ export const HappyFamilyImage = ({ className = '' }: ImagePlaceholderProps) => {
         Recommended size: 800x600px (4:3)
         Format: JPG or WebP
       */}
-      <div className="glass-card p-12 flex items-center justify-center min-h-[400px]">
+      <div className="bg-muted/30 p-12 flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <Heart className="w-32 h-32 mx-auto mb-4 text-accent opacity-20" />
-          <p className="text-lg text-muted-foreground">
-            Happy Family Image<br />
-            <span className="text-sm">(800x600px recommended)</span>
+          <Heart className="w-24 h-24 mx-auto mb-4 text-accent opacity-30" />
+          <p className="text-sm text-muted-foreground font-medium">
+            Happy Family Image
           </p>
         </div>
       </div>

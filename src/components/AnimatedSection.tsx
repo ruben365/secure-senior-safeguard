@@ -36,13 +36,13 @@ export const AnimatedSection = ({
           observer.unobserve(el);
         }
       },
-      { rootMargin: "0px 0px -60px 0px", threshold: 0.1 }
+      { rootMargin: "100px 0px 0px 0px", threshold: 0.05 }
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
-  const baseStyles = "transition-all duration-700 ease-out";
+  const baseStyles = "transition-all duration-300 ease-out";
 
   const animationMap = {
     "fade-up": {
