@@ -21,6 +21,9 @@ const LiveSecurityStats = lazy(() => import("@/components/home/LiveSecurityStats
 const ScamAlertsSection = lazy(() => import("@/components/home/ScamAlertsSection").then(m => ({ default: m.ScamAlertsSection })));
 const FamilyTrustSection = lazy(() => import("@/components/home/FamilyTrustSection").then(m => ({ default: m.FamilyTrustSection })));
 const FAQPreview = lazy(() => import("@/components/home/FAQPreview").then(m => ({ default: m.FAQPreview })));
+const TestimonialsShowcase = lazy(() => import("@/components/home/TestimonialsShowcase").then(m => ({ default: m.TestimonialsShowcase })));
+const TrustBadgesSection = lazy(() => import("@/components/home/TrustBadgesSection").then(m => ({ default: m.TrustBadgesSection })));
+const CompellingCTA = lazy(() => import("@/components/home/CompellingCTA").then(m => ({ default: m.CompellingCTA })));
 
 const LazySection = ({ children }: { children: React.ReactNode }) => (
   <Suspense fallback={null}>{children}</Suspense>
@@ -92,13 +95,22 @@ const Index = () => {
             </AnimatedSection>
           </section>
 
+          {/* Trust Badges Section */}
+          <LazySection><TrustBadgesSection /></LazySection>
+
           {/* Site Orientation Grid */}
           <LazySection><SiteOrientationGrid /></LazySection>
+
+          {/* Testimonials Showcase */}
+          <LazySection><TestimonialsShowcase /></LazySection>
 
           {/* AI Analysis CTA */}
           <AnimatedSection animation="fade-up">
             <LazySection><AiAnalysisCTA /></LazySection>
           </AnimatedSection>
+
+          {/* Mid-Page CTA - Secondary Variant */}
+          <LazySection><CompellingCTA variant="secondary" /></LazySection>
 
           {/* Scam Alerts */}
           <section id="alerts">
@@ -120,6 +132,9 @@ const Index = () => {
           <AnimatedSection animation="fade-up">
             <LazySection><FAQPreview /></LazySection>
           </AnimatedSection>
+
+          {/* Urgent CTA */}
+          <LazySection><CompellingCTA variant="urgent" /></LazySection>
 
           {/* Final CTA */}
           <AnimatedSection animation="scale-up">
