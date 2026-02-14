@@ -13,6 +13,8 @@ import {
   Shield,
   Sparkles,
   X,
+  Bot,
+  Headphones,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLauraChat } from "@/hooks/useLauraChat";
@@ -146,87 +148,97 @@ export const LauraAIAssistant = () => {
     await sendMessage(message);
   };
 
+  /* ─── Closed FAB ─── */
   if (!isOpen) {
     return (
       <div className="fixed bottom-6 right-6 z-fab">
         <button
           onClick={() => setIsOpen(true)}
-          className="group relative flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/80 dark:bg-card/80 backdrop-blur-xl border border-white/50 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:-translate-y-1"
+          className="group relative flex items-center gap-3 pl-1.5 pr-5 py-1.5 rounded-full bg-gradient-to-r from-primary to-accent shadow-[0_4px_20px_hsl(var(--primary)/0.35),0_12px_40px_-8px_hsl(var(--primary)/0.25)] transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_30px_hsl(var(--primary)/0.45)] active:scale-95"
           aria-label="Open Laura AI Assistant"
           style={{ contain: "layout" }}
         >
-          {/* Avatar */}
+          {/* Avatar circle */}
           <div
-            className="relative w-14 h-14 rounded-xl overflow-hidden flex-shrink-0"
+            className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-white/30 flex-shrink-0"
             style={{ contain: "strict" }}
           >
             <img
               src={lauraAvatar}
               alt="Laura"
-              width={56}
-              height={56}
+              width={48}
+              height={48}
               fetchPriority="high"
               className="w-full h-full object-cover object-top"
             />
           </div>
 
-          {/* Label */}
-          <span className="text-sm font-bold text-foreground tracking-wide">
-            LAURA
-          </span>
+          {/* Label text - HIGH CONTRAST white on gradient */}
+          <div className="flex flex-col items-start">
+            <span className="text-sm font-extrabold text-white leading-tight tracking-wide">
+              LAURA
+            </span>
+            <span className="text-[10px] font-medium text-white/80 leading-tight">
+              AI Assistant
+            </span>
+          </div>
 
           {/* Online pulse */}
-          <span className="absolute top-2 right-2 flex h-3 w-3">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border-2 border-white"></span>
+          <span className="absolute top-1 right-1 flex h-3 w-3">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75" />
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-400 border-2 border-white/50" />
           </span>
         </button>
       </div>
     );
   }
 
+  /* ─── Open Panel ─── */
   return (
-    <div className="fixed bottom-4 right-4 z-fab w-[calc(100vw-2rem)] max-w-[360px] sm:max-w-[400px]">
-      <div className="rounded-3xl border border-border/60 glass-heavy card-shine shadow-2xl overflow-hidden">
-        <div className="flex items-center justify-between p-4 border-b border-white/40 bg-white/70 backdrop-blur-xl">
+    <div className="fixed bottom-4 right-4 z-fab w-[calc(100vw-2rem)] max-w-[380px] sm:max-w-[420px]">
+      <div className="rounded-3xl border border-border/40 bg-card/95 backdrop-blur-2xl shadow-[0_8px_40px_hsl(var(--primary)/0.12),0_20px_60px_-12px_hsl(258_40%_20%/0.2)] overflow-hidden">
+        {/* Header */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-border/40 bg-gradient-to-r from-primary/8 to-accent/5">
           <div className="flex items-center gap-3">
-            <div className="relative w-10 h-10 rounded-full overflow-hidden">
+            <div className="relative w-10 h-10 rounded-full overflow-hidden ring-2 ring-primary/20">
               <img
                 src={lauraAvatar}
                 alt="Laura"
                 className="w-full h-full object-cover object-top"
               />
-              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-white" />
+              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-card" />
             </div>
             <div>
-              <p className="text-sm font-semibold text-foreground">Laura</p>
-              <p className="text-xs text-muted-foreground">Navigation & help</p>
+              <p className="text-sm font-bold text-foreground">Laura</p>
+              <p className="text-[11px] text-muted-foreground font-medium">
+                {isLoading ? "Thinking..." : "Navigation & help"}
+              </p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <button
               onClick={() => setMode("chat")}
-              className={`px-3 py-1.5 rounded-full text-xs font-semibold transition ${
+              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-200 ${
                 mode === "chat"
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-muted text-foreground"
+                  ? "bg-primary text-white shadow-sm"
+                  : "bg-muted text-foreground hover:bg-muted/80"
               }`}
             >
               Chat
             </button>
             <button
               onClick={() => setMode("help")}
-              className={`px-3 py-1.5 rounded-full text-xs font-semibold transition ${
+              className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-200 ${
                 mode === "help"
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-muted text-foreground"
+                  ? "bg-primary text-white shadow-sm"
+                  : "bg-muted text-foreground hover:bg-muted/80"
               }`}
             >
-              Quick Help
+              Help
             </button>
             <button
               onClick={() => setIsOpen(false)}
-              className="p-2 rounded-full hover:bg-muted transition"
+              className="p-2 rounded-full hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-all"
               aria-label="Close Laura"
             >
               <X className="w-4 h-4" />
@@ -236,30 +248,39 @@ export const LauraAIAssistant = () => {
 
         {mode === "chat" ? (
           <>
+            {/* Messages */}
             <div
               ref={scrollRef}
-              className="max-h-[420px] overflow-y-auto p-4 space-y-4"
+              className="max-h-[420px] overflow-y-auto p-4 space-y-3"
+              style={{
+                scrollbarWidth: "thin",
+                scrollbarColor: "hsl(var(--primary) / 0.2) transparent",
+              }}
             >
               {messages.length === 0 && (
-                <div className="space-y-4 text-center">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mx-auto">
-                    <Sparkles className="w-6 h-6 text-primary" />
+                <div className="space-y-5 text-center py-4">
+                  <div className="relative inline-flex items-center justify-center w-20 h-20 rounded-full overflow-hidden ring-4 ring-primary/10 mx-auto">
+                    <img
+                      src={lauraAvatar}
+                      alt="Laura"
+                      className="w-full h-full object-cover object-top"
+                    />
                   </div>
                   <div className="space-y-2">
-                    <p className="text-base font-semibold text-foreground">
-                      Hi, I’m Laura.
+                    <p className="text-lg font-bold text-foreground">
+                      Hi, I'm Laura
                     </p>
-                    <p className="text-sm text-muted-foreground">
-                      I can help with scanning, pricing, privacy, and how to use
+                    <p className="text-sm text-muted-foreground leading-relaxed px-2">
+                      I help with scanning, pricing, privacy, and navigating
                       InVision Network.
                     </p>
                   </div>
-                  <div className="flex flex-wrap justify-center gap-2">
+                  <div className="flex flex-wrap justify-center gap-2 pt-1">
                     {quickActions.map((action) => (
                       <button
                         key={action}
                         onClick={() => sendMessage(action)}
-                        className="px-3 py-1.5 rounded-full bg-muted text-xs text-foreground hover:bg-muted/80 transition"
+                        className="px-3.5 py-2 rounded-full bg-primary/10 text-xs font-semibold text-primary hover:bg-primary/18 transition-all border border-primary/15"
                       >
                         {action}
                       </button>
@@ -274,10 +295,10 @@ export const LauraAIAssistant = () => {
                   className={`flex ${msg.role === "assistant" ? "justify-start" : "justify-end"}`}
                 >
                   <div
-                    className={`rounded-2xl px-4 py-2 text-sm leading-relaxed max-w-[80%] ${
+                    className={`rounded-2xl px-4 py-2.5 text-sm leading-relaxed max-w-[82%] ${
                       msg.role === "assistant"
-                        ? "bg-muted text-foreground"
-                        : "bg-primary text-primary-foreground"
+                        ? "bg-muted/80 text-foreground border border-border/30"
+                        : "bg-gradient-to-br from-primary to-accent text-white shadow-sm"
                     }`}
                   >
                     {msg.content}
@@ -287,66 +308,76 @@ export const LauraAIAssistant = () => {
 
               {isLoading && (
                 <div className="flex justify-start">
-                  <div className="rounded-2xl px-4 py-2 bg-muted text-sm text-muted-foreground">
-                    Laura is typing...
+                  <div className="rounded-2xl px-4 py-2.5 bg-muted/80 text-sm text-muted-foreground border border-border/30 flex items-center gap-2">
+                    <span className="flex gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary/60 animate-bounce" style={{ animationDelay: "0ms" }} />
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary/60 animate-bounce" style={{ animationDelay: "150ms" }} />
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary/60 animate-bounce" style={{ animationDelay: "300ms" }} />
+                    </span>
+                    Laura is typing
                   </div>
                 </div>
               )}
             </div>
 
+            {/* Input */}
             <form
               onSubmit={handleSubmit}
-              className="p-4 border-t border-white/40 flex gap-2 bg-white/70 backdrop-blur-xl"
+              className="p-3 border-t border-border/40 flex gap-2 bg-card/80"
             >
               <button
                 type="button"
                 onClick={toggleRecording}
-                className={`w-11 h-11 rounded-full flex items-center justify-center transition ${
+                className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
                   isRecording
-                    ? "bg-rose-500 text-white"
-                    : "bg-muted text-foreground"
+                    ? "bg-rose-500 text-white shadow-lg shadow-rose-500/30 scale-110"
+                    : "bg-muted text-foreground hover:bg-primary/10 hover:text-primary"
                 }`}
                 aria-label="Voice input"
               >
                 {isRecording ? (
-                  <MicOff className="w-5 h-5" />
+                  <MicOff className="w-4 h-4" />
                 ) : (
-                  <Mic className="w-5 h-5" />
+                  <Mic className="w-4 h-4" />
                 )}
               </button>
               <input
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
                 placeholder="Ask Laura a question..."
-                className="flex-1 rounded-full bg-muted px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+                className="flex-1 rounded-full bg-muted/60 border border-border/40 px-4 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/30 transition-all"
               />
               <Button
                 type="submit"
                 size="icon"
                 disabled={!input.trim() || isLoading}
+                className="rounded-full w-10 h-10 flex-shrink-0"
               >
                 <Send className="w-4 h-4" />
               </Button>
             </form>
           </>
         ) : (
+          /* Quick Help Panel */
           <div className="p-4 space-y-4">
             <div className="flex items-center gap-2">
-              <Shield className="w-4 h-4 text-primary" />
-              <p className="text-sm font-semibold text-foreground">
-                Quick Help
-              </p>
+              <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Headphones className="w-4 h-4 text-primary" />
+              </div>
+              <div>
+                <p className="text-sm font-bold text-foreground">Quick Help</p>
+                <p className="text-[11px] text-muted-foreground">
+                  Fast paths to support & resources
+                </p>
+              </div>
             </div>
-            <p className="text-xs text-muted-foreground">
-              Fast paths to support, reporting, and learning resources.
-            </p>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-2.5">
               {quickHelpActions.map((action) => {
                 const ActionIcon = action.icon;
                 const content = (
                   <div
-                    className={`relative p-3 rounded-xl bg-white/70 hover:bg-white/90 border border-white/50 transition-all cursor-pointer group ${
-                      action.urgent ? "ring-2 ring-rose-500/50" : ""
+                    className={`relative p-3 rounded-xl bg-card hover:bg-muted/50 border border-border/50 hover:border-primary/20 transition-all cursor-pointer group ${
+                      action.urgent ? "ring-1 ring-rose-400/40" : ""
                     }`}
                     onClick={() => {
                       if (action.action) action.action();
@@ -356,14 +387,14 @@ export const LauraAIAssistant = () => {
                     }}
                   >
                     {action.urgent && (
-                      <span className="absolute -top-1 -right-1 w-3 h-3 bg-rose-500 rounded-full" />
+                      <span className="absolute -top-1 -right-1 w-3 h-3 bg-rose-500 rounded-full animate-pulse" />
                     )}
                     <div
-                      className={`w-8 h-8 rounded-lg bg-gradient-to-br ${action.color} flex items-center justify-center mb-2`}
+                      className={`w-9 h-9 rounded-xl bg-gradient-to-br ${action.color} flex items-center justify-center mb-2 shadow-sm group-hover:shadow-md group-hover:scale-105 transition-all`}
                     >
                       <ActionIcon className="w-4 h-4 text-white" />
                     </div>
-                    <div className="text-xs font-medium text-foreground">
+                    <div className="text-xs font-bold text-foreground">
                       {action.label}
                     </div>
                     <div className="text-[10px] text-muted-foreground leading-tight mt-0.5">
@@ -390,9 +421,9 @@ export const LauraAIAssistant = () => {
           </div>
         )}
       </div>
-      <div className="mt-2 text-[11px] text-muted-foreground text-right">
-        Laura only answers InVision Network questions.
-      </div>
+      <p className="mt-1.5 text-[10px] text-muted-foreground text-right pr-2 opacity-60">
+        Laura only answers InVision Network questions
+      </p>
     </div>
   );
 };

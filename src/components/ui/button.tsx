@@ -5,29 +5,31 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl font-semibold ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 select-none transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl font-bold ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 select-none transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden tracking-wide",
   {
     variants: {
       variant: {
         default: [
-          "bg-gradient-to-br from-primary via-primary to-primary/85 text-primary-foreground",
-          "border border-white/15",
+          "bg-gradient-to-br from-primary via-primary to-primary/90 text-white",
+          "border border-white/20",
           "shadow-[0_2px_8px_hsl(var(--primary)/0.35),0_8px_20px_-6px_hsl(var(--primary)/0.25),inset_0_1px_0_hsl(0_0%_100%/0.2),inset_0_-1px_0_hsl(0_0%_0%/0.1)]",
           "hover:shadow-[0_4px_14px_hsl(var(--primary)/0.45),0_12px_28px_-6px_hsl(var(--primary)/0.3),inset_0_1px_0_hsl(0_0%_100%/0.25)]",
           "hover:brightness-110",
+          "[text-shadow:0_1px_2px_rgba(0,0,0,0.2)]",
         ].join(" "),
         gold: [
           "bg-gradient-to-br from-coral-400 via-coral-500 to-coral-600 text-white",
-          "border border-white/15",
+          "border border-white/20",
           "shadow-[0_2px_8px_hsl(var(--coral-500)/0.35),0_8px_20px_-6px_hsl(var(--coral-500)/0.25),inset_0_1px_0_hsl(0_0%_100%/0.2),inset_0_-1px_0_hsl(0_0%_0%/0.1)]",
           "hover:shadow-[0_4px_14px_hsl(var(--coral-500)/0.45),0_12px_28px_-6px_hsl(var(--coral-500)/0.3)]",
           "hover:brightness-110",
+          "[text-shadow:0_1px_2px_rgba(0,0,0,0.2)]",
         ].join(" "),
         outline: [
-          "bg-white/80 backdrop-blur-sm text-foreground",
-          "border border-border/60",
-          "shadow-[0_1px_3px_hsl(258_20%_20%/0.05),inset_0_1px_0_hsl(0_0%_100%/0.9)]",
-          "hover:bg-white hover:border-primary/25 hover:shadow-[0_2px_8px_hsl(var(--primary)/0.08),0_6px_16px_-4px_hsl(var(--lavender-400)/0.1)]",
+          "bg-white/90 backdrop-blur-sm text-foreground",
+          "border border-border/80",
+          "shadow-[0_1px_3px_hsl(258_20%_20%/0.06),inset_0_1px_0_hsl(0_0%_100%/0.9)]",
+          "hover:bg-white hover:border-primary/30 hover:shadow-[0_2px_8px_hsl(var(--primary)/0.1),0_6px_16px_-4px_hsl(var(--lavender-400)/0.12)]",
         ].join(" "),
         outlineGold: [
           "bg-coral-100/60 backdrop-blur-sm text-coral-600",
