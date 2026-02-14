@@ -12,6 +12,9 @@ import { FAQPreview } from "@/components/home/FAQPreview";
 import { QuickLinksSection } from "@/components/home/QuickLinksSection";
 import { IntroductionSection } from "@/components/home/IntroductionSection";
 import { MotivationalSection } from "@/components/home/MotivationalSection";
+import { IllustrativeHeroSection } from "@/components/home/IllustrativeHeroSection";
+import { DecorativeBanner } from "@/components/home/DecorativeBanner";
+import { AnimatedInfographic } from "@/components/home/AnimatedInfographic";
 import { AnimatedSection } from "@/components/AnimatedSection";
 
 import CTASection from "@/components/CTASection";
@@ -80,6 +83,14 @@ const Index = () => {
             <IntroductionSection />
           </section>
 
+          {/* Illustrative Hero Graphic */}
+          <AnimatedSection animation="fade-up">
+            <IllustrativeHeroSection />
+          </AnimatedSection>
+
+          {/* Decorative Banner */}
+          <DecorativeBanner />
+
           {/* Live Stats */}
           <section id="stats" ref={statsRef}>
             <AnimatedSection animation="fade-up">
@@ -122,6 +133,14 @@ const Index = () => {
               <ResourcesPromo />
             </AnimatedSection>
           </section>
+
+          {/* Animated Infographic */}
+          <AnimatedSection animation="fade-up">
+            <AnimatedInfographic />
+          </AnimatedSection>
+
+          {/* Decorative Banner */}
+          <DecorativeBanner />
 
           {/* Motivational */}
           <section id="motivation">
