@@ -24,8 +24,8 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   }
 
   :root {
-    /* Base colors - warm blush-cream background */
-    --background: 348 30% 97%;
+    /* Base colors - warm peach-cream background */
+    --background: 24 40% 96%;
     --foreground: 240 20% 16%;
 
     /* Deep Violet Primary (from #493C62) */
@@ -44,23 +44,23 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     --destructive: 8 70% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Card & Surface - warm cream-white */
-    --card: 348 20% 99%;
+    /* Card & Surface - warm peachy white */
+    --card: 28 30% 98%;
     --card-foreground: 258 20% 15%;
 
-    --popover: 348 20% 99%;
+    --popover: 28 30% 98%;
     --popover-foreground: 258 20% 15%;
 
-    /* Secondary - soft lavender tint */
-    --secondary: 310 18% 94%;
+    /* Secondary - soft peach-lavender tint */
+    --secondary: 18 28% 93%;
     --secondary-foreground: 258 25% 31%;
 
-    /* Muted - warm blush gray */
-    --muted: 340 12% 93%;
-    --muted-foreground: 258 12% 45%;
+    /* Muted - warm peach-blush */
+    --muted: 20 20% 92%;
+    --muted-foreground: 258 12% 42%;
 
-    --border: 310 14% 89%;
-    --input: 340 16% 95%;
+    --border: 20 22% 88%;
+    --input: 24 24% 94%;
     --ring: 258 25% 31%;
 
     /* Standardized radius - 8px base */
@@ -292,12 +292,13 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     overflow-x: hidden;
     width: 100%;
     position: relative;
-    /* Uniform warm background - subtle blush-lavender gradient */
+    /* Uniform warm background - visible peach-lavender warmth */
     background: linear-gradient(160deg,
-      hsl(var(--background)) 0%,
-      hsl(var(--blush-300) / 0.25) 35%,
-      hsl(var(--lavender-100) / 0.2) 65%,
-      hsl(var(--background)) 100%);
+      hsl(24 40% 96%) 0%,
+      hsl(18 50% 94% / 0.6) 30%,
+      hsl(var(--coral-100) / 0.4) 50%,
+      hsl(var(--lavender-100) / 0.35) 70%,
+      hsl(24 40% 96%) 100%);
   }
 
   @media (min-width: 768px) {
