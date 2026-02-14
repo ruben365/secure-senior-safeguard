@@ -10,7 +10,7 @@ const stats = [
 
 export const ImpactStatsRow = () => {
   return (
-    <section className="relative py-16 overflow-hidden bg-background">
+    <section className="relative py-16 overflow-hidden">
       {/* Decorative gradient accent */}
       <div
         className="absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-20"

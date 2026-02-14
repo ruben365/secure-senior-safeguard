@@ -90,7 +90,7 @@ const Index = () => {
   }, []);
   return (
     <PageTransition variant="fade">
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen">
         <SEO {...PAGE_SEO.home} />
         <Navigation />
         <SectionNav />

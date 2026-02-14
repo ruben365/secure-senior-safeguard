@@ -16,7 +16,7 @@ export const HeroHomepage = () => {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="relative min-h-[110vh] lg:min-h-[121vh] overflow-hidden bg-background">
+    <section className="relative min-h-[110vh] lg:min-h-[121vh] overflow-hidden">
       {/* Premium Background - NO Glassmorphism on photo */}
       <div className="absolute inset-0 grid lg:grid-cols-[45%_55%]">
         {/* Left - Premium Gradient Background */}
