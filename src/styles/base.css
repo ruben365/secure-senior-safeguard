@@ -276,27 +276,7 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     position: relative;
     /* Clean layered background for a consistent pro look */
     background-color: hsl(var(--background));
-    background-image:
-      radial-gradient(
-        ellipse 55% 36% at 12% 6%,
-        hsl(var(--coral-200) / 0.2) 0%,
-        transparent 55%
-      ),
-      radial-gradient(
-        ellipse 48% 32% at 88% 2%,
-        hsl(var(--navy-100) / 0.18) 0%,
-        transparent 58%
-      ),
-      radial-gradient(
-        ellipse 52% 38% at 50% 100%,
-        hsl(var(--lavender-200) / 0.16) 0%,
-        transparent 62%
-      ),
-      linear-gradient(
-        180deg,
-        hsl(0 0% 100% / 0.6) 0%,
-        hsl(0 0% 100% / 0.9) 100%
-      );
+    background-image: none;
     background-repeat: no-repeat;
   }
 
@@ -472,6 +452,36 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
 
   button {
     font-size: 1rem;
+  }
+
+  /* Clean background mode: remove animated/decorative background effects */
+  .aurora-bg,
+  .mesh-gradient {
+    background: none !important;
+  }
+
+  .dynamic-gradient-overlay::before,
+  .premium-aurora::before,
+  .noise-overlay::after,
+  .skeuo-ambient-coral::before,
+  .skeuo-ambient-lavender::before,
+  .skeuo-ambient-mixed::before,
+  .theme-layer-coral::before,
+  .theme-layer-lavender::before,
+  .theme-layer-navy::before,
+  .theme-layer-mixed::before {
+    content: none !important;
+    animation: none !important;
+    display: none !important;
+    background: none !important;
+  }
+
+  .premium-orb,
+  .blob {
+    animation: none !important;
+    background: transparent !important;
+    filter: none !important;
+    opacity: 0 !important;
   }
 
   /* ===== SKEUOMORPHISM 2.0 GLOBAL EFFECTS ===== */
