@@ -982,3 +982,192 @@ a[role="button"]:active {
 }
 
 /* ===== END NEUMORPHISM ===== */
+
+/* ===== PREMIUM WIDGET BORDERS ===== */
+
+/* Gradient border widget - coral to lavender shimmer */
+.widget-border-gradient {
+  position: relative;
+  border: none;
+  background-clip: padding-box;
+}
+
+.widget-border-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--coral-300) / 0.6) 0%,
+    hsl(var(--lavender-300) / 0.4) 40%,
+    hsl(var(--coral-200) / 0.3) 70%,
+    hsl(var(--lavender-400) / 0.5) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.widget-border-gradient:hover::before {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--coral-400) / 0.8) 0%,
+    hsl(var(--lavender-400) / 0.6) 40%,
+    hsl(var(--coral-300) / 0.5) 70%,
+    hsl(var(--lavender-500) / 0.7) 100%
+  );
+}
+
+/* Animated shimmer border */
+.widget-border-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.widget-border-shimmer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(
+    90deg,
+    hsl(var(--coral-300) / 0.2) 0%,
+    hsl(var(--lavender-400) / 0.5) 25%,
+    hsl(var(--coral-400) / 0.7) 50%,
+    hsl(var(--lavender-300) / 0.5) 75%,
+    hsl(var(--coral-300) / 0.2) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: shimmer-border 4s linear infinite;
+}
+
+@keyframes shimmer-border {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Glow border on hover */
+.widget-glow-hover {
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.widget-glow-hover::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--coral-400) / 0.3) 0%,
+    hsl(var(--lavender-400) / 0.3) 50%,
+    hsl(var(--primary) / 0.2) 100%
+  );
+  opacity: 0;
+  z-index: -1;
+  filter: blur(12px);
+  transition: opacity 0.4s ease;
+}
+
+.widget-glow-hover:hover::after {
+  opacity: 1;
+}
+
+/* Premium embossed widget */
+.widget-embossed {
+  border: 1px solid hsl(var(--border) / 0.4);
+  box-shadow:
+    0 2px 6px hsl(var(--coral-400) / 0.06),
+    0 8px 20px -8px hsl(var(--lavender-400) / 0.08),
+    0 16px 40px -16px hsl(258 25% 25% / 0.07),
+    inset 0 1px 0 hsl(0 0% 100% / 0.9),
+    inset 0 -1px 0 hsl(258 20% 15% / 0.03);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.widget-embossed:hover {
+  border-color: hsl(var(--primary) / 0.2);
+  box-shadow:
+    0 4px 12px hsl(var(--coral-400) / 0.1),
+    0 12px 32px -8px hsl(var(--lavender-400) / 0.12),
+    0 24px 56px -16px hsl(258 25% 25% / 0.1),
+    inset 0 1px 0 hsl(0 0% 100% / 0.95),
+    inset 0 -1px 0 hsl(258 20% 15% / 0.02);
+  transform: translateY(-2px);
+}
+
+/* Inner light edge - top highlight */
+.widget-inner-light {
+  position: relative;
+}
+
+.widget-inner-light::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 8px;
+  right: 8px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    hsl(0 0% 100% / 0.9) 20%,
+    hsl(0 0% 100% / 0.95) 50%,
+    hsl(0 0% 100% / 0.9) 80%,
+    transparent 100%
+  );
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+/* Frosted premium panel */
+.widget-frosted {
+  background:
+    linear-gradient(
+      160deg,
+      hsl(348 20% 99% / 0.88) 0%,
+      hsl(310 15% 97% / 0.72) 40%,
+      hsl(var(--lavender-100) / 0.15) 70%,
+      hsl(348 20% 99% / 0.85) 100%
+    );
+  backdrop-filter: blur(32px) saturate(1.8) brightness(1.05);
+  -webkit-backdrop-filter: blur(32px) saturate(1.8) brightness(1.05);
+  border: 1px solid hsl(0 0% 100% / 0.5);
+  box-shadow:
+    0 4px 16px hsl(var(--coral-400) / 0.06),
+    0 12px 32px -12px hsl(var(--lavender-400) / 0.1),
+    0 20px 48px -20px hsl(258 25% 25% / 0.08),
+    inset 0 1px 0 hsl(0 0% 100% / 0.92);
+}
+
+/* Dotted decorative border */
+.widget-border-dotted {
+  border: 2px dashed hsl(var(--border) / 0.5);
+  transition: border-color 0.3s ease;
+}
+
+.widget-border-dotted:hover {
+  border-color: hsl(var(--primary) / 0.3);
+}
+
+/* Double border luxury */
+.widget-border-double {
+  border: 3px double hsl(var(--border) / 0.5);
+  transition: all 0.3s ease;
+}
+
+.widget-border-double:hover {
+  border-color: hsl(var(--primary) / 0.25);
+  box-shadow: 0 4px 16px hsl(var(--primary) / 0.06);
+}
+
+/* ===== END PREMIUM WIDGET BORDERS ===== */
