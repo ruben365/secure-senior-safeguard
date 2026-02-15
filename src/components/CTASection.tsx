@@ -21,6 +21,7 @@ const CTASection = ({
   backgroundImage,
   magneticButtons = true,
 }: CTASectionProps) => {
+  // Wrap children with magnetic effect if enabled
   const wrappedChildren = magneticButtons
     ? Children.map(children, (child) =>
         isValidElement(child) ? (
@@ -49,22 +50,24 @@ const CTASection = ({
     return (
       <section
         className={cn(
-          "py-14 sm:py-20 md:py-28 lg:py-36 relative overflow-hidden",
+          "py-20 md:py-28 lg:py-36 relative overflow-hidden",
           className,
         )}
         role="region"
         aria-label="Call to action"
       >
+        {/* Background Image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${backgroundImage})` }}
         />
+        {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-slate-900/85 via-slate-900/75 to-primary/65" />
 
-        <div className="container mx-auto px-5 sm:px-6 text-center relative z-10">
+        <div className="container mx-auto px-4 text-center relative z-10">
           <h2
             className={cn(
-              "mb-4 sm:mb-6 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold drop-shadow-lg",
+              "mb-6 text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold drop-shadow-lg",
               textClass,
             )}
           >
@@ -73,14 +76,14 @@ const CTASection = ({
           {description && (
             <p
               className={cn(
-                "text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed font-medium",
+                "text-xl md:text-2xl lg:text-3xl mb-10 max-w-3xl mx-auto leading-relaxed font-medium",
                 textClass,
               )}
             >
               {description}
             </p>
           )}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 justify-center items-center flex-wrap">
+          <div className="flex flex-col sm:flex-row gap-5 justify-center items-center flex-wrap">
             {wrappedChildren}
           </div>
         </div>
@@ -91,17 +94,17 @@ const CTASection = ({
   return (
     <section
       className={cn(
-        "py-10 sm:py-16 md:py-20 lg:py-24 rounded-2xl sm:rounded-3xl mx-3 sm:mx-4 my-6 sm:my-8",
+        "py-16 md:py-20 lg:py-24 rounded-3xl mx-4 my-8",
         bgClass,
         className,
       )}
       role="region"
       aria-label="Call to action"
     >
-      <div className="container mx-auto px-5 sm:px-6 text-center">
+      <div className="container mx-auto px-4 text-center">
         <h2
           className={cn(
-            "mb-4 sm:mb-6 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold",
+            "mb-6 text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold",
             textClass,
           )}
         >
@@ -110,14 +113,14 @@ const CTASection = ({
         {description && (
           <p
             className={cn(
-              "text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed font-medium",
+              "text-xl md:text-2xl lg:text-3xl mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed font-medium",
               textClass,
             )}
           >
             {description}
           </p>
         )}
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-5 justify-center items-center flex-wrap">
+        <div className="flex flex-col sm:flex-row gap-4 md:gap-5 justify-center items-center flex-wrap">
           {wrappedChildren}
         </div>
       </div>

@@ -76,7 +76,7 @@ const Navigation = React.memo(() => {
         />
       )}
 
-      <nav className="sticky top-0 z-[9999] bg-transparent">
+      <nav className="sticky top-0 z-[9999] border-b border-white/20 bg-white/90 backdrop-blur-sm shadow-sm">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-16">
             {/* Logo */}
@@ -105,7 +105,7 @@ const Navigation = React.memo(() => {
                 >
                   InVision Network
                 </span>
-                <span className="text-[10px] md:text-xs text-foreground/80 hidden sm:block">
+                <span className="text-[10px] md:text-xs text-muted-foreground hidden sm:block">
                   AI Scam Protection & Business Solutions
                 </span>
               </div>
@@ -119,10 +119,10 @@ const Navigation = React.memo(() => {
                   <PrefetchLink
                     key={link.name}
                     to={link.href}
-                    className={`relative text-sm transition-colors duration-150 font-semibold px-3 py-2 whitespace-nowrap tracking-tight ${
+                    className={`relative text-sm transition-colors duration-150 font-semibold px-3 py-2 rounded-md whitespace-nowrap tracking-tight ${
                       isActive
-                        ? "text-primary font-bold"
-                        : "text-foreground/85 hover:text-primary"
+                        ? "text-primary font-bold bg-primary/10 border border-primary/15 shadow-sm"
+                        : "text-foreground/80 hover:text-foreground hover:bg-card/80"
                     }`}
                   >
                     {link.name}
@@ -273,6 +273,7 @@ const Navigation = React.memo(() => {
           </div>
         )}
 
+        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/45 to-transparent pointer-events-none" />
       </nav>
 
       {/* Donation Modal */}
