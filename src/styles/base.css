@@ -391,6 +391,7 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     @apply min-h-screen;
     overflow-x: hidden;
     width: 100%;
+    contain: layout style;
   }
 
   /* Prevent image flicker and layout shift */

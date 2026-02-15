@@ -59,18 +59,5 @@ export function hasSlowConnection(): boolean {
 
 // Initialize performance optimizations - lightweight
 export function initPerformanceOptimizations() {
-  if (typeof window === "undefined") return;
-
-  // Add loaded class immediately
-  if (document.readyState === "loading") {
-    document.addEventListener(
-      "DOMContentLoaded",
-      () => {
-        document.body.classList.add("loaded");
-      },
-      { once: true },
-    );
-  } else {
-    document.body.classList.add("loaded");
-  }
+  // No-op: all optimizations handled via CSS and build config
 }
