@@ -30,9 +30,9 @@ import { PrerenderProvider } from "./contexts/PrerenderContext";
 // Admin Shell
 const AdminShell = lazy(() => import("./components/admin/AdminShell").then(m => ({ default: m.AdminShell })));
 
-// Critical pages - static imports for instant homepage/nav
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
+// Pages - lazy loaded to reduce main bundle size
+const Index = lazy(() => import("./pages/Index"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 const Auth = lazy(() => import("./pages/Auth"));
 
 // Non-critical public pages - lazy loaded
