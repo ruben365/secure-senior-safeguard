@@ -25,7 +25,7 @@ export const HeroHomepage = () => {
             width={1920}
             height={1080}
             loading="eager"
-            decoding="async"
+            decoding="sync"
             fetchPriority="high"
             className="w-full h-full object-cover"
           />
