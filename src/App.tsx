@@ -249,7 +249,10 @@ function App() {
   useSmoothAnchorScroll();
 
   useEffect(() => {
-    document.documentElement.style.scrollBehavior = "smooth";
+    // Defer scroll-behavior to avoid forced reflow during initial paint
+    requestAnimationFrame(() => {
+      document.documentElement.style.scrollBehavior = "smooth";
+    });
     return () => {
       document.documentElement.style.scrollBehavior = "auto";
     };
