@@ -13,7 +13,7 @@ function deferCssPlugin(): Plugin {
       // Convert <link rel="stylesheet" href="..."> to async loading pattern
       // Only for Vite-generated asset CSS, not external fonts
       return html.replace(
-        /<link rel="stylesheet" crossorigin href="(\/assets\/[^"]+\.css)">/g,
+        /<link rel="stylesheet"(?: crossorigin)? href="(\/assets\/[^"]+\.css)">/g,
         `<link rel="stylesheet" href="$1" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="$1"></noscript>`
       );
     },
