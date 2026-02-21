@@ -14,6 +14,10 @@ import { TrustBadgesSection } from "@/components/home/TrustBadgesSection";
 import SiteOrientationGrid from "@/components/home/SiteOrientationGrid";
 import PromoStrip from "@/components/home/PromoStrip";
 import { ThreatTicker } from "@/components/home/ThreatTicker";
+import { CaseStudiesSection } from "@/components/home/CaseStudiesSection";
+import { TeamPreviewSection } from "@/components/home/TeamPreviewSection";
+import { BlogPreviewSection } from "@/components/home/BlogPreviewSection";
+import { PartnerLogosSection } from "@/components/home/PartnerLogosSection";
 import { ArrowRight } from "lucide-react";
 
 const FAQPreview = lazy(() =>
@@ -59,6 +63,12 @@ const Index = () => {
           {/* How It Works */}
           <PromoStrip />
 
+          {/* Case Studies */}
+          <CaseStudiesSection />
+
+          {/* Team Preview */}
+          <TeamPreviewSection />
+
           {/* Testimonials */}
           <section id="testimonials">
             <LazySection>
@@ -66,8 +76,14 @@ const Index = () => {
             </LazySection>
           </section>
 
+          {/* Partner Logos */}
+          <PartnerLogosSection />
+
           {/* Trust proof */}
           <TrustBadgesSection />
+
+          {/* Blog Preview */}
+          <BlogPreviewSection />
 
           {/* FAQ */}
           <section id="faq">
