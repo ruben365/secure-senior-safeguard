@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
-const Toaster = lazy(() => import("@/components/ui/toaster").then(m => ({ default: m.Toaster })));
-const Sonner = lazy(() => import("@/components/ui/sonner").then(m => ({ default: m.Toaster })));
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -27,6 +27,7 @@ const MobileCallButton = lazy(() => import("./components/MobileCallButton"));
 const AnalyticsTracker = lazy(() => import("./components/AnalyticsTracker").then(m => ({ default: m.AnalyticsTracker })));
 const MagnificentDonateButton = lazy(() => import("./components/MagnificentDonateButton").then(m => ({ default: m.MagnificentDonateButton })));
 import { PrerenderProvider } from "./contexts/PrerenderContext";
+import { NavigationProgress } from "./components/NavigationProgress";
 
 // Admin Shell
 const AdminShell = lazy(() => import("./components/admin/AdminShell").then(m => ({ default: m.AdminShell })));
@@ -137,7 +138,16 @@ const CyberNotifications = lazy(() => import("./pages/admin/cyber/Notifications"
 const SecuritySettings = lazy(() => import("./pages/admin/cyber/SecuritySettings"));
 const CyberAnalytics = lazy(() => import("./pages/admin/cyber/CyberAnalytics"));
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60_000,       // 1 min — skip refetch if data is fresh
+      gcTime: 5 * 60_000,      // 5 min — keep unused data in cache
+      retry: 1,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 function PublicRoutes() {
   return (
@@ -276,16 +286,15 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-          <Suspense fallback={null}>
-            <Toaster />
-            <Sonner />
-          </Suspense>
+          <Toaster />
+          <Sonner />
           <SubscriptionProvider>
             <CartProvider>
               <CheckoutProvider>
                 <CartFeedbackProvider>
                   <BrowserRouter>
                     <PrerenderProvider>
+                      <NavigationProgress />
                       <SkipToContent />
                       <ScrollToTop />
                       <Suspense fallback={null}>

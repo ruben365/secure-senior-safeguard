@@ -40,11 +40,12 @@ export default defineConfig(({ mode }) => {
       port: 8080,
     },
     build: {
-      sourcemap: true,
+      sourcemap: false,
       cssCodeSplit: true,
       minify: "esbuild",
-      target: "es2015",
+      target: "es2020",
       cssMinify: true,
+      reportCompressedSize: false,
       rollupOptions: {
         output: {
           manualChunks: {
@@ -52,6 +53,8 @@ export default defineConfig(({ mode }) => {
             "router-vendor": ["react-router-dom"],
             "supabase-vendor": ["@supabase/supabase-js"],
             "query-vendor": ["@tanstack/react-query"],
+            "animation-vendor": ["framer-motion"],
+            "icons-vendor": ["lucide-react"],
           },
           // Optimize chunk file names for caching
           chunkFileNames: "assets/js/[name]-[hash].js",
