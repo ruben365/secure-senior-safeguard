@@ -4,6 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { HeroHomepage } from "@/components/HeroHomepage";
 import { HomeIntroSection } from "@/components/HomeIntroSection";
+import { AnimatedSection } from "@/components/AnimatedSection";
 import { ScamShieldSubmission } from "@/components/ScamShieldSubmission";
 import { PageTransition } from "@/components/PageTransition";
 import { Button } from "@/components/ui/button";
@@ -13,23 +14,11 @@ import { SITE } from "@/config/site";
 import { TrustBadgesSection } from "@/components/home/TrustBadgesSection";
 import SiteOrientationGrid from "@/components/home/SiteOrientationGrid";
 import PromoStrip from "@/components/home/PromoStrip";
-import { ThreatTicker } from "@/components/home/ThreatTicker";
-import { CaseStudiesSection } from "@/components/home/CaseStudiesSection";
-import { TeamPreviewSection } from "@/components/home/TeamPreviewSection";
-import { BlogPreviewSection } from "@/components/home/BlogPreviewSection";
-import { PartnerLogosSection } from "@/components/home/PartnerLogosSection";
-import { GraphicDesignSection } from "@/components/home/GraphicDesignSection";
 import { ArrowRight } from "lucide-react";
 
 const FAQPreview = lazy(() =>
   import("@/components/home/FAQPreview").then((m) => ({
     default: m.FAQPreview,
-  })),
-);
-
-const TestimonialsSection = lazy(() =>
-  import("@/components/home/TestimonialsSection").then((m) => ({
-    default: m.TestimonialsSection,
   })),
 );
 
@@ -47,13 +36,10 @@ const Index = () => {
         <Navigation />
 
         <main>
-          {/* Hero */}
+          {/* Hero — unchanged */}
           <section id="hero">
             <HeroHomepage />
           </section>
-
-          {/* Threat Ticker */}
-          <ThreatTicker />
 
           {/* Stats Counter + Intro */}
           <HomeIntroSection />
@@ -64,30 +50,8 @@ const Index = () => {
           {/* How It Works */}
           <PromoStrip />
 
-          {/* Case Studies */}
-          <CaseStudiesSection />
-
-          {/* Team Preview */}
-          <TeamPreviewSection />
-
-          {/* Testimonials */}
-          <section id="testimonials">
-            <LazySection>
-              <TestimonialsSection />
-            </LazySection>
-          </section>
-
-          {/* Partner Logos */}
-          <PartnerLogosSection />
-
           {/* Trust proof */}
           <TrustBadgesSection />
-
-          {/* Blog Preview */}
-          <BlogPreviewSection />
-
-          {/* Graphic Design Services */}
-          <GraphicDesignSection />
 
           {/* FAQ */}
           <section id="faq">
@@ -96,7 +60,7 @@ const Index = () => {
             </LazySection>
           </section>
 
-          {/* Final CTA */}
+          {/* Final CTA — clean corporate style */}
           <section id="final-action" className="py-20 md:py-28 lg:py-32 relative overflow-hidden">
             <div
               className="absolute inset-0 bg-cover bg-center"

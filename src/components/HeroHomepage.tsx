@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Shield, Star, CheckCircle, Play, AlertTriangle, Users, Zap } from "lucide-react";
+import { ArrowRight, Shield, Star, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect, useRef } from "react";
 const heroImage = "/images/hero-corporate-protection.webp";
 import { SITE } from "@/config/site";
 
@@ -12,79 +11,7 @@ const trustBadges = [
   { label: "24/7 Support" },
 ];
 
-const rotatingThreats = [
-  "Voice Cloning Scams",
-  "Deepfake Videos",
-  "Phishing Attacks",
-  "Identity Theft",
-  "AI-Powered Fraud",
-];
-
-function useTypingRotation(words: string[], typingSpeed = 80, pauseMs = 2200) {
-  const [displayed, setDisplayed] = useState("");
-  const [wordIndex, setWordIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const current = words[wordIndex];
-    let timeout: ReturnType<typeof setTimeout>;
-
-    if (!isDeleting && displayed === current) {
-      timeout = setTimeout(() => setIsDeleting(true), pauseMs);
-    } else if (isDeleting && displayed === "") {
-      setIsDeleting(false);
-      setWordIndex((i) => (i + 1) % words.length);
-    } else {
-      const speed = isDeleting ? typingSpeed / 2 : typingSpeed;
-      timeout = setTimeout(() => {
-        setDisplayed(
-          isDeleting
-            ? current.slice(0, displayed.length - 1)
-            : current.slice(0, displayed.length + 1)
-        );
-      }, speed);
-    }
-
-    return () => clearTimeout(timeout);
-  }, [displayed, isDeleting, wordIndex, words, typingSpeed, pauseMs]);
-
-  return displayed;
-}
-
-function useCountUpHero(target: number, duration = 2000) {
-  const [value, setValue] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
-  const started = useRef(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !started.current) {
-          started.current = true;
-          const start = performance.now();
-          const step = (now: number) => {
-            const progress = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            setValue(Math.floor(eased * target));
-            if (progress < 1) requestAnimationFrame(step);
-          };
-          requestAnimationFrame(step);
-        }
-      },
-      { threshold: 0.3 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [target, duration]);
-
-  return { value, ref };
-}
-
 export const HeroHomepage = () => {
-  const typedThreat = useTypingRotation(rotatingThreats);
-
   return (
     <section className="relative min-h-[90vh] lg:min-h-screen overflow-hidden">
       {/* Background Image */}
@@ -99,16 +26,10 @@ export const HeroHomepage = () => {
           fetchPriority="high"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/92 via-slate-900/80 to-slate-900/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/75 to-slate-900/50" />
       </div>
 
-      {/* Animated background particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-primary/5 blur-3xl hero-float-slow" />
-        <div className="absolute bottom-1/3 right-1/4 w-48 h-48 rounded-full bg-accent/5 blur-3xl hero-float-delayed" />
-      </div>
-
-      {/* Main Content */}
+      {/* Main Content — no animation wrappers to prevent CLS */}
       <div className="relative z-10 min-h-[90vh] lg:min-h-screen flex items-center">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-2xl py-24 lg:py-0">
@@ -122,30 +43,12 @@ export const HeroHomepage = () => {
             </div>
 
             <div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white leading-[1.05] mb-4">
-                Stop{" "}
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white leading-[1.05] mb-6">
+                Stop AI Scams{" "}
                 <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  AI Scams
-                </span>
-                <br />
-                <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
                   Before They Start
                 </span>
               </h1>
-            </div>
-
-            {/* Typing threat rotation */}
-            <div className="mb-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-red-500/10 border border-red-500/20 backdrop-blur-sm">
-                <AlertTriangle className="w-4 h-4 text-red-400 flex-shrink-0" />
-                <span className="text-sm text-red-300 font-medium">
-                  Current Threat:{" "}
-                  <span className="text-white font-bold">
-                    {typedThreat}
-                    <span className="animate-pulse text-accent">|</span>
-                  </span>
-                </span>
-              </div>
             </div>
 
             <div>
@@ -193,7 +96,7 @@ export const HeroHomepage = () => {
         </div>
       </div>
 
-      {/* Bottom Trust Bar — interactive mini-stats */}
+      {/* Bottom Trust Bar */}
       <div className="absolute bottom-0 left-0 right-0 z-20 bg-white/10 backdrop-blur-md border-t border-white/15">
         <div className="container mx-auto px-6 lg:px-8 py-4">
           <div className="flex flex-wrap items-center justify-between gap-6">
@@ -207,14 +110,17 @@ export const HeroHomepage = () => {
               <span className="text-sm font-medium text-white/80">Trusted by 100+ Ohio Families</span>
             </div>
 
-            {/* Animated Stats */}
+            {/* Stats */}
             <div className="hidden md:flex items-center gap-8">
               {[
-                { target: 99, suffix: "%", label: "Success Rate", icon: Zap },
-                { target: 24, suffix: "/7", label: "Monitoring", icon: Shield },
-                { target: 500, suffix: "+", label: "Protected", icon: Users },
+                { value: "99%", label: "Success Rate" },
+                { value: "24/7", label: "Monitoring" },
+                { value: "100+", label: "Families" },
               ].map((stat) => (
-                <HeroStat key={stat.label} {...stat} />
+                <div key={stat.label} className="text-center">
+                  <div className="text-xl font-black text-white">{stat.value}</div>
+                  <div className="text-[10px] font-medium text-white/60 uppercase tracking-wider">{stat.label}</div>
+                </div>
               ))}
             </div>
 
@@ -239,20 +145,5 @@ export const HeroHomepage = () => {
     </section>
   );
 };
-
-function HeroStat({ target, suffix, label, icon: Icon }: { target: number; suffix: string; label: string; icon: React.ElementType }) {
-  const { value, ref } = useCountUpHero(target);
-  return (
-    <div ref={ref} className="text-center flex items-center gap-2">
-      <Icon className="w-4 h-4 text-white/50" />
-      <div>
-        <div className="text-xl font-black text-white">
-          {value}{suffix}
-        </div>
-        <div className="text-[10px] font-medium text-white/60 uppercase tracking-wider">{label}</div>
-      </div>
-    </div>
-  );
-}
 
 export default HeroHomepage;
