@@ -42,10 +42,14 @@ export const TestimonialCarousel = () => {
   const prev = () => setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <section className="py-16 md:py-24" ref={ref}>
-      <div className="container mx-auto px-4 md:px-6 lg:px-12 max-w-5xl">
+    <section className="py-16 md:py-28 relative overflow-hidden" ref={ref}>
+      {/* Decorative orbs */}
+      <div className="absolute top-1/2 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 pointer-events-none" />
+      <div className="absolute top-1/2 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl -translate-y-1/2 pointer-events-none" />
+      
+      <div className="container mx-auto px-4 md:px-6 lg:px-12 max-w-5xl relative">
         <motion.div
-          className="text-center mb-12"
+          className="text-center mb-14"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
@@ -53,7 +57,7 @@ export const TestimonialCarousel = () => {
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary mb-4">
             Testimonials
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             What Families Are Saying
           </h2>
           <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
@@ -62,38 +66,52 @@ export const TestimonialCarousel = () => {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          initial={{ opacity: 0, y: 40, rotateX: 8 }}
+          animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.2 }}
           className="relative"
+          style={{ perspective: 1000 }}
         >
-          <div className="relative rounded-2xl border border-border/60 bg-card shadow-lg overflow-hidden">
-            {/* Decorative gradient */}
-            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-accent to-primary" />
+          <motion.div
+            className="relative rounded-2xl border border-border/50 bg-card shadow-3d-lg overflow-hidden"
+            whileHover={{ y: -4, boxShadow: "0 30px 60px -15px hsl(288 25% 20% / 0.15)" }}
+            style={{ transformStyle: "preserve-3d" }}
+          >
+            {/* Top gradient bar */}
+            <div className="h-1.5 bg-gradient-to-r from-primary via-accent to-primary" />
 
             <div className="p-8 md:p-12">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={current}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.3 }}
+                  initial={{ opacity: 0, x: 30, rotateY: 5 }}
+                  animate={{ opacity: 1, x: 0, rotateY: 0 }}
+                  exit={{ opacity: 0, x: -30, rotateY: -5 }}
+                  transition={{ duration: 0.4 }}
                 >
                   <div className="grid md:grid-cols-[auto_1fr] gap-8 items-center">
                     {/* Avatar */}
                     <div className="flex flex-col items-center gap-3">
                       <div className="relative">
-                        <img
-                          src={testimonials[current].avatar}
-                          alt={testimonials[current].name}
-                          className="w-20 h-20 md:w-24 md:h-24 rounded-2xl object-cover shadow-md"
-                        />
-                        <div className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-md">
-                          <Quote className="w-3.5 h-3.5 text-primary-foreground" />
-                        </div>
+                        <motion.div
+                          className="rounded-2xl overflow-hidden shadow-3d"
+                          whileHover={{ scale: 1.05, rotateZ: 2 }}
+                        >
+                          <img
+                            src={testimonials[current].avatar}
+                            alt={testimonials[current].name}
+                            className="w-20 h-20 md:w-28 md:h-28 object-cover"
+                          />
+                        </motion.div>
+                        <motion.div
+                          className="absolute -bottom-2 -right-2 w-9 h-9 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg"
+                          animate={{ scale: [1, 1.1, 1] }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        >
+                          <Quote className="w-4 h-4 text-white" />
+                        </motion.div>
                       </div>
-                      <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary border border-primary/20">
+                      <span className="inline-flex items-center px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-gradient-to-r from-primary/10 to-accent/10 text-primary border border-primary/20">
                         {testimonials[current].tag}
                       </span>
                     </div>
@@ -109,7 +127,7 @@ export const TestimonialCarousel = () => {
                         "{testimonials[current].quote}"
                       </blockquote>
                       <div>
-                        <p className="font-bold text-foreground">{testimonials[current].name}</p>
+                        <p className="font-bold text-foreground text-lg">{testimonials[current].name}</p>
                         <p className="text-sm text-muted-foreground">{testimonials[current].location}</p>
                       </div>
                     </div>
@@ -125,31 +143,35 @@ export const TestimonialCarousel = () => {
                   <button
                     key={i}
                     onClick={() => setCurrent(i)}
-                    className={`w-2.5 h-2.5 rounded-full transition-all ${
-                      i === current ? "bg-primary w-8" : "bg-border hover:bg-primary/30"
+                    className={`h-2.5 rounded-full transition-all duration-300 ${
+                      i === current ? "bg-gradient-to-r from-primary to-accent w-10" : "bg-border hover:bg-primary/30 w-2.5"
                     }`}
                     aria-label={`Go to testimonial ${i + 1}`}
                   />
                 ))}
               </div>
               <div className="flex gap-2">
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={prev}
                   className="w-10 h-10 rounded-xl border border-border/60 bg-card flex items-center justify-center hover:bg-muted transition-colors shadow-sm"
                   aria-label="Previous testimonial"
                 >
                   <ChevronLeft className="w-5 h-5 text-foreground" />
-                </button>
-                <button
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={next}
-                  className="w-10 h-10 rounded-xl border border-border/60 bg-primary flex items-center justify-center hover:bg-primary/90 transition-colors shadow-sm"
+                  className="w-10 h-10 rounded-xl bg-gradient-to-r from-primary to-accent flex items-center justify-center hover:opacity-90 transition-opacity shadow-lg"
                   aria-label="Next testimonial"
                 >
-                  <ChevronRight className="w-5 h-5 text-primary-foreground" />
-                </button>
+                  <ChevronRight className="w-5 h-5 text-white" />
+                </motion.button>
               </div>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
