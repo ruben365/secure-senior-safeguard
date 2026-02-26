@@ -7,32 +7,30 @@ const trustIndicators = [
   {
     icon: Shield,
     title: "Veteran-Founded",
-    description:
-      "Built by veterans who understand the importance of protecting what matters.",
+    description: "Built by veterans who understand the importance of protecting what matters.",
     stat: "Est. 2024",
-    gradient: "from-primary/15 to-lavender-300/10",
+    gradient: "from-primary/20 to-accent/5",
   },
   {
     icon: MapPin,
     title: "Ohio-Based",
     description: `Local, personalized cybersecurity for ${SITE.location.areaLabel}.`,
     stat: "Local Team",
-    gradient: "from-accent/15 to-primary/5",
+    gradient: "from-accent/20 to-primary/5",
   },
   {
     icon: Clock,
     title: "24/7 Human Support",
     description: "Real people ready to help when you need us. No bots, ever.",
     stat: "Always On",
-    gradient: "from-primary/10 to-accent/10",
+    gradient: "from-primary/15 to-accent/10",
   },
   {
     icon: Heart,
     title: "Family-First",
-    description:
-      "Every client is part of our extended family. Your safety is personal.",
+    description: "Every client is part of our extended family. Your safety is personal.",
     stat: "5,000+",
-    gradient: "from-lavender-300/15 to-primary/10",
+    gradient: "from-accent/15 to-primary/10",
   },
 ];
 
@@ -48,11 +46,15 @@ export const TrustBadgesSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section className="py-16 md:py-24 bg-muted/30" ref={ref}>
-      <div className="container mx-auto px-4 md:px-6 lg:px-12">
+    <section className="py-16 md:py-28 bg-muted/30 relative overflow-hidden" ref={ref}>
+      {/* Decorative */}
+      <div className="absolute top-20 right-20 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-20 left-20 w-80 h-80 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
+      
+      <div className="container mx-auto px-4 md:px-6 lg:px-12 relative">
         {/* Header */}
         <motion.div
-          className="text-center mb-12"
+          className="text-center mb-14"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
@@ -60,7 +62,7 @@ export const TrustBadgesSection = () => {
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary mb-4">
             Why Choose Us
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Built on Trust & Integrity
           </h2>
           <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
@@ -68,33 +70,37 @@ export const TrustBadgesSection = () => {
           </p>
         </motion.div>
 
-        {/* Trust Grid — 3D hover cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12" style={{ perspective: 1000 }}>
+        {/* Trust Grid — 3D glassmorphism cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-14" style={{ perspective: 1200 }}>
           {trustIndicators.map((item, i) => (
             <motion.div
               key={item.title}
-              initial={{ opacity: 0, y: 40, rotateX: 12 }}
+              initial={{ opacity: 0, y: 50, rotateX: 15 }}
               animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
+              transition={{ duration: 0.6, delay: i * 0.12, ease: "easeOut" }}
               whileHover={{
-                y: -8,
-                rotateX: -3,
-                rotateY: 4,
-                scale: 1.02,
-                boxShadow: "0 25px 50px -12px hsl(288 25% 20% / 0.15)",
+                y: -10,
+                rotateX: -4,
+                rotateY: 5,
+                scale: 1.03,
+                boxShadow: "0 30px 60px -15px hsl(288 25% 20% / 0.2)",
               }}
-              className="relative p-6 rounded-2xl border border-border/60 bg-card text-center overflow-hidden shadow-sm cursor-default"
+              className="relative p-6 rounded-2xl border border-border/50 bg-card text-center overflow-hidden shadow-3d cursor-default"
               style={{ transformStyle: "preserve-3d" }}
             >
               {/* Background gradient */}
               <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-60 pointer-events-none`} />
               {/* Top-lit highlight */}
-              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent" />
+              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/15 to-transparent" />
 
-              <div className="relative">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4 shadow-sm">
-                  <item.icon className="w-6 h-6 text-primary" />
-                </div>
+              <div className="relative" style={{ transform: "translateZ(12px)" }}>
+                <motion.div
+                  className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center mx-auto mb-4 shadow-sm border border-primary/10"
+                  whileHover={{ rotate: 8, scale: 1.1 }}
+                >
+                  <item.icon className="w-7 h-7 text-primary" />
+                </motion.div>
                 <h3 className="text-base font-bold text-foreground mb-2">
                   {item.title}
                 </h3>
@@ -102,7 +108,7 @@ export const TrustBadgesSection = () => {
                   {item.description}
                 </p>
                 <div className="pt-3 border-t border-border/50">
-                  <p className="text-lg font-bold text-primary">{item.stat}</p>
+                  <p className="text-xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">{item.stat}</p>
                 </div>
               </div>
             </motion.div>
@@ -111,23 +117,29 @@ export const TrustBadgesSection = () => {
 
         {/* Guarantees Bar — 3D elevated */}
         <motion.div
-          initial={{ opacity: 0, y: 20, rotateX: 5 }}
+          initial={{ opacity: 0, y: 30, rotateX: 8 }}
           animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          whileHover={{ y: -3, boxShadow: "0 16px 32px -8px hsl(288 25% 20% / 0.1)" }}
-          className="rounded-2xl border border-border/60 bg-card p-6 shadow-md"
-          style={{ transformStyle: "preserve-3d", perspective: 600 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          whileHover={{ y: -4, boxShadow: "0 20px 40px -10px hsl(288 25% 20% / 0.12)" }}
+          className="rounded-2xl border border-border/50 bg-card p-7 shadow-3d overflow-hidden relative"
+          style={{ transformStyle: "preserve-3d", perspective: 800 }}
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-accent/5 pointer-events-none" />
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20" />
+          <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {guarantees.map((text) => (
-              <div key={text} className="flex items-center gap-3">
-                <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <motion.div
+                key={text}
+                className="flex items-center gap-3"
+                whileHover={{ x: 4 }}
+              >
+                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center flex-shrink-0">
                   <CheckCircle2 className="w-4 h-4 text-primary" />
                 </div>
                 <span className="text-sm font-medium text-foreground">
                   {text}
                 </span>
-              </div>
+              </motion.div>
             ))}
           </div>
         </motion.div>

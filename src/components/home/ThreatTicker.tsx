@@ -11,22 +11,25 @@ const tickerItems = [
 ];
 
 export const ThreatTicker = () => {
-  // Double the items for seamless loop
   const items = [...tickerItems, ...tickerItems];
 
   return (
-    <div className="bg-foreground overflow-hidden py-3 relative">
+    <div className="relative overflow-hidden py-4">
+      {/* Glassmorphism background */}
+      <div className="absolute inset-0 bg-foreground" />
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-accent/10" />
+      
       {/* Edge fades */}
-      <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-foreground to-transparent z-10" />
-      <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-foreground to-transparent z-10" />
+      <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-foreground to-transparent z-10" />
+      <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-foreground to-transparent z-10" />
 
       <motion.div
-        className="flex gap-8 whitespace-nowrap"
+        className="flex gap-10 whitespace-nowrap relative"
         animate={{ x: ["0%", "-50%"] }}
         transition={{ duration: 30, ease: "linear", repeat: Infinity }}
       >
         {items.map((item, i) => (
-          <div key={i} className="flex items-center gap-2 text-sm font-semibold">
+          <div key={i} className="flex items-center gap-2.5 text-sm font-semibold">
             <item.icon className={`w-4 h-4 ${item.color}`} />
             <span className="text-background/90">{item.text}</span>
             <span className="text-background/20 mx-2">•</span>
