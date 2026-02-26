@@ -51,7 +51,7 @@ export const usePrefetchRoute = (path: string) => {
         "/faq": () => import("../pages/FAQ"),
         "/services": () => import("../pages/Services"),
         "/portfolio": () => import("../pages/Portfolio"),
-        "/invision-2026": () => import("../pages/InVision2026"),
+        "/invision-2026": () => import("../pages/Business"),
         "/business/autonomous-defense-hub": () => import("../pages/business/AutonomousDefenseHub"),
         "/services/cognitive-sentinel": () => import("../pages/services/CognitiveSentinel"),
         "/services/scam-insurance": () => import("../pages/services/ScamInsurance"),
