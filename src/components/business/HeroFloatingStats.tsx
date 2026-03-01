@@ -12,24 +12,24 @@ const HeroFloatingStats = () => {
   return (
     <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-20 pointer-events-none hidden lg:block">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8, duration: 0.6, type: "spring", stiffness: 100 }}
-        className="bg-card/95 backdrop-blur-xl rounded-full py-4 px-10 shadow-2xl shadow-primary/10 border border-border/40"
+        initial={{ opacity: 0, y: 30, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ delay: 0.8, duration: 0.7, type: "spring", stiffness: 90 }}
+        className="glass-heavy rounded-full py-4 px-10 shadow-3d-colored"
       >
         <div className="flex items-center gap-8">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.7 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1 + index * 0.1, duration: 0.4 }}
+              transition={{ delay: 1 + index * 0.12, duration: 0.5, type: "spring" }}
               className="flex items-center gap-2.5 group"
             >
-              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-md group-hover:shadow-primary/10 shadow-sm">
                 <stat.icon className="w-4.5 h-4.5 text-primary" strokeWidth={1.5} />
               </div>
-              <span className="text-sm font-semibold text-foreground whitespace-nowrap">
+              <span className="text-sm font-bold text-foreground whitespace-nowrap">
                 {stat.text}
               </span>
             </motion.div>

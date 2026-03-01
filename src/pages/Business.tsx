@@ -48,6 +48,9 @@ import {
   Award,
   DollarSign,
   Zap,
+  ChevronRight,
+  Globe,
+  Cpu,
 } from "lucide-react";
 import { ExpandableServiceCard } from "@/components/ExpandableServiceCard";
 import { Badge } from "@/components/ui/badge";
@@ -61,6 +64,8 @@ import { VideoLightbox } from "@/components/VideoLightbox";
 import { SEO } from "@/components/SEO";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const businessHeadlines = [
   "Your AI Front Desk, Running 24/7",
@@ -70,10 +75,10 @@ const businessHeadlines = [
 ];
 
 const platformSnapshotStats = [
-  { value: "9", label: "Integrated Services" },
-  { value: "< 90s", label: "Avg. Threat Response" },
-  { value: "$500K", label: "Max Scam Coverage" },
-  { value: "24/7", label: "Autonomous Monitoring" },
+  { value: "9", label: "Integrated Services", icon: Cpu },
+  { value: "< 90s", label: "Avg. Threat Response", icon: Zap },
+  { value: "$500K", label: "Max Scam Coverage", icon: Shield },
+  { value: "24/7", label: "Autonomous Monitoring", icon: Globe },
 ];
 
 const platformGroups = [
@@ -83,15 +88,8 @@ const platformGroups = [
     subtitle: "Autonomous prevention and response for organizations handling sensitive data.",
     minPrice: "From $297/mo",
     icon: Shield,
+    gradient: "from-primary via-primary/80 to-accent",
     accentStrip: "bg-primary",
-    titleColor: "text-primary",
-    cardBorderHover: "hover:border-primary/35",
-    cardShadowHover: "hover:shadow-primary/10",
-    iconBg: "bg-primary/10 group-hover:bg-primary/20",
-    iconColor: "text-primary",
-    featureHoverText: "group-hover:text-primary",
-    priceColor: "text-primary/75",
-    badgeClass: "bg-primary/12 text-primary border-primary/25",
     features: [
       {
         badge: "Enterprise",
@@ -133,15 +131,8 @@ const platformGroups = [
     subtitle: "Real-time protection workflows designed for individuals, families, and caregivers.",
     minPrice: "From $19/mo",
     icon: Brain,
+    gradient: "from-emerald-500 via-emerald-400 to-teal-400",
     accentStrip: "bg-emerald-500",
-    titleColor: "text-emerald-700",
-    cardBorderHover: "hover:border-emerald-500/35",
-    cardShadowHover: "hover:shadow-emerald-500/10",
-    iconBg: "bg-emerald-500/12 group-hover:bg-emerald-500/22",
-    iconColor: "text-emerald-700",
-    featureHoverText: "group-hover:text-emerald-700",
-    priceColor: "text-emerald-700/80",
-    badgeClass: "bg-emerald-500/12 text-emerald-700 border-emerald-500/25",
     features: [
       {
         badge: "Senior",
@@ -175,15 +166,8 @@ const platformGroups = [
     subtitle: "Coverage and trust signals that reduce legal and financial exposure.",
     minPrice: "From $49/mo",
     icon: Award,
+    gradient: "from-amber-500 via-amber-400 to-orange-400",
     accentStrip: "bg-amber-500",
-    titleColor: "text-amber-700",
-    cardBorderHover: "hover:border-amber-500/35",
-    cardShadowHover: "hover:shadow-amber-500/10",
-    iconBg: "bg-amber-500/12 group-hover:bg-amber-500/22",
-    iconColor: "text-amber-700",
-    featureHoverText: "group-hover:text-amber-700",
-    priceColor: "text-amber-700/80",
-    badgeClass: "bg-amber-500/12 text-amber-700 border-amber-500/25",
     features: [
       {
         badge: "Business",
@@ -229,20 +213,24 @@ const SectionHeader = ({
   title,
   subtitle,
   children,
+  light = false,
 }: {
   badge: string;
   title: string;
   subtitle?: string;
   children?: React.ReactNode;
+  light?: boolean;
 }) => (
-  <AnimatedSection animation="fade-up" className="text-center mb-14">
-    <span className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-primary/8 backdrop-blur-sm border border-primary/15 rounded-full text-xs font-bold text-primary uppercase tracking-[0.18em] mb-5 shadow-sm">
-      <Sparkles className="w-3 h-3" />
-      {badge}
+  <AnimatedSection animation="fade-up" className="text-center mb-16">
+    <span className="inline-flex items-center gap-2 px-5 py-2 glass-subtle rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15">
+      <Sparkles className="w-3.5 h-3.5 text-primary" />
+      <span className={light ? "text-white/90" : "text-primary"}>{badge}</span>
     </span>
-    <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 tracking-tight">{title}</h2>
+    <h2 className={`text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1] ${light ? "text-white" : ""}`}>
+      {title}
+    </h2>
     {subtitle && (
-      <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+      <p className={`text-base md:text-lg max-w-3xl mx-auto leading-relaxed ${light ? "text-white/75" : "text-muted-foreground"}`}>
         {subtitle}
       </p>
     )}
@@ -279,29 +267,39 @@ const PricingCard = ({
   delay?: number;
 }) => (
   <AnimatedSection animation="scale-up" delay={delay}>
-    <div className="relative h-full pt-5 group" style={{ perspective: "800px" }}>
+    <div className="relative h-full pt-5 group" style={{ perspective: "900px" }}>
       <div
-        className={`absolute -top-1 left-1/2 -translate-x-1/2 bg-gradient-to-r ${tagColor} text-white px-5 py-1.5 rounded-full text-xs font-bold tracking-wider shadow-lg z-20 whitespace-nowrap border border-white/20`}
+        className={`absolute -top-1 left-1/2 -translate-x-1/2 bg-gradient-to-r ${tagColor} text-white px-5 py-1.5 rounded-full text-[10px] font-black tracking-wider shadow-lg z-20 whitespace-nowrap border border-white/25`}
       >
         {tag}
       </div>
-      <Card
-        className={`p-6 rounded-2xl border backdrop-blur-sm ${featured ? "border-2 border-primary shadow-xl shadow-primary/10 bg-card" : "border-border/60 bg-card/90"} hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 h-full flex flex-col pt-8`}
+      <div
+        className={`relative rounded-2xl border backdrop-blur-xl overflow-hidden h-full flex flex-col transition-all duration-500 hover:-translate-y-3 ${
+          featured
+            ? "border-primary/40 shadow-[0_8px_40px_-12px_hsl(var(--primary)/0.25)] bg-card"
+            : "border-border/50 bg-card/90 hover:border-primary/25 hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)]"
+        }`}
+        style={{ transformStyle: "preserve-3d" }}
       >
-        <div className="text-center flex-1 flex flex-col">
+        {/* Top gradient line */}
+        <div className={`h-1 w-full bg-gradient-to-r ${tagColor}`} />
+        
+        {/* Featured glow */}
+        {featured && (
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.04] via-transparent to-accent/[0.02] pointer-events-none" />
+        )}
+
+        <div className="p-6 pt-8 text-center flex-1 flex flex-col relative z-10">
           <h3 className="text-xl font-bold mb-3">{title}</h3>
-          <div className="relative mb-1">
-            <p className="text-4xl font-black text-primary">
+          <div className="relative mb-2">
+            <p className="text-4xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               {price}
               {priceSuffix && (
-                <span className="text-base text-muted-foreground font-normal">
+                <span className="text-sm text-muted-foreground font-normal bg-none text-muted-foreground" style={{ WebkitTextFillColor: 'initial' }}>
                   {priceSuffix}
                 </span>
               )}
             </p>
-            {featured && (
-              <div className="absolute -inset-4 bg-primary/5 rounded-2xl -z-10 blur-sm" />
-            )}
           </div>
           {priceNote && (
             <p className="text-sm text-muted-foreground mb-4">{priceNote}</p>
@@ -318,25 +316,29 @@ const PricingCard = ({
               ))}
             </div>
           )}
-          <ul className="space-y-2.5 mb-6 text-sm text-left flex-1">
+          <ul className="space-y-3 mb-6 text-sm text-left flex-1">
             {features.map((f, i) => (
-              <li key={i} className="flex items-start gap-2.5">
-                <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <li key={i} className="flex items-start gap-3">
+                <div className="w-5 h-5 rounded-full bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <CheckCircle className="w-3 h-3 text-primary" />
                 </div>
-                <span>{f}</span>
+                <span className="text-foreground/85">{f}</span>
               </li>
             ))}
           </ul>
           <Button
             variant={featured ? "default" : "outline"}
-            className={`w-full mt-auto h-12 font-semibold transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] ${featured ? "shadow-lg shadow-primary/20" : ""}`}
+            className={`w-full mt-auto h-12 font-bold rounded-xl transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] ${
+              featured 
+                ? "bg-gradient-to-r from-primary to-accent text-white shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30" 
+                : "hover:border-primary/40"
+            }`}
             onClick={onButtonClick}
           >
             {buttonText}
           </Button>
         </div>
-      </Card>
+      </div>
     </div>
   </AnimatedSection>
 );
@@ -383,6 +385,9 @@ function Business() {
     src: string;
     title: string;
   } | null>(null);
+
+  const platformRef = useRef(null);
+  const platformInView = useInView(platformRef, { once: true, margin: "-80px" });
 
   useEffect(() => {
     fetchBusinessTestimonials();
@@ -539,15 +544,19 @@ function Business() {
         <TrustBar />
 
         {/* ═══════════════════ SERVICES ═══════════════════ */}
-        <section id="services" className="py-20 bg-background relative">
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-          <div className="container mx-auto px-4">
+        <section id="services" className="py-24 relative overflow-hidden">
+          {/* Premium background */}
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
+          <div className="absolute top-20 left-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-20 right-0 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-3xl pointer-events-none" />
+
+          <div className="container mx-auto px-4 relative z-10">
             <SectionHeader
               badge="Our Services"
               title="What We Build For You"
               subtitle="Pick a service below to see how your business benefits."
             />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl mx-auto" style={{ perspective: "1200px" }}>
               <AnimatedSection animation="fade-left" delay={0}>
                 <ExpandableServiceCard
                   icon={<Phone className="w-7 h-7 text-primary" />}
@@ -599,7 +608,7 @@ function Business() {
                         { icon: CheckCircle, label: "Calendar Sync", desc: "Works with Google, Outlook, and more." },
                       ].map((item, i) => (
                         <Card key={i} className="p-3 text-center border-border/60 hover:border-primary/30 transition-colors duration-300">
-                          <div className="w-9 h-9 mx-auto mb-2 bg-primary/10 rounded-lg flex items-center justify-center">
+                          <div className="w-9 h-9 mx-auto mb-2 bg-gradient-to-br from-primary/15 to-accent/10 rounded-lg flex items-center justify-center">
                             <item.icon className="w-4.5 h-4.5 text-primary" />
                           </div>
                           <h4 className="font-bold text-sm mb-1">{item.label}</h4>
@@ -679,11 +688,13 @@ function Business() {
         </section>
 
         {/* ═══════════════════ COMPLETE PLATFORM ═══════════════════ */}
-        <section className="py-24 relative overflow-hidden">
-          {/* Premium background */}
-          <div className="absolute inset-0 bg-gradient-to-b from-muted/40 via-background to-muted/30" />
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-accent/[0.04] rounded-full blur-3xl pointer-events-none" />
+        <section className="py-28 relative overflow-hidden" ref={platformRef}>
+          {/* Rich layered background */}
+          <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+          <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/15 to-transparent" />
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-primary/[0.025] rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
 
           <div className="container mx-auto px-4 relative z-10">
             <SectionHeader
@@ -692,115 +703,182 @@ function Business() {
               subtitle="All platform capabilities consolidated under one mission, one operating model, and one unified experience."
             />
 
-            {/* Hero overview card */}
-            <AnimatedSection animation="fade-up" className="max-w-6xl mx-auto mb-16">
-              <div className="relative rounded-3xl overflow-hidden border border-border/40 shadow-2xl shadow-primary/5" style={{ perspective: "1200px" }}>
-                {/* Glass card */}
-                <div className="relative bg-card/95 backdrop-blur-xl p-8 md:p-12">
-                  {/* Decorative corner accents */}
-                  <div className="absolute top-0 left-0 w-24 h-24 bg-gradient-to-br from-primary/10 to-transparent rounded-br-3xl" />
-                  <div className="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl from-accent/8 to-transparent rounded-tl-3xl" />
+            {/* Hero overview card — Premium glassmorphism */}
+            <motion.div
+              className="max-w-6xl mx-auto mb-20"
+              initial={{ opacity: 0, y: 60, rotateX: 8 }}
+              animate={platformInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              style={{ perspective: "1400px" }}
+            >
+              <div className="relative rounded-3xl overflow-hidden glass-heavy shadow-3d-lg">
+                {/* Animated gradient border */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/10 via-transparent to-accent/10 pointer-events-none" />
+                
+                {/* Corner accents */}
+                <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-primary/12 to-transparent" />
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-accent/10 to-transparent" />
+                <div className="absolute bottom-0 right-0 w-40 h-40 bg-gradient-to-tl from-primary/8 to-transparent" />
 
-                  <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] relative z-10">
+                <div className="relative p-8 md:p-12 lg:p-16">
+                  <div className="grid gap-12 lg:grid-cols-[1.3fr_0.7fr] items-center relative z-10">
                     <div>
-                      <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/8 border border-primary/15 rounded-full text-xs font-bold text-primary uppercase tracking-wider mb-5">
-                        <Shield className="w-3 h-3" />
-                        Unified Defense
-                      </div>
-                      <h3 className="text-2xl md:text-3xl font-black mb-4 leading-tight">
-                        One Platform. Clear Mission.<br />
-                        <span className="text-primary">Practical Outcomes.</span>
-                      </h3>
-                      <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-6">
-                        We merged the full platform into AI & Business to keep the story simple.
-                        Our purpose is to help Ohio organizations grow with AI while staying safe from
-                        modern fraud and operational risk.
-                      </p>
-                      <div className="space-y-3">
-                        {[
-                          "Current focus: business growth automation, enterprise defense, and family-level protection.",
-                          "Single operating model: shared threat intelligence across all 9 services.",
-                          "Single engagement path: strategy, deployment, hardening, and ongoing support.",
-                        ].map((item) => (
-                          <div key={item} className="flex items-start gap-3 text-sm group">
-                            <div className="w-6 h-6 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-primary/20 transition-colors">
-                              <CheckCircle className="w-3.5 h-3.5 text-primary" />
-                            </div>
-                            <p className="text-foreground/85">{item}</p>
-                          </div>
-                        ))}
-                      </div>
+                      <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={platformInView ? { opacity: 1, x: 0 } : {}}
+                        transition={{ delay: 0.3, duration: 0.5 }}
+                      >
+                        <div className="inline-flex items-center gap-2 px-4 py-2 glass-subtle rounded-full text-xs font-bold text-primary uppercase tracking-wider mb-6 border border-primary/15">
+                          <Shield className="w-3.5 h-3.5" />
+                          Unified Defense
+                        </div>
+                        <h3 className="text-2xl md:text-3xl lg:text-4xl font-black mb-5 leading-tight">
+                          One Platform. Clear Mission.
+                          <br />
+                          <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                            Practical Outcomes.
+                          </span>
+                        </h3>
+                        <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-8">
+                          We merged the full platform into AI & Business to keep the story simple.
+                          Our purpose is to help Ohio organizations grow with AI while staying safe from
+                          modern fraud and operational risk.
+                        </p>
+                        <div className="space-y-4">
+                          {[
+                            "Current focus: business growth automation, enterprise defense, and family-level protection.",
+                            "Single operating model: shared threat intelligence across all 9 services.",
+                            "Single engagement path: strategy, deployment, hardening, and ongoing support.",
+                          ].map((item, idx) => (
+                            <motion.div
+                              key={item}
+                              className="flex items-start gap-3 text-sm group"
+                              initial={{ opacity: 0, x: -15 }}
+                              animate={platformInView ? { opacity: 1, x: 0 } : {}}
+                              transition={{ delay: 0.5 + idx * 0.1, duration: 0.4 }}
+                            >
+                              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform duration-300 shadow-sm">
+                                <CheckCircle className="w-3.5 h-3.5 text-primary" />
+                              </div>
+                              <p className="text-foreground/80 leading-relaxed">{item}</p>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </motion.div>
                     </div>
 
                     {/* Stats grid with 3D depth */}
                     <div className="grid grid-cols-2 gap-4">
                       {platformSnapshotStats.map((stat, i) => (
-                        <AnimatedSection key={stat.label} animation="scale-up" delay={i * 100}>
-                          <div
-                            className="group relative rounded-2xl border border-border/50 bg-gradient-to-br from-background to-muted/50 p-5 text-center hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-1"
-                          >
-                            <div className="absolute inset-0 rounded-2xl bg-primary/[0.02] opacity-0 group-hover:opacity-100 transition-opacity" />
-                            <p className="text-3xl md:text-4xl font-black text-primary mb-1 relative z-10">{stat.value}</p>
-                            <p className="text-[11px] md:text-xs uppercase tracking-wider text-muted-foreground font-semibold relative z-10">{stat.label}</p>
+                        <motion.div
+                          key={stat.label}
+                          initial={{ opacity: 0, y: 30, scale: 0.9 }}
+                          animate={platformInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                          transition={{ delay: 0.4 + i * 0.12, duration: 0.5, ease: "easeOut" }}
+                          whileHover={{ y: -6, scale: 1.04 }}
+                          className="group"
+                        >
+                          <div className="relative rounded-2xl border border-border/50 bg-card/80 backdrop-blur-sm p-5 text-center hover:border-primary/30 hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.12)] transition-all duration-500 overflow-hidden">
+                            {/* Hover glow */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.04] to-accent/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                            
+                            <div className="relative z-10">
+                              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/12 to-accent/8 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
+                                <stat.icon className="w-5 h-5 text-primary" />
+                              </div>
+                              <p className="text-3xl md:text-4xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-1">
+                                {stat.value}
+                              </p>
+                              <p className="text-[10px] md:text-xs uppercase tracking-wider text-muted-foreground font-semibold">
+                                {stat.label}
+                              </p>
+                            </div>
                           </div>
-                        </AnimatedSection>
+                        </motion.div>
                       ))}
                     </div>
                   </div>
                 </div>
               </div>
-            </AnimatedSection>
+            </motion.div>
 
-            {/* Service groups */}
-            <div className="max-w-6xl mx-auto space-y-16">
+            {/* Service groups — Premium cards with 3D hover */}
+            <div className="max-w-6xl mx-auto space-y-20">
               {platformGroups.map((group, gi) => (
-                <AnimatedSection key={group.key} animation="fade-up" delay={gi * 100}>
+                <AnimatedSection key={group.key} animation="fade-up" delay={gi * 120}>
                   <div>
-                    {/* Group header with accent line */}
-                    <div className="flex flex-wrap items-center gap-3 mb-6">
-                      <div className={`h-8 w-1.5 rounded-full ${group.accentStrip}`} />
-                      <div className={`w-10 h-10 rounded-xl ${group.iconBg} flex items-center justify-center shadow-sm`}>
-                        <group.icon className={`w-5 h-5 ${group.iconColor}`} />
+                    {/* Group header with gradient accent */}
+                    <div className="flex flex-wrap items-center gap-4 mb-8">
+                      <div className={`h-10 w-1.5 rounded-full bg-gradient-to-b ${group.gradient}`} />
+                      <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${group.gradient} flex items-center justify-center shadow-lg`}>
+                        <group.icon className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <span className={`text-sm font-bold ${group.titleColor}`}>{group.title}</span>
-                        <span className="text-xs text-muted-foreground ml-3 bg-muted px-2.5 py-0.5 rounded-full font-medium">{group.minPrice}</span>
+                        <h3 className="text-lg font-black tracking-tight">{group.title}</h3>
+                        <div className="flex items-center gap-2 mt-0.5">
+                          <span className="text-xs text-muted-foreground">{group.subtitle}</span>
+                        </div>
                       </div>
+                      <span className="ml-auto text-xs font-bold text-primary bg-primary/8 px-4 py-1.5 rounded-full border border-primary/15">
+                        {group.minPrice}
+                      </span>
                     </div>
-                    <p className="text-sm text-muted-foreground mb-6 max-w-3xl ml-[3.25rem]">{group.subtitle}</p>
 
-                    <div className={`grid grid-cols-1 sm:grid-cols-2 gap-5 ${group.features.length === 4 ? "lg:grid-cols-4" : group.features.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-2"}`}>
+                    <div
+                      className={`grid grid-cols-1 sm:grid-cols-2 gap-5 ${
+                        group.features.length === 4
+                          ? "lg:grid-cols-4"
+                          : group.features.length === 3
+                          ? "lg:grid-cols-3"
+                          : "lg:grid-cols-2"
+                      }`}
+                      style={{ perspective: "1000px" }}
+                    >
                       {group.features.map((feature, fi) => (
-                        <AnimatedSection key={feature.title} animation="scale-up" delay={fi * 80}>
+                        <motion.div
+                          key={feature.title}
+                          initial={{ opacity: 0, y: 40, rotateX: 10 }}
+                          whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: fi * 0.08, duration: 0.5 }}
+                          whileHover={{ y: -10, rotateX: -2, rotateY: 3 }}
+                          style={{ transformStyle: "preserve-3d" }}
+                        >
                           <Link
                             to={feature.href}
-                            className={`group/card relative flex flex-col p-6 rounded-2xl border border-border/50 bg-card/95 backdrop-blur-sm transition-all duration-400 h-full no-underline ${group.cardBorderHover} hover:shadow-xl ${group.cardShadowHover} hover:-translate-y-2`}
-                            style={{ perspective: "600px" }}
+                            className="group/card relative flex flex-col p-6 rounded-2xl border border-border/50 bg-card/95 backdrop-blur-sm transition-all duration-500 h-full no-underline hover:border-primary/30 hover:shadow-[0_20px_50px_-15px_hsl(var(--primary)/0.15)] overflow-hidden"
                           >
-                            {/* Top glow on hover */}
-                            <div className={`absolute top-0 left-0 right-0 h-1 rounded-t-2xl ${group.accentStrip} opacity-0 group-hover/card:opacity-100 transition-opacity duration-300`} />
+                            {/* Top glow bar */}
+                            <div className={`absolute top-0 left-0 right-0 h-1 rounded-t-2xl bg-gradient-to-r ${group.gradient} opacity-40 group-hover/card:opacity-100 transition-opacity duration-300`} />
 
-                            <div className="flex items-start justify-between gap-3 mb-4">
-                              <div className={`w-11 h-11 rounded-xl ${group.iconBg} flex items-center justify-center transition-all duration-300 shadow-sm group-hover/card:scale-110 group-hover/card:shadow-md`}>
-                                <feature.icon className={`w-5 h-5 ${group.iconColor}`} />
+                            {/* Hover background glow */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] to-accent/[0.02] opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                            <div className="flex items-start justify-between gap-3 mb-4 relative z-10">
+                              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${group.gradient} flex items-center justify-center transition-all duration-300 shadow-md group-hover/card:scale-110 group-hover/card:shadow-lg`}
+                                style={{ transform: "translateZ(20px)" }}
+                              >
+                                <feature.icon className="w-5 h-5 text-white" />
                               </div>
-                              <Badge className={`text-[10px] font-bold border ${group.badgeClass} backdrop-blur-sm`}>
+                              <Badge className="text-[10px] font-bold bg-muted/80 text-muted-foreground border-border/50 backdrop-blur-sm">
                                 {feature.badge}
                               </Badge>
                             </div>
-                            <div className="mb-3">
-                              <p className={`font-bold text-sm text-foreground leading-tight transition-colors ${group.featureHoverText}`}>
+                            <div className="mb-3 relative z-10">
+                              <p className="font-bold text-base text-foreground leading-tight group-hover/card:text-primary transition-colors duration-300">
                                 {feature.title}
                               </p>
-                              <p className={`text-[11px] font-semibold mt-0.5 ${group.priceColor}`}>{feature.price}</p>
+                              <p className="text-xs font-semibold text-primary/70 mt-1">{feature.price}</p>
                             </div>
-                            <p className="text-xs text-muted-foreground leading-relaxed flex-1 mb-4">{feature.tagline}</p>
-                            <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground/70 group-hover/card:text-primary transition-colors">
+                            <p className="text-xs text-muted-foreground leading-relaxed flex-1 mb-4 relative z-10">
+                              {feature.tagline}
+                            </p>
+                            <div className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground/60 group-hover/card:text-primary transition-colors relative z-10">
                               <span>Explore</span>
-                              <ArrowRight className="w-3 h-3 group-hover/card:translate-x-1 transition-transform duration-300" />
+                              <ChevronRight className="w-3.5 h-3.5 group-hover/card:translate-x-1.5 transition-transform duration-300" />
                             </div>
                           </Link>
-                        </AnimatedSection>
+                        </motion.div>
                       ))}
                     </div>
                   </div>
@@ -808,26 +886,38 @@ function Business() {
               ))}
             </div>
 
-            {/* Platform integration pillars */}
-            <div className="mt-20 grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {/* Platform integration pillars — 3D cards */}
+            <div className="mt-24 grid md:grid-cols-3 gap-6 max-w-5xl mx-auto" style={{ perspective: "1200px" }}>
               {platformPillars.map((pillar, i) => (
-                <AnimatedSection key={pillar.title} animation="scale-up" delay={i * 100}>
-                  <Card className="group p-7 rounded-2xl border-border/40 bg-card/95 backdrop-blur-sm text-center h-full hover:shadow-xl hover:border-primary/20 hover:-translate-y-2 transition-all duration-500">
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center mx-auto mb-4 shadow-inner group-hover:scale-110 transition-transform duration-300">
-                      <pillar.icon className="w-6 h-6 text-primary" />
+                <motion.div
+                  key={pillar.title}
+                  initial={{ opacity: 0, y: 40, rotateX: 12 }}
+                  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.12, duration: 0.6 }}
+                  whileHover={{ y: -8, rotateX: -3, rotateY: 3 }}
+                  style={{ transformStyle: "preserve-3d" }}
+                >
+                  <Card className="group p-8 rounded-2xl border-border/40 bg-card/95 backdrop-blur-sm text-center h-full hover:shadow-[0_20px_50px_-15px_hsl(var(--primary)/0.12)] hover:border-primary/25 transition-all duration-500 overflow-hidden relative">
+                    <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/30 via-accent/20 to-primary/30 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div
+                      className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center mx-auto mb-5 shadow-inner group-hover:scale-110 transition-transform duration-300"
+                      style={{ transform: "translateZ(15px)" }}
+                    >
+                      <pillar.icon className="w-7 h-7 text-primary" />
                     </div>
-                    <h3 className="font-bold text-base mb-2">{pillar.title}</h3>
+                    <h3 className="font-bold text-base mb-3">{pillar.title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">{pillar.desc}</p>
                   </Card>
-                </AnimatedSection>
+                </motion.div>
               ))}
             </div>
 
             {/* Demo CTA */}
-            <AnimatedSection animation="fade-up" delay={200} className="text-center mt-14">
-              <div className="inline-flex flex-col sm:flex-row gap-3 justify-center">
+            <AnimatedSection animation="fade-up" delay={200} className="text-center mt-16">
+              <div className="inline-flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
-                  className="h-13 px-10 font-bold rounded-full bg-gradient-to-r from-primary to-accent text-white hover:opacity-90 transition-all duration-300 shadow-xl shadow-primary/20 hover:shadow-2xl hover:shadow-primary/30 hover:scale-[1.03]"
+                  className="h-14 px-12 font-bold rounded-full bg-gradient-to-r from-primary to-accent text-white hover:opacity-90 transition-all duration-300 shadow-xl shadow-primary/20 hover:shadow-2xl hover:shadow-primary/30 hover:scale-[1.03] text-base"
                   onClick={() => {
                     setSelectedInquiry({
                       name: "InVision Platform Demo",
@@ -838,13 +928,13 @@ function Business() {
                     setInquiryDialogOpen(true);
                   }}
                 >
-                  Request a Platform Demo <ArrowRight className="ml-2 w-4 h-4" />
+                  Request a Platform Demo <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
-                <Button asChild variant="outline" className="h-13 px-8 rounded-full font-semibold hover:scale-[1.03] transition-all duration-300">
+                <Button asChild variant="outline" className="h-14 px-10 rounded-full font-semibold hover:scale-[1.03] transition-all duration-300 text-base">
                   <Link to="/training">View Individual Plans</Link>
                 </Button>
               </div>
-              <p className="text-xs text-muted-foreground mt-4">
+              <p className="text-xs text-muted-foreground mt-5">
                 Early-access pricing is still available for platform-wide engagements.
               </p>
             </AnimatedSection>
@@ -852,11 +942,11 @@ function Business() {
         </section>
 
         {/* Veterans Discount */}
-        <section className="py-4 bg-muted border-y border-border/40">
+        <section className="py-4 bg-gradient-to-r from-muted via-card to-muted border-y border-border/30">
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-center gap-3 text-center">
               <span className="text-xl">🇺🇸</span>
-              <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
+              <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 font-bold">
                 <Shield className="w-3 h-3 mr-1" />
                 10% OFF
               </Badge>
@@ -868,15 +958,18 @@ function Business() {
         </section>
 
         {/* ═══════════════════ WEB DESIGN ═══════════════════ */}
-        <section id="website-design" className="py-16 bg-background">
-          <div className="container mx-auto px-4">
+        <section id="website-design" className="py-24 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
+          
+          <div className="container mx-auto px-4 relative z-10">
             <SectionHeader
               badge="Web Design"
               title="Websites That Sell For You"
               subtitle="Your website works around the clock. We build fast, secure sites that turn visitors into paying customers."
             />
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mb-14" style={{ perspective: "1000px" }}>
               <PricingCard
                 tag="⚡ QUICK START"
                 tagColor="from-primary to-violet-500"
@@ -973,7 +1066,8 @@ function Business() {
             {/* Website Add-Ons */}
             <AnimatedSection animation="fade-up" delay={100} className="max-w-5xl mx-auto">
               <div className="text-center mb-8">
-                <span className="inline-block px-3 py-1 bg-accent/10 rounded-full text-xs font-bold text-accent uppercase tracking-[0.15em] mb-3">
+                <span className="inline-flex items-center gap-2 px-4 py-1.5 glass-subtle rounded-full text-xs font-bold text-accent uppercase tracking-[0.18em] mb-4 border border-accent/15">
+                  <Sparkles className="w-3 h-3" />
                   Enhance Your Project
                 </span>
                 <h3 className="text-2xl font-bold mb-2">Premium Add-Ons</h3>
@@ -986,27 +1080,31 @@ function Business() {
                   { name: "AI Chatbot", price: "$1,200", note: "Full integration", color: "text-primary", tag: "POPULAR" },
                   { name: "Domain & Hosting", price: "FREE", note: "With any website", color: "text-primary", tag: "INCLUDED" },
                 ].map((addon, i) => (
-                  <Card
+                  <motion.div
                     key={i}
-                    className="p-4 text-center border-border/60 hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:border-primary/30 relative group"
+                    whileHover={{ y: -8, scale: 1.03 }}
+                    transition={{ type: "spring", stiffness: 300 }}
                   >
-                    {addon.tag && (
-                      <span className="absolute top-2 right-2 px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-bold rounded-full">
-                        {addon.tag}
-                      </span>
-                    )}
-                    <h4 className="font-bold text-sm mb-1">{addon.name}</h4>
-                    <div className={`text-xl font-black ${addon.color} mb-0.5 transition-transform duration-300 group-hover:scale-110`}>
-                      {addon.price}
-                    </div>
-                    <div className="text-xs text-muted-foreground">{addon.note}</div>
-                  </Card>
+                    <Card className="p-4 text-center border-border/50 hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.12)] transition-all duration-500 hover:border-primary/30 relative group overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] to-accent/[0.01] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                      {addon.tag && (
+                        <span className="absolute top-2 right-2 px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-bold rounded-full">
+                          {addon.tag}
+                        </span>
+                      )}
+                      <h4 className="font-bold text-sm mb-1 relative z-10">{addon.name}</h4>
+                      <div className={`text-xl font-black ${addon.color} mb-0.5 relative z-10`}>
+                        {addon.price}
+                      </div>
+                      <div className="text-xs text-muted-foreground relative z-10">{addon.note}</div>
+                    </Card>
+                  </motion.div>
                 ))}
               </div>
-              <div className="mt-6 text-center">
+              <div className="mt-8 text-center">
                 <Button
                   variant="outline"
-                  className="rounded-full transition-transform duration-200 hover:scale-105 active:scale-95"
+                  className="rounded-full h-11 px-8 font-semibold transition-all duration-300 hover:scale-105 active:scale-95 hover:border-primary/40"
                   onClick={() => {
                     setSelectedInquiry({
                       name: "Custom Website Package",
@@ -1017,7 +1115,7 @@ function Business() {
                     setInquiryDialogOpen(true);
                   }}
                 >
-                  Get Custom Quote →
+                  Get Custom Quote <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </div>
             </AnimatedSection>
@@ -1025,8 +1123,11 @@ function Business() {
         </section>
 
         {/* ═══════════════════ WEBSITE INSURANCE ═══════════════════ */}
-        <section id="website-insurance" className="py-16 bg-muted">
-          <div className="container mx-auto px-4">
+        <section id="website-insurance" className="py-24 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-muted/60 via-muted/40 to-muted/60" />
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+          
+          <div className="container mx-auto px-4 relative z-10">
             <SectionHeader
               badge="Protect Your Investment"
               title="Website Insurance"
@@ -1089,15 +1190,15 @@ function Business() {
             </div>
 
             {/* Trust badges */}
-            <AnimatedSection animation="fade-up" delay={200} className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <AnimatedSection animation="fade-up" delay={200} className="mt-10 flex flex-wrap items-center justify-center gap-4">
               {[
                 { icon: Lock, text: "Secure Payment" },
                 { icon: Shield, text: "30-Day Guarantee" },
                 { icon: CheckCircle, text: "Cancel Anytime" },
               ].map((item, i) => (
-                <div key={i} className="flex items-center gap-1.5 px-3 py-1.5 bg-card rounded-full border border-border/60 text-xs hover:border-primary/30 transition-colors duration-300">
+                <div key={i} className="flex items-center gap-2 px-4 py-2 glass-subtle rounded-full text-xs hover:border-primary/30 transition-colors duration-300">
                   <item.icon className="w-3.5 h-3.5 text-primary" />
-                  <span className="font-medium">{item.text}</span>
+                  <span className="font-semibold">{item.text}</span>
                 </div>
               ))}
             </AnimatedSection>
@@ -1105,23 +1206,26 @@ function Business() {
         </section>
 
         {/* ═══════════════════ AI AGENTS PRICING ═══════════════════ */}
-        <section id="automation-pricing" className="py-16 bg-background">
-          <div className="container mx-auto px-4">
+        <section id="automation-pricing" className="py-24 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
+          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
+          
+          <div className="container mx-auto px-4 relative z-10">
             <SectionHeader
               badge="AI Automation"
               title="AI Agents Pricing"
               subtitle="Missed calls and slow follow-ups cost you real money. Your AI agents work 24/7 so you do not have to."
             >
-              <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground mt-4">
-                <span className="inline-flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-primary" /> 30-Day Guarantee
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <Lock className="w-4 h-4 text-primary" /> Secure Setup
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <Phone className="w-4 h-4 text-primary" /> 24/7 Support
-                </span>
+              <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-muted-foreground mt-5">
+                {[
+                  { icon: CheckCircle, text: "30-Day Guarantee" },
+                  { icon: Lock, text: "Secure Setup" },
+                  { icon: Phone, text: "24/7 Support" },
+                ].map((item, i) => (
+                  <span key={i} className="inline-flex items-center gap-2">
+                    <item.icon className="w-4 h-4 text-primary" /> {item.text}
+                  </span>
+                ))}
               </div>
             </SectionHeader>
 
@@ -1154,121 +1258,117 @@ function Business() {
               <PricingCard
                 tag="⭐ MOST POPULAR"
                 featured
-                title="Follow-Up Automation"
+                title="AI Follow-Up Engine"
                 price="$12,500"
-                priceNote="Best ROI"
+                priceNote="3-Week Setup"
                 delay={150}
                 badges={[
-                  { text: "🚀 10x Leads", color: "bg-primary/10 text-primary" },
-                  { text: "✓ Multi-Channel", color: "bg-primary/10 text-primary" },
+                  { text: "🚀 Full Automation", color: "bg-primary/10 text-primary" },
+                  { text: "✓ CRM Integration", color: "bg-primary/10 text-primary" },
                 ]}
-                features={["Email and SMS campaigns", "Lead nurturing flows", "Analytics dashboard"]}
+                features={[
+                  "Automated follow-ups (SMS, email)",
+                  "Review collection system",
+                  "Re-engagement campaigns",
+                  "Performance dashboard",
+                ]}
                 buttonText="GET STARTED →"
                 onButtonClick={() => {
-                  trackButtonClick("Get Started - Full Automation", "Business Pricing");
+                  trackButtonClick("Get Started - AI Follow-Up", "Business Pricing");
                   setSelectedInquiry({
-                    name: "Follow-Up Automation System",
+                    name: "AI Follow-Up Engine",
                     price: 12500,
                     tier: "MOST POPULAR",
-                    description: "Automated email and SMS campaigns, lead nurturing, and multi-channel follow-ups.",
+                    description: "Automated follow-ups, review collection, and re-engagement campaigns.",
                   });
                   setInquiryDialogOpen(true);
                 }}
               />
 
               <PricingCard
-                tag="👑 ENTERPRISE"
+                tag="🏗️ FULL SUITE"
                 tagColor="from-amber-500 to-orange-500"
-                title="Custom Automation Suite"
+                title="Custom AI Automation"
                 price="$25,000+"
-                priceNote="Full Customization"
+                priceNote="Custom Timeline"
                 delay={300}
-                badges={[
-                  { text: "🔧 Custom Built", color: "bg-primary/10 text-primary" },
-                  { text: "✓ Priority Support", color: "bg-primary/10 text-primary" },
+                features={[
+                  "Everything in Follow-Up Engine",
+                  "Custom AI workflows",
+                  "Advanced analytics",
+                  "Dedicated account manager",
+                  "Priority support",
                 ]}
-                features={["Multi-system integration", "Custom workflows", "Dedicated support team"]}
-                buttonText="GET STARTED →"
+                buttonText="GET CUSTOM QUOTE"
                 onButtonClick={() => {
-                  trackButtonClick("Get Started - Custom Solution", "Business Pricing");
+                  trackButtonClick("Get Custom Quote - Full Suite", "Business Pricing");
                   setSelectedInquiry({
-                    name: "Custom Automation Suite",
-                    price: 25000,
-                    tier: "ENTERPRISE",
-                    description: "Custom-built AI automation for multi-system operations with priority support.",
+                    name: "Custom AI Automation",
+                    price: 0,
+                    tier: "Full Suite",
+                    description: "Full AI automation suite with custom workflows, analytics, and dedicated support.",
                   });
                   setInquiryDialogOpen(true);
                 }}
               />
             </div>
-
-            {/* Trust below pricing */}
-            <AnimatedSection animation="fade-up" delay={100} className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              {[
-                { icon: Lock, text: "Secure Payment", color: "text-primary" },
-                { icon: Shield, text: "30-Day Guarantee", color: "text-primary" },
-                { icon: CheckCircle, text: "Free Consultation", color: "text-primary" },
-              ].map((item, i) => (
-                <div key={i} className="flex items-center gap-1.5 px-3 py-1.5 bg-muted rounded-full border border-border/60 text-xs hover:border-primary/30 transition-colors duration-300">
-                  <item.icon className={`w-3.5 h-3.5 ${item.color}`} />
-                  <span className="font-medium">{item.text}</span>
-                </div>
-              ))}
-            </AnimatedSection>
           </div>
         </section>
 
-        {/* ═══════════════════ AI SERVICES INSURANCE ═══════════════════ */}
-        <section id="insurance" className="py-16 bg-muted">
-          <div className="container mx-auto px-4">
+        {/* ═══════════════════ AI INSURANCE ═══════════════════ */}
+        <section id="ai-insurance" className="py-24 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent" />
+          
+          <div className="container mx-auto px-4 relative z-10">
             <SectionHeader
-              badge="Protection & Maintenance"
-              title="AI Services Insurance"
-              subtitle="Keep your AI running at peak performance with ongoing maintenance, updates, and support. Works with AI from any vendor."
-            />
+              badge="AI Insurance"
+              title="Protect Your AI Investment"
+              subtitle="Your AI tools break, get hacked, or underperform. Our insurance plans keep your business running and your AI optimized."
+            >
+              <div className="flex items-center justify-center gap-4 mt-5">
+                <Label
+                  htmlFor="billing-toggle"
+                  className={`text-sm font-semibold transition-colors ${!isYearly ? "text-primary" : "text-muted-foreground"}`}
+                >
+                  Monthly
+                </Label>
+                <Switch
+                  id="billing-toggle"
+                  checked={isYearly}
+                  onCheckedChange={setIsYearly}
+                />
+                <Label
+                  htmlFor="billing-toggle"
+                  className={`text-sm font-semibold transition-colors ${isYearly ? "text-primary" : "text-muted-foreground"}`}
+                >
+                  Yearly{" "}
+                  <span className="text-xs text-primary font-bold">(Save 10%)</span>
+                </Label>
+              </div>
+            </SectionHeader>
 
-            {/* Payment Toggle */}
-            <AnimatedSection animation="fade-up" className="flex items-center justify-center gap-4 mb-8">
-              <Label
-                htmlFor="insurance-toggle"
-                className={`text-base font-semibold ${!isYearly ? "text-primary" : "text-muted-foreground"}`}
-              >
-                Monthly
-              </Label>
-              <Switch
-                id="insurance-toggle"
-                checked={isYearly}
-                onCheckedChange={setIsYearly}
-              />
-              <Label
-                htmlFor="insurance-toggle"
-                className={`text-base font-semibold ${isYearly ? "text-primary" : "text-muted-foreground"}`}
-              >
-                Yearly <span className="text-sm text-primary">(Save 10%)</span>
-              </Label>
-            </AnimatedSection>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
-              {/* Basic Care */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+              {/* Starter */}
               <PricingCard
-                tag="🛡️ STARTER"
-                tagColor="from-slate-500 to-slate-600"
+                tag="🌱 STARTER"
+                tagColor="from-emerald-500 to-teal-500"
                 title="Basic Care"
                 price={getInsurancePrice(199).display}
                 priceSuffix={getInsurancePrice(199).period}
                 priceNote="Essential Coverage"
                 delay={0}
                 features={[
-                  "Monthly health check",
-                  "Security patches",
-                  "Email support",
-                  "Uptime monitoring",
+                  "AI health monitoring",
+                  "Email support (48hr)",
+                  "Monthly diagnostics",
+                  "Basic data backup",
                 ]}
                 buttonText="Subscribe Now"
                 onButtonClick={() => {
                   trackButtonClick("Subscribe - AI Insurance Basic", "AI Insurance");
                   handleSubscribe(
-                    "price_1SjwUQJ8osfwYbX7C2ZD3f40",
+                    "price_1SjwUQJ8osfwYbX7yV7vHoLD",
                     "AI Service Insurance",
                     "Basic Care",
                     19900,
@@ -1279,19 +1379,19 @@ function Business() {
 
               {/* Standard */}
               <PricingCard
-                tag="⭐ RECOMMENDED"
+                tag="⭐ MOST POPULAR"
                 featured
                 title="Standard Care"
                 price={getInsurancePrice(399).display}
                 priceSuffix={getInsurancePrice(399).period}
-                priceNote="Full Protection"
+                priceNote="Full Coverage"
                 delay={100}
                 features={[
                   "Everything in Basic",
+                  "Priority support (24hr)",
                   "Weekly optimization",
-                  "Priority support",
-                  "Performance tuning",
-                  "Quarterly reviews",
+                  "Security scanning",
+                  "Performance reports",
                 ]}
                 buttonText="Subscribe Now"
                 onButtonClick={() => {
@@ -1366,41 +1466,53 @@ function Business() {
 
             {/* Universal Support */}
             <AnimatedSection animation="scale-up" delay={200}>
-              <Card className="max-w-4xl mx-auto mt-12 p-8 border-border/60 rounded-2xl hover:shadow-lg transition-shadow duration-500">
-                <div className="text-center mb-6">
-                  <span className="inline-block px-3 py-1 bg-primary/10 rounded-full text-xs font-bold text-primary uppercase tracking-[0.15em] mb-3">
-                    Universal AI Support
-                  </span>
-                  <h3 className="text-2xl font-bold mb-2">
-                    We Support AI Agents From Any Vendor
-                  </h3>
-                  <p className="text-muted-foreground text-sm max-w-2xl mx-auto">
-                    It does not matter where you bought your AI. We fix, optimize, secure, and develop AI systems from any platform worldwide.
-                  </p>
-                </div>
-                <div className="flex flex-wrap justify-center gap-6 mb-6">
-                  {["🔧 Resuscitate", "⚡ Optimize", "🛡️ Secure", "🚀 Develop"].map((item, i) => (
-                    <div key={i} className="flex items-center gap-2 text-sm group">
-                      <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                        <span>{item.split(" ")[0]}</span>
-                      </div>
-                      <span className="font-medium">{item.split(" ")[1]}</span>
-                    </div>
-                  ))}
-                </div>
-                <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
-                  <span><strong className="text-foreground">No Contracts</strong> · Cancel anytime</span>
-                  <span><strong className="text-foreground">Any Platform</strong> · Worldwide support</span>
-                  <span><strong className="text-foreground">24 to 48hr Response</strong> · Fast turnaround</span>
-                </div>
-              </Card>
+              <div className="max-w-4xl mx-auto mt-14">
+                <Card className="relative p-10 border-border/40 rounded-3xl bg-card/95 backdrop-blur-sm shadow-3d overflow-hidden">
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] to-accent/[0.01] pointer-events-none" />
+                  
+                  <div className="text-center mb-8 relative z-10">
+                    <span className="inline-flex items-center gap-2 px-4 py-1.5 glass-subtle rounded-full text-xs font-bold text-primary uppercase tracking-[0.18em] mb-4 border border-primary/15">
+                      <Globe className="w-3.5 h-3.5" />
+                      Universal AI Support
+                    </span>
+                    <h3 className="text-2xl font-black mb-3">
+                      We Support AI Agents From Any Vendor
+                    </h3>
+                    <p className="text-muted-foreground text-sm max-w-2xl mx-auto leading-relaxed">
+                      It does not matter where you bought your AI. We fix, optimize, secure, and develop AI systems from any platform worldwide.
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap justify-center gap-6 mb-8 relative z-10">
+                    {["🔧 Resuscitate", "⚡ Optimize", "🛡️ Secure", "🚀 Develop"].map((item, i) => (
+                      <motion.div
+                        key={i}
+                        className="flex items-center gap-2 text-sm group"
+                        whileHover={{ scale: 1.08, y: -2 }}
+                      >
+                        <div className="w-10 h-10 bg-gradient-to-br from-primary/12 to-accent/8 rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-all duration-300">
+                          <span className="text-lg">{item.split(" ")[0]}</span>
+                        </div>
+                        <span className="font-semibold">{item.split(" ")[1]}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                  <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground relative z-10">
+                    <span><strong className="text-foreground">No Contracts</strong> · Cancel anytime</span>
+                    <span><strong className="text-foreground">Any Platform</strong> · Worldwide support</span>
+                    <span><strong className="text-foreground">24 to 48hr Response</strong> · Fast turnaround</span>
+                  </div>
+                </Card>
+              </div>
             </AnimatedSection>
           </div>
         </section>
 
         {/* ═══════════════════ AI CONSULTING ═══════════════════ */}
-        <section id="ai-consulting" className="py-16 bg-background">
-          <div className="container mx-auto px-4">
+        <section id="ai-consulting" className="py-24 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
+          
+          <div className="container mx-auto px-4 relative z-10">
             <SectionHeader
               badge="Expert AI Guidance"
               title="AI Consulting Services"
@@ -1408,21 +1520,21 @@ function Business() {
             />
 
             <AnimatedSection animation="fade-up" className="max-w-4xl mx-auto">
-              {/* Tab Group */}
-              <div className="flex flex-wrap justify-center gap-2 p-2 bg-muted rounded-2xl border border-border/60 mb-8">
+              {/* Tab Group — Premium pill design */}
+              <div className="flex flex-wrap justify-center gap-2 p-2 glass-subtle rounded-2xl border border-border/40 mb-10 shadow-sm">
                 {[
-                  { key: "thinking" as const, label: "💭 Thinking About AI", color: "bg-primary" },
-                  { key: "buying" as const, label: "🔍 Buying AI", color: "bg-primary" },
-                  { key: "bought" as const, label: "🛡️ Already Bought AI", color: "bg-primary" },
-                  { key: "leaving" as const, label: "🚪 Want to Leave AI", color: "bg-primary" },
+                  { key: "thinking" as const, label: "💭 Thinking About AI" },
+                  { key: "buying" as const, label: "🔍 Buying AI" },
+                  { key: "bought" as const, label: "🛡️ Already Bought AI" },
+                  { key: "leaving" as const, label: "🚪 Want to Leave AI" },
                 ].map((tab) => (
                   <button
                     key={tab.key}
                     onClick={() => setActiveConsultingTab(tab.key)}
-                    className={`px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 flex-1 min-w-[130px] ${
+                    className={`px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 flex-1 min-w-[130px] ${
                       activeConsultingTab === tab.key
-                        ? `${tab.color} text-primary-foreground shadow-md scale-[1.02]`
-                        : "hover:bg-card text-muted-foreground hover:scale-[1.01]"
+                        ? "bg-gradient-to-r from-primary to-accent text-white shadow-lg shadow-primary/20 scale-[1.02]"
+                        : "hover:bg-card text-muted-foreground hover:text-foreground"
                     }`}
                   >
                     {tab.label}
@@ -1430,22 +1542,26 @@ function Business() {
                 ))}
               </div>
 
-              {/* Content */}
-              <Card className="p-8 border-border/60 rounded-2xl">
+              {/* Content — 3D card */}
+              <Card className="relative p-10 border-border/40 rounded-3xl overflow-hidden shadow-3d">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] via-transparent to-accent/[0.01] pointer-events-none" />
+                
                 {activeConsultingTab === "thinking" && (
-                  <div className="text-center animate-fade-in">
-                    <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <div className="text-center animate-fade-in relative z-10">
+                    <div className="w-18 h-18 bg-gradient-to-br from-primary/15 to-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-inner">
                       <span className="text-3xl">💭</span>
                     </div>
-                    <h3 className="text-2xl font-bold mb-3">Thinking About AI</h3>
-                    <Badge className="bg-primary/10 text-primary border-0 mb-4">FREE Consultation</Badge>
-                    <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
+                    <h3 className="text-2xl font-black mb-3">Thinking About AI</h3>
+                    <Badge className="bg-primary/10 text-primary border-0 mb-5 font-bold">FREE Consultation</Badge>
+                    <p className="text-muted-foreground max-w-2xl mx-auto mb-7 leading-relaxed">
                       Not sure if AI fits your business? We help you explore your options, understand costs, and figure out if AI will drive real growth for you.
                     </p>
-                    <ul className="text-left max-w-md mx-auto space-y-2 mb-6">
+                    <ul className="text-left max-w-md mx-auto space-y-3 mb-8">
                       {["30-minute discovery call", "Business needs assessment", "AI opportunity identification", "No obligation recommendation"].map((item, i) => (
-                        <li key={i} className="flex items-center gap-2 text-sm">
-                          <CheckCircle className="w-4 h-4 text-primary" />
+                        <li key={i} className="flex items-center gap-3 text-sm">
+                          <div className="w-5 h-5 rounded-full bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center flex-shrink-0">
+                            <CheckCircle className="w-3 h-3 text-primary" />
+                          </div>
                           <span>{item}</span>
                         </li>
                       ))}
@@ -1457,7 +1573,7 @@ function Business() {
                         setModalOpen(true);
                       }}
                       size="lg"
-                      className="transition-transform duration-200 hover:scale-105 active:scale-95"
+                      className="h-13 px-10 rounded-full bg-gradient-to-r from-primary to-accent text-white font-bold shadow-lg shadow-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300"
                     >
                       Book Free Consultation
                     </Button>
@@ -1465,19 +1581,21 @@ function Business() {
                 )}
 
                 {activeConsultingTab === "buying" && (
-                  <div className="text-center animate-fade-in">
-                    <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <div className="text-center animate-fade-in relative z-10">
+                    <div className="w-18 h-18 bg-gradient-to-br from-primary/15 to-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-inner">
                       <span className="text-3xl">🔍</span>
                     </div>
-                    <h3 className="text-2xl font-bold mb-3">Buying AI</h3>
-                    <Badge className="bg-primary/10 text-primary border-0 mb-4">$1,799 - Pre-Purchase Vetting</Badge>
-                    <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
+                    <h3 className="text-2xl font-black mb-3">Buying AI</h3>
+                    <Badge className="bg-primary/10 text-primary border-0 mb-5 font-bold">$1,799 - Pre-Purchase Vetting</Badge>
+                    <p className="text-muted-foreground max-w-2xl mx-auto mb-7 leading-relaxed">
                       Before you spend, let us check the tool first. We look for hidden costs, security gaps, data privacy risks, and whether the ROI claims hold up.
                     </p>
-                    <ul className="text-left max-w-md mx-auto space-y-2 mb-6">
+                    <ul className="text-left max-w-md mx-auto space-y-3 mb-8">
                       {["Full vendor security assessment", "Hidden cost analysis", "ROI projection review", "Data privacy compliance check", "Written report with recommendations"].map((item, i) => (
-                        <li key={i} className="flex items-center gap-2 text-sm">
-                          <CheckCircle className="w-4 h-4 text-primary" />
+                        <li key={i} className="flex items-center gap-3 text-sm">
+                          <div className="w-5 h-5 rounded-full bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center flex-shrink-0">
+                            <CheckCircle className="w-3 h-3 text-primary" />
+                          </div>
                           <span>{item}</span>
                         </li>
                       ))}
@@ -1490,7 +1608,7 @@ function Business() {
                         setModalOpen(true);
                       }}
                       size="lg"
-                      className="transition-transform duration-200 hover:scale-105 active:scale-95"
+                      className="h-13 px-10 rounded-full bg-gradient-to-r from-primary to-accent text-white font-bold shadow-lg shadow-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300"
                     >
                       Get Pre-Purchase Vetting
                     </Button>
@@ -1498,19 +1616,21 @@ function Business() {
                 )}
 
                 {activeConsultingTab === "bought" && (
-                  <div className="text-center animate-fade-in">
-                    <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <div className="text-center animate-fade-in relative z-10">
+                    <div className="w-18 h-18 bg-gradient-to-br from-primary/15 to-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-inner">
                       <span className="text-3xl">🛡️</span>
                     </div>
-                    <h3 className="text-2xl font-bold mb-3">Already Bought AI</h3>
-                    <Badge className="bg-primary/10 text-primary border-0 mb-4">From $3,499 - Security Audit</Badge>
-                    <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
+                    <h3 className="text-2xl font-black mb-3">Already Bought AI</h3>
+                    <Badge className="bg-primary/10 text-primary border-0 mb-5 font-bold">From $3,499 - Security Audit</Badge>
+                    <p className="text-muted-foreground max-w-2xl mx-auto mb-7 leading-relaxed">
                       Already running AI but unsure if your system is secure or performing well? We audit your setup to find vulnerabilities and speed up performance.
                     </p>
-                    <ul className="text-left max-w-md mx-auto space-y-2 mb-6">
+                    <ul className="text-left max-w-md mx-auto space-y-3 mb-8">
                       {["Full security vulnerability scan", "Performance optimization review", "Data handling audit", "Compliance verification", "Detailed remediation plan"].map((item, i) => (
-                        <li key={i} className="flex items-center gap-2 text-sm">
-                          <CheckCircle className="w-4 h-4 text-primary" />
+                        <li key={i} className="flex items-center gap-3 text-sm">
+                          <div className="w-5 h-5 rounded-full bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center flex-shrink-0">
+                            <CheckCircle className="w-3 h-3 text-primary" />
+                          </div>
                           <span>{item}</span>
                         </li>
                       ))}
@@ -1523,7 +1643,7 @@ function Business() {
                         setModalOpen(true);
                       }}
                       size="lg"
-                      className="transition-transform duration-200 hover:scale-105 active:scale-95"
+                      className="h-13 px-10 rounded-full bg-gradient-to-r from-primary to-accent text-white font-bold shadow-lg shadow-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300"
                     >
                       Get Security Audit
                     </Button>
@@ -1531,19 +1651,21 @@ function Business() {
                 )}
 
                 {activeConsultingTab === "leaving" && (
-                  <div className="text-center animate-fade-in">
-                    <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <div className="text-center animate-fade-in relative z-10">
+                    <div className="w-18 h-18 bg-gradient-to-br from-primary/15 to-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-inner">
                       <span className="text-3xl">🚪</span>
                     </div>
-                    <h3 className="text-2xl font-bold mb-3">Want to Leave AI</h3>
-                    <Badge className="bg-primary/10 text-primary border-0 mb-4">$2,499 - Safe Exit Strategy</Badge>
-                    <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
+                    <h3 className="text-2xl font-black mb-3">Want to Leave AI</h3>
+                    <Badge className="bg-primary/10 text-primary border-0 mb-5 font-bold">$2,499 - Safe Exit Strategy</Badge>
+                    <p className="text-muted-foreground max-w-2xl mx-auto mb-7 leading-relaxed">
                       Stuck with an AI tool that is not delivering? We help you exit safely, move your data, and find a better fit.
                     </p>
-                    <ul className="text-left max-w-md mx-auto space-y-2 mb-6">
+                    <ul className="text-left max-w-md mx-auto space-y-3 mb-8">
                       {["Contract review and exit strategy", "Data migration planning", "Alternative solution research", "Transition support", "30 days post-exit monitoring"].map((item, i) => (
-                        <li key={i} className="flex items-center gap-2 text-sm">
-                          <CheckCircle className="w-4 h-4 text-primary" />
+                        <li key={i} className="flex items-center gap-3 text-sm">
+                          <div className="w-5 h-5 rounded-full bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center flex-shrink-0">
+                            <CheckCircle className="w-3 h-3 text-primary" />
+                          </div>
                           <span>{item}</span>
                         </li>
                       ))}
@@ -1556,7 +1678,7 @@ function Business() {
                         setModalOpen(true);
                       }}
                       size="lg"
-                      className="transition-transform duration-200 hover:scale-105 active:scale-95"
+                      className="h-13 px-10 rounded-full bg-gradient-to-r from-primary to-accent text-white font-bold shadow-lg shadow-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300"
                     >
                       Get Safe Exit Strategy
                     </Button>
@@ -1568,12 +1690,11 @@ function Business() {
         </section>
 
         {/* ═══════════════════ ILLUSTRATION & VISUAL ART ═══════════════════ */}
-        <section id="illustration" className="py-16 bg-background relative overflow-hidden">
-          {/* Decorative background mesh */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-coral-100/30 via-transparent to-transparent rounded-full blur-3xl" />
-            <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-lavender-100/25 via-transparent to-transparent rounded-full blur-3xl" />
-          </div>
+        <section id="illustration" className="py-24 relative overflow-hidden">
+          {/* Decorative background */}
+          <div className="absolute inset-0 bg-gradient-to-b from-muted/40 via-background to-muted/30" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-coral-100/20 via-transparent to-transparent rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-lavender-100/15 via-transparent to-transparent rounded-full blur-3xl pointer-events-none" />
 
           <div className="container mx-auto px-4 relative z-10">
             <SectionHeader
@@ -1582,74 +1703,74 @@ function Business() {
               subtitle="Professional illustration and visual design services that give your brand a distinctive, memorable identity."
             />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto" style={{ perspective: "1200px" }}>
               {[
                 {
                   icon: Palette,
                   title: "Illustration Design",
                   desc: "Custom hand-crafted illustrations tailored to your brand story and audience. From editorial to product illustration.",
-                  accent: "from-coral-400 to-coral-600",
-                  glow: "hsl(var(--coral-400) / 0.15)",
+                  gradient: "from-coral-400 to-coral-600",
                 },
                 {
                   icon: Shapes,
                   title: "Vector Illustration",
                   desc: "Clean, scalable vector artwork for digital and print. Perfect for logos, web assets, and marketing collateral.",
-                  accent: "from-primary to-lavender-500",
-                  glow: "hsl(var(--primary) / 0.15)",
+                  gradient: "from-primary to-lavender-500",
                 },
                 {
                   icon: Pen,
                   title: "Character Design",
                   desc: "Original character concepts for your brand mascot, game, or animated content. Full turnarounds and style sheets included.",
-                  accent: "from-lavender-500 to-violet-500",
-                  glow: "hsl(var(--lavender-500) / 0.15)",
+                  gradient: "from-lavender-500 to-violet-500",
                 },
                 {
                   icon: Image,
                   title: "Icon Design",
                   desc: "Pixel-perfect custom icon sets that match your brand language. Available in SVG, PNG, and icon-font formats.",
-                  accent: "from-teal-500 to-cyan-500",
-                  glow: "hsl(var(--teal-500) / 0.15)",
+                  gradient: "from-teal-500 to-cyan-500",
                 },
                 {
                   icon: BarChart3,
                   title: "Infographic Design",
                   desc: "Data-driven visual storytelling that turns complex information into clear, shareable graphics your audience remembers.",
-                  accent: "from-gold-500 to-coral-400",
-                  glow: "hsl(var(--gold-500) / 0.15)",
+                  gradient: "from-gold-500 to-coral-400",
                 },
                 {
                   icon: Grid3X3,
                   title: "Pattern Design",
                   desc: "Seamless, repeatable patterns for packaging, textiles, wallpapers, and digital backgrounds. Unique to your brand.",
-                  accent: "from-coral-500 to-lavender-400",
-                  glow: "hsl(var(--coral-500) / 0.15)",
+                  gradient: "from-coral-500 to-lavender-400",
                 },
               ].map((service, i) => (
-                <AnimatedSection key={i} animation="scale-up" delay={i * 80}>
-                  <Card className="group relative p-0 border-border/40 rounded-2xl overflow-hidden hover:-translate-y-2 hover:shadow-[0_8px_32px_hsl(var(--lavender-400)/0.15)] transition-all duration-500">
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 40, rotateX: 10 }}
+                  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08, duration: 0.5 }}
+                  whileHover={{ y: -10, rotateX: -2, rotateY: 3 }}
+                  style={{ transformStyle: "preserve-3d" }}
+                >
+                  <Card className="group relative p-0 border-border/40 rounded-2xl overflow-hidden hover:shadow-[0_20px_50px_-15px_hsl(var(--primary)/0.12)] transition-all duration-500 h-full">
                     {/* Top accent bar */}
-                    <div className={`h-1.5 w-full bg-gradient-to-r ${service.accent}`} />
+                    <div className={`h-1.5 w-full bg-gradient-to-r ${service.gradient}`} />
                     
                     {/* Hover glow */}
-                    <div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"
-                      style={{ background: `radial-gradient(circle at 50% 0%, ${service.glow}, transparent 70%)` }}
-                    />
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] to-accent/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                     <div className="relative z-10 p-6">
-                      {/* Icon */}
-                      <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.accent} flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+                      <div
+                        className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}
+                        style={{ transform: "translateZ(15px)" }}
+                      >
                         <service.icon className="w-7 h-7 text-white" />
                       </div>
 
                       <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors duration-300">
                         {service.title}
                       </h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed mb-4">{service.desc}</p>
+                      <p className="text-muted-foreground text-sm leading-relaxed mb-5">{service.desc}</p>
 
-                      {/* CTA link */}
                       <button
                         onClick={() => {
                           setSelectedInquiry({
@@ -1666,18 +1787,19 @@ function Business() {
                       </button>
                     </div>
                   </Card>
-                </AnimatedSection>
+                </motion.div>
               ))}
             </div>
 
             {/* Bottom CTA */}
-            <AnimatedSection animation="fade-up" delay={300} className="text-center mt-12">
-              <Card className="widget-frosted max-w-3xl mx-auto p-8 rounded-2xl widget-border-gradient">
-                <h3 className="text-xl font-bold mb-2">Need a Custom Visual Package?</h3>
-                <p className="text-muted-foreground text-sm mb-5 max-w-xl mx-auto">
+            <AnimatedSection animation="fade-up" delay={300} className="text-center mt-14">
+              <Card className="glass-light max-w-3xl mx-auto p-10 rounded-3xl shadow-3d relative overflow-hidden">
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary" />
+                <h3 className="text-xl font-black mb-3 relative z-10">Need a Custom Visual Package?</h3>
+                <p className="text-muted-foreground text-sm mb-6 max-w-xl mx-auto leading-relaxed relative z-10">
                   We build complete visual identity systems. Illustrations, icons, patterns, and brand assets, all designed to work together.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
                   <Button
                     onClick={() => {
                       setSelectedInquiry({
@@ -1689,10 +1811,11 @@ function Business() {
                       setInquiryDialogOpen(true);
                     }}
                     size="lg"
+                    className="rounded-full bg-gradient-to-r from-primary to-accent text-white font-bold shadow-lg hover:shadow-xl hover:scale-[1.03] transition-all"
                   >
                     Request Custom Quote
                   </Button>
-                  <Button asChild variant="outline" size="lg">
+                  <Button asChild variant="outline" size="lg" className="rounded-full font-semibold hover:scale-[1.03] transition-all">
                     <Link to="/contact">Talk to Our Design Team</Link>
                   </Button>
                 </div>
@@ -1702,8 +1825,11 @@ function Business() {
         </section>
 
         {/* ═══════════════════ WHY CHOOSE US ═══════════════════ */}
-        <section className="py-20 bg-muted relative overflow-hidden">
+        <section className="py-24 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
+          
           <div className="container mx-auto px-4 relative z-10">
             <SectionHeader
               badge="Why Choose Us"
@@ -1711,7 +1837,7 @@ function Business() {
               subtitle="What makes us different from other AI vendors."
             />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mb-14" style={{ perspective: "1200px" }}>
               {[
                 { icon: Shield, title: "Security-First", desc: "Every solution ships with enterprise-grade encryption, monitoring, and data protection built in." },
                 { icon: Lock, title: "No Vendor Lock-In", desc: "We build on open standards. You own your AI and your data. Move in-house whenever you want." },
@@ -1720,36 +1846,55 @@ function Business() {
                 { icon: CheckCircle, title: "Ongoing Partnership", desc: "We stay with you after launch. Continuous support, updates, and optimization as your business grows." },
                 { icon: Phone, title: "24/7 Support", desc: "Get help when you need it. Our team is available around the clock for critical issues." },
               ].map((item, i) => (
-                <AnimatedSection key={i} animation="scale-up" delay={i * 80}>
-                  <Card
-                    className="group relative p-6 border-border/40 hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 hover:border-primary/25 rounded-2xl bg-card/95 backdrop-blur-sm overflow-hidden"
-                  >
-                    {/* Top accent on hover */}
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 40, rotateX: 10 }}
+                  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08, duration: 0.5 }}
+                  whileHover={{ y: -10, rotateX: -3, rotateY: 3 }}
+                  style={{ transformStyle: "preserve-3d" }}
+                >
+                  <Card className="group relative p-7 border-border/40 rounded-2xl bg-card/95 backdrop-blur-sm overflow-hidden h-full hover:shadow-[0_20px_50px_-15px_hsl(var(--primary)/0.12)] hover:border-primary/25 transition-all duration-500">
+                    {/* Top accent */}
                     <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="w-12 h-12 bg-gradient-to-br from-primary/15 to-accent/10 rounded-xl flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/10">
-                      <item.icon className="w-5.5 h-5.5 text-primary" />
+                    {/* Hover glow */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] to-accent/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                    
+                    <div
+                      className="w-13 h-13 bg-gradient-to-br from-primary/15 to-accent/10 rounded-xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/10 relative z-10"
+                      style={{ transform: "translateZ(15px)" }}
+                    >
+                      <item.icon className="w-6 h-6 text-primary" />
                     </div>
-                    <h3 className="text-base font-bold mb-2">{item.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
+                    <h3 className="text-base font-bold mb-2 relative z-10">{item.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed relative z-10">{item.desc}</p>
                   </Card>
-                </AnimatedSection>
+                </motion.div>
               ))}
             </div>
 
             {/* Stats Bar */}
             <AnimatedSection animation="fade-up" delay={200}>
-              <Card className="max-w-4xl mx-auto p-8 border-border/40 rounded-2xl bg-card/95 backdrop-blur-sm shadow-lg">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+              <Card className="max-w-4xl mx-auto p-10 border-border/40 rounded-3xl bg-card/95 backdrop-blur-sm shadow-3d relative overflow-hidden">
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/30 via-accent/20 to-primary/30" />
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center relative z-10">
                   {[
                     { value: "15+", label: "Businesses Served" },
                     { value: "99%+", label: "Uptime Guarantee" },
                     { value: "24/7", label: "Support Available" },
                     { value: "50+", label: "Integrations" },
                   ].map((stat, i) => (
-                    <div key={i} className="group">
-                      <p className="text-3xl md:text-4xl font-black text-primary mb-1 transition-transform duration-300 group-hover:scale-110">{stat.value}</p>
-                      <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider">{stat.label}</p>
-                    </div>
+                    <motion.div
+                      key={i}
+                      className="group"
+                      whileHover={{ scale: 1.08 }}
+                    >
+                      <p className="text-3xl md:text-4xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-1">
+                        {stat.value}
+                      </p>
+                      <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">{stat.label}</p>
+                    </motion.div>
                   ))}
                 </div>
               </Card>
@@ -1759,8 +1904,10 @@ function Business() {
 
         {/* ═══════════════════ TESTIMONIALS ═══════════════════ */}
         {(isAdmin || businessTestimonials.length > 0) && (
-          <section className="py-16 bg-background">
-            <div className="container mx-auto px-4">
+          <section className="py-24 relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
+            
+            <div className="container mx-auto px-4 relative z-10">
               <SectionHeader
                 badge="Client Stories"
                 title="What Our Clients Say"
@@ -1768,7 +1915,7 @@ function Business() {
 
               {isAdmin && !isLoading && businessTestimonials.length === 0 && (
                 <div className="max-w-2xl mx-auto">
-                  <Card className="p-10 border-2 border-dashed border-primary/30 text-center rounded-2xl">
+                  <Card className="p-10 border-2 border-dashed border-primary/30 text-center rounded-3xl">
                     <span className="text-4xl mb-4 block">💼</span>
                     <h3 className="text-xl font-bold mb-2">Business Testimonials</h3>
                     <p className="text-muted-foreground text-sm">
@@ -1821,7 +1968,7 @@ function Business() {
             <Button
               onClick={() => setModalOpen(true)}
               size="xl"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold shadow-xl transition-transform duration-200 hover:scale-105 active:scale-95"
+              className="bg-gradient-to-r from-primary to-accent text-white font-bold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95"
             >
               SCHEDULE DISCOVERY CALL
             </Button>
