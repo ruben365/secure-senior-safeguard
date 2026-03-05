@@ -21,7 +21,7 @@ const FloatingHearts = () => {
       return;
     }
 
-    const generated: Heart[] = Array.from({ length: 18 }, (_, i) => ({
+    const generated: Heart[] = Array.from({ length: 28 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,

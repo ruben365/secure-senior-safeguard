@@ -218,16 +218,17 @@
   }
 
   .dark .glass-card {
-    background: rgba(25, 22, 35, 0.72);
+    background: rgba(28, 24, 40, 0.72);
     backdrop-filter: blur(28px) saturate(160%);
     -webkit-backdrop-filter: blur(28px) saturate(160%);
-    border: 1px solid rgba(140, 120, 170, 0.12);
-    border-top: 1px solid rgba(160, 140, 190, 0.18);
-    border-left: 1px solid rgba(160, 140, 190, 0.14);
+    border: 1px solid rgba(160, 130, 200, 0.16);
+    border-top: 1px solid rgba(180, 150, 210, 0.22);
+    border-left: 1px solid rgba(180, 150, 210, 0.18);
     box-shadow:
-      inset 0 1px 1px rgba(255, 255, 255, 0.04),
+      inset 0 1px 1px rgba(255, 255, 255, 0.06),
       0 20px 40px rgba(10, 8, 18, 0.5),
-      0 0 40px rgba(120, 100, 160, 0.04);
+      0 0 50px rgba(140, 110, 180, 0.08),
+      0 0 100px rgba(120, 80, 160, 0.04);
   }
 
   .glass-card-strong {
@@ -248,16 +249,17 @@
   }
 
   .dark .glass-card-strong {
-    background: rgba(25, 22, 35, 0.78);
+    background: rgba(28, 24, 40, 0.78);
     backdrop-filter: blur(32px) saturate(160%);
     -webkit-backdrop-filter: blur(32px) saturate(160%);
-    border: 1px solid rgba(140, 120, 170, 0.15);
-    border-top: 1px solid rgba(160, 140, 190, 0.22);
-    border-left: 1px solid rgba(160, 140, 190, 0.17);
+    border: 1px solid rgba(160, 130, 200, 0.2);
+    border-top: 1px solid rgba(180, 150, 210, 0.28);
+    border-left: 1px solid rgba(180, 150, 210, 0.22);
     box-shadow:
-      inset 0 1px 2px rgba(255, 255, 255, 0.05),
+      inset 0 1px 2px rgba(255, 255, 255, 0.07),
       0 20px 40px rgba(10, 8, 18, 0.55),
-      0 0 60px rgba(120, 100, 160, 0.05);
+      0 0 60px rgba(140, 110, 180, 0.1),
+      0 0 120px rgba(120, 80, 160, 0.05);
   }
 
   .glass-card-dark {
@@ -322,10 +324,11 @@
   }
 
   .dark .gradient-text {
-    background: linear-gradient(135deg, hsl(275 22% 72%), hsl(310 20% 62%));
+    background: linear-gradient(135deg, hsl(275 28% 75%), hsl(310 24% 68%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    filter: drop-shadow(0 0 8px rgba(180, 140, 200, 0.3));
   }
 
   .gradient-mesh {
@@ -361,12 +364,12 @@
 
   .dark .gradient-hero {
     background:
-      radial-gradient(ellipse 80% 50% at 20% 80%, rgba(120, 100, 150, 0.1) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 0% 50%, rgba(150, 110, 130, 0.06) 0%, transparent 50%),
-      radial-gradient(ellipse 70% 60% at 50% 100%, rgba(130, 105, 120, 0.08) 0%, transparent 55%),
-      radial-gradient(ellipse 50% 70% at 100% 0%, rgba(120, 105, 160, 0.06) 0%, transparent 50%),
-      radial-gradient(ellipse 40% 40% at 50% 50%, rgba(110, 90, 130, 0.1) 0%, transparent 60%),
-      linear-gradient(135deg, hsl(260 18% 8%) 0%, hsl(255 15% 9%) 50%, hsl(265 14% 8%) 100%);
+      radial-gradient(ellipse 80% 50% at 20% 80%, rgba(140, 100, 170, 0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 0% 50%, rgba(170, 120, 150, 0.12) 0%, transparent 50%),
+      radial-gradient(ellipse 70% 60% at 50% 100%, rgba(150, 115, 140, 0.14) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 70% at 100% 0%, rgba(130, 110, 180, 0.12) 0%, transparent 50%),
+      radial-gradient(ellipse 40% 40% at 50% 50%, rgba(130, 100, 160, 0.16) 0%, transparent 60%),
+      linear-gradient(135deg, hsl(260 18% 9%) 0%, hsl(255 15% 10%) 50%, hsl(265 14% 9%) 100%);
     background-blend-mode: screen, overlay, screen, screen, overlay, normal;
   }
 
@@ -730,13 +733,21 @@
 
 /* ===== DARK MODE FLOATING HEARTS GLOW ===== */
 @keyframes heart-glow-pulse {
-  0%, 100% { opacity: 0; transform: scale(0.8); filter: blur(0px); }
-  50% { opacity: var(--heart-max-opacity, 0.4); transform: scale(1.2); filter: blur(1px); }
+  0%, 100% { opacity: 0; transform: scale(0.7); filter: blur(0px); }
+  50% { opacity: var(--heart-max-opacity, 0.5); transform: scale(1.3); filter: blur(1px); }
 }
 
 .dark .heart-glow {
   color: hsl(var(--dusty-rose));
-  text-shadow: 0 0 12px hsl(var(--dusty-rose) / 0.7), 0 0 24px hsl(var(--primary) / 0.4);
+  text-shadow: 
+    0 0 16px hsl(var(--dusty-rose) / 0.8),
+    0 0 32px hsl(var(--primary) / 0.5),
+    0 0 48px hsl(var(--primary) / 0.2);
   animation: heart-glow-pulse var(--heart-duration, 4s) ease-in-out infinite;
   animation-delay: var(--heart-delay, 0s);
+}
+
+/* Dark mode heading glow */
+.dark h1, .dark h2 {
+  text-shadow: 0 0 30px rgba(180, 140, 210, 0.15);
 }
