@@ -1,16 +1,22 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion } from 'framer-motion';
+import heroImg from '@/assets/hero-wedding.jpg';
+import flowersImg from '@/assets/flowers-lavender.jpg';
+import ringsImg from '@/assets/rings.jpg';
+import venueImg from '@/assets/venue.jpg';
+import coupleImg from '@/assets/couple-lavender.jpg';
+import cakeImg from '@/assets/cake.jpg';
 
-const placeholderImages = [
-  { id: 1, aspect: 'aspect-square' },
-  { id: 2, aspect: 'aspect-[3/4]' },
-  { id: 3, aspect: 'aspect-square' },
-  { id: 4, aspect: 'aspect-[4/3]' },
-  { id: 5, aspect: 'aspect-[3/4]' },
-  { id: 6, aspect: 'aspect-square' },
-  { id: 7, aspect: 'aspect-[4/3]' },
-  { id: 8, aspect: 'aspect-square' },
-  { id: 9, aspect: 'aspect-[3/4]' },
+const galleryImages = [
+  { src: heroImg, aspect: 'aspect-[4/3]' },
+  { src: flowersImg, aspect: 'aspect-square' },
+  { src: ringsImg, aspect: 'aspect-[3/4]' },
+  { src: venueImg, aspect: 'aspect-square' },
+  { src: coupleImg, aspect: 'aspect-[3/4]' },
+  { src: cakeImg, aspect: 'aspect-square' },
+  { src: heroImg, aspect: 'aspect-[3/4]' },
+  { src: flowersImg, aspect: 'aspect-[4/3]' },
+  { src: ringsImg, aspect: 'aspect-square' },
 ];
 
 const Gallery = () => {
@@ -35,19 +41,21 @@ const Gallery = () => {
         </motion.div>
 
         <div className="columns-2 md:columns-3 gap-4 space-y-4">
-          {placeholderImages.map((img, i) => (
+          {galleryImages.map((img, i) => (
             <motion.div
-              key={img.id}
+              key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
               className="break-inside-avoid"
             >
-              <div className={`${img.aspect} rounded-2xl overflow-hidden flex items-center justify-center gradient-soft border border-border/30 hover:shadow-card-hover transition-all duration-500 cursor-pointer hover:scale-[1.02]`}>
-                <span className="font-serif-display text-5xl text-primary/20">
-                  {i + 1}
-                </span>
+              <div className={`${img.aspect} rounded-2xl overflow-hidden cursor-pointer group`}>
+                <img
+                  src={img.src}
+                  alt=""
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
               </div>
             </motion.div>
           ))}
