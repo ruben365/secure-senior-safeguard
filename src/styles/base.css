@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
-}
-
 /* ===== SKEUOMORPHISM 2.0 by Kolpikov - GLOBAL IMPLEMENTATION ===== */
 /* Premium tactile design with physical depth, realistic shadows, and material feel */
 
@@ -23,9 +19,6 @@ html {
 All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid animations. */
 
 @layer base {
-  * {
-    scroll-behavior: smooth;
-  }
 
   :root {
     /* Base colors - warm blush-cream background */
@@ -296,14 +289,8 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     overflow-x: hidden;
     width: 100%;
     position: relative;
-    /* Uniform warm background - visible peach-lavender warmth */
-    background: linear-gradient(160deg,
-      hsl(330 28% 96%) 0%,
-      hsl(335 32% 94% / 0.6) 25%,
-      hsl(var(--blush-300) / 0.4) 45%,
-      hsl(var(--lavender-100) / 0.5) 65%,
-      hsl(var(--purple-100) / 0.3) 80%,
-      hsl(330 28% 96%) 100%);
+    /* Flat warm background - no gradient repaint cost */
+    background-color: hsl(330 28% 96%);
   }
 
   @media (min-width: 768px) {

@@ -739,28 +739,7 @@
     0 0 40px hsl(var(--accent) / 0.2);
 }
 
-/* Floating animation */
-.float {
-  animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.float-delayed {
-  animation: float 6s ease-in-out infinite 1s;
-}
-
-.float-slow {
-  animation: float 8s ease-in-out infinite;
-}
+/* Floating animation - DISABLED for performance */
 
 /* Pulse ring */
 .pulse-ring {
@@ -808,27 +787,7 @@
   opacity: 1;
 }
 
-/* Morphing blob */
-.blob {
-  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  animation: morph 8s ease-in-out infinite;
-}
-
-@keyframes morph {
-  0%,
-  100% {
-    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  }
-  25% {
-    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-  }
-  50% {
-    border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%;
-  }
-  75% {
-    border-radius: 60% 30% 70% 40% / 60% 40% 30% 70%;
-  }
-}
+/* Blob morph animation - DISABLED for performance */
 
 /* Stacked cards effect */
 .stack-card {
