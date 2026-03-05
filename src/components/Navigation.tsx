@@ -119,15 +119,15 @@ const Navigation = React.memo(() => {
                   <PrefetchLink
                     key={link.name}
                     to={link.href}
-                    className={`relative text-sm transition-colors duration-150 font-semibold px-3 py-2 whitespace-nowrap tracking-tight ${
+                    className={`relative text-sm font-semibold px-3 py-2 whitespace-nowrap tracking-tight transition-colors duration-150 ${
                       isActive
-                        ? "text-primary font-bold"
-                        : "text-foreground/75 hover:text-foreground"
+                        ? "text-primary"
+                        : "text-foreground/70 hover:text-foreground"
                     }`}
                   >
                     {link.name}
                     {isActive && (
-                      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary" />
+                      <span className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full bg-gradient-to-r from-primary to-accent" />
                     )}
                   </PrefetchLink>
                 );

@@ -2,8 +2,8 @@
 // Natural, photorealistic images for each page with InVision Network branding
 
 import heroBrandedBusiness from "@/assets/hero-branded-business-new.jpg";
-import heroBrandedTraining from "@/assets/hero-nature-training-v3.jpg";
-import heroBrandedResources from "@/assets/hero-branded-resources-new.jpg";
+import heroBrandedTraining from "@/assets/hero-training-premium.jpg";
+import heroBrandedResources from "@/assets/hero-resources-premium.jpg";
 import heroBrandedAbout from "@/assets/hero-branded-about.jpg";
 import heroBrandedCareers from "@/assets/hero-branded-careers-new.jpg";
 import heroBrandedFaq from "@/assets/hero-branded-faq.jpg";
