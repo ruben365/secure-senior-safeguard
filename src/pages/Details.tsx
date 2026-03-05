@@ -1,6 +1,7 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion } from 'framer-motion';
 import { Church, PartyPopper, Shirt, Hotel, Car } from 'lucide-react';
+import AuroraBackground from '@/components/AuroraBackground';
 
 const Details = () => {
   const { t } = useLanguage();
@@ -22,10 +23,8 @@ const Details = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-28 pb-20 relative overflow-hidden gradient-mesh">
-      <div className="floating-blob w-[450px] h-[450px] bg-pale-lilac/25 top-10 left-[-120px]" />
-      <div className="floating-blob w-[380px] h-[380px] bg-primary/15 bottom-20 right-[-100px]" />
-      <div className="floating-blob w-[250px] h-[250px] bg-dusty-rose/15 top-[45%] right-[30%]" />
+    <div className="min-h-screen pt-28 pb-20 relative overflow-hidden">
+      <AuroraBackground variant="mesh" />
 
       <div className="container mx-auto px-6 md:px-12 max-w-4xl relative z-10">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-16">

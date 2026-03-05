@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Info } from 'lucide-react';
+import AuroraBackground from '@/components/AuroraBackground';
 
 const RSVP = () => {
   const { t } = useLanguage();
@@ -11,10 +12,8 @@ const RSVP = () => {
   const [meal, setMeal] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen pt-28 pb-20 relative overflow-hidden gradient-mesh">
-      <div className="floating-blob w-[400px] h-[400px] bg-primary/20 top-20 right-[-100px]" />
-      <div className="floating-blob w-[320px] h-[320px] bg-pale-lilac/25 bottom-20 left-[-80px]" />
-      <div className="floating-blob w-[200px] h-[200px] bg-dusty-rose/15 top-[40%] left-[50%]" />
+    <div className="min-h-screen pt-28 pb-20 relative overflow-hidden">
+      <AuroraBackground variant="hero" />
 
       <div className="container mx-auto px-6 md:px-12 max-w-lg relative z-10">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
