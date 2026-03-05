@@ -75,7 +75,7 @@
     /* Footer — solid eggplant */
     --footer-bg: 286 13% 27%;
     --footer-fg: 300 5% 97.5%;
-    --footer-muted: 290 10% 60%;
+    --footer-muted: 290 10% 75%;
   }
 
   .dark {
@@ -133,7 +133,7 @@
 
     --footer-bg: 260 16% 9%;
     --footer-fg: 270 10% 88%;
-    --footer-muted: 270 12% 50%;
+    --footer-muted: 270 12% 70%;
   }
 }
 

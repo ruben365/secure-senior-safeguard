@@ -8,12 +8,10 @@ const Footer = () => {
   const companyLinks = [
     { label: t('nav.home'), to: '/' },
     { label: t('nav.story'), to: '/story' },
-    { label: t('nav.details'), to: '/details' },
   ];
 
   const inspirationLinks = [
     { label: t('nav.rsvp'), to: '/rsvp' },
-    { label: t('nav.gallery'), to: '/gallery' },
     { label: t('nav.registry'), to: '/registry' },
   ];
 
@@ -29,7 +27,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8 mb-14">
           {/* Brand */}
           <div className="md:col-span-1">
-            <span className="font-serif-display text-2xl font-semibold text-[hsl(var(--footer-fg))] opacity-90 block mb-5">C & R</span>
+            <span className="font-serif-display text-2xl font-semibold text-[hsl(var(--footer-fg))] block mb-5">C & R</span>
             <p className="font-sans-elegant text-sm leading-relaxed mb-6 text-[hsl(var(--footer-muted))]">
               {t('hero.tagline')}. {t('hero.date')}.
             </p>
@@ -44,7 +42,7 @@ const Footer = () => {
 
           {/* Links col 1 */}
           <div>
-            <h4 className="font-sans-elegant text-xs font-semibold tracking-[0.2em] uppercase mb-5 text-[hsl(var(--footer-fg))] opacity-80">
+            <h4 className="font-sans-elegant text-xs font-semibold tracking-[0.2em] uppercase mb-5 text-[hsl(var(--footer-fg))]">
               {t('footer.links')}
             </h4>
             <ul className="space-y-3">
@@ -60,7 +58,7 @@ const Footer = () => {
 
           {/* Links col 2 */}
           <div>
-            <h4 className="font-sans-elegant text-xs font-semibold tracking-[0.2em] uppercase mb-5 text-[hsl(var(--footer-fg))] opacity-80">
+            <h4 className="font-sans-elegant text-xs font-semibold tracking-[0.2em] uppercase mb-5 text-[hsl(var(--footer-fg))]">
               {t('footer.celebrate')}
             </h4>
             <ul className="space-y-3">
@@ -76,7 +74,7 @@ const Footer = () => {
 
           {/* Venue */}
           <div>
-            <h4 className="font-sans-elegant text-xs font-semibold tracking-[0.2em] uppercase mb-5 text-[hsl(var(--footer-fg))] opacity-80">
+            <h4 className="font-sans-elegant text-xs font-semibold tracking-[0.2em] uppercase mb-5 text-[hsl(var(--footer-fg))]">
               {t('footer.venue')}
             </h4>
             <p className="font-sans-elegant text-sm text-[hsl(var(--footer-muted))] leading-relaxed mb-2">
@@ -91,10 +89,10 @@ const Footer = () => {
 
         {/* Bottom */}
         <div className="border-t border-[hsl(var(--footer-fg))]/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-[hsl(var(--footer-muted))] opacity-70 flex items-center gap-1.5 font-sans-elegant">
+          <p className="text-xs text-[hsl(var(--footer-muted))] flex items-center gap-1.5 font-sans-elegant">
             {t('footer.made')} <Heart className="w-3 h-3 text-dusty-rose fill-dusty-rose" /> {t('footer.copyright')}
           </p>
-          <p className="font-serif-display text-lg font-semibold text-[hsl(var(--footer-fg))] opacity-70">Corine & Ruben</p>
+          <p className="font-serif-display text-lg font-semibold text-[hsl(var(--footer-fg))]">Corine & Ruben</p>
         </div>
       </div>
     </footer>

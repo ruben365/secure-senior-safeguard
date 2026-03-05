@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useMusic } from '@/components/MusicPlayer';
 import { motion } from 'framer-motion';
-import { ChevronDown, Heart, MapPin, Calendar, Clock, Utensils, Camera, Gift, Sparkles, Play, Pause, Music, Users, Flower2, BookOpen, Cross, Church, Gem } from 'lucide-react';
+import { ChevronDown, Heart, MapPin, Calendar, Clock, Utensils, Gift, Sparkles, Play, Pause, Music, Users, Flower2, BookOpen, Cross, Church, Gem, PartyPopper, Shirt, Hotel, Car } from 'lucide-react';
 
 import heroImg from '@/assets/hero-wedding.jpg';
 import flowersImg from '@/assets/flowers-lavender.jpg';
@@ -43,9 +43,24 @@ const Index = () => {
 
   const features = [
     { icon: Heart, label: t('nav.story'), desc: t('story.subtitle'), to: '/story', color: 'text-rose-400', bg: 'from-rose-500/20 to-pink-500/10' },
-    { icon: Camera, label: t('nav.gallery'), desc: t('gallery.subtitle'), to: '/gallery', color: 'text-violet-400', bg: 'from-violet-500/20 to-purple-500/10' },
     { icon: Gift, label: t('nav.registry'), desc: t('registry.subtitle'), to: '/registry', color: 'text-amber-400', bg: 'from-amber-500/20 to-orange-500/10' },
     { icon: Clock, label: t('nav.rsvp'), desc: t('rsvp.subtitle'), to: '/rsvp', color: 'text-emerald-400', bg: 'from-emerald-500/20 to-teal-500/10' },
+  ];
+
+  const detailSections = [
+    { icon: Church, title: t('details.ceremony'), items: [
+      { label: t('details.ceremony.time'), bold: true },
+      { label: t('details.ceremony.location'), bold: true },
+      { label: t('details.ceremony.address') },
+    ]},
+    { icon: PartyPopper, title: t('details.reception'), items: [
+      { label: t('details.reception.time'), bold: true },
+      { label: t('details.reception.location'), bold: true },
+      { label: t('details.reception.address') },
+    ]},
+    { icon: Shirt, title: t('details.dresscode'), items: [{ label: t('details.dresscode.desc') }] },
+    { icon: Hotel, title: t('details.accommodation'), items: [{ label: t('details.accommodation.desc') }] },
+    { icon: Car, title: t('details.transport'), items: [{ label: t('details.transport.desc') }] },
   ];
 
   return (
@@ -495,9 +510,9 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ===== HIGHLIGHTS CARDS ===== */}
+      {/* ===== WEDDING DETAILS ===== */}
       <section className="py-14 md:py-20 relative">
-        <div className="container mx-auto px-6 md:px-12 max-w-6xl relative z-10">
+        <div className="container mx-auto px-6 md:px-12 max-w-4xl relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -511,32 +526,28 @@ const Index = () => {
             <p className="font-sans-elegant text-lg text-muted-foreground max-w-lg mx-auto">{t('details.subtitle')}</p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-5">
-            {highlights.map((item, i) => (
+          <div className="grid md:grid-cols-2 gap-6">
+            {detailSections.map((section, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 25 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.15 }}
-                className="group"
+                transition={{ delay: i * 0.1, duration: 0.6 }}
+                className={`glass-card-strong rounded-3xl p-8 card-hover group ${
+                  i === detailSections.length - 1 && detailSections.length % 2 !== 0 ? 'md:col-span-2 md:max-w-md md:mx-auto' : ''
+                }`}
               >
-                <div className="glass-card-strong rounded-3xl overflow-hidden card-hover">
-                  <div className="relative h-48 overflow-hidden">
-                    <img src={item.img} alt={t(item.titleKey)} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center shadow-soft">
-                          <item.icon className={`w-4 h-4 text-primary-foreground`} />
-                        </div>
-                        <p className="font-sans-elegant text-sm font-semibold text-[hsl(var(--text-light))]">{t(item.titleKey)}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-5">
-                    <p className="font-sans-elegant text-sm text-muted-foreground leading-relaxed">{t(item.descKey)}</p>
-                  </div>
+                <div className="w-14 h-14 rounded-3xl gradient-primary flex items-center justify-center mb-6 group-hover:shadow-glow transition-shadow duration-500 shadow-soft">
+                  <section.icon className="w-6 h-6 text-primary-foreground" />
+                </div>
+                <h3 className="font-serif-display text-2xl text-foreground mb-4 font-semibold">{section.title}</h3>
+                <div className="space-y-2">
+                  {section.items.map((item, j) => (
+                    <p key={j} className={`font-sans-elegant text-sm ${item.bold ? 'text-foreground font-semibold' : 'text-muted-foreground'}`} style={{ lineHeight: 1.6 }}>
+                      {item.label}
+                    </p>
+                  ))}
                 </div>
               </motion.div>
             ))}
@@ -647,7 +658,7 @@ const Index = () => {
             </p>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {features.map((feat, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
                 <Link
@@ -667,39 +678,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ===== GALLERY PREVIEW ===== */}
-      <section className="py-14 md:py-20 relative">
-        <div className="container mx-auto px-6 md:px-12 max-w-6xl relative z-10">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-            <div className="inline-block px-5 py-2 rounded-full glass-card-strong mb-5">
-              <p className="font-sans-elegant text-xs tracking-[0.25em] uppercase text-muted-foreground font-medium">{t('nav.gallery')}</p>
-            </div>
-            <h2 className="font-serif-display text-3xl md:text-5xl text-foreground font-semibold mb-4">{t('gallery.title')}</h2>
-            <p className="font-sans-elegant text-lg text-muted-foreground max-w-md mx-auto">{t('index.capturedMoments')}</p>
-          </motion.div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {[heroImg, flowersImg, ringsImg, cakeImg, coupleImg].map((img, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className={`overflow-hidden rounded-3xl ${i === 0 ? 'md:col-span-2 md:row-span-2' : ''} group cursor-pointer glass-card-strong p-1.5 card-hover`}
-              >
-                <img src={img} alt="Wedding gallery" className="w-full h-full object-cover aspect-square rounded-[20px] group-hover:scale-105 transition-transform duration-700" />
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mt-8">
-            <Link to="/gallery" className="btn-primary">
-              {t('nav.gallery')} →
-            </Link>
-          </motion.div>
-        </div>
-      </section>
 
       {/* ===== CTA / RSVP ===== */}
       <section className="py-14 md:py-20 relative">
