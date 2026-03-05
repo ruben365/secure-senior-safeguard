@@ -297,15 +297,20 @@ const RSVP = () => {
               <div>
                 <label className="font-sans-elegant text-sm text-foreground block mb-3 font-semibold">{t('rsvp.attending')}</label>
                 <div className="flex gap-3">
-                  {[true, false].map(val => (
-                    <button key={String(val)} type="button" onClick={() => setAttending(val)}
-                      className={`flex-1 py-3.5 rounded-full text-sm font-sans-elegant font-medium transition-all duration-500 ${
-                        attending === val ? 'gradient-primary text-primary-foreground shadow-glow' : 'glass-card hover:border-primary/30 text-foreground'
-                      }`}
-                    >
-                      {val ? `🎉 ${t('rsvp.yes')}` : t('rsvp.no')}
-                    </button>
-                  ))}
+                  <button type="button" onClick={() => setAttending(true)}
+                    className={`flex-1 py-3.5 rounded-full text-sm font-sans-elegant font-medium transition-all duration-500 ${
+                      attending === true ? 'gradient-primary text-primary-foreground shadow-glow' : 'glass-card hover:border-primary/30 text-foreground'
+                    }`}
+                  >
+                    🎉 {t('rsvp.yes')}
+                  </button>
+                  <button type="button" onClick={() => { setAttending(false); if (name.trim()) setStep('gift'); }}
+                    className={`flex-1 py-3.5 rounded-full text-sm font-sans-elegant font-medium transition-all duration-500 ${
+                      attending === false ? 'gradient-primary text-primary-foreground shadow-glow' : 'glass-card hover:border-primary/30 text-foreground'
+                    }`}
+                  >
+                    {t('rsvp.no')}
+                  </button>
                 </div>
               </div>
 
