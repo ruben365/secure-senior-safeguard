@@ -15,7 +15,7 @@ const WEDDING_DATE = new Date('2027-08-15T14:00:00');
 
 const Index = () => {
   const { t } = useLanguage();
-  const { isPlaying, toggleMusic } = useMusic();
+  const { isPlaying, currentTrack, toggleTrack } = useMusic();
   const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
@@ -48,11 +48,6 @@ const Index = () => {
     { icon: Clock, label: t('nav.rsvp'), desc: t('rsvp.subtitle'), to: '/rsvp' },
   ];
 
-  const hymns = [
-    { title: t('hymn.amazing'), duration: '4:32', img: flowersImg },
-    { title: t('hymn.blessed'), duration: '3:15', img: ringsImg },
-    { title: t('hymn.howgreat'), duration: '5:01', img: cakeImg },
-  ];
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -178,17 +173,17 @@ const Index = () => {
                 animate={{ y: [-8, 10, -8] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                 className="glass-card-strong rounded-3xl p-4 flex items-center gap-3 cursor-pointer"
-                onClick={toggleMusic}
+                onClick={() => toggleTrack('amazing-grace')}
               >
                 <div className="w-12 h-12 rounded-xl overflow-hidden flex-shrink-0">
-                  <img src={hymns[0].img} alt="" className="w-full h-full object-cover" />
+                  <img src={flowersImg} alt="" className="w-full h-full object-cover" />
                 </div>
                 <div>
-                  <p className="font-sans-elegant text-sm font-bold text-foreground drop-shadow-sm">{hymns[0].title}</p>
-                  <p className="font-sans-elegant text-xs text-foreground/60 font-medium">{hymns[0].duration}</p>
+                  <p className="font-sans-elegant text-sm font-bold text-foreground drop-shadow-sm">{t('hymn.amazing')}</p>
+                  <p className="font-sans-elegant text-xs text-foreground/60 font-medium">Instrumental · 4:32</p>
                 </div>
                 <div className="w-8 h-8 rounded-full bg-background/80 dark:bg-background/40 flex items-center justify-center ml-1">
-                  {isPlaying ? <Pause className="w-3 h-3 text-foreground fill-foreground" /> : <Play className="w-3 h-3 text-foreground fill-foreground" />}
+                  {(currentTrack === 'amazing-grace' && isPlaying) ? <Pause className="w-3 h-3 text-foreground fill-foreground" /> : <Play className="w-3 h-3 text-foreground fill-foreground" />}
                 </div>
               </motion.div>
             </div>
@@ -225,8 +220,8 @@ const Index = () => {
                 </div>
 
                 <div className="flex gap-2">
-                  <button onClick={toggleMusic} className="w-10 h-10 rounded-full bg-background/20 backdrop-blur-sm border border-background/30 flex items-center justify-center hover:bg-background/30 transition-colors">
-                    {isPlaying ? <Pause className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current" />}
+                  <button onClick={() => toggleTrack('oceans-hillsong')} className="w-10 h-10 rounded-full bg-background/20 backdrop-blur-sm border border-background/30 flex items-center justify-center hover:bg-background/30 transition-colors">
+                    {(currentTrack === 'oceans-hillsong' && isPlaying) ? <Pause className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current" />}
                   </button>
                   <div className="w-10 h-10 rounded-full bg-background/20 backdrop-blur-sm border border-background/30 flex items-center justify-center">
                     <Music className="w-4 h-4" />
@@ -254,17 +249,17 @@ const Index = () => {
                 animate={{ y: [-6, 10, -6] }}
                 transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
                 className="glass-card-strong rounded-3xl p-4 flex items-center gap-3 cursor-pointer"
-                onClick={toggleMusic}
+                onClick={() => toggleTrack('blessed-larson')}
               >
                 <div className="w-12 h-12 rounded-xl overflow-hidden flex-shrink-0">
-                  <img src={hymns[1].img} alt="" className="w-full h-full object-cover" />
+                  <img src={ringsImg} alt="" className="w-full h-full object-cover" />
                 </div>
                 <div>
-                  <p className="font-sans-elegant text-sm font-bold text-foreground drop-shadow-sm">{hymns[1].title}</p>
-                  <p className="font-sans-elegant text-xs text-foreground/60 font-medium">{hymns[1].duration}</p>
+                  <p className="font-sans-elegant text-sm font-bold text-foreground drop-shadow-sm">I Have Been Blessed</p>
+                  <p className="font-sans-elegant text-xs text-foreground/60 font-medium">Joseph Larson</p>
                 </div>
                 <div className="w-8 h-8 rounded-full bg-background/80 dark:bg-background/40 flex items-center justify-center ml-1">
-                  <Play className="w-3 h-3 text-foreground fill-foreground" />
+                  {(currentTrack === 'blessed-larson' && isPlaying) ? <Pause className="w-3 h-3 text-foreground fill-foreground" /> : <Play className="w-3 h-3 text-foreground fill-foreground" />}
                 </div>
               </motion.div>
 
@@ -397,19 +392,19 @@ const Index = () => {
 
           <div className="space-y-3">
             {[
-              { title: t('hymn.amazing'), artist: t('hymn.traditional'), duration: '4:32', img: flowersImg },
-              { title: t('hymn.blessed'), artist: t('hymn.traditional'), duration: '3:15', img: ringsImg },
-              { title: t('hymn.howgreat'), artist: t('hymn.traditional'), duration: '5:01', img: cakeImg },
-              { title: t('hymn.joyful'), artist: t('hymn.traditional'), duration: '3:48', img: coupleImg },
-              { title: t('hymn.greatis'), artist: t('hymn.traditional'), duration: '4:15', img: heroImg },
+              { id: 'amazing-grace', title: t('hymn.amazing'), artist: 'Instrumental', duration: '4:32', img: flowersImg },
+              { id: 'blessed-larson', title: t('hymn.blessed'), artist: 'Joseph Larson', duration: '3:15', img: ringsImg },
+              { id: 'oceans-hillsong', title: 'Oceans', artist: 'Hillsong', duration: '5:01', img: cakeImg },
+              { id: 'how-great', title: t('hymn.howgreat'), artist: t('hymn.traditional'), duration: '3:48', img: coupleImg },
+              { id: 'great-faithfulness', title: t('hymn.greatis'), artist: t('hymn.traditional'), duration: '4:15', img: heroImg },
             ].map((hymn, i) => (
               <motion.div
-                key={i}
+                key={hymn.id}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                onClick={toggleMusic}
+                onClick={() => toggleTrack(hymn.id)}
                 className="glass-card-strong rounded-2xl p-4 flex items-center gap-4 card-hover cursor-pointer group"
               >
                 <div className="w-12 h-12 rounded-xl overflow-hidden flex-shrink-0">
@@ -421,7 +416,7 @@ const Index = () => {
                 </div>
                 <span className="font-sans-elegant text-xs text-muted-foreground mr-2">{hymn.duration}</span>
                 <div className="w-9 h-9 rounded-full glass-card flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Play className="w-3.5 h-3.5 text-foreground fill-foreground" />
+                  {(currentTrack === hymn.id && isPlaying) ? <Pause className="w-3.5 h-3.5 text-foreground fill-foreground" /> : <Play className="w-3.5 h-3.5 text-foreground fill-foreground" />}
                 </div>
               </motion.div>
             ))}
