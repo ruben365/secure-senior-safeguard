@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion } from 'framer-motion';
-import { ChevronDown, Heart, MapPin, Calendar, Clock, Utensils, Camera, Gift, Star, Sparkles, Play, Music } from 'lucide-react';
+import { ChevronDown, Heart, MapPin, Calendar, Clock, Utensils, Camera, Gift, Star, Sparkles, Play, Music, Users, Gem, Crown, Flower2 } from 'lucide-react';
 import AuroraBackground from '@/components/AuroraBackground';
 import heroImg from '@/assets/hero-wedding.jpg';
 import flowersImg from '@/assets/flowers-lavender.jpg';
@@ -65,6 +65,36 @@ const Index = () => {
           transition={{ duration: 1, ease: 'easeOut' }}
           className="flex flex-col items-center text-center max-w-3xl mx-auto mt-20 md:mt-28 z-20 px-6"
         >
+          {/* Floating badge top-left */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 1.2 }}
+            className="absolute top-24 left-4 md:left-12 z-30 hidden md:block"
+          >
+            <motion.div animate={{ y: [-4, 6, -4] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="glass-card-strong rounded-full px-4 py-2 flex items-center gap-2"
+            >
+              <Crown className="w-3.5 h-3.5 text-primary" />
+              <span className="font-sans-elegant text-[11px] font-semibold text-foreground">Premium Event</span>
+            </motion.div>
+          </motion.div>
+
+          {/* Floating badge top-right */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 1.4 }}
+            className="absolute top-28 right-4 md:right-12 z-30 hidden md:block"
+          >
+            <motion.div animate={{ y: [5, -5, 5] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="glass-card-strong rounded-2xl px-4 py-2.5 flex items-center gap-2"
+            >
+              <Users className="w-3.5 h-3.5 text-primary" />
+              <span className="font-sans-elegant text-[11px] font-semibold text-foreground">150+ Guests</span>
+            </motion.div>
+          </motion.div>
+
           {/* Top label */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -398,6 +428,27 @@ const Index = () => {
 
         <div className="container mx-auto px-6 md:px-12 max-w-5xl relative z-10 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            {/* Decorative badge row */}
+            <div className="flex flex-wrap gap-3 justify-center mb-8">
+              {[
+                { icon: Gem, text: 'Exclusive' },
+                { icon: Flower2, text: 'Garden Party' },
+                { icon: Crown, text: 'Black Tie' },
+              ].map((badge, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="glass-card-strong rounded-full px-4 py-2 flex items-center gap-2"
+                >
+                  <badge.icon className="w-3.5 h-3.5 text-primary" />
+                  <span className="font-sans-elegant text-[11px] font-semibold text-foreground">{badge.text}</span>
+                </motion.div>
+              ))}
+            </div>
+
             <p className="font-sans-elegant text-sm text-muted-foreground mb-4 tracking-wide">{t('index.joinCelebration')}</p>
             <h2 className="font-serif-display text-3xl md:text-5xl text-foreground font-semibold mb-4">
               {t('hero.tagline')}

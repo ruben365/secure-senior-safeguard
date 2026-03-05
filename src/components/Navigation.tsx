@@ -28,15 +28,16 @@ const Navigation = () => {
   ];
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? 'glass-card-strong border-b border-border/20'
-          : 'bg-transparent'
-      }`}
-      style={{ borderRadius: 0, height: '80px' }}
-    >
-      <div className="container mx-auto px-6 md:px-12 flex items-center justify-between h-full">
+    <div className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 pt-4">
+      <nav
+        className={`transition-all duration-700 rounded-[20px] ${
+          scrolled
+            ? 'glass-card-strong shadow-[0_8px_32px_rgba(139,107,138,0.18),0_2px_8px_rgba(212,165,165,0.12)]'
+            : 'bg-white/5 backdrop-blur-md border border-white/10'
+        }`}
+        style={{ height: '64px' }}
+      >
+        <div className="px-6 md:px-8 flex items-center justify-between h-full">
         <Link to="/" className="font-serif-display text-lg font-semibold tracking-wide gradient-text hover:opacity-80 transition-opacity" style={{ letterSpacing: '0.5px' }}>
           C & R
         </Link>
@@ -93,36 +94,38 @@ const Navigation = () => {
         </div>
       </div>
 
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden overflow-hidden border-t border-border/20"
-          >
-            <div className="flex flex-col p-5 gap-0.5 glass-card-strong" style={{ borderRadius: 0 }}>
-              {links.map(link => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  onClick={() => setMobileOpen(false)}
-                  className={`font-sans-elegant text-sm font-medium py-3 px-4 rounded-2xl transition-all duration-300 ${
-                    location.pathname === link.to
-                      ? 'text-primary-foreground bg-primary font-semibold'
-                      : 'text-foreground hover:bg-primary/10'
-                  }`}
-                  style={{ letterSpacing: '0.3px' }}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
+        {/* Mobile menu */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="absolute top-[72px] left-2 right-2 md:hidden overflow-hidden rounded-2xl glass-card-strong shadow-[0_20px_60px_rgba(139,107,138,0.2)]"
+            >
+              <div className="flex flex-col p-4 gap-1">
+                {links.map(link => (
+                  <Link
+                    key={link.to}
+                    to={link.to}
+                    onClick={() => setMobileOpen(false)}
+                    className={`font-sans-elegant text-sm font-medium py-3 px-4 rounded-2xl transition-all duration-300 ${
+                      location.pathname === link.to
+                        ? 'text-primary-foreground bg-primary font-semibold'
+                        : 'text-foreground hover:bg-primary/10'
+                    }`}
+                    style={{ letterSpacing: '0.3px' }}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
+    </div>
   );
 };
 
