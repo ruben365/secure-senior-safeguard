@@ -19,42 +19,15 @@ export function ProgressiveImage({
   containerClassName,
   priority = false,
 }: ProgressiveImageProps) {
-  const [loaded, setLoaded] = useState(() => loadedImages.has(src));
-
-  useEffect(() => {
-    if (loadedImages.has(src)) {
-      setLoaded(true);
-      return;
-    }
-
-    const img = new Image();
-    img.onload = () => {
-      loadedImages.add(src);
-      setLoaded(true);
-    };
-    img.onerror = () => setLoaded(true);
-    img.src = src;
-
-    return () => {
-      img.onload = null;
-      img.onerror = null;
-    };
-  }, [src]);
-
   return (
     <div className={cn("relative overflow-hidden", containerClassName)}>
-      {/* Shimmer placeholder */}
-      {!loaded && <div className="absolute inset-0 bg-muted" />}
-
-      {/* Image with CSS transition */}
       <img
         src={src}
         alt={alt}
         loading={priority ? "eager" : "lazy"}
         decoding="async"
         className={cn(
-          "w-full h-full object-cover transition-opacity duration-200",
-          loaded ? "opacity-100" : "opacity-0",
+          "w-full h-full object-cover",
           className,
         )}
       />

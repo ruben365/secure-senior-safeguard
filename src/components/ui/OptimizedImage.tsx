@@ -91,28 +91,22 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
       }}
     >
       {isInView && !hasError && (
-        <>
-          <img
-            src={src}
-            alt={alt}
-            loading={priority ? 'eager' : 'lazy'}
-            decoding="async"
-            className={cn(
-              'w-full h-full transition-opacity duration-500',
-              isLoaded ? 'opacity-100' : 'opacity-0',
-              objectFit === 'cover' && 'object-cover',
-              objectFit === 'contain' && 'object-contain',
-              objectFit === 'fill' && 'object-fill',
-              objectFit === 'none' && 'object-none',
-              objectFit === 'scale-down' && 'object-scale-down'
-            )}
-            onLoad={handleLoad}
-            onError={handleError}
-          />
-          {!isLoaded && (
-            <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        <img
+          src={src}
+          alt={alt}
+          loading={priority ? 'eager' : 'lazy'}
+          decoding="async"
+          className={cn(
+            'w-full h-full',
+            objectFit === 'cover' && 'object-cover',
+            objectFit === 'contain' && 'object-contain',
+            objectFit === 'fill' && 'object-fill',
+            objectFit === 'none' && 'object-none',
+            objectFit === 'scale-down' && 'object-scale-down'
           )}
-        </>
+          onLoad={handleLoad}
+          onError={handleError}
+        />
       )}
 
       {hasError && (
