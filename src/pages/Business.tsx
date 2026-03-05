@@ -1336,10 +1336,10 @@ function Business() {
               title="Protect Your AI Investment"
               subtitle="Your AI tools break, get hacked, or underperform. Our insurance plans keep your business running and your AI optimized."
             >
-              <div className="flex items-center justify-center gap-4 mt-5">
+              <div className="flex items-center justify-center gap-4 mt-5 bg-card/80 backdrop-blur-sm border border-border/50 rounded-full px-6 py-3 shadow-sm mx-auto w-fit">
                 <Label
                   htmlFor="billing-toggle"
-                  className={`text-sm font-semibold transition-colors ${!isYearly ? "text-primary" : "text-muted-foreground"}`}
+                  className={`text-sm font-bold transition-colors cursor-pointer ${!isYearly ? "text-primary" : "text-muted-foreground"}`}
                 >
                   Monthly
                 </Label>
@@ -1350,10 +1350,10 @@ function Business() {
                 />
                 <Label
                   htmlFor="billing-toggle"
-                  className={`text-sm font-semibold transition-colors ${isYearly ? "text-primary" : "text-muted-foreground"}`}
+                  className={`text-sm font-bold transition-colors cursor-pointer ${isYearly ? "text-primary" : "text-muted-foreground"}`}
                 >
                   Yearly{" "}
-                  <span className="text-xs text-primary font-bold">(Save 10%)</span>
+                  <span className="text-xs text-primary font-black bg-primary/10 px-2 py-0.5 rounded-full">(Save 10%)</span>
                 </Label>
               </div>
             </SectionHeader>
@@ -1979,15 +1979,15 @@ function Business() {
             <Button
               onClick={() => setModalOpen(true)}
               size="xl"
-              className="bg-gradient-to-r from-primary to-accent text-white font-bold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95"
+              className="bg-white text-primary font-black shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-[0_6px_30px_rgba(0,0,0,0.4)] transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-white text-lg tracking-wide"
             >
               SCHEDULE DISCOVERY CALL
             </Button>
-            <Button asChild variant="outlineLight" size="xl" className="transition-transform duration-200 hover:scale-105 active:scale-95">
+            <Button asChild size="xl" className="bg-transparent text-white font-black border-[3px] border-white shadow-[0_4px_20px_rgba(255,255,255,0.2)] hover:bg-white hover:text-primary transition-all duration-300 hover:scale-105 active:scale-95 text-lg tracking-wide">
               <Link to="/faq">View Frequently Asked Questions</Link>
             </Button>
           </div>
-          <p className="text-white/80 text-sm mt-4">
+          <p className="text-white/90 text-sm mt-4 font-semibold drop-shadow-md">
             15-minute call. No pressure. Free.
           </p>
         </CTASection>

@@ -83,6 +83,7 @@ import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 // GlassmorphismBackground removed — using Business-style sections
 import { NatureAccent } from "@/components/ui/NatureAccent";
 import { usePrerenderBlocker } from "@/contexts/PrerenderContext";
+import { TranslationRequestDialog } from "@/components/resources/TranslationRequestDialog";
 
 // Static book products with covers (20 books)
 // Author constant for all books
@@ -431,6 +432,7 @@ function Resources() {
   // Book cover modal state
   const [selectedBook, setSelectedBook] = useState<BookItem | null>(null);
   const [bookModalOpen, setBookModalOpen] = useState(false);
+  const [translationDialogOpen, setTranslationDialogOpen] = useState(false);
 
   const handleBookClick = (book: BookItem) => {
     setSelectedBook(book);
@@ -690,7 +692,7 @@ function Resources() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 2000px' }}>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4 scroll-smooth" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 2000px' }}>
             {staticBooks.map((book) =>
               <div key={book.id} className="group relative">
                 <div className="h-full rounded-2xl p-[1px] bg-gradient-to-b from-border/50 to-border/20 hover:from-primary/30 hover:to-primary/10 transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1">
@@ -803,14 +805,12 @@ function Resources() {
                 <p className="text-sm text-muted-foreground mb-3">
                   We offer translations in Spanish, French, German, Chinese, and more.
                   <br className="hidden md:block" />
-                  Simply contact us with your request and we'll prepare your
+                  Simply request and we'll prepare your
                   copy within <strong>1-3 business days</strong>.
                 </p>
-                <Button variant="outline" size="sm" asChild>
-                  <Link to="/contact" className="inline-flex items-center gap-2">
-                    <Mail className="w-4 h-4" />
-                    Request Translation
-                  </Link>
+                <Button variant="outline" size="sm" onClick={() => setTranslationDialogOpen(true)}>
+                  <Mail className="w-4 h-4 mr-2" />
+                  Request Translation
                 </Button>
               </div>
             </div>
@@ -929,6 +929,10 @@ function Resources() {
         onAddToCart={handleAddToCart}
         onBuyNow={handleBuyNow} />
 
+      {/* Translation Request Dialog */}
+      <TranslationRequestDialog
+        isOpen={translationDialogOpen}
+        onClose={() => setTranslationDialogOpen(false)} />
 
       <Footer />
     </PageTransition>);

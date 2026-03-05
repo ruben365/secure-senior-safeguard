@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* ===== SKEUOMORPHISM 2.0 by Kolpikov - GLOBAL IMPLEMENTATION ===== */
 /* Premium tactile design with physical depth, realistic shadows, and material feel */
 

@@ -113,7 +113,7 @@ const PremiumTrainingCard = memo(
     onBook: (plan: any) => void;
   }) => {
     return (
-      <div className="relative h-full pt-5">
+      <div className="relative h-full pt-5" style={{ perspective: '800px' }}>
         {/* Floating badge — always visible, decorative */}
         <div className="absolute -top-0.5 left-1/2 -translate-x-1/2 z-20">
           <span className={`inline-flex items-center gap-1.5 px-5 py-2 rounded-full text-xs font-bold tracking-wider shadow-lg whitespace-nowrap border ${
@@ -125,16 +125,22 @@ const PremiumTrainingCard = memo(
           </span>
         </div>
         <div
-          className={`relative overflow-hidden rounded-2xl bg-card border transition-all duration-300 hover:-translate-y-1 h-full flex flex-col ${
+          className={`relative overflow-hidden rounded-2xl bg-card/80 backdrop-blur-xl border transition-all duration-500 hover:-translate-y-2 h-full flex flex-col group ${
             plan.popular
-              ? "shadow-xl border-2 border-primary/40 ring-1 ring-primary/10"
-              : "shadow-sm border-border/60 hover:shadow-lg hover:border-primary/20"
+              ? "shadow-[0_8px_40px_-12px_hsl(var(--primary)/0.3)] border-2 border-primary/40 ring-1 ring-primary/10"
+              : "shadow-sm border-border/60 hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/20"
           }`}
+          style={{ transformStyle: 'preserve-3d' }}
         >
+          {/* Ambient glow orb */}
+          {plan.popular && (
+            <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-40 h-40 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+          )}
+          
           {/* Top gradient accent */}
           <div className={`h-1.5 ${plan.popular ? 'bg-gradient-to-r from-primary via-accent to-primary' : 'bg-gradient-to-r from-muted-foreground/20 via-primary/30 to-muted-foreground/20'}`} />
 
-          <div className="p-6 flex flex-col flex-1">
+          <div className="p-6 flex flex-col flex-1 relative z-10">
             {/* Spacer for badge */}
             <div className="h-4" />
 
@@ -153,9 +159,9 @@ const PremiumTrainingCard = memo(
               {plan.description}
             </p>
 
-            {/* Price */}
-            <div className="text-center mb-5 py-3 bg-muted/40 rounded-xl border border-border/30">
-              <p className="text-3xl font-black text-primary">
+            {/* Price — 3D glassmorphic block */}
+            <div className="text-center mb-5 py-4 bg-gradient-to-br from-primary/5 via-muted/40 to-accent/5 rounded-xl border border-border/40 backdrop-blur-sm shadow-inner">
+              <p className="text-3xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                 {plan.price}
                 {plan.pricePrefix || ""}
               </p>
@@ -176,7 +182,9 @@ const PremiumTrainingCard = memo(
             <Button
               onClick={() => onBook(plan)}
               variant={plan.popular ? "default" : "outline"}
-              className="w-full mt-auto rounded-xl h-12 text-base"
+              className={`w-full mt-auto rounded-xl h-12 text-base font-bold ${
+                plan.popular ? "shadow-[0_4px_20px_hsl(var(--primary)/0.3)]" : ""
+              }`}
             >
               Book Now — {plan.price}
               <ArrowRight className="w-4 h-4 ml-2" />
