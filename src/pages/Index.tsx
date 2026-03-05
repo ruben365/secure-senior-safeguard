@@ -49,186 +49,219 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col">
       {/* ===== HERO ===== */}
-      <section className="min-h-screen flex flex-col items-center justify-center relative px-6 md:px-12 overflow-hidden">
+      <section className="w-full min-h-screen relative overflow-hidden flex flex-col items-center pt-8 pb-24">
+        {/* Background layers */}
         <div className="absolute inset-0 gradient-hero" />
         <div className="absolute inset-0">
-          <img src={heroImg} alt="Wedding hero background" className="w-full h-full object-cover opacity-[0.12] dark:opacity-[0.06]" />
+          <img src={heroImg} alt="Wedding hero background" className="w-full h-full object-cover opacity-[0.08] dark:opacity-[0.04]" />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background/50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-transparent to-background/60" />
 
-        {/* Floating organic blobs */}
-        <div className="floating-blob w-[700px] h-[700px] bg-primary/20 top-[-280px] right-[-200px]" />
-        <div className="floating-blob w-[600px] h-[600px] bg-pale-lilac/30 top-[5%] left-[-200px]" />
-        <div className="floating-blob w-[400px] h-[400px] bg-dusty-rose/25 bottom-[10%] right-[2%]" />
-        <div className="floating-blob w-[300px] h-[300px] bg-lavender-pink/35 bottom-[-80px] left-[25%]" />
+        {/* Background blobs behind the card grid */}
+        <div className="absolute left-[-10%] bottom-[5%] w-[600px] h-[600px] rounded-full bg-dusty-rose/30 blur-[120px] -z-10 pointer-events-none" />
+        <div className="absolute right-[-10%] bottom-[10%] w-[600px] h-[600px] rounded-full bg-pale-lilac/30 blur-[120px] -z-10 pointer-events-none" />
+        <div className="floating-blob w-[500px] h-[500px] bg-primary/15 top-[-200px] right-[-150px]" />
+        <div className="floating-blob w-[400px] h-[400px] bg-pale-lilac/25 top-[5%] left-[-180px]" />
 
-        {/* ===== FLOATING GLASS CARDS ===== */}
-        <motion.div
-          animate={{ y: [-12, 12, -12] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-32 left-4 md:left-12 glass-card-strong rounded-3xl p-4 hidden md:flex items-center gap-3 z-20"
-        >
-          <div className="w-12 h-12 rounded-xl overflow-hidden">
-            <img src={flowersImg} alt="Flowers" className="w-full h-full object-cover" />
-          </div>
-          <div>
-            <p className="font-sans-elegant text-sm font-semibold text-foreground">Celestial Calm</p>
-            <p className="font-sans-elegant text-xs text-muted-foreground">2:10 mins</p>
-          </div>
-          <div className="w-8 h-8 rounded-full bg-background/80 dark:bg-background/40 flex items-center justify-center ml-2">
-            <Play className="w-3 h-3 text-foreground fill-foreground" />
-          </div>
-        </motion.div>
-
-        <motion.div
-          animate={{ y: [10, -15, 10] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-28 right-4 md:right-12 glass-card-dark rounded-3xl p-5 hidden md:block z-20 w-52"
-        >
-          <p className="font-sans-elegant text-xs font-medium opacity-70 mb-1">Featured</p>
-          <p className="font-serif-display text-lg font-semibold mb-3">Serenity Waves</p>
-          <div className="flex gap-2">
-            <div className="w-10 h-10 rounded-full bg-background/20 backdrop-blur-sm border border-background/30 flex items-center justify-center">
-              <Play className="w-4 h-4 fill-current" />
-            </div>
-            <div className="w-10 h-10 rounded-full bg-background/20 backdrop-blur-sm border border-background/30 flex items-center justify-center">
-              <Music className="w-4 h-4" />
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          animate={{ y: [-8, 14, -8] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-52 left-6 md:left-16 glass-card-strong rounded-3xl p-4 hidden lg:block z-20 w-48"
-        >
-          <p className="font-sans-elegant text-xs text-muted-foreground mb-1">Today, 15 Aug 2027</p>
-          <p className="font-sans-elegant text-sm font-semibold text-foreground">Start Your Journey</p>
-          <p className="font-sans-elegant text-xs text-muted-foreground mt-1">A celebration of love</p>
-        </motion.div>
-
-        <motion.div
-          animate={{ y: [12, -10, 12] }}
-          transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-44 right-6 md:right-20 glass-card-strong rounded-3xl p-4 hidden lg:flex items-center gap-3 z-20"
-        >
-          <div className="w-12 h-12 rounded-xl overflow-hidden">
-            <img src={ringsImg} alt="Rings" className="w-full h-full object-cover" />
-          </div>
-          <div>
-            <p className="font-sans-elegant text-sm font-semibold text-foreground">Forever & Always</p>
-            <p className="font-sans-elegant text-xs text-muted-foreground">3:22 mins</p>
-          </div>
-          <div className="w-8 h-8 rounded-full bg-background/80 dark:bg-background/40 flex items-center justify-center ml-2">
-            <Play className="w-3 h-3 text-foreground fill-foreground" />
-          </div>
-        </motion.div>
-
-        <motion.div
-          animate={{ y: [-6, 10, -6], rotate: [0, 2, -2, 0] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[58%] right-[8%] glass-card-strong rounded-3xl p-4 hidden xl:block z-20 w-44"
-        >
-          <div className="flex items-center gap-2 mb-2">
-            <Star className="w-4 h-4 text-primary fill-primary" />
-            <span className="font-sans-elegant text-lg font-bold text-foreground">4.8</span>
-          </div>
-          <p className="font-sans-elegant text-xs font-semibold text-foreground">Guest Reviews</p>
-          <p className="font-sans-elegant text-[10px] text-muted-foreground">150+ invited</p>
-        </motion.div>
-
-        <motion.div
-          animate={{ y: [-6, 10, -6], rotate: [0, 5, -5, 0] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[52%] left-6 md:left-10 glass-card rounded-full w-14 h-14 hidden xl:flex items-center justify-center z-20"
-        >
-          <Heart className="w-5 h-5 text-dusty-rose fill-dusty-rose" />
-        </motion.div>
-
-        {/* Main hero content */}
+        {/* ===== HERO TEXT CONTAINER ===== */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: 'easeOut' }}
-          className="text-center relative z-10 max-w-3xl"
+          className="flex flex-col items-center text-center max-w-3xl mx-auto mt-20 md:mt-28 z-20 px-6"
         >
+          {/* Top label */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="inline-block px-6 py-2.5 rounded-full glass-card-strong mb-8"
+            className="inline-block px-6 py-2.5 rounded-full glass-card-strong mb-6"
           >
             <p className="font-sans-elegant text-xs tracking-[0.3em] uppercase text-muted-foreground font-medium">
               {t('hero.tagline')}
             </p>
           </motion.div>
 
-          <h1 className="font-serif-display text-5xl md:text-7xl lg:text-8xl font-semibold text-foreground mb-2" style={{ letterSpacing: '-1px', lineHeight: 1.1 }}>
+          {/* H1 Title */}
+          <h1 className="font-serif-display text-5xl md:text-7xl lg:text-8xl font-semibold text-foreground mb-2 leading-tight">
             Corine
           </h1>
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.5, type: "spring" }}
-            className="my-5"
+            className="my-4"
           >
-            <span className="inline-flex items-center justify-center w-16 h-16 rounded-full gradient-primary shadow-glow">
+            <span className="inline-flex items-center justify-center w-14 h-14 rounded-full gradient-primary shadow-glow">
               <span className="text-primary-foreground text-2xl font-serif-display">&</span>
             </span>
           </motion.div>
-          <h1 className="font-serif-display text-5xl md:text-7xl lg:text-8xl font-semibold text-foreground mb-8" style={{ letterSpacing: '-1px', lineHeight: 1.1 }}>
+          <h1 className="font-serif-display text-5xl md:text-7xl lg:text-8xl font-semibold text-foreground mb-6 leading-tight">
             Ruben
           </h1>
 
-          <p className="font-sans-elegant text-lg md:text-xl text-muted-foreground mb-12 max-w-lg mx-auto" style={{ lineHeight: 1.6 }}>
+          {/* Description */}
+          <p className="font-sans-elegant text-lg md:text-xl text-muted-foreground max-w-xl mb-8" style={{ lineHeight: 1.6 }}>
             {t('hero.date')}
           </p>
 
-          {/* Countdown */}
-          <div className="grid grid-cols-4 gap-2 md:gap-5 justify-center mb-12 w-full max-w-md mx-auto">
-            {[
-              { value: countdown.days, label: t('countdown.days') },
-              { value: countdown.hours, label: t('countdown.hours') },
-              { value: countdown.minutes, label: t('countdown.minutes') },
-              { value: countdown.seconds, label: t('countdown.seconds') },
-            ].map((item, i) => (
-              <motion.div
-                key={item.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 + i * 0.1 }}
-                className="glass-card-strong rounded-3xl px-5 py-5 md:px-7 md:py-6 min-w-[72px] md:min-w-[90px] text-center"
-              >
-                <span className="font-serif-display text-3xl md:text-4xl text-foreground block font-semibold">
-                  {String(item.value).padStart(2, '0')}
-                </span>
-                <span className="font-sans-elegant text-[10px] md:text-xs tracking-[0.15em] uppercase text-muted-foreground mt-1.5 block font-medium">
-                  {item.label}
-                </span>
-              </motion.div>
-            ))}
-          </div>
-
+          {/* Button Group */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1 }}
-            className="flex gap-4 justify-center flex-wrap"
+            transition={{ delay: 0.8 }}
+            className="flex flex-row gap-4 justify-center mb-8"
           >
             <Link to="/rsvp" className="btn-primary">
               {t('hero.cta')}
             </Link>
-            <Link to="/story" className="btn-glass">
+            <Link to="/story" className="btn-outline">
               {t('nav.story')}
             </Link>
           </motion.div>
         </motion.div>
 
+        {/* ===== FLOATING CARDS COMPOSITION GRID ===== */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.6, ease: 'easeOut' }}
+          className="w-full max-w-6xl mx-auto mt-10 md:mt-16 relative z-20 px-4"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+
+            {/* LEFT COLUMN — pushed down */}
+            <div className="flex flex-col gap-6 items-center md:items-end md:translate-y-12">
+              {/* Circular stats widget */}
+              <motion.div
+                animate={{ y: [-6, 8, -6] }}
+                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                className="glass-card-strong rounded-3xl p-5 w-44"
+              >
+                <div className="flex items-center gap-2 mb-3">
+                  <Star className="w-4 h-4 text-primary fill-primary" />
+                  <span className="font-sans-elegant text-lg font-bold text-foreground">4.8</span>
+                </div>
+                <p className="font-sans-elegant text-xs font-semibold text-foreground">Guest Reviews</p>
+                <p className="font-sans-elegant text-[10px] text-muted-foreground">150+ invited</p>
+              </motion.div>
+
+              {/* Music player card */}
+              <motion.div
+                animate={{ y: [-8, 10, -8] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="glass-card-strong rounded-3xl p-4 flex items-center gap-3"
+              >
+                <div className="w-12 h-12 rounded-xl overflow-hidden flex-shrink-0">
+                  <img src={flowersImg} alt="Flowers" className="w-full h-full object-cover" />
+                </div>
+                <div>
+                  <p className="font-sans-elegant text-sm font-semibold text-foreground">Celestial Calm</p>
+                  <p className="font-sans-elegant text-xs text-muted-foreground">2:10 mins</p>
+                </div>
+                <div className="w-8 h-8 rounded-full bg-background/80 dark:bg-background/40 flex items-center justify-center ml-1">
+                  <Play className="w-3 h-3 text-foreground fill-foreground" />
+                </div>
+              </motion.div>
+            </div>
+
+            {/* CENTER COLUMN — main focal card, scaled up */}
+            <div className="flex justify-center z-30 relative">
+              <motion.div
+                animate={{ y: [-10, 10, -10] }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                className="glass-card-dark rounded-3xl p-6 w-full max-w-[260px] md:scale-105"
+              >
+                <p className="font-sans-elegant text-xs font-medium opacity-70 mb-2 tracking-[0.1em] uppercase">Featured</p>
+                <p className="font-serif-display text-xl font-semibold mb-2">Serenity Waves</p>
+                <p className="font-sans-elegant text-xs opacity-60 mb-5" style={{ lineHeight: 1.5 }}>
+                  A celebration of love, family & togetherness
+                </p>
+
+                {/* Countdown mini */}
+                <div className="grid grid-cols-4 gap-2 mb-5">
+                  {[
+                    { value: countdown.days, label: t('countdown.days') },
+                    { value: countdown.hours, label: t('countdown.hours') },
+                    { value: countdown.minutes, label: t('countdown.minutes') },
+                    { value: countdown.seconds, label: t('countdown.seconds') },
+                  ].map((item) => (
+                    <div key={item.label} className="text-center">
+                      <span className="font-serif-display text-xl font-semibold block">
+                        {String(item.value).padStart(2, '0')}
+                      </span>
+                      <span className="font-sans-elegant text-[8px] tracking-[0.1em] uppercase opacity-60 block mt-0.5">
+                        {item.label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex gap-2">
+                  <div className="w-10 h-10 rounded-full bg-background/20 backdrop-blur-sm border border-background/30 flex items-center justify-center">
+                    <Play className="w-4 h-4 fill-current" />
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-background/20 backdrop-blur-sm border border-background/30 flex items-center justify-center">
+                    <Music className="w-4 h-4" />
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-background/20 backdrop-blur-sm border border-background/30 flex items-center justify-center">
+                    <Heart className="w-4 h-4" />
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* RIGHT COLUMN — pulled up */}
+            <div className="flex flex-col gap-6 items-center md:items-start md:-translate-y-8">
+              {/* Rating pill */}
+              <motion.div
+                animate={{ y: [6, -8, 6] }}
+                transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+                className="glass-card-strong rounded-full px-5 py-3 flex items-center gap-2"
+              >
+                <Heart className="w-4 h-4 text-dusty-rose fill-dusty-rose" />
+                <span className="font-sans-elegant text-sm font-semibold text-foreground">Forever & Always</span>
+              </motion.div>
+
+              {/* Event info card */}
+              <motion.div
+                animate={{ y: [-6, 10, -6] }}
+                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                className="glass-card-strong rounded-3xl p-4 flex items-center gap-3"
+              >
+                <div className="w-12 h-12 rounded-xl overflow-hidden flex-shrink-0">
+                  <img src={ringsImg} alt="Rings" className="w-full h-full object-cover" />
+                </div>
+                <div>
+                  <p className="font-sans-elegant text-sm font-semibold text-foreground">Forever & Always</p>
+                  <p className="font-sans-elegant text-xs text-muted-foreground">3:22 mins</p>
+                </div>
+                <div className="w-8 h-8 rounded-full bg-background/80 dark:bg-background/40 flex items-center justify-center ml-1">
+                  <Play className="w-3 h-3 text-foreground fill-foreground" />
+                </div>
+              </motion.div>
+
+              {/* Date mini card */}
+              <motion.div
+                animate={{ y: [-4, 8, -4] }}
+                transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
+                className="glass-card-strong rounded-3xl p-4 w-48"
+              >
+                <p className="font-sans-elegant text-xs text-muted-foreground mb-1">15 Aug 2027</p>
+                <p className="font-sans-elegant text-sm font-semibold text-foreground">Start Your Journey</p>
+                <p className="font-sans-elegant text-xs text-muted-foreground mt-1">A celebration of love</p>
+              </motion.div>
+            </div>
+
+          </div>
+        </motion.div>
+
+        {/* Scroll indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
-          className="absolute bottom-8 flex flex-col items-center gap-2 z-10"
+          className="mt-auto pt-8 flex flex-col items-center gap-2 z-10"
         >
           <span className="font-sans-elegant text-xs tracking-wider text-muted-foreground">{t('hero.scroll')}</span>
           <ChevronDown className="w-4 h-4 text-muted-foreground animate-scroll-indicator" />
