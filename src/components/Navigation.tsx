@@ -39,7 +39,7 @@ const Navigation = () => {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 pt-4"
+      className="fixed top-0 left-1/2 -translate-x-1/2 z-50 px-4 pt-3 w-full max-w-xl"
       initial={{ y: 0 }}
       animate={{ y: visible ? 0 : -100 }}
       transition={{ duration: 0.35, ease: 'easeInOut' }}
@@ -53,7 +53,7 @@ const Navigation = () => {
         style={{ height: '52px' }}
       >
         <div className="px-5 md:px-6 flex items-center justify-between h-full">
-          <Link to="/" className="font-serif-display text-base font-semibold tracking-wide text-white/95 hover:text-white transition-colors" style={{ letterSpacing: '0.5px' }}>
+          <Link to="/" className="font-serif-display text-base font-extrabold tracking-wide text-white hover:text-white/90 transition-colors" style={{ letterSpacing: '0.5px' }}>
             C & R
           </Link>
 
@@ -63,10 +63,10 @@ const Navigation = () => {
               <Link
                 key={link.to}
                 to={link.to}
-                className={`font-sans-elegant text-xs font-medium transition-all duration-300 relative py-1 ${
+                className={`font-sans-elegant text-xs font-bold transition-all duration-300 relative py-1 ${
                   location.pathname === link.to
-                    ? 'text-white font-semibold'
-                    : 'text-white/70 hover:text-white'
+                    ? 'text-white'
+                    : 'text-white/75 hover:text-white'
                 }`}
                 style={{ letterSpacing: '0.3px' }}
               >
@@ -86,7 +86,7 @@ const Navigation = () => {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
-              className="flex items-center gap-1 px-3 py-1.5 text-[11px] rounded-full border border-white/25 text-white/80 hover:text-white hover:border-white/40 transition-all"
+              className="flex items-center gap-1 px-3 py-1.5 text-[11px] font-bold rounded-full border border-white/25 text-white/85 hover:text-white hover:border-white/40 transition-all"
               aria-label="Toggle language"
             >
               <Globe className="w-3.5 h-3.5" />
