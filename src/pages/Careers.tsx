@@ -29,6 +29,7 @@ import {
   TrendingUp,
   Shield,
   Globe,
+  Sparkles,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AIImageDisclaimer } from "@/components/AIImageDisclaimer";
@@ -258,41 +259,42 @@ function Careers() {
       <TrustBar />
 
       {/* Why InVision */}
-      <section className="py-6 bg-gradient-to-b from-background to-muted/20">
-        <div className="container-padding">
-          <ScrollReveal>
-            <div className="text-center mb-6">
-              <Badge className="mb-2">Why InVision?</Badge>
-              <h2 className="text-2xl md:text-3xl font-bold mb-2">
-                Work That Matters
-              </h2>
-              <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-                Join a team that's using AI to protect vulnerable families.
-                Every line of code, every support call, every design decision
-                makes the world safer.
-              </p>
-            </div>
-          </ScrollReveal>
+      <section className="py-20 relative overflow-hidden">
+        {/* Premium background — matches Business page */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
+        <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-20 right-0 w-[400px] h-[400px] bg-accent/[0.04] rounded-full blur-3xl pointer-events-none" />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-12">
+            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+              <Sparkles className="w-3.5 h-3.5 text-primary" />
+              <span className="text-primary">Why InVision?</span>
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1]">
+              Work That Matters
+            </h2>
+            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground">
+              Join a team that's using AI to protect vulnerable families.
+              Every line of code, every support call, every design decision
+              makes the world safer.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
             {companyValues.map((value, index) => {
               const IconComponent = value.icon;
               return (
-                <ScrollReveal key={index} delay={index * 100}>
-                  <Card className="text-center hover:shadow-lg transition-shadow h-full">
-                    <CardHeader>
-                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                        <IconComponent className="w-6 h-6 text-primary" />
-                      </div>
-                      <CardTitle className="text-lg">{value.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-muted-foreground">
-                        {value.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </ScrollReveal>
+                <div key={index} className="relative rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl overflow-hidden h-full hover:-translate-y-2 hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/25 transition-all duration-500 p-6 text-center">
+                  <div className="h-1 w-full bg-gradient-to-r from-primary to-accent absolute top-0 left-0 right-0" />
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center mx-auto mb-4 mt-2">
+                    <IconComponent className="w-7 h-7 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2">{value.title}</h3>
+                  <p className="text-sm text-muted-foreground">
+                    {value.description}
+                  </p>
+                </div>
               );
             })}
           </div>
@@ -300,18 +302,20 @@ function Careers() {
       </section>
 
       {/* Open Positions */}
-      <section className="section-spacing">
-        <div className="container-padding">
-          <ScrollReveal>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Open Positions
-              </h2>
-              <p className="text-lg text-muted-foreground">
-                Find your role in protecting families
-              </p>
-            </div>
-          </ScrollReveal>
+      <section className="py-20 bg-muted/20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+              <Briefcase className="w-3.5 h-3.5 text-primary" />
+              <span className="text-primary">Open Roles</span>
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1]">
+              Open Positions
+            </h2>
+            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground">
+              Find your role in protecting families
+            </p>
+          </div>
 
           {/* Department Tabs */}
           <Tabs
@@ -331,10 +335,11 @@ function Careers() {
           {/* Job Cards - Simplified */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
             {filteredJobs.map((job) => (
-              <Card
+              <div
                 key={job.id}
-                className={`p-5 hover:shadow-xl transition-all hover:-translate-y-1 ${job.featured ? "border-primary border-2" : ""}`}
+                className={`relative rounded-2xl border bg-card/90 backdrop-blur-xl overflow-hidden h-full hover:-translate-y-2 hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] transition-all duration-500 p-5 ${job.featured ? "border-primary/40 shadow-[0_8px_40px_-12px_hsl(var(--primary)/0.25)]" : "border-border/50 hover:border-primary/25"}`}
               >
+                {job.featured && <div className="h-1 w-full bg-gradient-to-r from-primary to-accent absolute top-0 left-0 right-0" />}
                 <div className="flex items-start justify-between mb-3">
                   <div>
                     <h3 className="font-bold text-lg mb-1">{job.title}</h3>
@@ -375,7 +380,7 @@ function Careers() {
                 <Button className="w-full mt-4" size="sm" asChild>
                   <Link to="/portal">Apply Now →</Link>
                 </Button>
-              </Card>
+              </div>
             ))}
           </div>
 
@@ -398,73 +403,76 @@ function Careers() {
       </section>
 
       {/* Benefits Grid */}
-      <section className="section-spacing bg-muted/30">
-        <div className="container-padding">
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+              <Heart className="w-3.5 h-3.5 text-primary" />
+              <span className="text-primary">Benefits</span>
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1]">
               Comprehensive Benefits
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground">
               We take care of our team so you can focus on the mission
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
             {benefits.map((category, index) => (
-              <Card key={index}>
-                <CardHeader>
-                  <CardTitle className="text-lg">{category.category}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
-                    {category.items.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm">
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
+              <div key={index} className="rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl p-6 hover:-translate-y-1 hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/25 transition-all duration-500">
+                <h3 className="text-lg font-bold mb-3">{category.category}</h3>
+                <ul className="space-y-2.5">
+                  {category.items.map((item, i) => (
+                    <li key={i} className="flex items-start gap-2.5 text-sm">
+                      <div className="w-5 h-5 rounded-full bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                      </div>
+                      <span className="text-foreground/85">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Application Process */}
-      <section className="section-spacing">
-        <div className="container-padding">
+      <section className="py-20 bg-muted/20">
+        <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+              <Target className="w-3.5 h-3.5 text-primary" />
+              <span className="text-primary">How to Apply</span>
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1]">
               Simple Application Process
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground">
               From application to offer in as little as one week
             </p>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-5 max-w-5xl mx-auto">
             {applicationSteps.map((step, index) => (
               <div key={index} className="relative">
-                <Card className="text-center hover:shadow-lg transition-shadow h-full">
-                  <CardHeader>
-                    <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center mx-auto mb-3 text-xl font-bold">
-                      {step.step}
-                    </div>
-                    <CardTitle className="text-lg">{step.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground mb-2">
-                      {step.description}
-                    </p>
-                    <Badge variant="outline" className="text-xs">
-                      <Clock className="w-3 h-3 mr-1" />
-                      {step.duration}
-                    </Badge>
-                  </CardContent>
-                </Card>
+                <div className="rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl text-center p-6 h-full hover:-translate-y-1 hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] transition-all duration-500">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center mx-auto mb-4 text-xl font-black shadow-lg">
+                    {step.step}
+                  </div>
+                  <h3 className="text-lg font-bold mb-2">{step.title}</h3>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    {step.description}
+                  </p>
+                  <Badge variant="outline" className="text-xs">
+                    <Clock className="w-3 h-3 mr-1" />
+                    {step.duration}
+                  </Badge>
+                </div>
                 {index < applicationSteps.length - 1 && (
-                  <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 text-muted-foreground">
+                  <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 text-primary/40 text-xl font-bold">
                     →
                   </div>
                 )}
@@ -475,103 +483,68 @@ function Careers() {
       </section>
 
       {/* Company Culture with Real Photos */}
-      <section className="section-spacing bg-gradient-to-b from-muted/20 to-background">
-        <div className="container-padding">
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
-            <Badge className="mb-4">Our Culture</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+              <Users className="w-3.5 h-3.5 text-primary" />
+              <span className="text-primary">Our Culture</span>
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1]">
               Life at InVision
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground">
               A remote-first culture built on trust, transparency, and making a
               difference
             </p>
           </div>
 
           {/* Team Photo Section */}
-          <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto mb-12">
-            <ScrollReveal>
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl group">
-                <img
-                  src={teamCollaboration}
-                  alt="Our team collaborating in a meeting"
-                  className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                  <h3 className="text-xl font-bold mb-1">
-                    Collaborative Spirit
-                  </h3>
-                  <p className="text-white/90 text-sm">
-                    Ideas flow freely in our open environment
-                  </p>
-                </div>
+          <div className="grid lg:grid-cols-2 gap-6 max-w-6xl mx-auto mb-12">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl group border border-border/30">
+              <img
+                src={teamCollaboration}
+                alt="Our team collaborating in a meeting"
+                className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[hsl(288_30%_15%/0.85)] via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <h3 className="text-xl font-bold mb-1">Collaborative Spirit</h3>
+                <p className="text-white/90 text-sm">Ideas flow freely in our open environment</p>
               </div>
-            </ScrollReveal>
+            </div>
 
-            <ScrollReveal delay={200}>
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl group">
-                <img
-                  src={supportAgent}
-                  alt="Support team member helping customers"
-                  className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-accent/80 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                  <h3 className="text-xl font-bold mb-1">People First</h3>
-                  <p className="text-white/90 text-sm">
-                    We genuinely care about every customer
-                  </p>
-                </div>
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl group border border-border/30">
+              <img
+                src={supportAgent}
+                alt="Support team member helping customers"
+                className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[hsl(18_60%_30%/0.85)] via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <h3 className="text-xl font-bold mb-1">People First</h3>
+                <p className="text-white/90 text-sm">We genuinely care about every customer</p>
               </div>
-            </ScrollReveal>
+            </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <Card className="text-center">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                  <Globe className="w-6 h-6 text-primary" />
+          <div className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+            {[
+              { icon: Globe, title: "Remote-First", desc: "Work from anywhere. We have team members across 12 states and growing." },
+              { icon: TrendingUp, title: "Growth-Focused", desc: "$2k/year learning budget. Conference attendance. 1-on-1 mentorship." },
+              { icon: Shield, title: "Mission-Driven", desc: "Every team member gets free family protection. Your loved ones stay safe too." },
+            ].map((item, index) => (
+              <div key={index} className="rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl text-center p-6 hover:-translate-y-1 hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/25 transition-all duration-500">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center mx-auto mb-4">
+                  <item.icon className="w-7 h-7 text-primary" />
                 </div>
-                <CardTitle>Remote-First</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Work from anywhere. We have team members across 12 states and
-                  growing.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-3">
-                  <TrendingUp className="w-6 h-6 text-accent" />
-                </div>
-                <CardTitle>Growth-Focused</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  $2k/year learning budget. Conference attendance. 1-on-1
-                  mentorship.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-full bg-success/10 flex items-center justify-center mx-auto mb-3">
-                  <Shield className="w-6 h-6 text-success" />
-                </div>
-                <CardTitle>Mission-Driven</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Every team member gets free family protection. Your loved ones
-                  stay safe too.
-                </p>
-              </CardContent>
-            </Card>
+                <h3 className="text-lg font-bold mb-2">{item.title}</h3>
+                <p className="text-sm text-muted-foreground">{item.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
