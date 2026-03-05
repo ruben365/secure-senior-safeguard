@@ -1,70 +1,146 @@
-import { useState, useEffect, useRef, createContext, useContext } from 'react';
-import { Volume2, VolumeX } from 'lucide-react';
+import { useState, useRef, createContext, useContext, useCallback } from 'react';
+import { Volume2, VolumeX, Pause } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-interface MusicContextType {
-  isPlaying: boolean;
-  toggleMusic: () => void;
+interface Track {
+  id: string;
+  title: string;
+  artist: string;
 }
 
-const MusicContext = createContext<MusicContextType>({ isPlaying: false, toggleMusic: () => {} });
+interface MusicContextType {
+  currentTrack: string | null;
+  isPlaying: boolean;
+  playTrack: (trackId: string) => void;
+  stopMusic: () => void;
+  toggleTrack: (trackId: string) => void;
+}
+
+const MusicContext = createContext<MusicContextType>({
+  currentTrack: null,
+  isPlaying: false,
+  playTrack: () => {},
+  stopMusic: () => {},
+  toggleTrack: () => {},
+});
 
 export const useMusic = () => useContext(MusicContext);
 
+// Track registry — add your MP3 URLs or paths here
+// Once you upload your songs, replace the `src` values with the file paths
+const TRACK_SOURCES: Record<string, string> = {
+  'amazing-grace': '',       // Instrumental Amazing Grace
+  'oceans-hillsong': '',     // Oceans by Hillsong
+  'blessed-larson': '',      // I Have Been Blessed by Joseph Larson
+  'how-great': '',           // How Great Thou Art
+  'joyful': '',              // Joyful, Joyful
+  'great-faithfulness': '',  // Great Is Thy Faithfulness
+};
+
+export const TRACK_INFO: Record<string, Track> = {
+  'amazing-grace': { id: 'amazing-grace', title: 'Amazing Grace', artist: 'Instrumental' },
+  'oceans-hillsong': { id: 'oceans-hillsong', title: 'Oceans', artist: 'Hillsong' },
+  'blessed-larson': { id: 'blessed-larson', title: 'I Have Been Blessed', artist: 'Joseph Larson' },
+  'how-great': { id: 'how-great', title: 'How Great Thou Art', artist: 'Traditional Hymn' },
+  'joyful': { id: 'joyful', title: 'Joyful, Joyful', artist: 'Traditional Hymn' },
+  'great-faithfulness': { id: 'great-faithfulness', title: 'Great Is Thy Faithfulness', artist: 'Traditional Hymn' },
+};
+
 export const MusicProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [currentTrack, setCurrentTrack] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  useEffect(() => {
-    // Create a silent audio element — ready for user-uploaded songs
-    const audio = new Audio();
-    audio.loop = true;
-    audio.volume = 0.3;
-    audioRef.current = audio;
-    return () => { audio.pause(); audio.src = ''; };
+  const stopMusic = useCallback(() => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+    setIsPlaying(false);
+    setCurrentTrack(null);
   }, []);
 
-  const toggleMusic = () => {
-    if (!audioRef.current) return;
-    if (isPlaying) {
+  const playTrack = useCallback((trackId: string) => {
+    // Stop current playback
+    if (audioRef.current) {
       audioRef.current.pause();
-    } else {
-      audioRef.current.play().catch(() => {});
+      audioRef.current.currentTime = 0;
     }
-    setIsPlaying(!isPlaying);
-  };
+
+    const src = TRACK_SOURCES[trackId];
+    if (!src) {
+      // No audio file yet — set state for UI but no sound
+      setCurrentTrack(trackId);
+      setIsPlaying(true);
+      return;
+    }
+
+    const audio = new Audio(src);
+    audio.loop = true;
+    audio.volume = 0.35;
+    audio.play().catch(() => {});
+    audio.onended = () => {
+      setIsPlaying(false);
+      setCurrentTrack(null);
+    };
+    audioRef.current = audio;
+    setCurrentTrack(trackId);
+    setIsPlaying(true);
+  }, []);
+
+  const toggleTrack = useCallback((trackId: string) => {
+    if (currentTrack === trackId && isPlaying) {
+      stopMusic();
+    } else {
+      playTrack(trackId);
+    }
+  }, [currentTrack, isPlaying, stopMusic, playTrack]);
 
   return (
-    <MusicContext.Provider value={{ isPlaying, toggleMusic }}>
+    <MusicContext.Provider value={{ currentTrack, isPlaying, playTrack, stopMusic, toggleTrack }}>
       {children}
     </MusicContext.Provider>
   );
 };
 
 const MusicFloatingButton = () => {
-  const { isPlaying, toggleMusic } = useMusic();
+  const { isPlaying, currentTrack, stopMusic } = useMusic();
 
   return (
-    <motion.button
-      initial={{ opacity: 0, scale: 0 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: 2, type: 'spring' }}
-      onClick={toggleMusic}
-      className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full glass-card-strong flex items-center justify-center shadow-glow hover:scale-110 transition-transform duration-300"
-      aria-label="Toggle music"
-    >
-      <AnimatePresence mode="wait">
-        {isPlaying ? (
-          <motion.div key="on" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
-            <Volume2 className="w-5 h-5 text-primary" />
-          </motion.div>
-        ) : (
-          <motion.div key="off" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
-            <VolumeX className="w-5 h-5 text-muted-foreground" />
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.button>
+    <AnimatePresence>
+      {isPlaying && currentTrack && (
+        <motion.button
+          initial={{ opacity: 0, scale: 0, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0, y: 20 }}
+          onClick={stopMusic}
+          className="fixed bottom-6 right-6 z-40 glass-card-strong rounded-full px-4 py-3 flex items-center gap-3 shadow-glow hover:scale-105 transition-transform duration-300"
+          aria-label="Stop music"
+        >
+          <div className="w-8 h-8 rounded-full gradient-primary flex items-center justify-center">
+            <Pause className="w-3.5 h-3.5 text-primary-foreground fill-primary-foreground" />
+          </div>
+          <div className="text-left pr-1">
+            <p className="font-sans-elegant text-xs font-bold text-foreground leading-tight">
+              {TRACK_INFO[currentTrack]?.title}
+            </p>
+            <p className="font-sans-elegant text-[10px] text-muted-foreground leading-tight">
+              {TRACK_INFO[currentTrack]?.artist}
+            </p>
+          </div>
+          <div className="flex gap-0.5 items-end h-4">
+            {[1, 2, 3, 4].map(i => (
+              <motion.div
+                key={i}
+                className="w-[3px] rounded-full bg-primary"
+                animate={{ height: ['4px', '14px', '6px', '12px', '4px'] }}
+                transition={{ duration: 0.8 + i * 0.15, repeat: Infinity, ease: 'easeInOut' }}
+              />
+            ))}
+          </div>
+        </motion.button>
+      )}
+    </AnimatePresence>
   );
 };
 
