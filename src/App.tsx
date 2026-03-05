@@ -7,13 +7,11 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AuroraBackground from "@/components/AuroraBackground";
 import Index from "./pages/Index";
-
-const FloatingHearts = lazy(() => import("@/components/FloatingHearts"));
-const MusicPlayerModule = lazy(() => import("@/components/MusicPlayer"));
-const Toaster = lazy(() => import("@/components/ui/toaster").then(m => ({ default: m.Toaster })));
-const Sonner = lazy(() => import("@/components/ui/sonner").then(m => ({ default: m.Toaster })));
-const TooltipProvider = lazy(() => import("@/components/ui/tooltip").then(m => ({ default: m.TooltipProvider })));
-const MusicProviderLazy = lazy(() => import("@/components/MusicPlayer").then(m => ({ default: m.MusicProvider })));
+import FloatingHearts from "@/components/FloatingHearts";
+import MusicFloatingButton, { MusicProvider } from "@/components/MusicPlayer";
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const Story = lazy(() => import("./pages/Story"));
 const RSVP = lazy(() => import("./pages/RSVP"));
@@ -25,43 +23,33 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
       <LanguageProvider>
-        <Suspense fallback={null}>
-          <MusicProviderLazy>
-            <Suspense fallback={null}>
-              <TooltipProvider>
-                <Suspense fallback={null}>
-                  <Toaster />
-                  <Sonner />
-                </Suspense>
-                <BrowserRouter>
-                  {/* Single unified aurora background behind everything */}
-                  <div className="fixed inset-0 z-0">
-                    <AuroraBackground variant="hero" />
-                  </div>
-                  <Suspense fallback={null}>
-                    <FloatingHearts />
-                  </Suspense>
+        <MusicProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              {/* Single unified aurora background behind everything */}
+              <div className="fixed inset-0 z-0">
+                <AuroraBackground variant="hero" />
+              </div>
+              <FloatingHearts />
 
-                  <div className="relative z-10">
-                    <Navigation />
-                    <Routes>
-                      <Route path="/" element={<Index />} />
-                      <Route path="/story" element={<Suspense fallback={null}><Story /></Suspense>} />
-                      <Route path="/rsvp" element={<Suspense fallback={null}><RSVP /></Suspense>} />
-                      
-                      <Route path="*" element={<Suspense fallback={null}><NotFound /></Suspense>} />
-                    </Routes>
-                    <Footer />
-                  </div>
+              <div className="relative z-10">
+                <Navigation />
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/story" element={<Suspense fallback={null}><Story /></Suspense>} />
+                  <Route path="/rsvp" element={<Suspense fallback={null}><RSVP /></Suspense>} />
+                  
+                  <Route path="*" element={<Suspense fallback={null}><NotFound /></Suspense>} />
+                </Routes>
+                <Footer />
+              </div>
 
-                  <Suspense fallback={null}>
-                    <MusicPlayerModule />
-                  </Suspense>
-                </BrowserRouter>
-              </TooltipProvider>
-            </Suspense>
-          </MusicProviderLazy>
-        </Suspense>
+              <MusicFloatingButton />
+            </BrowserRouter>
+          </TooltipProvider>
+        </MusicProvider>
       </LanguageProvider>
     </ThemeProvider>
   </QueryClientProvider>
