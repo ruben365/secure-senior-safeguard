@@ -195,6 +195,16 @@ const translations: Record<string, Record<Language, string>> = {
   'verse.1cor13': { fr: 'L\'amour est patient, l\'amour est bon. Il n\'envie pas, il ne se vante pas, il ne s\'enfle pas d\'orgueil.', en: 'Love is patient, love is kind. It does not envy, it does not boast, it is not proud.' },
   'verse.genesis': { fr: 'C\'est pourquoi l\'homme quittera son père et sa mère, et s\'attachera à sa femme, et ils deviendront une seule chair.', en: 'Therefore a man shall leave his father and his mother and hold fast to his wife, and they shall become one flesh.' },
   'verse.ecclesiastes': { fr: 'Deux valent mieux qu\'un seul, car ils ont un bon salaire de leur travail. Car s\'ils tombent, l\'un relève son compagnon.', en: 'Two are better than one, because they have a good reward for their toil. For if they fall, one will lift up his fellow.' },
+  'verse.proverbs': { fr: 'Confie-toi en l\'Éternel de tout ton cœur, et ne t\'appuie pas sur ta propre intelligence. Reconnais-le dans toutes tes voies, et il aplanira tes sentiers.', en: 'Trust in the Lord with all your heart, and do not lean on your own understanding. In all your ways acknowledge him, and he will make straight your paths.' },
+  'index.foundedOnFaith': { fr: 'Fondé sur la Foi', en: 'Founded on Faith' },
+  'index.ceremony': { fr: 'Cérémonie Sacrée', en: 'Sacred Ceremony' },
+  'index.ceremony.desc': { fr: 'Une célébration d\'amour devant Dieu, notre famille et nos amis les plus chers.', en: 'A celebration of love before God, our family, and our dearest friends.' },
+  'index.blessing': { fr: 'Bénédiction Divine', en: 'Divine Blessing' },
+  'index.blessing.desc': { fr: 'Recevant la grâce et la bénédiction de Dieu sur notre union sacrée.', en: 'Receiving God\'s grace and blessing upon our sacred union.' },
+  'index.vows': { fr: 'Vœux Éternels', en: 'Eternal Vows' },
+  'index.vows.desc': { fr: 'Des promesses faites devant Dieu, scellées par la foi et l\'amour éternel.', en: 'Promises made before God, sealed by faith and eternal love.' },
+  'index.fellowship': { fr: 'Communion Fraternelle', en: 'Fellowship & Joy' },
+  'index.fellowship.desc': { fr: 'Célébrer ensemble dans la joie, la prière et la reconnaissance.', en: 'Celebrating together in joy, prayer, and gratitude.' },
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);

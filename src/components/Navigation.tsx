@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -9,12 +9,25 @@ const Navigation = () => {
   const { language, setLanguage, t } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
+  const lastScrollY = useRef(0);
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      setScrolled(currentY > 20);
+
+      // Hide when scrolling down past 100px, show when scrolling up
+      if (currentY > 100) {
+        setVisible(currentY < lastScrollY.current || currentY < 80);
+      } else {
+        setVisible(true);
+      }
+      lastScrollY.current = currentY;
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -28,7 +41,12 @@ const Navigation = () => {
   ];
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 pt-4">
+    <motion.div
+      className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 pt-4"
+      initial={{ y: 0 }}
+      animate={{ y: visible ? 0 : -100 }}
+      transition={{ duration: 0.35, ease: 'easeInOut' }}
+    >
       <nav
         className={`nav-glow-border transition-all duration-500 rounded-[20px] ${
           scrolled
@@ -38,61 +56,61 @@ const Navigation = () => {
         style={{ height: '64px' }}
       >
         <div className="px-6 md:px-8 flex items-center justify-between h-full">
-        <Link to="/" className="font-serif-display text-lg font-semibold tracking-wide gradient-text hover:opacity-80 transition-opacity" style={{ letterSpacing: '0.5px' }}>
-          C & R
-        </Link>
+          <Link to="/" className="font-serif-display text-lg font-semibold tracking-wide gradient-text hover:opacity-80 transition-opacity" style={{ letterSpacing: '0.5px' }}>
+            C & R
+          </Link>
 
-        {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-8">
-          {links.map(link => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className={`font-sans-elegant text-sm font-medium transition-all duration-300 relative py-1.5 ${
-                location.pathname === link.to
-                  ? 'text-primary font-semibold'
-                  : 'text-foreground hover:text-primary'
-              }`}
-              style={{ letterSpacing: '0.3px' }}
+          {/* Desktop links */}
+          <div className="hidden md:flex items-center gap-8">
+            {links.map(link => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={`font-sans-elegant text-sm font-medium transition-all duration-300 relative py-1.5 ${
+                  location.pathname === link.to
+                    ? 'text-primary font-semibold'
+                    : 'text-foreground hover:text-primary'
+                }`}
+                style={{ letterSpacing: '0.3px' }}
+              >
+                {link.label}
+                {location.pathname === link.to && (
+                  <motion.div
+                    layoutId="nav-indicator"
+                    className="absolute -bottom-0.5 left-0 right-0 h-[2px] gradient-primary rounded-full"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+              </Link>
+            ))}
+          </div>
+
+          {/* Controls */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
+              className="btn-outline flex items-center gap-1.5 !px-4 !py-2 !text-xs"
+              aria-label="Toggle language"
             >
-              {link.label}
-              {location.pathname === link.to && (
-                <motion.div
-                  layoutId="nav-indicator"
-                  className="absolute -bottom-0.5 left-0 right-0 h-[2px] gradient-primary rounded-full"
-                  transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                />
-              )}
-            </Link>
-          ))}
+              <Globe className="w-3.5 h-3.5" />
+              {language === 'fr' ? 'EN' : 'FR'}
+            </button>
+            <button
+              onClick={toggleTheme}
+              className="p-2.5 rounded-full hover:bg-primary/10 transition-all duration-300 text-muted-foreground hover:text-primary"
+              aria-label="Toggle theme"
+            >
+              {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+            </button>
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="md:hidden p-2.5 rounded-full hover:bg-primary/10 transition-all duration-300 text-foreground"
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
-
-        {/* Controls */}
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
-            className="btn-outline flex items-center gap-1.5 !px-4 !py-2 !text-xs"
-            aria-label="Toggle language"
-          >
-            <Globe className="w-3.5 h-3.5" />
-            {language === 'fr' ? 'EN' : 'FR'}
-          </button>
-          <button
-            onClick={toggleTheme}
-            className="p-2.5 rounded-full hover:bg-primary/10 transition-all duration-300 text-muted-foreground hover:text-primary"
-            aria-label="Toggle theme"
-          >
-            {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
-          </button>
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2.5 rounded-full hover:bg-primary/10 transition-all duration-300 text-foreground"
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
-        </div>
-      </div>
 
         {/* Mobile menu */}
         <AnimatePresence>
@@ -125,7 +143,7 @@ const Navigation = () => {
           )}
         </AnimatePresence>
       </nav>
-    </div>
+    </motion.div>
   );
 };
 
