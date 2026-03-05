@@ -235,7 +235,8 @@ function Contact() {
             {contactMethods.map((method, index) => {
               const IconComponent = method.icon;
               return (
-                <div key={index} className="bg-card/70 backdrop-blur-xl border border-border/40 rounded-2xl p-6 shadow-sm hover:shadow-lg hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 h-full">
+                <div key={index} className="bg-card/70 backdrop-blur-xl border border-border/40 rounded-2xl p-6 shadow-sm hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/20 transition-all duration-500 hover:-translate-y-2 h-full relative overflow-hidden">
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-accent" />
                   <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
                     <IconComponent className="w-7 h-7 text-primary" />
                   </div>

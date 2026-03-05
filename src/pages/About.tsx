@@ -321,7 +321,8 @@ function About() {
             {values.map((value) => {
               const Icon = value.icon;
               return (
-                <div key={value.title} className="bg-card border border-border/60 rounded-2xl p-6 text-center shadow-sm hover:shadow-lg hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 h-full">
+                <div key={value.title} className="bg-card/70 backdrop-blur-xl border border-border/40 rounded-2xl p-6 text-center shadow-sm hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/20 transition-all duration-500 hover:-translate-y-2 h-full relative overflow-hidden">
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-accent" />
                   <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
                     <Icon className="w-7 h-7 text-primary" />
                   </div>
