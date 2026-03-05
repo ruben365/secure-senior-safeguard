@@ -1,7 +1,6 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion } from 'framer-motion';
 import { Heart } from 'lucide-react';
-import AuroraBackground from '@/components/AuroraBackground';
 
 const Story = () => {
   const { t } = useLanguage();
@@ -15,8 +14,7 @@ const Story = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-28 pb-20 relative overflow-hidden">
-      <AuroraBackground variant="mesh" />
+    <div className="min-h-screen pt-28 pb-20 relative">
 
       <div className="container mx-auto px-6 md:px-12 max-w-3xl relative z-10">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-16">

@@ -1,7 +1,6 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion } from 'framer-motion';
 import { Heart, ExternalLink } from 'lucide-react';
-import AuroraBackground from '@/components/AuroraBackground';
 
 const registries = [
   { name: 'Amazon', url: '#', icon: '🎁' },
@@ -13,8 +12,7 @@ const Registry = () => {
   const { t } = useLanguage();
 
   return (
-    <div className="min-h-screen pt-28 pb-20 relative overflow-hidden">
-      <AuroraBackground variant="soft" />
+    <div className="min-h-screen pt-28 pb-20 relative">
 
       <div className="container mx-auto px-6 md:px-12 max-w-2xl relative z-10">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-16">
