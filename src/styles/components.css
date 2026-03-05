@@ -193,18 +193,18 @@
 
 /* ===== LEGACY SOFT MODERN (kept for compatibility) ===== */
 
-/* Floating Card - The core container style */
+/* Floating Card - simplified for performance */
 .soft-card {
   background: hsl(0 0% 100%);
   border-radius: 1.5rem;
   padding: 2rem;
   box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.8);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .soft-card:hover {
-  transform: translateY(-8px) scale(1.02);
+  transform: translateY(-4px);
   box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.12);
 }
 
@@ -308,18 +308,7 @@
   );
 }
 
-/* Image opacity utility */
-img {
-  opacity: 0.9;
-  transition:
-    opacity 0.3s ease,
-    transform 0.4s ease,
-    box-shadow 0.4s ease;
-}
-
-img:hover {
-  opacity: 1;
-}
+/* Images render at full opacity - no transition overhead */
 
 /* Gradient Mesh Background */
 .gradient-mesh {
