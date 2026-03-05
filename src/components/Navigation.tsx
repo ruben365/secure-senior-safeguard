@@ -45,28 +45,28 @@ const Navigation = () => {
       transition={{ duration: 0.35, ease: 'easeInOut' }}
     >
       <nav
-        className={`nav-glow-border transition-all duration-500 rounded-[20px] ${
+        className={`nav-glow-border transition-all duration-500 rounded-[20px] border border-primary/20 ${
           scrolled
-            ? 'glass-card-strong shadow-[0_8px_32px_rgba(139,107,138,0.18),0_2px_8px_rgba(212,165,165,0.12)]'
-            : 'glass-card shadow-[0_4px_16px_rgba(139,107,138,0.1)]'
+            ? 'bg-gradient-to-r from-plum/80 via-plum-dark/70 to-plum/80 backdrop-blur-xl shadow-[0_8px_32px_rgba(107,78,113,0.25)]'
+            : 'bg-gradient-to-r from-plum/60 via-plum-dark/50 to-plum/60 backdrop-blur-lg shadow-[0_4px_16px_rgba(107,78,113,0.15)]'
         }`}
-        style={{ height: '64px' }}
+        style={{ height: '52px' }}
       >
-        <div className="px-6 md:px-8 flex items-center justify-between h-full">
-          <Link to="/" className="font-serif-display text-lg font-semibold tracking-wide gradient-text hover:opacity-80 transition-opacity" style={{ letterSpacing: '0.5px' }}>
+        <div className="px-5 md:px-6 flex items-center justify-between h-full">
+          <Link to="/" className="font-serif-display text-base font-semibold tracking-wide text-white/95 hover:text-white transition-colors" style={{ letterSpacing: '0.5px' }}>
             C & R
           </Link>
 
           {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {links.map(link => (
               <Link
                 key={link.to}
                 to={link.to}
-                className={`font-sans-elegant text-sm font-medium transition-all duration-300 relative py-1.5 ${
+                className={`font-sans-elegant text-xs font-medium transition-all duration-300 relative py-1 ${
                   location.pathname === link.to
-                    ? 'text-primary font-semibold'
-                    : 'text-foreground hover:text-primary'
+                    ? 'text-white font-semibold'
+                    : 'text-white/70 hover:text-white'
                 }`}
                 style={{ letterSpacing: '0.3px' }}
               >
@@ -86,7 +86,7 @@ const Navigation = () => {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')}
-              className="btn-outline flex items-center gap-1.5 !px-4 !py-2 !text-xs"
+              className="flex items-center gap-1 px-3 py-1.5 text-[11px] rounded-full border border-white/25 text-white/80 hover:text-white hover:border-white/40 transition-all"
               aria-label="Toggle language"
             >
               <Globe className="w-3.5 h-3.5" />
@@ -94,14 +94,14 @@ const Navigation = () => {
             </button>
             <button
               onClick={toggleTheme}
-              className="p-2.5 rounded-full hover:bg-primary/10 transition-all duration-300 text-muted-foreground hover:text-primary"
+              className="p-2 rounded-full hover:bg-white/10 transition-all duration-300 text-white/70 hover:text-white"
               aria-label="Toggle theme"
             >
               {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
             </button>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2.5 rounded-full hover:bg-primary/10 transition-all duration-300 text-foreground"
+              className="md:hidden p-2 rounded-full hover:bg-white/10 transition-all duration-300 text-white/90"
               aria-label="Toggle menu"
             >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
