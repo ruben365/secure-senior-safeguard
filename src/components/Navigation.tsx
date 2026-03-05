@@ -34,9 +34,7 @@ const Navigation = () => {
   const links = [
     { to: '/', label: t('nav.home') },
     { to: '/story', label: t('nav.story') },
-    { to: '/details', label: t('nav.details') },
     { to: '/rsvp', label: t('nav.rsvp') },
-    { to: '/gallery', label: t('nav.gallery') },
     { to: '/registry', label: t('nav.registry') },
   ];
 
