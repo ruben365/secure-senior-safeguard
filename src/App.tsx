@@ -7,6 +7,7 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import AuroraBackground from "@/components/AuroraBackground";
 import Index from "./pages/Index";
 import Story from "./pages/Story";
 import Details from "./pages/Details";
@@ -25,17 +26,24 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            <Navigation />
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/story" element={<Story />} />
-              <Route path="/details" element={<Details />} />
-              <Route path="/rsvp" element={<RSVP />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/registry" element={<Registry />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            <Footer />
+            {/* Single unified aurora background behind everything */}
+            <div className="fixed inset-0 z-0">
+              <AuroraBackground variant="hero" />
+            </div>
+
+            <div className="relative z-10">
+              <Navigation />
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/story" element={<Story />} />
+                <Route path="/details" element={<Details />} />
+                <Route path="/rsvp" element={<RSVP />} />
+                <Route path="/gallery" element={<Gallery />} />
+                <Route path="/registry" element={<Registry />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+              <Footer />
+            </div>
           </BrowserRouter>
         </TooltipProvider>
       </LanguageProvider>

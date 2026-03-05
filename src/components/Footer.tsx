@@ -18,7 +18,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="footer-dark relative overflow-hidden">
+    <footer className="footer-dark relative overflow-hidden z-20">
       {/* Subtle decorative blobs */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-[500px] h-[300px] rounded-full bg-[hsl(var(--footer-fg))] opacity-5 blur-[120px]" />

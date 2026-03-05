@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion } from 'framer-motion';
 import { ChevronDown, Heart, MapPin, Calendar, Clock, Utensils, Camera, Gift, Star, Sparkles, Play, Music, Users, Gem, Crown, Flower2 } from 'lucide-react';
-import AuroraBackground from '@/components/AuroraBackground';
+
 import heroImg from '@/assets/hero-wedding.jpg';
 import flowersImg from '@/assets/flowers-lavender.jpg';
 import ringsImg from '@/assets/rings.jpg';
@@ -51,8 +51,7 @@ const Index = () => {
     <div className="min-h-screen flex flex-col">
       {/* ===== HERO ===== */}
       <section className="w-full min-h-screen relative overflow-hidden flex flex-col items-center pt-8 pb-24">
-        {/* Animated Aurora Background */}
-        <AuroraBackground variant="hero" />
+        {/* Hero image — very faint watermark */}
         {/* Hero image — very faint watermark */}
         <div className="absolute inset-0 mix-blend-soft-light z-[1]">
           <img src={heroImg} alt="" className="w-full h-full object-cover opacity-[0.1]" style={{ filter: 'saturate(0.4) brightness(1.2)' }} />
@@ -294,8 +293,7 @@ const Index = () => {
       </section>
 
       {/* ===== ABOUT / INTRO ===== */}
-      <section className="py-28 md:py-36 relative overflow-hidden">
-        <AuroraBackground variant="mesh" />
+      <section className="py-28 md:py-36 relative">
 
         <div className="container mx-auto px-6 md:px-12 max-w-6xl relative z-10">
           <div className="grid md:grid-cols-2 gap-14 md:gap-20 items-center">
@@ -372,8 +370,7 @@ const Index = () => {
       </section>
 
       {/* ===== HIGHLIGHTS CARDS ===== */}
-      <section className="py-28 md:py-36 relative overflow-hidden">
-        <AuroraBackground variant="soft" />
+      <section className="py-28 md:py-36 relative">
 
         <div className="container mx-auto px-6 md:px-12 max-w-6xl relative z-10">
           <motion.div
@@ -423,8 +420,7 @@ const Index = () => {
       </section>
 
       {/* ===== STATS ===== */}
-      <section className="py-28 md:py-36 relative overflow-hidden">
-        <AuroraBackground variant="mesh" />
+      <section className="py-28 md:py-36 relative">
 
         <div className="container mx-auto px-6 md:px-12 max-w-5xl relative z-10 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
@@ -496,8 +492,7 @@ const Index = () => {
       </section>
 
       {/* ===== EXPLORE NAVIGATION ===== */}
-      <section className="py-28 md:py-36 relative overflow-hidden">
-        <AuroraBackground variant="hero" />
+      <section className="py-28 md:py-36 relative">
 
         <div className="container mx-auto px-6 md:px-12 max-w-5xl relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
@@ -532,8 +527,7 @@ const Index = () => {
       </section>
 
       {/* ===== GALLERY PREVIEW ===== */}
-      <section className="py-28 md:py-36 relative overflow-hidden">
-        <AuroraBackground variant="mesh" />
+      <section className="py-28 md:py-36 relative">
 
         <div className="container mx-auto px-6 md:px-12 max-w-6xl relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
@@ -568,8 +562,7 @@ const Index = () => {
       </section>
 
       {/* ===== CTA / RSVP ===== */}
-      <section className="py-28 md:py-36 relative overflow-hidden">
-        <AuroraBackground variant="hero" />
+      <section className="py-28 md:py-36 relative">
 
         <div className="container mx-auto px-6 md:px-12 max-w-3xl relative z-10 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>

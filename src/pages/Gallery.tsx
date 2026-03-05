@@ -6,7 +6,6 @@ import ringsImg from '@/assets/rings.jpg';
 import venueImg from '@/assets/venue.jpg';
 import coupleImg from '@/assets/couple-lavender.jpg';
 import cakeImg from '@/assets/cake.jpg';
-import AuroraBackground from '@/components/AuroraBackground';
 
 const galleryImages = [
   { src: heroImg, aspect: 'aspect-[4/3]', alt: 'Wedding celebration' },
@@ -24,8 +23,7 @@ const Gallery = () => {
   const { t } = useLanguage();
 
   return (
-    <div className="min-h-screen pt-28 pb-20 relative overflow-hidden">
-      <AuroraBackground variant="soft" />
+    <div className="min-h-screen pt-28 pb-20 relative">
 
       <div className="container mx-auto px-6 md:px-12 max-w-5xl relative z-10">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-16">

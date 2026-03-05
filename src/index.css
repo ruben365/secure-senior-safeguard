@@ -24,7 +24,7 @@
     --secondary-foreground: 286 13% 27%;
 
     --muted: 290 6% 92%;
-    --muted-foreground: 280 6% 47%;   /* #7A6F7D */
+    --muted-foreground: 280 8% 38%;   /* darker for legibility */
 
     /* Soft Lavender accent — #D8CDE0 */
     --accent: 270 18% 84%;
@@ -97,7 +97,7 @@
     --secondary-foreground: 280 15% 88%;
 
     --muted: 280 18% 12%;
-    --muted-foreground: 280 12% 60%;
+    --muted-foreground: 280 15% 72%;  /* brighter for dark mode legibility */
 
     /* Glowing lilac accent */
     --accent: 270 25% 30%;
