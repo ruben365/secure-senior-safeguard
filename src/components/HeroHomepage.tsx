@@ -6,15 +6,15 @@ import { motion } from "framer-motion";
 import heroImage from "@/assets/hero-homepage-cinematic.jpg";
 
 const fadeUp = (delay: number) => ({
-  initial: { opacity: 0, y: 20 },
+  initial: { opacity: 0, y: 12 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+  transition: { duration: 0.3, delay: delay * 0.4, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
 });
 
 const scaleIn = (delay: number) => ({
-  initial: { opacity: 0, scale: 0.9 },
+  initial: { opacity: 0, scale: 0.95 },
   animate: { opacity: 1, scale: 1 },
-  transition: { duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+  transition: { duration: 0.3, delay: delay * 0.4, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
 });
 
 export const HeroHomepage = () => {

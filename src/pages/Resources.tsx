@@ -717,9 +717,8 @@ function Resources() {
                           alt={book.name}
                           width={240}
                           height={320}
-                          loading="lazy"
+                          loading="eager"
                           decoding="async"
-                          fetchPriority="low"
                           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                         />
                       </div>

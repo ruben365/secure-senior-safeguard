@@ -9,5 +9,5 @@ export const PageTransition = ({
   children,
   variant: _variant = "auto",
 }: PageTransitionProps) => {
-  return <div className="animate-fade-in">{children}</div>;
+  return <>{children}</>;
 };

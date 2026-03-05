@@ -53,8 +53,6 @@ export function OptimizedImage({
         onLoad={handleLoad}
         onError={handleError}
         className={cn(
-          "transition-opacity duration-300",
-          isLoaded ? "opacity-100" : "opacity-0",
           hasError && "bg-muted",
           objectFit === "cover" && "object-cover",
           objectFit === "contain" && "object-contain",
@@ -63,13 +61,6 @@ export function OptimizedImage({
         )}
         {...props}
       />
-      {/* Placeholder while loading */}
-      {!isLoaded && !hasError && (
-        <div
-          className={cn("absolute inset-0 bg-muted", className)}
-          style={{ width, height }}
-        />
-      )}
     </picture>
   );
 }
