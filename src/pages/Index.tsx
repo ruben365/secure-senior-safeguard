@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useMusic } from '@/components/MusicPlayer';
 import { motion } from 'framer-motion';
-import { ChevronDown, Heart, MapPin, Calendar, Clock, Utensils, Camera, Gift, Star, Sparkles, Play, Pause, Music, Users, Flower2, BookOpen, Cross } from 'lucide-react';
+import { ChevronDown, Heart, MapPin, Calendar, Clock, Utensils, Camera, Gift, Sparkles, Play, Pause, Music, Users, Flower2, BookOpen, Cross, Church, Gem } from 'lucide-react';
 
 import heroImg from '@/assets/hero-wedding.jpg';
 import flowersImg from '@/assets/flowers-lavender.jpg';
@@ -36,18 +36,17 @@ const Index = () => {
   }, []);
 
   const highlights = [
-    { icon: Calendar, titleKey: 'hero.tagline', descKey: 'hero.date', img: flowersImg },
-    { icon: MapPin, titleKey: 'details.ceremony', descKey: 'details.ceremony.location', img: cakeImg },
-    { icon: Utensils, titleKey: 'details.reception', descKey: 'details.reception.location', img: ringsImg },
+    { icon: Calendar, titleKey: 'hero.tagline', descKey: 'hero.date', img: flowersImg, color: 'text-pink-400' },
+    { icon: MapPin, titleKey: 'details.ceremony', descKey: 'details.ceremony.location', img: cakeImg, color: 'text-violet-400' },
+    { icon: Utensils, titleKey: 'details.reception', descKey: 'details.reception.location', img: ringsImg, color: 'text-amber-400' },
   ];
 
   const features = [
-    { icon: Heart, label: t('nav.story'), desc: t('story.subtitle'), to: '/story' },
-    { icon: Camera, label: t('nav.gallery'), desc: t('gallery.subtitle'), to: '/gallery' },
-    { icon: Gift, label: t('nav.registry'), desc: t('registry.subtitle'), to: '/registry' },
-    { icon: Clock, label: t('nav.rsvp'), desc: t('rsvp.subtitle'), to: '/rsvp' },
+    { icon: Heart, label: t('nav.story'), desc: t('story.subtitle'), to: '/story', color: 'text-rose-400', bg: 'from-rose-500/20 to-pink-500/10' },
+    { icon: Camera, label: t('nav.gallery'), desc: t('gallery.subtitle'), to: '/gallery', color: 'text-violet-400', bg: 'from-violet-500/20 to-purple-500/10' },
+    { icon: Gift, label: t('nav.registry'), desc: t('registry.subtitle'), to: '/registry', color: 'text-amber-400', bg: 'from-amber-500/20 to-orange-500/10' },
+    { icon: Clock, label: t('nav.rsvp'), desc: t('rsvp.subtitle'), to: '/rsvp', color: 'text-emerald-400', bg: 'from-emerald-500/20 to-teal-500/10' },
   ];
-
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -73,7 +72,7 @@ const Index = () => {
             <motion.div animate={{ y: [-4, 6, -4] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
               className="glass-card-strong rounded-full px-4 py-2 flex items-center gap-2"
             >
-              <Cross className="w-3.5 h-3.5 text-primary" />
+              <Cross className="w-3.5 h-3.5 text-rose-400 icon-glow" />
               <span className="font-sans-elegant text-[11px] font-bold text-foreground drop-shadow-sm">{t('badge.blessed')}</span>
             </motion.div>
           </motion.div>
@@ -88,7 +87,7 @@ const Index = () => {
             <motion.div animate={{ y: [5, -5, 5] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               className="glass-card-strong rounded-2xl px-4 py-2.5 flex items-center gap-2"
             >
-              <Users className="w-3.5 h-3.5 text-primary" />
+              <Users className="w-3.5 h-3.5 text-violet-400 icon-glow" />
               <span className="font-sans-elegant text-[11px] font-bold text-foreground drop-shadow-sm">150+ {t('index.guestsInvited')}</span>
             </motion.div>
           </motion.div>
@@ -146,7 +145,7 @@ const Index = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6, ease: 'easeOut' }}
-          className="w-full max-w-6xl mx-auto mt-8 md:mt-12 relative z-20 px-4"
+          className="w-full max-w-6xl mx-auto mt-6 md:mt-10 relative z-20 px-4"
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
 
@@ -159,7 +158,7 @@ const Index = () => {
                 className="glass-card-strong rounded-3xl p-5 w-52"
               >
                 <div className="flex items-center gap-2 mb-3">
-                  <BookOpen className="w-4 h-4 text-primary" />
+                  <BookOpen className="w-4 h-4 text-amber-400 icon-glow" />
                   <span className="font-sans-elegant text-[10px] font-bold text-foreground/70 tracking-wider uppercase">{t('index.scripture')}</span>
                 </div>
                 <p className="font-serif-display text-sm text-foreground italic leading-relaxed">
@@ -168,22 +167,22 @@ const Index = () => {
                 <p className="font-sans-elegant text-[10px] text-muted-foreground mt-2 font-semibold">1 Corinthians 13:4-7</p>
               </motion.div>
 
-              {/* Hymn player card */}
+              {/* Hymn player card — Amazing Grace */}
               <motion.div
                 animate={{ y: [-8, 10, -8] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                 className="glass-card-strong rounded-3xl p-4 flex items-center gap-3 cursor-pointer"
                 onClick={() => toggleTrack('amazing-grace')}
               >
-                <div className="w-12 h-12 rounded-xl overflow-hidden flex-shrink-0">
+                <div className="w-12 h-12 rounded-xl overflow-hidden flex-shrink-0 ring-2 ring-rose-400/20">
                   <img src={flowersImg} alt="" className="w-full h-full object-cover" />
                 </div>
                 <div>
                   <p className="font-sans-elegant text-sm font-bold text-foreground drop-shadow-sm">{t('hymn.amazing')}</p>
                   <p className="font-sans-elegant text-xs text-foreground/60 font-medium">Instrumental · 4:32</p>
                 </div>
-                <div className="w-8 h-8 rounded-full bg-background/80 dark:bg-background/40 flex items-center justify-center ml-1">
-                  {(currentTrack === 'amazing-grace' && isPlaying) ? <Pause className="w-3 h-3 text-foreground fill-foreground" /> : <Play className="w-3 h-3 text-foreground fill-foreground" />}
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center ml-1 transition-all duration-300 ${(currentTrack === 'amazing-grace' && isPlaying) ? 'gradient-primary shadow-glow' : 'bg-background/80 dark:bg-background/40'}`}>
+                  {(currentTrack === 'amazing-grace' && isPlaying) ? <Pause className="w-3 h-3 text-primary-foreground fill-primary-foreground" /> : <Play className="w-3 h-3 text-foreground fill-foreground" />}
                 </div>
               </motion.div>
             </div>
@@ -220,7 +219,7 @@ const Index = () => {
                 </div>
 
                 <div className="flex gap-2">
-                  <button onClick={() => toggleTrack('oceans-hillsong')} className="w-10 h-10 rounded-full bg-background/20 backdrop-blur-sm border border-background/30 flex items-center justify-center hover:bg-background/30 transition-colors">
+                  <button onClick={() => toggleTrack('oceans-hillsong')} className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${(currentTrack === 'oceans-hillsong' && isPlaying) ? 'bg-white/30 shadow-glow' : 'bg-background/20 backdrop-blur-sm border border-background/30 hover:bg-background/30'}`}>
                     {(currentTrack === 'oceans-hillsong' && isPlaying) ? <Pause className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current" />}
                   </button>
                   <div className="w-10 h-10 rounded-full bg-background/20 backdrop-blur-sm border border-background/30 flex items-center justify-center">
@@ -240,26 +239,26 @@ const Index = () => {
                 transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
                 className="glass-card-strong rounded-full px-5 py-3 flex items-center gap-2"
               >
-                <Heart className="w-4 h-4 text-dusty-rose fill-dusty-rose" />
+                <Heart className="w-4 h-4 text-rose-400 fill-rose-400 icon-glow" />
                 <span className="font-sans-elegant text-sm font-bold text-foreground drop-shadow-sm">{t('index.foreverAlways')}</span>
               </motion.div>
 
-              {/* Hymn card 2 */}
+              {/* Hymn card — I Have Been Blessed */}
               <motion.div
                 animate={{ y: [-6, 10, -6] }}
                 transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
                 className="glass-card-strong rounded-3xl p-4 flex items-center gap-3 cursor-pointer"
                 onClick={() => toggleTrack('blessed-larson')}
               >
-                <div className="w-12 h-12 rounded-xl overflow-hidden flex-shrink-0">
+                <div className="w-12 h-12 rounded-xl overflow-hidden flex-shrink-0 ring-2 ring-violet-400/20">
                   <img src={ringsImg} alt="" className="w-full h-full object-cover" />
                 </div>
                 <div>
                   <p className="font-sans-elegant text-sm font-bold text-foreground drop-shadow-sm">I Have Been Blessed</p>
                   <p className="font-sans-elegant text-xs text-foreground/60 font-medium">Joseph Larson</p>
                 </div>
-                <div className="w-8 h-8 rounded-full bg-background/80 dark:bg-background/40 flex items-center justify-center ml-1">
-                  {(currentTrack === 'blessed-larson' && isPlaying) ? <Pause className="w-3 h-3 text-foreground fill-foreground" /> : <Play className="w-3 h-3 text-foreground fill-foreground" />}
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center ml-1 transition-all duration-300 ${(currentTrack === 'blessed-larson' && isPlaying) ? 'gradient-primary shadow-glow' : 'bg-background/80 dark:bg-background/40'}`}>
+                  {(currentTrack === 'blessed-larson' && isPlaying) ? <Pause className="w-3 h-3 text-primary-foreground fill-primary-foreground" /> : <Play className="w-3 h-3 text-foreground fill-foreground" />}
                 </div>
               </motion.div>
 
@@ -269,9 +268,11 @@ const Index = () => {
                 transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
                 className="glass-card-strong rounded-3xl p-4 w-48"
               >
-                <p className="font-sans-elegant text-xs text-foreground/60 font-medium mb-1">{t('hero.date')}</p>
+                <div className="flex items-center gap-1.5 mb-1.5">
+                  <Calendar className="w-3 h-3 text-emerald-400 icon-glow" />
+                  <p className="font-sans-elegant text-xs text-foreground/60 font-medium">{t('hero.date')}</p>
+                </div>
                 <p className="font-sans-elegant text-sm font-bold text-foreground drop-shadow-sm">{t('index.beginJourney')}</p>
-                <p className="font-sans-elegant text-xs text-foreground/60 font-medium mt-1">{t('index.celebrationDesc')}</p>
               </motion.div>
             </div>
           </div>
@@ -289,11 +290,14 @@ const Index = () => {
       </section>
 
       {/* ===== SCRIPTURE SECTION ===== */}
-      <section className="py-16 md:py-20 relative">
+      <section className="py-14 md:py-18 relative">
         <div className="container mx-auto px-6 md:px-12 max-w-3xl relative z-10 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <div className="glass-card-strong rounded-3xl p-10 md:p-14">
-              <BookOpen className="w-8 h-8 text-primary mx-auto mb-6" />
+            <div className="glass-card-strong rounded-3xl p-10 md:p-14 relative overflow-hidden">
+              {/* Abstract decoration */}
+              <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-gradient-to-br from-rose-400/10 to-violet-400/10 blur-2xl pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full bg-gradient-to-tr from-amber-400/10 to-pink-400/10 blur-2xl pointer-events-none" />
+              <BookOpen className="w-8 h-8 text-amber-400 icon-glow mx-auto mb-6" />
               <p className="font-serif-display text-xl md:text-2xl text-foreground italic leading-relaxed mb-4">
                 "{t('verse.genesis')}"
               </p>
@@ -304,7 +308,7 @@ const Index = () => {
       </section>
 
       {/* ===== ABOUT / INTRO ===== */}
-      <section className="py-16 md:py-24 relative">
+      <section className="py-14 md:py-20 relative">
         <div className="container mx-auto px-6 md:px-12 max-w-6xl relative z-10">
           <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
             <motion.div
@@ -343,7 +347,7 @@ const Index = () => {
                   className="absolute -top-4 -left-4 glass-card rounded-3xl px-4 py-2.5 hidden md:block"
                 >
                   <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-primary" />
+                    <Sparkles className="w-4 h-4 text-amber-400 icon-glow" />
                     <span className="font-sans-elegant text-xs font-semibold text-foreground">{t('index.ourJourney')}</span>
                   </div>
                 </motion.div>
@@ -362,8 +366,9 @@ const Index = () => {
               <h2 className="font-serif-display text-3xl md:text-5xl text-foreground mb-6 font-semibold">
                 {t('story.title')}
               </h2>
-              <div className="glass-card rounded-3xl p-6 mb-6">
-                <p className="font-sans-elegant text-base text-muted-foreground leading-relaxed">
+              <div className="glass-card rounded-3xl p-6 mb-6 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-20 h-20 rounded-full bg-gradient-to-br from-rose-400/8 to-violet-400/5 blur-xl pointer-events-none" />
+                <p className="font-sans-elegant text-base text-muted-foreground leading-relaxed relative z-10">
                   <span className="text-foreground font-semibold">{t('story.event1.description').split('.')[0]}.</span>{' '}
                   {t('story.event1.description').split('.').slice(1).join('.')}
                 </p>
@@ -379,44 +384,110 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ===== HYMN PLAYLIST ===== */}
-      <section className="py-16 md:py-20 relative">
-        <div className="container mx-auto px-6 md:px-12 max-w-2xl relative z-10">
+      {/* ===== FAITH & GRACE WIDGETS ===== */}
+      <section className="py-14 md:py-18 relative">
+        <div className="container mx-auto px-6 md:px-12 max-w-5xl relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
             <div className="inline-block px-5 py-2 rounded-full glass-card-strong mb-5">
-              <p className="font-sans-elegant text-xs tracking-[0.25em] uppercase text-muted-foreground font-medium">{t('index.worshipMusic')}</p>
+              <p className="font-sans-elegant text-xs tracking-[0.25em] uppercase text-muted-foreground font-medium">{t('badge.faith')}</p>
             </div>
-            <h2 className="font-serif-display text-3xl md:text-4xl text-foreground font-semibold mb-3">{t('index.hymns')}</h2>
-            <p className="font-sans-elegant text-sm text-muted-foreground">{t('index.hymns.desc')}</p>
+            <h2 className="font-serif-display text-3xl md:text-4xl text-foreground font-semibold mb-3">{t('index.foundedOnFaith')}</h2>
           </motion.div>
 
-          <div className="space-y-3">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Photo widget with verse overlay */}
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              className="glass-card-strong rounded-3xl overflow-hidden md:row-span-2 card-hover"
+            >
+              <div className="relative h-full min-h-[300px]">
+                <img src={flowersImg} alt="" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <BookOpen className="w-5 h-5 text-amber-300 icon-glow mb-3" />
+                  <p className="font-serif-display text-base text-white italic leading-relaxed mb-2">
+                    "{t('verse.proverbs')}"
+                  </p>
+                  <p className="font-sans-elegant text-xs text-white/70 font-semibold">Proverbs 3:5-6</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Promise widget */}
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
+              className="glass-card-strong rounded-3xl p-6 card-hover relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-24 h-24 rounded-full bg-gradient-to-br from-rose-400/10 to-transparent blur-xl pointer-events-none" />
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-rose-500/20 to-pink-500/10 flex items-center justify-center mb-4">
+                <Church className="w-6 h-6 text-rose-400 icon-glow" />
+              </div>
+              <h3 className="font-serif-display text-lg text-foreground font-semibold mb-2">{t('index.ceremony')}</h3>
+              <p className="font-sans-elegant text-sm text-muted-foreground leading-relaxed">{t('index.ceremony.desc')}</p>
+            </motion.div>
+
+            {/* Blessing widget */}
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 }}
+              className="glass-card-strong rounded-3xl p-6 card-hover relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-24 h-24 rounded-full bg-gradient-to-br from-violet-400/10 to-transparent blur-xl pointer-events-none" />
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500/20 to-purple-500/10 flex items-center justify-center mb-4">
+                <Cross className="w-6 h-6 text-violet-400 icon-glow" />
+              </div>
+              <h3 className="font-serif-display text-lg text-foreground font-semibold mb-2">{t('index.blessing')}</h3>
+              <p className="font-sans-elegant text-sm text-muted-foreground leading-relaxed">{t('index.blessing.desc')}</p>
+            </motion.div>
+
+            {/* Vow widget */}
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
+              className="glass-card-strong rounded-3xl p-6 card-hover relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-24 h-24 rounded-full bg-gradient-to-br from-amber-400/10 to-transparent blur-xl pointer-events-none" />
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500/20 to-orange-500/10 flex items-center justify-center mb-4">
+                <Gem className="w-6 h-6 text-amber-400 icon-glow" />
+              </div>
+              <h3 className="font-serif-display text-lg text-foreground font-semibold mb-2">{t('index.vows')}</h3>
+              <p className="font-sans-elegant text-sm text-muted-foreground leading-relaxed">{t('index.vows.desc')}</p>
+            </motion.div>
+
+            {/* Fellowship widget */}
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.25 }}
+              className="glass-card-strong rounded-3xl p-6 card-hover relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-24 h-24 rounded-full bg-gradient-to-br from-emerald-400/10 to-transparent blur-xl pointer-events-none" />
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/10 flex items-center justify-center mb-4">
+                <Users className="w-6 h-6 text-emerald-400 icon-glow" />
+              </div>
+              <h3 className="font-serif-display text-lg text-foreground font-semibold mb-2">{t('index.fellowship')}</h3>
+              <p className="font-sans-elegant text-sm text-muted-foreground leading-relaxed">{t('index.fellowship.desc')}</p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== PHOTO + VERSE STRIP ===== */}
+      <section className="py-10 md:py-14 relative">
+        <div className="container mx-auto px-6 md:px-12 max-w-6xl relative z-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
-              { id: 'amazing-grace', title: t('hymn.amazing'), artist: 'Instrumental', duration: '4:32', img: flowersImg },
-              { id: 'blessed-larson', title: t('hymn.blessed'), artist: 'Joseph Larson', duration: '3:15', img: ringsImg },
-              { id: 'oceans-hillsong', title: 'Oceans', artist: 'Hillsong', duration: '5:01', img: cakeImg },
-              { id: 'how-great', title: t('hymn.howgreat'), artist: t('hymn.traditional'), duration: '3:48', img: coupleImg },
-              { id: 'great-faithfulness', title: t('hymn.greatis'), artist: t('hymn.traditional'), duration: '4:15', img: heroImg },
-            ].map((hymn, i) => (
+              { img: heroImg, overlay: true },
+              { img: cakeImg, overlay: false },
+              { img: ringsImg, overlay: false },
+              { img: coupleImg, overlay: true },
+            ].map((item, i) => (
               <motion.div
-                key={hymn.id}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                key={i}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                onClick={() => toggleTrack(hymn.id)}
-                className="glass-card-strong rounded-2xl p-4 flex items-center gap-4 card-hover cursor-pointer group"
+                className="glass-card-strong rounded-3xl p-1.5 overflow-hidden card-hover"
               >
-                <div className="w-12 h-12 rounded-xl overflow-hidden flex-shrink-0">
-                  <img src={hymn.img} alt="" className="w-full h-full object-cover" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-sans-elegant text-sm font-bold text-foreground truncate">{hymn.title}</p>
-                  <p className="font-sans-elegant text-xs text-muted-foreground">{hymn.artist}</p>
-                </div>
-                <span className="font-sans-elegant text-xs text-muted-foreground mr-2">{hymn.duration}</span>
-                <div className="w-9 h-9 rounded-full glass-card flex items-center justify-center group-hover:scale-110 transition-transform">
-                  {(currentTrack === hymn.id && isPlaying) ? <Pause className="w-3.5 h-3.5 text-foreground fill-foreground" /> : <Play className="w-3.5 h-3.5 text-foreground fill-foreground" />}
+                <div className="relative rounded-[20px] overflow-hidden aspect-square">
+                  <img src={item.img} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                  {item.overlay && (
+                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent flex items-end p-4">
+                      <Heart className="w-4 h-4 text-rose-300 fill-rose-300 icon-glow" />
+                    </div>
+                  )}
                 </div>
               </motion.div>
             ))}
@@ -425,13 +496,13 @@ const Index = () => {
       </section>
 
       {/* ===== HIGHLIGHTS CARDS ===== */}
-      <section className="py-16 md:py-24 relative">
+      <section className="py-14 md:py-20 relative">
         <div className="container mx-auto px-6 md:px-12 max-w-6xl relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-10"
           >
             <div className="inline-block px-5 py-2 rounded-full glass-card-strong mb-5">
               <p className="font-sans-elegant text-xs tracking-[0.25em] uppercase text-muted-foreground font-medium">{t('nav.details')}</p>
@@ -440,7 +511,7 @@ const Index = () => {
             <p className="font-sans-elegant text-lg text-muted-foreground max-w-lg mx-auto">{t('details.subtitle')}</p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-5">
             {highlights.map((item, i) => (
               <motion.div
                 key={i}
@@ -451,19 +522,19 @@ const Index = () => {
                 className="group"
               >
                 <div className="glass-card-strong rounded-3xl overflow-hidden card-hover">
-                  <div className="relative h-52 overflow-hidden">
+                  <div className="relative h-48 overflow-hidden">
                     <img src={item.img} alt={t(item.titleKey)} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                     <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
                     <div className="absolute bottom-4 left-4 right-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center">
-                          <item.icon className="w-4 h-4 text-primary-foreground" />
+                        <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center shadow-soft">
+                          <item.icon className={`w-4 h-4 text-primary-foreground`} />
                         </div>
                         <p className="font-sans-elegant text-sm font-semibold text-[hsl(var(--text-light))]">{t(item.titleKey)}</p>
                       </div>
                     </div>
                   </div>
-                  <div className="p-6">
+                  <div className="p-5">
                     <p className="font-sans-elegant text-sm text-muted-foreground leading-relaxed">{t(item.descKey)}</p>
                   </div>
                 </div>
@@ -474,14 +545,14 @@ const Index = () => {
       </section>
 
       {/* ===== STATS ===== */}
-      <section className="py-16 md:py-24 relative">
+      <section className="py-14 md:py-20 relative">
         <div className="container mx-auto px-6 md:px-12 max-w-5xl relative z-10 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <div className="flex flex-wrap gap-3 justify-center mb-8">
               {[
-                { icon: Cross, text: t('badge.faith') },
-                { icon: Flower2, text: t('badge.garden') },
-                { icon: BookOpen, text: t('badge.covenant') },
+                { icon: Cross, text: t('badge.faith'), color: 'text-rose-400' },
+                { icon: Flower2, text: t('badge.garden'), color: 'text-emerald-400' },
+                { icon: BookOpen, text: t('badge.covenant'), color: 'text-amber-400' },
               ].map((badge, i) => (
                 <motion.div
                   key={i}
@@ -491,7 +562,7 @@ const Index = () => {
                   transition={{ delay: i * 0.1 }}
                   className="glass-card-strong rounded-full px-4 py-2 flex items-center gap-2"
                 >
-                  <badge.icon className="w-3.5 h-3.5 text-primary" />
+                  <badge.icon className={`w-3.5 h-3.5 ${badge.color} icon-glow`} />
                   <span className="font-sans-elegant text-[11px] font-semibold text-foreground">{badge.text}</span>
                 </motion.div>
               ))}
@@ -501,17 +572,17 @@ const Index = () => {
             <h2 className="font-serif-display text-3xl md:text-5xl text-foreground font-semibold mb-4">
               {t('hero.tagline')}
             </h2>
-            <p className="font-sans-elegant text-lg text-muted-foreground mb-12 max-w-md mx-auto">
+            <p className="font-sans-elegant text-lg text-muted-foreground mb-10 max-w-md mx-auto">
               {t('index.celebrationDesc')}
             </p>
           </motion.div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { value: countdown.days, label: t('countdown.days'), icon: '📅' },
-              { value: '150+', label: t('index.guestsInvited'), icon: '👥' },
-              { value: '5', label: t('index.courseDinner'), icon: '🍽️' },
-              { value: '∞', label: t('index.love'), icon: '✝️' },
+              { value: countdown.days, label: t('countdown.days'), icon: Calendar, color: 'text-pink-400' },
+              { value: '150+', label: t('index.guestsInvited'), icon: Users, color: 'text-violet-400' },
+              { value: '5', label: t('index.courseDinner'), icon: Utensils, color: 'text-amber-400' },
+              { value: '∞', label: t('index.love'), icon: Cross, color: 'text-rose-400' },
             ].map((stat, i) => (
               <motion.div
                 key={i}
@@ -519,9 +590,10 @@ const Index = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="glass-card-strong rounded-3xl p-6 card-hover group"
+                className="glass-card-strong rounded-3xl p-6 card-hover group relative overflow-hidden"
               >
-                <span className="text-2xl mb-2 block group-hover:scale-110 transition-transform duration-300">{stat.icon}</span>
+                <div className="absolute top-0 right-0 w-16 h-16 rounded-full bg-gradient-to-br from-current/5 to-transparent blur-xl pointer-events-none" />
+                <stat.icon className={`w-6 h-6 ${stat.color} icon-glow mb-3 mx-auto group-hover:scale-110 transition-transform duration-300`} />
                 <span className="font-serif-display text-3xl md:text-4xl font-semibold gradient-text block mb-2">
                   {typeof stat.value === 'number' ? String(stat.value).padStart(2, '0') : stat.value}
                 </span>
@@ -544,11 +616,13 @@ const Index = () => {
       </section>
 
       {/* ===== PRAYER / VERSE ===== */}
-      <section className="py-16 md:py-20 relative">
+      <section className="py-12 md:py-16 relative">
         <div className="container mx-auto px-6 md:px-12 max-w-3xl relative z-10 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <div className="glass-card-strong rounded-3xl p-10 md:p-14">
-              <Cross className="w-8 h-8 text-primary mx-auto mb-6" />
+            <div className="glass-card-strong rounded-3xl p-10 md:p-14 relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-40 h-40 rounded-full bg-gradient-to-br from-violet-400/8 to-transparent blur-2xl pointer-events-none" />
+              <div className="absolute bottom-0 right-0 w-32 h-32 rounded-full bg-gradient-to-tl from-rose-400/8 to-transparent blur-2xl pointer-events-none" />
+              <Cross className="w-8 h-8 text-rose-400 icon-glow mx-auto mb-6" />
               <p className="font-serif-display text-xl md:text-2xl text-foreground italic leading-relaxed mb-4">
                 "{t('verse.ecclesiastes')}"
               </p>
@@ -559,9 +633,9 @@ const Index = () => {
       </section>
 
       {/* ===== EXPLORE NAVIGATION ===== */}
-      <section className="py-16 md:py-24 relative">
+      <section className="py-14 md:py-20 relative">
         <div className="container mx-auto px-6 md:px-12 max-w-5xl relative z-10">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
             <div className="inline-block px-5 py-2 rounded-full glass-card-strong mb-5">
               <p className="font-sans-elegant text-xs tracking-[0.25em] uppercase text-muted-foreground font-medium">{t('index.explore')}</p>
             </div>
@@ -578,10 +652,11 @@ const Index = () => {
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
                 <Link
                   to={feat.to}
-                  className="glass-card-strong rounded-3xl p-7 flex flex-col items-center text-center card-hover group block h-full"
+                  className="glass-card-strong rounded-3xl p-7 flex flex-col items-center text-center card-hover group block h-full relative overflow-hidden"
                 >
-                  <div className="w-14 h-14 rounded-3xl gradient-primary flex items-center justify-center mb-4 group-hover:shadow-glow group-hover:scale-110 transition-all duration-500 shadow-soft">
-                    <feat.icon className="w-6 h-6 text-primary-foreground" />
+                  <div className={`absolute top-0 right-0 w-20 h-20 rounded-full bg-gradient-to-br ${feat.bg} blur-xl pointer-events-none`} />
+                  <div className={`w-14 h-14 rounded-3xl bg-gradient-to-br ${feat.bg} flex items-center justify-center mb-4 group-hover:shadow-glow group-hover:scale-110 transition-all duration-500`}>
+                    <feat.icon className={`w-6 h-6 ${feat.color} icon-glow`} />
                   </div>
                   <h3 className="font-serif-display text-lg font-semibold text-foreground mb-2">{feat.label}</h3>
                   <p className="font-sans-elegant text-sm text-muted-foreground leading-relaxed">{feat.desc}</p>
@@ -593,7 +668,7 @@ const Index = () => {
       </section>
 
       {/* ===== GALLERY PREVIEW ===== */}
-      <section className="py-16 md:py-24 relative">
+      <section className="py-14 md:py-20 relative">
         <div className="container mx-auto px-6 md:px-12 max-w-6xl relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
             <div className="inline-block px-5 py-2 rounded-full glass-card-strong mb-5">
@@ -618,7 +693,7 @@ const Index = () => {
             ))}
           </div>
 
-          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mt-10">
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mt-8">
             <Link to="/gallery" className="btn-primary">
               {t('nav.gallery')} →
             </Link>
@@ -627,7 +702,7 @@ const Index = () => {
       </section>
 
       {/* ===== CTA / RSVP ===== */}
-      <section className="py-16 md:py-24 relative">
+      <section className="py-14 md:py-20 relative">
         <div className="container mx-auto px-6 md:px-12 max-w-3xl relative z-10 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <div className="glass-card-strong rounded-full w-28 h-28 mx-auto mb-8 flex items-center justify-center overflow-hidden ring-4 ring-primary/15">
