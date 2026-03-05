@@ -687,100 +687,104 @@ function Resources() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-3" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 2000px' }}>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 2000px' }}>
             {staticBooks.map((book) =>
-              <Card key={book.id} className="group p-3 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-border/50 hover:border-primary/30 relative overflow-hidden bg-card/90 backdrop-blur-sm h-full flex flex-col">
-                  {/* eBook Badge - Top Left */}
-                  <Badge className="absolute top-2 left-2 text-[9px] px-1.5 py-0.5 bg-primary/90 text-primary-foreground z-10 shadow-sm">
-                    📘 eBook
-                  </Badge>
+              <div key={book.id} className="group relative">
+                <div className="h-full rounded-2xl p-[1px] bg-gradient-to-b from-border/50 to-border/20 hover:from-primary/30 hover:to-primary/10 transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1">
+                  <Card className="h-full rounded-[calc(1rem-1px)] p-3 border-0 bg-card/95 backdrop-blur-xl flex flex-col relative overflow-hidden">
+                    {/* Gradient accent bar */}
+                    <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/30 to-accent/20" />
 
-                  {/* Tag Badge - Top Right */}
-                  <Badge className="absolute top-2 right-2 text-[9px] px-1.5 py-0.5 bg-gradient-to-r from-primary to-accent text-primary-foreground z-10">
-                    {book.tag}
-                  </Badge>
+                    {/* eBook Badge - Top Left */}
+                    <Badge className="absolute top-2 left-2 text-[9px] px-1.5 py-0.5 bg-primary/90 text-primary-foreground z-10 shadow-sm">
+                      📘 eBook
+                    </Badge>
 
-                  {/* Book Cover Image - Clickable */}
-                  <button
-                  onClick={() => handleBookClick(book)}
-                  className="relative mb-3 rounded-lg overflow-hidden bg-secondary/30 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 hover:ring-2 hover:ring-primary/50"
-                  aria-label={`View ${book.name} details`}>
+                    {/* Tag Badge - Top Right */}
+                    <Badge className="absolute top-2 right-2 text-[9px] px-1.5 py-0.5 bg-gradient-to-r from-primary to-accent text-white z-10 shadow-sm">
+                      {book.tag}
+                    </Badge>
 
-                    <div className="aspect-[3/4]">
-                      <img
-                      src={book.image}
-                      alt={book.name}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    {/* Book Cover Image - Optimized */}
+                    <button
+                      onClick={() => handleBookClick(book)}
+                      className="relative mb-3 rounded-xl overflow-hidden bg-muted/30 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-1"
+                      aria-label={`View ${book.name} details`}
+                    >
+                      <div className="aspect-[3/4]">
+                        <img
+                          src={book.image}
+                          alt={book.name}
+                          width={240}
+                          height={320}
+                          loading="lazy"
+                          decoding="async"
+                          fetchPriority="low"
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                        />
+                      </div>
+                      {/* Hover overlay */}
+                      <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-200 flex items-center justify-center">
+                        <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-card/90 backdrop-blur-sm text-foreground text-xs px-3 py-1.5 rounded-full font-semibold shadow-lg border border-border/30">
+                          👁️ View Details
+                        </span>
+                      </div>
+                    </button>
 
+                    {/* Content */}
+                    <h3 className="text-xs md:text-sm font-bold mb-0.5 text-foreground group-hover:text-primary transition-colors line-clamp-2 leading-tight">
+                      {book.name}
+                    </h3>
+
+                    <p className="text-[8px] text-muted-foreground mb-1 truncate">
+                      {book.author}
+                    </p>
+
+                    <p className="text-[10px] text-muted-foreground mb-2 line-clamp-2 flex-1">
+                      {book.description}
+                    </p>
+
+                    {/* Rating */}
+                    <div className="flex items-center gap-1 mb-2">
+                      {[...Array(5)].map((_, i) =>
+                        <Star key={i} className="w-2.5 h-2.5 fill-chart-4 text-chart-4" />
+                      )}
+                      <span className="text-[9px] text-muted-foreground ml-1">5.0</span>
                     </div>
-                    {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-300 flex items-center justify-center">
-                      <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-background/90 text-foreground text-xs px-3 py-1.5 rounded-full font-medium shadow-lg">
-                        👁️ View Details
-                      </span>
+
+                    {/* Price and Actions */}
+                    <div className="mt-auto pt-2 border-t border-border/30">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-base md:text-lg font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                          ${book.price}
+                        </span>
+                        <span className="text-[8px] text-emerald-600 font-semibold">
+                          🎖️ Vets -10%
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-2 gap-1.5">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => handleAddToCart(book)}
+                          className="text-[10px] h-7 px-2 rounded-lg"
+                        >
+                          <ShoppingCart className="w-3 h-3 mr-1" />
+                          Cart
+                        </Button>
+                        <Button
+                          size="sm"
+                          onClick={() => handleBuyNow(book)}
+                          className="text-[10px] h-7 px-2 rounded-lg bg-gradient-to-r from-primary to-accent text-white hover:opacity-90"
+                        >
+                          <Zap className="w-3 h-3 mr-1" />
+                          Buy
+                        </Button>
+                      </div>
                     </div>
-                  </button>
-
-                  {/* Content */}
-                  <h3 className="text-xs md:text-sm font-bold mb-0.5 text-foreground group-hover:text-primary transition-colors line-clamp-2 leading-tight">
-                    {book.name}
-                  </h3>
-
-                  {/* Author */}
-                  <p className="text-[8px] text-muted-foreground mb-1 truncate">
-                    {book.author}
-                  </p>
-
-                  <p className="text-[10px] text-muted-foreground mb-2 line-clamp-2 flex-1">
-                    {book.description}
-                  </p>
-
-                  {/* Rating */}
-                  <div className="flex items-center gap-1 mb-2">
-                    {[...Array(5)].map((_, i) =>
-                  <Star
-                    key={i}
-                    className="w-2.5 h-2.5 fill-chart-4 text-chart-4" />
-
-                  )}
-                    <span className="text-[9px] text-muted-foreground ml-1">
-                      5.0
-                    </span>
-                  </div>
-
-                  {/* Price and Actions */}
-                  <div className="mt-auto pt-2 border-t border-border/50">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-base md:text-lg font-bold text-primary">
-                        ${book.price}
-                      </span>
-                      <span className="text-[8px] text-success font-medium">
-                        🎖️ Vets 10% OFF
-                      </span>
-                    </div>
-                    <div className="grid grid-cols-2 gap-1.5">
-                      <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleAddToCart(book)}
-                      className="text-[10px] h-7 px-2">
-
-                        <ShoppingCart className="w-3 h-3 mr-1" />
-                        Cart
-                      </Button>
-                      <Button
-                      size="sm"
-                      onClick={() => handleBuyNow(book)}
-                      className="text-[10px] h-7 px-2">
-
-                        <Zap className="w-3 h-3 mr-1" />
-                        Buy
-                      </Button>
-                    </div>
-                  </div>
-                </Card>
+                  </Card>
+                </div>
+              </div>
             )}
           </div>
 
