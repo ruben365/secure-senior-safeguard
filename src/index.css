@@ -48,6 +48,11 @@
     --cream-dark: 290 6% 92%;
     --dusty-rose: 330 40% 89%;        /* #F3D8E2 */
     --pale-lilac: 270 18% 84%;        /* #D8CDE0 */
+
+    /* Gold accent tokens */
+    --gold: 43 72% 52%;               /* #D4A524 — rich warm gold */
+    --gold-light: 43 65% 68%;         /* Softer gold for light mode borders */
+    --gold-muted: 43 40% 72%;         /* Muted gold for subtle accents */
     --peach-gradient: 330 40% 89%;
     --pink-gradient: 270 18% 90%;
     --text-light: 300 5% 97.5%;
@@ -118,6 +123,11 @@
     --cream-dark: 260 14% 11%;
     --dusty-rose: 340 22% 52%;
     --pale-lilac: 265 16% 32%;
+
+    /* Gold accent tokens — brighter for dark mode glow */
+    --gold: 45 85% 58%;               /* Brighter gold for dark mode */
+    --gold-light: 45 80% 65%;
+    --gold-muted: 43 50% 50%;
     --peach-gradient: 320 10% 12%;
     --pink-gradient: 265 10% 12%;
     --text-light: 270 10% 90%;
@@ -204,15 +214,14 @@
     background: rgba(255, 255, 255, 0.45);
     backdrop-filter: blur(28px) saturate(180%);
     -webkit-backdrop-filter: blur(28px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-top: 1px solid rgba(255, 255, 255, 0.7);
-    border-left: 1px solid rgba(255, 255, 255, 0.6);
+    border: 1px solid hsl(var(--gold-muted) / 0.35);
+    border-top: 1px solid hsl(var(--gold-light) / 0.45);
+    border-left: 1px solid hsl(var(--gold-light) / 0.4);
     border-radius: 24px;
     box-shadow:
       inset 0 1px 1px rgba(255, 255, 255, 0.5),
-      0 20px 40px rgba(139, 107, 138, 0.15),
-      0 10px 20px rgba(212, 165, 165, 0.1),
-      0 40px 80px rgba(184, 169, 201, 0.08);
+      0 20px 40px rgba(139, 107, 138, 0.12),
+      0 10px 20px rgba(212, 165, 165, 0.08);
     will-change: transform;
     transform: translateZ(0);
   }
@@ -221,29 +230,28 @@
     background: rgba(28, 24, 40, 0.72);
     backdrop-filter: blur(28px) saturate(160%);
     -webkit-backdrop-filter: blur(28px) saturate(160%);
-    border: 1px solid rgba(160, 130, 200, 0.16);
-    border-top: 1px solid rgba(180, 150, 210, 0.22);
-    border-left: 1px solid rgba(180, 150, 210, 0.18);
+    border: 1px solid hsl(var(--gold) / 0.25);
+    border-top: 1px solid hsl(var(--gold) / 0.35);
+    border-left: 1px solid hsl(var(--gold) / 0.3);
     box-shadow:
-      inset 0 1px 1px rgba(255, 255, 255, 0.06),
+      inset 0 1px 1px rgba(255, 215, 0, 0.06),
       0 20px 40px rgba(10, 8, 18, 0.5),
-      0 0 50px rgba(140, 110, 180, 0.08),
-      0 0 100px rgba(120, 80, 160, 0.04);
+      0 0 30px hsl(var(--gold) / 0.08),
+      0 0 60px hsl(var(--gold) / 0.04);
   }
 
   .glass-card-strong {
     background: rgba(255, 255, 255, 0.55);
     backdrop-filter: blur(32px) saturate(180%);
     -webkit-backdrop-filter: blur(32px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.55);
-    border-top: 1px solid rgba(255, 255, 255, 0.75);
-    border-left: 1px solid rgba(255, 255, 255, 0.65);
+    border: 1px solid hsl(var(--gold-muted) / 0.4);
+    border-top: 1px solid hsl(var(--gold-light) / 0.5);
+    border-left: 1px solid hsl(var(--gold-light) / 0.45);
     border-radius: 24px;
     box-shadow:
       inset 0 1px 2px rgba(255, 255, 255, 0.5),
-      0 20px 40px rgba(139, 107, 138, 0.15),
-      0 10px 20px rgba(212, 165, 165, 0.1),
-      0 40px 80px rgba(184, 169, 201, 0.08);
+      0 20px 40px rgba(139, 107, 138, 0.12),
+      0 10px 20px rgba(212, 165, 165, 0.08);
     will-change: transform;
     transform: translateZ(0);
   }
@@ -252,27 +260,27 @@
     background: rgba(28, 24, 40, 0.78);
     backdrop-filter: blur(32px) saturate(160%);
     -webkit-backdrop-filter: blur(32px) saturate(160%);
-    border: 1px solid rgba(160, 130, 200, 0.2);
-    border-top: 1px solid rgba(180, 150, 210, 0.28);
-    border-left: 1px solid rgba(180, 150, 210, 0.22);
+    border: 1px solid hsl(var(--gold) / 0.3);
+    border-top: 1px solid hsl(var(--gold) / 0.4);
+    border-left: 1px solid hsl(var(--gold) / 0.35);
     box-shadow:
-      inset 0 1px 2px rgba(255, 255, 255, 0.07),
+      inset 0 1px 2px rgba(255, 215, 0, 0.07),
       0 20px 40px rgba(10, 8, 18, 0.55),
-      0 0 60px rgba(140, 110, 180, 0.1),
-      0 0 120px rgba(120, 80, 160, 0.05);
+      0 0 40px hsl(var(--gold) / 0.1),
+      0 0 80px hsl(var(--gold) / 0.05);
   }
 
   .glass-card-dark {
     background: linear-gradient(135deg, rgba(107, 78, 113, 0.95) 0%, rgba(139, 107, 138, 0.9) 100%);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid hsl(var(--gold-muted) / 0.3);
     border-radius: 24px;
     color: hsl(var(--text-light));
     box-shadow:
       0 25px 50px rgba(107, 78, 113, 0.3),
       0 10px 20px rgba(0, 0, 0, 0.1),
-      inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      inset 0 1px 1px rgba(255, 215, 0, 0.08);
   }
 
   .glass-button {
@@ -324,11 +332,11 @@
   }
 
   .dark .gradient-text {
-    background: linear-gradient(135deg, hsl(275 28% 75%), hsl(310 24% 68%));
+    background: linear-gradient(135deg, hsl(45 80% 65%), hsl(40 70% 55%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 0 8px rgba(180, 140, 200, 0.3));
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.25));
   }
 
   .gradient-mesh {
@@ -411,7 +419,7 @@
     inset: -1px;
     border-radius: 9999px;
     padding: 1.5px;
-    background: linear-gradient(135deg, rgba(255,255,255,0.4), rgba(212,196,224,0.6), rgba(255,255,255,0.2));
+    background: linear-gradient(135deg, hsl(var(--gold-light) / 0.5), hsl(var(--gold) / 0.7), hsl(var(--gold-light) / 0.4));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -602,9 +610,9 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      hsl(293 15% 58% / 0.8) 20%,
-      hsl(270 18% 84% / 1) 50%,
-      hsl(330 40% 89% / 0.8) 80%,
+      hsl(var(--gold-muted) / 0.7) 20%,
+      hsl(var(--gold-light) / 0.9) 50%,
+      hsl(var(--gold-muted) / 0.7) 80%,
       transparent 100%
     );
     background-size: 300% 100%;
@@ -624,9 +632,9 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      hsl(293 15% 58% / 0.2) 20%,
-      hsl(270 18% 84% / 0.35) 50%,
-      hsl(330 40% 89% / 0.2) 80%,
+      hsl(var(--gold-muted) / 0.15) 20%,
+      hsl(var(--gold-light) / 0.25) 50%,
+      hsl(var(--gold-muted) / 0.15) 80%,
       transparent 100%
     );
     background-size: 300% 100%;
@@ -640,9 +648,9 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      hsl(280 25% 62% / 0.7) 20%,
-      hsl(265 18% 60% / 0.9) 50%,
-      hsl(310 20% 55% / 0.7) 80%,
+      hsl(var(--gold) / 0.7) 20%,
+      hsl(var(--gold-light) / 0.95) 50%,
+      hsl(var(--gold) / 0.7) 80%,
       transparent 100%
     );
     background-size: 300% 100%;
@@ -653,9 +661,9 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      hsl(280 25% 62% / 0.2) 20%,
-      hsl(265 18% 60% / 0.3) 50%,
-      hsl(310 20% 55% / 0.2) 80%,
+      hsl(var(--gold) / 0.25) 20%,
+      hsl(var(--gold-light) / 0.4) 50%,
+      hsl(var(--gold) / 0.25) 80%,
       transparent 100%
     );
     background-size: 300% 100%;
@@ -727,7 +735,13 @@
     content: '';
     height: 1px;
     width: 60px;
-    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.4), transparent);
+    background: linear-gradient(90deg, transparent, hsl(var(--gold-muted) / 0.5), transparent);
+  }
+
+  .dark .love-divider::before,
+  .dark .love-divider::after {
+    background: linear-gradient(90deg, transparent, hsl(var(--gold) / 0.5), transparent);
+    box-shadow: 0 0 8px hsl(var(--gold) / 0.2);
   }
 }
 
@@ -780,7 +794,12 @@
     0 0 20px rgba(255, 200, 80, 0.3);
 }
 
-/* Dark mode heading glow */
+/* Dark mode heading glow — gold */
 .dark h1, .dark h2 {
-  text-shadow: 0 0 30px rgba(180, 140, 210, 0.15);
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.12), 0 0 40px rgba(255, 200, 50, 0.06);
+}
+
+/* Dark mode h3/h4 subtle gold glow */
+.dark h3, .dark h4 {
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.08);
 }
