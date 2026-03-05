@@ -468,7 +468,7 @@ const Index = () => {
                 </div>
 
                 <div className="flex gap-2">
-                  <button onClick={() => toggleTrack('oceans-hillsong')} className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${currentTrack === 'oceans-hillsong' && isPlaying ? 'bg-white/30 shadow-glow' : 'bg-background/20 backdrop-blur-sm border border-background/30 hover:bg-background/30'}`}>
+                  <button aria-label="Play Oceans by Hillsong" onClick={() => toggleTrack('oceans-hillsong')} className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${currentTrack === 'oceans-hillsong' && isPlaying ? 'bg-white/30 shadow-glow' : 'bg-background/20 backdrop-blur-sm border border-background/30 hover:bg-background/30'}`}>
                     {currentTrack === 'oceans-hillsong' && isPlaying ? <Pause className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current" />}
                   </button>
                   <div className="w-10 h-10 rounded-full bg-background/20 backdrop-blur-sm border border-background/30 flex items-center justify-center">
