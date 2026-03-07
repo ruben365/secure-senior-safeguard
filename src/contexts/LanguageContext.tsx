@@ -366,7 +366,7 @@ const translations: Record<string, Record<Language, string>> = {
   'qr.desc': { fr: 'Scannez ce code pour accéder rapidement à notre page de mariage ou partagez-le avec vos proches.', en: 'Scan this code for quick access to our wedding page or share it with your loved ones.', es: 'Escanea este código para acceder rápidamente a nuestra página de boda o compártelo con tus seres queridos.' },
   'qr.placeholder': { fr: 'QR Code', en: 'QR Code', es: 'Código QR' },
   'qr.hint': { fr: 'Partagez l\'amour — envoyez ce lien à votre famille et vos amis', en: 'Share the love — send this link to your family and friends', es: 'Comparte el amor — envía este enlace a tu familia y amigos' },
-  'court.title': { fr: 'Notre Cour Personnelle', en: 'Our Personal Court', es: 'Nuestra Corte Personal' },
+  'court.title': { fr: 'Nos Citations Personnelles', en: 'Our Personal Quotes', es: 'Nuestras Citas Personales' },
   'court.desc': { fr: 'Ce en quoi nous croyons, nos valeurs et les principes qui guident notre union.', en: 'What we believe in, our values, and the principles that guide our union.', es: 'En lo que creemos, nuestros valores y los principios que guían nuestra unión.' },
   'court.belief.love': { fr: 'L\'Amour Inconditionnel', en: 'Unconditional Love', es: 'Amor Incondicional' },
   'court.belief.love.desc': { fr: 'Nous croyons que l\'amour véritable est patient, bienveillant et ne cherche pas son propre intérêt. C\'est le fondement de tout ce que nous construisons ensemble.', en: 'We believe that true love is patient, kind, and does not seek its own interest. It is the foundation of everything we build together.', es: 'Creemos que el amor verdadero es paciente, bondadoso y no busca lo suyo. Es el fundamento de todo lo que construimos juntos.' },
