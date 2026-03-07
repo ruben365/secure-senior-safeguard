@@ -220,6 +220,24 @@ const Dashboard = () => {
     setEnquiries(enquiries.filter(e => e.id !== id));
   };
 
+  const handleSendBlast = async () => {
+    if (!blastSubject.trim() || !blastContent.trim()) return;
+    setBlastSending(true);
+    setBlastResult(null);
+    try {
+      const { data, error } = await supabase.functions.invoke('send-bulk-announcement', {
+        body: { subject: blastSubject.trim(), content: blastContent.trim() },
+      });
+      if (error) throw error;
+      if (data) setBlastResult({ sent: data.sent, total: data.total });
+      setBlastSubject('');
+      setBlastContent('');
+    } catch (err) {
+      console.error('Bulk email error:', err);
+    }
+    setBlastSending(false);
+  };
+
   const unansweredCount = enquiries.filter(e => e.status === 'pending').length;
 
   const confirmed = rsvps.filter(r => r.status === 'confirmed');
