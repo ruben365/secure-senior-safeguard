@@ -93,7 +93,7 @@ const FallingPetals = () =>
 
 /* Section divider with golden decorative line */
 const SectionDivider = ({ variant = 'heart' }: { variant?: 'heart' | 'sparkle' | 'line' }) => (
-  <div className="relative py-8 flex items-center justify-center overflow-hidden">
+  <div className="relative py-4 flex items-center justify-center overflow-hidden">
     <div className="absolute inset-0 flex items-center">
       <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
     </div>
