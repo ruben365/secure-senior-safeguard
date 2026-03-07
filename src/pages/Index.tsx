@@ -214,7 +214,7 @@ const ScriptureTransition = ({ t }: { t: (key: string) => string }) => {
 };
 
 
-  const { t } = useLanguage();
+  const Index = () => {
   const { isPlaying, currentTrack, toggleTrack } = useMusic();
   const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [activeDetail, setActiveDetail] = useState<string | null>(null);
