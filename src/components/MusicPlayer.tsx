@@ -32,7 +32,7 @@ const TRACK_SOURCES: Record<string, string> = {
   'amazing-grace': 'https://play.hymnswithoutwords.com/wp-content/uploads/2023/06/Amazing-Grace-Organ-5-Verses-2023.mp3',
   'wedding-day': '/audio/wedding-day.mp3',
   'oceans-hillsong': '',     // Copyrighted — upload your own MP3
-  'blessed-larson': '',      // Copyrighted — upload your own MP3
+  'blessed-larson': 'https://play.hymnswithoutwords.com/wp-content/uploads/2019/06/I-Have-Been-Blessed-Blessed-Organ-3-Verses-2019.mp3',
   'how-great': 'https://play.hymnswithoutwords.com/wp-content/uploads/2021/06/O-Lord-My-God-How-Great-Thou-Art-Organ-4-Verses-2021.mp3',
   'joyful': '',              // Upload your own MP3
   'great-faithfulness': 'https://play.hymnswithoutwords.com/wp-content/uploads/2017/06/Great-is-thy-faithfulness-Faithfulness-Runyan-3-Verses-Organ-2019.mp3',
@@ -116,7 +116,7 @@ const MusicFloatingButton = () => {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0, y: 20 }}
           onClick={stopMusic}
-          className="fixed bottom-20 right-6 z-40 glass-card-strong rounded-full px-4 py-3 flex items-center gap-3 shadow-glow hover:scale-105 transition-transform duration-300"
+          className="fixed bottom-6 left-6 z-40 glass-card-strong rounded-full px-4 py-3 flex items-center gap-3 shadow-glow hover:scale-105 transition-transform duration-300"
           aria-label="Stop music"
         >
           <div className="w-8 h-8 rounded-full gradient-primary flex items-center justify-center">
