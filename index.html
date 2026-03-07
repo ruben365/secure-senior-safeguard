@@ -24,31 +24,50 @@
 
     <!-- Inline critical CSS for immediate FCP -->
     <style>
-      #app-loader{display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'Playfair Display',Georgia,serif;color:#4A3B4E;text-align:center;flex-direction:column;gap:0;position:relative;overflow:hidden;background:linear-gradient(135deg,#fdf6f0 0%,#f3e8f0 50%,#ede4f3 100%)}
-      .loader-couple{display:flex;align-items:center;justify-content:center;gap:0;position:relative;height:80px;width:280px}
-      .loader-groom,.loader-bride{font-size:2.8rem;position:absolute;top:50%;transform:translateY(-50%);animation-fill-mode:forwards;animation-timing-function:cubic-bezier(0.4,0,0.2,1)}
-      .loader-groom{left:0;animation:slide-groom 2s forwards}
-      .loader-bride{right:0;animation:slide-bride 2s forwards}
-      .loader-heart-pop{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);font-size:1.6rem;color:#C9A9B6;opacity:0;animation:heart-pop 1s 2s forwards}
-      .loader-glow{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:60px;height:60px;border-radius:50%;background:radial-gradient(circle,rgba(201,169,182,0.4) 0%,transparent 70%);opacity:0;animation:glow-in 1.2s 1.8s forwards}
-      .loader-names{font-size:2rem;font-weight:600;letter-spacing:-0.5px;margin-top:1.2rem;opacity:0;
+      #app-loader{display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'Playfair Display',Georgia,serif;color:#4A3B4E;text-align:center;flex-direction:column;gap:0;position:relative;overflow:hidden;
+        background:linear-gradient(135deg,rgba(253,246,240,0.85) 0%,rgba(243,232,240,0.85) 50%,rgba(237,228,243,0.85) 100%);
+        backdrop-filter:blur(20px) saturate(1.3);-webkit-backdrop-filter:blur(20px) saturate(1.3)}
+
+      .loader-couple{display:flex;align-items:flex-end;justify-content:center;position:relative;height:160px;width:360px;margin-bottom:0.5rem}
+
+      .loader-figure{display:flex;flex-direction:column;align-items:center;gap:0.3rem;position:absolute;bottom:0}
+      .loader-figure img{height:120px;width:auto;object-fit:contain;opacity:0.7;filter:drop-shadow(0 4px 20px rgba(74,59,78,0.15)) blur(0.3px)}
+      .loader-figure .loader-name{font-family:'Playfair Display',Georgia,serif;font-size:0.85rem;font-weight:600;letter-spacing:0.05em;color:#4A3B4E;opacity:0;animation:fade-up 0.6s 2.2s forwards}
+
+      .loader-groom-fig{left:0;animation:slide-groom 2s cubic-bezier(0.4,0,0.2,1) forwards}
+      .loader-bride-fig{right:0;animation:slide-bride 2s cubic-bezier(0.4,0,0.2,1) forwards}
+
+      .loader-heart-pop{position:absolute;left:50%;bottom:50px;transform:translateX(-50%) scale(0);font-size:1.4rem;color:#9F82A4;opacity:0;animation:heart-pop 1s 2s forwards;text-shadow:0 0 20px rgba(159,130,164,0.5)}
+      .loader-glow{position:absolute;left:50%;bottom:40px;transform:translateX(-50%);width:80px;height:80px;border-radius:50%;
+        background:radial-gradient(circle,rgba(159,130,164,0.25) 0%,rgba(201,169,182,0.1) 40%,transparent 70%);
+        opacity:0;animation:glow-in 1.2s 1.8s forwards}
+
+      .loader-title{font-size:1.8rem;font-weight:600;letter-spacing:-0.3px;margin-top:0.8rem;opacity:0;
         background:linear-gradient(135deg,#4A3B4E 0%,#9F82A4 50%,#6B4E71 100%);
         -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-        animation:fade-up 1s 2.4s forwards}
-      .loader-sub{font-family:'DM Sans',sans-serif;font-size:0.75rem;letter-spacing:0.35em;text-transform:uppercase;color:#9F82A4;opacity:0;margin-top:0.4rem;animation:fade-up 1s 2.8s forwards}
+        animation:fade-up 1s 2.6s forwards}
+      .loader-sub{font-family:'DM Sans',sans-serif;font-size:0.7rem;letter-spacing:0.35em;text-transform:uppercase;color:#9F82A4;opacity:0;margin-top:0.3rem;animation:fade-up 1s 3s forwards}
 
-      @keyframes slide-groom{0%{left:0;opacity:0}30%{opacity:1}100%{left:calc(50% - 36px);opacity:1}}
-      @keyframes slide-bride{0%{right:0;opacity:0}30%{opacity:1}100%{right:calc(50% - 36px);opacity:1}}
-      @keyframes heart-pop{0%{transform:translate(-50%,-50%) scale(0);opacity:0}50%{transform:translate(-50%,-50%) scale(1.3);opacity:1}100%{transform:translate(-50%,-50%) scale(1);opacity:1}}
-      @keyframes glow-in{0%{opacity:0;transform:translate(-50%,-50%) scale(0.5)}50%{opacity:1}100%{opacity:0.6;transform:translate(-50%,-50%) scale(1.2)}}
+      /* Glass card behind couple */
+      .loader-glass{position:absolute;left:50%;bottom:-10px;transform:translateX(-50%);width:200px;height:140px;border-radius:20px;
+        background:rgba(255,255,255,0.25);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+        border:1px solid rgba(255,255,255,0.3);box-shadow:0 8px 32px rgba(74,59,78,0.08);opacity:0;animation:fade-up 0.8s 1.6s forwards}
+
+      @keyframes slide-groom{0%{left:0;opacity:0}30%{opacity:1}100%{left:calc(50% - 70px);opacity:1}}
+      @keyframes slide-bride{0%{right:0;opacity:0}30%{opacity:1}100%{right:calc(50% - 70px);opacity:1}}
+      @keyframes heart-pop{0%{transform:translateX(-50%) scale(0);opacity:0}50%{transform:translateX(-50%) scale(1.3);opacity:1}100%{transform:translateX(-50%) scale(1);opacity:1}}
+      @keyframes glow-in{0%{opacity:0;transform:translateX(-50%) scale(0.5)}50%{opacity:1}100%{opacity:0.6;transform:translateX(-50%) scale(1.2)}}
       @keyframes fade-up{0%{opacity:0;transform:translateY(12px)}100%{opacity:1;transform:translateY(0)}}
 
       @media(prefers-color-scheme:dark){
-        #app-loader{background:linear-gradient(135deg,#0a080f 0%,#1a1225 50%,#120e1a 100%);color:#e8e0ec}
-        .loader-heart-pop{color:#9478a5}
-        .loader-glow{background:radial-gradient(circle,rgba(148,120,165,0.3) 0%,transparent 70%)}
-        .loader-names{background:linear-gradient(135deg,#e8e0ec 0%,#b8a9c9 50%,#9478a5 100%);-webkit-background-clip:text;background-clip:text}
+        #app-loader{background:linear-gradient(135deg,rgba(10,8,15,0.9) 0%,rgba(26,18,37,0.9) 50%,rgba(18,14,26,0.9) 100%)}
+        .loader-figure img{opacity:0.6;filter:drop-shadow(0 4px 20px rgba(148,120,165,0.2)) blur(0.3px) brightness(1.4)}
+        .loader-figure .loader-name{color:#d4c6e0}
+        .loader-heart-pop{color:#b8a9c9;text-shadow:0 0 20px rgba(184,169,201,0.4)}
+        .loader-glow{background:radial-gradient(circle,rgba(148,120,165,0.2) 0%,rgba(184,169,201,0.08) 40%,transparent 70%)}
+        .loader-title{background:linear-gradient(135deg,#e8e0ec 0%,#b8a9c9 50%,#9478a5 100%);-webkit-background-clip:text;background-clip:text}
         .loader-sub{color:#b8a9c9}
+        .loader-glass{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.08);box-shadow:0 8px 32px rgba(0,0,0,0.2)}
       }
     </style>
     
@@ -65,12 +84,19 @@
     <div id="root">
       <div id="app-loader" aria-hidden="true">
         <div class="loader-couple">
-          <span class="loader-groom">🤵</span>
-          <span class="loader-bride">👰</span>
+          <div class="loader-glass"></div>
+          <div class="loader-figure loader-groom-fig">
+            <img src="/images/groom-silhouette.png" alt="" />
+            <span class="loader-name">Ruben</span>
+          </div>
+          <div class="loader-figure loader-bride-fig">
+            <img src="/images/bride-silhouette.png" alt="" />
+            <span class="loader-name">Corine</span>
+          </div>
           <div class="loader-glow"></div>
           <span class="loader-heart-pop">♥</span>
         </div>
-        <div class="loader-names">Ruben &amp; Corine</div>
+        <div class="loader-title">Ruben &amp; Corine</div>
         <p class="loader-sub">15 . 08 . 2027</p>
       </div>
     <script type="module" src="/src/main.tsx"></script>
