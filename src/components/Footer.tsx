@@ -1,9 +1,43 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Heart, Instagram, Mail, MapPin } from 'lucide-react';
+import { Heart, Instagram, Mail, MapPin, Send } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
+import { Input } from '@/components/ui/input';
 
 const Footer = () => {
   const { t } = useLanguage();
+  const [email, setEmail] = useState('');
+  const [subscribing, setSubscribing] = useState(false);
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      toast.error(t('footer.subscribe.invalidEmail'));
+      return;
+    }
+    setSubscribing(true);
+    try {
+      const { error } = await (supabase as any).from('newsletter_subscribers').insert({ email: email.trim().toLowerCase() });
+      if (error) {
+        if (error.code === '23505') {
+          toast.info(t('footer.subscribe.already'));
+        } else throw error;
+      } else {
+        setSubscribed(true);
+        toast.success(t('footer.subscribe.success'));
+        setEmail('');
+        setTimeout(() => setSubscribed(false), 5000);
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error(t('footer.subscribe.error'));
+    } finally {
+      setSubscribing(false);
+    }
+  };
 
   const companyLinks = [
     { label: t('nav.home'), to: '/' },
@@ -16,7 +50,6 @@ const Footer = () => {
 
   return (
     <footer className="footer-dark relative overflow-hidden z-20">
-      {/* Subtle decorative blobs */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-[500px] h-[300px] rounded-full bg-[hsl(var(--footer-fg))] opacity-5 blur-[120px]" />
         <div className="absolute bottom-0 right-1/4 w-[400px] h-[250px] rounded-full bg-[hsl(var(--footer-fg))] opacity-[0.03] blur-[100px]" />
@@ -75,18 +108,38 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Venue */}
+          {/* Newsletter Subscribe */}
           <div>
             <h2 className="font-sans-elegant text-xs font-semibold tracking-[0.2em] uppercase mb-5 text-[hsl(var(--footer-fg))]">
-              {t('footer.venue')}
+              {t('footer.subscribe.title')}
             </h2>
-            <p className="font-sans-elegant text-sm text-[hsl(var(--footer-muted))] leading-relaxed mb-2">
-              {t('details.ceremony.location')}
-            </p>
             <p className="font-sans-elegant text-sm text-[hsl(var(--footer-muted))] leading-relaxed mb-4">
-              {t('details.ceremony.address')}
+              {t('footer.subscribe.desc')}
             </p>
-            <p className="font-sans-elegant text-xs font-medium text-dusty-rose">{t('hero.date')} • 14:00</p>
+            {subscribed ? (
+              <div className="flex items-center gap-2 text-emerald-400">
+                <Heart className="w-4 h-4 fill-current" />
+                <span className="font-sans-elegant text-sm font-medium">{t('footer.subscribe.thankyou')}</span>
+              </div>
+            ) : (
+              <form onSubmit={handleSubscribe} className="flex gap-2">
+                <Input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={t('footer.subscribe.placeholder')}
+                  className="font-sans-elegant rounded-full h-10 text-sm bg-[hsl(var(--footer-fg))]/10 border-[hsl(var(--footer-fg))]/20 text-[hsl(var(--footer-fg))] placeholder:text-[hsl(var(--footer-muted))]/60"
+                  required
+                />
+                <button
+                  type="submit"
+                  disabled={subscribing}
+                  className="w-10 h-10 rounded-full bg-primary flex items-center justify-center hover:bg-primary/90 transition-colors disabled:opacity-50 flex-shrink-0"
+                >
+                  <Send className="w-4 h-4 text-primary-foreground" />
+                </button>
+              </form>
+            )}
           </div>
         </div>
 
