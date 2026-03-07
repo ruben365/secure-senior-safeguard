@@ -435,6 +435,34 @@ const translations: Record<string, Record<Language, string>> = {
   'dashboard.date': { fr: 'Date', en: 'Date', es: 'Fecha' },
   'dashboard.noGifts': { fr: 'Aucun cadeau', en: 'No gifts yet', es: 'Sin regalos aún' },
   'dashboard.giftTiers': { fr: 'Niveaux de Cadeaux', en: 'Gift Tiers', es: 'Niveles de Regalos' },
+
+  // Enquiries
+  'enquiries.badge': { fr: 'Questions', en: 'Questions', es: 'Preguntas' },
+  'enquiries.title': { fr: 'Des Questions ?', en: 'Have Questions?', es: '¿Tienes Preguntas?' },
+  'enquiries.subtitle': { fr: 'N\'hésitez pas à nous poser vos questions — internationales ou locales, nous répondrons avec joie !', en: 'Feel free to ask us anything — international or local, we\'ll happily answer!', es: '¡No dudes en preguntarnos — internacionales o locales, responderemos con gusto!' },
+  'enquiries.form.title': { fr: 'Posez votre question', en: 'Ask Your Question', es: 'Haz Tu Pregunta' },
+  'enquiries.form.desc': { fr: 'Nous vous répondrons par email', en: 'We\'ll reply to your email', es: 'Te responderemos por correo' },
+  'enquiries.form.name': { fr: 'Votre nom', en: 'Your Name', es: 'Tu Nombre' },
+  'enquiries.form.name.placeholder': { fr: 'Prénom et nom', en: 'First and last name', es: 'Nombre y apellido' },
+  'enquiries.form.email': { fr: 'Votre email', en: 'Your Email', es: 'Tu Correo' },
+  'enquiries.form.email.placeholder': { fr: 'email@exemple.com', en: 'email@example.com', es: 'correo@ejemplo.com' },
+  'enquiries.form.question': { fr: 'Votre question', en: 'Your Question', es: 'Tu Pregunta' },
+  'enquiries.form.question.placeholder': { fr: 'Écrivez votre question ici...', en: 'Write your question here...', es: 'Escribe tu pregunta aquí...' },
+  'enquiries.form.submit': { fr: 'Envoyer', en: 'Send', es: 'Enviar' },
+  'enquiries.form.note': { fr: 'Nous répondrons dans les plus brefs délais', en: 'We\'ll respond as soon as possible', es: 'Responderemos lo antes posible' },
+  'enquiries.sent.title': { fr: 'Question envoyée !', en: 'Question Sent!', es: '¡Pregunta Enviada!' },
+  'enquiries.sent.desc': { fr: 'Merci ! Nous vous répondrons par email rapidement.', en: 'Thank you! We\'ll reply to your email soon.', es: '¡Gracias! Te responderemos por correo pronto.' },
+  'enquiries.sent.another': { fr: 'Poser une autre question', en: 'Ask Another Question', es: 'Hacer Otra Pregunta' },
+  'nav.enquiries': { fr: 'Questions', en: 'Questions', es: 'Preguntas' },
+
+  // Dashboard enquiries
+  'dashboard.enquiries': { fr: 'Questions', en: 'Enquiries', es: 'Preguntas' },
+  'dashboard.noEnquiries': { fr: 'Aucune question pour le moment', en: 'No enquiries yet', es: 'Sin preguntas por ahora' },
+  'dashboard.answerPlaceholder': { fr: 'Écrivez votre réponse...', en: 'Write your answer...', es: 'Escribe tu respuesta...' },
+  'dashboard.sendAnswer': { fr: 'Envoyer la réponse', en: 'Send Answer', es: 'Enviar Respuesta' },
+  'dashboard.answered': { fr: 'Répondu', en: 'Answered', es: 'Respondido' },
+  'dashboard.unanswered': { fr: 'Non répondu', en: 'Unanswered', es: 'Sin responder' },
+  'dashboard.enquiriesCount': { fr: '{n} question(s)', en: '{n} enquiry(ies)', es: '{n} pregunta(s)' },
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
