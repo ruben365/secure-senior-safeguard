@@ -140,7 +140,80 @@ const GoldenCorners = ({ className = '' }: { className?: string }) => (
   </div>
 );
 
-/* ===== Announcements Section — pulls from DB ===== */
+/* ===== Personal Court — Dynamic quotes from DB ===== */
+const PersonalCourtSection = ({ t }: { t: (key: string) => string }) => {
+  const [quotes, setQuotes] = useState<{ id: string; content: string }[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const fetchQuotes = async () => {
+      const { data } = await supabase.from('quotes').select('*').order('created_at', { ascending: false });
+      if (data) setQuotes(data);
+    };
+    fetchQuotes();
+  }, []);
+
+  useEffect(() => {
+    if (quotes.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % quotes.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [quotes.length]);
+
+  if (quotes.length === 0) return null;
+
+  return (
+    <section className="py-14 md:py-20 relative overflow-hidden">
+      <AuroraOrb position="center" color="rgba(139,107,138,0.2)" size={400} delay={3} />
+      <div className="container mx-auto px-6 md:px-12 max-w-4xl relative z-10 text-center">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+          <div className="glass-card-strong rounded-3xl p-10 md:p-16 relative overflow-hidden">
+            <GoldenCorners />
+            <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-gradient-to-br from-primary/10 to-violet-400/10 blur-2xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full bg-gradient-to-tr from-rose-400/10 to-pink-400/10 blur-2xl pointer-events-none" />
+
+            <div className="love-divider mb-6">
+              <Heart className="w-6 h-6 text-rose-400 fill-rose-400 icon-glow animate-pulse-love" />
+            </div>
+
+            <h3 className="font-serif-display text-2xl md:text-3xl text-foreground font-semibold mb-6">{t('court.title')}</h3>
+
+            <div className="min-h-[80px] flex items-center justify-center">
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={currentIndex}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.7 }}
+                  className="font-serif-display text-lg md:text-xl text-foreground italic leading-relaxed max-w-lg mx-auto"
+                >
+                  "{quotes[currentIndex].content}"
+                </motion.p>
+              </AnimatePresence>
+            </div>
+
+            {quotes.length > 1 && (
+              <div className="flex items-center justify-center gap-2 mt-6">
+                {quotes.map((_, i) => (
+                  <button key={i} onClick={() => setCurrentIndex(i)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${i === currentIndex ? 'bg-primary w-6' : 'bg-muted-foreground/25'}`} />
+                ))}
+              </div>
+            )}
+
+            <div className="love-divider mt-6">
+              <Heart className="w-4 h-4 text-primary/40 fill-primary/40" />
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+
 const AnnouncementsSection = ({ t }: { t: (key: string) => string }) => {
   const [announcements, setAnnouncements] = useState<{ id: string; title: string; content: string; created_at: string }[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
