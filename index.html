@@ -34,10 +34,8 @@
       /* ── Each figure ── */
       .loader-figure{display:flex;flex-direction:column;align-items:center;gap:0;opacity:0;position:relative}
       .loader-figure img{width:120px;height:auto;position:relative;z-index:3;
-        filter:brightness(0) saturate(100%) invert(15%) sepia(50%) saturate(2500%) hue-rotate(270deg) brightness(0.55);
-        transition:filter 0.3s ease;
-        -webkit-filter:brightness(0) saturate(100%) invert(15%) sepia(50%) saturate(2500%) hue-rotate(270deg) brightness(0.55);
-        drop-shadow(0 6px 20px rgba(75,0,130,0.4))}
+        filter:brightness(0) saturate(100%) invert(15%) sepia(50%) saturate(2500%) hue-rotate(270deg) brightness(0.55) drop-shadow(0 6px 20px rgba(75,0,130,0.4));
+        transition:filter 0.3s ease}
       .loader-figure-name{font-family:'Playfair Display',Georgia,serif;font-size:1.3rem;font-weight:700;
         color:rgba(74,59,78,0.5);letter-spacing:0.08em;opacity:0;
         position:absolute;top:45%;left:50%;transform:translate(-50%,-50%);z-index:1;
