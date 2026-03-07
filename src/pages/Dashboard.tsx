@@ -6,7 +6,8 @@ import { supabase } from '@/integrations/supabase/client';
 import {
   Users, Utensils, Gift, Heart, CheckCircle, XCircle, Clock,
   TrendingUp, BarChart3, PieChart, MapPin, Sparkles, Loader2, LogOut,
-  Megaphone, Trash2, Plus, Share2, Copy, Check, QrCode
+  Megaphone, Trash2, Plus, Share2, Copy, Check, QrCode,
+  MessageCircleQuestion, Send, Bell
 } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
 import { Input } from '@/components/ui/input';
@@ -96,6 +97,11 @@ interface QuoteRow {
   id: string; content: string; created_at: string;
 }
 
+interface EnquiryRow {
+  id: string; name: string; email: string; question: string;
+  answer: string | null; status: string; created_at: string; answered_at: string | null;
+}
+
 const Dashboard = () => {
   const { t } = useLanguage();
   const { signOut } = useAuth();
@@ -105,6 +111,7 @@ const Dashboard = () => {
   const [gifts, setGifts] = useState<GiftRow[]>([]);
   const [announcements, setAnnouncements] = useState<AnnouncementRow[]>([]);
   const [quotes, setQuotes] = useState<QuoteRow[]>([]);
+  const [enquiries, setEnquiries] = useState<EnquiryRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [annTitle, setAnnTitle] = useState('');
   const [annContent, setAnnContent] = useState('');
@@ -112,21 +119,25 @@ const Dashboard = () => {
   const [quoteContent, setQuoteContent] = useState('');
   const [quotePosting, setQuotePosting] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [answerTexts, setAnswerTexts] = useState<Record<string, string>>({});
+  const [answerSending, setAnswerSending] = useState<string | null>(null);
 
   const staffUrl = `${window.location.origin}/staff`;
 
   useEffect(() => {
     const fetchData = async () => {
-      const [rsvpRes, giftRes, annRes, quoteRes] = await Promise.all([
+      const [rsvpRes, giftRes, annRes, quoteRes, enqRes] = await Promise.all([
         supabase.from('rsvps').select('*').order('created_at', { ascending: false }),
         supabase.from('gifts').select('*').order('created_at', { ascending: false }),
         supabase.from('announcements').select('*').order('created_at', { ascending: false }),
         supabase.from('quotes').select('*').order('created_at', { ascending: false }),
+        supabase.from('enquiries').select('*').order('created_at', { ascending: false }),
       ]);
       if (rsvpRes.data) setRsvps(rsvpRes.data);
       if (giftRes.data) setGifts(giftRes.data);
       if (annRes.data) setAnnouncements(annRes.data);
       if (quoteRes.data) setQuotes(quoteRes.data);
+      if (enqRes.data) setEnquiries(enqRes.data as EnquiryRow[]);
       setLoading(false);
     };
     fetchData();
@@ -164,6 +175,29 @@ const Dashboard = () => {
     await supabase.from('quotes').delete().eq('id', id);
     setQuotes(quotes.filter(q => q.id !== id));
   };
+
+  const handleAnswerEnquiry = async (id: string) => {
+    const answer = answerTexts[id]?.trim();
+    if (!answer) return;
+    setAnswerSending(id);
+    const { error } = await supabase.from('enquiries').update({
+      answer,
+      status: 'answered',
+      answered_at: new Date().toISOString(),
+    }).eq('id', id);
+    if (!error) {
+      setEnquiries(enquiries.map(e => e.id === id ? { ...e, answer, status: 'answered', answered_at: new Date().toISOString() } : e));
+      setAnswerTexts(prev => { const n = { ...prev }; delete n[id]; return n; });
+    }
+    setAnswerSending(null);
+  };
+
+  const handleDeleteEnquiry = async (id: string) => {
+    await supabase.from('enquiries').delete().eq('id', id);
+    setEnquiries(enquiries.filter(e => e.id !== id));
+  };
+
+  const unansweredCount = enquiries.filter(e => e.status === 'pending').length;
 
   const confirmed = rsvps.filter(r => r.status === 'confirmed');
   const pending = rsvps.filter(r => r.status === 'pending');
@@ -227,6 +261,14 @@ const Dashboard = () => {
             </TabsTrigger>
             <TabsTrigger value="quotes" className="rounded-full px-5 py-2 font-sans-elegant text-xs font-bold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground">
               <Heart className="w-3.5 h-3.5 mr-1.5" /> {t('dashboard.quotes')}
+            </TabsTrigger>
+            <TabsTrigger value="enquiries" className="rounded-full px-5 py-2 font-sans-elegant text-xs font-bold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground relative">
+              <MessageCircleQuestion className="w-3.5 h-3.5 mr-1.5" /> {t('dashboard.enquiries')}
+              {unansweredCount > 0 && (
+                <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-rose-500 text-[10px] font-bold text-white flex items-center justify-center animate-pulse">
+                  {unansweredCount}
+                </span>
+              )}
             </TabsTrigger>
             <TabsTrigger value="share" className="rounded-full px-5 py-2 font-sans-elegant text-xs font-bold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground">
               <Share2 className="w-3.5 h-3.5 mr-1.5" /> Share
@@ -569,6 +611,82 @@ const Dashboard = () => {
                   >
                     <Trash2 className="w-4 h-4 text-rose-500" />
                   </button>
+                </div>
+              ))}
+            </motion.div>
+          </TabsContent>
+
+          {/* ═══ ENQUIRIES TAB ═══ */}
+          <TabsContent value="enquiries" className="space-y-6">
+            {/* Stats */}
+            <div className="grid sm:grid-cols-3 gap-4">
+              <StatCard icon={MessageCircleQuestion} label={t('dashboard.enquiries')} value={enquiries.length} color="text-blue-400" bg="from-blue-500/20 to-cyan-500/10" />
+              <StatCard icon={CheckCircle} label={t('dashboard.answered')} value={enquiries.filter(e => e.status === 'answered').length} color="text-emerald-400" bg="from-emerald-500/20 to-teal-500/10" />
+              <StatCard icon={Bell} label={t('dashboard.unanswered')} value={unansweredCount} sub={unansweredCount > 0 ? '⚡ Needs attention' : '✓ All clear'} color="text-amber-400" bg="from-amber-500/20 to-orange-500/10" />
+            </div>
+
+            {/* Enquiries list */}
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+              className="space-y-4">
+              {enquiries.length === 0 ? (
+                <div className="glass-card-strong rounded-3xl p-12 text-center">
+                  <MessageCircleQuestion className="w-8 h-8 text-muted-foreground/40 mx-auto mb-3" />
+                  <p className="font-sans-elegant text-sm text-muted-foreground">{t('dashboard.noEnquiries')}</p>
+                </div>
+              ) : enquiries.map((enq) => (
+                <div key={enq.id} className="glass-card-strong rounded-3xl p-6 space-y-4">
+                  <div className="flex items-start gap-4">
+                    <div className={`w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0 mt-1 ${
+                      enq.status === 'answered' ? 'bg-gradient-to-br from-emerald-500/20 to-teal-500/10' : 'bg-gradient-to-br from-amber-500/20 to-orange-500/10'
+                    }`}>
+                      {enq.status === 'answered' ? <CheckCircle className="w-5 h-5 text-emerald-400" /> : <Clock className="w-5 h-5 text-amber-400" />}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <p className="font-sans-elegant text-sm font-bold text-foreground">{enq.name}</p>
+                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide ${
+                          enq.status === 'answered' ? 'bg-emerald-500/15 text-emerald-500' : 'bg-amber-500/15 text-amber-500'
+                        }`}>{enq.status === 'answered' ? t('dashboard.answered') : t('dashboard.unanswered')}</span>
+                      </div>
+                      <p className="font-sans-elegant text-xs text-muted-foreground mb-2">📧 {enq.email} · {new Date(enq.created_at).toLocaleDateString()}</p>
+                      <div className="glass-card rounded-2xl p-3 mb-3">
+                        <p className="font-sans-elegant text-sm text-foreground leading-relaxed">❓ {enq.question}</p>
+                      </div>
+                      {enq.answer && (
+                        <div className="glass-card rounded-2xl p-3 border-l-4 border-emerald-500/30">
+                          <p className="font-sans-elegant text-xs text-emerald-500 font-bold mb-1">✅ {t('dashboard.answered')}</p>
+                          <p className="font-sans-elegant text-sm text-foreground leading-relaxed">{enq.answer}</p>
+                        </div>
+                      )}
+                      {enq.status === 'pending' && (
+                        <div className="flex gap-2 mt-3">
+                          <Textarea
+                            value={answerTexts[enq.id] || ''}
+                            onChange={(e) => setAnswerTexts(prev => ({ ...prev, [enq.id]: e.target.value }))}
+                            placeholder={t('dashboard.answerPlaceholder')}
+                            className="rounded-2xl glass-card border-border/30 font-sans-elegant min-h-[80px] flex-1"
+                          />
+                        </div>
+                      )}
+                      {enq.status === 'pending' && (
+                        <button
+                          onClick={() => handleAnswerEnquiry(enq.id)}
+                          disabled={answerSending === enq.id || !answerTexts[enq.id]?.trim()}
+                          className="btn-primary mt-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          {answerSending === enq.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                          {t('dashboard.sendAnswer')}
+                        </button>
+                      )}
+                    </div>
+                    <button
+                      onClick={() => handleDeleteEnquiry(enq.id)}
+                      className="w-9 h-9 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 flex items-center justify-center transition-colors flex-shrink-0"
+                      title={t('dashboard.deleteConfirm')}
+                    >
+                      <Trash2 className="w-4 h-4 text-rose-500" />
+                    </button>
+                  </div>
                 </div>
               ))}
             </motion.div>
