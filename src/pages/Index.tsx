@@ -164,7 +164,7 @@ const PersonalCourtSection = ({ t }: { t: (key: string) => string }) => {
   if (quotes.length === 0) return null;
 
   return (
-    <section className="py-14 md:py-20 relative overflow-hidden">
+    <section className="py-8 md:py-12 relative overflow-hidden">
       <AuroraOrb position="center" color="rgba(139,107,138,0.2)" size={400} delay={3} />
       <div className="container mx-auto px-6 md:px-12 max-w-4xl relative z-10 text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
@@ -240,7 +240,7 @@ const AnnouncementsSection = ({ t }: { t: (key: string) => string }) => {
   if (announcements.length === 0) return null;
 
   return (
-    <section className="py-12 md:py-16 relative overflow-hidden">
+    <section className="py-8 md:py-12 relative overflow-hidden">
       <AuroraOrb position="right" color="rgba(180,140,210,0.25)" size={350} delay={2} />
       <div className="container mx-auto px-6 md:px-12 max-w-3xl relative z-10 text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
@@ -367,7 +367,7 @@ const ScriptureTransition = ({ t }: { t: (key: string) => string }) => {
   }, []);
 
   return (
-    <section className="py-16 md:py-24 relative overflow-hidden">
+    <section className="py-10 md:py-14 relative overflow-hidden">
       <AuroraOrb position="center" color="rgba(139,107,138,0.15)" size={400} delay={3} />
       <div className="container mx-auto px-6 md:px-12 max-w-3xl relative z-10 text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-8">
@@ -868,7 +868,7 @@ const Index = () => {
       <SectionDivider variant="sparkle" />
 
       {/* ===== ABOUT / LOVE STORY INTRO ===== */}
-      <section className="py-14 md:py-20 relative overflow-hidden">
+      <section className="py-8 md:py-12 relative overflow-hidden">
         <AuroraOrb position="left" color="rgba(212,165,200,0.3)" size={450} delay={0} />
         <AuroraOrb position="right" color="rgba(232,196,184,0.25)" size={350} delay={4} />
         <div className="container mx-auto px-6 md:px-12 max-w-6xl relative z-10">
@@ -961,7 +961,7 @@ const Index = () => {
       <SectionDivider variant="line" />
 
       {/* ===== SCRIPTURE — Transitioning Verses ===== */}
-      <section className="py-14 md:py-18 relative overflow-hidden">
+      <section className="py-8 md:py-10 relative overflow-hidden">
         <AuroraOrb position="center" color="rgba(139,107,138,0.2)" size={400} delay={3} />
         <div className="container mx-auto px-6 md:px-12 max-w-3xl relative z-10 text-center">
           <TransitioningScripture t={t} />
@@ -972,7 +972,7 @@ const Index = () => {
       <SectionDivider variant="heart" />
 
       {/* ===== FAITH & GRACE WIDGETS ===== */}
-      <section className="py-14 md:py-18 relative overflow-hidden">
+      <section className="py-8 md:py-10 relative overflow-hidden">
         <AuroraOrb position="left" color="rgba(180,140,210,0.2)" size={500} delay={1} />
         <AuroraOrb position="right" color="rgba(212,165,165,0.2)" size={380} delay={6} />
         <div className="container mx-auto px-6 md:px-12 max-w-5xl relative z-10">
@@ -1024,7 +1024,7 @@ const Index = () => {
       <SectionDivider variant="sparkle" />
 
       {/* ===== LOVE GALLERY STRIP ===== */}
-      <section className="py-10 md:py-14 relative overflow-hidden">
+      <section className="py-6 md:py-10 relative overflow-hidden">
         <AuroraOrb position="center" color="rgba(232,196,184,0.25)" size={450} delay={2} />
         <div className="container mx-auto px-6 md:px-12 max-w-6xl relative z-10">
           <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-6">
@@ -1064,7 +1064,7 @@ const Index = () => {
       <SectionDivider variant="line" />
 
       {/* ===== WEDDING DETAILS — Interactive Cards ===== */}
-      <section className="py-14 md:py-20 relative overflow-hidden">
+      <section className="py-8 md:py-12 relative overflow-hidden">
         <AuroraOrb position="left" color="rgba(201,169,182,0.25)" size={400} delay={0} />
         <AuroraOrb position="right" color="rgba(180,140,210,0.2)" size={350} delay={5} />
         <div className="container mx-auto px-6 md:px-12 max-w-5xl relative z-10">
@@ -1150,7 +1150,7 @@ const Index = () => {
       <SectionDivider variant="sparkle" />
 
       {/* ===== LOVE PROMISE SECTION ===== */}
-      <section className="py-14 md:py-20 relative overflow-hidden">
+      <section className="py-8 md:py-12 relative overflow-hidden">
         <AuroraOrb position="right" color="rgba(212,165,200,0.25)" size={420} delay={1} />
         <AuroraOrb position="left" color="rgba(232,196,184,0.2)" size={350} delay={5} />
         <div className="container mx-auto px-6 md:px-12 max-w-4xl relative z-10">
@@ -1201,7 +1201,7 @@ const Index = () => {
       <SectionDivider variant="heart" />
 
       {/* ===== EXPLORE NAVIGATION ===== */}
-      <section className="py-14 md:py-20 relative overflow-hidden">
+      <section className="py-8 md:py-12 relative overflow-hidden">
         <AuroraOrb position="center" color="rgba(180,140,210,0.2)" size={400} delay={4} />
         <div className="container mx-auto px-6 md:px-12 max-w-5xl relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
@@ -1240,7 +1240,7 @@ const Index = () => {
       <SectionDivider variant="sparkle" />
 
       {/* ===== CTA / RSVP ===== */}
-      <section className="py-14 md:py-20 relative overflow-hidden">
+      <section className="py-8 md:py-12 relative overflow-hidden">
         <AuroraOrb position="left" color="rgba(212,165,200,0.3)" size={400} delay={0} />
         <AuroraOrb position="right" color="rgba(139,107,138,0.2)" size={350} delay={6} />
         <div className="container mx-auto px-6 md:px-12 max-w-3xl relative z-10 text-center">
