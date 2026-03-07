@@ -591,6 +591,7 @@ const Index = () => {
     }
   };
 
+  const handlePaymentSuccess = () => {
     setGiftSent(true);
     setCheckoutUrl(null);
     // Send gift confirmation email
