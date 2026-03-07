@@ -1507,16 +1507,34 @@ const Index = () => {
                 <div className="glass-card rounded-2xl p-5 text-center">
                   <p className="font-sans-elegant text-xs text-muted-foreground mb-1">{t('registry.dialog.amount')}</p>
                   <p className="font-serif-display text-2xl text-foreground font-bold mb-4">${selectedAmount}</p>
-                  <div className="bg-white rounded-2xl p-4 inline-block mb-4">
-                    <QRCodeSVG
-                      value={`https://smart-union-hub.lovable.app/registry?amount=${selectedAmount}`}
-                      size={180}
-                      level="H"
-                      includeMargin={false}
-                    />
-                  </div>
-                  <p className="font-sans-elegant text-sm text-muted-foreground">{t('gift.qr.scan')}</p>
-                  <p className="font-sans-elegant text-xs text-muted-foreground mt-2">{t('gift.qr.noinfo')}</p>
+                  {checkoutUrl ? (
+                    <>
+                      <div className="bg-white rounded-2xl p-4 inline-block mb-4">
+                        <QRCodeSVG
+                          value={checkoutUrl}
+                          size={180}
+                          level="H"
+                          includeMargin={false}
+                        />
+                      </div>
+                      <p className="font-sans-elegant text-sm text-muted-foreground">{t('gift.qr.scan')}</p>
+                    </>
+                  ) : (
+                    <div className="py-8">
+                      <button
+                        onClick={handleGenerateQR}
+                        disabled={giftLoading}
+                        className="btn-primary justify-center mx-auto disabled:opacity-50"
+                      >
+                        {giftLoading ? (
+                          <span className="animate-spin w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full" />
+                        ) : (
+                          <QrCode className="w-4 h-4" />
+                        )}
+                        {giftLoading ? '...' : t('gift.generateQR') || 'Generate QR Code'}
+                      </button>
+                    </div>
+                  )}
                 </div>
               </motion.div>
             ) : (
