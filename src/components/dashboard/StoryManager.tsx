@@ -305,7 +305,7 @@ const StoryManager = () => {
               )}
             </AnimatePresence>
           </div>
-        )))}
+        ))}
       </motion.div>
     </div>
   );
