@@ -502,7 +502,17 @@ const Index = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const handleSelectTier = (amount: number) => {
+  // Handle payment return from Stripe Checkout
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('gift') === 'success') {
+      const amount = params.get('amount');
+      toast.success(`Thank you for your generous gift${amount ? ` of $${amount}` : ''}! 💕`);
+      // Clean up URL
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  }, []);
+
     setSelectedAmount(amount);
     setCustomAmount('');
     setGiftOpen(false);
