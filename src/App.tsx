@@ -52,6 +52,7 @@ const App = () => (
                         <Dashboard />
                       </ProtectedRoute>
                     } />
+                    <Route path="/staff" element={<Staff />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                   <Footer />
