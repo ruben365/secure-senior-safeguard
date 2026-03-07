@@ -10,10 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { supabase } from '@/integrations/supabase/client';
 import { useSiteImages } from '@/hooks/useSiteContent';
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
-const stripePromise = loadStripe('pk_live_51T8RMQ1zcEEWFefrmD6etyTp68WFGVzc3eg0gURh4bXd5CMwV699dZph5vhdg47r0SDdH1lFgxkmlyHurgtkzkSz004Yz5eoR5');
 
 import heroImg from '@/assets/hero-wedding-opt.webp';
 import flowersImg from '@/assets/flowers-lavender.jpg';
