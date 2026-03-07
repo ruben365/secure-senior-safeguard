@@ -860,3 +860,12 @@
     animation: none !important;
   }
 }
+
+/* Hide scrollbars in dialogs */
+[role="dialog"] {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+[role="dialog"]::-webkit-scrollbar {
+  display: none;
+}
