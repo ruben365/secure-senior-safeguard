@@ -24,102 +24,67 @@
 
     <!-- Inline critical CSS for immediate FCP -->
     <style>
-      #app-loader{display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'Playfair Display',Georgia,serif;color:#4A3B4E;text-align:center;flex-direction:column;gap:0.75rem;position:relative;overflow:hidden;background:transparent}
+      #app-loader{display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'Playfair Display',Georgia,serif;color:#4A3B4E;text-align:center;flex-direction:column;gap:1.5rem;position:relative;overflow:hidden;
+        background:rgba(249,248,249,0.4);
+        backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px)}
 
-      /* ── Floating glass bubbles ── */
-      .glass-bubble{position:absolute;border-radius:50%;
-        background:rgba(255,255,255,0.08);
-        backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-        border:1px solid rgba(255,255,255,0.15);
-        box-shadow:inset 0 0 30px rgba(255,255,255,0.05),0 8px 32px rgba(74,59,78,0.08);
-        z-index:1}
-
-      .glass-bubble:nth-child(1){width:320px;height:320px;top:-8%;left:-5%;animation:bubble-float1 12s ease-in-out infinite}
-      .glass-bubble:nth-child(2){width:220px;height:220px;bottom:10%;right:-3%;animation:bubble-float2 10s ease-in-out infinite}
-      .glass-bubble:nth-child(3){width:160px;height:160px;top:20%;right:15%;animation:bubble-float3 14s ease-in-out infinite}
-      .glass-bubble:nth-child(4){width:120px;height:120px;bottom:25%;left:10%;animation:bubble-float1 11s ease-in-out infinite reverse}
-      .glass-bubble:nth-child(5){width:80px;height:80px;top:60%;left:35%;animation:bubble-float2 9s ease-in-out infinite}
-      .glass-bubble:nth-child(6){width:200px;height:200px;top:5%;right:40%;animation:bubble-float3 13s ease-in-out infinite reverse}
-      .glass-bubble:nth-child(7){width:100px;height:100px;bottom:5%;left:50%;animation:bubble-float1 8s ease-in-out infinite}
-
-      /* Colored inner glow per bubble */
-      .glass-bubble:nth-child(1)::after,.glass-bubble:nth-child(2)::after,.glass-bubble:nth-child(3)::after,
-      .glass-bubble:nth-child(4)::after,.glass-bubble:nth-child(5)::after,.glass-bubble:nth-child(6)::after,
-      .glass-bubble:nth-child(7)::after{
-        content:'';position:absolute;inset:15%;border-radius:50%;filter:blur(25px);opacity:0.5}
-      .glass-bubble:nth-child(1)::after{background:radial-gradient(circle,hsl(330,40%,75%),transparent)}
-      .glass-bubble:nth-child(2)::after{background:radial-gradient(circle,hsl(270,30%,75%),transparent)}
-      .glass-bubble:nth-child(3)::after{background:radial-gradient(circle,hsl(300,25%,70%),transparent)}
-      .glass-bubble:nth-child(4)::after{background:radial-gradient(circle,hsl(290,35%,72%),transparent)}
-      .glass-bubble:nth-child(5)::after{background:radial-gradient(circle,hsl(320,30%,78%),transparent)}
-      .glass-bubble:nth-child(6)::after{background:radial-gradient(circle,hsl(280,25%,74%),transparent)}
-      .glass-bubble:nth-child(7)::after{background:radial-gradient(circle,hsl(310,35%,76%),transparent)}
-
-      /* Highlight / refraction on bubbles */
-      .glass-bubble::before{content:'';position:absolute;top:12%;left:18%;width:35%;height:25%;border-radius:50%;
-        background:linear-gradient(135deg,rgba(255,255,255,0.4),transparent);transform:rotate(-30deg)}
-
-      @keyframes bubble-float1{
-        0%,100%{transform:translate(0,0) scale(1)}
-        33%{transform:translate(25px,-20px) scale(1.05)}
-        66%{transform:translate(-15px,15px) scale(0.97)}
-      }
-      @keyframes bubble-float2{
-        0%,100%{transform:translate(0,0) scale(1)}
-        50%{transform:translate(-20px,-25px) scale(1.08)}
-      }
-      @keyframes bubble-float3{
-        0%,100%{transform:translate(0,0) scale(1)}
-        25%{transform:translate(18px,12px) scale(1.03)}
-        75%{transform:translate(-12px,-18px) scale(0.96)}
-      }
-
-      /* ── Glassmorphism card ── */
-      @keyframes fade-up{0%{opacity:0;transform:translateY(24px)}100%{opacity:1;transform:translateY(0)}}
-      @keyframes pulse-glow{0%,100%{opacity:0.6;transform:scale(1)}50%{opacity:1;transform:scale(1.15)}}
-      @keyframes card-shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-
-      .loader-card{
-        background:rgba(255,255,255,0.12);
-        backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);
-        border:1px solid rgba(255,255,255,0.25);
-        border-radius:2.5rem;padding:3rem 3.5rem;
-        position:relative;z-index:3;
+      /* ── Central spectrum globe ── */
+      .spectrum-globe{
+        width:280px;height:280px;border-radius:50%;position:relative;z-index:2;
+        background:conic-gradient(from 0deg,
+          hsl(330,50%,75%),hsl(290,40%,72%),hsl(270,45%,74%),
+          hsl(310,42%,70%),hsl(340,48%,76%),hsl(300,45%,73%),
+          hsl(280,38%,71%),hsl(330,50%,75%));
         box-shadow:
-          0 8px 40px rgba(74,59,78,0.1),
-          0 0 60px rgba(201,169,182,0.12),
-          inset 0 1px 0 rgba(255,255,255,0.4),
-          inset 0 -1px 0 rgba(255,255,255,0.08);
-        animation:fade-up 0.9s ease-out both}
+          0 0 80px rgba(201,169,182,0.4),
+          0 0 160px rgba(184,169,201,0.25),
+          inset 0 0 60px rgba(255,255,255,0.15);
+        animation:globe-rotate 8s linear infinite,globe-morph 12s ease-in-out infinite,globe-pulse 4s ease-in-out infinite;
+      }
 
-      .loader-card::after{
-        content:'';position:absolute;inset:0;border-radius:2.5rem;
-        background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,0.18) 50%,transparent 60%);
-        background-size:200% 100%;
-        animation:card-shimmer 3s ease-in-out infinite;
-        pointer-events:none}
+      /* Glass refraction highlight */
+      .spectrum-globe::before{content:'';position:absolute;top:10%;left:15%;width:45%;height:35%;border-radius:50%;
+        background:linear-gradient(135deg,rgba(255,255,255,0.5) 0%,rgba(255,255,255,0.1) 50%,transparent 100%);
+        transform:rotate(-25deg);pointer-events:none}
 
-      .loader-heart{font-size:1.6rem;color:#C9A9B6;animation:pulse-glow 2s ease-in-out infinite;margin-bottom:0.25rem}
-      #app-loader h1{font-size:2.75rem;font-weight:600;letter-spacing:-0.5px;margin:0;background:linear-gradient(135deg,#4A3B4E 0%,#9F82A4 50%,#6B4E71 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:fade-up 0.9s ease-out 0.15s both}
+      /* Soft inner glow ring */
+      .spectrum-globe::after{content:'';position:absolute;inset:8%;border-radius:50%;
+        border:1px solid rgba(255,255,255,0.25);
+        background:radial-gradient(circle at 35% 35%,rgba(255,255,255,0.12),transparent 60%);
+        filter:blur(2px)}
+
+      @keyframes globe-rotate{0%{filter:hue-rotate(0deg) blur(0px)}100%{filter:hue-rotate(30deg) blur(0px)}}
+      @keyframes globe-morph{
+        0%,100%{border-radius:60% 40% 30% 70%/60% 30% 70% 40%}
+        25%{border-radius:30% 60% 70% 40%/50% 60% 30% 60%}
+        50%{border-radius:50% 60% 30% 60%/30% 40% 70% 60%}
+        75%{border-radius:40% 50% 60% 50%/60% 30% 50% 70%}
+      }
+      @keyframes globe-pulse{0%,100%{transform:scale(1);opacity:0.9}50%{transform:scale(1.04);opacity:1}}
+
+      /* ── Text below globe ── */
+      @keyframes fade-up{0%{opacity:0;transform:translateY(16px)}100%{opacity:1;transform:translateY(0)}}
+      @keyframes pulse-glow{0%,100%{opacity:0.6;transform:scale(1)}50%{opacity:1;transform:scale(1.12)}}
+
+      .loader-heart{font-size:1.4rem;color:#C9A9B6;animation:pulse-glow 2s ease-in-out infinite}
+      #app-loader h1{font-size:2.5rem;font-weight:600;letter-spacing:-0.5px;margin:0;
+        background:linear-gradient(135deg,#4A3B4E 0%,#9F82A4 50%,#6B4E71 100%);
+        -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+        animation:fade-up 0.9s ease-out 0.15s both}
       #app-loader .loader-date{font-family:'DM Sans','Inter',sans-serif;font-size:0.8rem;letter-spacing:0.35em;text-transform:uppercase;color:#9F82A4;margin:0;animation:fade-up 0.9s ease-out 0.35s both}
-      .loader-line{width:60px;height:1px;background:linear-gradient(90deg,transparent,rgba(191,163,122,0.5),transparent);margin:0.5rem auto;animation:fade-up 0.9s ease-out 0.25s both}
+      .loader-line{width:60px;height:1px;background:linear-gradient(90deg,transparent,rgba(191,163,122,0.5),transparent);margin:0.25rem auto;animation:fade-up 0.9s ease-out 0.25s both}
 
       /* ── DARK MODE ── */
       @media(prefers-color-scheme:dark){
-        #app-loader{color:#e8e0ec}
-        .glass-bubble{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08);
-          box-shadow:inset 0 0 30px rgba(160,120,180,0.06),0 8px 32px rgba(0,0,0,0.2)}
-        .glass-bubble::before{background:linear-gradient(135deg,rgba(255,255,255,0.12),transparent)}
-        .glass-bubble:nth-child(1)::after{background:radial-gradient(circle,hsl(330,40%,45%),transparent)}
-        .glass-bubble:nth-child(2)::after{background:radial-gradient(circle,hsl(270,30%,50%),transparent)}
-        .glass-bubble:nth-child(3)::after{background:radial-gradient(circle,hsl(300,25%,48%),transparent)}
-        .glass-bubble:nth-child(4)::after{background:radial-gradient(circle,hsl(290,35%,46%),transparent)}
-        .glass-bubble:nth-child(5)::after{background:radial-gradient(circle,hsl(320,30%,50%),transparent)}
-        .glass-bubble:nth-child(6)::after{background:radial-gradient(circle,hsl(280,25%,48%),transparent)}
-        .glass-bubble:nth-child(7)::after{background:radial-gradient(circle,hsl(310,35%,50%),transparent)}
-        .loader-card{background:rgba(30,24,38,0.35);border-color:rgba(255,255,255,0.1);
-          box-shadow:0 8px 40px rgba(0,0,0,0.3),0 0 60px rgba(140,100,160,0.1),inset 0 1px 0 rgba(255,255,255,0.06)}
-        .loader-card::after{background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,0.06) 50%,transparent 60%);background-size:200% 100%}
+        #app-loader{background:rgba(20,16,25,0.4);color:#e8e0ec}
+        .spectrum-globe{
+          background:conic-gradient(from 0deg,
+            hsl(330,45%,50%),hsl(290,38%,48%),hsl(270,42%,50%),
+            hsl(310,40%,47%),hsl(340,45%,52%),hsl(300,42%,49%),
+            hsl(280,36%,48%),hsl(330,45%,50%));
+          box-shadow:0 0 80px rgba(160,120,170,0.35),0 0 160px rgba(140,100,160,0.2),inset 0 0 60px rgba(255,255,255,0.06)}
+        .spectrum-globe::before{background:linear-gradient(135deg,rgba(255,255,255,0.2) 0%,rgba(255,255,255,0.04) 50%,transparent 100%)}
+        .spectrum-globe::after{border-color:rgba(255,255,255,0.1);background:radial-gradient(circle at 35% 35%,rgba(255,255,255,0.05),transparent 60%)}
         #app-loader h1{background:linear-gradient(135deg,#e8e0ec 0%,#b8a9c9 50%,#9478a5 100%);-webkit-background-clip:text;background-clip:text}
         #app-loader .loader-date{color:#b8a9c9}
         .loader-heart{color:#9478a5}
