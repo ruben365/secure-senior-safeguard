@@ -177,7 +177,10 @@ const PersonalCourtSection = ({ t }: { t: (key: string) => string }) => {
               <Heart className="w-6 h-6 text-rose-400 fill-rose-400 icon-glow animate-pulse-love" />
             </div>
 
-            <h3 className="font-serif-display text-2xl md:text-3xl text-foreground font-semibold mb-6">{t('court.title')}</h3>
+            <h3 className="font-serif-display text-2xl md:text-3xl text-foreground font-semibold mb-2">{t('court.title')}</h3>
+            <p className="font-sans-elegant text-xs tracking-[0.2em] uppercase text-muted-foreground font-medium mb-6">
+              {t('court.subtitle')}
+            </p>
 
             <div className="min-h-[80px] flex items-center justify-center">
               <AnimatePresence mode="wait">
@@ -250,9 +253,12 @@ const AnnouncementsSection = ({ t }: { t: (key: string) => string }) => {
               <Megaphone className="w-6 h-6 text-primary icon-glow" />
             </div>
 
-            <h3 className="font-serif-display text-lg md:text-xl text-foreground font-semibold mb-4 tracking-wide uppercase">
+            <h3 className="font-serif-display text-2xl md:text-3xl text-foreground font-semibold mb-2">
               {t('announcements.title')}
             </h3>
+            <p className="font-sans-elegant text-xs tracking-[0.2em] uppercase text-muted-foreground font-medium mb-4">
+              {t('announcements.subtitle')}
+            </p>
 
             <div className="min-h-[100px] flex items-center justify-center">
               <AnimatePresence mode="wait">
@@ -314,7 +320,7 @@ const TransitioningScripture = ({ t }: { t: (key: string) => string }) => {
         <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-gradient-to-br from-rose-400/10 to-violet-400/10 blur-2xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full bg-gradient-to-tr from-amber-400/10 to-pink-400/10 blur-2xl pointer-events-none" />
         <BookOpen className="w-8 h-8 text-amber-400 icon-glow mx-auto mb-6" />
-        <div className="min-h-[80px] flex items-center justify-center">
+        <div className="h-[140px] md:h-[120px] flex items-center justify-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentVerse}
@@ -356,7 +362,7 @@ const ScriptureTransition = ({ t }: { t: (key: string) => string }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentVerse((prev) => (prev + 1) % VERSES.length);
-    }, 6000);
+    }, 10000);
     return () => clearInterval(interval);
   }, []);
 
