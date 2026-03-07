@@ -268,6 +268,30 @@ const translations: Record<string, Record<Language, string>> = {
   'registry.dialog.send': { fr: 'Envoyer le cadeau', en: 'Send Gift', es: 'Enviar Regalo' },
   'registry.dialog.thanks': { fr: 'Merci pour votre générosité !', en: 'Thank you for your generosity!', es: '¡Gracias por tu generosidad!' },
   'registry.dialog.note': { fr: 'Le paiement sera configuré prochainement. Merci de votre patience.', en: 'Payment will be configured soon. Thank you for your patience.', es: 'El pago se configurará pronto. Gracias por tu paciencia.' },
+  'registry.dialog.defaultMessage': { fr: 'Félicitations aux mariés ! 💕', en: 'Congratulations to the couple! 💕', es: '¡Felicidades a los novios! 💕' },
+
+  // Gift payment
+  'gift.optional': { fr: 'optionnel', en: 'optional', es: 'opcional' },
+  'gift.payCard': { fr: 'Par carte', en: 'Pay by Card', es: 'Por tarjeta' },
+  'gift.payQR': { fr: 'QR Code', en: 'QR Code', es: 'Código QR' },
+  'gift.qr.scan': { fr: 'Scannez ce code avec votre téléphone pour procéder au paiement', en: 'Scan this code with your phone to proceed with payment', es: 'Escanea este código con tu teléfono para proceder al pago' },
+  'gift.qr.noinfo': { fr: 'Aucune information bancaire requise — paiement rapide et sécurisé', en: 'No bank information required — fast and secure payment', es: 'No se requiere información bancaria — pago rápido y seguro' },
+  'gift.terms.link': { fr: 'Conditions & politique de remboursement', en: 'Terms & Refund Policy', es: 'Términos y política de reembolso' },
+  'gift.terms.title': { fr: 'Conditions & Politique', en: 'Terms & Policy', es: 'Términos y Política' },
+  'gift.terms.refund': { fr: '💰 Si le montant de votre cadeau est supérieur à ce que vous souhaitiez, veuillez nous contacter. Nous pouvons vous rembourser sous 10 jours ouvrables.', en: '💰 If your gift amount was more than intended, please reach out to us. We can refund you within 10 business days.', es: '💰 Si el monto de su regalo fue mayor de lo previsto, contáctenos. Podemos reembolsarlo dentro de 10 días hábiles.' },
+  'gift.terms.privacy': { fr: '🔒 Nous ne collectons ni ne stockons aucune donnée personnelle ou bancaire sur cette plateforme. Tous les paiements sont traités de manière sécurisée par Stripe.', en: '🔒 We do not collect or store any personal or banking data on this platform. All payments are securely processed by Stripe.', es: '🔒 No recopilamos ni almacenamos datos personales ni bancarios en esta plataforma. Todos los pagos son procesados de forma segura por Stripe.' },
+  'gift.terms.accuracy': { fr: '✅ Veuillez vous assurer de saisir le montant correct avant de confirmer votre paiement.', en: '✅ Please make sure to enter the correct amount before confirming your payment.', es: '✅ Asegúrese de ingresar el monto correcto antes de confirmar su pago.' },
+  'gift.terms.contact': { fr: '📧 Pour toute question ou demande de remboursement, contactez-nous directement via la page Questions.', en: '📧 For any questions or refund requests, contact us directly via the Questions page.', es: '📧 Para cualquier pregunta o solicitud de reembolso, contáctenos directamente a través de la página de Preguntas.' },
+
+  // Newsletter / Subscribe
+  'footer.subscribe.title': { fr: 'Restez Connecté', en: 'Stay Connected', es: 'Mantente Conectado' },
+  'footer.subscribe.desc': { fr: 'Abonnez-vous pour recevoir nos nouvelles familiales — bébé à venir, annonces et plus !', en: 'Subscribe to receive our family news — baby announcements, updates and more!', es: '¡Suscríbete para recibir nuestras noticias familiares — anuncios de bebé, actualizaciones y más!' },
+  'footer.subscribe.placeholder': { fr: 'votre@email.com', en: 'your@email.com', es: 'tu@correo.com' },
+  'footer.subscribe.success': { fr: 'Vous êtes inscrit(e) ! 🎉', en: "You're subscribed! 🎉", es: '¡Estás suscrito! 🎉' },
+  'footer.subscribe.already': { fr: 'Vous êtes déjà inscrit(e) !', en: "You're already subscribed!", es: '¡Ya estás suscrito!' },
+  'footer.subscribe.invalidEmail': { fr: 'Veuillez entrer un email valide', en: 'Please enter a valid email', es: 'Ingrese un correo válido' },
+  'footer.subscribe.error': { fr: 'Une erreur est survenue. Réessayez.', en: 'Something went wrong. Please try again.', es: 'Algo salió mal. Inténtelo de nuevo.' },
+  'footer.subscribe.thankyou': { fr: 'Merci ! Vous recevrez nos nouvelles. 💕', en: 'Thank you! You\'ll receive our news. 💕', es: '¡Gracias! Recibirás nuestras noticias. 💕' },
 
   // Explore
   'explore.title': { fr: 'Découvrez Notre Mariage', en: 'Explore Our Wedding', es: 'Explora Nuestra Boda' },
