@@ -32,11 +32,14 @@
       .loader-figures{display:flex;align-items:flex-end;justify-content:center;gap:0;position:relative;z-index:2;min-height:180px}
 
       /* ── Each figure ── */
-      .loader-figure{display:flex;flex-direction:column;align-items:center;gap:0.4rem;opacity:0}
-      .loader-figure img{width:100px;height:auto;
-        filter:brightness(0.35) sepia(0.4) hue-rotate(260deg) saturate(2);
-        drop-shadow:0 4px 12px rgba(74,59,78,0.2)}
-      .loader-figure-name{font-family:'Playfair Display',Georgia,serif;font-size:1.1rem;font-weight:600;color:#4A3B4E;letter-spacing:0.05em;opacity:0}
+      .loader-figure{display:flex;flex-direction:column;align-items:center;gap:0;opacity:0;position:relative}
+      .loader-figure img{width:110px;height:auto;position:relative;z-index:2;
+        filter:brightness(0.2) sepia(0.5) hue-rotate(260deg) saturate(3) contrast(1.2);
+        drop-shadow:0 4px 16px rgba(74,59,78,0.3)}
+      .loader-figure-name{font-family:'Playfair Display',Georgia,serif;font-size:1.3rem;font-weight:700;
+        color:#4A3B4E;letter-spacing:0.08em;opacity:0;
+        position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;
+        text-shadow:0 0 20px rgba(255,255,255,0.9),0 0 40px rgba(255,255,255,0.6)}
 
       /* Groom slides in from left */
       .loader-figure--groom{animation:slide-from-left 1.2s ease-out 0.2s forwards}
