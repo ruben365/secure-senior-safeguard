@@ -48,8 +48,8 @@
       /* Bride slides in from right */
       .loader-figure--bride{animation:slide-from-right 1.2s ease-out 0.2s forwards}
 
-      @keyframes slide-from-left{0%{opacity:0;transform:translateX(-80px)}100%{opacity:1;transform:translateX(0)}}
-      @keyframes slide-from-right{0%{opacity:0;transform:translateX(80px)}100%{opacity:1;transform:translateX(0)}}
+      @keyframes slide-from-left{0%{opacity:0;transform:translateX(-80px) scale(0.9)}70%{opacity:1;transform:translateX(5px) scale(1.02)}100%{opacity:1;transform:translateX(0) scale(1)}}
+      @keyframes slide-from-right{0%{opacity:0;transform:translateX(80px) scale(0.9)}70%{opacity:1;transform:translateX(-5px) scale(1.02)}100%{opacity:1;transform:translateX(0) scale(1)}}
 
       /* Names fade in behind figures */
       .loader-figure--groom .loader-figure-name{animation:name-reveal 0.6s ease-out 1.5s forwards}
