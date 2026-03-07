@@ -317,6 +317,9 @@ const Dashboard = () => {
                 </span>
               )}
             </TabsTrigger>
+            <TabsTrigger value="email" className="rounded-full px-4 py-2 font-sans-elegant text-xs font-bold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground">
+              <Mail className="w-3.5 h-3.5 mr-1.5" /> Email Blast
+            </TabsTrigger>
             <TabsTrigger value="share" className="rounded-full px-4 py-2 font-sans-elegant text-xs font-bold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground">
               <Share2 className="w-3.5 h-3.5 mr-1.5" /> Share
             </TabsTrigger>
