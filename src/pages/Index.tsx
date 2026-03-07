@@ -214,8 +214,8 @@ const Index = () => {
       color: 'from-rose-500/20 to-pink-500/10',
       iconColor: 'text-rose-400',
       dialogContent: [
-        { icon: Clock, label: t('details.ceremony.time'), desc: t('details.ceremony.program.welcome') },
-        { icon: MapPin, label: t('details.ceremony.location'), desc: t('details.ceremony.address') },
+        { icon: Calendar, label: t('details.ceremony.time'), desc: t('details.ceremony.program.welcome'), highlight: true },
+        { icon: MapPin, label: t('details.ceremony.location'), desc: t('details.ceremony.address'), highlight: true },
         { icon: BookOpen, label: t('details.ceremony.program.readings'), desc: t('details.ceremony.program.readings.desc') },
         { icon: Gem, label: t('details.ceremony.program.vows'), desc: t('details.ceremony.program.vows.desc') },
         { icon: Music, label: t('details.ceremony.program.hymns'), desc: t('details.ceremony.program.hymns.desc') },
@@ -229,8 +229,8 @@ const Index = () => {
       color: 'from-amber-500/20 to-orange-500/10',
       iconColor: 'text-amber-400',
       dialogContent: [
-        { icon: Clock, label: t('details.reception.time'), desc: t('details.reception.program.cocktail') },
-        { icon: MapPin, label: t('details.reception.location'), desc: t('details.reception.address') },
+        { icon: Calendar, label: t('details.reception.time'), desc: t('details.reception.program.cocktail'), highlight: true },
+        { icon: MapPin, label: t('details.reception.location'), desc: t('details.reception.address'), highlight: true },
         { icon: Utensils, label: t('details.reception.program.dinner'), desc: t('details.reception.program.dinner.desc') },
         { icon: Music, label: t('details.reception.program.dance'), desc: t('details.reception.program.dance.desc') },
         { icon: Heart, label: t('details.reception.program.cake'), desc: t('details.reception.program.cake.desc') },
@@ -243,7 +243,7 @@ const Index = () => {
       color: 'from-violet-500/20 to-purple-500/10',
       iconColor: 'text-violet-400',
       dialogContent: [
-        { icon: Hotel, label: t('details.accommodation.hotel'), desc: t('details.accommodation.hotel.desc') },
+        { icon: Hotel, label: t('details.accommodation.hotel'), desc: t('details.accommodation.hotel.desc'), highlight: true },
         { icon: MapPin, label: t('details.accommodation.address'), desc: t('details.accommodation.address.desc') },
         { icon: Sparkles, label: t('details.accommodation.rate'), desc: t('details.accommodation.rate.desc') },
       ]
@@ -255,7 +255,7 @@ const Index = () => {
       color: 'from-emerald-500/20 to-teal-500/10',
       iconColor: 'text-emerald-400',
       dialogContent: [
-        { icon: Car, label: t('details.transport.shuttle'), desc: t('details.transport.shuttle.desc') },
+        { icon: Car, label: t('details.transport.shuttle'), desc: t('details.transport.shuttle.desc'), highlight: true },
         { icon: MapPin, label: t('details.transport.parking'), desc: t('details.transport.parking.desc') },
         { icon: Clock, label: t('details.transport.schedule'), desc: t('details.transport.schedule.desc') },
       ]
@@ -787,12 +787,12 @@ const Index = () => {
       <section className="py-14 md:py-20 relative overflow-hidden">
         <AuroraOrb position="left" color="rgba(201,169,182,0.25)" size={400} delay={0} />
         <AuroraOrb position="right" color="rgba(180,140,210,0.2)" size={350} delay={5} />
-        <div className="container mx-auto px-6 md:px-12 max-w-4xl relative z-10">
+        <div className="container mx-auto px-6 md:px-12 max-w-5xl relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-10"
+            className="text-center mb-12"
           >
             <div className="inline-block px-5 py-2 rounded-full glass-card-strong mb-5">
               <p className="font-sans-elegant text-xs tracking-[0.25em] uppercase text-muted-foreground font-medium">{t('nav.details')}</p>
@@ -801,27 +801,61 @@ const Index = () => {
             <p className="font-sans-elegant text-lg text-muted-foreground max-w-lg mx-auto">{t('details.subtitle')}</p>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {detailSections.map((section, i) =>
-              <motion.button
-                key={section.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
-                whileHover={{ scale: 1.04, y: -4 }}
-                whileTap={{ scale: 0.97 }}
-                onClick={() => setActiveDetail(section.id)}
-                className="glass-card-strong rounded-3xl p-6 card-hover group text-center relative overflow-hidden cursor-pointer"
-              >
-                <div className={`absolute top-0 right-0 w-20 h-20 rounded-full bg-gradient-to-br ${section.color} blur-xl pointer-events-none opacity-60`} />
-                <div className={`w-14 h-14 rounded-3xl bg-gradient-to-br ${section.color} flex items-center justify-center mb-4 mx-auto group-hover:shadow-glow transition-shadow duration-500 shadow-soft`}>
-                  <section.icon className={`w-6 h-6 ${section.iconColor} icon-glow`} />
-                </div>
-                <h3 className="font-serif-display text-base text-foreground font-semibold">{section.title}</h3>
-                <p className="font-sans-elegant text-[11px] text-muted-foreground mt-1.5">{t('details.tapToSee')}</p>
-              </motion.button>
-            )}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+            {detailSections.map((section, i) => {
+              const subtitleKeys: Record<string, string> = {
+                ceremony: 'details.ceremony.time',
+                reception: 'details.reception.time',
+                accommodation: 'details.accommodation.hotel',
+                transport: 'details.transport.shuttle',
+              };
+              return (
+                <motion.button
+                  key={section.id}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.12, duration: 0.6 }}
+                  whileHover={{ scale: 1.05, y: -6 }}
+                  whileTap={{ scale: 0.96 }}
+                  onClick={() => setActiveDetail(section.id)}
+                  className="group relative rounded-3xl p-6 md:p-7 text-center cursor-pointer overflow-hidden
+                    bg-white/60 dark:bg-white/[0.04] backdrop-blur-xl
+                    border border-white/40 dark:border-white/10
+                    shadow-[0_8px_32px_rgba(139,107,138,0.08),0_2px_8px_rgba(0,0,0,0.04)]
+                    hover:shadow-[0_16px_48px_rgba(139,107,138,0.16),0_4px_16px_rgba(0,0,0,0.06)]
+                    transition-shadow duration-500"
+                >
+                  {/* Soft colored glow behind icon */}
+                  <div className={`absolute top-4 left-1/2 -translate-x-1/2 w-24 h-24 rounded-full bg-gradient-to-br ${section.color} blur-2xl pointer-events-none opacity-50 group-hover:opacity-80 transition-opacity duration-500`} />
+
+                  {/* Icon circle with soft pastel bg */}
+                  <div className={`relative w-16 h-16 rounded-full bg-gradient-to-br ${section.color} flex items-center justify-center mb-5 mx-auto
+                    ring-4 ring-white/50 dark:ring-white/10
+                    group-hover:ring-primary/20 group-hover:shadow-glow
+                    transition-all duration-500`}>
+                    <section.icon className={`w-7 h-7 ${section.iconColor} group-hover:scale-110 transition-transform duration-300`} />
+                  </div>
+
+                  <h3 className="font-serif-display text-base md:text-lg text-foreground font-semibold mb-1.5">{section.title}</h3>
+
+                  {/* Preview text */}
+                  <p className="font-sans-elegant text-[11px] text-muted-foreground leading-relaxed mb-3 line-clamp-2">
+                    {t(subtitleKeys[section.id] || 'details.tapToSee')}
+                  </p>
+
+                  {/* Tap indicator */}
+                  <div className="flex items-center justify-center gap-1.5 text-primary/60 group-hover:text-primary transition-colors duration-300">
+                    <span className="font-sans-elegant text-[10px] font-semibold tracking-wide uppercase">{t('details.tapToSee')}</span>
+                    <ChevronDown className="w-3 h-3 group-hover:translate-y-0.5 transition-transform duration-300" />
+                  </div>
+
+                  {/* Subtle animated border shimmer on hover */}
+                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={{ background: 'linear-gradient(135deg, transparent 40%, rgba(139,107,138,0.08) 50%, transparent 60%)', backgroundSize: '200% 200%', animation: 'shimmer 3s ease-in-out infinite' }} />
+                </motion.button>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -1032,31 +1066,38 @@ const Index = () => {
       {/* ===== DETAIL DIALOGS ===== */}
       {detailSections.map((section) =>
         <Dialog key={section.id} open={activeDetail === section.id} onOpenChange={(open) => !open && setActiveDetail(null)}>
-          <DialogContent className="max-w-md">
+          <DialogContent className="max-w-lg">
             <DialogHeader>
-              <div className={`w-14 h-14 rounded-3xl bg-gradient-to-br ${section.color} flex items-center justify-center mb-3 mx-auto`}>
-                <section.icon className={`w-6 h-6 ${section.iconColor}`} />
+              <div className="relative mx-auto mb-4">
+                <div className={`absolute inset-0 w-20 h-20 rounded-full bg-gradient-to-br ${section.color} blur-xl opacity-60 mx-auto`} />
+                <div className={`relative w-16 h-16 rounded-full bg-gradient-to-br ${section.color} flex items-center justify-center mx-auto ring-4 ring-white/30 dark:ring-white/10`}>
+                  <section.icon className={`w-7 h-7 ${section.iconColor}`} />
+                </div>
               </div>
               <DialogTitle className="font-serif-display text-2xl text-center">{section.title}</DialogTitle>
               <DialogDescription className="font-sans-elegant text-center text-muted-foreground">
                 {t('details.subtitle')}
               </DialogDescription>
             </DialogHeader>
-            <div className="space-y-3 pt-2">
+            <div className="space-y-3 pt-2 max-h-[60vh] overflow-y-auto pr-1">
               {section.dialogContent.map((item, j) =>
                 <motion.div
                   key={j}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: j * 0.06 }}
-                  className="glass-card rounded-2xl p-4 flex items-start gap-3"
+                  className={`rounded-2xl p-4 flex items-start gap-3 ${
+                    (item as any).highlight
+                      ? 'bg-primary/[0.06] dark:bg-primary/[0.08] border border-primary/15'
+                      : 'glass-card'
+                  }`}
                 >
                   <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${section.color} flex items-center justify-center flex-shrink-0 mt-0.5`}>
                     <item.icon className={`w-4 h-4 ${section.iconColor}`} />
                   </div>
-                  <div>
+                  <div className="flex-1 min-w-0">
                     <p className="font-sans-elegant text-sm font-semibold text-foreground">{item.label}</p>
-                    <p className="font-sans-elegant text-xs text-muted-foreground mt-0.5" style={{ lineHeight: 1.5 }}>{item.desc}</p>
+                    <p className="font-sans-elegant text-xs text-muted-foreground mt-0.5" style={{ lineHeight: 1.6 }}>{item.desc}</p>
                   </div>
                 </motion.div>
               )}
