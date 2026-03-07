@@ -24,6 +24,18 @@ const Enquiries = () => {
       question: question.trim(),
     });
     if (!error) {
+      // Send email notification via edge function
+      try {
+        await supabase.functions.invoke('send-contact-email', {
+          body: {
+            name: name.trim(),
+            email: email.trim(),
+            message: question.trim(),
+          },
+        });
+      } catch (emailErr) {
+        console.error('Email notification failed:', emailErr);
+      }
       setSent(true);
       setName('');
       setEmail('');
