@@ -23,7 +23,7 @@ const FloatingHearts = () => {
     }
 
     const symbols = ['✦', '✧', '♥', '·', '✦', '♥', '✧', '·', '✵', '♡'];
-    const generated: Heart[] = Array.from({ length: 28 }, (_, i) => ({
+    const generated: Heart[] = Array.from({ length: 14 }, (_, i) => ({
       id: i,
       x: 5 + Math.random() * 90,
       y: 5 + Math.random() * 90,
