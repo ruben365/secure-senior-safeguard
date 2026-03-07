@@ -621,32 +621,8 @@ const Index = () => {
       {/* ===== DIVIDER ===== */}
       <SectionDivider variant="heart" />
 
-      {/* ===== LOVE QUOTE — Romantic Divider ===== */}
-      <section className="py-12 md:py-16 relative overflow-hidden">
-        <AuroraOrb position="right" color="rgba(180,140,210,0.25)" size={350} delay={2} />
-        <div className="container mx-auto px-6 md:px-12 max-w-3xl relative z-10 text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <div className="glass-card-strong rounded-3xl p-10 md:p-14 relative overflow-hidden">
-              <GoldenCorners />
-              <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-gradient-to-br from-rose-400/10 to-violet-400/10 blur-2xl pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full bg-gradient-to-tr from-pink-400/10 to-rose-400/10 blur-2xl pointer-events-none" />
-              
-              <div className="love-divider mb-6">
-                <Heart className="w-6 h-6 text-rose-400 fill-rose-400 icon-glow animate-pulse-love" />
-              </div>
-              
-              <p className="font-serif-display text-xl md:text-2xl text-foreground italic leading-relaxed mb-4">
-                {t('love.quote1')}
-              </p>
-              <p className="font-sans-elegant text-sm text-muted-foreground font-semibold">{t('love.quote1.ref')}</p>
-              
-              <div className="love-divider mt-6">
-                <Heart className="w-4 h-4 text-primary/40 fill-primary/40" />
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      {/* ===== ANNOUNCEMENTS ===== */}
+      <AnnouncementsSection t={t} />
 
       {/* ===== DIVIDER ===== */}
       <SectionDivider variant="sparkle" />
@@ -744,22 +720,11 @@ const Index = () => {
       {/* ===== DIVIDER ===== */}
       <SectionDivider variant="line" />
 
-      {/* ===== SCRIPTURE — Love is Patient ===== */}
+      {/* ===== SCRIPTURE — Transitioning Verses ===== */}
       <section className="py-14 md:py-18 relative overflow-hidden">
         <AuroraOrb position="center" color="rgba(139,107,138,0.2)" size={400} delay={3} />
         <div className="container mx-auto px-6 md:px-12 max-w-3xl relative z-10 text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <div className="glass-card-strong rounded-3xl p-10 md:p-14 relative overflow-hidden">
-              <GoldenCorners />
-              <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-gradient-to-br from-rose-400/10 to-violet-400/10 blur-2xl pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full bg-gradient-to-tr from-amber-400/10 to-pink-400/10 blur-2xl pointer-events-none" />
-              <BookOpen className="w-8 h-8 text-amber-400 icon-glow mx-auto mb-6" />
-              <p className="font-serif-display text-xl md:text-2xl text-foreground italic leading-relaxed mb-4">
-                "{t('verse.genesis')}"
-              </p>
-              <p className="font-sans-elegant text-sm text-muted-foreground font-semibold">Genesis 2:24</p>
-            </div>
-          </motion.div>
+          <TransitioningScripture t={t} />
         </div>
       </section>
 
