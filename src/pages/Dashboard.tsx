@@ -518,18 +518,48 @@ const Dashboard = () => {
                 <h3 className="font-serif-display text-lg font-semibold text-foreground">{t('dashboard.newAnnouncement')}</h3>
               </div>
               <div className="space-y-4">
+                <p className="font-sans-elegant text-xs text-muted-foreground font-medium">🇬🇧 English (required)</p>
                 <Input
                   value={annTitle}
                   onChange={(e) => setAnnTitle(e.target.value)}
-                  placeholder={t('dashboard.announcementTitle')}
+                  placeholder="Title (English)"
                   className="rounded-2xl h-11 glass-card border-border/30 font-sans-elegant"
                 />
                 <Textarea
                   value={annContent}
                   onChange={(e) => setAnnContent(e.target.value)}
-                  placeholder={t('dashboard.announcementContent')}
-                  className="rounded-2xl glass-card border-border/30 font-sans-elegant min-h-[100px]"
+                  placeholder="Content (English)"
+                  className="rounded-2xl glass-card border-border/30 font-sans-elegant min-h-[80px]"
                 />
+
+                <p className="font-sans-elegant text-xs text-muted-foreground font-medium pt-2">🇫🇷 Français (optionnel)</p>
+                <Input
+                  value={annTitleFr}
+                  onChange={(e) => setAnnTitleFr(e.target.value)}
+                  placeholder="Titre (Français)"
+                  className="rounded-2xl h-11 glass-card border-border/30 font-sans-elegant"
+                />
+                <Textarea
+                  value={annContentFr}
+                  onChange={(e) => setAnnContentFr(e.target.value)}
+                  placeholder="Contenu (Français)"
+                  className="rounded-2xl glass-card border-border/30 font-sans-elegant min-h-[80px]"
+                />
+
+                <p className="font-sans-elegant text-xs text-muted-foreground font-medium pt-2">🇪🇸 Español (opcional)</p>
+                <Input
+                  value={annTitleEs}
+                  onChange={(e) => setAnnTitleEs(e.target.value)}
+                  placeholder="Título (Español)"
+                  className="rounded-2xl h-11 glass-card border-border/30 font-sans-elegant"
+                />
+                <Textarea
+                  value={annContentEs}
+                  onChange={(e) => setAnnContentEs(e.target.value)}
+                  placeholder="Contenido (Español)"
+                  className="rounded-2xl glass-card border-border/30 font-sans-elegant min-h-[80px]"
+                />
+
                 <button
                   onClick={handlePostAnnouncement}
                   disabled={annPosting || !annTitle.trim() || !annContent.trim()}
