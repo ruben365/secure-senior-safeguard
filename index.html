@@ -28,12 +28,16 @@
         background:transparent;
         backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 
-      .loader-couple{display:flex;align-items:flex-end;justify-content:center;position:relative;height:180px;width:360px;margin-bottom:0.5rem}
+      .loader-couple{display:flex;align-items:flex-end;justify-content:center;position:relative;height:200px;width:360px;margin-bottom:0.5rem}
 
-      .loader-figure{display:flex;flex-direction:column;align-items:center;gap:0.4rem;position:absolute;bottom:0}
-      .loader-figure img{height:130px;width:auto;object-fit:contain;opacity:0.85;
-        filter:drop-shadow(0 8px 24px rgba(74,59,78,0.12)) brightness(0.6) sepia(0.3) hue-rotate(260deg) saturate(1.5)}
-      .loader-figure .loader-name{font-family:'Playfair Display',Georgia,serif;font-size:0.9rem;font-weight:600;letter-spacing:0.08em;color:#4A3B4E;opacity:0;animation:fade-up 0.6s 2.2s forwards}
+      /* Horizontal line the icons walk on */
+      .loader-line{position:absolute;bottom:28px;left:0;right:0;height:1px;
+        background:linear-gradient(90deg,transparent 5%,#4A3B4E 30%,#4A3B4E 70%,transparent 95%);opacity:0;animation:fade-up 0.8s 1.4s forwards}
+
+      .loader-figure{display:flex;flex-direction:column;align-items:center;gap:0.3rem;position:absolute;bottom:30px}
+      .loader-figure img{height:130px;width:auto;object-fit:contain;opacity:0.9;
+        filter:drop-shadow(0 6px 16px rgba(74,59,78,0.15)) brightness(0.35) sepia(0.4) hue-rotate(260deg) saturate(2)}
+      .loader-figure .loader-name{font-family:'Playfair Display',Georgia,serif;font-size:0.85rem;font-weight:600;letter-spacing:0.08em;color:#4A3B4E;opacity:0;animation:fade-up 0.6s 2.2s forwards}
 
       .loader-groom-fig{left:0;animation:slide-groom 2s cubic-bezier(0.4,0,0.2,1) forwards}
       .loader-bride-fig{right:0;animation:slide-bride 2s cubic-bezier(0.4,0,0.2,1) forwards}
@@ -56,7 +60,8 @@
       @keyframes fade-up{0%{opacity:0;transform:translateY(12px)}100%{opacity:1;transform:translateY(0)}}
 
       @media(prefers-color-scheme:dark){
-        .loader-figure img{opacity:0.9;filter:drop-shadow(0 8px 24px rgba(148,120,165,0.15)) brightness(1.6) sepia(0.2) hue-rotate(260deg) saturate(1.2)}
+        .loader-figure img{opacity:0.9;filter:drop-shadow(0 6px 16px rgba(148,120,165,0.2)) brightness(1.4) sepia(0.2) hue-rotate(260deg) saturate(1.4)}
+        .loader-line{background:linear-gradient(90deg,transparent 5%,#b8a9c9 30%,#b8a9c9 70%,transparent 95%)}
         .loader-figure .loader-name{color:#d4c6e0}
         .loader-heart-pop{color:#b8a9c9;text-shadow:0 0 20px rgba(184,169,201,0.4)}
         .loader-glow{background:radial-gradient(circle,rgba(148,120,165,0.15) 0%,rgba(184,169,201,0.06) 40%,transparent 70%)}
@@ -78,7 +83,7 @@
     <div id="root">
       <div id="app-loader" aria-hidden="true">
         <div class="loader-couple">
-          
+          <div class="loader-line"></div>
           <div class="loader-figure loader-groom-fig">
             <img src="/images/groom-silhouette.png" alt="" />
             <span class="loader-name">Ruben</span>
