@@ -29,12 +29,12 @@ export const useMusic = () => useContext(MusicContext);
 // Track registry — add your MP3 URLs or paths here
 // Once you upload your songs, replace the `src` values with the file paths
 const TRACK_SOURCES: Record<string, string> = {
-  'amazing-grace': '',       // Instrumental Amazing Grace
-  'oceans-hillsong': '',     // Oceans by Hillsong
-  'blessed-larson': '',      // I Have Been Blessed by Joseph Larson
-  'how-great': '',           // How Great Thou Art
-  'joyful': '',              // Joyful, Joyful
-  'great-faithfulness': '',  // Great Is Thy Faithfulness
+  'amazing-grace': 'https://play.hymnswithoutwords.com/wp-content/uploads/2023/06/Amazing-Grace-Organ-5-Verses-2023.mp3',
+  'oceans-hillsong': '',     // Copyrighted — upload your own MP3
+  'blessed-larson': '',      // Copyrighted — upload your own MP3
+  'how-great': 'https://play.hymnswithoutwords.com/wp-content/uploads/2021/06/O-Lord-My-God-How-Great-Thou-Art-Organ-4-Verses-2021.mp3',
+  'joyful': '',              // Upload your own MP3
+  'great-faithfulness': 'https://play.hymnswithoutwords.com/wp-content/uploads/2017/06/Great-is-thy-faithfulness-Faithfulness-Runyan-3-Verses-Organ-2019.mp3',
 };
 
 export const TRACK_INFO: Record<string, Track> = {
