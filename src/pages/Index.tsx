@@ -863,55 +863,8 @@ const Index = () => {
       {/* ===== DIVIDER ===== */}
       <SectionDivider variant="heart" />
 
-      {/* ===== SCRIPTURE GALLERY — Multiple Verses ===== */}
-      <section className="py-14 md:py-20 relative overflow-hidden">
-        <AuroraOrb position="left" color="rgba(201,169,182,0.25)" size={400} delay={0} />
-        <AuroraOrb position="right" color="rgba(180,140,210,0.2)" size={350} delay={5} />
-        <div className="container mx-auto px-6 md:px-12 max-w-5xl relative z-10">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <div className="inline-block px-5 py-2 rounded-full glass-card-strong mb-5">
-              <p className="font-sans-elegant text-xs tracking-[0.25em] uppercase text-muted-foreground font-medium">{t('index.scripture')}</p>
-            </div>
-            <h2 className="font-serif-display text-3xl md:text-5xl text-foreground font-semibold mb-4">{t('verse.section.title')}</h2>
-            <p className="font-sans-elegant text-lg text-muted-foreground max-w-lg mx-auto">{t('verse.section.subtitle')}</p>
-          </motion.div>
-
-          {/* Verse cards grid */}
-          <div className="grid md:grid-cols-2 gap-5">
-            {[
-              { verse: t('verse.1cor13.full'), ref: '1 Corinthians 13:4-7', icon: Heart, iconColor: 'text-rose-400', theme: t('verse.theme.love'), color: 'from-rose-500/15 to-pink-500/8' },
-              { verse: t('verse.ecclesiastes'), ref: 'Ecclesiastes 4:9-12', icon: Users, iconColor: 'text-violet-400', theme: t('verse.theme.unity'), color: 'from-violet-500/15 to-purple-500/8' },
-              { verse: t('verse.colossians'), ref: 'Colossians 3:14', icon: Gem, iconColor: 'text-amber-400', theme: t('verse.theme.bond'), color: 'from-amber-500/15 to-orange-500/8' },
-              { verse: t('verse.genesis'), ref: 'Genesis 2:24', icon: Church, iconColor: 'text-emerald-400', theme: t('verse.theme.marriage'), color: 'from-emerald-500/15 to-teal-500/8' },
-              { verse: t('verse.romans12'), ref: 'Romans 12:10', icon: Sparkles, iconColor: 'text-pink-400', theme: t('verse.theme.devotion'), color: 'from-pink-500/15 to-rose-500/8' },
-              { verse: t('verse.galatians'), ref: 'Galatians 5:22-23', icon: Flower2, iconColor: 'text-teal-400', theme: t('verse.theme.spirit'), color: 'from-teal-500/15 to-emerald-500/8' },
-              { verse: t('verse.proverbs'), ref: 'Proverbs 3:5-6', icon: BookOpen, iconColor: 'text-indigo-400', theme: t('verse.theme.trust'), color: 'from-indigo-500/15 to-violet-500/8' },
-              { verse: t('verse.psalm37'), ref: 'Psalm 37:4', icon: Cross, iconColor: 'text-rose-400', theme: t('verse.theme.delight'), color: 'from-rose-500/15 to-pink-500/8' },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="glass-card-strong rounded-3xl p-7 md:p-8 relative overflow-hidden group card-hover"
-              >
-                <div className={`absolute top-0 right-0 w-32 h-32 rounded-full bg-gradient-to-br ${item.color} blur-2xl pointer-events-none opacity-60`} />
-                <div className="flex items-center gap-3 mb-4">
-                  <div className={`w-10 h-10 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center`}>
-                    <item.icon className={`w-5 h-5 ${item.iconColor}`} />
-                  </div>
-                  <span className="font-sans-elegant text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-semibold">{item.theme}</span>
-                </div>
-                <p className="font-serif-display text-base md:text-lg text-foreground italic leading-relaxed mb-4 relative z-10">
-                  "{item.verse}"
-                </p>
-                <p className="font-sans-elegant text-xs text-muted-foreground font-semibold">{item.ref}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ===== SCRIPTURE — Auto-Transitioning Verses ===== */}
+      <ScriptureTransition t={t} />
 
       {/* ===== DIVIDER ===== */}
       <SectionDivider variant="sparkle" />
@@ -961,32 +914,54 @@ const Index = () => {
       {/* ===== DIVIDER ===== */}
       <SectionDivider variant="line" />
 
-      {/* ===== PERSONAL QR CODE ===== */}
+      {/* ===== OUR PERSONAL COURT ===== */}
       <section className="py-14 md:py-20 relative overflow-hidden">
         <AuroraOrb position="center" color="rgba(139,107,138,0.2)" size={400} delay={3} />
-        <div className="container mx-auto px-6 md:px-12 max-w-xl relative z-10 text-center">
+        <div className="container mx-auto px-6 md:px-12 max-w-4xl relative z-10 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <div className="glass-card-strong rounded-3xl p-10 md:p-14 relative overflow-hidden">
+            <div className="glass-card-strong rounded-3xl p-10 md:p-16 relative overflow-hidden">
               <GoldenCorners />
               <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-gradient-to-br from-primary/10 to-violet-400/10 blur-2xl pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full bg-gradient-to-tr from-rose-400/10 to-pink-400/10 blur-2xl pointer-events-none" />
 
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-violet-500/15 flex items-center justify-center mx-auto mb-6 ring-4 ring-white/30 dark:ring-white/10">
-                <QrCode className="w-7 h-7 text-primary" />
+              <div className="love-divider mb-6">
+                <Heart className="w-6 h-6 text-rose-400 fill-rose-400 icon-glow animate-pulse-love" />
               </div>
 
-              <h3 className="font-serif-display text-2xl md:text-3xl text-foreground font-semibold mb-3">{t('qr.title')}</h3>
-              <p className="font-sans-elegant text-sm text-muted-foreground leading-relaxed mb-6 max-w-sm mx-auto">
-                {t('qr.desc')}
+              <h3 className="font-serif-display text-2xl md:text-3xl text-foreground font-semibold mb-3">{t('court.title')}</h3>
+              <p className="font-sans-elegant text-sm text-muted-foreground leading-relaxed mb-8 max-w-md mx-auto">
+                {t('court.desc')}
               </p>
 
-              {/* QR code placeholder */}
-              <div className="w-48 h-48 mx-auto rounded-2xl bg-white dark:bg-white/90 p-4 shadow-soft mb-4 flex items-center justify-center">
-                <div className="w-full h-full rounded-xl border-2 border-dashed border-muted-foreground/20 flex items-center justify-center">
-                  <span className="font-sans-elegant text-xs text-muted-foreground">{t('qr.placeholder')}</span>
-                </div>
+              <div className="space-y-6 text-left max-w-xl mx-auto">
+                {[
+                  { icon: Heart, label: t('court.belief.love'), desc: t('court.belief.love.desc') },
+                  { icon: Cross, label: t('court.belief.faith'), desc: t('court.belief.faith.desc') },
+                  { icon: Users, label: t('court.belief.family'), desc: t('court.belief.family.desc') },
+                  { icon: Sparkles, label: t('court.belief.grace'), desc: t('court.belief.grace.desc') },
+                ].map((item, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -15 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 + i * 0.1 }}
+                    className="flex items-start gap-4"
+                  >
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/15 to-violet-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <item.icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-serif-display text-base text-foreground font-semibold mb-1">{item.label}</h4>
+                      <p className="font-sans-elegant text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
 
-              <p className="font-sans-elegant text-[11px] text-muted-foreground">{t('qr.hint')}</p>
+              <div className="love-divider mt-8">
+                <Heart className="w-4 h-4 text-primary/40 fill-primary/40" />
+              </div>
             </div>
           </motion.div>
         </div>
