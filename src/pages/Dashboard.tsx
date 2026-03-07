@@ -7,7 +7,7 @@ import {
   Users, Utensils, Gift, Heart, CheckCircle, XCircle, Clock,
   TrendingUp, BarChart3, PieChart, MapPin, Sparkles, Loader2, LogOut,
   Megaphone, Trash2, Plus, Share2, Copy, Check, QrCode,
-  MessageCircleQuestion, Send, Bell, Image, BookOpen
+  MessageCircleQuestion, Send, Bell, Image, BookOpen, Mail
 } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
 import { Input } from '@/components/ui/input';
@@ -133,6 +133,10 @@ const Dashboard = () => {
   const [donateCopied, setDonateCopied] = useState(false);
   const [answerTexts, setAnswerTexts] = useState<Record<string, string>>({});
   const [answerSending, setAnswerSending] = useState<string | null>(null);
+  const [blastSubject, setBlastSubject] = useState('');
+  const [blastContent, setBlastContent] = useState('');
+  const [blastSending, setBlastSending] = useState(false);
+  const [blastResult, setBlastResult] = useState<{ sent: number; total: number } | null>(null);
 
   const staffUrl = `${window.location.origin}/staff`;
 
@@ -216,6 +220,24 @@ const Dashboard = () => {
     setEnquiries(enquiries.filter(e => e.id !== id));
   };
 
+  const handleSendBlast = async () => {
+    if (!blastSubject.trim() || !blastContent.trim()) return;
+    setBlastSending(true);
+    setBlastResult(null);
+    try {
+      const { data, error } = await supabase.functions.invoke('send-bulk-announcement', {
+        body: { subject: blastSubject.trim(), content: blastContent.trim() },
+      });
+      if (error) throw error;
+      if (data) setBlastResult({ sent: data.sent, total: data.total });
+      setBlastSubject('');
+      setBlastContent('');
+    } catch (err) {
+      console.error('Bulk email error:', err);
+    }
+    setBlastSending(false);
+  };
+
   const unansweredCount = enquiries.filter(e => e.status === 'pending').length;
 
   const confirmed = rsvps.filter(r => r.status === 'confirmed');
@@ -294,6 +316,9 @@ const Dashboard = () => {
                   {unansweredCount}
                 </span>
               )}
+            </TabsTrigger>
+            <TabsTrigger value="email" className="rounded-full px-4 py-2 font-sans-elegant text-xs font-bold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground">
+              <Mail className="w-3.5 h-3.5 mr-1.5" /> Email Blast
             </TabsTrigger>
             <TabsTrigger value="share" className="rounded-full px-4 py-2 font-sans-elegant text-xs font-bold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground">
               <Share2 className="w-3.5 h-3.5 mr-1.5" /> Share
@@ -755,6 +780,84 @@ const Dashboard = () => {
           {/* ═══ STORY TAB ═══ */}
           <TabsContent value="story" className="space-y-6">
             <StoryManager />
+          </TabsContent>
+
+          {/* ═══ EMAIL BLAST TAB ═══ */}
+          <TabsContent value="email" className="space-y-6">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+              className="glass-card-strong rounded-3xl p-8 max-w-2xl mx-auto">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/20 to-violet-500/10 flex items-center justify-center">
+                  <Mail className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-serif-display text-xl font-semibold text-foreground">Send Email to Everyone</h3>
+                  <p className="font-sans-elegant text-xs text-muted-foreground">
+                    This will send to all newsletter subscribers + RSVP emails combined
+                  </p>
+                </div>
+              </div>
+
+              {blastResult && (
+                <div className="glass-card rounded-2xl p-4 mb-6 border-l-4 border-emerald-500/40">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-5 h-5 text-emerald-400" />
+                    <p className="font-sans-elegant text-sm text-foreground font-semibold">
+                      Email sent to {blastResult.sent}/{blastResult.total} recipients! ✨
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              <div className="space-y-4">
+                <div>
+                  <label className="font-sans-elegant text-sm font-medium text-foreground mb-1.5 block">Subject</label>
+                  <Input
+                    value={blastSubject}
+                    onChange={(e) => setBlastSubject(e.target.value)}
+                    placeholder="e.g. Save the Date Reminder 💕"
+                    className="rounded-2xl h-11 glass-card border-border/30 font-sans-elegant"
+                  />
+                </div>
+                <div>
+                  <label className="font-sans-elegant text-sm font-medium text-foreground mb-1.5 block">Message</label>
+                  <Textarea
+                    value={blastContent}
+                    onChange={(e) => setBlastContent(e.target.value)}
+                    placeholder="Write your announcement here... This will be sent to everyone who subscribed or RSVP'd with their email."
+                    className="rounded-2xl glass-card border-border/30 font-sans-elegant min-h-[160px]"
+                  />
+                </div>
+
+                <div className="glass-card rounded-2xl p-4">
+                  <p className="font-sans-elegant text-xs text-muted-foreground">
+                    💡 <strong>Quick templates:</strong> Baby shower, family news, wedding updates, reminders
+                  </p>
+                  <div className="flex flex-wrap gap-2 mt-3">
+                    {[
+                      { label: '📅 Wedding Reminder', subject: 'Wedding Day Reminder! 💒', body: 'Dear loved ones,\n\nThis is a friendly reminder that our wedding is approaching! We can\'t wait to celebrate with you.\n\nPlease don\'t forget to confirm your RSVP if you haven\'t already.\n\nSee you there!' },
+                      { label: '👶 Baby Shower', subject: 'You\'re Invited to Our Baby Shower! 👶', body: 'Dear family and friends,\n\nWe are thrilled to announce that we\'re expecting! Please join us for a baby shower celebration.\n\nMore details coming soon!' },
+                      { label: '📢 General Update', subject: 'Family Update 💕', body: 'Dear loved ones,\n\nWe wanted to share some news with you...\n\n[Add your message here]\n\nWith love!' },
+                      { label: '🙏 Thank You', subject: 'Thank You All! 🙏', body: 'Dear family and friends,\n\nWe want to express our heartfelt gratitude to each and every one of you for your love, support, and generosity.\n\nYou make our lives so beautiful!' },
+                    ].map((tpl, i) => (
+                      <button key={i} onClick={() => { setBlastSubject(tpl.subject); setBlastContent(tpl.body); }}
+                        className="px-3 py-1.5 rounded-full glass-card text-xs font-sans-elegant font-medium text-foreground hover:bg-primary/10 transition-colors">
+                        {tpl.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <button
+                  onClick={handleSendBlast}
+                  disabled={blastSending || !blastSubject.trim() || !blastContent.trim()}
+                  className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {blastSending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                  {blastSending ? 'Sending to all recipients...' : 'Send to All Subscribers & Guests'}
+                </button>
+              </div>
+            </motion.div>
           </TabsContent>
 
           {/* ═══ SHARE TAB ═══ */}
