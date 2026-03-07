@@ -32,11 +32,14 @@
       .loader-figures{display:flex;align-items:flex-end;justify-content:center;gap:0;position:relative;z-index:2;min-height:180px}
 
       /* ── Each figure ── */
-      .loader-figure{display:flex;flex-direction:column;align-items:center;gap:0.4rem;opacity:0}
-      .loader-figure img{width:100px;height:auto;
-        filter:brightness(0.35) sepia(0.4) hue-rotate(260deg) saturate(2);
-        drop-shadow:0 4px 12px rgba(74,59,78,0.2)}
-      .loader-figure-name{font-family:'Playfair Display',Georgia,serif;font-size:1.1rem;font-weight:600;color:#4A3B4E;letter-spacing:0.05em;opacity:0}
+      .loader-figure{display:flex;flex-direction:column;align-items:center;gap:0;opacity:0;position:relative}
+      .loader-figure img{width:110px;height:auto;position:relative;z-index:2;
+        filter:brightness(0.2) sepia(0.5) hue-rotate(260deg) saturate(3) contrast(1.2);
+        drop-shadow:0 4px 16px rgba(74,59,78,0.3)}
+      .loader-figure-name{font-family:'Playfair Display',Georgia,serif;font-size:1.3rem;font-weight:700;
+        color:#4A3B4E;letter-spacing:0.08em;opacity:0;
+        position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;
+        text-shadow:0 0 20px rgba(255,255,255,0.9),0 0 40px rgba(255,255,255,0.6)}
 
       /* Groom slides in from left */
       .loader-figure--groom{animation:slide-from-left 1.2s ease-out 0.2s forwards}
@@ -46,9 +49,10 @@
       @keyframes slide-from-left{0%{opacity:0;transform:translateX(-80px)}100%{opacity:1;transform:translateX(0)}}
       @keyframes slide-from-right{0%{opacity:0;transform:translateX(80px)}100%{opacity:1;transform:translateX(0)}}
 
-      /* Names fade in after figures meet */
-      .loader-figure--groom .loader-figure-name{animation:fade-up 0.6s ease-out 1.5s forwards}
-      .loader-figure--bride .loader-figure-name{animation:fade-up 0.6s ease-out 1.6s forwards}
+      /* Names fade in behind figures */
+      .loader-figure--groom .loader-figure-name{animation:name-reveal 0.6s ease-out 1.5s forwards}
+      .loader-figure--bride .loader-figure-name{animation:name-reveal 0.6s ease-out 1.6s forwards}
+      @keyframes name-reveal{0%{opacity:0;transform:translate(-50%,-50%) scale(0.8)}100%{opacity:1;transform:translate(-50%,-50%) scale(1)}}
 
       /* ── Walking line ── */
       .loader-walk-line{width:280px;height:2px;margin-top:-2px;opacity:0;
@@ -76,8 +80,8 @@
 
       /* ── DARK MODE ── */
       @media(prefers-color-scheme:dark){
-        .loader-figure img{filter:brightness(0.7) sepia(0.3) hue-rotate(260deg) saturate(1.8) invert(0.85)}
-        .loader-figure-name{color:#d4c8e0}
+        .loader-figure img{filter:brightness(0.5) sepia(0.4) hue-rotate(260deg) saturate(2.5) contrast(1.3) invert(0.85)}
+        .loader-figure-name{color:#d4c8e0;text-shadow:0 0 20px rgba(0,0,0,0.5),0 0 40px rgba(0,0,0,0.3)}
         .loader-walk-line{background:linear-gradient(90deg,transparent 5%,#b8a9c9 30%,#b8a9c9 70%,transparent 95%)}
         .loader-heart{color:#b8a9c9}
         #app-loader h1{background:linear-gradient(135deg,#e8e0ec 0%,#b8a9c9 100%);-webkit-background-clip:text;background-clip:text}
