@@ -1066,31 +1066,38 @@ const Index = () => {
       {/* ===== DETAIL DIALOGS ===== */}
       {detailSections.map((section) =>
         <Dialog key={section.id} open={activeDetail === section.id} onOpenChange={(open) => !open && setActiveDetail(null)}>
-          <DialogContent className="max-w-md">
+          <DialogContent className="max-w-lg">
             <DialogHeader>
-              <div className={`w-14 h-14 rounded-3xl bg-gradient-to-br ${section.color} flex items-center justify-center mb-3 mx-auto`}>
-                <section.icon className={`w-6 h-6 ${section.iconColor}`} />
+              <div className="relative mx-auto mb-4">
+                <div className={`absolute inset-0 w-20 h-20 rounded-full bg-gradient-to-br ${section.color} blur-xl opacity-60 mx-auto`} />
+                <div className={`relative w-16 h-16 rounded-full bg-gradient-to-br ${section.color} flex items-center justify-center mx-auto ring-4 ring-white/30 dark:ring-white/10`}>
+                  <section.icon className={`w-7 h-7 ${section.iconColor}`} />
+                </div>
               </div>
               <DialogTitle className="font-serif-display text-2xl text-center">{section.title}</DialogTitle>
               <DialogDescription className="font-sans-elegant text-center text-muted-foreground">
                 {t('details.subtitle')}
               </DialogDescription>
             </DialogHeader>
-            <div className="space-y-3 pt-2">
+            <div className="space-y-3 pt-2 max-h-[60vh] overflow-y-auto pr-1">
               {section.dialogContent.map((item, j) =>
                 <motion.div
                   key={j}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: j * 0.06 }}
-                  className="glass-card rounded-2xl p-4 flex items-start gap-3"
+                  className={`rounded-2xl p-4 flex items-start gap-3 ${
+                    (item as any).highlight
+                      ? 'bg-primary/[0.06] dark:bg-primary/[0.08] border border-primary/15'
+                      : 'glass-card'
+                  }`}
                 >
                   <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${section.color} flex items-center justify-center flex-shrink-0 mt-0.5`}>
                     <item.icon className={`w-4 h-4 ${section.iconColor}`} />
                   </div>
-                  <div>
+                  <div className="flex-1 min-w-0">
                     <p className="font-sans-elegant text-sm font-semibold text-foreground">{item.label}</p>
-                    <p className="font-sans-elegant text-xs text-muted-foreground mt-0.5" style={{ lineHeight: 1.5 }}>{item.desc}</p>
+                    <p className="font-sans-elegant text-xs text-muted-foreground mt-0.5" style={{ lineHeight: 1.6 }}>{item.desc}</p>
                   </div>
                 </motion.div>
               )}
