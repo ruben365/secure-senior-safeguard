@@ -139,7 +139,81 @@ const GoldenCorners = ({ className = '' }: { className?: string }) => (
   </div>
 );
 
-const Index = () => {
+/* Auto-transitioning scripture component — no cards, floating text */
+const VERSES = [
+  { key: 'verse.1cor13.full', ref: '1 Corinthians 13:4-7' },
+  { key: 'verse.ecclesiastes', ref: 'Ecclesiastes 4:9-12' },
+  { key: 'verse.colossians', ref: 'Colossians 3:14' },
+  { key: 'verse.genesis', ref: 'Genesis 2:24' },
+  { key: 'verse.romans12', ref: 'Romans 12:10' },
+  { key: 'verse.galatians', ref: 'Galatians 5:22-23' },
+  { key: 'verse.proverbs', ref: 'Proverbs 3:5-6' },
+  { key: 'verse.psalm37', ref: 'Psalm 37:4' },
+];
+
+const ScriptureTransition = ({ t }: { t: (key: string) => string }) => {
+  const [currentVerse, setCurrentVerse] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentVerse((prev) => (prev + 1) % VERSES.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <section className="py-16 md:py-24 relative overflow-hidden">
+      <AuroraOrb position="center" color="rgba(139,107,138,0.15)" size={400} delay={3} />
+      <div className="container mx-auto px-6 md:px-12 max-w-3xl relative z-10 text-center">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-8">
+          <div className="inline-block px-5 py-2 rounded-full glass-card-strong mb-5">
+            <p className="font-sans-elegant text-xs tracking-[0.25em] uppercase text-muted-foreground font-medium">{t('index.scripture')}</p>
+          </div>
+          <h2 className="font-serif-display text-3xl md:text-5xl text-foreground font-semibold mb-3">{t('verse.section.title')}</h2>
+          <p className="font-sans-elegant text-base text-muted-foreground max-w-lg mx-auto">{t('verse.section.subtitle')}</p>
+        </motion.div>
+
+        {/* Floating transitioning verse — no card, no background */}
+        <div className="min-h-[200px] flex items-center justify-center">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentVerse}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.8, ease: 'easeInOut' }}
+              className="text-center px-4"
+            >
+              <BookOpen className="w-6 h-6 text-primary/40 mx-auto mb-5" />
+              <p className="font-serif-display text-xl md:text-2xl lg:text-3xl text-foreground italic leading-relaxed mb-5">
+                "{t(VERSES[currentVerse].key)}"
+              </p>
+              <p className="font-sans-elegant text-sm text-muted-foreground font-semibold">
+                — {VERSES[currentVerse].ref}
+              </p>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Dot indicators */}
+        <div className="flex items-center justify-center gap-2 mt-6">
+          {VERSES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentVerse(i)}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                i === currentVerse ? 'bg-primary w-6' : 'bg-muted-foreground/25 hover:bg-muted-foreground/40'
+              }`}
+              aria-label={`Verse ${i + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+
   const { t } = useLanguage();
   const { isPlaying, currentTrack, toggleTrack } = useMusic();
   const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
