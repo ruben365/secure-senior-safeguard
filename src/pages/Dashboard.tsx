@@ -91,6 +91,10 @@ interface AnnouncementRow {
   id: string; title: string; content: string; created_at: string;
 }
 
+interface QuoteRow {
+  id: string; content: string; created_at: string;
+}
+
 const Dashboard = () => {
   const { t } = useLanguage();
   const { signOut } = useAuth();
@@ -99,21 +103,26 @@ const Dashboard = () => {
   const [rsvps, setRsvps] = useState<RsvpRow[]>([]);
   const [gifts, setGifts] = useState<GiftRow[]>([]);
   const [announcements, setAnnouncements] = useState<AnnouncementRow[]>([]);
+  const [quotes, setQuotes] = useState<QuoteRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [annTitle, setAnnTitle] = useState('');
   const [annContent, setAnnContent] = useState('');
   const [annPosting, setAnnPosting] = useState(false);
+  const [quoteContent, setQuoteContent] = useState('');
+  const [quotePosting, setQuotePosting] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      const [rsvpRes, giftRes, annRes] = await Promise.all([
+      const [rsvpRes, giftRes, annRes, quoteRes] = await Promise.all([
         supabase.from('rsvps').select('*').order('created_at', { ascending: false }),
         supabase.from('gifts').select('*').order('created_at', { ascending: false }),
         supabase.from('announcements').select('*').order('created_at', { ascending: false }),
+        supabase.from('quotes').select('*').order('created_at', { ascending: false }),
       ]);
       if (rsvpRes.data) setRsvps(rsvpRes.data);
       if (giftRes.data) setGifts(giftRes.data);
       if (annRes.data) setAnnouncements(annRes.data);
+      if (quoteRes.data) setQuotes(quoteRes.data);
       setLoading(false);
     };
     fetchData();
@@ -134,6 +143,22 @@ const Dashboard = () => {
   const handleDeleteAnnouncement = async (id: string) => {
     await supabase.from('announcements').delete().eq('id', id);
     setAnnouncements(announcements.filter(a => a.id !== id));
+  };
+
+  const handlePostQuote = async () => {
+    if (!quoteContent.trim()) return;
+    setQuotePosting(true);
+    const { data, error } = await supabase.from('quotes').insert({ content: quoteContent.trim() }).select().single();
+    if (data && !error) {
+      setQuotes([data, ...quotes]);
+      setQuoteContent('');
+    }
+    setQuotePosting(false);
+  };
+
+  const handleDeleteQuote = async (id: string) => {
+    await supabase.from('quotes').delete().eq('id', id);
+    setQuotes(quotes.filter(q => q.id !== id));
   };
 
   const confirmed = rsvps.filter(r => r.status === 'confirmed');
