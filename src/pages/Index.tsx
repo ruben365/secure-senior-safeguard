@@ -1463,7 +1463,7 @@ const Index = () => {
                     min="1"
                     value={customAmount}
                     onChange={(e) => setCustomAmount(e.target.value)}
-                    placeholder="150"
+                    placeholder=""
                     className="font-serif-display text-lg font-bold rounded-full h-12 pl-9 border-primary/30 bg-primary/5 focus:ring-primary/30"
                   />
                 </div>
