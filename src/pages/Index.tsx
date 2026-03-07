@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useMusic } from '@/components/MusicPlayer';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Heart, MapPin, Calendar, Clock, Utensils, Gift, Sparkles, Play, Pause, Music, Users, Flower2, BookOpen, Cross, Church, Gem, PartyPopper, Hotel, Car, Check, X, QrCode, Megaphone, CreditCard, Shield, ArrowLeft } from 'lucide-react';
-import { QRCodeSVG } from 'qrcode.react';
+import { ChevronDown, Heart, MapPin, Calendar, Clock, Utensils, Gift, Sparkles, Play, Pause, Music, Users, Flower2, BookOpen, Cross, Church, Gem, PartyPopper, Hotel, Car, Check, X, Megaphone } from 'lucide-react';
+import EmbeddedPaymentForm from '@/components/EmbeddedPaymentForm';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
+
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { useSiteImages } from '@/hooks/useSiteContent';
@@ -476,14 +476,7 @@ const Index = () => {
   const [giftOpen, setGiftOpen] = useState(false);
   const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
   const [customAmount, setCustomAmount] = useState('');
-  const [giftFormOpen, setGiftFormOpen] = useState(false);
-  const [giftName, setGiftName] = useState('');
-  const [giftMessage, setGiftMessage] = useState(t('registry.dialog.defaultMessage'));
-  const [giftSent, setGiftSent] = useState(false);
-  const [giftLoading, setGiftLoading] = useState(false);
-  const [showQR, setShowQR] = useState(false);
-  const [showTerms, setShowTerms] = useState(false);
-  const [checkoutUrl, setCheckoutUrl] = useState<string | null>(null);
+  const [paymentFormOpen, setPaymentFormOpen] = useState(false);
 
   useEffect(() => {
     const update = () => {
@@ -517,10 +510,7 @@ const Index = () => {
     setSelectedAmount(amount);
     setCustomAmount('');
     setGiftOpen(false);
-    setGiftFormOpen(true);
-    setGiftSent(false);
-    setCheckoutUrl(null);
-    setShowQR(false);
+    setPaymentFormOpen(true);
   };
 
   const handleCustomGift = () => {
@@ -528,90 +518,8 @@ const Index = () => {
     if (val && val > 0) {
       setSelectedAmount(val);
       setGiftOpen(false);
-      setGiftFormOpen(true);
-      setGiftSent(false);
-      setCheckoutUrl(null);
-      setShowQR(false);
+      setPaymentFormOpen(true);
     }
-  };
-
-  const handleProceedToPayment = async () => {
-    if (!selectedAmount) return;
-    setGiftLoading(true);
-    try {
-      const { data, error } = await supabase.functions.invoke('create-gift-payment', {
-        body: {
-          amount: selectedAmount,
-          guestName: giftName.trim() || 'Anonymous',
-          message: giftMessage,
-          origin: window.location.origin,
-        },
-      });
-
-      if (error) throw error;
-      if (data?.url) {
-        // Store URL for QR code too
-        setCheckoutUrl(data.url);
-        // Redirect to Stripe Checkout
-        window.location.href = data.url;
-        setGiftFormOpen(false);
-        toast.success(t('gift.redirecting') || 'Redirecting to payment...');
-      }
-    } catch (err) {
-      console.error('Gift payment error:', err);
-      toast.error('Payment failed. Please try again.');
-    } finally {
-      setGiftLoading(false);
-    }
-  };
-
-  const handleGenerateQR = async () => {
-    if (!selectedAmount) return;
-    setGiftLoading(true);
-    try {
-      const { data, error } = await supabase.functions.invoke('create-gift-payment', {
-        body: {
-          amount: selectedAmount,
-          guestName: giftName.trim() || 'Anonymous',
-          message: giftMessage,
-          origin: window.location.origin,
-        },
-      });
-
-      if (error) throw error;
-      if (data?.url) {
-        setCheckoutUrl(data.url);
-      }
-    } catch (err) {
-      console.error('QR generation error:', err);
-      toast.error('Could not generate QR code. Please try again.');
-    } finally {
-      setGiftLoading(false);
-    }
-  };
-
-  const handlePaymentSuccess = () => {
-    setGiftSent(true);
-    setCheckoutUrl(null);
-    // Send gift confirmation email
-    try {
-      supabase.functions.invoke('send-gift-confirmation', {
-        body: {
-          guestName: giftName.trim() || 'Anonymous',
-          amount: selectedAmount,
-          message: giftMessage || null,
-        },
-      });
-    } catch (e) {
-      console.error('Gift confirmation email failed:', e);
-    }
-    setTimeout(() => {
-      setGiftFormOpen(false);
-      setGiftSent(false);
-      setGiftMessage(t('registry.dialog.defaultMessage'));
-      setGiftName('');
-      setSelectedAmount(null);
-    }, 3000);
   };
 
   const features = [
@@ -1482,181 +1390,12 @@ const Index = () => {
         </DialogContent>
       </Dialog>
 
-      {/* ===== GIFT FORM DIALOG ===== */}
-      <Dialog open={giftFormOpen} onOpenChange={(open) => {
-        setGiftFormOpen(open);
-        if (!open) { setCheckoutUrl(null); setShowQR(false); setShowTerms(false); }
-      }}>
-        <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="font-serif-display text-2xl text-center">{t('registry.dialog.title')}</DialogTitle>
-            <DialogDescription className="font-sans-elegant text-center text-muted-foreground">
-              {t('registry.dialog.subtitle')}
-            </DialogDescription>
-          </DialogHeader>
-
-          <AnimatePresence mode="wait">
-            {giftSent ? (
-              <motion.div
-                key="success"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="py-8 text-center"
-              >
-                <div className="w-16 h-16 rounded-full gradient-primary flex items-center justify-center mx-auto mb-4 shadow-glow">
-                  <Check className="w-7 h-7 text-primary-foreground" />
-                </div>
-                <p className="font-sans-elegant text-foreground font-semibold">{t('registry.dialog.thanks')}</p>
-                <div className="love-divider mt-4">
-                  <Heart className="w-4 h-4 text-rose-400 fill-rose-400" />
-                </div>
-              </motion.div>
-            ) : showTerms ? (
-              <motion.div key="terms" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-2 space-y-4">
-                <button onClick={() => setShowTerms(false)} className="flex items-center gap-2 text-primary font-sans-elegant text-sm font-medium hover:underline">
-                  <ArrowLeft className="w-4 h-4" /> {t('rsvp.back')}
-                </button>
-                <div className="glass-card rounded-2xl p-5 space-y-3">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Shield className="w-5 h-5 text-primary" />
-                    <h4 className="font-serif-display text-lg font-semibold text-foreground">{t('gift.terms.title')}</h4>
-                  </div>
-                  <div className="font-sans-elegant text-sm text-muted-foreground space-y-3 leading-relaxed">
-                    <p>{t('gift.terms.refund')}</p>
-                    <p>{t('gift.terms.privacy')}</p>
-                    <p>{t('gift.terms.accuracy')}</p>
-                    <p>{t('gift.terms.contact')}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ) : showQR ? (
-              <motion.div key="qr" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-2 space-y-4">
-                <button onClick={() => setShowQR(false)} className="flex items-center gap-2 text-primary font-sans-elegant text-sm font-medium hover:underline">
-                  <ArrowLeft className="w-4 h-4" /> {t('rsvp.back')}
-                </button>
-                <div className="glass-card rounded-2xl p-5 text-center">
-                  <p className="font-sans-elegant text-xs text-muted-foreground mb-1">{t('registry.dialog.amount')}</p>
-                  <p className="font-serif-display text-2xl text-foreground font-bold mb-4">${selectedAmount}</p>
-                  {checkoutUrl ? (
-                    <>
-                      <div className="bg-white rounded-2xl p-4 inline-block mb-4">
-                        <QRCodeSVG
-                          value={checkoutUrl}
-                          size={180}
-                          level="H"
-                          includeMargin={false}
-                        />
-                      </div>
-                      <p className="font-sans-elegant text-sm text-muted-foreground">{t('gift.qr.scan')}</p>
-                    </>
-                  ) : (
-                    <div className="py-8">
-                      <button
-                        onClick={handleGenerateQR}
-                        disabled={giftLoading}
-                        className="btn-primary justify-center mx-auto disabled:opacity-50"
-                      >
-                        {giftLoading ? (
-                          <span className="animate-spin w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full" />
-                        ) : (
-                          <QrCode className="w-4 h-4" />
-                        )}
-                        {giftLoading ? '...' : t('gift.generateQR') || 'Generate QR Code'}
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </motion.div>
-            ) : (
-              <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4 pt-2">
-                <div className="glass-card rounded-2xl p-5 text-center">
-                  <p className="font-sans-elegant text-xs text-muted-foreground mb-1">{t('registry.dialog.amount')}</p>
-                  <p className="font-serif-display text-3xl text-foreground font-bold">${selectedAmount}</p>
-                </div>
-
-                <div>
-                  <label className="font-sans-elegant text-sm text-foreground block mb-2 font-semibold">
-                    {t('registry.dialog.name')} <span className="text-muted-foreground font-normal text-xs">({t('gift.optional')})</span>
-                  </label>
-                  <Input
-                    value={giftName}
-                    onChange={(e) => setGiftName(e.target.value)}
-                    placeholder={t('registry.dialog.name.placeholder')}
-                    className="font-sans-elegant rounded-full h-12 border-border/50 bg-background/50 backdrop-blur-sm"
-                  />
-                </div>
-
-                {/* Quick message selector */}
-                <div>
-                  <label className="font-sans-elegant text-sm text-foreground block mb-2 font-semibold">
-                    {t('registry.dialog.message')}
-                  </label>
-                  <div className="flex flex-wrap gap-2 mb-2">
-                    {[
-                      t('gift.msg.congrats'),
-                      t('gift.msg.blessed'),
-                      t('gift.msg.love'),
-                    ].map((msg) => (
-                      <button
-                        key={msg}
-                        type="button"
-                        onClick={() => setGiftMessage(msg)}
-                        className={`font-sans-elegant text-xs px-3 py-1.5 rounded-full border transition-all duration-200 ${
-                          giftMessage === msg
-                            ? 'border-primary bg-primary/10 text-primary font-semibold'
-                            : 'border-border/30 text-muted-foreground hover:border-primary/30 hover:bg-primary/5'
-                        }`}
-                      >
-                        {msg}
-                      </button>
-                    ))}
-                  </div>
-                  <Textarea
-                    value={giftMessage}
-                    onChange={(e) => setGiftMessage(e.target.value)}
-                    placeholder={t('registry.dialog.message.placeholder')}
-                    className="font-sans-elegant rounded-2xl border-border/50 bg-background/50 backdrop-blur-sm"
-                    rows={2}
-                  />
-                </div>
-
-                {/* Payment options */}
-                <div className="grid grid-cols-2 gap-3">
-                  <button
-                    type="button"
-                    disabled={giftLoading}
-                    onClick={handleProceedToPayment}
-                    className="btn-primary justify-center disabled:opacity-50 text-sm"
-                  >
-                    {giftLoading ? (
-                      <span className="animate-spin w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full" />
-                    ) : (
-                      <CreditCard className="w-4 h-4" />
-                    )}
-                    {giftLoading ? '...' : t('gift.payCard')}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setShowQR(true)}
-                    className="btn-outline justify-center text-sm"
-                  >
-                    <QrCode className="w-4 h-4" />
-                    {t('gift.payQR')}
-                  </button>
-                </div>
-
-                {/* Terms link */}
-                <div className="text-center">
-                  <button onClick={() => setShowTerms(true)} className="font-sans-elegant text-[11px] text-primary underline hover:no-underline">
-                    <Shield className="w-3 h-3 inline mr-1" />
-                    {t('gift.terms.link')}
-                  </button>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </DialogContent>
-      </Dialog>
+      {/* ===== EMBEDDED PAYMENT FORM ===== */}
+      <EmbeddedPaymentForm
+        open={paymentFormOpen}
+        onOpenChange={setPaymentFormOpen}
+        selectedAmount={selectedAmount}
+      />
     </div>
   );
 };

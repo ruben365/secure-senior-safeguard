@@ -1,0 +1,304 @@
+import { useState } from 'react';
+import { loadStripe, Stripe } from '@stripe/stripe-js';
+import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
+import { Heart, Check, CreditCard, ArrowLeft, Shield } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useIsMobile } from '@/hooks/use-mobile';
+import {
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription,
+} from '@/components/ui/dialog';
+import {
+  Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription,
+} from '@/components/ui/drawer';
+
+/* ── Inner checkout form (inside Elements) ── */
+const CheckoutForm = ({ amount, onSuccess, t }: { amount: number; onSuccess: () => void; t: (k: string) => string }) => {
+  const stripe = useStripe();
+  const elements = useElements();
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!stripe || !elements) return;
+
+    setLoading(true);
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: { return_url: `${window.location.origin}/?gift=success&amount=${amount}` },
+      redirect: 'if_required',
+    });
+
+    if (error) {
+      toast.error(error.message || 'Payment failed');
+      setLoading(false);
+    } else {
+      onSuccess();
+      setLoading(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <PaymentElement options={{ layout: 'tabs' }} />
+      <button
+        type="submit"
+        disabled={!stripe || loading}
+        className="w-full btn-primary justify-center disabled:opacity-50"
+      >
+        {loading ? (
+          <span className="animate-spin w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full" />
+        ) : (
+          <Heart className="w-4 h-4" />
+        )}
+        {loading ? '...' : `${t('registry.dialog.send')} — $${amount}`}
+      </button>
+    </form>
+  );
+};
+
+/* ── Main component ── */
+interface EmbeddedPaymentFormProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  selectedAmount: number | null;
+}
+
+const EmbeddedPaymentForm = ({ open, onOpenChange, selectedAmount }: EmbeddedPaymentFormProps) => {
+  const { t } = useLanguage();
+  const isMobile = useIsMobile();
+
+  const [step, setStep] = useState<'info' | 'pay' | 'success'>('info');
+  const [giftName, setGiftName] = useState('');
+  const [giftMessage, setGiftMessage] = useState('');
+  const [stripePromise, setStripePromise] = useState<Promise<Stripe | null> | null>(null);
+  const [clientSecret, setClientSecret] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [showTerms, setShowTerms] = useState(false);
+
+  const quickMessages = [
+    t('gift.msg.congrats'),
+    t('gift.msg.blessed'),
+    t('gift.msg.love'),
+  ];
+
+  const handleProceedToPayment = async () => {
+    if (!selectedAmount) return;
+    setLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('create-gift-intent', {
+        body: {
+          amount: selectedAmount,
+          guestName: giftName.trim() || 'Anonymous',
+          message: giftMessage || null,
+        },
+      });
+      if (error) throw error;
+      if (data?.clientSecret && data?.publishableKey) {
+        setStripePromise(loadStripe(data.publishableKey));
+        setClientSecret(data.clientSecret);
+        setStep('pay');
+      } else {
+        throw new Error('Missing payment data');
+      }
+    } catch (err) {
+      console.error('Payment intent error:', err);
+      toast.error('Could not initialize payment. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSuccess = () => {
+    setStep('success');
+    try {
+      supabase.functions.invoke('send-gift-confirmation', {
+        body: {
+          guestName: giftName.trim() || 'Anonymous',
+          amount: selectedAmount,
+          message: giftMessage || null,
+        },
+      });
+    } catch (e) {
+      console.error('Gift confirmation email failed:', e);
+    }
+    setTimeout(() => {
+      onOpenChange(false);
+      resetForm();
+    }, 3000);
+  };
+
+  const resetForm = () => {
+    setStep('info');
+    setGiftName('');
+    setGiftMessage('');
+    setStripePromise(null);
+    setClientSecret(null);
+    setShowTerms(false);
+  };
+
+  const handleClose = (isOpen: boolean) => {
+    onOpenChange(isOpen);
+    if (!isOpen) resetForm();
+  };
+
+  const content = (
+    <AnimatePresence mode="wait">
+      {step === 'success' ? (
+        <motion.div key="success" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="py-8 text-center">
+          <div className="w-16 h-16 rounded-full gradient-primary flex items-center justify-center mx-auto mb-4 shadow-glow">
+            <Check className="w-7 h-7 text-primary-foreground" />
+          </div>
+          <p className="font-sans-elegant text-foreground font-semibold">{t('registry.dialog.thanks')}</p>
+        </motion.div>
+      ) : showTerms ? (
+        <motion.div key="terms" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4 pt-2">
+          <button onClick={() => setShowTerms(false)} className="flex items-center gap-2 text-primary font-sans-elegant text-sm font-medium hover:underline">
+            <ArrowLeft className="w-4 h-4" /> {t('rsvp.back')}
+          </button>
+          <div className="glass-card rounded-2xl p-5 space-y-3">
+            <div className="flex items-center gap-2 mb-2">
+              <Shield className="w-5 h-5 text-primary" />
+              <h4 className="font-serif-display text-lg font-semibold text-foreground">{t('gift.terms.title')}</h4>
+            </div>
+            <div className="font-sans-elegant text-sm text-muted-foreground space-y-3 leading-relaxed">
+              <p>{t('gift.terms.refund')}</p>
+              <p>{t('gift.terms.privacy')}</p>
+              <p>{t('gift.terms.accuracy')}</p>
+              <p>{t('gift.terms.contact')}</p>
+            </div>
+          </div>
+        </motion.div>
+      ) : step === 'pay' && stripePromise && clientSecret ? (
+        <motion.div key="pay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4 pt-2">
+          <button onClick={() => { setStep('info'); setClientSecret(null); }} className="flex items-center gap-2 text-primary font-sans-elegant text-sm font-medium hover:underline">
+            <ArrowLeft className="w-4 h-4" /> {t('rsvp.back')}
+          </button>
+          <div className="glass-card rounded-2xl p-4 text-center">
+            <p className="font-sans-elegant text-xs text-muted-foreground mb-1">{t('registry.dialog.amount')}</p>
+            <p className="font-serif-display text-2xl text-foreground font-bold">${selectedAmount}</p>
+          </div>
+          <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'stripe', variables: { borderRadius: '12px' } } }}>
+            <CheckoutForm amount={selectedAmount!} onSuccess={handleSuccess} t={t} />
+          </Elements>
+          <div className="text-center">
+            <button onClick={() => setShowTerms(true)} className="font-sans-elegant text-[11px] text-primary underline hover:no-underline">
+              <Shield className="w-3 h-3 inline mr-1" />
+              {t('gift.terms.link')}
+            </button>
+          </div>
+        </motion.div>
+      ) : (
+        <motion.div key="info" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4 pt-2">
+          <div className="glass-card rounded-2xl p-5 text-center">
+            <p className="font-sans-elegant text-xs text-muted-foreground mb-1">{t('registry.dialog.amount')}</p>
+            <p className="font-serif-display text-3xl text-foreground font-bold">${selectedAmount}</p>
+          </div>
+
+          <div>
+            <label className="font-sans-elegant text-sm text-foreground block mb-2 font-semibold">
+              {t('registry.dialog.name')} <span className="text-muted-foreground font-normal text-xs">({t('gift.optional')})</span>
+            </label>
+            <Input
+              value={giftName}
+              onChange={(e) => setGiftName(e.target.value)}
+              placeholder={t('registry.dialog.name.placeholder')}
+              className="font-sans-elegant rounded-full h-12 border-border/50 bg-background/50 backdrop-blur-sm"
+            />
+          </div>
+
+          <div>
+            <label className="font-sans-elegant text-sm text-foreground block mb-2 font-semibold">
+              {t('registry.dialog.message')}
+            </label>
+            <div className="flex flex-wrap gap-2 mb-2">
+              {quickMessages.map((msg) => (
+                <button
+                  key={msg}
+                  type="button"
+                  onClick={() => setGiftMessage(msg)}
+                  className={`font-sans-elegant text-xs px-3 py-1.5 rounded-full border transition-all duration-200 ${
+                    giftMessage === msg
+                      ? 'border-primary bg-primary/10 text-primary font-semibold'
+                      : 'border-border/30 text-muted-foreground hover:border-primary/30 hover:bg-primary/5'
+                  }`}
+                >
+                  {msg}
+                </button>
+              ))}
+            </div>
+            <Textarea
+              value={giftMessage}
+              onChange={(e) => setGiftMessage(e.target.value)}
+              placeholder={t('registry.dialog.message.placeholder')}
+              className="font-sans-elegant rounded-2xl border-border/50 bg-background/50 backdrop-blur-sm"
+              rows={2}
+            />
+          </div>
+
+          <button
+            onClick={handleProceedToPayment}
+            disabled={loading}
+            className="w-full btn-primary justify-center disabled:opacity-50"
+          >
+            {loading ? (
+              <span className="animate-spin w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full" />
+            ) : (
+              <CreditCard className="w-4 h-4" />
+            )}
+            {loading ? '...' : t('gift.payCard')}
+          </button>
+
+          <div className="text-center">
+            <button onClick={() => setShowTerms(true)} className="font-sans-elegant text-[11px] text-primary underline hover:no-underline">
+              <Shield className="w-3 h-3 inline mr-1" />
+              {t('gift.terms.link')}
+            </button>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+
+  if (isMobile) {
+    return (
+      <Drawer open={open} onOpenChange={handleClose}>
+        <DrawerContent className="px-4 pb-8 max-h-[90vh] overflow-y-auto">
+          <DrawerHeader className="text-center">
+            <div className="w-14 h-14 rounded-full gradient-primary flex items-center justify-center mx-auto mb-2 shadow-glow">
+              <Heart className="w-6 h-6 text-primary-foreground" />
+            </div>
+            <DrawerTitle className="font-serif-display text-xl">{t('registry.dialog.title')}</DrawerTitle>
+            <DrawerDescription className="font-sans-elegant text-muted-foreground text-sm">
+              {t('registry.dialog.subtitle')}
+            </DrawerDescription>
+          </DrawerHeader>
+          {content}
+        </DrawerContent>
+      </Drawer>
+    );
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={handleClose}>
+      <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
+          <div className="w-14 h-14 rounded-full gradient-primary flex items-center justify-center mx-auto mb-2 shadow-glow">
+            <Heart className="w-6 h-6 text-primary-foreground" />
+          </div>
+          <DialogTitle className="font-serif-display text-2xl text-center">{t('registry.dialog.title')}</DialogTitle>
+          <DialogDescription className="font-sans-elegant text-center text-muted-foreground">
+            {t('registry.dialog.subtitle')}
+          </DialogDescription>
+        </DialogHeader>
+        {content}
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+export default EmbeddedPaymentForm;
