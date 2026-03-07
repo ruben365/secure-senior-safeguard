@@ -810,9 +810,19 @@ const Dashboard = () => {
                   <Gift className="w-7 h-7 text-primary" />
                 </div>
                 <h3 className="font-serif-display text-xl font-semibold text-foreground mb-2">Donate / Gift QR Code</h3>
-                <p className="font-sans-elegant text-sm text-muted-foreground">
-                  Paste any payment link (PayPal, CashApp, Venmo, Zelle, etc.) to generate a QR code guests can scan to donate.
+                <p className="font-sans-elegant text-sm text-muted-foreground mb-4">
+                  Paste any payment link or use the Stripe link below to generate a QR code guests can scan to donate.
                 </p>
+                <button
+                  onClick={() => {
+                    setDonateLink('https://buy.stripe.com/14A5kv9wL8AOeop6hN57W00');
+                    setDonateLabel('Wedding Gift 💐');
+                  }}
+                  className="btn-primary !rounded-full !px-4 !py-2 text-xs inline-flex items-center gap-2"
+                >
+                  <Gift className="w-3.5 h-3.5" />
+                  Use Stripe Payment Link
+                </button>
               </div>
 
               <div className="space-y-3 mb-6">
