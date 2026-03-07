@@ -221,6 +221,9 @@ const Dashboard = () => {
             <TabsTrigger value="announcements" className="rounded-full px-5 py-2 font-sans-elegant text-xs font-bold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground">
               <Megaphone className="w-3.5 h-3.5 mr-1.5" /> {t('dashboard.announcements')}
             </TabsTrigger>
+            <TabsTrigger value="quotes" className="rounded-full px-5 py-2 font-sans-elegant text-xs font-bold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground">
+              <Heart className="w-3.5 h-3.5 mr-1.5" /> {t('dashboard.quotes')}
+            </TabsTrigger>
           </TabsList>
 
           {/* ═══ OVERVIEW TAB ═══ */}
