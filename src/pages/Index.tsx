@@ -1115,35 +1115,50 @@ const Index = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Proverbs card with glassmorphism text overlay */}
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               className="glass-card-strong rounded-3xl overflow-hidden md:row-span-2 card-hover">
               <div className="relative h-full min-h-[300px]">
-                <img src={flowersImgSmall} alt="" className="w-full h-full object-cover" width={297} height={428} loading="lazy" decoding="async" />
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <Heart className="w-5 h-5 text-rose-300 fill-rose-300 icon-glow mb-3 animate-pulse-love" />
-                  <p className="font-serif-display text-base text-white italic leading-relaxed mb-2">
-                    "{t('verse.proverbs')}"
-                  </p>
-                  <p className="font-sans-elegant text-xs text-white/70 font-semibold">Proverbs 3:5-6</p>
+                <img src={flowersImgSmall} alt="" className="w-full h-full object-cover" width={297} height={428} loading="eager" decoding="async" fetchPriority="high" />
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/40 to-foreground/10" />
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <div className="rounded-2xl bg-background/20 backdrop-blur-xl border border-white/20 p-5 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+                    <Heart className="w-5 h-5 text-rose-300 fill-rose-300 icon-glow mb-3 animate-pulse-love" />
+                    <p className="font-serif-display text-base text-white italic leading-relaxed mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+                      "{t('verse.proverbs')}"
+                    </p>
+                    <p className="font-sans-elegant text-xs text-white/90 font-bold drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">Proverbs 3:5-6</p>
+                  </div>
                 </div>
               </div>
             </motion.div>
 
+            {/* Faith feature cards — redesigned */}
             {[
-              { icon: Church, title: t('index.ceremony'), desc: t('index.ceremony.desc'), color: 'from-rose-500/20 to-pink-500/10', iconColor: 'text-rose-400' },
-              { icon: Cross, title: t('index.blessing'), desc: t('index.blessing.desc'), color: 'from-violet-500/20 to-purple-500/10', iconColor: 'text-violet-400' },
-              { icon: Gem, title: t('index.vows'), desc: t('index.vows.desc'), color: 'from-amber-500/20 to-orange-500/10', iconColor: 'text-amber-400' },
-              { icon: Users, title: t('index.fellowship'), desc: t('index.fellowship.desc'), color: 'from-emerald-500/20 to-teal-500/10', iconColor: 'text-emerald-400' },
+              { icon: Church, title: t('index.ceremony'), desc: t('index.ceremony.desc'), color: 'from-rose-500/20 to-pink-500/10', iconColor: 'text-rose-400', accent: 'rose', emoji: '⛪' },
+              { icon: Cross, title: t('index.blessing'), desc: t('index.blessing.desc'), color: 'from-violet-500/20 to-purple-500/10', iconColor: 'text-violet-400', accent: 'violet', emoji: '✝️' },
+              { icon: Gem, title: t('index.vows'), desc: t('index.vows.desc'), color: 'from-amber-500/20 to-orange-500/10', iconColor: 'text-amber-400', accent: 'amber', emoji: '💎' },
+              { icon: Users, title: t('index.fellowship'), desc: t('index.fellowship.desc'), color: 'from-emerald-500/20 to-teal-500/10', iconColor: 'text-emerald-400', accent: 'emerald', emoji: '🤝' },
             ].map((item, i) =>
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 + i * 0.05 }}
-                className="glass-card-strong rounded-3xl p-6 card-hover relative overflow-hidden">
-                <div className={`absolute top-0 right-0 w-24 h-24 rounded-full bg-gradient-to-br ${item.color} blur-xl pointer-events-none`} />
-                <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4`}>
-                  <item.icon className={`w-6 h-6 ${item.iconColor} icon-glow`} />
+                className="group glass-card-strong rounded-3xl p-6 card-hover relative overflow-hidden border border-border/20">
+                {/* Background glow */}
+                <div className={`absolute top-0 right-0 w-32 h-32 rounded-full bg-gradient-to-br ${item.color} blur-2xl pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity duration-500`} />
+                <div className={`absolute bottom-0 left-0 w-20 h-20 rounded-full bg-gradient-to-tr ${item.color} blur-2xl pointer-events-none opacity-30`} />
+
+                {/* Top row: icon + emoji */}
+                <div className="flex items-start justify-between mb-4 relative z-10">
+                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center ring-2 ring-white/10 group-hover:ring-primary/20 group-hover:shadow-glow transition-all duration-500`}>
+                    <item.icon className={`w-7 h-7 ${item.iconColor} icon-glow group-hover:scale-110 transition-transform duration-300`} />
+                  </div>
+                  <span className="text-2xl opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">{item.emoji}</span>
                 </div>
-                <h3 className="font-serif-display text-lg text-foreground font-semibold mb-2">{item.title}</h3>
-                <p className="font-sans-elegant text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+
+                <h3 className="font-serif-display text-lg text-foreground font-semibold mb-2 relative z-10">{item.title}</h3>
+                <p className="font-sans-elegant text-sm text-muted-foreground leading-relaxed relative z-10">{item.desc}</p>
+
+                {/* Bottom accent line */}
+                <div className={`mt-4 h-0.5 w-12 rounded-full bg-gradient-to-r ${item.color} group-hover:w-full transition-all duration-500`} />
               </motion.div>
             )}
           </div>
