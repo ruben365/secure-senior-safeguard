@@ -484,6 +484,8 @@ const Index = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const [giftLoading, setGiftLoading] = useState(false);
+
   const handleSelectTier = (amount: number) => {
     setSelectedAmount(amount);
     setCustomAmount('');
@@ -502,16 +504,41 @@ const Index = () => {
     }
   };
 
-  const handleSendGift = (e: React.FormEvent) => {
+  const handleSendGift = async (e: React.FormEvent) => {
     e.preventDefault();
-    setGiftSent(true);
-    setTimeout(() => {
-      setGiftFormOpen(false);
-      setGiftSent(false);
-      setGiftMessage('');
-      setGiftName('');
-      setSelectedAmount(null);
-    }, 2000);
+    if (!selectedAmount) return;
+    setGiftLoading(true);
+    try {
+      // Record gift in DB
+      await supabase.from('gifts').insert({
+        amount: selectedAmount,
+        from_name: giftName || 'Anonymous',
+        message: giftMessage || null,
+      });
+
+      // Create Stripe checkout session
+      const { data, error } = await supabase.functions.invoke('create-gift-payment', {
+        body: { amount: selectedAmount, guestName: giftName, message: giftMessage },
+      });
+
+      if (error) throw error;
+      if (data?.url) {
+        window.open(data.url, '_blank');
+      }
+
+      setGiftSent(true);
+      setTimeout(() => {
+        setGiftFormOpen(false);
+        setGiftSent(false);
+        setGiftMessage('');
+        setGiftName('');
+        setSelectedAmount(null);
+      }, 2000);
+    } catch (err) {
+      console.error('Gift payment error:', err);
+    } finally {
+      setGiftLoading(false);
+    }
   };
 
   const features = [
@@ -1416,9 +1443,13 @@ const Index = () => {
                   />
                 </div>
 
-                <button type="submit" className="w-full btn-primary justify-center">
-                  <Heart className="w-4 h-4 fill-current" />
-                  {t('registry.dialog.send')}
+                <button type="submit" disabled={giftLoading} className="w-full btn-primary justify-center disabled:opacity-50">
+                  {giftLoading ? (
+                    <span className="animate-spin w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full" />
+                  ) : (
+                    <Heart className="w-4 h-4 fill-current" />
+                  )}
+                  {giftLoading ? t('registry.dialog.processing') || 'Processing...' : t('registry.dialog.send')}
                 </button>
 
                 <p className="font-sans-elegant text-[11px] text-muted-foreground text-center">{t('registry.dialog.note')}</p>
