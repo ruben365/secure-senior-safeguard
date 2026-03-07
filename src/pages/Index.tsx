@@ -3,12 +3,16 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useMusic } from '@/components/MusicPlayer';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Heart, MapPin, Calendar, Clock, Utensils, Gift, Sparkles, Play, Pause, Music, Users, Flower2, BookOpen, Cross, Church, Gem, PartyPopper, Hotel, Car, Check, X, QrCode, Megaphone } from 'lucide-react';
+import { ChevronDown, Heart, MapPin, Calendar, Clock, Utensils, Gift, Sparkles, Play, Pause, Music, Users, Flower2, BookOpen, Cross, Church, Gem, PartyPopper, Hotel, Car, Check, X, QrCode, Megaphone, CreditCard } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { supabase } from '@/integrations/supabase/client';
 import { useSiteImages } from '@/hooks/useSiteContent';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
+
+const stripePromise = loadStripe('pk_live_51T8RMQ1zcEEWFefrmD6etyTp68WFGVzc3eg0gURh4bXd5CMwV699dZph5vhdg47r0SDdH1lFgxkmlyHurgtkzkSz004Yz5eoR5');
 
 import heroImg from '@/assets/hero-wedding-opt.webp';
 import flowersImg from '@/assets/flowers-lavender.jpg';
@@ -450,6 +454,55 @@ const ScriptureTransition = ({ t }: { t: (key: string) => string }) => {
   );
 };
 
+/* ===== Embedded Stripe Payment Form ===== */
+const EmbeddedPaymentForm = ({ onSuccess }: { onSuccess: () => void }) => {
+  const stripe = useStripe();
+  const elements = useElements();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!stripe || !elements) return;
+
+    setLoading(true);
+    setError(null);
+
+    const { error: submitError } = await stripe.confirmPayment({
+      elements,
+      redirect: 'if_required',
+    });
+
+    if (submitError) {
+      setError(submitError.message || 'Payment failed');
+      setLoading(false);
+    } else {
+      onSuccess();
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <PaymentElement />
+      {error && (
+        <p className="font-sans-elegant text-sm text-red-500 text-center">{error}</p>
+      )}
+      <button
+        type="submit"
+        disabled={!stripe || loading}
+        className="w-full btn-primary justify-center disabled:opacity-50"
+      >
+        {loading ? (
+          <span className="animate-spin w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full" />
+        ) : (
+          <Heart className="w-4 h-4 fill-current" />
+        )}
+        {loading ? 'Processing...' : 'Pay Now'}
+      </button>
+    </form>
+  );
+};
+
 
 const Index = () => {
   const { t } = useLanguage();
@@ -466,6 +519,8 @@ const Index = () => {
   const [giftName, setGiftName] = useState('');
   const [giftMessage, setGiftMessage] = useState('');
   const [giftSent, setGiftSent] = useState(false);
+  const [giftLoading, setGiftLoading] = useState(false);
+  const [clientSecret, setClientSecret] = useState<string | null>(null);
 
   useEffect(() => {
     const update = () => {
@@ -484,14 +539,13 @@ const Index = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const [giftLoading, setGiftLoading] = useState(false);
-
   const handleSelectTier = (amount: number) => {
     setSelectedAmount(amount);
     setCustomAmount('');
     setGiftOpen(false);
     setGiftFormOpen(true);
     setGiftSent(false);
+    setClientSecret(null);
   };
 
   const handleCustomGift = () => {
@@ -501,44 +555,45 @@ const Index = () => {
       setGiftOpen(false);
       setGiftFormOpen(true);
       setGiftSent(false);
+      setClientSecret(null);
     }
   };
 
-  const handleSendGift = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleProceedToPayment = async () => {
     if (!selectedAmount) return;
     setGiftLoading(true);
     try {
-      // Record gift in DB
       await supabase.from('gifts').insert({
         amount: selectedAmount,
         from_name: giftName || 'Anonymous',
         message: giftMessage || null,
       });
 
-      // Create Stripe checkout session
       const { data, error } = await supabase.functions.invoke('create-gift-payment', {
         body: { amount: selectedAmount, guestName: giftName, message: giftMessage },
       });
 
       if (error) throw error;
-      if (data?.url) {
-        window.open(data.url, '_blank');
+      if (data?.clientSecret) {
+        setClientSecret(data.clientSecret);
       }
-
-      setGiftSent(true);
-      setTimeout(() => {
-        setGiftFormOpen(false);
-        setGiftSent(false);
-        setGiftMessage('');
-        setGiftName('');
-        setSelectedAmount(null);
-      }, 2000);
     } catch (err) {
       console.error('Gift payment error:', err);
     } finally {
       setGiftLoading(false);
     }
+  };
+
+  const handlePaymentSuccess = () => {
+    setGiftSent(true);
+    setClientSecret(null);
+    setTimeout(() => {
+      setGiftFormOpen(false);
+      setGiftSent(false);
+      setGiftMessage('');
+      setGiftName('');
+      setSelectedAmount(null);
+    }, 3000);
   };
 
   const features = [
@@ -1385,7 +1440,10 @@ const Index = () => {
       </Dialog>
 
       {/* ===== GIFT FORM DIALOG ===== */}
-      <Dialog open={giftFormOpen} onOpenChange={setGiftFormOpen}>
+      <Dialog open={giftFormOpen} onOpenChange={(open) => {
+        setGiftFormOpen(open);
+        if (!open) { setClientSecret(null); }
+      }}>
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle className="font-serif-display text-2xl text-center">{t('registry.dialog.title')}</DialogTitle>
@@ -1395,7 +1453,7 @@ const Index = () => {
           </DialogHeader>
 
           <AnimatePresence mode="wait">
-            {giftSent ?
+            {giftSent ? (
               <motion.div
                 key="success"
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -1409,14 +1467,19 @@ const Index = () => {
                 <div className="love-divider mt-4">
                   <Heart className="w-4 h-4 text-rose-400 fill-rose-400" />
                 </div>
-              </motion.div> :
-              <motion.form
-                key="form"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                onSubmit={handleSendGift}
-                className="space-y-5 pt-2"
-              >
+              </motion.div>
+            ) : clientSecret ? (
+              <motion.div key="payment" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-2">
+                <div className="glass-card rounded-2xl p-4 text-center mb-4">
+                  <p className="font-sans-elegant text-xs text-muted-foreground mb-1">{t('registry.dialog.amount')}</p>
+                  <p className="font-serif-display text-2xl text-foreground font-bold">${selectedAmount}</p>
+                </div>
+                <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'stripe', variables: { colorPrimary: 'hsl(286, 13%, 27%)' } } }}>
+                  <EmbeddedPaymentForm onSuccess={handlePaymentSuccess} />
+                </Elements>
+              </motion.div>
+            ) : (
+              <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-5 pt-2">
                 <div className="glass-card rounded-2xl p-5 text-center">
                   <p className="font-sans-elegant text-xs text-muted-foreground mb-1">{t('registry.dialog.amount')}</p>
                   <p className="font-serif-display text-3xl text-foreground font-bold">${selectedAmount}</p>
@@ -1443,18 +1506,23 @@ const Index = () => {
                   />
                 </div>
 
-                <button type="submit" disabled={giftLoading} className="w-full btn-primary justify-center disabled:opacity-50">
+                <button
+                  type="button"
+                  disabled={giftLoading || !giftName.trim()}
+                  onClick={handleProceedToPayment}
+                  className="w-full btn-primary justify-center disabled:opacity-50"
+                >
                   {giftLoading ? (
                     <span className="animate-spin w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full" />
                   ) : (
-                    <Heart className="w-4 h-4 fill-current" />
+                    <CreditCard className="w-4 h-4" />
                   )}
-                  {giftLoading ? t('registry.dialog.processing') || 'Processing...' : t('registry.dialog.send')}
+                  {giftLoading ? 'Processing...' : 'Proceed to Payment'}
                 </button>
 
                 <p className="font-sans-elegant text-[11px] text-muted-foreground text-center">{t('registry.dialog.note')}</p>
-              </motion.form>
-            }
+              </motion.div>
+            )}
           </AnimatePresence>
         </DialogContent>
       </Dialog>
