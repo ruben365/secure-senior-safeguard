@@ -199,6 +199,7 @@ const Dashboard = () => {
 
   const unansweredCount = enquiries.filter(e => e.status === 'pending').length;
 
+  const confirmed = rsvps.filter(r => r.status === 'confirmed');
   const pending = rsvps.filter(r => r.status === 'pending');
   const declined = rsvps.filter(r => r.status === 'declined');
   const totalGuests = confirmed.reduce((a, r) => a + r.guests, 0);
