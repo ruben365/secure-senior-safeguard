@@ -91,6 +91,10 @@ interface AnnouncementRow {
   id: string; title: string; content: string; created_at: string;
 }
 
+interface QuoteRow {
+  id: string; content: string; created_at: string;
+}
+
 const Dashboard = () => {
   const { t } = useLanguage();
   const { signOut } = useAuth();
@@ -99,21 +103,26 @@ const Dashboard = () => {
   const [rsvps, setRsvps] = useState<RsvpRow[]>([]);
   const [gifts, setGifts] = useState<GiftRow[]>([]);
   const [announcements, setAnnouncements] = useState<AnnouncementRow[]>([]);
+  const [quotes, setQuotes] = useState<QuoteRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [annTitle, setAnnTitle] = useState('');
   const [annContent, setAnnContent] = useState('');
   const [annPosting, setAnnPosting] = useState(false);
+  const [quoteContent, setQuoteContent] = useState('');
+  const [quotePosting, setQuotePosting] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      const [rsvpRes, giftRes, annRes] = await Promise.all([
+      const [rsvpRes, giftRes, annRes, quoteRes] = await Promise.all([
         supabase.from('rsvps').select('*').order('created_at', { ascending: false }),
         supabase.from('gifts').select('*').order('created_at', { ascending: false }),
         supabase.from('announcements').select('*').order('created_at', { ascending: false }),
+        supabase.from('quotes').select('*').order('created_at', { ascending: false }),
       ]);
       if (rsvpRes.data) setRsvps(rsvpRes.data);
       if (giftRes.data) setGifts(giftRes.data);
       if (annRes.data) setAnnouncements(annRes.data);
+      if (quoteRes.data) setQuotes(quoteRes.data);
       setLoading(false);
     };
     fetchData();
@@ -134,6 +143,22 @@ const Dashboard = () => {
   const handleDeleteAnnouncement = async (id: string) => {
     await supabase.from('announcements').delete().eq('id', id);
     setAnnouncements(announcements.filter(a => a.id !== id));
+  };
+
+  const handlePostQuote = async () => {
+    if (!quoteContent.trim()) return;
+    setQuotePosting(true);
+    const { data, error } = await supabase.from('quotes').insert({ content: quoteContent.trim() }).select().single();
+    if (data && !error) {
+      setQuotes([data, ...quotes]);
+      setQuoteContent('');
+    }
+    setQuotePosting(false);
+  };
+
+  const handleDeleteQuote = async (id: string) => {
+    await supabase.from('quotes').delete().eq('id', id);
+    setQuotes(quotes.filter(q => q.id !== id));
   };
 
   const confirmed = rsvps.filter(r => r.status === 'confirmed');
@@ -195,6 +220,9 @@ const Dashboard = () => {
             </TabsTrigger>
             <TabsTrigger value="announcements" className="rounded-full px-5 py-2 font-sans-elegant text-xs font-bold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground">
               <Megaphone className="w-3.5 h-3.5 mr-1.5" /> {t('dashboard.announcements')}
+            </TabsTrigger>
+            <TabsTrigger value="quotes" className="rounded-full px-5 py-2 font-sans-elegant text-xs font-bold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground">
+              <Heart className="w-3.5 h-3.5 mr-1.5" /> {t('dashboard.quotes')}
             </TabsTrigger>
           </TabsList>
 
@@ -473,6 +501,62 @@ const Dashboard = () => {
                   </div>
                   <button
                     onClick={() => handleDeleteAnnouncement(ann.id)}
+                    className="w-9 h-9 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 flex items-center justify-center transition-colors flex-shrink-0"
+                    title={t('dashboard.deleteConfirm')}
+                  >
+                    <Trash2 className="w-4 h-4 text-rose-500" />
+                  </button>
+                </div>
+              ))}
+            </motion.div>
+          </TabsContent>
+
+          {/* ═══ QUOTES TAB ═══ */}
+          <TabsContent value="quotes" className="space-y-6">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+              className="glass-card-strong rounded-3xl p-8">
+              <div className="flex items-center gap-2 mb-6">
+                <Plus className="w-5 h-5 text-primary" />
+                <h3 className="font-serif-display text-lg font-semibold text-foreground">{t('dashboard.newQuote')}</h3>
+              </div>
+              <div className="space-y-4">
+                <Textarea
+                  value={quoteContent}
+                  onChange={(e) => setQuoteContent(e.target.value)}
+                  placeholder={t('dashboard.quotePlaceholder')}
+                  className="rounded-2xl glass-card border-border/30 font-sans-elegant min-h-[100px]"
+                />
+                <button
+                  onClick={handlePostQuote}
+                  disabled={quotePosting || !quoteContent.trim()}
+                  className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {quotePosting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Heart className="w-4 h-4" />}
+                  {t('dashboard.post')}
+                </button>
+              </div>
+            </motion.div>
+
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+              className="space-y-4">
+              {quotes.length === 0 ? (
+                <div className="glass-card-strong rounded-3xl p-12 text-center">
+                  <Heart className="w-8 h-8 text-muted-foreground/40 mx-auto mb-3" />
+                  <p className="font-sans-elegant text-sm text-muted-foreground">{t('dashboard.noQuotes')}</p>
+                </div>
+              ) : quotes.map((q) => (
+                <div key={q.id} className="glass-card-strong rounded-3xl p-6 flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-rose-500/20 to-pink-500/10 flex items-center justify-center flex-shrink-0 mt-1">
+                    <Heart className="w-5 h-5 text-rose-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-serif-display text-base text-foreground italic leading-relaxed">"{q.content}"</p>
+                    <p className="font-sans-elegant text-[10px] text-muted-foreground/60 mt-2">
+                      {new Date(q.created_at).toLocaleDateString()}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => handleDeleteQuote(q.id)}
                     className="w-9 h-9 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 flex items-center justify-center transition-colors flex-shrink-0"
                     title={t('dashboard.deleteConfirm')}
                   >
