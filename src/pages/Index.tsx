@@ -1428,6 +1428,7 @@ const Index = () => {
             </DialogDescription>
           </DialogHeader>
 
+          {/* Quick amounts */}
           <div className="grid grid-cols-2 gap-3 pt-2">
             {giftTiers.map((tier, i) =>
               <motion.button
@@ -1447,22 +1448,31 @@ const Index = () => {
             )}
           </div>
 
-          <div className="flex gap-3 pt-2">
-            <div className="relative flex-1">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground font-sans-elegant text-sm">$</span>
-              <Input
-                type="number"
-                min="1"
-                value={customAmount}
-                onChange={(e) => setCustomAmount(e.target.value)}
-                placeholder={t('registry.custom.placeholder')}
-                className="font-sans-elegant rounded-full h-11 pl-8 border-border/50 bg-background/50 backdrop-blur-sm"
-              />
+          {/* Custom amount — prominent */}
+          <div className="pt-3">
+            <div className="glass-card-strong rounded-2xl p-4">
+              <p className="font-sans-elegant text-xs font-bold text-foreground mb-2 flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-primary" />
+                {t('gift.customAmount')}
+              </p>
+              <div className="flex gap-3">
+                <div className="relative flex-1">
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground font-serif-display text-lg font-bold">$</span>
+                  <Input
+                    type="number"
+                    min="1"
+                    value={customAmount}
+                    onChange={(e) => setCustomAmount(e.target.value)}
+                    placeholder="150"
+                    className="font-serif-display text-lg font-bold rounded-full h-12 pl-9 border-primary/30 bg-primary/5 focus:ring-primary/30"
+                  />
+                </div>
+                <button onClick={handleCustomGift} className="btn-primary px-6 rounded-full text-sm whitespace-nowrap">
+                  <Gift className="w-4 h-4" />
+                  {t('registry.give')}
+                </button>
+              </div>
             </div>
-            <button onClick={handleCustomGift} className="btn-primary px-5 rounded-full text-sm">
-              <Gift className="w-4 h-4" />
-              {t('registry.give')}
-            </button>
           </div>
         </DialogContent>
       </Dialog>
@@ -1563,10 +1573,31 @@ const Index = () => {
                   />
                 </div>
 
+                {/* Quick message selector */}
                 <div>
                   <label className="font-sans-elegant text-sm text-foreground block mb-2 font-semibold">
                     {t('registry.dialog.message')}
                   </label>
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {[
+                      t('gift.msg.congrats'),
+                      t('gift.msg.blessed'),
+                      t('gift.msg.love'),
+                    ].map((msg) => (
+                      <button
+                        key={msg}
+                        type="button"
+                        onClick={() => setGiftMessage(msg)}
+                        className={`font-sans-elegant text-xs px-3 py-1.5 rounded-full border transition-all duration-200 ${
+                          giftMessage === msg
+                            ? 'border-primary bg-primary/10 text-primary font-semibold'
+                            : 'border-border/30 text-muted-foreground hover:border-primary/30 hover:bg-primary/5'
+                        }`}
+                      >
+                        {msg}
+                      </button>
+                    ))}
+                  </div>
                   <Textarea
                     value={giftMessage}
                     onChange={(e) => setGiftMessage(e.target.value)}
