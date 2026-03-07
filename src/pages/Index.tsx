@@ -283,9 +283,9 @@ const AnnouncementsSection = ({ t }: { t: (key: string) => string }) => {
                   transition={{ duration: 0.6 }}
                   className="text-center"
                 >
-                  <p className="font-sans-elegant text-sm font-bold text-primary mb-2">{announcements[currentIndex].title}</p>
+                  <p className="font-sans-elegant text-sm font-bold text-primary mb-2">{getTitle(announcements[currentIndex])}</p>
                   <p className="font-serif-display text-base md:text-lg text-foreground italic leading-relaxed">
-                    {announcements[currentIndex].content}
+                    {getContent(announcements[currentIndex])}
                   </p>
                 </motion.div>
               </AnimatePresence>
