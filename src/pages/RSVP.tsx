@@ -262,6 +262,22 @@ const RSVP = () => {
         if (giftError) throw giftError;
       }
 
+      // Send RSVP confirmation email
+      if (email) {
+        try {
+          await supabase.functions.invoke('send-rsvp-confirmation', {
+            body: {
+              guestName: name,
+              guestEmail: email,
+              attending: attending ?? false,
+              guests: 1 + companions.length,
+            },
+          });
+        } catch (e) {
+          console.error('RSVP confirmation email failed:', e);
+        }
+      }
+
       setStep('done');
       toast.success('RSVP submitted! 💕');
     } catch (err) {

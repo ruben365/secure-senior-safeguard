@@ -600,6 +600,18 @@ const Index = () => {
   const handlePaymentSuccess = () => {
     setGiftSent(true);
     setClientSecret(null);
+    // Send gift confirmation email
+    try {
+      supabase.functions.invoke('send-gift-confirmation', {
+        body: {
+          guestName: giftName.trim() || 'Anonymous',
+          amount: selectedAmount,
+          message: giftMessage || null,
+        },
+      });
+    } catch (e) {
+      console.error('Gift confirmation email failed:', e);
+    }
     setTimeout(() => {
       setGiftFormOpen(false);
       setGiftSent(false);
