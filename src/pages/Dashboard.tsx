@@ -111,6 +111,9 @@ const Dashboard = () => {
   const [annPosting, setAnnPosting] = useState(false);
   const [quoteContent, setQuoteContent] = useState('');
   const [quotePosting, setQuotePosting] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const staffUrl = `${window.location.origin}/staff`;
 
   useEffect(() => {
     const fetchData = async () => {
