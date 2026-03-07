@@ -596,7 +596,7 @@ const Index = () => {
       </motion.button>
 
       {/* ===== HERO ===== */}
-      <section className="w-full min-h-screen relative overflow-hidden flex flex-col items-center pt-8 pb-16">
+      <section className="w-full min-h-screen relative overflow-hidden flex flex-col items-center pt-8 pb-8">
         <FallingPetals />
 
         {/* Hero aurora orbs — pure CSS */}
