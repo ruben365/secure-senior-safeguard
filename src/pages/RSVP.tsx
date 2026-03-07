@@ -893,7 +893,7 @@ const RSVP = () => {
 
               <div className="flex gap-3">
                 <button onClick={() => setStep('table')} className="flex-1 btn-outline justify-center">{t('rsvp.back')}</button>
-                <button onClick={() => setStep('done')}
+                <button onClick={handleSubmitRsvp}
                   className="flex-1 btn-primary justify-center"
                 >
                   {(showQR || skipGift) ? t('rsvp.submit') : t('rsvp.gift.skip')}
