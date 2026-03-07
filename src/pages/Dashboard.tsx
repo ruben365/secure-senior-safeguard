@@ -87,6 +87,10 @@ interface GiftRow {
   id: string; from_name: string; amount: number; message: string | null; created_at: string;
 }
 
+interface AnnouncementRow {
+  id: string; title: string; content: string; created_at: string;
+}
+
 const Dashboard = () => {
   const { t } = useLanguage();
   const { signOut } = useAuth();
@@ -94,20 +98,43 @@ const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [rsvps, setRsvps] = useState<RsvpRow[]>([]);
   const [gifts, setGifts] = useState<GiftRow[]>([]);
+  const [announcements, setAnnouncements] = useState<AnnouncementRow[]>([]);
   const [loading, setLoading] = useState(true);
+  const [annTitle, setAnnTitle] = useState('');
+  const [annContent, setAnnContent] = useState('');
+  const [annPosting, setAnnPosting] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      const [rsvpRes, giftRes] = await Promise.all([
+      const [rsvpRes, giftRes, annRes] = await Promise.all([
         supabase.from('rsvps').select('*').order('created_at', { ascending: false }),
         supabase.from('gifts').select('*').order('created_at', { ascending: false }),
+        supabase.from('announcements').select('*').order('created_at', { ascending: false }),
       ]);
       if (rsvpRes.data) setRsvps(rsvpRes.data);
       if (giftRes.data) setGifts(giftRes.data);
+      if (annRes.data) setAnnouncements(annRes.data);
       setLoading(false);
     };
     fetchData();
   }, []);
+
+  const handlePostAnnouncement = async () => {
+    if (!annTitle.trim() || !annContent.trim()) return;
+    setAnnPosting(true);
+    const { data, error } = await supabase.from('announcements').insert({ title: annTitle.trim(), content: annContent.trim() }).select().single();
+    if (data && !error) {
+      setAnnouncements([data, ...announcements]);
+      setAnnTitle('');
+      setAnnContent('');
+    }
+    setAnnPosting(false);
+  };
+
+  const handleDeleteAnnouncement = async (id: string) => {
+    await supabase.from('announcements').delete().eq('id', id);
+    setAnnouncements(announcements.filter(a => a.id !== id));
+  };
 
   const confirmed = rsvps.filter(r => r.status === 'confirmed');
   const pending = rsvps.filter(r => r.status === 'pending');
@@ -165,6 +192,9 @@ const Dashboard = () => {
             </TabsTrigger>
             <TabsTrigger value="gifts" className="rounded-full px-5 py-2 font-sans-elegant text-xs font-bold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground">
               <Gift className="w-3.5 h-3.5 mr-1.5" /> {t('dashboard.gifts')}
+            </TabsTrigger>
+            <TabsTrigger value="announcements" className="rounded-full px-5 py-2 font-sans-elegant text-xs font-bold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground">
+              <Megaphone className="w-3.5 h-3.5 mr-1.5" /> {t('dashboard.announcements')}
             </TabsTrigger>
           </TabsList>
 
