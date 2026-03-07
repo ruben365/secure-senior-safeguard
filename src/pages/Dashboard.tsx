@@ -228,6 +228,9 @@ const Dashboard = () => {
             <TabsTrigger value="quotes" className="rounded-full px-5 py-2 font-sans-elegant text-xs font-bold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground">
               <Heart className="w-3.5 h-3.5 mr-1.5" /> {t('dashboard.quotes')}
             </TabsTrigger>
+            <TabsTrigger value="share" className="rounded-full px-5 py-2 font-sans-elegant text-xs font-bold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground">
+              <Share2 className="w-3.5 h-3.5 mr-1.5" /> Share
+            </TabsTrigger>
           </TabsList>
 
           {/* ═══ OVERVIEW TAB ═══ */}
