@@ -219,6 +219,7 @@ const PersonalCourtSection = ({ t }: { t: (key: string) => string }) => {
                 <div className="flex items-center justify-center gap-1.5 mt-6">
                   {quotes.map((_, i) => (
                     <button key={i} onClick={() => setCurrentIndex(i)}
+                      aria-label={`Go to quote ${i + 1}`}
                       className={`h-1.5 rounded-full transition-all duration-300 ${i === currentIndex ? 'bg-primary w-6' : 'bg-muted-foreground/20 w-1.5'}`} />
                   ))}
                 </div>
