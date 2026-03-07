@@ -139,40 +139,40 @@ const Dashboard = () => {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
           <div className="inline-block px-5 py-2 rounded-full glass-card-strong mb-5">
             <p className="font-sans-elegant text-xs tracking-[0.25em] uppercase text-muted-foreground font-medium">
-              Admin Panel
+              {t('dashboard.admin')}
             </p>
           </div>
           <h1 className="font-serif-display text-4xl md:text-6xl text-foreground mb-4 font-semibold">
-            Wedding Dashboard
+            {t('dashboard.title')}
           </h1>
           <p className="font-sans-elegant text-base text-muted-foreground max-w-md mx-auto">
-            Track RSVPs, manage guests, and monitor gifts — all in one place.
+            {t('dashboard.subtitle')}
           </p>
         </motion.div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
           <TabsList className="glass-card-strong rounded-full p-1 mx-auto flex w-fit gap-1">
             <TabsTrigger value="overview" className="rounded-full px-5 py-2 font-sans-elegant text-xs font-bold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground">
-              <BarChart3 className="w-3.5 h-3.5 mr-1.5" /> Overview
+              <BarChart3 className="w-3.5 h-3.5 mr-1.5" /> {t('dashboard.overview')}
             </TabsTrigger>
             <TabsTrigger value="guests" className="rounded-full px-5 py-2 font-sans-elegant text-xs font-bold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground">
-              <Users className="w-3.5 h-3.5 mr-1.5" /> Guests
+              <Users className="w-3.5 h-3.5 mr-1.5" /> {t('dashboard.guests')}
             </TabsTrigger>
             <TabsTrigger value="tables" className="rounded-full px-5 py-2 font-sans-elegant text-xs font-bold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground">
-              <MapPin className="w-3.5 h-3.5 mr-1.5" /> Seating
+              <MapPin className="w-3.5 h-3.5 mr-1.5" /> {t('dashboard.seating')}
             </TabsTrigger>
             <TabsTrigger value="gifts" className="rounded-full px-5 py-2 font-sans-elegant text-xs font-bold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground">
-              <Gift className="w-3.5 h-3.5 mr-1.5" /> Gifts
+              <Gift className="w-3.5 h-3.5 mr-1.5" /> {t('dashboard.gifts')}
             </TabsTrigger>
           </TabsList>
 
           {/* ═══ OVERVIEW TAB ═══ */}
           <TabsContent value="overview" className="space-y-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <StatCard icon={Users} label="Total Guests" value={totalGuests} sub={`${confirmed.length} families`} color="text-violet-400" bg="from-violet-500/20 to-purple-500/10" />
-              <StatCard icon={CheckCircle} label="Confirmed" value={confirmed.length} sub={rsvps.length ? `${Math.round((confirmed.length / rsvps.length) * 100)}% response rate` : '—'} color="text-emerald-400" bg="from-emerald-500/20 to-teal-500/10" />
-              <StatCard icon={Clock} label="Pending" value={pending.length} sub="Awaiting response" color="text-amber-400" bg="from-amber-500/20 to-orange-500/10" />
-              <StatCard icon={Gift} label="Total Gifts" value={`$${totalGifts.toLocaleString()}`} sub={`${gifts.length} contributions`} color="text-rose-400" bg="from-rose-500/20 to-pink-500/10" />
+              <StatCard icon={Users} label={t('dashboard.totalGuests')} value={totalGuests} sub={t('dashboard.families').replace('{n}', String(confirmed.length))} color="text-violet-400" bg="from-violet-500/20 to-purple-500/10" />
+              <StatCard icon={CheckCircle} label={t('dashboard.confirmed')} value={confirmed.length} sub={rsvps.length ? t('dashboard.responseRate').replace('{n}', String(Math.round((confirmed.length / rsvps.length) * 100))) : '—'} color="text-emerald-400" bg="from-emerald-500/20 to-teal-500/10" />
+              <StatCard icon={Clock} label={t('dashboard.pending')} value={pending.length} sub={t('dashboard.awaitingResponse')} color="text-amber-400" bg="from-amber-500/20 to-orange-500/10" />
+              <StatCard icon={Gift} label={t('dashboard.totalGifts')} value={`$${totalGifts.toLocaleString()}`} sub={t('dashboard.contributions').replace('{n}', String(gifts.length))} color="text-rose-400" bg="from-rose-500/20 to-pink-500/10" />
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
@@ -180,12 +180,12 @@ const Dashboard = () => {
                 className="glass-card-strong rounded-3xl p-8">
                 <div className="flex items-center gap-2 mb-6">
                   <PieChart className="w-5 h-5 text-primary" />
-                  <h3 className="font-serif-display text-lg font-semibold text-foreground">RSVP Status</h3>
+                  <h3 className="font-serif-display text-lg font-semibold text-foreground">{t('dashboard.rsvpStatus')}</h3>
                 </div>
                 <DonutChart segments={[
-                  { value: confirmed.length, color: 'hsl(152, 60%, 52%)', label: 'Confirmed' },
-                  { value: pending.length, color: 'hsl(38, 92%, 60%)', label: 'Pending' },
-                  { value: declined.length, color: 'hsl(0, 72%, 62%)', label: 'Declined' },
+                  { value: confirmed.length, color: 'hsl(152, 60%, 52%)', label: t('dashboard.confirmed') },
+                  { value: pending.length, color: 'hsl(38, 92%, 60%)', label: t('dashboard.pending') },
+                  { value: declined.length, color: 'hsl(0, 72%, 62%)', label: t('dashboard.declined') },
                 ]} />
               </motion.div>
 
@@ -193,17 +193,17 @@ const Dashboard = () => {
                 className="glass-card-strong rounded-3xl p-8">
                 <div className="flex items-center gap-2 mb-6">
                   <Utensils className="w-5 h-5 text-primary" />
-                  <h3 className="font-serif-display text-lg font-semibold text-foreground">Cuisine Preferences</h3>
+                  <h3 className="font-serif-display text-lg font-semibold text-foreground">{t('dashboard.cuisinePrefs')}</h3>
                 </div>
                 <div className="space-y-5">
                   {Object.keys(mealCounts).length === 0 && (
-                    <p className="font-sans-elegant text-sm text-muted-foreground text-center">No meal data yet</p>
+                    <p className="font-sans-elegant text-sm text-muted-foreground text-center">{t('dashboard.noMealData')}</p>
                   )}
                   {Object.entries(mealCounts).map(([cuisine, count]) => (
                     <div key={cuisine}>
                       <div className="flex justify-between mb-2">
                         <span className="font-sans-elegant text-sm font-medium text-foreground capitalize">{cuisine}</span>
-                        <span className="font-sans-elegant text-sm text-muted-foreground">{count} guests</span>
+                        <span className="font-sans-elegant text-sm text-muted-foreground">{count} {t('dashboard.guestsLabel')}</span>
                       </div>
                       <ProgressBar value={count} max={totalGuests || 1} color="bg-primary" />
                     </div>
@@ -217,10 +217,10 @@ const Dashboard = () => {
               className="glass-card-strong rounded-3xl p-8">
               <div className="flex items-center gap-2 mb-6">
                 <TrendingUp className="w-5 h-5 text-primary" />
-                <h3 className="font-serif-display text-lg font-semibold text-foreground">Recent Activity</h3>
+                <h3 className="font-serif-display text-lg font-semibold text-foreground">{t('dashboard.recentActivity')}</h3>
               </div>
               {rsvps.length === 0 ? (
-                <p className="font-sans-elegant text-sm text-muted-foreground text-center py-8">No RSVPs yet — share your wedding link!</p>
+                <p className="font-sans-elegant text-sm text-muted-foreground text-center py-8">{t('dashboard.noRsvps')}</p>
               ) : (
                 <div className="space-y-3">
                   {rsvps.slice(0, 5).map(r => (
@@ -234,7 +234,7 @@ const Dashboard = () => {
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="font-sans-elegant text-sm font-semibold text-foreground truncate">{r.name}</p>
-                        <p className="font-sans-elegant text-xs text-muted-foreground">{r.guests} guest{r.guests > 1 ? 's' : ''} · {new Date(r.created_at).toLocaleDateString()}</p>
+                        <p className="font-sans-elegant text-xs text-muted-foreground">{r.guests} {t('dashboard.guestsLabel')}{r.guests > 1 ? '' : ''} · {new Date(r.created_at).toLocaleDateString()}</p>
                       </div>
                       <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide ${
                         r.status === 'confirmed' ? 'bg-emerald-500/15 text-emerald-500' :
@@ -253,7 +253,7 @@ const Dashboard = () => {
             <div className="flex flex-col sm:flex-row gap-3">
               <div className="relative flex-1">
                 <Input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search guests..." className="pl-4 rounded-full h-11 glass-card border-border/30 font-sans-elegant" />
+                  placeholder={t('dashboard.searchGuests')} className="pl-4 rounded-full h-11 glass-card border-border/30 font-sans-elegant" />
               </div>
             </div>
 
@@ -262,17 +262,17 @@ const Dashboard = () => {
               <Table>
                 <TableHeader>
                   <TableRow className="border-border/20">
-                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">Guest</TableHead>
-                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">Party Size</TableHead>
-                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">Status</TableHead>
-                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">Cuisine</TableHead>
-                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">Table</TableHead>
-                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">Message</TableHead>
+                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">{t('dashboard.guest')}</TableHead>
+                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">{t('dashboard.partySize')}</TableHead>
+                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">{t('dashboard.status')}</TableHead>
+                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">{t('dashboard.cuisine')}</TableHead>
+                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">{t('dashboard.table')}</TableHead>
+                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">{t('dashboard.message')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {filteredRsvps.length === 0 ? (
-                    <TableRow><TableCell colSpan={6} className="text-center py-8 text-muted-foreground font-sans-elegant">No guests found</TableCell></TableRow>
+                    <TableRow><TableCell colSpan={6} className="text-center py-8 text-muted-foreground font-sans-elegant">{t('dashboard.noGuests')}</TableCell></TableRow>
                   ) : filteredRsvps.map(r => (
                     <TableRow key={r.id} className="border-border/10 hover:bg-primary/5">
                       <TableCell className="font-sans-elegant text-sm font-semibold text-foreground">{r.name}</TableCell>
@@ -298,7 +298,7 @@ const Dashboard = () => {
           <TabsContent value="tables" className="space-y-6">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-4">
               <p className="font-sans-elegant text-sm text-muted-foreground">
-                {tablesUsed.length} of {TABLE_NAMES.length} tables assigned · {totalGuests} guests seated
+                {t('dashboard.tablesAssigned').replace('{used}', String(tablesUsed.length)).replace('{total}', String(TABLE_NAMES.length)).replace('{guests}', String(totalGuests))}
               </p>
             </motion.div>
 
@@ -318,7 +318,7 @@ const Dashboard = () => {
                     )}
                     <p className="font-serif-display text-base font-semibold text-foreground mb-1">🌸 {tableName}</p>
                     <p className="font-sans-elegant text-2xl font-bold text-foreground">{guestCount}</p>
-                    <p className="font-sans-elegant text-[10px] text-muted-foreground">of {maxSeats} seats</p>
+                    <p className="font-sans-elegant text-[10px] text-muted-foreground">{t('dashboard.ofSeats').replace('{n}', String(maxSeats))}</p>
                     <div className="mt-3">
                       <ProgressBar value={guestCount} max={maxSeats} color={guestCount >= maxSeats ? 'bg-rose-400' : 'bg-primary'} />
                     </div>
@@ -338,9 +338,9 @@ const Dashboard = () => {
           {/* ═══ GIFTS TAB ═══ */}
           <TabsContent value="gifts" className="space-y-6">
             <div className="grid sm:grid-cols-3 gap-4">
-              <StatCard icon={Gift} label="Total Received" value={`$${totalGifts.toLocaleString()}`} color="text-rose-400" bg="from-rose-500/20 to-pink-500/10" />
-              <StatCard icon={Heart} label="Contributors" value={gifts.length} color="text-violet-400" bg="from-violet-500/20 to-purple-500/10" />
-              <StatCard icon={TrendingUp} label="Average Gift" value={gifts.length ? `$${Math.round(totalGifts / gifts.length)}` : '$0'} color="text-amber-400" bg="from-amber-500/20 to-orange-500/10" />
+              <StatCard icon={Gift} label={t('dashboard.totalReceived')} value={`$${totalGifts.toLocaleString()}`} color="text-rose-400" bg="from-rose-500/20 to-pink-500/10" />
+              <StatCard icon={Heart} label={t('dashboard.contributors')} value={gifts.length} color="text-violet-400" bg="from-violet-500/20 to-purple-500/10" />
+              <StatCard icon={TrendingUp} label={t('dashboard.averageGift')} value={gifts.length ? `$${Math.round(totalGifts / gifts.length)}` : '$0'} color="text-amber-400" bg="from-amber-500/20 to-orange-500/10" />
             </div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
@@ -348,15 +348,15 @@ const Dashboard = () => {
               <Table>
                 <TableHeader>
                   <TableRow className="border-border/20">
-                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">From</TableHead>
-                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">Amount</TableHead>
-                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">Date</TableHead>
-                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">Message</TableHead>
+                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">{t('dashboard.from')}</TableHead>
+                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">{t('dashboard.amount')}</TableHead>
+                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">{t('dashboard.date')}</TableHead>
+                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">{t('dashboard.message')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {gifts.length === 0 ? (
-                    <TableRow><TableCell colSpan={4} className="text-center py-8 text-muted-foreground font-sans-elegant">No gifts yet</TableCell></TableRow>
+                    <TableRow><TableCell colSpan={4} className="text-center py-8 text-muted-foreground font-sans-elegant">{t('dashboard.noGifts')}</TableCell></TableRow>
                   ) : gifts.map(g => (
                     <TableRow key={g.id} className="border-border/10 hover:bg-primary/5">
                       <TableCell className="font-sans-elegant text-sm font-semibold text-foreground">{g.from_name}</TableCell>
@@ -374,7 +374,7 @@ const Dashboard = () => {
                 className="glass-card-strong rounded-3xl p-8">
                 <div className="flex items-center gap-2 mb-6">
                   <Sparkles className="w-5 h-5 text-primary" />
-                  <h3 className="font-serif-display text-lg font-semibold text-foreground">Gift Tiers</h3>
+                  <h3 className="font-serif-display text-lg font-semibold text-foreground">{t('dashboard.giftTiers')}</h3>
                 </div>
                 <DonutChart segments={[
                   { value: gifts.filter(g => g.amount <= 60).length, color: 'hsl(200, 60%, 55%)', label: '💐 ≤$60' },
