@@ -226,11 +226,11 @@ export const CartEmptyHelpNotification = forwardRef<HTMLDivElement>(function Car
 });
 
 // Combined Feedback Notifications Component
-export const CartFeedbackNotifications = () => {
+export const CartFeedbackNotifications = forwardRef<HTMLDivElement>(function CartFeedbackNotifications(_props, _ref) {
   return (
     <>
       <PurchaseThankYouNotification />
       <CartEmptyHelpNotification />
     </>
   );
-};
+});
