@@ -65,8 +65,7 @@ import { VideoLightbox } from "@/components/VideoLightbox";
 import { SEO } from "@/components/SEO";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+
 
 const businessHeadlines = [
   "Your AI Front Desk, Running 24/7",
@@ -383,8 +382,7 @@ function Business() {
     title: string;
   } | null>(null);
 
-  const platformRef = useRef(null);
-  const platformInView = useInView(platformRef, { once: true, margin: "-80px" });
+
 
   useEffect(() => {
     fetchBusinessTestimonials();
@@ -697,7 +695,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ COMPLETE PLATFORM ═══════════════════ */}
-        <section className="py-28 relative overflow-hidden" ref={platformRef}>
+        <section className="py-28 relative overflow-hidden">
           {/* Rich layered background */}
           <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
           
@@ -714,13 +712,7 @@ function Business() {
             />
 
             {/* Hero overview card — Premium glassmorphism */}
-            <motion.div
-              className="max-w-6xl mx-auto mb-20"
-              initial={{ opacity: 0, y: 60, rotateX: 8 }}
-              animate={platformInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              style={{ perspective: "1400px" }}
-            >
+            <AnimatedSection animation="scale-up" className="max-w-6xl mx-auto mb-20">
               <div className="relative rounded-3xl overflow-hidden glass-heavy shadow-3d-lg">
                 {/* Animated gradient border */}
                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/10 via-transparent to-accent/10 pointer-events-none" />
@@ -733,11 +725,7 @@ function Business() {
                 <div className="relative p-8 md:p-12 lg:p-16">
                   <div className="grid gap-12 lg:grid-cols-[1.3fr_0.7fr] items-center relative z-10">
                     <div>
-                      <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={platformInView ? { opacity: 1, x: 0 } : {}}
-                        transition={{ delay: 0.3, duration: 0.5 }}
-                      >
+                      <div>
                         <div className="inline-flex items-center gap-2 px-4 py-2 glass-subtle rounded-full text-xs font-bold text-primary uppercase tracking-wider mb-6 border border-primary/15">
                           <Shield className="w-3.5 h-3.5" />
                           Unified Defense
@@ -760,35 +748,28 @@ function Business() {
                             "Single operating model: shared threat intelligence across all 9 services.",
                             "Single engagement path: strategy, deployment, hardening, and ongoing support.",
                           ].map((item, idx) => (
-                            <motion.div
+                            <div
                               key={item}
                               className="flex items-start gap-3 text-sm group"
-                              initial={{ opacity: 0, x: -15 }}
-                              animate={platformInView ? { opacity: 1, x: 0 } : {}}
-                              transition={{ delay: 0.5 + idx * 0.1, duration: 0.4 }}
                             >
                               <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform duration-300 shadow-sm">
                                 <CheckCircle className="w-3.5 h-3.5 text-primary" />
                               </div>
                               <p className="text-foreground leading-relaxed">{item}</p>
-                            </motion.div>
+                            </div>
                           ))}
                         </div>
-                      </motion.div>
+                      </div>
                     </div>
 
                     {/* Stats grid with 3D depth */}
                     <div className="grid grid-cols-2 gap-4">
                       {platformSnapshotStats.map((stat, i) => (
-                        <motion.div
+                        <div
                           key={stat.label}
-                          initial={{ opacity: 0, y: 30, scale: 0.9 }}
-                          animate={platformInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-                          transition={{ delay: 0.4 + i * 0.12, duration: 0.5, ease: "easeOut" }}
-                          whileHover={{ y: -6, scale: 1.04 }}
                           className="group"
                         >
-                          <div className="relative rounded-2xl border border-border/50 bg-card/80 backdrop-blur-sm p-5 text-center hover:border-primary/30 hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.12)] transition-all duration-500 overflow-hidden">
+                          <div className="relative rounded-2xl border border-border/50 bg-card/80 backdrop-blur-sm p-5 text-center hover:border-primary/30 hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.12)] transition-all duration-500 overflow-hidden hover-lift">
                             {/* Hover glow */}
                             <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.04] to-accent/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             
@@ -804,13 +785,13 @@ function Business() {
                               </p>
                             </div>
                           </div>
-                        </motion.div>
+                        </div>
                       ))}
                     </div>
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </AnimatedSection>
 
             {/* Service groups — Premium cards with 3D hover */}
             <div className="max-w-6xl mx-auto space-y-20">
@@ -845,14 +826,9 @@ function Business() {
                       style={{ perspective: "1000px" }}
                     >
                       {group.features.map((feature, fi) => (
-                        <motion.div
+                        <div
                           key={feature.title}
-                          initial={{ opacity: 0, y: 40, rotateX: 10 }}
-                          whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: fi * 0.08, duration: 0.5 }}
-                          whileHover={{ y: -10, rotateX: -2, rotateY: 3 }}
-                          style={{ transformStyle: "preserve-3d" }}
+                          className="hover-lift"
                         >
                           <Link
                             to={feature.href}
@@ -888,7 +864,7 @@ function Business() {
                               <ChevronRight className="w-3.5 h-3.5 group-hover/card:translate-x-1.5 transition-transform duration-300" />
                             </div>
                           </Link>
-                        </motion.div>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -899,14 +875,10 @@ function Business() {
             {/* Platform integration pillars — 3D cards */}
             <div className="mt-24 grid md:grid-cols-3 gap-6 max-w-5xl mx-auto" style={{ perspective: "1200px" }}>
               {platformPillars.map((pillar, i) => (
-                <motion.div
+                <AnimatedSection
                   key={pillar.title}
-                  initial={{ opacity: 0, y: 40, rotateX: 12 }}
-                  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.12, duration: 0.6 }}
-                  whileHover={{ y: -8, rotateX: -3, rotateY: 3 }}
-                  style={{ transformStyle: "preserve-3d" }}
+                  animation="fade-up"
+                  delay={i * 120}
                 >
                   <Card className="group p-8 rounded-2xl border-border/40 bg-card/95 backdrop-blur-sm text-center h-full hover:shadow-[0_20px_50px_-15px_hsl(var(--primary)/0.12)] hover:border-primary/25 transition-all duration-500 overflow-hidden relative">
                     <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/30 via-accent/20 to-primary/30 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -919,7 +891,7 @@ function Business() {
                     <h3 className="font-bold text-base mb-3">{pillar.title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">{pillar.desc}</p>
                   </Card>
-                </motion.div>
+                </AnimatedSection>
               ))}
             </div>
 
@@ -1090,10 +1062,9 @@ function Business() {
                   { name: "AI Chatbot", price: "$1,200", note: "Full integration", color: "text-primary", tag: "POPULAR" },
                   { name: "Domain & Hosting", price: "FREE", note: "With any website", color: "text-primary", tag: "INCLUDED" },
                 ].map((addon, i) => (
-                  <motion.div
+                  <div
                     key={i}
-                    whileHover={{ y: -8, scale: 1.03 }}
-                    transition={{ type: "spring", stiffness: 300 }}
+                    className="hover-lift"
                   >
                     <Card className="p-4 text-center border-border/50 hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.12)] transition-all duration-500 hover:border-primary/30 relative group overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] to-accent/[0.01] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
@@ -1108,7 +1079,7 @@ function Business() {
                       </div>
                       <div className="text-xs text-muted-foreground relative z-10">{addon.note}</div>
                     </Card>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
               <div className="mt-8 text-center">
@@ -1495,16 +1466,15 @@ function Business() {
                   </div>
                   <div className="flex flex-wrap justify-center gap-6 mb-8 relative z-10">
                     {["🔧 Resuscitate", "⚡ Optimize", "🛡️ Secure", "🚀 Develop"].map((item, i) => (
-                      <motion.div
+                      <div
                         key={i}
-                        className="flex items-center gap-2 text-sm group"
-                        whileHover={{ scale: 1.08, y: -2 }}
+                        className="flex items-center gap-2 text-sm group hover-scale"
                       >
                         <div className="w-10 h-10 bg-gradient-to-br from-primary/12 to-accent/8 rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-all duration-300">
                           <span className="text-lg">{item.split(" ")[0]}</span>
                         </div>
                         <span className="font-semibold">{item.split(" ")[1]}</span>
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
                   <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground relative z-10">
@@ -1752,14 +1722,9 @@ function Business() {
                   gradient: "from-coral-500 to-lavender-400",
                 },
               ].map((service, i) => (
-                <motion.div
+                <div
                   key={i}
-                  initial={{ opacity: 0, y: 40, rotateX: 10 }}
-                  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08, duration: 0.5 }}
-                  whileHover={{ y: -10, rotateX: -2, rotateY: 3 }}
-                  style={{ transformStyle: "preserve-3d" }}
+                  className="hover-lift"
                 >
                   <Card className="group relative p-0 border-border/40 rounded-2xl overflow-hidden hover:shadow-[0_20px_50px_-15px_hsl(var(--primary)/0.12)] transition-all duration-500 h-full">
                     {/* Top accent bar */}
@@ -1797,7 +1762,7 @@ function Business() {
                       </button>
                     </div>
                   </Card>
-                </motion.div>
+                </div>
               ))}
             </div>
 
@@ -1857,14 +1822,9 @@ function Business() {
                 { icon: CheckCircle, title: "Ongoing Partnership", desc: "We stay with you after launch. Continuous support, updates, and optimization as your business grows." },
                 { icon: Phone, title: "24/7 Support", desc: "Get help when you need it. Our team is available around the clock for critical issues." },
               ].map((item, i) => (
-                <motion.div
+                <div
                   key={i}
-                  initial={{ opacity: 0, y: 40, rotateX: 10 }}
-                  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08, duration: 0.5 }}
-                  whileHover={{ y: -10, rotateX: -3, rotateY: 3 }}
-                  style={{ transformStyle: "preserve-3d" }}
+                  className="hover-lift"
                 >
                   <Card className="group relative p-7 border-border/40 rounded-2xl bg-card/95 backdrop-blur-sm overflow-hidden h-full hover:shadow-[0_20px_50px_-15px_hsl(var(--primary)/0.12)] hover:border-primary/25 transition-all duration-500">
                     {/* Top accent */}
@@ -1881,7 +1841,7 @@ function Business() {
                     <h3 className="text-base font-bold mb-2 relative z-10">{item.title}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed relative z-10">{item.desc}</p>
                   </Card>
-                </motion.div>
+                </div>
               ))}
             </div>
 
@@ -1896,16 +1856,15 @@ function Business() {
                     { value: "24/7", label: "Support Available" },
                     { value: "50+", label: "Integrations" },
                   ].map((stat, i) => (
-                    <motion.div
+                    <div
                       key={i}
-                      className="group"
-                      whileHover={{ scale: 1.08 }}
+                      className="group hover-scale"
                     >
                       <p className="text-3xl md:text-4xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-1">
                         {stat.value}
                       </p>
                       <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">{stat.label}</p>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               </Card>

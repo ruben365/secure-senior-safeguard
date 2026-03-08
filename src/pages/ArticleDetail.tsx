@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Calendar, ArrowLeft, ArrowRight, Eye, Share2 } from "lucide-react";
-import { motion } from "framer-motion";
+
 import { SEO } from "@/components/SEO";
 
 function ArticleDetail() {
@@ -133,11 +133,7 @@ function ArticleDetail() {
       <Navigation />
 
       <article className="container mx-auto px-4 py-16 max-w-4xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
+        <div className="animate-fade-in">
           {/* Back Button */}
           <Button variant="ghost" asChild className="mb-6">
             <Link to="/articles">
@@ -216,7 +212,7 @@ function ArticleDetail() {
               </div>
             </div>
           )}
-        </motion.div>
+        </div>
       </article>
 
       {/* Related Articles */}
