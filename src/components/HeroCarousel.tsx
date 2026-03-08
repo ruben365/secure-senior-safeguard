@@ -17,14 +17,31 @@ export const HeroCarousel = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const mountedRef = useRef(true);
 
-  // Preload remaining images in background after first renders
+  // Only preload remaining images if there's a carousel (>1 image)
   useEffect(() => {
     mountedRef.current = true;
-    // Skip first image since it's already loading with high priority
-    images.slice(1).forEach((image) => {
-      const img = new Image();
-      img.src = image.src;
-    });
+    if (images.length > 1) {
+      // Use requestIdleCallback to avoid blocking main thread
+      const preload = () => {
+        images.slice(1).forEach((image) => {
+          const img = new Image();
+          img.src = image.src;
+        });
+      };
+      if ("requestIdleCallback" in window) {
+        const id = requestIdleCallback(preload);
+        return () => {
+          cancelIdleCallback(id);
+          mountedRef.current = false;
+        };
+      } else {
+        const id = setTimeout(preload, 200);
+        return () => {
+          clearTimeout(id);
+          mountedRef.current = false;
+        };
+      }
+    }
     return () => {
       mountedRef.current = false;
     };
@@ -41,13 +58,15 @@ export const HeroCarousel = ({
 
   if (images.length === 0) return null;
 
-  // For single image, render immediately with native img for instant discovery
+  // For single image, render with native img for instant discovery
   if (images.length === 1) {
     return (
       <div className="absolute inset-0 overflow-hidden">
         <img
           src={images[0].src}
           alt={images[0].alt}
+          width={1920}
+          height={1080}
           fetchPriority="high"
           loading="eager"
           decoding="async"
@@ -59,12 +78,13 @@ export const HeroCarousel = ({
 
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* Stack all images with native img tags for better browser discovery */}
       {images.map((image, index) => (
         <img
           key={image.src}
           src={image.src}
           alt={image.alt}
+          width={1920}
+          height={1080}
           fetchPriority={index === 0 ? "high" : "low"}
           loading={index === 0 ? "eager" : "lazy"}
           decoding="async"
@@ -83,11 +103,11 @@ export const HeroCarousel = ({
   );
 };
 
-// Export preload function for route prefetching
+// Export preload function for route prefetching — only first image gets high priority
 export const preloadHeroImages = (images: HeroImage[]) => {
-  images.forEach((img) => {
+  images.forEach((img, i) => {
     const image = new Image();
-    image.fetchPriority = "high";
+    if (i === 0) image.fetchPriority = "high";
     image.src = img.src;
   });
 };
