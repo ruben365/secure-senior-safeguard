@@ -224,6 +224,7 @@ function PublicRoutes() {
         <Route path="/acceptable-use" element={<PageTransition variant="fade"><AcceptableUse /></PageTransition>} />
         <Route path="/disclaimer" element={<PageTransition variant="fade"><Disclaimer /></PageTransition>} />
         <Route path="/faq" element={<PageTransition variant="auto"><FAQ /></PageTransition>} />
+        <Route path="/help" element={<PageTransition variant="auto"><HelpCenter /></PageTransition>} />
 
         {/* Admin Routes */}
         <Route path="/admin/*" element={<AdminShell />}>
