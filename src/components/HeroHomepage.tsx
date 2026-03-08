@@ -2,20 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Shield, Star, CheckCircle, Phone, Zap, Users, Eye, Lock, Award, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/config/site";
-import { motion } from "framer-motion";
 import heroImage from "@/assets/hero-homepage-cinematic.jpg";
-
-const fadeUp = (delay: number) => ({
-  initial: { opacity: 0, y: 8 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.2, delay: delay * 0.15, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
-});
-
-const scaleIn = (delay: number) => ({
-  initial: { opacity: 0, scale: 0.97 },
-  animate: { opacity: 1, scale: 1 },
-  transition: { duration: 0.2, delay: delay * 0.15, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
-});
 
 export const HeroHomepage = () => {
   return (
