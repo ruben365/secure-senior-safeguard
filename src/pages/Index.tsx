@@ -344,7 +344,8 @@ const AnnouncementsSection = forwardRef<HTMLElement, { t: (key: string) => strin
       </div>
     </section>
   );
-};
+});
+AnnouncementsSection.displayName = 'AnnouncementsSection';
 
 /* ===== Transitioning Scripture (Genesis 2:24 + Jeremiah 31:3) ===== */
 const FEATURED_VERSES = [
