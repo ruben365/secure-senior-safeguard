@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, forwardRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -30,11 +30,11 @@ const giftTiers = [
 ];
 
 /* Decorative aurora orb — pure CSS, no framer-motion animation */
-const AuroraOrb = ({ 
+const AuroraOrb = forwardRef<HTMLDivElement, { position?: 'left' | 'right' | 'center'; color?: string; size?: number; delay?: number }>(({ 
   position = 'left', 
   color = 'rgba(201,169,182,0.3)', 
   size = 400, 
-}: { position?: 'left' | 'right' | 'center'; color?: string; size?: number; delay?: number }) => {
+}, ref) => {
   const posStyle = position === 'left' 
     ? { left: '-12%', top: '20%' } 
     : position === 'right' 
@@ -43,6 +43,7 @@ const AuroraOrb = ({
 
   return (
     <div
+      ref={ref}
       className="absolute rounded-full pointer-events-none z-0 aurora-blob-css"
       style={{
         width: size, height: size,
@@ -53,7 +54,8 @@ const AuroraOrb = ({
       }}
     />
   );
-};
+});
+AuroraOrb.displayName = 'AuroraOrb';
 
 /* Floating hearts component */
 const FloatingHearts = ({ isMobile = false }: { isMobile?: boolean }) =>
@@ -97,12 +99,11 @@ const FallingPetals = ({ isMobile = false }: { isMobile?: boolean }) => {
 };
 
 /* Section divider with golden decorative line */
-const SectionDivider = ({ variant = 'heart' }: { variant?: 'heart' | 'sparkle' | 'line' }) => (
-  <div className="relative py-4 flex items-center justify-center overflow-hidden">
+const SectionDivider = forwardRef<HTMLDivElement, { variant?: 'heart' | 'sparkle' | 'line' }>(({ variant = 'heart' }, ref) => (
+  <div ref={ref} className="relative py-4 flex items-center justify-center overflow-hidden">
     <div className="absolute inset-0 flex items-center">
       <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
     </div>
-    {/* Thin double golden lines */}
     <div className="absolute inset-0 flex items-center translate-y-[3px]">
       <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-gold-light/15 to-transparent" />
     </div>
@@ -117,11 +118,12 @@ const SectionDivider = ({ variant = 'heart' }: { variant?: 'heart' | 'sparkle' |
       {variant === 'line' && <span className="text-gold/40 text-xs">✦ ✦ ✦</span>}
     </motion.div>
   </div>
-);
+));
+SectionDivider.displayName = 'SectionDivider';
 
 /* Golden corner frame decoration for sections */
-const GoldenCorners = ({ className = '' }: { className?: string }) => (
-  <div className={`absolute inset-0 pointer-events-none z-[1] ${className}`}>
+const GoldenCorners = forwardRef<HTMLDivElement, { className?: string }>(({ className = '' }, ref) => (
+  <div ref={ref} className={`absolute inset-0 pointer-events-none z-[1] ${className}`}>
     {/* Top-left */}
     <div className="absolute top-0 left-0 w-12 h-12">
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-gold/40 to-transparent" />
@@ -143,7 +145,8 @@ const GoldenCorners = ({ className = '' }: { className?: string }) => (
       <div className="absolute bottom-0 right-0 h-full w-[1px] bg-gradient-to-t from-gold/40 to-transparent" />
     </div>
   </div>
-);
+));
+GoldenCorners.displayName = 'GoldenCorners';
 
 /* ===== Personal Court — Promise + Dynamic quotes from DB ===== */
 const PersonalCourtSection = ({ t }: { t: (key: string) => string }) => {
