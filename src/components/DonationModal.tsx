@@ -111,12 +111,12 @@ const impactInfo: Record<
   },
 };
 
-export const DonationModal = ({
+export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(function DonationModal({
   open,
   onOpenChange,
   type = "general",
   cause,
-}: DonationModalProps) => {
+}, _ref) {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [donationType, setDonationType] = useState<"one-time" | "monthly">(
