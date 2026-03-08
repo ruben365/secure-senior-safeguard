@@ -434,6 +434,7 @@ function Resources() {
   const [selectedBook, setSelectedBook] = useState<BookItem | null>(null);
   const [bookModalOpen, setBookModalOpen] = useState(false);
   const [translationDialogOpen, setTranslationDialogOpen] = useState(false);
+  const [readBooksOpen, setReadBooksOpen] = useState(false);
 
   const handleBookClick = (book: BookItem) => {
     setSelectedBook(book);

@@ -193,6 +193,7 @@ function PublicRoutes() {
         <Route path="/maintenance" element={<PageTransition><Maintenance /></PageTransition>} />
         <Route path="/reset-password" element={<PageTransition><ResetPassword /></PageTransition>} />
         <Route path="/guest-scanner" element={<Navigate to="/training/ai-analysis" replace />} />
+        <Route path="/reader" element={<PageTransition variant="fade"><BookReader /></PageTransition>} />
 
         {/* Portal Routes — 4 internal dashboards */}
         <Route path="/portal" element={<PageTransition><ProtectedRoute><Portal /></ProtectedRoute></PageTransition>} />

@@ -104,3 +104,9 @@ verify_jwt = false
 
 [functions.create-cart-checkout]
 verify_jwt = false
+
+[functions.generate-book-access]
+verify_jwt = false
+
+[functions.validate-book-access]
+verify_jwt = false
