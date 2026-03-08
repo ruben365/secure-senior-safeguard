@@ -29,7 +29,7 @@ const newsletterSchema = z.object({
     .max(255, "Email too long"),
 });
 
-const Footer = () => {
+const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { fireSuccess } = useConfetti();
