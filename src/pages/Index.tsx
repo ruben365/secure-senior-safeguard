@@ -1210,9 +1210,6 @@ const Index = () => {
                     <ChevronDown className="w-3 h-3 group-hover:translate-y-0.5 transition-transform duration-300" />
                   </div>
 
-                  {/* Subtle animated border shimmer on hover */}
-                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                    style={{ background: 'linear-gradient(135deg, transparent 40%, rgba(139,107,138,0.08) 50%, transparent 60%)', backgroundSize: '200% 200%', animation: 'shimmer 3s ease-in-out infinite' }} />
                 </motion.button>
               );
             })}
