@@ -279,7 +279,7 @@ const translations: Record<string, Record<Language, string>> = {
   'gift.msg.blessed': { fr: 'Que Dieu bénisse votre union ! 🙏✨', en: 'May God bless your union! 🙏✨', es: '¡Que Dios bendiga su unión! 🙏✨' },
   'gift.msg.love': { fr: 'Avec tout notre amour et nos meilleurs vœux ! 🌹❤️', en: 'With all our love and best wishes! 🌹❤️', es: '¡Con todo nuestro amor y mejores deseos! 🌹❤️' },
   'gift.qr.scan': { fr: 'Scannez ce code avec votre téléphone pour procéder au paiement', en: 'Scan this code with your phone to proceed with payment', es: 'Escanea este código con tu teléfono para proceder al pago' },
-  'gift.qr.noinfo': { fr: 'Aucune information bancaire requise — paiement rapide et sécurisé', en: 'No bank information required — fast and secure payment', es: 'No se requiere información bancaria — pago rápido y seguro' },
+  'gift.qr.noinfo': { fr: 'Aucune information bancaire requise, paiement rapide et sécurisé', en: 'No bank information required, fast and secure payment', es: 'No se requiere información bancaria, pago rápido y seguro' },
   'gift.terms.link': { fr: 'Conditions & politique de remboursement', en: 'Terms & Refund Policy', es: 'Términos y política de reembolso' },
   'gift.terms.title': { fr: 'Conditions & Politique', en: 'Terms & Policy', es: 'Términos y Política' },
   'gift.terms.refund': { fr: '💰 Si le montant de votre cadeau est supérieur à ce que vous souhaitiez, veuillez nous contacter. Nous pouvons vous rembourser sous 10 jours ouvrables.', en: '💰 If your gift amount was more than intended, please reach out to us. We can refund you within 10 business days.', es: '💰 Si el monto de su regalo fue mayor de lo previsto, contáctenos. Podemos reembolsarlo dentro de 10 días hábiles.' },
