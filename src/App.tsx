@@ -67,6 +67,7 @@ const PaymentCanceled = lazy(() => import("./pages/PaymentCanceled"));
 const GlassmorphismTrustHeroDemo = lazy(() => import("./pages/GlassmorphismTrustHeroDemo"));
 const StyleShowcase = lazy(() => import("./pages/StyleShowcase"));
 const FAQ = lazy(() => import("./pages/FAQ"));
+const HelpCenter = lazy(() => import("./pages/HelpCenter"));
 const Maintenance = lazy(() => import("./pages/Maintenance"));
 
 // Legal pages - lazy loaded
