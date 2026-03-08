@@ -1240,7 +1240,7 @@ const Index = () => {
 
           <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
             {features.map((feat, i) =>
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }} transition={{ delay: i * 0.04, duration: 0.3 }}>
                 <Link
                   to={feat.to}
                   className="glass-card-strong rounded-3xl p-7 flex flex-col items-center text-center card-hover group block h-full relative overflow-hidden"
