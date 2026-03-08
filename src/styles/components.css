@@ -530,50 +530,6 @@ a[role="button"]:active {
   transform: translateY(-2px);
 }
 
-/* ===== PREMIUM MICRO-INTERACTIONS & 3D SURFACES ===== */
-  background: hsl(var(--background));
-  border-radius: 1.25rem;
-  box-shadow:
-    8px 8px 20px rgba(0, 0, 0, 0.12),
-    -8px -8px 20px rgba(255, 255, 255, 0.9),
-    0 4px 12px rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.neumorphism-widget:hover {
-  box-shadow:
-    12px 12px 28px rgba(0, 0, 0, 0.15),
-    -12px -12px 28px rgba(255, 255, 255, 0.95),
-    0 8px 20px rgba(0, 0, 0, 0.08);
-  transform: translateY(-4px) scale(1.02);
-}
-
-/* Neumorphism circle - for icons/badges */
-.neumorphism-circle {
-  border-radius: 50%;
-  box-shadow:
-    6px 6px 14px rgba(0, 0, 0, 0.12),
-    -6px -6px 14px rgba(255, 255, 255, 0.95);
-  transition: all 0.3s ease-out;
-}
-
-.neumorphism-circle:hover {
-  box-shadow:
-    8px 8px 18px rgba(0, 0, 0, 0.15),
-    -8px -8px 18px rgba(255, 255, 255, 1);
-}
-
-/* Neumorphism input field */
-.neumorphism-input {
-  background: hsl(var(--background));
-  border-radius: 0.75rem;
-  box-shadow:
-    inset 3px 3px 6px rgba(0, 0, 0, 0.06),
-    inset -3px -3px 6px rgba(255, 255, 255, 0.9);
-  border: 1px solid transparent;
-  transition: all 0.25s ease-out;
-}
 
 /* ===== PREMIUM MICRO-INTERACTIONS & 3D SURFACES ===== */
 
