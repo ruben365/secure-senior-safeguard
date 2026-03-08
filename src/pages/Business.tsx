@@ -1822,14 +1822,9 @@ function Business() {
                 { icon: CheckCircle, title: "Ongoing Partnership", desc: "We stay with you after launch. Continuous support, updates, and optimization as your business grows." },
                 { icon: Phone, title: "24/7 Support", desc: "Get help when you need it. Our team is available around the clock for critical issues." },
               ].map((item, i) => (
-                <motion.div
+                <div
                   key={i}
-                  initial={{ opacity: 0, y: 40, rotateX: 10 }}
-                  whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08, duration: 0.5 }}
-                  whileHover={{ y: -10, rotateX: -3, rotateY: 3 }}
-                  style={{ transformStyle: "preserve-3d" }}
+                  className="hover-lift"
                 >
                   <Card className="group relative p-7 border-border/40 rounded-2xl bg-card/95 backdrop-blur-sm overflow-hidden h-full hover:shadow-[0_20px_50px_-15px_hsl(var(--primary)/0.12)] hover:border-primary/25 transition-all duration-500">
                     {/* Top accent */}
