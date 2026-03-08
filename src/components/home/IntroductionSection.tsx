@@ -273,7 +273,7 @@ export const IntroductionSection = () => {
             <div className="relative z-10 max-w-4xl mx-auto">
               <div className="inline-flex items-center gap-2 mb-6">
                 <Heart className="w-6 h-6 text-accent fill-accent" />
-                <span className="text-sm font-semibold text-foreground/80 uppercase tracking-wider">
+                <span className="text-sm font-semibold text-foreground uppercase tracking-wider">
                   Our Promise to You
                 </span>
               </div>
