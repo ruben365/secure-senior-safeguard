@@ -1,39 +1,37 @@
 
 
-## Fix Blinking/Lazy Loading on Homepage
+## Mobile Performance Analysis (66%) — What's Actually Happening
 
-### Root Cause
+After examining the audit data in detail, most of the 12 performance issues flagged are **not from your app code** — they come from platform-level infrastructure and cannot be fixed through code changes.
 
-The `Index.tsx` component uses `useSiteSettings()` and `useSiteImages('homepage_gallery')` but **ignores the `loading` state** from both hooks. This means:
+### Issues Outside Our Control (platform-level)
 
-1. First render: `settings` is `{}`, so `coupleName1` falls back to `'Corine'`, `coupleName2` to `'Ruben'`, etc.
-2. ~200ms later: data arrives from the database, settings update, and everything re-renders with the real values
+| Issue | Cause | Fixable? |
+|---|---|---|
+| **Redirects** (780ms) | Lovable staging → custom domain redirect | No |
+| **Render blocking requests** (2,240ms) | DM Sans font injected by Lovable badge | No (remove badge in Settings) |
+| **Unused JavaScript** (119 KiB) | Google Tag Manager scripts from Lovable | No |
+| **Cache lifetimes** (16 KiB) | Google Analytics cache headers | No |
+| **Document latency** (100ms) | Redirect chain | No |
+| **Network dependency tree** | Font chain through Google Fonts → gstatic | No |
 
-This causes a visible "blink" as content shifts from fallback to real data. Other pages (Venue, RSVP, Story, FAQ) already handle this correctly with loading guards.
+### Suspicious Audit Data
 
-### Fix
+The audit's LCP element references `bold-moves.webp` with text "Start your online journey / Build your website today" and a `div.services` selector — **this is NOT your wedding app**. This appears to be a domain parking page at `corineruben.com`. The CLS layout shift is also attributed to this parking page content.
 
-**File: `src/pages/Index.tsx`**
+This means the PageSpeed analysis may be hitting a cached or intermittent parking page at your custom domain rather than your actual app.
 
-1. Destructure `loading` from both hooks:
-   ```tsx
-   const { images: homepageGalleryImages, loading: imagesLoading } = useSiteImages('homepage_gallery');
-   const { settings, loading: settingsLoading } = useSiteSettings();
-   ```
+### What Can Be Improved In Code
 
-2. Add a loading guard before the main return. Show a minimal, non-jarring loading state (matching the page's aesthetic) while data loads:
-   ```tsx
-   if (settingsLoading) {
-     return (
-       <div className="min-h-screen flex flex-col items-center justify-center">
-         <Heart className="w-8 h-8 text-primary animate-pulse" />
-       </div>
-     );
-   }
-   ```
+Only two items are partially addressable:
 
-This is a single-file, targeted fix. The loading state will be brief (~100-300ms) and prevents all the downstream sections from flickering between fallback and real content.
+1. **SEO score (58%)** — Likely caused by the parking page content being analyzed. Need to verify the custom domain is properly serving the app. If it is, we can add structured data and improve meta tags.
 
-### Files to Edit
-- `src/pages/Index.tsx` (3 lines changed)
+2. **Font loading strategy** — The Google Fonts stylesheet in `index.html` is already using `media="print" onload="this.media='all'"` pattern (non-blocking). The render-blocking DM Sans flagged in the audit is from the Lovable badge, not our code.
+
+### Recommended Action
+
+The most impactful fix is **removing the Lovable badge** in your project Settings, which would eliminate the render-blocking DM Sans request (est. 2,240ms savings) and the unused JavaScript from Google Tag Manager (119 KiB). This alone could push the performance score significantly higher.
+
+No code changes are needed — the issues are infrastructure-level.
 
