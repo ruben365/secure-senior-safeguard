@@ -725,11 +725,7 @@ function Business() {
                 <div className="relative p-8 md:p-12 lg:p-16">
                   <div className="grid gap-12 lg:grid-cols-[1.3fr_0.7fr] items-center relative z-10">
                     <div>
-                      <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={platformInView ? { opacity: 1, x: 0 } : {}}
-                        transition={{ delay: 0.3, duration: 0.5 }}
-                      >
+                      <div>
                         <div className="inline-flex items-center gap-2 px-4 py-2 glass-subtle rounded-full text-xs font-bold text-primary uppercase tracking-wider mb-6 border border-primary/15">
                           <Shield className="w-3.5 h-3.5" />
                           Unified Defense
