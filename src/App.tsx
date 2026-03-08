@@ -69,6 +69,7 @@ const StyleShowcase = lazy(() => import("./pages/StyleShowcase"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const HelpCenter = lazy(() => import("./pages/HelpCenter"));
 const Maintenance = lazy(() => import("./pages/Maintenance"));
+const BookReader = lazy(() => import("./pages/BookReader"));
 
 // Legal pages - lazy loaded
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
@@ -192,6 +193,7 @@ function PublicRoutes() {
         <Route path="/maintenance" element={<PageTransition><Maintenance /></PageTransition>} />
         <Route path="/reset-password" element={<PageTransition><ResetPassword /></PageTransition>} />
         <Route path="/guest-scanner" element={<Navigate to="/training/ai-analysis" replace />} />
+        <Route path="/reader" element={<PageTransition variant="fade"><BookReader /></PageTransition>} />
 
         {/* Portal Routes — 4 internal dashboards */}
         <Route path="/portal" element={<PageTransition><ProtectedRoute><Portal /></ProtectedRoute></PageTransition>} />

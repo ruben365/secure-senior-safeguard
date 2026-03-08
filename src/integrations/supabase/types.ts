@@ -557,6 +557,42 @@ export type Database = {
         }
         Relationships: []
       }
+      book_purchases: {
+        Row: {
+          access_id: string
+          amount_paid: number | null
+          book_ids: string[]
+          created_at: string
+          customer_email: string
+          customer_name: string
+          id: string
+          last_accessed_at: string | null
+          stripe_session_id: string | null
+        }
+        Insert: {
+          access_id: string
+          amount_paid?: number | null
+          book_ids: string[]
+          created_at?: string
+          customer_email: string
+          customer_name: string
+          id?: string
+          last_accessed_at?: string | null
+          stripe_session_id?: string | null
+        }
+        Update: {
+          access_id?: string
+          amount_paid?: number | null
+          book_ids?: string[]
+          created_at?: string
+          customer_email?: string
+          customer_name?: string
+          id?: string
+          last_accessed_at?: string | null
+          stripe_session_id?: string | null
+        }
+        Relationships: []
+      }
       booking_requests: {
         Row: {
           admin_notes: string | null

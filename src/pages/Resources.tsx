@@ -84,6 +84,7 @@ import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 // NatureAccent removed for performance
 import { usePrerenderBlocker } from "@/contexts/PrerenderContext";
 import { TranslationRequestDialog } from "@/components/resources/TranslationRequestDialog";
+import { ReadBooksDialog } from "@/components/resources/ReadBooksDialog";
 
 // Static book products with covers (20 books)
 // Author constant for all books
@@ -433,6 +434,7 @@ function Resources() {
   const [selectedBook, setSelectedBook] = useState<BookItem | null>(null);
   const [bookModalOpen, setBookModalOpen] = useState(false);
   const [translationDialogOpen, setTranslationDialogOpen] = useState(false);
+  const [readBooksOpen, setReadBooksOpen] = useState(false);
 
   const handleBookClick = (book: BookItem) => {
     setSelectedBook(book);
@@ -599,9 +601,10 @@ function Resources() {
             <Button
               size="xl"
               variant="heroOutline"
-              asChild
+              onClick={() => setReadBooksOpen(true)}
             >
-              <Link to="/training#pricing">Get Protection Plan</Link>
+              <BookOpen className="h-5 w-5 mr-2" />
+              📖 Read Your Books
             </Button>
           </div>
         </Hero>
@@ -929,6 +932,11 @@ function Resources() {
       <TranslationRequestDialog
         isOpen={translationDialogOpen}
         onClose={() => setTranslationDialogOpen(false)} />
+
+      {/* Read Books Dialog */}
+      <ReadBooksDialog
+        open={readBooksOpen}
+        onOpenChange={setReadBooksOpen} />
 
       <Footer />
     </PageTransition>);
