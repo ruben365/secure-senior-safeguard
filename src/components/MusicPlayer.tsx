@@ -111,7 +111,7 @@ const MusicFloatingButton = forwardRef<HTMLButtonElement>((_, ref) => {
     <AnimatePresence>
       {isPlaying && currentTrack && (
         <motion.button
-          ref={ref as React.Ref<HTMLButtonElement>}
+          ref={ref}
           initial={{ opacity: 0, scale: 0, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0, y: 20 }}
