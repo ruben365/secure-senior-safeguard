@@ -180,7 +180,7 @@ const Story = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.05, duration: 0.6 }}
+                transition={{ delay: i * 0.03, duration: 0.3 }}
                 className="break-inside-avoid"
               >
                 <div className={`${img.aspect} rounded-3xl overflow-hidden cursor-pointer group card-hover glass-card-strong p-1.5`}>
