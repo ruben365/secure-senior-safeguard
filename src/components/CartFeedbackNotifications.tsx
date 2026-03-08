@@ -18,7 +18,7 @@ import { Link } from "react-router-dom";
 import { useCartFeedback } from "@/contexts/CartFeedbackContext";
 
 // Thank You Notification Component
-export const PurchaseThankYouNotification = () => {
+export const PurchaseThankYouNotification = forwardRef<HTMLDivElement>(function PurchaseThankYouNotification(_props, _ref) {
   const { showThankYou, dismissAll } = useCartFeedback();
 
   if (!showThankYou) return null;
