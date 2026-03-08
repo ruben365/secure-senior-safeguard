@@ -425,23 +425,6 @@
     pointer-events: none;
   }
 
-  .btn-primary::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-    animation: btn-shimmer 3s ease-in-out infinite;
-    pointer-events: none;
-  }
-
-  @keyframes btn-shimmer {
-    0% { left: -100%; }
-    50% { left: 100%; }
-    100% { left: 100%; }
-  }
 
   .btn-primary:hover {
     background: linear-gradient(135deg, hsl(286 15% 50%), hsl(280 14% 38%));
@@ -484,17 +467,6 @@
     box-shadow: 0 0 0 0 rgba(159, 130, 164, 0);
   }
 
-  .btn-outline::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(159, 130, 164, 0.08), transparent);
-    animation: btn-shimmer 4s ease-in-out infinite 1s;
-    pointer-events: none;
-  }
 
   .btn-outline:hover {
     background: rgba(159, 130, 164, 0.12);
@@ -549,35 +521,6 @@
     border: 1px solid rgba(160, 130, 200, 0.1);
   }
 
-  /* ===== GLASS SHIMMER — animated border refraction ===== */
-  .glass-shimmer {
-    position: relative;
-    overflow: hidden;
-  }
-  .glass-shimmer::after {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    background-size: 200% 100%;
-    animation: glass-shimmer-move 4s ease-in-out infinite;
-    pointer-events: none;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    padding: 1px;
-  }
-  .dark .glass-shimmer::after {
-    background: linear-gradient(90deg, transparent, rgba(180, 150, 210, 0.2), transparent);
-    background-size: 200% 100%;
-    animation: glass-shimmer-move 4s ease-in-out infinite;
-  }
-
-  @keyframes glass-shimmer-move {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-  }
 
   /* ===== GLASS BADGE ===== */
   .glass-badge {
@@ -862,10 +805,6 @@
   66% { transform: translate(-35px, 30px) scale(0.9); }
 }
 
-@keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
 
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {

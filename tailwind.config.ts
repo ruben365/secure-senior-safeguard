@@ -103,10 +103,6 @@ export default {
           "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
           "50%": { transform: "translateY(-20px) rotate(2deg)" },
         },
-        "shimmer": {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -114,7 +110,7 @@ export default {
         "fade-in-up": "fade-in-up 0.8s ease-out forwards",
         "scroll-indicator": "scroll-indicator 2s ease-in-out infinite",
         "float": "float 6s ease-in-out infinite",
-        "shimmer": "shimmer 3s ease-in-out infinite",
+        
       },
     },
   },

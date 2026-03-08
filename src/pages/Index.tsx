@@ -717,7 +717,7 @@ const Index = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="inline-block px-6 py-2.5 rounded-full glass-card-strong glass-shimmer mb-6"
+            className="inline-block px-6 py-2.5 rounded-full glass-card-strong mb-6"
           >
             <p className="font-sans-elegant text-xs tracking-[0.3em] uppercase text-foreground/80 dark:text-foreground/90 font-semibold">
               {t('love.tagline')}
@@ -1210,9 +1210,6 @@ const Index = () => {
                     <ChevronDown className="w-3 h-3 group-hover:translate-y-0.5 transition-transform duration-300" />
                   </div>
 
-                  {/* Subtle animated border shimmer on hover */}
-                  <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                    style={{ background: 'linear-gradient(135deg, transparent 40%, rgba(139,107,138,0.08) 50%, transparent 60%)', backgroundSize: '200% 200%', animation: 'shimmer 3s ease-in-out infinite' }} />
                 </motion.button>
               );
             })}
