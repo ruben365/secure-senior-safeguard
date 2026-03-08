@@ -212,7 +212,7 @@ function ArticleDetail() {
               </div>
             </div>
           )}
-        </motion.div>
+        </div>
       </article>
 
       {/* Related Articles */}
