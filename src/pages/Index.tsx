@@ -475,8 +475,8 @@ const Index = () => {
   const isMobile = useIsMobile();
   const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [activeDetail, setActiveDetail] = useState<string | null>(null);
-  const { images: homepageGalleryImages } = useSiteImages('homepage_gallery');
-  const { settings } = useSiteSettings();
+  const { images: homepageGalleryImages, loading: imagesLoading } = useSiteImages('homepage_gallery');
+  const { settings, loading: settingsLoading } = useSiteSettings();
 
   const coupleName1 = settings.couple_name_1 || 'Corine';
   const coupleName2 = settings.couple_name_2 || 'Ruben';
