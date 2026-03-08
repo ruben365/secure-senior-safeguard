@@ -17,26 +17,13 @@ const TABLE_NAMES = [
   'Bégonia', 'Clématite', 'Jonquille', 'Muguet', 'Renoncule', 'Tournesol', 'Édelweiss',
 ];
 
-const TABLES_DATA = TABLE_NAMES.map((name, i) => {
-  // Pre-populate a few tables with sample guests for realism
-  const presets: Record<number, { seats: number; family: boolean; guests: string[] }> = {
-    0: { seats: 8, family: false, guests: ['Alice M.', 'David K.', 'Sophie L.', 'Lucas T.', 'Emma R.', 'Paul B.', 'Léa C.', 'Hugo N.'] },
-    1: { seats: 8, family: false, guests: ['Marc R.', 'Julie B.', 'Chloé N.', 'Antoine D.', 'Clara F.', 'Pierre T.', 'Marie C.', 'Jean P.'] },
-    3: { seats: 8, family: true, guests: ['Famille Dupont', 'Famille Martin', 'Famille Bernard', 'Famille Petit', 'Famille Durand', 'Famille Leroy', 'Famille Moreau', 'Famille Simon'] },
-    7: { seats: 8, family: false, guests: ['Sarah H.', 'Thomas G.', 'Laura D.', 'Nicolas F.', 'Camille S.', 'Maxime L.', 'Inès K.', 'Raphaël M.'] },
-    4: { seats: 10, family: false, guests: ['Pierre T.', 'Emma V.', 'Lucas G.', 'Chloé N.'] },
-    5: { seats: 10, family: false, guests: ['Sarah H.'] },
-    9: { seats: 8, family: false, guests: ['François A.', 'Nathalie B.'] },
-  };
-  const preset = presets[i];
-  return {
-    id: i + 1,
-    name,
-    seats: preset?.seats || (i % 3 === 0 ? 10 : 8),
-    family: preset?.family || false,
-    guests: preset?.guests || [],
-  };
-});
+const TABLES_DATA = TABLE_NAMES.map((name, i) => ({
+  id: i + 1,
+  name,
+  seats: i % 3 === 0 ? 10 : 8,
+  family: false,
+  guests: [] as string[],
+}));
 
 type Step = 'info' | 'meal' | 'table' | 'gift' | 'done';
 
