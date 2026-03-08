@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { BookOpen, ArrowLeft, ChevronLeft, ChevronRight, Lock, LogOut } from "lucide-react";
 import { SEO } from "@/components/SEO";
+import { toast } from "@/hooks/use-toast";
 
 // Import all book covers for display
 import bookAiFundamentals from "@/assets/book-ai-fundamentals.jpg";
