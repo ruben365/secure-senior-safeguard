@@ -104,13 +104,14 @@ export const MusicProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   );
 };
 
-const MusicFloatingButton = () => {
+const MusicFloatingButton = forwardRef<HTMLDivElement>((_, ref) => {
   const { isPlaying, currentTrack, stopMusic } = useMusic();
 
   return (
     <AnimatePresence>
       {isPlaying && currentTrack && (
         <motion.button
+          ref={ref as React.Ref<HTMLButtonElement>}
           initial={{ opacity: 0, scale: 0, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0, y: 20 }}
@@ -143,6 +144,8 @@ const MusicFloatingButton = () => {
       )}
     </AnimatePresence>
   );
-};
+});
+
+MusicFloatingButton.displayName = 'MusicFloatingButton';
 
 export default MusicFloatingButton;
