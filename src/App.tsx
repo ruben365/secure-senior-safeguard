@@ -130,6 +130,9 @@ const ServiceInquiriesList = lazy(() => import("./pages/admin/ServiceInquiriesLi
 const BookingsList = lazy(() => import("./pages/admin/BookingsList"));
 const GraphicDesignAdmin = lazy(() => import("./pages/admin/GraphicDesignAdmin"));
 const PortfolioAdmin = lazy(() => import("./pages/admin/PortfolioAdmin"));
+const SupportTicketsAdmin = lazy(() => import("./pages/admin/SupportTickets"));
+const KnowledgeBaseAdmin = lazy(() => import("./pages/admin/KnowledgeBaseAdmin"));
+const ReviewsAdmin = lazy(() => import("./pages/admin/ReviewsAdmin"));
 
 // Cyber dashboard pages - lazy loaded
 const ThreatMonitor = lazy(() => import("./pages/admin/cyber/ThreatMonitor"));
