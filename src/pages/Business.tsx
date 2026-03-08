@@ -1474,7 +1474,7 @@ function Business() {
                           <span className="text-lg">{item.split(" ")[0]}</span>
                         </div>
                         <span className="font-semibold">{item.split(" ")[1]}</span>
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
                   <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground relative z-10">
