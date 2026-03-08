@@ -934,7 +934,7 @@ const Index = () => {
                 <div className="glass-card-strong rounded-3xl p-2.5">
                   <img
                     src={coupleImgSmall}
-                    alt="Corine & Ruben"
+                    alt={`${coupleName1} & ${coupleName2}`}
                     className="rounded-[20px] w-full object-cover aspect-[4/5]"
                     style={{ boxShadow: '0 20px 40px rgba(107, 78, 113, 0.15)' }}
                     width={474}
