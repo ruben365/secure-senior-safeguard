@@ -491,6 +491,76 @@ const translations: Record<string, Record<Language, string>> = {
   'dashboard.answered': { fr: 'Répondu', en: 'Answered', es: 'Respondido' },
   'dashboard.unanswered': { fr: 'Non répondu', en: 'Unanswered', es: 'Sin responder' },
   'dashboard.enquiriesCount': { fr: '{n} question(s)', en: '{n} enquiry(ies)', es: '{n} pregunta(s)' },
+
+  // Venue page
+  'nav.venue': { fr: 'Lieu', en: 'Venue', es: 'Lugar' },
+  'venue.badge': { fr: 'Où & Quand', en: 'Where & When', es: 'Dónde & Cuándo' },
+  'venue.title': { fr: 'Le Grand Jour', en: 'The Big Day', es: 'El Gran Día' },
+  'venue.subtitle': { fr: 'Tout ce que vous devez savoir pour être là', en: 'Everything you need to know to be there', es: 'Todo lo que necesitas saber para estar allí' },
+  'venue.ceremony': { fr: 'Cérémonie', en: 'Ceremony', es: 'Ceremonia' },
+  'venue.reception': { fr: 'Réception', en: 'Reception', es: 'Recepción' },
+  'venue.address': { fr: 'Adresse', en: 'Address', es: 'Dirección' },
+  'venue.getDirections': { fr: 'Itinéraire', en: 'Get Directions', es: 'Cómo llegar' },
+  'venue.schedule': { fr: 'Programme du Jour', en: 'Day Schedule', es: 'Programa del Día' },
+  'venue.gettingThere': { fr: 'Comment venir', en: 'Getting There', es: 'Cómo Llegar' },
+  'venue.byCar': { fr: 'En voiture', en: 'By Car', es: 'En coche' },
+  'venue.byTransit': { fr: 'En transports', en: 'By Public Transit', es: 'En transporte público' },
+  'venue.parking': { fr: 'Stationnement', en: 'Parking', es: 'Aparcamiento' },
+  'venue.accommodation': { fr: 'Hébergement', en: 'Accommodation', es: 'Alojamiento' },
+  'venue.accommodation.subtitle': { fr: 'Hôtels recommandés à proximité', en: 'Recommended nearby hotels', es: 'Hoteles recomendados cercanos' },
+  'venue.bookNow': { fr: 'Réserver', en: 'Book Now', es: 'Reservar' },
+
+  // Schedule items
+  'schedule.guestArrival': { fr: 'Arrivée des invités', en: 'Guest Arrival', es: 'Llegada de invitados' },
+  'schedule.ceremony': { fr: 'Cérémonie de mariage', en: 'Wedding Ceremony', es: 'Ceremonia de boda' },
+  'schedule.cocktail': { fr: 'Cocktail & Photos', en: 'Cocktail Hour & Photos', es: 'Cóctel y Fotos' },
+  'schedule.dinner': { fr: 'Dîner de réception', en: 'Reception Dinner', es: 'Cena de recepción' },
+  'schedule.firstDance': { fr: 'Première danse', en: 'First Dance', es: 'Primer baile' },
+  'schedule.cake': { fr: 'Découpe du gâteau', en: 'Cake Cutting', es: 'Corte del pastel' },
+  'schedule.dancing': { fr: 'Soirée dansante', en: 'Dancing & Celebration', es: 'Baile y celebración' },
+  'schedule.sendoff': { fr: 'Au revoir des mariés', en: 'Grand Send-Off', es: 'Gran despedida' },
+
+  // FAQ page
+  'nav.faq': { fr: 'FAQ', en: 'FAQ', es: 'FAQ' },
+  'faq.badge': { fr: 'Questions Fréquentes', en: 'Frequently Asked', es: 'Preguntas Frecuentes' },
+  'faq.title': { fr: 'Vous avez des questions ?', en: 'Have Questions?', es: '¿Tienes preguntas?' },
+  'faq.subtitle': { fr: 'Nous avons les réponses', en: 'We have the answers', es: 'Tenemos las respuestas' },
+  'faq.stillQuestions': { fr: 'Encore des questions ?', en: 'Still have questions?', es: '¿Aún tienes preguntas?' },
+  'faq.contactUs': { fr: 'Contactez-nous', en: 'Contact Us', es: 'Contáctenos' },
+
+  // Guestbook page
+  'nav.guestbook': { fr: 'Livre d\'or', en: 'Guestbook', es: 'Libro de visitas' },
+  'guestbook.badge': { fr: 'Partagez vos voeux', en: 'Share Your Wishes', es: 'Comparte tus deseos' },
+  'guestbook.title': { fr: 'Livre d\'or', en: 'Guestbook', es: 'Libro de Visitas' },
+  'guestbook.subtitle': { fr: 'Laissez un message pour les mariés', en: 'Leave a message for the couple', es: 'Deja un mensaje para la pareja' },
+  'guestbook.form.name': { fr: 'Votre prénom', en: 'Your name', es: 'Tu nombre' },
+  'guestbook.form.message': { fr: 'Votre message', en: 'Your message', es: 'Tu mensaje' },
+  'guestbook.form.submit': { fr: 'Laisser un message', en: 'Leave a Message', es: 'Dejar un mensaje' },
+  'guestbook.form.placeholder.name': { fr: 'Votre prénom...', en: 'Your name...', es: 'Tu nombre...' },
+  'guestbook.form.placeholder.message': { fr: 'Vos voeux pour Corine & Ruben...', en: 'Your wishes for Corine & Ruben...', es: 'Tus deseos para Corine & Ruben...' },
+  'guestbook.empty': { fr: 'Soyez le premier à laisser un message !', en: 'Be the first to leave a message!', es: '¡Sé el primero en dejar un mensaje!' },
+  'guestbook.success': { fr: 'Votre message a été envoyé !', en: 'Your message has been posted!', es: '¡Tu mensaje ha sido publicado!' },
+  'guestbook.messages': { fr: 'Messages des invités', en: 'Guest Messages', es: 'Mensajes de invitados' },
+
+  // Gallery page
+  'nav.gallery2': { fr: 'Galerie', en: 'Gallery', es: 'Galería' },
+  'gallery.badge': { fr: 'Nos Photos', en: 'Our Photos', es: 'Nuestras Fotos' },
+  'gallery.upload': { fr: 'Partager une photo', en: 'Share a Photo', es: 'Compartir una foto' },
+  'gallery.upload.name': { fr: 'Votre prénom', en: 'Your name', es: 'Tu nombre' },
+  'gallery.upload.choose': { fr: 'Choisir une photo', en: 'Choose a Photo', es: 'Elegir una foto' },
+  'gallery.upload.submit': { fr: 'Envoyer', en: 'Upload', es: 'Subir' },
+  'gallery.upload.success': { fr: 'Photo partagée !', en: 'Photo shared!', es: '¡Foto compartida!' },
+  'gallery.empty': { fr: 'Les photos arrivent bientôt...', en: 'Photos coming soon...', es: 'Fotos próximamente...' },
+
+  // RSVP edit
+  'rsvp.edit.label': { fr: 'Déjà répondu ?', en: 'Already RSVPed?', es: '¿Ya respondiste?' },
+  'rsvp.edit.link': { fr: 'Modifier mon RSVP', en: 'Edit my RSVP', es: 'Editar mi RSVP' },
+  'rsvp.edit.title': { fr: 'Modifier votre RSVP', en: 'Update Your RSVP', es: 'Actualizar tu RSVP' },
+  'rsvp.edit.lookup': { fr: 'Rechercher mon RSVP', en: 'Find My RSVP', es: 'Buscar mi RSVP' },
+  'rsvp.edit.notFound': { fr: 'Aucun RSVP trouvé avec ce nom et cet email.', en: 'No RSVP found with that name and email.', es: 'No se encontró RSVP con ese nombre y email.' },
+  'rsvp.edit.updated': { fr: 'Votre RSVP a été mis à jour !', en: 'Your RSVP has been updated!', es: '¡Tu RSVP ha sido actualizado!' },
+  'rsvp.edit.attending.yes': { fr: 'Je serai présent(e)', en: 'I will attend', es: 'Asistiré' },
+  'rsvp.edit.attending.no': { fr: 'Je ne pourrai pas venir', en: 'I cannot attend', es: 'No podré asistir' },
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);

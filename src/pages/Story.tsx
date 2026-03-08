@@ -4,7 +4,7 @@ import { Heart, Loader2 } from 'lucide-react';
 import { useSiteImages, useStoryEvents } from '@/hooks/useSiteContent';
 
 // Static fallback images (used when no DB images exist)
-import heroImg from '@/assets/hero-wedding-opt.webp';
+import heroImg from '@/assets/hero-wedding.jpg';
 import flowersImg from '@/assets/flowers-lavender.jpg';
 import ringsImg from '@/assets/rings.jpg';
 import venueImg from '@/assets/venue.jpg';

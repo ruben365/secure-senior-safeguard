@@ -3,7 +3,8 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Users, Utensils, ChevronRight, Plus, X, UserPlus, Crown, Check, Gift, Heart, Sparkles, QrCode, Copy, ArrowRight, EyeOff, Wine, Globe, AlertTriangle, Gem } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Users, Utensils, ChevronRight, Plus, X, UserPlus, Crown, Check, Gift, Heart, Sparkles, QrCode, Copy, ArrowRight, EyeOff, Wine, Globe, AlertTriangle, Gem, Pencil, Loader2 } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
@@ -99,6 +100,59 @@ const PAYMENT_BASE_URL = 'https://pay.example.com/corine-ruben';
 const RSVP = () => {
   const { t } = useLanguage();
   const [step, setStep] = useState<Step>('info');
+
+  // Edit RSVP modal state
+  const [editOpen, setEditOpen] = useState(false);
+  const [editLookupName, setEditLookupName] = useState('');
+  const [editLookupEmail, setEditLookupEmail] = useState('');
+  const [editLooking, setEditLooking] = useState(false);
+  const [editFound, setEditFound] = useState<{ id: string; attending: boolean; guests: number } | null>(null);
+  const [editAttending, setEditAttending] = useState<boolean | null>(null);
+  const [editGuests, setEditGuests] = useState(1);
+  const [editSaving, setEditSaving] = useState(false);
+
+  const handleEditLookup = async () => {
+    if (!editLookupName.trim() || !editLookupEmail.trim()) return;
+    setEditLooking(true);
+    setEditFound(null);
+    const { data } = await supabase
+      .from('rsvps')
+      .select('id, attending, guests')
+      .ilike('name', editLookupName.trim())
+      .ilike('email', editLookupEmail.trim())
+      .maybeSingle();
+    if (data) {
+      setEditFound(data);
+      setEditAttending(data.attending);
+      setEditGuests(data.guests ?? 1);
+    } else {
+      toast.error(t('rsvp.edit.notFound'));
+    }
+    setEditLooking(false);
+  };
+
+  const handleEditSave = async () => {
+    if (!editFound || editAttending === null) return;
+    setEditSaving(true);
+    const { error } = await supabase
+      .from('rsvps')
+      .update({
+        attending: editAttending,
+        guests: editGuests,
+        status: editAttending ? 'confirmed' : 'declined',
+      })
+      .eq('id', editFound.id);
+    if (error) {
+      toast.error('Update failed. Please try again.');
+    } else {
+      toast.success(t('rsvp.edit.updated'));
+      setEditOpen(false);
+      setEditFound(null);
+      setEditLookupName('');
+      setEditLookupEmail('');
+    }
+    setEditSaving(false);
+  };
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [attending, setAttending] = useState<boolean | null>(null);
@@ -324,8 +378,115 @@ const RSVP = () => {
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
             <Gem className="w-4 h-4 text-primary/50" />
           </div>
-          <p className="font-sans-elegant text-base text-muted-foreground">{t('rsvp.subtitle')}</p>
+          <p className="font-sans-elegant text-base text-muted-foreground mb-4">{t('rsvp.subtitle')}</p>
+
+          {/* Edit RSVP link */}
+          <button
+            type="button"
+            onClick={() => setEditOpen(true)}
+            className="inline-flex items-center gap-1.5 font-sans-elegant text-xs text-muted-foreground hover:text-primary transition-colors"
+          >
+            <Pencil className="w-3.5 h-3.5" />
+            {t('rsvp.edit.label')} <span className="underline underline-offset-2">{t('rsvp.edit.link')}</span>
+          </button>
         </motion.div>
+
+        {/* Edit RSVP Dialog */}
+        <Dialog open={editOpen} onOpenChange={setEditOpen}>
+          <DialogContent className="glass-card-strong border-border/30 rounded-3xl max-w-md">
+            <DialogHeader>
+              <DialogTitle className="font-serif-display text-xl text-foreground flex items-center gap-2">
+                <Pencil className="w-5 h-5 text-primary" />
+                {t('rsvp.edit.title')}
+              </DialogTitle>
+            </DialogHeader>
+
+            {!editFound ? (
+              <div className="space-y-4 pt-2">
+                <p className="font-sans-elegant text-sm text-muted-foreground">
+                  {t('rsvp.edit.lookup')}
+                </p>
+                <div>
+                  <label className="font-sans-elegant text-xs font-medium text-foreground mb-1.5 block">{t('rsvp.name')}</label>
+                  <Input
+                    value={editLookupName}
+                    onChange={e => setEditLookupName(e.target.value)}
+                    placeholder={t('rsvp.name.placeholder')}
+                    className="rounded-full h-11 glass-card border-border/30 font-sans-elegant"
+                  />
+                </div>
+                <div>
+                  <label className="font-sans-elegant text-xs font-medium text-foreground mb-1.5 block">{t('rsvp.email')}</label>
+                  <Input
+                    type="email"
+                    value={editLookupEmail}
+                    onChange={e => setEditLookupEmail(e.target.value)}
+                    placeholder={t('rsvp.email.placeholder')}
+                    className="rounded-full h-11 glass-card border-border/30 font-sans-elegant"
+                  />
+                </div>
+                <button
+                  type="button"
+                  onClick={handleEditLookup}
+                  disabled={editLooking || !editLookupName.trim() || !editLookupEmail.trim()}
+                  className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {editLooking ? <Loader2 className="w-4 h-4 animate-spin" /> : <Heart className="w-4 h-4" />}
+                  {t('rsvp.edit.lookup')}
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-5 pt-2">
+                <p className="font-sans-elegant text-sm text-emerald-400 flex items-center gap-2">
+                  <Check className="w-4 h-4" /> RSVP found!
+                </p>
+
+                <div>
+                  <label className="font-sans-elegant text-sm font-medium text-foreground mb-2 block">{t('rsvp.attending')}</label>
+                  <div className="flex gap-3">
+                    <button type="button" onClick={() => setEditAttending(true)}
+                      className={`flex-1 py-3 rounded-full text-sm font-sans-elegant font-medium transition-all ${editAttending === true ? 'gradient-primary text-primary-foreground' : 'glass-card text-foreground'}`}
+                    >
+                      🎉 {t('rsvp.edit.attending.yes')}
+                    </button>
+                    <button type="button" onClick={() => setEditAttending(false)}
+                      className={`flex-1 py-3 rounded-full text-sm font-sans-elegant font-medium transition-all ${editAttending === false ? 'gradient-primary text-primary-foreground' : 'glass-card text-foreground'}`}
+                    >
+                      💕 {t('rsvp.edit.attending.no')}
+                    </button>
+                  </div>
+                </div>
+
+                {editAttending && (
+                  <div>
+                    <label className="font-sans-elegant text-sm font-medium text-foreground mb-2 block">Total guests (including you)</label>
+                    <div className="flex items-center gap-3">
+                      <button type="button" onClick={() => setEditGuests(g => Math.max(1, g - 1))}
+                        className="w-9 h-9 rounded-full glass-card flex items-center justify-center text-foreground hover:bg-primary/20 transition-colors"
+                      >-</button>
+                      <span className="font-serif-display text-xl font-bold text-foreground w-8 text-center">{editGuests}</span>
+                      <button type="button" onClick={() => setEditGuests(g => Math.min(10, g + 1))}
+                        className="w-9 h-9 rounded-full glass-card flex items-center justify-center text-foreground hover:bg-primary/20 transition-colors"
+                      >+</button>
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex gap-3">
+                  <button type="button" onClick={() => setEditFound(null)} className="flex-1 py-3 rounded-full glass-card text-sm font-sans-elegant text-foreground">
+                    Back
+                  </button>
+                  <button type="button" onClick={handleEditSave} disabled={editSaving || editAttending === null}
+                    className="flex-1 btn-primary disabled:opacity-50"
+                  >
+                    {editSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
+                    Save
+                  </button>
+                </div>
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
 
         {/* Progress Steps */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15 }} className="flex items-center justify-center gap-2 mb-10">
