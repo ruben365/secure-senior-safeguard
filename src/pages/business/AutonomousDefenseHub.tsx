@@ -282,7 +282,7 @@ const AutonomousDefenseHub = () => {
                       <p className="text-orange-400">
                         [02:14:56] AGENT: Quarantining /payroll /HR /blueprints
                       </p>
-                      <p className="text-white/60">
+                      <p className="text-white/80">
                         [02:14:57] NOTIFY: Owner alerted via encrypted push
                       </p>
                       <p className="text-green-400">

@@ -208,7 +208,7 @@ const FamilyEmergencyNetwork = () => {
               <AnimatedSection animation="fade-up">
                 <Heart className="w-12 h-12 text-red-400 mx-auto mb-6" />
                 <h2 className="text-3xl md:text-4xl font-black text-white mb-4">Give your loved one a lifeline.</h2>
-                <p className="text-white/60 mb-8 max-w-xl mx-auto">One button that calls everyone who matters — in under 8 seconds.</p>
+                <p className="text-white/85 mb-8 max-w-xl mx-auto">One button that calls everyone who matters — in under 8 seconds.</p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button size="lg" className="h-14 px-10 font-bold rounded-full bg-gradient-to-r from-primary to-accent text-white hover:opacity-90 transition-opacity" onClick={() => setBookingOpen(true)}>
                     Add Emergency Network — $19/mo <ArrowRight className="ml-2 w-5 h-5" />

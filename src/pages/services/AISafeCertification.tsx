@@ -235,7 +235,7 @@ const AISafeCertification = () => {
               <AnimatedSection animation="fade-up">
                 <Award className="w-16 h-16 text-yellow-400 mx-auto mb-6" />
                 <h2 className="text-3xl md:text-4xl font-black text-white mb-4">Be the first certified business in your industry.</h2>
-                <p className="text-white/60 mb-8 max-w-xl mx-auto">Applications reviewed within 5 business days. First cohort starts Q2 2026.</p>
+                <p className="text-white/85 mb-8 max-w-xl mx-auto">Applications reviewed within 5 business days. First cohort starts Q2 2026.</p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button size="lg" className="h-14 px-10 font-bold rounded-full bg-gradient-to-r from-primary to-accent text-white hover:opacity-90 transition-opacity" onClick={() => openBooking("AI-Safe Initial Certification", 2400, "Initial")}>
                     Apply Now — $2,400 <ArrowRight className="ml-2 w-5 h-5" />
