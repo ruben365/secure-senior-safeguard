@@ -67,6 +67,7 @@ const PaymentCanceled = lazy(() => import("./pages/PaymentCanceled"));
 const GlassmorphismTrustHeroDemo = lazy(() => import("./pages/GlassmorphismTrustHeroDemo"));
 const StyleShowcase = lazy(() => import("./pages/StyleShowcase"));
 const FAQ = lazy(() => import("./pages/FAQ"));
+const HelpCenter = lazy(() => import("./pages/HelpCenter"));
 const Maintenance = lazy(() => import("./pages/Maintenance"));
 
 // Legal pages - lazy loaded
@@ -81,6 +82,9 @@ const Disclaimer = lazy(() => import("./pages/Disclaimer"));
 const Portal = lazy(() => import("./pages/Portal"));
 const MyCourses = lazy(() => import("./pages/portal/MyCourses"));
 const MyBookings = lazy(() => import("./pages/portal/MyBookings"));
+const MyTickets = lazy(() => import("./pages/portal/MyTickets"));
+const ReferralDashboard = lazy(() => import("./pages/portal/ReferralDashboard"));
+const UserAnalytics = lazy(() => import("./pages/portal/UserAnalytics"));
 const CourseDetail = lazy(() => import("./pages/portal/CourseDetail"));
 const ScamCheckResult = lazy(() => import("./pages/portal/ScamCheckResult"));
 const AnalystDashboard = lazy(() => import("./pages/portal/AnalystDashboard"));
@@ -126,6 +130,9 @@ const ServiceInquiriesList = lazy(() => import("./pages/admin/ServiceInquiriesLi
 const BookingsList = lazy(() => import("./pages/admin/BookingsList"));
 const GraphicDesignAdmin = lazy(() => import("./pages/admin/GraphicDesignAdmin"));
 const PortfolioAdmin = lazy(() => import("./pages/admin/PortfolioAdmin"));
+const SupportTicketsAdmin = lazy(() => import("./pages/admin/SupportTickets"));
+const KnowledgeBaseAdmin = lazy(() => import("./pages/admin/KnowledgeBaseAdmin"));
+const ReviewsAdmin = lazy(() => import("./pages/admin/ReviewsAdmin"));
 
 // Cyber dashboard pages - lazy loaded
 const ThreatMonitor = lazy(() => import("./pages/admin/cyber/ThreatMonitor"));
@@ -203,6 +210,9 @@ function PublicRoutes() {
         <Route path="/portal/healthcare" element={<PageTransition><ProtectedRoute><HealthcareDashboard /></ProtectedRoute></PageTransition>} />
         <Route path="/portal/my-courses" element={<PageTransition><ProtectedRoute><MyCourses /></ProtectedRoute></PageTransition>} />
         <Route path="/portal/my-bookings" element={<PageTransition><ProtectedRoute><MyBookings /></ProtectedRoute></PageTransition>} />
+        <Route path="/portal/my-tickets" element={<PageTransition><ProtectedRoute><MyTickets /></ProtectedRoute></PageTransition>} />
+        <Route path="/portal/referrals" element={<PageTransition><ProtectedRoute><ReferralDashboard /></ProtectedRoute></PageTransition>} />
+        <Route path="/portal/analytics" element={<PageTransition><ProtectedRoute><UserAnalytics /></ProtectedRoute></PageTransition>} />
         <Route path="/portal/courses/:id" element={<PageTransition><ProtectedRoute><CourseDetail /></ProtectedRoute></PageTransition>} />
         <Route path="/portal/scam-check/:id" element={<PageTransition><ProtectedRoute><ScamCheckResult /></ProtectedRoute></PageTransition>} />
 
@@ -214,6 +224,7 @@ function PublicRoutes() {
         <Route path="/acceptable-use" element={<PageTransition variant="fade"><AcceptableUse /></PageTransition>} />
         <Route path="/disclaimer" element={<PageTransition variant="fade"><Disclaimer /></PageTransition>} />
         <Route path="/faq" element={<PageTransition variant="auto"><FAQ /></PageTransition>} />
+        <Route path="/help" element={<PageTransition variant="auto"><HelpCenter /></PageTransition>} />
 
         {/* Admin Routes */}
         <Route path="/admin/*" element={<AdminShell />}>
@@ -261,6 +272,9 @@ function PublicRoutes() {
           <Route path="job-applications" element={<JobApplicationsList />} />
           <Route path="content/portfolio" element={<GraphicDesignAdmin />} />
           <Route path="content/portfolio-cms" element={<PortfolioAdmin />} />
+          <Route path="support/tickets" element={<SupportTicketsAdmin />} />
+          <Route path="content/knowledge-base" element={<KnowledgeBaseAdmin />} />
+          <Route path="content/reviews" element={<ReviewsAdmin />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />
