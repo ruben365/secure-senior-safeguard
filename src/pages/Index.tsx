@@ -11,7 +11,7 @@ import { Input } from '@/components/ui/input';
 
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
-import { useSiteImages } from '@/hooks/useSiteContent';
+import { useSiteImages, useSiteSettings } from '@/hooks/useSiteContent';
 
 
 import heroImg from '@/assets/hero-wedding.jpg';
@@ -19,8 +19,6 @@ import flowersImgSmall from '@/assets/flowers-lavender.jpg';
 import ringsImgSmall from '@/assets/rings.jpg';
 import cakeImgSmall from '@/assets/cake.jpg';
 import coupleImgSmall from '@/assets/couple-lavender.jpg';
-
-const WEDDING_DATE = new Date('2027-08-15T14:00:00');
 
 const giftTiers = [
   { amount: 60, emoji: '💐', labelKey: 'registry.tier.bouquet' },
