@@ -29,8 +29,8 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     --primary: 288 30% 30%;
     --primary-foreground: 0 0% 100%;
 
-    /* Mauve-Purple Accent (from #BB81B5) */
-    --accent: 308 30% 61%;
+    /* Mauve-Purple Accent (from #BB81B5) - darkened for contrast */
+    --accent: 308 30% 48%;
     --accent-foreground: 0 0% 100%;
 
     /* Success - warm sage */
