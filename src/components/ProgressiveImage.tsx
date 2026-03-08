@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 interface ProgressiveImageProps {
@@ -8,9 +7,6 @@ interface ProgressiveImageProps {
   containerClassName?: string;
   priority?: boolean;
 }
-
-// Global cache
-const loadedImages = new Set<string>();
 
 export function ProgressiveImage({
   src,
@@ -26,25 +22,8 @@ export function ProgressiveImage({
         alt={alt}
         loading={priority ? "eager" : "lazy"}
         decoding="async"
-        className={cn(
-          "w-full h-full object-cover",
-          className,
-        )}
+        className={cn("w-full h-full object-cover", className)}
       />
     </div>
   );
 }
-
-// Preload critical images
-export const preloadCriticalImages = (urls: string[]) => {
-  urls.forEach((url) => {
-    if (!loadedImages.has(url)) {
-      const img = new Image();
-      img.onload = () => loadedImages.add(url);
-      img.src = url;
-    }
-  });
-};
-
-// Check if cached
-export const isImageCached = (url: string) => loadedImages.has(url);
