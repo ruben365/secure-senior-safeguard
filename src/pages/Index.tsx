@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState, useRef } from "react";
+import { lazy, Suspense, useState, useRef, forwardRef } from "react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
