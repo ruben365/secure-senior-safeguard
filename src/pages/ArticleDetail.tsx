@@ -133,11 +133,7 @@ function ArticleDetail() {
       <Navigation />
 
       <article className="container mx-auto px-4 py-16 max-w-4xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
+        <div className="animate-fade-in">
           {/* Back Button */}
           <Button variant="ghost" asChild className="mb-6">
             <Link to="/articles">
