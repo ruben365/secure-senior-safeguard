@@ -39,6 +39,7 @@ interface Testimonial {
 function CoordinatorDashboard() {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [loading, setLoading] = useState(true);
   const [articles, setArticles] = useState<Article[]>([]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [stats, setStats] = useState({
