@@ -1226,7 +1226,7 @@ const Index = () => {
       <section className="py-8 md:py-12 relative overflow-hidden section-below-fold">
         <AuroraOrb position="center" color="rgba(180,140,210,0.2)" size={400} delay={4} />
         <div className="container mx-auto px-6 md:px-12 max-w-5xl relative z-10">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }} transition={{ duration: 0.3 }} className="text-center mb-10">
             <div className="inline-block px-5 py-2 rounded-full glass-card-strong mb-5">
               <p className="font-sans-elegant text-xs tracking-[0.25em] uppercase text-muted-foreground font-medium">{t('index.explore')}</p>
             </div>
