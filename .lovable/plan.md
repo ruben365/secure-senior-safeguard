@@ -1,83 +1,90 @@
 
 
-# Website Audit Plan — InVision Network
+# Secure Book Reader System with Purchase-Based Access IDs
 
-## Issues Found
+## What We're Building
 
-### Critical Issues
+A complete purchase → access ID → secure reader pipeline:
 
-1. **Training page renders blank/invisible content**
-   - The `/training` page shows only the footer — the main content area appears entirely white/invisible. This is a major usability failure; users cannot see any training plans or pricing.
-   - Root cause likely: CSS color/background conflict where text is rendering in white on a white background, or the hero section and content sections have no visible background contrast.
-   - **Fix**: Audit the Training.tsx page structure and ensure all sections have proper background colors and text contrast. Check for any CSS classes like `text-white` applied without a dark background.
+1. **Purchase Flow**: Buyer enters email + full name → pays via Stripe → receives a unique 8-12 digit access ID
+2. **Access ID Delivery**: ID is emailed to buyer and shown on the success screen
+3. **"Read Books" Login**: A button on the Resources page opens a credential prompt (email + access ID)
+4. **Secure Reader**: Authenticated readers see only their purchased books in a protected, no-download/no-print viewer
+5. **Multi-book Support**: One access ID unlocks all books from that purchase
 
-2. **Massive `forwardRef` warning spam (6+ warnings on every page load)**
-   - Components affected: `UnifiedCheckoutDialog`, `DonationModal`, `SEO`, `Navigation` (memo), `PrefetchLink`, `ShoppingCart`, `DialogContent`/`DialogPortal`
-   - These are React warnings about function components being given refs without `React.forwardRef()`. While they don't crash the app, they indicate broken ref forwarding that can cause subtle interaction bugs (e.g., Dialog focus management, Sheet animations).
-   - **Fix**: Wrap affected components in `React.forwardRef()` or remove unnecessary ref passing.
+## Database
 
-### Performance Issues
+New table: `book_purchases`
+- `id` (uuid, PK)
+- `access_id` (text, unique) — 8-12 digit alphanumeric code
+- `customer_email` (text, not null)
+- `customer_name` (text, not null)
+- `book_ids` (text[], not null) — array of book IDs purchased
+- `stripe_session_id` (text)
+- `amount_paid` (integer) — cents
+- `created_at` (timestamptz)
+- `last_accessed_at` (timestamptz)
 
-3. **Hero image too large (1.3MB)**
-   - `hero-corporate-protection.webp` is 1,319KB — this is the single largest resource and takes 913ms to load. Should be compressed to under 200KB or served at appropriate dimensions.
-   - **Fix**: Compress the hero image or use responsive `srcset` with smaller variants.
+RLS: No anonymous reads (access validated via edge function). Insert only via service role.
 
-4. **framer-motion loaded on initial page (93KB)**
-   - Per the project's own memory/architecture rules, framer-motion should be excluded from the root level and only lazy-loaded. Currently loaded as part of the initial bundle.
-   - **Fix**: Ensure framer-motion imports in Index.tsx are isolated to lazy-loaded sub-components.
+Enable realtime: No (not needed).
 
-5. **DOM Content Loaded: 3.4s, Full Page Load: 3.6s**
-   - Acceptable but could improve. The 76 script files loaded on dev is expected (Vite HMR), but production builds should be verified.
+## Edge Functions
 
-### Form Validation & Data Flow
+### `generate-book-access` (new)
+- Called after successful Stripe payment
+- Generates a unique 8-12 character alphanumeric access ID
+- Inserts into `book_purchases`
+- Sends email with access ID to buyer via Resend
+- Returns the access ID to the frontend
 
-6. **Contact form uses `useState` instead of `react-hook-form`**
-   - The Contact page imports `useForm` and `zodResolver` but the `handleSubmit` function uses raw `useState` with manual form data. The Zod schema is imported (`contactFormSchema`) but may not be wired up for field-level validation feedback.
-   - **Fix**: Wire up `react-hook-form` with `contactFormSchema` for proper field-level error display.
+### `validate-book-access` (new)
+- Receives email + access ID
+- Validates against `book_purchases` table
+- Returns list of purchased book IDs if valid
+- Updates `last_accessed_at`
 
-7. **Newsletter form validation is working correctly**
-   - Uses Zod schema, proper error handling, loading states, and success feedback. No issues found.
+## Frontend Changes
 
-### Navigation & Responsiveness
+### Resources Page (`Resources.tsx`)
+- Add a prominent "📖 Read Your Books" button in the hero/header area
+- Clicking opens a Dialog with email + access ID fields
+- On successful validation, redirect to `/reader`
 
-8. **Mobile navigation missing hamburger menu button on small screens**
-   - On 375px width, the nav shows logo + cart + phone + Login but no hamburger icon to open the mobile menu with all nav links. Users on mobile cannot access AI & Business, Learn & Train, Resources, etc.
-   - **Fix**: Ensure the hamburger menu button is visible on mobile breakpoints.
+### Book Reader Page (`/reader`) (new)
+- Shows only the books the user purchased
+- Each book opens in a secure viewer component
+- CSS/JS protections against downloading/printing:
+  - `user-select: none`, `-webkit-print-color-adjust` disabled
+  - Right-click disabled on content area
+  - Print media query hides content
+  - No download buttons
+- Book content rendered as paginated HTML text (not downloadable PDF)
+- Session stored in `sessionStorage` (not persistent — must re-login each visit)
 
-9. **Navigation responsive layout looks functional on desktop** — all 7 nav links visible, cart, phone, donate, login all accessible.
+### Payment Success Flow Update
+- After Stripe payment completes, call `generate-book-access`
+- Show the access ID prominently on the success screen
+- Inform buyer: "Your Access ID has been sent to your email"
 
-### Minor Issues
+## File Plan
 
-10. **`body.style.overflow` manipulation in Navigation**
-    - Direct DOM mutation for scroll locking — works but could cause issues with other overlay components competing for the same property.
+| Action | File | Purpose |
+|--------|------|---------|
+| **Create** | `supabase/functions/generate-book-access/index.ts` | Generate access ID + email it |
+| **Create** | `supabase/functions/validate-book-access/index.ts` | Validate credentials, return book list |
+| **Create** | `src/pages/BookReader.tsx` | Secure reader page |
+| **Create** | `src/components/resources/ReadBooksDialog.tsx` | Login dialog (email + access ID) |
+| **Update** | `src/pages/Resources.tsx` | Add "Read Your Books" button + dialog |
+| **Update** | `src/App.tsx` | Add `/reader` route |
+| **Update** | Payment success flow | Call `generate-book-access` after purchase |
+| **Migration** | Create `book_purchases` table | DB schema |
 
-11. **Edge function CORS headers missing newer Supabase client headers**
-    - The `process-payment` edge function uses basic CORS headers. Should include the extended headers per project standards.
-
----
-
-## Implementation Plan
-
-### Task 1: Fix Training page visibility
-- Inspect `Training.tsx` full render output and all CSS classes
-- Ensure hero and content sections have proper background/text colors
-- Verify the page renders correctly on both desktop and mobile
-
-### Task 2: Fix forwardRef warnings
-- Add `React.forwardRef()` to: `DonationModal`, `PrefetchLink`, `ShoppingCart`, `SEO`
-- These are the custom components triggering warnings; Dialog/Sheet warnings come from Radix internals and are lower priority
-
-### Task 3: Fix mobile navigation hamburger visibility
-- Ensure the hamburger menu toggle button renders on screens below `lg` breakpoint
-- Verify all nav links are accessible in the mobile drawer
-
-### Task 4: Optimize hero image size
-- Compress `hero-corporate-protection.webp` to under 200KB
-- Add `width`/`height` attributes to prevent layout shift
-
-### Task 5: Wire up Contact form validation properly
-- Connect `react-hook-form` + `zodResolver` with `contactFormSchema` for proper field-level error messages
-
-### Task 6: Update edge function CORS headers
-- Update `process-payment` and any other edge functions to include the full set of required CORS headers per project standards
+## Security Model
+- Access IDs are alphanumeric, 10 characters (e.g., `A7K9X2M4P1`)
+- No downloadable files served — content is rendered inline
+- Print stylesheet hides all book content
+- Right-click context menu disabled on reader
+- No `<a download>` or blob URLs exposed
+- Access validated server-side on every reader page load
 
