@@ -498,7 +498,7 @@ export const PremiumGlassmorphismWidgets = () => {
                 <div className="text-center p-3 rounded-xl bg-gradient-to-br from-coral-50 to-coral-100 border border-coral-200/50">
                   <Target className="w-6 h-6 mx-auto text-coral-500 mb-2" />
                   <div className="text-xl font-black text-[#18305A]">98%</div>
-                  <div className="text-[10px] text-foreground/50 uppercase font-medium">
+                  <div className="text-[10px] text-muted-foreground uppercase font-medium">
                     Accuracy
                   </div>
                 </div>
