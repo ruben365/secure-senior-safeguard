@@ -183,9 +183,9 @@ const AISafeCertification = () => {
                       <p className={`text-xs font-bold uppercase tracking-widest mb-2 ${t.highlight ? "text-white/70" : "text-primary"}`}>{t.name}</p>
                       <div className="flex items-baseline gap-1 mb-2">
                         <span className={`text-4xl font-black ${t.highlight ? "text-white" : "text-foreground"}`}>${t.price.toLocaleString()}</span>
-                        <span className={`text-sm ${t.highlight ? "text-white/60" : "text-muted-foreground"}`}>/{t.period}</span>
+                        <span className={`text-sm ${t.highlight ? "text-white/85" : "text-muted-foreground"}`}>/{t.period}</span>
                       </div>
-                      <p className={`text-sm mb-6 ${t.highlight ? "text-white/70" : "text-muted-foreground"}`}>{t.desc}</p>
+                      <p className={`text-sm mb-6 ${t.highlight ? "text-white/85" : "text-muted-foreground"}`}>{t.desc}</p>
                       <ul className="space-y-3 flex-1 mb-8">
                         {t.features.map((f) => (
                           <li key={f} className="flex items-start gap-2 text-sm">
