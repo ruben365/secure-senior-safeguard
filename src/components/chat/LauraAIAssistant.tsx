@@ -39,7 +39,7 @@ type QuickHelpAction = {
   closeOnAction?: boolean;
 };
 
-export const LauraAIAssistant = () => {
+export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssistant(_props, _ref) {
   const { messages, isLoading, sendMessage } = useLauraChat();
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
