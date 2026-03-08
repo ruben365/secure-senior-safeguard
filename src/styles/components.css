@@ -84,7 +84,7 @@
     inset 0 1px 3px rgba(0, 0, 0, 0.08),
     inset 0 2px 6px rgba(0, 0, 0, 0.04),
     0 1px 0 rgba(255, 255, 255, 0.8);
-  transition: all 0.2s ease-out;
+  transition: border-color 0.2s ease-out, box-shadow 0.2s ease-out;
 }
 
 .skeuo-input:focus {
