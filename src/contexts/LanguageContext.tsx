@@ -289,7 +289,7 @@ const translations: Record<string, Record<Language, string>> = {
 
   // Newsletter / Subscribe
   'footer.subscribe.title': { fr: 'Restez Connecté', en: 'Stay Connected', es: 'Mantente Conectado' },
-  'footer.subscribe.desc': { fr: 'Abonnez-vous pour recevoir nos nouvelles familiales — bébé à venir, annonces et plus !', en: 'Subscribe to receive our family news — baby announcements, updates and more!', es: '¡Suscríbete para recibir nuestras noticias familiares — anuncios de bebé, actualizaciones y más!' },
+  'footer.subscribe.desc': { fr: 'Abonnez-vous pour recevoir nos nouvelles familiales, bébé à venir, annonces et plus !', en: 'Subscribe to receive our family news, baby announcements, updates and more!', es: '¡Suscríbete para recibir nuestras noticias familiares, anuncios de bebé, actualizaciones y más!' },
   'footer.subscribe.placeholder': { fr: 'votre@email.com', en: 'your@email.com', es: 'tu@correo.com' },
   'footer.subscribe.success': { fr: 'Vous êtes inscrit(e) ! 🎉', en: "You're subscribed! 🎉", es: '¡Estás suscrito! 🎉' },
   'footer.subscribe.already': { fr: 'Vous êtes déjà inscrit(e) !', en: "You're already subscribed!", es: '¡Ya estás suscrito!' },
