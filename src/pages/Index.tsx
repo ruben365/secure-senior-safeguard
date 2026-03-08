@@ -917,7 +917,7 @@ const Index = () => {
       <SectionDivider variant="sparkle" />
 
       {/* ===== ABOUT / LOVE STORY INTRO ===== */}
-      <section className="py-8 md:py-12 relative overflow-hidden">
+      <section className="py-8 md:py-12 relative overflow-hidden section-below-fold">
         <AuroraOrb position="left" color="rgba(212,165,200,0.3)" size={450} delay={0} />
         <AuroraOrb position="right" color="rgba(232,196,184,0.25)" size={350} delay={4} />
         <div className="container mx-auto px-6 md:px-12 max-w-6xl relative z-10">
@@ -1010,7 +1010,7 @@ const Index = () => {
       <SectionDivider variant="line" />
 
       {/* ===== SCRIPTURE — Transitioning Verses ===== */}
-      <section className="py-8 md:py-10 relative overflow-hidden">
+      <section className="py-8 md:py-10 relative overflow-hidden section-below-fold">
         <AuroraOrb position="center" color="rgba(139,107,138,0.2)" size={400} delay={3} />
         <div className="container mx-auto px-6 md:px-12 max-w-3xl relative z-10 text-center">
           <TransitioningScripture t={t} />
@@ -1021,7 +1021,7 @@ const Index = () => {
       <SectionDivider variant="heart" />
 
       {/* ===== FAITH & GRACE WIDGETS ===== */}
-      <section className="py-8 md:py-10 relative overflow-hidden">
+      <section className="py-8 md:py-10 relative overflow-hidden section-below-fold">
         <AuroraOrb position="left" color="rgba(180,140,210,0.2)" size={500} delay={1} />
         <AuroraOrb position="right" color="rgba(212,165,165,0.2)" size={380} delay={6} />
         <div className="container mx-auto px-6 md:px-12 max-w-5xl relative z-10">
@@ -1088,7 +1088,7 @@ const Index = () => {
       <SectionDivider variant="sparkle" />
 
       {/* ===== LOVE GALLERY STRIP ===== */}
-      <section className="py-6 md:py-10 relative overflow-hidden">
+      <section className="py-6 md:py-10 relative overflow-hidden section-below-fold">
         <AuroraOrb position="center" color="rgba(232,196,184,0.25)" size={450} delay={2} />
         <div className="container mx-auto px-6 md:px-12 max-w-6xl relative z-10">
           <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-6">
@@ -1131,7 +1131,7 @@ const Index = () => {
       <SectionDivider variant="line" />
 
       {/* ===== WEDDING DETAILS — Interactive Cards ===== */}
-      <section className="py-8 md:py-12 relative overflow-hidden">
+      <section className="py-8 md:py-12 relative overflow-hidden section-below-fold">
         <AuroraOrb position="left" color="rgba(201,169,182,0.25)" size={400} delay={0} />
         <AuroraOrb position="right" color="rgba(180,140,210,0.2)" size={350} delay={5} />
         <div className="container mx-auto px-6 md:px-12 max-w-5xl relative z-10">
@@ -1223,7 +1223,7 @@ const Index = () => {
       <SectionDivider variant="heart" />
 
       {/* ===== EXPLORE NAVIGATION ===== */}
-      <section className="py-8 md:py-12 relative overflow-hidden">
+      <section className="py-8 md:py-12 relative overflow-hidden section-below-fold">
         <AuroraOrb position="center" color="rgba(180,140,210,0.2)" size={400} delay={4} />
         <div className="container mx-auto px-6 md:px-12 max-w-5xl relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
@@ -1262,7 +1262,7 @@ const Index = () => {
       <SectionDivider variant="sparkle" />
 
       {/* ===== CTA / RSVP ===== */}
-      <section className="py-8 md:py-12 relative overflow-hidden">
+      <section className="py-8 md:py-12 relative overflow-hidden section-below-fold">
         <AuroraOrb position="left" color="rgba(212,165,200,0.3)" size={400} delay={0} />
         <AuroraOrb position="right" color="rgba(139,107,138,0.2)" size={350} delay={6} />
         <div className="container mx-auto px-6 md:px-12 max-w-3xl relative z-10 text-center">
