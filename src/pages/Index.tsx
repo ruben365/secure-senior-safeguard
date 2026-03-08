@@ -253,7 +253,7 @@ const PersonalCourtSection = forwardRef<HTMLElement, { t: (key: string) => strin
 PersonalCourtSection.displayName = 'PersonalCourtSection';
 
 
-const AnnouncementsSection = ({ t }: { t: (key: string) => string }) => {
+const AnnouncementsSection = forwardRef<HTMLElement, { t: (key: string) => string }>(({ t }, ref) => {
   const { language } = useLanguage();
   const [announcements, setAnnouncements] = useState<{ id: string; title: string; content: string; created_at: string; title_fr?: string | null; title_es?: string | null; content_fr?: string | null; content_es?: string | null }[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
