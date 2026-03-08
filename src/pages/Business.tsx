@@ -765,13 +765,10 @@ function Business() {
                     {/* Stats grid with 3D depth */}
                     <div className="grid grid-cols-2 gap-4">
                       {platformSnapshotStats.map((stat, i) => (
-                        <motion.div
+                        <div
                           key={stat.label}
-                          initial={{ opacity: 0, y: 30, scale: 0.9 }}
-                          animate={platformInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-                          transition={{ delay: 0.4 + i * 0.12, duration: 0.5, ease: "easeOut" }}
-                          whileHover={{ y: -6, scale: 1.04 }}
                           className="group"
+                        >
                         >
                           <div className="relative rounded-2xl border border-border/50 bg-card/80 backdrop-blur-sm p-5 text-center hover:border-primary/30 hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.12)] transition-all duration-500 overflow-hidden">
                             {/* Hover glow */}
