@@ -1007,22 +1007,11 @@ a[role="button"]:active {
 
 /* Frosted premium panel */
 .widget-frosted {
-  background:
-    linear-gradient(
-      160deg,
-      hsl(348 20% 99% / 0.88) 0%,
-      hsl(310 15% 97% / 0.72) 40%,
-      hsl(var(--lavender-100) / 0.15) 70%,
-      hsl(348 20% 99% / 0.85) 100%
-    );
+  background: hsl(0 0% 100% / 0.96);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  border: 1px solid hsl(0 0% 100% / 0.5);
-  box-shadow:
-    0 4px 16px hsl(var(--coral-400) / 0.06),
-    0 12px 32px -12px hsl(var(--lavender-400) / 0.1),
-    0 20px 48px -20px hsl(258 25% 25% / 0.08),
-    inset 0 1px 0 hsl(0 0% 100% / 0.92);
+  border: 1px solid hsl(240 6% 90%);
+  box-shadow: var(--shadow-card);
 }
 
 /* Dotted decorative border */
