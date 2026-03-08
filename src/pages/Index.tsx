@@ -122,8 +122,8 @@ const SectionDivider = forwardRef<HTMLDivElement, { variant?: 'heart' | 'sparkle
 SectionDivider.displayName = 'SectionDivider';
 
 /* Golden corner frame decoration for sections */
-const GoldenCorners = ({ className = '' }: { className?: string }) => (
-  <div className={`absolute inset-0 pointer-events-none z-[1] ${className}`}>
+const GoldenCorners = forwardRef<HTMLDivElement, { className?: string }>(({ className = '' }, ref) => (
+  <div ref={ref} className={`absolute inset-0 pointer-events-none z-[1] ${className}`}>
     {/* Top-left */}
     <div className="absolute top-0 left-0 w-12 h-12">
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-gold/40 to-transparent" />
@@ -145,7 +145,8 @@ const GoldenCorners = ({ className = '' }: { className?: string }) => (
       <div className="absolute bottom-0 right-0 h-full w-[1px] bg-gradient-to-t from-gold/40 to-transparent" />
     </div>
   </div>
-);
+));
+GoldenCorners.displayName = 'GoldenCorners';
 
 /* ===== Personal Court — Promise + Dynamic quotes from DB ===== */
 const PersonalCourtSection = ({ t }: { t: (key: string) => string }) => {
