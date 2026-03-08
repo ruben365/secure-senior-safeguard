@@ -153,7 +153,7 @@ const Navigation = () => {
               <button
                 onClick={() => navigate('/login')}
                 className="flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-bold rounded-full border border-white/20 text-white/80 hover:text-white hover:border-white/35 transition-all"
-                aria-label="Sign in"
+                aria-label="Login"
               >
                 <LogIn className="w-3.5 h-3.5" />
                 Login
