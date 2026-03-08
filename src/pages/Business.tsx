@@ -792,7 +792,7 @@ function Business() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </AnimatedSection>
 
             {/* Service groups — Premium cards with 3D hover */}
             <div className="max-w-6xl mx-auto space-y-20">
