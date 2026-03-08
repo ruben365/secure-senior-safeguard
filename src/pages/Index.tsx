@@ -1090,7 +1090,7 @@ const Index = () => {
       <section className="py-6 md:py-10 relative overflow-hidden section-below-fold">
         <AuroraOrb position="center" color="rgba(232,196,184,0.25)" size={450} delay={2} />
         <div className="container mx-auto px-6 md:px-12 max-w-6xl relative z-10">
-          <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-6">
+          <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }} transition={{ duration: 0.3 }} className="text-center mb-6">
             <div className="love-divider mb-3">
               <Heart className="w-5 h-5 text-rose-400 fill-rose-400 icon-glow" />
             </div>
