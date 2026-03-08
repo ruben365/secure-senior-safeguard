@@ -57,5 +57,6 @@ export const AIImageDisclaimer = () => {
         </motion.div>
       )}
     </AnimatePresence>
+    </div>
   );
-});
+};
