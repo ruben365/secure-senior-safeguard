@@ -326,7 +326,7 @@ const translations: Record<string, Record<Language, string>> = {
   'love.soulmates': { fr: 'Âmes sœurs par la grâce de Dieu', en: 'Soulmates by the grace of God', es: 'Almas gemelas por la gracia de Dios' },
   'love.together': { fr: 'Ensemble pour toujours', en: 'Together forever', es: 'Juntos para siempre' },
   'love.loveStory': { fr: 'Une histoire d\'amour bénie', en: 'A blessed love story', es: 'Una historia de amor bendecida' },
-  'love.loveStory.desc': { fr: '___________', en: '___________', es: '___________' },
+  'love.loveStory.desc': { fr: 'Dieu a écrit notre histoire bien avant que nous nous rencontrions. Chaque chapitre est rempli de grâce, de rires et d\'un amour grandissant.', en: 'God wrote our story long before we met. Every chapter is filled with grace, laughter, and a growing love.', es: 'Dios escribió nuestra historia mucho antes de que nos conociéramos. Cada capítulo está lleno de gracia, risas y un amor creciente.' },
   'love.countdownLabel': { fr: 'Jours avant notre « Oui, je le veux »', en: 'Days until our "I do"', es: 'Días para nuestro "Sí, acepto"' },
   'love.joinUs': { fr: 'Joignez-vous à notre célébration d\'amour', en: 'Join our celebration of love', es: 'Únete a nuestra celebración de amor' },
 
