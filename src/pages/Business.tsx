@@ -1841,7 +1841,7 @@ function Business() {
                     <h3 className="text-base font-bold mb-2 relative z-10">{item.title}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed relative z-10">{item.desc}</p>
                   </Card>
-                </motion.div>
+                </div>
               ))}
             </div>
 
