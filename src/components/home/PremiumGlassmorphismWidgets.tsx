@@ -430,7 +430,7 @@ export const PremiumGlassmorphismWidgets = () => {
                   </div>
 
                   <div className="flex items-center justify-between mb-4">
-                    <span className="rounded-full bg-white/70 px-2 py-0.5 text-[10px] font-semibold text-foreground/70">
+                    <span className="rounded-full bg-white/70 px-2 py-0.5 text-[10px] font-semibold text-foreground/85">
                       Sample
                     </span>
                     <div className="flex gap-1">
