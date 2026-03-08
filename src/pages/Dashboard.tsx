@@ -7,7 +7,8 @@ import {
   Users, Utensils, Gift, Heart, CheckCircle, XCircle, Clock,
   TrendingUp, BarChart3, PieChart, MapPin, Sparkles, Loader2, LogOut,
   Megaphone, Trash2, Plus, Share2, Copy, Check, QrCode,
-  MessageCircleQuestion, Send, Bell, Image, BookOpen, Mail, Download, AtSign
+  MessageCircleQuestion, Send, Bell, Image, BookOpen, Mail, Download, AtSign,
+  MessageCircle, Camera, HelpCircle, Settings
 } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
 import { Input } from '@/components/ui/input';
