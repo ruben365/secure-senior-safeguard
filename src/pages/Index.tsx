@@ -924,7 +924,7 @@ const Index = () => {
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.4 }}
             >
               <div className="relative">
