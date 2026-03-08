@@ -1,83 +1,43 @@
 
 
-# Website Audit Plan — InVision Network
+# Fix Lazy Loading & Polish Internal Dashboards
 
-## Issues Found
+## Problem Identified
+Three issues causing the "lazy load" feel:
 
-### Critical Issues
+1. **`Suspense fallback={null}`** — When React lazy-loads dashboard pages, users see a blank white/dark flash before the component mounts. No loading indicator.
+2. **No loading state in dashboards** — Secretary, Coordinator, and Staff dashboards render their full layout immediately but with `0` values in stat cards while data loads. Stats jump from 0 → real values.
+3. **Internal Messages page** has a full-screen "Loading messages..." text that feels unprofessional.
 
-1. **Training page renders blank/invisible content**
-   - The `/training` page shows only the footer — the main content area appears entirely white/invisible. This is a major usability failure; users cannot see any training plans or pricing.
-   - Root cause likely: CSS color/background conflict where text is rendering in white on a white background, or the hero section and content sections have no visible background contrast.
-   - **Fix**: Audit the Training.tsx page structure and ensure all sections have proper background colors and text contrast. Check for any CSS classes like `text-white` applied without a dark background.
+## Plan
 
-2. **Massive `forwardRef` warning spam (6+ warnings on every page load)**
-   - Components affected: `UnifiedCheckoutDialog`, `DonationModal`, `SEO`, `Navigation` (memo), `PrefetchLink`, `ShoppingCart`, `DialogContent`/`DialogPortal`
-   - These are React warnings about function components being given refs without `React.forwardRef()`. While they don't crash the app, they indicate broken ref forwarding that can cause subtle interaction bugs (e.g., Dialog focus management, Sheet animations).
-   - **Fix**: Wrap affected components in `React.forwardRef()` or remove unnecessary ref passing.
+### 1. Add a proper Suspense fallback component
+Create a lightweight `PortalLoadingSkeleton` that matches the dark neon aesthetic — shows the header bar + 4 skeleton stat cards + content placeholders. Use this as the Suspense fallback for all portal routes in `App.tsx` instead of `null`.
 
-### Performance Issues
+### 2. Add loading states to all 3 dashboards
+Each dashboard (Secretary, Coordinator, Staff) needs a `loading` boolean state. While `loadData()` is running, render skeleton cards instead of real content. This prevents the 0-to-real-value jump.
 
-3. **Hero image too large (1.3MB)**
-   - `hero-corporate-protection.webp` is 1,319KB — this is the single largest resource and takes 913ms to load. Should be compressed to under 200KB or served at appropriate dimensions.
-   - **Fix**: Compress the hero image or use responsive `srcset` with smaller variants.
+- **SecretaryDashboard**: Add `loading` state, show skeleton stat cards + booking list placeholders
+- **CoordinatorDashboard**: Add `loading` state, show skeleton stat cards + article/testimonial placeholders  
+- **StaffDashboard**: Add `loading` state, show skeleton stat cards + task/ticket placeholders
 
-4. **framer-motion loaded on initial page (93KB)**
-   - Per the project's own memory/architecture rules, framer-motion should be excluded from the root level and only lazy-loaded. Currently loaded as part of the initial bundle.
-   - **Fix**: Ensure framer-motion imports in Index.tsx are isolated to lazy-loaded sub-components.
+### 3. Improve InternalMessages loading state
+Replace the plain "Loading messages..." text with a proper skeleton UI matching the inbox layout — skeleton cards in the message list area + a skeleton detail pane.
 
-5. **DOM Content Loaded: 3.4s, Full Page Load: 3.6s**
-   - Acceptable but could improve. The 76 script files loaded on dev is expected (Vite HMR), but production builds should be verified.
+### 4. Add internal messages link to Secretary & Coordinator headers
+Both dashboards currently lack a direct "Messages" button in their headers like Staff has. Add a consistent message notification indicator in all dashboard headers.
 
-### Form Validation & Data Flow
+## Files to Modify
 
-6. **Contact form uses `useState` instead of `react-hook-form`**
-   - The Contact page imports `useForm` and `zodResolver` but the `handleSubmit` function uses raw `useState` with manual form data. The Zod schema is imported (`contactFormSchema`) but may not be wired up for field-level validation feedback.
-   - **Fix**: Wire up `react-hook-form` with `contactFormSchema` for proper field-level error display.
+| File | Change |
+|------|--------|
+| `src/components/portal/PortalLoadingSkeleton.tsx` | **Create** — reusable skeleton matching dark neon layout |
+| `src/App.tsx` | Update Suspense fallback for portal routes to use skeleton |
+| `src/pages/portal/SecretaryDashboard.tsx` | Add loading skeleton state |
+| `src/pages/portal/CoordinatorDashboard.tsx` | Add loading skeleton state |
+| `src/pages/portal/StaffDashboard.tsx` | Add loading skeleton state |
+| `src/pages/portal/InternalMessages.tsx` | Replace loading text with skeleton UI |
 
-7. **Newsletter form validation is working correctly**
-   - Uses Zod schema, proper error handling, loading states, and success feedback. No issues found.
-
-### Navigation & Responsiveness
-
-8. **Mobile navigation missing hamburger menu button on small screens**
-   - On 375px width, the nav shows logo + cart + phone + Login but no hamburger icon to open the mobile menu with all nav links. Users on mobile cannot access AI & Business, Learn & Train, Resources, etc.
-   - **Fix**: Ensure the hamburger menu button is visible on mobile breakpoints.
-
-9. **Navigation responsive layout looks functional on desktop** — all 7 nav links visible, cart, phone, donate, login all accessible.
-
-### Minor Issues
-
-10. **`body.style.overflow` manipulation in Navigation**
-    - Direct DOM mutation for scroll locking — works but could cause issues with other overlay components competing for the same property.
-
-11. **Edge function CORS headers missing newer Supabase client headers**
-    - The `process-payment` edge function uses basic CORS headers. Should include the extended headers per project standards.
-
----
-
-## Implementation Plan
-
-### Task 1: Fix Training page visibility
-- Inspect `Training.tsx` full render output and all CSS classes
-- Ensure hero and content sections have proper background/text colors
-- Verify the page renders correctly on both desktop and mobile
-
-### Task 2: Fix forwardRef warnings
-- Add `React.forwardRef()` to: `DonationModal`, `PrefetchLink`, `ShoppingCart`, `SEO`
-- These are the custom components triggering warnings; Dialog/Sheet warnings come from Radix internals and are lower priority
-
-### Task 3: Fix mobile navigation hamburger visibility
-- Ensure the hamburger menu toggle button renders on screens below `lg` breakpoint
-- Verify all nav links are accessible in the mobile drawer
-
-### Task 4: Optimize hero image size
-- Compress `hero-corporate-protection.webp` to under 200KB
-- Add `width`/`height` attributes to prevent layout shift
-
-### Task 5: Wire up Contact form validation properly
-- Connect `react-hook-form` + `zodResolver` with `contactFormSchema` for proper field-level error messages
-
-### Task 6: Update edge function CORS headers
-- Update `process-payment` and any other edge functions to include the full set of required CORS headers per project standards
+## Design
+All skeletons use `bg-[#1F2937]` cards with `bg-gray-700/30 animate-pulse` placeholder bars on the `bg-[#0B1120]` background — consistent with the existing neon aesthetic. No framer-motion. Instant mount.
 
