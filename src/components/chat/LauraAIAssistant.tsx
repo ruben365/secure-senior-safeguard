@@ -414,6 +414,6 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
       </p>
     </div>
   );
-};
+});
 
 export default LauraAIAssistant;

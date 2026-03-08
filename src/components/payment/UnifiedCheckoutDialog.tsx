@@ -678,6 +678,6 @@ const UnifiedCheckoutDialog = React.forwardRef<HTMLDivElement>(function UnifiedC
       </DialogContent>
     </Dialog>
   );
-};
+});
 
 export default UnifiedCheckoutDialog;

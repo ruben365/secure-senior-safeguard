@@ -415,4 +415,4 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
       </DialogContent>
     </Dialog>
   );
-};
+});
