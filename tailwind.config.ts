@@ -110,7 +110,7 @@ export default {
         "fade-in-up": "fade-in-up 0.8s ease-out forwards",
         "scroll-indicator": "scroll-indicator 2s ease-in-out infinite",
         "float": "float 6s ease-in-out infinite",
-        "shimmer": "shimmer 3s ease-in-out infinite",
+        
       },
     },
   },
