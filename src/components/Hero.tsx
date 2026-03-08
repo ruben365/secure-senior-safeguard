@@ -90,9 +90,14 @@ const Hero = ({
         ) : (
           !useVideo &&
           backgroundImage && (
-            <div
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{ backgroundImage: `url(${backgroundImage})` }}
+            <img
+              src={backgroundImage}
+              alt=""
+              width={1920}
+              height={1080}
+              loading="eager"
+              decoding="async"
+              className="absolute inset-0 w-full h-full object-cover"
             />
           )
         )}
