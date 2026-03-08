@@ -35,6 +35,7 @@ import {
 } from "lucide-react";
 import { useInternalMessages, useStaffProfiles, InternalMessage } from "@/hooks/useInternalMessages";
 import { supabase } from "@/integrations/supabase/client";
+import { MessagesLoadingSkeleton } from "@/components/portal/PortalLoadingSkeleton";
 
 function InternalMessages() {
   const navigate = useNavigate();
