@@ -18,7 +18,7 @@ const translations: Record<string, Record<Language, string>> = {
   'nav.registry': { fr: 'Cadeaux', en: 'Gifts', es: 'Regalos' },
 
   // Hero
-  'hero.date': { fr: '___________', en: '___________', es: '___________' },
+  'hero.date': { fr: '15 Août 2027', en: 'August 15, 2027', es: '15 de Agosto de 2027' },
   'hero.tagline': { fr: 'Nous nous marions !', en: 'We\'re getting married!', es: '¡Nos casamos!' },
   'hero.cta': { fr: 'Confirmer votre présence', en: 'RSVP Now', es: 'Confirmar asistencia' },
   'hero.scroll': { fr: 'Découvrir plus', en: 'Discover more', es: 'Descubrir más' },
