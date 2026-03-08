@@ -891,7 +891,7 @@ function Business() {
                     <h3 className="font-bold text-base mb-3">{pillar.title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">{pillar.desc}</p>
                   </Card>
-                </motion.div>
+                </AnimatedSection>
               ))}
             </div>
 
