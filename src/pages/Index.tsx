@@ -105,7 +105,7 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
           </div>
 
           {/* 11. Blog Preview */}
-          <section id="blog" className="bg-muted/20">
+          <section id="blog">
             <LazySection>
               <BlogPreview />
             </LazySection>

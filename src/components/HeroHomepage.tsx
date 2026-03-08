@@ -119,7 +119,7 @@ export const HeroHomepage = () => {
         </div>
 
         {/* ── Bottom floating trust bar ── */}
-        <div className="border-t border-border/30 bg-card/60 backdrop-blur-2xl">
+        <div className="border-t border-border/40 bg-card/90">
           <div className="container mx-auto px-6 lg:px-12 py-4">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-3">

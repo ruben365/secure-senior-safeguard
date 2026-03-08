@@ -432,19 +432,19 @@ a[role="button"]:active {
   font-weight: 600;
 }
 
-/* Enhanced Card Hover Effects - Soft Modern Style */
+/* Enhanced Card Hover Effects - Clean Modern */
 .card-enhanced {
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translateY(0);
-  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
-  border-radius: 1.5rem;
+  border-radius: 1rem;
   background: hsl(0 0% 100%);
 }
 
 .card-enhanced:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .card-enhanced img {
