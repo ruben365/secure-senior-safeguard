@@ -90,6 +90,7 @@ const ScamCheckResult = lazy(() => import("./pages/portal/ScamCheckResult"));
 const SecretaryDashboard = lazy(() => import("./pages/portal/SecretaryDashboard"));
 const CoordinatorDashboard = lazy(() => import("./pages/portal/CoordinatorDashboard"));
 const StaffDashboard = lazy(() => import("./pages/portal/StaffDashboard"));
+const InternalMessages = lazy(() => import("./pages/portal/InternalMessages"));
 
 // Admin pages - lazy loaded
 const AdminDashboardContent = lazy(() => import("./pages/admin/AdminDashboardContent"));
@@ -207,6 +208,7 @@ function PublicRoutes() {
         <Route path="/portal/caregiver" element={<Navigate to="/portal/staff" replace />} />
         <Route path="/portal/healthcare" element={<Navigate to="/portal/staff" replace />} />
         {/* Shared portal utilities */}
+        <Route path="/portal/messages" element={<PageTransition><ProtectedRoute><InternalMessages /></ProtectedRoute></PageTransition>} />
         <Route path="/portal/my-courses" element={<PageTransition><ProtectedRoute><MyCourses /></ProtectedRoute></PageTransition>} />
         <Route path="/portal/my-bookings" element={<PageTransition><ProtectedRoute><MyBookings /></ProtectedRoute></PageTransition>} />
         <Route path="/portal/my-tickets" element={<PageTransition><ProtectedRoute><MyTickets /></ProtectedRoute></PageTransition>} />
