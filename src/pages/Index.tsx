@@ -45,8 +45,19 @@ const LazySection = ({ children }: { children: React.ReactNode }) => (
 
 const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
   const [scamShieldOpen, setScamShieldOpen] = useState(false);
-  const ctaRef = useRef(null);
-  const ctaInView = useInView(ctaRef, { once: true, margin: "-50px" });
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const [ctaVisible, setCtaVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ctaRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setCtaVisible(true); observer.disconnect(); } },
+      { rootMargin: "-50px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <PageTransition variant="fade">
