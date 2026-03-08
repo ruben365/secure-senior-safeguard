@@ -1856,10 +1856,9 @@ function Business() {
                     { value: "24/7", label: "Support Available" },
                     { value: "50+", label: "Integrations" },
                   ].map((stat, i) => (
-                    <motion.div
+                    <div
                       key={i}
-                      className="group"
-                      whileHover={{ scale: 1.08 }}
+                      className="group hover-scale"
                     >
                       <p className="text-3xl md:text-4xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-1">
                         {stat.value}
