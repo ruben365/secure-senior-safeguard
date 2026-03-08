@@ -35,6 +35,7 @@ import {
 } from "lucide-react";
 import { useInternalMessages, useStaffProfiles, InternalMessage } from "@/hooks/useInternalMessages";
 import { supabase } from "@/integrations/supabase/client";
+import { MessagesLoadingSkeleton } from "@/components/portal/PortalLoadingSkeleton";
 
 function InternalMessages() {
   const navigate = useNavigate();
@@ -106,11 +107,7 @@ function InternalMessages() {
   };
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-[#0B1120] flex items-center justify-center">
-        <p className="text-gray-400">Loading messages...</p>
-      </div>
-    );
+    return <MessagesLoadingSkeleton />;
   }
 
   return (

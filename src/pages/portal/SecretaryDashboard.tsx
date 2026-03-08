@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { PortalLoadingSkeleton } from "@/components/portal/PortalLoadingSkeleton";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Calendar } from "@/components/ui/calendar";
@@ -43,6 +44,7 @@ interface ClientMessage {
 function SecretaryDashboard() {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [loading, setLoading] = useState(true);
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [bookings, setBookings] = useState<BookingRequest[]>([]);
   const [messages, setMessages] = useState<ClientMessage[]>([]);
@@ -103,6 +105,7 @@ function SecretaryDashboard() {
       unreadMessages: unreadCount || 0,
       todayAppointments: apptCount || 0,
     });
+    setLoading(false);
   };
 
   const handleBookingAction = async (id: string, action: "confirmed" | "denied") => {
@@ -132,6 +135,8 @@ function SecretaryDashboard() {
       default: return "bg-gray-500/20 text-gray-400 border-gray-500/30";
     }
   };
+
+  if (loading) return <PortalLoadingSkeleton />;
 
   return (
     <div className="min-h-screen bg-[#0B1120] text-gray-100">

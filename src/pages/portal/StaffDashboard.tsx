@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { PortalLoadingSkeleton } from "@/components/portal/PortalLoadingSkeleton";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Calendar } from "@/components/ui/calendar";
@@ -36,6 +37,7 @@ interface Ticket {
 function StaffDashboard() {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [loading, setLoading] = useState(true);
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [tasks, setTasks] = useState<DashboardTask[]>([]);
   const [tickets, setTickets] = useState<Ticket[]>([]);
@@ -88,6 +90,7 @@ function StaffDashboard() {
       unreadMessages: messagesCount || 0,
       todaysMeetings: meetingsCount || 0,
     });
+    setLoading(false);
   };
 
   const handleSignOut = async () => {
@@ -102,6 +105,8 @@ function StaffDashboard() {
       default: return "bg-gray-500/20 text-gray-400 border-gray-500/30";
     }
   };
+
+  if (loading) return <PortalLoadingSkeleton />;
 
   return (
     <div className="min-h-screen bg-[#0B1120] text-gray-100">

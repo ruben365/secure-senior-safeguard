@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { PortalLoadingSkeleton } from "@/components/portal/PortalLoadingSkeleton";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -39,6 +40,7 @@ interface Testimonial {
 function CoordinatorDashboard() {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [loading, setLoading] = useState(true);
   const [articles, setArticles] = useState<Article[]>([]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [stats, setStats] = useState({
@@ -77,6 +79,7 @@ function CoordinatorDashboard() {
       pendingTestimonials: pendingTestCount || 0,
       kbArticles: kbCount || 0,
     });
+    setLoading(false);
   };
 
   const handleTestimonialAction = async (id: string, action: "approved" | "rejected") => {
@@ -105,6 +108,8 @@ function CoordinatorDashboard() {
       default: return "bg-amber-500/20 text-amber-400 border-amber-500/30";
     }
   };
+
+  if (loading) return <PortalLoadingSkeleton />;
 
   return (
     <div className="min-h-screen bg-[#0B1120] text-gray-100">
