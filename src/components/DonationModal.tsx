@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -111,12 +111,12 @@ const impactInfo: Record<
   },
 };
 
-export const DonationModal = ({
+export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(function DonationModal({
   open,
   onOpenChange,
   type = "general",
   cause,
-}: DonationModalProps) => {
+}, _ref) {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [donationType, setDonationType] = useState<"one-time" | "monthly">(
@@ -415,4 +415,4 @@ export const DonationModal = ({
       </DialogContent>
     </Dialog>
   );
-};
+});

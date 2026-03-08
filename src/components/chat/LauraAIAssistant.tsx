@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, forwardRef } from "react";
 import { Link } from "react-router-dom";
 import {
   AlertTriangle,
@@ -39,7 +39,7 @@ type QuickHelpAction = {
   closeOnAction?: boolean;
 };
 
-export const LauraAIAssistant = () => {
+export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssistant(_props, _ref) {
   const { messages, isLoading, sendMessage } = useLauraChat();
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
@@ -168,7 +168,7 @@ export const LauraAIAssistant = () => {
             alt="Laura"
             width={56}
             height={56}
-            fetchPriority="high"
+            loading="eager"
             className="w-full h-full object-cover object-top"
           />
           {/* Online pulse */}
@@ -414,6 +414,6 @@ export const LauraAIAssistant = () => {
       </p>
     </div>
   );
-};
+});
 
 export default LauraAIAssistant;

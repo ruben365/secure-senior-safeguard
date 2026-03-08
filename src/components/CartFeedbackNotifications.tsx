@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -18,7 +18,7 @@ import { Link } from "react-router-dom";
 import { useCartFeedback } from "@/contexts/CartFeedbackContext";
 
 // Thank You Notification Component
-export const PurchaseThankYouNotification = () => {
+export const PurchaseThankYouNotification = forwardRef<HTMLDivElement>(function PurchaseThankYouNotification(_props, _ref) {
   const { showThankYou, dismissAll } = useCartFeedback();
 
   if (!showThankYou) return null;
@@ -106,10 +106,10 @@ export const PurchaseThankYouNotification = () => {
       </motion.div>
     </AnimatePresence>
   );
-};
+});
 
 // Empty Cart Help Notification Component
-export const CartEmptyHelpNotification = () => {
+export const CartEmptyHelpNotification = forwardRef<HTMLDivElement>(function CartEmptyHelpNotification(_props, _ref) {
   const { showEmptyCartHelp, dismissAll } = useCartFeedback();
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedback, setFeedback] = useState("");
@@ -223,14 +223,14 @@ export const CartEmptyHelpNotification = () => {
       </motion.div>
     </AnimatePresence>
   );
-};
+});
 
 // Combined Feedback Notifications Component
-export const CartFeedbackNotifications = () => {
+export const CartFeedbackNotifications = forwardRef<HTMLDivElement>(function CartFeedbackNotifications(_props, _ref) {
   return (
     <>
       <PurchaseThankYouNotification />
       <CartEmptyHelpNotification />
     </>
   );
-};
+});

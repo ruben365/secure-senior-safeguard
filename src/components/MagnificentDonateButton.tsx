@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import { Heart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { DonationModal } from "./DonationModal";
@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 
 const HIDDEN_PATHS = ["/admin", "/portal"];
 
-export const MagnificentDonateButton = () => {
+export const MagnificentDonateButton = forwardRef<HTMLDivElement>(function MagnificentDonateButton(_props, _ref) {
   const [open, setOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const location = useLocation();
@@ -24,4 +24,4 @@ export const MagnificentDonateButton = () => {
       <DonationModal open={open} onOpenChange={setOpen} type="general" />
     </>
   );
-};
+});

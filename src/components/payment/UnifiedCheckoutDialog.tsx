@@ -555,7 +555,7 @@ const OrderSummary: React.FC = () => {
 };
 
 // Main Dialog Component
-const UnifiedCheckoutDialog: React.FC = () => {
+const UnifiedCheckoutDialog = React.forwardRef<HTMLDivElement>(function UnifiedCheckoutDialog(_props, _ref) {
   const { state, closeCheckout, setStep, resetCheckout } = useCheckout();
   const { stripePromise, initializeStripe } = useStripeKey();
 
@@ -678,6 +678,6 @@ const UnifiedCheckoutDialog: React.FC = () => {
       </DialogContent>
     </Dialog>
   );
-};
+});
 
 export default UnifiedCheckoutDialog;
