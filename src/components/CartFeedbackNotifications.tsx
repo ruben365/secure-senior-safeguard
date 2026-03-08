@@ -109,7 +109,7 @@ export const PurchaseThankYouNotification = forwardRef<HTMLDivElement>(function 
 });
 
 // Empty Cart Help Notification Component
-export const CartEmptyHelpNotification = () => {
+export const CartEmptyHelpNotification = forwardRef<HTMLDivElement>(function CartEmptyHelpNotification(_props, _ref) {
   const { showEmptyCartHelp, dismissAll } = useCartFeedback();
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedback, setFeedback] = useState("");
