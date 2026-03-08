@@ -970,24 +970,14 @@ a[role="button"]:active {
 
 /* Premium embossed widget */
 .widget-embossed {
-  border: 1px solid hsl(var(--border) / 0.4);
-  box-shadow:
-    0 2px 6px hsl(var(--coral-400) / 0.06),
-    0 8px 20px -8px hsl(var(--lavender-400) / 0.08),
-    0 16px 40px -16px hsl(258 25% 25% / 0.07),
-    inset 0 1px 0 hsl(0 0% 100% / 0.9),
-    inset 0 -1px 0 hsl(258 20% 15% / 0.03);
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid hsl(var(--border));
+  box-shadow: var(--shadow-card);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .widget-embossed:hover {
-  border-color: hsl(var(--primary) / 0.2);
-  box-shadow:
-    0 4px 12px hsl(var(--coral-400) / 0.1),
-    0 12px 32px -8px hsl(var(--lavender-400) / 0.12),
-    0 24px 56px -16px hsl(258 25% 25% / 0.1),
-    inset 0 1px 0 hsl(0 0% 100% / 0.95),
-    inset 0 -1px 0 hsl(258 20% 15% / 0.02);
+  border-color: hsl(var(--primary) / 0.15);
+  box-shadow: var(--shadow-card-hover);
   transform: translateY(-2px);
 }
 
