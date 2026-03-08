@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState, useRef, forwardRef } from "react";
+import { lazy, Suspense, useState, useRef, useEffect, forwardRef } from "react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -20,7 +20,6 @@ import { WorkshopsPromo } from "@/components/home/WorkshopsPromo";
 import { FamilyTrustSection } from "@/components/home/FamilyTrustSection";
 // NatureAccent removed for performance
 import { ArrowRight, CheckCircle, Phone, Shield } from "lucide-react";
-import { motion, useInView } from "framer-motion";
 
 const FAQPreview = lazy(() =>
   import("@/components/home/FAQPreview").then((m) => ({
