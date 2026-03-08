@@ -467,7 +467,7 @@ const translations: Record<string, Record<Language, string>> = {
   // Enquiries
   'enquiries.badge': { fr: 'Questions', en: 'Questions', es: 'Preguntas' },
   'enquiries.title': { fr: 'Des Questions ?', en: 'Have Questions?', es: '¿Tienes Preguntas?' },
-  'enquiries.subtitle': { fr: 'N\'hésitez pas à nous poser vos questions — internationales ou locales, nous répondrons avec joie !', en: 'Feel free to ask us anything — international or local, we\'ll happily answer!', es: '¡No dudes en preguntarnos — internacionales o locales, responderemos con gusto!' },
+  'enquiries.subtitle': { fr: 'N\'hésitez pas à nous poser vos questions, internationales ou locales, nous répondrons avec joie !', en: 'Feel free to ask us anything, international or local, we\'ll happily answer!', es: '¡No dudes en preguntarnos, internacionales o locales, responderemos con gusto!' },
   'enquiries.form.title': { fr: 'Posez votre question', en: 'Ask Your Question', es: 'Haz Tu Pregunta' },
   'enquiries.form.desc': { fr: 'Nous vous répondrons par email', en: 'We\'ll reply to your email', es: 'Te responderemos por correo' },
   'enquiries.form.name': { fr: 'Votre nom', en: 'Your Name', es: 'Tu Nombre' },
