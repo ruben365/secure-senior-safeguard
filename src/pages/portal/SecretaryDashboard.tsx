@@ -43,6 +43,7 @@ interface ClientMessage {
 function SecretaryDashboard() {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [loading, setLoading] = useState(true);
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [bookings, setBookings] = useState<BookingRequest[]>([]);
   const [messages, setMessages] = useState<ClientMessage[]>([]);
