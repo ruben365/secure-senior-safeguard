@@ -20,7 +20,7 @@ const Footer = () => {
     }
     setSubscribing(true);
     try {
-      const { error } = await (supabase as any).from('newsletter_subscribers').insert({ email: email.trim().toLowerCase() });
+      const { error } = await supabase.from('newsletter_subscribers').insert({ email: email.trim().toLowerCase() });
       if (error) {
         if (error.code === '23505') {
           toast.info(t('footer.subscribe.already'));

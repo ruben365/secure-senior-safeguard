@@ -1315,7 +1315,7 @@ const Index = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: j * 0.06 }}
                   className={`rounded-2xl p-4 flex items-start gap-3 ${
-                    (item as any).highlight
+                    (item as { highlight?: boolean }).highlight
                       ? 'bg-primary/[0.06] dark:bg-primary/[0.08] border border-primary/15'
                       : 'glass-card'
                   }`}
