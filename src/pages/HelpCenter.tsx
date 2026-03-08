@@ -6,7 +6,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Search, BookOpen, ChevronRight, ThumbsUp, ThumbsDown } from "lucide-react";
-import { Helmet } from "react-helmet-async";
 import { toast } from "sonner";
 
 export default function HelpCenter() {
