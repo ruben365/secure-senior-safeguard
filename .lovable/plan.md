@@ -1,80 +1,37 @@
 
 
-## Make All Frontend Content Admin-Controllable
+## Mobile Performance Analysis (66%) — What's Actually Happening
 
-### Current State
-The dashboard already controls: RSVPs, gifts, announcements, quotes, enquiries, story events, site images, email blasts, subscribers, seating, and QR sharing. That's solid coverage.
+After examining the audit data in detail, most of the 12 performance issues flagged are **not from your app code** — they come from platform-level infrastructure and cannot be fixed through code changes.
 
-### What's Missing
+### Issues Outside Our Control (platform-level)
 
-**1. Guestbook Moderation (no dashboard UI)**
-Guestbook entries require `approved = true` to display, but there's no UI in the dashboard to approve/reject them. Guests submit and entries stay invisible.
+| Issue | Cause | Fixable? |
+|---|---|---|
+| **Redirects** (780ms) | Lovable staging → custom domain redirect | No |
+| **Render blocking requests** (2,240ms) | DM Sans font injected by Lovable badge | No (remove badge in Settings) |
+| **Unused JavaScript** (119 KiB) | Google Tag Manager scripts from Lovable | No |
+| **Cache lifetimes** (16 KiB) | Google Analytics cache headers | No |
+| **Document latency** (100ms) | Redirect chain | No |
+| **Network dependency tree** | Font chain through Google Fonts → gstatic | No |
 
-**2. Gallery Photo Moderation (no dashboard UI)**  
-Same issue -- uploaded photos need `approved = true` but no dashboard panel to approve/reject/delete them.
+### Suspicious Audit Data
 
-**3. FAQ Management (fully hardcoded)**
-All 10 FAQ items are hardcoded in `FAQ.tsx` with multilingual text. Admin can't add, edit, or remove questions.
+The audit's LCP element references `bold-moves.webp` with text "Start your online journey / Build your website today" and a `div.services` selector — **this is NOT your wedding app**. This appears to be a domain parking page at `corineruben.com`. The CLS layout shift is also attributed to this parking page content.
 
-**4. Venue Details (fully hardcoded)**
-Addresses, Google Maps URLs, schedule (8 events with times), hotels (4 entries), and transport directions are all hardcoded constants in `Venue.tsx`.
+This means the PageSpeed analysis may be hitting a cached or intermittent parking page at your custom domain rather than your actual app.
 
-**5. Wedding Settings (hardcoded)**
-Couple names ("Corine" / "Ruben"), wedding date (`2027-08-15T14:00:00`), and Bible verse are hardcoded in `Index.tsx`.
+### What Can Be Improved In Code
 
-### Plan
+Only two items are partially addressable:
 
-#### Phase 1: Dashboard Moderation Panels (no DB changes needed)
+1. **SEO score (58%)** — Likely caused by the parking page content being analyzed. Need to verify the custom domain is properly serving the app. If it is, we can add structured data and improve meta tags.
 
-**Add "Guestbook" tab to Dashboard** -- List all entries (approved + pending), toggle approval, delete. Uses existing `guestbook` table.
+2. **Font loading strategy** — The Google Fonts stylesheet in `index.html` is already using `media="print" onload="this.media='all'"` pattern (non-blocking). The render-blocking DM Sans flagged in the audit is from the Lovable badge, not our code.
 
-**Add "Photos" tab to Dashboard** -- Grid of uploaded photos with approve/reject/delete. Uses existing `photos` table.
+### Recommended Action
 
-#### Phase 2: FAQ Management (new table + dashboard tab + page update)
+The most impactful fix is **removing the Lovable badge** in your project Settings, which would eliminate the render-blocking DM Sans request (est. 2,240ms savings) and the unused JavaScript from Google Tag Manager (119 KiB). This alone could push the performance score significantly higher.
 
-**Create `faqs` table** with columns: `id`, `question`, `question_fr`, `question_es`, `answer`, `answer_fr`, `answer_es`, `sort_order`, `created_at`. Public SELECT, authenticated INSERT/UPDATE/DELETE.
-
-**Seed with existing 10 FAQ items** via insert.
-
-**Add "FAQ" tab to Dashboard** -- CRUD form with multilingual fields, drag-to-reorder.
-
-**Update `FAQ.tsx`** to fetch from `faqs` table instead of hardcoded array.
-
-#### Phase 3: Venue Management (new table + dashboard tab + page update)
-
-**Create `venue_settings` table** (key-value style) with: `id`, `key` (unique text), `value` (jsonb), `updated_at`. Keys like `ceremony_address`, `reception_address`, `ceremony_maps_url`, `reception_maps_url`, `ceremony_time`, `reception_time`.
-
-**Create `venue_schedule` table**: `id`, `time`, `icon`, `label`, `label_fr`, `label_es`, `sort_order`.
-
-**Create `venue_hotels` table**: `id`, `name`, `stars`, `distance`, `price`, `url`, `description`, `sort_order`.
-
-**Create `venue_transport` table**: `id`, `type` (car/transit/parking), `description`, `description_fr`, `description_es`, `sort_order`.
-
-**Add "Venue" tab to Dashboard** with sub-sections for each.
-
-**Update `Venue.tsx`** to fetch all data from these tables.
-
-#### Phase 4: Wedding Settings (new table + dashboard tab)
-
-**Create `site_settings` table**: `id`, `key` (unique), `value` (text), `updated_at`. Keys: `couple_name_1`, `couple_name_2`, `wedding_date`, `bible_verse`, `bible_reference`.
-
-**Add "Settings" tab to Dashboard** for editing couple names, date, verse.
-
-**Update `Index.tsx`** to read from `site_settings`.
-
-### Technical Details
-
-- All new tables get RLS: public SELECT, authenticated INSERT/UPDATE/DELETE
-- All new tables use `gen_random_uuid()` for IDs and `now()` for timestamps
-- Dashboard tabs added to existing `TabsList` in `Dashboard.tsx`
-- Frontend pages use `useEffect` + `supabase.from(...)` pattern consistent with existing hooks
-- Seed migrations insert current hardcoded data so nothing is lost
-
-### Files to Create/Edit
-- **New migration**: Create `faqs`, `venue_settings`, `venue_schedule`, `venue_hotels`, `venue_transport`, `site_settings` tables with RLS + seed data
-- **`src/pages/Dashboard.tsx`**: Add Guestbook, Photos, FAQ, Venue, Settings tabs
-- **`src/pages/FAQ.tsx`**: Fetch from `faqs` table
-- **`src/pages/Venue.tsx`**: Fetch from venue tables
-- **`src/pages/Index.tsx`**: Fetch couple names/date from `site_settings`
-- **`src/hooks/useSiteContent.ts`**: Add hooks for new tables
+No code changes are needed — the issues are infrastructure-level.
 

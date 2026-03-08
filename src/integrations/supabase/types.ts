@@ -80,6 +80,42 @@ export type Database = {
         }
         Relationships: []
       }
+      faqs: {
+        Row: {
+          answer: string
+          answer_es: string | null
+          answer_fr: string | null
+          created_at: string
+          id: string
+          question: string
+          question_es: string | null
+          question_fr: string | null
+          sort_order: number
+        }
+        Insert: {
+          answer: string
+          answer_es?: string | null
+          answer_fr?: string | null
+          created_at?: string
+          id?: string
+          question: string
+          question_es?: string | null
+          question_fr?: string | null
+          sort_order?: number
+        }
+        Update: {
+          answer?: string
+          answer_es?: string | null
+          answer_fr?: string | null
+          created_at?: string
+          id?: string
+          question?: string
+          question_es?: string | null
+          question_fr?: string | null
+          sort_order?: number
+        }
+        Relationships: []
+      }
       gifts: {
         Row: {
           amount: number
@@ -281,6 +317,27 @@ export type Database = {
         }
         Relationships: []
       }
+      site_settings: {
+        Row: {
+          id: string
+          key: string
+          updated_at: string
+          value: string
+        }
+        Insert: {
+          id?: string
+          key: string
+          updated_at?: string
+          value?: string
+        }
+        Update: {
+          id?: string
+          key?: string
+          updated_at?: string
+          value?: string
+        }
+        Relationships: []
+      }
       story_events: {
         Row: {
           created_at: string
@@ -326,6 +383,111 @@ export type Database = {
           title?: string
           title_es?: string | null
           title_fr?: string | null
+        }
+        Relationships: []
+      }
+      venue_hotels: {
+        Row: {
+          created_at: string
+          description: string
+          distance: string
+          id: string
+          name: string
+          price: string
+          sort_order: number
+          stars: number
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string
+          distance?: string
+          id?: string
+          name: string
+          price?: string
+          sort_order?: number
+          stars?: number
+          url?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          distance?: string
+          id?: string
+          name?: string
+          price?: string
+          sort_order?: number
+          stars?: number
+          url?: string
+        }
+        Relationships: []
+      }
+      venue_schedule: {
+        Row: {
+          color: string
+          created_at: string
+          icon: string
+          id: string
+          label: string
+          label_es: string | null
+          label_fr: string | null
+          sort_order: number
+          time: string
+        }
+        Insert: {
+          color?: string
+          created_at?: string
+          icon?: string
+          id?: string
+          label: string
+          label_es?: string | null
+          label_fr?: string | null
+          sort_order?: number
+          time: string
+        }
+        Update: {
+          color?: string
+          created_at?: string
+          icon?: string
+          id?: string
+          label?: string
+          label_es?: string | null
+          label_fr?: string | null
+          sort_order?: number
+          time?: string
+        }
+        Relationships: []
+      }
+      venue_transport: {
+        Row: {
+          created_at: string
+          description: string
+          description_es: string | null
+          description_fr: string | null
+          icon: string
+          id: string
+          sort_order: number
+          type: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string
+          description_es?: string | null
+          description_fr?: string | null
+          icon?: string
+          id?: string
+          sort_order?: number
+          type: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          description_es?: string | null
+          description_fr?: string | null
+          icon?: string
+          id?: string
+          sort_order?: number
+          type?: string
         }
         Relationships: []
       }

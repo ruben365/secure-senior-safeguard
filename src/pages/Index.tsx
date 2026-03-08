@@ -11,7 +11,7 @@ import { Input } from '@/components/ui/input';
 
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
-import { useSiteImages } from '@/hooks/useSiteContent';
+import { useSiteImages, useSiteSettings } from '@/hooks/useSiteContent';
 
 
 import heroImg from '@/assets/hero-wedding.jpg';
@@ -19,8 +19,6 @@ import flowersImgSmall from '@/assets/flowers-lavender.jpg';
 import ringsImgSmall from '@/assets/rings.jpg';
 import cakeImgSmall from '@/assets/cake.jpg';
 import coupleImgSmall from '@/assets/couple-lavender.jpg';
-
-const WEDDING_DATE = new Date('2027-08-15T14:00:00');
 
 const giftTiers = [
   { amount: 60, emoji: '💐', labelKey: 'registry.tier.bouquet' },
@@ -149,7 +147,7 @@ const GoldenCorners = forwardRef<HTMLDivElement, { className?: string }>(({ clas
 GoldenCorners.displayName = 'GoldenCorners';
 
 /* ===== Personal Court — Promise + Dynamic quotes from DB ===== */
-const PersonalCourtSection = ({ t }: { t: (key: string) => string }) => {
+const PersonalCourtSection = ({ t, coupleNames }: { t: (key: string) => string; coupleNames: string }) => {
   const [quotes, setQuotes] = useState<{ id: string; content: string }[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -213,7 +211,7 @@ const PersonalCourtSection = ({ t }: { t: (key: string) => string }) => {
               <div className="text-center mt-6">
                 <div className="flex items-center justify-center gap-2">
                   <Heart className="w-3 h-3 text-rose-400 fill-rose-400" />
-                  <span className="font-sans-elegant text-xs text-muted-foreground font-semibold">Corine & Ruben</span>
+                  <span className="font-sans-elegant text-xs text-muted-foreground font-semibold">{coupleNames}</span>
                 </div>
               </div>
 
@@ -476,6 +474,11 @@ const Index = () => {
   const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [activeDetail, setActiveDetail] = useState<string | null>(null);
   const { images: homepageGalleryImages } = useSiteImages('homepage_gallery');
+  const { settings } = useSiteSettings();
+
+  const coupleName1 = settings.couple_name_1 || 'Corine';
+  const coupleName2 = settings.couple_name_2 || 'Ruben';
+  const weddingDate = new Date(settings.wedding_date || '2027-08-15T14:00:00');
 
   // Gift dialog state
   const [giftOpen, setGiftOpen] = useState(false);
@@ -486,7 +489,7 @@ const Index = () => {
   useEffect(() => {
     const update = () => {
       const now = new Date();
-      const diff = WEDDING_DATE.getTime() - now.getTime();
+      const diff = weddingDate.getTime() - now.getTime();
       if (diff <= 0) return;
       setCountdown({
         days: Math.floor(diff / (1000 * 60 * 60 * 24)),
@@ -712,7 +715,7 @@ const Index = () => {
           </motion.div>
 
           <h1 className="font-serif-display text-5xl md:text-7xl lg:text-8xl font-semibold text-foreground mb-2 leading-tight">
-            Corine
+            {coupleName1}
           </h1>
           <motion.div
             initial={{ scale: 0 }}
@@ -725,7 +728,7 @@ const Index = () => {
             </span>
           </motion.div>
           <p className="font-serif-display text-5xl md:text-7xl lg:text-8xl font-semibold text-foreground mb-6 leading-tight" aria-hidden="false">
-            Ruben
+            {coupleName2}
           </p>
 
           {/* Romantic subtitle */}
@@ -931,7 +934,7 @@ const Index = () => {
                 <div className="glass-card-strong rounded-3xl p-2.5">
                   <img
                     src={coupleImgSmall}
-                    alt="Corine & Ruben"
+                    alt={`${coupleName1} & ${coupleName2}`}
                     className="rounded-[20px] w-full object-cover aspect-[4/5]"
                     style={{ boxShadow: '0 20px 40px rgba(107, 78, 113, 0.15)' }}
                     width={474}
@@ -993,7 +996,7 @@ const Index = () => {
                 </p>
                 <div className="flex items-center gap-2 mt-3">
                   <Heart className="w-3 h-3 text-rose-400 fill-rose-400" />
-                  <span className="font-sans-elegant text-xs text-muted-foreground font-medium">Corine & Ruben</span>
+                  <span className="font-sans-elegant text-xs text-muted-foreground font-medium">{coupleName1} & {coupleName2}</span>
                 </div>
               </div>
               <Link to="/story" className="btn-primary">
@@ -1217,7 +1220,7 @@ const Index = () => {
       <SectionDivider variant="sparkle" />
 
       {/* ===== PROMISE + PERSONAL QUOTES (merged) ===== */}
-      <PersonalCourtSection t={t} />
+      <PersonalCourtSection t={t} coupleNames={`${coupleName1} & ${coupleName2}`} />
 
       {/* ===== DIVIDER ===== */}
       <SectionDivider variant="heart" />
