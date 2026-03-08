@@ -53,7 +53,7 @@ export const BlogPreview = () => {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
             Learn From Our <span className="text-primary">Latest Blog</span>
           </h2>
-          <p className="text-foreground/80 text-xl md:text-2xl max-w-2xl mx-auto font-medium leading-relaxed">
+          <p className="text-muted-foreground text-xl md:text-2xl max-w-2xl mx-auto font-medium leading-relaxed">
             Stay informed with the latest cybersecurity tips and protection
             strategies.
           </p>
