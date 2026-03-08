@@ -98,7 +98,7 @@ const Navigation = React.memo(() => {
                 <span
                   className="text-lg md:text-xl font-bold tracking-tight"
                   style={{
-                    background: "linear-gradient(120deg, #173B72 0%, #F47C52 100%)",
+                    background: "linear-gradient(120deg, hsl(240 20% 12%) 0%, hsl(288 30% 30%) 100%)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                   }}
