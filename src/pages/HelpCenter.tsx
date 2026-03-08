@@ -47,12 +47,6 @@ export default function HelpCenter() {
   };
 
   return (
-    <>
-      <Helmet>
-        <title>Help Center | InVision Network</title>
-        <meta name="description" content="Find answers to common questions about InVision Network services, billing, security, and more." />
-      </Helmet>
-
       <div className="min-h-screen bg-background">
         <div className="bg-primary/5 py-16">
           <div className="container mx-auto max-w-3xl text-center px-4">
