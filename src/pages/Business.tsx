@@ -864,7 +864,7 @@ function Business() {
                               <ChevronRight className="w-3.5 h-3.5 group-hover/card:translate-x-1.5 transition-transform duration-300" />
                             </div>
                           </Link>
-                        </motion.div>
+                        </div>
                       ))}
                     </div>
                   </div>
