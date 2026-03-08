@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface OptimizedImagePictureProps {
@@ -12,7 +11,7 @@ interface OptimizedImagePictureProps {
 }
 
 /**
- * Lightweight optimized image component
+ * Lightweight image — no state, no transitions, instant display.
  */
 export function OptimizedImagePicture({
   src,
@@ -23,30 +22,16 @@ export function OptimizedImagePicture({
   height,
   onLoad,
 }: OptimizedImagePictureProps) {
-  const [loaded, setLoaded] = useState(false);
-
   return (
-    <div className={cn("relative overflow-hidden", className)}>
-      {/* Placeholder */}
-      {!loaded && <div className="absolute inset-0 bg-muted" />}
-
-      {/* Image with CSS transition */}
-      <img
-        src={src}
-        alt={alt}
-        loading={loading}
-        decoding="async"
-        width={width}
-        height={height}
-        onLoad={() => {
-          setLoaded(true);
-          onLoad?.();
-        }}
-        className={cn(
-          "w-full h-full object-cover transition-opacity duration-150",
-          loaded ? "opacity-100" : "opacity-0",
-        )}
-      />
-    </div>
+    <img
+      src={src}
+      alt={alt}
+      loading={loading}
+      decoding="async"
+      width={width}
+      height={height}
+      onLoad={onLoad}
+      className={cn("w-full h-full object-cover", className)}
+    />
   );
 }
