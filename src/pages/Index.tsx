@@ -474,6 +474,11 @@ const Index = () => {
   const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [activeDetail, setActiveDetail] = useState<string | null>(null);
   const { images: homepageGalleryImages } = useSiteImages('homepage_gallery');
+  const { settings } = useSiteSettings();
+
+  const coupleName1 = settings.couple_name_1 || 'Corine';
+  const coupleName2 = settings.couple_name_2 || 'Ruben';
+  const weddingDate = new Date(settings.wedding_date || '2027-08-15T14:00:00');
 
   // Gift dialog state
   const [giftOpen, setGiftOpen] = useState(false);
@@ -484,7 +489,7 @@ const Index = () => {
   useEffect(() => {
     const update = () => {
       const now = new Date();
-      const diff = WEDDING_DATE.getTime() - now.getTime();
+      const diff = weddingDate.getTime() - now.getTime();
       if (diff <= 0) return;
       setCountdown({
         days: Math.floor(diff / (1000 * 60 * 60 * 24)),
