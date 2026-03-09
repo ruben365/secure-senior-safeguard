@@ -638,9 +638,9 @@ function Resources() {
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               {[
-                { icon: BookOpen, label: "Digital & Print Books" },
-                { icon: Package, label: "Security Gadgets" },
-                { icon: Download, label: "Instant Downloads" },
+                { icon: BookOpen, label: "Digital eBooks" },
+                { icon: Lock, label: "Secure Online Reading" },
+                { icon: Globe, label: "Read on Any Device" },
                 { icon: Users, label: "Family-Friendly" },
               ].map((item) => (
                 <div key={item.label} className="flex items-center gap-2 text-sm text-muted-foreground bg-card border border-border/40 px-3 py-1.5 rounded-full">
