@@ -56,24 +56,7 @@ const AuroraOrb = forwardRef<HTMLDivElement, { position?: 'left' | 'right' | 'ce
 });
 AuroraOrb.displayName = 'AuroraOrb';
 
-/* Floating hearts component */
-const FloatingHearts = ({ isMobile = false }: { isMobile?: boolean }) =>
-  <div className="fixed inset-0 pointer-events-none z-[5] overflow-hidden">
-    {Array.from({ length: isMobile ? 5 : 12 }).map((_, i) =>
-      <div
-        key={i}
-        className="absolute animate-float-heart text-primary/20"
-        style={{
-          left: `${8 + i * 7.5 % 85}%`,
-          bottom: '-20px',
-          '--duration': `${10 + i * 2}s`,
-          '--delay': `${i * 1.5}s`,
-          fontSize: `${12 + i % 4 * 6}px`
-        } as React.CSSProperties}>
-        ♥
-      </div>
-    )}
-  </div>;
+/* FloatingHearts removed — using global one from App.tsx */
 
 /* Falling petals component — hidden on mobile for performance */
 const FallingPetals = ({ isMobile = false }: { isMobile?: boolean }) => {
