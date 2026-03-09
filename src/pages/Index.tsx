@@ -599,7 +599,10 @@ const Index = () => {
       navigator.clipboard.writeText(shareUrl);
       toast.success('Link copied!');
     }
-  };
+  const embedUrl = livestreamUrl ? getEmbedUrl(livestreamUrl) : null;
+
+  return (
+    <div className="min-h-screen flex flex-col">
 
       {/* ===== FLOATING GIFT BUTTON ===== */}
       <motion.button
