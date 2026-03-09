@@ -87,7 +87,7 @@ const Guestbook = () => {
         <motion.form
           onSubmit={handleSubmit}
           initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-          className="glass-card-strong rounded-3xl p-8 mb-10 space-y-4"
+          className="glass-card-strong rounded-3xl p-5 md:p-8 mb-8 md:mb-10 space-y-4"
         >
           <div className="flex items-center gap-3 mb-2">
             <div className="w-11 h-11 rounded-2xl gradient-primary flex items-center justify-center">

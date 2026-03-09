@@ -408,7 +408,7 @@ const ScriptureTransition = ({ t }: { t: (key: string) => string }) => {
           <div className="inline-block px-5 py-2 rounded-full glass-card-strong mb-5">
             <p className="font-sans-elegant text-xs tracking-[0.25em] uppercase text-muted-foreground font-medium">{t('index.scripture')}</p>
           </div>
-          <h2 className="font-serif-display text-3xl md:text-5xl text-foreground font-semibold mb-3">{t('verse.section.title')}</h2>
+          <h2 className="font-serif-display text-2xl md:text-5xl text-foreground font-semibold mb-3">{t('verse.section.title')}</h2>
           <p className="font-sans-elegant text-base text-muted-foreground max-w-lg mx-auto">{t('verse.section.subtitle')}</p>
         </motion.div>
 

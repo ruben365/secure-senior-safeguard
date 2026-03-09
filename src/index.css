@@ -850,6 +850,22 @@
     filter: blur(40px) !important;
     will-change: transform;
   }
+
+  /* Compact buttons on mobile */
+  .btn-primary {
+    padding: 12px 24px;
+    font-size: 13px;
+  }
+
+  .btn-outline {
+    padding: 12px 24px;
+    font-size: 13px;
+  }
+
+  /* Tighter glass cards on mobile */
+  .glass-section {
+    padding: 16px;
+  }
 }
 
 /* Hide scrollbars in dialogs */

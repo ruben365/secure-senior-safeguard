@@ -198,7 +198,7 @@ const Navigation = () => {
                     key={link.to}
                     to={link.to}
                     onClick={() => setMobileOpen(false)}
-                    className={`font-sans-elegant text-sm font-medium py-3 px-4 rounded-2xl transition-all duration-300 ${
+                    className={`font-sans-elegant text-[13px] font-medium py-2.5 px-3 rounded-2xl transition-all duration-300 ${
                       location.pathname === link.to
                         ? 'text-primary-foreground bg-primary font-semibold'
                         : 'text-foreground hover:bg-primary/10'
