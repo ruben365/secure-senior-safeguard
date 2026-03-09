@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion } from 'framer-motion';
 import { Heart, Gift, Sparkles, Share2, Copy, Check } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-import EmbeddedPaymentForm from '@/components/EmbeddedPaymentForm';
+const EmbeddedPaymentForm = lazy(() => import('@/components/EmbeddedPaymentForm'));
 import { QRCodeSVG } from 'qrcode.react';
 
 const giftTiers = [
@@ -204,11 +204,15 @@ const Registry = () => {
         </div>
 
       {/* Embedded Payment */}
-      <EmbeddedPaymentForm
-        open={paymentOpen}
-        onOpenChange={setPaymentOpen}
-        selectedAmount={selectedAmount}
-      />
+      {paymentOpen && (
+        <Suspense fallback={null}>
+          <EmbeddedPaymentForm
+            open={paymentOpen}
+            onOpenChange={setPaymentOpen}
+            selectedAmount={selectedAmount}
+          />
+        </Suspense>
+      )}
     </div>
   );
 };
