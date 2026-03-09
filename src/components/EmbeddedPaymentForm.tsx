@@ -345,7 +345,9 @@ const EmbeddedPaymentForm = ({ open, onOpenChange, selectedAmount }: EmbeddedPay
               {t('registry.dialog.subtitle')}
             </DrawerDescription>
           </DrawerHeader>
-          {content}
+          <div className="overflow-y-auto flex-1 px-1 pb-2">
+            {content}
+          </div>
         </DrawerContent>
       </Drawer>
     );
