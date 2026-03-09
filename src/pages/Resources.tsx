@@ -306,7 +306,7 @@ function Resources() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center mt-10">
             {[
               { value: "20+", label: "Digital Guides", icon: BookOpen },
-              { value: "15+", label: "Security Products", icon: Shield },
+              { value: "30+", label: "Expert Guides", icon: Shield },
               { value: "100+", label: "Happy Customers", icon: Heart },
               { value: "24/7", label: "Support Available", icon: Headphones },
             ].map((stat, index) => (
