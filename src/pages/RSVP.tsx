@@ -395,7 +395,7 @@ const RSVP = () => {
           <div className="inline-block px-5 py-2 rounded-full glass-card-strong mb-5">
             <p className="font-sans-elegant text-xs tracking-[0.25em] uppercase text-muted-foreground font-medium">{t('venue.badge')}</p>
           </div>
-          <h2 className="font-serif-display text-4xl md:text-5xl text-foreground mb-4 font-semibold" style={{ letterSpacing: '-0.5px' }}>
+          <h2 className="font-serif-display text-3xl md:text-5xl text-foreground mb-4 font-semibold" style={{ letterSpacing: '-0.5px' }}>
             {isCourtMode ? t('venue.court.title') : t('venue.title')}
           </h2>
           <p className="font-sans-elegant text-base text-muted-foreground max-w-md mx-auto" style={{ lineHeight: 1.6 }}>
