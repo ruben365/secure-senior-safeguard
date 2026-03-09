@@ -577,18 +577,29 @@ const Index = () => {
     },
   ];
 
-  if (settingsLoading) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-background">
-        <Heart className="w-8 h-8 text-primary animate-pulse" />
-      </div>
-    );
-  }
+  /* ─── Live Stream helpers ─── */
+  const livestreamUrl = settings.livestream_url || '';
+  const livestreamActive = settings.livestream_active === 'true';
+  const livestreamTitle = settings.livestream_title || '';
 
-  return (
-    <div className="min-h-screen flex flex-col">
-      {/* Ambient floating hearts */}
-      <FloatingHearts isMobile={isMobile} />
+  const getEmbedUrl = (rawUrl: string) => {
+    // YouTube
+    const ytMatch = rawUrl.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/live\/)([\w-]+)/);
+    if (ytMatch) return `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1&rel=0`;
+    // Facebook
+    if (rawUrl.includes('facebook.com')) return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(rawUrl)}&autoplay=true`;
+    return null;
+  };
+
+  const handleShareStream = async () => {
+    const shareUrl = window.location.origin;
+    if (navigator.share) {
+      try { await navigator.share({ title: livestreamTitle || "Corine & Ruben's Wedding Live", url: shareUrl }); } catch {}
+    } else {
+      navigator.clipboard.writeText(shareUrl);
+      toast.success('Link copied!');
+    }
+  };
 
       {/* ===== FLOATING GIFT BUTTON ===== */}
       <motion.button
