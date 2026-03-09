@@ -75,7 +75,7 @@ const Guestbook = () => {
           <div className="inline-block px-5 py-2 rounded-full glass-card-strong mb-5">
             <p className="font-sans-elegant text-xs tracking-[0.25em] uppercase text-muted-foreground font-medium">{t('guestbook.badge')}</p>
           </div>
-          <h1 className="font-serif-display text-4xl md:text-6xl text-foreground mb-4 font-semibold" style={{ letterSpacing: '-0.5px' }}>
+          <h1 className="font-serif-display text-3xl md:text-6xl text-foreground mb-4 font-semibold" style={{ letterSpacing: '-0.5px' }}>
             {t('guestbook.title')}
           </h1>
           <p className="font-sans-elegant text-base text-muted-foreground max-w-sm mx-auto" style={{ lineHeight: 1.6 }}>
