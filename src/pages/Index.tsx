@@ -811,7 +811,7 @@ const Index = () => {
               <motion.div
                 animate={{ y: [-6, 8, -6] }}
                 transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-                className="glass-card-strong rounded-3xl p-5 w-52"
+                className="glass-card-strong rounded-3xl p-4 md:p-5 w-44 md:w-52"
               >
                 <div className="flex items-center gap-2 mb-3">
                   <Heart className="w-4 h-4 text-rose-400 fill-rose-400 icon-glow" />
