@@ -1448,6 +1448,7 @@ const Index = () => {
       </section>
 
       {/* ===== DETAIL DIALOGS ===== */}
+      <Suspense fallback={null}>
       {detailSections.map((section) =>
       <Dialog key={section.id} open={activeDetail === section.id} onOpenChange={(open) => !open && setActiveDetail(null)}>
           <DialogContent className="max-w-lg">
