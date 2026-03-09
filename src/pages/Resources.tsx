@@ -78,7 +78,7 @@ function Resources() {
   } | null>(null);
 
   // Book cover modal state
-  const [selectedBook, setSelectedBook] = useState<BookItem | null>(null);
+  const [selectedBook, setSelectedBook] = useState<(typeof BOOK_CATALOG)[number] | null>(null);
   const [bookModalOpen, setBookModalOpen] = useState(false);
   const [translationDialogOpen, setTranslationDialogOpen] = useState(false);
   const [readBooksOpen, setReadBooksOpen] = useState(false);
