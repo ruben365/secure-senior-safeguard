@@ -7,10 +7,10 @@ import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 
 // Static pre-wedding photos shown by default
-import flowersImg from '@/assets/flowers-lavender.jpg';
-import ringsImg from '@/assets/rings.jpg';
-import coupleImg from '@/assets/couple-lavender.jpg';
-import cakeImg from '@/assets/cake.jpg';
+import flowersImg from '@/assets/flowers-lavender-small.webp';
+import ringsImg from '@/assets/rings-small.webp';
+import coupleImg from '@/assets/couple-lavender-small.webp';
+import cakeImg from '@/assets/cake-small.webp';
 
 const STATIC_PHOTOS = [
   { id: 'static-1', url: coupleImg, alt: 'Corine & Ruben' },

@@ -16,10 +16,10 @@ import { useSiteImages, useSiteSettings } from '@/hooks/useSiteContent';
 
 
 import heroImg from '@/assets/hero-wedding-opt.webp';
-import flowersImgSmall from '@/assets/flowers-lavender-opt.webp';
-import ringsImgSmall from '@/assets/rings-opt.webp';
-import cakeImgSmall from '@/assets/cake.jpg';
-import coupleImgSmall from '@/assets/couple-lavender-opt.webp';
+import flowersImgSmall from '@/assets/flowers-lavender-small.webp';
+import ringsImgSmall from '@/assets/rings-small.webp';
+import cakeImgSmall from '@/assets/cake-small.webp';
+import coupleImgSmall from '@/assets/couple-lavender-small.webp';
 
 const giftTiers = [
 { amount: 60, emoji: '💐', labelKey: 'registry.tier.bouquet' },
@@ -1039,7 +1039,7 @@ const Index = () => {
                     width={474}
                     height={593}
                     loading="lazy"
-                    decoding="async" src="/lovable-uploads/813e601a-a098-4c8b-9879-005a622d470f.jpg" />
+                    decoding="async" src={coupleImgSmall} />
                   
                 </div>
                 <motion.div
