@@ -242,14 +242,14 @@ export default function PaymentSuccess() {
         return (
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-lg bg-success/10 flex items-center justify-center flex-shrink-0">
-              <Download className="w-6 h-6 text-success" />
+              <BookOpen className="w-6 h-6 text-success" />
             </div>
             <div>
-              <h3 className="font-semibold mb-2">Digital Product Delivery</h3>
+              <h3 className="font-semibold mb-2">Access ID Delivery</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li className="flex items-center gap-2">
                   <Mail className="w-4 h-4 text-primary" />
-                  <span>Check your email for download links</span>
+                  <span>Check your email for your Access ID</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-primary" />
@@ -263,77 +263,9 @@ export default function PaymentSuccess() {
                 </li>
                 <li className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                  <span>Download links expire in 24 hours</span>
+                  <span>Your Access ID never expires</span>
                 </li>
               </ul>
-            </div>
-          </div>
-        );
-      case "physical":
-        return (
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-              <Truck className="w-6 h-6 text-primary" />
-            </div>
-            <div>
-              <h3 className="font-semibold mb-2">Physical Product Shipping</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                  <span>
-                    You'll receive an order confirmation email shortly
-                  </span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                  <span>
-                    Your order will be processed within 1-2 business days
-                  </span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                  <span>Shipping typically takes 2-3 business days</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                  <span>You'll receive a tracking number once shipped</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        );
-      case "mixed":
-        return (
-          <div className="space-y-6">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-lg bg-success/10 flex items-center justify-center flex-shrink-0">
-                <Download className="w-6 h-6 text-success" />
-              </div>
-              <div>
-                <h3 className="font-semibold mb-2">Digital Products</h3>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li className="flex items-center gap-2">
-                    <Mail className="w-4 h-4 text-primary" />
-                    <span>
-                      Check your email for download links (within 2-5 minutes)
-                    </span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <Truck className="w-6 h-6 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-semibold mb-2">Physical Products</h3>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                    <span>Will be shipped within 1-2 business days</span>
-                  </li>
-                </ul>
-              </div>
             </div>
           </div>
         );
@@ -341,22 +273,18 @@ export default function PaymentSuccess() {
         return (
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-              <Package className="w-6 h-6 text-primary" />
+              <BookOpen className="w-6 h-6 text-primary" />
             </div>
             <div>
               <h3 className="font-semibold mb-2">What happens next?</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                  <span>
-                    You'll receive an order confirmation email shortly
-                  </span>
+                  <Mail className="w-4 h-4 text-primary" />
+                  <span>Check your email for your Access ID</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                  <span>
-                    Your order will be processed within 1-2 business days
-                  </span>
+                  <span>Use your Access ID to read your books at /reader</span>
                 </li>
               </ul>
             </div>
