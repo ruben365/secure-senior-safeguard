@@ -48,6 +48,8 @@ import Enquiries from "./pages/Enquiries";
 import Registry from "./pages/Registry";
 import FAQ from "./pages/FAQ";
 import Guestbook from "./pages/Guestbook";
+import Gallery from "./pages/Gallery";
+import Venue from "./pages/Venue";
 import FloatingHearts from "@/components/FloatingHearts";
 import MusicFloatingButton, { MusicProvider } from "@/components/MusicPlayer";
 import { Toaster } from "@/components/ui/toaster";
