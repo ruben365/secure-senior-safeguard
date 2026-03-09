@@ -59,7 +59,7 @@ const heroHeadlines = [
 "Your Digital Safety Arsenal",
 "Premium Guides & Resources",
 "Expert Security Tools",
-"Products to Protect What Matters Most"];
+"Guides to Protect What Matters Most"];
 
 function Resources() {
   const { addItem, lastClearReason, hadItemsBeforeClear, itemCount } =
