@@ -626,7 +626,9 @@ const Index = () => {
           boxShadow: { repeat: Infinity, duration: 2, ease: 'easeInOut' },
         }}
         onClick={() => setGiftOpen(true)}
-        className="fixed bottom-8 right-8 z-40 w-14 h-14 rounded-full gradient-primary shadow-glow flex items-center justify-center hover:scale-125 transition-transform duration-300 group"
+        className={`fixed z-40 rounded-full gradient-primary shadow-glow flex items-center justify-center hover:scale-110 transition-transform duration-300 group ${
+          isMobile ? 'bottom-20 right-4 w-12 h-12' : 'bottom-8 right-8 w-14 h-14'
+        }`}
         aria-label="Gift"
       >
         <motion.div
