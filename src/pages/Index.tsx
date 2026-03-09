@@ -408,7 +408,7 @@ const ScriptureTransition = ({ t }: { t: (key: string) => string }) => {
           <div className="inline-block px-5 py-2 rounded-full glass-card-strong mb-5">
             <p className="font-sans-elegant text-xs tracking-[0.25em] uppercase text-muted-foreground font-medium">{t('index.scripture')}</p>
           </div>
-          <h2 className="font-serif-display text-3xl md:text-5xl text-foreground font-semibold mb-3">{t('verse.section.title')}</h2>
+          <h2 className="font-serif-display text-2xl md:text-5xl text-foreground font-semibold mb-3">{t('verse.section.title')}</h2>
           <p className="font-sans-elegant text-base text-muted-foreground max-w-lg mx-auto">{t('verse.section.subtitle')}</p>
         </motion.div>
 
@@ -750,20 +750,20 @@ const Index = () => {
             </p>
           </motion.div>
 
-          <h1 className="font-serif-display text-5xl md:text-7xl lg:text-8xl font-semibold text-foreground mb-2 leading-tight">
+          <h1 className="font-serif-display text-4xl md:text-7xl lg:text-8xl font-semibold text-foreground mb-2 leading-tight">
             {coupleName1}
           </h1>
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.5, type: "spring" }}
-            className="my-4"
+            className="my-3 md:my-4"
           >
-            <span className="inline-flex items-center justify-center w-16 h-16 rounded-full gradient-primary shadow-glow animate-pulse-love" role="img" aria-label="Heart">
-              <Heart className="w-7 h-7 text-primary-foreground fill-primary-foreground" />
+            <span className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full gradient-primary shadow-glow animate-pulse-love" role="img" aria-label="Heart">
+              <Heart className="w-5 h-5 md:w-7 md:h-7 text-primary-foreground fill-primary-foreground" />
             </span>
           </motion.div>
-          <p className="font-serif-display text-5xl md:text-7xl lg:text-8xl font-semibold text-foreground mb-6 leading-tight" aria-hidden="false">
+          <p className="font-serif-display text-4xl md:text-7xl lg:text-8xl font-semibold text-foreground mb-4 md:mb-6 leading-tight" aria-hidden="false">
             {coupleName2}
           </p>
 
@@ -811,7 +811,7 @@ const Index = () => {
               <motion.div
                 animate={{ y: [-6, 8, -6] }}
                 transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-                className="glass-card-strong rounded-3xl p-5 w-52"
+                className="glass-card-strong rounded-3xl p-4 md:p-5 w-44 md:w-52"
               >
                 <div className="flex items-center gap-2 mb-3">
                   <Heart className="w-4 h-4 text-rose-400 fill-rose-400 icon-glow" />
@@ -922,7 +922,7 @@ const Index = () => {
               <motion.div
                 animate={{ y: [-4, 8, -4] }}
                 transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
-                className="glass-card-strong rounded-3xl p-4 w-48"
+                className="glass-card-strong rounded-3xl p-3 md:p-4 w-40 md:w-48"
               >
                 <div className="flex items-center gap-1.5 mb-1.5">
                   <Sparkles className="w-3 h-3 text-amber-400 icon-glow" />
@@ -1242,8 +1242,8 @@ const Index = () => {
             <div className="inline-block px-5 py-2 rounded-full glass-card-strong mb-5">
               <p className="font-sans-elegant text-xs tracking-[0.25em] uppercase text-muted-foreground font-medium">{t('nav.details')}</p>
             </div>
-            <h2 className="font-serif-display text-3xl md:text-5xl text-foreground font-semibold mb-4">{t('details.title')}</h2>
-            <p className="font-sans-elegant text-lg text-muted-foreground max-w-lg mx-auto">{t('details.subtitle')}</p>
+            <h2 className="font-serif-display text-2xl md:text-5xl text-foreground font-semibold mb-4">{t('details.title')}</h2>
+            <p className="font-sans-elegant text-base md:text-lg text-muted-foreground max-w-lg mx-auto">{t('details.subtitle')}</p>
           </motion.div>
 
           <div className={`grid gap-5 ${isCourtMode ? 'grid-cols-2 max-w-lg mx-auto' : 'grid-cols-2 md:grid-cols-4'}`}>
@@ -1266,7 +1266,7 @@ const Index = () => {
                   whileHover={{ scale: 1.05, y: -6 }}
                   whileTap={{ scale: 0.96 }}
                   onClick={() => setActiveDetail(section.id)}
-                  className="group relative rounded-3xl p-6 md:p-7 text-center cursor-pointer overflow-hidden
+                  className="group relative rounded-3xl p-4 md:p-7 text-center cursor-pointer overflow-hidden
                     bg-white/60 dark:bg-white/[0.04] backdrop-blur-xl
                     border border-white/40 dark:border-white/10
                     shadow-[0_8px_32px_rgba(139,107,138,0.08),0_2px_8px_rgba(0,0,0,0.04)]
@@ -1277,11 +1277,11 @@ const Index = () => {
                   <div className={`absolute top-4 left-1/2 -translate-x-1/2 w-24 h-24 rounded-full bg-gradient-to-br ${section.color} blur-2xl pointer-events-none opacity-50 group-hover:opacity-80 transition-opacity duration-500`} />
 
                   {/* Icon circle with soft pastel bg */}
-                  <div className={`relative w-16 h-16 rounded-full bg-gradient-to-br ${section.color} flex items-center justify-center mb-5 mx-auto
+                  <div className={`relative w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br ${section.color} flex items-center justify-center mb-3 md:mb-5 mx-auto
                     ring-4 ring-white/50 dark:ring-white/10
                     group-hover:ring-primary/20 group-hover:shadow-glow
                     transition-all duration-500`}>
-                    <section.icon className={`w-7 h-7 ${section.iconColor} group-hover:scale-110 transition-transform duration-300`} />
+                    <section.icon className={`w-5 h-5 md:w-7 md:h-7 ${section.iconColor} group-hover:scale-110 transition-transform duration-300`} />
                   </div>
 
                   <h3 className="font-serif-display text-base md:text-lg text-foreground font-semibold mb-1.5">{section.title}</h3>
@@ -1415,7 +1415,7 @@ const Index = () => {
               <Heart className="w-5 h-5 text-rose-400 fill-rose-400 icon-glow" />
             </div>
 
-            <h2 className="font-serif-display text-4xl md:text-6xl text-foreground font-semibold mb-4">
+            <h2 className="font-serif-display text-3xl md:text-6xl text-foreground font-semibold mb-4">
               {t('rsvp.title')}
             </h2>
             <p className="font-serif-display text-lg text-primary italic mb-2">{t('love.tagline')}</p>

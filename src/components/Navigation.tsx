@@ -190,7 +190,7 @@ const Navigation = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
-              className="absolute top-[72px] left-2 right-2 md:hidden overflow-hidden rounded-2xl glass-card-strong shadow-[0_20px_60px_rgba(139,107,138,0.2)]"
+              className="absolute top-[64px] left-2 right-2 md:hidden overflow-hidden rounded-2xl bg-background/95 dark:bg-background/95 backdrop-blur-2xl border border-border/50 shadow-[0_20px_60px_rgba(139,107,138,0.25)]"
             >
               <div className="flex flex-col p-4 gap-1">
                 {mobileLinks.map(link => (
@@ -198,7 +198,7 @@ const Navigation = () => {
                     key={link.to}
                     to={link.to}
                     onClick={() => setMobileOpen(false)}
-                    className={`font-sans-elegant text-sm font-medium py-3 px-4 rounded-2xl transition-all duration-300 ${
+                    className={`font-sans-elegant text-[13px] font-medium py-2.5 px-3 rounded-2xl transition-all duration-300 ${
                       location.pathname === link.to
                         ? 'text-primary-foreground bg-primary font-semibold'
                         : 'text-foreground hover:bg-primary/10'

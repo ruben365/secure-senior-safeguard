@@ -1,64 +1,37 @@
 
 
-## Plan: Mobile UX/UI Enhancement — Full Site Polish
+## Mobile Performance Analysis (66%) — What's Actually Happening
 
-### Problems Identified
+After examining the audit data in detail, most of the 12 performance issues flagged are **not from your app code** — they come from platform-level infrastructure and cannot be fixed through code changes.
 
-From the mobile screenshots and code review:
+### Issues Outside Our Control (platform-level)
 
-1. **Navigation mobile menu** — Opens as a transparent overlay that bleeds into page content behind it (no solid background, no z-index isolation). Links overlap with the page content.
-2. **Hero section** — Names "Corine" and "Ruben" at `text-5xl` (3rem) are oversized on small screens. The heart icon container (w-16 h-16) and floating cards (w-52) take too much space on 390px screens.
-3. **Floating cards in hero** — The 3-column grid stacks vertically on mobile but the cards are still large (w-52, p-5/p-6) creating excessive scrolling.
-4. **Section headings** — Many headings use `text-3xl`/`text-4xl` on mobile (no responsive step-down), making them feel oversized.
-5. **Form inputs** — RSVP forms, Guestbook forms, and Enquiry forms have large padding and tall inputs (h-14) that feel bulky on mobile.
-6. **Detail cards** — The wedding detail cards and venue cards use generous padding (p-7) on mobile, making everything feel "blown up."
-7. **Footer** — Large text and spacing on mobile.
-8. **Countdown card** — Takes significant vertical space on mobile with large numbers.
+| Issue | Cause | Fixable? |
+|---|---|---|
+| **Redirects** (780ms) | Lovable staging → custom domain redirect | No |
+| **Render blocking requests** (2,240ms) | DM Sans font injected by Lovable badge | No (remove badge in Settings) |
+| **Unused JavaScript** (119 KiB) | Google Tag Manager scripts from Lovable | No |
+| **Cache lifetimes** (16 KiB) | Google Analytics cache headers | No |
+| **Document latency** (100ms) | Redirect chain | No |
+| **Network dependency tree** | Font chain through Google Fonts → gstatic | No |
 
-### Changes
+### Suspicious Audit Data
 
-**1. Navigation (`src/components/Navigation.tsx`)**
-- Give the mobile menu dropdown a solid opaque background with proper backdrop-blur and higher z-index
-- Reduce mobile link padding from `py-3 px-4` to `py-2.5 px-3`
-- Use smaller text for mobile links (`text-sm` to `text-[13px]`)
+The audit's LCP element references `bold-moves.webp` with text "Start your online journey / Build your website today" and a `div.services` selector — **this is NOT your wedding app**. This appears to be a domain parking page at `corineruben.com`. The CLS layout shift is also attributed to this parking page content.
 
-**2. Homepage (`src/pages/Index.tsx`)**
-- Scale down hero names from `text-5xl` to `text-4xl` on mobile
-- Reduce heart icon from `w-16 h-16` to `w-12 h-12` on mobile
-- Shrink floating cards: reduce width from `w-52` to `w-44`, reduce padding
-- Reduce countdown card padding and number size on mobile
-- Scale section headings: use `text-2xl` base instead of `text-3xl`/`text-4xl` on mobile
-- Tighten section vertical padding from `py-8` to `py-6` on mobile
-- Make detail cards padding `p-4` on mobile instead of `p-6`/`p-7`
-- Reduce icon circle sizes from `w-16 h-16` to `w-12 h-12` on mobile
-- Compact the CTA section for mobile
+This means the PageSpeed analysis may be hitting a cached or intermittent parking page at your custom domain rather than your actual app.
 
-**3. RSVP Page (`src/pages/RSVP.tsx`)**
-- Reduce title from `text-4xl` to `text-3xl` on mobile
-- Shrink form input heights from `h-14` to `h-11` on mobile
-- Tighten card padding from `p-7` to `p-5` on mobile
-- Scale down icon containers
-- Reduce ring images size on mobile
+### What Can Be Improved In Code
 
-**4. Guestbook (`src/pages/Guestbook.tsx`)**
-- Tighten form spacing and card padding for mobile
+Only two items are partially addressable:
 
-**5. Enquiries (`src/pages/Enquiries.tsx`)**
-- Reduce title and form spacing for mobile
+1. **SEO score (58%)** — Likely caused by the parking page content being analyzed. Need to verify the custom domain is properly serving the app. If it is, we can add structured data and improve meta tags.
 
-**6. Global Styles (`src/index.css`)**
-- Add mobile-specific overrides for `.btn-primary`, `.btn-outline` (slightly smaller padding/font on small screens)
-- Reduce `.glass-card-strong` padding defaults on mobile via media query
+2. **Font loading strategy** — The Google Fonts stylesheet in `index.html` is already using `media="print" onload="this.media='all'"` pattern (non-blocking). The render-blocking DM Sans flagged in the audit is from the Lovable badge, not our code.
 
-**7. Footer (`src/components/Footer.tsx`)**
-- Tighten mobile spacing
+### Recommended Action
 
-### Files to Edit
-1. `src/components/Navigation.tsx` — Fix mobile menu background, reduce link sizes
-2. `src/pages/Index.tsx` — Scale down hero, cards, headings, sections for mobile
-3. `src/pages/RSVP.tsx` — Compact forms and cards for mobile
-4. `src/pages/Guestbook.tsx` — Tighten mobile form spacing
-5. `src/pages/Enquiries.tsx` — Tighten mobile layout
-6. `src/index.css` — Mobile button and card size overrides
-7. `src/components/Footer.tsx` — Mobile spacing reduction
+The most impactful fix is **removing the Lovable badge** in your project Settings, which would eliminate the render-blocking DM Sans request (est. 2,240ms savings) and the unused JavaScript from Google Tag Manager (119 KiB). This alone could push the performance score significantly higher.
+
+No code changes are needed — the issues are infrastructure-level.
 

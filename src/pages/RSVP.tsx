@@ -395,7 +395,7 @@ const RSVP = () => {
           <div className="inline-block px-5 py-2 rounded-full glass-card-strong mb-5">
             <p className="font-sans-elegant text-xs tracking-[0.25em] uppercase text-muted-foreground font-medium">{t('venue.badge')}</p>
           </div>
-          <h2 className="font-serif-display text-4xl md:text-5xl text-foreground mb-4 font-semibold" style={{ letterSpacing: '-0.5px' }}>
+          <h2 className="font-serif-display text-3xl md:text-5xl text-foreground mb-4 font-semibold" style={{ letterSpacing: '-0.5px' }}>
             {isCourtMode ? t('venue.court.title') : t('venue.title')}
           </h2>
           <p className="font-sans-elegant text-base text-muted-foreground max-w-md mx-auto" style={{ lineHeight: 1.6 }}>
@@ -407,7 +407,7 @@ const RSVP = () => {
           <>
             {/* Court venue cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
-              <motion.div initial="hidden" animate="show" variants={fadeUp} className="glass-card-strong rounded-3xl p-7">
+              <motion.div initial="hidden" animate="show" variants={fadeUp} className="glass-card-strong rounded-3xl p-5 md:p-7">
                 <div className="flex items-start gap-4 mb-5">
                   <div className="w-14 h-14 rounded-2xl glass-card flex items-center justify-center text-2xl flex-shrink-0">⚖️</div>
                   <div>
@@ -422,7 +422,7 @@ const RSVP = () => {
                 <p className="font-sans-elegant text-xs text-muted-foreground/70">{t('court.wedding.officiant')}</p>
               </motion.div>
 
-              <motion.div initial="hidden" animate="show" variants={fadeUp} transition={{ delay: 0.1 }} className="glass-card-strong rounded-3xl p-7">
+              <motion.div initial="hidden" animate="show" variants={fadeUp} transition={{ delay: 0.1 }} className="glass-card-strong rounded-3xl p-5 md:p-7">
                 <div className="flex items-start gap-4 mb-5">
                   <div className="w-14 h-14 rounded-2xl glass-card flex items-center justify-center text-2xl flex-shrink-0">🍽️</div>
                   <div>
@@ -458,7 +458,7 @@ const RSVP = () => {
                   key={label}
                   initial="hidden" animate="show" variants={fadeUp}
                   transition={{ delay: i * 0.1 }}
-                  className="glass-card-strong rounded-3xl p-7"
+                  className="glass-card-strong rounded-3xl p-5 md:p-7"
                 >
                   <div className="flex items-start gap-4 mb-5">
                     <div className="w-14 h-14 rounded-2xl glass-card flex items-center justify-center text-2xl flex-shrink-0">
@@ -635,7 +635,7 @@ const RSVP = () => {
             <motion.img
               src={ringsImg}
               alt="Wedding rings"
-              className="absolute -top-8 -left-16 w-20 h-20 object-contain opacity-60 rotate-[-15deg] pointer-events-none"
+              className="absolute -top-6 -left-10 w-14 h-14 md:w-20 md:h-20 object-contain opacity-60 rotate-[-15deg] pointer-events-none"
               initial={{ opacity: 0, scale: 0.5, rotate: -30 }}
               animate={{ opacity: 0.6, scale: 1, rotate: -15 }}
               transition={{ delay: 0.3, duration: 0.8 }}
@@ -643,12 +643,12 @@ const RSVP = () => {
             <motion.img
               src={ringsImg}
               alt="Wedding rings"
-              className="absolute -top-6 -right-14 w-16 h-16 object-contain opacity-40 rotate-[20deg] pointer-events-none"
+              className="absolute -top-4 -right-8 w-12 h-12 md:w-16 md:h-16 object-contain opacity-40 rotate-[20deg] pointer-events-none"
               initial={{ opacity: 0, scale: 0.5, rotate: 40 }}
               animate={{ opacity: 0.4, scale: 1, rotate: 20 }}
               transition={{ delay: 0.5, duration: 0.8 }}
             />
-            <h1 className="font-serif-display text-4xl md:text-6xl text-foreground font-semibold relative z-10" style={{ letterSpacing: '-0.5px' }}>
+            <h1 className="font-serif-display text-3xl md:text-6xl text-foreground font-semibold relative z-10" style={{ letterSpacing: '-0.5px' }}>
               {t('rsvp.title')}
             </h1>
           </div>

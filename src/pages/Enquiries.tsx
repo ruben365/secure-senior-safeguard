@@ -54,7 +54,7 @@ const Enquiries = () => {
               {t('enquiries.badge')}
             </p>
           </div>
-          <h1 className="font-serif-display text-4xl md:text-5xl text-foreground mb-4 font-semibold">
+          <h1 className="font-serif-display text-3xl md:text-5xl text-foreground mb-4 font-semibold">
             {t('enquiries.title')}
           </h1>
           <p className="font-sans-elegant text-base text-muted-foreground max-w-md mx-auto">
@@ -77,7 +77,7 @@ const Enquiries = () => {
           </motion.div>
         ) : (
           <motion.form onSubmit={handleSubmit} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-            className="glass-card-strong rounded-3xl p-8 md:p-10 space-y-6">
+            className="glass-card-strong rounded-3xl p-5 md:p-10 space-y-5 md:space-y-6">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/20 to-violet-500/10 flex items-center justify-center">
                 <MessageCircleQuestion className="w-6 h-6 text-primary" />

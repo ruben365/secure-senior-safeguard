@@ -75,7 +75,7 @@ const Guestbook = () => {
           <div className="inline-block px-5 py-2 rounded-full glass-card-strong mb-5">
             <p className="font-sans-elegant text-xs tracking-[0.25em] uppercase text-muted-foreground font-medium">{t('guestbook.badge')}</p>
           </div>
-          <h1 className="font-serif-display text-4xl md:text-6xl text-foreground mb-4 font-semibold" style={{ letterSpacing: '-0.5px' }}>
+          <h1 className="font-serif-display text-3xl md:text-6xl text-foreground mb-4 font-semibold" style={{ letterSpacing: '-0.5px' }}>
             {t('guestbook.title')}
           </h1>
           <p className="font-sans-elegant text-base text-muted-foreground max-w-sm mx-auto" style={{ lineHeight: 1.6 }}>
@@ -87,7 +87,7 @@ const Guestbook = () => {
         <motion.form
           onSubmit={handleSubmit}
           initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-          className="glass-card-strong rounded-3xl p-8 mb-10 space-y-4"
+          className="glass-card-strong rounded-3xl p-5 md:p-8 mb-8 md:mb-10 space-y-4"
         >
           <div className="flex items-center gap-3 mb-2">
             <div className="w-11 h-11 rounded-2xl gradient-primary flex items-center justify-center">

@@ -60,11 +60,11 @@ const Footer = () => {
         <div className="absolute bottom-0 right-1/4 w-[400px] h-[250px] rounded-full bg-[hsl(var(--footer-fg))] opacity-[0.03] blur-[100px]" />
       </div>
 
-      <div className="container mx-auto px-6 md:px-12 py-20 relative z-10">
+      <div className="container mx-auto px-6 md:px-12 py-12 md:py-20 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8 mb-14">
           {/* Brand */}
           <div className="md:col-span-1">
-            <span className="font-serif-display text-2xl font-semibold text-[hsl(var(--footer-fg))] block mb-5">Corine & Ruben's Wedding</span>
+            <span className="font-serif-display text-xl md:text-2xl font-semibold text-[hsl(var(--footer-fg))] block mb-4 md:mb-5">Corine & Ruben's Wedding</span>
             <p className="font-sans-elegant text-sm leading-relaxed mb-6 text-[hsl(var(--footer-muted))]">
               {t('hero.tagline')}.
             </p>
