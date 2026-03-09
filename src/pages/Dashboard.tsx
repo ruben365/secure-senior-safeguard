@@ -863,6 +863,11 @@ const Dashboard = () => {
             <VenueManager />
           </TabsContent>
 
+          {/* ═══ LIVESTREAM TAB ═══ */}
+          <TabsContent value="livestream" className="space-y-6">
+            <LivestreamManager />
+          </TabsContent>
+
           {/* ═══ SETTINGS TAB ═══ */}
           <TabsContent value="settings" className="space-y-6">
             <SettingsManager />
