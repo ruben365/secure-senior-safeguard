@@ -62,7 +62,7 @@ interface UserProfile {
   full_name: string | null;
   avatar_url: string | null;
   created_at: string;
-  last_login_at: string | null;
+  last_login_at?: string | null;
 }
 
 interface UserWithRole extends UserProfile {
@@ -96,7 +96,7 @@ export default function SuperAdminUserManagement() {
       const { data: profiles, error: profilesError } = await supabase
         .from("profiles")
         .select(
-          "id, email, username, full_name, avatar_url, created_at, last_login_at",
+          "id, email, username, full_name, avatar_url, created_at",
         )
         .order("created_at", { ascending: false });
 
@@ -116,13 +116,20 @@ export default function SuperAdminUserManagement() {
 
       if (subsError) throw subsError;
 
+      // Fetch security audit data (last login)
+      const { data: securityAudit } = await supabase
+        .from("profile_security_audit")
+        .select("user_id, last_login_at");
+
       // Combine data
       const usersWithData: UserWithRole[] = (profiles || []).map((profile) => {
         const userRole = roles?.find((r) => r.user_id === profile.id);
         const userSub = subscriptions?.find((s) => s.user_id === profile.id);
+        const audit = securityAudit?.find((a) => a.user_id === profile.id);
 
         return {
           ...profile,
+          last_login_at: audit?.last_login_at || null,
           role: userRole?.role || null,
           subscription_status: userSub?.status || null,
           subscription_plan: userSub?.plan_name || null,
