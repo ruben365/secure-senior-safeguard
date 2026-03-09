@@ -327,6 +327,7 @@ const Dashboard = () => {
           </p>
         </motion.div>
 
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
           <TabsList className="glass-card-strong rounded-2xl p-1.5 mx-auto flex flex-wrap w-fit gap-1 max-w-full">
             <TabsTrigger value="overview" className="rounded-full px-4 py-2 font-sans-elegant text-xs font-bold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground">
               <BarChart3 className="w-3.5 h-3.5 mr-1.5" /> {t('dashboard.overview')}
