@@ -1374,7 +1374,7 @@ const RSVP = () => {
               </div>
 
               <div className="flex gap-3">
-                <button onClick={() => setStep('table')} className="flex-1 btn-outline justify-center">{t('rsvp.back')}</button>
+                <button onClick={() => setStep(isCourtMode ? 'info' : 'table')} className="flex-1 btn-outline justify-center">{t('rsvp.back')}</button>
                 <button onClick={handleSubmitRsvp}
                   className="flex-1 btn-primary justify-center"
                 >
