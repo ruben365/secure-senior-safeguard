@@ -1487,9 +1487,10 @@ const Index = () => {
                 </motion.div>
             )}
             </div>
-          </DialogContent>
-        </Dialog>
+          </LazyDialogContent>
+        </LazyDialog>
       )}
+      </Suspense>
 
       {/* ===== GIFT PICKER (DRAWER on mobile, DIALOG on desktop) ===== */}
       {isMobile ?
