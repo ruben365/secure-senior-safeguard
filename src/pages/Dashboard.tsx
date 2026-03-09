@@ -24,6 +24,7 @@ import PhotoManager from '@/components/dashboard/PhotoManager';
 import FaqManager from '@/components/dashboard/FaqManager';
 import VenueManager from '@/components/dashboard/VenueManager';
 import SettingsManager from '@/components/dashboard/SettingsManager';
+import LivestreamManager from '@/components/dashboard/LivestreamManager';
 
 
 const TABLE_NAMES = [
