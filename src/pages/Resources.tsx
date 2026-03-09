@@ -234,7 +234,7 @@ function Resources() {
               <RotatingHeadlines headlines={heroHeadlines} className="" />
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-              Expert-curated guides, tools, and products designed to keep you
+              Expert-curated guides and tools designed to keep you
               and your family safe
             </p>
           </div>
