@@ -633,7 +633,7 @@ function Resources() {
             </h2>
             <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground mb-6">
               Welcome to InVision Network's resource center. Here you'll find carefully curated
-              <strong className="text-foreground"> e-books, digital guides, softcover books, and security gadgets</strong>.
+              <strong className="text-foreground"> e-books and digital guides</strong>.
               All designed to help you and your family stay safe in the digital age.
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
