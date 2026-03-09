@@ -897,7 +897,7 @@ const Index = () => {
               >
                 <div className="flex items-center gap-1.5 mb-1.5">
                   <Sparkles className="w-3 h-3 text-amber-400 icon-glow" />
-                  <p className="font-sans-elegant text-xs text-foreground/60 font-medium">{t('hero.date')}</p>
+                  <p className="font-sans-elegant text-xs text-foreground/60 font-medium">{isCourtMode ? t('court.wedding.date') : t('hero.date')}</p>
                 </div>
                 <p className="font-sans-elegant text-sm font-bold text-foreground drop-shadow-sm">{t('index.beginJourney')}</p>
               </motion.div>
