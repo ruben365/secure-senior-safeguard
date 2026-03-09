@@ -83,7 +83,7 @@ function Resources() {
   const [translationDialogOpen, setTranslationDialogOpen] = useState(false);
   const [readBooksOpen, setReadBooksOpen] = useState(false);
 
-  const handleBookClick = (book: BookItem) => {
+  const handleBookClick = (book: (typeof BOOK_CATALOG)[number]) => {
     setSelectedBook(book);
     setBookModalOpen(true);
   };
