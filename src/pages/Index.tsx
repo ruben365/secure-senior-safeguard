@@ -1553,20 +1553,20 @@ const Index = () => {
                 </div>
               </div>
             </div>
-          </DrawerContent>
-        </Drawer> :
+          </LazyDrawerContent>
+        </LazyDrawer> :
 
-      <Dialog open={giftOpen} onOpenChange={setGiftOpen}>
-          <DialogContent className="max-w-md">
-            <DialogHeader>
+      <LazyDialog open={giftOpen} onOpenChange={setGiftOpen}>
+          <LazyDialogContent className="max-w-md">
+            <LazyDialogHeader>
               <div className="w-16 h-16 rounded-full gradient-primary flex items-center justify-center mx-auto mb-3 shadow-glow">
                 <Gift className="w-7 h-7 text-primary-foreground" />
               </div>
-              <DialogTitle className="font-serif-display text-2xl text-center">{t('registry.title')}</DialogTitle>
-              <DialogDescription className="font-sans-elegant text-center text-muted-foreground">
+              <LazyDialogTitle className="font-serif-display text-2xl text-center">{t('registry.title')}</LazyDialogTitle>
+              <LazyDialogDescription className="font-sans-elegant text-center text-muted-foreground">
                 {t('registry.message')}
-              </DialogDescription>
-            </DialogHeader>
+              </LazyDialogDescription>
+            </LazyDialogHeader>
 
             {/* Quick amounts */}
             <div className="grid grid-cols-2 gap-3 pt-2">
