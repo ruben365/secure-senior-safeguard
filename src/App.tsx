@@ -66,7 +66,8 @@ const App = () => (
     <ThemeProvider>
       <LanguageProvider>
         <MusicProvider>
-          <TooltipProvider>
+          <Suspense fallback={null}>
+            <TooltipProvider>
             <Toaster />
             <Sonner />
             <BrowserRouter>
