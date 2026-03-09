@@ -47,6 +47,7 @@ const Footer = () => {
   ];
 
   const inspirationLinks = [
+    { label: t('nav.gallery'), to: '/gallery' },
     { label: t('nav.guestbook'), to: '/guestbook' },
     { label: t('nav.enquiries'), to: '/enquiries' },
     { label: t('nav.registry'), to: '/registry' },
