@@ -1,12 +1,22 @@
 import { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { BookOpen, ArrowLeft, ChevronLeft, ChevronRight, Lock, LogOut } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { BookOpen, ArrowLeft, ChevronLeft, ChevronRight, Lock, LogOut, Library, Link2, Clock, Bookmark } from "lucide-react";
 import { SEO } from "@/components/SEO";
-import { toast } from "@/hooks/use-toast";
+import { toast } from "sonner";
+import { useToast } from "@/hooks/use-toast";
+import { ReadingModeToggle, MODE_CLASSES, CARD_CLASSES, FONT_SIZE_CLASSES } from "@/components/reader/ReadingModeToggle";
+import type { ReadingMode, FontSize } from "@/components/reader/ReadingModeToggle";
+import { InternalLibrary } from "@/components/reader/InternalLibrary";
+import { BookRecommendations } from "@/components/reader/BookRecommendations";
+import { ReadingProgressBar } from "@/components/ReadingProgressBar";
+import { BOOK_CATALOG, type BookItem } from "@/config/bookCatalog";
+import { cn } from "@/lib/utils";
 
 // Import all book covers for display
 import bookAiFundamentals from "@/assets/book-ai-fundamentals.jpg";
@@ -47,7 +57,7 @@ interface BookData {
   chapters: { title: string; content: string }[];
 }
 
-const BOOK_CATALOG: Record<string, Omit<BookData, "chapters"> & { chapters: { title: string; content: string }[] }> = {
+const BOOK_CONTENT: Record<string, Omit<BookData, "chapters"> & { chapters: { title: string; content: string }[] }> = {
   "book-ai-fundamentals": { id: "book-ai-fundamentals", name: "AI Fundamentals", image: bookAiFundamentals, chapters: [
     { title: "Chapter 1: What Is Artificial Intelligence?", content: "Artificial Intelligence (AI) refers to the simulation of human intelligence in machines programmed to think, learn, and adapt. This chapter explores the foundational concepts of AI, from machine learning algorithms to neural networks, and how these technologies are reshaping every aspect of our digital lives.\n\nAI systems can be categorized into narrow AI (designed for specific tasks) and general AI (theoretical systems with human-like reasoning). Understanding these distinctions is crucial for recognizing both the benefits and risks that AI presents to everyday users.\n\nKey areas covered include natural language processing, computer vision, and predictive analytics — all of which play a role in modern scam detection and prevention systems." },
     { title: "Chapter 2: AI in Cybersecurity", content: "AI has become an essential tool in the cybersecurity arsenal. From detecting unusual network patterns to identifying phishing attempts in real-time, AI-powered security systems can process millions of data points faster than any human analyst.\n\nThis chapter examines how organizations deploy AI for threat detection, anomaly identification, and automated response. You'll learn about the dual-edged nature of AI in security — how the same technology that protects can also be weaponized by malicious actors.\n\nTopics include behavioral analysis, deep learning for malware detection, and how AI assists in maintaining digital privacy across an increasingly connected world." },
@@ -65,44 +75,41 @@ const BOOK_CATALOG: Record<string, Omit<BookData, "chapters"> & { chapters: { ti
   ]},
 };
 
-// Generate simple chapter content for books not explicitly defined
+// Generate generic content for books not explicitly defined
+const bookImageMap: Record<string, { name: string; image: string }> = {
+  "book-senior-tech": { name: "Senior Tech Handbook", image: bookSeniorTechSafety },
+  "book-digital-privacy": { name: "Digital Privacy Mastery", image: bookDigitalPrivacy },
+  "book-deepfake": { name: "Deepfake Detection", image: bookDeepfakeDetection },
+  "book-password": { name: "Password Security", image: bookPasswordSecurity },
+  "book-social-media": { name: "Social Media Safety", image: bookSocialMediaSafety },
+  "book-online-shopping": { name: "Online Shopping Guide", image: bookOnlineShopping },
+  "book-identity-theft": { name: "Identity Theft Prevention", image: bookIdentityTheft },
+  "book-business-cyber": { name: "Business Cybersecurity", image: bookBusinessCyber },
+  "book-ai-management": { name: "AI Management Guide", image: bookAiManagement },
+  "book-being-real-ai": { name: "Being Real in AI World", image: bookBeingRealAi },
+  "book-auth-personalities": { name: "Auth of Personalities", image: bookAuthPersonalities },
+  "book-auth-friendship-v2": { name: "Auth of Friendship V2", image: bookAuthFriendshipV2 },
+  "book-cyber-kids": { name: "Cyber Awareness for Kids", image: bookCyberKids },
+  "book-smart-home": { name: "Smart Home Security", image: bookSmartHome },
+  "book-phishing-defense": { name: "Email Phishing Defense", image: bookPhishingDefense },
+  "book-banking-safety": { name: "Banking & Financial Safety", image: bookBankingSafety },
+  "book-mobile-security": { name: "Mobile Phone Security", image: bookMobileSecurity },
+  "book-crypto-defense": { name: "Crypto Scam Defense", image: bookCryptoDefense },
+  "book-romance-scam": { name: "Romance Scam Awareness", image: bookRomanceScam },
+  "book-voice-clone": { name: "Voice Clone Detection", image: bookVoiceClone },
+  "book-medicare-fraud": { name: "Medicare Fraud Protection", image: bookMedicareFraud },
+  "book-email-safety": { name: "Email Safety Essentials", image: bookEmailSafety },
+  "book-tax-scam": { name: "Tax Scam Prevention", image: bookTaxScam },
+  "book-tech-support": { name: "Tech Support Fraud Defense", image: bookTechSupport },
+  "book-grandparent-scam": { name: "Grandparent Scam Defense", image: bookGrandparentScam },
+  "book-investment-fraud": { name: "Investment Fraud Guide", image: bookInvestmentFraud },
+  "book-charity-scam": { name: "Charity Scam Awareness", image: bookCharityScam },
+};
+
 function getBookData(bookId: string): BookData | null {
-  if (BOOK_CATALOG[bookId]) return BOOK_CATALOG[bookId];
-
-  // Generic content for other books
-  const bookMap: Record<string, { name: string; image: string }> = {
-    "book-senior-tech": { name: "Senior Tech Handbook", image: bookSeniorTechSafety },
-    "book-digital-privacy": { name: "Digital Privacy Mastery", image: bookDigitalPrivacy },
-    "book-deepfake": { name: "Deepfake Detection", image: bookDeepfakeDetection },
-    "book-password": { name: "Password Security", image: bookPasswordSecurity },
-    "book-social-media": { name: "Social Media Safety", image: bookSocialMediaSafety },
-    "book-online-shopping": { name: "Online Shopping Guide", image: bookOnlineShopping },
-    "book-identity-theft": { name: "Identity Theft Prevention", image: bookIdentityTheft },
-    "book-business-cyber": { name: "Business Cybersecurity", image: bookBusinessCyber },
-    "book-ai-management": { name: "AI Management Guide", image: bookAiManagement },
-    "book-being-real-ai": { name: "Being Real in AI World", image: bookBeingRealAi },
-    "book-auth-personalities": { name: "Auth of Personalities", image: bookAuthPersonalities },
-    "book-auth-friendship-v2": { name: "Auth of Friendship V2", image: bookAuthFriendshipV2 },
-    "book-cyber-kids": { name: "Cyber Awareness for Kids", image: bookCyberKids },
-    "book-smart-home": { name: "Smart Home Security", image: bookSmartHome },
-    "book-phishing-defense": { name: "Email Phishing Defense", image: bookPhishingDefense },
-    "book-banking-safety": { name: "Banking & Financial Safety", image: bookBankingSafety },
-    "book-mobile-security": { name: "Mobile Phone Security", image: bookMobileSecurity },
-    "book-crypto-defense": { name: "Crypto Scam Defense", image: bookCryptoDefense },
-    "book-romance-scam": { name: "Romance Scam Awareness", image: bookRomanceScam },
-    "book-voice-clone": { name: "Voice Clone Detection", image: bookVoiceClone },
-    "book-medicare-fraud": { name: "Medicare Fraud Protection", image: bookMedicareFraud },
-    "book-email-safety": { name: "Email Safety Essentials", image: bookEmailSafety },
-    "book-tax-scam": { name: "Tax Scam Prevention", image: bookTaxScam },
-    "book-tech-support": { name: "Tech Support Fraud Defense", image: bookTechSupport },
-    "book-grandparent-scam": { name: "Grandparent Scam Defense", image: bookGrandparentScam },
-    "book-investment-fraud": { name: "Investment Fraud Guide", image: bookInvestmentFraud },
-    "book-charity-scam": { name: "Charity Scam Awareness", image: bookCharityScam },
-  };
-
-  const info = bookMap[bookId];
+  if (BOOK_CONTENT[bookId]) return BOOK_CONTENT[bookId];
+  const info = bookImageMap[bookId];
   if (!info) return null;
-
   return {
     id: bookId,
     name: info.name,
@@ -115,35 +122,105 @@ function getBookData(bookId: string): BookData | null {
   };
 }
 
+function estimateReadingTime(content: string): number {
+  const words = content.split(/\s+/).length;
+  return Math.max(1, Math.ceil(words / 200));
+}
+
 export default function BookReader() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const { toast: toastHook } = useToast();
   const [session, setSession] = useState<{ bookIds: string[]; customerName: string; email: string } | null>(null);
   const [selectedBook, setSelectedBook] = useState<BookData | null>(null);
   const [currentChapter, setCurrentChapter] = useState(0);
+  const [activeTab, setActiveTab] = useState("my-books");
+
+  // Reading preferences
+  const [readingMode, setReadingMode] = useState<ReadingMode>(() => {
+    return (localStorage.getItem("readingMode") as ReadingMode) || "day";
+  });
+  const [fontSize, setFontSize] = useState<FontSize>(() => {
+    return (localStorage.getItem("readerFontSize") as FontSize) || "md";
+  });
+  const [bookmarkedChapter, setBookmarkedChapter] = useState<Record<string, number>>({});
+
+  // Persist reading preferences
+  useEffect(() => { localStorage.setItem("readingMode", readingMode); }, [readingMode]);
+  useEffect(() => { localStorage.setItem("readerFontSize", fontSize); }, [fontSize]);
+
+  // Load bookmarks from sessionStorage
+  useEffect(() => {
+    try {
+      const saved = sessionStorage.getItem("readerBookmarks");
+      if (saved) setBookmarkedChapter(JSON.parse(saved));
+    } catch { /* ignore */ }
+  }, []);
+
+  const saveBookmark = useCallback((bookId: string, chapter: number) => {
+    setBookmarkedChapter(prev => {
+      const next = { ...prev, [bookId]: chapter };
+      sessionStorage.setItem("readerBookmarks", JSON.stringify(next));
+      return next;
+    });
+    toast.success("Bookmark saved!");
+  }, []);
 
   useEffect(() => {
     const raw = sessionStorage.getItem("bookReaderSession");
     if (!raw) {
-      toast({ title: "Session expired", description: "Please sign in with your Access ID to read your books.", variant: "destructive" });
+      toastHook({ title: "Session expired", description: "Please sign in with your Access ID to read your books.", variant: "destructive" });
       navigate("/resources");
       return;
     }
     try {
       setSession(JSON.parse(raw));
     } catch {
-      toast({ title: "Session error", description: "Please sign in again with your Access ID.", variant: "destructive" });
+      toastHook({ title: "Session error", description: "Please sign in again with your Access ID.", variant: "destructive" });
       navigate("/resources");
     }
-  }, [navigate]);
+  }, [navigate, toastHook]);
 
-  // Disable right-click on reader
-  const handleContextMenu = useCallback((e: React.MouseEvent) => {
-    e.preventDefault();
-  }, []);
+  // Scroll to top on chapter change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentChapter, selectedBook]);
+
+  const handleContextMenu = useCallback((e: React.MouseEvent) => { e.preventDefault(); }, []);
 
   const handleLogout = () => {
     sessionStorage.removeItem("bookReaderSession");
+    sessionStorage.removeItem("readerBookmarks");
     navigate("/resources");
+  };
+
+  const handleShareLink = () => {
+    if (!session) return;
+    const raw = sessionStorage.getItem("bookReaderSession");
+    if (!raw) return;
+    // We don't expose the access ID in URLs for security — instead share the reader URL
+    const url = `${window.location.origin}/reader`;
+    navigator.clipboard.writeText(url).then(() => {
+      toast.success("Reader link copied! Share it and use your Access ID to log in from any device.");
+    }).catch(() => {
+      toast.info("Reader URL: " + url);
+    });
+  };
+
+  const handleBuyFromLibrary = (book: BookItem) => {
+    // Navigate to resources page with the book pre-selected for purchase
+    navigate("/resources");
+    toast.info(`Visit Resources to purchase "${book.name}" — use your reader account for 5% off!`);
+  };
+
+  const handleReadFromLibrary = (bookId: string) => {
+    const bookData = getBookData(bookId);
+    if (bookData) {
+      const savedChapter = bookmarkedChapter[bookId] ?? 0;
+      setSelectedBook(bookData);
+      setCurrentChapter(savedChapter);
+      setActiveTab("my-books");
+    }
   };
 
   if (!session) return null;
@@ -152,61 +229,120 @@ export default function BookReader() {
     .map((id) => getBookData(id))
     .filter((b): b is BookData => b !== null);
 
-  // Book selection view
+  // Dashboard view (no book selected)
   if (!selectedBook) {
     return (
       <>
         <SEO title="Book Reader — InVision Network" description="Read your purchased books securely online." />
         <Navigation />
-        <div className="min-h-screen bg-background pt-24 pb-16">
+        <div className={cn("min-h-screen pt-24 pb-16 transition-colors duration-300", MODE_CLASSES[readingMode])}>
           <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between mb-8">
+            {/* Header */}
+            <div className="flex items-center justify-between mb-6">
               <div>
-                <h1 className="text-3xl font-bold text-foreground">Your Library</h1>
+                <h1 className="text-3xl font-bold">Your Library</h1>
                 <p className="text-muted-foreground mt-1">
-                  Welcome back, {session.customerName}! You have {availableBooks.length} book{availableBooks.length !== 1 ? "s" : ""}.
+                  Welcome back, <span className="font-medium">{session.customerName}</span>!
                 </p>
               </div>
-              <Button variant="outline" onClick={handleLogout} size="sm">
-                <LogOut className="h-4 w-4 mr-2" />
-                Sign Out
-              </Button>
+              <div className="flex items-center gap-2">
+                <ReadingModeToggle
+                  mode={readingMode}
+                  onModeChange={setReadingMode}
+                  fontSize={fontSize}
+                  onFontSizeChange={setFontSize}
+                />
+                <Button variant="ghost" size="sm" onClick={handleShareLink} title="Share reader link">
+                  <Link2 className="h-4 w-4" />
+                </Button>
+                <Button variant="outline" onClick={handleLogout} size="sm">
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Sign Out
+                </Button>
+              </div>
             </div>
 
-            {availableBooks.length === 0 ? (
-              <Card className="p-12 text-center">
-                <Lock className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                <p className="text-lg font-medium">No books found for this purchase.</p>
-                <p className="text-muted-foreground mt-2">Please contact support if you believe this is an error.</p>
-              </Card>
-            ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                {availableBooks.map((book) => (
-                  <Card
-                    key={book.id}
-                    className="group cursor-pointer overflow-hidden hover:shadow-lg transition-shadow duration-200"
-                    onClick={() => { setSelectedBook(book); setCurrentChapter(0); }}
-                  >
-                    <div className="aspect-[3/4] overflow-hidden">
-                      <img
-                        src={book.image}
-                        alt={book.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        draggable={false}
-                      />
-                    </div>
-                    <div className="p-3">
-                      <h3 className="font-semibold text-sm line-clamp-2">{book.name}</h3>
-                      <p className="text-xs text-muted-foreground mt-1">{book.chapters.length} chapters</p>
-                      <Button size="sm" className="w-full mt-2" variant="outline">
-                        <BookOpen className="h-3 w-3 mr-1" />
-                        Read
-                      </Button>
-                    </div>
+            {/* Tabs: My Books / Browse Library */}
+            <Tabs value={activeTab} onValueChange={setActiveTab}>
+              <TabsList className="mb-6">
+                <TabsTrigger value="my-books" className="gap-1.5">
+                  <BookOpen className="h-4 w-4" />
+                  My Books ({availableBooks.length})
+                </TabsTrigger>
+                <TabsTrigger value="library" className="gap-1.5">
+                  <Library className="h-4 w-4" />
+                  Browse Library
+                </TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="my-books">
+                {availableBooks.length === 0 ? (
+                  <Card className={cn("p-12 text-center", CARD_CLASSES[readingMode])}>
+                    <Lock className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                    <p className="text-lg font-medium">No books found for this purchase.</p>
+                    <p className="text-muted-foreground mt-2">Please contact support if you believe this is an error.</p>
                   </Card>
-                ))}
-              </div>
-            )}
+                ) : (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    {availableBooks.map((book) => {
+                      const bookmark = bookmarkedChapter[book.id];
+                      return (
+                        <Card
+                          key={book.id}
+                          className={cn(
+                            "group cursor-pointer overflow-hidden hover:shadow-lg transition-shadow duration-200",
+                            CARD_CLASSES[readingMode]
+                          )}
+                          onClick={() => {
+                            setSelectedBook(book);
+                            setCurrentChapter(bookmark ?? 0);
+                          }}
+                        >
+                          <div className="aspect-[3/4] overflow-hidden relative">
+                            <img
+                              src={book.image}
+                              alt={book.name}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              draggable={false}
+                            />
+                            {bookmark !== undefined && (
+                              <Badge className="absolute top-2 left-2 bg-primary text-primary-foreground text-[10px]">
+                                <Bookmark className="h-2.5 w-2.5 mr-0.5" />
+                                Ch. {bookmark + 1}
+                              </Badge>
+                            )}
+                          </div>
+                          <div className="p-3">
+                            <h3 className="font-semibold text-sm line-clamp-2">{book.name}</h3>
+                            <p className="text-xs text-muted-foreground mt-1">{book.chapters.length} chapters</p>
+                            <Button size="sm" className="w-full mt-2" variant="outline">
+                              <BookOpen className="h-3 w-3 mr-1" />
+                              {bookmark !== undefined ? "Continue Reading" : "Read"}
+                            </Button>
+                          </div>
+                        </Card>
+                      );
+                    })}
+                  </div>
+                )}
+
+                {/* Recommendations */}
+                <BookRecommendations
+                  ownedBookIds={session.bookIds}
+                  onBuy={handleBuyFromLibrary}
+                />
+              </TabsContent>
+
+              <TabsContent value="library">
+                <InternalLibrary
+                  ownedBookIds={session.bookIds}
+                  onBuy={handleBuyFromLibrary}
+                  onRead={handleReadFromLibrary}
+                  email={session.email}
+                  customerName={session.customerName}
+                />
+              </TabsContent>
+            </Tabs>
           </div>
         </div>
         <Footer />
@@ -216,10 +352,12 @@ export default function BookReader() {
 
   // Reader view — secure, no-print, no-copy
   const chapter = selectedBook.chapters[currentChapter];
+  const readingTime = estimateReadingTime(chapter.content);
 
   return (
     <>
       <SEO title={`${selectedBook.name} — InVision Network Reader`} description="Secure book reader." />
+      <ReadingProgressBar showPercentage />
       {/* Print blocker */}
       <style>{`
         @media print {
@@ -236,31 +374,45 @@ export default function BookReader() {
       `}</style>
       <Navigation />
       <div
-        className="secure-reader min-h-screen bg-background pt-24 pb-16"
+        className={cn("secure-reader min-h-screen pt-24 pb-16 transition-colors duration-300", MODE_CLASSES[readingMode])}
         onContextMenu={handleContextMenu}
       >
         <div className="container mx-auto px-4 max-w-4xl">
           {/* Reader Header */}
-          <div className="flex items-center gap-4 mb-6">
+          <div className="flex items-center gap-2 mb-4 flex-wrap">
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setSelectedBook(null)}
             >
               <ArrowLeft className="h-4 w-4 mr-1" />
-              Back to Library
+              Library
             </Button>
-            <div className="flex-1 text-center">
-              <h2 className="font-semibold text-foreground text-sm md:text-base truncate">
-                {selectedBook.name}
-              </h2>
+            <div className="flex-1 text-center min-w-0">
+              <h2 className="font-semibold text-sm md:text-base truncate">{selectedBook.name}</h2>
               <p className="text-xs text-muted-foreground">
                 Chapter {currentChapter + 1} of {selectedBook.chapters.length}
               </p>
             </div>
-            <Button variant="ghost" size="sm" onClick={handleLogout}>
-              <LogOut className="h-4 w-4" />
-            </Button>
+            <div className="flex items-center gap-1">
+              <ReadingModeToggle
+                mode={readingMode}
+                onModeChange={setReadingMode}
+                fontSize={fontSize}
+                onFontSizeChange={setFontSize}
+              />
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => saveBookmark(selectedBook.id, currentChapter)}
+                title="Bookmark this chapter"
+              >
+                <Bookmark className="h-4 w-4" />
+              </Button>
+              <Button variant="ghost" size="sm" onClick={handleLogout}>
+                <LogOut className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
 
           {/* Chapter Navigation Tabs */}
@@ -278,16 +430,28 @@ export default function BookReader() {
             ))}
           </div>
 
+          {/* Reading time estimate */}
+          <div className="flex items-center gap-2 mb-4 text-xs text-muted-foreground">
+            <Clock className="h-3.5 w-3.5" />
+            <span>~{readingTime} min read</span>
+            {bookmarkedChapter[selectedBook.id] === currentChapter && (
+              <Badge variant="outline" className="text-[10px]">
+                <Bookmark className="h-2.5 w-2.5 mr-0.5" />
+                Bookmarked
+              </Badge>
+            )}
+          </div>
+
           {/* Reader Content */}
-          <Card className="p-6 md:p-10 min-h-[60vh]">
+          <Card className={cn("p-6 md:p-10 min-h-[60vh]", CARD_CLASSES[readingMode])}>
             <div className="flex items-center gap-2 mb-2 opacity-50">
               <Lock className="h-3 w-3" />
               <span className="text-[10px] uppercase tracking-wider font-medium">Protected Content — InVision Network</span>
             </div>
-            <h3 className="text-2xl font-bold text-foreground mb-6">{chapter.title}</h3>
-            <div className="prose prose-lg dark:prose-invert max-w-none">
+            <h3 className="text-2xl font-bold mb-6">{chapter.title}</h3>
+            <div className={cn("prose dark:prose-invert max-w-none", FONT_SIZE_CLASSES[fontSize])}>
               {chapter.content.split("\n\n").map((paragraph, i) => (
-                <p key={i} className="text-foreground/90 leading-relaxed mb-4 text-base">
+                <p key={i} className="mb-4 opacity-90">
                   {paragraph}
                 </p>
               ))}
@@ -307,14 +471,14 @@ export default function BookReader() {
               onClick={() => setCurrentChapter((c) => c - 1)}
             >
               <ChevronLeft className="h-4 w-4 mr-1" />
-              Previous Chapter
+              Previous
             </Button>
             <Button
               variant="outline"
               disabled={currentChapter === selectedBook.chapters.length - 1}
               onClick={() => setCurrentChapter((c) => c + 1)}
             >
-              Next Chapter
+              Next
               <ChevronRight className="h-4 w-4 ml-1" />
             </Button>
           </div>
