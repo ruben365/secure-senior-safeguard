@@ -481,9 +481,10 @@ const Index = () => {
   const [paymentFormOpen, setPaymentFormOpen] = useState(false);
 
   useEffect(() => {
+    const targetDate = new Date(weddingDateStr);
     const update = () => {
       const now = new Date();
-      const diff = weddingDate.getTime() - now.getTime();
+      const diff = targetDate.getTime() - now.getTime();
       if (diff <= 0) return;
       setCountdown({
         days: Math.floor(diff / (1000 * 60 * 60 * 24)),
@@ -495,7 +496,7 @@ const Index = () => {
     update();
     const interval = setInterval(update, 1000);
     return () => clearInterval(interval);
-  }, [weddingDate]);
+  }, [weddingDateStr]);
 
   // Handle payment return from Stripe Checkout
   useEffect(() => {
