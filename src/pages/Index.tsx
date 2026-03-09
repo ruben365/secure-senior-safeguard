@@ -15,11 +15,11 @@ import { toast } from 'sonner';
 import { useSiteImages, useSiteSettings } from '@/hooks/useSiteContent';
 
 
-import heroImg from '@/assets/hero-wedding.jpg';
-import flowersImgSmall from '@/assets/flowers-lavender.jpg';
-import ringsImgSmall from '@/assets/rings.jpg';
+import heroImg from '@/assets/hero-wedding-opt.webp';
+import flowersImgSmall from '@/assets/flowers-lavender-opt.webp';
+import ringsImgSmall from '@/assets/rings-opt.webp';
 import cakeImgSmall from '@/assets/cake.jpg';
-import coupleImgSmall from '@/assets/couple-lavender.jpg';
+import coupleImgSmall from '@/assets/couple-lavender-opt.webp';
 
 const giftTiers = [
 { amount: 60, emoji: '💐', labelKey: 'registry.tier.bouquet' },
