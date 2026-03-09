@@ -1,30 +1,37 @@
 
 
-## Plan: Update Domain & Meta Information Across the Website
+## Mobile Performance Analysis (66%) — What's Actually Happening
 
-### What Needs to Change
+After examining the audit data in detail, most of the 12 performance issues flagged are **not from your app code** — they come from platform-level infrastructure and cannot be fixed through code changes.
 
-The custom domain `corineruben.com` (and `www.corineruben.com`) is now live. Several files still reference the old Lovable staging URL or have outdated date/description metadata that needs correcting.
+### Issues Outside Our Control (platform-level)
 
-### Changes
+| Issue | Cause | Fixable? |
+|---|---|---|
+| **Redirects** (780ms) | Lovable staging → custom domain redirect | No |
+| **Render blocking requests** (2,240ms) | DM Sans font injected by Lovable badge | No (remove badge in Settings) |
+| **Unused JavaScript** (119 KiB) | Google Tag Manager scripts from Lovable | No |
+| **Cache lifetimes** (16 KiB) | Google Analytics cache headers | No |
+| **Document latency** (100ms) | Redirect chain | No |
+| **Network dependency tree** | Font chain through Google Fonts → gstatic | No |
 
-**1. Edge Function — Gift Payment (`supabase/functions/create-gift-payment/index.ts`)**
-- Replace `https://smart-union-hub.lovable.app` fallback origin with `https://corineruben.com`
+### Suspicious Audit Data
 
-**2. HTML Meta & SEO (`index.html`)**
-- Update all `meta description`, `og:description`, and `twitter:description` from "August 15, 2027" to "March 16, 2026" (the court wedding date — current active event)
-- Update JSON-LD structured data: `startDate` → `2026-03-16T14:00:00`, `endDate` → `2026-03-16T22:00:00`
-- Update description text to reflect the court wedding event
-- Canonical and og:url already point to `corineruben.com` — no change needed there
+The audit's LCP element references `bold-moves.webp` with text "Start your online journey / Build your website today" and a `div.services` selector — **this is NOT your wedding app**. This appears to be a domain parking page at `corineruben.com`. The CLS layout shift is also attributed to this parking page content.
 
-**3. Sitemap (`public/sitemap.xml`)**
-- Add missing pages: `/gallery`, `/guestbook`, `/venue`, `/faq`, `/enquiries` (currently only has `/`, `/story`, `/rsvp`, `/registry`)
+This means the PageSpeed analysis may be hitting a cached or intermittent parking page at your custom domain rather than your actual app.
 
-**4. Robots.txt (`public/robots.txt`)**
-- Already correct — no changes needed
+### What Can Be Improved In Code
 
-### Files to Edit
-1. `supabase/functions/create-gift-payment/index.ts` — Fix origin URL
-2. `index.html` — Update meta descriptions and JSON-LD dates
-3. `public/sitemap.xml` — Add missing page URLs
+Only two items are partially addressable:
+
+1. **SEO score (58%)** — Likely caused by the parking page content being analyzed. Need to verify the custom domain is properly serving the app. If it is, we can add structured data and improve meta tags.
+
+2. **Font loading strategy** — The Google Fonts stylesheet in `index.html` is already using `media="print" onload="this.media='all'"` pattern (non-blocking). The render-blocking DM Sans flagged in the audit is from the Lovable badge, not our code.
+
+### Recommended Action
+
+The most impactful fix is **removing the Lovable badge** in your project Settings, which would eliminate the render-blocking DM Sans request (est. 2,240ms savings) and the unused JavaScript from Google Tag Manager (119 KiB). This alone could push the performance score significantly higher.
+
+No code changes are needed — the issues are infrastructure-level.
 

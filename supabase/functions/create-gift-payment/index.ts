@@ -28,7 +28,7 @@ serve(async (req) => {
       throw new Error("Invalid amount");
     }
 
-    const siteOrigin = origin || "https://smart-union-hub.lovable.app";
+    const siteOrigin = origin || "https://corineruben.com";
 
     // Create a Stripe Checkout Session for one-time payment
     const session = await stripe.checkout.sessions.create({
