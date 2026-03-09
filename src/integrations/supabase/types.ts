@@ -593,6 +593,36 @@ export type Database = {
         }
         Relationships: []
       }
+      book_requests: {
+        Row: {
+          created_at: string | null
+          customer_name: string | null
+          description: string | null
+          email: string
+          id: string
+          status: string | null
+          topic: string
+        }
+        Insert: {
+          created_at?: string | null
+          customer_name?: string | null
+          description?: string | null
+          email: string
+          id?: string
+          status?: string | null
+          topic: string
+        }
+        Update: {
+          created_at?: string | null
+          customer_name?: string | null
+          description?: string | null
+          email?: string
+          id?: string
+          status?: string | null
+          topic?: string
+        }
+        Relationships: []
+      }
       booking_requests: {
         Row: {
           admin_notes: string | null

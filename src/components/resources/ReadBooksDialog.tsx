@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,10 +14,19 @@ interface ReadBooksDialogProps {
 }
 
 export function ReadBooksDialog({ open, onOpenChange }: ReadBooksDialogProps) {
+  const [searchParams] = useSearchParams();
   const [email, setEmail] = useState("");
   const [accessId, setAccessId] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  // Auto-fill from URL params for shareable links
+  useEffect(() => {
+    const paramEmail = searchParams.get("email");
+    const paramAccess = searchParams.get("access");
+    if (paramEmail) setEmail(decodeURIComponent(paramEmail));
+    if (paramAccess) setAccessId(decodeURIComponent(paramAccess).toUpperCase());
+  }, [searchParams]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
