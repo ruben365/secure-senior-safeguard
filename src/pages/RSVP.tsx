@@ -120,6 +120,8 @@ const RSVP = () => {
   const { t, language } = useLanguage();
   const { settings, loading: settingsLoading } = useSiteSettings();
   const { schedule, hotels, transport, loading: venueLoading } = useVenueData();
+  const isCourtMode = settings.active_event === 'court';
+  const [step, setStep] = useState<Step>('info');
   const [step, setStep] = useState<Step>('info');
 
   // Edit RSVP modal state
