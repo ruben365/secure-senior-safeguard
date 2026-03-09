@@ -1277,7 +1277,7 @@ const Index = () => {
                   <div className={`absolute top-4 left-1/2 -translate-x-1/2 w-24 h-24 rounded-full bg-gradient-to-br ${section.color} blur-2xl pointer-events-none opacity-50 group-hover:opacity-80 transition-opacity duration-500`} />
 
                   {/* Icon circle with soft pastel bg */}
-                  <div className={`relative w-16 h-16 rounded-full bg-gradient-to-br ${section.color} flex items-center justify-center mb-5 mx-auto
+                  <div className={`relative w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br ${section.color} flex items-center justify-center mb-3 md:mb-5 mx-auto
                     ring-4 ring-white/50 dark:ring-white/10
                     group-hover:ring-primary/20 group-hover:shadow-glow
                     transition-all duration-500`}>
