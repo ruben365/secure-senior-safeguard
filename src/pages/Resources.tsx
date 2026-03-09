@@ -156,7 +156,7 @@ function Resources() {
     });
     setEmbeddedPaymentOpen(true);
   };
-  const handleAddToCart = (book: (typeof staticBooks)[0]) => {
+  const handleAddToCart = (book: (typeof BOOK_CATALOG)[number]) => {
     addItem({
       id: book.id,
       productId: book.id,

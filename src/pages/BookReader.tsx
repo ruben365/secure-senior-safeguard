@@ -45,40 +45,9 @@ const BOOK_CONTENT: Record<string, Omit<BookData, "chapters"> & { chapters: { ti
   ]},
 };
 
-// Generate generic content for books not explicitly defined
-const bookImageMap: Record<string, { name: string; image: string }> = {
-  "book-senior-tech": { name: "Senior Tech Handbook", image: bookSeniorTechSafety },
-  "book-digital-privacy": { name: "Digital Privacy Mastery", image: bookDigitalPrivacy },
-  "book-deepfake": { name: "Deepfake Detection", image: bookDeepfakeDetection },
-  "book-password": { name: "Password Security", image: bookPasswordSecurity },
-  "book-social-media": { name: "Social Media Safety", image: bookSocialMediaSafety },
-  "book-online-shopping": { name: "Online Shopping Guide", image: bookOnlineShopping },
-  "book-identity-theft": { name: "Identity Theft Prevention", image: bookIdentityTheft },
-  "book-business-cyber": { name: "Business Cybersecurity", image: bookBusinessCyber },
-  "book-ai-management": { name: "AI Management Guide", image: bookAiManagement },
-  "book-being-real-ai": { name: "Being Real in AI World", image: bookBeingRealAi },
-  "book-auth-personalities": { name: "Auth of Personalities", image: bookAuthPersonalities },
-  "book-auth-friendship-v2": { name: "Auth of Friendship V2", image: bookAuthFriendshipV2 },
-  "book-cyber-kids": { name: "Cyber Awareness for Kids", image: bookCyberKids },
-  "book-smart-home": { name: "Smart Home Security", image: bookSmartHome },
-  "book-phishing-defense": { name: "Email Phishing Defense", image: bookPhishingDefense },
-  "book-banking-safety": { name: "Banking & Financial Safety", image: bookBankingSafety },
-  "book-mobile-security": { name: "Mobile Phone Security", image: bookMobileSecurity },
-  "book-crypto-defense": { name: "Crypto Scam Defense", image: bookCryptoDefense },
-  "book-romance-scam": { name: "Romance Scam Awareness", image: bookRomanceScam },
-  "book-voice-clone": { name: "Voice Clone Detection", image: bookVoiceClone },
-  "book-medicare-fraud": { name: "Medicare Fraud Protection", image: bookMedicareFraud },
-  "book-email-safety": { name: "Email Safety Essentials", image: bookEmailSafety },
-  "book-tax-scam": { name: "Tax Scam Prevention", image: bookTaxScam },
-  "book-tech-support": { name: "Tech Support Fraud Defense", image: bookTechSupport },
-  "book-grandparent-scam": { name: "Grandparent Scam Defense", image: bookGrandparentScam },
-  "book-investment-fraud": { name: "Investment Fraud Guide", image: bookInvestmentFraud },
-  "book-charity-scam": { name: "Charity Scam Awareness", image: bookCharityScam },
-};
-
 function getBookData(bookId: string): BookData | null {
   if (BOOK_CONTENT[bookId]) return BOOK_CONTENT[bookId];
-  const info = bookImageMap[bookId];
+  const info = catalogImageMap[bookId];
   if (!info) return null;
   return {
     id: bookId,
