@@ -190,7 +190,7 @@ const Navigation = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
-              className="absolute top-[72px] left-2 right-2 md:hidden overflow-hidden rounded-2xl glass-card-strong shadow-[0_20px_60px_rgba(139,107,138,0.2)]"
+              className="absolute top-[64px] left-2 right-2 md:hidden overflow-hidden rounded-2xl bg-background/95 dark:bg-background/95 backdrop-blur-2xl border border-border/50 shadow-[0_20px_60px_rgba(139,107,138,0.25)]"
             >
               <div className="flex flex-col p-4 gap-1">
                 {mobileLinks.map(link => (
