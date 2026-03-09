@@ -111,6 +111,7 @@ const App = () => (
               </AuthProvider>
             </BrowserRouter>
           </TooltipProvider>
+          </Suspense>
         </MusicProvider>
       </LanguageProvider>
     </ThemeProvider>
