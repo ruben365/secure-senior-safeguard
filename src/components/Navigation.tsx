@@ -104,19 +104,26 @@ const Navigation = () => {
               </Link>
             ))}
 
-            {/* Questions — subtle icon-only link */}
-            <Link
-              to="/enquiries"
-              className={`relative p-1.5 rounded-full transition-all duration-300 ml-1 ${
-                location.pathname === '/enquiries'
-                  ? 'text-white bg-white/15 border border-white/20'
-                  : 'text-white/50 hover:text-white hover:bg-white/10'
-              }`}
-              aria-label={t('nav.enquiries')}
-              title={t('nav.enquiries')}
-            >
-              <MessageCircleQuestion className="w-4 h-4" />
-            </Link>
+            {/* Icon-only links for secondary pages */}
+            {[
+              { to: '/gallery', icon: Camera, label: t('nav.gallery') },
+              { to: '/registry', icon: Gift, label: t('nav.registry') },
+              { to: '/enquiries', icon: MessageCircleQuestion, label: t('nav.enquiries') },
+            ].map(({ to, icon: Icon, label }) => (
+              <Link
+                key={to}
+                to={to}
+                className={`relative p-1.5 rounded-full transition-all duration-300 ml-0.5 ${
+                  location.pathname === to
+                    ? 'text-white bg-white/15 border border-white/20'
+                    : 'text-white/50 hover:text-white hover:bg-white/10'
+                }`}
+                aria-label={label}
+                title={label}
+              >
+                <Icon className="w-4 h-4" />
+              </Link>
+            ))}
           </div>
 
           {/* Subtle separator */}
