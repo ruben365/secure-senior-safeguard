@@ -910,7 +910,7 @@ const RSVP = () => {
                 </motion.div>
               )}
 
-              <button disabled={!canProceedInfo} onClick={() => attending ? setStep('meal') : setStep('gift')}
+              <button disabled={!canProceedInfo} onClick={() => attending ? (isCourtMode ? setStep('gift') : setStep('meal')) : setStep('gift')}
                 className="w-full btn-primary justify-center disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:transform-none"
               >
                 {attending ? t('rsvp.next') : t('rsvp.next')}
