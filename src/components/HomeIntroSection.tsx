@@ -145,7 +145,7 @@ export const HomeIntroSection = () => {
             </AnimatedSection>
 
             {/* Right — Image Bento Grid */}
-            <AnimatedSection animation="fade-in" delay={200} className="relative">
+            <AnimatedSection animation="fade-up" delay={200} className="relative">
               <div className="grid grid-cols-2 gap-3">
                 {/* Large image */}
                 <div className="col-span-2 relative rounded-2xl overflow-hidden shadow-3d-lg group">
