@@ -564,6 +564,19 @@ const translations: Record<string, Record<Language, string>> = {
   'rsvp.edit.updated': { fr: 'Votre RSVP a été mis à jour !', en: 'Your RSVP has been updated!', es: '¡Tu RSVP ha sido actualizado!' },
   'rsvp.edit.attending.yes': { fr: 'Je serai présent(e)', en: 'I will attend', es: 'Asistiré' },
   'rsvp.edit.attending.no': { fr: 'Je ne pourrai pas venir', en: 'I cannot attend', es: 'No podré asistir' },
+
+  // Court Wedding
+  'court.wedding.title': { fr: 'Mariage Civil', en: 'Court Wedding', es: 'Boda Civil' },
+  'court.wedding.date': { fr: '16 Mars 2026', en: 'March 16, 2026', es: '16 de Marzo de 2026' },
+  'court.wedding.time': { fr: '14h00', en: '2:00 PM', es: '2:00 PM' },
+  'court.wedding.ceremony': { fr: 'Cérémonie Civile', en: 'Civil Ceremony', es: 'Ceremonia Civil' },
+  'court.wedding.officiant': { fr: 'Officié par le Maire Letner', en: 'Officiated by Mayor Letner', es: 'Oficiada por el Alcalde Letner' },
+  'court.wedding.venue': { fr: '301 Sycamore St, Brookville', en: '301 Sycamore St, Brookville', es: '301 Sycamore St, Brookville' },
+  'court.wedding.after': { fr: 'Collation après la cérémonie', en: 'After-Ceremony Gathering', es: 'Reunión después de la ceremonia' },
+  'court.wedding.after.venue': { fr: '10209 Gully Pass Dr, Dayton, OH 45458', en: '10209 Gully Pass Dr, Dayton, OH 45458', es: '10209 Gully Pass Dr, Dayton, OH 45458' },
+  'court.wedding.after.desc': { fr: 'Rejoignez-nous pour un moment convivial après la cérémonie', en: 'Join us for a small snack gathering after the ceremony', es: 'Únase a nosotros para un pequeño refrigerio después de la ceremonia' },
+  'church.wedding.coming': { fr: '🎉 Le Grand Mariage Religieux & la Célébration arrivent bientôt — Restez connectés !', en: '🎉 The Big Church Wedding & Celebration is Coming Soon — Stay Tuned!', es: '🎉 ¡La Gran Boda Religiosa y Celebración llegará pronto — ¡Estén atentos!' },
+  'church.wedding.coming.short': { fr: 'Grande Célébration à venir', en: 'Big Celebration Coming', es: 'Gran Celebración Próxima' },
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
