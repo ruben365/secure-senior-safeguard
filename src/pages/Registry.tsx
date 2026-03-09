@@ -18,6 +18,17 @@ const Registry = () => {
   const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
   const [customAmount, setCustomAmount] = useState('');
   const [paymentOpen, setPaymentOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const rsvpUrl = typeof window !== 'undefined' 
+    ? `${window.location.origin}/rsvp` 
+    : 'https://smart-union-hub.lovable.app/rsvp';
+
+  const handleCopyLink = async () => {
+    await navigator.clipboard.writeText(rsvpUrl);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const handleSelectTier = (amount: number) => {
     setSelectedAmount(amount);
