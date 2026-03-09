@@ -42,7 +42,7 @@ export const FAQPreview = () => {
       <div className="container mx-auto px-4 md:px-6 lg:px-12 max-w-5xl relative">
         <div className="grid lg:grid-cols-5 gap-10 items-start">
           {/* Left sidebar */}
-          <AnimatedSection animation="fade-in" className="lg:col-span-2 space-y-6">
+          <AnimatedSection animation="fade-up" className="lg:col-span-2 space-y-6">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary mb-4">
                 FAQ
