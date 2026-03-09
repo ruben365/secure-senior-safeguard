@@ -259,11 +259,15 @@ const AnnouncementsSection = forwardRef<HTMLElement, {t: (key: string) => string
   };
 
   useEffect(() => {
-    const fetch = async () => {
-      const { data } = await supabase.from('announcements').select('*').order('created_at', { ascending: false });
-      if (data) setAnnouncements(data);
-    };
-    fetch();
+    // Defer non-critical data fetch to reduce main-thread work during initial load
+    const id = setTimeout(() => {
+      const fetchData = async () => {
+        const { data } = await supabase.from('announcements').select('*').order('created_at', { ascending: false });
+        if (data) setAnnouncements(data);
+      };
+      fetchData();
+    }, 1500);
+    return () => clearTimeout(id);
   }, []);
 
   useEffect(() => {
