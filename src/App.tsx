@@ -33,7 +33,7 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boole
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AuthProvider } from "@/contexts/AuthContext";
-import Navigation from "@/components/Navigation";
+const Navigation = lazy(() => import("@/components/Navigation"));
 import ScrollToTop from "@/components/ScrollToTop";
 import Footer from "@/components/Footer";
 import AuroraBackground from "@/components/AuroraBackground";
