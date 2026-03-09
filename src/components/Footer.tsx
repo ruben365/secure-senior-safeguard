@@ -153,7 +153,7 @@ const Footer = () => {
           <p className="text-xs text-[hsl(var(--footer-muted))] flex items-center gap-1.5 font-sans-elegant">
             {t('footer.made')} <Heart className="w-3 h-3 text-dusty-rose fill-dusty-rose" /> {t('footer.copyright')}
           </p>
-          <p className="font-serif-display text-lg font-semibold text-[hsl(var(--footer-fg))]">Corine & Ruben</p>
+          <p className="font-serif-display text-lg font-semibold text-[hsl(var(--footer-fg))]">Corine & Ruben's Wedding</p>
         </div>
       </div>
     </footer>

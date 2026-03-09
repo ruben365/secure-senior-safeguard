@@ -69,8 +69,8 @@ const Navigation = () => {
             <span className="w-8 h-8 rounded-full bg-white/15 border border-white/25 flex items-center justify-center group-hover:bg-white/20 transition-all duration-300 shadow-[0_0_12px_rgba(255,255,255,0.1)]">
               <Heart className="w-3.5 h-3.5 text-white fill-white" />
             </span>
-            <span className="font-serif-display text-base font-extrabold tracking-wide text-white group-hover:text-white/90 transition-colors whitespace-nowrap" style={{ letterSpacing: '1px' }}>
-              C & R
+            <span className="font-serif-display text-sm md:text-base font-extrabold tracking-wide text-white group-hover:text-white/90 transition-colors whitespace-nowrap" style={{ letterSpacing: '0.5px' }}>
+              Corine & Ruben
             </span>
           </Link>
 
