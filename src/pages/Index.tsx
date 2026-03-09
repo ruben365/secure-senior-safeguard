@@ -749,7 +749,7 @@ const Index = () => {
           </motion.p>
 
           <p className="font-sans-elegant text-lg md:text-xl text-foreground/70 dark:text-foreground/80 max-w-xl mb-8 font-medium" style={{ lineHeight: 1.6 }}>
-            {t('hero.date')}
+            {isCourtMode ? t('court.wedding.date') : t('hero.date')}
           </p>
 
           <motion.div
