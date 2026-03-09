@@ -1244,13 +1244,15 @@ const Index = () => {
             <p className="font-sans-elegant text-lg text-muted-foreground max-w-lg mx-auto">{t('details.subtitle')}</p>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+          <div className={`grid gap-5 ${isCourtMode ? 'grid-cols-2 max-w-lg mx-auto' : 'grid-cols-2 md:grid-cols-4'}`}>
             {detailSections.map((section, i) => {
               const subtitleKeys: Record<string, string> = {
                 ceremony: 'details.ceremony.time',
                 reception: 'details.reception.time',
                 accommodation: 'details.accommodation.hotel',
                 transport: 'details.transport.shuttle',
+                'court-ceremony': 'court.wedding.time',
+                'court-after': 'court.wedding.after',
               };
               return (
                 <motion.button
