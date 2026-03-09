@@ -6,11 +6,17 @@ import { useMusic } from '@/components/MusicContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Heart, MapPin, Calendar, Clock, Utensils, Gift, Sparkles, Play, Pause, Music, Users, Flower2, BookOpen, Cross, Church, Gem, PartyPopper, Hotel, Car, Check, X, Megaphone, Video, Share2, ExternalLink } from 'lucide-react';
 const EmbeddedPaymentForm = lazy(() => import('@/components/EmbeddedPaymentForm'));
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription } from '@/components/ui/drawer';
+const LazyDialog = lazy(() => import('@/components/ui/dialog').then(m => ({ default: m.Dialog })));
+const LazyDialogContent = lazy(() => import('@/components/ui/dialog').then(m => ({ default: m.DialogContent })));
+const LazyDialogHeader = lazy(() => import('@/components/ui/dialog').then(m => ({ default: m.DialogHeader })));
+const LazyDialogTitle = lazy(() => import('@/components/ui/dialog').then(m => ({ default: m.DialogTitle })));
+const LazyDialogDescription = lazy(() => import('@/components/ui/dialog').then(m => ({ default: m.DialogDescription })));
+const LazyDrawer = lazy(() => import('@/components/ui/drawer').then(m => ({ default: m.Drawer })));
+const LazyDrawerContent = lazy(() => import('@/components/ui/drawer').then(m => ({ default: m.DrawerContent })));
+const LazyDrawerHeader = lazy(() => import('@/components/ui/drawer').then(m => ({ default: m.DrawerHeader })));
+const LazyDrawerTitle = lazy(() => import('@/components/ui/drawer').then(m => ({ default: m.DrawerTitle })));
+const LazyDrawerDescription = lazy(() => import('@/components/ui/drawer').then(m => ({ default: m.DrawerDescription })));
 import { Input } from '@/components/ui/input';
-
-import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { useSiteImages, useSiteSettings } from '@/hooks/useSiteContent';
 
@@ -139,6 +145,7 @@ const PersonalCourtSection = forwardRef<HTMLElement, {t: (key: string) => string
     // Defer non-critical data fetch to reduce main-thread work during initial load
     const id = setTimeout(() => {
       const fetchQuotes = async () => {
+        const { supabase } = await import('@/integrations/supabase/client');
         const { data } = await supabase.from('quotes').select('*').order('created_at', { ascending: false });
         if (data) setQuotes(data);
       };
@@ -262,6 +269,7 @@ const AnnouncementsSection = forwardRef<HTMLElement, {t: (key: string) => string
     // Defer non-critical data fetch to reduce main-thread work during initial load
     const id = setTimeout(() => {
       const fetchData = async () => {
+        const { supabase } = await import('@/integrations/supabase/client');
         const { data } = await supabase.from('announcements').select('*').order('created_at', { ascending: false });
         if (data) setAnnouncements(data);
       };
@@ -1440,21 +1448,22 @@ const Index = () => {
       </section>
 
       {/* ===== DETAIL DIALOGS ===== */}
+      <Suspense fallback={null}>
       {detailSections.map((section) =>
-      <Dialog key={section.id} open={activeDetail === section.id} onOpenChange={(open) => !open && setActiveDetail(null)}>
-          <DialogContent className="max-w-lg">
-            <DialogHeader>
+      <LazyDialog key={section.id} open={activeDetail === section.id} onOpenChange={(open) => !open && setActiveDetail(null)}>
+          <LazyDialogContent className="max-w-lg">
+            <LazyDialogHeader>
               <div className="relative mx-auto mb-4">
                 <div className={`absolute inset-0 w-20 h-20 rounded-full bg-gradient-to-br ${section.color} blur-xl opacity-60 mx-auto`} />
                 <div className={`relative w-16 h-16 rounded-full bg-gradient-to-br ${section.color} flex items-center justify-center mx-auto ring-4 ring-white/30 dark:ring-white/10`}>
                   <section.icon className={`w-7 h-7 ${section.iconColor}`} />
                 </div>
               </div>
-              <DialogTitle className="font-serif-display text-2xl text-center">{section.title}</DialogTitle>
-              <DialogDescription className="font-sans-elegant text-center text-muted-foreground">
+              <LazyDialogTitle className="font-serif-display text-2xl text-center">{section.title}</LazyDialogTitle>
+              <LazyDialogDescription className="font-sans-elegant text-center text-muted-foreground">
                 {t('details.subtitle')}
-              </DialogDescription>
-            </DialogHeader>
+              </LazyDialogDescription>
+            </LazyDialogHeader>
             <div className="space-y-3 pt-2 max-h-[60vh] overflow-y-auto pr-1">
               {section.dialogContent.map((item, j) =>
             <motion.div
@@ -1478,23 +1487,25 @@ const Index = () => {
                 </motion.div>
             )}
             </div>
-          </DialogContent>
-        </Dialog>
+          </LazyDialogContent>
+        </LazyDialog>
       )}
+      </Suspense>
 
       {/* ===== GIFT PICKER (DRAWER on mobile, DIALOG on desktop) ===== */}
+      <Suspense fallback={null}>
       {isMobile ?
-      <Drawer open={giftOpen} onOpenChange={setGiftOpen}>
-          <DrawerContent className="px-4 pb-8 max-h-[85vh]">
-            <DrawerHeader className="text-center">
+      <LazyDrawer open={giftOpen} onOpenChange={setGiftOpen}>
+          <LazyDrawerContent className="px-4 pb-8 max-h-[85vh]">
+            <LazyDrawerHeader className="text-center">
               <div className="w-14 h-14 rounded-full gradient-primary flex items-center justify-center mx-auto mb-2 shadow-glow">
                 <Gift className="w-6 h-6 text-primary-foreground" />
               </div>
-              <DrawerTitle className="font-serif-display text-xl">{t('registry.title')}</DrawerTitle>
-              <DrawerDescription className="font-sans-elegant text-muted-foreground text-sm">
+              <LazyDrawerTitle className="font-serif-display text-xl">{t('registry.title')}</LazyDrawerTitle>
+              <LazyDrawerDescription className="font-sans-elegant text-muted-foreground text-sm">
                 {t('registry.message')}
-              </DrawerDescription>
-            </DrawerHeader>
+              </LazyDrawerDescription>
+            </LazyDrawerHeader>
 
             {/* Quick amounts — mobile optimized */}
             <div className="grid grid-cols-2 gap-3 pt-2 px-1">
@@ -1542,20 +1553,20 @@ const Index = () => {
                 </div>
               </div>
             </div>
-          </DrawerContent>
-        </Drawer> :
+          </LazyDrawerContent>
+        </LazyDrawer> :
 
-      <Dialog open={giftOpen} onOpenChange={setGiftOpen}>
-          <DialogContent className="max-w-md">
-            <DialogHeader>
+      <LazyDialog open={giftOpen} onOpenChange={setGiftOpen}>
+          <LazyDialogContent className="max-w-md">
+            <LazyDialogHeader>
               <div className="w-16 h-16 rounded-full gradient-primary flex items-center justify-center mx-auto mb-3 shadow-glow">
                 <Gift className="w-7 h-7 text-primary-foreground" />
               </div>
-              <DialogTitle className="font-serif-display text-2xl text-center">{t('registry.title')}</DialogTitle>
-              <DialogDescription className="font-sans-elegant text-center text-muted-foreground">
+              <LazyDialogTitle className="font-serif-display text-2xl text-center">{t('registry.title')}</LazyDialogTitle>
+              <LazyDialogDescription className="font-sans-elegant text-center text-muted-foreground">
                 {t('registry.message')}
-              </DialogDescription>
-            </DialogHeader>
+              </LazyDialogDescription>
+            </LazyDialogHeader>
 
             {/* Quick amounts */}
             <div className="grid grid-cols-2 gap-3 pt-2">
@@ -1603,9 +1614,10 @@ const Index = () => {
                 </div>
               </div>
             </div>
-          </DialogContent>
-        </Dialog>
+          </LazyDialogContent>
+        </LazyDialog>
       }
+      </Suspense>
 
       {/* ===== EMBEDDED PAYMENT FORM ===== */}
       {paymentFormOpen && (
