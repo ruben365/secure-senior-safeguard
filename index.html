@@ -84,45 +84,8 @@
         text-align: center;
       }
 
-      /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-         AMBIENT BACKGROUND ORBS
-      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-      .l-bg {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        overflow: hidden;
-      }
-      .l-orb {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(90px);
-        opacity: 0;
-        animation: l-orb-in 2.5s ease-out forwards;
-      }
-      .l-orb--a {
-        width: 600px; height: 600px;
-        top: -200px; left: -200px;
-        background: radial-gradient(circle, rgba(110,65,150,0.22) 0%, transparent 65%);
-        animation-delay: 0.2s;
-      }
-      .l-orb--b {
-        width: 500px; height: 500px;
-        bottom: -150px; right: -150px;
-        background: radial-gradient(circle, rgba(190,130,40,0.15) 0%, transparent 65%);
-        animation-delay: 0.6s;
-      }
-      .l-orb--c {
-        width: 350px; height: 350px;
-        top: 30%; left: 50%;
-        transform: translateX(-50%);
-        background: radial-gradient(circle, rgba(160,90,200,0.08) 0%, transparent 70%);
-        animation-delay: 1.0s;
-      }
-      @keyframes l-orb-in {
-        from { opacity: 0; }
-        to   { opacity: 1; }
-      }
+      /* No ambient orbs — clean dark background */
+      .l-bg { display: none; }
 
       /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
          STAGE — figures + meeting point
