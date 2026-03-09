@@ -39,7 +39,7 @@ import Footer from "@/components/Footer";
 import AuroraBackground from "@/components/AuroraBackground";
 import { MusicProvider } from "@/components/MusicContext";
 const MusicFloatingButton = lazy(() => import("@/components/MusicPlayer"));
-import Index from "./pages/Index";
+const Index = lazy(() => import("./pages/Index"));
 const Story = lazy(() => import("./pages/Story"));
 const RSVP = lazy(() => import("./pages/RSVP"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
