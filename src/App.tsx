@@ -112,7 +112,7 @@ const App = () => (
                   <Route path="*" element={<NotFound />} />
                 </Routes>
                 </Suspense>
-                <Footer />
+                <Suspense fallback={null}><Footer /></Suspense>
               </div>
 
               <Suspense fallback={null}>
