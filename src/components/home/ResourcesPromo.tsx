@@ -97,7 +97,7 @@ export const ResourcesPromo = () => {
                   </div>
                 </div>
                 <Button asChild className="relative z-10 rounded-full bg-gradient-to-r from-primary to-accent text-white hover:opacity-90 hover:scale-105 active:scale-95 transition-all flex-shrink-0 shadow-[0_8px_30px_hsl(var(--primary)/0.3)]">
-                  <Link to="/resources">Download Free <ArrowRight className="ml-2 w-4 h-4" /></Link>
+                  <Link to="/resources">Get Free Scripts <ArrowRight className="ml-2 w-4 h-4" /></Link>
                 </Button>
               </div>
             </div>

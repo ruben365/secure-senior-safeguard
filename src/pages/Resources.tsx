@@ -928,7 +928,7 @@ function Resources() {
         onSuccess={() => {
           toast({
             title: "Purchase Complete!",
-            description: "Check your email for your download link."
+            description: "Check your email for your Access ID to start reading."
           });
         }} />
 
