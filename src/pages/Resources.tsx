@@ -144,7 +144,7 @@ function Resources() {
   )
   )
   ) || [];
-  const handleBuyNow = (product: (typeof staticBooks)[0]) => {
+  const handleBuyNow = (product: (typeof BOOK_CATALOG)[number]) => {
     // Use embedded payment modal instead of redirect
     setEmbeddedPaymentConfig({
       mode: "payment",
