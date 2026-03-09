@@ -33,7 +33,7 @@ const TRACK_SOURCES: Record<string, string> = {
   'amazing-grace': 'https://play.hymnswithoutwords.com/wp-content/uploads/2023/06/Amazing-Grace-Organ-5-Verses-2023.mp3',
   'wedding-day': '/audio/ruben-and-corine.mp3',
   'oceans-hillsong': '',     // Copyrighted — upload your own MP3
-  'blessed-larson': 'https://play.hymnswithoutwords.com/wp-content/uploads/2019/06/I-Have-Been-Blessed-Blessed-Organ-3-Verses-2019.mp3',
+  'blessed-larson': '/audio/i-have-been-blessed.mp3',
   'how-great': 'https://play.hymnswithoutwords.com/wp-content/uploads/2021/06/O-Lord-My-God-How-Great-Thou-Art-Organ-4-Verses-2021.mp3',
   'joyful': '',              // Upload your own MP3
   'great-faithfulness': 'https://play.hymnswithoutwords.com/wp-content/uploads/2017/06/Great-is-thy-faithfulness-Faithfulness-Runyan-3-Verses-Organ-2019.mp3',
