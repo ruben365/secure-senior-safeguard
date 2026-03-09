@@ -107,7 +107,6 @@ const Navigation = () => {
             {/* Icon-only links for secondary pages */}
             {[
               { to: '/gallery', icon: Camera, label: t('nav.gallery') },
-              { to: '/registry', icon: Gift, label: t('nav.registry') },
               { to: '/enquiries', icon: MessageCircleQuestion, label: t('nav.enquiries') },
             ].map(({ to, icon: Icon, label }) => (
               <Link
