@@ -335,7 +335,7 @@ const EmbeddedPaymentForm = ({ open, onOpenChange, selectedAmount }: EmbeddedPay
   if (isMobile) {
     return (
       <Drawer open={open} onOpenChange={handleClose}>
-        <DrawerContent className="px-4 pb-8 max-h-[90vh] overflow-y-auto">
+        <DrawerContent className="px-4 pb-8 max-h-[85dvh]">
           <DrawerHeader className="text-center">
             <div className="w-14 h-14 rounded-full gradient-primary flex items-center justify-center mx-auto mb-2 shadow-glow">
               <Heart className="w-6 h-6 text-primary-foreground" />
