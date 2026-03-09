@@ -1448,6 +1448,12 @@ const RSVP = () => {
               )}
 
               <p className="font-sans-elegant text-xs text-muted-foreground">{t('rsvp.done.confirmation')}</p>
+
+              {isCourtMode && (
+                <div className="glass-card rounded-2xl p-4 border-primary/20 mt-2">
+                  <p className="font-sans-elegant text-xs text-muted-foreground">{t('rsvp.court.coming.note')}</p>
+                </div>
+              )}
             </motion.div>
           )}
         </AnimatePresence>
