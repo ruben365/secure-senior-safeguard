@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useAuth } from '@/contexts/AuthContext';
-import { Sun, Moon, Menu, X, Globe, Heart, LogOut, LogIn, MessageCircleQuestion } from 'lucide-react';
+import { Sun, Moon, Menu, X, Globe, Heart, LogOut, LogIn, MessageCircleQuestion, Camera, Gift } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
@@ -42,6 +42,8 @@ const Navigation = () => {
 
   const mobileLinks = [
     ...navLinks,
+    { to: '/gallery', label: t('nav.gallery') },
+    { to: '/registry', label: t('nav.registry') },
     { to: '/guestbook', label: t('nav.guestbook') },
     { to: '/faq', label: t('nav.faq') },
     { to: '/enquiries', label: t('nav.enquiries') },
@@ -102,19 +104,26 @@ const Navigation = () => {
               </Link>
             ))}
 
-            {/* Questions — subtle icon-only link */}
-            <Link
-              to="/enquiries"
-              className={`relative p-1.5 rounded-full transition-all duration-300 ml-1 ${
-                location.pathname === '/enquiries'
-                  ? 'text-white bg-white/15 border border-white/20'
-                  : 'text-white/50 hover:text-white hover:bg-white/10'
-              }`}
-              aria-label={t('nav.enquiries')}
-              title={t('nav.enquiries')}
-            >
-              <MessageCircleQuestion className="w-4 h-4" />
-            </Link>
+            {/* Icon-only links for secondary pages */}
+            {[
+              { to: '/gallery', icon: Camera, label: t('nav.gallery') },
+              { to: '/registry', icon: Gift, label: t('nav.registry') },
+              { to: '/enquiries', icon: MessageCircleQuestion, label: t('nav.enquiries') },
+            ].map(({ to, icon: Icon, label }) => (
+              <Link
+                key={to}
+                to={to}
+                className={`relative p-1.5 rounded-full transition-all duration-300 ml-0.5 ${
+                  location.pathname === to
+                    ? 'text-white bg-white/15 border border-white/20'
+                    : 'text-white/50 hover:text-white hover:bg-white/10'
+                }`}
+                aria-label={label}
+                title={label}
+              >
+                <Icon className="w-4 h-4" />
+              </Link>
+            ))}
           </div>
 
           {/* Subtle separator */}
