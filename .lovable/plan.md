@@ -1,37 +1,43 @@
 
 
-## Mobile Performance Analysis (66%) — What's Actually Happening
+## Plan: Gift Payment Verification & Mobile UI/UX Improvements
 
-After examining the audit data in detail, most of the 12 performance issues flagged are **not from your app code** — they come from platform-level infrastructure and cannot be fixed through code changes.
+### Current State
+- **Payment backend works**: The `create-gift-intent` edge function boots correctly and creates Stripe PaymentIntents. The `gifts` table has real records confirming end-to-end flow.
+- **Two payment paths exist**: `create-gift-intent` (embedded Stripe Elements) and `create-gift-payment` (Checkout redirect). The app uses the embedded path via `EmbeddedPaymentForm`.
+- **Mobile UX issues**: The gift picker on Index uses a `Dialog` for both mobile and desktop (unlike `EmbeddedPaymentForm` which correctly uses `Drawer` on mobile). The FAB button positioning and the two-step dialog flow could be smoother on small screens.
 
-### Issues Outside Our Control (platform-level)
+### Changes
 
-| Issue | Cause | Fixable? |
-|---|---|---|
-| **Redirects** (780ms) | Lovable staging → custom domain redirect | No |
-| **Render blocking requests** (2,240ms) | DM Sans font injected by Lovable badge | No (remove badge in Settings) |
-| **Unused JavaScript** (119 KiB) | Google Tag Manager scripts from Lovable | No |
-| **Cache lifetimes** (16 KiB) | Google Analytics cache headers | No |
-| **Document latency** (100ms) | Redirect chain | No |
-| **Network dependency tree** | Font chain through Google Fonts → gstatic | No |
+#### 1. Fix Gift Picker Dialog — Use Drawer on Mobile
+The gift tier picker in `Index.tsx` (lines 1335-1395) uses `Dialog` on all screen sizes. On mobile, this should be a `Drawer` (bottom sheet) matching the pattern already used in `EmbeddedPaymentForm`.
 
-### Suspicious Audit Data
+- Import `Drawer`/`DrawerContent`/`DrawerHeader` and `useIsMobile`
+- Conditionally render `Drawer` on mobile, `Dialog` on desktop for the gift picker
 
-The audit's LCP element references `bold-moves.webp` with text "Start your online journey / Build your website today" and a `div.services` selector — **this is NOT your wedding app**. This appears to be a domain parking page at `corineruben.com`. The CLS layout shift is also attributed to this parking page content.
+#### 2. Improve Mobile FAB (Floating Gift Button)
+- Adjust position to avoid overlap with navigation/bottom bars: `bottom-20` on mobile instead of `bottom-8`
+- Slightly smaller on mobile (`w-12 h-12`) for less intrusion
+- Add a subtle label tooltip on first visit
 
-This means the PageSpeed analysis may be hitting a cached or intermittent parking page at your custom domain rather than your actual app.
+#### 3. Improve EmbeddedPaymentForm Mobile UX
+- Increase touch targets for quick message buttons (min 44px height)
+- Better spacing in the info step for thumb-friendly scrolling
+- Larger "Proceed to Payment" button with full-width on mobile
+- Add haptic-like visual feedback on button press (scale animation)
+- Improve the Stripe Elements container padding on small screens
 
-### What Can Be Improved In Code
+#### 4. Gift Picker UI Polish
+- Make tier cards slightly larger on mobile with better tap targets
+- Add selected state highlight when a tier is tapped (brief visual confirmation before transitioning)
+- Improve custom amount input — larger touch target, auto-focus on mobile
 
-Only two items are partially addressable:
+#### 5. Error Handling & Loading States
+- Add a retry mechanism if `create-gift-intent` fails (currently shows a toast but no retry button)
+- Show a skeleton/shimmer while Stripe Elements loads in the pay step
+- Handle edge case where user closes drawer mid-payment gracefully
 
-1. **SEO score (58%)** — Likely caused by the parking page content being analyzed. Need to verify the custom domain is properly serving the app. If it is, we can add structured data and improve meta tags.
-
-2. **Font loading strategy** — The Google Fonts stylesheet in `index.html` is already using `media="print" onload="this.media='all'"` pattern (non-blocking). The render-blocking DM Sans flagged in the audit is from the Lovable badge, not our code.
-
-### Recommended Action
-
-The most impactful fix is **removing the Lovable badge** in your project Settings, which would eliminate the render-blocking DM Sans request (est. 2,240ms savings) and the unused JavaScript from Google Tag Manager (119 KiB). This alone could push the performance score significantly higher.
-
-No code changes are needed — the issues are infrastructure-level.
+### Files to Edit
+1. **`src/pages/Index.tsx`** — Gift picker: Drawer on mobile, FAB positioning
+2. **`src/components/EmbeddedPaymentForm.tsx`** — Mobile UX improvements (spacing, touch targets, loading states, retry)
 
