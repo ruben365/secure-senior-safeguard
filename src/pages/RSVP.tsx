@@ -407,7 +407,7 @@ const RSVP = () => {
           <>
             {/* Court venue cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
-              <motion.div initial="hidden" animate="show" variants={fadeUp} className="glass-card-strong rounded-3xl p-7">
+              <motion.div initial="hidden" animate="show" variants={fadeUp} className="glass-card-strong rounded-3xl p-5 md:p-7">
                 <div className="flex items-start gap-4 mb-5">
                   <div className="w-14 h-14 rounded-2xl glass-card flex items-center justify-center text-2xl flex-shrink-0">⚖️</div>
                   <div>
