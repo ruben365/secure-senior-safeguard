@@ -464,7 +464,14 @@ const Index = () => {
 
   const coupleName1 = settings.couple_name_1 || 'Corine';
   const coupleName2 = settings.couple_name_2 || 'Ruben';
-  const weddingDate = new Date(settings.wedding_date || '2026-10-16T15:00:00');
+  
+  // Event mode: court or church
+  const isCourtMode = settings.active_event === 'court';
+  const courtWeddingDate = new Date(settings.court_wedding_date || '2026-03-16T14:00:00');
+  const churchWeddingDate = new Date(settings.wedding_date || '2026-10-16T15:00:00');
+  const weddingDate = isCourtMode ? courtWeddingDate : churchWeddingDate;
+  const courtVenue = settings.court_wedding_venue || '301 Sycamore St, Brookville — Mayor Letner';
+  const courtAfterVenue = settings.court_wedding_after_venue || '10209 Gully Pass Dr, Dayton, OH 45458';
 
   // Gift dialog state
   const [giftOpen, setGiftOpen] = useState(false);
@@ -487,7 +494,7 @@ const Index = () => {
     update();
     const interval = setInterval(update, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [weddingDate]);
 
   // Handle payment return from Stripe Checkout
   useEffect(() => {
@@ -521,7 +528,32 @@ const Index = () => {
     { icon: Clock, label: t('nav.rsvp'), desc: t('rsvp.subtitle'), to: '/rsvp', color: 'text-emerald-400', bg: 'from-emerald-500/20 to-teal-500/10' },
   ];
 
-  const detailSections = [
+  const courtDetailSections = [
+    {
+      id: 'court-ceremony',
+      icon: Calendar,
+      title: t('court.wedding.ceremony'),
+      color: 'from-rose-500/20 to-pink-500/10',
+      iconColor: 'text-rose-400',
+      dialogContent: [
+        { icon: Clock, label: t('court.wedding.time'), desc: t('court.wedding.officiant'), highlight: true },
+        { icon: MapPin, label: t('court.wedding.ceremony'), desc: courtVenue, highlight: true },
+      ]
+    },
+    {
+      id: 'court-after',
+      icon: Utensils,
+      title: t('court.wedding.after'),
+      color: 'from-amber-500/20 to-orange-500/10',
+      iconColor: 'text-amber-400',
+      dialogContent: [
+        { icon: MapPin, label: t('court.wedding.after'), desc: courtAfterVenue, highlight: true },
+        { icon: Utensils, label: t('court.wedding.after'), desc: t('court.wedding.after.desc') },
+      ]
+    },
+  ];
+
+  const churchDetailSections = [
     {
       id: 'ceremony',
       icon: Church,
@@ -576,6 +608,8 @@ const Index = () => {
       ]
     },
   ];
+
+  const detailSections = isCourtMode ? courtDetailSections : churchDetailSections;
 
   /* ─── Live Stream helpers ─── */
   const livestreamUrl = settings.livestream_url || '';
@@ -742,7 +776,7 @@ const Index = () => {
           </motion.p>
 
           <p className="font-sans-elegant text-lg md:text-xl text-foreground/70 dark:text-foreground/80 max-w-xl mb-8 font-medium" style={{ lineHeight: 1.6 }}>
-            {t('hero.date')}
+            {isCourtMode ? t('court.wedding.date') : t('hero.date')}
           </p>
 
           <motion.div
@@ -890,7 +924,7 @@ const Index = () => {
               >
                 <div className="flex items-center gap-1.5 mb-1.5">
                   <Sparkles className="w-3 h-3 text-amber-400 icon-glow" />
-                  <p className="font-sans-elegant text-xs text-foreground/60 font-medium">{t('hero.date')}</p>
+                  <p className="font-sans-elegant text-xs text-foreground/60 font-medium">{isCourtMode ? t('court.wedding.date') : t('hero.date')}</p>
                 </div>
                 <p className="font-sans-elegant text-sm font-bold text-foreground drop-shadow-sm">{t('index.beginJourney')}</p>
               </motion.div>
@@ -1210,13 +1244,15 @@ const Index = () => {
             <p className="font-sans-elegant text-lg text-muted-foreground max-w-lg mx-auto">{t('details.subtitle')}</p>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+          <div className={`grid gap-5 ${isCourtMode ? 'grid-cols-2 max-w-lg mx-auto' : 'grid-cols-2 md:grid-cols-4'}`}>
             {detailSections.map((section, i) => {
               const subtitleKeys: Record<string, string> = {
                 ceremony: 'details.ceremony.time',
                 reception: 'details.reception.time',
                 accommodation: 'details.accommodation.hotel',
                 transport: 'details.transport.shuttle',
+                'court-ceremony': 'court.wedding.time',
+                'court-after': 'court.wedding.after',
               };
               return (
                 <motion.button
@@ -1265,6 +1301,48 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* ===== COMING SOON BANNER (Court Mode Only) ===== */}
+      {isCourtMode && (
+        <>
+          <SectionDivider variant="sparkle" />
+          <section className="py-8 md:py-12 relative overflow-hidden">
+            <div className="container mx-auto px-6 md:px-12 max-w-3xl relative z-10">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="glass-card-strong rounded-3xl p-8 md:p-12 text-center relative overflow-hidden border border-primary/20"
+              >
+                <GoldenCorners />
+                <div className="absolute top-0 right-0 w-40 h-40 rounded-full bg-gradient-to-br from-amber-400/10 to-rose-400/10 blur-3xl pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-32 h-32 rounded-full bg-gradient-to-tr from-violet-400/10 to-primary/10 blur-3xl pointer-events-none" />
+                
+                <motion.div
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                  className="text-5xl mb-4"
+                >
+                  ⛪
+                </motion.div>
+                
+                <h3 className="font-serif-display text-2xl md:text-3xl text-foreground font-semibold mb-4">
+                  {t('church.wedding.coming.short')}
+                </h3>
+                <p className="font-sans-elegant text-base md:text-lg text-muted-foreground leading-relaxed max-w-lg mx-auto">
+                  {t('church.wedding.coming')}
+                </p>
+                
+                <div className="flex items-center justify-center gap-2 mt-6">
+                  <Heart className="w-4 h-4 text-rose-400 fill-rose-400 animate-pulse-love" />
+                  <span className="font-sans-elegant text-sm text-primary font-semibold">{t('hero.date')}</span>
+                  <Heart className="w-4 h-4 text-rose-400 fill-rose-400 animate-pulse-love" />
+                </div>
+              </motion.div>
+            </div>
+          </section>
+        </>
+      )}
 
       {/* ===== DIVIDER ===== */}
       <SectionDivider variant="heart" />
