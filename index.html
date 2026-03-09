@@ -134,9 +134,9 @@
         100% { opacity: 1;   transform: translateX(0)      translateY(0);    }
       }
 
-      /* Bride: pure-white silhouette, enters walking from far RIGHT */
+      /* Bride: dark purple silhouette, enters walking from far RIGHT */
       .l-bride img {
-        filter: brightness(0) invert(1);
+        filter: brightness(0) saturate(100%) invert(1) sepia(1) saturate(400%) hue-rotate(240deg) brightness(0.25) contrast(1.2);
       }
       .l-bride {
         opacity: 0;
