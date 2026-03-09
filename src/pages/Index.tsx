@@ -145,6 +145,7 @@ const PersonalCourtSection = forwardRef<HTMLElement, {t: (key: string) => string
     // Defer non-critical data fetch to reduce main-thread work during initial load
     const id = setTimeout(() => {
       const fetchQuotes = async () => {
+        const { supabase } = await import('@/integrations/supabase/client');
         const { data } = await supabase.from('quotes').select('*').order('created_at', { ascending: false });
         if (data) setQuotes(data);
       };
