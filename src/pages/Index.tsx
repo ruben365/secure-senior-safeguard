@@ -599,6 +599,8 @@ const Index = () => {
       navigator.clipboard.writeText(shareUrl);
       toast.success('Link copied!');
     }
+  };
+
   const embedUrl = livestreamUrl ? getEmbedUrl(livestreamUrl) : null;
 
   return (
