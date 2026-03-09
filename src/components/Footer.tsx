@@ -63,7 +63,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8 mb-14">
           {/* Brand */}
           <div className="md:col-span-1">
-            <span className="font-serif-display text-2xl font-semibold text-[hsl(var(--footer-fg))] block mb-5">C & R</span>
+            <span className="font-serif-display text-2xl font-semibold text-[hsl(var(--footer-fg))] block mb-5">Corine & Ruben's Wedding</span>
             <p className="font-sans-elegant text-sm leading-relaxed mb-6 text-[hsl(var(--footer-muted))]">
               {t('hero.tagline')}. {t('hero.date')}.
             </p>
@@ -153,7 +153,7 @@ const Footer = () => {
           <p className="text-xs text-[hsl(var(--footer-muted))] flex items-center gap-1.5 font-sans-elegant">
             {t('footer.made')} <Heart className="w-3 h-3 text-dusty-rose fill-dusty-rose" /> {t('footer.copyright')}
           </p>
-          <p className="font-serif-display text-lg font-semibold text-[hsl(var(--footer-fg))]">Corine & Ruben</p>
+          <p className="font-serif-display text-lg font-semibold text-[hsl(var(--footer-fg))]">Corine & Ruben's Wedding</p>
         </div>
       </div>
     </footer>
