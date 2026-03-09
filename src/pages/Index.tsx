@@ -1493,18 +1493,19 @@ const Index = () => {
       </Suspense>
 
       {/* ===== GIFT PICKER (DRAWER on mobile, DIALOG on desktop) ===== */}
+      <Suspense fallback={null}>
       {isMobile ?
-      <Drawer open={giftOpen} onOpenChange={setGiftOpen}>
-          <DrawerContent className="px-4 pb-8 max-h-[85vh]">
-            <DrawerHeader className="text-center">
+      <LazyDrawer open={giftOpen} onOpenChange={setGiftOpen}>
+          <LazyDrawerContent className="px-4 pb-8 max-h-[85vh]">
+            <LazyDrawerHeader className="text-center">
               <div className="w-14 h-14 rounded-full gradient-primary flex items-center justify-center mx-auto mb-2 shadow-glow">
                 <Gift className="w-6 h-6 text-primary-foreground" />
               </div>
-              <DrawerTitle className="font-serif-display text-xl">{t('registry.title')}</DrawerTitle>
-              <DrawerDescription className="font-sans-elegant text-muted-foreground text-sm">
+              <LazyDrawerTitle className="font-serif-display text-xl">{t('registry.title')}</LazyDrawerTitle>
+              <LazyDrawerDescription className="font-sans-elegant text-muted-foreground text-sm">
                 {t('registry.message')}
-              </DrawerDescription>
-            </DrawerHeader>
+              </LazyDrawerDescription>
+            </LazyDrawerHeader>
 
             {/* Quick amounts — mobile optimized */}
             <div className="grid grid-cols-2 gap-3 pt-2 px-1">
