@@ -8,11 +8,11 @@ import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 
 // Static fallback images
-import flowersImg from '@/assets/flowers-lavender.jpg';
-import ringsImg from '@/assets/rings.jpg';
+import flowersImg from '@/assets/flowers-lavender-small.webp';
+import ringsImg from '@/assets/rings-small.webp';
 import venueImg from '@/assets/venue.jpg';
-import coupleImg from '@/assets/couple-lavender.jpg';
-import cakeImg from '@/assets/cake.jpg';
+import coupleImg from '@/assets/couple-lavender-small.webp';
+import cakeImg from '@/assets/cake-small.webp';
 
 const FALLBACK_EVENTS = [
   { titleKey: 'story.event1.title', descKey: 'story.event1.description', dateKey: 'story.event1.date', icon: '💫' },
