@@ -438,10 +438,12 @@ const ScriptureTransition = ({ t }: {t: (key: string) => string;}) => {
           <button
             key={i}
             onClick={() => setCurrentVerse(i)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-            i === currentVerse ? 'bg-primary w-6' : 'bg-muted-foreground/25 hover:bg-muted-foreground/40'}`
-            }
-            aria-label={`Verse ${i + 1}`} />
+            className="relative flex items-center justify-center w-6 h-6"
+            aria-label={`Verse ${i + 1}`}>
+            <span className={`block rounded-full transition-all duration-300 ${
+              i === currentVerse ? 'bg-primary w-6 h-2' : 'bg-muted-foreground/25 hover:bg-muted-foreground/40 w-2 h-2'}`
+            } />
+          </button>
 
           )}
         </div>
