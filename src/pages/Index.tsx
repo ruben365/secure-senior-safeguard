@@ -1300,6 +1300,48 @@ const Index = () => {
         </div>
       </section>
 
+      {/* ===== COMING SOON BANNER (Court Mode Only) ===== */}
+      {isCourtMode && (
+        <>
+          <SectionDivider variant="sparkle" />
+          <section className="py-8 md:py-12 relative overflow-hidden">
+            <div className="container mx-auto px-6 md:px-12 max-w-3xl relative z-10">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="glass-card-strong rounded-3xl p-8 md:p-12 text-center relative overflow-hidden border border-primary/20"
+              >
+                <GoldenCorners />
+                <div className="absolute top-0 right-0 w-40 h-40 rounded-full bg-gradient-to-br from-amber-400/10 to-rose-400/10 blur-3xl pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-32 h-32 rounded-full bg-gradient-to-tr from-violet-400/10 to-primary/10 blur-3xl pointer-events-none" />
+                
+                <motion.div
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                  className="text-5xl mb-4"
+                >
+                  ⛪
+                </motion.div>
+                
+                <h3 className="font-serif-display text-2xl md:text-3xl text-foreground font-semibold mb-4">
+                  {t('church.wedding.coming.short')}
+                </h3>
+                <p className="font-sans-elegant text-base md:text-lg text-muted-foreground leading-relaxed max-w-lg mx-auto">
+                  {t('church.wedding.coming')}
+                </p>
+                
+                <div className="flex items-center justify-center gap-2 mt-6">
+                  <Heart className="w-4 h-4 text-rose-400 fill-rose-400 animate-pulse-love" />
+                  <span className="font-sans-elegant text-sm text-primary font-semibold">{t('hero.date')}</span>
+                  <Heart className="w-4 h-4 text-rose-400 fill-rose-400 animate-pulse-love" />
+                </div>
+              </motion.div>
+            </div>
+          </section>
+        </>
+      )}
+
       {/* ===== DIVIDER ===== */}
       <SectionDivider variant="heart" />
 
