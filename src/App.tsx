@@ -37,7 +37,9 @@ import Navigation from "@/components/Navigation";
 import ScrollToTop from "@/components/ScrollToTop";
 import Footer from "@/components/Footer";
 import AuroraBackground from "@/components/AuroraBackground";
-import Index from "./pages/Index";
+import { MusicProvider } from "@/components/MusicContext";
+const MusicFloatingButton = lazy(() => import("@/components/MusicPlayer"));
+const Index = lazy(() => import("./pages/Index"));
 const Story = lazy(() => import("./pages/Story"));
 const RSVP = lazy(() => import("./pages/RSVP"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
@@ -51,7 +53,6 @@ const Guestbook = lazy(() => import("./pages/Guestbook"));
 const Gallery = lazy(() => import("./pages/Gallery"));
 const Venue = lazy(() => import("./pages/Venue"));
 import FloatingHearts from "@/components/FloatingHearts";
-import MusicFloatingButton, { MusicProvider } from "@/components/MusicPlayer";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -103,7 +104,9 @@ const App = () => (
                   <Footer />
                 </div>
 
-                <MusicFloatingButton />
+                <Suspense fallback={null}>
+                  <MusicFloatingButton />
+                </Suspense>
               </AuthProvider>
             </BrowserRouter>
           </TooltipProvider>

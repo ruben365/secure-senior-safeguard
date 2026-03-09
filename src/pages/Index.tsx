@@ -2,7 +2,7 @@ import { useState, useEffect, forwardRef, lazy, Suspense } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useMusic } from '@/components/MusicPlayer';
+import { useMusic } from '@/components/MusicContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Heart, MapPin, Calendar, Clock, Utensils, Gift, Sparkles, Play, Pause, Music, Users, Flower2, BookOpen, Cross, Church, Gem, PartyPopper, Hotel, Car, Check, X, Megaphone, Video, Share2, ExternalLink } from 'lucide-react';
 const EmbeddedPaymentForm = lazy(() => import('@/components/EmbeddedPaymentForm'));
