@@ -146,6 +146,59 @@ const Registry = () => {
             <Gift className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
           </div>
         </motion.button>
+        {/* RSVP Share Card with QR Code */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.45 }}
+          className="glass-card-strong rounded-3xl p-7 mt-6"
+        >
+          <div className="flex items-center gap-3 mb-5">
+            <div className="w-10 h-10 rounded-2xl gradient-primary flex items-center justify-center">
+              <Share2 className="w-5 h-5 text-primary-foreground" />
+            </div>
+            <div>
+              <span className="font-sans-elegant text-foreground font-semibold text-sm block">Share RSVP Link</span>
+              <span className="font-sans-elegant text-xs text-muted-foreground">Help spread the word!</span>
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row items-center gap-6">
+            {/* QR Code */}
+            <div className="bg-white p-4 rounded-2xl shadow-sm">
+              <QRCodeSVG 
+                value={rsvpUrl} 
+                size={120} 
+                level="H"
+                includeMargin={false}
+                bgColor="#ffffff"
+                fgColor="#1a1a2e"
+              />
+            </div>
+
+            {/* Link & Copy */}
+            <div className="flex-1 w-full">
+              <p className="font-sans-elegant text-xs text-muted-foreground mb-3">
+                Scan the QR code or copy the link to share with guests
+              </p>
+              <div className="flex gap-2">
+                <Input
+                  readOnly
+                  value={rsvpUrl}
+                  className="font-sans-elegant text-sm rounded-full h-11 bg-background/50 border-border/50"
+                />
+                <button
+                  onClick={handleCopyLink}
+                  className="btn-primary px-5 rounded-full text-sm flex items-center gap-2 whitespace-nowrap"
+                >
+                  {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                  {copied ? 'Copied!' : 'Copy'}
+                </button>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </div>
 
         </div>
