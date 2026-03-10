@@ -174,7 +174,8 @@ const PersonalCourtSection = forwardRef<HTMLElement, {t: (key: string) => string
           <p className="font-sans-elegant text-base text-muted-foreground max-w-md mx-auto">{t('love.promise.desc')}</p>
         </motion.div>
 
-        {/* Quotes carousel */}
+        {/* Quotes carousel — reserve space to prevent layout shift */}
+        <div style={{ minHeight: quotes.length > 0 ? undefined : '280px' }}>
         {quotes.length > 0 &&
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <div className="glass-card-strong rounded-3xl p-8 md:p-12 relative overflow-hidden">
@@ -222,6 +223,7 @@ const PersonalCourtSection = forwardRef<HTMLElement, {t: (key: string) => string
             </div>
           </motion.div>
         }
+        </div>
 
         {/* Values row */}
         <div className="flex justify-center gap-4 mt-6">
@@ -289,7 +291,7 @@ const AnnouncementsSection = forwardRef<HTMLElement, {t: (key: string) => string
   }, [announcements.length]);
 
   if (loaded && announcements.length === 0) return null;
-  if (!loaded) return <section ref={ref} aria-hidden="true" />;
+  if (!loaded) return <section ref={ref} aria-hidden="true" style={{ minHeight: '380px' }} />;
 
   return (
     <section ref={ref} className="py-8 md:py-12 relative overflow-hidden">
