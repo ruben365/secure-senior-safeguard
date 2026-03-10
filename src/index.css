@@ -300,10 +300,10 @@
 
   .gradient-soft {
     background:
-      radial-gradient(ellipse 70% 50% at 30% 40%, rgba(201, 169, 182, 0.3) 0%, transparent 55%),
-      radial-gradient(ellipse 60% 50% at 70% 60%, rgba(212, 196, 224, 0.25) 0%, transparent 50%),
-      radial-gradient(ellipse 50% 40% at 50% 50%, rgba(245, 230, 220, 0.35) 0%, transparent 55%),
-      linear-gradient(135deg, #F5F0F0 0%, #F0E8F0 50%, #F5E8E0 100%);
+      radial-gradient(ellipse 70% 50% at 30% 40%, rgba(246, 213, 216, 0.35) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 50% at 70% 60%, rgba(215, 192, 224, 0.3) 0%, transparent 50%),
+      radial-gradient(ellipse 50% 40% at 50% 50%, rgba(251, 249, 248, 0.4) 0%, transparent 55%),
+      linear-gradient(135deg, #FBF9F8 0%, #F6F0F4 50%, #FBF9F8 100%);
     background-blend-mode: soft-light, overlay, overlay, normal;
   }
 
