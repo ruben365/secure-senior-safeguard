@@ -7,12 +7,12 @@ import { useSiteImages, useStoryEvents } from '@/hooks/useSiteContent';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 
-// Static fallback images
-import flowersImg from '@/assets/flowers-lavender-small.webp';
-import ringsImg from '@/assets/rings-small.webp';
-import venueImg from '@/assets/venue.jpg';
-import coupleImg from '@/assets/couple-lavender-small.webp';
-import cakeImg from '@/assets/cake-small.webp';
+// Personal couple photos
+import couple1 from '@/assets/couple-1.jpg';
+import couple3 from '@/assets/couple-3.jpg';
+import couple5 from '@/assets/couple-5.jpg';
+import couple9 from '@/assets/couple-9.jpg';
+import couple10 from '@/assets/couple-10.jpg';
 
 const FALLBACK_EVENTS = [
   { titleKey: 'story.event1.title', descKey: 'story.event1.description', dateKey: 'story.event1.date', icon: '💫' },
