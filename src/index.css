@@ -332,11 +332,11 @@
 
   .gradient-mesh {
     background:
-      radial-gradient(ellipse 80% 60% at 20% 15%, rgba(201, 169, 182, 0.4) 0%, transparent 60%),
-      radial-gradient(ellipse 70% 50% at 80% 25%, rgba(184, 169, 201, 0.35) 0%, transparent 55%),
-      radial-gradient(ellipse 60% 50% at 50% 80%, rgba(232, 196, 184, 0.3) 0%, transparent 50%),
-      radial-gradient(ellipse 50% 40% at 40% 50%, rgba(245, 230, 220, 0.4) 0%, transparent 55%),
-      linear-gradient(135deg, #F5F0F0 0%, #F0E8F0 50%, #F5E8E0 100%);
+      radial-gradient(ellipse 80% 60% at 20% 15%, rgba(246, 213, 216, 0.4) 0%, transparent 60%),
+      radial-gradient(ellipse 70% 50% at 80% 25%, rgba(215, 192, 224, 0.35) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 50% at 50% 80%, rgba(246, 213, 216, 0.3) 0%, transparent 50%),
+      radial-gradient(ellipse 50% 40% at 40% 50%, rgba(215, 192, 224, 0.3) 0%, transparent 55%),
+      linear-gradient(135deg, #FBF9F8 0%, #F6F0F4 50%, #FBF9F8 100%);
     background-blend-mode: soft-light, overlay, screen, overlay, normal;
   }
 
