@@ -174,7 +174,8 @@ const PersonalCourtSection = forwardRef<HTMLElement, {t: (key: string) => string
           <p className="font-sans-elegant text-base text-muted-foreground max-w-md mx-auto">{t('love.promise.desc')}</p>
         </motion.div>
 
-        {/* Quotes carousel */}
+        {/* Quotes carousel — reserve space to prevent layout shift */}
+        <div style={{ minHeight: quotes.length > 0 ? undefined : '280px' }}>
         {quotes.length > 0 &&
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <div className="glass-card-strong rounded-3xl p-8 md:p-12 relative overflow-hidden">
