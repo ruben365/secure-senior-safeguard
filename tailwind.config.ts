@@ -77,10 +77,10 @@ export default {
         sm: "calc(var(--radius) - 8px)",
       },
       boxShadow: {
-        "soft": "0 8px 24px -4px rgba(74, 59, 78, 0.08)",
-        "glow": "0 0 40px -10px rgba(159, 130, 164, 0.3)",
-        "card-hover": "0 30px 60px -8px rgba(74, 59, 78, 0.12)",
-        "glass": "0 20px 40px -4px rgba(74, 59, 78, 0.08)",
+        "soft": "0 20px 40px rgba(155, 120, 168, 0.08)",
+        "glow": "0 0 40px -10px rgba(155, 120, 168, 0.3)",
+        "card-hover": "0 20px 40px rgba(155, 120, 168, 0.15)",
+        "glass": "0 20px 40px rgba(155, 120, 168, 0.08)",
       },
       keyframes: {
         "accordion-down": {
