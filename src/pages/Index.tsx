@@ -223,6 +223,7 @@ const PersonalCourtSection = forwardRef<HTMLElement, {t: (key: string) => string
             </div>
           </motion.div>
         }
+        </div>
 
         {/* Values row */}
         <div className="flex justify-center gap-4 mt-6">
