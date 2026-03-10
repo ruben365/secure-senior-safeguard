@@ -815,58 +815,58 @@ function Business() {
 
                   
 
-                    <div
-                    className={`grid grid-cols-1 sm:grid-cols-2 gap-5 ${
-                    group.features.length === 4 ?
-                    "lg:grid-cols-4" :
-                    group.features.length === 3 ?
-                    "lg:grid-cols-3" :
-                    "lg:grid-cols-2"}`
-                    }
-                    style={{ perspective: "1000px" }}>
                     
-                      {group.features.map((feature, fi) =>
-                    <div
-                      key={feature.title}
-                      className="hover-lift">
-                      
-                          <Link
-                        to={feature.href}
-                        className="group/card relative flex flex-col p-6 rounded-2xl border border-border/50 bg-card/95 backdrop-blur-sm transition-all duration-500 h-full no-underline hover:border-primary/30 hover:shadow-[0_20px_50px_-15px_hsl(var(--primary)/0.15)] overflow-hidden">
-                        
-                            {/* Top glow bar */}
-                            <div className={`absolute top-0 left-0 right-0 h-1 rounded-t-2xl bg-gradient-to-r ${group.gradient} opacity-40 group-hover/card:opacity-100 transition-opacity duration-300`} />
 
-                            {/* Hover background glow */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] to-accent/[0.02] opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-                            <div className="flex items-start justify-between gap-3 mb-4 relative z-10">
-                              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${group.gradient} flex items-center justify-center transition-all duration-300 shadow-md group-hover/card:scale-110 group-hover/card:shadow-lg`}
-                          style={{ transform: "translateZ(20px)" }}>
-                            
-                                <feature.icon className="w-5 h-5 text-white" />
-                              </div>
-                              <Badge className="text-[10px] font-bold bg-muted/80 text-muted-foreground border-border/50 backdrop-blur-sm">
-                                {feature.badge}
-                              </Badge>
-                            </div>
-                            <div className="mb-3 relative z-10">
-                              <p className="font-bold text-base text-foreground leading-tight group-hover/card:text-primary transition-colors duration-300">
-                                {feature.title}
-                              </p>
-                              <p className="text-xs font-semibold text-primary/70 mt-1">{feature.price}</p>
-                            </div>
-                            <p className="text-xs text-muted-foreground leading-relaxed flex-1 mb-4 relative z-10">
-                              {feature.tagline}
-                            </p>
-                            <div className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground/60 group-hover/card:text-primary transition-colors relative z-10">
-                              <span>Explore</span>
-                              <ChevronRight className="w-3.5 h-3.5 group-hover/card:translate-x-1.5 transition-transform duration-300" />
-                            </div>
-                          </Link>
-                        </div>
-                    )}
-                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  
                   </div>
                 </AnimatedSection>
               )}
