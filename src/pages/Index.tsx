@@ -23,7 +23,7 @@ import { useSiteImages, useSiteSettings } from '@/hooks/useSiteContent';
 
 import heroImg from '@/assets/hero-wedding-thumb.webp';
 import couple11 from '@/assets/couple-11.jpg';
-import coupleImgSmall from '@/assets/couple-lavender-bg.webp';
+import coupleImgSmall from '@/assets/couple-lavender-tiny.webp';
 import couple1 from '@/assets/couple-1.jpg';
 import couple2 from '@/assets/couple-2.jpg';
 import couple3 from '@/assets/couple-3.jpg';
@@ -32,8 +32,8 @@ import couple5 from '@/assets/couple-5.jpg';
 import couple6 from '@/assets/couple-6.jpg';
 import couple7 from '@/assets/couple-7.jpg';
 import couple8 from '@/assets/couple-8.jpg';
-import cakeImg from '@/assets/cake-thumb.webp';
-import ringsImg from '@/assets/rings-thumb.webp';
+import cakeImg from '@/assets/cake-small.webp';
+import ringsImg from '@/assets/rings-small.webp';
 
 const giftTiers = [
 { amount: 60, emoji: '💐', labelKey: 'registry.tier.bouquet' },
