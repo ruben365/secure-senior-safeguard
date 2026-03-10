@@ -268,6 +268,7 @@ const Gallery = () => {
                 <img
                   src={photo.url}
                   alt={photo.alt}
+                  style={{ objectPosition: 'top' }}
                   loading="lazy"
                   className="w-full object-cover"
                 />
