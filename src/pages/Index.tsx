@@ -23,7 +23,7 @@ import { useSiteImages, useSiteSettings } from '@/hooks/useSiteContent';
 
 import heroImg from '@/assets/hero-wedding-thumb.webp';
 import couple11 from '@/assets/couple-11.jpg';
-import coupleImgSmall from '@/assets/couple-lavender-micro.webp';
+import coupleImgSmall from '@/assets/couple-lavender-bg.webp';
 import couple1 from '@/assets/couple-1.jpg';
 import couple2 from '@/assets/couple-2.jpg';
 import couple3 from '@/assets/couple-3.jpg';
