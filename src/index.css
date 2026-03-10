@@ -389,17 +389,14 @@
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 text-sm font-medium tracking-wider transition-all duration-500;
     font-family: 'Inter', sans-serif;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 14px;
     letter-spacing: 0.5px;
-    background: linear-gradient(135deg, hsl(293 15% 58%), hsl(286 13% 42%));
+    background: #9B78A8;
     color: #FFFFFF;
     padding: 16px 32px;
-    border-radius: 9999px;
-    box-shadow:
-      0 8px 24px -4px rgba(74, 59, 78, 0.25),
-      0 0 0 1px rgba(159, 130, 164, 0.3),
-      inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+    box-shadow: 0 20px 40px rgba(155, 120, 168, 0.08);
     position: relative;
     overflow: hidden;
   }
