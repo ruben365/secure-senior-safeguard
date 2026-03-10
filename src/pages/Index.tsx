@@ -273,7 +273,7 @@ const AnnouncementsSection = forwardRef<HTMLElement, {t: (key: string) => string
         const { supabase } = await import('@/integrations/supabase/client');
         const { data } = await supabase.from('announcements').select('*').order('created_at', { ascending: false });
         if (data) setAnnouncements(data);
-      };
+        setLoaded(true);
       fetchData();
     }, 1500);
     return () => clearTimeout(id);
