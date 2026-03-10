@@ -1225,9 +1225,9 @@ const Index = () => {
             homepageGalleryImages.map((img) => ({ img: img.url, label: '♥' })) :
             [
             { img: heroImg, label: '♥' },
-            { img: cakeImgSmall, label: '🌸' },
-            { img: ringsImgSmall, label: '💍' },
-            { img: coupleImgSmall, label: '♥' }]).
+            { img: couple5, label: '🌸' },
+            { img: couple6, label: '💍' },
+            { img: couple7, label: '♥' }]).
 
             map((item, i) =>
             <motion.div
