@@ -619,8 +619,8 @@
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .card-hover:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 30px 60px -8px rgba(74, 59, 78, 0.12);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(155, 120, 168, 0.15);
   }
 
   /* ===== FOOTER — matches header nav bar ===== */
