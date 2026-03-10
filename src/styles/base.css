@@ -166,33 +166,33 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   }
 
   .dark {
-    --background: 288 35% 7%;
-    --foreground: 330 18% 95%;
-    --card: 288 30% 11%;
-    --card-foreground: 330 18% 95%;
-    --popover: 288 30% 11%;
-    --popover-foreground: 330 18% 95%;
-    --primary: 316 45% 68%;
-    --primary-foreground: 288 35% 7%;
-    --secondary: 295 22% 18%;
-    --secondary-foreground: 330 18% 95%;
-    --muted: 288 18% 16%;
-    --muted-foreground: 316 12% 65%;
-    --accent: 18 88% 65%;
+    --background: 270 40% 6%;
+    --foreground: 300 15% 95%;
+    --card: 272 35% 10%;
+    --card-foreground: 300 15% 95%;
+    --popover: 272 35% 10%;
+    --popover-foreground: 300 15% 95%;
+    --primary: 290 50% 65%;
+    --primary-foreground: 270 40% 6%;
+    --secondary: 278 28% 16%;
+    --secondary-foreground: 300 15% 95%;
+    --muted: 275 22% 14%;
+    --muted-foreground: 290 14% 62%;
+    --accent: 172 55% 52%;
     --accent-foreground: 0 0% 100%;
-    --destructive: 8 70% 55%;
+    --destructive: 4 78% 52%;
     --destructive-foreground: 0 0% 100%;
-    --border: 288 22% 20%;
-    --input: 288 22% 20%;
-    --ring: 316 45% 68%;
-    --sidebar-background: 288 35% 6%;
-    --sidebar-foreground: 330 14% 95%;
-    --sidebar-primary: 316 45% 68%;
-    --sidebar-primary-foreground: 288 35% 7%;
-    --sidebar-accent: 295 22% 16%;
-    --sidebar-accent-foreground: 330 14% 95%;
-    --sidebar-border: 288 22% 16%;
-    --sidebar-ring: 316 45% 68%;
+    --border: 275 26% 18%;
+    --input: 275 26% 18%;
+    --ring: 290 50% 65%;
+    --sidebar-background: 270 40% 5%;
+    --sidebar-foreground: 300 12% 95%;
+    --sidebar-primary: 290 50% 65%;
+    --sidebar-primary-foreground: 270 40% 6%;
+    --sidebar-accent: 278 28% 14%;
+    --sidebar-accent-foreground: 300 12% 95%;
+    --sidebar-border: 275 26% 14%;
+    --sidebar-ring: 290 50% 65%;
   }
 }
 
