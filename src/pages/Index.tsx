@@ -251,6 +251,7 @@ PersonalCourtSection.displayName = 'PersonalCourtSection';
 const AnnouncementsSection = forwardRef<HTMLElement, {t: (key: string) => string;}>(({ t }, ref) => {
   const { language } = useLanguage();
   const [announcements, setAnnouncements] = useState<{id: string;title: string;content: string;created_at: string;title_fr?: string | null;title_es?: string | null;content_fr?: string | null;content_es?: string | null;}[]>([]);
+  const [loaded, setLoaded] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const getTitle = (ann: typeof announcements[number]) => {
