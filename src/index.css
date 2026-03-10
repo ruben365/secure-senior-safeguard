@@ -416,11 +416,8 @@
 
 
   .btn-primary:hover {
-    background: linear-gradient(135deg, hsl(286 15% 50%), hsl(280 14% 38%));
-    box-shadow:
-      0 14px 36px -4px rgba(74, 59, 78, 0.35),
-      0 0 0 1px rgba(159, 130, 164, 0.5),
-      0 0 24px rgba(159, 130, 164, 0.15);
+    background: #8A6596;
+    box-shadow: 0 20px 40px rgba(155, 120, 168, 0.15);
     transform: translateY(-2px);
   }
 
