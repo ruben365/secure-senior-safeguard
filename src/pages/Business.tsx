@@ -916,9 +916,9 @@ function Business() {
                   <Link to="/training">View Individual Plans</Link>
                 </Button>
               </div>
-              <p className="text-xs text-muted-foreground mt-5">
-                Early-access pricing is still available for platform-wide engagements.
-              </p>
+              
+
+              
             </AnimatedSection>
           </div>
         </section>
