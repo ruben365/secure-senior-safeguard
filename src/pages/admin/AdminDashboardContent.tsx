@@ -121,11 +121,10 @@ export default function AdminDashboardContent() {
         .select("*", { count: "exact", head: true })
         .in("role", [
           "staff",
-          "trainer",
-          "developer",
-          "analyst",
-          "healthcare",
-          "caregiver",
+          "secretary",
+          "training_coordinator",
+          "business_consultant",
+          "support_specialist",
         ]);
 
       const { count: projectsCount } = await supabase

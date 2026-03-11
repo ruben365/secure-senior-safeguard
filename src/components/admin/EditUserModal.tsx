@@ -40,14 +40,13 @@ interface EditUserModalProps {
 const APP_ROLES = [
   { value: "user", label: "User" },
   { value: "staff", label: "Staff" },
-  { value: "moderator", label: "Moderator" },
+  { value: "secretary", label: "Office Manager" },
+  { value: "training_coordinator", label: "Training Coordinator" },
+  { value: "business_consultant", label: "Business Consultant" },
+  { value: "support_specialist", label: "Support Specialist" },
   { value: "admin", label: "Admin" },
-  { value: "trainer", label: "Trainer" },
-  { value: "developer", label: "Developer" },
-  { value: "analyst", label: "Analyst" },
-  { value: "healthcare", label: "Healthcare" },
-  { value: "caregiver", label: "Caregiver" },
-  { value: "senior", label: "Senior" },
+  { value: "worker", label: "Worker" },
+  { value: "partner", label: "Partner" },
 ];
 
 export function EditUserModal({
