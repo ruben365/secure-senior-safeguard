@@ -45,7 +45,7 @@ export function AdminShell() {
   } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  const inactivityTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const inactivityTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const navigate = useNavigate();
   const { toast } = useToast();
 

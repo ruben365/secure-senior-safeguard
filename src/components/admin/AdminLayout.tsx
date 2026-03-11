@@ -47,7 +47,7 @@ export function AdminLayout({
   const [adminEmail, setAdminEmail] = useState("");
 
   const profileRef = useRef<HTMLDivElement>(null);
-  const inactivityTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const inactivityTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const navigate = useNavigate();
   const { toast } = useToast();
 

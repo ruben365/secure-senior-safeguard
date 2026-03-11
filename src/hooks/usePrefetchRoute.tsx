@@ -16,7 +16,7 @@ const routeToPageKey: Record<string, string> = {
 };
 
 export const usePrefetchRoute = (path: string) => {
-  const prefetchTimerRef = useRef<NodeJS.Timeout>();
+  const prefetchTimerRef = useRef<ReturnType<typeof setTimeout>>();
 
   const prefetch = () => {
     if (prefetchedRoutes.has(path)) return;
