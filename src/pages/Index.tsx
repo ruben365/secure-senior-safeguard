@@ -479,10 +479,6 @@ const ScriptureTransition = ({ t }: {t: (key: string) => string;}) => {
 
 };
 
-  const features = [
-  { icon: Heart, label: t('nav.story'), desc: t('story.subtitle'), to: '/story', color: 'text-rose-400', bg: 'from-rose-500/20 to-pink-500/10' },
-  { icon: Clock, label: t('nav.rsvp'), desc: t('rsvp.subtitle'), to: '/rsvp', color: 'text-emerald-400', bg: 'from-emerald-500/20 to-teal-500/10' }];
-
 
 const Index = () => {
   const { t } = useLanguage();
@@ -505,7 +501,9 @@ const Index = () => {
   const courtVenue = settings.court_wedding_venue || '301 Sycamore St, Brookville — Mayor Letner';
   const courtAfterVenue = settings.court_wedding_after_venue || '10209 Gully Pass Dr, Dayton, OH 45458';
 
-
+  const features = [
+  { icon: Heart, label: t('nav.story'), desc: t('story.subtitle'), to: '/story', color: 'text-rose-400', bg: 'from-rose-500/20 to-pink-500/10' },
+  { icon: Clock, label: t('nav.rsvp'), desc: t('rsvp.subtitle'), to: '/rsvp', color: 'text-emerald-400', bg: 'from-emerald-500/20 to-teal-500/10' }];
 
   const courtDetailSections = [
   {
