@@ -151,7 +151,7 @@ const VoiceListeningIndicator: React.FC<VoiceListeningIndicatorProps> = ({
   interimText,
 }) => {
   const [time, setTime] = React.useState(0);
-  const timerRef = React.useRef<NodeJS.Timeout | null>(null);
+  const timerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   React.useEffect(() => {
     if (isRecording) {
       setTime(0);

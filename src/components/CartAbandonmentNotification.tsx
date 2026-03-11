@@ -25,7 +25,7 @@ export const CartAbandonmentNotification = () => {
     // Don't show if already dismissed or already shown once
     if (isDismissedThisSession() || hasShownOnce) return;
 
-    let timer: NodeJS.Timeout;
+    let timer: ReturnType<typeof setTimeout>;
 
     if (itemCount > 0) {
       // Show after 2 minutes of having items (longer delay, less intrusive)
