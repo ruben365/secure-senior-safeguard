@@ -80,7 +80,7 @@ export function NeonPendingRequests() {
       // Fetch pending testimonials
       const { data: testimonials } = await supabase
         .from("testimonials")
-        .select("id, author_name, created_at")
+        .select("id, name, created_at")
         .eq("status", "pending")
         .order("created_at", { ascending: false })
         .limit(2);
