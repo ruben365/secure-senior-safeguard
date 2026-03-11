@@ -91,7 +91,7 @@ export function NeonPendingRequests() {
             id: t.id,
             type: "testimonial",
             title: "New Testimonial",
-            subtitle: t.author_name,
+            subtitle: t.name,
             time: formatTimeAgo(t.created_at),
           });
         });
