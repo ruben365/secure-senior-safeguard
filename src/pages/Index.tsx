@@ -29,7 +29,7 @@ import couple3 from '@/assets/couple-3-thumb.webp';
 import couple4 from '@/assets/couple-4-thumb.webp';
 import couple5 from '@/assets/couple-5-small.webp';
 import couple7 from '@/assets/couple-7-small.webp';
-import couple8 from '@/assets/couple-7-small.webp';
+import couple8 from '@/assets/couple-12.jpg';
 import cakeImg from '@/assets/cake-gallery.webp';
 import ringsImg from '@/assets/rings-gallery.webp';
 
