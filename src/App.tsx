@@ -119,6 +119,9 @@ const App = () => (
               <Suspense fallback={null}>
                 <MusicFloatingButton />
               </Suspense>
+              <Suspense fallback={null}>
+                <GiftFAB />
+              </Suspense>
             </AuthProvider>
           </BrowserRouter>
         </MusicProvider>
