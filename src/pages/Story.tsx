@@ -8,7 +8,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 
 // Personal couple photos
-import couple1 from '@/assets/couple-1.jpg';
+import coupleFirstMeeting from '@/assets/couple-first-meeting.jpg';
 import couple3 from '@/assets/couple-3.jpg';
 import couple5 from '@/assets/couple-5.jpg';
 import couple9 from '@/assets/couple-9.jpg';
@@ -25,7 +25,7 @@ const FALLBACK_EVENTS = [
 ];
 
 // Images paired with timeline events
-const EVENT_IMAGES = [couple1, couple3, couple9, couple5, couple10, coupleForever];
+const EVENT_IMAGES = [coupleFirstMeeting, couple3, couple9, couple5, couple10, coupleForever];
 
 interface Photo {
   id: string;
@@ -35,7 +35,7 @@ interface Photo {
 }
 
 const STATIC_PHOTOS = [
-  { id: 'static-1', url: couple1, alt: 'Corine & Ruben' },
+  { id: 'static-1', url: coupleFirstMeeting, alt: 'Corine & Ruben' },
   { id: 'static-3', url: couple3, alt: 'Corine & Ruben' },
   { id: 'static-4', url: couple9, alt: 'Corine & Ruben' },
   { id: 'static-5', url: couple10, alt: 'Corine & Ruben' },
