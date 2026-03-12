@@ -440,17 +440,17 @@
   .btn-outline {
     @apply inline-flex items-center justify-center gap-2 text-sm font-medium tracking-wider transition-all duration-500;
     font-family: 'Inter', sans-serif;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 14px;
     letter-spacing: 0.5px;
     background: transparent;
-    border: 1px solid #9B78A8;
-    color: #9B78A8;
+    border: 2px solid #9B78A8;
+    color: #8A6596;
     padding: 16px 32px;
     border-radius: 50px;
     position: relative;
     overflow: hidden;
-    box-shadow: none;
+    box-shadow: 0 2px 8px rgba(155, 120, 168, 0.1);
   }
 
 
