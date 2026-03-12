@@ -1,0 +1,156 @@
+import { useLocation, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLanguage } from '@/contexts/LanguageContext';
+import { motion } from "framer-motion";
+import { Home, ArrowLeft, Heart, MapPin, Calendar, Mail } from "lucide-react";
+
+const NotFound = () => {
+  const location = useLocation();
+  const { t } = useLanguage();
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  const quickLinks = [
+    { icon: Home, label: t('nav.home'), path: "/", desc: t('notfound.backToStart') },
+    { icon: Heart, label: t('nav.story'), path: "/story", desc: t('notfound.howWeMet') },
+    { icon: Calendar, label: t('nav.rsvp'), path: "/rsvp", desc: t('notfound.confirmAttendance') },
+    { icon: MapPin, label: t('nav.details'), path: "/details", desc: t('notfound.venueSchedule') },
+  ];
+
+  return (
+    <div className="relative min-h-screen overflow-hidden gradient-hero flex items-center justify-center px-6 md:px-12 py-24">
+      <div
+        className="floating-blob w-[500px] h-[500px] bg-primary/20 top-[-10%] left-[-5%]"
+        style={{ transform: `translate(${mousePos.x * 30}px, ${mousePos.y * 20}px)` }}
+      />
+      <div
+        className="floating-blob w-[400px] h-[400px] bg-pale-lilac/25 bottom-[-10%] right-[-5%]"
+        style={{ transform: `translate(${-mousePos.x * 20}px, ${-mousePos.y * 15}px)` }}
+      />
+      <div
+        className="floating-blob w-[300px] h-[300px] bg-dusty-rose/15 top-[40%] right-[20%]"
+        style={{ transform: `translate(${mousePos.x * 15}px, ${-mousePos.y * 25}px)` }}
+      />
+
+      <div className="relative z-10 w-full max-w-4xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="glass-card-strong rounded-3xl p-8 md:p-14 text-center mb-8"
+        >
+          <motion.div
+            animate={{ y: [-8, 8, -8], rotate: [0, 5, -5, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            className="flex items-center justify-center gap-3 mb-6"
+          >
+            <Heart className="w-5 h-5 text-dusty-rose/50" />
+            <Heart className="w-7 h-7 text-dusty-rose/70 fill-dusty-rose/20" />
+            <Heart className="w-5 h-5 text-dusty-rose/50" />
+          </motion.div>
+
+          <motion.h1
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="font-serif-display text-8xl md:text-9xl font-semibold gradient-text mb-4 leading-none"
+          >
+            404
+          </motion.h1>
+
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}>
+            <h2 className="font-serif-display text-2xl md:text-3xl text-foreground mb-3 font-semibold">
+              {t('notfound.title')}
+            </h2>
+            <p className="font-sans-elegant text-lg md:text-xl text-muted-foreground max-w-md mx-auto mb-2" style={{ lineHeight: 1.6 }}>
+              {t('notfound.desc')}
+            </p>
+            <p className="font-sans-elegant text-xs text-muted-foreground/60 tracking-wider uppercase mt-4">
+              {t('notfound.requested')}: <span className="text-primary/70">{location.pathname}</span>
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10"
+          >
+            <Link to="/" className="btn-primary">
+              <Home className="w-4 h-4" />
+              {t('notfound.returnHome')}
+            </Link>
+            <button onClick={() => window.history.back()} className="btn-outline">
+              <ArrowLeft className="w-4 h-4" />
+              {t('notfound.goBack')}
+            </button>
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4"
+        >
+          {quickLinks.map((link, i) => (
+            <motion.div
+              key={link.path}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9 + i * 0.1 }}
+              whileHover={{ y: -6, scale: 1.02 }}
+            >
+              <Link
+                to={link.path}
+                className="glass-card-strong rounded-3xl p-6 flex flex-col items-center text-center gap-2.5 card-hover group block"
+              >
+                <div className="w-12 h-12 rounded-3xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
+                  <link.icon className="w-5 h-5 text-primary" />
+                </div>
+                <span className="font-sans-elegant text-sm font-semibold text-foreground">{link.label}</span>
+                <span className="font-sans-elegant text-xs text-muted-foreground">{link.desc}</span>
+              </Link>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.3 }}
+          className="mt-8 glass-card-strong rounded-3xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-11 h-11 rounded-3xl bg-accent/30 flex items-center justify-center">
+              <Mail className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <p className="font-sans-elegant text-sm font-semibold text-foreground">{t('notfound.needHelp')}</p>
+              <p className="font-sans-elegant text-xs text-muted-foreground">{t('notfound.reachOut')}</p>
+            </div>
+          </div>
+          <Link
+            to="/rsvp"
+            className="font-sans-elegant text-xs font-semibold tracking-wider uppercase text-primary hover:text-primary/80 transition-colors"
+          >
+            {t('notfound.contactUs')} →
+          </Link>
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
+export default NotFound;
