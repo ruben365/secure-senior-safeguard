@@ -3,7 +3,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useMusic } from '@/components/MusicContext';
-import { motion, AnimatePresence } from 'framer-motion';
+/* framer-motion removed for performance — using CSS transitions instead */
 import { ChevronDown, Heart, MapPin, Calendar, Clock, Utensils, Gift, Sparkles, Play, Pause, Music, Users, Flower2, BookOpen, Cross, Church, Gem, PartyPopper, Hotel, Car, Check, X, Megaphone, Video, Share2, ExternalLink } from 'lucide-react';
 const LazyDialog = lazy(() => import('@/components/ui/dialog').then(m => ({ default: m.Dialog })));
 const LazyDialogContent = lazy(() => import('@/components/ui/dialog').then(m => ({ default: m.DialogContent })));
