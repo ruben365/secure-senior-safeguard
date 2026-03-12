@@ -172,10 +172,10 @@ const Story = () => {
     return (
       <motion.div
         key={key}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-80px' }}
-        transition={{ delay: index * 0.04, duration: 0.3 }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: '-40px' }}
+        transition={{ duration: 0.4 }}
         className="relative mb-16"
       >
         {/* Timeline dot */}
