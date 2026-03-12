@@ -974,6 +974,14 @@
   66% { transform: translate(-35px, 30px) scale(0.9); }
 }
 
+@keyframes float-slow {
+  0%, 100% { transform: translateY(-6px); }
+  50% { transform: translateY(8px); }
+}
+.animate-float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
 /* Reduce motion */
 @media (prefers-reduced-motion: reduce) {
   .aurora-blob-css, .heart-glow, .animate-float-heart, .animate-petal-fall {
