@@ -14,6 +14,7 @@ import couple5 from '@/assets/couple-5.jpg';
 import couple9 from '@/assets/couple-9.jpg';
 import couple10 from '@/assets/couple-10.jpg';
 import coupleForever from '@/assets/couple-forever.jpg';
+import coupleProposal from '@/assets/couple-proposal.jpg';
 
 const FALLBACK_EVENTS = [
   { titleKey: 'story.event1.title', descKey: 'story.event1.description', dateKey: 'story.event1.date', icon: '💫' },
