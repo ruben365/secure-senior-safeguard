@@ -607,26 +607,35 @@ const Dashboard = () => {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
               className="glass-card-strong rounded-3xl overflow-hidden">
               <Table>
-                <TableHeader>
-                  <TableRow className="border-border/20">
-                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">{t('dashboard.from')}</TableHead>
-                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">{t('dashboard.amount')}</TableHead>
-                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">{t('dashboard.date')}</TableHead>
-                    <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">{t('dashboard.message')}</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {gifts.length === 0 ? (
-                    <TableRow><TableCell colSpan={4} className="text-center py-8 text-muted-foreground font-sans-elegant">{t('dashboard.noGifts')}</TableCell></TableRow>
-                  ) : gifts.map(g => (
-                    <TableRow key={g.id} className="border-border/10 hover:bg-primary/5">
-                      <TableCell className="font-sans-elegant text-sm font-semibold text-foreground">{g.from_name}</TableCell>
-                      <TableCell className="font-serif-display text-lg font-bold text-foreground">${g.amount}</TableCell>
-                      <TableCell className="font-sans-elegant text-sm text-muted-foreground">{new Date(g.created_at).toLocaleDateString()}</TableCell>
-                      <TableCell className="font-sans-elegant text-xs text-muted-foreground max-w-[200px] truncate">{g.message || '—'}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
+                 <TableHeader>
+                   <TableRow className="border-border/20">
+                     <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">{t('dashboard.from')}</TableHead>
+                     <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">{t('dashboard.amount')}</TableHead>
+                     <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">{t('dashboard.date')}</TableHead>
+                     <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground">{t('dashboard.message')}</TableHead>
+                     <TableHead className="font-sans-elegant text-xs font-bold tracking-wide uppercase text-muted-foreground w-12"></TableHead>
+                   </TableRow>
+                 </TableHeader>
+                 <TableBody>
+                   {gifts.length === 0 ? (
+                     <TableRow><TableCell colSpan={5} className="text-center py-8 text-muted-foreground font-sans-elegant">{t('dashboard.noGifts')}</TableCell></TableRow>
+                   ) : gifts.map(g => (
+                     <TableRow key={g.id} className="border-border/10 hover:bg-primary/5">
+                       <TableCell className="font-sans-elegant text-sm font-semibold text-foreground">{g.from_name}</TableCell>
+                       <TableCell className="font-serif-display text-lg font-bold text-foreground">${g.amount}</TableCell>
+                       <TableCell className="font-sans-elegant text-sm text-muted-foreground">{new Date(g.created_at).toLocaleDateString()}</TableCell>
+                       <TableCell className="font-sans-elegant text-xs text-muted-foreground max-w-[200px] truncate">{g.message || '—'}</TableCell>
+                       <TableCell>
+                         <button type="button" onClick={async () => {
+                           await supabase.from('gifts').delete().eq('id', g.id);
+                           setGifts(prev => prev.filter(x => x.id !== g.id));
+                         }} className="w-8 h-8 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 flex items-center justify-center transition-colors">
+                           <Trash2 className="w-3.5 h-3.5 text-rose-500" />
+                         </button>
+                       </TableCell>
+                     </TableRow>
+                   ))}
+                 </TableBody>
               </Table>
             </motion.div>
 
