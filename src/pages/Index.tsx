@@ -260,17 +260,13 @@ const AnnouncementsSection = forwardRef<HTMLElement, {t: (key: string) => string
   };
 
   useEffect(() => {
-    // Defer non-critical data fetch to reduce main-thread work during initial load
-    const id = setTimeout(() => {
-      const fetchData = async () => {
-        const { supabase } = await import('@/integrations/supabase/client');
-        const { data } = await supabase.from('announcements').select('*').order('created_at', { ascending: false });
-        if (data) setAnnouncements(data);
-        setLoaded(true);
-      };
-      fetchData();
-    }, 1500);
-    return () => clearTimeout(id);
+    const fetchData = async () => {
+      const { supabase } = await import('@/integrations/supabase/client');
+      const { data } = await supabase.from('announcements').select('*').order('created_at', { ascending: false });
+      if (data) setAnnouncements(data);
+      setLoaded(true);
+    };
+    fetchData();
   }, []);
 
   useEffect(() => {

@@ -282,6 +282,7 @@ const Gallery = () => {
                   alt={photo.alt}
                   style={{ objectPosition: 'center 20%' }}
                   loading="lazy"
+                  decoding="async"
                   className="w-full object-cover"
                 />
                 {photo.uploader && (
