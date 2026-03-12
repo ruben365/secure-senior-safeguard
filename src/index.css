@@ -389,14 +389,14 @@
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 text-sm font-medium tracking-wider transition-all duration-500;
     font-family: 'Inter', sans-serif;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 14px;
     letter-spacing: 0.5px;
     background: #9B78A8;
     color: #FFFFFF;
     padding: 16px 32px;
     border-radius: 50px;
-    box-shadow: 0 20px 40px rgba(155, 120, 168, 0.08);
+    box-shadow: 0 4px 16px rgba(155, 120, 168, 0.2), 0 20px 40px rgba(155, 120, 168, 0.08);
     position: relative;
     overflow: hidden;
   }
