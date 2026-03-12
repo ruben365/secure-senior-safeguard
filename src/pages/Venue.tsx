@@ -170,19 +170,23 @@ const Venue = () => {
                       <p className="font-serif-display text-xl font-semibold text-foreground">{time}</p>
                     </div>
                   </div>
-                  <div className="flex items-start gap-2 mb-4">
-                    <MapPin className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                    <p className="font-sans-elegant text-sm text-muted-foreground">{address}</p>
-                  </div>
-                  <a
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full btn-primary text-xs font-semibold"
-                  >
-                    <ExternalLink className="w-3.5 h-3.5" />
-                    {t('venue.getDirections')}
-                  </a>
+                  {addressVisible && address && (
+                    <div className="flex items-start gap-2 mb-4">
+                      <MapPin className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                      <p className="font-sans-elegant text-sm text-muted-foreground">{address}</p>
+                    </div>
+                  )}
+                  {addressVisible && url && (
+                    <a
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full btn-primary text-xs font-semibold"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      {t('venue.getDirections')}
+                    </a>
+                  )}
                 </motion.div>
               ))}
             </div>

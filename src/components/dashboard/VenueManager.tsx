@@ -137,6 +137,39 @@ const VenueManager = () => {
         </button>
       </div>
 
+      {/* Address visibility toggle */}
+      <div className="glass-card-strong rounded-3xl p-5 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          {addressVisible ? (
+            <div className="w-10 h-10 rounded-2xl bg-emerald-500/15 flex items-center justify-center">
+              <MapPin className="w-5 h-5 text-emerald-400" />
+            </div>
+          ) : (
+            <div className="w-10 h-10 rounded-2xl bg-amber-500/15 flex items-center justify-center">
+              <EyeOff className="w-5 h-5 text-amber-400" />
+            </div>
+          )}
+          <div>
+            <p className="font-sans-elegant text-sm font-bold text-foreground">
+              Venue Address is {addressVisible ? 'Visible' : 'Hidden'}
+            </p>
+            <p className="font-sans-elegant text-xs text-muted-foreground">
+              {addressVisible ? 'Guests can see the venue address & directions' : 'Address & directions are hidden from guests'}
+            </p>
+          </div>
+        </div>
+        <button
+          onClick={toggleAddressVisibility}
+          className={`px-5 py-2.5 rounded-full font-sans-elegant text-xs font-bold transition-all ${
+            addressVisible
+              ? 'bg-amber-500/15 hover:bg-amber-500/25 text-amber-500'
+              : 'bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-500'
+          }`}
+        >
+          {addressVisible ? 'Hide Address' : 'Show Address'}
+        </button>
+      </div>
+
     <Tabs defaultValue="addresses" className="space-y-6">
       <TabsList className="glass-card-strong rounded-2xl p-1 flex flex-wrap w-fit gap-1">
         <TabsTrigger value="addresses" className="rounded-full px-4 py-2 font-sans-elegant text-xs font-bold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground">
