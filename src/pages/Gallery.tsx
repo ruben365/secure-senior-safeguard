@@ -12,8 +12,12 @@ import couple4 from '@/assets/couple-4.jpg';
 import couple5 from '@/assets/couple-5.jpg';
 import couple6 from '@/assets/couple-6.jpg';
 import couple12 from '@/assets/couple-12.jpg';
+import couple13 from '@/assets/couple-13.jpg';
+import couple14 from '@/assets/couple-14.jpg';
 
 const STATIC_PHOTOS = [
+  { id: 'static-0', url: couple13, alt: 'Corine & Ruben' },
+  { id: 'static-00', url: couple14, alt: 'Corine & Ruben' },
   { id: 'static-1', url: couple2, alt: 'Corine & Ruben' },
   { id: 'static-3', url: couple4, alt: 'Corine & Ruben' },
   { id: 'static-4', url: couple5, alt: 'Corine & Ruben' },
