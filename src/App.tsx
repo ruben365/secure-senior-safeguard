@@ -78,10 +78,12 @@ const AppShell = () => {
 
   return (
     <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-      </TooltipProvider>
+      <Suspense fallback={null}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+        </TooltipProvider>
+      </Suspense>
 
       {disableAmbientEffects ? (
         <div className="fixed inset-0 z-0 bg-background" />
