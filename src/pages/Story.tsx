@@ -13,6 +13,7 @@ import couple3 from '@/assets/couple-3.jpg';
 import couple5 from '@/assets/couple-5.jpg';
 import couple9 from '@/assets/couple-9.jpg';
 import couple10 from '@/assets/couple-10.jpg';
+import coupleForever from '@/assets/couple-forever.jpg';
 
 const FALLBACK_EVENTS = [
   { titleKey: 'story.event1.title', descKey: 'story.event1.description', dateKey: 'story.event1.date', icon: '💫' },
@@ -24,7 +25,7 @@ const FALLBACK_EVENTS = [
 ];
 
 // Images paired with timeline events
-const EVENT_IMAGES = [couple1, couple3, couple9, couple5, couple10];
+const EVENT_IMAGES = [couple1, couple3, couple9, couple5, couple10, coupleForever];
 
 interface Photo {
   id: string;
