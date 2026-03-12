@@ -430,10 +430,6 @@ const RSVP = () => {
                     <p className="font-serif-display text-xl font-semibold text-foreground">{t('venue.court.after')}</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-2 mb-3">
-                  <MapPin className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                  <p className="font-sans-elegant text-sm text-muted-foreground">{courtAfterVenue}</p>
-                </div>
                 <p className="font-sans-elegant text-xs text-muted-foreground/70">{t('court.wedding.after.desc')}</p>
               </motion.div>
             </div>
