@@ -984,7 +984,7 @@
 
 /* Reduce motion */
 @media (prefers-reduced-motion: reduce) {
-  .aurora-blob-css, .heart-glow, .animate-float-heart, .animate-petal-fall {
+  .aurora-blob-css, .heart-glow, .animate-float-heart, .animate-petal-fall, .animate-float-slow {
     animation: none !important;
   }
 }
