@@ -746,7 +746,7 @@ const Index = () => {
                 <p className="font-serif-display text-sm text-foreground italic leading-relaxed">
                   "{t('verse.1cor13')}"
                 </p>
-                <p className="font-sans-elegant text-[10px] text-muted-foreground mt-2 font-semibold">1 Corinthians 13:4-7</p>
+                <p className="font-sans-elegant text-[10px] text-foreground/70 mt-2 font-semibold">1 Corinthians 13:4-7</p>
               </motion.div>
 
               <motion.div
