@@ -238,7 +238,7 @@ const Footer = () => {
                     value={contactName}
                     onChange={e => setContactName(e.target.value)}
                     placeholder="Jane Doe"
-                    className="rounded-xl glass-card border-border/30 font-sans-elegant"
+                    className="rounded-xl glass-card border-border/30 font-sans-elegant text-foreground placeholder:text-muted-foreground"
                     required
                   />
                 </div>
@@ -249,7 +249,7 @@ const Footer = () => {
                     value={contactEmail}
                     onChange={e => setContactEmail(e.target.value)}
                     placeholder="jane@example.com"
-                    className="rounded-xl glass-card border-border/30 font-sans-elegant"
+                    className="rounded-xl glass-card border-border/30 font-sans-elegant text-foreground placeholder:text-muted-foreground"
                     required
                   />
                 </div>
@@ -259,7 +259,7 @@ const Footer = () => {
                     value={contactMessage}
                     onChange={e => setContactMessage(e.target.value)}
                     placeholder="Write your message here..."
-                    className="rounded-xl glass-card border-border/30 font-sans-elegant min-h-[120px]"
+                    className="rounded-xl glass-card border-border/30 font-sans-elegant min-h-[120px] text-foreground placeholder:text-muted-foreground"
                     required
                   />
                 </div>
