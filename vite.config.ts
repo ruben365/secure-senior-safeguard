@@ -63,6 +63,7 @@ export default defineConfig(({ mode }) => ({
           'query': ['@tanstack/react-query'],
           'icons': ['lucide-react'],
           'forms': ['react-hook-form', '@hookform/resolvers', 'zod'],
+          'motion': ['framer-motion'],
         },
       },
     },

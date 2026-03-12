@@ -4,14 +4,24 @@ const ScrollProgress = () => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    // Cache docHeight so scroll handler never triggers a forced reflow.
+    // Only recalculate on resize (infrequent).
+    let docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
     const onScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const p = docHeight > 0 ? scrollTop / docHeight : 0;
+      const p = docHeight > 0 ? window.scrollY / docHeight : 0;
       setProgress(p);
     };
+    const onResize = () => {
+      docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    };
+
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener('resize', onResize, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onResize);
+    };
   }, []);
 
   if (progress < 0.01) return null;
