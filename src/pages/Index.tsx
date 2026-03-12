@@ -863,15 +863,6 @@ const Index = () => {
           </div>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="mt-auto pt-6 flex flex-col items-center gap-2 z-10">
-          
-          <span className="font-sans-elegant text-xs tracking-wider text-muted-foreground">{t('hero.scroll')}</span>
-          <ChevronDown className="w-4 h-4 text-muted-foreground animate-scroll-indicator" />
-        </motion.div>
       </section>
 
       {/* ===== DIVIDER ===== */}
