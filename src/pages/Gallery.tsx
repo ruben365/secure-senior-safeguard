@@ -14,10 +14,16 @@ import couple6 from '@/assets/couple-6.jpg';
 import couple12 from '@/assets/couple-12.jpg';
 import couple13 from '@/assets/couple-13.jpg';
 import couple14 from '@/assets/couple-14.jpg';
+import corinePortrait from '@/assets/corine-portrait.jpg';
+import rubenPortrait from '@/assets/ruben-portrait.jpg';
+import coupleFlowers from '@/assets/couple-flowers.jpg';
 
 const STATIC_PHOTOS = [
   { id: 'static-0', url: couple13, alt: 'Corine & Ruben' },
   { id: 'static-00', url: couple14, alt: 'Corine & Ruben' },
+  { id: 'static-corine', url: corinePortrait, alt: 'Corine' },
+  { id: 'static-ruben', url: rubenPortrait, alt: 'Ruben' },
+  { id: 'static-flowers', url: coupleFlowers, alt: 'Corine & Ruben' },
   { id: 'static-1', url: couple2, alt: 'Corine & Ruben' },
   { id: 'static-3', url: couple4, alt: 'Corine & Ruben' },
   { id: 'static-4', url: couple5, alt: 'Corine & Ruben' },
