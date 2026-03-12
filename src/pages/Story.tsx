@@ -35,7 +35,7 @@ interface Photo {
 }
 
 const STATIC_PHOTOS = [
-  { id: 'static-1', url: couple1, alt: 'Corine & Ruben' },
+  { id: 'static-1', url: coupleFirstMeeting, alt: 'Corine & Ruben' },
   { id: 'static-3', url: couple3, alt: 'Corine & Ruben' },
   { id: 'static-4', url: couple9, alt: 'Corine & Ruben' },
   { id: 'static-5', url: couple10, alt: 'Corine & Ruben' },
