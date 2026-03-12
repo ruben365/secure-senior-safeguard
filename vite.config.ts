@@ -56,7 +56,6 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       output: {
         manualChunks: {
-          'framer': ['framer-motion'],
           'vendor': ['react', 'react-dom', 'react-router-dom'],
           'supabase': ['@supabase/supabase-js'],
           'stripe': ['@stripe/react-stripe-js', '@stripe/stripe-js'],
