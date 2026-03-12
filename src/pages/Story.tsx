@@ -205,8 +205,9 @@ const Story = () => {
                   src={image}
                   alt={content.title}
                   className="w-full aspect-[4/3] object-cover object-[center_20%] rounded-[20px] group-hover:scale-105 transition-transform duration-700"
-                  loading="lazy"
-                  decoding="async"
+                  loading={index < 2 ? 'eager' : 'lazy'}
+                  decoding={index < 2 ? 'sync' : 'async'}
+                  fetchPriority={index < 2 ? 'high' : undefined}
                   width={600}
                   height={450}
                 />
