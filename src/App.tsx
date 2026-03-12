@@ -1,4 +1,4 @@
-import { Component, type ErrorInfo, type ReactNode, Suspense } from "react";
+import { Component, lazy, Suspense, type ErrorInfo, type ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -39,25 +39,33 @@ import Footer from "@/components/Footer";
 import AuroraBackground from "@/components/AuroraBackground";
 import { MusicProvider } from "@/components/MusicContext";
 import MusicFloatingButton from "@/components/MusicPlayer";
-import Index from "./pages/Index";
-import Story from "./pages/Story";
-import RSVP from "./pages/RSVP";
-import Dashboard from "./pages/Dashboard";
-import Login from "./pages/Login";
-import NotFound from "./pages/NotFound";
-import Staff from "./pages/Staff";
-import Enquiries from "./pages/Enquiries";
-import Registry from "./pages/Registry";
-import FAQ from "./pages/FAQ";
-import Guestbook from "./pages/Guestbook";
-import Gallery from "./pages/Gallery";
-import Venue from "./pages/Venue";
 import FloatingHearts from "@/components/FloatingHearts";
 import GiftFAB from "@/components/GiftFAB";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import ProtectedRoute from "@/components/ProtectedRoute";
+
+// Route-level code splitting — each page loads only when first visited
+import Index from "./pages/Index";
+const Story      = lazy(() => import("./pages/Story"));
+const RSVP       = lazy(() => import("./pages/RSVP"));
+const Dashboard  = lazy(() => import("./pages/Dashboard"));
+const Login      = lazy(() => import("./pages/Login"));
+const NotFound   = lazy(() => import("./pages/NotFound"));
+const Staff      = lazy(() => import("./pages/Staff"));
+const Enquiries  = lazy(() => import("./pages/Enquiries"));
+const Registry   = lazy(() => import("./pages/Registry"));
+const FAQ        = lazy(() => import("./pages/FAQ"));
+const Guestbook  = lazy(() => import("./pages/Guestbook"));
+const Gallery    = lazy(() => import("./pages/Gallery"));
+const Venue      = lazy(() => import("./pages/Venue"));
+
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="w-8 h-8 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+  </div>
+);
 
 const queryClient = new QueryClient();
 
@@ -82,25 +90,27 @@ const App = () => (
               <div className="relative z-10">
                 <ScrollToTop />
                 <Navigation />
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="/story" element={<Story />} />
-                  <Route path="/rsvp" element={<RSVP />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/dashboard" element={
-                    <ProtectedRoute>
-                      <Dashboard />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/staff" element={<Staff />} />
-                  <Route path="/enquiries" element={<Enquiries />} />
-                  <Route path="/registry" element={<Registry />} />
-                  <Route path="/faq" element={<FAQ />} />
-                  <Route path="/guestbook" element={<Guestbook />} />
-                  <Route path="/gallery" element={<Gallery />} />
-                  <Route path="/venue" element={<Venue />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
+                <Suspense fallback={<PageLoader />}>
+                  <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="/story" element={<Story />} />
+                    <Route path="/rsvp" element={<RSVP />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/dashboard" element={
+                      <ProtectedRoute>
+                        <Dashboard />
+                      </ProtectedRoute>
+                    } />
+                    <Route path="/staff" element={<Staff />} />
+                    <Route path="/enquiries" element={<Enquiries />} />
+                    <Route path="/registry" element={<Registry />} />
+                    <Route path="/faq" element={<FAQ />} />
+                    <Route path="/guestbook" element={<Guestbook />} />
+                    <Route path="/gallery" element={<Gallery />} />
+                    <Route path="/venue" element={<Venue />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </Suspense>
                 <Footer />
               </div>
 
