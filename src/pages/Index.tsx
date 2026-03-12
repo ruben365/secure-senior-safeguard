@@ -137,16 +137,12 @@ const PersonalCourtSection = forwardRef<HTMLElement, {t: (key: string) => string
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    // Defer non-critical data fetch to reduce main-thread work during initial load
-    const id = setTimeout(() => {
-      const fetchQuotes = async () => {
-        const { supabase } = await import('@/integrations/supabase/client');
-        const { data } = await supabase.from('quotes').select('*').order('created_at', { ascending: false });
-        if (data) setQuotes(data);
-      };
-      fetchQuotes();
-    }, 2000);
-    return () => clearTimeout(id);
+    const fetchQuotes = async () => {
+      const { supabase } = await import('@/integrations/supabase/client');
+      const { data } = await supabase.from('quotes').select('*').order('created_at', { ascending: false });
+      if (data) setQuotes(data);
+    };
+    fetchQuotes();
   }, []);
 
   useEffect(() => {
@@ -264,17 +260,13 @@ const AnnouncementsSection = forwardRef<HTMLElement, {t: (key: string) => string
   };
 
   useEffect(() => {
-    // Defer non-critical data fetch to reduce main-thread work during initial load
-    const id = setTimeout(() => {
-      const fetchData = async () => {
-        const { supabase } = await import('@/integrations/supabase/client');
-        const { data } = await supabase.from('announcements').select('*').order('created_at', { ascending: false });
-        if (data) setAnnouncements(data);
-        setLoaded(true);
-      };
-      fetchData();
-    }, 1500);
-    return () => clearTimeout(id);
+    const fetchData = async () => {
+      const { supabase } = await import('@/integrations/supabase/client');
+      const { data } = await supabase.from('announcements').select('*').order('created_at', { ascending: false });
+      if (data) setAnnouncements(data);
+      setLoaded(true);
+    };
+    fetchData();
   }, []);
 
   useEffect(() => {

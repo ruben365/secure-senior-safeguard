@@ -7,9 +7,9 @@ import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 
 // Personal couple photos
-import couple2 from '@/assets/couple-2.jpg';
-import couple4 from '@/assets/couple-4.jpg';
-import couple5 from '@/assets/couple-5.jpg';
+import couple2 from '@/assets/couple-2-small.webp';
+import couple4 from '@/assets/couple-4-thumb.webp';
+import couple5 from '@/assets/couple-5-small.webp';
 import couple6 from '@/assets/couple-6.jpg';
 import couple12 from '@/assets/couple-12.jpg';
 import couple13 from '@/assets/couple-13.jpg';
@@ -282,6 +282,7 @@ const Gallery = () => {
                   alt={photo.alt}
                   style={{ objectPosition: 'center 20%' }}
                   loading="lazy"
+                  decoding="async"
                   className="w-full object-cover"
                 />
                 {photo.uploader && (
