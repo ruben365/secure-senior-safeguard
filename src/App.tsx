@@ -41,6 +41,7 @@ import { MusicProvider } from "@/components/MusicContext";
 import MusicFloatingButton from "@/components/MusicPlayer";
 import FloatingHearts from "@/components/FloatingHearts";
 import GiftFAB from "@/components/GiftFAB";
+import ScrollProgress from "@/components/ScrollProgress";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
