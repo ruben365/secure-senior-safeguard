@@ -230,7 +230,7 @@ const PersonalCourtSection = forwardRef<HTMLElement, {t: (key: string) => string
               <div className="w-11 h-11 rounded-2xl glass-card-strong flex items-center justify-center">
                 <span className="text-lg">{item.emoji}</span>
               </div>
-              <span className="font-sans-elegant text-[9px] tracking-[0.15em] uppercase text-muted-foreground/60 font-medium">{item.label}</span>
+              <span className="font-sans-elegant text-[9px] tracking-[0.15em] uppercase text-foreground/60 font-medium">{item.label}</span>
             </motion.div>
           )}
         </div>
