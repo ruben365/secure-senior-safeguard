@@ -60,6 +60,26 @@ const Venue = () => {
     );
   }
 
+  // If venue is hidden, show coming soon
+  if (settings.venue_visible === 'false') {
+    return (
+      <div className="min-h-screen pt-28 pb-20 flex items-center justify-center">
+        <div className="text-center max-w-md mx-auto px-6">
+          <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
+            <EyeOff className="w-7 h-7 text-primary" />
+          </div>
+          <h1 className="font-serif-display text-3xl text-foreground font-semibold mb-3">Coming Soon</h1>
+          <p className="font-sans-elegant text-base text-muted-foreground mb-6">
+            Venue details will be shared soon. Stay tuned! 💕
+          </p>
+          <Link to="/" className="btn-primary">
+            Back to Home
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen pt-28 pb-20 relative">
       <div className="container mx-auto px-6 md:px-12 max-w-3xl relative z-10">
