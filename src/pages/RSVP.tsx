@@ -372,6 +372,7 @@ const RSVP = () => {
   const receptionMapsUrl = settings.reception_maps_url || '';
   const receptionTime = settings.reception_time || '19:00';
   const mapEmbedUrl = settings.map_embed_url || '';
+  const addressVisible = settings.venue_address_visible !== 'false';
 
   const getTransportDesc = (item: typeof transport[number]) => {
     if (language === 'fr' && item.description_fr) return item.description_fr;
