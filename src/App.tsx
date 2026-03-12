@@ -69,30 +69,19 @@ const App = () => (
         <MusicProvider>
           <BrowserRouter>
             <AuthProvider>
-              {/* Non-critical UI overlays load independently */}
-              <Suspense fallback={null}>
-                <TooltipProvider>
-                  <Toaster />
-                  <Sonner />
-                </TooltipProvider>
-              </Suspense>
+              <TooltipProvider>
+                <Toaster />
+                <Sonner />
+              </TooltipProvider>
 
-              {/* Single unified aurora background behind everything */}
-              <Suspense fallback={null}>
-                <div className="fixed inset-0 z-0">
-                  <AuroraBackground variant="hero" />
-                </div>
-              </Suspense>
-              <Suspense fallback={null}>
-                <FloatingHearts />
-              </Suspense>
+              <div className="fixed inset-0 z-0">
+                <AuroraBackground variant="hero" />
+              </div>
+              <FloatingHearts />
 
               <div className="relative z-10">
                 <ScrollToTop />
-                <Suspense fallback={null}>
-                  <Navigation />
-                </Suspense>
-                <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
+                <Navigation />
                 <Routes>
                   <Route path="/" element={<Index />} />
                   <Route path="/story" element={<Story />} />
@@ -112,16 +101,11 @@ const App = () => (
                   <Route path="/venue" element={<Venue />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
-                </Suspense>
-                <Suspense fallback={null}><Footer /></Suspense>
+                <Footer />
               </div>
 
-              <Suspense fallback={null}>
-                <MusicFloatingButton />
-              </Suspense>
-              <Suspense fallback={null}>
-                <GiftFAB />
-              </Suspense>
+              <MusicFloatingButton />
+              <GiftFAB />
             </AuthProvider>
           </BrowserRouter>
         </MusicProvider>
