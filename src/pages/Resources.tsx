@@ -339,7 +339,7 @@ function Resources() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 2000px' }}>
-            {BOOK_CATALOG.map((book) =>
+            {BOOK_CATALOG.map((book, bookIndex) =>
               <div key={book.id} className="group relative">
                 <div className="h-full rounded-2xl p-[1px] bg-gradient-to-b from-border/50 to-border/20 hover:from-primary/30 hover:to-primary/10 transition-colors duration-200 shadow-sm hover:shadow-md">
                   <Card className="h-full rounded-[calc(1rem-1px)] p-3 border-0 bg-card flex flex-col relative overflow-hidden">
@@ -368,8 +368,9 @@ function Resources() {
                           alt={book.name}
                           width={240}
                           height={320}
-                          loading="lazy"
-                          decoding="async"
+                          loading={bookIndex < 10 ? "eager" : "lazy"}
+                          decoding={bookIndex < 10 ? "sync" : "async"}
+                          fetchPriority={bookIndex < 5 ? "high" : undefined}
                           className="w-full h-full object-cover"
                         />
                       </div>
