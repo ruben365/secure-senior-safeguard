@@ -131,10 +131,10 @@ const Navigation = React.memo(() => {
                   <PrefetchLink
                     key={link.name}
                     to={link.href}
-                    className={`relative text-sm px-3 py-2 rounded-md transition-colors duration-150 ${
+                    className={`relative text-[15px] px-3 py-2 rounded-md transition-colors duration-150 ${
                       isActive
-                        ? "text-primary font-semibold bg-primary/5"
-                        : "text-muted-foreground font-medium hover:text-foreground hover:bg-muted/50"
+                        ? "text-primary font-bold bg-primary/5"
+                        : "text-foreground/80 font-semibold hover:text-foreground hover:bg-muted/50"
                     }`}
                   >
                     {link.name}
