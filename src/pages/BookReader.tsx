@@ -272,7 +272,7 @@ export default function BookReader() {
 
                 {/* Recommendations */}
                 <BookRecommendations
-                  ownedBookIds={session.bookIds}
+                  ownedBookIds={effectiveOwnedIds}
                   onBuy={handleBuyFromLibrary}
                 />
               </TabsContent>
