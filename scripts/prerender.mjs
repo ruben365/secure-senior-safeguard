@@ -72,6 +72,18 @@ const ROUTES = [
   "/services/ai-safe-certification",
   "/services/family-emergency-network",
   "/services/digital-estate",
+  // Digital library
+  "/library",
+  "/resources/digital-self-defense",
+  "/resources/scam-proof",
+  "/resources/ai-for-everyday-life",
+  "/resources/securing-home-network",
+  "/resources/privacy-digital-age",
+  "/resources/cybersecurity-small-business",
+  "/resources/social-media-safety",
+  "/resources/understanding-ai-threats",
+  "/resources/seniors-guide-safe-computing",
+  "/resources/ransomware-data-recovery",
   // Legal
   "/privacy-policy",
   "/terms-of-service",

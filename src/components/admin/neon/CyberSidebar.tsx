@@ -41,6 +41,9 @@ import {
   Image,
   UserPlus,
   KeyRound,
+  Library,
+  Sparkles,
+  Layers,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -127,6 +130,15 @@ const menuItems: MenuItem[] = [
       { title: "Site Settings", href: "/admin/settings/site", icon: Settings },
       { title: "User Roles", href: "/admin/settings/users", icon: UserCog },
       { title: "Billing", href: "/admin/settings/billing", icon: CreditCard },
+    ],
+  },
+  {
+    title: "Digital Library",
+    icon: Library,
+    children: [
+      { title: "All Books", href: "/admin/books", icon: BookOpen },
+      { title: "Add Book", href: "/admin/books/new", icon: Layers },
+      { title: "Book Access IDs", href: "/admin/ecommerce/book-access", icon: KeyRound },
     ],
   },
   {

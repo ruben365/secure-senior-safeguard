@@ -71,6 +71,9 @@ const FAQ = lazy(() => import("./pages/FAQ"));
 const HelpCenter = lazy(() => import("./pages/HelpCenter"));
 const Maintenance = lazy(() => import("./pages/Maintenance"));
 const BookReader = lazy(() => import("./pages/BookReader"));
+const BookDetail = lazy(() => import("./pages/BookDetail"));
+const LibraryPage = lazy(() => import("./pages/LibraryPage"));
+const PurchasePage = lazy(() => import("./pages/PurchasePage"));
 
 // Legal pages - lazy loaded
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
@@ -132,6 +135,9 @@ const SupportTicketsAdmin = lazy(() => import("./pages/admin/SupportTickets"));
 const KnowledgeBaseAdmin = lazy(() => import("./pages/admin/KnowledgeBaseAdmin"));
 const ReviewsAdmin = lazy(() => import("./pages/admin/ReviewsAdmin"));
 const BookAccessAdmin = lazy(() => import("./pages/admin/BookAccessAdmin"));
+const BooksAdmin = lazy(() => import("./pages/admin/BooksAdmin"));
+const BookEditor = lazy(() => import("./pages/admin/BookEditor"));
+const BookAIUpdates = lazy(() => import("./pages/admin/BookAIUpdates"));
 
 // Cyber dashboard pages - lazy loaded
 const ThreatMonitor = lazy(() => import("./pages/admin/cyber/ThreatMonitor"));
@@ -176,6 +182,9 @@ function PublicRoutes() {
         <Route path="/about" element={<PageTransition variant="auto"><About /></PageTransition>} />
         <Route path="/services" element={<PageTransition variant="auto"><Services /></PageTransition>} />
         <Route path="/resources" element={<PageTransition variant="auto"><Resources /></PageTransition>} />
+        <Route path="/resources/:slug" element={<PageTransition variant="auto"><BookDetail /></PageTransition>} />
+        <Route path="/library" element={<PageTransition variant="auto"><LibraryPage /></PageTransition>} />
+        <Route path="/purchase/:slug" element={<PageTransition variant="auto"><PurchasePage /></PageTransition>} />
         <Route path="/payment-success" element={<PageTransition variant="fade"><PaymentSuccess /></PageTransition>} />
         <Route path="/payment-canceled" element={<PageTransition variant="fade"><PaymentCanceled /></PageTransition>} />
         <Route path="/demo/glassmorphism-hero" element={<PageTransition variant="auto"><GlassmorphismTrustHeroDemo /></PageTransition>} />
@@ -281,6 +290,11 @@ function PublicRoutes() {
           <Route path="content/knowledge-base" element={<KnowledgeBaseAdmin />} />
           <Route path="content/reviews" element={<ReviewsAdmin />} />
           <Route path="ecommerce/book-access" element={<BookAccessAdmin />} />
+          <Route path="books" element={<BooksAdmin />} />
+          <Route path="books/new" element={<BookEditor />} />
+          <Route path="books/:id" element={<BookEditor />} />
+          <Route path="books/:id/chapters" element={<BookEditor />} />
+          <Route path="books/:id/ai-updates" element={<BookAIUpdates />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />
