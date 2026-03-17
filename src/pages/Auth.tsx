@@ -38,7 +38,7 @@ function Auth() {
   const defaultTab = searchParams.get("mode") === "signup" ? "signup" : "login";
 
   const [activeTab, setActiveTab] = useState(defaultTab);
-  const [email, setEmail] = useState("ruben@invisionnetwork.org");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -415,8 +415,8 @@ function Auth() {
 
   if (signupSuccess) {
     return (
-      <div className="min-h-screen w-full relative flex items-center justify-center p-4 md:p-6 lg:p-8">
-        <div className="fixed inset-0 z-0">
+      <div className="w-full relative flex items-center justify-center p-4 md:p-6 lg:p-8" style={{ minHeight: 'calc(100vh / 0.75)' }}>
+        <div className="absolute inset-0 z-0">
           <img
             src={authBackground}
             alt=""
@@ -453,9 +453,9 @@ function Auth() {
   }
 
   return (
-    <div className="min-h-screen w-full relative flex items-center justify-center p-4 md:p-6 lg:p-8">
+    <div className="w-full relative flex items-center justify-center p-4 md:p-6 lg:p-8" style={{ minHeight: 'calc(100vh / 0.75)' }}>
       {/* Background */}
-      <div className="fixed inset-0 z-0">
+      <div className="absolute inset-0 z-0">
         <img
           src={authBackground}
           alt=""
