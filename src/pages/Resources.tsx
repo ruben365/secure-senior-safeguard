@@ -369,7 +369,7 @@ function Resources() {
               </Button>
             </div>
 
-            <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {featuredBooks.map((book) => (
                 <Card key={book.id} className="overflow-hidden border-border/50 bg-card/80">
                   <button
@@ -377,7 +377,7 @@ function Resources() {
                     className="w-full text-left"
                     aria-label={`View ${book.name} details`}
                   >
-                    <div className="aspect-[3/2] overflow-hidden bg-muted">
+                    <div className="aspect-[3/4] overflow-hidden bg-muted">
                       <img
                         src={book.image}
                         alt={book.name}
@@ -386,18 +386,33 @@ function Resources() {
                       />
                     </div>
                   </button>
-                  <div className="p-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Badge>{book.tag}</Badge>
-                      <Badge variant="outline">{CATEGORY_LABELS[book.category]}</Badge>
+                  <div className="p-3">
+                    <div className="flex items-center gap-1.5 mb-1.5">
+                      <Badge className="text-[10px] px-1.5 py-0">{book.tag}</Badge>
+                      <Badge variant="outline" className="text-[10px] px-1.5 py-0">{CATEGORY_LABELS[book.category]}</Badge>
                     </div>
-                    <h4 className="font-semibold leading-tight">{book.name}</h4>
-                    <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{book.subtitle}</p>
-                    <p className="text-sm text-foreground/80 mt-3 line-clamp-3">{book.outcomes[0]}</p>
-                    <div className="flex items-center justify-between mt-4">
-                      <span className="font-bold text-primary">${book.price.toFixed(2)}</span>
-                      <Button size="sm" variant="ghost" asChild>
-                        <Link to={`/resources/${book.slug}`}>Preview</Link>
+                    <h4 className="font-semibold text-sm leading-tight line-clamp-1">{book.name}</h4>
+                    <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{book.subtitle}</p>
+                    <div className="flex items-center justify-between mt-3">
+                      <span className="font-bold text-primary text-sm">${book.price.toFixed(2)}</span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-1.5 mt-2">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="h-8 text-xs"
+                        onClick={(e) => { e.stopPropagation(); handleAddToCart(book); }}
+                      >
+                        <ShoppingCart className="w-3 h-3 mr-1" />
+                        Cart
+                      </Button>
+                      <Button
+                        size="sm"
+                        className="h-8 text-xs"
+                        onClick={(e) => { e.stopPropagation(); handleBuyNow(book); }}
+                      >
+                        <Zap className="w-3 h-3 mr-1" />
+                        Buy
                       </Button>
                     </div>
                   </div>
