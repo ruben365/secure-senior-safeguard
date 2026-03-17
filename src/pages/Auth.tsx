@@ -38,7 +38,7 @@ function Auth() {
   const defaultTab = searchParams.get("mode") === "signup" ? "signup" : "login";
 
   const [activeTab, setActiveTab] = useState(defaultTab);
-  const [email, setEmail] = useState("ruben@invisionnetwork.org");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [firstName, setFirstName] = useState("");
