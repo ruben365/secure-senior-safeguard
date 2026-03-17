@@ -416,7 +416,7 @@ function Auth() {
   if (signupSuccess) {
     return (
       <div className="w-full relative flex items-center justify-center p-4 md:p-6 lg:p-8" style={{ minHeight: 'calc(100vh / 0.75)' }}>
-        <div className="fixed inset-0 z-0">
+        <div className="absolute inset-0 z-0">
           <img
             src={authBackground}
             alt=""
