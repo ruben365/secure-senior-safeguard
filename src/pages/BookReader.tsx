@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -15,51 +15,23 @@ import type { ReadingMode, FontSize } from "@/components/reader/ReadingModeToggl
 import { InternalLibrary } from "@/components/reader/InternalLibrary";
 import { BookRecommendations } from "@/components/reader/BookRecommendations";
 import { ReadingProgressBar } from "@/components/ReadingProgressBar";
-import { BOOK_CATALOG, type BookItem } from "@/config/bookCatalog";
+import { BOOK_CATALOG, getBookById, type BookItem } from "@/config/bookCatalog";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/AuthContext";
+import {
+  clearBookReaderSession,
+  createAdminBookReaderSession,
+  readBookReaderSession,
+  storeBookReaderSession,
+  type BookReaderSession,
+} from "@/lib/bookReaderSession";
 
-interface BookData {
-  id: string;
-  name: string;
-  image: string;
-  chapters: { title: string; content: string }[];
-}
-
-const catalogImageMap = Object.fromEntries(BOOK_CATALOG.map(b => [b.id, { name: b.name, image: b.image }]));
-
-const BOOK_CONTENT: Record<string, Omit<BookData, "chapters"> & { chapters: { title: string; content: string }[] }> = {
-  "book-ai-fundamentals": { id: "book-ai-fundamentals", name: "AI Fundamentals", image: catalogImageMap["book-ai-fundamentals"]?.image ?? "", chapters: [
-    { title: "Chapter 1: What Is Artificial Intelligence?", content: "Artificial Intelligence (AI) refers to the simulation of human intelligence in machines programmed to think, learn, and adapt. This chapter explores the foundational concepts of AI, from machine learning algorithms to neural networks, and how these technologies are reshaping every aspect of our digital lives.\n\nAI systems can be categorized into narrow AI (designed for specific tasks) and general AI (theoretical systems with human-like reasoning). Understanding these distinctions is crucial for recognizing both the benefits and risks that AI presents to everyday users.\n\nKey areas covered include natural language processing, computer vision, and predictive analytics — all of which play a role in modern scam detection and prevention systems." },
-    { title: "Chapter 2: AI in Cybersecurity", content: "AI has become an essential tool in the cybersecurity arsenal. From detecting unusual network patterns to identifying phishing attempts in real-time, AI-powered security systems can process millions of data points faster than any human analyst.\n\nThis chapter examines how organizations deploy AI for threat detection, anomaly identification, and automated response. You'll learn about the dual-edged nature of AI in security — how the same technology that protects can also be weaponized by malicious actors.\n\nTopics include behavioral analysis, deep learning for malware detection, and how AI assists in maintaining digital privacy across an increasingly connected world." },
-    { title: "Chapter 3: Protecting Yourself in the AI Age", content: "As AI becomes more sophisticated, so do the threats it enables. Deepfakes, AI-generated phishing emails, and automated social engineering attacks represent a new frontier of digital danger.\n\nThis chapter provides practical strategies for protecting yourself: verifying AI-generated content, using AI-powered security tools, maintaining strong authentication practices, and staying informed about emerging threats.\n\nYou'll also learn about the importance of digital literacy in the AI age and how to teach these skills to family members of all ages." },
-  ]},
-  "book-scam-prevention": { id: "book-scam-prevention", name: "Scam Prevention Guide", image: catalogImageMap["book-scam-prevention"]?.image ?? "", chapters: [
-    { title: "Chapter 1: The Anatomy of a Scam", content: "Every scam follows a predictable pattern: identification of a target, establishment of trust, exploitation of emotions, and extraction of value. Understanding this cycle is the first step in protecting yourself.\n\nScammers invest significant effort in appearing legitimate. They research their targets, craft believable stories, and create a sense of urgency that overrides rational thinking. This chapter deconstructs the psychological techniques used by fraudsters and teaches you to recognize manipulation when it occurs.\n\nFrom the initial contact to the final ask, every scam leaves tell-tale signs that an informed consumer can identify and avoid." },
-    { title: "Chapter 2: Common Scam Types", content: "The digital landscape hosts an ever-evolving array of scam types. Phone scams remain prevalent, with robocalls and impersonation schemes targeting millions daily. Online scams range from fake shopping sites to romance fraud, while emerging threats include cryptocurrency scams and AI-powered impersonation.\n\nThis chapter catalogs the most common scam types currently active, provides real-world examples, and offers specific advice for each category. Special attention is given to scams targeting seniors, veterans, and small business owners — populations that experience disproportionate targeting." },
-    { title: "Chapter 3: Building Your Defense", content: "Prevention is far more effective than recovery. This chapter outlines a comprehensive personal security framework that includes technological safeguards, behavioral habits, and community awareness.\n\nKey defenses include: verifying unsolicited contacts through official channels, never sharing personal information under pressure, using strong and unique passwords, enabling two-factor authentication, and maintaining updated security software.\n\nThe chapter also covers what to do if you suspect you've been targeted: documentation steps, reporting procedures, and resources for victims of fraud." },
-  ]},
-  "book-family-safety": { id: "book-family-safety", name: "Family Safety Toolkit", image: catalogImageMap["book-family-safety"]?.image ?? "", chapters: [
-    { title: "Chapter 1: Creating a Family Safety Plan", content: "A comprehensive family safety plan addresses digital threats at every age level. From young children discovering the internet to elderly parents navigating online banking, each family member faces unique risks that require tailored protections.\n\nThis chapter guides you through creating a family-wide security strategy that includes device management, age-appropriate internet usage guidelines, shared password management, and regular family discussions about online safety.\n\nYou'll learn how to establish boundaries without creating fear, and how to foster an environment where family members feel comfortable reporting suspicious activities." },
-    { title: "Chapter 2: Children and Online Safety", content: "Children are particularly vulnerable online. They may share personal information unknowingly, fall prey to cyberbullying, or encounter inappropriate content. This chapter provides age-specific guidance for protecting children from kindergarten through high school.\n\nTopics include: parental controls and monitoring tools, teaching digital citizenship, recognizing signs of cyberbullying, understanding social media risks, and establishing healthy screen time habits. The goal is empowering children to be safe digital citizens while maintaining trust and open communication." },
-    { title: "Chapter 3: Protecting Elderly Family Members", content: "Seniors are disproportionately targeted by scammers. Tech support scams, Medicare fraud, grandparent scams, and romance fraud cause billions in losses annually among the elderly population.\n\nThis chapter offers practical strategies for protecting older family members: setting up fraud alerts, configuring simplified and secure devices, teaching recognition of common scam patterns, and establishing communication protocols for financial decisions.\n\nThe emphasis is on preserving dignity and independence while adding layers of protection that reduce vulnerability to exploitation." },
-  ]},
-};
-
-function getBookData(bookId: string): BookData | null {
-  if (BOOK_CONTENT[bookId]) return BOOK_CONTENT[bookId];
-  const info = catalogImageMap[bookId];
-  if (!info) return null;
-  return {
-    id: bookId,
-    name: info.name,
-    image: info.image,
-    chapters: [
-      { title: `Chapter 1: Introduction to ${info.name}`, content: `Welcome to "${info.name}" by InVision Network's Department of Literature. This comprehensive guide is designed to equip you with the knowledge and tools necessary to navigate the increasingly complex digital landscape safely.\n\nIn this opening chapter, we lay the groundwork by exploring the current threat environment and why understanding these risks is essential for every individual, family, and organization. The digital world offers unprecedented opportunities, but it also presents challenges that require informed, proactive defenses.\n\nThroughout this book, you will find practical advice, real-world case studies, and actionable strategies that you can implement immediately to enhance your security posture.` },
-      { title: `Chapter 2: Understanding the Threats`, content: `The threat landscape is constantly evolving. What was considered a sophisticated attack five years ago may now be automated and deployed at scale. This chapter examines the most prevalent threats in the context of ${info.name.toLowerCase()}, providing detailed analysis of how these attacks work and who they target.\n\nYou'll learn to identify warning signs, understand the motivations behind different types of attacks, and develop a framework for assessing your personal risk level. Knowledge is your first line of defense, and this chapter ensures you have the information needed to make informed decisions about your digital safety.` },
-      { title: `Chapter 3: Practical Defense Strategies`, content: `Theory without practice offers incomplete protection. This chapter translates the knowledge from previous chapters into concrete, actionable steps you can take today.\n\nFrom configuring your devices for maximum security to establishing routines that minimize your exposure to threats, every recommendation in this chapter has been tested and validated by cybersecurity professionals. Special attention is given to solutions that don't require technical expertise — because security should be accessible to everyone.\n\nBy the end of this chapter, you'll have a personalized security checklist and the confidence to implement it effectively.` },
-    ],
-  };
-}
+const stripHtml = (html: string) =>
+  html
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 
 function estimateReadingTime(content: string): number {
   const words = content.split(/\s+/).length;
@@ -68,10 +40,10 @@ function estimateReadingTime(content: string): number {
 
 export default function BookReader() {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
   const { toast: toastHook } = useToast();
-  const [session, setSession] = useState<{ bookIds: string[]; customerName: string; email: string } | null>(null);
-  const [selectedBook, setSelectedBook] = useState<BookData | null>(null);
+  const { user, adminName, adminEmail, isAdmin, loading: authLoading, initialized } = useAuth();
+  const [session, setSession] = useState<BookReaderSession | null>(null);
+  const [selectedBook, setSelectedBook] = useState<BookItem | null>(null);
   const [currentChapter, setCurrentChapter] = useState(0);
   const [activeTab, setActiveTab] = useState("my-books");
 
@@ -106,19 +78,37 @@ export default function BookReader() {
   }, []);
 
   useEffect(() => {
-    const raw = sessionStorage.getItem("bookReaderSession");
-    if (!raw) {
-      toastHook({ title: "Session expired", description: "Please sign in with your Access ID to read your books.", variant: "destructive" });
-      navigate("/resources");
+    if (!initialized || authLoading) return;
+
+    const storedSession = readBookReaderSession();
+    if (storedSession) {
+      if (storedSession.accessType === "admin" && !(user && isAdmin())) {
+        clearBookReaderSession();
+      } else {
+      setSession(storedSession);
+      return;
+      }
+    }
+
+    if (user && isAdmin()) {
+      const adminSession = createAdminBookReaderSession({
+        customerName: adminName,
+        email: adminEmail || user.email || "",
+      });
+      storeBookReaderSession(adminSession);
+      setSession(adminSession);
       return;
     }
-    try {
-      setSession(JSON.parse(raw));
-    } catch {
-      toastHook({ title: "Session error", description: "Please sign in again with your Access ID.", variant: "destructive" });
+
+    if (session) return;
+
+    clearBookReaderSession();
+    setSession(null);
+    if (!user || !isAdmin()) {
+      toastHook({ title: "Session expired", description: "Please sign in with your Access ID to read your books.", variant: "destructive" });
       navigate("/resources");
     }
-  }, [navigate, toastHook]);
+  }, [adminEmail, adminName, authLoading, initialized, isAdmin, navigate, session, toastHook, user]);
 
   // Scroll to top on chapter change
   useEffect(() => {
@@ -128,14 +118,14 @@ export default function BookReader() {
   const handleContextMenu = useCallback((e: React.MouseEvent) => { e.preventDefault(); }, []);
 
   const handleLogout = () => {
-    sessionStorage.removeItem("bookReaderSession");
+    clearBookReaderSession();
     sessionStorage.removeItem("readerBookmarks");
     navigate("/resources");
   };
 
   const handleShareLink = () => {
     if (!session) return;
-    const raw = sessionStorage.getItem("bookReaderSession");
+    const raw = readBookReaderSession();
     if (!raw) return;
     // We don't expose the access ID in URLs for security — instead share the reader URL
     const url = `${window.location.origin}/reader`;
@@ -153,7 +143,7 @@ export default function BookReader() {
   };
 
   const handleReadFromLibrary = (bookId: string) => {
-    const bookData = getBookData(bookId);
+    const bookData = getBookById(bookId);
     if (bookData) {
       const savedChapter = bookmarkedChapter[bookId] ?? 0;
       setSelectedBook(bookData);
@@ -166,8 +156,10 @@ export default function BookReader() {
 
   const hasAllAccess = session.bookIds.includes("all");
   const availableBooks = hasAllAccess
-    ? BOOK_CATALOG.map((b) => getBookData(b.id)).filter((b): b is BookData => b !== null)
-    : session.bookIds.map((id) => getBookData(id)).filter((b): b is BookData => b !== null);
+    ? BOOK_CATALOG
+    : session.bookIds
+        .map((id) => getBookById(id))
+        .filter((book): book is BookItem => book !== undefined);
 
   const effectiveOwnedIds = hasAllAccess
     ? BOOK_CATALOG.map((b) => b.id)
@@ -184,10 +176,17 @@ export default function BookReader() {
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h1 className="text-3xl font-bold">Your Library</h1>
-                <p className="text-muted-foreground mt-1">
+                <h1 className="text-3xl font-bold">
+                  {session.accessType === "admin" ? "Admin Library" : "Your Library"}
+                </h1>
+                <div className="flex items-center gap-2 mt-1 flex-wrap">
+                  <p className="text-muted-foreground">
                   Welcome back, <span className="font-medium">{session.customerName}</span>!
-                </p>
+                  </p>
+                  {session.accessType === "admin" && (
+                    <Badge variant="secondary">Full catalog access</Badge>
+                  )}
+                </div>
               </div>
               <div className="flex items-center gap-2">
                 <ReadingModeToggle
@@ -296,7 +295,7 @@ export default function BookReader() {
 
   // Reader view — secure, no-print, no-copy
   const chapter = selectedBook.chapters[currentChapter];
-  const readingTime = estimateReadingTime(chapter.content);
+  const readingTime = estimateReadingTime(stripHtml(chapter.content_html));
 
   return (
     <>
@@ -375,7 +374,7 @@ export default function BookReader() {
           </div>
 
           {/* Reading time estimate */}
-          <div className="flex items-center gap-2 mb-4 text-xs text-muted-foreground">
+            <div className="flex items-center gap-2 mb-4 text-xs text-muted-foreground">
             <Clock className="h-3.5 w-3.5" />
             <span>~{readingTime} min read</span>
             {bookmarkedChapter[selectedBook.id] === currentChapter && (
@@ -392,14 +391,14 @@ export default function BookReader() {
               <Lock className="h-3 w-3" />
               <span className="text-[10px] uppercase tracking-wider font-medium">Protected Content — InVision Network</span>
             </div>
-            <h3 className="text-2xl font-bold mb-6">{chapter.title}</h3>
-            <div className={cn("prose dark:prose-invert max-w-none", FONT_SIZE_CLASSES[fontSize])}>
-              {chapter.content.split("\n\n").map((paragraph, i) => (
-                <p key={i} className="mb-4 opacity-90">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
+            <h3 className="text-2xl font-bold mb-6">{chapter.chapter_title}</h3>
+            <div
+              className={cn(
+                "prose max-w-none [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mb-6 [&_h3]:font-semibold [&_h3]:mt-6 [&_h3]:mb-3 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5",
+                FONT_SIZE_CLASSES[fontSize],
+              )}
+              dangerouslySetInnerHTML={{ __html: chapter.content_html }}
+            />
             <div className="mt-8 pt-6 border-t border-border/50 text-center">
               <p className="text-xs text-muted-foreground">
                 © InVision Network • Department of Literature • All Rights Reserved

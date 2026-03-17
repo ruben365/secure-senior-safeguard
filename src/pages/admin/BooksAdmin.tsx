@@ -51,6 +51,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { useAuth } from "@/contexts/AuthContext";
+import { createAdminBookReaderSession, storeBookReaderSession } from "@/lib/bookReaderSession";
 
 type BookStatus = "published" | "draft" | "archived";
 
@@ -83,9 +85,21 @@ const STATUS_COLORS: Record<BookStatus, string> = {
 export default function BooksAdmin() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { user, adminName, adminEmail } = useAuth();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [archiveTarget, setArchiveTarget] = useState<Book | null>(null);
+
+  const handleOpenAdminLibrary = () => {
+    storeBookReaderSession(
+      createAdminBookReaderSession({
+        customerName: adminName,
+        email: adminEmail || user?.email || "",
+      }),
+    );
+    toast.success("Opened the full admin library.");
+    navigate("/reader");
+  };
 
   const { data: books = [], isLoading } = useQuery({
     queryKey: ["admin-books"],
@@ -186,13 +200,23 @@ export default function BooksAdmin() {
             Manage books, chapters, access IDs, and AI content updates
           </p>
         </div>
-        <Button
-          onClick={() => navigate("/admin/books/new")}
-          className="bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] text-white hover:opacity-90"
-        >
-          <Plus className="h-4 w-4 mr-2" />
-          Add Book
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            onClick={handleOpenAdminLibrary}
+            className="border-gray-700 bg-[#111827] text-[#F9FAFB] hover:bg-gray-800"
+          >
+            <BookOpen className="h-4 w-4 mr-2" />
+            Open Full Library
+          </Button>
+          <Button
+            onClick={() => navigate("/admin/books/new")}
+            className="bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] text-white hover:opacity-90"
+          >
+            <Plus className="h-4 w-4 mr-2" />
+            Add Book
+          </Button>
+        </div>
       </div>
 
       {/* Stats */}

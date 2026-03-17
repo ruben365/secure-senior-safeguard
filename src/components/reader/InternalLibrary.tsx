@@ -8,7 +8,7 @@ import {
   BookOpen, ShoppingCart, Percent, Search, CheckCircle,
   MessageSquarePlus, Star, Library, Sparkles, Lock, CreditCard
 } from "lucide-react";
-import { BOOK_CATALOG, BOOK_AUTHOR, type BookItem } from "@/config/bookCatalog";
+import { BOOK_CATALOG, type BookItem } from "@/config/bookCatalog";
 import { RequestBookDialog } from "./RequestBookDialog";
 
 interface InternalLibraryProps {
@@ -60,8 +60,11 @@ export function InternalLibrary({ ownedBookIds, onBuy, onRead, email, customerNa
       books = books.filter(
         (b) =>
           b.name.toLowerCase().includes(q) ||
+          b.subtitle.toLowerCase().includes(q) ||
           b.description.toLowerCase().includes(q) ||
-          b.tag.toLowerCase().includes(q)
+          b.tag.toLowerCase().includes(q) ||
+          b.ideal_for.toLowerCase().includes(q) ||
+          b.outcomes.some((outcome) => outcome.toLowerCase().includes(q))
       );
     }
 
@@ -234,11 +237,16 @@ export function InternalLibrary({ ownedBookIds, onBuy, onRead, email, customerNa
               {/* Info */}
               <div className="p-2.5">
                 <h3 className="font-semibold text-xs line-clamp-2 text-foreground">{book.name}</h3>
-                <p className="text-[10px] text-muted-foreground mt-0.5 line-clamp-1">{book.description}</p>
+                <p className="text-[10px] text-muted-foreground mt-0.5 line-clamp-2 min-h-[2rem]">{book.subtitle}</p>
+                <p className="text-[9px] text-muted-foreground/80 mt-1 line-clamp-2">{book.description}</p>
 
                 {/* Author */}
                 <p className="text-[9px] text-muted-foreground/70 mt-1 truncate">
                   {book.author}
+                </p>
+
+                <p className="text-[9px] text-muted-foreground mt-1">
+                  {book.total_pages} pages • {book.chapters.length} chapters
                 </p>
 
                 {/* Rating */}

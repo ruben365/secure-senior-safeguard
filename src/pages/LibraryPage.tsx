@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
@@ -18,25 +18,27 @@ import {
   Sparkles,
 } from "lucide-react";
 import { LIBRARY_BOOKS } from "@/data/libraryBooks";
+import { CATEGORY_LABELS, type BookCategory } from "@/config/bookCatalog";
 import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
 const CATEGORIES = [
   { value: "all", label: "All Books" },
-  { value: "cybersecurity", label: "Cybersecurity" },
-  { value: "scam", label: "Scam Prevention" },
-  { value: "ai", label: "AI & Technology" },
-  { value: "privacy", label: "Privacy" },
-  { value: "business", label: "Business" },
-  { value: "social", label: "Social Media" },
-  { value: "seniors", label: "Seniors" },
+  { value: "ai", label: CATEGORY_LABELS.ai },
+  { value: "scam", label: CATEGORY_LABELS.scam },
+  { value: "family", label: CATEGORY_LABELS.family },
+  { value: "seniors", label: CATEGORY_LABELS.seniors },
+  { value: "privacy", label: CATEGORY_LABELS.privacy },
+  { value: "social", label: CATEGORY_LABELS.social },
+  { value: "finance", label: CATEGORY_LABELS.finance },
+  { value: "business", label: CATEGORY_LABELS.business },
+  { value: "tech", label: CATEGORY_LABELS.tech },
 ];
 
 export default function LibraryPage() {
   const { addItem } = useCart();
   const { toast } = useToast();
-  const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
 
@@ -58,8 +60,8 @@ export default function LibraryPage() {
     e.preventDefault();
     e.stopPropagation();
     addItem({
-      id: book.slug,
-      productId: book.slug,
+      id: book.id,
+      productId: book.id,
       name: book.title,
       price: book.price,
       image: book.cover_image,
@@ -106,8 +108,8 @@ export default function LibraryPage() {
               InVision Network Digital Library
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-              Expert guides on cybersecurity, AI safety, scam prevention, and digital privacy.
-              Written by our security team, updated by AI to stay current with evolving threats.
+              Expert guides on AI safety, scam prevention, digital privacy, family protection,
+              and financial defense. Every title now shares one integrated catalog and reader flow.
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
               <span className="flex items-center gap-1.5">
@@ -183,14 +185,21 @@ export default function LibraryPage() {
                     className="group"
                   >
                     <Card className="h-full hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 border-border/60">
-                      {/* Cover image */}
-                      <div className="relative aspect-[3/2] bg-gradient-to-br from-primary/20 to-purple-100 rounded-t-lg overflow-hidden flex items-center justify-center">
-                        <BookOpen className="h-12 w-12 text-primary/40" />
+                      <div className="relative aspect-[3/4] rounded-t-lg overflow-hidden bg-muted">
+                        <img
+                          src={book.cover_image}
+                          alt={book.title}
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          loading="lazy"
+                        />
                         {book.tag && (
                           <Badge className="absolute top-2 left-2 text-xs bg-primary/90">
                             {book.tag}
                           </Badge>
                         )}
+                        <Badge variant="secondary" className="absolute top-2 right-2 text-[10px] capitalize">
+                          {CATEGORY_LABELS[book.category as BookCategory]}
+                        </Badge>
                       </div>
 
                       <CardContent className="p-4 flex flex-col gap-3">
@@ -200,6 +209,9 @@ export default function LibraryPage() {
                           </h2>
                           <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
                             {book.subtitle}
+                          </p>
+                          <p className="text-xs text-muted-foreground/80 mt-2 line-clamp-2">
+                            {book.description}
                           </p>
                         </div>
 
@@ -213,6 +225,14 @@ export default function LibraryPage() {
                         <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                           <BookOpen className="h-3.5 w-3.5" />
                           <span>{book.total_pages} pages · {book.chapters.length} chapters</span>
+                        </div>
+
+                        <div className="flex flex-wrap gap-1.5">
+                          {book.outcomes.slice(0, 2).map((outcome) => (
+                            <Badge key={outcome} variant="outline" className="text-[10px] font-normal">
+                              {outcome}
+                            </Badge>
+                          ))}
                         </div>
 
                         <div className="flex items-center justify-between mt-auto pt-1">

@@ -7,6 +7,8 @@ import { BookOpen, Loader2, KeyRound, Mail, RefreshCw } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { createAdminBookReaderSession, storeBookReaderSession } from "@/lib/bookReaderSession";
 
 interface ReadBooksDialogProps {
   open: boolean;
@@ -22,6 +24,8 @@ export function ReadBooksDialog({ open, onOpenChange }: ReadBooksDialogProps) {
   const [showReset, setShowReset] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
   const navigate = useNavigate();
+  const { user, adminName, adminEmail, isAdmin } = useAuth();
+  const adminAccess = !!user && isAdmin();
 
   // Auto-fill from URL params for shareable links
   useEffect(() => {
@@ -30,6 +34,23 @@ export function ReadBooksDialog({ open, onOpenChange }: ReadBooksDialogProps) {
     if (paramEmail) setEmail(decodeURIComponent(paramEmail));
     if (paramAccess) setAccessId(decodeURIComponent(paramAccess).toUpperCase());
   }, [searchParams]);
+
+  useEffect(() => {
+    if (!adminAccess || email.trim()) return;
+    setEmail(adminEmail || user?.email || "");
+  }, [adminAccess, adminEmail, email, user?.email]);
+
+  const handleAdminAccess = () => {
+    storeBookReaderSession(
+      createAdminBookReaderSession({
+        customerName: adminName,
+        email: adminEmail || user?.email || email.trim(),
+      }),
+    );
+    onOpenChange(false);
+    toast.success("Admin library opened.");
+    navigate("/reader");
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,14 +73,12 @@ export function ReadBooksDialog({ open, onOpenChange }: ReadBooksDialogProps) {
       }
 
       // Store session in sessionStorage (not persistent)
-      sessionStorage.setItem(
-        "bookReaderSession",
-        JSON.stringify({
-          bookIds: data.bookIds,
-          customerName: data.customerName,
-          email: email.trim(),
-        })
-      );
+      storeBookReaderSession({
+        bookIds: data.bookIds,
+        customerName: data.customerName,
+        email: email.trim(),
+        accessType: "purchase",
+      });
 
       onOpenChange(false);
       navigate("/reader");
@@ -80,11 +99,28 @@ export function ReadBooksDialog({ open, onOpenChange }: ReadBooksDialogProps) {
             Read Your Books
           </DialogTitle>
           <DialogDescription>
-            Enter the email you used to purchase and your Access ID to start reading.
+            {adminAccess
+              ? "Open the full library with your admin account, or use purchase credentials to verify a customer session."
+              : "Enter the email you used to purchase and your Access ID to start reading."}
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4 mt-2">
+          {adminAccess && (
+            <div className="rounded-lg border border-primary/20 bg-primary/5 p-3 space-y-3">
+              <div>
+                <p className="text-sm font-medium">Admin full-library access</p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Signed in as {adminName || "Administrator"}. Open every book and the full internal library without an Access ID.
+                </p>
+              </div>
+              <Button type="button" variant="secondary" className="w-full" onClick={handleAdminAccess}>
+                <BookOpen className="h-4 w-4 mr-2" />
+                Open Admin Library
+              </Button>
+            </div>
+          )}
+
           <div className="space-y-2">
             <label className="text-sm font-medium flex items-center gap-2">
               <Mail className="h-3.5 w-3.5 text-muted-foreground" />

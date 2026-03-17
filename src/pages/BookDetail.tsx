@@ -52,8 +52,8 @@ export default function BookDetail() {
 
   const handleAddToCart = () => {
     addItem({
-      id: book.slug,
-      productId: book.slug,
+      id: book.id,
+      productId: book.id,
       name: book.title,
       price: book.price,
       image: book.cover_image,
@@ -132,12 +132,13 @@ export default function BookDetail() {
                         (e.target as HTMLImageElement).style.display = "none";
                       }}
                     />
-                  ) : null}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-gradient-to-br from-primary/80 to-purple-800/80 text-white text-center">
-                    <BookOpen className="h-16 w-16 mb-4 opacity-80" />
-                    <h2 className="text-xl font-bold leading-tight">{book.title}</h2>
-                    <p className="text-sm mt-2 opacity-80">{book.subtitle}</p>
-                  </div>
+                  ) : (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-gradient-to-br from-primary/80 to-purple-800/80 text-white text-center">
+                      <BookOpen className="h-16 w-16 mb-4 opacity-80" />
+                      <h2 className="text-xl font-bold leading-tight">{book.title}</h2>
+                      <p className="text-sm mt-2 opacity-80">{book.subtitle}</p>
+                    </div>
+                  )}
                 </div>
 
                 {/* Purchase box */}
@@ -222,6 +223,23 @@ export default function BookDetail() {
                   </span>
                 </div>
                 <p className="text-base text-foreground/80 leading-relaxed">{book.description}</p>
+                <p className="text-sm text-muted-foreground mt-4">
+                  Ideal for: <span className="text-foreground">{book.ideal_for}</span>
+                </p>
+              </div>
+
+              <div>
+                <h2 className="text-xl font-semibold mb-4">What You Will Learn</h2>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {book.outcomes.map((outcome) => (
+                    <div key={outcome} className="rounded-xl border border-border/60 bg-card/50 p-4 text-sm text-foreground/85">
+                      <div className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                        <span>{outcome}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Free chapter preview */}
@@ -304,9 +322,17 @@ export default function BookDetail() {
                   <Card key={related.slug} className="hover:shadow-md transition-shadow">
                     <CardContent className="p-5">
                       <div className="flex items-start gap-4">
-                        <div className="w-16 h-20 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                      <div className="w-16 h-20 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                        {related.cover_image ? (
+                          <img
+                            src={related.cover_image}
+                            alt={related.title}
+                            className="w-full h-full object-cover rounded-lg"
+                          />
+                        ) : (
                           <BookOpen className="h-6 w-6 text-primary" />
-                        </div>
+                        )}
+                      </div>
                         <div className="flex-1 min-w-0">
                           <h3 className="font-semibold text-sm leading-tight mb-1 truncate">{related.title}</h3>
                           <p className="text-xs text-muted-foreground mb-2 line-clamp-2">{related.subtitle}</p>
