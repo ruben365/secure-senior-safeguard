@@ -120,7 +120,7 @@ export function AdminShell() {
   // Show skeleton while checking auth - shell stays visible
   if (!initialized || loading) {
     return (
-      <div className="flex min-h-screen bg-[#0B0F19] w-full">
+      <div className="flex min-h-screen bg-[#0F1117] w-full">
         <CyberSidebar
           isOpen={sidebarOpen}
           isMobileOpen={false}
