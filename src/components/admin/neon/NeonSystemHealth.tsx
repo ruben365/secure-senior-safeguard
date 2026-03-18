@@ -1,229 +1,94 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
-import {
-  Activity,
-  Heart,
-  AlertTriangle,
-  XCircle,
-  RefreshCw,
-  Server,
-  Database,
-  Shield,
-  Mail,
-} from "lucide-react";
+import { Activity, Heart, AlertTriangle, XCircle, RefreshCw, Server, Database, Shield, Mail } from "lucide-react";
 
 interface ServiceStatus {
   name: string;
   status: "healthy" | "struggling" | "dead" | "unknown";
-  lastChecked: string;
   icon: React.ElementType;
 }
 
 export function NeonSystemHealth() {
   const [services, setServices] = useState<ServiceStatus[]>([
-    {
-      name: "Database",
-      status: "healthy",
-      lastChecked: "Just now",
-      icon: Database,
-    },
-    {
-      name: "Auth Service",
-      status: "healthy",
-      lastChecked: "Just now",
-      icon: Shield,
-    },
-    {
-      name: "Email Service",
-      status: "healthy",
-      lastChecked: "Just now",
-      icon: Mail,
-    },
-    {
-      name: "API Gateway",
-      status: "healthy",
-      lastChecked: "Just now",
-      icon: Server,
-    },
+    { name: "Database", status: "healthy", icon: Database },
+    { name: "Auth", status: "healthy", icon: Shield },
+    { name: "Email", status: "healthy", icon: Mail },
+    { name: "API", status: "healthy", icon: Server },
   ]);
   const [refreshing, setRefreshing] = useState(false);
 
-  const fetchSystemHealth = async () => {
+  const fetchHealth = async () => {
     setRefreshing(true);
     try {
-      // Check database connectivity
-      const { error: dbError } = await supabase
-        .from("profiles")
-        .select("id")
-        .limit(1);
-
-      // Check auth service
+      const { error: dbError } = await supabase.from("profiles").select("id").limit(1);
       const { data: session } = await supabase.auth.getSession();
-
       setServices([
-        {
-          name: "Database",
-          status: dbError ? "struggling" : "healthy",
-          lastChecked: "Just now",
-          icon: Database,
-        },
-        {
-          name: "Auth Service",
-          status: session ? "healthy" : "struggling",
-          lastChecked: "Just now",
-          icon: Shield,
-        },
-        {
-          name: "Email Service",
-          status: "healthy",
-          lastChecked: "Just now",
-          icon: Mail,
-        },
-        {
-          name: "API Gateway",
-          status: "healthy",
-          lastChecked: "Just now",
-          icon: Server,
-        },
+        { name: "Database", status: dbError ? "struggling" : "healthy", icon: Database },
+        { name: "Auth", status: session ? "healthy" : "struggling", icon: Shield },
+        { name: "Email", status: "healthy", icon: Mail },
+        { name: "API", status: "healthy", icon: Server },
       ]);
-    } catch (err) {
-      console.error("Health check error:", err);
-    } finally {
-      setRefreshing(false);
-    }
+    } catch { /* silent */ } finally { setRefreshing(false); }
   };
 
   useEffect(() => {
-    fetchSystemHealth();
-    const interval = setInterval(fetchSystemHealth, 60000);
+    fetchHealth();
+    const interval = setInterval(fetchHealth, 60000);
     return () => clearInterval(interval);
   }, []);
 
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case "healthy":
-        return <Heart className="w-4 h-4 text-green-400" />;
-      case "struggling":
-        return <AlertTriangle className="w-4 h-4 text-amber-400" />;
-      case "dead":
-        return <XCircle className="w-4 h-4 text-red-400" />;
-      default:
-        return <Activity className="w-4 h-4 text-gray-400" />;
-    }
-  };
+  const healthyCount = services.filter(s => s.status === "healthy").length;
+  const pct = services.length > 0 ? (healthyCount / services.length) * 100 : 0;
 
-  const getStatusBadge = (status: string) => {
-    const config = {
-      healthy: "bg-green-500/20 text-green-400 border-green-500/30",
-      struggling: "bg-amber-500/20 text-amber-400 border-amber-500/30",
-      dead: "bg-red-500/20 text-red-400 border-red-500/30",
-      unknown: "bg-gray-500/20 text-gray-400 border-gray-500/30",
-    };
-    return config[status as keyof typeof config] || config.unknown;
+  const statusIcon = (s: string) => {
+    if (s === "healthy") return <Heart className="w-3 h-3 text-emerald-400" />;
+    if (s === "struggling") return <AlertTriangle className="w-3 h-3 text-amber-400" />;
+    return <XCircle className="w-3 h-3 text-red-400" />;
   };
-
-  const healthyCount = services.filter((s) => s.status === "healthy").length;
-  const overallHealth =
-    services.length > 0 ? (healthyCount / services.length) * 100 : 0;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.5, duration: 0.5 }}
-    >
-      <Card className="bg-[#111827] border-gray-800 p-5 shadow-lg shadow-teal-500/5">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-[#F9FAFB] flex items-center gap-2">
-            <Activity className="w-5 h-5 text-teal-400" />
-            System Health
-          </h2>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={fetchSystemHealth}
-            disabled={refreshing}
-            className="text-[#D1D5DB] hover:text-[#F9FAFB] hover:bg-gray-800/50"
-          >
-            <RefreshCw
-              className={`w-4 h-4 ${refreshing ? "animate-spin" : ""}`}
-            />
-          </Button>
-        </div>
+    <Card className="bg-[#1F2937] border-[#374151] p-5">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-sm font-semibold text-[#F9FAFB] flex items-center gap-2">
+          <Activity className="w-4 h-4 text-teal-400" />
+          System Health
+        </h2>
+        <Button variant="ghost" size="sm" onClick={fetchHealth} disabled={refreshing}
+          className="text-[#6B7280] hover:text-[#F9FAFB] hover:bg-[#374151] h-8 w-8 p-0">
+          <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? "animate-spin" : ""}`} />
+        </Button>
+      </div>
 
-        {/* Overall Health Bar */}
-        <div className="mb-4">
-          <div className="flex items-center justify-between text-sm mb-1">
-            <span className="text-[#D1D5DB]">Overall Status</span>
-            <span
-              className={
-                overallHealth === 100 ? "text-[#10B981]" : "text-[#FBBF24]"
-              }
-            >
-              {(overallHealth ?? 0).toFixed(0)}% Operational
-            </span>
-          </div>
-          <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: `${overallHealth}%` }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className={`h-full rounded-full ${overallHealth === 100 ? "bg-gradient-to-r from-green-500 to-emerald-500" : "bg-gradient-to-r from-amber-500 to-orange-500"}`}
-            />
-          </div>
+      <div className="mb-4">
+        <div className="flex items-center justify-between text-xs mb-1.5">
+          <span className="text-[#6B7280]">Overall</span>
+          <span className={pct === 100 ? "text-emerald-400" : "text-amber-400"}>{pct.toFixed(0)}%</span>
         </div>
+        <div className="h-1.5 bg-[#111827] rounded-full overflow-hidden">
+          <div className={`h-full rounded-full transition-all duration-500 ${pct === 100 ? "bg-emerald-500" : "bg-amber-500"}`} style={{ width: `${pct}%` }} />
+        </div>
+      </div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-2 gap-2">
-          {services.map((service, index) => {
-            const Icon = service.icon;
-            return (
-              <motion.div
-                key={service.name}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.6 + index * 0.1, duration: 0.3 }}
-                className="flex items-center gap-2 p-2 bg-[#111827] rounded-lg border border-gray-800/50"
-              >
-                <div
-                  className={`w-8 h-8 rounded-lg flex items-center justify-center ${
-                    service.status === "healthy"
-                      ? "bg-green-500/10"
-                      : service.status === "struggling"
-                        ? "bg-amber-500/10"
-                        : "bg-red-500/10"
-                  }`}
-                >
-                  <Icon
-                    className={`w-4 h-4 ${
-                      service.status === "healthy"
-                        ? "text-green-400"
-                        : service.status === "struggling"
-                          ? "text-amber-400"
-                          : "text-red-400"
-                    }`}
-                  />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs font-medium text-[#F9FAFB] truncate">
-                    {service.name}
-                  </p>
-                  <div className="flex items-center gap-1">
-                    {getStatusIcon(service.status)}
-                    <span className="text-xs text-[#9CA3AF] capitalize">
-                      {service.status}
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-      </Card>
-    </motion.div>
+      <div className="grid grid-cols-2 gap-2">
+        {services.map((s) => {
+          const Icon = s.icon;
+          const color = s.status === "healthy" ? "text-emerald-400" : s.status === "struggling" ? "text-amber-400" : "text-red-400";
+          const bg = s.status === "healthy" ? "bg-emerald-500/10" : s.status === "struggling" ? "bg-amber-500/10" : "bg-red-500/10";
+          return (
+            <div key={s.name} className="flex items-center gap-2 p-2.5 bg-[#111827] rounded-lg border border-[#374151]">
+              <div className={`w-7 h-7 rounded-md flex items-center justify-center ${bg}`}>
+                <Icon className={`w-3.5 h-3.5 ${color}`} />
+              </div>
+              <div className="min-w-0">
+                <p className="text-xs font-medium text-[#D1D5DB] truncate">{s.name}</p>
+                <div className="flex items-center gap-1">{statusIcon(s.status)}<span className="text-[10px] text-[#6B7280] capitalize">{s.status}</span></div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </Card>
   );
 }
