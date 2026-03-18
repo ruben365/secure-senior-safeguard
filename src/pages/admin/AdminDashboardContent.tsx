@@ -1,28 +1,18 @@
 import { useState, useEffect } from "react";
-// Framer Motion removed for Zero-Distraction protocol
 import { Command } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
-import { CyberGuardianStats } from "@/components/admin/neon/CyberGuardianStats";
-import { GlobalThreatActivityChart } from "@/components/admin/neon/GlobalThreatActivityChart";
-import { AttackVectorBarChart } from "@/components/admin/neon/AttackVectorBarChart";
-import { DeviceSecurityShield } from "@/components/admin/neon/DeviceSecurityShield";
-import { CyberRecentAlerts } from "@/components/admin/neon/CyberRecentAlerts";
-import { NeonOperationsStats } from "@/components/admin/neon/NeonOperationsStats";
+import { DashboardKPICards } from "@/components/admin/neon/DashboardKPICards";
+import { NeonAdminModules } from "@/components/admin/neon/NeonAdminModules";
 import { NeonManagementTabs } from "@/components/admin/neon/NeonManagementTabs";
 import { NeonTasksCard } from "@/components/admin/neon/NeonTasksCard";
 import { NeonEventsCard } from "@/components/admin/neon/NeonEventsCard";
-import { NeonTeamOverview } from "@/components/admin/neon/NeonTeamOverview";
 import { NeonCalendarCard } from "@/components/admin/neon/NeonCalendarCard";
 import { NeonQuickActions } from "@/components/admin/neon/NeonQuickActions";
-import { NeonAdminModules } from "@/components/admin/neon/NeonAdminModules";
 import { NeonSystemHealth } from "@/components/admin/neon/NeonSystemHealth";
-import { NeonAccountActions } from "@/components/admin/neon/NeonAccountActions";
 import { NeonPendingRequests } from "@/components/admin/neon/NeonPendingRequests";
-import { NeonDashboardLinks } from "@/components/admin/neon/NeonDashboardLinks";
 import { PageSkeleton } from "@/components/admin/PageSkeleton";
 
-// Dashboard content - no shell wrapper (shell is in AdminShell via Outlet)
 export default function AdminDashboardContent() {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [tasks, setTasks] = useState<any[]>([]);
@@ -35,11 +25,10 @@ export default function AdminDashboardContent() {
     unreadMessages: 0,
     lowStockProducts: 0,
   });
-  const [stats, setStats] = useState({
+  const [kpiStats, setKpiStats] = useState({
+    pendingBookings: 0,
+    unreadMessages: 0,
     totalStaff: 0,
-    activeProjects: 0,
-    pendingTasks: 0,
-    upcomingEvents: 0,
     newsletterSubscribers: 0,
   });
 
@@ -82,6 +71,12 @@ export default function AdminDashboardContent() {
         unreadMessages: messagesCount || 0,
         lowStockProducts: lowStockCount || 0,
       });
+
+      setKpiStats(prev => ({
+        ...prev,
+        pendingBookings: bookingsCount || 0,
+        unreadMessages: messagesCount || 0,
+      }));
     } catch (err) {
       console.error("Error loading module stats:", err);
     }
@@ -89,13 +84,8 @@ export default function AdminDashboardContent() {
 
   const loadDashboardData = async () => {
     try {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (!user) {
-        setLoading(false);
-        return;
-      }
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) { setLoading(false); return; }
 
       const { data: tasksData } = await supabase
         .from("admin_tasks")
@@ -119,30 +109,17 @@ export default function AdminDashboardContent() {
       const { count: staffCount } = await supabase
         .from("user_roles")
         .select("*", { count: "exact", head: true })
-        .in("role", [
-          "staff",
-          "secretary",
-          "training_coordinator",
-          "business_consultant",
-          "support_specialist",
-        ]);
-
-      const { count: projectsCount } = await supabase
-        .from("jobs")
-        .select("*", { count: "exact", head: true })
-        .in("status", ["Pending", "In Progress"]);
+        .in("role", ["staff", "secretary", "training_coordinator", "business_consultant", "support_specialist"]);
 
       const { count: subscriberCount } = await supabase
         .from("newsletter_subscribers")
         .select("*", { count: "exact", head: true });
 
-      setStats({
+      setKpiStats(prev => ({
+        ...prev,
         totalStaff: staffCount || 0,
-        activeProjects: projectsCount || 0,
-        pendingTasks: tasksData?.length || 0,
-        upcomingEvents: eventsData?.length || 0,
         newsletterSubscribers: subscriberCount || 0,
-      });
+      }));
     } catch (err) {
       console.error("Error loading dashboard data:", err);
     } finally {
@@ -154,88 +131,48 @@ export default function AdminDashboardContent() {
     return <PageSkeleton variant="dashboard" />;
   }
 
+  const today = new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
-    <div className="p-4 sm:p-6 lg:p-8 max-w-[1600px] mx-auto">
+    <div className="p-6 lg:p-8 max-w-[1400px] mx-auto space-y-6">
       {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="w-10 h-10 bg-gradient-to-br from-[#3B82F6] to-[#06B6D4] rounded-lg flex items-center justify-center shadow-lg shadow-[#3B82F6]/20">
-            <Command className="w-5 h-5 text-white" />
-          </div>
-          <div>
-            <div className="flex items-center gap-3">
-              <h1 className="text-3xl font-bold text-[#F9FAFB]">
-                Security Command Center
-              </h1>
-              {/* Live Status Badge */}
-              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#10B981]/10 border border-[#10B981]/30">
-                <span className="w-2 h-2 rounded-full bg-[#10B981]" />
-                <span className="text-xs font-medium text-[#10B981]">LIVE</span>
-              </div>
-            </div>
-            <p className="text-[#9CA3AF]">
-              Real-time threat monitoring and family protection overview
-            </p>
-          </div>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-semibold text-[#F9FAFB] tracking-tight">
+            Admin Overview
+          </h1>
+          <p className="text-sm text-[#6B7280] mt-1">{today}</p>
         </div>
       </div>
 
-      {/* Live Monitor Cards */}
-      <CyberGuardianStats />
+      {/* KPI Cards */}
+      <DashboardKPICards stats={kpiStats} />
 
-      {/* Admin Modules Grid */}
-      <div className="mb-6">
-        <NeonAdminModules stats={moduleStats} />
-      </div>
+      {/* Modules */}
+      <NeonAdminModules stats={moduleStats} />
 
-      {/* Operations Stats */}
-      <div className="mb-6">
-        <NeonOperationsStats stats={stats} />
-      </div>
-
-      {/* Charts Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-        <div className="lg:col-span-2">
-          <GlobalThreatActivityChart />
-        </div>
-        <div className="lg:col-span-1">
-          <DeviceSecurityShield />
-        </div>
-      </div>
-
-      {/* Second Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <AttackVectorBarChart />
-        <CyberRecentAlerts />
-      </div>
-
-      {/* Management Tabs */}
-      <div className="mb-6">
-        <NeonManagementTabs />
-      </div>
-
-      {/* Three Column Layout */}
-      <div className="grid lg:grid-cols-3 gap-6">
-        {/* Left Column */}
-        <div className="space-y-6">
+      {/* Two-column: Management Tabs + Sidebar */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div className="lg:col-span-8 space-y-6">
+          <NeonManagementTabs />
           <NeonPendingRequests />
-          <NeonTasksCard tasks={tasks} />
-          <NeonEventsCard events={events} />
         </div>
-
-        {/* Middle Column */}
-        <div className="space-y-6">
-          <NeonSystemHealth />
-          <NeonTeamOverview />
-          <NeonAccountActions />
-        </div>
-
-        {/* Right Column */}
-        <div className="space-y-6">
-          <NeonCalendarCard date={date} onSelect={setDate} />
-          <NeonDashboardLinks />
+        <div className="lg:col-span-4 space-y-6">
           <NeonQuickActions />
+          <NeonSystemHealth />
+          <NeonCalendarCard date={date} onSelect={setDate} />
         </div>
+      </div>
+
+      {/* Tasks & Events */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <NeonTasksCard tasks={tasks} />
+        <NeonEventsCard events={events} />
       </div>
     </div>
   );
