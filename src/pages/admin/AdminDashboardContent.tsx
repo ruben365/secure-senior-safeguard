@@ -164,7 +164,6 @@ export default function AdminDashboardContent() {
         </div>
         <div className="lg:col-span-4 space-y-6">
           <NeonQuickActions />
-          <NeonSystemHealth />
           <NeonCalendarCard date={date} onSelect={setDate} />
         </div>
       </div>
