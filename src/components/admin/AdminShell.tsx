@@ -152,10 +152,10 @@ export function AdminShell() {
     );
   }
 
-  // Redirect if not authenticated
-  if (!user) {
-    return <Navigate to="/auth" replace />;
-  }
+  // TRIAL MODE: Auth check bypassed
+  // if (!user) {
+  //   return <Navigate to="/auth" replace />;
+  // }
 
   // Show access denied if no role config (not an admin/staff)
   if (!roleConfig) {
