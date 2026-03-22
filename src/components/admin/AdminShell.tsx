@@ -157,8 +157,8 @@ export function AdminShell() {
   //   return <Navigate to="/auth" replace />;
   // }
 
-  // Show access denied if no role config (not an admin/staff)
-  if (!roleConfig) {
+  // TRIAL MODE: Role check bypassed
+  if (false && !roleConfig) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4 bg-[#0F1117]">
         <Card className="max-w-md w-full bg-[#111827] border-gray-800">
