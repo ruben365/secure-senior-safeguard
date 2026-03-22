@@ -80,34 +80,22 @@ export default function BookReader() {
   useEffect(() => {
     if (!initialized || authLoading) return;
 
+    // TRIAL MODE: Auto-grant universal access to all books
     const storedSession = readBookReaderSession();
     if (storedSession) {
-      if (storedSession.accessType === "admin" && !(user && isAdmin())) {
-        clearBookReaderSession();
-      } else {
       setSession(storedSession);
       return;
-      }
     }
 
-    if (user && isAdmin()) {
-      const adminSession = createAdminBookReaderSession({
-        customerName: adminName,
-        email: adminEmail || user.email || "",
-      });
-      storeBookReaderSession(adminSession);
-      setSession(adminSession);
-      return;
-    }
-
-    if (session) return;
-
-    clearBookReaderSession();
-    setSession(null);
-    if (!user || !isAdmin()) {
-      toastHook({ title: "Session expired", description: "Please sign in with your Access ID to read your books.", variant: "destructive" });
-      navigate("/resources");
-    }
+    // Create a universal trial session
+    const trialSession: BookReaderSession = {
+      customerName: user ? (adminName || user.email || "Trial User") : "Trial User",
+      email: user?.email || "trial@invisionnetwork.org",
+      bookIds: ["all"],
+      accessType: "admin",
+    };
+    storeBookReaderSession(trialSession);
+    setSession(trialSession);
   }, [adminEmail, adminName, authLoading, initialized, isAdmin, navigate, session, toastHook, user]);
 
   // Scroll to top on chapter change
