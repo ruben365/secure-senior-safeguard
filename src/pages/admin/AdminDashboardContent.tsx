@@ -9,7 +9,7 @@ import { NeonTasksCard } from "@/components/admin/neon/NeonTasksCard";
 import { NeonEventsCard } from "@/components/admin/neon/NeonEventsCard";
 import { NeonCalendarCard } from "@/components/admin/neon/NeonCalendarCard";
 import { NeonQuickActions } from "@/components/admin/neon/NeonQuickActions";
-import { NeonSystemHealth } from "@/components/admin/neon/NeonSystemHealth";
+
 import { NeonPendingRequests } from "@/components/admin/neon/NeonPendingRequests";
 import { PageSkeleton } from "@/components/admin/PageSkeleton";
 
@@ -164,7 +164,6 @@ export default function AdminDashboardContent() {
         </div>
         <div className="lg:col-span-4 space-y-6">
           <NeonQuickActions />
-          <NeonSystemHealth />
           <NeonCalendarCard date={date} onSelect={setDate} />
         </div>
       </div>
