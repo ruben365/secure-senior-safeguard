@@ -1,7 +1,5 @@
 import SuperAdminDashboardHealth from "@/components/admin/super/SuperAdminDashboardHealth";
 import SuperAdminActivityFeed from "@/components/admin/super/SuperAdminActivityFeed";
-import { SystemHeartbeatMonitor } from "@/components/admin/SystemHeartbeatMonitor";
-import { SecurityMonitor } from "@/components/admin/SecurityMonitor";
 
 export default function SystemHealthDashboard() {
   return (
@@ -11,13 +9,11 @@ export default function SystemHealthDashboard() {
           System Health & Monitoring
         </h1>
         <p className="text-[#9CA3AF]">
-          Monitor backend services, security, and platform activity
+          Monitor backend services and platform activity
         </p>
       </div>
       <div className="space-y-6">
         <SuperAdminDashboardHealth />
-        <SystemHeartbeatMonitor />
-        <SecurityMonitor />
         <SuperAdminActivityFeed />
       </div>
     </div>

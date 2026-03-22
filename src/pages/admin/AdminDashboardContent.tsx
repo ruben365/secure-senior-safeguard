@@ -9,7 +9,7 @@ import { NeonTasksCard } from "@/components/admin/neon/NeonTasksCard";
 import { NeonEventsCard } from "@/components/admin/neon/NeonEventsCard";
 import { NeonCalendarCard } from "@/components/admin/neon/NeonCalendarCard";
 import { NeonQuickActions } from "@/components/admin/neon/NeonQuickActions";
-import { NeonSystemHealth } from "@/components/admin/neon/NeonSystemHealth";
+
 import { NeonPendingRequests } from "@/components/admin/neon/NeonPendingRequests";
 import { PageSkeleton } from "@/components/admin/PageSkeleton";
 
