@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiAnalysisCTA } from "@/components/home/AiAnalysisCTA";
 import { useQuery } from "@tanstack/react-query";
 import { useCart } from "@/contexts/CartContext";
