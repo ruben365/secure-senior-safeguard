@@ -1,4 +1,5 @@
 import bookAiFundamentals from "@/assets/book-ai-fundamentals.jpg";
+import { AI_FUNDAMENTALS_CHAPTERS } from "@/data/aiFundamentalsContent";
 import bookBeingRealAi from "@/assets/book-being-real-ai.jpg";
 import bookAuthPersonalities from "@/assets/book-auth-personalities.jpg";
 import bookAuthFriendshipV2 from "@/assets/book-auth-friendship-v2.jpg";
@@ -406,6 +407,11 @@ function createChapters(seed: BookSeed): BookChapter[] {
   });
 }
 
+/** Map of book IDs to custom full-content chapters */
+const CUSTOM_CHAPTERS: Record<string, BookChapter[]> = {
+  "book-ai-fundamentals": AI_FUNDAMENTALS_CHAPTERS,
+};
+
 function createBook(seed: BookSeed): BookItem {
   const totalPages = normalizePageCount(seed);
   return {
@@ -413,7 +419,7 @@ function createBook(seed: BookSeed): BookItem {
     author: BOOK_AUTHOR,
     total_pages: totalPages,
     bulk_price: toCurrency(seed.price * 0.8),
-    chapters: createChapters({ ...seed, total_pages: totalPages }),
+    chapters: CUSTOM_CHAPTERS[seed.id] ?? createChapters({ ...seed, total_pages: totalPages }),
   };
 }
 
