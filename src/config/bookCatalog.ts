@@ -1,4 +1,5 @@
 import bookAiFundamentals from "@/assets/book-ai-fundamentals.jpg";
+import { AI_FUNDAMENTALS_CHAPTERS } from "@/data/aiFundamentalsContent";
 import bookBeingRealAi from "@/assets/book-being-real-ai.jpg";
 import bookAuthPersonalities from "@/assets/book-auth-personalities.jpg";
 import bookAuthFriendshipV2 from "@/assets/book-auth-friendship-v2.jpg";
