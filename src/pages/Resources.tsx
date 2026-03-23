@@ -64,6 +64,7 @@ const heroHeadlines = [
 "Guides to Protect What Matters Most"];
 
 function Resources() {
+  const navigate = useNavigate();
   const { addItem, lastClearReason, hadItemsBeforeClear, itemCount } =
   useCart();
   const { toast } = useToast();
