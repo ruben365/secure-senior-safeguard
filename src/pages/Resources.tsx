@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiAnalysisCTA } from "@/components/home/AiAnalysisCTA";
 import { useQuery } from "@tanstack/react-query";
 import { useCart } from "@/contexts/CartContext";
@@ -64,6 +64,7 @@ const heroHeadlines = [
 "Guides to Protect What Matters Most"];
 
 function Resources() {
+  const navigate = useNavigate();
   const { addItem, lastClearReason, hadItemsBeforeClear, itemCount } =
   useCart();
   const { toast } = useToast();
@@ -181,30 +182,16 @@ function Resources() {
   )
   ) || [];
   const handleBuyNow = (product: (typeof BOOK_CATALOG)[number]) => {
-    // Use embedded payment modal instead of redirect
-    setEmbeddedPaymentConfig({
-      mode: "payment",
-      priceId: product.stripe_price_id,
-      productName: product.name,
-      amount: Math.round(product.price * 100),
-      // Convert to cents
-      description: product.description
-    });
-    setEmbeddedPaymentOpen(true);
+    // TRIAL MODE: Skip payment, go directly to reader
+    navigate("/reader");
   };
   const handleAddToCart = (book: (typeof BOOK_CATALOG)[number]) => {
-    addItem({
-      id: book.id,
-      productId: book.id,
-      name: book.name,
-      price: book.price,
-      image: book.image,
-      stripe_price_id: book.stripe_price_id
-    });
+    // TRIAL MODE: Skip cart, go directly to reader
     toast({
-      title: "Added to Cart",
-      description: `${book.name} has been added to your cart.`
+      title: "Trial Mode",
+      description: `Opening ${book.name} in the reader...`
     });
+    navigate("/reader");
   };
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);

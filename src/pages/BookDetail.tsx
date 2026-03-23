@@ -51,21 +51,14 @@ export default function BookDetail() {
   }
 
   const handleAddToCart = () => {
-    addItem({
-      id: book.id,
-      productId: book.id,
-      name: book.title,
-      price: book.price,
-      image: book.cover_image,
-      isDigital: true,
-      stripe_price_id: book.stripe_price_id,
-    });
-    toast({ title: "Added to cart", description: `${book.title} has been added to your cart.` });
+    // TRIAL MODE: Skip cart, go directly to reader
+    toast({ title: "Trial Mode", description: `Opening ${book.title} in the reader...` });
+    navigate("/reader");
   };
 
   const handleBuyNow = () => {
-    handleAddToCart();
-    navigate("/resources#checkout");
+    // TRIAL MODE: Skip payment, go directly to reader
+    navigate("/reader");
   };
 
   const relatedBooks = LIBRARY_BOOKS.filter(
