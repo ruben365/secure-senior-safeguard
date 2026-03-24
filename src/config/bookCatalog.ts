@@ -76,7 +76,7 @@ interface BookSeed extends Omit<BookItem, "author" | "bulk_price" | "chapters"> 
   controls: string[];
   response_plan: string[];
   practice_plan: string[];
-  chapter_titles: [string, string, string, string, string];
+  chapter_titles: string[];
 }
 
 const CATEGORY_RELATIONS: Record<BookCategory, BookCategory[]> = {
