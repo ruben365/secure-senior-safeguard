@@ -475,6 +475,7 @@ const BOOK_SEEDS: BookSeed[] = [
       "Guardrails Before Convenience",
       "What to Do When AI Is Used Against You",
       "Building an AI-Safe Routine",
+      "AI Norms: Ethics, Safety Rules, and Regulatory Frameworks",
     ],
   },
   {
