@@ -76,7 +76,7 @@ interface BookSeed extends Omit<BookItem, "author" | "bulk_price" | "chapters"> 
   controls: string[];
   response_plan: string[];
   practice_plan: string[];
-  chapter_titles: [string, string, string, string, string];
+  chapter_titles: string[];
 }
 
 const CATEGORY_RELATIONS: Record<BookCategory, BookCategory[]> = {
@@ -433,7 +433,7 @@ const BOOK_SEEDS: BookSeed[] = [
     longDescription:
       "AI Fundamentals explains the systems now shaping search, writing, customer service, scams, and workplace automation. It gives non-technical readers enough fluency to evaluate new tools without falling for hype, fear, or synthetic manipulation.",
     price: 29.99,
-    total_pages: 150,
+    total_pages: 170,
     image: bookAiFundamentals,
     tag: "Best Seller",
     stripe_price_id: "price_1SjwOGJ8osfwYbX7UnEPLRMz",
@@ -475,6 +475,7 @@ const BOOK_SEEDS: BookSeed[] = [
       "Guardrails Before Convenience",
       "What to Do When AI Is Used Against You",
       "Building an AI-Safe Routine",
+      "AI Norms: Ethics, Safety Rules, and Regulatory Frameworks",
     ],
   },
   {
