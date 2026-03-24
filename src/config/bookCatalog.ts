@@ -433,7 +433,7 @@ const BOOK_SEEDS: BookSeed[] = [
     longDescription:
       "AI Fundamentals explains the systems now shaping search, writing, customer service, scams, and workplace automation. It gives non-technical readers enough fluency to evaluate new tools without falling for hype, fear, or synthetic manipulation.",
     price: 29.99,
-    total_pages: 150,
+    total_pages: 170,
     image: bookAiFundamentals,
     tag: "Best Seller",
     stripe_price_id: "price_1SjwOGJ8osfwYbX7UnEPLRMz",
