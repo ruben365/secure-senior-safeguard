@@ -1,5 +1,7 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import {
   Menu,
@@ -9,6 +11,7 @@ import {
   Heart,
   ChevronDown,
   Shield,
+  ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PrefetchLink } from "@/components/PrefetchLink";
@@ -32,10 +35,256 @@ const secondaryLinks = [
   { name: "Contact", href: "/contact" },
 ];
 
-const allLinks = [...primaryLinks, ...secondaryLinks];
+const allNavLinks = [...primaryLinks, ...secondaryLinks];
+
+// ─── Mobile Drawer ──────────────────────────────────────────────────────────
+
+interface MobileDrawerProps {
+  open: boolean;
+  onClose: () => void;
+  onDonate: () => void;
+  isAdminOrStaff: boolean;
+  activeHref: string;
+}
+
+function MobileDrawer({ open, onClose, onDonate, isAdminOrStaff, activeHref }: MobileDrawerProps) {
+  // Body scroll lock
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
+  // Escape key
+  useEffect(() => {
+    if (!open) return;
+    const h = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", h);
+    return () => document.removeEventListener("keydown", h);
+  }, [open, onClose]);
+
+  const isActive = (href: string) =>
+    activeHref === href || activeHref.startsWith(href + "/");
+
+  return createPortal(
+    <AnimatePresence>
+      {open && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            key="nav-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={onClose}
+            aria-hidden="true"
+            style={{
+              position: "fixed",
+              inset: 0,
+              background: "rgba(8,18,36,0.55)",
+              backdropFilter: "blur(3px)",
+              WebkitBackdropFilter: "blur(3px)",
+              zIndex: 99998,
+              cursor: "default",
+            }}
+          />
+
+          {/* Drawer panel — slides in from right */}
+          <motion.div
+            key="nav-drawer"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation menu"
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "tween", duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+            style={{
+              position: "fixed",
+              top: 0,
+              right: 0,
+              bottom: 0,
+              width: "min(320px, 88vw)",
+              background: "#ffffff",
+              zIndex: 99999,
+              display: "flex",
+              flexDirection: "column",
+              boxShadow: "-8px 0 48px rgba(6,109,179,0.18), -2px 0 16px rgba(0,0,0,0.08)",
+              overflowY: "auto",
+              overscrollBehavior: "contain",
+            }}
+          >
+            {/* Header */}
+            <div style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "14px 18px",
+              borderBottom: "1px solid hsl(214 32% 91%)",
+              flexShrink: 0,
+            }}>
+              <Link
+                to="/"
+                onClick={onClose}
+                style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}
+              >
+                <div style={{
+                  width: 36, height: 36, borderRadius: 8,
+                  background: "hsl(207 89% 34% / 0.1)",
+                  display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
+                }}>
+                  <img src={invisionLogo} alt="" width={22} height={22} style={{ width: 22, height: 22, objectFit: "contain" }} />
+                </div>
+                <div>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: "hsl(213 60% 12%)", lineHeight: 1.2 }}>
+                    InVision Network
+                  </div>
+                  <div style={{ fontSize: 10, fontWeight: 600, color: "hsl(207 89% 34%)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                    AI Scam Protection
+                  </div>
+                </div>
+              </Link>
+              <button
+                onClick={onClose}
+                aria-label="Close menu"
+                style={{
+                  width: 44, height: 44, borderRadius: 10, flexShrink: 0,
+                  border: "none", background: "hsl(210 40% 96%)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  cursor: "pointer",
+                }}
+              >
+                <X size={20} color="hsl(213 60% 20%)" />
+              </button>
+            </div>
+
+            {/* Trust badge */}
+            <div style={{
+              display: "flex", alignItems: "center", gap: 7,
+              padding: "8px 18px",
+              background: "hsl(207 89% 34% / 0.05)",
+              borderBottom: "1px solid hsl(207 89% 34% / 0.1)",
+              flexShrink: 0,
+            }}>
+              <Shield size={13} color="hsl(207 89% 34%)" style={{ flexShrink: 0 }} />
+              <span style={{ fontSize: 11.5, fontWeight: 600, color: "hsl(207 89% 34%)" }}>
+                Veteran-founded · Ohio · 500+ families protected
+              </span>
+            </div>
+
+            {/* Nav links */}
+            <nav aria-label="Main navigation" style={{ flex: 1, padding: "6px 10px 10px" }}>
+              {allNavLinks.map((link) => {
+                const active = isActive(link.href);
+                return (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    onClick={onClose}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      padding: "13px 14px",
+                      borderRadius: 10,
+                      marginBottom: 2,
+                      fontSize: 15.5,
+                      fontWeight: active ? 700 : 500,
+                      color: active ? "hsl(207 89% 34%)" : "hsl(213 40% 22%)",
+                      background: active ? "hsl(207 89% 34% / 0.08)" : "transparent",
+                      textDecoration: "none",
+                      minHeight: 50,
+                    }}
+                  >
+                    <span>{link.name}</span>
+                    <ChevronRight size={15} color={active ? "hsl(207 89% 34%)" : "hsl(213 40% 65%)"} />
+                  </Link>
+                );
+              })}
+            </nav>
+
+            {/* CTA actions */}
+            <div style={{
+              padding: "14px 16px 36px",
+              borderTop: "1px solid hsl(214 32% 91%)",
+              display: "flex",
+              flexDirection: "column",
+              gap: 9,
+              flexShrink: 0,
+            }}>
+              {isAdminOrStaff ? (
+                <Link
+                  to="/admin"
+                  onClick={onClose}
+                  style={{
+                    display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+                    height: 50, borderRadius: 12,
+                    background: "hsl(207 89% 34%)",
+                    color: "#fff", fontWeight: 700, fontSize: 15.5,
+                    textDecoration: "none",
+                  }}
+                >
+                  <LayoutDashboard size={17} />
+                  Dashboard
+                </Link>
+              ) : (
+                <Link
+                  to="/portal"
+                  onClick={onClose}
+                  style={{
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    height: 50, borderRadius: 12,
+                    background: "hsl(207 89% 34%)",
+                    color: "#fff", fontWeight: 700, fontSize: 15.5,
+                    textDecoration: "none",
+                  }}
+                >
+                  Login
+                </Link>
+              )}
+
+              <button
+                onClick={() => { onClose(); onDonate(); }}
+                style={{
+                  display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+                  height: 50, borderRadius: 12,
+                  border: "1.5px solid hsl(207 89% 34% / 0.3)",
+                  background: "transparent",
+                  color: "hsl(207 89% 34%)", fontWeight: 700, fontSize: 15.5,
+                  cursor: "pointer",
+                }}
+              >
+                <Heart size={17} />
+                Donate
+              </button>
+
+              <a
+                href={SITE.phone.tel}
+                onClick={onClose}
+                style={{
+                  display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+                  height: 50, borderRadius: 12,
+                  background: "hsl(210 40% 96%)",
+                  color: "hsl(213 40% 30%)", fontWeight: 600, fontSize: 15,
+                  textDecoration: "none",
+                }}
+              >
+                <Phone size={16} />
+                {SITE.phone.display}
+              </a>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>,
+    document.body
+  );
+}
+
+// ─── Main Navigation ──────────────────────────────────────────────────────────
 
 const Navigation = React.memo(() => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const [donateOpen, setDonateOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -43,17 +292,22 @@ const Navigation = React.memo(() => {
   const { user, roleConfig } = useAuth();
   const moreRef = React.useRef<HTMLDivElement>(null);
 
-  const isAdminOrStaff = user && roleConfig;
+  const isAdminOrStaff = !!(user && roleConfig);
 
-  // Shadow on scroll
+  const isActive = useCallback((href: string) =>
+    location.pathname === href || location.pathname.startsWith(href + "/"),
+    [location.pathname]
+  );
+
+  const isSecondaryActive = secondaryLinks.some((l) => isActive(l.href));
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close "More" dropdown on outside click
-  React.useEffect(() => {
+  useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (moreRef.current && !moreRef.current.contains(e.target as Node)) {
         setMoreOpen(false);
@@ -63,27 +317,11 @@ const Navigation = React.memo(() => {
     return () => document.removeEventListener("mousedown", handler);
   }, [moreOpen]);
 
-  // Lock scroll when mobile menu open
-  React.useEffect(() => {
-    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [mobileMenuOpen]);
-
-  const isActiveLink = (href: string) =>
-    location.pathname === href || location.pathname.startsWith(href + "/");
-
-  const isSecondaryActive = secondaryLinks.some((l) => isActiveLink(l.href));
+  // Close drawer on route change
+  useEffect(() => { setDrawerOpen(false); }, [location.pathname]);
 
   return (
     <>
-      {/* Mobile backdrop */}
-      {mobileMenuOpen && (
-        <div
-          className="fixed inset-0 bg-foreground/40 backdrop-blur-sm z-[9998] lg:hidden"
-          onClick={() => setMobileMenuOpen(false)}
-        />
-      )}
-
       <nav
         className={`sticky top-0 z-[9999] bg-white/98 backdrop-blur-md border-b border-border/60 transition-shadow duration-200 ${
           scrolled ? "shadow-md shadow-blue-900/5" : ""
@@ -100,7 +338,7 @@ const Navigation = React.memo(() => {
               <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                 <img
                   src={invisionLogo}
-                  alt="InVision Network Shield"
+                  alt="InVision Network"
                   width={22}
                   height={22}
                   loading="eager"
@@ -121,18 +359,18 @@ const Navigation = React.memo(() => {
             {/* Desktop nav links */}
             <div className="hidden lg:flex items-center gap-0.5">
               {primaryLinks.map((link) => {
-                const isActive = isActiveLink(link.href);
+                const active = isActive(link.href);
                 return (
                   <PrefetchLink
                     key={link.name}
                     to={link.href}
                     className={`relative text-sm px-3.5 py-2 rounded-md font-medium transition-colors duration-150 ${
-                      isActive
+                      active
                         ? "text-primary font-semibold bg-primary/8"
                         : "text-foreground/70 hover:text-foreground hover:bg-muted/60"
                     }`}
                   >
-                    {isActive && (
+                    {active && (
                       <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-primary rounded-full" />
                     )}
                     {link.name}
@@ -143,7 +381,7 @@ const Navigation = React.memo(() => {
               {/* More dropdown */}
               <div className="relative" ref={moreRef}>
                 <button
-                  onClick={() => setMoreOpen(!moreOpen)}
+                  onClick={() => setMoreOpen((v) => !v)}
                   className={`flex items-center gap-1 text-sm px-3.5 py-2 rounded-md font-medium transition-colors duration-150 ${
                     isSecondaryActive
                       ? "text-primary font-semibold bg-primary/8"
@@ -153,7 +391,6 @@ const Navigation = React.memo(() => {
                   More
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${moreOpen ? "rotate-180" : ""}`} />
                 </button>
-
                 {moreOpen && (
                   <div className="absolute top-full left-0 mt-1.5 w-44 bg-white rounded-xl border border-border shadow-lg shadow-blue-900/8 py-1.5 z-50 animate-in fade-in-0 slide-in-from-top-1 duration-150">
                     {secondaryLinks.map((link) => (
@@ -161,7 +398,7 @@ const Navigation = React.memo(() => {
                         key={link.name}
                         to={link.href}
                         className={`block px-4 py-2 text-sm transition-colors rounded-lg mx-1 ${
-                          isActiveLink(link.href)
+                          isActive(link.href)
                             ? "text-primary font-semibold bg-primary/8"
                             : "text-foreground/80 hover:text-foreground hover:bg-muted/60"
                         }`}
@@ -189,7 +426,7 @@ const Navigation = React.memo(() => {
                 {SITE.phone.display}
               </a>
 
-              {/* Donate */}
+              {/* Donate — lg+ only */}
               <button
                 type="button"
                 onClick={() => setDonateOpen(true)}
@@ -202,104 +439,44 @@ const Navigation = React.memo(() => {
 
               <div className="hidden lg:block w-px h-5 bg-border mx-0.5" />
 
-              {/* CTA button */}
+              {/* Login / Dashboard — always visible */}
               <Button
                 asChild
                 size="sm"
-                className="h-9 px-5 text-sm font-semibold rounded-lg shadow-sm bg-primary hover:bg-primary/90 text-primary-foreground"
+                className="h-9 px-4 text-sm font-semibold rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground"
               >
                 {isAdminOrStaff ? (
                   <Link to="/admin" className="flex items-center gap-1.5">
                     <LayoutDashboard className="h-3.5 w-3.5" />
-                    Dashboard
+                    <span className="hidden sm:inline">Dashboard</span>
                   </Link>
                 ) : (
                   <Link to="/portal">Login</Link>
                 )}
               </Button>
 
-              {/* Mobile hamburger */}
+              {/* Hamburger — hidden on lg+ */}
               <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden ml-1 p-2.5 rounded-lg hover:bg-muted/60 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
-                aria-label="Toggle menu"
-                aria-expanded={mobileMenuOpen}
+                onClick={() => setDrawerOpen(true)}
+                className="lg:hidden flex items-center justify-center w-11 h-11 rounded-xl hover:bg-muted/60 transition-colors ml-1"
+                aria-label="Open menu"
+                aria-expanded={drawerOpen}
+                aria-haspopup="dialog"
               >
-                {mobileMenuOpen ? (
-                  <X className="h-5 w-5 text-foreground" />
-                ) : (
-                  <Menu className="h-5 w-5 text-foreground" />
-                )}
+                <Menu className="h-5 w-5 text-foreground" />
               </button>
             </div>
           </div>
         </div>
-
-        {/* Mobile menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden fixed top-16 left-0 right-0 bottom-0 bg-white z-[10001] overflow-y-auto overscroll-contain pb-safe">
-            {/* Trust bar at top of mobile menu */}
-            <div className="bg-primary/5 border-b border-border/50 px-4 py-2 flex items-center gap-2">
-              <Shield className="w-3.5 h-3.5 text-primary flex-shrink-0" />
-              <span className="text-xs text-primary font-medium">Veteran-founded · Ohio · Serving 500+ families</span>
-            </div>
-
-            <div className="px-4 py-3 space-y-0.5">
-              {allLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.href}
-                  className={`flex items-center text-[15px] font-medium px-4 py-3.5 rounded-xl transition-colors ${
-                    isActiveLink(link.href)
-                      ? "text-primary bg-primary/8 font-semibold"
-                      : "text-foreground/80 hover:text-foreground hover:bg-muted/50"
-                  }`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              ))}
-
-              {/* Divider */}
-              <div className="pt-3 mt-3 border-t border-border space-y-2.5">
-                <Button
-                  variant="outline"
-                  className="w-full h-11 text-[15px] font-semibold border-primary/30 text-primary hover:bg-primary/8"
-                  onClick={() => { setDonateOpen(true); setMobileMenuOpen(false); }}
-                >
-                  <Heart className="h-4 w-4 mr-2" />
-                  Donate
-                </Button>
-
-                <Button
-                  asChild
-                  className="w-full h-11 text-[15px] font-semibold bg-primary hover:bg-primary/90"
-                >
-                  {isAdminOrStaff ? (
-                    <Link to="/admin" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-center gap-2">
-                      <LayoutDashboard className="h-4 w-4" />
-                      Dashboard
-                    </Link>
-                  ) : (
-                    <Link to="/portal" onClick={() => setMobileMenuOpen(false)}>
-                      Login
-                    </Link>
-                  )}
-                </Button>
-
-                <a
-                  href={SITE.phone.tel}
-                  className="flex items-center justify-center gap-2 text-[15px] text-muted-foreground font-medium px-4 py-3 rounded-xl hover:bg-muted/40 transition-colors no-underline"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <Phone className="h-4 w-4" />
-                  {SITE.phone.display}
-                </a>
-              </div>
-            </div>
-          </div>
-        )}
       </nav>
+
+      <MobileDrawer
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        onDonate={() => setDonateOpen(true)}
+        isAdminOrStaff={isAdminOrStaff}
+        activeHref={location.pathname}
+      />
 
       <DonationModal open={donateOpen} onOpenChange={setDonateOpen} type="general" />
     </>

@@ -156,25 +156,25 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
   /* ─── Closed FAB ─── */
   if (!isOpen) {
     return (
-      <div className="fixed bottom-[5.5rem] right-4 z-fab sm:bottom-6 sm:right-6">
+      <div className="fixed bottom-4 right-4 z-fab sm:bottom-6 sm:right-6">
         <button
           onClick={() => setIsOpen(true)}
-          className="group relative w-14 h-14 rounded-full bg-gradient-to-br from-primary to-accent shadow-[0_4px_20px_hsl(var(--primary)/0.35),0_12px_40px_-8px_hsl(var(--primary)/0.25)] transition-all duration-300 hover:scale-110 hover:shadow-[0_8px_30px_hsl(var(--primary)/0.45)] active:scale-95 overflow-hidden ring-2 ring-white/20"
+          className="group relative w-11 h-11 rounded-full bg-gradient-to-br from-primary to-accent shadow-[0_4px_16px_hsl(var(--primary)/0.35)] transition-all duration-300 hover:scale-110 hover:shadow-[0_6px_24px_hsl(var(--primary)/0.45)] active:scale-95 overflow-hidden ring-2 ring-white/20"
           aria-label="Open Laura AI Assistant"
           style={{ contain: "layout" }}
         >
           <img
             src={lauraAvatar}
             alt="Laura"
-            width={56}
-            height={56}
+            width={44}
+            height={44}
             loading="eager"
             className="w-full h-full object-cover object-top"
           />
           {/* Online pulse */}
-          <span className="absolute bottom-0.5 right-0.5 flex h-3 w-3">
+          <span className="absolute bottom-0 right-0 flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75" />
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-400 border-2 border-white/50" />
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400 border-2 border-white/50" />
           </span>
         </button>
       </div>

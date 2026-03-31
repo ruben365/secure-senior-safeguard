@@ -74,7 +74,7 @@ export const HomeIntroSection = () => {
   return (
     <>
       {/* Stats Counter Bar */}
-      <section className="py-14 md:py-20 relative overflow-hidden">
+      <section className="py-10 md:py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/60 to-background pointer-events-none" />
         <div className="absolute top-0 left-1/4 w-72 h-72 bg-primary/8 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-accent/8 rounded-full blur-3xl pointer-events-none" />
@@ -89,7 +89,7 @@ export const HomeIntroSection = () => {
       </section>
 
       {/* Visual Bento Grid */}
-      <section className="py-16 md:py-28" ref={introRef as any}>
+      <section className="py-12 md:py-28 overflow-hidden" ref={introRef as any}>
         <div className="container mx-auto px-4 md:px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Left — Copy */}
@@ -189,8 +189,8 @@ export const HomeIntroSection = () => {
                 </div>
               </div>
 
-              {/* Floating stat widget — top right */}
-              <div className={`absolute -top-5 -right-5 md:-right-8 z-10 transition-all duration-700 ${isInView ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
+              {/* Floating stat widget — top right (desktop only) */}
+              <div className={`hidden sm:block absolute -top-5 -right-5 md:-right-8 z-10 transition-all duration-700 ${isInView ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
                 <div className="glass rounded-2xl p-3 shadow-3d-colored">
                   <div className="flex items-center gap-2">
                     <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center">
@@ -204,8 +204,8 @@ export const HomeIntroSection = () => {
                 </div>
               </div>
 
-              {/* Floating widget — bottom left */}
-              <div className={`absolute -bottom-5 -left-5 md:-left-8 z-10 transition-all duration-700 delay-200 ${isInView ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
+              {/* Floating widget — bottom left (desktop only) */}
+              <div className={`hidden sm:block absolute -bottom-5 -left-5 md:-left-8 z-10 transition-all duration-700 delay-200 ${isInView ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
                 <div className="glass rounded-2xl p-3 shadow-3d-colored">
                   <div className="flex items-center gap-2">
                     <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-accent/20 to-primary/10 flex items-center justify-center">
@@ -219,8 +219,8 @@ export const HomeIntroSection = () => {
                 </div>
               </div>
 
-              {/* Floating alert widget — mid right */}
-              <div className={`absolute top-1/2 -right-3 md:-right-6 z-10 transition-all duration-500 delay-300 ${isInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-5'}`}>
+              {/* Floating alert widget — mid right (desktop only) */}
+              <div className={`hidden sm:block absolute top-1/2 -right-3 md:-right-6 z-10 transition-all duration-500 delay-300 ${isInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-5'}`}>
                 <div className="glass rounded-xl p-2.5 shadow-3d">
                   <div className="flex items-center gap-2">
                     <div className="w-7 h-7 rounded-lg bg-destructive/15 flex items-center justify-center">
@@ -387,20 +387,20 @@ function StatCard({
     <AnimatedSection animation="fade-up" delay={index * 120}>
       <div
         ref={ref}
-        className="relative text-center p-6 md:p-8 rounded-2xl border border-border/40 bg-card shadow-3d hover:shadow-3d-lg hover:-translate-y-2.5 hover:scale-[1.03] transition-all duration-300 cursor-default overflow-hidden"
+        className="relative text-center p-4 sm:p-6 md:p-8 rounded-2xl border border-border/40 bg-card shadow-3d hover:shadow-3d-lg hover:-translate-y-2.5 hover:scale-[1.03] transition-all duration-300 cursor-default overflow-hidden"
       >
         <div className={`absolute inset-0 bg-gradient-to-br ${color} pointer-events-none rounded-2xl`} />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/25 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/15 to-transparent" />
         <div className="relative">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center mx-auto mb-4 shadow-sm">
-            <Icon className="w-6 h-6 text-primary" />
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-sm">
+            <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
           </div>
-          <div className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-1">
+          <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-1">
             {value.toLocaleString()}
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">{suffix}</span>
           </div>
-          <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+          <div className="text-[10px] sm:text-xs font-semibold text-muted-foreground uppercase tracking-wider">
             {label}
           </div>
         </div>
