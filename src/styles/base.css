@@ -101,16 +101,68 @@
     --slate-100: 213 20% 93%;
     --slate-50:  213 30% 97%;
 
-    /* ── Coral / coral-200 kept for any legacy usage ── */
-    --coral-200: 14 82% 90%;
-    --coral-100: 14 70% 96%;
+    /* ── Purple spectrum (admin neon/tech theme) ── */
+    --purple-900: 270 60%  18%;
+    --purple-700: 270 55%  32%;
+    --purple-500: 270 72%  52%;
+    --purple-400: 270 65%  62%;
+    --purple-300: 270 60%  74%;
+    --purple-200: 270 55%  86%;
+    --purple-100: 270 50%  94%;
 
-    /* ── Lavender — kept for admin dark sidebar compatibility ── */
+    /* ── Violet spectrum (admin accents) ── */
+    --violet-600: 258 64%  42%;
+    --violet-500: 258 72%  55%;
+    --violet-400: 258 65%  65%;
+    --violet-300: 258 58%  78%;
+
+    /* ── Navy spectrum (admin dark surfaces) ── */
+    --navy-900: 213 62%   9%;
+    --navy-800: 213 58%  14%;
+    --navy-700: 213 52%  19%;
+    --navy-600: 213 48%  25%;
+    --navy-500: 213 44%  33%;
+    --navy-400: 213 40%  44%;
+    --navy-300: 213 36%  58%;
+    --navy-200: 213 32%  75%;
+    --navy-100: 213 28%  90%;
+
+    /* ── Lavender (admin sidebar / soft accents) ── */
     --lavender-700: 235 38% 30%;
+    --lavender-600: 235 36% 40%;
+    --lavender-500: 235 34% 52%;
+    --lavender-400: 235 32% 64%;
+    --lavender-300: 235 30% 76%;
     --lavender-200: 235 28% 88%;
     --lavender-100: 235 30% 95%;
 
+    /* ── Coral spectrum (warm accents / alerts) ── */
+    --coral-600: 14 80% 50%;
+    --coral-500: 14 82% 58%;
+    --coral-400: 14 82% 67%;
+    --coral-300: 14 80% 76%;
+    --coral-200: 14 82% 90%;
+    --coral-100: 14 70% 96%;
+
+    /* ── Blush (soft highlights) ── */
+    --blush-500: 345 72% 65%;
+    --blush-400: 345 68% 75%;
+    --blush-300: 345 60% 85%;
+
+    /* ── Teal (success / tech green) ── */
+    --teal-600: 172 70% 30%;
+    --teal-500: 172 66% 40%;
+    --teal-400: 172 60% 52%;
+    --teal-300: 172 56% 66%;
+    --teal-100: 172 50% 92%;
+
+    /* ── Cyan (info / link accents) ── */
+    --cyan-600: 197 80% 38%;
+    --cyan-500: 197 76% 50%;
+    --cyan-400: 197 70% 62%;
+
     /* ── Gold (trust badges / ratings) ── */
+    --gold-600: 35 92% 44%;
     --gold-500: 38 95% 50%;
     --gold-400: 42 92% 58%;
     --gold-300: 46 88% 68%;
