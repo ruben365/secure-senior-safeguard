@@ -156,7 +156,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
   /* ─── Closed FAB ─── */
   if (!isOpen) {
     return (
-      <div className="fixed bottom-6 right-6 z-fab">
+      <div className="fixed bottom-[5.5rem] right-4 z-fab sm:bottom-6 sm:right-6">
         <button
           onClick={() => setIsOpen(true)}
           className="group relative w-14 h-14 rounded-full bg-gradient-to-br from-primary to-accent shadow-[0_4px_20px_hsl(var(--primary)/0.35),0_12px_40px_-8px_hsl(var(--primary)/0.25)] transition-all duration-300 hover:scale-110 hover:shadow-[0_8px_30px_hsl(var(--primary)/0.45)] active:scale-95 overflow-hidden ring-2 ring-white/20"

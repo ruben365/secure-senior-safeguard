@@ -208,7 +208,7 @@ export const TestimonialsTable = () => {
         open={!!selectedTestimonial}
         onOpenChange={() => setSelectedTestimonial(null)}
       >
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-2xl max-h-[90dvh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Testimonial Details</DialogTitle>
             <DialogDescription>

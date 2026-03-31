@@ -358,7 +358,7 @@ export const AIChat = () => {
   // Closed state - just show floating button
   if (!isOpen) {
     return (
-      <div className="fixed bottom-6 right-6 z-[9998] group">
+      <div className="fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] right-[calc(1.5rem+env(safe-area-inset-right))] z-[9998] group">
         <button
           onClick={openChat}
           className="relative w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden ring-2 ring-primary/20"
@@ -389,7 +389,7 @@ export const AIChat = () => {
   return (
     <div className="fixed bottom-4 right-4 z-[9998] sm:bottom-6 sm:right-6">
       {/* Enhanced chat panel with better dimensions */}
-      <div className="bg-card rounded-2xl shadow-2xl w-[360px] sm:w-[400px] h-[560px] flex flex-col overflow-hidden border border-border">
+      <div className="bg-card rounded-2xl shadow-2xl w-[calc(100vw-2rem)] sm:w-[380px] h-[85dvh] sm:h-[560px] flex flex-col overflow-hidden border border-border">
         {/* Header */}
         <div className="flex items-center justify-between p-3 border-b border-border bg-card shrink-0">
           <div className="flex items-center gap-2">

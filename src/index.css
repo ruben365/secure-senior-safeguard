@@ -1,3 +1,6 @@
+/* Google Fonts — Lexend (headings) + Inter (body) */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
 /* All CSS loaded synchronously to prevent CLS from deferred style application */
 @import "./styles/base.css";
 @import "./styles/responsive.css";
@@ -6,7 +9,7 @@
 @import "./styles/utilities.css";
 @import "./styles/trending-ui.css";
 
-/* Global zoom out to 75% */
+/* Full viewport rendering — no zoom scaling */
 #root {
-  zoom: 0.75;
+  min-height: 100%;
 }
