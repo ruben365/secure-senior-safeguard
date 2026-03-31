@@ -1,3 +1,4 @@
+import { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight, Shield, Star, Phone,
@@ -24,18 +25,23 @@ const trustPills = [
 const threatItems = ["Voice Cloning", "Deepfake AI", "Phishing Links"];
 
 export const HeroHomepage = () => {
+  const heroRef = useRef<HTMLImageElement>(null);
+  useEffect(() => {
+    heroRef.current?.setAttribute("fetchpriority", "high");
+  }, []);
+
   return (
     <section className="relative overflow-hidden bg-[hsl(var(--background))]" style={{ minHeight: "100dvh" }}>
 
       {/* Full-bleed background */}
       <div className="absolute inset-0">
         <img
+          ref={heroRef}
           src={heroImage}
           alt="Multi-generational family safely using technology together"
           className="w-full h-full object-cover object-center"
           loading="eager"
           decoding="sync"
-          fetchPriority="high"
         />
         {/* Strong left gradient — ensures text legibility on all screen sizes */}
         <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--background))] via-[hsl(var(--background)/0.95)] sm:via-[hsl(var(--background)/0.88)] lg:via-[hsl(var(--background)/0.78)] to-transparent" />

@@ -372,7 +372,7 @@ export const AIChat = () => {
             loading="eager"
             decoding="async"
             className="w-full h-full object-cover object-top"
-            style={{ fetchPriority: "high" } as React.CSSProperties}
+            ref={(el: HTMLImageElement | null) => el?.setAttribute("fetchpriority", "high")}
           />
           <div className="absolute bottom-0.5 right-0.5 w-3 h-3 rounded-full bg-green-500 border-2 border-white" />
         </button>

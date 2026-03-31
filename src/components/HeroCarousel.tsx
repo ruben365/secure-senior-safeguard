@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 interface HeroImage {
   src: string;
@@ -63,11 +63,11 @@ export const HeroCarousel = ({
     return (
       <div className="absolute inset-0 overflow-hidden">
         <img
+          ref={(el) => el?.setAttribute("fetchpriority", "high")}
           src={images[0].src}
           alt={images[0].alt}
           width={1920}
           height={1080}
-          fetchPriority="high"
           loading="eager"
           decoding="async"
           className="absolute inset-0 w-full h-full object-cover"
@@ -81,11 +81,11 @@ export const HeroCarousel = ({
       {images.map((image, index) => (
         <img
           key={image.src}
+          ref={(el) => el?.setAttribute("fetchpriority", index === 0 ? "high" : "low")}
           src={image.src}
           alt={image.alt}
           width={1920}
           height={1080}
-          fetchPriority={index === 0 ? "high" : "low"}
           loading={index === 0 ? "eager" : "lazy"}
           decoding="async"
           className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
