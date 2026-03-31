@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/config/site";
-import heroImage from "@/assets/hero-homepage-cinematic.jpg";
+const heroImage = "/images/hero-homepage-cinematic.jpg";
 
 const stats = [
   { value: "500+",   label: "Families Protected", icon: Users },
