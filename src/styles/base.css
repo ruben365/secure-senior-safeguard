@@ -272,15 +272,15 @@
     /* Clean glass backgrounds */
     --skeuo-glass-bg: linear-gradient(
       135deg,
-      hsl(0 0% 100% / 0.96) 0%,
-      hsl(0 0% 99% / 0.92) 100%
+      hsl(218 14% 15% / 0.96) 0%,
+      hsl(220 14% 12% / 0.92) 100%
     );
-    --skeuo-glass-border: hsl(240 6% 90%);
+    --skeuo-glass-border: hsl(215 10% 22%);
     --skeuo-glass-blur: none;
     --skeuo-glass-shadow:
-      0 4px 12px rgba(0, 0, 0, 0.06),
-      0 1px 3px rgba(0, 0, 0, 0.04),
-      inset 0 1px 0 hsl(0 0% 100% / 0.92);
+      0 4px 12px rgba(0, 0, 0, 0.20),
+      0 1px 3px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 hsl(210 15% 25% / 0.3);
 
     /* Primary gradient for accents */
     --skeuo-gradient-accent: linear-gradient(
@@ -290,8 +290,8 @@
     );
     --skeuo-gradient-accent-soft: linear-gradient(
       135deg,
-      hsl(var(--primary) / 0.08) 0%,
-      hsl(var(--accent) / 0.08) 100%
+      hsl(var(--primary) / 0.12) 0%,
+      hsl(var(--accent) / 0.12) 100%
     );
   }
 
