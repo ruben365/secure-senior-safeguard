@@ -328,7 +328,7 @@
     overflow-x: hidden;
     width: 100%;
     position: relative;
-    background-color: hsl(240 10% 98%);
+    background-color: hsl(220 14% 10%);
   }
 
   @media (min-width: 768px) {
