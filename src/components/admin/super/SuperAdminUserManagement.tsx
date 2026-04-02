@@ -469,7 +469,7 @@ export default function SuperAdminUserManagement() {
 
         {/* Reset Confirmation Dialog */}
         <Dialog open={showResetDialog} onOpenChange={setShowResetDialog}>
-          <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-lg bg-[#1F2937] border-gray-700 text-white max-h-[90dvh] overflow-y-auto">
+          <DialogContent className="bg-[#1F2937] border-gray-700 text-white">
             <DialogHeader>
               <DialogTitle>Reset User Dashboard</DialogTitle>
               <DialogDescription className="text-gray-400">
@@ -510,7 +510,7 @@ export default function SuperAdminUserManagement() {
 
         {/* User Details Dialog */}
         <Dialog open={showDetailsDialog} onOpenChange={setShowDetailsDialog}>
-          <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-lg bg-[#1F2937] border-gray-700 text-white max-h-[90dvh] overflow-y-auto">
+          <DialogContent className="bg-[#1F2937] border-gray-700 text-white max-w-lg">
             <DialogHeader>
               <DialogTitle>User Details</DialogTitle>
             </DialogHeader>
@@ -588,7 +588,7 @@ export default function SuperAdminUserManagement() {
           open={showDeactivateDialog}
           onOpenChange={setShowDeactivateDialog}
         >
-          <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-lg bg-[#1F2937] border-gray-700 text-white max-h-[90dvh] overflow-y-auto">
+          <DialogContent className="bg-[#1F2937] border-gray-700 text-white">
             <DialogHeader>
               <DialogTitle className="text-red-400">
                 Deactivate Account

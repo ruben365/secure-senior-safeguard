@@ -20,9 +20,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Inter", "Plus Jakarta Sans", "ui-sans-serif", "system-ui", "sans-serif"],
-        heading: ["Plus Jakarta Sans", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["Plus Jakarta Sans", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+        outfit: ["Rubik", "sans-serif"],
+        sans: ["Rubik", "sans-serif"],
+        display: ["Lora", "Rubik", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",

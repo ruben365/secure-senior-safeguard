@@ -42,7 +42,7 @@ export const WorkshopsPromo = () => {
           {/* Content - Right */}
           <div className="space-y-8">
             <div>
-              <span className="section-label mb-4">Learn &amp; Train</span>
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/8 backdrop-blur-sm border border-primary/15 text-xs font-bold uppercase tracking-[0.2em] text-primary mb-4">Learn & Train</span>
               <h2 id="workshops-heading" className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] mb-4">
                 Why Families Choose Our{" "}
                 <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Protection Training</span>
@@ -52,16 +52,15 @@ export const WorkshopsPromo = () => {
               </p>
             </div>
 
-            <div className="flex items-center gap-8 p-5 rounded-2xl bg-card border border-primary/12 shadow-sm relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary/40 to-transparent pointer-events-none" />
+            <div className="flex items-center gap-8 p-5 rounded-2xl backdrop-blur-xl bg-card/60 border border-border/40" style={{ boxShadow: 'var(--skeuo-shadow-ombre)' }}>
               <div>
-                <div className="text-4xl font-black text-primary metric-pulse">500+</div>
-                <div className="text-sm font-medium text-muted-foreground">Families Protected</div>
+                <div className="text-4xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">100+</div>
+                <div className="text-sm text-muted-foreground">Families Protected</div>
               </div>
               <div className="h-12 w-px bg-gradient-to-b from-transparent via-border to-transparent" />
               <div>
-                <div className="text-4xl font-black text-primary">99%</div>
-                <div className="text-sm font-medium text-muted-foreground">Client Satisfaction</div>
+                <div className="text-4xl font-black bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">100%</div>
+                <div className="text-sm text-muted-foreground">Satisfaction</div>
               </div>
             </div>
 
@@ -86,7 +85,7 @@ export const WorkshopsPromo = () => {
               ))}
             </div>
 
-            <Button asChild size="lg" className="cta-signal border-0 shadow-none h-12 px-8">
+            <Button asChild size="lg">
               <Link to="/training">
                 Start Training <ArrowRight className="ml-2 w-4 h-4" />
               </Link>

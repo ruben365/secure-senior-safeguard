@@ -496,7 +496,7 @@ function Resources() {
                           height={320}
                           loading={bookIndex < 10 ? "eager" : "lazy"}
                           decoding={bookIndex < 10 ? "sync" : "async"}
-                          ref={(el: HTMLImageElement | null) => { if (el && bookIndex < 5) el.setAttribute("fetchpriority", "high"); }}
+                          fetchPriority={bookIndex < 5 ? "high" : undefined}
                           className="w-full h-full object-cover"
                         />
                       </div>

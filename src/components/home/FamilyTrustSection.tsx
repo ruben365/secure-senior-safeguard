@@ -27,7 +27,7 @@ export const FamilyTrustSection = () => {
         {/* Photo + heading grid */}
         <div className="grid lg:grid-cols-2 gap-6 md:gap-10 items-center mb-8 md:mb-12">
           <div>
-            <span className="section-label mb-3 md:mb-4">Real Protection, Real Results</span>
+            <span className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 rounded-full bg-primary/8 backdrop-blur-sm border border-primary/15 text-[10px] md:text-xs font-bold uppercase tracking-[0.14em] md:tracking-[0.2em] text-primary mb-3 md:mb-4">Real Protection, Real Results</span>
             <h2 id="trust-heading" className="text-2xl md:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] mb-2 md:mb-3">
               Why Families{" "}
               <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Trust Us</span>

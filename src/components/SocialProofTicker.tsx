@@ -61,7 +61,7 @@ export const SocialProofTicker = () => {
 
   return (
     <div
-      className="fixed bottom-[5.5rem] left-4 z-50 sm:bottom-5 sm:left-5 animate-fade-in"
+      className="fixed bottom-4 left-4 z-50 sm:bottom-5 sm:left-5 animate-fade-in"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >

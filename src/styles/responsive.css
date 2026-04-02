@@ -1,12 +1,10 @@
 /* Mobile-specific form enhancements */
 @media (max-width: 768px) {
-  /* Ensure checkboxes and radio buttons are touch-friendly (WCAG 44px min) */
+  /* Ensure checkboxes and radio buttons are touch-friendly */
   input[type="checkbox"],
   input[type="radio"] {
     width: 24px;
     height: 24px;
-    min-width: 44px;
-    min-height: 44px;
   }
 
   /* Remove hover effects on mobile, use active instead */
@@ -42,7 +40,7 @@
 
   /* Reduce chart height on mobile */
   .admin-chart {
-    height: clamp(180px, 40vw, 250px) !important;
+    height: 250px !important;
   }
 
   /* Stack quick actions */
@@ -50,10 +48,10 @@
     grid-template-columns: repeat(2, 1fr) !important;
   }
 
-  /* Full width modals on mobile — use dvh to exclude browser chrome */
+  /* Full width modals on mobile */
   .mobile-modal {
-    width: 100dvw;
-    height: 100dvh;
+    width: 100vw;
+    height: 100vh;
     max-width: none;
     border-radius: 0;
   }
@@ -83,7 +81,7 @@
   }
 
   .hero-mobile {
-    min-height: 60dvh !important;
+    min-height: 50vh !important;
   }
 
   .card-mobile {
@@ -138,7 +136,7 @@
   }
 }
 
-/* Extra small screens (< 380px) */
+/* Extra small screens */
 @media (max-width: 380px) {
   .hero-mobile h1 {
     font-size: 1.5rem !important;
@@ -152,21 +150,6 @@
   * {
     word-wrap: break-word;
     overflow-wrap: break-word;
-  }
-}
-
-/* Minimum supported width (320px) — tighter padding */
-@media (max-width: 359px) {
-  .container,
-  .container-responsive {
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
-  }
-  h1 {
-    font-size: 1.5rem !important;
-  }
-  h2 {
-    font-size: 1.25rem !important;
   }
 }
 

@@ -37,7 +37,7 @@ const menuItems: MenuItem[] = [
     title: "Dashboard",
     icon: LayoutDashboard,
     href: "/admin",
-    gradient: "from-blue-500 to-sky-400",
+    gradient: "from-violet-500 to-fuchsia-500",
   },
   {
     title: "Content",
@@ -194,17 +194,17 @@ export const PremiumSidebar = ({
       />
 
       {/* Ambient glow effects */}
-      <div className="absolute top-20 -left-20 w-40 h-40 bg-[hsl(207_89%_34%/0.15)] rounded-full blur-[80px] pointer-events-none" />
-      <div className="absolute bottom-40 -right-10 w-32 h-32 bg-[hsl(25_95%_53%/0.08)] rounded-full blur-[60px] pointer-events-none" />
+      <div className="absolute top-20 -left-20 w-40 h-40 bg-violet-500/20 rounded-full blur-[80px] pointer-events-none" />
+      <div className="absolute bottom-40 -right-10 w-32 h-32 bg-cyan-500/15 rounded-full blur-[60px] pointer-events-none" />
 
       {/* Logo Section */}
       <div className="h-20 flex items-center px-5 border-b border-white/[0.06] relative z-10">
         <Link to="/admin" className="flex items-center gap-3 group">
           <div className="relative">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[hsl(207_89%_34%)] to-[hsl(207_89%_50%)] flex items-center justify-center shadow-lg shadow-[hsl(207_89%_34%/0.3)] group-hover:shadow-[hsl(207_89%_34%/0.45)] transition-shadow duration-300">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 via-fuchsia-500 to-pink-500 flex items-center justify-center shadow-lg shadow-violet-500/25 group-hover:shadow-violet-500/40 transition-shadow duration-300">
               <Shield className="h-5 w-5 text-white" />
             </div>
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-[hsl(207_89%_34%)] to-[hsl(207_89%_50%)] blur-lg opacity-30 group-hover:opacity-50 transition-opacity" />
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-violet-500 via-fuchsia-500 to-pink-500 blur-lg opacity-40 group-hover:opacity-60 transition-opacity" />
           </div>
           {!collapsed && (
             <motion.div
@@ -437,15 +437,15 @@ export const PremiumSidebar = ({
         <div className="p-4 border-t border-white/[0.06] relative z-10">
           <div className="relative p-4 rounded-2xl bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-white/[0.08] backdrop-blur-xl">
             {/* Decorative glow */}
-            <div className="absolute -top-2 -right-2 w-16 h-16 bg-[hsl(207_89%_34%/0.15)] rounded-full blur-2xl" />
+            <div className="absolute -top-2 -right-2 w-16 h-16 bg-gradient-to-br from-violet-500/20 to-fuchsia-500/20 rounded-full blur-2xl" />
 
             <div className="relative flex items-center gap-3">
               <div className="relative">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[hsl(207_89%_34%)] to-[hsl(25_95%_53%)] flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center">
                   <Sparkles className="h-5 w-5 text-white" />
                 </div>
                 {/* Online indicator */}
-                <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 rounded-full border-2 border-[hsl(213_60%_6%)]">
+                <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 rounded-full border-2 border-[#0a0a0f]">
                   <div className="absolute inset-0 bg-emerald-400 rounded-full animate-ping opacity-75" />
                 </div>
               </div>
@@ -468,8 +468,8 @@ export const PremiumSidebar = ({
       <aside
         className={cn(
           "fixed left-0 top-0 h-screen text-white transition-all duration-500 ease-out z-30 hidden md:block",
-          "bg-[hsl(213_60%_6%/0.97)] backdrop-blur-2xl border-r border-white/[0.06]",
-          "shadow-[0_0_60px_-15px_hsl(207_89%_34%/0.25)]",
+          "bg-[#0a0a0f]/95 backdrop-blur-2xl border-r border-white/[0.06]",
+          "shadow-[0_0_60px_-15px_rgba(139,92,246,0.3)]",
           collapsed ? "w-[70px]" : "w-[260px]",
         )}
       >
@@ -497,8 +497,8 @@ export const PremiumSidebar = ({
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
               className={cn(
                 "fixed left-0 top-0 h-screen w-[280px] z-50 md:hidden",
-                "bg-[hsl(213_60%_6%/0.99)] backdrop-blur-2xl border-r border-white/[0.06]",
-                "shadow-[0_0_60px_-15px_hsl(207_89%_34%/0.35)]",
+                "bg-[#0a0a0f]/98 backdrop-blur-2xl border-r border-white/[0.06]",
+                "shadow-[0_0_60px_-15px_rgba(139,92,246,0.4)]",
               )}
             >
               {/* Close button */}

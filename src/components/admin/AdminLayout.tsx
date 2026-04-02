@@ -157,11 +157,11 @@ export function AdminLayout({
   };
 
   return (
-    <div className="flex min-h-screen bg-[hsl(213_60%_7%)] w-full">
+    <div className="flex min-h-screen bg-[#050508] w-full">
       {/* Premium background effects */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-[hsl(207_89%_34%/0.06)] rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-[hsl(25_95%_53%/0.04)] rounded-full blur-[100px]" />
+        <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-violet-500/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[100px]" />
       </div>
 
       <PremiumSidebar
@@ -172,7 +172,7 @@ export function AdminLayout({
 
       {/* Top Header Bar */}
       <header
-        className={`fixed top-0 right-0 left-0 h-16 bg-[hsl(213_60%_5%/0.95)] backdrop-blur-2xl border-b border-white/[0.06] z-40
+        className={`fixed top-0 right-0 left-0 h-16 bg-[#0a0a0f]/90 backdrop-blur-2xl border-b border-white/[0.06] z-40 
         transition-all duration-500 ${sidebarOpen ? "md:left-[260px]" : "md:left-[70px]"}`}
       >
         <div className="flex items-center justify-between h-full px-4 lg:px-6">
@@ -244,7 +244,7 @@ export function AdminLayout({
                 className="flex items-center gap-2 h-10 text-white/60 hover:text-white hover:bg-white/10 rounded-xl"
                 onClick={() => setProfileOpen(!profileOpen)}
               >
-                <Avatar className="h-8 w-8 bg-gradient-to-br from-[hsl(207_89%_34%)] to-[hsl(25_95%_53%)] shadow-lg shadow-[hsl(207_89%_34%/0.3)]">
+                <Avatar className="h-8 w-8 bg-gradient-to-br from-violet-500 to-fuchsia-500 shadow-lg shadow-violet-500/25">
                   <AvatarFallback className="bg-transparent text-white text-xs font-semibold">
                     {getInitials(adminName)}
                   </AvatarFallback>
@@ -256,9 +256,9 @@ export function AdminLayout({
               </Button>
 
               {profileOpen && (
-                <div className="absolute right-0 top-full mt-2 w-64 bg-[hsl(213_60%_6%/0.98)] backdrop-blur-2xl border border-white/[0.08] rounded-2xl shadow-2xl shadow-black/50 z-50 overflow-hidden">
+                <div className="absolute right-0 top-full mt-2 w-64 bg-[#0f0f14]/95 backdrop-blur-2xl border border-white/[0.08] rounded-2xl shadow-2xl shadow-black/50 z-50 overflow-hidden">
                   {/* Decorative glow */}
-                  <div className="absolute -top-10 -right-10 w-32 h-32 bg-[hsl(207_89%_34%/0.2)] rounded-full blur-3xl pointer-events-none" />
+                  <div className="absolute -top-10 -right-10 w-32 h-32 bg-violet-500/20 rounded-full blur-3xl pointer-events-none" />
 
                   <div className="relative p-4 border-b border-white/[0.06]">
                     <p className="font-medium text-white">{adminName}</p>
@@ -309,13 +309,13 @@ export function AdminLayout({
       <main
         className={`relative flex-1 transition-all duration-500 pt-16 w-full ${sidebarOpen ? "md:ml-[260px]" : "md:ml-[70px]"}`}
       >
-        <div className="p-4 sm:p-6 lg:p-8">
+        <div className="p-6 lg:p-8">
           {/* Page Header */}
           {(title || headerActions) && (
-            <div className="flex flex-wrap items-center justify-between gap-3 mb-6 sm:mb-8">
+            <div className="flex items-center justify-between mb-8">
               <div>
                 {title && (
-                  <h1 className="text-2xl sm:text-3xl font-bold text-white">{title}</h1>
+                  <h1 className="text-3xl font-bold text-white">{title}</h1>
                 )}
                 {subtitle && <p className="text-white/50">{subtitle}</p>}
               </div>

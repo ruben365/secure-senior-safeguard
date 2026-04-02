@@ -167,7 +167,7 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
-                  <Button asChild size="lg" className="cta-signal border-0 shadow-none h-12 px-8 text-base font-bold">
+                  <Button asChild size="lg">
                     <Link to="/training#pricing">
                       Get Protected Today <ArrowRight className="ml-2 w-5 h-5" />
                     </Link>
