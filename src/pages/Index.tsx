@@ -64,13 +64,13 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
       <div className="min-h-screen bg-background">
         <SEO {...PAGE_SEO.home} />
         <main>
-          {/* 1. Hero (includes its own dark navigation bar) */}
+          {/* Navigation at the top */}
+          <Navigation />
+
+          {/* 1. Hero */}
           <section id="hero">
             <HeroHomepage />
           </section>
-
-          {/* Sticky nav for content below the hero */}
-          <Navigation />
 
           {/* 2. Live Threat Ticker */}
           <ThreatTicker />

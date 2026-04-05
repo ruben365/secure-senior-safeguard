@@ -15,8 +15,6 @@ import {
   Shield,
   Users,
   MapPin,
-  Star,
-  CheckCircle,
 } from "lucide-react";
 import { TimelineVisualization } from "@/components/TimelineVisualization";
 import { InspirationalVerses } from "@/components/InspirationalVerses";
@@ -25,12 +23,9 @@ import { AchievementsShowcase } from "@/components/AchievementsShowcase";
 import { AIImageDisclaimer } from "@/components/AIImageDisclaimer";
 import { trackButtonClick } from "@/utils/analyticsTracker";
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
-import { SectionDivider, MeshBackground, GlowCard } from "@/components/pro";
 // Team and culture photos
 import teamDiverse1 from "@/assets/team-diverse-1.jpg";
 import businessCollaboration from "@/assets/business-collaboration.jpg";
-import ohioNatureImpact from "@/assets/ohio-nature-impact.jpg";
-import fieldSunsetCta from "@/assets/field-sunset-cta.jpg";
 import familyGathering from "@/assets/family-gathering.jpg";
 import seniorLearning from "@/assets/senior-learning.jpg";
 import { SEO } from "@/components/SEO";
@@ -141,10 +136,10 @@ function About() {
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="xl" asChild>
+            <Button size="xl" asChild className="border border-white/20 bg-transparent text-white hover:bg-white/[0.04]">
               <Link to="/training">Start Training</Link>
             </Button>
-            <Button size="xl" variant="heroOutline" asChild>
+            <Button size="xl" asChild className="border border-white/20 bg-transparent text-white hover:bg-white/[0.04]">
               <Link to="/contact">Get in Touch</Link>
             </Button>
           </div>
@@ -159,19 +154,18 @@ function About() {
       <TrustBar />
 
       {/* Our Story */}
-      <MeshBackground variant="subtle" withOrbs>
-      <section className="py-10 sm:py-16 md:py-20 bg-transparent relative overflow-hidden">
+      <section className="py-10 sm:py-16 md:py-20 bg-[#080b11] relative overflow-hidden">
 
         <div className="container mx-auto px-4 lg:px-12">
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div>
-              <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
+              <span className="text-white/30 uppercase tracking-[0.15em] text-[11px] font-semibold mb-4 block">
                 Our Story
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
-                It Started With a <span className="text-primary">Breach</span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
+                It Started With a Breach
               </h2>
-              <div className="space-y-3 text-sm sm:text-base text-muted-foreground leading-relaxed">
+              <div className="space-y-3 text-sm sm:text-base text-white/50 leading-relaxed">
                 <p>
                   When Ruben and Corine fell victim to a sophisticated data
                   breach, their worst fears came true. All their passwords,
@@ -199,7 +193,7 @@ function About() {
               <img
                 src={teamDiverse1}
                 alt="InVision Network team working together"
-                className="rounded-2xl shadow-2xl w-full h-auto border-4 border-primary/20"
+                className="rounded-2xl shadow-2xl w-full h-auto border border-white/[0.06]"
               />
               <div className="absolute -bottom-4 sm:-bottom-6 -right-4 sm:-right-6 bg-primary text-primary-foreground p-4 sm:p-6 md:p-8 rounded-xl shadow-xl">
                 <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 sm:mb-2">
@@ -213,22 +207,19 @@ function About() {
           </div>
         </div>
       </section>
-      </MeshBackground>
-
-      <SectionDivider variant="wave" color="muted" />
 
       {/* Timeline */}
-      <section className="py-10 sm:py-16 md:py-20 bg-muted/30 relative overflow-hidden">
+      <section className="py-10 sm:py-16 md:py-20 bg-[#0d1017] relative overflow-hidden">
         
         <div className="container mx-auto px-4 lg:px-12">
           <div className="text-center mb-14">
-            <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
+            <span className="text-white/30 uppercase tracking-[0.15em] text-[11px] font-semibold mb-4 block">
               Our Journey
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
-              Milestones That <span className="text-primary">Matter</span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
+              Milestones That Matter
             </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-lg text-white/50 max-w-3xl mx-auto">
               From a personal scare to protecting hundreds of families
             </p>
           </div>
@@ -237,36 +228,36 @@ function About() {
       </section>
 
       {/* Founders */}
-      <section id="founders" className="py-10 sm:py-16 md:py-20 bg-background relative overflow-hidden">
+      <section id="founders" className="py-10 sm:py-16 md:py-20 bg-[#080b11] relative overflow-hidden">
         
         <div className="container mx-auto px-4 lg:px-12">
           <div className="text-center mb-14">
-            <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
+            <span className="text-white/30 uppercase tracking-[0.15em] text-[11px] font-semibold mb-4 block">
               Meet Our Founders
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
-              The People Behind the <span className="text-primary">Mission</span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
+              The People Behind the Mission
             </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-lg text-white/50 max-w-3xl mx-auto">
               United by experience, driven by purpose
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto">
-            <Card className="p-6 sm:p-8 border border-border/40 bg-card/70 backdrop-blur-xl shadow-sm hover:shadow-lg hover:border-primary/20 transition-all duration-300 hover:-translate-y-1">
+            <Card className="p-6 sm:p-8 bg-white/[0.03] border border-white/[0.06] rounded-xl hover:-translate-y-0.5 transition-all duration-300">
               <div className="relative mb-6">
-                <div className="w-full aspect-square bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl flex items-center justify-center border-2 border-dashed border-primary/30">
+                <div className="w-full aspect-square bg-white/[0.03] rounded-xl flex items-center justify-center border border-white/[0.06]">
                   <div className="text-center p-6">
-                    <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-                      <span className="text-4xl font-bold text-primary">R</span>
+                    <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-white/[0.06] flex items-center justify-center">
+                      <span className="text-4xl font-bold text-white">R</span>
                     </div>
-                    <p className="text-sm text-muted-foreground">Photo Coming Soon</p>
+                    <p className="text-sm text-white/50">Photo Coming Soon</p>
                   </div>
                 </div>
-                <Badge className="absolute top-4 right-4 bg-primary text-primary-foreground">Co-Founder & CEO</Badge>
+                <Badge className="absolute top-4 right-4 bg-white text-[#080b11]">Co-Founder & CEO</Badge>
               </div>
-              <h3 className="text-2xl font-black mb-2 text-foreground">Ruben</h3>
-              <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+              <h3 className="text-2xl font-black mb-2 text-white">Ruben</h3>
+              <p className="text-sm text-white/50 mb-4 leading-relaxed">
                 Cybersecurity Analyst with 5 years of experience protecting
                 organizations and families. After he and his wife Corine fell
                 victim to a sophisticated scam that exposed their passwords
@@ -275,26 +266,26 @@ function About() {
                 embracing a deeper mission: making enterprise-level security
                 accessible to everyone.
               </p>
-              <blockquote className="border-l-4 border-primary pl-4 italic text-sm text-muted-foreground">
+              <blockquote className="border-l-4 border-white/20 pl-4 italic text-sm text-white/50">
                 "Everyone deserves to feel safe online, regardless of their
                 technical knowledge."
               </blockquote>
             </Card>
 
-            <Card className="p-6 sm:p-8 border border-border/40 bg-card/70 backdrop-blur-xl shadow-sm hover:shadow-lg hover:border-primary/20 transition-all duration-300 hover:-translate-y-1">
+            <Card className="p-6 sm:p-8 bg-white/[0.03] border border-white/[0.06] rounded-xl hover:-translate-y-0.5 transition-all duration-300">
               <div className="relative mb-6">
-                <div className="w-full aspect-square bg-gradient-to-br from-accent/10 to-primary/10 rounded-xl flex items-center justify-center border-2 border-dashed border-accent/30">
+                <div className="w-full aspect-square bg-white/[0.03] rounded-xl flex items-center justify-center border border-white/[0.06]">
                   <div className="text-center p-6">
-                    <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-accent/10 flex items-center justify-center">
-                      <span className="text-4xl font-bold text-accent">C</span>
+                    <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-white/[0.06] flex items-center justify-center">
+                      <span className="text-4xl font-bold text-white">C</span>
                     </div>
-                    <p className="text-sm text-muted-foreground">Photo Coming Soon</p>
+                    <p className="text-sm text-white/50">Photo Coming Soon</p>
                   </div>
                 </div>
-                <Badge className="absolute top-4 right-4 bg-primary text-primary-foreground">Co-Founder & COO</Badge>
+                <Badge className="absolute top-4 right-4 bg-white text-[#080b11]">Co-Founder & COO</Badge>
               </div>
-              <h3 className="text-2xl font-black mb-2 text-foreground">Corine</h3>
-              <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+              <h3 className="text-2xl font-black mb-2 text-white">Corine</h3>
+              <p className="text-sm text-white/50 mb-4 leading-relaxed">
                 Registered Nurse with 4 years of clinical experience and a
                 heart for community wellness. After experiencing identity
                 theft alongside her husband, Corine channeled her
@@ -302,7 +293,7 @@ function About() {
                 cybersecurity training that meets people where they are -
                 especially seniors and vulnerable populations.
               </p>
-              <blockquote className="border-l-4 border-primary pl-4 italic text-sm text-muted-foreground">
+              <blockquote className="border-l-4 border-white/20 pl-4 italic text-sm text-white/50">
                 "Technology should empower, not intimidate. We're here to
                 bridge that gap."
               </blockquote>
@@ -311,16 +302,13 @@ function About() {
         </div>
       </section>
 
-      <SectionDivider variant="curve" color="muted" flip />
-
       {/* Values */}
-      <MeshBackground variant="vibrant" withDots>
-      <section className="py-10 sm:py-16 md:py-20">
+      <section className="py-10 sm:py-16 md:py-20 bg-[#0d1017]">
         <div className="container mx-auto px-4 lg:px-12">
           <div className="text-center mb-14">
-            <span className="frosted-pill mb-4">Our Values</span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
-              What Drives Us <span className="gradient-text-brand">Every Day</span>
+            <span className="text-white/30 uppercase tracking-[0.15em] text-[11px] font-semibold mb-4 block">Our Values</span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
+              What Drives Us Every Day
             </h2>
           </div>
 
@@ -328,40 +316,31 @@ function About() {
             {values.map((value) => {
               const Icon = value.icon;
               return (
-                <GlowCard key={value.title} className="text-center h-full">
-                  <div className="icon-glow-ring w-14 h-14 rounded-2xl bg-gradient-to-br from-[hsl(var(--primary)/0.1)] to-[hsl(var(--accent)/0.08)] flex items-center justify-center mx-auto mb-4">
-                    <Icon className="w-7 h-7 text-[hsl(var(--accent))]" />
+                <div key={value.title} className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-6 text-center h-full hover:-translate-y-0.5 transition-all duration-300">
+                  <div className="w-14 h-14 rounded-2xl bg-white/[0.06] flex items-center justify-center mx-auto mb-4">
+                    <Icon className="w-7 h-7 text-white/50" />
                   </div>
-                  <h3 className="text-lg font-bold text-foreground mb-2">
+                  <h3 className="text-lg font-bold text-white mb-2">
                     {value.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-sm text-white/50 leading-relaxed">
                     {value.description}
                   </p>
-                </GlowCard>
+                </div>
               );
             })}
           </div>
         </div>
       </section>
-      </MeshBackground>
-
-      <SectionDivider variant="mountains" color="background" />
 
       {/* Community Impact */}
-      <section className="py-16 md:py-24 relative overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${ohioNatureImpact})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-primary/60 to-accent/70" />
-
-        <div className="container mx-auto px-4 lg:px-12 relative z-10 text-white">
+      <section className="py-16 md:py-24 bg-[#080b11] relative overflow-hidden">
+        <div className="container mx-auto px-4 lg:px-12 relative z-10">
           <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 drop-shadow-lg text-white">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 text-white">
               Our Community Impact
             </h2>
-            <p className="text-lg max-w-3xl mx-auto drop-shadow-md text-white/95">
+            <p className="text-lg max-w-3xl mx-auto text-white/50">
               Protecting families and serving our local community
             </p>
           </div>
@@ -372,43 +351,41 @@ function About() {
               { icon: Award, title: "Veteran-Supporting", desc: "Honoring those who served with special discounts" },
               { icon: Heart, title: "Mission-Driven", desc: "Protection over profit, always" },
             ].map((item) => (
-              <div key={item.title} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-1 shine-hover">
-                <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/15 flex items-center justify-center">
-                  <item.icon className="w-7 h-7 text-white" />
+              <div key={item.title} className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-6 text-center transition-all duration-300 hover:-translate-y-0.5">
+                <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/[0.06] flex items-center justify-center">
+                  <item.icon className="w-7 h-7 text-white/50" />
                 </div>
-                <div className="font-bold text-xl mb-2">{item.title}</div>
-                <div className="text-sm text-white/95">{item.desc}</div>
+                <div className="font-bold text-xl mb-2 text-white">{item.title}</div>
+                <div className="text-sm text-white/50">{item.desc}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <SectionDivider variant="wave" color="background" flip />
-
       {/* Who We Help */}
-      <section className="py-10 sm:py-16 md:py-20 bg-background">
+      <section className="py-10 sm:py-16 md:py-20 bg-[#0d1017]">
         <div className="container mx-auto px-4 lg:px-12">
           <div className="text-center mb-14">
-            <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
+            <span className="text-white/30 uppercase tracking-[0.15em] text-[11px] font-semibold mb-4 block">
               Who We Serve
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
-              Protecting Those Who <span className="text-primary">Matter Most</span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
+              Protecting Those Who Matter Most
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-white/50 max-w-2xl mx-auto">
               From multi-generational families to seniors learning new technology
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <div className="relative group overflow-hidden rounded-2xl shadow-lg border border-border/60">
+            <div className="relative group overflow-hidden rounded-xl border border-white/[0.06]">
               <img
                 src={familyGathering}
                 alt="Multi-generational family enjoying time together"
                 className="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
                 <h3 className="text-2xl font-black mb-2">Family Protection</h3>
                 <p className="text-white/90 text-sm">
@@ -417,13 +394,13 @@ function About() {
               </div>
             </div>
 
-            <div className="relative group overflow-hidden rounded-2xl shadow-lg border border-border/60">
+            <div className="relative group overflow-hidden rounded-xl border border-white/[0.06]">
               <img
                 src={seniorLearning}
                 alt="Senior learning to use technology with instructor"
                 className="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
                 <h3 className="text-2xl font-black mb-2">Senior Education</h3>
                 <p className="text-white/90 text-sm">
@@ -444,26 +421,19 @@ function About() {
       {/* Service Areas with Interactive Map */}
       <OhioServiceMap />
 
-      <div className="section-glow-strip" />
 
-      {/* CTA with Field Background */}
-      <section className="py-24 md:py-32 relative overflow-hidden" id="cta">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${fieldSunsetCta})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/50 to-transparent" />
-
+      {/* CTA */}
+      <section className="py-24 md:py-32 bg-[#080b11] relative overflow-hidden" id="cta">
         <div className="container mx-auto px-4 relative z-10 text-center">
-          <h2 className="text-3xl md:text-5xl font-black text-white mb-6 drop-shadow-lg">
+          <h2 className="text-3xl md:text-5xl font-black text-white mb-6">
             Ready to Join Our Protected Community?
           </h2>
-          <p className="text-lg md:text-xl text-white/95 mb-8 max-w-2xl mx-auto drop-shadow-md">
+          <p className="text-lg md:text-xl text-white/50 mb-8 max-w-2xl mx-auto">
             Whether you're looking for personal training, business solutions, or
             want to support our mission, we'd love to connect.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Button asChild size="xl">
+            <Button asChild size="xl" className="bg-white text-[#080b11] hover:bg-white/90">
               <Link
                 to="/training"
                 onClick={() => trackButtonClick("Start Training", "About CTA")}
@@ -471,7 +441,7 @@ function About() {
                 Start Training
               </Link>
             </Button>
-            <Button asChild size="xl" variant="heroOutline">
+            <Button asChild size="xl" className="border border-white/20 bg-transparent text-white hover:bg-white/[0.04]">
               <Link
                 to="/business"
                 onClick={() => trackButtonClick("Partner With Us", "About CTA")}

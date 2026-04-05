@@ -64,7 +64,8 @@ import { VideoLightbox } from "@/components/VideoLightbox";
 import { SEO } from "@/components/SEO";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
-import { SectionDivider, MeshBackground } from "@/components/pro";
+
+
 
 
 const businessHeadlines = [
@@ -222,15 +223,14 @@ const SectionHeader = ({
 
 }: {badge: string;title: string;subtitle?: string;children?: React.ReactNode;light?: boolean;}) =>
 <AnimatedSection animation="fade-up" className="text-center mb-16">
-    <span className="inline-flex items-center gap-2 px-5 py-2 glass-subtle rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15">
-      <Sparkles className="w-3.5 h-3.5 text-primary" />
-      <span className={light ? "text-white/90" : "text-primary"}>{badge}</span>
+    <span className="text-white/30 uppercase tracking-[0.15em] text-[11px] font-semibold mb-6 block">
+      {badge}
     </span>
-    <h2 className={`text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1] ${light ? "text-white" : ""}`}>
+    <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1] text-white">
       {title}
     </h2>
     {subtitle &&
-  <p className={`text-base md:text-lg max-w-3xl mx-auto leading-relaxed ${light ? "text-white/90" : "text-muted-foreground"}`}>
+  <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-white/50">
         {subtitle}
       </p>
   }
@@ -520,17 +520,17 @@ function Business() {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="default" size="xl" onClick={openStrategyCall}>
+              <Button size="xl" className="bg-white text-[#080b11] font-bold hover:bg-white/90" onClick={openStrategyCall}>
                 Book Strategy Call
               </Button>
               <Button
-                variant="heroOutline"
                 size="xl"
+                className="border border-white/20 text-white hover:bg-white/[0.04] bg-transparent"
                 onClick={() => {
                   scrollToSection("services");
                   trackButtonClick("Explore Services", "Business Hero");
                 }}>
-                
+
                 Explore Services
               </Button>
             </div>
@@ -542,7 +542,7 @@ function Business() {
         <TrustBar />
 
         {/* Live Stats Ticker — matches Training page */}
-        <div className="bg-foreground text-background py-3 overflow-hidden">
+        <div className="bg-[#0d1017] text-white/50 py-3 overflow-hidden border-y border-white/[0.06]">
           
 
 
@@ -555,19 +555,15 @@ function Business() {
         </div>
 
         {/* ═══════════════════ SERVICES ═══════════════════ */}
-        <section id="services" className="py-24 relative overflow-hidden dot-grid-bg">
-          {/* Premium background */}
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
-          <div className="absolute top-20 left-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-20 right-0 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-3xl pointer-events-none" />
+        <section id="services" className="py-24 relative overflow-hidden bg-[#080b11]">
 
-          <div className="container mx-auto px-4 relative z-10">
+          <div className="container mx-auto px-4">
             <SectionHeader
               badge="Our Services"
               title="What We Build For You"
               subtitle="Pick a service below to see how your business benefits." />
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl mx-auto" style={{ perspective: "1200px" }}>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl mx-auto">
               <AnimatedSection animation="fade-left" delay={0}>
                 <ExpandableServiceCard
                   icon={<Phone className="w-7 h-7 text-primary" />}
@@ -698,19 +694,10 @@ function Business() {
           </div>
         </section>
 
-        <SectionDivider variant="wave" color="muted" />
-
         {/* ═══════════════════ COMPLETE PLATFORM ═══════════════════ */}
-        <section className="py-28 relative overflow-hidden">
-          {/* Rich layered background */}
-          <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
-          
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
-          <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/15 to-transparent" />
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-primary/[0.025] rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
+        <section className="py-28 relative overflow-hidden bg-[#0d1017]">
 
-          <div className="container mx-auto px-4 relative z-10">
+          <div className="container mx-auto px-4">
             <SectionHeader
               badge="Complete Platform"
               title="InVision Platform, Fully Integrated"
@@ -879,24 +866,22 @@ function Business() {
             </div>
 
             {/* Platform integration pillars — 3D cards */}
-            <div className="mt-24 grid md:grid-cols-3 gap-6 max-w-5xl mx-auto" style={{ perspective: "1200px" }}>
+            <div className="mt-24 grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
               {platformPillars.map((pillar, i) =>
               <AnimatedSection
                 key={pillar.title}
                 animation="fade-up"
                 delay={i * 120}>
-                
-                  <Card className="group p-8 rounded-2xl border-border/40 bg-card/95 backdrop-blur-sm text-center h-full hover:shadow-[0_20px_50px_-15px_hsl(var(--primary)/0.12)] hover:border-primary/25 transition-all duration-500 overflow-hidden relative">
-                    <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/30 via-accent/20 to-primary/30 opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                  <div className="group p-8 rounded-xl bg-white/[0.03] border border-white/[0.06] text-center h-full hover:-translate-y-0.5 transition-all duration-300">
                     <div
-                    className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center mx-auto mb-5 shadow-inner group-hover:scale-110 transition-transform duration-300"
-                    style={{ transform: "translateZ(15px)" }}>
-                    
-                      <pillar.icon className="w-7 h-7 text-primary" />
+                    className="w-16 h-16 rounded-2xl bg-white/[0.05] flex items-center justify-center mx-auto mb-5">
+
+                      <pillar.icon className="w-7 h-7 text-white/70" />
                     </div>
-                    <h3 className="font-bold text-base mb-3">{pillar.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{pillar.desc}</p>
-                  </Card>
+                    <h3 className="font-bold text-base mb-3 text-white">{pillar.title}</h3>
+                    <p className="text-sm text-white/50 leading-relaxed">{pillar.desc}</p>
+                  </div>
                 </AnimatedSection>
               )}
             </div>
@@ -930,7 +915,7 @@ function Business() {
         </section>
 
         {/* Veterans Discount */}
-        <section className="py-4 bg-gradient-to-r from-muted via-card to-muted border-y border-border/30">
+        <section className="py-4 bg-[#080b11] border-y border-white/[0.06]">
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-center gap-3 text-center">
               <span className="text-xl">🇺🇸</span>
@@ -946,9 +931,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ WEB DESIGN ═══════════════════ */}
-        <section id="website-design" className="py-24 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
+        <section id="website-design" className="py-24 relative overflow-hidden bg-[#0d1017]">
           
           <div className="container mx-auto px-4 relative z-10">
             <SectionHeader
@@ -1109,12 +1092,8 @@ function Business() {
           </div>
         </section>
 
-        <SectionDivider variant="curve" color="muted" flip />
-
         {/* ═══════════════════ WEBSITE INSURANCE ═══════════════════ */}
-        <section id="website-insurance" className="py-24 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-muted/60 via-muted/40 to-muted/60" />
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+        <section id="website-insurance" className="py-24 relative overflow-hidden bg-[#080b11]">
           
           <div className="container mx-auto px-4 relative z-10">
             <SectionHeader
@@ -1195,11 +1174,8 @@ function Business() {
         </section>
 
         {/* ═══════════════════ AI AGENTS PRICING ═══════════════════ */}
-        <section id="automation-pricing" className="py-24 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
-          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
-          
-          <div className="container mx-auto px-4 relative z-10">
+        <section id="automation-pricing" className="py-24 relative overflow-hidden bg-[#0d1017]">
+          <div className="container mx-auto px-4">
             <SectionHeader
               badge="AI Automation"
               title="AI Agents Pricing"
@@ -1304,12 +1280,8 @@ function Business() {
           </div>
         </section>
 
-        <SectionDivider variant="slant" color="muted" />
-
         {/* ═══════════════════ AI INSURANCE ═══════════════════ */}
-        <section id="ai-insurance" className="py-24 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent" />
+        <section id="ai-insurance" className="py-24 relative overflow-hidden bg-[#080b11]">
           
           <div className="container mx-auto px-4 relative z-10">
             <SectionHeader
@@ -1500,8 +1472,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ AI CONSULTING ═══════════════════ */}
-        <section id="ai-consulting" className="py-24 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
+        <section id="ai-consulting" className="py-24 relative overflow-hidden bg-[#0d1017]">
           
           <div className="container mx-auto px-4 relative z-10">
             <SectionHeader
@@ -1680,14 +1651,8 @@ function Business() {
           </div>
         </section>
 
-        <div className="divider-gradient-colored" />
-
         {/* ═══════════════════ ILLUSTRATION & VISUAL ART ═══════════════════ */}
-        <section id="illustration" className="py-24 relative overflow-hidden dot-grid-bg">
-          {/* Decorative background */}
-          <div className="absolute inset-0 bg-gradient-to-b from-muted/40 via-background to-muted/30" />
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-coral-100/20 via-transparent to-transparent rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-lavender-100/15 via-transparent to-transparent rounded-full blur-3xl pointer-events-none" />
+        <section id="illustration" className="py-24 relative overflow-hidden bg-[#080b11]">
 
           <div className="container mx-auto px-4 relative z-10">
             <SectionHeader
@@ -1696,7 +1661,7 @@ function Business() {
               subtitle="Professional illustration and visual design services that give your brand a distinctive, memorable identity." />
             
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto" style={{ perspective: "1200px" }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
               {[
               {
                 icon: Palette,
@@ -1813,12 +1778,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ WHY CHOOSE US ═══════════════════ */}
-        <MeshBackground variant="vibrant" withOrbs>
-        <section className="py-24 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
-          
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
+        <section className="py-24 relative overflow-hidden bg-[#0d1017]">
           
           <div className="container mx-auto px-4 relative z-10">
             <SectionHeader
@@ -1827,7 +1787,7 @@ function Business() {
               subtitle="What makes us different from other AI vendors." />
             
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mb-14" style={{ perspective: "1200px" }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mb-14">
               {[
               { icon: Shield, title: "Security-First", desc: "Every solution ships with enterprise-grade encryption, monitoring, and data protection built in." },
               { icon: Lock, title: "No Vendor Lock-In", desc: "We build on open standards. You own your AI and your data. Move in-house whenever you want." },
@@ -1838,23 +1798,15 @@ function Business() {
               map((item, i) =>
               <div
                 key={i}
-                className="hover-lift">
-                
-                  <Card className="group relative p-7 border-border/40 rounded-2xl bg-card/95 backdrop-blur-sm overflow-hidden h-full hover:shadow-[0_20px_50px_-15px_hsl(var(--primary)/0.12)] hover:border-primary/25 transition-all duration-500">
-                    {/* Top accent */}
-                    <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    {/* Hover glow */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] to-accent/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                    
+                className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-7 h-full hover:-translate-y-0.5 transition-all duration-300">
+
                     <div
-                    className="w-13 h-13 bg-gradient-to-br from-primary/15 to-accent/10 rounded-xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/10 relative z-10"
-                    style={{ transform: "translateZ(15px)" }}>
-                    
-                      <item.icon className="w-6 h-6 text-primary" />
+                    className="w-13 h-13 bg-white/[0.05] rounded-xl flex items-center justify-center mb-5">
+
+                      <item.icon className="w-6 h-6 text-white/70" />
                     </div>
-                    <h3 className="text-base font-bold mb-2 relative z-10">{item.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed relative z-10">{item.desc}</p>
-                  </Card>
+                    <h3 className="text-base font-bold mb-2 text-white">{item.title}</h3>
+                    <p className="text-white/50 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               )}
             </div>
@@ -1885,14 +1837,9 @@ function Business() {
             </AnimatedSection>
           </div>
         </section>
-        </MeshBackground>
-
-        <SectionDivider variant="mountains" color="background" />
-
         {/* ═══════════════════ TESTIMONIALS ═══════════════════ */}
         {(isAdmin || businessTestimonials.length > 0) &&
-        <section className="py-24 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
+        <section className="py-24 relative overflow-hidden bg-[#080b11]">
             
             <div className="container mx-auto px-4 relative z-10">
               <SectionHeader
@@ -1943,8 +1890,6 @@ function Business() {
             </div>
           </section>
         }
-
-        <div className="section-glow-strip" />
 
         {/* Final CTA */}
         <CTASection
