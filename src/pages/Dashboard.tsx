@@ -1,12 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { useSiteSettings } from '@/hooks/useSiteContent';
 import {
   Users, Utensils, Gift, Heart, CheckCircle, XCircle, Clock,
-  TrendingUp, BarChart3, PieChart, MapPin, Sparkles, Loader2, LogOut,
+  TrendingUp, BarChart3, PieChart, MapPin, Sparkles, Loader2,
   Megaphone, Trash2, Plus, Share2, Copy, Check, QrCode,
   MessageCircleQuestion, Send, Bell, Image, BookOpen, Mail, Download, AtSign,
   MessageCircle, Camera, HelpCircle, Settings, Video
@@ -125,7 +124,6 @@ interface ContactMessageRow {
 
 const Dashboard = () => {
   const { t } = useLanguage();
-  const { signOut } = useAuth();
   const { settings: siteSettings } = useSiteSettings();
   const isCourtMode = siteSettings.active_event === 'court';
   const [searchQuery, setSearchQuery] = useState('');
@@ -162,6 +160,8 @@ const Dashboard = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) { setLoading(false); return; }
       try {
         const [rsvpRes, giftRes, annRes, quoteRes, enqRes, subRes, contactRes] = await Promise.all([
           supabase.from('rsvps').select('*').order('created_at', { ascending: false }),
@@ -208,7 +208,9 @@ const Dashboard = () => {
   };
 
   const handleDeleteAnnouncement = async (id: string) => {
-    await supabase.from('announcements').delete().eq('id', id);
+    if (!confirm("Are you sure you want to delete this announcement?")) return;
+    const { error } = await supabase.from('announcements').delete().eq('id', id);
+    if (error) { console.error('Failed to delete announcement:', error); return; }
     setAnnouncements(announcements.filter(a => a.id !== id));
   };
 
@@ -224,7 +226,9 @@ const Dashboard = () => {
   };
 
   const handleDeleteQuote = async (id: string) => {
-    await supabase.from('quotes').delete().eq('id', id);
+    if (!confirm("Are you sure you want to delete this quote?")) return;
+    const { error } = await supabase.from('quotes').delete().eq('id', id);
+    if (error) { console.error('Failed to delete quote:', error); return; }
     setQuotes(quotes.filter(q => q.id !== id));
   };
 
@@ -245,7 +249,9 @@ const Dashboard = () => {
   };
 
   const handleDeleteEnquiry = async (id: string) => {
-    await supabase.from('enquiries').delete().eq('id', id);
+    if (!confirm("Are you sure you want to delete this enquiry?")) return;
+    const { error } = await supabase.from('enquiries').delete().eq('id', id);
+    if (error) { console.error('Failed to delete enquiry:', error); return; }
     setEnquiries(enquiries.filter(e => e.id !== id));
   };
 
@@ -269,6 +275,7 @@ const Dashboard = () => {
 
   const handleSendBlast = async () => {
     if (!blastSubject.trim() || !blastContent.trim()) return;
+    if (!confirm(`Send email to all subscribers? This cannot be undone.`)) return;
     setBlastSending(true);
     setBlastResult(null);
     try {
@@ -286,23 +293,24 @@ const Dashboard = () => {
   };
 
   const unansweredCount = enquiries.filter(e => e.status === 'pending').length;
+  const unreadContactsCount = useMemo(() => contacts.filter(c => !c.read).length, [contacts]);
 
-  const confirmed = rsvps.filter(r => r.status === 'confirmed');
-  const pending = rsvps.filter(r => r.status === 'pending');
-  const declined = rsvps.filter(r => r.status === 'declined');
-  const totalGuests = confirmed.reduce((a, r) => a + r.guests, 0);
+  const confirmed = useMemo(() => rsvps.filter(r => r.status === 'confirmed'), [rsvps]);
+  const pending = useMemo(() => rsvps.filter(r => r.status === 'pending'), [rsvps]);
+  const declined = useMemo(() => rsvps.filter(r => r.status === 'declined'), [rsvps]);
+  const totalGuests = useMemo(() => confirmed.reduce((a, r) => a + r.guests, 0), [confirmed]);
   const totalGifts = gifts.reduce((a, g) => a + g.amount, 0);
 
-  const mealCounts = confirmed.reduce((acc, r) => {
+  const mealCounts = useMemo(() => confirmed.reduce((acc, r) => {
     if (r.cuisine) acc[r.cuisine] = (acc[r.cuisine] || 0) + r.guests;
     return acc;
-  }, {} as Record<string, number>);
+  }, {} as Record<string, number>), [confirmed]);
 
-  const filteredRsvps = rsvps.filter(r =>
+  const filteredRsvps = useMemo(() => rsvps.filter(r =>
     r.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  ), [rsvps, searchQuery]);
 
-  const tablesUsed = [...new Set(confirmed.map(r => r.table_name).filter(Boolean))];
+  const tablesUsed = useMemo(() => [...new Set(confirmed.map(r => r.table_name).filter(Boolean))], [confirmed]);
 
   if (loading) {
     return (
@@ -396,9 +404,9 @@ const Dashboard = () => {
             </TabsTrigger>
             <TabsTrigger value="contact" className="rounded-full px-4 py-2 font-sans-elegant text-xs font-bold data-[state=active]:gradient-primary data-[state=active]:text-primary-foreground relative">
               <Mail className="w-3.5 h-3.5 mr-1.5" /> Contact
-              {contacts.filter(c => !c.read).length > 0 && (
+              {unreadContactsCount > 0 && (
                 <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-500 text-white text-[9px] font-bold flex items-center justify-center">
-                  {contacts.filter(c => !c.read).length}
+                  {unreadContactsCount}
                 </span>
               )}
             </TabsTrigger>
@@ -542,7 +550,9 @@ const Dashboard = () => {
                        <TableCell className="font-sans-elegant text-xs text-muted-foreground max-w-[150px] truncate">{r.message || '—'}</TableCell>
                        <TableCell>
                          <button type="button" onClick={async () => {
-                           await supabase.from('rsvps').delete().eq('id', r.id);
+                           if (!confirm("Are you sure you want to delete this RSVP?")) return;
+                           const { error } = await supabase.from('rsvps').delete().eq('id', r.id);
+                           if (error) { console.error('Failed to delete RSVP:', error); return; }
                            setRsvps(prev => prev.filter(x => x.id !== r.id));
                          }} className="w-8 h-8 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 flex items-center justify-center transition-colors">
                            <Trash2 className="w-3.5 h-3.5 text-rose-500" />
@@ -627,7 +637,9 @@ const Dashboard = () => {
                        <TableCell className="font-sans-elegant text-xs text-muted-foreground max-w-[200px] truncate">{g.message || '—'}</TableCell>
                        <TableCell>
                          <button type="button" onClick={async () => {
-                           await supabase.from('gifts').delete().eq('id', g.id);
+                           if (!confirm("Are you sure you want to delete this gift?")) return;
+                           const { error } = await supabase.from('gifts').delete().eq('id', g.id);
+                           if (error) { console.error('Failed to delete gift:', error); return; }
                            setGifts(prev => prev.filter(x => x.id !== g.id));
                          }} className="w-8 h-8 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 flex items-center justify-center transition-colors">
                            <Trash2 className="w-3.5 h-3.5 text-rose-500" />
@@ -957,7 +969,7 @@ const Dashboard = () => {
                   <label className="font-sans-elegant text-sm font-medium text-foreground mb-1.5 block">Subject</label>
                   <Input
                     value={blastSubject}
-                    onChange={(e) => setBlastSubject(e.target.value)}
+                    onChange={(e) => { setBlastSubject(e.target.value); setBlastResult(null); }}
                     placeholder="e.g. Save the Date Reminder 💕"
                     className="rounded-2xl h-11 glass-card border-border/30 font-sans-elegant"
                   />
@@ -966,7 +978,7 @@ const Dashboard = () => {
                   <label className="font-sans-elegant text-sm font-medium text-foreground mb-1.5 block">Message</label>
                   <Textarea
                     value={blastContent}
-                    onChange={(e) => setBlastContent(e.target.value)}
+                    onChange={(e) => { setBlastContent(e.target.value); setBlastResult(null); }}
                     placeholder="Write your announcement here... This will be sent to everyone who subscribed or RSVP'd with their email."
                     className="rounded-2xl glass-card border-border/30 font-sans-elegant min-h-[160px]"
                   />
@@ -1036,7 +1048,9 @@ const Dashboard = () => {
                        <TableCell className="font-sans-elegant text-sm text-muted-foreground">{new Date(s.created_at).toLocaleDateString()}</TableCell>
                        <TableCell>
                          <button type="button" onClick={async () => {
-                           await supabase.from('newsletter_subscribers').delete().eq('id', s.id);
+                           if (!confirm("Are you sure you want to delete this subscriber?")) return;
+                           const { error } = await supabase.from('newsletter_subscribers').delete().eq('id', s.id);
+                           if (error) { console.error('Failed to delete subscriber:', error); return; }
                            setSubscribers(prev => prev.filter(x => x.id !== s.id));
                          }} className="w-8 h-8 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 flex items-center justify-center transition-colors">
                            <Trash2 className="w-3.5 h-3.5 text-rose-500" />
@@ -1124,6 +1138,7 @@ const Dashboard = () => {
               </div>
 
               {donateLink.trim() ? (
+                donateLink.trim().startsWith('https://') ? (
                 <div className="text-center space-y-4">
                   <div className="glass-card rounded-3xl p-6 inline-block">
                     <p className="font-sans-elegant text-xs text-muted-foreground mb-3 font-medium">{donateLabel}</p>
@@ -1157,6 +1172,11 @@ const Dashboard = () => {
                     Share this QR code or link with guests · No personal info required · Works with any payment app
                   </p>
                 </div>
+                ) : (
+                  <div className="text-center py-6">
+                    <p className="font-sans-elegant text-sm text-rose-500">Invalid URL: donate link must start with https://</p>
+                  </div>
+                )
               ) : (
                 <div className="text-center py-6">
                   <QrCode className="w-8 h-8 text-muted-foreground/30 mx-auto mb-2" />
@@ -1170,7 +1190,7 @@ const Dashboard = () => {
           <TabsContent value="contact" className="space-y-6">
             <div className="grid sm:grid-cols-2 gap-4">
               <StatCard icon={Mail} label="Total Messages" value={contacts.length} color="text-blue-400" bg="from-blue-500/20 to-cyan-500/10" />
-              <StatCard icon={Bell} label="Unread" value={contacts.filter(c => !c.read).length} sub={contacts.filter(c => !c.read).length > 0 ? '⚡ Needs attention' : '✓ All read'} color="text-amber-400" bg="from-amber-500/20 to-orange-500/10" />
+              <StatCard icon={Bell} label="Unread" value={unreadContactsCount} sub={unreadContactsCount > 0 ? '⚡ Needs attention' : '✓ All read'} color="text-amber-400" bg="from-amber-500/20 to-orange-500/10" />
             </div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
@@ -1213,7 +1233,9 @@ const Dashboard = () => {
                       type="button"
                       title="Delete message"
                       onClick={async () => {
-                        await supabase.from('contact_messages').delete().eq('id', c.id);
+                        if (!confirm("Are you sure you want to delete this message?")) return;
+                        const { error } = await supabase.from('contact_messages').delete().eq('id', c.id);
+                        if (error) { console.error('Failed to delete contact message:', error); return; }
                         setContacts(prev => prev.filter(m => m.id !== c.id));
                       }}
                       className="w-9 h-9 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 flex items-center justify-center transition-colors"

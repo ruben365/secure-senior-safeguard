@@ -33,6 +33,9 @@ import { NavigationProgress } from "./components/NavigationProgress";
 // Admin Shell
 const AdminShell = lazy(() => import("./components/admin/AdminShell").then(m => ({ default: m.AdminShell })));
 
+// Portal Shell
+const PortalShell = lazy(() => import("./components/portal/PortalShell").then(m => ({ default: m.PortalShell })));
+
 // Pages - lazy loaded to reduce main bundle size
 const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -85,6 +88,14 @@ const Disclaimer = lazy(() => import("./pages/Disclaimer"));
 
 // Portal pages - lazy loaded
 const Portal = lazy(() => import("./pages/Portal"));
+const SeniorHome = lazy(() => import("./pages/portal/SeniorHome"));
+const CaregiverHome = lazy(() => import("./pages/portal/CaregiverHome"));
+const HealthcareHome = lazy(() => import("./pages/portal/HealthcareHome"));
+const ClientModule = lazy(() => import("./pages/portal/ClientModule"));
+const BookingModule = lazy(() => import("./pages/portal/BookingModule"));
+const TaskModule = lazy(() => import("./pages/portal/TaskModule"));
+const InvoiceModule = lazy(() => import("./pages/portal/InvoiceModule"));
+const PartnerModule = lazy(() => import("./pages/portal/PartnerModule"));
 const MyCourses = lazy(() => import("./pages/portal/MyCourses"));
 const MyBookings = lazy(() => import("./pages/portal/MyBookings"));
 const MyTickets = lazy(() => import("./pages/portal/MyTickets"));
@@ -207,29 +218,35 @@ function PublicRoutes() {
         <Route path="/guest-scanner" element={<Navigate to="/training/ai-analysis" replace />} />
         <Route path="/reader" element={<PageTransition variant="fade"><BookReader /></PageTransition>} />
 
-        {/* Portal Routes — 4 internal dashboards */}
-        <Route path="/portal" element={<PageTransition><ProtectedRoute><Portal /></ProtectedRoute></PageTransition>} />
+        {/* Portal routes wrapped in PortalShell */}
+        <Route path="/portal" element={<ProtectedRoute><PortalShell /></ProtectedRoute>}>
+          <Route index element={<Portal />} />
+          <Route path="secretary" element={<SecretaryDashboard />} />
+          <Route path="coordinator" element={<CoordinatorDashboard />} />
+          <Route path="staff" element={<StaffDashboard />} />
+          <Route path="messages" element={<InternalMessages />} />
+          <Route path="my-courses" element={<MyCourses />} />
+          <Route path="my-bookings" element={<MyBookings />} />
+          <Route path="my-tickets" element={<MyTickets />} />
+          <Route path="referrals" element={<ReferralDashboard />} />
+          <Route path="analytics" element={<UserAnalytics />} />
+          <Route path="courses/:id" element={<CourseDetail />} />
+          <Route path="scam-check/:id" element={<ScamCheckResult />} />
+          <Route path="senior" element={<SeniorHome />} />
+          <Route path="caregiver" element={<CaregiverHome />} />
+          <Route path="healthcare" element={<HealthcareHome />} />
+          <Route path="clients" element={<ClientModule />} />
+          <Route path="bookings" element={<BookingModule />} />
+          <Route path="tasks" element={<TaskModule />} />
+          <Route path="invoices" element={<InvoiceModule />} />
+          <Route path="partners" element={<PartnerModule />} />
+        </Route>
+        {/* Redirects for portal paths — outside PortalShell */}
         <Route path="/portal/admin" element={<Navigate to="/admin" replace />} />
-        <Route path="/portal/secretary" element={<PageTransition><ProtectedRoute><SecretaryDashboard /></ProtectedRoute></PageTransition>} />
-        <Route path="/portal/coordinator" element={<PageTransition><ProtectedRoute><CoordinatorDashboard /></ProtectedRoute></PageTransition>} />
-        <Route path="/portal/staff" element={<PageTransition><ProtectedRoute><StaffDashboard /></ProtectedRoute></PageTransition>} />
-        {/* Redirects for removed dashboards */}
         <Route path="/portal/analyst" element={<Navigate to="/portal/staff" replace />} />
         <Route path="/portal/trainer" element={<Navigate to="/portal/coordinator" replace />} />
         <Route path="/portal/developer" element={<Navigate to="/portal/staff" replace />} />
-        <Route path="/portal/senior" element={<Navigate to="/portal/staff" replace />} />
         <Route path="/portal/business" element={<Navigate to="/portal/staff" replace />} />
-        <Route path="/portal/caregiver" element={<Navigate to="/portal/staff" replace />} />
-        <Route path="/portal/healthcare" element={<Navigate to="/portal/staff" replace />} />
-        {/* Shared portal utilities */}
-        <Route path="/portal/messages" element={<PageTransition><ProtectedRoute><InternalMessages /></ProtectedRoute></PageTransition>} />
-        <Route path="/portal/my-courses" element={<PageTransition><ProtectedRoute><MyCourses /></ProtectedRoute></PageTransition>} />
-        <Route path="/portal/my-bookings" element={<PageTransition><ProtectedRoute><MyBookings /></ProtectedRoute></PageTransition>} />
-        <Route path="/portal/my-tickets" element={<PageTransition><ProtectedRoute><MyTickets /></ProtectedRoute></PageTransition>} />
-        <Route path="/portal/referrals" element={<PageTransition><ProtectedRoute><ReferralDashboard /></ProtectedRoute></PageTransition>} />
-        <Route path="/portal/analytics" element={<PageTransition><ProtectedRoute><UserAnalytics /></ProtectedRoute></PageTransition>} />
-        <Route path="/portal/courses/:id" element={<PageTransition><ProtectedRoute><CourseDetail /></ProtectedRoute></PageTransition>} />
-        <Route path="/portal/scam-check/:id" element={<PageTransition><ProtectedRoute><ScamCheckResult /></ProtectedRoute></PageTransition>} />
 
         {/* Legal Pages */}
         <Route path="/privacy-policy" element={<PageTransition variant="fade"><PrivacyPolicy /></PageTransition>} />

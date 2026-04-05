@@ -24,15 +24,15 @@ export function DashboardKPICards({ stats }: { stats: KPIStats }) {
         return (
           <Card
             key={kpi.key}
-            className={`bg-[#1F2937] border-[#374151] border-l-4 ${kpi.accent} p-5`}
+            className={`bg-card border-border border-l-4 ${kpi.accent} p-5`}
           >
             <div className="flex items-center justify-between mb-3">
               <Icon className={`h-5 w-5 ${kpi.iconColor}`} />
             </div>
-            <p className="text-3xl font-semibold text-[#F9FAFB] tracking-tight">
-              {value}
+            <p className="text-3xl font-semibold text-foreground tracking-tight">
+              {value ?? "\u2014"}
             </p>
-            <p className="text-sm text-[#6B7280] mt-1">{kpi.label}</p>
+            <p className="text-sm text-muted-foreground mt-1">{kpi.label}</p>
           </Card>
         );
       })}

@@ -1,244 +1,401 @@
-import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/contexts/AuthContext";
 import { PortalLoadingSkeleton } from "@/components/portal/PortalLoadingSkeleton";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Calendar } from "@/components/ui/calendar";
+import { StatCard } from "@/components/shared/StatCard";
+import { DataTable } from "@/components/shared/DataTable";
+import { RealCalendar } from "@/components/shared/RealCalendar";
+import { ErrorState } from "@/components/shared/ErrorState";
 import { Badge } from "@/components/ui/badge";
-import { useToast } from "@/hooks/use-toast";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  ArrowLeft,
+  ListTodo,
+  Ticket,
   Users,
-  MessageSquare,
   CalendarDays,
-  Headphones,
-  LogOut,
-  ClipboardCheck,
-  Activity,
-  Search,
+  Clock,
+  MessageSquare,
 } from "lucide-react";
+import type { StatCardData, TableColumn, CalendarEvent } from "@/types/portal";
 
-interface DashboardTask {
+// ── Types ─────────────────────────────────────────────────────────────────────
+
+interface Task {
   id: string;
   title: string;
-  description: string | null;
   status: string | null;
+  priority: string | null;
+  due_date: string | null;
 }
 
-interface Ticket {
+interface SupportTicket {
   id: string;
   subject: string;
-  status: string;
   priority: string | null;
+  status: string;
   created_at: string;
 }
 
+interface Appointment {
+  id: string;
+  title: string;
+  start_time: string;
+}
+
+// ── Allowed roles ─────────────────────────────────────────────────────────────
+
+const ALLOWED_ROLES = new Set([
+  "staff",
+  "business_consultant",
+  "support_specialist",
+  "moderator",
+  "admin",
+]);
+
+// ── Badge helpers ─────────────────────────────────────────────────────────────
+
+function TaskStatusBadge({ status }: { status: string | null }) {
+  const map: Record<string, string> = {
+    completed: "bg-green-500/15 text-green-600 border-green-500/30",
+    in_progress: "bg-blue-500/15 text-blue-600 border-blue-500/30",
+    blocked: "bg-red-500/15 text-red-600 border-red-500/30",
+    pending: "bg-yellow-500/15 text-yellow-600 border-yellow-500/30",
+  };
+  const cls = map[status ?? ""] ?? "bg-muted text-muted-foreground border-border";
+  return (
+    <Badge variant="outline" className={cls}>
+      {status ?? "—"}
+    </Badge>
+  );
+}
+
+function PriorityBadge({ priority }: { priority: string | null }) {
+  const map: Record<string, string> = {
+    high: "bg-red-500/15 text-red-600 border-red-500/30",
+    medium: "bg-orange-500/15 text-orange-600 border-orange-500/30",
+    low: "bg-blue-500/15 text-blue-600 border-blue-500/30",
+  };
+  const cls = map[priority ?? ""] ?? "bg-muted text-muted-foreground border-border";
+  return (
+    <Badge variant="outline" className={cls}>
+      {priority ?? "normal"}
+    </Badge>
+  );
+}
+
+// ── Column definitions ────────────────────────────────────────────────────────
+
+const taskColumns: TableColumn<Task>[] = [
+  {
+    key: "title",
+    label: "Title",
+    sortable: true,
+  },
+  {
+    key: "status",
+    label: "Status",
+    render: (item) => <TaskStatusBadge status={item.status} />,
+  },
+  {
+    key: "priority",
+    label: "Priority",
+    render: (item) => <PriorityBadge priority={item.priority} />,
+  },
+  {
+    key: "due_date",
+    label: "Due Date",
+    sortable: true,
+    render: (item) =>
+      item.due_date
+        ? new Date(item.due_date).toLocaleDateString()
+        : <span className="text-muted-foreground">—</span>,
+  },
+];
+
+const ticketColumns: TableColumn<SupportTicket>[] = [
+  {
+    key: "subject",
+    label: "Subject",
+    sortable: true,
+  },
+  {
+    key: "priority",
+    label: "Priority",
+    render: (item) => <PriorityBadge priority={item.priority} />,
+  },
+  {
+    key: "status",
+    label: "Status",
+    render: (item) => (
+      <Badge variant="outline" className="bg-muted text-muted-foreground border-border capitalize">
+        {item.status}
+      </Badge>
+    ),
+  },
+  {
+    key: "created_at",
+    label: "Created",
+    sortable: true,
+    render: (item) => new Date(item.created_at).toLocaleDateString(),
+  },
+];
+
+// ── Component ─────────────────────────────────────────────────────────────────
+
 function StaffDashboard() {
-  const navigate = useNavigate();
-  const { toast } = useToast();
-  const [loading, setLoading] = useState(true);
-  const [date, setDate] = useState<Date | undefined>(new Date());
-  const [tasks, setTasks] = useState<DashboardTask[]>([]);
-  const [tickets, setTickets] = useState<Ticket[]>([]);
-  const [stats, setStats] = useState({
-    activeClients: 0,
-    openTickets: 0,
-    unreadMessages: 0,
-    todaysMeetings: 0,
+  const { user, roleConfig } = useAuth();
+
+  // ── Role guard ──────────────────────────────────────────────────────────────
+  if (roleConfig && !ALLOWED_ROLES.has(roleConfig.role)) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <Card className="max-w-sm w-full text-center p-8">
+          <h2 className="text-xl font-bold text-foreground mb-2">Access Denied</h2>
+          <p className="text-muted-foreground mb-4">You do not have staff privileges.</p>
+          <Button asChild variant="outline">
+            <Link to="/portal">Return to Portal</Link>
+          </Button>
+        </Card>
+      </div>
+    );
+  }
+
+  // ── Queries ─────────────────────────────────────────────────────────────────
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const todayIso = today.toISOString();
+
+  const { data: tasks = [], isLoading: tasksLoading, isError: tasksError } = useQuery({
+    queryKey: ["staff-tasks", user?.id],
+    enabled: !!user?.id,
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("tasks")
+        .select("id, title, status, priority, due_date")
+        .eq("user_id", user!.id)
+        .order("due_date", { ascending: true });
+      if (error) throw error;
+      return (data ?? []) as Task[];
+    },
   });
 
-  useEffect(() => {
-    loadData();
-  }, []);
+  const { data: tickets = [], isLoading: ticketsLoading, isError: ticketsError } = useQuery({
+    queryKey: ["staff-tickets", user?.id],
+    enabled: !!user?.id,
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("support_tickets")
+        .select("id, subject, priority, status, created_at")
+        .eq("assigned_to", user!.id)
+        .neq("status", "resolved")
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      return (data ?? []) as SupportTicket[];
+    },
+  });
 
-  const loadData = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return;
+  const { data: clientCount = 0 } = useQuery({
+    queryKey: ["staff-clients-count", user?.id],
+    enabled: !!user?.id,
+    queryFn: async () => {
+      const { count, error } = await supabase
+        .from("clients")
+        .select("*", { count: "exact", head: true })
+        .eq("assigned_staff_id", user!.id);
+      if (error) throw error;
+      return count ?? 0;
+    },
+  });
 
-    const [
-      { data: tasksData },
-      { data: ticketsData },
-      { count: clientsCount },
-      { count: ticketsCount },
-      { count: messagesCount },
-    ] = await Promise.all([
-      supabase.from("tasks").select("id, title, description, status").eq("user_id", user.id).order("due_date", { ascending: true }).limit(8),
-      supabase.from("tickets").select("id, subject, status, priority, created_at").eq("status", "open").order("created_at", { ascending: false }).limit(6),
-      supabase.from("clients").select("*", { count: "exact", head: true }),
-      supabase.from("tickets").select("*", { count: "exact", head: true }).eq("status", "open"),
-      supabase.from("internal_messages").select("*", { count: "exact", head: true }).eq("recipient_id", user.id).eq("is_read", false),
-    ]);
+  const { data: appointments = [], isLoading: appointmentsLoading } = useQuery({
+    queryKey: ["staff-appointments", user?.id, todayIso],
+    enabled: !!user?.id,
+    queryFn: async () => {
+      const endOfDay = new Date(today);
+      endOfDay.setHours(23, 59, 59, 999);
+      const { data, error } = await supabase
+        .from("appointments")
+        .select("id, title, start_time")
+        .eq("worker_id", user!.id)
+        .gte("start_time", todayIso)
+        .lte("start_time", endOfDay.toISOString())
+        .order("start_time", { ascending: true });
+      if (error) throw error;
+      return (data ?? []) as Appointment[];
+    },
+  });
 
-    const startOfToday = new Date();
-    startOfToday.setHours(0, 0, 0, 0);
-    const endOfToday = new Date();
-    endOfToday.setHours(23, 59, 59, 999);
+  // ── All future appointments for calendar ────────────────────────────────────
+  const { data: allAppointments = [] } = useQuery({
+    queryKey: ["staff-all-appointments", user?.id],
+    enabled: !!user?.id,
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("appointments")
+        .select("id, title, start_time")
+        .eq("worker_id", user!.id)
+        .gte("start_time", todayIso)
+        .order("start_time", { ascending: true });
+      if (error) throw error;
+      return (data ?? []) as Appointment[];
+    },
+  });
 
-    const { count: meetingsCount } = await supabase
-      .from("appointments")
-      .select("*", { count: "exact", head: true })
-      .gte("scheduled_start", startOfToday.toISOString())
-      .lte("scheduled_start", endOfToday.toISOString())
-      .eq("worker_id", user.id);
+  // ── Derived values ──────────────────────────────────────────────────────────
 
-    if (tasksData) setTasks(tasksData);
-    if (ticketsData) setTickets(ticketsData);
-    setStats({
-      activeClients: clientsCount || 0,
-      openTickets: ticketsCount || 0,
-      unreadMessages: messagesCount || 0,
-      todaysMeetings: meetingsCount || 0,
-    });
-    setLoading(false);
-  };
+  const openTasks = tasks.filter((t) => t.status !== "completed");
 
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    navigate("/auth");
-  };
+  const calendarEvents: CalendarEvent[] = allAppointments.map((a) => {
+    const dt = new Date(a.start_time);
+    return {
+      id: a.id,
+      title: a.title ?? "Appointment",
+      date: a.start_time,
+      time: dt.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      type: "appointment",
+    };
+  });
 
-  const priorityColor = (p: string | null) => {
-    switch (p) {
-      case "high": return "bg-red-500/20 text-red-400 border-red-500/30";
-      case "medium": return "bg-amber-500/20 text-amber-400 border-amber-500/30";
-      default: return "bg-gray-500/20 text-gray-400 border-gray-500/30";
-    }
-  };
+  // ── Stat cards ──────────────────────────────────────────────────────────────
 
-  if (loading) return <PortalLoadingSkeleton />;
+  const statCards: StatCardData[] = [
+    {
+      title: "My Tasks",
+      value: openTasks.length,
+      subtitle: "open tasks",
+      icon: ListTodo,
+    },
+    {
+      title: "Open Tickets",
+      value: tickets.length,
+      subtitle: "assigned to you",
+      icon: Ticket,
+    },
+    {
+      title: "My Clients",
+      value: clientCount,
+      subtitle: "assigned clients",
+      icon: Users,
+    },
+    {
+      title: "Today's Meetings",
+      value: appointments.length,
+      subtitle: "scheduled today",
+      icon: CalendarDays,
+    },
+  ];
 
+  // ── Loading state ────────────────────────────────────────────────────────────
+  if (!roleConfig || (tasksLoading && ticketsLoading && appointmentsLoading)) {
+    return <PortalLoadingSkeleton />;
+  }
+
+  // ── Render ───────────────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-[#0B1120] text-gray-100">
-      <header className="border-b border-gray-800/60 bg-[#111827]/80 backdrop-blur-sm">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Button asChild variant="ghost" size="sm" className="text-gray-400 hover:text-white hover:bg-white/5">
-                <Link to="/portal"><ArrowLeft className="w-4 h-4 mr-2" />Back</Link>
-              </Button>
-              <div>
-                <h1 className="text-xl font-bold text-white">Staff & Support</h1>
-                <p className="text-sm text-gray-500">Tasks • Tickets • Clients</p>
-              </div>
-            </div>
-            <Button variant="ghost" size="sm" onClick={handleSignOut} className="text-gray-400 hover:text-white hover:bg-white/5">
-              <LogOut className="w-4 h-4 mr-2" />Sign Out
-            </Button>
-          </div>
-        </div>
-      </header>
-
+    <div className="min-h-screen bg-background text-foreground">
       <main className="container mx-auto px-4 py-6 space-y-6">
-        {/* Stats */}
+        {/* Stat Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[
-            { label: "Active Clients", value: stats.activeClients, icon: Users, color: "text-blue-400", bg: "bg-blue-500/10" },
-            { label: "Open Tickets", value: stats.openTickets, icon: Headphones, color: "text-amber-400", bg: "bg-amber-500/10" },
-            { label: "Messages", value: stats.unreadMessages, icon: MessageSquare, color: "text-emerald-400", bg: "bg-emerald-500/10" },
-            { label: "Today's Meetings", value: stats.todaysMeetings, icon: CalendarDays, color: "text-purple-400", bg: "bg-purple-500/10" },
-          ].map((s) => {
-            const Icon = s.icon;
-            return (
-              <Card key={s.label} className="bg-[#1F2937] border-gray-800/50 p-5">
-                <div className="flex items-center justify-between mb-3">
-                  <div className={`w-10 h-10 ${s.bg} rounded-lg flex items-center justify-center`}>
-                    <Icon className={`w-5 h-5 ${s.color}`} />
-                  </div>
-                  <span className="text-2xl font-bold text-white">{s.value}</span>
-                </div>
-                <p className="text-xs text-gray-500">{s.label}</p>
-              </Card>
-            );
-          })}
+          {statCards.map((card) => (
+            <StatCard key={card.title} data={card} />
+          ))}
         </div>
 
+        {/* Two-column layout */}
         <div className="grid lg:grid-cols-3 gap-6">
+          {/* Left: 2/3 */}
           <div className="lg:col-span-2 space-y-6">
             {/* My Tasks */}
-            <Card className="bg-[#1F2937] border-gray-800/50 p-6">
-              <h2 className="text-lg font-bold text-white flex items-center gap-2 mb-5">
-                <ClipboardCheck className="w-5 h-5 text-blue-400" />
-                My Tasks
-              </h2>
-              <div className="space-y-3">
-                {tasks.length === 0 ? (
-                  <p className="text-center text-gray-500 py-8">No tasks assigned</p>
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <ListTodo className="h-5 w-5 text-primary" />
+                  My Tasks
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                {tasksError ? (
+                  <ErrorState title="Failed to load tasks" />
                 ) : (
-                  tasks.map((task) => (
-                    <div key={task.id} className="flex items-center justify-between p-3 bg-[#111827] rounded-lg border border-gray-800/40">
-                      <div className="min-w-0 flex-1">
-                        <p className="font-medium text-white text-sm">{task.title}</p>
-                        {task.description && <p className="text-xs text-gray-500 mt-0.5 truncate">{task.description}</p>}
-                      </div>
-                      <Badge className="bg-gray-500/20 text-gray-400 border-gray-500/30 text-[10px]">{task.status}</Badge>
-                    </div>
-                  ))
+                  <DataTable
+                    data={tasks}
+                    columns={taskColumns}
+                    isLoading={tasksLoading}
+                    searchPlaceholder="Search tasks..."
+                    emptyTitle="No tasks assigned"
+                    emptyDescription="You have no tasks assigned at the moment."
+                    pageSize={8}
+                  />
                 )}
-              </div>
+              </CardContent>
             </Card>
 
-            {/* Support Tickets */}
-            <Card className="bg-[#1F2937] border-gray-800/50 p-6">
-              <div className="flex items-center justify-between mb-5">
-                <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                  <Headphones className="w-5 h-5 text-amber-400" />
+            {/* Open Tickets */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Ticket className="h-5 w-5 text-primary" />
                   Open Tickets
-                </h2>
-                <Button asChild variant="ghost" size="sm" className="text-gray-400 hover:text-white">
-                  <Link to="/admin/support/tickets">View All</Link>
-                </Button>
-              </div>
-              <div className="space-y-3">
-                {tickets.length === 0 ? (
-                  <p className="text-center text-gray-500 py-8">No open tickets</p>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                {ticketsError ? (
+                  <ErrorState title="Failed to load tickets" />
                 ) : (
-                  tickets.map((ticket) => (
-                    <div key={ticket.id} className="flex items-center justify-between p-3 bg-[#111827] rounded-lg border border-gray-800/40">
-                      <div className="min-w-0 flex-1">
-                        <p className="font-medium text-white text-sm truncate">{ticket.subject}</p>
-                        <p className="text-[10px] text-gray-600">{new Date(ticket.created_at).toLocaleDateString()}</p>
-                      </div>
-                      <Badge className={`text-[10px] ${priorityColor(ticket.priority)}`}>{ticket.priority || "normal"}</Badge>
-                    </div>
-                  ))
+                  <DataTable
+                    data={tickets}
+                    columns={ticketColumns}
+                    isLoading={ticketsLoading}
+                    searchPlaceholder="Search tickets..."
+                    emptyTitle="No open tickets"
+                    emptyDescription="No tickets are currently assigned to you."
+                    pageSize={8}
+                  />
                 )}
-              </div>
+              </CardContent>
             </Card>
           </div>
 
-          {/* Sidebar */}
+          {/* Right: 1/3 */}
           <div className="space-y-6">
-            <Card className="bg-[#1F2937] border-gray-800/50 p-5">
-              <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                <Search className="w-5 h-5 text-blue-400" />
-                Quick Access
-              </h2>
-              <div className="space-y-2">
-                {[
-                  { label: "Client Directory", path: "/admin/clients/businesses", icon: Users },
-                  { label: "Support Tickets", path: "/admin/support/tickets", icon: Headphones },
-                  { label: "Messages", path: "/portal/messages", icon: MessageSquare },
-                  { label: "Activity Log", path: "/admin/activity", icon: Activity },
-                ].map((link) => {
-                  const Icon = link.icon;
-                  return (
-                    <Button key={link.path} asChild variant="ghost" className="w-full justify-start text-gray-400 hover:text-white hover:bg-white/5">
-                      <Link to={link.path}><Icon className="w-4 h-4 mr-2" />{link.label}</Link>
-                    </Button>
-                  );
-                })}
-              </div>
-            </Card>
+            {/* Calendar */}
+            <RealCalendar
+              events={calendarEvents}
+              title="My Schedule"
+            />
 
-            <Card className="bg-[#1F2937] border-gray-800/50 p-5">
-              <h2 className="text-lg font-bold text-white flex items-center gap-2 mb-4">
-                <CalendarDays className="w-5 h-5 text-purple-400" />
-                Calendar
-              </h2>
-              <div className="[&_.rdp]:bg-[#111827] [&_.rdp]:rounded-lg [&_.rdp]:border [&_.rdp]:border-gray-800/50 [&_.rdp]:p-3 [&_.rdp-day]:text-gray-300 [&_.rdp-day:hover]:bg-purple-500/20 [&_.rdp-day_button:hover]:bg-purple-500/20 [&_.rdp-day_button]:text-gray-300 [&_.rdp-day_button.rdp-day_selected]:bg-gradient-to-r [&_.rdp-day_button.rdp-day_selected]:from-purple-500 [&_.rdp-day_button.rdp-day_selected]:to-pink-600 [&_.rdp-day_button.rdp-day_selected]:text-white [&_.rdp-caption]:text-white [&_.rdp-head_cell]:text-gray-500 [&_.rdp-nav_button]:text-gray-400 [&_.rdp-nav_button:hover]:bg-purple-500/20">
-                <Calendar mode="single" selected={date} onSelect={setDate} className="rounded-md" />
-              </div>
+            {/* Quick Actions */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Quick Actions</CardTitle>
+              </CardHeader>
+              <CardContent className="flex flex-col gap-2">
+                <Button
+                  variant="outline"
+                  className="w-full justify-start gap-2"
+                  onClick={() => {
+                    /* placeholder — log time */
+                  }}
+                >
+                  <Clock className="h-4 w-4" />
+                  Log Time
+                </Button>
+                <Button asChild variant="outline" className="w-full justify-start gap-2">
+                  <Link to="/portal/my-tickets">
+                    <Ticket className="h-4 w-4" />
+                    Update Ticket
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" className="w-full justify-start gap-2">
+                  <Link to="/portal/messages">
+                    <MessageSquare className="h-4 w-4" />
+                    Send Message
+                  </Link>
+                </Button>
+              </CardContent>
             </Card>
           </div>
         </div>

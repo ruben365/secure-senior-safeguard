@@ -8,6 +8,7 @@ export interface DashboardMetrics {
   totalEnrollments: number;
   completedCourses: number;
   overallProgress: number;
+  errors: string[];
 }
 
 export interface ThreatEvent {
@@ -29,13 +30,18 @@ export function useDashboardMetrics() {
       } = await supabase.auth.getUser();
       if (!user) return null;
 
-      // Fetch threat events for this user
-      const { data: threats, error: threatError } = await supabase
-        .from("threat_events")
-        .select("*")
-        .eq("profile_id", user.id);
+      const errors: string[] = [];
 
-      if (threatError) console.error("Error fetching threats:", threatError);
+      // Use count query instead of fetching all threat_events rows
+      const { count: blockedCount, error: threatError } = await supabase
+        .from("threat_events")
+        .select("*", { count: "exact", head: true })
+        .eq("profile_id", user.id)
+        .in("status", ["blocked", "resolved"]);
+
+      if (threatError) {
+        errors.push(`Error fetching threats: ${threatError.message}`);
+      }
 
       // Fetch enrollments for this user
       const { data: enrollments, error: enrollError } = await supabase
@@ -43,8 +49,9 @@ export function useDashboardMetrics() {
         .select("*")
         .eq("user_id", user.id);
 
-      if (enrollError)
-        console.error("Error fetching enrollments:", enrollError);
+      if (enrollError) {
+        errors.push(`Error fetching enrollments: ${enrollError.message}`);
+      }
 
       // Fetch user profile to calculate days protected
       const { data: profile, error: profileError } = await supabase
@@ -53,13 +60,18 @@ export function useDashboardMetrics() {
         .eq("id", user.id)
         .single();
 
-      if (profileError) console.error("Error fetching profile:", profileError);
+      if (profileError) {
+        errors.push(`Error fetching profile: ${profileError.message}`);
+      }
+
+      // If all queries failed, throw so React Query surfaces the error state
+      if (threatError && enrollError && profileError) {
+        throw new Error(
+          `All dashboard queries failed: ${errors.join("; ")}`,
+        );
+      }
 
       // Calculate metrics
-      const blockedThreats =
-        threats?.filter(
-          (t) => t.status === "blocked" || t.status === "resolved",
-        ) || [];
       const completedEnrollments =
         enrollments?.filter((e) => e.status === "completed") || [];
 
@@ -72,9 +84,10 @@ export function useDashboardMetrics() {
       );
 
       // Calculate protection score based on various factors
+      const threatsBlocked = blockedCount ?? 0;
       const baseScore = 70;
-      const threatBonus = Math.min(blockedThreats.length * 2, 15); // Up to 15 points for blocking threats
-      const trainingBonus = Math.min(completedEnrollments.length * 5, 15); // Up to 15 points for training
+      const threatBonus = Math.min(threatsBlocked * 2, 15);
+      const trainingBonus = Math.min(completedEnrollments.length * 5, 15);
       const protectionScore = Math.min(
         baseScore + threatBonus + trainingBonus,
         100,
@@ -91,12 +104,13 @@ export function useDashboardMetrics() {
         : 0;
 
       return {
-        threatsBlocked: blockedThreats.length,
+        threatsBlocked,
         daysProtected: Math.max(daysProtected, 1),
         protectionScore,
         totalEnrollments: enrollments?.length || 0,
         completedCourses: completedEnrollments.length,
         overallProgress,
+        errors,
       } as DashboardMetrics;
     },
   });
@@ -119,8 +133,7 @@ export function useThreatEvents(limit = 10) {
         .limit(limit);
 
       if (error) {
-        console.error("Error fetching threat events:", error);
-        return [];
+        throw new Error(`Error fetching threat events: ${error.message}`);
       }
 
       return data as ThreatEvent[];
@@ -149,8 +162,7 @@ export function useTrainingProgress() {
         .order("enrolled_at", { ascending: false });
 
       if (error) {
-        console.error("Error fetching training progress:", error);
-        return [];
+        throw new Error(`Error fetching training progress: ${error.message}`);
       }
 
       return data;

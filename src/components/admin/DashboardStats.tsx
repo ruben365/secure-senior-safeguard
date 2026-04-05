@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { DashboardStatCard } from "./DashboardStatCard";
 import { Users, DollarSign, RefreshCw, AlertTriangle } from "lucide-react";
@@ -10,7 +10,7 @@ interface DashboardData {
   activeSubscriptions: number;
   pendingActions: number;
   newClientsThisMonth: number;
-  revenueGrowth: number;
+  revenueGrowth: number | null;
   expiringSoon: number;
 }
 
@@ -26,6 +26,114 @@ export function DashboardStats() {
   });
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
+
+  const fetchDashboardData = useCallback(async () => {
+    try {
+      setLoading(true);
+
+      // Get current month dates
+      const now = new Date();
+      const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+      const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+      const endOfLastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+
+      const thirtyDaysFromNow = new Date();
+      thirtyDaysFromNow.setDate(thirtyDaysFromNow.getDate() + 30);
+
+      // Parallelize all independent queries
+      const [
+        { count: totalClients },
+        { count: newClientsThisMonth },
+        { count: activeSubscriptions },
+        { count: expiringSoon },
+        { data: orderItemsThisMonth },
+        { data: orderItemsLastMonth },
+        { count: pendingTestimonials },
+        { count: pendingBookings },
+        { count: newInquiries },
+      ] = await Promise.all([
+        supabase
+          .from("clients")
+          .select("*", { count: "exact", head: true }),
+        supabase
+          .from("clients")
+          .select("*", { count: "exact", head: true })
+          .gte("created_at", firstDayOfMonth.toISOString()),
+        supabase
+          .from("subscriptions")
+          .select("*", { count: "exact", head: true })
+          .eq("status", "active"),
+        supabase
+          .from("subscriptions")
+          .select("*", { count: "exact", head: true })
+          .eq("status", "active")
+          .lte("end_date", thirtyDaysFromNow.toISOString())
+          .gte("end_date", now.toISOString()),
+        supabase
+          .from("order_items")
+          .select("total")
+          .gte("created_at", firstDayOfMonth.toISOString()),
+        supabase
+          .from("order_items")
+          .select("total")
+          .gte("created_at", lastMonth.toISOString())
+          .lte("created_at", endOfLastMonth.toISOString()),
+        supabase
+          .from("testimonials")
+          .select("*", { count: "exact", head: true })
+          .eq("status", "pending"),
+        supabase
+          .from("booking_requests")
+          .select("*", { count: "exact", head: true })
+          .eq("status", "pending"),
+        supabase
+          .from("website_inquiries")
+          .select("*", { count: "exact", head: true })
+          .eq("status", "new"),
+      ]);
+
+      const revenueThisMonth =
+        orderItemsThisMonth?.reduce(
+          (sum, item) => sum + Number(item.total || 0),
+          0,
+        ) || 0;
+
+      const revenueLastMonth =
+        orderItemsLastMonth?.reduce(
+          (sum, item) => sum + Number(item.total || 0),
+          0,
+        ) || 0;
+
+      const revenueGrowth =
+        revenueLastMonth > 0
+          ? ((revenueThisMonth - revenueLastMonth) / revenueLastMonth) * 100
+          : null;
+
+      const pendingActions =
+        (pendingTestimonials || 0) +
+        (pendingBookings || 0) +
+        (newInquiries || 0);
+
+      setData({
+        totalClients: totalClients || 0,
+        revenueThisMonth,
+        activeSubscriptions: activeSubscriptions || 0,
+        pendingActions,
+        newClientsThisMonth: newClientsThisMonth || 0,
+        revenueGrowth,
+        expiringSoon: expiringSoon || 0,
+      });
+    } catch (error: any) {
+      console.error("Error fetching dashboard data:", error);
+      toast({
+        title: "Error",
+        description: "Failed to load dashboard statistics",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  }, [toast]);
 
   useEffect(() => {
     fetchDashboardData();
@@ -63,117 +171,7 @@ export function DashboardStats() {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, []);
-
-  const fetchDashboardData = async () => {
-    try {
-      setLoading(true);
-
-      // Get current month dates
-      const now = new Date();
-      const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-      const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-      const endOfLastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-
-      // Fetch total clients
-      const { count: totalClients } = await supabase
-        .from("clients")
-        .select("*", { count: "exact", head: true });
-
-      // Fetch new clients this month
-      const { count: newClientsThisMonth } = await supabase
-        .from("clients")
-        .select("*", { count: "exact", head: true })
-        .gte("created_at", firstDayOfMonth.toISOString());
-
-      // Fetch active subscriptions
-      const { count: activeSubscriptions } = await supabase
-        .from("subscriptions")
-        .select("*", { count: "exact", head: true })
-        .eq("status", "active");
-
-      // Fetch subscriptions expiring in next 30 days
-      const thirtyDaysFromNow = new Date();
-      thirtyDaysFromNow.setDate(thirtyDaysFromNow.getDate() + 30);
-
-      const { count: expiringSoon } = await supabase
-        .from("subscriptions")
-        .select("*", { count: "exact", head: true })
-        .eq("status", "active")
-        .lte("end_date", thirtyDaysFromNow.toISOString())
-        .gte("end_date", now.toISOString());
-
-      // Calculate revenue this month (from order_items)
-      const { data: orderItemsThisMonth } = await supabase
-        .from("order_items")
-        .select("total")
-        .gte("created_at", firstDayOfMonth.toISOString());
-
-      const revenueThisMonth =
-        orderItemsThisMonth?.reduce(
-          (sum, item) => sum + Number(item.total || 0),
-          0,
-        ) || 0;
-
-      // Calculate revenue last month for growth comparison
-      const { data: orderItemsLastMonth } = await supabase
-        .from("order_items")
-        .select("total")
-        .gte("created_at", lastMonth.toISOString())
-        .lte("created_at", endOfLastMonth.toISOString());
-
-      const revenueLastMonth =
-        orderItemsLastMonth?.reduce(
-          (sum, item) => sum + Number(item.total || 0),
-          0,
-        ) || 0;
-
-      const revenueGrowth =
-        revenueLastMonth > 0
-          ? ((revenueThisMonth - revenueLastMonth) / revenueLastMonth) * 100
-          : 0;
-
-      // Count pending actions (pending testimonials, booking requests, inquiries)
-      const { count: pendingTestimonials } = await supabase
-        .from("testimonials")
-        .select("*", { count: "exact", head: true })
-        .eq("status", "pending");
-
-      const { count: pendingBookings } = await supabase
-        .from("booking_requests")
-        .select("*", { count: "exact", head: true })
-        .eq("status", "pending");
-
-      const { count: newInquiries } = await supabase
-        .from("website_inquiries")
-        .select("*", { count: "exact", head: true })
-        .eq("status", "new");
-
-      const pendingActions =
-        (pendingTestimonials || 0) +
-        (pendingBookings || 0) +
-        (newInquiries || 0);
-
-      setData({
-        totalClients: totalClients || 0,
-        revenueThisMonth,
-        activeSubscriptions: activeSubscriptions || 0,
-        pendingActions,
-        newClientsThisMonth: newClientsThisMonth || 0,
-        revenueGrowth,
-        expiringSoon: expiringSoon || 0,
-      });
-    } catch (error: any) {
-      console.error("Error fetching dashboard data:", error);
-      toast({
-        title: "Error",
-        description: "Failed to load dashboard statistics",
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [fetchDashboardData]);
 
   if (loading) {
     return (
@@ -188,6 +186,11 @@ export function DashboardStats() {
     );
   }
 
+  const revenueSubtitle =
+    data.revenueGrowth !== null
+      ? `${data.revenueGrowth >= 0 ? "+" : ""}${data.revenueGrowth.toFixed(1)}% vs last month ${data.revenueGrowth >= 0 ? "\u2191" : "\u2193"}`
+      : "N/A vs last month";
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 admin-stats-grid">
       <DashboardStatCard
@@ -195,7 +198,7 @@ export function DashboardStats() {
         iconBgColor="bg-gradient-to-br from-accent/80 to-accent"
         title="Total Clients"
         value={data.totalClients}
-        subtitle={`+${data.newClientsThisMonth} this month ↑`}
+        subtitle={`+${data.newClientsThisMonth} this month \u2191`}
         subtitleColor="success"
         gradientFrom="hsl(var(--accent) / 0.1)"
         gradientTo="hsl(var(--accent) / 0.05)"
@@ -208,13 +211,12 @@ export function DashboardStats() {
         iconBgColor="bg-gradient-to-br from-success/80 to-success"
         title="Revenue This Month"
         value={Math.round(data.revenueThisMonth)}
-        subtitle={`${data.revenueGrowth >= 0 ? "+" : ""}${(data.revenueGrowth ?? 0).toFixed(1)}% vs last month ${data.revenueGrowth >= 0 ? "↑" : "↓"}`}
-        subtitleColor={data.revenueGrowth >= 0 ? "success" : "destructive"}
+        subtitle={revenueSubtitle}
+        subtitleColor={data.revenueGrowth !== null && data.revenueGrowth >= 0 ? "success" : "destructive"}
         gradientFrom="hsl(var(--success) / 0.1)"
         gradientTo="hsl(var(--success) / 0.05)"
         index={1}
         prefix="$"
-        showSparkline={true}
         link="/admin/orders"
       />
 
@@ -223,7 +225,7 @@ export function DashboardStats() {
         iconBgColor="bg-gradient-to-br from-primary/80 to-primary"
         title="Active Subscriptions"
         value={data.activeSubscriptions}
-        subtitle={`${data.expiringSoon} expiring soon ⚠️`}
+        subtitle={`${data.expiringSoon} expiring soon \u26A0\uFE0F`}
         subtitleColor="warning"
         gradientFrom="hsl(var(--primary) / 0.1)"
         gradientTo="hsl(var(--primary) / 0.05)"
@@ -236,10 +238,10 @@ export function DashboardStats() {
         iconBgColor="bg-gradient-to-br from-yellow-500/80 to-yellow-600"
         title="Requires Attention"
         value={data.pendingActions}
-        subtitle="View all →"
+        subtitle="View all"
         subtitleColor="warning"
-        gradientFrom="hsl(var(--teal-100))"
-        gradientTo="hsl(var(--teal-300))"
+        gradientFrom="#ccfbf1"
+        gradientTo="#99f6e4"
         index={3}
         isPulsing={data.pendingActions > 0}
         link="/admin/pending"
