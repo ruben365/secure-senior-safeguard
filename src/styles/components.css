@@ -4,12 +4,12 @@
 
 /* Skeuomorphic Card - Glassmorphism hybrid with warm ombre depth */
 .skeuo-card {
-  background: hsl(0 0% 100%);
+  background: hsl(var(--card));
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  border-radius: 1rem;
+  border-radius: var(--radius);
   padding: 1.25rem;
-  border: 1px solid hsl(240 6% 90%);
+  border: 1px solid hsl(var(--border));
   box-shadow: var(--shadow-card);
   transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
