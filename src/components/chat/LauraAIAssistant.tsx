@@ -1,3 +1,4 @@
+// Laura AI Assistant Component
 import { useEffect, useRef, useState, forwardRef } from "react";
 import { Link } from "react-router-dom";
 import {
