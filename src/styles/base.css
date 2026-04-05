@@ -203,55 +203,55 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
 
   /* ===== SKEUOMORPHISM 2.0 - GLOBAL MATERIAL STYLES ===== */
   :root {
-    /* Modern clean shadow layers */
+    /* Plume shadow layers - warm plum tint */
     --skeuo-shadow-raised:
-      0 1px 2px rgba(0, 0, 0, 0.04),
-      0 2px 4px rgba(0, 0, 0, 0.03);
-    --skeuo-shadow-pressed: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+      0 1px 2px rgba(80, 40, 80, 0.04),
+      0 2px 4px rgba(80, 40, 80, 0.03);
+    --skeuo-shadow-pressed: inset 0 1px 2px rgba(80, 40, 80, 0.08);
     --skeuo-shadow-floating:
-      0 2px 8px rgba(0, 0, 0, 0.04),
-      0 8px 24px rgba(0, 0, 0, 0.06);
+      0 2px 8px rgba(80, 40, 80, 0.04),
+      0 8px 24px rgba(80, 40, 80, 0.06);
     --skeuo-highlight: linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.25) 0%,
+      rgba(255, 255, 255, 0.3) 0%,
       transparent 50%
     );
     --skeuo-inset:
-      inset 0 1px 2px rgba(0, 0, 0, 0.06),
-      inset 0 -1px 1px rgba(255, 255, 255, 0.5);
+      inset 0 1px 2px rgba(80, 40, 80, 0.06),
+      inset 0 -1px 1px rgba(255, 255, 255, 0.6);
 
-    /* Neutral modern shadows */
+    /* Plum-tinted section shadows */
     --skeuo-shadow-coral:
-      0 2px 4px rgba(0, 0, 0, 0.04),
-      0 4px 8px rgba(0, 0, 0, 0.04),
-      0 8px 16px rgba(0, 0, 0, 0.03);
+      0 2px 4px rgba(80, 40, 80, 0.04),
+      0 4px 8px rgba(80, 40, 80, 0.04),
+      0 8px 16px rgba(80, 40, 80, 0.03);
     --skeuo-shadow-lavender:
-      0 2px 4px rgba(0, 0, 0, 0.04),
-      0 4px 8px rgba(0, 0, 0, 0.04),
-      0 8px 16px rgba(0, 0, 0, 0.03);
+      0 2px 4px rgba(80, 40, 80, 0.04),
+      0 4px 8px rgba(80, 40, 80, 0.04),
+      0 8px 16px rgba(80, 40, 80, 0.03);
     --skeuo-shadow-mixed:
-      0 2px 4px rgba(0, 0, 0, 0.04),
-      0 6px 12px rgba(0, 0, 0, 0.05),
-      0 12px 24px rgba(0, 0, 0, 0.04);
+      0 2px 4px rgba(80, 40, 80, 0.04),
+      0 6px 12px rgba(80, 40, 80, 0.05),
+      0 12px 24px rgba(80, 40, 80, 0.04);
 
-    /* Clean card shadow */
+    /* Warm ombre card shadow */
     --skeuo-shadow-ombre:
-      0 1px 3px rgba(0, 0, 0, 0.04),
-      0 4px 12px rgba(0, 0, 0, 0.06),
-      inset 0 1px 0 hsl(0 0% 100% / 0.9);
+      0 1px 3px rgba(80, 40, 80, 0.04),
+      0 4px 12px rgba(80, 40, 80, 0.06),
+      inset 0 1px 0 hsl(30 25% 100% / 0.9);
 
-    /* Clean glass backgrounds */
+    /* Warm glass backgrounds */
     --skeuo-glass-bg: linear-gradient(
       135deg,
-      hsl(0 0% 100% / 0.96) 0%,
-      hsl(0 0% 99% / 0.92) 100%
+      hsl(30 20% 100% / 0.96) 0%,
+      hsl(30 15% 98% / 0.92) 100%
     );
-    --skeuo-glass-border: hsl(240 6% 90%);
+    --skeuo-glass-border: hsl(270 8% 88%);
     --skeuo-glass-blur: none;
     --skeuo-glass-shadow:
-      0 4px 12px rgba(0, 0, 0, 0.06),
-      0 1px 3px rgba(0, 0, 0, 0.04),
-      inset 0 1px 0 hsl(0 0% 100% / 0.92);
+      0 4px 12px rgba(80, 40, 80, 0.06),
+      0 1px 3px rgba(80, 40, 80, 0.04),
+      inset 0 1px 0 hsl(30 20% 100% / 0.92);
 
     /* Primary gradient for accents */
     --skeuo-gradient-accent: linear-gradient(
