@@ -19,6 +19,7 @@ import { LiveSecurityStats } from "@/components/home/LiveSecurityStats";
 import { WorkshopsPromo } from "@/components/home/WorkshopsPromo";
 import { FamilyTrustSection } from "@/components/home/FamilyTrustSection";
 import { ArrowRight, CheckCircle, Phone, Shield } from "lucide-react";
+import { SectionDivider, TrustMarquee, MeshBackground } from "@/components/pro";
 
 const FAQPreview = lazy(() =>
   import("@/components/home/FAQPreview").then((m) => ({
@@ -68,25 +69,40 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
             <HeroHomepage />
           </section>
 
-          {/* Navigation is now built into the hero section */}
+          {/* Sticky nav for content below the hero */}
+          <Navigation />
 
           {/* 2. Live Threat Ticker */}
           <ThreatTicker />
 
+          {/* Trust Marquee — scrolling credibility strip */}
+          <TrustMarquee className="border-y border-border/40 bg-muted/20" />
+
           {/* 3. Stats + Who We Are + Real Results */}
-          <div id="stats">
-            <HomeIntroSection />
-          </div>
+          <MeshBackground variant="subtle" withOrbs>
+            <div id="stats">
+              <HomeIntroSection />
+            </div>
+          </MeshBackground>
+
+          {/* Wave divider into dark section */}
+          <SectionDivider variant="wave" color="background" />
 
           {/* 4. Live Security Command Center — dark premium dashboard */}
           <div id="live-security">
             <LiveSecurityStats />
           </div>
 
+          {/* Curve divider out of dark section */}
+          <SectionDivider variant="curve" color="background" flip />
+
           {/* 5. Services Grid */}
-          <div id="services">
+          <div id="services" className="dot-grid-bg">
             <SiteOrientationGrid />
           </div>
+
+          {/* Gradient glow strip between sections */}
+          <div className="section-glow-strip" />
 
           {/* 6. Protection Training Promo */}
           <div id="workshops">
@@ -94,24 +110,37 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
           </div>
 
           {/* 7. How It Works — 3 Steps */}
-          <div id="get-protected">
-            <PromoStrip />
-          </div>
+          <MeshBackground variant="vibrant">
+            <div id="get-protected">
+              <PromoStrip />
+            </div>
+          </MeshBackground>
+
+          <SectionDivider variant="mountains" color="muted" />
 
           {/* 8. Family Trust Section */}
-          <div id="trust">
+          <div id="trust" className="bg-muted/30">
             <FamilyTrustSection />
           </div>
 
+          <SectionDivider variant="wave" color="background" flip />
+
           {/* 9. Testimonials */}
-          <div id="testimonials" className="bg-muted/30">
+          <div id="testimonials">
             <TestimonialCarousel />
           </div>
 
+          {/* Gradient divider */}
+          <div className="divider-gradient-colored my-0" />
+
           {/* 10. Why Choose Us */}
-          <div id="why-us">
-            <TrustBadgesSection />
-          </div>
+          <MeshBackground variant="subtle" withDots>
+            <div id="why-us">
+              <TrustBadgesSection />
+            </div>
+          </MeshBackground>
+
+          <SectionDivider variant="curve" color="background" />
 
           {/* 11. Blog Preview */}
           <section id="blog">
@@ -121,11 +150,14 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
           </section>
 
           {/* 12. FAQ */}
-          <section id="faq">
+          <section id="faq" className="bg-muted/20">
+            <SectionDivider variant="slant" color="muted" flip />
             <LazySection>
               <FAQPreview />
             </LazySection>
           </section>
+
+          <SectionDivider variant="wave" color="background" flip />
 
           {/* 13. Newsletter */}
           <section id="newsletter">

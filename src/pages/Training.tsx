@@ -61,6 +61,7 @@ import { SEO } from "@/components/SEO";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 import { usePrerenderBlocker } from "@/contexts/PrerenderContext";
+import { SectionDivider, MeshBackground } from "@/components/pro";
 
 import seniorCouple from "@/assets/senior-couple-active.jpg";
 
@@ -641,7 +642,7 @@ function LearnAndTrain() {
 
         {/* ══════════ SECTION 1: WHY FAMILIES TRUST US ══════════ */}
         <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background dot-grid-bg" />
           
           <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto px-4 lg:px-12 relative z-10">
@@ -754,6 +755,8 @@ function LearnAndTrain() {
             </div>
           </div>
         </section>
+
+        <SectionDivider variant="wave" color="muted" />
 
         {/* ══════════ GRADIENT DIVIDER ══════════ */}
         <div className="h-1.5 bg-gradient-to-r from-primary via-accent to-primary" />
@@ -927,6 +930,7 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 5: THREAT ANALYSIS ══════════ */}
+        <MeshBackground variant="subtle" withOrbs>
         <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
           <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
@@ -991,8 +995,10 @@ function LearnAndTrain() {
           </div>
         </section>
 
+        </MeshBackground>
+
         {/* ══════════ GRADIENT DIVIDER ══════════ */}
-        <div className="h-1.5 bg-gradient-to-r from-accent via-primary to-accent" />
+        <div className="divider-gradient-colored" />
 
         {/* ══════════ SECTION 6: AI PROFESSIONAL TRAINING ══════════ */}
         <section id="ai-pro-training" className="py-10 sm:py-16 md:py-20 bg-muted/20">
@@ -1048,7 +1054,7 @@ function LearnAndTrain() {
 
         {/* ══════════ SECTION 7: SECURE YOUR FAMILY ══════════ */}
         <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background dot-grid-bg" />
           <div className="absolute bottom-20 right-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto px-4 lg:px-12 relative z-10">
             <div className="text-center mb-14">
@@ -1246,6 +1252,8 @@ function LearnAndTrain() {
             </div>
           </section>
         )}
+
+        <div className="section-glow-strip" />
 
         {/* ══════════ FINAL CTA ══════════ */}
         <section className="py-16 sm:py-20 md:py-24 relative overflow-hidden">

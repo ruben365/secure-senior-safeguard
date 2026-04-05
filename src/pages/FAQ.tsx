@@ -33,6 +33,7 @@ import {
 } from "@/components/ui/accordion";
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
+import { SectionDivider, MeshBackground } from "@/components/pro";
 
 interface FAQ {
   id: string;
@@ -468,6 +469,7 @@ export default function FAQ() {
           <div className="hidden lg:block h-14" />
           <div className="lg:hidden h-6" />
 
+          <MeshBackground variant="subtle" withDots>
           <TrustBar />
 
           {/* Platform Guide Section */}
@@ -490,6 +492,8 @@ export default function FAQ() {
               </div>
             </div>
           </section>
+
+          <SectionDivider variant="curve" color="background" />
 
           {/* Search & Filter Section - Redesigned */}
           <section className="py-6 bg-gradient-to-b from-muted/30 to-background">
@@ -531,6 +535,8 @@ export default function FAQ() {
             </div>
           </section>
 
+          <SectionDivider variant="curve" color="background" />
+
           {/* Category Tabs */}
           <section className="py-4 border-y border-border/40 bg-muted/20">
             <div className="container mx-auto px-4">
@@ -560,6 +566,8 @@ export default function FAQ() {
               </div>
             </div>
           </section>
+
+          <SectionDivider variant="curve" color="background" />
 
           {/* FAQ Accordion */}
           <section className="py-4 sm:py-6">
@@ -611,6 +619,8 @@ export default function FAQ() {
             </div>
           </section>
 
+          <SectionDivider variant="curve" color="background" />
+
           {/* Still Have Questions CTA */}
           <section className="py-12 sm:py-16 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
@@ -645,6 +655,8 @@ export default function FAQ() {
             </div>
           </section>
 
+          <SectionDivider variant="curve" color="background" />
+
           {/* AI Image Disclaimer */}
           <section className="py-12 bg-muted/20">
             <div className="container mx-auto px-4">
@@ -653,7 +665,9 @@ export default function FAQ() {
               </div>
             </div>
           </section>
+          </MeshBackground>
 
+          <div className="section-glow-strip" />
           <Footer />
         </main>
       </div>

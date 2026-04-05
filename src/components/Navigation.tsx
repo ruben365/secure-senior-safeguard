@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   Menu,
@@ -8,6 +8,7 @@ import {
   LayoutDashboard,
   Heart,
   ChevronDown,
+  Bell,
 } from "lucide-react";
 import { PrefetchLink } from "@/components/PrefetchLink";
 import { ShoppingCart } from "@/components/ShoppingCart";
@@ -41,7 +42,6 @@ const Navigation = React.memo(() => {
 
   const isAdminOrStaff = user && roleConfig;
 
-  // Close "More" dropdown on outside click
   React.useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (moreRef.current && !moreRef.current.contains(e.target as Node)) {
@@ -77,12 +77,18 @@ const Navigation = React.memo(() => {
   };
 
   const isActiveLink = (href: string) => {
-    return (
-      location.pathname === href || location.pathname.startsWith(href + "/")
-    );
+    return location.pathname === href || location.pathname.startsWith(href + "/");
   };
 
   const isSecondaryActive = secondaryLinks.some((l) => isActiveLink(l.href));
+
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <>
@@ -94,10 +100,10 @@ const Navigation = React.memo(() => {
         />
       )}
 
-      <nav className="sticky top-0 z-[9999] bg-[#080d1a]/95 backdrop-blur-md border-b border-white/[0.06]">
+      <nav className={`sticky top-0 z-[9999] transition-colors duration-300 ${scrolled ? "bg-[#080d1a]/95 backdrop-blur-md border-b border-white/[0.06]" : "bg-transparent"}`}>
         <div className="container mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
           <div className="flex items-center justify-between h-[68px]">
-            {/* Logo */}
+            {/* Logo — identical to hero */}
             <a
               href="/"
               className="flex items-center gap-2.5 hover:opacity-90 transition-opacity duration-150 flex-shrink-0 no-underline"
@@ -113,16 +119,12 @@ const Navigation = React.memo(() => {
                 className="w-[38px] h-[38px] object-contain flex-shrink-0 brightness-0 invert"
               />
               <div className="flex flex-col leading-none min-w-0">
-                <span className="text-[17px] font-extrabold text-white tracking-tight">
-                  InVision Network
-                </span>
-                <span className="text-[10px] font-bold text-gray-400 hidden sm:block tracking-widest uppercase">
-                  AI Scam Protection
-                </span>
+                <span className="text-[17px] font-extrabold text-white tracking-tight">InVision Network</span>
+                <span className="text-[10px] font-bold text-gray-400 hidden sm:block tracking-widest uppercase">AI Scam Protection</span>
               </div>
             </a>
 
-            {/* Desktop Navigation — centered */}
+            {/* Desktop Links — identical to hero */}
             <div className="hidden lg:flex items-center gap-1">
               {primaryLinks.map((link) => {
                 const isActive = isActiveLink(link.href);
@@ -182,8 +184,18 @@ const Navigation = React.memo(() => {
               </div>
             </div>
 
-            {/* Right Side */}
+            {/* Right Side — identical to hero */}
             <div className="flex items-center gap-2">
+              {/* Bell notification */}
+              <button
+                type="button"
+                className="hidden lg:flex items-center justify-center w-9 h-9 rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-colors relative"
+                aria-label="Notifications"
+              >
+                <Bell className="w-4 h-4" />
+                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-violet-500 rounded-full" />
+              </button>
+
               <ShoppingCart />
 
               {/* Phone */}
@@ -193,9 +205,7 @@ const Navigation = React.memo(() => {
                 aria-label={`Call us at ${SITE.phone.display}`}
               >
                 <Phone className="w-4 h-4" />
-                <span className="hidden xl:inline text-sm font-medium">
-                  {SITE.phone.display}
-                </span>
+                <span className="hidden xl:inline text-sm font-medium">{SITE.phone.display}</span>
               </a>
 
               {/* Donate */}
@@ -212,12 +222,12 @@ const Navigation = React.memo(() => {
               {/* Divider */}
               <div className="hidden lg:block w-px h-6 bg-gray-700 mx-1" />
 
-              {/* Login / Dashboard */}
+              {/* Login / Dashboard — pill shape, glow, identical to hero */}
               {isAdminOrStaff ? (
                 <Link
                   to="/admin"
                   aria-label="Go to Dashboard"
-                  className="flex items-center gap-1.5 h-9 px-5 text-sm font-semibold rounded-lg bg-violet-600 hover:bg-violet-700 text-white transition-colors shadow-sm"
+                  className="flex items-center gap-1.5 h-9 px-6 text-sm font-semibold rounded-full bg-violet-600 hover:bg-violet-500 text-white transition-all shadow-[0_0_15px_rgba(124,58,237,0.2)]"
                 >
                   <LayoutDashboard className="h-4 w-4" />
                   Dashboard
@@ -226,7 +236,7 @@ const Navigation = React.memo(() => {
                 <Link
                   to="/portal"
                   aria-label="Login to your account"
-                  className="h-9 px-5 text-sm font-semibold rounded-lg bg-violet-600 hover:bg-violet-700 text-white transition-colors shadow-sm inline-flex items-center"
+                  className="h-9 px-6 text-sm font-semibold rounded-full bg-violet-600 hover:bg-violet-500 text-white transition-all shadow-[0_0_15px_rgba(124,58,237,0.2)] inline-flex items-center"
                 >
                   Login
                 </Link>
@@ -248,10 +258,9 @@ const Navigation = React.memo(() => {
             </div>
           </div>
         </div>
-
       </nav>
 
-      {/* Mobile Menu (dark themed) — outside nav for proper stacking */}
+      {/* Mobile Menu — outside nav for proper stacking */}
       {mobileMenuOpen && (
         <div className="lg:hidden fixed top-[68px] left-0 right-0 bottom-0 border-t border-gray-800 z-[10001] overflow-y-auto overscroll-contain pb-[calc(env(safe-area-inset-bottom)+1.25rem)] [-webkit-overflow-scrolling:touch] bg-[#080d1a]">
           <div className="container mx-auto px-4 py-4 space-y-1">
@@ -276,7 +285,6 @@ const Navigation = React.memo(() => {
               );
             })}
 
-            {/* Mobile Actions */}
             <div className="pt-4 border-t border-gray-800 mt-3 space-y-3">
               <button
                 type="button"

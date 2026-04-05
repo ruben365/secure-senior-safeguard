@@ -53,6 +53,7 @@ import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import supportAgentPhoto from "@/assets/support-agent.jpg";
 import heroContactBranded from "@/assets/hero-contact-branded.jpg";
 import { SITE } from "@/config/site";
+import { SectionDivider, MeshBackground } from "@/components/pro";
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
@@ -208,23 +209,14 @@ function Contact() {
         </Hero>
       </div>
 
-      {/* Spacer */}
-      <div className="h-8" />
+      <SectionDivider variant="curve" color="background" />
 
-      <div className="py-16 bg-gradient-to-b from-background via-muted/30 to-background relative overflow-hidden">
-        {/* Premium Background Effects + Nature */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
-        </div>
-        
-
+      <MeshBackground variant="vibrant" withOrbs>
+      <div className="py-16 relative overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
-          {/* Contact Methods Grid — matches Business card style */}
+          {/* Contact Methods Grid */}
           <div className="text-center mb-10">
-            <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
-              Get in Touch
-            </span>
+            <span className="frosted-pill mb-4">Get in Touch</span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
               How Can We <span className="text-primary">Help?</span>
             </h2>
@@ -237,10 +229,10 @@ function Contact() {
             {contactMethods.map((method, index) => {
               const IconComponent = method.icon;
               return (
-                <div key={index} className="bg-card/70 backdrop-blur-xl border border-border/40 rounded-2xl p-6 shadow-sm hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/20 transition-all duration-500 hover:-translate-y-2 h-full relative overflow-hidden">
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-accent" />
-                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
-                    <IconComponent className="w-7 h-7 text-primary" />
+                <div key={index} className="glow-card shine-hover p-6 h-full relative overflow-hidden">
+                  <div className="relative z-10">
+                  <div className="icon-glow-ring w-14 h-14 rounded-2xl bg-gradient-to-br from-[hsl(var(--primary)/0.1)] to-[hsl(var(--accent)/0.08)] flex items-center justify-center mb-4">
+                    <IconComponent className="w-7 h-7 text-[hsl(var(--accent))]" />
                   </div>
                   <h3 className="text-lg font-bold text-foreground mb-2">{method.title}</h3>
                   <p className="font-semibold text-foreground mb-1 text-sm">
@@ -264,6 +256,7 @@ function Contact() {
                   >
                     <a href={method.action}>{method.actionText}</a>
                   </Button>
+                  </div>
                 </div>
               );
             })}
@@ -721,6 +714,9 @@ function Contact() {
           </div>
         </div>
       </div>
+      </MeshBackground>
+
+      <div className="section-glow-strip" />
 
       <Footer />
     </PageTransition>

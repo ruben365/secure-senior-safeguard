@@ -64,6 +64,7 @@ import { VideoLightbox } from "@/components/VideoLightbox";
 import { SEO } from "@/components/SEO";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
+import { SectionDivider, MeshBackground } from "@/components/pro";
 
 
 const businessHeadlines = [
@@ -554,7 +555,7 @@ function Business() {
         </div>
 
         {/* ═══════════════════ SERVICES ═══════════════════ */}
-        <section id="services" className="py-24 relative overflow-hidden">
+        <section id="services" className="py-24 relative overflow-hidden dot-grid-bg">
           {/* Premium background */}
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
           <div className="absolute top-20 left-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
@@ -696,6 +697,8 @@ function Business() {
             </div>
           </div>
         </section>
+
+        <SectionDivider variant="wave" color="muted" />
 
         {/* ═══════════════════ COMPLETE PLATFORM ═══════════════════ */}
         <section className="py-28 relative overflow-hidden">
@@ -1106,6 +1109,8 @@ function Business() {
           </div>
         </section>
 
+        <SectionDivider variant="curve" color="muted" flip />
+
         {/* ═══════════════════ WEBSITE INSURANCE ═══════════════════ */}
         <section id="website-insurance" className="py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-muted/60 via-muted/40 to-muted/60" />
@@ -1298,6 +1303,8 @@ function Business() {
             </div>
           </div>
         </section>
+
+        <SectionDivider variant="slant" color="muted" />
 
         {/* ═══════════════════ AI INSURANCE ═══════════════════ */}
         <section id="ai-insurance" className="py-24 relative overflow-hidden">
@@ -1673,8 +1680,10 @@ function Business() {
           </div>
         </section>
 
+        <div className="divider-gradient-colored" />
+
         {/* ═══════════════════ ILLUSTRATION & VISUAL ART ═══════════════════ */}
-        <section id="illustration" className="py-24 relative overflow-hidden">
+        <section id="illustration" className="py-24 relative overflow-hidden dot-grid-bg">
           {/* Decorative background */}
           <div className="absolute inset-0 bg-gradient-to-b from-muted/40 via-background to-muted/30" />
           <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-coral-100/20 via-transparent to-transparent rounded-full blur-3xl pointer-events-none" />
@@ -1804,6 +1813,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ WHY CHOOSE US ═══════════════════ */}
+        <MeshBackground variant="vibrant" withOrbs>
         <section className="py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
           
@@ -1875,6 +1885,9 @@ function Business() {
             </AnimatedSection>
           </div>
         </section>
+        </MeshBackground>
+
+        <SectionDivider variant="mountains" color="background" />
 
         {/* ═══════════════════ TESTIMONIALS ═══════════════════ */}
         {(isAdmin || businessTestimonials.length > 0) &&
@@ -1930,6 +1943,8 @@ function Business() {
             </div>
           </section>
         }
+
+        <div className="section-glow-strip" />
 
         {/* Final CTA */}
         <CTASection

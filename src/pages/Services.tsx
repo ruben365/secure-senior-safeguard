@@ -23,6 +23,7 @@ import { SEO } from "@/components/SEO";
 import { supabase } from "@/integrations/supabase/client";
 import { trackButtonClick } from "@/utils/analyticsTracker";
 import { usePrerenderBlocker } from "@/contexts/PrerenderContext";
+import { SectionDivider, MeshBackground } from "@/components/pro";
 import {
   Shield,
   Bot,
@@ -318,12 +319,14 @@ const Services = () => {
         </Hero>
 
         {/* Benefits Section */}
-        <section className="py-12 md:py-16 lg:py-20 bg-background">
+        <MeshBackground variant="subtle" withOrbs>
+        <section className="py-12 md:py-16 lg:py-20">
           <div className="container mx-auto px-4">
             <ScrollReveal>
               <div className="text-center mb-12">
+                <span className="frosted-pill mb-4">Why Choose Us</span>
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                  Why Choose InVision Network?
+                  Why Choose <span className="gradient-text-brand">InVision Network</span>?
                 </h2>
                 <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
                   We're not just a service provider. We're your partners in
@@ -335,26 +338,27 @@ const Services = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 spacing-lg">
               {benefits.map((benefit, index) => (
                 <ScrollReveal key={index} delay={index * 100}>
-                  <Card className="h-full glass-card border-white/30 transition-all duration-300">
-                    <CardHeader>
-                      <div
-                        className={`w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-4`}
-                      >
-                        <benefit.icon className="h-6 w-6 text-primary-foreground" />
+                  <div className="h-full feature-highlight">
+                    <div className="flex items-start gap-4">
+                      <div className="icon-glow-ring flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-[hsl(var(--primary)/0.1)] to-[hsl(var(--accent)/0.08)] flex items-center justify-center">
+                        <benefit.icon className="h-6 w-6 text-[hsl(var(--accent))]" />
                       </div>
-                      <CardTitle className="text-xl">{benefit.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-muted-foreground">
-                        {benefit.description}
-                      </p>
-                    </CardContent>
-                  </Card>
+                      <div>
+                        <h3 className="text-xl font-bold mb-2">{benefit.title}</h3>
+                        <p className="text-muted-foreground">
+                          {benefit.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </ScrollReveal>
               ))}
             </div>
           </div>
         </section>
+        </MeshBackground>
+
+        <SectionDivider variant="wave" color="muted" />
 
         {/* Services Grid */}
         <section id="services" className="py-12 md:py-16 lg:py-20 bg-muted/30">
@@ -483,8 +487,10 @@ const Services = () => {
           </div>
         </section>
 
+        <SectionDivider variant="curve" color="background" flip />
+
         {/* Comparison Table */}
-        <section className="py-12 md:py-16 lg:py-20 bg-background">
+        <section className="py-12 md:py-16 lg:py-20 bg-background dot-grid-bg">
           <div className="container mx-auto px-4">
             <ScrollReveal>
               <div className="text-center mb-12">
@@ -557,6 +563,8 @@ const Services = () => {
           </div>
         </section>
 
+        <div className="divider-gradient-colored" />
+
         {/* Testimonials */}
         {testimonials.length > 0 && (
           <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
@@ -589,8 +597,11 @@ const Services = () => {
           </section>
         )}
 
+        <SectionDivider variant="mountains" color="background" flip />
+
         {/* FAQ Section */}
-        <section className="py-12 md:py-16 lg:py-20 bg-background">
+        <MeshBackground variant="vibrant">
+        <section className="py-12 md:py-16 lg:py-20">
           <div className="container mx-auto px-4">
             <ScrollReveal>
               <div className="text-center mb-12">
@@ -619,6 +630,9 @@ const Services = () => {
             </div>
           </div>
         </section>
+        </MeshBackground>
+
+        <div className="section-glow-strip" />
 
         {/* CTA Section */}
         <CTASection

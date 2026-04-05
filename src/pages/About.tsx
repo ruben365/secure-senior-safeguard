@@ -25,6 +25,7 @@ import { AchievementsShowcase } from "@/components/AchievementsShowcase";
 import { AIImageDisclaimer } from "@/components/AIImageDisclaimer";
 import { trackButtonClick } from "@/utils/analyticsTracker";
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
+import { SectionDivider, MeshBackground, GlowCard } from "@/components/pro";
 // Team and culture photos
 import teamDiverse1 from "@/assets/team-diverse-1.jpg";
 import businessCollaboration from "@/assets/business-collaboration.jpg";
@@ -158,8 +159,9 @@ function About() {
       <TrustBar />
 
       {/* Our Story */}
-      <section className="py-10 sm:py-16 md:py-20 bg-background relative overflow-hidden">
-        
+      <MeshBackground variant="subtle" withOrbs>
+      <section className="py-10 sm:py-16 md:py-20 bg-transparent relative overflow-hidden">
+
         <div className="container mx-auto px-4 lg:px-12">
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div>
@@ -211,6 +213,9 @@ function About() {
           </div>
         </div>
       </section>
+      </MeshBackground>
+
+      <SectionDivider variant="wave" color="muted" />
 
       {/* Timeline */}
       <section className="py-10 sm:py-16 md:py-20 bg-muted/30 relative overflow-hidden">
@@ -306,15 +311,16 @@ function About() {
         </div>
       </section>
 
+      <SectionDivider variant="curve" color="muted" flip />
+
       {/* Values */}
-      <section className="py-10 sm:py-16 md:py-20 bg-muted/30">
+      <MeshBackground variant="vibrant" withDots>
+      <section className="py-10 sm:py-16 md:py-20">
         <div className="container mx-auto px-4 lg:px-12">
           <div className="text-center mb-14">
-            <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
-              Our Values
-            </span>
+            <span className="frosted-pill mb-4">Our Values</span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
-              What Drives Us <span className="text-primary">Every Day</span>
+              What Drives Us <span className="gradient-text-brand">Every Day</span>
             </h2>
           </div>
 
@@ -322,10 +328,9 @@ function About() {
             {values.map((value) => {
               const Icon = value.icon;
               return (
-                <div key={value.title} className="bg-card/70 backdrop-blur-xl border border-border/40 rounded-2xl p-6 text-center shadow-sm hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/20 transition-all duration-500 hover:-translate-y-2 h-full relative overflow-hidden">
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-accent" />
-                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                    <Icon className="w-7 h-7 text-primary" />
+                <GlowCard key={value.title} className="text-center h-full">
+                  <div className="icon-glow-ring w-14 h-14 rounded-2xl bg-gradient-to-br from-[hsl(var(--primary)/0.1)] to-[hsl(var(--accent)/0.08)] flex items-center justify-center mx-auto mb-4">
+                    <Icon className="w-7 h-7 text-[hsl(var(--accent))]" />
                   </div>
                   <h3 className="text-lg font-bold text-foreground mb-2">
                     {value.title}
@@ -333,12 +338,15 @@ function About() {
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     {value.description}
                   </p>
-                </div>
+                </GlowCard>
               );
             })}
           </div>
         </div>
       </section>
+      </MeshBackground>
+
+      <SectionDivider variant="mountains" color="background" />
 
       {/* Community Impact */}
       <section className="py-16 md:py-24 relative overflow-hidden">
@@ -360,12 +368,14 @@ function About() {
 
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {[
-              { emoji: "🏠", title: "Ohio-Based", desc: "Serving local communities across the Buckeye State" },
-              { emoji: "🎖️", title: "Veteran-Supporting", desc: "Honoring those who served with special discounts" },
-              { emoji: "💙", title: "Mission-Driven", desc: "Protection over profit, always" },
+              { icon: MapPin, title: "Ohio-Based", desc: "Serving local communities across the Buckeye State" },
+              { icon: Award, title: "Veteran-Supporting", desc: "Honoring those who served with special discounts" },
+              { icon: Heart, title: "Mission-Driven", desc: "Protection over profit, always" },
             ].map((item) => (
-              <div key={item.title} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-1">
-                <div className="text-4xl mb-4">{item.emoji}</div>
+              <div key={item.title} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-1 shine-hover">
+                <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/15 flex items-center justify-center">
+                  <item.icon className="w-7 h-7 text-white" />
+                </div>
                 <div className="font-bold text-xl mb-2">{item.title}</div>
                 <div className="text-sm text-white/95">{item.desc}</div>
               </div>
@@ -373,6 +383,8 @@ function About() {
           </div>
         </div>
       </section>
+
+      <SectionDivider variant="wave" color="background" flip />
 
       {/* Who We Help */}
       <section className="py-10 sm:py-16 md:py-20 bg-background">
@@ -431,6 +443,8 @@ function About() {
 
       {/* Service Areas with Interactive Map */}
       <OhioServiceMap />
+
+      <div className="section-glow-strip" />
 
       {/* CTA with Field Background */}
       <section className="py-24 md:py-32 relative overflow-hidden" id="cta">
