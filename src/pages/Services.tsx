@@ -7,13 +7,6 @@ import CTASection from "@/components/CTASection";
 import TestimonialCard from "@/components/TestimonialCard";
 import { PageTransition } from "@/components/PageTransition";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
@@ -23,25 +16,19 @@ import { SEO } from "@/components/SEO";
 import { supabase } from "@/integrations/supabase/client";
 import { trackButtonClick } from "@/utils/analyticsTracker";
 import { usePrerenderBlocker } from "@/contexts/PrerenderContext";
-import { SectionDivider, MeshBackground } from "@/components/pro";
 import {
   Shield,
   Bot,
   GraduationCap,
   CheckCircle,
   Users,
-  Building2,
   Heart,
   Clock,
   Award,
   TrendingUp,
-  Search,
   Phone,
-  Mail,
   ArrowRight,
-  Zap,
   Target,
-  BarChart,
 } from "lucide-react";
 import heroServices1 from "@/assets/hero-services-1.jpg";
 import heroServices2 from "@/assets/hero-services-2.jpg";
@@ -284,13 +271,13 @@ const Services = () => {
         ]}
       />
 
-      <div className="min-h-screen bg-gradient-to-b from-background via-background to-muted/20">
+      <div className="min-h-screen bg-[#0a0a10]">
         <Navigation overlay />
 
         <Hero
           backgroundImages={servicesHeroImages}
-          headline="Comprehensive Protection for Everyone"
-          subheadline="From individuals to enterprises, we provide tailored cybersecurity solutions that protect what matters most to you."
+          headline="Solutions Built to Protect"
+          subheadline="Enterprise-grade cybersecurity and AI solutions for individuals, families, and organizations."
           showScrollIndicator
         >
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
@@ -301,7 +288,7 @@ const Services = () => {
                   trackButtonClick("Explore Services", "Services Hero")
                 }
               >
-                Explore Services
+                View Services
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
@@ -312,40 +299,38 @@ const Services = () => {
                   trackButtonClick("Contact Sales", "Services Hero")
                 }
               >
-                Contact Sales
+                Get in Touch
               </Link>
             </Button>
           </div>
         </Hero>
 
         {/* Benefits Section */}
-        <MeshBackground variant="subtle" withOrbs>
-        <section className="py-12 md:py-16 lg:py-20">
+        <section className="py-16 md:py-20 lg:py-24 bg-[#0a0a10]">
           <div className="container mx-auto px-4">
             <ScrollReveal>
-              <div className="text-center mb-12">
-                <span className="frosted-pill mb-4">Why Choose Us</span>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                  Why Choose <span className="gradient-text-brand">InVision Network</span>?
+              <div className="text-center mb-14">
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/40 mb-4">Why Choose Us</p>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">
+                  Why Choose InVision Network?
                 </h2>
-                <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-                  We're not just a service provider. We're your partners in
-                  digital safety.
+                <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto">
+                  Your partners in digital safety, not just a service provider.
                 </p>
               </div>
             </ScrollReveal>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 spacing-lg">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {benefits.map((benefit, index) => (
                 <ScrollReveal key={index} delay={index * 100}>
-                  <div className="h-full feature-highlight">
+                  <div className="h-full rounded-2xl bg-[#111118] border border-white/[0.06] p-6 hover:-translate-y-1 transition-transform duration-300">
                     <div className="flex items-start gap-4">
-                      <div className="icon-glow-ring flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-[hsl(var(--primary)/0.1)] to-[hsl(var(--accent)/0.08)] flex items-center justify-center">
-                        <benefit.icon className="h-6 w-6 text-[hsl(var(--accent))]" />
+                      <div className="flex-shrink-0 w-11 h-11 rounded-lg bg-white/[0.04] flex items-center justify-center">
+                        <benefit.icon className="h-5 w-5 text-white/70" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold mb-2">{benefit.title}</h3>
-                        <p className="text-muted-foreground">
+                        <h3 className="text-lg font-semibold mb-1.5 text-white">{benefit.title}</h3>
+                        <p className="text-sm text-white/45 leading-relaxed">
                           {benefit.description}
                         </p>
                       </div>
@@ -356,68 +341,93 @@ const Services = () => {
             </div>
           </div>
         </section>
-        </MeshBackground>
-
-        <SectionDivider variant="wave" color="muted" />
 
         {/* Services Grid */}
-        <section id="services" className="py-12 md:py-16 lg:py-20 bg-muted/30">
+        <section id="services" className="py-16 md:py-20 lg:py-24 bg-[#08080e]">
           <div className="container mx-auto px-4">
             <ScrollReveal>
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                  Our Services
+              <div className="text-center mb-14">
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/40 mb-4">Our Services</p>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">
+                  Choose Your Protection
                 </h2>
-                <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-                  Choose the perfect protection plan for your needs
+                <p className="text-lg text-white/50 max-w-2xl mx-auto">
+                  Tailored plans for every need and budget
                 </p>
               </div>
             </ScrollReveal>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 spacing-lg max-w-6xl mx-auto">
+            {/* Billing Toggle */}
+            <ScrollReveal delay={100}>
+              <div className="flex items-center justify-center gap-4 mb-12">
+                <Label
+                  htmlFor="billing-toggle"
+                  className={`text-sm ${isMonthly ? "font-semibold text-white" : "text-white/50"}`}
+                >
+                  Monthly
+                </Label>
+                <Switch
+                  id="billing-toggle"
+                  checked={!isMonthly}
+                  onCheckedChange={(checked) => setIsMonthly(!checked)}
+                  aria-label="Toggle yearly billing"
+                />
+                <Label
+                  htmlFor="billing-toggle"
+                  className={`text-sm ${!isMonthly ? "font-semibold text-white" : "text-white/50"}`}
+                >
+                  Annual{" "}
+                  <Badge variant="success" className="ml-2 text-xs">
+                    Save 10%
+                  </Badge>
+                </Label>
+              </div>
+            </ScrollReveal>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
               {services.map((service, index) => (
                 <ScrollReveal key={index} delay={index * 100}>
-                  <Card
-                    className={`h-full flex flex-col relative overflow-hidden ${service.popular ? "glass-heavy border-primary/40" : "glass-card border-white/30"}`}
+                  <div
+                    className={`h-full flex flex-col relative rounded-2xl overflow-hidden bg-[#111118] border hover:-translate-y-1 transition-transform duration-300 ${service.popular ? "border-primary/30" : "border-white/[0.06]"}`}
                   >
                     {service.popular && (
                       <div className="absolute top-4 right-4">
-                        <Badge variant="premium" className="text-xs font-bold">
-                          MOST POPULAR
-                        </Badge>
+                        <span className="text-[10px] font-bold uppercase tracking-wider bg-primary/20 text-primary px-3 py-1 rounded-full">
+                          Most Popular
+                        </span>
                       </div>
                     )}
 
-                    <CardHeader>
+                    <div className="p-6 pb-0">
                       <div
-                        className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-4`}
+                        className="w-11 h-11 rounded-lg bg-white/[0.04] flex items-center justify-center mb-5"
                       >
-                        <service.icon className="h-7 w-7 text-primary-foreground" />
+                        <service.icon className="h-5 w-5 text-white/70" />
                       </div>
-                      <CardTitle className="text-2xl">
+                      <h3 className="text-xl font-bold text-white mb-1">
                         {service.title}
-                      </CardTitle>
-                      <CardDescription className="text-base font-medium">
+                      </h3>
+                      <p className="text-sm font-medium text-white/40 mb-2">
                         {service.subtitle}
-                      </CardDescription>
-                      <p className="text-muted-foreground mt-2">
+                      </p>
+                      <p className="text-sm text-white/45 leading-relaxed">
                         {service.description}
                       </p>
-                    </CardHeader>
+                    </div>
 
-                    <CardContent className="flex-1 flex flex-col">
+                    <div className="p-6 flex-1 flex flex-col">
                       <div className="mb-6">
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-4xl font-bold">
+                        <div className="flex items-baseline gap-1.5">
+                          <span className="text-4xl font-bold text-white tracking-tight">
                             $
                             {isMonthly
                               ? service.priceMonthly
                               : Math.round(service.priceAnnual / 12)}
                           </span>
-                          <span className="text-muted-foreground">/month</span>
+                          <span className="text-sm text-white/35">/month</span>
                         </div>
                         {!isMonthly && (
-                          <p className="text-sm text-success mt-1">
+                          <p className="text-xs text-emerald-400/80 mt-1.5">
                             Save $
                             {service.priceMonthly * 12 - service.priceAnnual}
                             /year
@@ -425,18 +435,18 @@ const Services = () => {
                         )}
                       </div>
 
-                      <ul className="space-y-3 mb-6 flex-1">
+                      <ul className="space-y-3 mb-8 flex-1">
                         {service.features.map((feature, idx) => (
-                          <li key={idx} className="flex items-start gap-2">
-                            <CheckCircle className="h-5 w-5 text-success flex-shrink-0 mt-0.5" />
-                            <span className="text-sm">{feature}</span>
+                          <li key={idx} className="flex items-start gap-2.5">
+                            <CheckCircle className="h-4 w-4 text-emerald-400/60 flex-shrink-0 mt-0.5" />
+                            <span className="text-sm text-white/55">{feature}</span>
                           </li>
                         ))}
                       </ul>
 
                       <Button
-                        className="w-full"
-                        variant={service.popular ? "default" : "outline"}
+                        className={`w-full ${service.popular ? "" : "bg-white/[0.06] hover:bg-white/[0.1] text-white border-0"}`}
+                        variant={service.popular ? "default" : "ghost"}
                         asChild
                       >
                         <Link
@@ -452,52 +462,24 @@ const Services = () => {
                           <ArrowRight className="ml-2 h-4 w-4" />
                         </Link>
                       </Button>
-                    </CardContent>
-                  </Card>
+                    </div>
+                  </div>
                 </ScrollReveal>
               ))}
             </div>
-
-            {/* Billing Toggle */}
-            <ScrollReveal delay={400}>
-              <div className="flex items-center justify-center gap-4 mt-12">
-                <Label
-                  htmlFor="billing-toggle"
-                  className={isMonthly ? "font-semibold" : ""}
-                >
-                  Monthly
-                </Label>
-                <Switch
-                  id="billing-toggle"
-                  checked={!isMonthly}
-                  onCheckedChange={(checked) => setIsMonthly(!checked)}
-                  aria-label="Toggle yearly billing"
-                />
-                <Label
-                  htmlFor="billing-toggle"
-                  className={!isMonthly ? "font-semibold" : ""}
-                >
-                  Annual{" "}
-                  <Badge variant="success" className="ml-2">
-                    Save 10%
-                  </Badge>
-                </Label>
-              </div>
-            </ScrollReveal>
           </div>
         </section>
 
-        <SectionDivider variant="curve" color="background" flip />
-
         {/* Comparison Table */}
-        <section className="py-12 md:py-16 lg:py-20 bg-background dot-grid-bg">
+        <section className="py-16 md:py-20 lg:py-24 bg-[#0a0a10]">
           <div className="container mx-auto px-4">
             <ScrollReveal>
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+              <div className="text-center mb-14">
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/40 mb-4">Compare</p>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">
                   Compare Services
                 </h2>
-                <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+                <p className="text-lg text-white/50 max-w-2xl mx-auto">
                   Find the perfect match for your needs
                 </p>
               </div>
@@ -508,20 +490,20 @@ const Services = () => {
               <MobileComparisonCards comparisons={comparisons} />
 
               {/* Desktop: Table view */}
-              <div className="hidden md:block max-w-5xl mx-auto overflow-x-auto">
+              <div className="hidden md:block max-w-5xl mx-auto overflow-x-auto rounded-2xl bg-[#111118] border border-white/[0.06]">
                 <table className="w-full border-collapse">
                   <thead>
-                    <tr className="border-b-2 border-border">
-                      <th className="text-left py-4 px-4 font-semibold">
+                    <tr className="border-b border-white/[0.06]">
+                      <th className="text-left py-4 px-6 font-semibold text-white/80 text-sm">
                         Feature
                       </th>
-                      <th className="text-center py-4 px-4 font-semibold">
+                      <th className="text-center py-4 px-6 font-semibold text-white/80 text-sm">
                         ScamShield
                       </th>
-                      <th className="text-center py-4 px-4 font-semibold">
+                      <th className="text-center py-4 px-6 font-semibold text-white/80 text-sm">
                         AI Business
                       </th>
-                      <th className="text-center py-4 px-4 font-semibold">
+                      <th className="text-center py-4 px-6 font-semibold text-white/80 text-sm">
                         Training
                       </th>
                     </tr>
@@ -530,28 +512,28 @@ const Services = () => {
                     {comparisons.map((row, index) => (
                       <tr
                         key={index}
-                        className="border-b border-border hover:bg-muted/50 transition-colors"
+                        className="border-b border-white/[0.04] last:border-0 hover:bg-white/[0.02] transition-colors"
                       >
-                        <td className="py-4 px-4">{row.feature}</td>
-                        <td className="text-center py-4 px-4">
+                        <td className="py-4 px-6 text-sm text-white/60">{row.feature}</td>
+                        <td className="text-center py-4 px-6">
                           {row.scamshield ? (
-                            <CheckCircle className="h-5 w-5 text-success mx-auto" />
+                            <CheckCircle className="h-4 w-4 text-emerald-400/60 mx-auto" />
                           ) : (
-                            <span className="text-muted-foreground"></span>
+                            <span className="text-white/20">--</span>
                           )}
                         </td>
-                        <td className="text-center py-4 px-4">
+                        <td className="text-center py-4 px-6">
                           {row.business ? (
-                            <CheckCircle className="h-5 w-5 text-success mx-auto" />
+                            <CheckCircle className="h-4 w-4 text-emerald-400/60 mx-auto" />
                           ) : (
-                            <span className="text-muted-foreground"></span>
+                            <span className="text-white/20">--</span>
                           )}
                         </td>
-                        <td className="text-center py-4 px-4">
+                        <td className="text-center py-4 px-6">
                           {row.training ? (
-                            <CheckCircle className="h-5 w-5 text-success mx-auto" />
+                            <CheckCircle className="h-4 w-4 text-emerald-400/60 mx-auto" />
                           ) : (
-                            <span className="text-muted-foreground"></span>
+                            <span className="text-white/20">--</span>
                           )}
                         </td>
                       </tr>
@@ -563,18 +545,17 @@ const Services = () => {
           </div>
         </section>
 
-        <div className="divider-gradient-colored" />
-
         {/* Testimonials */}
         {testimonials.length > 0 && (
-          <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
+          <section className="py-16 md:py-20 lg:py-24 bg-[#08080e]">
             <div className="container mx-auto px-4">
               <ScrollReveal>
-                <div className="text-center mb-12">
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                <div className="text-center mb-14">
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/40 mb-4">Testimonials</p>
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">
                     What Our Clients Say
                   </h2>
-                  <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+                  <p className="text-lg text-white/50 max-w-2xl mx-auto">
                     Real stories from real people we've protected
                   </p>
                 </div>
@@ -597,42 +578,33 @@ const Services = () => {
           </section>
         )}
 
-        <SectionDivider variant="mountains" color="background" flip />
-
         {/* FAQ Section */}
-        <MeshBackground variant="vibrant">
-        <section className="py-12 md:py-16 lg:py-20">
+        <section className="py-16 md:py-20 lg:py-24 bg-[#0a0a10]">
           <div className="container mx-auto px-4">
             <ScrollReveal>
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+              <div className="text-center mb-14">
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/40 mb-4">FAQ</p>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">
                   Frequently Asked Questions
                 </h2>
-                <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+                <p className="text-lg text-white/50 max-w-2xl mx-auto">
                   Everything you need to know about our services
                 </p>
               </div>
             </ScrollReveal>
 
-            <div className="max-w-3xl mx-auto space-y-6">
+            <div className="max-w-3xl mx-auto space-y-4">
               {faqs.map((faq, index) => (
                 <ScrollReveal key={index} delay={index * 50}>
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg">{faq.question}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-muted-foreground">{faq.answer}</p>
-                    </CardContent>
-                  </Card>
+                  <div className="rounded-2xl bg-[#111118] border border-white/[0.06] p-6">
+                    <h3 className="text-base font-semibold text-white mb-2">{faq.question}</h3>
+                    <p className="text-sm text-white/45 leading-relaxed">{faq.answer}</p>
+                  </div>
                 </ScrollReveal>
               ))}
             </div>
           </div>
         </section>
-        </MeshBackground>
-
-        <div className="section-glow-strip" />
 
         {/* CTA Section */}
         <CTASection

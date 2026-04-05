@@ -1,10 +1,8 @@
-import { ReactNode, useState, useRef, Children, isValidElement } from "react";
+import { ReactNode, useState, useRef } from "react";
 import { cn } from "@/lib/utils";
 import ScrollIndicator from "./ScrollIndicator";
 import { ProtectionBadge } from "./ProtectionBadge";
 import { HeroCarousel } from "./HeroCarousel";
-import { MagneticWrapper } from "./ui/magnetic-button";
-import HeroPurpleOverlay from "./HeroPurpleOverlay";
 
 interface HeroImage {
   src: string;
@@ -45,27 +43,23 @@ const Hero = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoLoaded, setVideoLoaded] = useState(false);
 
-  // No loading states for images - show immediately for instant page transitions
   const useCarousel = backgroundImages && backgroundImages.length > 0;
   const useVideo = !!backgroundVideo;
 
   return (
     <div
       className={cn(
-        "relative w-full min-h-[65vh] sm:min-h-[75vh] md:min-h-screen lg:min-h-[105vh] xl:min-h-[110vh] flex items-center overflow-hidden hero-mobile",
+        "relative w-full min-h-[65vh] sm:min-h-[75vh] md:min-h-screen flex items-center overflow-hidden",
         className,
       )}
     >
-      {/* Transparent fallback - no color flash */}
-      <div className="absolute inset-0 bg-transparent" />
-
-      {/* Background */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Video Background */}
+      {/* Background media layer */}
+      <div className="absolute inset-0">
+        {/* Video background */}
         {useVideo && (
           <div
             className={cn(
-              "absolute inset-0 transition-opacity duration-300",
+              "absolute inset-0 transition-opacity duration-500",
               videoLoaded ? "opacity-100" : "opacity-0",
             )}
           >
@@ -77,14 +71,14 @@ const Hero = ({
               playsInline
               preload="auto"
               onCanPlay={() => setVideoLoaded(true)}
-              className="absolute inset-0 w-full h-full object-cover brightness-[0.85]"
+              className="absolute inset-0 w-full h-full object-cover"
             >
               <source src={backgroundVideo} type="video/mp4" />
             </video>
           </div>
         )}
 
-        {/* Image Carousel (if no video) */}
+        {/* Image carousel or single image */}
         {!useVideo && useCarousel ? (
           <HeroCarousel images={backgroundImages} />
         ) : (
@@ -103,45 +97,54 @@ const Hero = ({
           )
         )}
 
-        {/* Simple dark tint for text readability on inner pages */}
-        {!disablePurpleOverlay && <HeroPurpleOverlay />}
+        {/* Cinematic overlay system */}
+        {!disablePurpleOverlay && (
+          <>
+            {/* Left gradient for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-transparent" />
+
+            {/* Bottom fade to page background */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent" />
+
+            {/* Top gradient for nav readability */}
+            <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/60 to-transparent" />
+          </>
+        )}
       </div>
 
-      {/* Protection Badge (if enabled) */}
+      {/* Protection badge */}
       {showProtectionBadge && (
         <div className="absolute top-4 right-4 md:top-8 md:right-8 z-20">
           <ProtectionBadge text={badgeText || "Family Protected"} size="md" />
         </div>
       )}
 
-      {/* Content - CSS animations instead of framer-motion */}
+      {/* Content */}
       <div className="w-full center-container-wide py-20 sm:py-24 md:py-28 lg:py-32 relative z-10">
-        <div className="max-w-6xl animate-fade-in">
+        <div className="max-w-4xl animate-fade-in">
           {headline && (
-            <h1 className="text-white mb-4 sm:mb-6 md:mb-8 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight font-bold">
+            <h1
+              className="text-white mb-4 sm:mb-6 md:mb-8 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] font-bold tracking-tight [text-shadow:0_2px_20px_rgba(0,0,0,0.5)]"
+            >
               {headline}
             </h1>
           )}
           {subheadline && (
-            <p className="text-white/95 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl mb-8 md:mb-10 leading-relaxed max-w-3xl">
+            <p
+              className="text-white/90 text-base sm:text-lg md:text-xl lg:text-2xl mb-8 sm:mb-10 md:mb-12 leading-relaxed max-w-2xl font-light [text-shadow:0_1px_10px_rgba(0,0,0,0.4)]"
+            >
               {subheadline}
             </p>
           )}
           {children && (
-            <div className="flex flex-wrap spacing-md justify-start">
-              {Children.map(children, (child) =>
-                isValidElement(child) ? (
-                  <MagneticWrapper strength={0.3}>{child}</MagneticWrapper>
-                ) : (
-                  child
-                ),
-              )}
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+              {children}
             </div>
           )}
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll indicator */}
       {showScrollIndicator && <ScrollIndicator />}
     </div>
   );

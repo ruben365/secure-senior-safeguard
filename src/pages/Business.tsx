@@ -63,7 +63,7 @@ import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import { VideoLightbox } from "@/components/VideoLightbox";
 import { SEO } from "@/components/SEO";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
-import HeroFloatingStats from "@/components/business/HeroFloatingStats";
+// HeroFloatingStats removed — clean hero layout
 import { SectionDivider, MeshBackground } from "@/components/pro";
 
 
@@ -222,9 +222,9 @@ const SectionHeader = ({
 
 }: {badge: string;title: string;subtitle?: string;children?: React.ReactNode;light?: boolean;}) =>
 <AnimatedSection animation="fade-up" className="text-center mb-16">
-    <span className="inline-flex items-center gap-2 px-5 py-2 glass-subtle rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15">
-      <Sparkles className="w-3.5 h-3.5 text-primary" />
-      <span className={light ? "text-white/90" : "text-primary"}>{badge}</span>
+    <span className={`inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border ${light ? "border-amber-500/20 bg-amber-500/[0.08]" : "glass-subtle border-primary/15"}`}>
+      <Sparkles className={`w-3.5 h-3.5 ${light ? "text-amber-400" : "text-primary"}`} />
+      <span className={light ? "text-amber-400" : "text-primary"}>{badge}</span>
     </span>
     <h2 className={`text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1] ${light ? "text-white" : ""}`}>
       {title}
@@ -509,44 +509,42 @@ function Business() {
             backgroundImages={businessHeroImages}
             headline=""
             subheadline=""
-            showScrollIndicator={true}>
-            
-            <div className="text-center mb-6">
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-4">
+            showScrollIndicator={true}
+            disablePurpleOverlay={true}>
+
+            <div className="text-center mb-8">
+              <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-white mb-6 tracking-tight leading-[1.08]">
                 <RotatingHeadlines headlines={businessHeadlines} className="" />
               </h1>
-              <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
+              <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed font-medium">
                 AI agents, professional websites, and security tools built for small businesses across Ohio.
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="default" size="xl" onClick={openStrategyCall}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                size="xl"
+                className="bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-xl shadow-lg shadow-amber-500/20 transition-all duration-300"
+                onClick={openStrategyCall}>
                 Book Strategy Call
+                <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
               <Button
-                variant="heroOutline"
                 size="xl"
+                className="bg-transparent border-2 border-white/20 text-white hover:bg-white/10 hover:border-white/40 rounded-xl font-semibold transition-all duration-300"
                 onClick={() => {
                   scrollToSection("services");
                   trackButtonClick("Explore Services", "Business Hero");
                 }}>
-                
                 Explore Services
               </Button>
             </div>
           </Hero>
-          <HeroFloatingStats />
         </div>
 
-        <div className="h-8" />
         <TrustBar />
 
         {/* Live Stats Ticker — matches Training page */}
         <div className="bg-foreground text-background py-3 overflow-hidden">
-          
-
-
-
 
 
 
@@ -555,22 +553,21 @@ function Business() {
         </div>
 
         {/* ═══════════════════ SERVICES ═══════════════════ */}
-        <section id="services" className="py-24 relative overflow-hidden dot-grid-bg">
-          {/* Premium background */}
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
-          <div className="absolute top-20 left-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-20 right-0 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-3xl pointer-events-none" />
+        <section id="services" className="py-24 relative overflow-hidden bg-[#0a0a0f]">
+          {/* Subtle ambient glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-amber-500/[0.03] rounded-full blur-3xl pointer-events-none" />
 
           <div className="container mx-auto px-4 relative z-10">
             <SectionHeader
               badge="Our Services"
               title="What We Build For You"
-              subtitle="Pick a service below to see how your business benefits." />
+              subtitle="Pick a service below to see how your business benefits."
+              light />
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl mx-auto" style={{ perspective: "1200px" }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
               <AnimatedSection animation="fade-left" delay={0}>
                 <ExpandableServiceCard
-                  icon={<Phone className="w-7 h-7 text-primary" />}
+                  icon={<Phone className="w-7 h-7 text-amber-400" />}
                   title="AI Receptionist"
                   image={businessReceptionist}
                   summary="Your phone gets answered 24/7. Calls are routed, appointments booked, FAQs handled. You never lose a lead.">
@@ -602,7 +599,7 @@ function Business() {
 
               <AnimatedSection animation="fade-right" delay={100}>
                 <ExpandableServiceCard
-                  icon={<Calendar className="w-7 h-7 text-primary" />}
+                  icon={<Calendar className="w-7 h-7 text-amber-400" />}
                   title="Smart Scheduling"
                   image={businessScheduling}
                   summary="Appointments book themselves. Reminders go out. Calendars stay in sync. No more back-and-forth emails.">
@@ -633,7 +630,7 @@ function Business() {
 
               <AnimatedSection animation="fade-left" delay={200}>
                 <ExpandableServiceCard
-                  icon={<MessageSquare className="w-7 h-7 text-primary" />}
+                  icon={<MessageSquare className="w-7 h-7 text-amber-400" />}
                   title="Customer Support Bot"
                   image={businessSupportBot}
                   summary="Answers customer questions 24/7 on your website, SMS, or WhatsApp. Your team focuses on high-value work.">
@@ -665,7 +662,7 @@ function Business() {
 
               <AnimatedSection animation="fade-right" delay={300}>
                 <ExpandableServiceCard
-                  icon={<Calendar className="w-7 h-7 text-primary" />}
+                  icon={<Calendar className="w-7 h-7 text-amber-400" />}
                   title="Intake & Scheduling"
                   image={businessIntake}
                   summary="Collect client details, score leads, and book meetings automatically. Save hours of admin work each week.">

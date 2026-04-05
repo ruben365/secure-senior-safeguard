@@ -51,7 +51,7 @@ import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 // GlassmorphismBackground removed — using Business-style sections
 import { usePrerenderBlocker } from "@/contexts/PrerenderContext";
-import { SectionDivider, MeshBackground } from "@/components/pro";
+
 import { TranslationRequestDialog } from "@/components/resources/TranslationRequestDialog";
 import { ReadBooksDialog } from "@/components/resources/ReadBooksDialog";
 
@@ -288,22 +288,21 @@ function Resources() {
 
       <TrustBar />
 
-      {/* Introduction Section — Business style */}
-      <MeshBackground variant="subtle" withOrbs>
-      <section className="py-12 relative overflow-hidden">
+      {/* Introduction Section — Dark theme */}
+      <section className="py-12 relative overflow-hidden bg-[#0a0a12]">
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-10">
-            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 border border-white/[0.08] bg-white/[0.04]">
               <Sparkles className="w-3.5 h-3.5 text-primary" />
               <span className="text-primary">Trusted Resources</span>
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1]">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1] text-white">
               Your One-Stop Security Shop
             </h2>
-            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground mb-6">
+            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-white/70 mb-6">
               Welcome to InVision Network's resource center. Here you'll find carefully curated
-              <strong className="text-foreground"> e-books and digital guides</strong>.
+              <strong className="text-white"> e-books and digital guides</strong>.
               All designed to help you and your family stay safe in the digital age.
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
@@ -313,7 +312,7 @@ function Resources() {
                 { icon: Globe, label: "Read on Any Device" },
                 { icon: Users, label: "Family-Friendly" },
               ].map((item) => (
-                <div key={item.label} className="flex items-center gap-2 text-sm text-muted-foreground bg-card border border-border/40 px-3 py-1.5 rounded-full">
+                <div key={item.label} className="flex items-center gap-2 text-sm text-white/60 bg-white/[0.04] border border-white/[0.06] px-3 py-1.5 rounded-full">
                   <item.icon className="w-4 h-4 text-primary" />
                   <span>{item.label}</span>
                 </div>
@@ -332,12 +331,12 @@ function Resources() {
               { value: `${BOOK_CATALOG.reduce((sum, book) => sum + book.total_pages, 0)}`, label: "Library Pages", icon: Heart },
               { value: "1", label: "Unified Reader", icon: Headphones },
             ].map((stat, index) => (
-              <div key={index} className="flex flex-col items-center gap-1 rounded-2xl bg-card border border-border/40 p-4 shadow-sm">
+              <div key={index} className="flex flex-col items-center gap-1 rounded-2xl bg-[#111118] border border-white/[0.06] p-4">
                 <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-1">
                   <stat.icon className="w-5 h-5 text-primary" />
                 </div>
-                <span className="text-2xl font-black text-foreground">{stat.value}</span>
-                <span className="text-xs text-muted-foreground">{stat.label}</span>
+                <span className="text-2xl font-black text-white">{stat.value}</span>
+                <span className="text-xs text-white/50">{stat.label}</span>
               </div>
             ))}
           </div>
@@ -345,8 +344,8 @@ function Resources() {
           <div className="mt-12">
             <div className="flex items-center justify-between gap-3 mb-5 flex-wrap">
               <div>
-                <h3 className="text-2xl font-bold">Featured Shelf</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="text-2xl font-bold text-white">Featured Shelf</h3>
+                <p className="text-sm text-white/50">
                   Start with the books most visitors use to build their safety baseline.
                 </p>
               </div>
@@ -357,7 +356,7 @@ function Resources() {
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {featuredBooks.map((book) => (
-                <Card key={book.id} className="overflow-hidden border-border/50 bg-card/80">
+                <Card key={book.id} className="overflow-hidden border-white/[0.06] bg-[#111118] hover:-translate-y-1 transition-all duration-300">
                   <button
                     onClick={() => handleBookClick(book)}
                     className="w-full text-left"
@@ -377,8 +376,8 @@ function Resources() {
                       <Badge className="text-[10px] px-1.5 py-0">{book.tag}</Badge>
                       <Badge variant="outline" className="text-[10px] px-1.5 py-0">{CATEGORY_LABELS[book.category]}</Badge>
                     </div>
-                    <h4 className="font-semibold text-sm leading-tight line-clamp-1">{book.name}</h4>
-                    <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{book.subtitle}</p>
+                    <h4 className="font-semibold text-sm leading-tight line-clamp-1 text-white">{book.name}</h4>
+                    <p className="text-xs text-white/50 mt-1 line-clamp-2">{book.subtitle}</p>
                     <div className="flex items-center justify-between mt-3">
                       <span className="font-bold text-primary text-sm">${book.price.toFixed(2)}</span>
                     </div>
@@ -410,22 +409,22 @@ function Resources() {
       </section>
 
       {/* Digital Security Guides */}
-      <section id="guides" className="py-10 sm:py-16 md:py-20 bg-muted/20 relative overflow-hidden">
+      <section id="guides" className="py-10 sm:py-16 md:py-20 bg-[#08080e] relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="text-center mb-10">
-            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 border border-white/[0.08] bg-white/[0.04]">
               <BookOpen className="w-3.5 h-3.5 text-primary" />
               <span className="text-primary">Digital Library</span>
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1]">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1] text-white">
               Digital Security <span className="text-primary">Guides</span>
             </h2>
-            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground">
+            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-white/70">
               Read securely online from any device. No downloads needed.
             </p>
           </div>
 
-          <div className="rounded-2xl border border-border/50 bg-background/80 p-4 md:p-5 mb-6">
+          <div className="rounded-2xl border border-white/[0.06] bg-[#111118] p-4 md:p-5 mb-6">
             <div className="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
               <div className="relative flex-1 max-w-xl">
                 <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
@@ -466,10 +465,8 @@ function Resources() {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 2000px' }}>
             {filteredBooks.map((book, bookIndex) =>
               <div key={book.id} className="group relative">
-                <div className="h-full rounded-2xl p-[1px] bg-gradient-to-b from-border/50 to-border/20 hover:from-primary/30 hover:to-primary/10 transition-colors duration-200 shadow-sm hover:shadow-md">
-                  <Card className="h-full rounded-[calc(1rem-1px)] p-3 border-0 bg-card flex flex-col relative overflow-hidden">
-                    {/* Gradient accent bar */}
-                    <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/30 to-accent/20" />
+                <div className="h-full rounded-2xl hover:-translate-y-1 transition-all duration-300">
+                  <Card className="h-full rounded-2xl p-3 border border-white/[0.06] bg-[#111118] flex flex-col relative overflow-hidden">
 
                     {/* eBook Badge - Top Left */}
                     <Badge className="absolute top-2 left-2 text-[9px] px-1.5 py-0.5 bg-primary/90 text-primary-foreground z-10 shadow-sm">
@@ -508,23 +505,23 @@ function Resources() {
                     </button>
 
                     {/* Content */}
-                    <h3 className="text-xs md:text-sm font-bold mb-0.5 text-foreground group-hover:text-primary transition-colors line-clamp-2 leading-tight">
+                    <h3 className="text-xs md:text-sm font-bold mb-0.5 text-white group-hover:text-primary transition-colors line-clamp-2 leading-tight">
                       {book.name}
                     </h3>
 
-                    <p className="text-[9px] text-muted-foreground mb-1 line-clamp-2 min-h-[2rem]">
+                    <p className="text-[9px] text-white/50 mb-1 line-clamp-2 min-h-[2rem]">
                       {book.subtitle}
                     </p>
 
-                    <p className="text-[8px] text-muted-foreground mb-1 truncate">
+                    <p className="text-[8px] text-white/40 mb-1 truncate">
                       {book.author}
                     </p>
 
-                    <p className="text-[10px] text-muted-foreground mb-2 line-clamp-2 flex-1">
+                    <p className="text-[10px] text-white/60 mb-2 line-clamp-2 flex-1">
                       {book.description}
                     </p>
 
-                    <p className="text-[9px] text-muted-foreground mb-2">
+                    <p className="text-[9px] text-white/40 mb-2">
                       {book.total_pages} pages • {book.chapters.length} chapters
                     </p>
 
@@ -533,11 +530,11 @@ function Resources() {
                       {[...Array(5)].map((_, i) =>
                         <Star key={i} className="w-2.5 h-2.5 fill-chart-4 text-chart-4" />
                       )}
-                      <span className="text-[9px] text-muted-foreground ml-1">5.0</span>
+                      <span className="text-[9px] text-white/40 ml-1">5.0</span>
                     </div>
 
                     {/* Price and Actions */}
-                    <div className="mt-auto pt-2 border-t border-border/30">
+                    <div className="mt-auto pt-2 border-t border-white/[0.06]">
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-base md:text-lg font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                           ${book.price}
@@ -593,14 +590,14 @@ function Resources() {
           {/* Bundle Info Banner */}
           <div className="mt-8 space-y-4">
               {/* Language Request Note */}
-              <div className="p-4 bg-gradient-to-r from-accent/10 via-primary/5 to-accent/10 rounded-xl border border-accent/20 text-center">
+              <div className="p-4 bg-[#111118] rounded-xl border border-white/[0.06] text-center">
                 <div className="flex items-center justify-center gap-2 mb-2">
-                  <Globe className="w-4 h-4 text-accent" />
-                  <span className="font-semibold text-sm">
+                  <Globe className="w-4 h-4 text-primary" />
+                  <span className="font-semibold text-sm text-white">
                     Need a Book in a Different Language?
                   </span>
                 </div>
-                <p className="text-sm text-muted-foreground mb-3">
+                <p className="text-sm text-white/60 mb-3">
                   We offer translations in Spanish, French, German, Chinese, and more.
                   <br className="hidden md:block" />
                   Simply request and we'll prepare your
@@ -614,16 +611,13 @@ function Resources() {
             </div>
         </div>
       </section>
-      </MeshBackground>
-
-      <SectionDivider variant="wave" color="muted" />
 
       {/* Why Shop With Us */}
-      <section className="py-12 sm:py-16 bg-muted/30 dot-grid-bg">
+      <section className="py-12 sm:py-16 bg-[#0a0a12]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold mb-3">Why Trust InVision Network</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">Your security education partner — backed by expertise, integrity, and a mission to protect.</p>
+            <h2 className="text-2xl md:text-3xl font-bold mb-3 text-white">Why Trust InVision Network</h2>
+            <p className="text-white/60 max-w-2xl mx-auto">Your security education partner — backed by expertise, integrity, and a mission to protect.</p>
           </div>
           <div className="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {[
@@ -631,12 +625,12 @@ function Resources() {
               { icon: Lock, title: "Secure Delivery", desc: "Protected digital reader — no downloads, no unauthorized sharing" },
               { icon: Headphones, title: "Ongoing Support", desc: "Email support and regular content updates included" },
             ].map((item) => (
-              <div key={item.title} className="feature-highlight text-center">
-                <div className="icon-glow-ring w-14 h-14 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-[hsl(var(--primary)/0.1)] to-[hsl(var(--accent)/0.08)] flex items-center justify-center">
-                  <item.icon className="w-7 h-7 text-[hsl(var(--accent))]" />
+              <div key={item.title} className="text-center rounded-2xl bg-[#111118] border border-white/[0.06] p-6 hover:-translate-y-1 transition-all duration-300">
+                <div className="w-14 h-14 mx-auto mb-3 rounded-2xl bg-primary/10 flex items-center justify-center">
+                  <item.icon className="w-7 h-7 text-primary" />
                 </div>
-                <h3 className="font-semibold mb-1">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.desc}</p>
+                <h3 className="font-semibold mb-1 text-white">{item.title}</h3>
+                <p className="text-sm text-white/60">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -682,8 +676,6 @@ function Resources() {
       <ReadBooksDialog
         open={readBooksOpen}
         onOpenChange={setReadBooksOpen} />
-
-      <div className="section-glow-strip" />
 
       <Footer />
     </PageTransition>);

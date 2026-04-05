@@ -6,13 +6,7 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import { SEO } from "@/components/SEO";
 import { PageTransition } from "@/components/PageTransition";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -49,11 +43,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { contactFormSchema, formatPhoneNumber } from "@/utils/formValidation";
 import { z } from "zod";
 import { useConfetti } from "@/hooks/useConfetti";
-import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import supportAgentPhoto from "@/assets/support-agent.jpg";
 import heroContactBranded from "@/assets/hero-contact-branded.jpg";
 import { SITE } from "@/config/site";
-import { SectionDivider, MeshBackground } from "@/components/pro";
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
@@ -164,8 +156,6 @@ function Contact() {
     }
   };
 
-  const contactHeroImages = PROFESSIONAL_HERO_IMAGES.contact;
-
   return (
     <PageTransition variant="fade">
       <SEO
@@ -209,36 +199,31 @@ function Contact() {
         </Hero>
       </div>
 
-      <SectionDivider variant="curve" color="background" />
-
-      <MeshBackground variant="vibrant" withOrbs>
-      <div className="py-16 relative overflow-hidden">
+      <div className="py-20 bg-[#0a0a12] relative overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
           {/* Contact Methods Grid */}
-          <div className="text-center mb-10">
-            <span className="frosted-pill mb-4">Get in Touch</span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
-              How Can We <span className="text-primary">Help?</span>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              How Can We Help?
             </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-lg text-white/60 max-w-3xl mx-auto">
               Choose the best way to reach us. We respond to every inquiry.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
             {contactMethods.map((method, index) => {
               const IconComponent = method.icon;
               return (
-                <div key={index} className="glow-card shine-hover p-6 h-full relative overflow-hidden">
-                  <div className="relative z-10">
-                  <div className="icon-glow-ring w-14 h-14 rounded-2xl bg-gradient-to-br from-[hsl(var(--primary)/0.1)] to-[hsl(var(--accent)/0.08)] flex items-center justify-center mb-4">
-                    <IconComponent className="w-7 h-7 text-[hsl(var(--accent))]" />
+                <div key={index} className="bg-[#111118] border border-white/[0.06] rounded-2xl p-6 h-full hover:border-white/[0.12] transition-colors duration-300">
+                  <div className="w-12 h-12 rounded-xl bg-white/[0.04] flex items-center justify-center mb-4">
+                    <IconComponent className="w-6 h-6 text-primary" />
                   </div>
-                  <h3 className="text-lg font-bold text-foreground mb-2">{method.title}</h3>
-                  <p className="font-semibold text-foreground mb-1 text-sm">
+                  <h3 className="text-lg font-semibold text-white mb-2">{method.title}</h3>
+                  <p className="font-medium text-white/80 mb-1 text-sm">
                     {method.detail}
                   </p>
-                  <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-3">
+                  <div className="flex items-center gap-1.5 text-xs text-white/40 mb-3">
                     <Clock className="w-3.5 h-3.5" />
                     {method.hours}
                   </div>
@@ -250,13 +235,12 @@ function Contact() {
                   </Badge>
                   <Button
                     variant="outline"
-                    className="w-full"
+                    className="w-full border-white/[0.08] text-white/70 hover:bg-white/[0.04] hover:text-white"
                     size="sm"
                     asChild
                   >
                     <a href={method.action}>{method.actionText}</a>
                   </Button>
-                  </div>
                 </div>
               );
             })}
@@ -264,25 +248,22 @@ function Contact() {
 
           {/* Main Contact Form Section */}
           <div className="grid lg:grid-cols-5 gap-8 max-w-7xl mx-auto">
-            {/* Premium Contact Form - 60% */}
+            {/* Contact Form */}
             <div className="lg:col-span-3">
-              <div className="relative bg-card/70 backdrop-blur-xl border border-border/40 rounded-2xl shadow-sm overflow-hidden">
-                {/* Top gradient accent */}
-                <div className="h-1.5 bg-gradient-to-r from-primary via-accent to-primary" />
-
+              <div className="bg-[#111118] border border-white/[0.06] rounded-2xl overflow-hidden">
                 <div className="p-8 md:p-10">
                   <div className="flex items-center justify-between mb-6">
                     <div>
-                      <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
+                      <h2 className="text-2xl md:text-3xl font-bold text-white">
                         Send Us a Message
                       </h2>
-                      <p className="text-muted-foreground mt-2">
+                      <p className="text-white/50 mt-2">
                         We'll respond within 4 hours during business hours
                       </p>
                     </div>
                     <Badge
                       variant="outline"
-                      className="gap-1.5 px-3 py-1.5 bg-success/10 border-success/30 text-success"
+                      className="gap-1.5 px-3 py-1.5 bg-emerald-500/10 border-emerald-500/20 text-emerald-400"
                     >
                       <Shield className="w-3.5 h-3.5" />
                       Secure
@@ -291,13 +272,13 @@ function Contact() {
 
                   {isSubmitted ? (
                     <div className="text-center py-16">
-                      <div className="w-20 h-20 bg-gradient-to-br from-success/20 to-success/5 rounded-full flex items-center justify-center mx-auto mb-6 animate-scale-in">
-                        <CheckCircle className="w-10 h-10 text-success" />
+                      <div className="w-20 h-20 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-6 animate-scale-in">
+                        <CheckCircle className="w-10 h-10 text-emerald-400" />
                       </div>
-                      <h3 className="text-2xl font-bold mb-3">
+                      <h3 className="text-2xl font-bold text-white mb-3">
                         Message Sent Successfully!
                       </h3>
-                      <p className="text-muted-foreground">
+                      <p className="text-white/50">
                         We'll respond within 4 hours
                       </p>
                     </div>
@@ -310,14 +291,14 @@ function Contact() {
                           name="fullName"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm font-semibold">
+                              <FormLabel className="text-sm font-semibold text-white/80">
                                 Full Name <span className="text-primary">*</span>
                               </FormLabel>
                               <FormControl>
                                 <Input
                                   {...field}
                                   placeholder="Enter your full name"
-                                  className="h-12 bg-background/50 border-border/50 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 pl-4"
+                                  className="h-12 bg-white/[0.03] border-white/[0.08] rounded-xl text-white placeholder:text-white/30 focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all duration-300"
                                 />
                               </FormControl>
                               <FormMessage />
@@ -332,7 +313,7 @@ function Contact() {
                             name="email"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel className="text-sm font-semibold">
+                                <FormLabel className="text-sm font-semibold text-white/80">
                                   Email <span className="text-primary">*</span>
                                 </FormLabel>
                                 <FormControl>
@@ -340,7 +321,7 @@ function Contact() {
                                     {...field}
                                     type="email"
                                     placeholder="your@email.com"
-                                    className="h-12 bg-background/50 border-border/50 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
+                                    className="h-12 bg-white/[0.03] border-white/[0.08] rounded-xl text-white placeholder:text-white/30 focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all duration-300"
                                   />
                                 </FormControl>
                                 <FormMessage />
@@ -352,7 +333,7 @@ function Contact() {
                             name="phone"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel className="text-sm font-semibold">
+                                <FormLabel className="text-sm font-semibold text-white/80">
                                   Phone{" "}
                                   <span className="text-muted-foreground text-xs">
                                     (optional)
@@ -363,7 +344,7 @@ function Contact() {
                                     {...field}
                                     type="tel"
                                     placeholder="(937) 000-0000"
-                                    className="h-12 bg-background/50 border-border/50 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
+                                    className="h-12 bg-white/[0.03] border-white/[0.08] rounded-xl text-white placeholder:text-white/30 focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all duration-300"
                                   />
                                 </FormControl>
                                 <FormMessage />
@@ -378,7 +359,7 @@ function Contact() {
                           name="subject"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm font-semibold">
+                              <FormLabel className="text-sm font-semibold text-white/80">
                                 Subject <span className="text-primary">*</span>
                               </FormLabel>
                               <Select
@@ -386,11 +367,11 @@ function Contact() {
                                 onValueChange={field.onChange}
                               >
                                 <FormControl>
-                                  <SelectTrigger className="h-12 bg-background/50 border-border/50 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300">
+                                  <SelectTrigger className="h-12 bg-white/[0.03] border-white/[0.08] rounded-xl text-white placeholder:text-white/30 focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all duration-300">
                                     <SelectValue placeholder="What can we help you with?" />
                                   </SelectTrigger>
                                 </FormControl>
-                                <SelectContent className="rounded-xl border-border/50 backdrop-blur-md">
+                                <SelectContent className="rounded-xl border-white/[0.08] bg-[#111118] backdrop-blur-md">
                                   <SelectItem value="general">
                                     General Inquiry
                                   </SelectItem>
@@ -417,7 +398,7 @@ function Contact() {
                           name="message"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm font-semibold">
+                              <FormLabel className="text-sm font-semibold text-white/80">
                                 Message <span className="text-primary">*</span>
                               </FormLabel>
                               <FormControl>
@@ -426,7 +407,7 @@ function Contact() {
                                   placeholder="Tell us how we can help you..."
                                   rows={5}
                                   maxLength={maxLength}
-                                  className="bg-background/50 border-border/50 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 resize-none"
+                                  className="bg-white/[0.03] border-white/[0.08] rounded-xl text-white placeholder:text-white/30 focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all duration-300 resize-none"
                                 />
                               </FormControl>
                               <div className="flex justify-between items-center mt-2">
@@ -461,7 +442,7 @@ function Contact() {
                           name="hearAbout"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm font-semibold">
+                              <FormLabel className="text-sm font-semibold text-white/80">
                                 How did you hear about us?
                               </FormLabel>
                               <Select
@@ -469,11 +450,11 @@ function Contact() {
                                 onValueChange={field.onChange}
                               >
                                 <FormControl>
-                                  <SelectTrigger className="h-12 bg-background/50 border-border/50 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300">
+                                  <SelectTrigger className="h-12 bg-white/[0.03] border-white/[0.08] rounded-xl text-white placeholder:text-white/30 focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all duration-300">
                                     <SelectValue placeholder="Select an option" />
                                   </SelectTrigger>
                                 </FormControl>
-                                <SelectContent className="rounded-xl border-border/50 backdrop-blur-md">
+                                <SelectContent className="rounded-xl border-white/[0.08] bg-[#111118] backdrop-blur-md">
                                   <SelectItem value="search">
                                     Search Engine
                                   </SelectItem>
@@ -496,7 +477,7 @@ function Contact() {
                           name="contactMethod"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm font-semibold">
+                              <FormLabel className="text-sm font-semibold text-white/80">
                                 Preferred Contact Method{" "}
                                 <span className="text-primary">*</span>
                               </FormLabel>
@@ -509,8 +490,8 @@ function Contact() {
                                   <div
                                     className={`flex-1 flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
                                       field.value === "email"
-                                        ? "border-primary bg-primary/5"
-                                        : "border-border/50 hover:border-primary/50"
+                                        ? "border-primary bg-primary/10"
+                                        : "border-white/[0.08] hover:border-white/[0.15]"
                                     }`}
                                   >
                                     <RadioGroupItem value="email" id="contact-email" />
@@ -525,8 +506,8 @@ function Contact() {
                                   <div
                                     className={`flex-1 flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
                                       field.value === "phone"
-                                        ? "border-primary bg-primary/5"
-                                        : "border-border/50 hover:border-primary/50"
+                                        ? "border-primary bg-primary/10"
+                                        : "border-white/[0.08] hover:border-white/[0.15]"
                                     }`}
                                   >
                                     <RadioGroupItem value="phone" id="contact-phone" />
@@ -566,8 +547,8 @@ function Contact() {
                         </Button>
 
                         {/* Security note */}
-                        <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground bg-muted/30 rounded-lg p-3">
-                          <Shield className="w-4 h-4 text-success" />
+                        <div className="flex items-center justify-center gap-2 text-xs text-white/40 bg-white/[0.02] border border-white/[0.04] rounded-lg p-3">
+                          <Shield className="w-4 h-4 text-emerald-400/70" />
                           Your message is encrypted and secure. We never share
                           your information.
                         </div>
@@ -578,19 +559,18 @@ function Contact() {
               </div>
             </div>
 
-            {/* Contact Info Sidebar - 40% with Premium Styling */}
+            {/* Contact Info Sidebar */}
             <div className="lg:col-span-2 space-y-6">
-              {/* Response Promise with Premium Card */}
-              <div className="relative bg-card/90 backdrop-blur-md rounded-2xl border border-border/30 shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-500">
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-success via-accent to-success" />
+              {/* Response Promise */}
+              <div className="bg-[#111118] border border-white/[0.06] rounded-2xl overflow-hidden">
                 <div className="p-6">
-                  <h3 className="text-lg font-bold flex items-center gap-2 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-success/20 to-success/5 flex items-center justify-center">
-                      <CheckCircle className="w-5 h-5 text-success" />
+                  <h3 className="text-lg font-semibold text-white flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center">
+                      <CheckCircle className="w-5 h-5 text-emerald-400" />
                     </div>
                     Our Response Promise
                   </h3>
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     {[
                       { text: "4-hour response", sub: "during business hours" },
                       { text: "24-hour response", sub: "on weekends" },
@@ -598,11 +578,11 @@ function Contact() {
                     ].map((item, i) => (
                       <div
                         key={i}
-                        className="flex items-center gap-3 p-3 rounded-xl bg-muted/30 border border-border/30 hover:border-primary/30 transition-all duration-300"
+                        className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/[0.04] hover:border-white/[0.1] transition-colors duration-300"
                       >
-                        <div className="w-2.5 h-2.5 rounded-full bg-gradient-to-br from-primary to-accent animate-pulse" />
-                        <span className="text-sm">
-                          <strong>{item.text}</strong> {item.sub}
+                        <div className="w-2 h-2 rounded-full bg-primary" />
+                        <span className="text-sm text-white/70">
+                          <strong className="text-white">{item.text}</strong> {item.sub}
                         </span>
                       </div>
                     ))}
@@ -610,35 +590,34 @@ function Contact() {
                 </div>
               </div>
 
-              {/* Office Location with Premium Styling */}
-              <div className="relative bg-card/90 backdrop-blur-md rounded-2xl border border-border/30 shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-500">
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary" />
+              {/* Office Location */}
+              <div className="bg-[#111118] border border-white/[0.06] rounded-2xl overflow-hidden">
                 <div className="p-6">
-                  <h3 className="text-lg font-bold flex items-center gap-2 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                  <h3 className="text-lg font-semibold text-white flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
                       <MapPin className="w-5 h-5 text-primary" />
                     </div>
                     Visit Our Office
                   </h3>
-                  <div className="p-4 rounded-xl bg-muted/30 border border-border/30 mb-4">
-                    <p className="text-sm font-semibold text-foreground mb-1">
+                  <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.04] mb-4">
+                    <p className="text-sm font-semibold text-white mb-1">
                       InVision Network HQ
                     </p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-white/50">
                       123 Tech Boulevard
                       <br />
                       Dayton, OH 45402
                     </p>
                   </div>
-                  <div className="bg-gradient-to-br from-muted/50 to-muted/20 rounded-xl h-40 flex items-center justify-center text-muted-foreground text-sm mb-4 border border-border/30">
+                  <div className="bg-white/[0.02] border border-white/[0.04] rounded-xl h-40 flex items-center justify-center text-white/30 text-sm mb-4">
                     <div className="text-center">
-                      <MapPin className="w-8 h-8 mx-auto mb-2 opacity-50" />
+                      <MapPin className="w-8 h-8 mx-auto mb-2 opacity-40" />
                       Map Preview
                     </div>
                   </div>
                   <Button
                     variant="outline"
-                    className="w-full"
+                    className="w-full border-white/[0.08] text-white/70 hover:bg-white/[0.04] hover:text-white"
                     size="sm"
                     asChild
                   >
@@ -650,27 +629,26 @@ function Contact() {
               </div>
 
               {/* Support Team with Photo */}
-              <div className="relative bg-card/90 backdrop-blur-md rounded-2xl border border-border/30 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500">
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent via-primary to-accent" />
+              <div className="bg-[#111118] border border-white/[0.06] rounded-2xl overflow-hidden">
                 <div className="p-6">
-                  <h3 className="text-lg font-bold mb-1">
+                  <h3 className="text-lg font-semibold text-white mb-1">
                     Meet Your Support Team
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-4">
+                  <p className="text-sm text-white/50 mb-4">
                     Real people ready to help
                   </p>
 
                   {/* Team Photo */}
-                  <div className="relative rounded-xl overflow-hidden mb-4 group">
+                  <div className="relative rounded-xl overflow-hidden mb-4">
                     <img
                       src={supportAgentPhoto}
                       alt="Our friendly support team member"
-                      className="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-40 object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#111118] via-transparent to-transparent" />
                     <div className="absolute bottom-2 left-3 text-white">
-                      <span className="text-xs bg-success/80 px-2 py-0.5 rounded-full">
-                        ● Online Now
+                      <span className="text-xs bg-emerald-500/80 px-2 py-0.5 rounded-full">
+                        Online Now
                       </span>
                     </div>
                   </div>
@@ -692,16 +670,16 @@ function Contact() {
                     ].map((member, i) => (
                       <div
                         key={i}
-                        className="flex items-center gap-3 p-3 rounded-xl bg-muted/30 border border-border/30 hover:border-primary/30 hover:bg-muted/50 transition-all duration-300 cursor-pointer group"
+                        className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/[0.04] hover:border-white/[0.1] transition-colors duration-300 cursor-pointer"
                       >
                         <div
-                          className={`w-12 h-12 rounded-xl bg-gradient-to-br from-${member.color}/20 to-${member.color}/5 flex items-center justify-center text-${member.color} font-bold group-hover:scale-110 transition-transform duration-300`}
+                          className={`w-12 h-12 rounded-xl bg-${member.color}/10 flex items-center justify-center text-${member.color} font-bold`}
                         >
                           {member.initials}
                         </div>
                         <div>
-                          <p className="text-sm font-semibold">{member.name}</p>
-                          <p className="text-xs text-muted-foreground">
+                          <p className="text-sm font-semibold text-white">{member.name}</p>
+                          <p className="text-xs text-white/50">
                             {member.role}
                           </p>
                         </div>
@@ -714,9 +692,6 @@ function Contact() {
           </div>
         </div>
       </div>
-      </MeshBackground>
-
-      <div className="section-glow-strip" />
 
       <Footer />
     </PageTransition>
