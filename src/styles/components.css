@@ -388,8 +388,8 @@ a[role="button"]:active {
   transform: translateY(0);
   box-shadow: var(--shadow-card);
   overflow: hidden;
-  border-radius: 1rem;
-  background: hsl(0 0% 100%);
+  border-radius: var(--radius);
+  background: hsl(var(--card));
 }
 
 .card-enhanced:hover {
