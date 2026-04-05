@@ -2,12 +2,12 @@ import { useState, useMemo } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
-
+import TrustBar from "@/components/TrustBar";
 import { SEO } from "@/components/SEO";
 import { PageTransition } from "@/components/PageTransition";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
+import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
   Search,
@@ -15,9 +15,10 @@ import {
   ThumbsDown,
   Phone,
   MessageCircle,
+  Shield,
   BookOpen,
 } from "lucide-react";
-
+import { Sparkles } from "lucide-react";
 import { PlatformGuide } from "@/components/PlatformGuide";
 import { AIImageDisclaimer } from "@/components/AIImageDisclaimer";
 import { SITE } from "@/config/site";
@@ -31,6 +32,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
+import HeroFloatingStats from "@/components/business/HeroFloatingStats";
+import { SectionDivider, MeshBackground } from "@/components/pro";
 
 interface FAQ {
   id: string;
@@ -448,40 +451,40 @@ export default function FAQ() {
         <Navigation overlay />
 
         <main>
-          {/* Hero */}
+          {/* Hero wrapper for floating stats */}
           <div className="relative">
             <Hero
               backgroundImages={faqHeroImages}
-              headline=""
-              subheadline=""
+              headline="Frequently Asked Questions"
+              subheadline="Get instant answers to your questions about our AI scam protection services, training programs, and security solutions"
               overlay={true}
               showScrollIndicator={false}
-            >
-              <div className="text-center mb-6">
-                <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-                  Frequently Asked Questions
-                </h1>
-                <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
-                  Get instant answers about our AI scam protection, business services, and security solutions.
-                </p>
-              </div>
-            </Hero>
+            />
+
+            {/* Floating Stats Bar - Outside Hero to stay static */}
+            <HeroFloatingStats />
           </div>
 
-          <div className="bg-[#0a0a12]">
+          {/* Spacer for floating stats bar */}
+          <div className="hidden lg:block h-14" />
+          <div className="lg:hidden h-6" />
+
+          <MeshBackground variant="subtle" withDots>
+          <TrustBar />
 
           {/* Platform Guide Section */}
-          <section className="py-10">
+          <section className="py-6 bg-gradient-to-b from-primary/5 to-background relative overflow-hidden">
+            
             <div className="container mx-auto px-4">
               <div className="max-w-4xl mx-auto text-center">
                 <Badge className="mb-3 bg-primary/10 text-primary border-primary/20">
                   <BookOpen className="w-3 h-3 mr-1" />
                   New to InVision?
                 </Badge>
-                <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                <h2 className="text-2xl md:text-3xl font-bold mb-3">
                   Learn How to Use Our Platform
                 </h2>
-                <p className="text-white/50 mb-4 max-w-2xl mx-auto">
+                <p className="text-muted-foreground mb-4 max-w-2xl mx-auto">
                   Get step-by-step guidance on purchasing, subscribing,
                   submitting scam reports, and more
                 </p>
@@ -490,32 +493,39 @@ export default function FAQ() {
             </div>
           </section>
 
-          {/* Search Section */}
-          <section className="py-8">
+          <SectionDivider variant="curve" color="background" />
+
+          {/* Search & Filter Section - Redesigned */}
+          <section className="py-6 bg-gradient-to-b from-muted/30 to-background">
             <div className="container mx-auto px-4">
               <div className="max-w-4xl mx-auto">
-                <div className="relative">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30 w-5 h-5" />
-                  <Input
-                    type="text"
-                    placeholder="Search for answers... (e.g., 'How to get started', 'Payment methods')"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-12 h-14 text-base rounded-xl border border-white/[0.08] bg-[#111118] text-white placeholder:text-white/30 focus:border-primary/50 focus:ring-1 focus:ring-primary/20"
-                  />
-                  {searchQuery && (
-                    <button
-                      onClick={() => setSearchQuery("")}
-                      className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white/40 hover:text-white transition-colors"
-                    >
-                      ✕
-                    </button>
-                  )}
+                {/* Search Bar - Enhanced */}
+                <div className="relative mb-6">
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 rounded-2xl blur-xl opacity-50" />
+                  <div className="relative">
+                    <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
+                    <Input
+                      type="text"
+                      placeholder="Search for answers... (e.g., 'How to get started', 'Payment methods')"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="pl-12 h-14 text-base rounded-xl border-2 border-border/50 focus:border-primary/50 bg-background/80 backdrop-blur-sm shadow-lg"
+                    />
+                    {searchQuery && (
+                      <button
+                        onClick={() => setSearchQuery("")}
+                        className="absolute right-4 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        ✕
+                      </button>
+                    )}
+                  </div>
                 </div>
 
+                {/* Results Count */}
                 {searchQuery && (
-                  <div className="text-center mt-4">
-                    <Badge variant="secondary" className="text-sm bg-white/[0.05] text-white/60 border-white/[0.08]">
+                  <div className="text-center mb-4">
+                    <Badge variant="secondary" className="text-sm">
                       {filteredFAQs.length}{" "}
                       {filteredFAQs.length === 1 ? "result" : "results"} found
                     </Badge>
@@ -525,27 +535,28 @@ export default function FAQ() {
             </div>
           </section>
 
+          <SectionDivider variant="curve" color="background" />
+
           {/* Category Tabs */}
-          <section className="py-6 border-y border-white/[0.04]">
+          <section className="py-4 border-y border-border/40 bg-muted/20">
             <div className="container mx-auto px-4">
               <div className="max-w-6xl mx-auto">
-                <h3 className="text-sm font-semibold text-white/40 uppercase tracking-wider mb-4 text-center">
+                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3 text-center">
                   Filter by Category
                 </h3>
                 <div className="flex flex-wrap gap-2 justify-center">
                   {categories.map((category) => {
                     const count = categoryCounts[category] || 0;
-                    const isActive = activeCategory === category;
                     return (
                       <Button
                         key={category}
-                        variant={isActive ? "default" : "outline"}
+                        variant={activeCategory === category ? "default" : "outline"}
                         size="lg"
                         onClick={() => setActiveCategory(category)}
-                        className={`rounded-full ${!isActive ? "border-white/[0.08] text-white/60 hover:bg-white/[0.04] hover:text-white" : ""}`}
+                        className="rounded-full shadow-sm hover:shadow-md transition-shadow"
                       >
                         {category}
-                        <Badge variant="secondary" className={`ml-2 ${isActive ? "bg-white/20" : "bg-white/[0.05] text-white/40"}`}>
+                        <Badge variant="secondary" className="ml-2 bg-background/50">
                           {count}
                         </Badge>
                       </Button>
@@ -556,30 +567,32 @@ export default function FAQ() {
             </div>
           </section>
 
+          <SectionDivider variant="curve" color="background" />
+
           {/* FAQ Accordion */}
-          <section className="py-8">
+          <section className="py-4 sm:py-6">
             <div className="container mx-auto px-4">
               <div className="max-w-4xl mx-auto">
                 {filteredFAQs.length > 0 ? (
-                  <Accordion type="single" collapsible className="space-y-2">
+                  <Accordion type="single" collapsible className="space-y-1">
                     {filteredFAQs.map((faq) => (
-                      <div key={faq.id} className="bg-[#111118] border border-white/[0.06] rounded-xl overflow-hidden hover:border-white/[0.1] transition-colors">
+                      <Card key={faq.id} className="overflow-hidden">
                         <AccordionItem value={faq.id} className="border-none">
-                          <AccordionTrigger className="px-5 py-4 text-left text-white hover:bg-white/[0.02] transition-colors text-base font-semibold hover:no-underline">
+                          <AccordionTrigger className="px-4 py-2.5 text-left hover:bg-muted/50 transition-colors text-base font-semibold hover:no-underline">
                             <span className="pr-4">{faq.question}</span>
                           </AccordionTrigger>
-                          <AccordionContent className="px-5 pb-5">
+                          <AccordionContent className="px-4 pb-4">
                             <div className="pt-1 space-y-3">
-                              <p className="text-base leading-relaxed whitespace-pre-line text-white/70">
+                              <p className="text-base leading-relaxed whitespace-pre-line text-foreground/90">
                                 {faq.answer}
                               </p>
-                              <div className="flex items-center gap-4 pt-4 border-t border-white/[0.06]">
-                                <span className="text-sm text-white/40">Was this helpful?</span>
+                              <div className="flex items-center gap-4 pt-4 border-t border-border">
+                                <span className="text-sm text-muted-foreground">Was this helpful?</span>
                                 <div className="flex gap-2">
-                                  <Button variant={helpfulVotes[faq.id] === true ? "default" : "outline"} size="sm" onClick={() => handleHelpful(faq.id, true)} className={`gap-2 ${helpfulVotes[faq.id] !== true ? "border-white/[0.08] text-white/60 hover:bg-white/[0.04]" : ""}`}>
+                                  <Button variant={helpfulVotes[faq.id] === true ? "default" : "outline"} size="sm" onClick={() => handleHelpful(faq.id, true)} className="gap-2">
                                     <ThumbsUp className="w-4 h-4" /> Yes
                                   </Button>
-                                  <Button variant={helpfulVotes[faq.id] === false ? "default" : "outline"} size="sm" onClick={() => handleHelpful(faq.id, false)} className={`gap-2 ${helpfulVotes[faq.id] !== false ? "border-white/[0.08] text-white/60 hover:bg-white/[0.04]" : ""}`}>
+                                  <Button variant={helpfulVotes[faq.id] === false ? "default" : "outline"} size="sm" onClick={() => handleHelpful(faq.id, false)} className="gap-2">
                                     <ThumbsDown className="w-4 h-4" /> No
                                   </Button>
                                 </div>
@@ -587,33 +600,37 @@ export default function FAQ() {
                             </div>
                           </AccordionContent>
                         </AccordionItem>
-                      </div>
+                      </Card>
                     ))}
                   </Accordion>
                 ) : (
-                  <div className="bg-[#111118] border border-white/[0.06] rounded-xl p-12 text-center">
+                  <Card className="p-12 text-center">
                     <div className="max-w-md mx-auto">
-                      <Search className="w-16 h-16 mx-auto mb-4 text-white/20" />
-                      <h3 className="text-xl font-semibold text-white mb-2">No results found</h3>
-                      <p className="text-white/50 mb-4">Try adjusting your search or browse all categories</p>
-                      <Button variant="outline" className="border-white/[0.08] text-white/60 hover:bg-white/[0.04]" onClick={() => { setSearchQuery(""); setActiveCategory("All Questions"); }}>
+                      <Search className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
+                      <h3 className="text-xl font-semibold mb-2">No results found</h3>
+                      <p className="text-muted-foreground mb-4">Try adjusting your search or browse all categories</p>
+                      <Button variant="outline" onClick={() => { setSearchQuery(""); setActiveCategory("All Questions"); }}>
                         Clear Search
                       </Button>
                     </div>
-                  </div>
+                  </Card>
                 )}
               </div>
             </div>
           </section>
 
+          <SectionDivider variant="curve" color="background" />
+
           {/* Still Have Questions CTA */}
-          <section className="py-16">
-            <div className="container mx-auto px-4">
-              <div className="max-w-2xl mx-auto bg-[#111118] border border-white/[0.06] rounded-2xl p-8 sm:p-12 text-center">
-                <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <section className="py-12 sm:py-16 relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
+            <div className="absolute top-10 right-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
+            <div className="container mx-auto px-4 relative z-10">
+              <Card className="max-w-2xl mx-auto p-8 sm:p-12 text-center border border-border/50 shadow-sm">
+                <h2 className="text-3xl sm:text-4xl font-black mb-4">
                   Still Have Questions?
                 </h2>
-                <p className="text-lg text-white/50 mb-8">
+                <p className="text-lg text-muted-foreground mb-8">
                   Didn't find what you need? Our support team is here to help.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -622,31 +639,35 @@ export default function FAQ() {
                       <MessageCircle className="w-5 h-5" /> Contact Support
                     </Link>
                   </Button>
-                  <Button size="lg" variant="outline" asChild className="gap-2 border-white/[0.08] text-white/70 hover:bg-white/[0.04] hover:text-white">
+                  <Button size="lg" variant="outline" asChild className="gap-2">
                     <a href={SITE.phone.tel}>
                       <Phone className="w-5 h-5" /> Call {SITE.phone.display}
                     </a>
                   </Button>
                 </div>
-                <div className="mt-8 pt-8 border-t border-white/[0.06]">
-                  <p className="text-sm text-white/40">
-                    <strong className="text-white/60">Support Hours:</strong><br />
-                    Email: 24/7 &middot; Phone: Mon-Fri 9am-6pm EST
+                <div className="mt-8 pt-8 border-t border-border">
+                  <p className="text-sm text-muted-foreground">
+                    <strong>Support Hours:</strong><br />
+                    Email: 24/7 • Phone: Mon-Fri 9am-6pm EST
                   </p>
                 </div>
-              </div>
+              </Card>
             </div>
           </section>
 
+          <SectionDivider variant="curve" color="background" />
+
           {/* AI Image Disclaimer */}
-          <section className="py-12">
+          <section className="py-12 bg-muted/20">
             <div className="container mx-auto px-4">
               <div className="max-w-4xl mx-auto">
                 <AIImageDisclaimer />
               </div>
             </div>
           </section>
-          </div>
+          </MeshBackground>
+
+          <div className="section-glow-strip" />
           <Footer />
         </main>
       </div>

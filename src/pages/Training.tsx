@@ -61,7 +61,7 @@ import { SEO } from "@/components/SEO";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 import { usePrerenderBlocker } from "@/contexts/PrerenderContext";
-// SectionDivider and MeshBackground removed for cleaner dark theme
+import { SectionDivider, MeshBackground } from "@/components/pro";
 
 import seniorCouple from "@/assets/senior-couple-active.jpg";
 
@@ -272,30 +272,31 @@ const ScamExampleCard = ({
   index: number;
 }) => {
   return (
-    <div className="h-full overflow-hidden rounded-2xl bg-[#111118] border border-white/[0.06] hover:-translate-y-1 transition-all duration-300">
+    <div className="h-full overflow-hidden rounded-2xl bg-card border border-border/60 shadow-sm hover:shadow-lg hover:border-primary/20 transition-all duration-300 hover:-translate-y-1">
+      <div className="h-1.5 bg-gradient-to-r from-primary via-accent to-primary" />
       <div className="p-6">
         <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20 mb-4">
           {example.badge}
         </span>
         <div className="space-y-4">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.15em] text-white/50 font-bold mb-2">
+            <p className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground font-bold mb-2">
               What They Received
             </p>
-            <p className="text-white italic leading-relaxed text-sm">
+            <p className="text-foreground italic leading-relaxed text-sm">
               "{example.received}"
             </p>
           </div>
           <div>
-            <p className="text-[11px] uppercase tracking-[0.15em] text-white/50 font-bold mb-2">
+            <p className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground font-bold mb-2">
               Our Analysis
             </p>
-            <p className="text-white/70 leading-relaxed text-sm">
+            <p className="text-muted-foreground leading-relaxed text-sm">
               {example.analysis}
             </p>
           </div>
-          <div className="pt-4 border-t border-white/[0.06]">
-            <p className="text-[11px] uppercase tracking-[0.15em] text-white/50 font-bold mb-2">
+          <div className="pt-4 border-t border-border/50">
+            <p className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground font-bold mb-2">
               Amount Saved
             </p>
             <p className="text-3xl font-black text-primary">
@@ -590,16 +591,16 @@ function LearnAndTrain() {
             subheadline=""
             showScrollIndicator={true}
           >
-            <div className="text-center md:text-left mb-6 sm:mb-8">
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight">
+            <div className="text-center md:text-left mb-4 sm:mb-6">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3 glow-text">
                 <RotatingHeadlines headlines={trainingHeadlines} className="" />
               </h1>
-              <p className="text-lg md:text-xl text-white/70 max-w-3xl leading-relaxed">
+              <p className="text-lg md:text-xl text-white/90 max-w-3xl">
                 Expert-led workshops & instant file scanning for families and
                 seniors
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-3 flex-wrap justify-center md:justify-start">
+            <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center md:justify-start">
               <Button
                 onClick={() =>
                   document
@@ -607,7 +608,6 @@ function LearnAndTrain() {
                     ?.scrollIntoView({ behavior: "smooth" })
                 }
                 size="xl"
-                className="rounded-lg font-semibold tracking-wide"
               >
                 <Shield className="w-5 h-5 mr-2" />
                 Learn & Train Workshops
@@ -616,7 +616,6 @@ function LearnAndTrain() {
                 asChild
                 size="xl"
                 variant="heroOutline"
-                className="rounded-lg font-semibold tracking-wide border-white/20 hover:border-white/40"
               >
                 <Link to="/training/ai-analysis">
                   <FileCheck className="w-5 h-5 mr-2" />
@@ -629,30 +628,33 @@ function LearnAndTrain() {
         </div>
 
         {/* ══════════ LIVE THREAT TICKER ══════════ */}
-        <div className="bg-[#0a0a0f] text-white py-3 overflow-hidden border-y border-white/[0.06]">
+        <div className="bg-foreground text-background py-3 overflow-hidden">
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-center gap-4 sm:gap-8 flex-wrap text-xs sm:text-sm font-semibold">
               <span className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" /> 2,847 scams blocked this month</span>
-              <span className="hidden sm:inline text-white/20">|</span>
+              <span className="hidden sm:inline text-background/30">|</span>
               <span className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-green-400" /> $1.2M saved for families</span>
-              <span className="hidden sm:inline text-white/20">|</span>
+              <span className="hidden sm:inline text-background/30">|</span>
               <span className="flex items-center gap-2"><Users className="w-4 h-4" /> 140,000+ students trained</span>
             </div>
           </div>
         </div>
 
         {/* ══════════ SECTION 1: WHY FAMILIES TRUST US ══════════ */}
-        <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden bg-[#0a0a0f]">
+        <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background dot-grid-bg" />
+          
+          <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto px-4 lg:px-12 relative z-10">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Sparkles className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">Trusted by 100+ Families</span>
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
                 Why Families <span className="text-primary">Trust Us</span>
               </h2>
-              <p className="text-lg text-white/70 max-w-3xl mx-auto">
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 Clear teaching, privacy-first protocols, and real scripts your
                 family can use in any emergency.
               </p>
@@ -660,17 +662,19 @@ function LearnAndTrain() {
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-14">
               {TRUST_PILLARS.map((item, index) => (
-                <div key={index} className="relative rounded-2xl border border-white/[0.06] bg-[#111118] overflow-hidden p-6 text-center hover:-translate-y-1 transition-all duration-300 h-full">
+                <div key={index} className="relative rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl overflow-hidden p-6 text-center shadow-sm hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/25 hover:-translate-y-2 transition-all duration-500 h-full">
+                  <div className="h-1 w-full bg-gradient-to-r from-primary to-accent absolute top-0 left-0 right-0" />
                   <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
                     <item.icon className="w-7 h-7 text-primary" />
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-2">{item.title}</h3>
-                  <p className="text-sm text-white/70 leading-relaxed mb-3">
+                  <h3 className="text-lg font-bold text-foreground mb-2">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">
                     {item.desc}
                   </p>
-                  <div className="mt-auto pt-3 border-t border-white/[0.06]">
+                  {/* Graphic stat callout */}
+                  <div className="mt-auto pt-3 border-t border-border/50">
                     <p className="text-2xl font-black text-primary">{item.stat}</p>
-                    <p className="text-[10px] uppercase tracking-widest text-white/50 font-bold">{item.statLabel}</p>
+                    <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">{item.statLabel}</p>
                   </div>
                 </div>
               ))}
@@ -678,16 +682,17 @@ function LearnAndTrain() {
 
             {/* Emergency Protocol + Identity Verification */}
             <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-              <div className="relative rounded-2xl border border-white/[0.06] bg-[#111118] overflow-hidden p-6 sm:p-8 hover:-translate-y-1 transition-all duration-300 h-full">
+              <div className="relative rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl overflow-hidden p-6 sm:p-8 shadow-sm hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/25 transition-all duration-500 h-full">
+                <div className="h-1 w-full bg-gradient-to-r from-destructive/60 to-primary absolute top-0 left-0 right-0" />
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-destructive/10 flex items-center justify-center">
                     <AlertTriangle className="w-6 h-6 text-destructive" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-black text-white">
+                    <h3 className="text-xl font-black text-foreground">
                       60-Second Pause Protocol
                     </h3>
-                    <p className="text-xs text-white/50">Memorize these 5 steps</p>
+                    <p className="text-xs text-muted-foreground">Memorize these 5 steps</p>
                   </div>
                 </div>
                 <ol className="space-y-3">
@@ -711,16 +716,17 @@ function LearnAndTrain() {
                 </ol>
               </div>
 
-              <div className="relative rounded-2xl border border-white/[0.06] bg-[#111118] overflow-hidden p-6 sm:p-8 hover:-translate-y-1 transition-all duration-300 h-full">
+              <div className="relative rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl overflow-hidden p-6 sm:p-8 shadow-sm hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/25 transition-all duration-500 h-full">
+                <div className="h-1 w-full bg-gradient-to-r from-primary to-accent absolute top-0 left-0 right-0" />
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                     <Fingerprint className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-black text-white">
+                    <h3 className="text-xl font-black text-foreground">
                       Identity Verification Script
                     </h3>
-                    <p className="text-xs text-white/50">Use these exact phrases</p>
+                    <p className="text-xs text-muted-foreground">Use these exact phrases</p>
                   </div>
                 </div>
                 <ul className="space-y-3">
@@ -750,18 +756,23 @@ function LearnAndTrain() {
           </div>
         </section>
 
+        <SectionDivider variant="wave" color="muted" />
+
+        {/* ══════════ GRADIENT DIVIDER ══════════ */}
+        <div className="h-1.5 bg-gradient-to-r from-primary via-accent to-primary" />
+
         {/* ══════════ SECTION 2: HOW IT WORKS ══════════ */}
-        <section id="book" className="py-10 sm:py-16 md:py-20 bg-[#111118]">
+        <section id="book" className="py-10 sm:py-16 md:py-20 bg-muted/20">
           <div className="container mx-auto px-4 lg:px-12">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Sparkles className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">Getting Started</span>
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
                 How It <span className="text-primary">Works</span>
               </h2>
-              <p className="text-lg text-white/70 max-w-3xl mx-auto">
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 Three simple steps to build calm, repeatable safety habits.
               </p>
             </div>
@@ -772,16 +783,18 @@ function LearnAndTrain() {
                 { step: "02", icon: GraduationCap, title: "Learn & Practice", desc: "Master identity verification, spot deepfakes, and handle urgent messages with confidence.", color: "from-green-500/20 to-primary/20" },
                 { step: "03", icon: Shield, title: "Get Ongoing Support", desc: "Add our monthly help line to forward suspicious messages for expert review.", color: "from-violet-500/20 to-primary/20" },
               ].map((item, index) => (
-                <div key={index} className="relative rounded-2xl border border-white/[0.06] bg-[#0a0a0f] p-8 text-center hover:-translate-y-1 transition-all duration-300 h-full overflow-hidden">
+                <div key={index} className="relative rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl p-8 text-center shadow-sm hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/25 hover:-translate-y-2 transition-all duration-500 h-full overflow-hidden">
+                  {/* Background gradient accent */}
+                  <div className={`absolute top-0 left-0 right-0 h-24 bg-gradient-to-b ${item.color} to-transparent opacity-50`} />
                   <div className="relative">
-                    <div className="absolute top-0 right-0 text-5xl font-black text-white/[0.05]">
+                    <div className="absolute top-0 right-0 text-5xl font-black text-primary/10">
                       {item.step}
                     </div>
                     <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
                       <item.icon className="w-8 h-8 text-primary" />
                     </div>
-                    <h3 className="text-xl font-black text-white mb-3">{item.title}</h3>
-                    <p className="text-sm text-white/70 leading-relaxed">{item.desc}</p>
+                    <h3 className="text-xl font-black text-foreground mb-3">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
                   </div>
                   {/* Connecting arrow for desktop */}
                   {index < 2 && (
@@ -796,17 +809,20 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 3: SCAM PREVENTION WORKSHOPS ══════════ */}
-        <section id="training" className="py-10 sm:py-16 md:py-20 relative overflow-hidden bg-[#0a0a0f]">
+        <section id="training" className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
+          <div className="absolute top-20 right-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-20 left-0 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto px-4 lg:px-12 relative z-10">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Shield className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">Protecting Families Together</span>
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
                 Scam Prevention <span className="text-primary">Workshops</span>
               </h2>
-              <p className="text-lg text-white/70 max-w-3xl mx-auto">
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 Simple, friendly classes. No tech skills needed. Perfect for
                 seniors, parents, and grandparents.
               </p>
@@ -814,12 +830,12 @@ function LearnAndTrain() {
 
             {/* Veterans banner */}
             <div className="flex justify-center mb-8 sm:mb-10 px-2">
-              <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2.5 sm:py-3 bg-[#111118] border border-white/[0.06] rounded-full text-center flex-wrap justify-center">
+              <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2.5 sm:py-3 bg-card border border-border/60 rounded-full shadow-sm text-center flex-wrap justify-center">
                 <span className="text-lg sm:text-xl">🇺🇸</span>
-                <span className="font-bold text-white text-xs sm:text-sm">
+                <span className="font-bold text-foreground text-xs sm:text-sm">
                   Veterans & First Responders Save 10%
                 </span>
-                <span className="text-[10px] sm:text-xs text-white/50">
+                <span className="text-[10px] sm:text-xs text-muted-foreground">
                   · Applied at checkout
                 </span>
               </div>
@@ -839,10 +855,10 @@ function LearnAndTrain() {
                 { icon: Award, value: "100%", label: "Completion Rate" },
                 { icon: Heart, value: "4.9/5", label: "Student Rating" },
               ].map((stat, i) => (
-                <div key={i} className="bg-[#111118] border border-white/[0.06] rounded-xl p-3 text-center">
+                <div key={i} className="bg-muted/50 border border-border/40 rounded-xl p-3 text-center">
                   <stat.icon className="w-5 h-5 text-primary mx-auto mb-1" />
-                  <p className="text-xl font-black text-white">{stat.value}</p>
-                  <p className="text-[10px] uppercase tracking-widest text-white/50 font-bold">{stat.label}</p>
+                  <p className="text-xl font-black text-foreground">{stat.value}</p>
+                  <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">{stat.label}</p>
                 </div>
               ))}
             </div>
@@ -853,17 +869,17 @@ function LearnAndTrain() {
         <InstructorShowcase />
 
         {/* ══════════ SECTION 4: SIMPLE PROTECTION IN 4 STEPS ══════════ */}
-        <section className="py-10 sm:py-16 md:py-20 bg-[#111118]">
+        <section className="py-10 sm:py-16 md:py-20 bg-muted/20">
           <div className="container mx-auto px-4 lg:px-12">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Zap className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">Easy as 1-2-3-4</span>
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
                 Simple Protection in <span className="text-primary">4 Steps</span>
               </h2>
-              <p className="text-lg text-white/70 max-w-3xl mx-auto">
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 Our process is designed to be effortless. Just forward it to us.
               </p>
             </div>
@@ -875,37 +891,38 @@ function LearnAndTrain() {
                 { step: "03", icon: Brain, title: "Expert Analysis", subtitle: "We check it", desc: "Our AI and human experts analyze the threat and verify authenticity.", color: "from-violet-500/15" },
                 { step: "04", icon: ShieldCheck, title: "Clear Guidance", subtitle: "You're safe", desc: "You get a clear, simple answer: safe or dangerous, with next steps.", color: "from-green-500/15" },
               ].map((item, index) => (
-                <div key={index} className="relative rounded-2xl border border-white/[0.06] bg-[#0a0a0f] p-6 text-center hover:-translate-y-1 transition-all duration-300 h-full overflow-hidden">
+                <div key={index} className="relative rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl p-6 text-center shadow-sm hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/25 hover:-translate-y-2 transition-all duration-500 h-full overflow-hidden">
+                  <div className={`absolute inset-0 bg-gradient-to-b ${item.color} to-transparent opacity-40`} />
                   <div className="relative">
-                    <div className="absolute top-0 right-0 text-4xl font-black text-white/[0.05]">
+                    <div className="absolute top-0 right-0 text-4xl font-black text-primary/10">
                       {item.step}
                     </div>
                     <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
                       <item.icon className="w-7 h-7 text-primary" />
                     </div>
-                    <h3 className="text-lg font-black text-white mb-1">{item.title}</h3>
+                    <h3 className="text-lg font-black text-foreground mb-1">{item.title}</h3>
                     <p className="text-sm font-semibold text-primary mb-3">{item.subtitle}</p>
-                    <p className="text-sm text-white/70 leading-relaxed">{item.desc}</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
 
             {/* Visual response time graphic */}
-            <div className="mt-10 max-w-2xl mx-auto bg-[#0a0a0f] border border-white/[0.06] rounded-2xl p-5 sm:p-6">
+            <div className="mt-10 max-w-2xl mx-auto bg-card border border-border/60 rounded-2xl p-5 sm:p-6 shadow-sm">
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center">
-                    <Zap className="w-6 h-6 text-green-400" />
+                    <Zap className="w-6 h-6 text-green-600" />
                   </div>
                   <div>
-                    <p className="font-black text-white">Average Response Time</p>
-                    <p className="text-xs text-white/50">From submission to analysis</p>
+                    <p className="font-black text-foreground">Average Response Time</p>
+                    <p className="text-xs text-muted-foreground">From submission to analysis</p>
                   </div>
                 </div>
                 <div className="text-right">
                   <p className="text-3xl sm:text-4xl font-black text-primary">{'<'}2 min</p>
-                  <p className="text-[10px] uppercase tracking-widest text-white/50 font-bold">AI-Powered Speed</p>
+                  <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">AI-Powered Speed</p>
                 </div>
               </div>
             </div>
@@ -913,17 +930,20 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 5: THREAT ANALYSIS ══════════ */}
-        <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden bg-[#0a0a0f]">
+        <MeshBackground variant="subtle" withOrbs>
+        <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
+          <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto px-4 lg:px-12 relative z-10">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Shield className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">Comprehensive Protection</span>
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
                 We Analyze <span className="text-primary">All Types</span> of Threats
               </h2>
-              <p className="text-lg text-white/70 max-w-3xl mx-auto">
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 Click on any threat type to learn how we protect you.
               </p>
             </div>
@@ -933,22 +953,22 @@ function LearnAndTrain() {
                 <div
                   key={index}
                   onClick={() => setExpandedThreat(expandedThreat === threat.title ? null : threat.title)}
-                  className={`cursor-pointer bg-[#111118] border rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 ${
+                  className={`cursor-pointer bg-card border rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-lg ${
                     expandedThreat === threat.title
-                      ? "border-primary/40"
-                      : "border-white/[0.06] hover:border-white/[0.12]"
+                      ? "border-primary/40 shadow-lg"
+                      : "border-border/60 hover:border-primary/20"
                   }`}
                 >
                   <div className="flex flex-col items-center text-center">
                     <div className={`w-12 h-12 rounded-xl ${threat.color.split(' ')[0]} flex items-center justify-center mb-3`}>
                       <threat.icon className={`w-6 h-6 ${threat.color.split(' ')[1]}`} />
                     </div>
-                    <h3 className="font-bold text-sm text-white mb-1">{threat.title}</h3>
-                    <p className="text-xs text-white/50">Click to learn more</p>
+                    <h3 className="font-bold text-sm text-foreground mb-1">{threat.title}</h3>
+                    <p className="text-xs text-muted-foreground">Click to learn more</p>
                   </div>
                   {expandedThreat === threat.title && (
-                    <div className="mt-3 pt-3 border-t border-white/[0.06]">
-                      <p className="text-xs text-white/70 leading-relaxed">{threat.description}</p>
+                    <div className="mt-3 pt-3 border-t border-border/50">
+                      <p className="text-xs text-muted-foreground leading-relaxed">{threat.description}</p>
                       <div className="mt-2 flex items-center justify-center gap-1 text-primary">
                         <span className="text-xs font-bold">Forward to us!</span>
                         <CheckCircle className="w-3 h-3" />
@@ -966,27 +986,32 @@ function LearnAndTrain() {
                 { value: "99.7%", label: "Detection Accuracy" },
                 { value: "24/7", label: "Monitoring Active" },
               ].map((stat, i) => (
-                <div key={i} className="bg-[#111118] border border-white/[0.06] rounded-xl p-4 text-center">
+                <div key={i} className="bg-card border border-border/60 rounded-xl p-4 text-center">
                   <p className="text-2xl sm:text-3xl font-black text-primary">{stat.value}</p>
-                  <p className="text-[10px] sm:text-xs uppercase tracking-widest text-white/50 font-bold">{stat.label}</p>
+                  <p className="text-[10px] sm:text-xs uppercase tracking-widest text-muted-foreground font-bold">{stat.label}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
+        </MeshBackground>
+
+        {/* ══════════ GRADIENT DIVIDER ══════════ */}
+        <div className="divider-gradient-colored" />
+
         {/* ══════════ SECTION 6: AI PROFESSIONAL TRAINING ══════════ */}
-        <section id="ai-pro-training" className="py-10 sm:py-16 md:py-20 bg-[#111118]">
+        <section id="ai-pro-training" className="py-10 sm:py-16 md:py-20 bg-muted/20">
           <div className="container mx-auto px-4 lg:px-12">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Brain className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">For Professionals & Entrepreneurs</span>
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
                 AI Professional <span className="text-primary">Training</span>
               </h2>
-              <p className="text-lg text-white/70 max-w-4xl mx-auto mb-2">
+              <p className="text-lg text-muted-foreground max-w-4xl mx-auto mb-2">
                 Build an AI agency, create automation workflows, or design
                 stunning websites.
               </p>
@@ -1002,9 +1027,9 @@ function LearnAndTrain() {
             </div>
 
             <div className="text-center mt-10">
-              <div className="inline-flex items-center gap-3 bg-[#0a0a0f] border border-white/[0.06] rounded-full px-6 py-3">
+              <div className="inline-flex items-center gap-3 bg-card border border-border/60 rounded-full px-6 py-3 shadow-sm">
                 <Lock className="w-4 h-4 text-primary" />
-                <p className="text-sm text-white/70">
+                <p className="text-sm text-muted-foreground">
                   Secure payment required · 10% veteran discount available
                 </p>
               </div>
@@ -1013,14 +1038,14 @@ function LearnAndTrain() {
         </section>
 
         {/* Veterans Discount Strip */}
-        <section className="py-5 bg-[#0a0a0f] border-y border-white/[0.06]">
+        <section className="py-5 bg-card border-y border-border/60">
           <div className="container mx-auto px-4">
             <div className="flex flex-wrap items-center justify-center gap-4 text-base">
               <span className="text-xl">🇺🇸</span>
-              <span className="font-bold text-white">
+              <span className="font-bold text-foreground">
                 Veterans & First Responders: 10% OFF
               </span>
-              <span className="text-sm text-white/50">
+              <span className="text-sm text-muted-foreground">
                 Military, Police, Fire, EMT
               </span>
             </div>
@@ -1028,23 +1053,25 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 7: SECURE YOUR FAMILY ══════════ */}
-        <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden bg-[#111118]">
+        <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background dot-grid-bg" />
+          <div className="absolute bottom-20 right-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto px-4 lg:px-12 relative z-10">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Heart className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">Family Protection</span>
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
                 Secure Your <span className="text-primary">Family</span>
               </h2>
-              <p className="text-lg text-white/70 max-w-3xl mx-auto">
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 AI-powered scammers don't just target you — they target your entire family.
               </p>
             </div>
 
             <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto mb-14">
-              <div className="bg-[#0a0a0f] border border-destructive/20 rounded-2xl p-6 sm:p-8 h-full">
+              <div className="bg-card border-2 border-destructive/20 rounded-2xl p-6 sm:p-8 shadow-sm h-full">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-destructive/10 flex items-center justify-center">
                     <AlertTriangle className="w-6 h-6 text-destructive" />
@@ -1066,13 +1093,14 @@ function LearnAndTrain() {
                     </li>
                   ))}
                 </ul>
+                {/* Danger stat */}
                 <div className="mt-6 p-4 bg-destructive/5 rounded-xl border border-destructive/10 text-center">
                   <p className="text-2xl font-black text-destructive">$28.4B</p>
-                  <p className="text-[10px] uppercase tracking-widest text-white/50 font-bold">Lost to scams in 2024 (FTC)</p>
+                  <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Lost to scams in 2024 (FTC)</p>
                 </div>
               </div>
 
-              <div className="bg-[#0a0a0f] border border-primary/20 rounded-2xl p-6 sm:p-8 h-full">
+              <div className="bg-card border-2 border-primary/20 rounded-2xl p-6 sm:p-8 shadow-sm h-full">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                     <Shield className="w-6 h-6 text-primary" />
@@ -1094,21 +1122,22 @@ function LearnAndTrain() {
                     </li>
                   ))}
                 </ul>
+                {/* Protection stat */}
                 <div className="mt-6 p-4 bg-primary/5 rounded-xl border border-primary/10 text-center">
                   <p className="text-2xl font-black text-primary">$1.2M+</p>
-                  <p className="text-[10px] uppercase tracking-widest text-white/50 font-bold">Saved for our families</p>
+                  <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Saved for our families</p>
                 </div>
               </div>
             </div>
 
             {/* Family Safety Vault */}
-            <div className="max-w-4xl mx-auto bg-[#0a0a0f] border border-white/[0.06] rounded-2xl p-5 sm:p-8 md:p-10">
+            <div className="max-w-4xl mx-auto bg-card border border-border/60 rounded-2xl p-5 sm:p-8 md:p-10 shadow-sm">
               <div className="text-center">
                 <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
                   <Lock className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="text-2xl font-black text-white mb-3">Family Safety Vault</h3>
-                <p className="text-white/70 mb-6">Included with Family & Premium Plans</p>
+                <h3 className="text-2xl font-black text-foreground mb-3">Family Safety Vault</h3>
+                <p className="text-muted-foreground mb-6">Included with Family & Premium Plans</p>
                 <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-3 max-w-2xl mx-auto">
                   {[
                     { icon: "🔑", feature: "Family safe words" },
@@ -1118,9 +1147,9 @@ function LearnAndTrain() {
                     { icon: "🔐", feature: "Account recovery" },
                     { icon: "✈️", feature: "Travel itineraries" },
                   ].map((item, index) => (
-                    <div key={index} className="flex items-center gap-2 p-3 bg-[#111118] rounded-xl border border-white/[0.06]">
+                    <div key={index} className="flex items-center gap-2 p-3 bg-muted/50 rounded-xl border border-border/50">
                       <span className="text-xl">{item.icon}</span>
-                      <span className="font-medium text-sm text-white">{item.feature}</span>
+                      <span className="font-medium text-sm text-foreground">{item.feature}</span>
                     </div>
                   ))}
                 </div>
@@ -1130,17 +1159,17 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 8: SCAMS WE'VE CAUGHT ══════════ */}
-        <section className="py-10 sm:py-16 md:py-20 bg-[#0a0a0f]">
+        <section className="py-10 sm:py-16 md:py-20 bg-muted/20">
           <div className="container mx-auto px-4 lg:px-12">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Award className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">Success Stories</span>
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
                 Scams We've <span className="text-primary">Caught</span>
               </h2>
-              <p className="text-lg text-white/70 max-w-3xl mx-auto">
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 Real examples of how we've protected our members from devastating losses.
               </p>
             </div>
@@ -1152,10 +1181,10 @@ function LearnAndTrain() {
             </div>
 
             {/* Total saved banner */}
-            <div className="mt-10 bg-[#111118] border border-primary/20 rounded-2xl p-6 max-w-3xl mx-auto text-center">
-              <p className="text-sm uppercase tracking-widest text-white/50 font-bold mb-2">Total Saved Across All Members</p>
+            <div className="mt-10 bg-card border border-primary/20 rounded-2xl p-6 max-w-3xl mx-auto text-center">
+              <p className="text-sm uppercase tracking-widest text-muted-foreground font-bold mb-2">Total Saved Across All Members</p>
               <p className="text-4xl sm:text-5xl font-black text-primary">$1,200,000+</p>
-              <p className="text-sm text-white/50 mt-2">and counting — since our founding</p>
+              <p className="text-sm text-muted-foreground mt-2">and counting — since our founding</p>
             </div>
 
             {isAdmin && (
@@ -1182,16 +1211,16 @@ function LearnAndTrain() {
 
         {/* Training Success Stories */}
         {trainingTestimonials.length > 0 && (
-          <section className="py-10 sm:py-16 md:py-20 bg-[#111118]">
+          <section className="py-10 sm:py-16 md:py-20 bg-background">
             <div className="container mx-auto px-4 lg:px-12">
               <div className="text-center mb-14">
                 <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
                   Testimonials
                 </span>
-                <h2 className="text-3xl md:text-4xl font-black text-white mb-3">
+                <h2 className="text-3xl md:text-4xl font-black text-foreground mb-3">
                   Workshop <span className="text-primary">Success Stories</span>
                 </h2>
-                <p className="text-white/70 max-w-2xl mx-auto">
+                <p className="text-muted-foreground max-w-2xl mx-auto">
                   Hear from families who have completed our workshops
                 </p>
               </div>
@@ -1224,6 +1253,8 @@ function LearnAndTrain() {
           </section>
         )}
 
+        <div className="section-glow-strip" />
+
         {/* ══════════ FINAL CTA ══════════ */}
         <section className="py-16 sm:py-20 md:py-24 relative overflow-hidden">
           <div
@@ -1244,7 +1275,7 @@ function LearnAndTrain() {
                   document.getElementById("training")?.scrollIntoView({ behavior: "smooth" })
                 }
                 size="lg"
-                className="rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-semibold tracking-wide w-full sm:w-auto"
+                className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-bold w-full sm:w-auto"
               >
                 Get Started
                 <ArrowRight className="w-5 h-5 ml-2" />
@@ -1253,7 +1284,7 @@ function LearnAndTrain() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="rounded-lg bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white/20 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-semibold tracking-wide w-full sm:w-auto"
+                className="rounded-full bg-white/10 backdrop-blur-md text-white border-white/30 hover:bg-white/20 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-bold w-full sm:w-auto"
               >
                 <Link to="/contact">
                   <Headphones className="w-5 h-5 mr-2" />
