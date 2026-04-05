@@ -188,9 +188,9 @@
 
 /* Physical Photo - Image container with depth */
 .soft-image {
-  border-radius: 1rem;
+  border-radius: var(--radius);
   box-shadow: var(--shadow-card);
-  border: 1px solid hsl(240 6% 92%);
+  border: 1px solid hsl(var(--border));
   overflow: hidden;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
