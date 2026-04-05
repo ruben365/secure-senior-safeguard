@@ -17,7 +17,7 @@
 .skeuo-card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-card-hover);
-  border-color: hsl(240 6% 86%);
+  border-color: hsl(var(--border));
 }
 
 /* Skeuomorphic Button - Tactile, physical button */
