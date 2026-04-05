@@ -123,7 +123,7 @@ export const SiteOrientationGrid = () => {
                 <div className="p-5 relative">
                   <div className={`absolute inset-0 bg-gradient-to-br ${page.gradient} opacity-30 pointer-events-none`} />
                   <div className="relative">
-                    <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center mb-3 shadow-sm border border-primary/10">
+                    <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-primary/20 to-accent/15 flex items-center justify-center mb-3 shadow-[0_2px_8px_hsl(var(--primary)/0.15)] border border-primary/15 group-hover:shadow-[0_4px_16px_hsl(var(--primary)/0.25)] group-hover:scale-110 transition-all duration-300">
                       <page.icon className="w-5 h-5 text-primary" />
                     </div>
                     <h3 className="text-lg font-bold text-foreground mb-2">

@@ -64,13 +64,13 @@ export const TrustBadgesSection = () => {
           {trustIndicators.map((item) => (
             <div
               key={item.title}
-              className="relative p-6 rounded-2xl border border-border/50 bg-card text-center overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-default"
+              className="group relative p-6 rounded-2xl border border-border/50 bg-card text-center overflow-hidden hover:shadow-[0_8px_30px_-8px_hsl(var(--primary)/0.15)] hover:-translate-y-1.5 transition-all duration-300 cursor-default"
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-60 pointer-events-none`} />
               <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
 
               <div className="relative">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center mx-auto mb-4 shadow-sm border border-primary/10">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/15 flex items-center justify-center mx-auto mb-4 shadow-[0_4px_12px_hsl(var(--primary)/0.18)] border border-primary/15 group-hover:shadow-[0_6px_20px_hsl(var(--primary)/0.28)] group-hover:scale-110 transition-all duration-300">
                   <item.icon className="w-7 h-7 text-primary" />
                 </div>
                 <h3 className="text-base font-bold text-foreground mb-2">
