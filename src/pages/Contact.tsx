@@ -6,8 +6,16 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import { SEO } from "@/components/SEO";
 import { PageTransition } from "@/components/PageTransition";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import {
@@ -38,12 +46,14 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { contactFormSchema } from "@/utils/formValidation";
+import { contactFormSchema, formatPhoneNumber } from "@/utils/formValidation";
 import { z } from "zod";
 import { useConfetti } from "@/hooks/useConfetti";
+import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import supportAgentPhoto from "@/assets/support-agent.jpg";
 import heroContactBranded from "@/assets/hero-contact-branded.jpg";
 import { SITE } from "@/config/site";
+import { SectionDivider, MeshBackground } from "@/components/pro";
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
@@ -154,6 +164,8 @@ function Contact() {
     }
   };
 
+  const contactHeroImages = PROFESSIONAL_HERO_IMAGES.contact;
+
   return (
     <PageTransition variant="fade">
       <SEO
@@ -181,26 +193,34 @@ function Contact() {
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href={SITE.phone.tel} className="inline-flex items-center justify-center h-12 px-8 rounded-lg bg-white text-[#080b11] font-semibold hover:bg-white/90 transition-all duration-300">
-              <Phone className="w-5 h-5 mr-2" />
-              {SITE.phone.display}
-            </a>
-            <a href={`mailto:${SITE.emails.info}`} className="inline-flex items-center justify-center h-12 px-8 rounded-lg border border-white/20 text-white font-semibold hover:bg-white/[0.04] transition-all duration-300">
-              <Mail className="w-5 h-5 mr-2" />
-              Email Us
-            </a>
+            <Button size="xl" asChild>
+              <a href={SITE.phone.tel}>
+                <Phone className="w-5 h-5 mr-2" />
+                {SITE.phone.display}
+              </a>
+            </Button>
+            <Button size="xl" variant="heroOutline" asChild>
+              <a href={`mailto:${SITE.emails.info}`}>
+                <Mail className="w-5 h-5 mr-2" />
+                Email Us
+              </a>
+            </Button>
           </div>
         </Hero>
       </div>
 
-      <div className="py-16 bg-[#080b11]">
-        <div className="container mx-auto px-4">
+      <SectionDivider variant="curve" color="background" />
+
+      <MeshBackground variant="vibrant" withOrbs>
+      <div className="py-16 relative overflow-hidden">
+        <div className="container mx-auto px-4 relative z-10">
           {/* Contact Methods Grid */}
           <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
-              How Can We Help?
+            <span className="frosted-pill mb-4">Get in Touch</span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
+              How Can We <span className="text-primary">Help?</span>
             </h2>
-            <p className="text-lg text-white/50 max-w-3xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
               Choose the best way to reach us. We respond to every inquiry.
             </p>
           </div>
@@ -209,15 +229,16 @@ function Contact() {
             {contactMethods.map((method, index) => {
               const IconComponent = method.icon;
               return (
-                <div key={index} className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-6 h-full hover:-translate-y-0.5 transition-all duration-300">
-                  <div className="w-14 h-14 rounded-2xl bg-white/[0.05] flex items-center justify-center mb-4">
-                    <IconComponent className="w-7 h-7 text-white/60" />
+                <div key={index} className="glow-card shine-hover p-6 h-full relative overflow-hidden">
+                  <div className="relative z-10">
+                  <div className="icon-glow-ring w-14 h-14 rounded-2xl bg-gradient-to-br from-[hsl(var(--primary)/0.1)] to-[hsl(var(--accent)/0.08)] flex items-center justify-center mb-4">
+                    <IconComponent className="w-7 h-7 text-[hsl(var(--accent))]" />
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-2">{method.title}</h3>
-                  <p className="font-semibold text-white/70 mb-1 text-sm">
+                  <h3 className="text-lg font-bold text-foreground mb-2">{method.title}</h3>
+                  <p className="font-semibold text-foreground mb-1 text-sm">
                     {method.detail}
                   </p>
-                  <div className="flex items-center gap-1.5 text-xs text-white/40 mb-3">
+                  <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-3">
                     <Clock className="w-3.5 h-3.5" />
                     {method.hours}
                   </div>
@@ -227,9 +248,15 @@ function Contact() {
                   >
                     {method.badge}
                   </Badge>
-                  <a href={method.action} className="flex items-center justify-center w-full h-9 rounded-lg border border-white/20 text-white text-sm hover:bg-white/[0.04] transition-all duration-300">
-                    {method.actionText}
-                  </a>
+                  <Button
+                    variant="outline"
+                    className="w-full"
+                    size="sm"
+                    asChild
+                  >
+                    <a href={method.action}>{method.actionText}</a>
+                  </Button>
+                  </div>
                 </div>
               );
             })}
@@ -239,20 +266,23 @@ function Contact() {
           <div className="grid lg:grid-cols-5 gap-8 max-w-7xl mx-auto">
             {/* Premium Contact Form - 60% */}
             <div className="lg:col-span-3">
-              <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl overflow-hidden">
+              <div className="relative bg-card/70 backdrop-blur-xl border border-border/40 rounded-2xl shadow-sm overflow-hidden">
+                {/* Top gradient accent */}
+                <div className="h-1.5 bg-gradient-to-r from-primary via-accent to-primary" />
+
                 <div className="p-8 md:p-10">
                   <div className="flex items-center justify-between mb-6">
                     <div>
-                      <h2 className="text-2xl md:text-3xl font-bold text-white">
+                      <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
                         Send Us a Message
                       </h2>
-                      <p className="text-white/50 mt-2">
+                      <p className="text-muted-foreground mt-2">
                         We'll respond within 4 hours during business hours
                       </p>
                     </div>
                     <Badge
                       variant="outline"
-                      className="gap-1.5 px-3 py-1.5 border-white/20 text-white/60"
+                      className="gap-1.5 px-3 py-1.5 bg-success/10 border-success/30 text-success"
                     >
                       <Shield className="w-3.5 h-3.5" />
                       Secure
@@ -261,13 +291,13 @@ function Contact() {
 
                   {isSubmitted ? (
                     <div className="text-center py-16">
-                      <div className="w-20 h-20 bg-white/[0.05] rounded-full flex items-center justify-center mx-auto mb-6">
-                        <CheckCircle className="w-10 h-10 text-white/70" />
+                      <div className="w-20 h-20 bg-gradient-to-br from-success/20 to-success/5 rounded-full flex items-center justify-center mx-auto mb-6 animate-scale-in">
+                        <CheckCircle className="w-10 h-10 text-success" />
                       </div>
-                      <h3 className="text-2xl font-bold text-white mb-3">
+                      <h3 className="text-2xl font-bold mb-3">
                         Message Sent Successfully!
                       </h3>
-                      <p className="text-white/50">
+                      <p className="text-muted-foreground">
                         We'll respond within 4 hours
                       </p>
                     </div>
@@ -280,14 +310,14 @@ function Contact() {
                           name="fullName"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm font-semibold text-white/70">
+                              <FormLabel className="text-sm font-semibold">
                                 Full Name <span className="text-primary">*</span>
                               </FormLabel>
                               <FormControl>
                                 <Input
                                   {...field}
                                   placeholder="Enter your full name"
-                                  className="h-12 bg-white/[0.03] border-white/[0.08] text-white placeholder:text-white/25 rounded-xl focus:border-white/20 transition-all duration-300 pl-4"
+                                  className="h-12 bg-background/50 border-border/50 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 pl-4"
                                 />
                               </FormControl>
                               <FormMessage />
@@ -302,7 +332,7 @@ function Contact() {
                             name="email"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel className="text-sm font-semibold text-white/70">
+                                <FormLabel className="text-sm font-semibold">
                                   Email <span className="text-primary">*</span>
                                 </FormLabel>
                                 <FormControl>
@@ -310,7 +340,7 @@ function Contact() {
                                     {...field}
                                     type="email"
                                     placeholder="your@email.com"
-                                    className="h-12 bg-white/[0.03] border-white/[0.08] text-white placeholder:text-white/25 rounded-xl focus:border-white/20 transition-all duration-300"
+                                    className="h-12 bg-background/50 border-border/50 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
                                   />
                                 </FormControl>
                                 <FormMessage />
@@ -322,7 +352,7 @@ function Contact() {
                             name="phone"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel className="text-sm font-semibold text-white/70">
+                                <FormLabel className="text-sm font-semibold">
                                   Phone{" "}
                                   <span className="text-muted-foreground text-xs">
                                     (optional)
@@ -333,7 +363,7 @@ function Contact() {
                                     {...field}
                                     type="tel"
                                     placeholder="(937) 000-0000"
-                                    className="h-12 bg-white/[0.03] border-white/[0.08] text-white placeholder:text-white/25 rounded-xl focus:border-white/20 transition-all duration-300"
+                                    className="h-12 bg-background/50 border-border/50 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
                                   />
                                 </FormControl>
                                 <FormMessage />
@@ -348,7 +378,7 @@ function Contact() {
                           name="subject"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm font-semibold text-white/70">
+                              <FormLabel className="text-sm font-semibold">
                                 Subject <span className="text-primary">*</span>
                               </FormLabel>
                               <Select
@@ -356,11 +386,11 @@ function Contact() {
                                 onValueChange={field.onChange}
                               >
                                 <FormControl>
-                                  <SelectTrigger className="h-12 bg-white/[0.03] border-white/[0.08] text-white placeholder:text-white/25 rounded-xl focus:border-white/20 transition-all duration-300">
+                                  <SelectTrigger className="h-12 bg-background/50 border-border/50 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300">
                                     <SelectValue placeholder="What can we help you with?" />
                                   </SelectTrigger>
                                 </FormControl>
-                                <SelectContent className="rounded-xl bg-[#0d1017] border-white/[0.08] text-white">
+                                <SelectContent className="rounded-xl border-border/50 backdrop-blur-md">
                                   <SelectItem value="general">
                                     General Inquiry
                                   </SelectItem>
@@ -387,7 +417,7 @@ function Contact() {
                           name="message"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm font-semibold text-white/70">
+                              <FormLabel className="text-sm font-semibold">
                                 Message <span className="text-primary">*</span>
                               </FormLabel>
                               <FormControl>
@@ -396,11 +426,11 @@ function Contact() {
                                   placeholder="Tell us how we can help you..."
                                   rows={5}
                                   maxLength={maxLength}
-                                  className="bg-white/[0.03] border-white/[0.08] text-white placeholder:text-white/25 rounded-xl focus:border-white/20 transition-all duration-300 resize-none"
+                                  className="bg-background/50 border-border/50 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 resize-none"
                                 />
                               </FormControl>
                               <div className="flex justify-between items-center mt-2">
-                                <div className="h-1.5 flex-1 bg-white/[0.06] rounded-full overflow-hidden mr-4">
+                                <div className="h-1.5 flex-1 bg-muted rounded-full overflow-hidden mr-4">
                                   <div
                                     className={`h-full rounded-full transition-all duration-300 ${
                                       messageLength > maxLength * 0.9
@@ -415,7 +445,7 @@ function Contact() {
                                   />
                                 </div>
                                 <span
-                                  className={`text-xs font-medium ${messageLength > maxLength * 0.9 ? "text-red-400" : "text-white/40"}`}
+                                  className={`text-xs font-medium ${messageLength > maxLength * 0.9 ? "text-destructive" : "text-muted-foreground"}`}
                                 >
                                   {messageLength}/{maxLength}
                                 </span>
@@ -431,7 +461,7 @@ function Contact() {
                           name="hearAbout"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm font-semibold text-white/70">
+                              <FormLabel className="text-sm font-semibold">
                                 How did you hear about us?
                               </FormLabel>
                               <Select
@@ -439,11 +469,11 @@ function Contact() {
                                 onValueChange={field.onChange}
                               >
                                 <FormControl>
-                                  <SelectTrigger className="h-12 bg-white/[0.03] border-white/[0.08] text-white placeholder:text-white/25 rounded-xl focus:border-white/20 transition-all duration-300">
+                                  <SelectTrigger className="h-12 bg-background/50 border-border/50 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300">
                                     <SelectValue placeholder="Select an option" />
                                   </SelectTrigger>
                                 </FormControl>
-                                <SelectContent className="rounded-xl bg-[#0d1017] border-white/[0.08] text-white">
+                                <SelectContent className="rounded-xl border-border/50 backdrop-blur-md">
                                   <SelectItem value="search">
                                     Search Engine
                                   </SelectItem>
@@ -466,7 +496,7 @@ function Contact() {
                           name="contactMethod"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm font-semibold text-white/70">
+                              <FormLabel className="text-sm font-semibold">
                                 Preferred Contact Method{" "}
                                 <span className="text-primary">*</span>
                               </FormLabel>
@@ -479,14 +509,14 @@ function Contact() {
                                   <div
                                     className={`flex-1 flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
                                       field.value === "email"
-                                        ? "border-white/30 bg-white/[0.05]"
-                                        : "border-white/[0.08] hover:border-white/20"
+                                        ? "border-primary bg-primary/5"
+                                        : "border-border/50 hover:border-primary/50"
                                     }`}
                                   >
                                     <RadioGroupItem value="email" id="contact-email" />
                                     <Label
                                       htmlFor="contact-email"
-                                      className="cursor-pointer flex items-center gap-2 text-white"
+                                      className="cursor-pointer flex items-center gap-2"
                                     >
                                       <Mail className="w-4 h-4" />
                                       Email
@@ -495,14 +525,14 @@ function Contact() {
                                   <div
                                     className={`flex-1 flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
                                       field.value === "phone"
-                                        ? "border-white/30 bg-white/[0.05]"
-                                        : "border-white/[0.08] hover:border-white/20"
+                                        ? "border-primary bg-primary/5"
+                                        : "border-border/50 hover:border-primary/50"
                                     }`}
                                   >
                                     <RadioGroupItem value="phone" id="contact-phone" />
                                     <Label
                                       htmlFor="contact-phone"
-                                      className="cursor-pointer flex items-center gap-2 text-white"
+                                      className="cursor-pointer flex items-center gap-2"
                                     >
                                       <Phone className="w-4 h-4" />
                                       Phone
@@ -516,9 +546,10 @@ function Contact() {
                         />
 
                         {/* Submit Button */}
-                        <button
+                        <Button
                           type="submit"
-                          className="w-full h-14 text-lg rounded-xl bg-white text-[#080b11] font-semibold hover:bg-white/90 transition-all duration-300 disabled:opacity-50 flex items-center justify-center"
+                          className="w-full h-14 text-lg"
+                          size="lg"
                           disabled={isSubmitting}
                         >
                           {isSubmitting ? (
@@ -532,11 +563,11 @@ function Contact() {
                               Send Message
                             </>
                           )}
-                        </button>
+                        </Button>
 
                         {/* Security note */}
-                        <div className="flex items-center justify-center gap-2 text-xs text-white/40 bg-white/[0.03] rounded-lg p-3">
-                          <Shield className="w-4 h-4 text-white/50" />
+                        <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground bg-muted/30 rounded-lg p-3">
+                          <Shield className="w-4 h-4 text-success" />
                           Your message is encrypted and secure. We never share
                           your information.
                         </div>
@@ -550,11 +581,12 @@ function Contact() {
             {/* Contact Info Sidebar - 40% with Premium Styling */}
             <div className="lg:col-span-2 space-y-6">
               {/* Response Promise with Premium Card */}
-              <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl hover:-translate-y-0.5 transition-all duration-300">
+              <div className="relative bg-card/90 backdrop-blur-md rounded-2xl border border-border/30 shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-500">
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-success via-accent to-success" />
                 <div className="p-6">
-                  <h3 className="text-lg font-bold text-white flex items-center gap-2 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-white/[0.05] flex items-center justify-center">
-                      <CheckCircle className="w-5 h-5 text-white/60" />
+                  <h3 className="text-lg font-bold flex items-center gap-2 mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-success/20 to-success/5 flex items-center justify-center">
+                      <CheckCircle className="w-5 h-5 text-success" />
                     </div>
                     Our Response Promise
                   </h3>
@@ -566,11 +598,11 @@ function Contact() {
                     ].map((item, i) => (
                       <div
                         key={i}
-                        className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/[0.06] transition-all duration-300"
+                        className="flex items-center gap-3 p-3 rounded-xl bg-muted/30 border border-border/30 hover:border-primary/30 transition-all duration-300"
                       >
-                        <div className="w-2.5 h-2.5 rounded-full bg-white/30" />
-                        <span className="text-sm text-white/50">
-                          <strong className="text-white/70">{item.text}</strong> {item.sub}
+                        <div className="w-2.5 h-2.5 rounded-full bg-gradient-to-br from-primary to-accent animate-pulse" />
+                        <span className="text-sm">
+                          <strong>{item.text}</strong> {item.sub}
                         </span>
                       </div>
                     ))}
@@ -579,43 +611,52 @@ function Contact() {
               </div>
 
               {/* Office Location with Premium Styling */}
-              <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl hover:-translate-y-0.5 transition-all duration-300">
+              <div className="relative bg-card/90 backdrop-blur-md rounded-2xl border border-border/30 shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-500">
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary" />
                 <div className="p-6">
-                  <h3 className="text-lg font-bold text-white flex items-center gap-2 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-white/[0.05] flex items-center justify-center">
-                      <MapPin className="w-5 h-5 text-white/60" />
+                  <h3 className="text-lg font-bold flex items-center gap-2 mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                      <MapPin className="w-5 h-5 text-primary" />
                     </div>
                     Visit Our Office
                   </h3>
-                  <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.06] mb-4">
-                    <p className="text-sm font-semibold text-white mb-1">
+                  <div className="p-4 rounded-xl bg-muted/30 border border-border/30 mb-4">
+                    <p className="text-sm font-semibold text-foreground mb-1">
                       InVision Network HQ
                     </p>
-                    <p className="text-sm text-white/50">
+                    <p className="text-sm text-muted-foreground">
                       123 Tech Boulevard
                       <br />
                       Dayton, OH 45402
                     </p>
                   </div>
-                  <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl h-40 flex items-center justify-center text-white/40 text-sm mb-4">
+                  <div className="bg-gradient-to-br from-muted/50 to-muted/20 rounded-xl h-40 flex items-center justify-center text-muted-foreground text-sm mb-4 border border-border/30">
                     <div className="text-center">
                       <MapPin className="w-8 h-8 mx-auto mb-2 opacity-50" />
                       Map Preview
                     </div>
                   </div>
-                  <a href="https://maps.google.com/?q=123+Tech+Boulevard+Dayton+OH+45402" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-full h-9 rounded-lg border border-white/20 text-white text-sm hover:bg-white/[0.04] transition-all duration-300">
-                    Get Directions
-                  </a>
+                  <Button
+                    variant="outline"
+                    className="w-full"
+                    size="sm"
+                    asChild
+                  >
+                    <a href="https://maps.google.com/?q=123+Tech+Boulevard+Dayton+OH+45402" target="_blank" rel="noopener noreferrer">
+                      Get Directions
+                    </a>
+                  </Button>
                 </div>
               </div>
 
               {/* Support Team with Photo */}
-              <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl hover:-translate-y-0.5 transition-all duration-300">
+              <div className="relative bg-card/90 backdrop-blur-md rounded-2xl border border-border/30 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500">
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent via-primary to-accent" />
                 <div className="p-6">
-                  <h3 className="text-lg font-bold text-white mb-1">
+                  <h3 className="text-lg font-bold mb-1">
                     Meet Your Support Team
                   </h3>
-                  <p className="text-sm text-white/50 mb-4">
+                  <p className="text-sm text-muted-foreground mb-4">
                     Real people ready to help
                   </p>
 
@@ -626,7 +667,7 @@ function Contact() {
                       alt="Our friendly support team member"
                       className="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#080b11]/80 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent" />
                     <div className="absolute bottom-2 left-3 text-white">
                       <span className="text-xs bg-success/80 px-2 py-0.5 rounded-full">
                         ● Online Now
@@ -651,14 +692,16 @@ function Contact() {
                     ].map((member, i) => (
                       <div
                         key={i}
-                        className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:border-white/15 transition-all duration-300 cursor-pointer group"
+                        className="flex items-center gap-3 p-3 rounded-xl bg-muted/30 border border-border/30 hover:border-primary/30 hover:bg-muted/50 transition-all duration-300 cursor-pointer group"
                       >
-                        <div className="w-12 h-12 rounded-xl bg-white/[0.05] flex items-center justify-center text-white/60 font-bold group-hover:scale-110 transition-transform duration-300">
+                        <div
+                          className={`w-12 h-12 rounded-xl bg-gradient-to-br from-${member.color}/20 to-${member.color}/5 flex items-center justify-center text-${member.color} font-bold group-hover:scale-110 transition-transform duration-300`}
+                        >
                           {member.initials}
                         </div>
                         <div>
-                          <p className="text-sm font-semibold text-white">{member.name}</p>
-                          <p className="text-xs text-white/50">
+                          <p className="text-sm font-semibold">{member.name}</p>
+                          <p className="text-xs text-muted-foreground">
                             {member.role}
                           </p>
                         </div>
@@ -671,6 +714,10 @@ function Contact() {
           </div>
         </div>
       </div>
+      </MeshBackground>
+
+      <div className="section-glow-strip" />
+
       <Footer />
     </PageTransition>
   );

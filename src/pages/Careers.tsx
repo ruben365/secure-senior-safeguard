@@ -29,6 +29,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AIImageDisclaimer } from "@/components/AIImageDisclaimer";
+import { SectionDivider, MeshBackground } from "@/components/pro";
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 import { JOB_POSITIONS, DEPARTMENTS } from "@/config/jobPositions";
@@ -140,17 +141,20 @@ function Careers() {
       <TrustBar />
 
       {/* Why InVision */}
-      <section className="py-20 bg-[#080b11]">
-        <div className="container mx-auto px-4">
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
+        <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-20 right-0 w-[400px] h-[400px] bg-accent/[0.04] rounded-full blur-3xl pointer-events-none" />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
-            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-white/[0.06] bg-white/[0.03]">
-              <Sparkles className="w-3.5 h-3.5 text-white/70" />
-              <span className="text-white/70">Why InVision?</span>
+            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+              <Sparkles className="w-3.5 h-3.5 text-primary" />
+              <span className="text-primary">Why InVision?</span>
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1] text-white">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1]">
               Work That Matters
             </h2>
-            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-white/50">
+            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground">
               Join a team that's using AI to protect vulnerable families.
               Every line of code, every support call, every design decision
               makes the world safer.
@@ -160,12 +164,13 @@ function Careers() {
             {companyValues.map((value, index) => {
               const IconComponent = value.icon;
               return (
-                <div key={index} className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-6 text-center hover:-translate-y-0.5 transition-all duration-300">
-                  <div className="w-14 h-14 rounded-xl bg-white/[0.05] flex items-center justify-center mx-auto mb-4 mt-2">
-                    <IconComponent className="w-7 h-7 text-white/70" />
+                <div key={index} className="relative rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl overflow-hidden h-full hover:-translate-y-2 hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/25 transition-all duration-500 p-6 text-center">
+                  <div className="h-1 w-full bg-gradient-to-r from-primary to-accent absolute top-0 left-0 right-0" />
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center mx-auto mb-4 mt-2">
+                    <IconComponent className="w-7 h-7 text-primary" />
                   </div>
-                  <h3 className="text-lg font-bold mb-2 text-white">{value.title}</h3>
-                  <p className="text-sm text-white/50">{value.description}</p>
+                  <h3 className="text-lg font-bold mb-2">{value.title}</h3>
+                  <p className="text-sm text-muted-foreground">{value.description}</p>
                 </div>
               );
             })}
@@ -173,18 +178,22 @@ function Careers() {
         </div>
       </section>
 
+      <SectionDivider variant="wave" color="muted" />
+
       {/* Open Positions */}
-      <section className="py-20 bg-[#0d1017]">
-        <div className="container mx-auto px-4">
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-background to-muted/20" />
+        <div className="absolute top-10 right-[20%] w-[350px] h-[350px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
-            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-white/[0.06] bg-white/[0.03]">
-              <Briefcase className="w-3.5 h-3.5 text-white/70" />
-              <span className="text-white/70">{JOB_POSITIONS.length} Open Roles</span>
+            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+              <Briefcase className="w-3.5 h-3.5 text-primary" />
+              <span className="text-primary">{JOB_POSITIONS.length} Open Roles</span>
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1] text-white">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1]">
               Open Positions
             </h2>
-            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-white/50">
+            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground">
               Find your role in protecting families — {featuredCount} featured roles hiring now
             </p>
           </div>
@@ -208,15 +217,16 @@ function Careers() {
           </div>
 
           {/* Don't see your role CTA */}
-          <Card className="mt-12 max-w-3xl mx-auto bg-white/[0.03] border border-white/[0.06] rounded-xl">
+          <Card className="mt-12 max-w-3xl mx-auto relative overflow-hidden border-primary/20 shadow-[0_8px_40px_-12px_hsl(var(--primary)/0.15)]">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10" />
             <CardHeader className="text-center">
-              <CardTitle className="text-2xl text-white">Don't See Your Role?</CardTitle>
-              <CardDescription className="text-base text-white/50">
+              <CardTitle className="text-2xl">Don't See Your Role?</CardTitle>
+              <CardDescription className="text-base">
                 We're always looking for talented people who care about our mission
               </CardDescription>
             </CardHeader>
             <CardContent className="text-center">
-              <Button size="lg" className="bg-white text-[#080b11] hover:bg-white/90" asChild>
+              <Button size="lg" asChild>
                 <Link to="/contact">Send Us Your Resume</Link>
               </Button>
             </CardContent>
@@ -225,31 +235,33 @@ function Careers() {
       </section>
 
       {/* Benefits Grid */}
-      <section className="py-20 bg-[#080b11]">
-        <div className="container mx-auto px-4">
+      <MeshBackground variant="subtle" withDots>
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
-            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-white/[0.06] bg-white/[0.03]">
-              <Heart className="w-3.5 h-3.5 text-white/70" />
-              <span className="text-white/70">Benefits</span>
+            <span className="frosted-pill mb-6">
+              <Heart className="w-3.5 h-3.5 text-primary" />
+              <span className="text-primary">Benefits</span>
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1] text-white">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1]">
               Comprehensive Benefits
             </h2>
-            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-white/50">
+            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground">
               We take care of our team so you can focus on the mission
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
             {benefits.map((category, index) => (
-              <div key={index} className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-6 hover:-translate-y-0.5 transition-all duration-300">
-                <h3 className="text-lg font-bold mb-3 text-white">{category.category}</h3>
+              <div key={index} className="rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl p-6 hover:-translate-y-1 hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/25 transition-all duration-500">
+                <h3 className="text-lg font-bold mb-3">{category.category}</h3>
                 <ul className="space-y-2.5">
                   {category.items.map((item, i) => (
                     <li key={i} className="flex items-start gap-2.5 text-sm">
-                      <div className="w-5 h-5 rounded-full bg-white/[0.05] flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <div className="w-1.5 h-1.5 rounded-full bg-white/50" />
+                      <div className="w-5 h-5 rounded-full bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary" />
                       </div>
-                      <span className="text-white/50">{item}</span>
+                      <span className="text-foreground">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -259,37 +271,43 @@ function Careers() {
         </div>
       </section>
 
+      </MeshBackground>
+
+      <div className="divider-gradient-colored" />
+
       {/* Application Process */}
-      <section className="py-20 bg-[#0d1017]">
-        <div className="container mx-auto px-4">
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-muted/30" />
+        <div className="absolute bottom-10 left-[15%] w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
-            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-white/[0.06] bg-white/[0.03]">
-              <Target className="w-3.5 h-3.5 text-white/70" />
-              <span className="text-white/70">How to Apply</span>
+            <span className="frosted-pill mb-6">
+              <Target className="w-3.5 h-3.5 text-primary" />
+              <span className="text-primary">How to Apply</span>
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1] text-white">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1]">
               Simple Application Process
             </h2>
-            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-white/50">
+            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground">
               From application to offer in as little as one week
             </p>
           </div>
           <div className="grid md:grid-cols-4 gap-5 max-w-5xl mx-auto">
             {applicationSteps.map((step, index) => (
               <div key={index} className="relative">
-                <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl text-center p-6 h-full hover:-translate-y-0.5 transition-all duration-300">
-                  <div className="w-14 h-14 rounded-xl bg-white/[0.05] text-white flex items-center justify-center mx-auto mb-4 text-xl font-black">
+                <div className="rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl text-center p-6 h-full hover:-translate-y-1 hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] transition-all duration-500">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center mx-auto mb-4 text-xl font-black shadow-lg">
                     {step.step}
                   </div>
-                  <h3 className="text-lg font-bold mb-2 text-white">{step.title}</h3>
-                  <p className="text-sm text-white/50 mb-3">{step.description}</p>
-                  <Badge variant="outline" className="text-xs border-white/[0.06] text-white/50">
+                  <h3 className="text-lg font-bold mb-2">{step.title}</h3>
+                  <p className="text-sm text-muted-foreground mb-3">{step.description}</p>
+                  <Badge variant="outline" className="text-xs">
                     <Clock className="w-3 h-3 mr-1" />
                     {step.duration}
                   </Badge>
                 </div>
                 {index < applicationSteps.length - 1 && (
-                  <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 text-white/20 text-xl font-bold">
+                  <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 text-primary/40 text-xl font-bold">
                     →
                   </div>
                 )}
@@ -300,45 +318,46 @@ function Careers() {
       </section>
 
       {/* Company Culture */}
-      <section className="py-20 bg-[#080b11]">
-        <div className="container mx-auto px-4">
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
-            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-white/[0.06] bg-white/[0.03]">
-              <Users className="w-3.5 h-3.5 text-white/70" />
-              <span className="text-white/70">Our Culture</span>
+            <span className="frosted-pill mb-6">
+              <Users className="w-3.5 h-3.5 text-primary" />
+              <span className="text-primary">Our Culture</span>
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1] text-white">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1]">
               Life at InVision
             </h2>
-            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-white/50">
+            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground">
               A remote-first culture built on trust, transparency, and making a difference
             </p>
           </div>
           <div className="grid lg:grid-cols-2 gap-6 max-w-6xl mx-auto mb-12">
-            <div className="relative rounded-xl overflow-hidden group border border-white/[0.06]">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl group border border-border/30">
               <img
                 src={teamCollaboration}
                 alt="Our team collaborating in a meeting"
                 className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#080b11] via-transparent to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h3 className="text-xl font-bold mb-1 text-white">Collaborative Spirit</h3>
-                <p className="text-white/50 text-sm">Ideas flow freely in our open environment</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-[hsl(288_30%_15%/0.85)] via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <h3 className="text-xl font-bold mb-1">Collaborative Spirit</h3>
+                <p className="text-white/90 text-sm">Ideas flow freely in our open environment</p>
               </div>
             </div>
-            <div className="relative rounded-xl overflow-hidden group border border-white/[0.06]">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl group border border-border/30">
               <img
                 src={supportAgent}
                 alt="Support team member helping customers"
                 className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#080b11] via-transparent to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h3 className="text-xl font-bold mb-1 text-white">People First</h3>
-                <p className="text-white/50 text-sm">We genuinely care about every customer</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-[hsl(18_60%_30%/0.85)] via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <h3 className="text-xl font-bold mb-1">People First</h3>
+                <p className="text-white/90 text-sm">We genuinely care about every customer</p>
               </div>
             </div>
           </div>
@@ -348,19 +367,21 @@ function Careers() {
               { icon: TrendingUp, title: "Growth-Focused", desc: "$2k/year learning budget. Conference attendance. 1-on-1 mentorship." },
               { icon: Shield, title: "Mission-Driven", desc: "Every team member gets free family protection. Your loved ones stay safe too." },
             ].map((item, index) => (
-              <div key={index} className="bg-white/[0.03] border border-white/[0.06] rounded-xl text-center p-6 hover:-translate-y-0.5 transition-all duration-300">
-                <div className="w-14 h-14 rounded-xl bg-white/[0.05] flex items-center justify-center mx-auto mb-4">
-                  <item.icon className="w-7 h-7 text-white/70" />
+              <div key={index} className="rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl text-center p-6 hover:-translate-y-1 hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/25 transition-all duration-500">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center mx-auto mb-4">
+                  <item.icon className="w-7 h-7 text-primary" />
                 </div>
-                <h3 className="text-lg font-bold mb-2 text-white">{item.title}</h3>
-                <p className="text-sm text-white/50">{item.desc}</p>
+                <h3 className="text-lg font-bold mb-2">{item.title}</h3>
+                <p className="text-sm text-muted-foreground">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-12 bg-[#0d1017]">
+      <div className="section-glow-strip" />
+
+      <section className="py-12 bg-muted/20">
         <AIImageDisclaimer />
       </section>
 
