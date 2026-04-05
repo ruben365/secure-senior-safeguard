@@ -28,7 +28,6 @@ export default function BillingSettings() {
     autoInvoicing: false,
     latePaymentFee: "",
     stripePublishableKey: "",
-    stripeSecretKey: "",
   });
 
   const handleSave = () => {
@@ -239,18 +238,9 @@ export default function BillingSettings() {
                 className="bg-[#111827] border-gray-600 text-[#F9FAFB]"
               />
             </div>
-            <div className="space-y-2">
-              <Label className="text-[#9CA3AF]">Stripe Secret Key</Label>
-              <Input
-                type="password"
-                value={settings.stripeSecretKey}
-                onChange={(e) =>
-                  setSettings({ ...settings, stripeSecretKey: e.target.value })
-                }
-                placeholder="sk_test_..."
-                className="bg-[#111827] border-gray-600 text-[#F9FAFB]"
-              />
-            </div>
+            <p className="text-xs text-[#9CA3AF]">
+              Stripe secret key must be configured server-side via environment variables. Never enter it in the browser.
+            </p>
           </CardContent>
         </Card>
 

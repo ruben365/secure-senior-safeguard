@@ -67,7 +67,7 @@ export const HeroCarousel = ({
           alt={images[0].alt}
           width={1920}
           height={1080}
-          fetchPriority="high"
+          {...{ fetchpriority: "high" } as any}
           loading="eager"
           decoding="async"
           className="absolute inset-0 w-full h-full object-cover"
@@ -85,7 +85,7 @@ export const HeroCarousel = ({
           alt={image.alt}
           width={1920}
           height={1080}
-          fetchPriority={index === 0 ? "high" : "low"}
+          {...{ fetchpriority: index === 0 ? "high" : "low" } as any}
           loading={index === 0 ? "eager" : "lazy"}
           decoding="async"
           className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"

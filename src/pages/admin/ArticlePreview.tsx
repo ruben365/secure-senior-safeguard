@@ -3,6 +3,7 @@ import { useSearchParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Monitor, Smartphone, Tablet, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { sanitizeHtml } from "@/utils/sanitize";
 
 export default function ArticlePreview() {
   const [searchParams] = useSearchParams();
@@ -157,7 +158,7 @@ export default function ArticlePreview() {
             {/* Article Content */}
             <article
               className="prose prose-lg max-w-none"
-              dangerouslySetInnerHTML={{ __html: articleData.content }}
+              dangerouslySetInnerHTML={{ __html: sanitizeHtml(articleData.content) }}
             />
 
             {/* Tags */}

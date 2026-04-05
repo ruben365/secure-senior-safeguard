@@ -2,6 +2,11 @@ import { Helmet } from "react-helmet-async";
 import { useLocation } from "react-router-dom";
 import { SITE } from "@/config/site";
 
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
 interface SEOProps {
   title?: string;
   description?: string;
@@ -11,6 +16,7 @@ interface SEOProps {
   canonical?: string;
   noindex?: boolean;
   structuredData?: Record<string, unknown>;
+  breadcrumbs?: BreadcrumbItem[];
 }
 
 const OG_IMAGE =
@@ -26,6 +32,38 @@ const DEFAULT_SEO = {
     "cybersecurity Ohio, AI scam protection, deepfake detection, senior scam training, family cybersecurity, phishing defense, Kettering Ohio, Southwest Ohio",
 };
 
+/** Build a BreadcrumbList JSON-LD object from an array of crumbs. */
+export function buildBreadcrumbSchema(items: BreadcrumbItem[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
+}
+
+/** Build a FAQPage JSON-LD object from question/answer pairs. */
+export function buildFAQSchema(
+  faqs: Array<{ question: string; answer: string }>
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+}
+
 export function SEO({
   title,
   description = DEFAULT_SEO.description,
@@ -35,6 +73,7 @@ export function SEO({
   canonical,
   noindex = false,
   structuredData,
+  breadcrumbs,
 }: SEOProps) {
   const location = useLocation();
   const fullTitle = title
@@ -42,6 +81,10 @@ export function SEO({
     : DEFAULT_SEO.title;
   const url = `https://www.invisionnetwork.org${location.pathname}`;
   const canonicalUrl = canonical || url;
+
+  const breadcrumbSchema = breadcrumbs
+    ? buildBreadcrumbSchema(breadcrumbs)
+    : null;
 
   return (
     <Helmet>
@@ -80,6 +123,13 @@ export function SEO({
           {JSON.stringify(structuredData)}
         </script>
       )}
+
+      {/* BreadcrumbList */}
+      {breadcrumbSchema && (
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbSchema)}
+        </script>
+      )}
     </Helmet>
   );
 }
@@ -95,91 +145,8 @@ export const PAGE_SEO = {
       "Protect your family from AI-powered scams with InVision Network. Expert cybersecurity training, deepfake detection, and 24/7 scam analysis for families and seniors in Kettering, Ohio.",
     keywords:
       "AI scam protection Ohio, cybersecurity Kettering, deepfake detection, senior scam training, family cybersecurity Southwest Ohio",
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      name: SITE.name,
-      description:
-        "Cybersecurity training and AI protection for families and businesses in Southwest Ohio",
-      url: "https://www.invisionnetwork.org",
-      logo: "https://www.invisionnetwork.org/favicon.png",
-      image:
-        "https://www.invisionnetwork.org/images/hero-corporate-protection.webp",
-      telephone: "+14074465749",
-      priceRange: "$$",
-      foundingDate: "2024",
-      founders: [
-        { "@type": "Person", name: "Ruben Nk" },
-        { "@type": "Person", name: "Corine Mk" },
-      ],
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Kettering",
-        addressRegion: "OH",
-        postalCode: "45429",
-        addressCountry: "US",
-      },
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: 39.6895,
-        longitude: -84.1688,
-      },
-      areaServed: {
-        "@type": "GeoCircle",
-        geoMidpoint: {
-          "@type": "GeoCoordinates",
-          latitude: 39.6895,
-          longitude: -84.1688,
-        },
-        geoRadius: "80000",
-      },
-      openingHoursSpecification: [
-        {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          opens: "09:00",
-          closes: "18:00",
-        },
-      ],
-      contactPoint: {
-        "@type": "ContactPoint",
-        telephone: "+14074465749",
-        contactType: "Customer Service",
-        availableLanguage: ["English", "Spanish", "French"],
-      },
-      sameAs: [
-        "https://twitter.com/invisionnetwork",
-        "https://facebook.com/invisionnetwork",
-        "https://linkedin.com/company/invisionnetwork",
-      ],
-      hasOfferCatalog: {
-        "@type": "OfferCatalog",
-        name: "InVision Network Services",
-        itemListElement: [
-          {
-            "@type": "Offer",
-            itemOffered: {
-              "@type": "Service",
-              name: "Cybersecurity Training for Seniors & Families",
-            },
-          },
-          {
-            "@type": "Offer",
-            itemOffered: {
-              "@type": "Service",
-              name: "AI Business Automation",
-            },
-          },
-          {
-            "@type": "Offer",
-            itemOffered: {
-              "@type": "Service",
-              name: "AI Services Insurance & Maintenance Plans",
-            },
-          },
-        ],
-      },
-    },
+    // NOTE: LocalBusiness structured data is in index.html (static) for non-JS crawlers.
+    // Do NOT duplicate it here — it causes conflicting JSON-LD blocks.
   },
 
   training: {
@@ -201,7 +168,7 @@ export const PAGE_SEO = {
         addressRegion: "OH",
         addressCountry: "US",
       },
-      telephone: "+14074465749",
+      telephone: SITE.phone.e164,
       offers: [
         {
           "@type": "Offer",
@@ -272,7 +239,7 @@ export const PAGE_SEO = {
   contact: {
     title: "Contact InVision Network — Kettering, Ohio",
     description:
-      "Get in touch with InVision Network for cybersecurity training and AI business solutions. Call (407) 446-5749 or fill out our form. Serving Kettering and all of Southwest Ohio.",
+      "Get in touch with InVision Network for cybersecurity training and AI business solutions. Call (937) 301-8749 or fill out our form. Serving Kettering and all of Southwest Ohio.",
     keywords:
       "contact InVision Network, Kettering cybersecurity contact, AI protection Ohio inquiry",
   },

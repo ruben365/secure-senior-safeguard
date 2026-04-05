@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { sanitizeHtml } from "@/utils/sanitize";
 import {
   AlertTriangle,
   CheckCircle2,
@@ -84,21 +85,21 @@ export const ScanResults = ({
         <body>
           <h1>InVision Network Guest Scan Report</h1>
           <div class="meta">Generated ${new Date().toLocaleString()}</div>
-          <p><strong>File:</strong> ${file.name}</p>
-          <p><strong>Type:</strong> ${getFileTypeLabel(file)}</p>
+          <p><strong>File:</strong> ${sanitizeHtml(file.name)}</p>
+          <p><strong>Type:</strong> ${sanitizeHtml(getFileTypeLabel(file))}</p>
           <p><strong>Size:</strong> ${formatFileSize(file.size).formatted}</p>
-          <p><strong>Threat Level:</strong> ${analysis.threatLevel.toUpperCase()}</p>
+          <p><strong>Threat Level:</strong> ${sanitizeHtml(analysis.threatLevel.toUpperCase())}</p>
           <p><strong>Confidence:</strong> ${Math.round(analysis.confidence * 100)}%</p>
           <h2>Summary</h2>
-          <p>${analysis.summary}</p>
+          <p>${sanitizeHtml(analysis.summary)}</p>
           <h2>Findings</h2>
-          <ul>${analysis.findings.map((item) => `<li>${item}</li>`).join("")}</ul>
+          <ul>${analysis.findings.map((item) => `<li>${sanitizeHtml(item)}</li>`).join("")}</ul>
           <h2>Recommendations</h2>
-          <ul>${analysis.recommendations.map((item) => `<li>${item}</li>`).join("")}</ul>
+          <ul>${analysis.recommendations.map((item) => `<li>${sanitizeHtml(item)}</li>`).join("")}</ul>
           ${
             analysis.indicators.suspiciousLinks.length
               ? `<h2>Suspicious Links</h2><ul>${analysis.indicators.suspiciousLinks
-                  .map((link) => `<li>${link}</li>`)
+                  .map((link) => `<li>${sanitizeHtml(link)}</li>`)
                   .join("")}</ul>`
               : ""
           }

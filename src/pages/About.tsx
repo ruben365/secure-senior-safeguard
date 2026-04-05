@@ -6,8 +6,6 @@ import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
 import CTASection from "@/components/CTASection";
 import { PageTransition } from "@/components/PageTransition";
-// FloatingShapes removed for performance
-// NatureAccent removed for performance
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -20,7 +18,6 @@ import {
   Star,
   CheckCircle,
 } from "lucide-react";
-// ScrollReveal removed for instant rendering
 import { TimelineVisualization } from "@/components/TimelineVisualization";
 import { InspirationalVerses } from "@/components/InspirationalVerses";
 import { OhioServiceMap } from "@/components/OhioServiceMap";
@@ -119,6 +116,10 @@ function About() {
       <SEO
         title="About Us - Our Story, Mission & Team"
         description="Learn about InVision Network's mission to protect families from digital scams. Founded from personal experience, serving families across Ohio."
+        breadcrumbs={[
+          { name: "Home", url: "https://www.invisionnetwork.org/" },
+          { name: "About", url: "https://www.invisionnetwork.org/about" },
+        ]}
       />
       <Navigation />
 

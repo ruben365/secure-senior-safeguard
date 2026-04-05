@@ -17,7 +17,7 @@ const LauraAIAssistant = lazy(() => import("./components/chat/LauraAIAssistant")
 const CartFeedbackNotifications = lazy(() => import("./components/CartFeedbackNotifications").then(m => ({ default: m.CartFeedbackNotifications })));
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { RouteTracker } from "./components/RouteTracker";
-const DraggablePerformanceMonitor = lazy(() => import("./components/DraggablePerformanceMonitor").then(m => ({ default: m.DraggablePerformanceMonitor })));
+
 import { PageTransition } from "./components/PageTransition";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { useSmoothAnchorScroll } from "./hooks/useSmoothAnchorScroll";
@@ -152,10 +152,11 @@ const CyberAnalytics = lazy(() => import("./pages/admin/cyber/CyberAnalytics"));
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 60_000,       // 1 min — skip refetch if data is fresh
-      gcTime: 5 * 60_000,      // 5 min — keep unused data in cache
+      staleTime: 5 * 60_000,   // 5 min — avoid unnecessary refetches
+      gcTime: 15 * 60_000,     // 15 min — keep cache longer
       retry: 1,
       refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
     },
   },
 });
@@ -350,7 +351,7 @@ function App() {
                         <LauraAIAssistant />
                         <CartFeedbackNotifications />
                         <UnifiedCheckoutDialog />
-                        <DraggablePerformanceMonitor />
+
                       </Suspense>
                     </PrerenderProvider>
                   </BrowserRouter>

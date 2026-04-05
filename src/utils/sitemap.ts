@@ -16,7 +16,7 @@ export interface SitemapPage {
   lastmod?: string;
 }
 
-const SITE_URL = "https://invisionnetwork.org";
+const SITE_URL = "https://www.invisionnetwork.org";
 
 export const SITEMAP_PAGES: SitemapPage[] = [
   // High priority pages

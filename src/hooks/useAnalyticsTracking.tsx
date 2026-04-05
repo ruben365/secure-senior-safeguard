@@ -40,6 +40,7 @@ export function useAnalyticsTracking() {
 
     // Wait for page to fully load before tracking analytics
     let scheduleTracking: ReturnType<typeof setTimeout>;
+    let loadDelayTimer: ReturnType<typeof setTimeout>;
 
     const startTracking = () => {
       // Use simple setTimeout with 5s delay - outside critical rendering path
@@ -48,15 +49,17 @@ export function useAnalyticsTracking() {
 
     // Only start tracking after load event (ensures LCP is complete)
     if (document.readyState === "complete") {
-      setTimeout(startTracking, 3000); // 3s delay after load
+      loadDelayTimer = setTimeout(startTracking, 3000);
     } else {
-      window.addEventListener("load", () => setTimeout(startTracking, 3000), {
-        once: true,
-      });
+      const onLoad = () => {
+        loadDelayTimer = setTimeout(startTracking, 3000);
+      };
+      window.addEventListener("load", onLoad, { once: true });
     }
 
     const cancelTracking = () => {
       clearTimeout(scheduleTracking);
+      clearTimeout(loadDelayTimer);
     };
 
     // Track scroll depth - deferred to avoid forced reflow during initial paint

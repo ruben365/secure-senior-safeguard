@@ -1,0 +1,36 @@
+# InVision Network
+
+> Cybersecurity training and AI protection services for families, seniors, and businesses in Southwest Ohio.
+
+## About
+
+InVision Network is a cybersecurity company based in Kettering, Ohio (Greater Dayton Area). Founded by Ruben Nk and Corine Mk, we specialize in protecting families and businesses from AI-powered scams, deepfakes, and phishing attacks.
+
+## Services
+
+- [Cybersecurity Training](https://www.invisionnetwork.org/training): In-person and virtual AI scam protection training for seniors and families
+- [AI Business Solutions](https://www.invisionnetwork.org/business): AI receptionists, follow-up automation, and website design
+- [AI Receptionist](https://www.invisionnetwork.org/business/ai-receptionist): 24/7 AI-powered phone answering for businesses
+- [AI Automation](https://www.invisionnetwork.org/business/ai-automation): Automated lead nurturing and customer follow-up
+- [Website Design](https://www.invisionnetwork.org/business/website-design): Professional website design services
+- [Website Insurance](https://www.invisionnetwork.org/business/website-insurance): Website maintenance and protection plans
+- [Cognitive Sentinel](https://www.invisionnetwork.org/services/cognitive-sentinel): AI-powered monitoring service
+- [Scam Insurance](https://www.invisionnetwork.org/services/scam-insurance): Financial protection against scam losses
+- [AI-Safe Certification](https://www.invisionnetwork.org/services/ai-safe-certification): Certification program for AI safety
+- [Family Emergency Network](https://www.invisionnetwork.org/services/family-emergency-network): Emergency response system for families
+- [Digital Estate Protection](https://www.invisionnetwork.org/services/digital-estate): Digital legacy and estate planning
+
+## Resources
+
+- [Digital Library](https://www.invisionnetwork.org/library): Free cybersecurity guides and educational books
+- [Articles](https://www.invisionnetwork.org/articles): Cybersecurity news and scam prevention guides
+- [FAQ](https://www.invisionnetwork.org/faq): Frequently asked questions
+- [Help Center](https://www.invisionnetwork.org/help): Support and knowledge base
+
+## Contact
+
+- Phone: (937) 301-8749
+- Email: hello@invisionnetwork.org
+- Location: Kettering, OH 45429 (serving Southwest Ohio)
+- Website: https://www.invisionnetwork.org
+- Languages: English, Spanish, French

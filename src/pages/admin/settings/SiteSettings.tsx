@@ -36,7 +36,7 @@ const DEFAULTS: Settings = {
   tagline: "AI Scam Protection & Business Solutions",
   description:
     "Empowering seniors and businesses with cutting-edge technology solutions and cybersecurity protection.",
-  phone: "(407) 446-5749",
+  phone: "(937) 301-8749",
   primaryEmail: "hello@invisionnetwork.org",
   supportEmail: "support@invisionnetwork.org",
   businessEmail: "consulting@invisionnetwork.org",

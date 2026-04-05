@@ -155,7 +155,7 @@ export const HomeIntroSection = () => {
                     className="w-full h-48 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/56 via-foreground/16 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/30 to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
                     <p className="text-white font-bold text-sm">Expert-Led Security Operations</p>
                     <p className="text-white/70 text-xs">24/7 Monitoring & Threat Response</p>
@@ -170,7 +170,7 @@ export const HomeIntroSection = () => {
                     className="w-full h-36 md:h-44 object-cover group-hover:scale-110 transition-transform duration-700"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/44 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
                   <div className="absolute bottom-3 left-3">
                     <p className="text-white font-bold text-xs">Family Plans</p>
                   </div>
@@ -182,7 +182,7 @@ export const HomeIntroSection = () => {
                     className="w-full h-36 md:h-44 object-cover group-hover:scale-110 transition-transform duration-700"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/44 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
                   <div className="absolute bottom-3 left-3">
                     <p className="text-white font-bold text-xs">Community Events</p>
                   </div>
@@ -269,7 +269,7 @@ export const HomeIntroSection = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-r from-foreground/70 via-foreground/38 to-transparent" />
               <div className="relative p-8 md:p-10 flex flex-col justify-end h-full">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/20 backdrop-blur-xl border border-primary/30 text-xs font-bold text-primary w-fit mb-4">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/15 backdrop-blur-xl border border-white/25 text-xs font-bold text-white w-fit mb-4">
                   <Shield className="w-3 h-3" /> Success Story
                 </span>
                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">$1.2M+ Saved for Families</h3>
@@ -393,8 +393,8 @@ function StatCard({
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/25 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/15 to-transparent" />
         <div className="relative">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center mx-auto mb-4 shadow-sm">
-            <Icon className="w-6 h-6 text-primary" />
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mx-auto mb-4 shadow-sm">
+            <Icon className="w-6 h-6 text-white" />
           </div>
           <div className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-1">
             {value.toLocaleString()}

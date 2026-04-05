@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { sanitizeHtml } from "@/utils/sanitize";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -385,7 +386,7 @@ export default function BookReader() {
                 "prose max-w-none [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mb-6 [&_h3]:font-semibold [&_h3]:mt-6 [&_h3]:mb-3 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5",
                 FONT_SIZE_CLASSES[fontSize],
               )}
-              dangerouslySetInnerHTML={{ __html: chapter.content_html }}
+              dangerouslySetInnerHTML={{ __html: sanitizeHtml(chapter.content_html) }}
             />
             <div className="mt-8 pt-6 border-t border-border/50 text-center">
               <p className="text-xs text-muted-foreground">

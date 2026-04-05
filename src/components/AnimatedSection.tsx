@@ -52,7 +52,7 @@ export const AnimatedSection = React.forwardRef<HTMLDivElement, AnimatedSectionP
     };
   }, []);
 
-  const baseStyles = "transition-all duration-300 ease-out";
+  const baseStyles = "transition-[opacity,transform] duration-200 ease-out will-change-[opacity,transform]";
 
   const animationMap = {
     "fade-up": {

@@ -5,7 +5,6 @@ import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
 import { SEO } from "@/components/SEO";
 import { PageTransition } from "@/components/PageTransition";
-// NatureAccent removed for performance
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -443,6 +442,10 @@ export default function FAQ() {
           description="Find answers to common questions about InVision Network's AI scam protection, business services, billing, and technical support."
           keywords="FAQ, questions, support, help, InVision Network"
           structuredData={faqStructuredData}
+          breadcrumbs={[
+            { name: "Home", url: "https://www.invisionnetwork.org/" },
+            { name: "FAQ", url: "https://www.invisionnetwork.org/faq" },
+          ]}
         />
         <Navigation />
 

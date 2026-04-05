@@ -61,7 +61,6 @@ import { SEO } from "@/components/SEO";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 import { usePrerenderBlocker } from "@/contexts/PrerenderContext";
-// NatureAccent removed for performance
 
 import seniorCouple from "@/assets/senior-couple-active.jpg";
 
@@ -567,6 +566,10 @@ function LearnAndTrain() {
           title="AI Scam Protection Training"
           description="Comprehensive AI scam protection training for families and seniors. Learn to spot deepfakes, phishing, and AI-powered scams."
           keywords="AI scam training, deepfake detection training, senior cybersecurity, phishing awareness"
+          breadcrumbs={[
+            { name: "Home", url: "https://www.invisionnetwork.org/" },
+            { name: "Training", url: "https://www.invisionnetwork.org/training" },
+          ]}
           structuredData={{
             "@context": "https://schema.org",
             "@type": "EducationalOrganization",

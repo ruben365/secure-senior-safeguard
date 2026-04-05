@@ -3,6 +3,7 @@ import { SEO, PAGE_SEO } from "@/components/SEO";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
+import { sanitizeHtml } from "@/utils/sanitize";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -115,7 +116,7 @@ export default function HelpCenter() {
 
                   {expandedArticle === article.id && (
                     <div className="mt-4 pt-4 border-t">
-                      <div className="prose prose-sm max-w-none text-foreground" dangerouslySetInnerHTML={{ __html: article.content }} />
+                      <div className="prose prose-sm max-w-none text-foreground" dangerouslySetInnerHTML={{ __html: sanitizeHtml(article.content) }} />
                       <div className="flex items-center gap-4 mt-6 pt-4 border-t">
                         <span className="text-sm text-muted-foreground">Was this helpful?</span>
                         <Button variant="outline" size="sm" onClick={() => handleHelpful(article.id, true)}>

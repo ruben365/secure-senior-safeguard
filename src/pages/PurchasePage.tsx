@@ -356,8 +356,8 @@ export default function PurchasePage() {
               Contact us
             </Link>{" "}
             or call{" "}
-            <a href="tel:+14074465749" className="text-primary underline underline-offset-2">
-              (407) 446-5749
+            <a href="tel:+19373018749" className="text-primary underline underline-offset-2">
+              (937) 301-8749
             </a>
           </div>
         </div>

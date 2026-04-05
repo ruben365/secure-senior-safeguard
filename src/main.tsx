@@ -1,7 +1,9 @@
 import { createRoot, hydrateRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import "./i18n";
+
+// Defer i18n initialization — not needed for first paint
+import("./i18n");
 
 // Clean refresh param
 if (window.location.search.includes("r=")) {

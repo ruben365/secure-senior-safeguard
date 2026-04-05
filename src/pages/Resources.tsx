@@ -42,7 +42,6 @@ import {
   Mail } from
 "lucide-react";
 import { EmbeddedPaymentModal } from "@/components/payment/EmbeddedPaymentModal";
-// ScrollReveal removed — instant rendering
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import BookCoverModal from "@/components/resources/BookCoverModal";
 import { BOOK_CATALOG, CATEGORY_LABELS, type BookCategory } from "@/config/bookCatalog";
@@ -51,7 +50,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 // GlassmorphismBackground removed — using Business-style sections
-// NatureAccent removed for performance
 import { usePrerenderBlocker } from "@/contexts/PrerenderContext";
 import { TranslationRequestDialog } from "@/components/resources/TranslationRequestDialog";
 import { ReadBooksDialog } from "@/components/resources/ReadBooksDialog";
@@ -496,7 +494,7 @@ function Resources() {
                           height={320}
                           loading={bookIndex < 10 ? "eager" : "lazy"}
                           decoding={bookIndex < 10 ? "sync" : "async"}
-                          fetchPriority={bookIndex < 5 ? "high" : undefined}
+                          {...{ fetchpriority: bookIndex < 5 ? "high" : undefined } as any}
                           className="w-full h-full object-cover"
                         />
                       </div>

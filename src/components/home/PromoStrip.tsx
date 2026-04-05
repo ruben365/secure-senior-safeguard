@@ -64,8 +64,8 @@ export const PromoStrip = () => {
                     <span className="text-xs font-black text-primary-foreground">{step.num}</span>
                   </div>
                   
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center mx-auto mb-5 shadow-sm border border-primary/10">
-                    <step.icon className="w-7 h-7 text-primary" />
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/5 flex items-center justify-center mx-auto mb-5 shadow-sm border border-primary/20">
+                    <step.icon className="w-7 h-7 text-foreground" />
                   </div>
                   <h3 className="text-lg font-bold text-foreground mb-3">
                     {step.title}

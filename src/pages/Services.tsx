@@ -277,6 +277,10 @@ const Services = () => {
         title="Our Services - Comprehensive Protection Solutions"
         description="Explore InVision Network's complete range of cybersecurity services: ScamShield Protection, AI Business Solutions, Training Programs, and Safety Vault. Protect what matters most."
         keywords="cybersecurity services, scam protection, AI business solutions, security training, password management, fraud prevention"
+        breadcrumbs={[
+          { name: "Home", url: "https://www.invisionnetwork.org/" },
+          { name: "Services", url: "https://www.invisionnetwork.org/services" },
+        ]}
       />
 
       <div className="min-h-screen bg-gradient-to-b from-background via-background to-muted/20">
@@ -463,6 +467,7 @@ const Services = () => {
                   id="billing-toggle"
                   checked={!isMonthly}
                   onCheckedChange={(checked) => setIsMonthly(!checked)}
+                  aria-label="Toggle yearly billing"
                 />
                 <Label
                   htmlFor="billing-toggle"

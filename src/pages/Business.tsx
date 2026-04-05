@@ -59,7 +59,6 @@ import businessScheduling from "@/assets/business-smart-scheduling.jpg";
 import businessSupportBot from "@/assets/business-support-bot.jpg";
 import businessIntake from "@/assets/business-intake-scheduling.jpg";
 import { natureSummer2 } from "@/config/natureHeroImages";
-// NatureAccent removed for performance
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import { VideoLightbox } from "@/components/VideoLightbox";
 import { SEO } from "@/components/SEO";
@@ -458,8 +457,12 @@ function Business() {
       <div className="min-h-screen">
         <SEO
           title="AI Business Solutions & Automation"
-          description="AI receptionists, automated follow-ups, and professional websites for Ohio businesses. Your AI front desk runs 24/7. Serving Dayton and all of Ohio."
-          keywords="AI receptionist, business automation, AI answering service, virtual receptionist, Dayton Ohio, small business AI"
+          description="AI receptionists, automated follow-ups, and professional websites for Ohio businesses. Your AI front desk runs 24/7. Serving Kettering and all of Ohio."
+          keywords="AI receptionist, business automation, AI answering service, virtual receptionist, Kettering Ohio, small business AI"
+          breadcrumbs={[
+            { name: "Home", url: "https://www.invisionnetwork.org/" },
+            { name: "Business", url: "https://www.invisionnetwork.org/business" },
+          ]}
           structuredData={{
             "@context": "https://schema.org",
             "@type": "ItemList",
@@ -1317,7 +1320,8 @@ function Business() {
                 <Switch
                   id="billing-toggle"
                   checked={isYearly}
-                  onCheckedChange={setIsYearly} />
+                  onCheckedChange={setIsYearly}
+                  aria-label="Toggle yearly billing" />
                 
                 <Label
                   htmlFor="billing-toggle"

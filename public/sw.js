@@ -1,5 +1,6 @@
-const CACHE_NAME = "invision-network-v7";
-const IMAGE_CACHE = "invision-images-v5";
+const CACHE_NAME = "invision-network-v8";
+const IMAGE_CACHE = "invision-images-v6";
+const JS_CACHE = "invision-js-v1";
 const STATIC_ASSETS = [
   "/index.html",
   "/favicon.ico",
@@ -19,11 +20,12 @@ self.addEventListener("install", (event) => {
 
 // Activate event - clean up old caches
 self.addEventListener("activate", (event) => {
+  const validCaches = new Set([CACHE_NAME, IMAGE_CACHE, JS_CACHE]);
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames
-          .filter((name) => name !== CACHE_NAME && name !== IMAGE_CACHE)
+          .filter((name) => !validCaches.has(name))
           .map((name) => caches.delete(name)),
       );
     }),
@@ -102,6 +104,25 @@ self.addEventListener("fetch", (event) => {
             return response;
           })
         );
+      }),
+    );
+    return;
+  }
+
+  // JS chunks with hash in filename: cache-first (immutable)
+  if (
+    /\/assets\/js\/.*-[a-zA-Z0-9]{8}\.js$/i.test(url.pathname)
+  ) {
+    event.respondWith(
+      caches.match(request).then((cached) => {
+        if (cached) return cached;
+        return fetch(request).then((response) => {
+          if (response.ok) {
+            const clone = response.clone();
+            caches.open(JS_CACHE).then((cache) => cache.put(request, clone));
+          }
+          return response;
+        });
       }),
     );
     return;

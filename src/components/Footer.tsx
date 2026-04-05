@@ -164,7 +164,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
           <div className="h-px bg-white/8 mb-12" />
 
           {/* Navigation Links */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-14">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 md:gap-8 mb-14">
             <div>
               <h4 className="font-bold text-sm mb-5 text-white">
                 Navigation

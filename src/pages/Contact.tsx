@@ -6,8 +6,6 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import { SEO } from "@/components/SEO";
 import { PageTransition } from "@/components/PageTransition";
-// FloatingShapes & ScrollReveal removed for performance
-// NatureAccent removed for performance
 import {
   Card,
   CardContent,
@@ -172,6 +170,10 @@ function Contact() {
       <SEO
         title="Contact Us - Get Support & Answers"
         description="Contact InVision Network for scam protection support. Phone, email, live chat available. Average 2-minute wait time. 95% same-day response rate."
+        breadcrumbs={[
+          { name: "Home", url: "https://www.invisionnetwork.org/" },
+          { name: "Contact", url: "https://www.invisionnetwork.org/contact" },
+        ]}
       />
       <Navigation />
       {/* Hero */}

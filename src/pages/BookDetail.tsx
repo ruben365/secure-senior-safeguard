@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
+import { sanitizeHtml } from "@/utils/sanitize";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -245,7 +246,7 @@ export default function BookDetail() {
                   <h3 className="font-medium text-foreground mb-3">{firstChapter.chapter_title}</h3>
                   <div
                     className="prose prose-sm max-w-none text-foreground/80 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:mb-1 [&_h3]:font-semibold [&_h3]:mt-4 [&_h3]:mb-2"
-                    dangerouslySetInnerHTML={{ __html: firstChapter.content_html }}
+                    dangerouslySetInnerHTML={{ __html: sanitizeHtml(firstChapter.content_html) }}
                   />
                   <p className="text-xs text-muted-foreground mt-4 italic">
                     Pages {firstChapter.page_start}–{firstChapter.page_end} of {book.total_pages}

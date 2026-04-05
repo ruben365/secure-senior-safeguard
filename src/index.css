@@ -6,7 +6,4 @@
 @import "./styles/utilities.css";
 @import "./styles/trending-ui.css";
 
-/* Global zoom out to 75% */
-#root {
-  zoom: 0.75;
-}
+/* Standard sizing - no zoom override */

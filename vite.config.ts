@@ -43,18 +43,51 @@ export default defineConfig(({ mode }) => {
       sourcemap: false,
       cssCodeSplit: true,
       minify: "esbuild",
-      target: "es2020",
+      target: "es2022",
       cssMinify: true,
       reportCompressedSize: false,
       rollupOptions: {
         output: {
-          manualChunks: {
-            "react-vendor": ["react", "react-dom"],
-            "router-vendor": ["react-router-dom"],
-            "supabase-vendor": ["@supabase/supabase-js"],
-            "query-vendor": ["@tanstack/react-query"],
-            "animation-vendor": ["framer-motion"],
-            "icons-vendor": ["lucide-react"],
+          manualChunks(id) {
+            // Core React — loaded on every page
+            if (id.includes("node_modules/react-dom") || id.includes("node_modules/react/")) {
+              return "react-vendor";
+            }
+            if (id.includes("node_modules/react-router")) {
+              return "router-vendor";
+            }
+            // Deferred: only loaded when needed
+            if (id.includes("node_modules/@supabase")) {
+              return "supabase-vendor";
+            }
+            if (id.includes("node_modules/@tanstack/react-query")) {
+              return "query-vendor";
+            }
+            if (id.includes("node_modules/framer-motion")) {
+              return "animation-vendor";
+            }
+            if (id.includes("node_modules/lucide-react")) {
+              return "icons-vendor";
+            }
+            // Heavy libs — isolate so they only load when needed
+            if (id.includes("node_modules/recharts") || id.includes("node_modules/d3-")) {
+              return "charts-vendor";
+            }
+            if (id.includes("node_modules/@tiptap") || id.includes("node_modules/prosemirror") || id.includes("node_modules/@hocuspocus")) {
+              return "editor-vendor";
+            }
+            if (id.includes("node_modules/@stripe") || id.includes("node_modules/@stripe/stripe-js")) {
+              return "stripe-vendor";
+            }
+            if (id.includes("node_modules/react-helmet-async")) {
+              return "helmet-vendor";
+            }
+            if (id.includes("node_modules/zod")) {
+              return "zod-vendor";
+            }
+            if (id.includes("node_modules/dompurify")) {
+              return "sanitize-vendor";
+            }
           },
           // Optimize chunk file names for caching
           chunkFileNames: "assets/js/[name]-[hash].js",

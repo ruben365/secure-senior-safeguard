@@ -152,13 +152,13 @@ export function AdminShell() {
     );
   }
 
-  // TRIAL MODE: Auth check bypassed
-  // if (!user) {
-  //   return <Navigate to="/auth" replace />;
-  // }
+  // Auth check — redirect unauthenticated users
+  if (!user) {
+    return <Navigate to="/auth" replace />;
+  }
 
-  // TRIAL MODE: Role check bypassed
-  if (false && !roleConfig) {
+  // Role check — only staff/admin roles may access
+  if (!roleConfig) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4 bg-[#0F1117]">
         <Card className="max-w-md w-full bg-[#111827] border-gray-800">

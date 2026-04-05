@@ -18,7 +18,6 @@ import { TestimonialCarousel } from "@/components/home/TestimonialCarousel";
 import { LiveSecurityStats } from "@/components/home/LiveSecurityStats";
 import { WorkshopsPromo } from "@/components/home/WorkshopsPromo";
 import { FamilyTrustSection } from "@/components/home/FamilyTrustSection";
-// NatureAccent removed for performance
 import { ArrowRight, CheckCircle, Phone, Shield } from "lucide-react";
 
 const FAQPreview = lazy(() =>
@@ -63,13 +62,13 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
     <PageTransition variant="fade">
       <div className="min-h-screen bg-background">
         <SEO {...PAGE_SEO.home} />
-        <Navigation />
-
         <main>
-          {/* 1. Hero */}
+          {/* 1. Hero (includes its own dark navigation bar) */}
           <section id="hero">
             <HeroHomepage />
           </section>
+
+          {/* Navigation is now built into the hero section */}
 
           {/* 2. Live Threat Ticker */}
           <ThreatTicker />
@@ -144,7 +143,7 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
                 className="w-full h-full object-cover"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[hsl(288_35%_8%/0.85)] via-[hsl(288_35%_12%/0.7)] to-[hsl(288_35%_15%/0.5)]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[hsl(272_52%_8%/0.94)] via-[hsl(272_48%_12%/0.82)] to-[hsl(272_42%_16%/0.6)]" />
             </div>
 
             <div className="container mx-auto px-4 py-20 md:py-28 lg:py-32 text-center relative z-10">
