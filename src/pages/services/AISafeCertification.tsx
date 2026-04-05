@@ -58,7 +58,7 @@ const AISafeCertification = () => {
           description="Get your business InVision Certified AI-Safe. Annual audit, verified badge for your website, and recognition Ohio defense contractors and law firms trust."
           keywords="AI safe certification, business cybersecurity audit, Ohio defense contractor compliance, AI scam verified seal"
         />
-        <Navigation />
+        <Navigation overlay />
         <main>
           {/* HERO */}
           <section className="relative overflow-hidden py-24 md:py-32 bg-gradient-to-br from-[#0a0f1e] via-[#0d1a2e] to-[#0a1628]">

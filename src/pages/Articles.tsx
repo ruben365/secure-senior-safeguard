@@ -51,7 +51,7 @@ function Articles() {
           url: "https://invisionnetwork.org/articles",
         }}
       />
-      <Navigation />
+      <Navigation overlay />
 
       <Hero
         backgroundImages={articlesHeroImages}

@@ -122,7 +122,7 @@ function About() {
           { name: "About", url: "https://www.invisionnetwork.org/about" },
         ]}
       />
-      <Navigation />
+      <Navigation overlay />
 
       {/* Hero */}
       <div className="relative">

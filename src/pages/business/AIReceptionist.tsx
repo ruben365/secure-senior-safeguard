@@ -130,7 +130,7 @@ const AIReceptionist = () => {
             },
           }}
         />
-        <Navigation />
+        <Navigation overlay />
 
         <main>
           {/* Hero Section with Nature Image */}

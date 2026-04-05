@@ -94,7 +94,7 @@ export default function LibraryPage() {
           },
         }}
       />
-      <Navigation />
+      <Navigation overlay />
 
       <main id="main-content" tabIndex={-1} className="flex-1">
         {/* Hero */}

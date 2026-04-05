@@ -291,7 +291,7 @@ const WebsiteDesign = () => {
             ],
           }}
         />
-        <Navigation />
+        <Navigation overlay />
 
         <main>
           {/* Hero Section */}

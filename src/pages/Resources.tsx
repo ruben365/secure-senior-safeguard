@@ -240,7 +240,7 @@ function Resources() {
         description="Browse our curated collection of scam prevention e-books and digital security guides. Everything you need to protect yourself and your loved ones."
         structuredData={resourceStructuredData} />
 
-      <Navigation />
+      <Navigation overlay />
 
       {/* Hero wrapper for floating stats */}
       <div className="relative">

@@ -501,7 +501,7 @@ function Business() {
 
           }} />
         
-        <Navigation />
+        <Navigation overlay />
 
         {/* Hero */}
         <div className="relative">

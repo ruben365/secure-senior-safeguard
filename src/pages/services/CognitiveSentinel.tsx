@@ -89,7 +89,7 @@ const CognitiveSentinel = () => {
           description="AI that detects when a senior is being socially engineered — in real time. Passive behavioral monitoring alerts caregivers while the threat is happening."
           keywords="senior scam protection, cognitive monitoring, elder fraud prevention, caregiver alerts Ohio"
         />
-        <Navigation />
+        <Navigation overlay />
 
         <main>
           {/* HERO */}

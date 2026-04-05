@@ -175,7 +175,7 @@ const WebsiteInsurance = () => {
             ],
           }}
         />
-        <Navigation />
+        <Navigation overlay />
 
         <main>
           {/* Hero Section */}

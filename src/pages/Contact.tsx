@@ -176,7 +176,7 @@ function Contact() {
           { name: "Contact", url: "https://www.invisionnetwork.org/contact" },
         ]}
       />
-      <Navigation />
+      <Navigation overlay />
       {/* Hero */}
       <div className="relative">
         <Hero

@@ -581,7 +581,7 @@ function LearnAndTrain() {
             telephone: SITE.phone.e164,
           }}
         />
-        <Navigation />
+        <Navigation overlay />
 
         {/* Hero Section */}
         <div className="relative">

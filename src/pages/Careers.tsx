@@ -124,7 +124,7 @@ function Careers() {
         title="Careers - Join Our Mission"
         description="Join InVision Network and help protect families from AI-powered scams. Remote-first culture, competitive benefits, meaningful work. Open positions in engineering, support, design, and more."
       />
-      <Navigation />
+      <Navigation overlay />
 
       {/* Hero */}
       <div className="relative">

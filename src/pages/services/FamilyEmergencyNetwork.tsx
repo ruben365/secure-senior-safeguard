@@ -42,7 +42,7 @@ const FamilyEmergencyNetwork = () => {
           description="One button sends a simultaneous alert to 3 family members, an InVision analyst, and local police — with a GPS-stamped voice recording of the scammer."
           keywords="senior panic button, family alert system, scam emergency response, elder fraud protection Ohio"
         />
-        <Navigation />
+        <Navigation overlay />
         <main>
           {/* HERO */}
           <section className="relative overflow-hidden py-24 md:py-32 bg-gradient-to-br from-[#0a0f1e] via-[#0d1a2e] to-[#0a1628]">

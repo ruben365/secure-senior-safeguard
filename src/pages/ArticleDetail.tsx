@@ -43,7 +43,7 @@ function ArticleDetail() {
           description="Loading article content."
           noindex
         />
-        <Navigation />
+        <Navigation overlay />
         <div className="container mx-auto px-4 py-16 max-w-4xl">
           <Skeleton className="h-8 w-32 mb-4" />
           <Skeleton className="h-12 w-full mb-4" />
@@ -68,7 +68,7 @@ function ArticleDetail() {
           description="The article you're looking for doesn't exist or has been removed."
           noindex
         />
-        <Navigation />
+        <Navigation overlay />
         <div className="container mx-auto px-4 py-16 text-center">
           <h1 className="text-4xl font-bold mb-4">Article Not Found</h1>
           <p className="text-muted-foreground mb-8">
@@ -130,7 +130,7 @@ function ArticleDetail() {
           },
         }}
       />
-      <Navigation />
+      <Navigation overlay />
 
       <article className="container mx-auto px-4 py-16 max-w-4xl">
         <div className="animate-fade-in">

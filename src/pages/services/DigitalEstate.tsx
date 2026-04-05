@@ -56,7 +56,7 @@ const DigitalEstate = () => {
           description="An AI-managed digital vault that automatically locks down accounts, notifies contacts, and transfers credentials to heirs upon death or incapacitation. Built for Ohio seniors."
           keywords="digital estate planning, senior account vault, digital asset executor, online accounts after death Ohio"
         />
-        <Navigation />
+        <Navigation overlay />
         <main>
           {/* HERO */}
           <section className="relative overflow-hidden py-24 md:py-32 bg-gradient-to-br from-[#0a0f1e] via-[#0d1a2e] to-[#0a1628]">

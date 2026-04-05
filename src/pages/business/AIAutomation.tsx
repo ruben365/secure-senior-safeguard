@@ -143,7 +143,7 @@ const AIAutomation = () => {
             },
           }}
         />
-        <Navigation />
+        <Navigation overlay />
 
         <main>
           {/* Hero Section with Nature Image */}

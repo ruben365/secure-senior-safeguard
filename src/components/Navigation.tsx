@@ -32,7 +32,7 @@ const secondaryLinks = [
 
 const allLinks = [...primaryLinks, ...secondaryLinks];
 
-const Navigation = React.memo(() => {
+const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [donateOpen, setDonateOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
@@ -100,7 +100,7 @@ const Navigation = React.memo(() => {
         />
       )}
 
-      <nav className={`sticky top-0 z-[9999] transition-colors duration-300 ${scrolled ? "bg-[#080d1a]/95 backdrop-blur-md border-b border-white/[0.06]" : "bg-transparent"}`}>
+      <nav className={overlay ? "absolute top-0 left-0 right-0 z-[9999] bg-gradient-to-b from-black/60 to-transparent" : `sticky top-0 z-[9999] transition-colors duration-300 ${scrolled ? "bg-[#080d1a]/95 backdrop-blur-md border-b border-white/[0.06]" : "bg-transparent"}`}>
         <div className="container mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
           <div className="flex items-center justify-between h-[68px]">
             {/* Logo — identical to hero */}

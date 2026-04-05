@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight, Shield, Star, Phone,
-  Users, Lock, Award, TrendingUp, Zap,
+  Users, TrendingUp, Zap,
   CheckCircle2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -14,12 +14,6 @@ const stats = [
   { value: "$1.2M",  label: "Saved From Scams",   icon: TrendingUp },
   { value: "99.8%",  label: "Detection Rate",      icon: Shield },
   { value: "< 2min", label: "Response Time",       icon: Zap },
-];
-
-const trustPills = [
-  { icon: Award,  text: `${SITE.veteranDiscountPercent}% Veteran Discount` },
-  { icon: Lock,   text: `${SITE.moneyBackGuaranteeDays}-Day Money Back` },
-  { icon: Shield, text: "Privacy-First Approach" },
 ];
 
 const threatItems = ["Voice Cloning", "Deepfake AI", "Phishing Links"];
@@ -198,32 +192,6 @@ export const HeroHomepage = () => {
         </div>
       </div>
 
-      {/* Bottom trust bar — hidden on mobile (covered by fixed call button), sm+ only */}
-      <div className="hidden sm:block absolute bottom-0 left-0 right-0 border-t border-border/40 bg-white/92 backdrop-blur-sm z-10">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-3 sm:py-4">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-2">
-              <div className="flex gap-0.5">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                ))}
-              </div>
-              <span className="text-sm font-bold text-foreground">5.0 — Rated by Ohio Families</span>
-            </div>
-            <div className="hidden md:flex items-center gap-2">
-              {trustPills.map((item) => (
-                <div
-                  key={item.text}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary border border-border/40"
-                >
-                  <item.icon className="w-3 h-3 text-primary" />
-                  <span className="text-[11px] font-semibold text-foreground/70">{item.text}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
   );
 };

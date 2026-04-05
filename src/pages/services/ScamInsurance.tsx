@@ -75,7 +75,7 @@ const ScamInsurance = () => {
           description="The first insurance policy specifically underwritten for AI-driven scams. If you get defrauded despite our protection, we pay. Up to $500K coverage."
           keywords="scam insurance, AI fraud protection, elder fraud insurance, business email compromise coverage Ohio"
         />
-        <Navigation />
+        <Navigation overlay />
 
         <main>
           {/* HERO */}

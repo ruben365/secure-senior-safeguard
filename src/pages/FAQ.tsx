@@ -448,7 +448,7 @@ export default function FAQ() {
             { name: "FAQ", url: "https://www.invisionnetwork.org/faq" },
           ]}
         />
-        <Navigation />
+        <Navigation overlay />
 
         <main>
           {/* Hero wrapper for floating stats */}

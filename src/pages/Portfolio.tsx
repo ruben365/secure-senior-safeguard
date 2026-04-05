@@ -65,7 +65,7 @@ const Portfolio = () => {
         title="Design Portfolio | InVision Network"
         description="Explore our design portfolio: brand systems, digital design, typography, illustration, motion design, and UI assets."
       />
-      <Navigation />
+      <Navigation overlay />
 
       {/* Hero */}
       <section className="pt-28 pb-16 bg-gradient-to-b from-primary/5 to-background">

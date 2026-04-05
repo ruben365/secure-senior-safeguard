@@ -37,7 +37,7 @@ export default function BookDetail() {
     return (
       <div className="min-h-screen flex flex-col">
         <SEO title="Book Not Found" description="The requested book was not found." noindex />
-        <Navigation />
+        <Navigation overlay />
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center py-20">
             <BookOpen className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
@@ -94,7 +94,7 @@ export default function BookDetail() {
           },
         }}
       />
-      <Navigation />
+      <Navigation overlay />
 
       <main id="main-content" tabIndex={-1} className="flex-1">
         {/* Breadcrumb */}
