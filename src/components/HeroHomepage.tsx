@@ -1,376 +1,230 @@
-import * as React from "react";
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
-  ArrowRight, Shield, Phone, Fingerprint, Eye, Lock, Wifi,
-  Menu, X, Heart, ChevronDown, LayoutDashboard, Bell,
+  ArrowRight, Shield, Star, Phone,
+  Users, Lock, Award, TrendingUp, Zap,
+  CheckCircle2,
 } from "lucide-react";
-import { PrefetchLink } from "@/components/PrefetchLink";
-import { ShoppingCart } from "@/components/ShoppingCart";
-import { useAuth } from "@/contexts/AuthContext";
+import { Button } from "@/components/ui/button";
 import { SITE } from "@/config/site";
-import { DonationModal } from "@/components/DonationModal";
-import invisionLogo from "@/assets/shield-logo.png";
-import heroImage from "@/assets/hero-corporate-protection.jpg";
+const heroImage = "/images/hero-homepage-cinematic.jpg";
 
-const primaryLinks = [
-  { name: "AI & Business", href: "/business" },
-  { name: "Learn & Train", href: "/training" },
-  { name: "Resources", href: "/resources" },
-  { name: "About", href: "/about" },
+const stats = [
+  { value: "500+",   label: "Families Protected", icon: Users },
+  { value: "$1.2M",  label: "Saved From Scams",   icon: TrendingUp },
+  { value: "99.8%",  label: "Detection Rate",      icon: Shield },
+  { value: "< 2min", label: "Response Time",       icon: Zap },
 ];
 
-const secondaryLinks = [
-  { name: "Careers", href: "/careers" },
-  { name: "FAQ", href: "/faq" },
-  { name: "Contact", href: "/contact" },
+const trustPills = [
+  { icon: Award,  text: `${SITE.veteranDiscountPercent}% Veteran Discount` },
+  { icon: Lock,   text: `${SITE.moneyBackGuaranteeDays}-Day Money Back` },
+  { icon: Shield, text: "Privacy-First Approach" },
 ];
 
-const allLinks = [...primaryLinks, ...secondaryLinks];
+const threatItems = ["Voice Cloning", "Deepfake AI", "Phishing Links"];
 
 export const HeroHomepage = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [donateOpen, setDonateOpen] = useState(false);
-  const [moreOpen, setMoreOpen] = useState(false);
-  const location = useLocation();
-  const { user, roleConfig } = useAuth();
-  const moreRef = React.useRef<HTMLDivElement>(null);
-  const isAdminOrStaff = user && roleConfig;
-
-  React.useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (moreRef.current && !moreRef.current.contains(e.target as Node)) setMoreOpen(false);
-    };
-    if (moreOpen) document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, [moreOpen]);
-
-  const hasOpenedMenu = React.useRef(false);
-  React.useEffect(() => {
-    if (mobileMenuOpen) { hasOpenedMenu.current = true; document.body.style.overflow = "hidden"; }
-    else if (hasOpenedMenu.current) { document.body.style.overflow = ""; }
-    return () => { if (hasOpenedMenu.current) document.body.style.overflow = ""; };
-  }, [mobileMenuOpen]);
-
-  const isActiveLink = (href: string) => location.pathname === href || location.pathname.startsWith(href + "/");
-  const isSecondaryActive = secondaryLinks.some((l) => isActiveLink(l.href));
+  const heroRef = useRef<HTMLImageElement>(null);
+  useEffect(() => {
+    heroRef.current?.setAttribute("fetchpriority", "high");
+  }, []);
 
   return (
-    <>
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 bg-black/60 z-[9998] lg:hidden" onClick={() => setMobileMenuOpen(false)} />
-      )}
+    <section className="relative overflow-hidden bg-[hsl(var(--background))]" style={{ minHeight: "100dvh" }}>
 
-      <section className="relative w-full lg:min-h-screen lg:h-[100dvh] overflow-hidden hero-dark-bg">
-        {/* ── Full-bleed background image with cinematic overlays ── */}
-        <div className="absolute inset-0">
-          <img
-            src={heroImage}
-            alt="Cybersecurity protection shield visualization"
-            className="w-full h-full object-cover object-right"
-            loading="eager"
-            decoding="sync"
-            {...{ fetchpriority: "high" } as any}
-          />
-          {/* Primary left-to-right fade */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#060a14] via-[#060a14]/90 via-40% to-transparent" />
-          {/* Bottom fade for cards */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#060a14] via-[#060a14]/30 via-30% to-transparent" />
-          {/* Top subtle darkening for nav readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#060a14]/60 via-transparent via-20% to-transparent" />
-          {/* Cinematic vignette */}
-          <div className="absolute inset-0 hero-vignette" />
-          {/* Subtle light streak across hero */}
-          <div className="absolute inset-0 hero-light-streak" />
-          {/* Ambient color accent — subtle purple glow from left */}
-          <div className="absolute top-1/4 -left-20 w-[500px] h-[500px] rounded-full bg-[hsl(272,52%,24%)]/10 blur-[120px] pointer-events-none" />
-          <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] rounded-full bg-[hsl(280,58%,52%)]/6 blur-[100px] pointer-events-none" />
-        </div>
+      {/* Full-bleed background */}
+      <div className="absolute inset-0">
+        <img
+          ref={heroRef}
+          src={heroImage}
+          alt="Multi-generational family safely using technology together"
+          className="w-full h-full object-cover object-center"
+          loading="eager"
+          decoding="sync"
+        />
+        {/* Strong left gradient — ensures text legibility on all screen sizes */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--background))] via-[hsl(var(--background)/0.96)] sm:via-[hsl(var(--background)/0.9)] lg:via-[hsl(var(--background)/0.8)] to-[hsl(var(--background)/0.15)]" />
+        {/* Bottom fade for stat cards */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--background))] via-[hsl(var(--background)/0.3)] via-25% to-transparent" />
+        {/* Top darkening for nav readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--background)/0.5)] via-transparent via-15% to-transparent" />
+        {/* Brand tint — subtle blue wash */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-transparent to-accent/3" />
+        {/* Cinematic vignette */}
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 85% 65% at 50% 50%, transparent 40%, hsl(var(--background) / 0.35) 100%)' }} />
+        {/* Ambient blue glow orb — adds depth */}
+        <div className="absolute top-1/3 -left-32 w-[500px] h-[500px] rounded-full bg-primary/[0.06] blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-1/4 right-0 w-[300px] h-[300px] rounded-full bg-accent/[0.04] blur-[100px] pointer-events-none" />
+      </div>
 
-        {/* ── Transparent Navigation (no background) ── */}
-        <nav className="absolute top-0 left-0 right-0 z-[9999]">
-          <div className="container mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
-            <div className="flex items-center justify-between h-[68px]">
-              {/* Logo */}
-              <Link to="/" className="flex items-center gap-2.5 hover:opacity-90 transition-opacity duration-150 flex-shrink-0 no-underline">
-                <img
-                  src={invisionLogo}
-                  alt="InVision Network Shield Logo"
-                  width={34}
-                  height={34}
-                  loading="eager"
-                  decoding="sync"
-                  className="w-[38px] h-[38px] object-contain flex-shrink-0 brightness-0 invert"
-                />
-                <div className="flex flex-col leading-none min-w-0">
-                  <span className="text-[17px] font-extrabold text-white tracking-tight">InVision Network</span>
-                  <span className="text-[10px] font-bold text-gray-400 hidden sm:block tracking-widest uppercase">AI Scam Protection</span>
-                </div>
-              </Link>
-
-              {/* Desktop Links */}
-              <div className="hidden lg:flex items-center gap-1">
-                {primaryLinks.map((link) => (
-                  <PrefetchLink
-                    key={link.name}
-                    to={link.href}
-                    className={`relative text-[15px] px-3 py-2 rounded-md transition-colors duration-150 ${
-                      isActiveLink(link.href)
-                        ? "text-violet-400 font-bold bg-violet-500/10"
-                        : "text-gray-300 font-semibold hover:text-white hover:bg-white/10"
-                    }`}
-                  >
-                    {link.name}
-                  </PrefetchLink>
-                ))}
-
-                <div className="relative" ref={moreRef}>
-                  <button
-                    type="button"
-                    onClick={() => setMoreOpen(!moreOpen)}
-                    className={`flex items-center gap-1 text-[15px] px-3 py-2 rounded-md transition-colors duration-150 ${
-                      isSecondaryActive
-                        ? "text-violet-400 font-bold bg-violet-500/10"
-                        : "text-gray-300 font-semibold hover:text-white hover:bg-white/10"
-                    }`}
-                  >
-                    More
-                    <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${moreOpen ? "rotate-180" : ""}`} />
-                  </button>
-
-                  {moreOpen && (
-                    <div className="absolute top-full left-0 mt-1 w-44 rounded-lg border border-gray-700/50 shadow-lg py-1 z-50 cyber-card-bg backdrop-blur-xl">
-                      {secondaryLinks.map((link) => (
-                        <PrefetchLink
-                          key={link.name}
-                          to={link.href}
-                          className={`block px-4 py-2.5 text-sm transition-colors ${
-                            isActiveLink(link.href)
-                              ? "text-violet-400 font-semibold bg-violet-500/10"
-                              : "text-gray-300 hover:text-white hover:bg-white/10"
-                          }`}
-                          onClick={() => setMoreOpen(false)}
-                        >
-                          {link.name}
-                        </PrefetchLink>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Right Side */}
-              <div className="flex items-center gap-2">
-                {/* Bell notification */}
-                <button
-                  type="button"
-                  className="hidden lg:flex items-center justify-center w-9 h-9 rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-colors relative"
-                  aria-label="Notifications"
-                >
-                  <Bell className="w-4 h-4" />
-                  <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-violet-500 rounded-full" />
-                </button>
-
-                <ShoppingCart />
-
-                <a
-                  href={SITE.phone.tel}
-                  className="hidden lg:flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors duration-150 no-underline px-2 py-1.5 rounded-md hover:bg-white/10"
-                  aria-label={`Call us at ${SITE.phone.display}`}
-                >
-                  <Phone className="w-4 h-4" />
-                  <span className="hidden xl:inline text-sm font-medium">{SITE.phone.display}</span>
-                </a>
-
-                <button
-                  type="button"
-                  onClick={() => setDonateOpen(true)}
-                  className="hidden lg:flex items-center gap-1.5 text-sm font-medium px-2.5 py-1.5 rounded-md text-gray-400 hover:text-violet-400 hover:bg-violet-500/10 transition-colors"
-                  aria-label="Donate"
-                >
-                  <Heart className="w-4 h-4" />
-                  <span className="hidden xl:inline">Donate</span>
-                </button>
-
-                <div className="hidden lg:block w-px h-6 bg-gray-700 mx-1" />
-
-                {isAdminOrStaff ? (
-                  <Link to="/admin" className="flex items-center gap-1.5 h-9 px-6 text-sm font-semibold rounded-full bg-violet-600 hover:bg-violet-500 text-white transition-all shadow-[0_0_15px_rgba(124,58,237,0.2)]">
-                    <LayoutDashboard className="h-4 w-4" />
-                    Dashboard
-                  </Link>
-                ) : (
-                  <Link to="/portal" className="h-9 px-6 text-sm font-semibold rounded-full bg-violet-600 hover:bg-violet-500 text-white transition-all shadow-[0_0_15px_rgba(124,58,237,0.2)] inline-flex items-center">
-                    Login
-                  </Link>
-                )}
-
-                <button
-                  type="button"
-                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  className="lg:hidden p-2 rounded-lg hover:bg-white/10 transition-colors duration-150 min-w-[44px] min-h-[44px] flex items-center justify-center"
-                  aria-label="Toggle menu"
-                >
-                  {mobileMenuOpen ? <X className="h-5 w-5 text-white" /> : <Menu className="h-5 w-5 text-white" />}
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Mobile Menu */}
-          {mobileMenuOpen && (
-            <div className="lg:hidden fixed top-16 left-0 right-0 bottom-0 border-t border-gray-800 z-[10001] overflow-y-auto overscroll-contain pb-[calc(env(safe-area-inset-bottom)+1.25rem)] [-webkit-overflow-scrolling:touch] hero-dark-bg">
-              <div className="container mx-auto px-4 py-4 space-y-1">
-                {allLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    to={link.href}
-                    className={`block text-[15px] transition-colors duration-150 font-medium px-4 py-3 rounded-lg ${
-                      isActiveLink(link.href)
-                        ? "text-violet-400 font-semibold bg-violet-500/10"
-                        : "text-gray-300 hover:text-white hover:bg-white/10"
-                    }`}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.name}
-                  </Link>
-                ))}
-                <div className="pt-4 border-t border-gray-800 mt-3 space-y-3">
-                  <button
-                    type="button"
-                    className="w-full h-11 text-[15px] font-semibold border border-violet-500/30 text-violet-400 hover:bg-violet-500/10 rounded-lg flex items-center justify-center gap-2 transition-colors"
-                    onClick={() => { setDonateOpen(true); setMobileMenuOpen(false); }}
-                  >
-                    <Heart className="h-4 w-4" />
-                    Donate
-                  </button>
-                  {isAdminOrStaff ? (
-                    <Link to="/admin" onClick={() => setMobileMenuOpen(false)} className="w-full h-11 text-[15px] font-semibold rounded-lg bg-violet-600 hover:bg-violet-700 text-white flex items-center justify-center gap-2 transition-colors">
-                      <LayoutDashboard className="h-4 w-4" />
-                      Dashboard
-                    </Link>
-                  ) : (
-                    <Link to="/portal" onClick={() => setMobileMenuOpen(false)} className="w-full h-11 text-[15px] font-semibold rounded-lg bg-violet-600 hover:bg-violet-700 text-white flex items-center justify-center transition-colors">
-                      Login
-                    </Link>
-                  )}
-                  <a
-                    href={SITE.phone.tel}
-                    className="flex items-center justify-center gap-2 text-[15px] text-gray-400 font-medium px-4 py-3 rounded-lg hover:bg-white/10 transition-colors duration-150"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <Phone className="h-4 w-4" />
-                    {SITE.phone.display}
-                  </a>
-                </div>
-              </div>
-            </div>
-          )}
-        </nav>
-
-        {/* ── Hero Content (Left-Aligned) ── */}
-        <div className="relative z-10 flex flex-col justify-center pt-24 pb-10 lg:pt-0 lg:pb-0 lg:min-h-screen lg:h-[100dvh] max-w-6xl mx-auto px-6 sm:px-8 lg:px-10 3xl:max-w-7xl">
-          <div className="w-full lg:w-[55%] lg:pb-52">
-            <p className="text-[0.6875rem] uppercase tracking-[0.2em] text-violet-400 font-semibold mb-3 opacity-90">
-              AI-Powered Cyber Defense
-            </p>
-
-            <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[3.25rem] font-extrabold text-white leading-[1.08] tracking-[-0.035em]">
-              Protect Your Family
-              <br />
-              From Digital
-              <br />
-              <span className="bg-gradient-to-r from-violet-400 via-purple-300 to-fuchsia-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(167,139,250,0.3)]">Threats</span>
-            </h1>
-
-            <p className="text-[0.9375rem] text-gray-400 max-w-md mt-5 leading-[1.7]">
-              Real-time deepfake detection, voice clone analysis, and phishing
-              prevention. Veteran-founded in Ohio, shielding 500+ families with
-              next-gen AI security.
-            </p>
+      {/* Main content */}
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        {/* Mobile: compact top padding, leave space for bottom fixed elements */}
+        <div
+          className="flex flex-col justify-center"
+          style={{ minHeight: "100dvh", paddingTop: "clamp(72px, 14vw, 112px)", paddingBottom: "clamp(96px, 18vw, 112px)" }}
+        >
+          <div className="max-w-2xl xl:max-w-3xl">
 
             {/* Live status badge */}
-            <div className="flex items-center gap-2.5 mt-6 mb-2">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.08] bg-white/[0.04] backdrop-blur-sm">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+            <div className="mb-5 sm:mb-7">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 border border-border/50 shadow-sm">
+                <span className="relative flex h-2 w-2 flex-shrink-0">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-70" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
                 </span>
-                <span className="text-[0.75rem] text-gray-300 font-medium">2,847 threats blocked this month</span>
-                <Shield className="w-3.5 h-3.5 text-violet-400" />
+                <span className="text-[13px] font-semibold text-foreground leading-none">
+                  2,847 threats blocked this month
+                </span>
+                <span className="w-px h-3 bg-border" />
+                <span className="text-[11px] font-bold text-emerald-600 uppercase tracking-wider leading-none">Live</span>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 mt-3">
-              <Link
-                to="/training#pricing"
-                className="inline-flex items-center justify-center bg-gradient-to-b from-violet-500 to-violet-700 hover:from-violet-400 hover:to-violet-600 text-white px-7 py-3.5 rounded-xl font-semibold text-[0.9375rem] transition-all duration-200 shadow-[0_2px_0_0_rgba(80,40,160,0.5),0_0_20px_rgba(124,58,237,0.25),0_0_60px_rgba(124,58,237,0.1)] hover:shadow-[0_2px_0_0_rgba(80,40,160,0.5),0_0_30px_rgba(124,58,237,0.4),0_0_80px_rgba(124,58,237,0.15)] hover:-translate-y-0.5 active:translate-y-0 border border-violet-400/30"
+            {/* Headline — mobile-first fluid type */}
+            <h1
+              className="font-heading font-extrabold text-foreground mb-4 sm:mb-5"
+              style={{ fontSize: "clamp(2rem, 8vw, 4rem)", lineHeight: 1.08, letterSpacing: "-0.02em" }}
+            >
+              <span className="block">AI-Powered</span>
+              <span className="bg-gradient-to-r from-primary via-blue-400 to-primary bg-clip-text text-transparent">Scam Protection</span>
+              <span className="block">for Your Family</span>
+            </h1>
+
+            {/* Sub-headline */}
+            <p className="text-[15px] sm:text-lg lg:text-xl text-foreground/70 leading-relaxed max-w-lg mb-6 sm:mb-8">
+              Real-time deepfake detection, voice clone analysis, and phishing prevention.
+              Veteran-founded in Ohio — protecting 500+ families.
+            </p>
+
+            {/* Trust checkpoints — compact on mobile */}
+            <div className="flex flex-col xs:flex-row flex-wrap gap-x-5 gap-y-2 mb-7 sm:mb-8">
+              {["No long-term contracts", "Setup in under 5 minutes", "24/7 expert support"].map((item) => (
+                <div key={item} className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                  <span className="text-[13px] sm:text-sm font-medium text-foreground/80">{item}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* CTAs — single strong primary, secondary compact */}
+            <div className="flex flex-col sm:flex-row gap-3 mb-8 sm:mb-10">
+              <Button
+                asChild
+                size="lg"
+                className="h-12 sm:h-13 px-7 text-[15px] font-bold bg-gradient-to-b from-accent to-[hsl(20,90%,48%)] hover:from-[hsl(25,95%,56%)] hover:to-accent text-accent-foreground border border-accent/40 shadow-[0_2px_0_0_hsl(20,80%,40%),0_0_20px_hsl(var(--accent)/0.25),0_0_60px_hsl(var(--accent)/0.1)] hover:shadow-[0_2px_0_0_hsl(20,80%,40%),0_0_28px_hsl(var(--accent)/0.35),0_0_80px_hsl(var(--accent)/0.15)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 w-full sm:w-auto"
               >
-                <Shield className="mr-2 w-[1.125rem] h-[1.125rem]" />
-                Start Protection — From $79
-                <ArrowRight className="ml-2 w-[1.125rem] h-[1.125rem]" />
-              </Link>
-              <a
-                href={SITE.phone.tel}
-                className="inline-flex items-center justify-center bg-white/[0.06] border border-white/[0.15] hover:border-white/30 hover:bg-white/[0.12] text-white px-7 py-3.5 rounded-xl font-semibold text-[0.9375rem] transition-all duration-200 gap-2 backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_4px_16px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 active:translate-y-0"
+                <Link to="/training#pricing">
+                  <Shield className="mr-2 w-4 h-4" />
+                  Start Protection — From $79
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="h-12 px-5 text-[15px] font-semibold bg-white/85 backdrop-blur-sm border-border/70 hover:bg-white hover:border-primary/30 hover:text-primary text-foreground w-full sm:w-auto"
               >
-                <Phone className="w-[1.125rem] h-[1.125rem]" />
-                Call {SITE.phone.display}
-              </a>
+                <a href={SITE.phone.tel} className="flex items-center justify-center gap-2">
+                  <Phone className="w-4 h-4" />
+                  Call {SITE.phone.display}
+                </a>
+              </Button>
+            </div>
+
+            {/* Stat cards — 2-col on mobile, 4-col on sm+ */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+              {stats.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="group rounded-xl bg-white/94 border border-border/40 px-3 py-3 sm:p-4 shadow-[0_1px_3px_rgba(3,105,161,0.06),0_4px_16px_-4px_rgba(3,105,161,0.08)] backdrop-blur-md hover:shadow-[0_2px_6px_rgba(3,105,161,0.08),0_8px_24px_-4px_rgba(3,105,161,0.12)] hover:-translate-y-0.5 transition-all duration-200"
+                >
+                  <stat.icon className="w-4 h-4 text-primary mb-1.5 group-hover:scale-110 transition-transform duration-200" />
+                  <div className="text-lg sm:text-2xl font-extrabold text-foreground font-heading leading-none">
+                    {stat.value}
+                  </div>
+                  <div className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mt-1 leading-tight">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
+      </div>
 
-        {/* ── Glassmorphism Feature Cards (Bottom Row) ── */}
-        <div className="relative lg:absolute lg:bottom-10 left-0 right-0 z-20 px-6 sm:px-8 lg:px-10 pb-8 lg:pb-0">
-          <div className="max-w-6xl 3xl:max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-            {[
-              {
-                icon: Fingerprint,
-                title: "Deepfake Detection",
-                description: "AI-powered real-time analysis identifies manipulated media and synthetic voices before they reach you.",
-              },
-              {
-                icon: Eye,
-                title: "Phishing Prevention",
-                description: "Smart URL scanning and email analysis blocks fraudulent attempts, protecting your identity 24/7.",
-              },
-              {
-                icon: Lock,
-                title: "Identity Shield",
-                description: "Multi-layered defense monitors the dark web and alerts you instantly to any compromised credentials.",
-              },
-              {
-                icon: Wifi,
-                title: "Network Security",
-                description: "Continuous device monitoring and encrypted communications keep your home network locked down.",
-              },
-            ].map((card) => (
-              <div
-                key={card.title}
-                className="relative p-5 rounded-2xl backdrop-blur-xl overflow-hidden group hover:-translate-y-1 transition-all duration-300 cyber-glass-card"
-              >
-                {/* Code pattern overlay */}
-                <div className="absolute inset-0 opacity-[0.12] pointer-events-none cyber-code-pattern" />
-                <div className="relative z-10">
-                  <div className="icon-glow relative w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500/20 to-purple-600/10 border border-violet-400/15 flex items-center justify-center mb-3 group-hover:shadow-[0_0_20px_rgba(124,58,237,0.2)] transition-all duration-300">
-                    <card.icon className="w-5 h-5 text-violet-400" />
-                  </div>
-                  <h3 className="text-white text-[0.9375rem] font-semibold mb-1.5 tracking-tight">
-                    {card.title}
-                  </h3>
-                  <p className="text-gray-400/80 text-[0.8125rem] leading-relaxed m-0">
-                    {card.description}
-                  </p>
-                </div>
+      {/* Floating security card — desktop only */}
+      <div className="hidden xl:block absolute top-1/4 right-16 z-20">
+        <div className="w-56 rounded-2xl bg-white/96 border border-border/40 shadow-[0_8px_30px_-8px_rgba(3,105,161,0.15),0_20px_60px_-16px_rgba(3,105,161,0.1)] p-5 backdrop-blur-sm">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200/60 flex items-center justify-center">
+              <Shield className="w-4 h-4 text-emerald-600" />
+            </div>
+            <div>
+              <div className="text-sm font-bold text-foreground">Shield Active</div>
+              <div className="text-[10px] font-semibold text-emerald-600 uppercase tracking-wide">Protected</div>
+            </div>
+          </div>
+          <div className="space-y-2.5">
+            {threatItems.map((threat) => (
+              <div key={threat} className="flex items-center justify-between">
+                <span className="text-xs text-muted-foreground">{threat}</span>
+                <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" />
+                  Blocked
+                </span>
               </div>
             ))}
           </div>
         </div>
-      </section>
+      </div>
 
-      <DonationModal open={donateOpen} onOpenChange={setDonateOpen} type="general" />
-    </>
+      {/* Floating rating card — desktop only */}
+      <div className="hidden xl:block absolute bottom-32 right-20 z-20">
+        <div className="rounded-2xl bg-white/95 border border-border/50 shadow-xl shadow-blue-900/8 px-5 py-4">
+          <div className="flex items-center gap-3">
+            <div className="flex gap-0.5">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+              ))}
+            </div>
+            <div>
+              <div className="text-sm font-bold text-foreground">5.0 Rating</div>
+              <div className="text-[10px] text-muted-foreground font-medium">100+ verified reviews</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom trust bar — hidden on mobile (covered by fixed call button), sm+ only */}
+      <div className="hidden sm:block absolute bottom-0 left-0 right-0 border-t border-border/40 bg-white/92 backdrop-blur-sm z-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-3 sm:py-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              <div className="flex gap-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                ))}
+              </div>
+              <span className="text-sm font-bold text-foreground">5.0 — Rated by Ohio Families</span>
+            </div>
+            <div className="hidden md:flex items-center gap-2">
+              {trustPills.map((item) => (
+                <div
+                  key={item.text}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary border border-border/40"
+                >
+                  <item.icon className="w-3 h-3 text-primary" />
+                  <span className="text-[11px] font-semibold text-foreground/70">{item.text}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 

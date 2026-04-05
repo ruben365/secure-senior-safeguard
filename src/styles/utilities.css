@@ -1,50 +1,58 @@
-/* Utility Classes — Plume Aesthetic */
+/* Utility Classes */
 
-/* ===== GRADIENT TEXT UTILITIES — Vivid Premium ===== */
-/* Brand: deep plum → orchid accent */
+/* ===== DARK HERO GRID OVERLAY ===== */
+/* Reusable blueprint/cybersecurity grid pattern for dark hero sections */
+.hero-grid-overlay {
+  background-image:
+    linear-gradient(hsl(var(--primary) / 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--primary) / 0.35) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ===== GRADIENT TEXT UTILITIES ===== */
+/* Brand: primary blue → sky → accent orange */
 .gradient-text-brand {
-  background-image: linear-gradient(125deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--lavender-400)));
-  background-size: 200% auto;
+  background-image: linear-gradient(125deg, hsl(var(--primary)), hsl(var(--blue-400)), hsl(var(--accent)));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
-/* Electric: plum → teal */
+/* Electric: indigo → cyan → blue (futuristic pages) */
 .gradient-text-electric {
-  background-image: linear-gradient(125deg, hsl(var(--primary)), hsl(var(--teal-500)), hsl(var(--cyan-400)));
+  background-image: linear-gradient(125deg, #6366f1, #22d3ee, #3b82f6);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
-/* Fire: plum → coral */
+/* Fire: indigo → accent orange */
 .gradient-text-fire {
-  background-image: linear-gradient(125deg, hsl(var(--primary)), hsl(var(--coral-500)), hsl(var(--coral-400)));
+  background-image: linear-gradient(120deg, #6366f1, hsl(var(--accent)));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
-/* Warm: accent orchid → gold */
+/* Warm: accent → yellow */
 .gradient-text-warm {
-  background-image: linear-gradient(125deg, hsl(var(--accent)), hsl(var(--gold-500)));
+  background-image: linear-gradient(120deg, hsl(var(--accent)), #facc15);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
-/* Gold: gold → accent */
+/* Gold: yellow → accent (certification pages) */
 .gradient-text-gold {
-  background-image: linear-gradient(125deg, hsl(var(--gold-500)), hsl(var(--accent)));
+  background-image: linear-gradient(120deg, #facc15, hsl(var(--accent)));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
-/* Red-fire: destructive → coral */
+/* Red-fire: red → accent (emergency pages) */
 .gradient-text-red-fire {
-  background-image: linear-gradient(125deg, hsl(var(--destructive)), hsl(var(--coral-500)));
+  background-image: linear-gradient(120deg, #ef4444, hsl(var(--accent)));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -54,14 +62,10 @@
 /* ===== GLOBAL CARD STYLE — Premium ===== */
 [data-slot="card"],
 .glass-card {
-  background: hsl(30 30% 99% / 0.98);
-  border: 1px solid hsl(268 12% 86% / 0.6) !important;
-  border-radius: var(--radius);
-  box-shadow:
-    0 1px 2px rgba(60, 20, 80, 0.04),
-    0 2px 6px rgba(60, 20, 80, 0.05),
-    0 8px 24px -8px rgba(60, 20, 80, 0.08),
-    inset 0 1px 0 hsl(0 0% 100% / 0.9);
+  background: hsl(0 0% 100% / 0.98);
+  border: 1px solid hsl(var(--border) / 0.7) !important;
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-card);
   transition: box-shadow 0.22s cubic-bezier(0.2, 0, 0.2, 1),
               border-color 0.22s ease,
               transform 0.22s cubic-bezier(0.2, 0, 0.2, 1);
@@ -69,19 +73,9 @@
 
 [data-slot="card"]:hover,
 .glass-card:hover {
-  box-shadow:
-    0 2px 4px rgba(60, 20, 80, 0.05),
-    0 6px 16px rgba(60, 20, 80, 0.08),
-    0 16px 36px -8px rgba(60, 20, 80, 0.14),
-    inset 0 1px 0 hsl(0 0% 100% / 0.96);
-  border-color: hsl(272 16% 80% / 0.7) !important;
+  box-shadow: var(--shadow-card-hover);
+  border-color: hsl(var(--primary) / 0.2) !important;
   transform: translateY(-2px);
-}
-
-.glass-card-strong {
-  background: hsl(30 25% 99% / 0.98);
-  border: 1px solid hsl(270 8% 88% / 0.5);
-  box-shadow: var(--shadow-card);
 }
 
 /* Glass section wrapper */
@@ -97,12 +91,12 @@
   background:
     radial-gradient(
       ellipse at 20% 20%,
-      hsl(var(--lavender-100) / 0.15) 0%,
+      hsl(var(--primary) / 0.06) 0%,
       transparent 55%
     ),
     radial-gradient(
       ellipse at 80% 80%,
-      hsl(var(--blush-300) / 0.1) 0%,
+      hsl(var(--accent) / 0.04) 0%,
       transparent 55%
     );
   pointer-events: none;
@@ -126,34 +120,34 @@
   z-index: 1;
 }
 
-/* Premium gradient mesh background - warm peachy-violet */
+/* Premium gradient mesh background - trust-blue */
 .bg-premium-mesh {
   background:
     radial-gradient(
       ellipse 80% 50% at 20% -10%,
-      hsl(var(--lavender-200) / 0.1) 0%,
+      hsl(var(--primary) / 0.06) 0%,
       transparent 50%
     ),
     radial-gradient(
       ellipse 60% 40% at 85% 110%,
-      hsl(var(--coral-200) / 0.08) 0%,
+      hsl(var(--accent) / 0.05) 0%,
       transparent 50%
     ),
     radial-gradient(
       ellipse 40% 60% at 50% 50%,
-      hsl(var(--blush-300) / 0.06) 0%,
+      hsl(207 84% 94% / 0.08) 0%,
       transparent 60%
     ),
     hsl(var(--background));
 }
 
-/* Silky smooth sections - warm tone */
+/* Silky smooth sections - cool blue tone */
 .section-premium {
   position: relative;
   background: linear-gradient(
     180deg,
     hsl(var(--background)) 0%,
-    hsl(var(--blush-300) / 0.2) 50%,
+    hsl(207 84% 94% / 0.3) 50%,
     hsl(var(--background)) 100%
   );
 }
@@ -173,28 +167,36 @@
 .text-gradient-premium {
   background: linear-gradient(
     135deg,
-    hsl(var(--primary)) 0%,
-    hsl(var(--accent)) 50%,
-    hsl(var(--lavender-400)) 100%
+    hsl(213 60% 12%) 0%,
+    hsl(207 89% 28%) 50%,
+    hsl(207 89% 34%) 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Glow accent on elements */
+/* Glow accent on elements — 3-ring bloom */
 .glow-accent {
   box-shadow:
-    0 0 16px hsl(var(--primary) / 0.2),
-    0 0 40px hsl(var(--accent) / 0.12),
-    0 0 80px hsl(var(--accent) / 0.06);
+    0 0 16px hsl(var(--primary) / 0.18),
+    0 0 40px hsl(var(--primary) / 0.1),
+    0 0 80px hsl(var(--primary) / 0.05);
 }
 
 .glow-accent-strong {
   box-shadow:
-    0 0 24px hsl(var(--primary) / 0.3),
-    0 0 56px hsl(var(--accent) / 0.18),
-    0 0 100px hsl(var(--accent) / 0.08);
+    0 0 20px hsl(var(--primary) / 0.28),
+    0 0 50px hsl(var(--primary) / 0.16),
+    0 0 100px hsl(var(--primary) / 0.08);
+}
+
+/* CTA glow — warm orange bloom */
+.glow-cta {
+  box-shadow:
+    0 0 16px hsl(var(--accent) / 0.2),
+    0 0 40px hsl(var(--accent) / 0.12),
+    0 0 80px hsl(var(--accent) / 0.06);
 }
 
 /* Modal glass - for dialogs and modals */
@@ -556,7 +558,7 @@ video {
 
 /* Prevent font flash */
 .font-loaded {
-  font-family: "Rubik", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Lexend", "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
 /* Reduce CLS */
