@@ -81,7 +81,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
 
       {/* Main Footer */}
       <div
-        className="relative overflow-hidden"
+        className="text-white relative overflow-hidden"
         style={{ background: "linear-gradient(180deg, hsl(280 35% 18%) 0%, hsl(278 32% 14%) 40%, hsl(275 30% 10%) 100%)" }}
       >
         {/* Subtle frost overlay */}
