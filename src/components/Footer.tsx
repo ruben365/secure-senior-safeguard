@@ -147,7 +147,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="h-12 w-12 rounded-xl bg-purple-600 hover:bg-purple-500 border-0 p-0 flex-shrink-0 disabled:opacity-50"
+                  className="h-12 w-12 rounded-xl bg-accent hover:bg-accent/90 border-0 p-0 flex-shrink-0 disabled:opacity-50"
                   aria-label="Subscribe to newsletter"
                 >
                   {isSubmitting ? (

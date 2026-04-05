@@ -6,7 +6,7 @@ import heroImage from "@/assets/hero-homepage-cinematic.jpg";
 
 export const HeroHomepage = () => {
   return (
-    <section className="relative min-h-[100vh] overflow-hidden">
+    <section className="relative min-h-[100vh] overflow-hidden bg-background">
       {/* ── Full-bleed background image ── */}
       <div className="absolute inset-0">
         <img
@@ -17,8 +17,9 @@ export const HeroHomepage = () => {
           decoding="sync"
           fetchPriority="high"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--background))] via-[hsl(var(--background)/0.85)] to-transparent lg:via-[hsl(var(--background)/0.7)]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--background))] via-transparent to-[hsl(var(--background)/0.3)]" />
+        {/* Warm cream gradient overlay — Plume aesthetic */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[hsl(30_20%_96%)] via-[hsl(30_20%_96%/0.92)] to-[hsl(30_20%_96%/0.3)] lg:via-[hsl(30_20%_96%/0.8)]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[hsl(30_20%_96%)] via-transparent to-[hsl(30_20%_96%/0.4)]" />
       </div>
 
       {/* ── Content ── */}
@@ -28,7 +29,7 @@ export const HeroHomepage = () => {
 
             {/* Live status badge */}
             <div className="mb-8">
-              <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-card/80 backdrop-blur-xl border border-border/50 shadow-lg shadow-primary/5">
+              <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-card/90 border border-border/50 shadow-md">
                 <span className="relative flex h-2.5 w-2.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
@@ -37,14 +38,14 @@ export const HeroHomepage = () => {
                   2,847 threats blocked this month
                 </span>
                 <div className="w-px h-4 bg-border" />
-                <span className="text-xs font-bold text-primary uppercase tracking-wider">Live</span>
+                <span className="text-xs font-bold text-accent uppercase tracking-wider">Live</span>
               </div>
             </div>
 
             {/* Headline */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-black text-foreground leading-[1.05] mb-6 tracking-tight">
               AI-Powered{" "}
-              <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary via-accent to-[hsl(var(--lavender-400))] bg-clip-text text-transparent">
                 Scam Protection
               </span>
               <br className="hidden sm:block" />
@@ -54,26 +55,26 @@ export const HeroHomepage = () => {
             {/* Subheadline */}
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mb-10">
               Real-time deepfake detection, voice clone analysis, and phishing prevention.
-              Veteran-founded in Ohio — protecting 500+ families and counting.
+              Veteran-founded in Ohio, protecting 500+ families and counting.
             </p>
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <Button asChild size="xl" className="shadow-lg shadow-primary/20">
+              <Button asChild size="xl" className="shadow-lg">
                 <Link to="/training#pricing">
                   <Shield className="mr-2 w-5 h-5" />
                   Start Protection — From $79
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="xl" className="bg-card/60 backdrop-blur-sm border-border/60 shadow-lg">
+              <Button asChild variant="outline" size="xl" className="bg-card/80 border-border/60 shadow-md">
                 <a href={SITE.phone.tel}>
                   <Phone className="mr-2 w-5 h-5" /> Call {SITE.phone.display}
                 </a>
               </Button>
             </div>
 
-            {/* Metric cards */}
+            {/* Metric cards — Plume glassmorphic style */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
                 { value: "500+", label: "Families Protected", icon: Users },
@@ -83,10 +84,12 @@ export const HeroHomepage = () => {
               ].map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-xl bg-card/90 border border-border/60 p-4 shadow-sm hover:shadow-md transition-shadow duration-200"
+                  className="rounded-xl bg-card/95 border border-border/50 p-4 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5"
                 >
                   <div className="flex items-center gap-3">
-                    <stat.icon className="w-5 h-5 text-primary flex-shrink-0" />
+                    <div className="w-9 h-9 rounded-lg bg-primary/8 flex items-center justify-center flex-shrink-0">
+                      <stat.icon className="w-4.5 h-4.5 text-accent" />
+                    </div>
                     <div>
                       <div className="text-lg font-extrabold text-foreground leading-none">{stat.value}</div>
                       <div className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mt-1">{stat.label}</div>
@@ -99,7 +102,7 @@ export const HeroHomepage = () => {
         </div>
 
         {/* ── Bottom floating trust bar ── */}
-        <div className="border-t border-border/40 bg-card/90">
+        <div className="border-t border-border/40 bg-card/95">
           <div className="container mx-auto px-6 lg:px-12 py-4">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-3">
@@ -118,8 +121,8 @@ export const HeroHomepage = () => {
                   { icon: Lock, text: `${SITE.moneyBackGuaranteeDays}-Day Money Back` },
                   { icon: Shield, text: "Privacy-First Approach" },
                 ].map((item) => (
-                  <div key={item.text} className="flex items-center gap-2 px-4 py-2 rounded-full bg-muted/60 border border-border/40">
-                    <item.icon className="w-3.5 h-3.5 text-primary" />
+                  <div key={item.text} className="flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/60 border border-border/40">
+                    <item.icon className="w-3.5 h-3.5 text-accent" />
                     <span className="text-[11px] font-semibold text-muted-foreground">{item.text}</span>
                   </div>
                 ))}
@@ -131,7 +134,7 @@ export const HeroHomepage = () => {
 
       {/* ── Right-side floating elements (desktop only) ── */}
       <div className="hidden xl:block absolute top-[20%] right-[5%] z-20">
-        <div className="px-5 py-4 rounded-2xl bg-card/80 backdrop-blur-2xl border border-border/40 shadow-2xl shadow-primary/10 max-w-[220px]">
+        <div className="px-5 py-4 rounded-2xl bg-card/90 border border-border/40 shadow-lg max-w-[220px]">
           <div className="flex items-center gap-3 mb-3">
             <div className="w-9 h-9 rounded-xl bg-emerald-500/10 flex items-center justify-center">
               <Shield className="w-5 h-5 text-emerald-600" />
@@ -157,7 +160,7 @@ export const HeroHomepage = () => {
       </div>
 
       <div className="hidden xl:block absolute bottom-[22%] right-[8%] z-20">
-        <div className="px-5 py-4 rounded-2xl bg-card/80 backdrop-blur-2xl border border-border/40 shadow-2xl shadow-primary/10">
+        <div className="px-5 py-4 rounded-2xl bg-card/90 border border-border/40 shadow-lg">
           <div className="flex items-center gap-3">
             <div className="flex gap-0.5">
               {[...Array(5)].map((_, i) => (
