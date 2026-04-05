@@ -81,13 +81,13 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
 
       {/* Main Footer */}
       <div
-        className="text-white relative overflow-hidden"
-        style={{ background: "linear-gradient(180deg, hsl(260 30% 20%) 0%, hsl(265 28% 16%) 40%, hsl(268 32% 12%) 100%)" }}
+        className="relative overflow-hidden"
+        style={{ background: "linear-gradient(180deg, hsl(280 35% 18%) 0%, hsl(278 32% 14%) 40%, hsl(275 30% 10%) 100%)" }}
       >
-        {/* Glassmorphic frost overlay */}
+        {/* Subtle frost overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-white/[0.02] pointer-events-none" />
-        {/* Subtle top border glow */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent" />
+        {/* Top border glow — plum accent */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[hsl(var(--accent)/0.4)] to-transparent" />
 
         <div className="container mx-auto px-6 lg:px-12 pt-14 pb-10 relative z-10">
           {/* Top Section - Brand & Newsletter */}
