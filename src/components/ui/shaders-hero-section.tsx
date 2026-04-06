@@ -51,14 +51,11 @@ export function ShaderBackground({ children }: ShaderBackgroundProps) {
         className="absolute inset-0 w-full h-full"
         colors={["#0f172a", "#1e3a5f", "#0c1529", "#1a2744", "#0b1120"]}
         speed={0.25}
-        backgroundColor="#070d1a"
       />
       <MeshGradient
         className="absolute inset-0 w-full h-full opacity-30"
         colors={["#0f172a", "#93c5fd", "#3b82f6", "#000000"]}
         speed={0.15}
-        wireframe="true"
-        backgroundColor="transparent"
       />
       {/* Subtle radial glow */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_80%,rgba(59,130,246,0.15),transparent_60%)] pointer-events-none" />
