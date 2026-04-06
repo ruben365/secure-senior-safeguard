@@ -10,7 +10,7 @@ import corineHero from "@/assets/hero-wife-office.jpg";
 const heroTabs = [
   { label: "Protection", to: "/training#pricing" },
   { label: "Workshops", to: "/training" },
-  { label: "AI & Business", to: "/business" },
+  { label: "AI", to: "/business" },
   { label: "Contact", to: "/contact" },
 ];
 

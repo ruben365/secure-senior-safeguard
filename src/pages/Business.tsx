@@ -707,7 +707,7 @@ function Business() {
                           </span>
                         </h3>
                         <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-8">
-                          We merged the full platform into AI & Business to keep the story simple.
+                          We merged the full platform into AI to keep the story simple.
                           Our purpose is to help Ohio organizations grow with AI while staying safe from
                           modern fraud and operational risk.
                         </p>

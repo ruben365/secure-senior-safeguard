@@ -153,7 +153,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                 {[
                   { to: "/", label: "Home" },
                   { to: "/training", label: "Workshops" },
-                  { to: "/business", label: "AI for Business" },
+                  { to: "/business", label: "AI" },
                   { to: "/resources", label: "Resources" },
                   { to: "/about", label: "About" },
                 ].map((link) => (

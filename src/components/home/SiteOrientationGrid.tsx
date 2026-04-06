@@ -28,7 +28,7 @@ const pages = [
   },
   {
     icon: Building2,
-    title: "AI & Business",
+    title: "AI",
     description: "Security audits, AI automation, and employee training for organizations.",
     link: "/business",
     cta: "Get a Quote",

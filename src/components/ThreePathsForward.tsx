@@ -67,7 +67,7 @@ const paths: PathConfig[] = [
   },
   {
     id: 3,
-    title: "AI for Business",
+    title: "AI",
     description:
       "• AI Service Insurance\n• Customer protection systems\n• Compliance consulting\n• Custom AI solutions",
     pricing: "Custom Pricing",

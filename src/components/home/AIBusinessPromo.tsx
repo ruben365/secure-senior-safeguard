@@ -40,7 +40,7 @@ export const AIBusinessPromo = () => {
 
           <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12">
             <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs font-bold uppercase tracking-[0.2em] text-white/70 mb-4">
-              <Sparkles className="w-3 h-3" /> AI & Business Solutions
+              <Sparkles className="w-3 h-3" /> AI Solutions
             </span>
             <h2 id="business-heading" className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.1] mb-3">
               Digital Solutions That Work 24/7

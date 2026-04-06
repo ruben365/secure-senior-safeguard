@@ -28,7 +28,7 @@ export const MAIN_NAV_ROUTES: NavRoute[] = [
   },
   {
     path: "/business",
-    name: "AI & Business",
+    name: "AI",
     description: "AI automation services and business solutions",
     showInNav: true,
   },
