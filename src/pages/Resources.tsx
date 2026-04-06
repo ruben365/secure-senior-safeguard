@@ -683,7 +683,6 @@ function Resources() {
         open={readBooksOpen}
         onOpenChange={setReadBooksOpen} />
 
-      <div className="section-glow-strip" />
 
       <Footer />
     </PageTransition>);

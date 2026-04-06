@@ -444,7 +444,6 @@ function About() {
       {/* Service Areas with Interactive Map */}
       <OhioServiceMap />
 
-      <div className="section-glow-strip" />
 
       {/* CTA with Field Background */}
       <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden" id="cta">

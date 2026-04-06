@@ -102,7 +102,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
 
       <nav className={overlay ? "absolute top-0 left-0 right-0 z-[9999] bg-gradient-to-b from-black/60 to-transparent" : `sticky top-0 z-[9999] transition-colors duration-300 ${scrolled ? "bg-[#080d1a]/95 backdrop-blur-md border-b border-white/[0.06]" : "bg-transparent"}`}>
         <div className="container mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
-          <div className="flex items-center justify-between h-[62px] scale-[0.95] origin-center">
+          <div className="flex items-center justify-between h-[60px]">
             {/* Logo — identical to hero */}
             <a
               href="/"
@@ -116,11 +116,11 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 height={34}
                 loading="eager"
                 decoding="sync"
-                className="w-[38px] h-[38px] object-contain flex-shrink-0 brightness-0 invert"
+                className="w-[32px] h-[32px] object-contain flex-shrink-0 brightness-0 invert"
               />
               <div className="flex flex-col leading-none min-w-0">
-                <span className="text-[17px] font-extrabold text-white tracking-tight">InVision Network</span>
-                <span className="text-[10px] font-bold text-gray-400 hidden sm:block tracking-widest uppercase">AI Scam Protection</span>
+                <span className="text-[15px] font-extrabold text-white tracking-tight">InVision Network</span>
+                <span className="text-[9px] font-bold text-gray-400 hidden sm:block tracking-widest uppercase">AI Scam Protection</span>
               </div>
             </a>
 

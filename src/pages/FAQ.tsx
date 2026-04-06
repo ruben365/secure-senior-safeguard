@@ -667,7 +667,6 @@ export default function FAQ() {
           </section>
           </MeshBackground>
 
-          <div className="section-glow-strip" />
           <Footer />
         </main>
       </div>

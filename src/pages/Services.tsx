@@ -563,7 +563,6 @@ const Services = () => {
           </div>
         </section>
 
-        <div className="divider-gradient-colored" />
 
         {/* Testimonials */}
         {testimonials.length > 0 && (
@@ -632,7 +631,6 @@ const Services = () => {
         </section>
         </MeshBackground>
 
-        <div className="section-glow-strip" />
 
         {/* CTA Section */}
         <CTASection

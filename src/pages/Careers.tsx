@@ -273,7 +273,6 @@ function Careers() {
 
       </MeshBackground>
 
-      <div className="divider-gradient-colored" />
 
       {/* Application Process */}
       <section className="py-20 relative overflow-hidden">
@@ -379,7 +378,6 @@ function Careers() {
         </div>
       </section>
 
-      <div className="section-glow-strip" />
 
       <section className="py-12 bg-muted/20">
         <AIImageDisclaimer />

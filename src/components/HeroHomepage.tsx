@@ -1,12 +1,10 @@
-import { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
   Bot, Globe, Lock, Cpu,
   Shield, Brain, Scan, Headphones,
 } from "lucide-react";
-import corineHeroVideo from "@/assets/hero-wife-office.mp4";
-import corineHeroPoster from "@/assets/hero-wife-office.jpg";
+import corineHero from "@/assets/hero-wife-office.jpg";
 
 /* ── Hero tab items — each navigates to a dedicated page ── */
 const heroTabs = [
@@ -65,46 +63,18 @@ const featuresRow2 = [
 ];
 
 export const HeroHomepage = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    // Force autoplay on load
-    video.play().catch(() => {
-      // Browser blocked autoplay, mute and retry
-      video.muted = true;
-      video.play();
-    });
-
-    // Seamless loop: restart 0.3s before end to hide the cut
-    const handleTimeUpdate = () => {
-      if (video.duration && video.currentTime >= video.duration - 0.3) {
-        video.currentTime = 0;
-        video.play();
-      }
-    };
-    video.addEventListener("timeupdate", handleTimeUpdate);
-    return () => video.removeEventListener("timeupdate", handleTimeUpdate);
-  }, []);
-
   return (
     <section className="hero-home">
 
       {/* ── 1. Background ── */}
       <div className="hero-home__bg">
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster={corineHeroPoster}
-          className="hero-home__video"
-        >
-          <source src={corineHeroVideo} type="video/mp4" />
-        </video>
+        <img
+          src={corineHero}
+          alt="Corine — InVision Network co-founder"
+          loading="eager"
+          decoding="sync"
+          fetchPriority="high"
+        />
         <div className="hero-home__top-veil" />
       </div>
 

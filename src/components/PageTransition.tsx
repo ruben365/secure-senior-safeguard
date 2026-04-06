@@ -1,4 +1,4 @@
-import { ReactNode, forwardRef, useEffect, useState } from "react";
+import { ReactNode, forwardRef, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
 interface PageTransitionProps {
@@ -9,26 +9,36 @@ interface PageTransitionProps {
 export const PageTransition = forwardRef<HTMLDivElement, PageTransitionProps>(
   ({ children, variant: _variant = "auto" }, _ref) => {
     const location = useLocation();
-    const [visible, setVisible] = useState(false);
+    const wrapperRef = useRef<HTMLDivElement>(null);
+    const isFirst = useRef(true);
 
     useEffect(() => {
-      setVisible(false);
-      // Scroll to top on route change
-      window.scrollTo(0, 0);
-      // Small delay for the fade to register
-      const raf = requestAnimationFrame(() => setVisible(true));
-      return () => cancelAnimationFrame(raf);
+      const el = wrapperRef.current;
+      if (!el) return;
+
+      if (isFirst.current) {
+        isFirst.current = false;
+        return;
+      }
+
+      // Fade out
+      el.style.transition = "opacity 0.12s ease-in";
+      el.style.opacity = "0";
+
+      const timer = setTimeout(() => {
+        // Scroll to top while invisible
+        window.scrollTo(0, 0);
+
+        // Fade in
+        el.style.transition = "opacity 0.25s ease-out";
+        el.style.opacity = "1";
+      }, 130);
+
+      return () => clearTimeout(timer);
     }, [location.pathname]);
 
     return (
-      <div
-        className="page-transition"
-        style={{
-          opacity: visible ? 1 : 0,
-          transform: visible ? "none" : "translateY(8px)",
-          transition: "opacity 0.3s ease-out, transform 0.3s ease-out",
-        }}
-      >
+      <div ref={wrapperRef} style={{ opacity: 1 }}>
         {children}
       </div>
     );
