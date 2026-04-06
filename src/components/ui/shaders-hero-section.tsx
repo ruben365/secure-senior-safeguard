@@ -78,14 +78,6 @@ export function PulsingCircle() {
           thickness={0.1}
           softness={0.2}
           intensity={5}
-          spotsPerColor={5}
-          spotSize={0.1}
-          pulse={0.1}
-          smoke={0.5}
-          smokeSize={4}
-          scale={0.65}
-          rotation={0}
-          frame={9161408.251009725}
           style={{
             width: "60px",
             height: "60px",
