@@ -874,7 +874,7 @@ function Business() {
                       name: "InVision Platform Demo",
                       price: 0,
                       tier: "Full Platform",
-                      description: "Schedule a live demo of all 9 integrated services now consolidated under AI & Business."
+                      description: "Schedule a live demo of all 9 integrated services now consolidated under AI."
                     });
                     setInquiryDialogOpen(true);
                   }}>
