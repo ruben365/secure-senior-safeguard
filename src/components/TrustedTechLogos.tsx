@@ -17,29 +17,17 @@ const techPartners = [
 const TrustedTechLogos = forwardRef<HTMLDivElement>(function TrustedTechLogos(_props, ref) {
   return (
     <section ref={ref} className="relative overflow-hidden">
-      {/* Tech Partners Marquee Only */}
-      <div className="bg-background py-5 border-y border-border/20">
+      <div className="py-3 border-t border-border/15">
         <div className="relative overflow-hidden">
           {/* Gradient Edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[hsl(260_18%_12%)] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[hsl(260_18%_12%)] to-transparent z-10 pointer-events-none" />
 
           <div className="flex animate-scroll-left items-center">
             {[...techPartners, ...techPartners, ...techPartners].map(
               (name, index) => (
-                <div
-                  key={index}
-                  className="flex-shrink-0 mx-10 flex items-center gap-2"
-                >
-                  <span
-                    className="text-lg font-black text-foreground hover:text-primary transition-colors duration-300 whitespace-nowrap tracking-tight uppercase"
-                    style={{
-                      fontFamily:
-                        'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-                      letterSpacing: "-0.02em",
-                      textShadow: "0 1px 2px rgba(0,0,0,0.08)",
-                    }}
-                  >
+                <div key={index} className="flex-shrink-0 mx-8 flex items-center gap-2">
+                  <span className="text-[11px] font-bold text-white/25 whitespace-nowrap tracking-widest uppercase">
                     {name}
                   </span>
                 </div>
@@ -48,11 +36,11 @@ const TrustedTechLogos = forwardRef<HTMLDivElement>(function TrustedTechLogos(_p
           </div>
         </div>
 
-        {/* Trust Badge */}
-        <div className="text-center mt-4">
-          <p className="text-[10px] text-muted-foreground tracking-widest uppercase flex items-center justify-center gap-2">
-            <Shield className="w-3 h-3" />
-            <span>Security-First Practices • Privacy-First Approach</span>
+        {/* Trust line */}
+        <div className="text-center mt-2">
+          <p className="text-[9px] text-white/20 tracking-widest uppercase flex items-center justify-center gap-1.5">
+            <Shield className="w-2.5 h-2.5" />
+            <span>Security-First • Privacy-First</span>
           </p>
         </div>
       </div>
