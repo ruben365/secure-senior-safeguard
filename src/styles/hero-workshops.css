@@ -126,7 +126,7 @@
   align-items: center;
   gap: 0.625rem;
   margin-bottom: 1rem;
-  animation: wsFadeUp 0.6s ease-out 0.1s both;
+  animation: wsFadeUp 0.5s ease-out both;
 }
 
 .hero-ws__kicker-line {
@@ -153,7 +153,7 @@
   line-height: 1.1;
   letter-spacing: -0.02em;
   margin: 1.5rem 0;
-  animation: wsFadeUp 0.6s ease-out 0.25s both;
+  animation: wsFadeUp 0.5s ease-out 0.1s both;
 }
 
 /* ── Body ── */
@@ -163,7 +163,7 @@
   color: var(--ws-text-muted);
   max-width: 520px;
   margin: 0 0 2.5rem 0;
-  animation: wsFadeUp 0.6s ease-out 0.4s both;
+  animation: wsFadeUp 0.5s ease-out 0.15s both;
 }
 
 /* ── CTAs ── */
@@ -171,7 +171,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  animation: wsFadeUp 0.6s ease-out 0.55s both;
+  animation: wsFadeUp 0.5s ease-out 0.2s both;
 }
 
 .hero-ws__cta {
@@ -275,7 +275,7 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.15),
     inset 0 -1px 0 rgba(255, 255, 255, 0.05),
     0 8px 32px rgba(0, 0, 0, 0.2);
-  animation: wsFadeUp 0.7s ease-out 0.5s both;
+  animation: wsFadeUp 0.5s ease-out 0.25s both;
   position: relative;
   overflow: hidden;
 }
@@ -561,7 +561,7 @@
   background: transparent;
   border: none;
   padding: 1.5rem clamp(20px, 4vw, 64px);
-  animation: wsPanelUp 0.7s ease-out 0.65s both;
+  animation: wsPanelUp 0.5s ease-out 0.3s both;
 }
 
 .hero-ws__panel-inner {

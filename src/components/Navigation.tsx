@@ -264,7 +264,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
 
       {/* Mobile Menu — outside nav for proper stacking */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed top-[68px] left-0 right-0 bottom-0 border-t border-gray-800 z-[10001] overflow-y-auto overscroll-contain pb-[calc(env(safe-area-inset-bottom)+1.25rem)] [-webkit-overflow-scrolling:touch] bg-[#080d1a]">
+        <div className="lg:hidden fixed top-[60px] left-0 right-0 bottom-0 border-t border-gray-800 z-[10001] overflow-y-auto overscroll-contain pb-[calc(env(safe-area-inset-bottom)+1.25rem)] [-webkit-overflow-scrolling:touch] bg-[#080d1a]">
           <div className="container mx-auto px-4 py-4 space-y-1">
             {allLinks.map((link) => {
               const isActive = isActiveLink(link.href);

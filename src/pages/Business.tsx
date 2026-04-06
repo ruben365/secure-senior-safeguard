@@ -506,11 +506,7 @@ function Business() {
 
         {/* Hero — Dark cinematic theme */}
         <HeroBusiness onStrategyCall={openStrategyCall} />
-
         <TrustBar />
-
-        {/* Spacer */}
-        <div className="h-4" />
 
         {/* Live Stats Ticker removed — empty */}
         <div className="hidden">

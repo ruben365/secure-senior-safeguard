@@ -1,4 +1,4 @@
-import { ReactNode, forwardRef, useEffect, useRef } from "react";
+import { ReactNode, forwardRef, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 interface PageTransitionProps {
@@ -11,6 +11,7 @@ export const PageTransition = forwardRef<HTMLDivElement, PageTransitionProps>(
     const location = useLocation();
     const wrapperRef = useRef<HTMLDivElement>(null);
     const isFirst = useRef(true);
+    const [animKey, setAnimKey] = useState(0);
 
     useEffect(() => {
       const el = wrapperRef.current;
@@ -26,8 +27,10 @@ export const PageTransition = forwardRef<HTMLDivElement, PageTransitionProps>(
       el.style.opacity = "0";
 
       const timer = setTimeout(() => {
-        // Scroll to top while invisible
         window.scrollTo(0, 0);
+
+        // Bump key to remount children — restarts CSS animations
+        setAnimKey((k) => k + 1);
 
         // Fade in
         el.style.transition = "opacity 0.25s ease-out";
@@ -38,7 +41,7 @@ export const PageTransition = forwardRef<HTMLDivElement, PageTransitionProps>(
     }, [location.pathname]);
 
     return (
-      <div ref={wrapperRef} style={{ opacity: 1 }}>
+      <div ref={wrapperRef} style={{ opacity: 1 }} key={animKey}>
         {children}
       </div>
     );

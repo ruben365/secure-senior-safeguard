@@ -150,9 +150,9 @@ export const PAGE_SEO = {
   },
 
   training: {
-    title: "AI Scam Protection Training for Seniors & Families",
+    title: "Workshops — AI Scam Protection for Seniors & Families",
     description:
-      "Comprehensive cybersecurity training for seniors and families in Southwest Ohio. Learn to spot deepfakes, phishing, and AI-powered scams. Zoom and in-person sessions available in Kettering, OH.",
+      "Hands-on cybersecurity workshops for seniors and families in Southwest Ohio. Learn to spot deepfakes, phishing, and AI-powered scams. Zoom and in-person sessions available in Kettering, OH.",
     keywords:
       "AI scam training Kettering Ohio, deepfake detection training, senior cybersecurity, family scam prevention, phishing awareness Southwest Ohio",
     structuredData: {

@@ -132,25 +132,8 @@ export const CookieConsent = forwardRef<HTMLDivElement>(function CookieConsent(_
 
   return (
     <>
-      <style>{`
-        @keyframes cookieSlideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes cookieBorderGlow{0%,100%{border-color:rgba(48,103,232,0.3);box-shadow:0 0 15px rgba(48,103,232,0.08)}50%{border-color:rgba(107,70,193,0.35);box-shadow:0 0 20px rgba(107,70,193,0.1)}}
-      `}</style>
-      <div
-        className="fixed bottom-4 left-4 right-4 sm:bottom-6 sm:left-auto sm:right-6 z-50"
-        style={{ animation: 'cookieSlideUp 0.4s ease-out', contain: 'layout style paint' }}
-      >
-        <div
-          className="sm:w-[380px] rounded-xl overflow-hidden"
-          style={{
-            background: 'rgba(12, 12, 16, 0.55)',
-            backdropFilter: 'blur(24px) saturate(130%)',
-            WebkitBackdropFilter: 'blur(24px) saturate(130%)',
-            border: '1px solid rgba(48, 103, 232, 0.25)',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06)',
-            animation: 'cookieBorderGlow 4s ease-in-out infinite',
-          }}
-        >
+      <div className="cookie-banner fixed bottom-4 left-4 right-4 sm:bottom-6 sm:left-auto sm:right-6 z-50">
+        <div className="cookie-banner__card sm:w-[360px] rounded-xl overflow-hidden">
           <div className="p-4">
             {/* Header row */}
             <div className="flex items-center justify-between mb-2">

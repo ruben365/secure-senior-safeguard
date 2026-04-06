@@ -23,8 +23,8 @@ const workshopFeatures = [
   },
   {
     icon: ShieldCheck,
-    title: "Scam Insurance",
-    desc: "Coverage up to $500K if fraud gets past our defenses.",
+    title: "Scam & Spam Detection",
+    desc: "AI-powered analysis of emails, links, files, and messages.",
     target: "pricing",
   },
   {

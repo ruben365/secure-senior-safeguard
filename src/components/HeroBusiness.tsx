@@ -99,17 +99,17 @@ export const HeroBusiness = ({ onStrategyCall }: { onStrategyCall: () => void })
                 className={`hero-biz__feature hero-biz__feature--${f.variant}`}
                 onClick={() => scrollTo(f.target)}
               >
-                {/* Large AI label */}
-                <div className="hero-biz__feature-header">
+                {/* Icon + Title side by side at top */}
+                <div className="hero-biz__feature-top">
                   <div className="hero-biz__feature-icon">
                     <f.icon />
                   </div>
-                  {f.label && <span className="hero-biz__feature-label">{f.label}</span>}
+                  <div className="hero-biz__feature-info">
+                    {f.label && <span className="hero-biz__feature-label">{f.label}</span>}
+                    <p className="hero-biz__feature-title">{f.title}</p>
+                  </div>
                 </div>
-                <div className="hero-biz__feature-text">
-                  <p className="hero-biz__feature-title">{f.title}</p>
-                  <p className="hero-biz__feature-desc">{f.desc}</p>
-                </div>
+                <p className="hero-biz__feature-desc">{f.desc}</p>
               </button>
             ))}
           </div>
