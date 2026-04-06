@@ -1,0 +1,218 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   PREMIUM BODY ENHANCEMENTS — Applied to all page body sections
+   Does NOT affect hero sections or footer.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Section headings — subtle gradient text on hover ── */
+.container h2,
+.center-container-wide h2 {
+  position: relative;
+}
+
+/* ── Cards — premium lift + border glow on hover ── */
+.container .bg-card,
+.container [class*="rounded-2xl"],
+.container [class*="rounded-xl"] {
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease, border-color 0.3s ease;
+}
+
+.container .bg-card:hover,
+.container [class*="glass-card"]:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 12px 40px -8px hsl(var(--primary) / 0.08),
+    0 4px 16px -4px rgba(0, 0, 0, 0.06);
+}
+
+/* ── Buttons inside body — refined hover glow ── */
+main .bg-gradient-to-b:hover,
+main .bg-gradient-to-br:hover {
+  filter: brightness(1.05);
+}
+
+/* ── Section backgrounds — subtle mesh dot pattern ── */
+.dot-grid-bg {
+  background-image: radial-gradient(circle, hsl(var(--border) / 0.3) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ── Badge / pill elements — refined glass look ── */
+.glass-subtle {
+  background: hsl(0 0% 100% / 0.92);
+  border: 1px solid hsl(var(--border) / 0.5);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 hsl(0 0% 100% / 0.8);
+  transition: all 0.2s ease;
+}
+
+.glass-subtle:hover {
+  border-color: hsl(var(--primary) / 0.2);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 hsl(0 0% 100% / 0.9);
+}
+
+/* ── Expandable service cards — premium border animation ── */
+[class*="ExpandableService"],
+[class*="expandable"] {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Section dividers — premium gradient line ── */
+.h-px {
+  background: linear-gradient(90deg, transparent 5%, hsl(var(--border)) 50%, transparent 95%) !important;
+}
+
+/* ── Pricing cards — depth + glass edge ── */
+[class*="border-primary"],
+[class*="shadow-[0_8px_40px"] {
+  position: relative;
+}
+
+/* ── Image containers — subtle frame + shadow ── */
+main img[class*="rounded"] {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+main img[class*="rounded"]:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* ── Stat numbers / counters — tabular figures ── */
+[class*="text-4xl"][class*="font-black"],
+[class*="text-3xl"][class*="font-bold"] {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Section accent lines — animated gradient ── */
+.section-accent-line {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.4), hsl(var(--accent) / 0.3), transparent);
+  background-size: 200% 100%;
+  animation: shimmer-line 4s ease-in-out infinite;
+}
+
+@keyframes shimmer-line {
+  0%, 100% { background-position: 200% 0; }
+  50% { background-position: -200% 0; }
+}
+
+/* ── Card icon containers — refined circle/square with subtle glow ── */
+[class*="bg-gradient-to-br"][class*="rounded-xl"][class*="flex"][class*="items-center"][class*="justify-center"] {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ── Smooth scrolling for the whole page ── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Premium focus ring for all interactive body elements ── */
+main button:focus-visible,
+main a:focus-visible,
+main input:focus-visible,
+main select:focus-visible,
+main textarea:focus-visible {
+  outline: 2px solid hsl(var(--primary) / 0.5);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Hover state for all links in body content ── */
+main a:not([class]):hover {
+  color: hsl(var(--primary));
+  transition: color 0.2s ease;
+}
+
+/* ── Premium card shine effect on hover ── */
+.hover-lift {
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 16px 48px -12px rgba(0, 0, 0, 0.1),
+    0 4px 16px -4px rgba(0, 0, 0, 0.05);
+}
+
+/* ── Animated gradient border for featured/highlighted cards ── */
+.gradient-border {
+  position: relative;
+  overflow: hidden;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, hsl(var(--primary) / 0.3), hsl(var(--accent) / 0.2), hsl(var(--primary) / 0.1));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.gradient-border:hover::before {
+  opacity: 1;
+}
+
+/* ── Skeleton loading shimmer for async content ── */
+.shimmer {
+  background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--muted) / 0.5) 50%, hsl(var(--muted)) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Subtle background texture for alternating sections ── */
+.bg-muted\/20,
+.bg-muted\/30 {
+  position: relative;
+}
+
+/* ── Premium accordion / expandable styling ── */
+[data-state="open"] {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Tooltip-like elements — consistent glass style ── */
+[role="tooltip"],
+[data-radix-popper-content-wrapper] {
+  border-radius: 8px !important;
+}
+
+/* ── Input fields — premium focus state ── */
+main input:focus,
+main textarea:focus,
+main select:focus {
+  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+/* ── Reduce motion preference ── */
+@media (prefers-reduced-motion: reduce) {
+  .hover-lift,
+  .gradient-border::before,
+  .section-accent-line,
+  .shimmer {
+    animation: none;
+    transition: none;
+  }
+
+  .hover-lift:hover {
+    transform: none;
+  }
+}

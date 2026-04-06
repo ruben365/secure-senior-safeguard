@@ -222,7 +222,7 @@ export const ServiceInquiryDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="glass-modal sm:max-w-[550px] max-h-[90vh] overflow-y-auto border-white/30">
+      <DialogContent className="sm:max-w-[550px] max-h-[90vh] overflow-y-auto rounded-2xl">
         <DialogHeader>
           <div className="flex items-center gap-2 mb-2">
             <Badge variant="secondary" className="bg-primary/10 text-primary">

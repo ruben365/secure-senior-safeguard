@@ -70,7 +70,7 @@ export const HeroCarousel = ({
           {...{ fetchpriority: "high" } as any}
           loading="eager"
           decoding="async"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover brightness-[0.85] saturate-[0.9]"
         />
       </div>
     );
@@ -88,7 +88,7 @@ export const HeroCarousel = ({
           {...{ fetchpriority: index === 0 ? "high" : "low" } as any}
           loading={index === 0 ? "eager" : "lazy"}
           decoding="async"
-          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
+          className="absolute inset-0 w-full h-full object-cover brightness-[0.85] saturate-[0.9] transition-opacity duration-700"
           style={{
             opacity: index === currentIndex ? 1 : 0,
             zIndex: index === currentIndex ? 1 : 0,

@@ -142,7 +142,7 @@ export const PAGE_SEO = {
   home: {
     title: "",
     description:
-      "Protect your family from AI-powered scams with InVision Network. Expert cybersecurity training, deepfake detection, and 24/7 scam analysis for families and seniors in Kettering, Ohio.",
+      "InVision Network stops AI-powered scams before they reach your family. We provide live training, automated defenses, and 24/7 threat monitoring for families and businesses in Kettering, Ohio.",
     keywords:
       "AI scam protection Ohio, cybersecurity Kettering, deepfake detection, senior scam training, family cybersecurity Southwest Ohio",
     // NOTE: LocalBusiness structured data is in index.html (static) for non-JS crawlers.

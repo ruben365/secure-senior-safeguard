@@ -6,6 +6,7 @@ import {
   Youtube,
   Instagram,
   Shield,
+  Heart,
   Mail,
   MapPin,
   ArrowRight,
@@ -76,296 +77,156 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
 
   return (
     <footer className="relative">
-      {/* Tech Partners Marquee */}
       <TrustedTechLogos />
 
-      {/* Main Footer */}
       <div
         className="text-white relative overflow-hidden"
-        style={{ background: "linear-gradient(180deg, hsl(280 35% 18%) 0%, hsl(278 32% 14%) 40%, hsl(275 30% 10%) 100%)" }}
+        style={{ background: "linear-gradient(180deg, hsl(260 12% 11%) 0%, hsl(260 10% 8%) 60%, hsl(260 8% 6%) 100%)" }}
       >
-        {/* Subtle frost overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-white/[0.02] pointer-events-none" />
-        {/* Top border glow — plum accent */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[hsl(var(--accent)/0.4)] to-transparent" />
+        {/* Subtle top edge */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
 
-        <div className="container mx-auto px-6 lg:px-12 pt-14 pb-10 relative z-10">
-          {/* Top Section - Brand & Newsletter */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-14">
+        <div className="container mx-auto px-6 lg:px-12 pt-10 pb-6 relative z-10">
+
+          {/* Top Row — Brand + Newsletter side by side */}
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">
             {/* Brand */}
-            <div className="space-y-5">
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-xl bg-white/8 border border-white/10">
-                  <img
-                    src={invisionLogo}
-                    alt="InVision Network"
-                    className="h-8 w-8 object-contain brightness-0 invert premium-4k-image"
-                  />
-                </div>
-                <div>
-                  <h2 className="text-lg font-bold text-white">InVision Network</h2>
-                  <p className="text-xs text-white/40">
-                    AI Security & Protection
-                  </p>
-                </div>
+            <div className="flex items-center gap-3">
+              <div className="p-1.5 rounded-lg bg-white/6 border border-white/8">
+                <img src={invisionLogo} alt="InVision Network" className="h-7 w-7 object-contain brightness-0 invert" />
               </div>
-              <p className="text-sm text-white/50 max-w-md leading-relaxed">
-                Protecting families and businesses from AI-powered scams with
-                cutting-edge technology and expert training.
-              </p>
-              <div className="flex flex-wrap gap-5">
-                <span className="flex items-center gap-2 text-sm text-white/40">
-                  <MapPin className="w-4 h-4" />
-                  {SITE.location.city}, {SITE.location.region}
-                </span>
-                <span className="flex items-center gap-2 text-sm text-white/40">
-                  <Mail className="w-4 h-4" />
-                  {SITE.emails.hello}
-                </span>
+              <div>
+                <h2 className="text-base font-bold text-white leading-tight">InVision Network</h2>
+                <p className="text-[11px] text-white/35">AI Security & Protection</p>
               </div>
             </div>
 
             {/* Newsletter */}
-            <div className="lg:pl-8 lg:flex lg:flex-col lg:justify-center">
-              <h3 className="text-lg font-bold mb-2 text-white">
-                Stay Protected
-              </h3>
-              <p className="text-sm text-white/50 mb-4">
-                Get monthly AI safety tips and scam alerts delivered to your
-                inbox.
-              </p>
-              <form onSubmit={handleNewsletterSubmit} className="flex gap-3">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 lg:gap-4">
+              <div className="hidden sm:block">
+                <p className="text-sm font-semibold text-white">Stay Protected</p>
+                <p className="text-xs text-white/40">Monthly AI safety tips & scam alerts.</p>
+              </div>
+              <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
                 <Input
                   type="email"
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   disabled={isSubmitting}
-                  className="flex-1 h-12 bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:bg-white/8 focus:border-purple-500/40 rounded-xl disabled:opacity-50"
+                  className="h-10 w-56 bg-white/5 border-white/10 text-white text-sm placeholder:text-white/25 focus:bg-white/8 focus:border-violet-500/30 rounded-lg disabled:opacity-50"
                   aria-label="Email address for newsletter"
                 />
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="h-12 w-12 rounded-xl bg-accent hover:bg-accent/90 border-0 p-0 flex-shrink-0 disabled:opacity-50"
+                  className="h-10 w-10 rounded-lg bg-violet-600 hover:bg-violet-500 border-0 p-0 flex-shrink-0 disabled:opacity-50"
                   aria-label="Subscribe to newsletter"
                 >
-                  {isSubmitting ? (
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                  ) : (
-                    <ArrowRight className="w-4 h-4" />
-                  )}
+                  {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <ArrowRight className="w-4 h-4" />}
                 </Button>
               </form>
             </div>
           </div>
 
-          {/* Divider */}
-          <div className="h-px bg-white/8 mb-12" />
+          {/* Description + Location */}
+          <p className="text-sm text-white/40 max-w-lg leading-relaxed mb-2">
+            Protecting families and businesses from AI-powered scams with cutting-edge technology and expert training.
+          </p>
+          <div className="flex flex-wrap gap-4 mb-6">
+            <span className="flex items-center gap-1.5 text-xs text-white/30">
+              <MapPin className="w-3.5 h-3.5" /> {SITE.location.city}, {SITE.location.region}
+            </span>
+            <span className="flex items-center gap-1.5 text-xs text-white/30">
+              <Mail className="w-3.5 h-3.5" /> {SITE.emails.hello}
+            </span>
+          </div>
 
-          {/* Navigation Links */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 md:gap-8 mb-14">
+          {/* Divider */}
+          <div className="h-px bg-white/6 mb-6" />
+
+          {/* Nav Links — compact 4-column */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-5 mb-6">
             <div>
-              <h4 className="font-bold text-sm mb-5 text-white">
-                Navigation
-              </h4>
-              <ul className="space-y-3">
+              <h4 className="font-bold text-xs mb-3 text-white/70 uppercase tracking-wider">Navigation</h4>
+              <ul className="space-y-1.5">
                 {[
                   { to: "/", label: "Home" },
-                  { to: "/services", label: "Services" },
-                  { to: "/training", label: "Training" },
+                  { to: "/training", label: "Workshops" },
                   { to: "/business", label: "AI for Business" },
                   { to: "/resources", label: "Resources" },
                   { to: "/about", label: "About" },
                 ].map((link) => (
                   <li key={link.to}>
-                    <Link
-                      to={link.to}
-                      className="text-sm text-white/40 hover:text-white transition-colors"
-                    >
-                      {link.label}
-                    </Link>
+                    <Link to={link.to} className="text-xs text-white/35 hover:text-white transition-colors">{link.label}</Link>
                   </li>
                 ))}
               </ul>
             </div>
-
             <div>
-              <h4 className="font-bold text-sm mb-5 text-white">
-                Services
-              </h4>
-              <ul className="space-y-3">
-                {[
-                  "ScamShield Protection",
-                  "Safety Audit",
-                  "Web Design",
-                  "AI Automation",
-                ].map((label, i) => (
-                  <li key={i}>
-                    <Link
-                      to="/services"
-                      className="text-sm text-white/40 hover:text-white transition-colors"
-                    >
-                      {label}
-                    </Link>
-                  </li>
+              <h4 className="font-bold text-xs mb-3 text-white/70 uppercase tracking-wider">Workshops</h4>
+              <ul className="space-y-1.5">
+                {["Zoom Classes", "In-Person", "Group Bookings", "Gift Certificates"].map((label, i) => (
+                  <li key={i}><Link to="/training" className="text-xs text-white/35 hover:text-white transition-colors">{label}</Link></li>
                 ))}
               </ul>
             </div>
-
             <div>
-              <h4 className="font-bold text-sm mb-5 text-white">
-                Training
-              </h4>
-              <ul className="space-y-3">
-                {[
-                  "Zoom Classes",
-                  "In-Person",
-                  "Group Bookings",
-                  "Gift Certificates",
-                ].map((label, i) => (
-                  <li key={i}>
-                    <Link
-                      to="/training"
-                      className="text-sm text-white/40 hover:text-white transition-colors"
-                    >
-                      {label}
-                    </Link>
-                  </li>
-                ))}
+              <h4 className="font-bold text-xs mb-3 text-white/70 uppercase tracking-wider">Support</h4>
+              <ul className="space-y-1.5">
+                <li><Link to="/faq" className="text-xs text-white/35 hover:text-white transition-colors">FAQ</Link></li>
+                <li><Link to="/contact" className="text-xs text-white/35 hover:text-white transition-colors">Contact Us</Link></li>
+                <li><Link to="/contact" className="text-xs text-white/35 hover:text-white transition-colors">Emergency Help</Link></li>
               </ul>
             </div>
-
             <div>
-              <h4 className="font-bold text-sm mb-5 text-white">
-                Support
-              </h4>
-              <ul className="space-y-3">
-                <li>
-                  <Link
-                    to="/faq"
-                    className="text-sm text-white/40 hover:text-white transition-colors"
-                  >
-                    FAQ
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/contact"
-                    className="text-sm text-white/40 hover:text-white transition-colors"
-                  >
-                    Contact Us
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/contact"
-                    className="text-sm text-white/40 hover:text-white transition-colors"
-                  >
-                    Emergency Help
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-sm mb-5 text-white">Legal</h4>
-              <ul className="space-y-3">
-                <li>
-                  <Link
-                    to="/privacy-policy"
-                    className="text-sm text-white/40 hover:text-white transition-colors"
-                  >
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/terms-of-service"
-                    className="text-sm text-white/40 hover:text-white transition-colors"
-                  >
-                    Terms of Service
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/refund-policy"
-                    className="text-sm text-white/40 hover:text-white transition-colors"
-                  >
-                    Refund Policy
-                  </Link>
-                </li>
+              <h4 className="font-bold text-xs mb-3 text-white/70 uppercase tracking-wider">Legal</h4>
+              <ul className="space-y-1.5">
+                <li><Link to="/privacy-policy" className="text-xs text-white/35 hover:text-white transition-colors">Privacy Policy</Link></li>
+                <li><Link to="/terms-of-service" className="text-xs text-white/35 hover:text-white transition-colors">Terms of Service</Link></li>
+                <li><Link to="/refund-policy" className="text-xs text-white/35 hover:text-white transition-colors">Refund Policy</Link></li>
               </ul>
             </div>
           </div>
 
-          {/* Bottom Bar */}
-          <div className="h-px bg-white/8 mb-6" />
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <p className="text-sm text-white/35">
-                © {new Date().getFullYear()} InVision Network. All rights
-                reserved.
-              </p>
-              <div className="flex items-center gap-4">
-                <span className="flex items-center gap-1.5 text-xs text-white/45">
-                  <Shield className="w-4 h-4 text-emerald-500/60" />
-                  BBB Accredited
-                </span>
-                <span className="flex items-center gap-1.5 text-xs text-white/45">
-                  <Shield className="w-4 h-4 text-amber-500/60" />
-                  Veteran-Supporting
-                </span>
-              </div>
-            </div>
+          {/* Support Statement */}
+          <div className="flex items-center justify-center gap-2 py-3 mb-4 rounded-lg bg-white/[0.03] border border-white/6 text-center">
+            <Heart className="w-3.5 h-3.5 text-pink-400/70 flex-shrink-0" />
+            <p className="text-xs text-white/45">
+              We proudly support veterans and children with cancer. A portion of every service goes toward these causes.
+            </p>
+          </div>
 
-            {/* Social Icons */}
-            <div className="flex items-center gap-2">
+          {/* Bottom Bar */}
+          <div className="h-px bg-white/6 mb-4" />
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
+              <p className="text-xs text-white/30">© {new Date().getFullYear()} InVision Network. All rights reserved.</p>
+              <span className="flex items-center gap-1 text-[11px] text-white/30">
+                <Shield className="w-3 h-3 text-emerald-500/50" /> BBB Accredited
+              </span>
+              <span className="flex items-center gap-1 text-[11px] text-white/30">
+                <Shield className="w-3 h-3 text-amber-500/50" /> Veteran Owned
+              </span>
+            </div>
+            <div className="flex items-center gap-1.5">
               {[
-                {
-                  href: "https://facebook.com/invisionnetwork",
-                  icon: Facebook,
-                  label: "Facebook",
-                },
-                {
-                  href: "https://linkedin.com/company/invision-network",
-                  icon: Linkedin,
-                  label: "LinkedIn",
-                },
-                {
-                  href: "https://youtube.com/invisionnetwork",
-                  icon: Youtube,
-                  label: "YouTube",
-                },
-                {
-                  href: "https://instagram.com/invisionnetwork",
-                  icon: Instagram,
-                  label: "Instagram",
-                },
-              ].map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/8 transition-colors flex items-center justify-center"
-                  aria-label={social.label}
-                >
-                  <social.icon className="w-4 h-4 text-white/50" />
+                { href: "https://facebook.com/invisionnetwork", icon: Facebook, label: "Facebook" },
+                { href: "https://linkedin.com/company/invision-network", icon: Linkedin, label: "LinkedIn" },
+                { href: "https://youtube.com/invisionnetwork", icon: Youtube, label: "YouTube" },
+                { href: "https://instagram.com/invisionnetwork", icon: Instagram, label: "Instagram" },
+              ].map((s) => (
+                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
+                  className="w-8 h-8 rounded-lg bg-white/4 hover:bg-white/8 border border-white/6 transition-colors flex items-center justify-center">
+                  <s.icon className="w-3.5 h-3.5 text-white/40" />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Legal Disclaimer */}
-          <p className="text-white/25 text-xs text-center leading-relaxed max-w-4xl mx-auto">
-            InVision Network provides educational services only. We are not
-            legal, financial, tax, or licensed cybersecurity professionals. In
-            case of active fraud, identity theft, or criminal activity,
-            contact local law enforcement (911), your bank's fraud department
-            immediately using official phone numbers, and report to FTC at
-            IdentityTheft.gov. We never request passwords, 2FA codes, bank
-            account information, or Social Security numbers.
+          {/* Disclaimer */}
+          <p className="text-white/20 text-[10px] text-center leading-relaxed max-w-3xl mx-auto mt-4">
+            InVision Network provides educational services only. We are not legal, financial, tax, or licensed cybersecurity professionals. In case of active fraud, identity theft, or criminal activity, contact local law enforcement (911), your bank's fraud department immediately using official phone numbers, and report to FTC at IdentityTheft.gov. We never request passwords, 2FA codes, bank account information, or Social Security numbers.
           </p>
         </div>
       </div>

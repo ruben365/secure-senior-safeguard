@@ -6,6 +6,7 @@ import { BookingModal } from "@/components/BookingModal";
 import { EmbeddedPaymentModal } from "@/components/payment/EmbeddedPaymentModal";
 import { TrainingPaymentModal } from "@/components/TrainingPaymentModal";
 import Hero from "@/components/Hero";
+import { HeroWorkshops } from "@/components/HeroWorkshops";
 import { PageTransition } from "@/components/PageTransition";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -583,49 +584,8 @@ function LearnAndTrain() {
         />
         <Navigation overlay />
 
-        {/* Hero Section */}
-        <div className="relative">
-          <Hero
-            backgroundImages={trainingHeroImages}
-            headline=""
-            subheadline=""
-            showScrollIndicator={true}
-          >
-            <div className="text-center md:text-left mb-4 sm:mb-6">
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3 glow-text">
-                <RotatingHeadlines headlines={trainingHeadlines} className="" />
-              </h1>
-              <p className="text-lg md:text-xl text-white/90 max-w-3xl">
-                Expert-led workshops & instant file scanning for families and
-                seniors
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center md:justify-start">
-              <Button
-                onClick={() =>
-                  document
-                    .getElementById("training")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                size="xl"
-              >
-                <Shield className="w-5 h-5 mr-2" />
-                Learn & Train Workshops
-              </Button>
-              <Button
-                asChild
-                size="xl"
-                variant="heroOutline"
-              >
-                <Link to="/training/ai-analysis">
-                  <FileCheck className="w-5 h-5 mr-2" />
-                  AI Analysis & Secure Scan
-                </Link>
-              </Button>
-            </div>
-          </Hero>
-          <HeroFloatingStats />
-        </div>
+        {/* Hero Section — Dark cinematic theme */}
+        <HeroWorkshops />
 
         {/* ══════════ LIVE THREAT TICKER ══════════ */}
         <div className="bg-foreground text-background py-3 overflow-hidden">
@@ -997,9 +957,6 @@ function LearnAndTrain() {
 
         </MeshBackground>
 
-        {/* ══════════ GRADIENT DIVIDER ══════════ */}
-        <div className="divider-gradient-colored" />
-
         {/* ══════════ SECTION 6: AI PROFESSIONAL TRAINING ══════════ */}
         <section id="ai-pro-training" className="py-10 sm:py-16 md:py-20 bg-muted/20">
           <div className="container mx-auto px-4 lg:px-12">
@@ -1252,8 +1209,6 @@ function LearnAndTrain() {
             </div>
           </section>
         )}
-
-        <div className="section-glow-strip" />
 
         {/* ══════════ FINAL CTA ══════════ */}
         <section className="py-16 sm:py-20 md:py-24 relative overflow-hidden">

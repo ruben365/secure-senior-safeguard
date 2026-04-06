@@ -6,5 +6,11 @@
 @import "./styles/utilities.css";
 @import "./styles/trending-ui.css";
 @import "./styles/hero-homepage.css";
+@import "./styles/hero-business.css";
+@import "./styles/hero-workshops.css";
+@import "./styles/premium-body.css";
 
-/* Standard sizing - no zoom override */
+/* Global scale — 85% for tighter, cleaner layout */
+html {
+  font-size: 85%;
+}

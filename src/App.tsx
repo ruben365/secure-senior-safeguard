@@ -192,7 +192,7 @@ function PublicRoutes() {
         <Route path="/services/family-emergency-network" element={<PageTransition variant="auto"><FamilyEmergencyNetwork /></PageTransition>} />
         <Route path="/services/digital-estate" element={<PageTransition variant="auto"><DigitalEstate /></PageTransition>} />
         <Route path="/about" element={<PageTransition variant="auto"><About /></PageTransition>} />
-        <Route path="/services" element={<PageTransition variant="auto"><Services /></PageTransition>} />
+        {/* /services removed — content covered by other pages */}
         <Route path="/resources" element={<PageTransition variant="auto"><Resources /></PageTransition>} />
         <Route path="/resources/:slug" element={<PageTransition variant="auto"><BookDetail /></PageTransition>} />
         <Route path="/library" element={<PageTransition variant="auto"><LibraryPage /></PageTransition>} />

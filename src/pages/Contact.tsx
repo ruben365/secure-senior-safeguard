@@ -209,8 +209,6 @@ function Contact() {
         </Hero>
       </div>
 
-      <SectionDivider variant="curve" color="background" />
-
       <MeshBackground variant="vibrant" withOrbs>
       <div className="py-16 relative overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
@@ -715,8 +713,6 @@ function Contact() {
         </div>
       </div>
       </MeshBackground>
-
-      <div className="section-glow-strip" />
 
       <Footer />
     </PageTransition>

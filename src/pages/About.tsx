@@ -349,7 +349,7 @@ function About() {
       <SectionDivider variant="mountains" color="background" />
 
       {/* Community Impact */}
-      <section className="py-16 md:py-24 relative overflow-hidden">
+      <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${ohioNatureImpact})` }}
@@ -447,7 +447,7 @@ function About() {
       <div className="section-glow-strip" />
 
       {/* CTA with Field Background */}
-      <section className="py-24 md:py-32 relative overflow-hidden" id="cta">
+      <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden" id="cta">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${fieldSunsetCta})` }}

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import { HeroBusiness } from "@/components/HeroBusiness";
 import TrustBar from "@/components/TrustBar";
 import TestimonialCard from "@/components/TestimonialCard";
 import CTASection from "@/components/CTASection";
@@ -503,50 +504,16 @@ function Business() {
         
         <Navigation overlay />
 
-        {/* Hero */}
-        <div className="relative">
-          <Hero
-            backgroundImages={businessHeroImages}
-            headline=""
-            subheadline=""
-            showScrollIndicator={true}>
-            
-            <div className="text-center mb-6">
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-4">
-                <RotatingHeadlines headlines={businessHeadlines} className="" />
-              </h1>
-              <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-                AI agents, professional websites, and security tools built for small businesses across Ohio.
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="default" size="xl" onClick={openStrategyCall}>
-                Book Strategy Call
-              </Button>
-              <Button
-                variant="heroOutline"
-                size="xl"
-                onClick={() => {
-                  scrollToSection("services");
-                  trackButtonClick("Explore Services", "Business Hero");
-                }}>
-                
-                Explore Services
-              </Button>
-            </div>
-          </Hero>
-          <HeroFloatingStats />
-        </div>
+        {/* Hero — Dark cinematic theme */}
+        <HeroBusiness onStrategyCall={openStrategyCall} />
 
-        <div className="h-8" />
         <TrustBar />
 
-        {/* Live Stats Ticker — matches Training page */}
-        <div className="bg-foreground text-background py-3 overflow-hidden">
-          
+        {/* Spacer */}
+        <div className="h-4" />
 
-
-
+        {/* Live Stats Ticker removed — empty */}
+        <div className="hidden">
 
 
 
@@ -555,7 +522,7 @@ function Business() {
         </div>
 
         {/* ═══════════════════ SERVICES ═══════════════════ */}
-        <section id="services" className="py-24 relative overflow-hidden dot-grid-bg">
+        <section id="services" className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
           {/* Premium background */}
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
           <div className="absolute top-20 left-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
@@ -568,7 +535,7 @@ function Business() {
               subtitle="Pick a service below to see how your business benefits." />
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl mx-auto" style={{ perspective: "1200px" }}>
-              <AnimatedSection animation="fade-left" delay={0}>
+              <AnimatedSection animation="fade-left" delay={0} id="svc-ai-receptionist">
                 <ExpandableServiceCard
                   icon={<Phone className="w-7 h-7 text-primary" />}
                   title="AI Receptionist"
@@ -600,7 +567,7 @@ function Business() {
                 </ExpandableServiceCard>
               </AnimatedSection>
 
-              <AnimatedSection animation="fade-right" delay={100}>
+              <AnimatedSection animation="fade-right" delay={100} id="svc-smart-scheduling">
                 <ExpandableServiceCard
                   icon={<Calendar className="w-7 h-7 text-primary" />}
                   title="Smart Scheduling"
@@ -631,7 +598,7 @@ function Business() {
                 </ExpandableServiceCard>
               </AnimatedSection>
 
-              <AnimatedSection animation="fade-left" delay={200}>
+              <AnimatedSection animation="fade-left" delay={200} id="svc-support-bot">
                 <ExpandableServiceCard
                   icon={<MessageSquare className="w-7 h-7 text-primary" />}
                   title="Customer Support Bot"
@@ -663,7 +630,7 @@ function Business() {
                 </ExpandableServiceCard>
               </AnimatedSection>
 
-              <AnimatedSection animation="fade-right" delay={300}>
+              <AnimatedSection animation="fade-right" delay={300} id="svc-intake-automation">
                 <ExpandableServiceCard
                   icon={<Calendar className="w-7 h-7 text-primary" />}
                   title="Intake & Scheduling"
@@ -701,7 +668,7 @@ function Business() {
         <SectionDivider variant="wave" color="muted" />
 
         {/* ═══════════════════ COMPLETE PLATFORM ═══════════════════ */}
-        <section className="py-28 relative overflow-hidden">
+        <section id="security" className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
           {/* Rich layered background */}
           <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
           
@@ -946,7 +913,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ WEB DESIGN ═══════════════════ */}
-        <section id="website-design" className="py-24 relative overflow-hidden">
+        <section id="website-design" className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
           
@@ -1112,7 +1079,7 @@ function Business() {
         <SectionDivider variant="curve" color="muted" flip />
 
         {/* ═══════════════════ WEBSITE INSURANCE ═══════════════════ */}
-        <section id="website-insurance" className="py-24 relative overflow-hidden">
+        <section id="website-insurance" className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-muted/60 via-muted/40 to-muted/60" />
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
           
@@ -1195,7 +1162,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ AI AGENTS PRICING ═══════════════════ */}
-        <section id="automation-pricing" className="py-24 relative overflow-hidden">
+        <section id="automation-pricing" className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
           <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           
@@ -1307,7 +1274,7 @@ function Business() {
         <SectionDivider variant="slant" color="muted" />
 
         {/* ═══════════════════ AI INSURANCE ═══════════════════ */}
-        <section id="ai-insurance" className="py-24 relative overflow-hidden">
+        <section id="ai-insurance" className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent" />
           
@@ -1500,7 +1467,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ AI CONSULTING ═══════════════════ */}
-        <section id="ai-consulting" className="py-24 relative overflow-hidden">
+        <section id="ai-consulting" className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
           
           <div className="container mx-auto px-4 relative z-10">
@@ -1680,10 +1647,8 @@ function Business() {
           </div>
         </section>
 
-        <div className="divider-gradient-colored" />
-
         {/* ═══════════════════ ILLUSTRATION & VISUAL ART ═══════════════════ */}
-        <section id="illustration" className="py-24 relative overflow-hidden dot-grid-bg">
+        <section id="illustration" className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
           {/* Decorative background */}
           <div className="absolute inset-0 bg-gradient-to-b from-muted/40 via-background to-muted/30" />
           <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-coral-100/20 via-transparent to-transparent rounded-full blur-3xl pointer-events-none" />
@@ -1814,7 +1779,7 @@ function Business() {
 
         {/* ═══════════════════ WHY CHOOSE US ═══════════════════ */}
         <MeshBackground variant="vibrant" withOrbs>
-        <section className="py-24 relative overflow-hidden">
+        <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
           
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
@@ -1891,7 +1856,7 @@ function Business() {
 
         {/* ═══════════════════ TESTIMONIALS ═══════════════════ */}
         {(isAdmin || businessTestimonials.length > 0) &&
-        <section className="py-24 relative overflow-hidden">
+        <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
             
             <div className="container mx-auto px-4 relative z-10">
@@ -1943,8 +1908,6 @@ function Business() {
             </div>
           </section>
         }
-
-        <div className="section-glow-strip" />
 
         {/* Final CTA */}
         <CTASection

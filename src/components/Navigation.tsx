@@ -8,7 +8,6 @@ import {
   LayoutDashboard,
   Heart,
   ChevronDown,
-  Bell,
 } from "lucide-react";
 import { PrefetchLink } from "@/components/PrefetchLink";
 import { ShoppingCart } from "@/components/ShoppingCart";
@@ -16,10 +15,11 @@ import { useAuth } from "@/contexts/AuthContext";
 import { SITE } from "@/config/site";
 import invisionLogo from "@/assets/shield-logo.png";
 import { DonationModal } from "@/components/DonationModal";
+import { AnnouncementBell } from "@/components/AnnouncementBell";
 
 const primaryLinks = [
-  { name: "AI & Business", href: "/business" },
-  { name: "Learn & Train", href: "/training" },
+  { name: "AI", href: "/business" },
+  { name: "Workshops", href: "/training" },
   { name: "Resources", href: "/resources" },
   { name: "About", href: "/about" },
 ];
@@ -102,7 +102,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
 
       <nav className={overlay ? "absolute top-0 left-0 right-0 z-[9999] bg-gradient-to-b from-black/60 to-transparent" : `sticky top-0 z-[9999] transition-colors duration-300 ${scrolled ? "bg-[#080d1a]/95 backdrop-blur-md border-b border-white/[0.06]" : "bg-transparent"}`}>
         <div className="container mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
-          <div className="flex items-center justify-between h-[68px]">
+          <div className="flex items-center justify-between h-[62px] scale-[0.95] origin-center">
             {/* Logo — identical to hero */}
             <a
               href="/"
@@ -161,17 +161,24 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 </button>
 
                 {moreOpen && (
-                  <div className="absolute top-full left-0 mt-1 w-44 rounded-lg border border-gray-700/50 shadow-lg py-1 z-50 cyber-card-bg backdrop-blur-xl">
+                  <div
+                    className="absolute top-full left-0 mt-2 w-44 rounded-lg border border-white/8 shadow-lg py-1 z-50 overflow-hidden"
+                    style={{
+                      background: "rgba(20, 20, 28, 0.75)",
+                      backdropFilter: "blur(16px)",
+                      WebkitBackdropFilter: "blur(16px)",
+                    }}
+                  >
                     {secondaryLinks.map((link) => {
                       const isActive = isActiveLink(link.href);
                       return (
                         <PrefetchLink
                           key={link.name}
                           to={link.href}
-                          className={`block px-4 py-2.5 text-sm transition-colors ${
+                          className={`block px-4 py-2 text-sm transition-colors ${
                             isActive
-                              ? "text-violet-400 font-semibold bg-violet-500/10"
-                              : "text-gray-300 hover:text-white hover:bg-white/10"
+                              ? "text-violet-400 font-semibold"
+                              : "text-gray-400 hover:text-white"
                           }`}
                           onClick={() => setMoreOpen(false)}
                         >
@@ -186,15 +193,10 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
 
             {/* Right Side — identical to hero */}
             <div className="flex items-center gap-2">
-              {/* Bell notification */}
-              <button
-                type="button"
-                className="hidden lg:flex items-center justify-center w-9 h-9 rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-colors relative"
-                aria-label="Notifications"
-              >
-                <Bell className="w-4 h-4" />
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-violet-500 rounded-full" />
-              </button>
+              {/* Announcements bell */}
+              <div className="hidden lg:block">
+                <AnnouncementBell />
+              </div>
 
               <ShoppingCart />
 

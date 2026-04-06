@@ -313,7 +313,7 @@ export function TrainingPaymentModal({
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto p-0">
+      <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto p-0 rounded-2xl">
         {/* Header */}
         <div className="bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 p-6 border-b">
           <DialogHeader>
