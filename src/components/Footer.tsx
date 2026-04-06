@@ -189,10 +189,10 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
             </div>
           </div>
 
-          {/* Support Statement */}
-          <div className="flex items-center justify-center gap-2 py-3 mb-4 rounded-lg bg-white/[0.03] border border-white/6 text-center">
-            <Heart className="w-3.5 h-3.5 text-pink-400/70 flex-shrink-0" />
-            <p className="text-xs text-white/45">
+          {/* Support Statement — inline, no box */}
+          <div className="flex items-center justify-center gap-1.5 mb-3">
+            <Heart className="w-3 h-3 text-pink-400/50 flex-shrink-0" />
+            <p className="text-[10px] text-white/30">
               We proudly support veterans and children with cancer. A portion of every service goes toward these causes.
             </p>
           </div>
