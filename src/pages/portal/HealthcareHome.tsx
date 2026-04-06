@@ -104,7 +104,10 @@ export default function HealthcareHome() {
           .order("scheduled_start", { ascending: true })
           .limit(10);
         if (error) throw error;
-        return (data ?? []) as Appointment[];
+        return (data ?? []).map((d: any) => ({
+          ...d,
+          clients: Array.isArray(d.clients) ? d.clients[0] ?? null : d.clients ?? null,
+        })) as Appointment[];
       } catch {
         return [];
       }

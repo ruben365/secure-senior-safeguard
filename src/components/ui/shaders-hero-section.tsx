@@ -51,14 +51,11 @@ export function ShaderBackground({ children }: ShaderBackgroundProps) {
         className="absolute inset-0 w-full h-full"
         colors={["#0f172a", "#1e3a5f", "#0c1529", "#1a2744", "#0b1120"]}
         speed={0.25}
-        backgroundColor="#070d1a"
       />
       <MeshGradient
         className="absolute inset-0 w-full h-full opacity-30"
         colors={["#0f172a", "#93c5fd", "#3b82f6", "#000000"]}
         speed={0.15}
-        wireframe="true"
-        backgroundColor="transparent"
       />
       {/* Subtle radial glow */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_80%,rgba(59,130,246,0.15),transparent_60%)] pointer-events-none" />
@@ -81,14 +78,6 @@ export function PulsingCircle() {
           thickness={0.1}
           softness={0.2}
           intensity={5}
-          spotsPerColor={5}
-          spotSize={0.1}
-          pulse={0.1}
-          smoke={0.5}
-          smokeSize={4}
-          scale={0.65}
-          rotation={0}
-          frame={9161408.251009725}
           style={{
             width: "60px",
             height: "60px",
