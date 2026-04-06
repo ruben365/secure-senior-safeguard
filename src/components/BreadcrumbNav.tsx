@@ -11,7 +11,7 @@ import { Home } from "lucide-react";
 
 const routeNameMap: Record<string, string> = {
   "/": "Home",
-  "/business": "AI & Business",
+  "/business": "AI",
   "/training": "Learn & Train",
   "/resources": "Resources",
   "/about": "About",

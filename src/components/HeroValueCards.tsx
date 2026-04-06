@@ -42,7 +42,7 @@ const HeroValueCards = () => {
     },
     {
       icon: Building2,
-      title: "AI for Business",
+      title: "AI",
       description:
         "Custom AI solutions, automation, and security audits for your business",
       priceRange: "From $1,500",
