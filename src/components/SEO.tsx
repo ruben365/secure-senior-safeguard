@@ -252,14 +252,6 @@ export const PAGE_SEO = {
       "scam protection resources, AI security guides, cybersecurity articles, deepfake information, Ohio senior scam prevention",
   },
 
-  services: {
-    title: "Cybersecurity & AI Protection Services",
-    description:
-      "Explore InVision Network's full suite of cybersecurity services: Cognitive Sentinel AI monitoring, scam insurance, AI-Safe Certification, Family Emergency Network, and digital estate protection.",
-    keywords:
-      "cybersecurity services Ohio, AI protection plans, scam insurance, digital estate, family emergency network, Kettering",
-  },
-
   articles: {
     title: "Cybersecurity Articles & Scam Prevention News",
     description:

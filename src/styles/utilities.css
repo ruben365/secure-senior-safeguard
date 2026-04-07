@@ -558,7 +558,7 @@ video {
 
 /* Prevent font flash */
 .font-loaded {
-  font-family: "Lexend", "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Rubik", ui-sans-serif, system-ui, sans-serif;
 }
 
 /* Reduce CLS */
