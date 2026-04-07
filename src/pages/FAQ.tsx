@@ -475,7 +475,7 @@ export default function FAQ() {
           {/* Platform Guide Section */}
           <section className="py-6 bg-gradient-to-b from-primary/5 to-background relative overflow-hidden">
             
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
               <div className="max-w-4xl mx-auto text-center">
                 <Badge className="mb-3 bg-primary/10 text-primary border-primary/20">
                   <BookOpen className="w-3 h-3 mr-1" />
@@ -497,7 +497,7 @@ export default function FAQ() {
 
           {/* Search & Filter Section - Redesigned */}
           <section className="py-6 bg-gradient-to-b from-muted/30 to-background">
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
               <div className="max-w-4xl mx-auto">
                 {/* Search Bar - Enhanced */}
                 <div className="relative mb-6">
@@ -539,7 +539,7 @@ export default function FAQ() {
 
           {/* Category Tabs */}
           <section className="py-4 border-y border-border/40 bg-muted/20">
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
               <div className="max-w-6xl mx-auto">
                 <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3 text-center">
                   Filter by Category
@@ -571,7 +571,7 @@ export default function FAQ() {
 
           {/* FAQ Accordion */}
           <section className="py-4 sm:py-6">
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
               <div className="max-w-4xl mx-auto">
                 {filteredFAQs.length > 0 ? (
                   <Accordion type="single" collapsible className="space-y-1">
@@ -659,7 +659,7 @@ export default function FAQ() {
 
           {/* AI Image Disclaimer */}
           <section className="py-16 bg-muted/20">
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
               <div className="max-w-4xl mx-auto">
                 <AIImageDisclaimer />
               </div>

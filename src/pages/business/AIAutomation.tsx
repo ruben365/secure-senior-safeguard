@@ -172,7 +172,7 @@ const AIAutomation = () => {
 
           {/* Stats Section */}
           <section className="py-12 bg-card border-y border-border">
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 <div>
                   <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
@@ -204,7 +204,7 @@ const AIAutomation = () => {
 
           {/* Features Grid */}
           <section className="py-20">
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
                   Complete Follow-Up Automation Suite
@@ -239,7 +239,7 @@ const AIAutomation = () => {
 
           {/* Automation Types */}
           <section className="py-20 bg-card">
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
                   Ready-to-Deploy Automation Templates
@@ -274,7 +274,7 @@ const AIAutomation = () => {
 
           {/* Process Section */}
           <section className="py-20">
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
                   How We Build Your Automation
@@ -304,7 +304,7 @@ const AIAutomation = () => {
 
           {/* Pricing Preview */}
           <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-accent/5">
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
               <div className="max-w-3xl mx-auto text-center">
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">
                   Investment That Pays for Itself

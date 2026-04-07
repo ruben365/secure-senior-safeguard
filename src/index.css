@@ -10,6 +10,11 @@
 @import "./styles/hero-workshops.css";
 @import "./styles/premium-body.css";
 
+/* Global zoom out to 75% — intentional design choice for dense information layout */
+#root {
+  zoom: 0.75;
+}
+
 /* Note: html font-size and responsive scaling are handled in base.css
    via calc(16px * var(--text-scale)) and in responsive.css per-breakpoint.
    The previous 87.5% override here fought those rules and made text blurry. */

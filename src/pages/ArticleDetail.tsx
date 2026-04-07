@@ -222,7 +222,7 @@ function ArticleDetail() {
       {/* Related Articles */}
       {otherArticles && otherArticles.length > 0 && (
         <section className="bg-muted/30 py-16">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-12">
             <h2 className="text-2xl font-bold mb-8">Related Articles</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               {otherArticles.map((related) => (

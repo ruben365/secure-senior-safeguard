@@ -54,7 +54,7 @@ export const NewsletterSection = () => {
 
   return (
     <div className="py-10">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12">
         <div className="max-w-2xl mx-auto">
           <div className="flex flex-col sm:flex-row items-center gap-4 rounded-2xl border border-border/60 bg-card/80 backdrop-blur-sm px-6 py-5 shadow-sm">
             <div className="flex items-center gap-3 shrink-0">

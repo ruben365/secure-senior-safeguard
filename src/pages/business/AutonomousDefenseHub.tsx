@@ -242,7 +242,7 @@ const AutonomousDefenseHub = () => {
           {/* FEATURE 1 — AGENTIC SOC */}
           {/* ──────────────────────────────────────────────────────────────────── */}
           <section className="py-20 md:py-28 bg-background">
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
               <SectionHeader
                 badge="Feature 01 · Agentic SOC"
                 title={
@@ -324,7 +324,7 @@ const AutonomousDefenseHub = () => {
           {/* FEATURE 2 — INVISION VALIDATOR / TRUST PORTAL */}
           {/* ──────────────────────────────────────────────────────────────────── */}
           <section className="py-20 md:py-28 bg-muted/30">
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
               <SectionHeader
                 badge="Feature 02 · InVision Validator"
                 title={
@@ -419,7 +419,7 @@ const AutonomousDefenseHub = () => {
           {/* FEATURE 3 — HONEY-IDENTITIES */}
           {/* ──────────────────────────────────────────────────────────────────── */}
           <section className="py-20 md:py-28 bg-background">
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
               <SectionHeader
                 badge="Feature 03 · Honey-Identity Network"
                 title={
@@ -519,7 +519,7 @@ const AutonomousDefenseHub = () => {
           {/* FEATURE 4 — SAFE-ZONE HARDWARE KEY */}
           {/* ──────────────────────────────────────────────────────────────────── */}
           <section className="py-20 md:py-28 bg-muted/30">
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
               <SectionHeader
                 badge="Feature 04 · Safe-Zone Key"
                 title={
@@ -602,7 +602,7 @@ const AutonomousDefenseHub = () => {
           {/* SUMMARY TABLE */}
           {/* ──────────────────────────────────────────────────────────────────── */}
           <section className="py-20 md:py-24 bg-background">
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
               <SectionHeader
                 badge="InVision 2026 Roadmap"
                 title="Your Complete Defense Stack"
@@ -663,7 +663,7 @@ const AutonomousDefenseHub = () => {
           {/* PRICING TIERS */}
           {/* ──────────────────────────────────────────────────────────────────── */}
           <section className="py-20 md:py-28 bg-muted/30">
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
               <SectionHeader
                 badge="Pricing"
                 title={

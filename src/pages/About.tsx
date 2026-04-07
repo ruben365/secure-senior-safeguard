@@ -162,7 +162,7 @@ function About() {
       <MeshBackground variant="subtle" withOrbs>
       <section className="py-16 md:py-24 bg-transparent relative overflow-hidden">
 
-        <div className="container mx-auto px-4 lg:px-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div>
               <span className="inline-block text-xs uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
@@ -316,7 +316,7 @@ function About() {
       {/* Values */}
       <MeshBackground variant="vibrant" withDots>
       <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4 lg:px-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
           <div className="text-center mb-14">
             <span className="frosted-pill mb-4">Our Values</span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
@@ -453,7 +453,7 @@ function About() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/50 to-transparent" />
 
-        <div className="container mx-auto px-4 relative z-10 text-center">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10 text-center">
           <h2 className="text-3xl md:text-5xl font-black text-white mb-6 drop-shadow-lg">
             Ready to Join Our Protected Community?
           </h2>

@@ -79,7 +79,7 @@ export function ShoppingCart() {
                     <div key={item.id} className="px-4 py-3 border-b border-white/5 hover:bg-white/[0.03] transition-colors">
                       <div className="flex items-start gap-3">
                         {item.image && (
-                          <img src={item.image} alt={item.name} className="w-10 h-10 rounded-md object-cover flex-shrink-0" />
+                          <img src={item.image} alt={item.name} className="w-10 h-10 rounded-md object-cover flex-shrink-0" loading="lazy" decoding="async" width={40} height={40} />
                         )}
                         <div className="flex-1 min-w-0">
                           <h4 className="text-sm font-semibold text-white truncate">{item.name}</h4>

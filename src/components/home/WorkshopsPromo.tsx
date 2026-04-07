@@ -16,7 +16,7 @@ export const WorkshopsPromo = () => {
       <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-primary/8 to-accent/5 blur-[120px] pointer-events-none" />
       <div className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-gradient-to-br from-accent/6 to-primary/4 blur-[100px] pointer-events-none" />
 
-      <div className="container mx-auto px-4 lg:px-8 max-w-6xl relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12 max-w-6xl relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Media - Left */}
           <div className="relative">

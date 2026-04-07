@@ -93,7 +93,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
             {/* Brand */}
             <div className="flex items-center gap-3">
               <div className="p-1.5 rounded-lg bg-white/6 border border-white/8">
-                <img src={invisionLogo} alt="InVision Network" className="h-7 w-7 object-contain brightness-0 invert" />
+                <img src={invisionLogo} alt="InVision Network" className="h-7 w-7 object-contain brightness-0 invert" loading="eager" decoding="sync" width={28} height={28} />
               </div>
               <div>
                 <h2 className="text-base font-bold text-white leading-tight">InVision Network</h2>

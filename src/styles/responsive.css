@@ -1,158 +1,11 @@
+/* =====================================================
    RESPONSIVE SYSTEM
-   Breakpoints: 380 | 480 | 640 | 768 | 1024 | 1280 | 1536 | 1920 | 2560px
+   Breakpoints: 374 | 640 | 768 | 1024 | 1280 | 1536 | 1920 | 2560px
+   Phones (320-640) | Tablets (641-1024) | Laptops (1025-1440) | Desktops (1441-1920) | Projectors (1921+)
    zoom: 0.75 on #root — all CSS px = visual × 1.333
    Touch targets need ≥52px CSS (39px visual)
    Full visual viewport: calc(100vh / 0.75)
    ===================================================== */
-
-/* Mobile-specific form enhancements */
-@media (max-width: 768px) {
-  /* Ensure checkboxes and radio buttons are touch-friendly */
-  input[type="checkbox"],
-  input[type="radio"] {
-    width: 24px;
-    height: 24px;
-  }
-
-  /* Remove hover effects on mobile, use active instead */
-  .hover-scale:active {
-    transform: scale(0.95);
-  }
-
-  .hover-scale:hover {
-    transform: none;
-  }
-
-  /* Ensure all interactive elements have proper touch targets
-     52px CSS = ~39px visual with 0.75 zoom — meets WCAG 2.5.5 */
-  button,
-  a[role="button"],
-  [role="button"] {
-    min-height: 52px;
-    min-width: 44px;
-  }
-
-  /* Stack admin dashboard stats */
-  .admin-stats-grid {
-    grid-template-columns: 1fr !important;
-  }
-
-  /* Mobile table cards */
-  .desktop-table {
-    display: none;
-  }
-
-  .mobile-cards {
-    display: block;
-  }
-
-  /* Reduce chart height on mobile */
-  .admin-chart {
-    height: 250px !important;
-  }
-
-  /* Stack quick actions */
-  .quick-actions-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-
-  /* Full width modals on mobile */
-  .mobile-modal {
-    width: 100vw;
-    height: 100vh;
-    max-width: none;
-    border-radius: 0;
-  }
-
-  /* Dialogs: full-screen on mobile, inner scroll */
-  [role="dialog"] [data-slot="dialog-content"],
-  .dialog-content {
-    max-width: calc(100vw - 1rem) !important;
-    max-height: 92vh !important;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  /* Prevent content overflow in cards */
-  [data-slot="card"] {
-    min-width: 0;
-  }
-
-  /* Grid: never go below 1 col on very small screens */
-  .grid-cols-2,
-  .grid-cols-3,
-  .grid-cols-4 {
-    /* Handled via Tailwind responsive prefixes — this is a safety net */
-  }
-
-  /* Forms: 16px minimum font to prevent iOS zoom-in on focus */
-  input,
-  select,
-  textarea {
-    font-size: 16px !important;
-  }
-}
-
-/* Touch device optimizations */
-@media (hover: none) and (pointer: coarse) {
-  .card-enhanced:hover {
-    transform: translateY(0);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-  .card-enhanced:active {
-    transform: scale(0.98);
-    transition: transform 0.1s ease-out;
-  }
-
-  .card-enhanced:hover img {
-    transform: scale(1);
-  }
-}
-
-/* Mobile-specific optimizations */
-@media (max-width: 768px) {
-  .section-spacing {
-    @apply py-6;
-  }
-
-  .hero-mobile {
-    min-height: 50vh !important;
-  }
-
-  .card-mobile {
-    @apply p-4;
-  }
-
-  /* NOTE: h1/h2/h3 sizes intentionally omitted here.
-     base.css uses clamp() which already scales gracefully at all breakpoints.
-     Fixed overrides here would break fluid typography. */
-}
-
-/* Mobile Typography Optimizations
-   zoom: 0.75 shrinks visual size by 25%. CSS values below are chosen
-   so that CSS × 0.75 = desired visual minimum (~24px for h1 on narrow screens). */
-@media (max-width: 640px) {
-  .hero-mobile h1 {
-    font-size: clamp(2.5rem, 7vw, 3.5rem) !important;  /* visual: 1.875rem–2.625rem */
-    line-height: 1.15 !important;
-  }
-
-  .hero-mobile h2 {
-    font-size: clamp(1.75rem, 5vw, 2.5rem) !important;  /* visual: 1.3rem–1.875rem */
-  }
-
-  .hero-mobile p {
-    font-size: clamp(1rem, 3.5vw, 1.25rem) !important;  /* visual: 0.75rem–0.94rem */
-  }
-
-  /* Prevent horizontal overflow */
-  body {
-    overflow-x: hidden;
-  }
-=======
-/* ===== RESPONSIVE DESIGN — All Devices ===== */
-/* Phones (320-640) | Tablets (641-1024) | Laptops (1025-1440) | Desktops (1441-1920) | Projectors (1921+) */
 
 /* ------------------------------------------------------------ */
 /*  EXTRA-SMALL PHONES (<375px) — iPhone SE, Galaxy Fold         */
@@ -163,46 +16,7 @@
     padding-right: 0.75rem !important;
   }
 
-  /* Ensure images don't overflow */
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  /* Make cards more compact on mobile */
-  .card {
-    padding: 1rem !important;
-  }
-}
-
-/* ===== TABLET (768px–1024px) ===== */
-@media (min-width: 768px) and (max-width: 1023px) {
-  /* Ensure nav items don't overflow on tablet */
-  nav .container {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-  }
-
-  /* 2-column grid on tablet */
-  .grid-responsive {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Extra small screens (≤380px physical viewport)
-   zoom: 0.75 is applied AFTER CSS, so CSS px = physical px here.
-   Visual size = CSS × 0.75. Keep hero headings legible. */
-@media (max-width: 380px) {
-  .hero-mobile h1 {
-    font-size: 2.25rem !important;   /* 2.25rem CSS = ~1.7rem visual — readable */
-    line-height: 1.15 !important;
-  }
-
-  .hero-mobile h2 {
-    font-size: 1.5rem !important;    /* 1.5rem CSS = ~1.125rem visual */
-  }
-
-  /* Prevent text overflow */
+  /* Prevent text overflow on narrow screens */
   * {
     word-wrap: break-word;
     overflow-wrap: break-word;
@@ -260,116 +74,9 @@
   .mobile-full-width { width: 100% !important; }
 }
 
-/* ===== LARGE DESKTOP / LAPTOP (1024px+) ===== */
-@media (min-width: 1024px) {
-  :root {
-    --text-scale: 1;
-    /* Wider section padding on desktop */
-    --section-py-md: 5rem;
-    --section-py-lg: 7rem;
-    --section-py-xl: 9rem;
-  }
-
-  .container {
-    max-width: 1280px;
-  }
-}
-
-/* ===== XL DESKTOP (1280px+) ===== */
-@media (min-width: 1280px) {
-  :root {
-    --text-scale: 1.02;
-  }
-}
-
-/* ===== 2XL DESKTOP (1536px+) ===== */
-@media (min-width: 1536px) {
-  :root {
-    --text-scale: 1.04;
-  }
-
-  .container {
-    max-width: 1400px;
-  }
-}
-
-/* ===== WIDE SCREEN / TV (1920px+) ===== */
-@media (min-width: 1920px) {
-  :root {
-    --text-scale: 1.08;
-  }
-
-  /* Wider containers for large screens */
-  .container {
-    max-width: 1600px;
-  }
-
-  /* Increase section spacing */
-  .section-spacing {
-    @apply py-14;
-  }
-
-  .section-spacing-loose {
-    @apply py-16;
-  }
-
-  /* Hero gets even more room */
-  .hero-mobile {
-    min-height: 80vh !important;
-  }
-}
-
-/* ===== PROJECTOR / 4K (2560px+) ===== */
-@media (min-width: 2560px) {
-  :root {
-    --text-scale: 1.15;
-  }
-
-  .container {
-    max-width: 2000px;
-  }
-
-  .section-spacing {
-    @apply py-20;
-  }
-}
-
-/* ===== 480px — small phone landscape / medium phone ===== */
-@media (max-width: 480px) {
-  /* Force 1-col for content grids on small phones */
-  .grid-cols-2.force-1col-xs {
-    grid-template-columns: 1fr !important;
-  }
-}
-
-/* ===== 380px — extra-small phones ===== */
-@media (max-width: 380px) {
-  /* Reduce hero image height to free up vertical space */
-  .hero-mobile img {
-    max-height: 40vh;
-    object-fit: cover;
-  }
-
-  /* Prevent text from overflowing */
-  * {
-    overflow-wrap: break-word;
-    word-break: break-word;
-  }
-
-  /* Reduce container padding to get more usable width */
-  .container {
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
-  }
-
-  /* Compact section padding on tiny screens */
-  .section-spacing,
-  .section-spacing-tight {
-    @apply py-5;
-  }
-}
-
-/* Mobile performance trims - reduce heavy blur/shadows/animations */
+/* ------------------------------------------------------------ */
+/*  ALL MOBILE (<768px) — Phones in portrait & landscape         */
+/* ------------------------------------------------------------ */
 @media (max-width: 768px) {
   /* Touch-friendly form controls */
   input[type="checkbox"],
@@ -507,6 +214,13 @@
 /*  TABLET LANDSCAPE / SMALL LAPTOP (1024-1280px)                */
 /* ------------------------------------------------------------ */
 @media (min-width: 1024px) and (max-width: 1280px) {
+  :root {
+    --text-scale: 1;
+    --section-py-md: 5rem;
+    --section-py-lg: 7rem;
+    --section-py-xl: 9rem;
+  }
+
   .container {
     max-width: 1024px;
     padding-left: 2rem !important;

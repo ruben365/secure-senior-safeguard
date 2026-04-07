@@ -894,7 +894,7 @@ function Business() {
 
         {/* Veterans Discount */}
         <section className="py-4 bg-gradient-to-r from-muted via-card to-muted border-y border-border/30">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-12">
             <div className="flex items-center justify-center gap-3 text-center">
               <span className="text-xl">🇺🇸</span>
               <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 font-bold">
