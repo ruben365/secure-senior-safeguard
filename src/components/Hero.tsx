@@ -52,7 +52,7 @@ const Hero = ({
   return (
     <div
       className={cn(
-        "relative w-full min-h-[65vh] sm:min-h-[75vh] md:min-h-screen lg:min-h-[105vh] xl:min-h-[110vh] flex items-center overflow-hidden hero-mobile",
+        "relative w-full min-h-[65vh] sm:min-h-[75vh] md:min-h-screen flex items-center overflow-hidden hero-mobile",
         className,
       )}
     >
@@ -77,7 +77,7 @@ const Hero = ({
               playsInline
               preload="auto"
               onCanPlay={() => setVideoLoaded(true)}
-              className="absolute inset-0 w-full h-full object-cover brightness-[0.85]"
+              className="absolute inset-0 w-full h-full object-cover brightness-[0.85] saturate-[0.9]"
             >
               <source src={backgroundVideo} type="video/mp4" />
             </video>
@@ -98,12 +98,12 @@ const Hero = ({
               height={1080}
               loading="eager"
               decoding="async"
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover brightness-[0.85] saturate-[0.9]"
             />
           )
         )}
 
-        {/* Simple dark tint for text readability on inner pages */}
+        {/* Navy-purple tint for visual consistency */}
         {!disablePurpleOverlay && <HeroPurpleOverlay />}
       </div>
 

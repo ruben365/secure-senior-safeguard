@@ -5,7 +5,6 @@ import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
 import { SEO } from "@/components/SEO";
 import { PageTransition } from "@/components/PageTransition";
-// NatureAccent removed for performance
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -34,6 +33,7 @@ import {
 } from "@/components/ui/accordion";
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
+import { SectionDivider, MeshBackground } from "@/components/pro";
 
 interface FAQ {
   id: string;
@@ -56,21 +56,21 @@ const faqs: FAQ[] = [
     category: "Getting Started",
     question: "Do I need technical skills to use your services?",
     answer:
-      "Not at all! Our platform is designed for everyone, including those who aren't tech-savvy. We offer free onboarding sessions and 24/7 support to help you get started.",
+      "Not at all! Our platform is designed for everyone, including those who aren't tech-savvy. Every paid plan includes onboarding sessions and 24/7 support to help you get started.",
   },
   {
     id: "gs-3",
     category: "Getting Started",
     question: "What happens after I sign up?",
     answer:
-      "Within minutes, you'll receive a welcome email with your secure access link. Click it to access your personalized dashboard. We'll also send you a getting started guide and offer a free 15-minute onboarding call.",
+      "Within minutes, you'll receive a welcome email with your secure access link. Click it to access your personalized dashboard. We'll also send you a getting started guide and schedule your included 15-minute onboarding call (bundled with every paid plan).",
   },
   {
     id: "gs-4",
     category: "Getting Started",
     question: "Can I try it before I buy?",
     answer:
-      "Yes! We offer a 7-day free trial on all plans. No credit card required. Cancel anytime during the trial at no charge.",
+      "We do not offer free trials. Every plan is paid up front, but every paid plan includes a 7-day money-back guarantee — if you're not satisfied within the first week, request a full refund through your account portal and we'll process it within 5 business days.",
   },
 
   // Family Shield
@@ -239,7 +239,7 @@ const faqs: FAQ[] = [
     category: "Technical Support",
     question: "Do you offer training?",
     answer:
-      "Yes! All business clients receive free onboarding training. Family Shield Premium includes video training library. Custom training sessions available.",
+      "Yes. Onboarding training is included with every business plan. Family Shield Premium includes our video training library. Additional custom training sessions are available as paid add-ons.",
   },
 
   // Account & Access
@@ -336,14 +336,14 @@ const faqs: FAQ[] = [
     category: "Veterans & Seniors",
     question: "Is this service easy for seniors to use?",
     answer:
-      "Absolutely. We specifically designed our platform for seniors with large text, simple navigation, and clear instructions. We also offer free one-on-one training sessions.",
+      "Absolutely. We specifically designed our platform for seniors with large text, simple navigation, and clear instructions. Every paid plan includes one-on-one onboarding sessions to walk you through everything.",
   },
   {
     id: "vs-3",
     category: "Veterans & Seniors",
     question: "Do you offer in-person training for seniors?",
     answer:
-      "Yes, in select areas including Columbus, OH. We offer free in-person training sessions at senior centers and community centers. Contact us to schedule.",
+      "Yes, in select areas including Columbus, OH. We provide paid in-person training sessions at senior centers and community centers — pricing depends on group size and travel. Contact us for a quote.",
   },
   {
     id: "vs-4",
@@ -443,8 +443,12 @@ export default function FAQ() {
           description="Find answers to common questions about InVision Network's AI scam protection, business services, billing, and technical support."
           keywords="FAQ, questions, support, help, InVision Network"
           structuredData={faqStructuredData}
+          breadcrumbs={[
+            { name: "Home", url: "https://www.invisionnetwork.org/" },
+            { name: "FAQ", url: "https://www.invisionnetwork.org/faq" },
+          ]}
         />
-        <Navigation />
+        <Navigation overlay />
 
         <main>
           {/* Hero wrapper for floating stats */}
@@ -465,6 +469,7 @@ export default function FAQ() {
           <div className="hidden lg:block h-14" />
           <div className="lg:hidden h-6" />
 
+          <MeshBackground variant="subtle" withDots>
           <TrustBar />
 
           {/* Platform Guide Section */}
@@ -487,6 +492,8 @@ export default function FAQ() {
               </div>
             </div>
           </section>
+
+          <SectionDivider variant="curve" color="background" />
 
           {/* Search & Filter Section - Redesigned */}
           <section className="py-6 bg-gradient-to-b from-muted/30 to-background">
@@ -528,6 +535,8 @@ export default function FAQ() {
             </div>
           </section>
 
+          <SectionDivider variant="curve" color="background" />
+
           {/* Category Tabs */}
           <section className="py-4 border-y border-border/40 bg-muted/20">
             <div className="container mx-auto px-4">
@@ -557,6 +566,8 @@ export default function FAQ() {
               </div>
             </div>
           </section>
+
+          <SectionDivider variant="curve" color="background" />
 
           {/* FAQ Accordion */}
           <section className="py-4 sm:py-6">
@@ -608,8 +619,10 @@ export default function FAQ() {
             </div>
           </section>
 
+          <SectionDivider variant="curve" color="background" />
+
           {/* Still Have Questions CTA */}
-          <section className="py-12 sm:py-16 relative overflow-hidden">
+          <section className="py-16 md:py-24 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
             <div className="absolute top-10 right-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
             <div className="container mx-auto px-4 relative z-10">
@@ -642,14 +655,17 @@ export default function FAQ() {
             </div>
           </section>
 
+          <SectionDivider variant="curve" color="background" />
+
           {/* AI Image Disclaimer */}
-          <section className="py-12 bg-muted/20">
+          <section className="py-16 bg-muted/20">
             <div className="container mx-auto px-4">
               <div className="max-w-4xl mx-auto">
                 <AIImageDisclaimer />
               </div>
             </div>
           </section>
+          </MeshBackground>
 
           <Footer />
         </main>

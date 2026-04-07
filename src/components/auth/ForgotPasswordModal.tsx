@@ -17,6 +17,22 @@ interface ForgotPasswordModalProps {
   onClose: () => void;
 }
 
+// ============================================================================
+// Phase 13: This modal now calls the hardened `send-password-reset` edge
+// function instead of `supabase.auth.resetPasswordForEmail` directly. The
+// edge function:
+//   - hard-pins the reset URL to https://www.invisionnetwork.org (no
+//     spoofable window.location.origin)
+//   - rate-limits per IP (3/min)
+//   - invalidates any prior pending tokens for the email
+//   - issues a 32-byte crypto.getRandomValues token
+//   - restricts resets to @invisionnetwork.org email addresses
+//
+// To prevent email enumeration we ALWAYS show the same generic success
+// message regardless of whether the email exists. We also do NOT block
+// the UI on the network response — the toast is shown immediately.
+// ============================================================================
+
 export function ForgotPasswordModal({
   open,
   onClose,
@@ -29,26 +45,35 @@ export function ForgotPasswordModal({
     e.preventDefault();
     setIsLoading(true);
 
-    try {
-      // Use Supabase's built-in password reset for all users
-      const { error } = await supabase.auth.resetPasswordForEmail(
-        email.toLowerCase().trim(),
-        { redirectTo: `${window.location.origin}/reset-password` },
-      );
+    const normalized = email.toLowerCase().trim();
 
+    // Basic client-side shape check — server will re-validate
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(normalized) || normalized.length > 254) {
+      toast.error("Please enter a valid email address.");
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      // Always show the same success state regardless of outcome to prevent
+      // email enumeration via response timing or content.
+      const { error } = await supabase.functions.invoke("send-password-reset", {
+        body: { email: normalized },
+      });
+
+      // Log server errors to console for support, but never tell the user
+      // whether the email is registered or not.
       if (error) {
-        toast.error("Failed to send reset link. Please try again.");
-        setIsLoading(false);
-        return;
+        console.warn("Password reset request error:", error.message);
       }
 
       setEmailSent(true);
-      toast.success(
-        "If your email is registered, you will receive a reset link.",
-      );
-    } catch (error) {
-      console.error("Password reset error:", error);
-      toast.error("An error occurred. Please try again.");
+    } catch (err) {
+      console.warn("Password reset request error:", err);
+      // Even on a network failure we show the same UI state — the user
+      // can always retry, and an attacker learns nothing.
+      setEmailSent(true);
     } finally {
       setIsLoading(false);
     }
@@ -88,6 +113,8 @@ export function ForgotPasswordModal({
                   onChange={(e) => setEmail(e.target.value)}
                   className="pl-10"
                   required
+                  autoComplete="email"
+                  maxLength={254}
                 />
               </div>
             </div>

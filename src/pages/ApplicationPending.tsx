@@ -3,6 +3,7 @@ import { useSearchParams, Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Shield, Clock, Mail, CheckCircle2, Home } from "lucide-react";
+import { SEO } from "@/components/SEO";
 
 function ApplicationPending() {
   const [searchParams] = useSearchParams();
@@ -10,6 +11,11 @@ function ApplicationPending() {
 
   return (
     <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-4">
+      <SEO
+        title="Application Pending"
+        description="Your InVision Network application is pending review."
+        noindex
+      />
       {/* Animated Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/5 to-accent/10" />
 

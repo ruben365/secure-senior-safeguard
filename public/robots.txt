@@ -46,3 +46,32 @@ Allow: /
 
 User-agent: LinkedInBot
 Allow: /
+
+# AI Crawlers — allow public content for AI training and discovery
+User-agent: GPTBot
+Allow: /
+Disallow: /admin/
+Disallow: /portal/
+Disallow: /auth
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /admin/
+Disallow: /portal/
+
+User-agent: Anthropic-ai
+Allow: /
+Disallow: /admin/
+Disallow: /portal/
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   Menu,
@@ -9,17 +9,17 @@ import {
   Heart,
   ChevronDown,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { PrefetchLink } from "@/components/PrefetchLink";
 import { ShoppingCart } from "@/components/ShoppingCart";
 import { useAuth } from "@/contexts/AuthContext";
 import { SITE } from "@/config/site";
 import invisionLogo from "@/assets/shield-logo.png";
 import { DonationModal } from "@/components/DonationModal";
+import { AnnouncementBell } from "@/components/AnnouncementBell";
 
 const primaryLinks = [
-  { name: "AI & Business", href: "/business" },
-  { name: "Learn & Train", href: "/training" },
+  { name: "AI", href: "/business" },
+  { name: "Workshops", href: "/training" },
   { name: "Resources", href: "/resources" },
   { name: "About", href: "/about" },
 ];
@@ -32,7 +32,7 @@ const secondaryLinks = [
 
 const allLinks = [...primaryLinks, ...secondaryLinks];
 
-const Navigation = React.memo(() => {
+const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [donateOpen, setDonateOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
@@ -102,27 +102,33 @@ const Navigation = React.memo(() => {
   };
 
   const isActiveLink = (href: string) => {
-    return (
-      location.pathname === href || location.pathname.startsWith(href + "/")
-    );
+    return location.pathname === href || location.pathname.startsWith(href + "/");
   };
 
   const isSecondaryActive = secondaryLinks.some((l) => isActiveLink(l.href));
+
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <>
       {/* Mobile backdrop */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-foreground/40 z-[9998] lg:hidden"
+          className="fixed inset-0 bg-black/60 z-[9998] lg:hidden"
           onClick={() => setMobileMenuOpen(false)}
         />
       )}
 
-      <nav className="sticky top-0 z-[9999] bg-card/95 backdrop-blur-md border-b border-border/40">
+      <nav className={overlay ? "absolute top-0 left-0 right-0 z-[9999] bg-gradient-to-b from-black/60 to-transparent" : `sticky top-0 z-[9999] transition-colors duration-300 ${scrolled ? "bg-[#080d1a]/95 backdrop-blur-md border-b border-white/[0.06]" : "bg-transparent"}`}>
         <div className="container mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
-          <div className="flex items-center justify-between h-[68px]">
-            {/* Logo */}
+          <div className="flex items-center justify-between h-[60px]">
+            {/* Logo — identical to hero */}
             <a
               href="/"
               className="flex items-center gap-2.5 hover:opacity-90 transition-opacity duration-150 flex-shrink-0 no-underline"
@@ -135,19 +141,15 @@ const Navigation = React.memo(() => {
                 height={34}
                 loading="eager"
                 decoding="sync"
-                className="w-[38px] h-[38px] object-contain flex-shrink-0"
+                className="w-[32px] h-[32px] object-contain flex-shrink-0 brightness-0 invert"
               />
               <div className="flex flex-col leading-none min-w-0">
-                <span className="text-[17px] font-extrabold text-foreground tracking-tight">
-                  InVision Network
-                </span>
-                <span className="text-[10px] font-bold text-muted-foreground hidden sm:block tracking-widest uppercase">
-                  AI Scam Protection
-                </span>
+                <span className="text-[15px] font-extrabold text-white tracking-tight">InVision Network</span>
+                <span className="text-[10px] font-bold text-gray-300 hidden sm:block tracking-widest uppercase">AI Scam Protection</span>
               </div>
             </a>
 
-            {/* Desktop Navigation — centered */}
+            {/* Desktop Links — identical to hero */}
             <div className="hidden lg:flex items-center gap-1">
               {primaryLinks.map((link) => {
                 const isActive = isActiveLink(link.href);
@@ -157,8 +159,8 @@ const Navigation = React.memo(() => {
                     to={link.href}
                     className={`relative text-[15px] px-3 py-2 rounded-md transition-colors duration-150 ${
                       isActive
-                        ? "text-primary font-bold bg-primary/5"
-                        : "text-foreground/80 font-semibold hover:text-foreground hover:bg-muted/50"
+                        ? "text-orange-400 font-bold bg-orange-500/10"
+                        : "text-gray-300 font-semibold hover:text-white hover:bg-white/10"
                     }`}
                   >
                     {link.name}
@@ -169,14 +171,15 @@ const Navigation = React.memo(() => {
               {/* More dropdown */}
               <div className="relative" ref={moreRef}>
                 <button
+                  type="button"
                   onClick={() => setMoreOpen(!moreOpen)}
-                  aria-haspopup="true"
+                  aria-haspopup="menu"
                   aria-expanded={moreOpen}
                   aria-label="More navigation links"
                   className={`flex items-center gap-1 text-[15px] px-3 py-2 rounded-md transition-colors duration-150 ${
                     isSecondaryActive
-                      ? "text-primary font-bold bg-primary/5"
-                      : "text-foreground/80 font-semibold hover:text-foreground hover:bg-muted/50"
+                      ? "text-orange-400 font-bold bg-orange-500/10"
+                      : "text-gray-300 font-semibold hover:text-white hover:bg-white/10"
                   }`}
                 >
                   More
@@ -188,8 +191,13 @@ const Navigation = React.memo(() => {
                 {moreOpen && (
                   <div
                     role="menu"
-                    aria-label="More links"
-                    className="absolute top-full left-0 mt-1 w-44 bg-card rounded-lg border border-border shadow-lg py-1 z-[10002]"
+                    aria-label="Secondary navigation"
+                    className="absolute top-full left-0 mt-2 w-44 rounded-lg border border-white/8 shadow-lg py-1 z-50 overflow-hidden"
+                    style={{
+                      background: "rgba(20, 20, 28, 0.75)",
+                      backdropFilter: "blur(16px)",
+                      WebkitBackdropFilter: "blur(16px)",
+                    }}
                   >
                     {secondaryLinks.map((link) => {
                       const isActive = isActiveLink(link.href);
@@ -198,10 +206,10 @@ const Navigation = React.memo(() => {
                           key={link.name}
                           to={link.href}
                           role="menuitem"
-                          className={`block px-4 py-2.5 text-sm transition-colors ${
+                          className={`block px-4 py-2 text-sm transition-colors ${
                             isActive
-                              ? "text-primary font-semibold bg-primary/5"
-                              : "text-foreground hover:bg-muted/60"
+                              ? "text-orange-400 font-semibold"
+                              : "text-gray-400 hover:text-white"
                           }`}
                           onClick={() => setMoreOpen(false)}
                         >
@@ -214,27 +222,30 @@ const Navigation = React.memo(() => {
               </div>
             </div>
 
-            {/* Right Side — streamlined */}
+            {/* Right Side — identical to hero */}
             <div className="flex items-center gap-2">
+              {/* Announcements bell */}
+              <div className="hidden lg:block">
+                <AnnouncementBell />
+              </div>
+
               <ShoppingCart />
 
-              {/* Phone — icon only on smaller desktops, with number on xl */}
+              {/* Phone */}
               <a
                 href={SITE.phone.tel}
-                className="hidden lg:flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors duration-150 no-underline px-2 py-1.5 rounded-md hover:bg-muted/50"
+                className="hidden lg:flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors duration-150 no-underline px-2 py-1.5 rounded-md hover:bg-white/10"
                 aria-label={`Call us at ${SITE.phone.display}`}
               >
                 <Phone className="w-4 h-4" />
-                <span className="hidden xl:inline text-sm font-medium">
-                  {SITE.phone.display}
-                </span>
+                <span className="hidden xl:inline text-sm font-medium">{SITE.phone.display}</span>
               </a>
 
-              {/* Donate — subtle icon button */}
+              {/* Donate */}
               <button
                 type="button"
                 onClick={() => setDonateOpen(true)}
-                className="hidden lg:flex items-center gap-1.5 text-sm font-medium px-2.5 py-1.5 rounded-md text-muted-foreground hover:text-primary hover:bg-primary/5 transition-colors"
+                className="hidden lg:flex items-center gap-1.5 text-sm font-medium px-2.5 py-1.5 rounded-md text-gray-400 hover:text-orange-400 hover:bg-orange-500/10 transition-colors"
                 aria-label="Donate"
               >
                 <Heart className="w-4 h-4" />
@@ -242,119 +253,117 @@ const Navigation = React.memo(() => {
               </button>
 
               {/* Divider */}
-              <div className="hidden lg:block w-px h-6 bg-border/60 mx-1" />
+              <div className="hidden lg:block w-px h-6 bg-gray-700 mx-1" />
 
-              {/* Login / Dashboard */}
-              <Button
-                asChild
-                size="sm"
-                className="h-9 px-5 text-sm text-primary-foreground font-semibold rounded-lg shadow-sm"
-              >
-                {isAdminOrStaff ? (
-                  <Link
-                    to="/admin"
-                    aria-label="Go to Dashboard"
-                    className="flex items-center gap-1.5"
-                  >
-                    <LayoutDashboard className="h-4 w-4" />
-                    Dashboard
-                  </Link>
-                ) : (
-                  <Link to="/portal" aria-label="Login to your account">
-                    Login
-                  </Link>
-                )}
-              </Button>
+              {/* Login / Dashboard — pill shape, glow, identical to hero */}
+              {isAdminOrStaff ? (
+                <Link
+                  to="/admin"
+                  aria-label="Go to Dashboard"
+                  className="flex items-center gap-1.5 h-9 px-6 text-sm font-semibold rounded-full bg-[#d96c4a] hover:bg-[#b8552f] text-white transition-all shadow-[0_0_15px_rgba(217,108,74,0.25)]"
+                >
+                  <LayoutDashboard className="h-4 w-4" />
+                  Dashboard
+                </Link>
+              ) : (
+                <Link
+                  to="/portal"
+                  aria-label="Login to your account"
+                  className="h-9 px-6 text-sm font-semibold rounded-full bg-[#d96c4a] hover:bg-[#b8552f] text-white transition-all shadow-[0_0_15px_rgba(217,108,74,0.25)] inline-flex items-center"
+                >
+                  Login
+                </Link>
+              )}
 
               {/* Mobile menu button */}
               <button
+                type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 rounded-lg hover:bg-muted/60 transition-colors duration-150 min-w-[44px] min-h-[44px] flex items-center justify-center"
-                aria-label="Toggle menu"
+                className="lg:hidden p-2 rounded-lg hover:bg-white/10 transition-colors duration-150 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+                aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-navigation"
               >
                 {mobileMenuOpen ? (
-                  <X className="h-5 w-5 text-foreground" />
+                  <X className="h-5 w-5 text-white" />
                 ) : (
-                  <Menu className="h-5 w-5 text-foreground" />
+                  <Menu className="h-5 w-5 text-white" />
                 )}
               </button>
             </div>
           </div>
         </div>
+      </nav>
 
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden fixed top-[68px] left-0 right-0 bottom-0 bg-card border-t border-border z-[10001] overflow-y-auto overscroll-contain pb-[calc(env(safe-area-inset-bottom)+1.25rem)] [-webkit-overflow-scrolling:touch]">
-            <div className="container mx-auto px-4 py-4 space-y-1">
-              {allLinks.map((link) => {
-                const isActive = isActiveLink(link.href);
-                return (
-                  <Link
-                    key={link.name}
-                    to={link.href}
-                    className={`block text-[15px] transition-colors duration-150 font-medium px-4 py-3 rounded-lg ${
-                      isActive
-                        ? "text-primary font-semibold bg-primary/5"
-                        : "text-foreground/80 hover:text-foreground hover:bg-muted/40"
-                    }`}
-                    onClick={() => {
-                      setMobileMenuOpen(false);
-                      scrollToTop();
-                    }}
-                  >
-                    {link.name}
-                  </Link>
-                );
-              })}
-
-              {/* Mobile Actions */}
-              <div className="pt-4 border-t border-border mt-3 space-y-3">
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="w-full h-11 text-[15px] font-semibold border-primary/20 text-primary hover:bg-primary/5"
+      {/* Mobile Menu — outside nav for proper stacking */}
+      {mobileMenuOpen && (
+        <div id="mobile-navigation" role="dialog" aria-modal="true" aria-label="Main navigation" className="lg:hidden fixed top-[60px] left-0 right-0 bottom-0 border-t border-gray-800 z-[10001] overflow-y-auto overscroll-contain pb-[calc(env(safe-area-inset-bottom)+1.25rem)] [-webkit-overflow-scrolling:touch] bg-[#080d1a]">
+          <div className="container mx-auto px-4 py-4 space-y-1">
+            {allLinks.map((link) => {
+              const isActive = isActiveLink(link.href);
+              return (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className={`block text-[15px] transition-colors duration-150 font-medium px-4 py-3 rounded-lg ${
+                    isActive
+                      ? "text-orange-400 font-semibold bg-orange-500/10"
+                      : "text-gray-300 hover:text-white hover:bg-white/10"
+                  }`}
                   onClick={() => {
-                    setDonateOpen(true);
                     setMobileMenuOpen(false);
+                    scrollToTop();
                   }}
                 >
-                  <Heart className="h-4 w-4 mr-2" />
-                  Donate
-                </Button>
+                  {link.name}
+                </Link>
+              );
+            })}
 
-                <Button
-                  asChild
-                  className="w-full h-11 text-[15px] font-semibold text-primary-foreground rounded-lg"
-                >
-                  {isAdminOrStaff ? (
-                    <Link
-                      to="/admin"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="flex items-center justify-center gap-2"
-                    >
-                      <LayoutDashboard className="h-4 w-4" />
-                      Dashboard
-                    </Link>
-                  ) : (
-                    <Link to="/portal" onClick={() => setMobileMenuOpen(false)}>
-                      Login
-                    </Link>
-                  )}
-                </Button>
+            <div className="pt-4 border-t border-gray-800 mt-3 space-y-3">
+              <button
+                type="button"
+                className="w-full h-11 text-[15px] font-semibold border border-orange-500/30 text-orange-400 hover:bg-orange-500/10 rounded-lg flex items-center justify-center gap-2 transition-colors"
+                onClick={() => {
+                  setDonateOpen(true);
+                  setMobileMenuOpen(false);
+                }}
+              >
+                <Heart className="h-4 w-4" />
+                Donate
+              </button>
 
-                <a
-                  href={SITE.phone.tel}
-                  className="flex items-center justify-center gap-2 text-[15px] text-muted-foreground font-medium px-4 py-3 rounded-lg hover:bg-muted/40 transition-colors duration-150"
+              {isAdminOrStaff ? (
+                <Link
+                  to="/admin"
                   onClick={() => setMobileMenuOpen(false)}
+                  className="w-full h-11 text-[15px] font-semibold rounded-lg bg-[#d96c4a] hover:bg-[#b8552f] text-white flex items-center justify-center gap-2 transition-colors"
                 >
-                  <Phone className="h-4 w-4" />
-                  {SITE.phone.display}
-                </a>
-              </div>
+                  <LayoutDashboard className="h-4 w-4" />
+                  Dashboard
+                </Link>
+              ) : (
+                <Link
+                  to="/portal"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full h-11 text-[15px] font-semibold rounded-lg bg-[#d96c4a] hover:bg-[#b8552f] text-white flex items-center justify-center transition-colors"
+                >
+                  Login
+                </Link>
+              )}
+
+              <a
+                href={SITE.phone.tel}
+                className="flex items-center justify-center gap-2 text-[15px] text-gray-400 font-medium px-4 py-3 rounded-lg hover:bg-white/10 transition-colors duration-150"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Phone className="h-4 w-4" />
+                {SITE.phone.display}
+              </a>
             </div>
           </div>
-        )}
-      </nav>
+        </div>
+      )}
 
       <DonationModal
         open={donateOpen}

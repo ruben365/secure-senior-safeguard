@@ -24,6 +24,19 @@ interface SuspiciousPattern {
   timestamp: string;
 }
 
+// Constant-time string comparison so the service-role key check below
+// doesn't leak character-by-character timing data. Length is not secret.
+function constantTimeEqual(a: string, b: string): boolean {
+  if (a.length !== b.length) return false;
+  const aBytes = new TextEncoder().encode(a);
+  const bBytes = new TextEncoder().encode(b);
+  let mismatch = 0;
+  for (let i = 0; i < aBytes.length; i++) {
+    mismatch |= aBytes[i] ^ bBytes[i];
+  }
+  return mismatch === 0;
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -31,6 +44,57 @@ serve(async (req) => {
 
   try {
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
+    // ====================================================================
+    // AUTHORIZATION — admin user OR service-role token (cron job).
+    // This function returns sensitive forensic data (failed login IPs,
+    // role-change history, mass-export signals) so it MUST NOT be public.
+    // ====================================================================
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return new Response(
+        JSON.stringify({ error: "Authorization header required" }),
+        {
+          status: 401,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        },
+      );
+    }
+
+    const callerToken = authHeader.replace("Bearer ", "");
+
+    if (!constantTimeEqual(callerToken, supabaseServiceKey)) {
+      const { data: userData, error: userError } = await supabase.auth.getUser(
+        callerToken,
+      );
+      if (userError || !userData?.user) {
+        return new Response(
+          JSON.stringify({ error: "Invalid or expired token" }),
+          {
+            status: 401,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          },
+        );
+      }
+
+      const { data: isAdmin, error: roleError } = await supabase.rpc(
+        "has_role",
+        { user_id: userData.user.id, role: "admin" },
+      );
+
+      if (roleError || !isAdmin) {
+        console.warn(
+          `[security-alert] FORBIDDEN attempt by ${userData.user.email} (${userData.user.id})`,
+        );
+        return new Response(
+          JSON.stringify({ error: "Forbidden — admin role required" }),
+          {
+            status: 403,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          },
+        );
+      }
+    }
 
     // Detect suspicious patterns
     const patterns: SuspiciousPattern[] = [];

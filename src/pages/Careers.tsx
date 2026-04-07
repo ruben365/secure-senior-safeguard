@@ -29,6 +29,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AIImageDisclaimer } from "@/components/AIImageDisclaimer";
+import { SectionDivider, MeshBackground } from "@/components/pro";
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 import { JOB_POSITIONS, DEPARTMENTS } from "@/config/jobPositions";
@@ -123,7 +124,7 @@ function Careers() {
         title="Careers - Join Our Mission"
         description="Join InVision Network and help protect families from AI-powered scams. Remote-first culture, competitive benefits, meaningful work. Open positions in engineering, support, design, and more."
       />
-      <Navigation />
+      <Navigation overlay />
 
       {/* Hero */}
       <div className="relative">
@@ -176,6 +177,8 @@ function Careers() {
           </div>
         </div>
       </section>
+
+      <SectionDivider variant="wave" color="muted" />
 
       {/* Open Positions */}
       <section className="py-20 relative overflow-hidden">
@@ -232,11 +235,12 @@ function Careers() {
       </section>
 
       {/* Benefits Grid */}
+      <MeshBackground variant="subtle" withDots>
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
-            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+            <span className="frosted-pill mb-6">
               <Heart className="w-3.5 h-3.5 text-primary" />
               <span className="text-primary">Benefits</span>
             </span>
@@ -267,13 +271,16 @@ function Careers() {
         </div>
       </section>
 
+      </MeshBackground>
+
+
       {/* Application Process */}
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-muted/30" />
         <div className="absolute bottom-10 left-[15%] w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
-            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+            <span className="frosted-pill mb-6">
               <Target className="w-3.5 h-3.5 text-primary" />
               <span className="text-primary">How to Apply</span>
             </span>
@@ -314,7 +321,7 @@ function Careers() {
         <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
-            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+            <span className="frosted-pill mb-6">
               <Users className="w-3.5 h-3.5 text-primary" />
               <span className="text-primary">Our Culture</span>
             </span>
@@ -376,6 +383,7 @@ function Careers() {
           </div>
         </div>
       </section>
+
 
       <section className="py-12 bg-muted/20">
         <AIImageDisclaimer />

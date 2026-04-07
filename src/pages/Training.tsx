@@ -6,6 +6,7 @@ import { BookingModal } from "@/components/BookingModal";
 import { EmbeddedPaymentModal } from "@/components/payment/EmbeddedPaymentModal";
 import { TrainingPaymentModal } from "@/components/TrainingPaymentModal";
 import Hero from "@/components/Hero";
+import { HeroWorkshops } from "@/components/HeroWorkshops";
 import { PageTransition } from "@/components/PageTransition";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -61,7 +62,7 @@ import { SEO } from "@/components/SEO";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 import { usePrerenderBlocker } from "@/contexts/PrerenderContext";
-// NatureAccent removed for performance
+import { SectionDivider, MeshBackground } from "@/components/pro";
 
 import seniorCouple from "@/assets/senior-couple-active.jpg";
 
@@ -119,7 +120,7 @@ const PremiumTrainingCard = memo(
         {/* Floating badge */}
         <div className="absolute -top-0 left-1/2 -translate-x-1/2 z-30">
           <span
-            className={`inline-flex items-center gap-1.5 px-5 py-2 rounded-full text-[11px] font-black uppercase tracking-[0.15em] whitespace-nowrap border shadow-lg ${
+            className={`inline-flex items-center gap-1.5 px-5 py-2 rounded-full text-xs font-black uppercase tracking-[0.15em] whitespace-nowrap border shadow-lg ${
               isPopular
                 ? "bg-gradient-to-r from-primary via-accent to-primary text-white border-primary/40 shadow-[0_4px_20px_hsl(var(--primary)/0.35)]"
                 : "bg-card text-primary border-primary/25 shadow-md"
@@ -173,11 +174,11 @@ const PremiumTrainingCard = memo(
 
               {/* Meta chips */}
               <div className="flex items-center justify-center gap-2 mb-4">
-                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-muted/60 border border-border/40 text-[11px] font-semibold text-muted-foreground">
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-muted/60 border border-border/40 text-xs font-semibold text-muted-foreground">
                   <ClockIcon className="w-3 h-3" />
                   {plan.duration}
                 </span>
-                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-muted/60 border border-border/40 text-[11px] font-semibold text-muted-foreground">
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-muted/60 border border-border/40 text-xs font-semibold text-muted-foreground">
                   <Users className="w-3 h-3" />
                   {plan.size}
                 </span>
@@ -280,7 +281,7 @@ const ScamExampleCard = ({
         </span>
         <div className="space-y-4">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground font-bold mb-2">
+            <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground font-bold mb-2">
               What They Received
             </p>
             <p className="text-foreground italic leading-relaxed text-sm">
@@ -288,7 +289,7 @@ const ScamExampleCard = ({
             </p>
           </div>
           <div>
-            <p className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground font-bold mb-2">
+            <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground font-bold mb-2">
               Our Analysis
             </p>
             <p className="text-muted-foreground leading-relaxed text-sm">
@@ -296,7 +297,7 @@ const ScamExampleCard = ({
             </p>
           </div>
           <div className="pt-4 border-t border-border/50">
-            <p className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground font-bold mb-2">
+            <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground font-bold mb-2">
               Amount Saved
             </p>
             <p className="text-3xl font-black text-primary">
@@ -567,61 +568,24 @@ function LearnAndTrain() {
           title="AI Scam Protection Training"
           description="Comprehensive AI scam protection training for families and seniors. Learn to spot deepfakes, phishing, and AI-powered scams."
           keywords="AI scam training, deepfake detection training, senior cybersecurity, phishing awareness"
+          breadcrumbs={[
+            { name: "Home", url: "https://www.invisionnetwork.org/" },
+            { name: "Training", url: "https://www.invisionnetwork.org/training" },
+          ]}
           structuredData={{
             "@context": "https://schema.org",
             "@type": "EducationalOrganization",
             name: "InVision Network Training Academy",
             description:
               "Comprehensive AI scam protection training for families, seniors, and businesses",
-            url: "https://invisionnetwork.org/training",
+            url: "https://www.invisionnetwork.org/training",
             telephone: SITE.phone.e164,
           }}
         />
-        <Navigation />
+        <Navigation overlay />
 
-        {/* Hero Section */}
-        <div className="relative">
-          <Hero
-            backgroundImages={trainingHeroImages}
-            headline=""
-            subheadline=""
-            showScrollIndicator={true}
-          >
-            <div className="text-center md:text-left mb-4 sm:mb-6">
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3 glow-text">
-                <RotatingHeadlines headlines={trainingHeadlines} className="" />
-              </h1>
-              <p className="text-lg md:text-xl text-white/90 max-w-3xl">
-                Expert-led workshops & instant file scanning for families and
-                seniors
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center md:justify-start">
-              <Button
-                onClick={() =>
-                  document
-                    .getElementById("training")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                size="xl"
-              >
-                <Shield className="w-5 h-5 mr-2" />
-                Learn & Train Workshops
-              </Button>
-              <Button
-                asChild
-                size="xl"
-                variant="heroOutline"
-              >
-                <Link to="/training/ai-analysis">
-                  <FileCheck className="w-5 h-5 mr-2" />
-                  AI Analysis & Secure Scan
-                </Link>
-              </Button>
-            </div>
-          </Hero>
-          <HeroFloatingStats />
-        </div>
+        {/* Hero Section — Dark cinematic theme */}
+        <HeroWorkshops />
 
         {/* ══════════ LIVE THREAT TICKER ══════════ */}
         <div className="bg-foreground text-background py-3 overflow-hidden">
@@ -637,8 +601,8 @@ function LearnAndTrain() {
         </div>
 
         {/* ══════════ SECTION 1: WHY FAMILIES TRUST US ══════════ */}
-        <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
+        <section className="py-16 md:py-24 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background dot-grid-bg" />
           
           <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
@@ -670,7 +634,7 @@ function LearnAndTrain() {
                   {/* Graphic stat callout */}
                   <div className="mt-auto pt-3 border-t border-border/50">
                     <p className="text-2xl font-black text-primary">{item.stat}</p>
-                    <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">{item.statLabel}</p>
+                    <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">{item.statLabel}</p>
                   </div>
                 </div>
               ))}
@@ -752,6 +716,8 @@ function LearnAndTrain() {
           </div>
         </section>
 
+        <SectionDivider variant="wave" color="muted" />
+
         {/* ══════════ GRADIENT DIVIDER ══════════ */}
         <div className="h-1.5 bg-gradient-to-r from-primary via-accent to-primary" />
 
@@ -803,7 +769,7 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 3: SCAM PREVENTION WORKSHOPS ══════════ */}
-        <section id="training" className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
+        <section id="training" className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
           <div className="absolute top-20 right-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-20 left-0 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-3xl pointer-events-none" />
@@ -852,7 +818,7 @@ function LearnAndTrain() {
                 <div key={i} className="bg-muted/50 border border-border/40 rounded-xl p-3 text-center">
                   <stat.icon className="w-5 h-5 text-primary mx-auto mb-1" />
                   <p className="text-xl font-black text-foreground">{stat.value}</p>
-                  <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">{stat.label}</p>
+                  <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">{stat.label}</p>
                 </div>
               ))}
             </div>
@@ -916,7 +882,7 @@ function LearnAndTrain() {
                 </div>
                 <div className="text-right">
                   <p className="text-3xl sm:text-4xl font-black text-primary">{'<'}2 min</p>
-                  <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">AI-Powered Speed</p>
+                  <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">AI-Powered Speed</p>
                 </div>
               </div>
             </div>
@@ -924,7 +890,8 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 5: THREAT ANALYSIS ══════════ */}
-        <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
+        <MeshBackground variant="subtle" withOrbs>
+        <section className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
           <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
@@ -981,15 +948,14 @@ function LearnAndTrain() {
               ].map((stat, i) => (
                 <div key={i} className="bg-card border border-border/60 rounded-xl p-4 text-center">
                   <p className="text-2xl sm:text-3xl font-black text-primary">{stat.value}</p>
-                  <p className="text-[10px] sm:text-xs uppercase tracking-widest text-muted-foreground font-bold">{stat.label}</p>
+                  <p className="text-[11px] sm:text-xs uppercase tracking-widest text-muted-foreground font-bold">{stat.label}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ══════════ GRADIENT DIVIDER ══════════ */}
-        <div className="h-1.5 bg-gradient-to-r from-accent via-primary to-accent" />
+        </MeshBackground>
 
         {/* ══════════ SECTION 6: AI PROFESSIONAL TRAINING ══════════ */}
         <section id="ai-pro-training" className="py-10 sm:py-16 md:py-20 bg-muted/20">
@@ -1044,8 +1010,8 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 7: SECURE YOUR FAMILY ══════════ */}
-        <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
+        <section className="py-16 md:py-24 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background dot-grid-bg" />
           <div className="absolute bottom-20 right-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
             <div className="text-center mb-14">
@@ -1087,7 +1053,7 @@ function LearnAndTrain() {
                 {/* Danger stat */}
                 <div className="mt-6 p-4 bg-destructive/5 rounded-xl border border-destructive/10 text-center">
                   <p className="text-2xl font-black text-destructive">$28.4B</p>
-                  <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Lost to scams in 2024 (FTC)</p>
+                  <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">Lost to scams in 2024 (FTC)</p>
                 </div>
               </div>
 
@@ -1116,7 +1082,7 @@ function LearnAndTrain() {
                 {/* Protection stat */}
                 <div className="mt-6 p-4 bg-primary/5 rounded-xl border border-primary/10 text-center">
                   <p className="text-2xl font-black text-primary">$1.2M+</p>
-                  <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Saved for our families</p>
+                  <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">Saved for our families</p>
                 </div>
               </div>
             </div>
@@ -1205,7 +1171,7 @@ function LearnAndTrain() {
           <section className="py-10 sm:py-16 md:py-20 bg-background">
             <div className="container mx-auto px-4 sm:px-6 lg:px-12">
               <div className="text-center mb-14">
-                <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
+                <span className="inline-block text-xs uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
                   Testimonials
                 </span>
                 <h2 className="text-3xl md:text-4xl font-black text-foreground mb-3">

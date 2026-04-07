@@ -21,12 +21,8 @@ export const ScrollToTop = forwardRef<HTMLDivElement>((_props, _ref) => {
         }
       });
     } else {
-      requestAnimationFrame(() => {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-      });
+      // Instant scroll on route change — smooth scroll causes visible jank
+      window.scrollTo(0, 0);
     }
   }, [pathname, hash]);
 

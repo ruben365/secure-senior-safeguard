@@ -20,9 +20,9 @@ import { SITE } from "@/config/site";
 
 const popularPages = [
   { icon: Home, label: "Home", desc: "Back to the main page", path: "/" },
-  { icon: Briefcase, label: "AI for Business", desc: "Enterprise security solutions", path: "/business" },
+  { icon: Briefcase, label: "AI", desc: "Enterprise security solutions", path: "/business" },
   { icon: Shield, label: "Family Protection", desc: "Training plans and pricing", path: "/training" },
-  { icon: BookOpen, label: "Resources", desc: "Free guides and tools", path: "/resources" },
+  { icon: BookOpen, label: "Resources", desc: "Guides, e-books, and tools", path: "/resources" },
   { icon: Phone, label: "Contact Us", desc: "Talk to our team", path: "/contact" },
 ];
 

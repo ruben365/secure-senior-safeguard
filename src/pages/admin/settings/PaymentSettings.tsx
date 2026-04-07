@@ -15,13 +15,11 @@ const PaymentSettings = () => {
 
   const [testKeys, setTestKeys] = useState({
     publishable: "pk_test_...",
-    secret: "sk_test_...",
     webhook: "whsec_...",
   });
 
   const [liveKeys, setLiveKeys] = useState({
     publishable: "pk_live_...",
-    secret: "sk_live_...",
     webhook: "whsec_...",
   });
 
@@ -39,7 +37,7 @@ const PaymentSettings = () => {
     taxLabel: "Sales Tax",
   });
 
-  const webhookUrl = "https://invisionnetwork.org/api/stripe/webhook";
+  const webhookUrl = "https://www.invisionnetwork.org/api/stripe/webhook";
 
   const handleTestConnection = () => {
     toast.success("Stripe connection test successful!");
@@ -137,19 +135,9 @@ const PaymentSettings = () => {
             />
           </div>
 
-          <div className="space-y-2">
-            <Label>Secret Key</Label>
-            <Input
-              type="password"
-              value={mode === "test" ? testKeys.secret : liveKeys.secret}
-              onChange={(e) =>
-                mode === "test"
-                  ? setTestKeys({ ...testKeys, secret: e.target.value })
-                  : setLiveKeys({ ...liveKeys, secret: e.target.value })
-              }
-              placeholder={`sk_${mode}_...`}
-            />
-          </div>
+          <p className="text-sm text-muted-foreground p-3 bg-muted rounded-lg">
+            Secret keys are configured server-side via environment variables for security. Never enter them in the browser.
+          </p>
         </div>
       </div>
 

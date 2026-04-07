@@ -13,6 +13,39 @@ const logStep = (step: string, details?: unknown) => {
   console.log(`[${timestamp}] [VERIFY-PAYMENT-LINK] ${step}${detailsStr}`);
 };
 
+// ============================================================================
+// Per-IP rate limit (30 / minute) — this endpoint is polled by the QR
+// payment success page so legitimate clients hit it more than once. Cap is
+// generous but still blocks enumeration of session_id values against Stripe.
+// ============================================================================
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT = 30;
+const RATE_WINDOW_MS = 60 * 1000;
+
+function checkRateLimit(identifier: string): {
+  allowed: boolean;
+  retryAfter?: number;
+} {
+  const now = Date.now();
+  const record = rateLimitMap.get(identifier);
+  if (!record || now > record.resetTime) {
+    rateLimitMap.set(identifier, { count: 1, resetTime: now + RATE_WINDOW_MS });
+    return { allowed: true };
+  }
+  if (record.count >= RATE_LIMIT) {
+    return {
+      allowed: false,
+      retryAfter: Math.ceil((record.resetTime - now) / 1000),
+    };
+  }
+  record.count++;
+  return { allowed: true };
+}
+
+// Stripe ID prefixes — anything not matching these patterns is a probe.
+const SESSION_ID_RE = /^cs_[A-Za-z0-9_]+$/;
+const PAYMENT_LINK_ID_RE = /^plink_[A-Za-z0-9]+$/;
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -20,6 +53,31 @@ serve(async (req) => {
 
   const requestId = crypto.randomUUID().slice(0, 8);
   logStep(`Request ${requestId} - Verification started`);
+
+  // Per-IP rate limit
+  const clientIp =
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    req.headers.get("x-real-ip") ||
+    "unknown";
+
+  const rateCheck = checkRateLimit(clientIp);
+  if (!rateCheck.allowed) {
+    return new Response(
+      JSON.stringify({
+        error: "Too many requests. Please try again shortly.",
+        retryAfter: rateCheck.retryAfter,
+        requestId,
+      }),
+      {
+        status: 429,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+          "Retry-After": String(rateCheck.retryAfter),
+        },
+      },
+    );
+  }
 
   try {
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
@@ -33,14 +91,35 @@ serve(async (req) => {
     const body = await req.json();
     const { paymentLinkId, sessionId } = body;
 
+    if (!paymentLinkId && !sessionId) {
+      throw new Error("paymentLinkId or sessionId required");
+    }
+
+    // Validate ID formats before sending anything to Stripe so we don't burn
+    // API quota / leak existence info on probing requests.
+    if (sessionId !== undefined && sessionId !== null) {
+      if (
+        typeof sessionId !== "string" ||
+        sessionId.length > 100 ||
+        !SESSION_ID_RE.test(sessionId)
+      ) {
+        throw new Error("Invalid sessionId format");
+      }
+    }
+    if (paymentLinkId !== undefined && paymentLinkId !== null) {
+      if (
+        typeof paymentLinkId !== "string" ||
+        paymentLinkId.length > 100 ||
+        !PAYMENT_LINK_ID_RE.test(paymentLinkId)
+      ) {
+        throw new Error("Invalid paymentLinkId format");
+      }
+    }
+
     logStep(`Request ${requestId} - Checking payment`, {
       paymentLinkId: paymentLinkId?.slice(0, 10) + "...",
       sessionId: sessionId?.slice(0, 10) + "...",
     });
-
-    if (!paymentLinkId && !sessionId) {
-      throw new Error("paymentLinkId or sessionId required");
-    }
 
     // If we have a session ID, check it directly
     if (sessionId) {
@@ -82,7 +161,7 @@ serve(async (req) => {
       });
 
       const paidSession = sessions.data.find(
-        (s: any) => s.payment_status === "paid",
+        (s) => s.payment_status === "paid",
       );
 
       if (paidSession) {

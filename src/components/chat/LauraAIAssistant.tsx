@@ -1,3 +1,4 @@
+// Laura AI Assistant Component
 import { useEffect, useRef, useState, forwardRef } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -84,7 +85,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
       label: "Training",
       description: "Learn to stay protected",
       href: "/training",
-      color: "from-purple-500 to-violet-500",
+      color: "from-orange-500 to-[#d96c4a]",
     },
     {
       icon: Mail,

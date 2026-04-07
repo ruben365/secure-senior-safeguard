@@ -6,15 +6,130 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
+// ============================================================================
+// Constant-time string comparison. Used for comparing the bearer token
+// against the service role key — `===` would short-circuit at the first
+// mismatching byte and leak length / prefix information to a network
+// timing observer.
+// ============================================================================
+function constantTimeEqual(a: string, b: string): boolean {
+  if (typeof a !== "string" || typeof b !== "string") return false;
+  if (a.length !== b.length) return false;
+  let mismatch = 0;
+  for (let i = 0; i < a.length; i++) {
+    mismatch |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  }
+  return mismatch === 0;
+}
+
+// ============================================================================
+// Per-IP rate limit (10 / min). Even with auth, the watchdog issues queries
+// against system_heartbeats and may send admin alert emails — that's a real
+// cost and a moderate cap is appropriate.
+// ============================================================================
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT = 10;
+const RATE_WINDOW_MS = 60 * 1000;
+
+function checkRateLimit(ip: string): { allowed: boolean; retryAfter?: number } {
+  const now = Date.now();
+  const record = rateLimitMap.get(ip);
+  if (!record || now > record.resetTime) {
+    rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_WINDOW_MS });
+    return { allowed: true };
+  }
+  if (record.count >= RATE_LIMIT) {
+    return {
+      allowed: false,
+      retryAfter: Math.ceil((record.resetTime - now) / 1000),
+    };
+  }
+  record.count++;
+  return { allowed: true };
+}
+
+function escapeHtml(s: string): string {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
+  const clientIP =
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    req.headers.get("x-real-ip") ||
+    "unknown";
+
+  const rateCheck = checkRateLimit(clientIP);
+  if (!rateCheck.allowed) {
+    return new Response(
+      JSON.stringify({ error: "Too many requests" }),
+      {
+        status: 429,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+          "Retry-After": String(rateCheck.retryAfter),
+        },
+      },
+    );
+  }
+
   try {
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    const watchdogSecret = Deno.env.get("HEARTBEAT_WATCHDOG_SECRET");
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
+
+    // ====================================================================
+    // AUTH: This endpoint reads the full system_heartbeats table (which
+    // contains internal service names + error logs) and can fire admin
+    // alert emails. It must NOT be callable by unauthenticated traffic.
+    //
+    // Accept either:
+    //   1. Authorization: Bearer <SERVICE_ROLE_KEY>  (Supabase cron / scripts)
+    //   2. X-Watchdog-Secret: <HEARTBEAT_WATCHDOG_SECRET>  (external monitor)
+    //
+    // Both compared in constant time. Fails closed.
+    // ====================================================================
+    let authorized = false;
+
+    const authHeader = req.headers.get("Authorization");
+    if (authHeader?.startsWith("Bearer ")) {
+      const token = authHeader.slice("Bearer ".length).trim();
+      if (serviceRoleKey && constantTimeEqual(token, serviceRoleKey)) {
+        authorized = true;
+      }
+    }
+
+    if (!authorized) {
+      const provided = req.headers.get("x-watchdog-secret") ?? "";
+      if (
+        watchdogSecret && provided && constantTimeEqual(provided, watchdogSecret)
+      ) {
+        authorized = true;
+      }
+    }
+
+    if (!authorized) {
+      console.warn(
+        `[heartbeat-watchdog] unauthorized call from ${clientIP}`,
+      );
+      return new Response(
+        JSON.stringify({ error: "Unauthorized" }),
+        {
+          status: 401,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        },
+      );
+    }
 
     const supabase = createClient(supabaseUrl, serviceRoleKey);
 
@@ -28,7 +143,6 @@ Deno.serve(async (req) => {
       return new Response(
         JSON.stringify({
           error: "Failed to check heartbeats",
-          details: checkError.message,
         }),
         {
           status: 500,
@@ -74,24 +188,33 @@ Deno.serve(async (req) => {
         },
       });
 
-      // Send email alert if Resend is configured
+      // Send email alert if Resend is configured. Every interpolated value
+      // is HTML-escaped because service_name and error_log come from the
+      // heartbeat callers and would otherwise be a stored-XSS vector in
+      // the admin's email client.
       if (resendApiKey) {
         try {
           const alertHtml = `
-            <h2>⚠️ InVision Network - Critical Service Alert</h2>
+            <h2>InVision Network - Critical Service Alert</h2>
             <p>The following services are unresponsive:</p>
             <ul>
-              ${deadServices
-                .map(
-                  (s) => `
+              ${
+            deadServices
+              .map(
+                (s) => `
                 <li>
-                  <strong>${s.service_name}</strong><br/>
-                  Last heartbeat: ${s.last_heartbeat}<br/>
-                  ${s.error_log ? `Error: ${s.error_log}` : ""}
+                  <strong>${escapeHtml(String(s.service_name ?? ""))}</strong><br/>
+                  Last heartbeat: ${escapeHtml(String(s.last_heartbeat ?? ""))}<br/>
+                  ${
+                  s.error_log
+                    ? `Error: ${escapeHtml(String(s.error_log))}`
+                    : ""
+                }
                 </li>
               `,
-                )
-                .join("")}
+              )
+              .join("")
+          }
             </ul>
             <p>Please investigate immediately.</p>
           `;
@@ -105,7 +228,7 @@ Deno.serve(async (req) => {
             body: JSON.stringify({
               from: "InVision Network <alerts@invisionnetwork.org>",
               to: ["admin@invisionnetwork.org"],
-              subject: "🚨 CRITICAL: InVision Service Down",
+              subject: "CRITICAL: InVision Service Down",
               html: alertHtml,
             }),
           });

@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
+import { sanitizeHtml } from "@/utils/sanitize";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -36,7 +37,7 @@ export default function BookDetail() {
     return (
       <div className="min-h-screen flex flex-col">
         <SEO title="Book Not Found" description="The requested book was not found." noindex />
-        <Navigation />
+        <Navigation overlay />
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center py-20">
             <BookOpen className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
@@ -51,21 +52,14 @@ export default function BookDetail() {
   }
 
   const handleAddToCart = () => {
-    addItem({
-      id: book.slug,
-      productId: book.slug,
-      name: book.title,
-      price: book.price,
-      image: book.cover_image,
-      isDigital: true,
-      stripe_price_id: book.stripe_price_id,
-    });
-    toast({ title: "Added to cart", description: `${book.title} has been added to your cart.` });
+    // TRIAL MODE: Skip cart, go directly to reader
+    toast({ title: "Trial Mode", description: `Opening ${book.title} in the reader...` });
+    navigate("/reader");
   };
 
   const handleBuyNow = () => {
-    handleAddToCart();
-    navigate("/resources#checkout");
+    // TRIAL MODE: Skip payment, go directly to reader
+    navigate("/reader");
   };
 
   const relatedBooks = LIBRARY_BOOKS.filter(
@@ -100,7 +94,7 @@ export default function BookDetail() {
           },
         }}
       />
-      <Navigation />
+      <Navigation overlay />
 
       <main id="main-content" tabIndex={-1} className="flex-1">
         {/* Breadcrumb */}
@@ -137,12 +131,13 @@ export default function BookDetail() {
                         (e.target as HTMLImageElement).style.display = "none";
                       }}
                     />
-                  ) : null}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-gradient-to-br from-primary/80 to-purple-800/80 text-white text-center">
-                    <BookOpen className="h-16 w-16 mb-4 opacity-80" />
-                    <h2 className="text-xl font-bold leading-tight">{book.title}</h2>
-                    <p className="text-sm mt-2 opacity-80">{book.subtitle}</p>
-                  </div>
+                  ) : (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-gradient-to-br from-primary/80 to-purple-800/80 text-white text-center">
+                      <BookOpen className="h-16 w-16 mb-4 opacity-80" />
+                      <h2 className="text-xl font-bold leading-tight">{book.title}</h2>
+                      <p className="text-sm mt-2 opacity-80">{book.subtitle}</p>
+                    </div>
+                  )}
                 </div>
 
                 {/* Purchase box */}
@@ -227,19 +222,36 @@ export default function BookDetail() {
                   </span>
                 </div>
                 <p className="text-base text-foreground/80 leading-relaxed">{book.description}</p>
+                <p className="text-sm text-muted-foreground mt-4">
+                  Ideal for: <span className="text-foreground">{book.ideal_for}</span>
+                </p>
               </div>
 
-              {/* Free chapter preview */}
+              <div>
+                <h2 className="text-xl font-semibold mb-4">What You Will Learn</h2>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {book.outcomes.map((outcome) => (
+                    <div key={outcome} className="rounded-xl border border-border/60 bg-card/50 p-4 text-sm text-foreground/85">
+                      <div className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                        <span>{outcome}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Sample chapter — marketing preview, not a free product */}
               <Card className="border-primary/20 bg-primary/5">
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-lg font-semibold">Free Preview — Chapter 1</h2>
-                    <Badge variant="outline" className="border-primary/30 text-primary">Free</Badge>
+                    <h2 className="text-lg font-semibold">Sample — Chapter 1</h2>
+                    <Badge variant="outline" className="border-primary/30 text-primary">Preview</Badge>
                   </div>
                   <h3 className="font-medium text-foreground mb-3">{firstChapter.chapter_title}</h3>
                   <div
                     className="prose prose-sm max-w-none text-foreground/80 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:mb-1 [&_h3]:font-semibold [&_h3]:mt-4 [&_h3]:mb-2"
-                    dangerouslySetInnerHTML={{ __html: firstChapter.content_html }}
+                    dangerouslySetInnerHTML={{ __html: sanitizeHtml(firstChapter.content_html) }}
                   />
                   <p className="text-xs text-muted-foreground mt-4 italic">
                     Pages {firstChapter.page_start}–{firstChapter.page_end} of {book.total_pages}
@@ -284,7 +296,7 @@ export default function BookDetail() {
                       </button>
                       {expandedChapter === chapter.chapter_number && chapter.chapter_number === 1 && (
                         <div className="px-4 pb-4 pt-1 text-sm text-muted-foreground border-t bg-muted/20">
-                          Free preview available above. Purchase to access all chapters.
+                          Sample shown above. Purchase to access all chapters.
                         </div>
                       )}
                     </div>
@@ -309,9 +321,17 @@ export default function BookDetail() {
                   <Card key={related.slug} className="hover:shadow-md transition-shadow">
                     <CardContent className="p-5">
                       <div className="flex items-start gap-4">
-                        <div className="w-16 h-20 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                      <div className="w-16 h-20 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                        {related.cover_image ? (
+                          <img
+                            src={related.cover_image}
+                            alt={related.title}
+                            className="w-full h-full object-cover rounded-lg"
+                          />
+                        ) : (
                           <BookOpen className="h-6 w-6 text-primary" />
-                        </div>
+                        )}
+                      </div>
                         <div className="flex-1 min-w-0">
                           <h3 className="font-semibold text-sm leading-tight mb-1 truncate">{related.title}</h3>
                           <p className="text-xs text-muted-foreground mb-2 line-clamp-2">{related.subtitle}</p>

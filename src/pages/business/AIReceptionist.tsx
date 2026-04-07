@@ -21,8 +21,7 @@ import {
   TrendingUp,
   Bot,
 } from "lucide-react";
-import heroNatureAi1 from "@/assets/hero-nature-ai-1.jpg";
-import heroNatureAi2 from "@/assets/hero-nature-ai-2.jpg";
+import heroBrandedBusinessNew from "@/assets/hero-branded-business-new.png";
 
 const AIReceptionist = () => {
   const features = [
@@ -130,16 +129,15 @@ const AIReceptionist = () => {
             },
           }}
         />
-        <Navigation />
+        <Navigation overlay />
 
         <main>
           {/* Hero Section with Nature Image */}
           <Hero
             backgroundImages={[
-              { src: heroNatureAi1, alt: "Tranquil forest path with sunbeams" },
               {
-                src: heroNatureAi2,
-                alt: "Beautiful meadow with wildflowers at sunrise",
+                src: heroBrandedBusinessNew,
+                alt: "AI receptionist for modern business",
               },
             ]}
             headline="Stop Missing Calls. Let AI Run Your Front Desk."
@@ -147,13 +145,13 @@ const AIReceptionist = () => {
             showScrollIndicator={true}
           >
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="xl" variant="gold">
+              <Button asChild size="heroPill" variant="heroPrimary">
                 <Link to="/contact">
                   Get Your AI Receptionist
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-              <Button asChild size="xl" variant="outlineLight">
+              <Button asChild size="heroPill" variant="heroOutline">
                 <a href={SITE.phone.tel}>
                   <Phone className="mr-2 h-5 w-5" />
                   Hear It In Action
@@ -362,7 +360,7 @@ const AIReceptionist = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="xl" variant="gold">
                   <Link to="/contact">
-                    Schedule My Free Demo
+                    Schedule a Demo
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>

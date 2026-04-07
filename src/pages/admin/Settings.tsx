@@ -10,7 +10,10 @@ import SiteSettings from "./settings/SiteSettings";
 import EmailSettings from "./settings/EmailSettings";
 import PaymentSettings from "./settings/PaymentSettings";
 import SuperAdminUserManagement from "@/components/admin/super/SuperAdminUserManagement";
-import DiscountCodes from "./settings/DiscountCodes";
+
+// Discount Codes tab/route removed Phase 4.9d — `discount_codes` table was
+// dropped and the product policy is "no free / no discounts" (only the
+// veteran flag in payments survives, and that's a separate flow).
 
 const Settings = () => {
   const navigate = useNavigate();
@@ -31,12 +34,11 @@ const Settings = () => {
         value={currentTab}
         onValueChange={(value) => navigate(`/admin/settings/${value}`)}
       >
-        <TabsList className="grid w-full grid-cols-5 bg-[#111827]">
+        <TabsList className="grid w-full grid-cols-4 bg-[#111827]">
           <TabsTrigger value="site">Site Settings</TabsTrigger>
           <TabsTrigger value="email">Email Settings</TabsTrigger>
           <TabsTrigger value="payment">Payment Settings</TabsTrigger>
           <TabsTrigger value="users">User Management</TabsTrigger>
-          <TabsTrigger value="discounts">Discount Codes</TabsTrigger>
         </TabsList>
       </Tabs>
 
@@ -50,7 +52,6 @@ const Settings = () => {
           <Route path="email" element={<EmailSettings />} />
           <Route path="payment" element={<PaymentSettings />} />
           <Route path="users" element={<SuperAdminUserManagement />} />
-          <Route path="discounts" element={<DiscountCodes />} />
         </Routes>
       </div>
     </div>

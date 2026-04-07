@@ -107,7 +107,7 @@ export default function BookAIUpdates() {
   const { data: logs = [], isLoading } = useQuery<UpdateLog[]>({
     queryKey: ["admin-book-update-logs", id],
     queryFn: async () => {
-      let query = supabase
+      const query = supabase
         .from("update_logs")
         .select("*")
         .eq("book_id", id!)

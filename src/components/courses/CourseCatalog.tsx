@@ -14,7 +14,6 @@ import {
   ArrowRight,
   GraduationCap,
   Trophy,
-  Calendar,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import {
@@ -74,12 +73,14 @@ function CourseCard({
               "Learn essential skills to protect yourself and your family."}
           </p>
 
-          {/* Course Meta */}
+          {/* Course Meta — schema-aligned (Phase 6).
+              The courses table exposes duration_hours/max_students/level only.
+              `duration_weeks` and `start_date` were never real columns. */}
           <div className="flex flex-wrap gap-3 mb-4 text-sm text-muted-foreground">
-            {course.duration_weeks && (
+            {course.duration_hours && (
               <span className="flex items-center gap-1">
                 <Clock className="w-4 h-4" />
-                {course.duration_weeks} weeks
+                {course.duration_hours} hrs
               </span>
             )}
             {course.max_students && (
@@ -88,10 +89,10 @@ function CourseCard({
                 {course.max_students} seats
               </span>
             )}
-            {course.start_date && (
+            {course.level && (
               <span className="flex items-center gap-1">
-                <Calendar className="w-4 h-4" />
-                Starts {new Date(course.start_date).toLocaleDateString()}
+                <GraduationCap className="w-4 h-4" />
+                {course.level}
               </span>
             )}
           </div>
@@ -107,10 +108,10 @@ function CourseCard({
             </div>
           )}
 
-          {/* Price */}
+          {/* Price — every course must be priced; missing price shows "Pricing TBD" */}
           <div className="flex items-center justify-between mb-4">
             <span className="text-2xl font-bold">
-              {course.price ? `$${course.price}` : "Free"}
+              {course.price ? `$${course.price}` : "Pricing TBD"}
             </span>
           </div>
 
@@ -135,8 +136,8 @@ function CourseCard({
           ) : (
             <Button
               className="w-full"
-              onClick={() => onEnroll(course.id)}
-              disabled={isEnrolling}
+              onClick={() => course.price && onEnroll(course.id)}
+              disabled={isEnrolling || !course.price}
             >
               {isEnrolling ? (
                 "Enrolling..."
@@ -146,10 +147,7 @@ function CourseCard({
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </>
               ) : (
-                <>
-                  Start Free Course
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </>
+                <>Pricing Coming Soon</>
               )}
             </Button>
           )}

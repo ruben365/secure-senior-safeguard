@@ -16,7 +16,7 @@ const TrustBadges = () => {
       title: "Privacy-First",
       description: "Privacy-by-design practices",
       emoji: "🔐",
-      gradient: "from-primary/20 to-purple-500/20",
+      gradient: "from-orange-500/20 to-lavender-400/15",
     },
     {
       icon: Award,

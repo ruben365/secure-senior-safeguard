@@ -152,8 +152,45 @@ Deno.serve(async (req: Request) => {
   }
 
   try {
+    // ====================================================================
+    // AUTHENTICATION + AUTHORIZATION — admin role required
+    // (This function calls Anthropic API which costs money and rewrites
+    // book content, so it must never be callable by anonymous users.)
+    // ====================================================================
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return new Response(
+        JSON.stringify({ error: "Authorization header required" }),
+        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    const callerToken = authHeader.replace("Bearer ", "");
+    const { data: userData, error: userError } = await supabase.auth.getUser(callerToken);
+    if (userError || !userData?.user) {
+      return new Response(
+        JSON.stringify({ error: "Invalid or expired token" }),
+        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    const { data: isAdmin, error: roleError } = await supabase.rpc("has_role", {
+      user_id: userData.user.id,
+      role: "admin",
+    });
+
+    if (roleError || !isAdmin) {
+      console.warn(
+        `[update-book-content] FORBIDDEN attempt by ${userData.user.email} (${userData.user.id})`
+      );
+      return new Response(
+        JSON.stringify({ error: "Forbidden — admin role required" }),
+        { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
     const body: RequestBody = await req.json();
-    const { book_id, chapter_id, updated_by = "ai" } = body;
+    const { book_id, chapter_id, updated_by = userData.user.email || "admin" } = body;
 
     if (!book_id) {
       return new Response(JSON.stringify({ error: "book_id is required" }), {

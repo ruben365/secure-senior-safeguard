@@ -13,10 +13,30 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: {
+        DEFAULT: "1rem",
+        sm: "1.5rem",
+        lg: "2rem",
+        xl: "2.5rem",
+        "2xl": "3rem",
+      },
       screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
         "2xl": "1400px",
       },
+    },
+    screens: {
+      xs: "375px",
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
+      "3xl": "1920px",
+      "4xl": "2560px",
     },
     extend: {
       screens: {
@@ -147,6 +167,19 @@ export default {
           600: "hsl(var(--cyan-600))",
           500: "hsl(var(--cyan-500))",
           400: "hsl(var(--cyan-400))",
+        },
+        blue: {
+          50: "hsl(var(--blue-50))",
+          100: "hsl(var(--blue-100))",
+          200: "hsl(var(--blue-200))",
+          300: "hsl(var(--blue-300))",
+          400: "hsl(var(--blue-400))",
+          500: "hsl(var(--blue-500))",
+          600: "hsl(var(--blue-600))",
+          700: "hsl(var(--blue-700))",
+          800: "hsl(var(--blue-800))",
+          900: "hsl(var(--blue-900))",
+          950: "hsl(var(--blue-950))",
         },
       },
       borderRadius: {

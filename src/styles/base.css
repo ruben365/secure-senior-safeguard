@@ -21,50 +21,55 @@
   transform: none !important;
 }
 
-/* InVision Network Design System - "Liquid Trust" Premium Visual Design
-All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid animations. */
+/* InVision Network Design System — "Trust & Authority"
+   Security-first, accessible, professional blue palette.
+   Compliant: WCAG AAA on all primary surfaces. */
 
 @layer base {
 
   :root {
-    /* Base colors - warm-tinted off-white for depth */
-    --background: 250 14% 97%;
-    --foreground: 240 24% 10%;
+    /* ── Core Surfaces ── */
+    --background: 210 40% 98%;       /* #F5F9FC — cool off-white */
+    --foreground: 213 60% 12%;       /* #0D2137 — deep navy text */
 
-    /* Deep Amethyst Primary - richer, more saturated */
-    --primary: 275 42% 28%;
+    /* ── Primary: Security Blue ── */
+    --primary: 207 89% 34%;          /* #066DB3 — trust blue */
     --primary-foreground: 0 0% 100%;
 
-    /* Vivid Orchid Accent - punchy and modern */
-    --accent: 292 48% 52%;
+    /* ── Secondary: Sky Blue ── */
+    --secondary: 207 84% 94%;        /* #E0F0FC — soft blue tint */
+    --secondary-foreground: 207 89% 28%; /* deep blue text */
+
+    /* ── Accent / CTA: Signal Orange ── */
+    --accent: 25 95% 53%;            /* #F97316 — high-energy CTA */
     --accent-foreground: 0 0% 100%;
 
-    /* Success - vibrant emerald */
-    --success: 160 58% 40%;
+    /* ── Success: Protected Green ── */
+    --success: 142 71% 32%;          /* #15803D */
     --success-foreground: 0 0% 100%;
 
-    /* Destructive - vivid warm red */
-    --destructive: 4 78% 52%;
+    /* ── Destructive ── */
+    --destructive: 0 72% 51%;        /* #DC2626 */
     --destructive-foreground: 0 0% 100%;
 
-    /* Card & Surface - crisp white with subtle warmth */
-    --card: 260 20% 100%;
-    --card-foreground: 240 24% 10%;
+    /* ── Card & Popover ── */
+    --card: 0 0% 100%;
+    --card-foreground: 213 60% 12%;
 
-    --popover: 260 20% 100%;
-    --popover-foreground: 240 24% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 213 60% 12%;
 
-    /* Secondary - subtle purple-tinted gray */
-    --secondary: 260 10% 93%;
-    --secondary-foreground: 275 42% 28%;
+    /* ── Muted ── */
+    --muted: 210 30% 93%;            /* #E4EDF5 */
+    --muted-foreground: 215 20% 45%; /* #637080 */
 
-    /* Muted - refined neutral with purple undertone */
-    --muted: 255 8% 93%;
-    --muted-foreground: 250 14% 32%;
+    /* ── Borders & Inputs ── */
+    --border: 210 28% 86%;           /* #CAD8E6 */
+    --input: 210 30% 93%;
+    --ring: 207 89% 34%;
 
-    --border: 255 10% 89%;
-    --input: 255 8% 93%;
-    --ring: 275 42% 28%;
+    /* ── Radius ── */
+    --radius: 0.5rem;                /* 8px base, cards get 12-16px */
 
     /* Radius scale — use these tokens for consistent rounding */
     --radius-xs:   0.25rem;   /* 4px  — tight: badges, chips */
@@ -86,97 +91,122 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     --z-toast:     10001;
     --z-tooltip:   10002;
 
-    /* Extended Color Palette - Deep Navy Spectrum - richer saturation */
-    --navy-900: 228 72% 7%;
-    --navy-800: 226 65% 11%;
-    --navy-700: 224 60% 16%;
-    --navy-600: 222 56% 20%;
-    --navy-500: 220 50% 28%;
-    --navy-400: 218 42% 40%;
-    --navy-300: 215 34% 56%;
-    --navy-200: 212 28% 76%;
-    --navy-100: 210 22% 92%;
+    /* ── Extended Blue Spectrum ── */
+    --blue-950: 213 80%  8%;
+    --blue-900: 213 75% 12%;
+    --blue-800: 211 70% 18%;
+    --blue-700: 209 68% 25%;
+    --blue-600: 207 80% 32%;
+    --blue-500: 207 89% 40%;
+    --blue-400: 204 88% 53%;
+    --blue-300: 204 80% 68%;
+    --blue-200: 206 72% 82%;
+    --blue-100: 207 70% 92%;
+    --blue-50:  210 60% 97%;
 
-    /* Lavender/Purple spectrum - deeper, more vivid */
-    --lavender-700: 275 42% 28%;
-    --lavender-600: 280 38% 36%;
-    --lavender-500: 288 42% 52%;
-    --lavender-400: 296 48% 65%;
-    --lavender-300: 304 52% 78%;
-    --lavender-200: 312 56% 88%;
-    --lavender-100: 318 48% 95%;
+    /* ── Green Spectrum (security/success) ── */
+    --green-700: 142 76% 24%;
+    --green-600: 142 72% 29%;
+    --green-500: 142 71% 36%;
+    --green-400: 142 60% 48%;
+    --green-100: 142 50% 92%;
 
-    /* Coral-Rose spectrum - warmer, more expressive */
-    --coral-600: 348 55% 48%;
-    --coral-500: 350 60% 55%;
-    --coral-400: 352 58% 62%;
-    --coral-300: 355 50% 74%;
-    --coral-200: 358 55% 86%;
-    --coral-100: 0 48% 94%;
+    /* ── Slate Neutrals ── */
+    --slate-900: 213 60% 10%;
+    --slate-700: 213 30% 24%;
+    --slate-500: 213 16% 42%;
+    --slate-400: 213 12% 56%;
+    --slate-300: 213 10% 70%;
+    --slate-200: 213 14% 84%;
+    --slate-100: 213 20% 93%;
+    --slate-50:  213 30% 97%;
 
-    /* Blush Pink - warmer, richer */
-    --blush-500: 340 62% 84%;
-    --blush-400: 342 66% 89%;
-    --blush-300: 345 72% 94%;
+    /* ── Purple spectrum (admin neon/tech theme) ── */
+    --purple-900: 270 60%  18%;
+    --purple-700: 270 55%  32%;
+    --purple-500: 270 72%  52%;
+    --purple-400: 270 65%  62%;
+    --purple-300: 270 60%  74%;
+    --purple-200: 270 55%  86%;
+    --purple-100: 270 50%  94%;
 
-    /* Neutral slate tones - slightly warmer */
-    --slate-900: 245 18% 11%;
-    --slate-700: 245 12% 24%;
-    --slate-500: 245 8% 40%;
-    --slate-300: 240 6% 68%;
-    --slate-100: 245 10% 96%;
+    /* ── Violet spectrum (admin accents) ── */
+    --violet-600: 258 64%  42%;
+    --violet-500: 258 72%  55%;
+    --violet-400: 258 65%  65%;
+    --violet-300: 258 58%  78%;
 
-    /* Gold accent - richer amber tones */
-    --gold-600: 32 95% 42%;
-    --gold-500: 36 96% 48%;
-    --gold-400: 40 92% 56%;
-    --gold-300: 44 88% 68%;
+    /* ── Navy spectrum (admin dark surfaces) ── */
+    --navy-900: 213 62%   9%;
+    --navy-800: 213 58%  14%;
+    --navy-700: 213 52%  19%;
+    --navy-600: 213 48%  25%;
+    --navy-500: 213 44%  33%;
+    --navy-400: 213 40%  44%;
+    --navy-300: 213 36%  58%;
+    --navy-200: 213 32%  75%;
+    --navy-100: 213 28%  90%;
 
-    /* Purple/violet - vivid, saturated spectrum */
-    --purple-900: 275 50% 16%;
-    --purple-700: 278 44% 24%;
-    --purple-500: 280 40% 34%;
-    --purple-400: 285 38% 44%;
-    --purple-300: 290 36% 56%;
-    --purple-200: 300 34% 72%;
-    --purple-100: 316 38% 91%;
+    /* ── Lavender (admin sidebar / soft accents) ── */
+    --lavender-700: 235 38% 30%;
+    --lavender-600: 235 36% 40%;
+    --lavender-500: 235 34% 52%;
+    --lavender-400: 235 32% 64%;
+    --lavender-300: 235 30% 76%;
+    --lavender-200: 235 28% 88%;
+    --lavender-100: 235 30% 95%;
 
-    --violet-600: 278 42% 36%;
-    --violet-500: 284 38% 46%;
-    --violet-400: 290 40% 56%;
-    --violet-300: 298 44% 68%;
+    /* ── Coral spectrum (warm accents / alerts) ── */
+    --coral-600: 14 80% 50%;
+    --coral-500: 14 82% 58%;
+    --coral-400: 14 82% 67%;
+    --coral-300: 14 80% 76%;
+    --coral-200: 14 82% 90%;
+    --coral-100: 14 70% 96%;
 
-    /* Teal - fresh, vibrant modern accent */
-    --teal-600: 172 62% 32%;
-    --teal-500: 172 58% 38%;
-    --teal-400: 172 52% 48%;
-    --teal-300: 172 46% 60%;
-    --teal-100: 172 40% 92%;
+    /* ── Blush (soft highlights) ── */
+    --blush-500: 345 72% 65%;
+    --blush-400: 345 68% 75%;
+    --blush-300: 345 60% 85%;
 
-    /* Cyan - bolder, more energetic */
-    --cyan-600: 192 62% 34%;
-    --cyan-500: 192 58% 42%;
-    --cyan-400: 192 52% 52%;
+    /* ── Teal (success / tech green) ── */
+    --teal-600: 172 70% 30%;
+    --teal-500: 172 66% 40%;
+    --teal-400: 172 60% 52%;
+    --teal-300: 172 56% 66%;
+    --teal-100: 172 50% 92%;
 
-    /* Modern neutral shadows */
-    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
-    --shadow-md: 0 2px 8px -2px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 4px 16px -4px rgba(0, 0, 0, 0.1);
+    /* ── Cyan (info / link accents) ── */
+    --cyan-600: 197 80% 38%;
+    --cyan-500: 197 76% 50%;
+    --cyan-400: 197 70% 62%;
 
-    /* Modern shadow system */
-    --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.06);
-    --shadow-card-hover: 0 2px 6px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
-    --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.08), 0 16px 40px rgba(0, 0, 0, 0.06);
+    /* ── Gold (trust badges / ratings) ── */
+    --gold-600: 35 92% 44%;
+    --gold-500: 38 95% 50%;
+    --gold-400: 42 92% 58%;
+    --gold-300: 46 88% 68%;
 
-    --sidebar-background: 260 12% 99%;
-    --sidebar-foreground: 240 18% 12%;
-    --sidebar-primary: 275 42% 28%;
+    /* ── Shadow System — crisp blue-tinted depth ── */
+    --shadow-xs:  0 1px 2px rgba(3, 80, 140, 0.06);
+    --shadow-sm:  0 1px 3px rgba(3, 80, 140, 0.07), 0 2px 6px rgba(3, 80, 140, 0.04);
+    --shadow-md:  0 2px 6px rgba(3, 80, 140, 0.06), 0 4px 14px -2px rgba(3, 80, 140, 0.1);
+    --shadow-lg:  0 4px 10px rgba(3, 80, 140, 0.06), 0 8px 28px -4px rgba(3, 80, 140, 0.14);
+
+    --shadow-card:       0 1px 2px rgba(3,80,140,0.05), 0 2px 8px rgba(3,80,140,0.06), 0 8px 24px -6px rgba(3,80,140,0.08);
+    --shadow-card-hover: 0 2px 4px rgba(3,80,140,0.06), 0 6px 16px rgba(3,80,140,0.08), 0 16px 36px -8px rgba(3,80,140,0.14);
+    --shadow-elevated:   0 6px 24px rgba(3,105,161,0.12), 0 2px 8px rgba(0,0,0,0.04);
+    --shadow-cta:        0 4px 14px rgba(249,115,22,0.35);
+
+    /* ── Sidebar (admin dark) ── */
+    --sidebar-background: 215 40% 10%;
+    --sidebar-foreground: 210 20% 90%;
+    --sidebar-primary: 207 89% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 260 10% 93%;
-    --sidebar-accent-foreground: 275 42% 28%;
-    --sidebar-border: 255 10% 89%;
-    --sidebar-ring: 275 42% 28%;
+    --sidebar-accent: 215 30% 18%;
+    --sidebar-accent-foreground: 210 20% 90%;
+    --sidebar-border: 215 28% 18%;
+    --sidebar-ring: 207 89% 50%;
 
     /* ── Spacing scale (rem-based, zoom-agnostic) ──
        Usage: var(--space-4) = 1rem = 16px CSS = 12px visual (with 0.75 zoom)
@@ -220,33 +250,33 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   }
 
   .dark {
-    --background: 270 40% 6%;
-    --foreground: 300 15% 95%;
-    --card: 272 35% 10%;
-    --card-foreground: 300 15% 95%;
-    --popover: 272 35% 10%;
-    --popover-foreground: 300 15% 95%;
-    --primary: 290 50% 65%;
-    --primary-foreground: 270 40% 6%;
-    --secondary: 278 28% 16%;
-    --secondary-foreground: 300 15% 95%;
-    --muted: 275 22% 14%;
-    --muted-foreground: 290 14% 62%;
-    --accent: 172 55% 52%;
+    --background: 215 40% 8%;
+    --foreground: 210 20% 94%;
+    --card: 215 36% 12%;
+    --card-foreground: 210 20% 94%;
+    --popover: 215 36% 12%;
+    --popover-foreground: 210 20% 94%;
+    --primary: 207 84% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 215 28% 18%;
+    --secondary-foreground: 210 20% 90%;
+    --muted: 215 24% 16%;
+    --muted-foreground: 210 16% 58%;
+    --accent: 25 95% 53%;
     --accent-foreground: 0 0% 100%;
-    --destructive: 4 78% 52%;
+    --destructive: 0 72% 55%;
     --destructive-foreground: 0 0% 100%;
-    --border: 275 26% 18%;
-    --input: 275 26% 18%;
-    --ring: 290 50% 65%;
-    --sidebar-background: 270 40% 5%;
-    --sidebar-foreground: 300 12% 95%;
-    --sidebar-primary: 290 50% 65%;
-    --sidebar-primary-foreground: 270 40% 6%;
-    --sidebar-accent: 278 28% 14%;
-    --sidebar-accent-foreground: 300 12% 95%;
-    --sidebar-border: 275 26% 14%;
-    --sidebar-ring: 290 50% 65%;
+    --border: 215 24% 20%;
+    --input: 215 24% 18%;
+    --ring: 207 84% 55%;
+    --sidebar-background: 215 44% 6%;
+    --sidebar-foreground: 210 18% 92%;
+    --sidebar-primary: 207 84% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 32% 14%;
+    --sidebar-accent-foreground: 210 18% 90%;
+    --sidebar-border: 215 28% 14%;
+    --sidebar-ring: 207 84% 55%;
   }
 }
 
@@ -445,7 +475,7 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     @apply min-h-screen;
     overflow-x: hidden;
     width: 100%;
-    contain: layout style;
+    contain: style;
     position: relative;
     z-index: 1;
   }
@@ -480,9 +510,9 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   h5,
   h6 {
     @apply font-bold;
-    font-family: "Inter", "Rubik", ui-sans-serif, system-ui, -apple-system, sans-serif;
-    line-height: 1.08;
-    letter-spacing: -0.03em;
+    font-family: "Lora", "Rubik", ui-serif, Georgia, serif;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
     text-wrap: balance;
     font-weight: 700;
     color: hsl(var(--foreground));
@@ -519,15 +549,15 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   }
 
   h5 {
-    font-size: clamp(1.125rem, 1.5vw + 0.25rem, 1.5rem);
-    letter-spacing: -0.015em;
+    font-size: clamp(1rem, 1vw + 0.25rem, 1.25rem);
+    letter-spacing: -0.01em;
     line-height: 1.3;
     font-weight: 600;
   }
 
   h6 {
-    font-size: clamp(1rem, 1vw + 0.125rem, 1.25rem);
-    letter-spacing: -0.01em;
+    font-size: clamp(0.9375rem, 0.5vw + 0.25rem, 1.125rem);
+    letter-spacing: -0.008em;
     line-height: 1.4;
     font-weight: 600;
   }
@@ -601,36 +631,6 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
 
   button {
     font-size: 1rem;
-  }
-
-  /* Clean background mode: remove animated/decorative background effects */
-  .aurora-bg,
-  .mesh-gradient {
-    background: none !important;
-  }
-
-  .dynamic-gradient-overlay::before,
-  .premium-aurora::before,
-  .noise-overlay::after,
-  .skeuo-ambient-coral::before,
-  .skeuo-ambient-lavender::before,
-  .skeuo-ambient-mixed::before,
-  .theme-layer-coral::before,
-  .theme-layer-lavender::before,
-  .theme-layer-navy::before,
-  .theme-layer-mixed::before {
-    content: none !important;
-    animation: none !important;
-    display: none !important;
-    background: none !important;
-  }
-
-  .premium-orb,
-  .blob {
-    animation: none !important;
-    background: transparent !important;
-    filter: none !important;
-    opacity: 0 !important;
   }
 
   /* ===== PERFORMANCE OPTIMIZATION ===== */

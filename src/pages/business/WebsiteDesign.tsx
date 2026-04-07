@@ -291,7 +291,7 @@ const WebsiteDesign = () => {
             ],
           }}
         />
-        <Navigation />
+        <Navigation overlay />
 
         <main>
           {/* Hero Section */}
@@ -417,7 +417,7 @@ const WebsiteDesign = () => {
                         className="shadow-2xl shadow-primary/30"
                       >
                         <Link to="/contact">
-                          Get Free Quote
+                          Get a Quote
                           <ArrowRight className="ml-2 h-5 w-5" />
                         </Link>
                       </Button>
@@ -721,8 +721,8 @@ const WebsiteDesign = () => {
                     Ready for a Website That Works?
                   </h2>
                   <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                    Let's build something amazing together. Get a free quote
-                    today.
+                    Let's build something amazing together. Request a custom
+                    quote today.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <div className="btn-press">
@@ -733,7 +733,7 @@ const WebsiteDesign = () => {
                         className="shadow-2xl shadow-primary/40"
                       >
                         <Link to="/contact">
-                          Request Free Quote
+                          Request a Quote
                           <ArrowRight className="ml-2 h-5 w-5" />
                         </Link>
                       </Button>

@@ -289,7 +289,7 @@ export default function ScamCheckResult() {
             <Link to="/portal/senior">Back to Dashboard</Link>
           </Button>
           <Button asChild className="flex-1">
-            <Link to="/scam-analysis">Submit Another</Link>
+            <Link to="/training/ai-analysis">Submit Another</Link>
           </Button>
         </div>
       </div>

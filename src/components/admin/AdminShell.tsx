@@ -120,7 +120,7 @@ export function AdminShell() {
   // Show skeleton while checking auth - shell stays visible
   if (!initialized || loading) {
     return (
-      <div className="flex min-h-screen bg-[#0B0F19] w-full">
+      <div className="flex min-h-screen bg-[#0F1117] w-full">
         <CyberSidebar
           isOpen={sidebarOpen}
           isMobileOpen={false}
@@ -152,15 +152,15 @@ export function AdminShell() {
     );
   }
 
-  // Redirect if not authenticated
+  // Auth check — redirect unauthenticated users
   if (!user) {
     return <Navigate to="/auth" replace />;
   }
 
-  // Show access denied if no role config (not an admin/staff)
+  // Role check — only staff/admin roles may access
   if (!roleConfig) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4 bg-[#0B0F19]">
+      <div className="min-h-screen flex items-center justify-center p-4 bg-[#0F1117]">
         <Card className="max-w-md w-full bg-[#111827] border-gray-800">
           <CardContent className="pt-6">
             <div className="flex flex-col items-center text-center space-y-4">
@@ -187,7 +187,7 @@ export function AdminShell() {
   }
 
   return (
-    <div className="admin-no-animations flex min-h-screen bg-[#0B0F19] w-full overflow-x-hidden">
+    <div className="admin-no-animations flex min-h-screen bg-[#0F1117] w-full overflow-x-hidden">
       {/* Persistent Sidebar - Never re-renders on navigation */}
       <CyberSidebar
         isOpen={sidebarOpen}

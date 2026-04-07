@@ -21,7 +21,7 @@ const serviceConfigs = [
   },
   {
     key: "business",
-    label: "AI Business",
+    label: "AI",
     gradient: "from-accent to-accent/80",
   },
   {

@@ -31,6 +31,15 @@ interface DashboardHealth {
   error_message: string | null;
 }
 
+function isSafeUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === "https:" || parsed.protocol === "http:";
+  } catch {
+    return false;
+  }
+}
+
 export default function SuperAdminDashboardHealth() {
   const [dashboards, setDashboards] = useState<DashboardHealth[]>([]);
   const [loading, setLoading] = useState(true);
@@ -60,68 +69,83 @@ export default function SuperAdminDashboardHealth() {
   const checkDashboardHealth = async () => {
     setChecking(true);
 
-    for (const dashboard of dashboards) {
-      try {
-        const startTime = performance.now();
+    try {
+      for (const dashboard of dashboards) {
+        if (!isSafeUrl(dashboard.dashboard_url)) {
+          await supabase
+            .from("dashboard_health")
+            .update({
+              status: "offline",
+              last_check: new Date().toISOString(),
+              error_message: "Invalid or unsafe URL",
+            })
+            .eq("id", dashboard.id);
+          continue;
+        }
 
-        // Try to fetch the dashboard page
-        const response = await fetch(dashboard.dashboard_url, {
-          method: "HEAD",
-          mode: "same-origin",
-        });
+        try {
+          const startTime = performance.now();
 
-        const endTime = performance.now();
-        const responseTime = Math.round(endTime - startTime);
+          // Try to fetch the dashboard page
+          const response = await fetch(dashboard.dashboard_url, {
+            method: "HEAD",
+            mode: "same-origin",
+          });
 
-        const newStatus = response.ok ? "healthy" : "degraded";
+          const endTime = performance.now();
+          const responseTime = Math.round(endTime - startTime);
 
-        await supabase
-          .from("dashboard_health")
-          .update({
-            status: newStatus,
-            last_check: new Date().toISOString(),
-            response_time_ms: responseTime,
-            error_message: response.ok ? null : `HTTP ${response.status}`,
-          })
-          .eq("id", dashboard.id);
-      } catch (error: any) {
-        await supabase
-          .from("dashboard_health")
-          .update({
-            status: "offline",
-            last_check: new Date().toISOString(),
-            error_message: error.message,
-          })
-          .eq("id", dashboard.id);
+          const newStatus = response.ok ? "healthy" : "degraded";
+
+          await supabase
+            .from("dashboard_health")
+            .update({
+              status: newStatus,
+              last_check: new Date().toISOString(),
+              response_time_ms: responseTime,
+              error_message: response.ok ? null : `HTTP ${response.status}`,
+            })
+            .eq("id", dashboard.id);
+        } catch (error: any) {
+          await supabase
+            .from("dashboard_health")
+            .update({
+              status: "offline",
+              last_check: new Date().toISOString(),
+              error_message: error.message,
+            })
+            .eq("id", dashboard.id);
+        }
       }
-    }
 
-    await fetchDashboardHealth();
-    setChecking(false);
+      await fetchDashboardHealth();
+    } finally {
+      setChecking(false);
+    }
   };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "healthy":
-        return <CheckCircle className="w-5 h-5 text-green-400" />;
+        return <CheckCircle className="w-5 h-5 text-success" />;
       case "degraded":
-        return <AlertTriangle className="w-5 h-5 text-yellow-400" />;
+        return <AlertTriangle className="w-5 h-5 text-warning" />;
       case "offline":
-        return <XCircle className="w-5 h-5 text-red-400" />;
+        return <XCircle className="w-5 h-5 text-destructive" />;
       default:
-        return <Monitor className="w-5 h-5 text-gray-400" />;
+        return <Monitor className="w-5 h-5 text-muted-foreground" />;
     }
   };
 
   const getStatusBadge = (status: string) => {
     const colors: Record<string, string> = {
-      healthy: "bg-green-500",
-      degraded: "bg-yellow-500",
-      offline: "bg-red-500",
+      healthy: "bg-success",
+      degraded: "bg-warning",
+      offline: "bg-destructive",
     };
 
     return (
-      <Badge className={colors[status] || "bg-gray-500"}>
+      <Badge className={colors[status] || "bg-muted"}>
         {status.charAt(0).toUpperCase() + status.slice(1)}
       </Badge>
     );
@@ -132,15 +156,15 @@ export default function SuperAdminDashboardHealth() {
     dashboards.length > 0 ? (healthyCount / dashboards.length) * 100 : 0;
 
   return (
-    <Card className="bg-[#111827] border-gray-800">
+    <Card className="bg-card border-border">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle className="text-xl text-white flex items-center gap-2">
-              <Monitor className="w-5 h-5 text-blue-400" />
+            <CardTitle className="text-xl text-foreground flex items-center gap-2">
+              <Monitor className="w-5 h-5 text-primary" />
               Dashboard Health Monitor
             </CardTitle>
-            <CardDescription className="text-gray-400">
+            <CardDescription className="text-muted-foreground">
               Monitor connectivity of all platform dashboards
             </CardDescription>
           </div>
@@ -149,7 +173,7 @@ export default function SuperAdminDashboardHealth() {
             size="sm"
             onClick={checkDashboardHealth}
             disabled={checking}
-            className="border-gray-700 text-gray-300 hover:bg-gray-800"
+            className="border-border text-muted-foreground hover:bg-muted"
           >
             <RefreshCw
               className={`w-4 h-4 mr-2 ${checking ? "animate-spin" : ""}`}
@@ -161,17 +185,17 @@ export default function SuperAdminDashboardHealth() {
       <CardContent>
         {loading ? (
           <div className="flex items-center justify-center py-8">
-            <Loader2 className="w-8 h-8 animate-spin text-blue-400" />
+            <Loader2 className="w-8 h-8 animate-spin text-primary" />
           </div>
         ) : (
           <div className="space-y-6">
             {/* Overall Health */}
-            <div className="p-4 rounded-lg bg-gray-800/50">
+            <div className="p-4 rounded-lg bg-muted/50">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-gray-300">
+                <span className="text-sm font-medium text-foreground">
                   Overall System Health
                 </span>
-                <span className="text-sm text-gray-400">
+                <span className="text-sm text-muted-foreground">
                   {healthyCount}/{dashboards.length} healthy
                 </span>
               </div>
@@ -183,15 +207,15 @@ export default function SuperAdminDashboardHealth() {
               {dashboards.map((dashboard) => (
                 <div
                   key={dashboard.id}
-                  className="flex items-center justify-between p-4 rounded-lg bg-gray-800/50 hover:bg-gray-800 transition-colors"
+                  className="flex items-center justify-between p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors"
                 >
                   <div className="flex items-center gap-3">
                     {getStatusIcon(dashboard.status)}
                     <div>
-                      <p className="font-medium text-white">
+                      <p className="font-medium text-foreground">
                         {dashboard.dashboard_name}
                       </p>
-                      <div className="flex items-center gap-2 text-sm text-gray-400">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <span>{dashboard.dashboard_url}</span>
                         {dashboard.response_time_ms && (
                           <>
@@ -205,7 +229,7 @@ export default function SuperAdminDashboardHealth() {
                   <div className="flex items-center gap-3">
                     <div className="text-right">
                       {getStatusBadge(dashboard.status)}
-                      <p className="text-xs text-gray-500 mt-1">
+                      <p className="text-xs text-muted-foreground mt-1">
                         {dashboard.last_check
                           ? formatDistanceToNow(
                               new Date(dashboard.last_check),
@@ -217,10 +241,12 @@ export default function SuperAdminDashboardHealth() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() =>
-                        window.open(dashboard.dashboard_url, "_blank")
-                      }
-                      className="text-gray-400 hover:text-white"
+                      onClick={() => {
+                        if (isSafeUrl(dashboard.dashboard_url)) {
+                          window.open(dashboard.dashboard_url, "_blank", "noopener,noreferrer");
+                        }
+                      }}
+                      className="text-muted-foreground hover:text-foreground"
                     >
                       <ExternalLink className="w-4 h-4" />
                     </Button>
@@ -230,7 +256,7 @@ export default function SuperAdminDashboardHealth() {
             </div>
 
             {dashboards.length === 0 && (
-              <div className="text-center py-8 text-gray-400">
+              <div className="text-center py-8 text-muted-foreground">
                 <Monitor className="w-12 h-12 mx-auto mb-4 opacity-50" />
                 <p>No dashboards configured</p>
               </div>

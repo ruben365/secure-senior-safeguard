@@ -73,7 +73,7 @@ export const WorkshopsPromo = () => {
                     }} />
                     <div className="flex items-start gap-3 relative z-10">
                       <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/15 to-accent/10 backdrop-blur-sm border border-primary/10 flex items-center justify-center flex-shrink-0">
-                        <service.icon className="w-4.5 h-4.5 text-primary" />
+                        <service.icon className="w-[18px] h-[18px] text-primary" />
                       </div>
                       <div>
                         <div className="text-sm font-bold text-foreground">{service.title}</div>

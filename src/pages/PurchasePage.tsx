@@ -79,8 +79,8 @@ export default function PurchasePage() {
   const handleCheckout = () => {
     if (purchaseType === "single") {
       addItem({
-        id: book.slug,
-        productId: book.slug,
+        id: book.id,
+        productId: book.id,
         name: book.title,
         price: book.price,
         image: book.cover_image,
@@ -90,13 +90,12 @@ export default function PurchasePage() {
       toast({ title: "Added to cart", description: `${book.title} — single copy added.` });
     } else {
       addItem({
-        id: `${book.slug}-bulk-${quantity}`,
-        productId: `${book.slug}-bulk`,
+        id: `${book.id}-bulk-${quantity}`,
+        productId: book.id,
         name: `${book.title} × ${quantity} copies`,
         price: totalPrice,
         image: book.cover_image,
         isDigital: true,
-        stripe_price_id: book.stripe_price_id,
       });
       toast({ title: "Bulk order added", description: `${quantity} copies of ${book.title} added to cart.` });
     }
@@ -165,6 +164,9 @@ export default function PurchasePage() {
                         <span className="font-medium">Single Copy</span>
                         <p className="text-sm text-muted-foreground mt-0.5">
                           For personal use — instant access to all chapters.
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-2">
+                          Ideal for: {book.ideal_for}
                         </p>
                         <span className="text-lg font-bold text-primary mt-1 block">
                           ${book.price.toFixed(2)}
@@ -278,8 +280,12 @@ export default function PurchasePage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <div className="w-12 h-16 rounded bg-primary/10 flex items-center justify-center shrink-0">
-                      <BookOpen className="h-5 w-5 text-primary" />
+                    <div className="w-12 h-16 rounded overflow-hidden bg-primary/10 flex items-center justify-center shrink-0">
+                      {book.cover_image ? (
+                        <img src={book.cover_image} alt={book.title} className="w-full h-full object-cover" />
+                      ) : (
+                        <BookOpen className="h-5 w-5 text-primary" />
+                      )}
                     </div>
                     <div>
                       <p className="font-medium text-sm leading-tight">{book.title}</p>
@@ -350,8 +356,8 @@ export default function PurchasePage() {
               Contact us
             </Link>{" "}
             or call{" "}
-            <a href="tel:+14074465749" className="text-primary underline underline-offset-2">
-              (407) 446-5749
+            <a href="tel:+19373018749" className="text-primary underline underline-offset-2">
+              (937) 301-8749
             </a>
           </div>
         </div>

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import { HeroBusiness } from "@/components/HeroBusiness";
 import TrustBar from "@/components/TrustBar";
 import TestimonialCard from "@/components/TestimonialCard";
 import CTASection from "@/components/CTASection";
@@ -59,12 +60,12 @@ import businessScheduling from "@/assets/business-smart-scheduling.jpg";
 import businessSupportBot from "@/assets/business-support-bot.jpg";
 import businessIntake from "@/assets/business-intake-scheduling.jpg";
 import { natureSummer2 } from "@/config/natureHeroImages";
-// NatureAccent removed for performance
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import { VideoLightbox } from "@/components/VideoLightbox";
 import { SEO } from "@/components/SEO";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
+import { SectionDivider, MeshBackground } from "@/components/pro";
 
 
 const businessHeadlines = [
@@ -140,7 +141,7 @@ const platformGroups = [
     title: "Cognitive Sentinel",
     tagline: "Detects behavioral stress signals and alerts caregivers during active scams.",
     price: "$49/mo add-on",
-    href: "/services/cognitive-sentinel"
+    href: "/contact"
   },
   {
     badge: "Senior",
@@ -148,7 +149,7 @@ const platformGroups = [
     title: "Family Emergency Network",
     tagline: "One PANIC action calls family, alerts analysts, and notifies police in seconds.",
     price: "$19/mo add-on",
-    href: "/services/family-emergency-network"
+    href: "/contact"
   },
   {
     badge: "Senior",
@@ -156,7 +157,7 @@ const platformGroups = [
     title: "Digital Estate Executor",
     tagline: "Locks down accounts and securely transfers credentials to heirs when needed.",
     price: "$299 + $9/mo",
-    href: "/services/digital-estate"
+    href: "/contact"
   }]
 
 },
@@ -175,7 +176,7 @@ const platformGroups = [
     title: "Scam Insurance",
     tagline: "If fraud succeeds despite our controls, coverage pays up to $500K.",
     price: "From $49/mo",
-    href: "/services/scam-insurance"
+    href: "/contact"
   },
   {
     badge: "Business",
@@ -183,7 +184,7 @@ const platformGroups = [
     title: "AI-Safe Certification",
     tagline: "Annual audit and verified trust seal for Ohio businesses handling AI risk.",
     price: "$2,400/yr",
-    href: "/services/ai-safe-certification"
+    href: "/contact"
   }]
 
 }];
@@ -269,7 +270,7 @@ const PricingCard = ({
 <AnimatedSection animation="scale-up" delay={delay}>
     <div className="relative h-full pt-5 group" style={{ perspective: "900px" }}>
       <div
-      className={`absolute -top-1 left-1/2 -translate-x-1/2 bg-gradient-to-r ${tagColor} text-white px-5 py-1.5 rounded-full text-[10px] font-black tracking-wider shadow-lg z-20 whitespace-nowrap border border-white/25`}>
+      className={`absolute -top-1 left-1/2 -translate-x-1/2 bg-gradient-to-r ${tagColor} text-white px-5 py-1.5 rounded-full text-[11px] font-black tracking-wider shadow-lg z-20 whitespace-nowrap border border-white/25`}>
       
         {tag}
       </div>
@@ -423,7 +424,7 @@ function Business() {
       price: 0,
       tier: "Consultation",
       description:
-      "Book a free strategy call. We map your goals, recommend the right AI setup, and outline a clear build plan."
+      "Book a paid strategy call ($199, credited toward your build). We map your goals, recommend the right AI setup, and outline a clear build plan."
     });
     setInquiryDialogOpen(true);
     trackButtonClick("Book Strategy Call", "Business Hero");
@@ -457,14 +458,18 @@ function Business() {
     <PageTransition variant="fade">
       <div className="min-h-screen">
         <SEO
-          title="AI Business Solutions & Automation"
-          description="AI receptionists, automated follow-ups, and professional websites for Ohio businesses. Your AI front desk runs 24/7. Serving Dayton and all of Ohio."
-          keywords="AI receptionist, business automation, AI answering service, virtual receptionist, Dayton Ohio, small business AI"
+          title="AI Solutions & Automation"
+          description="AI receptionists, automated follow-ups, and professional websites for Ohio businesses. Your AI front desk runs 24/7. Serving Kettering and all of Ohio."
+          keywords="AI receptionist, business automation, AI answering service, virtual receptionist, Kettering Ohio, small business AI"
+          breadcrumbs={[
+            { name: "Home", url: "https://www.invisionnetwork.org/" },
+            { name: "Business", url: "https://www.invisionnetwork.org/business" },
+          ]}
           structuredData={{
             "@context": "https://schema.org",
             "@type": "ItemList",
-            name: "AI Business Services",
-            description: "Professional AI automation services for businesses",
+            name: "AI Services",
+            description: "Professional AI automation services",
             itemListElement: [
             {
               "@type": "Service",
@@ -497,52 +502,14 @@ function Business() {
 
           }} />
         
-        <Navigation />
+        <Navigation overlay />
 
-        {/* Hero */}
-        <div className="relative">
-          <Hero
-            backgroundImages={businessHeroImages}
-            headline=""
-            subheadline=""
-            showScrollIndicator={true}>
-            
-            <div className="text-center mb-6">
-              <h1 className="font-black text-white mb-4">
-                <RotatingHeadlines headlines={businessHeadlines} className="" />
-              </h1>
-              <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-                AI agents, professional websites, and security tools built for small businesses across Ohio.
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="default" size="xl" onClick={openStrategyCall}>
-                Book Strategy Call
-              </Button>
-              <Button
-                variant="heroOutline"
-                size="xl"
-                onClick={() => {
-                  scrollToSection("services");
-                  trackButtonClick("Explore Services", "Business Hero");
-                }}>
-                
-                Explore Services
-              </Button>
-            </div>
-          </Hero>
-          <HeroFloatingStats />
-        </div>
-
-        <div className="h-8" />
+        {/* Hero — Dark cinematic theme */}
+        <HeroBusiness onStrategyCall={openStrategyCall} />
         <TrustBar />
 
-        {/* Live Stats Ticker — matches Training page */}
-        <div className="bg-foreground text-background py-3 overflow-hidden">
-          
-
-
-
+        {/* Live Stats Ticker removed — empty */}
+        <div className="hidden">
 
 
 
@@ -551,9 +518,9 @@ function Business() {
         </div>
 
         {/* ═══════════════════ SERVICES ═══════════════════ */}
-        <section id="services" className="py-24 relative overflow-hidden">
+        <section id="services" className="py-16 md:py-24 relative overflow-hidden">
           {/* Premium background */}
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background my-[777px]" />
           <div className="absolute top-20 left-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-20 right-0 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-3xl pointer-events-none" />
 
@@ -564,7 +531,7 @@ function Business() {
               subtitle="Pick a service below to see how your business benefits." />
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl mx-auto" style={{ perspective: "1200px" }}>
-              <AnimatedSection animation="fade-left" delay={0}>
+              <AnimatedSection animation="fade-left" delay={0} id="svc-ai-receptionist">
                 <ExpandableServiceCard
                   icon={<Phone className="w-7 h-7 text-primary" />}
                   title="AI Receptionist"
@@ -596,7 +563,7 @@ function Business() {
                 </ExpandableServiceCard>
               </AnimatedSection>
 
-              <AnimatedSection animation="fade-right" delay={100}>
+              <AnimatedSection animation="fade-right" delay={100} id="svc-smart-scheduling">
                 <ExpandableServiceCard
                   icon={<Calendar className="w-7 h-7 text-primary" />}
                   title="Smart Scheduling"
@@ -627,7 +594,7 @@ function Business() {
                 </ExpandableServiceCard>
               </AnimatedSection>
 
-              <AnimatedSection animation="fade-left" delay={200}>
+              <AnimatedSection animation="fade-left" delay={200} id="svc-support-bot">
                 <ExpandableServiceCard
                   icon={<MessageSquare className="w-7 h-7 text-primary" />}
                   title="Customer Support Bot"
@@ -659,7 +626,7 @@ function Business() {
                 </ExpandableServiceCard>
               </AnimatedSection>
 
-              <AnimatedSection animation="fade-right" delay={300}>
+              <AnimatedSection animation="fade-right" delay={300} id="svc-intake-automation">
                 <ExpandableServiceCard
                   icon={<Calendar className="w-7 h-7 text-primary" />}
                   title="Intake & Scheduling"
@@ -694,8 +661,10 @@ function Business() {
           </div>
         </section>
 
+        <SectionDivider variant="wave" color="muted" />
+
         {/* ═══════════════════ COMPLETE PLATFORM ═══════════════════ */}
-        <section className="py-28 relative overflow-hidden">
+        <section id="security" className="py-16 md:py-24 relative overflow-hidden">
           {/* Rich layered background */}
           <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
           
@@ -738,7 +707,7 @@ function Business() {
                           </span>
                         </h3>
                         <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-8">
-                          We merged the full platform into AI & Business to keep the story simple.
+                          We merged the full platform into AI to keep the story simple.
                           Our purpose is to help Ohio organizations grow with AI while staying safe from
                           modern fraud and operational risk.
                         </p>
@@ -780,7 +749,7 @@ function Business() {
                               <p className="text-3xl md:text-4xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-1">
                                 {stat.value}
                               </p>
-                              <p className="text-[10px] md:text-xs uppercase tracking-wider text-muted-foreground font-semibold">
+                              <p className="text-[11px] md:text-xs uppercase tracking-wider text-muted-foreground font-semibold">
                                 {stat.label}
                               </p>
                             </div>
@@ -905,7 +874,7 @@ function Business() {
                       name: "InVision Platform Demo",
                       price: 0,
                       tier: "Full Platform",
-                      description: "Schedule a live demo of all 9 integrated services now consolidated under AI & Business."
+                      description: "Schedule a live demo of all 9 integrated services now consolidated under AI."
                     });
                     setInquiryDialogOpen(true);
                   }}>
@@ -940,7 +909,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ WEB DESIGN ═══════════════════ */}
-        <section id="website-design" className="py-24 relative overflow-hidden">
+        <section id="website-design" className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
           
@@ -1060,7 +1029,7 @@ function Business() {
                 { name: "Content Writing", price: "$150", note: "Per page", color: "text-accent" },
                 { name: "Business Email", price: "$200", note: "One-time setup", color: "text-primary" },
                 { name: "AI Chatbot", price: "$1,200", note: "Full integration", color: "text-primary", tag: "POPULAR" },
-                { name: "Domain & Hosting", price: "FREE", note: "With any website", color: "text-primary", tag: "INCLUDED" }].
+                { name: "Domain & Hosting", price: "Included", note: "With any website build", color: "text-primary", tag: "BUNDLED" }].
                 map((addon, i) =>
                 <div
                   key={i}
@@ -1069,7 +1038,7 @@ function Business() {
                     <Card className="p-4 text-center border-border/50 hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.12)] transition-all duration-500 hover:border-primary/30 relative group overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] to-accent/[0.01] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                       {addon.tag &&
-                    <span className="absolute top-2 right-2 px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-bold rounded-full">
+                    <span className="absolute top-2 right-2 px-2 py-0.5 bg-primary/10 text-primary text-[11px] font-bold rounded-full">
                           {addon.tag}
                         </span>
                     }
@@ -1103,8 +1072,10 @@ function Business() {
           </div>
         </section>
 
+        <SectionDivider variant="curve" color="muted" flip />
+
         {/* ═══════════════════ WEBSITE INSURANCE ═══════════════════ */}
-        <section id="website-insurance" className="py-24 relative overflow-hidden">
+        <section id="website-insurance" className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-muted/60 via-muted/40 to-muted/60" />
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
           
@@ -1187,7 +1158,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ AI AGENTS PRICING ═══════════════════ */}
-        <section id="automation-pricing" className="py-24 relative overflow-hidden">
+        <section id="automation-pricing" className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
           <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           
@@ -1296,8 +1267,10 @@ function Business() {
           </div>
         </section>
 
+        <SectionDivider variant="slant" color="muted" />
+
         {/* ═══════════════════ AI INSURANCE ═══════════════════ */}
-        <section id="ai-insurance" className="py-24 relative overflow-hidden">
+        <section id="ai-insurance" className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent" />
           
@@ -1317,7 +1290,8 @@ function Business() {
                 <Switch
                   id="billing-toggle"
                   checked={isYearly}
-                  onCheckedChange={setIsYearly} />
+                  onCheckedChange={setIsYearly}
+                  aria-label="Toggle yearly billing" />
                 
                 <Label
                   htmlFor="billing-toggle"
@@ -1489,7 +1463,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ AI CONSULTING ═══════════════════ */}
-        <section id="ai-consulting" className="py-24 relative overflow-hidden">
+        <section id="ai-consulting" className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
           
           <div className="container mx-auto px-4 relative z-10">
@@ -1532,12 +1506,12 @@ function Business() {
                       <span className="text-3xl">💭</span>
                     </div>
                     <h3 className="text-2xl font-black mb-3">Thinking About AI</h3>
-                    <Badge className="bg-primary/10 text-primary border-0 mb-5 font-bold">FREE Consultation</Badge>
+                    <Badge className="bg-primary/10 text-primary border-0 mb-5 font-bold">$199 Discovery Call</Badge>
                     <p className="text-muted-foreground max-w-2xl mx-auto mb-7 leading-relaxed">
-                      Not sure if AI fits your business? We help you explore your options, understand costs, and figure out if AI will drive real growth for you.
+                      Not sure if AI fits your business? In a paid 30-minute discovery call ($199, credited toward any project you book), we help you explore your options, understand costs, and figure out if AI will drive real growth for you.
                     </p>
                     <ul className="text-left max-w-md mx-auto space-y-3 mb-8">
-                      {["30-minute discovery call", "Business needs assessment", "AI opportunity identification", "No obligation recommendation"].map((item, i) =>
+                      {["30-minute discovery call", "Business needs assessment", "AI opportunity identification", "Credit applied to any project"].map((item, i) =>
                     <li key={i} className="flex items-center gap-3 text-sm">
                           <div className="w-5 h-5 rounded-full bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center flex-shrink-0">
                             <CheckCircle className="w-3 h-3 text-primary" />
@@ -1548,14 +1522,14 @@ function Business() {
                     </ul>
                     <Button
                     onClick={() => {
-                      trackButtonClick("Book Free AI Discovery", "Business Consulting");
-                      setSelectedService({ type: "business", name: "AI Discovery Consultation (Free)", tier: "Free" });
+                      trackButtonClick("Book AI Discovery Call", "Business Consulting");
+                      setSelectedService({ type: "business", name: "AI Discovery Consultation ($199)", tier: "Discovery" });
                       setModalOpen(true);
                     }}
                     size="lg"
                     className="h-13 px-10 rounded-full bg-gradient-to-r from-primary to-accent text-white font-bold shadow-lg shadow-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300">
-                    
-                      Book Free Consultation
+
+                      Book Discovery Call ($199)
                     </Button>
                   </div>
                 }
@@ -1670,7 +1644,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ ILLUSTRATION & VISUAL ART ═══════════════════ */}
-        <section id="illustration" className="py-24 relative overflow-hidden">
+        <section id="illustration" className="py-16 md:py-24 relative overflow-hidden">
           {/* Decorative background */}
           <div className="absolute inset-0 bg-gradient-to-b from-muted/40 via-background to-muted/30" />
           <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-coral-100/20 via-transparent to-transparent rounded-full blur-3xl pointer-events-none" />
@@ -1800,7 +1774,8 @@ function Business() {
         </section>
 
         {/* ═══════════════════ WHY CHOOSE US ═══════════════════ */}
-        <section className="py-24 relative overflow-hidden">
+        <MeshBackground variant="vibrant" withOrbs>
+        <section className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
           
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
@@ -1871,10 +1846,13 @@ function Business() {
             </AnimatedSection>
           </div>
         </section>
+        </MeshBackground>
+
+        <SectionDivider variant="mountains" color="background" />
 
         {/* ═══════════════════ TESTIMONIALS ═══════════════════ */}
         {(isAdmin || businessTestimonials.length > 0) &&
-        <section className="py-24 relative overflow-hidden">
+        <section className="py-16 md:py-24 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
             
             <div className="container mx-auto px-4 relative z-10">
@@ -1947,7 +1925,7 @@ function Business() {
             </Button>
           </div>
           <p className="text-white/90 text-sm mt-4 font-semibold drop-shadow-md">
-            15-minute call. No pressure. Free.
+            15-minute scoping call. No pressure. Quoted upfront.
           </p>
         </CTASection>
 

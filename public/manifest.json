@@ -1,12 +1,15 @@
 {
   "name": "InVision Network",
   "short_name": "InVision",
-  "description": "AI Scam Protection & Business Solutions",
+  "description": "AI Scam Protection & Business Solutions — Cybersecurity for Ohio families and businesses",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#050507",
   "theme_color": "#6D28D9",
-  "orientation": "portrait-primary",
+  "orientation": "any",
+  "scope": "/",
+  "lang": "en-US",
+  "categories": ["security", "business", "education"],
   "icons": [
     {
       "src": "/shield-logo-192.png",

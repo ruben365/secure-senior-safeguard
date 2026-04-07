@@ -5,9 +5,25 @@ import {
   useState,
   ReactNode,
   useCallback,
+  useRef,
 } from "react";
 import { User, Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
+
+// ============================================================================
+// Phase 13 hardening:
+//   1. .maybeSingle() instead of .single() for role + profile lookups
+//   2. Session expiry check on every auth state change — if the JWT
+//      expires_at is in the past we force a sign out instead of trusting
+//      the stale session
+//   3. Inactivity timeout — if the user makes no UI interactions for
+//      INACTIVITY_TIMEOUT_MS, we sign them out automatically. This is a
+//      defense-in-depth control for unattended browsers (e.g. shared
+//      kiosks at senior centers).
+// ============================================================================
+
+// 30 minutes of inactivity → automatic sign out
+const INACTIVITY_TIMEOUT_MS = 30 * 60 * 1000;
 
 export type UserRole =
   | "admin"
@@ -127,13 +143,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [adminName, setAdminName] = useState("Admin");
   const [adminEmail, setAdminEmail] = useState("");
 
+  // Inactivity timer ref — reset on every user interaction
+  const inactivityTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Phase 13: Session expiry check. If the token's expires_at is in the
+  // past (or missing) we refuse to trust the session and sign out.
+  const isSessionExpired = useCallback((s: Session | null): boolean => {
+    if (!s) return true;
+    const expiresAt = s.expires_at;
+    if (typeof expiresAt !== "number") return false; // no expiry info — trust it
+    return Date.now() >= expiresAt * 1000;
+  }, []);
+
   const fetchUserRole = useCallback(async (currentUser: User) => {
     try {
+      // Phase 13: .maybeSingle() so users with no role row don't throw
       const { data: roleData, error } = await supabase
         .from("user_roles")
         .select("role")
         .eq("user_id", currentUser.id)
-        .single();
+        .maybeSingle();
 
       if (error) {
         console.error("Error fetching user role:", error);
@@ -145,12 +174,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setRoleConfig(null);
       }
 
-      // Fetch profile info
+      // Phase 13: .maybeSingle() so users with no profile row don't throw
       const { data: profile } = await supabase
         .from("profiles_safe")
         .select("first_name, last_name")
         .eq("id", currentUser.id)
-        .single();
+        .maybeSingle();
 
       if (profile) {
         setAdminName(
@@ -169,14 +198,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // Set up auth state listener FIRST
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      setSession(session);
-      setUser(session?.user ?? null);
+    } = supabase.auth.onAuthStateChange((event, newSession) => {
+      // Phase 13: refuse to trust expired sessions
+      if (newSession && isSessionExpired(newSession)) {
+        console.warn("[auth] discarding expired session");
+        supabase.auth.signOut();
+        setSession(null);
+        setUser(null);
+        setRoleConfig(null);
+        setLoading(false);
+        setInitialized(true);
+        return;
+      }
 
-      if (session?.user) {
+      setSession(newSession);
+      setUser(newSession?.user ?? null);
+
+      if (newSession?.user) {
         // Defer Supabase calls with setTimeout to prevent deadlock
         setTimeout(() => {
-          fetchUserRole(session.user);
+          fetchUserRole(newSession.user);
         }, 0);
       } else {
         setRoleConfig(null);
@@ -186,12 +227,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
 
     // THEN check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
+    supabase.auth.getSession().then(({ data: { session: existingSession } }) => {
+      // Phase 13: refuse to trust expired sessions on initial load
+      if (existingSession && isSessionExpired(existingSession)) {
+        console.warn("[auth] discarding expired session on init");
+        supabase.auth.signOut();
+        setLoading(false);
+        setInitialized(true);
+        return;
+      }
 
-      if (session?.user) {
-        fetchUserRole(session.user).finally(() => {
+      setSession(existingSession);
+      setUser(existingSession?.user ?? null);
+
+      if (existingSession?.user) {
+        fetchUserRole(existingSession.user).finally(() => {
           setLoading(false);
           setInitialized(true);
         });
@@ -202,7 +252,44 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
 
     return () => subscription.unsubscribe();
-  }, [fetchUserRole]);
+  }, [fetchUserRole, isSessionExpired]);
+
+  // ============================================================================
+  // Phase 13: Inactivity timeout. If the user signs in and then walks away
+  // from the keyboard for INACTIVITY_TIMEOUT_MS, we sign them out automatically.
+  // The timer resets on any user interaction (click, keypress, scroll, touch).
+  // ============================================================================
+  useEffect(() => {
+    if (!user) return;
+
+    const resetTimer = () => {
+      if (inactivityTimerRef.current) {
+        clearTimeout(inactivityTimerRef.current);
+      }
+      inactivityTimerRef.current = setTimeout(() => {
+        console.warn("[auth] inactivity timeout — signing out");
+        supabase.auth.signOut();
+      }, INACTIVITY_TIMEOUT_MS);
+    };
+
+    const events: (keyof WindowEventMap)[] = [
+      "mousedown",
+      "keydown",
+      "scroll",
+      "touchstart",
+    ];
+
+    events.forEach((e) => window.addEventListener(e, resetTimer, { passive: true }));
+    resetTimer();
+
+    return () => {
+      events.forEach((e) => window.removeEventListener(e, resetTimer));
+      if (inactivityTimerRef.current) {
+        clearTimeout(inactivityTimerRef.current);
+        inactivityTimerRef.current = null;
+      }
+    };
+  }, [user]);
 
   const hasPermission = useCallback(
     (permission: string): boolean => {

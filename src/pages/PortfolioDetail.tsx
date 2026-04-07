@@ -38,7 +38,7 @@ const PortfolioDetail = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen">
-        <Navigation />
+        <Navigation overlay />
         <div className="pt-28 pb-20 container mx-auto px-6">
           <div className="animate-pulse space-y-6">
             <div className="h-8 w-48 bg-muted rounded" />
@@ -52,7 +52,7 @@ const PortfolioDetail = () => {
   if (!project) {
     return (
       <div className="min-h-screen">
-        <Navigation />
+        <Navigation overlay />
         <div className="pt-28 pb-20 container mx-auto px-6 text-center">
           <h1 className="text-2xl font-bold text-foreground mb-4">
             Project not found
@@ -75,7 +75,7 @@ const PortfolioDetail = () => {
         title={`${project.title} | Portfolio`}
         description={project.short_description || `${project.title} design case study`}
       />
-      <Navigation />
+      <Navigation overlay />
 
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-6 lg:px-12">

@@ -387,7 +387,7 @@ export default function PaymentSuccess() {
 
                 {/* Auto-Login Banner for Subscriptions */}
                 {showAutoLogin && postPurchase?.magic_link && (
-                  <Card className="p-6 mb-8 bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20 animate-in slide-in-from-bottom duration-500 delay-250">
+                  <Card className="p-6 mb-8 bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20 animate-in slide-in-from-bottom duration-500 delay-200">
                     <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                       <div className="flex items-center gap-4">
                         <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center animate-pulse">

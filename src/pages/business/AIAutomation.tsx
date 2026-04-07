@@ -21,8 +21,7 @@ import {
   Users,
   Bot,
 } from "lucide-react";
-import heroNatureAi1 from "@/assets/hero-nature-ai-1.jpg";
-import heroNatureAi2 from "@/assets/hero-nature-ai-2.jpg";
+import heroBrandedBusinessNew from "@/assets/hero-branded-business-new.png";
 
 const AIAutomation = () => {
   const features = [
@@ -143,30 +142,29 @@ const AIAutomation = () => {
             },
           }}
         />
-        <Navigation />
+        <Navigation overlay />
 
         <main>
           {/* Hero Section with Nature Image */}
           <Hero
             backgroundImages={[
               {
-                src: heroNatureAi2,
-                alt: "Beautiful meadow with wildflowers at sunrise",
+                src: heroBrandedBusinessNew,
+                alt: "AI-powered business automation",
               },
-              { src: heroNatureAi1, alt: "Tranquil forest path with sunbeams" },
             ]}
             headline="Follow-Up Automation System"
             subheadline="Stop losing leads to silence. Our AI-powered follow-up system ensures every prospect gets the right message at the right time."
             showScrollIndicator={true}
           >
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="xl" variant="gold">
+              <Button asChild size="heroPill" variant="heroPrimary">
                 <Link to="/contact">
                   Get Your Automation Plan
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-              <Button asChild size="xl" variant="outlineLight">
+              <Button asChild size="heroPill" variant="heroOutline">
                 <Link to="/business">View All Services</Link>
               </Button>
             </div>

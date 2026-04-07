@@ -23,21 +23,16 @@ import {
   Heart,
   DollarSign,
   Loader2,
-  CheckCircle,
   Shield,
   Users,
   Sparkles,
   Gift,
   Calendar,
-  CreditCard,
+  Lock,
 } from "lucide-react";
 import { donationFormSchema, formatPhoneNumber } from "@/utils/formValidation";
 import { z } from "zod";
 import { Badge } from "@/components/ui/badge";
-import {
-  TrustIndicators,
-  AcceptedCards,
-} from "@/components/payment/TrustIndicators";
 
 interface DonationModalProps {
   open: boolean;
@@ -107,7 +102,7 @@ const impactInfo: Record<
         description: "Sponsors comprehensive protection services",
       },
     ],
-    color: "from-purple-500/20 to-violet-500/20",
+    color: "from-orange-500/20 to-lavender-500/15",
   },
 };
 
@@ -213,64 +208,63 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="glass-modal max-w-[calc(100vw-2rem)] sm:max-w-lg max-h-[90vh] overflow-y-auto p-0 border-white/30">
-        {/* Header */}
-        <div className={`bg-gradient-to-r ${info.color} p-6 border-b`}>
-          <DialogHeader>
-            <div className="flex items-center gap-3 mb-3">
-              <div className="p-3 bg-background/80 backdrop-blur rounded-xl text-primary">
-                {info.icon}
-              </div>
-              <Badge variant="secondary">
-                {donationType === "monthly" ? "Monthly" : "One-time"}
+      <DialogContent className="max-w-[calc(100vw-2rem)] sm:max-w-[460px] max-h-[90vh] overflow-y-auto rounded-2xl">
+        {/* Header — matches EmbeddedPaymentModal style */}
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+              <Heart className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <span className="block text-lg">{cause || info.title}</span>
+              <Badge variant="outline" className="text-xs font-normal mt-1">
+                <Shield className="w-3 h-3 mr-1" />
+                Secure via Stripe
               </Badge>
             </div>
-            <DialogTitle className="text-2xl font-bold">
-              {cause || info.title}
-            </DialogTitle>
-          </DialogHeader>
-        </div>
+          </DialogTitle>
+        </DialogHeader>
 
-        <div className="p-6">
+        <div className="space-y-5">
           {/* Donation Type Toggle */}
           {type !== "monthly" && (
-            <div className="flex gap-2 p-1 bg-muted rounded-lg mb-6">
+            <div className="flex gap-1 p-1 bg-muted/50 rounded-lg">
               <Button
                 type="button"
                 variant={donationType === "one-time" ? "default" : "ghost"}
-                className="flex-1 h-10"
+                className="flex-1 h-9 text-sm"
                 onClick={() => setDonationType("one-time")}
               >
-                <Gift className="w-4 h-4 mr-2" />
+                <Gift className="w-3.5 h-3.5 mr-1.5" />
                 One-time
               </Button>
               <Button
                 type="button"
                 variant={donationType === "monthly" ? "default" : "ghost"}
-                className="flex-1 h-10"
+                className="flex-1 h-9 text-sm"
                 onClick={() => setDonationType("monthly")}
               >
-                <Calendar className="w-4 h-4 mr-2" />
+                <Calendar className="w-3.5 h-3.5 mr-1.5" />
                 Monthly
               </Button>
             </div>
           )}
 
           {/* Amount Selection */}
-          <div className="mb-6">
-            <label className="text-sm font-medium mb-3 block">
+          <div>
+            <label className="text-xs font-medium text-muted-foreground mb-2 block uppercase tracking-wide">
               Select Amount
             </label>
-            <div className="grid grid-cols-4 gap-2 mb-3">
+            <div className="grid grid-cols-4 gap-2 mb-2">
               {amounts.map((amount) => (
                 <button
                   key={amount}
                   type="button"
                   onClick={() => handleAmountSelect(amount)}
-                  className={`p-3 rounded-xl text-center font-semibold transition-all border-2 hover:scale-[1.02] active:scale-[0.98] ${
+                  className={`py-2.5 rounded-lg text-center text-sm font-semibold transition-all border ${
                     selectedAmount === amount
-                      ? "bg-primary text-primary-foreground border-primary shadow-lg"
-                      : "bg-muted/50 border-transparent hover:border-primary/30"
+                      ? "bg-primary text-primary-foreground border-primary"
+                      : "bg-muted/40 border-border/50 hover:border-primary/40"
                   }`}
                 >
                   ${amount}
@@ -278,13 +272,13 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
               ))}
             </div>
             <div className="relative">
-              <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+              <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
                 type="number"
                 placeholder="Custom amount"
                 value={customAmount}
                 onChange={(e) => handleCustomAmount(e.target.value)}
-                className="pl-10 h-12 text-lg"
+                className="pl-9 h-10"
                 min={1}
               />
             </div>
@@ -292,56 +286,48 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
 
           {/* Impact Message */}
           {finalAmount > 0 && (
-            <div className="mb-6 p-4 bg-success/10 border border-success/20 rounded-xl animate-fade-in">
-              <div className="flex items-center gap-2 text-success">
-                <Sparkles className="w-5 h-5" />
-                <span className="font-medium">Your Impact</span>
+            <div className="p-3 bg-primary/5 border border-primary/15 rounded-lg">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-primary flex-shrink-0" />
+                <p className="text-sm text-muted-foreground">
+                  <span className="font-medium text-foreground">Your Impact: </span>
+                  {getImpactMessage()}
+                </p>
               </div>
-              <p className="text-sm mt-1 text-muted-foreground">
-                {getImpactMessage()}
-              </p>
             </div>
           )}
 
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(handleSubmit)}
-              className="space-y-4"
+              className="space-y-3"
             >
-              <FormField
-                control={form.control}
-                name="donor_name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        placeholder="Your Name *"
-                        className="h-11"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        type="email"
-                        placeholder="Email * (for receipt)"
-                        className="h-11"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <div className="grid grid-cols-2 gap-3">
+                <FormField
+                  control={form.control}
+                  name="donor_name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input {...field} placeholder="Your Name *" className="h-10" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input {...field} type="email" placeholder="Email *" className="h-10" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
               <FormField
                 control={form.control}
@@ -362,17 +348,15 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
               />
 
               {/* Total */}
-              <div className="p-4 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl border">
+              <div className="p-3 bg-muted/40 rounded-lg border border-border/50">
                 <div className="flex justify-between items-center">
-                  <span className="font-medium">
-                    {donationType === "monthly"
-                      ? "Monthly Donation"
-                      : "Donation Total"}
+                  <span className="text-sm text-muted-foreground">
+                    {donationType === "monthly" ? "Monthly" : "Total"}
                   </span>
-                  <span className="text-3xl font-bold text-primary">
+                  <span className="text-2xl font-bold text-primary">
                     ${finalAmount.toFixed(2)}
                     {donationType === "monthly" && (
-                      <span className="text-sm font-normal">/mo</span>
+                      <span className="text-sm font-normal text-muted-foreground">/mo</span>
                     )}
                   </span>
                 </div>
@@ -381,33 +365,29 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
               <Button
                 type="submit"
                 disabled={loading || finalAmount < 1}
-                className="w-full h-12 text-base font-semibold"
+                className="w-full h-11"
                 size="lg"
               >
                 {loading ? (
                   <>
-                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     Processing...
                   </>
                 ) : (
                   <>
-                    <Heart className="mr-2 h-5 w-5" />
+                    <Heart className="mr-2 h-4 w-4" />
                     Donate ${finalAmount.toFixed(2)}
                     {donationType === "monthly" ? "/month" : ""}
                   </>
                 )}
               </Button>
 
-              {/* Trust Indicators */}
-              <div className="space-y-3 pt-2">
-                <TrustIndicators />
-                <AcceptedCards />
-                <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
-                  <Shield className="w-4 h-4" />
-                  <span>
-                    100% goes to the cause • Secure payment via Stripe
-                  </span>
-                </div>
+              {/* Trust footer — compact single line */}
+              <div className="flex items-center justify-center gap-3 pt-1 text-[11px] text-muted-foreground">
+                <Lock className="w-3 h-3" />
+                <span>Secure & Encrypted</span>
+                <span className="text-border">•</span>
+                <span>100% goes to the cause</span>
               </div>
             </form>
           </Form>

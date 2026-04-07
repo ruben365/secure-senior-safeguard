@@ -280,7 +280,7 @@ export const BookingModal = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="glass-modal max-w-2xl max-h-[90vh] overflow-y-auto p-0 border-white/30">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto p-0 rounded-2xl">
         {/* Header with gradient */}
         <div className="bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 p-6 border-b">
           <DialogHeader>
@@ -587,8 +587,8 @@ export const BookingModal = ({
                     </div>
                   </div>
                   <p className="text-xs text-muted-foreground mt-2">
-                    📋 This is a free consultation request. No payment required
-                    now
+                    📋 Pricing is finalized after we review your request. No
+                    payment is collected through this form.
                   </p>
                 </div>
               )}

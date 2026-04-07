@@ -1,10 +1,15 @@
-import { useState, useEffect } from "react";
+import { useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/contexts/AuthContext";
 import { PortalLoadingSkeleton } from "@/components/portal/PortalLoadingSkeleton";
+import { StatCard } from "@/components/shared/StatCard";
+import { ActionQueue } from "@/components/shared/ActionQueue";
+import { RealCalendar } from "@/components/shared/RealCalendar";
+import { DataTable } from "@/components/shared/DataTable";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Calendar } from "@/components/ui/calendar";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -16,11 +21,12 @@ import {
   LogOut,
   CheckCircle,
   XCircle,
-  Clock,
-  Building2,
-  UserCheck,
-  Mail,
+  Plus,
+  Send,
 } from "lucide-react";
+import type { ActionItem, CalendarEvent, StatCardData, TableColumn } from "@/types/portal";
+
+// ── Local types ──────────────────────────────────────────────────────────────
 
 interface BookingRequest {
   id: string;
@@ -41,258 +47,396 @@ interface ClientMessage {
   is_from_client: boolean | null;
 }
 
+interface Appointment {
+  id: string;
+  title: string | null;
+  scheduled_start: string;
+  scheduled_end: string | null;
+  status: string | null;
+}
+
+// ── Component ─────────────────────────────────────────────────────────────────
+
 function SecretaryDashboard() {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [loading, setLoading] = useState(true);
-  const [date, setDate] = useState<Date | undefined>(new Date());
-  const [bookings, setBookings] = useState<BookingRequest[]>([]);
-  const [messages, setMessages] = useState<ClientMessage[]>([]);
-  const [stats, setStats] = useState({
-    totalClients: 0,
-    pendingBookings: 0,
-    unreadMessages: 0,
-    todayAppointments: 0,
+  const { user, roleConfig, signOut } = useAuth();
+  const queryClient = useQueryClient();
+
+  // ── Role guard ──────────────────────────────────────────────────────────────
+  const isAuthorized =
+    roleConfig?.role === "secretary" || roleConfig?.role === "admin";
+
+  // ── Queries ─────────────────────────────────────────────────────────────────
+
+  const { data: pendingBookings = [], isLoading: loadingBookings } = useQuery({
+    queryKey: ["secretary", "pending-bookings"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("booking_requests")
+        .select("id, full_name, email, service_name, status, created_at, request_number")
+        .eq("status", "pending")
+        .order("created_at", { ascending: false })
+        .limit(10);
+      if (error) throw error;
+      return (data ?? []) as BookingRequest[];
+    },
+    enabled: !!user && isAuthorized,
   });
 
-  useEffect(() => {
-    loadData();
-  }, []);
-
-  const loadData = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return;
-
-    const [
-      { data: bookingsData },
-      { data: messagesData },
-      { count: clientsCount },
-      { count: pendingCount },
-      { count: unreadCount },
-    ] = await Promise.all([
-      supabase
+  const { data: recentBookings = [], isLoading: loadingRecentBookings } = useQuery({
+    queryKey: ["secretary", "recent-bookings"],
+    queryFn: async () => {
+      const { data, error } = await supabase
         .from("booking_requests")
         .select("id, full_name, email, service_name, status, created_at, request_number")
         .order("created_at", { ascending: false })
-        .limit(10),
-      supabase
+        .limit(20);
+      if (error) throw error;
+      return (data ?? []) as BookingRequest[];
+    },
+    enabled: !!user && isAuthorized,
+  });
+
+  const { data: unreadMessages = [], isLoading: loadingMessages } = useQuery({
+    queryKey: ["secretary", "unread-messages", user?.id],
+    queryFn: async () => {
+      const { data, error } = await supabase
         .from("client_messages")
         .select("id, subject, content, is_read, created_at, is_from_client")
+        .eq("recipient_id", user!.id)
         .eq("is_read", false)
         .order("created_at", { ascending: false })
-        .limit(8),
-      supabase.from("clients").select("*", { count: "exact", head: true }),
-      supabase.from("booking_requests").select("*", { count: "exact", head: true }).eq("status", "pending"),
-      supabase.from("client_messages").select("*", { count: "exact", head: true }).eq("is_read", false),
-    ]);
+        .limit(8);
+      if (error) throw error;
+      return (data ?? []) as ClientMessage[];
+    },
+    enabled: !!user && isAuthorized,
+  });
 
-    const startOfToday = new Date();
-    startOfToday.setHours(0, 0, 0, 0);
-    const endOfToday = new Date();
-    endOfToday.setHours(23, 59, 59, 999);
+  const { data: clientCount = 0 } = useQuery({
+    queryKey: ["secretary", "client-count"],
+    queryFn: async () => {
+      const { count, error } = await supabase
+        .from("clients")
+        .select("*", { count: "exact", head: true });
+      if (error) throw error;
+      return count ?? 0;
+    },
+    enabled: !!user && isAuthorized,
+  });
 
-    const { count: apptCount } = await supabase
-      .from("appointments")
-      .select("*", { count: "exact", head: true })
-      .gte("scheduled_start", startOfToday.toISOString())
-      .lte("scheduled_start", endOfToday.toISOString());
+  const { data: todayAppointments = [], isLoading: loadingAppointments } = useQuery({
+    queryKey: ["secretary", "today-appointments"],
+    queryFn: async () => {
+      const startOfToday = new Date();
+      startOfToday.setHours(0, 0, 0, 0);
+      const endOfToday = new Date();
+      endOfToday.setHours(23, 59, 59, 999);
 
-    if (bookingsData) setBookings(bookingsData);
-    if (messagesData) setMessages(messagesData);
-    setStats({
-      totalClients: clientsCount || 0,
-      pendingBookings: pendingCount || 0,
-      unreadMessages: unreadCount || 0,
-      todayAppointments: apptCount || 0,
-    });
-    setLoading(false);
-  };
+      const { data, error } = await supabase
+        .from("appointments")
+        .select("id, title, scheduled_start, scheduled_end, status")
+        .gte("scheduled_start", startOfToday.toISOString())
+        .lte("scheduled_start", endOfToday.toISOString())
+        .order("scheduled_start", { ascending: true });
+      if (error) throw error;
+      return (data ?? []) as Appointment[];
+    },
+    enabled: !!user && isAuthorized,
+  });
 
-  const handleBookingAction = async (id: string, action: "confirmed" | "denied") => {
-    const { error } = await supabase
-      .from("booking_requests")
-      .update({ status: action })
-      .eq("id", id);
+  // ── Derived data ─────────────────────────────────────────────────────────────
 
-    if (error) {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
-    } else {
-      toast({ title: action === "confirmed" ? "✅ Booking Confirmed" : "❌ Booking Denied" });
-      loadData();
-    }
-  };
+  const calendarEvents: CalendarEvent[] = todayAppointments.map((a) => ({
+    id: a.id,
+    title: a.title ?? "Appointment",
+    date: a.scheduled_start,
+    time: new Date(a.scheduled_start).toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
+    type: a.status ?? undefined,
+  }));
+
+  const actionItems: ActionItem[] = [
+    ...pendingBookings.map((b): ActionItem => ({
+      id: `booking-${b.id}`,
+      title: `Booking: ${b.full_name}`,
+      description: b.service_name,
+      priority: "high",
+      icon: ClipboardList,
+      href: "/admin/bookings",
+    })),
+    ...unreadMessages.map((m): ActionItem => ({
+      id: `msg-${m.id}`,
+      title: m.subject ?? "New message",
+      description: m.content?.substring(0, 80),
+      priority: "medium",
+      icon: MessageSquare,
+      href: "/portal/messages",
+    })),
+  ].sort((a, b) => {
+    const order = { critical: 0, high: 1, medium: 2, low: 3 };
+    return order[a.priority] - order[b.priority];
+  });
+
+  const statCards: StatCardData[] = [
+    {
+      title: "Pending Bookings",
+      value: pendingBookings.length,
+      icon: CalendarDays,
+    },
+    {
+      title: "Unread Messages",
+      value: unreadMessages.length,
+      icon: MessageSquare,
+    },
+    {
+      title: "Active Clients",
+      value: clientCount,
+      icon: Users,
+    },
+    {
+      title: "Today's Appointments",
+      value: todayAppointments.length,
+      icon: CalendarDays,
+    },
+  ];
+
+  // ── Mutation: booking action ──────────────────────────────────────────────────
+
+  const handleBookingAction = useCallback(
+    async (id: string, action: "confirmed" | "denied") => {
+      try {
+        const { error } = await supabase
+          .from("booking_requests")
+          .update({ status: action })
+          .eq("id", id);
+
+        if (error) throw error;
+
+        toast({
+          title: action === "confirmed" ? "Booking Confirmed" : "Booking Denied",
+          description: `The booking has been ${action}.`,
+        });
+
+        await queryClient.invalidateQueries({ queryKey: ["secretary"] });
+      } catch (err) {
+        toast({
+          title: "Error",
+          description: err instanceof Error ? err.message : "Failed to update booking.",
+          variant: "destructive",
+        });
+      }
+    },
+    [toast, queryClient]
+  );
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut();
+    await signOut();
     navigate("/auth");
   };
 
-  const statusColor = (status: string) => {
-    switch (status) {
-      case "pending": return "bg-amber-500/20 text-amber-400 border-amber-500/30";
-      case "confirmed": return "bg-emerald-500/20 text-emerald-400 border-emerald-500/30";
-      case "denied": return "bg-red-500/20 text-red-400 border-red-500/30";
-      default: return "bg-gray-500/20 text-gray-400 border-gray-500/30";
-    }
-  };
+  // ── Booking table columns ─────────────────────────────────────────────────────
 
-  if (loading) return <PortalLoadingSkeleton />;
+  const bookingColumns: TableColumn<BookingRequest>[] = [
+    {
+      key: "full_name",
+      label: "Client",
+      sortable: true,
+    },
+    {
+      key: "service_name",
+      label: "Service",
+      sortable: true,
+    },
+    {
+      key: "created_at",
+      label: "Date",
+      sortable: true,
+      render: (b) => new Date(b.created_at).toLocaleDateString(),
+    },
+    {
+      key: "status",
+      label: "Status",
+      sortable: true,
+      render: (b) => {
+        const variants: Record<string, "default" | "secondary" | "destructive" | "outline"> = {
+          pending: "secondary",
+          confirmed: "default",
+          denied: "destructive",
+        };
+        return (
+          <Badge variant={variants[b.status] ?? "outline"}>
+            {b.status}
+          </Badge>
+        );
+      },
+    },
+    {
+      key: "id",
+      label: "Actions",
+      render: (b) =>
+        b.status === "pending" ? (
+          <div className="flex gap-1">
+            <Button
+              size="sm"
+              variant="ghost"
+              className="h-7 w-7 p-0 text-green-600 hover:text-green-700 hover:bg-green-500/10"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleBookingAction(b.id, "confirmed");
+              }}
+            >
+              <CheckCircle className="w-4 h-4" />
+            </Button>
+            <Button
+              size="sm"
+              variant="ghost"
+              className="h-7 w-7 p-0 text-destructive hover:text-destructive hover:bg-destructive/10"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleBookingAction(b.id, "denied");
+              }}
+            >
+              <XCircle className="w-4 h-4" />
+            </Button>
+          </div>
+        ) : null,
+    },
+  ];
+
+  // ── Early returns ─────────────────────────────────────────────────────────────
+
+  if (roleConfig && !isAuthorized) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
+        <Card className="p-8 text-center max-w-sm">
+          <CardHeader>
+            <CardTitle>Access Denied</CardTitle>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-4">
+            <p className="text-muted-foreground">
+              You do not have secretary privileges.
+            </p>
+            <Button asChild variant="outline">
+              <Link to="/portal">Return to Portal</Link>
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  const isLoading =
+    loadingBookings || loadingMessages || loadingAppointments || loadingRecentBookings;
+
+  if (!roleConfig || isLoading) return <PortalLoadingSkeleton />;
+
+  // ── Render ────────────────────────────────────────────────────────────────────
 
   return (
-    <div className="min-h-screen bg-[#0B1120] text-gray-100">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <header className="border-b border-gray-800/60 bg-[#111827]/80 backdrop-blur-sm">
+      <header className="border-b border-border bg-card/80 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Button asChild variant="ghost" size="sm" className="text-gray-400 hover:text-white hover:bg-white/5">
-                <Link to="/portal"><ArrowLeft className="w-4 h-4 mr-2" />Back</Link>
+              <Button asChild variant="ghost" size="sm">
+                <Link to="/portal">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back
+                </Link>
               </Button>
               <div>
-                <h1 className="text-xl font-bold text-white">Office Manager</h1>
-                <p className="text-sm text-gray-500">Bookings • Clients • Appointments</p>
+                <h1 className="text-xl font-bold text-foreground">Office Manager</h1>
+                <p className="text-sm text-muted-foreground">
+                  Bookings · Clients · Appointments
+                </p>
               </div>
             </div>
-            <Button variant="ghost" size="sm" onClick={handleSignOut} className="text-gray-400 hover:text-white hover:bg-white/5">
-              <LogOut className="w-4 h-4 mr-2" />Sign Out
+            <Button variant="ghost" size="sm" onClick={handleSignOut}>
+              <LogOut className="w-4 h-4 mr-2" />
+              Sign Out
             </Button>
           </div>
         </div>
       </header>
 
       <main className="container mx-auto px-4 py-6 space-y-6">
-        {/* Stats */}
+        {/* Stat cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[
-            { label: "Total Clients", value: stats.totalClients, icon: Users, color: "text-blue-400", bg: "bg-blue-500/10" },
-            { label: "Pending Bookings", value: stats.pendingBookings, icon: ClipboardList, color: "text-amber-400", bg: "bg-amber-500/10" },
-            { label: "Unread Messages", value: stats.unreadMessages, icon: MessageSquare, color: "text-emerald-400", bg: "bg-emerald-500/10" },
-            { label: "Today's Appointments", value: stats.todayAppointments, icon: CalendarDays, color: "text-purple-400", bg: "bg-purple-500/10" },
-          ].map((s) => {
-            const Icon = s.icon;
-            return (
-              <Card key={s.label} className="bg-[#1F2937] border-gray-800/50 p-5">
-                <div className="flex items-center justify-between mb-3">
-                  <div className={`w-10 h-10 ${s.bg} rounded-lg flex items-center justify-center`}>
-                    <Icon className={`w-5 h-5 ${s.color}`} />
-                  </div>
-                  <span className="text-2xl font-bold text-white">{s.value}</span>
-                </div>
-                <p className="text-xs text-gray-500">{s.label}</p>
-              </Card>
-            );
-          })}
+          {statCards.map((card) => (
+            <StatCard key={card.title} data={card} />
+          ))}
         </div>
 
+        {/* Main layout */}
         <div className="grid lg:grid-cols-3 gap-6">
-          {/* Bookings Queue */}
+          {/* Left 2/3 */}
           <div className="lg:col-span-2 space-y-6">
-            <Card className="bg-[#1F2937] border-gray-800/50 p-6">
-              <div className="flex items-center justify-between mb-5">
-                <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                  <ClipboardList className="w-5 h-5 text-amber-400" />
-                  Booking Requests
-                </h2>
-                <Button asChild variant="ghost" size="sm" className="text-gray-400 hover:text-white">
+            {/* Action required */}
+            <ActionQueue
+              title="Action Required"
+              items={actionItems}
+              maxItems={8}
+              onViewAll={() => navigate("/admin/bookings")}
+            />
+
+            {/* Recent bookings table */}
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+                <CardTitle className="text-base font-semibold">Recent Bookings</CardTitle>
+                <Button asChild variant="ghost" size="sm">
                   <Link to="/admin/bookings">View All</Link>
                 </Button>
-              </div>
-              <div className="space-y-3">
-                {bookings.length === 0 ? (
-                  <p className="text-center text-gray-500 py-8">No booking requests</p>
-                ) : (
-                  bookings.map((b) => (
-                    <div key={b.id} className="flex items-center justify-between p-3 bg-[#111827] rounded-lg border border-gray-800/40">
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          <p className="font-medium text-white text-sm truncate">{b.full_name}</p>
-                          <Badge className={`text-[10px] ${statusColor(b.status)}`}>{b.status}</Badge>
-                        </div>
-                        <p className="text-xs text-gray-500 truncate">{b.service_name} • {b.request_number}</p>
-                      </div>
-                      {b.status === "pending" && (
-                        <div className="flex gap-1 ml-2">
-                          <Button size="sm" variant="ghost" className="h-7 w-7 p-0 text-emerald-400 hover:bg-emerald-500/10"
-                            onClick={() => handleBookingAction(b.id, "confirmed")}>
-                            <CheckCircle className="w-4 h-4" />
-                          </Button>
-                          <Button size="sm" variant="ghost" className="h-7 w-7 p-0 text-red-400 hover:bg-red-500/10"
-                            onClick={() => handleBookingAction(b.id, "denied")}>
-                            <XCircle className="w-4 h-4" />
-                          </Button>
-                        </div>
-                      )}
-                    </div>
-                  ))
-                )}
-              </div>
-            </Card>
-
-            {/* Unread Messages */}
-            <Card className="bg-[#1F2937] border-gray-800/50 p-6">
-              <div className="flex items-center justify-between mb-5">
-                <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                  <Mail className="w-5 h-5 text-emerald-400" />
-                  Unread Messages
-                </h2>
-                <Button asChild variant="ghost" size="sm" className="text-gray-400 hover:text-white">
-                  <Link to="/portal/messages">View All</Link>
-                </Button>
-              </div>
-              <div className="space-y-3">
-                {messages.length === 0 ? (
-                  <p className="text-center text-gray-500 py-8">All caught up!</p>
-                ) : (
-                  messages.map((m) => (
-                    <div key={m.id} className="p-3 bg-[#111827] rounded-lg border border-gray-800/40">
-                      <p className="font-medium text-white text-sm">{m.subject || "No Subject"}</p>
-                      <p className="text-xs text-gray-500 mt-1 line-clamp-2">{m.content}</p>
-                      <p className="text-[10px] text-gray-600 mt-1">
-                        {m.created_at ? new Date(m.created_at).toLocaleString() : ""}
-                      </p>
-                    </div>
-                  ))
-                )}
-              </div>
+              </CardHeader>
+              <CardContent>
+                <DataTable
+                  data={recentBookings}
+                  columns={bookingColumns}
+                  searchable
+                  searchPlaceholder="Search bookings..."
+                  pageSize={8}
+                  emptyTitle="No bookings found"
+                  emptyDescription="Booking requests will appear here."
+                />
+              </CardContent>
             </Card>
           </div>
 
-          {/* Sidebar */}
+          {/* Right 1/3 */}
           <div className="space-y-6">
-            {/* Quick Links */}
-            <Card className="bg-[#1F2937] border-gray-800/50 p-5">
-              <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                <Building2 className="w-5 h-5 text-blue-400" />
-                Quick Access
-              </h2>
-              <div className="space-y-2">
-                {[
-                  { label: "Business Clients", path: "/admin/clients/businesses", icon: Building2 },
-                  { label: "Individual Clients", path: "/admin/clients/individuals", icon: UserCheck },
-                  { label: "Service Inquiries", path: "/admin/service-inquiries", icon: ClipboardList },
-                  { label: "Appointments", path: "/admin/bookings", icon: CalendarDays },
-                ].map((link) => {
-                  const Icon = link.icon;
-                  return (
-                    <Button key={link.path} asChild variant="ghost" className="w-full justify-start text-gray-400 hover:text-white hover:bg-white/5">
-                      <Link to={link.path}>
-                        <Icon className="w-4 h-4 mr-2" />{link.label}
-                      </Link>
-                    </Button>
-                  );
-                })}
-              </div>
-            </Card>
+            {/* Real calendar with today's appointments */}
+            <RealCalendar
+              title="Today's Schedule"
+              events={calendarEvents}
+            />
 
-            {/* Calendar */}
-            <Card className="bg-[#1F2937] border-gray-800/50 p-5">
-              <h2 className="text-lg font-bold text-white flex items-center gap-2 mb-4">
-                <CalendarDays className="w-5 h-5 text-purple-400" />
-                Calendar
-              </h2>
-              <div className="[&_.rdp]:bg-[#111827] [&_.rdp]:rounded-lg [&_.rdp]:border [&_.rdp]:border-gray-800/50 [&_.rdp]:p-3 [&_.rdp-day]:text-gray-300 [&_.rdp-day:hover]:bg-purple-500/20 [&_.rdp-day_button:hover]:bg-purple-500/20 [&_.rdp-day_button]:text-gray-300 [&_.rdp-day_button.rdp-day_selected]:bg-gradient-to-r [&_.rdp-day_button.rdp-day_selected]:from-purple-500 [&_.rdp-day_button.rdp-day_selected]:to-pink-600 [&_.rdp-day_button.rdp-day_selected]:text-white [&_.rdp-caption]:text-white [&_.rdp-head_cell]:text-gray-500 [&_.rdp-nav_button]:text-gray-400 [&_.rdp-nav_button:hover]:bg-purple-500/20">
-                <Calendar mode="single" selected={date} onSelect={setDate} className="rounded-md" />
-              </div>
+            {/* Quick actions */}
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base font-semibold">Quick Actions</CardTitle>
+              </CardHeader>
+              <CardContent className="flex flex-col gap-2">
+                <Button asChild className="w-full justify-start gap-2">
+                  <Link to="/admin/bookings">
+                    <Plus className="w-4 h-4" />
+                    Manage Bookings
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="w-full justify-start gap-2"
+                >
+                  <Link to="/portal/messages">
+                    <Send className="w-4 h-4" />
+                    Send Message
+                  </Link>
+                </Button>
+              </CardContent>
             </Card>
           </div>
         </div>

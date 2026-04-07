@@ -1,18 +1,28 @@
-import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { toast } from "sonner";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useToast } from "@/hooks/use-toast";
 import { Copy, Users, DollarSign, Share2, Gift } from "lucide-react";
+
+interface ReferralTracking {
+  id: string;
+  referral_code_id: string;
+  referred_email: string;
+  status: string;
+  reward_amount: number;
+  created_at: string;
+}
 
 export default function ReferralDashboard() {
   const { user } = useAuth();
+  const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  const { data: referralCode } = useQuery({
+  const { data: referralCode, isLoading: isLoadingCode, isError: isErrorCode } = useQuery({
     queryKey: ["my-referral-code", user?.id],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -26,39 +36,51 @@ export default function ReferralDashboard() {
     enabled: !!user,
   });
 
-  const { data: referrals } = useQuery({
+  const { data: referrals, isLoading: isLoadingReferrals, isError: isErrorReferrals } = useQuery({
     queryKey: ["my-referrals", referralCode?.id],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("referral_tracking")
         .select("*")
-        .eq("referral_code_id", referralCode!.id)
+        .eq("referral_code_id", referralCode?.id ?? "")
         .order("created_at", { ascending: false });
       if (error) throw error;
-      return data;
+      return data as ReferralTracking[];
     },
     enabled: !!referralCode,
   });
 
   const createCode = useMutation({
     mutationFn: async () => {
-      const code = `INV-${user!.id.substring(0, 4).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+      const code = `INV-${user!.id.substring(0, 4).toUpperCase()}-${crypto.randomUUID().substring(0, 8).toUpperCase()}`;
       const { error } = await supabase.from("referral_codes").insert({ user_id: user!.id, code });
       if (error) throw error;
     },
     onSuccess: () => {
-      toast.success("Referral code created!");
+      toast({ title: "Referral code created!" });
       queryClient.invalidateQueries({ queryKey: ["my-referral-code"] });
     },
-    onError: () => toast.error("Failed to create referral code"),
+    onError: () => toast({ title: "Failed to create referral code", variant: "destructive" }),
   });
 
   const copyCode = () => {
     if (referralCode) {
       navigator.clipboard.writeText(`${window.location.origin}?ref=${referralCode.code}`);
-      toast.success("Referral link copied!");
+      toast({ title: "Referral link copied!" });
     }
   };
+
+  if (isErrorCode) {
+    return (
+      <div className="container mx-auto max-w-4xl py-8 px-4">
+        <Card>
+          <CardContent className="pt-6 text-center">
+            <p className="text-destructive">Failed to load referral data. Please try again later.</p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto max-w-4xl py-8 px-4">
@@ -74,7 +96,11 @@ export default function ReferralDashboard() {
               <Users className="h-6 w-6 text-primary" />
             </div>
             <div>
-              <p className="text-2xl font-bold">{referralCode?.total_referrals || 0}</p>
+              {isLoadingCode ? (
+                <Skeleton className="h-8 w-16" />
+              ) : (
+                <p className="text-2xl font-bold">{referralCode?.total_referrals || 0}</p>
+              )}
               <p className="text-sm text-muted-foreground">Total Referrals</p>
             </div>
           </CardContent>
@@ -85,7 +111,11 @@ export default function ReferralDashboard() {
               <Gift className="h-6 w-6 text-green-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold">{referralCode?.successful_referrals || 0}</p>
+              {isLoadingCode ? (
+                <Skeleton className="h-8 w-16" />
+              ) : (
+                <p className="text-2xl font-bold">{referralCode?.successful_referrals || 0}</p>
+              )}
               <p className="text-sm text-muted-foreground">Successful</p>
             </div>
           </CardContent>
@@ -96,7 +126,11 @@ export default function ReferralDashboard() {
               <DollarSign className="h-6 w-6 text-yellow-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold">${referralCode?.total_earnings || "0.00"}</p>
+              {isLoadingCode ? (
+                <Skeleton className="h-8 w-16" />
+              ) : (
+                <p className="text-2xl font-bold">${Number(referralCode?.total_earnings ?? 0).toFixed(2)}</p>
+              )}
               <p className="text-sm text-muted-foreground">Total Earnings</p>
             </div>
           </CardContent>
@@ -110,7 +144,9 @@ export default function ReferralDashboard() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          {referralCode ? (
+          {isLoadingCode ? (
+            <Skeleton className="h-10 w-full" />
+          ) : referralCode ? (
             <div className="flex gap-2">
               <Input readOnly value={`${window.location.origin}?ref=${referralCode.code}`} className="font-mono" />
               <Button onClick={copyCode}><Copy className="h-4 w-4 mr-2" /> Copy</Button>
@@ -126,12 +162,33 @@ export default function ReferralDashboard() {
         </CardContent>
       </Card>
 
+      {isErrorReferrals && (
+        <Card>
+          <CardContent className="pt-6 text-center">
+            <p className="text-destructive">Failed to load referral history.</p>
+          </CardContent>
+        </Card>
+      )}
+
+      {isLoadingReferrals && referralCode && (
+        <Card>
+          <CardHeader><CardTitle>Referral History</CardTitle></CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              {[1, 2, 3].map((i) => (
+                <Skeleton key={i} className="h-12 w-full" />
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       {referrals && referrals.length > 0 && (
         <Card>
           <CardHeader><CardTitle>Referral History</CardTitle></CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {referrals.map((r: any) => (
+              {referrals.map((r) => (
                 <div key={r.id} className="flex items-center justify-between py-2 border-b border-border/50 last:border-0">
                   <div>
                     <p className="text-sm font-medium">{r.referred_email}</p>

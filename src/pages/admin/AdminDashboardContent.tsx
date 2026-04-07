@@ -1,148 +1,159 @@
 import { useState, useEffect } from "react";
-// Framer Motion removed for Zero-Distraction protocol
-import { Command } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { Card } from "@/components/ui/card";
 
-import { CyberGuardianStats } from "@/components/admin/neon/CyberGuardianStats";
-import { GlobalThreatActivityChart } from "@/components/admin/neon/GlobalThreatActivityChart";
-import { AttackVectorBarChart } from "@/components/admin/neon/AttackVectorBarChart";
-import { DeviceSecurityShield } from "@/components/admin/neon/DeviceSecurityShield";
-import { CyberRecentAlerts } from "@/components/admin/neon/CyberRecentAlerts";
-import { NeonOperationsStats } from "@/components/admin/neon/NeonOperationsStats";
+import { DashboardKPICards } from "@/components/admin/neon/DashboardKPICards";
+import { NeonAdminModules } from "@/components/admin/neon/NeonAdminModules";
 import { NeonManagementTabs } from "@/components/admin/neon/NeonManagementTabs";
 import { NeonTasksCard } from "@/components/admin/neon/NeonTasksCard";
 import { NeonEventsCard } from "@/components/admin/neon/NeonEventsCard";
-import { NeonTeamOverview } from "@/components/admin/neon/NeonTeamOverview";
 import { NeonCalendarCard } from "@/components/admin/neon/NeonCalendarCard";
 import { NeonQuickActions } from "@/components/admin/neon/NeonQuickActions";
-import { NeonAdminModules } from "@/components/admin/neon/NeonAdminModules";
-import { NeonSystemHealth } from "@/components/admin/neon/NeonSystemHealth";
-import { NeonAccountActions } from "@/components/admin/neon/NeonAccountActions";
+
 import { NeonPendingRequests } from "@/components/admin/neon/NeonPendingRequests";
-import { NeonDashboardLinks } from "@/components/admin/neon/NeonDashboardLinks";
 import { PageSkeleton } from "@/components/admin/PageSkeleton";
 
-// Dashboard content - no shell wrapper (shell is in AdminShell via Outlet)
+interface ModuleStats {
+  pendingBookings: number;
+  pendingInquiries: number;
+  pendingApplications: number;
+  unreadMessages: number;
+  lowStockProducts: number;
+}
+
+interface KpiStats {
+  totalStaff: number;
+  newsletterSubscribers: number;
+}
+
+const OPS_PIPELINES = [
+  { name: "Clients",  table: "clients",          countField: "status", healthyValue: "active"    },
+  { name: "Bookings", table: "booking_requests",  countField: "status", healthyValue: "confirmed" },
+  { name: "Threats",  table: "threat_events",     countField: "status", healthyValue: "resolved"  },
+  { name: "Tickets",  table: "support_tickets",   countField: "status", healthyValue: "resolved"  },
+  { name: "Training", table: "enrollments",       countField: "status", healthyValue: "completed" },
+] as const;
+
 export default function AdminDashboardContent() {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [tasks, setTasks] = useState<any[]>([]);
   const [events, setEvents] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [moduleStats, setModuleStats] = useState({
+  const [moduleStats, setModuleStats] = useState<ModuleStats>({
     pendingBookings: 0,
     pendingInquiries: 0,
     pendingApplications: 0,
     unreadMessages: 0,
     lowStockProducts: 0,
   });
-  const [stats, setStats] = useState({
+  const [kpiStats, setKpiStats] = useState<KpiStats>({
     totalStaff: 0,
-    activeProjects: 0,
-    pendingTasks: 0,
-    upcomingEvents: 0,
     newsletterSubscribers: 0,
   });
 
   useEffect(() => {
-    loadDashboardData();
-    loadModuleStats();
+    loadAllDashboardData();
   }, []);
 
-  const loadModuleStats = async () => {
+  // Ops Health: fetch total + healthy counts for all 5 pipelines in parallel
+  const { data: opsHealth } = useQuery({
+    queryKey: ["ops-health"],
+    queryFn: async () => {
+      const results = await Promise.all(
+        OPS_PIPELINES.map(async (p) => {
+          const [totalRes, healthyRes] = await Promise.all([
+            supabase.from(p.table as any).select("*", { count: "exact", head: true }),
+            supabase.from(p.table as any).select("*", { count: "exact", head: true }).eq(p.countField, p.healthyValue),
+          ]);
+          return {
+            name: p.name,
+            total: totalRes.count ?? 0,
+            healthy: healthyRes.count ?? 0,
+          };
+        })
+      );
+      return results;
+    },
+    staleTime: 60_000,
+  });
+
+  const loadAllDashboardData = async () => {
     try {
-      const { count: bookingsCount } = await supabase
-        .from("booking_requests")
-        .select("*", { count: "exact", head: true })
-        .eq("status", "pending");
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) { setLoading(false); return; }
 
-      const { count: applicationsCount } = await supabase
-        .from("job_applications")
-        .select("*", { count: "exact", head: true })
-        .eq("status", "pending");
+      const [
+        bookingsResult,
+        applicationsResult,
+        messagesResult,
+        inquiriesResult,
+        lowStockResult,
+        tasksResult,
+        eventsResult,
+        staffResult,
+        subscriberResult,
+      ] = await Promise.all([
+        supabase
+          .from("booking_requests")
+          .select("*", { count: "exact", head: true })
+          .eq("status", "pending"),
+        supabase
+          .from("job_applications")
+          .select("*", { count: "exact", head: true })
+          .eq("status", "pending"),
+        supabase
+          .from("internal_messages")
+          .select("*", { count: "exact", head: true })
+          .eq("is_read", false),
+        supabase
+          .from("service_inquiries")
+          .select("*", { count: "exact", head: true })
+          .eq("status", "pending"),
+        supabase
+          .from("products")
+          .select("*", { count: "exact", head: true })
+          .lt("stock_quantity", 10),
+        supabase
+          .from("admin_tasks")
+          .select("*")
+          .eq("user_id", user.id)
+          .order("due_date", { ascending: true })
+          .limit(5),
+        supabase
+          .from("admin_events")
+          .select("*")
+          .eq("user_id", user.id)
+          .gte("start_time", new Date().toISOString())
+          .order("start_time", { ascending: true })
+          .limit(5),
+        supabase
+          .from("user_roles")
+          .select("*", { count: "exact", head: true })
+          .in("role", ["staff", "secretary", "training_coordinator", "business_consultant", "support_specialist"]),
+        supabase
+          .from("newsletter_subscribers")
+          .select("*", { count: "exact", head: true }),
+      ]);
 
-      const { count: messagesCount } = await supabase
-        .from("internal_messages")
-        .select("*", { count: "exact", head: true })
-        .eq("is_read", false);
-
-      const { count: inquiriesCount } = await supabase
-        .from("service_inquiries")
-        .select("*", { count: "exact", head: true })
-        .eq("status", "pending");
-
-      const { count: lowStockCount } = await supabase
-        .from("products")
-        .select("*", { count: "exact", head: true })
-        .lt("stock_quantity", 10);
+      const pendingBookings = bookingsResult.count || 0;
+      const unreadMessages = messagesResult.count || 0;
 
       setModuleStats({
-        pendingBookings: bookingsCount || 0,
-        pendingInquiries: inquiriesCount || 0,
-        pendingApplications: applicationsCount || 0,
-        unreadMessages: messagesCount || 0,
-        lowStockProducts: lowStockCount || 0,
+        pendingBookings,
+        pendingInquiries: inquiriesResult.count || 0,
+        pendingApplications: applicationsResult.count || 0,
+        unreadMessages,
+        lowStockProducts: lowStockResult.count || 0,
       });
-    } catch (err) {
-      console.error("Error loading module stats:", err);
-    }
-  };
 
-  const loadDashboardData = async () => {
-    try {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (!user) {
-        setLoading(false);
-        return;
-      }
-
-      const { data: tasksData } = await supabase
-        .from("admin_tasks")
-        .select("*")
-        .eq("user_id", user.id)
-        .order("due_date", { ascending: true })
-        .limit(5);
-
-      if (tasksData) setTasks(tasksData);
-
-      const { data: eventsData } = await supabase
-        .from("admin_events")
-        .select("*")
-        .eq("user_id", user.id)
-        .gte("start_time", new Date().toISOString())
-        .order("start_time", { ascending: true })
-        .limit(5);
-
-      if (eventsData) setEvents(eventsData);
-
-      const { count: staffCount } = await supabase
-        .from("user_roles")
-        .select("*", { count: "exact", head: true })
-        .in("role", [
-          "staff",
-          "secretary",
-          "training_coordinator",
-          "business_consultant",
-          "support_specialist",
-        ]);
-
-      const { count: projectsCount } = await supabase
-        .from("jobs")
-        .select("*", { count: "exact", head: true })
-        .in("status", ["Pending", "In Progress"]);
-
-      const { count: subscriberCount } = await supabase
-        .from("newsletter_subscribers")
-        .select("*", { count: "exact", head: true });
-
-      setStats({
-        totalStaff: staffCount || 0,
-        activeProjects: projectsCount || 0,
-        pendingTasks: tasksData?.length || 0,
-        upcomingEvents: eventsData?.length || 0,
-        newsletterSubscribers: subscriberCount || 0,
+      setKpiStats({
+        totalStaff: staffResult.count || 0,
+        newsletterSubscribers: subscriberResult.count || 0,
       });
+
+      if (tasksResult.data) setTasks(tasksResult.data);
+      if (eventsResult.data) setEvents(eventsResult.data);
     } catch (err) {
       console.error("Error loading dashboard data:", err);
     } finally {
@@ -154,88 +165,88 @@ export default function AdminDashboardContent() {
     return <PageSkeleton variant="dashboard" />;
   }
 
+  const today = new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  // Derive KPI card stats by combining module stats with kpi-only stats
+  const kpiCardStats = {
+    pendingBookings: moduleStats.pendingBookings,
+    unreadMessages: moduleStats.unreadMessages,
+    totalStaff: kpiStats.totalStaff,
+    newsletterSubscribers: kpiStats.newsletterSubscribers,
+  };
+
   return (
-    <div className="p-4 sm:p-6 lg:p-8 max-w-[1600px] mx-auto">
+    <div className="p-6 lg:p-8 max-w-[1400px] mx-auto space-y-6">
       {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="w-10 h-10 bg-gradient-to-br from-[#3B82F6] to-[#06B6D4] rounded-lg flex items-center justify-center shadow-lg shadow-[#3B82F6]/20">
-            <Command className="w-5 h-5 text-white" />
-          </div>
-          <div>
-            <div className="flex items-center gap-3">
-              <h1 className="text-3xl font-bold text-[#F9FAFB]">
-                Security Command Center
-              </h1>
-              {/* Live Status Badge */}
-              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#10B981]/10 border border-[#10B981]/30">
-                <span className="w-2 h-2 rounded-full bg-[#10B981]" />
-                <span className="text-xs font-medium text-[#10B981]">LIVE</span>
-              </div>
-            </div>
-            <p className="text-[#9CA3AF]">
-              Real-time threat monitoring and family protection overview
-            </p>
-          </div>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-semibold text-[#F9FAFB] tracking-tight">
+            Admin Overview
+          </h1>
+          <p className="text-sm text-[#6B7280] mt-1">{today}</p>
         </div>
       </div>
 
-      {/* Live Monitor Cards */}
-      <CyberGuardianStats />
-
-      {/* Admin Modules Grid */}
-      <div className="mb-6">
-        <NeonAdminModules stats={moduleStats} />
-      </div>
-
-      {/* Operations Stats */}
-      <div className="mb-6">
-        <NeonOperationsStats stats={stats} />
-      </div>
-
-      {/* Charts Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-        <div className="lg:col-span-2">
-          <GlobalThreatActivityChart />
+      {/* Ops Health Strip */}
+      {opsHealth && (
+        <div className="flex flex-wrap gap-3">
+          {opsHealth.map((p) => {
+            const ratio = p.total > 0 ? p.healthy / p.total : 0;
+            const dotColor =
+              ratio > 0.5
+                ? "bg-green-500"
+                : ratio >= 0.25
+                ? "bg-yellow-400"
+                : "bg-red-500";
+            const borderColor =
+              ratio > 0.5
+                ? "border-l-green-500"
+                : ratio >= 0.25
+                ? "border-l-yellow-400"
+                : "border-l-red-500";
+            return (
+              <Card
+                key={p.name}
+                className={`flex items-center gap-2 px-3 py-2 border-l-4 ${borderColor} min-w-[110px]`}
+              >
+                <span className={`inline-block w-2 h-2 rounded-full shrink-0 ${dotColor}`} />
+                <div className="flex flex-col leading-tight">
+                  <span className="text-xs font-medium text-foreground">{p.name}</span>
+                  <span className="text-[11px] text-muted-foreground">{p.healthy}/{p.total}</span>
+                </div>
+              </Card>
+            );
+          })}
         </div>
-        <div className="lg:col-span-1">
-          <DeviceSecurityShield />
-        </div>
-      </div>
+      )}
 
-      {/* Second Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <AttackVectorBarChart />
-        <CyberRecentAlerts />
-      </div>
+      {/* KPI Cards */}
+      <DashboardKPICards stats={kpiCardStats} />
 
-      {/* Management Tabs */}
-      <div className="mb-6">
-        <NeonManagementTabs />
-      </div>
+      {/* Modules */}
+      <NeonAdminModules stats={moduleStats} />
 
-      {/* Three Column Layout */}
-      <div className="grid lg:grid-cols-3 gap-6">
-        {/* Left Column */}
-        <div className="space-y-6">
+      {/* Two-column: Management Tabs + Sidebar */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div className="lg:col-span-8 space-y-6">
+          <NeonManagementTabs />
           <NeonPendingRequests />
-          <NeonTasksCard tasks={tasks} />
-          <NeonEventsCard events={events} />
         </div>
-
-        {/* Middle Column */}
-        <div className="space-y-6">
-          <NeonSystemHealth />
-          <NeonTeamOverview />
-          <NeonAccountActions />
-        </div>
-
-        {/* Right Column */}
-        <div className="space-y-6">
-          <NeonCalendarCard date={date} onSelect={setDate} />
-          <NeonDashboardLinks />
+        <div className="lg:col-span-4 space-y-6">
           <NeonQuickActions />
+          <NeonCalendarCard date={date} onSelect={setDate} />
         </div>
+      </div>
+
+      {/* Tasks & Events */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <NeonTasksCard tasks={tasks} />
+        <NeonEventsCard events={events} />
       </div>
     </div>
   );

@@ -132,81 +132,82 @@ export const CookieConsent = forwardRef<HTMLDivElement>(function CookieConsent(_
 
   return (
     <>
-      <style>{`@keyframes cookieFadeIn{from{opacity:0}to{opacity:1}}`}</style>
-      <div className="fixed bottom-0 left-0 right-0 z-50 p-4 sm:p-6" style={{ animation: 'cookieFadeIn 0.3s ease-out', contain: 'layout style paint' }}>
-        <Card className="max-w-4xl mx-auto p-4 sm:p-6 shadow-2xl border-2 border-border">
-          <div className="flex flex-col sm:flex-row items-start gap-4">
-            <div className="flex-1">
-              <h3 className="text-lg font-bold mb-2">
-                🍪 We Value Your Privacy
-              </h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                We use cookies to improve your experience, analyze site traffic,
-                and provide personalized content. You can customize your
-                preferences or accept all cookies.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-2">
-                <Button onClick={acceptAll} size="sm" variant="default">
-                  Accept All
-                </Button>
-                <Button onClick={acceptEssential} variant="outline" size="sm">
-                  Essential Only
-                </Button>
-                <Button
-                  onClick={() => setShowSettings(true)}
-                  variant="secondary"
-                  size="sm"
-                  className="gap-2"
-                >
-                  <Settings className="w-4 h-4" />
-                  Customize
-                </Button>
-              </div>
+      <div className="cookie-banner fixed bottom-4 left-4 right-4 sm:bottom-6 sm:left-auto sm:right-6 z-50">
+        <div className="cookie-banner__card sm:w-[360px] rounded-xl overflow-hidden">
+          <div className="p-4">
+            {/* Header row */}
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-sm font-bold text-white">We Value Your Privacy</h3>
+              <button
+                type="button"
+                onClick={acceptEssential}
+                className="p-1 text-white/40 hover:text-white rounded transition-colors"
+                aria-label="Close cookie banner"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={acceptEssential}
-              className="self-start"
-              aria-label="Close cookie banner"
-            >
-              <X className="w-4 h-4" />
-            </Button>
+
+            {/* Description */}
+            <p className="text-xs text-white/55 leading-relaxed mb-3">
+              We use cookies to improve your experience, analyze site traffic,
+              and provide personalized content.
+            </p>
+
+            {/* Buttons */}
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={acceptAll}
+                className="h-8 px-4 text-xs font-semibold text-white rounded-lg transition-all duration-200 hover:brightness-110"
+                style={{ background: 'var(--ws-blue, #3067e8)' }}
+              >
+                Accept All
+              </button>
+              <button
+                type="button"
+                onClick={acceptEssential}
+                className="h-8 px-4 text-xs font-semibold text-white/70 rounded-lg border border-white/15 hover:border-white/30 hover:text-white transition-all duration-200"
+                style={{ background: 'rgba(255,255,255,0.05)' }}
+              >
+                Essential Only
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowSettings(true)}
+                className="h-8 w-8 flex items-center justify-center text-white/40 rounded-lg border border-white/10 hover:border-white/25 hover:text-white transition-all duration-200 ml-auto"
+                style={{ background: 'rgba(255,255,255,0.04)' }}
+                aria-label="Cookie settings"
+              >
+                <Settings className="w-3.5 h-3.5" />
+              </button>
+            </div>
           </div>
-        </Card>
+        </div>
       </div>
 
       <Dialog open={showSettings} onOpenChange={setShowSettings}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-md rounded-2xl">
           <DialogHeader>
             <DialogTitle>Cookie Preferences</DialogTitle>
             <DialogDescription>
-              Manage your cookie preferences. Essential cookies are required for
-              the site to function and cannot be disabled.
+              Essential cookies are required for the site to function.
             </DialogDescription>
           </DialogHeader>
 
-          <div className="space-y-6 py-4">
-            <div className="flex items-center justify-between space-x-2">
+          <div className="space-y-5 py-3">
+            <div className="flex items-center justify-between gap-3">
               <div className="flex-1">
-                <Label htmlFor="essential" className="font-semibold">
-                  Essential Cookies
-                </Label>
-                <p className="text-sm text-muted-foreground">
-                  Required for the website to function. Cannot be disabled.
-                </p>
+                <Label htmlFor="essential" className="text-sm font-semibold">Essential</Label>
+                <p className="text-xs text-muted-foreground">Required. Cannot be disabled.</p>
               </div>
               <Switch id="essential" checked={true} disabled />
             </div>
 
-            <div className="flex items-center justify-between space-x-2">
+            <div className="flex items-center justify-between gap-3">
               <div className="flex-1">
-                <Label htmlFor="analytics" className="font-semibold">
-                  Analytics Cookies
-                </Label>
-                <p className="text-sm text-muted-foreground">
-                  Help us understand how visitors use our website.
-                </p>
+                <Label htmlFor="analytics" className="text-sm font-semibold">Analytics</Label>
+                <p className="text-xs text-muted-foreground">Helps us understand site usage.</p>
               </div>
               <Switch
                 id="analytics"
@@ -217,14 +218,10 @@ export const CookieConsent = forwardRef<HTMLDivElement>(function CookieConsent(_
               />
             </div>
 
-            <div className="flex items-center justify-between space-x-2">
+            <div className="flex items-center justify-between gap-3">
               <div className="flex-1">
-                <Label htmlFor="marketing" className="font-semibold">
-                  Marketing Cookies
-                </Label>
-                <p className="text-sm text-muted-foreground">
-                  Used to deliver personalized advertisements.
-                </p>
+                <Label htmlFor="marketing" className="text-sm font-semibold">Marketing</Label>
+                <p className="text-xs text-muted-foreground">Personalized advertisements.</p>
               </div>
               <Switch
                 id="marketing"
@@ -237,7 +234,7 @@ export const CookieConsent = forwardRef<HTMLDivElement>(function CookieConsent(_
           </div>
 
           <DialogFooter>
-            <Button onClick={handleSaveSettings}>Save Preferences</Button>
+            <Button onClick={handleSaveSettings} size="sm">Save Preferences</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

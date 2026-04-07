@@ -17,7 +17,7 @@ const LauraAIAssistant = lazy(() => import("./components/chat/LauraAIAssistant")
 const CartFeedbackNotifications = lazy(() => import("./components/CartFeedbackNotifications").then(m => ({ default: m.CartFeedbackNotifications })));
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { RouteTracker } from "./components/RouteTracker";
-const DraggablePerformanceMonitor = lazy(() => import("./components/DraggablePerformanceMonitor").then(m => ({ default: m.DraggablePerformanceMonitor })));
+
 import { PageTransition } from "./components/PageTransition";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { useSmoothAnchorScroll } from "./hooks/useSmoothAnchorScroll";
@@ -33,6 +33,9 @@ import { NavigationProgress } from "./components/NavigationProgress";
 // Admin Shell
 const AdminShell = lazy(() => import("./components/admin/AdminShell").then(m => ({ default: m.AdminShell })));
 
+// Portal Shell
+const PortalShell = lazy(() => import("./components/portal/PortalShell").then(m => ({ default: m.PortalShell })));
+
 // Pages - lazy loaded to reduce main bundle size
 const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -47,16 +50,10 @@ const AIAutomation = lazy(() => import("./pages/business/AIAutomation"));
 const WebsiteDesign = lazy(() => import("./pages/business/WebsiteDesign"));
 const WebsiteInsurance = lazy(() => import("./pages/business/WebsiteInsurance"));
 const AutonomousDefenseHub = lazy(() => import("./pages/business/AutonomousDefenseHub"));
-const CognitiveSentinel = lazy(() => import("./pages/services/CognitiveSentinel"));
-const ScamInsurance = lazy(() => import("./pages/services/ScamInsurance"));
-const AISafeCertification = lazy(() => import("./pages/services/AISafeCertification"));
-const FamilyEmergencyNetwork = lazy(() => import("./pages/services/FamilyEmergencyNetwork"));
-const DigitalEstate = lazy(() => import("./pages/services/DigitalEstate"));
 const About = lazy(() => import("./pages/About"));
 const Resources = lazy(() => import("./pages/Resources"));
 const Articles = lazy(() => import("./pages/Articles"));
 const ArticleDetail = lazy(() => import("./pages/ArticleDetail"));
-const Services = lazy(() => import("./pages/Services"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Careers = lazy(() => import("./pages/Careers"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword"));
@@ -65,8 +62,6 @@ const Portfolio = lazy(() => import("./pages/Portfolio"));
 const PortfolioDetail = lazy(() => import("./pages/PortfolioDetail"));
 const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
 const PaymentCanceled = lazy(() => import("./pages/PaymentCanceled"));
-const GlassmorphismTrustHeroDemo = lazy(() => import("./pages/GlassmorphismTrustHeroDemo"));
-const StyleShowcase = lazy(() => import("./pages/StyleShowcase"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const HelpCenter = lazy(() => import("./pages/HelpCenter"));
 const Maintenance = lazy(() => import("./pages/Maintenance"));
@@ -85,6 +80,14 @@ const Disclaimer = lazy(() => import("./pages/Disclaimer"));
 
 // Portal pages - lazy loaded
 const Portal = lazy(() => import("./pages/Portal"));
+const SeniorHome = lazy(() => import("./pages/portal/SeniorHome"));
+const CaregiverHome = lazy(() => import("./pages/portal/CaregiverHome"));
+const HealthcareHome = lazy(() => import("./pages/portal/HealthcareHome"));
+const ClientModule = lazy(() => import("./pages/portal/ClientModule"));
+const BookingModule = lazy(() => import("./pages/portal/BookingModule"));
+const TaskModule = lazy(() => import("./pages/portal/TaskModule"));
+const InvoiceModule = lazy(() => import("./pages/portal/InvoiceModule"));
+const PartnerModule = lazy(() => import("./pages/portal/PartnerModule"));
 const MyCourses = lazy(() => import("./pages/portal/MyCourses"));
 const MyBookings = lazy(() => import("./pages/portal/MyBookings"));
 const MyTickets = lazy(() => import("./pages/portal/MyTickets"));
@@ -152,10 +155,11 @@ const CyberAnalytics = lazy(() => import("./pages/admin/cyber/CyberAnalytics"));
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 60_000,       // 1 min — skip refetch if data is fresh
-      gcTime: 5 * 60_000,      // 5 min — keep unused data in cache
+      staleTime: 5 * 60_000,   // 5 min — avoid unnecessary refetches
+      gcTime: 15 * 60_000,     // 15 min — keep cache longer
       retry: 1,
       refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
     },
   },
 });
@@ -174,21 +178,15 @@ function PublicRoutes() {
         <Route path="/business/website-insurance" element={<PageTransition variant="auto"><WebsiteInsurance /></PageTransition>} />
         <Route path="/business/autonomous-defense-hub" element={<PageTransition variant="auto"><AutonomousDefenseHub /></PageTransition>} />
         <Route path="/invision-2026" element={<Navigate to="/business" replace />} />
-        <Route path="/services/cognitive-sentinel" element={<PageTransition variant="auto"><CognitiveSentinel /></PageTransition>} />
-        <Route path="/services/scam-insurance" element={<PageTransition variant="auto"><ScamInsurance /></PageTransition>} />
-        <Route path="/services/ai-safe-certification" element={<PageTransition variant="auto"><AISafeCertification /></PageTransition>} />
-        <Route path="/services/family-emergency-network" element={<PageTransition variant="auto"><FamilyEmergencyNetwork /></PageTransition>} />
-        <Route path="/services/digital-estate" element={<PageTransition variant="auto"><DigitalEstate /></PageTransition>} />
+        {/* Legacy /services/* routes removed - redirect any stragglers to /contact for inquiry */}
+        <Route path="/services/*" element={<Navigate to="/contact" replace />} />
         <Route path="/about" element={<PageTransition variant="auto"><About /></PageTransition>} />
-        <Route path="/services" element={<PageTransition variant="auto"><Services /></PageTransition>} />
         <Route path="/resources" element={<PageTransition variant="auto"><Resources /></PageTransition>} />
         <Route path="/resources/:slug" element={<PageTransition variant="auto"><BookDetail /></PageTransition>} />
         <Route path="/library" element={<PageTransition variant="auto"><LibraryPage /></PageTransition>} />
         <Route path="/purchase/:slug" element={<PageTransition variant="auto"><PurchasePage /></PageTransition>} />
         <Route path="/payment-success" element={<PageTransition variant="fade"><PaymentSuccess /></PageTransition>} />
         <Route path="/payment-canceled" element={<PageTransition variant="fade"><PaymentCanceled /></PageTransition>} />
-        <Route path="/demo/glassmorphism-hero" element={<PageTransition variant="auto"><GlassmorphismTrustHeroDemo /></PageTransition>} />
-        <Route path="/style-showcase" element={<PageTransition variant="auto"><StyleShowcase /></PageTransition>} />
         <Route path="/articles" element={<PageTransition variant="auto"><Articles /></PageTransition>} />
         <Route path="/articles/:slug" element={<PageTransition variant="auto"><ArticleDetail /></PageTransition>} />
         <Route path="/contact" element={<PageTransition variant="auto"><Contact /></PageTransition>} />
@@ -206,29 +204,35 @@ function PublicRoutes() {
         <Route path="/guest-scanner" element={<Navigate to="/training/ai-analysis" replace />} />
         <Route path="/reader" element={<PageTransition variant="fade"><BookReader /></PageTransition>} />
 
-        {/* Portal Routes — 4 internal dashboards */}
-        <Route path="/portal" element={<PageTransition><ProtectedRoute><Portal /></ProtectedRoute></PageTransition>} />
+        {/* Portal routes wrapped in PortalShell */}
+        <Route path="/portal" element={<ProtectedRoute><PortalShell /></ProtectedRoute>}>
+          <Route index element={<Portal />} />
+          <Route path="secretary" element={<SecretaryDashboard />} />
+          <Route path="coordinator" element={<CoordinatorDashboard />} />
+          <Route path="staff" element={<StaffDashboard />} />
+          <Route path="messages" element={<InternalMessages />} />
+          <Route path="my-courses" element={<MyCourses />} />
+          <Route path="my-bookings" element={<MyBookings />} />
+          <Route path="my-tickets" element={<MyTickets />} />
+          <Route path="referrals" element={<ReferralDashboard />} />
+          <Route path="analytics" element={<UserAnalytics />} />
+          <Route path="courses/:id" element={<CourseDetail />} />
+          <Route path="scam-check/:id" element={<ScamCheckResult />} />
+          <Route path="senior" element={<SeniorHome />} />
+          <Route path="caregiver" element={<CaregiverHome />} />
+          <Route path="healthcare" element={<HealthcareHome />} />
+          <Route path="clients" element={<ClientModule />} />
+          <Route path="bookings" element={<BookingModule />} />
+          <Route path="tasks" element={<TaskModule />} />
+          <Route path="invoices" element={<InvoiceModule />} />
+          <Route path="partners" element={<PartnerModule />} />
+        </Route>
+        {/* Redirects for portal paths — outside PortalShell */}
         <Route path="/portal/admin" element={<Navigate to="/admin" replace />} />
-        <Route path="/portal/secretary" element={<PageTransition><ProtectedRoute><SecretaryDashboard /></ProtectedRoute></PageTransition>} />
-        <Route path="/portal/coordinator" element={<PageTransition><ProtectedRoute><CoordinatorDashboard /></ProtectedRoute></PageTransition>} />
-        <Route path="/portal/staff" element={<PageTransition><ProtectedRoute><StaffDashboard /></ProtectedRoute></PageTransition>} />
-        {/* Redirects for removed dashboards */}
         <Route path="/portal/analyst" element={<Navigate to="/portal/staff" replace />} />
         <Route path="/portal/trainer" element={<Navigate to="/portal/coordinator" replace />} />
         <Route path="/portal/developer" element={<Navigate to="/portal/staff" replace />} />
-        <Route path="/portal/senior" element={<Navigate to="/portal/staff" replace />} />
         <Route path="/portal/business" element={<Navigate to="/portal/staff" replace />} />
-        <Route path="/portal/caregiver" element={<Navigate to="/portal/staff" replace />} />
-        <Route path="/portal/healthcare" element={<Navigate to="/portal/staff" replace />} />
-        {/* Shared portal utilities */}
-        <Route path="/portal/messages" element={<PageTransition><ProtectedRoute><InternalMessages /></ProtectedRoute></PageTransition>} />
-        <Route path="/portal/my-courses" element={<PageTransition><ProtectedRoute><MyCourses /></ProtectedRoute></PageTransition>} />
-        <Route path="/portal/my-bookings" element={<PageTransition><ProtectedRoute><MyBookings /></ProtectedRoute></PageTransition>} />
-        <Route path="/portal/my-tickets" element={<PageTransition><ProtectedRoute><MyTickets /></ProtectedRoute></PageTransition>} />
-        <Route path="/portal/referrals" element={<PageTransition><ProtectedRoute><ReferralDashboard /></ProtectedRoute></PageTransition>} />
-        <Route path="/portal/analytics" element={<PageTransition><ProtectedRoute><UserAnalytics /></ProtectedRoute></PageTransition>} />
-        <Route path="/portal/courses/:id" element={<PageTransition><ProtectedRoute><CourseDetail /></ProtectedRoute></PageTransition>} />
-        <Route path="/portal/scam-check/:id" element={<PageTransition><ProtectedRoute><ScamCheckResult /></ProtectedRoute></PageTransition>} />
 
         {/* Legal Pages */}
         <Route path="/privacy-policy" element={<PageTransition variant="fade"><PrivacyPolicy /></PageTransition>} />
@@ -350,7 +354,7 @@ function App() {
                         <LauraAIAssistant />
                         <CartFeedbackNotifications />
                         <UnifiedCheckoutDialog />
-                        <DraggablePerformanceMonitor />
+
                       </Suspense>
                     </PrerenderProvider>
                   </BrowserRouter>

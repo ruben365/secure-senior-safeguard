@@ -147,7 +147,7 @@ export function NotificationBell() {
         >
           New Inquiries
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => navigate("/admin/team/applications")}>
+        <DropdownMenuItem onClick={() => navigate("/admin/job-applications")}>
           Job Applications
         </DropdownMenuItem>
       </DropdownMenuContent>

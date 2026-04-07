@@ -13,11 +13,39 @@ const logStep = (step: string, details?: unknown) => {
   console.log(`[CREATE-TRAINING-PAYMENT] ${step}${detailsStr}`);
 };
 
+// ============================================================================
+// Per-IP rate limit (15 / minute) — public endpoint that creates Stripe
+// resources and runs DB lookups. Cap to prevent enumeration / spam.
+// ============================================================================
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT = 15;
+const RATE_WINDOW_MS = 60 * 1000;
+
+function checkRateLimit(identifier: string): {
+  allowed: boolean;
+  retryAfter?: number;
+} {
+  const now = Date.now();
+  const record = rateLimitMap.get(identifier);
+  if (!record || now > record.resetTime) {
+    rateLimitMap.set(identifier, { count: 1, resetTime: now + RATE_WINDOW_MS });
+    return { allowed: true };
+  }
+  if (record.count >= RATE_LIMIT) {
+    return {
+      allowed: false,
+      retryAfter: Math.ceil((record.resetTime - now) / 1000),
+    };
+  }
+  record.count++;
+  return { allowed: true };
+}
+
 interface TrainingPaymentRequest {
-  serviceType: string;
-  serviceName: string;
+  // Either an exact courseId OR a slug. amount is IGNORED if sent.
+  courseId?: string;
+  courseSlug?: string;
   serviceTier?: string;
-  amount: number; // in dollars
   customerEmail: string;
   customerName: string;
   isVeteran?: boolean;
@@ -35,16 +63,46 @@ serve(async (req) => {
   try {
     logStep("Function started");
 
+    // Per-IP rate limit
+    const clientIp =
+      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      req.headers.get("x-real-ip") ||
+      "unknown";
+
+    const rateCheck = checkRateLimit(clientIp);
+    if (!rateCheck.allowed) {
+      return new Response(
+        JSON.stringify({
+          error: "Too many requests. Please try again shortly.",
+          retryAfter: rateCheck.retryAfter,
+        }),
+        {
+          status: 429,
+          headers: {
+            ...corsHeaders,
+            "Content-Type": "application/json",
+            "Retry-After": String(rateCheck.retryAfter),
+          },
+        },
+      );
+    }
+
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
     if (!stripeKey) {
       throw new Error("STRIPE_SECRET_KEY is not configured");
     }
 
+    const supabaseAdmin = createClient(
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
+      { auth: { persistSession: false } },
+    );
+
+    const body: TrainingPaymentRequest = await req.json();
     const {
-      serviceType,
-      serviceName,
+      courseId,
+      courseSlug,
       serviceTier,
-      amount,
       customerEmail,
       customerName,
       isVeteran = false,
@@ -52,29 +110,80 @@ serve(async (req) => {
       phone,
       message,
       state,
-    }: TrainingPaymentRequest = await req.json();
+    } = body;
 
-    logStep("Request data", {
-      serviceType,
-      serviceName,
-      amount,
-      customerEmail,
-      isVeteran,
-    });
+    if (!customerEmail || !customerName) {
+      throw new Error("Missing required fields: customerEmail or customerName");
+    }
 
-    if (!customerEmail || !customerName || !amount) {
+    if (!courseId && !courseSlug) {
+      throw new Error("courseId or courseSlug is required");
+    }
+
+    // Validate email
+    const normalizedEmail = String(customerEmail).toLowerCase().trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(normalizedEmail) || normalizedEmail.length > 254) {
+      throw new Error("Invalid email format");
+    }
+
+    // Cap customer-controlled string fields so they can't be used to flood
+    // Stripe metadata or our DB later via webhook handlers.
+    const safeCustomerName = String(customerName).slice(0, 100).trim();
+    const safePhone = typeof phone === "string" ? phone.slice(0, 30).trim() : "";
+    const safeMessage = typeof message === "string" ? message.slice(0, 480) : "";
+    const safeState = typeof state === "string" ? state.slice(0, 50).trim() : "";
+    const safeServiceTier =
+      typeof serviceTier === "string" ? serviceTier.slice(0, 50).trim() : "";
+    const safePreferredDate =
+      typeof preferredDate === "string" ? preferredDate.slice(0, 50).trim() : "";
+
+    // ====================================================================
+    // CRITICAL SECURITY: server-side price lookup
+    // The client used to send `amount` directly. We now ignore that and
+    // look up the actual price from the courses table.
+    // ====================================================================
+    let courseQuery = supabaseAdmin
+      .from("courses")
+      .select("id, title, slug, price, status, category, level");
+
+    if (courseId) {
+      courseQuery = courseQuery.eq("id", courseId);
+    } else if (courseSlug) {
+      courseQuery = courseQuery.eq("slug", courseSlug);
+    }
+
+    const { data: course, error: courseErr } = await courseQuery
+      .maybeSingle();
+
+    if (courseErr || !course) {
+      throw new Error(`Course not found`);
+    }
+
+    if (course.status !== "active" && course.status !== "published") {
+      throw new Error(`Course is not available: ${course.title}`);
+    }
+
+    const baseAmount = Number(course.price);
+    if (!Number.isFinite(baseAmount) || baseAmount <= 0) {
       throw new Error(
-        "Missing required fields: customerEmail, customerName, or amount",
+        `Course has no valid price (nothing for free): ${course.title}`,
       );
     }
 
-    // Calculate veteran discount (10%)
-    const veteranDiscount = isVeteran ? amount * 0.1 : 0;
-    const finalAmount = amount - veteranDiscount;
+    // Apply 10% veteran discount server-side
+    const veteranDiscount = isVeteran ? baseAmount * 0.1 : 0;
+    const finalAmount = baseAmount - veteranDiscount;
     const amountInCents = Math.round(finalAmount * 100);
 
-    logStep("Calculated pricing", {
-      originalAmount: amount,
+    if (amountInCents < 50) {
+      throw new Error("Order total must be at least $0.50");
+    }
+
+    logStep("Server-verified pricing", {
+      courseId: course.id,
+      title: course.title,
+      baseAmount,
       veteranDiscount,
       finalAmount,
       amountInCents,
@@ -84,7 +193,7 @@ serve(async (req) => {
 
     // Check if customer exists
     const customers = await stripe.customers.list({
-      email: customerEmail,
+      email: normalizedEmail,
       limit: 1,
     });
     let customerId: string | undefined;
@@ -93,44 +202,46 @@ serve(async (req) => {
       customerId = customers.data[0].id;
       logStep("Found existing customer", { customerId });
     } else {
-      // Create new customer
       const newCustomer = await stripe.customers.create({
-        email: customerEmail,
-        name: customerName,
-        phone: phone || undefined,
+        email: normalizedEmail,
+        name: safeCustomerName || undefined,
+        phone: safePhone || undefined,
         metadata: {
           isVeteran: isVeteran ? "true" : "false",
-          state: state || "",
+          state: safeState,
         },
       });
       customerId = newCustomer.id;
       logStep("Created new customer", { customerId });
     }
 
-    // Create payment intent with metadata
+    // Create payment intent with the SERVER-COMPUTED amount
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amountInCents,
       currency: "usd",
       customer: customerId,
       metadata: {
         paymentType: "training",
-        serviceType,
-        serviceName,
-        serviceTier: serviceTier || "",
+        courseId: course.id,
+        courseSlug: course.slug || "",
+        courseTitle: String(course.title).slice(0, 480),
+        serviceTier: safeServiceTier,
         isVeteran: isVeteran ? "true" : "false",
-        veteranDiscount: veteranDiscount.toString(),
-        originalAmount: amount.toString(),
-        preferredDate: preferredDate || "",
-        customerName,
-        customerEmail,
-        phone: phone || "",
-        message: message || "",
-        state: state || "",
+        veteranDiscountCents: Math.round(veteranDiscount * 100).toString(),
+        baseAmountCents: Math.round(baseAmount * 100).toString(),
+        preferredDate: safePreferredDate,
+        customerName: safeCustomerName,
+        customerEmail: normalizedEmail,
+        phone: safePhone,
+        message: safeMessage,
+        state: safeState,
       },
       automatic_payment_methods: {
         enabled: true,
       },
-      description: `Training: ${serviceName}${serviceTier ? ` - ${serviceTier}` : ""}`,
+      description: `Training: ${String(course.title).slice(0, 100)}${
+        safeServiceTier ? ` - ${safeServiceTier}` : ""
+      }`,
     });
 
     logStep("Created payment intent", {
@@ -144,9 +255,11 @@ serve(async (req) => {
         paymentIntentId: paymentIntent.id,
         customerId,
         amount: amountInCents,
-        originalAmount: amount,
+        baseAmount,
         veteranDiscount,
         finalAmount,
+        courseId: course.id,
+        courseTitle: course.title,
       }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },

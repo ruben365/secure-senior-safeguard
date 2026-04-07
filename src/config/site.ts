@@ -18,8 +18,9 @@ export const SITE = {
     abuse: "abuse@invisionnetwork.org",
   },
   location: {
-    city: "Dayton",
+    city: "Kettering",
     region: "OH",
+    postalCode: "45429",
     areaLabel: "Greater Dayton Area",
     country: "US",
   },

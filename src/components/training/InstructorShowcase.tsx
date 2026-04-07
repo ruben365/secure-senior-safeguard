@@ -107,7 +107,7 @@ export const InstructorShowcase = () => {
       <section className="py-10 sm:py-16 md:py-20 bg-muted/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-12">
           <div className="text-center mb-14">
-            <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
+            <span className="inline-block text-xs uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
               Meet Your Instructors
             </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
@@ -142,7 +142,7 @@ export const InstructorShowcase = () => {
                 <p className="text-xs text-muted-foreground mb-2 line-clamp-1">
                   {instructor.title}
                 </p>
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] md:text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] md:text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
                   {instructor.specialty}
                 </span>
                 <p className="text-xs text-primary mt-2 opacity-0 group-hover:opacity-100 transition-opacity font-semibold">
@@ -156,17 +156,17 @@ export const InstructorShowcase = () => {
             <div className="inline-flex items-center gap-6 sm:gap-10 bg-card border border-border/60 rounded-2xl px-6 sm:px-10 py-4 shadow-sm">
               <div className="text-center">
                 <p className="text-2xl font-black text-primary">80+</p>
-                <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Years Combined</p>
+                <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">Years Combined</p>
               </div>
               <div className="w-px h-10 bg-border/60" />
               <div className="text-center">
                 <p className="text-2xl font-black text-primary">140K+</p>
-                <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Students Helped</p>
+                <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">Students Helped</p>
               </div>
               <div className="w-px h-10 bg-border/60" />
               <div className="text-center">
                 <p className="text-2xl font-black text-primary">5</p>
-                <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Specialists</p>
+                <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">Specialists</p>
               </div>
             </div>
           </div>

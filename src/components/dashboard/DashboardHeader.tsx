@@ -1,4 +1,4 @@
-import { LogOut, Home, Settings, Bell } from "lucide-react";
+import { LogOut, Home, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from "react-router-dom";
@@ -30,7 +30,7 @@ export function DashboardHeader({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Avatar className="w-12 h-12 border-2 border-primary/20">
-              <AvatarImage src={avatarUrl} alt={`${firstName} ${lastName}`} />
+              <AvatarImage src={avatarUrl} alt={firstName && lastName ? `${firstName} ${lastName}` : "User avatar"} />
               <AvatarFallback className="bg-gradient-to-br from-primary to-primary/60 text-white font-semibold">
                 {initials}
               </AvatarFallback>
@@ -43,13 +43,10 @@ export function DashboardHeader({
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" className="relative">
-              <Bell className="w-5 h-5" />
-              <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
-            </Button>
             <Button variant="ghost" size="icon">
-              <Settings className="w-5 h-5" />
+              <Bell className="w-5 h-5" />
             </Button>
+            {/* TODO: Settings button placeholder - wire up onClick when settings page is available */}
             <Button variant="outline" size="sm" onClick={() => navigate("/")}>
               <Home className="w-4 h-4 mr-2" />
               Home

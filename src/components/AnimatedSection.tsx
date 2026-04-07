@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 interface AnimatedSectionProps {
   children: ReactNode;
   className?: string;
+  id?: string;
   animation?: "fade-up" | "fade-left" | "fade-right" | "scale-up" | "blur-in";
   delay?: number;
   stagger?: boolean;
@@ -12,6 +13,7 @@ interface AnimatedSectionProps {
 export const AnimatedSection = React.forwardRef<HTMLDivElement, AnimatedSectionProps>(({
   children,
   className,
+  id,
   animation = "fade-up",
   delay = 0,
   stagger = false,
@@ -52,7 +54,7 @@ export const AnimatedSection = React.forwardRef<HTMLDivElement, AnimatedSectionP
     };
   }, []);
 
-  const baseStyles = "transition-all duration-300 ease-out";
+  const baseStyles = "transition-[opacity,transform] duration-200 ease-out will-change-[opacity,transform]";
 
   const animationMap = {
     "fade-up": {
@@ -82,6 +84,7 @@ export const AnimatedSection = React.forwardRef<HTMLDivElement, AnimatedSectionP
   return (
     <div
       ref={ref}
+      id={id}
       className={cn(
         baseStyles,
         isVisible ? anim.visible : anim.hidden,

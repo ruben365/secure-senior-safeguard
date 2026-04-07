@@ -222,7 +222,7 @@ export const ServiceInquiryDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="glass-modal sm:max-w-[550px] max-h-[90vh] overflow-y-auto border-white/30">
+      <DialogContent className="sm:max-w-[550px] max-h-[90vh] overflow-y-auto rounded-2xl">
         <DialogHeader>
           <div className="flex items-center gap-2 mb-2">
             <Badge variant="secondary" className="bg-primary/10 text-primary">
@@ -555,7 +555,7 @@ export const ServiceInquiryDialog = ({
                   </h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
                     <li>• Our team reviews your inquiry within 24 hours</li>
-                    <li>• We'll schedule a free consultation call</li>
+                    <li>• We'll schedule a scoping call</li>
                     <li>• Receive a custom proposal tailored to your needs</li>
                   </ul>
                 </div>

@@ -131,8 +131,10 @@ const OrderDetail = () => {
           subtotal: orderData.subtotal || 0,
           shipping: orderData.shipping_cost || 0,
           tax: orderData.tax_amount || 0,
+          // partner_orders has `discount_amount` (used by veteran flag and
+          // future Stripe Coupon flow) but never had a `discount_code` text
+          // column. The discount-codes feature was removed Phase 4.9d.
           discount: orderData.discount_amount || 0,
-          discountCode: orderData.discount_code || "",
           total: orderData.total_amount,
         },
         timeline: [
@@ -483,10 +485,12 @@ const OrderDetail = () => {
                   <span className="text-muted-foreground">Tax:</span>
                   <span>${order.summary.tax.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between text-success">
-                  <span>Discount ({order.summary.discountCode}):</span>
-                  <span>-${order.summary.discount.toFixed(2)}</span>
-                </div>
+                {order.summary.discount > 0 && (
+                  <div className="flex justify-between text-success">
+                    <span>Discount:</span>
+                    <span>-${order.summary.discount.toFixed(2)}</span>
+                  </div>
+                )}
                 <Separator />
                 <div className="flex justify-between text-lg font-bold">
                   <span>Total:</span>

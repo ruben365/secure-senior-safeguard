@@ -1,7 +1,7 @@
 // Professional Hero Images Configuration
 // Natural, photorealistic images for each page with InVision Network branding
 
-import heroBrandedBusiness from "@/assets/hero-branded-business-new.jpg";
+import heroBrandedBusiness from "@/assets/hero-branded-business-new.png";
 import heroBrandedTraining from "@/assets/training-hero-workshop.jpg";
 import heroBrandedResources from "@/assets/hero-resources-premium.jpg";
 import heroBrandedAbout from "@/assets/hero-branded-about.jpg";

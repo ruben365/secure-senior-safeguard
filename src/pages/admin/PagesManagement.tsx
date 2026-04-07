@@ -19,7 +19,6 @@ import { FileText, Save, Eye, RefreshCw } from "lucide-react";
 const PAGES = [
   { id: "home", name: "Home", path: "/" },
   { id: "about", name: "About", path: "/about" },
-  { id: "services", name: "Services", path: "/services" },
   { id: "training", name: "Training", path: "/training" },
   { id: "business", name: "Business", path: "/business" },
   { id: "resources", name: "Resources", path: "/resources" },

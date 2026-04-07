@@ -43,7 +43,7 @@ function ArticleDetail() {
           description="Loading article content."
           noindex
         />
-        <Navigation />
+        <Navigation overlay />
         <div className="container mx-auto px-4 py-16 max-w-4xl">
           <Skeleton className="h-8 w-32 mb-4" />
           <Skeleton className="h-12 w-full mb-4" />
@@ -68,7 +68,7 @@ function ArticleDetail() {
           description="The article you're looking for doesn't exist or has been removed."
           noindex
         />
-        <Navigation />
+        <Navigation overlay />
         <div className="container mx-auto px-4 py-16 text-center">
           <h1 className="text-4xl font-bold mb-4">Article Not Found</h1>
           <p className="text-muted-foreground mb-8">
@@ -90,7 +90,7 @@ function ArticleDetail() {
   const otherArticles = relatedArticles
     ?.filter((a) => a.id !== article.id)
     .slice(0, 2);
-  const articleUrl = `https://invisionnetwork.org/articles/${article.slug}`;
+  const articleUrl = `https://www.invisionnetwork.org/articles/${article.slug}`;
   const articleDescription =
     article.seo_description ||
     article.excerpt ||
@@ -125,12 +125,12 @@ function ArticleDetail() {
             name: "InVision Network",
             logo: {
               "@type": "ImageObject",
-              url: "https://invisionnetwork.org/favicon.png",
+              url: "https://www.invisionnetwork.org/favicon.png",
             },
           },
         }}
       />
-      <Navigation />
+      <Navigation overlay />
 
       <article className="container mx-auto px-4 py-16 max-w-4xl">
         <div className="animate-fade-in">
@@ -276,7 +276,7 @@ function ArticleDetail() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild variant="default" size="lg">
-                <Link to="/training#scamshield">
+                <Link to="/training#training">
                   Learn About ScamShield
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Link>

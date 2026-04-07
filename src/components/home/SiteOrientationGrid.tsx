@@ -28,7 +28,7 @@ const pages = [
   },
   {
     icon: Building2,
-    title: "AI & Business",
+    title: "AI",
     description: "Security audits, AI automation, and employee training for organizations.",
     link: "/business",
     cta: "Get a Quote",
@@ -38,18 +38,19 @@ const pages = [
   {
     icon: Shield,
     title: "ScamShield AI",
-    description: "Real-time AI-powered scanning for calls, texts, and emails.",
+    description:
+      "Real-time AI-powered scanning for calls, texts, and emails. Pay-per-scan from $0.50.",
     link: "/training/ai-analysis",
-    cta: "Try Free",
+    cta: "Start a Scan",
     image: serviceScamshield,
     gradient: "from-primary/15 to-accent/15",
   },
   {
     icon: BookOpen,
     title: "Resources",
-    description: "Free guides, e-books, and security tools for your family.",
+    description: "Guides, e-books, and security tools for your family.",
     link: "/resources",
-    cta: "Browse Free",
+    cta: "Browse Library",
     image: serviceFamilySafety,
     gradient: "from-accent/15 to-primary/10",
   },
@@ -113,7 +114,7 @@ export const SiteOrientationGrid = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
                   {page.featured && (
-                    <span className="absolute top-3 left-3 inline-flex items-center px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-gradient-to-r from-primary to-accent text-white shadow-lg">
+                    <span className="absolute top-3 left-3 inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-primary to-accent text-white shadow-lg">
                       ⭐ Most Popular
                     </span>
                   )}
@@ -126,7 +127,7 @@ export const SiteOrientationGrid = () => {
                 <div className="p-5 relative">
                   <div className={`absolute inset-0 bg-gradient-to-br ${page.gradient} opacity-30 pointer-events-none`} />
                   <div className="relative">
-                    <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center mb-3 shadow-sm border border-primary/10">
+                    <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-primary/20 to-accent/15 flex items-center justify-center mb-3 shadow-[0_2px_8px_hsl(var(--primary)/0.15)] border border-primary/15 group-hover:shadow-[0_4px_16px_hsl(var(--primary)/0.25)] group-hover:scale-110 transition-all duration-300">
                       <page.icon className="w-5 h-5 text-primary" />
                     </div>
                     <h3 className="text-lg font-bold text-foreground mb-2">

@@ -1,4 +1,4 @@
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -6,14 +6,17 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-// Simple in-memory rate limiter
+// ============================================================================
+// Per-IP rate limit (10 / min). The endpoint forwards every call to a paid
+// LLM gateway, so the cap must be tight enough to prevent credit-burn DoS.
+// ============================================================================
 interface RateLimitEntry {
   count: number;
   resetAt: number;
 }
 
 const rateLimitMap = new Map<string, RateLimitEntry>();
-const RATE_LIMIT_WINDOW_MS = 60000;
+const RATE_LIMIT_WINDOW_MS = 60_000;
 const MAX_REQUESTS_PER_WINDOW = 10;
 
 setInterval(() => {
@@ -23,7 +26,7 @@ setInterval(() => {
       rateLimitMap.delete(key);
     }
   }
-}, 300000);
+}, 300_000);
 
 function checkRateLimit(identifier: string): {
   allowed: boolean;
@@ -51,7 +54,27 @@ function checkRateLimit(identifier: string): {
   };
 }
 
-const LAURA_SYSTEM_PROMPT = `You are Laura, the professional AI assistant for InVision Network, a cybersecurity education company specializing in AI scam protection and business solutions.
+// ============================================================================
+// Hard caps on the LLM payload. These exist to prevent both prompt-injection
+// amplification (10MB transcript) and pure cost burn — a free-tier abuser
+// could otherwise jam the gateway with arbitrarily long histories.
+// ============================================================================
+const MAX_MESSAGES = 30;
+const MAX_MESSAGE_CHARS = 4000;
+const MAX_TOTAL_CHARS = 30_000;
+const ALLOWED_ROLES = new Set(["system", "user", "assistant"]);
+const ALLOWED_TYPES = new Set([
+  "chat",
+  "laura",
+  "sentiment",
+  "summary",
+  "translation",
+  "document_qa",
+  "image_analysis",
+]);
+
+const LAURA_SYSTEM_PROMPT =
+  `You are Laura, the professional AI assistant for InVision Network, a cybersecurity education company specializing in AI scam protection and business solutions.
 
 PLATFORM KNOWLEDGE (current system):
 - InVision Network sells 30+ digital eBooks through the Resources page. All books are read online only. There are no physical products, no downloads, and no shipping.
@@ -96,7 +119,7 @@ STRICT RULES:
    - Pricing, services, and Access IDs
    - How the online reading system works
    - Privacy and security
-   
+
 2. You NEVER:
    - Read or analyze files
    - Open or visit links
@@ -140,7 +163,7 @@ serve(async (req) => {
 
   try {
     const clientIp =
-      req.headers.get("x-forwarded-for")?.split(",")[0] ||
+      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
       req.headers.get("x-real-ip") ||
       "unknown";
 
@@ -168,20 +191,100 @@ serve(async (req) => {
       );
     }
 
-    console.log(
-      `Request from IP: ${clientIp}, remaining: ${rateCheck.remaining}`,
-    );
+    const body = await req.json().catch(() => null);
+    if (!body || typeof body !== "object") {
+      return new Response(
+        JSON.stringify({ error: "Invalid request body" }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        },
+      );
+    }
 
-    const { messages, type = "chat" } = await req.json();
+    const rawType = (body as { type?: unknown }).type;
+    const type = typeof rawType === "string" && ALLOWED_TYPES.has(rawType)
+      ? rawType
+      : "chat";
+
+    const rawMessages = (body as { messages?: unknown }).messages;
+    if (!Array.isArray(rawMessages)) {
+      return new Response(
+        JSON.stringify({ error: "messages must be an array" }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        },
+      );
+    }
+
+    if (rawMessages.length === 0 || rawMessages.length > MAX_MESSAGES) {
+      return new Response(
+        JSON.stringify({
+          error: `messages must contain between 1 and ${MAX_MESSAGES} entries`,
+        }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        },
+      );
+    }
+
+    // Validate every message: shape, role allow-list, content length cap.
+    let totalChars = 0;
+    const sanitized: Array<{ role: string; content: string }> = [];
+    for (const m of rawMessages) {
+      if (!m || typeof m !== "object") {
+        return new Response(
+          JSON.stringify({ error: "Invalid message entry" }),
+          {
+            status: 400,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          },
+        );
+      }
+      const role = (m as { role?: unknown }).role;
+      const content = (m as { content?: unknown }).content;
+      if (typeof role !== "string" || !ALLOWED_ROLES.has(role)) {
+        return new Response(
+          JSON.stringify({ error: "Invalid message role" }),
+          {
+            status: 400,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          },
+        );
+      }
+      if (typeof content !== "string") {
+        return new Response(
+          JSON.stringify({ error: "Message content must be a string" }),
+          {
+            status: 400,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          },
+        );
+      }
+      const trimmed = content.slice(0, MAX_MESSAGE_CHARS);
+      totalChars += trimmed.length;
+      if (totalChars > MAX_TOTAL_CHARS) {
+        return new Response(
+          JSON.stringify({ error: "Message history too long" }),
+          {
+            status: 400,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          },
+        );
+      }
+      sanitized.push({ role, content: trimmed });
+    }
+
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
-
     if (!LOVABLE_API_KEY) {
       throw new Error("LOVABLE_API_KEY is not configured");
     }
 
     const systemPrompt = getSystemPrompt(type);
 
-    console.log(`Processing ${type} request with ${messages.length} messages`);
+    console.log(`Processing ${type} request with ${sanitized.length} messages`);
 
     const response = await fetch(
       "https://ai.gateway.lovable.dev/v1/chat/completions",
@@ -193,7 +296,7 @@ serve(async (req) => {
         },
         body: JSON.stringify({
           model: "google/gemini-2.5-flash",
-          messages: [{ role: "system", content: systemPrompt }, ...messages],
+          messages: [{ role: "system", content: systemPrompt }, ...sanitized],
           stream: true,
         }),
       },
@@ -243,8 +346,7 @@ serve(async (req) => {
     console.error("AI chat error:", error);
     return new Response(
       JSON.stringify({
-        error:
-          error instanceof Error ? error.message : "Unknown error occurred",
+        error: "AI chat request failed",
       }),
       {
         status: 500,

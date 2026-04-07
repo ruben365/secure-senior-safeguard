@@ -1,142 +1,144 @@
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import {
   ShoppingCart as CartIcon,
   Trash2,
   Plus,
   Minus,
-  Sparkles,
+  X,
+  Lock,
 } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useState, lazy, Suspense } from "react";
 const EnhancedCheckoutDialog = lazy(() => import("./EnhancedCheckoutDialog").then(m => ({ default: m.EnhancedCheckoutDialog })));
-import { Badge } from "@/components/ui/badge";
 
 export function ShoppingCart() {
   const { items, removeItem, updateQuantity, total, itemCount } = useCart();
   const [checkoutOpen, setCheckoutOpen] = useState(false);
-  const [cartOpen, setCartOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <>
-      <Sheet open={cartOpen} onOpenChange={setCartOpen}>
-        <SheetTrigger asChild>
-          <Button
-            variant="outline"
-            size="icon"
-            className="relative group hover:bg-primary/10 transition-colors"
-            aria-label="Open shopping cart"
-          >
-            <CartIcon className="h-5 w-5 group-hover:text-primary transition-colors" />
-            {itemCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-gradient-to-r from-primary to-accent text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center animate-bounce shadow-lg">
-                {itemCount}
-              </span>
-            )}
-          </Button>
-        </SheetTrigger>
-        <SheetContent className="w-full sm:max-w-lg">
-          <SheetHeader>
-            <SheetTitle>Shopping Cart ({itemCount} items)</SheetTitle>
-          </SheetHeader>
-          <div className="flex flex-col h-full">
-            <div className="flex-1 overflow-y-auto py-4">
-              {items.length === 0 ? (
-                <div className="text-center py-12 text-muted-foreground">
-                  Your cart is empty
+      <div className="relative">
+        {/* Trigger */}
+        <button
+          type="button"
+          onClick={() => setOpen(!open)}
+          className="flex items-center justify-center w-9 h-9 rounded-lg bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-white/20 transition-colors relative"
+          aria-label={`Shopping cart, ${itemCount} items`}
+        >
+          <CartIcon className="w-4 h-4" />
+          {itemCount > 0 && (
+            <span className="absolute -top-1.5 -right-1.5 flex items-center justify-center min-w-[16px] h-4 px-1 text-[10px] font-bold text-white bg-orange-500 rounded-full leading-none shadow-[0_0_8px_rgba(249,115,22,0.45)]">
+              {itemCount}
+            </span>
+          )}
+        </button>
+
+        {/* Dropdown */}
+        {open && (
+          <>
+            <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
+            <div
+              className="absolute right-0 top-full mt-2 z-50 w-[min(320px,calc(100vw-2rem))] rounded-xl overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+              style={{
+                background: "rgba(15, 15, 20, 0.92)",
+                backdropFilter: "blur(20px) saturate(120%)",
+                WebkitBackdropFilter: "blur(20px) saturate(120%)",
+              }}
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between px-4 py-3 border-b border-white/8">
+                <div className="flex items-center gap-2">
+                  <CartIcon className="w-4 h-4 text-orange-400" />
+                  <span className="text-sm font-bold text-white">Cart</span>
+                  {itemCount > 0 && (
+                    <span className="text-[10px] font-bold text-orange-300 bg-orange-500/20 px-1.5 py-0.5 rounded-full">
+                      {itemCount}
+                    </span>
+                  )}
                 </div>
-              ) : (
-                <div className="space-y-4">
-                  {items.map((item) => (
-                    <div
-                      key={item.id}
-                      className="flex gap-4 p-4 border rounded-lg"
-                    >
-                      {item.image && (
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          width={80}
-                          height={80}
-                          loading="lazy"
-                          decoding="async"
-                          className="w-20 h-20 object-cover rounded"
-                        />
-                      )}
-                      <div className="flex-1">
-                        <h4 className="font-semibold">{item.name}</h4>
-                        <p className="text-sm text-muted-foreground">
-                          ${item.price.toFixed(2)}
-                        </p>
-                        <div className="flex items-center gap-2 mt-2">
-                          <Button
-                            size="icon"
-                            variant="outline"
-                            className="h-8 w-8"
-                            onClick={() =>
-                              updateQuantity(item.id, item.quantity - 1)
-                            }
-                            aria-label={`Decrease quantity of ${item.name}`}
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  className="p-1 text-gray-400 hover:text-white rounded-md hover:bg-white/8 transition-colors"
+                  aria-label="Close cart"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              </div>
+
+              {/* Items */}
+              <div className="max-h-64 overflow-y-auto overscroll-contain">
+                {items.length === 0 ? (
+                  <div className="px-4 py-8 text-center">
+                    <CartIcon className="w-6 h-6 text-gray-600 mx-auto mb-2" />
+                    <p className="text-sm text-gray-500">Your cart is empty</p>
+                  </div>
+                ) : (
+                  items.map((item) => (
+                    <div key={item.id} className="px-4 py-3 border-b border-white/5 hover:bg-white/[0.03] transition-colors">
+                      <div className="flex items-start gap-3">
+                        {item.image && (
+                          <img src={item.image} alt={item.name} className="w-10 h-10 rounded-md object-cover flex-shrink-0" />
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-sm font-semibold text-white truncate">{item.name}</h4>
+                          <p className="text-xs text-orange-400 font-medium">${item.price.toFixed(2)}</p>
+                        </div>
+                        <div className="flex items-center gap-1 flex-shrink-0">
+                          <button
+                            type="button"
+                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                            className="w-6 h-6 flex items-center justify-center rounded bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-white/20 transition-colors"
+                            aria-label="Decrease"
                           >
-                            <Minus className="h-4 w-4" />
-                          </Button>
-                          <span className="w-8 text-center">
-                            {item.quantity}
-                          </span>
-                          <Button
-                            size="icon"
-                            variant="outline"
-                            className="h-8 w-8"
-                            onClick={() =>
-                              updateQuantity(item.id, item.quantity + 1)
-                            }
-                            aria-label={`Increase quantity of ${item.name}`}
+                            <Minus className="w-3 h-3" />
+                          </button>
+                          <span className="w-5 text-center text-xs font-medium text-white">{item.quantity}</span>
+                          <button
+                            type="button"
+                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                            className="w-6 h-6 flex items-center justify-center rounded bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-white/20 transition-colors"
+                            aria-label="Increase"
                           >
-                            <Plus className="h-4 w-4" />
-                          </Button>
-                          <Button
-                            size="icon"
-                            variant="ghost"
-                            className="h-8 w-8 ml-auto"
+                            <Plus className="w-3 h-3" />
+                          </button>
+                          <button
+                            type="button"
                             onClick={() => removeItem(item.id)}
-                            aria-label={`Remove ${item.name} from cart`}
+                            className="w-6 h-6 flex items-center justify-center rounded text-gray-500 hover:text-red-400 hover:bg-red-500/10 transition-colors ml-1"
+                            aria-label="Remove"
                           >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
+                            <Trash2 className="w-3 h-3" />
+                          </button>
                         </div>
                       </div>
                     </div>
-                  ))}
+                  ))
+                )}
+              </div>
+
+              {/* Footer */}
+              {items.length > 0 && (
+                <div className="px-4 py-3 border-t border-white/8">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-sm text-gray-400">Total</span>
+                    <span className="text-base font-bold text-white">${total.toFixed(2)}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => { setOpen(false); setCheckoutOpen(true); }}
+                    className="w-full h-10 flex items-center justify-center gap-2 rounded-lg bg-orange-600 hover:bg-orange-500 text-white text-sm font-semibold transition-colors"
+                  >
+                    <Lock className="w-3.5 h-3.5" />
+                    Checkout
+                  </button>
                 </div>
               )}
             </div>
-            {items.length > 0 && (
-              <div className="border-t pt-4 space-y-4">
-                <div className="flex justify-between text-lg font-semibold">
-                  <span>Total:</span>
-                  <span>${total.toFixed(2)}</span>
-                </div>
-                <Button
-                  className="w-full"
-                  size="lg"
-                  onClick={() => {
-                    setCartOpen(false);
-                    setCheckoutOpen(true);
-                  }}
-                >
-                  Proceed to Checkout
-                </Button>
-              </div>
-            )}
-          </div>
-        </SheetContent>
-      </Sheet>
+          </>
+        )}
+      </div>
 
       {checkoutOpen && (
         <Suspense fallback={null}>

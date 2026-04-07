@@ -135,7 +135,7 @@ function MyBookings() {
               <Calendar className="w-5 h-5 text-primary" />
               Your Booking Requests
             </CardTitle>
-            <Button onClick={() => navigate("/services")} variant="outline">
+            <Button onClick={() => navigate("/business")} variant="outline">
               Book New Service
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
@@ -231,7 +231,7 @@ function MyBookings() {
                 <p className="text-muted-foreground mb-6">
                   You haven't made any service requests yet.
                 </p>
-                <Button onClick={() => navigate("/services")}>
+                <Button onClick={() => navigate("/business")}>
                   Browse Services
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>

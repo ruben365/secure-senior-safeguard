@@ -168,7 +168,7 @@ const AutonomousDefenseHub = () => {
           description="The future of cybersecurity for Ohio businesses: Agentic SOC, Deepfake Validator, Honey-Identities, and Hardware-Bound Identity. Built by InVision Network."
           keywords="agentic SOC, deepfake detection, honey tokens, hardware security key, AI cybersecurity Ohio"
         />
-        <Navigation />
+        <Navigation overlay />
 
         <main>
           {/* ── HERO ── */}

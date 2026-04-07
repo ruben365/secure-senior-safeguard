@@ -181,8 +181,8 @@ function AcceptableUse() {
                   <h3 className="text-lg font-semibold mb-2">Service Abuse</h3>
                   <ul className="list-disc list-inside space-y-2 text-muted-foreground ml-4 mb-4">
                     <li>
-                      Creating multiple accounts to abuse free trials or
-                      promotions
+                      Creating multiple accounts to abuse promotional pricing,
+                      discount codes, or money-back guarantees
                     </li>
                     <li>Sharing account credentials with unauthorized users</li>
                     <li>

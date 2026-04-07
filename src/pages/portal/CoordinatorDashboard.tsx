@@ -1,33 +1,31 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/contexts/AuthContext";
 import { PortalLoadingSkeleton } from "@/components/portal/PortalLoadingSkeleton";
+import { StatCard } from "@/components/shared/StatCard";
+import { ActionQueue } from "@/components/shared/ActionQueue";
+import { EmptyState } from "@/components/shared/EmptyState";
+import { ErrorState } from "@/components/shared/ErrorState";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import {
   ArrowLeft,
-  FileText,
   GraduationCap,
-  Star,
+  Users,
+  MessageSquare,
   BookOpen,
   LogOut,
   CheckCircle,
   XCircle,
-  Eye,
-  PenLine,
-  MessageSquare,
+  Calendar,
+  Shield,
+  PlusCircle,
+  Database,
 } from "lucide-react";
-
-interface Article {
-  id: string;
-  title: string;
-  status: string;
-  category: string;
-  created_at: string | null;
-  views: number | null;
-}
+import type { ActionItem, StatCardData } from "@/types/portal";
 
 interface Testimonial {
   id: string;
@@ -37,243 +35,505 @@ interface Testimonial {
   created_at: string;
 }
 
+interface ZoomClass {
+  id: string;
+  title: string;
+  start_time: string;
+  enrollment_count?: number | null;
+}
+
 function CoordinatorDashboard() {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [loading, setLoading] = useState(true);
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  const [stats, setStats] = useState({
-    publishedArticles: 0,
-    activeCourses: 0,
-    pendingTestimonials: 0,
-    kbArticles: 0,
+  const { roleConfig, signOut } = useAuth();
+  const queryClient = useQueryClient();
+  const [submittingId, setSubmittingId] = useState<string | null>(null);
+
+  // ── Role check (used by query `enabled` flags AND by render guard) ────────
+  // IMPORTANT: We compute this BEFORE the queries and gate the queries on it
+  // via `enabled`, then early-return AFTER all hooks have been called.
+  // Rules of Hooks: hooks must run in the same order every render, so the
+  // role guard must NOT short-circuit before any useQuery call.
+  const isAuthorized =
+    roleConfig?.role === "training_coordinator" ||
+    roleConfig?.role === "admin";
+
+  // ── Queries ───────────────────────────────────────────────────────────────
+  const sevenDaysAgo = new Date(
+    Date.now() - 7 * 24 * 60 * 60 * 1000
+  ).toISOString();
+  const now = new Date().toISOString();
+
+  const { data: coursesData, isLoading: loadingCourses } = useQuery({
+    queryKey: ["coordinator", "courses"],
+    enabled: isAuthorized,
+    queryFn: async () => {
+      const [{ count: total }, { count: published }] = await Promise.all([
+        supabase
+          .from("courses")
+          .select("*", { count: "exact", head: true }),
+        supabase
+          .from("courses")
+          .select("*", { count: "exact", head: true })
+          .eq("status", "published"),
+      ]);
+      return { total: total ?? 0, published: published ?? 0 };
+    },
   });
 
-  useEffect(() => {
-    loadData();
-  }, []);
+  const { data: enrollmentsData, isLoading: loadingEnrollments } = useQuery({
+    queryKey: ["coordinator", "enrollments"],
+    enabled: isAuthorized,
+    queryFn: async () => {
+      const [{ count: total }, { count: weekly }] = await Promise.all([
+        supabase
+          .from("enrollments")
+          .select("*", { count: "exact", head: true }),
+        supabase
+          .from("enrollments")
+          .select("*", { count: "exact", head: true })
+          .gte("created_at", sevenDaysAgo),
+      ]);
+      return { total: total ?? 0, weekly: weekly ?? 0 };
+    },
+  });
 
-  const loadData = async () => {
-    const [
-      { data: articlesData },
-      { data: testimonialsData },
-      { count: publishedCount },
-      { count: coursesCount },
-      { count: pendingTestCount },
-      { count: kbCount },
-    ] = await Promise.all([
-      supabase.from("articles").select("id, title, status, category, created_at, views").order("created_at", { ascending: false }).limit(8),
-      supabase.from("testimonials").select("id, name, content, status, created_at").eq("status", "pending").order("created_at", { ascending: false }).limit(6),
-      supabase.from("articles").select("*", { count: "exact", head: true }).eq("status", "published"),
-      supabase.from("courses").select("*", { count: "exact", head: true }).eq("active", true),
-      supabase.from("testimonials").select("*", { count: "exact", head: true }).eq("status", "pending"),
-      supabase.from("knowledge_base_articles" as any).select("*", { count: "exact", head: true }),
-    ]);
+  const {
+    data: testimonials,
+    isLoading: loadingTestimonials,
+    isError: testimonialsError,
+    refetch: refetchTestimonials,
+  } = useQuery({
+    queryKey: ["coordinator", "testimonials"],
+    enabled: isAuthorized,
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("testimonials")
+        .select("id, name, content, status, created_at")
+        .eq("status", "pending")
+        .order("created_at", { ascending: false })
+        .limit(6);
+      if (error) throw error;
+      return (data ?? []) as Testimonial[];
+    },
+  });
 
-    if (articlesData) setArticles(articlesData);
-    if (testimonialsData) setTestimonials(testimonialsData);
-    setStats({
-      publishedArticles: publishedCount || 0,
-      activeCourses: coursesCount || 0,
-      pendingTestimonials: pendingTestCount || 0,
-      kbArticles: kbCount || 0,
-    });
-    setLoading(false);
-  };
+  const { data: kbCount, isLoading: loadingKb } = useQuery({
+    queryKey: ["coordinator", "knowledge_base"],
+    enabled: isAuthorized,
+    queryFn: async () => {
+      const { count } = await (supabase as any)
+        .from("knowledge_base_articles")
+        .select("*", { count: "exact", head: true });
+      return count ?? 0;
+    },
+  });
 
-  const handleTestimonialAction = async (id: string, action: "approved" | "rejected") => {
-    const { error } = await supabase
-      .from("testimonials")
-      .update({ status: action })
-      .eq("id", id);
+  const { data: upcomingSessions, isLoading: loadingSessions } = useQuery({
+    queryKey: ["coordinator", "zoom_classes"],
+    enabled: isAuthorized,
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("zoom_classes")
+        .select("id, title, start_time, enrollment_count")
+        .gte("start_time", now)
+        .order("start_time", { ascending: true })
+        .limit(5);
+      if (error) throw error;
+      return (data ?? []) as ZoomClass[];
+    },
+  });
 
-    if (error) {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
-    } else {
-      toast({ title: action === "approved" ? "✅ Testimonial Approved" : "❌ Testimonial Rejected" });
-      loadData();
+  const { data: scamCount, isLoading: loadingScam } = useQuery({
+    queryKey: ["coordinator", "scam_submissions"],
+    enabled: isAuthorized,
+    queryFn: async () => {
+      const { count } = await supabase
+        .from("scam_submissions")
+        .select("*", { count: "exact", head: true })
+        .gte("created_at", sevenDaysAgo);
+      return count ?? 0;
+    },
+  });
+
+  // ── Role guard (AFTER all hooks have been called) ────────────────────────
+  if (!isAuthorized) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Card className="p-8 text-center max-w-sm">
+          <h2 className="text-xl font-bold text-foreground mb-2">
+            Access Denied
+          </h2>
+          <p className="text-muted-foreground mb-4">
+            You do not have coordinator privileges.
+          </p>
+          <Button asChild variant="ghost">
+            <Link to="/portal">Return to Portal</Link>
+          </Button>
+        </Card>
+      </div>
+    );
+  }
+
+  const isLoading =
+    loadingCourses ||
+    loadingEnrollments ||
+    loadingTestimonials ||
+    loadingKb ||
+    loadingSessions ||
+    loadingScam;
+
+  // ── Handlers ──────────────────────────────────────────────────────────────
+  const handleTestimonialAction = async (
+    id: string,
+    action: "approved" | "rejected"
+  ) => {
+    if (submittingId) return;
+    setSubmittingId(id);
+    try {
+      const { error } = await supabase
+        .from("testimonials")
+        .update({ status: action })
+        .eq("id", id);
+
+      if (error) {
+        toast({
+          title: "Error",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title:
+            action === "approved"
+              ? "Testimonial Approved"
+              : "Testimonial Rejected",
+        });
+        await queryClient.invalidateQueries({
+          queryKey: ["coordinator", "testimonials"],
+        });
+        await queryClient.invalidateQueries({
+          queryKey: ["coordinator", "courses"],
+        });
+      }
+    } catch (err: any) {
+      toast({
+        title: "Error",
+        description: err?.message ?? "An unexpected error occurred.",
+        variant: "destructive",
+      });
+    } finally {
+      setSubmittingId(null);
     }
   };
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut();
+    await signOut();
     navigate("/auth");
   };
 
-  const articleStatusColor = (status: string) => {
-    switch (status) {
-      case "published": return "bg-emerald-500/20 text-emerald-400 border-emerald-500/30";
-      case "draft": return "bg-gray-500/20 text-gray-400 border-gray-500/30";
-      default: return "bg-amber-500/20 text-amber-400 border-amber-500/30";
-    }
-  };
+  if (isLoading) return <PortalLoadingSkeleton />;
 
-  if (loading) return <PortalLoadingSkeleton />;
+  // ── Derived data ──────────────────────────────────────────────────────────
+  const statCards: StatCardData[] = [
+    {
+      title: "Active Courses",
+      value: coursesData?.published ?? 0,
+      subtitle: `${coursesData?.total ?? 0} total`,
+      icon: GraduationCap,
+    },
+    {
+      title: "Enrollments This Week",
+      value: enrollmentsData?.weekly ?? 0,
+      subtitle: `${enrollmentsData?.total ?? 0} total`,
+      icon: Users,
+    },
+    {
+      title: "Pending Reviews",
+      value: testimonials?.length ?? 0,
+      subtitle: "Testimonials awaiting approval",
+      icon: MessageSquare,
+    },
+    {
+      title: "Knowledge Base",
+      value: kbCount ?? 0,
+      subtitle: "Articles published",
+      icon: BookOpen,
+    },
+  ];
 
+  const testimonialActionItems: ActionItem[] = (testimonials ?? []).map(
+    (t) => ({
+      id: t.id,
+      title: t.name,
+      description: t.content,
+      priority: "medium" as const,
+      icon: MessageSquare,
+      onAction: () => handleTestimonialAction(t.id, "approved"),
+      actionLabel: "Approve",
+    })
+  );
+
+  // ── Render ────────────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-[#0B1120] text-gray-100">
-      <header className="border-b border-gray-800/60 bg-[#111827]/80 backdrop-blur-sm">
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Header */}
+      <header className="border-b border-border bg-card/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Button asChild variant="ghost" size="sm" className="text-gray-400 hover:text-white hover:bg-white/5">
-                <Link to="/portal"><ArrowLeft className="w-4 h-4 mr-2" />Back</Link>
+              <Button
+                asChild
+                variant="ghost"
+                size="sm"
+                className="text-muted-foreground"
+              >
+                <Link to="/portal">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back
+                </Link>
               </Button>
               <div>
-                <h1 className="text-xl font-bold text-white">Training Coordinator</h1>
-                <p className="text-sm text-gray-500">Content • Courses • Testimonials</p>
+                <h1 className="text-xl font-bold text-foreground">
+                  Training Coordinator
+                </h1>
+                <p className="text-sm text-muted-foreground">
+                  Courses · Enrollments · Testimonials
+                </p>
               </div>
             </div>
-            <Button variant="ghost" size="sm" onClick={handleSignOut} className="text-gray-400 hover:text-white hover:bg-white/5">
-              <LogOut className="w-4 h-4 mr-2" />Sign Out
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleSignOut}
+              className="text-muted-foreground"
+            >
+              <LogOut className="w-4 h-4 mr-2" />
+              Sign Out
             </Button>
           </div>
         </div>
       </header>
 
       <main className="container mx-auto px-4 py-6 space-y-6">
-        {/* Stats */}
+        {/* Stat Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[
-            { label: "Published Articles", value: stats.publishedArticles, icon: FileText, color: "text-blue-400", bg: "bg-blue-500/10" },
-            { label: "Active Courses", value: stats.activeCourses, icon: GraduationCap, color: "text-teal-400", bg: "bg-teal-500/10" },
-            { label: "Pending Reviews", value: stats.pendingTestimonials, icon: Star, color: "text-amber-400", bg: "bg-amber-500/10" },
-            { label: "KB Articles", value: stats.kbArticles, icon: BookOpen, color: "text-purple-400", bg: "bg-purple-500/10" },
-          ].map((s) => {
-            const Icon = s.icon;
-            return (
-              <Card key={s.label} className="bg-[#1F2937] border-gray-800/50 p-5">
-                <div className="flex items-center justify-between mb-3">
-                  <div className={`w-10 h-10 ${s.bg} rounded-lg flex items-center justify-center`}>
-                    <Icon className={`w-5 h-5 ${s.color}`} />
-                  </div>
-                  <span className="text-2xl font-bold text-white">{s.value}</span>
-                </div>
-                <p className="text-xs text-gray-500">{s.label}</p>
-              </Card>
-            );
-          })}
+          {statCards.map((card) => (
+            <StatCard key={card.title} data={card} />
+          ))}
         </div>
 
+        {/* Main grid */}
         <div className="grid lg:grid-cols-3 gap-6">
-          {/* Articles */}
+          {/* ── Left column (2/3) ── */}
           <div className="lg:col-span-2 space-y-6">
-            <Card className="bg-[#1F2937] border-gray-800/50 p-6">
-              <div className="flex items-center justify-between mb-5">
-                <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                  <FileText className="w-5 h-5 text-blue-400" />
-                  Recent Articles
-                </h2>
-                <div className="flex gap-2">
-                  <Button asChild size="sm" className="bg-blue-600 hover:bg-blue-700 text-white h-8">
-                    <Link to="/admin/content/articles/new"><PenLine className="w-3 h-3 mr-1" />New</Link>
+            {/* Pending Reviews via ActionQueue */}
+            {testimonialsError ? (
+              <ErrorState
+                title="Could not load testimonials"
+                description="There was a problem fetching pending reviews."
+                onRetry={() => refetchTestimonials()}
+              />
+            ) : (
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+                  <CardTitle className="text-base font-semibold">
+                    Pending Reviews
+                  </CardTitle>
+                  <Button asChild variant="ghost" size="sm">
+                    <Link to="/admin/content/testimonials">View All</Link>
                   </Button>
-                  <Button asChild variant="ghost" size="sm" className="text-gray-400 hover:text-white">
-                    <Link to="/admin/content/articles">View All</Link>
-                  </Button>
-                </div>
-              </div>
-              <div className="space-y-3">
-                {articles.length === 0 ? (
-                  <p className="text-center text-gray-500 py-8">No articles yet</p>
-                ) : (
-                  articles.map((a) => (
-                    <div key={a.id} className="flex items-center justify-between p-3 bg-[#111827] rounded-lg border border-gray-800/40">
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          <p className="font-medium text-white text-sm truncate">{a.title}</p>
-                          <Badge className={`text-[10px] ${articleStatusColor(a.status)}`}>{a.status}</Badge>
-                        </div>
-                        <p className="text-xs text-gray-500">{a.category} • {a.views || 0} views</p>
-                      </div>
-                      <Button asChild size="sm" variant="ghost" className="h-7 w-7 p-0 text-gray-400 hover:text-white">
-                        <Link to={`/admin/content/articles/${a.id}`}><PenLine className="w-3.5 h-3.5" /></Link>
-                      </Button>
+                </CardHeader>
+                <CardContent className="p-0">
+                  {(testimonials ?? []).length === 0 ? (
+                    <div className="px-6 pb-6">
+                      <EmptyState
+                        title="No pending testimonials"
+                        description="All testimonials have been reviewed."
+                        className="py-8"
+                      />
                     </div>
-                  ))
-                )}
-              </div>
-            </Card>
+                  ) : (
+                    <div className="flex flex-col divide-y divide-border">
+                      {(testimonials ?? []).map((t) => (
+                        <div key={t.id} className="px-6 py-4">
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="min-w-0 flex-1">
+                              <p className="text-sm font-medium text-foreground">
+                                {t.name}
+                              </p>
+                              <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">
+                                {t.content}
+                              </p>
+                            </div>
+                            <div className="flex gap-1 flex-shrink-0">
+                              <Button
+                                size="sm"
+                                variant="ghost"
+                                className="h-7 w-7 p-0 text-green-500 hover:bg-green-500/10"
+                                disabled={submittingId === t.id}
+                                onClick={() =>
+                                  handleTestimonialAction(t.id, "approved")
+                                }
+                                title="Approve"
+                              >
+                                <CheckCircle className="w-4 h-4" />
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="ghost"
+                                className="h-7 w-7 p-0 text-destructive hover:bg-destructive/10"
+                                disabled={submittingId === t.id}
+                                onClick={() =>
+                                  handleTestimonialAction(t.id, "rejected")
+                                }
+                                title="Reject"
+                              >
+                                <XCircle className="w-4 h-4" />
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            )}
 
-            {/* Testimonial Queue */}
-            <Card className="bg-[#1F2937] border-gray-800/50 p-6">
-              <div className="flex items-center justify-between mb-5">
-                <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                  <Star className="w-5 h-5 text-amber-400" />
-                  Testimonial Approval Queue
-                </h2>
-                <Button asChild variant="ghost" size="sm" className="text-gray-400 hover:text-white">
-                  <Link to="/admin/content/testimonials">View All</Link>
-                </Button>
-              </div>
-              <div className="space-y-3">
-                {testimonials.length === 0 ? (
-                  <p className="text-center text-gray-500 py-8">No pending testimonials</p>
+            {/* Upcoming Sessions */}
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+                <CardTitle className="text-base font-semibold flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-primary" />
+                  Upcoming Sessions
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-0">
+                {loadingSessions ? null : (upcomingSessions ?? []).length ===
+                  0 ? (
+                  <div className="px-6 pb-6">
+                    <EmptyState
+                      title="No upcoming sessions"
+                      description="There are no scheduled Zoom classes in the near future."
+                      className="py-8"
+                    />
+                  </div>
                 ) : (
-                  testimonials.map((t) => (
-                    <div key={t.id} className="p-3 bg-[#111827] rounded-lg border border-gray-800/40">
-                      <div className="flex items-center justify-between mb-1">
-                        <p className="font-medium text-white text-sm">{t.name}</p>
-                        <div className="flex gap-1">
-                          <Button size="sm" variant="ghost" className="h-7 w-7 p-0 text-emerald-400 hover:bg-emerald-500/10"
-                            onClick={() => handleTestimonialAction(t.id, "approved")}>
-                            <CheckCircle className="w-4 h-4" />
-                          </Button>
-                          <Button size="sm" variant="ghost" className="h-7 w-7 p-0 text-red-400 hover:bg-red-500/10"
-                            onClick={() => handleTestimonialAction(t.id, "rejected")}>
-                            <XCircle className="w-4 h-4" />
-                          </Button>
+                  <div className="flex flex-col divide-y divide-border">
+                    {(upcomingSessions ?? []).map((session) => {
+                      const dt = new Date(session.start_time);
+                      const dateStr = dt.toLocaleDateString(undefined, {
+                        weekday: "short",
+                        month: "short",
+                        day: "numeric",
+                      });
+                      const timeStr = dt.toLocaleTimeString(undefined, {
+                        hour: "numeric",
+                        minute: "2-digit",
+                      });
+                      return (
+                        <div
+                          key={session.id}
+                          className="flex items-center justify-between px-6 py-3 hover:bg-muted/50 transition-colors"
+                        >
+                          <div className="min-w-0 flex-1">
+                            <p className="text-sm font-medium text-foreground truncate">
+                              {session.title}
+                            </p>
+                            <p className="text-xs text-muted-foreground">
+                              {dateStr} · {timeStr}
+                            </p>
+                          </div>
+                          {session.enrollment_count != null && (
+                            <div className="flex items-center gap-1 text-xs text-muted-foreground flex-shrink-0 ml-4">
+                              <Users className="w-3.5 h-3.5" />
+                              <span>{session.enrollment_count}</span>
+                            </div>
+                          )}
                         </div>
-                      </div>
-                      <p className="text-xs text-gray-500 line-clamp-2">{t.content}</p>
-                    </div>
-                  ))
+                      );
+                    })}
+                  </div>
                 )}
-              </div>
+              </CardContent>
             </Card>
           </div>
 
-          {/* Sidebar */}
+          {/* ── Right column (1/3) ── */}
           <div className="space-y-6">
-            <Card className="bg-[#1F2937] border-gray-800/50 p-5">
-              <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                <BookOpen className="w-5 h-5 text-teal-400" />
-                Quick Access
-              </h2>
-              <div className="space-y-2">
-                {[
-                  { label: "Articles", path: "/admin/content/articles", icon: FileText },
-                  { label: "Testimonials", path: "/admin/content/testimonials", icon: Star },
-                  { label: "Knowledge Base", path: "/admin/content/knowledge-base", icon: BookOpen },
-                  { label: "Internal Messages", path: "/portal/messages", icon: MessageSquare },
-                  { label: "Individual Clients", path: "/admin/clients/individuals", icon: Eye },
-                ].map((link) => {
-                  const Icon = link.icon;
-                  return (
-                    <Button key={link.path} asChild variant="ghost" className="w-full justify-start text-gray-400 hover:text-white hover:bg-white/5">
-                      <Link to={link.path}><Icon className="w-4 h-4 mr-2" />{link.label}</Link>
-                    </Button>
-                  );
-                })}
-              </div>
+            {/* Training Pipeline mini stats */}
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base font-semibold flex items-center gap-2">
+                  <GraduationCap className="w-4 h-4 text-primary" />
+                  Training Pipeline
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground">
+                    Published Courses
+                  </span>
+                  <span className="font-semibold text-foreground">
+                    {coursesData?.published ?? 0}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground">
+                    Total Enrollments
+                  </span>
+                  <span className="font-semibold text-foreground">
+                    {enrollmentsData?.total ?? 0}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground">Completion Rate</span>
+                  <span className="font-semibold text-foreground">—%</span>
+                </div>
+              </CardContent>
             </Card>
 
-            <Card className="bg-[#1F2937] border-gray-800/50 p-5">
-              <h2 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
-                <GraduationCap className="w-5 h-5 text-teal-400" />
-                Content Tips
-              </h2>
-              <div className="space-y-3 text-xs text-gray-400">
-                <div className="p-3 bg-[#111827] rounded-lg border border-gray-800/40">
-                  <p className="font-medium text-gray-300 mb-1">📝 Article Best Practices</p>
-                  <p>Use clear headlines, add featured images, and include relevant tags for SEO.</p>
-                </div>
-                <div className="p-3 bg-[#111827] rounded-lg border border-gray-800/40">
-                  <p className="font-medium text-gray-300 mb-1">⭐ Review Guidelines</p>
-                  <p>Verify testimonials for authenticity before approving. Flag suspicious content.</p>
-                </div>
-              </div>
+            {/* Scam Shield */}
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base font-semibold flex items-center gap-2">
+                  <Shield className="w-4 h-4 text-primary" />
+                  Scam Shield
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <p className="text-sm text-muted-foreground">
+                  Recent submissions (last 7 days)
+                </p>
+                <p className="text-2xl font-bold text-foreground">
+                  {scamCount ?? 0}
+                </p>
+                {/* "View Threat Center" link removed - no /portal/threat-center route exists */}
+              </CardContent>
+            </Card>
+
+            {/* Quick Actions */}
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base font-semibold">
+                  Quick Actions
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                {/* "Create Course" link removed - no /admin/courses CRUD exists */}
+                <Button
+                  asChild
+                  variant="outline"
+                  className="w-full justify-start"
+                  size="sm"
+                >
+                  <Link to="/admin/content/knowledge-base">
+                    <Database className="w-4 h-4 mr-2" />
+                    Manage Knowledge Base
+                  </Link>
+                </Button>
+              </CardContent>
             </Card>
           </div>
         </div>

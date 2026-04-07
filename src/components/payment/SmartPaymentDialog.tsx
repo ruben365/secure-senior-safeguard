@@ -519,6 +519,31 @@ function PaymentElementWrapper({
         paymentIntent?.status === "succeeded" ||
         paymentIntent?.status === "processing"
       ) {
+        // ================================================================
+        // Phase 4.12 — close the cart digital delivery hand-off.
+        //
+        // create-cart-payment-intent inserts a partner_orders row before
+        // creating the PaymentIntent and stamps order_id onto its
+        // metadata. After confirmPayment succeeds we ping verify-payment
+        // with the payment_intent_id so it can mark partner_orders paid
+        // and (when hasDigital === "true") trigger send-digital-download
+        // with the partner_orders.id. Non-blocking — verify-payment is
+        // idempotent and a webhook would catch a missed delivery on a
+        // slower path. Happy path = "delivery within seconds".
+        // ================================================================
+        if (paymentIntent.id) {
+          try {
+            await supabase.functions.invoke("verify-payment", {
+              body: { payment_intent_id: paymentIntent.id },
+            });
+          } catch (verifyError) {
+            console.error(
+              "verify-payment hand-off failed (non-blocking):",
+              verifyError,
+            );
+          }
+        }
+
         onSuccess();
       }
     } catch (err: any) {
