@@ -1,24 +1,84 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
+// ============================================================================
+// Phase 13 hardening:
+//   1. Origin allow-list CORS (no more wildcard *)
+//   2. Method check (POST only — non-POST returns 405)
+//   3. GC for in-memory rate limit map
+//   4. Generic 500 errors (already mostly done — kept "Server error" string)
+//   5. Continued: hard-pinned canonical origin for the reset URL (no spoof)
+//   6. Continued: per-IP rate limit 3/min
+//   7. Continued: domain restriction to @invisionnetwork.org
+// ============================================================================
+
 const resendApiKey = Deno.env.get("RESEND_API_KEY")!;
 const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
 const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
-};
+const ALLOWED_ORIGINS = new Set([
+  "https://www.invisionnetwork.org",
+  "https://invisionnetwork.org",
+  "https://www.invisionnetwork.com",
+  "https://invisionnetwork.com",
+  "http://localhost:5173",
+  "http://localhost:8080",
+  "http://localhost:3000",
+]);
+
+// Reset URL is HARD-PINNED to the canonical origin. The previous (pre-Phase
+// 11) version trusted req.headers.get("origin"), which an attacker could
+// spoof to make the reset link point at a phishing clone of the site.
+const CANONICAL_ORIGIN = "https://www.invisionnetwork.org";
+
+function corsHeadersFor(req: Request): Record<string, string> {
+  const origin = req.headers.get("origin") ?? "";
+  const allowed = ALLOWED_ORIGINS.has(origin) ? origin : CANONICAL_ORIGIN;
+  return {
+    "Access-Control-Allow-Origin": allowed,
+    Vary: "Origin",
+    "Access-Control-Allow-Headers":
+      "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+  };
+}
+
+function json(
+  req: Request,
+  status: number,
+  payload: unknown,
+  extra: Record<string, string> = {},
+) {
+  return new Response(JSON.stringify(payload), {
+    status,
+    headers: {
+      ...corsHeadersFor(req),
+      "Content-Type": "application/json",
+      ...extra,
+    },
+  });
+}
 
 // ============================================================================
 // Per-IP rate limit (3 / min) — password reset is high-impact, kept strict.
+// GC every 5 minutes to prevent unbounded growth on a long-running instance.
 // ============================================================================
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 const RATE_LIMIT = 3;
 const RATE_WINDOW_MS = 60 * 1000;
+let lastGc = Date.now();
+
+function gcRateLimit() {
+  const now = Date.now();
+  if (now - lastGc < 5 * 60 * 1000) return;
+  for (const [k, v] of rateLimitMap) {
+    if (now > v.resetTime) rateLimitMap.delete(k);
+  }
+  lastGc = now;
+}
 
 function checkRateLimit(ip: string): { allowed: boolean; retryAfter?: number } {
+  gcRateLimit();
   const now = Date.now();
   const record = rateLimitMap.get(ip);
   if (!record || now > record.resetTime) {
@@ -35,17 +95,13 @@ function checkRateLimit(ip: string): { allowed: boolean; retryAfter?: number } {
   return { allowed: true };
 }
 
-// ============================================================================
-// Reset URL is HARD-PINNED to the canonical origin. The previous version
-// trusted req.headers.get("origin"), which an attacker could spoof to make
-// the reset link point at a phishing clone of the site. Now the link is
-// guaranteed to land on the real domain.
-// ============================================================================
-const CANONICAL_ORIGIN = "https://www.invisionnetwork.org";
-
 serve(async (req) => {
   if (req.method === "OPTIONS") {
-    return new Response(null, { headers: corsHeaders });
+    return new Response(null, { headers: corsHeadersFor(req) });
+  }
+
+  if (req.method !== "POST") {
+    return json(req, 405, { error: "Method not allowed" });
   }
 
   const clientIP =
@@ -55,63 +111,49 @@ serve(async (req) => {
 
   const rateCheck = checkRateLimit(clientIP);
   if (!rateCheck.allowed) {
-    return new Response(
-      JSON.stringify({
+    return json(
+      req,
+      429,
+      {
         error:
           "Too many password reset requests. Please wait before trying again.",
-      }),
-      {
-        status: 429,
-        headers: {
-          ...corsHeaders,
-          "Content-Type": "application/json",
-          "Retry-After": String(rateCheck.retryAfter),
-        },
       },
+      { "Retry-After": String(rateCheck.retryAfter) },
     );
   }
 
   try {
-    const { email } = await req.json();
+    let body: { email?: unknown };
+    try {
+      body = await req.json();
+    } catch {
+      return json(req, 400, { error: "Invalid request body" });
+    }
+
+    const email = body.email;
 
     // Validate input shape
     if (typeof email !== "string") {
-      return new Response(
-        JSON.stringify({ error: "Invalid email" }),
-        {
-          status: 400,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        },
-      );
+      return json(req, 400, { error: "Invalid email" });
     }
 
     const normalizedEmail = email.toLowerCase().trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(normalizedEmail) || normalizedEmail.length > 254) {
-      return new Response(
-        JSON.stringify({ error: "Invalid email format" }),
-        {
-          status: 400,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        },
-      );
+      return json(req, 400, { error: "Invalid email format" });
     }
 
     // Domain restriction: only InVision Network staff get password reset
     if (!normalizedEmail.endsWith("@invisionnetwork.org")) {
-      return new Response(
-        JSON.stringify({
-          error:
-            "Password reset is only available for InVision Network email addresses",
-        }),
-        {
-          status: 403,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        },
-      );
+      return json(req, 403, {
+        error:
+          "Password reset is only available for InVision Network email addresses",
+      });
     }
 
-    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+    const supabase = createClient(supabaseUrl, supabaseServiceKey, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    });
 
     // Invalidate any existing unused tokens for this email so an attacker
     // who triggered an earlier reset can't reuse a stale token in parallel.
@@ -138,7 +180,8 @@ serve(async (req) => {
       });
 
     if (insertError) {
-      throw new Error(`Failed to create reset token: ${insertError.message}`);
+      console.error("[send-password-reset] insert error");
+      return json(req, 500, { error: "Server error" });
     }
 
     // CRITICAL: hard-pinned origin, NOT req.headers.get("origin")
@@ -159,23 +202,15 @@ serve(async (req) => {
     });
 
     if (!emailResponse.ok) {
-      const text = await emailResponse.text();
-      console.error("Resend error:", text);
-      throw new Error("Failed to send reset email");
+      console.error("[send-password-reset] Resend error");
+      return json(req, 500, { error: "Server error" });
     }
 
-    return new Response(JSON.stringify({ success: true }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    return json(req, 200, { success: true });
   } catch (error: unknown) {
     const msg = error instanceof Error ? error.message : String(error);
-    console.error("send-password-reset error:", msg);
-    return new Response(
-      JSON.stringify({ error: "An error occurred. Please try again." }),
-      {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      },
-    );
+    console.error("[send-password-reset] fatal:", msg);
+    // Generic 500 — never leak error.message internals
+    return json(req, 500, { error: "An error occurred. Please try again." });
   }
 });

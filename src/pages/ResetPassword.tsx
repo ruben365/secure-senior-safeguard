@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Eye, EyeOff, Lock, CheckCircle, X } from "lucide-react";
@@ -8,6 +8,32 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { FloatingShapes } from "@/components/FloatingShapes";
 import { SEO } from "@/components/SEO";
+
+// ============================================================================
+// Phase 13 hardening:
+//
+// Before this rewrite, ResetPassword.tsx queried `password_reset_tokens`
+// directly from the browser and used `supabase.auth.updateUser` to set
+// the new password. That had several problems:
+//
+//   1. Direct table access depended entirely on RLS to prevent leakage.
+//   2. updateUser only works if the user already has a session — but
+//      a password-reset visitor by definition does not.
+//   3. Token marking was non-atomic with the password update, allowing
+//      a race window where two parallel requests could both succeed.
+//   4. updateError.message was rendered straight to the toast UI, leaking
+//      Supabase internals to attackers.
+//
+// The page now calls two server-side edge functions instead:
+//
+//   - `validate-reset-token` for the initial token check (replaces the
+//     direct supabase.from("password_reset_tokens") query).
+//   - `complete-password-reset` for the password update + atomic token
+//     invalidation (replaces supabase.auth.updateUser + manual update).
+//
+// Both edge functions enforce per-IP rate limits, generic error responses,
+// and origin allow-list CORS.
+// ============================================================================
 
 export default function ResetPassword() {
   const [searchParams] = useSearchParams();
@@ -50,9 +76,47 @@ export default function ResetPassword() {
 
   const strength = getPasswordStrength();
 
+  // ============================================================================
+  // Server-side token validation via the validate-reset-token edge function.
+  // The browser never touches the password_reset_tokens table directly.
+  // ============================================================================
+  const validateToken = useCallback(async () => {
+    if (!token) {
+      toast.error("Invalid reset link");
+      setIsValidating(false);
+      return;
+    }
+
+    // Basic shape check before round-tripping to the server
+    if (!/^[a-f0-9]{64}$/i.test(token)) {
+      toast.error("This reset link is invalid or has expired.");
+      setIsValidating(false);
+      return;
+    }
+
+    try {
+      const { data, error } = await supabase.functions.invoke(
+        "validate-reset-token",
+        { body: { token } },
+      );
+
+      if (error || !data || data.valid !== true) {
+        toast.error("This reset link is invalid or has expired.");
+        setIsValidating(false);
+        return;
+      }
+
+      setIsTokenValid(true);
+    } catch {
+      toast.error("Unable to verify reset link. Please try again.");
+    } finally {
+      setIsValidating(false);
+    }
+  }, [token]);
+
   useEffect(() => {
     validateToken();
-  }, [token]);
+  }, [validateToken]);
 
   useEffect(() => {
     if (success && countdown > 0) {
@@ -63,37 +127,11 @@ export default function ResetPassword() {
     }
   }, [success, countdown, navigate]);
 
-  const validateToken = async () => {
-    if (!token) {
-      toast.error("Invalid reset link");
-      setIsValidating(false);
-      return;
-    }
-
-    // Check if token exists and is valid
-    const { data, error } = await supabase
-      .from("password_reset_tokens")
-      .select("*")
-      .eq("token", token)
-      .eq("used", false)
-      .single();
-
-    if (error || !data) {
-      toast.error("This reset link is invalid or has expired.");
-      setIsValidating(false);
-      return;
-    }
-
-    if (new Date(data.expires_at) < new Date()) {
-      toast.error("This reset link has expired.");
-      setIsValidating(false);
-      return;
-    }
-
-    setIsTokenValid(true);
-    setIsValidating(false);
-  };
-
+  // ============================================================================
+  // Submit handler — calls complete-password-reset edge function.
+  // The edge function validates the token, updates the password atomically
+  // via the admin API, and marks the token used in a single server round-trip.
+  // ============================================================================
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -107,43 +145,31 @@ export default function ResetPassword() {
       return;
     }
 
+    if (!token) {
+      toast.error("Invalid reset link");
+      return;
+    }
+
     setIsLoading(true);
 
     try {
-      // Get token data
-      const { data: tokenData } = await supabase
-        .from("password_reset_tokens")
-        .select("email")
-        .eq("token", token!)
-        .single();
+      const { data, error } = await supabase.functions.invoke(
+        "complete-password-reset",
+        { body: { token, newPassword: password } },
+      );
 
-      if (!tokenData) {
-        toast.error("Invalid reset token");
+      if (error || !data?.success) {
+        // Show a generic message — never surface raw error.message to
+        // avoid leaking server internals or hint at token state.
+        toast.error("Failed to reset password. Please request a new link.");
         setIsLoading(false);
         return;
       }
-
-      // Update password
-      const { error: updateError } = await supabase.auth.updateUser({
-        password,
-      });
-
-      if (updateError) {
-        toast.error(updateError.message);
-        setIsLoading(false);
-        return;
-      }
-
-      // Mark token as used
-      await supabase
-        .from("password_reset_tokens")
-        .update({ used: true })
-        .eq("token", token!);
 
       setSuccess(true);
       toast.success("Password reset successful!");
-    } catch (error: any) {
-      console.error("Password reset error:", error);
+    } catch (err) {
+      console.error("Password reset error:", err);
       toast.error("Failed to reset password. Please try again.");
     } finally {
       setIsLoading(false);
@@ -233,6 +259,8 @@ export default function ResetPassword() {
                   onChange={(e) => setPassword(e.target.value)}
                   className="pl-10 pr-10"
                   required
+                  autoComplete="new-password"
+                  maxLength={128}
                 />
                 <button
                   type="button"
@@ -318,6 +346,8 @@ export default function ResetPassword() {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   className="pl-10 pr-10"
                   required
+                  autoComplete="new-password"
+                  maxLength={128}
                 />
                 <button
                   type="button"

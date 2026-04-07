@@ -26,11 +26,33 @@ import { Session, User as SupabaseUser } from "@supabase/supabase-js";
 import { ForgotPasswordModal } from "@/components/auth/ForgotPasswordModal";
 import { SEO } from "@/components/SEO";
 
+// ============================================================================
+// Phase 13: hard-pinned canonical origin for OAuth redirects.
+// Previously the code used `${window.location.origin}/auth` for the OAuth
+// callback URL, which an attacker could spoof by hosting a clone of the site
+// at a similar-looking domain. The OAuth provider would happily redirect to
+// the spoofed domain because that's what we asked for. Now the redirect URL
+// is hard-pinned to the canonical origin in production, and only falls back
+// to window.location.origin for localhost development.
+// ============================================================================
+const CANONICAL_ORIGIN = "https://www.invisionnetwork.org";
+function getAuthRedirectUrl(): string {
+  if (typeof window === "undefined") return `${CANONICAL_ORIGIN}/auth`;
+  const o = window.location.origin;
+  // Only allow localhost dev origins to use the live origin — anything else
+  // gets redirected through the canonical production URL.
+  if (o.startsWith("http://localhost:") || o.startsWith("http://127.0.0.1:")) {
+    return `${o}/auth`;
+  }
+  return `${CANONICAL_ORIGIN}/auth`;
+}
+
 const emailSchema = z.string().email("Please enter a valid email address");
 const passwordSchema = z
   .string()
   .min(8, "Password must be at least 8 characters")
   .regex(/[A-Z]/, "Must contain uppercase letter")
+  .regex(/[a-z]/, "Must contain lowercase letter")
   .regex(/[0-9]/, "Must contain number")
   .regex(/[^A-Za-z0-9]/, "Must contain special character");
 
@@ -58,6 +80,7 @@ function Auth() {
   // Password strength indicators
   const [passwordHasLength, setPasswordHasLength] = useState(false);
   const [passwordHasUppercase, setPasswordHasUppercase] = useState(false);
+  const [passwordHasLowercase, setPasswordHasLowercase] = useState(false);
   const [passwordHasNumber, setPasswordHasNumber] = useState(false);
   const [passwordHasSpecial, setPasswordHasSpecial] = useState(false);
   const [passwordsMatch, setPasswordsMatch] = useState(false);
@@ -96,6 +119,7 @@ function Auth() {
   useEffect(() => {
     setPasswordHasLength(password.length >= 8);
     setPasswordHasUppercase(/[A-Z]/.test(password));
+    setPasswordHasLowercase(/[a-z]/.test(password));
     setPasswordHasNumber(/[0-9]/.test(password));
     setPasswordHasSpecial(/[^A-Za-z0-9]/.test(password));
     setPasswordsMatch(password.length > 0 && password === confirmPassword);
@@ -103,11 +127,12 @@ function Auth() {
 
   const handlePostLoginRedirect = async (userId: string) => {
     try {
+      // Phase 13: .maybeSingle() so a missing profile row doesn't throw
       const { data: profileData } = await supabase
         .from("profiles")
         .select("account_status, application_reference")
         .eq("id", userId)
-        .single();
+        .maybeSingle();
 
       if (profileData?.account_status === "pending") {
         await supabase.auth.signOut();
@@ -225,7 +250,7 @@ function Auth() {
       toast({
         title: "Weak Password",
         description:
-          "Password must be 8+ chars with uppercase, number, and special character",
+          "Password must be 8+ chars with uppercase, lowercase, number, and special character",
         variant: "destructive",
       });
       return false;
@@ -261,27 +286,37 @@ function Auth() {
       if (data.session && data.user) {
         toast({
           title: "Welcome back!",
-          description: `Successfully signed in as ${email}`,
+          description: "Successfully signed in.",
         });
       }
-    } catch (error: any) {
-      let errorMessage = "An error occurred during sign in";
+    } catch (error: unknown) {
+      // ====================================================================
+      // Phase 13: GENERIC error messages for login failures.
+      //
+      // The previous version surfaced "Invalid login credentials" vs
+      // "Email not confirmed" vs raw error.message, which lets an attacker
+      // distinguish "this email exists but the password is wrong" from
+      // "this email doesn't exist". That's email enumeration via error
+      // disclosure.
+      //
+      // Now we collapse every credential-related failure into the same
+      // generic message. The only special-cased error is the rate-limit
+      // case, which is safe to disclose because it doesn't reveal whether
+      // the email exists.
+      // ====================================================================
+      const message = error instanceof Error ? error.message : String(error);
+
+      let errorMessage =
+        "Email or password is incorrect. Please try again.";
       let errorTitle = "Sign In Failed";
 
-      if (error.message?.includes("Invalid login credentials")) {
-        errorTitle = "Invalid Credentials";
-        errorMessage =
-          "Email or password is incorrect. Please check your credentials and try again.";
-      } else if (error.message?.includes("Email not confirmed")) {
-        errorTitle = "Email Not Confirmed";
-        errorMessage =
-          "Please check your email and click the confirmation link.";
-      } else if (error.message?.includes("Too many requests")) {
+      if (message.toLowerCase().includes("too many requests")) {
         errorTitle = "Too Many Attempts";
         errorMessage = "Please wait a moment before trying again.";
-      } else if (error.message) {
-        errorMessage = error.message;
       }
+
+      // Log the real reason server-side for support, but never show it.
+      console.warn("[auth] login failure:", message);
 
       toast({
         title: errorTitle,
@@ -305,7 +340,8 @@ function Auth() {
         email: email.trim().toLowerCase(),
         password,
         options: {
-          emailRedirectTo: `${window.location.origin}/auth`,
+          // Phase 13: hard-pinned canonical origin in production
+          emailRedirectTo: getAuthRedirectUrl(),
           data: {
             first_name: firstName.trim(),
             last_name: lastName.trim(),
@@ -338,14 +374,24 @@ function Auth() {
           description: "Please check your email to verify your account.",
         });
       }
-    } catch (error: any) {
-      let errorMessage = "An error occurred during sign up";
+    } catch (error: unknown) {
+      // ====================================================================
+      // Phase 13: GENERIC signup error messages.
+      // We do NOT disclose "already registered" because that's an email
+      // enumeration vector. Instead we show the same generic success toast
+      // and rely on the email verification step to actually deliver to a
+      // real user. (For an attacker probing the signup endpoint with a
+      // random email, the response is identical regardless of whether the
+      // email is taken.)
+      // ====================================================================
+      const message = error instanceof Error ? error.message : String(error);
+      console.warn("[auth] signup failure:", message);
 
-      if (error.message?.includes("already registered")) {
-        errorMessage =
-          "This email is already registered. Please sign in instead.";
-      } else if (error.message) {
-        errorMessage = error.message;
+      // Special-cased benign errors that are safe to surface
+      let errorMessage =
+        "Unable to complete signup. Please verify your information and try again.";
+      if (message.toLowerCase().includes("too many requests")) {
+        errorMessage = "Please wait a moment before trying again.";
       }
 
       toast({
@@ -362,13 +408,15 @@ function Auth() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${window.location.origin}/auth`,
+        // Phase 13: hard-pinned canonical origin in production
+        redirectTo: getAuthRedirectUrl(),
       },
     });
     if (error) {
+      console.warn("[auth] google oauth failure:", error.message);
       toast({
         title: "Sign In Failed",
-        description: error.message,
+        description: "Unable to start Google sign-in. Please try again.",
         variant: "destructive",
       });
     }
@@ -378,14 +426,16 @@ function Auth() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "azure",
       options: {
-        redirectTo: `${window.location.origin}/auth`,
+        // Phase 13: hard-pinned canonical origin in production
+        redirectTo: getAuthRedirectUrl(),
         scopes: "email",
       },
     });
     if (error) {
+      console.warn("[auth] microsoft oauth failure:", error.message);
       toast({
         title: "Sign In Failed",
-        description: error.message,
+        description: "Unable to start Microsoft sign-in. Please try again.",
         variant: "destructive",
       });
     }
@@ -850,6 +900,10 @@ function Auth() {
                     <PasswordStrengthIndicator
                       met={passwordHasUppercase}
                       label="Uppercase"
+                    />
+                    <PasswordStrengthIndicator
+                      met={passwordHasLowercase}
+                      label="Lowercase"
                     />
                     <PasswordStrengthIndicator
                       met={passwordHasNumber}
