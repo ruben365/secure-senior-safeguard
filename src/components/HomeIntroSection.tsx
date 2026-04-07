@@ -86,7 +86,7 @@ function StatCard({ target, suffix, label, icon: Icon, index }: {
             {value.toLocaleString()}
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">{suffix}</span>
           </div>
-          <div className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider">
+          <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
             {label}
           </div>
         </div>
@@ -180,8 +180,8 @@ export const HomeIntroSection = () => {
                   {/* Abstract ombre overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--primary)/0.6)] via-[hsl(var(--primary)/0.15)] to-transparent" />
                   <div className="absolute bottom-3 left-3 right-3">
-                    <p className="text-white font-bold text-xs">Expert-Led Security Operations</p>
-                    <p className="text-white/70 text-[10px]">24/7 Monitoring & Threat Response</p>
+                    <p className="text-white font-bold text-sm">Expert-Led Security Operations</p>
+                    <p className="text-white/80 text-xs">24/7 Monitoring & Threat Response</p>
                   </div>
                 </div>
 
@@ -195,7 +195,7 @@ export const HomeIntroSection = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--accent)/0.5)] via-transparent to-[hsl(var(--primary)/0.08)]" />
                   <div className="absolute bottom-2 left-2">
-                    <p className="text-white font-bold text-[10px]">Family Plans</p>
+                    <p className="text-white font-bold text-xs">Family Plans</p>
                   </div>
                 </div>
                 <div className="relative rounded-xl overflow-hidden group">
@@ -207,7 +207,7 @@ export const HomeIntroSection = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--primary)/0.5)] via-transparent to-[hsl(var(--accent)/0.08)]" />
                   <div className="absolute bottom-2 left-2">
-                    <p className="text-white font-bold text-[10px]">Community Events</p>
+                    <p className="text-white font-bold text-xs">Community Events</p>
                   </div>
                 </div>
               </div>
@@ -221,7 +221,7 @@ export const HomeIntroSection = () => {
                     </div>
                     <div>
                       <p className="text-base font-black text-foreground leading-none">99%</p>
-                      <p className="text-[9px] text-muted-foreground">Detection</p>
+                      <p className="text-[11px] text-muted-foreground">Detection</p>
                     </div>
                   </div>
                 </div>
@@ -259,11 +259,11 @@ export const HomeIntroSection = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--primary)/0.7)] via-[hsl(var(--primary)/0.3)] to-transparent" />
               <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--foreground)/0.4)] via-transparent to-transparent" />
               <div className="relative p-6 flex flex-col justify-end h-full">
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/15 backdrop-blur-xl border border-white/20 text-[10px] font-bold text-white w-fit mb-2">
-                  <Shield className="w-2.5 h-2.5" /> Success Story
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/15 backdrop-blur-xl border border-white/20 text-xs font-bold text-white w-fit mb-2">
+                  <Shield className="w-3 h-3" /> Success Story
                 </span>
                 <h3 className="text-xl font-bold text-white mb-1">$1.2M+ Saved for Families</h3>
-                <p className="text-white/80 text-xs max-w-md leading-relaxed">
+                <p className="text-white/85 text-sm max-w-md leading-relaxed">
                   Our detection systems have prevented over $1.2 million in losses from scams, phishing, and AI voice cloning.
                 </p>
               </div>
@@ -286,7 +286,7 @@ export const HomeIntroSection = () => {
               <div className="relative mt-3 pt-3 border-t border-border/40">
                 <div className="flex items-baseline gap-1.5">
                   <span className="text-2xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">2,847</span>
-                  <span className="text-[10px] text-muted-foreground">blocked this month</span>
+                  <span className="text-xs text-muted-foreground">blocked this month</span>
                 </div>
               </div>
             </div>
@@ -301,7 +301,7 @@ export const HomeIntroSection = () => {
                 </div>
                 <div>
                   <p className="text-xl font-black text-foreground leading-none">4.9★</p>
-                  <p className="text-[9px] text-muted-foreground uppercase tracking-wider font-bold">Client Rating</p>
+                  <p className="text-[11px] text-muted-foreground uppercase tracking-wider font-bold">Client Rating</p>
                 </div>
               </div>
               <p className="text-xs text-muted-foreground relative">Trusted by families across the Greater Dayton area.</p>
@@ -316,7 +316,7 @@ export const HomeIntroSection = () => {
                 </div>
                 <div>
                   <p className="text-xl font-black text-foreground leading-none">100%</p>
-                  <p className="text-[9px] text-muted-foreground uppercase tracking-wider font-bold">Data Safe</p>
+                  <p className="text-[11px] text-muted-foreground uppercase tracking-wider font-bold">Data Safe</p>
                 </div>
               </div>
               <p className="text-xs text-muted-foreground relative">We never sell data. Privacy-first encryption keeps your information secure.</p>
@@ -334,12 +334,12 @@ export const HomeIntroSection = () => {
                   "InVision Network saved my mother from a $8,000 grandparent scam. The AI detected the voice clone instantly."
                 </blockquote>
                 <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary/25 to-accent/15 flex items-center justify-center">
-                    <span className="text-[8px] font-bold text-primary">JM</span>
+                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-primary/25 to-accent/15 flex items-center justify-center">
+                    <span className="text-[10px] font-bold text-primary">JM</span>
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold text-foreground">Jennifer M.</p>
-                    <p className="text-[9px] text-muted-foreground">Dayton, OH</p>
+                    <p className="text-xs font-bold text-foreground">Jennifer M.</p>
+                    <p className="text-[11px] text-muted-foreground">Dayton, OH</p>
                   </div>
                 </div>
               </div>
