@@ -14,15 +14,12 @@ InVision Network is a cybersecurity company based in Kettering, Ohio (Greater Da
 - [AI Automation](https://www.invisionnetwork.org/business/ai-automation): Automated lead nurturing and customer follow-up
 - [Website Design](https://www.invisionnetwork.org/business/website-design): Professional website design services
 - [Website Insurance](https://www.invisionnetwork.org/business/website-insurance): Website maintenance and protection plans
-- [Cognitive Sentinel](https://www.invisionnetwork.org/services/cognitive-sentinel): AI-powered monitoring service
-- [Scam Insurance](https://www.invisionnetwork.org/services/scam-insurance): Financial protection against scam losses
-- [AI-Safe Certification](https://www.invisionnetwork.org/services/ai-safe-certification): Certification program for AI safety
-- [Family Emergency Network](https://www.invisionnetwork.org/services/family-emergency-network): Emergency response system for families
-- [Digital Estate Protection](https://www.invisionnetwork.org/services/digital-estate): Digital legacy and estate planning
+- [Autonomous Defense Hub](https://www.invisionnetwork.org/business/autonomous-defense-hub): 24/7 automated threat monitoring and response
+- [AI File Scanner](https://www.invisionnetwork.org/training/ai-analysis): Pay-per-scan AI threat analysis for files, calls, texts, and emails
 
 ## Resources
 
-- [Digital Library](https://www.invisionnetwork.org/library): Free cybersecurity guides and educational books
+- [Digital Library](https://www.invisionnetwork.org/library): Premium cybersecurity guides and educational books (paid access)
 - [Articles](https://www.invisionnetwork.org/articles): Cybersecurity news and scam prevention guides
 - [FAQ](https://www.invisionnetwork.org/faq): Frequently asked questions
 - [Help Center](https://www.invisionnetwork.org/help): Support and knowledge base
