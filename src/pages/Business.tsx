@@ -270,7 +270,7 @@ const PricingCard = ({
 <AnimatedSection animation="scale-up" delay={delay}>
     <div className="relative h-full pt-5 group" style={{ perspective: "900px" }}>
       <div
-      className={`absolute -top-1 left-1/2 -translate-x-1/2 bg-gradient-to-r ${tagColor} text-white px-5 py-1.5 rounded-full text-[10px] font-black tracking-wider shadow-lg z-20 whitespace-nowrap border border-white/25`}>
+      className={`absolute -top-1 left-1/2 -translate-x-1/2 bg-gradient-to-r ${tagColor} text-white px-5 py-1.5 rounded-full text-[11px] font-black tracking-wider shadow-lg z-20 whitespace-nowrap border border-white/25`}>
       
         {tag}
       </div>
@@ -518,7 +518,7 @@ function Business() {
         </div>
 
         {/* ═══════════════════ SERVICES ═══════════════════ */}
-        <section id="services" className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
+        <section id="services" className="py-16 md:py-24 relative overflow-hidden">
           {/* Premium background */}
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background my-[777px]" />
           <div className="absolute top-20 left-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
@@ -664,7 +664,7 @@ function Business() {
         <SectionDivider variant="wave" color="muted" />
 
         {/* ═══════════════════ COMPLETE PLATFORM ═══════════════════ */}
-        <section id="security" className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
+        <section id="security" className="py-16 md:py-24 relative overflow-hidden">
           {/* Rich layered background */}
           <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
           
@@ -749,7 +749,7 @@ function Business() {
                               <p className="text-3xl md:text-4xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-1">
                                 {stat.value}
                               </p>
-                              <p className="text-[10px] md:text-xs uppercase tracking-wider text-muted-foreground font-semibold">
+                              <p className="text-[11px] md:text-xs uppercase tracking-wider text-muted-foreground font-semibold">
                                 {stat.label}
                               </p>
                             </div>
@@ -909,7 +909,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ WEB DESIGN ═══════════════════ */}
-        <section id="website-design" className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
+        <section id="website-design" className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
           
@@ -1038,7 +1038,7 @@ function Business() {
                     <Card className="p-4 text-center border-border/50 hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.12)] transition-all duration-500 hover:border-primary/30 relative group overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] to-accent/[0.01] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                       {addon.tag &&
-                    <span className="absolute top-2 right-2 px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-bold rounded-full">
+                    <span className="absolute top-2 right-2 px-2 py-0.5 bg-primary/10 text-primary text-[11px] font-bold rounded-full">
                           {addon.tag}
                         </span>
                     }
@@ -1075,7 +1075,7 @@ function Business() {
         <SectionDivider variant="curve" color="muted" flip />
 
         {/* ═══════════════════ WEBSITE INSURANCE ═══════════════════ */}
-        <section id="website-insurance" className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
+        <section id="website-insurance" className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-muted/60 via-muted/40 to-muted/60" />
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
           
@@ -1158,7 +1158,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ AI AGENTS PRICING ═══════════════════ */}
-        <section id="automation-pricing" className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
+        <section id="automation-pricing" className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
           <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           
@@ -1270,7 +1270,7 @@ function Business() {
         <SectionDivider variant="slant" color="muted" />
 
         {/* ═══════════════════ AI INSURANCE ═══════════════════ */}
-        <section id="ai-insurance" className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
+        <section id="ai-insurance" className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent" />
           
@@ -1463,7 +1463,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ AI CONSULTING ═══════════════════ */}
-        <section id="ai-consulting" className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
+        <section id="ai-consulting" className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
           
           <div className="container mx-auto px-4 relative z-10">
@@ -1644,7 +1644,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ ILLUSTRATION & VISUAL ART ═══════════════════ */}
-        <section id="illustration" className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
+        <section id="illustration" className="py-16 md:py-24 relative overflow-hidden">
           {/* Decorative background */}
           <div className="absolute inset-0 bg-gradient-to-b from-muted/40 via-background to-muted/30" />
           <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-coral-100/20 via-transparent to-transparent rounded-full blur-3xl pointer-events-none" />
@@ -1775,7 +1775,7 @@ function Business() {
 
         {/* ═══════════════════ WHY CHOOSE US ═══════════════════ */}
         <MeshBackground variant="vibrant" withOrbs>
-        <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
+        <section className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
           
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
@@ -1852,7 +1852,7 @@ function Business() {
 
         {/* ═══════════════════ TESTIMONIALS ═══════════════════ */}
         {(isAdmin || businessTestimonials.length > 0) &&
-        <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
+        <section className="py-16 md:py-24 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
             
             <div className="container mx-auto px-4 relative z-10">

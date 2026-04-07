@@ -160,12 +160,12 @@ function About() {
 
       {/* Our Story */}
       <MeshBackground variant="subtle" withOrbs>
-      <section className="py-10 sm:py-16 md:py-20 bg-transparent relative overflow-hidden">
+      <section className="py-16 md:py-24 bg-transparent relative overflow-hidden">
 
         <div className="container mx-auto px-4 lg:px-12">
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div>
-              <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
+              <span className="inline-block text-xs uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
                 Our Story
               </span>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
@@ -218,11 +218,11 @@ function About() {
       <SectionDivider variant="wave" color="muted" />
 
       {/* Timeline */}
-      <section className="py-10 sm:py-16 md:py-20 bg-muted/30 relative overflow-hidden">
+      <section className="py-16 md:py-24 bg-muted/30 relative overflow-hidden">
         
         <div className="container mx-auto px-4 lg:px-12">
           <div className="text-center mb-14">
-            <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
+            <span className="inline-block text-xs uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
               Our Journey
             </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
@@ -237,11 +237,11 @@ function About() {
       </section>
 
       {/* Founders */}
-      <section id="founders" className="py-10 sm:py-16 md:py-20 bg-background relative overflow-hidden">
+      <section id="founders" className="py-16 md:py-24 bg-background relative overflow-hidden">
         
         <div className="container mx-auto px-4 lg:px-12">
           <div className="text-center mb-14">
-            <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
+            <span className="inline-block text-xs uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
               Meet Our Founders
             </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
@@ -315,7 +315,7 @@ function About() {
 
       {/* Values */}
       <MeshBackground variant="vibrant" withDots>
-      <section className="py-10 sm:py-16 md:py-20">
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 lg:px-12">
           <div className="text-center mb-14">
             <span className="frosted-pill mb-4">Our Values</span>
@@ -349,7 +349,7 @@ function About() {
       <SectionDivider variant="mountains" color="background" />
 
       {/* Community Impact */}
-      <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
+      <section className="py-16 md:py-24 relative overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${ohioNatureImpact})` }}
@@ -387,10 +387,10 @@ function About() {
       <SectionDivider variant="wave" color="background" flip />
 
       {/* Who We Help */}
-      <section className="py-10 sm:py-16 md:py-20 bg-background">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 lg:px-12">
           <div className="text-center mb-14">
-            <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
+            <span className="inline-block text-xs uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
               Who We Serve
             </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
@@ -446,7 +446,7 @@ function About() {
 
 
       {/* CTA with Field Background */}
-      <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden" id="cta">
+      <section className="py-16 md:py-24 relative overflow-hidden" id="cta">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${fieldSunsetCta})` }}

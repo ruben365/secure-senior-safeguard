@@ -111,7 +111,7 @@ export const SiteOrientationGrid = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
                   {page.featured && (
-                    <span className="absolute top-3 left-3 inline-flex items-center px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-gradient-to-r from-primary to-accent text-white shadow-lg">
+                    <span className="absolute top-3 left-3 inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-primary to-accent text-white shadow-lg">
                       ⭐ Most Popular
                     </span>
                   )}

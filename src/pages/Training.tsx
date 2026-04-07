@@ -120,7 +120,7 @@ const PremiumTrainingCard = memo(
         {/* Floating badge */}
         <div className="absolute -top-0 left-1/2 -translate-x-1/2 z-30">
           <span
-            className={`inline-flex items-center gap-1.5 px-5 py-2 rounded-full text-[11px] font-black uppercase tracking-[0.15em] whitespace-nowrap border shadow-lg ${
+            className={`inline-flex items-center gap-1.5 px-5 py-2 rounded-full text-xs font-black uppercase tracking-[0.15em] whitespace-nowrap border shadow-lg ${
               isPopular
                 ? "bg-gradient-to-r from-primary via-accent to-primary text-white border-primary/40 shadow-[0_4px_20px_hsl(var(--primary)/0.35)]"
                 : "bg-card text-primary border-primary/25 shadow-md"
@@ -174,11 +174,11 @@ const PremiumTrainingCard = memo(
 
               {/* Meta chips */}
               <div className="flex items-center justify-center gap-2 mb-4">
-                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-muted/60 border border-border/40 text-[11px] font-semibold text-muted-foreground">
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-muted/60 border border-border/40 text-xs font-semibold text-muted-foreground">
                   <ClockIcon className="w-3 h-3" />
                   {plan.duration}
                 </span>
-                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-muted/60 border border-border/40 text-[11px] font-semibold text-muted-foreground">
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-muted/60 border border-border/40 text-xs font-semibold text-muted-foreground">
                   <Users className="w-3 h-3" />
                   {plan.size}
                 </span>
@@ -281,7 +281,7 @@ const ScamExampleCard = ({
         </span>
         <div className="space-y-4">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground font-bold mb-2">
+            <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground font-bold mb-2">
               What They Received
             </p>
             <p className="text-foreground italic leading-relaxed text-sm">
@@ -289,7 +289,7 @@ const ScamExampleCard = ({
             </p>
           </div>
           <div>
-            <p className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground font-bold mb-2">
+            <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground font-bold mb-2">
               Our Analysis
             </p>
             <p className="text-muted-foreground leading-relaxed text-sm">
@@ -297,7 +297,7 @@ const ScamExampleCard = ({
             </p>
           </div>
           <div className="pt-4 border-t border-border/50">
-            <p className="text-[11px] uppercase tracking-[0.15em] text-muted-foreground font-bold mb-2">
+            <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground font-bold mb-2">
               Amount Saved
             </p>
             <p className="text-3xl font-black text-primary">
@@ -601,7 +601,7 @@ function LearnAndTrain() {
         </div>
 
         {/* ══════════ SECTION 1: WHY FAMILIES TRUST US ══════════ */}
-        <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
+        <section className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background dot-grid-bg" />
           
           <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
@@ -634,7 +634,7 @@ function LearnAndTrain() {
                   {/* Graphic stat callout */}
                   <div className="mt-auto pt-3 border-t border-border/50">
                     <p className="text-2xl font-black text-primary">{item.stat}</p>
-                    <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">{item.statLabel}</p>
+                    <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">{item.statLabel}</p>
                   </div>
                 </div>
               ))}
@@ -722,7 +722,7 @@ function LearnAndTrain() {
         <div className="h-1.5 bg-gradient-to-r from-primary via-accent to-primary" />
 
         {/* ══════════ SECTION 2: HOW IT WORKS ══════════ */}
-        <section id="book" className="py-10 sm:py-16 md:py-20 bg-muted/20">
+        <section id="book" className="py-16 md:py-24 bg-muted/20">
           <div className="container mx-auto px-4 lg:px-12">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
@@ -769,7 +769,7 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 3: SCAM PREVENTION WORKSHOPS ══════════ */}
-        <section id="training" className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
+        <section id="training" className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
           <div className="absolute top-20 right-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-20 left-0 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-3xl pointer-events-none" />
@@ -818,7 +818,7 @@ function LearnAndTrain() {
                 <div key={i} className="bg-muted/50 border border-border/40 rounded-xl p-3 text-center">
                   <stat.icon className="w-5 h-5 text-primary mx-auto mb-1" />
                   <p className="text-xl font-black text-foreground">{stat.value}</p>
-                  <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">{stat.label}</p>
+                  <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">{stat.label}</p>
                 </div>
               ))}
             </div>
@@ -829,7 +829,7 @@ function LearnAndTrain() {
         <InstructorShowcase />
 
         {/* ══════════ SECTION 4: SIMPLE PROTECTION IN 4 STEPS ══════════ */}
-        <section className="py-10 sm:py-16 md:py-20 bg-muted/20">
+        <section className="py-16 md:py-24 bg-muted/20">
           <div className="container mx-auto px-4 lg:px-12">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
@@ -882,7 +882,7 @@ function LearnAndTrain() {
                 </div>
                 <div className="text-right">
                   <p className="text-3xl sm:text-4xl font-black text-primary">{'<'}2 min</p>
-                  <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">AI-Powered Speed</p>
+                  <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">AI-Powered Speed</p>
                 </div>
               </div>
             </div>
@@ -891,7 +891,7 @@ function LearnAndTrain() {
 
         {/* ══════════ SECTION 5: THREAT ANALYSIS ══════════ */}
         <MeshBackground variant="subtle" withOrbs>
-        <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
+        <section className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
           <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto px-4 lg:px-12 relative z-10">
@@ -948,7 +948,7 @@ function LearnAndTrain() {
               ].map((stat, i) => (
                 <div key={i} className="bg-card border border-border/60 rounded-xl p-4 text-center">
                   <p className="text-2xl sm:text-3xl font-black text-primary">{stat.value}</p>
-                  <p className="text-[10px] sm:text-xs uppercase tracking-widest text-muted-foreground font-bold">{stat.label}</p>
+                  <p className="text-[11px] sm:text-xs uppercase tracking-widest text-muted-foreground font-bold">{stat.label}</p>
                 </div>
               ))}
             </div>
@@ -958,7 +958,7 @@ function LearnAndTrain() {
         </MeshBackground>
 
         {/* ══════════ SECTION 6: AI PROFESSIONAL TRAINING ══════════ */}
-        <section id="ai-pro-training" className="py-10 sm:py-16 md:py-20 bg-muted/20">
+        <section id="ai-pro-training" className="py-16 md:py-24 bg-muted/20">
           <div className="container mx-auto px-4 lg:px-12">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
@@ -1010,7 +1010,7 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 7: SECURE YOUR FAMILY ══════════ */}
-        <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
+        <section className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background dot-grid-bg" />
           <div className="absolute bottom-20 right-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto px-4 lg:px-12 relative z-10">
@@ -1053,7 +1053,7 @@ function LearnAndTrain() {
                 {/* Danger stat */}
                 <div className="mt-6 p-4 bg-destructive/5 rounded-xl border border-destructive/10 text-center">
                   <p className="text-2xl font-black text-destructive">$28.4B</p>
-                  <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Lost to scams in 2024 (FTC)</p>
+                  <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">Lost to scams in 2024 (FTC)</p>
                 </div>
               </div>
 
@@ -1082,7 +1082,7 @@ function LearnAndTrain() {
                 {/* Protection stat */}
                 <div className="mt-6 p-4 bg-primary/5 rounded-xl border border-primary/10 text-center">
                   <p className="text-2xl font-black text-primary">$1.2M+</p>
-                  <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Saved for our families</p>
+                  <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">Saved for our families</p>
                 </div>
               </div>
             </div>
@@ -1116,7 +1116,7 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 8: SCAMS WE'VE CAUGHT ══════════ */}
-        <section className="py-10 sm:py-16 md:py-20 bg-muted/20">
+        <section className="py-16 md:py-24 bg-muted/20">
           <div className="container mx-auto px-4 lg:px-12">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
@@ -1168,10 +1168,10 @@ function LearnAndTrain() {
 
         {/* Training Success Stories */}
         {trainingTestimonials.length > 0 && (
-          <section className="py-10 sm:py-16 md:py-20 bg-background">
+          <section className="py-16 md:py-24 bg-background">
             <div className="container mx-auto px-4 lg:px-12">
               <div className="text-center mb-14">
-                <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
+                <span className="inline-block text-xs uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
                   Testimonials
                 </span>
                 <h2 className="text-3xl md:text-4xl font-black text-foreground mb-3">

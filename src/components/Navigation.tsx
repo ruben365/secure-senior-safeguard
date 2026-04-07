@@ -120,7 +120,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
               />
               <div className="flex flex-col leading-none min-w-0">
                 <span className="text-[15px] font-extrabold text-white tracking-tight">InVision Network</span>
-                <span className="text-[9px] font-bold text-gray-400 hidden sm:block tracking-widest uppercase">AI Scam Protection</span>
+                <span className="text-[10px] font-bold text-gray-300 hidden sm:block tracking-widest uppercase">AI Scam Protection</span>
               </div>
             </a>
 

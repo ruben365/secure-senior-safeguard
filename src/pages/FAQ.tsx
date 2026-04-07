@@ -622,7 +622,7 @@ export default function FAQ() {
           <SectionDivider variant="curve" color="background" />
 
           {/* Still Have Questions CTA */}
-          <section className="py-12 sm:py-16 relative overflow-hidden">
+          <section className="py-16 md:py-24 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
             <div className="absolute top-10 right-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
             <div className="container mx-auto px-4 relative z-10">
@@ -658,7 +658,7 @@ export default function FAQ() {
           <SectionDivider variant="curve" color="background" />
 
           {/* AI Image Disclaimer */}
-          <section className="py-12 bg-muted/20">
+          <section className="py-16 bg-muted/20">
             <div className="container mx-auto px-4">
               <div className="max-w-4xl mx-auto">
                 <AIImageDisclaimer />

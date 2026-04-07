@@ -97,7 +97,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
               </div>
               <div>
                 <h2 className="text-base font-bold text-white leading-tight">InVision Network</h2>
-                <p className="text-[11px] text-white/75">AI Security & Protection</p>
+                <p className="text-xs text-white/75">AI Security & Protection</p>
               </div>
             </div>
 
@@ -195,9 +195,9 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
           </div>
 
           {/* Support Statement — inline, no box */}
-          <div className="flex items-center justify-center gap-1.5 mb-3">
-            <Heart className="w-3 h-3 text-pink-400/50 flex-shrink-0" />
-            <p className="text-[10px] text-white/65">
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <Heart className="w-3.5 h-3.5 text-pink-400/60 flex-shrink-0" />
+            <p className="text-xs text-white/75">
               We proudly support veterans and children with cancer. A portion of every service goes toward these causes.
             </p>
           </div>
@@ -207,11 +207,11 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3">
             <div className="flex flex-wrap items-center gap-3">
               <p className="text-xs text-white/75">© {new Date().getFullYear()} InVision Network. All rights reserved.</p>
-              <span className="flex items-center gap-1 text-[11px] text-white/70">
-                <Shield className="w-3 h-3 text-emerald-500/50" /> BBB Accredited
+              <span className="flex items-center gap-1.5 text-xs text-white/75">
+                <Shield className="w-3.5 h-3.5 text-emerald-500/60" /> BBB Accredited
               </span>
-              <span className="flex items-center gap-1 text-[11px] text-white/70">
-                <Shield className="w-3 h-3 text-amber-500/50" /> Veteran Owned
+              <span className="flex items-center gap-1.5 text-xs text-white/75">
+                <Shield className="w-3.5 h-3.5 text-amber-500/60" /> Veteran Owned
               </span>
             </div>
             <div className="flex items-center gap-1.5">
@@ -230,7 +230,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
           </div>
 
           {/* Disclaimer */}
-          <p className="text-white/65 text-[10px] text-center leading-relaxed max-w-3xl mx-auto mt-4">
+          <p className="text-white/70 text-xs text-center leading-relaxed max-w-3xl mx-auto mt-4">
             InVision Network provides educational services only. We are not legal, financial, tax, or licensed cybersecurity professionals. In case of active fraud, identity theft, or criminal activity, contact local law enforcement (911), your bank's fraud department immediately using official phone numbers, and report to FTC at IdentityTheft.gov. We never request passwords, 2FA codes, bank account information, or Social Security numbers.
           </p>
         </div>

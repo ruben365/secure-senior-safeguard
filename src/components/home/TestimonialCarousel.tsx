@@ -76,7 +76,7 @@ export const TestimonialCarousel = () => {
                       <Quote className="w-3.5 h-3.5 text-primary-foreground" />
                     </div>
                   </div>
-                  <span className="inline-flex items-center px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-primary/8 text-primary border border-primary/15">
+                  <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-primary/8 text-primary border border-primary/15">
                     {testimonials[current].tag}
                   </span>
                 </div>
