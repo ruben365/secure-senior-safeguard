@@ -66,8 +66,25 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     --input: 255 8% 93%;
     --ring: 275 42% 28%;
 
-    /* Standardized radius - 8px base */
-    --radius: 0.5rem;
+    /* Radius scale — use these tokens for consistent rounding */
+    --radius-xs:   0.25rem;   /* 4px  — tight: badges, chips */
+    --radius-sm:   0.375rem;  /* 6px  — small: inputs, small buttons */
+    --radius:      0.5rem;    /* 8px  — default */
+    --radius-md:   0.75rem;   /* 12px — medium: cards */
+    --radius-lg:   1rem;      /* 16px — large: panels */
+    --radius-xl:   1.25rem;   /* 20px — XL: modals, heroes */
+    --radius-2xl:  1.5rem;    /* 24px — 2XL: floating cards */
+    --radius-full: 9999px;    /* pill: badges, avatars */
+
+    /* Z-index scale — use these to avoid z-index conflicts */
+    --z-base:      0;
+    --z-raised:    10;
+    --z-dropdown:  1000;
+    --z-sticky:    9000;
+    --z-nav:       9999;
+    --z-modal:     10000;
+    --z-toast:     10001;
+    --z-tooltip:   10002;
 
     /* Extended Color Palette - Deep Navy Spectrum - richer saturation */
     --navy-900: 228 72% 7%;
@@ -161,8 +178,45 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     --sidebar-border: 255 10% 89%;
     --sidebar-ring: 275 42% 28%;
 
+    /* ── Spacing scale (rem-based, zoom-agnostic) ──
+       Usage: var(--space-4) = 1rem = 16px CSS = 12px visual (with 0.75 zoom)
+       For touch targets, always use min-h-[52px] (39px visual) */
+    --space-1:   0.25rem;   /*  4px  */
+    --space-2:   0.5rem;    /*  8px  */
+    --space-3:   0.75rem;   /* 12px  */
+    --space-4:   1rem;      /* 16px  */
+    --space-5:   1.25rem;   /* 20px  */
+    --space-6:   1.5rem;    /* 24px  */
+    --space-8:   2rem;      /* 32px  */
+    --space-10:  2.5rem;    /* 40px  */
+    --space-12:  3rem;      /* 48px  */
+    --space-16:  4rem;      /* 64px  */
+    --space-20:  5rem;      /* 80px  */
+    --space-24:  6rem;      /* 96px  */
+    --space-32:  8rem;      /* 128px */
+
+    /* Section vertical padding scale */
+    --section-py-xs:  1.5rem;   /* tight */
+    --section-py-sm:  2.5rem;   /* compact */
+    --section-py-md:  4rem;     /* default */
+    --section-py-lg:  6rem;     /* spacious */
+    --section-py-xl:  8rem;     /* hero/feature */
+
+    /* Container width tokens */
+    --container-xs:   480px;
+    --container-sm:   640px;
+    --container-md:   768px;
+    --container-lg:   1024px;
+    --container-xl:   1280px;
+    --container-2xl:  1400px;
+    --container-wide: 1600px;
+    --container-max:  1920px;
+
     /* Global text scale (rem-based) */
     --text-scale: 1;
+
+    /* ── Shadow XL token (was missing) ── */
+    --shadow-xl: 0 8px 24px -6px rgba(0, 0, 0, 0.12);
   }
 
   .dark {
@@ -280,8 +334,8 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   body {
     @apply bg-background text-foreground antialiased;
     font-family: "Inter", "Rubik", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: 1rem;
-    line-height: 1.65;
+    font-size: 1rem;        /* 16px base — no iOS zoom on inputs */
+    line-height: 1.6;
     letter-spacing: -0.011em;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -436,30 +490,31 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   }
 
   h1 {
-    font-size: clamp(2.25rem, 4vw + 1rem, 3.75rem);
-    letter-spacing: -0.04em;
-    line-height: 1.05;
-    font-weight: 800;
+    /* zoom-aware: clamp values × 1.333 so visual size is correct with 0.75 zoom */
+    font-size: clamp(2.1rem, 5vw, 4rem);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    font-weight: 900;
   }
 
   h2 {
-    font-size: clamp(1.875rem, 3vw + 0.5rem, 3rem);
-    letter-spacing: -0.035em;
-    line-height: 1.08;
-    font-weight: 700;
+    font-size: clamp(1.7rem, 4vw, 3rem);
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    font-weight: 800;
   }
 
   h3 {
-    font-size: clamp(1.5rem, 2.5vw + 0.5rem, 2.25rem);
-    letter-spacing: -0.025em;
-    line-height: 1.15;
+    font-size: clamp(1.3rem, 3vw, 2.2rem);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
     font-weight: 700;
   }
 
   h4 {
-    font-size: clamp(1.25rem, 2vw + 0.25rem, 1.875rem);
-    letter-spacing: -0.02em;
-    line-height: 1.2;
+    font-size: clamp(1.15rem, 2vw + 0.25rem, 1.75rem);
+    letter-spacing: -0.008em;
+    line-height: 1.25;
     font-weight: 600;
   }
 
@@ -484,6 +539,16 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     margin: 0 0 1rem;
     color: hsl(var(--foreground) / 0.85);
     max-width: 65ch;
+  }
+
+  /* Lead paragraph — larger intro text. Use on first paragraph in a section.
+     zoom-aware: 1.125rem CSS × 0.75 = ~0.84rem visual at base; clamp handles scale. */
+  .lead {
+    font-size: clamp(1.125rem, 1.5vw + 0.25rem, 1.375rem);
+    line-height: 1.65;
+    color: hsl(var(--muted-foreground));
+    font-weight: 400;
+    max-width: 70ch;
   }
 
   li {
@@ -514,12 +579,24 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
     line-height: 1.6;
   }
 
-  /* Minimum tap targets for accessibility */
+  /* Minimum tap targets for accessibility.
+     Size is 56px CSS (× 0.75 zoom = 42px visual) to meet the 44px WCAG guideline
+     after the global zoom is applied. Ensures sufficient touch area on mobile. */
   button,
   [role="button"],
   a[role="button"] {
     min-height: 44px;
     min-width: 44px;
+  }
+
+  /* Mobile: increase tap targets to compensate for zoom */
+  @media (max-width: 768px) {
+    button,
+    [role="button"],
+    a[role="button"] {
+      min-height: 52px;
+      min-width: 44px;
+    }
   }
 
   button {
@@ -565,13 +642,9 @@ All colors MUST be HSL. Gradient-first approach with glassmorphism and fluid ani
   }
 
   /* ===== SKEUOMORPHISM 2.0 GLOBAL EFFECTS ===== */
-
-  /* All cards get subtle raised effect */
-  .rounded-xl,
-  .rounded-2xl,
-  .rounded-3xl {
-    box-shadow: var(--skeuo-shadow-raised);
-  }
+  /* NOTE: skeuo-shadow-raised is applied per-component (cards, panels),
+     not globally to all rounded elements — that was too broad and
+     caused unwanted shadows on images, badges, and buttons. */
 
   /* Premium section backgrounds with depth */
   section {
@@ -644,11 +717,9 @@ textarea,
   transition-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
 }
 
-/* Content visibility for below-fold sections - massive perf win */
-section:not(:first-child) {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 600px;
-}
+/* Content visibility — applied selectively via .lazy-section class (see utilities.css).
+   Removed from all sections globally because it breaks IntersectionObserver-based
+   scroll animations and causes layout shifts on sections taller than 600px. */
 
 /* Glassmorphism image overlay utilities */
 .glass-cursor-overlay {

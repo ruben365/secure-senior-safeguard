@@ -44,7 +44,7 @@ export const GuestScannerSection = () => {
       <section id="scamshield" className="py-16 bg-muted/30">
         <div id="guest-scanner" aria-hidden="true" />
 
-        <div className="container mx-auto px-4 lg:px-12 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
           <div className="text-center mb-10">
             <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
               <Sparkles className="w-3.5 h-3.5" />

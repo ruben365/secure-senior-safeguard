@@ -73,6 +73,10 @@ export const BlogPreview = () => {
                           src={article.image}
                           alt={article.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          loading="lazy"
+                          decoding="async"
+                          width={400}
+                          height={400}
                         />
                       </div>
                       <div className="absolute bottom-4 left-1/2 -translate-x-1/2">

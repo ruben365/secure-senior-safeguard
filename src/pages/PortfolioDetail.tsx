@@ -220,7 +220,7 @@ const PortfolioDetail = () => {
                       }`}>
                         {section.media_urls.map((url, i) => (
                           <div key={i} className="rounded-xl overflow-hidden bg-muted aspect-video">
-                            <img src={url} alt={`${sectionDef.label} ${i + 1}`} className="w-full h-full object-cover" />
+                            <img src={url} alt={`${sectionDef.label} ${i + 1}`} className="w-full h-full object-cover" loading="lazy" decoding="async" width={800} height={450} />
                           </div>
                         ))}
                       </div>
@@ -238,7 +238,7 @@ const PortfolioDetail = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {project.gallery.map((img) => (
                   <div key={img.id} className="rounded-xl overflow-hidden bg-muted aspect-[4/3]">
-                    <img src={img.image_url} alt={img.caption || project.title} className="w-full h-full object-cover" />
+                    <img src={img.image_url} alt={img.caption || project.title} className="w-full h-full object-cover" loading="lazy" decoding="async" width={800} height={600} />
                     {img.caption && (
                       <p className="p-2 text-xs text-muted-foreground">{img.caption}</p>
                     )}

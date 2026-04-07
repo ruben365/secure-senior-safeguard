@@ -70,6 +70,10 @@ export const TestimonialCarousel = () => {
                         src={testimonials[current].avatar}
                         alt={testimonials[current].name}
                         className="w-20 h-20 md:w-28 md:h-28 object-cover"
+                        loading="lazy"
+                        decoding="async"
+                        width={112}
+                        height={112}
                       />
                     </div>
                     <div className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-md">

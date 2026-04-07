@@ -62,6 +62,10 @@ export function ShoppingCart() {
                         <img
                           src={item.image}
                           alt={item.name}
+                          width={80}
+                          height={80}
+                          loading="lazy"
+                          decoding="async"
                           className="w-20 h-20 object-cover rounded"
                         />
                       )}

@@ -131,7 +131,7 @@ function About() {
           showScrollIndicator={true}
         >
           <div className="text-center mb-6">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+            <h1 className="font-bold text-white mb-4">
               <RotatingHeadlines headlines={aboutHeadlines} className="" />
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
@@ -159,7 +159,7 @@ function About() {
       {/* Our Story */}
       <section className="py-10 sm:py-16 md:py-20 bg-background relative overflow-hidden">
         
-        <div className="container mx-auto px-4 lg:px-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div>
               <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
@@ -214,7 +214,7 @@ function About() {
       {/* Timeline */}
       <section className="py-10 sm:py-16 md:py-20 bg-muted/30 relative overflow-hidden">
         
-        <div className="container mx-auto px-4 lg:px-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
           <div className="text-center mb-14">
             <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
               Our Journey
@@ -233,7 +233,7 @@ function About() {
       {/* Founders */}
       <section id="founders" className="py-10 sm:py-16 md:py-20 bg-background relative overflow-hidden">
         
-        <div className="container mx-auto px-4 lg:px-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
           <div className="text-center mb-14">
             <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
               Meet Our Founders
@@ -307,7 +307,7 @@ function About() {
 
       {/* Values */}
       <section className="py-10 sm:py-16 md:py-20 bg-muted/30">
-        <div className="container mx-auto px-4 lg:px-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
           <div className="text-center mb-14">
             <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
               Our Values
@@ -347,7 +347,7 @@ function About() {
         />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-primary/60 to-accent/70" />
 
-        <div className="container mx-auto px-4 lg:px-12 relative z-10 text-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10 text-white">
           <div className="text-center mb-14">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 drop-shadow-lg text-white">
               Our Community Impact
@@ -375,7 +375,7 @@ function About() {
 
       {/* Who We Help */}
       <section className="py-10 sm:py-16 md:py-20 bg-background">
-        <div className="container mx-auto px-4 lg:px-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
           <div className="text-center mb-14">
             <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
               Who We Serve

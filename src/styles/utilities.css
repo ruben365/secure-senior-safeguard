@@ -1,5 +1,29 @@
 /* Utility Classes */
 
+/* ===== ZOOM-COMPENSATED VIEWPORT HELPERS ===== */
+/* The #root has zoom: 0.75. Inside that context:
+   - 100vh in CSS renders as 75vh visually.
+   - Use these helpers when you need a full visual viewport height. */
+
+/* Full visual viewport height (compensates for 0.75 zoom on #root) */
+.h-viewport {
+  height: calc(100vh / 0.75);
+}
+
+.min-h-viewport {
+  min-height: calc(100vh / 0.75);
+}
+
+/* 80vh visual */
+.min-h-viewport-80 {
+  min-height: calc(80vh / 0.75);
+}
+
+/* 60vh visual */
+.min-h-viewport-60 {
+  min-height: calc(60vh / 0.75);
+}
+
 /* ===== DARK HERO GRID OVERLAY ===== */
 /* Reusable blueprint/cybersecurity grid pattern for dark hero sections */
 .hero-grid-overlay {

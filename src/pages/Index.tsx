@@ -143,6 +143,9 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
                 alt="Protected senior couple"
                 className="w-full h-full object-cover"
                 loading="lazy"
+                decoding="async"
+                width={1920}
+                height={1080}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[hsl(288_35%_8%/0.85)] via-[hsl(288_35%_12%/0.7)] to-[hsl(288_35%_15%/0.5)]" />
             </div>

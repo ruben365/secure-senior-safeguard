@@ -102,7 +102,7 @@ export default function LibraryPage() {
               <Sparkles className="h-4 w-4" />
               AI-Updated Content
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="font-bold mb-4">
               InVision Network Digital Library
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">

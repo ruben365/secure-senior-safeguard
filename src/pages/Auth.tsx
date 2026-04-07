@@ -422,6 +422,10 @@ function Auth() {
             alt=""
             aria-hidden="true"
             className="w-full h-full object-cover"
+            loading="eager"
+            decoding="async"
+            width={1920}
+            height={1080}
           />
           <div className="absolute inset-0 bg-white/30 backdrop-blur-[2px]" />
         </div>
@@ -460,6 +464,10 @@ function Auth() {
           src={authBackground}
           alt=""
           className="w-full h-full object-cover"
+          loading="eager"
+          decoding="async"
+          width={1920}
+          height={1080}
         />
         <div className="absolute inset-0 bg-white/30 backdrop-blur-[2px]" />
       </div>
@@ -477,6 +485,10 @@ function Auth() {
               src={invisionLogo}
               alt="InVision Network"
               className="w-11 h-11 drop-shadow-md"
+              loading="eager"
+              decoding="sync"
+              width={44}
+              height={44}
             />
             <div className="flex flex-col leading-tight">
               <span className="text-lg font-bold text-foreground">

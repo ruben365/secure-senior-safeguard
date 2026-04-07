@@ -19,6 +19,9 @@ export default {
       },
     },
     extend: {
+      screens: {
+        xs: "480px",
+      },
       fontFamily: {
         outfit: ["Rubik", "sans-serif"],
         sans: ["Rubik", "sans-serif"],

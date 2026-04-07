@@ -100,25 +100,29 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                     src={invisionLogo}
                     alt="InVision Network"
                     className="h-8 w-8 object-contain brightness-0 invert premium-4k-image"
+                    loading="eager"
+                    decoding="sync"
+                    width={32}
+                    height={32}
                   />
                 </div>
                 <div>
                   <h2 className="text-lg font-bold text-white">InVision Network</h2>
-                  <p className="text-xs text-white/40">
+                  <p className="text-xs text-white/65">
                     AI Security & Protection
                   </p>
                 </div>
               </div>
-              <p className="text-sm text-white/50 max-w-md leading-relaxed">
+              <p className="text-sm text-white/60 max-w-md leading-relaxed">
                 Protecting families and businesses from AI-powered scams with
                 cutting-edge technology and expert training.
               </p>
               <div className="flex flex-wrap gap-5">
-                <span className="flex items-center gap-2 text-sm text-white/40">
+                <span className="flex items-center gap-2 text-sm text-white/70">
                   <MapPin className="w-4 h-4" />
                   {SITE.location.city}, {SITE.location.region}
                 </span>
-                <span className="flex items-center gap-2 text-sm text-white/40">
+                <span className="flex items-center gap-2 text-sm text-white/70">
                   <Mail className="w-4 h-4" />
                   {SITE.emails.hello}
                 </span>
@@ -130,11 +134,11 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
               <h3 className="text-lg font-bold mb-2 text-white">
                 Stay Protected
               </h3>
-              <p className="text-sm text-white/50 mb-4">
+              <p className="text-sm text-white/60 mb-4">
                 Get monthly AI safety tips and scam alerts delivered to your
                 inbox.
               </p>
-              <form onSubmit={handleNewsletterSubmit} className="flex gap-3">
+              <form onSubmit={handleNewsletterSubmit} className="flex flex-col xs:flex-row gap-3">
                 <Input
                   type="email"
                   placeholder="Enter your email"
@@ -147,7 +151,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="h-12 w-12 rounded-xl bg-purple-600 hover:bg-purple-500 border-0 p-0 flex-shrink-0 disabled:opacity-50"
+                  className="h-12 w-full xs:w-12 rounded-xl bg-purple-600 hover:bg-purple-500 border-0 p-0 xs:flex-shrink-0 disabled:opacity-50"
                   aria-label="Subscribe to newsletter"
                 >
                   {isSubmitting ? (
@@ -164,7 +168,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
           <div className="h-px bg-white/8 mb-12" />
 
           {/* Navigation Links */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-14">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 mb-14">
             <div>
               <h4 className="font-bold text-sm mb-5 text-white">
                 Navigation
@@ -181,7 +185,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                   <li key={link.to}>
                     <Link
                       to={link.to}
-                      className="text-sm text-white/40 hover:text-white transition-colors"
+                      className="text-sm text-white/70 hover:text-white transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -204,7 +208,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                   <li key={i}>
                     <Link
                       to="/services"
-                      className="text-sm text-white/40 hover:text-white transition-colors"
+                      className="text-sm text-white/70 hover:text-white transition-colors"
                     >
                       {label}
                     </Link>
@@ -227,7 +231,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                   <li key={i}>
                     <Link
                       to="/training"
-                      className="text-sm text-white/40 hover:text-white transition-colors"
+                      className="text-sm text-white/70 hover:text-white transition-colors"
                     >
                       {label}
                     </Link>
@@ -244,7 +248,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                 <li>
                   <Link
                     to="/faq"
-                    className="text-sm text-white/40 hover:text-white transition-colors"
+                    className="text-sm text-white/70 hover:text-white transition-colors"
                   >
                     FAQ
                   </Link>
@@ -252,7 +256,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                 <li>
                   <Link
                     to="/contact"
-                    className="text-sm text-white/40 hover:text-white transition-colors"
+                    className="text-sm text-white/70 hover:text-white transition-colors"
                   >
                     Contact Us
                   </Link>
@@ -260,7 +264,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                 <li>
                   <Link
                     to="/contact"
-                    className="text-sm text-white/40 hover:text-white transition-colors"
+                    className="text-sm text-white/70 hover:text-white transition-colors"
                   >
                     Emergency Help
                   </Link>
@@ -274,7 +278,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                 <li>
                   <Link
                     to="/privacy-policy"
-                    className="text-sm text-white/40 hover:text-white transition-colors"
+                    className="text-sm text-white/70 hover:text-white transition-colors"
                   >
                     Privacy Policy
                   </Link>
@@ -282,7 +286,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                 <li>
                   <Link
                     to="/terms-of-service"
-                    className="text-sm text-white/40 hover:text-white transition-colors"
+                    className="text-sm text-white/70 hover:text-white transition-colors"
                   >
                     Terms of Service
                   </Link>
@@ -290,7 +294,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                 <li>
                   <Link
                     to="/refund-policy"
-                    className="text-sm text-white/40 hover:text-white transition-colors"
+                    className="text-sm text-white/70 hover:text-white transition-colors"
                   >
                     Refund Policy
                   </Link>
@@ -303,17 +307,17 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
           <div className="h-px bg-white/8 mb-6" />
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
             <div className="flex flex-wrap items-center justify-center gap-4">
-              <p className="text-sm text-white/35">
+              <p className="text-sm text-white/70">
                 © {new Date().getFullYear()} InVision Network. All rights
                 reserved.
               </p>
               <div className="flex items-center gap-4">
-                <span className="flex items-center gap-1.5 text-xs text-white/45">
-                  <Shield className="w-4 h-4 text-emerald-500/60" />
+                <span className="flex items-center gap-1.5 text-xs text-white/70">
+                  <Shield className="w-4 h-4 text-emerald-400/80" />
                   BBB Accredited
                 </span>
-                <span className="flex items-center gap-1.5 text-xs text-white/45">
-                  <Shield className="w-4 h-4 text-amber-500/60" />
+                <span className="flex items-center gap-1.5 text-xs text-white/70">
+                  <Shield className="w-4 h-4 text-amber-400/80" />
                   Veteran-Supporting
                 </span>
               </div>
@@ -348,17 +352,17 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/8 transition-colors flex items-center justify-center"
+                  className="w-[52px] h-[52px] rounded-xl bg-white/5 hover:bg-white/12 border border-white/10 transition-colors flex items-center justify-center"
                   aria-label={social.label}
                 >
-                  <social.icon className="w-4 h-4 text-white/50" />
+                  <social.icon className="w-4 h-4 text-white/65" />
                 </a>
               ))}
             </div>
           </div>
 
           {/* Legal Disclaimer */}
-          <p className="text-white/25 text-xs text-center leading-relaxed max-w-4xl mx-auto">
+          <p className="text-white/60 text-xs text-center leading-relaxed max-w-4xl mx-auto">
             InVision Network provides educational services only. We are not
             legal, financial, tax, or licensed cybersecurity professionals. In
             case of active fraud, identity theft, or criminal activity,

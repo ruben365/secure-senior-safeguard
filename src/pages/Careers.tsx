@@ -332,6 +332,9 @@ function Careers() {
                 alt="Our team collaborating in a meeting"
                 className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
+                decoding="async"
+                width={800}
+                height={320}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[hsl(288_30%_15%/0.85)] via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
@@ -345,6 +348,9 @@ function Careers() {
                 alt="Support team member helping customers"
                 className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
+                decoding="async"
+                width={800}
+                height={320}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[hsl(18_60%_30%/0.85)] via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6 text-white">

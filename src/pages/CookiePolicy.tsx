@@ -91,7 +91,8 @@ function CookiePolicy() {
                         These cookies are necessary for the website to function
                         properly. They cannot be disabled.
                       </p>
-                      <table className="w-full text-sm">
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-sm min-w-[400px]">
                         <thead>
                           <tr className="border-b">
                             <th className="text-left py-2">Cookie</th>
@@ -139,6 +140,7 @@ function CookiePolicy() {
                           </tr>
                         </tbody>
                       </table>
+                      </div>
                     </div>
 
                     <div className="border rounded-lg p-5">
@@ -155,7 +157,8 @@ function CookiePolicy() {
                         These cookies enable enhanced functionality and
                         personalization, such as remembering your preferences.
                       </p>
-                      <table className="w-full text-sm">
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-sm min-w-[400px]">
                         <thead>
                           <tr className="border-b">
                             <th className="text-left py-2">Cookie</th>
@@ -185,6 +188,7 @@ function CookiePolicy() {
                           </tr>
                         </tbody>
                       </table>
+                      </div>
                     </div>
 
                     <div className="border rounded-lg p-5">
@@ -202,7 +206,8 @@ function CookiePolicy() {
                         with our website, allowing us to improve the user
                         experience.
                       </p>
-                      <table className="w-full text-sm">
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-sm min-w-[400px]">
                         <thead>
                           <tr className="border-b">
                             <th className="text-left py-2">Cookie</th>
@@ -240,6 +245,7 @@ function CookiePolicy() {
                           </tr>
                         </tbody>
                       </table>
+                      </div>
                       <p className="text-muted-foreground mt-4 text-sm">
                         <strong>Note:</strong> We use first-party analytics and
                         do not share this data with third parties for

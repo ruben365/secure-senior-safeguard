@@ -107,6 +107,9 @@ export const SiteOrientationGrid = () => {
                     alt={page.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     loading="lazy"
+                    decoding="async"
+                    width={600}
+                    height={176}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
                   {page.featured && (

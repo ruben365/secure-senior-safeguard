@@ -127,6 +127,11 @@ export default function BookDetail() {
                     <img
                       src={book.cover_image}
                       alt={`${book.title} book cover`}
+                      width={320}
+                      height={427}
+                      loading="eager"
+                      decoding="async"
+                      fetchPriority="high"
                       className="w-full h-full object-cover"
                       onError={(e) => {
                         (e.target as HTMLImageElement).style.display = "none";
@@ -201,7 +206,7 @@ export default function BookDetail() {
                   <Badge variant="secondary" className="capitalize">{book.category}</Badge>
                   {book.tag && <Badge className="bg-primary/10 text-primary border-primary/20">{book.tag}</Badge>}
                 </div>
-                <h1 className="text-3xl md:text-4xl font-bold mb-2">{book.title}</h1>
+                <h1 className="font-bold mb-2">{book.title}</h1>
                 <p className="text-xl text-muted-foreground mb-4">{book.subtitle}</p>
                 <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
                   <span className="flex items-center gap-1">

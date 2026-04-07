@@ -89,7 +89,7 @@ export const HomeIntroSection = () => {
       </section>
 
       {/* Visual Bento Grid */}
-      <section className="py-16 md:py-28" ref={introRef as any}>
+      <section className="py-16 md:py-28 overflow-hidden" ref={introRef as any}>
         <div className="container mx-auto px-4 md:px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Left — Copy */}
@@ -154,6 +154,9 @@ export const HomeIntroSection = () => {
                     alt="Our cybersecurity operations center"
                     className="w-full h-48 md:h-64 object-cover group-hover:scale-105 transition-transform duration-700"
                     loading="lazy"
+                    decoding="async"
+                    width={800}
+                    height={400}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-foreground/56 via-foreground/16 to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
@@ -169,6 +172,9 @@ export const HomeIntroSection = () => {
                     alt="Family gathering for safety training"
                     className="w-full h-36 md:h-44 object-cover group-hover:scale-110 transition-transform duration-700"
                     loading="lazy"
+                    decoding="async"
+                    width={400}
+                    height={176}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-foreground/44 to-transparent" />
                   <div className="absolute bottom-3 left-3">
@@ -181,6 +187,9 @@ export const HomeIntroSection = () => {
                     alt="Community workshop"
                     className="w-full h-36 md:h-44 object-cover group-hover:scale-110 transition-transform duration-700"
                     loading="lazy"
+                    decoding="async"
+                    width={400}
+                    height={176}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-foreground/44 to-transparent" />
                   <div className="absolute bottom-3 left-3">
@@ -190,7 +199,7 @@ export const HomeIntroSection = () => {
               </div>
 
               {/* Floating stat widget — top right */}
-              <div className={`absolute -top-5 -right-5 md:-right-8 z-10 transition-all duration-700 ${isInView ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
+              <div className={`hidden sm:block absolute -top-5 -right-5 md:-right-8 z-10 transition-all duration-700 ${isInView ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
                 <div className="glass rounded-2xl p-3 shadow-3d-colored">
                   <div className="flex items-center gap-2">
                     <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center">
@@ -205,7 +214,7 @@ export const HomeIntroSection = () => {
               </div>
 
               {/* Floating widget — bottom left */}
-              <div className={`absolute -bottom-5 -left-5 md:-left-8 z-10 transition-all duration-700 delay-200 ${isInView ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
+              <div className={`hidden sm:block absolute -bottom-5 -left-5 md:-left-8 z-10 transition-all duration-700 delay-200 ${isInView ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
                 <div className="glass rounded-2xl p-3 shadow-3d-colored">
                   <div className="flex items-center gap-2">
                     <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-accent/20 to-primary/10 flex items-center justify-center">
@@ -220,7 +229,7 @@ export const HomeIntroSection = () => {
               </div>
 
               {/* Floating alert widget — mid right */}
-              <div className={`absolute top-1/2 -right-3 md:-right-6 z-10 transition-all duration-500 delay-300 ${isInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-5'}`}>
+              <div className={`hidden sm:block absolute top-1/2 -right-3 md:-right-6 z-10 transition-all duration-500 delay-300 ${isInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-5'}`}>
                 <div className="glass rounded-xl p-2.5 shadow-3d">
                   <div className="flex items-center gap-2">
                     <div className="w-7 h-7 rounded-lg bg-destructive/15 flex items-center justify-center">
@@ -320,7 +329,7 @@ export const HomeIntroSection = () => {
             </div>
 
             <div
-              className={`rounded-2xl border border-border/60 bg-card p-6 shadow-3d overflow-hidden relative hover:-translate-y-1.5 hover:scale-[1.02] hover:shadow-[0_20px_40px_-12px_hsl(288_25%_20%/0.15)] transition-all duration-500 delay-[250ms] ${bentoInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+              className={`rounded-2xl border border-border/60 bg-card p-6 shadow-3d overflow-hidden relative hover:-translate-y-1.5 hover:scale-[1.02] hover:shadow-[0_20px_40px_-12px_hsl(288_25%_20%/0.15)] transition-all duration-500 delay-250 ${bentoInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 pointer-events-none" />
               <div className="relative flex items-center gap-3 mb-3">

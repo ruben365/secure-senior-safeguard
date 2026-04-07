@@ -173,24 +173,11 @@
         z-index: 9999;
       }
       h1 {
-        font-weight: 700;
-        line-height: 0.95;
-        letter-spacing: -0.025em;
-      }
-      @media (min-width: 640px) {
-        h1 {
-          font-size: 2.25rem;
-        }
-      }
-      @media (min-width: 768px) {
-        h1 {
-          font-size: 3rem;
-        }
-      }
-      @media (min-width: 1024px) {
-        h1 {
-          font-size: 3.75rem;
-        }
+        font-weight: 900;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        /* zoom-aware clamp — matches base.css */
+        font-size: clamp(2.1rem, 5vw, 4rem);
       }
       .lcp-text {
         font-size: clamp(1rem, 2vw, 1.5rem);
@@ -261,15 +248,16 @@
     </script>
 
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>InVision Network | Cybersecurity & AI Protection in Ohio</title>
+    <link rel="apple-touch-icon" href="/shield-logo-192.png" />
+    <title>InVision Network | AI Scam Protection & Cybersecurity Training in Ohio</title>
     <meta
       name="description"
-      content="InVision Network provides expert cybersecurity training and AI protection for Ohio families and businesses. Protect your identity and data from online scams."
+      content="InVision Network protects Ohio families and seniors from AI-powered scams, deepfakes, voice cloning, and phishing. Expert cybersecurity training, real-time threat detection, and business AI automation. Veteran-founded in Kettering, Ohio."
     />
     <meta name="author" content="InVision Network" />
     <meta
       name="keywords"
-      content="AI scam protection, deepfake detection, senior scam training, family cybersecurity, phishing defense, Dayton Ohio"
+      content="AI scam protection, deepfake detection, voice clone scam, senior scam prevention, family cybersecurity, phishing defense, scam workshops, Ohio cybersecurity, Kettering Ohio, digital safety training, AI business automation"
     />
     <meta
       name="robots"
@@ -286,16 +274,22 @@
 
     <!-- Open Graph Tags -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="InVision Network" />
+    <meta property="og:url" content="https://www.invisionnetwork.org/" />
     <meta
       property="og:image"
-      content="https://storage.googleapis.com/gpt-engineer-file-uploads/UpYpYr7MTVdr1jgHmL94ALNUlk93/social-images/social-1761862743436-shield_purpleb.png"
+      content="https://www.invisionnetwork.org/images/hero-corporate-protection.webp"
     />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="InVision Network — AI Scam Protection for Ohio Families" />
+    <meta property="og:locale" content="en_US" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@invisionnetwork" />
     <meta
       name="twitter:image"
-      content="https://storage.googleapis.com/gpt-engineer-file-uploads/UpYpYr7MTVdr1jgHmL94ALNUlk93/social-images/social-1761862743436-shield_purpleb.png"
+      content="https://www.invisionnetwork.org/images/hero-corporate-protection.webp"
     />
 
     <!-- Canonical URL is set per-page by react-helmet-async (SEO component) -->
@@ -393,26 +387,21 @@
       }
     </script>
 
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="https://storage.googleapis.com/gpt-engineer-file-uploads/UpYpYr7MTVdr1jgHmL94ALNUlk93/uploads/1761862729082-shield_purpleb.png"
-    />
     <meta
       property="og:title"
-      content="InVision Network | Cybersecurity & AI Protection in Ohio"
+      content="InVision Network | AI Scam Protection & Cybersecurity Training in Ohio"
     />
     <meta
       name="twitter:title"
-      content="InVision Network | Cybersecurity & AI Protection in Ohio"
+      content="InVision Network | AI Scam Protection & Cybersecurity Training in Ohio"
     />
     <meta
       property="og:description"
-      content="InVision Network provides expert cybersecurity training and AI protection for Ohio families and businesses. Protect your identity and data from online scams."
+      content="InVision Network protects Ohio families and seniors from AI-powered scams, deepfakes, voice cloning, and phishing. Veteran-founded, privacy-first, 500+ families protected."
     />
     <meta
       name="twitter:description"
-      content="InVision Network provides expert cybersecurity training and AI protection for Ohio families and businesses. Protect your identity and data from online scams."
+      content="InVision Network protects Ohio families and seniors from AI-powered scams, deepfakes, voice cloning, and phishing. Veteran-founded, privacy-first, 500+ families protected."
     />
   </head>
 

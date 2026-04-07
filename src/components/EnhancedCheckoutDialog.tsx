@@ -144,7 +144,11 @@ function QRCodePayment({
           <div className="bg-white p-4 rounded-xl inline-block shadow-lg">
             <img
               src={qrCodeUrl}
-              alt="Payment QR Code"
+              alt="Payment QR Code — scan with your phone to complete payment"
+              width={200}
+              height={200}
+              loading="lazy"
+              decoding="async"
               className="w-[200px] h-[200px]"
             />
           </div>

@@ -51,6 +51,17 @@ export function useStripeKey() {
       // First try VITE env variable (fastest)
       const envKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 
+      if (!envKey || envKey.trim() === "") {
+        // NOTE: Add VITE_STRIPE_PUBLISHABLE_KEY=pk_live_... to your .env file.
+        // Without this key the payment form will fall back to fetching from the
+        // get-stripe-key edge function. If that also fails, payments will not work.
+        console.warn(
+          "[Stripe] VITE_STRIPE_PUBLISHABLE_KEY is not set. " +
+          "Falling back to get-stripe-key edge function. " +
+          "Set this env variable to avoid the extra network round-trip."
+        );
+      }
+
       if (envKey && envKey.trim() !== "") {
         stripePromiseCache = loadStripe(envKey);
         setStripePromise(stripePromiseCache);

@@ -105,7 +105,7 @@ export const InstructorShowcase = () => {
   return (
     <>
       <section className="py-10 sm:py-16 md:py-20 bg-muted/30">
-        <div className="container mx-auto px-4 lg:px-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
           <div className="text-center mb-14">
             <span className="inline-block text-[11px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
               Meet Your Instructors
@@ -131,6 +131,8 @@ export const InstructorShowcase = () => {
                     alt={instructor.name}
                     width={96}
                     height={96}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
@@ -201,6 +203,8 @@ export const InstructorShowcase = () => {
                     alt={selectedInstructor.name}
                     width={96}
                     height={96}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover"
                   />
                 </div>

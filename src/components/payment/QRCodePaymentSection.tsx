@@ -197,7 +197,7 @@ export function QRCodePaymentSection({
       {qrImageUrl ? (
         <div className="flex flex-col items-center gap-4 animate-fade-in">
           <div className="relative bg-white p-4 rounded-xl border-2 border-primary/20">
-            <img src={qrImageUrl} alt="Payment QR Code" className="w-48 h-48" />
+            <img src={qrImageUrl} alt="Payment QR Code" className="w-48 h-48" loading="lazy" decoding="async" width={192} height={192} />
             {/* Countdown overlay */}
             <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2">
               <Badge

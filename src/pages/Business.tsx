@@ -508,7 +508,7 @@ function Business() {
             showScrollIndicator={true}>
             
             <div className="text-center mb-6">
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-4">
+              <h1 className="font-black text-white mb-4">
                 <RotatingHeadlines headlines={businessHeadlines} className="" />
               </h1>
               <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">

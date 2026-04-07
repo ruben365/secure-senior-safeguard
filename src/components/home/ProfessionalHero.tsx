@@ -139,6 +139,9 @@ export const ProfessionalHero = () => {
                 alt="Family protected from online scams"
                 className="w-full h-full object-cover"
                 loading="eager"
+                decoding="async"
+                width={800}
+                height={600}
               />
 
               {/* Image Overlay Gradient */}

@@ -182,7 +182,7 @@ function Contact() {
           subheadline=""
         >
           <div className="text-center mb-6">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+            <h1 className="font-bold text-white mb-4">
               Contact Us
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
@@ -671,6 +671,10 @@ function Contact() {
                       src={supportAgentPhoto}
                       alt="Our friendly support team member"
                       className="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                      width={600}
+                      height={160}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent" />
                     <div className="absolute bottom-2 left-3 text-white">
@@ -686,13 +690,13 @@ function Contact() {
                         initials: "RN",
                         name: "Ruben N.",
                         role: "Support Lead",
-                        color: "primary",
+                        avatarClass: "bg-gradient-to-br from-primary/20 to-primary/5 text-primary",
                       },
                       {
                         initials: "CM",
                         name: "Corine M.",
                         role: "Customer Care",
-                        color: "accent",
+                        avatarClass: "bg-gradient-to-br from-accent/20 to-accent/5 text-accent",
                       },
                     ].map((member, i) => (
                       <div
@@ -700,7 +704,7 @@ function Contact() {
                         className="flex items-center gap-3 p-3 rounded-xl bg-muted/30 border border-border/30 hover:border-primary/30 hover:bg-muted/50 transition-all duration-300 cursor-pointer group"
                       >
                         <div
-                          className={`w-12 h-12 rounded-xl bg-gradient-to-br from-${member.color}/20 to-${member.color}/5 flex items-center justify-center text-${member.color} font-bold group-hover:scale-110 transition-transform duration-300`}
+                          className={`w-12 h-12 rounded-xl flex items-center justify-center font-bold group-hover:scale-110 transition-transform duration-300 ${member.avatarClass}`}
                         >
                           {member.initials}
                         </div>

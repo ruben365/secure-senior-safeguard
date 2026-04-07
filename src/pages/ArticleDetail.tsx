@@ -147,7 +147,7 @@ function ArticleDetail() {
             <Badge variant="secondary" className="mb-4">
               {article.category}
             </Badge>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+            <h1 className="font-bold mb-4 leading-tight">
               {article.title}
             </h1>
             <div className="flex flex-wrap items-center gap-4 text-muted-foreground">
@@ -180,6 +180,10 @@ function ArticleDetail() {
               src={article.featured_image_url}
               alt={article.title}
               className="w-full h-auto rounded-2xl mb-8 object-cover max-h-[500px]"
+              loading="lazy"
+              decoding="async"
+              width={1200}
+              height={500}
             />
           )}
 
@@ -233,6 +237,8 @@ function ArticleDetail() {
                       <img
                         src={related.featured_image_url}
                         alt={related.title}
+                        width={400}
+                        height={192}
                         className="w-full h-48 object-cover"
                         loading="lazy"
                         decoding="async"

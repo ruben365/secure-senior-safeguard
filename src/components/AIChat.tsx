@@ -387,9 +387,9 @@ export const AIChat = () => {
   }
 
   return (
-    <div className="fixed bottom-4 right-4 z-[9998] sm:bottom-6 sm:right-6">
+    <div className="fixed bottom-4 right-2 z-[9998] sm:bottom-6 sm:right-6">
       {/* Enhanced chat panel with better dimensions */}
-      <div className="bg-card rounded-2xl shadow-2xl w-[360px] sm:w-[400px] h-[560px] flex flex-col overflow-hidden border border-border">
+      <div className="bg-card rounded-2xl shadow-2xl w-[calc(100vw-1rem)] max-w-[360px] sm:w-[400px] sm:max-w-none h-[560px] flex flex-col overflow-hidden border border-border">
         {/* Header */}
         <div className="flex items-center justify-between p-3 border-b border-border bg-card shrink-0">
           <div className="flex items-center gap-2">
@@ -435,7 +435,8 @@ export const AIChat = () => {
 
             <button
               onClick={() => setAutoSpeak(!autoSpeak)}
-              className={`p-2 rounded-full transition-all ${autoSpeak ? "text-primary bg-primary/10" : "text-muted-foreground hover:bg-muted"}`}
+              className={`p-2 rounded-full transition-all focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 ${autoSpeak ? "text-primary bg-primary/10" : "text-muted-foreground hover:bg-muted"}`}
+              aria-label={autoSpeak ? "Disable voice" : "Enable voice"}
               title={autoSpeak ? "Voice enabled" : "Voice disabled"}
             >
               {autoSpeak ? (
@@ -447,7 +448,8 @@ export const AIChat = () => {
 
             <button
               onClick={() => setMode(mode === "chat" ? "translation" : "chat")}
-              className={`p-2 rounded-full transition-all ${mode === "translation" ? "text-accent bg-accent/10" : "text-muted-foreground hover:bg-muted"}`}
+              className={`p-2 rounded-full transition-all focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 ${mode === "translation" ? "text-accent bg-accent/10" : "text-muted-foreground hover:bg-muted"}`}
+              aria-label={mode === "chat" ? "Switch to translation mode" : "Switch to chat mode"}
               title={mode === "chat" ? "Chat mode" : "Translation mode"}
             >
               <Languages className="w-4 h-4" />
@@ -455,7 +457,8 @@ export const AIChat = () => {
 
             <button
               onClick={closeChat}
-              className="p-2 rounded-full text-muted-foreground hover:bg-muted hover:text-foreground transition-all"
+              aria-label="Close chat"
+              className="p-2 rounded-full text-muted-foreground hover:bg-muted hover:text-foreground transition-all focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
             >
               <X className="w-4 h-4" />
             </button>

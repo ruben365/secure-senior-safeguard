@@ -193,6 +193,10 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
                 src={lauraAvatar}
                 alt="Laura"
                 className="w-full h-full object-cover object-top"
+                loading="lazy"
+                decoding="async"
+                width={40}
+                height={40}
               />
               <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-card" />
             </div>
@@ -252,6 +256,10 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
                       src={lauraAvatar}
                       alt="Laura"
                       className="w-full h-full object-cover object-top"
+                      loading="lazy"
+                      decoding="async"
+                      width={80}
+                      height={80}
                     />
                   </div>
                   <div className="space-y-2">

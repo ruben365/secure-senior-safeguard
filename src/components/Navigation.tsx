@@ -42,15 +42,22 @@ const Navigation = React.memo(() => {
 
   const isAdminOrStaff = user && roleConfig;
 
-  // Close "More" dropdown on outside click
+  // Close "More" dropdown on outside click (mouse + touch)
   React.useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (moreRef.current && !moreRef.current.contains(e.target as Node)) {
+    const handler = (e: MouseEvent | TouchEvent) => {
+      const target = e instanceof TouchEvent ? e.touches[0]?.target : (e as MouseEvent).target;
+      if (moreRef.current && !moreRef.current.contains(target as Node)) {
         setMoreOpen(false);
       }
     };
-    if (moreOpen) document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
+    if (moreOpen) {
+      document.addEventListener("mousedown", handler as EventListener);
+      document.addEventListener("touchstart", handler as EventListener, { passive: true });
+    }
+    return () => {
+      document.removeEventListener("mousedown", handler as EventListener);
+      document.removeEventListener("touchstart", handler as EventListener);
+    };
   }, [moreOpen]);
 
   const hasOpenedMenu = React.useRef(false);
@@ -67,6 +74,23 @@ const Navigation = React.memo(() => {
       }
     };
   }, [mobileMenuOpen]);
+
+  // Close mobile menu on Escape key
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileMenuOpen(false);
+        setMoreOpen(false);
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  // Close mobile menu on route change
+  React.useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -146,6 +170,9 @@ const Navigation = React.memo(() => {
               <div className="relative" ref={moreRef}>
                 <button
                   onClick={() => setMoreOpen(!moreOpen)}
+                  aria-haspopup="true"
+                  aria-expanded={moreOpen}
+                  aria-label="More navigation links"
                   className={`flex items-center gap-1 text-[15px] px-3 py-2 rounded-md transition-colors duration-150 ${
                     isSecondaryActive
                       ? "text-primary font-bold bg-primary/5"
@@ -159,13 +186,18 @@ const Navigation = React.memo(() => {
                 </button>
 
                 {moreOpen && (
-                  <div className="absolute top-full left-0 mt-1 w-44 bg-card rounded-lg border border-border shadow-lg py-1 z-50">
+                  <div
+                    role="menu"
+                    aria-label="More links"
+                    className="absolute top-full left-0 mt-1 w-44 bg-card rounded-lg border border-border shadow-lg py-1 z-[10002]"
+                  >
                     {secondaryLinks.map((link) => {
                       const isActive = isActiveLink(link.href);
                       return (
                         <PrefetchLink
                           key={link.name}
                           to={link.href}
+                          role="menuitem"
                           className={`block px-4 py-2.5 text-sm transition-colors ${
                             isActive
                               ? "text-primary font-semibold bg-primary/5"
@@ -252,7 +284,7 @@ const Navigation = React.memo(() => {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden fixed top-16 left-0 right-0 bottom-0 bg-card border-t border-border z-[10001] overflow-y-auto overscroll-contain pb-[calc(env(safe-area-inset-bottom)+1.25rem)] [-webkit-overflow-scrolling:touch]">
+          <div className="lg:hidden fixed top-[68px] left-0 right-0 bottom-0 bg-card border-t border-border z-[10001] overflow-y-auto overscroll-contain pb-[calc(env(safe-area-inset-bottom)+1.25rem)] [-webkit-overflow-scrolling:touch]">
             <div className="container mx-auto px-4 py-4 space-y-1">
               {allLinks.map((link) => {
                 const isActive = isActiveLink(link.href);
