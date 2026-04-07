@@ -21,7 +21,7 @@ import {
   Users,
   Bot,
 } from "lucide-react";
-import heroBrandedBusinessNew from "@/assets/hero-branded-business-new.jpg";
+import heroBrandedBusinessNew from "@/assets/hero-branded-business-new.png";
 
 const AIAutomation = () => {
   const features = [
@@ -158,13 +158,13 @@ const AIAutomation = () => {
             showScrollIndicator={true}
           >
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="xl" variant="gold">
+              <Button asChild size="heroPill" variant="heroPrimary">
                 <Link to="/contact">
                   Get Your Automation Plan
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-              <Button asChild size="xl" variant="outlineLight">
+              <Button asChild size="heroPill" variant="heroOutline">
                 <Link to="/business">View All Services</Link>
               </Button>
             </div>

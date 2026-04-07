@@ -262,13 +262,14 @@ function Resources() {
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
-              size="xl"
+              size="heroPill"
+              variant="heroPrimary"
               onClick={() => scrollToSection("guides")}
             >
               Shop Digital Guides
             </Button>
             <Button
-              size="xl"
+              size="heroPill"
               variant="heroOutline"
               onClick={() => setReadBooksOpen(true)}
             >

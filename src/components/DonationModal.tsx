@@ -102,7 +102,7 @@ const impactInfo: Record<
         description: "Sponsors comprehensive protection services",
       },
     ],
-    color: "from-purple-500/20 to-violet-500/20",
+    color: "from-orange-500/20 to-lavender-500/15",
   },
 };
 

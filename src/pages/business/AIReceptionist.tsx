@@ -21,7 +21,7 @@ import {
   TrendingUp,
   Bot,
 } from "lucide-react";
-import heroBrandedBusinessNew from "@/assets/hero-branded-business-new.jpg";
+import heroBrandedBusinessNew from "@/assets/hero-branded-business-new.png";
 
 const AIReceptionist = () => {
   const features = [
@@ -145,13 +145,13 @@ const AIReceptionist = () => {
             showScrollIndicator={true}
           >
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="xl" variant="gold">
+              <Button asChild size="heroPill" variant="heroPrimary">
                 <Link to="/contact">
                   Get Your AI Receptionist
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-              <Button asChild size="xl" variant="outlineLight">
+              <Button asChild size="heroPill" variant="heroOutline">
                 <a href={SITE.phone.tel}>
                   <Phone className="mr-2 h-5 w-5" />
                   Hear It In Action

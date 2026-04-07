@@ -28,7 +28,7 @@ export function ShoppingCart() {
         >
           <CartIcon className="w-4 h-4" />
           {itemCount > 0 && (
-            <span className="absolute -top-1.5 -right-1.5 flex items-center justify-center min-w-[16px] h-4 px-1 text-[10px] font-bold text-white bg-violet-500 rounded-full leading-none shadow-[0_0_8px_rgba(139,92,246,0.4)]">
+            <span className="absolute -top-1.5 -right-1.5 flex items-center justify-center min-w-[16px] h-4 px-1 text-[10px] font-bold text-white bg-orange-500 rounded-full leading-none shadow-[0_0_8px_rgba(249,115,22,0.45)]">
               {itemCount}
             </span>
           )}
@@ -49,10 +49,10 @@ export function ShoppingCart() {
               {/* Header */}
               <div className="flex items-center justify-between px-4 py-3 border-b border-white/8">
                 <div className="flex items-center gap-2">
-                  <CartIcon className="w-4 h-4 text-violet-400" />
+                  <CartIcon className="w-4 h-4 text-orange-400" />
                   <span className="text-sm font-bold text-white">Cart</span>
                   {itemCount > 0 && (
-                    <span className="text-[10px] font-bold text-violet-300 bg-violet-500/20 px-1.5 py-0.5 rounded-full">
+                    <span className="text-[10px] font-bold text-orange-300 bg-orange-500/20 px-1.5 py-0.5 rounded-full">
                       {itemCount}
                     </span>
                   )}
@@ -83,7 +83,7 @@ export function ShoppingCart() {
                         )}
                         <div className="flex-1 min-w-0">
                           <h4 className="text-sm font-semibold text-white truncate">{item.name}</h4>
-                          <p className="text-xs text-violet-400 font-medium">${item.price.toFixed(2)}</p>
+                          <p className="text-xs text-orange-400 font-medium">${item.price.toFixed(2)}</p>
                         </div>
                         <div className="flex items-center gap-1 flex-shrink-0">
                           <button
@@ -128,7 +128,7 @@ export function ShoppingCart() {
                   <button
                     type="button"
                     onClick={() => { setOpen(false); setCheckoutOpen(true); }}
-                    className="w-full h-10 flex items-center justify-center gap-2 rounded-lg bg-violet-600 hover:bg-violet-500 text-white text-sm font-semibold transition-colors"
+                    className="w-full h-10 flex items-center justify-center gap-2 rounded-lg bg-orange-600 hover:bg-orange-500 text-white text-sm font-semibold transition-colors"
                   >
                     <Lock className="w-3.5 h-3.5" />
                     Checkout

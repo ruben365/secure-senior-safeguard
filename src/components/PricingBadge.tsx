@@ -78,13 +78,13 @@ const badgeConfig = {
   guaranteed: {
     icon: CheckCircle,
     label: "GUARANTEED",
-    gradient: "from-primary to-purple-600",
+    gradient: "from-orange-500 to-amber-500",
     emoji: "✓",
   },
   premium: {
     icon: Star,
     label: "PREMIUM",
-    gradient: "from-violet-600 to-purple-700",
+    gradient: "from-orange-600 to-[#d96c4a]",
     emoji: "👑",
   },
   new: {

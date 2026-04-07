@@ -3,12 +3,12 @@
    ═══════════════════════════════════════════════════════════════════════ */
 
 .hero-biz {
-  --biz-bg: #0B0D14;
+  --biz-bg: #080b11;
   --biz-card-dark: #151923;
-  --biz-card-accent: #7C1938;
+  --biz-card-accent: #6B2E1A;
   --biz-card-light: #E2E8F0;
-  --biz-accent: #D61A5A;
-  --biz-accent-hover: #B01548;
+  --biz-accent: #d96c4a;
+  --biz-accent-hover: #b8552f;
   --biz-text: #FFFFFF;
   --biz-muted: #9CA3AF;
   --biz-border: rgba(255, 255, 255, 0.08);
@@ -42,10 +42,25 @@
   object-fit: cover;
   object-position: right center;
   display: block;
-  filter: brightness(0.55) saturate(0.85);
+  filter: brightness(0.88) saturate(0.9);
 }
 
-/* Bottom dark shelf */
+/* Layer 1 — Left wall: readable text zone (matches hero-home) */
+.hero-biz__bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to right,
+    hsla(260, 18%, 8%, 0.72)   0%,
+    hsla(260, 14%, 10%, 0.48) 25%,
+    hsla(260, 10%, 12%, 0.2)  50%,
+    transparent                70%
+  );
+}
+
+/* Layer 2 — Bottom shelf (matches hero-home) */
 .hero-biz__bg::after {
   content: "";
   position: absolute;
@@ -53,18 +68,19 @@
   z-index: 2;
   background: linear-gradient(
     to top,
-    rgba(11, 13, 20, 0.95)  0%,
-    rgba(11, 13, 20, 0.6)  20%,
-    transparent              50%
+    hsla(260, 18%, 6%, 0.65)  0%,
+    hsla(260, 14%, 8%, 0.3)   20%,
+    transparent                40%
   );
 }
 
+/* Layer 3 — Top veil (matches hero-home) */
 .hero-biz__top-veil {
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 5rem;
+  height: 6rem;
   z-index: 3;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.25), transparent);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), transparent);
   pointer-events: none;
 }
 
@@ -144,6 +160,7 @@
   animation: bizFadeUp 0.5s ease-out 0.2s both;
 }
 
+/* CTA buttons — match homepage hero-home__cta visual style */
 .hero-biz__cta {
   display: inline-flex;
   align-items: center;
@@ -154,49 +171,61 @@
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-  color: var(--biz-text);
-  border-radius: 9999px;
+  color: rgba(255, 255, 255, 0.92);
+  border-radius: 50px;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: inherit;
+  position: relative;
 }
 
 .hero-biz__cta:active {
-  transform: translateY(1px) scale(0.97);
+  transform: translateY(1px) scale(0.98);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
   transition-duration: 0.1s;
 }
 
 .hero-biz__cta:focus-visible {
-  outline: 2px solid var(--biz-accent);
+  outline: 2px solid rgba(249, 115, 22, 0.7);
   outline-offset: 3px;
 }
 
-/* Primary — Solid magenta, rounded pill */
+/* Primary — glass with warm orange accent glow */
 .hero-biz__cta--primary {
-  background: var(--biz-accent);
-  border: none;
-  box-shadow: 0 4px 20px rgba(214, 26, 90, 0.3);
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.2) 0%, rgba(255, 255, 255, 0.08) 100%);
+  border: 1px solid rgba(249, 115, 22, 0.35);
+  box-shadow:
+    0 0 20px rgba(249, 115, 22, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .hero-biz__cta--primary:hover {
-  background: var(--biz-accent-hover);
-  transform: translateY(-2px) scale(1.02);
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.3) 0%, rgba(255, 255, 255, 0.12) 100%);
+  border-color: rgba(249, 115, 22, 0.5);
+  transform: translateY(-2px);
   box-shadow:
-    0 8px 30px rgba(214, 26, 90, 0.4),
-    0 0 60px rgba(214, 26, 90, 0.1);
+    0 4px 24px rgba(249, 115, 22, 0.25),
+    0 0 40px rgba(249, 115, 22, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-/* Secondary — Ghost outline, rounded pill */
+/* Secondary — subtle glass border */
 .hero-biz__cta--secondary {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .hero-biz__cta--secondary:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.35);
   transform: translateY(-2px);
+  box-shadow:
+    0 4px 20px rgba(249, 115, 22, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 
@@ -287,14 +316,14 @@
 .hero-biz__feature--accent {
   background:
     linear-gradient(160deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.01) 40%, rgba(255,255,255,0.04) 100%),
-    rgba(124, 25, 56, 0.3);
+    rgba(107, 46, 26, 0.3);
   -webkit-backdrop-filter: blur(48px) saturate(180%);
   backdrop-filter: blur(48px) saturate(180%);
-  border-color: rgba(214, 26, 90, 0.25);
+  border-color: rgba(217, 108, 74, 0.25);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.18),
     inset 0 -1px 0 rgba(255, 255, 255, 0.04),
-    0 8px 30px rgba(214, 26, 90, 0.1);
+    0 8px 30px rgba(217, 108, 74, 0.1);
 }
 
 .hero-biz__feature--light {
@@ -322,11 +351,11 @@
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
 }
 .hero-biz__feature--dark:hover {
-  box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 40px rgba(107,70,193,0.1);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 40px rgba(217,108,74,0.1);
 }
 .hero-biz__feature--accent:hover {
-  border-color: rgba(214, 26, 90, 0.4);
-  box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 40px rgba(214,26,90,0.15);
+  border-color: rgba(217, 108, 74, 0.4);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 40px rgba(217,108,74,0.15);
 }
 .hero-biz__feature--light:hover {
   box-shadow: 0 20px 50px rgba(0,0,0,0.12);
@@ -369,11 +398,11 @@
 .hero-biz__feature-icon svg { width: 14px; height: 14px; color: var(--biz-text); stroke-width: 1.8; transition: all 0.3s ease; }
 
 .hero-biz__feature:hover .hero-biz__feature-icon {
-  background: rgba(214, 26, 90, 0.1);
-  border-color: rgba(214, 26, 90, 0.3);
-  box-shadow: 0 0 12px rgba(214, 26, 90, 0.08);
+  background: rgba(217, 108, 74, 0.1);
+  border-color: rgba(217, 108, 74, 0.3);
+  box-shadow: 0 0 12px rgba(217, 108, 74, 0.08);
 }
-.hero-biz__feature:hover .hero-biz__feature-icon svg { color: #f472b6; }
+.hero-biz__feature:hover .hero-biz__feature-icon svg { color: #f4a98e; }
 
 /* Title — sits next to icon */
 .hero-biz__feature-title {

@@ -134,7 +134,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                     to={link.href}
                     className={`relative text-[15px] px-3 py-2 rounded-md transition-colors duration-150 ${
                       isActive
-                        ? "text-violet-400 font-bold bg-violet-500/10"
+                        ? "text-orange-400 font-bold bg-orange-500/10"
                         : "text-gray-300 font-semibold hover:text-white hover:bg-white/10"
                     }`}
                   >
@@ -150,7 +150,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   onClick={() => setMoreOpen(!moreOpen)}
                   className={`flex items-center gap-1 text-[15px] px-3 py-2 rounded-md transition-colors duration-150 ${
                     isSecondaryActive
-                      ? "text-violet-400 font-bold bg-violet-500/10"
+                      ? "text-orange-400 font-bold bg-orange-500/10"
                       : "text-gray-300 font-semibold hover:text-white hover:bg-white/10"
                   }`}
                 >
@@ -177,7 +177,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                           to={link.href}
                           className={`block px-4 py-2 text-sm transition-colors ${
                             isActive
-                              ? "text-violet-400 font-semibold"
+                              ? "text-orange-400 font-semibold"
                               : "text-gray-400 hover:text-white"
                           }`}
                           onClick={() => setMoreOpen(false)}
@@ -214,7 +214,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
               <button
                 type="button"
                 onClick={() => setDonateOpen(true)}
-                className="hidden lg:flex items-center gap-1.5 text-sm font-medium px-2.5 py-1.5 rounded-md text-gray-400 hover:text-violet-400 hover:bg-violet-500/10 transition-colors"
+                className="hidden lg:flex items-center gap-1.5 text-sm font-medium px-2.5 py-1.5 rounded-md text-gray-400 hover:text-orange-400 hover:bg-orange-500/10 transition-colors"
                 aria-label="Donate"
               >
                 <Heart className="w-4 h-4" />
@@ -229,7 +229,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 <Link
                   to="/admin"
                   aria-label="Go to Dashboard"
-                  className="flex items-center gap-1.5 h-9 px-6 text-sm font-semibold rounded-full bg-violet-600 hover:bg-violet-500 text-white transition-all shadow-[0_0_15px_rgba(124,58,237,0.2)]"
+                  className="flex items-center gap-1.5 h-9 px-6 text-sm font-semibold rounded-full bg-[#d96c4a] hover:bg-[#b8552f] text-white transition-all shadow-[0_0_15px_rgba(217,108,74,0.25)]"
                 >
                   <LayoutDashboard className="h-4 w-4" />
                   Dashboard
@@ -238,7 +238,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 <Link
                   to="/portal"
                   aria-label="Login to your account"
-                  className="h-9 px-6 text-sm font-semibold rounded-full bg-violet-600 hover:bg-violet-500 text-white transition-all shadow-[0_0_15px_rgba(124,58,237,0.2)] inline-flex items-center"
+                  className="h-9 px-6 text-sm font-semibold rounded-full bg-[#d96c4a] hover:bg-[#b8552f] text-white transition-all shadow-[0_0_15px_rgba(217,108,74,0.25)] inline-flex items-center"
                 >
                   Login
                 </Link>
@@ -274,7 +274,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   to={link.href}
                   className={`block text-[15px] transition-colors duration-150 font-medium px-4 py-3 rounded-lg ${
                     isActive
-                      ? "text-violet-400 font-semibold bg-violet-500/10"
+                      ? "text-orange-400 font-semibold bg-orange-500/10"
                       : "text-gray-300 hover:text-white hover:bg-white/10"
                   }`}
                   onClick={() => {
@@ -290,7 +290,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
             <div className="pt-4 border-t border-gray-800 mt-3 space-y-3">
               <button
                 type="button"
-                className="w-full h-11 text-[15px] font-semibold border border-violet-500/30 text-violet-400 hover:bg-violet-500/10 rounded-lg flex items-center justify-center gap-2 transition-colors"
+                className="w-full h-11 text-[15px] font-semibold border border-orange-500/30 text-orange-400 hover:bg-orange-500/10 rounded-lg flex items-center justify-center gap-2 transition-colors"
                 onClick={() => {
                   setDonateOpen(true);
                   setMobileMenuOpen(false);
@@ -304,7 +304,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 <Link
                   to="/admin"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full h-11 text-[15px] font-semibold rounded-lg bg-violet-600 hover:bg-violet-700 text-white flex items-center justify-center gap-2 transition-colors"
+                  className="w-full h-11 text-[15px] font-semibold rounded-lg bg-[#d96c4a] hover:bg-[#b8552f] text-white flex items-center justify-center gap-2 transition-colors"
                 >
                   <LayoutDashboard className="h-4 w-4" />
                   Dashboard
@@ -313,7 +313,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 <Link
                   to="/portal"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full h-11 text-[15px] font-semibold rounded-lg bg-violet-600 hover:bg-violet-700 text-white flex items-center justify-center transition-colors"
+                  className="w-full h-11 text-[15px] font-semibold rounded-lg bg-[#d96c4a] hover:bg-[#b8552f] text-white flex items-center justify-center transition-colors"
                 >
                   Login
                 </Link>

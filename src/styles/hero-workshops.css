@@ -11,8 +11,8 @@
 
 /* Design tokens */
 .hero-ws {
-  --ws-blue: #3067e8;
-  --ws-blue-glow: rgba(48, 103, 232, 0.35);
+  --ws-blue: #d96c4a;
+  --ws-blue-glow: rgba(217, 108, 74, 0.35);
   --ws-text-main: #FFFFFF;
   --ws-text-muted: #b0b3bf;
   --ws-glass-bg: rgba(255, 255, 255, 0.05);
@@ -53,38 +53,42 @@
   filter: brightness(0.88) saturate(0.9);
 }
 
+/* Layer 1 — Left wall: readable text zone, gentle fade (matches hero-home) */
 .hero-ws__bg::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 1;
   background: linear-gradient(
-    90deg,
-    rgba(10, 10, 12, 0.55)  0%,
-    rgba(10, 10, 12, 0.3)  30%,
-    transparent             65%
+    to right,
+    hsla(260, 18%, 8%, 0.72)   0%,
+    hsla(260, 14%, 10%, 0.48) 25%,
+    hsla(260, 10%, 12%, 0.2)  50%,
+    transparent                70%
   );
 }
 
+/* Layer 2 — Bottom curtain: lighter shelf (matches hero-home) */
 .hero-ws__bg::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 2;
   background: linear-gradient(
-    0deg,
-    rgba(10, 10, 12, 0.45)  0%,
-    rgba(10, 10, 12, 0.15) 15%,
-    transparent              30%
+    to top,
+    hsla(260, 18%, 6%, 0.65)  0%,
+    hsla(260, 14%, 8%, 0.3)   20%,
+    transparent                40%
   );
 }
 
+/* Layer 3 — Top veil: subtle nav contrast (matches hero-home) */
 .hero-ws__top-veil {
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 4rem;
+  height: 6rem;
   z-index: 3;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.12), transparent);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), transparent);
   pointer-events: none;
 }
 
@@ -174,6 +178,8 @@
   animation: wsFadeUp 0.5s ease-out 0.2s both;
 }
 
+/* CTA buttons — match homepage hero-home__cta visual style:
+   pill-shape, glass surface, warm orange accent */
 .hero-ws__cta {
   display: inline-flex;
   align-items: center;
@@ -183,68 +189,74 @@
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-  color: var(--ws-text-main);
-  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.92);
+  border-radius: 50px;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: inherit;
+  position: relative;
 }
 
 .hero-ws__cta svg {
   width: 15px;
   height: 15px;
+  opacity: 0.6;
   flex-shrink: 0;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .hero-ws__cta:hover svg {
+  opacity: 0.9;
   transform: translateX(2px);
 }
 
 .hero-ws__cta:active {
   transform: translateY(1px) scale(0.98);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
   transition-duration: 0.1s;
 }
 
 .hero-ws__cta:focus-visible {
-  outline: 2px solid var(--ws-blue);
+  outline: 2px solid rgba(249, 115, 22, 0.7);
   outline-offset: 3px;
 }
 
-/* Primary — Solid sapphire blue */
+/* Primary — glass with warm orange accent glow */
 .hero-ws__cta--primary {
-  background: var(--ws-blue);
-  border: 1px solid rgba(48, 103, 232, 0.6);
-  box-shadow: 0 4px 15px rgba(48, 103, 232, 0.2);
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.2) 0%, rgba(255, 255, 255, 0.08) 100%);
+  border: 1px solid rgba(249, 115, 22, 0.35);
+  box-shadow:
+    0 0 20px rgba(249, 115, 22, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .hero-ws__cta--primary:hover {
-  background: #2558cc;
-  transform: translateY(-2px) scale(1.02);
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.3) 0%, rgba(255, 255, 255, 0.12) 100%);
+  border-color: rgba(249, 115, 22, 0.5);
+  transform: translateY(-2px);
   box-shadow:
-    0 6px 25px var(--ws-blue-glow),
-    0 0 40px rgba(48, 103, 232, 0.12);
+    0 4px 24px rgba(249, 115, 22, 0.25),
+    0 0 40px rgba(249, 115, 22, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-/* Secondary — Glassmorphism matching bottom cards */
+/* Secondary — subtle glass border */
 .hero-ws__cta--secondary {
-  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.03) 100%);
-  -webkit-backdrop-filter: blur(20px) saturate(130%);
-  backdrop-filter: blur(20px) saturate(130%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    0 2px 8px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .hero-ws__cta--secondary:hover {
-  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.06) 100%);
-  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.35);
   transform: translateY(-2px);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    0 6px 25px rgba(139, 92, 246, 0.15);
+    0 4px 20px rgba(249, 115, 22, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 
@@ -342,8 +354,8 @@
   width: 110px;
   height: 110px;
   border-radius: 50%;
-  border: 1.5px solid rgba(48, 103, 232, 0.18);
-  box-shadow: 0 0 35px rgba(48, 103, 232, 0.08);
+  border: 1.5px solid rgba(217, 108, 74, 0.18);
+  box-shadow: 0 0 35px rgba(217, 108, 74, 0.08);
   pointer-events: none;
   animation: wsRingPulse 4s ease-in-out infinite;
 }
@@ -371,7 +383,7 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  border: 1px dashed rgba(48, 103, 232, 0.1);
+  border: 1px dashed rgba(217, 108, 74, 0.1);
   pointer-events: none;
   animation: wsRingPulse 6s ease-in-out 1s infinite;
 }
@@ -385,8 +397,8 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(48, 103, 232, 0.4) 0%, transparent 70%);
-  box-shadow: 0 0 12px rgba(48, 103, 232, 0.3);
+  background: radial-gradient(circle, rgba(217, 108, 74, 0.4) 0%, transparent 70%);
+  box-shadow: 0 0 12px rgba(217, 108, 74, 0.3);
   pointer-events: none;
   animation: wsOrbFloat 3s ease-in-out infinite;
 }
@@ -399,8 +411,8 @@
   left: -8px;
   width: 20px;
   height: 20px;
-  border-left: 1.5px solid rgba(48, 103, 232, 0.18);
-  border-top: 1.5px solid rgba(48, 103, 232, 0.18);
+  border-left: 1.5px solid rgba(217, 108, 74, 0.18);
+  border-top: 1.5px solid rgba(217, 108, 74, 0.18);
   border-radius: 6px 0 0 0;
   pointer-events: none;
 }
@@ -413,8 +425,8 @@
   right: -8px;
   width: 20px;
   height: 20px;
-  border-right: 1.5px solid rgba(48, 103, 232, 0.18);
-  border-bottom: 1.5px solid rgba(48, 103, 232, 0.18);
+  border-right: 1.5px solid rgba(217, 108, 74, 0.18);
+  border-bottom: 1.5px solid rgba(217, 108, 74, 0.18);
   border-radius: 0 0 6px 0;
   pointer-events: none;
 }
@@ -427,7 +439,7 @@
   top: 25%;
   width: 2px;
   height: 50%;
-  background: linear-gradient(to bottom, transparent, rgba(48, 103, 232, 0.2), transparent);
+  background: linear-gradient(to bottom, transparent, rgba(217, 108, 74, 0.2), transparent);
   border-radius: 1px;
   pointer-events: none;
 }
@@ -459,8 +471,8 @@
   width: 42px;
   height: 42px;
   border-radius: 10px;
-  background: rgba(48, 103, 232, 0.12);
-  border: 1px solid rgba(48, 103, 232, 0.25);
+  background: rgba(217, 108, 74, 0.12);
+  border: 1px solid rgba(217, 108, 74, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -547,7 +559,7 @@
 .hero-ws__widget-btn:hover {
   border-color: #6d9bff;
   color: #6d9bff;
-  background: rgba(48, 103, 232, 0.1);
+  background: rgba(217, 108, 74, 0.1);
 }
 
 
@@ -629,14 +641,14 @@
     0 15px 30px rgba(0, 0, 0, 0.4);
 }
 
-.hero-ws__feature:nth-child(1):hover { box-shadow: 0 15px 30px rgba(0,0,0,0.4), 0 0 30px rgba(48,103,232,0.15); }
+.hero-ws__feature:nth-child(1):hover { box-shadow: 0 15px 30px rgba(0,0,0,0.4), 0 0 30px rgba(217,108,74,0.15); }
 .hero-ws__feature:nth-child(2):hover { box-shadow: 0 15px 30px rgba(0,0,0,0.4), 0 0 30px rgba(59,130,246,0.15); }
 .hero-ws__feature:nth-child(3):hover { box-shadow: 0 15px 30px rgba(0,0,0,0.4), 0 0 30px rgba(193,70,107,0.15); }
 .hero-ws__feature:nth-child(4):hover { box-shadow: 0 15px 30px rgba(0,0,0,0.4), 0 0 30px rgba(16,185,129,0.15); }
 
 .hero-ws__feature:hover .hero-ws__feature-icon {
-  border-color: rgba(48, 103, 232, 0.35);
-  background: rgba(48, 103, 232, 0.1);
+  border-color: rgba(217, 108, 74, 0.35);
+  background: rgba(217, 108, 74, 0.1);
 }
 
 .hero-ws__feature:hover .hero-ws__feature-icon svg {

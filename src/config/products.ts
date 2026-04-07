@@ -89,7 +89,7 @@ export const SCAMSHIELD_PLANS: Product[] = [
   },
 ];
 
-// AI Business Services (One-time payments)
+// AI Services (One-time payments)
 export const AI_SERVICES: Product[] = [
   {
     id: "ai-receptionist",

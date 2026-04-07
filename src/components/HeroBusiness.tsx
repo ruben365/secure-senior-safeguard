@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import {
   Cpu, Bot, ShieldCheck, Cog,
 } from "lucide-react";
-import businessHero from "@/assets/hero-branded-business-new.jpg";
+import businessHero from "@/assets/hero-branded-business-new.png";
 
 /* ── Bottom feature cards — varied backgrounds ── */
 const businessFeatures = [
@@ -51,12 +51,13 @@ export const HeroBusiness = ({ onStrategyCall }: { onStrategyCall: () => void })
       <div className="hero-biz__bg">
         <img
           src={businessHero}
-          alt="InVision Network — AI Business Solutions"
+          alt="InVision Network — AI Solutions"
           loading="eager"
           decoding="sync"
           fetchPriority="high"
         />
         <div className="hero-biz__top-veil" />
+        <div className="hero-biz__glow" aria-hidden="true" />
       </div>
 
       {/* ── Hero Content: Left text only ── */}

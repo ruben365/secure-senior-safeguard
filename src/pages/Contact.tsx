@@ -193,13 +193,13 @@ function Contact() {
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="xl" asChild>
+            <Button size="heroPill" variant="heroPrimary" asChild>
               <a href={SITE.phone.tel}>
                 <Phone className="w-5 h-5 mr-2" />
                 {SITE.phone.display}
               </a>
             </Button>
-            <Button size="xl" variant="heroOutline" asChild>
+            <Button size="heroPill" variant="heroOutline" asChild>
               <a href={`mailto:${SITE.emails.info}`}>
                 <Mail className="w-5 h-5 mr-2" />
                 Email Us

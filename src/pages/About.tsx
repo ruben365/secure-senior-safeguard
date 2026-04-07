@@ -141,10 +141,10 @@ function About() {
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="xl" asChild>
+            <Button size="heroPill" variant="heroPrimary" asChild>
               <Link to="/training">Start Training</Link>
             </Button>
-            <Button size="xl" variant="heroOutline" asChild>
+            <Button size="heroPill" variant="heroOutline" asChild>
               <Link to="/contact">Get in Touch</Link>
             </Button>
           </div>

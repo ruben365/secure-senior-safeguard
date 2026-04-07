@@ -458,7 +458,7 @@ function Business() {
     <PageTransition variant="fade">
       <div className="min-h-screen">
         <SEO
-          title="AI Business Solutions & Automation"
+          title="AI Solutions & Automation"
           description="AI receptionists, automated follow-ups, and professional websites for Ohio businesses. Your AI front desk runs 24/7. Serving Kettering and all of Ohio."
           keywords="AI receptionist, business automation, AI answering service, virtual receptionist, Kettering Ohio, small business AI"
           breadcrumbs={[
@@ -468,8 +468,8 @@ function Business() {
           structuredData={{
             "@context": "https://schema.org",
             "@type": "ItemList",
-            name: "AI Business Services",
-            description: "Professional AI automation services for businesses",
+            name: "AI Services",
+            description: "Professional AI automation services",
             itemListElement: [
             {
               "@type": "Service",

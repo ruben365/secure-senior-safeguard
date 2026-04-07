@@ -89,7 +89,7 @@ export function AnnouncementBell() {
       >
         <Bell className="w-4 h-4" />
         {unreadCount > 0 && (
-          <span className="absolute top-1 right-1 flex items-center justify-center min-w-[16px] h-4 px-1 text-[10px] font-bold text-white bg-violet-500 rounded-full leading-none shadow-[0_0_8px_rgba(139,92,246,0.4)]">
+          <span className="absolute top-1 right-1 flex items-center justify-center min-w-[16px] h-4 px-1 text-[10px] font-bold text-white bg-orange-500 rounded-full leading-none shadow-[0_0_8px_rgba(249,115,22,0.45)]">
             {unreadCount > 9 ? "9+" : unreadCount}
           </span>
         )}
@@ -115,10 +115,10 @@ export function AnnouncementBell() {
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-white/8">
               <div className="flex items-center gap-2">
-                <Megaphone className="w-4 h-4 text-violet-400" />
+                <Megaphone className="w-4 h-4 text-orange-400" />
                 <span className="text-sm font-bold text-white">Announcements</span>
                 {unreadCount > 0 && (
-                  <span className="text-[10px] font-bold text-violet-300 bg-violet-500/20 px-1.5 py-0.5 rounded-full">
+                  <span className="text-[10px] font-bold text-orange-300 bg-orange-500/20 px-1.5 py-0.5 rounded-full">
                     {unreadCount} new
                   </span>
                 )}
@@ -165,7 +165,7 @@ export function AnnouncementBell() {
                         {/* Unread dot */}
                         <div className="pt-1.5 w-2 flex-shrink-0">
                           {isUnread && (
-                            <span className="block w-2 h-2 rounded-full bg-violet-500 shadow-[0_0_6px_rgba(139,92,246,0.5)]" />
+                            <span className="block w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_6px_rgba(249,115,22,0.55)]" />
                           )}
                         </div>
 

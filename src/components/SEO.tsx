@@ -189,7 +189,7 @@ export const PAGE_SEO = {
   },
 
   business: {
-    title: "AI Business Automation & Solutions for Ohio Companies",
+    title: "AI Automation & Solutions for Ohio Companies",
     description:
       "Transform your Ohio business with AI receptionists, automated follow-ups, and professional website design. Stop missing calls. AI-powered front desk available 24/7. Serving Kettering and Southwest Ohio.",
     keywords:
@@ -197,7 +197,7 @@ export const PAGE_SEO = {
     structuredData: {
       "@context": "https://schema.org",
       "@type": "ItemList",
-      name: "AI Business Services",
+      name: "AI Services",
       itemListElement: [
         {
           "@type": "Service",

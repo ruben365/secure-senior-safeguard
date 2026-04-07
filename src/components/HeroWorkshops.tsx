@@ -11,7 +11,7 @@ import { SITE } from "@/config/site";
 const workshopFeatures = [
   {
     icon: Settings,
-    title: "AI Business Tools",
+    title: "AI Tools",
     desc: "Custom software that automates your daily operations.",
     target: "training",
   },
@@ -53,6 +53,7 @@ export const HeroWorkshops = () => {
           fetchPriority="high"
         />
         <div className="hero-ws__top-veil" />
+        <div className="hero-ws__glow" aria-hidden="true" />
       </div>
 
       {/* ── Main Layout: Left Content + Right Widget ── */}

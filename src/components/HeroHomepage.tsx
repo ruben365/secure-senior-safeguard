@@ -18,7 +18,7 @@ const heroTabs = [
 const featuresRow1 = [
   {
     icon: Bot,
-    title: "AI Business Tools",
+    title: "AI Tools",
     desc: "Custom software that automates your daily operations.",
   },
   {
@@ -76,6 +76,7 @@ export const HeroHomepage = () => {
           fetchPriority="high"
         />
         <div className="hero-home__top-veil" />
+        <div className="hero-home__glow" aria-hidden="true" />
       </div>
 
       {/* ── 2. Hero Content ── */}
