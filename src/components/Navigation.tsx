@@ -148,6 +148,9 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 <button
                   type="button"
                   onClick={() => setMoreOpen(!moreOpen)}
+                  aria-haspopup="menu"
+                  aria-expanded={moreOpen}
+                  aria-label="More navigation links"
                   className={`flex items-center gap-1 text-[15px] px-3 py-2 rounded-md transition-colors duration-150 ${
                     isSecondaryActive
                       ? "text-orange-400 font-bold bg-orange-500/10"
@@ -162,6 +165,8 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
 
                 {moreOpen && (
                   <div
+                    role="menu"
+                    aria-label="Secondary navigation"
                     className="absolute top-full left-0 mt-2 w-44 rounded-lg border border-white/8 shadow-lg py-1 z-50 overflow-hidden"
                     style={{
                       background: "rgba(20, 20, 28, 0.75)",
@@ -249,7 +254,9 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="lg:hidden p-2 rounded-lg hover:bg-white/10 transition-colors duration-150 min-w-[44px] min-h-[44px] flex items-center justify-center"
-                aria-label="Toggle menu"
+                aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+                aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-navigation"
               >
                 {mobileMenuOpen ? (
                   <X className="h-5 w-5 text-white" />
@@ -264,7 +271,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
 
       {/* Mobile Menu — outside nav for proper stacking */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed top-[60px] left-0 right-0 bottom-0 border-t border-gray-800 z-[10001] overflow-y-auto overscroll-contain pb-[calc(env(safe-area-inset-bottom)+1.25rem)] [-webkit-overflow-scrolling:touch] bg-[#080d1a]">
+        <div id="mobile-navigation" role="dialog" aria-modal="true" aria-label="Main navigation" className="lg:hidden fixed top-[60px] left-0 right-0 bottom-0 border-t border-gray-800 z-[10001] overflow-y-auto overscroll-contain pb-[calc(env(safe-area-inset-bottom)+1.25rem)] [-webkit-overflow-scrolling:touch] bg-[#080d1a]">
           <div className="container mx-auto px-4 py-4 space-y-1">
             {allLinks.map((link) => {
               const isActive = isActiveLink(link.href);
