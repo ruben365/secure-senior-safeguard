@@ -52,11 +52,6 @@ export const usePrefetchRoute = (path: string) => {
         "/portfolio": () => import("../pages/Portfolio"),
         "/invision-2026": () => import("../pages/Business"),
         "/business/autonomous-defense-hub": () => import("../pages/business/AutonomousDefenseHub"),
-        "/services/cognitive-sentinel": () => import("../pages/services/CognitiveSentinel"),
-        "/services/scam-insurance": () => import("../pages/services/ScamInsurance"),
-        "/services/ai-safe-certification": () => import("../pages/services/AISafeCertification"),
-        "/services/family-emergency-network": () => import("../pages/services/FamilyEmergencyNetwork"),
-        "/services/digital-estate": () => import("../pages/services/DigitalEstate"),
       };
 
       const importFn = routeMap[path];

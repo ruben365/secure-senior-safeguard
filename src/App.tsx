@@ -50,11 +50,6 @@ const AIAutomation = lazy(() => import("./pages/business/AIAutomation"));
 const WebsiteDesign = lazy(() => import("./pages/business/WebsiteDesign"));
 const WebsiteInsurance = lazy(() => import("./pages/business/WebsiteInsurance"));
 const AutonomousDefenseHub = lazy(() => import("./pages/business/AutonomousDefenseHub"));
-const CognitiveSentinel = lazy(() => import("./pages/services/CognitiveSentinel"));
-const ScamInsurance = lazy(() => import("./pages/services/ScamInsurance"));
-const AISafeCertification = lazy(() => import("./pages/services/AISafeCertification"));
-const FamilyEmergencyNetwork = lazy(() => import("./pages/services/FamilyEmergencyNetwork"));
-const DigitalEstate = lazy(() => import("./pages/services/DigitalEstate"));
 const About = lazy(() => import("./pages/About"));
 const Resources = lazy(() => import("./pages/Resources"));
 const Articles = lazy(() => import("./pages/Articles"));
@@ -183,11 +178,8 @@ function PublicRoutes() {
         <Route path="/business/website-insurance" element={<PageTransition variant="auto"><WebsiteInsurance /></PageTransition>} />
         <Route path="/business/autonomous-defense-hub" element={<PageTransition variant="auto"><AutonomousDefenseHub /></PageTransition>} />
         <Route path="/invision-2026" element={<Navigate to="/business" replace />} />
-        <Route path="/services/cognitive-sentinel" element={<PageTransition variant="auto"><CognitiveSentinel /></PageTransition>} />
-        <Route path="/services/scam-insurance" element={<PageTransition variant="auto"><ScamInsurance /></PageTransition>} />
-        <Route path="/services/ai-safe-certification" element={<PageTransition variant="auto"><AISafeCertification /></PageTransition>} />
-        <Route path="/services/family-emergency-network" element={<PageTransition variant="auto"><FamilyEmergencyNetwork /></PageTransition>} />
-        <Route path="/services/digital-estate" element={<PageTransition variant="auto"><DigitalEstate /></PageTransition>} />
+        {/* Legacy /services/* routes removed - redirect any stragglers to /contact for inquiry */}
+        <Route path="/services/*" element={<Navigate to="/contact" replace />} />
         <Route path="/about" element={<PageTransition variant="auto"><About /></PageTransition>} />
         <Route path="/resources" element={<PageTransition variant="auto"><Resources /></PageTransition>} />
         <Route path="/resources/:slug" element={<PageTransition variant="auto"><BookDetail /></PageTransition>} />

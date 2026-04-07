@@ -141,7 +141,7 @@ const platformGroups = [
     title: "Cognitive Sentinel",
     tagline: "Detects behavioral stress signals and alerts caregivers during active scams.",
     price: "$49/mo add-on",
-    href: "/services/cognitive-sentinel"
+    href: "/contact"
   },
   {
     badge: "Senior",
@@ -149,7 +149,7 @@ const platformGroups = [
     title: "Family Emergency Network",
     tagline: "One PANIC action calls family, alerts analysts, and notifies police in seconds.",
     price: "$19/mo add-on",
-    href: "/services/family-emergency-network"
+    href: "/contact"
   },
   {
     badge: "Senior",
@@ -157,7 +157,7 @@ const platformGroups = [
     title: "Digital Estate Executor",
     tagline: "Locks down accounts and securely transfers credentials to heirs when needed.",
     price: "$299 + $9/mo",
-    href: "/services/digital-estate"
+    href: "/contact"
   }]
 
 },
@@ -176,7 +176,7 @@ const platformGroups = [
     title: "Scam Insurance",
     tagline: "If fraud succeeds despite our controls, coverage pays up to $500K.",
     price: "From $49/mo",
-    href: "/services/scam-insurance"
+    href: "/contact"
   },
   {
     badge: "Business",
@@ -184,7 +184,7 @@ const platformGroups = [
     title: "AI-Safe Certification",
     tagline: "Annual audit and verified trust seal for Ohio businesses handling AI risk.",
     price: "$2,400/yr",
-    href: "/services/ai-safe-certification"
+    href: "/contact"
   }]
 
 }];

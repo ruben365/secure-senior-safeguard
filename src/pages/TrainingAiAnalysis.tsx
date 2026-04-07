@@ -429,10 +429,10 @@ export default function TrainingAiAnalysis() {
               </p>
               <Button asChild className="w-full">
                 <Link
-                  to="/services/scam-insurance"
+                  to="/contact"
                   onClick={() => setPaywallOpen(false)}
                 >
-                  See ScamShield plans
+                  Inquire about ScamShield plans
                 </Link>
               </Button>
             </div>
