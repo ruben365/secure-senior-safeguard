@@ -81,22 +81,41 @@ export default function BookReader() {
   useEffect(() => {
     if (!initialized || authLoading) return;
 
-    // TRIAL MODE: Auto-grant universal access to all books
+    // Paywall: only authenticated admins or customers with a verified purchase
+    // session may access the reader. Standing rule: nothing free, ever.
     const storedSession = readBookReaderSession();
     if (storedSession) {
-      setSession(storedSession);
+      // An "admin" session in storage must be backed by an authenticated admin —
+      // otherwise it's a stale or forged session and must be cleared.
+      if (storedSession.accessType === "admin" && !(user && isAdmin())) {
+        clearBookReaderSession();
+      } else {
+        setSession(storedSession);
+        return;
+      }
+    }
+
+    // Authenticated admins get a fresh full-catalog session.
+    if (user && isAdmin()) {
+      const adminSession = createAdminBookReaderSession({
+        customerName: adminName,
+        email: adminEmail || user.email || "",
+      });
+      storeBookReaderSession(adminSession);
+      setSession(adminSession);
       return;
     }
 
-    // Create a universal trial session
-    const trialSession: BookReaderSession = {
-      customerName: user ? (adminName || user.email || "Trial User") : "Trial User",
-      email: user?.email || "trial@invisionnetwork.org",
-      bookIds: ["all"],
-      accessType: "admin",
-    };
-    storeBookReaderSession(trialSession);
-    setSession(trialSession);
+    // Everyone else: redirect to /resources to enter purchase credentials.
+    if (session) return;
+    clearBookReaderSession();
+    setSession(null);
+    toastHook({
+      title: "Sign in required",
+      description: "Please sign in with your Access ID to read your books.",
+      variant: "destructive",
+    });
+    navigate("/resources");
   }, [adminEmail, adminName, authLoading, initialized, isAdmin, navigate, session, toastHook, user]);
 
   // Scroll to top on chapter change
