@@ -22,14 +22,13 @@ import {
   Clock,
   Users,
   DollarSign,
-  Calendar,
   CheckCircle,
   Play,
   Lock,
   GraduationCap,
+  Layers,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { format } from "date-fns";
 
 export default function CourseDetail() {
   const { id } = useParams<{ id: string }>();
@@ -188,7 +187,9 @@ export default function CourseDetail() {
                     {modules.length} modules •{" "}
                     {totalDuration > 0
                       ? `${Math.round(totalDuration / 60)}h ${totalDuration % 60}m`
-                      : `${course.duration_weeks} weeks`}
+                      : course.duration_hours
+                        ? `${course.duration_hours} hours`
+                        : "Self-paced"}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">
@@ -282,7 +283,7 @@ export default function CourseDetail() {
                     </div>
                   )}
 
-                  {course.duration_weeks && (
+                  {course.duration_hours && (
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
                         <Clock className="w-5 h-5 text-blue-500" />
@@ -292,7 +293,7 @@ export default function CourseDetail() {
                           Duration
                         </p>
                         <p className="font-semibold">
-                          {course.duration_weeks} weeks
+                          {course.duration_hours} hours
                         </p>
                       </div>
                     </div>
@@ -314,17 +315,31 @@ export default function CourseDetail() {
                     </div>
                   )}
 
-                  {course.start_date && (
+                  {course.level && (
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center">
-                        <Calendar className="w-5 h-5 text-orange-500" />
+                        <Layers className="w-5 h-5 text-orange-500" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">Level</p>
+                        <p className="font-semibold capitalize">
+                          {course.level}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {course.category && (
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center">
+                        <BookOpen className="w-5 h-5 text-pink-500" />
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">
-                          Start Date
+                          Category
                         </p>
-                        <p className="font-semibold">
-                          {format(new Date(course.start_date), "MMM d, yyyy")}
+                        <p className="font-semibold capitalize">
+                          {course.category}
                         </p>
                       </div>
                     </div>

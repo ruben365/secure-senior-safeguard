@@ -6,8 +6,8 @@ const steps = [
   {
     num: "01",
     icon: FileSearch,
-    title: "Free Assessment",
-    desc: "We evaluate your current digital safety and identify vulnerabilities — no cost, no obligation.",
+    title: "Risk Assessment",
+    desc: "We evaluate your current digital safety and identify vulnerabilities. Plans start at $89.",
     gradient: "from-primary/20 to-accent/5",
   },
   {
@@ -82,7 +82,7 @@ export const PromoStrip = () => {
         <div className="text-center">
           <Button asChild size="lg">
             <Link to="/training#pricing">
-              Start Your Free Assessment <ArrowRight className="ml-2 w-4 h-4" />
+              See Assessment Plans <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
           </Button>
         </div>

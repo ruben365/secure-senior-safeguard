@@ -48,7 +48,7 @@ function Articles() {
           name: "Scam Prevention Articles & News",
           description:
             "Practical guidance on scam prevention, AI threats, and digital safety.",
-          url: "https://invisionnetwork.org/articles",
+          url: "https://www.invisionnetwork.org/articles",
         }}
       />
       <Navigation overlay />
@@ -165,7 +165,7 @@ function Articles() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild variant="default" size="lg">
-                  <Link to="/training#scamshield">
+                  <Link to="/training#training">
                     Learn About ScamShield
                     <ArrowRight className="ml-2 w-4 h-4 arrow-icon" />
                   </Link>

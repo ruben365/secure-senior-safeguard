@@ -421,9 +421,9 @@ function SecretaryDashboard() {
               </CardHeader>
               <CardContent className="flex flex-col gap-2">
                 <Button asChild className="w-full justify-start gap-2">
-                  <Link to="/admin/bookings/new">
+                  <Link to="/admin/bookings">
                     <Plus className="w-4 h-4" />
-                    New Booking
+                    Manage Bookings
                   </Link>
                 </Button>
                 <Button

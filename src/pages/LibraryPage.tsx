@@ -250,7 +250,7 @@ export default function LibraryPage() {
                         </div>
 
                         <div className="flex items-center gap-1 text-xs text-primary/70 hover:text-primary transition-colors">
-                          Read free preview
+                          Read sample
                           <ChevronRight className="h-3.5 w-3.5" />
                         </div>
                       </CardContent>

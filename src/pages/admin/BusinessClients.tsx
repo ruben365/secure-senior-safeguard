@@ -142,7 +142,7 @@ export default function BusinessClients() {
           </h1>
           <p className="text-[#9CA3AF]">Manage your business client accounts</p>
         </div>
-        <Button onClick={() => navigate("/admin/clients/businesses/new")}>
+        <Button disabled title="Create flow not yet available">
           <Plus className="mr-2 h-4 w-4" />
           Add New Client
         </Button>
@@ -240,7 +240,7 @@ export default function BusinessClients() {
             No Business Clients Yet
           </h3>
           <p className="text-[#9CA3AF] mb-6">Add your first business client</p>
-          <Button onClick={() => navigate("/admin/clients/businesses/new")}>
+          <Button disabled title="Create flow not yet available">
             <Plus className="mr-2 h-4 w-4" />
             Add Client
           </Button>

@@ -147,20 +147,13 @@ const ticketColumns: TableColumn<SupportTicket>[] = [
 function StaffDashboard() {
   const { user, roleConfig } = useAuth();
 
-  // ── Role guard ──────────────────────────────────────────────────────────────
-  if (roleConfig && !ALLOWED_ROLES.has(roleConfig.role)) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <Card className="max-w-sm w-full text-center p-8">
-          <h2 className="text-xl font-bold text-foreground mb-2">Access Denied</h2>
-          <p className="text-muted-foreground mb-4">You do not have staff privileges.</p>
-          <Button asChild variant="outline">
-            <Link to="/portal">Return to Portal</Link>
-          </Button>
-        </Card>
-      </div>
-    );
-  }
+  // ── Role check (used by query `enabled` flags AND by render guard) ──────────
+  // IMPORTANT: We compute this BEFORE the queries and gate the queries on it
+  // via `enabled`, then early-return AFTER all hooks have been called.
+  // Rules of Hooks: hooks must run in the same order every render, so the
+  // role guard must NOT short-circuit before any useQuery call.
+  const isAuthorized = !!roleConfig && ALLOWED_ROLES.has(roleConfig.role);
+  const queriesEnabled = isAuthorized && !!user?.id;
 
   // ── Queries ─────────────────────────────────────────────────────────────────
 
@@ -170,7 +163,7 @@ function StaffDashboard() {
 
   const { data: tasks = [], isLoading: tasksLoading, isError: tasksError } = useQuery({
     queryKey: ["staff-tasks", user?.id],
-    enabled: !!user?.id,
+    enabled: queriesEnabled,
     queryFn: async () => {
       const { data, error } = await supabase
         .from("tasks")
@@ -184,7 +177,7 @@ function StaffDashboard() {
 
   const { data: tickets = [], isLoading: ticketsLoading, isError: ticketsError } = useQuery({
     queryKey: ["staff-tickets", user?.id],
-    enabled: !!user?.id,
+    enabled: queriesEnabled,
     queryFn: async () => {
       const { data, error } = await supabase
         .from("support_tickets")
@@ -199,7 +192,7 @@ function StaffDashboard() {
 
   const { data: clientCount = 0 } = useQuery({
     queryKey: ["staff-clients-count", user?.id],
-    enabled: !!user?.id,
+    enabled: queriesEnabled,
     queryFn: async () => {
       const { count, error } = await supabase
         .from("clients")
@@ -212,7 +205,7 @@ function StaffDashboard() {
 
   const { data: appointments = [], isLoading: appointmentsLoading } = useQuery({
     queryKey: ["staff-appointments", user?.id, todayIso],
-    enabled: !!user?.id,
+    enabled: queriesEnabled,
     queryFn: async () => {
       const endOfDay = new Date(today);
       endOfDay.setHours(23, 59, 59, 999);
@@ -231,7 +224,7 @@ function StaffDashboard() {
   // ── All future appointments for calendar ────────────────────────────────────
   const { data: allAppointments = [] } = useQuery({
     queryKey: ["staff-all-appointments", user?.id],
-    enabled: !!user?.id,
+    enabled: queriesEnabled,
     queryFn: async () => {
       const { data, error } = await supabase
         .from("appointments")
@@ -243,6 +236,21 @@ function StaffDashboard() {
       return (data ?? []) as Appointment[];
     },
   });
+
+  // ── Role guard (AFTER all hooks have been called) ──────────────────────────
+  if (roleConfig && !ALLOWED_ROLES.has(roleConfig.role)) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <Card className="max-w-sm w-full text-center p-8">
+          <h2 className="text-xl font-bold text-foreground mb-2">Access Denied</h2>
+          <p className="text-muted-foreground mb-4">You do not have staff privileges.</p>
+          <Button asChild variant="outline">
+            <Link to="/portal">Return to Portal</Link>
+          </Button>
+        </Card>
+      </div>
+    );
+  }
 
   // ── Derived values ──────────────────────────────────────────────────────────
 

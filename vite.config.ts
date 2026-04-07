@@ -34,10 +34,21 @@ export default defineConfig(({ mode }) => {
   const disableImageOptimizer =
     (env.VITE_DISABLE_IMAGE_OPTIMIZER || "").toLowerCase() === "true";
 
+  // Honor PORT env var so the Claude Code preview launcher (which sets PORT
+  // when autoPort:true picks a free port) can override the hardcoded default.
+  // No code references localhost:5173/8080 for OAuth/webhooks/CORS, so the
+  // server is free to bind to whatever port the launcher provides. Fall back
+  // to 8080 for plain `npm run dev` outside the launcher.
+  const portFromEnv = Number(process.env.PORT);
+  const devServerPort = Number.isFinite(portFromEnv) && portFromEnv > 0
+    ? portFromEnv
+    : 8080;
+
   return {
     server: {
       host: "::",
-      port: 8080,
+      port: devServerPort,
+      strictPort: false,
     },
     build: {
       sourcemap: false,

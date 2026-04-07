@@ -297,9 +297,12 @@ function TermsOfService() {
                     </li>
                   </ul>
                   <p className="text-muted-foreground">
-                    <strong>Free Trials:</strong> If you sign up for a free
-                    trial, you will be automatically charged when the trial ends
-                    unless you cancel before the trial period expires.
+                    <strong>No Free Trials:</strong> InVision Network does not
+                    offer free trials. Every plan and service is paid up front.
+                    Subscribers receive a 7-day money-back guarantee on all
+                    subscription plans — request a refund through your account
+                    portal within 7 days of activation and we'll process it
+                    within 5 business days.
                   </p>
                 </section>
 

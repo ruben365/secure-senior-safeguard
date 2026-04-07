@@ -1,7 +1,24 @@
-project_id = "avoafweoebstkgjnbadv"
+project_id = "qexeqdpejhacbhewuvbd"
 
 [functions.ai-chat]
 verify_jwt = false
+
+# ============================================================================
+# Admin-only edge functions — gateway enforces JWT presence; function code
+# enforces admin role via has_role() RPC.
+# ============================================================================
+
+[functions.admin-reset-password]
+verify_jwt = true
+
+[functions.update-book-content]
+verify_jwt = true
+
+[functions.send-bulk-announcement]
+verify_jwt = true
+
+[functions.security-alert]
+verify_jwt = true
 
 [functions.analyze-scam]
 verify_jwt = false
@@ -16,7 +33,7 @@ verify_jwt = false
 verify_jwt = false
 
 [functions.send-welcome-email]
-verify_jwt = false
+verify_jwt = true
 
 [functions.create-subscription-checkout]
 verify_jwt = false
@@ -42,8 +59,7 @@ verify_jwt = false
 [functions.verify-payment]
 verify_jwt = false
 
-[functions.send-digital-download]
-verify_jwt = false
+# (send-digital-download is configured below — gateway requires JWT)
 
 [functions.newsletter-signup]
 verify_jwt = false
@@ -74,6 +90,14 @@ verify_jwt = false
 
 [functions.complete-payment]
 verify_jwt = false
+
+# send-digital-download requires either the service-role JWT (for the
+# verify-payment server-to-server hand-off) or an authenticated user JWT
+# (admin or order owner). Both are valid Supabase JWTs, so verify_jwt=true
+# is safe and gives us gateway-level rejection of malformed tokens before
+# any function code runs.
+[functions.send-digital-download]
+verify_jwt = true
 
 [functions.send-booking-confirmation]
 verify_jwt = false
@@ -109,4 +133,75 @@ verify_jwt = false
 verify_jwt = false
 
 [functions.validate-book-access]
+verify_jwt = false
+
+# ============================================================================
+# Internal cron-style functions. Gateway requires a valid JWT; the function
+# body additionally verifies the bearer token equals the service role key.
+# ============================================================================
+
+[functions.send-automated-email]
+verify_jwt = true
+
+[functions.schedule-campaign-emails]
+verify_jwt = true
+
+[functions.cleanup-guest-scans]
+verify_jwt = true
+
+# ============================================================================
+# Webhook receivers — gateway must allow unsigned bodies because the upstream
+# (Resend / Svix) signs with HMAC, not a Supabase JWT. The function body
+# verifies the upstream signature.
+# ============================================================================
+
+[functions.process-email-webhooks]
+verify_jwt = false
+
+# ============================================================================
+# Admin-only edge functions (continued) — gateway enforces JWT presence;
+# function code enforces admin role via has_role() RPC.
+# ============================================================================
+
+[functions.process-testimonial-video]
+verify_jwt = true
+
+# ============================================================================
+# Tombstoned functions — return HTTP 410 Gone. Gateway enforces JWT so the
+# tombstone isn't a public DoS surface, but the body itself does no work.
+# ============================================================================
+
+[functions.create-gift-intent]
+verify_jwt = true
+
+[functions.create-gift-payment]
+verify_jwt = true
+
+[functions.send-gift-confirmation]
+verify_jwt = true
+
+[functions.send-rsvp-confirmation]
+verify_jwt = true
+
+[functions.text-to-speech]
+verify_jwt = true
+
+[functions.process-payment]
+verify_jwt = true
+
+# ============================================================================
+# Public functions missing prior config entries — declared explicitly so the
+# config.toml is now in 1:1 sync with the deployed functions list.
+# ============================================================================
+
+[functions.analyze-file]
+verify_jwt = false
+
+[functions.guest-scan-payment]
+verify_jwt = false
+
+[functions.reset-book-access]
+verify_jwt = false
+
+[functions.track-analytics-event]
 verify_jwt = false

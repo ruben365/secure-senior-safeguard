@@ -307,7 +307,6 @@ export const AIChat = () => {
       }
     } catch (error: any) {
       if (error.name === "AbortError") {
-        console.log("Request was cancelled");
         return;
       }
       console.error("Chat error:", error);

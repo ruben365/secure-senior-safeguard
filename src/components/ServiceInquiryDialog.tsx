@@ -555,7 +555,7 @@ export const ServiceInquiryDialog = ({
                   </h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
                     <li>• Our team reviews your inquiry within 24 hours</li>
-                    <li>• We'll schedule a free consultation call</li>
+                    <li>• We'll schedule a scoping call</li>
                     <li>• Receive a custom proposal tailored to your needs</li>
                   </ul>
                 </div>

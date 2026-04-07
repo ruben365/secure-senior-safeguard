@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { SITE } from "@/config/site";
+import { SEO } from "@/components/SEO";
 
 interface MaintenanceData {
   expectedCompletion: Date;
@@ -86,6 +87,11 @@ function Maintenance() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-background flex items-center justify-center px-4 py-16">
+      <SEO
+        title="Site Maintenance"
+        description="InVision Network is temporarily down for scheduled maintenance. We will be back online shortly."
+        noindex
+      />
       <div className="max-w-2xl w-full">
         <Card className="p-8 md:p-12 text-center space-y-8">
           {/* Logo */}

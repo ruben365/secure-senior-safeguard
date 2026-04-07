@@ -578,7 +578,7 @@ function LearnAndTrain() {
             name: "InVision Network Training Academy",
             description:
               "Comprehensive AI scam protection training for families, seniors, and businesses",
-            url: "https://invisionnetwork.org/training",
+            url: "https://www.invisionnetwork.org/training",
             telephone: SITE.phone.e164,
           }}
         />

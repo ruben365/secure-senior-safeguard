@@ -338,10 +338,11 @@ export default function HealthcareHome() {
               <Button
                 variant="outline"
                 className="w-full justify-start gap-2"
-                onClick={() => navigate("/portal/time-off")}
+                disabled
+                title="Coming soon"
               >
                 <CalendarOff className="h-4 w-4" />
-                Request Time Off
+                Request Time Off (coming soon)
               </Button>
             </CardContent>
           </Card>

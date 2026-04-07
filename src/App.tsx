@@ -59,7 +59,6 @@ const About = lazy(() => import("./pages/About"));
 const Resources = lazy(() => import("./pages/Resources"));
 const Articles = lazy(() => import("./pages/Articles"));
 const ArticleDetail = lazy(() => import("./pages/ArticleDetail"));
-const Services = lazy(() => import("./pages/Services"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Careers = lazy(() => import("./pages/Careers"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword"));
@@ -68,8 +67,6 @@ const Portfolio = lazy(() => import("./pages/Portfolio"));
 const PortfolioDetail = lazy(() => import("./pages/PortfolioDetail"));
 const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
 const PaymentCanceled = lazy(() => import("./pages/PaymentCanceled"));
-const GlassmorphismTrustHeroDemo = lazy(() => import("./pages/GlassmorphismTrustHeroDemo"));
-const StyleShowcase = lazy(() => import("./pages/StyleShowcase"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const HelpCenter = lazy(() => import("./pages/HelpCenter"));
 const Maintenance = lazy(() => import("./pages/Maintenance"));
@@ -192,15 +189,12 @@ function PublicRoutes() {
         <Route path="/services/family-emergency-network" element={<PageTransition variant="auto"><FamilyEmergencyNetwork /></PageTransition>} />
         <Route path="/services/digital-estate" element={<PageTransition variant="auto"><DigitalEstate /></PageTransition>} />
         <Route path="/about" element={<PageTransition variant="auto"><About /></PageTransition>} />
-        {/* /services removed — content covered by other pages */}
         <Route path="/resources" element={<PageTransition variant="auto"><Resources /></PageTransition>} />
         <Route path="/resources/:slug" element={<PageTransition variant="auto"><BookDetail /></PageTransition>} />
         <Route path="/library" element={<PageTransition variant="auto"><LibraryPage /></PageTransition>} />
         <Route path="/purchase/:slug" element={<PageTransition variant="auto"><PurchasePage /></PageTransition>} />
         <Route path="/payment-success" element={<PageTransition variant="fade"><PaymentSuccess /></PageTransition>} />
         <Route path="/payment-canceled" element={<PageTransition variant="fade"><PaymentCanceled /></PageTransition>} />
-        <Route path="/demo/glassmorphism-hero" element={<PageTransition variant="auto"><GlassmorphismTrustHeroDemo /></PageTransition>} />
-        <Route path="/style-showcase" element={<PageTransition variant="auto"><StyleShowcase /></PageTransition>} />
         <Route path="/articles" element={<PageTransition variant="auto"><Articles /></PageTransition>} />
         <Route path="/articles/:slug" element={<PageTransition variant="auto"><ArticleDetail /></PageTransition>} />
         <Route path="/contact" element={<PageTransition variant="auto"><Contact /></PageTransition>} />

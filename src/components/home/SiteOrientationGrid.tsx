@@ -38,18 +38,19 @@ const pages = [
   {
     icon: Shield,
     title: "ScamShield AI",
-    description: "Real-time AI-powered scanning for calls, texts, and emails.",
+    description:
+      "Real-time AI-powered scanning for calls, texts, and emails. Pay-per-scan from $0.50.",
     link: "/training/ai-analysis",
-    cta: "Try Free",
+    cta: "Start a Scan",
     image: serviceScamshield,
     gradient: "from-primary/15 to-accent/15",
   },
   {
     icon: BookOpen,
     title: "Resources",
-    description: "Free guides, e-books, and security tools for your family.",
+    description: "Guides, e-books, and security tools for your family.",
     link: "/resources",
-    cta: "Browse Free",
+    cta: "Browse Library",
     image: serviceFamilySafety,
     gradient: "from-accent/15 to-primary/10",
   },

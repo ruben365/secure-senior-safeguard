@@ -272,7 +272,7 @@ export default function SeniorHome() {
               <Button
                 variant="outline"
                 className="flex flex-col h-auto gap-2 py-4"
-                onClick={() => navigate("/portal/scam-check")}
+                onClick={() => navigate("/training/ai-analysis")}
               >
                 <Flag className="h-5 w-5 text-destructive" />
                 <span className="text-xs font-medium">Report a Scam</span>
@@ -288,7 +288,7 @@ export default function SeniorHome() {
               <Button
                 variant="outline"
                 className="flex flex-col h-auto gap-2 py-4"
-                onClick={() => navigate("/portal/scam-check")}
+                onClick={() => navigate("/training/ai-analysis")}
               >
                 <LinkIcon className="h-5 w-5 text-warning" />
                 <span className="text-xs font-medium">Check a Link</span>

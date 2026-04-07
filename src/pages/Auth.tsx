@@ -24,6 +24,7 @@ import invisionLogo from "@/assets/shield-logo.png";
 const authBackground = "/images/hero-corporate-protection.webp";
 import { Session, User as SupabaseUser } from "@supabase/supabase-js";
 import { ForgotPasswordModal } from "@/components/auth/ForgotPasswordModal";
+import { SEO } from "@/components/SEO";
 
 const emailSchema = z.string().email("Please enter a valid email address");
 const passwordSchema = z
@@ -454,6 +455,11 @@ function Auth() {
 
   return (
     <div className="w-full relative flex items-center justify-center p-4 md:p-6 lg:p-8" style={{ minHeight: 'calc(100vh / 0.75)' }}>
+      <SEO
+        title="Sign In"
+        description="Sign in to your InVision Network account to access your portal, courses, and protection tools."
+        noindex
+      />
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <img
@@ -947,7 +953,7 @@ function Auth() {
             Want to join our team?
           </p>
           <Link
-            to="/apply"
+            to="/careers"
             className="inline-flex items-center gap-2 text-primary font-semibold hover:text-primary/80 transition-colors"
           >
             Don't have an account? Apply

@@ -34,7 +34,6 @@ export const SITEMAP_PAGES: SitemapPage[] = [
   { path: "/resources", priority: 0.8, changefreq: "weekly" },
   { path: "/contact", priority: 0.8, changefreq: "monthly" },
   { path: "/about", priority: 0.7, changefreq: "monthly" },
-  { path: "/services", priority: 0.7, changefreq: "weekly" },
   { path: "/faq", priority: 0.7, changefreq: "monthly" },
   { path: "/articles", priority: 0.7, changefreq: "weekly" },
   { path: "/careers", priority: 0.6, changefreq: "monthly" },

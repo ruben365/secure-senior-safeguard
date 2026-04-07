@@ -1,4 +1,4 @@
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -6,7 +6,10 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-// Rate limiting: 10 requests per minute per IP
+// ============================================================================
+// Per-IP rate limit (10 / min). Each call hits a paid LLM gateway, so the
+// cap protects against credit-burn DoS.
+// ============================================================================
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 const RATE_LIMIT = 10;
 const RATE_WINDOW_MS = 60 * 1000;
@@ -31,6 +34,24 @@ function checkRateLimit(ip: string): { allowed: boolean; retryAfter?: number } {
   record.count++;
   return { allowed: true };
 }
+
+// ============================================================================
+// Hard caps on the analyzed payload. The body is forwarded into an LLM
+// prompt — without these caps, an attacker could submit arbitrarily large
+// content and burn credits.
+// ============================================================================
+const MAX_CONTENT_CHARS = 10_000;
+const ALLOWED_TYPES = new Set([
+  "email",
+  "sms",
+  "message",
+  "url",
+  "phone",
+  "text",
+  "voicemail",
+  "image",
+  "other",
+]);
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -59,16 +80,70 @@ serve(async (req) => {
   }
 
   try {
-    const { content, type, timestamp } = await req.json();
-    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+    const body = await req.json().catch(() => null);
+    if (!body || typeof body !== "object") {
+      return new Response(
+        JSON.stringify({ error: "Invalid request body" }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        },
+      );
+    }
 
+    const rawContent = (body as { content?: unknown }).content;
+    const rawType = (body as { type?: unknown }).type;
+    const rawTimestamp = (body as { timestamp?: unknown }).timestamp;
+
+    if (typeof rawContent !== "string" || rawContent.trim().length === 0) {
+      return new Response(
+        JSON.stringify({ error: "content is required" }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        },
+      );
+    }
+
+    if (typeof rawType !== "string") {
+      return new Response(
+        JSON.stringify({ error: "type is required" }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        },
+      );
+    }
+
+    // Cap and normalize input fields. Anything beyond MAX_CONTENT_CHARS is
+    // truncated rather than rejected so legit slightly-over submissions
+    // still go through.
+    const content = rawContent.slice(0, MAX_CONTENT_CHARS).trim();
+    const type = rawType.slice(0, 50).trim().toLowerCase();
+    if (!ALLOWED_TYPES.has(type)) {
+      return new Response(
+        JSON.stringify({ error: "Invalid type" }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        },
+      );
+    }
+
+    // Timestamp is logged only — never trusted for any control flow.
+    const timestamp = typeof rawTimestamp === "string"
+      ? rawTimestamp.slice(0, 50)
+      : "";
+
+    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) {
       throw new Error("LOVABLE_API_KEY is not configured");
     }
 
     console.log(`Analyzing ${type} scam submission from ${timestamp}`);
 
-    const systemPrompt = `You are a cybersecurity expert specializing in scam detection and fraud prevention. Analyze the provided content and determine if it's a scam or legitimate communication.
+    const systemPrompt =
+      `You are a cybersecurity expert specializing in scam detection and fraud prevention. Analyze the provided content and determine if it's a scam or legitimate communication.
 
 Your analysis must return a JSON object with this exact structure:
 {
@@ -148,7 +223,7 @@ Provide your analysis in valid JSON format only, no additional text.`;
     }
 
     const data = await response.json();
-    const analysisText = data.choices[0].message.content;
+    const analysisText = data?.choices?.[0]?.message?.content;
 
     let analysis;
     try {
@@ -168,7 +243,7 @@ Provide your analysis in valid JSON format only, no additional text.`;
     console.log(
       "Analysis complete:",
       analysis.riskLevel,
-      `${Math.round(analysis.confidence * 100)}% confidence`,
+      `${Math.round((analysis.confidence ?? 0) * 100)}% confidence`,
     );
 
     return new Response(JSON.stringify(analysis), {
@@ -179,7 +254,7 @@ Provide your analysis in valid JSON format only, no additional text.`;
     console.error("Scam analysis error:", error);
     return new Response(
       JSON.stringify({
-        error: error instanceof Error ? error.message : "Analysis failed",
+        error: "Scam analysis failed",
       }),
       {
         status: 500,

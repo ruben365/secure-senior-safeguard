@@ -43,7 +43,7 @@ const CustomerInfoStep: React.FC<{
   onNext: () => void;
 }> = ({ onNext }) => {
   const { state, setCustomerInfo, setLoading, setError, total } = useCheckout();
-  const { createPaymentIntent } = usePaymentFlow();
+  const { createPaymentIntent, createSubscriptionCheckout } = usePaymentFlow();
   const { customerInfo, items, isLoading } = state;
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -54,6 +54,31 @@ const CustomerInfoStep: React.FC<{
       return;
     }
 
+    // SUBSCRIPTION FLOW: Stripe Elements (PaymentIntent) does not support recurring billing.
+    // For subscriptions we must use a hosted Stripe Checkout Session and redirect.
+    if (state.type === "subscription") {
+      const subscriptionItem = items[0];
+      if (!subscriptionItem?.product.stripePriceId) {
+        toast.error("This subscription is not available for direct checkout.");
+        return;
+      }
+
+      const result = await createSubscriptionCheckout({
+        priceId: subscriptionItem.product.stripePriceId,
+        serviceName: subscriptionItem.product.name,
+        planTier: subscriptionItem.product.id,
+        customerEmail: customerInfo.email,
+        customerName: customerInfo.name,
+      });
+
+      if (result?.url) {
+        // Redirect to hosted Stripe Checkout (Stripe handles the success/cancel URLs)
+        window.location.href = result.url;
+      }
+      return;
+    }
+
+    // ONE-TIME / CART FLOW: PaymentIntent + in-dialog Stripe Elements
     const paymentItems = items.map((item) => ({
       id: item.productId,
       name: item.product.name,
@@ -334,7 +359,10 @@ const PaymentFormStep: React.FC<{
   const stripe = useStripe();
   const elements = useElements();
   const { state, setLoading, setError, setOrderId, total } = useCheckout();
-  const { verifyPayment, sendDigitalDownload } = usePaymentFlow();
+  // verifyPayment is invoked directly via supabase.functions.invoke below
+  // (Phase 4.12 hand-off). The usePaymentFlow.verifyPayment helper is
+  // intentionally not used here because it predates the payment_intent_id
+  // path on the server and would have to be called with the legacy shape.
   const [processing, setProcessing] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -375,16 +403,31 @@ const PaymentFormStep: React.FC<{
           origin: { y: 0.6 },
         });
 
-        // Verify payment and send digital downloads if applicable
-        const digitalItems = state.items.filter(
-          (item) => item.product.isDigital,
-        );
-        if (digitalItems.length > 0) {
-          await sendDigitalDownload(
-            paymentIntent.id,
-            state.customerInfo.email,
-            digitalItems.map((item) => item.productId),
-          );
+        // ====================================================================
+        // Phase 4.12 — close the cart digital delivery hand-off.
+        //
+        // create-cart-payment-intent now inserts a partner_orders row and
+        // stamps the order_id (UUID) onto PaymentIntent.metadata.order_id.
+        // After confirmPayment we ping verify-payment with payment_intent_id
+        // so it can mark the partner_orders row paid + trigger
+        // send-digital-download for any digital line items.
+        //
+        // Non-blocking: verify-payment is idempotent and the order is
+        // already paid at Stripe. A Stripe webhook would also catch a
+        // missed delivery on a slower path. Happy path = "delivery within
+        // seconds of confirmation".
+        // ====================================================================
+        if (paymentIntent.id) {
+          try {
+            await supabase.functions.invoke("verify-payment", {
+              body: { payment_intent_id: paymentIntent.id },
+            });
+          } catch (verifyError) {
+            console.error(
+              "verify-payment hand-off failed (non-blocking):",
+              verifyError,
+            );
+          }
         }
 
         setOrderId(paymentIntent.id);

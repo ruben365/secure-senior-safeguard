@@ -245,9 +245,9 @@ export const PAGE_SEO = {
   },
 
   resources: {
-    title: "Free Cybersecurity Resources & Scam Prevention Guides",
+    title: "Cybersecurity Resources & Scam Prevention Guides",
     description:
-      "Free guides, checklists, and articles on AI scam protection, deepfake detection, and cybersecurity for Ohio families. Stay informed and stay safe.",
+      "Practical guides, checklists, and articles on AI scam protection, deepfake detection, and cybersecurity for Ohio families. Stay informed and stay safe.",
     keywords:
       "scam protection resources, AI security guides, cybersecurity articles, deepfake information, Ohio senior scam prevention",
   },
@@ -308,9 +308,9 @@ export const PAGE_SEO = {
   },
 
   guestScanner: {
-    title: "Free AI Scam File Scanner",
+    title: "Anonymous AI Scam File Scanner — Pay Per Use",
     description:
-      "Scan a suspicious file instantly without creating an account. Pay per use, get immediate threat analysis, and protect your family from AI-powered scams.",
+      "Scan a suspicious file instantly without creating an account. Pay per use ($0.50 minimum), get immediate threat analysis, and protect your family from AI-powered scams. Files auto-deleted in 10 minutes.",
     keywords:
       "file scanner, phishing detection, malware scan, deepfake detection, pay per scan",
   },

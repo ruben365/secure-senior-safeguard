@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AiAnalysisCTA } from "@/components/home/AiAnalysisCTA";
+// AiAnalysisCTA removed during cleanup
 import { useQuery } from "@tanstack/react-query";
 import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/hooks/use-toast";
@@ -202,7 +202,7 @@ function Resources() {
   const resourceStructuredData = useMemo(() => {
     const toAbsoluteUrl = (url: string) => {
       if (url.startsWith("http")) return url;
-      return `https://invisionnetwork.org${url.startsWith("/") ? url : `/${url}`}`;
+      return `https://www.invisionnetwork.org${url.startsWith("/") ? url : `/${url}`}`;
     };
 
     return {
@@ -226,7 +226,7 @@ function Resources() {
             priceCurrency: "USD",
             price: book.price.toFixed(2),
             availability: "https://schema.org/InStock",
-            url: "https://invisionnetwork.org/resources"
+            url: "https://www.invisionnetwork.org/resources"
           }
         }
       }))
@@ -321,8 +321,12 @@ function Resources() {
             </div>
           </div>
 
-          {/* AI Analysis CTA */}
-          <AiAnalysisCTA compact />
+          {/* AI Analysis CTA - link to training */}
+          <div className="text-center py-8">
+            <Link to="/training/ai-analysis" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity">
+              Try Our AI Scam Analysis Tool
+            </Link>
+          </div>
 
           {/* Quick Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center mt-10">

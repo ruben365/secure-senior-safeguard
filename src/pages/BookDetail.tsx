@@ -236,12 +236,12 @@ export default function BookDetail() {
                 </div>
               </div>
 
-              {/* Free chapter preview */}
+              {/* Sample chapter — marketing preview, not a free product */}
               <Card className="border-primary/20 bg-primary/5">
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-lg font-semibold">Free Preview — Chapter 1</h2>
-                    <Badge variant="outline" className="border-primary/30 text-primary">Free</Badge>
+                    <h2 className="text-lg font-semibold">Sample — Chapter 1</h2>
+                    <Badge variant="outline" className="border-primary/30 text-primary">Preview</Badge>
                   </div>
                   <h3 className="font-medium text-foreground mb-3">{firstChapter.chapter_title}</h3>
                   <div
@@ -291,7 +291,7 @@ export default function BookDetail() {
                       </button>
                       {expandedChapter === chapter.chapter_number && chapter.chapter_number === 1 && (
                         <div className="px-4 pb-4 pt-1 text-sm text-muted-foreground border-t bg-muted/20">
-                          Free preview available above. Purchase to access all chapters.
+                          Sample shown above. Purchase to access all chapters.
                         </div>
                       )}
                     </div>

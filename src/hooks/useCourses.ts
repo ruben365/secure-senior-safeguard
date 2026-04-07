@@ -2,16 +2,32 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
+// ============================================================================
+// Course-related types — aligned with the actual courses/course_modules/
+// course_lessons/enrollments schema as of Phase 6.
+//
+// Two columns the older version of this file referenced never existed in
+// the database (`duration_weeks`, `start_date`, `end_date`, and the boolean
+// `active`). The schema instead uses `status text` (mirrored by the
+// CoordinatorDashboard which already filters by status='published'),
+// `duration_hours`, `slug`, etc. The interfaces below now match the real
+// schema and the `activeOnly` filter is translated to status='published'.
+// ============================================================================
+
 export interface Course {
   id: string;
   title: string;
+  slug: string | null;
   description: string | null;
+  instructor_id: string | null;
+  category: string | null;
+  level: string | null;
   price: number | null;
-  duration_weeks: number | null;
+  duration_hours: number | null;
   max_students: number | null;
-  start_date: string | null;
-  end_date: string | null;
-  active: boolean;
+  // Schema: status is `text NULL` — published/draft/archived/null
+  status: string | null;
+  thumbnail_url: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -21,7 +37,7 @@ export interface CourseModule {
   course_id: string;
   title: string;
   description: string | null;
-  order_index: number;
+  sort_order: number;
   duration_minutes: number | null;
   created_at: string;
   updated_at: string;
@@ -34,9 +50,9 @@ export interface CourseLesson {
   title: string;
   content: string | null;
   video_url: string | null;
-  order_index: number;
+  sort_order: number;
   duration_minutes: number | null;
-  is_free_preview: boolean;
+  is_free: boolean;
   created_at: string;
   updated_at: string;
 }
@@ -45,7 +61,7 @@ export interface Enrollment {
   id: string;
   user_id: string | null;
   course_id: string;
-  contact_id: string;
+  contact_id: string | null;
   status: string;
   progress_percentage: number | null;
   enrolled_at: string;
@@ -64,7 +80,10 @@ export function useCourses(activeOnly = true) {
         .order("created_at", { ascending: false });
 
       if (activeOnly) {
-        query = query.eq("active", true);
+        // Schema uses `status` text (published/draft/archived), not a
+        // boolean `active`. CoordinatorDashboard.tsx already follows this
+        // convention.
+        query = query.eq("status", "published");
       }
 
       const { data, error } = await query;
@@ -113,19 +132,19 @@ export function useCourseModules(courseId: string) {
         `,
         )
         .eq("course_id", courseId)
-        .order("order_index", { ascending: true });
+        .order("sort_order", { ascending: true });
 
       if (error) {
         console.error("Error fetching course modules:", error);
         throw error;
       }
 
-      // Sort lessons within each module
+      // Sort lessons within each module by their schema-native sort_order.
       return (data as (CourseModule & { lessons: CourseLesson[] })[]).map(
         (module) => ({
           ...module,
           lessons:
-            module.lessons?.sort((a, b) => a.order_index - b.order_index) || [],
+            module.lessons?.sort((a, b) => a.sort_order - b.sort_order) || [],
         }),
       );
     },

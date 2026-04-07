@@ -90,7 +90,7 @@ function ArticleDetail() {
   const otherArticles = relatedArticles
     ?.filter((a) => a.id !== article.id)
     .slice(0, 2);
-  const articleUrl = `https://invisionnetwork.org/articles/${article.slug}`;
+  const articleUrl = `https://www.invisionnetwork.org/articles/${article.slug}`;
   const articleDescription =
     article.seo_description ||
     article.excerpt ||
@@ -125,7 +125,7 @@ function ArticleDetail() {
             name: "InVision Network",
             logo: {
               "@type": "ImageObject",
-              url: "https://invisionnetwork.org/favicon.png",
+              url: "https://www.invisionnetwork.org/favicon.png",
             },
           },
         }}
@@ -270,7 +270,7 @@ function ArticleDetail() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild variant="default" size="lg">
-                <Link to="/training#scamshield">
+                <Link to="/training#training">
                   Learn About ScamShield
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Link>

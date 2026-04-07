@@ -13,6 +13,40 @@ const logStep = (step: string, details?: unknown) => {
   console.log(`[SEND-TESTIMONIAL-THANKYOU] ${step}${detailsStr}`);
 };
 
+// ============================================================================
+// Per-IP rate limit (5 / min) — gates abuse where an attacker could spam
+// "thank you" emails to arbitrary addresses with our branding.
+// ============================================================================
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT = 5;
+const RATE_WINDOW_MS = 60 * 1000;
+
+function checkRateLimit(ip: string): { allowed: boolean; retryAfter?: number } {
+  const now = Date.now();
+  const record = rateLimitMap.get(ip);
+  if (!record || now > record.resetTime) {
+    rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_WINDOW_MS });
+    return { allowed: true };
+  }
+  if (record.count >= RATE_LIMIT) {
+    return {
+      allowed: false,
+      retryAfter: Math.ceil((record.resetTime - now) / 1000),
+    };
+  }
+  record.count++;
+  return { allowed: true };
+}
+
+function escapeHtml(s: string): string {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 interface TestimonialThankYouRequest {
   email: string;
   name: string;
@@ -24,15 +58,79 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
+  const clientIP =
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    req.headers.get("x-real-ip") ||
+    "unknown";
+
+  const rateCheck = checkRateLimit(clientIP);
+  if (!rateCheck.allowed) {
+    return new Response(
+      JSON.stringify({
+        error: "Too many requests. Please try again shortly.",
+      }),
+      {
+        status: 429,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+          "Retry-After": String(rateCheck.retryAfter),
+        },
+      },
+    );
+  }
+
   try {
     logStep("Function started");
 
-    const { email, name, rating }: TestimonialThankYouRequest =
-      await req.json();
+    const body = (await req.json()) as TestimonialThankYouRequest;
 
-    logStep("Request data", { email, name, rating });
+    if (typeof body.email !== "string" || typeof body.name !== "string") {
+      return new Response(
+        JSON.stringify({ error: "Missing required fields" }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        },
+      );
+    }
 
-    // Send thank-you email
+    const normalizedEmail = body.email.toLowerCase().trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(normalizedEmail) || normalizedEmail.length > 254) {
+      return new Response(
+        JSON.stringify({ error: "Invalid email format" }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        },
+      );
+    }
+
+    const safeName = body.name.slice(0, 100).trim();
+    if (!safeName) {
+      return new Response(
+        JSON.stringify({ error: "Missing name" }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        },
+      );
+    }
+
+    // Validate rating: must be an integer 1-5, otherwise default to 5 stars
+    const rawRating = body.rating;
+    const safeRating =
+      typeof rawRating === "number" &&
+      Number.isInteger(rawRating) &&
+      rawRating >= 1 &&
+      rawRating <= 5
+        ? rawRating
+        : 5;
+
+    const escName = escapeHtml(safeName);
+    const stars = "&#11088;".repeat(safeRating);
+
     const emailResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -41,21 +139,16 @@ serve(async (req) => {
       },
       body: JSON.stringify({
         from: "InVision Network <hello@invisionnetwork.org>",
-        to: [email],
-        subject: "Thank You for Sharing Your Story! 💜 - InVision Network",
+        to: [normalizedEmail],
+        subject: "Thank You for Sharing Your Story - InVision Network",
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h1 style="color: #6D28D9;">Thank You, ${name}! 💜</h1>
-            
+            <h1 style="color: #6D28D9;">Thank You, ${escName}!</h1>
             <p>We're incredibly grateful that you took the time to share your experience with InVision Network.</p>
-            
             <div style="background: linear-gradient(135deg, #faf5ff, #ede9fe); padding: 20px; border-radius: 12px; margin: 20px 0; text-align: center;">
-              <p style="font-size: 24px; margin: 0;">
-                ${rating ? "⭐".repeat(rating) : "⭐⭐⭐⭐⭐"}
-              </p>
+              <p style="font-size: 24px; margin: 0;">${stars}</p>
               <p style="color: #6D28D9; font-weight: bold; margin-top: 10px;">Your Rating</p>
             </div>
-            
             <h3>What Happens Next?</h3>
             <p>Our team will review your testimonial, and once approved, it may be featured on:</p>
             <ul>
@@ -63,15 +156,7 @@ serve(async (req) => {
               <li>Our social media channels</li>
               <li>Marketing materials (with your permission)</li>
             </ul>
-            
             <p>Your story helps others trust InVision Network and makes a real difference in our community.</p>
-            
-            <div style="background: #f0fdf4; padding: 15px; border-radius: 8px; margin: 20px 0; border: 1px solid #bbf7d0;">
-              <p style="margin: 0; color: #16a34a; font-weight: bold;">
-                🎁 As a thank you, you'll receive early access to our new features!
-              </p>
-            </div>
-            
             <p style="margin-top: 30px;">With appreciation,<br><strong>The InVision Network Team</strong></p>
           </div>
         `,
@@ -84,7 +169,7 @@ serve(async (req) => {
       throw new Error("Failed to send email");
     }
 
-    logStep("Thank-you email sent successfully");
+    logStep("Thank-you email sent");
 
     return new Response(
       JSON.stringify({ success: true, message: "Thank-you email sent" }),
@@ -96,9 +181,12 @@ serve(async (req) => {
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     logStep("ERROR", { message: errorMessage });
-    return new Response(JSON.stringify({ error: errorMessage }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 500,
-    });
+    return new Response(
+      JSON.stringify({ error: "Failed to send thank-you email" }),
+      {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 500,
+      },
+    );
   }
 });

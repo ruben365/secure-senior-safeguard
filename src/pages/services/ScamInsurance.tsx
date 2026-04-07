@@ -107,7 +107,7 @@ const ScamInsurance = () => {
                     Get a Coverage Quote <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                   <Button asChild variant="outline" size="lg" className="h-14 px-10 font-bold rounded-full border-white/20 text-white hover:bg-white/10">
-                    <a href="/services">View All Services</a>
+                    <a href="/business">View All Solutions</a>
                   </Button>
                 </div>
 

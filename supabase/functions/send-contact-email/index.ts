@@ -9,7 +9,9 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-// Rate limiting: 10 requests per minute per IP
+// ============================================================================
+// Per-IP rate limit (10 / min) — public contact form, kept moderate.
+// ============================================================================
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 const RATE_LIMIT = 10;
 const RATE_WINDOW_MS = 60 * 1000;
@@ -17,22 +19,32 @@ const RATE_WINDOW_MS = 60 * 1000;
 function checkRateLimit(ip: string): { allowed: boolean; retryAfter?: number } {
   const now = Date.now();
   const record = rateLimitMap.get(ip);
-
   if (!record || now > record.resetTime) {
     rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_WINDOW_MS });
     return { allowed: true };
   }
-
   if (record.count >= RATE_LIMIT) {
-    const retryAfter = Math.ceil((record.resetTime - now) / 1000);
-    console.log(
-      `[RATE LIMIT] IP ${ip} exceeded limit. Retry after ${retryAfter}s`,
-    );
-    return { allowed: false, retryAfter };
+    return {
+      allowed: false,
+      retryAfter: Math.ceil((record.resetTime - now) / 1000),
+    };
   }
-
   record.count++;
   return { allowed: true };
+}
+
+// ============================================================================
+// HTML-escape every customer-controlled field that lands in the admin's
+// inbox. Without this, a hostile name like `<script>fetch(evil)</script>`
+// would render as live HTML in any HTML email client.
+// ============================================================================
+function escapeHtml(s: string): string {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 interface ContactEmailRequest {
@@ -50,7 +62,6 @@ const handler = async (req: Request): Promise<Response> => {
     return new Response(null, { headers: corsHeaders });
   }
 
-  // Rate limiting check
   const clientIP =
     req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
     req.headers.get("x-real-ip") ||
@@ -72,17 +83,61 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const {
-      name,
-      email,
-      phone,
-      interest,
-      message,
-      language,
-      preferredDate,
-    }: ContactEmailRequest = await req.json();
+    const body = (await req.json()) as ContactEmailRequest;
 
-    console.log("Sending contact form email:", { name, email, interest });
+    // Validate types
+    if (
+      typeof body.name !== "string" ||
+      typeof body.email !== "string" ||
+      typeof body.interest !== "string" ||
+      typeof body.message !== "string"
+    ) {
+      return new Response(
+        JSON.stringify({ error: "Missing required fields" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        },
+      );
+    }
+
+    const normalizedEmail = body.email.toLowerCase().trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(normalizedEmail) || normalizedEmail.length > 254) {
+      return new Response(
+        JSON.stringify({ error: "Invalid email format" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        },
+      );
+    }
+
+    // Cap every customer-controlled string so they can't be used to flood
+    // the admin inbox or our DB.
+    const safeName = body.name.slice(0, 100).trim();
+    const safePhone =
+      typeof body.phone === "string" ? body.phone.slice(0, 30).trim() : "";
+    const safeInterest = body.interest.slice(0, 100).trim();
+    const safeMessage = body.message.slice(0, 5000).trim();
+    const safeLanguage =
+      typeof body.language === "string"
+        ? body.language.slice(0, 50).trim()
+        : "";
+    const safePreferredDate =
+      typeof body.preferredDate === "string"
+        ? body.preferredDate.slice(0, 50).trim()
+        : "";
+
+    if (!safeName || !safeInterest || !safeMessage) {
+      return new Response(
+        JSON.stringify({ error: "Missing required fields" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        },
+      );
+    }
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
@@ -91,13 +146,13 @@ const handler = async (req: Request): Promise<Response> => {
     const { data: inquiry, error: dbError } = await supabase
       .from("website_inquiries")
       .insert({
-        name,
-        email,
-        phone: phone || null,
-        inquiry_type: interest,
-        subject: interest,
-        message,
-        metadata: { language, preferredDate },
+        name: safeName,
+        email: normalizedEmail,
+        phone: safePhone || null,
+        inquiry_type: safeInterest,
+        subject: safeInterest,
+        message: safeMessage,
+        metadata: { language: safeLanguage, preferredDate: safePreferredDate },
         status: "new",
       })
       .select()
@@ -106,8 +161,20 @@ const handler = async (req: Request): Promise<Response> => {
     if (dbError) {
       console.error("Database insertion error:", dbError);
     } else {
-      console.log("Inquiry saved to database:", inquiry.id);
+      console.log("Inquiry saved:", inquiry?.id);
     }
+
+    // ALL customer-controlled values are HTML-escaped before going into
+    // the admin email. Replace newlines AFTER escaping so <br> survives.
+    const escName = escapeHtml(safeName);
+    const escEmail = escapeHtml(normalizedEmail);
+    const escPhone = safePhone ? escapeHtml(safePhone) : "";
+    const escInterest = escapeHtml(safeInterest);
+    const escLanguage = safeLanguage ? escapeHtml(safeLanguage) : "";
+    const escPreferredDate = safePreferredDate
+      ? escapeHtml(safePreferredDate)
+      : "";
+    const escMessage = escapeHtml(safeMessage).replace(/\n/g, "<br>");
 
     const adminEmailResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -118,20 +185,18 @@ const handler = async (req: Request): Promise<Response> => {
       body: JSON.stringify({
         from: "InVision Network <hello@invisionnetwork.org>",
         to: ["hello@invisionnetwork.org"],
-        subject: `New Contact Form Submission - ${interest}`,
+        subject: `New Contact Form Submission - ${escInterest}`,
         html: `
           <h1>New Contact Form Submission</h1>
           <h2>Contact Information:</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          ${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ""}
-          <p><strong>Service Interest:</strong> ${interest}</p>
-          ${language ? `<p><strong>Preferred Language:</strong> ${language}</p>` : ""}
-          ${preferredDate ? `<p><strong>Preferred Date:</strong> ${preferredDate}</p>` : ""}
-          
+          <p><strong>Name:</strong> ${escName}</p>
+          <p><strong>Email:</strong> ${escEmail}</p>
+          ${escPhone ? `<p><strong>Phone:</strong> ${escPhone}</p>` : ""}
+          <p><strong>Service Interest:</strong> ${escInterest}</p>
+          ${escLanguage ? `<p><strong>Preferred Language:</strong> ${escLanguage}</p>` : ""}
+          ${escPreferredDate ? `<p><strong>Preferred Date:</strong> ${escPreferredDate}</p>` : ""}
           <h2>Message:</h2>
-          <p>${message.replace(/\n/g, "<br>")}</p>
-          
+          <p>${escMessage}</p>
           <hr>
           <p><small>Submitted from InVision Network Contact Form</small></p>
         `,
@@ -144,8 +209,6 @@ const handler = async (req: Request): Promise<Response> => {
       throw new Error("Failed to send admin email");
     }
 
-    console.log("Admin email sent successfully");
-
     const userEmailResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -154,27 +217,22 @@ const handler = async (req: Request): Promise<Response> => {
       },
       body: JSON.stringify({
         from: "InVision Network <hello@invisionnetwork.org>",
-        to: [email],
+        to: [normalizedEmail],
         subject: "We received your message - InVision Network",
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h1 style="color: #6D28D9;">Thank you for contacting us, ${name}!</h1>
-            
+            <h1 style="color: #6D28D9;">Thank you for contacting us, ${escName}!</h1>
             <p>We have received your message and will get back to you within 24 hours.</p>
-            
             <h2 style="color: #6D28D9;">What you submitted:</h2>
-            <p><strong>Interest:</strong> ${interest}</p>
-            <p><strong>Message:</strong><br>${message.replace(/\n/g, "<br>")}</p>
-            
+            <p><strong>Interest:</strong> ${escInterest}</p>
+            <p><strong>Message:</strong><br>${escMessage}</p>
             <hr style="border: 1px solid #e5e5e5; margin: 20px 0;">
-            
             <p>In the meantime, feel free to:</p>
             <ul>
               <li>Call us: <a href="tel:9373018749">(937) 301-8749</a></li>
               <li>Email us: <a href="mailto:hello@invisionnetwork.org">hello@invisionnetwork.org</a></li>
-              <li>Visit our website: <a href="https://invisionnetwork.com">invisionnetwork.com</a></li>
+              <li>Visit our website: <a href="https://www.invisionnetwork.org">www.invisionnetwork.org</a></li>
             </ul>
-            
             <p style="margin-top: 30px;">Best regards,<br><strong>The InVision Network Team</strong></p>
           </div>
         `,
@@ -184,8 +242,6 @@ const handler = async (req: Request): Promise<Response> => {
     if (!userEmailResponse.ok) {
       const error = await userEmailResponse.text();
       console.error("Failed to send user email:", error);
-    } else {
-      console.log("User confirmation email sent successfully");
     }
 
     return new Response(
@@ -205,8 +261,7 @@ const handler = async (req: Request): Promise<Response> => {
     console.error("Error in send-contact-email function:", error);
     return new Response(
       JSON.stringify({
-        error: error instanceof Error ? error.message : String(error),
-        details: "Failed to send contact form email",
+        error: "Failed to send contact form email",
       }),
       {
         status: 500,

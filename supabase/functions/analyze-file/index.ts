@@ -128,23 +128,37 @@ serve(async (req) => {
     }
 
     const { scanId } = await req.json();
-    if (!scanId) throw new Error("scanId is required.");
+    if (!scanId || typeof scanId !== "string") {
+      throw new Error("scanId is required.");
+    }
+    // UUID format check
+    if (
+      !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+        scanId,
+      )
+    ) {
+      throw new Error("Invalid scanId format.");
+    }
 
-    const supabase = createClient(supabaseUrl, serviceRoleKey);
+    const supabase = createClient(supabaseUrl, serviceRoleKey, {
+      auth: { persistSession: false },
+    });
     const { data: scan, error: scanError } = await supabase
       .from("guest_scans")
       .select("*")
       .eq("id", scanId)
-      .single();
+      .eq("scan_type", "file")
+      .maybeSingle();
 
     if (scanError || !scan) {
       throw new Error("Scan not found.");
     }
 
-    if (scan.status === "completed" && scan.analysis_results) {
+    // Idempotency: if we already produced a result, return the cached one
+    if (scan.scan_status === "completed" && scan.result) {
       return new Response(
         JSON.stringify({
-          analysis: scan.analysis_results,
+          analysis: scan.result,
           expiresAt: scan.expires_at,
         }),
         {
@@ -155,8 +169,11 @@ serve(async (req) => {
     }
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2024-11-20.acacia" });
+    if (!scan.stripe_session_id) {
+      throw new Error("Scan has no associated payment.");
+    }
     const paymentIntent = await stripe.paymentIntents.retrieve(
-      scan.stripe_payment_id,
+      scan.stripe_session_id,
     );
 
     if (
@@ -176,8 +193,12 @@ serve(async (req) => {
 
     await supabase
       .from("guest_scans")
-      .update({ status: "analyzing" })
+      .update({ scan_status: "analyzing", payment_status: "paid" })
       .eq("id", scanId);
+
+    if (!scan.file_path) {
+      throw new Error("Scan has no associated file path.");
+    }
 
     const { data: fileData, error: fileError } = await supabase.storage
       .from("guest-scans")
@@ -291,35 +312,23 @@ If evidence is limited, be conservative and note limitations.`;
     }
 
     const expiresAt =
-      scan.expires_at || new Date(Date.now() + 10 * 60 * 1000).toISOString();
+      scan.expires_at || new Date(Date.now() + 30 * 60 * 1000).toISOString();
 
     await supabase
       .from("guest_scans")
       .update({
-        status: "completed",
-        threat_level: analysis.threatLevel,
-        analysis_results: analysis,
+        scan_status: "completed",
+        risk_level: analysis.threatLevel,
+        result: analysis,
         expires_at: expiresAt,
       })
       .eq("id", scanId);
 
-    const scamTypes: string[] = [];
-    if (analysis.indicators.phishing.length) scamTypes.push("phishing");
-    if (analysis.indicators.malware.length) scamTypes.push("malware");
-    if (analysis.indicators.deepfake.length) scamTypes.push("deepfake");
-    if (analysis.indicators.voiceClone.length) scamTypes.push("voice_clone");
-    if (!scamTypes.length && analysis.threatLevel === "safe")
-      scamTypes.push("safe");
-
-    if (scamTypes.length) {
-      await supabase.from("scam_statistics").insert(
-        scamTypes.map((scamType) => ({
-          scam_type: scamType,
-          threat_level: analysis.threatLevel,
-          file_type: scan.file_type,
-        })),
-      );
-    }
+    // Per-detection logging deliberately omitted: scam_statistics is a
+    // daily-aggregate table (stat_date, total_scans, threats_detected,
+    // threats_blocked, new_users) and does not accept per-event inserts.
+    // The full analysis result is persisted on guest_scans.result above
+    // and can be rolled up by a scheduled job.
 
     return new Response(JSON.stringify({ analysis, expiresAt }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },

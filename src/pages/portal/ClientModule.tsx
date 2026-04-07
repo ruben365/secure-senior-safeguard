@@ -107,7 +107,7 @@ export default function ClientModule() {
     queryKey: ["clients", user?.id],
     enabled: !!user,
     queryFn: async () => {
-      let query = supabase
+      const query = supabase
         .from("clients")
         .select("id, first_name, last_name, email, phone, tags, created_at")
         .order("created_at", { ascending: false });

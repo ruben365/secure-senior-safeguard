@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { FloatingShapes } from "@/components/FloatingShapes";
+import { SEO } from "@/components/SEO";
 
 export default function ResetPassword() {
   const [searchParams] = useSearchParams();
@@ -201,6 +202,11 @@ export default function ResetPassword() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-purple-50 flex items-center justify-center p-4 relative overflow-hidden">
+      <SEO
+        title="Reset Password"
+        description="Reset your InVision Network account password."
+        noindex
+      />
       <FloatingShapes />
 
       <div className="w-full max-w-md relative z-10">

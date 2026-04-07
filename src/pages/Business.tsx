@@ -424,7 +424,7 @@ function Business() {
       price: 0,
       tier: "Consultation",
       description:
-      "Book a free strategy call. We map your goals, recommend the right AI setup, and outline a clear build plan."
+      "Book a paid strategy call ($199, credited toward your build). We map your goals, recommend the right AI setup, and outline a clear build plan."
     });
     setInquiryDialogOpen(true);
     trackButtonClick("Book Strategy Call", "Business Hero");
@@ -1029,7 +1029,7 @@ function Business() {
                 { name: "Content Writing", price: "$150", note: "Per page", color: "text-accent" },
                 { name: "Business Email", price: "$200", note: "One-time setup", color: "text-primary" },
                 { name: "AI Chatbot", price: "$1,200", note: "Full integration", color: "text-primary", tag: "POPULAR" },
-                { name: "Domain & Hosting", price: "FREE", note: "With any website", color: "text-primary", tag: "INCLUDED" }].
+                { name: "Domain & Hosting", price: "Included", note: "With any website build", color: "text-primary", tag: "BUNDLED" }].
                 map((addon, i) =>
                 <div
                   key={i}
@@ -1506,12 +1506,12 @@ function Business() {
                       <span className="text-3xl">💭</span>
                     </div>
                     <h3 className="text-2xl font-black mb-3">Thinking About AI</h3>
-                    <Badge className="bg-primary/10 text-primary border-0 mb-5 font-bold">FREE Consultation</Badge>
+                    <Badge className="bg-primary/10 text-primary border-0 mb-5 font-bold">$199 Discovery Call</Badge>
                     <p className="text-muted-foreground max-w-2xl mx-auto mb-7 leading-relaxed">
-                      Not sure if AI fits your business? We help you explore your options, understand costs, and figure out if AI will drive real growth for you.
+                      Not sure if AI fits your business? In a paid 30-minute discovery call ($199, credited toward any project you book), we help you explore your options, understand costs, and figure out if AI will drive real growth for you.
                     </p>
                     <ul className="text-left max-w-md mx-auto space-y-3 mb-8">
-                      {["30-minute discovery call", "Business needs assessment", "AI opportunity identification", "No obligation recommendation"].map((item, i) =>
+                      {["30-minute discovery call", "Business needs assessment", "AI opportunity identification", "Credit applied to any project"].map((item, i) =>
                     <li key={i} className="flex items-center gap-3 text-sm">
                           <div className="w-5 h-5 rounded-full bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center flex-shrink-0">
                             <CheckCircle className="w-3 h-3 text-primary" />
@@ -1522,14 +1522,14 @@ function Business() {
                     </ul>
                     <Button
                     onClick={() => {
-                      trackButtonClick("Book Free AI Discovery", "Business Consulting");
-                      setSelectedService({ type: "business", name: "AI Discovery Consultation (Free)", tier: "Free" });
+                      trackButtonClick("Book AI Discovery Call", "Business Consulting");
+                      setSelectedService({ type: "business", name: "AI Discovery Consultation ($199)", tier: "Discovery" });
                       setModalOpen(true);
                     }}
                     size="lg"
                     className="h-13 px-10 rounded-full bg-gradient-to-r from-primary to-accent text-white font-bold shadow-lg shadow-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300">
-                    
-                      Book Free Consultation
+
+                      Book Discovery Call ($199)
                     </Button>
                   </div>
                 }
@@ -1925,7 +1925,7 @@ function Business() {
             </Button>
           </div>
           <p className="text-white/90 text-sm mt-4 font-semibold drop-shadow-md">
-            15-minute call. No pressure. Free.
+            15-minute scoping call. No pressure. Quoted upfront.
           </p>
         </CTASection>
 

@@ -7,16 +7,10 @@ import {
   ListTodo,
   Ticket,
   GraduationCap,
-  BookOpen,
-  Shield,
   AlertTriangle,
   FileText,
-  ShoppingCart,
   UserCheck,
-  Clock,
-  Mail,
   BarChart3,
-  Settings,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import type { NavSection } from "@/types/portal";
@@ -80,19 +74,9 @@ export function usePortalNavigation(): NavSection[] {
             permission: "view_training",
           },
           {
-            title: "Knowledge Base",
-            icon: BookOpen,
-            href: "/portal/knowledge-base",
-          },
-          {
-            title: "Threat Center",
-            icon: Shield,
-            href: "/portal/threats",
-          },
-          {
             title: "Scam Check",
             icon: AlertTriangle,
-            href: "/portal/scam-check",
+            href: "/training/ai-analysis",
           },
         ],
       },
@@ -103,12 +87,6 @@ export function usePortalNavigation(): NavSection[] {
             title: "Invoices",
             icon: FileText,
             href: "/portal/invoices",
-            permission: "view_clients",
-          },
-          {
-            title: "Orders",
-            icon: ShoppingCart,
-            href: "/portal/orders",
             permission: "view_clients",
           },
         ],
@@ -122,30 +100,9 @@ export function usePortalNavigation(): NavSection[] {
             href: "/portal/referrals",
           },
           {
-            title: "Availability",
-            icon: Clock,
-            href: "/portal/availability",
-          },
-          {
-            title: "Campaigns",
-            icon: Mail,
-            href: "/portal/campaigns",
-            permission: "manage_training",
-          },
-          {
             title: "Analytics",
             icon: BarChart3,
             href: "/portal/analytics",
-          },
-        ],
-      },
-      {
-        label: "Account",
-        items: [
-          {
-            title: "Settings",
-            icon: Settings,
-            href: "/portal/settings",
           },
         ],
       },

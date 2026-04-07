@@ -207,8 +207,9 @@ export const AI_INSURANCE_PLANS: Product[] = [
 ];
 
 // Training Programs (One-time payments)
-// Note: These use database-driven pricing - no Stripe price IDs needed
-// Training is handled through booking/inquiry flow, not direct checkout
+// Note: Training is handled through the booking/inquiry flow, not direct Stripe checkout.
+// stripePriceId is intentionally empty — these entries should never reach Stripe directly.
+// The /training page collects inquiries, then the team sends a custom invoice.
 export const TRAINING_PROGRAMS: Product[] = [
   {
     id: "training-individual",
@@ -216,7 +217,7 @@ export const TRAINING_PROGRAMS: Product[] = [
     description: "Comprehensive cybersecurity training for individuals",
     category: "training",
     paymentType: "one-time",
-    stripePriceId: "price_1SjwObJ8osfwYbX7UxSe7ORt", // Scam Defense Guide E-Book
+    stripePriceId: "",
     price: 34.99,
     isDigital: true,
     features: [
@@ -232,7 +233,7 @@ export const TRAINING_PROGRAMS: Product[] = [
     description: "Complete cybersecurity training in Spanish",
     category: "training",
     paymentType: "one-time",
-    stripePriceId: "price_1SjwOaJ8osfwYbX7MPe7VAm2", // AI Detection E-Book
+    stripePriceId: "",
     price: 34.99,
     isDigital: true,
     features: [
@@ -245,10 +246,10 @@ export const TRAINING_PROGRAMS: Product[] = [
   {
     id: "training-enterprise",
     name: "Enterprise Training",
-    description: "Team-based training for organizations",
+    description: "Team-based training for organizations (custom quote)",
     category: "training",
     paymentType: "one-time",
-    stripePriceId: "price_1SjwUVJ8osfwYbX7cAA0LiG2", // Custom AI (contact for quote)
+    stripePriceId: "",
     price: 599,
     isDigital: true,
     features: [
@@ -261,41 +262,10 @@ export const TRAINING_PROGRAMS: Product[] = [
   },
 ];
 
-// Digital Books - Using actual Stripe price IDs
+// Digital Books - Using actual Stripe price IDs (verified against LIVE Stripe acct_1SRELFJ8osfwYbX7)
+// Legacy entries (book-scam-defense, book-cyber-safety, book-identity-protection) were removed
+// because they mapped to mismatched/invalid Stripe products. The 10 entries below replace them.
 export const DIGITAL_BOOKS: Product[] = [
-  {
-    id: "book-scam-defense",
-    name: "Complete Scam Defense Guide",
-    description: "Everything you need to protect yourself from modern scams",
-    category: "digital-book",
-    paymentType: "one-time",
-    stripePriceId: "price_1SjwObJ8osfwYbX7UxSe7ORt",
-    price: 34.99,
-    isDigital: true,
-    imageUrl: "/placeholder.svg",
-  },
-  {
-    id: "book-cyber-safety",
-    name: "Cybersecurity for Seniors",
-    description: "Easy-to-understand guide for staying safe online",
-    category: "digital-book",
-    paymentType: "one-time",
-    stripePriceId: "price_1SjwOgJ8osfwYbX7BFT7VyBl",
-    price: 19.99,
-    isDigital: true,
-    imageUrl: "/placeholder.svg",
-  },
-  {
-    id: "book-identity-protection",
-    name: "Identity Protection Handbook",
-    description: "Protect your identity in the digital age",
-    category: "digital-book",
-    paymentType: "one-time",
-    stripePriceId: "price_1SjwOdJ8osfwYbX7MPe7VAm2",
-    price: 32.99,
-    isDigital: true,
-    imageUrl: "/placeholder.svg",
-  },
   {
     id: "book-crypto-defense",
     name: "Crypto Scam Defense",

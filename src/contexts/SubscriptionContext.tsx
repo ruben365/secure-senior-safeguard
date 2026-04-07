@@ -52,7 +52,7 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
         );
         toast.error("Your session expired. Please sign in again.");
         await supabase.auth.signOut();
-        window.location.href = "/login";
+        window.location.href = "/auth";
         setSubscriptions([]);
         setLoading(false);
         return;
@@ -72,10 +72,9 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
           errorMessage.includes("does not exist") ||
           errorMessage.includes("not authenticated")
         ) {
-          console.log("User no longer exists, signing out...");
           toast.error("Your session is no longer valid. Please sign in again.");
           await supabase.auth.signOut();
-          window.location.href = "/login";
+          window.location.href = "/auth";
         }
 
         setSubscriptions([]);

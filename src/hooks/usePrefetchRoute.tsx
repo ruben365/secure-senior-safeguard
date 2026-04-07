@@ -49,7 +49,6 @@ export const usePrefetchRoute = (path: string) => {
         "/contact": () => import("../pages/Contact"),
         "/careers": () => import("../pages/Careers"),
         "/faq": () => import("../pages/FAQ"),
-        "/services": () => import("../pages/Services"),
         "/portfolio": () => import("../pages/Portfolio"),
         "/invision-2026": () => import("../pages/Business"),
         "/business/autonomous-defense-hub": () => import("../pages/business/AutonomousDefenseHub"),

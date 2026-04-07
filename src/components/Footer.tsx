@@ -153,9 +153,10 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                 {[
                   { to: "/", label: "Home" },
                   { to: "/training", label: "Workshops" },
-                  { to: "/business", label: "AI" },
+                  { to: "/business", label: "AI Services" },
                   { to: "/resources", label: "Resources" },
                   { to: "/about", label: "About" },
+                  { to: "/careers", label: "Careers" },
                 ].map((link) => (
                   <li key={link.to}>
                     <Link to={link.to} className="text-xs text-white/35 hover:text-white transition-colors">{link.label}</Link>
@@ -164,19 +165,20 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
               </ul>
             </div>
             <div>
-              <h4 className="font-bold text-xs mb-3 text-white/70 uppercase tracking-wider">Workshops</h4>
+              <h4 className="font-bold text-xs mb-3 text-white/70 uppercase tracking-wider">Explore</h4>
               <ul className="space-y-1.5">
-                {["Zoom Classes", "In-Person", "Group Bookings", "Gift Certificates"].map((label, i) => (
-                  <li key={i}><Link to="/training" className="text-xs text-white/35 hover:text-white transition-colors">{label}</Link></li>
-                ))}
+                <li><Link to="/training/ai-analysis" className="text-xs text-white/35 hover:text-white transition-colors">AI Scam Analysis</Link></li>
+                <li><Link to="/library" className="text-xs text-white/35 hover:text-white transition-colors">Digital Library</Link></li>
+                <li><Link to="/articles" className="text-xs text-white/35 hover:text-white transition-colors">Articles</Link></li>
+                <li><Link to="/portfolio" className="text-xs text-white/35 hover:text-white transition-colors">Portfolio</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold text-xs mb-3 text-white/70 uppercase tracking-wider">Support</h4>
               <ul className="space-y-1.5">
                 <li><Link to="/faq" className="text-xs text-white/35 hover:text-white transition-colors">FAQ</Link></li>
+                <li><Link to="/help" className="text-xs text-white/35 hover:text-white transition-colors">Help Center</Link></li>
                 <li><Link to="/contact" className="text-xs text-white/35 hover:text-white transition-colors">Contact Us</Link></li>
-                <li><Link to="/contact" className="text-xs text-white/35 hover:text-white transition-colors">Emergency Help</Link></li>
               </ul>
             </div>
             <div>
@@ -185,6 +187,9 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                 <li><Link to="/privacy-policy" className="text-xs text-white/35 hover:text-white transition-colors">Privacy Policy</Link></li>
                 <li><Link to="/terms-of-service" className="text-xs text-white/35 hover:text-white transition-colors">Terms of Service</Link></li>
                 <li><Link to="/refund-policy" className="text-xs text-white/35 hover:text-white transition-colors">Refund Policy</Link></li>
+                <li><Link to="/cookie-policy" className="text-xs text-white/35 hover:text-white transition-colors">Cookie Policy</Link></li>
+                <li><Link to="/acceptable-use" className="text-xs text-white/35 hover:text-white transition-colors">Acceptable Use</Link></li>
+                <li><Link to="/disclaimer" className="text-xs text-white/35 hover:text-white transition-colors">Disclaimer</Link></li>
               </ul>
             </div>
           </div>

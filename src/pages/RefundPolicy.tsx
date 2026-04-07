@@ -161,7 +161,7 @@ function RefundPolicy() {
                       <div>
                         <h4 className="font-semibold">48+ Hours Notice</h4>
                         <p className="text-sm text-muted-foreground">
-                          Full refund or free rescheduling
+                          Full refund or rescheduling with no fee
                         </p>
                       </div>
                     </div>

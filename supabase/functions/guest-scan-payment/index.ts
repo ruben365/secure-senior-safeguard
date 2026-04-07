@@ -12,8 +12,10 @@ const MB = 1024 * 1024;
 const RATE_PER_MB = 0.1;
 const MINIMUM_CHARGE = 0.5;
 const MAX_FILE_MB = 500;
+const MIN_FILE_BYTES = 1;
+const MAX_FILE_BYTES = MAX_FILE_MB * MB;
 
-const ALLOWED_MIME_TYPES = [
+const ALLOWED_MIME_TYPES = new Set([
   "application/pdf",
   "image/jpeg",
   "image/png",
@@ -22,9 +24,9 @@ const ALLOWED_MIME_TYPES = [
   "audio/mp3",
   "audio/wav",
   "audio/x-wav",
-];
+]);
 
-const ALLOWED_EXTENSIONS = [
+const ALLOWED_EXTENSIONS = new Set([
   ".pdf",
   ".jpg",
   ".jpeg",
@@ -32,7 +34,7 @@ const ALLOWED_EXTENSIONS = [
   ".mp4",
   ".mp3",
   ".wav",
-];
+]);
 
 const EXTENSION_MIME_MAP: Record<string, string> = {
   ".pdf": "application/pdf",
@@ -43,6 +45,34 @@ const EXTENSION_MIME_MAP: Record<string, string> = {
   ".mp3": "audio/mpeg",
   ".wav": "audio/wav",
 };
+
+// ============================================================================
+// Per-IP rate limit (10 file scan intents / 10 minutes). Each call also
+// creates a Stripe payment intent so this caps Stripe spend from abuse.
+// ============================================================================
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT = 10;
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+
+function checkRateLimit(identifier: string): {
+  allowed: boolean;
+  retryAfter?: number;
+} {
+  const now = Date.now();
+  const record = rateLimitMap.get(identifier);
+  if (!record || now > record.resetTime) {
+    rateLimitMap.set(identifier, { count: 1, resetTime: now + RATE_WINDOW_MS });
+    return { allowed: true };
+  }
+  if (record.count >= RATE_LIMIT) {
+    return {
+      allowed: false,
+      retryAfter: Math.ceil((record.resetTime - now) / 1000),
+    };
+  }
+  record.count++;
+  return { allowed: true };
+}
 
 const sanitizeFileName = (name: string) =>
   name
@@ -74,32 +104,64 @@ serve(async (req) => {
       throw new Error("Missing required server configuration.");
     }
 
+    const clientIp =
+      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      req.headers.get("x-real-ip") ||
+      "unknown";
+
+    // Per-IP rate limit
+    const rateCheck = checkRateLimit(clientIp);
+    if (!rateCheck.allowed) {
+      return new Response(
+        JSON.stringify({
+          error: "Too many scan requests. Please try again shortly.",
+          retryAfter: rateCheck.retryAfter,
+        }),
+        {
+          status: 429,
+          headers: {
+            ...corsHeaders,
+            "Content-Type": "application/json",
+            "Retry-After": String(rateCheck.retryAfter),
+          },
+        },
+      );
+    }
+
     const body = await req.json();
     const { fileName, fileSize, fileType } = body;
     const fileSizeNumber = Number(fileSize);
 
-    if (!fileName || !fileSizeNumber || Number.isNaN(fileSizeNumber)) {
-      throw new Error("Missing file metadata.");
-    }
-
-    const extension = getExtension(fileName);
-    const normalizedType = (fileType || "").toLowerCase();
-    const storedType =
-      normalizedType || EXTENSION_MIME_MAP[extension] || extension;
-
+    // ====================================================================
+    // Strict input validation. CRITICAL: fileSize is the basis for the
+    // charge, so we have to refuse anything outside legal bounds. We
+    // cannot trust the client to be honest about file size, but the
+    // upload bucket has a server-side 500MB cap and the actual analyze
+    // step reads the file from storage, so any underreporting will be
+    // caught at analyze time when the file's true size is checked.
+    // ====================================================================
     if (
-      !ALLOWED_MIME_TYPES.includes(normalizedType) &&
-      !ALLOWED_EXTENSIONS.includes(extension)
+      !fileName ||
+      typeof fileName !== "string" ||
+      fileName.length === 0 ||
+      fileName.length > 255
     ) {
-      return new Response(JSON.stringify({ error: "Unsupported file type." }), {
+      return new Response(JSON.stringify({ error: "Invalid file name." }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 400,
       });
     }
 
-    if (fileSize > MAX_FILE_MB * MB) {
+    if (
+      !Number.isFinite(fileSizeNumber) ||
+      !Number.isInteger(fileSizeNumber) ||
+      fileSizeNumber < MIN_FILE_BYTES ||
+      fileSizeNumber > MAX_FILE_BYTES
+    ) {
       return new Response(
-        JSON.stringify({ error: `File exceeds ${MAX_FILE_MB}MB limit.` }),
+        JSON.stringify({
+          error: `File size must be between ${MIN_FILE_BYTES} byte and ${MAX_FILE_MB}MB.`,
+        }),
         {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
           status: 400,
@@ -107,9 +169,37 @@ serve(async (req) => {
       );
     }
 
+    const extension = getExtension(fileName);
+    const normalizedType = (typeof fileType === "string" ? fileType : "")
+      .toLowerCase()
+      .slice(0, 100);
+    const storedType =
+      normalizedType || EXTENSION_MIME_MAP[extension] || extension;
+
+    if (
+      !ALLOWED_MIME_TYPES.has(normalizedType) &&
+      !ALLOWED_EXTENSIONS.has(extension)
+    ) {
+      return new Response(JSON.stringify({ error: "Unsupported file type." }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 400,
+      });
+    }
+
     const { cost } = calculateAmount(fileSizeNumber);
     const scanId = crypto.randomUUID();
     const sanitized = sanitizeFileName(fileName);
+
+    if (!sanitized) {
+      return new Response(
+        JSON.stringify({ error: "File name produced no usable characters." }),
+        {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 400,
+        },
+      );
+    }
+
     const filePath = `guest/${scanId}/${sanitized}`;
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2024-11-20.acacia" });
@@ -125,22 +215,27 @@ serve(async (req) => {
       },
     });
 
-    const clientIp =
-      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-      req.headers.get("x-real-ip") ||
-      null;
+    const supabase = createClient(supabaseUrl, serviceRoleKey, {
+      auth: { persistSession: false },
+    });
 
-    const supabase = createClient(supabaseUrl, serviceRoleKey);
+    // ====================================================================
+    // Insert into guest_scans using the restored file-scan columns.
+    // scan_type='file' tells the RLS policy this is the paid file path.
+    // ====================================================================
     const { error: insertError } = await supabase.from("guest_scans").insert({
       id: scanId,
+      scan_type: "file",
       file_name: sanitized,
       file_size: fileSizeNumber,
       file_type: storedType,
       file_path: filePath,
-      stripe_payment_id: paymentIntent.id,
+      stripe_session_id: paymentIntent.id,
       amount_paid: cost,
-      status: "pending",
+      payment_status: "pending",
+      scan_status: "pending",
       ip_address: clientIp,
+      expires_at: new Date(Date.now() + 30 * 60 * 1000).toISOString(),
     });
 
     if (insertError) {

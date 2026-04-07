@@ -634,7 +634,7 @@ export default function ArticleEditor() {
       <PublishSuccessModal
         isOpen={showSuccessModal}
         onClose={() => setShowSuccessModal(false)}
-        articleUrl={`https://invisionnetwork.org/articles/${articleId}`}
+        articleUrl={`https://www.invisionnetwork.org/articles/${articleId}`}
         articleTitle={article.title}
         onViewArticle={() => {
           window.open(`/articles/${articleId}`, "_blank");

@@ -56,21 +56,21 @@ const faqs: FAQ[] = [
     category: "Getting Started",
     question: "Do I need technical skills to use your services?",
     answer:
-      "Not at all! Our platform is designed for everyone, including those who aren't tech-savvy. We offer free onboarding sessions and 24/7 support to help you get started.",
+      "Not at all! Our platform is designed for everyone, including those who aren't tech-savvy. Every paid plan includes onboarding sessions and 24/7 support to help you get started.",
   },
   {
     id: "gs-3",
     category: "Getting Started",
     question: "What happens after I sign up?",
     answer:
-      "Within minutes, you'll receive a welcome email with your secure access link. Click it to access your personalized dashboard. We'll also send you a getting started guide and offer a free 15-minute onboarding call.",
+      "Within minutes, you'll receive a welcome email with your secure access link. Click it to access your personalized dashboard. We'll also send you a getting started guide and schedule your included 15-minute onboarding call (bundled with every paid plan).",
   },
   {
     id: "gs-4",
     category: "Getting Started",
     question: "Can I try it before I buy?",
     answer:
-      "Yes! We offer a 7-day free trial on all plans. No credit card required. Cancel anytime during the trial at no charge.",
+      "We do not offer free trials. Every plan is paid up front, but every paid plan includes a 7-day money-back guarantee — if you're not satisfied within the first week, request a full refund through your account portal and we'll process it within 5 business days.",
   },
 
   // Family Shield
@@ -239,7 +239,7 @@ const faqs: FAQ[] = [
     category: "Technical Support",
     question: "Do you offer training?",
     answer:
-      "Yes! All business clients receive free onboarding training. Family Shield Premium includes video training library. Custom training sessions available.",
+      "Yes. Onboarding training is included with every business plan. Family Shield Premium includes our video training library. Additional custom training sessions are available as paid add-ons.",
   },
 
   // Account & Access
@@ -336,14 +336,14 @@ const faqs: FAQ[] = [
     category: "Veterans & Seniors",
     question: "Is this service easy for seniors to use?",
     answer:
-      "Absolutely. We specifically designed our platform for seniors with large text, simple navigation, and clear instructions. We also offer free one-on-one training sessions.",
+      "Absolutely. We specifically designed our platform for seniors with large text, simple navigation, and clear instructions. Every paid plan includes one-on-one onboarding sessions to walk you through everything.",
   },
   {
     id: "vs-3",
     category: "Veterans & Seniors",
     question: "Do you offer in-person training for seniors?",
     answer:
-      "Yes, in select areas including Columbus, OH. We offer free in-person training sessions at senior centers and community centers. Contact us to schedule.",
+      "Yes, in select areas including Columbus, OH. We provide paid in-person training sessions at senior centers and community centers — pricing depends on group size and travel. Contact us for a quote.",
   },
   {
     id: "vs-4",

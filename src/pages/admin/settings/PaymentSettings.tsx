@@ -37,7 +37,7 @@ const PaymentSettings = () => {
     taxLabel: "Sales Tax",
   });
 
-  const webhookUrl = "https://invisionnetwork.org/api/stripe/webhook";
+  const webhookUrl = "https://www.invisionnetwork.org/api/stripe/webhook";
 
   const handleTestConnection = () => {
     toast.success("Stripe connection test successful!");

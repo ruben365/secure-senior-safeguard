@@ -49,27 +49,14 @@ function CoordinatorDashboard() {
   const queryClient = useQueryClient();
   const [submittingId, setSubmittingId] = useState<string | null>(null);
 
-  // ── Role guard ────────────────────────────────────────────────────────────
-  if (
-    roleConfig?.role !== "training_coordinator" &&
-    roleConfig?.role !== "admin"
-  ) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <Card className="p-8 text-center max-w-sm">
-          <h2 className="text-xl font-bold text-foreground mb-2">
-            Access Denied
-          </h2>
-          <p className="text-muted-foreground mb-4">
-            You do not have coordinator privileges.
-          </p>
-          <Button asChild variant="ghost">
-            <Link to="/portal">Return to Portal</Link>
-          </Button>
-        </Card>
-      </div>
-    );
-  }
+  // ── Role check (used by query `enabled` flags AND by render guard) ────────
+  // IMPORTANT: We compute this BEFORE the queries and gate the queries on it
+  // via `enabled`, then early-return AFTER all hooks have been called.
+  // Rules of Hooks: hooks must run in the same order every render, so the
+  // role guard must NOT short-circuit before any useQuery call.
+  const isAuthorized =
+    roleConfig?.role === "training_coordinator" ||
+    roleConfig?.role === "admin";
 
   // ── Queries ───────────────────────────────────────────────────────────────
   const sevenDaysAgo = new Date(
@@ -79,6 +66,7 @@ function CoordinatorDashboard() {
 
   const { data: coursesData, isLoading: loadingCourses } = useQuery({
     queryKey: ["coordinator", "courses"],
+    enabled: isAuthorized,
     queryFn: async () => {
       const [{ count: total }, { count: published }] = await Promise.all([
         supabase
@@ -95,6 +83,7 @@ function CoordinatorDashboard() {
 
   const { data: enrollmentsData, isLoading: loadingEnrollments } = useQuery({
     queryKey: ["coordinator", "enrollments"],
+    enabled: isAuthorized,
     queryFn: async () => {
       const [{ count: total }, { count: weekly }] = await Promise.all([
         supabase
@@ -116,6 +105,7 @@ function CoordinatorDashboard() {
     refetch: refetchTestimonials,
   } = useQuery({
     queryKey: ["coordinator", "testimonials"],
+    enabled: isAuthorized,
     queryFn: async () => {
       const { data, error } = await supabase
         .from("testimonials")
@@ -130,6 +120,7 @@ function CoordinatorDashboard() {
 
   const { data: kbCount, isLoading: loadingKb } = useQuery({
     queryKey: ["coordinator", "knowledge_base"],
+    enabled: isAuthorized,
     queryFn: async () => {
       const { count } = await (supabase as any)
         .from("knowledge_base_articles")
@@ -140,6 +131,7 @@ function CoordinatorDashboard() {
 
   const { data: upcomingSessions, isLoading: loadingSessions } = useQuery({
     queryKey: ["coordinator", "zoom_classes"],
+    enabled: isAuthorized,
     queryFn: async () => {
       const { data, error } = await supabase
         .from("zoom_classes")
@@ -154,6 +146,7 @@ function CoordinatorDashboard() {
 
   const { data: scamCount, isLoading: loadingScam } = useQuery({
     queryKey: ["coordinator", "scam_submissions"],
+    enabled: isAuthorized,
     queryFn: async () => {
       const { count } = await supabase
         .from("scam_submissions")
@@ -162,6 +155,25 @@ function CoordinatorDashboard() {
       return count ?? 0;
     },
   });
+
+  // ── Role guard (AFTER all hooks have been called) ────────────────────────
+  if (!isAuthorized) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Card className="p-8 text-center max-w-sm">
+          <h2 className="text-xl font-bold text-foreground mb-2">
+            Access Denied
+          </h2>
+          <p className="text-muted-foreground mb-4">
+            You do not have coordinator privileges.
+          </p>
+          <Button asChild variant="ghost">
+            <Link to="/portal">Return to Portal</Link>
+          </Button>
+        </Card>
+      </div>
+    );
+  }
 
   const isLoading =
     loadingCourses ||
@@ -497,9 +509,7 @@ function CoordinatorDashboard() {
                 <p className="text-2xl font-bold text-foreground">
                   {scamCount ?? 0}
                 </p>
-                <Button asChild variant="outline" size="sm" className="w-full">
-                  <Link to="/portal/threat-center">View Threat Center</Link>
-                </Button>
+                {/* "View Threat Center" link removed - no /portal/threat-center route exists */}
               </CardContent>
             </Card>
 
@@ -511,12 +521,7 @@ function CoordinatorDashboard() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
-                <Button asChild className="w-full justify-start" size="sm">
-                  <Link to="/admin/courses/new">
-                    <PlusCircle className="w-4 h-4 mr-2" />
-                    Create Course
-                  </Link>
-                </Button>
+                {/* "Create Course" link removed - no /admin/courses CRUD exists */}
                 <Button
                   asChild
                   variant="outline"

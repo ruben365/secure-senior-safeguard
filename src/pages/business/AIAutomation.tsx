@@ -21,8 +21,7 @@ import {
   Users,
   Bot,
 } from "lucide-react";
-import heroNatureAi1 from "@/assets/hero-nature-ai-1.jpg";
-import heroNatureAi2 from "@/assets/hero-nature-ai-2.jpg";
+import heroBrandedBusinessNew from "@/assets/hero-branded-business-new.jpg";
 
 const AIAutomation = () => {
   const features = [
@@ -150,10 +149,9 @@ const AIAutomation = () => {
           <Hero
             backgroundImages={[
               {
-                src: heroNatureAi2,
-                alt: "Beautiful meadow with wildflowers at sunrise",
+                src: heroBrandedBusinessNew,
+                alt: "AI-powered business automation",
               },
-              { src: heroNatureAi1, alt: "Tranquil forest path with sunbeams" },
             ]}
             headline="Follow-Up Automation System"
             subheadline="Stop losing leads to silence. Our AI-powered follow-up system ensures every prospect gets the right message at the right time."

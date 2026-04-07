@@ -364,9 +364,10 @@ export default function CaregiverHome() {
                 variant="secondary"
                 size="sm"
                 className="w-full"
-                onClick={() => navigate("/portal/availability")}
+                disabled
+                title="Coming soon"
               >
-                Manage availability
+                Manage availability (coming soon)
               </Button>
             </CardContent>
           </Card>

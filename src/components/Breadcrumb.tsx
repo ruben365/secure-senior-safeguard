@@ -30,13 +30,13 @@ export function Breadcrumb() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://invisionnetwork.org",
+        item: "https://www.invisionnetwork.org",
       },
       ...pathnames.map((segment, index) => ({
         "@type": "ListItem",
         position: index + 2,
         name: formatName(segment),
-        item: `https://invisionnetwork.org/${pathnames.slice(0, index + 1).join("/")}`,
+        item: `https://www.invisionnetwork.org/${pathnames.slice(0, index + 1).join("/")}`,
       })),
     ],
   };
