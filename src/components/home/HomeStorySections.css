@@ -13,18 +13,15 @@
    ═══════════════════════════════════════════════════════════════════ */
 .home-color-wash {
   position: relative;
+  isolation: isolate;
 }
 
-/* The wash sits on top of inner section backgrounds but uses soft-light
-   blend mode — which only tints colors without fighting text contrast.
-   pointer-events: none so it never steals clicks. */
-.home-color-wash::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  mix-blend-mode: soft-light;
+/* The wash is a BASE background layer on the wrapper itself, painted
+   BEFORE child sections render their own backgrounds. Each section
+   below paints on top, so the wash never touches buttons, cards, or
+   text — it only shows through where a section has a transparent or
+   semi-transparent background. No blend mode, no z-index fighting. */
+.home-color-wash {
   background:
     /* 10% dark — slate-900 */
     radial-gradient(ellipse 60% 35% at 15% 8%,  rgba(15,  23,  42,  0.10) 0%, transparent 65%),
@@ -42,15 +39,12 @@
     /* 3% maroon */
     radial-gradient(ellipse 40% 38% at 92% 55%, rgba(76,  5,   25,  0.03) 0%, transparent 65%),
     /* 1% red — red-600 */
-    radial-gradient(ellipse 35% 30% at 50% 36%, rgba(220, 38,  38,  0.01) 0%, transparent 65%);
+    radial-gradient(ellipse 35% 30% at 50% 36%, rgba(220, 38,  38,  0.01) 0%, transparent 65%),
+    hsl(var(--background));
 }
 
-/* Keep text + cards + buttons crisp above the wash by giving them a
-   higher stacking context. The wash only tints raw backgrounds. */
-.home-color-wash > * { position: relative; z-index: 2; }
-
-/* Container — same mesh-gradient palette used on the About page,
-   layered over the theme background token so it stays light/dark aware. */
+/* Container — mesh gradient decorations only, base transparent so the
+   .home-color-wash beneath it bleeds through. */
 .hss-root {
   background:
     radial-gradient(at 40% 20%, hsl(var(--primary) / 0.15) 0px, transparent 50%),
@@ -59,7 +53,7 @@
     radial-gradient(at 80% 50%, hsl(var(--primary) / 0.10) 0px, transparent 50%),
     radial-gradient(at 0% 100%, hsl(var(--accent)  / 0.15) 0px, transparent 50%),
     radial-gradient(at 80% 100%,hsl(var(--primary) / 0.10) 0px, transparent 50%),
-    hsl(var(--background));
+    transparent;
   position: relative;
   overflow: hidden;
 }
@@ -107,14 +101,14 @@
   .hss-root::after { animation: none; }
 }
 
-/* Alternate section tint — uses theme muted token */
+/* Alternate section tint — translucent so .home-color-wash shows through */
 .hss-section-tint {
-  background: hsl(var(--muted));
+  background: hsl(var(--muted) / 0.55);
 }
 
-/* Editorial section — uses theme card token */
+/* Editorial section — translucent so .home-color-wash shows through */
 .hss-section-white {
-  background: hsl(var(--card));
+  background: hsl(var(--card) / 0.55);
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -334,7 +328,7 @@
     radial-gradient(at 80% 0%,  hsl(var(--accent)  / 0.12) 0px, transparent 50%),
     radial-gradient(at 0% 100%, hsl(265 55% 42% / 0.10) 0px, transparent 50%),
     radial-gradient(at 80% 100%, hsl(var(--primary) / 0.10) 0px, transparent 50%),
-    hsl(var(--background));
+    transparent;
   position: relative;
   overflow: hidden;
 }
@@ -550,7 +544,7 @@
     radial-gradient(at 80% 20%, hsl(var(--accent)  / 0.12) 0px, transparent 50%),
     radial-gradient(at 30% 90%, hsl(265 55% 42% / 0.12) 0px, transparent 50%),
     radial-gradient(at 90% 80%, hsl(var(--primary) / 0.10) 0px, transparent 50%),
-    hsl(var(--background));
+    transparent;
   position: relative;
   overflow: hidden;
 }
