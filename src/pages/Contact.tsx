@@ -211,7 +211,7 @@ function Contact() {
 
       <MeshBackground variant="vibrant" withOrbs>
       <div className="py-16 relative overflow-hidden">
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-6 lg:px-8 relative z-10">
           {/* Contact Methods Grid */}
           <div className="text-center mb-10">
             <span className="frosted-pill mb-4">Get in Touch</span>
