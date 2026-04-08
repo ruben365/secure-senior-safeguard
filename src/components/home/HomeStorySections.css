@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════
-   HomeStorySections — three narrative sections under the hero.
+   HomeStorySections — narrative sections under the hero.
    Light dimmed theme: warm off-white background, slate text,
    premium glass cards, warm orange accent.
    ═══════════════════════════════════════════════════════════════════ */
@@ -11,26 +11,20 @@
   overflow: hidden;
 }
 
-/* Alternate section tint — soft warm cream (orange-system equivalent
-   of the spec's "light lavender #F5F3FF" — keeps brand intact) */
+/* Alternate section tint — soft warm cream */
 .hss-section-tint {
   background: #fef6f1;
 }
 
-/* Editorial section — pure white background for content variety */
+/* Editorial section — pure white background */
 .hss-section-white {
   background: #ffffff;
 }
 
 /* ─────────────────────────────────────────────────────────────────
    SECONDARY ACCENT — Deep teal #0d9488
-   Cool complement to the warm orange primary. Used SPARINGLY:
-   live-monitoring indicators, numbered step counters, info badges.
-   Never used as a primary CTA color.
    ─────────────────────────────────────────────────────────────── */
-.hss-teal-text {
-  color: #0d9488;
-}
+.hss-teal-text { color: #0d9488; }
 
 .hss-teal-bg-soft {
   background: rgba(13, 148, 136, 0.10);
@@ -48,26 +42,19 @@
 
 /* ─────────────────────────────────────────────────────────────────
    DEPTH LAYER 1 — Subtle slate dot pattern
-   Sits on the absolute base, beneath all content. Provides texture
-   without shifting the page's color temperature. Opacity ~3%, slate
-   tone keeps it neutral.
    ─────────────────────────────────────────────────────────────── */
 .hss-dot-grid {
   position: absolute;
   inset: 0;
   z-index: -10;
   pointer-events: none;
-  background-image: radial-gradient(
-    circle,
-    rgba(15, 23, 42, 1) 1px,
-    transparent 1.5px
-  );
+  background-image: radial-gradient(circle, rgba(15, 23, 42, 1) 1px, transparent 1.5px);
   background-size: 28px 28px;
   background-position: 0 0;
   opacity: 0.035;
 }
 
-/* Ambient warm wash on the left — soft orange shimmer (existing) */
+/* Ambient warm wash */
 .hss-ambient-wash {
   position: absolute;
   left: -10%;
@@ -76,12 +63,7 @@
   height: 60%;
   pointer-events: none;
   z-index: -1;
-  background: radial-gradient(
-    50% 50% at 30% 50%,
-    rgba(249, 115, 22, 0.10) 0%,
-    rgba(249, 115, 22, 0.03) 40%,
-    transparent 70%
-  );
+  background: radial-gradient(50% 50% at 30% 50%, rgba(249, 115, 22, 0.10) 0%, rgba(249, 115, 22, 0.03) 40%, transparent 70%);
   filter: blur(120px);
 }
 
@@ -93,23 +75,11 @@
   height: 50%;
   pointer-events: none;
   z-index: -1;
-  background: radial-gradient(
-    50% 50% at 70% 50%,
-    rgba(249, 115, 22, 0.08) 0%,
-    rgba(249, 115, 22, 0.02) 40%,
-    transparent 70%
-  );
+  background: radial-gradient(50% 50% at 70% 50%, rgba(249, 115, 22, 0.08) 0%, rgba(249, 115, 22, 0.02) 40%, transparent 70%);
   filter: blur(120px);
 }
 
-/* ─────────────────────────────────────────────────────────────────
-   DEPTH LAYER 2 — Secondary orange ambient glows (new)
-   Two more heavy-blur radial halos using the existing orange accent
-   at extremely low opacity. They sit behind everything (z-index: -1)
-   and add 3D depth without changing the base color tone.
-   ─────────────────────────────────────────────────────────────── */
 .hss-ambient-wash-3 {
-  /* Top-right corner halo */
   position: absolute;
   right: -8%;
   top: -5%;
@@ -117,17 +87,11 @@
   height: 50%;
   pointer-events: none;
   z-index: -1;
-  background: radial-gradient(
-    50% 50% at 70% 30%,
-    rgba(249, 115, 22, 0.06) 0%,
-    rgba(249, 115, 22, 0.02) 45%,
-    transparent 75%
-  );
+  background: radial-gradient(50% 50% at 70% 30%, rgba(249, 115, 22, 0.06) 0%, rgba(249, 115, 22, 0.02) 45%, transparent 75%);
   filter: blur(140px);
 }
 
 .hss-ambient-wash-4 {
-  /* Middle-right halo — adds depth at the testimonials/FAQ area */
   position: absolute;
   right: -5%;
   top: 40%;
@@ -135,12 +99,7 @@
   height: 40%;
   pointer-events: none;
   z-index: -1;
-  background: radial-gradient(
-    50% 50% at 60% 50%,
-    rgba(249, 115, 22, 0.05) 0%,
-    rgba(249, 115, 22, 0.015) 40%,
-    transparent 70%
-  );
+  background: radial-gradient(50% 50% at 60% 50%, rgba(249, 115, 22, 0.05) 0%, rgba(249, 115, 22, 0.015) 40%, transparent 70%);
   filter: blur(140px);
 }
 
@@ -167,53 +126,35 @@
   background: #d96c4a;
 }
 
-/* White card surface — used for stat tiles, side cards */
+/* White card surface */
 .hss-card {
   background: #ffffff;
   border: 1px solid rgba(30, 41, 59, 0.08);
-  box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, 1) inset,
-    0 8px 24px -12px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 1) inset, 0 8px 24px -12px rgba(15, 23, 42, 0.12);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hss-card:hover {
   transform: translateY(-3px);
   border-color: rgba(217, 108, 74, 0.25);
-  box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, 1) inset,
-    0 16px 40px -12px rgba(15, 23, 42, 0.18),
-    0 0 30px -8px rgba(249, 115, 22, 0.18);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 1) inset, 0 16px 40px -12px rgba(15, 23, 42, 0.18), 0 0 30px -8px rgba(249, 115, 22, 0.18);
 }
 
-/* Soft warm tint card — orange wash on cream */
+/* Soft warm tint card */
 .hss-soft-tint {
-  background: linear-gradient(
-    135deg,
-    rgba(249, 115, 22, 0.06) 0%,
-    rgba(217, 108, 74, 0.10) 100%
-  );
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.06) 0%, rgba(217, 108, 74, 0.10) 100%);
   border: 1px solid rgba(217, 108, 74, 0.18);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hss-soft-tint:hover {
   transform: translateY(-3px);
-  background: linear-gradient(
-    135deg,
-    rgba(249, 115, 22, 0.10) 0%,
-    rgba(217, 108, 74, 0.16) 100%
-  );
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.10) 0%, rgba(217, 108, 74, 0.16) 100%);
   border-color: rgba(217, 108, 74, 0.32);
   box-shadow: 0 16px 40px -12px rgba(249, 115, 22, 0.22);
 }
 
-/* Stat number — orange suffix */
-.hss-stat-suffix {
-  color: #d96c4a;
-}
-
-/* Icon tile — small soft-orange square that holds a Lucide icon */
+/* Icon tile */
 .hss-icon-tile {
   display: inline-flex;
   align-items: center;
@@ -223,43 +164,25 @@
   color: #d96c4a;
 }
 
-/* Section divider — subtle line that separates sections */
+/* Section divider */
 .hss-divider {
   position: relative;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(15, 23, 42, 0.10) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg, transparent 0%, rgba(15, 23, 42, 0.10) 50%, transparent 100%);
 }
 
-/* Dark contrast card — solid deep slate with warm orange edge glow.
-   Used as the standout card in 2x2 grids. The reference design uses
-   a deep purple variant; we use deep slate + orange to keep the
-   established brand palette intact. */
+/* Dark contrast card */
 .hss-dark-card {
-  background: linear-gradient(
-    135deg,
-    #1e293b 0%,
-    #2a1c14 100%
-  );
+  background: linear-gradient(135deg, #1e293b 0%, #2a1c14 100%);
   border: 1px solid rgba(217, 108, 74, 0.18);
-  box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, 0.06) inset,
-    0 24px 60px -16px rgba(15, 23, 42, 0.4),
-    0 0 40px -12px rgba(249, 115, 22, 0.18);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.06) inset, 0 24px 60px -16px rgba(15, 23, 42, 0.4), 0 0 40px -12px rgba(249, 115, 22, 0.18);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hss-dark-card:hover {
   transform: translateY(-3px);
   border-color: rgba(217, 108, 74, 0.35);
-  box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, 0.08) inset,
-    0 28px 70px -16px rgba(15, 23, 42, 0.5),
-    0 0 60px -12px rgba(249, 115, 22, 0.28);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.08) inset, 0 28px 70px -16px rgba(15, 23, 42, 0.5), 0 0 60px -12px rgba(249, 115, 22, 0.28);
 }
 
 .hss-dark-card-glow {
@@ -269,30 +192,20 @@
   width: 65%;
   height: 75%;
   pointer-events: none;
-  background: radial-gradient(
-    50% 50% at 50% 50%,
-    rgba(249, 115, 22, 0.32) 0%,
-    rgba(249, 115, 22, 0.08) 50%,
-    transparent 75%
-  );
+  background: radial-gradient(50% 50% at 50% 50%, rgba(249, 115, 22, 0.32) 0%, rgba(249, 115, 22, 0.08) 50%, transparent 75%);
   filter: blur(50px);
 }
 
-/* Primary CTA pill — solid warm orange */
+/* Primary CTA pill */
 .hss-cta-primary {
   background: #d96c4a;
   color: #ffffff;
-  box-shadow:
-    0 8px 24px -8px rgba(217, 108, 74, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 24px -8px rgba(217, 108, 74, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
 .hss-cta-primary:hover {
   background: #b8552f;
-  box-shadow:
-    0 12px 32px -8px rgba(217, 108, 74, 0.55),
-    0 0 40px rgba(249, 115, 22, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  box-shadow: 0 12px 32px -8px rgba(217, 108, 74, 0.55), 0 0 40px rgba(249, 115, 22, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.22);
 }
 
 /* Ghost CTA pill */
@@ -308,54 +221,291 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   Final CTA section — sits right before the footer.
-   Premium dark cinematic block that lands the page after the white
-   story sections. Matches the hero's dark slate + orange accent.
+   DARK STATS BENTO
    ═══════════════════════════════════════════════════════════════════ */
-.hss-final-cta {
+.hss-stats-bento {
+  background: linear-gradient(150deg, #080c16 0%, #0d1525 55%, #111b32 100%);
   position: relative;
-  background: linear-gradient(
-    180deg,
-    #080b11 0%,
-    hsl(260, 18%, 8%) 50%,
-    hsl(260, 22%, 6%) 100%
-  );
   overflow: hidden;
 }
 
-.hss-final-cta-image {
+.hss-stats-bento::before {
+  content: '';
   position: absolute;
   inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 26px 26px;
   pointer-events: none;
-  opacity: 0.32;
+  z-index: 0;
 }
 
-.hss-final-cta-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(0.65) saturate(0.85);
+.hss-stats-glow-left {
+  position: absolute;
+  left: -18%;
+  top: -30%;
+  width: 65%;
+  height: 160%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(50% 50% at 30% 50%, rgba(249,115,22,0.20) 0%, transparent 65%);
+  filter: blur(80px);
 }
+
+.hss-stats-glow-right {
+  position: absolute;
+  right: -18%;
+  bottom: -30%;
+  width: 60%;
+  height: 160%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(50% 50% at 70% 60%, rgba(249,115,22,0.14) 0%, transparent 65%);
+  filter: blur(80px);
+}
+
+.hss-stats-tile {
+  background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 1.25rem;
+  padding: 1.75rem 1.75rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  z-index: 1;
+}
+
+.hss-stats-tile:hover {
+  background: rgba(255,255,255,0.055);
+  border-color: rgba(249,115,22,0.25);
+  box-shadow: 0 0 40px -8px rgba(249,115,22,0.25), 0 16px 40px -12px rgba(0,0,0,0.4);
+  transform: translateY(-3px);
+}
+
+.hss-stats-tile-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: rgba(217,108,74,0.15);
+  border: 1px solid rgba(217,108,74,0.25);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+/* LIVE badge */
+.hss-live-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  background: rgba(45,212,191,0.12);
+  border: 1px solid rgba(45,212,191,0.30);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #2dd4bf;
+}
+
+.hss-live-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #2dd4bf;
+  animation: hss-live-pulse 2s ease-in-out infinite;
+}
+
+@keyframes hss-live-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(45,212,191,0.7); }
+  50% { opacity: 0.5; box-shadow: 0 0 14px rgba(45,212,191,0.3); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   FLOATING DATA CARD — glass overlay on images
+   ═══════════════════════════════════════════════════════════════════ */
+.hss-float-card {
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(30,41,59,0.10);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px -8px rgba(15,23,42,0.28), 0 2px 8px -2px rgba(15,23,42,0.12);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SOCIAL PROOF STRIP
+   ═══════════════════════════════════════════════════════════════════ */
+.hss-avatar-stack {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.hss-avatar-stack > * {
+  margin-left: -10px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(15,23,42,0.15);
+}
+
+.hss-avatar-stack > *:last-child {
+  margin-left: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   TIMELINE — How It Works
+   ═══════════════════════════════════════════════════════════════════ */
+.hss-step-bubble {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #d96c4a 0%, #b8552f 100%);
+  box-shadow: 0 0 24px -4px rgba(217,108,74,0.55), inset 0 1px 0 rgba(255,255,255,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  font-size: 14px;
+  font-weight: 800;
+  color: white;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SECTION 3 — Editorial feature list with vertical timeline
+   ═══════════════════════════════════════════════════════════════════ */
+.hss-feature-list {
+  position: relative;
+}
+
+.hss-feature-list::before {
+  content: '';
+  position: absolute;
+  left: 1.125rem; /* center of the 2.25rem (w-9) icon */
+  top: 3rem;
+  bottom: 1rem;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(217,108,74,0.30) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Quote card editorial — left orange border treatment */
+.hss-quote-editorial {
+  border-left: 3px solid #d96c4a;
+  padding-left: 1.25rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SECTION 4 — Asymmetric collage with floating trust badge
+   ═══════════════════════════════════════════════════════════════════ */
+.hss-trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: 9999px;
+  background: #d96c4a;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 8px 24px -4px rgba(217,108,74,0.55), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   TESTIMONIALS — Dark cinematic theater
+   ═══════════════════════════════════════════════════════════════════ */
+.hss-testimonial-theater {
+  background: linear-gradient(150deg, #080c16 0%, #0d1425 55%, #111b30 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hss-testimonial-glow-left {
+  position: absolute;
+  left: -10%;
+  top: 5%;
+  width: 55%;
+  height: 85%;
+  pointer-events: none;
+  background: radial-gradient(50% 50% at 30% 40%, rgba(249,115,22,0.17) 0%, transparent 65%);
+  filter: blur(90px);
+}
+
+.hss-testimonial-glow-right {
+  position: absolute;
+  right: -10%;
+  bottom: 5%;
+  width: 45%;
+  height: 65%;
+  pointer-events: none;
+  background: radial-gradient(50% 50% at 70% 60%, rgba(249,115,22,0.11) 0%, transparent 65%);
+  filter: blur(90px);
+}
+
+.hss-giant-quote {
+  position: absolute;
+  top: -0.75rem;
+  left: -0.5rem;
+  font-size: clamp(6rem, 14vw, 10rem);
+  line-height: 1;
+  color: rgba(217,108,74,0.11);
+  font-family: Georgia, 'Times New Roman', serif;
+  pointer-events: none;
+  user-select: none;
+  font-weight: 700;
+}
+
+.hss-testimonial-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border-radius: 1.5rem;
+  box-shadow: 0 1px 0 0 rgba(255,255,255,0.06) inset, 0 24px 60px -16px rgba(0,0,0,0.6);
+  transition: border-color 0.3s ease;
+  overflow: hidden;
+}
+
+.hss-card-accent-bar {
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, #d96c4a 30%, rgba(249,115,22,0.5) 70%, transparent 100%);
+}
+
+.hss-avatar-ring {
+  box-shadow: 0 0 0 3px rgba(217,108,74,0.55), 0 0 0 6px rgba(217,108,74,0.12);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Final CTA section
+   ═══════════════════════════════════════════════════════════════════ */
+.hss-final-cta {
+  position: relative;
+  background: linear-gradient(180deg, #080b11 0%, hsl(260, 18%, 8%) 50%, hsl(260, 22%, 6%) 100%);
+  overflow: hidden;
+}
+
+.hss-final-cta-image { position: absolute; inset: 0; pointer-events: none; opacity: 0.32; }
+.hss-final-cta-image img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.65) saturate(0.85); }
 
 .hss-final-cta-overlay {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(
-    135deg,
-    rgba(8, 11, 17, 0.85) 0%,
-    rgba(8, 11, 17, 0.55) 50%,
-    rgba(8, 11, 17, 0.85) 100%
-  );
+  background: linear-gradient(135deg, rgba(8,11,17,0.85) 0%, rgba(8,11,17,0.55) 50%, rgba(8,11,17,0.85) 100%);
 }
 
 .hss-final-cta-glow {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background:
-    radial-gradient(50% 60% at 20% 50%, rgba(249, 115, 22, 0.18) 0%, transparent 60%),
-    radial-gradient(50% 60% at 80% 50%, rgba(249, 115, 22, 0.12) 0%, transparent 60%);
+  background: radial-gradient(50% 60% at 20% 50%, rgba(249,115,22,0.18) 0%, transparent 60%), radial-gradient(50% 60% at 80% 50%, rgba(249,115,22,0.12) 0%, transparent 60%);
   filter: blur(60px);
 }
 
@@ -365,70 +515,51 @@
   gap: 0.5rem;
   padding: 0.5rem 1.1rem;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
   color: #fbab8e;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .hss-final-trust {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.06) 0%,
-    rgba(255, 255, 255, 0.02) 100%
-  );
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid rgba(255,255,255,0.12);
   backdrop-filter: blur(16px) saturate(140%);
-  box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, 0.08) inset,
-    0 12px 32px -8px rgba(0, 0, 0, 0.45);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 0 1px 0 0 rgba(255,255,255,0.08) inset, 0 12px 32px -8px rgba(0,0,0,0.45);
 }
 
 .hss-final-cta-button-primary {
-  background: linear-gradient(
-    135deg,
-    rgba(249, 115, 22, 0.28) 0%,
-    rgba(255, 255, 255, 0.08) 100%
-  );
-  border: 1px solid rgba(249, 115, 22, 0.5);
+  background: linear-gradient(135deg, rgba(249,115,22,0.28) 0%, rgba(255,255,255,0.08) 100%);
+  border: 1px solid rgba(249,115,22,0.5);
   color: #ffffff;
-  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-  box-shadow:
-    0 0 24px rgba(249, 115, 22, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  -webkit-backdrop-filter: blur(8px);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  box-shadow: 0 0 24px rgba(249,115,22,0.22), inset 0 1px 0 rgba(255,255,255,0.16);
 }
 
 .hss-final-cta-button-primary:hover {
-  background: linear-gradient(
-    135deg,
-    rgba(249, 115, 22, 0.4) 0%,
-    rgba(255, 255, 255, 0.12) 100%
-  );
-  border-color: rgba(249, 115, 22, 0.65);
-  box-shadow:
-    0 4px 32px rgba(249, 115, 22, 0.35),
-    0 0 60px rgba(249, 115, 22, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  background: linear-gradient(135deg, rgba(249,115,22,0.4) 0%, rgba(255,255,255,0.12) 100%);
+  border-color: rgba(249,115,22,0.65);
+  box-shadow: 0 4px 32px rgba(249,115,22,0.35), 0 0 60px rgba(249,115,22,0.18), inset 0 1px 0 rgba(255,255,255,0.22);
 }
 
 .hss-final-cta-button-ghost {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.20);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.20);
   color: #ffffff;
-  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  -webkit-backdrop-filter: blur(8px);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
 }
 
 .hss-final-cta-button-ghost:hover {
-  background: rgba(255, 255, 255, 0.10);
-  border-color: rgba(255, 255, 255, 0.38);
+  background: rgba(255,255,255,0.10);
+  border-color: rgba(255,255,255,0.38);
 }
