@@ -222,19 +222,20 @@ export const ServiceInquiryDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[550px] max-h-[90vh] overflow-y-auto rounded-2xl">
-        <DialogHeader>
-          <div className="flex items-center gap-2 mb-2">
-            <Badge variant="secondary" className="bg-primary/10 text-primary">
+      {/* Compact: no scrollbar, teal badge accent, tight header */}
+      <DialogContent className="max-w-[calc(100vw-2rem)] sm:max-w-[560px] overflow-hidden rounded-2xl p-5 gap-0">
+        <DialogHeader className="space-y-0 pb-3">
+          <div className="flex items-center gap-1.5 mb-1.5">
+            <Badge variant="secondary" className="text-[10px] h-[18px] px-1.5 py-0 bg-teal-500/10 text-teal-700 border-teal-500/30">
               {serviceTier}
             </Badge>
-            <Badge variant="outline" className="text-xs">
-              <Clock className="w-3 h-3 mr-1" />
+            <Badge variant="outline" className="text-[10px] h-[18px] px-1.5 py-0">
+              <Clock className="w-2.5 h-2.5 mr-1" />
               24hr Response
             </Badge>
           </div>
-          <DialogTitle className="text-xl">{serviceName}</DialogTitle>
-          <DialogDescription>
+          <DialogTitle className="text-base font-semibold leading-tight">{serviceName}</DialogTitle>
+          <DialogDescription className="text-[11px] mt-0.5">
             {serviceDescription ||
               "Complete the form below and our team will contact you to discuss your project."}
           </DialogDescription>

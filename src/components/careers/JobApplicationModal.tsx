@@ -118,33 +118,34 @@ export function JobApplicationModal({ job, open, onOpenChange }: JobApplicationM
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
+      {/* Compact: no scrollbar, teal accent on success icon */}
+      <DialogContent className="max-w-[calc(100vw-2rem)] sm:max-w-[520px] overflow-hidden rounded-2xl p-5 gap-0">
         {submitted ? (
-          <div className="py-8 text-center space-y-4">
-            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
-              <CheckCircle2 className="w-8 h-8 text-primary" />
+          <div className="py-4 text-center space-y-3">
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-teal-500/15 to-indigo-500/15 border border-teal-500/30 flex items-center justify-center mx-auto">
+              <CheckCircle2 className="w-6 h-6 text-teal-600" />
             </div>
-            <DialogHeader>
-              <DialogTitle className="text-2xl">Application Received!</DialogTitle>
-              <DialogDescription className="text-base">
+            <DialogHeader className="space-y-0">
+              <DialogTitle className="text-base font-semibold leading-tight">Application Received!</DialogTitle>
+              <DialogDescription className="text-[11px] mt-1">
                 Thank you for applying for <span className="font-semibold text-foreground">{job.title}</span>.
                 Our team will review your application and reach out within 3-5 business days.
               </DialogDescription>
             </DialogHeader>
-            <Button onClick={() => handleClose(false)} className="mt-4">
+            <Button onClick={() => handleClose(false)} className="mt-2" size="sm">
               Close
             </Button>
           </div>
         ) : (
           <>
-            <DialogHeader>
-              <DialogTitle className="text-xl">Apply for {job.title}</DialogTitle>
-              <DialogDescription className="flex flex-wrap gap-2 pt-2">
-                <Badge variant="outline" className="text-xs">
-                  <Briefcase className="w-3 h-3 mr-1" />
+            <DialogHeader className="space-y-0 pb-3">
+              <DialogTitle className="text-base font-semibold leading-tight">Apply for {job.title}</DialogTitle>
+              <DialogDescription className="flex flex-wrap gap-1.5 pt-1.5">
+                <Badge variant="outline" className="text-[10px] h-[18px] px-1.5 py-0">
+                  <Briefcase className="w-2.5 h-2.5 mr-1" />
                   {job.department}
                 </Badge>
-                <Badge variant="outline" className="text-xs">
+                <Badge variant="outline" className="text-[10px] h-[18px] px-1.5 py-0">
                   <MapPin className="w-3 h-3 mr-1" />
                   {job.location}
                 </Badge>

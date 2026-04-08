@@ -222,19 +222,20 @@ export function VerificationCodeModal({
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md w-[calc(100vw-2rem)] max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="flex items-center gap-2 text-2xl">
-            <Shield className="w-6 h-6 text-primary" />
+      {/* Compact: no scrollbar, tight header, teal shield */}
+      <DialogContent className="sm:max-w-[440px] w-[calc(100vw-2rem)] overflow-hidden rounded-2xl p-5 gap-0">
+        <DialogHeader className="space-y-0 pb-3">
+          <DialogTitle className="flex items-center gap-2 text-base font-semibold leading-tight">
+            <Shield className="w-4 h-4 text-teal-600" />
             Two-Factor Authentication
           </DialogTitle>
-          <DialogDescription className="text-base">
+          <DialogDescription className="text-[11px] mt-0.5">
             We sent a 6-digit code to{" "}
             <span className="font-semibold text-foreground">{email}</span>
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-6 py-4">
+        <div className="space-y-3">
           {/* Code Input Grid - Responsive with 2x3 grid for very small screens */}
           <div className="grid grid-cols-6 xs-small:grid-cols-3 gap-2 sm:gap-3 max-w-sm mx-auto px-2">
             <style>{`

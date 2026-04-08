@@ -280,51 +280,61 @@ export const BookingModal = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto p-0 rounded-2xl">
-        {/* Header with gradient */}
-        <div className="bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 p-6 border-b">
-          <DialogHeader>
-            <div className="flex items-center gap-3 mb-2">
-              <div className="p-2 bg-primary/20 rounded-lg text-primary">
+      {/*
+        Compact booking modal — max-w-2xl -> [620px]. Header gradient
+        recolored from heavy orange primary/accent to teal+indigo so
+        the dialog isn't a wall of orange. overflow-hidden + no max-h
+        = no scrollbar.
+      */}
+      <DialogContent className="max-w-[calc(100vw-2rem)] sm:max-w-[620px] overflow-hidden p-0 rounded-2xl gap-0">
+        {/* Header — compact teal/indigo gradient strip */}
+        <div className="bg-gradient-to-r from-teal-500/10 via-indigo-500/10 to-teal-500/10 px-5 pt-4 pb-3 border-b">
+          <DialogHeader className="space-y-0">
+            <div className="flex items-center gap-2 mb-1.5">
+              <div className="p-1.5 bg-teal-500/15 border border-teal-500/30 rounded-md text-teal-600">
                 {info.icon}
               </div>
-              <Badge variant="secondary" className="text-xs">
+              <Badge variant="secondary" className="text-[10px] h-[18px] px-1.5 py-0">
                 {info.format}
               </Badge>
+              {serviceTier && (
+                <Badge className="text-[10px] h-[18px] px-1.5 py-0 bg-gradient-to-r from-teal-600 to-indigo-600 text-white border-0">
+                  {serviceTier}
+                </Badge>
+              )}
             </div>
-            <DialogTitle className="text-2xl font-bold">
+            <DialogTitle className="text-base font-semibold leading-tight">
               Book: {serviceName}
             </DialogTitle>
             <DialogDescription className="sr-only">
               Complete the booking form for {serviceName} service
             </DialogDescription>
-            {serviceTier && <Badge className="w-fit mt-1">{serviceTier}</Badge>}
           </DialogHeader>
 
-          {/* Step Indicator */}
-          <div className="flex items-center justify-between mt-6 max-w-xs">
+          {/* Step Indicator — compact, teal accent */}
+          <div className="flex items-center justify-between mt-2 max-w-xs">
             {steps.map((s, i) => (
               <div key={s.num} className="flex items-center">
                 <div
-                  className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-bold transition-colors ${
+                  className={`flex items-center justify-center w-6 h-6 rounded-full text-[11px] font-bold transition-colors ${
                     step >= s.num
-                      ? "bg-primary text-primary-foreground"
+                      ? "bg-gradient-to-br from-teal-600 to-indigo-600 text-white"
                       : "bg-muted text-muted-foreground"
                   }`}
                 >
-                  {step > s.num ? <CheckCircle className="w-5 h-5" /> : s.num}
+                  {step > s.num ? <CheckCircle className="w-4 h-4" /> : s.num}
                 </div>
                 <span
-                  className={`ml-2 text-xs font-medium hidden sm:block ${
-                    step >= s.num ? "text-primary" : "text-muted-foreground"
+                  className={`ml-1.5 text-[10px] font-medium hidden sm:block ${
+                    step >= s.num ? "text-teal-700" : "text-muted-foreground"
                   }`}
                 >
                   {s.label}
                 </span>
                 {i < steps.length - 1 && (
                   <div
-                    className={`w-8 sm:w-12 h-0.5 mx-2 ${
-                      step > s.num ? "bg-primary" : "bg-muted"
+                    className={`w-6 sm:w-10 h-px mx-1.5 ${
+                      step > s.num ? "bg-teal-600" : "bg-muted"
                     }`}
                   />
                 )}
@@ -332,8 +342,8 @@ export const BookingModal = ({
             ))}
           </div>
 
-          {/* Quick Info Bar */}
-          <div className="flex flex-wrap gap-4 mt-4 text-sm">
+          {/* Quick Info Bar — compact */}
+          <div className="flex flex-wrap gap-3 mt-2 text-xs">
             <div className="flex items-center gap-1.5 text-muted-foreground">
               <Clock className="w-4 h-4" />
               <span>{info.duration}</span>
@@ -358,7 +368,7 @@ export const BookingModal = ({
           </div>
         </div>
 
-        <div className="p-6">
+        <div className="p-4">
           {/* What's Included */}
           <div className="mb-6 p-4 bg-muted/50 rounded-xl">
             <h4 className="font-semibold mb-3 flex items-center gap-2">

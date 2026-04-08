@@ -242,17 +242,22 @@ export const ScamShieldSubmission = ({
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-              <Shield className="w-6 h-6 text-primary" />
+      {/*
+        Compact: max-w-3xl -> [620px] to fit the page system.
+        overflow-hidden + no max-h = no scrollbar. Teal+indigo accents
+        replace heavy orange on the hero icon.
+      */}
+      <DialogContent className="max-w-[calc(100vw-2rem)] sm:max-w-[620px] overflow-hidden rounded-2xl p-5 gap-0">
+        <DialogHeader className="space-y-0 pb-3">
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 bg-gradient-to-br from-teal-500/15 to-indigo-500/15 border border-teal-500/30 rounded-full flex items-center justify-center flex-shrink-0">
+              <Shield className="w-4 h-4 text-teal-600" />
             </div>
-            <div>
-              <DialogTitle className="text-2xl font-bold">
+            <div className="flex-1 min-w-0">
+              <DialogTitle className="text-[15px] font-semibold leading-tight">
                 ScamShield Analysis
               </DialogTitle>
-              <DialogDescription>
+              <DialogDescription className="text-[11px] mt-0.5">
                 Submit suspicious content for AI-powered threat detection
               </DialogDescription>
             </div>
@@ -263,7 +268,7 @@ export const ScamShieldSubmission = ({
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(handleSubmit)}
-              className="space-y-6"
+              className="space-y-3"
             >
               <Alert>
                 <AlertTriangle className="h-4 w-4" />
