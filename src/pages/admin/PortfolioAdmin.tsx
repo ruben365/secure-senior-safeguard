@@ -255,7 +255,7 @@ export default function PortfolioAdmin() {
 
       {/* ═══ Edit Modal ═══ */}
       <Dialog open={!!editingProject} onOpenChange={() => setEditingProject(null)}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="sm:max-w-[560px] overflow-hidden p-5 gap-3">
           <DialogHeader>
             <DialogTitle>
               {editingProject?.id ? "Edit Project" : "New Project"}

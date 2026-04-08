@@ -17,7 +17,9 @@ const PopoverContent = React.forwardRef<
       align={align}
       sideOffset={sideOffset}
       className={cn(
-        "z-[100] w-72 rounded-2xl border border-white/30 bg-white/80 dark:bg-card/80 backdrop-blur-2xl p-4 text-popover-foreground shadow-[0_10px_40px_-10px_rgba(0,0,0,0.2)] outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 duration-300",
+        // Compact quick-action menu — tighter width, tighter padding,
+        // refined layered shadow matching the DialogContent system.
+        "z-[100] w-64 rounded-xl border border-border/50 bg-background/95 backdrop-blur-xl p-3 text-popover-foreground shadow-[0_16px_48px_-16px_rgba(15,23,42,0.25),0_4px_12px_-4px_rgba(15,23,42,0.1),inset_0_1px_0_0_rgba(255,255,255,0.55)] outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 duration-200",
         className,
       )}
       style={{

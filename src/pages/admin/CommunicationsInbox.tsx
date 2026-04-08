@@ -278,7 +278,7 @@ export default function CommunicationsInbox() {
                               <Mail className="h-4 w-4" />
                             </Button>
                           </DialogTrigger>
-                          <DialogContent className="max-w-2xl bg-[#111827] border-gray-800">
+                          <DialogContent className="sm:max-w-[560px] bg-[#111827] border-gray-800 p-5 gap-3">
                             <DialogHeader>
                               <DialogTitle className="text-[#F9FAFB]">
                                 Reply to Inquiry

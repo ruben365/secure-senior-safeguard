@@ -208,7 +208,7 @@ export const TestimonialsTable = () => {
         open={!!selectedTestimonial}
         onOpenChange={() => setSelectedTestimonial(null)}
       >
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="sm:max-w-[560px] p-5 gap-3">
           <DialogHeader>
             <DialogTitle>Testimonial Details</DialogTitle>
             <DialogDescription>

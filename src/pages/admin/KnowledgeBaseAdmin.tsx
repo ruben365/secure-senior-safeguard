@@ -81,7 +81,7 @@ export default function KnowledgeBaseAdmin() {
           <DialogTrigger asChild>
             <Button><Plus className="h-4 w-4 mr-2" /> New Article</Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="sm:max-w-[560px] overflow-hidden p-5 gap-3">
             <DialogHeader><DialogTitle>{editing ? "Edit" : "New"} Article</DialogTitle></DialogHeader>
             <div className="space-y-4 mt-4">
               <Input placeholder="Title" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />

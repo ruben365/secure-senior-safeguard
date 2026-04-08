@@ -382,7 +382,7 @@ export function RichTextEditor({
 
       {/* Image Dialog */}
       <Dialog open={imageDialogOpen} onOpenChange={setImageDialogOpen}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="sm:max-w-[520px] p-5 gap-3">
           <DialogHeader>
             <DialogTitle>Insert Image</DialogTitle>
             <DialogDescription>Add an image to your article</DialogDescription>

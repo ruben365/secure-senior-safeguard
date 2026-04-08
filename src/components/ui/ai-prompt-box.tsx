@@ -283,7 +283,7 @@ const ImageViewDialog: React.FC<ImageViewDialogProps> = ({
   if (!imageUrl) return null;
   return (
     <Dialog open={!!imageUrl} onOpenChange={onClose}>
-      <DialogContent className="p-0 border-none bg-transparent shadow-none max-w-[90vw] md:max-w-[800px]">
+      <DialogContent className="p-0 border-none bg-transparent shadow-none max-w-[90vw] md:max-w-[640px] gap-0">
         <DialogTitle className="sr-only">Image Preview</DialogTitle>
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}

@@ -522,7 +522,7 @@ const JobApplicationsList = () => {
         open={!!selectedApplication}
         onOpenChange={() => setSelectedApplication(null)}
       >
-        <DialogContent className="max-w-2xl bg-slate-900 border-slate-700">
+        <DialogContent className="sm:max-w-[560px] bg-slate-900 border-slate-700 p-5 gap-3">
           <DialogHeader>
             <DialogTitle className="text-white">
               Application Details

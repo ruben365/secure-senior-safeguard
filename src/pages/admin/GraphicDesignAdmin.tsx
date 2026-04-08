@@ -231,7 +231,7 @@ const GraphicDesignAdmin = () => {
 
       {/* Edit/Create Dialog */}
       <Dialog open={!!editing} onOpenChange={(open) => !open && setEditing(null)}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="sm:max-w-[560px] overflow-hidden p-5 gap-3">
           <DialogHeader>
             <DialogTitle>
               {editing?.id ? "Edit Project" : "New Project"}

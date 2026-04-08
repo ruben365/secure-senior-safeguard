@@ -394,7 +394,7 @@ const ServiceInquiriesList = () => {
                               <MessageSquare className="h-4 w-4" />
                             </Button>
                           </DialogTrigger>
-                          <DialogContent className="max-w-2xl">
+                          <DialogContent className="sm:max-w-[560px] p-5 gap-3">
                             <DialogHeader>
                               <DialogTitle>
                                 Inquiry Details - {inquiry.inquiry_number}

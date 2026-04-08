@@ -91,11 +91,11 @@ export default function MyTickets() {
           <DialogTrigger asChild>
             <Button><Plus className="h-4 w-4 mr-2" /> New Ticket</Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-lg">
+          <DialogContent className="sm:max-w-[480px] p-5 gap-3">
             <DialogHeader>
               <DialogTitle>Create Support Ticket</DialogTitle>
             </DialogHeader>
-            <div className="space-y-4 mt-4">
+            <div className="space-y-3">
               <Input
                 placeholder="Subject"
                 value={newTicket.subject}

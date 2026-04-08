@@ -32,7 +32,8 @@ const SheetOverlay = React.forwardRef<
 SheetOverlay.displayName = SheetPrimitive.Overlay.displayName;
 
 const sheetVariants = cva(
-  "fixed z-50 gap-4 bg-white/80 dark:bg-card/80 backdrop-blur-2xl border border-white/30 p-6 shadow-xl transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
+  // Compact side panel — tighter padding, refined shadow, aligned with modal system
+  "fixed z-50 gap-3 bg-background/95 backdrop-blur-xl border border-border/50 p-5 shadow-[0_24px_64px_-20px_rgba(15,23,42,0.28),0_8px_24px_-8px_rgba(15,23,42,0.12)] transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
   {
     variants: {
       side: {
