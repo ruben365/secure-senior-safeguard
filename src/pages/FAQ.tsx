@@ -216,29 +216,30 @@ const faqs: FAQEntry[] = [
 ];
 
 // ─── CATEGORY METADATA ──────────────────────────────────────────
+// All accents use the warm brand orange family — refined, not heavy.
 const categoryMeta: Record<
   FAQCategory,
   { icon: typeof Bot; accent: string }
 > = {
   "Getting Started": {
     icon: Sparkles,
-    accent: "from-teal-500 to-indigo-500",
+    accent: "from-[#e07a55] to-[#d05f3a]",
   },
   "AI Business Services": {
     icon: Bot,
-    accent: "from-indigo-500 to-violet-500",
+    accent: "from-[#ea8568] to-[#d96c4a]",
   },
   "Cybersecurity Education": {
     icon: GraduationCap,
-    accent: "from-violet-500 to-purple-500",
+    accent: "from-[#f39372] to-[#e07a55]",
   },
   "AI Insurance & Support": {
     icon: Server,
-    accent: "from-purple-500 to-fuchsia-500",
+    accent: "from-[#fb923c] to-[#ea580c]",
   },
   "Billing & Privacy": {
     icon: Receipt,
-    accent: "from-teal-600 to-cyan-500",
+    accent: "from-[#f97316] to-[#c2410c]",
   },
 };
 
@@ -390,11 +391,11 @@ export default function FAQ() {
           </div>
 
           <div className="container mx-auto px-6 lg:px-8">
-            {/* Section eyebrow + heading — compact */}
+            {/* Section eyebrow + heading — refined warm orange accent */}
             <div className="max-w-3xl mb-8">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/60 backdrop-blur border border-white/70 shadow-sm mb-4">
-                <HelpCircle className="w-3.5 h-3.5 text-teal-600" />
-                <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-slate-700">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50/90 backdrop-blur border border-orange-200 shadow-sm mb-4">
+                <HelpCircle className="w-3.5 h-3.5 text-[#d96c4a]" />
+                <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#b8552f]">
                   Everything you wanted to ask
                 </span>
               </div>
@@ -403,7 +404,7 @@ export default function FAQ() {
                 className="text-[2rem] md:text-[2.5rem] font-extrabold tracking-tight leading-[1.08] text-slate-900 mb-3"
               >
                 Straight answers,{" "}
-                <span className="bg-gradient-to-r from-teal-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#d96c4a] via-[#e07a55] to-[#d05f3a] bg-clip-text text-transparent">
                   no runaround.
                 </span>
               </h2>
@@ -431,7 +432,7 @@ export default function FAQ() {
                       placeholder="Search answers..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-9 pr-9 h-11 text-sm rounded-xl border-slate-200 bg-white/80 focus-visible:border-teal-500 focus-visible:ring-teal-500/20"
+                      className="pl-9 pr-9 h-11 text-sm rounded-xl border-slate-200 bg-white/80 focus-visible:border-[#d96c4a] focus-visible:ring-[#d96c4a]/20"
                     />
                     {searchQuery && (
                       <button
@@ -457,8 +458,8 @@ export default function FAQ() {
                           onClick={() => setActiveCategory(cat)}
                           className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
                             isActive
-                              ? "bg-gradient-to-r from-teal-600 to-indigo-600 text-white shadow-[0_4px_12px_-2px_rgba(13,148,136,0.45)]"
-                              : "bg-white/70 text-slate-700 border border-slate-200 hover:border-teal-400 hover:text-teal-700"
+                              ? "bg-gradient-to-b from-[#e07a55] to-[#d05f3a] text-white border border-[#b8552f] shadow-[0_1px_0_0_rgba(255,255,255,0.18)_inset,0_4px_12px_-2px_rgba(217,108,74,0.45)]"
+                              : "bg-white/70 text-slate-700 border border-slate-200 hover:border-[#d96c4a]/50 hover:text-[#b8552f]"
                           }`}
                         >
                           {cat}
@@ -496,7 +497,7 @@ export default function FAQ() {
                           <AccordionItem
                             key={faq.id}
                             value={faq.id}
-                            className="rounded-2xl bg-white/75 backdrop-blur-xl border border-white/70 shadow-[0_6px_24px_-12px_rgba(15,23,42,0.15)] overflow-hidden data-[state=open]:shadow-[0_16px_40px_-14px_rgba(15,23,42,0.22)] data-[state=open]:border-teal-400/50 transition-all duration-300"
+                            className="rounded-2xl bg-white/80 backdrop-blur-xl border border-white/70 shadow-[0_6px_24px_-12px_rgba(15,23,42,0.15)] overflow-hidden data-[state=open]:shadow-[0_16px_40px_-14px_rgba(217,108,74,0.28)] data-[state=open]:border-[#d96c4a]/45 data-[state=open]:bg-gradient-to-br data-[state=open]:from-white/90 data-[state=open]:to-orange-50/70 transition-all duration-300"
                           >
                             <AccordionTrigger className="px-4 py-3 hover:no-underline group">
                               <div className="flex items-center gap-3 flex-1 text-left min-w-0">
@@ -577,12 +578,12 @@ export default function FAQ() {
                     {/* Per-card accent glow */}
                     <div
                       aria-hidden="true"
-                      className="absolute -top-16 -right-16 w-44 h-44 rounded-full bg-teal-500/25 blur-3xl pointer-events-none"
+                      className="absolute -top-16 -right-16 w-44 h-44 rounded-full bg-[#d96c4a]/20 blur-3xl pointer-events-none"
                     />
 
                     <div className="relative">
                       <div className="flex items-center gap-2 mb-1">
-                        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-teal-500 to-indigo-600 flex items-center justify-center shadow-[0_6px_16px_-4px_rgba(13,148,136,0.5),inset_0_1px_0_0_rgba(255,255,255,0.4)] border border-white/40">
+                        <div className="w-8 h-8 rounded-xl bg-gradient-to-b from-[#e07a55] to-[#d05f3a] border border-[#b8552f] flex items-center justify-center shadow-[0_6px_16px_-4px_rgba(217,108,74,0.5),inset_0_1px_0_0_rgba(255,255,255,0.35)]">
                           <Sparkles className="w-4 h-4 text-white" strokeWidth={2} />
                         </div>
                         <h3 className="text-base font-bold text-slate-900 leading-none">
@@ -599,7 +600,7 @@ export default function FAQ() {
                           value={askName}
                           onChange={(e) => setAskName(e.target.value)}
                           placeholder="Your name"
-                          className="h-9 text-sm rounded-lg border-slate-200 bg-white/80 focus-visible:border-teal-500 focus-visible:ring-teal-500/20"
+                          className="h-9 text-sm rounded-lg border-slate-200 bg-white/90 focus-visible:border-[#d96c4a] focus-visible:ring-[#d96c4a]/20"
                           required
                         />
                         <Input
@@ -607,7 +608,7 @@ export default function FAQ() {
                           onChange={(e) => setAskEmail(e.target.value)}
                           type="email"
                           placeholder="Email address"
-                          className="h-9 text-sm rounded-lg border-slate-200 bg-white/80 focus-visible:border-teal-500 focus-visible:ring-teal-500/20"
+                          className="h-9 text-sm rounded-lg border-slate-200 bg-white/90 focus-visible:border-[#d96c4a] focus-visible:ring-[#d96c4a]/20"
                           required
                         />
                         <Textarea
@@ -615,7 +616,7 @@ export default function FAQ() {
                           onChange={(e) => setAskQuestion(e.target.value)}
                           placeholder="What's your question?"
                           rows={4}
-                          className="text-sm rounded-lg border-slate-200 bg-white/80 focus-visible:border-teal-500 focus-visible:ring-teal-500/20 resize-none leading-snug"
+                          className="text-sm rounded-lg border-slate-200 bg-white/90 focus-visible:border-[#d96c4a] focus-visible:ring-[#d96c4a]/20 resize-none leading-snug"
                           required
                         />
                       </div>
@@ -623,7 +624,7 @@ export default function FAQ() {
                       <Button
                         type="submit"
                         disabled={submitting}
-                        className="w-full mt-3 h-10 text-sm rounded-xl bg-gradient-to-r from-teal-600 via-indigo-600 to-violet-600 hover:from-teal-700 hover:via-indigo-700 hover:to-violet-700 text-white border-0 shadow-[0_8px_24px_-6px_rgba(13,148,136,0.5),inset_0_1px_0_0_rgba(255,255,255,0.25)]"
+                        className="w-full mt-3 h-10 text-sm rounded-xl text-white border border-[#b8552f] bg-gradient-to-b from-[#e07a55] to-[#d05f3a] hover:from-[#e88560] hover:to-[#d96847] shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_8px_20px_-6px_rgba(217,108,74,0.5)]"
                       >
                         {submitting ? (
                           <>Sending...</>
@@ -636,33 +637,33 @@ export default function FAQ() {
                       </Button>
 
                       <div className="mt-3 pt-3 border-t border-slate-200/70 flex items-center gap-1.5 text-[10px] text-slate-500">
-                        <CheckCircle2 className="w-3 h-3 text-teal-600" />
+                        <CheckCircle2 className="w-3 h-3 text-[#d96c4a]" />
                         <span>No spam, no newsletters — just an answer.</span>
                       </div>
                     </div>
                   </form>
 
-                  {/* Contact fallback card */}
-                  <div className="rounded-2xl bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 p-5 shadow-[0_20px_50px_-20px_rgba(15,23,42,0.5)] border border-white/10 overflow-hidden relative">
+                  {/* Contact fallback card — warm cream with orange accents */}
+                  <div className="rounded-2xl bg-gradient-to-br from-[#fff9f4] via-[#fff2e8] to-[#fff9f4] p-5 shadow-[0_18px_44px_-18px_rgba(217,108,74,0.35),0_2px_8px_-2px_rgba(217,108,74,0.15)] border border-[#d96c4a]/25 overflow-hidden relative">
                     <div
                       aria-hidden="true"
-                      className="absolute -top-16 -right-16 w-40 h-40 rounded-full bg-violet-500/30 blur-3xl pointer-events-none"
+                      className="absolute -top-16 -right-16 w-40 h-40 rounded-full bg-[#d96c4a]/25 blur-3xl pointer-events-none"
                     />
                     <div className="relative">
-                      <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-violet-300 mb-2">
+                      <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#b8552f] mb-2">
                         Prefer to talk?
                       </div>
-                      <h4 className="text-base font-bold text-white mb-3 leading-tight">
+                      <h4 className="text-base font-bold text-slate-900 mb-3 leading-tight">
                         We answer the phone.
                       </h4>
 
                       <div className="space-y-2">
                         <a
                           href={SITE.phone.tel}
-                          className="flex items-center gap-2.5 text-sm text-white hover:text-teal-300 transition-colors group"
+                          className="flex items-center gap-2.5 text-sm text-slate-800 hover:text-[#b8552f] transition-colors group"
                         >
-                          <div className="w-8 h-8 rounded-lg bg-white/10 border border-white/15 flex items-center justify-center flex-shrink-0 group-hover:bg-teal-500/20 group-hover:border-teal-400/40 transition-colors">
-                            <Phone className="w-3.5 h-3.5" />
+                          <div className="w-8 h-8 rounded-lg bg-white border border-[#d96c4a]/25 flex items-center justify-center flex-shrink-0 group-hover:bg-[#d96c4a]/10 group-hover:border-[#d96c4a]/45 transition-colors">
+                            <Phone className="w-3.5 h-3.5 text-[#d96c4a]" />
                           </div>
                           <span className="font-semibold whitespace-nowrap">
                             {SITE.phone.display.replace(" ", "\u00A0")}
@@ -670,10 +671,10 @@ export default function FAQ() {
                         </a>
                         <a
                           href={`mailto:${SITE.emails.support}`}
-                          className="flex items-center gap-2.5 text-sm text-white hover:text-teal-300 transition-colors group"
+                          className="flex items-center gap-2.5 text-sm text-slate-800 hover:text-[#b8552f] transition-colors group"
                         >
-                          <div className="w-8 h-8 rounded-lg bg-white/10 border border-white/15 flex items-center justify-center flex-shrink-0 group-hover:bg-teal-500/20 group-hover:border-teal-400/40 transition-colors">
-                            <Mail className="w-3.5 h-3.5" />
+                          <div className="w-8 h-8 rounded-lg bg-white border border-[#d96c4a]/25 flex items-center justify-center flex-shrink-0 group-hover:bg-[#d96c4a]/10 group-hover:border-[#d96c4a]/45 transition-colors">
+                            <Mail className="w-3.5 h-3.5 text-[#d96c4a]" />
                           </div>
                           <span className="font-semibold truncate">
                             {SITE.emails.support}
@@ -685,7 +686,7 @@ export default function FAQ() {
                         asChild
                         size="sm"
                         variant="outline"
-                        className="mt-4 w-full h-9 text-xs rounded-lg bg-white/5 border-white/20 text-white hover:bg-white/10 hover:border-white/30"
+                        className="mt-4 w-full h-9 text-xs rounded-lg bg-white border-[#d96c4a]/30 text-[#b8552f] hover:bg-[#d96c4a]/5 hover:border-[#d96c4a]/50"
                       >
                         <Link to="/contact">
                           Full contact page

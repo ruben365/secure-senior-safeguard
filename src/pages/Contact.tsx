@@ -50,7 +50,6 @@ import { contactFormSchema, formatPhoneNumber } from "@/utils/formValidation";
 import { z } from "zod";
 import { useConfetti } from "@/hooks/useConfetti";
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
-import supportAgentPhoto from "@/assets/support-agent.jpg";
 import heroContactBranded from "@/assets/hero-contact-branded.jpg";
 import { SITE } from "@/config/site";
 import { SectionDivider, MeshBackground } from "@/components/pro";
@@ -260,27 +259,47 @@ function Contact() {
             })}
           </div>
 
-          {/* Main Contact Form Section */}
+          {/* Main Contact Form Section — premium redesign */}
           <div className="grid lg:grid-cols-5 gap-8 max-w-7xl mx-auto">
-            {/* Premium Contact Form - 60% */}
-            <div className="lg:col-span-3">
-              <div className="relative bg-card/70 backdrop-blur-xl border border-border/40 rounded-2xl shadow-sm overflow-hidden">
-                {/* Top gradient accent */}
-                <div className="h-1.5 bg-gradient-to-r from-primary via-accent to-primary" />
+            {/*
+              Contact form — upgraded to premium business treatment:
+                • Warm orange glow ring behind the card
+                • Layered 5-level drop shadow stack
+                • Orange accent bar at the top (replaces old
+                  primary/accent/primary gradient strip)
+                • Stronger heading hierarchy + spacing
+                • Refined badge and card border radius
+            */}
+            <div className="lg:col-span-3 relative">
+              {/* Soft warm glow ring behind the card */}
+              <div
+                aria-hidden="true"
+                className="absolute -inset-3 rounded-[28px] bg-gradient-to-br from-orange-500/15 via-transparent to-amber-500/10 blur-2xl pointer-events-none"
+              />
+
+              <div className="relative bg-white border border-orange-200/50 rounded-[20px] overflow-hidden shadow-[0_1px_0_0_rgba(255,255,255,0.9)_inset,0_2px_4px_-1px_rgba(15,23,42,0.06),0_12px_28px_-8px_rgba(15,23,42,0.14),0_32px_64px_-20px_rgba(217,108,74,0.25),0_48px_96px_-24px_rgba(15,23,42,0.18)]">
+                {/* Crisp warm orange accent strip at top */}
+                <div className="h-1 bg-gradient-to-r from-transparent via-[#d96c4a] to-transparent" />
 
                 <div className="p-8 md:p-10">
-                  <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-start justify-between gap-4 mb-7">
                     <div>
-                      <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
-                        Send Us a Message
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 mb-3">
+                        <MessageCircle className="w-3.5 h-3.5 text-[#d96c4a]" />
+                        <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#b8552f]">
+                          Send a message
+                        </span>
+                      </div>
+                      <h2 className="text-2xl md:text-3xl font-bold text-slate-900 leading-tight tracking-tight">
+                        How can we help?
                       </h2>
-                      <p className="text-muted-foreground mt-2">
-                        We'll respond within 4 hours during business hours
+                      <p className="text-sm text-slate-500 mt-1.5">
+                        We reply within 4 business hours.
                       </p>
                     </div>
                     <Badge
                       variant="outline"
-                      className="gap-1.5 px-3 py-1.5 bg-success/10 border-success/30 text-success"
+                      className="gap-1.5 px-3 py-1.5 bg-emerald-50 border-emerald-200 text-emerald-700 flex-shrink-0"
                     >
                       <Shield className="w-3.5 h-3.5" />
                       Secure
@@ -308,14 +327,14 @@ function Contact() {
                           name="fullName"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm font-semibold">
-                                Full Name <span className="text-primary">*</span>
+                              <FormLabel className="text-[11px] font-bold uppercase tracking-[0.1em] text-slate-600">
+                                Full Name <span className="text-[#d96c4a]">*</span>
                               </FormLabel>
                               <FormControl>
                                 <Input
                                   {...field}
                                   placeholder="Enter your full name"
-                                  className="h-12 bg-background/50 border-border/50 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 pl-4"
+                                  className="h-12 bg-slate-50/70 border-slate-200/90 rounded-xl text-slate-900 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-[#d96c4a]/60 focus:ring-4 focus:ring-[#d96c4a]/10 transition-all duration-200"
                                 />
                               </FormControl>
                               <FormMessage />
@@ -330,15 +349,15 @@ function Contact() {
                             name="email"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel className="text-sm font-semibold">
-                                  Email <span className="text-primary">*</span>
+                                <FormLabel className="text-[11px] font-bold uppercase tracking-[0.1em] text-slate-600">
+                                  Email <span className="text-[#d96c4a]">*</span>
                                 </FormLabel>
                                 <FormControl>
                                   <Input
                                     {...field}
                                     type="email"
                                     placeholder="your@email.com"
-                                    className="h-12 bg-background/50 border-border/50 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
+                                    className="h-12 bg-slate-50/70 border-slate-200/90 rounded-xl text-slate-900 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-[#d96c4a]/60 focus:ring-4 focus:ring-[#d96c4a]/10 transition-all duration-200"
                                   />
                                 </FormControl>
                                 <FormMessage />
@@ -350,7 +369,7 @@ function Contact() {
                             name="phone"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel className="text-sm font-semibold">
+                                <FormLabel className="text-[11px] font-bold uppercase tracking-[0.1em] text-slate-600">
                                   Phone{" "}
                                   <span className="text-muted-foreground text-xs">
                                     (optional)
@@ -361,7 +380,7 @@ function Contact() {
                                     {...field}
                                     type="tel"
                                     placeholder="(937) 000-0000"
-                                    className="h-12 bg-background/50 border-border/50 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
+                                    className="h-12 bg-slate-50/70 border-slate-200/90 rounded-xl text-slate-900 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-[#d96c4a]/60 focus:ring-4 focus:ring-[#d96c4a]/10 transition-all duration-200"
                                   />
                                 </FormControl>
                                 <FormMessage />
@@ -376,15 +395,15 @@ function Contact() {
                           name="subject"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm font-semibold">
-                                Subject <span className="text-primary">*</span>
+                              <FormLabel className="text-[11px] font-bold uppercase tracking-[0.1em] text-slate-600">
+                                Subject <span className="text-[#d96c4a]">*</span>
                               </FormLabel>
                               <Select
                                 value={field.value}
                                 onValueChange={field.onChange}
                               >
                                 <FormControl>
-                                  <SelectTrigger className="h-12 bg-background/50 border-border/50 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300">
+                                  <SelectTrigger className="h-12 bg-slate-50/70 border-slate-200/90 rounded-xl text-slate-900 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-[#d96c4a]/60 focus:ring-4 focus:ring-[#d96c4a]/10 transition-all duration-200">
                                     <SelectValue placeholder="What can we help you with?" />
                                   </SelectTrigger>
                                 </FormControl>
@@ -415,8 +434,8 @@ function Contact() {
                           name="message"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm font-semibold">
-                                Message <span className="text-primary">*</span>
+                              <FormLabel className="text-[11px] font-bold uppercase tracking-[0.1em] text-slate-600">
+                                Message <span className="text-[#d96c4a]">*</span>
                               </FormLabel>
                               <FormControl>
                                 <Textarea
@@ -424,7 +443,7 @@ function Contact() {
                                   placeholder="Tell us how we can help you..."
                                   rows={5}
                                   maxLength={maxLength}
-                                  className="bg-background/50 border-border/50 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 resize-none"
+                                  className="bg-slate-50/70 border-slate-200/90 rounded-xl text-slate-900 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-[#d96c4a]/60 focus:ring-4 focus:ring-[#d96c4a]/10 transition-all duration-200 resize-none"
                                 />
                               </FormControl>
                               <div className="flex justify-between items-center mt-2">
@@ -459,7 +478,7 @@ function Contact() {
                           name="hearAbout"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm font-semibold">
+                              <FormLabel className="text-[11px] font-bold uppercase tracking-[0.1em] text-slate-600">
                                 How did you hear about us?
                               </FormLabel>
                               <Select
@@ -467,7 +486,7 @@ function Contact() {
                                 onValueChange={field.onChange}
                               >
                                 <FormControl>
-                                  <SelectTrigger className="h-12 bg-background/50 border-border/50 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300">
+                                  <SelectTrigger className="h-12 bg-slate-50/70 border-slate-200/90 rounded-xl text-slate-900 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-[#d96c4a]/60 focus:ring-4 focus:ring-[#d96c4a]/10 transition-all duration-200">
                                     <SelectValue placeholder="Select an option" />
                                   </SelectTrigger>
                                 </FormControl>
@@ -494,9 +513,9 @@ function Contact() {
                           name="contactMethod"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-sm font-semibold">
+                              <FormLabel className="text-[11px] font-bold uppercase tracking-[0.1em] text-slate-600">
                                 Preferred Contact Method{" "}
-                                <span className="text-primary">*</span>
+                                <span className="text-[#d96c4a]">*</span>
                               </FormLabel>
                               <FormControl>
                                 <RadioGroup
@@ -505,34 +524,34 @@ function Contact() {
                                   className="flex gap-4"
                                 >
                                   <div
-                                    className={`flex-1 flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
+                                    className={`flex-1 flex items-center gap-3 p-4 rounded-xl border cursor-pointer transition-all duration-200 ${
                                       field.value === "email"
-                                        ? "border-primary bg-primary/5"
-                                        : "border-border/50 hover:border-primary/50"
+                                        ? "border-[#d96c4a] bg-orange-50/70 shadow-[0_0_0_3px_rgba(217,108,74,0.08)]"
+                                        : "border-slate-200/90 bg-slate-50/50 hover:border-[#d96c4a]/50 hover:bg-white"
                                     }`}
                                   >
                                     <RadioGroupItem value="email" id="contact-email" />
                                     <Label
                                       htmlFor="contact-email"
-                                      className="cursor-pointer flex items-center gap-2"
+                                      className="cursor-pointer flex items-center gap-2 text-sm font-medium"
                                     >
-                                      <Mail className="w-4 h-4" />
+                                      <Mail className={`w-4 h-4 ${field.value === "email" ? "text-[#d96c4a]" : "text-slate-500"}`} />
                                       Email
                                     </Label>
                                   </div>
                                   <div
-                                    className={`flex-1 flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
+                                    className={`flex-1 flex items-center gap-3 p-4 rounded-xl border cursor-pointer transition-all duration-200 ${
                                       field.value === "phone"
-                                        ? "border-primary bg-primary/5"
-                                        : "border-border/50 hover:border-primary/50"
+                                        ? "border-[#d96c4a] bg-orange-50/70 shadow-[0_0_0_3px_rgba(217,108,74,0.08)]"
+                                        : "border-slate-200/90 bg-slate-50/50 hover:border-[#d96c4a]/50 hover:bg-white"
                                     }`}
                                   >
                                     <RadioGroupItem value="phone" id="contact-phone" />
                                     <Label
                                       htmlFor="contact-phone"
-                                      className="cursor-pointer flex items-center gap-2"
+                                      className="cursor-pointer flex items-center gap-2 text-sm font-medium"
                                     >
-                                      <Phone className="w-4 h-4" />
+                                      <Phone className={`w-4 h-4 ${field.value === "phone" ? "text-[#d96c4a]" : "text-slate-500"}`} />
                                       Phone
                                     </Label>
                                   </div>
@@ -543,12 +562,11 @@ function Contact() {
                           )}
                         />
 
-                        {/* Submit Button */}
+                        {/* Submit Button — strong brand orange */}
                         <Button
                           type="submit"
-                          className="w-full h-14 text-lg"
-                          size="lg"
                           disabled={isSubmitting}
+                          className="w-full h-14 text-[15px] font-semibold rounded-xl text-white bg-gradient-to-b from-[#e07a55] to-[#d05f3a] border border-[#b8552f] shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_8px_20px_-6px_rgba(217,108,74,0.5),0_16px_32px_-12px_rgba(217,108,74,0.35)] hover:from-[#e88560] hover:to-[#d96847] hover:-translate-y-[1px] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.25)_inset,0_12px_28px_-6px_rgba(217,108,74,0.6),0_20px_40px_-12px_rgba(217,108,74,0.4)] active:translate-y-[0.5px] transition-all duration-200"
                         >
                           {isSubmitting ? (
                             <>
@@ -564,8 +582,8 @@ function Contact() {
                         </Button>
 
                         {/* Security note */}
-                        <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground bg-muted/30 rounded-lg p-3">
-                          <Shield className="w-4 h-4 text-success" />
+                        <div className="flex items-center justify-center gap-2 text-xs text-slate-500 bg-slate-50/80 border border-slate-200/70 rounded-lg px-3 py-2.5">
+                          <Shield className="w-3.5 h-3.5 text-emerald-600" />
                           Your message is encrypted and secure. We never share
                           your information.
                         </div>
@@ -608,7 +626,13 @@ function Contact() {
                 </div>
               </div>
 
-              {/* Office Location with Premium Styling */}
+              {/*
+                Service Area card — replaces the old "Visit Our Office"
+                block that had a fake street address, a Map Preview
+                placeholder, and a "Meet Your Support Team" section.
+                Shows the real region (Kettering + Dayton) without
+                publishing a personal address.
+              */}
               <div className="relative bg-card/90 backdrop-blur-md rounded-2xl border border-border/30 shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-500">
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary" />
                 <div className="p-6">
@@ -616,99 +640,17 @@ function Contact() {
                     <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
                       <MapPin className="w-5 h-5 text-primary" />
                     </div>
-                    Visit Our Office
+                    Service Area
                   </h3>
-                  <div className="p-4 rounded-xl bg-muted/30 border border-border/30 mb-4">
+                  <div className="p-4 rounded-xl bg-gradient-to-br from-orange-50/70 to-transparent border border-orange-200/50 mb-4">
                     <p className="text-sm font-semibold text-foreground mb-1">
-                      InVision Network HQ
+                      {SITE.location.city}, {SITE.location.region}
                     </p>
-                    <p className="text-sm text-muted-foreground">
-                      123 Tech Boulevard
-                      <br />
-                      Dayton, OH 45402
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Based in the {SITE.location.areaLabel}. We work
+                      remotely across Ohio and in person around Kettering
+                      and Dayton.
                     </p>
-                  </div>
-                  <div className="bg-gradient-to-br from-muted/50 to-muted/20 rounded-xl h-40 flex items-center justify-center text-muted-foreground text-sm mb-4 border border-border/30">
-                    <div className="text-center">
-                      <MapPin className="w-8 h-8 mx-auto mb-2 opacity-50" />
-                      Map Preview
-                    </div>
-                  </div>
-                  <Button
-                    variant="outline"
-                    className="w-full"
-                    size="sm"
-                    asChild
-                  >
-                    <a href="https://maps.google.com/?q=123+Tech+Boulevard+Dayton+OH+45402" target="_blank" rel="noopener noreferrer">
-                      Get Directions
-                    </a>
-                  </Button>
-                </div>
-              </div>
-
-              {/* Support Team with Photo */}
-              <div className="relative bg-card/90 backdrop-blur-md rounded-2xl border border-border/30 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500">
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent via-primary to-accent" />
-                <div className="p-6">
-                  <h3 className="text-lg font-bold mb-1">
-                    Meet Your Support Team
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Real people ready to help
-                  </p>
-
-                  {/* Team Photo */}
-                  <div className="relative rounded-xl overflow-hidden mb-4 group">
-                    <img
-                      src={supportAgentPhoto}
-                      alt="Our friendly support team member"
-                      className="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
-                      width={600}
-                      height={160}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent" />
-                    <div className="absolute bottom-2 left-3 text-white">
-                      <span className="text-xs bg-success/80 px-2 py-0.5 rounded-full">
-                        ● Online Now
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    {[
-                      {
-                        initials: "RN",
-                        name: "Ruben N.",
-                        role: "Support Lead",
-                        avatarClass: "bg-gradient-to-br from-primary/20 to-primary/5 text-primary",
-                      },
-                      {
-                        initials: "CM",
-                        name: "Corine M.",
-                        role: "Customer Care",
-                        avatarClass: "bg-gradient-to-br from-accent/20 to-accent/5 text-accent",
-                      },
-                    ].map((member, i) => (
-                      <div
-                        key={i}
-                        className="flex items-center gap-3 p-3 rounded-xl bg-muted/30 border border-border/30 hover:border-primary/30 hover:bg-muted/50 transition-all duration-300 cursor-pointer group"
-                      >
-                        <div
-                          className={`w-12 h-12 rounded-xl flex items-center justify-center font-bold group-hover:scale-110 transition-transform duration-300 ${member.avatarClass}`}
-                        >
-                          {member.initials}
-                        </div>
-                        <div>
-                          <p className="text-sm font-semibold">{member.name}</p>
-                          <p className="text-xs text-muted-foreground">
-                            {member.role}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
                   </div>
                 </div>
               </div>
