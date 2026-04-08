@@ -1,421 +1,323 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
-import TrustBar from "@/components/TrustBar";
 import { SEO } from "@/components/SEO";
 import { PageTransition } from "@/components/PageTransition";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import {
-  Search,
-  ThumbsUp,
-  ThumbsDown,
-  Phone,
-  MessageCircle,
-  Shield,
-  BookOpen,
-} from "lucide-react";
-import { Sparkles } from "lucide-react";
-import { PlatformGuide } from "@/components/PlatformGuide";
-import { AIImageDisclaimer } from "@/components/AIImageDisclaimer";
-import { SITE } from "@/config/site";
-
-import { toast } from "sonner";
-import { Link } from "react-router-dom";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  Search,
+  Phone,
+  Mail,
+  Send,
+  HelpCircle,
+  Bot,
+  GraduationCap,
+  Shield,
+  Receipt,
+  Server,
+  Sparkles,
+  CheckCircle2,
+  ArrowRight,
+  X,
+} from "lucide-react";
+import { toast } from "sonner";
+import { Link } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
-import { SectionDivider, MeshBackground } from "@/components/pro";
+import { SITE } from "@/config/site";
 
-interface FAQ {
+// ─── TYPES ──────────────────────────────────────────────────────
+type FAQCategory =
+  | "Getting Started"
+  | "AI Business Services"
+  | "Cybersecurity Education"
+  | "AI Insurance & Support"
+  | "Billing & Privacy";
+
+interface FAQEntry {
   id: string;
+  category: FAQCategory;
   question: string;
   answer: string;
-  category: string;
 }
 
-const faqs: FAQ[] = [
+// ─── CONTENT (revised to match current project scope) ──────────
+// Removed outdated Family Shield / access-link language.
+// Aligned with the three core services: AI Business, Education,
+// AI Insurance. Kept billing + privacy as a compact fifth bucket.
+const faqs: FAQEntry[] = [
+  // ══════════════════════════════════════════════════════════
   // Getting Started
+  // ══════════════════════════════════════════════════════════
   {
     id: "gs-1",
     category: "Getting Started",
-    question: "How do I get started with InVision Network?",
+    question: "What does InVision Network actually do?",
     answer:
-      "Choose your plan, complete a quick signup, and you'll receive your secure access link via email within minutes. No downloads or installations required.",
+      "We do three things, all for real non-technical people and small local businesses. We build AI tools like AI receptionists and automation for small shops. We run cybersecurity education and hands-on workshops for seniors and families. And we sell AI Insurance plans — ongoing support subscriptions that keep your AI tools running, updated, and monitored.",
   },
   {
     id: "gs-2",
     category: "Getting Started",
-    question: "Do I need technical skills to use your services?",
+    question: "Where are you based and who do you serve?",
     answer:
-      "Not at all! Our platform is designed for everyone, including those who aren't tech-savvy. Every paid plan includes onboarding sessions and 24/7 support to help you get started.",
+      "We're based in Kettering, Ohio and we primarily serve the greater Dayton region. That said, most of our services — training sessions, AI deployments, and monitoring — are delivered online, so we work with families and businesses across the country.",
   },
   {
     id: "gs-3",
     category: "Getting Started",
-    question: "What happens after I sign up?",
+    question: "Do I need technical skills to work with you?",
     answer:
-      "Within minutes, you'll receive a welcome email with your secure access link. Click it to access your personalized dashboard. We'll also send you a getting started guide and schedule your included 15-minute onboarding call (bundled with every paid plan).",
+      "Not at all. Everything we build is designed for people who don't think of themselves as tech people. Every engagement includes onboarding, plain-English documentation, and a real human you can call when something doesn't make sense.",
   },
   {
     id: "gs-4",
     category: "Getting Started",
-    question: "Can I try it before I buy?",
+    question: "How long does it take to get started?",
     answer:
-      "We do not offer free trials. Every plan is paid up front, but every paid plan includes a 7-day money-back guarantee — if you're not satisfied within the first week, request a full refund through your account portal and we'll process it within 5 business days.",
+      "Most new clients have a first conversation within 24 hours. From there: education workshops can usually be booked within a week, AI tool deployments typically go live in 2–7 business days, and AI Insurance plans activate the same day you sign up.",
   },
 
-  // Family Shield
-  {
-    id: "fs-1",
-    category: "Family Shield",
-    question: "What is Family Shield?",
-    answer:
-      "Family Shield is our AI scam protection service that helps families identify and avoid sophisticated AI-powered scams like deepfake calls, fake texts, and phishing attempts.",
-  },
-  {
-    id: "fs-2",
-    category: "Family Shield",
-    question: "How does the access link system work?",
-    answer:
-      "Instead of creating a password, you receive a unique secure link via email. Click the link anytime to access your personalized protection portal. Your link never expires as long as your subscription is active.",
-  },
-  {
-    id: "fs-3",
-    category: "Family Shield",
-    question: "Can I share my access link with family members?",
-    answer:
-      "Your access link is for your household. While multiple people can use it, each person's activity is logged for security. For separate accounts with individual tracking, consider our Family Plan.",
-  },
-  {
-    id: "fs-4",
-    category: "Family Shield",
-    question: "What happens if I lose my access link?",
-    answer: `Simply email us at ${SITE.emails.support} and we'll resend your link immediately. You can also request a new link from your original confirmation email.`,
-  },
-  {
-    id: "fs-5",
-    category: "Family Shield",
-    question: "How do I submit a suspicious message or call?",
-    answer:
-      "Log into your portal using your access link, click 'Submit Suspicious Item,' and upload the message, voicemail, or screenshot. Our AI analyzes it within minutes and sends you a detailed report.",
-  },
-  {
-    id: "fs-6",
-    category: "Family Shield",
-    question: "What's the difference between plans?",
-    answer:
-      "• Starter ($39/mo): Basic protection, submit items, monthly alerts\n• Family ($79/mo): Everything in Starter + family vault, video training\n• Premium ($129/mo): Everything + 24/7 support, personal consultations\n• Custom ($229+/mo): Tailored to your specific needs",
-  },
-
-  // Business Services
-  {
-    id: "bs-1",
-    category: "Business Services",
-    question: "What is an AI Receptionist?",
-    answer:
-      "Our AI Receptionist answers calls 24/7, books appointments, transfers calls, and handles common questions - all while sounding completely natural. It never sleeps, never takes breaks, and costs less than hiring staff.",
-  },
-  {
-    id: "bs-2",
-    category: "Business Services",
-    question: "How long does setup take?",
-    answer:
-      "Most clients are up and running within 48-72 hours. We handle everything: system configuration, voice training, script development, and testing.",
-  },
-  {
-    id: "bs-3",
-    category: "Business Services",
-    question: "Can the AI Receptionist handle multiple calls at once?",
-    answer:
-      "Yes! Unlike human staff, our AI can handle unlimited simultaneous calls. No more busy signals or missed opportunities.",
-  },
-  {
-    id: "bs-4",
-    category: "Business Services",
-    question: "What if a caller needs a real person?",
-    answer:
-      "The AI seamlessly transfers to your team when needed. You can set custom rules for when to transfer (complex questions, VIP callers, emergencies).",
-  },
-  {
-    id: "bs-5",
-    category: "Business Services",
-    question: "How much does an AI Receptionist cost?",
-    answer:
-      "Setup: $9,500 one-time. Monthly: starting at $299/month. Includes unlimited calls, 24/7 operation, ongoing updates, and support.",
-  },
-
-  // AI Insurance
+  // ══════════════════════════════════════════════════════════
+  // AI Business Services
+  // ══════════════════════════════════════════════════════════
   {
     id: "ai-1",
-    category: "AI Insurance",
-    question: "What does AI Insurance cover?",
+    category: "AI Business Services",
+    question: "What's included in your AI Business Services?",
     answer:
-      "We monitor, maintain, and protect your AI systems (chatbots, automation, customer service AI). We handle updates, security patches, performance monitoring, and instant issue resolution.",
+      "AI receptionists that answer calls and book appointments 24/7, workflow automation for billing and scheduling, customer engagement tools (review requests, follow-ups, reminders), and custom AI builds tailored to your specific business.",
   },
   {
     id: "ai-2",
-    category: "AI Insurance",
-    question: "I already have AI. Can you insure it?",
+    category: "AI Business Services",
+    question: "Will the AI receptionist sound natural to my customers?",
     answer:
-      "Yes! We're vendor-agnostic. Whether you built it in-house, use ChatGPT, or bought from another provider, we can protect it.",
+      "Yes. It's voice-tuned to sound warm and natural, uses your scripts, handles interruptions gracefully, and knows when to escalate to a real person on your team. Most callers don't realize it's AI until we tell them.",
   },
   {
     id: "ai-3",
-    category: "AI Insurance",
-    question: "What's included in monitoring?",
+    category: "AI Business Services",
+    question: "Can your AI handle multiple calls at once?",
     answer:
-      "24/7 uptime monitoring, performance tracking, security scans, automatic updates, error alerts, and monthly health reports.",
+      "Unlike human staff, our AI can handle unlimited simultaneous calls — so you never miss a customer during peak hours, evenings, or weekends.",
   },
   {
     id: "ai-4",
-    category: "AI Insurance",
-    question: "How fast do you respond to issues?",
+    category: "AI Business Services",
+    question: "I already use ChatGPT. Do you work with existing AI tools?",
     answer:
-      "Critical issues: within 15 minutes. Non-critical: within 4 hours. We proactively catch 95% of issues before they affect your users.",
+      "Yes, we're vendor-agnostic. Whether you built something in-house, use ChatGPT or Claude, or bought from another provider, we can integrate with it, monitor it, and layer automation on top.",
   },
 
-  // Billing & Pricing
+  // ══════════════════════════════════════════════════════════
+  // Cybersecurity Education
+  // ══════════════════════════════════════════════════════════
+  {
+    id: "edu-1",
+    category: "Cybersecurity Education",
+    question: "Who are your workshops designed for?",
+    answer:
+      "Seniors, families, non-technical professionals, and small teams. No jargon, no assumptions. Every session is trauma-informed — many of our attendees have already been targeted by a scam, and we treat them with the patience that deserves.",
+  },
+  {
+    id: "edu-2",
+    category: "Cybersecurity Education",
+    question: "What topics do you cover?",
+    answer:
+      "Deepfake and voice-clone detection, AI-powered phishing, password and identity protection, safe online banking, romance and grief scams, Medicare and tax scams, and how to help an older relative without taking away their independence.",
+  },
+  {
+    id: "edu-3",
+    category: "Cybersecurity Education",
+    question: "Do you offer in-person workshops?",
+    answer:
+      "Yes. We run in-person workshops throughout the Dayton and Columbus areas at senior centers, churches, community centers, and small businesses. Outside that region we offer live online workshops that stay highly interactive.",
+  },
+  {
+    id: "edu-4",
+    category: "Cybersecurity Education",
+    question: "Can I book a private session for my family or team?",
+    answer:
+      "Absolutely. Private 1-on-1 or small-group sessions are available at a flat rate — great for families who want to walk a parent through their phone, or small businesses that want their whole team trained in one sitting.",
+  },
+
+  // ══════════════════════════════════════════════════════════
+  // AI Insurance & Support
+  // ══════════════════════════════════════════════════════════
+  {
+    id: "ins-1",
+    category: "AI Insurance & Support",
+    question: "What is an 'AI Insurance' plan?",
+    answer:
+      "It's a monthly subscription that keeps the AI tools we built for you running smoothly. We handle updates, security patches, performance monitoring, and respond when something breaks — so you never have to worry about your AI suddenly stopping working at the worst possible moment.",
+  },
+  {
+    id: "ins-2",
+    category: "AI Insurance & Support",
+    question: "How fast do you respond when something goes wrong?",
+    answer:
+      "Critical issues (tool down, customer-facing outage): within 15 minutes, day or night. Non-critical issues: within 4 business hours. We also proactively catch about 95% of problems via monitoring before you ever notice them.",
+  },
+  {
+    id: "ins-3",
+    category: "AI Insurance & Support",
+    question: "Can I reach a real person?",
+    answer: `Yes — that's the whole point. You can email ${SITE.emails.support}, call ${SITE.phone.display}, or submit a ticket from your portal. Our support team is based in Kettering, not offshore.`,
+  },
+  {
+    id: "ins-4",
+    category: "AI Insurance & Support",
+    question: "Do you offer discounts for nonprofits or veterans?",
+    answer: `Yes. Veterans and first responders get ${SITE.veteranDiscountPercent}% off everything. Nonprofits and multi-service bundles can request custom pricing — contact us with details and we'll put together a quote.`,
+  },
+
+  // ══════════════════════════════════════════════════════════
+  // Billing & Privacy
+  // ══════════════════════════════════════════════════════════
   {
     id: "bp-1",
-    category: "Billing & Pricing",
+    category: "Billing & Privacy",
     question: "What payment methods do you accept?",
     answer:
-      "Credit cards (Visa, Mastercard, Amex, Discover), ACH bank transfer, and for businesses: invoicing with net-30 terms.",
+      "Credit cards (Visa, Mastercard, Amex, Discover) and ACH bank transfer for monthly plans. For larger business engagements we also accept invoiced net-30 terms.",
   },
   {
     id: "bp-2",
-    category: "Billing & Pricing",
+    category: "Billing & Privacy",
     question: "Can I cancel anytime?",
-    answer:
-      "Yes! Individual/family plans: cancel anytime, no penalties. Business services: 30-day notice required (in contract). We'll process your cancellation and provide any final reports.",
+    answer: `Yes. Individual and family plans cancel immediately with no penalties. Business services require 30 days' notice per contract. Every paid plan includes a ${SITE.moneyBackGuaranteeDays}-day money-back guarantee on your first charge.`,
   },
   {
     id: "bp-3",
-    category: "Billing & Pricing",
-    question: "Do you offer refunds?",
+    category: "Billing & Privacy",
+    question: "How do you handle my personal data?",
     answer:
-      "Individual plans: 30-day money-back guarantee. Business services: custom terms in contract. If you're not satisfied, we'll work to make it right.",
+      "We never sell, rent, or share your data. Everything is encrypted in transit and at rest, stored in US data centers, and accessible only to staff who need it to deliver your service. You can request full deletion at any time and we'll complete it within 30 days.",
   },
   {
     id: "bp-4",
-    category: "Billing & Pricing",
-    question: "Are there setup fees?",
+    category: "Billing & Privacy",
+    question: "What happens to suspicious messages I submit for analysis?",
     answer:
-      "Family Shield: No setup fees. AI Receptionist: $9,500 setup (one-time). Websites: varies by scope. AI Insurance: no setup fee.",
-  },
-  {
-    id: "bp-5",
-    category: "Billing & Pricing",
-    question: "Do you offer discounts?",
-    answer:
-      "Yes! Veterans and first responders receive 10% off. Nonprofits and bundled services can request custom pricing.",
-  },
-
-  // Technical Support
-  {
-    id: "ts-1",
-    category: "Technical Support",
-    question: "What are your support hours?",
-    answer:
-      "Email support: 24/7 (respond within 4 hours). Phone support: Mon-Fri 9am-6pm EST, Sat 10am-3pm. Premium clients: 24/7 priority support.",
-  },
-  {
-    id: "ts-2",
-    category: "Technical Support",
-    question: "How do I contact support?",
-    answer: `Email: ${SITE.emails.support}, Phone: ${SITE.phone.display}, Live chat: on our website, or submit ticket through your portal.`,
-  },
-  {
-    id: "ts-3",
-    category: "Technical Support",
-    question: "Do you offer training?",
-    answer:
-      "Yes. Onboarding training is included with every business plan. Family Shield Premium includes our video training library. Additional custom training sessions are available as paid add-ons.",
-  },
-
-  // Account & Access
-  {
-    id: "aa-1",
-    category: "Account & Access",
-    question: "How do I access my portal?",
-    answer:
-      "Business clients: Log in at invisionnetwork.org/auth with your email and password. Individual clients: Use your unique access link (sent via email).",
-  },
-  {
-    id: "aa-2",
-    category: "Account & Access",
-    question: "I forgot my password. What do I do?",
-    answer:
-      "Click 'Forgot Password' on the login page. We'll email you a reset link. For access link users: email us to resend your link.",
-  },
-  {
-    id: "aa-3",
-    category: "Account & Access",
-    question: "Can I update my payment method?",
-    answer:
-      "Yes! Log into your portal, go to Billing, click 'Update Payment Method,' and enter new card details. Changes take effect immediately.",
-  },
-  {
-    id: "aa-4",
-    category: "Account & Access",
-    question: "How do I upgrade my plan?",
-    answer:
-      "Log into your portal, go to Plan & Billing, click 'Upgrade,' choose new plan. Changes take effect immediately, and we'll prorate the difference.",
-  },
-  {
-    id: "aa-5",
-    category: "Account & Access",
-    question: "Can I downgrade my plan?",
-    answer:
-      "Yes, you can downgrade at any time. Changes take effect at the start of your next billing cycle. You'll keep full access to current features until then.",
-  },
-  {
-    id: "aa-6",
-    category: "Account & Access",
-    question: "Can I cancel my subscription anytime?",
-    answer:
-      "Yes, you can cancel your subscription at any time with no penalties or fees. Your service will continue until the end of your current billing period.",
-  },
-
-  // Privacy & Security
-  {
-    id: "ps-1",
-    category: "Privacy & Security",
-    question: "How do you protect my personal information?",
-    answer:
-      "We use industry-standard encryption (TLS) and never sell your data. Sensitive details are handled with privacy-by-design practices and access controls.",
-  },
-  {
-    id: "ps-2",
-    category: "Privacy & Security",
-    question: "Do you share my data with third parties?",
-    answer:
-      "Never. We don't sell, rent, or share your information. Your privacy is non-negotiable. We only use your data to provide services you've requested.",
-  },
-  {
-    id: "ps-3",
-    category: "Privacy & Security",
-    question: "Where is my data stored?",
-    answer:
-      "All data is stored in secure, encrypted data centers in the United States with redundant backups. We use AWS and Microsoft Azure infrastructure with strict access controls.",
-  },
-  {
-    id: "ps-4",
-    category: "Privacy & Security",
-    question: "Can I delete my data?",
-    answer:
-      "Yes. You can request complete data deletion at any time. We aim to permanently remove personal information within 30 days.",
-  },
-  {
-    id: "ps-5",
-    category: "Privacy & Security",
-    question: "How do you handle suspicious messages I submit?",
-    answer:
-      "Submitted messages are analyzed by our AI in a secure, isolated environment. Personal information is redacted and never shared. Messages are deleted after 90 days unless you save them.",
-  },
-
-  // Veterans & Seniors
-  {
-    id: "vs-1",
-    category: "Veterans & Seniors",
-    question: "Do you offer discounts for veterans or seniors?",
-    answer:
-      "Yes! We offer 10% off for veterans and first responders. Contact us with proof of service to apply your discount.",
-  },
-  {
-    id: "vs-2",
-    category: "Veterans & Seniors",
-    question: "Is this service easy for seniors to use?",
-    answer:
-      "Absolutely. We specifically designed our platform for seniors with large text, simple navigation, and clear instructions. Every paid plan includes one-on-one onboarding sessions to walk you through everything.",
-  },
-  {
-    id: "vs-3",
-    category: "Veterans & Seniors",
-    question: "Do you offer in-person training for seniors?",
-    answer:
-      "Yes, in select areas including Columbus, OH. We provide paid in-person training sessions at senior centers and community centers — pricing depends on group size and travel. Contact us for a quote.",
-  },
-  {
-    id: "vs-4",
-    category: "Veterans & Seniors",
-    question: "Can my adult children manage my account?",
-    answer:
-      "Yes! You can add authorized family members who can access your account, view alerts, and help manage your protection. Perfect for families looking out for elderly parents.",
-  },
-  {
-    id: "vs-5",
-    category: "Veterans & Seniors",
-    question: "What if I'm not comfortable with technology?",
-    answer:
-      "That's exactly who we built this for! We offer phone support, step-by-step guides with pictures, and patient 1-on-1 training. Many of our senior users had never used a computer before.",
+      "Submitted messages are analyzed in an isolated environment. Personal information is redacted before analysis, the raw submission is deleted after 90 days unless you explicitly save it, and nothing is ever used to train external AI models.",
   },
 ];
 
-const categories = [
-  "All Questions",
+// ─── CATEGORY METADATA ──────────────────────────────────────────
+const categoryMeta: Record<
+  FAQCategory,
+  { icon: typeof Bot; accent: string }
+> = {
+  "Getting Started": {
+    icon: Sparkles,
+    accent: "from-teal-500 to-indigo-500",
+  },
+  "AI Business Services": {
+    icon: Bot,
+    accent: "from-indigo-500 to-violet-500",
+  },
+  "Cybersecurity Education": {
+    icon: GraduationCap,
+    accent: "from-violet-500 to-purple-500",
+  },
+  "AI Insurance & Support": {
+    icon: Server,
+    accent: "from-purple-500 to-fuchsia-500",
+  },
+  "Billing & Privacy": {
+    icon: Receipt,
+    accent: "from-teal-600 to-cyan-500",
+  },
+};
+
+const categories: ("All" | FAQCategory)[] = [
+  "All",
   "Getting Started",
-  "Privacy & Security",
-  "Veterans & Seniors",
-  "Family Shield",
-  "Business Services",
-  "AI Insurance",
-  "Billing & Pricing",
-  "Technical Support",
-  "Account & Access",
+  "AI Business Services",
+  "Cybersecurity Education",
+  "AI Insurance & Support",
+  "Billing & Privacy",
 ];
 
+// ─── COMPONENT ──────────────────────────────────────────────────
 export default function FAQ() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [helpfulVotes, setHelpfulVotes] = useState<Record<string, boolean>>({});
+  const [activeCategory, setActiveCategory] = useState<"All" | FAQCategory>(
+    "All",
+  );
+  const [askName, setAskName] = useState("");
+  const [askEmail, setAskEmail] = useState("");
+  const [askQuestion, setAskQuestion] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const accordionRef = useRef<HTMLDivElement>(null);
 
   const filteredFAQs = useMemo(() => {
     let filtered = faqs;
-
-    // Filter by category
-    if (activeCategory !== "all") {
-      filtered = filtered.filter((faq) => faq.category === activeCategory);
+    if (activeCategory !== "All") {
+      filtered = filtered.filter((f) => f.category === activeCategory);
     }
-
-    // Filter by search query
     if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase();
+      const q = searchQuery.toLowerCase();
       filtered = filtered.filter(
-        (faq) =>
-          faq.question.toLowerCase().includes(query) ||
-          faq.answer.toLowerCase().includes(query),
+        (f) =>
+          f.question.toLowerCase().includes(q) ||
+          f.answer.toLowerCase().includes(q),
       );
     }
-
     return filtered;
   }, [searchQuery, activeCategory]);
 
-  // Pre-compute category counts for performance (avoids O(n²) filtering on every render)
   const categoryCounts = useMemo(() => {
-    const counts: Record<string, number> = { "All Questions": faqs.length };
-    faqs.forEach((faq) => {
-      counts[faq.category] = (counts[faq.category] || 0) + 1;
+    const counts: Record<string, number> = { All: faqs.length };
+    faqs.forEach((f) => {
+      counts[f.category] = (counts[f.category] || 0) + 1;
     });
     return counts;
-  }, []); // Empty deps - faqs array is static
+  }, []);
 
-  const handleHelpful = (faqId: string, isHelpful: boolean) => {
-    setHelpfulVotes((prev) => ({ ...prev, [faqId]: isHelpful }));
-    toast.success(
-      isHelpful
-        ? "Thanks for your feedback!"
-        : "We'll work on improving this answer.",
-    );
+  const handleAskSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!askName.trim() || !askEmail.trim() || !askQuestion.trim()) {
+      toast.error("Please fill in every field so we can reply.");
+      return;
+    }
+    setSubmitting(true);
+    try {
+      // Reuse the generic contact-submission edge function
+      const { error } = await supabase.functions.invoke(
+        "process-contact-form",
+        {
+          body: {
+            name: askName,
+            email: askEmail,
+            subject: "FAQ — specific question",
+            message: askQuestion,
+            source: "faq-ask",
+          },
+        },
+      );
+      if (error) throw error;
+      toast.success("Got it — we'll reply within 1 business day.");
+      setAskName("");
+      setAskEmail("");
+      setAskQuestion("");
+    } catch (err: any) {
+      toast.error(err?.message || "Something went wrong, please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const faqHeroImages = PROFESSIONAL_HERO_IMAGES.faq;
@@ -423,7 +325,7 @@ export default function FAQ() {
     () => ({
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      mainEntity: faqs.slice(0, 8).map((faq) => ({
+      mainEntity: faqs.slice(0, 10).map((faq) => ({
         "@type": "Question",
         name: faq.question,
         acceptedAnswer: {
@@ -437,239 +339,369 @@ export default function FAQ() {
 
   return (
     <PageTransition variant="fade">
-      <div className="min-h-screen">
-        <SEO
-          title="Frequently Asked Questions"
-          description="Find answers to common questions about InVision Network's AI scam protection, business services, billing, and technical support."
-          keywords="FAQ, questions, support, help, InVision Network"
-          structuredData={faqStructuredData}
-          breadcrumbs={[
-            { name: "Home", url: "https://www.invisionnetwork.org/" },
-            { name: "FAQ", url: "https://www.invisionnetwork.org/faq" },
-          ]}
-        />
-        <Navigation overlay />
+      <SEO
+        title="Frequently Asked Questions"
+        description="Answers about InVision Network's AI business services, cybersecurity education workshops, AI insurance plans, billing, and privacy — straight from our Kettering, Ohio team."
+        keywords="FAQ, AI receptionist, cybersecurity education, AI insurance, Kettering Ohio"
+        structuredData={faqStructuredData}
+        breadcrumbs={[
+          { name: "Home", url: "https://www.invisionnetwork.org/" },
+          { name: "FAQ", url: "https://www.invisionnetwork.org/faq" },
+        ]}
+      />
+      <Navigation overlay />
 
-        <main>
-          {/* Hero wrapper for floating stats */}
-          <div className="relative">
-            <Hero
-              backgroundImages={faqHeroImages}
-              headline="Frequently Asked Questions"
-              subheadline="Get instant answers to your questions about our AI scam protection services, training programs, and security solutions"
-              overlay={true}
-              showScrollIndicator={false}
-            />
+      <main>
+        {/* ═══════════════════════════════════════════════════════
+            HERO — untouched per design rules
+            ═══════════════════════════════════════════════════ */}
+        <div className="relative">
+          <Hero
+            backgroundImages={faqHeroImages}
+            headline="Frequently Asked Questions"
+            subheadline="Clear answers about our AI services, workshops, and support — no jargon, no runaround."
+            overlay={true}
+            showScrollIndicator={false}
+          />
+          <HeroFloatingStats />
+        </div>
 
-            {/* Floating Stats Bar - Outside Hero to stay static */}
-            <HeroFloatingStats />
+        {/* Spacer for floating stats bar */}
+        <div className="hidden lg:block h-14" />
+        <div className="lg:hidden h-6" />
+
+        {/* ═══════════════════════════════════════════════════════
+            REDESIGNED FAQ BODY — single compressed block with
+            a 2-column glass layout (left: accordion, right: ask form).
+            Aligned to the site plumb line: container mx-auto px-6 lg:px-8
+            ═══════════════════════════════════════════════════ */}
+        <section
+          aria-labelledby="faq-main-heading"
+          className="relative isolate py-12 md:py-16 overflow-hidden"
+        >
+          {/* Ambient backdrop orbs — teal / indigo / violet */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 -z-10"
+          >
+            <div className="absolute -top-32 -left-40 h-[480px] w-[480px] rounded-full bg-teal-500/15 blur-[140px]" />
+            <div className="absolute top-1/3 -right-40 h-[520px] w-[520px] rounded-full bg-indigo-500/15 blur-[150px]" />
+            <div className="absolute -bottom-40 left-1/3 h-[440px] w-[440px] rounded-full bg-violet-500/12 blur-[150px]" />
           </div>
 
-          {/* Spacer for floating stats bar */}
-          <div className="hidden lg:block h-14" />
-          <div className="lg:hidden h-6" />
-
-          <MeshBackground variant="subtle" withDots>
-          <TrustBar />
-
-          {/* Platform Guide Section */}
-          <section className="py-6 bg-gradient-to-b from-primary/5 to-background relative overflow-hidden">
-            
-            <div className="container mx-auto px-6 lg:px-8">
-              <div className="max-w-4xl mx-auto text-center">
-                <Badge className="mb-3 bg-primary/10 text-primary border-primary/20">
-                  <BookOpen className="w-3 h-3 mr-1" />
-                  New to InVision?
-                </Badge>
-                <h2 className="text-2xl md:text-3xl font-bold mb-3">
-                  Learn How to Use Our Platform
-                </h2>
-                <p className="text-muted-foreground mb-4 max-w-2xl mx-auto">
-                  Get step-by-step guidance on purchasing, subscribing,
-                  submitting scam reports, and more
-                </p>
-                <PlatformGuide />
+          <div className="container mx-auto px-6 lg:px-8">
+            {/* Section eyebrow + heading — compact */}
+            <div className="max-w-3xl mb-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/60 backdrop-blur border border-white/70 shadow-sm mb-4">
+                <HelpCircle className="w-3.5 h-3.5 text-teal-600" />
+                <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-slate-700">
+                  Everything you wanted to ask
+                </span>
               </div>
+              <h2
+                id="faq-main-heading"
+                className="text-[2rem] md:text-[2.5rem] font-extrabold tracking-tight leading-[1.08] text-slate-900 mb-3"
+              >
+                Straight answers,{" "}
+                <span className="bg-gradient-to-r from-teal-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent">
+                  no runaround.
+                </span>
+              </h2>
+              <p className="text-slate-600 text-base md:text-lg leading-relaxed">
+                Most people get what they need in under a minute. If not, use
+                the form on the right and we&rsquo;ll reply personally within one
+                business day.
+              </p>
             </div>
-          </section>
 
-          <SectionDivider variant="curve" color="background" />
-
-          {/* Search & Filter Section - Redesigned */}
-          <section className="py-6 bg-gradient-to-b from-muted/30 to-background">
-            <div className="container mx-auto px-6 lg:px-8">
-              <div className="max-w-4xl mx-auto">
-                {/* Search Bar - Enhanced */}
-                <div className="relative mb-6">
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 rounded-2xl blur-xl opacity-50" />
-                  <div className="relative">
-                    <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
+            {/* Two-column grid: accordion (lg:col-span-8) + sticky form (lg:col-span-4) */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+              {/* ─────────────────────────────────────────────
+                  LEFT — search + categories + accordion
+                  ───────────────────────────────────────── */}
+              <div className="lg:col-span-8">
+                {/* Search bar + category pills — grouped in one compact
+                    glass panel so the whole filter UI takes minimal space */}
+                <div className="rounded-2xl bg-white/70 backdrop-blur-xl border border-white/60 shadow-[0_12px_40px_-16px_rgba(15,23,42,0.18)] p-4 md:p-5 mb-5">
+                  {/* Search */}
+                  <div className="relative mb-3">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                     <Input
                       type="text"
-                      placeholder="Search for answers... (e.g., 'How to get started', 'Payment methods')"
+                      placeholder="Search answers..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-12 h-14 text-base rounded-xl border-2 border-border/50 focus:border-primary/50 bg-background/80 backdrop-blur-sm shadow-lg"
+                      className="pl-9 pr-9 h-11 text-sm rounded-xl border-slate-200 bg-white/80 focus-visible:border-teal-500 focus-visible:ring-teal-500/20"
                     />
                     {searchQuery && (
                       <button
+                        type="button"
                         onClick={() => setSearchQuery("")}
-                        className="absolute right-4 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                        aria-label="Clear search"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-slate-200 hover:bg-slate-300 flex items-center justify-center text-slate-600"
                       >
-                        ✕
+                        <X className="w-3 h-3" />
                       </button>
                     )}
                   </div>
+
+                  {/* Category pills — horizontal scroll on mobile */}
+                  <div className="flex flex-wrap gap-1.5">
+                    {categories.map((cat) => {
+                      const isActive = activeCategory === cat;
+                      const count = categoryCounts[cat] || 0;
+                      return (
+                        <button
+                          key={cat}
+                          type="button"
+                          onClick={() => setActiveCategory(cat)}
+                          className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                            isActive
+                              ? "bg-gradient-to-r from-teal-600 to-indigo-600 text-white shadow-[0_4px_12px_-2px_rgba(13,148,136,0.45)]"
+                              : "bg-white/70 text-slate-700 border border-slate-200 hover:border-teal-400 hover:text-teal-700"
+                          }`}
+                        >
+                          {cat}
+                          <span
+                            className={`text-[10px] font-bold ${
+                              isActive ? "text-white/80" : "text-slate-500"
+                            }`}
+                          >
+                            {count}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
 
-                {/* Results Count */}
+                {/* Results count — only when searching */}
                 {searchQuery && (
-                  <div className="text-center mb-4">
-                    <Badge variant="secondary" className="text-sm">
+                  <div className="mb-3 px-1">
+                    <Badge variant="secondary" className="text-[11px]">
                       {filteredFAQs.length}{" "}
-                      {filteredFAQs.length === 1 ? "result" : "results"} found
+                      {filteredFAQs.length === 1 ? "result" : "results"}
                     </Badge>
                   </div>
                 )}
-              </div>
-            </div>
-          </section>
 
-          <SectionDivider variant="curve" color="background" />
-
-          {/* Category Tabs */}
-          <section className="py-4 border-y border-border/40 bg-muted/20">
-            <div className="container mx-auto px-6 lg:px-8">
-              <div className="max-w-6xl mx-auto">
-                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3 text-center">
-                  Filter by Category
-                </h3>
-                <div className="flex flex-wrap gap-2 justify-center">
-                  {categories.map((category) => {
-                    const count = categoryCounts[category] || 0;
-                    return (
-                      <Button
-                        key={category}
-                        variant={activeCategory === category ? "default" : "outline"}
-                        size="lg"
-                        onClick={() => setActiveCategory(category)}
-                        className="rounded-full shadow-sm hover:shadow-md transition-shadow"
-                      >
-                        {category}
-                        <Badge variant="secondary" className="ml-2 bg-background/50">
-                          {count}
-                        </Badge>
-                      </Button>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <SectionDivider variant="curve" color="background" />
-
-          {/* FAQ Accordion */}
-          <section className="py-4 sm:py-6">
-            <div className="container mx-auto px-6 lg:px-8">
-              <div className="max-w-4xl mx-auto">
-                {filteredFAQs.length > 0 ? (
-                  <Accordion type="single" collapsible className="space-y-1">
-                    {filteredFAQs.map((faq) => (
-                      <Card key={faq.id} className="overflow-hidden">
-                        <AccordionItem value={faq.id} className="border-none">
-                          <AccordionTrigger className="px-4 py-2.5 text-left hover:bg-muted/50 transition-colors text-base font-semibold hover:no-underline">
-                            <span className="pr-4">{faq.question}</span>
-                          </AccordionTrigger>
-                          <AccordionContent className="px-4 pb-4">
-                            <div className="pt-1 space-y-3">
-                              <p className="text-base leading-relaxed whitespace-pre-line text-foreground/90">
-                                {faq.answer}
-                              </p>
-                              <div className="flex items-center gap-4 pt-4 border-t border-border">
-                                <span className="text-sm text-muted-foreground">Was this helpful?</span>
-                                <div className="flex gap-2">
-                                  <Button variant={helpfulVotes[faq.id] === true ? "default" : "outline"} size="sm" onClick={() => handleHelpful(faq.id, true)} className="gap-2">
-                                    <ThumbsUp className="w-4 h-4" /> Yes
-                                  </Button>
-                                  <Button variant={helpfulVotes[faq.id] === false ? "default" : "outline"} size="sm" onClick={() => handleHelpful(faq.id, false)} className="gap-2">
-                                    <ThumbsDown className="w-4 h-4" /> No
-                                  </Button>
+                {/* Accordion — glass cards, compact */}
+                <div ref={accordionRef}>
+                  {filteredFAQs.length > 0 ? (
+                    <Accordion type="single" collapsible className="space-y-2">
+                      {filteredFAQs.map((faq) => {
+                        const meta = categoryMeta[faq.category];
+                        const Icon = meta.icon;
+                        return (
+                          <AccordionItem
+                            key={faq.id}
+                            value={faq.id}
+                            className="rounded-2xl bg-white/75 backdrop-blur-xl border border-white/70 shadow-[0_6px_24px_-12px_rgba(15,23,42,0.15)] overflow-hidden data-[state=open]:shadow-[0_16px_40px_-14px_rgba(15,23,42,0.22)] data-[state=open]:border-teal-400/50 transition-all duration-300"
+                          >
+                            <AccordionTrigger className="px-4 py-3 hover:no-underline group">
+                              <div className="flex items-center gap-3 flex-1 text-left min-w-0">
+                                <div
+                                  className={`flex-shrink-0 w-8 h-8 rounded-xl bg-gradient-to-br ${meta.accent} flex items-center justify-center shadow-[0_6px_16px_-6px_rgba(99,102,241,0.5),inset_0_1px_0_0_rgba(255,255,255,0.4)] border border-white/40`}
+                                >
+                                  <Icon
+                                    className="w-4 h-4 text-white"
+                                    strokeWidth={2}
+                                  />
+                                </div>
+                                <span className="font-semibold text-[15px] text-slate-900 leading-snug pr-3 group-hover:text-teal-700 transition-colors">
+                                  {faq.question}
+                                </span>
+                              </div>
+                            </AccordionTrigger>
+                            <AccordionContent className="px-4 pb-4">
+                              <div className="pl-11">
+                                <p className="text-[14px] leading-relaxed text-slate-600 whitespace-pre-line">
+                                  {faq.answer}
+                                </p>
+                                <div className="mt-3 flex items-center gap-2">
+                                  <Badge
+                                    variant="outline"
+                                    className="text-[10px] h-[18px] px-1.5 py-0 border-teal-500/30 text-teal-700"
+                                  >
+                                    {faq.category}
+                                  </Badge>
                                 </div>
                               </div>
-                            </div>
-                          </AccordionContent>
-                        </AccordionItem>
-                      </Card>
-                    ))}
-                  </Accordion>
-                ) : (
-                  <Card className="p-12 text-center">
-                    <div className="max-w-md mx-auto">
-                      <Search className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-                      <h3 className="text-xl font-semibold mb-2">No results found</h3>
-                      <p className="text-muted-foreground mb-4">Try adjusting your search or browse all categories</p>
-                      <Button variant="outline" onClick={() => { setSearchQuery(""); setActiveCategory("All Questions"); }}>
-                        Clear Search
+                            </AccordionContent>
+                          </AccordionItem>
+                        );
+                      })}
+                    </Accordion>
+                  ) : (
+                    <div className="rounded-2xl bg-white/75 backdrop-blur-xl border border-white/70 shadow-[0_12px_40px_-16px_rgba(15,23,42,0.18)] p-8 text-center">
+                      <Search className="w-10 h-10 mx-auto mb-3 text-slate-300" />
+                      <h3 className="text-base font-semibold text-slate-900 mb-1">
+                        No matches for that search
+                      </h3>
+                      <p className="text-sm text-slate-600 mb-4">
+                        Try a different keyword, or ask us directly using the
+                        form.
+                      </p>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          setSearchQuery("");
+                          setActiveCategory("All");
+                        }}
+                        className="border-teal-500/40 text-teal-700 hover:bg-teal-50"
+                      >
+                        Clear filters
                       </Button>
                     </div>
-                  </Card>
-                )}
-              </div>
-            </div>
-          </section>
-
-          <SectionDivider variant="curve" color="background" />
-
-          {/* Still Have Questions CTA */}
-          <section className="py-16 md:py-24 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
-            <div className="absolute top-10 right-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
-            <div className="container mx-auto px-6 lg:px-8 relative z-10">
-              <Card className="max-w-2xl mx-auto p-8 sm:p-12 text-center border border-border/50 shadow-sm">
-                <h2 className="text-3xl sm:text-4xl font-black mb-4">
-                  Still Have Questions?
-                </h2>
-                <p className="text-lg text-muted-foreground mb-8">
-                  Didn't find what you need? Our support team is here to help.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button size="lg" asChild className="gap-2">
-                    <Link to="/contact">
-                      <MessageCircle className="w-5 h-5" /> Contact Support
-                    </Link>
-                  </Button>
-                  <Button size="lg" variant="outline" asChild className="gap-2">
-                    <a href={SITE.phone.tel}>
-                      <Phone className="w-5 h-5" /> Call {SITE.phone.display}
-                    </a>
-                  </Button>
+                  )}
                 </div>
-                <div className="mt-8 pt-8 border-t border-border">
-                  <p className="text-sm text-muted-foreground">
-                    <strong>Support Hours:</strong><br />
-                    Email: 24/7 • Phone: Mon-Fri 9am-6pm EST
-                  </p>
-                </div>
-              </Card>
-            </div>
-          </section>
-
-          <SectionDivider variant="curve" color="background" />
-
-          {/* AI Image Disclaimer */}
-          <section className="py-16 bg-muted/20">
-            <div className="container mx-auto px-6 lg:px-8">
-              <div className="max-w-4xl mx-auto">
-                <AIImageDisclaimer />
               </div>
-            </div>
-          </section>
-          </MeshBackground>
 
-          <Footer />
-        </main>
-      </div>
+              {/* ─────────────────────────────────────────────
+                  RIGHT — "Ask a specific question" form
+                  + contact card. Sticky on desktop.
+                  ───────────────────────────────────────── */}
+              <aside className="lg:col-span-4">
+                <div className="lg:sticky lg:top-24 space-y-4">
+                  {/* Ask form card */}
+                  <form
+                    onSubmit={handleAskSubmit}
+                    className="relative rounded-2xl bg-white/80 backdrop-blur-xl border border-white/70 shadow-[0_20px_60px_-20px_rgba(15,23,42,0.25),0_4px_16px_-4px_rgba(13,148,136,0.15)] p-5 overflow-hidden"
+                  >
+                    {/* Top hairline highlight */}
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-white to-transparent"
+                    />
+                    {/* Per-card accent glow */}
+                    <div
+                      aria-hidden="true"
+                      className="absolute -top-16 -right-16 w-44 h-44 rounded-full bg-teal-500/25 blur-3xl pointer-events-none"
+                    />
+
+                    <div className="relative">
+                      <div className="flex items-center gap-2 mb-1">
+                        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-teal-500 to-indigo-600 flex items-center justify-center shadow-[0_6px_16px_-4px_rgba(13,148,136,0.5),inset_0_1px_0_0_rgba(255,255,255,0.4)] border border-white/40">
+                          <Sparkles className="w-4 h-4 text-white" strokeWidth={2} />
+                        </div>
+                        <h3 className="text-base font-bold text-slate-900 leading-none">
+                          Ask your own question
+                        </h3>
+                      </div>
+                      <p className="text-[12px] text-slate-600 mb-3 ml-10">
+                        We reply within 1 business day, from a real person in
+                        Kettering.
+                      </p>
+
+                      <div className="space-y-2.5">
+                        <Input
+                          value={askName}
+                          onChange={(e) => setAskName(e.target.value)}
+                          placeholder="Your name"
+                          className="h-9 text-sm rounded-lg border-slate-200 bg-white/80 focus-visible:border-teal-500 focus-visible:ring-teal-500/20"
+                          required
+                        />
+                        <Input
+                          value={askEmail}
+                          onChange={(e) => setAskEmail(e.target.value)}
+                          type="email"
+                          placeholder="Email address"
+                          className="h-9 text-sm rounded-lg border-slate-200 bg-white/80 focus-visible:border-teal-500 focus-visible:ring-teal-500/20"
+                          required
+                        />
+                        <Textarea
+                          value={askQuestion}
+                          onChange={(e) => setAskQuestion(e.target.value)}
+                          placeholder="What's your question?"
+                          rows={4}
+                          className="text-sm rounded-lg border-slate-200 bg-white/80 focus-visible:border-teal-500 focus-visible:ring-teal-500/20 resize-none leading-snug"
+                          required
+                        />
+                      </div>
+
+                      <Button
+                        type="submit"
+                        disabled={submitting}
+                        className="w-full mt-3 h-10 text-sm rounded-xl bg-gradient-to-r from-teal-600 via-indigo-600 to-violet-600 hover:from-teal-700 hover:via-indigo-700 hover:to-violet-700 text-white border-0 shadow-[0_8px_24px_-6px_rgba(13,148,136,0.5),inset_0_1px_0_0_rgba(255,255,255,0.25)]"
+                      >
+                        {submitting ? (
+                          <>Sending...</>
+                        ) : (
+                          <>
+                            Send question
+                            <Send className="w-3.5 h-3.5 ml-1.5" />
+                          </>
+                        )}
+                      </Button>
+
+                      <div className="mt-3 pt-3 border-t border-slate-200/70 flex items-center gap-1.5 text-[10px] text-slate-500">
+                        <CheckCircle2 className="w-3 h-3 text-teal-600" />
+                        <span>No spam, no newsletters — just an answer.</span>
+                      </div>
+                    </div>
+                  </form>
+
+                  {/* Contact fallback card */}
+                  <div className="rounded-2xl bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 p-5 shadow-[0_20px_50px_-20px_rgba(15,23,42,0.5)] border border-white/10 overflow-hidden relative">
+                    <div
+                      aria-hidden="true"
+                      className="absolute -top-16 -right-16 w-40 h-40 rounded-full bg-violet-500/30 blur-3xl pointer-events-none"
+                    />
+                    <div className="relative">
+                      <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-violet-300 mb-2">
+                        Prefer to talk?
+                      </div>
+                      <h4 className="text-base font-bold text-white mb-3 leading-tight">
+                        We answer the phone.
+                      </h4>
+
+                      <div className="space-y-2">
+                        <a
+                          href={SITE.phone.tel}
+                          className="flex items-center gap-2.5 text-sm text-white hover:text-teal-300 transition-colors group"
+                        >
+                          <div className="w-8 h-8 rounded-lg bg-white/10 border border-white/15 flex items-center justify-center flex-shrink-0 group-hover:bg-teal-500/20 group-hover:border-teal-400/40 transition-colors">
+                            <Phone className="w-3.5 h-3.5" />
+                          </div>
+                          <span className="font-semibold whitespace-nowrap">
+                            {SITE.phone.display.replace(" ", "\u00A0")}
+                          </span>
+                        </a>
+                        <a
+                          href={`mailto:${SITE.emails.support}`}
+                          className="flex items-center gap-2.5 text-sm text-white hover:text-teal-300 transition-colors group"
+                        >
+                          <div className="w-8 h-8 rounded-lg bg-white/10 border border-white/15 flex items-center justify-center flex-shrink-0 group-hover:bg-teal-500/20 group-hover:border-teal-400/40 transition-colors">
+                            <Mail className="w-3.5 h-3.5" />
+                          </div>
+                          <span className="font-semibold truncate">
+                            {SITE.emails.support}
+                          </span>
+                        </a>
+                      </div>
+
+                      <Button
+                        asChild
+                        size="sm"
+                        variant="outline"
+                        className="mt-4 w-full h-9 text-xs rounded-lg bg-white/5 border-white/20 text-white hover:bg-white/10 hover:border-white/30"
+                      >
+                        <Link to="/contact">
+                          Full contact page
+                          <ArrowRight className="w-3 h-3 ml-1.5" />
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </section>
+
+        <Footer />
+      </main>
     </PageTransition>
   );
 }
