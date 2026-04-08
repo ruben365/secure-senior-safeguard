@@ -208,43 +208,54 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-[calc(100vw-2rem)] sm:max-w-[460px] max-h-[90vh] overflow-y-auto rounded-2xl">
-        {/* Header — matches EmbeddedPaymentModal style */}
-        <DialogHeader>
-          <DialogTitle className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-              <Heart className="w-5 h-5 text-primary" />
+      {/*
+        DonationModal — streamlined static layout.
+        - Wider (540px) so the email field is never truncated.
+        - overflow-hidden + no max-h -> NO scrollbar.
+        - Name and email are stacked full-width.
+        - All internal spacing compacted: smaller buttons, smaller inputs,
+          tight header, lower textarea, squeezed total bar, single-line
+          trust footer.
+      */}
+      <DialogContent className="max-w-[calc(100vw-2rem)] sm:max-w-[540px] overflow-hidden rounded-2xl p-5 gap-0">
+        {/* Header — very tight */}
+        <DialogHeader className="space-y-0 pb-3">
+          <DialogTitle className="flex items-center gap-2.5">
+            <div className="w-9 h-9 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+              <Heart className="w-4 h-4 text-primary" />
             </div>
-            <div>
-              <span className="block text-lg">{cause || info.title}</span>
-              <Badge variant="outline" className="text-xs font-normal mt-1">
-                <Shield className="w-3 h-3 mr-1" />
-                Secure via Stripe
-              </Badge>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-[15px] font-semibold leading-none">{cause || info.title}</span>
+                <Badge variant="outline" className="text-[10px] font-normal px-1.5 py-0 h-[18px]">
+                  <Shield className="w-2.5 h-2.5 mr-1" />
+                  Secure via Stripe
+                </Badge>
+              </div>
             </div>
           </DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-5">
-          {/* Donation Type Toggle */}
+        <div className="space-y-2.5">
+          {/* Donation Type Toggle — lower profile */}
           {type !== "monthly" && (
-            <div className="flex gap-1 p-1 bg-muted/50 rounded-lg">
+            <div className="flex gap-1 p-0.5 bg-muted/50 rounded-md">
               <Button
                 type="button"
                 variant={donationType === "one-time" ? "default" : "ghost"}
-                className="flex-1 h-9 text-sm"
+                className="flex-1 h-7 text-xs px-2"
                 onClick={() => setDonationType("one-time")}
               >
-                <Gift className="w-3.5 h-3.5 mr-1.5" />
+                <Gift className="w-3 h-3 mr-1" />
                 One-time
               </Button>
               <Button
                 type="button"
                 variant={donationType === "monthly" ? "default" : "ghost"}
-                className="flex-1 h-9 text-sm"
+                className="flex-1 h-7 text-xs px-2"
                 onClick={() => setDonationType("monthly")}
               >
-                <Calendar className="w-3.5 h-3.5 mr-1.5" />
+                <Calendar className="w-3 h-3 mr-1" />
                 Monthly
               </Button>
             </div>
@@ -252,16 +263,16 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
 
           {/* Amount Selection */}
           <div>
-            <label className="text-xs font-medium text-muted-foreground mb-2 block uppercase tracking-wide">
+            <label className="text-[10px] font-medium text-muted-foreground mb-1 block uppercase tracking-wide">
               Select Amount
             </label>
-            <div className="grid grid-cols-4 gap-2 mb-2">
+            <div className="grid grid-cols-4 gap-1.5 mb-1.5">
               {amounts.map((amount) => (
                 <button
                   key={amount}
                   type="button"
                   onClick={() => handleAmountSelect(amount)}
-                  className={`py-2.5 rounded-lg text-center text-sm font-semibold transition-all border ${
+                  className={`py-1.5 rounded-md text-center text-xs font-semibold transition-all border ${
                     selectedAmount === amount
                       ? "bg-primary text-primary-foreground border-primary"
                       : "bg-muted/40 border-border/50 hover:border-primary/40"
@@ -272,24 +283,24 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
               ))}
             </div>
             <div className="relative">
-              <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <DollarSign className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground" />
               <Input
                 type="number"
                 placeholder="Custom amount"
                 value={customAmount}
                 onChange={(e) => handleCustomAmount(e.target.value)}
-                className="pl-9 h-10"
+                className="pl-8 h-8 text-sm"
                 min={1}
               />
             </div>
           </div>
 
-          {/* Impact Message */}
+          {/* Impact Message — compact single line */}
           {finalAmount > 0 && (
-            <div className="p-3 bg-primary/5 border border-primary/15 rounded-lg">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-primary flex-shrink-0" />
-                <p className="text-sm text-muted-foreground">
+            <div className="px-2.5 py-1.5 bg-primary/5 border border-primary/15 rounded-md">
+              <div className="flex items-center gap-1.5">
+                <Sparkles className="w-3 h-3 text-primary flex-shrink-0" />
+                <p className="text-[11px] text-muted-foreground truncate">
                   <span className="font-medium text-foreground">Your Impact: </span>
                   {getImpactMessage()}
                 </p>
@@ -300,63 +311,68 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(handleSubmit)}
-              className="space-y-3"
+              className="space-y-2"
             >
-              <div className="grid grid-cols-2 gap-3">
-                <FormField
-                  control={form.control}
-                  name="donor_name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input {...field} placeholder="Your Name *" className="h-10" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input {...field} type="email" placeholder="Email *" className="h-10" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+              {/* Name + Email — STACKED full-width so long emails never truncate */}
+              <FormField
+                control={form.control}
+                name="donor_name"
+                render={({ field }) => (
+                  <FormItem className="space-y-0.5">
+                    <FormControl>
+                      <Input {...field} placeholder="Your Name *" className="h-8 text-sm w-full" />
+                    </FormControl>
+                    <FormMessage className="text-[10px]" />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem className="space-y-0.5">
+                    <FormControl>
+                      <Input {...field} type="email" placeholder="Email Address *" className="h-8 text-sm w-full" />
+                    </FormControl>
+                    <FormMessage className="text-[10px]" />
+                  </FormItem>
+                )}
+              />
 
+              {/*
+                Comments area:
+                Must be very low height (2 lines of text) and have
+                NO internal scrollbar — even if the user types a lot,
+                the field stays locked at this height.
+              */}
               <FormField
                 control={form.control}
                 name="message"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="space-y-0.5">
                     <FormControl>
                       <Textarea
                         {...field}
                         placeholder="Leave a message (optional)"
                         rows={2}
-                        className="resize-none"
+                        className="resize-none text-sm min-h-[44px] h-[44px] py-1.5 px-3 overflow-hidden leading-snug"
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-[10px]" />
                   </FormItem>
                 )}
               />
 
-              {/* Total */}
-              <div className="p-3 bg-muted/40 rounded-lg border border-border/50">
+              {/* Total bar — squeezed peach strip */}
+              <div className="px-3 py-1.5 bg-muted/40 rounded-md border border-border/50">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">
+                  <span className="text-xs text-muted-foreground">
                     {donationType === "monthly" ? "Monthly" : "Total"}
                   </span>
-                  <span className="text-2xl font-bold text-primary">
+                  <span className="text-lg font-bold text-primary leading-none">
                     ${finalAmount.toFixed(2)}
                     {donationType === "monthly" && (
-                      <span className="text-sm font-normal text-muted-foreground">/mo</span>
+                      <span className="text-xs font-normal text-muted-foreground">/mo</span>
                     )}
                   </span>
                 </div>
@@ -365,27 +381,26 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
               <Button
                 type="submit"
                 disabled={loading || finalAmount < 1}
-                className="w-full h-11"
-                size="lg"
+                className="w-full h-9 text-sm"
               >
                 {loading ? (
                   <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />
                     Processing...
                   </>
                 ) : (
                   <>
-                    <Heart className="mr-2 h-4 w-4" />
+                    <Heart className="mr-2 h-3.5 w-3.5" />
                     Donate ${finalAmount.toFixed(2)}
                     {donationType === "monthly" ? "/month" : ""}
                   </>
                 )}
               </Button>
 
-              {/* Trust footer — compact single line */}
-              <div className="flex items-center justify-center gap-3 pt-1 text-[11px] text-muted-foreground">
-                <Lock className="w-3 h-3" />
-                <span>Secure & Encrypted</span>
+              {/* Trust footer — single compact line */}
+              <div className="flex items-center justify-center gap-2 text-[10px] text-muted-foreground">
+                <Lock className="w-2.5 h-2.5" />
+                <span>Secure &amp; Encrypted</span>
                 <span className="text-border">•</span>
                 <span>100% goes to the cause</span>
               </div>
