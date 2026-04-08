@@ -149,7 +149,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
           className="footer-aura absolute right-0 top-0 w-[600px] h-full pointer-events-none opacity-50"
         />
 
-        <div className="max-w-7xl mx-auto w-full px-6 lg:px-8 py-8 relative z-10">
+        <div className="max-w-[1440px] mx-auto w-full px-6 lg:px-8 py-8 relative z-10">
 
           {/* ─────────── TOP ROW — Brand left + Newsletter card right ─────────── */}
           <div className="flex flex-col lg:flex-row justify-between w-full gap-6 lg:gap-12">
