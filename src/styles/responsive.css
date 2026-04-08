@@ -114,7 +114,7 @@
 
   /* Section spacing */
   .section-spacing { @apply py-6; }
-  .hero-mobile { min-height: 50vh !important; }
+  .hero-mobile { min-height: 115dvh !important; }
   .card-mobile { @apply p-4; }
 
   h1 { font-size: 2rem; }

@@ -157,7 +157,7 @@ const AIAutomation = () => {
             subheadline="Stop losing leads to silence. Our AI-powered follow-up system ensures every prospect gets the right message at the right time."
             showScrollIndicator={true}
           >
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-start">
               <Button asChild size="heroPill" variant="heroPrimary">
                 <Link to="/contact">
                   Get Your Automation Plan

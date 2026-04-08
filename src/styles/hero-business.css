@@ -28,6 +28,12 @@
   padding-bottom: 4px;
 }
 
+@media (min-width: 1024px) {
+  .hero-biz {
+    min-height: 100dvh;
+  }
+}
+
 
 /* ═══ 2. BACKGROUND — image on right, fades to dark on left ═══ */
 .hero-biz__bg {
@@ -85,7 +91,7 @@
 }
 
 
-/* ═══ 3. HERO CONTENT — left-aligned, massive typography ═══ */
+/* ═══ 3. HERO CONTENT — anchored left, massive typography ═══ */
 .hero-biz__content {
   position: relative;
   z-index: 10;
@@ -93,17 +99,17 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 1400px;
   width: 100%;
-  margin: 0 auto;
-  padding: clamp(100px, 14vw, 140px)
-           clamp(20px, 4vw, 64px)
-           2.5rem
-           clamp(24px, 5vw, 80px);
+  margin: 0;
+  padding-top: clamp(110px, 12vw, 150px);
+  padding-right: max(4rem, 8%);
+  padding-bottom: clamp(220px, 18vw, 290px);
+  padding-left: max(4rem, 8%);
 }
 
 .hero-biz__copy {
-  max-width: 620px;
+  max-width: 640px;
+  margin-left: 0;
 }
 
 /* Kicker */
@@ -132,13 +138,13 @@
 
 /* Headline — matches Workshop/other pages scale */
 .hero-biz__headline {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2.4rem, 5.5vw, 4.25rem);
   font-weight: 800;
   color: var(--biz-text);
   line-height: 1.05;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   text-transform: uppercase;
-  margin: 1rem 0 1.5rem 0;
+  margin: 1rem 0 1.75rem 0;
   animation: bizFadeUp 0.5s ease-out 0.1s both;
 }
 
@@ -407,25 +413,25 @@
 /* Title — sits next to icon */
 .hero-biz__feature-title {
   font-size: 0.78rem;
-  font-weight: 700;
-  color: #FFFFFF;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.82);
   line-height: 1.25;
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Description */
 .hero-biz__feature-desc {
-  font-size: 0.65rem;
-  font-weight: 500;
-  line-height: 1.45;
+  font-size: 0.68rem;
+  font-weight: 400;
+  line-height: 1.5;
   color: rgba(255, 255, 255, 0.55);
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 

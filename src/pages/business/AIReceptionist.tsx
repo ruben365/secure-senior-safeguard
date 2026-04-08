@@ -144,7 +144,7 @@ const AIReceptionist = () => {
             subheadline="Our AI answers calls 24/7, sounds human, filters spam, and books appointments directly into your calendar while you sleep. Never lose another customer to voicemail."
             showScrollIndicator={true}
           >
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-start">
               <Button asChild size="heroPill" variant="heroPrimary">
                 <Link to="/contact">
                   Get Your AI Receptionist
@@ -158,7 +158,7 @@ const AIReceptionist = () => {
                 </a>
               </Button>
             </div>
-            <p className="text-sm text-white/80 mt-6">
+            <p className="text-sm text-white/80 mt-6 text-left">
               ✓ Setup in 48 hours ✓ No contracts ✓ Cancel anytime
             </p>
           </Hero>

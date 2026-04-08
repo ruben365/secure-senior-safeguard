@@ -4,7 +4,7 @@ import {
   Phone, ShieldCheck,
   Settings, Server, Lock,
 } from "lucide-react";
-import workshopHero from "@/assets/learn_and_train.jpg";
+import workshopHero from "@/assets/learn_and_train.png";
 import { SITE } from "@/config/site";
 
 /* ── Bottom feature cards ── */

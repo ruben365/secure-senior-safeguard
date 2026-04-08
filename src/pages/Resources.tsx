@@ -9,7 +9,6 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import { CartAbandonmentNotification } from "@/components/CartAbandonmentNotification";
 import { useCartFeedback } from "@/contexts/CartFeedbackContext";
-import TrustBar from "@/components/TrustBar";
 import { PageTransition } from "@/components/PageTransition";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -51,7 +50,7 @@ import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 // GlassmorphismBackground removed — using Business-style sections
 import { usePrerenderBlocker } from "@/contexts/PrerenderContext";
-import { SectionDivider, MeshBackground } from "@/components/pro";
+import { SectionDivider } from "@/components/pro";
 import { TranslationRequestDialog } from "@/components/resources/TranslationRequestDialog";
 import { ReadBooksDialog } from "@/components/resources/ReadBooksDialog";
 
@@ -251,16 +250,16 @@ function Resources() {
           showScrollIndicator={true}>
 
           {/* Transitioning Headlines */}
-          <div className="text-center mb-6">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+          <div className="text-left mb-8">
+            <h1 className="font-extrabold text-white mb-4 leading-[1.05] tracking-tight text-[clamp(2.525rem,5.75vw,4.5rem)]">
               <RotatingHeadlines headlines={heroHeadlines} className="" />
             </h1>
-            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-white/90 max-w-xl">
               Expert-curated guides and tools designed to keep you
               and your family safe
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-start">
             <Button
               size="heroPill"
               variant="heroPrimary"
@@ -287,12 +286,8 @@ function Resources() {
       <div className="hidden lg:block h-14" />
       <div className="lg:hidden h-6" />
 
-      <TrustBar />
-
-      {/* Introduction Section — Business style */}
-      <MeshBackground variant="subtle" withOrbs>
-      <section className="py-16 md:py-24 relative overflow-hidden">
-
+      {/* Introduction Section */}
+      <section className="py-16 md:py-24 relative overflow-hidden bg-background">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-10">
             <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
@@ -302,31 +297,20 @@ function Resources() {
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1]">
               Your One-Stop Security Shop
             </h2>
-            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground mb-6">
+            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground">
               Welcome to InVision Network's resource center. Here you'll find carefully curated
-              <strong className="text-foreground"> e-books and digital guides</strong>.
-              All designed to help you and your family stay safe in the digital age.
+              <strong className="text-foreground"> e-books and digital guides</strong>
+              {" "}designed to help you and your family stay safe in the digital age.
             </p>
-            <div className="flex flex-wrap gap-3 justify-center">
-              {[
-                { icon: BookOpen, label: "Digital eBooks" },
-                { icon: Lock, label: "Secure Online Reading" },
-                { icon: Globe, label: "Read on Any Device" },
-                { icon: Users, label: "Family-Friendly" },
-              ].map((item) => (
-                <div key={item.label} className="flex items-center gap-2 text-sm text-muted-foreground bg-card border border-border/40 px-3 py-1.5 rounded-full">
-                  <item.icon className="w-4 h-4 text-primary" />
-                  <span>{item.label}</span>
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* AI Analysis CTA - link to training */}
-          <div className="text-center py-8">
-            <Link to="/training/ai-analysis" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity">
-              Try Our AI Scam Analysis Tool
-            </Link>
+          <div className="text-center pb-4">
+            <Button asChild size="lg">
+              <Link to="/training/ai-analysis">
+                Try Our AI Scam Analysis Tool
+              </Link>
+            </Button>
           </div>
 
           {/* Quick Stats */}
@@ -619,7 +603,6 @@ function Resources() {
             </div>
         </div>
       </section>
-      </MeshBackground>
 
       <SectionDivider variant="wave" color="muted" />
 

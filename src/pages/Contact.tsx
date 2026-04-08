@@ -184,15 +184,15 @@ function Contact() {
           headline=""
           subheadline=""
         >
-          <div className="text-center mb-6">
-            <h1 className="font-bold text-white mb-4">
+          <div className="text-left mb-8">
+            <h1 className="font-extrabold text-white mb-4 leading-[1.05] tracking-tight text-[clamp(2.525rem,5.75vw,4.5rem)]">
               Contact Us
             </h1>
-            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-white/90 max-w-xl">
               We're here to help protect your family. Get in touch today.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-start">
             <Button size="heroPill" variant="heroPrimary" asChild>
               <a href={SITE.phone.tel}>
                 <Phone className="w-5 h-5 mr-2" />

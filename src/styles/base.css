@@ -32,8 +32,8 @@
     --background: 210 40% 98%;       /* #F5F9FC — cool off-white */
     --foreground: 213 60% 12%;       /* #0D2137 — deep navy text */
 
-    /* ── Primary: Security Blue ── */
-    --primary: 207 89% 34%;          /* #066DB3 — trust blue */
+    /* ── Primary: Warm Orange (was trust blue) ── */
+    --primary: 14 65% 57%;           /* #d96c4a — warm terracotta orange */
     --primary-foreground: 0 0% 100%;
 
     /* ── Secondary: Sky Blue ── */
@@ -66,7 +66,7 @@
     /* ── Borders & Inputs ── */
     --border: 210 28% 86%;           /* #CAD8E6 */
     --input: 210 30% 93%;
-    --ring: 207 89% 34%;
+    --ring: 14 65% 57%;              /* matches new primary */
 
     /* ── Radius ── */
     --radius: 0.5rem;                /* 8px base, cards get 12-16px */
@@ -242,8 +242,9 @@
     --container-wide: 1600px;
     --container-max:  1920px;
 
-    /* Global text scale (rem-based) */
-    --text-scale: 1;
+    /* Global text scale (rem-based) — drives `html { font-size }`,
+       so every rem-based size in the design system zooms uniformly. */
+    --text-scale: 1.1;
 
     /* ── Shadow XL token (was missing) ── */
     --shadow-xl: 0 8px 24px -6px rgba(0, 0, 0, 0.12);
@@ -256,7 +257,7 @@
     --card-foreground: 210 20% 94%;
     --popover: 215 36% 12%;
     --popover-foreground: 210 20% 94%;
-    --primary: 207 84% 55%;
+    --primary: 14 65% 57%;
     --primary-foreground: 0 0% 100%;
     --secondary: 215 28% 18%;
     --secondary-foreground: 210 20% 90%;
@@ -268,7 +269,7 @@
     --destructive-foreground: 0 0% 100%;
     --border: 215 24% 20%;
     --input: 215 24% 18%;
-    --ring: 207 84% 55%;
+    --ring: 14 65% 57%;
     --sidebar-background: 215 44% 6%;
     --sidebar-foreground: 210 18% 92%;
     --sidebar-primary: 207 84% 55%;
@@ -395,7 +396,7 @@
 
   @media (max-width: 768px) {
     :root {
-      --text-scale: 0.95;
+      --text-scale: 1.045; /* 0.95 baseline × 1.10 zoom */
     }
   }
 

@@ -188,7 +188,6 @@ export const HomeIntroSection = () => {
                     className="w-full h-40 md:h-52 object-cover group-hover:scale-105 transition-transform duration-700"
                     loading="lazy"
                     decoding="async"
-                    decoding="async"
                   />
                   {/* Abstract ombre overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--primary)/0.6)] via-[hsl(var(--primary)/0.15)] to-transparent" />
@@ -206,7 +205,6 @@ export const HomeIntroSection = () => {
                     className="w-full h-28 md:h-36 object-cover group-hover:scale-110 transition-transform duration-700"
                     loading="lazy"
                     decoding="async"
-                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--accent)/0.5)] via-transparent to-[hsl(var(--primary)/0.08)]" />
                   <div className="absolute bottom-2 left-2">
@@ -219,7 +217,6 @@ export const HomeIntroSection = () => {
                     alt="Community workshop"
                     className="w-full h-28 md:h-36 object-cover group-hover:scale-110 transition-transform duration-700"
                     loading="lazy"
-                    decoding="async"
                     decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--primary)/0.5)] via-transparent to-[hsl(var(--accent)/0.08)]" />
@@ -271,8 +268,7 @@ export const HomeIntroSection = () => {
                 alt="Senior couple using devices safely"
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 loading="lazy"
-                    decoding="async"
-                    decoding="async"
+                decoding="async"
               />
               {/* Abstract ombre gradient */}
               <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--primary)/0.7)] via-[hsl(var(--primary)/0.3)] to-transparent" />

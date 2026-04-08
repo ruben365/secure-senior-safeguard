@@ -127,37 +127,37 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
 
       <nav className={overlay ? "absolute top-0 left-0 right-0 z-[9999] bg-gradient-to-b from-black/60 to-transparent" : `sticky top-0 z-[9999] transition-colors duration-300 ${scrolled ? "bg-[#080d1a]/95 backdrop-blur-md border-b border-white/[0.06]" : "bg-transparent"}`}>
         <div className="container mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
-          <div className="flex items-center justify-between h-[60px]">
+          <div className="flex items-center justify-between h-[76px] gap-6 lg:gap-12">
             {/* Logo — identical to hero */}
             <a
               href="/"
-              className="flex items-center gap-2.5 hover:opacity-90 transition-opacity duration-150 flex-shrink-0 no-underline"
+              className="flex items-center gap-4 hover:opacity-90 transition-opacity duration-150 flex-shrink-0 no-underline"
               onClick={handleBrandClick}
             >
               <img
                 src={invisionLogo}
                 alt="InVision Network Shield Logo"
-                width={34}
-                height={34}
+                width={42}
+                height={42}
                 loading="eager"
                 decoding="sync"
-                className="w-[32px] h-[32px] object-contain flex-shrink-0 brightness-0 invert"
+                className="w-[41px] h-[41px] object-contain flex-shrink-0 brightness-0 invert"
               />
-              <div className="flex flex-col leading-none min-w-0">
-                <span className="text-[15px] font-extrabold text-white tracking-tight">InVision Network</span>
-                <span className="text-[10px] font-bold text-gray-300 hidden sm:block tracking-widest uppercase">AI Scam Protection</span>
+              <div className="flex flex-col min-w-0 gap-1">
+                <span className="text-[19px] font-extrabold text-white tracking-tight leading-none">InVision Network</span>
+                <span className="text-[12.5px] font-bold text-gray-300 hidden sm:block tracking-widest uppercase leading-none">AI Scam Protection</span>
               </div>
             </a>
 
             {/* Desktop Links — identical to hero */}
-            <div className="hidden lg:flex items-center gap-1">
+            <div className="hidden lg:flex items-center gap-3 xl:gap-5 lg:ml-6 xl:ml-10">
               {primaryLinks.map((link) => {
                 const isActive = isActiveLink(link.href);
                 return (
                   <PrefetchLink
                     key={link.name}
                     to={link.href}
-                    className={`relative text-[15px] px-3 py-2 rounded-md transition-colors duration-150 ${
+                    className={`relative text-[19px] px-4 py-2 rounded-md transition-colors duration-150 ${
                       isActive
                         ? "text-orange-400 font-bold bg-orange-500/10"
                         : "text-gray-300 font-semibold hover:text-white hover:bg-white/10"
@@ -174,9 +174,9 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   type="button"
                   onClick={() => setMoreOpen(!moreOpen)}
                   aria-haspopup="menu"
-                  aria-expanded={moreOpen}
+                  aria-expanded={moreOpen ? "true" : "false"}
                   aria-label="More navigation links"
-                  className={`flex items-center gap-1 text-[15px] px-3 py-2 rounded-md transition-colors duration-150 ${
+                  className={`flex items-center gap-1 text-[19px] px-4 py-2 rounded-md transition-colors duration-150 ${
                     isSecondaryActive
                       ? "text-orange-400 font-bold bg-orange-500/10"
                       : "text-gray-300 font-semibold hover:text-white hover:bg-white/10"
@@ -184,7 +184,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 >
                   More
                   <ChevronDown
-                    className={`w-3.5 h-3.5 transition-transform duration-200 ${moreOpen ? "rotate-180" : ""}`}
+                    className={`w-4 h-4 transition-transform duration-200 ${moreOpen ? "rotate-180" : ""}`}
                   />
                 </button>
 
@@ -192,11 +192,14 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <div
                     role="menu"
                     aria-label="Secondary navigation"
-                    className="absolute top-full left-0 mt-2 w-44 rounded-lg border border-white/8 shadow-lg py-1 z-50 overflow-hidden"
+                    className="absolute top-full left-0 mt-2 w-48 rounded-xl border border-white/15 py-1.5 z-50 overflow-hidden"
                     style={{
-                      background: "rgba(20, 20, 28, 0.75)",
-                      backdropFilter: "blur(16px)",
-                      WebkitBackdropFilter: "blur(16px)",
+                      background:
+                        "linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%)",
+                      backdropFilter: "blur(20px) saturate(160%)",
+                      WebkitBackdropFilter: "blur(20px) saturate(160%)",
+                      boxShadow:
+                        "0 12px 32px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.12)",
                     }}
                   >
                     {secondaryLinks.map((link) => {
@@ -206,10 +209,10 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                           key={link.name}
                           to={link.href}
                           role="menuitem"
-                          className={`block px-4 py-2 text-sm transition-colors ${
+                          className={`block px-4 py-2.5 text-[15px] transition-colors ${
                             isActive
                               ? "text-orange-400 font-semibold"
-                              : "text-gray-400 hover:text-white"
+                              : "text-gray-300 hover:text-white"
                           }`}
                           onClick={() => setMoreOpen(false)}
                         >
@@ -237,18 +240,18 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 className="hidden lg:flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors duration-150 no-underline px-2 py-1.5 rounded-md hover:bg-white/10"
                 aria-label={`Call us at ${SITE.phone.display}`}
               >
-                <Phone className="w-4 h-4" />
-                <span className="hidden xl:inline text-sm font-medium">{SITE.phone.display}</span>
+                <Phone className="w-[21px] h-[21px]" />
+                <span className="hidden xl:inline text-[17.5px] font-medium">{SITE.phone.display}</span>
               </a>
 
               {/* Donate */}
               <button
                 type="button"
                 onClick={() => setDonateOpen(true)}
-                className="hidden lg:flex items-center gap-1.5 text-sm font-medium px-2.5 py-1.5 rounded-md text-gray-400 hover:text-orange-400 hover:bg-orange-500/10 transition-colors"
+                className="hidden lg:flex items-center gap-1.5 text-[17.5px] font-medium px-2.5 py-1.5 rounded-md text-gray-400 hover:text-orange-400 hover:bg-orange-500/10 transition-colors"
                 aria-label="Donate"
               >
-                <Heart className="w-4 h-4" />
+                <Heart className="w-[21px] h-[21px]" />
                 <span className="hidden xl:inline">Donate</span>
               </button>
 
@@ -260,7 +263,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 <Link
                   to="/admin"
                   aria-label="Go to Dashboard"
-                  className="flex items-center gap-1.5 h-9 px-6 text-sm font-semibold rounded-full bg-[#d96c4a] hover:bg-[#b8552f] text-white transition-all shadow-[0_0_15px_rgba(217,108,74,0.25)]"
+                  className="flex items-center gap-1.5 h-[46px] px-7 text-[17.5px] font-semibold rounded-full bg-violet-600 hover:bg-violet-500 text-white transition-all shadow-[0_0_15px_rgba(124,58,237,0.25)]"
                 >
                   <LayoutDashboard className="h-4 w-4" />
                   Dashboard
@@ -269,7 +272,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 <Link
                   to="/portal"
                   aria-label="Login to your account"
-                  className="h-9 px-6 text-sm font-semibold rounded-full bg-[#d96c4a] hover:bg-[#b8552f] text-white transition-all shadow-[0_0_15px_rgba(217,108,74,0.25)] inline-flex items-center"
+                  className="h-[46px] px-7 text-[17.5px] font-semibold rounded-full bg-violet-600 hover:bg-violet-500 text-white transition-all shadow-[0_0_15px_rgba(124,58,237,0.25)] inline-flex items-center"
                 >
                   Login
                 </Link>
@@ -281,7 +284,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="lg:hidden p-2 rounded-lg hover:bg-white/10 transition-colors duration-150 min-w-[44px] min-h-[44px] flex items-center justify-center"
                 aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-                aria-expanded={mobileMenuOpen}
+                aria-expanded={mobileMenuOpen ? "true" : "false"}
                 aria-controls="mobile-navigation"
               >
                 {mobileMenuOpen ? (
@@ -337,7 +340,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 <Link
                   to="/admin"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full h-11 text-[15px] font-semibold rounded-lg bg-[#d96c4a] hover:bg-[#b8552f] text-white flex items-center justify-center gap-2 transition-colors"
+                  className="w-full h-11 text-[15px] font-semibold rounded-lg bg-violet-600 hover:bg-violet-500 text-white flex items-center justify-center gap-2 transition-colors"
                 >
                   <LayoutDashboard className="h-4 w-4" />
                   Dashboard
@@ -346,7 +349,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 <Link
                   to="/portal"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full h-11 text-[15px] font-semibold rounded-lg bg-[#d96c4a] hover:bg-[#b8552f] text-white flex items-center justify-center transition-colors"
+                  className="w-full h-11 text-[15px] font-semibold rounded-lg bg-violet-600 hover:bg-violet-500 text-white flex items-center justify-center transition-colors"
                 >
                   Login
                 </Link>

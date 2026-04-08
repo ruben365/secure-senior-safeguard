@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { PageTransition } from "@/components/PageTransition";
 import { PaymentDialog } from "@/components/scanner/PaymentDialog";
-import { EnhancedPromptInputBox } from "@/components/ui/ai-prompt-box-enhanced";
+import { PromptInputBox } from "@/components/training/PromptInputBox";
 import { PremiumChatHistory } from "@/components/training/PremiumChatHistory";
 
 import { usePrerenderReady } from "@/contexts/PrerenderContext";
@@ -326,33 +326,45 @@ export default function TrainingAiAnalysis() {
 
               {/* Enhanced AI Command Center */}
               <div className="w-full flex flex-col items-center gap-3">
-                <EnhancedPromptInputBox
+                <PromptInputBox
                   onSend={handleSendMessage}
                   onFileSelect={prepareFile}
                   isLoading={status === "uploading" || status === "analyzing"}
                   placeholder="Drop file to scan or type a message..."
-                  hasFile={!!file}
-                  onClearFile={clearFile}
-                  onRequestPayment={handleRequestPayment}
-                  canAnalyze={file && status === "ready"}
+                  className="max-w-3xl"
                 />
                 {file && (
-                  <div className="flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 shadow-xl">
-                    <span className="text-sm text-white/90 font-medium truncate max-w-[200px]">
-                      {file.name}
-                    </span>
-                    <span className="text-white/60">•</span>
-                    <span className="text-sm text-white/80 whitespace-nowrap">
-                      {cost.formatted}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={clearFile}
-                      className="ml-2 rounded-full p-1 text-white/60 hover:text-white hover:bg-white/10 transition"
-                      aria-label="Remove file"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
+                  <div className="flex flex-wrap items-center justify-center gap-3">
+                    {/* File chip */}
+                    <div className="flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 shadow-xl">
+                      <span className="text-sm text-white/90 font-medium truncate max-w-[200px]">
+                        {file.name}
+                      </span>
+                      <span className="text-white/60">•</span>
+                      <span className="text-sm text-white/80 whitespace-nowrap">
+                        {cost.formatted}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={clearFile}
+                        className="ml-2 rounded-full p-1 text-white/60 hover:text-white hover:bg-white/10 transition"
+                        aria-label="Remove file"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                    </div>
+                    {/* Pay & Scan button — only when file is ready */}
+                    {status === "ready" && (
+                      <Button
+                        type="button"
+                        size="lg"
+                        onClick={handleRequestPayment}
+                        disabled={isProcessing}
+                        className="rounded-full"
+                      >
+                        Pay {cost.formatted} &amp; Scan
+                      </Button>
+                    )}
                   </div>
                 )}
                 <div className="w-full max-w-3xl mx-auto rounded-2xl border border-white/15 bg-black/35 backdrop-blur-md px-5 py-4 shadow-xl">

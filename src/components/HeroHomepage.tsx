@@ -10,7 +10,7 @@ import corineHero from "@/assets/hero-wife-office.jpg";
 const heroTabs = [
   { label: "Protection", to: "/training#pricing" },
   { label: "Workshops", to: "/training" },
-  { label: "AI", to: "/business" },
+  { label: "AI & Business", to: "/business" },
   { label: "Contact", to: "/contact" },
 ];
 
@@ -18,7 +18,7 @@ const heroTabs = [
 const featuresRow1 = [
   {
     icon: Bot,
-    title: "AI Tools",
+    title: "AI Business Tools",
     desc: "Custom software that automates your daily operations.",
   },
   {

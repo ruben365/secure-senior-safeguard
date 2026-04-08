@@ -1,0 +1,434 @@
+/* ═══════════════════════════════════════════════════════════════════
+   HomeStorySections — three narrative sections under the hero.
+   Light dimmed theme: warm off-white background, slate text,
+   premium glass cards, warm orange accent.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Container — clean warm off-white base */
+.hss-root {
+  background: #fafaf7;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Alternate section tint — soft warm cream (orange-system equivalent
+   of the spec's "light lavender #F5F3FF" — keeps brand intact) */
+.hss-section-tint {
+  background: #fef6f1;
+}
+
+/* Editorial section — pure white background for content variety */
+.hss-section-white {
+  background: #ffffff;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   SECONDARY ACCENT — Deep teal #0d9488
+   Cool complement to the warm orange primary. Used SPARINGLY:
+   live-monitoring indicators, numbered step counters, info badges.
+   Never used as a primary CTA color.
+   ─────────────────────────────────────────────────────────────── */
+.hss-teal-text {
+  color: #0d9488;
+}
+
+.hss-teal-bg-soft {
+  background: rgba(13, 148, 136, 0.10);
+  color: #0f766e;
+  border: 1px solid rgba(13, 148, 136, 0.22);
+}
+
+.hss-teal-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: #0d9488;
+  box-shadow: 0 0 8px rgba(13, 148, 136, 0.45);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   DEPTH LAYER 1 — Subtle slate dot pattern
+   Sits on the absolute base, beneath all content. Provides texture
+   without shifting the page's color temperature. Opacity ~3%, slate
+   tone keeps it neutral.
+   ─────────────────────────────────────────────────────────────── */
+.hss-dot-grid {
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+  background-image: radial-gradient(
+    circle,
+    rgba(15, 23, 42, 1) 1px,
+    transparent 1.5px
+  );
+  background-size: 28px 28px;
+  background-position: 0 0;
+  opacity: 0.035;
+}
+
+/* Ambient warm wash on the left — soft orange shimmer (existing) */
+.hss-ambient-wash {
+  position: absolute;
+  left: -10%;
+  top: 5%;
+  width: 60%;
+  height: 60%;
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(
+    50% 50% at 30% 50%,
+    rgba(249, 115, 22, 0.10) 0%,
+    rgba(249, 115, 22, 0.03) 40%,
+    transparent 70%
+  );
+  filter: blur(120px);
+}
+
+.hss-ambient-wash-2 {
+  position: absolute;
+  right: -10%;
+  bottom: 0;
+  width: 50%;
+  height: 50%;
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(
+    50% 50% at 70% 50%,
+    rgba(249, 115, 22, 0.08) 0%,
+    rgba(249, 115, 22, 0.02) 40%,
+    transparent 70%
+  );
+  filter: blur(120px);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   DEPTH LAYER 2 — Secondary orange ambient glows (new)
+   Two more heavy-blur radial halos using the existing orange accent
+   at extremely low opacity. They sit behind everything (z-index: -1)
+   and add 3D depth without changing the base color tone.
+   ─────────────────────────────────────────────────────────────── */
+.hss-ambient-wash-3 {
+  /* Top-right corner halo */
+  position: absolute;
+  right: -8%;
+  top: -5%;
+  width: 45%;
+  height: 50%;
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(
+    50% 50% at 70% 30%,
+    rgba(249, 115, 22, 0.06) 0%,
+    rgba(249, 115, 22, 0.02) 45%,
+    transparent 75%
+  );
+  filter: blur(140px);
+}
+
+.hss-ambient-wash-4 {
+  /* Middle-right halo — adds depth at the testimonials/FAQ area */
+  position: absolute;
+  right: -5%;
+  top: 40%;
+  width: 40%;
+  height: 40%;
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(
+    50% 50% at 60% 50%,
+    rgba(249, 115, 22, 0.05) 0%,
+    rgba(249, 115, 22, 0.015) 40%,
+    transparent 70%
+  );
+  filter: blur(140px);
+}
+
+/* Eyebrow / overline pill */
+.hss-overline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  background: rgba(249, 115, 22, 0.10);
+  border: 1px solid rgba(249, 115, 22, 0.22);
+  color: #b8552f;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.hss-overline-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: #d96c4a;
+}
+
+/* White card surface — used for stat tiles, side cards */
+.hss-card {
+  background: #ffffff;
+  border: 1px solid rgba(30, 41, 59, 0.08);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 1) inset,
+    0 8px 24px -12px rgba(15, 23, 42, 0.12);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hss-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(217, 108, 74, 0.25);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 1) inset,
+    0 16px 40px -12px rgba(15, 23, 42, 0.18),
+    0 0 30px -8px rgba(249, 115, 22, 0.18);
+}
+
+/* Soft warm tint card — orange wash on cream */
+.hss-soft-tint {
+  background: linear-gradient(
+    135deg,
+    rgba(249, 115, 22, 0.06) 0%,
+    rgba(217, 108, 74, 0.10) 100%
+  );
+  border: 1px solid rgba(217, 108, 74, 0.18);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hss-soft-tint:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(
+    135deg,
+    rgba(249, 115, 22, 0.10) 0%,
+    rgba(217, 108, 74, 0.16) 100%
+  );
+  border-color: rgba(217, 108, 74, 0.32);
+  box-shadow: 0 16px 40px -12px rgba(249, 115, 22, 0.22);
+}
+
+/* Stat number — orange suffix */
+.hss-stat-suffix {
+  color: #d96c4a;
+}
+
+/* Icon tile — small soft-orange square that holds a Lucide icon */
+.hss-icon-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(249, 115, 22, 0.12);
+  border: 1px solid rgba(217, 108, 74, 0.18);
+  color: #d96c4a;
+}
+
+/* Section divider — subtle line that separates sections */
+.hss-divider {
+  position: relative;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(15, 23, 42, 0.10) 50%,
+    transparent 100%
+  );
+}
+
+/* Dark contrast card — solid deep slate with warm orange edge glow.
+   Used as the standout card in 2x2 grids. The reference design uses
+   a deep purple variant; we use deep slate + orange to keep the
+   established brand palette intact. */
+.hss-dark-card {
+  background: linear-gradient(
+    135deg,
+    #1e293b 0%,
+    #2a1c14 100%
+  );
+  border: 1px solid rgba(217, 108, 74, 0.18);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.06) inset,
+    0 24px 60px -16px rgba(15, 23, 42, 0.4),
+    0 0 40px -12px rgba(249, 115, 22, 0.18);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hss-dark-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(217, 108, 74, 0.35);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.08) inset,
+    0 28px 70px -16px rgba(15, 23, 42, 0.5),
+    0 0 60px -12px rgba(249, 115, 22, 0.28);
+}
+
+.hss-dark-card-glow {
+  position: absolute;
+  top: -25%;
+  right: -25%;
+  width: 65%;
+  height: 75%;
+  pointer-events: none;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(249, 115, 22, 0.32) 0%,
+    rgba(249, 115, 22, 0.08) 50%,
+    transparent 75%
+  );
+  filter: blur(50px);
+}
+
+/* Primary CTA pill — solid warm orange */
+.hss-cta-primary {
+  background: #d96c4a;
+  color: #ffffff;
+  box-shadow:
+    0 8px 24px -8px rgba(217, 108, 74, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.hss-cta-primary:hover {
+  background: #b8552f;
+  box-shadow:
+    0 12px 32px -8px rgba(217, 108, 74, 0.55),
+    0 0 40px rgba(249, 115, 22, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+/* Ghost CTA pill */
+.hss-cta-ghost {
+  background: transparent;
+  color: #1e293b;
+  border: 1px solid rgba(30, 41, 59, 0.18);
+}
+
+.hss-cta-ghost:hover {
+  background: rgba(30, 41, 59, 0.04);
+  border-color: rgba(30, 41, 59, 0.28);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Final CTA section — sits right before the footer.
+   Premium dark cinematic block that lands the page after the white
+   story sections. Matches the hero's dark slate + orange accent.
+   ═══════════════════════════════════════════════════════════════════ */
+.hss-final-cta {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    #080b11 0%,
+    hsl(260, 18%, 8%) 50%,
+    hsl(260, 22%, 6%) 100%
+  );
+  overflow: hidden;
+}
+
+.hss-final-cta-image {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.32;
+}
+
+.hss-final-cta-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.65) saturate(0.85);
+}
+
+.hss-final-cta-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    rgba(8, 11, 17, 0.85) 0%,
+    rgba(8, 11, 17, 0.55) 50%,
+    rgba(8, 11, 17, 0.85) 100%
+  );
+}
+
+.hss-final-cta-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(50% 60% at 20% 50%, rgba(249, 115, 22, 0.18) 0%, transparent 60%),
+    radial-gradient(50% 60% at 80% 50%, rgba(249, 115, 22, 0.12) 0%, transparent 60%);
+  filter: blur(60px);
+}
+
+.hss-final-overline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.1rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fbab8e;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.hss-final-trust {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.08) inset,
+    0 12px 32px -8px rgba(0, 0, 0, 0.45);
+}
+
+.hss-final-cta-button-primary {
+  background: linear-gradient(
+    135deg,
+    rgba(249, 115, 22, 0.28) 0%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  border: 1px solid rgba(249, 115, 22, 0.5);
+  color: #ffffff;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 0 24px rgba(249, 115, 22, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+.hss-final-cta-button-primary:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(249, 115, 22, 0.4) 0%,
+    rgba(255, 255, 255, 0.12) 100%
+  );
+  border-color: rgba(249, 115, 22, 0.65);
+  box-shadow:
+    0 4px 32px rgba(249, 115, 22, 0.35),
+    0 0 60px rgba(249, 115, 22, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.hss-final-cta-button-ghost {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  color: #ffffff;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.hss-final-cta-button-ghost:hover {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.38);
+}

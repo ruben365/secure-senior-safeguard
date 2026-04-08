@@ -10,12 +10,17 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: [
-          "bg-gradient-to-b from-primary to-primary/85 text-white",
-          "border border-primary/60",
-          "shadow-[0_2px_0_0_hsl(var(--primary)/0.5),0_4px_12px_-2px_hsl(var(--primary)/0.3),inset_0_1px_0_0_hsl(0_0%_100%/0.25),inset_0_-2px_0_0_hsl(0_0%_0%/0.15)]",
-          "hover:translate-y-[-1px] hover:shadow-[0_3px_0_0_hsl(var(--primary)/0.5),0_6px_16px_-2px_hsl(var(--primary)/0.35),inset_0_1px_0_0_hsl(0_0%_100%/0.3),inset_0_-2px_0_0_hsl(0_0%_0%/0.15)]",
-          "active:translate-y-[1px] active:shadow-[inset_0_2px_4px_hsl(0_0%_0%/0.2),inset_0_1px_2px_hsl(0_0%_0%/0.15)]",
-          "[text-shadow:0_1px_2px_rgba(0,0,0,0.3)]",
+          // Solid warm orange with a whisper of top-to-bottom gradient
+          "bg-gradient-to-b from-[#e07a55] to-[#d05f3a] text-white",
+          // Crisp border keyed to the bottom of the gradient
+          "border border-[#b8552f]",
+          // Soft single drop shadow tinted with the brand color
+          "shadow-[0_1px_0_0_rgba(255,255,255,0.18)_inset,0_8px_20px_-6px_rgba(217,108,74,0.45)]",
+          // Hover — gentle lift, slightly warmer, bigger soft glow
+          "hover:-translate-y-[1px] hover:from-[#e88560] hover:to-[#d96847]",
+          "hover:shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_12px_28px_-6px_rgba(217,108,74,0.55),0_0_24px_-4px_rgba(217,108,74,0.35)]",
+          // Active — micro-press
+          "active:translate-y-[0.5px] active:shadow-[0_1px_0_0_rgba(255,255,255,0.12)_inset,0_4px_12px_-4px_rgba(217,108,74,0.4)]",
         ].join(" "),
         gold: [
           "bg-gradient-to-b from-accent to-[hsl(308_23%_51%)] text-white",

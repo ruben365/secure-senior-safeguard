@@ -1,0 +1,30 @@
+/* ═══════════════════════════════════════════════════════════════════
+   Footer — premium dark layout with warm orange edge tie-in
+   ═══════════════════════════════════════════════════════════════════ */
+
+.footer-bg {
+  background: linear-gradient(
+    180deg,
+    hsl(260 12% 11%) 0%,
+    hsl(260 10% 8%) 60%,
+    hsl(260 8% 6%) 100%
+  );
+}
+
+.footer-aura {
+  background: radial-gradient(
+    60% 60% at 100% 30%,
+    rgba(249, 115, 22, 0.07) 0%,
+    transparent 70%
+  );
+}
+
+.footer-newsletter-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.015) 100%
+  );
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}

@@ -1,0 +1,183 @@
+/* ═══════════════════════════════════════════════════════════════════
+   PromptInputBox — premium dark frosted glass surface for the AI chat
+   input. Matches the hero's #080b11 slate + warm orange accent system.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Outer surface — deep slate frosted glass ───────────────────── */
+.pib-surface {
+  background: linear-gradient(
+    180deg,
+    rgba(14, 18, 27, 0.92) 0%,
+    rgba(8, 11, 17, 0.94) 100%
+  );
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.08) inset,
+    0 -1px 0 0 rgba(0, 0, 0, 0.3) inset,
+    0 24px 60px -16px rgba(0, 0, 0, 0.55),
+    0 8px 24px -8px rgba(217, 108, 74, 0.18),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+  transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pib-surface:focus-within {
+  border-color: rgba(217, 108, 74, 0.45);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.10) inset,
+    0 -1px 0 0 rgba(0, 0, 0, 0.3) inset,
+    0 24px 60px -16px rgba(0, 0, 0, 0.55),
+    0 0 32px -4px rgba(217, 108, 74, 0.30),
+    0 0 0 1px rgba(217, 108, 74, 0.20);
+}
+
+.pib-surface.is-loading {
+  border-color: rgba(217, 108, 74, 0.55);
+}
+
+/* ─── Textarea — clean white-on-dark, no chrome ──────────────────── */
+.pib-textarea {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+
+.pib-textarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+.pib-textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.pib-textarea::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.18);
+  border-radius: 3px;
+}
+
+.pib-textarea::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.32);
+}
+
+.pib-textarea:focus-visible {
+  outline: none;
+  outline-offset: 0;
+}
+
+/* ─── Tooltip — matches the hero glass family ─────────────────────── */
+.pib-tooltip {
+  background: rgba(8, 11, 17, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+  color: #ffffff;
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.55);
+}
+
+/* ─── Mode toggle button — base ───────────────────────────────────── */
+.pib-toggle {
+  background: transparent;
+  border: 1px solid transparent;
+  color: rgba(255, 255, 255, 0.55);
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pib-toggle:hover {
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.pib-toggle.is-active {
+  color: #fbab8e;
+  background: rgba(249, 115, 22, 0.12);
+  border-color: rgba(249, 115, 22, 0.35);
+}
+
+/* ─── Icon ghost button (file upload) ─────────────────────────────── */
+.pib-ghost-button {
+  color: rgba(255, 255, 255, 0.55);
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pib-ghost-button:hover {
+  color: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ─── Send / mic button — warm orange when active ─────────────────── */
+.pib-send-button {
+  background: linear-gradient(180deg, #e07a55 0%, #d05f3a 100%);
+  border: 1px solid #b8552f;
+  color: #ffffff;
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.18) inset,
+    0 4px 14px -2px rgba(217, 108, 74, 0.55);
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pib-send-button:hover {
+  background: linear-gradient(180deg, #e88560 0%, #d96847 100%);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.22) inset,
+    0 6px 20px -2px rgba(217, 108, 74, 0.7),
+    0 0 24px -4px rgba(249, 115, 22, 0.35);
+  transform: translateY(-1px);
+}
+
+.pib-send-button.is-mic {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.65);
+  box-shadow: none;
+}
+
+.pib-send-button.is-mic:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.95);
+  border-color: rgba(255, 255, 255, 0.22);
+  transform: none;
+  box-shadow: none;
+}
+
+.pib-send-button.is-recording {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.45);
+  color: #f87171;
+  box-shadow: 0 0 24px -4px rgba(239, 68, 68, 0.35);
+}
+
+/* ─── Subtle divider between toggle buttons ───────────────────────── */
+.pib-divider {
+  width: 1px;
+  height: 18px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.16) 50%,
+    transparent 100%
+  );
+  margin: 0 4px;
+}
+
+/* ─── Image preview thumbnail ─────────────────────────────────────── */
+.pib-thumb {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.45);
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pib-thumb:hover {
+  border-color: rgba(249, 115, 22, 0.45);
+  transform: translateY(-1px);
+}
+
+/* ─── Voice recorder dot — pulsing orange ─────────────────────────── */
+.pib-recorder-dot {
+  background-color: #d96c4a;
+  box-shadow: 0 0 8px rgba(217, 108, 74, 0.55);
+}
+
+.pib-recorder-bar {
+  background-color: rgba(249, 115, 22, 0.55);
+}
