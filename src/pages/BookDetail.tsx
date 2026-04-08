@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
@@ -23,13 +23,14 @@ import {
 import { getBookBySlug, LIBRARY_BOOKS } from "@/data/libraryBooks";
 import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/hooks/use-toast";
+import { EmbeddedPaymentModal } from "@/components/payment/EmbeddedPaymentModal";
 
 export default function BookDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
   const { addItem } = useCart();
   const { toast } = useToast();
   const [expandedChapter, setExpandedChapter] = useState<number | null>(1);
+  const [paymentOpen, setPaymentOpen] = useState(false);
 
   const book = getBookBySlug(slug || "");
 
@@ -52,14 +53,23 @@ export default function BookDetail() {
   }
 
   const handleAddToCart = () => {
-    // TRIAL MODE: Skip cart, go directly to reader
-    toast({ title: "Trial Mode", description: `Opening ${book.title} in the reader...` });
-    navigate("/reader");
+    addItem({
+      id: book.slug,
+      productId: book.slug,
+      name: book.title,
+      price: book.price,
+      image: book.cover_image,
+      isDigital: true,
+      stripe_price_id: book.stripe_price_id,
+    });
+    toast({
+      title: "Added to cart",
+      description: `${book.title} is ready to check out.`,
+    });
   };
 
   const handleBuyNow = () => {
-    // TRIAL MODE: Skip payment, go directly to reader
-    navigate("/reader");
+    setPaymentOpen(true);
   };
 
   const relatedBooks = LIBRARY_BOOKS.filter(
@@ -363,6 +373,23 @@ export default function BookDetail() {
       </main>
 
       <Footer />
+
+      {/* Book purchase — compact embedded Stripe modal */}
+      <EmbeddedPaymentModal
+        open={paymentOpen}
+        onOpenChange={setPaymentOpen}
+        mode="payment"
+        priceId={book.stripe_price_id}
+        productName={book.title}
+        amount={Math.round(book.price * 100)}
+        description={book.subtitle}
+        onSuccess={() => {
+          toast({
+            title: "Purchase complete",
+            description: "Check your email for your Access ID to start reading.",
+          });
+        }}
+      />
     </div>
   );
 }

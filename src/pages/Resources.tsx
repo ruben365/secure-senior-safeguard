@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 // AiAnalysisCTA removed during cleanup
 import { useQuery } from "@tanstack/react-query";
 import { useCart } from "@/contexts/CartContext";
@@ -62,7 +62,6 @@ const heroHeadlines = [
 "Guides to Protect What Matters Most"];
 
 function Resources() {
-  const navigate = useNavigate();
   const { addItem, lastClearReason, hadItemsBeforeClear, itemCount } =
   useCart();
   const { toast } = useToast();
@@ -179,17 +178,31 @@ function Resources() {
   )
   )
   ) || [];
+  // Open the embedded payment modal for a single book purchase
   const handleBuyNow = (product: (typeof BOOK_CATALOG)[number]) => {
-    // TRIAL MODE: Skip payment, go directly to reader
-    navigate("/reader");
+    setEmbeddedPaymentConfig({
+      mode: "payment",
+      priceId: product.stripe_price_id,
+      productName: product.name,
+      amount: Math.round(product.price * 100), // dollars -> cents
+      description: product.subtitle,
+    });
+    setEmbeddedPaymentOpen(true);
   };
   const handleAddToCart = (book: (typeof BOOK_CATALOG)[number]) => {
-    // TRIAL MODE: Skip cart, go directly to reader
-    toast({
-      title: "Trial Mode",
-      description: `Opening ${book.name} in the reader...`
+    addItem({
+      id: book.id,
+      productId: book.id,
+      name: book.name,
+      price: book.price,
+      image: book.image,
+      isDigital: true,
+      stripe_price_id: book.stripe_price_id,
     });
-    navigate("/reader");
+    toast({
+      title: "Added to cart",
+      description: `${book.name} is ready to check out.`,
+    });
   };
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -363,8 +376,8 @@ function Resources() {
                   </button>
                   <div className="p-3">
                     <div className="flex items-center gap-1.5 mb-1.5">
-                      <Badge className="text-[10px] px-1.5 py-0">{book.tag}</Badge>
-                      <Badge variant="outline" className="text-[10px] px-1.5 py-0">{CATEGORY_LABELS[book.category]}</Badge>
+                      <Badge className="text-[10px] px-1.5 py-0 bg-gradient-to-r from-teal-600 to-indigo-600 text-white border-0">{book.tag}</Badge>
+                      <Badge variant="outline" className="text-[10px] px-1.5 py-0 border-teal-600/30 text-teal-700">{CATEGORY_LABELS[book.category]}</Badge>
                     </div>
                     <h4 className="font-semibold text-sm leading-tight line-clamp-1">{book.name}</h4>
                     <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{book.subtitle}</p>
@@ -457,16 +470,11 @@ function Resources() {
               <div key={book.id} className="group relative">
                 <div className="h-full rounded-2xl p-[1px] bg-gradient-to-b from-border/50 to-border/20 hover:from-primary/30 hover:to-primary/10 transition-colors duration-200 shadow-sm hover:shadow-md">
                   <Card className="h-full rounded-[calc(1rem-1px)] p-3 border-0 bg-card flex flex-col relative overflow-hidden">
-                    {/* Gradient accent bar */}
-                    <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/30 to-accent/20" />
+                    {/* Teal/indigo accent bar — breaks up the all-orange palette */}
+                    <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-teal-500/40 via-indigo-500/30 to-primary/20" />
 
-                    {/* eBook Badge - Top Left */}
-                    <Badge className="absolute top-2 left-2 text-[9px] px-1.5 py-0.5 bg-primary/90 text-primary-foreground z-10 shadow-sm">
-                      📘 eBook
-                    </Badge>
-
-                    {/* Tag Badge - Top Right */}
-                    <Badge className="absolute top-2 right-2 text-[9px] px-1.5 py-0.5 bg-gradient-to-r from-primary to-accent text-white z-10 shadow-sm">
+                    {/* Single tag badge — top right, no more duplicated eBook label */}
+                    <Badge className="absolute top-2 right-2 text-[9px] px-1.5 py-0.5 bg-gradient-to-r from-teal-600 to-indigo-600 text-white z-10 shadow-sm border-0">
                       {book.tag}
                     </Badge>
 
@@ -528,7 +536,7 @@ function Resources() {
                     {/* Price and Actions */}
                     <div className="mt-auto pt-2 border-t border-border/30">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-base md:text-lg font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                        <span className="text-base md:text-lg font-black bg-gradient-to-r from-teal-600 to-indigo-600 bg-clip-text text-transparent">
                           ${book.price}
                         </span>
                         <span className="text-[8px] text-emerald-600 font-semibold">
@@ -540,7 +548,7 @@ function Resources() {
                           variant="outline"
                           size="sm"
                           onClick={() => handleAddToCart(book)}
-                          className="text-[10px] h-7 px-2 rounded-lg"
+                          className="text-[10px] h-7 px-2 rounded-lg border-teal-600/40 hover:border-teal-600 hover:bg-teal-50"
                         >
                           <ShoppingCart className="w-3 h-3 mr-1" />
                           Cart
@@ -548,7 +556,7 @@ function Resources() {
                         <Button
                           size="sm"
                           onClick={() => handleBuyNow(book)}
-                          className="text-[10px] h-7 px-2 rounded-lg bg-gradient-to-r from-primary to-accent text-white hover:opacity-90"
+                          className="text-[10px] h-7 px-2 rounded-lg bg-gradient-to-r from-teal-600 to-indigo-600 text-white border-0 hover:from-teal-700 hover:to-indigo-700 hover:opacity-100 shadow-[0_4px_12px_-2px_rgba(13,148,136,0.4)]"
                         >
                           <Zap className="w-3 h-3 mr-1" />
                           Buy
