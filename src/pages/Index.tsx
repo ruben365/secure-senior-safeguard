@@ -51,6 +51,11 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
             <HeroHomepage />
           </section>
 
+          {/* Color-wash wrapper — layered overlay of dark 10%, purple 10%,
+              white 6%, brown 10%, yellow 7%, burgundy 6%, maroon 3%, red 1%.
+              Hero and Footer sit OUTSIDE this wrapper so they stay untouched. */}
+          <div className="home-color-wash relative isolate">
+
           {/* 2. Story sections — replaces the old intro/services/workshops/promo
               stack with one cohesive 3-section block in the orange/glass system */}
           <section
@@ -170,6 +175,9 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
               </div>
             </div>
           </section>
+
+          </div>
+          {/* /home-color-wash */}
 
           <Footer />
 
