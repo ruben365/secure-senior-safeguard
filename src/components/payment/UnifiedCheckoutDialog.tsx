@@ -623,7 +623,7 @@ const UnifiedCheckoutDialog = React.forwardRef<HTMLDivElement>(function UnifiedC
 
   return (
     <Dialog open={state.isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-lg">
+      <DialogContent className="sm:max-w-[540px] p-5 gap-3">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             {state.step === "success" ? (

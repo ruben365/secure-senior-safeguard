@@ -460,9 +460,9 @@ function Auth() {
     </div>
   );
 
-  // Input style with focus state
+  // Premium input style — subtle bg, warm orange focus ring
   const inputClassName =
-    "h-12 pl-10 bg-slate-50/50 border-slate-200 text-foreground placeholder:text-muted-foreground transition-all duration-200 focus:border-primary focus:ring-2 focus:ring-primary/20";
+    "h-12 pl-10 bg-slate-50/70 border-slate-200/90 text-foreground placeholder:text-slate-400 rounded-xl transition-all duration-200 focus:bg-white focus:border-orange-400/70 focus:ring-4 focus:ring-orange-400/10 hover:border-slate-300";
 
   if (signupSuccess) {
     return (
@@ -532,25 +532,89 @@ function Auth() {
       />
 
       {/*
-        ─── SUBTLE BACKGROUND LAYER ────────────────────────────────
-        Dark slate-to-indigo gradient with a very subtle dot grid
-        and two soft ambient orbs. No heavy photo wash, no heavy
-        orange — just a calm professional backdrop.
+        ═══════════════════════════════════════════════════════════════
+        PREMIUM BACKGROUND — layered composition
+        ═══════════════════════════════════════════════════════════════
+        Stack, bottom to top:
+          1. Deep navy base gradient (not flat black)
+          2. Soft radial vignette at the card's center
+          3. Fine dot grid at 0.04 opacity — texture, not pattern
+          4. Diagonal mesh gradient — warm coral top-left, cool
+             lavender bottom-right, navy mid — adds depth and color
+             balance without being flashy
+          5. Decorative glass shapes: a large soft circle top-right
+             and a geometric rounded-square bottom-left, both at
+             low opacity with heavy blur
+          6. Thin horizontal brand strip at the very top (barely
+             visible) — subtle reference to the brand band
       */}
       <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0b1020] via-[#0e1428] to-[#0a0f1e]" />
-        {/* Subtle dot grid */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.035]">
+        {/* 1 — deep navy base gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0c1024] via-[#0f1530] to-[#0a0e22]" />
+
+        {/* 4 — diagonal mesh: warm top-left → navy center → cool bottom-right */}
+        <div
+          className="absolute inset-0 opacity-90"
+          style={{
+            background:
+              "radial-gradient(ellipse 70% 55% at 12% 8%, rgba(217, 108, 74, 0.18) 0%, transparent 55%), " +
+              "radial-gradient(ellipse 60% 50% at 88% 92%, rgba(139, 116, 188, 0.22) 0%, transparent 55%), " +
+              "radial-gradient(ellipse 55% 45% at 50% 50%, rgba(30, 41, 80, 0.3) 0%, transparent 65%)",
+          }}
+        />
+
+        {/* 3 — fine dot grid texture */}
+        <svg className="absolute inset-0 w-full h-full opacity-[0.04]">
           <defs>
-            <pattern id="auth-dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+            <pattern id="auth-dots" x="0" y="0" width="26" height="26" patternUnits="userSpaceOnUse">
               <circle cx="1" cy="1" r="1" fill="#ffffff" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#auth-dots)" />
         </svg>
-        {/* A small orange glow ties back to the brand without dominating */}
-        <div className="absolute -top-40 -left-40 h-[520px] w-[520px] rounded-full bg-orange-500/10 blur-[140px]" />
-        <div className="absolute -bottom-40 -right-40 h-[560px] w-[560px] rounded-full bg-indigo-500/12 blur-[160px]" />
+
+        {/* 5a — decorative large glass circle, top-right */}
+        <div
+          className="absolute -top-32 -right-20 w-[540px] h-[540px] rounded-full opacity-60"
+          style={{
+            background:
+              "radial-gradient(circle at 30% 30%, rgba(217, 108, 74, 0.18) 0%, rgba(217, 108, 74, 0.05) 40%, transparent 70%)",
+            filter: "blur(70px)",
+          }}
+        />
+
+        {/* 5b — decorative geometric rounded-square, bottom-left */}
+        <div
+          className="absolute -bottom-24 -left-16 w-[480px] h-[480px] rotate-12 opacity-60"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 50%, rgba(139, 116, 188, 0.2) 0%, rgba(139, 116, 188, 0.06) 40%, transparent 70%)",
+            borderRadius: "48% 52% 44% 56% / 52% 46% 54% 48%",
+            filter: "blur(80px)",
+          }}
+        />
+
+        {/* 5c — accent amber orb, upper-center (small, subtle) */}
+        <div
+          className="absolute top-[15%] left-[50%] -translate-x-1/2 w-[380px] h-[380px] rounded-full opacity-40"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(251, 191, 36, 0.1) 0%, transparent 60%)",
+            filter: "blur(90px)",
+          }}
+        />
+
+        {/* 2 — soft central vignette for focus around the card */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 50% 45% at 55% 50%, transparent 0%, rgba(10, 14, 34, 0.35) 85%)",
+          }}
+        />
+
+        {/* 6 — thin brand strip at the top */}
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-orange-500/40 to-transparent" />
       </div>
 
       {/*
@@ -642,13 +706,34 @@ function Auth() {
             </div>
           </aside>
 
-          {/* RIGHT — auth card */}
+          {/* RIGHT — premium auth card */}
           <div className="w-full max-w-[460px] mx-auto lg:mx-0">
-            <div className="relative rounded-2xl bg-white border border-slate-200/80 shadow-[0_40px_80px_-24px_rgba(15,23,42,0.45),0_8px_28px_-8px_rgba(15,23,42,0.25)] p-7 md:p-9">
-              {/* Top hairline highlight */}
+            {/*
+              Auth card — premium multi-layer presentation:
+                • Soft warm glow ring behind the card
+                • White card with a gradient-tinted border
+                • 5-layer shadow stack (inner highlight, contact,
+                  ambient close, ambient mid, ambient far)
+                • Top hairline rim light
+                • Subtle bottom accent bar
+            */}
+            {/* Warm glow ring — sits behind the card */}
+            <div
+              aria-hidden="true"
+              className="absolute -inset-4 rounded-[28px] bg-gradient-to-br from-orange-500/20 via-transparent to-purple-500/15 blur-2xl pointer-events-none"
+            />
+
+            <div className="relative rounded-[20px] bg-white border border-slate-200/70 p-8 md:p-10 shadow-[0_1px_0_0_rgba(255,255,255,0.9)_inset,0_2px_4px_-1px_rgba(15,23,42,0.08),0_12px_24px_-8px_rgba(15,23,42,0.18),0_32px_64px_-20px_rgba(15,23,42,0.4),0_48px_96px_-24px_rgba(15,23,42,0.35)]">
+              {/* Top hairline rim light */}
               <div
                 aria-hidden="true"
-                className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-slate-300/80 to-transparent"
+                className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-orange-400/50 to-transparent"
+              />
+
+              {/* Subtle bottom accent bar */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-x-10 bottom-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent"
               />
 
               {/* Mobile logo (desktop shows it in the left pane) */}
@@ -715,7 +800,7 @@ function Auth() {
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full h-11 border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-all"
+                    className="w-full h-11 rounded-xl bg-white border-slate-200/80 text-slate-800 font-medium shadow-[0_1px_2px_rgba(15,23,42,0.04),0_1px_0_rgba(255,255,255,0.9)_inset] hover:bg-slate-50 hover:border-slate-300 hover:shadow-[0_2px_6px_rgba(15,23,42,0.08),0_1px_0_rgba(255,255,255,1)_inset] transition-all duration-200"
                     onClick={handleGoogleSignIn}
                   >
                     <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
@@ -742,7 +827,7 @@ function Auth() {
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full h-11 border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-all"
+                    className="w-full h-11 rounded-xl bg-white border-slate-200/80 text-slate-800 font-medium shadow-[0_1px_2px_rgba(15,23,42,0.04),0_1px_0_rgba(255,255,255,0.9)_inset] hover:bg-slate-50 hover:border-slate-300 hover:shadow-[0_2px_6px_rgba(15,23,42,0.08),0_1px_0_rgba(255,255,255,1)_inset] transition-all duration-200"
                     onClick={handleMicrosoftSignIn}
                   >
                     <svg className="w-5 h-5 mr-3" viewBox="0 0 23 23">
@@ -761,7 +846,7 @@ function Auth() {
                     <span className="w-full border-t border-slate-200" />
                   </div>
                   <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-white px-3 text-muted-foreground">
+                    <span className="bg-white px-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-400">
                       or continue with email
                     </span>
                   </div>
@@ -864,7 +949,7 @@ function Auth() {
 
                 <Button
                   type="submit"
-                  className="w-full h-12 text-base font-semibold bg-gradient-to-r from-primary to-accent shadow-[0_4px_20px_-4px_hsl(var(--primary)/0.5)] hover:shadow-[0_6px_24px_-4px_hsl(var(--primary)/0.6)] transition-all duration-300"
+                  className="w-full h-12 text-[15px] font-semibold rounded-xl bg-gradient-to-b from-[#e07a55] to-[#d05f3a] border border-[#b8552f] text-white shadow-[0_1px_0_0_rgba(255,255,255,0.18)_inset,0_8px_20px_-6px_rgba(217,108,74,0.5),0_16px_32px_-12px_rgba(217,108,74,0.35)] hover:from-[#e88560] hover:to-[#d96847] hover:-translate-y-[1px] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_12px_28px_-6px_rgba(217,108,74,0.6),0_20px_40px_-12px_rgba(217,108,74,0.4)] active:translate-y-[0.5px] transition-all duration-200"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -898,7 +983,7 @@ function Auth() {
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full h-11 border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-all"
+                    className="w-full h-11 rounded-xl bg-white border-slate-200/80 text-slate-800 font-medium shadow-[0_1px_2px_rgba(15,23,42,0.04),0_1px_0_rgba(255,255,255,0.9)_inset] hover:bg-slate-50 hover:border-slate-300 hover:shadow-[0_2px_6px_rgba(15,23,42,0.08),0_1px_0_rgba(255,255,255,1)_inset] transition-all duration-200"
                     onClick={handleGoogleSignIn}
                   >
                     <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
@@ -925,7 +1010,7 @@ function Auth() {
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full h-11 border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-all"
+                    className="w-full h-11 rounded-xl bg-white border-slate-200/80 text-slate-800 font-medium shadow-[0_1px_2px_rgba(15,23,42,0.04),0_1px_0_rgba(255,255,255,0.9)_inset] hover:bg-slate-50 hover:border-slate-300 hover:shadow-[0_2px_6px_rgba(15,23,42,0.08),0_1px_0_rgba(255,255,255,1)_inset] transition-all duration-200"
                     onClick={handleMicrosoftSignIn}
                   >
                     <svg className="w-5 h-5 mr-3" viewBox="0 0 23 23">
@@ -944,7 +1029,7 @@ function Auth() {
                     <span className="w-full border-t border-slate-200" />
                   </div>
                   <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-white px-3 text-muted-foreground">
+                    <span className="bg-white px-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-400">
                       or continue with email
                     </span>
                   </div>
@@ -1116,7 +1201,7 @@ function Auth() {
 
                 <Button
                   type="submit"
-                  className="w-full h-12 text-base font-semibold bg-gradient-to-r from-primary to-accent shadow-[0_4px_20px_-4px_hsl(var(--primary)/0.5)] hover:shadow-[0_6px_24px_-4px_hsl(var(--primary)/0.6)] transition-all duration-300"
+                  className="w-full h-12 text-[15px] font-semibold rounded-xl bg-gradient-to-b from-[#e07a55] to-[#d05f3a] border border-[#b8552f] text-white shadow-[0_1px_0_0_rgba(255,255,255,0.18)_inset,0_8px_20px_-6px_rgba(217,108,74,0.5),0_16px_32px_-12px_rgba(217,108,74,0.35)] hover:from-[#e88560] hover:to-[#d96847] hover:-translate-y-[1px] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_12px_28px_-6px_rgba(217,108,74,0.6),0_20px_40px_-12px_rgba(217,108,74,0.4)] active:translate-y-[0.5px] transition-all duration-200"
                   disabled={isLoading}
                 >
                   {isLoading ? (

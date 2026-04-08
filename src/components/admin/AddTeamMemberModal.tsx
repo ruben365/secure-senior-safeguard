@@ -278,9 +278,9 @@ export function AddTeamMemberModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
-        <DialogHeader>
-          <DialogTitle className="text-2xl flex items-center gap-2">
+      <DialogContent className="sm:max-w-[640px] max-h-[86vh] overflow-hidden flex flex-col p-5 gap-0">
+        <DialogHeader className="pb-3">
+          <DialogTitle className="text-base font-semibold flex items-center gap-2">
             {isEditMode ? "Edit Team Member" : "Add Team Member"}
             {isFounder && (
               <Badge variant="secondary" className="bg-primary/10 text-primary">

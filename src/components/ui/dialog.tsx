@@ -48,7 +48,15 @@ const DialogContent = React.forwardRef<
         }
       }}
       className={cn(
-        "fixed left-[50%] top-[50%] z-50 grid w-[calc(100%-2rem)] sm:w-full max-w-md translate-x-[-50%] translate-y-[-50%] gap-4 border border-border/40 bg-background/95 backdrop-blur-xl p-5 sm:p-6 shadow-[0_16px_48px_-12px_rgba(0,0,0,0.2)] duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 rounded-2xl",
+        // Unified compact modal system:
+        //   • fixed centered placement with safe gutters on small screens
+        //   • default max-w capped at 440px (small-to-medium)
+        //   • tight internal padding (p-5) and gap (gap-3)
+        //   • refined layered shadow + 1px inner highlight for depth
+        //   • rounded-2xl corners across the site
+        //   • smooth 200ms zoom/fade
+        // Per-dialog classes can still override max-w/p/gap when truly needed
+        "fixed left-[50%] top-[50%] z-50 grid w-[calc(100%-2rem)] sm:w-full max-w-[440px] translate-x-[-50%] translate-y-[-50%] gap-3 border border-border/50 bg-background/95 backdrop-blur-xl p-5 rounded-2xl shadow-[0_24px_64px_-20px_rgba(15,23,42,0.28),0_8px_24px_-8px_rgba(15,23,42,0.12),inset_0_1px_0_0_rgba(255,255,255,0.55)] duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
         className,
       )}
       style={{
@@ -72,7 +80,8 @@ const DialogHeader = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "flex flex-col space-y-1.5 text-center sm:text-left",
+      // Compact header — 4px vertical rhythm between title and description.
+      "flex flex-col space-y-1 text-left",
       className,
     )}
     {...props}
@@ -101,7 +110,8 @@ const DialogTitle = React.forwardRef<
   <DialogPrimitive.Title
     ref={ref}
     className={cn(
-      "text-lg font-semibold leading-none tracking-tight",
+      // Compact default title — 16px/leading-tight matches the small-to-medium modal scale.
+      "text-[15.5px] font-semibold leading-tight tracking-tight",
       className,
     )}
     {...props}
@@ -115,7 +125,7 @@ const DialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn("text-sm text-muted-foreground", className)}
+    className={cn("text-[12.5px] text-muted-foreground leading-snug", className)}
     {...props}
   />
 ));

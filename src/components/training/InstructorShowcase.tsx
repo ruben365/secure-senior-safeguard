@@ -173,9 +173,13 @@ export const InstructorShowcase = () => {
         </div>
       </section>
 
-      {/* Instructor Detail Modal */}
+      {/*
+        Instructor Biography Modal — refined compact panel.
+        Small-to-medium width (460px), tight vertical rhythm, premium
+        layered header + body. No full-screen container.
+      */}
       <Dialog open={!!selectedInstructor} onOpenChange={() => setSelectedInstructor(null)}>
-        <DialogContent className="max-w-lg p-0 overflow-hidden bg-card border border-border/60">
+        <DialogContent className="sm:max-w-[460px] p-0 overflow-hidden bg-card border border-border/60 gap-0">
           <DialogTitle className="sr-only">
             {selectedInstructor?.name} - Instructor Profile
           </DialogTitle>
@@ -185,78 +189,93 @@ export const InstructorShowcase = () => {
 
           <button
             onClick={() => setSelectedInstructor(null)}
-            className="absolute top-3 right-3 z-50 p-2 rounded-full bg-muted hover:bg-muted/80 transition-colors"
+            className="absolute top-2.5 right-2.5 z-50 w-7 h-7 rounded-full bg-muted/80 hover:bg-muted flex items-center justify-center transition-colors"
+            aria-label="Close"
           >
-            <X className="w-4 h-4" />
+            <X className="w-3.5 h-3.5" />
           </button>
 
           {selectedInstructor && (
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="bg-muted/50 p-5 text-center border-b border-border/60">
-                <div className="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden ring-3 ring-primary/30">
+              {/* Header — smaller avatar + tighter rhythm */}
+              <div className="bg-gradient-to-b from-muted/60 to-muted/20 px-5 pt-5 pb-4 text-center border-b border-border/50">
+                <div className="w-16 h-16 mx-auto mb-2.5 rounded-full overflow-hidden ring-2 ring-primary/30 ring-offset-2 ring-offset-card">
                   <img
                     src={selectedInstructor.image}
                     alt={selectedInstructor.name}
-                    width={96}
-                    height={96}
+                    width={64}
+                    height={64}
                     loading="lazy"
                     decoding="async"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h2 className="text-xl font-black text-foreground mb-1">{selectedInstructor.name}</h2>
-                <p className="text-sm text-muted-foreground mb-2">{selectedInstructor.title}</p>
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20">
+                <h2 className="text-base font-bold text-foreground leading-tight mb-0.5">
+                  {selectedInstructor.name}
+                </h2>
+                <p className="text-[11px] text-muted-foreground mb-2">{selectedInstructor.title}</p>
+                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-primary/10 text-primary border border-primary/20">
                   {selectedInstructor.specialty}
                 </span>
               </div>
 
-              <div className="p-5 space-y-4">
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="flex items-center gap-2 p-2 bg-muted/50 rounded-lg border border-border/50">
-                    <Briefcase className="w-4 h-4 text-primary" />
-                    <div>
-                      <p className="text-xs text-muted-foreground">Experience</p>
-                      <p className="font-bold text-sm text-foreground">{selectedInstructor.yearsExperience} Years</p>
+              {/* Body — denser spacing, smaller type */}
+              <div className="p-4 space-y-3">
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="flex items-center gap-2 px-2.5 py-1.5 bg-muted/40 rounded-lg border border-border/40">
+                    <Briefcase className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                    <div className="min-w-0">
+                      <p className="text-[10px] text-muted-foreground leading-tight">Experience</p>
+                      <p className="font-bold text-xs text-foreground leading-tight">
+                        {selectedInstructor.yearsExperience} Years
+                      </p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 p-2 bg-muted/50 rounded-lg border border-border/50">
-                    <Users className="w-4 h-4 text-primary" />
-                    <div>
-                      <p className="text-xs text-muted-foreground">Students</p>
-                      <p className="font-bold text-sm text-foreground">{selectedInstructor.studentsHelped}</p>
+                  <div className="flex items-center gap-2 px-2.5 py-1.5 bg-muted/40 rounded-lg border border-border/40">
+                    <Users className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                    <div className="min-w-0">
+                      <p className="text-[10px] text-muted-foreground leading-tight">Students</p>
+                      <p className="font-bold text-xs text-foreground leading-tight">
+                        {selectedInstructor.studentsHelped}
+                      </p>
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="font-bold text-sm mb-2 flex items-center gap-2 text-foreground">
-                    <BookOpen className="w-4 h-4 text-primary" />
+                  <h3 className="font-bold text-[11px] uppercase tracking-wider mb-1.5 flex items-center gap-1.5 text-foreground">
+                    <BookOpen className="w-3 h-3 text-primary" />
                     About
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{selectedInstructor.fullBio}</p>
+                  <p className="text-[12.5px] text-muted-foreground leading-relaxed">
+                    {selectedInstructor.fullBio}
+                  </p>
                 </div>
 
                 <div>
-                  <h3 className="font-bold text-sm mb-2 flex items-center gap-2 text-foreground">
-                    <Award className="w-4 h-4 text-primary" />
+                  <h3 className="font-bold text-[11px] uppercase tracking-wider mb-1.5 flex items-center gap-1.5 text-foreground">
+                    <Award className="w-3 h-3 text-primary" />
                     Achievements
                   </h3>
-                  <ul className="space-y-1.5">
+                  <ul className="space-y-1">
                     {selectedInstructor.achievements.map((achievement, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-sm">
-                        <Star className="w-3 h-3 text-primary mt-1 flex-shrink-0" />
-                        <span className="text-muted-foreground">{achievement}</span>
+                      <li key={idx} className="flex items-start gap-1.5 text-[12px]">
+                        <Star className="w-2.5 h-2.5 text-primary mt-1 flex-shrink-0" />
+                        <span className="text-muted-foreground leading-snug">{achievement}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <Button className="w-full rounded-full font-bold" onClick={() => setSelectedInstructor(null)}>
+                <Button
+                  size="sm"
+                  className="w-full rounded-full font-bold h-9 text-xs"
+                  onClick={() => setSelectedInstructor(null)}
+                >
                   Book a Session with {selectedInstructor.name.split(" ")[0]}
                 </Button>
               </div>

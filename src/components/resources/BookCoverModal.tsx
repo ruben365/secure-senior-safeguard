@@ -38,27 +38,31 @@ const BookCoverModal = ({
         Compact: max-w-4xl -> 820px, overflow-hidden, tighter grid,
         single combined eBook+tag pill, coral+lavender brand accents.
       */}
-      <DialogContent className="max-w-[calc(100vw-2rem)] sm:max-w-[820px] p-0 overflow-hidden rounded-2xl bg-gradient-to-br from-card via-card to-[hsl(var(--coral-100))] border-[hsl(var(--coral-200))] gap-0">
+      {/*
+        Book detail modal — refined compact panel.
+        820px -> 640px, tighter cover column, smaller body padding.
+      */}
+      <DialogContent className="max-w-[calc(100vw-2rem)] sm:max-w-[640px] p-0 overflow-hidden rounded-2xl bg-gradient-to-br from-card via-card to-[hsl(var(--coral-100))] border-[hsl(var(--coral-200))] gap-0">
         <DialogTitle className="sr-only">
           {book.name} - Book Details
         </DialogTitle>
 
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 z-50 p-1.5 rounded-full bg-background/85 backdrop-blur-sm hover:bg-background transition-colors"
+          className="absolute top-2.5 right-2.5 z-50 w-7 h-7 rounded-full bg-background/85 backdrop-blur-sm hover:bg-background flex items-center justify-center transition-colors"
           aria-label="Close"
         >
-          <X className="w-4 h-4" />
+          <X className="w-3.5 h-3.5" />
         </button>
 
-        <div className="grid lg:grid-cols-[260px,1fr] gap-0">
+        <div className="grid lg:grid-cols-[200px,1fr] gap-0">
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.25 }}
-            className="relative bg-gradient-to-br from-[hsl(var(--coral-100))] via-[hsl(var(--lavender-100))] to-[hsl(var(--coral-200))] p-5 flex items-center justify-center"
+            className="relative bg-gradient-to-br from-[hsl(var(--coral-100))] via-[hsl(var(--lavender-100))] to-[hsl(var(--coral-200))] p-4 flex items-center justify-center"
           >
-            <div className="relative w-full max-w-[200px] shadow-[0_24px_48px_-16px_rgba(15,23,42,0.35)] rounded-lg overflow-hidden">
+            <div className="relative w-full max-w-[160px] shadow-[0_20px_40px_-14px_rgba(15,23,42,0.35)] rounded-lg overflow-hidden">
               <div className="aspect-[3/4]">
                 <img
                   src={book.image}
@@ -89,7 +93,7 @@ const BookCoverModal = ({
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.25, delay: 0.05 }}
-            className="p-5 md:p-6 flex flex-col min-w-0"
+            className="p-4 md:p-5 flex flex-col min-w-0"
           >
             {/* Metadata row — compact chips, coral brand palette */}
             <div className="flex flex-wrap gap-1.5 mb-3">
