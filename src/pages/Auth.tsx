@@ -466,40 +466,51 @@ function Auth() {
 
   if (signupSuccess) {
     return (
-      <div className="w-full relative flex items-center justify-center p-4 md:p-6 lg:p-8" style={{ minHeight: 'calc(100vh / 0.75)' }}>
-        <div className="absolute inset-0 z-0">
-          <img
-            src={authBackground}
-            alt=""
-            aria-hidden="true"
-            className="w-full h-full object-cover"
-            loading="eager"
-            decoding="async"
-            width={1920}
-            height={1080}
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-orange-400/55 via-amber-300/40 to-orange-500/55 backdrop-blur-[2px]" />
-          <div className="absolute -top-40 -left-32 h-[520px] w-[520px] rounded-full bg-orange-400/40 blur-[130px]" />
-          <div className="absolute -bottom-40 -right-32 h-[560px] w-[560px] rounded-full bg-amber-400/35 blur-[150px]" />
+      <div
+        className="w-full relative flex items-center justify-center p-5 md:p-8 font-sans antialiased"
+        style={{ minHeight: "calc(100vh / 0.75)" }}
+      >
+        {/* Same calm dark backdrop as the main sign-in screen */}
+        <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0b1020] via-[#0e1428] to-[#0a0f1e]" />
+          <svg className="absolute inset-0 w-full h-full opacity-[0.035]">
+            <defs>
+              <pattern id="auth-success-dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+                <circle cx="1" cy="1" r="1" fill="#ffffff" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#auth-success-dots)" />
+          </svg>
+          <div className="absolute -top-40 -left-40 h-[520px] w-[520px] rounded-full bg-emerald-500/10 blur-[140px]" />
+          <div className="absolute -bottom-40 -right-40 h-[560px] w-[560px] rounded-full bg-indigo-500/12 blur-[160px]" />
         </div>
-        <div className="relative z-10 w-full max-w-[420px]">
-          <div className="bg-[#fffaf5] rounded-3xl p-8 md:p-10 shadow-[0_20px_60px_-15px_rgba(217,108,74,0.35),0_0_0_1px_rgba(249,115,22,0.15)] border border-orange-200/60 text-center">
-            <div className="w-16 h-16 mx-auto bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg mb-6">
-              <CheckCircle2 className="w-8 h-8 text-white" />
+
+        <div className="relative z-10 w-full max-w-[440px]">
+          <div className="relative rounded-2xl bg-white border border-slate-200/80 shadow-[0_40px_80px_-24px_rgba(15,23,42,0.45),0_8px_28px_-8px_rgba(15,23,42,0.25)] p-7 md:p-9 text-center">
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-slate-300/80 to-transparent"
+            />
+            <div className="relative w-14 h-14 mx-auto mb-5">
+              <div className="absolute inset-0 rounded-2xl bg-emerald-500/20 blur-xl" />
+              <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center shadow-[0_12px_28px_-8px_rgba(16,185,129,0.5),inset_0_1px_0_0_rgba(255,255,255,0.35)] border border-white/20">
+                <CheckCircle2 className="w-7 h-7 text-white" strokeWidth={2.25} />
+              </div>
             </div>
-            <h2 className="text-2xl font-bold text-foreground mb-2">
-              Check Your Email
+            <h2 className="text-[1.5rem] font-bold text-slate-900 tracking-tight mb-2">
+              Check your email
             </h2>
-            <p className="text-muted-foreground mb-6">
-              We've sent a verification link to <strong>{email}</strong>. Click
-              the link to activate your account.
+            <p className="text-sm text-slate-500 leading-relaxed mb-6">
+              We sent a verification link to{" "}
+              <span className="font-semibold text-slate-800">{email}</span>.
+              Click it to activate your account.
             </p>
             <Button
               onClick={() => {
                 setSignupSuccess(false);
                 setActiveTab("login");
               }}
-              className="w-full"
+              className="w-full h-11"
             >
               Back to Sign In
             </Button>
@@ -510,57 +521,171 @@ function Auth() {
   }
 
   return (
-    <div className="w-full relative flex items-center justify-center p-4 md:p-6 lg:p-8" style={{ minHeight: 'calc(100vh / 0.75)' }}>
+    <div
+      className="w-full relative flex items-stretch justify-center p-0 font-sans antialiased"
+      style={{ minHeight: "calc(100vh / 0.75)" }}
+    >
       <SEO
         title="Sign In"
         description="Sign in to your InVision Network account to access your portal, courses, and protection tools."
         noindex
       />
-      {/* Background — orange-washed */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src={authBackground}
-          alt=""
-          className="w-full h-full object-cover"
-          loading="eager"
-          decoding="async"
-          width={1920}
-          height={1080}
-        />
-        {/* Warm orange wash replaces the old neutral white veil */}
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-400/55 via-amber-300/40 to-orange-500/55 backdrop-blur-[2px]" />
-        {/* Ambient orange glows */}
-        <div className="absolute -top-40 -left-32 h-[520px] w-[520px] rounded-full bg-orange-400/40 blur-[130px]" />
-        <div className="absolute -bottom-40 -right-32 h-[560px] w-[560px] rounded-full bg-amber-400/35 blur-[150px]" />
+
+      {/*
+        ─── SUBTLE BACKGROUND LAYER ────────────────────────────────
+        Dark slate-to-indigo gradient with a very subtle dot grid
+        and two soft ambient orbs. No heavy photo wash, no heavy
+        orange — just a calm professional backdrop.
+      */}
+      <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0b1020] via-[#0e1428] to-[#0a0f1e]" />
+        {/* Subtle dot grid */}
+        <svg className="absolute inset-0 w-full h-full opacity-[0.035]">
+          <defs>
+            <pattern id="auth-dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+              <circle cx="1" cy="1" r="1" fill="#ffffff" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#auth-dots)" />
+        </svg>
+        {/* A small orange glow ties back to the brand without dominating */}
+        <div className="absolute -top-40 -left-40 h-[520px] w-[520px] rounded-full bg-orange-500/10 blur-[140px]" />
+        <div className="absolute -bottom-40 -right-40 h-[560px] w-[560px] rounded-full bg-indigo-500/12 blur-[160px]" />
       </div>
 
-      {/* Main Content */}
-      <div className="relative z-10 w-full max-w-[440px]">
-        {/* Auth Card — warm cream with orange edge glow */}
-        <div className="bg-[#fffaf5] rounded-3xl p-8 md:p-10 shadow-[0_20px_60px_-15px_rgba(217,108,74,0.35),0_0_0_1px_rgba(249,115,22,0.15)] border border-orange-200/60">
-          {/* Logo Inside Card */}
-          <Link
-            to="/"
-            className="flex items-center justify-center gap-3 mb-6 group transition-transform duration-300 hover:scale-105"
-          >
-            <img
-              src={invisionLogo}
-              alt="InVision Network"
-              className="w-11 h-11 drop-shadow-md"
-              loading="eager"
-              decoding="sync"
-              width={44}
-              height={44}
-            />
-            <div className="flex flex-col leading-tight">
-              <span className="text-lg font-bold text-foreground">
-                InVision Network
+      {/*
+        ─── TWO-PANE LAYOUT ────────────────────────────────────────
+        LEFT (lg+ only): brand storytelling — logo, tagline, three
+        trust points, a quiet decorative shield illustration.
+        RIGHT: the clean white auth card with the existing form.
+      */}
+      <div className="relative z-10 w-full max-w-[1100px] mx-auto flex items-center justify-center p-5 md:p-8 lg:p-10">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-8 lg:gap-14 items-center">
+
+          {/* LEFT — brand pane (desktop only) */}
+          <aside className="hidden lg:flex flex-col text-white pr-2">
+            <Link
+              to="/"
+              className="inline-flex items-center gap-3 mb-14 group w-fit"
+            >
+              <div className="relative">
+                <div className="absolute inset-0 rounded-2xl bg-orange-500/20 blur-xl group-hover:bg-orange-500/30 transition-colors" />
+                <div className="relative w-12 h-12 rounded-2xl bg-white/[0.06] border border-white/15 backdrop-blur-sm flex items-center justify-center">
+                  <img
+                    src={invisionLogo}
+                    alt="InVision Network"
+                    className="w-7 h-7 brightness-0 invert drop-shadow-md"
+                    loading="eager"
+                    decoding="sync"
+                    width={28}
+                    height={28}
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col leading-tight">
+                <span className="text-[15px] font-bold text-white tracking-tight">
+                  InVision Network
+                </span>
+                <span className="text-[10px] font-medium text-white/55 tracking-[0.15em] uppercase mt-0.5">
+                  Secure Member Portal
+                </span>
+              </div>
+            </Link>
+
+            <h1 className="text-[2.25rem] xl:text-[2.625rem] font-bold text-white leading-[1.08] tracking-tight mb-5">
+              Welcome back to a{" "}
+              <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-orange-400 bg-clip-text text-transparent">
+                quieter
               </span>
-              <span className="text-[10px] text-muted-foreground tracking-wide uppercase">
-                Secure Portal
-              </span>
+              ,<br />
+              safer digital life.
+            </h1>
+            <p className="text-white/65 text-base leading-relaxed mb-10 max-w-md">
+              Sign in to access your training, monitoring dashboard, bookings,
+              and family protection settings — all in one place.
+            </p>
+
+            <ul className="space-y-4 mb-10 max-w-md">
+              {[
+                {
+                  title: "End-to-end encrypted",
+                  body: "256-bit encryption on every session, every request.",
+                },
+                {
+                  title: "Kettering-based humans",
+                  body: "Real support from real people when something goes wrong.",
+                },
+                {
+                  title: "Private by design",
+                  body: "We never sell your data. We never share it. We protect it.",
+                },
+              ].map((f) => (
+                <li key={f.title} className="flex items-start gap-3">
+                  <div className="flex-shrink-0 w-6 h-6 rounded-md bg-gradient-to-br from-orange-400/25 to-orange-500/15 border border-orange-400/30 flex items-center justify-center mt-0.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-orange-300" strokeWidth={2.25} />
+                  </div>
+                  <div>
+                    <div className="text-white text-sm font-semibold">
+                      {f.title}
+                    </div>
+                    <div className="text-white/55 text-[13px] leading-relaxed">
+                      {f.body}
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+            <div className="flex items-center gap-3 text-xs text-white/50">
+              <ShieldCheck className="w-4 h-4 text-white/60" />
+              <span>Trusted by 100+ families across Ohio</span>
             </div>
-          </Link>
+          </aside>
+
+          {/* RIGHT — auth card */}
+          <div className="w-full max-w-[460px] mx-auto lg:mx-0">
+            <div className="relative rounded-2xl bg-white border border-slate-200/80 shadow-[0_40px_80px_-24px_rgba(15,23,42,0.45),0_8px_28px_-8px_rgba(15,23,42,0.25)] p-7 md:p-9">
+              {/* Top hairline highlight */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-slate-300/80 to-transparent"
+              />
+
+              {/* Mobile logo (desktop shows it in the left pane) */}
+              <Link
+                to="/"
+                className="flex lg:hidden items-center justify-center gap-3 mb-6 group"
+              >
+                <img
+                  src={invisionLogo}
+                  alt="InVision Network"
+                  className="w-10 h-10 drop-shadow-sm"
+                  loading="eager"
+                  decoding="sync"
+                  width={40}
+                  height={40}
+                />
+                <div className="flex flex-col leading-tight">
+                  <span className="text-base font-bold text-slate-900 tracking-tight">
+                    InVision Network
+                  </span>
+                  <span className="text-[10px] text-slate-500 tracking-[0.12em] uppercase">
+                    Secure Portal
+                  </span>
+                </div>
+              </Link>
+
+              {/* Heading — swaps between Sign In and Sign Up */}
+              <div className="mb-6">
+                <h2 className="text-[1.5rem] md:text-[1.625rem] font-bold text-slate-900 leading-tight tracking-tight">
+                  {activeTab === "signup" ? "Create your account" : "Sign in to your account"}
+                </h2>
+                <p className="text-[13px] text-slate-500 mt-1">
+                  {activeTab === "signup"
+                    ? "A few details and you're set — it takes 30 seconds."
+                    : "Welcome back. Please enter your details."}
+                </p>
+              </div>
 
           <Tabs
             value={activeTab}
@@ -1017,41 +1142,45 @@ function Auth() {
               </form>
             </TabsContent>
           </Tabs>
-        </div>
+            </div>
+            {/* /card */}
 
-        {/* Apply Link */}
-        <div className="mt-6 text-center">
-          <p className="text-sm text-muted-foreground mb-2">
-            Want to join our team?
-          </p>
-          <Link
-            to="/careers"
-            className="inline-flex items-center gap-2 text-primary font-semibold hover:text-primary/80 transition-colors"
-          >
-            Don't have an account? Apply
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
+            {/* Apply link — restyled for dark backdrop */}
+            <div className="mt-6 text-center">
+              <Link
+                to="/careers"
+                className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
+              >
+                Want to join our team?{" "}
+                <span className="text-orange-300 font-semibold">Apply here</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
 
-        {/* Bottom Links */}
-        <div className="mt-4 flex items-center justify-center gap-4 text-xs text-muted-foreground">
-          <Link
-            to="/privacy-policy"
-            className="hover:text-foreground transition-colors"
-          >
-            Privacy Policy
-          </Link>
-          <span className="text-slate-300">•</span>
-          <Link
-            to="/terms-of-service"
-            className="hover:text-foreground transition-colors"
-          >
-            Terms of Service
-          </Link>
-          <span className="text-slate-300">•</span>
-          <span>© {new Date().getFullYear()} InVision Network</span>
+            {/* Bottom legal links — restyled for dark backdrop */}
+            <div className="mt-3 flex items-center justify-center gap-3 text-[11px] text-white/45">
+              <Link
+                to="/privacy-policy"
+                className="hover:text-white/80 transition-colors"
+              >
+                Privacy Policy
+              </Link>
+              <span className="text-white/25">•</span>
+              <Link
+                to="/terms-of-service"
+                className="hover:text-white/80 transition-colors"
+              >
+                Terms of Service
+              </Link>
+              <span className="text-white/25">•</span>
+              <span>© {new Date().getFullYear()} InVision Network</span>
+            </div>
+          </div>
+          {/* /right auth card column */}
         </div>
+        {/* /grid */}
       </div>
+      {/* /max-w-[1100px] */}
 
       <ForgotPasswordModal
         open={showForgotPassword}
