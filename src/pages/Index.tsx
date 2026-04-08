@@ -4,6 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { HeroHomepage } from "@/components/HeroHomepage";
 import HomeStorySections from "@/components/home/HomeStorySections";
+import { HomePremiumMiddle } from "@/components/home/HomePremiumMiddle";
 import { ScamShieldSubmission } from "@/components/ScamShieldSubmission";
 import { PageTransition } from "@/components/PageTransition";
 import { Button } from "@/components/ui/button";
@@ -63,6 +64,15 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
             aria-label="Who we are, what we offer, how we train you"
           >
             <HomeStorySections />
+          </section>
+
+          {/* 2b. Premium middle — reverse-offset gradient shapes + 2x2 floating grid
+              in the indigo/violet ombré aesthetic. Hero and Footer untouched. */}
+          <section
+            id="why-forecast"
+            aria-label="Why forecasting protection beats reacting"
+          >
+            <HomePremiumMiddle />
           </section>
 
           {/* 3. Testimonials + FAQ — wrapped in the same warm off-white
