@@ -8,8 +8,8 @@
    HOME COLOR WASH — layered overlay across the entire home page body.
    Wraps sections 2, 3, and the final CTA in Index.tsx. Hero and Footer
    sit outside this wrapper so they remain untouched.
-   Mix: 10% dark, 25% purple, 6% white, 10% brown, 7% yellow,
-        6% burgundy, 3% maroon, 1% red.
+   Mix: 10% dark, 25% purple, 6% white, 10% brown,
+        6% burgundy, 3% maroon, 1% red. (yellow removed)
    ═══════════════════════════════════════════════════════════════════ */
 .home-color-wash {
   position: relative;
@@ -32,8 +32,6 @@
     radial-gradient(ellipse 55% 50% at 50% 48%, rgba(255, 255, 255, 0.06) 0%, transparent 65%),
     /* 10% brown — amber-900 */
     radial-gradient(ellipse 55% 38% at 12% 62%, rgba(120, 53,  15,  0.10) 0%, transparent 65%),
-    /* 7% yellow — amber-500 */
-    radial-gradient(ellipse 50% 38% at 74% 72%, rgba(234, 179, 8,   0.07) 0%, transparent 65%),
     /* 6% burgundy — deep wine */
     radial-gradient(ellipse 55% 42% at 30% 92%, rgba(127, 29,  29,  0.06) 0%, transparent 65%),
     /* 3% maroon */
