@@ -49,6 +49,7 @@ export default defineConfig(({ mode }) => {
       host: "::",
       port: devServerPort,
       strictPort: false,
+      allowedHosts: [".trycloudflare.com", "localhost", "192.168.1.201"],
     },
     build: {
       sourcemap: false,
