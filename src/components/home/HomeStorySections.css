@@ -15,17 +15,20 @@
   position: relative;
 }
 
+/* The wash sits on top of inner section backgrounds but uses soft-light
+   blend mode — which only tints colors without fighting text contrast.
+   pointer-events: none so it never steals clicks. */
 .home-color-wash::after {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 5;
-  mix-blend-mode: overlay;
+  z-index: 1;
+  mix-blend-mode: soft-light;
   background:
     /* 10% dark — slate-900 */
     radial-gradient(ellipse 60% 35% at 15% 8%,  rgba(15,  23,  42,  0.10) 0%, transparent 65%),
-    /* 25% purple — violet-500, broadened to two lobes for richer coverage */
+    /* 25% purple — violet-500, two lobes for rich coverage */
     radial-gradient(ellipse 55% 40% at 82% 14%, rgba(139, 92,  246, 0.25) 0%, transparent 65%),
     radial-gradient(ellipse 50% 45% at 22% 52%, rgba(168, 85,  247, 0.22) 0%, transparent 68%),
     /* 6% white */
@@ -41,6 +44,10 @@
     /* 1% red — red-600 */
     radial-gradient(ellipse 35% 30% at 50% 36%, rgba(220, 38,  38,  0.01) 0%, transparent 65%);
 }
+
+/* Keep text + cards + buttons crisp above the wash by giving them a
+   higher stacking context. The wash only tints raw backgrounds. */
+.home-color-wash > * { position: relative; z-index: 2; }
 
 /* Container — same mesh-gradient palette used on the About page,
    layered over the theme background token so it stays light/dark aware. */
@@ -287,6 +294,8 @@
 
 /* Override hardcoded white text inside the (now light) dark card */
 .hss-dark-card .text-white { color: hsl(var(--foreground)) !important; }
+.hss-dark-card .text-white\/45,
+.hss-dark-card .text-white\/50,
 .hss-dark-card .text-white\/55,
 .hss-dark-card .text-white\/70,
 .hss-dark-card .text-white\/85,
@@ -384,7 +393,10 @@
 }
 
 /* Override hardcoded white text inside the (now light) stats bento */
-.hss-stats-bento .text-white { color: hsl(var(--foreground)) !important; }
+.hss-stats-bento .text-white,
+.hss-stats-bento [class*="text-white/"] { color: hsl(var(--foreground)) !important; }
+.hss-stats-bento .text-white\/45,
+.hss-stats-bento .text-white\/50,
 .hss-stats-bento .text-white\/55,
 .hss-stats-bento .text-white\/60,
 .hss-stats-bento .text-white\/70,
@@ -592,12 +604,27 @@
 
 /* Override hardcoded white text inside the (now light) testimonial theater */
 .hss-testimonial-theater .text-white { color: hsl(var(--foreground)) !important; }
+.hss-testimonial-theater .text-white\/45,
+.hss-testimonial-theater .text-white\/50,
 .hss-testimonial-theater .text-white\/55,
 .hss-testimonial-theater .text-white\/60,
 .hss-testimonial-theater .text-white\/70,
 .hss-testimonial-theater .text-white\/80,
 .hss-testimonial-theater .text-white\/85,
 .hss-testimonial-theater .text-white\/90 { color: hsl(var(--muted-foreground)) !important; }
+
+/* Prev button in the (now light) testimonial carousel — inline style
+   gives it white-on-light background that disappears. Override here. */
+.hss-testimonial-theater button[aria-label="Previous testimonial"] {
+  background: hsl(var(--muted)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+.hss-testimonial-theater button[aria-label="Previous testimonial"]:hover {
+  background: hsl(var(--accent) / 0.12) !important;
+}
+.hss-testimonial-theater button[aria-label="Previous testimonial"] svg {
+  color: hsl(var(--foreground)) !important;
+}
 
 .hss-card-accent-bar {
   height: 3px;
