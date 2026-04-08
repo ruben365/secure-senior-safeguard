@@ -313,57 +313,57 @@ export function TrainingPaymentModal({
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto p-0 rounded-2xl">
-        {/* Header */}
-        <div className="bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 p-6 border-b">
-          <DialogHeader>
-            <div className="flex items-center gap-3 mb-2">
-              <div className="p-2 bg-primary/20 rounded-lg text-primary">
-                <Sparkles className="w-5 h-5" />
+      <DialogContent className="max-w-[calc(100vw-2rem)] sm:max-w-[540px] overflow-hidden p-0 rounded-2xl gap-0">
+        {/* Header — compact, coral-tinted to match site palette */}
+        <div className="bg-gradient-to-r from-[#d96c4a]/8 via-[#fbab8e]/8 to-[#d96c4a]/8 px-5 py-3 border-b border-[#d96c4a]/15">
+          <DialogHeader className="space-y-0">
+            <div className="flex items-center gap-2 mb-1">
+              <div className="p-1.5 bg-[#d96c4a]/15 rounded-md text-[#d96c4a]">
+                <Sparkles className="w-3.5 h-3.5" />
               </div>
               {serviceTier && (
-                <Badge variant="secondary" className="text-xs">
+                <Badge variant="secondary" className="text-[10px] px-2 py-0 h-[18px]">
                   {serviceTier}
                 </Badge>
               )}
             </div>
-            <DialogTitle className="text-xl font-bold">
+            <DialogTitle className="text-base font-bold leading-tight">
               {serviceName}
             </DialogTitle>
             <DialogDescription className="sr-only">
               Complete the payment for {serviceName} training
             </DialogDescription>
             {duration && (
-              <p className="text-sm text-muted-foreground">{duration}</p>
+              <p className="text-[11px] text-muted-foreground mt-0.5">{duration}</p>
             )}
           </DialogHeader>
 
-          {/* Step Indicator */}
-          <div className="flex items-center justify-between mt-6 max-w-xs">
+          {/* Step Indicator — small */}
+          <div className="flex items-center justify-between mt-2.5 max-w-[220px]">
             {steps.map((s, i) => (
               <div key={s.num} className="flex items-center">
                 <div
-                  className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-bold transition-colors ${
+                  className={`flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-bold transition-colors ${
                     (step === "info" && s.num === 1) ||
                     (step === "payment" && s.num <= 2) ||
                     (step === "success" && s.num <= 3)
-                      ? "bg-primary text-primary-foreground"
+                      ? "bg-[#d96c4a] text-white"
                       : "bg-muted text-muted-foreground"
                   }`}
                 >
                   {(step === "payment" && s.num === 1) ||
                   (step === "success" && s.num <= 2) ? (
-                    <CheckCircle className="w-5 h-5" />
+                    <CheckCircle className="w-3 h-3" />
                   ) : (
                     s.num
                   )}
                 </div>
                 <span
-                  className={`ml-2 text-xs font-medium hidden sm:block ${
+                  className={`ml-1.5 text-[10px] font-medium hidden sm:block ${
                     (step === "info" && s.num === 1) ||
                     (step === "payment" && s.num <= 2) ||
                     step === "success"
-                      ? "text-primary"
+                      ? "text-[#d96c4a]"
                       : "text-muted-foreground"
                   }`}
                 >
@@ -371,10 +371,10 @@ export function TrainingPaymentModal({
                 </span>
                 {i < steps.length - 1 && (
                   <div
-                    className={`w-8 sm:w-12 h-0.5 mx-2 ${
+                    className={`w-5 sm:w-8 h-0.5 mx-1.5 ${
                       (step === "payment" && s.num === 1) ||
                       (step === "success" && s.num <= 2)
-                        ? "bg-primary"
+                        ? "bg-[#d96c4a]"
                         : "bg-muted"
                     }`}
                   />
@@ -384,7 +384,7 @@ export function TrainingPaymentModal({
           </div>
         </div>
 
-        <div className="p-6">
+        <div className="p-5">
           <AnimatePresence mode="wait">
             {step === "info" && (
               <motion.div
@@ -392,21 +392,21 @@ export function TrainingPaymentModal({
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
-                className="space-y-5"
+                className="space-y-2.5"
               >
-                {/* Features */}
+                {/* Features — compact */}
                 {features.length > 0 && (
-                  <div className="p-4 bg-muted/50 rounded-xl">
-                    <h4 className="font-semibold mb-3 text-sm">
+                  <div className="px-3 py-2 bg-muted/50 rounded-md">
+                    <h4 className="font-semibold mb-1.5 text-[11px] uppercase tracking-wide text-muted-foreground">
                       What's Included
                     </h4>
-                    <div className="grid grid-cols-1 gap-2">
+                    <div className="grid grid-cols-1 gap-1">
                       {features.slice(0, 4).map((feature, i) => (
                         <div
                           key={i}
-                          className="flex items-center gap-2 text-sm"
+                          className="flex items-center gap-1.5 text-xs"
                         >
-                          <CheckCircle className="w-4 h-4 text-green-500 shrink-0" />
+                          <CheckCircle className="w-3 h-3 text-[#d96c4a] shrink-0" />
                           <span>{feature}</span>
                         </div>
                       ))}
@@ -414,36 +414,34 @@ export function TrainingPaymentModal({
                   </div>
                 )}
 
-                {/* Contact Info */}
-                <div className="space-y-3">
-                  <div className="grid grid-cols-2 gap-3">
-                    <Input
-                      placeholder="Your Name *"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      className="h-11"
-                    />
-                    <Input
-                      type="email"
-                      placeholder="Email *"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="h-11"
-                    />
-                  </div>
-                  <div className="grid grid-cols-2 gap-3">
+                {/* Contact Info — stacked full-width name + email, two-col phone/state */}
+                <div className="space-y-2">
+                  <Input
+                    placeholder="Your Name *"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="h-8 text-sm"
+                  />
+                  <Input
+                    type="email"
+                    placeholder="Email Address *"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="h-8 text-sm"
+                  />
+                  <div className="grid grid-cols-2 gap-2">
                     <div className="relative">
-                      <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                      <Phone className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground" />
                       <Input
                         placeholder="Phone"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        className="h-11 pl-10"
+                        className="h-8 pl-8 text-sm"
                       />
                     </div>
                     <Select value={state} onValueChange={setState}>
-                      <SelectTrigger className="h-11">
-                        <SelectValue placeholder="Select State" />
+                      <SelectTrigger className="h-8 text-sm">
+                        <SelectValue placeholder="State" />
                       </SelectTrigger>
                       <SelectContent className="max-h-[200px]">
                         {US_STATES.map((s) => (
@@ -462,11 +460,11 @@ export function TrainingPaymentModal({
                     <Button
                       variant="outline"
                       className={cn(
-                        "w-full h-11 justify-start text-left font-normal",
+                        "w-full h-8 justify-start text-left font-normal text-sm",
                         !selectedDate && "text-muted-foreground",
                       )}
                     >
-                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      <CalendarIcon className="mr-2 h-3.5 w-3.5" />
                       {selectedDate
                         ? format(selectedDate, "PPP")
                         : "Preferred date (optional)"}
@@ -499,35 +497,35 @@ export function TrainingPaymentModal({
                   onCheckedChange={setTermsAccepted}
                 />
 
-                {/* Price Summary */}
-                <div className="p-4 bg-gradient-to-r from-primary/5 to-accent/5 rounded-xl border">
+                {/* Price Summary — compact peach strip */}
+                <div className="px-3 py-2 bg-gradient-to-r from-[#d96c4a]/5 to-[#fbab8e]/5 rounded-md border border-[#d96c4a]/15">
                   <div className="flex justify-between items-center">
-                    <span className="text-muted-foreground">Total</span>
-                    <div className="text-right">
+                    <span className="text-xs text-muted-foreground">Total</span>
+                    <div className="text-right flex items-baseline gap-2">
                       {isVeteran && (
-                        <span className="text-sm line-through text-muted-foreground mr-2">
+                        <span className="text-xs line-through text-muted-foreground">
                           ${basePrice.toFixed(2)}
                         </span>
                       )}
-                      <span className="text-2xl font-bold text-primary">
+                      <span className="text-lg font-bold text-[#d96c4a] leading-none">
                         ${finalAmount.toFixed(2)}
                       </span>
                     </div>
                   </div>
                   {isVeteran && (
-                    <div className="text-right mt-1">
+                    <div className="text-right mt-0.5">
                       <Badge
                         variant="outline"
-                        className="text-xs text-green-600 border-green-600"
+                        className="text-[9px] text-green-600 border-green-600 px-1.5 py-0 h-[16px]"
                       >
-                        Veteran discount: -${veteranDiscount.toFixed(2)}
+                        Veteran: -${veteranDiscount.toFixed(2)}
                       </Badge>
                     </div>
                   )}
                 </div>
 
                 {error && (
-                  <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive text-sm">
+                  <div className="px-3 py-2 bg-destructive/10 border border-destructive/20 rounded-md text-destructive text-xs">
                     {error}
                   </div>
                 )}
@@ -535,18 +533,17 @@ export function TrainingPaymentModal({
                 <Button
                   onClick={handleInfoSubmit}
                   disabled={!email || !name || !termsAccepted || isLoading}
-                  className="w-full h-12 text-base font-semibold"
-                  size="lg"
+                  className="w-full h-9 text-sm font-semibold"
                 >
                   {isLoading ? (
                     <>
-                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                      <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" />
                       Preparing Payment...
                     </>
                   ) : (
                     <>
                       Continue to Payment
-                      <ArrowRight className="ml-2 h-5 w-5" />
+                      <ArrowRight className="ml-2 h-3.5 w-3.5" />
                     </>
                   )}
                 </Button>
@@ -561,34 +558,34 @@ export function TrainingPaymentModal({
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
-                className="space-y-4"
+                className="space-y-2.5"
               >
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setStep("info")}
-                  className="mb-2"
+                  className="h-7 text-xs px-2"
                 >
-                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  <ArrowLeft className="mr-1 h-3 w-3" />
                   Back
                 </Button>
 
-                <div className="p-4 bg-muted/50 rounded-xl mb-4">
+                <div className="px-3 py-2 bg-muted/50 rounded-md">
                   <div className="flex justify-between items-center">
-                    <div>
-                      <p className="font-semibold">{serviceName}</p>
-                      <p className="text-sm text-muted-foreground">{email}</p>
+                    <div className="min-w-0">
+                      <p className="font-semibold text-sm truncate">{serviceName}</p>
+                      <p className="text-[11px] text-muted-foreground truncate">{email}</p>
                     </div>
-                    <div className="text-right">
-                      <p className="text-xl font-bold text-primary">
+                    <div className="text-right flex-shrink-0 ml-2">
+                      <p className="text-base font-bold text-[#d96c4a] leading-none">
                         ${finalAmount.toFixed(2)}
                       </p>
                       {isVeteran && (
                         <Badge
                           variant="outline"
-                          className="text-xs text-green-600 border-green-600"
+                          className="text-[9px] text-green-600 border-green-600 mt-0.5 px-1 py-0 h-[14px]"
                         >
-                          10% Veteran Discount
+                          10% Veteran
                         </Badge>
                       )}
                     </div>
@@ -596,16 +593,16 @@ export function TrainingPaymentModal({
                 </div>
 
                 <Tabs defaultValue="card" className="w-full">
-                  <TabsList className="grid w-full grid-cols-2 mb-4">
+                  <TabsList className="grid w-full grid-cols-2 mb-2 h-8">
                     <TabsTrigger
                       value="card"
-                      className="flex items-center gap-2"
+                      className="flex items-center gap-1.5 text-xs h-6"
                     >
-                      <CreditCard className="w-4 h-4" />
+                      <CreditCard className="w-3 h-3" />
                       Card
                     </TabsTrigger>
-                    <TabsTrigger value="qr" className="flex items-center gap-2">
-                      <Smartphone className="w-4 h-4" />
+                    <TabsTrigger value="qr" className="flex items-center gap-1.5 text-xs h-6">
+                      <Smartphone className="w-3 h-3" />
                       QR Code
                     </TabsTrigger>
                   </TabsList>
@@ -618,7 +615,11 @@ export function TrainingPaymentModal({
                         appearance: {
                           theme: "stripe",
                           variables: {
-                            colorPrimary: "#6D28D9",
+                            // Coral to match site primary (was purple #6D28D9)
+                            colorPrimary: "#d96c4a",
+                            fontSizeBase: "14px",
+                            spacingUnit: "3px",
+                            borderRadius: "8px",
                           },
                         },
                       }}

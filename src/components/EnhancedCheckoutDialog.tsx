@@ -607,19 +607,19 @@ export function EnhancedCheckoutDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl p-0">
-        {/* Header */}
-        <div className="bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 p-4 border-b">
-          <DialogHeader>
-            <div className="flex items-center gap-3 mb-1">
-              <div className="p-2 bg-primary/20 rounded-lg">
-                <Package className="w-5 h-5 text-primary" />
+      <DialogContent className="max-w-[calc(100vw-2rem)] sm:max-w-[580px] overflow-hidden p-0 gap-0 rounded-2xl">
+        {/* Header — coral-tinted, compact */}
+        <div className="bg-gradient-to-r from-[#d96c4a]/8 via-[#fbab8e]/8 to-[#d96c4a]/8 px-4 py-2.5 border-b border-[#d96c4a]/15">
+          <DialogHeader className="space-y-0">
+            <div className="flex items-center gap-2 mb-0.5">
+              <div className="p-1.5 bg-[#d96c4a]/15 rounded-md">
+                <Package className="w-3.5 h-3.5 text-[#d96c4a]" />
               </div>
-              <Badge variant="secondary">
+              <Badge variant="secondary" className="text-[10px] px-2 py-0 h-[18px]">
                 {items.length} {items.length === 1 ? "item" : "items"}
               </Badge>
             </div>
-            <DialogTitle className="text-xl font-bold">Checkout</DialogTitle>
+            <DialogTitle className="text-base font-bold leading-tight">Checkout</DialogTitle>
           </DialogHeader>
 
           {/* Delivery Info */}

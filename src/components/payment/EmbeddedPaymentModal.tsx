@@ -438,7 +438,11 @@ function PaymentForm({
                           theme: "stripe",
                           variables: {
                             borderRadius: "8px",
-                            colorPrimary: "#6D28D9",
+                            // Coral to match site primary (was purple #6D28D9)
+                            colorPrimary: "#d96c4a",
+                            fontSizeBase: "14px",
+                            spacingUnit: "3px",
+                            borderRadius: "8px",
                           },
                         },
                       }}
@@ -658,21 +662,23 @@ export function EmbeddedPaymentModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto rounded-2xl">
-        <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-              <CreditCard className="w-5 h-5 text-primary" />
+      <DialogContent className="max-w-[calc(100vw-2rem)] sm:max-w-[540px] overflow-hidden rounded-2xl p-5 gap-0">
+        <DialogHeader className="space-y-0 pb-2.5">
+          <DialogTitle className="flex items-center gap-2.5">
+            <div className="w-8 h-8 bg-[#d96c4a]/12 rounded-full flex items-center justify-center flex-shrink-0">
+              <CreditCard className="w-4 h-4 text-[#d96c4a]" />
             </div>
-            <div>
-              <span className="block">Secure Checkout</span>
-              <Badge variant="outline" className="text-xs font-normal mt-1">
-                <Lock className="w-3 h-3 mr-1" />
-                Powered by Stripe
-              </Badge>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-[15px] font-semibold leading-none">Secure Checkout</span>
+                <Badge variant="outline" className="text-[10px] font-normal px-1.5 py-0 h-[18px]">
+                  <Lock className="w-2.5 h-2.5 mr-1" />
+                  Powered by Stripe
+                </Badge>
+              </div>
             </div>
           </DialogTitle>
-          <DialogDescription>
+          <DialogDescription className="text-[11px] mt-1">
             Complete your{" "}
             {mode === "subscription" ? "subscription" : "purchase"} securely
           </DialogDescription>

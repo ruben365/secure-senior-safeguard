@@ -380,91 +380,91 @@ export const WebsiteInsuranceDialog = ({
           if (!isOpen) resetDialog();
         }}
       >
-        <DialogContent className="sm:max-w-[800px] max-h-[90vh] overflow-y-auto rounded-2xl">
-          <DialogHeader>
-            <div className="flex items-center gap-2 mb-2">
+        <DialogContent className="max-w-[calc(100vw-2rem)] sm:max-w-[720px] overflow-hidden rounded-2xl p-5 gap-0">
+          <DialogHeader className="space-y-0 pb-2.5">
+            <div className="flex items-center gap-1.5 mb-1">
               <Badge
                 variant="secondary"
-                className="bg-primary/10 text-primary border-primary/20"
+                className="bg-[#d96c4a]/10 text-[#d96c4a] border-[#d96c4a]/20 text-[10px] px-1.5 py-0 h-[18px]"
               >
-                <Shield className="w-3 h-3 mr-1" />
+                <Shield className="w-2.5 h-2.5 mr-1" />
                 Website Insurance
               </Badge>
-              <Badge variant="outline" className="text-xs">
-                <Lock className="w-3 h-3 mr-1" />
+              <Badge variant="outline" className="text-[10px] px-1.5 py-0 h-[18px]">
+                <Lock className="w-2.5 h-2.5 mr-1" />
                 Secure Payment
               </Badge>
             </div>
-            <DialogTitle className="text-2xl">
+            <DialogTitle className="text-base font-bold leading-tight">
               Website Insurance Subscription
             </DialogTitle>
-            <DialogDescription>
+            <DialogDescription className="text-[11px] mt-0.5">
               Select a plan or build your custom coverage. Pay securely with
               card or QR code.
             </DialogDescription>
           </DialogHeader>
 
-          {/* Trust Indicators */}
-          <div className="flex flex-wrap items-center gap-3 py-2 border-y border-border/50">
-            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-              <CheckCircle className="w-3.5 h-3.5 text-success" />
+          {/* Trust Indicators — single compact row */}
+          <div className="flex flex-wrap items-center gap-3 py-1.5 border-y border-border/50">
+            <div className="flex items-center gap-1 text-[10px] text-muted-foreground">
+              <CheckCircle className="w-3 h-3 text-[#d96c4a]" />
               <span>Cancel Anytime</span>
             </div>
-            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-              <Shield className="w-3.5 h-3.5 text-success" />
+            <div className="flex items-center gap-1 text-[10px] text-muted-foreground">
+              <Shield className="w-3 h-3 text-[#d96c4a]" />
               <span>30-Day Guarantee</span>
             </div>
-            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-              <Lock className="w-3.5 h-3.5 text-success" />
+            <div className="flex items-center gap-1 text-[10px] text-muted-foreground">
+              <Lock className="w-3 h-3 text-[#d96c4a]" />
               <span>256-bit Encryption</span>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-2.5">
             {/* Left Column - Plan Selection */}
-            <div className="space-y-4">
-              <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider">
+            <div className="space-y-2">
+              <h3 className="font-semibold text-[10px] text-muted-foreground uppercase tracking-wider">
                 Select Plan
               </h3>
 
               {/* Preset Packages */}
-              <div className="space-y-3">
+              <div className="space-y-1.5">
                 {packages.map((pkg) => (
                   <Card
                     key={pkg.name}
-                    className={`p-4 cursor-pointer transition-all ${
+                    className={`px-2.5 py-2 cursor-pointer transition-all ${
                       selectedPackage?.name === pkg.name && !isCustom
-                        ? "border-2 border-primary bg-primary/5"
-                        : "border hover:border-primary/50"
+                        ? "border-2 border-[#d96c4a] bg-[#d96c4a]/5"
+                        : "border hover:border-[#d96c4a]/50"
                     }`}
                     onClick={() => selectPackage(pkg)}
                   >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
                         <div
-                          className={`w-3 h-3 rounded-full ${
+                          className={`w-2 h-2 rounded-full flex-shrink-0 ${
                             selectedPackage?.name === pkg.name && !isCustom
-                              ? "bg-primary"
+                              ? "bg-[#d96c4a]"
                               : "bg-border"
                           }`}
                         />
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <span className="font-semibold">{pkg.name}</span>
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-1.5">
+                            <span className="font-semibold text-xs truncate">{pkg.name}</span>
                             <Badge
-                              className={`bg-gradient-to-r ${pkg.badgeColor} text-white text-[10px] px-2`}
+                              className={`bg-gradient-to-r ${pkg.badgeColor} text-white text-[9px] px-1 py-0 h-[14px]`}
                             >
                               {pkg.badge}
                             </Badge>
                           </div>
-                          <p className="text-xs text-muted-foreground">
-                            {pkg.features.length} features included
+                          <p className="text-[10px] text-muted-foreground">
+                            {pkg.features.length} features
                           </p>
                         </div>
                       </div>
-                      <span className="text-xl font-bold text-primary">
+                      <span className="text-sm font-bold text-[#d96c4a] flex-shrink-0">
                         ${pkg.price}
-                        <span className="text-xs text-muted-foreground font-normal">
+                        <span className="text-[10px] text-muted-foreground font-normal">
                           /mo
                         </span>
                       </span>
@@ -473,34 +473,32 @@ export const WebsiteInsuranceDialog = ({
                 ))}
               </div>
 
-              <Separator />
-
               {/* Custom Build Section */}
-              <div>
+              <div className="pt-1">
                 <button
-                  className={`w-full p-4 rounded-lg border-2 border-dashed transition-all text-left ${
+                  className={`w-full px-2.5 py-2 rounded-md border-2 border-dashed transition-all text-left ${
                     isCustom
-                      ? "border-primary bg-primary/5"
-                      : "border-border hover:border-primary/50"
+                      ? "border-[#d96c4a] bg-[#d96c4a]/5"
+                      : "border-border hover:border-[#d96c4a]/50"
                   }`}
                   onClick={() => {
                     setIsCustom(true);
                     setSelectedPackage(null);
                   }}
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
                       <div
-                        className={`w-3 h-3 rounded-full ${isCustom ? "bg-primary" : "bg-border"}`}
+                        className={`w-2 h-2 rounded-full ${isCustom ? "bg-[#d96c4a]" : "bg-border"}`}
                       />
                       <div>
-                        <span className="font-semibold">Build Custom Plan</span>
-                        <p className="text-xs text-muted-foreground">
+                        <span className="font-semibold text-xs">Build Custom Plan</span>
+                        <p className="text-[10px] text-muted-foreground">
                           $29 - $500/mo
                         </p>
                       </div>
                     </div>
-                    <Badge className="bg-gradient-to-r from-primary to-accent text-white text-[10px]">
+                    <Badge className="bg-gradient-to-r from-[#d96c4a] to-[#fbab8e] text-white text-[9px] px-1 py-0 h-[14px]">
                       CUSTOM
                     </Badge>
                   </div>
@@ -509,7 +507,7 @@ export const WebsiteInsuranceDialog = ({
 
               {/* Custom Features (when custom is selected) */}
               {isCustom && (
-                <div className="space-y-3 max-h-[250px] overflow-y-auto pr-2">
+                <div className="space-y-2 max-h-[180px] overflow-y-auto pr-1">
                   {Object.entries(groupedFeatures).map(
                     ([category, features]) => (
                       <div key={category}>
@@ -690,40 +688,26 @@ export const WebsiteInsuranceDialog = ({
                 </button>
 
                 {showTerms && (
-                  <div className="bg-muted/50 rounded-lg p-3 text-[10px] text-muted-foreground max-h-32 overflow-y-auto space-y-2">
+                  <div className="bg-muted/50 rounded-md px-2.5 py-1.5 text-[9px] text-muted-foreground max-h-[70px] overflow-y-auto space-y-1 leading-snug">
                     <p>
-                      <strong>Subscription Terms:</strong> Your subscription
-                      will automatically renew monthly until cancelled. You can
-                      cancel anytime from your account dashboard.
+                      <strong>Subscription:</strong> Auto-renews monthly until cancelled.
                     </p>
                     <p>
-                      <strong>30-Day Guarantee:</strong> If you're not satisfied
-                      within the first 30 days, contact us for a full refund.
+                      <strong>30-Day Guarantee:</strong> Full refund within 30 days.
                     </p>
                     <p>
-                      <strong>Service Level:</strong> We guarantee 99.9% uptime
-                      for monitoring services. Support response times are based
-                      on your plan tier.
+                      <strong>Service Level:</strong> 99.9% uptime guarantee.
                     </p>
                     <p>
-                      <strong>Data Protection:</strong> Your data is encrypted
-                      and stored securely. We never share your information with
-                      third parties.
-                    </p>
-                    <p>
-                      <strong>Cancellation:</strong> Cancel anytime with no
-                      penalties. Service continues until the end of your billing
-                      period.
+                      <strong>Cancellation:</strong> Cancel anytime, no penalties.
                     </p>
                   </div>
                 )}
               </div>
 
-              <Separator />
-
               {/* Subscribe Button */}
               <Button
-                className="w-full h-11 text-sm font-semibold"
+                className="w-full h-9 text-sm font-semibold mt-2"
                 onClick={handleSubscribe}
                 disabled={loading || !email || !termsAccepted}
               >
@@ -731,13 +715,13 @@ export const WebsiteInsuranceDialog = ({
                   "Processing..."
                 ) : (
                   <>
-                    <Lock className="w-4 h-4 mr-2" />
+                    <Lock className="w-3.5 h-3.5 mr-1.5" />
                     Subscribe Now - ${totalPrice}/mo
                   </>
                 )}
               </Button>
 
-              <p className="text-[10px] text-center text-muted-foreground">
+              <p className="text-[10px] text-center text-muted-foreground mt-1">
                 Secure payment powered by Stripe. Cancel anytime.
               </p>
             </div>
