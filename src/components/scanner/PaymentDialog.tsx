@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { Lock, CreditCard, FileText, Loader2 } from "lucide-react";
+import { Lock, CreditCard, FileText, Loader2, AlertCircle, RotateCcw } from "lucide-react";
 import { useStripeKey } from "@/hooks/useStripeKey";
 import useStripePayment from "@/hooks/useStripePayment";
 import {
@@ -147,6 +147,10 @@ export const PaymentDialog = ({
     };
   }, [file]);
 
+  // Count retries so a clicking Retry re-triggers the effect without
+  // closing/reopening the dialog.
+  const [retryTick, setRetryTick] = useState(0);
+
   useEffect(() => {
     if (!open || !file) return;
     let isMounted = true;
@@ -162,9 +166,9 @@ export const PaymentDialog = ({
         setPaymentIntentId(data.paymentIntentId);
         setServerAmount(data.amount ?? null);
       } catch (err: any) {
-        if (isMounted) {
-          toast.error(err?.message || "Unable to initialize payment.");
-        }
+        // Don't fire a toast — the in-dialog error panel is clearer.
+        // The hook already writes the real server message into paymentError.
+        if (!isMounted) return;
       }
     };
 
@@ -173,7 +177,7 @@ export const PaymentDialog = ({
     return () => {
       isMounted = false;
     };
-  }, [createGuestScanPayment, file, initializeStripe, open]);
+  }, [createGuestScanPayment, file, initializeStripe, open, retryTick]);
 
   useEffect(() => {
     if (!open) {
@@ -258,14 +262,39 @@ export const PaymentDialog = ({
               </div>
             </div>
 
-            {stripeError && (
-              <div className="text-xs text-destructive">{stripeError}</div>
-            )}
-            {paymentError && (
-              <div className="text-xs text-destructive">{paymentError}</div>
-            )}
+            {/*
+              Unified state surface — one of these three is shown at a time:
+                1. Error panel with retry (highest priority)
+                2. Loading indicator
+                3. The actual Stripe payment form
+            */}
+            {(stripeError || paymentError) && !paymentLoading && !stripeLoading ? (
+              <div className="rounded-md border border-destructive/30 bg-destructive/5 p-3">
+                <div className="flex items-start gap-2">
+                  <AlertCircle className="w-4 h-4 text-destructive flex-shrink-0 mt-0.5" />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-semibold text-destructive mb-0.5">
+                      Unable to start payment
+                    </p>
+                    <p className="text-[11px] text-destructive/85 leading-snug break-words">
+                      {paymentError || stripeError}
+                    </p>
+                  </div>
+                </div>
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="outline"
+                  className="w-full mt-2.5 h-8 text-xs border-destructive/40 text-destructive hover:bg-destructive/10"
+                  onClick={() => setRetryTick((n) => n + 1)}
+                >
+                  <RotateCcw className="w-3 h-3 mr-1.5" />
+                  Try again
+                </Button>
+              </div>
+            ) : null}
 
-            {(stripeLoading || paymentLoading) && (
+            {(stripeLoading || paymentLoading) && !stripeError && !paymentError && (
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 <Loader2 className="w-3.5 h-3.5 animate-spin" />
                 Preparing secure payment form...
@@ -275,7 +304,9 @@ export const PaymentDialog = ({
             {stripePromise &&
               clientSecret &&
               !stripeLoading &&
-              !paymentLoading && (
+              !paymentLoading &&
+              !stripeError &&
+              !paymentError && (
                 <Elements
                   stripe={stripePromise}
                   options={{
