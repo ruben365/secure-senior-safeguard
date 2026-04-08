@@ -92,10 +92,23 @@ type StatProps = {
   live?: boolean;
 };
 
-function StatTile({ target, suffix, label, icon: Icon, description, live }: StatProps) {
+function StatTile({
+  target,
+  suffix,
+  label,
+  icon: Icon,
+  description,
+  live,
+  index = 0,
+}: StatProps & { index?: number }) {
   const { value, ref } = useCountUp(target);
   return (
-    <div ref={ref} className="hss-stats-tile">
+    <div
+      ref={ref}
+      data-reveal="scale"
+      style={{ "--reveal-delay": `${index * 110}ms` } as React.CSSProperties}
+      className="hss-stats-tile"
+    >
       {live && (
         <div className="hss-live-badge">
           <span className="hss-live-dot" />
@@ -195,9 +208,51 @@ const ctaChecks = [
   "Real human support, every hour of every day",
 ];
 
+/* ─── Scroll reveal observer ─────────────────────────────────────
+   Auto-reveals any element with [data-reveal] when it scrolls into view.
+   Supports [data-reveal="fade|scale|slide-left|slide-right|zoom"] and
+   --reveal-delay CSS custom property (or inline style) for stagger. */
+function useRevealObserver() {
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    const targets = root.querySelectorAll<HTMLElement>("[data-reveal]");
+    if (!targets.length) return;
+
+    // Respect reduced motion — skip observer, instantly mark visible
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) {
+      targets.forEach((el) => el.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" },
+    );
+
+    targets.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  return rootRef;
+}
+
 export const HomeStorySections = () => {
+  const rootRef = useRevealObserver();
+
   return (
-    <div className="hss-root">
+    <div ref={rootRef} className="hss-root">
 
       {/* ═══════════════════════════════════════════════════════════════
           SECTION 1 — White bg | 60/40 text + image split
@@ -211,26 +266,36 @@ export const HomeStorySections = () => {
 
             {/* Left column — 60% */}
             <div className="md:col-span-7 max-w-[500px]">
-              <span className="hss-overline mb-5">
+              <span data-reveal className="hss-overline mb-5">
                 <span className="hss-overline-dot" />
                 Built for real families
               </span>
 
               <h2
                 id="story-section-1-heading"
+                data-reveal
+                style={{ "--reveal-delay": "80ms" } as React.CSSProperties}
                 className="text-[2rem] md:text-[2.25rem] lg:text-[2.5rem] font-bold tracking-tight text-[#1E293B] leading-[1.1] mb-5 mt-4"
               >
                 AI scams move fast. Your protection moves faster.
               </h2>
 
-              <p className="text-base text-[#6B7280] leading-relaxed mb-8 max-w-[480px]">
+              <p
+                data-reveal
+                style={{ "--reveal-delay": "160ms" } as React.CSSProperties}
+                className="text-base text-[#6B7280] leading-relaxed mb-8 max-w-[480px]"
+              >
                 Our team builds the same enterprise-grade defenses used by
                 Fortune 500 companies and brings them to families and small
                 businesses across Ohio. Every layer is engineered to stop scams
                 before they reach you.
               </p>
 
-              <div className="flex flex-wrap items-center gap-5 mb-8">
+              <div
+                data-reveal
+                style={{ "--reveal-delay": "240ms" } as React.CSSProperties}
+                className="flex flex-wrap items-center gap-5 mb-8"
+              >
                 <CtaPrimary to="/training#pricing">
                   Get Protected
                   <ArrowRight className="w-4 h-4" />
@@ -239,7 +304,11 @@ export const HomeStorySections = () => {
               </div>
 
               {/* Social proof strip */}
-              <div className="flex items-center gap-3">
+              <div
+                data-reveal
+                style={{ "--reveal-delay": "320ms" } as React.CSSProperties}
+                className="flex items-center gap-3"
+              >
                 <div className="hss-avatar-stack">
                   <img src={instructorPriya} alt="Protected family member" width={32} height={32} className="w-8 h-8 object-cover rounded-full" loading="lazy" decoding="async" />
                   <img src={instructorJames} alt="Protected family member" width={32} height={32} className="w-8 h-8 object-cover rounded-full" loading="lazy" decoding="async" />
@@ -257,9 +326,16 @@ export const HomeStorySections = () => {
             </div>
 
             {/* Right column — 40% — image with floating data card */}
-            <div className="md:col-span-5">
+            <div
+              data-reveal="slide-right"
+              style={{ "--reveal-delay": "200ms" } as React.CSSProperties}
+              className="md:col-span-5"
+            >
               <div className="relative rounded-xl overflow-visible">
-                <div className="rounded-xl overflow-hidden shadow-[0_18px_44px_-16px_rgba(15,23,42,0.22)] aspect-[4/5] lg:aspect-[5/6]">
+                <div
+                  data-reveal="fade"
+                  className="hss-img-zoom rounded-xl overflow-hidden shadow-[0_18px_44px_-16px_rgba(15,23,42,0.22)] aspect-[4/5] lg:aspect-[5/6]"
+                >
                   <img
                     src={businessTeam}
                     alt="The InVision Network security operations team at work"
@@ -277,7 +353,11 @@ export const HomeStorySections = () => {
                 </div>
 
                 {/* Floating threat detection card — top-right */}
-                <div className="hss-float-card absolute -top-4 -right-4 p-3.5 min-w-[168px] hidden md:block">
+                <div
+                  data-reveal="scale"
+                  style={{ "--reveal-delay": "500ms" } as React.CSSProperties}
+                  className="hss-float-card absolute -top-4 -right-4 p-3.5 min-w-[168px] hidden md:block"
+                >
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-7 h-7 rounded-lg bg-[#d96c4a]/12 flex items-center justify-center flex-shrink-0">
                       <Activity className="w-3.5 h-3.5 text-[#d96c4a]" strokeWidth={2.5} />
@@ -309,8 +389,8 @@ export const HomeStorySections = () => {
         <div className="relative z-10 container mx-auto px-6 lg:px-16 max-w-[1280px]">
           <h2 id="story-stats-heading" className="sr-only">By the numbers</h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
-            {stats.map((stat) => (
-              <StatTile key={stat.label} {...stat} />
+            {stats.map((stat, i) => (
+              <StatTile key={stat.label} {...stat} index={i} />
             ))}
           </div>
         </div>
@@ -327,7 +407,10 @@ export const HomeStorySections = () => {
           <div className="grid grid-cols-1 lg:grid-cols-[45fr_55fr] gap-10 lg:gap-12 items-stretch">
 
             {/* Left — 45%: tall image with overlay caption */}
-            <div className="relative rounded-2xl overflow-hidden aspect-[3/4] lg:aspect-auto lg:min-h-[560px] shadow-[0_18px_44px_-16px_rgba(15,23,42,0.22)]">
+            <div
+              data-reveal="slide-left"
+              className="hss-img-zoom relative rounded-2xl overflow-hidden aspect-[3/4] lg:aspect-auto lg:min-h-[560px] shadow-[0_18px_44px_-16px_rgba(15,23,42,0.22)]"
+            >
               <img
                 src={familyLiving}
                 alt="A protected family at home"
@@ -361,7 +444,11 @@ export const HomeStorySections = () => {
             {/* Right — 55%: two stacked content cards */}
             <div className="flex flex-col gap-8">
               {/* Top card */}
-              <div className="bg-white rounded-2xl p-7 lg:p-9 shadow-sm border border-[#1E293B]/8">
+              <div
+                data-reveal
+                style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
+                className="bg-white rounded-2xl p-7 lg:p-9 shadow-sm border border-[#1E293B]/8"
+              >
                 <h3 className="text-[1.5rem] font-bold text-[#1E293B] tracking-tight leading-tight mb-3">
                   One platform. Every layer of protection.
                 </h3>
@@ -379,7 +466,11 @@ export const HomeStorySections = () => {
               {/* Bottom — two feature boxes */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 {/* Dark card — threats */}
-                <div className="hss-dark-card relative rounded-xl p-6 overflow-hidden">
+                <div
+                  data-reveal="scale"
+                  style={{ "--reveal-delay": "220ms" } as React.CSSProperties}
+                  className="hss-dark-card relative rounded-xl p-6 overflow-hidden"
+                >
                   <div aria-hidden="true" className="hss-dark-card-glow" />
                   <div className="relative z-10">
                     <div className="w-10 h-10 rounded-full bg-[#d96c4a]/20 border border-[#d96c4a]/30 flex items-center justify-center mb-4">
@@ -395,7 +486,11 @@ export const HomeStorySections = () => {
                 </div>
 
                 {/* Light card — identity */}
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-[#1E293B]/8">
+                <div
+                  data-reveal="scale"
+                  style={{ "--reveal-delay": "320ms" } as React.CSSProperties}
+                  className="bg-white rounded-xl p-6 shadow-sm border border-[#1E293B]/8"
+                >
                   <div className="w-10 h-10 rounded-full bg-[#d96c4a]/12 flex items-center justify-center mb-4">
                     <Eye className="w-4 h-4 text-[#d96c4a]" strokeWidth={2.25} />
                   </div>
@@ -424,19 +519,25 @@ export const HomeStorySections = () => {
 
             {/* Left — feature list with timeline */}
             <div>
-              <span className="hss-overline mb-5">
+              <span data-reveal className="hss-overline mb-5">
                 <span className="hss-overline-dot" />
                 Why families trust us
               </span>
 
               <h2
                 id="story-section-3-heading"
+                data-reveal
+                style={{ "--reveal-delay": "80ms" } as React.CSSProperties}
                 className="text-[2rem] lg:text-[2.25rem] font-bold text-[#1E293B] tracking-tight leading-[1.1] mb-4 mt-4"
               >
                 Protection backed by real investigation.
               </h2>
 
-              <p className="text-base text-[#6B7280] leading-relaxed mb-8 max-w-[480px]">
+              <p
+                data-reveal
+                style={{ "--reveal-delay": "160ms" } as React.CSSProperties}
+                className="text-base text-[#6B7280] leading-relaxed mb-8 max-w-[480px]"
+              >
                 Every alert we send is a real human looking at real evidence.
                 No black box, no false alarms — just security analysts who
                 treat your case like it's the only one they have.
@@ -444,8 +545,13 @@ export const HomeStorySections = () => {
 
               {/* Feature list with vertical timeline line */}
               <ul className="hss-feature-list divide-y divide-[#1E293B]/8">
-                {featureList.map((item) => (
-                  <li key={item.label} className="py-5 first:pt-0 last:pb-0">
+                {featureList.map((item, i) => (
+                  <li
+                    key={item.label}
+                    data-reveal="slide-right"
+                    style={{ "--reveal-delay": `${240 + i * 100}ms` } as React.CSSProperties}
+                    className="py-5 first:pt-0 last:pb-0"
+                  >
                     <div className="flex items-start gap-4">
                       <div className="w-9 h-9 rounded-lg bg-[#d96c4a]/12 flex items-center justify-center flex-shrink-0 relative z-10">
                         <item.icon className="w-4 h-4 text-[#d96c4a]" strokeWidth={2.25} />
@@ -463,7 +569,11 @@ export const HomeStorySections = () => {
             {/* Right — editorial quote + image card */}
             <div className="flex flex-col gap-6">
               {/* Quote card — editorial with left orange border */}
-              <div className="bg-[#fef6f1] rounded-2xl p-7 lg:p-8 border border-[#d96c4a]/15 relative overflow-hidden">
+              <div
+                data-reveal="slide-left"
+                style={{ "--reveal-delay": "160ms" } as React.CSSProperties}
+                className="bg-[#fef6f1] rounded-2xl p-7 lg:p-8 border border-[#d96c4a]/15 relative overflow-hidden"
+              >
                 {/* Decorative large quote mark */}
                 <div aria-hidden="true" className="absolute top-4 right-6 text-[5rem] leading-none text-[#d96c4a]/10 font-serif font-bold pointer-events-none select-none">&ldquo;</div>
                 <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#d96c4a]/12 mb-5">
@@ -482,8 +592,12 @@ export const HomeStorySections = () => {
               </div>
 
               {/* Image card with floating metric badge */}
-              <div className="relative rounded-2xl overflow-visible">
-                <div className="relative rounded-2xl overflow-hidden aspect-[16/10] shadow-sm">
+              <div
+                data-reveal="slide-left"
+                style={{ "--reveal-delay": "280ms" } as React.CSSProperties}
+                className="relative rounded-2xl overflow-visible"
+              >
+                <div className="hss-img-zoom relative rounded-2xl overflow-hidden aspect-[16/10] shadow-sm">
                   <img
                     src={consultingTeam}
                     alt="Security consultation in progress"
@@ -501,7 +615,11 @@ export const HomeStorySections = () => {
                   </div>
                 </div>
                 {/* Floating metric badge */}
-                <div className="hss-float-card absolute -top-3 -right-3 px-3.5 py-2.5 hidden sm:flex items-center gap-2.5">
+                <div
+                  data-reveal="scale"
+                  style={{ "--reveal-delay": "480ms" } as React.CSSProperties}
+                  className="hss-float-card absolute -top-3 -right-3 px-3.5 py-2.5 hidden sm:flex items-center gap-2.5"
+                >
                   <div className="w-7 h-7 rounded-lg bg-[#d96c4a]/12 flex items-center justify-center flex-shrink-0">
                     <Zap className="w-3.5 h-3.5 text-[#d96c4a]" strokeWidth={2.5} />
                   </div>
@@ -525,19 +643,25 @@ export const HomeStorySections = () => {
       >
         <div className="container mx-auto px-6 lg:px-16 max-w-[1280px]">
           <div className="max-w-2xl mb-14 lg:mb-16">
-            <span className="hss-overline mb-5">
+            <span data-reveal className="hss-overline mb-5">
               <span className="hss-overline-dot" />
               How it works
             </span>
             <h2
               id="story-how-heading"
+              data-reveal
+              style={{ "--reveal-delay": "80ms" } as React.CSSProperties}
               className="text-[2rem] md:text-[2.25rem] lg:text-[2.5rem] font-bold text-[#1E293B] tracking-tight leading-[1.1] mt-4 mb-4"
             >
               Three steps to a quieter,
               <br />
               safer digital life.
             </h2>
-            <p className="text-base text-[#6B7280] leading-relaxed max-w-[480px]">
+            <p
+              data-reveal
+              style={{ "--reveal-delay": "160ms" } as React.CSSProperties}
+              className="text-base text-[#6B7280] leading-relaxed max-w-[480px]"
+            >
               No technical knowledge required. We handle the security work so
               you can stay focused on the people who matter most.
             </p>
@@ -552,7 +676,12 @@ export const HomeStorySections = () => {
             />
 
             {howItWorks.map((step, i) => (
-              <div key={step.step} className="relative flex flex-col px-0 md:px-6 lg:px-8 pb-10 md:pb-0">
+              <div
+                key={step.step}
+                data-reveal
+                style={{ "--reveal-delay": `${i * 160}ms` } as React.CSSProperties}
+                className="relative flex flex-col px-0 md:px-6 lg:px-8 pb-10 md:pb-0"
+              >
                 {/* Vertical connecting line — mobile only */}
                 {i < howItWorks.length - 1 && (
                   <div
@@ -563,7 +692,7 @@ export const HomeStorySections = () => {
 
                 {/* Step bubble */}
                 <div className="flex items-center gap-4 mb-5 relative z-10">
-                  <div className="hss-step-bubble">
+                  <div className="hss-step-bubble" data-step={step.step}>
                     {step.step}
                   </div>
                   <step.icon className="w-5 h-5 text-[#d96c4a]" strokeWidth={2.25} />
@@ -596,13 +725,15 @@ export const HomeStorySections = () => {
 
             {/* Left — checklist + CTA */}
             <div>
-              <span className="hss-overline mb-5">
+              <span data-reveal className="hss-overline mb-5">
                 <span className="hss-overline-dot" />
                 Get started today
               </span>
 
               <h2
                 id="story-section-4-heading"
+                data-reveal
+                style={{ "--reveal-delay": "80ms" } as React.CSSProperties}
                 className="text-[1.75rem] lg:text-[2rem] font-bold text-[#1E293B] tracking-tight leading-[1.15] mb-4 mt-4"
               >
                 Everything you need to feel
@@ -610,14 +741,23 @@ export const HomeStorySections = () => {
                 safe, in one plan.
               </h2>
 
-              <p className="text-base text-[#6B7280] leading-relaxed mb-7 max-w-[480px]">
+              <p
+                data-reveal
+                style={{ "--reveal-delay": "160ms" } as React.CSSProperties}
+                className="text-base text-[#6B7280] leading-relaxed mb-7 max-w-[480px]"
+              >
                 Same-day setup, no contracts, and a real human you can call by
                 name. Here's what comes with every InVision plan.
               </p>
 
               <ul className="space-y-3 mb-9">
-                {ctaChecks.map((item) => (
-                  <li key={item} className="flex items-start gap-3">
+                {ctaChecks.map((item, i) => (
+                  <li
+                    key={item}
+                    data-reveal="slide-right"
+                    style={{ "--reveal-delay": `${240 + i * 80}ms` } as React.CSSProperties}
+                    className="flex items-start gap-3"
+                  >
                     <span className="flex-shrink-0 w-5 h-5 rounded-full bg-[#d96c4a]/15 flex items-center justify-center mt-0.5">
                       <Check className="w-3 h-3 text-[#d96c4a]" strokeWidth={3} />
                     </span>
@@ -626,7 +766,11 @@ export const HomeStorySections = () => {
                 ))}
               </ul>
 
-              <div className="flex flex-wrap items-center gap-5">
+              <div
+                data-reveal
+                style={{ "--reveal-delay": "720ms" } as React.CSSProperties}
+                className="flex flex-wrap items-center gap-5"
+              >
                 <CtaPrimary to="/training#pricing">
                   Start Protecting My Family
                   <ArrowRight className="w-4 h-4" />
@@ -638,7 +782,11 @@ export const HomeStorySections = () => {
             {/* Right — asymmetric collage */}
             <div className="relative grid grid-rows-2 gap-5 h-[460px] lg:h-[520px]">
               {/* Large top image */}
-              <div className="relative rounded-2xl overflow-hidden shadow-[0_12px_28px_-12px_rgba(15,23,42,0.22)] row-span-1">
+              <div
+                data-reveal="slide-left"
+                style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
+                className="hss-img-zoom relative rounded-2xl overflow-hidden shadow-[0_12px_28px_-12px_rgba(15,23,42,0.22)] row-span-1"
+              >
                 <img
                   src={protectionWorkshop}
                   alt="Live protection workshop in session"
@@ -652,7 +800,11 @@ export const HomeStorySections = () => {
               </div>
 
               {/* Bottom image */}
-              <div className="relative rounded-2xl overflow-hidden shadow-[0_12px_28px_-12px_rgba(15,23,42,0.22)] row-span-1">
+              <div
+                data-reveal="slide-left"
+                style={{ "--reveal-delay": "260ms" } as React.CSSProperties}
+                className="hss-img-zoom relative rounded-2xl overflow-hidden shadow-[0_12px_28px_-12px_rgba(15,23,42,0.22)] row-span-1"
+              >
                 <img
                   src={communityWorkshop}
                   alt="Community workshop attendees"
@@ -669,9 +821,15 @@ export const HomeStorySections = () => {
               </div>
 
               {/* Floating trust badge */}
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 hss-trust-badge whitespace-nowrap">
-                <Check className="w-3.5 h-3.5" strokeWidth={3} />
-                30-Day Money-Back Guarantee
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2">
+                <div
+                  data-reveal="scale"
+                  style={{ "--reveal-delay": "500ms" } as React.CSSProperties}
+                  className="hss-trust-badge whitespace-nowrap"
+                >
+                  <Check className="w-3.5 h-3.5" strokeWidth={3} />
+                  30-Day Money-Back Guarantee
+                </div>
               </div>
             </div>
           </div>
