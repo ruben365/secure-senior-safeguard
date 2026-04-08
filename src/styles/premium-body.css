@@ -105,10 +105,10 @@ main img[class*="rounded"]:hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* ── Smooth scrolling for the whole page ── */
-html {
-  scroll-behavior: smooth;
-}
+/* Browser-level smooth-scroll is intentionally NOT set here.
+   It forces wheel/touch scrolling through the smooth-scroll animator
+   which causes input delay and visible blinking against animated
+   backgrounds. Anchor links can opt in per call via JS scrollIntoView. */
 
 /* ── Premium focus ring for all interactive body elements ── */
 main button:focus-visible,

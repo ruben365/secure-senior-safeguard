@@ -352,10 +352,16 @@
   }
 
   html {
-    @apply scroll-smooth;
+    /*
+      scroll-behavior is intentionally NOT "smooth" at the html level.
+      Forcing smooth on the root element routes every wheel/touch scroll
+      through the browser's smooth-scroll animator, which makes scrolling
+      feel delayed and causes visible blinking against animated/blurred
+      backgrounds. Anchor-link smooth jumps can be added per-call via
+      element.scrollIntoView({ behavior: "smooth" }) where needed.
+    */
     overflow-x: hidden;
     width: 100%;
-    scroll-behavior: smooth;
     scrollbar-gutter: stable;
     font-size: calc(16px * var(--text-scale));
     -webkit-text-size-adjust: 100%;

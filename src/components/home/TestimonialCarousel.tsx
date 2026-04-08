@@ -250,56 +250,127 @@ function WorldMapBackdrop() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 -z-0 flex items-center justify-center"
+      className="pointer-events-none absolute inset-0 -z-0 flex items-center justify-center overflow-hidden"
     >
       <svg
         viewBox="0 0 2000 1000"
-        className="w-full h-full max-w-[1600px]"
+        className="w-full h-full max-w-[1700px]"
         preserveAspectRatio="xMidYMid meet"
         fill="none"
       >
         <defs>
-          {/* Soft outer glow filter — used on the widest blur halo layer */}
+          {/* Soft outer glow — used on the widest halo layer */}
           <filter id="wm-outer-glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="6" />
+            <feGaussianBlur stdDeviation="5" />
           </filter>
           <filter id="wm-mid-glow" x="-10%" y="-10%" width="120%" height="120%">
-            <feGaussianBlur stdDeviation="2.2" />
+            <feGaussianBlur stdDeviation="1.8" />
           </filter>
 
-          {/* Shared group — every continent path referenced by id */}
+          {/* Warm -> cool gradient on the continent outlines — matches
+              the brand coral + lavender pair instead of pure white. */}
+          <linearGradient id="wm-stroke" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"  stopColor="#d96c4a" stopOpacity="1" />
+            <stop offset="55%" stopColor="#ffffff" stopOpacity="1" />
+            <stop offset="100%" stopColor="#8b80c4" stopOpacity="1" />
+          </linearGradient>
+
+          {/* Radial gradient for the globe sphere — soft 3D falloff */}
+          <radialGradient id="wm-globe-surface" cx="38%" cy="32%" r="70%">
+            <stop offset="0%"  stopColor="#ffffff" stopOpacity="0.18" />
+            <stop offset="55%" stopColor="#ffffff" stopOpacity="0.06" />
+            <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+          </radialGradient>
+
+          {/* Globe rim highlight */}
+          <radialGradient id="wm-globe-rim" cx="50%" cy="50%" r="50%">
+            <stop offset="88%" stopColor="#ffffff" stopOpacity="0" />
+            <stop offset="96%" stopColor="#ffffff" stopOpacity="0.45" />
+            <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+          </radialGradient>
+
+          {/* Shared continents group */}
           <g id="world-continents">
             {paths.map((p) => (
               <path key={p.id} d={p.d} />
             ))}
           </g>
+
+          {/*
+            SPHERICAL GLOBE element on the right side.
+            Built inline as a reusable group. Centered at (1760, 500)
+            with radius 200 — sits in the right margin of the viewBox.
+            Includes:
+              - outer rim highlight
+              - soft surface gradient
+              - latitude arcs (horizontal "parallel" curves)
+              - longitude arcs (vertical "meridian" curves)
+              - subtle glow halo
+          */}
+          <g id="wm-globe">
+            {/* Outer glow halo */}
+            <circle cx="1760" cy="500" r="230" fill="#d96c4a" opacity="0.07" filter="url(#wm-outer-glow)" />
+            {/* Rim highlight ring */}
+            <circle cx="1760" cy="500" r="200" fill="url(#wm-globe-rim)" />
+            {/* Soft surface gradient */}
+            <circle cx="1760" cy="500" r="198" fill="url(#wm-globe-surface)" />
+            {/* Equator — crisp horizontal line */}
+            <ellipse
+              cx="1760" cy="500" rx="198" ry="2"
+              fill="none" stroke="#ffffff" strokeWidth="0.8" opacity="0.55"
+            />
+            {/* Latitude parallels (curved via ellipse rx=198, ry varies) */}
+            <ellipse cx="1760" cy="500" rx="198" ry="60"
+              fill="none" stroke="#ffffff" strokeWidth="0.6" opacity="0.32" />
+            <ellipse cx="1760" cy="500" rx="198" ry="120"
+              fill="none" stroke="#ffffff" strokeWidth="0.6" opacity="0.28" />
+            <ellipse cx="1760" cy="500" rx="198" ry="165"
+              fill="none" stroke="#ffffff" strokeWidth="0.6" opacity="0.22" />
+            {/* Prime meridian — crisp vertical line */}
+            <ellipse cx="1760" cy="500" rx="2" ry="198"
+              fill="none" stroke="#ffffff" strokeWidth="0.8" opacity="0.55" />
+            {/* Longitude meridians (curved via ellipse ry=198, rx varies) */}
+            <ellipse cx="1760" cy="500" rx="60" ry="198"
+              fill="none" stroke="#ffffff" strokeWidth="0.6" opacity="0.32" />
+            <ellipse cx="1760" cy="500" rx="120" ry="198"
+              fill="none" stroke="#ffffff" strokeWidth="0.6" opacity="0.28" />
+            <ellipse cx="1760" cy="500" rx="165" ry="198"
+              fill="none" stroke="#ffffff" strokeWidth="0.6" opacity="0.22" />
+            {/* Outer sphere outline — hairline edge */}
+            <circle cx="1760" cy="500" r="198" fill="none" stroke="#ffffff" strokeWidth="1.2" opacity="0.7" />
+            {/* Connection nodes around the sphere */}
+            <circle cx="1680" cy="430" r="3.5" fill="#d96c4a" opacity="0.85" />
+            <circle cx="1680" cy="430" r="7" fill="none" stroke="#d96c4a" strokeWidth="0.8" opacity="0.35" />
+            <circle cx="1840" cy="460" r="3" fill="#ffffff" opacity="0.9" />
+            <circle cx="1840" cy="460" r="6" fill="none" stroke="#ffffff" strokeWidth="0.7" opacity="0.35" />
+            <circle cx="1720" cy="580" r="3" fill="#c4b5e8" opacity="0.85" />
+            <circle cx="1720" cy="580" r="6" fill="none" stroke="#c4b5e8" strokeWidth="0.7" opacity="0.35" />
+            <circle cx="1820" cy="550" r="2.5" fill="#ffffff" opacity="0.8" />
+          </g>
         </defs>
 
         {/*
           Rendering order (bottom → top):
-          1) Subtle interior fill so the continent silhouettes are
-             faintly suggested as areas.
-          2) Thick wide soft-blurred white glow — the "aura".
-          3) Mid white halo — a tighter but still soft stroke.
-          4) Crisp thin white outline — the final hairline edge.
+          1) Subtle interior fill for continent silhouettes
+          2) Wide soft glow outline — halo
+          3) Mid halo — tighter
+          4) Crisp hairline outline with warm->cool gradient stroke
+          5) Connection nodes on key cities
+          6) Spherical globe element on the right
         */}
 
         {/* 1 — interior fill */}
-        <use
-          href="#world-continents"
-          fill="#ffffff"
-          opacity="0.035"
-        />
+        <use href="#world-continents" fill="#ffffff" opacity="0.04" />
 
         {/* 2 — outer soft glow */}
         <use
           href="#world-continents"
           fill="none"
           stroke="#ffffff"
-          strokeWidth="4"
+          strokeWidth="3.2"
           strokeLinejoin="round"
           strokeLinecap="round"
-          opacity="0.22"
+          opacity="0.2"
           filter="url(#wm-outer-glow)"
         />
 
@@ -308,23 +379,49 @@ function WorldMapBackdrop() {
           href="#world-continents"
           fill="none"
           stroke="#ffffff"
-          strokeWidth="2"
+          strokeWidth="1.8"
           strokeLinejoin="round"
           strokeLinecap="round"
-          opacity="0.5"
+          opacity="0.45"
           filter="url(#wm-mid-glow)"
         />
 
-        {/* 4 — crisp hairline edge */}
+        {/* 4 — crisp hairline with warm->cool gradient */}
         <use
           href="#world-continents"
           fill="none"
-          stroke="#ffffff"
+          stroke="url(#wm-stroke)"
           strokeWidth="1.1"
           strokeLinejoin="round"
           strokeLinecap="round"
-          opacity="0.72"
+          opacity="0.78"
         />
+
+        {/* 5 — connection nodes on key landmark cities */}
+        <g opacity="0.9">
+          {/* Ohio / Kettering — home base, coral */}
+          <circle cx="520" cy="340" r="4.5" fill="#d96c4a" />
+          <circle cx="520" cy="340" r="10" fill="none" stroke="#d96c4a" strokeWidth="1" opacity="0.4" />
+          <circle cx="520" cy="340" r="18" fill="none" stroke="#d96c4a" strokeWidth="0.6" opacity="0.22" />
+          {/* Europe — London */}
+          <circle cx="955" cy="270" r="3" fill="#ffffff" />
+          <circle cx="955" cy="270" r="7" fill="none" stroke="#ffffff" strokeWidth="0.8" opacity="0.35" />
+          {/* Asia — Tokyo */}
+          <circle cx="1780" cy="330" r="3" fill="#c4b5e8" />
+          <circle cx="1780" cy="330" r="7" fill="none" stroke="#c4b5e8" strokeWidth="0.8" opacity="0.35" />
+          {/* Africa — Nairobi */}
+          <circle cx="1130" cy="560" r="3" fill="#ffffff" />
+          <circle cx="1130" cy="560" r="7" fill="none" stroke="#ffffff" strokeWidth="0.8" opacity="0.35" />
+          {/* South America — São Paulo */}
+          <circle cx="685" cy="810" r="3" fill="#ffffff" />
+          <circle cx="685" cy="810" r="7" fill="none" stroke="#ffffff" strokeWidth="0.8" opacity="0.35" />
+          {/* Australia — Sydney */}
+          <circle cx="1845" cy="770" r="3" fill="#ffffff" />
+          <circle cx="1845" cy="770" r="7" fill="none" stroke="#ffffff" strokeWidth="0.8" opacity="0.35" />
+        </g>
+
+        {/* 6 — Spherical globe on the right side */}
+        <use href="#wm-globe" />
       </svg>
     </div>
   );

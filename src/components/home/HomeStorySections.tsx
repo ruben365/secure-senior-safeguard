@@ -261,11 +261,11 @@ export const HomeStorySections = () => {
         className="hss-section-white relative py-20 lg:py-24"
         aria-labelledby="story-section-1-heading"
       >
-        <div className="container mx-auto px-6 lg:px-16 max-w-[1280px]">
+        <div className="container mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
 
             {/* Left column — 60% */}
-            <div className="md:col-span-7 max-w-[500px]">
+            <div className="md:col-span-7 max-w-[620px]">
               <span data-reveal className="hss-overline mb-5">
                 <span className="hss-overline-dot" />
                 Built for real families
@@ -283,7 +283,7 @@ export const HomeStorySections = () => {
               <p
                 data-reveal
                 style={{ "--reveal-delay": "160ms" } as React.CSSProperties}
-                className="text-base text-[#6B7280] leading-relaxed mb-8 max-w-[480px]"
+                className="text-base text-[#6B7280] leading-relaxed mb-8 max-w-[560px]"
               >
                 Our team builds the same enterprise-grade defenses used by
                 Fortune 500 companies and brings them to families and small
@@ -386,7 +386,7 @@ export const HomeStorySections = () => {
         <div aria-hidden="true" className="hss-stats-glow-left" />
         <div aria-hidden="true" className="hss-stats-glow-right" />
 
-        <div className="relative z-10 container mx-auto px-6 lg:px-16 max-w-[1280px]">
+        <div className="relative z-10 container mx-auto px-6 lg:px-8">
           <h2 id="story-stats-heading" className="sr-only">By the numbers</h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
             {stats.map((stat, i) => (
@@ -403,7 +403,7 @@ export const HomeStorySections = () => {
         className="hss-section-tint relative py-20 lg:py-24"
         aria-labelledby="story-section-2-heading"
       >
-        <div className="container mx-auto px-6 lg:px-16 max-w-[1280px]">
+        <div className="container mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-[45fr_55fr] gap-10 lg:gap-12 items-stretch">
 
             {/* Left — 45%: tall image with overlay caption */}
@@ -452,7 +452,7 @@ export const HomeStorySections = () => {
                 <h3 className="text-[1.5rem] font-bold text-[#1E293B] tracking-tight leading-tight mb-3">
                   One platform. Every layer of protection.
                 </h3>
-                <p className="text-[#6B7280] text-base leading-relaxed mb-6 max-w-[480px]">
+                <p className="text-[#6B7280] text-base leading-relaxed mb-6 max-w-[560px]">
                   From personal training and live workshops to enterprise
                   security audits and 24/7 monitoring — we built the toolkit so
                   your only job is to live your life.
@@ -514,7 +514,7 @@ export const HomeStorySections = () => {
         className="hss-section-white relative py-20 lg:py-24"
         aria-labelledby="story-section-3-heading"
       >
-        <div className="container mx-auto px-6 lg:px-16 max-w-[1280px]">
+        <div className="container mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-start">
 
             {/* Left — feature list with timeline */}
@@ -536,7 +536,7 @@ export const HomeStorySections = () => {
               <p
                 data-reveal
                 style={{ "--reveal-delay": "160ms" } as React.CSSProperties}
-                className="text-base text-[#6B7280] leading-relaxed mb-8 max-w-[480px]"
+                className="text-base text-[#6B7280] leading-relaxed mb-8 max-w-[560px]"
               >
                 Every alert we send is a real human looking at real evidence.
                 No black box, no false alarms — just security analysts who
@@ -558,7 +558,7 @@ export const HomeStorySections = () => {
                       </div>
                       <div className="flex-1 min-w-0">
                         <h4 className="text-base font-bold text-[#1E293B] leading-tight mb-1">{item.label}</h4>
-                        <p className="text-[14px] text-[#6B7280] leading-relaxed max-w-[440px]">{item.desc}</p>
+                        <p className="text-[14px] text-[#6B7280] leading-relaxed max-w-[520px]">{item.desc}</p>
                       </div>
                     </div>
                   </li>
@@ -641,8 +641,8 @@ export const HomeStorySections = () => {
         className="hss-section-tint relative py-20 lg:py-24"
         aria-labelledby="story-how-heading"
       >
-        <div className="container mx-auto px-6 lg:px-16 max-w-[1280px]">
-          <div className="max-w-2xl mb-14 lg:mb-16">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="max-w-3xl mb-14 lg:mb-16">
             <span data-reveal className="hss-overline mb-5">
               <span className="hss-overline-dot" />
               How it works
@@ -653,14 +653,12 @@ export const HomeStorySections = () => {
               style={{ "--reveal-delay": "80ms" } as React.CSSProperties}
               className="text-[2rem] md:text-[2.25rem] lg:text-[2.5rem] font-bold text-[#1E293B] tracking-tight leading-[1.1] mt-4 mb-4"
             >
-              Three steps to a quieter,
-              <br />
-              safer digital life.
+              Three steps to a quieter, safer digital life.
             </h2>
             <p
               data-reveal
               style={{ "--reveal-delay": "160ms" } as React.CSSProperties}
-              className="text-base text-[#6B7280] leading-relaxed max-w-[480px]"
+              className="text-base text-[#6B7280] leading-relaxed max-w-[560px]"
             >
               No technical knowledge required. We handle the security work so
               you can stay focused on the people who matter most.
@@ -720,7 +718,7 @@ export const HomeStorySections = () => {
         className="hss-section-white relative py-20 lg:py-24"
         aria-labelledby="story-section-4-heading"
       >
-        <div className="container mx-auto px-6 lg:px-16 max-w-[1280px]">
+        <div className="container mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
 
             {/* Left — checklist + CTA */}
@@ -744,7 +742,7 @@ export const HomeStorySections = () => {
               <p
                 data-reveal
                 style={{ "--reveal-delay": "160ms" } as React.CSSProperties}
-                className="text-base text-[#6B7280] leading-relaxed mb-7 max-w-[480px]"
+                className="text-base text-[#6B7280] leading-relaxed mb-7 max-w-[560px]"
               >
                 Same-day setup, no contracts, and a real human you can call by
                 name. Here's what comes with every InVision plan.
