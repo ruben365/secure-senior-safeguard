@@ -4,21 +4,72 @@
    premium glass cards, warm orange accent.
    ═══════════════════════════════════════════════════════════════════ */
 
-/* Container — clean warm off-white base */
+/* Container — same mesh-gradient palette used on the About page,
+   layered over the theme background token so it stays light/dark aware. */
 .hss-root {
-  background: #fafaf7;
+  background:
+    radial-gradient(at 40% 20%, hsl(var(--primary) / 0.15) 0px, transparent 50%),
+    radial-gradient(at 80% 0%,  hsl(var(--accent)  / 0.15) 0px, transparent 50%),
+    radial-gradient(at 0% 50%,  hsl(265 55% 42% / 0.15) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, hsl(var(--primary) / 0.10) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsl(var(--accent)  / 0.15) 0px, transparent 50%),
+    radial-gradient(at 80% 100%,hsl(var(--primary) / 0.10) 0px, transparent 50%),
+    hsl(var(--background));
   position: relative;
   overflow: hidden;
 }
 
-/* Alternate section tint — soft warm cream */
-.hss-section-tint {
-  background: #fef6f1;
+/* Aurora — slow drifting northern-lights ribbon across the home page.
+   Multi-stop conic + radial blend, gently animated. Sits behind content. */
+.hss-root::after {
+  content: '';
+  position: absolute;
+  left: -25%;
+  top: 12%;
+  width: 150%;
+  height: 70%;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(45% 38% at 18% 38%, rgba(139, 92, 246, 0.18) 0%, rgba(139, 92, 246, 0.04) 50%, transparent 78%),
+    radial-gradient(40% 32% at 38% 62%, rgba(45, 212, 191, 0.16) 0%, rgba(45, 212, 191, 0.03) 50%, transparent 78%),
+    radial-gradient(48% 40% at 62% 42%, rgba(168, 85, 247, 0.17) 0%, rgba(168, 85, 247, 0.04) 50%, transparent 78%),
+    radial-gradient(40% 32% at 82% 60%, rgba(56, 189, 248, 0.15) 0%, rgba(56, 189, 248, 0.03) 50%, transparent 78%);
+  filter: blur(100px) saturate(140%);
+  transform: rotate(-5deg);
+  mix-blend-mode: screen;
+  opacity: 0.9;
+  animation: hss-aurora-drift 22s ease-in-out infinite alternate;
+  will-change: transform, filter;
 }
 
-/* Editorial section — pure white background */
+@keyframes hss-aurora-drift {
+  0% {
+    transform: rotate(-5deg) translate3d(0, 0, 0) scale(1);
+    filter: blur(100px) saturate(140%) hue-rotate(0deg);
+  }
+  50% {
+    transform: rotate(-3deg) translate3d(2%, -1.5%, 0) scale(1.05);
+    filter: blur(110px) saturate(160%) hue-rotate(18deg);
+  }
+  100% {
+    transform: rotate(-6deg) translate3d(-1.5%, 1%, 0) scale(1.02);
+    filter: blur(105px) saturate(150%) hue-rotate(-12deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hss-root::after { animation: none; }
+}
+
+/* Alternate section tint — uses theme muted token */
+.hss-section-tint {
+  background: hsl(var(--muted));
+}
+
+/* Editorial section — uses theme card token */
 .hss-section-white {
-  background: #ffffff;
+  background: hsl(var(--card));
 }
 
 /* ─────────────────────────────────────────────────────────────────
