@@ -4,6 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { HeroHomepage } from "@/components/HeroHomepage";
 import HomeStorySections from "@/components/home/HomeStorySections";
+import { HomeIntroSection } from "@/components/home/HomeIntroSection";
 import { ScamShieldSubmission } from "@/components/ScamShieldSubmission";
 import { PageTransition } from "@/components/PageTransition";
 import { Button } from "@/components/ui/button";
@@ -55,6 +56,15 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
               white 6%, brown 10%, yellow 7%, burgundy 6%, maroon 3%, red 1%.
               Hero and Footer sit OUTSIDE this wrapper so they stay untouched. */}
           <div className="home-color-wash relative isolate">
+
+          {/* 1b. Intro — announces what we do in a glass-morphism grid
+              aligned to the same plumb line as the nav / hero / footer. */}
+          <section
+            id="home-intro"
+            aria-label="What we do — an introduction"
+          >
+            <HomeIntroSection />
+          </section>
 
           {/* 2. Story sections — replaces the old intro/services/workshops/promo
               stack with one cohesive 3-section block in the orange/glass system */}
