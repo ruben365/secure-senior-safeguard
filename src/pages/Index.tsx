@@ -4,6 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { HeroHomepage } from "@/components/HeroHomepage";
 import HomeStorySections from "@/components/home/HomeStorySections";
+import { HomeMiddleSections } from "@/components/home/HomeMiddleSections";
 import { ScamShieldSubmission } from "@/components/ScamShieldSubmission";
 import { PageTransition } from "@/components/PageTransition";
 import { Button } from "@/components/ui/button";
@@ -64,6 +65,11 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
           >
             <HomeStorySections />
           </section>
+
+          {/* 2b. Middle block — Services bento, How It Works timeline,
+              About split screen, Testimonials masonry, Contact dual-pane.
+              Hero and Footer are NOT touched. */}
+          <HomeMiddleSections />
 
           {/* 3. Testimonials + FAQ — wrapped in the same warm off-white
               container so they flow seamlessly out of HomeStorySections.
