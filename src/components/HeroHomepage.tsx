@@ -72,7 +72,7 @@ export const HeroHomepage = () => {
           src={corineHero}
           alt="Corine — InVision Network co-founder"
           loading="eager"
-          decoding="sync"
+          decoding="async"
           fetchPriority="high"
         />
         <div className="hero-home__top-veil" />

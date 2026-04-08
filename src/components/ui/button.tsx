@@ -14,13 +14,13 @@ const buttonVariants = cva(
           "bg-gradient-to-b from-[#e07a55] to-[#d05f3a] text-white",
           // Crisp border keyed to the bottom of the gradient
           "border border-[#b8552f]",
-          // Soft single drop shadow tinted with the brand color
-          "shadow-[0_1px_0_0_rgba(255,255,255,0.18)_inset,0_8px_20px_-6px_rgba(217,108,74,0.45)]",
-          // Hover — gentle lift, slightly warmer, bigger soft glow
-          "hover:-translate-y-[1px] hover:from-[#e88560] hover:to-[#d96847]",
-          "hover:shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_12px_28px_-6px_rgba(217,108,74,0.55),0_0_24px_-4px_rgba(217,108,74,0.35)]",
+          // Prominent drop shadow + warm ambient glow so buttons POP on any background
+          "shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_14px_32px_-8px_rgba(217,108,74,0.7),0_0_28px_-6px_rgba(249,115,22,0.4),0_4px_12px_-2px_rgba(15,23,42,0.15)]",
+          // Hover — noticeable lift, warmer tone, bigger glow halo
+          "hover:-translate-y-[2px] hover:from-[#e88560] hover:to-[#d96847]",
+          "hover:shadow-[0_1px_0_0_rgba(255,255,255,0.28)_inset,0_20px_44px_-8px_rgba(217,108,74,0.8),0_0_44px_-6px_rgba(249,115,22,0.55),0_6px_16px_-2px_rgba(15,23,42,0.18)]",
           // Active — micro-press
-          "active:translate-y-[0.5px] active:shadow-[0_1px_0_0_rgba(255,255,255,0.12)_inset,0_4px_12px_-4px_rgba(217,108,74,0.4)]",
+          "active:translate-y-[0.5px] active:shadow-[0_1px_0_0_rgba(255,255,255,0.14)_inset,0_6px_16px_-4px_rgba(217,108,74,0.55)]",
         ].join(" "),
         gold: [
           "bg-gradient-to-b from-accent to-[hsl(308_23%_51%)] text-white",

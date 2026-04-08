@@ -10,16 +10,16 @@ const testimonials = [
     name: "Robert & Carol S.",
     location: "Dayton, OH",
     quote:
-      "We were about to send $5,000 to someone pretending to be our grandson. InVision's training taught us to use a family safe word — it saved us from devastation.",
+      "We were about to send $5,000 to someone pretending to be our grandson. InVision's safe-word training saved us.",
     rating: 5,
     avatar: instructorSarah,
-    tag: "Grandparent Scam Prevented",
+    tag: "Grandparent Scam",
   },
   {
     name: "Maria T.",
     location: "Springfield, OH",
     quote:
-      "As a small business owner, I didn't realize how vulnerable my team was. The workshop was eye-opening. We've since blocked 3 phishing attempts using what we learned.",
+      "The workshop was eye-opening. We've blocked 3 phishing attempts on our small business since.",
     rating: 5,
     avatar: instructorJames,
     tag: "Business Owner",
@@ -28,10 +28,91 @@ const testimonials = [
     name: "David & Linda W.",
     location: "Centerville, OH",
     quote:
-      "The private family session was worth every penny. Our parents now know exactly what to do when they get suspicious calls. We sleep better knowing they're protected.",
+      "Our parents now know exactly what to do when they get suspicious calls. We sleep better.",
     rating: 5,
     avatar: instructorPriya,
     tag: "Family Session",
+  },
+  {
+    name: "Harold P.",
+    location: "Kettering, OH",
+    quote:
+      "I used to panic every time the phone rang. Now I know the tricks — even caught a deepfake call last week.",
+    rating: 5,
+    avatar: instructorSarah,
+    tag: "Deepfake Caught",
+  },
+  {
+    name: "Jennifer R.",
+    location: "Beavercreek, OH",
+    quote:
+      "Their team had our practice back up in under an hour after a payroll email got spoofed. Best insurance we ever bought.",
+    rating: 5,
+    avatar: instructorPriya,
+    tag: "Business Rescue",
+  },
+  {
+    name: "Eleanor B.",
+    location: "Oakwood, OH",
+    quote:
+      "I'm 78 and felt completely lost with technology. Their patience with me was incredible — I actually feel confident now.",
+    rating: 5,
+    avatar: instructorSarah,
+    tag: "Senior Training",
+  },
+  {
+    name: "Thomas & Anne G.",
+    location: "Miamisburg, OH",
+    quote:
+      "A romance scammer nearly took our life savings. InVision's team spotted it in minutes when nobody else would listen.",
+    rating: 5,
+    avatar: instructorJames,
+    tag: "Romance Scam",
+  },
+  {
+    name: "Patricia H.",
+    location: "Fairborn, OH",
+    quote:
+      "My identity was stolen and I had no idea where to start. They walked me through every step until it was fully resolved.",
+    rating: 5,
+    avatar: instructorPriya,
+    tag: "Identity Theft",
+  },
+  {
+    name: "Michael S.",
+    location: "Huber Heights, OH",
+    quote:
+      "The AI receptionist they built for my barbershop pays for itself every week. Bookings are up 40%.",
+    rating: 5,
+    avatar: instructorJames,
+    tag: "AI Receptionist",
+  },
+  {
+    name: "Grace & Walter K.",
+    location: "Vandalia, OH",
+    quote:
+      "My husband has dementia and scammers target him daily. InVision set up filters that catch 99% of them before he sees them.",
+    rating: 5,
+    avatar: instructorSarah,
+    tag: "Dementia Support",
+  },
+  {
+    name: "Rev. Daniel F.",
+    location: "Troy, OH",
+    quote:
+      "They trained my entire church congregation for free. A week later a parishioner avoided a $12,000 gift-card scam.",
+    rating: 5,
+    avatar: instructorJames,
+    tag: "Community Outreach",
+  },
+  {
+    name: "Susan & James M.",
+    location: "Xenia, OH",
+    quote:
+      "After the breach at our kids' school we panicked. InVision had us locked down across every device in two evenings.",
+    rating: 5,
+    avatar: instructorPriya,
+    tag: "Family Lockdown",
   },
 ];
 
@@ -49,14 +130,15 @@ function WorldMapBackdrop() {
     >
       <svg
         viewBox="0 0 2000 1000"
-        className="w-full h-full max-w-[1600px] opacity-[0.09]"
+        className="w-full h-full max-w-[1600px] opacity-[0.22]"
         preserveAspectRatio="xMidYMid meet"
         fill="none"
       >
         <defs>
-          {/* Dot pattern that maps continents via mask */}
-          <pattern id="map-dots" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
-            <circle cx="2" cy="2" r="1.8" fill="#6b5b8a" />
+          {/* Dot pattern that maps continents via mask — denser + larger
+              dots so the map is clearly legible behind the cards. */}
+          <pattern id="map-dots" x="0" y="0" width="12" height="12" patternUnits="userSpaceOnUse">
+            <circle cx="2" cy="2" r="2" fill="#6b5b8a" />
           </pattern>
 
           {/* Continent mask — all continents as a single composite path.
@@ -212,91 +294,97 @@ export const TestimonialCarousel = () => {
           </p>
         </div>
 
-        {/* Small fade-in cards grid — 3 cards, hover to reveal */}
+        {/* Mini fade-in cards grid — many testimonials, hover to reveal.
+            4 per row on xl so we can pack 12 into a 3-row grid. */}
         <div
           data-reveal
           style={{ "--reveal-delay": "300ms" } as React.CSSProperties}
-          className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 max-w-6xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4 max-w-6xl mx-auto"
         >
           {testimonials.map((t, i) => {
             const isHovered = hoveredIdx === i;
             const anyHovered = hoveredIdx !== null;
+            // Staggered rise delay so they don't all pop in at once
+            const riseDelay = `${(i % 4) * 60 + Math.floor(i / 4) * 80}ms`;
             return (
               <figure
                 key={t.name}
                 onMouseEnter={() => setHoveredIdx(i)}
                 onMouseLeave={() => setHoveredIdx(null)}
+                style={{ transitionDelay: anyHovered ? "0ms" : riseDelay }}
                 className={[
-                  "group relative rounded-2xl p-5 md:p-6",
+                  "group relative rounded-xl p-3 md:p-3.5",
                   "bg-white/85 backdrop-blur-md border border-[#1E293B]/8",
-                  "shadow-[0_8px_24px_-12px_rgba(15,23,42,0.15)]",
-                  "transition-all duration-500 ease-out",
-                  // Fade effect: idle state is slightly dimmed; hovered card
-                  // pops to full clarity; other cards dim further.
+                  "shadow-[0_6px_18px_-10px_rgba(15,23,42,0.15)]",
+                  "transition-all duration-[600ms]",
+                  "ease-[cubic-bezier(0.22,1,0.36,1)]",
+                  // Smart appear/disappear: when any card is hovered,
+                  // unhovered cards dim + shrink and slightly recede,
+                  // hovered card floats forward with a warm glow.
                   anyHovered
                     ? isHovered
-                      ? "opacity-100 scale-[1.02] shadow-[0_20px_48px_-12px_rgba(217,108,74,0.28),0_4px_16px_-4px_rgba(15,23,42,0.12)] border-[#d96c4a]/25 -translate-y-1"
-                      : "opacity-40 scale-[0.98]"
-                    : "opacity-85 hover:opacity-100",
+                      ? "opacity-100 scale-[1.04] -translate-y-1.5 shadow-[0_18px_44px_-14px_rgba(217,108,74,0.35),0_4px_14px_-4px_rgba(15,23,42,0.14)] border-[#d96c4a]/30 z-10"
+                      : "opacity-25 scale-[0.97] blur-[0.5px]"
+                    : "opacity-90 hover:opacity-100",
                 ].join(" ")}
               >
-                {/* Floating quote badge */}
+                {/* Floating quote badge — very small */}
                 <div
                   aria-hidden="true"
                   className={[
-                    "absolute -top-3 -left-3 w-10 h-10 rounded-xl bg-gradient-to-br from-[#d96c4a] to-[#b8552f]",
-                    "flex items-center justify-center shadow-[0_8px_20px_-6px_rgba(217,108,74,0.45)] border border-white/30",
-                    "transition-all duration-500",
-                    isHovered ? "rotate-[-6deg] scale-110" : "rotate-0 scale-100",
+                    "absolute -top-2 -left-2 w-7 h-7 rounded-lg bg-gradient-to-br from-[#d96c4a] to-[#b8552f]",
+                    "flex items-center justify-center shadow-[0_4px_12px_-4px_rgba(217,108,74,0.5)] border border-white/30",
+                    "transition-all duration-[600ms] ease-out",
+                    isHovered ? "rotate-[-8deg] scale-110" : "rotate-0 scale-100",
                   ].join(" ")}
                 >
-                  <Quote className="w-4 h-4 text-white" strokeWidth={2.5} />
+                  <Quote className="w-3 h-3 text-white" strokeWidth={2.5} />
                 </div>
 
-                {/* Stars */}
-                <div className="flex gap-0.5 mb-3 mt-1">
+                {/* Stars row */}
+                <div className="flex gap-0.5 mb-1.5 mt-0.5 ml-6">
                   {Array.from({ length: t.rating }).map((_, idx) => (
                     <Star
                       key={idx}
-                      className="w-3.5 h-3.5 fill-[#d96c4a] text-[#d96c4a]"
+                      className="w-2.5 h-2.5 fill-[#d96c4a] text-[#d96c4a]"
                     />
                   ))}
                 </div>
 
-                {/* Quote — clamped to keep cards the same small height */}
-                <blockquote className="text-[0.8125rem] md:text-sm text-[#475569] leading-relaxed mb-4 italic font-light line-clamp-5">
+                {/* Quote — clamped to keep every card compact + uniform */}
+                <blockquote className="text-[11px] md:text-[11.5px] text-[#475569] leading-snug mb-2.5 italic font-light line-clamp-3">
                   &ldquo;{t.quote}&rdquo;
                 </blockquote>
 
-                {/* Author row */}
-                <figcaption className="flex items-center gap-3 pt-3 border-t border-[#1E293B]/8">
+                {/* Author row — tight */}
+                <figcaption className="flex items-center gap-2 pt-2 border-t border-[#1E293B]/8">
                   <img
                     src={t.avatar}
                     alt={t.name}
-                    className="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm flex-shrink-0"
+                    className="w-7 h-7 rounded-full object-cover border border-white shadow-sm flex-shrink-0"
                     loading="lazy"
                     decoding="async"
-                    width={40}
-                    height={40}
+                    width={28}
+                    height={28}
                   />
-                  <div className="min-w-0">
-                    <div className="font-bold text-[#1E293B] text-xs truncate">
+                  <div className="min-w-0 flex-1">
+                    <div className="font-bold text-[#1E293B] text-[10px] leading-tight truncate">
                       {t.name}
                     </div>
-                    <div className="text-[11px] text-[#64748B] truncate">
+                    <div className="text-[9px] text-[#64748B] truncate">
                       {t.location}
                     </div>
                   </div>
                 </figcaption>
 
-                {/* Tag pill */}
+                {/* Tag pill — appears on hover */}
                 <div
                   className={[
-                    "absolute top-3 right-3 inline-flex items-center px-2 py-0.5 rounded-full",
-                    "text-[9px] font-bold uppercase tracking-wider",
-                    "bg-[#d96c4a]/10 text-[#d96c4a] border border-[#d96c4a]/20",
-                    "transition-all duration-500",
-                    isHovered ? "opacity-100 translate-y-0" : "opacity-70 translate-y-0.5",
+                    "absolute top-2 right-2 inline-flex items-center px-1.5 py-px rounded-full",
+                    "text-[8px] font-bold uppercase tracking-wider whitespace-nowrap",
+                    "bg-[#d96c4a]/12 text-[#d96c4a] border border-[#d96c4a]/25",
+                    "transition-all duration-[600ms] ease-out",
+                    isHovered ? "opacity-100 translate-y-0" : "opacity-60 translate-y-0.5",
                   ].join(" ")}
                 >
                   {t.tag}

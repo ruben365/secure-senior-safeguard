@@ -478,10 +478,12 @@ function Auth() {
             width={1920}
             height={1080}
           />
-          <div className="absolute inset-0 bg-white/30 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-400/55 via-amber-300/40 to-orange-500/55 backdrop-blur-[2px]" />
+          <div className="absolute -top-40 -left-32 h-[520px] w-[520px] rounded-full bg-orange-400/40 blur-[130px]" />
+          <div className="absolute -bottom-40 -right-32 h-[560px] w-[560px] rounded-full bg-amber-400/35 blur-[150px]" />
         </div>
         <div className="relative z-10 w-full max-w-[420px]">
-          <div className="bg-white rounded-3xl p-8 md:p-10 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] border border-white/50 text-center">
+          <div className="bg-[#fffaf5] rounded-3xl p-8 md:p-10 shadow-[0_20px_60px_-15px_rgba(217,108,74,0.35),0_0_0_1px_rgba(249,115,22,0.15)] border border-orange-200/60 text-center">
             <div className="w-16 h-16 mx-auto bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg mb-6">
               <CheckCircle2 className="w-8 h-8 text-white" />
             </div>
@@ -514,7 +516,7 @@ function Auth() {
         description="Sign in to your InVision Network account to access your portal, courses, and protection tools."
         noindex
       />
-      {/* Background */}
+      {/* Background — orange-washed */}
       <div className="absolute inset-0 z-0">
         <img
           src={authBackground}
@@ -525,13 +527,17 @@ function Auth() {
           width={1920}
           height={1080}
         />
-        <div className="absolute inset-0 bg-white/30 backdrop-blur-[2px]" />
+        {/* Warm orange wash replaces the old neutral white veil */}
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-400/55 via-amber-300/40 to-orange-500/55 backdrop-blur-[2px]" />
+        {/* Ambient orange glows */}
+        <div className="absolute -top-40 -left-32 h-[520px] w-[520px] rounded-full bg-orange-400/40 blur-[130px]" />
+        <div className="absolute -bottom-40 -right-32 h-[560px] w-[560px] rounded-full bg-amber-400/35 blur-[150px]" />
       </div>
 
       {/* Main Content */}
       <div className="relative z-10 w-full max-w-[440px]">
-        {/* Auth Card */}
-        <div className="bg-white rounded-3xl p-8 md:p-10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.12)] border border-white/50">
+        {/* Auth Card — warm cream with orange edge glow */}
+        <div className="bg-[#fffaf5] rounded-3xl p-8 md:p-10 shadow-[0_20px_60px_-15px_rgba(217,108,74,0.35),0_0_0_1px_rgba(249,115,22,0.15)] border border-orange-200/60">
           {/* Logo Inside Card */}
           <Link
             to="/"
