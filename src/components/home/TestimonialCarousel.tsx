@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 
 import instructorSarah from "@/assets/instructor-sarah.jpg";
@@ -37,12 +37,40 @@ const testimonials = [
 
 export const TestimonialCarousel = () => {
   const [current, setCurrent] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
 
   const next = () => setCurrent((c) => (c + 1) % testimonials.length);
   const prev = () => setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length);
 
+  // Scroll-reveal observer for [data-reveal] inside this section
+  useEffect(() => {
+    const root = sectionRef.current;
+    if (!root) return;
+    const targets = root.querySelectorAll<HTMLElement>("[data-reveal]");
+    if (!targets.length) return;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) {
+      targets.forEach((el) => el.classList.add("is-visible"));
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" },
+    );
+    targets.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       className="hss-testimonial-theater relative z-10 py-16 md:py-22 lg:py-28"
       aria-labelledby="testimonials-heading"
     >
@@ -54,24 +82,37 @@ export const TestimonialCarousel = () => {
 
         {/* Section header */}
         <div className="text-center mb-12 lg:mb-16">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/12 bg-white/[0.06] mb-5"
-            style={{ backdropFilter: "blur(12px)" }}>
+          <span
+            data-reveal
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/12 bg-white/[0.06] mb-5"
+            style={{ backdropFilter: "blur(12px)" }}
+          >
             <span className="w-1.5 h-1.5 rounded-full bg-[#d96c4a]" />
             <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#fbab8e]">Testimonials</span>
           </span>
           <h2
             id="testimonials-heading"
+            data-reveal
+            style={{ "--reveal-delay": "100ms" } as React.CSSProperties}
             className="text-4xl md:text-5xl lg:text-[3rem] font-extrabold text-white leading-[1.05] tracking-tight mb-3 mt-4"
           >
             What families are saying
           </h2>
-          <p className="text-white/50 text-base md:text-lg max-w-xl mx-auto leading-relaxed">
+          <p
+            data-reveal
+            style={{ "--reveal-delay": "200ms" } as React.CSSProperties}
+            className="text-white/50 text-base md:text-lg max-w-xl mx-auto leading-relaxed"
+          >
             Real stories from Ohio families we've helped protect.
           </p>
         </div>
 
         {/* Glass card */}
-        <div className="hss-testimonial-card">
+        <div
+          data-reveal="scale"
+          style={{ "--reveal-delay": "280ms" } as React.CSSProperties}
+          className="hss-testimonial-card"
+        >
           {/* Orange accent top bar */}
           <div className="hss-card-accent-bar" />
 
