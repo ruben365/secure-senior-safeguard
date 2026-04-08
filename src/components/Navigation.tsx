@@ -300,18 +300,38 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
 
       {/* Mobile Menu — outside nav for proper stacking */}
       {mobileMenuOpen && (
-        <div id="mobile-navigation" role="dialog" aria-modal="true" aria-label="Main navigation" className="lg:hidden fixed top-[60px] left-0 right-0 bottom-0 border-t border-gray-800 z-[10001] overflow-y-auto overscroll-contain pb-[calc(env(safe-area-inset-bottom)+1.25rem)] [-webkit-overflow-scrolling:touch] bg-[#080d1a]">
-          <div className="container mx-auto px-4 py-4 space-y-1">
+        <div
+          id="mobile-navigation"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Main navigation"
+          className="lg:hidden fixed top-[60px] left-0 right-0 bottom-0 border-t border-white/[0.08] z-[10001] overflow-y-auto overscroll-contain pb-[calc(env(safe-area-inset-bottom)+1.25rem)] [-webkit-overflow-scrolling:touch]"
+          style={{
+            background: "rgba(6, 9, 18, 0.80)",
+            backdropFilter: "blur(32px) saturate(200%)",
+            WebkitBackdropFilter: "blur(32px) saturate(200%)",
+          }}
+        >
+          {/* Ambient orange glow at top */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute top-0 left-0 right-0 h-64"
+            style={{
+              background: "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(249,115,22,0.12) 0%, transparent 75%)",
+            }}
+          />
+
+          <div className="relative container mx-auto px-4 py-5 space-y-1">
             {allLinks.map((link) => {
               const isActive = isActiveLink(link.href);
               return (
                 <Link
                   key={link.name}
                   to={link.href}
-                  className={`block text-[15px] transition-colors duration-150 font-medium px-4 py-3 rounded-lg ${
+                  className={`flex items-center text-[16px] font-semibold px-4 py-3.5 rounded-xl transition-all duration-200 ${
                     isActive
-                      ? "text-orange-400 font-semibold bg-orange-500/10"
-                      : "text-gray-300 hover:text-white hover:bg-white/10"
+                      ? "text-orange-400 bg-orange-500/[0.12] border border-orange-500/20 shadow-[0_0_20px_-6px_rgba(249,115,22,0.3)]"
+                      : "text-white/75 hover:text-white hover:bg-white/[0.06] border border-transparent hover:border-white/[0.08]"
                   }`}
                   onClick={() => {
                     setMobileMenuOpen(false);
@@ -323,10 +343,20 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
               );
             })}
 
-            <div className="pt-4 border-t border-gray-800 mt-3 space-y-3">
+            <div
+              className="mt-4 pt-4 space-y-3"
+              style={{
+                borderTop: "1px solid rgba(255,255,255,0.08)",
+              }}
+            >
               <button
                 type="button"
-                className="w-full h-11 text-[15px] font-semibold border border-orange-500/30 text-orange-400 hover:bg-orange-500/10 rounded-lg flex items-center justify-center gap-2 transition-colors"
+                className="w-full h-12 text-[15px] font-semibold rounded-xl flex items-center justify-center gap-2 transition-all duration-200 border text-orange-400 hover:text-orange-300"
+                style={{
+                  background: "rgba(249,115,22,0.08)",
+                  borderColor: "rgba(249,115,22,0.25)",
+                  backdropFilter: "blur(12px)",
+                }}
                 onClick={() => {
                   setDonateOpen(true);
                   setMobileMenuOpen(false);
@@ -340,7 +370,13 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 <Link
                   to="/admin"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full h-11 text-[15px] font-semibold rounded-lg bg-violet-600 hover:bg-violet-500 text-white flex items-center justify-center gap-2 transition-colors"
+                  className="w-full h-12 text-[15px] font-semibold rounded-xl text-white flex items-center justify-center gap-2 transition-all duration-200"
+                  style={{
+                    background: "linear-gradient(135deg, rgba(124,58,237,0.85) 0%, rgba(109,40,217,0.85) 100%)",
+                    border: "1px solid rgba(167,139,250,0.25)",
+                    backdropFilter: "blur(12px)",
+                    boxShadow: "0 0 24px -6px rgba(124,58,237,0.5), inset 0 1px 0 rgba(255,255,255,0.12)",
+                  }}
                 >
                   <LayoutDashboard className="h-4 w-4" />
                   Dashboard
@@ -349,7 +385,13 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 <Link
                   to="/portal"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full h-11 text-[15px] font-semibold rounded-lg bg-violet-600 hover:bg-violet-500 text-white flex items-center justify-center transition-colors"
+                  className="w-full h-12 text-[15px] font-semibold rounded-xl text-white flex items-center justify-center transition-all duration-200"
+                  style={{
+                    background: "linear-gradient(135deg, rgba(124,58,237,0.85) 0%, rgba(109,40,217,0.85) 100%)",
+                    border: "1px solid rgba(167,139,250,0.25)",
+                    backdropFilter: "blur(12px)",
+                    boxShadow: "0 0 24px -6px rgba(124,58,237,0.5), inset 0 1px 0 rgba(255,255,255,0.12)",
+                  }}
                 >
                   Login
                 </Link>
@@ -357,7 +399,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
 
               <a
                 href={SITE.phone.tel}
-                className="flex items-center justify-center gap-2 text-[15px] text-gray-400 font-medium px-4 py-3 rounded-lg hover:bg-white/10 transition-colors duration-150"
+                className="flex items-center justify-center gap-2 text-[14px] text-white/50 font-medium px-4 py-3 rounded-xl transition-all duration-200 hover:text-white/80 hover:bg-white/[0.05]"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <Phone className="h-4 w-4" />
