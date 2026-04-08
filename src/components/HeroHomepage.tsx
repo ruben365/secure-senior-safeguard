@@ -81,57 +81,60 @@ export const HeroHomepage = () => {
 
       {/* ── 2. Hero Content ── */}
       <div className="hero-home__content">
-        <div className="hero-home__copy">
+        <div className="max-w-7xl mx-auto w-full px-6 lg:px-8">
+          <div className="hero-home__copy">
 
-          {/* Kicker / Overline */}
-          <div className="hero-home__kicker">
-            <span className="hero-home__kicker-line" />
-            <span className="hero-home__kicker-text">Your Path to Safety</span>
-          </div>
+            {/* Kicker / Overline */}
+            <div className="hero-home__kicker">
+              <span className="hero-home__kicker-line" />
+              <span className="hero-home__kicker-text">Your Path to Safety</span>
+            </div>
 
-          {/* Micro-Nav Tabs — navigate to dedicated pages */}
-          <nav className="hero-home__tabs" aria-label="Quick links">
-            {heroTabs.map((tab) => (
-              <Link
-                key={tab.label}
-                to={tab.to}
-                className="hero-home__tab"
-              >
-                {tab.label}
+            {/* Micro-Nav Tabs — navigate to dedicated pages */}
+            <nav className="hero-home__tabs" aria-label="Quick links">
+              {heroTabs.map((tab) => (
+                <Link
+                  key={tab.label}
+                  to={tab.to}
+                  className="hero-home__tab"
+                >
+                  {tab.label}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Headline */}
+            <h1 className="hero-home__headline">
+              AI Protection
+              <br />
+              for Families &amp; Business
+            </h1>
+
+            {/* Body */}
+            <p className="hero-home__body">
+              We stop AI-powered scams before they reach your family. Our team
+              builds automated defenses, runs live training, and monitors threats
+              around the clock so you stay safe without lifting a finger.
+            </p>
+
+            {/* Ghost CTA Buttons */}
+            <div className="hero-home__ctas">
+              <Link to="/training#pricing" className="hero-home__cta">
+                Get Protected
               </Link>
-            ))}
-          </nav>
-
-          {/* Headline */}
-          <h1 className="hero-home__headline">
-            AI Protection
-            <br />
-            for Families &amp; Business
-          </h1>
-
-          {/* Body */}
-          <p className="hero-home__body">
-            We stop AI-powered scams before they reach your family. Our team
-            builds automated defenses, runs live training, and monitors threats
-            around the clock so you stay safe without lifting a finger.
-          </p>
-
-          {/* Ghost CTA Buttons */}
-          <div className="hero-home__ctas">
-            <Link to="/training#pricing" className="hero-home__cta">
-              Get Protected
-            </Link>
-            <Link to="/business" className="hero-home__cta">
-              See Our Work
-              <ArrowRight />
-            </Link>
+              <Link to="/business" className="hero-home__cta">
+                See Our Work
+                <ArrowRight />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
 
       {/* ── 3. Glassmorphism Bottom Panel ── */}
       <div className="hero-home__panel">
-        <div className="hero-home__panel-inner">
+        <div className="max-w-7xl mx-auto w-full px-6 lg:px-8">
+          <div className="hero-home__panel-inner">
 
           {/* Row 1 — Top features */}
           <div className="hero-home__feature-row">
@@ -166,6 +169,7 @@ export const HeroHomepage = () => {
             ))}
           </div>
 
+          </div>
         </div>
       </div>
     </section>

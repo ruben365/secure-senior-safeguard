@@ -195,9 +195,9 @@
   width: 100%;
   margin: 0;
   padding-top: clamp(100px, 14vw, 140px);
-  padding-right: max(4rem, 8%);
+  padding-right: 0;
   padding-bottom: 2.5rem;
-  padding-left: max(4rem, 8%);
+  padding-left: 0;
 }
 
 .hero-home__copy {
@@ -412,17 +412,16 @@
   z-index: 20;
   margin-top: auto;              /* push to bottom of flex column */
 
-  /* The glass surface */
+  /* The glass surface — full-bleed, horizontal padding owned by the
+     Tailwind max-w-7xl wrapper inside, so panel aligns with nav/hero. */
   background: var(--glass-bg);
   backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  padding: 2rem clamp(20px, 4vw, 64px);
+  padding: 2rem 0;
 }
 
 .hero-home__panel-inner {
-  max-width: 1400px;
   width: 100%;
-  margin: 0 auto;
 }
 
 /* ── 4a. Feature Grid ──
@@ -538,7 +537,7 @@
   }
 
   .hero-home__panel {
-    padding: 1.5rem clamp(16px, 3vw, 32px);
+    padding: 1.5rem 0;
   }
 }
 
@@ -567,7 +566,7 @@
   }
 
   .hero-home__panel {
-    padding: 1.25rem 1rem;
+    padding: 1.25rem 0;
   }
 
   .hero-home__content {
