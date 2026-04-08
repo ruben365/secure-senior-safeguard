@@ -101,14 +101,15 @@
   .hss-root::after { animation: none; }
 }
 
-/* Alternate section tint — translucent so .home-color-wash shows through */
+/* Alternate section tint — 88% opaque, lets a hint of the wash bleed
+   through at the edges but keeps widgets readable. */
 .hss-section-tint {
-  background: hsl(var(--muted) / 0.55);
+  background: hsl(var(--muted) / 0.88);
 }
 
-/* Editorial section — translucent so .home-color-wash shows through */
+/* Editorial section — 88% opaque for the same reason */
 .hss-section-white {
-  background: hsl(var(--card) / 0.55);
+  background: hsl(var(--card) / 0.88);
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -230,17 +231,21 @@
   box-shadow: 0 1px 0 0 rgba(255, 255, 255, 1) inset, 0 16px 40px -12px rgba(15, 23, 42, 0.18), 0 0 30px -8px rgba(249, 115, 22, 0.18);
 }
 
-/* Soft warm tint card */
+/* Soft warm tint card — solid base + warm tint on top */
 .hss-soft-tint {
-  background: linear-gradient(135deg, rgba(249, 115, 22, 0.06) 0%, rgba(217, 108, 74, 0.10) 100%);
-  border: 1px solid rgba(217, 108, 74, 0.18);
+  background:
+    linear-gradient(135deg, rgba(249, 115, 22, 0.08) 0%, rgba(217, 108, 74, 0.12) 100%),
+    #fff8f3;
+  border: 1px solid rgba(217, 108, 74, 0.22);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hss-soft-tint:hover {
   transform: translateY(-3px);
-  background: linear-gradient(135deg, rgba(249, 115, 22, 0.10) 0%, rgba(217, 108, 74, 0.16) 100%);
-  border-color: rgba(217, 108, 74, 0.32);
+  background:
+    linear-gradient(135deg, rgba(249, 115, 22, 0.12) 0%, rgba(217, 108, 74, 0.18) 100%),
+    #fff8f3;
+  border-color: rgba(217, 108, 74, 0.35);
   box-shadow: 0 16px 40px -12px rgba(249, 115, 22, 0.22);
 }
 
@@ -263,16 +268,16 @@
 
 /* Formerly dark card — now light to match home page theme */
 .hss-dark-card {
-  background: hsl(var(--card));
-  border: 1px solid rgba(217, 108, 74, 0.22);
-  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 1) inset, 0 24px 60px -16px rgba(15, 23, 42, 0.12), 0 0 40px -12px rgba(249, 115, 22, 0.12);
+  background: #ffffff;
+  border: 1px solid rgba(217, 108, 74, 0.25);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 1) inset, 0 24px 60px -16px rgba(15, 23, 42, 0.15), 0 0 40px -12px rgba(249, 115, 22, 0.14);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hss-dark-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(217, 108, 74, 0.4);
-  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 1) inset, 0 28px 70px -16px rgba(15, 23, 42, 0.2), 0 0 60px -12px rgba(249, 115, 22, 0.18);
+  border-color: rgba(217, 108, 74, 0.45);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 1) inset, 0 28px 70px -16px rgba(15, 23, 42, 0.22), 0 0 60px -12px rgba(249, 115, 22, 0.2);
 }
 
 .hss-dark-card-glow {
@@ -368,21 +373,21 @@
 }
 
 .hss-stats-tile {
-  background: hsl(var(--card));
-  border: 1px solid rgba(30,41,59,0.08);
+  background: #ffffff;
+  border: 1px solid rgba(30,41,59,0.1);
   border-radius: 1.25rem;
   padding: 1.75rem 1.75rem 1.5rem;
   position: relative;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
   z-index: 1;
-  box-shadow: 0 1px 0 0 rgba(255,255,255,1) inset, 0 8px 24px -12px rgba(15,23,42,0.10);
+  box-shadow: 0 1px 0 0 rgba(255,255,255,1) inset, 0 12px 32px -14px rgba(15,23,42,0.14);
 }
 
 .hss-stats-tile:hover {
-  background: hsl(var(--card));
-  border-color: rgba(249,115,22,0.32);
-  box-shadow: 0 1px 0 0 rgba(255,255,255,1) inset, 0 16px 40px -12px rgba(15,23,42,0.14), 0 0 40px -8px rgba(249,115,22,0.18);
+  background: #ffffff;
+  border-color: rgba(249,115,22,0.35);
+  box-shadow: 0 1px 0 0 rgba(255,255,255,1) inset, 0 20px 44px -14px rgba(15,23,42,0.18), 0 0 40px -8px rgba(249,115,22,0.22);
   transform: translateY(-3px);
 }
 
@@ -586,12 +591,10 @@
 }
 
 .hss-testimonial-card {
-  background: hsl(var(--card));
-  border: 1px solid rgba(30,41,59,0.08);
-  -webkit-backdrop-filter: blur(20px) saturate(150%);
-  backdrop-filter: blur(20px) saturate(150%);
+  background: #ffffff;
+  border: 1px solid rgba(30,41,59,0.1);
   border-radius: 1.5rem;
-  box-shadow: 0 1px 0 0 rgba(255,255,255,1) inset, 0 24px 60px -16px rgba(15,23,42,0.14);
+  box-shadow: 0 1px 0 0 rgba(255,255,255,1) inset, 0 28px 64px -18px rgba(15,23,42,0.18);
   transition: border-color 0.3s ease;
   overflow: hidden;
 }
