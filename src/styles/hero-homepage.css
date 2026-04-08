@@ -67,33 +67,6 @@
   flex-direction: column;
 }
 
-/* Color wash overlay — painted on top of hero background layers
-   (z-index 0-3) but BELOW the content layer (z-index 10).
-   Purple 10%, White 6%, Brown 10%, Yellow 7%, Burgundy 6%, Maroon 3%, Red 1%.
-   pointer-events: none so interactions still pass through. */
-.hero-home::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 4;
-  background:
-    /* 10% purple — violet-500, top-right */
-    radial-gradient(ellipse 55% 40% at 82% 14%, rgba(139, 92,  246, 0.10) 0%, transparent 65%),
-    /* 6% white — center */
-    radial-gradient(ellipse 55% 50% at 50% 48%, rgba(255, 255, 255, 0.06) 0%, transparent 65%),
-    /* 10% brown — amber-900, mid-left */
-    radial-gradient(ellipse 55% 38% at 12% 50%, rgba(120, 53,  15,  0.10) 0%, transparent 65%),
-    /* 7% yellow — amber-500, mid-right */
-    radial-gradient(ellipse 50% 38% at 88% 50%, rgba(234, 179, 8,   0.07) 0%, transparent 65%),
-    /* 6% burgundy — bottom-left */
-    radial-gradient(ellipse 55% 42% at 18% 92%, rgba(127, 29,  29,  0.06) 0%, transparent 65%),
-    /* 3% maroon — right */
-    radial-gradient(ellipse 40% 38% at 95% 72%, rgba(76,  5,   25,  0.03) 0%, transparent 65%),
-    /* 1% red — red-600, upper-center */
-    radial-gradient(ellipse 35% 30% at 50% 18%, rgba(220, 38,  38,  0.01) 0%, transparent 65%);
-}
-
 
 /* ═══════════════════════════════════════════
    2. BACKGROUND — Photo + gradient overlays
