@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Star, Quote } from "lucide-react";
+import { Star, Quote, MapPin } from "lucide-react";
 
 import instructorSarah from "@/assets/instructor-sarah.jpg";
 import instructorJames from "@/assets/instructor-james.jpg";
@@ -117,12 +117,136 @@ const testimonials = [
 ];
 
 /**
- * Dotted world map background — ultra-lightweight silhouette of all
- * seven continents painted as low-opacity purple-gray blobs. Sits
- * behind the testimonial cards so the grid feels like a network
- * reaching around the world without adding any new background color.
+ * World map backdrop — all seven continents rendered as recognizable
+ * silhouettes with glowing white outlines.
+ *
+ * Continents included (matching real geography, not blobs):
+ *   North America, Central America, Greenland, South America,
+ *   Europe (incl. British Isles, Scandinavia, Iberia, Italy),
+ *   Africa (incl. Horn, Cape, Madagascar),
+ *   Middle East, Asia main mass, Arabian Peninsula, India,
+ *   Southeast Asia / Indochina, Indonesia / Philippines, Japan,
+ *   Australia, New Zealand, plus a thin Antarctic rim.
+ *
+ * Render style:
+ *   Layer 1: outer soft white glow (blurred, very low opacity)
+ *   Layer 2: mid white halo
+ *   Layer 3: crisp thin white outline on top
+ *   Layer 4: very subtle interior fill
+ *
+ * viewBox uses a 2000×1000 Mercator-ish grid so continents sit
+ * in roughly correct lat/lon positions.
  */
 function WorldMapBackdrop() {
+  // Continent path data — pulled out so the same d-values drive
+  // every layer (glow + halo + outline + fill).
+  const paths: { id: string; d: string }[] = [
+    // ─── NORTH AMERICA (Alaska → Florida) ───
+    {
+      id: "north-america",
+      d: "M 220 120 L 260 95 L 310 85 L 360 82 L 410 88 L 455 98 L 495 112 L 525 102 L 560 92 L 595 90 L 625 105 L 640 130 L 635 158 L 615 180 L 585 200 L 570 225 L 580 250 L 605 272 L 618 305 L 608 340 L 585 375 L 560 405 L 540 440 L 515 470 L 480 498 L 445 512 L 410 520 L 380 518 L 355 505 L 335 483 L 320 458 L 305 430 L 290 395 L 275 360 L 262 325 L 250 288 L 240 248 L 232 208 L 225 168 Z",
+    },
+    // ─── CENTRAL AMERICA isthmus ───
+    {
+      id: "central-america",
+      d: "M 460 520 L 490 540 L 515 572 L 530 605 L 545 635 L 552 665 L 545 680 L 525 672 L 505 648 L 485 618 L 470 585 L 458 550 Z",
+    },
+    // ─── SOUTH AMERICA (Venezuela → Patagonia) ───
+    {
+      id: "south-america",
+      d: "M 560 640 L 605 625 L 645 628 L 680 645 L 708 670 L 725 705 L 735 740 L 740 780 L 735 815 L 722 850 L 700 880 L 678 908 L 655 925 L 628 932 L 605 925 L 585 905 L 570 875 L 560 840 L 552 798 L 548 755 L 550 712 L 555 675 Z",
+    },
+    // ─── GREENLAND ───
+    {
+      id: "greenland",
+      d: "M 720 70 L 770 58 L 820 62 L 855 78 L 870 105 L 862 138 L 840 160 L 810 172 L 780 168 L 750 155 L 728 130 L 720 100 Z",
+    },
+    // ─── ICELAND ───
+    {
+      id: "iceland",
+      d: "M 885 200 L 908 195 L 920 210 L 912 225 L 892 225 L 880 215 Z",
+    },
+    // ─── EUROPE (Iberia / France / Italy / Balkans / Scandinavia / E-Europe) ───
+    {
+      id: "europe",
+      d: "M 930 258 L 945 245 L 962 235 L 980 232 L 1000 238 L 1018 235 L 1035 220 L 1050 200 L 1068 182 L 1085 175 L 1100 188 L 1108 210 L 1118 232 L 1132 248 L 1150 260 L 1168 272 L 1185 288 L 1190 305 L 1178 320 L 1158 328 L 1135 332 L 1108 335 L 1082 340 L 1055 345 L 1028 342 L 1002 335 L 978 325 L 955 312 L 938 295 L 928 278 Z",
+    },
+    // ─── BRITISH ISLES ───
+    {
+      id: "british-isles",
+      d: "M 928 220 L 948 215 L 960 228 L 962 245 L 950 258 L 932 258 L 922 245 L 920 230 Z",
+    },
+    // ─── AFRICA (Mediterranean → Cape) ───
+    {
+      id: "africa",
+      d: "M 990 340 L 1030 332 L 1070 330 L 1110 332 L 1148 338 L 1180 348 L 1208 365 L 1228 388 L 1240 418 L 1245 450 L 1242 482 L 1235 515 L 1225 545 L 1218 575 L 1220 608 L 1215 638 L 1202 668 L 1185 700 L 1162 728 L 1138 755 L 1112 780 L 1085 795 L 1058 800 L 1035 790 L 1015 770 L 998 745 L 982 715 L 968 680 L 955 640 L 945 595 L 938 545 L 935 495 L 938 445 L 948 395 L 965 360 Z",
+    },
+    // ─── MADAGASCAR ───
+    {
+      id: "madagascar",
+      d: "M 1238 672 L 1252 678 L 1260 698 L 1262 720 L 1255 740 L 1245 748 L 1235 735 L 1232 715 L 1232 692 Z",
+    },
+    // ─── ARABIAN PENINSULA ───
+    {
+      id: "arabia",
+      d: "M 1188 350 L 1218 352 L 1248 362 L 1272 380 L 1288 405 L 1290 430 L 1278 450 L 1258 460 L 1232 460 L 1205 450 L 1185 432 L 1175 412 L 1175 388 L 1180 365 Z",
+    },
+    // ─── ASIA MAIN MASS (Siberia → East Asia) ───
+    {
+      id: "asia-main",
+      d: "M 1190 240 L 1230 218 L 1275 198 L 1320 182 L 1370 170 L 1425 162 L 1485 158 L 1545 162 L 1605 172 L 1660 188 L 1705 212 L 1740 242 L 1762 278 L 1772 315 L 1765 350 L 1742 380 L 1710 400 L 1672 408 L 1632 402 L 1592 392 L 1552 388 L 1515 395 L 1482 402 L 1452 395 L 1425 380 L 1400 362 L 1375 345 L 1348 335 L 1320 322 L 1292 305 L 1262 288 L 1235 270 L 1212 255 Z",
+    },
+    // ─── INDIA SUB-CONTINENT ───
+    {
+      id: "india",
+      d: "M 1410 395 L 1448 405 L 1482 425 L 1502 455 L 1510 490 L 1498 525 L 1478 548 L 1452 558 L 1425 548 L 1402 520 L 1388 488 L 1385 450 L 1395 415 Z",
+    },
+    // ─── SOUTHEAST ASIA / INDOCHINA ───
+    {
+      id: "sea-mainland",
+      d: "M 1520 412 L 1548 408 L 1575 420 L 1592 445 L 1595 472 L 1580 495 L 1558 505 L 1538 498 L 1522 478 L 1515 452 L 1515 430 Z",
+    },
+    // ─── INDONESIA (Sumatra + Java) ───
+    {
+      id: "indonesia-sumatra",
+      d: "M 1548 528 L 1588 525 L 1618 540 L 1625 558 L 1608 572 L 1575 572 L 1548 560 L 1540 542 Z",
+    },
+    // ─── INDONESIA (Borneo + Sulawesi) ───
+    {
+      id: "indonesia-borneo",
+      d: "M 1635 520 L 1668 518 L 1692 530 L 1700 552 L 1688 568 L 1660 570 L 1638 558 L 1632 538 Z",
+    },
+    // ─── PHILIPPINES ───
+    {
+      id: "philippines",
+      d: "M 1720 480 L 1735 478 L 1742 498 L 1738 518 L 1725 522 L 1715 505 L 1715 490 Z",
+    },
+    // ─── JAPAN ───
+    {
+      id: "japan",
+      d: "M 1755 290 L 1778 285 L 1795 302 L 1800 328 L 1790 352 L 1770 362 L 1752 348 L 1748 322 L 1750 302 Z",
+    },
+    // ─── AUSTRALIA ───
+    {
+      id: "australia",
+      d: "M 1645 700 L 1700 688 L 1755 682 L 1808 688 L 1852 702 L 1880 728 L 1888 758 L 1878 788 L 1848 808 L 1808 818 L 1760 818 L 1712 812 L 1672 798 L 1645 778 L 1632 752 L 1632 725 Z",
+    },
+    // ─── NEW ZEALAND (north + south island) ───
+    {
+      id: "new-zealand-north",
+      d: "M 1898 808 L 1915 808 L 1925 825 L 1918 842 L 1902 842 L 1895 825 Z",
+    },
+    {
+      id: "new-zealand-south",
+      d: "M 1878 835 L 1895 835 L 1905 852 L 1898 870 L 1882 870 L 1872 855 Z",
+    },
+    // ─── ANTARCTICA rim ───
+    {
+      id: "antarctica",
+      d: "M 200 935 L 400 925 L 600 922 L 800 925 L 1000 928 L 1200 925 L 1400 922 L 1600 925 L 1800 932 L 1880 945 L 1850 960 L 1700 968 L 1500 972 L 1300 970 L 1100 972 L 900 970 L 700 968 L 500 965 L 300 960 L 180 952 Z",
+    },
+  ];
+
   return (
     <div
       aria-hidden="true"
@@ -130,91 +254,77 @@ function WorldMapBackdrop() {
     >
       <svg
         viewBox="0 0 2000 1000"
-        className="w-full h-full max-w-[1600px] opacity-[0.22]"
+        className="w-full h-full max-w-[1600px]"
         preserveAspectRatio="xMidYMid meet"
         fill="none"
       >
         <defs>
-          {/* Dot pattern that maps continents via mask — denser + larger
-              dots so the map is clearly legible behind the cards. */}
-          <pattern id="map-dots" x="0" y="0" width="12" height="12" patternUnits="userSpaceOnUse">
-            <circle cx="2" cy="2" r="2" fill="#6b5b8a" />
-          </pattern>
+          {/* Soft outer glow filter — used on the widest blur halo layer */}
+          <filter id="wm-outer-glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="6" />
+          </filter>
+          <filter id="wm-mid-glow" x="-10%" y="-10%" width="120%" height="120%">
+            <feGaussianBlur stdDeviation="2.2" />
+          </filter>
 
-          {/* Continent mask — all continents as a single composite path.
-              Numbers chosen to look roughly world-like without being
-              geographically precise. */}
-          <mask id="continents-mask">
-            <rect width="2000" height="1000" fill="black" />
-            {/* North America */}
-            <path
-              d="M 140 180 Q 180 140 280 150 L 430 140 Q 520 160 540 220 L 560 300 Q 540 360 500 400 L 480 480 Q 440 520 380 520 L 300 500 Q 240 470 200 420 L 170 350 Q 140 280 140 180 Z"
-              fill="white"
-            />
-            {/* Central America connector */}
-            <path
-              d="M 410 520 Q 440 560 460 610 L 470 650 Q 450 670 430 660 L 400 620 Q 390 570 410 520 Z"
-              fill="white"
-            />
-            {/* South America */}
-            <path
-              d="M 490 660 Q 540 650 570 690 L 620 780 Q 640 860 600 910 L 560 950 Q 510 950 480 900 L 450 820 Q 440 740 490 660 Z"
-              fill="white"
-            />
-            {/* Greenland */}
-            <path
-              d="M 650 100 Q 700 90 740 110 L 770 150 Q 760 200 720 210 L 680 200 Q 640 170 650 100 Z"
-              fill="white"
-            />
-            {/* Europe */}
-            <path
-              d="M 900 220 Q 960 200 1030 220 L 1080 260 Q 1080 310 1040 330 L 970 340 Q 910 320 880 280 Q 870 250 900 220 Z"
-              fill="white"
-            />
-            {/* Africa */}
-            <path
-              d="M 940 360 Q 1010 350 1080 390 L 1140 470 Q 1160 560 1130 640 L 1090 720 Q 1040 770 980 760 Q 910 720 890 640 L 870 530 Q 870 440 940 360 Z"
-              fill="white"
-            />
-            {/* Middle East / West Asia */}
-            <path
-              d="M 1100 320 Q 1170 310 1220 340 L 1250 390 Q 1240 430 1200 440 L 1140 430 Q 1080 400 1080 360 Q 1080 330 1100 320 Z"
-              fill="white"
-            />
-            {/* Asia main mass */}
-            <path
-              d="M 1180 180 Q 1320 150 1460 170 L 1600 180 Q 1680 220 1700 280 L 1680 350 Q 1620 390 1520 400 L 1380 390 Q 1260 360 1180 300 Q 1140 240 1180 180 Z"
-              fill="white"
-            />
-            {/* India / SE Asia */}
-            <path
-              d="M 1360 400 Q 1420 410 1460 450 L 1470 510 Q 1440 540 1390 540 L 1350 520 Q 1320 470 1340 420 Q 1350 405 1360 400 Z"
-              fill="white"
-            />
-            {/* SE Asia islands */}
-            <path
-              d="M 1550 470 Q 1620 470 1680 500 L 1710 540 Q 1690 570 1640 570 L 1580 550 Q 1540 520 1550 470 Z"
-              fill="white"
-            />
-            {/* Australia */}
-            <path
-              d="M 1620 660 Q 1720 650 1810 680 L 1860 730 Q 1860 790 1810 810 L 1710 810 Q 1620 790 1590 740 Q 1580 690 1620 660 Z"
-              fill="white"
-            />
-            {/* Japan */}
-            <path
-              d="M 1720 310 Q 1750 300 1770 330 L 1760 360 Q 1730 370 1710 350 Q 1700 325 1720 310 Z"
-              fill="white"
-            />
-            {/* NZ */}
-            <path
-              d="M 1900 800 Q 1920 795 1930 815 L 1920 840 Q 1900 845 1890 825 Q 1885 810 1900 800 Z"
-              fill="white"
-            />
-          </mask>
+          {/* Shared group — every continent path referenced by id */}
+          <g id="world-continents">
+            {paths.map((p) => (
+              <path key={p.id} d={p.d} />
+            ))}
+          </g>
         </defs>
 
-        <rect width="2000" height="1000" fill="url(#map-dots)" mask="url(#continents-mask)" />
+        {/*
+          Rendering order (bottom → top):
+          1) Subtle interior fill so the continent silhouettes are
+             faintly suggested as areas.
+          2) Thick wide soft-blurred white glow — the "aura".
+          3) Mid white halo — a tighter but still soft stroke.
+          4) Crisp thin white outline — the final hairline edge.
+        */}
+
+        {/* 1 — interior fill */}
+        <use
+          href="#world-continents"
+          fill="#ffffff"
+          opacity="0.035"
+        />
+
+        {/* 2 — outer soft glow */}
+        <use
+          href="#world-continents"
+          fill="none"
+          stroke="#ffffff"
+          strokeWidth="4"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          opacity="0.22"
+          filter="url(#wm-outer-glow)"
+        />
+
+        {/* 3 — mid halo */}
+        <use
+          href="#world-continents"
+          fill="none"
+          stroke="#ffffff"
+          strokeWidth="2"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          opacity="0.5"
+          filter="url(#wm-mid-glow)"
+        />
+
+        {/* 4 — crisp hairline edge */}
+        <use
+          href="#world-continents"
+          fill="none"
+          stroke="#ffffff"
+          strokeWidth="1.1"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          opacity="0.72"
+        />
       </svg>
     </div>
   );
