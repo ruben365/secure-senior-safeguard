@@ -237,11 +237,11 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
               {/* Phone */}
               <a
                 href={SITE.phone.tel}
-                className="hidden lg:flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors duration-150 no-underline px-2 py-1.5 rounded-md hover:bg-white/10"
+                className="hidden lg:flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors duration-150 no-underline px-2 py-1.5 rounded-md hover:bg-white/10 whitespace-nowrap"
                 aria-label={`Call us at ${SITE.phone.display}`}
               >
-                <Phone className="w-[21px] h-[21px]" />
-                <span className="hidden xl:inline text-[17.5px] font-medium">{SITE.phone.display}</span>
+                <Phone className="w-[21px] h-[21px] shrink-0" />
+                <span className="hidden xl:inline text-[17.5px] font-medium whitespace-nowrap">{SITE.phone.display}</span>
               </a>
 
               {/* Donate */}
