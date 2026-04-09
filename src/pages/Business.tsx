@@ -1526,9 +1526,9 @@ function Business() {
                       setSelectedService({ type: "business", name: "AI Discovery Consultation ($199)", tier: "Discovery" });
                       setModalOpen(true);
                     }}
-                    size="lg"
-                    className="h-13 px-10 rounded-full bg-gradient-to-r from-primary to-accent text-white font-bold shadow-lg shadow-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300">
-
+                    size="sm"
+                    className="h-9 px-5 rounded-lg text-[13px] font-semibold text-white transition-all duration-200 hover:-translate-y-[1px]"
+                    style={{ background: "linear-gradient(135deg, #ea580c, #c2410c)" }}>
                       Book Discovery Call ($199)
                     </Button>
                   </div>

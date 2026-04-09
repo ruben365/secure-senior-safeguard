@@ -192,12 +192,9 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <div
                     role="menu"
                     aria-label="Secondary navigation"
-                    className="absolute top-full left-0 mt-2 w-48 rounded-xl py-2 z-50 overflow-hidden"
+                    className="absolute top-full left-0 mt-1 w-44 py-1 z-50 transition-opacity duration-200"
                     style={{
-                      background: "rgba(18, 14, 12, 0.75)",
-                      backdropFilter: "blur(24px) saturate(1.4)",
-                      WebkitBackdropFilter: "blur(24px) saturate(1.4)",
-                      border: "1px solid rgba(255, 255, 255, 0.06)",
+                      background: "transparent",
                     }}
                   >
                     {secondaryLinks.map((link) => {
@@ -207,10 +204,10 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                           key={link.name}
                           to={link.href}
                           role="menuitem"
-                          className={`block px-3 py-2 text-[14px] rounded-lg transition-colors ${
+                          className={`block px-3 py-2 text-[14px] transition-colors ${
                             isActive
                               ? "text-orange-400 font-semibold"
-                              : "text-white/85 hover:text-white hover:bg-white/[0.06]"
+                              : "text-white hover:text-orange-300"
                           }`}
                           onClick={() => setMoreOpen(false)}
                         >
