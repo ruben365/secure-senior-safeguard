@@ -4,21 +4,10 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 
-// Plugin to defer non-critical CSS (critical CSS is already inlined in index.html)
-function deferCssPlugin(): Plugin {
-  return {
-    name: "defer-css",
-    enforce: "post",
-    transformIndexHtml(html) {
-      // Convert <link rel="stylesheet" href="..."> to async loading pattern
-      // Only for Vite-generated asset CSS, not external fonts
-      return html.replace(
-        /<link rel="stylesheet"(?: crossorigin)? href="(\/assets\/[^"]+\.css)">/g,
-        `<link rel="stylesheet" href="$1" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="$1"></noscript>`
-      );
-    },
-  };
-}
+// NOTE: deferCssPlugin was removed — it converted the main CSS bundle to
+// media="print" with an onload swap, which caused a blank page in production
+// on Vercel (the CSS loaded but never became visible). The CSS bundle is
+// small enough to load synchronously without harming LCP.
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -119,7 +108,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       react(),
       mode === "development" && componentTagger(),
-      mode === "production" && deferCssPlugin(),
+      // deferCssPlugin removed — caused blank page on Vercel (media="print" never swapped)
       !isPreviewBuild &&
         !disableImageOptimizer &&
         ViteImageOptimizer({
