@@ -283,3 +283,92 @@ a[href^="#"] {
     0 8px 20px -4px rgba(15, 23, 42, 0.1),
     0 24px 60px -16px rgba(15, 23, 42, 0.18);
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   DIALOG & GLASS PANEL READABILITY — compact text, high-contrast
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Dialog interior text scaling — tighter for compact dialogs ── */
+[role="dialog"] {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+[role="dialog"] h1,
+[role="dialog"] h2,
+[role="dialog"] h3 {
+  font-size: 15px;
+  line-height: 1.25;
+  font-weight: 700;
+  color: hsl(var(--foreground));
+  letter-spacing: -0.01em;
+}
+
+[role="dialog"] h4,
+[role="dialog"] h5 {
+  font-size: 13px;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+
+[role="dialog"] p {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: hsl(var(--foreground) / 0.8);
+  margin: 0 0 0.5rem;
+}
+
+[role="dialog"] label {
+  font-size: 12px;
+  font-weight: 600;
+  color: hsl(var(--foreground) / 0.85);
+}
+
+[role="dialog"] input,
+[role="dialog"] textarea,
+[role="dialog"] select {
+  font-size: 13px;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+}
+
+/* Buttons inside dialogs — compact height */
+[role="dialog"] button {
+  min-height: 38px;
+  font-size: 13px;
+}
+
+/* ── Glass panel text readability ──────────────────────────────
+   Glassmorphism panels use semi-transparent backgrounds which make
+   normal text unreadable. These rules boost text contrast WITHOUT
+   removing the glass look. Apply to any element with .glass-panel
+   or backdrop-filter. */
+[style*="backdrop-filter"],
+[style*="backdropFilter"],
+.backdrop-blur-sm,
+.backdrop-blur-md,
+.backdrop-blur-lg,
+.backdrop-blur-xl,
+.backdrop-blur-2xl {
+  color: hsl(var(--foreground));
+}
+
+/* Glass panels on DARK backgrounds (nav, hero, footer overlays) */
+.bg-black\/50 [style*="backdrop-filter"],
+nav [style*="backdrop-filter"],
+.hss-testimonial-theater [style*="backdrop-filter"],
+[class*="bg-[#0"] [style*="backdrop-filter"] {
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+/* Explicit high-contrast glass text utility — use on any glass panel */
+.glass-text-readable {
+  color: hsl(var(--foreground)) !important;
+  text-shadow: 0 0 8px hsl(var(--background) / 0.6);
+}
+
+.glass-text-light {
+  color: rgba(255, 255, 255, 0.96) !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+}
