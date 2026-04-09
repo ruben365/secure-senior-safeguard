@@ -11,11 +11,41 @@
 @import "./styles/premium-body.css";
 @import "./styles/polish.css";
 
-/* Global zoom out to 75% — intentional design choice for dense information layout */
-#root {
-  zoom: 0.75;
+/* ═══════════════════════════════════════════════════════════════════
+   GLOBAL OVERRIDES — shadows removed, HD sharpness applied
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* TASK 1: Remove ALL box-shadows globally.
+   This nuclear override ensures no shadow appears anywhere on the site,
+   regardless of Tailwind classes, inline styles, or CSS variables.
+   text-shadow is preserved for readability on dark backgrounds. */
+*,
+*::before,
+*::after {
+  box-shadow: none !important;
 }
 
-/* Note: html font-size and responsive scaling are handled in base.css
-   via calc(16px * var(--text-scale)) and in responsive.css per-breakpoint.
-   The previous 87.5% override here fought those rules and made text blurry. */
+/* TASK 2: zoom: 0.75 REMOVED.
+   The previous zoom caused everything to render at 75% and scale up,
+   creating subpixel blur across all text, images, and borders.
+   Layout and font sizes in base.css are already responsive and do not
+   need the zoom hack for dense layout. */
+
+/* HD text rendering — crisp antialiasing */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* HD image rendering — prevent blurry upscaling */
+img {
+  image-rendering: auto;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Remove will-change from non-animating elements (can cause blur) */
+[data-reveal].is-visible,
+.reveal-on-scroll.is-visible {
+  will-change: auto;
+}
