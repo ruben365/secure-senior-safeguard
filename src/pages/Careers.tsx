@@ -162,7 +162,7 @@ function Careers() {
             <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground">
               Join a team that's using AI to protect vulnerable families.
               Every line of code, every support call, every design decision
-              makes the world safer.
+              makes the world safer. Learn more about <Link to="/about" className="text-primary hover:underline font-medium">our mission</Link> and the people behind it.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -334,7 +334,7 @@ function Careers() {
               Life at InVision
             </h2>
             <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground">
-              A remote-first culture built on trust, transparency, and making a difference
+              A remote-first culture built on trust, transparency, and making a difference. Ready to join us? <Link to="/contact" className="text-primary hover:underline font-medium">Apply now</Link>.
             </p>
           </div>
           <div className="grid lg:grid-cols-2 gap-6 max-w-6xl mx-auto mb-12">
