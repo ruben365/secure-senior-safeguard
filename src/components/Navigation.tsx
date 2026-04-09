@@ -271,7 +271,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 <Link
                   to="/admin"
                   aria-label="Go to Dashboard"
-                  className="inline-flex items-center gap-1.5 h-[40px] px-5 text-[14px] font-semibold rounded-full text-white bg-gradient-to-b from-[#e07a55] to-[#d05f3a] border border-[#b8552f] shadow-[0_1px_0_0_rgba(255,255,255,0.18)_inset,0_8px_20px_-6px_rgba(217,108,74,0.5),0_16px_32px_-12px_rgba(217,108,74,0.35)] hover:-translate-y-[1px] hover:from-[#e88560] hover:to-[#d96847] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_12px_28px_-6px_rgba(217,108,74,0.6),0_20px_40px_-12px_rgba(217,108,74,0.4)] active:translate-y-[0.5px] transition-all duration-200"
+                  className="inline-flex items-center gap-1.5 h-[40px] px-5 text-[14px] font-semibold rounded-full text-white bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12] shadow-[0_1px_0_0_rgba(255,255,255,0.18)_inset,0_8px_20px_-6px_rgba(217,108,74,0.5),0_16px_32px_-12px_rgba(217,108,74,0.35)] hover:-translate-y-[1px] hover:from-[#ea580c] hover:to-[#c2410c] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_12px_28px_-6px_rgba(217,108,74,0.6),0_20px_40px_-12px_rgba(217,108,74,0.4)] active:translate-y-[0.5px] transition-all duration-200"
                 >
                   <LayoutDashboard className="h-4 w-4" />
                   Dashboard
@@ -280,7 +280,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 <Link
                   to="/portal"
                   aria-label="Login to your account"
-                  className="inline-flex items-center h-[40px] px-5 text-[14px] font-semibold rounded-full text-white bg-gradient-to-b from-[#e07a55] to-[#d05f3a] border border-[#b8552f] shadow-[0_1px_0_0_rgba(255,255,255,0.18)_inset,0_8px_20px_-6px_rgba(217,108,74,0.5),0_16px_32px_-12px_rgba(217,108,74,0.35)] hover:-translate-y-[1px] hover:from-[#e88560] hover:to-[#d96847] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_12px_28px_-6px_rgba(217,108,74,0.6),0_20px_40px_-12px_rgba(217,108,74,0.4)] active:translate-y-[0.5px] transition-all duration-200"
+                  className="inline-flex items-center h-[40px] px-5 text-[14px] font-semibold rounded-full text-white bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12] shadow-[0_1px_0_0_rgba(255,255,255,0.18)_inset,0_8px_20px_-6px_rgba(217,108,74,0.5),0_16px_32px_-12px_rgba(217,108,74,0.35)] hover:-translate-y-[1px] hover:from-[#ea580c] hover:to-[#c2410c] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_12px_28px_-6px_rgba(217,108,74,0.6),0_20px_40px_-12px_rgba(217,108,74,0.4)] active:translate-y-[0.5px] transition-all duration-200"
                 >
                   Login
                 </Link>
@@ -380,7 +380,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   onClick={() => setMobileMenuOpen(false)}
                   className="w-full h-12 text-[15px] font-semibold rounded-xl text-white flex items-center justify-center gap-2 transition-all duration-200"
                   style={{
-                    background: "linear-gradient(180deg, #e07a55 0%, #d05f3a 100%)",
+                    background: "linear-gradient(180deg, #c2410c 0%, #9a3412 100%)",
                     border: "1px solid #b8552f",
                     boxShadow:
                       "0 1px 0 0 rgba(255,255,255,0.22) inset, 0 8px 20px -6px rgba(217,108,74,0.55), 0 16px 32px -12px rgba(217,108,74,0.4)",
@@ -395,7 +395,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   onClick={() => setMobileMenuOpen(false)}
                   className="w-full h-12 text-[15px] font-semibold rounded-xl text-white flex items-center justify-center transition-all duration-200"
                   style={{
-                    background: "linear-gradient(180deg, #e07a55 0%, #d05f3a 100%)",
+                    background: "linear-gradient(180deg, #c2410c 0%, #9a3412 100%)",
                     border: "1px solid #b8552f",
                     boxShadow:
                       "0 1px 0 0 rgba(255,255,255,0.22) inset, 0 8px 20px -6px rgba(217,108,74,0.55), 0 16px 32px -12px rgba(217,108,74,0.4)",
