@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { ArrowRight, LucideIcon } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
@@ -41,9 +40,7 @@ export function DashboardStatCard({
   });
 
   const handleClick = () => {
-    if (link) {
-      navigate(link);
-    }
+    if (link) navigate(link);
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
@@ -55,68 +52,59 @@ export function DashboardStatCard({
   };
 
   const subtitleColorClass = {
-    success: "text-success",
-    warning: "text-yellow-600",
-    destructive: "text-destructive",
+    success: "text-emerald-400",
+    warning: "text-yellow-400",
+    destructive: "text-red-400",
   }[subtitleColor];
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.5,
-        delay: index * 0.1,
-        ease: "easeOut",
-      }}
-      whileHover={{ y: -4 }}
-      whileTap={{ scale: 0.98 }}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       role={link ? "button" : undefined}
       tabIndex={link ? 0 : undefined}
       aria-label={link ? `${title} details` : undefined}
-      className={link ? "cursor-pointer" : ""}
+      className={`${link ? "cursor-pointer" : ""} transition-transform duration-200 hover:-translate-y-1`}
     >
       <Card
-        className="relative overflow-hidden p-6 rounded-xl transition-shadow duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.12)]"
+        className="relative overflow-hidden p-5 rounded-xl border-0 shadow-[0_4px_24px_-8px_rgba(0,0,0,0.3)]"
         style={{
           background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})`,
         }}
       >
         {/* Icon */}
         <div
-          className={`w-12 h-12 rounded-full flex items-center justify-center mb-4 ${iconBgColor} ${
+          className={`w-11 h-11 rounded-xl flex items-center justify-center mb-3 ${iconBgColor} ${
             isPulsing ? "animate-pulse" : ""
           }`}
         >
-          <Icon className="w-6 h-6 text-white" />
+          <Icon className="w-5 h-5 text-white" />
         </div>
 
         {/* Value */}
-        <div className="text-4xl font-bold text-foreground mb-2">
+        <div className="text-3xl font-bold text-white mb-1 tabular-nums">
           {prefix}
           {animatedValue.toLocaleString()}
         </div>
 
         {/* Title */}
-        <div className="text-base text-muted-foreground mb-2">{title}</div>
+        <div className="text-sm text-white/70 mb-1.5">{title}</div>
 
         {/* Subtitle */}
         <div
-          className={`text-sm font-medium flex items-center gap-1 ${subtitleColorClass}`}
+          className={`text-xs font-medium flex items-center gap-1 ${subtitleColorClass}`}
         >
           {subtitle}
         </div>
 
-        {/* Clickable indicator */}
+        {/* Link arrow */}
         {link && (
-          <div className="absolute bottom-2 right-2 text-xs text-muted-foreground">
+          <div className="absolute bottom-3 right-3 text-white/40">
             <ArrowRight className="w-4 h-4" aria-hidden />
           </div>
         )}
       </Card>
-    </motion.div>
+    </div>
   );
 }
