@@ -486,53 +486,139 @@ export default function FAQ() {
                   </div>
                 )}
 
-                {/* Accordion — glass cards, compact */}
+                {/* Accordion — glass cards, compact.
+                    When "All" is active + no search query, questions are
+                    grouped by category with sticky subheadings so the list
+                    doesn't read as one giant flat 30-row wall. */}
                 <div ref={accordionRef}>
                   {filteredFAQs.length > 0 ? (
-                    <Accordion type="single" collapsible className="space-y-2">
-                      {filteredFAQs.map((faq) => {
-                        const meta = categoryMeta[faq.category];
-                        const Icon = meta.icon;
-                        return (
-                          <AccordionItem
-                            key={faq.id}
-                            value={faq.id}
-                            className="rounded-2xl bg-white/80 backdrop-blur-xl border border-white/70 shadow-[0_6px_24px_-12px_rgba(15,23,42,0.15)] overflow-hidden data-[state=open]:shadow-[0_16px_40px_-14px_rgba(217,108,74,0.28)] data-[state=open]:border-[#d96c4a]/45 data-[state=open]:bg-gradient-to-br data-[state=open]:from-white/90 data-[state=open]:to-orange-50/70 transition-all duration-300"
-                          >
-                            <AccordionTrigger className="px-4 py-3 hover:no-underline group">
-                              <div className="flex items-center gap-3 flex-1 text-left min-w-0">
-                                <div
-                                  className={`flex-shrink-0 w-8 h-8 rounded-xl bg-gradient-to-br ${meta.accent} flex items-center justify-center shadow-[0_6px_16px_-6px_rgba(99,102,241,0.5),inset_0_1px_0_0_rgba(255,255,255,0.4)] border border-white/40`}
-                                >
-                                  <Icon
-                                    className="w-4 h-4 text-white"
-                                    strokeWidth={2}
-                                  />
-                                </div>
-                                <span className="font-semibold text-[15px] text-slate-900 leading-snug pr-3 group-hover:text-teal-700 transition-colors">
-                                  {faq.question}
-                                </span>
-                              </div>
-                            </AccordionTrigger>
-                            <AccordionContent className="px-4 pb-4">
-                              <div className="pl-11">
-                                <p className="text-[14px] leading-relaxed text-slate-600 whitespace-pre-line">
-                                  {faq.answer}
-                                </p>
-                                <div className="mt-3 flex items-center gap-2">
-                                  <Badge
-                                    variant="outline"
-                                    className="text-[10px] h-[18px] px-1.5 py-0 border-teal-500/30 text-teal-700"
+                    activeCategory === "All" && !searchQuery ? (
+                      // Grouped rendering — one Accordion per category
+                      <div className="space-y-8">
+                        {(Object.keys(categoryMeta) as FAQCategory[])
+                          .filter((cat) =>
+                            filteredFAQs.some((f) => f.category === cat),
+                          )
+                          .map((cat) => {
+                            const catFaqs = filteredFAQs.filter(
+                              (f) => f.category === cat,
+                            );
+                            const meta = categoryMeta[cat];
+                            const CatIcon = meta.icon;
+                            return (
+                              <section key={cat} aria-labelledby={`faq-cat-${cat}`}>
+                                <header className="flex items-center gap-3 mb-3 px-1">
+                                  <div
+                                    className={`flex-shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br ${meta.accent} flex items-center justify-center shadow-[0_6px_16px_-6px_rgba(15,23,42,0.25),inset_0_1px_0_0_rgba(255,255,255,0.4)] border border-white/40`}
                                   >
-                                    {faq.category}
-                                  </Badge>
+                                    <CatIcon
+                                      className="w-4 h-4 text-white"
+                                      strokeWidth={2.25}
+                                    />
+                                  </div>
+                                  <div className="flex items-baseline gap-2 min-w-0">
+                                    <h3
+                                      id={`faq-cat-${cat}`}
+                                      className="text-[15px] font-bold text-slate-900 tracking-tight truncate"
+                                    >
+                                      {cat}
+                                    </h3>
+                                    <span className="text-[11px] font-semibold text-slate-500 tabular-nums">
+                                      {catFaqs.length}
+                                    </span>
+                                  </div>
+                                  <div className="flex-1 h-px bg-gradient-to-r from-slate-200 to-transparent ml-1" />
+                                </header>
+                                <Accordion
+                                  type="single"
+                                  collapsible
+                                  className="space-y-2"
+                                >
+                                  {catFaqs.map((faq) => {
+                                    const Icon = meta.icon;
+                                    return (
+                                      <AccordionItem
+                                        key={faq.id}
+                                        value={faq.id}
+                                        className="rounded-2xl bg-white/80 backdrop-blur-xl border border-white/70 shadow-[0_6px_24px_-12px_rgba(15,23,42,0.15)] overflow-hidden data-[state=open]:shadow-[0_16px_40px_-14px_rgba(217,108,74,0.28)] data-[state=open]:border-[#d96c4a]/45 data-[state=open]:bg-gradient-to-br data-[state=open]:from-white/90 data-[state=open]:to-orange-50/70 transition-all duration-300"
+                                      >
+                                        <AccordionTrigger className="px-4 py-3 hover:no-underline group">
+                                          <div className="flex items-center gap-3 flex-1 text-left min-w-0">
+                                            <div
+                                              className={`flex-shrink-0 w-8 h-8 rounded-xl bg-gradient-to-br ${meta.accent} flex items-center justify-center shadow-[0_6px_16px_-6px_rgba(15,23,42,0.25),inset_0_1px_0_0_rgba(255,255,255,0.4)] border border-white/40`}
+                                            >
+                                              <Icon
+                                                className="w-4 h-4 text-white"
+                                                strokeWidth={2}
+                                              />
+                                            </div>
+                                            <span className="font-semibold text-[15px] text-slate-900 leading-snug pr-3 group-hover:text-[#b8552f] transition-colors">
+                                              {faq.question}
+                                            </span>
+                                          </div>
+                                        </AccordionTrigger>
+                                        <AccordionContent className="px-4 pb-4">
+                                          <div className="pl-11">
+                                            <p className="text-[14px] leading-relaxed text-slate-600 whitespace-pre-line">
+                                              {faq.answer}
+                                            </p>
+                                          </div>
+                                        </AccordionContent>
+                                      </AccordionItem>
+                                    );
+                                  })}
+                                </Accordion>
+                              </section>
+                            );
+                          })}
+                      </div>
+                    ) : (
+                      // Flat rendering — filtered/search results
+                      <Accordion type="single" collapsible className="space-y-2">
+                        {filteredFAQs.map((faq) => {
+                          const meta = categoryMeta[faq.category];
+                          const Icon = meta.icon;
+                          return (
+                            <AccordionItem
+                              key={faq.id}
+                              value={faq.id}
+                              className="rounded-2xl bg-white/80 backdrop-blur-xl border border-white/70 shadow-[0_6px_24px_-12px_rgba(15,23,42,0.15)] overflow-hidden data-[state=open]:shadow-[0_16px_40px_-14px_rgba(217,108,74,0.28)] data-[state=open]:border-[#d96c4a]/45 data-[state=open]:bg-gradient-to-br data-[state=open]:from-white/90 data-[state=open]:to-orange-50/70 transition-all duration-300"
+                            >
+                              <AccordionTrigger className="px-4 py-3 hover:no-underline group">
+                                <div className="flex items-center gap-3 flex-1 text-left min-w-0">
+                                  <div
+                                    className={`flex-shrink-0 w-8 h-8 rounded-xl bg-gradient-to-br ${meta.accent} flex items-center justify-center shadow-[0_6px_16px_-6px_rgba(15,23,42,0.25),inset_0_1px_0_0_rgba(255,255,255,0.4)] border border-white/40`}
+                                  >
+                                    <Icon
+                                      className="w-4 h-4 text-white"
+                                      strokeWidth={2}
+                                    />
+                                  </div>
+                                  <span className="font-semibold text-[15px] text-slate-900 leading-snug pr-3 group-hover:text-[#b8552f] transition-colors">
+                                    {faq.question}
+                                  </span>
                                 </div>
-                              </div>
-                            </AccordionContent>
-                          </AccordionItem>
-                        );
-                      })}
-                    </Accordion>
+                              </AccordionTrigger>
+                              <AccordionContent className="px-4 pb-4">
+                                <div className="pl-11">
+                                  <p className="text-[14px] leading-relaxed text-slate-600 whitespace-pre-line">
+                                    {faq.answer}
+                                  </p>
+                                  <div className="mt-3 flex items-center gap-2">
+                                    <Badge
+                                      variant="outline"
+                                      className="text-[10px] h-[18px] px-1.5 py-0 border-[#d96c4a]/35 text-[#b8552f] bg-orange-50/50"
+                                    >
+                                      {faq.category}
+                                    </Badge>
+                                  </div>
+                                </div>
+                              </AccordionContent>
+                            </AccordionItem>
+                          );
+                        })}
+                      </Accordion>
+                    )
                   ) : (
                     <div className="rounded-2xl bg-white/75 backdrop-blur-xl border border-white/70 shadow-[0_12px_40px_-16px_rgba(15,23,42,0.18)] p-8 text-center">
                       <Search className="w-10 h-10 mx-auto mb-3 text-slate-300" />
