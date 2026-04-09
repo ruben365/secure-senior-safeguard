@@ -126,8 +126,8 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
       )}
 
       <nav className={overlay ? "absolute top-0 left-0 right-0 z-[9999] bg-gradient-to-b from-black/60 to-transparent" : `sticky top-0 z-[9999] transition-all duration-300 ${scrolled ? "bg-[#080d1a]/97 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_4px_24px_-4px_rgba(0,0,0,0.3)]" : "bg-[#080d1a]/80 backdrop-blur-md"}`}>
-        <div className="max-w-[1080px] mx-auto w-full px-6 lg:px-8">
-          <div className="flex items-center justify-between h-[48px] gap-3 lg:gap-6">
+        <div className="max-w-[1280px] mx-auto w-full px-6 lg:px-8">
+          <div className="flex items-center justify-between h-[64px] gap-4 lg:gap-8">
             {/* Logo — identical to hero */}
             <a
               href="/"
@@ -141,11 +141,11 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 height={42}
                 loading="eager"
                 decoding="sync"
-                className="w-[28px] h-[28px] object-contain flex-shrink-0 brightness-0 invert"
+                className="w-[34px] h-[34px] object-contain flex-shrink-0 brightness-0 invert"
               />
               <div className="flex flex-col min-w-0 gap-1">
-                <span className="text-[12.5px] font-extrabold text-white tracking-tight leading-none">InVision Network</span>
-                <span className="text-[8px] font-bold text-white/75 hidden sm:block tracking-widest uppercase leading-none">AI Scam Protection</span>
+                <span className="text-[16px] font-extrabold text-white tracking-tight leading-none">InVision Network</span>
+                <span className="text-[10px] font-bold text-white/75 hidden sm:block tracking-widest uppercase leading-none">AI Scam Protection</span>
               </div>
             </a>
 
@@ -157,7 +157,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <PrefetchLink
                     key={link.name}
                     to={link.href}
-                    className={`relative text-[11.5px] px-2.5 py-1 rounded-md transition-colors duration-150 ${
+                    className={`relative text-[14px] px-3.5 py-2 rounded-md transition-colors duration-150 ${
                       isActive
                         ? "text-orange-400 font-bold bg-orange-500/12"
                         : "text-white font-semibold hover:text-orange-300 hover:bg-white/[0.07]"
@@ -176,7 +176,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   aria-haspopup="menu"
                   aria-expanded={moreOpen ? "true" : "false"}
                   aria-label="More navigation links"
-                  className={`flex items-center gap-1 text-[11.5px] px-2.5 py-1 rounded-md transition-colors duration-150 ${
+                  className={`flex items-center gap-1 text-[14px] px-3.5 py-2 rounded-md transition-colors duration-150 ${
                     isSecondaryActive
                       ? "text-orange-400 font-bold bg-orange-500/12"
                       : "text-white font-semibold hover:text-orange-300 hover:bg-white/[0.07]"
@@ -192,14 +192,12 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <div
                     role="menu"
                     aria-label="Secondary navigation"
-                    className="absolute top-full left-0 mt-2 w-48 rounded-xl border border-white/15 py-1.5 z-50 overflow-hidden"
+                    className="absolute top-full left-0 mt-2 w-48 rounded-xl py-2 z-50 overflow-hidden"
                     style={{
-                      background:
-                        "linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%)",
-                      backdropFilter: "blur(20px) saturate(160%)",
-                      WebkitBackdropFilter: "blur(20px) saturate(160%)",
-                      boxShadow:
-                        "0 12px 32px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.12)",
+                      background: "rgba(18, 14, 12, 0.75)",
+                      backdropFilter: "blur(24px) saturate(1.4)",
+                      WebkitBackdropFilter: "blur(24px) saturate(1.4)",
+                      border: "1px solid rgba(255, 255, 255, 0.06)",
                     }}
                   >
                     {secondaryLinks.map((link) => {
@@ -209,10 +207,10 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                           key={link.name}
                           to={link.href}
                           role="menuitem"
-                          className={`block px-4 py-2.5 text-[13.5px] transition-colors ${
+                          className={`block px-3 py-2 text-[14px] rounded-lg transition-colors ${
                             isActive
                               ? "text-orange-400 font-semibold"
-                              : "text-white/90 hover:text-orange-300 hover:bg-white/[0.06]"
+                              : "text-white/85 hover:text-white hover:bg-white/[0.06]"
                           }`}
                           onClick={() => setMoreOpen(false)}
                         >
@@ -241,7 +239,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 aria-label={`Call us at ${SITE.phone.display}`}
               >
                 <Phone className="w-4 h-4 shrink-0" />
-                <span className="hidden xl:inline text-[11px] font-medium whitespace-nowrap [word-break:keep-all]">
+                <span className="hidden xl:inline text-[14px] font-medium whitespace-nowrap [word-break:keep-all]">
                   {/* Non-breaking space between area code and local guarantees single line */}
                   {SITE.phone.display.replace(" ", "\u00A0")}
                 </span>
@@ -251,7 +249,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
               <button
                 type="button"
                 onClick={() => setDonateOpen(true)}
-                className="hidden lg:flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1.5 rounded-md text-white/80 hover:text-orange-400 hover:bg-orange-500/10 transition-colors"
+                className="hidden lg:flex items-center gap-1.5 text-[14px] font-medium px-2.5 py-1.5 rounded-md text-white/80 hover:text-orange-400 hover:bg-orange-500/10 transition-colors"
                 aria-label="Donate"
               >
                 <Heart className="w-4 h-4" />
@@ -271,7 +269,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 <Link
                   to="/admin"
                   aria-label="Go to Dashboard"
-                  className="inline-flex items-center gap-1.5 h-[30px] px-3.5 text-[11px] font-semibold rounded-full text-white bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12] shadow-[0_1px_0_0_rgba(255,255,255,0.18)_inset,0_8px_20px_-6px_rgba(217,108,74,0.5),0_16px_32px_-12px_rgba(217,108,74,0.35)] hover:-translate-y-[1px] hover:from-[#ea580c] hover:to-[#c2410c] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_12px_28px_-6px_rgba(217,108,74,0.6),0_20px_40px_-12px_rgba(217,108,74,0.4)] active:translate-y-[0.5px] transition-all duration-200"
+                  className="inline-flex items-center gap-1.5 h-[40px] px-5 text-[14px] font-semibold rounded-full text-white bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12] shadow-[0_1px_0_0_rgba(255,255,255,0.18)_inset,0_8px_20px_-6px_rgba(217,108,74,0.5),0_16px_32px_-12px_rgba(217,108,74,0.35)] hover:-translate-y-[1px] hover:from-[#ea580c] hover:to-[#c2410c] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_12px_28px_-6px_rgba(217,108,74,0.6),0_20px_40px_-12px_rgba(217,108,74,0.4)] active:translate-y-[0.5px] transition-all duration-200"
                 >
                   <LayoutDashboard className="h-4 w-4" />
                   Dashboard
@@ -280,7 +278,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 <Link
                   to="/portal"
                   aria-label="Login to your account"
-                  className="inline-flex items-center h-[30px] px-3.5 text-[11px] font-semibold rounded-full text-white bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12] shadow-[0_1px_0_0_rgba(255,255,255,0.18)_inset,0_8px_20px_-6px_rgba(217,108,74,0.5),0_16px_32px_-12px_rgba(217,108,74,0.35)] hover:-translate-y-[1px] hover:from-[#ea580c] hover:to-[#c2410c] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_12px_28px_-6px_rgba(217,108,74,0.6),0_20px_40px_-12px_rgba(217,108,74,0.4)] active:translate-y-[0.5px] transition-all duration-200"
+                  className="inline-flex items-center h-[40px] px-5 text-[14px] font-semibold rounded-full text-white bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12] shadow-[0_1px_0_0_rgba(255,255,255,0.18)_inset,0_8px_20px_-6px_rgba(217,108,74,0.5),0_16px_32px_-12px_rgba(217,108,74,0.35)] hover:-translate-y-[1px] hover:from-[#ea580c] hover:to-[#c2410c] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_12px_28px_-6px_rgba(217,108,74,0.6),0_20px_40px_-12px_rgba(217,108,74,0.4)] active:translate-y-[0.5px] transition-all duration-200"
                 >
                   Login
                 </Link>
@@ -313,7 +311,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
           role="dialog"
           aria-modal="true"
           aria-label="Main navigation"
-          className="lg:hidden fixed top-[48px] left-0 right-0 bottom-0 border-t border-white/[0.08] z-[10001] overflow-y-auto overscroll-contain pb-[calc(env(safe-area-inset-bottom)+1.25rem)] [-webkit-overflow-scrolling:touch]"
+          className="lg:hidden fixed top-[64px] left-0 right-0 bottom-0 border-t border-white/[0.08] z-[10001] overflow-y-auto overscroll-contain pb-[calc(env(safe-area-inset-bottom)+1.25rem)] [-webkit-overflow-scrolling:touch]"
           style={{
             background: "rgba(6, 9, 18, 0.80)",
             backdropFilter: "blur(32px) saturate(200%)",
@@ -336,7 +334,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 <Link
                   key={link.name}
                   to={link.href}
-                  className={`flex items-center text-[13px] font-semibold px-3 py-2.5 rounded-lg transition-all duration-200 ${
+                  className={`flex items-center text-[15px] font-semibold px-4 py-3 rounded-xl transition-all duration-200 ${
                     isActive
                       ? "text-orange-400 bg-orange-500/[0.14] border border-orange-500/25 shadow-[0_0_20px_-6px_rgba(249,115,22,0.3)]"
                       : "text-white/90 hover:text-white hover:bg-white/[0.07] border border-transparent hover:border-white/[0.10]"

@@ -144,7 +144,7 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
                         Get Protected Today <ArrowRight className="ml-2 w-5 h-5" />
                       </Link>
                     </Button>
-                    <Button asChild variant="heroOutline" size="lg">
+                    <Button asChild variant="heroPrimary" size="lg">
                       <Link to="/business">Business Solutions</Link>
                     </Button>
                   </div>
