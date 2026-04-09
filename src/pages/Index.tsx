@@ -142,10 +142,10 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
                     </span>
                   </div>
 
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-[3.25rem] font-extrabold text-white mb-5 leading-[1.1] tracking-tight [text-shadow:0_2px_12px_rgba(0,0,0,0.55)]">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-[3.25rem] font-extrabold text-white mb-5 leading-[1.1] tracking-tight">
                     Start Protecting Your Family Today
                   </h2>
-                  <p className="text-base md:text-lg text-white/90 mb-8 max-w-md leading-relaxed [text-shadow:0_1px_8px_rgba(0,0,0,0.5)]">
+                  <p className="text-base md:text-lg text-white/90 mb-8 max-w-md leading-relaxed">
                     Join families across Ohio who live confidently, knowing
                     they are protected from AI scams. Get started in minutes.
                   </p>

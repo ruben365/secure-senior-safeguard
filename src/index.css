@@ -12,24 +12,16 @@
 @import "./styles/polish.css";
 
 /* ═══════════════════════════════════════════════════════════════════
-   GLOBAL OVERRIDES — shadows removed, HD sharpness applied
+   GLOBAL OVERRIDES — NO shadows, NO glows, NO text-shadow. Period.
    ═══════════════════════════════════════════════════════════════════ */
 
-/* TASK 1: Remove ALL box-shadows globally.
-   This nuclear override ensures no shadow appears anywhere on the site,
-   regardless of Tailwind classes, inline styles, or CSS variables.
-   text-shadow is preserved for readability on dark backgrounds. */
+/* Nuclear kill: box-shadow + text-shadow everywhere */
 *,
 *::before,
 *::after {
   box-shadow: none !important;
+  text-shadow: none !important;
 }
-
-/* TASK 2: zoom: 0.75 REMOVED.
-   The previous zoom caused everything to render at 75% and scale up,
-   creating subpixel blur across all text, images, and borders.
-   Layout and font sizes in base.css are already responsive and do not
-   need the zoom hack for dense layout. */
 
 /* HD text rendering — crisp antialiasing */
 html {
