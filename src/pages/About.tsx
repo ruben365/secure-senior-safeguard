@@ -34,6 +34,7 @@ import fieldSunsetCta from "@/assets/field-sunset-cta.jpg";
 import familyGathering from "@/assets/family-gathering.jpg";
 import seniorLearning from "@/assets/senior-learning.jpg";
 import { SEO } from "@/components/SEO";
+import { AnswerSummary } from "@/components/AnswerSummary";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 import { useAdminStatus } from "@/hooks/useAdminStatus";
@@ -156,6 +157,14 @@ function About() {
       {/* Spacer for floating stats bar */}
       <div className="hidden lg:block h-8" />
       <div className="lg:hidden h-4" />
+
+      {/* Answer summary — who we are at a glance */}
+      <AnswerSummary
+        summary="InVision Network is a cybersecurity company founded by Ruben Nk and Corine Mk in Kettering, Ohio. We protect families and small businesses from AI-powered scams through hands-on training, automated defenses, and 24/7 monitoring — serving the greater Dayton area and beyond."
+        ctaHref="/contact"
+        ctaLabel="Get in touch with our team"
+        className="py-6"
+      />
 
       <TrustBar />
 
