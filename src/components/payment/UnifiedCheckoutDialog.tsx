@@ -5,11 +5,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -21,8 +18,10 @@ import {
   ShieldCheck,
   PartyPopper,
   ArrowLeft,
+  ArrowRight,
   Smartphone,
-  RefreshCw,
+  Lock,
+  X,
 } from "lucide-react";
 import {
   Elements,
@@ -36,56 +35,168 @@ import { usePaymentFlow } from "@/hooks/usePaymentFlow";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import confetti from "canvas-confetti";
-import { motion, AnimatePresence } from "framer-motion";
 
-// Step 1: Customer Information Form
-const CustomerInfoStep: React.FC<{
-  onNext: () => void;
-}> = ({ onNext }) => {
-  const { state, setCustomerInfo, setLoading, setError, total } = useCheckout();
+/* ═══════════════════════════════════════════════════════════════════
+   DESIGN TOKENS — dark glassmorphism checkout
+   ═══════════════════════════════════════════════════════════════════ */
+const T = {
+  // Surfaces
+  glass: "rgba(15, 15, 25, 0.88)",
+  glassCard: "rgba(255, 255, 255, 0.04)",
+  glassCardBorder: "rgba(255, 255, 255, 0.08)",
+  glassInput: "rgba(255, 255, 255, 0.05)",
+  glassInputBorder: "rgba(255, 255, 255, 0.10)",
+  // Text
+  white: "rgba(255, 255, 255, 0.95)",
+  white70: "rgba(255, 255, 255, 0.70)",
+  white50: "rgba(255, 255, 255, 0.50)",
+  white30: "rgba(255, 255, 255, 0.30)",
+  // Accents
+  copper: "#F97316",
+  copperDark: "#EA580C",
+  copperGlow: "rgba(249, 115, 22, 0.3)",
+  copperSoft: "rgba(249, 115, 22, 0.15)",
+  // Status
+  success: "#22C55E",
+  successBg: "rgba(34, 197, 94, 0.12)",
+  error: "#EF4444",
+  errorBg: "rgba(239, 68, 68, 0.12)",
+} as const;
+
+/* ── Shared input class ────────────────────────────────────────── */
+const inputClass =
+  "w-full h-[44px] rounded-lg border px-3 text-[14px] placeholder:text-white/30 transition-colors duration-200 focus:outline-none focus:ring-0";
+const inputStyle = {
+  background: T.glassInput,
+  borderColor: T.glassInputBorder,
+  color: T.white,
+};
+const inputFocusStyle = {
+  borderColor: T.copper,
+  boxShadow: `0 0 0 3px ${T.copperSoft}`,
+};
+
+/* ── Progress Bar ──────────────────────────────────────────────── */
+const ProgressBar: React.FC<{ step: number }> = ({ step }) => (
+  <div className="flex items-center justify-center gap-0 px-4 py-3">
+    {[1, 2, 3].map((n, i) => (
+      <React.Fragment key={n}>
+        {i > 0 && (
+          <div
+            className="flex-1 h-px mx-1"
+            style={{
+              background:
+                step >= n
+                  ? `linear-gradient(90deg, ${T.copper}, ${T.copperDark})`
+                  : T.glassInputBorder,
+            }}
+          />
+        )}
+        <div
+          className="w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold transition-all duration-300"
+          style={{
+            background: step >= n ? T.copper : "transparent",
+            border: `2px solid ${step >= n ? T.copper : T.white30}`,
+            color: step >= n ? "#fff" : T.white50,
+            boxShadow: step === n ? `0 0 12px ${T.copperGlow}` : "none",
+          }}
+        >
+          {n}
+        </div>
+      </React.Fragment>
+    ))}
+  </div>
+);
+
+/* ── Order Summary Card ────────────────────────────────────────── */
+const OrderSummaryCard: React.FC = () => {
+  const { state, subtotal, discount, total } = useCheckout();
+  const item = state.items[0];
+  if (!item) return null;
+
+  return (
+    <div
+      className="rounded-xl p-4"
+      style={{
+        background: T.glassCard,
+        border: `1px solid ${T.glassCardBorder}`,
+      }}
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex-1 min-w-0">
+          <p className="text-[15px] font-semibold truncate" style={{ color: T.white }}>
+            {item.product.name}
+          </p>
+          <p className="text-[12px] mt-1 line-clamp-2" style={{ color: T.white50 }}>
+            {item.product.description || "Digital product"}
+          </p>
+        </div>
+        <span className="text-[20px] font-bold flex-shrink-0" style={{ color: T.copper }}>
+          ${total.toFixed(2)}
+        </span>
+      </div>
+
+      {discount > 0 && (
+        <div className="flex items-center gap-1.5 mt-2 text-[11px]" style={{ color: T.success }}>
+          <Star className="w-3 h-3" />
+          Veteran discount: -${discount.toFixed(2)}
+        </div>
+      )}
+
+      {state.items.length > 1 && (
+        <div className="mt-3 pt-3 space-y-1" style={{ borderTop: `1px solid ${T.glassCardBorder}` }}>
+          {state.items.slice(1).map((i) => (
+            <div key={i.productId} className="flex justify-between text-[12px]" style={{ color: T.white70 }}>
+              <span className="truncate flex-1">{i.product.name}</span>
+              <span>${i.discountedPrice.toFixed(2)}</span>
+            </div>
+          ))}
+          <div className="flex justify-between text-[13px] font-semibold pt-1" style={{ color: T.white }}>
+            <span>Total</span>
+            <span style={{ color: T.copper }}>${total.toFixed(2)}</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+/* ── Step 1: Customer Info ─────────────────────────────────────── */
+const CustomerInfoStep: React.FC<{ onNext: () => void }> = ({ onNext }) => {
+  const { state, setCustomerInfo, total } = useCheckout();
   const { createPaymentIntent, createSubscriptionCheckout } = usePaymentFlow();
   const { customerInfo, items, isLoading } = state;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!customerInfo.email || !customerInfo.name) {
       toast.error("Please enter your name and email to continue.");
       return;
     }
 
-    // SUBSCRIPTION FLOW: Stripe Elements (PaymentIntent) does not support recurring billing.
-    // For subscriptions we must use a hosted Stripe Checkout Session and redirect.
     if (state.type === "subscription") {
-      const subscriptionItem = items[0];
-      if (!subscriptionItem?.product.stripePriceId) {
+      const sub = items[0];
+      if (!sub?.product.stripePriceId) {
         toast.error("This subscription is not available for direct checkout.");
         return;
       }
-
       const result = await createSubscriptionCheckout({
-        priceId: subscriptionItem.product.stripePriceId,
-        serviceName: subscriptionItem.product.name,
-        planTier: subscriptionItem.product.id,
+        priceId: sub.product.stripePriceId,
+        serviceName: sub.product.name,
+        planTier: sub.product.id,
         customerEmail: customerInfo.email,
         customerName: customerInfo.name,
       });
-
-      if (result?.url) {
-        // Redirect to hosted Stripe Checkout (Stripe handles the success/cancel URLs)
-        window.location.href = result.url;
-      }
+      if (result?.url) window.location.href = result.url;
       return;
     }
 
-    // ONE-TIME / CART FLOW: PaymentIntent + in-dialog Stripe Elements
     const paymentItems = items.map((item) => ({
       id: item.productId,
       name: item.product.name,
       price: item.discountedPrice,
       quantity: item.quantity,
     }));
-
     const result = await createPaymentIntent({
       amount: total,
       customerEmail: customerInfo.email,
@@ -93,91 +204,94 @@ const CustomerInfoStep: React.FC<{
       isVeteran: customerInfo.isVeteran,
       items: paymentItems,
     });
-
-    if (result) {
-      onNext();
-    }
+    if (result) onNext();
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="space-y-2">
-        <Label htmlFor="name">Full Name *</Label>
-        <Input
-          id="name"
-          value={customerInfo.name}
-          onChange={(e) => setCustomerInfo({ name: e.target.value })}
-          placeholder="Your full name"
-          required
-        />
-      </div>
+      <OrderSummaryCard />
 
-      <div className="space-y-2">
-        <Label htmlFor="email">Email Address *</Label>
-        <Input
-          id="email"
-          type="email"
-          value={customerInfo.email}
-          onChange={(e) => setCustomerInfo({ email: e.target.value })}
-          placeholder="you@email.com"
-          required
-        />
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="phone">Phone (Optional)</Label>
-        <Input
-          id="phone"
-          type="tel"
-          value={customerInfo.phone || ""}
-          onChange={(e) => setCustomerInfo({ phone: e.target.value })}
-          placeholder="(555) 123-4567"
-        />
-      </div>
-
-      <div className="flex items-center gap-3 p-3 bg-muted rounded-lg">
-        <Checkbox
-          id="veteran"
-          checked={customerInfo.isVeteran}
-          onCheckedChange={(checked) =>
-            setCustomerInfo({ isVeteran: !!checked })
-          }
-        />
-        <div className="flex-1">
-          <Label
-            htmlFor="veteran"
-            className="flex items-center gap-2 cursor-pointer"
-          >
-            <Star className="h-4 w-4 text-amber-500" />
-            <span>I am a Veteran or First Responder</span>
-          </Label>
-          <p className="text-xs text-muted-foreground mt-1">
-            Save 10% on your purchase
-          </p>
+      <div className="space-y-3">
+        <div>
+          <label className="block text-[12px] font-medium mb-1.5" style={{ color: T.white70 }}>
+            Email Address
+          </label>
+          <input
+            type="email"
+            value={customerInfo.email}
+            onChange={(e) => setCustomerInfo({ email: e.target.value })}
+            placeholder="your@email.com"
+            required
+            className={inputClass}
+            style={inputStyle}
+            onFocus={(e) => Object.assign(e.target.style, inputFocusStyle)}
+            onBlur={(e) => Object.assign(e.target.style, { borderColor: T.glassInputBorder, boxShadow: "none" })}
+          />
+        </div>
+        <div>
+          <label className="block text-[12px] font-medium mb-1.5" style={{ color: T.white70 }}>
+            Full Name
+          </label>
+          <input
+            type="text"
+            value={customerInfo.name}
+            onChange={(e) => setCustomerInfo({ name: e.target.value })}
+            placeholder="Your full name"
+            required
+            className={inputClass}
+            style={inputStyle}
+            onFocus={(e) => Object.assign(e.target.style, inputFocusStyle)}
+            onBlur={(e) => Object.assign(e.target.style, { borderColor: T.glassInputBorder, boxShadow: "none" })}
+          />
         </div>
       </div>
 
-      <Button type="submit" className="w-full" disabled={isLoading}>
+      {/* Veteran toggle — compact inline */}
+      <label
+        className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg cursor-pointer transition-colors"
+        style={{ background: T.glassCard, border: `1px solid ${T.glassCardBorder}` }}
+      >
+        <Checkbox
+          id="veteran-checkout"
+          checked={customerInfo.isVeteran}
+          onCheckedChange={(c) => setCustomerInfo({ isVeteran: !!c })}
+          className="border-white/20 data-[state=checked]:bg-[#F97316] data-[state=checked]:border-[#F97316]"
+        />
+        <div className="flex-1 flex items-center gap-1.5">
+          <Star className="w-3.5 h-3.5" style={{ color: T.copper }} />
+          <span className="text-[13px] font-medium" style={{ color: T.white70 }}>
+            Veteran / First Responder — save 10%
+          </span>
+        </div>
+      </label>
+
+      <button
+        type="submit"
+        disabled={isLoading}
+        className="w-full h-[48px] rounded-xl text-[15px] font-semibold text-white flex items-center justify-center gap-2 transition-all duration-200 disabled:opacity-50 hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.98]"
+        style={{
+          background: `linear-gradient(135deg, ${T.copper}, ${T.copperDark})`,
+          boxShadow: `0 4px 14px ${T.copperGlow}`,
+        }}
+      >
         {isLoading ? (
           <>
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            <Loader2 className="w-4 h-4 animate-spin" />
             Preparing checkout...
           </>
         ) : (
           <>
             Continue to Payment
-            <CreditCard className="ml-2 h-4 w-4" />
+            <ArrowRight className="w-4 h-4" />
           </>
         )}
-      </Button>
+      </button>
     </form>
   );
 };
 
-// QR Code Payment Component
-const QRCodePaymentStep: React.FC<{
-  onSuccess: () => void;
-}> = ({ onSuccess }) => {
+/* ── QR Code step (reused from original) ───────────────────────── */
+const QRCodePaymentStep: React.FC<{ onSuccess: () => void }> = ({ onSuccess }) => {
   const { state, total } = useCheckout();
   const [loading, setLoading] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState<string | null>(null);
@@ -185,7 +299,6 @@ const QRCodePaymentStep: React.FC<{
   const [timeLeft, setTimeLeft] = useState(240);
   const [checking, setChecking] = useState(false);
 
-  // Countdown timer
   useEffect(() => {
     if (qrCodeUrl && timeLeft > 0) {
       const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
@@ -196,190 +309,107 @@ const QRCodePaymentStep: React.FC<{
     }
   }, [qrCodeUrl, timeLeft]);
 
-  // Poll for payment status
   useEffect(() => {
     if (!paymentLinkId || !qrCodeUrl) return;
-
-    const checkPayment = async () => {
+    const interval = setInterval(async () => {
       setChecking(true);
       try {
         const { data } = await supabase.functions.invoke(
           "verify-payment-link",
-          {
-            body: { paymentLinkId },
-          },
+          { body: { paymentLinkId } },
         );
-
         if (data?.paid) {
-          confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-          toast.success("Payment received!");
+          clearInterval(interval);
           onSuccess();
         }
-      } catch (err) {
-        console.error("Payment check:", err);
+      } catch {
+        // Silently retry
       } finally {
         setChecking(false);
       }
-    };
-
-    const interval = setInterval(checkPayment, 4000);
+    }, 5000);
     return () => clearInterval(interval);
   }, [paymentLinkId, qrCodeUrl, onSuccess]);
 
-  const generateQRCode = async () => {
+  const generateQR = async () => {
     setLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke(
-        "generate-payment-link",
+        "create-payment-link",
         {
           body: {
             amount: Math.round(total * 100),
+            description: state.items.map((i) => i.product.name).join(", "),
             customerEmail: state.customerInfo.email,
-            customerName: state.customerInfo.name,
-            items: state.items.map((item) => ({
-              name: item.product.name,
-              quantity: item.quantity,
-              price: item.discountedPrice,
-            })),
           },
         },
       );
-
       if (error) throw error;
-
-      if (data?.url) {
-        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(data.url)}`;
-        setQrCodeUrl(qrUrl);
-        setPaymentLinkId(data.id);
+      if (data?.qrCodeUrl) {
+        setQrCodeUrl(data.qrCodeUrl);
+        setPaymentLinkId(data.paymentLinkId);
         setTimeLeft(240);
       }
-    } catch (error: any) {
-      console.error("[QR Payment] Error:", error);
+    } catch {
       toast.error("Couldn't create the QR code. Please refresh and try again.");
     } finally {
       setLoading(false);
     }
   };
 
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, "0")}`;
-  };
-
   return (
-    <div className="text-center space-y-4 py-2">
-      <AnimatePresence mode="wait">
-        {!qrCodeUrl ? (
-          <motion.div
-            key="generate"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="space-y-4"
-          >
-            <div className="p-4 bg-muted/50 rounded-xl">
-              <Smartphone className="w-10 h-10 mx-auto mb-3 text-primary" />
-              <h4 className="font-semibold mb-1">Pay with Your Phone</h4>
-              <p className="text-sm text-muted-foreground">
-                Scan QR code with Apple Pay, Google Pay, or any mobile wallet
-              </p>
-            </div>
-            <Button
-              onClick={generateQRCode}
-              disabled={loading}
-              className="w-full"
-            >
-              {loading ? (
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              ) : (
-                <Smartphone className="mr-2 h-4 w-4" />
-              )}
-              Generate QR Code
-            </Button>
-          </motion.div>
-        ) : (
-          <motion.div
-            key="qr"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            className="space-y-3"
-          >
-            <div className="bg-white p-3 rounded-xl inline-block shadow-md">
-              <img
-                src={qrCodeUrl}
-                alt="Payment QR Code"
-                className="w-[180px] h-[180px]"
-              />
-            </div>
-
-            <div className="flex items-center justify-center gap-2">
-              <Badge variant={timeLeft < 60 ? "destructive" : "secondary"}>
-                {checking && <Loader2 className="w-3 h-3 mr-1 animate-spin" />}
-                {!checking && <RefreshCw className="w-3 h-3 mr-1" />}
-                {formatTime(timeLeft)}
-              </Badge>
-            </div>
-
-            <p className="text-sm text-muted-foreground">
-              Scan to pay{" "}
-              <strong className="text-foreground">${total.toFixed(2)}</strong>
+    <div className="space-y-4 text-center py-2">
+      {!qrCodeUrl ? (
+        <button
+          onClick={generateQR}
+          disabled={loading}
+          className="w-full h-[44px] rounded-xl text-[14px] font-semibold flex items-center justify-center gap-2"
+          style={{
+            background: T.glassCard,
+            border: `1px solid ${T.glassCardBorder}`,
+            color: T.white,
+          }}
+        >
+          {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Smartphone className="w-4 h-4" />}
+          {loading ? "Generating..." : "Generate QR Code"}
+        </button>
+      ) : (
+        <>
+          <img src={qrCodeUrl} alt="Payment QR Code" className="w-48 h-48 mx-auto rounded-xl bg-white p-3" />
+          <p className="text-[12px]" style={{ color: T.white50 }}>
+            Scan with your phone camera · Expires in {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, "0")}
+          </p>
+          {checking && (
+            <p className="text-[11px] flex items-center justify-center gap-1.5" style={{ color: T.copper }}>
+              <Loader2 className="w-3 h-3 animate-spin" /> Checking payment...
             </p>
-
-            <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
-              <Loader2 className="w-3 h-3 animate-spin" />
-              Waiting for payment...
-            </div>
-
-            <Button
-              variant="outline"
-              onClick={generateQRCode}
-              size="sm"
-              disabled={loading}
-            >
-              {loading ? (
-                <Loader2 className="w-3 h-3 animate-spin" />
-              ) : (
-                "Regenerate"
-              )}
-            </Button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </>
+      )}
     </div>
   );
 };
 
-// Step 2: Payment Form (Stripe)
+/* ── Step 2: Payment Form (Stripe Elements) ────────────────────── */
 const PaymentFormStep: React.FC<{
   onSuccess: () => void;
   onBack: () => void;
 }> = ({ onSuccess, onBack }) => {
   const stripe = useStripe();
   const elements = useElements();
-  const { state, setLoading, setError, setOrderId, total } = useCheckout();
-  // verifyPayment is invoked directly via supabase.functions.invoke below
-  // (Phase 4.12 hand-off). The usePaymentFlow.verifyPayment helper is
-  // intentionally not used here because it predates the payment_intent_id
-  // path on the server and would have to be called with the legacy shape.
+  const { state, setError, setOrderId, total } = useCheckout();
   const [processing, setProcessing] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!stripe || !elements) {
-      return;
-    }
+    if (!stripe || !elements) return;
 
     setProcessing(true);
     setError(null);
 
     try {
       const { error: submitError } = await elements.submit();
-      if (submitError) {
-        throw new Error(submitError.message);
-      }
+      if (submitError) throw new Error(submitError.message);
 
       const { error: confirmError, paymentIntent } =
         await stripe.confirmPayment({
@@ -391,50 +421,24 @@ const PaymentFormStep: React.FC<{
           redirect: "if_required",
         });
 
-      if (confirmError) {
-        throw new Error(confirmError.message);
-      }
+      if (confirmError) throw new Error(confirmError.message);
 
       if (paymentIntent?.status === "succeeded") {
-        // Trigger confetti
-        confetti({
-          particleCount: 100,
-          spread: 70,
-          origin: { y: 0.6 },
-        });
-
-        // ====================================================================
-        // Phase 4.12 — close the cart digital delivery hand-off.
-        //
-        // create-cart-payment-intent now inserts a partner_orders row and
-        // stamps the order_id (UUID) onto PaymentIntent.metadata.order_id.
-        // After confirmPayment we ping verify-payment with payment_intent_id
-        // so it can mark the partner_orders row paid + trigger
-        // send-digital-download for any digital line items.
-        //
-        // Non-blocking: verify-payment is idempotent and the order is
-        // already paid at Stripe. A Stripe webhook would also catch a
-        // missed delivery on a slower path. Happy path = "delivery within
-        // seconds of confirmation".
-        // ====================================================================
+        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
         if (paymentIntent.id) {
           try {
             await supabase.functions.invoke("verify-payment", {
               body: { payment_intent_id: paymentIntent.id },
             });
-          } catch (verifyError) {
-            console.error(
-              "verify-payment hand-off failed (non-blocking):",
-              verifyError,
-            );
+          } catch {
+            // Non-blocking
           }
         }
-
         setOrderId(paymentIntent.id);
         onSuccess();
       }
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Payment failed";
+      const message = err instanceof Error ? err.message : "Payment didn't go through. Please try again.";
       setError(message);
       toast.error(message);
     } finally {
@@ -444,18 +448,17 @@ const PaymentFormStep: React.FC<{
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <Button
+      <button
         type="button"
-        variant="ghost"
-        size="sm"
         onClick={onBack}
-        className="mb-2"
+        className="flex items-center gap-1.5 text-[13px] font-medium transition-colors"
+        style={{ color: T.white50 }}
       >
-        <ArrowLeft className="mr-2 h-4 w-4" />
+        <ArrowLeft className="w-3.5 h-3.5" />
         Back to details
-      </Button>
+      </button>
 
-      <div className="border rounded-lg p-4">
+      <div className="rounded-xl p-3" style={{ border: `1px solid ${T.glassCardBorder}` }}>
         <PaymentElement
           options={{
             layout: "tabs",
@@ -464,215 +467,247 @@ const PaymentFormStep: React.FC<{
       </div>
 
       {state.error && (
-        <div className="flex items-center gap-2 p-3 bg-destructive/10 text-destructive rounded-lg">
-          <AlertCircle className="h-4 w-4" />
-          <span className="text-sm">{state.error}</span>
+        <div
+          className="flex items-center gap-2 p-3 rounded-lg text-[13px]"
+          style={{ background: T.errorBg, color: T.error }}
+        >
+          <AlertCircle className="w-4 h-4 flex-shrink-0" />
+          {state.error}
         </div>
       )}
 
-      <Button type="submit" className="w-full" disabled={!stripe || processing}>
+      <button
+        type="submit"
+        disabled={!stripe || processing}
+        className="w-full h-[48px] rounded-xl text-[15px] font-semibold text-white flex items-center justify-center gap-2 transition-all duration-200 disabled:opacity-50 hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.98]"
+        style={{
+          background: `linear-gradient(135deg, ${T.copper}, ${T.copperDark})`,
+          boxShadow: `0 4px 14px ${T.copperGlow}`,
+        }}
+      >
         {processing ? (
           <>
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Processing payment...
+            <Loader2 className="w-4 h-4 animate-spin" />
+            Processing...
           </>
         ) : (
           <>
-            <ShieldCheck className="mr-2 h-4 w-4" />
+            <ShieldCheck className="w-4 h-4" />
             Pay ${total.toFixed(2)}
           </>
         )}
-      </Button>
+      </button>
 
-      <p className="text-xs text-center text-muted-foreground">
-        Your payment is secured with 256-bit SSL encryption
+      <p className="text-center text-[11px]" style={{ color: T.white30 }}>
+        <Lock className="inline w-3 h-3 mr-1 -mt-px" />
+        Secured with 256-bit SSL encryption
       </p>
     </form>
   );
 };
 
-// Step 3: Success
-const SuccessStep: React.FC<{
-  onClose: () => void;
-}> = ({ onClose }) => {
+/* ── Step 3: Success ───────────────────────────────────────────── */
+const SuccessStep: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const { state, hasDigitalProducts, total } = useCheckout();
 
   return (
-    <div className="text-center space-y-4 py-4">
-      <div className="w-16 h-16 mx-auto bg-green-100 rounded-full flex items-center justify-center">
-        <PartyPopper className="h-8 w-8 text-green-600" />
+    <div className="text-center space-y-4 py-2">
+      <div
+        className="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center"
+        style={{ background: T.successBg }}
+      >
+        <PartyPopper className="w-8 h-8" style={{ color: T.success }} />
       </div>
 
       <div>
-        <h3 className="text-xl font-semibold">Payment Successful!</h3>
-        <p className="text-muted-foreground mt-1">
+        <h3 className="text-[20px] font-semibold" style={{ color: T.white }}>
+          Payment Successful!
+        </h3>
+        <p className="text-[13px] mt-1" style={{ color: T.white50 }}>
           Thank you for your purchase
         </p>
       </div>
 
-      <div className="bg-muted rounded-lg p-4 text-left space-y-2">
+      <div className="rounded-xl p-4 space-y-2 text-[13px]" style={{ background: T.glassCard }}>
         <div className="flex justify-between">
-          <span className="text-muted-foreground">Order ID</span>
-          <span className="font-mono text-sm">
+          <span style={{ color: T.white50 }}>Order ID</span>
+          <span className="font-mono" style={{ color: T.white70 }}>
             {state.orderId?.slice(0, 8)}...
           </span>
         </div>
         <div className="flex justify-between">
-          <span className="text-muted-foreground">Amount Paid</span>
-          <span className="font-semibold">${total.toFixed(2)}</span>
+          <span style={{ color: T.white50 }}>Amount Paid</span>
+          <span className="font-semibold" style={{ color: T.copper }}>
+            ${total.toFixed(2)}
+          </span>
         </div>
         <div className="flex justify-between">
-          <span className="text-muted-foreground">Email</span>
-          <span className="text-sm">{state.customerInfo.email}</span>
+          <span style={{ color: T.white50 }}>Email</span>
+          <span style={{ color: T.white70 }}>{state.customerInfo.email}</span>
         </div>
       </div>
 
       {hasDigitalProducts && (
-        <div className="flex items-center gap-2 p-3 bg-blue-50 text-blue-700 rounded-lg">
-          <Check className="h-4 w-4" />
-          <span className="text-sm">Digital products sent to your email</span>
+        <div
+          className="flex items-center justify-center gap-2 p-3 rounded-lg text-[13px]"
+          style={{ background: T.successBg, color: T.success }}
+        >
+          <Check className="w-4 h-4" />
+          Digital products sent to your email
         </div>
       )}
 
-      <Button onClick={onClose} className="w-full">
+      <button
+        onClick={onClose}
+        className="w-full h-[44px] rounded-xl text-[14px] font-semibold transition-all duration-200 hover:-translate-y-[1px]"
+        style={{
+          background: T.glassCard,
+          border: `1px solid ${T.glassCardBorder}`,
+          color: T.white,
+        }}
+      >
         Continue Shopping
-      </Button>
+      </button>
     </div>
   );
 };
 
-// Order Summary Component
-const OrderSummary: React.FC = () => {
-  const { state, subtotal, discount, total } = useCheckout();
+/* ═══════════════════════════════════════════════════════════════════
+   MAIN DIALOG
+   ═══════════════════════════════════════════════════════════════════ */
+const UnifiedCheckoutDialog = React.forwardRef<HTMLDivElement>(
+  function UnifiedCheckoutDialog(_props, _ref) {
+    const { state, closeCheckout, setStep, resetCheckout } = useCheckout();
+    const { stripePromise, initializeStripe } = useStripeKey();
 
-  return (
-    <div className="space-y-3">
-      <h4 className="font-medium">Order Summary</h4>
+    useEffect(() => {
+      if (state.isOpen) initializeStripe();
+    }, [state.isOpen, initializeStripe]);
 
-      <div className="space-y-2">
-        {state.items.map((item) => (
-          <div key={item.productId} className="flex justify-between text-sm">
-            <span className="flex-1 truncate">
-              {item.product.name}
-              {item.quantity > 1 && ` x${item.quantity}`}
-            </span>
-            <span>${item.originalPrice.toFixed(2)}</span>
+    const handleClose = () => {
+      if (state.step === "success") resetCheckout();
+      closeCheckout();
+    };
+
+    const stepNum = state.step === "info" ? 1 : state.step === "payment" ? 2 : 3;
+
+    return (
+      <Dialog open={state.isOpen} onOpenChange={handleClose}>
+        {/* Custom dark glass overlay with bokeh effect */}
+        <DialogContent
+          className="border-0 p-0 gap-0 overflow-hidden"
+          style={{
+            background: T.glass,
+            backdropFilter: "blur(28px) saturate(180%)",
+            WebkitBackdropFilter: "blur(28px) saturate(180%)",
+            border: `1px solid ${T.glassCardBorder}`,
+            borderRadius: "1.25rem",
+            boxShadow:
+              "0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
+            maxWidth: "440px",
+            width: "92%",
+          }}
+        >
+          {/* ── Header ─────────────────────────────────────── */}
+          <div
+            className="flex items-center justify-between px-5 pt-5 pb-2"
+          >
+            <div className="flex items-center gap-2.5">
+              <CreditCard className="w-5 h-5" style={{ color: T.copper }} />
+              <h2 className="text-[20px] font-semibold" style={{ color: T.white }}>
+                Secure Checkout
+              </h2>
+            </div>
+            <div className="flex items-center gap-2">
+              <span
+                className="flex items-center gap-1 px-2 py-1 rounded-full text-[11px]"
+                style={{
+                  background: T.glassCard,
+                  border: `1px solid ${T.glassCardBorder}`,
+                  color: T.white50,
+                }}
+              >
+                <Lock className="w-2.5 h-2.5" />
+                Stripe
+              </span>
+            </div>
           </div>
-        ))}
-      </div>
 
-      <Separator />
+          <p className="px-5 text-[13px]" style={{ color: T.white50 }}>
+            Complete your purchase securely.
+          </p>
 
-      <div className="space-y-1 text-sm">
-        <div className="flex justify-between">
-          <span>Subtotal</span>
-          <span>${subtotal.toFixed(2)}</span>
-        </div>
+          {/* ── Progress Bar ───────────────────────────────── */}
+          <ProgressBar step={stepNum} />
 
-        {discount > 0 && (
-          <div className="flex justify-between text-green-600">
-            <span className="flex items-center gap-1">
-              <Star className="h-3 w-3" />
-              Veteran Discount
-            </span>
-            <span>-${discount.toFixed(2)}</span>
-          </div>
-        )}
-
-        <Separator />
-
-        <div className="flex justify-between font-semibold text-base">
-          <span>Total</span>
-          <span>${total.toFixed(2)}</span>
-        </div>
-      </div>
-
-      {state.type === "subscription" &&
-        state.items[0]?.product.billingInterval && (
-          <Badge variant="secondary" className="w-full justify-center">
-            Billed {state.items[0].product.billingInterval}ly
-          </Badge>
-        )}
-    </div>
-  );
-};
-
-// Main Dialog Component
-const UnifiedCheckoutDialog = React.forwardRef<HTMLDivElement>(function UnifiedCheckoutDialog(_props, _ref) {
-  const { state, closeCheckout, setStep, resetCheckout } = useCheckout();
-  const { stripePromise, initializeStripe } = useStripeKey();
-
-  useEffect(() => {
-    if (state.isOpen) {
-      initializeStripe();
-    }
-  }, [state.isOpen, initializeStripe]);
-
-  const handleClose = () => {
-    if (state.step === "success") {
-      resetCheckout();
-    }
-    closeCheckout();
-  };
-
-  const stepTitles = {
-    info: "Checkout",
-    payment: "Payment",
-    success: "Order Complete",
-  };
-
-  return (
-    <Dialog open={state.isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[360px] p-4 gap-2">
-        <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
-            {state.step === "success" ? (
-              <Check className="h-5 w-5 text-green-600" />
-            ) : (
-              <CreditCard className="h-5 w-5" />
+          {/* ── Body ───────────────────────────────────────── */}
+          <div className="px-5 pb-5">
+            {state.step === "info" && (
+              <CustomerInfoStep onNext={() => {}} />
             )}
-            {stepTitles[state.step]}
-          </DialogTitle>
-        </DialogHeader>
-
-        <div className="grid gap-3">
-          <div className="order-2 md:order-1">
-            {state.step === "info" && <CustomerInfoStep onNext={() => {}} />}
 
             {state.step === "payment" && (
               <Tabs defaultValue="card" className="w-full">
-                <TabsList className="grid w-full grid-cols-2 mb-4">
-                  <TabsTrigger value="card" className="flex items-center gap-2">
-                    <CreditCard className="w-4 h-4" />
+                <TabsList
+                  className="grid w-full grid-cols-2 mb-4 rounded-lg h-9 p-0.5"
+                  style={{ background: T.glassCard }}
+                >
+                  <TabsTrigger
+                    value="card"
+                    className="flex items-center gap-1.5 text-[12px] rounded-md data-[state=active]:bg-white/10 data-[state=active]:text-white text-white/50 h-8"
+                  >
+                    <CreditCard className="w-3.5 h-3.5" />
                     Card
                   </TabsTrigger>
-                  <TabsTrigger value="qr" className="flex items-center gap-2">
-                    <Smartphone className="w-4 h-4" />
+                  <TabsTrigger
+                    value="qr"
+                    className="flex items-center gap-1.5 text-[12px] rounded-md data-[state=active]:bg-white/10 data-[state=active]:text-white text-white/50 h-8"
+                  >
+                    <Smartphone className="w-3.5 h-3.5" />
                     QR Code
                   </TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="card">
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setStep("info")}
-                    className="mb-2"
-                  >
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    Back to details
-                  </Button>
-
                   {stripePromise && state.clientSecret ? (
                     <Elements
                       stripe={stripePromise}
                       options={{
                         clientSecret: state.clientSecret,
                         appearance: {
-                          theme: "stripe",
+                          theme: "night",
                           variables: {
-                            colorPrimary: "hsl(var(--primary))",
+                            colorPrimary: T.copper,
+                            colorBackground: "rgba(15, 15, 25, 0.6)",
+                            colorText: "rgba(255, 255, 255, 0.9)",
+                            colorTextSecondary: "rgba(255, 255, 255, 0.5)",
+                            borderRadius: "10px",
+                            fontFamily: "inherit",
+                          },
+                          rules: {
+                            ".Input": {
+                              backgroundColor: T.glassInput,
+                              border: `1px solid ${T.glassInputBorder}`,
+                              color: T.white,
+                            },
+                            ".Input:focus": {
+                              borderColor: T.copper,
+                              boxShadow: `0 0 0 3px ${T.copperSoft}`,
+                            },
+                            ".Tab": {
+                              backgroundColor: T.glassCard,
+                              border: `1px solid ${T.glassCardBorder}`,
+                              color: T.white70,
+                            },
+                            ".Tab--selected": {
+                              backgroundColor: T.copperSoft,
+                              borderColor: T.copper,
+                              color: T.white,
+                            },
+                            ".Label": {
+                              color: T.white70,
+                              fontSize: "12px",
+                            },
                           },
                         },
                       }}
@@ -683,9 +718,9 @@ const UnifiedCheckoutDialog = React.forwardRef<HTMLDivElement>(function UnifiedC
                       />
                     </Elements>
                   ) : (
-                    <div className="flex items-center justify-center py-8">
-                      <Loader2 className="w-6 h-6 animate-spin text-primary" />
-                      <span className="ml-2 text-sm text-muted-foreground">
+                    <div className="flex items-center justify-center py-8 gap-2">
+                      <Loader2 className="w-5 h-5 animate-spin" style={{ color: T.copper }} />
+                      <span className="text-[13px]" style={{ color: T.white50 }}>
                         Loading payment...
                       </span>
                     </div>
@@ -693,17 +728,6 @@ const UnifiedCheckoutDialog = React.forwardRef<HTMLDivElement>(function UnifiedC
                 </TabsContent>
 
                 <TabsContent value="qr">
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setStep("info")}
-                    className="mb-2"
-                  >
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    Back to details
-                  </Button>
-
                   <QRCodePaymentStep onSuccess={() => setStep("success")} />
                 </TabsContent>
               </Tabs>
@@ -711,16 +735,10 @@ const UnifiedCheckoutDialog = React.forwardRef<HTMLDivElement>(function UnifiedC
 
             {state.step === "success" && <SuccessStep onClose={handleClose} />}
           </div>
-
-          {state.step !== "success" && (
-            <div className="order-1 md:order-2 md:w-48 md:border-l md:pl-6">
-              <OrderSummary />
-            </div>
-          )}
-        </div>
-      </DialogContent>
-    </Dialog>
-  );
-});
+        </DialogContent>
+      </Dialog>
+    );
+  },
+);
 
 export default UnifiedCheckoutDialog;
