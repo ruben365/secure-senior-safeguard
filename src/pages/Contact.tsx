@@ -168,8 +168,9 @@ function Contact() {
   return (
     <PageTransition variant="fade">
       <SEO
-        title="Contact Us - Get Support & Answers"
-        description="Contact InVision Network for scam protection support. Phone, email, live chat available. Average 2-minute wait time. 95% same-day response rate."
+        title="Contact InVision Network — Kettering, Ohio"
+        description="Reach InVision Network for cybersecurity training or AI business solutions. Call (937) 301-8749, email us, or fill out our contact form. Serving Kettering, Dayton, and all of Southwest Ohio."
+        keywords="contact InVision Network, Kettering cybersecurity, AI protection Ohio, call InVision Network"
         breadcrumbs={[
           { name: "Home", url: "https://www.invisionnetwork.org/" },
           { name: "Contact", url: "https://www.invisionnetwork.org/contact" },

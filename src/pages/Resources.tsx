@@ -248,8 +248,13 @@ function Resources() {
   return (
     <PageTransition variant="fade">
       <SEO
-        title="Resources & Marketplace - Digital Guides & Security Products"
-        description="Browse our curated collection of scam prevention e-books and digital security guides. Everything you need to protect yourself and your loved ones."
+        title="Cybersecurity Resources & Scam Prevention Guides"
+        description="Practical scam prevention guides, digital security e-books, and emergency anti-scam scripts for Ohio families. Protect yourself and your loved ones from AI-powered threats."
+        keywords="scam prevention guides, AI security e-books, cybersecurity resources Ohio, deepfake information, senior scam prevention"
+        breadcrumbs={[
+          { name: "Home", url: "https://www.invisionnetwork.org/" },
+          { name: "Resources", url: "https://www.invisionnetwork.org/resources" },
+        ]}
         structuredData={resourceStructuredData} />
 
       <Navigation overlay />

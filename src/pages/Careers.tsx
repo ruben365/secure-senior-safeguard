@@ -121,8 +121,13 @@ function Careers() {
   return (
     <PageTransition variant="fade">
       <SEO
-        title="Careers - Join Our Mission"
-        description="Join InVision Network and help protect families from AI-powered scams. Remote-first culture, competitive benefits, meaningful work. Open positions in engineering, support, design, and more."
+        title="Careers at InVision Network — Kettering, Ohio"
+        description="Join InVision Network's team of cybersecurity professionals and AI specialists in Kettering, Ohio. Open positions for trainers, analysts, designers, and engineers. Remote-friendly."
+        keywords="cybersecurity careers Kettering Ohio, AI jobs Dayton, InVision Network hiring, security analyst positions"
+        breadcrumbs={[
+          { name: "Home", url: "https://www.invisionnetwork.org/" },
+          { name: "Careers", url: "https://www.invisionnetwork.org/careers" },
+        ]}
       />
       <Navigation overlay />
 

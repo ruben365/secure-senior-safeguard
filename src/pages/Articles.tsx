@@ -39,15 +39,19 @@ function Articles() {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Scam Prevention Articles & News"
-        description="Read practical guidance on scam prevention, AI threats, and digital safety. Updated articles and resources from InVision Network."
-        keywords="scam prevention articles, AI scam news, digital safety guides, cybersecurity tips"
+        title="Cybersecurity Articles & Scam Prevention News"
+        description="Read practical guides on AI scam prevention, phishing defense, and cybersecurity for seniors and families. Updated regularly by InVision Network's security analysts in Kettering, Ohio."
+        keywords="cybersecurity articles, AI scam news, phishing guides, deepfake detection tips, senior scam alerts Ohio"
+        breadcrumbs={[
+          { name: "Home", url: "https://www.invisionnetwork.org/" },
+          { name: "Articles", url: "https://www.invisionnetwork.org/articles" },
+        ]}
         structuredData={{
           "@context": "https://schema.org",
           "@type": "CollectionPage",
-          name: "Scam Prevention Articles & News",
+          name: "Cybersecurity Articles & Scam Prevention News",
           description:
-            "Practical guidance on scam prevention, AI threats, and digital safety.",
+            "Practical guides on scam prevention, AI threats, and digital safety from InVision Network.",
           url: "https://www.invisionnetwork.org/articles",
         }}
       />

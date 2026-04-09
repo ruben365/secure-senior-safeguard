@@ -565,9 +565,9 @@ function LearnAndTrain() {
     <PageTransition variant="fade">
       <div className="min-h-screen">
         <SEO
-          title="AI Scam Protection Training"
-          description="Comprehensive AI scam protection training for families and seniors. Learn to spot deepfakes, phishing, and AI-powered scams."
-          keywords="AI scam training, deepfake detection training, senior cybersecurity, phishing awareness"
+          title="AI Scam Protection Workshops for Seniors & Families — Kettering, Ohio"
+          description="Hands-on cybersecurity workshops for seniors and families in the Dayton area. Learn to spot deepfakes, voice cloning, phishing, and AI-powered scams. In-person and Zoom sessions. Starting at $89."
+          keywords="AI scam training Kettering Ohio, deepfake detection workshop, senior cybersecurity class, phishing awareness Dayton Ohio, family scam prevention"
           breadcrumbs={[
             { name: "Home", url: "https://www.invisionnetwork.org/" },
             { name: "Training", url: "https://www.invisionnetwork.org/training" },
@@ -577,9 +577,20 @@ function LearnAndTrain() {
             "@type": "EducationalOrganization",
             name: "InVision Network Training Academy",
             description:
-              "Comprehensive AI scam protection training for families, seniors, and businesses",
+              "AI scam protection training for seniors, families, and businesses in Southwest Ohio. In-person and virtual sessions.",
             url: "https://www.invisionnetwork.org/training",
             telephone: SITE.phone.e164,
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Kettering",
+              addressRegion: "OH",
+              addressCountry: "US",
+            },
+            areaServed: {
+              "@type": "GeoCircle",
+              geoMidpoint: { "@type": "GeoCoordinates", latitude: 39.6895, longitude: -84.1688 },
+              geoRadius: "80000",
+            },
           }}
         />
         <Navigation overlay />
