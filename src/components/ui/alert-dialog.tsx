@@ -41,7 +41,7 @@ const AlertDialogContent = React.forwardRef<
         // max-w-[420px] for confirmation boxes (slightly tighter than
         // Dialog's 440 since confirmations usually have less content).
         // Same layered shadow, rounded-2xl, backdrop blur, spacing.
-        "fixed left-[50%] top-[50%] z-50 grid w-[calc(100%-2rem)] sm:w-full max-w-[420px] translate-x-[-50%] translate-y-[-50%] gap-3 border border-border/50 bg-background/95 backdrop-blur-xl p-5 rounded-2xl shadow-[0_24px_64px_-20px_rgba(15,23,42,0.28),0_8px_24px_-8px_rgba(15,23,42,0.12),inset_0_1px_0_0_rgba(255,255,255,0.55)] duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
+        "fixed left-[50%] top-[50%] z-50 grid w-[calc(100%-2rem)] sm:w-full max-w-[340px] translate-x-[-50%] translate-y-[-50%] gap-2 border border-border/60 bg-background/97 backdrop-blur-2xl p-4 rounded-2xl shadow-[0_20px_60px_-20px_rgba(15,23,42,0.28),0_8px_20px_-8px_rgba(15,23,42,0.12),0_0_0_1px_rgba(255,255,255,0.04),inset_0_1px_0_0_rgba(255,255,255,0.6)] duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
         className,
       )}
       style={{

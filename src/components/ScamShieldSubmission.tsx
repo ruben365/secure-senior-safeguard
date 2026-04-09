@@ -247,7 +247,7 @@ export const ScamShieldSubmission = ({
         overflow-hidden + no max-h = no scrollbar. Teal+indigo accents
         replace heavy orange on the hero icon.
       */}
-      <DialogContent className="max-w-[calc(100vw-2rem)] sm:max-w-[620px] overflow-hidden rounded-2xl p-5 gap-0">
+      <DialogContent className="sm:max-w-[420px] overflow-hidden rounded-2xl p-4 gap-0">
         <DialogHeader className="space-y-0 pb-3">
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 bg-gradient-to-br from-teal-500/15 to-indigo-500/15 border border-teal-500/30 rounded-full flex items-center justify-center flex-shrink-0">

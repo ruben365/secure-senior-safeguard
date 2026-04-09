@@ -119,7 +119,7 @@ export function JobApplicationModal({ job, open, onOpenChange }: JobApplicationM
   return (
     <Dialog open={open} onOpenChange={handleClose}>
       {/* Compact: no scrollbar, teal accent on success icon */}
-      <DialogContent className="max-w-[calc(100vw-2rem)] sm:max-w-[520px] overflow-hidden rounded-2xl p-5 gap-0">
+      <DialogContent className="sm:max-w-[380px] overflow-hidden rounded-2xl p-4 gap-0">
         {submitted ? (
           <div className="py-4 text-center space-y-3">
             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-teal-500/15 to-indigo-500/15 border border-teal-500/30 flex items-center justify-center mx-auto">

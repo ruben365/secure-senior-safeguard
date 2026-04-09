@@ -18,6 +18,89 @@ html {
   scroll-padding-top: 80px;
 }
 
+/* ═══════════════════════════════════════════════════════════════════
+   COMPACT MODAL SYSTEM — scoped overrides inside dialogs/sheets/popovers
+   Site CTAs/forms stay bold on marketing pages, but inside modals
+   everything tightens to a dense, professional small-to-medium scale.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Scope: any Radix dialog/alert-dialog/sheet content (all use role="dialog") */
+[role="dialog"] input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+[role="alertdialog"] input:not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
+  height: 2.25rem !important;       /* 36px */
+  padding-top: 0.375rem !important;
+  padding-bottom: 0.375rem !important;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+  border-radius: 0.5rem !important; /* rounded-lg */
+  font-size: 0.8125rem !important;  /* 13px */
+}
+
+[role="dialog"] textarea,
+[role="alertdialog"] textarea {
+  min-height: 4.5rem !important;    /* 72px, down from 120 */
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 0.5rem !important;
+  font-size: 0.8125rem !important;
+}
+
+[role="dialog"] label,
+[role="alertdialog"] label {
+  font-size: 0.75rem !important;    /* 12px */
+  font-weight: 500 !important;
+  margin-bottom: 0.25rem !important;
+}
+
+/* Compact the oversized Button variants inside dialogs only */
+[role="dialog"] button.h-\[52px\],
+[role="dialog"] button.h-\[44px\],
+[role="dialog"] button.h-\[56px\],
+[role="dialog"] button.h-\[50px\],
+[role="alertdialog"] button.h-\[52px\],
+[role="alertdialog"] button.h-\[44px\] {
+  height: 2.25rem !important;       /* 36px */
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  font-size: 0.8125rem !important;
+}
+
+/* The icon variant (52×52) becomes 36×36 */
+[role="dialog"] button.w-\[52px\].h-\[52px\],
+[role="alertdialog"] button.w-\[52px\].h-\[52px\] {
+  width: 2.25rem !important;
+  height: 2.25rem !important;
+}
+
+/* Select triggers — shadcn uses h-10 by default but often gets bigger from variants */
+[role="dialog"] [role="combobox"],
+[role="alertdialog"] [role="combobox"] {
+  height: 2.25rem !important;
+  font-size: 0.8125rem !important;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+}
+
+/* Checkbox/radio inside dialogs — keep them a touch smaller */
+[role="dialog"] [role="checkbox"],
+[role="dialog"] [role="radio"] {
+  width: 1rem !important;
+  height: 1rem !important;
+}
+
+/* Reduce large avatar / icon bubbles often used in dialog headers */
+[role="dialog"] .w-20.h-20,
+[role="dialog"] .w-16.h-16 {
+  width: 3rem !important;
+  height: 3rem !important;
+}
+
+/* Cap dialog height and make internal content scrollable so no modal
+   ever exceeds 85% of the viewport */
+[role="dialog"][data-state="open"] {
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
 /* ── Scroll-reveal system ─────────────────────────────────────
    HomeStorySections.css already defines [data-reveal] rules.
    We only add .reveal-on-scroll as a separate class for new components. */

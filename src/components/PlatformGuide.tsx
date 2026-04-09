@@ -212,7 +212,7 @@ export const PlatformGuide = ({ triggerButton }: PlatformGuideProps) => {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>{triggerButton || defaultTrigger}</DialogTrigger>
       {/* Compact: no scrollbar, teal icon accent, tight padding */}
-      <DialogContent className="max-w-[calc(100vw-2rem)] sm:max-w-[640px] overflow-hidden rounded-2xl p-5 gap-0">
+      <DialogContent className="sm:max-w-[420px] overflow-hidden rounded-2xl p-4 gap-0">
         <DialogHeader className="space-y-0 pb-3">
           <DialogTitle className="flex items-center gap-2 text-base font-semibold leading-tight">
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-teal-500/15 to-indigo-500/15 border border-teal-500/30 flex items-center justify-center">

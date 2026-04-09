@@ -623,7 +623,7 @@ const UnifiedCheckoutDialog = React.forwardRef<HTMLDivElement>(function UnifiedC
 
   return (
     <Dialog open={state.isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[440px] p-4 gap-2.5">
+      <DialogContent className="sm:max-w-[360px] p-4 gap-2">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             {state.step === "success" ? (
@@ -635,7 +635,7 @@ const UnifiedCheckoutDialog = React.forwardRef<HTMLDivElement>(function UnifiedC
           </DialogTitle>
         </DialogHeader>
 
-        <div className="grid gap-6 md:grid-cols-[1fr,auto]">
+        <div className="grid gap-3">
           <div className="order-2 md:order-1">
             {state.step === "info" && <CustomerInfoStep onNext={() => {}} />}
 

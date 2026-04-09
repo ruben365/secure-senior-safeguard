@@ -183,13 +183,13 @@ function SmartPaymentForm({ items, onSuccess, onClose }: PaymentFormProps) {
   const isDigital = items.some((item) => item.isDigital);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3.5">
       {/* Progress Steps */}
-      <div className="flex items-center justify-center gap-2 mb-6">
+      <div className="flex items-center justify-center gap-1.5 mb-1">
         {["info", "payment", "success"].map((s, i) => (
-          <div key={s} className="flex items-center gap-2">
+          <div key={s} className="flex items-center gap-1.5">
             <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ${
+              className={`w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold transition-all ${
                 step === s
                   ? "bg-primary text-primary-foreground"
                   : ["info", "payment", "success"].indexOf(step) > i
@@ -198,14 +198,14 @@ function SmartPaymentForm({ items, onSuccess, onClose }: PaymentFormProps) {
               }`}
             >
               {["info", "payment", "success"].indexOf(step) > i ? (
-                <CheckCircle className="w-4 h-4" />
+                <CheckCircle className="w-3 h-3" />
               ) : (
                 i + 1
               )}
             </div>
             {i < 2 && (
               <div
-                className={`w-12 h-1 rounded ${
+                className={`w-8 h-0.5 rounded ${
                   ["info", "payment", "success"].indexOf(step) > i
                     ? "bg-primary"
                     : "bg-muted"
@@ -224,40 +224,40 @@ function SmartPaymentForm({ items, onSuccess, onClose }: PaymentFormProps) {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            className="space-y-4"
+            className="space-y-3"
           >
             {/* Order Summary */}
-            <div className="bg-muted/50 rounded-xl p-4 border">
-              <h4 className="font-semibold mb-3">Order Summary</h4>
-              <div className="space-y-2 mb-3">
+            <div className="bg-muted/50 rounded-lg p-3 border">
+              <h4 className="font-semibold text-xs mb-2 text-muted-foreground uppercase tracking-wide">Order Summary</h4>
+              <div className="space-y-1 mb-2">
                 {items.map((item) => (
-                  <div key={item.id} className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">
+                  <div key={item.id} className="flex justify-between text-xs">
+                    <span className="text-muted-foreground truncate pr-2">
                       {item.name}{" "}
                       {item.quantity &&
                         item.quantity > 1 &&
                         `× ${item.quantity}`}
                     </span>
-                    <span className="font-medium">
+                    <span className="font-medium flex-shrink-0">
                       ${(item.price * (item.quantity || 1)).toFixed(2)}
                     </span>
                   </div>
                 ))}
               </div>
               {isVeteran && veteranDiscount > 0 && (
-                <div className="flex justify-between text-sm text-green-600 border-t pt-2">
+                <div className="flex justify-between text-xs text-green-600 border-t pt-1.5">
                   <span>Veteran Discount (10%)</span>
                   <span>-${veteranDiscount.toFixed(2)}</span>
                 </div>
               )}
-              <div className="flex justify-between font-bold text-lg mt-2 pt-2 border-t">
+              <div className="flex justify-between font-bold text-sm mt-1.5 pt-1.5 border-t">
                 <span>Total</span>
                 <span className="text-primary">${finalAmount.toFixed(2)}</span>
               </div>
             </div>
 
             {/* Form Fields */}
-            <div className="space-y-4">
+            <div className="space-y-2.5">
               <div>
                 <Label htmlFor="email">Email Address *</Label>
                 <Input
@@ -349,15 +349,15 @@ function SmartPaymentForm({ items, onSuccess, onClose }: PaymentFormProps) {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            className="space-y-4"
+            className="space-y-3"
           >
             {/* Order Summary */}
-            <div className="bg-muted/50 rounded-xl p-4 border">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-muted-foreground">
-                  Order Total:
+            <div className="bg-muted/50 rounded-lg px-3 py-2 border">
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-muted-foreground">
+                  Order Total
                 </span>
-                <span className="text-xl font-bold text-primary">
+                <span className="text-base font-bold text-primary">
                   ${finalAmount.toFixed(2)}
                 </span>
               </div>
@@ -370,7 +370,7 @@ function SmartPaymentForm({ items, onSuccess, onClose }: PaymentFormProps) {
             </div>
 
             {/* Stripe Payment Element */}
-            <div className="bg-background rounded-xl p-4 border">
+            <div className="bg-background rounded-lg p-3 border">
               {stripeLoading ? (
                 <div className="flex items-center justify-center py-8">
                   <Loader2 className="w-6 h-6 animate-spin text-primary" />
@@ -422,7 +422,7 @@ function SmartPaymentForm({ items, onSuccess, onClose }: PaymentFormProps) {
             </div>
 
             {/* Trust Indicators */}
-            <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground">
+            <div className="flex items-center justify-center gap-3 text-[11px] text-muted-foreground">
               <div className="flex items-center gap-1">
                 <Lock className="w-3 h-3" />
                 <span>Secure Payment</span>
@@ -441,20 +441,20 @@ function SmartPaymentForm({ items, onSuccess, onClose }: PaymentFormProps) {
             key="success"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="text-center py-8"
+            className="text-center py-4"
           >
-            <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-14 h-14 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring" }}
               >
-                <CheckCircle className="w-10 h-10 text-green-500" />
+                <CheckCircle className="w-7 h-7 text-green-500" />
               </motion.div>
             </div>
 
-            <h3 className="text-2xl font-bold mb-2">Payment Successful!</h3>
-            <p className="text-muted-foreground mb-6">
+            <h3 className="text-lg font-bold mb-1">Payment Successful!</h3>
+            <p className="text-xs text-muted-foreground mb-4">
               Thank you for your purchase!
               <br />A confirmation email has been sent to {email}.
             </p>
@@ -638,7 +638,7 @@ export function SmartPaymentDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-[calc(100vw-2rem)] sm:max-w-[440px] overflow-hidden rounded-xl p-4 gap-0">
+      <DialogContent className="sm:max-w-[360px] overflow-hidden p-4 gap-2">
         <DialogHeader className="space-y-0 pb-2.5">
           <DialogTitle className="flex items-center gap-2.5">
             <div className="w-8 h-8 bg-[#d96c4a]/12 rounded-full flex items-center justify-center flex-shrink-0">

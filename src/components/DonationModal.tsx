@@ -217,7 +217,7 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
           tight header, lower textarea, squeezed total bar, single-line
           trust footer.
       */}
-      <DialogContent className="max-w-[calc(100vw-2rem)] sm:max-w-[540px] overflow-hidden rounded-2xl p-5 gap-0">
+      <DialogContent className="sm:max-w-[380px] overflow-hidden rounded-2xl p-4 gap-0">
         {/* Header — very tight */}
         <DialogHeader className="space-y-0 pb-3">
           <DialogTitle className="flex items-center gap-2.5">

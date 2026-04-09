@@ -209,7 +209,6 @@ const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
       </div>
       <div className="w-full h-10 flex items-center justify-center gap-0.5 px-4">
         {bars.map((bar, i) => (
-          // eslint-disable-next-line react/forbid-dom-props
           <div
             key={i}
             className="pib-recorder-bar w-0.5 rounded-full animate-pulse"
@@ -385,7 +384,7 @@ const PromptInputTextarea: React.FC<
   );
 };
 
-interface PromptInputActionsProps extends React.HTMLAttributes<HTMLDivElement> {}
+type PromptInputActionsProps = React.HTMLAttributes<HTMLDivElement>;
 const PromptInputActions: React.FC<PromptInputActionsProps> = ({
   children,
   className,

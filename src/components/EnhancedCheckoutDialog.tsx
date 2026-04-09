@@ -607,7 +607,7 @@ export function EnhancedCheckoutDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-[calc(100vw-2rem)] sm:max-w-[580px] overflow-hidden p-0 gap-0 rounded-2xl">
+      <DialogContent className="sm:max-w-[400px] overflow-hidden p-0 gap-0 rounded-2xl">
         {/* Header — coral-tinted, compact */}
         <div className="bg-gradient-to-r from-[#d96c4a]/8 via-[#fbab8e]/8 to-[#d96c4a]/8 px-4 py-2.5 border-b border-[#d96c4a]/15">
           <DialogHeader className="space-y-0">

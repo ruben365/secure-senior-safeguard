@@ -342,8 +342,8 @@ export const TestimonialCarousel = () => {
                   "group relative rounded-xl p-3 md:p-3.5",
                   "bg-white/85 backdrop-blur-md border border-[#1E293B]/8",
                   "shadow-[0_6px_18px_-10px_rgba(15,23,42,0.15)]",
-                  "transition-all duration-[600ms]",
-                  "ease-[cubic-bezier(0.22,1,0.36,1)]",
+                  "transition-all [transition-duration:600ms]",
+                  "[transition-timing-function:cubic-bezier(0.22,1,0.36,1)]",
                   // Smart appear/disappear: when any card is hovered,
                   // unhovered cards dim + shrink and slightly recede,
                   // hovered card floats forward with a warm glow.
@@ -360,7 +360,7 @@ export const TestimonialCarousel = () => {
                   className={[
                     "absolute -top-2 -left-2 w-7 h-7 rounded-lg bg-gradient-to-br from-[#d96c4a] to-[#b8552f]",
                     "flex items-center justify-center shadow-[0_4px_12px_-4px_rgba(217,108,74,0.5)] border border-white/30",
-                    "transition-all duration-[600ms] ease-out",
+                    "transition-all [transition-duration:600ms] ease-out",
                     isHovered ? "rotate-[-8deg] scale-110" : "rotate-0 scale-100",
                   ].join(" ")}
                 >
@@ -409,7 +409,7 @@ export const TestimonialCarousel = () => {
                     "absolute top-2 right-2 inline-flex items-center px-1.5 py-px rounded-full",
                     "text-[8px] font-bold uppercase tracking-wider whitespace-nowrap",
                     "bg-[#d96c4a]/12 text-[#d96c4a] border border-[#d96c4a]/25",
-                    "transition-all duration-[600ms] ease-out",
+                    "transition-all [transition-duration:600ms] ease-out",
                     isHovered ? "opacity-100 translate-y-0" : "opacity-60 translate-y-0.5",
                   ].join(" ")}
                 >

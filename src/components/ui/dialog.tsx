@@ -56,7 +56,10 @@ const DialogContent = React.forwardRef<
         //   • rounded-2xl corners across the site
         //   • smooth 200ms zoom/fade
         // Per-dialog classes can still override max-w/p/gap when truly needed
-        "fixed left-[50%] top-[50%] z-50 grid w-[calc(100%-2rem)] sm:w-full max-w-[400px] translate-x-[-50%] translate-y-[-50%] gap-2.5 border border-border/50 bg-background/95 backdrop-blur-xl p-4 sm:p-5 rounded-xl shadow-[0_16px_48px_-16px_rgba(15,23,42,0.22),0_6px_16px_-6px_rgba(15,23,42,0.10),inset_0_1px_0_0_rgba(255,255,255,0.5)] duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
+        // Unified compact modal system — small-to-medium default (400px),
+        // tight padding (p-4 sm:p-5), refined layered shadow with subtle
+        // inner highlight, rounded-2xl corners, and smooth 200ms zoom/fade.
+        "fixed left-[50%] top-[50%] z-50 grid w-[calc(100%-2rem)] sm:w-full max-w-[360px] translate-x-[-50%] translate-y-[-50%] gap-2 border border-border/60 bg-background/97 backdrop-blur-2xl p-4 rounded-2xl shadow-[0_20px_60px_-20px_rgba(15,23,42,0.28),0_8px_20px_-8px_rgba(15,23,42,0.12),0_0_0_1px_rgba(255,255,255,0.04),inset_0_1px_0_0_rgba(255,255,255,0.6)] duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
         className,
       )}
       style={{
@@ -111,7 +114,7 @@ const DialogTitle = React.forwardRef<
     ref={ref}
     className={cn(
       // Compact default title — 16px/leading-tight matches the small-to-medium modal scale.
-      "text-[15.5px] font-semibold leading-tight tracking-tight",
+      "text-base font-semibold leading-tight tracking-tight",
       className,
     )}
     {...props}
@@ -125,7 +128,7 @@ const DialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn("text-[12.5px] text-muted-foreground leading-snug", className)}
+    className={cn("text-[13px] text-muted-foreground leading-snug", className)}
     {...props}
   />
 ));

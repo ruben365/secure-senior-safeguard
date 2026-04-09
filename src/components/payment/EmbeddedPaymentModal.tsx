@@ -179,13 +179,13 @@ function PaymentForm({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3.5">
       {/* Progress Steps */}
-      <div className="flex items-center justify-center gap-2 mb-6">
+      <div className="flex items-center justify-center gap-1.5 mb-1">
         {["info", "payment", "success"].map((s, i) => (
           <div key={s} className="flex items-center gap-2">
             <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ${
+              className={`w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold transition-all ${
                 step === s
                   ? "bg-primary text-primary-foreground"
                   : ["info", "payment", "success"].indexOf(step) > i
@@ -194,14 +194,14 @@ function PaymentForm({
               }`}
             >
               {["info", "payment", "success"].indexOf(step) > i ? (
-                <CheckCircle className="w-4 h-4" />
+                <CheckCircle className="w-3 h-3" />
               ) : (
                 i + 1
               )}
             </div>
             {i < 2 && (
               <div
-                className={`w-12 h-1 rounded ${
+                className={`w-8 h-0.5 rounded ${
                   ["info", "payment", "success"].indexOf(step) > i
                     ? "bg-primary"
                     : "bg-muted"
@@ -220,21 +220,21 @@ function PaymentForm({
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            className="space-y-4"
+            className="space-y-3"
           >
             {/* Product Summary */}
-            <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl p-4 border border-primary/20">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="font-bold text-lg">{productName}</h3>
+            <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg p-3 border border-primary/20">
+              <div className="flex items-center justify-between gap-3">
+                <div className="min-w-0">
+                  <h3 className="font-semibold text-sm truncate">{productName}</h3>
                   {description && (
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-xs text-muted-foreground line-clamp-1">
                       {description}
                     </p>
                   )}
                 </div>
-                <div className="text-right">
-                  <div className="text-2xl font-bold text-primary">
+                <div className="text-right flex-shrink-0">
+                  <div className="text-lg font-bold text-primary">
                     ${(finalAmount / 100).toFixed(2)}
                   </div>
                   {mode === "subscription" && (
@@ -267,7 +267,7 @@ function PaymentForm({
             )}
 
             {/* Form Fields */}
-            <div className="space-y-4">
+            <div className="space-y-2.5">
               <div>
                 <Label htmlFor="email">Email Address</Label>
                 <Input
@@ -366,15 +366,15 @@ function PaymentForm({
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            className="space-y-4"
+            className="space-y-3"
           >
             {/* Order Summary */}
-            <div className="bg-muted/50 rounded-xl p-4 border">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-muted-foreground">
-                  Order Total:
+            <div className="bg-muted/50 rounded-lg px-3 py-2 border">
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-muted-foreground">
+                  Order Total
                 </span>
-                <span className="text-xl font-bold text-primary">
+                <span className="text-base font-bold text-primary">
                   ${(finalAmount / 100).toFixed(2)}
                   {mode === "subscription" && (
                     <span className="text-sm font-normal">/mo</span>
@@ -391,7 +391,7 @@ function PaymentForm({
 
             {/* Payment Method Tabs */}
             <Tabs defaultValue="card" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 mb-4">
+              <TabsList className="grid w-full grid-cols-2 mb-2 h-9">
                 <TabsTrigger value="card" className="flex items-center gap-2">
                   <CreditCard className="w-4 h-4" />
                   Card
@@ -404,7 +404,7 @@ function PaymentForm({
 
               {/* Card Payment Tab */}
               <TabsContent value="card" className="mt-0">
-                <div className="bg-background rounded-xl p-4 border">
+                <div className="bg-background rounded-lg p-3 border">
                   {stripeLoading ? (
                     <div className="flex items-center justify-center py-8">
                       <Loader2 className="w-6 h-6 animate-spin text-primary" />
@@ -459,7 +459,7 @@ function PaymentForm({
 
               {/* QR Code Payment Tab */}
               <TabsContent value="qr" className="mt-0">
-                <div className="bg-background rounded-xl p-4 border">
+                <div className="bg-background rounded-lg p-3 border">
                   <QRCodePaymentSection
                     amount={finalAmount}
                     productName={productName}
@@ -473,7 +473,7 @@ function PaymentForm({
             </Tabs>
 
             {/* Trust Indicators */}
-            <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground">
+            <div className="flex items-center justify-center gap-3 text-[11px] text-muted-foreground">
               <div className="flex items-center gap-1">
                 <Lock className="w-3 h-3" />
                 <span>Secure Payment</span>
@@ -492,28 +492,28 @@ function PaymentForm({
             key="success"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="text-center py-8"
+            className="text-center py-4"
           >
-            <div className="w-20 h-20 bg-success/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-14 h-14 bg-success/20 rounded-full flex items-center justify-center mx-auto mb-3">
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring" }}
               >
-                <CheckCircle className="w-10 h-10 text-success" />
+                <CheckCircle className="w-7 h-7 text-success" />
               </motion.div>
             </div>
 
-            <h3 className="text-2xl font-bold mb-2">Payment Successful!</h3>
-            <p className="text-muted-foreground mb-6">
+            <h3 className="text-lg font-bold mb-1">Payment Successful!</h3>
+            <p className="text-xs text-muted-foreground mb-3">
               Thank you for your{" "}
               {mode === "subscription" ? "subscription" : "purchase"}!
               <br />A confirmation email has been sent to {email}.
             </p>
 
-            <div className="space-y-3">
-              <div className="bg-success/10 text-success p-4 rounded-xl text-sm">
-                <Sparkles className="w-5 h-5 mx-auto mb-2" />
+            <div className="space-y-2">
+              <div className="bg-success/10 text-success p-2.5 rounded-lg text-xs">
+                <Sparkles className="w-4 h-4 mx-auto mb-1" />
                 <p className="font-medium">
                   You now have access to {productName}
                 </p>
@@ -665,7 +665,7 @@ export function EmbeddedPaymentModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-[calc(100vw-2rem)] sm:max-w-[440px] overflow-hidden rounded-xl p-4 gap-0">
+      <DialogContent className="sm:max-w-[360px] overflow-hidden p-4 gap-2">
         <DialogHeader className="space-y-0 pb-2.5">
           <DialogTitle className="flex items-center gap-2.5">
             <div className="w-8 h-8 bg-[#d96c4a]/12 rounded-full flex items-center justify-center flex-shrink-0">
