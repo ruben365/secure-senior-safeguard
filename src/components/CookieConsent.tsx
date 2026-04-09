@@ -1,7 +1,6 @@
 import { useState, useEffect, forwardRef } from "react";
-import { X, Settings } from "lucide-react";
+import { X, Settings, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import {
@@ -22,230 +21,290 @@ interface CookiePreferences {
 const COOKIE_CONSENT_KEY = "invision-cookie-consent";
 const COOKIE_PREFERENCES_KEY = "invision-cookie-preferences";
 const PAGE_VISIT_COUNT_KEY = "invision-page-visit-count";
-const VISIT_THRESHOLD = 1; // Show banner on first visit
+const VISIT_THRESHOLD = 1;
 
-export const CookieConsent = forwardRef<HTMLDivElement>(function CookieConsent(_props, _ref) {
-  const [showBanner, setShowBanner] = useState(false);
-  const [showSettings, setShowSettings] = useState(false);
-  const [preferences, setPreferences] = useState<CookiePreferences>({
-    essential: true,
-    analytics: false,
-    marketing: false,
-  });
-
-  useEffect(() => {
-    const consent = localStorage.getItem(COOKIE_CONSENT_KEY);
-
-    if (!consent) {
-      // Track page visits and only show after threshold
-      const visitCount =
-        parseInt(localStorage.getItem(PAGE_VISIT_COUNT_KEY) || "0", 10) + 1;
-      localStorage.setItem(PAGE_VISIT_COUNT_KEY, visitCount.toString());
-
-      if (visitCount >= VISIT_THRESHOLD) {
-        // Delay banner until after LCP to avoid layout shift during measurement
-        const timer = setTimeout(() => setShowBanner(true), 3500);
-        return () => clearTimeout(timer);
-      }
-    } else {
-      const saved = localStorage.getItem(COOKIE_PREFERENCES_KEY);
-      if (saved) {
-        const prefs = JSON.parse(saved);
-        setPreferences(prefs);
-        applyPreferences(prefs);
-      }
-    }
-  }, []);
-
-  const acceptAll = () => {
-    const allPreferences = {
-      essential: true,
-      analytics: true,
-      marketing: true,
-    };
-    savePreferences(allPreferences);
-    setShowBanner(false);
-  };
-
-  const acceptEssential = () => {
-    const essentialOnly = {
+export const CookieConsent = forwardRef<HTMLDivElement>(
+  function CookieConsent(_props, _ref) {
+    const [showBanner, setShowBanner] = useState(false);
+    const [showSettings, setShowSettings] = useState(false);
+    const [preferences, setPreferences] = useState<CookiePreferences>({
       essential: true,
       analytics: false,
       marketing: false,
+    });
+
+    useEffect(() => {
+      const consent = localStorage.getItem(COOKIE_CONSENT_KEY);
+      if (!consent) {
+        const visitCount =
+          parseInt(localStorage.getItem(PAGE_VISIT_COUNT_KEY) || "0", 10) + 1;
+        localStorage.setItem(PAGE_VISIT_COUNT_KEY, visitCount.toString());
+        if (visitCount >= VISIT_THRESHOLD) {
+          const timer = setTimeout(() => setShowBanner(true), 3500);
+          return () => clearTimeout(timer);
+        }
+      } else {
+        const saved = localStorage.getItem(COOKIE_PREFERENCES_KEY);
+        if (saved) {
+          const prefs = JSON.parse(saved);
+          setPreferences(prefs);
+          applyPreferences(prefs);
+        }
+      }
+    }, []);
+
+    const acceptAll = () => {
+      savePreferences({ essential: true, analytics: true, marketing: true });
+      setShowBanner(false);
     };
-    savePreferences(essentialOnly);
-    setShowBanner(false);
-  };
 
-  const savePreferences = (prefs: CookiePreferences) => {
-    localStorage.setItem(COOKIE_CONSENT_KEY, "true");
-    localStorage.setItem(COOKIE_PREFERENCES_KEY, JSON.stringify(prefs));
-    setPreferences(prefs);
-    applyPreferences(prefs);
-    window.dispatchEvent(new Event("cookie-consent-updated"));
-  };
+    const acceptEssential = () => {
+      savePreferences({ essential: true, analytics: false, marketing: false });
+      setShowBanner(false);
+    };
 
-  const applyPreferences = (prefs: CookiePreferences) => {
-    // Enable/disable analytics tracking
-    if (prefs.analytics) {
-      // Enable Google Analytics if configured
+    const savePreferences = (prefs: CookiePreferences) => {
+      localStorage.setItem(COOKIE_CONSENT_KEY, "true");
+      localStorage.setItem(COOKIE_PREFERENCES_KEY, JSON.stringify(prefs));
+      setPreferences(prefs);
+      applyPreferences(prefs);
+      window.dispatchEvent(new Event("cookie-consent-updated"));
+    };
+
+    const applyPreferences = (prefs: CookiePreferences) => {
       if (window.gtag) {
         window.gtag("consent", "update", {
-          analytics_storage: "granted",
+          analytics_storage: prefs.analytics ? "granted" : "denied",
+          ad_storage: prefs.marketing ? "granted" : "denied",
+          ad_user_data: prefs.marketing ? "granted" : "denied",
+          ad_personalization: prefs.marketing ? "granted" : "denied",
         });
       }
-    } else {
-      if (window.gtag) {
-        window.gtag("consent", "update", {
-          analytics_storage: "denied",
-        });
-      }
-    }
+    };
 
-    // Enable/disable marketing cookies
-    if (prefs.marketing) {
-      if (window.gtag) {
-        window.gtag("consent", "update", {
-          ad_storage: "granted",
-          ad_user_data: "granted",
-          ad_personalization: "granted",
-        });
-      }
-    } else {
-      if (window.gtag) {
-        window.gtag("consent", "update", {
-          ad_storage: "denied",
-          ad_user_data: "denied",
-          ad_personalization: "denied",
-        });
-      }
-    }
-  };
+    const handleSaveSettings = () => {
+      savePreferences(preferences);
+      setShowSettings(false);
+      setShowBanner(false);
+    };
 
-  const handleSaveSettings = () => {
-    savePreferences(preferences);
-    setShowSettings(false);
-    setShowBanner(false);
-  };
+    if (!showBanner) return null;
 
-  if (!showBanner) return null;
-
-  return (
-    <>
-      <div className="cookie-banner fixed bottom-4 left-4 right-4 sm:bottom-6 sm:left-auto sm:right-6 z-50">
-        <div className="cookie-banner__card sm:w-[360px] rounded-xl overflow-hidden">
-          <div className="p-4">
-            {/* Header row */}
-            <div className="flex items-center justify-between mb-2">
-              <h3 className="text-sm font-bold text-white">We Value Your Privacy</h3>
+    return (
+      <>
+        {/* ── Premium cookie consent card ─────────────────────────── */}
+        <div
+          className="fixed bottom-4 left-1/2 -translate-x-1/2 z-[9999] w-[92%] max-w-[420px] sm:max-w-[420px]"
+          style={{
+            animation: "cookie-slide-up 300ms ease-out both",
+            animationDelay: "100ms",
+          }}
+        >
+          {/* Animated border wrapper */}
+          <div className="cookie-glow-border relative isolate rounded-[14px]">
+            {/* Card content */}
+            <div
+              className="relative rounded-[14px] p-5"
+              style={{
+                background: "rgba(18, 14, 12, 0.92)",
+                backdropFilter: "blur(20px) saturate(1.3)",
+                WebkitBackdropFilter: "blur(20px) saturate(1.3)",
+              }}
+            >
+              {/* Close */}
               <button
                 type="button"
                 onClick={acceptEssential}
-                className="p-1 text-white/40 hover:text-white rounded transition-colors"
+                className="absolute right-3 top-3 w-7 h-7 flex items-center justify-center rounded-full text-[hsl(30_15%_72%)] hover:text-white transition-colors"
                 aria-label="Close cookie banner"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
-            </div>
 
-            {/* Description */}
-            <p className="text-xs text-white/55 leading-relaxed mb-3">
-              We use cookies to improve your experience, analyze site traffic,
-              and provide personalized content.
-            </p>
+              {/* Header */}
+              <div className="flex items-center gap-2 mb-2">
+                <Shield
+                  className="w-5 h-5 flex-shrink-0"
+                  style={{ color: "hsl(30, 15%, 72%)" }}
+                  strokeWidth={2}
+                />
+                <h3 className="text-[14px] font-semibold text-white">
+                  Cookie Preferences
+                </h3>
+              </div>
 
-            {/* Buttons */}
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={acceptAll}
-                className="h-8 px-4 text-xs font-semibold text-white rounded-lg transition-all duration-200 hover:brightness-110"
-                style={{ background: 'var(--ws-blue, #3067e8)' }}
+              {/* Description */}
+              <p
+                className="text-[12px] leading-[1.5] mb-4 pr-6"
+                style={{ color: "hsl(30, 15%, 85%)" }}
               >
-                Accept All
-              </button>
-              <button
-                type="button"
-                onClick={acceptEssential}
-                className="h-8 px-4 text-xs font-semibold text-white/70 rounded-lg border border-white/15 hover:border-white/30 hover:text-white transition-all duration-200"
-                style={{ background: 'rgba(255,255,255,0.05)' }}
-              >
-                Essential Only
-              </button>
-              <button
-                type="button"
-                onClick={() => setShowSettings(true)}
-                className="h-8 w-8 flex items-center justify-center text-white/40 rounded-lg border border-white/10 hover:border-white/25 hover:text-white transition-all duration-200 ml-auto"
-                style={{ background: 'rgba(255,255,255,0.04)' }}
-                aria-label="Cookie settings"
-              >
-                <Settings className="w-3.5 h-3.5" />
-              </button>
+                We use cookies to improve your experience and analyze site
+                traffic. Essential cookies are always active.
+              </p>
+
+              {/* Buttons */}
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={acceptAll}
+                  className="h-[32px] px-4 text-[12px] font-semibold text-white rounded-lg transition-all duration-200 hover:-translate-y-[1px]"
+                  style={{
+                    background: "linear-gradient(135deg, #ea580c, #c2410c)",
+                  }}
+                >
+                  Accept All
+                </button>
+                <button
+                  type="button"
+                  onClick={acceptEssential}
+                  className="h-[32px] px-4 text-[12px] font-medium rounded-lg transition-all duration-200"
+                  style={{
+                    color: "hsl(30, 15%, 85%)",
+                    border: "1px solid hsl(30 15% 72% / 0.25)",
+                    background: "transparent",
+                  }}
+                >
+                  Essential Only
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowSettings(true)}
+                  className="h-[32px] w-[32px] flex items-center justify-center rounded-lg transition-all duration-200 ml-auto"
+                  style={{
+                    color: "hsl(30, 15%, 72%)",
+                    border: "1px solid hsl(30 15% 72% / 0.15)",
+                    background: "transparent",
+                  }}
+                  aria-label="Cookie settings"
+                >
+                  <Settings className="w-3.5 h-3.5" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <Dialog open={showSettings} onOpenChange={setShowSettings}>
-        <DialogContent className="sm:max-w-md rounded-2xl">
-          <DialogHeader>
-            <DialogTitle>Cookie Preferences</DialogTitle>
-            <DialogDescription>
-              Essential cookies are required for the site to function.
-            </DialogDescription>
-          </DialogHeader>
+        {/* ── Settings dialog (uses redesigned glass dialog) ─────── */}
+        <Dialog open={showSettings} onOpenChange={setShowSettings}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Cookie Preferences</DialogTitle>
+              <DialogDescription>
+                Essential cookies are required for the site to function.
+              </DialogDescription>
+            </DialogHeader>
 
-          <div className="space-y-5 py-3">
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex-1">
-                <Label htmlFor="essential" className="text-sm font-semibold">Essential</Label>
-                <p className="text-xs text-muted-foreground">Required. Cannot be disabled.</p>
+            <div className="space-y-4 py-2">
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex-1">
+                  <Label htmlFor="essential" className="text-[12px] font-semibold text-white">
+                    Essential
+                  </Label>
+                  <p className="text-[11px]" style={{ color: "hsl(30, 15%, 72%)" }}>
+                    Required. Cannot be disabled.
+                  </p>
+                </div>
+                <Switch id="essential" checked disabled />
               </div>
-              <Switch id="essential" checked={true} disabled />
+
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex-1">
+                  <Label htmlFor="analytics" className="text-[12px] font-semibold text-white">
+                    Analytics
+                  </Label>
+                  <p className="text-[11px]" style={{ color: "hsl(30, 15%, 72%)" }}>
+                    Helps us understand site usage.
+                  </p>
+                </div>
+                <Switch
+                  id="analytics"
+                  checked={preferences.analytics}
+                  onCheckedChange={(checked) =>
+                    setPreferences({ ...preferences, analytics: checked })
+                  }
+                />
+              </div>
+
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex-1">
+                  <Label htmlFor="marketing" className="text-[12px] font-semibold text-white">
+                    Marketing
+                  </Label>
+                  <p className="text-[11px]" style={{ color: "hsl(30, 15%, 72%)" }}>
+                    Personalized advertisements.
+                  </p>
+                </div>
+                <Switch
+                  id="marketing"
+                  checked={preferences.marketing}
+                  onCheckedChange={(checked) =>
+                    setPreferences({ ...preferences, marketing: checked })
+                  }
+                />
+              </div>
             </div>
 
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex-1">
-                <Label htmlFor="analytics" className="text-sm font-semibold">Analytics</Label>
-                <p className="text-xs text-muted-foreground">Helps us understand site usage.</p>
-              </div>
-              <Switch
-                id="analytics"
-                checked={preferences.analytics}
-                onCheckedChange={(checked) =>
-                  setPreferences({ ...preferences, analytics: checked })
-                }
-              />
-            </div>
+            <DialogFooter>
+              <Button onClick={handleSaveSettings} size="sm">
+                Save Preferences
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
 
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex-1">
-                <Label htmlFor="marketing" className="text-sm font-semibold">Marketing</Label>
-                <p className="text-xs text-muted-foreground">Personalized advertisements.</p>
-              </div>
-              <Switch
-                id="marketing"
-                checked={preferences.marketing}
-                onCheckedChange={(checked) =>
-                  setPreferences({ ...preferences, marketing: checked })
-                }
-              />
-            </div>
-          </div>
+        {/* ── Inline styles for animations ───────────────────────── */}
+        <style>{`
+          @keyframes cookie-slide-up {
+            from { transform: translateX(-50%) translateY(16px); opacity: 0; }
+            to   { transform: translateX(-50%) translateY(0); opacity: 1; }
+          }
 
-          <DialogFooter>
-            <Button onClick={handleSaveSettings} size="sm">Save Preferences</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    </>
-  );
-});
+          .cookie-glow-border::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 15px;
+            background: conic-gradient(
+              from 0deg,
+              transparent 0%,
+              transparent 25%,
+              rgba(249, 115, 22, 0.35) 30%,
+              rgba(255, 255, 255, 0.12) 35%,
+              transparent 40%,
+              transparent 100%
+            );
+            animation: cookie-border-rotate 4s linear infinite;
+            z-index: -1;
+          }
 
-// Type definitions for gtag
+          .cookie-glow-border::after {
+            content: '';
+            position: absolute;
+            inset: 1px;
+            border-radius: 13px;
+            background: rgba(18, 14, 12, 0.92);
+            z-index: -1;
+          }
+
+          @keyframes cookie-border-rotate {
+            to { transform: rotate(360deg); }
+          }
+
+          @media (prefers-reduced-motion: reduce) {
+            .cookie-glow-border::before {
+              animation: none;
+              background: hsl(30 15% 85% / 0.12);
+            }
+          }
+        `}</style>
+      </>
+    );
+  },
+);
+
 declare global {
   interface Window {
-    gtag?: (...args: any[]) => void;
-    dataLayer?: any[];
+    gtag?: (...args: unknown[]) => void;
+    dataLayer?: unknown[];
   }
 }
