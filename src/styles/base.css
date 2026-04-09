@@ -232,19 +232,18 @@
     --section-py-lg:  4rem;     /* spacious */
     --section-py-xl:  5.5rem;   /* hero/feature */
 
-    /* Container widths — tighter */
-    --container-xs:   420px;
-    --container-sm:   560px;
-    --container-md:   700px;
-    --container-lg:   920px;
-    --container-xl:   1100px;
-    --container-2xl:  1200px;
-    --container-wide: 1340px;
-    --container-max:  1600px;
+    /* Container widths — compact */
+    --container-xs:   400px;
+    --container-sm:   540px;
+    --container-md:   680px;
+    --container-lg:   880px;
+    --container-xl:   1040px;
+    --container-2xl:  1140px;
+    --container-wide: 1280px;
+    --container-max:  1440px;
 
-    /* Global text scale — 0.85 gives a compact 75%-feel without
-       CSS zoom (which causes subpixel blur). 16px × 0.85 = 13.6px base. */
-    --text-scale: 0.85;
+    /* Global text scale — 0.875 = 14px base (compact but readable) */
+    --text-scale: 0.875;
 
     /* ── Shadow XL token — DISABLED ── */
     --shadow-xl: none;
