@@ -17,13 +17,16 @@ const PopoverContent = React.forwardRef<
       align={align}
       sideOffset={sideOffset}
       className={cn(
-        // Compact quick-action menu — tighter width, tighter padding,
-        // refined layered shadow matching the DialogContent system.
-        "z-[100] w-64 rounded-xl border border-border/50 bg-background/95 backdrop-blur-xl p-3 text-popover-foreground shadow-[0_16px_48px_-16px_rgba(15,23,42,0.25),0_4px_12px_-4px_rgba(15,23,42,0.1),inset_0_1px_0_0_rgba(255,255,255,0.55)] outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 duration-200",
+        // Premium glass popover
+        "z-[100] w-56 rounded-[8px] p-2.5 text-white/85 outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-[0.97] data-[state=open]:zoom-in-[0.97] data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 duration-200",
         className,
       )}
       style={{
         animationTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+        background: "rgba(18, 14, 12, 0.88)",
+        backdropFilter: "blur(20px) saturate(1.3)",
+        WebkitBackdropFilter: "blur(20px) saturate(1.3)",
+        border: "1px solid hsl(30 15% 85% / 0.12)",
       }}
       {...props}
     />
