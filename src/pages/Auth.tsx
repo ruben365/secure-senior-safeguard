@@ -462,13 +462,13 @@ function Auth() {
 
   // Premium input style — subtle bg, warm orange focus ring
   const inputClassName =
-    "h-12 pl-10 bg-slate-50/70 border-slate-200/90 text-foreground placeholder:text-slate-400 rounded-xl transition-all duration-200 focus:bg-white focus:border-orange-400/70 focus:ring-4 focus:ring-orange-400/10 hover:border-slate-300";
+    "h-10 pl-10 text-[14px] bg-slate-50/70 border-slate-200 text-foreground placeholder:text-slate-400 rounded-lg transition-all duration-200 focus:bg-white focus:border-orange-500 hover:border-slate-300";
 
   if (signupSuccess) {
     return (
       <div
         className="w-full relative flex items-center justify-center p-5 md:p-8 font-sans antialiased"
-        style={{ minHeight: "calc(100vh / 0.75)" }}
+        style={{ minHeight: "100vh" }}
       >
         {/* Same calm dark backdrop as the main sign-in screen */}
         <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden">
@@ -486,7 +486,7 @@ function Auth() {
         </div>
 
         <div className="relative z-10 w-full max-w-[440px]">
-          <div className="relative rounded-2xl bg-white border border-slate-200/80 shadow-[0_40px_80px_-24px_rgba(15,23,42,0.45),0_8px_28px_-8px_rgba(15,23,42,0.25)] p-7 md:p-9 text-center">
+          <div className="relative rounded-xl bg-white border border-slate-200 p-5 md:p-7 text-center">
             <div
               aria-hidden="true"
               className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-slate-300/80 to-transparent"
@@ -523,7 +523,7 @@ function Auth() {
   return (
     <div
       className="w-full relative flex items-stretch justify-center p-0 font-sans antialiased"
-      style={{ minHeight: "calc(100vh / 0.75)" }}
+      style={{ minHeight: "100vh" }}
     >
       <SEO
         title="Sign In"
@@ -623,7 +623,7 @@ function Auth() {
         trust points, a quiet decorative shield illustration.
         RIGHT: the clean white auth card with the existing form.
       */}
-      <div className="relative z-10 w-full max-w-[1100px] mx-auto flex items-center justify-center p-5 md:p-8 lg:p-10">
+      <div className="relative z-10 w-full max-w-[960px] mx-auto flex items-center justify-center p-4 md:p-6 lg:p-8">
         <div className="w-full grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-8 lg:gap-14 items-center">
 
           {/* LEFT — brand pane (desktop only) */}
@@ -800,7 +800,7 @@ function Auth() {
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full h-11 rounded-xl bg-white border-slate-200/80 text-slate-800 font-medium shadow-[0_1px_2px_rgba(15,23,42,0.04),0_1px_0_rgba(255,255,255,0.9)_inset] hover:bg-slate-50 hover:border-slate-300 hover:shadow-[0_2px_6px_rgba(15,23,42,0.08),0_1px_0_rgba(255,255,255,1)_inset] transition-all duration-200"
+                    className="w-full h-10 rounded-lg bg-white border border-slate-200 text-slate-700 text-[13px] font-medium hover:bg-slate-50 hover:border-slate-300 transition-all duration-200"
                     onClick={handleGoogleSignIn}
                   >
                     <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
@@ -827,7 +827,7 @@ function Auth() {
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full h-11 rounded-xl bg-white border-slate-200/80 text-slate-800 font-medium shadow-[0_1px_2px_rgba(15,23,42,0.04),0_1px_0_rgba(255,255,255,0.9)_inset] hover:bg-slate-50 hover:border-slate-300 hover:shadow-[0_2px_6px_rgba(15,23,42,0.08),0_1px_0_rgba(255,255,255,1)_inset] transition-all duration-200"
+                    className="w-full h-10 rounded-lg bg-white border border-slate-200 text-slate-700 text-[13px] font-medium hover:bg-slate-50 hover:border-slate-300 transition-all duration-200"
                     onClick={handleMicrosoftSignIn}
                   >
                     <svg className="w-5 h-5 mr-3" viewBox="0 0 23 23">
@@ -949,7 +949,7 @@ function Auth() {
 
                 <Button
                   type="submit"
-                  className="w-full h-12 text-[15px] font-semibold rounded-xl bg-gradient-to-b from-[#e07a55] to-[#d05f3a] border border-[#b8552f] text-white shadow-[0_1px_0_0_rgba(255,255,255,0.18)_inset,0_8px_20px_-6px_rgba(217,108,74,0.5),0_16px_32px_-12px_rgba(217,108,74,0.35)] hover:from-[#e88560] hover:to-[#d96847] hover:-translate-y-[1px] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_12px_28px_-6px_rgba(217,108,74,0.6),0_20px_40px_-12px_rgba(217,108,74,0.4)] active:translate-y-[0.5px] transition-all duration-200"
+                  className="w-full h-10 text-[14px] font-semibold rounded-lg bg-[#080d1a] text-white border border-[#1e293b] hover:bg-[#111827] hover:-translate-y-[1px] active:translate-y-[0.5px] transition-all duration-200"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -983,7 +983,7 @@ function Auth() {
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full h-11 rounded-xl bg-white border-slate-200/80 text-slate-800 font-medium shadow-[0_1px_2px_rgba(15,23,42,0.04),0_1px_0_rgba(255,255,255,0.9)_inset] hover:bg-slate-50 hover:border-slate-300 hover:shadow-[0_2px_6px_rgba(15,23,42,0.08),0_1px_0_rgba(255,255,255,1)_inset] transition-all duration-200"
+                    className="w-full h-10 rounded-lg bg-white border border-slate-200 text-slate-700 text-[13px] font-medium hover:bg-slate-50 hover:border-slate-300 transition-all duration-200"
                     onClick={handleGoogleSignIn}
                   >
                     <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
@@ -1010,7 +1010,7 @@ function Auth() {
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full h-11 rounded-xl bg-white border-slate-200/80 text-slate-800 font-medium shadow-[0_1px_2px_rgba(15,23,42,0.04),0_1px_0_rgba(255,255,255,0.9)_inset] hover:bg-slate-50 hover:border-slate-300 hover:shadow-[0_2px_6px_rgba(15,23,42,0.08),0_1px_0_rgba(255,255,255,1)_inset] transition-all duration-200"
+                    className="w-full h-10 rounded-lg bg-white border border-slate-200 text-slate-700 text-[13px] font-medium hover:bg-slate-50 hover:border-slate-300 transition-all duration-200"
                     onClick={handleMicrosoftSignIn}
                   >
                     <svg className="w-5 h-5 mr-3" viewBox="0 0 23 23">
@@ -1201,7 +1201,7 @@ function Auth() {
 
                 <Button
                   type="submit"
-                  className="w-full h-12 text-[15px] font-semibold rounded-xl bg-gradient-to-b from-[#e07a55] to-[#d05f3a] border border-[#b8552f] text-white shadow-[0_1px_0_0_rgba(255,255,255,0.18)_inset,0_8px_20px_-6px_rgba(217,108,74,0.5),0_16px_32px_-12px_rgba(217,108,74,0.35)] hover:from-[#e88560] hover:to-[#d96847] hover:-translate-y-[1px] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_12px_28px_-6px_rgba(217,108,74,0.6),0_20px_40px_-12px_rgba(217,108,74,0.4)] active:translate-y-[0.5px] transition-all duration-200"
+                  className="w-full h-10 text-[14px] font-semibold rounded-lg bg-[#080d1a] text-white border border-[#1e293b] hover:bg-[#111827] hover:-translate-y-[1px] active:translate-y-[0.5px] transition-all duration-200"
                   disabled={isLoading}
                 >
                   {isLoading ? (
