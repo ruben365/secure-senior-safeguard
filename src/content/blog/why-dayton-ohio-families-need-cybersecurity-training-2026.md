@@ -44,7 +44,7 @@ This isn't about intelligence. It's about exposure. Many seniors didn't grow up 
 
 In Kettering, Centerville, Beavercreek, and neighborhoods across Dayton, people trust their neighbors. That's a wonderful thing. But scammers weaponize that trust. They impersonate local churches, community organizations, and even neighbors to make their schemes feel familiar and safe.
 
-We've talked to families right here in the Miami Valley who received [deepfake phone calls](/blog/5-signs-phone-call-is-deepfake) from someone pretending to be a grandchild. The voice sounded real. The story sounded believable. The only thing that stopped them was training.
+We've talked to families right here in the Miami Valley who received [deepfake phone calls](/articles/5-signs-phone-call-is-deepfake) from someone pretending to be a grandchild. The voice sounded real. The story sounded believable. The only thing that stopped them was training.
 
 ### A Military and Veteran Community
 
@@ -60,7 +60,7 @@ Here's what you'll learn:
 
 ### Deepfake and Voice Cloning Detection
 
-We show you what [deepfake phone calls](/blog/5-signs-phone-call-is-deepfake) actually sound like. You'll hear real examples, learn the warning signs, and practice what to do when you get one. We also teach you how to set up a family safe word so you can verify a caller's identity in seconds.
+We show you what [deepfake phone calls](/articles/5-signs-phone-call-is-deepfake) actually sound like. You'll hear real examples, learn the warning signs, and practice what to do when you get one. We also teach you how to set up a family safe word so you can verify a caller's identity in seconds.
 
 ### Phishing and Smishing Defense
 
