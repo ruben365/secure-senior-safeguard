@@ -174,18 +174,16 @@ a[role="button"]:focus-visible,
   outline-offset: 4px;
 }
 
-/* ── Card hover — any element with .card-hover gets a subtle lift */
+/* ── Card hover — lift + border highlight only, no shadow */
 .card-hover {
   transition:
     transform 300ms var(--ease-out-std),
-    box-shadow 300ms var(--ease-out-std),
     border-color 300ms var(--ease-out-std);
-  will-change: transform, box-shadow;
 }
 
 .card-hover:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-card-hover);
+  border-color: rgba(249, 115, 22, 0.25);
 }
 
 /* ── Icon button tap target ──────────────────────────────────
@@ -227,7 +225,6 @@ button[aria-label][data-icon-only]:hover::before {
   border-radius: var(--radius-md);
   text-decoration: none;
   font-weight: 600;
-  box-shadow: var(--shadow-lg);
   z-index: 10003;
 }
 
@@ -321,19 +318,7 @@ a[href^="#"] {
   color: hsl(var(--foreground));
 }
 
-/* ── Utility — soft deep shadow for premium cards ──────────── */
-.shadow-premium {
-  box-shadow:
-    0 1px 2px rgba(15, 23, 42, 0.04),
-    0 4px 12px -2px rgba(15, 23, 42, 0.06),
-    0 16px 40px -12px rgba(15, 23, 42, 0.12);
-}
-.shadow-premium-hover {
-  box-shadow:
-    0 2px 4px rgba(15, 23, 42, 0.05),
-    0 8px 20px -4px rgba(15, 23, 42, 0.1),
-    0 24px 60px -16px rgba(15, 23, 42, 0.18);
-}
+/* shadow-premium/shadow-premium-hover removed — no shadows */
 
 /* ═══════════════════════════════════════════════════════════════════
    DIALOG & GLASS PANEL READABILITY — compact text, high-contrast
@@ -392,7 +377,7 @@ a[href^="#"] {
    normal text unreadable. These rules boost text contrast WITHOUT
    removing the glass look. */
 
-/* Light-background glass panels — darker text with subtle text shadow */
+/* Light-background glass panels — strong foreground color, no shadow */
 [style*="backdrop-filter"],
 [style*="backdropFilter"],
 .backdrop-blur-sm,
@@ -401,8 +386,6 @@ a[href^="#"] {
 .backdrop-blur-xl,
 .backdrop-blur-2xl {
   color: hsl(var(--foreground));
-  /* Subtle inner glow helps text separate from blurred content */
-  text-shadow: 0 0 6px hsl(var(--background) / 0.4);
 }
 
 /* Secondary text inside glass panels — lighter but still readable */
@@ -418,13 +401,12 @@ a[href^="#"] {
   color: #F97316;
 }
 
-/* Glass panels on DARK backgrounds — bright white text */
+/* Glass panels on DARK backgrounds — bright white text, no shadow */
 nav [style*="backdrop-filter"],
 nav [style*="backdropFilter"],
 .hss-testimonial-theater [style*="backdrop-filter"],
 [class*="bg-[#0"] [style*="backdrop-filter"] {
   color: rgba(255, 255, 255, 0.95);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 /* Dark glass secondary text — soft light gray */
@@ -442,12 +424,10 @@ nav [style*="backdrop-filter"] .text-muted-foreground {
 /* Utility classes for explicit opt-in */
 .glass-text-readable {
   color: hsl(var(--foreground)) !important;
-  text-shadow: 0 0 8px hsl(var(--background) / 0.6);
 }
 
 .glass-text-light {
   color: rgba(255, 255, 255, 0.96) !important;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
 }
 
 .glass-text-secondary {
@@ -463,26 +443,7 @@ nav [style*="backdrop-filter"] .text-muted-foreground {
    Pure CSS, no heavy libraries. Uses transform + opacity only.
    ═══════════════════════════════════════════════════════════════════ */
 
-/* ── Hero CTA pulse glow ─────────────────────────────────────── */
-@keyframes cta-pulse-glow {
-  0%, 100% {
-    box-shadow:
-      0 0 20px rgba(249, 115, 22, 0.25),
-      0 8px 20px -6px rgba(217, 108, 74, 0.5);
-  }
-  50% {
-    box-shadow:
-      0 0 32px rgba(249, 115, 22, 0.4),
-      0 12px 28px -6px rgba(217, 108, 74, 0.65);
-  }
-}
-
-/* Apply to any primary CTA in a hero section */
-section[id="hero"] a[class*="heroPrimary"],
-section[id="hero"] button[class*="heroPrimary"],
-.cta-pulse {
-  animation: cta-pulse-glow 3s ease-in-out infinite;
-}
+/* cta-pulse-glow removed — no glow animations */
 
 /* ── Ken Burns (subtle zoom + pan on hero images) ────────────── */
 @keyframes ken-burns {
@@ -549,20 +510,16 @@ img.ken-burns {
   z-index: 1;
 }
 
-/* ── Card hover lift + border glow ───────────────────────────── */
+/* ── Card hover lift — border highlight only, no shadow/glow ─── */
 .card-lift {
   transition:
     transform 300ms var(--ease-out-std),
-    box-shadow 300ms var(--ease-out-std),
     border-color 300ms var(--ease-out-std);
 }
 
 .card-lift:hover {
   transform: translateY(-4px);
-  box-shadow:
-    0 12px 40px -8px rgba(15, 23, 42, 0.1),
-    0 0 20px -4px rgba(249, 115, 22, 0.08);
-  border-color: rgba(249, 115, 22, 0.2);
+  border-color: rgba(249, 115, 22, 0.25);
 }
 
 /* ── Button ripple effect ────────────────────────────────────── */
@@ -608,15 +565,15 @@ a[role="button"]:active::after {
   animation: icon-bounce 400ms var(--ease-out-std);
 }
 
-/* ── Section divider glow ────────────────────────────────────── */
+/* ── Section divider — clean gradient line, no glow ──────────── */
 .section-divider {
   height: 1px;
   background: linear-gradient(
     90deg,
     transparent 5%,
-    rgba(249, 115, 22, 0.15) 30%,
-    rgba(249, 115, 22, 0.25) 50%,
-    rgba(249, 115, 22, 0.15) 70%,
+    rgba(255, 255, 255, 0.06) 30%,
+    rgba(255, 255, 255, 0.10) 50%,
+    rgba(255, 255, 255, 0.06) 70%,
     transparent 95%
   );
   margin: 0 auto;
@@ -741,11 +698,7 @@ section[data-reveal]:nth-child(odd) {
 
 /* ── Prefers reduced motion — disable ALL motion ─────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .cta-pulse,
-  section[id="hero"] a[class*="heroPrimary"],
-  section[id="hero"] button[class*="heroPrimary"] {
-    animation: none !important;
-  }
+  /* cta-pulse removed — no glow animations to disable */
   .ken-burns img,
   img.ken-burns {
     animation: none !important;

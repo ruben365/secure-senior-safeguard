@@ -21,7 +21,6 @@ const buttonVariants = cva(
           "border border-accent/60",
           "hover:translate-y-[-1px]",
           "active:translate-y-[1px]",
-          "[text-shadow:0_1px_2px_rgba(0,0,0,0.3)]",
         ].join(" "),
         outline: [
           "bg-gradient-to-b from-white to-slate-50 text-slate-800",
@@ -48,7 +47,6 @@ const buttonVariants = cva(
           "hover:-translate-y-[1px] hover:bg-white/[0.20] hover:border-white/[0.50]",
           "active:translate-y-[0.5px] active:scale-[0.98]",
           "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[rgba(249,115,22,0.7)]",
-          "[text-shadow:0_1px_3px_rgba(0,0,0,0.4)]",
           "[transition-duration:250ms] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)]",
         ].join(" "),
         heroPrimary: [
@@ -60,7 +58,6 @@ const buttonVariants = cva(
           "hover:-translate-y-[1px] hover:from-[#ea580c] hover:to-[#c2410c]",
           "active:translate-y-[0.5px] active:scale-[0.98]",
           "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[rgba(249,115,22,0.7)]",
-          "[text-shadow:0_1px_2px_rgba(0,0,0,0.3)]",
           "[transition-duration:250ms] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)]",
         ].join(" "),
         destructive: [
