@@ -105,7 +105,7 @@ export function VerificationCodeModal({
     const verificationCode = codeString || code.join("");
 
     if (verificationCode.length !== 6) {
-      toast.error("Please enter the complete 6-digit code");
+      toast.error("Please enter all 6 digits of the code.");
       return;
     }
 
@@ -118,7 +118,10 @@ export function VerificationCodeModal({
       });
 
       if (error || !data.valid) {
-        toast.error(data?.error || "Invalid verification code");
+        toast.error(
+          data?.error ||
+            "That code didn't match. Please check your email and try again.",
+        );
         setCode(["", "", "", "", "", ""]);
         inputRefs.current[0]?.focus();
         setIsVerifying(false);
@@ -176,9 +179,11 @@ export function VerificationCodeModal({
         onClose();
         setIsVerifying(false);
       }, 500);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Verification error:", error);
-      toast.error("An unexpected error occurred. Please try again.");
+      toast.error(
+        "Something went wrong on our end. Please try the code again or request a new one.",
+      );
       setIsVerifying(false);
     }
   };
@@ -195,11 +200,11 @@ export function VerificationCodeModal({
       );
 
       if (error) {
-        toast.error("Failed to resend code. Please try again.");
+        toast.error("Couldn't resend the code. Please wait a moment and try again.");
         return;
       }
 
-      toast.success("New code sent! Check your email.");
+      toast.success("New code sent. Check your email.");
       setCode(["", "", "", "", "", ""]);
       setCountdown(600);
       setResendCountdown(60);
@@ -207,7 +212,9 @@ export function VerificationCodeModal({
       inputRefs.current[0]?.focus();
     } catch (error) {
       console.error("Resend error:", error);
-      toast.error("Failed to resend code.");
+      toast.error(
+        "Couldn't resend the code right now. Please wait a minute and try again.",
+      );
     }
   };
 

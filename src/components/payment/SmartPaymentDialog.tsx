@@ -113,12 +113,12 @@ function SmartPaymentForm({ items, onSuccess, onClose }: PaymentFormProps) {
 
   const handleInfoSubmit = async () => {
     if (!email || !name) {
-      toast.error("Please enter your name and email");
+      toast.error("Please enter your name and email to continue.");
       return;
     }
 
     if (!termsAccepted) {
-      toast.error("Please accept the terms and conditions");
+      toast.error("Please accept the terms and conditions to continue.");
       return;
     }
 
@@ -163,10 +163,12 @@ function SmartPaymentForm({ items, onSuccess, onClose }: PaymentFormProps) {
 
       setClientSecret(data.clientSecret);
       setStep("payment");
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Error creating payment intent:", err);
-      setError(err.message || "Failed to initialize payment");
-      toast.error("Failed to initialize payment. Please try again.");
+      const message =
+        err instanceof Error ? err.message : "Couldn't start checkout";
+      setError(message);
+      toast.error("Couldn't start checkout. Please refresh and try again.");
     } finally {
       setIsLoading(false);
     }
@@ -548,10 +550,14 @@ function PaymentElementWrapper({
 
         onSuccess();
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Payment error:", err);
-      setError(err.message || "Payment failed");
-      toast.error(err.message || "Payment failed. Please try again.");
+      const message =
+        err instanceof Error
+          ? err.message
+          : "Payment didn't go through. Please try again.";
+      setError(message);
+      toast.error(message);
     } finally {
       setIsLoading(false);
     }
