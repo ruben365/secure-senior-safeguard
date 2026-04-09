@@ -158,7 +158,7 @@ const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
   visualizerBars = 32,
 }) => {
   const [time, setTime] = React.useState(0);
-  const timerRef = React.useRef<NodeJS.Timeout | null>(null);
+  const timerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Stable per-mount randomized bar shapes (heights + animation timings).
   // Computed once so React doesn't reshuffle them every render.
@@ -400,6 +400,7 @@ interface PromptInputActionProps extends React.ComponentProps<typeof Tooltip> {
   tooltip: React.ReactNode;
   children: React.ReactNode;
   side?: "top" | "bottom" | "left" | "right";
+  className?: string;
 }
 const PromptInputAction: React.FC<PromptInputActionProps> = ({
   tooltip,

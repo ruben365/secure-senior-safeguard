@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import {
   Cpu, Bot, ShieldCheck, Cog,
 } from "lucide-react";
-import businessHero from "@/assets/hero-branded-business-new.png";
+import businessHero from "@/assets/hero-ai-business-unified.jpg";
 
 /* ── Bottom feature cards — varied backgrounds ── */
 const businessFeatures = [

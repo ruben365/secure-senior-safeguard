@@ -1,61 +1,61 @@
 // Professional Hero Images Configuration
-// Natural, photorealistic images for each page with InVision Network branding
+// Unified cinematic style — warm amber bokeh, premium office environments
 
-import heroBrandedBusiness from "@/assets/hero-branded-business-new.png";
-import heroBrandedTraining from "@/assets/training-hero-workshop.jpg";
-import heroBrandedResources from "@/assets/hero-resources-premium.jpg";
-import heroBrandedAbout from "@/assets/hero-branded-about.jpg";
-import heroBrandedCareers from "@/assets/hero-branded-careers-new.jpg";
-import heroBrandedFaq from "@/assets/hero-branded-faq.jpg";
-import heroBrandedContact from "@/assets/hero-branded-contact-new.jpg";
+import heroBrandedBusiness from "@/assets/hero-ai-business-unified.jpg";
+import heroBrandedTraining from "@/assets/hero-training-unified.jpg";
+import heroBrandedResources from "@/assets/hero-resources-unified.jpg";
+import heroBrandedAbout from "@/assets/hero-about-unified.jpg";
+import heroBrandedCareers from "@/assets/hero-careers-unified.jpg";
+import heroBrandedFaq from "@/assets/hero-faq-unified.jpg";
+import heroBrandedContact from "@/assets/hero-contact-unified.jpg";
 
 export interface HeroImage {
   src: string;
   alt: string;
 }
 
-// Professional branded hero images for each page - InVision Network integrated
+// Professional branded hero images for each page — unified cinematic style
 export const PROFESSIONAL_HERO_IMAGES: Record<string, HeroImage[]> = {
   business: [
     {
       src: heroBrandedBusiness,
-      alt: "Diverse business professionals collaborating around conference table with InVision Network branding in modern bright office",
+      alt: "Diverse professionals collaborating around AI data screens in modern office with warm amber lighting",
     },
   ],
   training: [
     {
       src: heroBrandedTraining,
-      alt: "Seniors joyfully learning together in sunlit community center with InVision Network banner, warm hopeful atmosphere",
+      alt: "Professional workshop training session with engaged learners in modern conference room",
     },
   ],
   resources: [
     {
       src: heroBrandedResources,
-      alt: "InVision Network digital knowledge center with security resources, learning materials, and modern study environment",
+      alt: "Professional browsing knowledge resources in elegant modern library with warm lighting",
     },
   ],
   about: [
     {
       src: heroBrandedAbout,
-      alt: "InVision Network diverse professional team dedicated to protecting Ohio families and businesses",
+      alt: "InVision Network diverse professional team in modern office lobby",
     },
   ],
   careers: [
     {
       src: heroBrandedCareers,
-      alt: "Diverse professional team collaborating in bright InVision Network office with whiteboard and natural lighting",
+      alt: "Confident professional walking through modern glass office hallway",
     },
   ],
   faq: [
     {
       src: heroBrandedFaq,
-      alt: "InVision Network friendly customer support team ready to answer your questions",
+      alt: "Friendly professional at modern help desk ready to assist",
     },
   ],
   contact: [
     {
       src: heroBrandedContact,
-      alt: "Welcoming InVision Network receptionist at branded reception desk with prominent logo on frosted glass wall",
+      alt: "Welcoming premium office reception area with warm ambient lighting",
     },
   ],
 };

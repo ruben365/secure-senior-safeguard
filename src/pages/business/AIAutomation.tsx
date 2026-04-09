@@ -21,7 +21,7 @@ import {
   Users,
   Bot,
 } from "lucide-react";
-import heroBrandedBusinessNew from "@/assets/hero-branded-business-new.png";
+import heroBrandedBusinessNew from "@/assets/hero-ai-business-unified.jpg";
 
 const AIAutomation = () => {
   const features = [

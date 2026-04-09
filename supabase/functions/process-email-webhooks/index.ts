@@ -101,7 +101,7 @@ async function importHmacKey(secret: string): Promise<CryptoKey> {
   const keyBytes = base64ToBytes(cleaned);
   return await crypto.subtle.importKey(
     "raw",
-    keyBytes,
+    keyBytes.buffer as ArrayBuffer,
     { name: "HMAC", hash: "SHA-256" },
     false,
     ["sign"],

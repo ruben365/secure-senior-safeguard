@@ -161,7 +161,7 @@ serve(async (req) => {
       });
 
       const paidSession = sessions.data.find(
-        (s) => s.payment_status === "paid",
+        (s: { payment_status: string }) => s.payment_status === "paid",
       );
 
       if (paidSession) {

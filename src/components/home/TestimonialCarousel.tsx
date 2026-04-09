@@ -117,134 +117,47 @@ const testimonials = [
 ];
 
 /**
- * World map backdrop — all seven continents rendered as recognizable
- * silhouettes with glowing white outlines.
- *
- * Continents included (matching real geography, not blobs):
- *   North America, Central America, Greenland, South America,
- *   Europe (incl. British Isles, Scandinavia, Iberia, Italy),
- *   Africa (incl. Horn, Cape, Madagascar),
- *   Middle East, Asia main mass, Arabian Peninsula, India,
- *   Southeast Asia / Indochina, Indonesia / Philippines, Japan,
- *   Australia, New Zealand, plus a thin Antarctic rim.
- *
- * Render style:
- *   Layer 1: outer soft white glow (blurred, very low opacity)
- *   Layer 2: mid white halo
- *   Layer 3: crisp thin white outline on top
- *   Layer 4: very subtle interior fill
- *
- * viewBox uses a 2000×1000 Mercator-ish grid so continents sit
- * in roughly correct lat/lon positions.
+ * World map backdrop — refined flat vector with all continents,
+ * subtle dot markers, and elegant soft presence.
  */
 function WorldMapBackdrop() {
-  // Continent path data — pulled out so the same d-values drive
-  // every layer (glow + halo + outline + fill).
   const paths: { id: string; d: string }[] = [
-    // ─── NORTH AMERICA (Alaska → Florida) ───
-    {
-      id: "north-america",
-      d: "M 220 120 L 260 95 L 310 85 L 360 82 L 410 88 L 455 98 L 495 112 L 525 102 L 560 92 L 595 90 L 625 105 L 640 130 L 635 158 L 615 180 L 585 200 L 570 225 L 580 250 L 605 272 L 618 305 L 608 340 L 585 375 L 560 405 L 540 440 L 515 470 L 480 498 L 445 512 L 410 520 L 380 518 L 355 505 L 335 483 L 320 458 L 305 430 L 290 395 L 275 360 L 262 325 L 250 288 L 240 248 L 232 208 L 225 168 Z",
-    },
-    // ─── CENTRAL AMERICA isthmus ───
-    {
-      id: "central-america",
-      d: "M 460 520 L 490 540 L 515 572 L 530 605 L 545 635 L 552 665 L 545 680 L 525 672 L 505 648 L 485 618 L 470 585 L 458 550 Z",
-    },
-    // ─── SOUTH AMERICA (Venezuela → Patagonia) ───
-    {
-      id: "south-america",
-      d: "M 560 640 L 605 625 L 645 628 L 680 645 L 708 670 L 725 705 L 735 740 L 740 780 L 735 815 L 722 850 L 700 880 L 678 908 L 655 925 L 628 932 L 605 925 L 585 905 L 570 875 L 560 840 L 552 798 L 548 755 L 550 712 L 555 675 Z",
-    },
-    // ─── GREENLAND ───
-    {
-      id: "greenland",
-      d: "M 720 70 L 770 58 L 820 62 L 855 78 L 870 105 L 862 138 L 840 160 L 810 172 L 780 168 L 750 155 L 728 130 L 720 100 Z",
-    },
-    // ─── ICELAND ───
-    {
-      id: "iceland",
-      d: "M 885 200 L 908 195 L 920 210 L 912 225 L 892 225 L 880 215 Z",
-    },
-    // ─── EUROPE (Iberia / France / Italy / Balkans / Scandinavia / E-Europe) ───
-    {
-      id: "europe",
-      d: "M 930 258 L 945 245 L 962 235 L 980 232 L 1000 238 L 1018 235 L 1035 220 L 1050 200 L 1068 182 L 1085 175 L 1100 188 L 1108 210 L 1118 232 L 1132 248 L 1150 260 L 1168 272 L 1185 288 L 1190 305 L 1178 320 L 1158 328 L 1135 332 L 1108 335 L 1082 340 L 1055 345 L 1028 342 L 1002 335 L 978 325 L 955 312 L 938 295 L 928 278 Z",
-    },
-    // ─── BRITISH ISLES ───
-    {
-      id: "british-isles",
-      d: "M 928 220 L 948 215 L 960 228 L 962 245 L 950 258 L 932 258 L 922 245 L 920 230 Z",
-    },
-    // ─── AFRICA (Mediterranean → Cape) ───
-    {
-      id: "africa",
-      d: "M 990 340 L 1030 332 L 1070 330 L 1110 332 L 1148 338 L 1180 348 L 1208 365 L 1228 388 L 1240 418 L 1245 450 L 1242 482 L 1235 515 L 1225 545 L 1218 575 L 1220 608 L 1215 638 L 1202 668 L 1185 700 L 1162 728 L 1138 755 L 1112 780 L 1085 795 L 1058 800 L 1035 790 L 1015 770 L 998 745 L 982 715 L 968 680 L 955 640 L 945 595 L 938 545 L 935 495 L 938 445 L 948 395 L 965 360 Z",
-    },
-    // ─── MADAGASCAR ───
-    {
-      id: "madagascar",
-      d: "M 1238 672 L 1252 678 L 1260 698 L 1262 720 L 1255 740 L 1245 748 L 1235 735 L 1232 715 L 1232 692 Z",
-    },
-    // ─── ARABIAN PENINSULA ───
-    {
-      id: "arabia",
-      d: "M 1188 350 L 1218 352 L 1248 362 L 1272 380 L 1288 405 L 1290 430 L 1278 450 L 1258 460 L 1232 460 L 1205 450 L 1185 432 L 1175 412 L 1175 388 L 1180 365 Z",
-    },
-    // ─── ASIA MAIN MASS (Siberia → East Asia) ───
-    {
-      id: "asia-main",
-      d: "M 1190 240 L 1230 218 L 1275 198 L 1320 182 L 1370 170 L 1425 162 L 1485 158 L 1545 162 L 1605 172 L 1660 188 L 1705 212 L 1740 242 L 1762 278 L 1772 315 L 1765 350 L 1742 380 L 1710 400 L 1672 408 L 1632 402 L 1592 392 L 1552 388 L 1515 395 L 1482 402 L 1452 395 L 1425 380 L 1400 362 L 1375 345 L 1348 335 L 1320 322 L 1292 305 L 1262 288 L 1235 270 L 1212 255 Z",
-    },
-    // ─── INDIA SUB-CONTINENT ───
-    {
-      id: "india",
-      d: "M 1410 395 L 1448 405 L 1482 425 L 1502 455 L 1510 490 L 1498 525 L 1478 548 L 1452 558 L 1425 548 L 1402 520 L 1388 488 L 1385 450 L 1395 415 Z",
-    },
-    // ─── SOUTHEAST ASIA / INDOCHINA ───
-    {
-      id: "sea-mainland",
-      d: "M 1520 412 L 1548 408 L 1575 420 L 1592 445 L 1595 472 L 1580 495 L 1558 505 L 1538 498 L 1522 478 L 1515 452 L 1515 430 Z",
-    },
-    // ─── INDONESIA (Sumatra + Java) ───
-    {
-      id: "indonesia-sumatra",
-      d: "M 1548 528 L 1588 525 L 1618 540 L 1625 558 L 1608 572 L 1575 572 L 1548 560 L 1540 542 Z",
-    },
-    // ─── INDONESIA (Borneo + Sulawesi) ───
-    {
-      id: "indonesia-borneo",
-      d: "M 1635 520 L 1668 518 L 1692 530 L 1700 552 L 1688 568 L 1660 570 L 1638 558 L 1632 538 Z",
-    },
-    // ─── PHILIPPINES ───
-    {
-      id: "philippines",
-      d: "M 1720 480 L 1735 478 L 1742 498 L 1738 518 L 1725 522 L 1715 505 L 1715 490 Z",
-    },
-    // ─── JAPAN ───
-    {
-      id: "japan",
-      d: "M 1755 290 L 1778 285 L 1795 302 L 1800 328 L 1790 352 L 1770 362 L 1752 348 L 1748 322 L 1750 302 Z",
-    },
-    // ─── AUSTRALIA ───
-    {
-      id: "australia",
-      d: "M 1645 700 L 1700 688 L 1755 682 L 1808 688 L 1852 702 L 1880 728 L 1888 758 L 1878 788 L 1848 808 L 1808 818 L 1760 818 L 1712 812 L 1672 798 L 1645 778 L 1632 752 L 1632 725 Z",
-    },
-    // ─── NEW ZEALAND (north + south island) ───
-    {
-      id: "new-zealand-north",
-      d: "M 1898 808 L 1915 808 L 1925 825 L 1918 842 L 1902 842 L 1895 825 Z",
-    },
-    {
-      id: "new-zealand-south",
-      d: "M 1878 835 L 1895 835 L 1905 852 L 1898 870 L 1882 870 L 1872 855 Z",
-    },
-    // ─── ANTARCTICA rim ───
-    {
-      id: "antarctica",
-      d: "M 200 935 L 400 925 L 600 922 L 800 925 L 1000 928 L 1200 925 L 1400 922 L 1600 925 L 1800 932 L 1880 945 L 1850 960 L 1700 968 L 1500 972 L 1300 970 L 1100 972 L 900 970 L 700 968 L 500 965 L 300 960 L 180 952 Z",
-    },
+    { id: "north-america", d: "M 220 120 L 260 95 L 310 85 L 360 82 L 410 88 L 455 98 L 495 112 L 525 102 L 560 92 L 595 90 L 625 105 L 640 130 L 635 158 L 615 180 L 585 200 L 570 225 L 580 250 L 605 272 L 618 305 L 608 340 L 585 375 L 560 405 L 540 440 L 515 470 L 480 498 L 445 512 L 410 520 L 380 518 L 355 505 L 335 483 L 320 458 L 305 430 L 290 395 L 275 360 L 262 325 L 250 288 L 240 248 L 232 208 L 225 168 Z" },
+    { id: "central-america", d: "M 460 520 L 490 540 L 515 572 L 530 605 L 545 635 L 552 665 L 545 680 L 525 672 L 505 648 L 485 618 L 470 585 L 458 550 Z" },
+    { id: "south-america", d: "M 560 640 L 605 625 L 645 628 L 680 645 L 708 670 L 725 705 L 735 740 L 740 780 L 735 815 L 722 850 L 700 880 L 678 908 L 655 925 L 628 932 L 605 925 L 585 905 L 570 875 L 560 840 L 552 798 L 548 755 L 550 712 L 555 675 Z" },
+    { id: "greenland", d: "M 720 70 L 770 58 L 820 62 L 855 78 L 870 105 L 862 138 L 840 160 L 810 172 L 780 168 L 750 155 L 728 130 L 720 100 Z" },
+    { id: "iceland", d: "M 885 200 L 908 195 L 920 210 L 912 225 L 892 225 L 880 215 Z" },
+    { id: "europe", d: "M 930 258 L 945 245 L 962 235 L 980 232 L 1000 238 L 1018 235 L 1035 220 L 1050 200 L 1068 182 L 1085 175 L 1100 188 L 1108 210 L 1118 232 L 1132 248 L 1150 260 L 1168 272 L 1185 288 L 1190 305 L 1178 320 L 1158 328 L 1135 332 L 1108 335 L 1082 340 L 1055 345 L 1028 342 L 1002 335 L 978 325 L 955 312 L 938 295 L 928 278 Z" },
+    { id: "british-isles", d: "M 928 220 L 948 215 L 960 228 L 962 245 L 950 258 L 932 258 L 922 245 L 920 230 Z" },
+    { id: "africa", d: "M 990 340 L 1030 332 L 1070 330 L 1110 332 L 1148 338 L 1180 348 L 1208 365 L 1228 388 L 1240 418 L 1245 450 L 1242 482 L 1235 515 L 1225 545 L 1218 575 L 1220 608 L 1215 638 L 1202 668 L 1185 700 L 1162 728 L 1138 755 L 1112 780 L 1085 795 L 1058 800 L 1035 790 L 1015 770 L 998 745 L 982 715 L 968 680 L 955 640 L 945 595 L 938 545 L 935 495 L 938 445 L 948 395 L 965 360 Z" },
+    { id: "madagascar", d: "M 1238 672 L 1252 678 L 1260 698 L 1262 720 L 1255 740 L 1245 748 L 1235 735 L 1232 715 L 1232 692 Z" },
+    { id: "arabia", d: "M 1188 350 L 1218 352 L 1248 362 L 1272 380 L 1288 405 L 1290 430 L 1278 450 L 1258 460 L 1232 460 L 1205 450 L 1185 432 L 1175 412 L 1175 388 L 1180 365 Z" },
+    { id: "asia-main", d: "M 1190 240 L 1230 218 L 1275 198 L 1320 182 L 1370 170 L 1425 162 L 1485 158 L 1545 162 L 1605 172 L 1660 188 L 1705 212 L 1740 242 L 1762 278 L 1772 315 L 1765 350 L 1742 380 L 1710 400 L 1672 408 L 1632 402 L 1592 392 L 1552 388 L 1515 395 L 1482 402 L 1452 395 L 1425 380 L 1400 362 L 1375 345 L 1348 335 L 1320 322 L 1292 305 L 1262 288 L 1235 270 L 1212 255 Z" },
+    { id: "india", d: "M 1410 395 L 1448 405 L 1482 425 L 1502 455 L 1510 490 L 1498 525 L 1478 548 L 1452 558 L 1425 548 L 1402 520 L 1388 488 L 1385 450 L 1395 415 Z" },
+    { id: "sea-mainland", d: "M 1520 412 L 1548 408 L 1575 420 L 1592 445 L 1595 472 L 1580 495 L 1558 505 L 1538 498 L 1522 478 L 1515 452 L 1515 430 Z" },
+    { id: "indonesia-sumatra", d: "M 1548 528 L 1588 525 L 1618 540 L 1625 558 L 1608 572 L 1575 572 L 1548 560 L 1540 542 Z" },
+    { id: "indonesia-borneo", d: "M 1635 520 L 1668 518 L 1692 530 L 1700 552 L 1688 568 L 1660 570 L 1638 558 L 1632 538 Z" },
+    { id: "philippines", d: "M 1720 480 L 1735 478 L 1742 498 L 1738 518 L 1725 522 L 1715 505 L 1715 490 Z" },
+    { id: "japan", d: "M 1755 290 L 1778 285 L 1795 302 L 1800 328 L 1790 352 L 1770 362 L 1752 348 L 1748 322 L 1750 302 Z" },
+    { id: "australia", d: "M 1645 700 L 1700 688 L 1755 682 L 1808 688 L 1852 702 L 1880 728 L 1888 758 L 1878 788 L 1848 808 L 1808 818 L 1760 818 L 1712 812 L 1672 798 L 1645 778 L 1632 752 L 1632 725 Z" },
+    { id: "new-zealand-north", d: "M 1898 808 L 1915 808 L 1925 825 L 1918 842 L 1902 842 L 1895 825 Z" },
+    { id: "new-zealand-south", d: "M 1878 835 L 1895 835 L 1905 852 L 1898 870 L 1882 870 L 1872 855 Z" },
+    { id: "antarctica", d: "M 200 935 L 400 925 L 600 922 L 800 925 L 1000 928 L 1200 925 L 1400 922 L 1600 925 L 1800 932 L 1880 945 L 1850 960 L 1700 968 L 1500 972 L 1300 970 L 1100 972 L 900 970 L 700 968 L 500 965 L 300 960 L 180 952 Z" },
+  ];
+
+  /* Scatter dots across the map for visual texture */
+  const scatterDots = [
+    { cx: 350, cy: 300 }, { cx: 420, cy: 280 }, { cx: 480, cy: 350 },
+    { cx: 380, cy: 420 }, { cx: 520, cy: 250 }, { cx: 300, cy: 200 },
+    { cx: 600, cy: 700 }, { cx: 650, cy: 750 }, { cx: 680, cy: 830 },
+    { cx: 960, cy: 280 }, { cx: 1020, cy: 260 }, { cx: 1080, cy: 300 },
+    { cx: 1060, cy: 400 }, { cx: 1100, cy: 500 }, { cx: 1150, cy: 600 },
+    { cx: 1050, cy: 700 }, { cx: 1200, cy: 400 }, { cx: 1300, cy: 250 },
+    { cx: 1400, cy: 300 }, { cx: 1500, cy: 200 }, { cx: 1600, cy: 250 },
+    { cx: 1700, cy: 300 }, { cx: 1450, cy: 450 }, { cx: 1550, cy: 450 },
+    { cx: 1750, cy: 700 }, { cx: 1800, cy: 750 }, { cx: 1650, cy: 750 },
+    { cx: 400, cy: 150 }, { cx: 550, cy: 130 }, { cx: 1100, cy: 250 },
+    { cx: 1350, cy: 380 }, { cx: 1250, cy: 350 }, { cx: 1480, cy: 500 },
   ];
 
   return (
@@ -259,169 +172,75 @@ function WorldMapBackdrop() {
         fill="none"
       >
         <defs>
-          {/* Soft outer glow — used on the widest halo layer */}
-          <filter id="wm-outer-glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="5" />
+          <filter id="wm-soft" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="4" />
           </filter>
-          <filter id="wm-mid-glow" x="-10%" y="-10%" width="120%" height="120%">
-            <feGaussianBlur stdDeviation="1.8" />
-          </filter>
-
-          {/* Warm -> cool gradient on the continent outlines — matches
-              the brand coral + lavender pair instead of pure white. */}
           <linearGradient id="wm-stroke" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%"  stopColor="#d96c4a" stopOpacity="1" />
-            <stop offset="55%" stopColor="#ffffff" stopOpacity="1" />
-            <stop offset="100%" stopColor="#8b80c4" stopOpacity="1" />
+            <stop offset="0%" stopColor="#d96c4a" stopOpacity="0.6" />
+            <stop offset="50%" stopColor="#94a3b8" stopOpacity="0.4" />
+            <stop offset="100%" stopColor="#8b80c4" stopOpacity="0.5" />
           </linearGradient>
-
-          {/* Radial gradient for the globe sphere — soft 3D falloff */}
-          <radialGradient id="wm-globe-surface" cx="38%" cy="32%" r="70%">
-            <stop offset="0%"  stopColor="#ffffff" stopOpacity="0.18" />
-            <stop offset="55%" stopColor="#ffffff" stopOpacity="0.06" />
-            <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
-          </radialGradient>
-
-          {/* Globe rim highlight */}
-          <radialGradient id="wm-globe-rim" cx="50%" cy="50%" r="50%">
-            <stop offset="88%" stopColor="#ffffff" stopOpacity="0" />
-            <stop offset="96%" stopColor="#ffffff" stopOpacity="0.45" />
-            <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
-          </radialGradient>
-
-          {/* Shared continents group */}
           <g id="world-continents">
             {paths.map((p) => (
               <path key={p.id} d={p.d} />
             ))}
           </g>
-
-          {/*
-            SPHERICAL GLOBE element on the right side.
-            Built inline as a reusable group. Centered at (1760, 500)
-            with radius 200 — sits in the right margin of the viewBox.
-            Includes:
-              - outer rim highlight
-              - soft surface gradient
-              - latitude arcs (horizontal "parallel" curves)
-              - longitude arcs (vertical "meridian" curves)
-              - subtle glow halo
-          */}
-          <g id="wm-globe">
-            {/* Outer glow halo */}
-            <circle cx="1760" cy="500" r="230" fill="#d96c4a" opacity="0.07" filter="url(#wm-outer-glow)" />
-            {/* Rim highlight ring */}
-            <circle cx="1760" cy="500" r="200" fill="url(#wm-globe-rim)" />
-            {/* Soft surface gradient */}
-            <circle cx="1760" cy="500" r="198" fill="url(#wm-globe-surface)" />
-            {/* Equator — crisp horizontal line */}
-            <ellipse
-              cx="1760" cy="500" rx="198" ry="2"
-              fill="none" stroke="#ffffff" strokeWidth="0.8" opacity="0.55"
-            />
-            {/* Latitude parallels (curved via ellipse rx=198, ry varies) */}
-            <ellipse cx="1760" cy="500" rx="198" ry="60"
-              fill="none" stroke="#ffffff" strokeWidth="0.6" opacity="0.32" />
-            <ellipse cx="1760" cy="500" rx="198" ry="120"
-              fill="none" stroke="#ffffff" strokeWidth="0.6" opacity="0.28" />
-            <ellipse cx="1760" cy="500" rx="198" ry="165"
-              fill="none" stroke="#ffffff" strokeWidth="0.6" opacity="0.22" />
-            {/* Prime meridian — crisp vertical line */}
-            <ellipse cx="1760" cy="500" rx="2" ry="198"
-              fill="none" stroke="#ffffff" strokeWidth="0.8" opacity="0.55" />
-            {/* Longitude meridians (curved via ellipse ry=198, rx varies) */}
-            <ellipse cx="1760" cy="500" rx="60" ry="198"
-              fill="none" stroke="#ffffff" strokeWidth="0.6" opacity="0.32" />
-            <ellipse cx="1760" cy="500" rx="120" ry="198"
-              fill="none" stroke="#ffffff" strokeWidth="0.6" opacity="0.28" />
-            <ellipse cx="1760" cy="500" rx="165" ry="198"
-              fill="none" stroke="#ffffff" strokeWidth="0.6" opacity="0.22" />
-            {/* Outer sphere outline — hairline edge */}
-            <circle cx="1760" cy="500" r="198" fill="none" stroke="#ffffff" strokeWidth="1.2" opacity="0.7" />
-            {/* Connection nodes around the sphere */}
-            <circle cx="1680" cy="430" r="3.5" fill="#d96c4a" opacity="0.85" />
-            <circle cx="1680" cy="430" r="7" fill="none" stroke="#d96c4a" strokeWidth="0.8" opacity="0.35" />
-            <circle cx="1840" cy="460" r="3" fill="#ffffff" opacity="0.9" />
-            <circle cx="1840" cy="460" r="6" fill="none" stroke="#ffffff" strokeWidth="0.7" opacity="0.35" />
-            <circle cx="1720" cy="580" r="3" fill="#c4b5e8" opacity="0.85" />
-            <circle cx="1720" cy="580" r="6" fill="none" stroke="#c4b5e8" strokeWidth="0.7" opacity="0.35" />
-            <circle cx="1820" cy="550" r="2.5" fill="#ffffff" opacity="0.8" />
-          </g>
         </defs>
 
-        {/*
-          Rendering order (bottom → top):
-          1) Subtle interior fill for continent silhouettes
-          2) Wide soft glow outline — halo
-          3) Mid halo — tighter
-          4) Crisp hairline outline with warm->cool gradient stroke
-          5) Connection nodes on key cities
-          6) Spherical globe element on the right
-        */}
+        {/* Subtle continent fill */}
+        <use href="#world-continents" fill="#94a3b8" opacity="0.04" />
 
-        {/* 1 — interior fill */}
-        <use href="#world-continents" fill="#ffffff" opacity="0.04" />
-
-        {/* 2 — outer soft glow */}
+        {/* Soft outer glow */}
         <use
           href="#world-continents"
-          fill="none"
-          stroke="#ffffff"
-          strokeWidth="3.2"
-          strokeLinejoin="round"
-          strokeLinecap="round"
-          opacity="0.2"
-          filter="url(#wm-outer-glow)"
+          fill="none" stroke="#94a3b8" strokeWidth="2.5"
+          strokeLinejoin="round" strokeLinecap="round"
+          opacity="0.12" filter="url(#wm-soft)"
         />
 
-        {/* 3 — mid halo */}
+        {/* Clean hairline outline */}
         <use
           href="#world-continents"
-          fill="none"
-          stroke="#ffffff"
-          strokeWidth="1.8"
-          strokeLinejoin="round"
-          strokeLinecap="round"
-          opacity="0.45"
-          filter="url(#wm-mid-glow)"
+          fill="none" stroke="url(#wm-stroke)" strokeWidth="0.8"
+          strokeLinejoin="round" strokeLinecap="round"
+          opacity="0.55"
         />
 
-        {/* 4 — crisp hairline with warm->cool gradient */}
-        <use
-          href="#world-continents"
-          fill="none"
-          stroke="url(#wm-stroke)"
-          strokeWidth="1.1"
-          strokeLinejoin="round"
-          strokeLinecap="round"
-          opacity="0.78"
-        />
-
-        {/* 5 — connection nodes on key landmark cities */}
-        <g opacity="0.9">
-          {/* Ohio / Kettering — home base, coral */}
-          <circle cx="520" cy="340" r="4.5" fill="#d96c4a" />
-          <circle cx="520" cy="340" r="10" fill="none" stroke="#d96c4a" strokeWidth="1" opacity="0.4" />
-          <circle cx="520" cy="340" r="18" fill="none" stroke="#d96c4a" strokeWidth="0.6" opacity="0.22" />
-          {/* Europe — London */}
-          <circle cx="955" cy="270" r="3" fill="#ffffff" />
-          <circle cx="955" cy="270" r="7" fill="none" stroke="#ffffff" strokeWidth="0.8" opacity="0.35" />
-          {/* Asia — Tokyo */}
-          <circle cx="1780" cy="330" r="3" fill="#c4b5e8" />
-          <circle cx="1780" cy="330" r="7" fill="none" stroke="#c4b5e8" strokeWidth="0.8" opacity="0.35" />
-          {/* Africa — Nairobi */}
-          <circle cx="1130" cy="560" r="3" fill="#ffffff" />
-          <circle cx="1130" cy="560" r="7" fill="none" stroke="#ffffff" strokeWidth="0.8" opacity="0.35" />
-          {/* South America — São Paulo */}
-          <circle cx="685" cy="810" r="3" fill="#ffffff" />
-          <circle cx="685" cy="810" r="7" fill="none" stroke="#ffffff" strokeWidth="0.8" opacity="0.35" />
-          {/* Australia — Sydney */}
-          <circle cx="1845" cy="770" r="3" fill="#ffffff" />
-          <circle cx="1845" cy="770" r="7" fill="none" stroke="#ffffff" strokeWidth="0.8" opacity="0.35" />
+        {/* Scatter dots — small visual texture across the map */}
+        <g opacity="0.35">
+          {scatterDots.map((dot, i) => (
+            <circle key={i} cx={dot.cx} cy={dot.cy} r="2" fill="#94a3b8" />
+          ))}
         </g>
 
-        {/* 6 — Spherical globe on the right side */}
-        <use href="#wm-globe" />
+        {/* Key city markers with subtle pulse rings */}
+        <g opacity="0.6">
+          {/* Ohio — home base */}
+          <circle cx="520" cy="340" r="3.5" fill="#d96c4a" />
+          <circle cx="520" cy="340" r="8" fill="none" stroke="#d96c4a" strokeWidth="0.8" opacity="0.4" />
+          <circle cx="520" cy="340" r="14" fill="none" stroke="#d96c4a" strokeWidth="0.4" opacity="0.2" />
+          {/* London */}
+          <circle cx="955" cy="270" r="2.5" fill="#94a3b8" />
+          <circle cx="955" cy="270" r="6" fill="none" stroke="#94a3b8" strokeWidth="0.6" opacity="0.3" />
+          {/* Tokyo */}
+          <circle cx="1780" cy="330" r="2.5" fill="#8b80c4" />
+          <circle cx="1780" cy="330" r="6" fill="none" stroke="#8b80c4" strokeWidth="0.6" opacity="0.3" />
+          {/* Nairobi */}
+          <circle cx="1130" cy="560" r="2.5" fill="#94a3b8" />
+          <circle cx="1130" cy="560" r="6" fill="none" stroke="#94a3b8" strokeWidth="0.6" opacity="0.3" />
+          {/* São Paulo */}
+          <circle cx="685" cy="810" r="2.5" fill="#94a3b8" />
+          <circle cx="685" cy="810" r="6" fill="none" stroke="#94a3b8" strokeWidth="0.6" opacity="0.3" />
+          {/* Sydney */}
+          <circle cx="1845" cy="770" r="2.5" fill="#94a3b8" />
+          <circle cx="1845" cy="770" r="6" fill="none" stroke="#94a3b8" strokeWidth="0.6" opacity="0.3" />
+          {/* Mumbai */}
+          <circle cx="1420" cy="450" r="2.5" fill="#94a3b8" />
+          <circle cx="1420" cy="450" r="6" fill="none" stroke="#94a3b8" strokeWidth="0.6" opacity="0.3" />
+          {/* Berlin */}
+          <circle cx="1040" cy="250" r="2.5" fill="#94a3b8" />
+          <circle cx="1040" cy="250" r="6" fill="none" stroke="#94a3b8" strokeWidth="0.6" opacity="0.3" />
+        </g>
       </svg>
     </div>
   );
@@ -599,6 +418,26 @@ export const TestimonialCarousel = () => {
               </figure>
             );
           })}
+        </div>
+
+        {/* Decorative dot row beneath testimonials */}
+        <div
+          data-reveal
+          style={{ "--reveal-delay": "500ms" } as React.CSSProperties}
+          className="flex items-center justify-center gap-2.5 mt-10 md:mt-14"
+          aria-hidden="true"
+        >
+          {Array.from({ length: 7 }).map((_, i) => (
+            <span
+              key={i}
+              className="block rounded-full bg-[#d96c4a]"
+              style={{
+                width: i === 3 ? 6 : 3,
+                height: i === 3 ? 6 : 3,
+                opacity: i === 3 ? 0.5 : 0.2,
+              }}
+            />
+          ))}
         </div>
       </div>
     </section>
