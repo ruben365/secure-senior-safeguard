@@ -101,7 +101,7 @@ export function CyberSidebar({ isOpen, isMobileOpen, onMobileClose }: CyberSideb
       {/* Logo */}
       <div className="h-16 flex items-center px-4 border-b border-[#1F2937]">
         <Link to="/admin" className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#e07a55] to-[#d05f3a] flex items-center justify-center">
             <Globe className="h-4 w-4 text-white" />
           </div>
           {isOpen && <span className="text-base font-semibold text-[#F9FAFB]">InVision</span>}
@@ -154,7 +154,7 @@ export function CyberSidebar({ isOpen, isMobileOpen, onMobileClose }: CyberSideb
                       <Link key={child.href} to={child.href} onClick={onMobileClose}
                         className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors
                           ${location.pathname === child.href
-                            ? "text-blue-400 bg-blue-500/10"
+                            ? "text-orange-400 bg-orange-500/10"
                             : "text-[#6B7280] hover:text-[#F9FAFB] hover:bg-[#1F2937]/50"}`}>
                         {ChildIcon && <ChildIcon className="h-3.5 w-3.5" />}
                         {child.title}

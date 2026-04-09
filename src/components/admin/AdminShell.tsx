@@ -245,7 +245,7 @@ export function AdminShell() {
                 type="text"
                 placeholder="Search..."
                 className="pl-10 bg-[#374151] border-gray-700 text-[#F9FAFB] placeholder:text-[#9CA3AF] 
-                  focus:border-[#3B82F6] focus:ring-[#3B82F6]/20 h-10 rounded-lg"
+                  focus:border-[#d96c4a] focus:ring-[#d96c4a]/20 h-10 rounded-lg"
               />
             </div>
           </div>
@@ -287,7 +287,7 @@ export function AdminShell() {
                   variant="ghost"
                   className="flex items-center gap-2 pl-3 border-l border-gray-700 text-gray-300 hover:text-white hover:bg-gray-800/50"
                 >
-                  <Avatar className="w-8 h-8 bg-gradient-to-br from-[#3B82F6] to-[#06B6D4]">
+                  <Avatar className="w-8 h-8 bg-gradient-to-br from-[#e07a55] to-[#d05f3a]">
                     <AvatarFallback className="text-xs text-white bg-transparent">
                       {getInitials(adminName)}
                     </AvatarFallback>
