@@ -231,9 +231,61 @@ button[aria-label][data-icon-only]:hover::before {
   z-index: 10003;
 }
 
-/* ── Nav sticky shrink — any nav with .nav-scrolled class shrinks
-   automatically. Navigation.tsx toggles .scrolled on <nav>, we map
-   that here so any element with [data-nav-shrink] tightens. */
+/* ── Nav link animated underline on hover ────────────────────
+   Applies to desktop nav links. Uses a pseudo-element that scales
+   from 0 to 100% width on hover with an orange underline. */
+nav a[class*="text-white"]:not([class*="rounded-full"])::after {
+  content: "";
+  position: absolute;
+  left: 0.875rem;    /* matches px-3.5 */
+  right: 0.875rem;
+  bottom: 0.25rem;
+  height: 2px;
+  background: #F97316;
+  border-radius: 1px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 250ms var(--ease-out-std);
+}
+
+nav a[class*="text-white"]:not([class*="rounded-full"]):hover::after {
+  transform: scaleX(1);
+}
+
+/* Active link keeps the underline visible */
+nav a[class*="text-orange-400"]::after {
+  content: "";
+  position: absolute;
+  left: 0.875rem;
+  right: 0.875rem;
+  bottom: 0.25rem;
+  height: 2px;
+  background: #F97316;
+  border-radius: 1px;
+  transform: scaleX(1);
+}
+
+/* ── Nav icons — orange accent ───────────────────────────────── */
+nav a svg,
+nav button svg {
+  color: #F97316;
+  opacity: 0.85;
+  transition: opacity 150ms ease;
+}
+
+nav a:hover svg,
+nav button:hover svg {
+  opacity: 1;
+}
+
+/* Exclude menu/X icons from orange — keep white */
+nav button[aria-label*="menu"] svg,
+nav button[aria-label*="Menu"] svg {
+  color: white;
+  opacity: 1;
+}
+
+/* ── Nav sticky shrink ───────────────────────────────────────── */
 nav[data-nav-shrink] {
   transition:
     padding 300ms var(--ease-out-std),
@@ -338,8 +390,9 @@ a[href^="#"] {
 /* ── Glass panel text readability ──────────────────────────────
    Glassmorphism panels use semi-transparent backgrounds which make
    normal text unreadable. These rules boost text contrast WITHOUT
-   removing the glass look. Apply to any element with .glass-panel
-   or backdrop-filter. */
+   removing the glass look. */
+
+/* Light-background glass panels — darker text with subtle text shadow */
 [style*="backdrop-filter"],
 [style*="backdropFilter"],
 .backdrop-blur-sm,
@@ -348,18 +401,45 @@ a[href^="#"] {
 .backdrop-blur-xl,
 .backdrop-blur-2xl {
   color: hsl(var(--foreground));
+  /* Subtle inner glow helps text separate from blurred content */
+  text-shadow: 0 0 6px hsl(var(--background) / 0.4);
 }
 
-/* Glass panels on DARK backgrounds (nav, hero, footer overlays) */
-.bg-black\/50 [style*="backdrop-filter"],
+/* Secondary text inside glass panels — lighter but still readable */
+[style*="backdrop-filter"] .text-muted-foreground,
+.backdrop-blur-xl .text-muted-foreground,
+.backdrop-blur-2xl .text-muted-foreground {
+  color: hsl(var(--foreground) / 0.7);
+}
+
+/* Accent elements inside glass — use brand orange */
+[style*="backdrop-filter"] .text-primary,
+.backdrop-blur-xl .text-primary {
+  color: #F97316;
+}
+
+/* Glass panels on DARK backgrounds — bright white text */
 nav [style*="backdrop-filter"],
+nav [style*="backdropFilter"],
 .hss-testimonial-theater [style*="backdrop-filter"],
 [class*="bg-[#0"] [style*="backdrop-filter"] {
   color: rgba(255, 255, 255, 0.95);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
-/* Explicit high-contrast glass text utility — use on any glass panel */
+/* Dark glass secondary text — soft light gray */
+nav [style*="backdrop-filter"] .text-muted-foreground {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Glass panel borders — subtle but visible */
+[style*="backdrop-filter"],
+.backdrop-blur-xl,
+.backdrop-blur-2xl {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Utility classes for explicit opt-in */
 .glass-text-readable {
   color: hsl(var(--foreground)) !important;
   text-shadow: 0 0 8px hsl(var(--background) / 0.6);
@@ -368,4 +448,12 @@ nav [style*="backdrop-filter"],
 .glass-text-light {
   color: rgba(255, 255, 255, 0.96) !important;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+}
+
+.glass-text-secondary {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.glass-text-accent {
+  color: #F97316 !important;
 }

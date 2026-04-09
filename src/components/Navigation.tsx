@@ -125,7 +125,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
         />
       )}
 
-      <nav className={overlay ? "absolute top-0 left-0 right-0 z-[9999] bg-gradient-to-b from-black/60 to-transparent" : `sticky top-0 z-[9999] transition-colors duration-300 ${scrolled ? "bg-[#080d1a]/95 backdrop-blur-md border-b border-white/[0.06]" : "bg-transparent"}`}>
+      <nav className={overlay ? "absolute top-0 left-0 right-0 z-[9999] bg-gradient-to-b from-black/60 to-transparent" : `sticky top-0 z-[9999] transition-all duration-300 ${scrolled ? "bg-[#080d1a]/97 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_4px_24px_-4px_rgba(0,0,0,0.3)]" : "bg-[#080d1a]/80 backdrop-blur-md"}`}>
         <div className="max-w-[1600px] mx-auto w-full px-6 lg:px-8">
           <div className="flex items-center justify-between h-[76px] gap-6 lg:gap-12">
             {/* Logo — identical to hero */}
@@ -145,7 +145,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
               />
               <div className="flex flex-col min-w-0 gap-1">
                 <span className="text-[17px] font-extrabold text-white tracking-tight leading-none">InVision Network</span>
-                <span className="text-[10.5px] font-bold text-white/60 hidden sm:block tracking-widest uppercase leading-none">AI Scam Protection</span>
+                <span className="text-[10.5px] font-bold text-white/75 hidden sm:block tracking-widest uppercase leading-none">AI Scam Protection</span>
               </div>
             </a>
 
@@ -240,7 +240,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 className="hidden lg:flex flex-none shrink-0 items-center gap-1.5 text-white/80 hover:text-orange-300 transition-colors duration-150 no-underline px-2 py-1.5 rounded-md hover:bg-white/[0.07] whitespace-nowrap"
                 aria-label={`Call us at ${SITE.phone.display}`}
               >
-                <Phone className="w-[21px] h-[21px] shrink-0" />
+                <Phone className="w-[18px] h-[18px] shrink-0" />
                 <span className="hidden xl:inline text-[14px] font-medium whitespace-nowrap [word-break:keep-all]">
                   {/* Non-breaking space between area code and local guarantees single line */}
                   {SITE.phone.display.replace(" ", "\u00A0")}
@@ -254,7 +254,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 className="hidden lg:flex items-center gap-1.5 text-[14px] font-medium px-2.5 py-1.5 rounded-md text-white/80 hover:text-orange-400 hover:bg-orange-500/10 transition-colors"
                 aria-label="Donate"
               >
-                <Heart className="w-[21px] h-[21px]" />
+                <Heart className="w-[18px] h-[18px]" />
                 <span className="hidden xl:inline">Donate</span>
               </button>
 
