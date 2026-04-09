@@ -1,0 +1,612 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - link "Skip to main content" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
+  - button "Scroll to top" [ref=e780] [cursor=pointer]:
+    - img [ref=e781]
+  - main [ref=e4]:
+    - main [ref=e8]:
+      - navigation [ref=e9]:
+        - generic [ref=e11]:
+          - link "InVision Network Shield Logo InVision Network AI Scam Protection" [ref=e12] [cursor=pointer]:
+            - /url: /
+            - img "InVision Network Shield Logo" [ref=e13]
+            - generic [ref=e14]:
+              - generic [ref=e15]: InVision Network
+              - generic [ref=e16]: AI Scam Protection
+          - generic [ref=e17]:
+            - link "AI" [ref=e18] [cursor=pointer]:
+              - /url: /business
+            - link "Workshops" [ref=e19] [cursor=pointer]:
+              - /url: /training
+            - link "Resources" [ref=e20] [cursor=pointer]:
+              - /url: /resources
+            - link "About" [ref=e21] [cursor=pointer]:
+              - /url: /about
+            - button "More navigation links" [ref=e23] [cursor=pointer]:
+              - text: More
+              - img [ref=e24]
+          - generic [ref=e26]:
+            - button "Announcements" [ref=e29] [cursor=pointer]:
+              - img [ref=e30]
+            - button "Shopping cart, 0 items" [ref=e34] [cursor=pointer]:
+              - img [ref=e35]
+            - link "Call us at (937) 301-8749" [ref=e39] [cursor=pointer]:
+              - /url: tel:+19373018749
+              - img [ref=e40]
+            - button "Donate" [ref=e42] [cursor=pointer]:
+              - img [ref=e43]
+            - link "Login to your account" [ref=e46] [cursor=pointer]:
+              - /url: /portal
+              - text: Login
+      - region "Hero introduction" [ref=e47]:
+        - generic [ref=e48]:
+          - img "Corine — InVision Network co-founder" [ref=e50]
+          - generic [ref=e52]:
+            - generic [ref=e55]: Your Path to Safety
+            - navigation "Quick links" [ref=e56]:
+              - link "Protection" [ref=e57] [cursor=pointer]:
+                - /url: /training#pricing
+              - link "Workshops" [ref=e58] [cursor=pointer]:
+                - /url: /training
+              - link "AI & Business" [ref=e59] [cursor=pointer]:
+                - /url: /business
+              - link "Contact" [ref=e60] [cursor=pointer]:
+                - /url: /contact
+            - heading "AI Protection for Families & Business" [level=1] [ref=e61]:
+              - text: AI Protection
+              - text: for Families & Business
+            - paragraph [ref=e62]: We stop AI-powered scams before they reach your family. Our team builds automated defenses, runs live training, and monitors threats around the clock so you stay safe without lifting a finger.
+            - generic [ref=e63]:
+              - link "Get Protected" [ref=e64] [cursor=pointer]:
+                - /url: /training#pricing
+              - link "See Our Work" [ref=e65] [cursor=pointer]:
+                - /url: /business
+                - text: See Our Work
+                - img [ref=e66]
+          - generic [ref=e69]:
+            - generic [ref=e70]:
+              - generic [ref=e71]:
+                - img [ref=e73]
+                - generic [ref=e76]:
+                  - paragraph [ref=e77]: AI Business Tools
+                  - paragraph [ref=e78]: Custom software that automates your daily operations.
+              - generic [ref=e79]:
+                - img [ref=e81]
+                - generic [ref=e84]:
+                  - paragraph [ref=e85]: Business Automation
+                  - paragraph [ref=e86]: AI agents that answer calls, book appointments, follow up.
+              - generic [ref=e87]:
+                - img [ref=e89]
+                - generic [ref=e92]:
+                  - paragraph [ref=e93]: Scam & Spam Detection
+                  - paragraph [ref=e94]: AI-powered analysis of emails, links, files, and messages.
+              - generic [ref=e95]:
+                - img [ref=e97]
+                - generic [ref=e100]:
+                  - paragraph [ref=e101]: Cybersecurity
+                  - paragraph [ref=e102]: 24/7 threat monitoring with automated response.
+            - generic [ref=e104]:
+              - generic [ref=e105]:
+                - img [ref=e107]
+                - generic [ref=e109]:
+                  - paragraph [ref=e110]: Digital Estate
+                  - paragraph [ref=e111]: Lock down accounts and transfer credentials to heirs.
+              - generic [ref=e112]:
+                - img [ref=e114]
+                - generic [ref=e124]:
+                  - paragraph [ref=e125]: AI Training
+                  - paragraph [ref=e126]: Live workshops on spotting deepfakes and phishing.
+              - generic [ref=e127]:
+                - img [ref=e129]
+                - generic [ref=e134]:
+                  - paragraph [ref=e135]: Threat Detection
+                  - paragraph [ref=e136]: Real-time file scanning and risk reports.
+              - generic [ref=e137]:
+                - img [ref=e139]
+                - generic [ref=e141]:
+                  - paragraph [ref=e142]: 24/7 Support
+                  - paragraph [ref=e143]: Our analysts respond day and night, no exceptions.
+      - region "Who we are, what we offer, how we train you" [ref=e144]:
+        - generic [ref=e145]:
+          - region "AI scams move fast. Your protection moves faster." [ref=e146]:
+            - generic [ref=e148]:
+              - generic [ref=e149]:
+                - generic [ref=e150]: Built for real families
+                - heading "AI scams move fast. Your protection moves faster." [level=2] [ref=e152]
+                - paragraph [ref=e153]: Our team builds the same enterprise-grade defenses used by Fortune 500 companies and brings them to families and small businesses across Ohio. Every layer is engineered to stop scams before they reach you.
+                - generic [ref=e154]:
+                  - link "Get Protected" [ref=e155] [cursor=pointer]:
+                    - /url: /training#pricing
+                    - text: Get Protected
+                    - img [ref=e156]
+                  - link "How we started" [ref=e158] [cursor=pointer]:
+                    - /url: /about
+                    - text: How we started
+                    - img [ref=e159]
+                - generic [ref=e161]:
+                  - generic [ref=e162]:
+                    - img "Protected family member" [ref=e163]
+                    - img "Protected family member" [ref=e164]
+                    - img "Protected family member" [ref=e165]
+                  - generic [ref=e166]:
+                    - generic [ref=e167]:
+                      - img [ref=e168]
+                      - img [ref=e170]
+                      - img [ref=e172]
+                      - img [ref=e174]
+                      - img [ref=e176]
+                    - paragraph [ref=e178]: 100+ families protected across Ohio
+              - generic [ref=e180]:
+                - generic [ref=e181]:
+                  - img "The InVision Network security operations team at work" [ref=e182]
+                  - generic [ref=e185]: Live Operations
+                - generic [ref=e186]:
+                  - generic [ref=e187]:
+                    - img [ref=e189]
+                    - generic [ref=e191]: Threat Intel
+                  - generic [ref=e192]: 347 blocked
+                  - paragraph [ref=e193]: scams stopped this week
+          - region "By the numbers" [ref=e194]:
+            - generic [ref=e195]:
+              - heading "By the numbers" [level=2] [ref=e196]
+              - generic [ref=e197]:
+                - generic [ref=e198]:
+                  - img [ref=e200]
+                  - generic [ref=e205]: 100+
+                  - generic [ref=e206]: Families Protected
+                  - paragraph [ref=e207]: Across Ohio, every household covered end-to-end.
+                - generic [ref=e208]:
+                  - generic [ref=e209]: LIVE
+                  - img [ref=e212]
+                  - generic [ref=e214]: 99%
+                  - generic [ref=e215]: Detection Rate
+                  - paragraph [ref=e216]: Scams flagged before they reach the inbox or phone.
+                - generic [ref=e217]:
+                  - img [ref=e219]
+                  - generic [ref=e222]: 24/7
+                  - generic [ref=e223]: Expert Support
+                  - paragraph [ref=e224]: Real human analysts on standby every hour, every day.
+                - generic [ref=e225]:
+                  - img [ref=e227]
+                  - generic [ref=e230]: 10%
+                  - generic [ref=e231]: Veteran Discount
+                  - paragraph [ref=e232]: Lifetime discount for veterans and their families.
+          - region "Peace of mind that works while you sleep." [ref=e233]:
+            - generic [ref=e235]:
+              - generic [ref=e236]:
+                - img "A protected family at home" [ref=e237]
+                - generic [ref=e239]:
+                  - generic [ref=e240]:
+                    - img [ref=e241]
+                    - generic [ref=e244]: Family-First
+                  - heading "Peace of mind that works while you sleep." [level=3] [ref=e245]:
+                    - text: Peace of mind that
+                    - text: works while you sleep.
+                  - paragraph [ref=e246]: Active monitoring, deepfake detection, and instant alerts — so the only thing you have to think about is your family.
+              - generic [ref=e247]:
+                - generic [ref=e248]:
+                  - heading "One platform. Every layer of protection." [level=3] [ref=e249]
+                  - paragraph [ref=e250]: From personal training and live workshops to enterprise security audits and 24/7 monitoring — we built the toolkit so your only job is to live your life.
+                  - link "Explore Protection Plans" [ref=e251] [cursor=pointer]:
+                    - /url: /training
+                    - text: Explore Protection Plans
+                    - img [ref=e252]
+                - generic [ref=e254]:
+                  - generic [ref=e256]:
+                    - img [ref=e258]
+                    - heading "Threats neutralized before they land" [level=4] [ref=e261]
+                    - paragraph [ref=e262]: Inbound calls, texts, and emails screened by AI trained on the latest scam patterns.
+                  - generic [ref=e263]:
+                    - img [ref=e265]
+                    - heading "Continuous identity monitoring" [level=4] [ref=e268]
+                    - paragraph [ref=e269]: We watch the dark web for your credentials so a leak doesn't become a crisis.
+          - region "Protection backed by real investigation." [ref=e270]:
+            - generic [ref=e272]:
+              - generic [ref=e273]:
+                - generic [ref=e274]: Why families trust us
+                - heading "Protection backed by real investigation." [level=2] [ref=e276]
+                - paragraph [ref=e277]: Every alert we send is a real human looking at real evidence. No black box, no false alarms — just security analysts who treat your case like it's the only one they have.
+                - list [ref=e278]:
+                  - listitem [ref=e279]:
+                    - generic [ref=e280]:
+                      - img [ref=e282]
+                      - generic [ref=e285]:
+                        - heading "Always-on monitoring" [level=4] [ref=e286]
+                        - paragraph [ref=e287]: 24/7 threat detection across calls, texts, and email — flagged the moment something looks wrong.
+                  - listitem [ref=e288]:
+                    - generic [ref=e289]:
+                      - img [ref=e291]
+                      - generic [ref=e294]:
+                        - heading "Real human investigators" [level=4] [ref=e295]
+                        - paragraph [ref=e296]: Every alert is reviewed by a security analyst — never just a black-box AI guess.
+                  - listitem [ref=e297]:
+                    - generic [ref=e298]:
+                      - img [ref=e300]
+                      - generic [ref=e305]:
+                        - heading "Family-first plans" [level=4] [ref=e306]
+                        - paragraph [ref=e307]: Coverage that scales from a single account to your whole household, including elders.
+              - generic [ref=e308]:
+                - generic [ref=e309]:
+                  - generic: “
+                  - generic [ref=e310]:
+                    - img [ref=e311]
+                    - generic [ref=e313]: Trusted by 100+ Ohio Families
+                  - generic [ref=e314]:
+                    - heading "Real results, real reviews." [level=3] [ref=e315]
+                    - blockquote [ref=e316]: “We were about to send $5,000 to someone pretending to be our grandson. InVision's training taught us to use a family safe word — it saved us from devastation.”
+                  - paragraph [ref=e317]: Robert & Carol S. — Dayton, OH
+                - generic [ref=e318]:
+                  - generic [ref=e319]:
+                    - img "Security consultation in progress" [ref=e320]
+                    - paragraph [ref=e323]: AI that filters out the scammers — automatically.
+                  - generic [ref=e324]:
+                    - img [ref=e326]
+                    - generic [ref=e328]:
+                      - generic [ref=e329]: 99% stopped
+                      - generic [ref=e330]: scam detection rate
+          - region "Three steps to a quieter, safer digital life." [ref=e331]:
+            - generic [ref=e332]:
+              - generic [ref=e333]:
+                - generic [ref=e334]: How it works
+                - heading "Three steps to a quieter, safer digital life." [level=2] [ref=e336]:
+                  - text: Three steps to a quieter,
+                  - text: safer digital life.
+                - paragraph [ref=e337]: No technical knowledge required. We handle the security work so you can stay focused on the people who matter most.
+              - generic [ref=e338]:
+                - generic [ref=e340]:
+                  - generic [ref=e341]:
+                    - generic [ref=e342]: "01"
+                    - img [ref=e343]
+                  - generic [ref=e346]:
+                    - heading "We assess your risk" [level=3] [ref=e347]
+                    - paragraph [ref=e348]: A quick conversation maps the people, accounts, and devices that need protecting — and where the gaps are.
+                - generic [ref=e349]:
+                  - generic [ref=e350]:
+                    - generic [ref=e351]: "02"
+                    - img [ref=e352]
+                  - generic [ref=e355]:
+                    - heading "We deploy the defenses" [level=3] [ref=e356]
+                    - paragraph [ref=e357]: Same-day setup of monitoring, screening, alerts, and family safe-words. No wait, no contracts, no jargon.
+                - generic [ref=e358]:
+                  - generic [ref=e359]:
+                    - generic [ref=e360]: "03"
+                    - img [ref=e361]
+                  - generic [ref=e364]:
+                    - heading "We watch your back 24/7" [level=3] [ref=e365]
+                    - paragraph [ref=e366]: Real analysts review every alert. If something slips through, we recover and reimburse — fully covered.
+          - region "Everything you need to feel safe, in one plan." [ref=e367]:
+            - generic [ref=e369]:
+              - generic [ref=e370]:
+                - generic [ref=e371]: Get started today
+                - heading "Everything you need to feel safe, in one plan." [level=2] [ref=e373]:
+                  - text: Everything you need to feel
+                  - text: safe, in one plan.
+                - paragraph [ref=e374]: Same-day setup, no contracts, and a real human you can call by name. Here's what comes with every InVision plan.
+                - list [ref=e375]:
+                  - listitem [ref=e376]:
+                    - img [ref=e378]
+                    - generic [ref=e380]: Same-day setup with no contracts
+                  - listitem [ref=e381]:
+                    - img [ref=e383]
+                    - generic [ref=e385]: 10% lifetime veteran discount
+                  - listitem [ref=e386]:
+                    - img [ref=e388]
+                    - generic [ref=e390]: 30-day money-back guarantee
+                  - listitem [ref=e391]:
+                    - img [ref=e393]
+                    - generic [ref=e395]: Free re-training for new family members
+                  - listitem [ref=e396]:
+                    - img [ref=e398]
+                    - generic [ref=e400]: Real human support, every hour of every day
+                - generic [ref=e401]:
+                  - link "Start Protecting My Family" [ref=e402] [cursor=pointer]:
+                    - /url: /training#pricing
+                    - text: Start Protecting My Family
+                    - img [ref=e403]
+                  - link "Talk to a human" [ref=e405] [cursor=pointer]:
+                    - /url: /contact
+                    - text: Talk to a human
+                    - img [ref=e406]
+              - generic [ref=e408]:
+                - img "Live protection workshop in session" [ref=e410]
+                - generic [ref=e412]:
+                  - img "Community workshop attendees" [ref=e413]
+                  - paragraph [ref=e416]: Live community workshops in Ohio
+                - generic [ref=e417]:
+                  - img [ref=e418]
+                  - text: 30-Day Money-Back Guarantee
+      - generic [ref=e420]:
+        - region "What families are saying" [ref=e422]:
+          - generic [ref=e423]:
+            - generic [ref=e424]:
+              - generic [ref=e427]: Testimonials
+              - heading "What families are saying" [level=2] [ref=e428]
+              - paragraph [ref=e429]: Real stories from Ohio families we've helped protect.
+            - generic [ref=e430]:
+              - generic [ref=e432]:
+                - generic: “
+                - generic [ref=e434]:
+                  - generic [ref=e435]:
+                    - img "Robert & Carol S." [ref=e438]
+                    - generic [ref=e439]: Grandparent Scam Prevented
+                  - generic [ref=e440]:
+                    - generic [ref=e441]:
+                      - img [ref=e442]
+                      - img [ref=e444]
+                      - img [ref=e446]
+                      - img [ref=e448]
+                      - img [ref=e450]
+                    - blockquote [ref=e452]: “We were about to send $5,000 to someone pretending to be our grandson. InVision's training taught us to use a family safe word — it saved us from devastation.”
+                    - generic [ref=e453]:
+                      - paragraph [ref=e454]: Robert & Carol S.
+                      - paragraph [ref=e455]: Dayton, OH
+              - generic [ref=e456]:
+                - generic [ref=e457]:
+                  - button "Go to testimonial 1" [ref=e458] [cursor=pointer]
+                  - button "Go to testimonial 2" [ref=e459] [cursor=pointer]
+                  - button "Go to testimonial 3" [ref=e460] [cursor=pointer]
+                - generic [ref=e461]:
+                  - button "Previous testimonial" [ref=e462] [cursor=pointer]:
+                    - img [ref=e463]
+                  - button "Next testimonial" [ref=e465] [cursor=pointer]:
+                    - img [ref=e466]
+        - region "Frequently asked questions" [ref=e468]:
+          - region "Got questions?" [ref=e469]:
+            - generic [ref=e471]:
+              - generic [ref=e472]:
+                - generic [ref=e473]:
+                  - generic [ref=e474]: FAQ
+                  - heading "Got questions?" [level=2] [ref=e476]
+                  - paragraph [ref=e477]: Protecting your family from scams is a big decision. Here is what you need to know.
+                - generic [ref=e478]:
+                  - generic [ref=e479]:
+                    - img [ref=e481]
+                    - heading "Talk to a Human" [level=3] [ref=e483]
+                  - paragraph [ref=e484]: Real experts, not bots
+                  - generic [ref=e485]:
+                    - link "Chat With Expert" [ref=e486] [cursor=pointer]:
+                      - /url: /contact
+                    - link "Call Now" [ref=e487] [cursor=pointer]:
+                      - /url: tel:+19373018749
+                      - img [ref=e488]
+                      - text: Call Now
+              - generic [ref=e490]:
+                - generic [ref=e491]:
+                  - heading "1 How does ScamShield AI protect me?" [level=3] [ref=e493]:
+                    - button "1 How does ScamShield AI protect me?" [ref=e494] [cursor=pointer]:
+                      - generic [ref=e495]:
+                        - generic [ref=e496]: "1"
+                        - generic [ref=e497]: How does ScamShield AI protect me?
+                      - img [ref=e498]
+                  - heading "2 Is my personal data safe with InVision Network?" [level=3] [ref=e500]:
+                    - button "2 Is my personal data safe with InVision Network?" [ref=e501] [cursor=pointer]:
+                      - generic [ref=e502]:
+                        - generic [ref=e503]: "2"
+                        - generic [ref=e504]: Is my personal data safe with InVision Network?
+                      - img [ref=e505]
+                  - heading "3 What makes you different from other companies?" [level=3] [ref=e507]:
+                    - button "3 What makes you different from other companies?" [ref=e508] [cursor=pointer]:
+                      - generic [ref=e509]:
+                        - generic [ref=e510]: "3"
+                        - generic [ref=e511]: What makes you different from other companies?
+                      - img [ref=e512]
+                  - heading "4 I want to protect my elderly parents who are not tech-savvy. Is this for them?" [level=3] [ref=e514]:
+                    - button "4 I want to protect my elderly parents who are not tech-savvy. Is this for them?" [ref=e515] [cursor=pointer]:
+                      - generic [ref=e516]:
+                        - generic [ref=e517]: "4"
+                        - generic [ref=e518]: I want to protect my elderly parents who are not tech-savvy. Is this for them?
+                      - img [ref=e519]
+                - link "View All FAQs" [ref=e521] [cursor=pointer]:
+                  - /url: /faq
+                  - text: View All FAQs
+                  - img [ref=e522]
+      - region "Get started call to action" [ref=e524]:
+        - img "Protected senior couple" [ref=e526]
+        - generic [ref=e531]:
+          - generic [ref=e532]:
+            - img [ref=e533]
+            - generic [ref=e535]: Protected Community
+          - heading "Start Protecting Your Family Today" [level=2] [ref=e536]
+          - paragraph [ref=e537]: Join families across Ohio who live confidently, knowing they are protected from AI scams. Get started in minutes.
+          - generic [ref=e538]:
+            - link "Get Protected Today" [ref=e539] [cursor=pointer]:
+              - /url: /training#pricing
+              - text: Get Protected Today
+              - img
+            - link "Business Solutions" [ref=e540] [cursor=pointer]:
+              - /url: /business
+          - generic [ref=e541]:
+            - generic [ref=e542]:
+              - img [ref=e543]
+              - generic [ref=e546]: 10% Veteran Discount
+            - generic [ref=e547]:
+              - img [ref=e548]
+              - generic [ref=e551]: Privacy-First
+            - generic [ref=e552]:
+              - img [ref=e553]
+              - generic [ref=e556]: 30-Day Guarantee
+            - generic [ref=e557]:
+              - img [ref=e558]
+              - generic [ref=e561]: 24/7 Support
+      - generic [ref=e562]:
+        - generic [ref=e564]:
+          - generic [ref=e566]:
+            - generic [ref=e568]: OpenAI
+            - generic [ref=e570]: Google AI
+            - generic [ref=e572]: Microsoft Azure
+            - generic [ref=e574]: Amazon AWS
+            - generic [ref=e576]: IBM Watson
+            - generic [ref=e578]: Anthropic
+            - generic [ref=e580]: Meta AI
+            - generic [ref=e582]: NVIDIA
+            - generic [ref=e584]: Cloudflare
+            - generic [ref=e586]: Stripe
+            - generic [ref=e588]: OpenAI
+            - generic [ref=e590]: Google AI
+            - generic [ref=e592]: Microsoft Azure
+            - generic [ref=e594]: Amazon AWS
+            - generic [ref=e596]: IBM Watson
+            - generic [ref=e598]: Anthropic
+            - generic [ref=e600]: Meta AI
+            - generic [ref=e602]: NVIDIA
+            - generic [ref=e604]: Cloudflare
+            - generic [ref=e606]: Stripe
+            - generic [ref=e608]: OpenAI
+            - generic [ref=e610]: Google AI
+            - generic [ref=e612]: Microsoft Azure
+            - generic [ref=e614]: Amazon AWS
+            - generic [ref=e616]: IBM Watson
+            - generic [ref=e618]: Anthropic
+            - generic [ref=e620]: Meta AI
+            - generic [ref=e622]: NVIDIA
+            - generic [ref=e624]: Cloudflare
+            - generic [ref=e626]: Stripe
+          - paragraph [ref=e628]:
+            - img [ref=e629]
+            - generic [ref=e631]: Security-First • Privacy-First
+        - generic [ref=e634]:
+          - generic [ref=e635]:
+            - generic [ref=e636]:
+              - link "InVision Network — back to home" [ref=e637] [cursor=pointer]:
+                - /url: /
+                - img "InVision Network Shield Logo" [ref=e639]
+                - generic [ref=e640]:
+                  - heading "InVision Network" [level=2] [ref=e641]
+                  - paragraph [ref=e642]: AI Security & Protection
+              - paragraph [ref=e643]: Protecting families and businesses from AI-powered scams with cutting-edge technology and expert training.
+              - generic [ref=e644]:
+                - generic [ref=e645]:
+                  - img [ref=e646]
+                  - text: Kettering, OH
+                - generic [ref=e649]:
+                  - img [ref=e650]
+                  - text: hello@invisionnetwork.org
+            - generic [ref=e654]:
+              - paragraph [ref=e655]: Stay Protected
+              - heading "Monthly AI safety tips & scam alerts." [level=3] [ref=e656]
+              - paragraph [ref=e657]: Join the families and businesses we protect across Ohio. No spam — just the threats worth knowing about.
+              - generic [ref=e658]:
+                - textbox "Email address for newsletter" [ref=e659]:
+                  - /placeholder: you@example.com
+                - button "Subscribe to newsletter" [ref=e660] [cursor=pointer]:
+                  - text: Subscribe
+                  - img
+          - generic [ref=e661]:
+            - generic [ref=e662]:
+              - heading "Navigation" [level=4] [ref=e663]
+              - list [ref=e664]:
+                - listitem [ref=e665]:
+                  - link "Home" [ref=e666] [cursor=pointer]:
+                    - /url: /
+                - listitem [ref=e667]:
+                  - link "About" [ref=e668] [cursor=pointer]:
+                    - /url: /about
+                - listitem [ref=e669]:
+                  - link "Resources" [ref=e670] [cursor=pointer]:
+                    - /url: /resources
+                - listitem [ref=e671]:
+                  - link "Portfolio" [ref=e672] [cursor=pointer]:
+                    - /url: /portfolio
+                - listitem [ref=e673]:
+                  - link "Articles" [ref=e674] [cursor=pointer]:
+                    - /url: /articles
+                - listitem [ref=e675]:
+                  - link "Careers" [ref=e676] [cursor=pointer]:
+                    - /url: /careers
+            - generic [ref=e677]:
+              - heading "Services" [level=4] [ref=e678]
+              - list [ref=e679]:
+                - listitem [ref=e680]:
+                  - link "AI for Business" [ref=e681] [cursor=pointer]:
+                    - /url: /business
+                - listitem [ref=e682]:
+                  - link "AI Receptionist" [ref=e683] [cursor=pointer]:
+                    - /url: /business#svc-ai-receptionist
+                - listitem [ref=e684]:
+                  - link "Smart Scheduling" [ref=e685] [cursor=pointer]:
+                    - /url: /business#svc-smart-scheduling
+                - listitem [ref=e686]:
+                  - link "Website Design" [ref=e687] [cursor=pointer]:
+                    - /url: /business#svc-website-design
+                - listitem [ref=e688]:
+                  - link "Website Insurance" [ref=e689] [cursor=pointer]:
+                    - /url: /business#svc-website-insurance
+            - generic [ref=e690]:
+              - heading "Training" [level=4] [ref=e691]
+              - list [ref=e692]:
+                - listitem [ref=e693]:
+                  - link "Workshops" [ref=e694] [cursor=pointer]:
+                    - /url: /training
+                - listitem [ref=e695]:
+                  - link "AI Scam Analysis" [ref=e696] [cursor=pointer]:
+                    - /url: /training/ai-analysis
+                - listitem [ref=e697]:
+                  - link "Digital Library" [ref=e698] [cursor=pointer]:
+                    - /url: /library
+                - listitem [ref=e699]:
+                  - link "Protection Plans" [ref=e700] [cursor=pointer]:
+                    - /url: /training#pricing
+            - generic [ref=e701]:
+              - heading "Support" [level=4] [ref=e702]
+              - list [ref=e703]:
+                - listitem [ref=e704]:
+                  - link "FAQ" [ref=e705] [cursor=pointer]:
+                    - /url: /faq
+                - listitem [ref=e706]:
+                  - link "Help Center" [ref=e707] [cursor=pointer]:
+                    - /url: /help
+                - listitem [ref=e708]:
+                  - link "Contact Us" [ref=e709] [cursor=pointer]:
+                    - /url: /contact
+            - generic [ref=e710]:
+              - heading "Legal" [level=4] [ref=e711]
+              - list [ref=e712]:
+                - listitem [ref=e713]:
+                  - link "Privacy Policy" [ref=e714] [cursor=pointer]:
+                    - /url: /privacy-policy
+                - listitem [ref=e715]:
+                  - link "Terms of Service" [ref=e716] [cursor=pointer]:
+                    - /url: /terms-of-service
+                - listitem [ref=e717]:
+                  - link "Refund Policy" [ref=e718] [cursor=pointer]:
+                    - /url: /refund-policy
+                - listitem [ref=e719]:
+                  - link "Cookie Policy" [ref=e720] [cursor=pointer]:
+                    - /url: /cookie-policy
+                - listitem [ref=e721]:
+                  - link "Acceptable Use" [ref=e722] [cursor=pointer]:
+                    - /url: /acceptable-use
+                - listitem [ref=e723]:
+                  - link "Disclaimer" [ref=e724] [cursor=pointer]:
+                    - /url: /disclaimer
+          - generic [ref=e725]:
+            - generic [ref=e726]:
+              - paragraph [ref=e727]: © 2026 InVision Network. All rights reserved.
+              - generic [ref=e729]:
+                - img [ref=e730]
+                - text: BBB Accredited
+              - generic [ref=e732]:
+                - img [ref=e733]
+                - text: Veteran Owned
+            - generic [ref=e735]:
+              - link "Facebook" [ref=e736] [cursor=pointer]:
+                - /url: https://facebook.com/invisionnetwork
+                - img [ref=e737]
+              - link "LinkedIn" [ref=e739] [cursor=pointer]:
+                - /url: https://linkedin.com/company/invision-network
+                - img [ref=e740]
+              - link "YouTube" [ref=e744] [cursor=pointer]:
+                - /url: https://youtube.com/invisionnetwork
+                - img [ref=e745]
+              - link "Instagram" [ref=e748] [cursor=pointer]:
+                - /url: https://instagram.com/invisionnetwork
+                - img [ref=e749]
+          - generic [ref=e752]:
+            - img [ref=e753]
+            - paragraph [ref=e755]: We proudly support veterans and children with cancer. A portion of every service goes toward these causes.
+          - paragraph [ref=e756]: InVision Network provides educational services only. We are not legal, financial, tax, or licensed cybersecurity professionals. In case of active fraud, identity theft, or criminal activity, contact local law enforcement (911), your bank's fraud department immediately using official phone numbers, and report to FTC at IdentityTheft.gov. We never request passwords, 2FA codes, bank account information, or Social Security numbers.
+  - button "Open Laura AI Assistant" [ref=e775] [cursor=pointer]:
+    - img "Laura" [ref=e776]
