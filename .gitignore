@@ -40,3 +40,4 @@ blob-report
 *.njsproj
 *.sln
 *.sw?
+.playwright-mcp/
