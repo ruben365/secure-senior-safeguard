@@ -50,7 +50,7 @@ import { contactFormSchema, formatPhoneNumber } from "@/utils/formValidation";
 import { z } from "zod";
 import { useConfetti } from "@/hooks/useConfetti";
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
-import heroContactBranded from "@/assets/hero-contact-branded.jpg";
+import heroContactBranded from "@/assets/hero-contact-unified.jpg";
 import { SITE } from "@/config/site";
 import { SectionDivider, MeshBackground } from "@/components/pro";
 
