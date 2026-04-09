@@ -1,21 +1,37 @@
-/* All CSS loaded synchronously to prevent CLS from deferred style application */
+/* ═══════════════════════════════════════════════════════════════════
+   InVision Network — Unified CSS entry point
+   4-file system: base → components → responsive → animations
+   + hero styles (kept separate for code splitting)
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* 1. Design tokens, reset, typography, global element styles */
 @import "./styles/base.css";
-@import "./styles/responsive.css";
-@import "./styles/animations.css";
+
+/* 2. Component-level styles (buttons, cards, glass, nav, etc.) */
 @import "./styles/components.css";
-@import "./styles/utilities.css";
-@import "./styles/trending-ui.css";
+
+/* 3. Responsive breakpoint overrides */
+@import "./styles/responsive.css";
+
+/* 4. Animation keyframes and reveal system */
+@import "./styles/animations.css";
+
+/* Hero section styles (imported globally for now — could be code-split later) */
 @import "./styles/hero-homepage.css";
 @import "./styles/hero-business.css";
 @import "./styles/hero-workshops.css";
+
+/* Legacy files kept for backward compat — will be emptied over time */
+@import "./styles/utilities.css";
+@import "./styles/trending-ui.css";
 @import "./styles/premium-body.css";
 @import "./styles/polish.css";
 
 /* ═══════════════════════════════════════════════════════════════════
-   GLOBAL OVERRIDES — NO shadows, NO glows, NO text-shadow. Period.
+   GLOBAL OVERRIDES — no shadows, HD sharpness
    ═══════════════════════════════════════════════════════════════════ */
 
-/* Nuclear kill: box-shadow + text-shadow everywhere */
+/* Zero shadows everywhere — nuclear override */
 *,
 *::before,
 *::after {
@@ -23,20 +39,20 @@
   text-shadow: none !important;
 }
 
-/* HD text rendering — crisp antialiasing */
+/* HD text rendering */
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
-/* HD image rendering — prevent blurry upscaling */
+/* HD image rendering */
 img {
   image-rendering: auto;
   image-rendering: -webkit-optimize-contrast;
 }
 
-/* Remove will-change from non-animating elements (can cause blur) */
+/* Cleanup will-change on settled elements */
 [data-reveal].is-visible,
 .reveal-on-scroll.is-visible {
   will-change: auto;
