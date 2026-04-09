@@ -283,7 +283,7 @@
   font-weight: 700;
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: none;
 }
 
 /* ── 3c. H1 Headline ──
@@ -317,61 +317,46 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  height: 50px;
-  padding: 0 2.25rem;
-  font-size: 0.875rem;
+  height: 40px;
+  padding: 0 1.5rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-  color: rgba(255, 255, 255, 0.92);
+  color: #ffffff;
   border-radius: 50px;
   text-decoration: none;
   cursor: pointer;
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: inherit;
   position: relative;
 }
 
-/* Primary CTA — glass with purple accent glow */
+/* Primary CTA — SOLID orange, high contrast white text */
 .hero-home__cta:first-child {
-  background: linear-gradient(135deg, rgba(249, 115, 22, 0.2) 0%, rgba(255, 255, 255, 0.08) 100%);
-  border: 1px solid rgba(249, 115, 22, 0.35);
-  box-shadow:
-    0 0 20px rgba(249, 115, 22, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, #c2410c, #9a3412);
+  border: 1px solid #7c2d12;
 }
 
 .hero-home__cta:first-child:hover {
-  background: linear-gradient(135deg, rgba(249, 115, 22, 0.3) 0%, rgba(255, 255, 255, 0.12) 100%);
-  border-color: rgba(249, 115, 22, 0.5);
-  transform: translateY(-2px);
-  box-shadow:
-    0 4px 24px rgba(249, 115, 22, 0.25),
-    0 0 40px rgba(249, 115, 22, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  background: linear-gradient(135deg, #ea580c, #c2410c);
+  transform: translateY(-1px);
 }
 
-/* Secondary CTA — subtle glass border */
+/* Secondary CTA — visible glass, white text, no shadow */
 .hero-home__cta:last-child {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.30);
 }
 
 .hero-home__cta:last-child:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.35);
-  transform: translateY(-2px);
-  box-shadow:
-    0 4px 20px rgba(249, 115, 22, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.20);
+  border-color: rgba(255, 255, 255, 0.50);
+  transform: translateY(-1px);
 }
 
 /* Active press — both CTAs */
 .hero-home__cta:active {
   transform: translateY(1px) scale(0.98);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
   transition-duration: 0.1s;
 }
 
@@ -468,7 +453,7 @@
 .hero-home__feature:hover .hero-home__feature-icon {
   border-color: rgba(249, 115, 22, 0.3);
   background: rgba(249, 115, 22, 0.08);
-  box-shadow: 0 0 12px rgba(249, 115, 22, 0.1);
+  box-shadow: none;
 }
 
 .hero-home__feature:hover .hero-home__feature-icon svg {
