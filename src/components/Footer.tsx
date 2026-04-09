@@ -61,16 +61,16 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
       if (error) throw error;
 
       if (data?.alreadySubscribed) {
-        toast.info("You're already subscribed!");
+        toast.info("You're already on the list.");
       } else {
         fireSuccess();
-        toast.success("✓ Subscribed! Check your email.");
+        toast.success("You're in. Check your email for a welcome message.");
       }
 
       setEmail("");
     } catch (error: unknown) {
       console.error("Newsletter signup error:", error);
-      toast.error("Subscription failed. Please try again.");
+      toast.error("Couldn't subscribe you right now. Please try again.");
     } finally {
       setIsSubmitting(false);
     }

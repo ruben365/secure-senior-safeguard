@@ -37,16 +37,16 @@ export const NewsletterSection = () => {
       if (error) throw error;
 
       if (data?.alreadySubscribed) {
-        toast.info("You're already subscribed!");
+        toast.info("You're already on the list.");
       } else {
         fireCelebration();
-        toast.success("✓ Successfully subscribed! Check your email.");
+        toast.success("You're in. Check your email for a welcome message.");
       }
 
       setEmail("");
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Newsletter signup error:", error);
-      toast.error("Subscription failed. Please try again.");
+      toast.error("Couldn't subscribe you right now. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
