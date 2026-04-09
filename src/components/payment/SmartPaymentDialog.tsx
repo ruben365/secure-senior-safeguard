@@ -402,11 +402,9 @@ function SmartPaymentForm({ items, onSuccess, onClose }: PaymentFormProps) {
                       theme: "stripe",
                       variables: {
                         borderRadius: "8px",
-                        // Coral to match site primary (was purple #6D28D9)
                         colorPrimary: "#d96c4a",
                         fontSizeBase: "14px",
                         spacingUnit: "3px",
-                        borderRadius: "8px",
                       },
                     },
                   }}
