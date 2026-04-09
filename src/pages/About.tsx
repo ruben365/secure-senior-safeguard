@@ -201,7 +201,7 @@ function About() {
                   lesson. We're a team of cybersecurity analysts, nurses,
                   educators, and community advocates united by one mission:
                   ensuring no family experiences the fear and financial
-                  devastation we endured.
+                  devastation we endured. If you'd like to learn more, <Link to="/contact" className="text-primary hover:underline font-medium">get in touch</Link> with our team.
                 </p>
               </div>
             </div>
@@ -283,7 +283,7 @@ function About() {
                 and emails - with criminals demanding payment to delete their
                 data - Ruben was inspired to enter the cybersecurity field,
                 embracing a deeper mission: making enterprise-level security
-                accessible to everyone.
+                accessible to everyone through <Link to="/training" className="text-primary hover:underline font-medium">our workshops</Link> and hands-on education.
               </p>
               <blockquote className="border-l-2 border-primary pl-3 italic text-xs text-muted-foreground">
                 "Everyone deserves to feel safe online, regardless of their
@@ -468,7 +468,7 @@ function About() {
             Ready to Join Our Protected Community?
           </h2>
           <p className="text-base md:text-lg text-white/95 mb-5 max-w-2xl mx-auto drop-shadow-md">
-            Whether you're looking for personal training, business solutions, or
+            Whether you're looking for personal training, <Link to="/business" className="text-white/95 underline hover:text-white font-medium">AI business solutions</Link>, or
             want to support our mission, we'd love to connect.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">

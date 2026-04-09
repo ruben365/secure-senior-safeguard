@@ -318,7 +318,7 @@ function Resources() {
             <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground">
               Welcome to InVision Network's resource center. Here you'll find carefully curated
               <strong className="text-foreground"> e-books and digital guides</strong>
-              {" "}designed to help you and your family stay safe in the digital age.
+              {" "}designed to help you and your family stay safe in the digital age. Pair these with <Link to="/training" className="text-primary hover:underline font-medium">our workshops</Link> for hands-on learning, or <Link to="/contact" className="text-primary hover:underline font-medium">get help</Link> from our team.
             </p>
           </div>
 

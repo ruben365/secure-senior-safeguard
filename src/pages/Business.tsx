@@ -709,7 +709,7 @@ function Business() {
                         <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-8">
                           We merged the full platform into AI to keep the story simple.
                           Our purpose is to help Ohio organizations grow with AI while staying safe from
-                          modern fraud and operational risk.
+                          modern fraud and operational risk. Learn more about <Link to="/about" className="text-primary hover:underline font-medium">our story</Link> and the team behind the mission.
                         </p>
                         <div className="space-y-4">
                           {[
@@ -1435,7 +1435,7 @@ function Business() {
                       We Support AI Agents From Any Vendor
                     </h3>
                     <p className="text-muted-foreground text-sm max-w-2xl mx-auto leading-relaxed">
-                      It does not matter where you bought your AI. We fix, optimize, secure, and develop AI systems from any platform worldwide.
+                      It does not matter where you bought your AI. We fix, optimize, secure, and develop AI systems from any platform worldwide. We also offer <Link to="/training" className="text-primary hover:underline font-medium">cybersecurity workshops</Link> to keep your team sharp.
                     </p>
                   </div>
                   <div className="flex flex-wrap justify-center gap-6 mb-8 relative z-10">
@@ -1508,7 +1508,7 @@ function Business() {
                     <h3 className="text-2xl font-black mb-3">Thinking About AI</h3>
                     <Badge className="bg-primary/10 text-primary border-0 mb-5 font-bold">$199 Discovery Call</Badge>
                     <p className="text-muted-foreground max-w-2xl mx-auto mb-7 leading-relaxed">
-                      Not sure if AI fits your business? In a paid 30-minute discovery call ($199, credited toward any project you book), we help you explore your options, understand costs, and figure out if AI will drive real growth for you.
+                      Not sure if AI fits your business? In a paid 30-minute discovery call ($199, credited toward any project you book), we help you explore your options, understand costs, and figure out if AI will drive real growth for you. <Link to="/contact" className="text-primary hover:underline font-medium">Schedule a call</Link> to get started.
                     </p>
                     <ul className="text-left max-w-md mx-auto space-y-3 mb-8">
                       {["30-minute discovery call", "Business needs assessment", "AI opportunity identification", "Credit applied to any project"].map((item, i) =>

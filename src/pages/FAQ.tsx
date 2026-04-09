@@ -412,7 +412,7 @@ export default function FAQ() {
               <p className="text-slate-600 text-base md:text-lg leading-relaxed">
                 Most people get what they need in under a minute. If not, use
                 the form on the right and we&rsquo;ll reply personally within one
-                business day.
+                business day. You can also <Link to="/contact" className="text-primary hover:underline font-medium">reach out to us</Link> directly.
               </p>
             </div>
 
@@ -679,7 +679,7 @@ export default function FAQ() {
                       </div>
                       <p className="text-[12px] text-slate-600 mb-3 ml-10">
                         We reply within 1 business day, from a real person in
-                        Kettering.
+                        Kettering. Or explore our <Link to="/training" className="text-primary hover:underline font-medium">training sessions</Link> and <Link to="/business" className="text-primary hover:underline font-medium">AI business tools</Link>.
                       </p>
 
                       <div className="space-y-2.5">

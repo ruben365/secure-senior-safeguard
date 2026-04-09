@@ -636,7 +636,7 @@ function LearnAndTrain() {
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 Clear teaching, privacy-first protocols, and real scripts your
-                family can use in any emergency.
+                family can use in any emergency. Have questions? Check our <Link to="/faq" className="text-primary hover:underline font-medium">common questions</Link> page.
               </p>
             </div>
 
@@ -753,7 +753,7 @@ function LearnAndTrain() {
                 How It <span className="text-primary">Works</span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                Three simple steps to build calm, repeatable safety habits.
+                Three simple steps to build calm, repeatable safety habits. Ready to begin? <Link to="/contact" className="text-primary hover:underline font-medium">Book a session</Link> today.
               </p>
             </div>
 
@@ -1043,7 +1043,7 @@ function LearnAndTrain() {
                 Secure Your <span className="text-primary">Family</span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                AI-powered scammers don't just target you — they target your entire family.
+                AI-powered scammers don't just target you — they target your entire family. Explore our <Link to="/resources" className="text-primary hover:underline font-medium">scam prevention guides</Link> for additional protection.
               </p>
             </div>
 
