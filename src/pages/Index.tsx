@@ -73,27 +73,15 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
             <HomeStorySections />
           </section>
 
-          {/* 3. Testimonials + FAQ — wrapped in the same warm off-white
-              container so they flow seamlessly out of HomeStorySections.
-              Layered depth: dot grid base + 4 ambient orange glows. */}
-          <div className="hss-root relative isolate">
-            {/* DEPTH LAYER 1 — slate dot pattern (z-index -10) */}
-            <div aria-hidden="true" className="hss-dot-grid" />
-
-            {/* DEPTH LAYER 2 — ambient orange halos (z-index -1) */}
-            <div aria-hidden="true" className="hss-ambient-wash" />
-            <div aria-hidden="true" className="hss-ambient-wash-2" />
-            <div aria-hidden="true" className="hss-ambient-wash-3" />
-            <div aria-hidden="true" className="hss-ambient-wash-4" />
-
-            <div id="testimonials" className="relative z-10">
+          {/* 3. Testimonials + FAQ — clean container, no decorative noise */}
+          <div className="relative">
+            <div id="testimonials">
               <TestimonialCarousel />
             </div>
 
             <section
               id="faq"
               aria-label="Frequently asked questions"
-              className="relative z-10"
             >
               <LazySection>
                 <FAQPreview />
