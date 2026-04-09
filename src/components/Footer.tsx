@@ -68,7 +68,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
       }
 
       setEmail("");
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Newsletter signup error:", error);
       toast.error("Subscription failed. Please try again.");
     } finally {

@@ -56,10 +56,11 @@ export function AlertPreferences() {
       }
     },
     onSuccess: () => {
-      toast.success("Alert preferences saved!");
+      toast.success("Alert preferences saved.");
       queryClient.invalidateQueries({ queryKey: ["alert-prefs"] });
     },
-    onError: () => toast.error("Failed to save preferences"),
+    onError: () =>
+      toast.error("Couldn't save your preferences. Please try again."),
   });
 
   return (

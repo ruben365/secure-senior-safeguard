@@ -50,7 +50,7 @@ const CustomerInfoStep: React.FC<{
     e.preventDefault();
 
     if (!customerInfo.email || !customerInfo.name) {
-      toast.error("Please fill in all required fields");
+      toast.error("Please enter your name and email to continue.");
       return;
     }
 
@@ -255,7 +255,7 @@ const QRCodePaymentStep: React.FC<{
       }
     } catch (error: any) {
       console.error("[QR Payment] Error:", error);
-      toast.error("Failed to generate QR code");
+      toast.error("Couldn't create the QR code. Please refresh and try again.");
     } finally {
       setLoading(false);
     }
