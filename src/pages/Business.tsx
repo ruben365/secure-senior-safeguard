@@ -520,7 +520,7 @@ function Business() {
         {/* ═══════════════════ SERVICES ═══════════════════ */}
         <section id="services" className="py-16 md:py-24 relative overflow-hidden">
           {/* Premium background */}
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background my-[777px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
           <div className="absolute top-20 left-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-20 right-0 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-3xl pointer-events-none" />
 
