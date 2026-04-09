@@ -1,30 +1,77 @@
 /* ═══════════════════════════════════════════════════════════════════
-   Footer — premium dark layout with warm orange edge tie-in
+   Footer — premium warm-slate layout with coral brand tie-in
+   Retuned from purple-slate (hsl 260) to warm navy/charcoal (hsl 213)
+   so the orange accent no longer fights a purple backdrop.
    ═══════════════════════════════════════════════════════════════════ */
 
 .footer-bg {
   background: linear-gradient(
     180deg,
-    hsl(260 12% 11%) 0%,
-    hsl(260 10% 8%) 60%,
-    hsl(260 8% 6%) 100%
+    hsl(213 28% 10%) 0%,
+    hsl(213 24% 7%) 60%,
+    hsl(213 22% 5%) 100%
   );
+  position: relative;
+  isolation: isolate;
+}
+
+/* Top edge hairline in brand orange — ties the footer to brand */
+.footer-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(217, 108, 74, 0.28) 20%,
+    rgba(249, 115, 22, 0.45) 50%,
+    rgba(217, 108, 74, 0.28) 80%,
+    transparent 100%
+  );
+  z-index: 1;
+  pointer-events: none;
 }
 
 .footer-aura {
-  background: radial-gradient(
-    60% 60% at 100% 30%,
-    rgba(249, 115, 22, 0.07) 0%,
-    transparent 70%
-  );
+  background:
+    radial-gradient(
+      55% 55% at 100% 25%,
+      rgba(249, 115, 22, 0.09) 0%,
+      transparent 65%
+    ),
+    radial-gradient(
+      45% 45% at 5% 90%,
+      rgba(217, 108, 74, 0.06) 0%,
+      transparent 60%
+    );
 }
 
 .footer-newsletter-card {
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.04) 0%,
-    rgba(255, 255, 255, 0.015) 100%
+    rgba(255, 255, 255, 0.045) 0%,
+    rgba(255, 255, 255, 0.018) 100%
   );
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
+  border: 1px solid rgba(249, 115, 22, 0.18);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  backdrop-filter: blur(10px) saturate(140%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 12px 32px -8px rgba(0, 0, 0, 0.45),
+    0 0 40px -8px rgba(249, 115, 22, 0.12);
+  transition:
+    border-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-newsletter-card:hover,
+.footer-newsletter-card:focus-within {
+  border-color: rgba(249, 115, 22, 0.35);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 16px 40px -8px rgba(0, 0, 0, 0.5),
+    0 0 60px -8px rgba(249, 115, 22, 0.2);
 }
