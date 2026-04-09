@@ -457,3 +457,324 @@ nav [style*="backdrop-filter"] .text-muted-foreground {
 .glass-text-accent {
   color: #F97316 !important;
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   ENHANCED MOTION SYSTEM — makes the site feel alive
+   Pure CSS, no heavy libraries. Uses transform + opacity only.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Hero CTA pulse glow ─────────────────────────────────────── */
+@keyframes cta-pulse-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 20px rgba(249, 115, 22, 0.25),
+      0 8px 20px -6px rgba(217, 108, 74, 0.5);
+  }
+  50% {
+    box-shadow:
+      0 0 32px rgba(249, 115, 22, 0.4),
+      0 12px 28px -6px rgba(217, 108, 74, 0.65);
+  }
+}
+
+/* Apply to any primary CTA in a hero section */
+section[id="hero"] a[class*="heroPrimary"],
+section[id="hero"] button[class*="heroPrimary"],
+.cta-pulse {
+  animation: cta-pulse-glow 3s ease-in-out infinite;
+}
+
+/* ── Ken Burns (subtle zoom + pan on hero images) ────────────── */
+@keyframes ken-burns {
+  0%   { transform: scale(1)    translate3d(0, 0, 0); }
+  50%  { transform: scale(1.06) translate3d(-1%, -0.5%, 0); }
+  100% { transform: scale(1)    translate3d(0, 0, 0); }
+}
+
+.ken-burns img,
+img.ken-burns {
+  animation: ken-burns 25s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* ── Card stagger entrance ───────────────────────────────────── */
+.stagger-grid > * {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  transition:
+    opacity 500ms var(--ease-out-emph),
+    transform 500ms var(--ease-out-emph);
+}
+
+.stagger-grid.is-visible > *:nth-child(1) { transition-delay: 0ms; }
+.stagger-grid.is-visible > *:nth-child(2) { transition-delay: 80ms; }
+.stagger-grid.is-visible > *:nth-child(3) { transition-delay: 160ms; }
+.stagger-grid.is-visible > *:nth-child(4) { transition-delay: 240ms; }
+.stagger-grid.is-visible > *:nth-child(5) { transition-delay: 320ms; }
+.stagger-grid.is-visible > *:nth-child(6) { transition-delay: 400ms; }
+.stagger-grid.is-visible > *:nth-child(7) { transition-delay: 480ms; }
+.stagger-grid.is-visible > *:nth-child(8) { transition-delay: 560ms; }
+
+.stagger-grid.is-visible > * {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* ── Card featured shimmer (plays once on viewport entry) ───── */
+@keyframes card-shimmer {
+  0% { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
+
+.card-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-shimmer.is-visible::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.12) 45%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.12) 55%,
+    transparent 100%
+  );
+  animation: card-shimmer 800ms var(--ease-out-emph) forwards;
+  animation-delay: 300ms;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Card hover lift + border glow ───────────────────────────── */
+.card-lift {
+  transition:
+    transform 300ms var(--ease-out-std),
+    box-shadow 300ms var(--ease-out-std),
+    border-color 300ms var(--ease-out-std);
+}
+
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 12px 40px -8px rgba(15, 23, 42, 0.1),
+    0 0 20px -4px rgba(249, 115, 22, 0.08);
+  border-color: rgba(249, 115, 22, 0.2);
+}
+
+/* ── Button ripple effect ────────────────────────────────────── */
+@keyframes btn-ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.35;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(4);
+    opacity: 0;
+  }
+}
+
+button::after,
+a[role="button"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+button:active::after,
+a[role="button"]:active::after {
+  background: radial-gradient(
+    circle at var(--ripple-x, 50%) var(--ripple-y, 50%),
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 60%
+  );
+  animation: btn-ripple 450ms var(--ease-out-std) forwards;
+}
+
+/* ── Icon bounce on hover ────────────────────────────────────── */
+@keyframes icon-bounce {
+  0%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-3px); }
+  60% { transform: translateY(-1px); }
+}
+
+.icon-bounce:hover svg,
+.icon-bounce:hover [data-lucide] {
+  animation: icon-bounce 400ms var(--ease-out-std);
+}
+
+/* ── Section divider glow ────────────────────────────────────── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 5%,
+    rgba(249, 115, 22, 0.15) 30%,
+    rgba(249, 115, 22, 0.25) 50%,
+    rgba(249, 115, 22, 0.15) 70%,
+    transparent 95%
+  );
+  margin: 0 auto;
+  max-width: 80%;
+}
+
+/* ── Scroll-to-top smooth fade ───────────────────────────────── */
+.scroll-to-top-btn {
+  transition:
+    opacity 300ms var(--ease-out-std),
+    transform 300ms var(--ease-out-std);
+}
+
+.scroll-to-top-btn[data-visible="false"] {
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+
+.scroll-to-top-btn[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Alternating section slide directions ────────────────────── */
+section[data-reveal]:nth-child(even) {
+  --reveal-direction: -1;
+}
+
+section[data-reveal]:nth-child(odd) {
+  --reveal-direction: 1;
+}
+
+/* ── Form input label float ──────────────────────────────────── */
+.float-label {
+  position: relative;
+}
+
+.float-label label {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: hsl(var(--muted-foreground));
+  pointer-events: none;
+  transition:
+    transform 200ms var(--ease-out-std),
+    font-size 200ms var(--ease-out-std),
+    color 200ms var(--ease-out-std);
+  transform-origin: left center;
+}
+
+.float-label input:focus ~ label,
+.float-label input:not(:placeholder-shown) ~ label,
+.float-label textarea:focus ~ label,
+.float-label textarea:not(:placeholder-shown) ~ label {
+  transform: translateY(-170%) scale(0.85);
+  color: hsl(var(--primary));
+  font-weight: 600;
+}
+
+/* ── Page crossfade transition ───────────────────────────────── */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 300ms var(--ease-out-emph),
+    transform 300ms var(--ease-out-emph);
+}
+
+.page-transition-exit {
+  opacity: 1;
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transition: opacity 150ms ease-in;
+}
+
+/* ── Branded loading bar ─────────────────────────────────────── */
+@keyframes loading-bar {
+  0% { transform: scaleX(0); transform-origin: left; }
+  50% { transform: scaleX(0.7); transform-origin: left; }
+  51% { transform-origin: right; }
+  100% { transform: scaleX(0); transform-origin: right; }
+}
+
+.loading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
+  animation: loading-bar 1.5s var(--ease-out-std) infinite;
+  z-index: 10004;
+}
+
+/* ── Skeleton loading shimmer ────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--muted)) 25%,
+    hsl(var(--muted) / 0.5) 50%,
+    hsl(var(--muted)) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: var(--radius-md);
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Prefers reduced motion — disable ALL motion ─────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .cta-pulse,
+  section[id="hero"] a[class*="heroPrimary"],
+  section[id="hero"] button[class*="heroPrimary"] {
+    animation: none !important;
+  }
+  .ken-burns img,
+  img.ken-burns {
+    animation: none !important;
+  }
+  .stagger-grid > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .card-shimmer.is-visible::after {
+    animation: none !important;
+    display: none;
+  }
+  button:active::after,
+  a[role="button"]:active::after {
+    animation: none !important;
+  }
+  .icon-bounce:hover svg {
+    animation: none !important;
+  }
+  .loading-bar {
+    animation: none !important;
+    display: none;
+  }
+  .skeleton {
+    animation: none !important;
+  }
+  .page-transition-enter-active,
+  .page-transition-exit-active {
+    transition: none !important;
+  }
+}
