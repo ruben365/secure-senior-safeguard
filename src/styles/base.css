@@ -225,25 +225,31 @@
     --space-24:  6rem;      /* 96px  */
     --space-32:  8rem;      /* 128px */
 
-    /* Section vertical padding — compact scale */
-    --section-py-xs:  1rem;     /* tight */
-    --section-py-sm:  1.75rem;  /* compact */
-    --section-py-md:  2.75rem;  /* default */
-    --section-py-lg:  4rem;     /* spacious */
-    --section-py-xl:  5.5rem;   /* hero/feature */
+    /* Section vertical padding — true compact scale */
+    --section-py-xs:  0.75rem;  /* tight */
+    --section-py-sm:  1.5rem;   /* compact */
+    --section-py-md:  2.25rem;  /* default */
+    --section-py-lg:  3rem;     /* spacious */
+    --section-py-xl:  4rem;     /* hero/feature */
 
-    /* Container widths — compact */
-    --container-xs:   400px;
-    --container-sm:   540px;
-    --container-md:   680px;
-    --container-lg:   880px;
-    --container-xl:   1040px;
-    --container-2xl:  1140px;
-    --container-wide: 1280px;
-    --container-max:  1440px;
+    /* Container widths — 1080px primary */
+    --container-xs:   380px;
+    --container-sm:   520px;
+    --container-md:   660px;
+    --container-lg:   840px;
+    --container-xl:   1000px;
+    --container-2xl:  1080px;
+    --container-wide: 1200px;
+    --container-max:  1400px;
 
-    /* Global text scale — 0.875 = 14px base (compact but readable) */
-    --text-scale: 0.875;
+    /* Global text scale — 0.84375 = 13.5px base (true 75% feel) */
+    --text-scale: 0.84375;
+
+    /* ── Warm neutral accent — coffee/taupe balance tone ── */
+    --warm: 30 15% 72%;
+    --warm-light: 30 15% 85%;
+    --warm-dark: 30 15% 55%;
+    --warm-bg: 30 10% 12%;
 
     /* ── Shadow XL token — DISABLED ── */
     --shadow-xl: none;
@@ -380,7 +386,7 @@
 
   @media (max-width: 768px) {
     :root {
-      --text-scale: 0.9; /* slightly larger than desktop 0.85 for mobile readability */
+      --text-scale: 0.875; /* slightly larger than desktop 0.84375 for mobile readability */
     }
   }
 
