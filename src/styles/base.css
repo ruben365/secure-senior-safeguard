@@ -225,26 +225,26 @@
     --space-24:  6rem;      /* 96px  */
     --space-32:  8rem;      /* 128px */
 
-    /* Section vertical padding scale */
-    --section-py-xs:  1.5rem;   /* tight */
-    --section-py-sm:  2.5rem;   /* compact */
-    --section-py-md:  4rem;     /* default */
-    --section-py-lg:  6rem;     /* spacious */
-    --section-py-xl:  8rem;     /* hero/feature */
+    /* Section vertical padding — compact scale */
+    --section-py-xs:  1rem;     /* tight */
+    --section-py-sm:  1.75rem;  /* compact */
+    --section-py-md:  2.75rem;  /* default */
+    --section-py-lg:  4rem;     /* spacious */
+    --section-py-xl:  5.5rem;   /* hero/feature */
 
-    /* Container width tokens */
-    --container-xs:   480px;
-    --container-sm:   640px;
-    --container-md:   768px;
-    --container-lg:   1024px;
-    --container-xl:   1280px;
-    --container-2xl:  1400px;
-    --container-wide: 1600px;
-    --container-max:  1920px;
+    /* Container widths — tighter */
+    --container-xs:   420px;
+    --container-sm:   560px;
+    --container-md:   700px;
+    --container-lg:   920px;
+    --container-xl:   1100px;
+    --container-2xl:  1200px;
+    --container-wide: 1340px;
+    --container-max:  1600px;
 
-    /* Global text scale (rem-based) — drives `html { font-size }`,
-       so every rem-based size in the design system zooms uniformly. */
-    --text-scale: 1.1;
+    /* Global text scale — 0.85 gives a compact 75%-feel without
+       CSS zoom (which causes subpixel blur). 16px × 0.85 = 13.6px base. */
+    --text-scale: 0.85;
 
     /* ── Shadow XL token — DISABLED ── */
     --shadow-xl: none;
@@ -381,7 +381,7 @@
 
   @media (max-width: 768px) {
     :root {
-      --text-scale: 1.045; /* 0.95 baseline × 1.10 zoom */
+      --text-scale: 0.9; /* slightly larger than desktop 0.85 for mobile readability */
     }
   }
 
@@ -506,62 +506,63 @@
   }
 
   h1 {
-    /* zoom-aware: clamp values × 1.333 so visual size is correct with 0.75 zoom */
-    font-size: clamp(2.1rem, 5vw, 4rem);
+    /* Compact: ~28-36px range (was 34-64px with old zoom) */
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
     letter-spacing: -0.02em;
     line-height: 1.1;
     font-weight: 900;
   }
 
   h2 {
-    font-size: clamp(1.7rem, 4vw, 3rem);
+    /* Compact: ~22-28px range */
+    font-size: clamp(1.375rem, 3vw, 2rem);
     letter-spacing: -0.015em;
     line-height: 1.15;
     font-weight: 800;
   }
 
   h3 {
-    font-size: clamp(1.3rem, 3vw, 2.2rem);
+    /* Compact: ~18-22px range */
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
     letter-spacing: -0.01em;
     line-height: 1.2;
     font-weight: 700;
   }
 
   h4 {
-    font-size: clamp(1.15rem, 2vw + 0.25rem, 1.75rem);
+    /* Compact: ~16-18px range */
+    font-size: clamp(1rem, 1.5vw + 0.25rem, 1.25rem);
     letter-spacing: -0.008em;
     line-height: 1.25;
     font-weight: 600;
   }
 
   h5 {
-    font-size: clamp(1rem, 1vw + 0.25rem, 1.25rem);
+    font-size: clamp(0.9375rem, 1vw + 0.2rem, 1.125rem);
     letter-spacing: -0.01em;
     line-height: 1.3;
     font-weight: 600;
   }
 
   h6 {
-    font-size: clamp(0.9375rem, 0.5vw + 0.25rem, 1.125rem);
+    font-size: clamp(0.875rem, 0.5vw + 0.2rem, 1rem);
     letter-spacing: -0.008em;
     line-height: 1.4;
     font-weight: 600;
   }
 
   p {
-    font-size: 1rem;
-    line-height: 1.7;
+    font-size: 0.9375rem; /* 15px at 16px base, ~13px with 0.85 scale */
+    line-height: 1.65;
     letter-spacing: -0.011em;
-    margin: 0 0 1rem;
+    margin: 0 0 0.75rem;
     color: hsl(var(--foreground) / 0.85);
     max-width: 65ch;
   }
 
-  /* Lead paragraph — larger intro text. Use on first paragraph in a section.
-     zoom-aware: 1.125rem CSS × 0.75 = ~0.84rem visual at base; clamp handles scale. */
   .lead {
-    font-size: clamp(1.125rem, 1.5vw + 0.25rem, 1.375rem);
-    line-height: 1.65;
+    font-size: clamp(1rem, 1.25vw + 0.25rem, 1.175rem);
+    line-height: 1.6;
     color: hsl(var(--muted-foreground));
     font-weight: 400;
     max-width: 70ch;
@@ -595,22 +596,19 @@
     line-height: 1.6;
   }
 
-  /* Minimum tap targets for accessibility.
-     Size is 56px CSS (× 0.75 zoom = 42px visual) to meet the 44px WCAG guideline
-     after the global zoom is applied. Ensures sufficient touch area on mobile. */
+  /* Tap targets — 36px desktop, 44px mobile (no zoom to compensate for) */
   button,
   [role="button"],
   a[role="button"] {
-    min-height: 44px;
-    min-width: 44px;
+    min-height: 36px;
+    min-width: 36px;
   }
 
-  /* Mobile: increase tap targets to compensate for zoom */
   @media (max-width: 768px) {
     button,
     [role="button"],
     a[role="button"] {
-      min-height: 52px;
+      min-height: 44px;
       min-width: 44px;
     }
   }

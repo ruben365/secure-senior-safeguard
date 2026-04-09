@@ -48,8 +48,8 @@ const DialogContent = React.forwardRef<
         }
       }}
       className={cn(
-        // Compact modal: 440px desktop default, 85vh cap, tight padding
-        "fixed left-[50%] top-[50%] z-50 grid w-[92%] sm:w-full max-w-[440px] max-h-[85vh] overflow-y-auto translate-x-[-50%] translate-y-[-50%] gap-2.5 border border-border/60 bg-background/97 backdrop-blur-2xl p-4 sm:p-5 rounded-2xl shadow-[0_20px_60px_-20px_rgba(15,23,42,0.28),0_8px_20px_-8px_rgba(15,23,42,0.12),0_0_0_1px_rgba(255,255,255,0.04),inset_0_1px_0_0_rgba(255,255,255,0.6)] duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
+        // Compact modal: 380px max, tight padding, no shadow
+        "fixed left-[50%] top-[50%] z-50 grid w-[90%] sm:w-full max-w-[380px] max-h-[85vh] overflow-y-auto translate-x-[-50%] translate-y-[-50%] gap-2 border border-border/60 bg-background/97 backdrop-blur-2xl p-3.5 sm:p-4 rounded-xl duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
         className,
       )}
       style={{
@@ -58,7 +58,7 @@ const DialogContent = React.forwardRef<
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className="absolute right-3 top-3 rounded-lg p-2 min-w-[40px] min-h-[40px] flex items-center justify-center opacity-70 ring-offset-background transition-all hover:opacity-100 hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none">
+      <DialogPrimitive.Close className="absolute right-2.5 top-2.5 rounded-lg p-1.5 min-w-[32px] min-h-[32px] flex items-center justify-center opacity-70 ring-offset-background transition-all hover:opacity-100 hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none">
         <X className="h-4 w-4" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
@@ -103,8 +103,8 @@ const DialogTitle = React.forwardRef<
   <DialogPrimitive.Title
     ref={ref}
     className={cn(
-      // Dialog title — 18px for 440px modal
-      "text-[18px] font-semibold leading-tight tracking-tight text-foreground",
+      // Dialog title — 16px for compact 380px modal
+      "text-[16px] font-semibold leading-tight tracking-tight text-foreground",
       className,
     )}
     {...props}

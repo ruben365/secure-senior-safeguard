@@ -324,16 +324,16 @@ a[href^="#"] {
    DIALOG & GLASS PANEL READABILITY — compact text, high-contrast
    ═══════════════════════════════════════════════════════════════════ */
 
-/* ── Dialog interior text scaling — proportional to 440px modal ── */
+/* ── Dialog interior text — compact for 380px modal ── */
 [role="dialog"] {
-  font-size: 14px;
-  line-height: 1.55;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 [role="dialog"] h1,
 [role="dialog"] h2,
 [role="dialog"] h3 {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.25;
   font-weight: 700;
   color: hsl(var(--foreground));
@@ -342,20 +342,20 @@ a[href^="#"] {
 
 [role="dialog"] h4,
 [role="dialog"] h5 {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   color: hsl(var(--foreground));
 }
 
 [role="dialog"] p {
-  font-size: 13.5px;
-  line-height: 1.55;
+  font-size: 12.5px;
+  line-height: 1.5;
   color: hsl(var(--foreground) / 0.82);
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.4rem;
 }
 
 [role="dialog"] label {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: hsl(var(--foreground) / 0.88);
 }
@@ -363,13 +363,13 @@ a[href^="#"] {
 [role="dialog"] input,
 [role="dialog"] textarea,
 [role="dialog"] select {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 /* Buttons inside dialogs */
 [role="dialog"] button {
-  min-height: 40px;
-  font-size: 14px;
+  min-height: 34px;
+  font-size: 13px;
 }
 
 /* ── Glass panel text readability ──────────────────────────────

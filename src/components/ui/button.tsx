@@ -76,12 +76,12 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-[52px] px-5 py-2.5 text-base",
-        sm: "h-[44px] rounded-md px-4 text-sm",
-        lg: "h-[52px] rounded-lg px-6 text-base",
-        xl: "h-[56px] rounded-lg px-8 text-lg",
-        icon: "h-[52px] w-[52px]",
-        heroPill: "h-[50px] rounded-full px-9 text-sm tracking-wide gap-2",
+        default: "h-[38px] px-4 py-1.5 text-[13px]",
+        sm: "h-[34px] rounded-md px-3 text-[12px]",
+        lg: "h-[42px] rounded-lg px-5 text-[14px]",
+        xl: "h-[46px] rounded-lg px-6 text-[15px]",
+        icon: "h-[38px] w-[38px]",
+        heroPill: "h-[40px] rounded-full px-6 text-[13px] tracking-wide gap-1.5",
       },
     },
     defaultVariants: {
