@@ -8,6 +8,7 @@ import { ScamShieldSubmission } from "@/components/ScamShieldSubmission";
 import { PageTransition } from "@/components/PageTransition";
 import { Button } from "@/components/ui/button";
 import { SEO, PAGE_SEO } from "@/components/SEO";
+import { AnswerSummary } from "@/components/AnswerSummary";
 import seniorCoupleActive from "@/assets/senior-couple-active.jpg";
 import { SITE } from "@/config/site";
 import { TestimonialCarousel } from "@/components/home/TestimonialCarousel";
@@ -54,10 +55,17 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
           {/* Color-wash wrapper — layered overlay of dark 10%, purple 10%,
               white 6%, brown 10%, yellow 7%, burgundy 6%, maroon 3%, red 1%.
               Hero and Footer sit OUTSIDE this wrapper so they stay untouched. */}
+          {/* Answer summary — visible to users and AI search engines */}
+          <AnswerSummary
+            summary="InVision Network provides AI scam protection, cybersecurity training, and business automation for families and companies in Kettering, Dayton, and across Ohio. We stop deepfakes, phishing, and voice-clone scams before they reach you."
+            ctaHref="/training"
+            ctaLabel="Explore our workshops and protection plans"
+            className="py-8"
+          />
+
           <div className="home-color-wash relative isolate">
 
-          {/* 2. Story sections — replaces the old intro/services/workshops/promo
-              stack with one cohesive 3-section block in the orange/glass system */}
+          {/* 2. Story sections */}
           <section
             id="story"
             aria-label="Who we are, what we offer, how we train you"
