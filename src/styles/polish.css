@@ -27,13 +27,13 @@ html {
 /* Scope: any Radix dialog/alert-dialog/sheet content (all use role="dialog") */
 [role="dialog"] input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
 [role="alertdialog"] input:not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
-  height: 2rem !important;          /* ~27px at 13.5px base */
-  padding-top: 0.3rem !important;
-  padding-bottom: 0.3rem !important;
-  padding-left: 0.6rem !important;
-  padding-right: 0.6rem !important;
-  border-radius: 0.375rem !important;
-  font-size: 0.75rem !important;    /* ~10px */
+  height: 2.5rem !important;        /* 40px */
+  padding-top: 0.375rem !important;
+  padding-bottom: 0.375rem !important;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+  border-radius: 0.5rem !important;
+  font-size: 0.875rem !important;   /* 14px */
 }
 
 [role="dialog"] textarea,
@@ -56,14 +56,14 @@ html {
 [role="dialog"] button.h-\[44px\],
 [role="dialog"] button.h-\[56px\],
 [role="dialog"] button.h-\[50px\],
-[role="dialog"] button.h-\[38px\],
-[role="dialog"] button.h-\[32px\],
+[role="dialog"] button.h-\[48px\],
+[role="dialog"] button.h-\[40px\],
 [role="alertdialog"] button.h-\[52px\],
 [role="alertdialog"] button.h-\[44px\] {
-  height: 2rem !important;
-  padding-left: 1rem !important;
-  padding-right: 1rem !important;
-  font-size: 0.75rem !important;
+  height: 2.5rem !important;        /* 40px */
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+  font-size: 0.875rem !important;   /* 14px */
 }
 
 /* The icon variant (52×52) becomes 40×40 */
@@ -326,52 +326,52 @@ a[href^="#"] {
    DIALOG & GLASS PANEL READABILITY — compact text, high-contrast
    ═══════════════════════════════════════════════════════════════════ */
 
-/* ── Dialog interior text — compact for 340px modal ── */
+/* ── Dialog interior text — standard 440px modal ── */
 [role="dialog"] {
-  font-size: 12px;
-  line-height: 1.45;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 [role="dialog"] h1,
 [role="dialog"] h2,
 [role="dialog"] h3 {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.25;
   font-weight: 700;
-  color: hsl(var(--foreground));
+  color: white;
   letter-spacing: -0.01em;
 }
 
 [role="dialog"] h4,
 [role="dialog"] h5 {
-  font-size: 12.5px;
+  font-size: 14px;
   font-weight: 600;
-  color: hsl(var(--foreground));
+  color: white;
 }
 
 [role="dialog"] p {
-  font-size: 11.5px;
-  line-height: 1.45;
-  color: hsl(var(--foreground) / 0.82);
-  margin: 0 0 0.35rem;
+  font-size: 13px;
+  line-height: 1.5;
+  color: hsl(30 15% 85%);
+  margin: 0 0 0.5rem;
 }
 
 [role="dialog"] label {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
-  color: hsl(var(--foreground) / 0.88);
+  color: hsl(30 15% 72%);
 }
 
 [role="dialog"] input,
 [role="dialog"] textarea,
 [role="dialog"] select {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 /* Buttons inside dialogs */
 [role="dialog"] button {
-  min-height: 28px;
-  font-size: 12px;
+  min-height: 36px;
+  font-size: 14px;
 }
 
 /* ── Glass panel text readability ──────────────────────────────
