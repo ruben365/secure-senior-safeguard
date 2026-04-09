@@ -10,15 +10,28 @@ const Toaster = ({ ...props }: ToasterProps) => {
     <Sonner
       theme={theme as ToasterProps["theme"]}
       className="toaster group"
+      position="top-right"
+      duration={2500}
       toastOptions={{
         classNames: {
           toast:
-            "group toast backdrop-blur-xl bg-white/70 text-foreground border border-white/40 shadow-2xl dark:bg-slate-900/70 dark:border-white/10",
-          description: "group-[.toast]:text-muted-foreground",
+            "group toast backdrop-blur-xl border rounded-lg " +
+            "bg-[rgba(15,15,25,0.92)] text-white border-white/10 " +
+            "dark:bg-[rgba(15,15,25,0.92)] dark:text-white dark:border-white/10",
+          description:
+            "group-[.toast]:text-white/70",
           actionButton:
-            "group-[.toast]:bg-primary/90 group-[.toast]:text-primary-foreground group-[.toast]:shadow",
+            "group-[.toast]:bg-white/15 group-[.toast]:text-white group-[.toast]:border group-[.toast]:border-white/20",
           cancelButton:
-            "group-[.toast]:bg-white/70 group-[.toast]:text-muted-foreground group-[.toast]:border group-[.toast]:border-white/40",
+            "group-[.toast]:bg-white/10 group-[.toast]:text-white/70 group-[.toast]:border group-[.toast]:border-white/15",
+          success:
+            "group-[.toast]:[&>svg]:text-emerald-400",
+          error:
+            "group-[.toast]:[&>svg]:text-red-400",
+          warning:
+            "group-[.toast]:[&>svg]:text-amber-400",
+          info:
+            "group-[.toast]:[&>svg]:text-blue-400",
         },
       }}
       {...props}
