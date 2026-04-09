@@ -10,10 +10,10 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: [
-          // WCAG AA compliant — #c2410c (4.6:1) to #9a3412 (6.5:1) with white
-          "bg-gradient-to-b from-[#c2410c] to-[#9a3412] text-white",
-          "border border-[#7c2d12]",
-          "hover:-translate-y-[1px] hover:from-[#ea580c] hover:to-[#c2410c]",
+          // Uses shared CSS variables from hero-shared.css for brand consistency
+          "bg-[image:linear-gradient(135deg,var(--hero-cta-from),var(--hero-cta-to))] text-white",
+          "border border-[var(--hero-cta-border)]",
+          "hover:-translate-y-[1px] hover:bg-[image:linear-gradient(135deg,var(--hero-cta-hover-from),var(--hero-cta-hover-to))]",
           "active:translate-y-[0.5px]",
         ].join(" "),
         gold: [
@@ -41,23 +41,23 @@ const buttonVariants = cva(
           "active:translate-y-[1px]",
         ].join(" "),
         heroOutline: [
-          // Hero secondary — visible glass with clear white border
-          "bg-white/[0.12] backdrop-blur-sm text-white font-semibold",
-          "border border-white/[0.30]",
-          "hover:-translate-y-[1px] hover:bg-white/[0.20] hover:border-white/[0.50]",
+          // Hero secondary — uses shared CSS variables from hero-shared.css
+          "bg-[var(--hero-cta-sec-bg)] backdrop-blur-sm text-white font-semibold",
+          "border border-[var(--hero-cta-sec-border)]",
+          "hover:-translate-y-[1px] hover:bg-[var(--hero-cta-sec-hover-bg)] hover:border-[var(--hero-cta-sec-hover-border)]",
           "active:translate-y-[0.5px] active:scale-[0.98]",
-          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[rgba(249,115,22,0.7)]",
+          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--hero-cta-focus-ring)]",
           "[transition-duration:250ms] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)]",
         ].join(" "),
         heroPrimary: [
-          // Hero primary — WCAG AA compliant (4.5:1+ white on dark orange)
-          // #c2410c = 4.6:1, #9a3412 = 6.5:1 with white text
-          "bg-gradient-to-b from-[#c2410c] to-[#9a3412]",
+          // Hero primary — uses shared CSS variables from hero-shared.css
+          // Change --hero-cta-from/--hero-cta-to in hero-shared.css to update everywhere
+          "bg-[image:linear-gradient(135deg,var(--hero-cta-from),var(--hero-cta-to))]",
           "text-white font-semibold",
-          "border border-[#7c2d12]",
-          "hover:-translate-y-[1px] hover:from-[#ea580c] hover:to-[#c2410c]",
+          "border border-[var(--hero-cta-border)]",
+          "hover:-translate-y-[1px] hover:bg-[image:linear-gradient(135deg,var(--hero-cta-hover-from),var(--hero-cta-hover-to))]",
           "active:translate-y-[0.5px] active:scale-[0.98]",
-          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[rgba(249,115,22,0.7)]",
+          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[var(--hero-cta-focus-ring)]",
           "[transition-duration:250ms] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)]",
         ].join(" "),
         destructive: [
@@ -81,7 +81,7 @@ const buttonVariants = cva(
         lg: "h-[44px] rounded-lg px-6 text-[15px]",
         xl: "h-[48px] rounded-lg px-7 text-[16px]",
         icon: "h-[40px] w-[40px]",
-        heroPill: "h-[44px] rounded-full px-7 text-[14px] tracking-wide gap-2",
+        heroPill: "h-[var(--hero-cta-height)] rounded-full px-7 text-[14px] tracking-wide gap-2",
       },
     },
     defaultVariants: {

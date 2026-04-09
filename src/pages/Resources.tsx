@@ -324,8 +324,9 @@ function Resources() {
 
           {/* AI Analysis CTA - link to training */}
           <div className="text-center pb-4">
-            <Button asChild size="lg">
-              <Link to="/training/ai-analysis">
+            <Button asChild size="lg" variant="heroPrimary" className="h-[48px] px-8 text-[15px] rounded-full">
+              <Link to="/training/ai-analysis" className="inline-flex items-center gap-2">
+                <Shield className="w-5 h-5" />
                 Try Our AI Scam Analysis Tool
               </Link>
             </Button>

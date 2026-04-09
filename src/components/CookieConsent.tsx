@@ -92,7 +92,7 @@ export const CookieConsent = forwardRef<HTMLDivElement>(
 
     return (
       <>
-        {/* ── Premium cookie consent card ─────────────────────────── */}
+        {/* ── Glassmorphism cookie consent card ─────────────────── */}
         <div
           className="fixed bottom-4 left-1/2 -translate-x-1/2 z-[9999] w-[92%] max-w-[420px] sm:max-w-[420px]"
           style={{
@@ -100,86 +100,103 @@ export const CookieConsent = forwardRef<HTMLDivElement>(
             animationDelay: "100ms",
           }}
         >
-          {/* Animated border wrapper */}
-          <div className="cookie-glow-border relative isolate rounded-[14px]">
-            {/* Card content */}
+          {/* Glassmorphism card */}
+          <div
+            className="relative rounded-2xl p-5 border border-white/[0.15] overflow-hidden"
+            style={{
+              background: "rgba(15, 15, 20, 0.55)",
+              WebkitBackdropFilter: "blur(24px) saturate(140%)",
+              backdropFilter: "blur(24px) saturate(140%)",
+            }}
+          >
+            {/* Top shine edge */}
             <div
-              className="relative rounded-[14px] p-5"
+              className="absolute top-0 left-0 right-0 h-px pointer-events-none"
               style={{
-                background: "rgba(18, 14, 12, 0.92)",
-                backdropFilter: "blur(20px) saturate(1.3)",
-                WebkitBackdropFilter: "blur(20px) saturate(1.3)",
+                background: "linear-gradient(90deg, transparent 10%, rgba(255,255,255,0.25) 50%, transparent 90%)",
               }}
+            />
+
+            {/* Subtle inner glow */}
+            <div
+              className="absolute inset-0 pointer-events-none rounded-2xl"
+              style={{
+                background: "radial-gradient(ellipse at 30% 0%, rgba(249, 115, 22, 0.06) 0%, transparent 60%)",
+              }}
+            />
+
+            {/* Close */}
+            <button
+              type="button"
+              onClick={acceptEssential}
+              className="absolute right-3 top-3 w-7 h-7 flex items-center justify-center rounded-full text-white/50 hover:text-white hover:bg-white/10 transition-colors"
+              aria-label="Close cookie banner"
             >
-              {/* Close */}
+              <X className="w-3.5 h-3.5" />
+            </button>
+
+            {/* Header */}
+            <div className="relative flex items-center gap-2.5 mb-3">
+              <div
+                className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                style={{
+                  background: "rgba(249, 115, 22, 0.12)",
+                  border: "1px solid rgba(249, 115, 22, 0.2)",
+                }}
+              >
+                <Shield
+                  className="w-4 h-4 flex-shrink-0"
+                  style={{ color: "var(--hero-cta-hover-from, #ea580c)" }}
+                  strokeWidth={2}
+                />
+              </div>
+              <h3 className="text-[14px] font-semibold text-white">
+                Cookie Preferences
+              </h3>
+            </div>
+
+            {/* Description */}
+            <p className="relative text-[12px] leading-[1.6] mb-4 pr-6 text-white/60">
+              We use cookies to improve your experience and analyze site
+              traffic. Essential cookies are always active.
+            </p>
+
+            {/* Buttons — using shared brand tokens */}
+            <div className="relative flex items-center gap-2">
+              <button
+                type="button"
+                onClick={acceptAll}
+                className="h-[32px] px-4 text-[12px] font-semibold text-white rounded-lg transition-all duration-200 hover:-translate-y-[1px]"
+                style={{
+                  background: "linear-gradient(135deg, var(--hero-cta-from, #c2410c), var(--hero-cta-to, #9a3412))",
+                  border: "1px solid var(--hero-cta-border, #7c2d12)",
+                }}
+              >
+                Accept All
+              </button>
               <button
                 type="button"
                 onClick={acceptEssential}
-                className="absolute right-3 top-3 w-7 h-7 flex items-center justify-center rounded-full text-[hsl(30_15%_72%)] hover:text-white transition-colors"
-                aria-label="Close cookie banner"
+                className="h-[32px] px-4 text-[12px] font-medium text-white/70 rounded-lg transition-all duration-200 hover:text-white hover:bg-white/10"
+                style={{
+                  border: "1px solid rgba(255, 255, 255, 0.15)",
+                  background: "rgba(255, 255, 255, 0.06)",
+                }}
               >
-                <X className="w-3.5 h-3.5" />
+                Essential Only
               </button>
-
-              {/* Header */}
-              <div className="flex items-center gap-2 mb-2">
-                <Shield
-                  className="w-5 h-5 flex-shrink-0"
-                  style={{ color: "hsl(30, 15%, 72%)" }}
-                  strokeWidth={2}
-                />
-                <h3 className="text-[14px] font-semibold text-white">
-                  Cookie Preferences
-                </h3>
-              </div>
-
-              {/* Description */}
-              <p
-                className="text-[12px] leading-[1.5] mb-4 pr-6"
-                style={{ color: "hsl(30, 15%, 85%)" }}
+              <button
+                type="button"
+                onClick={() => setShowSettings(true)}
+                className="h-[32px] w-[32px] flex items-center justify-center rounded-lg transition-all duration-200 ml-auto text-white/50 hover:text-white hover:bg-white/10"
+                style={{
+                  border: "1px solid rgba(255, 255, 255, 0.12)",
+                  background: "rgba(255, 255, 255, 0.04)",
+                }}
+                aria-label="Cookie settings"
               >
-                We use cookies to improve your experience and analyze site
-                traffic. Essential cookies are always active.
-              </p>
-
-              {/* Buttons */}
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={acceptAll}
-                  className="h-[32px] px-4 text-[12px] font-semibold text-white rounded-lg transition-all duration-200 hover:-translate-y-[1px]"
-                  style={{
-                    background: "linear-gradient(135deg, #ea580c, #c2410c)",
-                  }}
-                >
-                  Accept All
-                </button>
-                <button
-                  type="button"
-                  onClick={acceptEssential}
-                  className="h-[32px] px-4 text-[12px] font-medium rounded-lg transition-all duration-200"
-                  style={{
-                    color: "hsl(30, 15%, 85%)",
-                    border: "1px solid hsl(30 15% 72% / 0.25)",
-                    background: "transparent",
-                  }}
-                >
-                  Essential Only
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setShowSettings(true)}
-                  className="h-[32px] w-[32px] flex items-center justify-center rounded-lg transition-all duration-200 ml-auto"
-                  style={{
-                    color: "hsl(30, 15%, 72%)",
-                    border: "1px solid hsl(30 15% 72% / 0.15)",
-                    background: "transparent",
-                  }}
-                  aria-label="Cookie settings"
-                >
-                  <Settings className="w-3.5 h-3.5" />
-                </button>
-              </div>
+                <Settings className="w-3.5 h-3.5" />
+              </button>
             </div>
           </div>
         </div>
@@ -200,7 +217,7 @@ export const CookieConsent = forwardRef<HTMLDivElement>(
                   <Label htmlFor="essential" className="text-[12px] font-semibold text-white">
                     Essential
                   </Label>
-                  <p className="text-[11px]" style={{ color: "hsl(30, 15%, 72%)" }}>
+                  <p className="text-[11px] text-white/50">
                     Required. Cannot be disabled.
                   </p>
                 </div>
@@ -212,7 +229,7 @@ export const CookieConsent = forwardRef<HTMLDivElement>(
                   <Label htmlFor="analytics" className="text-[12px] font-semibold text-white">
                     Analytics
                   </Label>
-                  <p className="text-[11px]" style={{ color: "hsl(30, 15%, 72%)" }}>
+                  <p className="text-[11px] text-white/50">
                     Helps us understand site usage.
                   </p>
                 </div>
@@ -230,7 +247,7 @@ export const CookieConsent = forwardRef<HTMLDivElement>(
                   <Label htmlFor="marketing" className="text-[12px] font-semibold text-white">
                     Marketing
                   </Label>
-                  <p className="text-[11px]" style={{ color: "hsl(30, 15%, 72%)" }}>
+                  <p className="text-[11px] text-white/50">
                     Personalized advertisements.
                   </p>
                 </div>
@@ -259,41 +276,9 @@ export const CookieConsent = forwardRef<HTMLDivElement>(
             to   { transform: translateX(-50%) translateY(0); opacity: 1; }
           }
 
-          .cookie-glow-border::before {
-            content: '';
-            position: absolute;
-            inset: -1px;
-            border-radius: 15px;
-            background: conic-gradient(
-              from 0deg,
-              transparent 0%,
-              transparent 25%,
-              rgba(249, 115, 22, 0.35) 30%,
-              rgba(255, 255, 255, 0.12) 35%,
-              transparent 40%,
-              transparent 100%
-            );
-            animation: cookie-border-rotate 4s linear infinite;
-            z-index: -1;
-          }
-
-          .cookie-glow-border::after {
-            content: '';
-            position: absolute;
-            inset: 1px;
-            border-radius: 13px;
-            background: rgba(18, 14, 12, 0.92);
-            z-index: -1;
-          }
-
-          @keyframes cookie-border-rotate {
-            to { transform: rotate(360deg); }
-          }
-
           @media (prefers-reduced-motion: reduce) {
             .cookie-glow-border::before {
               animation: none;
-              background: hsl(30 15% 85% / 0.12);
             }
           }
         `}</style>

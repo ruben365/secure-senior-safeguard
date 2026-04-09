@@ -16,7 +16,8 @@
 /* 4. Animation keyframes and reveal system */
 @import "./styles/animations.css";
 
-/* Hero section styles (imported globally for now — could be code-split later) */
+/* Hero section styles — shared tokens/overlays/CTAs first, then page-specific */
+@import "./styles/hero-shared.css";
 @import "./styles/hero-homepage.css";
 @import "./styles/hero-business.css";
 @import "./styles/hero-workshops.css";
@@ -48,8 +49,8 @@ html {
 
 /* HD image rendering */
 img {
-  image-rendering: auto;
   image-rendering: -webkit-optimize-contrast;
+  image-rendering: auto;
 }
 
 /* Cleanup will-change on settled elements */
