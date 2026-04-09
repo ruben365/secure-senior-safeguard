@@ -258,7 +258,7 @@ export const HomeStorySections = () => {
           SECTION 1 — White bg | 60/40 text + image split
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-white relative py-20 lg:py-24"
+        className="hss-section-white relative py-12 md:py-20 lg:py-24"
         aria-labelledby="story-section-1-heading"
       >
         <div className="container mx-auto px-6 lg:px-8">
@@ -379,7 +379,7 @@ export const HomeStorySections = () => {
           STATS STRIP — DARK BENTO
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-stats-bento py-20 lg:py-24"
+        className="hss-stats-bento py-12 md:py-20 lg:py-24"
         aria-labelledby="story-stats-heading"
       >
         {/* Ambient glows */}
@@ -400,7 +400,7 @@ export const HomeStorySections = () => {
           SECTION 2 — Cream bg | 45/55 wide image + stacked cards
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-tint relative py-20 lg:py-24"
+        className="hss-section-tint relative py-12 md:py-20 lg:py-24"
         aria-labelledby="story-section-2-heading"
       >
         <div className="container mx-auto px-6 lg:px-8">
@@ -511,7 +511,7 @@ export const HomeStorySections = () => {
           SECTION 3 — White bg | 50/50 feature list + cards
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-white relative py-20 lg:py-24"
+        className="hss-section-white relative py-12 md:py-20 lg:py-24"
         aria-labelledby="story-section-3-heading"
       >
         <div className="container mx-auto px-6 lg:px-8">
@@ -638,7 +638,7 @@ export const HomeStorySections = () => {
           HOW IT WORKS — Connected timeline
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-tint relative py-20 lg:py-24"
+        className="hss-section-tint relative py-12 md:py-20 lg:py-24"
         aria-labelledby="story-how-heading"
       >
         <div className="container mx-auto px-6 lg:px-8">
@@ -715,7 +715,7 @@ export const HomeStorySections = () => {
           SECTION 4 — White bg | CTA close | checklist + collage
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-white relative py-20 lg:py-24"
+        className="hss-section-white relative py-12 md:py-20 lg:py-24"
         aria-labelledby="story-section-4-heading"
       >
         <div className="container mx-auto px-6 lg:px-8">
