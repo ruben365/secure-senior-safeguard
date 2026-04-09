@@ -419,6 +419,26 @@ export const TestimonialCarousel = () => {
             );
           })}
         </div>
+
+        {/* Decorative dot row beneath testimonials */}
+        <div
+          data-reveal
+          style={{ "--reveal-delay": "500ms" } as React.CSSProperties}
+          className="flex items-center justify-center gap-2.5 mt-10 md:mt-14"
+          aria-hidden="true"
+        >
+          {Array.from({ length: 7 }).map((_, i) => (
+            <span
+              key={i}
+              className="block rounded-full bg-[#d96c4a]"
+              style={{
+                width: i === 3 ? 6 : 3,
+                height: i === 3 ? 6 : 3,
+                opacity: i === 3 ? 0.5 : 0.2,
+              }}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
