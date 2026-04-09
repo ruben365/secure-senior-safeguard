@@ -115,8 +115,9 @@ function About() {
   return (
     <PageTransition variant="fade">
       <SEO
-        title="About Us - Our Story, Mission & Team"
-        description="Learn about InVision Network's mission to protect families from digital scams. Founded from personal experience, serving families across Ohio."
+        title="About InVision Network — Cybersecurity Experts in Kettering, Ohio"
+        description="Meet the team behind InVision Network. Founded by Ruben Nk and Corine Mk in Kettering, Ohio, we protect Southwest Ohio families and businesses from AI-powered scams, deepfakes, and digital fraud."
+        keywords="InVision Network about, cybersecurity Kettering Ohio, Ruben Nk, Corine Mk, Southwest Ohio AI protection"
         breadcrumbs={[
           { name: "Home", url: "https://www.invisionnetwork.org/" },
           { name: "About", url: "https://www.invisionnetwork.org/about" },

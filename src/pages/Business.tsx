@@ -458,9 +458,9 @@ function Business() {
     <PageTransition variant="fade">
       <div className="min-h-screen">
         <SEO
-          title="AI Solutions & Automation"
-          description="AI receptionists, automated follow-ups, and professional websites for Ohio businesses. Your AI front desk runs 24/7. Serving Kettering and all of Ohio."
-          keywords="AI receptionist, business automation, AI answering service, virtual receptionist, Kettering Ohio, small business AI"
+          title="AI Automation & Business Solutions — Kettering & Dayton, Ohio"
+          description="Transform your Ohio business with AI receptionists, automated follow-ups, custom websites, and AI insurance. Your AI front desk runs 24/7 — never miss a call. Serving Kettering, Dayton, and Southwest Ohio."
+          keywords="AI receptionist Ohio, business automation Kettering, AI answering service Dayton, virtual receptionist Southwest Ohio, small business AI"
           breadcrumbs={[
             { name: "Home", url: "https://www.invisionnetwork.org/" },
             { name: "Business", url: "https://www.invisionnetwork.org/business" },
