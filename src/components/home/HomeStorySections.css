@@ -786,8 +786,8 @@
 [data-reveal="zoom"] { transform: scale(1.05); }
 
 [data-reveal].is-visible {
-  opacity: 1;
-  transform: translate(0, 0) scale(1);
+  opacity: 1 !important;
+  transform: translate(0, 0) scale(1) !important;
 }
 
 /* ── Floating motion (continuous, always on) ───────────────────── */

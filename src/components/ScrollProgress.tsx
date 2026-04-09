@@ -28,10 +28,13 @@ const ScrollProgress = () => {
 
   return (
     <div
-      className="fixed top-0 left-0 right-0 h-[2px] z-[100] origin-left transition-transform duration-150 ease-out"
+      aria-hidden="true"
+      className="fixed top-0 left-0 right-0 h-[3px] z-[10003] origin-left transition-transform duration-150 ease-out pointer-events-none"
       style={{
         transform: `scaleX(${progress})`,
-        background: 'linear-gradient(90deg, hsl(var(--primary) / 0.6), hsl(var(--primary)), hsl(var(--gold)))',
+        background:
+          'linear-gradient(90deg, hsl(var(--primary) / 0.6), hsl(var(--primary)) 50%, hsl(var(--accent)))',
+        boxShadow: '0 0 12px hsl(var(--primary) / 0.45)',
       }}
     />
   );

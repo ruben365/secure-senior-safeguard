@@ -9,6 +9,7 @@
 @import "./styles/hero-business.css";
 @import "./styles/hero-workshops.css";
 @import "./styles/premium-body.css";
+@import "./styles/polish.css";
 
 /* Global zoom out to 75% — intentional design choice for dense information layout */
 #root {

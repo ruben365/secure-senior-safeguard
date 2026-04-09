@@ -29,6 +29,8 @@ const AnalyticsTracker = lazy(() => import("./components/AnalyticsTracker").then
 const MagnificentDonateButton = lazy(() => import("./components/MagnificentDonateButton").then(m => ({ default: m.MagnificentDonateButton })));
 import { PrerenderProvider } from "./contexts/PrerenderContext";
 import { NavigationProgress } from "./components/NavigationProgress";
+import ScrollProgress from "./components/ScrollProgress";
+import { GlobalMotionProvider } from "./components/GlobalMotionProvider";
 
 // Admin Shell
 const AdminShell = lazy(() => import("./components/admin/AdminShell").then(m => ({ default: m.AdminShell })));
@@ -333,6 +335,8 @@ function App() {
                   <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                     <PrerenderProvider>
                       <NavigationProgress />
+                      <ScrollProgress />
+                      <GlobalMotionProvider />
                       <SkipToContent />
                       <ScrollToTop />
                       <Suspense fallback={null}>

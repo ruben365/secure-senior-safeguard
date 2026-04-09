@@ -1,0 +1,202 @@
+/* ═══════════════════════════════════════════════════════════════════
+   FRONTEND MASTER PASS — polish layer
+   Global motion, focus, link, image, and a11y utilities.
+   This file is imported once from index.css and propagates site-wide.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Standard easing + durations ──────────────────────────────── */
+:root {
+  --ease-out-std: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out-emph: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 150ms;
+  --dur-std: 250ms;
+  --dur-slow: 450ms;
+}
+
+/* ── Smooth-scroll for anchor links only (not html level) ───── */
+html {
+  scroll-padding-top: 80px;
+}
+
+/* ── Scroll-reveal system ─────────────────────────────────────
+   HomeStorySections.css already defines [data-reveal] rules.
+   We only add .reveal-on-scroll as a separate class for new components. */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition:
+    opacity 650ms var(--ease-out-emph),
+    transform 650ms var(--ease-out-emph);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* ── Section auto-stagger — children of any <section[data-anim]>
+   reveal with a natural 80ms stagger */
+section[data-anim] > *:nth-child(1) { --reveal-delay: 0ms; }
+section[data-anim] > *:nth-child(2) { --reveal-delay: 80ms; }
+section[data-anim] > *:nth-child(3) { --reveal-delay: 160ms; }
+section[data-anim] > *:nth-child(4) { --reveal-delay: 240ms; }
+section[data-anim] > *:nth-child(5) { --reveal-delay: 320ms; }
+section[data-anim] > *:nth-child(6) { --reveal-delay: 400ms; }
+
+/* ── Image blur-to-sharp reveal ───────────────────────────────
+   Any <img data-img-reveal> loads blurred then sharpens. */
+img[data-img-reveal] {
+  filter: blur(14px);
+  transform: scale(1.03);
+  transition:
+    filter 800ms var(--ease-out-emph),
+    transform 800ms var(--ease-out-emph);
+}
+
+img[data-img-reveal].is-visible,
+img[data-img-reveal][data-loaded="true"] {
+  filter: blur(0);
+  transform: scale(1);
+}
+
+/* ── Link underline animation ─────────────────────────────────
+   Any <a> inside main content gets an animated underline on hover */
+main a:not([class*="btn"]):not([class*="button"]):not(.no-underline-anim):not([role="button"]) {
+  position: relative;
+  text-decoration: none;
+  background-image: linear-gradient(to right, currentColor, currentColor);
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size var(--dur-std) var(--ease-out-std);
+}
+
+main a:not([class*="btn"]):not([class*="button"]):not(.no-underline-anim):not([role="button"]):hover,
+main a:not([class*="btn"]):not([class*="button"]):not(.no-underline-anim):not([role="button"]):focus-visible {
+  background-size: 100% 2px;
+}
+
+/* ── Enhanced focus ring for keyboard users ─────────────────── */
+*:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 3px;
+  border-radius: 4px;
+  transition: outline-offset 120ms var(--ease-out-std);
+}
+
+button:focus-visible,
+a[role="button"]:focus-visible,
+[role="button"]:focus-visible {
+  outline-offset: 4px;
+}
+
+/* ── Card hover — any element with .card-hover gets a subtle lift */
+.card-hover {
+  transition:
+    transform 300ms var(--ease-out-std),
+    box-shadow 300ms var(--ease-out-std),
+    border-color 300ms var(--ease-out-std);
+  will-change: transform, box-shadow;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* ── Icon button tap target ──────────────────────────────────
+   Any <button> containing only an SVG gets bumped to a 44px tap target
+   with a soft background fade on hover. */
+button.icon-btn,
+button[aria-label][data-icon-only] {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 9999px;
+  transition: background-color var(--dur-std) var(--ease-out-std);
+}
+
+button.icon-btn::before,
+button[aria-label][data-icon-only]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: hsl(var(--primary) / 0);
+  transition: background-color var(--dur-std) var(--ease-out-std);
+  pointer-events: none;
+}
+
+button.icon-btn:hover::before,
+button[aria-label][data-icon-only]:hover::before {
+  background: hsl(var(--primary) / 0.08);
+}
+
+/* ── Skip-to-content (override to brand color) ─────────────── */
+.skip-to-content:focus {
+  background: hsl(var(--primary));
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: var(--shadow-lg);
+  z-index: 10003;
+}
+
+/* ── Nav sticky shrink — any nav with .nav-scrolled class shrinks
+   automatically. Navigation.tsx toggles .scrolled on <nav>, we map
+   that here so any element with [data-nav-shrink] tightens. */
+nav[data-nav-shrink] {
+  transition:
+    padding 300ms var(--ease-out-std),
+    backdrop-filter 300ms var(--ease-out-std);
+}
+
+/* ── Prefers reduced motion — hard disable ─────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  .reveal-on-scroll,
+  img[data-img-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+  main a:not([class*="btn"]) {
+    background-image: none !important;
+  }
+  .card-hover:hover {
+    transform: none !important;
+  }
+}
+
+/* ── Smooth inner anchor scroll ─────────────────────────────── */
+a[href^="#"] {
+  scroll-behavior: smooth;
+}
+
+/* ── Selection color ───────────────────────────────────────── */
+::selection {
+  background: hsl(var(--primary) / 0.22);
+  color: hsl(var(--foreground));
+}
+
+/* ── Utility — soft deep shadow for premium cards ──────────── */
+.shadow-premium {
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 4px 12px -2px rgba(15, 23, 42, 0.06),
+    0 16px 40px -12px rgba(15, 23, 42, 0.12);
+}
+.shadow-premium-hover {
+  box-shadow:
+    0 2px 4px rgba(15, 23, 42, 0.05),
+    0 8px 20px -4px rgba(15, 23, 42, 0.1),
+    0 24px 60px -16px rgba(15, 23, 42, 0.18);
+}
