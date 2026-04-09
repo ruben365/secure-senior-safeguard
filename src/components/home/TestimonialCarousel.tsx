@@ -178,7 +178,7 @@ function WorldMapBackdrop() {
           <linearGradient id="wm-stroke" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#d96c4a" stopOpacity="0.6" />
             <stop offset="50%" stopColor="#94a3b8" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#8b80c4" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.5" />
           </linearGradient>
           <g id="world-continents">
             {paths.map((p) => (
@@ -223,8 +223,8 @@ function WorldMapBackdrop() {
           <circle cx="955" cy="270" r="2.5" fill="#94a3b8" />
           <circle cx="955" cy="270" r="6" fill="none" stroke="#94a3b8" strokeWidth="0.6" opacity="0.3" />
           {/* Tokyo */}
-          <circle cx="1780" cy="330" r="2.5" fill="#8b80c4" />
-          <circle cx="1780" cy="330" r="6" fill="none" stroke="#8b80c4" strokeWidth="0.6" opacity="0.3" />
+          <circle cx="1780" cy="330" r="2.5" fill="#f59e0b" />
+          <circle cx="1780" cy="330" r="6" fill="none" stroke="#f59e0b" strokeWidth="0.6" opacity="0.3" />
           {/* Nairobi */}
           <circle cx="1130" cy="560" r="2.5" fill="#94a3b8" />
           <circle cx="1130" cy="560" r="6" fill="none" stroke="#94a3b8" strokeWidth="0.6" opacity="0.3" />
@@ -286,7 +286,7 @@ export const TestimonialCarousel = () => {
       <div aria-hidden="true" className="hss-testimonial-glow-left" />
       <div aria-hidden="true" className="hss-testimonial-glow-right" />
 
-      {/* NEW — dotted world map backdrop in purple-gray at low opacity */}
+      {/* Dotted world map backdrop — amber + slate at low opacity */}
       <WorldMapBackdrop />
 
       <div className="relative z-10 container mx-auto px-6 lg:px-8">
