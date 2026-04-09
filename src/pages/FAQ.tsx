@@ -380,14 +380,15 @@ export default function FAQ() {
           aria-labelledby="faq-main-heading"
           className="relative isolate py-12 md:py-16 overflow-hidden"
         >
-          {/* Ambient backdrop orbs — teal / indigo / violet */}
+          {/* Ambient backdrop orbs — warm coral / amber / peach
+              Was teal + indigo + violet which fought the brand orange. */}
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 -z-10"
           >
-            <div className="absolute -top-32 -left-40 h-[480px] w-[480px] rounded-full bg-teal-500/15 blur-[140px]" />
-            <div className="absolute top-1/3 -right-40 h-[520px] w-[520px] rounded-full bg-indigo-500/15 blur-[150px]" />
-            <div className="absolute -bottom-40 left-1/3 h-[440px] w-[440px] rounded-full bg-violet-500/12 blur-[150px]" />
+            <div className="absolute -top-32 -left-40 h-[480px] w-[480px] rounded-full bg-[#d96c4a]/15 blur-[140px]" />
+            <div className="absolute top-1/3 -right-40 h-[520px] w-[520px] rounded-full bg-amber-400/15 blur-[150px]" />
+            <div className="absolute -bottom-40 left-1/3 h-[440px] w-[440px] rounded-full bg-orange-300/15 blur-[150px]" />
           </div>
 
           <div className="container mx-auto px-6 lg:px-8">
@@ -636,7 +637,7 @@ export default function FAQ() {
                           setSearchQuery("");
                           setActiveCategory("All");
                         }}
-                        className="border-teal-500/40 text-teal-700 hover:bg-teal-50"
+                        className="border-[#d96c4a]/40 text-[#b8552f] hover:bg-orange-50"
                       >
                         Clear filters
                       </Button>
