@@ -27,27 +27,27 @@ html {
 /* Scope: any Radix dialog/alert-dialog/sheet content (all use role="dialog") */
 [role="dialog"] input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
 [role="alertdialog"] input:not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
-  height: 2.25rem !important;       /* 36px */
-  padding-top: 0.375rem !important;
-  padding-bottom: 0.375rem !important;
+  height: 2.5rem !important;        /* 40px */
+  padding-top: 0.4rem !important;
+  padding-bottom: 0.4rem !important;
   padding-left: 0.75rem !important;
   padding-right: 0.75rem !important;
-  border-radius: 0.5rem !important; /* rounded-lg */
-  font-size: 0.8125rem !important;  /* 13px */
+  border-radius: 0.5rem !important;
+  font-size: 0.875rem !important;   /* 14px */
 }
 
 [role="dialog"] textarea,
 [role="alertdialog"] textarea {
-  min-height: 4.5rem !important;    /* 72px, down from 120 */
+  min-height: 5rem !important;      /* 80px */
   padding: 0.5rem 0.75rem !important;
   border-radius: 0.5rem !important;
-  font-size: 0.8125rem !important;
+  font-size: 0.875rem !important;
 }
 
 [role="dialog"] label,
 [role="alertdialog"] label {
-  font-size: 0.75rem !important;    /* 12px */
-  font-weight: 500 !important;
+  font-size: 0.8125rem !important;  /* 13px */
+  font-weight: 600 !important;
   margin-bottom: 0.25rem !important;
 }
 
@@ -58,44 +58,43 @@ html {
 [role="dialog"] button.h-\[50px\],
 [role="alertdialog"] button.h-\[52px\],
 [role="alertdialog"] button.h-\[44px\] {
-  height: 2.25rem !important;       /* 36px */
-  padding-left: 1rem !important;
-  padding-right: 1rem !important;
-  font-size: 0.8125rem !important;
+  height: 2.5rem !important;        /* 40px */
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+  font-size: 0.875rem !important;   /* 14px */
 }
 
-/* The icon variant (52×52) becomes 36×36 */
+/* The icon variant (52×52) becomes 40×40 */
 [role="dialog"] button.w-\[52px\].h-\[52px\],
 [role="alertdialog"] button.w-\[52px\].h-\[52px\] {
-  width: 2.25rem !important;
-  height: 2.25rem !important;
+  width: 2.5rem !important;
+  height: 2.5rem !important;
 }
 
-/* Select triggers — shadcn uses h-10 by default but often gets bigger from variants */
+/* Select triggers */
 [role="dialog"] [role="combobox"],
 [role="alertdialog"] [role="combobox"] {
-  height: 2.25rem !important;
-  font-size: 0.8125rem !important;
+  height: 2.5rem !important;
+  font-size: 0.875rem !important;
   padding-left: 0.75rem !important;
   padding-right: 0.75rem !important;
 }
 
-/* Checkbox/radio inside dialogs — keep them a touch smaller */
+/* Checkbox/radio inside dialogs */
 [role="dialog"] [role="checkbox"],
 [role="dialog"] [role="radio"] {
-  width: 1rem !important;
-  height: 1rem !important;
+  width: 1.125rem !important;
+  height: 1.125rem !important;
 }
 
 /* Reduce large avatar / icon bubbles often used in dialog headers */
 [role="dialog"] .w-20.h-20,
 [role="dialog"] .w-16.h-16 {
-  width: 3rem !important;
-  height: 3rem !important;
+  width: 3.5rem !important;
+  height: 3.5rem !important;
 }
 
-/* Cap dialog height and make internal content scrollable so no modal
-   ever exceeds 85% of the viewport */
+/* Cap dialog height and make internal content scrollable */
 [role="dialog"][data-state="open"] {
   max-height: 85vh;
   overflow-y: auto;
@@ -288,16 +287,16 @@ a[href^="#"] {
    DIALOG & GLASS PANEL READABILITY — compact text, high-contrast
    ═══════════════════════════════════════════════════════════════════ */
 
-/* ── Dialog interior text scaling — tighter for compact dialogs ── */
+/* ── Dialog interior text scaling — proportional to 440px modal ── */
 [role="dialog"] {
-  font-size: 13px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.55;
 }
 
 [role="dialog"] h1,
 [role="dialog"] h2,
 [role="dialog"] h3 {
-  font-size: 15px;
+  font-size: 18px;
   line-height: 1.25;
   font-weight: 700;
   color: hsl(var(--foreground));
@@ -306,36 +305,34 @@ a[href^="#"] {
 
 [role="dialog"] h4,
 [role="dialog"] h5 {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   color: hsl(var(--foreground));
 }
 
 [role="dialog"] p {
-  font-size: 12.5px;
+  font-size: 13.5px;
   line-height: 1.55;
-  color: hsl(var(--foreground) / 0.8);
+  color: hsl(var(--foreground) / 0.82);
   margin: 0 0 0.5rem;
 }
 
 [role="dialog"] label {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
-  color: hsl(var(--foreground) / 0.85);
+  color: hsl(var(--foreground) / 0.88);
 }
 
 [role="dialog"] input,
 [role="dialog"] textarea,
 [role="dialog"] select {
-  font-size: 13px;
-  padding-top: 0.4rem;
-  padding-bottom: 0.4rem;
+  font-size: 14px;
 }
 
-/* Buttons inside dialogs — compact height */
+/* Buttons inside dialogs */
 [role="dialog"] button {
-  min-height: 38px;
-  font-size: 13px;
+  min-height: 40px;
+  font-size: 14px;
 }
 
 /* ── Glass panel text readability ──────────────────────────────

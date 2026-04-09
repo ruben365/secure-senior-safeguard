@@ -202,13 +202,14 @@ main select:focus {
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-/* ── Responsive dialog/menu sizing — compact, tight ── */
+/* ── Responsive dialog/menu sizing ── */
 @media (max-width: 640px) {
   [role="dialog"] {
-    max-width: calc(100vw - 1.25rem) !important;
-    max-height: 82vh !important;
-    padding: 1rem !important;
-    border-radius: 0.875rem !important;
+    width: 92% !important;
+    max-width: 100% !important;
+    max-height: 85vh !important;
+    padding: 1.125rem !important;
+    border-radius: 1rem !important;
   }
 
   [data-radix-popper-content-wrapper] {
@@ -218,7 +219,7 @@ main select:focus {
 
 @media (min-width: 641px) and (max-width: 1024px) {
   [role="dialog"] {
-    max-width: min(380px, calc(100vw - 2.5rem)) !important;
+    max-width: min(430px, calc(100vw - 2rem)) !important;
   }
 }
 
