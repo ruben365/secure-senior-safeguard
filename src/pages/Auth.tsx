@@ -24,6 +24,8 @@ import invisionLogo from "@/assets/shield-logo.png";
 const authBackground = "/images/hero-corporate-protection.webp";
 import { Session, User as SupabaseUser } from "@supabase/supabase-js";
 import { ForgotPasswordModal } from "@/components/auth/ForgotPasswordModal";
+import { TwoFactorVerify } from "@/components/auth/TwoFactorVerify";
+import { PasswordResetForm } from "@/components/auth/PasswordResetForm";
 import { SEO } from "@/components/SEO";
 
 // ============================================================================
@@ -76,6 +78,8 @@ function Auth() {
   const [passwordError, setPasswordError] = useState("");
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [signupSuccess, setSignupSuccess] = useState(false);
+  const [showMfaVerify, setShowMfaVerify] = useState(false);
+  const [showPasswordReset, setShowPasswordReset] = useState(false);
 
   // Password strength indicators
   const [passwordHasLength, setPasswordHasLength] = useState(false);
@@ -95,22 +99,50 @@ function Auth() {
       setSession(currentSession);
       setUser(currentSession?.user ?? null);
 
+      // Password recovery flow — Supabase redirects back with this event
+      if (event === "PASSWORD_RECOVERY") {
+        setShowPasswordReset(true);
+        return;
+      }
+
       if (event === "SIGNED_IN" && currentSession?.user) {
-        setTimeout(() => {
-          handlePostLoginRedirect(currentSession.user.id);
-        }, 0);
+        // Check if MFA is required before redirecting
+        supabase.auth.mfa.getAuthenticatorAssuranceLevel().then(({ data }) => {
+          if (
+            data &&
+            data.currentLevel === "aal1" &&
+            data.nextLevel === "aal2"
+          ) {
+            // User has MFA enrolled but hasn't verified yet this session
+            setShowMfaVerify(true);
+          } else {
+            handlePostLoginRedirect(currentSession.user.id);
+          }
+        });
       }
     });
 
-    supabase.auth
-      .getSession()
-      .then(({ data: { session: existingSession } }) => {
-        setSession(existingSession);
-        setUser(existingSession?.user ?? null);
-        if (existingSession?.user) {
-          handlePostLoginRedirect(existingSession.user.id);
+    // Detect ?type=reset in URL (fallback for the PASSWORD_RECOVERY event)
+    const typeParam = searchParams.get("type");
+    if (typeParam === "reset") {
+      supabase.auth.getSession().then(({ data: { session: s } }) => {
+        if (s?.user) {
+          setShowPasswordReset(true);
+          setSession(s);
+          setUser(s.user);
         }
       });
+    } else {
+      supabase.auth
+        .getSession()
+        .then(({ data: { session: existingSession } }) => {
+          setSession(existingSession);
+          setUser(existingSession?.user ?? null);
+          if (existingSession?.user) {
+            handlePostLoginRedirect(existingSession.user.id);
+          }
+        });
+    }
 
     return () => subscription.unsubscribe();
   }, []);
@@ -514,6 +546,71 @@ function Auth() {
             >
               Back to Sign In
             </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // MFA verification screen — shown after password login when 2FA is enrolled
+  if (showMfaVerify) {
+    return (
+      <div
+        className="w-full relative flex items-center justify-center p-5 md:p-8 font-sans antialiased"
+        style={{ minHeight: "100vh" }}
+      >
+        <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0b1020] via-[#0e1428] to-[#0a0f1e]" />
+          <div className="absolute -top-40 -left-40 h-[520px] w-[520px] rounded-full bg-orange-500/10 blur-[140px]" />
+          <div className="absolute -bottom-40 -right-40 h-[560px] w-[560px] rounded-full bg-indigo-500/12 blur-[160px]" />
+        </div>
+        <div className="relative z-10 w-full max-w-[440px]">
+          <div className="relative rounded-xl bg-white border border-slate-200 p-5 md:p-7">
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-orange-400/50 to-transparent"
+            />
+            <TwoFactorVerify
+              onVerified={() => {
+                setShowMfaVerify(false);
+                if (user) handlePostLoginRedirect(user.id);
+              }}
+              onCancel={() => {
+                setShowMfaVerify(false);
+                supabase.auth.signOut();
+              }}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Password reset screen — shown when user clicks the email reset link
+  if (showPasswordReset) {
+    return (
+      <div
+        className="w-full relative flex items-center justify-center p-5 md:p-8 font-sans antialiased"
+        style={{ minHeight: "100vh" }}
+      >
+        <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0b1020] via-[#0e1428] to-[#0a0f1e]" />
+          <div className="absolute -top-40 -left-40 h-[520px] w-[520px] rounded-full bg-emerald-500/10 blur-[140px]" />
+          <div className="absolute -bottom-40 -right-40 h-[560px] w-[560px] rounded-full bg-indigo-500/12 blur-[160px]" />
+        </div>
+        <div className="relative z-10 w-full max-w-[440px]">
+          <div className="relative rounded-xl bg-white border border-slate-200 p-5 md:p-7">
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-emerald-400/50 to-transparent"
+            />
+            <PasswordResetForm
+              onComplete={() => {
+                setShowPasswordReset(false);
+                setActiveTab("login");
+                navigate("/auth", { replace: true });
+              }}
+            />
           </div>
         </div>
       </div>

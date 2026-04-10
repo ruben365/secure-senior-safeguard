@@ -100,69 +100,6 @@
   box-shadow: 0 0 8px rgba(13, 148, 136, 0.45);
 }
 
-/* ─────────────────────────────────────────────────────────────────
-   DEPTH LAYER 1 — Subtle slate dot pattern
-   ─────────────────────────────────────────────────────────────── */
-.hss-dot-grid {
-  position: absolute;
-  inset: 0;
-  z-index: -10;
-  pointer-events: none;
-  background-image: radial-gradient(circle, rgba(15, 23, 42, 1) 1px, transparent 1.5px);
-  background-size: 28px 28px;
-  background-position: 0 0;
-  opacity: 0.035;
-}
-
-/* Ambient warm wash */
-.hss-ambient-wash {
-  position: absolute;
-  left: -10%;
-  top: 5%;
-  width: 60%;
-  height: 60%;
-  pointer-events: none;
-  z-index: -1;
-  background: radial-gradient(50% 50% at 30% 50%, rgba(249, 115, 22, 0.10) 0%, rgba(249, 115, 22, 0.03) 40%, transparent 70%);
-  filter: blur(120px);
-}
-
-.hss-ambient-wash-2 {
-  position: absolute;
-  right: -10%;
-  bottom: 0;
-  width: 50%;
-  height: 50%;
-  pointer-events: none;
-  z-index: -1;
-  background: radial-gradient(50% 50% at 70% 50%, rgba(249, 115, 22, 0.08) 0%, rgba(249, 115, 22, 0.02) 40%, transparent 70%);
-  filter: blur(120px);
-}
-
-.hss-ambient-wash-3 {
-  position: absolute;
-  right: -8%;
-  top: -5%;
-  width: 45%;
-  height: 50%;
-  pointer-events: none;
-  z-index: -1;
-  background: radial-gradient(50% 50% at 70% 30%, rgba(249, 115, 22, 0.06) 0%, rgba(249, 115, 22, 0.02) 45%, transparent 75%);
-  filter: blur(140px);
-}
-
-.hss-ambient-wash-4 {
-  position: absolute;
-  right: -5%;
-  top: 40%;
-  width: 40%;
-  height: 40%;
-  pointer-events: none;
-  z-index: -1;
-  background: radial-gradient(50% 50% at 60% 50%, rgba(249, 115, 22, 0.05) 0%, rgba(249, 115, 22, 0.015) 40%, transparent 70%);
-  filter: blur(140px);
-}
-
 /* Eyebrow / overline pill */
 .hss-overline {
   display: inline-flex;
@@ -799,11 +736,6 @@
   50% { transform: translate(-22px, 12px) scale(1.1); opacity: 0.9; }
 }
 
-.hss-ambient-wash { animation: hss-drift-a 22s ease-in-out infinite; }
-.hss-ambient-wash-2 { animation: hss-drift-b 26s ease-in-out infinite; animation-delay: -4s; }
-.hss-ambient-wash-3 { animation: hss-drift-a 30s ease-in-out infinite; animation-delay: -8s; }
-.hss-ambient-wash-4 { animation: hss-drift-b 24s ease-in-out infinite; animation-delay: -12s; }
-
 .hss-stats-glow-left { animation: hss-drift-a 28s ease-in-out infinite; }
 .hss-stats-glow-right { animation: hss-drift-b 32s ease-in-out infinite; animation-delay: -6s; }
 
@@ -899,10 +831,6 @@
   }
   .hss-float-card,
   .hss-trust-badge,
-  .hss-ambient-wash,
-  .hss-ambient-wash-2,
-  .hss-ambient-wash-3,
-  .hss-ambient-wash-4,
   .hss-stats-glow-left,
   .hss-stats-glow-right,
   .hss-card-accent-bar,
@@ -946,11 +874,7 @@
 
   /* Hide ambient glows — visual noise on small screens */
   .hss-stats-glow-left,
-  .hss-stats-glow-right,
-  .hss-ambient-wash,
-  .hss-ambient-wash-2,
-  .hss-ambient-wash-3,
-  .hss-ambient-wash-4 {
+  .hss-stats-glow-right {
     display: none !important;
   }
 
