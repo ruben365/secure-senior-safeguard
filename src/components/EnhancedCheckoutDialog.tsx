@@ -141,7 +141,7 @@ function QRCodePayment({
           animate={{ opacity: 1, scale: 1 }}
           className="space-y-4"
         >
-          <div className="bg-white p-4 rounded-xl inline-block shadow-lg">
+          <div className="bg-white p-4 rounded-xl inline-block">
             <img
               src={qrCodeUrl}
               alt="Payment QR Code — scan with your phone to complete payment"
@@ -158,9 +158,9 @@ function QRCodePayment({
               Expires in {formatTime(timeLeft)}
             </Badge>
           </div>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-white/70">
             Scan to pay{" "}
-            <strong className="text-foreground">${total.toFixed(2)}</strong>
+            <strong className="text-white font-bold">${total.toFixed(2)}</strong>
           </p>
           <Button variant="outline" onClick={generateQRCode} size="sm">
             Generate New Code
@@ -607,13 +607,13 @@ export function EnhancedCheckoutDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[400px] overflow-hidden p-0 gap-0 rounded-2xl">
-        {/* Header — coral-tinted, compact */}
-        <div className="bg-gradient-to-r from-[#d96c4a]/8 via-[#fbab8e]/8 to-[#d96c4a]/8 px-4 py-2.5 border-b border-[#d96c4a]/15">
+      <DialogContent className="sm:max-w-[440px] overflow-hidden p-0 gap-0">
+        {/* Header */}
+        <div className="px-5 py-3 border-b border-white/8">
           <DialogHeader className="space-y-0">
             <div className="flex items-center gap-2 mb-0.5">
-              <div className="p-1.5 bg-[#d96c4a]/15 rounded-md">
-                <Package className="w-3.5 h-3.5 text-[#d96c4a]" />
+              <div className="p-1.5 bg-orange-500/15 rounded-md">
+                <Package className="w-3.5 h-3.5 text-orange-400" />
               </div>
               <Badge variant="secondary" className="text-[10px] px-2 py-0 h-[18px]">
                 {items.length} {items.length === 1 ? "item" : "items"}
@@ -639,7 +639,7 @@ export function EnhancedCheckoutDialog({
           </div>
         </div>
 
-        <div className="p-4 grid md:grid-cols-5 gap-4">
+        <div className="p-5 grid md:grid-cols-5 gap-4">
           {/* Main Form */}
           <div className="md:col-span-3">
             <Tabs
@@ -680,21 +680,21 @@ export function EnhancedCheckoutDialog({
           {/* Order Summary Sidebar - Compact */}
           <div className="md:col-span-2">
             <div className="space-y-3">
-              <div className="p-3 bg-muted/50 rounded-xl border">
-                <h4 className="font-semibold text-sm mb-2">Order Summary</h4>
+              <div className="p-3 bg-white/[0.04] rounded-xl border border-white/8">
+                <h4 className="font-semibold text-sm mb-2 text-white">Order Summary</h4>
                 <div className="space-y-1 mb-3">
                   {items.slice(0, 3).map((item) => (
                     <div key={item.id} className="flex justify-between text-xs">
-                      <span className="text-muted-foreground truncate max-w-[120px]">
+                      <span className="text-white/60 truncate max-w-[120px]">
                         {item.name} × {item.quantity}
                       </span>
-                      <span className="font-medium">
+                      <span className="font-medium text-white">
                         ${(item.price * item.quantity).toFixed(2)}
                       </span>
                     </div>
                   ))}
                   {items.length > 3 && (
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-white/50">
                       +{items.length - 3} more items
                     </p>
                   )}
@@ -706,16 +706,16 @@ export function EnhancedCheckoutDialog({
                   discountPercent={10}
                 />
 
-                <div className="border-t pt-2 mt-2">
+                <div className="border-t border-white/8 pt-2 mt-2">
                   {veteranDiscount > 0 && (
-                    <div className="flex justify-between text-xs text-success mb-1">
+                    <div className="flex justify-between text-xs text-emerald-400 mb-1">
                       <span>Veteran Discount</span>
                       <span>-${veteranDiscount.toFixed(2)}</span>
                     </div>
                   )}
-                  <div className="flex justify-between font-bold">
+                  <div className="flex justify-between font-bold text-white">
                     <span>Total</span>
-                    <span className="text-primary">
+                    <span className="text-orange-400">
                       ${finalTotal.toFixed(2)}
                     </span>
                   </div>

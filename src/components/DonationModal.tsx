@@ -217,12 +217,12 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
           tight header, lower textarea, squeezed total bar, single-line
           trust footer.
       */}
-      <DialogContent className="sm:max-w-[380px] overflow-hidden rounded-2xl p-4 gap-0">
+      <DialogContent className="sm:max-w-[440px] overflow-hidden p-5 gap-0">
         {/* Header — very tight */}
         <DialogHeader className="space-y-0 pb-3">
           <DialogTitle className="flex items-center gap-2.5">
-            <div className="w-9 h-9 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-              <Heart className="w-4 h-4 text-primary" />
+            <div className="w-9 h-9 bg-orange-500/15 rounded-full flex items-center justify-center flex-shrink-0">
+              <Heart className="w-4 h-4 text-orange-400" />
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
@@ -239,7 +239,7 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
         <div className="space-y-2.5">
           {/* Donation Type Toggle — lower profile */}
           {type !== "monthly" && (
-            <div className="flex gap-1 p-0.5 bg-muted/50 rounded-md">
+            <div className="flex gap-1 p-0.5 bg-white/[0.04] rounded-md">
               <Button
                 type="button"
                 variant={donationType === "one-time" ? "default" : "ghost"}
@@ -263,7 +263,7 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
 
           {/* Amount Selection */}
           <div>
-            <label className="text-[10px] font-medium text-muted-foreground mb-1 block uppercase tracking-wide">
+            <label className="text-[10px] font-medium text-white/50 mb-1 block uppercase tracking-wide">
               Select Amount
             </label>
             <div className="grid grid-cols-4 gap-1.5 mb-1.5">
@@ -274,8 +274,8 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
                   onClick={() => handleAmountSelect(amount)}
                   className={`py-1.5 rounded-md text-center text-xs font-semibold transition-all border ${
                     selectedAmount === amount
-                      ? "bg-primary text-primary-foreground border-primary"
-                      : "bg-muted/40 border-border/50 hover:border-primary/40"
+                      ? "bg-orange-600 text-white border-orange-600"
+                      : "bg-white/[0.04] border-white/12 text-white/80 hover:border-orange-500/40"
                   }`}
                 >
                   ${amount}
@@ -283,7 +283,7 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
               ))}
             </div>
             <div className="relative">
-              <DollarSign className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground" />
+              <DollarSign className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/40" />
               <Input
                 type="number"
                 placeholder="Custom amount"
@@ -297,11 +297,11 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
 
           {/* Impact Message — compact single line */}
           {finalAmount > 0 && (
-            <div className="px-2.5 py-1.5 bg-primary/5 border border-primary/15 rounded-md">
+            <div className="px-2.5 py-1.5 bg-orange-500/10 border border-orange-500/15 rounded-md">
               <div className="flex items-center gap-1.5">
-                <Sparkles className="w-3 h-3 text-primary flex-shrink-0" />
-                <p className="text-[11px] text-muted-foreground truncate">
-                  <span className="font-medium text-foreground">Your Impact: </span>
+                <Sparkles className="w-3 h-3 text-orange-400 flex-shrink-0" />
+                <p className="text-[11px] text-white/70 truncate">
+                  <span className="font-medium text-white">Your Impact: </span>
                   {getImpactMessage()}
                 </p>
               </div>
@@ -364,15 +364,15 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
               />
 
               {/* Total bar — squeezed peach strip */}
-              <div className="px-3 py-1.5 bg-muted/40 rounded-md border border-border/50">
+              <div className="px-3 py-1.5 bg-white/[0.04] rounded-md border border-white/8">
                 <div className="flex justify-between items-center">
-                  <span className="text-xs text-muted-foreground">
+                  <span className="text-xs text-white/60">
                     {donationType === "monthly" ? "Monthly" : "Total"}
                   </span>
-                  <span className="text-lg font-bold text-primary leading-none">
+                  <span className="text-lg font-bold text-orange-400 leading-none">
                     ${finalAmount.toFixed(2)}
                     {donationType === "monthly" && (
-                      <span className="text-xs font-normal text-muted-foreground">/mo</span>
+                      <span className="text-xs font-normal text-white/50">/mo</span>
                     )}
                   </span>
                 </div>
@@ -398,10 +398,10 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
               </Button>
 
               {/* Trust footer — single compact line */}
-              <div className="flex items-center justify-center gap-2 text-[10px] text-muted-foreground">
+              <div className="flex items-center justify-center gap-2 text-[10px] text-white/40">
                 <Lock className="w-2.5 h-2.5" />
                 <span>Secure &amp; Encrypted</span>
-                <span className="text-border">•</span>
+                <span className="text-white/20">•</span>
                 <span>100% goes to the cause</span>
               </div>
             </form>
