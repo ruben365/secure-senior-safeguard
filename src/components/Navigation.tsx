@@ -356,10 +356,10 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 );
               })}
 
-              <div className="mt-3 pt-3 flex flex-col items-center gap-2 border-t border-white/[0.08]">
+              <div className="mt-3 pt-3 flex flex-col items-center gap-1.5 border-t border-white/[0.08]">
                 <button
                   type="button"
-                  className="h-8 px-5 text-[12px] font-medium rounded-md flex items-center justify-center gap-1.5 transition-colors duration-150 border border-white/20 text-white/70 hover:text-white hover:border-white/30"
+                  className="h-7 px-4 text-[11px] font-medium rounded-md flex items-center justify-center gap-1.5 transition-colors duration-150 border border-white/20 text-white/70 hover:text-white hover:border-white/30"
                   onClick={() => {
                     setDonateOpen(true);
                     setMobileMenuOpen(false);
@@ -373,7 +373,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <Link
                     to="/admin"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="h-8 max-w-[160px] w-full text-[12px] font-semibold rounded-md text-white flex items-center justify-center gap-1.5 transition-all duration-150 bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12]"
+                    className="h-7 max-w-[140px] w-full text-[11px] font-semibold rounded-md text-white flex items-center justify-center gap-1.5 transition-all duration-150 bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12]"
                   >
                     <LayoutDashboard className="h-3 w-3" />
                     Dashboard
@@ -382,7 +382,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <Link
                     to="/portal"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="h-8 max-w-[160px] w-full text-[12px] font-semibold rounded-md text-white flex items-center justify-center transition-all duration-150 bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12]"
+                    className="h-7 max-w-[140px] w-full text-[11px] font-semibold rounded-md text-white flex items-center justify-center transition-all duration-150 bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12]"
                   >
                     Login
                   </Link>

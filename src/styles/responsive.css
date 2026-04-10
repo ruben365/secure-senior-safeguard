@@ -90,12 +90,22 @@
   .hover-scale:active { transform: scale(0.95); }
   .hover-scale:hover { transform: none; }
 
-  /* Touch targets — compact but still accessible */
+  /* Touch targets — compact but accessible */
   button,
   a[role="button"],
   [role="button"] {
-    min-height: 38px;
-    min-width: 38px;
+    min-height: 34px;
+    min-width: 34px;
+  }
+
+  /* ── BUTTON COMPRESSION — all buttons smaller on phone ── */
+  main button,
+  main a[role="button"],
+  main [role="button"],
+  main .btn,
+  main [class*="Button"] {
+    max-height: 38px;
+    font-size: 13px !important;
   }
 
   /* Admin dashboard responsive */
@@ -113,17 +123,53 @@
     border-radius: 0;
   }
 
-  /* Section spacing — compact on mobile */
+  /* ── SECTION COMPRESSION — tight vertical spacing on mobile ── */
   .section-spacing { @apply py-6; }
   .card-mobile { @apply p-3; }
 
-  /* Mobile typography — compressed, no larger than 28px */
-  h1 { font-size: 1.625rem; line-height: 1.2; }
-  h2 { font-size: 1.25rem; line-height: 1.2; }
-  h3 { font-size: 1.0625rem; line-height: 1.25; }
+  /* Compress all homepage sections */
+  main > section,
+  main > div > section,
+  .hss-root section,
+  .home-color-wash section {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  /* Compress cards inside sections */
+  main section [data-slot="card"],
+  main section .card,
+  main section [class*="glass-card"] {
+    padding: 0.75rem !important;
+  }
+
+  main section [data-slot="card"] p,
+  main section .card p {
+    font-size: 0.8125rem !important;  /* 13px */
+  }
+
+  /* Card grid gap compression — scoped to content sections only */
+  main section .grid.gap-6 { gap: 0.5rem; }
+  main section .grid.gap-8 { gap: 0.75rem; }
+  main section .grid.gap-4 { gap: 0.375rem; }
+
+  /* Compress final CTA section on mobile */
+  #final-action {
+    min-height: 400px !important;
+  }
+
+  #final-action .container {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  /* Mobile typography — compressed */
+  h1 { font-size: 1.5rem; line-height: 1.2; }
+  h2 { font-size: 1.1875rem; line-height: 1.2; }
+  h3 { font-size: 1rem; line-height: 1.25; }
 
   /* Mobile body text — scoped to content paragraphs */
-  main p, main li { font-size: 0.875rem; line-height: 1.5; }
+  main p, main li { font-size: 0.8125rem; line-height: 1.5; }
 
   /* Mobile containers — tighter horizontal padding */
   .container {
@@ -151,17 +197,17 @@
     ) !important;
   }
 
-  /* Card grid gap compression — scoped to content sections only */
-  main section .grid.gap-6 { gap: 0.75rem; }
-  main section .grid.gap-8 { gap: 1rem; }
-
-  /* Dialog text rendering — sharp on mobile */
+  /* Dialog — consolidated mobile rules (single declaration) */
   [role="dialog"] {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    padding: 0.75rem !important;
-    max-height: 90vh;
+    width: 94% !important;
+    max-width: 100% !important;
+    max-height: 85vh !important;
+    padding: 1rem !important;
+    border-radius: 1rem !important;
+    overflow-y: auto !important;
   }
 
   /* Compress inputs inside dialogs on mobile */
@@ -178,23 +224,11 @@
     transform: none !important;
   }
 
-  /* Force single column for bare multi-column grids on mobile.
-     Only targets grids that don't already have responsive prefixes
-     (md:grid-cols-X / lg:grid-cols-X breakpoints handle themselves). */
+  /* Force single column for bare multi-column grids on mobile */
   main section [class~="grid-cols-2"]:not([class*="sm:grid-cols"]):not([class*="md:grid-cols"]):not([role="tablist"]):not([class*="tabs"]),
   main section [class~="grid-cols-3"]:not([class*="sm:grid-cols"]):not([class*="md:grid-cols"]):not([role="tablist"]):not([class*="tabs"]),
   main section [class~="grid-cols-4"]:not([class*="sm:grid-cols"]):not([class*="md:grid-cols"]):not([role="tablist"]):not([class*="tabs"]) {
     grid-template-columns: 1fr !important;
-  }
-
-  /* Full-width dialogs on mobile */
-  [role="dialog"] {
-    width: 94% !important;
-    max-width: 100% !important;
-    max-height: 85vh !important;
-    padding: 1.25rem !important;
-    border-radius: 1rem !important;
-    overflow-y: auto !important;
   }
 
   /* Inputs: prevent iOS zoom (must be ≥16px) */
