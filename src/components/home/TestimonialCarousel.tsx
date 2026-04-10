@@ -170,7 +170,7 @@ export const TestimonialCarousel = () => {
             id="testimonials-heading"
             data-reveal
             style={{ "--reveal-delay": "100ms" } as React.CSSProperties}
-            className="text-4xl md:text-5xl lg:text-[3rem] font-extrabold text-[#1E293B] leading-[1.05] tracking-tight mb-3 mt-4"
+            className="text-2xl sm:text-4xl md:text-5xl lg:text-[3rem] font-extrabold text-[#1E293B] leading-[1.05] tracking-tight mb-3 mt-4"
           >
             What families are saying
           </h2>

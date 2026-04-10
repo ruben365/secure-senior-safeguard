@@ -36,7 +36,7 @@ const faqs = [
 export const FAQPreview = () => {
   return (
     <section
-      className="relative z-10 py-14 md:py-20 lg:py-24"
+      className="relative z-10 py-6 md:py-20 lg:py-24"
       aria-labelledby="faq-heading"
     >
       <div className="container mx-auto px-6 lg:px-12 max-w-6xl relative">
@@ -53,7 +53,7 @@ export const FAQPreview = () => {
               </span>
               <h2
                 id="faq-heading"
-                className="text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold text-[#1E293B] leading-[1.05] tracking-tight mb-3 mt-4"
+                className="text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold text-[#1E293B] leading-[1.05] tracking-tight mb-3 mt-4"
               >
                 Got questions?
               </h2>
@@ -79,15 +79,15 @@ export const FAQPreview = () => {
               <div className="flex flex-col gap-2.5">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-full bg-[#d96c4a] hover:bg-[#b8552f] text-white text-[14px] font-semibold transition-colors shadow-[0_4px_12px_-2px_rgba(217,108,74,0.4)]"
+                  className="inline-flex items-center justify-center gap-1.5 h-8 px-4 sm:h-11 sm:px-5 rounded-full bg-[#d96c4a] hover:bg-[#b8552f] text-white text-xs sm:text-[14px] font-semibold transition-colors shadow-[0_4px_12px_-2px_rgba(217,108,74,0.4)] w-auto"
                 >
                   Chat With Expert
                 </Link>
                 <a
                   href={`tel:${SITE.phone.e164}`}
-                  className="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-full bg-white hover:bg-[#1E293B]/[0.04] border border-[#1E293B]/12 hover:border-[#1E293B]/22 text-[#1E293B] text-[14px] font-semibold transition-colors"
+                  className="inline-flex items-center justify-center gap-1.5 h-8 px-3 sm:h-11 sm:px-5 rounded-full bg-white hover:bg-[#1E293B]/[0.04] border border-[#1E293B]/12 hover:border-[#1E293B]/22 text-[#1E293B] text-xs sm:text-[14px] font-semibold transition-colors w-auto"
                 >
-                  <Phone className="w-4 h-4" /> Call Now
+                  <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> Call Now
                 </a>
               </div>
             </div>

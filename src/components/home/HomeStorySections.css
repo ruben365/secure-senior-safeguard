@@ -884,16 +884,17 @@
     animation: none !important;
   }
 
-  /* Sections: more breathing room */
+  /* Sections: compact on mobile */
   .hss-section-white,
   .hss-section-tint {
-    padding-top: 2.5rem !important;
-    padding-bottom: 2.5rem !important;
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
   }
 
-  /* CTA buttons: full width on mobile */
+  /* CTA buttons: auto-width compact pills on mobile (NOT full-width) */
   .hss-cta-primary {
-    width: 100%;
+    width: auto;
+    max-width: 220px;
     justify-content: center;
   }
 
