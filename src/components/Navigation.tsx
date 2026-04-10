@@ -117,14 +117,6 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
 
   return (
     <>
-      {/* Mobile backdrop */}
-      {mobileMenuOpen && (
-        <div
-          className="fixed inset-0 bg-black/60 z-[9998] lg:hidden"
-          onClick={() => setMobileMenuOpen(false)}
-        />
-      )}
-
       <nav className={overlay ? "absolute top-0 left-0 right-0 z-[9999] bg-gradient-to-b from-black/60 to-transparent" : `sticky top-0 z-[9999] transition-all duration-300 ${scrolled ? "bg-[#080d1a]/97 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_4px_24px_-4px_rgba(0,0,0,0.3)]" : "bg-[#080d1a]/80 backdrop-blur-md"}`}>
         <div className="max-w-[1280px] mx-auto w-full px-6 lg:px-8">
           <div className="flex items-center justify-between h-[56px] gap-4 lg:gap-8">
@@ -314,10 +306,10 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
             @keyframes backdropIn   { from { opacity: 0; } to { opacity: 1; } }
           `}</style>
 
-          {/* Backdrop — click to close */}
+          {/* Backdrop — click to close, starts below nav */}
           <div
-            className="lg:hidden fixed inset-0 z-[10000]"
-            style={{ background: "rgba(0,0,0,0.3)", animation: "backdropIn 200ms ease-out" }}
+            className="lg:hidden fixed left-0 right-0 bottom-0 z-[10000]"
+            style={{ top: "56px", background: "rgba(0,0,0,0.3)", animation: "backdropIn 200ms ease-out" }}
             onClick={() => setMobileMenuOpen(false)}
             aria-hidden="true"
           />
