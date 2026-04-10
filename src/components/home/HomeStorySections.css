@@ -22,7 +22,11 @@
    text — it only shows through where a section has a transparent or
    semi-transparent background. No blend mode, no z-index fighting. */
 .home-color-wash {
-  background: var(--surface-base, #FAFAF8);
+  background:
+    radial-gradient(ellipse 55% 40% at 12% 8%, rgba(217, 108, 74, 0.09) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 85% 35%, rgba(251, 171, 142, 0.12) 0%, transparent 68%),
+    radial-gradient(ellipse 50% 35% at 18% 88%, rgba(249, 115, 22, 0.08) 0%, transparent 65%),
+    hsl(var(--background));
 }
 
 /* Container — mesh gradient decorations only, base transparent so the
@@ -30,7 +34,14 @@
    Rebalanced Apr 2026: removed purple (hsl 265) that fought the orange
    brand, replaced with warm amber variation that reinforces it. */
 .hss-root {
-  background: var(--surface-base, #FAFAF8);
+  background:
+    radial-gradient(at 40% 20%, hsl(var(--primary) / 0.15) 0px, transparent 50%),
+    radial-gradient(at 80% 0%,  hsl(var(--accent)  / 0.15) 0px, transparent 50%),
+    radial-gradient(at 0% 50%,  hsl(30 85% 55% / 0.08) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, hsl(var(--primary) / 0.10) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsl(var(--accent)  / 0.15) 0px, transparent 50%),
+    radial-gradient(at 80% 100%,hsl(var(--primary) / 0.10) 0px, transparent 50%),
+    transparent;
   position: relative;
   overflow: hidden;
 }
@@ -56,13 +67,14 @@
   transform: translateZ(0);
 }
 
-/* Neo-Tactile: alternating light sections */
+/* Alternate section tint */
 .hss-section-tint {
-  background: var(--surface-inset, #F5F3F0);
+  background: #fef6f1;
 }
 
+/* Editorial section — pure white background */
 .hss-section-white {
-  background: var(--surface-base, #FAFAF8);
+  background: #ffffff;
 }
 
 /* ─────────────────────────────────────────────────────────────────
