@@ -502,8 +502,8 @@ function Auth() {
 
   return (
     <div
-      className="w-full relative flex items-stretch justify-center p-0 font-sans antialiased"
-      style={{ minHeight: "100vh" }}
+      className="w-full relative flex items-stretch justify-center p-0 font-sans antialiased bg-gradient-to-br from-[hsl(30,20%,96%)] via-[hsl(30,15%,94%)] to-[hsl(30,20%,96%)]"
+      style={{ minHeight: "calc(100vh / 0.75)" }}
     >
       <SEO
         title="Sign In"
@@ -511,90 +511,22 @@ function Auth() {
         noindex
       />
 
-      {/*
-        ═══════════════════════════════════════════════════════════════
-        PREMIUM BACKGROUND — layered composition
-        ═══════════════════════════════════════════════════════════════
-        Stack, bottom to top:
-          1. Deep navy base gradient (not flat black)
-          2. Soft radial vignette at the card's center
-          3. Fine dot grid at 0.04 opacity — texture, not pattern
-          4. Diagonal mesh gradient — warm coral top-left, cool
-             lavender bottom-right, navy mid — adds depth and color
-             balance without being flashy
-          5. Decorative glass shapes: a large soft circle top-right
-             and a geometric rounded-square bottom-left, both at
-             low opacity with heavy blur
-          6. Thin horizontal brand strip at the very top (barely
-             visible) — subtle reference to the brand band
-      */}
+      {/* Warm subtle background accents */}
       <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden">
-        {/* 1 — deep navy base gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0c1024] via-[#0f1530] to-[#0a0e22]" />
-
-        {/* 4 — diagonal mesh: warm top-left → navy center → cool bottom-right */}
         <div
-          className="absolute inset-0 opacity-90"
+          className="absolute -top-32 -right-20 w-[500px] h-[500px] rounded-full opacity-30"
           style={{
-            background:
-              "radial-gradient(ellipse 70% 55% at 12% 8%, rgba(217, 108, 74, 0.18) 0%, transparent 55%), " +
-              "radial-gradient(ellipse 60% 50% at 88% 92%, rgba(139, 116, 188, 0.22) 0%, transparent 55%), " +
-              "radial-gradient(ellipse 55% 45% at 50% 50%, rgba(30, 41, 80, 0.3) 0%, transparent 65%)",
-          }}
-        />
-
-        {/* 3 — fine dot grid texture */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.04]">
-          <defs>
-            <pattern id="auth-dots" x="0" y="0" width="26" height="26" patternUnits="userSpaceOnUse">
-              <circle cx="1" cy="1" r="1" fill="#ffffff" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#auth-dots)" />
-        </svg>
-
-        {/* 5a — decorative large glass circle, top-right */}
-        <div
-          className="absolute -top-32 -right-20 w-[540px] h-[540px] rounded-full opacity-60"
-          style={{
-            background:
-              "radial-gradient(circle at 30% 30%, rgba(217, 108, 74, 0.18) 0%, rgba(217, 108, 74, 0.05) 40%, transparent 70%)",
-            filter: "blur(70px)",
-          }}
-        />
-
-        {/* 5b — decorative geometric rounded-square, bottom-left */}
-        <div
-          className="absolute -bottom-24 -left-16 w-[480px] h-[480px] rotate-12 opacity-60"
-          style={{
-            background:
-              "radial-gradient(ellipse at 50% 50%, rgba(139, 116, 188, 0.2) 0%, rgba(139, 116, 188, 0.06) 40%, transparent 70%)",
-            borderRadius: "48% 52% 44% 56% / 52% 46% 54% 48%",
+            background: "radial-gradient(circle, hsl(14, 65%, 57%, 0.15) 0%, transparent 60%)",
             filter: "blur(80px)",
           }}
         />
-
-        {/* 5c — accent amber orb, upper-center (small, subtle) */}
         <div
-          className="absolute top-[15%] left-[50%] -translate-x-1/2 w-[380px] h-[380px] rounded-full opacity-40"
+          className="absolute -bottom-24 -left-16 w-[400px] h-[400px] rounded-full opacity-25"
           style={{
-            background:
-              "radial-gradient(circle, rgba(251, 191, 36, 0.1) 0%, transparent 60%)",
-            filter: "blur(90px)",
+            background: "radial-gradient(circle, hsl(270, 40%, 55%, 0.12) 0%, transparent 60%)",
+            filter: "blur(80px)",
           }}
         />
-
-        {/* 2 — soft central vignette for focus around the card */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 50% 45% at 55% 50%, transparent 0%, rgba(10, 14, 34, 0.35) 85%)",
-          }}
-        />
-
-        {/* 6 — thin brand strip at the top */}
-        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-orange-500/40 to-transparent" />
       </div>
 
       {/*
