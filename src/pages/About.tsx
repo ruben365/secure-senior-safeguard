@@ -456,19 +456,14 @@ function About() {
 
 
       {/* CTA with Field Background */}
-      <section className="py-10 md:py-14 relative overflow-hidden" id="cta">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${fieldSunsetCta})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/50 to-primary/20" />
+      <section className="py-10 md:py-14 relative overflow-hidden bg-muted/30" id="cta">
 
         <div className="container mx-auto px-6 lg:px-8 relative z-10 text-center">
-          <h2 className="text-2xl md:text-4xl font-black text-white mb-3 drop-shadow-lg">
+          <h2 className="text-2xl md:text-4xl font-black text-foreground mb-3">
             Ready to Join Our Protected Community?
           </h2>
-          <p className="text-base md:text-lg text-white/95 mb-5 max-w-2xl mx-auto drop-shadow-md">
-            Whether you're looking for personal training, <Link to="/business" className="text-white/95 underline hover:text-white font-medium">AI business solutions</Link>, or
+          <p className="text-base md:text-lg text-muted-foreground mb-5 max-w-2xl mx-auto">
+            Whether you're looking for personal training, <Link to="/business" className="text-primary underline hover:text-primary/80 font-medium">AI business solutions</Link>, or
             want to support our mission, we'd love to connect.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
