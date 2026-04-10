@@ -231,9 +231,9 @@ export const PAGE_SEO = {
   about: {
     title: "About InVision Network — Cybersecurity Experts in Kettering, Ohio",
     description:
-      "Meet Ruben Nk and Corine Mk, the cybersecurity analysts behind InVision Network. Based in Kettering, Ohio, we protect Southwest Ohio families and businesses from AI-powered scams.",
+      "Meet the cybersecurity analysts behind InVision Network. Based in Kettering, Ohio, we protect Southwest Ohio families and businesses from AI-powered scams.",
     keywords:
-      "InVision Network about, Ruben Nk cybersecurity, Corine Mk, Kettering Ohio cybersecurity, Southwest Ohio AI protection",
+      "InVision Network about, Kettering Ohio cybersecurity, Southwest Ohio AI protection",
   },
 
   contact: {

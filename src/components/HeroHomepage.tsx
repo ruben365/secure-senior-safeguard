@@ -70,7 +70,7 @@ export const HeroHomepage = () => {
       <div className="hero-home__bg">
         <img
           src={corineHero}
-          alt="Corine — InVision Network co-founder"
+          alt="InVision Network co-founder"
           loading="eager"
           decoding="async"
           fetchPriority="high"
