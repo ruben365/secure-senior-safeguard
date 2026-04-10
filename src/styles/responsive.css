@@ -38,6 +38,16 @@
     min-height: 44px !important;
     font-size: 16px !important;
   }
+
+  /* Hero CTA buttons wrap vertically on very narrow phones */
+  .hero-home__ctas,
+  .hero-home__ctas--mobile,
+  .hero-home__ctas--mobile > div,
+  .hero-biz__ctas,
+  .hero-ws__ctas,
+  #final-action .flex {
+    flex-wrap: wrap !important;
+  }
 }
 
 /* ------------------------------------------------------------ */
@@ -98,14 +108,12 @@
     min-width: 34px;
   }
 
-  /* ── HERO BUTTON COMPRESSION — compact on ALL pages ── */
+  /* ── HERO BUTTON COMPRESSION — scoped to CTA buttons only ── */
   .hero-home__cta,
   .hero-biz__cta,
   .hero-ws__cta,
-  [class*="hero"] button,
-  [class*="Hero"] button,
-  main > section:first-child button,
-  #final-action button {
+  #final-action .flex > a,
+  #final-action .flex > button {
     height: 34px !important;
     max-height: 34px !important;
     font-size: 12px !important;
@@ -114,28 +122,18 @@
     border-radius: 8px !important;
   }
 
-  /* ── CONTENT SECTION BUTTONS — compact on phone ── */
-  main section button,
-  main section a[role="button"],
-  main section [role="button"],
-  main section a.inline-flex,
-  .home-color-wash button,
-  .hss-root button {
+  /* ── CONTENT CTA BUTTONS — scoped to explicit CTA classes ── */
+  .hss-cta-primary,
+  .hss-cta-ghost,
+  .home-color-wash .flex > a[class*="Button"],
+  .home-color-wash .flex > button[class*="Button"],
+  .hss-root .flex > a[class*="Button"],
+  .hss-root .flex > button[class*="Button"] {
     height: 32px !important;
     max-height: 32px !important;
     font-size: 12px !important;
     padding: 0 12px !important;
     border-radius: 6px !important;
-  }
-
-  /* ── GENERAL BUTTON COMPRESSION — fallback for rest ── */
-  main button,
-  main a[role="button"],
-  main [role="button"],
-  main .btn,
-  main [class*="Button"] {
-    max-height: 36px;
-    font-size: 12px !important;
   }
 
   /* Admin dashboard responsive */
@@ -164,18 +162,18 @@
     padding-bottom: 1.5rem !important;
   }
 
-  /* No full-width buttons in content on phone */
-  main section .w-full:is(button, a, [role="button"]),
-  .hss-cta-primary {
+  /* No full-width CTA buttons on phone — scoped to CTA classes only */
+  .hss-cta-primary,
+  .hss-cta-ghost,
+  .home-color-wash .w-full:is(a, [role="button"]),
+  .hss-root .w-full:is(a, [role="button"]) {
     width: auto !important;
     max-width: 220px !important;
     min-width: 140px;
   }
 
-  /* Primary content buttons — strong orange, visible and compact */
-  main section a.hss-cta-primary,
-  main section a[class*="bg-[#d96c4a]"],
-  main section a[class*="bg-gradient"] {
+  /* Primary CTA buttons — orange gradient, scoped to primary class only */
+  .hss-cta-primary {
     background: linear-gradient(135deg, #ea580c, #c2410c) !important;
     color: white !important;
     font-weight: 600 !important;
@@ -380,14 +378,13 @@
     line-height: 1.5 !important;
   }
 
-  /* ── BUTTONS — compact pill shape everywhere ── */
+  /* ── BUTTONS — compact pill shape, scoped to CTA classes only ── */
   .hss-cta-primary,
-  main section button,
-  main section a[role="button"],
-  main section [role="button"],
-  main section a.inline-flex,
-  .home-color-wash button,
-  .hss-root button {
+  .hss-cta-ghost,
+  .home-color-wash .flex > a,
+  .home-color-wash .flex > button:not([data-state]):not([aria-expanded]),
+  .hss-root .flex > a:not([aria-label]),
+  .hss-root .flex > button:not([data-state]):not([aria-expanded]) {
     height: 32px !important;
     max-height: 32px !important;
     font-size: 12px !important;
@@ -399,20 +396,16 @@
     max-width: 220px !important;
   }
 
-  /* Primary buttons — warm orange gradient */
-  .hss-cta-primary,
-  main section a[class*="bg-[#d96c4a]"],
-  main section a[class*="bg-gradient"] {
+  /* Primary CTA buttons — warm orange gradient */
+  .hss-cta-primary {
     background: linear-gradient(135deg, #ea580c, #c2410c) !important;
     color: white !important;
     border: none !important;
     box-shadow: 0 2px 8px -2px rgba(234,88,12,0.3) !important;
   }
 
-  /* Secondary/ghost buttons — orange border pill */
-  .hss-cta-ghost,
-  main section button[class*="outline"],
-  main section a[class*="outline"] {
+  /* Secondary/ghost CTA buttons — orange border pill */
+  .hss-cta-ghost {
     background: transparent !important;
     border: 1.5px solid rgba(234,88,12,0.4) !important;
     color: #ea580c !important;
