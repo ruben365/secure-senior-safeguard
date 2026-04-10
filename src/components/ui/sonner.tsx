@@ -15,23 +15,24 @@ const Toaster = ({ ...props }: ToasterProps) => {
       toastOptions={{
         classNames: {
           toast:
-            "group toast backdrop-blur-xl border rounded-lg " +
-            "bg-[rgba(15,15,25,0.92)] text-white border-white/10 " +
-            "dark:bg-[rgba(15,15,25,0.92)] dark:text-white dark:border-white/10",
+            "group toast border rounded-xl " +
+            "bg-white text-slate-900 border-slate-200/80 " +
+            "shadow-[0_4px_12px_-2px_rgba(80,40,80,0.1),0_2px_4px_rgba(80,40,80,0.06)] " +
+            "dark:bg-white dark:text-slate-900 dark:border-slate-200/80",
           description:
-            "group-[.toast]:text-white/70",
+            "group-[.toast]:text-slate-600",
           actionButton:
-            "group-[.toast]:bg-white/15 group-[.toast]:text-white group-[.toast]:border group-[.toast]:border-white/20",
+            "group-[.toast]:bg-primary group-[.toast]:text-white group-[.toast]:border group-[.toast]:border-primary/60",
           cancelButton:
-            "group-[.toast]:bg-white/10 group-[.toast]:text-white/70 group-[.toast]:border group-[.toast]:border-white/15",
+            "group-[.toast]:bg-slate-100 group-[.toast]:text-slate-700 group-[.toast]:border group-[.toast]:border-slate-200",
           success:
-            "group-[.toast]:[&>svg]:text-emerald-400",
+            "group-[.toast]:[&>svg]:text-emerald-500",
           error:
-            "group-[.toast]:[&>svg]:text-red-400",
+            "group-[.toast]:[&>svg]:text-red-500",
           warning:
-            "group-[.toast]:[&>svg]:text-amber-400",
+            "group-[.toast]:[&>svg]:text-amber-500",
           info:
-            "group-[.toast]:[&>svg]:text-blue-400",
+            "group-[.toast]:[&>svg]:text-blue-500",
         },
       }}
       {...props}

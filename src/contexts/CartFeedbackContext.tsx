@@ -1,5 +1,7 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
+const DISMISSED_KEY = "cart_help_dismissed";
+
 interface CartFeedbackContextType {
   showThankYou: boolean;
   triggerThankYou: () => void;
@@ -25,11 +27,14 @@ export const CartFeedbackProvider = ({ children }: { children: ReactNode }) => {
   const triggerThankYou = () => {
     setShowEmptyCartHelp(false);
     setShowThankYou(true);
-    // Auto-dismiss after 8 seconds
     setTimeout(() => setShowThankYou(false), 8000);
   };
 
   const triggerEmptyCartHelp = () => {
+    // Don't show if user already dismissed this session
+    try {
+      if (sessionStorage.getItem(DISMISSED_KEY) === "true") return;
+    } catch {}
     setShowThankYou(false);
     setShowEmptyCartHelp(true);
   };
@@ -37,6 +42,10 @@ export const CartFeedbackProvider = ({ children }: { children: ReactNode }) => {
   const dismissAll = () => {
     setShowThankYou(false);
     setShowEmptyCartHelp(false);
+    // Persist dismissal for this session
+    try {
+      sessionStorage.setItem(DISMISSED_KEY, "true");
+    } catch {}
   };
 
   return (
