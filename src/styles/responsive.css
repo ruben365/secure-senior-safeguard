@@ -33,8 +33,6 @@
 
   /* Hero CTA buttons wrap vertically on very narrow phones */
   .hero-home__ctas,
-  .hero-home__ctas--mobile,
-  .hero-home__ctas--mobile > div,
   .hero-biz__ctas,
   .hero-ws__ctas,
   #final-action .flex {

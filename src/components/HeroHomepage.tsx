@@ -1,23 +1,12 @@
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
-  Bot, Globe, Lock, Cpu,
-  Shield, Brain, Scan, Headphones,
+  Bot, Lock, Cpu, Headphones,
 } from "lucide-react";
 import corineHero from "@/assets/hero-wife-office.jpg";
 
-/* ── Feature items — Row 1 (top) ── */
-const featuresRow1 = [
-  {
-    icon: Bot,
-    title: "AI Business Tools",
-    desc: "Custom software that automates your daily operations.",
-  },
-  {
-    icon: Globe,
-    title: "Business Automation",
-    desc: "AI agents that answer calls, book appointments, follow up.",
-  },
+/* ── Feature items — 4 core services ── */
+const features = [
   {
     icon: Lock,
     title: "Scam & Spam Detection",
@@ -28,24 +17,10 @@ const featuresRow1 = [
     title: "Cybersecurity",
     desc: "24/7 threat monitoring with automated response.",
   },
-];
-
-/* ── Feature items — Row 2 (bottom) ── */
-const featuresRow2 = [
   {
-    icon: Shield,
-    title: "Digital Estate",
-    desc: "Lock down accounts and transfer credentials to heirs.",
-  },
-  {
-    icon: Brain,
-    title: "AI Training",
-    desc: "Live workshops on spotting deepfakes and phishing.",
-  },
-  {
-    icon: Scan,
-    title: "Threat Detection",
-    desc: "Real-time file scanning and risk reports.",
+    icon: Bot,
+    title: "AI Business Tools",
+    desc: "Custom software that automates your daily operations.",
   },
   {
     icon: Headphones,
@@ -87,8 +62,8 @@ export const HeroHomepage = () => {
                 builds automated defenses, runs live training, and monitors threats
                 around the clock so you stay safe without lifting a finger.
               </p>
-              {/* CTAs — inline on desktop, separate block on mobile */}
-              <div className="hero-home__ctas hero-home__ctas--desktop">
+              {/* CTAs */}
+              <div className="hero-home__ctas">
                 <Link to="/training#pricing" className="hero-home__cta">
                   Get Protected
                 </Link>
@@ -101,18 +76,6 @@ export const HeroHomepage = () => {
           </div>
         </div>
 
-        {/* CTA group — drops to bottom on mobile */}
-        <div className="hero-home__ctas hero-home__ctas--mobile">
-          <div className="max-w-[1600px] mx-auto w-full px-6 lg:px-8">
-            <Link to="/training#pricing" className="hero-home__cta">
-              Get Protected
-            </Link>
-            <Link to="/business" className="hero-home__cta">
-              See Our Work
-              <ArrowRight />
-            </Link>
-          </div>
-        </div>
       </div>
 
       {/* ── 3. Glassmorphism Bottom Panel ── */}
@@ -120,27 +83,8 @@ export const HeroHomepage = () => {
         <div className="max-w-[1600px] mx-auto w-full px-6 lg:px-8">
           <div className="hero-home__panel-inner">
 
-          {/* Row 1 — Top features */}
           <div className="hero-home__feature-row">
-            {featuresRow1.map((f) => (
-              <div key={f.title} className="hero-home__feature">
-                <div className="hero-home__feature-icon">
-                  <f.icon />
-                </div>
-                <div className="hero-home__feature-text">
-                  <p className="hero-home__feature-title">{f.title}</p>
-                  <p className="hero-home__feature-desc">{f.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Divider */}
-          <div className="hero-home__divider" />
-
-          {/* Row 2 — Bottom features */}
-          <div className="hero-home__feature-row">
-            {featuresRow2.map((f) => (
+            {features.map((f) => (
               <div key={f.title} className="hero-home__feature">
                 <div className="hero-home__feature-icon">
                   <f.icon />
