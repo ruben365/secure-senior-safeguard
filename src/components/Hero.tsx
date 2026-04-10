@@ -52,10 +52,9 @@ const Hero = ({
   return (
     <div
       className={cn(
-        "relative w-full flex items-center overflow-hidden hero-mobile",
+        "relative w-full min-h-[115dvh] md:min-h-[125dvh] lg:min-h-[135dvh] flex items-center overflow-hidden hero-mobile",
         className,
       )}
-      style={{ minHeight: "100dvh" }}
     >
       {/* Transparent fallback - no color flash */}
       <div className="absolute inset-0 bg-transparent" />

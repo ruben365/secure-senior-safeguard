@@ -462,18 +462,38 @@ function Auth() {
 
   // Premium input style — subtle bg, warm orange focus ring
   const inputClassName =
-    "h-10 pl-10 text-[14px] bg-white border-slate-200 text-foreground placeholder:text-slate-400 rounded-lg transition-all duration-200 focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 hover:border-slate-300";
+    "h-10 pl-10 text-[14px] bg-slate-50/70 border-slate-200 text-foreground placeholder:text-slate-400 rounded-lg transition-all duration-200 focus:bg-white focus:border-orange-500 hover:border-slate-300";
 
   if (signupSuccess) {
     return (
       <div
-        className="w-full relative flex items-center justify-center p-5 md:p-8 font-sans antialiased bg-gradient-to-br from-[hsl(30,20%,96%)] via-[hsl(30,15%,94%)] to-[hsl(30,20%,96%)]"
-        style={{ minHeight: "calc(100vh / 0.75)" }}
+        className="w-full relative flex items-center justify-center p-5 md:p-8 font-sans antialiased"
+        style={{ minHeight: "100vh" }}
       >
+        {/* Same calm dark backdrop as the main sign-in screen */}
+        <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0b1020] via-[#0e1428] to-[#0a0f1e]" />
+          <svg className="absolute inset-0 w-full h-full opacity-[0.035]">
+            <defs>
+              <pattern id="auth-success-dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+                <circle cx="1" cy="1" r="1" fill="#ffffff" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#auth-success-dots)" />
+          </svg>
+          <div className="absolute -top-40 -left-40 h-[520px] w-[520px] rounded-full bg-emerald-500/10 blur-[140px]" />
+          <div className="absolute -bottom-40 -right-40 h-[560px] w-[560px] rounded-full bg-indigo-500/12 blur-[160px]" />
+        </div>
+
         <div className="relative z-10 w-full max-w-[440px]">
-          <div className="relative rounded-xl bg-white border border-slate-200 p-5 md:p-7 text-center shadow-[0_4px_24px_-4px_rgba(80,40,80,0.1),0_1px_3px_rgba(80,40,80,0.06)]">
+          <div className="relative rounded-xl bg-white border border-slate-200 p-5 md:p-7 text-center">
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-slate-300/80 to-transparent"
+            />
             <div className="relative w-14 h-14 mx-auto mb-5">
-              <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center shadow-[0_4px_12px_-2px_rgba(16,185,129,0.3)]">
+              <div className="absolute inset-0 rounded-2xl bg-emerald-500/20 blur-xl" />
+              <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center shadow-[0_12px_28px_-8px_rgba(16,185,129,0.5),inset_0_1px_0_0_rgba(255,255,255,0.35)] border border-white/20">
                 <CheckCircle2 className="w-7 h-7 text-white" strokeWidth={2.25} />
               </div>
             </div>
@@ -502,8 +522,8 @@ function Auth() {
 
   return (
     <div
-      className="w-full relative flex items-stretch justify-center p-0 font-sans antialiased bg-gradient-to-br from-[hsl(30,20%,96%)] via-[hsl(30,15%,94%)] to-[hsl(30,20%,96%)]"
-      style={{ minHeight: "calc(100vh / 0.75)" }}
+      className="w-full relative flex items-stretch justify-center p-0 font-sans antialiased"
+      style={{ minHeight: "100vh" }}
     >
       <SEO
         title="Sign In"
@@ -511,22 +531,90 @@ function Auth() {
         noindex
       />
 
-      {/* Warm subtle background accents */}
+      {/*
+        ═══════════════════════════════════════════════════════════════
+        PREMIUM BACKGROUND — layered composition
+        ═══════════════════════════════════════════════════════════════
+        Stack, bottom to top:
+          1. Deep navy base gradient (not flat black)
+          2. Soft radial vignette at the card's center
+          3. Fine dot grid at 0.04 opacity — texture, not pattern
+          4. Diagonal mesh gradient — warm coral top-left, cool
+             lavender bottom-right, navy mid — adds depth and color
+             balance without being flashy
+          5. Decorative glass shapes: a large soft circle top-right
+             and a geometric rounded-square bottom-left, both at
+             low opacity with heavy blur
+          6. Thin horizontal brand strip at the very top (barely
+             visible) — subtle reference to the brand band
+      */}
       <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden">
+        {/* 1 — deep navy base gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0c1024] via-[#0f1530] to-[#0a0e22]" />
+
+        {/* 4 — diagonal mesh: warm top-left → navy center → cool bottom-right */}
         <div
-          className="absolute -top-32 -right-20 w-[500px] h-[500px] rounded-full opacity-30"
+          className="absolute inset-0 opacity-90"
           style={{
-            background: "radial-gradient(circle, hsl(14, 65%, 57%, 0.15) 0%, transparent 60%)",
+            background:
+              "radial-gradient(ellipse 70% 55% at 12% 8%, rgba(217, 108, 74, 0.18) 0%, transparent 55%), " +
+              "radial-gradient(ellipse 60% 50% at 88% 92%, rgba(139, 116, 188, 0.22) 0%, transparent 55%), " +
+              "radial-gradient(ellipse 55% 45% at 50% 50%, rgba(30, 41, 80, 0.3) 0%, transparent 65%)",
+          }}
+        />
+
+        {/* 3 — fine dot grid texture */}
+        <svg className="absolute inset-0 w-full h-full opacity-[0.04]">
+          <defs>
+            <pattern id="auth-dots" x="0" y="0" width="26" height="26" patternUnits="userSpaceOnUse">
+              <circle cx="1" cy="1" r="1" fill="#ffffff" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#auth-dots)" />
+        </svg>
+
+        {/* 5a — decorative large glass circle, top-right */}
+        <div
+          className="absolute -top-32 -right-20 w-[540px] h-[540px] rounded-full opacity-60"
+          style={{
+            background:
+              "radial-gradient(circle at 30% 30%, rgba(217, 108, 74, 0.18) 0%, rgba(217, 108, 74, 0.05) 40%, transparent 70%)",
+            filter: "blur(70px)",
+          }}
+        />
+
+        {/* 5b — decorative geometric rounded-square, bottom-left */}
+        <div
+          className="absolute -bottom-24 -left-16 w-[480px] h-[480px] rotate-12 opacity-60"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 50%, rgba(139, 116, 188, 0.2) 0%, rgba(139, 116, 188, 0.06) 40%, transparent 70%)",
+            borderRadius: "48% 52% 44% 56% / 52% 46% 54% 48%",
             filter: "blur(80px)",
           }}
         />
+
+        {/* 5c — accent amber orb, upper-center (small, subtle) */}
         <div
-          className="absolute -bottom-24 -left-16 w-[400px] h-[400px] rounded-full opacity-25"
+          className="absolute top-[15%] left-[50%] -translate-x-1/2 w-[380px] h-[380px] rounded-full opacity-40"
           style={{
-            background: "radial-gradient(circle, hsl(270, 40%, 55%, 0.12) 0%, transparent 60%)",
-            filter: "blur(80px)",
+            background:
+              "radial-gradient(circle, rgba(251, 191, 36, 0.1) 0%, transparent 60%)",
+            filter: "blur(90px)",
           }}
         />
+
+        {/* 2 — soft central vignette for focus around the card */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 50% 45% at 55% 50%, transparent 0%, rgba(10, 14, 34, 0.35) 85%)",
+          }}
+        />
+
+        {/* 6 — thin brand strip at the top */}
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-orange-500/40 to-transparent" />
       </div>
 
       {/*
@@ -539,41 +627,44 @@ function Auth() {
         <div className="w-full grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-8 lg:gap-14 items-center">
 
           {/* LEFT — brand pane (desktop only) */}
-          <aside className="hidden lg:flex flex-col pr-2">
+          <aside className="hidden lg:flex flex-col text-white pr-2">
             <Link
               to="/"
               className="inline-flex items-center gap-3 mb-14 group w-fit"
             >
-              <div className="relative w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center">
-                <img
-                  src={invisionLogo}
-                  alt="InVision Network"
-                  className="w-7 h-7 drop-shadow-sm"
-                  loading="eager"
-                  decoding="sync"
-                  width={28}
-                  height={28}
-                />
+              <div className="relative">
+                <div className="absolute inset-0 rounded-2xl bg-orange-500/20 blur-xl group-hover:bg-orange-500/30 transition-colors" />
+                <div className="relative w-12 h-12 rounded-2xl bg-white/[0.06] border border-white/15 backdrop-blur-sm flex items-center justify-center">
+                  <img
+                    src={invisionLogo}
+                    alt="InVision Network"
+                    className="w-7 h-7 brightness-0 invert drop-shadow-md"
+                    loading="eager"
+                    decoding="sync"
+                    width={28}
+                    height={28}
+                  />
+                </div>
               </div>
               <div className="flex flex-col leading-tight">
-                <span className="text-[15px] font-bold text-foreground tracking-tight">
+                <span className="text-[15px] font-bold text-white tracking-tight">
                   InVision Network
                 </span>
-                <span className="text-[10px] font-medium text-muted-foreground tracking-[0.15em] uppercase mt-0.5">
+                <span className="text-[10px] font-medium text-white/55 tracking-[0.15em] uppercase mt-0.5">
                   Secure Member Portal
                 </span>
               </div>
             </Link>
 
-            <h1 className="text-[2.25rem] xl:text-[2.625rem] font-bold text-foreground leading-[1.08] tracking-tight mb-5">
+            <h1 className="text-[2.25rem] xl:text-[2.625rem] font-bold text-white leading-[1.08] tracking-tight mb-5">
               Welcome back to a{" "}
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-orange-400 bg-clip-text text-transparent">
                 quieter
               </span>
               ,<br />
               safer digital life.
             </h1>
-            <p className="text-muted-foreground text-base leading-relaxed mb-10 max-w-md">
+            <p className="text-white/65 text-base leading-relaxed mb-10 max-w-md">
               Sign in to access your training, monitoring dashboard, bookings,
               and family protection settings — all in one place.
             </p>
@@ -594,14 +685,14 @@ function Auth() {
                 },
               ].map((f) => (
                 <li key={f.title} className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-md bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/25 flex items-center justify-center mt-0.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-primary" strokeWidth={2.25} />
+                  <div className="flex-shrink-0 w-6 h-6 rounded-md bg-gradient-to-br from-orange-400/25 to-orange-500/15 border border-orange-400/30 flex items-center justify-center mt-0.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-orange-300" strokeWidth={2.25} />
                   </div>
                   <div>
-                    <div className="text-foreground text-sm font-semibold">
+                    <div className="text-white text-sm font-semibold">
                       {f.title}
                     </div>
-                    <div className="text-muted-foreground text-[13px] leading-relaxed">
+                    <div className="text-white/55 text-[13px] leading-relaxed">
                       {f.body}
                     </div>
                   </div>
@@ -609,15 +700,41 @@ function Auth() {
               ))}
             </ul>
 
-            <div className="flex items-center gap-3 text-xs text-muted-foreground">
-              <ShieldCheck className="w-4 h-4 text-primary/60" />
+            <div className="flex items-center gap-3 text-xs text-white/50">
+              <ShieldCheck className="w-4 h-4 text-white/60" />
               <span>Trusted by 100+ families across Ohio</span>
             </div>
           </aside>
 
-          {/* RIGHT — auth card */}
+          {/* RIGHT — premium auth card */}
           <div className="w-full max-w-[460px] mx-auto lg:mx-0">
-            <div className="relative rounded-xl bg-white border border-slate-200 p-7 md:p-8 shadow-[0_4px_24px_-4px_rgba(80,40,80,0.1),0_1px_3px_rgba(80,40,80,0.06)]">
+            {/*
+              Auth card — premium multi-layer presentation:
+                • Soft warm glow ring behind the card
+                • White card with a gradient-tinted border
+                • 5-layer shadow stack (inner highlight, contact,
+                  ambient close, ambient mid, ambient far)
+                • Top hairline rim light
+                • Subtle bottom accent bar
+            */}
+            {/* Warm glow ring — sits behind the card */}
+            <div
+              aria-hidden="true"
+              className="absolute -inset-4 rounded-[28px] bg-gradient-to-br from-orange-500/20 via-transparent to-purple-500/15 blur-2xl pointer-events-none"
+            />
+
+            <div className="relative rounded-[20px] bg-white border border-slate-200/70 p-8 md:p-10 shadow-[0_1px_0_0_rgba(255,255,255,0.9)_inset,0_2px_4px_-1px_rgba(15,23,42,0.08),0_12px_24px_-8px_rgba(15,23,42,0.18),0_32px_64px_-20px_rgba(15,23,42,0.4),0_48px_96px_-24px_rgba(15,23,42,0.35)]">
+              {/* Top hairline rim light */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-orange-400/50 to-transparent"
+              />
+
+              {/* Subtle bottom accent bar */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-x-10 bottom-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent"
+              />
 
               {/* Mobile logo (desktop shows it in the left pane) */}
               <Link
@@ -832,8 +949,7 @@ function Auth() {
 
                 <Button
                   type="submit"
-                  className="w-full h-10 text-[14px] font-semibold rounded-lg"
-                  variant="default"
+                  className="w-full h-10 text-[14px] font-semibold rounded-lg bg-[#080d1a] text-white border border-[#1e293b] hover:bg-[#111827] hover:-translate-y-[1px] active:translate-y-[0.5px] transition-all duration-200"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -1085,8 +1201,7 @@ function Auth() {
 
                 <Button
                   type="submit"
-                  className="w-full h-10 text-[14px] font-semibold rounded-lg"
-                  variant="default"
+                  className="w-full h-10 text-[14px] font-semibold rounded-lg bg-[#080d1a] text-white border border-[#1e293b] hover:bg-[#111827] hover:-translate-y-[1px] active:translate-y-[0.5px] transition-all duration-200"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -1115,34 +1230,34 @@ function Auth() {
             </div>
             {/* /card */}
 
-            {/* Apply link */}
+            {/* Apply link — restyled for dark backdrop */}
             <div className="mt-6 text-center">
               <Link
                 to="/careers"
-                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
               >
                 Want to join our team?{" "}
-                <span className="text-primary font-semibold">Apply here</span>
+                <span className="text-orange-300 font-semibold">Apply here</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
 
-            {/* Bottom legal links */}
-            <div className="mt-3 flex items-center justify-center gap-3 text-[11px] text-muted-foreground/70">
+            {/* Bottom legal links — restyled for dark backdrop */}
+            <div className="mt-3 flex items-center justify-center gap-3 text-[11px] text-white/45">
               <Link
                 to="/privacy-policy"
-                className="hover:text-foreground transition-colors"
+                className="hover:text-white/80 transition-colors"
               >
                 Privacy Policy
               </Link>
-              <span className="text-muted-foreground/40">•</span>
+              <span className="text-white/25">•</span>
               <Link
                 to="/terms-of-service"
-                className="hover:text-foreground transition-colors"
+                className="hover:text-white/80 transition-colors"
               >
                 Terms of Service
               </Link>
-              <span className="text-muted-foreground/40">•</span>
+              <span className="text-white/25">•</span>
               <span>© {new Date().getFullYear()} InVision Network</span>
             </div>
           </div>
