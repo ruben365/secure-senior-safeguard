@@ -946,3 +946,62 @@
     transform: none !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE — Clean, spacious, noise-free
+   ═══════════════════════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  /* Stats grid: single column on phones */
+  .hss-stats-bento .grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+  }
+
+  .hss-stats-tile {
+    padding: 1.25rem !important;
+  }
+
+  /* Reduce stat number size on mobile */
+  .hss-stats-bento .text-\[2\.75rem\] {
+    font-size: 2rem !important;
+  }
+
+  /* Hide floating cards / decorative badges on mobile */
+  .hss-float-card {
+    display: none !important;
+  }
+
+  /* Hide ambient glows — visual noise on small screens */
+  .hss-stats-glow-left,
+  .hss-stats-glow-right,
+  .hss-ambient-wash,
+  .hss-ambient-wash-2,
+  .hss-ambient-wash-3,
+  .hss-ambient-wash-4 {
+    display: none !important;
+  }
+
+  /* Stop floating animations on mobile */
+  .hss-float-card,
+  .hss-trust-badge {
+    animation: none !important;
+  }
+
+  /* Sections: more breathing room */
+  .hss-section-white,
+  .hss-section-tint {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+
+  /* CTA buttons: full width on mobile */
+  .hss-cta-primary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Collage section: auto height instead of fixed */
+  .hss-section-white .grid-rows-2 {
+    height: auto !important;
+  }
+}

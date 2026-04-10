@@ -380,7 +380,7 @@
 
   @media (max-width: 768px) {
     :root {
-      --text-scale: 0.9; /* slightly larger than desktop 0.85 for mobile readability */
+      --text-scale: 1; /* full 16px base on mobile for readability — no shrinking */
     }
   }
 

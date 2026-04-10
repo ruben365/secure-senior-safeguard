@@ -388,7 +388,7 @@ export const HomeStorySections = () => {
 
         <div className="relative z-10 container mx-auto px-6 lg:px-8">
           <h2 id="story-stats-heading" className="sr-only">By the numbers</h2>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
             {stats.map((stat, i) => (
               <StatTile key={stat.label} {...stat} index={i} />
             ))}
@@ -778,7 +778,7 @@ export const HomeStorySections = () => {
             </div>
 
             {/* Right — asymmetric collage */}
-            <div className="relative grid grid-rows-2 gap-5 h-[460px] lg:h-[520px]">
+            <div className="relative grid grid-rows-2 gap-5 h-auto sm:h-[460px] lg:h-[520px]">
               {/* Large top image */}
               <div
                 data-reveal="slide-left"

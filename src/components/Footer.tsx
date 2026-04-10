@@ -240,7 +240,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
           </div>
 
           {/* ─────────── MIDDLE — 5 nav columns stretched across full width ─────────── */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 lg:gap-x-12 gap-y-6 w-full mt-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 lg:gap-x-12 gap-y-8 w-full mt-8">
             {navColumns.map((col) => (
               <div key={col.heading}>
                 <h4 className="font-bold text-[13px] mb-2 text-white uppercase tracking-[0.18em] leading-tight">
@@ -279,7 +279,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
             </div>
 
             {/* Right cluster: social icons */}
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-3">
               {socials.map((s) => (
                 <a
                   key={s.label}
@@ -287,9 +287,9 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="w-9 h-9 rounded-xl bg-white/[0.05] hover:bg-orange-500/15 border border-white/10 hover:border-orange-500/40 transition-all duration-200 flex items-center justify-center group"
+                  className="w-11 h-11 sm:w-9 sm:h-9 rounded-xl bg-white/[0.05] hover:bg-orange-500/15 border border-white/10 hover:border-orange-500/40 transition-all duration-200 flex items-center justify-center group"
                 >
-                  <s.icon className="w-4 h-4 text-white/75 group-hover:text-orange-300 transition-colors" />
+                  <s.icon className="w-5 h-5 sm:w-4 sm:h-4 text-white/75 group-hover:text-orange-300 transition-colors" />
                 </a>
               ))}
             </div>
