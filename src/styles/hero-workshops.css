@@ -223,18 +223,15 @@
   outline-offset: 3px;
 }
 
-/* Primary — glass with warm orange accent glow */
+/* Primary — solid orange, matches homepage exactly */
 .hero-ws__cta--primary {
   background: linear-gradient(135deg, #c2410c, #9a3412);
-  border: 1px solid rgba(249, 115, 22, 0.35);
-  box-shadow: none;
+  border: 1px solid #7c2d12;
 }
 
 .hero-ws__cta--primary:hover {
   background: linear-gradient(135deg, #ea580c, #c2410c);
-  border-color: rgba(249, 115, 22, 0.5);
-  transform: translateY(-2px);
-  box-shadow: none;
+  transform: translateY(-1px);
 }
 
 /* Secondary — subtle glass border */

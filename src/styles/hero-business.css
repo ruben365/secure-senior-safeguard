@@ -199,6 +199,19 @@
   outline-offset: 3px;
 }
 
+.hero-biz__cta svg {
+  width: 15px;
+  height: 15px;
+  opacity: 0.6;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.hero-biz__cta:hover svg {
+  opacity: 0.9;
+  transform: translateX(2px);
+}
+
 /* Primary — solid orange, white text, no shadow */
 .hero-biz__cta--primary {
   background: linear-gradient(135deg, #c2410c, #9a3412);
