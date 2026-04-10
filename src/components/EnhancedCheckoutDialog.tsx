@@ -124,8 +124,8 @@ function QRCodePayment({
           <Button
             onClick={generateQRCode}
             disabled={loading}
-            size="lg"
-            className="w-full"
+            size="sm"
+            className="w-full h-9 text-sm"
           >
             {loading ? (
               <Loader2 className="mr-2 h-5 w-5 animate-spin" />
@@ -329,7 +329,8 @@ function CardPaymentForm({
       <Button
         type="submit"
         disabled={!stripe || loading || !elementReady}
-        className="w-full h-10 text-[14px] font-semibold bg-gradient-to-b from-orange-600 to-orange-700 text-white rounded-lg"
+        className="w-full h-9 text-sm font-semibold bg-gradient-to-b from-orange-600 to-orange-700 text-white rounded-lg"
+        size="sm"
       >
         {loading ? (
           <>
@@ -491,7 +492,8 @@ function CardPaymentWrapper({
             type="button"
             onClick={handleContinue}
             disabled={!formData.name || !formData.email || loading}
-            className="w-full h-10 bg-gradient-to-b from-orange-600 to-orange-700 text-white text-[14px] font-semibold rounded-lg"
+            className="w-full h-9 bg-gradient-to-b from-orange-600 to-orange-700 text-white text-sm font-semibold rounded-lg"
+            size="sm"
           >
             {loading ? (
               <>

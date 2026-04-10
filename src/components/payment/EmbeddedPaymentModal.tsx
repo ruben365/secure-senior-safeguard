@@ -347,8 +347,8 @@ function PaymentForm({
             <Button
               onClick={handleInfoSubmit}
               disabled={isLoading || !email || !name || !termsAccepted}
-              className="w-full max-sm:h-[38px] max-sm:text-[13px]"
-              size="lg"
+              className="w-full h-9 text-sm"
+              size="sm"
             >
               {isLoading ? (
                 <>
@@ -525,7 +525,7 @@ function PaymentForm({
                 </p>
               </div>
 
-              <Button onClick={onClose} className="w-full">
+              <Button onClick={onClose} className="w-full h-9 text-sm" size="sm">
                 Close
               </Button>
             </div>
@@ -626,7 +626,8 @@ function PaymentElementWrapper({
           variant="outline"
           onClick={onBack}
           disabled={isLoading}
-          className="flex-1"
+          className="flex-1 h-9 text-sm"
+          size="sm"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back
@@ -634,8 +635,8 @@ function PaymentElementWrapper({
         <Button
           onClick={handleSubmit}
           disabled={isLoading || !stripe || !elements || !isReady}
-          className="flex-1"
-          size="lg"
+          className="flex-1 h-9 text-sm"
+          size="sm"
         >
           {isLoading ? (
             <>

@@ -324,8 +324,8 @@ function SmartPaymentForm({ items, onSuccess, onClose }: PaymentFormProps) {
             <Button
               onClick={handleInfoSubmit}
               disabled={isLoading || !email || !name || !termsAccepted}
-              className="w-full"
-              size="lg"
+              className="w-full h-9 text-sm"
+              size="sm"
             >
               {isLoading ? (
                 <>
@@ -594,7 +594,8 @@ function PaymentElementWrapper({
           variant="outline"
           onClick={onBack}
           disabled={isLoading}
-          className="flex-1"
+          className="flex-1 h-9 text-sm"
+          size="sm"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back
@@ -602,8 +603,8 @@ function PaymentElementWrapper({
         <Button
           onClick={handleSubmit}
           disabled={isLoading || !stripe || !elements || !isReady}
-          className="flex-1"
-          size="lg"
+          className="flex-1 h-9 text-sm"
+          size="sm"
         >
           {isLoading ? (
             <>
