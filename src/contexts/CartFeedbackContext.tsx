@@ -18,6 +18,8 @@ export const useCartFeedback = () => {
   return context;
 };
 
+const EMPTY_CART_DISMISSED_KEY = "empty_cart_help_dismissed";
+
 export const CartFeedbackProvider = ({ children }: { children: ReactNode }) => {
   const [showThankYou, setShowThankYou] = useState(false);
   const [showEmptyCartHelp, setShowEmptyCartHelp] = useState(false);
@@ -30,6 +32,7 @@ export const CartFeedbackProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const triggerEmptyCartHelp = () => {
+    if (sessionStorage.getItem(EMPTY_CART_DISMISSED_KEY) === "true") return;
     setShowThankYou(false);
     setShowEmptyCartHelp(true);
   };
@@ -37,6 +40,7 @@ export const CartFeedbackProvider = ({ children }: { children: ReactNode }) => {
   const dismissAll = () => {
     setShowThankYou(false);
     setShowEmptyCartHelp(false);
+    sessionStorage.setItem(EMPTY_CART_DISMISSED_KEY, "true");
   };
 
   return (
