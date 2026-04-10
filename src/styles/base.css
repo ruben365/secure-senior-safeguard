@@ -417,8 +417,14 @@
   .dark-surface,
   [role="dialog"][class*="bg-[rgba(18"],
   [role="dialog"][class*="bg-[rgba(15"],
+  [role="dialog"][class*="bg-[rgba(12"],
+  [role="dialog"][class*="bg-[#0f"],
+  [role="dialog"][class*="bg-[#0F"],
   [role="alertdialog"][class*="bg-[rgba(18"],
   [role="alertdialog"][class*="bg-[rgba(15"],
+  [role="alertdialog"][class*="bg-[rgba(12"],
+  [role="alertdialog"][class*="bg-[#0f"],
+  [role="alertdialog"][class*="bg-[#0F"],
   [role="dialog"][class*="dark"],
   [role="alertdialog"][class*="dark"] {
     /* Text — solid, no embedded alpha */
@@ -441,11 +447,17 @@
   /* Links inside dark dialogs: orange accent for visibility */
   .dark-surface a:not([class*="Button"]):not([role="button"]),
   [role="dialog"][class*="bg-[rgba(18"] a:not([class*="Button"]):not([role="button"]),
+  [role="dialog"][class*="bg-[rgba(15"] a:not([class*="Button"]):not([role="button"]),
+  [role="dialog"][class*="bg-[rgba(12"] a:not([class*="Button"]):not([role="button"]),
+  [role="dialog"][class*="bg-[#0f"] a:not([class*="Button"]):not([role="button"]),
   [role="alertdialog"][class*="bg-[rgba(18"] a:not([class*="Button"]):not([role="button"]) {
     color: #F97316;
   }
   .dark-surface a:not([class*="Button"]):not([role="button"]):hover,
   [role="dialog"][class*="bg-[rgba(18"] a:not([class*="Button"]):not([role="button"]):hover,
+  [role="dialog"][class*="bg-[rgba(15"] a:not([class*="Button"]):not([role="button"]):hover,
+  [role="dialog"][class*="bg-[rgba(12"] a:not([class*="Button"]):not([role="button"]):hover,
+  [role="dialog"][class*="bg-[#0f"] a:not([class*="Button"]):not([role="button"]):hover,
   [role="alertdialog"][class*="bg-[rgba(18"] a:not([class*="Button"]):not([role="button"]):hover {
     color: #fb923c;
   }

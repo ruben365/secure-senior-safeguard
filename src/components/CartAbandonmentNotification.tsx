@@ -42,15 +42,22 @@ export const CartAbandonmentNotification = () => {
     };
   }, [itemCount, isDismissedThisSession, hasShownOnce]);
 
-  // Auto-dismiss after 5 seconds of inactivity — pauses while user interacts
+  // Auto-dismiss after 5 seconds — clears on hover, restarts on leave
+  const dismissTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const interactingRef = useRef(false);
-  useEffect(() => {
-    if (!showNotification) return;
-    const autoDismiss = setTimeout(() => {
+
+  const startDismissTimer = useCallback(() => {
+    if (dismissTimerRef.current) clearTimeout(dismissTimerRef.current);
+    dismissTimerRef.current = setTimeout(() => {
       if (!interactingRef.current && !showFeedback) handleDismiss();
     }, 5000);
-    return () => clearTimeout(autoDismiss);
-  }, [showNotification, showFeedback]);
+  }, [showFeedback]);
+
+  useEffect(() => {
+    if (!showNotification) return;
+    startDismissTimer();
+    return () => { if (dismissTimerRef.current) clearTimeout(dismissTimerRef.current); };
+  }, [showNotification, showFeedback, startDismissTimer]);
 
   const handleSubmitFeedback = () => {
     if (feedback.trim()) {
@@ -78,8 +85,8 @@ export const CartAbandonmentNotification = () => {
       >
         <Card
           className="p-4 shadow-xl border-primary/20 bg-card/95 backdrop-blur-sm"
-          onMouseEnter={() => { interactingRef.current = true; }}
-          onMouseLeave={() => { interactingRef.current = false; }}
+          onMouseEnter={() => { interactingRef.current = true; if (dismissTimerRef.current) clearTimeout(dismissTimerRef.current); }}
+          onMouseLeave={() => { interactingRef.current = false; startDismissTimer(); }}
         >
           <button
             onClick={handleDismiss}
