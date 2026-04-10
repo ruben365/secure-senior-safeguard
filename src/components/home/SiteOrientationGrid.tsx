@@ -18,7 +18,7 @@ import serviceScamshield from "@/assets/service-scamshield.jpg";
 const pages = [
   {
     icon: GraduationCap,
-    title: "Learn & Train",
+    title: "Workshops",
     description: "Hands-on workshops that teach you to spot and stop scams before they happen.",
     link: "/training",
     cta: "View Plans",
