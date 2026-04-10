@@ -329,16 +329,16 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
             }}
           />
 
-          <div className="relative container mx-auto px-4 py-5 space-y-1">
+          <div className="relative container mx-auto px-5 py-6 space-y-1.5">
             {allLinks.map((link) => {
               const isActive = isActiveLink(link.href);
               return (
                 <Link
                   key={link.name}
                   to={link.href}
-                  className={`flex items-center text-[13px] font-semibold px-3 py-2.5 rounded-lg transition-all duration-200 ${
+                  className={`flex items-center text-[16px] font-semibold px-4 py-3.5 rounded-xl transition-all duration-200 min-h-[48px] ${
                     isActive
-                      ? "text-orange-400 bg-orange-500/[0.14] border border-orange-500/25 shadow-[0_0_20px_-6px_rgba(249,115,22,0.3)]"
+                      ? "text-orange-400 bg-orange-500/[0.14] border border-orange-500/25"
                       : "text-white/90 hover:text-white hover:bg-white/[0.07] border border-transparent hover:border-white/[0.10]"
                   }`}
                   onClick={() => {

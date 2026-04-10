@@ -45,28 +45,29 @@
 /* ------------------------------------------------------------ */
 @media (max-width: 640px) {
   .hero-mobile h1 {
-    font-size: clamp(1.75rem, 5vw, 2.5rem) !important;
-    line-height: 1.2 !important;
+    font-size: clamp(1.75rem, 6vw, 2rem) !important;
+    line-height: 1.15 !important;
   }
   .hero-mobile h2 {
-    font-size: clamp(1.25rem, 4vw, 1.75rem) !important;
+    font-size: clamp(1.25rem, 4vw, 1.5rem) !important;
   }
   .hero-mobile p {
-    font-size: clamp(0.875rem, 3vw, 1rem) !important;
+    font-size: 0.9375rem !important;
+    line-height: 1.6 !important;
   }
 
   /* Prevent horizontal overflow */
   body { overflow-x: hidden; }
 
   .container {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
   }
 
   /* Ensure images don't overflow */
   img { max-width: 100%; height: auto; }
 
-  /* More compact cards */
+  /* Mobile cards — breathing room */
   .card { padding: 1rem !important; }
 
   /* Stack flex items */
@@ -112,14 +113,48 @@
     border-radius: 0;
   }
 
-  /* Section spacing */
-  .section-spacing { @apply py-6; }
-  .hero-mobile { min-height: 115dvh !important; }
+  /* Section spacing — generous on mobile */
+  .section-spacing { @apply py-10; }
   .card-mobile { @apply p-4; }
 
-  h1 { font-size: 2rem; }
-  h2 { font-size: 1.5rem; }
-  h3 { font-size: 1.25rem; }
+  /* Mobile typography — clean and readable */
+  h1 { font-size: 1.75rem; line-height: 1.15; }
+  h2 { font-size: 1.375rem; line-height: 1.2; }
+  h3 { font-size: 1.125rem; line-height: 1.25; }
+
+  /* Mobile body text minimum */
+  p, li, span { line-height: 1.6; }
+
+  /* Disable hover lift/translateY on mobile (no hover on touch) */
+  .hover-lift:hover,
+  .container .bg-card:hover,
+  .container [class*="glass-card"]:hover {
+    transform: none !important;
+  }
+
+  /* Force single column for bare multi-column grids on mobile.
+     Only targets grids that don't already have responsive prefixes
+     (md:grid-cols-X / lg:grid-cols-X breakpoints handle themselves). */
+  main [class~="grid-cols-2"]:not([class*="sm:grid-cols"]):not([class*="md:grid-cols"]),
+  main [class~="grid-cols-3"]:not([class*="sm:grid-cols"]):not([class*="md:grid-cols"]),
+  main [class~="grid-cols-4"]:not([class*="sm:grid-cols"]):not([class*="md:grid-cols"]) {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Full-width dialogs on mobile */
+  [role="dialog"] {
+    width: 94% !important;
+    max-width: 100% !important;
+    max-height: 85vh !important;
+    padding: 1.25rem !important;
+    border-radius: 1rem !important;
+    overflow-y: auto !important;
+  }
+
+  /* Inputs: prevent iOS zoom (must be ≥16px) */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
 
   /* Performance: simplify glass effects */
   .glass,

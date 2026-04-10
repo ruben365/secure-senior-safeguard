@@ -52,7 +52,7 @@ const Hero = ({
   return (
     <div
       className={cn(
-        "relative w-full min-h-[115dvh] md:min-h-[125dvh] lg:min-h-[135dvh] flex items-center overflow-hidden hero-mobile",
+        "relative w-full min-h-[75dvh] sm:min-h-[85dvh] md:min-h-[100dvh] lg:min-h-[110dvh] flex items-center overflow-hidden hero-mobile",
         className,
       )}
     >
@@ -115,20 +115,20 @@ const Hero = ({
       )}
 
       {/* Content — anchored left, matches HeroHomepage rhythm */}
-      <div className="w-full py-32 sm:py-40 md:py-48 lg:py-56 xl:py-64 relative z-10 text-left px-[max(4rem,8%)]">
+      <div className="w-full py-20 sm:py-32 md:py-40 lg:py-56 xl:py-64 relative z-10 text-left px-5 sm:px-8 md:px-[max(4rem,8%)]">
         <div className="max-w-[640px] animate-fade-in">
           {headline && (
-            <h1 className="text-white mb-6 sm:mb-8 md:mb-10 leading-[1.05] text-[clamp(2.525rem,5.75vw,4.5rem)] font-extrabold tracking-tight text-left">
+            <h1 className="text-white mb-4 sm:mb-6 md:mb-10 leading-[1.1] text-[clamp(1.75rem,5.75vw,4.5rem)] font-extrabold tracking-tight text-left">
               {headline}
             </h1>
           )}
           {subheadline && (
-            <p className="text-white/95 text-lg sm:text-xl md:text-2xl mb-10 md:mb-12 leading-relaxed text-left">
+            <p className="text-white/95 text-[15px] sm:text-lg md:text-2xl mb-8 md:mb-12 leading-relaxed text-left line-clamp-3 sm:line-clamp-none">
               {subheadline}
             </p>
           )}
           {children && (
-            <div className="flex flex-wrap gap-3 sm:gap-4 justify-start">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-start">
               {Children.map(children, (child) =>
                 isValidElement(child) ? (
                   <MagneticWrapper strength={0.3}>{child}</MagneticWrapper>

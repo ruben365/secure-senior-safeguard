@@ -205,11 +205,12 @@ main select:focus {
 /* ── Responsive dialog/menu sizing ── */
 @media (max-width: 640px) {
   [role="dialog"] {
-    width: 92% !important;
+    width: 94% !important;
     max-width: 100% !important;
     max-height: 85vh !important;
-    padding: 1.125rem !important;
+    padding: 1.25rem !important;
     border-radius: 1rem !important;
+    overflow-y: auto !important;
   }
 
   [data-radix-popper-content-wrapper] {
@@ -251,6 +252,22 @@ nav { z-index: 50 !important; }
 @keyframes cookieBorderGlow {
   0%, 100% { border-color: rgba(48, 103, 232, 0.3); box-shadow: 0 0 15px rgba(48, 103, 232, 0.08); }
   50% { border-color: rgba(107, 70, 193, 0.35); box-shadow: 0 0 20px rgba(107, 70, 193, 0.1); }
+}
+
+/* ── Touch devices — disable hover lift effects ── */
+@media (hover: none) and (pointer: coarse) {
+  .hover-lift:hover {
+    transform: none;
+  }
+
+  .container .bg-card:hover,
+  .container [class*="glass-card"]:hover {
+    transform: none;
+  }
+
+  main img[class*="rounded"]:hover {
+    transform: none;
+  }
 }
 
 /* ── Reduce motion preference ── */
