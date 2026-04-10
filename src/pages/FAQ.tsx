@@ -363,7 +363,16 @@ export default function FAQ() {
             subheadline="Clear answers about our AI services, workshops, and support — no jargon, no runaround."
             overlay={true}
             showScrollIndicator={false}
-          />
+          >
+            <div className="flex flex-col sm:flex-row gap-4 justify-start">
+              <Button size="heroPill" variant="heroPrimary" asChild>
+                <Link to="/training">Get Protected</Link>
+              </Button>
+              <Button size="heroPill" variant="heroOutline" asChild>
+                <Link to="/contact">Contact Us</Link>
+              </Button>
+            </div>
+          </Hero>
           <HeroFloatingStats />
         </div>
 

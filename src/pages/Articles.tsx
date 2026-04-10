@@ -61,7 +61,16 @@ function Articles() {
         backgroundImages={articlesHeroImages}
         headline="Scam Prevention Articles & News"
         subheadline="Stay informed about the latest scam threats and protection strategies"
-      />
+      >
+        <div className="flex flex-col sm:flex-row gap-4 justify-start">
+          <Button size="heroPill" variant="heroPrimary" asChild>
+            <Link to="/training">Get Protected</Link>
+          </Button>
+          <Button size="heroPill" variant="heroOutline" asChild>
+            <Link to="/resources">Browse Resources</Link>
+          </Button>
+        </div>
+      </Hero>
 
       <TrustBar />
 
