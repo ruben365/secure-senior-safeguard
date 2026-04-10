@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/contexts/CartContext";
 import { Button } from "@/components/ui/button";
@@ -42,12 +42,15 @@ export const CartAbandonmentNotification = () => {
     };
   }, [itemCount, isDismissedThisSession, hasShownOnce]);
 
-  // Auto-dismiss after 3 seconds
+  // Auto-dismiss after 5 seconds of inactivity — pauses while user interacts
+  const interactingRef = useRef(false);
   useEffect(() => {
     if (!showNotification) return;
-    const autoDismiss = setTimeout(() => handleDismiss(), 3000);
+    const autoDismiss = setTimeout(() => {
+      if (!interactingRef.current && !showFeedback) handleDismiss();
+    }, 5000);
     return () => clearTimeout(autoDismiss);
-  }, [showNotification]);
+  }, [showNotification, showFeedback]);
 
   const handleSubmitFeedback = () => {
     if (feedback.trim()) {
@@ -73,7 +76,11 @@ export const CartAbandonmentNotification = () => {
         exit={{ opacity: 0, y: 50, scale: 0.95 }}
         className="fixed bottom-20 right-4 z-40 max-w-sm"
       >
-        <Card className="p-4 shadow-xl border-primary/20 bg-card/95 backdrop-blur-sm">
+        <Card
+          className="p-4 shadow-xl border-primary/20 bg-card/95 backdrop-blur-sm"
+          onMouseEnter={() => { interactingRef.current = true; }}
+          onMouseLeave={() => { interactingRef.current = false; }}
+        >
           <button
             onClick={handleDismiss}
             className="absolute top-2 right-2 p-1 text-muted-foreground hover:text-foreground transition-colors"
