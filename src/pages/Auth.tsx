@@ -1115,34 +1115,34 @@ function Auth() {
             </div>
             {/* /card */}
 
-            {/* Apply link — restyled for dark backdrop */}
+            {/* Apply link */}
             <div className="mt-6 text-center">
               <Link
                 to="/careers"
-                className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 Want to join our team?{" "}
-                <span className="text-orange-300 font-semibold">Apply here</span>
+                <span className="text-primary font-semibold">Apply here</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
 
-            {/* Bottom legal links — restyled for dark backdrop */}
-            <div className="mt-3 flex items-center justify-center gap-3 text-[11px] text-white/45">
+            {/* Bottom legal links */}
+            <div className="mt-3 flex items-center justify-center gap-3 text-[11px] text-muted-foreground/70">
               <Link
                 to="/privacy-policy"
-                className="hover:text-white/80 transition-colors"
+                className="hover:text-foreground transition-colors"
               >
                 Privacy Policy
               </Link>
-              <span className="text-white/25">•</span>
+              <span className="text-muted-foreground/40">•</span>
               <Link
                 to="/terms-of-service"
-                className="hover:text-white/80 transition-colors"
+                className="hover:text-foreground transition-colors"
               >
                 Terms of Service
               </Link>
-              <span className="text-white/25">•</span>
+              <span className="text-muted-foreground/40">•</span>
               <span>© {new Date().getFullYear()} InVision Network</span>
             </div>
           </div>
