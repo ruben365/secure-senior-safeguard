@@ -33,7 +33,7 @@ SheetOverlay.displayName = SheetPrimitive.Overlay.displayName;
 
 const sheetVariants = cva(
   // Compact side panel — tighter padding, refined shadow, aligned with modal system
-  "fixed z-50 gap-2.5 bg-[rgba(18,14,12,0.92)] backdrop-blur-[20px] border border-[rgba(255,255,255,0.08)] p-4 text-white transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
+  "fixed z-50 gap-2.5 bg-background border border-border/70 p-4 text-foreground shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
   {
     variants: {
       side: {
@@ -111,7 +111,7 @@ const SheetTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Title
     ref={ref}
-    className={cn("text-[18px] font-semibold text-white leading-tight tracking-tight", className)}
+    className={cn("text-[18px] font-semibold text-foreground leading-tight tracking-tight", className)}
     {...props}
   />
 ));
@@ -123,7 +123,7 @@ const SheetDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Description
     ref={ref}
-    className={cn("text-[13px] text-[rgba(255,255,255,0.7)] leading-snug", className)}
+    className={cn("text-[13px] text-muted-foreground leading-snug", className)}
     {...props}
   />
 ));

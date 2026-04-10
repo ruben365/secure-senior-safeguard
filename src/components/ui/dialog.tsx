@@ -48,7 +48,7 @@ const DialogContent = React.forwardRef<
         }
       }}
       className={cn(
-        "fixed left-[50%] top-[50%] z-50 grid w-[92%] sm:w-full max-w-[440px] max-h-[85vh] overflow-y-auto translate-x-[-50%] translate-y-[-50%] gap-2 border border-[rgba(255,255,255,0.08)] bg-[rgba(18,14,12,0.92)] backdrop-blur-[20px] p-5 rounded-[14px] text-white duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
+        "fixed left-[50%] top-[50%] z-50 grid w-[92%] sm:w-full max-w-[440px] max-h-[85vh] overflow-y-auto translate-x-[-50%] translate-y-[-50%] gap-2 border border-border/70 bg-background p-5 rounded-[14px] text-foreground shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
         className,
       )}
       style={{
@@ -57,7 +57,7 @@ const DialogContent = React.forwardRef<
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className="absolute right-2.5 top-2.5 rounded-full p-1.5 min-w-[32px] min-h-[32px] flex items-center justify-center text-[rgba(255,255,255,0.5)] transition-all hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/30 disabled:pointer-events-none">
+      <DialogPrimitive.Close className="absolute right-2.5 top-2.5 rounded-full p-1.5 min-w-[32px] min-h-[32px] flex items-center justify-center text-muted-foreground transition-all hover:text-foreground hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring disabled:pointer-events-none">
         <X className="h-4 w-4" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
@@ -102,7 +102,7 @@ const DialogTitle = React.forwardRef<
   <DialogPrimitive.Title
     ref={ref}
     className={cn(
-      "text-[16px] font-semibold leading-tight tracking-tight text-white",
+      "text-[16px] font-semibold leading-tight tracking-tight text-foreground",
       className,
     )}
     {...props}
@@ -116,7 +116,7 @@ const DialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn("text-[13px] text-[rgba(255,255,255,0.7)] leading-snug", className)}
+    className={cn("text-[13px] text-muted-foreground leading-snug", className)}
     {...props}
   />
 ));
