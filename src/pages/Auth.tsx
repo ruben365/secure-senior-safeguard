@@ -539,44 +539,41 @@ function Auth() {
         <div className="w-full grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-8 lg:gap-14 items-center">
 
           {/* LEFT — brand pane (desktop only) */}
-          <aside className="hidden lg:flex flex-col text-white pr-2">
+          <aside className="hidden lg:flex flex-col pr-2">
             <Link
               to="/"
               className="inline-flex items-center gap-3 mb-14 group w-fit"
             >
-              <div className="relative">
-                <div className="absolute inset-0 rounded-2xl bg-orange-500/20 blur-xl group-hover:bg-orange-500/30 transition-colors" />
-                <div className="relative w-12 h-12 rounded-2xl bg-white/[0.06] border border-white/15 backdrop-blur-sm flex items-center justify-center">
-                  <img
-                    src={invisionLogo}
-                    alt="InVision Network"
-                    className="w-7 h-7 brightness-0 invert drop-shadow-md"
-                    loading="eager"
-                    decoding="sync"
-                    width={28}
-                    height={28}
-                  />
-                </div>
+              <div className="relative w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+                <img
+                  src={invisionLogo}
+                  alt="InVision Network"
+                  className="w-7 h-7 drop-shadow-sm"
+                  loading="eager"
+                  decoding="sync"
+                  width={28}
+                  height={28}
+                />
               </div>
               <div className="flex flex-col leading-tight">
-                <span className="text-[15px] font-bold text-white tracking-tight">
+                <span className="text-[15px] font-bold text-foreground tracking-tight">
                   InVision Network
                 </span>
-                <span className="text-[10px] font-medium text-white/55 tracking-[0.15em] uppercase mt-0.5">
+                <span className="text-[10px] font-medium text-muted-foreground tracking-[0.15em] uppercase mt-0.5">
                   Secure Member Portal
                 </span>
               </div>
             </Link>
 
-            <h1 className="text-[2.25rem] xl:text-[2.625rem] font-bold text-white leading-[1.08] tracking-tight mb-5">
+            <h1 className="text-[2.25rem] xl:text-[2.625rem] font-bold text-foreground leading-[1.08] tracking-tight mb-5">
               Welcome back to a{" "}
-              <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-orange-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                 quieter
               </span>
               ,<br />
               safer digital life.
             </h1>
-            <p className="text-white/65 text-base leading-relaxed mb-10 max-w-md">
+            <p className="text-muted-foreground text-base leading-relaxed mb-10 max-w-md">
               Sign in to access your training, monitoring dashboard, bookings,
               and family protection settings — all in one place.
             </p>
@@ -597,14 +594,14 @@ function Auth() {
                 },
               ].map((f) => (
                 <li key={f.title} className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-md bg-gradient-to-br from-orange-400/25 to-orange-500/15 border border-orange-400/30 flex items-center justify-center mt-0.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-orange-300" strokeWidth={2.25} />
+                  <div className="flex-shrink-0 w-6 h-6 rounded-md bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/25 flex items-center justify-center mt-0.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-primary" strokeWidth={2.25} />
                   </div>
                   <div>
-                    <div className="text-white text-sm font-semibold">
+                    <div className="text-foreground text-sm font-semibold">
                       {f.title}
                     </div>
-                    <div className="text-white/55 text-[13px] leading-relaxed">
+                    <div className="text-muted-foreground text-[13px] leading-relaxed">
                       {f.body}
                     </div>
                   </div>
@@ -612,8 +609,8 @@ function Auth() {
               ))}
             </ul>
 
-            <div className="flex items-center gap-3 text-xs text-white/50">
-              <ShieldCheck className="w-4 h-4 text-white/60" />
+            <div className="flex items-center gap-3 text-xs text-muted-foreground">
+              <ShieldCheck className="w-4 h-4 text-primary/60" />
               <span>Trusted by 100+ families across Ohio</span>
             </div>
           </aside>
