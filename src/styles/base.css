@@ -187,6 +187,34 @@
     --gold-400: 42 92% 58%;
     --gold-300: 46 88% 68%;
 
+    /* ═══ NEO-TACTILE LIGHT CONTENT SYSTEM ═══
+       Light surfaces for content sections between dark hero and footer.
+       Warm cream/white canvas with walnut + copper accents. */
+
+    /* Surfaces */
+    --surface-base: #FAFAF8;     /* warm white, slightly cream */
+    --surface-raised: #FFFFFF;   /* pure white for cards */
+    --surface-inset: #F5F3F0;   /* subtle warm gray for alternating sections */
+    --surface-pressed: #EEEBE7; /* pressed/active state */
+
+    /* Walnut accent spectrum */
+    --accent-walnut: #2E1F1B;        /* deep walnut — headings */
+    --accent-walnut-medium: #5E4B43; /* medium walnut — body text */
+    --accent-walnut-light: #8B7D75;  /* muted warm gray — labels */
+
+    /* Copper metallic accent */
+    --accent-copper: #B87333;        /* copper — links, icons, CTAs */
+    --accent-copper-light: #D4956B;  /* lighter copper — hover */
+
+    /* Warm cream/sand — borders, fills */
+    --accent-warm-cream: #F0E6D8;    /* cream for borders and dividers */
+    --accent-warm-sand: #E8DDD0;     /* sand for subtle fills */
+
+    /* Text on light surfaces */
+    --text-on-light-primary: #2E1F1B;   /* walnut dark */
+    --text-on-light-secondary: #5E4B43; /* medium walnut */
+    --text-on-light-muted: #8B7D75;     /* muted warm gray */
+
     /* ── Shadow System — DISABLED per design directive (no box-shadows anywhere) ── */
     --shadow-xs:  none;
     --shadow-sm:  none;
