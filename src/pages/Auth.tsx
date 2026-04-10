@@ -615,35 +615,9 @@ function Auth() {
             </div>
           </aside>
 
-          {/* RIGHT — premium auth card */}
+          {/* RIGHT — auth card */}
           <div className="w-full max-w-[460px] mx-auto lg:mx-0">
-            {/*
-              Auth card — premium multi-layer presentation:
-                • Soft warm glow ring behind the card
-                • White card with a gradient-tinted border
-                • 5-layer shadow stack (inner highlight, contact,
-                  ambient close, ambient mid, ambient far)
-                • Top hairline rim light
-                • Subtle bottom accent bar
-            */}
-            {/* Warm glow ring — sits behind the card */}
-            <div
-              aria-hidden="true"
-              className="absolute -inset-4 rounded-[28px] bg-gradient-to-br from-orange-500/20 via-transparent to-purple-500/15 blur-2xl pointer-events-none"
-            />
-
-            <div className="relative rounded-[20px] bg-white border border-slate-200/70 p-8 md:p-10 shadow-[0_1px_0_0_rgba(255,255,255,0.9)_inset,0_2px_4px_-1px_rgba(15,23,42,0.08),0_12px_24px_-8px_rgba(15,23,42,0.18),0_32px_64px_-20px_rgba(15,23,42,0.4),0_48px_96px_-24px_rgba(15,23,42,0.35)]">
-              {/* Top hairline rim light */}
-              <div
-                aria-hidden="true"
-                className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-orange-400/50 to-transparent"
-              />
-
-              {/* Subtle bottom accent bar */}
-              <div
-                aria-hidden="true"
-                className="absolute inset-x-10 bottom-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent"
-              />
+            <div className="relative rounded-xl bg-white border border-slate-200 p-7 md:p-8 shadow-[0_4px_24px_-4px_rgba(80,40,80,0.1),0_1px_3px_rgba(80,40,80,0.06)]">
 
               {/* Mobile logo (desktop shows it in the left pane) */}
               <Link
