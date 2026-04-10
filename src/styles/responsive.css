@@ -173,6 +173,27 @@
   .gap-6 { gap: 0.75rem !important; }
   .gap-8 { gap: 1rem !important; }
 
+  /* Dialog text rendering — sharp on mobile */
+  [role="dialog"] {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    padding: 0.75rem !important;
+    max-height: 90vh;
+  }
+
+  /* Compress inputs inside dialogs on mobile */
+  [role="dialog"] input,
+  [role="dialog"] textarea {
+    height: 36px !important;
+    font-size: 14px !important;
+  }
+
+  /* Cap heading sizes on mobile */
+  h1 { font-size: 1.5rem !important; }
+  h2 { font-size: 1.25rem !important; }
+  h3 { font-size: 1.1rem !important; }
+
   /* Disable hover lift/translateY on mobile (no hover on touch) */
   .hover-lift:hover,
   .container .bg-card:hover,

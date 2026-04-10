@@ -307,7 +307,7 @@ function CardPaymentForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      <div className="border-2 border-border rounded-xl p-4 bg-card min-h-[200px]">
+      <div className="border border-white/10 rounded-xl p-3 bg-white/[0.04] min-h-[180px]">
         {!elementReady && (
           <div className="flex items-center justify-center py-8">
             <Loader2 className="w-6 h-6 animate-spin text-primary" />
@@ -329,8 +329,7 @@ function CardPaymentForm({
       <Button
         type="submit"
         disabled={!stripe || loading || !elementReady}
-        className="w-full h-12 text-base font-semibold"
-        size="lg"
+        className="w-full h-10 text-[14px] font-semibold bg-gradient-to-b from-orange-600 to-orange-700 text-white rounded-lg"
       >
         {loading ? (
           <>
@@ -454,28 +453,28 @@ function CardPaymentWrapper({
           exit={{ opacity: 0, x: 20 }}
           className="space-y-4"
         >
-          <div className="flex items-center gap-2 mb-4">
-            <div className="w-7 h-7 rounded-full bg-primary text-primary-foreground text-sm flex items-center justify-center font-bold">
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-5 h-5 rounded-full bg-orange-600 text-white text-[11px] flex items-center justify-center font-bold">
               1
             </div>
-            <h3 className="font-semibold">Contact Information</h3>
+            <h3 className="text-[14px] font-semibold text-white">Contact Information</h3>
           </div>
 
           <div className="relative">
-            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/40" />
             <Input
               placeholder="Your Name *"
               value={formData.name}
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
               }
-              className="pl-10 h-12"
+              className="pl-9 h-9"
               required
             />
           </div>
 
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/40" />
             <Input
               type="email"
               placeholder="Email * (for receipt)"
@@ -483,7 +482,7 @@ function CardPaymentWrapper({
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
-              className="pl-10 h-12"
+              className="pl-9 h-9"
               required
             />
           </div>
@@ -492,7 +491,7 @@ function CardPaymentWrapper({
             type="button"
             onClick={handleContinue}
             disabled={!formData.name || !formData.email || loading}
-            className="w-full h-11"
+            className="w-full h-10 bg-gradient-to-b from-orange-600 to-orange-700 text-white text-[14px] font-semibold rounded-lg"
           >
             {loading ? (
               <>
@@ -517,24 +516,24 @@ function CardPaymentWrapper({
           exit={{ opacity: 0, x: -20 }}
           className="space-y-4"
         >
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center gap-2 mb-3">
             <button
               type="button"
               onClick={() => setStep("contact")}
-              className="text-sm text-primary hover:underline"
+              className="text-[13px] text-orange-400 hover:underline"
             >
               ← Back
             </button>
-            <div className="w-7 h-7 rounded-full bg-primary text-primary-foreground text-sm flex items-center justify-center font-bold ml-auto">
+            <div className="w-5 h-5 rounded-full bg-orange-600 text-white text-[11px] flex items-center justify-center font-bold ml-auto">
               2
             </div>
-            <h3 className="font-semibold">Payment</h3>
+            <h3 className="text-[14px] font-semibold text-white">Payment</h3>
           </div>
 
-          <div className="p-3 bg-muted/50 rounded-lg text-sm flex items-center gap-2">
-            <CheckCircle className="w-4 h-4 text-success" />
+          <div className="p-2.5 bg-white/[0.04] rounded-lg text-[13px] flex items-center gap-2 text-white/70 border border-white/8">
+            <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
             <span>
-              Paying as <strong>{formData.email}</strong>
+              Paying as <strong className="text-white">{formData.email}</strong>
             </span>
           </div>
 
