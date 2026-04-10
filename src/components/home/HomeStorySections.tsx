@@ -778,7 +778,7 @@ export const HomeStorySections = () => {
             </div>
 
             {/* Right — asymmetric collage */}
-            <div className="relative grid grid-rows-2 gap-5 h-auto sm:h-[460px] lg:h-[520px]">
+            <div className="relative grid grid-rows-2 gap-5 min-h-[280px] sm:h-[460px] lg:h-[520px]">
               {/* Large top image */}
               <div
                 data-reveal="slide-left"

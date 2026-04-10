@@ -25,11 +25,13 @@ import {
 import { CyberSidebar } from "@/components/admin/neon/CyberSidebar";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { TwoFactorSetup } from "@/components/auth/TwoFactorSetup";
 
 export default function SecuritySettings() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [show2FASetup, setShow2FASetup] = useState(false);
 
   const [settings, setSettings] = useState({
     twoFactor: true,
@@ -151,9 +153,12 @@ export default function SecuritySettings() {
                   </div>
                   <Switch
                     checked={settings.twoFactor}
-                    onCheckedChange={(v) =>
-                      setSettings({ ...settings, twoFactor: v })
-                    }
+                    onCheckedChange={(v) => {
+                      if (v) {
+                        setShow2FASetup(true);
+                      }
+                      setSettings({ ...settings, twoFactor: v });
+                    }}
                   />
                 </div>
                 <div className="flex items-center justify-between">
@@ -292,6 +297,15 @@ export default function SecuritySettings() {
           </div>
         </div>
       </main>
+
+      <TwoFactorSetup
+        open={show2FASetup}
+        onClose={() => setShow2FASetup(false)}
+        onSuccess={() => {
+          setShow2FASetup(false);
+          setSettings({ ...settings, twoFactor: true });
+        }}
+      />
     </div>
   );
 }

@@ -90,8 +90,8 @@ export const HeroHomepage = () => {
               <span className="hero-home__kicker-text">Your Path to Safety</span>
             </div>
 
-            {/* Micro-Nav Tabs — navigate to dedicated pages */}
-            <nav className="hero-home__tabs" aria-label="Quick links">
+            {/* Micro-Nav Tabs — desktop only, hidden on mobile to reduce clutter */}
+            <nav className="hero-home__tabs hidden md:flex" aria-label="Quick links">
               {heroTabs.map((tab) => (
                 <Link
                   key={tab.label}

@@ -204,9 +204,9 @@
   /* Force single column for bare multi-column grids on mobile.
      Only targets grids that don't already have responsive prefixes
      (md:grid-cols-X / lg:grid-cols-X breakpoints handle themselves). */
-  main [class~="grid-cols-2"]:not([class*="sm:grid-cols"]):not([class*="md:grid-cols"]),
-  main [class~="grid-cols-3"]:not([class*="sm:grid-cols"]):not([class*="md:grid-cols"]),
-  main [class~="grid-cols-4"]:not([class*="sm:grid-cols"]):not([class*="md:grid-cols"]) {
+  main section [class~="grid-cols-2"]:not([class*="sm:grid-cols"]):not([class*="md:grid-cols"]):not([role="tablist"]):not([class*="tabs"]),
+  main section [class~="grid-cols-3"]:not([class*="sm:grid-cols"]):not([class*="md:grid-cols"]):not([role="tablist"]):not([class*="tabs"]),
+  main section [class~="grid-cols-4"]:not([class*="sm:grid-cols"]):not([class*="md:grid-cols"]):not([role="tablist"]):not([class*="tabs"]) {
     grid-template-columns: 1fr !important;
   }
 
