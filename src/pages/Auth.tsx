@@ -832,7 +832,8 @@ function Auth() {
 
                 <Button
                   type="submit"
-                  className="w-full h-10 text-[14px] font-semibold rounded-lg bg-[#080d1a] text-white border border-[#1e293b] hover:bg-[#111827] hover:-translate-y-[1px] active:translate-y-[0.5px] transition-all duration-200"
+                  className="w-full h-10 text-[14px] font-semibold rounded-lg"
+                  variant="default"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -1084,7 +1085,8 @@ function Auth() {
 
                 <Button
                   type="submit"
-                  className="w-full h-10 text-[14px] font-semibold rounded-lg bg-[#080d1a] text-white border border-[#1e293b] hover:bg-[#111827] hover:-translate-y-[1px] active:translate-y-[0.5px] transition-all duration-200"
+                  className="w-full h-10 text-[14px] font-semibold rounded-lg"
+                  variant="default"
                   disabled={isLoading}
                 >
                   {isLoading ? (
