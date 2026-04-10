@@ -42,7 +42,7 @@ function CtaText({ to, children }: { to: string; children: React.ReactNode }) {
   return (
     <Link
       to={to}
-      className="inline-flex items-center gap-2 text-[#d96c4a] hover:text-[#B87333] font-semibold text-[15px] group transition-colors"
+      className="inline-flex items-center gap-2 text-[#d96c4a] hover:text-[#b8552f] font-semibold text-[15px] group transition-colors"
     >
       {children}
       <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -275,7 +275,7 @@ export const HomeStorySections = () => {
                 id="story-section-1-heading"
                 data-reveal
                 style={{ "--reveal-delay": "80ms" } as React.CSSProperties}
-                className="text-[2rem] md:text-[2.25rem] lg:text-[2.5rem] font-bold tracking-tight text-[#2E1F1B] leading-[1.1] mb-5 mt-4"
+                className="text-[2rem] md:text-[2.25rem] lg:text-[2.5rem] font-bold tracking-tight text-[#1E293B] leading-[1.1] mb-5 mt-4"
               >
                 AI scams move fast. Your protection moves faster.
               </h2>
@@ -283,7 +283,7 @@ export const HomeStorySections = () => {
               <p
                 data-reveal
                 style={{ "--reveal-delay": "160ms" } as React.CSSProperties}
-                className="text-base text-[#5E4B43] leading-relaxed mb-8 max-w-[560px]"
+                className="text-base text-[#6B7280] leading-relaxed mb-8 max-w-[560px]"
               >
                 Our team builds the same enterprise-grade defenses used by
                 Fortune 500 companies and brings them to families and small
@@ -320,7 +320,7 @@ export const HomeStorySections = () => {
                       <svg key={i} className="w-3 h-3 fill-[#d96c4a]" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
                     ))}
                   </div>
-                  <p className="text-[12px] text-[#5E4B43]"><span className="font-bold text-[#2E1F1B]">100+ families</span> protected across Ohio</p>
+                  <p className="text-[12px] text-[#6B7280]"><span className="font-bold text-[#1E293B]">100+ families</span> protected across Ohio</p>
                 </div>
               </div>
             </div>
@@ -362,12 +362,12 @@ export const HomeStorySections = () => {
                     <div className="w-7 h-7 rounded-lg bg-[#d96c4a]/12 flex items-center justify-center flex-shrink-0">
                       <Activity className="w-3.5 h-3.5 text-[#d96c4a]" strokeWidth={2.5} />
                     </div>
-                    <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#5E4B43]">Threat Intel</span>
+                    <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#6B7280]">Threat Intel</span>
                   </div>
-                  <div className="text-[1.5rem] font-bold text-[#2E1F1B] leading-none tabular-nums mb-1">
+                  <div className="text-[1.5rem] font-bold text-[#1E293B] leading-none tabular-nums mb-1">
                     347 <span className="text-[#d96c4a]">blocked</span>
                   </div>
-                  <p className="text-[10px] text-[#5E4B43]">scams stopped this week</p>
+                  <p className="text-[10px] text-[#6B7280]">scams stopped this week</p>
                 </div>
               </div>
             </div>
@@ -449,10 +449,10 @@ export const HomeStorySections = () => {
                 style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
                 className="bg-white rounded-2xl p-7 lg:p-9 shadow-sm border border-[#1E293B]/8"
               >
-                <h3 className="text-[1.5rem] font-bold text-[#2E1F1B] tracking-tight leading-tight mb-3">
+                <h3 className="text-[1.5rem] font-bold text-[#1E293B] tracking-tight leading-tight mb-3">
                   One platform. Every layer of protection.
                 </h3>
-                <p className="text-[#5E4B43] text-base leading-relaxed mb-6 max-w-[560px]">
+                <p className="text-[#6B7280] text-base leading-relaxed mb-6 max-w-[560px]">
                   From personal training and live workshops to enterprise
                   security audits and 24/7 monitoring — we built the toolkit so
                   your only job is to live your life.
@@ -494,10 +494,10 @@ export const HomeStorySections = () => {
                   <div className="w-10 h-10 rounded-full bg-[#d96c4a]/12 flex items-center justify-center mb-4">
                     <Eye className="w-4 h-4 text-[#d96c4a]" strokeWidth={2.25} />
                   </div>
-                  <h4 className="text-[1.05rem] font-bold text-[#2E1F1B] leading-tight mb-2">
+                  <h4 className="text-[1.05rem] font-bold text-[#1E293B] leading-tight mb-2">
                     Continuous identity monitoring
                   </h4>
-                  <p className="text-[#5E4B43] text-[0.875rem] leading-relaxed">
+                  <p className="text-[#6B7280] text-[0.875rem] leading-relaxed">
                     We watch the dark web for your credentials so a leak doesn't become a crisis.
                   </p>
                 </div>
@@ -528,7 +528,7 @@ export const HomeStorySections = () => {
                 id="story-section-3-heading"
                 data-reveal
                 style={{ "--reveal-delay": "80ms" } as React.CSSProperties}
-                className="text-[2rem] lg:text-[2.25rem] font-bold text-[#2E1F1B] tracking-tight leading-[1.1] mb-4 mt-4"
+                className="text-[2rem] lg:text-[2.25rem] font-bold text-[#1E293B] tracking-tight leading-[1.1] mb-4 mt-4"
               >
                 Protection backed by real investigation.
               </h2>
@@ -536,7 +536,7 @@ export const HomeStorySections = () => {
               <p
                 data-reveal
                 style={{ "--reveal-delay": "160ms" } as React.CSSProperties}
-                className="text-base text-[#5E4B43] leading-relaxed mb-8 max-w-[560px]"
+                className="text-base text-[#6B7280] leading-relaxed mb-8 max-w-[560px]"
               >
                 Every alert we send is a real human looking at real evidence.
                 No black box, no false alarms — just security analysts who
@@ -557,8 +557,8 @@ export const HomeStorySections = () => {
                         <item.icon className="w-4 h-4 text-[#d96c4a]" strokeWidth={2.25} />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h4 className="text-base font-bold text-[#2E1F1B] leading-tight mb-1">{item.label}</h4>
-                        <p className="text-[14px] text-[#5E4B43] leading-relaxed max-w-[520px]">{item.desc}</p>
+                        <h4 className="text-base font-bold text-[#1E293B] leading-tight mb-1">{item.label}</h4>
+                        <p className="text-[14px] text-[#6B7280] leading-relaxed max-w-[520px]">{item.desc}</p>
                       </div>
                     </div>
                   </li>
@@ -577,17 +577,17 @@ export const HomeStorySections = () => {
                 {/* Decorative large quote mark */}
                 <div aria-hidden="true" className="absolute top-4 right-6 text-[5rem] leading-none text-[#d96c4a]/10 font-serif font-bold pointer-events-none select-none">&ldquo;</div>
                 <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#d96c4a]/12 mb-5">
-                  <Shield className="w-3 h-3 text-[#B87333]" strokeWidth={2.5} />
-                  <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#B87333]">Trusted by 100+ Ohio Families</span>
+                  <Shield className="w-3 h-3 text-[#b8552f]" strokeWidth={2.5} />
+                  <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#b8552f]">Trusted by 100+ Ohio Families</span>
                 </span>
                 <div className="hss-quote-editorial mb-5">
-                  <h3 className="text-[1.4rem] font-bold text-[#2E1F1B] tracking-tight leading-tight mb-3">Real results, real reviews.</h3>
-                  <blockquote className="text-[#5E4B43] text-base leading-relaxed italic">
+                  <h3 className="text-[1.4rem] font-bold text-[#1E293B] tracking-tight leading-tight mb-3">Real results, real reviews.</h3>
+                  <blockquote className="text-[#6B7280] text-base leading-relaxed italic">
                     &ldquo;We were about to send $5,000 to someone pretending to be our grandson. InVision's training taught us to use a family safe word — it saved us from devastation.&rdquo;
                   </blockquote>
                 </div>
-                <p className="text-[14px] font-semibold text-[#2E1F1B]">
-                  Robert &amp; Carol S. <span className="text-[#5E4B43] font-normal">— Dayton, OH</span>
+                <p className="text-[14px] font-semibold text-[#1E293B]">
+                  Robert &amp; Carol S. <span className="text-[#6B7280] font-normal">— Dayton, OH</span>
                 </p>
               </div>
 
@@ -624,8 +624,8 @@ export const HomeStorySections = () => {
                     <Zap className="w-3.5 h-3.5 text-[#d96c4a]" strokeWidth={2.5} />
                   </div>
                   <div>
-                    <div className="text-[13px] font-bold text-[#2E1F1B] leading-none">99% stopped</div>
-                    <div className="text-[10px] text-[#5E4B43] mt-0.5">scam detection rate</div>
+                    <div className="text-[13px] font-bold text-[#1E293B] leading-none">99% stopped</div>
+                    <div className="text-[10px] text-[#6B7280] mt-0.5">scam detection rate</div>
                   </div>
                 </div>
               </div>
@@ -651,14 +651,14 @@ export const HomeStorySections = () => {
               id="story-how-heading"
               data-reveal
               style={{ "--reveal-delay": "80ms" } as React.CSSProperties}
-              className="text-[2rem] md:text-[2.25rem] lg:text-[2.5rem] font-bold text-[#2E1F1B] tracking-tight leading-[1.1] mt-4 mb-4"
+              className="text-[2rem] md:text-[2.25rem] lg:text-[2.5rem] font-bold text-[#1E293B] tracking-tight leading-[1.1] mt-4 mb-4"
             >
               Three steps to a quieter, safer digital life.
             </h2>
             <p
               data-reveal
               style={{ "--reveal-delay": "160ms" } as React.CSSProperties}
-              className="text-base text-[#5E4B43] leading-relaxed max-w-[560px]"
+              className="text-base text-[#6B7280] leading-relaxed max-w-[560px]"
             >
               No technical knowledge required. We handle the security work so
               you can stay focused on the people who matter most.
@@ -698,10 +698,10 @@ export const HomeStorySections = () => {
 
                 {/* Content */}
                 <div className="md:pl-0">
-                  <h3 className="text-[1.2rem] font-bold text-[#2E1F1B] tracking-tight leading-tight mb-2.5">
+                  <h3 className="text-[1.2rem] font-bold text-[#1E293B] tracking-tight leading-tight mb-2.5">
                     {step.title}
                   </h3>
-                  <p className="text-[14px] text-[#5E4B43] leading-relaxed">
+                  <p className="text-[14px] text-[#6B7280] leading-relaxed">
                     {step.desc}
                   </p>
                 </div>
@@ -732,7 +732,7 @@ export const HomeStorySections = () => {
                 id="story-section-4-heading"
                 data-reveal
                 style={{ "--reveal-delay": "80ms" } as React.CSSProperties}
-                className="text-[1.75rem] lg:text-[2rem] font-bold text-[#2E1F1B] tracking-tight leading-[1.15] mb-4 mt-4"
+                className="text-[1.75rem] lg:text-[2rem] font-bold text-[#1E293B] tracking-tight leading-[1.15] mb-4 mt-4"
               >
                 Everything you need to feel
                 <br />
@@ -742,7 +742,7 @@ export const HomeStorySections = () => {
               <p
                 data-reveal
                 style={{ "--reveal-delay": "160ms" } as React.CSSProperties}
-                className="text-base text-[#5E4B43] leading-relaxed mb-7 max-w-[560px]"
+                className="text-base text-[#6B7280] leading-relaxed mb-7 max-w-[560px]"
               >
                 Same-day setup, no contracts, and a real human you can call by
                 name. Here's what comes with every InVision plan.
@@ -759,7 +759,7 @@ export const HomeStorySections = () => {
                     <span className="flex-shrink-0 w-5 h-5 rounded-full bg-[#d96c4a]/15 flex items-center justify-center mt-0.5">
                       <Check className="w-3 h-3 text-[#d96c4a]" strokeWidth={3} />
                     </span>
-                    <span className="text-[15px] text-[#2E1F1B] leading-snug">{item}</span>
+                    <span className="text-[15px] text-[#1E293B] leading-snug">{item}</span>
                   </li>
                 ))}
               </ul>
