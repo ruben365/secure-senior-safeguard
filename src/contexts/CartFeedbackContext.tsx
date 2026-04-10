@@ -3,6 +3,7 @@ import { createContext, useContext, useState, ReactNode } from "react";
 interface CartFeedbackContextType {
   showThankYou: boolean;
   triggerThankYou: () => void;
+  dismissThankYou: () => void;
   showEmptyCartHelp: boolean;
   triggerEmptyCartHelp: () => void;
   dismissAll: () => void;
@@ -37,6 +38,10 @@ export const CartFeedbackProvider = ({ children }: { children: ReactNode }) => {
     setShowEmptyCartHelp(true);
   };
 
+  const dismissThankYou = () => {
+    setShowThankYou(false);
+  };
+
   const dismissAll = () => {
     setShowThankYou(false);
     setShowEmptyCartHelp(false);
@@ -48,6 +53,7 @@ export const CartFeedbackProvider = ({ children }: { children: ReactNode }) => {
       value={{
         showThankYou,
         triggerThankYou,
+        dismissThankYou,
         showEmptyCartHelp,
         triggerEmptyCartHelp,
         dismissAll,

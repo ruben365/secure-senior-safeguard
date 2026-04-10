@@ -135,10 +135,16 @@ function Auth() {
     } else {
       supabase.auth
         .getSession()
-        .then(({ data: { session: existingSession } }) => {
+        .then(async ({ data: { session: existingSession } }) => {
           setSession(existingSession);
           setUser(existingSession?.user ?? null);
           if (existingSession?.user) {
+            // Check MFA assurance level on session restore
+            const { data: mfaData } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+            if (mfaData && mfaData.currentLevel === "aal1" && mfaData.nextLevel === "aal2") {
+              setShowMfaVerify(true);
+              return;
+            }
             handlePostLoginRedirect(existingSession.user.id);
           }
         });

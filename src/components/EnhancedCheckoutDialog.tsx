@@ -606,9 +606,9 @@ export function EnhancedCheckoutDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[440px] overflow-hidden p-0 gap-0">
+      <DialogContent className="sm:max-w-[420px] overflow-hidden p-0 gap-0" style={{ WebkitFontSmoothing: "antialiased", MozOsxFontSmoothing: "grayscale", textRendering: "optimizeLegibility" }}>
         {/* Header */}
-        <div className="px-5 py-3 border-b border-white/8">
+        <div className="px-3 sm:px-5 py-2.5 border-b border-white/8">
           <DialogHeader className="space-y-0">
             <div className="flex items-center gap-2 mb-0.5">
               <div className="p-1.5 bg-orange-500/15 rounded-md">
@@ -618,7 +618,7 @@ export function EnhancedCheckoutDialog({
                 {items.length} {items.length === 1 ? "item" : "items"}
               </Badge>
             </div>
-            <DialogTitle className="text-base font-bold leading-tight">Checkout</DialogTitle>
+            <DialogTitle className="text-[13px] font-semibold leading-tight">Secure Checkout</DialogTitle>
           </DialogHeader>
 
           {/* Delivery Info */}
@@ -638,7 +638,7 @@ export function EnhancedCheckoutDialog({
           </div>
         </div>
 
-        <div className="p-5 grid md:grid-cols-5 gap-4">
+        <div className="p-3 sm:p-5 grid md:grid-cols-5 gap-3 sm:gap-4">
           {/* Main Form */}
           <div className="md:col-span-3">
             <Tabs
