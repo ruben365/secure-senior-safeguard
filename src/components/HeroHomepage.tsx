@@ -73,33 +73,44 @@ export const HeroHomepage = () => {
 
       {/* ── 2. Hero Content ── */}
       <div className="hero-home__content">
-        <div className="max-w-[1600px] mx-auto w-full px-6 lg:px-8">
-          <div className="hero-home__copy">
-
-            {/* Headline */}
-            <h1 className="hero-home__headline">
-              AI Protection
-              <br />
-              for Families &amp; Business
-            </h1>
-
-            {/* Body */}
-            <p className="hero-home__body">
-              We stop AI-powered scams before they reach your family. Our team
-              builds automated defenses, runs live training, and monitors threats
-              around the clock so you stay safe without lifting a finger.
-            </p>
-
-            {/* Ghost CTA Buttons */}
-            <div className="hero-home__ctas">
-              <Link to="/training#pricing" className="hero-home__cta">
-                Get Protected
-              </Link>
-              <Link to="/business" className="hero-home__cta">
-                See Our Work
-                <ArrowRight />
-              </Link>
+        {/* Text group — pushed to top on mobile */}
+        <div className="hero-home__text-group">
+          <div className="max-w-[1600px] mx-auto w-full px-6 lg:px-8">
+            <div className="hero-home__copy">
+              <h1 className="hero-home__headline">
+                AI Protection
+                <br />
+                for Families &amp; Business
+              </h1>
+              <p className="hero-home__body">
+                We stop AI-powered scams before they reach your family. Our team
+                builds automated defenses, runs live training, and monitors threats
+                around the clock so you stay safe without lifting a finger.
+              </p>
+              {/* CTAs — inline on desktop, separate block on mobile */}
+              <div className="hero-home__ctas hero-home__ctas--desktop">
+                <Link to="/training#pricing" className="hero-home__cta">
+                  Get Protected
+                </Link>
+                <Link to="/business" className="hero-home__cta">
+                  See Our Work
+                  <ArrowRight />
+                </Link>
+              </div>
             </div>
+          </div>
+        </div>
+
+        {/* CTA group — drops to bottom on mobile */}
+        <div className="hero-home__ctas hero-home__ctas--mobile">
+          <div className="max-w-[1600px] mx-auto w-full px-6 lg:px-8">
+            <Link to="/training#pricing" className="hero-home__cta">
+              Get Protected
+            </Link>
+            <Link to="/business" className="hero-home__cta">
+              See Our Work
+              <ArrowRight />
+            </Link>
           </div>
         </div>
       </div>

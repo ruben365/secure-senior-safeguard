@@ -98,14 +98,44 @@
     min-width: 34px;
   }
 
-  /* ── BUTTON COMPRESSION — all buttons smaller on phone ── */
+  /* ── HERO BUTTON COMPRESSION — compact on ALL pages ── */
+  .hero-home__cta,
+  .hero-biz__cta,
+  .hero-ws__cta,
+  [class*="hero"] button,
+  [class*="Hero"] button,
+  main > section:first-child button,
+  #final-action button {
+    height: 34px !important;
+    max-height: 34px !important;
+    font-size: 12px !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    border-radius: 8px !important;
+  }
+
+  /* ── CONTENT SECTION BUTTONS — compact on phone ── */
+  main section button,
+  main section a[role="button"],
+  main section [role="button"],
+  main section a.inline-flex,
+  .home-color-wash button,
+  .hss-root button {
+    height: 32px !important;
+    max-height: 32px !important;
+    font-size: 12px !important;
+    padding: 0 12px !important;
+    border-radius: 6px !important;
+  }
+
+  /* ── GENERAL BUTTON COMPRESSION — fallback for rest ── */
   main button,
   main a[role="button"],
   main [role="button"],
   main .btn,
   main [class*="Button"] {
-    max-height: 38px;
-    font-size: 13px !important;
+    max-height: 36px;
+    font-size: 12px !important;
   }
 
   /* Admin dashboard responsive */

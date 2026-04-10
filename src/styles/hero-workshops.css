@@ -753,12 +753,17 @@
   }
 
   .hero-ws__ctas {
-    flex-direction: column;
+    flex-direction: row;
+    gap: 0.5rem;
   }
 
   .hero-ws__cta {
-    width: 100%;
+    width: auto;
+    max-width: 180px;
     justify-content: center;
+    height: 34px;
+    font-size: 12px;
+    padding: 0 14px;
   }
 
   .hero-ws__panel {
