@@ -537,7 +537,7 @@
     radial-gradient(at 80% 20%, hsl(var(--accent)  / 0.13) 0px, transparent 50%),
     radial-gradient(at 30% 90%, hsl(35 90% 55% / 0.10) 0px, transparent 50%),
     radial-gradient(at 90% 80%, hsl(var(--primary) / 0.11) 0px, transparent 50%),
-    transparent;
+    #FAFAF8;
   position: relative;
   overflow: hidden;
 }
@@ -849,24 +849,9 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   MOBILE — Clean, spacious, noise-free
+   MOBILE — App-style tiles, compact cards, warm white canvas
    ═══════════════════════════════════════════════════════════════════ */
 @media (max-width: 640px) {
-  /* Stats grid: single column on phones */
-  .hss-stats-bento .grid {
-    grid-template-columns: 1fr !important;
-    gap: 0.75rem !important;
-  }
-
-  .hss-stats-tile {
-    padding: 1.25rem !important;
-  }
-
-  /* Reduce stat number size on mobile */
-  .hss-stats-bento .text-\[2\.75rem\] {
-    font-size: 2rem !important;
-  }
-
   /* Hide floating cards / decorative badges on mobile */
   .hss-float-card {
     display: none !important;
@@ -884,14 +869,14 @@
     animation: none !important;
   }
 
-  /* Sections: compact on mobile */
+  /* Sections: compact vertical spacing */
   .hss-section-white,
   .hss-section-tint {
-    padding-top: 1.5rem !important;
-    padding-bottom: 1.5rem !important;
+    padding-top: 1.25rem !important;
+    padding-bottom: 1.25rem !important;
   }
 
-  /* CTA buttons: auto-width compact pills on mobile (NOT full-width) */
+  /* CTA buttons: auto-width compact pills */
   .hss-cta-primary {
     width: auto;
     max-width: 220px;
@@ -901,5 +886,42 @@
   /* Collage section: auto height instead of fixed */
   .hss-section-white .grid-rows-2 {
     height: auto !important;
+  }
+
+  /* Container horizontal padding — breathing room */
+  .hss-root .container,
+  .hss-stats-bento .container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* Grid gaps — tighter for tile feel */
+  .hss-root .grid {
+    gap: 8px !important;
+  }
+
+  /* Card text compression for tile layout */
+  .hss-dark-card p,
+  .hss-root .bg-white p {
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  /* Icon circles — smaller in tiles */
+  .hss-dark-card .w-10,
+  .hss-root .bg-white .w-10 {
+    width: 28px !important;
+    height: 28px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .hss-dark-card .w-10 svg,
+  .hss-root .bg-white .w-10 svg {
+    width: 14px !important;
+    height: 14px !important;
   }
 }

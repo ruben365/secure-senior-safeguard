@@ -53,7 +53,7 @@ export const FAQPreview = () => {
               </span>
               <h2
                 id="faq-heading"
-                className="text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold text-[#1E293B] leading-[1.05] tracking-tight mb-3 mt-4"
+                className="text-xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold text-[#1E293B] leading-[1.05] tracking-tight mb-3 mt-4"
               >
                 Got questions?
               </h2>
@@ -79,15 +79,15 @@ export const FAQPreview = () => {
               <div className="flex flex-col gap-2.5">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-1.5 h-8 px-4 sm:h-11 sm:px-5 rounded-full bg-[#d96c4a] hover:bg-[#b8552f] text-white text-xs sm:text-[14px] font-semibold transition-colors shadow-[0_4px_12px_-2px_rgba(217,108,74,0.4)] w-auto"
+                  className="inline-flex items-center justify-center gap-1.5 h-8 px-4 sm:h-11 sm:px-5 rounded-full bg-gradient-to-r from-[#ea580c] to-[#c2410c] hover:from-[#c2410c] hover:to-[#9a3412] text-white text-xs sm:text-[14px] font-semibold transition-colors shadow-[0_2px_8px_-2px_rgba(234,88,12,0.3)] w-auto"
                 >
                   Chat With Expert
                 </Link>
                 <a
                   href={`tel:${SITE.phone.e164}`}
-                  className="inline-flex items-center justify-center gap-1.5 h-8 px-3 sm:h-11 sm:px-5 rounded-full bg-white hover:bg-[#1E293B]/[0.04] border border-[#1E293B]/12 hover:border-[#1E293B]/22 text-[#1E293B] text-xs sm:text-[14px] font-semibold transition-colors w-auto"
+                  className="inline-flex items-center justify-center gap-1.5 h-7 px-3 sm:h-11 sm:px-5 rounded-full bg-transparent hover:bg-[#ea580c]/[0.06] border-[1.5px] border-[#ea580c]/30 hover:border-[#ea580c]/50 text-[#ea580c] text-[11px] sm:text-[14px] font-semibold transition-colors w-auto"
                 >
-                  <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> Call Now
+                  <Phone className="w-3 h-3 sm:w-4 sm:h-4" /> Call Now
                 </a>
               </div>
             </div>
@@ -104,19 +104,19 @@ export const FAQPreview = () => {
                 <AccordionItem
                   key={index}
                   value={`faq-${index}`}
-                  className="hss-card rounded-2xl overflow-hidden border-0"
+                  className="hss-card rounded-[14px] sm:rounded-2xl overflow-hidden border-0"
                 >
-                  <AccordionTrigger className="text-left font-bold text-[#1E293B] hover:no-underline px-6 py-5 [&[data-state=open]]:text-[#b8552f] [&>svg]:text-[#1E293B]/50">
-                    <span className="flex items-center gap-4 pr-4">
-                      <span className="hss-icon-tile w-9 h-9 rounded-xl text-[13px] font-bold flex-shrink-0">
+                  <AccordionTrigger className="text-left font-bold text-[#1E293B] hover:no-underline px-4 py-3 sm:px-6 sm:py-5 [&[data-state=open]]:text-[#b8552f] [&>svg]:text-[#1E293B]/50">
+                    <span className="flex items-center gap-3 sm:gap-4 pr-4">
+                      <span className="hss-icon-tile w-7 h-7 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl text-[11px] sm:text-[13px] font-bold flex-shrink-0">
                         {index + 1}
                       </span>
-                      <span className="text-[15px] leading-snug">
+                      <span className="text-[13px] sm:text-[15px] leading-snug font-medium sm:font-bold">
                         {faq.question}
                       </span>
                     </span>
                   </AccordionTrigger>
-                  <AccordionContent className="text-[14px] text-[#6B7280] leading-relaxed pb-5 px-6 pl-[4.5rem]">
+                  <AccordionContent className="text-[13px] sm:text-[14px] text-[#6B7280] leading-relaxed pb-3 sm:pb-5 px-4 sm:px-6 pl-[3.25rem] sm:pl-[4.5rem]">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>

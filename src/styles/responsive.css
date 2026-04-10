@@ -319,6 +319,244 @@
   .premium-float-spring {
     animation: none !important;
   }
+
+  /* ══════════════════════════════════════════════════════════════════
+     APP-STYLE MOBILE OVERHAUL — tile cards, chip stats, pill buttons
+     Target: modern app feel on phone with warm white canvas
+     ══════════════════════════════════════════════════════════════════ */
+
+  /* ── WARM WHITE CANVAS for content sections ── */
+  .home-color-wash,
+  .hss-root,
+  .hss-testimonial-theater {
+    background: #FAFAF8 !important;
+  }
+
+  .hss-root::after,
+  .home-color-wash::before {
+    display: none !important;
+  }
+
+  .hss-section-white,
+  .hss-section-tint {
+    background: transparent !important;
+  }
+
+  /* ── SECTION HEADINGS — clean and compact ── */
+  .hss-root h2,
+  .home-color-wash h2,
+  .hss-testimonial-theater h2 {
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.01em !important;
+  }
+
+  .hss-root h3,
+  .home-color-wash h3 {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    line-height: 1.25 !important;
+  }
+
+  .hss-root h4,
+  .home-color-wash h4 {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Overline badge — smaller */
+  .hss-overline {
+    font-size: 10px !important;
+    letter-spacing: 0.1em !important;
+    padding: 0.3rem 0.75rem !important;
+  }
+
+  /* Section subtext */
+  .hss-root section > .container p,
+  .home-color-wash section > .container > p {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+
+  /* ── BUTTONS — compact pill shape everywhere ── */
+  .hss-cta-primary,
+  main section button,
+  main section a[role="button"],
+  main section [role="button"],
+  main section a.inline-flex,
+  .home-color-wash button,
+  .hss-root button {
+    height: 32px !important;
+    max-height: 32px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    padding: 0 14px !important;
+    border-radius: 100px !important;
+    width: auto !important;
+    min-width: 100px !important;
+    max-width: 220px !important;
+  }
+
+  /* Primary buttons — warm orange gradient */
+  .hss-cta-primary,
+  main section a[class*="bg-[#d96c4a]"],
+  main section a[class*="bg-gradient"] {
+    background: linear-gradient(135deg, #ea580c, #c2410c) !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 2px 8px -2px rgba(234,88,12,0.3) !important;
+  }
+
+  /* Secondary/ghost buttons — orange border pill */
+  .hss-cta-ghost,
+  main section button[class*="outline"],
+  main section a[class*="outline"] {
+    background: transparent !important;
+    border: 1.5px solid rgba(234,88,12,0.4) !important;
+    color: #ea580c !important;
+  }
+
+  /* ── STAT TILES → horizontal scrollable chips ── */
+  .hss-stats-bento .grid {
+    display: flex !important;
+    overflow-x: auto !important;
+    gap: 8px !important;
+    padding: 0 16px !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    grid-template-columns: none !important;
+  }
+
+  .hss-stats-bento .grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hss-stats-tile {
+    flex-shrink: 0 !important;
+    min-width: 140px !important;
+    max-width: 180px !important;
+    padding: 10px 14px !important;
+    border-radius: 100px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    background: rgba(234,88,12,0.06) !important;
+    border: 1px solid rgba(234,88,12,0.12) !important;
+    box-shadow: none !important;
+  }
+
+  .hss-stats-tile:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Hide verbose parts inside stat chips */
+  .hss-stats-tile p,
+  .hss-stats-tile-icon {
+    display: none !important;
+  }
+
+  /* Stat number — inline compact */
+  .hss-stats-bento .text-\[2\.75rem\],
+  .hss-stats-bento .text-\[3\.25rem\] {
+    font-size: 16px !important;
+    margin-bottom: 0 !important;
+    line-height: 1 !important;
+  }
+
+  /* Stat label — inline */
+  .hss-stats-tile .text-\[14px\] {
+    font-size: 11px !important;
+    margin-bottom: 0 !important;
+    white-space: nowrap !important;
+  }
+
+  .hss-stats-bento {
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+    background: transparent !important;
+  }
+
+  .hss-stats-bento::before {
+    display: none !important;
+  }
+
+  /* ── CARDS — compact tiles with soft borders ── */
+  .hss-card,
+  .hss-soft-tint,
+  .hss-dark-card,
+  .home-color-wash .bg-white,
+  .hss-root .bg-white {
+    border-radius: 14px !important;
+    padding: 12px !important;
+    border: 1px solid rgba(0,0,0,0.06) !important;
+    box-shadow: none !important;
+  }
+
+  .hss-card:hover,
+  .hss-soft-tint:hover,
+  .hss-dark-card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Feature boxes in section 2 — 2-col grid tiles */
+  .hss-root .grid.sm\:grid-cols-2 {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+  }
+
+  /* Dark card glow — hidden on mobile tiles */
+  .hss-dark-card-glow {
+    display: none !important;
+  }
+
+  /* Feature list items — compact */
+  .hss-feature-list li {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+  }
+
+  .hss-feature-list .w-9 {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .hss-feature-list .w-9 svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  .hss-feature-list::before {
+    display: none !important;
+  }
+
+  /* ── QUOTE CARD — compact on mobile ── */
+  .hss-quote-editorial {
+    border-left-width: 2px !important;
+    padding-left: 12px !important;
+  }
+
+  /* ── HOW IT WORKS — compact timeline ── */
+  .hss-step-bubble {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 12px !important;
+  }
+
+  /* ── IMAGE SECTIONS — compact aspect ratio ── */
+  .hss-root .aspect-\[4\/5\],
+  .hss-root .aspect-\[3\/4\] {
+    aspect-ratio: 16/10 !important;
+  }
+
+  /* Social proof strip — compact */
+  .hss-avatar-stack img {
+    width: 24px !important;
+    height: 24px !important;
+  }
 }
 
 /* ------------------------------------------------------------ */
