@@ -139,13 +139,13 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
                     they are protected from AI scams. Get started in minutes.
                   </p>
 
-                  <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                    <Button asChild size="lg">
+                  <div className="flex flex-row gap-3 mb-8">
+                    <Button asChild size="lg" className="h-8 text-xs px-3 sm:h-11 sm:text-sm sm:px-6">
                       <Link to="/training#pricing">
-                        Get Protected Today <ArrowRight className="ml-2 w-5 h-5" />
+                        Get Protected Today <ArrowRight className="ml-1.5 w-4 h-4 sm:ml-2 sm:w-5 sm:h-5" />
                       </Link>
                     </Button>
-                    <Button asChild variant="heroOutline" size="lg">
+                    <Button asChild variant="heroOutline" size="lg" className="h-8 text-xs px-3 sm:h-11 sm:text-sm sm:px-6">
                       <Link to="/business">Business Solutions</Link>
                     </Button>
                   </div>

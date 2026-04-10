@@ -233,6 +233,11 @@
 }
 
 /* ── 3e. CTA Buttons — Premium Glassmorphic Pills ── */
+/* On desktop: show inline CTAs, hide bottom CTAs */
+.hero-home__ctas--mobile {
+  display: none;
+}
+
 .hero-home__ctas {
   display: flex;
   flex-wrap: wrap;
@@ -464,12 +469,16 @@
     min-height: 100dvh;
   }
 
-  /* Push content to the TOP so the person is visible below */
+  /* Text at top, buttons at bottom, person visible in middle */
   .hero-home__content {
-    justify-content: flex-start;
+    justify-content: space-between;
     padding-top: 72px;       /* just below nav */
-    padding-bottom: 0.75rem;
-    flex: 0;                 /* don't stretch to fill */
+    padding-bottom: 0;
+    flex: 1;                 /* fill available space */
+  }
+
+  .hero-home__text-group {
+    flex-shrink: 0;
   }
 
   .hero-home__copy {
@@ -484,26 +493,39 @@
   .hero-home__body {
     font-size: 0.8125rem;    /* 13px */
     line-height: 1.45;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
 
-  /* CTAs: side by side, compact */
-  .hero-home__ctas {
-    flex-direction: row;
+  /* Hide desktop CTAs on mobile, show mobile CTAs */
+  .hero-home__ctas--desktop {
+    display: none !important;
+  }
+
+  .hero-home__ctas--mobile {
+    display: flex !important;
+    flex-shrink: 0;
+    margin-top: auto;
+    padding-bottom: 1rem;
+    gap: 0.5rem;
+  }
+
+  .hero-home__ctas--mobile > div {
+    display: flex;
     gap: 0.5rem;
   }
 
   .hero-home__cta {
     width: auto;
     max-width: 180px;
-    height: 36px;
+    height: 34px;
     justify-content: center;
-    font-size: 0.8125rem;    /* 13px */
-    padding: 0 1rem;
+    font-size: 0.75rem;      /* 12px */
+    padding: 0 14px;
+    border-radius: 8px;
   }
 
   /* Gradient: dark at top (text), transparent at bottom (person) */
