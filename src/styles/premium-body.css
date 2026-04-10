@@ -204,14 +204,7 @@ main select:focus {
 
 /* ── Responsive dialog/menu sizing ── */
 @media (max-width: 640px) {
-  [role="dialog"] {
-    width: 94% !important;
-    max-width: 100% !important;
-    max-height: 85vh !important;
-    padding: 1.25rem !important;
-    border-radius: 1rem !important;
-    overflow-y: auto !important;
-  }
+  /* Dialog sizing moved to responsive.css — single source of truth */
 
   [data-radix-popper-content-wrapper] {
     max-width: calc(100vw - 1rem) !important;
