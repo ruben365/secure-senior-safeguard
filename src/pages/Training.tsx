@@ -600,14 +600,14 @@ function LearnAndTrain() {
         <HeroWorkshops />
 
         {/* ══════════ LIVE THREAT TICKER ══════════ */}
-        <div className="bg-foreground text-background py-3 overflow-hidden">
+        <div className="bg-[#FAFAF8] border-b border-[#E8DDD0] text-[#2E1F1B] py-3 overflow-hidden">
           <div className="container mx-auto px-6 lg:px-8">
             <div className="flex items-center justify-center gap-4 sm:gap-8 flex-wrap text-xs sm:text-sm font-semibold">
               <span className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" /> 2,847 scams blocked this month</span>
-              <span className="hidden sm:inline text-background/30">|</span>
-              <span className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-green-400" /> $1.2M saved for families</span>
-              <span className="hidden sm:inline text-background/30">|</span>
-              <span className="flex items-center gap-2"><Users className="w-4 h-4" /> 140,000+ students trained</span>
+              <span className="hidden sm:inline text-[#8B7D75]">|</span>
+              <span className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-green-600" /> $1.2M saved for families</span>
+              <span className="hidden sm:inline text-[#8B7D75]">|</span>
+              <span className="flex items-center gap-2"><Users className="w-4 h-4 text-[#5E4B43]" /> 140,000+ students trained</span>
             </div>
           </div>
         </div>

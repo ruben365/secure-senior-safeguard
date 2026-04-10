@@ -461,7 +461,7 @@ function About() {
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${fieldSunsetCta})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/50 to-primary/20" />
 
         <div className="container mx-auto px-6 lg:px-8 relative z-10 text-center">
           <h2 className="text-2xl md:text-4xl font-black text-white mb-3 drop-shadow-lg">

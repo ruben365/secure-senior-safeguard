@@ -96,18 +96,19 @@
      back to home doesn't block paint. */
 }
 
-/* Layer 1 — Top-down veil: dark at top for text, clear at bottom for person */
+/* Layer 1 — Angled veil: dark at top-left (text area), transparent toward center-right (person) */
 .hero-home__bg::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 1;
   background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.8)   0%,
-    rgba(0, 0, 0, 0.6)  35%,
-    rgba(0, 0, 0, 0.2)  60%,
-    transparent          80%
+    135deg,
+    rgba(0, 0, 0, 0.75)  0%,
+    rgba(0, 0, 0, 0.5)  30%,
+    rgba(0, 0, 0, 0.15) 50%,
+    rgba(0, 0, 0, 0.05) 70%,
+    transparent          100%
   );
 }
 
@@ -514,10 +515,10 @@
     pointer-events: none;
     background: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0.8) 0%,
-      rgba(0, 0, 0, 0.6) 40%,
-      rgba(0, 0, 0, 0.1) 70%,
-      transparent 100%
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.4) 40%,
+      rgba(0, 0, 0, 0.1) 60%,
+      transparent 80%
     );
   }
 
