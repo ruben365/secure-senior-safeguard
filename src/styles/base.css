@@ -406,6 +406,48 @@
     }
   }
 
+  /* ═══════════════════════════════════════════════════════════════════
+     PERMANENT FIX: Readable text on ALL dark surfaces
+     ───────────────────────────────────────────────────────────────────
+     Dialogs, modals, sheets, alert-dialogs, and popovers have dark
+     glass backgrounds.  Re-scope the core theme tokens so Tailwind
+     classes like text-foreground, text-muted-foreground, bg-muted,
+     border-border resolve to light/white values inside these surfaces.
+     This is a single-point fix — every current and future dialog
+     inherits readable text automatically.
+     ═══════════════════════════════════════════════════════════════════ */
+  [role="dialog"],
+  [role="alertdialog"],
+  [data-radix-popper-content-wrapper] {
+    /* Text */
+    --foreground: 0 0% 100%;               /* white */
+    --card-foreground: 0 0% 100%;
+    --popover-foreground: 0 0% 100%;
+    --muted-foreground: 0 0% 100% / 0.65;  /* white @ 65% — secondary/muted */
+
+    /* Surfaces */
+    --muted: 0 0% 100% / 0.08;
+    --card: 0 0% 100% / 0.06;
+    --background: 0 0% 100% / 0.04;
+
+    /* Borders & inputs */
+    --border: 0 0% 100% / 0.12;
+    --input: 0 0% 100% / 0.10;
+    --ring: 25 95% 53%;                     /* keep accent orange ring */
+
+    /* Success/destructive stay the same (already bright enough) */
+  }
+
+  /* Links inside dialogs: orange accent for visibility */
+  [role="dialog"] a:not([class*="Button"]):not([role="button"]),
+  [role="alertdialog"] a:not([class*="Button"]):not([role="button"]) {
+    color: #F97316;
+  }
+  [role="dialog"] a:not([class*="Button"]):not([role="button"]):hover,
+  [role="alertdialog"] a:not([class*="Button"]):not([role="button"]):hover {
+    color: #fb923c;
+  }
+
   /* Accessibility - Skip to content link */
   .skip-to-content {
     position: absolute;
