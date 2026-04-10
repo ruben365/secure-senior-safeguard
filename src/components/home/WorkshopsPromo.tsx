@@ -42,7 +42,7 @@ export const WorkshopsPromo = () => {
           {/* Content - Right */}
           <div className="space-y-8">
             <div>
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/8 backdrop-blur-sm border border-primary/15 text-xs font-bold uppercase tracking-[0.2em] text-primary mb-4">Learn & Train</span>
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/8 backdrop-blur-sm border border-primary/15 text-xs font-bold uppercase tracking-[0.2em] text-primary mb-4">Workshops</span>
               <h2 id="workshops-heading" className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] mb-4">
                 Why Families Choose Our{" "}
                 <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Protection Training</span>

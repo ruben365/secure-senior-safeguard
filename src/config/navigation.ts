@@ -22,8 +22,8 @@ export const MAIN_NAV_ROUTES: NavRoute[] = [
   },
   {
     path: "/training",
-    name: "Learn & Train",
-    description: "Cybersecurity training and ScamShield protection plans",
+    name: "Workshops",
+    description: "Cybersecurity workshops and ScamShield protection plans",
     showInNav: true,
   },
   {
