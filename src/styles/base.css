@@ -673,12 +673,12 @@
     min-width: 36px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     button,
     [role="button"],
     a[role="button"] {
-      min-height: 44px;
-      min-width: 44px;
+      min-height: 34px;
+      min-width: 34px;
     }
   }
 

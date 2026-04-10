@@ -25,11 +25,11 @@ export const CartAbandonmentNotification = () => {
     // Don't show if already dismissed or already shown once
     if (isDismissedThisSession() || hasShownOnce) return;
 
-    let timer: ReturnType<typeof setTimeout>;
+    let showTimer: ReturnType<typeof setTimeout>;
 
     if (itemCount > 0) {
       // Show after 2 minutes of having items (longer delay, less intrusive)
-      timer = setTimeout(() => {
+      showTimer = setTimeout(() => {
         if (!isDismissedThisSession() && !hasShownOnce) {
           setShowNotification(true);
           setHasShownOnce(true);
@@ -38,9 +38,16 @@ export const CartAbandonmentNotification = () => {
     }
 
     return () => {
-      if (timer) clearTimeout(timer);
+      if (showTimer) clearTimeout(showTimer);
     };
   }, [itemCount, isDismissedThisSession, hasShownOnce]);
+
+  // Auto-dismiss after 3 seconds
+  useEffect(() => {
+    if (!showNotification) return;
+    const autoDismiss = setTimeout(() => handleDismiss(), 3000);
+    return () => clearTimeout(autoDismiss);
+  }, [showNotification]);
 
   const handleSubmitFeedback = () => {
     if (feedback.trim()) {

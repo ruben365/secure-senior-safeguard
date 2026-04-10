@@ -45,8 +45,8 @@ export function ShoppingCart() {
             <div
               className="
                 sm:absolute sm:right-0 sm:top-full sm:mt-2 sm:w-[320px] sm:rounded-xl
-                fixed right-0 top-0 z-50 h-full sm:h-auto
-                w-[min(85%,300px)] sm:w-[320px]
+                fixed right-0 top-0 z-50 sm:h-auto
+                w-[min(80%,280px)] sm:w-[320px]
                 rounded-l-xl sm:rounded-xl
                 overflow-hidden border border-white/10
                 shadow-[0_20px_60px_rgba(0,0,0,0.5)]
@@ -55,9 +55,11 @@ export function ShoppingCart() {
                 background: "rgba(15, 15, 20, 0.95)",
                 backdropFilter: "blur(20px) saturate(120%)",
                 WebkitBackdropFilter: "blur(20px) saturate(120%)",
+                height: "auto",
+                maxHeight: "80vh",
               }}
             >
-              {/* Inner wrapper with max-height on mobile */}
+              {/* Inner wrapper — auto height, scrollable items */}
               <div className="flex flex-col max-h-[80vh] sm:max-h-none">
                 {/* Header */}
                 <div className="flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 border-b border-white/8 flex-shrink-0">

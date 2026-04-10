@@ -27,28 +27,28 @@ html {
 /* Scope: any Radix dialog/alert-dialog/sheet content (all use role="dialog") */
 [role="dialog"] input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
 [role="alertdialog"] input:not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
-  height: 2.5rem !important;        /* 40px */
-  padding-top: 0.4rem !important;
-  padding-bottom: 0.4rem !important;
-  padding-left: 0.75rem !important;
-  padding-right: 0.75rem !important;
-  border-radius: 0.5rem !important;
-  font-size: 0.875rem !important;   /* 14px */
+  height: 2.5rem;        /* 40px */
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;   /* 14px */
 }
 
 [role="dialog"] textarea,
 [role="alertdialog"] textarea {
-  min-height: 5rem !important;      /* 80px */
-  padding: 0.5rem 0.75rem !important;
-  border-radius: 0.5rem !important;
-  font-size: 0.875rem !important;
+  min-height: 5rem;      /* 80px */
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
 }
 
 [role="dialog"] label,
 [role="alertdialog"] label {
-  font-size: 0.8125rem !important;  /* 13px */
-  font-weight: 600 !important;
-  margin-bottom: 0.25rem !important;
+  font-size: 0.8125rem;  /* 13px */
+  font-weight: 600;
+  margin-bottom: 0.25rem;
 }
 
 /* Compact the oversized Button variants inside dialogs only */
@@ -58,40 +58,40 @@ html {
 [role="dialog"] button.h-\[50px\],
 [role="alertdialog"] button.h-\[52px\],
 [role="alertdialog"] button.h-\[44px\] {
-  height: 2.5rem !important;        /* 40px */
-  padding-left: 1.25rem !important;
-  padding-right: 1.25rem !important;
-  font-size: 0.875rem !important;   /* 14px */
+  height: 2.5rem;        /* 40px */
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  font-size: 0.875rem;   /* 14px */
 }
 
 /* The icon variant (52×52) becomes 40×40 */
 [role="dialog"] button.w-\[52px\].h-\[52px\],
 [role="alertdialog"] button.w-\[52px\].h-\[52px\] {
-  width: 2.5rem !important;
-  height: 2.5rem !important;
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
 /* Select triggers */
 [role="dialog"] [role="combobox"],
 [role="alertdialog"] [role="combobox"] {
-  height: 2.5rem !important;
-  font-size: 0.875rem !important;
-  padding-left: 0.75rem !important;
-  padding-right: 0.75rem !important;
+  height: 2.5rem;
+  font-size: 0.875rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
 /* Checkbox/radio inside dialogs */
 [role="dialog"] [role="checkbox"],
 [role="dialog"] [role="radio"] {
-  width: 1.125rem !important;
-  height: 1.125rem !important;
+  width: 1.125rem;
+  height: 1.125rem;
 }
 
 /* Reduce large avatar / icon bubbles often used in dialog headers */
 [role="dialog"] .w-20.h-20,
 [role="dialog"] .w-16.h-16 {
-  width: 3.5rem !important;
-  height: 3.5rem !important;
+  width: 3.5rem;
+  height: 3.5rem;
 }
 
 /* Cap dialog height and make internal content scrollable */

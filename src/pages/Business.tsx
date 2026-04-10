@@ -330,7 +330,7 @@ const PricingCard = ({
           </ul>
           <Button
           variant={featured ? "default" : "outline"}
-          className="w-full mt-auto h-12 rounded-xl"
+          className="w-full mt-auto h-9 sm:h-12 text-sm sm:text-base rounded-xl"
           onClick={onButtonClick}>
           
             {buttonText}
@@ -1916,11 +1916,11 @@ function Business() {
             <Button
               onClick={() => setModalOpen(true)}
               size="xl"
-              className="bg-white text-primary font-black shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-[0_6px_30px_rgba(0,0,0,0.4)] transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-white text-lg tracking-wide">
-              
+              className="bg-white text-primary font-black shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-[0_6px_30px_rgba(0,0,0,0.4)] transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-white text-sm sm:text-lg tracking-wide">
+
               SCHEDULE DISCOVERY CALL
             </Button>
-            <Button asChild size="xl" className="bg-transparent text-white font-black border-[3px] border-white shadow-[0_4px_20px_rgba(255,255,255,0.2)] hover:bg-white hover:text-primary transition-all duration-300 hover:scale-105 active:scale-95 text-lg tracking-wide">
+            <Button asChild size="xl" className="bg-transparent text-white font-black border-[3px] border-white shadow-[0_4px_20px_rgba(255,255,255,0.2)] hover:bg-white hover:text-primary transition-all duration-300 hover:scale-105 active:scale-95 text-sm sm:text-lg tracking-wide">
               <Link to="/faq">View Frequently Asked Questions</Link>
             </Button>
           </div>
