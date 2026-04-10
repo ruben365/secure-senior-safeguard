@@ -157,13 +157,29 @@
   .section-spacing { @apply py-6; }
   .card-mobile { @apply p-3; }
 
-  /* Compress all homepage sections */
-  main > section,
-  main > div > section,
+  /* Compress homepage sections only (not FAQ, Contact, etc.) */
   .hss-root section,
   .home-color-wash section {
     padding-top: 1.5rem !important;
     padding-bottom: 1.5rem !important;
+  }
+
+  /* No full-width buttons in content on phone */
+  main section .w-full:is(button, a, [role="button"]),
+  .hss-cta-primary {
+    width: auto !important;
+    max-width: 220px !important;
+    min-width: 140px;
+  }
+
+  /* Primary content buttons — strong orange, visible and compact */
+  main section a.hss-cta-primary,
+  main section a[class*="bg-[#d96c4a]"],
+  main section a[class*="bg-gradient"] {
+    background: linear-gradient(135deg, #ea580c, #c2410c) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
   }
 
   /* Compress cards inside sections */
