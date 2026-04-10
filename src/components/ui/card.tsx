@@ -9,12 +9,10 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "relative rounded-xl bg-card text-card-foreground",
+      "relative rounded-[14px] bg-card text-card-foreground",
       "border border-border/70",
-      "shadow-[0_1px_2px_rgba(3,80,140,0.04),0_2px_8px_rgba(3,80,140,0.05),0_8px_24px_-6px_rgba(3,80,140,0.08)]",
       "transition-all duration-200",
-      "hover:shadow-[0_2px_4px_rgba(3,80,140,0.05),0_6px_16px_rgba(3,80,140,0.08),0_16px_36px_-8px_rgba(3,80,140,0.12)]",
-      "hover:border-primary/15 hover:-translate-y-0.5",
+      "hover:border-primary/20 hover:-translate-y-0.5",
       className,
     )}
     {...props}

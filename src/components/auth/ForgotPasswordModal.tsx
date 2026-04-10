@@ -87,7 +87,7 @@ export function ForgotPasswordModal({
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-[440px]">
         <DialogHeader>
           <DialogTitle className="text-center text-2xl">
             {emailSent ? "Check Your Email" : "Reset Your Password"}
@@ -96,7 +96,7 @@ export function ForgotPasswordModal({
 
         {!emailSent ? (
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="text-center text-sm text-muted-foreground">
+            <div className="text-center text-sm text-white/70">
               Enter your authorized email address and we'll send you a reset
               link.
             </div>
@@ -135,20 +135,20 @@ export function ForgotPasswordModal({
         ) : (
           <div className="space-y-6 text-center">
             <div className="flex justify-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
-                <CheckCircle className="w-8 h-8 text-green-600" />
+              <div className="w-16 h-16 bg-emerald-500/15 rounded-full flex items-center justify-center">
+                <CheckCircle className="w-8 h-8 text-emerald-400" />
               </div>
             </div>
 
             <div className="space-y-2">
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-white/70">
                 If your email is registered, we've sent you a password reset
                 link.
               </p>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-white/70">
                 Check your inbox and spam folder.
               </p>
-              <p className="text-sm font-medium">Link expires in 1 hour.</p>
+              <p className="text-sm font-medium text-white">Link expires in 1 hour.</p>
             </div>
 
             <Button onClick={handleClose} className="w-full">

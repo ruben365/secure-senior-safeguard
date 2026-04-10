@@ -230,15 +230,15 @@ export function VerificationCodeModal({
   return (
     <Dialog open={open} onOpenChange={onClose}>
       {/* Compact: no scrollbar, tight header, teal shield */}
-      <DialogContent className="sm:max-w-[380px] overflow-hidden rounded-2xl p-4 gap-0">
+      <DialogContent className="sm:max-w-[440px] overflow-hidden p-5 gap-0">
         <DialogHeader className="space-y-0 pb-3">
           <DialogTitle className="flex items-center gap-2 text-base font-semibold leading-tight">
-            <Shield className="w-4 h-4 text-teal-600" />
+            <Shield className="w-4 h-4 text-orange-400" />
             Two-Factor Authentication
           </DialogTitle>
-          <DialogDescription className="text-[11px] mt-0.5">
+          <DialogDescription className="text-[11px] mt-0.5 text-white/60">
             We sent a 6-digit code to{" "}
-            <span className="font-semibold text-foreground">{email}</span>
+            <span className="font-semibold text-white">{email}</span>
           </DialogDescription>
         </DialogHeader>
 
@@ -267,7 +267,7 @@ export function VerificationCodeModal({
                   "w-full aspect-square text-center text-lg sm:text-xl md:text-2xl font-bold rounded-lg border-2 transition-all duration-200",
                   "focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary",
                   "bg-background",
-                  digit ? "border-primary bg-primary/5" : "border-input",
+                  digit ? "border-orange-500 bg-orange-500/10" : "border-white/15",
                   "touch-manipulation min-h-[48px] min-w-[48px]",
                 )}
                 disabled={isVerifying}
@@ -278,9 +278,9 @@ export function VerificationCodeModal({
 
           {/* Timer */}
           <div className="text-center">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-white/60">
               Code expires in:{" "}
-              <span className="font-semibold text-foreground">
+              <span className="font-semibold text-white">
                 {formatTime(countdown)}
               </span>
             </p>
@@ -288,7 +288,7 @@ export function VerificationCodeModal({
 
           {/* Resend Code */}
           <div className="text-center">
-            <p className="text-sm text-muted-foreground mb-2">
+            <p className="text-sm text-white/60 mb-2">
               Didn't receive the code?
             </p>
             <Button
@@ -308,7 +308,7 @@ export function VerificationCodeModal({
           <Button
             onClick={() => handleVerify()}
             disabled={isVerifying || code.some((d) => !d)}
-            className="w-full min-h-[52px] text-base font-semibold bg-gradient-to-r from-primary to-accent"
+            className="w-full min-h-[52px] text-base font-semibold bg-gradient-to-r from-orange-600 to-orange-500 text-white"
           >
             {isVerifying ? (
               <span className="flex items-center justify-center gap-2">
@@ -325,7 +325,7 @@ export function VerificationCodeModal({
             <button
               type="button"
               onClick={onClose}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1 py-2"
+              className="text-sm text-white/50 hover:text-white transition-colors inline-flex items-center gap-1 py-2"
             >
               ← Back to Login
             </button>

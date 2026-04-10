@@ -284,3 +284,35 @@ nav { z-index: 50 !important; }
     transform: none;
   }
 }
+
+/* ── Dark dialog surface — input/label overrides ── */
+[role="dialog"] input,
+[role="dialog"] textarea,
+[role="dialog"] select {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: white !important;
+}
+
+[role="dialog"] input::placeholder,
+[role="dialog"] textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+[role="dialog"] input:focus,
+[role="dialog"] textarea:focus,
+[role="dialog"] select:focus {
+  border-color: rgba(184, 115, 51, 0.5) !important;
+  box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.1) !important;
+}
+
+[role="dialog"] label {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Buttons inside dark dialogs */
+[role="dialog"] button[data-variant="outline"],
+[role="dialog"] [data-slot="trigger"][data-state] {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}

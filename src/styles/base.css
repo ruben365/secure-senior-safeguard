@@ -187,6 +187,28 @@
     --gold-400: 42 92% 58%;
     --gold-300: 46 88% 68%;
 
+    /* ── Warm Palette — walnut/copper/cream ── */
+    --walnut-dark:   #2E1F1B;
+    --walnut-medium: #5E4B43;
+    --walnut-muted:  #8B7D75;
+    --copper:        #B87333;
+    --copper-light:  #D4956B;
+    --cream:         #FAF6F1;
+    --cream-border:  #E8DDD0;
+
+    /* ── Dark Surface Tokens ── */
+    --dark-glass:       rgba(18, 14, 12, 0.92);
+    --dark-card:        rgba(255, 255, 255, 0.04);
+    --dark-border:      rgba(255, 255, 255, 0.08);
+    --dark-border-hover: rgba(255, 255, 255, 0.15);
+    --dark-input-bg:    rgba(255, 255, 255, 0.06);
+    --dark-input-border: rgba(255, 255, 255, 0.12);
+    --dark-text:        rgba(255, 255, 255, 1);
+    --dark-text-body:   rgba(255, 255, 255, 0.8);
+    --dark-text-label:  rgba(255, 255, 255, 0.7);
+    --dark-text-muted:  rgba(255, 255, 255, 0.5);
+    --dark-placeholder: rgba(255, 255, 255, 0.4);
+
     /* ── Shadow System — DISABLED per design directive (no box-shadows anywhere) ── */
     --shadow-xs:  none;
     --shadow-sm:  none;
