@@ -149,7 +149,7 @@ export const TestimonialCarousel = () => {
   return (
     <section
       ref={sectionRef}
-      className="hss-testimonial-theater relative z-10 py-16 md:py-22 lg:py-24"
+      className="hss-testimonial-theater relative z-10 py-6 md:py-22 lg:py-24"
       aria-labelledby="testimonials-heading"
     >
 
@@ -170,7 +170,7 @@ export const TestimonialCarousel = () => {
             id="testimonials-heading"
             data-reveal
             style={{ "--reveal-delay": "100ms" } as React.CSSProperties}
-            className="text-2xl sm:text-4xl md:text-5xl lg:text-[3rem] font-extrabold text-[#1E293B] leading-[1.05] tracking-tight mb-3 mt-4"
+            className="text-xl sm:text-4xl md:text-5xl lg:text-[3rem] font-extrabold text-[#1E293B] leading-[1.05] tracking-tight mb-3 mt-4"
           >
             What families are saying
           </h2>
@@ -189,7 +189,7 @@ export const TestimonialCarousel = () => {
         <div
           data-reveal
           style={{ "--reveal-delay": "300ms" } as React.CSSProperties}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4 max-w-6xl mx-auto"
+          className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4 max-w-6xl mx-auto"
         >
           {testimonials.map((t, i) => {
             const isHovered = hoveredIdx === i;
@@ -203,9 +203,9 @@ export const TestimonialCarousel = () => {
                 onMouseLeave={() => setHoveredIdx(null)}
                 style={{ transitionDelay: anyHovered ? "0ms" : riseDelay }}
                 className={[
-                  "group relative rounded-xl p-3 md:p-3.5",
-                  "bg-white/85 backdrop-blur-md border border-[#1E293B]/8",
-                  "shadow-[0_6px_18px_-10px_rgba(15,23,42,0.15)]",
+                  "group relative rounded-[12px] p-2.5 md:p-3.5",
+                  "bg-white/95 border border-[rgba(0,0,0,0.06)]",
+                  "shadow-none md:shadow-[0_6px_18px_-10px_rgba(15,23,42,0.15)]",
                   "transition-all [transition-duration:600ms]",
                   "[transition-timing-function:cubic-bezier(0.22,1,0.36,1)]",
                   // Smart appear/disappear: when any card is hovered,
@@ -222,46 +222,46 @@ export const TestimonialCarousel = () => {
                 <div
                   aria-hidden="true"
                   className={[
-                    "absolute -top-2 -left-2 w-7 h-7 rounded-lg bg-gradient-to-br from-[#d96c4a] to-[#b8552f]",
+                    "absolute -top-1.5 -left-1.5 w-5 h-5 md:w-7 md:h-7 rounded-md md:rounded-lg bg-gradient-to-br from-[#d96c4a] to-[#b8552f]",
                     "flex items-center justify-center shadow-[0_4px_12px_-4px_rgba(217,108,74,0.5)] border border-white/30",
                     "transition-all [transition-duration:600ms] ease-out",
                     isHovered ? "rotate-[-8deg] scale-110" : "rotate-0 scale-100",
                   ].join(" ")}
                 >
-                  <Quote className="w-3 h-3 text-white" strokeWidth={2.5} />
+                  <Quote className="w-2 h-2 md:w-3 md:h-3 text-white" strokeWidth={2.5} />
                 </div>
 
                 {/* Stars row */}
-                <div className="flex gap-0.5 mb-1.5 mt-0.5 ml-6">
+                <div className="flex gap-0.5 mb-1 mt-0.5 ml-6">
                   {Array.from({ length: t.rating }).map((_, idx) => (
                     <Star
                       key={idx}
-                      className="w-2.5 h-2.5 fill-[#d96c4a] text-[#d96c4a]"
+                      className="w-2 h-2 md:w-2.5 md:h-2.5 fill-[#d96c4a] text-[#d96c4a]"
                     />
                   ))}
                 </div>
 
                 {/* Quote — clamped to keep every card compact + uniform */}
-                <blockquote className="text-[11px] md:text-[11.5px] text-[#475569] leading-snug mb-2.5 italic font-light line-clamp-3">
+                <blockquote className="text-[10px] md:text-[11.5px] text-[#475569] leading-snug mb-2 md:mb-2.5 italic font-light line-clamp-2 md:line-clamp-3">
                   &ldquo;{t.quote}&rdquo;
                 </blockquote>
 
                 {/* Author row — tight */}
-                <figcaption className="flex items-center gap-2 pt-2 border-t border-[#1E293B]/8">
+                <figcaption className="flex items-center gap-1.5 md:gap-2 pt-1.5 md:pt-2 border-t border-[#1E293B]/8">
                   <img
                     src={t.avatar}
                     alt={t.name}
-                    className="w-7 h-7 rounded-full object-cover border border-white shadow-sm flex-shrink-0"
+                    className="w-5 h-5 md:w-7 md:h-7 rounded-full object-cover border border-white shadow-sm flex-shrink-0"
                     loading="lazy"
                     decoding="async"
                     width={28}
                     height={28}
                   />
                   <div className="min-w-0 flex-1">
-                    <div className="font-bold text-[#1E293B] text-[10px] leading-tight truncate">
+                    <div className="font-bold text-[#1E293B] text-[9px] md:text-[10px] leading-tight truncate">
                       {t.name}
                     </div>
-                    <div className="text-[9px] text-[#64748B] truncate">
+                    <div className="text-[8px] md:text-[9px] text-[#64748B] truncate">
                       {t.location}
                     </div>
                   </div>
