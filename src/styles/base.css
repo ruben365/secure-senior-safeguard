@@ -541,12 +541,6 @@
     contain: style;
     position: relative;
     z-index: 1;
-    zoom: 0.75;
-  }
-
-  /* Keep navigation at full size by counter-scaling the zoom */
-  nav {
-    zoom: calc(1 / 0.75);
   }
 
   /* Prevent image flicker and layout shift */
