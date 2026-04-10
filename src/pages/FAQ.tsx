@@ -363,7 +363,14 @@ export default function FAQ() {
             subheadline="Clear answers about our AI services, workshops, and support — no jargon, no runaround."
             overlay={true}
             showScrollIndicator={false}
-          />
+          >
+            <Button size="heroPill" variant="heroPrimary" asChild>
+              <Link to="/contact">Ask a Question</Link>
+            </Button>
+            <Button size="heroPill" variant="heroOutline" asChild>
+              <Link to="/contact">Contact Us</Link>
+            </Button>
+          </Hero>
           <HeroFloatingStats />
         </div>
 

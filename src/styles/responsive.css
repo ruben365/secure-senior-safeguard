@@ -90,12 +90,12 @@
   .hover-scale:active { transform: scale(0.95); }
   .hover-scale:hover { transform: none; }
 
-  /* Touch-friendly tap targets (WCAG 2.5.5) */
+  /* Touch targets — compact but still accessible */
   button,
   a[role="button"],
   [role="button"] {
-    min-height: 44px;
-    min-width: 44px;
+    min-height: 38px;
+    min-width: 38px;
   }
 
   /* Admin dashboard responsive */
@@ -113,17 +113,65 @@
     border-radius: 0;
   }
 
-  /* Section spacing — generous on mobile */
-  .section-spacing { @apply py-10; }
-  .card-mobile { @apply p-4; }
+  /* Section spacing — compact on mobile */
+  .section-spacing { @apply py-6; }
+  .card-mobile { @apply p-3; }
 
-  /* Mobile typography — clean and readable */
-  h1 { font-size: 1.75rem; line-height: 1.15; }
-  h2 { font-size: 1.375rem; line-height: 1.2; }
-  h3 { font-size: 1.125rem; line-height: 1.25; }
+  /* Mobile typography — compressed, no larger than 28px */
+  h1 { font-size: 1.625rem; line-height: 1.2; }
+  h2 { font-size: 1.25rem; line-height: 1.2; }
+  h3 { font-size: 1.0625rem; line-height: 1.25; }
 
-  /* Mobile body text minimum */
-  p, li, span { line-height: 1.6; }
+  /* Mobile body text */
+  p, li, span { font-size: 0.875rem; line-height: 1.5; }
+
+  /* Mobile buttons — compressed height */
+  button, .btn, [role="button"] {
+    font-size: 0.8125rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Mobile cards — tight padding */
+  [data-slot="card"],
+  .bg-card,
+  .glass-card {
+    padding: 0.75rem !important;
+    border-radius: 12px;
+  }
+
+  /* Mobile containers — tighter horizontal padding */
+  .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* Mobile sections — reduced vertical spacing */
+  section { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+
+  /* Hide decorative floating elements on mobile */
+  .hss-float-card,
+  .hss-trust-badge,
+  [class*="float-card"],
+  [class*="floating-stat"],
+  [class*="decorative"] {
+    display: none !important;
+  }
+
+  /* Hero text overlay — stronger gradient for readability */
+  .hero-overlay,
+  [class*="hero"] [class*="overlay"] {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.5) 50%,
+      rgba(0, 0, 0, 0.7) 100%
+    ) !important;
+  }
+
+  /* Card gap compression */
+  .gap-6 { gap: 0.75rem !important; }
+  .gap-8 { gap: 1rem !important; }
 
   /* Disable hover lift/translateY on mobile (no hover on touch) */
   .hover-lift:hover,

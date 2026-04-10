@@ -139,7 +139,14 @@ function Careers() {
           subheadline="Help us protect families from AI-powered scams"
           showProtectionBadge
           badgeText="We're Hiring"
-        />
+        >
+          <Button size="heroPill" variant="heroPrimary" asChild>
+            <Link to="/contact">View Open Positions</Link>
+          </Button>
+          <Button size="heroPill" variant="heroOutline" asChild>
+            <Link to="/about">Learn About Us</Link>
+          </Button>
+        </Hero>
         <HeroFloatingStats />
       </div>
       <div className="h-6" />

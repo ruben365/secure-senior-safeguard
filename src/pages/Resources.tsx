@@ -290,8 +290,7 @@ function Resources() {
               variant="heroOutline"
               onClick={() => setReadBooksOpen(true)}
             >
-              <BookOpen className="h-5 w-5 mr-2" />
-              📖 Read Your Books
+              Read Your Books
             </Button>
           </div>
         </Hero>
