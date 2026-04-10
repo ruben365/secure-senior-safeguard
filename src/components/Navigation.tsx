@@ -306,89 +306,108 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
         </div>
       </nav>
 
-      {/* Mobile Menu — outside nav for proper stacking */}
+      {/* Mobile Menu — right-side slide panel */}
       {mobileMenuOpen && (
-        <div
-          id="mobile-navigation"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Main navigation"
-          className="lg:hidden fixed top-[56px] left-0 right-0 border-t border-white/[0.06] z-[10001] overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch]"
-          style={{
-            background: "rgba(12, 10, 8, 0.75)",
-            backdropFilter: "blur(24px) saturate(1.3)",
-            WebkitBackdropFilter: "blur(24px) saturate(1.3)",
-            animation: "menuSlideDown 250ms ease-out",
-            paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1rem)",
-          }}
-        >
-          <style>{`@keyframes menuSlideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }`}</style>
+        <>
+          <style>{`
+            @keyframes menuSlideIn  { from { transform: translateX(100%); } to { transform: translateX(0); } }
+            @keyframes backdropIn   { from { opacity: 0; } to { opacity: 1; } }
+          `}</style>
 
-          <div className="container mx-auto px-5 py-3">
-            {allLinks.map((link) => {
-              const isActive = isActiveLink(link.href);
-              return (
-                <Link
-                  key={link.name}
-                  to={link.href}
-                  className={`flex items-center text-[14px] font-medium px-5 py-3 transition-colors duration-150 ${
-                    isActive
-                      ? "text-orange-400"
-                      : "text-white/85 hover:text-white hover:bg-white/[0.06]"
-                  }`}
+          {/* Backdrop — click to close */}
+          <div
+            className="lg:hidden fixed inset-0 z-[10000]"
+            style={{ background: "rgba(0,0,0,0.3)", animation: "backdropIn 200ms ease-out" }}
+            onClick={() => setMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
+
+          {/* Panel */}
+          <div
+            id="mobile-navigation"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Main navigation"
+            className="lg:hidden fixed top-[56px] right-0 z-[10001] overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch]"
+            style={{
+              width: "65%",
+              maxWidth: "260px",
+              maxHeight: "calc(80vh - 56px)",
+              background: "rgba(12, 10, 8, 0.92)",
+              backdropFilter: "blur(20px) saturate(1.3)",
+              WebkitBackdropFilter: "blur(20px) saturate(1.3)",
+              borderLeft: "1px solid rgba(255,255,255,0.08)",
+              borderBottomLeftRadius: "12px",
+              animation: "menuSlideIn 250ms ease-out",
+              paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 0.5rem)",
+            }}
+          >
+            <div className="p-4">
+              {allLinks.map((link) => {
+                const isActive = isActiveLink(link.href);
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className={`flex items-center text-[14px] font-medium px-4 py-3 rounded-md transition-colors duration-150 ${
+                      isActive
+                        ? "text-orange-400 border-l-2 border-orange-400 pl-3.5"
+                        : "text-white/85 hover:text-white hover:bg-white/[0.06]"
+                    }`}
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      scrollToTop();
+                    }}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
+
+              <div className="mt-3 pt-3 flex flex-col items-center gap-2 border-t border-white/[0.08]">
+                <button
+                  type="button"
+                  className="h-8 px-5 text-[12px] font-medium rounded-md flex items-center justify-center gap-1.5 transition-colors duration-150 border border-white/20 text-white/70 hover:text-white hover:border-white/30"
                   onClick={() => {
+                    setDonateOpen(true);
                     setMobileMenuOpen(false);
-                    scrollToTop();
                   }}
                 >
-                  {link.name}
-                </Link>
-              );
-            })}
+                  <Heart className="h-3 w-3" />
+                  Donate
+                </button>
 
-            <div className="mt-3 pt-3 flex flex-col items-center gap-2.5 border-t border-white/[0.06]">
-              <button
-                type="button"
-                className="h-9 px-6 text-[13px] font-medium rounded-lg flex items-center justify-center gap-2 transition-colors duration-150 border border-white/20 text-white/70 hover:text-white hover:border-white/30"
-                onClick={() => {
-                  setDonateOpen(true);
-                  setMobileMenuOpen(false);
-                }}
-              >
-                <Heart className="h-3.5 w-3.5" />
-                Donate
-              </button>
+                {isAdminOrStaff ? (
+                  <Link
+                    to="/admin"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="h-8 max-w-[160px] w-full text-[12px] font-semibold rounded-md text-white flex items-center justify-center gap-1.5 transition-all duration-150 bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12]"
+                  >
+                    <LayoutDashboard className="h-3 w-3" />
+                    Dashboard
+                  </Link>
+                ) : (
+                  <Link
+                    to="/portal"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="h-8 max-w-[160px] w-full text-[12px] font-semibold rounded-md text-white flex items-center justify-center transition-all duration-150 bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12]"
+                  >
+                    Login
+                  </Link>
+                )}
 
-              {isAdminOrStaff ? (
-                <Link
-                  to="/admin"
+                <a
+                  href={SITE.phone.tel}
+                  className="flex items-center justify-center gap-1.5 text-[12px] text-white/50 font-medium py-1.5 transition-colors duration-150 hover:text-white/80"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="h-9 max-w-[200px] w-full text-[13px] font-semibold rounded-lg text-white flex items-center justify-center gap-2 transition-all duration-150 bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12]"
                 >
-                  <LayoutDashboard className="h-3.5 w-3.5" />
-                  Dashboard
-                </Link>
-              ) : (
-                <Link
-                  to="/portal"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="h-9 max-w-[200px] w-full text-[13px] font-semibold rounded-lg text-white flex items-center justify-center transition-all duration-150 bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12]"
-                >
-                  Login
-                </Link>
-              )}
-
-              <a
-                href={SITE.phone.tel}
-                className="flex items-center justify-center gap-2 text-[13px] text-white/50 font-medium py-2 transition-colors duration-150 hover:text-white/80"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <Phone className="h-3.5 w-3.5" />
-                {SITE.phone.display}
-              </a>
+                  <Phone className="h-3 w-3" />
+                  {SITE.phone.display}
+                </a>
+              </div>
             </div>
           </div>
-        </div>
+        </>
       )}
 
       <DonationModal
