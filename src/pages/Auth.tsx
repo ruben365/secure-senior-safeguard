@@ -462,38 +462,18 @@ function Auth() {
 
   // Premium input style — subtle bg, warm orange focus ring
   const inputClassName =
-    "h-10 pl-10 text-[14px] bg-slate-50/70 border-slate-200 text-foreground placeholder:text-slate-400 rounded-lg transition-all duration-200 focus:bg-white focus:border-orange-500 hover:border-slate-300";
+    "h-10 pl-10 text-[14px] bg-white border-slate-200 text-foreground placeholder:text-slate-400 rounded-lg transition-all duration-200 focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 hover:border-slate-300";
 
   if (signupSuccess) {
     return (
       <div
-        className="w-full relative flex items-center justify-center p-5 md:p-8 font-sans antialiased"
-        style={{ minHeight: "100vh" }}
+        className="w-full relative flex items-center justify-center p-5 md:p-8 font-sans antialiased bg-gradient-to-br from-[hsl(30,20%,96%)] via-[hsl(30,15%,94%)] to-[hsl(30,20%,96%)]"
+        style={{ minHeight: "calc(100vh / 0.75)" }}
       >
-        {/* Same calm dark backdrop as the main sign-in screen */}
-        <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0b1020] via-[#0e1428] to-[#0a0f1e]" />
-          <svg className="absolute inset-0 w-full h-full opacity-[0.035]">
-            <defs>
-              <pattern id="auth-success-dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
-                <circle cx="1" cy="1" r="1" fill="#ffffff" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#auth-success-dots)" />
-          </svg>
-          <div className="absolute -top-40 -left-40 h-[520px] w-[520px] rounded-full bg-emerald-500/10 blur-[140px]" />
-          <div className="absolute -bottom-40 -right-40 h-[560px] w-[560px] rounded-full bg-indigo-500/12 blur-[160px]" />
-        </div>
-
         <div className="relative z-10 w-full max-w-[440px]">
-          <div className="relative rounded-xl bg-white border border-slate-200 p-5 md:p-7 text-center">
-            <div
-              aria-hidden="true"
-              className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-slate-300/80 to-transparent"
-            />
+          <div className="relative rounded-xl bg-white border border-slate-200 p-5 md:p-7 text-center shadow-[0_4px_24px_-4px_rgba(80,40,80,0.1),0_1px_3px_rgba(80,40,80,0.06)]">
             <div className="relative w-14 h-14 mx-auto mb-5">
-              <div className="absolute inset-0 rounded-2xl bg-emerald-500/20 blur-xl" />
-              <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center shadow-[0_12px_28px_-8px_rgba(16,185,129,0.5),inset_0_1px_0_0_rgba(255,255,255,0.35)] border border-white/20">
+              <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center shadow-[0_4px_12px_-2px_rgba(16,185,129,0.3)]">
                 <CheckCircle2 className="w-7 h-7 text-white" strokeWidth={2.25} />
               </div>
             </div>
