@@ -158,9 +158,9 @@ function QRCodePayment({
               Expires in {formatTime(timeLeft)}
             </Badge>
           </div>
-          <p className="text-sm text-white/70">
+          <p className="text-sm text-muted-foreground">
             Scan to pay{" "}
-            <strong className="text-white font-bold">${total.toFixed(2)}</strong>
+            <strong className="text-foreground font-bold">${total.toFixed(2)}</strong>
           </p>
           <Button variant="outline" onClick={generateQRCode} size="sm">
             Generate New Code
@@ -458,11 +458,11 @@ function CardPaymentWrapper({
             <div className="w-5 h-5 rounded-full bg-orange-600 text-white text-[11px] flex items-center justify-center font-bold">
               1
             </div>
-            <h3 className="text-[14px] font-semibold text-white">Contact Information</h3>
+            <h3 className="text-[14px] font-semibold text-foreground">Contact Information</h3>
           </div>
 
           <div className="relative">
-            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/40" />
+            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground/60" />
             <Input
               placeholder="Your Name *"
               value={formData.name}
@@ -475,7 +475,7 @@ function CardPaymentWrapper({
           </div>
 
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/40" />
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground/60" />
             <Input
               type="email"
               placeholder="Email * (for receipt)"
@@ -529,13 +529,13 @@ function CardPaymentWrapper({
             <div className="w-5 h-5 rounded-full bg-orange-600 text-white text-[11px] flex items-center justify-center font-bold ml-auto">
               2
             </div>
-            <h3 className="text-[14px] font-semibold text-white">Payment</h3>
+            <h3 className="text-[14px] font-semibold text-foreground">Payment</h3>
           </div>
 
-          <div className="p-2.5 bg-white/[0.04] rounded-lg text-[13px] flex items-center gap-2 text-white/70 border border-white/8">
-            <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
+          <div className="p-2.5 bg-muted/50 rounded-lg text-[13px] flex items-center gap-2 text-muted-foreground border border-border/70">
+            <CheckCircle className="w-3.5 h-3.5 text-emerald-500" />
             <span>
-              Paying as <strong className="text-white">{formData.email}</strong>
+              Paying as <strong className="text-foreground">{formData.email}</strong>
             </span>
           </div>
 
@@ -610,7 +610,7 @@ export function EnhancedCheckoutDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[420px] overflow-hidden p-0 gap-0" style={{ WebkitFontSmoothing: "antialiased", MozOsxFontSmoothing: "grayscale", textRendering: "optimizeLegibility" }}>
         {/* Header */}
-        <div className="px-3 sm:px-5 py-2.5 border-b border-white/8">
+        <div className="px-3 sm:px-5 py-2.5 border-b border-border/70">
           <DialogHeader className="space-y-0">
             <div className="flex items-center gap-2 mb-0.5">
               <div className="p-1.5 bg-orange-500/15 rounded-md">
@@ -681,21 +681,21 @@ export function EnhancedCheckoutDialog({
           {/* Order Summary Sidebar - Compact */}
           <div className="md:col-span-2">
             <div className="space-y-3">
-              <div className="p-3 bg-white/[0.04] rounded-xl border border-white/8">
-                <h4 className="font-semibold text-sm mb-2 text-white">Order Summary</h4>
+              <div className="p-3 bg-muted/30 rounded-xl border border-border/70">
+                <h4 className="font-semibold text-sm mb-2 text-foreground">Order Summary</h4>
                 <div className="space-y-1 mb-3">
                   {items.slice(0, 3).map((item) => (
                     <div key={item.id} className="flex justify-between text-xs">
-                      <span className="text-white/60 truncate max-w-[120px]">
+                      <span className="text-muted-foreground truncate max-w-[120px]">
                         {item.name} × {item.quantity}
                       </span>
-                      <span className="font-medium text-white">
+                      <span className="font-medium text-foreground">
                         ${(item.price * item.quantity).toFixed(2)}
                       </span>
                     </div>
                   ))}
                   {items.length > 3 && (
-                    <p className="text-xs text-white/50">
+                    <p className="text-xs text-muted-foreground">
                       +{items.length - 3} more items
                     </p>
                   )}
@@ -707,14 +707,14 @@ export function EnhancedCheckoutDialog({
                   discountPercent={10}
                 />
 
-                <div className="border-t border-white/8 pt-2 mt-2">
+                <div className="border-t border-border/70 pt-2 mt-2">
                   {veteranDiscount > 0 && (
                     <div className="flex justify-between text-xs text-emerald-400 mb-1">
                       <span>Veteran Discount</span>
                       <span>-${veteranDiscount.toFixed(2)}</span>
                     </div>
                   )}
-                  <div className="flex justify-between font-bold text-white">
+                  <div className="flex justify-between font-bold text-foreground">
                     <span>Total</span>
                     <span className="text-orange-400">
                       ${finalTotal.toFixed(2)}

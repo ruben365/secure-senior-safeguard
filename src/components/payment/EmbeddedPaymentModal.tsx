@@ -680,7 +680,7 @@ export function EmbeddedPaymentModal({
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-[15px] max-sm:text-[13px] font-semibold leading-none text-white">Secure Checkout</span>
+                <span className="text-[15px] max-sm:text-[13px] font-semibold leading-none text-foreground">Secure Checkout</span>
                 <Badge variant="outline" className="text-[10px] max-sm:text-[9px] font-normal px-1.5 py-0 h-[18px] max-sm:h-4">
                   <Lock className="w-2.5 h-2.5 mr-1" />
                   Stripe
