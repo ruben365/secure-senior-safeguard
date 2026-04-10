@@ -727,7 +727,7 @@ function Auth() {
         RIGHT: the clean white auth card with the existing form.
       */}
       <div className="relative z-10 w-full max-w-[960px] mx-auto flex items-center justify-center p-4 md:p-6 lg:p-8">
-        <div className="w-full grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-8 lg:gap-14 items-center">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-[0.82fr_1fr] gap-8 lg:gap-14 items-center">
 
           {/* LEFT — brand pane (desktop only) */}
           <aside className="hidden lg:flex flex-col text-white pr-2">
@@ -880,16 +880,16 @@ function Auth() {
             onValueChange={setActiveTab}
             className="w-full"
           >
-            <TabsList className="grid w-full grid-cols-2 mb-6 bg-slate-100">
+            <TabsList className="grid w-full grid-cols-2 mb-6 h-11 bg-slate-100 rounded-lg p-1">
               <TabsTrigger
                 value="login"
-                className="data-[state=active]:bg-white data-[state=active]:shadow-sm"
+                className="h-9 text-[14px] font-semibold data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-md"
               >
                 Sign In
               </TabsTrigger>
               <TabsTrigger
                 value="signup"
-                className="data-[state=active]:bg-white data-[state=active]:shadow-sm"
+                className="h-9 text-[14px] font-semibold data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-md"
               >
                 Sign Up
               </TabsTrigger>
@@ -1052,7 +1052,7 @@ function Auth() {
 
                 <Button
                   type="submit"
-                  className="w-full h-10 text-[14px] font-semibold rounded-lg bg-[#080d1a] text-white border border-[#1e293b] hover:bg-[#111827] hover:-translate-y-[1px] active:translate-y-[0.5px] transition-all duration-200"
+                  className="w-full h-11 text-[14px] font-semibold rounded-lg bg-[#3E2723] text-white border border-[#4E342E] hover:bg-[#4E342E] hover:-translate-y-[1px] active:translate-y-[0.5px] transition-all duration-200"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -1304,7 +1304,7 @@ function Auth() {
 
                 <Button
                   type="submit"
-                  className="w-full h-10 text-[14px] font-semibold rounded-lg bg-[#080d1a] text-white border border-[#1e293b] hover:bg-[#111827] hover:-translate-y-[1px] active:translate-y-[0.5px] transition-all duration-200"
+                  className="w-full h-11 text-[14px] font-semibold rounded-lg bg-[#3E2723] text-white border border-[#4E342E] hover:bg-[#4E342E] hover:-translate-y-[1px] active:translate-y-[0.5px] transition-all duration-200"
                   disabled={isLoading}
                 >
                   {isLoading ? (

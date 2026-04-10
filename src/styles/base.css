@@ -407,44 +407,46 @@
   }
 
   /* ═══════════════════════════════════════════════════════════════════
-     PERMANENT FIX: Readable text on ALL dark surfaces
+     READABLE TEXT ON DARK SURFACES
      ───────────────────────────────────────────────────────────────────
-     Dialogs, modals, sheets, alert-dialogs, and popovers have dark
-     glass backgrounds.  Re-scope the core theme tokens so Tailwind
-     classes like text-foreground, text-muted-foreground, bg-muted,
-     border-border resolve to light/white values inside these surfaces.
-     This is a single-point fix — every current and future dialog
-     inherits readable text automatically.
+     Only dark-background dialogs/modals/sheets get white text tokens.
+     Uses .dark-surface class + specific dark-bg selectors so light
+     popover/select/dropdown content keeps dark text.
+     Alpha-free values — let Tailwind handle opacity via /XX syntax.
      ═══════════════════════════════════════════════════════════════════ */
-  [role="dialog"],
-  [role="alertdialog"],
-  [data-radix-popper-content-wrapper] {
-    /* Text */
+  .dark-surface,
+  [role="dialog"][class*="bg-[rgba(18"],
+  [role="dialog"][class*="bg-[rgba(15"],
+  [role="alertdialog"][class*="bg-[rgba(18"],
+  [role="alertdialog"][class*="bg-[rgba(15"],
+  [role="dialog"][class*="dark"],
+  [role="alertdialog"][class*="dark"] {
+    /* Text — solid, no embedded alpha */
     --foreground: 0 0% 100%;               /* white */
     --card-foreground: 0 0% 100%;
     --popover-foreground: 0 0% 100%;
-    --muted-foreground: 0 0% 100% / 0.65;  /* white @ 65% — secondary/muted */
+    --muted-foreground: 0 0% 70%;          /* light gray — no alpha */
 
-    /* Surfaces */
-    --muted: 0 0% 100% / 0.08;
-    --card: 0 0% 100% / 0.06;
-    --background: 0 0% 100% / 0.04;
+    /* Surfaces — solid dark tones */
+    --muted: 0 0% 20%;
+    --card: 0 0% 15%;
+    --background: 0 0% 10%;
 
-    /* Borders & inputs */
-    --border: 0 0% 100% / 0.12;
-    --input: 0 0% 100% / 0.10;
+    /* Borders & inputs — solid dark grays */
+    --border: 0 0% 25%;
+    --input: 0 0% 22%;
     --ring: 25 95% 53%;                     /* keep accent orange ring */
-
-    /* Success/destructive stay the same (already bright enough) */
   }
 
-  /* Links inside dialogs: orange accent for visibility */
-  [role="dialog"] a:not([class*="Button"]):not([role="button"]),
-  [role="alertdialog"] a:not([class*="Button"]):not([role="button"]) {
+  /* Links inside dark dialogs: orange accent for visibility */
+  .dark-surface a:not([class*="Button"]):not([role="button"]),
+  [role="dialog"][class*="bg-[rgba(18"] a:not([class*="Button"]):not([role="button"]),
+  [role="alertdialog"][class*="bg-[rgba(18"] a:not([class*="Button"]):not([role="button"]) {
     color: #F97316;
   }
-  [role="dialog"] a:not([class*="Button"]):not([role="button"]):hover,
-  [role="alertdialog"] a:not([class*="Button"]):not([role="button"]):hover {
+  .dark-surface a:not([class*="Button"]):not([role="button"]):hover,
+  [role="dialog"][class*="bg-[rgba(18"] a:not([class*="Button"]):not([role="button"]):hover,
+  [role="alertdialog"][class*="bg-[rgba(18"] a:not([class*="Button"]):not([role="button"]):hover {
     color: #fb923c;
   }
 

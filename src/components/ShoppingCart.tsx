@@ -59,8 +59,8 @@ export function ShoppingCart() {
                 maxHeight: "80vh",
               }}
             >
-              {/* Inner wrapper — auto height, scrollable items */}
-              <div className="flex flex-col max-h-[80vh] sm:max-h-none">
+              {/* Inner wrapper — capped height, scrollable items, sticky footer */}
+              <div className="flex flex-col max-h-[80vh]">
                 {/* Header */}
                 <div className="flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 border-b border-white/8 flex-shrink-0">
                   <div className="flex items-center gap-2">
