@@ -28,8 +28,8 @@ html {
 [role="dialog"] input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
 [role="alertdialog"] input:not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
   height: 2.5rem !important;        /* 40px */
-  padding-top: 0.375rem !important;
-  padding-bottom: 0.375rem !important;
+  padding-top: 0.4rem !important;
+  padding-bottom: 0.4rem !important;
   padding-left: 0.75rem !important;
   padding-right: 0.75rem !important;
   border-radius: 0.5rem !important;
@@ -56,8 +56,6 @@ html {
 [role="dialog"] button.h-\[44px\],
 [role="dialog"] button.h-\[56px\],
 [role="dialog"] button.h-\[50px\],
-[role="dialog"] button.h-\[48px\],
-[role="dialog"] button.h-\[40px\],
 [role="alertdialog"] button.h-\[52px\],
 [role="alertdialog"] button.h-\[44px\] {
   height: 2.5rem !important;        /* 40px */
@@ -326,9 +324,9 @@ a[href^="#"] {
    DIALOG & GLASS PANEL READABILITY — compact text, high-contrast
    ═══════════════════════════════════════════════════════════════════ */
 
-/* ── Dialog interior text — standard 440px modal ── */
+/* ── Dialog interior text — compact for 380px modal ── */
 [role="dialog"] {
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.5;
 }
 
@@ -338,7 +336,7 @@ a[href^="#"] {
   font-size: 16px;
   line-height: 1.25;
   font-weight: 700;
-  color: white;
+  color: hsl(var(--foreground));
   letter-spacing: -0.01em;
 }
 
@@ -346,32 +344,32 @@ a[href^="#"] {
 [role="dialog"] h5 {
   font-size: 14px;
   font-weight: 600;
-  color: white;
+  color: hsl(var(--foreground));
 }
 
 [role="dialog"] p {
-  font-size: 13px;
+  font-size: 12.5px;
   line-height: 1.5;
-  color: hsl(30 15% 85%);
-  margin: 0 0 0.5rem;
+  color: hsl(var(--foreground) / 0.82);
+  margin: 0 0 0.4rem;
 }
 
 [role="dialog"] label {
   font-size: 12px;
   font-weight: 600;
-  color: hsl(30 15% 72%);
+  color: hsl(var(--foreground) / 0.88);
 }
 
 [role="dialog"] input,
 [role="dialog"] textarea,
 [role="dialog"] select {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 /* Buttons inside dialogs */
 [role="dialog"] button {
-  min-height: 36px;
-  font-size: 14px;
+  min-height: 34px;
+  font-size: 13px;
 }
 
 /* ── Glass panel text readability ──────────────────────────────

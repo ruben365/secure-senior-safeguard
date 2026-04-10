@@ -228,7 +228,30 @@ main select:focus {
 nav { z-index: 50 !important; }
 [role="dialog"] { z-index: 60 !important; }
 
-/* cookie-banner styles removed — now inline in CookieConsent.tsx */
+/* ── Cookie consent banner ── */
+.cookie-banner {
+  animation: cookieSlideUp 0.4s ease-out;
+  contain: layout style paint;
+}
+
+.cookie-banner__card {
+  background: rgba(12, 12, 16, 0.6);
+  -webkit-backdrop-filter: blur(24px) saturate(130%);
+  backdrop-filter: blur(24px) saturate(130%);
+  border: 1px solid rgba(48, 103, 232, 0.25);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+  animation: cookieBorderGlow 4s ease-in-out infinite;
+}
+
+@keyframes cookieSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cookieBorderGlow {
+  0%, 100% { border-color: rgba(48, 103, 232, 0.3); box-shadow: 0 0 15px rgba(48, 103, 232, 0.08); }
+  50% { border-color: rgba(107, 70, 193, 0.35); box-shadow: 0 0 20px rgba(107, 70, 193, 0.1); }
+}
 
 /* ── Reduce motion preference ── */
 @media (prefers-reduced-motion: reduce) {

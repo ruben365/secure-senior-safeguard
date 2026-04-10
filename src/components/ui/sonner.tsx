@@ -31,7 +31,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
           warning:
             "group-[.toast]:[&>svg]:text-amber-400",
           info:
-            "group-[.toast]:[&>svg]:text-orange-400",
+            "group-[.toast]:[&>svg]:text-blue-400",
         },
       }}
       {...props}

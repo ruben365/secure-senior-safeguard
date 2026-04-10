@@ -282,7 +282,12 @@ export const TestimonialCarousel = () => {
       className="hss-testimonial-theater relative z-10 py-16 md:py-22 lg:py-24"
       aria-labelledby="testimonials-heading"
     >
-      {/* Clean section — no decorative noise */}
+      {/* Ambient glows */}
+      <div aria-hidden="true" className="hss-testimonial-glow-left" />
+      <div aria-hidden="true" className="hss-testimonial-glow-right" />
+
+      {/* Dotted world map backdrop — amber + slate at low opacity */}
+      <WorldMapBackdrop />
 
       <div className="relative z-10 container mx-auto px-6 lg:px-8">
 

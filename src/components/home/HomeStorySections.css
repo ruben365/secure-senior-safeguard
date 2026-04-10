@@ -23,8 +23,11 @@
    semi-transparent background. No blend mode, no z-index fighting. */
 .home-color-wash {
   background:
+    /* Soft warm coral top-left */
     radial-gradient(ellipse 55% 40% at 12% 8%, rgba(217, 108, 74, 0.09) 0%, transparent 65%),
+    /* Soft peach mid-right — replaces cool lavender that conflicted with brand */
     radial-gradient(ellipse 50% 40% at 85% 35%, rgba(251, 171, 142, 0.12) 0%, transparent 68%),
+    /* Soft warm amber bottom-left */
     radial-gradient(ellipse 50% 35% at 18% 88%, rgba(249, 115, 22, 0.08) 0%, transparent 65%),
     hsl(var(--background));
 }
@@ -67,14 +70,15 @@
   transform: translateZ(0);
 }
 
-/* Alternate section tint */
+/* Alternate section tint — 88% opaque, lets a hint of the wash bleed
+   through at the edges but keeps widgets readable. */
 .hss-section-tint {
-  background: #fef6f1;
+  background: hsl(var(--muted) / 0.88);
 }
 
-/* Editorial section — pure white background */
+/* Editorial section — 88% opaque for the same reason */
 .hss-section-white {
-  background: #ffffff;
+  background: hsl(var(--card) / 0.88);
 }
 
 /* ─────────────────────────────────────────────────────────────────

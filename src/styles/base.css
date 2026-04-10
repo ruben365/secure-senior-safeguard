@@ -187,34 +187,6 @@
     --gold-400: 42 92% 58%;
     --gold-300: 46 88% 68%;
 
-    /* ═══ NEO-TACTILE LIGHT CONTENT SYSTEM ═══
-       Light surfaces for content sections between dark hero and footer.
-       Warm cream/white canvas with walnut + copper accents. */
-
-    /* Surfaces */
-    --surface-base: #FAFAF8;     /* warm white, slightly cream */
-    --surface-raised: #FFFFFF;   /* pure white for cards */
-    --surface-inset: #F5F3F0;   /* subtle warm gray for alternating sections */
-    --surface-pressed: #EEEBE7; /* pressed/active state */
-
-    /* Walnut accent spectrum */
-    --accent-walnut: #2E1F1B;        /* deep walnut — headings */
-    --accent-walnut-medium: #5E4B43; /* medium walnut — body text */
-    --accent-walnut-light: #8B7D75;  /* muted warm gray — labels */
-
-    /* Copper metallic accent */
-    --accent-copper: #B87333;        /* copper — links, icons, CTAs */
-    --accent-copper-light: #D4956B;  /* lighter copper — hover */
-
-    /* Warm cream/sand — borders, fills */
-    --accent-warm-cream: #F0E6D8;    /* cream for borders and dividers */
-    --accent-warm-sand: #E8DDD0;     /* sand for subtle fills */
-
-    /* Text on light surfaces */
-    --text-on-light-primary: #2E1F1B;   /* walnut dark */
-    --text-on-light-secondary: #5E4B43; /* medium walnut */
-    --text-on-light-muted: #8B7D75;     /* muted warm gray */
-
     /* ── Shadow System — DISABLED per design directive (no box-shadows anywhere) ── */
     --shadow-xs:  none;
     --shadow-sm:  none;
@@ -253,31 +225,25 @@
     --space-24:  6rem;      /* 96px  */
     --space-32:  8rem;      /* 128px */
 
-    /* Section vertical padding — standard */
-    --section-py-xs:  1.5rem;
-    --section-py-sm:  2.5rem;
-    --section-py-md:  4rem;
-    --section-py-lg:  5rem;
-    --section-py-xl:  6rem;
+    /* Section vertical padding — compact scale */
+    --section-py-xs:  1rem;     /* tight */
+    --section-py-sm:  1.75rem;  /* compact */
+    --section-py-md:  2.75rem;  /* default */
+    --section-py-lg:  4rem;     /* spacious */
+    --section-py-xl:  5.5rem;   /* hero/feature */
 
-    /* Container widths — standard 1280px */
-    --container-xs:   480px;
-    --container-sm:   640px;
-    --container-md:   768px;
-    --container-lg:   1024px;
-    --container-xl:   1200px;
-    --container-2xl:  1280px;
+    /* Container widths — compact */
+    --container-xs:   400px;
+    --container-sm:   540px;
+    --container-md:   680px;
+    --container-lg:   880px;
+    --container-xl:   1040px;
+    --container-2xl:  1140px;
     --container-wide: 1280px;
     --container-max:  1440px;
 
-    /* Global text scale — 1.0 = 16px standard base */
-    --text-scale: 1;
-
-    /* ── Warm neutral accent — coffee/taupe balance tone ── */
-    --warm: 30 15% 72%;
-    --warm-light: 30 15% 85%;
-    --warm-dark: 30 15% 55%;
-    --warm-bg: 30 10% 12%;
+    /* Global text scale — 0.875 = 14px base (compact but readable) */
+    --text-scale: 0.875;
 
     /* ── Shadow XL token — DISABLED ── */
     --shadow-xl: none;
@@ -414,7 +380,7 @@
 
   @media (max-width: 768px) {
     :root {
-      --text-scale: 1; /* standard — no reduction on mobile */
+      --text-scale: 0.9; /* slightly larger than desktop 0.85 for mobile readability */
     }
   }
 
@@ -539,59 +505,63 @@
   }
 
   h1 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    /* Compact: ~28-36px range (was 34-64px with old zoom) */
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
     letter-spacing: -0.02em;
     line-height: 1.1;
     font-weight: 900;
   }
 
   h2 {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    /* Compact: ~22-28px range */
+    font-size: clamp(1.375rem, 3vw, 2rem);
     letter-spacing: -0.015em;
     line-height: 1.15;
     font-weight: 800;
   }
 
   h3 {
-    font-size: clamp(1.25rem, 3vw, 1.875rem);
+    /* Compact: ~18-22px range */
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
     letter-spacing: -0.01em;
     line-height: 1.2;
     font-weight: 700;
   }
 
   h4 {
-    font-size: clamp(1.125rem, 2vw + 0.25rem, 1.5rem);
+    /* Compact: ~16-18px range */
+    font-size: clamp(1rem, 1.5vw + 0.25rem, 1.25rem);
     letter-spacing: -0.008em;
     line-height: 1.25;
     font-weight: 600;
   }
 
   h5 {
-    font-size: clamp(1rem, 1vw + 0.25rem, 1.25rem);
+    font-size: clamp(0.9375rem, 1vw + 0.2rem, 1.125rem);
     letter-spacing: -0.01em;
     line-height: 1.3;
     font-weight: 600;
   }
 
   h6 {
-    font-size: clamp(0.9375rem, 0.5vw + 0.25rem, 1.125rem);
+    font-size: clamp(0.875rem, 0.5vw + 0.2rem, 1rem);
     letter-spacing: -0.008em;
     line-height: 1.4;
     font-weight: 600;
   }
 
   p {
-    font-size: 1rem;
-    line-height: 1.7;
+    font-size: 0.9375rem; /* 15px at 16px base, ~13px with 0.85 scale */
+    line-height: 1.65;
     letter-spacing: -0.011em;
-    margin: 0 0 1rem;
+    margin: 0 0 0.75rem;
     color: hsl(var(--foreground) / 0.85);
     max-width: 65ch;
   }
 
   .lead {
-    font-size: clamp(1.125rem, 1.5vw + 0.25rem, 1.375rem);
-    line-height: 1.65;
+    font-size: clamp(1rem, 1.25vw + 0.25rem, 1.175rem);
+    line-height: 1.6;
     color: hsl(var(--muted-foreground));
     font-weight: 400;
     max-width: 70ch;
@@ -625,12 +595,12 @@
     line-height: 1.6;
   }
 
-  /* Tap targets — 40px desktop, 44px mobile */
+  /* Tap targets — 36px desktop, 44px mobile (no zoom to compensate for) */
   button,
   [role="button"],
   a[role="button"] {
-    min-height: 40px;
-    min-width: 40px;
+    min-height: 36px;
+    min-width: 36px;
   }
 
   @media (max-width: 768px) {

@@ -52,7 +52,7 @@ const Hero = ({
   return (
     <div
       className={cn(
-        "relative w-full min-h-[500px] max-h-[600px] flex items-center overflow-hidden hero-mobile",
+        "relative w-full min-h-[115dvh] md:min-h-[125dvh] lg:min-h-[135dvh] flex items-center overflow-hidden hero-mobile",
         className,
       )}
     >

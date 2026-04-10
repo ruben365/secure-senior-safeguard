@@ -65,17 +65,11 @@ const SheetContent = React.forwardRef<
     <SheetPrimitive.Content
       ref={ref}
       className={cn(sheetVariants({ side }), className)}
-      style={{
-        background: "rgba(18, 14, 12, 0.92)",
-        backdropFilter: "blur(20px) saturate(1.3)",
-        WebkitBackdropFilter: "blur(20px) saturate(1.3)",
-        borderColor: "hsl(30 15% 85% / 0.12)",
-      }}
       {...props}
     >
       {children}
-      <SheetPrimitive.Close className="absolute right-3 top-3 rounded-full w-7 h-7 flex items-center justify-center text-[hsl(30_15%_72%)] hover:text-white transition-colors focus:outline-none disabled:pointer-events-none">
-        <X className="h-3.5 w-3.5" />
+      <SheetPrimitive.Close className="absolute right-4 top-4 rounded-full p-1 opacity-70 ring-offset-background transition-all data-[state=open]:bg-secondary hover:opacity-100 hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none">
+        <X className="h-4 w-4" />
         <span className="sr-only">Close</span>
       </SheetPrimitive.Close>
     </SheetPrimitive.Content>
@@ -117,7 +111,7 @@ const SheetTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Title
     ref={ref}
-    className={cn("text-[14px] font-semibold text-white leading-tight tracking-tight", className)}
+    className={cn("text-[18px] font-semibold text-foreground leading-tight tracking-tight", className)}
     {...props}
   />
 ));
@@ -129,7 +123,7 @@ const SheetDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Description
     ref={ref}
-    className={cn("text-[12px] text-[hsl(30_15%_85%)] leading-snug", className)}
+    className={cn("text-[13px] text-muted-foreground leading-snug", className)}
     {...props}
   />
 ));
