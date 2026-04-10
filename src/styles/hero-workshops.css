@@ -105,9 +105,9 @@
   justify-content: center;
   width: 100%;
   margin: 0;
-  padding-top: clamp(90px, 12vw, 130px);
+  padding-top: clamp(100px, 14vw, 140px);
   padding-right: 0;
-  padding-bottom: 2rem;
+  padding-bottom: 2.5rem;
   padding-left: 0;
 }
 
@@ -558,7 +558,7 @@
   margin-top: auto;
   background: transparent;
   border: none;
-  padding: 1.5rem 0;
+  padding: 2rem 0;
   animation: wsPanelUp 0.5s ease-out 0.3s both;
 }
 

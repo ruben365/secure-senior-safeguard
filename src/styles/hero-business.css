@@ -20,12 +20,10 @@
   position: relative;
   min-height: 100dvh;
   width: 100%;
-  overflow: visible;
+  overflow: hidden;
   background-color: var(--biz-bg);
   display: flex;
   flex-direction: column;
-  margin-bottom: -4px;
-  padding-bottom: 4px;
 }
 
 @media (min-width: 1024px) {
@@ -101,9 +99,9 @@
   justify-content: center;
   width: 100%;
   margin: 0;
-  padding-top: clamp(110px, 12vw, 150px);
+  padding-top: clamp(100px, 14vw, 140px);
   padding-right: 0;
-  padding-bottom: clamp(220px, 18vw, 290px);
+  padding-bottom: 2.5rem;
   padding-left: 0;
 }
 
@@ -243,7 +241,7 @@
   position: relative;
   z-index: 20;
   margin-top: auto;
-  padding: 1.5rem 0;
+  padding: 2rem 0;
   animation: bizPanelUp 0.7s ease-out 0.6s both;
 }
 
