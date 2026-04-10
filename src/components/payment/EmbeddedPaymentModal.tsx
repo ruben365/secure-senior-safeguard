@@ -179,13 +179,13 @@ function PaymentForm({
   };
 
   return (
-    <div className="space-y-3.5">
+    <div className="space-y-3.5 max-sm:space-y-2">
       {/* Progress Steps */}
-      <div className="flex items-center justify-center gap-1.5 mb-1">
+      <div className="flex items-center justify-center gap-1.5 mb-1 max-sm:mb-0">
         {["info", "payment", "success"].map((s, i) => (
-          <div key={s} className="flex items-center gap-2">
+          <div key={s} className="flex items-center gap-2 max-sm:gap-1">
             <div
-              className={`w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold transition-all ${
+              className={`w-6 h-6 max-sm:w-4 max-sm:h-4 rounded-full flex items-center justify-center text-[11px] max-sm:text-[9px] font-bold transition-all ${
                 step === s
                   ? "bg-primary text-primary-foreground"
                   : ["info", "payment", "success"].indexOf(step) > i
@@ -194,14 +194,14 @@ function PaymentForm({
               }`}
             >
               {["info", "payment", "success"].indexOf(step) > i ? (
-                <CheckCircle className="w-3 h-3" />
+                <CheckCircle className="w-3 h-3 max-sm:w-2 max-sm:h-2" />
               ) : (
                 i + 1
               )}
             </div>
             {i < 2 && (
               <div
-                className={`w-8 h-0.5 rounded ${
+                className={`w-8 max-sm:w-5 h-0.5 rounded ${
                   ["info", "payment", "success"].indexOf(step) > i
                     ? "bg-primary"
                     : "bg-muted"
@@ -223,106 +223,112 @@ function PaymentForm({
             className="space-y-3"
           >
             {/* Product Summary */}
-            <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg p-3 border border-primary/20">
-              <div className="flex items-center justify-between gap-3">
+            <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg p-3 max-sm:p-2 border border-primary/20">
+              <div className="flex items-center justify-between gap-3 max-sm:gap-2">
                 <div className="min-w-0">
-                  <h3 className="font-semibold text-sm truncate">{productName}</h3>
+                  <h3 className="font-semibold text-sm max-sm:text-xs truncate">{productName}</h3>
                   {description && (
-                    <p className="text-xs text-muted-foreground line-clamp-1">
+                    <p className="text-xs max-sm:text-[10px] text-muted-foreground line-clamp-1">
                       {description}
                     </p>
                   )}
                 </div>
                 <div className="text-right flex-shrink-0">
-                  <div className="text-lg font-bold text-primary">
+                  <div className="text-lg max-sm:text-sm font-bold text-primary">
                     ${(finalAmount / 100).toFixed(2)}
                   </div>
                   {mode === "subscription" && (
-                    <span className="text-xs text-muted-foreground">
+                    <span className="text-xs max-sm:text-[10px] text-muted-foreground">
                       /month
                     </span>
                   )}
                 </div>
               </div>
               {isVeteran && veteranDiscount > 0 && (
-                <div className="mt-2 pt-2 border-t border-primary/20">
-                  <Badge className="bg-success/20 text-success border-success/30">
+                <div className="mt-2 max-sm:mt-1 pt-2 max-sm:pt-1 border-t border-primary/20">
+                  <Badge className="bg-success/20 text-success border-success/30 max-sm:text-[10px] max-sm:h-5">
                     <Shield className="w-3 h-3 mr-1" />
-                    Veteran Discount: -${(veteranDiscount / 100).toFixed(2)}
+                    Veteran: -${(veteranDiscount / 100).toFixed(2)}
                   </Badge>
                 </div>
               )}
             </div>
 
-            {/* Features List */}
+            {/* Features List — collapsed to single line on mobile */}
             {features && features.length > 0 && (
-              <div className="space-y-2">
-                {features.slice(0, 4).map((feature, i) => (
-                  <div key={i} className="flex items-center gap-2 text-sm">
-                    <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span>{feature}</span>
-                  </div>
-                ))}
-              </div>
+              <>
+                <div className="space-y-2 hidden sm:block">
+                  {features.slice(0, 4).map((feature, i) => (
+                    <div key={i} className="flex items-center gap-2 text-sm">
+                      <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
+                      <span>{feature}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-[10px] text-muted-foreground sm:hidden leading-snug">
+                  <span className="font-medium text-foreground">Includes:</span>{" "}
+                  {features.slice(0, 4).join(" · ")}
+                </p>
+              </>
             )}
 
             {/* Form Fields */}
-            <div className="space-y-2.5">
+            <div className="space-y-2.5 max-sm:space-y-1.5">
               <div>
-                <Label htmlFor="email">Email Address</Label>
+                <Label htmlFor="email" className="max-sm:text-[11px]">Email Address</Label>
                 <Input
                   id="email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="your@email.com"
-                  className="mt-1"
+                  className="mt-1 max-sm:mt-0.5 max-sm:h-9 max-sm:text-[13px]"
                 />
               </div>
 
               <div>
-                <Label htmlFor="name">Full Name</Label>
+                <Label htmlFor="name" className="max-sm:text-[11px]">Full Name</Label>
                 <Input
                   id="name"
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Your full name"
-                  className="mt-1"
+                  className="mt-1 max-sm:mt-0.5 max-sm:h-9 max-sm:text-[13px]"
                 />
               </div>
 
               {/* Veteran Discount Toggle */}
-              <div className="flex items-center justify-between p-3 bg-muted/50 rounded-xl border">
-                <div className="flex items-center gap-3">
-                  <Shield className="w-5 h-5 text-primary" />
+              <div className="flex items-center justify-between p-3 max-sm:py-1.5 max-sm:px-3 bg-muted/50 rounded-xl border max-sm:h-9">
+                <div className="flex items-center gap-3 max-sm:gap-2">
+                  <Shield className="w-5 h-5 max-sm:w-4 max-sm:h-4 text-primary" />
                   <div>
-                    <p className="text-sm font-medium">Veteran Discount</p>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-sm max-sm:text-[11px] font-medium">Veteran Discount</p>
+                    <p className="text-xs text-muted-foreground max-sm:hidden">
                       10% off for veterans & military
                     </p>
                   </div>
                 </div>
-                <Switch checked={isVeteran} onCheckedChange={setIsVeteran} />
+                <Switch checked={isVeteran} onCheckedChange={setIsVeteran} className="max-sm:scale-90" />
               </div>
 
               {/* Terms Checkbox */}
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-3 max-sm:gap-2 max-sm:items-center">
                 <Checkbox
                   id="terms"
                   checked={termsAccepted}
                   onCheckedChange={(checked) =>
                     setTermsAccepted(checked === true)
                   }
-                  className="mt-1"
+                  className="mt-1 max-sm:mt-0"
                 />
                 <Label
                   htmlFor="terms"
-                  className="text-sm text-muted-foreground"
+                  className="text-sm max-sm:text-[10px] max-sm:leading-[1.3] text-muted-foreground"
                 >
                   I agree to the{" "}
                   <a href="/terms-of-service" className="text-primary hover:underline">
-                    Terms of Service
+                    Terms
                   </a>{" "}
                   and{" "}
                   <a href="/privacy-policy" className="text-primary hover:underline">
@@ -341,7 +347,7 @@ function PaymentForm({
             <Button
               onClick={handleInfoSubmit}
               disabled={isLoading || !email || !name || !termsAccepted}
-              className="w-full"
+              className="w-full max-sm:h-[38px] max-sm:text-[13px]"
               size="lg"
             >
               {isLoading ? (
@@ -369,15 +375,15 @@ function PaymentForm({
             className="space-y-3"
           >
             {/* Order Summary */}
-            <div className="bg-muted/50 rounded-lg px-3 py-2 border">
+            <div className="bg-muted/50 rounded-lg px-3 py-2 max-sm:py-1.5 border">
               <div className="flex items-center justify-between">
-                <span className="text-xs text-muted-foreground">
-                  Order Total
+                <span className="text-xs max-sm:text-[11px] text-muted-foreground">
+                  Service Total
                 </span>
-                <span className="text-base font-bold text-primary">
+                <span className="text-base max-sm:text-sm font-bold text-primary">
                   ${(finalAmount / 100).toFixed(2)}
                   {mode === "subscription" && (
-                    <span className="text-sm font-normal">/mo</span>
+                    <span className="text-sm max-sm:text-xs font-normal">/mo</span>
                   )}
                 </span>
               </div>
@@ -389,14 +395,14 @@ function PaymentForm({
               )}
             </div>
 
-            {/* Payment Method Tabs */}
+            {/* Payment Method Tabs — QR hidden on mobile */}
             <Tabs defaultValue="card" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 mb-2 h-9">
-                <TabsTrigger value="card" className="flex items-center gap-2">
-                  <CreditCard className="w-4 h-4" />
+              <TabsList className="grid w-full grid-cols-2 sm:grid-cols-2 max-sm:grid-cols-1 mb-2 h-9 max-sm:h-7">
+                <TabsTrigger value="card" className="flex items-center gap-2 max-sm:text-[11px] max-sm:h-6">
+                  <CreditCard className="w-4 h-4 max-sm:w-3 max-sm:h-3" />
                   Card
                 </TabsTrigger>
-                <TabsTrigger value="qr" className="flex items-center gap-2">
+                <TabsTrigger value="qr" className="items-center gap-2 hidden sm:flex">
                   <Smartphone className="w-4 h-4" />
                   QR Code
                 </TabsTrigger>
@@ -404,7 +410,7 @@ function PaymentForm({
 
               {/* Card Payment Tab */}
               <TabsContent value="card" className="mt-0">
-                <div className="bg-background rounded-lg p-3 border">
+                <div className="bg-background rounded-lg p-3 max-sm:p-2 border">
                   {stripeLoading ? (
                     <div className="flex items-center justify-center py-8">
                       <Loader2 className="w-6 h-6 animate-spin text-primary" />
@@ -665,23 +671,23 @@ export function EmbeddedPaymentModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[360px] overflow-hidden p-4 gap-2">
-        <DialogHeader className="space-y-0 pb-2.5">
-          <DialogTitle className="flex items-center gap-2.5">
-            <div className="w-8 h-8 bg-[#d96c4a]/12 rounded-full flex items-center justify-center flex-shrink-0">
-              <CreditCard className="w-4 h-4 text-[#d96c4a]" />
+      <DialogContent className="sm:max-w-[360px] overflow-hidden p-4 sm:p-4 max-sm:p-2.5 gap-2 max-sm:max-h-[85vh] max-sm:overflow-y-auto">
+        <DialogHeader className="space-y-0 pb-2.5 max-sm:pb-1.5">
+          <DialogTitle className="flex items-center gap-2.5 max-sm:gap-1.5">
+            <div className="w-8 h-8 max-sm:w-6 max-sm:h-6 bg-[#d96c4a]/12 rounded-full flex items-center justify-center flex-shrink-0">
+              <CreditCard className="w-4 h-4 max-sm:w-3 max-sm:h-3 text-[#d96c4a]" />
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-[15px] font-semibold leading-none">Secure Checkout</span>
-                <Badge variant="outline" className="text-[10px] font-normal px-1.5 py-0 h-[18px]">
+                <span className="text-[15px] max-sm:text-[13px] font-semibold leading-none text-white">Secure Checkout</span>
+                <Badge variant="outline" className="text-[10px] max-sm:text-[9px] font-normal px-1.5 py-0 h-[18px] max-sm:h-4">
                   <Lock className="w-2.5 h-2.5 mr-1" />
-                  Powered by Stripe
+                  Stripe
                 </Badge>
               </div>
             </div>
           </DialogTitle>
-          <DialogDescription className="text-[11px] mt-1">
+          <DialogDescription className="text-[11px] max-sm:text-[10px] mt-1 max-sm:mt-0.5">
             Complete your{" "}
             {mode === "subscription" ? "subscription" : "purchase"} securely
           </DialogDescription>

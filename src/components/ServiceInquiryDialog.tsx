@@ -223,27 +223,27 @@ export const ServiceInquiryDialog = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       {/* Compact: no scrollbar, teal badge accent, tight header */}
-      <DialogContent className="sm:max-w-[400px] overflow-hidden rounded-2xl p-4 gap-0">
-        <DialogHeader className="space-y-0 pb-3">
-          <div className="flex items-center gap-1.5 mb-1.5">
-            <Badge variant="secondary" className="text-[10px] h-[18px] px-1.5 py-0 bg-teal-500/10 text-teal-700 border-teal-500/30">
+      <DialogContent className="sm:max-w-[400px] overflow-hidden rounded-2xl p-4 max-sm:p-2.5 gap-0 max-sm:max-h-[85vh] max-sm:overflow-y-auto">
+        <DialogHeader className="space-y-0 pb-3 max-sm:pb-1.5">
+          <div className="flex items-center gap-1.5 mb-1.5 max-sm:mb-1">
+            <Badge variant="secondary" className="text-[10px] max-sm:text-[9px] h-[18px] max-sm:h-4 px-1.5 py-0 bg-teal-500/10 text-teal-700 border-teal-500/30">
               {serviceTier}
             </Badge>
-            <Badge variant="outline" className="text-[10px] h-[18px] px-1.5 py-0">
+            <Badge variant="outline" className="text-[10px] max-sm:text-[9px] h-[18px] max-sm:h-4 px-1.5 py-0">
               <Clock className="w-2.5 h-2.5 mr-1" />
-              24hr Response
+              24hr
             </Badge>
           </div>
-          <DialogTitle className="text-base font-semibold leading-tight">{serviceName}</DialogTitle>
-          <DialogDescription className="text-[11px] mt-0.5">
+          <DialogTitle className="text-base max-sm:text-[13px] font-semibold leading-tight">{serviceName}</DialogTitle>
+          <DialogDescription className="text-[11px] max-sm:text-[10px] mt-0.5">
             {serviceDescription ||
-              "Complete the form below and our team will contact you to discuss your project."}
+              "Complete the form below and our team will contact you."}
           </DialogDescription>
         </DialogHeader>
 
         {/* Progress */}
-        <div className="space-y-2 mb-4">
-          <div className="flex justify-between text-xs text-muted-foreground">
+        <div className="space-y-2 max-sm:space-y-1 mb-4 max-sm:mb-2">
+          <div className="flex justify-between text-xs max-sm:text-[10px] text-muted-foreground">
             <span>Step {step} of 3</span>
             <span>
               {step === 1
@@ -253,27 +253,27 @@ export const ServiceInquiryDialog = ({
                   : "Review & Submit"}
             </span>
           </div>
-          <Progress value={(step / 3) * 100} className="h-2" />
+          <Progress value={(step / 3) * 100} className="h-2 max-sm:h-1.5" />
         </div>
 
         {/* Price Display */}
-        <div className="bg-muted/50 rounded-lg p-4 mb-4">
+        <div className="bg-muted/50 rounded-lg p-4 max-sm:p-2 max-sm:py-2 mb-4 max-sm:mb-2">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-muted-foreground">Starting Price</p>
-              <p className="text-2xl font-bold text-primary">
+              <p className="text-sm max-sm:text-[11px] text-muted-foreground">Service Total</p>
+              <p className="text-2xl max-sm:text-lg font-bold text-primary">
                 ${finalPrice.toLocaleString()}
                 {isVeteran && (
-                  <span className="text-sm text-muted-foreground line-through ml-2">
+                  <span className="text-sm max-sm:text-xs text-muted-foreground line-through ml-2">
                     ${servicePrice.toLocaleString()}
                   </span>
                 )}
               </p>
             </div>
             {isVeteran && (
-              <Badge className="bg-success/20 text-success border-success/30">
+              <Badge className="bg-success/20 text-success border-success/30 max-sm:text-[10px] max-sm:h-5">
                 <Shield className="w-3 h-3 mr-1" />
-                10% Veteran Discount
+                10% Off
               </Badge>
             )}
           </div>
@@ -282,11 +282,11 @@ export const ServiceInquiryDialog = ({
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(handleSubmit)}
-            className="space-y-4"
+            className="space-y-4 max-sm:space-y-2"
           >
             {/* Step 1: Contact Information */}
             {step === 1 && (
-              <div className="space-y-4 animate-in fade-in duration-300">
+              <div className="space-y-4 max-sm:space-y-1.5 animate-in fade-in duration-300">
                 <FormField
                   control={form.control}
                   name="fullName"
@@ -363,7 +363,7 @@ export const ServiceInquiryDialog = ({
 
             {/* Step 2: Project Details */}
             {step === 2 && (
-              <div className="space-y-4 animate-in fade-in duration-300">
+              <div className="space-y-4 max-sm:space-y-1.5 animate-in fade-in duration-300">
                 <FormField
                   control={form.control}
                   name="budget"
@@ -448,7 +448,7 @@ export const ServiceInquiryDialog = ({
                       <FormControl>
                         <Textarea
                           placeholder="Tell us about your business needs, current challenges, and what you'd like to automate..."
-                          className="min-h-[120px]"
+                          className="min-h-[120px] max-sm:min-h-[80px] max-sm:text-[13px]"
                           {...field}
                         />
                       </FormControl>
@@ -461,21 +461,21 @@ export const ServiceInquiryDialog = ({
 
             {/* Step 3: Review & Submit */}
             {step === 3 && (
-              <div className="space-y-4 animate-in fade-in duration-300">
+              <div className="space-y-4 max-sm:space-y-2 animate-in fade-in duration-300">
                 {/* Summary */}
-                <div className="bg-muted/30 rounded-lg p-4 space-y-3">
-                  <h4 className="font-semibold flex items-center gap-2">
+                <div className="bg-muted/30 rounded-lg p-4 max-sm:p-2.5 space-y-3 max-sm:space-y-1.5">
+                  <h4 className="font-semibold flex items-center gap-2 max-sm:text-[13px]">
                     <Sparkles className="w-4 h-4 text-primary" />
                     Inquiry Summary
                   </h4>
-                  <div className="grid grid-cols-2 gap-2 text-sm">
+                  <div className="grid grid-cols-2 gap-2 max-sm:gap-1 text-sm max-sm:text-[11px]">
                     <div>
                       <p className="text-muted-foreground">Name</p>
                       <p className="font-medium">{form.watch("fullName")}</p>
                     </div>
                     <div>
                       <p className="text-muted-foreground">Email</p>
-                      <p className="font-medium">{form.watch("email")}</p>
+                      <p className="font-medium truncate">{form.watch("email")}</p>
                     </div>
                     {form.watch("companyName") && (
                       <div>
@@ -495,14 +495,14 @@ export const ServiceInquiryDialog = ({
                 </div>
 
                 {/* Veteran Toggle */}
-                <div className="flex items-center justify-between p-4 bg-primary/5 rounded-lg border border-primary/20">
-                  <div className="flex items-center gap-3">
-                    <Shield className="w-5 h-5 text-primary" />
+                <div className="flex items-center justify-between p-4 max-sm:py-1.5 max-sm:px-3 bg-primary/5 rounded-lg border border-primary/20 max-sm:h-9">
+                  <div className="flex items-center gap-3 max-sm:gap-2">
+                    <Shield className="w-5 h-5 max-sm:w-4 max-sm:h-4 text-primary" />
                     <div>
-                      <Label htmlFor="veteran-discount" className="font-medium">
+                      <Label htmlFor="veteran-discount" className="font-medium max-sm:text-[11px]">
                         Veteran / First Responder
                       </Label>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-xs text-muted-foreground max-sm:hidden">
                         Receive 10% discount (verification required)
                       </p>
                     </div>
@@ -511,11 +511,12 @@ export const ServiceInquiryDialog = ({
                     id="veteran-discount"
                     checked={isVeteran}
                     onCheckedChange={setIsVeteran}
+                    className="max-sm:scale-90"
                   />
                 </div>
 
                 {/* Terms */}
-                <div className="flex items-start space-x-3 p-3 border rounded-lg">
+                <div className="flex items-start max-sm:items-center space-x-3 max-sm:space-x-2 p-3 max-sm:p-2 border rounded-lg">
                   <Checkbox
                     id="terms"
                     checked={termsAccepted}
@@ -525,7 +526,7 @@ export const ServiceInquiryDialog = ({
                   />
                   <label
                     htmlFor="terms"
-                    className="text-sm leading-tight cursor-pointer"
+                    className="text-sm max-sm:text-[10px] max-sm:leading-[1.3] leading-tight cursor-pointer"
                   >
                     I agree to the{" "}
                     <a
@@ -534,7 +535,7 @@ export const ServiceInquiryDialog = ({
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Terms of Service
+                      Terms
                     </a>{" "}
                     and{" "}
                     <a
@@ -548,8 +549,8 @@ export const ServiceInquiryDialog = ({
                   </label>
                 </div>
 
-                {/* What Happens Next */}
-                <div className="bg-success/5 border border-success/20 rounded-lg p-4">
+                {/* What Happens Next — hidden on mobile to save space */}
+                <div className="bg-success/5 border border-success/20 rounded-lg p-4 max-sm:p-2 max-sm:hidden">
                   <h4 className="font-semibold text-success flex items-center gap-2 mb-2">
                     <CheckCircle className="w-4 h-4" />
                     What Happens Next?
@@ -564,7 +565,7 @@ export const ServiceInquiryDialog = ({
             )}
 
             {/* Navigation Buttons */}
-            <div className="flex gap-3 pt-4">
+            <div className="flex gap-3 max-sm:gap-2 pt-4 max-sm:pt-2">
               {step > 1 && (
                 <Button
                   type="button"
