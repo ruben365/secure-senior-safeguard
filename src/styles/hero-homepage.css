@@ -212,80 +212,6 @@
 }
 
 /* ── 3a. Kicker / Overline ──
-   Very small uppercase text with a decorative
-   accent line to the left — establishes the
-   micro-hierarchy above the tabs.             */
-.hero-home__kicker {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-  margin-bottom: 1rem;
-}
-
-.hero-home__kicker-line {
-  width: 22px;
-  height: 1.5px;
-  background: var(--hero-accent-orange);
-  flex-shrink: 0;
-  border-radius: 1px;
-}
-
-.hero-home__kicker-text {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--hero-text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-}
-
-/* ── 3b. Micro-Nav / Tab Row ──  */
-.hero-home__tabs {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  margin: 0 0 1.5rem 0;
-  padding: 0;
-  list-style: none;
-}
-
-.hero-home__tab {
-  padding: 0.45rem 0.85rem;
-  font-size: 0.7rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--hero-text-dim);
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-family: inherit;
-}
-
-.hero-home__tab:hover {
-  color: var(--hero-text-secondary);
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-.hero-home__tab:active {
-  transform: scale(0.96);
-}
-
-.hero-home__tab:focus-visible {
-  outline: 2px solid rgba(249, 115, 22, 0.6);
-  outline-offset: 2px;
-}
-
-.hero-home__tab--active {
-  color: var(--hero-text-primary);
-  font-weight: 700;
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.12);
-  box-shadow: none;
-}
-
 /* ── 3c. H1 Headline ──
    Massive, bold, tight. The visual anchor.  */
 .hero-home__headline {
@@ -560,16 +486,6 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-  }
-
-  /* Hide kicker bar on mobile — clutter */
-  .hero-home__kicker {
-    display: none;
-  }
-
-  /* Tabs hidden via JSX (hidden md:flex), but CSS fallback */
-  .hero-home__tabs {
-    display: none !important;
   }
 
   .hero-home__ctas {
