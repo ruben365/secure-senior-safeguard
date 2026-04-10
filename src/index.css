@@ -28,16 +28,8 @@
 @import "./styles/polish.css";
 
 /* ═══════════════════════════════════════════════════════════════════
-   GLOBAL OVERRIDES — no shadows, HD sharpness
+   GLOBAL OVERRIDES — HD sharpness
    ═══════════════════════════════════════════════════════════════════ */
-
-/* Zero shadows everywhere — nuclear override */
-*,
-*::before,
-*::after {
-  box-shadow: none !important;
-  text-shadow: none !important;
-}
 
 /* HD text rendering */
 html {

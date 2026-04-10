@@ -139,7 +139,16 @@ function Careers() {
           subheadline="Help us protect families from AI-powered scams"
           showProtectionBadge
           badgeText="We're Hiring"
-        />
+        >
+          <div className="flex flex-col sm:flex-row gap-4 justify-start">
+            <Button size="heroPill" variant="heroPrimary" asChild>
+              <Link to="/contact">Apply Now</Link>
+            </Button>
+            <Button size="heroPill" variant="heroOutline" asChild>
+              <Link to="/about">Learn About Us</Link>
+            </Button>
+          </div>
+        </Hero>
         <HeroFloatingStats />
       </div>
       <div className="h-6" />
