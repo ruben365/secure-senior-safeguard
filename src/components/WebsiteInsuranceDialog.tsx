@@ -349,6 +349,8 @@ export const WebsiteInsuranceDialog = ({
       features: featureNames.slice(0, 5), // Show first 5 features
     });
     setEmbeddedPaymentOpen(true);
+    // Close the parent insurance dialog so it doesn't overlap
+    onOpenChange(false);
   };
 
   const groupedFeatures = useMemo(() => {
