@@ -50,12 +50,11 @@ const buttonVariants = cva(
           "[transition-duration:250ms] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)]",
         ].join(" "),
         heroPrimary: [
-          // Hero primary — WCAG AA compliant (4.5:1+ white on dark orange)
-          // #c2410c = 4.6:1, #9a3412 = 6.5:1 with white text
-          "bg-gradient-to-b from-[#c2410c] to-[#9a3412]",
+          // Hero primary — matches hero-home__cta exactly (135deg diagonal gradient)
+          "bg-[linear-gradient(135deg,#c2410c,#9a3412)]",
           "text-white font-semibold",
           "border border-[#7c2d12]",
-          "hover:-translate-y-[1px] hover:from-[#ea580c] hover:to-[#c2410c]",
+          "hover:-translate-y-[1px] hover:bg-[linear-gradient(135deg,#ea580c,#c2410c)]",
           "active:translate-y-[0.5px] active:scale-[0.98]",
           "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[rgba(249,115,22,0.7)]",
           "[transition-duration:250ms] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)]",
@@ -81,7 +80,7 @@ const buttonVariants = cva(
         lg: "h-[42px] rounded-lg px-5 text-[14px]",
         xl: "h-[46px] rounded-lg px-6 text-[15px]",
         icon: "h-[38px] w-[38px]",
-        heroPill: "h-[40px] rounded-full px-6 text-[13px] tracking-wide gap-1.5",
+        heroPill: "h-[40px] rounded-full px-6 text-[13px] tracking-[0.02em] gap-2",
       },
     },
     defaultVariants: {

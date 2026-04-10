@@ -168,7 +168,6 @@
 .hero-biz__cta {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 0.5rem;
   height: 40px;
   padding: 0 1.5rem;
@@ -179,8 +178,6 @@
   border-radius: 50px;
   text-decoration: none;
   cursor: pointer;
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: inherit;
   position: relative;
