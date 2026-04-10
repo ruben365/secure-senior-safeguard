@@ -187,16 +187,16 @@
     --gold-400: 42 92% 58%;
     --gold-300: 46 88% 68%;
 
-    /* ── Shadow System — DISABLED per design directive (no box-shadows anywhere) ── */
-    --shadow-xs:  none;
-    --shadow-sm:  none;
-    --shadow-md:  none;
-    --shadow-lg:  none;
+    /* ── Neo-Tactile Shadow System — warm plum-tinted elevations ── */
+    --shadow-xs:  0 1px 2px 0 rgba(80, 40, 80, 0.04);
+    --shadow-sm:  0 1px 3px 0 rgba(80, 40, 80, 0.06), 0 1px 2px -1px rgba(80, 40, 80, 0.06);
+    --shadow-md:  0 4px 6px -1px rgba(80, 40, 80, 0.07), 0 2px 4px -2px rgba(80, 40, 80, 0.05);
+    --shadow-lg:  0 10px 15px -3px rgba(80, 40, 80, 0.08), 0 4px 6px -4px rgba(80, 40, 80, 0.05);
 
-    --shadow-card:       none;
-    --shadow-card-hover: none;
-    --shadow-elevated:   none;
-    --shadow-cta:        none;
+    --shadow-card:       0 1px 3px rgba(80, 40, 80, 0.06), 0 1px 2px rgba(80, 40, 80, 0.04);
+    --shadow-card-hover: 0 4px 12px -2px rgba(80, 40, 80, 0.1), 0 2px 4px rgba(80, 40, 80, 0.06);
+    --shadow-elevated:   0 10px 25px -5px rgba(80, 40, 80, 0.1), 0 4px 10px -5px rgba(80, 40, 80, 0.04);
+    --shadow-cta:        0 4px 14px -3px rgba(80, 40, 80, 0.15);
 
     /* ── Sidebar (admin dark) ── */
     --sidebar-background: 215 40% 10%;
@@ -245,8 +245,8 @@
     /* Global text scale — 0.875 = 14px base (compact but readable) */
     --text-scale: 0.875;
 
-    /* ── Shadow XL token — DISABLED ── */
-    --shadow-xl: none;
+    /* ── Shadow XL token ── */
+    --shadow-xl: 0 20px 40px -10px rgba(80, 40, 80, 0.12), 0 8px 16px -6px rgba(80, 40, 80, 0.06);
   }
 
   .dark {
@@ -287,10 +287,10 @@
 
   /* ===== SKEUOMORPHISM 2.0 - GLOBAL MATERIAL STYLES ===== */
   :root {
-    /* Shadow layers — DISABLED */
-    --skeuo-shadow-raised: none;
-    --skeuo-shadow-pressed: none;
-    --skeuo-shadow-floating: none;
+    /* Shadow layers — Neo-Tactile warm elevations */
+    --skeuo-shadow-raised: 0 2px 8px -2px rgba(80, 40, 80, 0.1), 0 1px 2px rgba(80, 40, 80, 0.06);
+    --skeuo-shadow-pressed: inset 0 2px 4px rgba(80, 40, 80, 0.08);
+    --skeuo-shadow-floating: 0 12px 32px -8px rgba(80, 40, 80, 0.14), 0 4px 8px rgba(80, 40, 80, 0.06);
     --skeuo-highlight: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0.25) 0%,
@@ -300,11 +300,11 @@
       inset 0 1px 2px rgba(0, 0, 0, 0.06),
       inset 0 -1px 1px rgba(255, 255, 255, 0.5);
 
-    /* Neutral shadows — DISABLED */
-    --skeuo-shadow-coral: none;
-    --skeuo-shadow-lavender: none;
-    --skeuo-shadow-mixed: none;
-    --skeuo-shadow-ombre: none;
+    /* Warm Neo-Tactile accent shadows */
+    --skeuo-shadow-coral: 0 4px 14px -3px rgba(217, 108, 74, 0.2);
+    --skeuo-shadow-lavender: 0 4px 14px -3px rgba(139, 94, 160, 0.18);
+    --skeuo-shadow-mixed: 0 4px 14px -3px rgba(150, 80, 120, 0.15);
+    --skeuo-shadow-ombre: 0 8px 24px -6px rgba(80, 40, 80, 0.12);
 
     /* Clean glass backgrounds */
     --skeuo-glass-bg: linear-gradient(
@@ -463,6 +463,7 @@
     contain: style;
     position: relative;
     z-index: 1;
+    zoom: 0.75;
   }
 
   /* Prevent image flicker and layout shift */
