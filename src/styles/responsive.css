@@ -1,42 +1,34 @@
 /* =====================================================
-   RESPONSIVE SYSTEM
+   RESPONSIVE SYSTEM — Single Source of Truth
    Breakpoints: 374 | 640 | 768 | 1024 | 1280 | 1536 | 1920 | 2560px
-   Phones (320-640) | Tablets (641-1024) | Laptops (1025-1440) | Desktops (1441-1920) | Projectors (1921+)
-   zoom: 0.75 on #root — all CSS px = visual × 1.333
-   Touch targets need ≥52px CSS (39px visual)
-   Full visual viewport: calc(100vh / 0.75)
    ===================================================== */
+
 
 /* ------------------------------------------------------------ */
 /*  EXTRA-SMALL PHONES (<375px) — iPhone SE, Galaxy Fold         */
 /* ------------------------------------------------------------ */
 @media (max-width: 374px) {
   .container {
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
 
-  /* Prevent text overflow on narrow screens */
   * {
     word-wrap: break-word;
     overflow-wrap: break-word;
   }
 
-  h1 { font-size: 1.5rem !important; }
-  h2 { font-size: 1.25rem !important; }
-  h3 { font-size: 1.125rem !important; }
-
   /* 2FA code input grid */
   .xs-small\:grid-cols-3 {
-    grid-template-columns: repeat(3, 1fr) !important;
+    grid-template-columns: repeat(3, 1fr);
     max-width: 200px;
     gap: 6px;
   }
 
   .xs-small\:grid-cols-3 input {
-    min-width: 44px !important;
-    min-height: 44px !important;
-    font-size: 16px !important;
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 16px;
   }
 
   /* Hero CTA buttons wrap vertically on very narrow phones */
@@ -46,104 +38,173 @@
   .hero-biz__ctas,
   .hero-ws__ctas,
   #final-action .flex {
-    flex-wrap: wrap !important;
+    flex-wrap: wrap;
   }
 }
 
+
 /* ------------------------------------------------------------ */
-/*  SMALL PHONES (375-640px) — iPhone, standard Android          */
+/*  PHONE (<640px) — Tightest constraints                        */
 /* ------------------------------------------------------------ */
-@media (max-width: 640px) {
-  .hero-mobile h1 {
-    font-size: clamp(1.75rem, 6vw, 2rem) !important;
-    line-height: 1.15 !important;
-  }
-  .hero-mobile h2 {
-    font-size: clamp(1.25rem, 4vw, 1.5rem) !important;
-  }
-  .hero-mobile p {
-    font-size: 0.9375rem !important;
-    line-height: 1.6 !important;
+@media (max-width: 639px) {
+  /* --- Container --- */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   /* Prevent horizontal overflow */
   body { overflow-x: hidden; }
-
-  .container {
-    padding-left: 1.25rem !important;
-    padding-right: 1.25rem !important;
-  }
-
-  /* Ensure images don't overflow */
   img { max-width: 100%; height: auto; }
 
-  /* Mobile cards — breathing room */
-  .card { padding: 1rem !important; }
-
   /* Stack flex items */
-  .mobile-stack { flex-direction: column !important; }
-  .mobile-full-width { width: 100% !important; }
+  .mobile-stack { flex-direction: column; }
+  .mobile-full-width { width: 100%; }
 }
 
+
 /* ------------------------------------------------------------ */
-/*  ALL MOBILE (<768px) — Phones in portrait & landscape         */
+/*  ALL MOBILE (<768px) — Unified phone system                   */
 /* ------------------------------------------------------------ */
-@media (max-width: 768px) {
-  /* Touch-friendly form controls */
+@media (max-width: 767px) {
+
+  /* --- Typography --- */
+  :root { --text-scale: 0.9; }
+  h1 { font-size: 1.5rem; line-height: 1.2; }
+  h2 { font-size: 1.1875rem; line-height: 1.2; }
+  h3 { font-size: 1rem; line-height: 1.25; }
+  main p, main li { font-size: 0.8125rem; line-height: 1.5; }
+
+  /* --- Container --- */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* --- Touch-friendly form controls --- */
   input[type="checkbox"],
   input[type="radio"] {
     width: 24px;
     height: 24px;
   }
 
+  /* Inputs: prevent iOS zoom (must be >= 16px) */
+  input, select, textarea {
+    font-size: 16px;
+  }
+
   /* Replace hover with active on touch */
   .hover-scale:active { transform: scale(0.95); }
   .hover-scale:hover { transform: none; }
 
-  /* Touch targets — compact but accessible */
-  button,
-  a[role="button"],
-  [role="button"] {
-    min-height: 34px;
-    min-width: 34px;
+  /* --- ALL buttons on phone --- */
+  /* Scoped with :not() to exclude radix tabs, accordion triggers, icon-only buttons */
+  button:not([data-radix-collection-item]):not([role="tab"]):not([class*="AccordionTrigger"]):not(.icon-btn):not(.sr-only):not([aria-label*="Close"]):not([aria-label*="menu"]):not([aria-label*="Menu"]) {
+    max-height: 40px;
+    font-size: 13px;
   }
 
-  /* ── HERO BUTTON COMPRESSION — scoped to CTA buttons only ── */
+  /* Hero CTA buttons — slightly smaller */
   .hero-home__cta,
   .hero-biz__cta,
   .hero-ws__cta,
   #final-action .flex > a,
   #final-action .flex > button {
-    height: 34px !important;
-    max-height: 34px !important;
-    font-size: 12px !important;
-    padding-left: 14px !important;
-    padding-right: 14px !important;
-    border-radius: 8px !important;
+    height: 34px;
+    max-height: 34px;
+    font-size: 12px;
+    padding-left: 14px;
+    padding-right: 14px;
+    border-radius: 8px;
   }
 
-  /* ── CONTENT CTA BUTTONS — scoped to explicit CTA classes ── */
+  /* Scoped CTA pill buttons — homepage sections only */
   .hss-cta-primary,
-  .hss-cta-ghost,
-  .home-color-wash .flex > a[class*="Button"],
-  .home-color-wash .flex > button[class*="Button"],
-  .hss-root .flex > a[class*="Button"],
-  .hss-root .flex > button[class*="Button"] {
-    height: 32px !important;
-    max-height: 32px !important;
-    font-size: 12px !important;
-    padding: 0 12px !important;
-    border-radius: 6px !important;
+  .hss-cta-ghost {
+    height: 32px;
+    max-height: 32px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 0 14px;
+    border-radius: 100px;
+    width: auto;
+    min-width: 100px;
+    max-width: 220px;
   }
 
-  /* Admin dashboard responsive */
-  .admin-stats-grid { grid-template-columns: 1fr !important; }
+  .hss-cta-primary {
+    background: linear-gradient(135deg, #ea580c, #c2410c);
+    color: white;
+    border: none;
+    box-shadow: 0 2px 8px -2px rgba(234,88,12,0.3);
+  }
+
+  .hss-cta-ghost {
+    background: transparent;
+    border: 1.5px solid rgba(234,88,12,0.4);
+    color: #ea580c;
+  }
+
+  /* --- Dialogs on phone --- */
+  [role="dialog"],
+  [role="alertdialog"] {
+    width: 94%;
+    max-width: 100%;
+    max-height: 85vh;
+    padding: 1rem;
+    border-radius: 1rem;
+    overflow-y: auto;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Compress inputs inside dialogs */
+  [role="dialog"] input,
+  [role="dialog"] textarea {
+    height: 36px;
+    font-size: 14px;
+  }
+
+  /* --- Section compression --- */
+  .hss-root section,
+  .home-color-wash section {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  #final-action {
+    min-height: 400px;
+  }
+
+  #final-action .container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  /* --- Cards --- */
+  main section [data-slot="card"],
+  main section .card,
+  main section [class*="glass-card"] {
+    padding: 0.75rem;
+  }
+
+  main section [data-slot="card"] p,
+  main section .card p {
+    font-size: 0.8125rem;
+  }
+
+  /* Card grid gap compression */
+  main section .grid.gap-6 { gap: 0.5rem; }
+  main section .grid.gap-8 { gap: 0.75rem; }
+  main section .grid.gap-4 { gap: 0.375rem; }
+
+  /* --- Admin dashboard --- */
+  .admin-stats-grid { grid-template-columns: 1fr; }
   .desktop-table { display: none; }
   .mobile-cards { display: block; }
-  .admin-chart { height: 250px !important; }
-  .quick-actions-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .admin-chart { height: 250px; }
+  .quick-actions-grid { grid-template-columns: repeat(2, 1fr); }
 
-  /* Full-width modals */
+  /* --- Full-width modals --- */
   .mobile-modal {
     width: 100vw;
     height: 100vh;
@@ -151,86 +212,185 @@
     border-radius: 0;
   }
 
-  /* ── SECTION COMPRESSION — tight vertical spacing on mobile ── */
-  .section-spacing { @apply py-6; }
-  .card-mobile { @apply p-3; }
-
-  /* Compress homepage sections only (not FAQ, Contact, etc.) */
-  .hss-root section,
-  .home-color-wash section {
-    padding-top: 1.5rem !important;
-    padding-bottom: 1.5rem !important;
+  /* --- Homepage section headings --- */
+  .hss-root h2,
+  .home-color-wash h2,
+  .hss-testimonial-theater h2 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
   }
 
-  /* No full-width CTA buttons on phone — scoped to CTA classes only */
-  .hss-cta-primary,
-  .hss-cta-ghost,
-  .home-color-wash .w-full:is(a, [role="button"]),
-  .hss-root .w-full:is(a, [role="button"]) {
-    width: auto !important;
-    max-width: 220px !important;
+  .hss-root h3,
+  .home-color-wash h3 {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  .hss-root h4,
+  .home-color-wash h4 {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .hss-overline {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    padding: 0.3rem 0.75rem;
+  }
+
+  .hss-root section > .container p,
+  .home-color-wash section > .container > p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  /* --- Warm white canvas --- */
+  .home-color-wash,
+  .hss-root,
+  .hss-testimonial-theater {
+    background: #FAFAF8;
+  }
+
+  .hss-root::after,
+  .home-color-wash::before {
+    display: none;
+  }
+
+  .hss-section-white,
+  .hss-section-tint {
+    background: transparent;
+  }
+
+  /* --- Stat tiles → horizontal scrollable chips --- */
+  .hss-stats-bento .grid {
+    display: flex;
+    overflow-x: auto;
+    gap: 8px;
+    padding: 0 16px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    grid-template-columns: none;
+  }
+
+  .hss-stats-bento .grid::-webkit-scrollbar { display: none; }
+
+  .hss-stats-tile {
+    flex-shrink: 0;
     min-width: 140px;
+    max-width: 180px;
+    padding: 10px 14px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(234,88,12,0.06);
+    border: 1px solid rgba(234,88,12,0.12);
+    box-shadow: none;
   }
 
-  /* Primary CTA buttons — orange gradient, scoped to primary class only */
-  .hss-cta-primary {
-    background: linear-gradient(135deg, #ea580c, #c2410c) !important;
-    color: white !important;
-    font-weight: 600 !important;
-    border: 1px solid rgba(255,255,255,0.15) !important;
+  .hss-stats-tile:hover {
+    transform: none;
+    box-shadow: none;
   }
 
-  /* Compress cards inside sections */
-  main section [data-slot="card"],
-  main section .card,
-  main section [class*="glass-card"] {
-    padding: 0.75rem !important;
+  .hss-stats-tile p,
+  .hss-stats-tile-icon { display: none; }
+
+  .hss-stats-bento .text-\[2\.75rem\],
+  .hss-stats-bento .text-\[3\.25rem\] {
+    font-size: 16px;
+    margin-bottom: 0;
+    line-height: 1;
   }
 
-  main section [data-slot="card"] p,
-  main section .card p {
-    font-size: 0.8125rem !important;  /* 13px */
+  .hss-stats-tile .text-\[14px\] {
+    font-size: 11px;
+    margin-bottom: 0;
+    white-space: nowrap;
   }
 
-  /* Card grid gap compression — scoped to content sections only */
-  main section .grid.gap-6 { gap: 0.5rem; }
-  main section .grid.gap-8 { gap: 0.75rem; }
-  main section .grid.gap-4 { gap: 0.375rem; }
-
-  /* Compress final CTA section on mobile */
-  #final-action {
-    min-height: 400px !important;
+  .hss-stats-bento {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    background: transparent;
   }
 
-  #final-action .container {
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
+  .hss-stats-bento::before { display: none; }
+
+  /* --- Cards — compact tiles --- */
+  .hss-card,
+  .hss-soft-tint,
+  .hss-dark-card,
+  .home-color-wash .bg-white,
+  .hss-root .bg-white {
+    border-radius: 14px;
+    padding: 12px;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: none;
   }
 
-  /* Mobile typography — compressed */
-  h1 { font-size: 1.5rem; line-height: 1.2; }
-  h2 { font-size: 1.1875rem; line-height: 1.2; }
-  h3 { font-size: 1rem; line-height: 1.25; }
-
-  /* Mobile body text — scoped to content paragraphs */
-  main p, main li { font-size: 0.8125rem; line-height: 1.5; }
-
-  /* Mobile containers — tighter horizontal padding */
-  .container {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+  .hss-card:hover,
+  .hss-soft-tint:hover,
+  .hss-dark-card:hover {
+    transform: none;
+    box-shadow: none;
   }
 
-  /* Hide decorative floating elements on mobile */
+  .hss-root .grid.sm\:grid-cols-2 {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .hss-dark-card-glow { display: none; }
+
+  .hss-feature-list li {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .hss-feature-list .w-9 { width: 28px; height: 28px; }
+  .hss-feature-list .w-9 svg { width: 14px; height: 14px; }
+  .hss-feature-list::before { display: none; }
+
+  .hss-quote-editorial {
+    border-left-width: 2px;
+    padding-left: 12px;
+  }
+
+  .hss-step-bubble {
+    width: 36px;
+    height: 36px;
+    font-size: 12px;
+  }
+
+  .hss-root .aspect-\[4\/5\],
+  .hss-root .aspect-\[3\/4\] {
+    aspect-ratio: 16/10;
+  }
+
+  .hss-avatar-stack img { width: 24px; height: 24px; }
+
+  /* --- Force single column for bare multi-column grids --- */
+  main section [class~="grid-cols-2"]:not([class*="sm:grid-cols"]):not([class*="md:grid-cols"]):not([role="tablist"]):not([class*="tabs"]),
+  main section [class~="grid-cols-3"]:not([class*="sm:grid-cols"]):not([class*="md:grid-cols"]):not([role="tablist"]):not([class*="tabs"]),
+  main section [class~="grid-cols-4"]:not([class*="sm:grid-cols"]):not([class*="md:grid-cols"]):not([role="tablist"]):not([class*="tabs"]) {
+    grid-template-columns: 1fr;
+  }
+
+  /* --- Hide decorative elements --- */
   .hss-float-card,
   .hss-trust-badge,
   [class*="float-card"],
   [class*="floating-stat"],
   [class*="decorative"] {
-    display: none !important;
+    display: none;
   }
 
-  /* Hero text overlay — stronger gradient for readability */
+  /* Hero overlay — stronger gradient for readability */
   .hero-overlay,
   [class*="hero"] [class*="overlay"] {
     background: linear-gradient(
@@ -238,49 +398,17 @@
       rgba(0, 0, 0, 0.7) 0%,
       rgba(0, 0, 0, 0.5) 50%,
       rgba(0, 0, 0, 0.7) 100%
-    ) !important;
+    );
   }
 
-  /* Dialog — consolidated mobile rules (single declaration) */
-  [role="dialog"] {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    width: 94% !important;
-    max-width: 100% !important;
-    max-height: 85vh !important;
-    padding: 1rem !important;
-    border-radius: 1rem !important;
-    overflow-y: auto !important;
-  }
-
-  /* Compress inputs inside dialogs on mobile */
-  [role="dialog"] input,
-  [role="dialog"] textarea {
-    height: 36px !important;
-    font-size: 14px !important;
-  }
-
-  /* Disable hover lift/translateY on mobile (no hover on touch) */
+  /* Disable hover lift/translateY on mobile */
   .hover-lift:hover,
   .container .bg-card:hover,
   .container [class*="glass-card"]:hover {
-    transform: none !important;
+    transform: none;
   }
 
-  /* Force single column for bare multi-column grids on mobile */
-  main section [class~="grid-cols-2"]:not([class*="sm:grid-cols"]):not([class*="md:grid-cols"]):not([role="tablist"]):not([class*="tabs"]),
-  main section [class~="grid-cols-3"]:not([class*="sm:grid-cols"]):not([class*="md:grid-cols"]):not([role="tablist"]):not([class*="tabs"]),
-  main section [class~="grid-cols-4"]:not([class*="sm:grid-cols"]):not([class*="md:grid-cols"]):not([role="tablist"]):not([class*="tabs"]) {
-    grid-template-columns: 1fr !important;
-  }
-
-  /* Inputs: prevent iOS zoom (must be ≥16px) */
-  input, select, textarea {
-    font-size: 16px !important;
-  }
-
-  /* Performance: simplify glass effects */
+  /* --- Performance: simplify glass effects --- */
   .glass,
   .glass-light,
   .glass-heavy,
@@ -289,8 +417,8 @@
   .premium-crystal,
   .premium-glass-refraction,
   .premium-frosted-dark {
-    backdrop-filter: blur(10px) saturate(1.08) brightness(1.01) !important;
-    -webkit-backdrop-filter: blur(10px) saturate(1.08) brightness(1.01) !important;
+    backdrop-filter: blur(10px) saturate(1.08) brightness(1.01);
+    -webkit-backdrop-filter: blur(10px) saturate(1.08) brightness(1.01);
     box-shadow: 0 10px 24px -16px hsl(220 20% 20% / 0.2);
   }
 
@@ -300,13 +428,13 @@
     box-shadow: 0 8px 20px -14px hsl(220 20% 20% / 0.18);
   }
 
-  /* Disable heavy animations on mobile for performance */
+  /* Disable heavy animations for performance */
   .premium-shine-sweep::after,
   .premium-border-glow::before,
   .premium-holographic::before,
   .premium-aurora::before {
-    animation: none !important;
-    opacity: 0 !important;
+    animation: none;
+    opacity: 0;
   }
 
   .premium-orb,
@@ -315,284 +443,41 @@
   .float-delayed,
   .float-slow,
   .premium-float-spring {
-    animation: none !important;
-  }
-
-  /* ══════════════════════════════════════════════════════════════════
-     APP-STYLE MOBILE OVERHAUL — tile cards, chip stats, pill buttons
-     Target: modern app feel on phone with warm white canvas
-     ══════════════════════════════════════════════════════════════════ */
-
-  /* ── WARM WHITE CANVAS for content sections ── */
-  .home-color-wash,
-  .hss-root,
-  .hss-testimonial-theater {
-    background: #FAFAF8 !important;
-  }
-
-  .hss-root::after,
-  .home-color-wash::before {
-    display: none !important;
-  }
-
-  .hss-section-white,
-  .hss-section-tint {
-    background: transparent !important;
-  }
-
-  /* ── SECTION HEADINGS — clean and compact ── */
-  .hss-root h2,
-  .home-color-wash h2,
-  .hss-testimonial-theater h2 {
-    font-size: 20px !important;
-    font-weight: 700 !important;
-    line-height: 1.2 !important;
-    letter-spacing: -0.01em !important;
-  }
-
-  .hss-root h3,
-  .home-color-wash h3 {
-    font-size: 15px !important;
-    font-weight: 600 !important;
-    line-height: 1.25 !important;
-  }
-
-  .hss-root h4,
-  .home-color-wash h4 {
-    font-size: 13px !important;
-    font-weight: 600 !important;
-    line-height: 1.3 !important;
-  }
-
-  /* Overline badge — smaller */
-  .hss-overline {
-    font-size: 10px !important;
-    letter-spacing: 0.1em !important;
-    padding: 0.3rem 0.75rem !important;
-  }
-
-  /* Section subtext */
-  .hss-root section > .container p,
-  .home-color-wash section > .container > p {
-    font-size: 13px !important;
-    line-height: 1.5 !important;
-  }
-
-  /* ── BUTTONS — compact pill shape, scoped to CTA classes only ── */
-  .hss-cta-primary,
-  .hss-cta-ghost,
-  .home-color-wash .flex > a,
-  .home-color-wash .flex > button:not([data-state]):not([aria-expanded]),
-  .hss-root .flex > a:not([aria-label]),
-  .hss-root .flex > button:not([data-state]):not([aria-expanded]) {
-    height: 32px !important;
-    max-height: 32px !important;
-    font-size: 12px !important;
-    font-weight: 600 !important;
-    padding: 0 14px !important;
-    border-radius: 100px !important;
-    width: auto !important;
-    min-width: 100px !important;
-    max-width: 220px !important;
-  }
-
-  /* Primary CTA buttons — warm orange gradient */
-  .hss-cta-primary {
-    background: linear-gradient(135deg, #ea580c, #c2410c) !important;
-    color: white !important;
-    border: none !important;
-    box-shadow: 0 2px 8px -2px rgba(234,88,12,0.3) !important;
-  }
-
-  /* Secondary/ghost CTA buttons — orange border pill */
-  .hss-cta-ghost {
-    background: transparent !important;
-    border: 1.5px solid rgba(234,88,12,0.4) !important;
-    color: #ea580c !important;
-  }
-
-  /* ── STAT TILES → horizontal scrollable chips ── */
-  .hss-stats-bento .grid {
-    display: flex !important;
-    overflow-x: auto !important;
-    gap: 8px !important;
-    padding: 0 16px !important;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    grid-template-columns: none !important;
-  }
-
-  .hss-stats-bento .grid::-webkit-scrollbar {
-    display: none;
-  }
-
-  .hss-stats-tile {
-    flex-shrink: 0 !important;
-    min-width: 140px !important;
-    max-width: 180px !important;
-    padding: 10px 14px !important;
-    border-radius: 100px !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    background: rgba(234,88,12,0.06) !important;
-    border: 1px solid rgba(234,88,12,0.12) !important;
-    box-shadow: none !important;
-  }
-
-  .hss-stats-tile:hover {
-    transform: none !important;
-    box-shadow: none !important;
-  }
-
-  /* Hide verbose parts inside stat chips */
-  .hss-stats-tile p,
-  .hss-stats-tile-icon {
-    display: none !important;
-  }
-
-  /* Stat number — inline compact */
-  .hss-stats-bento .text-\[2\.75rem\],
-  .hss-stats-bento .text-\[3\.25rem\] {
-    font-size: 16px !important;
-    margin-bottom: 0 !important;
-    line-height: 1 !important;
-  }
-
-  /* Stat label — inline */
-  .hss-stats-tile .text-\[14px\] {
-    font-size: 11px !important;
-    margin-bottom: 0 !important;
-    white-space: nowrap !important;
-  }
-
-  .hss-stats-bento {
-    padding-top: 0.75rem !important;
-    padding-bottom: 0.75rem !important;
-    background: transparent !important;
-  }
-
-  .hss-stats-bento::before {
-    display: none !important;
-  }
-
-  /* ── CARDS — compact tiles with soft borders ── */
-  .hss-card,
-  .hss-soft-tint,
-  .hss-dark-card,
-  .home-color-wash .bg-white,
-  .hss-root .bg-white {
-    border-radius: 14px !important;
-    padding: 12px !important;
-    border: 1px solid rgba(0,0,0,0.06) !important;
-    box-shadow: none !important;
-  }
-
-  .hss-card:hover,
-  .hss-soft-tint:hover,
-  .hss-dark-card:hover {
-    transform: none !important;
-    box-shadow: none !important;
-  }
-
-  /* Feature boxes in section 2 — 2-col grid tiles */
-  .hss-root .grid.sm\:grid-cols-2 {
-    grid-template-columns: 1fr 1fr !important;
-    gap: 8px !important;
-  }
-
-  /* Dark card glow — hidden on mobile tiles */
-  .hss-dark-card-glow {
-    display: none !important;
-  }
-
-  /* Feature list items — compact */
-  .hss-feature-list li {
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
-  }
-
-  .hss-feature-list .w-9 {
-    width: 28px !important;
-    height: 28px !important;
-  }
-
-  .hss-feature-list .w-9 svg {
-    width: 14px !important;
-    height: 14px !important;
-  }
-
-  .hss-feature-list::before {
-    display: none !important;
-  }
-
-  /* ── QUOTE CARD — compact on mobile ── */
-  .hss-quote-editorial {
-    border-left-width: 2px !important;
-    padding-left: 12px !important;
-  }
-
-  /* ── HOW IT WORKS — compact timeline ── */
-  .hss-step-bubble {
-    width: 36px !important;
-    height: 36px !important;
-    font-size: 12px !important;
-  }
-
-  /* ── IMAGE SECTIONS — compact aspect ratio ── */
-  .hss-root .aspect-\[4\/5\],
-  .hss-root .aspect-\[3\/4\] {
-    aspect-ratio: 16/10 !important;
-  }
-
-  /* Social proof strip — compact */
-  .hss-avatar-stack img {
-    width: 24px !important;
-    height: 24px !important;
+    animation: none;
   }
 }
 
+
 /* ------------------------------------------------------------ */
-/*  TABLET PORTRAIT (768-1024px) — iPad, Galaxy Tab, Surface     */
+/*  TABLET PORTRAIT (768-1024px)                                 */
 /* ------------------------------------------------------------ */
 @media (min-width: 768px) and (max-width: 1024px) {
   .container {
-    padding-left: 1.5rem !important;
-    padding-right: 1.5rem !important;
-    max-width: 100% !important;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    max-width: 100%;
   }
 
-  /* 2-column grids for tablets instead of 1 or 3 */
   .tablet-grid-2 {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  /* Ensure navigation doesn't crowd on tablets */
   nav .container {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
-  /* Comfortable card spacing */
   .section-spacing { @apply py-10; }
 
-  /* Slightly larger touch targets */
   button,
   a[role="button"],
   [role="button"] {
     min-height: 44px;
   }
 
-  /* Admin dashboard 2-column grid */
-  .admin-stats-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
+  .admin-stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .quick-actions-grid { grid-template-columns: repeat(3, 1fr); }
 
-  .quick-actions-grid {
-    grid-template-columns: repeat(3, 1fr) !important;
-  }
-
-  /* Tables scroll horizontally */
   .desktop-table {
     display: block;
     overflow-x: auto;
@@ -601,6 +486,7 @@
 
   .mobile-cards { display: none; }
 }
+
 
 /* ------------------------------------------------------------ */
 /*  TABLET LANDSCAPE / SMALL LAPTOP (1024-1280px)                */
@@ -615,103 +501,66 @@
 
   .container {
     max-width: 1024px;
-    padding-left: 2rem !important;
-    padding-right: 2rem !important;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }
+
 
 /* ------------------------------------------------------------ */
 /*  LAPTOP (1280-1536px)                                         */
 /* ------------------------------------------------------------ */
 @media (min-width: 1280px) and (max-width: 1536px) {
-  .container {
-    max-width: 1280px;
-  }
+  .container { max-width: 1280px; }
 }
+
 
 /* ------------------------------------------------------------ */
 /*  DESKTOP / LARGE MONITOR (1537-1920px)                        */
 /* ------------------------------------------------------------ */
 @media (min-width: 1537px) and (max-width: 1920px) {
-  .container {
-    max-width: 1400px;
-  }
-
-  /* More breathing room on large screens */
+  .container { max-width: 1400px; }
   .section-spacing { @apply py-20; }
-
-  /* Larger typography for comfortable reading distance */
   h1 { font-size: clamp(2.5rem, 3.5vw, 4rem); }
   h2 { font-size: clamp(2rem, 2.5vw, 3rem); }
 }
+
 
 /* ------------------------------------------------------------ */
 /*  PROJECTOR / TV / ULTRA-WIDE (>1920px)                        */
 /* ------------------------------------------------------------ */
 @media (min-width: 1921px) {
-  html {
-    font-size: clamp(16px, 0.85vw, 22px);
-  }
-
-  .container {
-    max-width: 1600px;
-  }
-
-  /* Scale up section spacing for big screens */
+  html { font-size: clamp(16px, 0.85vw, 22px); }
+  .container { max-width: 1600px; }
   .section-spacing { @apply py-24; }
 
-  /* Larger hero for auditorium visibility */
-  h1 {
-    font-size: clamp(3rem, 4vw, 5rem) !important;
-    letter-spacing: -0.03em;
-  }
-  h2 {
-    font-size: clamp(2.25rem, 3vw, 3.75rem) !important;
-  }
-  h3 {
-    font-size: clamp(1.5rem, 2vw, 2.5rem) !important;
-  }
-  p, li {
-    font-size: clamp(1.125rem, 1.2vw, 1.5rem);
-    line-height: 1.7;
-  }
+  h1 { font-size: clamp(3rem, 4vw, 5rem); letter-spacing: -0.03em; }
+  h2 { font-size: clamp(2.25rem, 3vw, 3.75rem); }
+  h3 { font-size: clamp(1.5rem, 2vw, 2.5rem); }
+  p, li { font-size: clamp(1.125rem, 1.2vw, 1.5rem); line-height: 1.7; }
 
-  /* Cards need to be bigger on projectors */
   .skeuo-card,
   [data-slot="card"],
-  .glass-card {
-    padding: 2rem;
-  }
+  .glass-card { padding: 2rem; }
 
-  /* Larger buttons for visibility */
   button, .skeuo-button {
     font-size: clamp(1rem, 1.1vw, 1.25rem);
     padding: 0.875rem 2rem;
   }
 
-  /* Ensure nav logo and text are visible at distance */
-  nav img {
-    width: 48px !important;
-    height: 48px !important;
-  }
+  nav img { width: 48px; height: 48px; }
 }
 
-/* Ultra-wide monitors (>2560px — 4K) */
 @media (min-width: 2560px) {
-  html {
-    font-size: clamp(18px, 0.75vw, 24px);
-  }
-
-  .container {
-    max-width: 1920px;
-  }
+  html { font-size: clamp(18px, 0.75vw, 24px); }
+  .container { max-width: 1920px; }
 }
+
 
 /* ------------------------------------------------------------ */
 /*  TOUCH DEVICE OPTIMIZATIONS                                   */
 /* ------------------------------------------------------------ */
 @media (hover: none) and (pointer: coarse) {
-  /* Disable hover effects on pure touch */
   .card-enhanced:hover {
     transform: translateY(0);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -720,16 +569,13 @@
     transform: scale(0.98);
     transition: transform 0.1s ease-out;
   }
-  .card-enhanced:hover img {
-    transform: scale(1);
-  }
-
-  /* Ensure scrolling is smooth */
+  .card-enhanced:hover img { transform: scale(1); }
   * { -webkit-overflow-scrolling: touch; }
 }
 
+
 /* ------------------------------------------------------------ */
-/*  iOS SAFE AREA INSETS — notch, Dynamic Island, home bar       */
+/*  iOS SAFE AREA INSETS                                          */
 /* ------------------------------------------------------------ */
 @supports (padding: env(safe-area-inset-bottom)) {
   .fixed.bottom-0,
@@ -750,7 +596,7 @@
     padding-right: env(safe-area-inset-right);
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     .mobile-call-btn,
     .cookie-consent,
     .fab-button {
@@ -759,22 +605,21 @@
   }
 }
 
+
 /* ------------------------------------------------------------ */
-/*  LANDSCAPE PHONE — prevent cramped layouts                    */
+/*  LANDSCAPE PHONE                                              */
 /* ------------------------------------------------------------ */
 @media (max-height: 500px) and (orientation: landscape) {
   .hero-mobile {
-    min-height: auto !important;
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
+    min-height: auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
-  /* Reduce section spacing in landscape */
   .section-spacing { @apply py-4; }
-
-  /* Hide non-essential decorative elements */
-  .landscape-hide { display: none !important; }
+  .landscape-hide { display: none; }
 }
+
 
 /* ------------------------------------------------------------ */
 /*  PRINT STYLES                                                 */
@@ -785,23 +630,15 @@
     display: none !important;
   }
 
-  body {
-    background: white !important;
-    color: black !important;
-    font-size: 12pt;
-  }
-
-  .container {
-    max-width: 100% !important;
-    padding: 0 !important;
-  }
-
+  body { background: white !important; color: black !important; font-size: 12pt; }
+  .container { max-width: 100% !important; padding: 0 !important; }
   a { text-decoration: underline; }
   a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; }
 }
 
+
 /* ------------------------------------------------------------ */
-/*  REDUCED MOTION — accessibility                               */
+/*  REDUCED MOTION                                               */
 /* ------------------------------------------------------------ */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -812,13 +649,12 @@
   }
 }
 
+
 /* ------------------------------------------------------------ */
-/*  HIGH CONTRAST — accessibility                                */
+/*  HIGH CONTRAST                                                */
 /* ------------------------------------------------------------ */
 @media (prefers-contrast: high) {
-  :root {
-    --border: 0 0% 40%;
-  }
+  :root { --border: 0 0% 40%; }
 
   .glass,
   .glass-light,

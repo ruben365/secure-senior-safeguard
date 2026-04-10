@@ -191,7 +191,7 @@ main a:not([class]):hover {
 /* ── Tooltip-like elements — consistent glass style ── */
 [role="tooltip"],
 [data-radix-popper-content-wrapper] {
-  border-radius: 8px !important;
+  border-radius: 8px;
 }
 
 /* ── Input fields — premium focus state ── */
@@ -203,24 +203,22 @@ main select:focus {
 }
 
 /* ── Responsive dialog/menu sizing ── */
-@media (max-width: 640px) {
-  /* Dialog sizing moved to responsive.css — single source of truth */
-
+@media (max-width: 639px) {
   [data-radix-popper-content-wrapper] {
-    max-width: calc(100vw - 1rem) !important;
+    max-width: calc(100vw - 1rem);
   }
 }
 
-@media (min-width: 641px) and (max-width: 1024px) {
+@media (min-width: 640px) and (max-width: 1024px) {
   [role="dialog"] {
-    max-width: min(430px, calc(100vw - 2rem)) !important;
+    max-width: min(430px, calc(100vw - 2rem));
   }
 }
 
 /* ── Z-index system — prevent stacking conflicts ── */
 .fixed { z-index: 40; }
-nav { z-index: 50 !important; }
-[role="dialog"] { z-index: 60 !important; }
+nav { z-index: 50; }
+[role="dialog"] { z-index: 60; }
 
 /* ── Cookie consent banner ── */
 .cookie-banner {
@@ -282,21 +280,21 @@ nav { z-index: 50 !important; }
 [role="dialog"] input,
 [role="dialog"] textarea,
 [role="dialog"] select {
-  background: rgba(255, 255, 255, 0.06) !important;
-  border-color: rgba(255, 255, 255, 0.12) !important;
-  color: white !important;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: white;
 }
 
 [role="dialog"] input::placeholder,
 [role="dialog"] textarea::placeholder {
-  color: rgba(255, 255, 255, 0.4) !important;
+  color: rgba(255, 255, 255, 0.4);
 }
 
 [role="dialog"] input:focus,
 [role="dialog"] textarea:focus,
 [role="dialog"] select:focus {
-  border-color: rgba(184, 115, 51, 0.5) !important;
-  box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.1) !important;
+  border-color: rgba(184, 115, 51, 0.5);
+  box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.1);
 }
 
 [role="dialog"] label {
