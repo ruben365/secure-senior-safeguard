@@ -62,6 +62,7 @@ export const HeroBusiness = ({ onStrategyCall }: { onStrategyCall: () => void })
 
       {/* ── Hero Content: Left text only ── */}
       <div className="hero-biz__content">
+        <div className="max-w-[1600px] mx-auto w-full px-6 lg:px-8">
         <div className="hero-biz__copy">
 
           <h1 className="hero-biz__headline">
@@ -87,10 +88,12 @@ export const HeroBusiness = ({ onStrategyCall }: { onStrategyCall: () => void })
             </button>
           </div>
         </div>
+        </div>
       </div>
 
       {/* ── Bottom Feature Cards ── */}
       <div className="hero-biz__panel">
+        <div className="max-w-[1600px] mx-auto w-full px-6 lg:px-8">
         <div className="hero-biz__panel-inner">
           <div className="hero-biz__feature-row">
             {businessFeatures.map((f) => (
@@ -114,6 +117,7 @@ export const HeroBusiness = ({ onStrategyCall }: { onStrategyCall: () => void })
               </button>
             ))}
           </div>
+        </div>
         </div>
       </div>
     </section>

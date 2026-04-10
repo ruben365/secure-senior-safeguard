@@ -106,9 +106,9 @@
   width: 100%;
   margin: 0;
   padding-top: clamp(90px, 12vw, 130px);
-  padding-right: max(4rem, 8%);
+  padding-right: 0;
   padding-bottom: 2rem;
-  padding-left: max(4rem, 8%);
+  padding-left: 0;
 }
 
 .hero-ws__layout {
@@ -183,9 +183,9 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  height: 50px;
-  padding: 0 2.25rem;
-  font-size: 0.875rem;
+  height: 40px;
+  padding: 0 1.5rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   color: #ffffff;
@@ -561,14 +561,12 @@
   margin-top: auto;
   background: transparent;
   border: none;
-  padding: 1.5rem clamp(20px, 4vw, 64px);
+  padding: 1.5rem 0;
   animation: wsPanelUp 0.5s ease-out 0.3s both;
 }
 
 .hero-ws__panel-inner {
-  max-width: 1400px;
   width: 100%;
-  margin: 0 auto;
 }
 
 .hero-ws__feature-row {

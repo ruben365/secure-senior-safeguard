@@ -500,7 +500,7 @@ function Auth() {
 
   // Premium input style — subtle bg, warm orange focus ring
   const inputClassName =
-    "h-10 pl-10 text-[14px] bg-white/[0.06] border-white/[0.12] text-white placeholder:text-white/40 rounded-lg transition-all duration-200 focus:bg-white/[0.1] focus:border-orange-500/50 hover:border-white/20";
+    "h-10 pl-10 text-[14px] bg-muted/30 border-border/70 text-foreground placeholder:text-muted-foreground/60 rounded-lg transition-all duration-200 focus:bg-background focus:border-primary/50 hover:border-border";
 
   if (signupSuccess) {
     return (
@@ -535,12 +535,12 @@ function Auth() {
                 <CheckCircle2 className="w-7 h-7 text-white" strokeWidth={2.25} />
               </div>
             </div>
-            <h2 className="text-[1.5rem] font-bold text-white tracking-tight mb-2">
+            <h2 className="text-[1.5rem] font-bold text-foreground tracking-tight mb-2">
               Check your email
             </h2>
-            <p className="text-sm text-white/60 leading-relaxed mb-6">
+            <p className="text-sm text-muted-foreground leading-relaxed mb-6">
               We sent a verification link to{" "}
-              <span className="font-semibold text-white">{email}</span>.
+              <span className="font-semibold text-foreground">{email}</span>.
               Click it to activate your account.
             </p>
             <Button
@@ -826,7 +826,7 @@ function Auth() {
               className="absolute -inset-4 rounded-[28px] bg-gradient-to-br from-orange-500/20 via-transparent to-purple-500/15 blur-2xl pointer-events-none"
             />
 
-            <div className="dark-surface relative rounded-[20px] p-8 md:p-10" style={{ background: "rgba(18, 14, 12, 0.92)", backdropFilter: "blur(20px) saturate(130%)", WebkitBackdropFilter: "blur(20px) saturate(130%)", border: "1px solid rgba(255, 255, 255, 0.08)", boxShadow: "0 1px 0 0 rgba(255,255,255,0.06) inset, 0 24px 60px -16px rgba(0,0,0,0.5), 0 8px 32px -8px rgba(0,0,0,0.3)" }}>
+            <div className="relative rounded-[20px] p-8 md:p-10" style={{ background: "hsl(var(--background))", border: "1px solid hsl(var(--border) / 0.7)", boxShadow: "0 24px 60px -16px rgba(0,0,0,0.12), 0 8px 32px -8px rgba(0,0,0,0.08)" }}>
               {/* Top hairline rim light */}
               <div
                 aria-hidden="true"
@@ -847,17 +847,17 @@ function Auth() {
                 <img
                   src={invisionLogo}
                   alt="InVision Network"
-                  className="w-10 h-10 brightness-0 invert drop-shadow-sm"
+                  className="w-10 h-10 drop-shadow-sm"
                   loading="eager"
                   decoding="sync"
                   width={40}
                   height={40}
                 />
                 <div className="flex flex-col leading-tight">
-                  <span className="text-base font-bold text-white tracking-tight">
+                  <span className="text-base font-bold text-foreground tracking-tight">
                     InVision Network
                   </span>
-                  <span className="text-[10px] text-white/50 tracking-[0.12em] uppercase">
+                  <span className="text-[10px] text-muted-foreground tracking-[0.12em] uppercase">
                     Secure Portal
                   </span>
                 </div>
@@ -865,10 +865,10 @@ function Auth() {
 
               {/* Heading — swaps between Sign In and Sign Up */}
               <div className="mb-6">
-                <h2 className="text-[1.5rem] md:text-[1.625rem] font-bold text-white leading-tight tracking-tight">
+                <h2 className="text-[1.5rem] md:text-[1.625rem] font-bold text-foreground leading-tight tracking-tight">
                   {activeTab === "signup" ? "Create your account" : "Sign in to your account"}
                 </h2>
-                <p className="text-[13px] text-white/50 mt-1">
+                <p className="text-[13px] text-muted-foreground mt-1">
                   {activeTab === "signup"
                     ? "A few details and you're set — it takes 30 seconds."
                     : "Welcome back. Please enter your details."}
@@ -880,16 +880,16 @@ function Auth() {
             onValueChange={setActiveTab}
             className="w-full"
           >
-            <TabsList className="grid w-full grid-cols-2 mb-6 h-11 bg-white/[0.06] border border-white/[0.08] rounded-lg p-1">
+            <TabsList className="grid w-full grid-cols-2 mb-6 h-11 bg-muted/50 border border-border/70 rounded-lg p-1">
               <TabsTrigger
                 value="login"
-                className="h-9 text-[14px] font-semibold text-white/60 data-[state=active]:text-white data-[state=active]:bg-white/[0.1] data-[state=active]:shadow-sm rounded-md"
+                className="h-9 text-[14px] font-semibold text-muted-foreground data-[state=active]:text-foreground data-[state=active]:bg-background data-[state=active]:shadow-sm rounded-md"
               >
                 Sign In
               </TabsTrigger>
               <TabsTrigger
                 value="signup"
-                className="h-9 text-[14px] font-semibold text-white/60 data-[state=active]:text-white data-[state=active]:bg-white/[0.1] data-[state=active]:shadow-sm rounded-md"
+                className="h-9 text-[14px] font-semibold text-muted-foreground data-[state=active]:text-foreground data-[state=active]:bg-background data-[state=active]:shadow-sm rounded-md"
               >
                 Sign Up
               </TabsTrigger>
@@ -903,7 +903,7 @@ function Auth() {
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full h-10 rounded-lg bg-white/[0.06] border border-white/[0.12] text-white text-[13px] font-medium hover:bg-white/[0.1] hover:border-white/20 transition-all duration-200"
+                    className="w-full h-10 rounded-lg bg-muted/50 border border-border/70 text-foreground text-[13px] font-medium hover:bg-muted hover:border-border transition-all duration-200"
                     onClick={handleGoogleSignIn}
                   >
                     <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
@@ -930,7 +930,7 @@ function Auth() {
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full h-10 rounded-lg bg-white/[0.06] border border-white/[0.12] text-white text-[13px] font-medium hover:bg-white/[0.1] hover:border-white/20 transition-all duration-200"
+                    className="w-full h-10 rounded-lg bg-muted/50 border border-border/70 text-foreground text-[13px] font-medium hover:bg-muted hover:border-border transition-all duration-200"
                     onClick={handleMicrosoftSignIn}
                   >
                     <svg className="w-5 h-5 mr-3" viewBox="0 0 23 23">
@@ -946,17 +946,17 @@ function Auth() {
                 {/* Divider */}
                 <div className="relative">
                   <div className="absolute inset-0 flex items-center">
-                    <span className="w-full border-t border-white/[0.1]" />
+                    <span className="w-full border-t border-border/50" />
                   </div>
                   <div className="relative flex justify-center text-xs uppercase">
-                    <span className="px-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-white/40" style={{ background: "rgba(18, 14, 12, 0.92)" }}>
+                    <span className="px-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground" style={{ background: "hsl(var(--background))" }}>
                       or continue with email
                     </span>
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="login-email" className="text-sm font-medium text-white/70">
+                  <Label htmlFor="login-email" className="text-sm font-medium text-foreground/80">
                     Email Address
                   </Label>
                   <div className="relative">
@@ -983,7 +983,7 @@ function Auth() {
                 <div className="space-y-2">
                   <Label
                     htmlFor="login-password"
-                    className="text-sm font-medium text-white/70"
+                    className="text-sm font-medium text-foreground/80"
                   >
                     Password
                   </Label>
@@ -1069,9 +1069,9 @@ function Auth() {
                 </Button>
 
                 {/* Security Footer */}
-                <div className="flex items-center justify-center gap-2 pt-3 border-t border-white/[0.08] mt-4">
-                  <ShieldCheck className="w-4 h-4 text-white/40" />
-                  <span className="text-xs text-white/40">
+                <div className="flex items-center justify-center gap-2 pt-3 border-t border-border/50 mt-4">
+                  <ShieldCheck className="w-4 h-4 text-muted-foreground" />
+                  <span className="text-xs text-muted-foreground">
                     Secured by 256-bit Encryption
                   </span>
                 </div>
@@ -1086,7 +1086,7 @@ function Auth() {
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full h-10 rounded-lg bg-white/[0.06] border border-white/[0.12] text-white text-[13px] font-medium hover:bg-white/[0.1] hover:border-white/20 transition-all duration-200"
+                    className="w-full h-10 rounded-lg bg-muted/50 border border-border/70 text-foreground text-[13px] font-medium hover:bg-muted hover:border-border transition-all duration-200"
                     onClick={handleGoogleSignIn}
                   >
                     <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
@@ -1113,7 +1113,7 @@ function Auth() {
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full h-10 rounded-lg bg-white/[0.06] border border-white/[0.12] text-white text-[13px] font-medium hover:bg-white/[0.1] hover:border-white/20 transition-all duration-200"
+                    className="w-full h-10 rounded-lg bg-muted/50 border border-border/70 text-foreground text-[13px] font-medium hover:bg-muted hover:border-border transition-all duration-200"
                     onClick={handleMicrosoftSignIn}
                   >
                     <svg className="w-5 h-5 mr-3" viewBox="0 0 23 23">
@@ -1129,10 +1129,10 @@ function Auth() {
                 {/* Divider */}
                 <div className="relative">
                   <div className="absolute inset-0 flex items-center">
-                    <span className="w-full border-t border-white/[0.1]" />
+                    <span className="w-full border-t border-border/50" />
                   </div>
                   <div className="relative flex justify-center text-xs uppercase">
-                    <span className="px-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-white/40" style={{ background: "rgba(18, 14, 12, 0.92)" }}>
+                    <span className="px-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground" style={{ background: "hsl(var(--background))" }}>
                       or continue with email
                     </span>
                   </div>
@@ -1140,7 +1140,7 @@ function Auth() {
 
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-2">
-                    <Label htmlFor="firstName" className="text-sm font-medium text-white/70">
+                    <Label htmlFor="firstName" className="text-sm font-medium text-foreground/80">
                       First Name
                     </Label>
                     <Input
@@ -1149,11 +1149,11 @@ function Auth() {
                       onChange={(e) => setFirstName(e.target.value)}
                       required
                       disabled={isLoading}
-                      className="h-10 bg-white/[0.06] border-white/[0.12] text-white placeholder:text-white/40 focus:border-orange-500/50 focus:ring-2 focus:ring-orange-500/20 transition-all rounded-lg"
+                      className="h-10 bg-muted/30 border-border/70 text-foreground placeholder:text-muted-foreground/60 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all rounded-lg"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="lastName" className="text-sm font-medium text-white/70">
+                    <Label htmlFor="lastName" className="text-sm font-medium text-foreground/80">
                       Last Name
                     </Label>
                     <Input
@@ -1162,13 +1162,13 @@ function Auth() {
                       onChange={(e) => setLastName(e.target.value)}
                       required
                       disabled={isLoading}
-                      className="h-10 bg-white/[0.06] border-white/[0.12] text-white placeholder:text-white/40 focus:border-orange-500/50 focus:ring-2 focus:ring-orange-500/20 transition-all rounded-lg"
+                      className="h-10 bg-muted/30 border-border/70 text-foreground placeholder:text-muted-foreground/60 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all rounded-lg"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="signup-email" className="text-sm font-medium text-white/70">
+                  <Label htmlFor="signup-email" className="text-sm font-medium text-foreground/80">
                     Email Address
                   </Label>
                   <div className="relative">
@@ -1189,7 +1189,7 @@ function Auth() {
                 <div className="space-y-2">
                   <Label
                     htmlFor="signup-password"
-                    className="text-sm font-medium text-white/70"
+                    className="text-sm font-medium text-foreground/80"
                   >
                     Password
                   </Label>
@@ -1250,7 +1250,7 @@ function Auth() {
                 <div className="space-y-2">
                   <Label
                     htmlFor="confirmPassword"
-                    className="text-sm font-medium text-white/70"
+                    className="text-sm font-medium text-foreground/80"
                   >
                     Confirm Password
                   </Label>
@@ -1321,9 +1321,9 @@ function Auth() {
                 </Button>
 
                 {/* Security Footer */}
-                <div className="flex items-center justify-center gap-2 pt-3 border-t border-white/[0.08] mt-4">
-                  <ShieldCheck className="w-4 h-4 text-white/40" />
-                  <span className="text-xs text-white/40">
+                <div className="flex items-center justify-center gap-2 pt-3 border-t border-border/50 mt-4">
+                  <ShieldCheck className="w-4 h-4 text-muted-foreground" />
+                  <span className="text-xs text-muted-foreground">
                     Secured by 256-bit Encryption
                   </span>
                 </div>
@@ -1337,7 +1337,7 @@ function Auth() {
             <div className="mt-6 text-center">
               <Link
                 to="/careers"
-                className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 Want to join our team?{" "}
                 <span className="text-orange-300 font-semibold">Apply here</span>
@@ -1346,21 +1346,21 @@ function Auth() {
             </div>
 
             {/* Bottom legal links — restyled for dark backdrop */}
-            <div className="mt-3 flex items-center justify-center gap-3 text-[11px] text-white/45">
+            <div className="mt-3 flex items-center justify-center gap-3 text-[11px] text-muted-foreground">
               <Link
                 to="/privacy-policy"
-                className="hover:text-white/80 transition-colors"
+                className="hover:text-foreground transition-colors"
               >
                 Privacy Policy
               </Link>
-              <span className="text-white/25">•</span>
+              <span className="text-muted-foreground/50">•</span>
               <Link
                 to="/terms-of-service"
-                className="hover:text-white/80 transition-colors"
+                className="hover:text-foreground transition-colors"
               >
                 Terms of Service
               </Link>
-              <span className="text-white/25">•</span>
+              <span className="text-muted-foreground/50">•</span>
               <span>© {new Date().getFullYear()} InVision Network</span>
             </div>
           </div>

@@ -102,9 +102,9 @@
   width: 100%;
   margin: 0;
   padding-top: clamp(110px, 12vw, 150px);
-  padding-right: max(4rem, 8%);
+  padding-right: 0;
   padding-bottom: clamp(220px, 18vw, 290px);
-  padding-left: max(4rem, 8%);
+  padding-left: 0;
 }
 
 .hero-biz__copy {
@@ -172,9 +172,9 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  height: 50px;
-  padding: 0 2.25rem;
-  font-size: 0.875rem;
+  height: 40px;
+  padding: 0 1.5rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   color: #ffffff;
@@ -227,12 +227,10 @@
 
 /* ═══ 4. BOTTOM FEATURE CARDS — overlapping hero bottom ═══ */
 .hero-biz__panel {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 40%;
+  position: relative;
   z-index: 20;
-  padding: 0 clamp(8px, 1vw, 16px) 0 0;
+  margin-top: auto;
+  padding: 1.5rem 0;
   animation: bizPanelUp 0.7s ease-out 0.6s both;
 }
 
@@ -430,7 +428,7 @@
 
 /* ═══ 6. RESPONSIVE ═══ */
 @media (max-width: 1024px) {
-  .hero-biz__panel { position: relative; left: auto; right: auto; padding: 0 clamp(16px, 3vw, 32px); max-width: 100%; }
+  .hero-biz__panel { padding: 1rem 0; }
   .hero-biz__feature-row { flex-wrap: wrap; }
   .hero-biz__feature { flex: 1 1 calc(50% - 0.5rem); min-height: 180px; border-radius: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); }
 }
@@ -442,7 +440,7 @@
   .hero-biz__body { font-size: 0.75rem; }
   .hero-biz__ctas { flex-direction: row; gap: 0.5rem; }
   .hero-biz__cta { width: auto; max-width: 180px; justify-content: center; height: 34px; font-size: 12px; padding: 0 14px; }
-  .hero-biz__panel { padding: 0 1rem 1rem; }
+  .hero-biz__panel { padding: 0.75rem 0; }
   .hero-biz__content { padding-bottom: 1.5rem; }
   .hero-biz__feature-label { font-size: 1.2rem; }
   .hero-biz__bg img {
