@@ -137,8 +137,6 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
 
   return (
     <footer ref={ref} className="relative">
-      <TrustedTechLogos />
-
       <div className="footer-bg text-white relative overflow-hidden">
         {/* Subtle top edge */}
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -315,6 +313,9 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
             Social Security numbers.
           </p>
         </div>
+
+        {/* Tech logos — inside footer dark area */}
+        <TrustedTechLogos />
       </div>
     </footer>
   );
