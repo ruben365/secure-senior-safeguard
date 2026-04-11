@@ -6,14 +6,6 @@ import {
 } from "lucide-react";
 import corineHero from "@/assets/hero-wife-office.jpg";
 
-/* ── Hero tab items — each navigates to a dedicated page ── */
-const heroTabs = [
-  { label: "Protection", to: "/training#pricing" },
-  { label: "Workshops", to: "/training" },
-  { label: "AI", to: "/business" },
-  { label: "Contact", to: "/contact" },
-];
-
 /* ── Feature items — Row 1 (top) ── */
 const featuresRow1 = [
   {
@@ -83,25 +75,6 @@ export const HeroHomepage = () => {
       <div className="hero-home__content">
         <div className="max-w-[1600px] mx-auto w-full px-6 lg:px-8">
           <div className="hero-home__copy">
-
-            {/* Kicker / Overline */}
-            <div className="hero-home__kicker">
-              <span className="hero-home__kicker-line" />
-              <span className="hero-home__kicker-text">Your Path to Safety</span>
-            </div>
-
-            {/* Micro-Nav Tabs — desktop only, hidden on mobile to reduce clutter */}
-            <nav className="hero-home__tabs hidden md:flex" aria-label="Quick links">
-              {heroTabs.map((tab) => (
-                <Link
-                  key={tab.label}
-                  to={tab.to}
-                  className="hero-home__tab"
-                >
-                  {tab.label}
-                </Link>
-              ))}
-            </nav>
 
             {/* Headline */}
             <h1 className="hero-home__headline">
