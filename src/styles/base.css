@@ -209,16 +209,17 @@
     --dark-text-muted:  rgba(255, 255, 255, 0.5);
     --dark-placeholder: rgba(255, 255, 255, 0.4);
 
-    /* ── Shadow System — DISABLED per design directive (no box-shadows anywhere) ── */
-    --shadow-xs:  none;
-    --shadow-sm:  none;
-    --shadow-md:  none;
-    --shadow-lg:  none;
+    /* ── Shadow System — Polished, subtle depth (light theme only) ──
+       Using low-opacity navy-tinted shadows for cohesion with brand.  */
+    --shadow-xs:  0 1px 2px rgba(13, 33, 55, 0.04);
+    --shadow-sm:  0 1px 3px rgba(13, 33, 55, 0.06), 0 1px 2px rgba(13, 33, 55, 0.04);
+    --shadow-md:  0 4px 12px rgba(13, 33, 55, 0.08), 0 2px 4px rgba(13, 33, 55, 0.04);
+    --shadow-lg:  0 10px 24px rgba(13, 33, 55, 0.10), 0 4px 8px rgba(13, 33, 55, 0.06);
 
-    --shadow-card:       none;
-    --shadow-card-hover: none;
-    --shadow-elevated:   none;
-    --shadow-cta:        none;
+    --shadow-card:       0 1px 3px rgba(13, 33, 55, 0.06), 0 1px 2px rgba(13, 33, 55, 0.04);
+    --shadow-card-hover: 0 8px 20px rgba(13, 33, 55, 0.10), 0 3px 6px rgba(13, 33, 55, 0.06);
+    --shadow-elevated:   0 12px 32px rgba(13, 33, 55, 0.12), 0 4px 8px rgba(13, 33, 55, 0.06);
+    --shadow-cta:        0 4px 14px rgba(217, 108, 74, 0.30), 0 1px 0 rgba(255, 255, 255, 0.20) inset;
 
     /* ── Sidebar (admin dark) ── */
     --sidebar-background: 215 40% 10%;
@@ -267,8 +268,8 @@
     /* Global text scale — 0.875 = 14px base (compact but readable) */
     --text-scale: 0.875;
 
-    /* ── Shadow XL token — DISABLED ── */
-    --shadow-xl: none;
+    /* ── Shadow XL token ── */
+    --shadow-xl: 0 20px 40px rgba(13, 33, 55, 0.14), 0 6px 12px rgba(13, 33, 55, 0.08);
   }
 
   .dark {
@@ -629,12 +630,19 @@
   }
 
   p {
-    font-size: 0.9375rem; /* 15px at 16px base, ~13px with 0.85 scale */
+    font-size: 0.9375rem; /* 15px */
     line-height: 1.65;
     letter-spacing: -0.011em;
     margin: 0 0 0.75rem;
-    color: hsl(var(--foreground) / 0.85);
+    /* Full foreground for WCAG AA contrast; use .text-muted-foreground for secondary text */
+    color: hsl(var(--foreground));
     max-width: 65ch;
+  }
+
+  /* Secondary/muted paragraph text — still meets WCAG AA */
+  p.text-muted,
+  .text-secondary {
+    color: hsl(var(--muted-foreground));
   }
 
   .lead {
@@ -673,25 +681,52 @@
     line-height: 1.6;
   }
 
-  /* Tap targets — 36px desktop, 44px mobile (no zoom to compensate for) */
+  /* Tap targets — WCAG/Apple HIG/Material guidance */
   button,
   [role="button"],
   a[role="button"] {
-    min-height: 36px;
-    min-width: 36px;
+    min-height: 38px;
+    min-width: 38px;
   }
 
+  /* Mobile: enforce 44×44 minimum touch target */
   @media (max-width: 767px) {
     button,
     [role="button"],
     a[role="button"] {
-      min-height: 34px;
-      min-width: 34px;
+      min-height: 44px;
+      min-width: 44px;
     }
   }
 
   button {
     font-size: 1rem;
+  }
+
+  /* ===== POLISH: Consistent focus ring across interactive elements ===== */
+  :focus-visible {
+    outline: none;
+  }
+  button:focus-visible,
+  a:focus-visible,
+  [role="button"]:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid hsl(var(--primary) / 0.6);
+    outline-offset: 3px;
+    border-radius: inherit;
+  }
+
+  /* ===== POLISH: Respect reduced motion ===== */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 
   /* ===== PERFORMANCE OPTIMIZATION ===== */

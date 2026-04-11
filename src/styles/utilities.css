@@ -79,22 +79,22 @@
   color: transparent;
 }
 
-/* ===== GLOBAL CARD STYLE — Premium ===== */
+/* ===== GLOBAL CARD STYLE — Premium polished ===== */
 [data-slot="card"],
 .glass-card {
-  background: hsl(0 0% 100% / 0.98);
-  border: 1px solid hsl(var(--border) / 0.7) !important;
-  border-radius: 0.75rem;
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border) / 0.6) !important;
+  border-radius: 0.875rem;
   box-shadow: var(--shadow-card);
-  transition: box-shadow 0.22s cubic-bezier(0.2, 0, 0.2, 1),
-              border-color 0.22s ease,
-              transform 0.22s cubic-bezier(0.2, 0, 0.2, 1);
+  transition: box-shadow 0.25s cubic-bezier(0.2, 0, 0.2, 1),
+              border-color 0.25s ease,
+              transform 0.25s cubic-bezier(0.2, 0, 0.2, 1);
 }
 
 [data-slot="card"]:hover,
 .glass-card:hover {
   box-shadow: var(--shadow-card-hover);
-  border-color: hsl(var(--primary) / 0.2) !important;
+  border-color: hsl(var(--primary) / 0.25) !important;
   transform: translateY(-2px);
 }
 
