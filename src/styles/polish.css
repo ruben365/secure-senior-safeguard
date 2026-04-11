@@ -731,3 +731,223 @@ section[data-reveal]:nth-child(odd) {
     transition: none !important;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   WEBSITE ENHANCEMENT PASS — polished details for every device
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Refined image treatment ──
+   Every <img> that isn't a hero background or icon gets soft rounding
+   and subtle depth, so content photos feel premium without being loud. */
+main img:not([class*="rounded-none"]):not([class*="rounded-full"]):not([aria-hidden="true"]):not([class*="hero"]):not(.no-polish) {
+  border-radius: 0.625rem;
+  transition: transform var(--dur-std) var(--ease-out-std);
+}
+
+/* ── Figure / picture polish ── */
+figure {
+  margin: 0;
+}
+
+/* ── Global smooth transitions on common interactive elements ──
+   Guarantees a consistent feel even if a component forgot to set one. */
+button,
+[role="button"],
+a,
+input,
+select,
+textarea,
+summary {
+  transition-property: color, background-color, border-color, box-shadow, transform, opacity;
+  transition-duration: var(--dur-std);
+  transition-timing-function: var(--ease-out-std);
+}
+
+/* ── Scroll progress indicator (optional, opt-in via .has-scroll-progress on body) ── */
+body.has-scroll-progress::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: var(--scroll-progress, 0%);
+  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
+  z-index: 10000;
+  transition: width 80ms linear;
+  pointer-events: none;
+}
+
+/* ── Polished scrollbars (WebKit + Firefox) ── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--primary) / 0.35) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.25);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: background var(--dur-std) var(--ease-out-std);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.5);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+/* ── Section vertical rhythm — consistent spacing across all content pages ── */
+main > section,
+main > div > section {
+  padding-top: clamp(3rem, 6vw, 5rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+/* Keep hero-ish sections exempt — they own their padding */
+main > section.hero-home,
+main > section.hero-biz,
+main > section.hero-ws,
+main > div > .hero-home,
+main > div > .hero-biz,
+main > div > .hero-ws {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* ── Mobile spacing relief ── */
+@media (max-width: 640px) {
+  main > section,
+  main > div > section {
+    padding-top: clamp(2rem, 8vw, 3rem);
+    padding-bottom: clamp(2rem, 8vw, 3rem);
+  }
+}
+
+/* ── Polished horizontal rules ── */
+hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    hsl(var(--border) / 0.7) 20%,
+    hsl(var(--border) / 0.7) 80%,
+    transparent
+  );
+  margin: 2rem 0;
+}
+
+/* ── Code tag polish (inline code in content) ── */
+main p code,
+main li code {
+  background: hsl(var(--muted) / 0.7);
+  border: 1px solid hsl(var(--border) / 0.5);
+  padding: 0.125rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.85em;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: hsl(var(--foreground));
+}
+
+/* ── Strong / emphasis treatment ── */
+main strong,
+main b {
+  color: hsl(var(--foreground));
+  font-weight: 700;
+}
+
+/* ── Blockquote polish ── */
+main blockquote {
+  border-left: 3px solid hsl(var(--primary) / 0.6);
+  padding-left: 1.25rem;
+  margin: 1.5rem 0;
+  color: hsl(var(--foreground) / 0.85);
+  font-style: italic;
+}
+
+/* ── Table polish ── */
+main table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9375rem;
+  border: 1px solid hsl(var(--border) / 0.6);
+  border-radius: 0.625rem;
+  overflow: hidden;
+}
+
+main thead {
+  background: hsl(var(--muted) / 0.6);
+}
+
+main th,
+main td {
+  padding: 0.625rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid hsl(var(--border) / 0.4);
+}
+
+main tr:last-child td {
+  border-bottom: none;
+}
+
+main tbody tr:hover {
+  background: hsl(var(--muted) / 0.3);
+}
+
+/* ── Tap highlight removal on mobile for cleaner interactions ── */
+a,
+button,
+[role="button"],
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── Consistent active press scale on touch devices ── */
+@media (hover: none) {
+  button:active,
+  a[role="button"]:active,
+  [role="button"]:active {
+    transform: scale(0.97);
+  }
+}
+
+/* ── Prevent iOS zoom on input focus (keep 16px minimum) ── */
+@media screen and (max-width: 767px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="url"],
+  input[type="search"],
+  input[type="date"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* ── Page wrapper min-height to keep footer at bottom ── */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#root > * {
+  flex-shrink: 0;
+}
