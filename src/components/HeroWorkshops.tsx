@@ -63,11 +63,6 @@ export const HeroWorkshops = () => {
 
           {/* Left — Copy */}
           <div className="hero-ws__copy">
-            <div className="hero-ws__kicker">
-              <span className="hero-ws__kicker-line" />
-              <span className="hero-ws__kicker-text">Workshops &amp; Training</span>
-            </div>
-
             <h1 className="hero-ws__headline">
               Learn to Spot Scams
               <br />
