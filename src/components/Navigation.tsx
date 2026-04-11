@@ -309,12 +309,18 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
           {/* Backdrop — click to close, starts below nav */}
           <div
             className="lg:hidden fixed left-0 right-0 bottom-0 z-[10000]"
-            style={{ top: "56px", background: "rgba(0,0,0,0.3)", animation: "backdropIn 200ms ease-out" }}
+            style={{
+              top: "56px",
+              background: "rgba(0,0,0,0.4)",
+              backdropFilter: "blur(4px)",
+              WebkitBackdropFilter: "blur(4px)",
+              animation: "backdropIn 200ms ease-out",
+            }}
             onClick={() => setMobileMenuOpen(false)}
             aria-hidden="true"
           />
 
-          {/* Panel */}
+          {/* Panel — clean glassmorphism */}
           <div
             id="mobile-navigation"
             role="dialog"
@@ -322,14 +328,16 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
             aria-label="Main navigation"
             className="lg:hidden fixed top-[56px] right-0 z-[10001] overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch]"
             style={{
-              width: "65%",
-              maxWidth: "260px",
-              maxHeight: "calc(80vh - 56px)",
-              background: "rgba(12, 10, 8, 0.92)",
-              backdropFilter: "blur(20px) saturate(1.3)",
-              WebkitBackdropFilter: "blur(20px) saturate(1.3)",
-              borderLeft: "1px solid rgba(255,255,255,0.08)",
-              borderBottomLeftRadius: "12px",
+              width: "72%",
+              maxWidth: "280px",
+              maxHeight: "calc(85vh - 56px)",
+              background: "rgba(20, 16, 14, 0.55)",
+              WebkitBackdropFilter: "blur(28px) saturate(1.6)",
+              backdropFilter: "blur(28px) saturate(1.6)",
+              borderLeft: "1px solid rgba(255,255,255,0.18)",
+              borderBottom: "1px solid rgba(255,255,255,0.14)",
+              borderBottomLeftRadius: "16px",
+              boxShadow: "0 20px 50px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.12)",
               animation: "menuSlideIn 250ms ease-out",
               paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 0.5rem)",
             }}
