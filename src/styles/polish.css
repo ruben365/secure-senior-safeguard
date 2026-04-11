@@ -1177,3 +1177,320 @@ main blockquote.pull-quote cite {
     display: none;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   PRO TOUCH — refined micro-interactions & depth
+   ─────────────────────────────────────────────────────────────────
+   The small details: spring easing, layered shadows, depth on hover,
+   link underline ease, subtle text shine on headlines.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Refined spring/physics-based easing tokens ── */
+:root {
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* ── Buttons: refined depth on hover + subtle press physics ── */
+@media (hover: hover) and (pointer: fine) {
+  button:not([data-radix-collection-item]):not([class*="no-lift"]),
+  a[role="button"]:not([class*="no-lift"]),
+  [role="button"]:not([data-radix-collection-item]):not([class*="no-lift"]) {
+    transition:
+      transform 0.22s var(--ease-out-expo),
+      box-shadow 0.22s var(--ease-out-expo),
+      border-color 0.22s var(--ease-out-expo),
+      background-color 0.22s var(--ease-out-expo),
+      color 0.22s var(--ease-out-expo);
+  }
+}
+
+/* ── Card: layered depth shadow on hover (light theme) ── */
+@media (hover: hover) and (pointer: fine) {
+  [data-slot="card"]:hover,
+  .glass-card:hover {
+    transform: translateY(-3px);
+    transition-timing-function: var(--ease-out-expo);
+  }
+}
+
+/* ── Refined image reveal — when entering viewport ── */
+main img:not([class*="hero"]):not([aria-hidden="true"]):not(.no-polish) {
+  opacity: 1;
+  animation: subtleFadeIn 0.6s var(--ease-out-expo) both;
+}
+
+@keyframes subtleFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Pro headline letter-animation on page load (opt-in via .h-reveal) ── */
+.h-reveal {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.h-reveal > span {
+  display: inline-block;
+  animation: headlineRise 0.8s var(--ease-out-expo) both;
+}
+
+@keyframes headlineRise {
+  from {
+    opacity: 0;
+    transform: translateY(110%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Refined link hover — animated underline with proper easing ── */
+main a:not([class*="btn"]):not([class*="button"]):not(.no-underline-anim):not([role="button"]) {
+  transition:
+    color 0.25s var(--ease-out-expo),
+    background-size 0.35s var(--ease-out-expo);
+  background-image: linear-gradient(to right, hsl(var(--primary)), hsl(var(--primary)));
+  background-size: 0% 1.5px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  padding-bottom: 1px;
+}
+
+main a:not([class*="btn"]):not([class*="button"]):not(.no-underline-anim):not([role="button"]):hover {
+  color: hsl(var(--primary));
+  background-size: 100% 1.5px;
+}
+
+/* ── Pro focus ring — springs in on focus ── */
+:focus-visible {
+  transition:
+    outline-offset 0.18s var(--ease-spring),
+    outline-color 0.18s var(--ease-out-expo);
+}
+
+button:focus-visible,
+[role="button"]:focus-visible,
+a:focus-visible {
+  outline-offset: 4px !important;
+}
+
+/* ── Input focus — refined glow ring ── */
+input:focus-visible:not([type="checkbox"]):not([type="radio"]),
+textarea:focus-visible,
+select:focus-visible,
+[role="combobox"]:focus-visible {
+  box-shadow:
+    0 0 0 4px hsl(var(--primary) / 0.12),
+    inset 0 2px 4px rgba(13, 33, 55, 0.04) !important;
+  border-color: hsl(var(--primary)) !important;
+}
+
+/* ── Select/Combobox chevron spin on open ── */
+[data-state="open"] > svg,
+[aria-expanded="true"] > svg.chevron,
+[data-state="open"] .chevron-icon {
+  transform: rotate(180deg);
+  transition: transform 0.22s var(--ease-out-expo);
+}
+
+/* ── Refined list marker (bullet points) ── */
+main ul:not([class]) {
+  list-style: none;
+  padding-left: 0;
+}
+
+main ul:not([class]) > li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+main ul:not([class]) > li::before {
+  content: "";
+  position: absolute;
+  left: 0.25rem;
+  top: 0.7em;
+  width: 6px;
+  height: 6px;
+  background: hsl(var(--primary));
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+/* ── Number formatting: tabular figures everywhere it matters ── */
+.price,
+.stat-value,
+.metric,
+time,
+[data-tabular] {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* ── Pro detail: text shine on the primary heading ── */
+.text-shine {
+  background: linear-gradient(
+    120deg,
+    hsl(var(--foreground)) 0%,
+    hsl(var(--foreground)) 40%,
+    hsl(var(--primary)) 50%,
+    hsl(var(--foreground)) 60%,
+    hsl(var(--foreground)) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shine 6s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0%, 100% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ── Refined scroll snap for horizontal galleries ── */
+.snap-x-mandatory {
+  scroll-snap-type: x mandatory;
+  scroll-padding: 1rem;
+}
+
+.snap-x-mandatory > * {
+  scroll-snap-align: start;
+}
+
+/* ── Spring-easing utility classes (opt-in) ── */
+.ease-spring {
+  transition-timing-function: var(--ease-spring);
+}
+
+.ease-expo {
+  transition-timing-function: var(--ease-out-expo);
+}
+
+/* ── Refined container rhythm — consistent max-width system-wide ── */
+.container-editorial {
+  width: 100%;
+  max-width: 72rem;   /* 1152px — comfortable reading column */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container-editorial {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* ── Pro detail: asymmetric section intro layout ── */
+.section-intro {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 42rem;
+}
+
+@media (min-width: 768px) {
+  .section-intro {
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+    max-width: 56rem;
+    align-items: baseline;
+  }
+}
+
+.section-intro .kicker {
+  margin: 0;
+  padding-top: 0.35rem;
+  white-space: nowrap;
+}
+
+/* ── Pro card — refined depth with colored rim highlight ── */
+.pro-card {
+  position: relative;
+  background: white;
+  border: 1px solid hsl(var(--border) / 0.6);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow:
+    0 1px 2px rgba(13, 33, 55, 0.04),
+    0 1px 0 rgba(255, 255, 255, 0.8) inset;
+  transition:
+    transform 0.3s var(--ease-out-expo),
+    box-shadow 0.3s var(--ease-out-expo),
+    border-color 0.3s var(--ease-out-expo);
+}
+
+.pro-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  right: 1rem;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    hsl(var(--primary) / 0.4),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-out-expo);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .pro-card:hover {
+    transform: translateY(-4px);
+    border-color: hsl(var(--primary) / 0.25);
+    box-shadow:
+      0 12px 28px rgba(13, 33, 55, 0.12),
+      0 4px 8px rgba(13, 33, 55, 0.06),
+      0 1px 0 rgba(255, 255, 255, 0.8) inset;
+  }
+
+  .pro-card:hover::before {
+    opacity: 1;
+  }
+}
+
+/* ── Section anchor offset for sticky nav ── */
+section[id],
+div[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* ── Reduced motion respect for pro polish ── */
+@media (prefers-reduced-motion: reduce) {
+  .text-shine {
+    animation: none;
+  }
+  .h-reveal > span {
+    animation: none;
+    transform: none;
+    opacity: 1;
+  }
+  main img:not([class*="hero"]):not([aria-hidden="true"]):not(.no-polish) {
+    animation: none;
+  }
+  .pro-card::before {
+    display: none;
+  }
+}
