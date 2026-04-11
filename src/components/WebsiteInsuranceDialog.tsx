@@ -348,6 +348,7 @@ export const WebsiteInsuranceDialog = ({
       amount: totalPrice * 100, // Convert to cents
       features: featureNames.slice(0, 5), // Show first 5 features
     });
+
     setEmbeddedPaymentOpen(true);
     // Close the parent insurance dialog so it doesn't overlap
     onOpenChange(false);
