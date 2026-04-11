@@ -598,20 +598,9 @@
     border-radius: 8px;
   }
 
-  /* Gradient: dark at top (text), transparent at bottom (person) */
+  /* No dark overlay on mobile — the image should be fully visible */
   .hero-home__content::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.7) 0%,
-      rgba(0, 0, 0, 0.4) 40%,
-      rgba(0, 0, 0, 0.1) 60%,
-      transparent 80%
-    );
+    display: none;
   }
 
   /* Feature grid: 2-column, compact */
