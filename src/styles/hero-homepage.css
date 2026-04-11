@@ -598,11 +598,6 @@
     border-radius: 8px;
   }
 
-  /* No dark overlay on mobile — the image should be fully visible */
-  .hero-home__content::before {
-    display: none;
-  }
-
   /* Feature grid: 2-column, compact */
   .hero-home__feature-row {
     grid-template-columns: repeat(2, 1fr);
