@@ -4,6 +4,8 @@ import {
 } from "lucide-react";
 import businessHero from "@/assets/hero-ai-business-unified.jpg";
 
+const highPriorityImageProps = { fetchpriority: "high" } as const;
+
 /* ── Bottom feature cards — varied backgrounds ── */
 const businessFeatures = [
   {
@@ -54,7 +56,7 @@ export const HeroBusiness = ({ onStrategyCall }: { onStrategyCall: () => void })
           alt="InVision Network — AI Solutions"
           loading="eager"
           decoding="sync"
-          fetchPriority="high"
+          {...highPriorityImageProps}
         />
         <div className="hero-biz__top-veil" />
         <div className="hero-biz__glow" aria-hidden="true" />

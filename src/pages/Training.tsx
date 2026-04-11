@@ -1202,27 +1202,31 @@ function LearnAndTrain() {
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                {trainingTestimonials.map((testimonial) => {
+                {trainingTestimonials.map((testimonial, index) => {
                   const videoMedia = testimonial.testimonial_media?.find(
                     (m: any) => m.media_type === "video",
                   );
                   return (
-                    <TestimonialCard
+                    <div
                       key={testimonial.id}
-                      name={testimonial.name}
-                      location={testimonial.location}
-                      quote={testimonial.story}
-                      image={videoMedia?.thumbnail_url || "/placeholder.svg"}
-                      rating={testimonial.rating}
-                      videoUrl={videoMedia?.file_url}
-                      onVideoClick={() =>
-                        videoMedia &&
-                        setSelectedVideo({
-                          src: videoMedia.file_url,
-                          title: `${testimonial.name}'s Story`,
-                        })
-                      }
-                    />
+                      className={index >= 4 ? "hidden sm:block" : ""}
+                    >
+                      <TestimonialCard
+                        name={testimonial.name}
+                        location={testimonial.location}
+                        quote={testimonial.story}
+                        image={videoMedia?.thumbnail_url || "/placeholder.svg"}
+                        rating={testimonial.rating}
+                        videoUrl={videoMedia?.file_url}
+                        onVideoClick={() =>
+                          videoMedia &&
+                          setSelectedVideo({
+                            src: videoMedia.file_url,
+                            title: `${testimonial.name}'s Story`,
+                          })
+                        }
+                      />
+                    </div>
                   );
                 })}
               </div>

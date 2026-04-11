@@ -7,6 +7,8 @@ import {
 import workshopHero from "@/assets/learn_and_train.png";
 import { SITE } from "@/config/site";
 
+const highPriorityImageProps = { fetchpriority: "high" } as const;
+
 /* ── Bottom feature cards ── */
 const workshopFeatures = [
   {
@@ -50,7 +52,7 @@ export const HeroWorkshops = () => {
           alt="Seniors learning together in community workshop"
           loading="eager"
           decoding="sync"
-          fetchPriority="high"
+          {...highPriorityImageProps}
         />
         <div className="hero-ws__top-veil" />
         <div className="hero-ws__glow" aria-hidden="true" />

@@ -1880,7 +1880,12 @@ function Business() {
                   (m: any) => m.media_type === "video"
                 );
                 return (
-                  <AnimatedSection key={testimonial.id} animation="fade-up" delay={i * 100}>
+                  <AnimatedSection
+                    key={testimonial.id}
+                    animation="fade-up"
+                    delay={i * 100}
+                    className={i >= 4 ? "hidden sm:block" : ""}
+                  >
                         <TestimonialCard
                       name={testimonial.name}
                       location={testimonial.location}

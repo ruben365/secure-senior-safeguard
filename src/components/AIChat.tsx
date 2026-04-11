@@ -17,6 +17,8 @@ import {
 } from "lucide-react";
 import lauraAvatar from "@/assets/laura-avatar-new.png";
 
+const highPriorityImageProps = { fetchpriority: "high" } as const;
+
 interface Message {
   role: "user" | "assistant";
   content: string;
@@ -371,7 +373,7 @@ export const AIChat = () => {
             loading="eager"
             decoding="async"
             className="w-full h-full object-cover object-top"
-            style={{ fetchPriority: "high" } as React.CSSProperties}
+            {...highPriorityImageProps}
           />
           <div className="absolute bottom-0.5 right-0.5 w-3 h-3 rounded-full bg-green-500 border-2 border-white" />
         </button>

@@ -189,7 +189,7 @@ export const TestimonialCarousel = () => {
         <div
           data-reveal
           style={{ "--reveal-delay": "300ms" } as React.CSSProperties}
-          className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4 max-w-6xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4 max-w-6xl mx-auto"
         >
           {testimonials.map((t, i) => {
             const isHovered = hoveredIdx === i;
@@ -203,6 +203,7 @@ export const TestimonialCarousel = () => {
                 onMouseLeave={() => setHoveredIdx(null)}
                 style={{ transitionDelay: anyHovered ? "0ms" : riseDelay }}
                 className={[
+                  i >= 4 ? "hidden sm:block" : "",
                   "group relative rounded-[12px] p-2.5 md:p-3.5",
                   "bg-white/95 border border-[rgba(0,0,0,0.06)]",
                   "shadow-none md:shadow-[0_6px_18px_-10px_rgba(15,23,42,0.15)]",
@@ -283,6 +284,10 @@ export const TestimonialCarousel = () => {
             );
           })}
         </div>
+
+        <p className="sm:hidden mt-4 text-center text-xs font-medium text-[#64748B]">
+          Showing a shorter testimonial list on phone for easier browsing.
+        </p>
 
       </div>
     </section>

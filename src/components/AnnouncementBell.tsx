@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Bell, Megaphone, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -9,9 +9,12 @@ interface Announcement {
   created_at: string;
 }
 
+const announcementsEnabled = import.meta.env.VITE_ENABLE_ANNOUNCEMENTS === "true";
+
 export function AnnouncementBell() {
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [open, setOpen] = useState(false);
+  const [isConfigured, setIsConfigured] = useState(announcementsEnabled);
   const [dismissedIds, setDismissedIds] = useState<Set<string>>(() => {
     try {
       const stored = localStorage.getItem("invision_dismissed_announcements");
@@ -21,29 +24,65 @@ export function AnnouncementBell() {
     }
   });
 
-  useEffect(() => {
-    fetchAnnouncements();
-
-    const channel = supabase
-      .channel("public-announcements")
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "announcements" },
-        fetchAnnouncements,
-      )
-      .subscribe();
-
-    return () => { supabase.removeChannel(channel); };
-  }, []);
-
-  const fetchAnnouncements = async () => {
-    const { data } = await supabase
+  const fetchAnnouncements = useCallback(async () => {
+    const { data, error } = await supabase
       .from("announcements")
       .select("id, title, content, created_at")
       .order("created_at", { ascending: false })
       .limit(10);
-    if (data) setAnnouncements(data);
-  };
+
+    if (error) {
+      const missingAnnouncementsTable =
+        error.code === "PGRST205" ||
+        error.message.toLowerCase().includes("announcements");
+
+      if (missingAnnouncementsTable) {
+        setIsConfigured(false);
+        setOpen(false);
+      }
+
+      return false;
+    }
+
+    setAnnouncements(data ?? []);
+    return true;
+  }, []);
+
+  useEffect(() => {
+    if (!announcementsEnabled) return;
+
+    let cancelled = false;
+    let channel: ReturnType<typeof supabase.channel> | null = null;
+
+    const initializeAnnouncements = async () => {
+      const loaded = await fetchAnnouncements();
+      if (!loaded || cancelled) return;
+
+      channel = supabase
+        .channel("public-announcements")
+        .on(
+          "postgres_changes",
+          { event: "*", schema: "public", table: "announcements" },
+          () => {
+            void fetchAnnouncements();
+          },
+        )
+        .subscribe();
+    };
+
+    void initializeAnnouncements();
+
+    return () => {
+      cancelled = true;
+      if (channel) {
+        void supabase.removeChannel(channel);
+      }
+    };
+  }, [fetchAnnouncements]);
+
+  if (!announcementsEnabled || !isConfigured) {
+    return null;
+  }
 
   const unreadCount = announcements.filter((a) => !dismissedIds.has(a.id)).length;
 

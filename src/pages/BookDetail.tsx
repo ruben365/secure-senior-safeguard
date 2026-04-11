@@ -25,6 +25,8 @@ import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import { EmbeddedPaymentModal } from "@/components/payment/EmbeddedPaymentModal";
 
+const highPriorityImageProps = { fetchpriority: "high" } as const;
+
 export default function BookDetail() {
   const { slug } = useParams<{ slug: string }>();
   const { addItem } = useCart();
@@ -135,7 +137,7 @@ export default function BookDetail() {
                       height={427}
                       loading="eager"
                       decoding="async"
-                      fetchPriority="high"
+                      {...highPriorityImageProps}
                       className="w-full h-full object-cover"
                       onError={(e) => {
                         (e.target as HTMLImageElement).style.display = "none";

@@ -6,6 +6,8 @@ import {
 } from "lucide-react";
 import corineHero from "@/assets/hero-wife-office.jpg";
 
+const highPriorityImageProps = { fetchpriority: "high" } as const;
+
 /* ── Feature items — Row 1 (top) ── */
 const featuresRow1 = [
   {
@@ -65,7 +67,7 @@ export const HeroHomepage = () => {
           alt="InVision Network co-founder"
           loading="eager"
           decoding="async"
-          fetchPriority="high"
+          {...highPriorityImageProps}
         />
         <div className="hero-home__top-veil" />
         <div className="hero-home__glow" aria-hidden="true" />
