@@ -807,28 +807,15 @@ body.has-scroll-progress::before {
   border: 2px solid transparent;
 }
 
-/* ── Section vertical rhythm — consistent spacing across all content pages ── */
-main > section,
-main > div > section {
+/* ── Section vertical rhythm — opt-in via .section-rhythm class to avoid
+   breaking hero sections that manage their own padding. ── */
+.section-rhythm {
   padding-top: clamp(3rem, 6vw, 5rem);
   padding-bottom: clamp(3rem, 6vw, 5rem);
 }
 
-/* Keep hero-ish sections exempt — they own their padding */
-main > section.hero-home,
-main > section.hero-biz,
-main > section.hero-ws,
-main > div > .hero-home,
-main > div > .hero-biz,
-main > div > .hero-ws {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-/* ── Mobile spacing relief ── */
 @media (max-width: 640px) {
-  main > section,
-  main > div > section {
+  .section-rhythm {
     padding-top: clamp(2rem, 8vw, 3rem);
     padding-bottom: clamp(2rem, 8vw, 3rem);
   }
