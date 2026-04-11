@@ -258,218 +258,101 @@
    phone row, action buttons, decorative graphics.
    ═══════════════════════════════════════════ */
 .hero-ws__widget {
-  width: 240px;
+  width: 260px;
   flex-shrink: 0;
   margin-left: auto;
-  margin-right: -1rem;
+  margin-right: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  padding: 1.5rem;
-  border-radius: 16px;
+  gap: 0.875rem;
+  padding: 1.625rem;
+  border-radius: 20px;
   background:
-    linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.08) 100%);
-  -webkit-backdrop-filter: blur(28px) saturate(140%);
-  backdrop-filter: blur(28px) saturate(140%);
+    linear-gradient(155deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.04) 55%, rgba(217,108,74,0.06) 100%);
+  -webkit-backdrop-filter: blur(32px) saturate(150%);
+  backdrop-filter: blur(32px) saturate(150%);
   border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow: none;
+  box-shadow:
+    0 20px 40px -20px rgba(0, 0, 0, 0.5),
+    0 8px 20px -12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08);
   animation: wsFadeUp 0.5s ease-out 0.25s both;
   position: relative;
   overflow: hidden;
 }
 
-/* Shine highlight across top */
-.hero-ws__widget > .hero-ws__widget-badge ~ * {
-  position: relative;
-  z-index: 1;
+/* Top rim-light highlight */
+.hero-ws__widget::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 1.25rem;
+  right: 1.25rem;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.6), transparent);
+  pointer-events: none;
+  z-index: 2;
 }
 
 @supports not (backdrop-filter: blur(1px)) {
   .hero-ws__widget { background: rgba(15, 15, 20, 0.88); }
 }
 
-/* ── Inner decorative graphics passing through card ── */
-
-/* Diagonal line crossing through card */
-.hero-ws__widget-title::after {
-  content: "";
-  position: absolute;
-  top: 50px;
-  right: -20px;
-  width: 180px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), rgba(255,255,255,0.1), rgba(255,255,255,0.06), transparent);
-  transform: rotate(-25deg);
-  pointer-events: none;
-}
-
-/* Second diagonal — lower */
-.hero-ws__widget-desc::before {
-  content: "";
-  position: absolute;
-  bottom: 60px;
-  left: -30px;
-  width: 200px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), rgba(255,255,255,0.08), rgba(255,255,255,0.05), transparent);
-  transform: rotate(-20deg);
-  pointer-events: none;
-}
-
-/* Inner subtle grid pattern overlay */
-.hero-ws__widget-badge::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size: 24px 24px;
-  border-radius: 16px;
-  pointer-events: none;
-}
-
-/* ── Outer decorative graphics ── */
-
-/* Glow ring — top right */
-.hero-ws__widget::before {
-  content: "";
-  position: absolute;
-  top: -40px;
-  right: -40px;
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(217, 108, 74, 0.18);
-  box-shadow: none;
-  pointer-events: none;
-  animation: wsRingPulse 4s ease-in-out infinite;
-}
-
-/* Dot grid — bottom left */
+/* ── Refined decorative: soft corner glow only ── */
 .hero-ws__widget::after {
   content: "";
   position: absolute;
-  bottom: -20px;
-  left: -20px;
-  width: 50px;
-  height: 50px;
-  background-image: radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 1px);
-  background-size: 8px 8px;
+  top: -30%;
+  right: -30%;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(217, 108, 74, 0.18) 0%, transparent 60%);
   pointer-events: none;
-  opacity: 0.45;
+  z-index: 0;
 }
 
-/* Outer dashed ring */
-.hero-ws__widget-dots::before {
-  content: "";
-  position: absolute;
-  top: -60px;
-  right: -60px;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  border: 1px dashed rgba(217, 108, 74, 0.1);
-  pointer-events: none;
-  animation: wsRingPulse 6s ease-in-out 1s infinite;
+/* All inner children stay above the glow */
+.hero-ws__widget > * {
+  position: relative;
+  z-index: 1;
 }
 
-/* Orb — top left */
-.hero-ws__widget-dots::after {
-  content: "";
-  position: absolute;
-  top: -15px;
-  left: -20px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(217, 108, 74, 0.4) 0%, transparent 70%);
-  box-shadow: none;
-  pointer-events: none;
-  animation: wsOrbFloat 3s ease-in-out infinite;
-}
-
-/* Corner bracket — top left */
-.hero-ws__widget-actions::before {
-  content: "";
-  position: absolute;
-  top: -8px;
-  left: -8px;
-  width: 20px;
-  height: 20px;
-  border-left: 1.5px solid rgba(217, 108, 74, 0.18);
-  border-top: 1.5px solid rgba(217, 108, 74, 0.18);
-  border-radius: 6px 0 0 0;
-  pointer-events: none;
-}
-
-/* Corner bracket — bottom right */
-.hero-ws__widget-actions::after {
-  content: "";
-  position: absolute;
-  bottom: -8px;
-  right: -8px;
-  width: 20px;
-  height: 20px;
-  border-right: 1.5px solid rgba(217, 108, 74, 0.18);
-  border-bottom: 1.5px solid rgba(217, 108, 74, 0.18);
-  border-radius: 0 0 6px 0;
-  pointer-events: none;
-}
-
-/* Accent line — right edge */
-.hero-ws__widget-desc::after {
-  content: "";
-  position: absolute;
-  right: -10px;
-  top: 25%;
-  width: 2px;
-  height: 50%;
-  background: linear-gradient(to bottom, transparent, rgba(217, 108, 74, 0.2), transparent);
-  border-radius: 1px;
-  pointer-events: none;
-}
-
-@keyframes wsRingPulse {
-  0%, 100% { transform: scale(1); opacity: 0.6; }
-  50% { transform: scale(1.15); opacity: 1; }
-}
-
-@keyframes wsOrbFloat {
-  0%, 100% { transform: translateY(0); opacity: 0.6; }
-  50% { transform: translateY(-6px); opacity: 1; }
-}
-
-/* ── Widget inner dot grid element ── */
+/* Widget dots — now a subtle corner dot grid pattern */
 .hero-ws__widget-dots {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 32px;
-  height: 32px;
-  background-image: radial-gradient(circle, rgba(255,255,255,0.15) 1.2px, transparent 1.2px);
-  background-size: 7px 7px;
+  top: 1rem;
+  right: 1rem;
+  width: 28px;
+  height: 28px;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.22) 1px, transparent 1.2px);
+  background-size: 6px 6px;
   pointer-events: none;
+  opacity: 0.6;
+  z-index: 1;
 }
 
 /* Icon badge */
 .hero-ws__widget-badge {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
-  background: rgba(217, 108, 74, 0.12);
-  border: 1px solid rgba(217, 108, 74, 0.25);
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(217, 108, 74, 0.22), rgba(217, 108, 74, 0.1));
+  border: 1px solid rgba(217, 108, 74, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   z-index: 2;
+  box-shadow:
+    0 4px 12px -4px rgba(217, 108, 74, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .hero-ws__widget-badge svg {
-  width: 20px;
-  height: 20px;
-  color: #6d9bff;
+  width: 22px;
+  height: 22px;
+  color: #ffb898;
   stroke-width: 1.8;
 }
 
@@ -512,7 +395,7 @@
 }
 
 .hero-ws__widget-phone:hover {
-  color: #6d9bff;
+  color: #ffb898;
 }
 
 /* Action buttons */
@@ -523,29 +406,30 @@
 }
 
 .hero-ws__widget-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.12);
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.5);
-  transition: all 0.2s ease;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.25s cubic-bezier(0.19, 1, 0.22, 1);
   font-family: inherit;
 }
 
 .hero-ws__widget-btn svg {
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
 }
 
 .hero-ws__widget-btn:hover {
-  border-color: #6d9bff;
-  color: #6d9bff;
-  background: rgba(217, 108, 74, 0.1);
+  border-color: rgba(217, 108, 74, 0.5);
+  color: #ffb898;
+  background: rgba(217, 108, 74, 0.12);
+  transform: translateY(-1px);
 }
 
 
@@ -572,24 +456,25 @@
   gap: 1.5rem;
 }
 
-/* ── Feature Card — glassmorphism with shine ── */
+/* ── Feature Card — refined glassmorphism ── */
 .hero-ws__feature {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding: 1.5rem;
-  border-radius: 14px;
+  border-radius: 16px;
   background:
-    linear-gradient(135deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      rgba(200, 210, 230, 0.06) 40%,
-      rgba(255, 255, 255, 0.08) 100%
-    ),
-    rgba(15, 18, 30, 0.45);
-  -webkit-backdrop-filter: blur(24px) saturate(140%);
-  backdrop-filter: blur(24px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: none;
+    linear-gradient(155deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.04) 55%,
+      rgba(217, 108, 74, 0.05) 100%
+    );
+  -webkit-backdrop-filter: blur(28px) saturate(145%);
+  backdrop-filter: blur(28px) saturate(145%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 12px 28px -16px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
   text-align: left;
   font-family: inherit;
   width: 100%;
@@ -597,41 +482,47 @@
   position: relative;
   overflow: hidden;
   transition:
-    transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-    border-color 0.3s ease,
-    box-shadow 0.4s ease;
+    transform 0.35s cubic-bezier(0.19, 1, 0.22, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    background 0.35s ease;
 }
 
-/* Shine highlight across top edge */
+/* Top rim-light highlight */
 .hero-ws__feature::before {
   content: "";
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
+  left: 1rem;
+  right: 1rem;
   height: 1px;
-  background: linear-gradient(90deg, transparent 10%, rgba(255,255,255,0.3) 50%, transparent 90%);
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.5), transparent);
   pointer-events: none;
 }
 
 .hero-ws__feature:hover {
-  transform: translateY(-8px);
-  border-color: rgba(255, 255, 255, 0.4);
-  box-shadow: none;
+  transform: translateY(-6px);
+  border-color: rgba(217, 108, 74, 0.35);
+  background:
+    linear-gradient(155deg,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(255, 255, 255, 0.06) 55%,
+      rgba(217, 108, 74, 0.10) 100%
+    );
+  box-shadow:
+    0 20px 40px -20px rgba(0, 0, 0, 0.55),
+    0 8px 20px -12px rgba(217, 108, 74, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
 }
 
-.hero-ws__feature:nth-child(1):hover { border-color: rgba(217, 108, 74, 0.3); }
-.hero-ws__feature:nth-child(2):hover { border-color: rgba(217, 108, 74, 0.3); }
-.hero-ws__feature:nth-child(3):hover { border-color: rgba(217, 108, 74, 0.3); }
-.hero-ws__feature:nth-child(4):hover { border-color: rgba(217, 108, 74, 0.3); }
-
 .hero-ws__feature:hover .hero-ws__feature-icon {
-  border-color: rgba(217, 108, 74, 0.35);
-  background: rgba(217, 108, 74, 0.1);
+  border-color: rgba(217, 108, 74, 0.45);
+  background: rgba(217, 108, 74, 0.14);
+  transform: scale(1.05);
 }
 
 .hero-ws__feature:hover .hero-ws__feature-icon svg {
-  color: var(--ws-blue);
+  color: #ffb898;
 }
 
 .hero-ws__feature:hover .hero-ws__feature-desc {

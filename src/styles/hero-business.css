@@ -254,28 +254,40 @@
   justify-content: flex-end;
 }
 
-/* ═══ Card — compact, text near top, right-aligned ═══ */
+/* ═══ Card — refined compact glass tile ═══ */
 .hero-biz__feature {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 0.5rem;
-  padding: 1rem 0.85rem;
-  border-radius: 10px 10px 0 0;
-  min-height: 200px;
+  gap: 0.625rem;
+  padding: 1.125rem 1rem;
+  border-radius: 14px;
+  min-height: 180px;
   flex: 1;
-  max-width: 200px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: none;
+  max-width: 220px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   text-align: left;
   font-family: inherit;
   cursor: pointer;
   position: relative;
   overflow: hidden;
   transition:
-    transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    transform 0.35s cubic-bezier(0.19, 1, 0.22, 1),
     border-color 0.35s ease,
-    box-shadow 0.4s ease;
+    box-shadow 0.35s ease,
+    background 0.35s ease;
+}
+
+/* Top rim-light highlight */
+.hero-biz__feature::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0.75rem;
+  right: 0.75rem;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.5), transparent);
+  pointer-events: none;
 }
 
 /* Top shine sweep — disabled */
@@ -303,57 +315,55 @@
 
 .hero-biz__feature:hover::after { opacity: 1; }
 
-/* ── Card variants ── */
+/* ── Unified glass variants — all refined with same depth ── */
 .hero-biz__feature--dark {
-  background:
-    linear-gradient(160deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 40%, rgba(255,255,255,0.06) 100%),
-    rgba(15, 18, 28, 0.3);
-  -webkit-backdrop-filter: blur(48px) saturate(180%);
-  backdrop-filter: blur(48px) saturate(180%);
-  border-color: rgba(255, 255, 255, 0.18);
-  box-shadow: none;
+  background: linear-gradient(155deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 55%, rgba(217,108,74,0.04) 100%);
+  -webkit-backdrop-filter: blur(28px) saturate(145%);
+  backdrop-filter: blur(28px) saturate(145%);
+  box-shadow:
+    0 12px 28px -16px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
 .hero-biz__feature--accent {
-  background:
-    linear-gradient(160deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.01) 40%, rgba(255,255,255,0.04) 100%),
-    rgba(107, 46, 26, 0.3);
-  -webkit-backdrop-filter: blur(48px) saturate(180%);
-  backdrop-filter: blur(48px) saturate(180%);
-  border-color: rgba(217, 108, 74, 0.25);
-  box-shadow: none;
+  background: linear-gradient(155deg, rgba(217,108,74,0.18) 0%, rgba(217,108,74,0.06) 55%, rgba(217,108,74,0.10) 100%);
+  -webkit-backdrop-filter: blur(28px) saturate(145%);
+  backdrop-filter: blur(28px) saturate(145%);
+  border-color: rgba(217, 108, 74, 0.35);
+  box-shadow:
+    0 12px 28px -16px rgba(217, 108, 74, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .hero-biz__feature--light {
-  background:
-    linear-gradient(160deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.12) 40%, rgba(255,255,255,0.2) 100%),
-    rgba(210, 218, 230, 0.25);
-  -webkit-backdrop-filter: blur(48px) saturate(180%);
-  backdrop-filter: blur(48px) saturate(180%);
-  border-color: rgba(255, 255, 255, 0.4);
-  box-shadow: none;
+  background: linear-gradient(155deg, rgba(255,255,255,0.32) 0%, rgba(255,255,255,0.18) 55%, rgba(255,255,255,0.24) 100%);
+  -webkit-backdrop-filter: blur(28px) saturate(145%);
+  backdrop-filter: blur(28px) saturate(145%);
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow:
+    0 12px 28px -16px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
 }
 .hero-biz__feature--light .hero-biz__feature-title { color: #0f172a; }
-.hero-biz__feature--light .hero-biz__feature-desc { color: #1e293b; }
-.hero-biz__feature--light .hero-biz__feature-label { color: #0f172a; }
-.hero-biz__feature--light .hero-biz__feature-icon { border-color: rgba(0,0,0,0.12); background: rgba(0,0,0,0.06); }
-.hero-biz__feature--light .hero-biz__feature-icon svg { color: #0f172a; }
+.hero-biz__feature--light .hero-biz__feature-desc { color: #334155; }
+.hero-biz__feature--light .hero-biz__feature-label { color: #c2410c; }
+.hero-biz__feature--light .hero-biz__feature-icon { border-color: rgba(194, 65, 12, 0.25); background: rgba(194, 65, 12, 0.1); }
+.hero-biz__feature--light .hero-biz__feature-icon svg { color: #c2410c; }
 
-/* Hover states */
+/* Unified hover — lift with orange glow */
 .hero-biz__feature:hover {
-  transform: translateY(-10px);
-  border-color: rgba(255, 255, 255, 0.25);
-  box-shadow: none;
+  transform: translateY(-6px);
+  border-color: rgba(217, 108, 74, 0.45);
+  box-shadow:
+    0 20px 40px -20px rgba(0, 0, 0, 0.55),
+    0 8px 20px -12px rgba(217, 108, 74, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
 }
-.hero-biz__feature--dark:hover {
-  box-shadow: none;
-}
-.hero-biz__feature--accent:hover {
-  border-color: rgba(217, 108, 74, 0.4);
-  box-shadow: none;
-}
-.hero-biz__feature--light:hover {
-  box-shadow: none;
+
+.hero-biz__feature:hover .hero-biz__feature-icon {
+  border-color: rgba(217, 108, 74, 0.45);
+  background: rgba(217, 108, 74, 0.14);
+  transform: scale(1.05);
 }
 
 /* Header — icon + "AI" label */
