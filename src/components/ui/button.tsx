@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg font-bold ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 select-none relative overflow-hidden tracking-wide transition-all duration-150 ease-out",
+  "button-link inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg font-bold ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 select-none relative overflow-hidden tracking-wide transition-all duration-150 ease-out",
   {
     variants: {
       variant: {
@@ -48,7 +48,7 @@ const buttonVariants = cva(
         ].join(" "),
         heroOutline: [
           // Hero secondary — visible glass with clear white border
-          "bg-white/[0.15] backdrop-blur-sm text-white font-semibold",
+          "bg-white/[0.15] backdrop-blur-sm text-white hover:text-white font-semibold",
           "border border-white/[0.40]",
           "shadow-[0_2px_8px_rgba(0,0,0,0.15)]",
           "hover:-translate-y-[1px] hover:bg-white/[0.22] hover:border-white/[0.60] hover:shadow-[0_4px_12px_rgba(0,0,0,0.2)]",

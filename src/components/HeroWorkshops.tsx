@@ -4,6 +4,7 @@ import {
   Phone, ShieldCheck,
   Settings, Server, Lock,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import workshopHero from "@/assets/learn_and_train.png";
 import { SITE } from "@/config/site";
 
@@ -78,14 +79,25 @@ export const HeroWorkshops = () => {
             </p>
 
             <div className="hero-ws__ctas">
-              <button type="button" className="hero-ws__cta hero-ws__cta--primary" onClick={() => scrollTo("training")}>
+              <Button
+                type="button"
+                size="heroPill"
+                variant="heroPrimary"
+                onClick={() => scrollTo("training")}
+              >
                 <Shield className="w-4 h-4" />
                 View Workshops
-              </button>
-              <button type="button" className="hero-ws__cta hero-ws__cta--secondary" onClick={() => scrollTo("pricing")}>
+              </Button>
+              <Button
+                type="button"
+                size="heroPill"
+                variant="heroOutline"
+                className="text-white hover:text-white"
+                onClick={() => scrollTo("pricing")}
+              >
                 See Pricing
                 <ArrowRight />
-              </button>
+              </Button>
             </div>
           </div>
 

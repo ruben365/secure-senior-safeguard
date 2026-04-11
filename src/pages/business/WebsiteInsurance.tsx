@@ -211,7 +211,7 @@ const WebsiteInsurance = () => {
                     </Link>
                   </Button>
                   <Button asChild size="xl" variant="outline">
-                    <Link to="/business">View All Services</Link>
+                    <Link to="/ai-workshop">View All Services</Link>
                   </Button>
                 </div>
               </div>

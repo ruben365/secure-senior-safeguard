@@ -283,14 +283,15 @@ function Resources() {
               variant="heroPrimary"
               onClick={() => scrollToSection("guides")}
             >
-              Shop Digital Guides
+              Browse Digital Guides
             </Button>
             <Button
               size="heroPill"
               variant="heroOutline"
+              className="text-white hover:text-white"
               onClick={() => setReadBooksOpen(true)}
             >
-              Read Your Books
+              Open Your Reader
             </Button>
           </div>
         </Hero>
@@ -323,9 +324,9 @@ function Resources() {
 
           {/* AI Analysis CTA - link to training */}
           <div className="text-center pb-4">
-            <Button asChild size="lg">
+            <Button asChild size="lg" variant="heroPrimary" className="text-white">
               <Link to="/training/ai-analysis">
-                Try Our AI Scam Analysis Tool
+                Try the AI Scam Analysis Tool
               </Link>
             </Button>
           </div>

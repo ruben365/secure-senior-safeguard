@@ -97,8 +97,8 @@ export const HeroHomepage = () => {
               <Link to="/training#pricing" className="hero-home__cta">
                 Get Protected
               </Link>
-              <Link to="/business" className="hero-home__cta">
-                See Our Work
+              <Link to="/ai-workshop" className="hero-home__cta">
+                Explore AI Workshop
                 <ArrowRight />
               </Link>
             </div>

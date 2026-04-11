@@ -40,7 +40,7 @@ import { SITE } from "@/config/site";
 // ─── TYPES ──────────────────────────────────────────────────────
 type FAQCategory =
   | "Getting Started"
-  | "AI Business Services"
+  | "AI Workshop Systems"
   | "Cybersecurity Education"
   | "AI Insurance & Support"
   | "Billing & Privacy";
@@ -54,7 +54,7 @@ interface FAQEntry {
 
 // ─── CONTENT (revised to match current project scope) ──────────
 // Removed outdated Family Shield / access-link language.
-// Aligned with the three core services: AI Business, Education,
+// Aligned with the three core services: AI Workshop, Education,
 // AI Insurance. Kept billing + privacy as a compact fifth bucket.
 const faqs: FAQEntry[] = [
   // ══════════════════════════════════════════════════════════
@@ -90,32 +90,32 @@ const faqs: FAQEntry[] = [
   },
 
   // ══════════════════════════════════════════════════════════
-  // AI Business Services
+  // AI Workshop Systems
   // ══════════════════════════════════════════════════════════
   {
     id: "ai-1",
-    category: "AI Business Services",
-    question: "What's included in your AI Business Services?",
+    category: "AI Workshop Systems",
+    question: "What's included in your AI Workshop systems?",
     answer:
       "AI receptionists that answer calls and book appointments 24/7, workflow automation for billing and scheduling, customer engagement tools (review requests, follow-ups, reminders), and custom AI builds tailored to your specific business.",
   },
   {
     id: "ai-2",
-    category: "AI Business Services",
+    category: "AI Workshop Systems",
     question: "Will the AI receptionist sound natural to my customers?",
     answer:
       "Yes. It's voice-tuned to sound warm and natural, uses your scripts, handles interruptions gracefully, and knows when to escalate to a real person on your team. Most callers don't realize it's AI until we tell them.",
   },
   {
     id: "ai-3",
-    category: "AI Business Services",
+    category: "AI Workshop Systems",
     question: "Can your AI handle multiple calls at once?",
     answer:
       "Unlike human staff, our AI can handle unlimited simultaneous calls — so you never miss a customer during peak hours, evenings, or weekends.",
   },
   {
     id: "ai-4",
-    category: "AI Business Services",
+    category: "AI Workshop Systems",
     question: "I already use ChatGPT. Do you work with existing AI tools?",
     answer:
       "Yes, we're vendor-agnostic. Whether you built something in-house, use ChatGPT or Claude, or bought from another provider, we can integrate with it, monitor it, and layer automation on top.",
@@ -225,7 +225,7 @@ const categoryMeta: Record<
     icon: Sparkles,
     accent: "from-[#e07a55] to-[#d05f3a]",
   },
-  "AI Business Services": {
+  "AI Workshop Systems": {
     icon: Bot,
     accent: "from-[#ea8568] to-[#d96c4a]",
   },
@@ -246,7 +246,7 @@ const categoryMeta: Record<
 const categories: ("All" | FAQCategory)[] = [
   "All",
   "Getting Started",
-  "AI Business Services",
+  "AI Workshop Systems",
   "Cybersecurity Education",
   "AI Insurance & Support",
   "Billing & Privacy",
@@ -342,7 +342,7 @@ export default function FAQ() {
     <PageTransition variant="fade">
       <SEO
         title="Frequently Asked Questions"
-        description="Answers about InVision Network's AI business services, cybersecurity education workshops, AI insurance plans, billing, and privacy — straight from our Kettering, Ohio team."
+        description="Answers about InVision Network's AI Workshop systems, cybersecurity education workshops, AI insurance plans, billing, and privacy — straight from our Kettering, Ohio team."
         keywords="FAQ, AI receptionist, cybersecurity education, AI insurance, Kettering Ohio"
         structuredData={faqStructuredData}
         breadcrumbs={[
@@ -360,14 +360,14 @@ export default function FAQ() {
           <Hero
             backgroundImages={faqHeroImages}
             headline="Frequently Asked Questions"
-            subheadline="Clear answers about our AI services, workshops, and support — no jargon, no runaround."
+            subheadline="Clear answers about our AI Workshop systems, workshops, and support — no jargon, no runaround."
             overlay={true}
             showScrollIndicator={false}
           >
             <Button size="heroPill" variant="heroPrimary" asChild>
               <Link to="/contact">Ask a Question</Link>
             </Button>
-            <Button size="heroPill" variant="heroOutline" asChild>
+            <Button size="heroPill" variant="heroOutline" className="text-white hover:text-white" asChild>
               <Link to="/contact">Contact Us</Link>
             </Button>
           </Hero>
@@ -686,7 +686,7 @@ export default function FAQ() {
                       </div>
                       <p className="text-[12px] text-slate-600 mb-3 ml-10">
                         We reply within 1 business day, from a real person in
-                        Kettering. Or explore our <Link to="/training" className="text-primary hover:underline font-medium">training sessions</Link> and <Link to="/business" className="text-primary hover:underline font-medium">AI business tools</Link>.
+                        Kettering. Or explore our <Link to="/training" className="text-primary hover:underline font-medium">training sessions</Link> and <Link to="/ai-workshop" className="text-primary hover:underline font-medium">AI Workshop systems</Link>.
                       </p>
 
                       <div className="space-y-2.5">

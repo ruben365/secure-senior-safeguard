@@ -211,7 +211,7 @@ const AutonomousDefenseHub = () => {
                     size="lg"
                     className="h-9 sm:h-14 px-6 sm:px-10 text-sm sm:text-base font-bold rounded-full border-white/20 text-white hover:bg-white/10"
                   >
-                    <Link to="/business">View All Services</Link>
+                    <Link to="/ai-workshop">View All Services</Link>
                   </Button>
                 </div>
               </AnimatedSection>

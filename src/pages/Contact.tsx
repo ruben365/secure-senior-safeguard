@@ -169,7 +169,7 @@ function Contact() {
     <PageTransition variant="fade">
       <SEO
         title="Contact InVision Network — Kettering, Ohio"
-        description="Reach InVision Network for cybersecurity training or AI business solutions. Call (937) 301-8749, email us, or fill out our contact form. Serving Kettering, Dayton, and all of Southwest Ohio."
+        description="Reach InVision Network for cybersecurity training or AI Workshop systems. Call (937) 301-8749, email us, or fill out our contact form. Serving Kettering, Dayton, and all of Southwest Ohio."
         keywords="contact InVision Network, Kettering cybersecurity, AI protection Ohio, call InVision Network"
         breadcrumbs={[
           { name: "Home", url: "https://www.invisionnetwork.org/" },
@@ -189,17 +189,18 @@ function Contact() {
               Contact Us
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-xl">
-              We're here to help protect your family. Get in touch today.
+              Call, email, or send a secure message and our Kettering team will
+              help you choose the right next step.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-start">
-            <Button size="heroPill" variant="heroPrimary" asChild>
+            <Button size="heroPill" variant="heroPrimary" className="text-white" asChild>
               <a href={SITE.phone.tel}>
                 <Phone className="w-5 h-5 mr-2" />
-                {SITE.phone.display}
+                Contact Us
               </a>
             </Button>
-            <Button size="heroPill" variant="heroOutline" asChild>
+            <Button size="heroPill" variant="heroOutline" className="text-white hover:text-white" asChild>
               <a href={`mailto:${SITE.emails.info}`}>
                 <Mail className="w-5 h-5 mr-2" />
                 Email Us

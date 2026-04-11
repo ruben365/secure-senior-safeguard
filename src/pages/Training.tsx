@@ -61,6 +61,7 @@ import { InstructorShowcase } from "@/components/training/InstructorShowcase";
 import { SEO } from "@/components/SEO";
 import { AnswerSummary } from "@/components/AnswerSummary";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
+import { SiteCalloutCard } from "@/components/shared/SiteCalloutCard";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 import { usePrerenderBlocker } from "@/contexts/PrerenderContext";
 import { SectionDivider, MeshBackground } from "@/components/pro";
@@ -1048,13 +1049,14 @@ function LearnAndTrain() {
             </div>
 
             <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto mb-14">
-              <div className="bg-card border-2 border-destructive/20 rounded-2xl p-6 sm:p-8 shadow-sm h-full">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-destructive/10 flex items-center justify-center">
-                    <AlertTriangle className="w-6 h-6 text-destructive" />
-                  </div>
-                  <h3 className="text-xl font-black text-destructive">Without Protection</h3>
-                </div>
+              <SiteCalloutCard
+                className="h-full"
+                tone="neutral"
+                eyebrow="Risk snapshot"
+                icon={AlertTriangle}
+                title="Without Protection"
+                description="AI-enabled scams move faster than traditional warning signs and can spread risk across an entire household."
+              >
                 <ul className="space-y-3">
                   {[
                     "Scammers can impersonate grandchildren using AI voice cloning",
@@ -1063,27 +1065,27 @@ function LearnAndTrain() {
                     "Personal documents and identity could be stolen",
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start gap-3 text-sm">
-                      <span className="w-6 h-6 rounded-full bg-destructive/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <span className="text-destructive text-xs font-bold">✗</span>
+                      <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-slate-900/8">
+                        <span className="text-[10px] font-bold text-slate-700">•</span>
                       </span>
                       <span className="text-muted-foreground">{item}</span>
                     </li>
                   ))}
                 </ul>
-                {/* Danger stat */}
-                <div className="mt-6 p-4 bg-destructive/5 rounded-xl border border-destructive/10 text-center">
-                  <p className="text-2xl font-black text-destructive">$28.4B</p>
+                <div className="mt-6 rounded-2xl border border-border/60 bg-background/90 p-4 text-center">
+                  <p className="text-2xl font-black text-foreground">$28.4B</p>
                   <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">Lost to scams in 2024 (FTC)</p>
                 </div>
-              </div>
+              </SiteCalloutCard>
 
-              <div className="bg-card border-2 border-primary/20 rounded-2xl p-6 sm:p-8 shadow-sm h-full">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                    <Shield className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="text-xl font-black text-primary">With InVision Protection</h3>
-                </div>
+              <SiteCalloutCard
+                className="h-full"
+                tone="brand"
+                eyebrow="Protection plan"
+                icon={Shield}
+                title="With InVision Protection"
+                description="Every family gets a calmer, repeatable system for verifying urgent requests and responding before money or identity is at risk."
+              >
                 <ul className="space-y-3">
                   {[
                     "Family safe words to verify real emergencies instantly",
@@ -1092,19 +1094,18 @@ function LearnAndTrain() {
                     "Secure vault for important family documents",
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start gap-3 text-sm">
-                      <span className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <CheckCircle className="w-3.5 h-3.5 text-primary" />
+                      <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary/10">
+                        <CheckCircle className="h-3.5 w-3.5 text-primary" />
                       </span>
                       <span className="text-muted-foreground">{item}</span>
                     </li>
                   ))}
                 </ul>
-                {/* Protection stat */}
-                <div className="mt-6 p-4 bg-primary/5 rounded-xl border border-primary/10 text-center">
+                <div className="mt-6 rounded-2xl border border-primary/10 bg-primary/5 p-4 text-center">
                   <p className="text-2xl font-black text-primary">$1.2M+</p>
                   <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">Saved for our families</p>
                 </div>
-              </div>
+              </SiteCalloutCard>
             </div>
 
             {/* Family Safety Vault */}

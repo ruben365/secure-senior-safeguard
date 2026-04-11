@@ -175,7 +175,7 @@ export const PAGE_SEO = {
         "Phishing Defense",
         "Voice Clone Detection",
         "Senior Cybersecurity Training",
-        "Business AI Automation",
+        "AI Workshop Systems",
         "Family Digital Safety",
       ],
       aggregateRating: {
@@ -228,15 +228,15 @@ export const PAGE_SEO = {
   },
 
   business: {
-    title: "AI Automation for Ohio Businesses | InVision Network",
+    title: "AI Workshop Systems for Ohio Businesses | InVision Network",
     description:
-      "24/7 AI receptionists, automated follow-ups, and website design for Kettering and Southwest Ohio businesses. Stop missing calls.",
+      "AI Workshop systems for Ohio businesses: 24/7 AI receptionists, automated follow-ups, website design, and secure support for teams in Kettering and Southwest Ohio.",
     keywords:
-      "AI receptionist Ohio, business automation Kettering, AI answering service, virtual receptionist Southwest Ohio, small business AI automation",
+      "AI workshop Ohio, AI receptionist Ohio, business automation Kettering, AI answering service, virtual receptionist Southwest Ohio",
     structuredData: {
       "@context": "https://schema.org",
       "@type": "ItemList",
-      name: "AI Services",
+      name: "AI Workshop Services",
       itemListElement: [
         {
           "@type": "Service",
@@ -278,7 +278,7 @@ export const PAGE_SEO = {
   contact: {
     title: "Contact InVision Network — Kettering, Ohio",
     description:
-      "Contact InVision Network for cybersecurity training and AI business solutions. Call (937) 301-8749. Serving all of Southwest Ohio.",
+      "Contact InVision Network for cybersecurity training and AI Workshop systems. Call (937) 301-8749. Serving Kettering, Dayton, and all of Southwest Ohio.",
     keywords:
       "contact InVision Network, Kettering cybersecurity contact, AI protection Ohio inquiry",
   },
@@ -318,7 +318,7 @@ export const PAGE_SEO = {
   faq: {
     title: "Frequently Asked Questions — InVision Network",
     description:
-      "Answers to common questions about InVision Network's cybersecurity training, AI business services, pricing, and how we protect Ohio families from scams.",
+      "Answers to common questions about InVision Network's cybersecurity training, AI Workshop systems, pricing, and how we protect Ohio families from scams.",
     keywords:
       "InVision Network FAQ, cybersecurity questions Ohio, AI scam protection FAQ, training pricing",
   },
@@ -326,9 +326,9 @@ export const PAGE_SEO = {
   help: {
     title: "Help Center — InVision Network Support",
     description:
-      "Find answers, guides, and support resources for InVision Network's cybersecurity and AI services. Browse our knowledge base or contact our team.",
+      "Find answers, guides, and support resources for InVision Network's cybersecurity programs and AI Workshop systems. Browse our knowledge base or contact our team.",
     keywords:
-      "InVision Network help, cybersecurity support, AI services FAQ, knowledge base",
+      "InVision Network help, cybersecurity support, AI Workshop FAQ, knowledge base",
   },
 
   notFound: {

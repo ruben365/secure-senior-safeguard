@@ -132,7 +132,7 @@ export const CookieConsent = forwardRef<HTMLDivElement>(function CookieConsent(_
 
   return (
     <>
-      <div className="cookie-banner fixed bottom-4 left-4 right-4 sm:bottom-6 sm:left-auto sm:right-6 z-50">
+      <div className="cookie-banner fixed bottom-[calc(env(safe-area-inset-bottom,0px)+7rem)] left-4 right-4 sm:bottom-6 sm:left-auto sm:right-6 z-50">
         <div className="cookie-banner__card sm:w-[360px] rounded-xl overflow-hidden">
           <div className="p-4">
             {/* Header row */}

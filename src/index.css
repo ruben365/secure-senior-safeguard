@@ -28,15 +28,13 @@
 @import "./styles/polish.css";
 
 /* ═══════════════════════════════════════════════════════════════════
-   GLOBAL OVERRIDES — no shadows, HD sharpness
+   GLOBAL OVERRIDES — keep text crisp without flattening components
    ═══════════════════════════════════════════════════════════════════ */
 
-/* Zero decorative shadows — preserves Tailwind focus rings (--tw-ring-shadow) */
+/* Preserve component elevation; only strip stray legacy text shadows */
 *,
 *::before,
 *::after {
-  --tw-shadow: 0 0 #0000 !important;
-  --tw-shadow-colored: 0 0 #0000 !important;
   text-shadow: none !important;
 }
 

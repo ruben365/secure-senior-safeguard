@@ -91,11 +91,11 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
     {
       heading: "Services",
       links: [
-        { to: "/business", label: "AI for Business" },
-        { to: "/business#svc-ai-receptionist", label: "AI Receptionist" },
-        { to: "/business#svc-smart-scheduling", label: "Smart Scheduling" },
-        { to: "/business#svc-website-design", label: "Website Design" },
-        { to: "/business#svc-website-insurance", label: "Website Insurance" },
+        { to: "/ai-workshop", label: "AI Workshop" },
+        { to: "/ai-workshop#svc-ai-receptionist", label: "AI Receptionist" },
+        { to: "/ai-workshop#svc-smart-scheduling", label: "Smart Scheduling" },
+        { to: "/ai-workshop#svc-website-design", label: "Website Design" },
+        { to: "/ai-workshop#svc-website-insurance", label: "Website Insurance" },
       ],
     },
     {

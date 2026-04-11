@@ -210,11 +210,11 @@ export const PaymentDialog = ({
               <CreditCard className="w-4 h-4 text-[#d96c4a]" />
             </div>
             <span className="text-[15px] font-semibold leading-none">
-              Secure Guest Scan Payment
+              Pay for 1 secure upload scan
             </span>
           </DialogTitle>
           <DialogDescription className="text-[11px] mt-1">
-            Your file is analyzed immediately after payment. No account required.
+            Pay once for this upload. After payment, your file is analyzed immediately.
           </DialogDescription>
         </DialogHeader>
 
@@ -246,7 +246,8 @@ export const PaymentDialog = ({
             <div className="rounded-md border border-border/60 px-3 py-2 bg-white/70">
               <p className="text-[11px] text-muted-foreground leading-snug">
                 We do NOT store your file or payment details. Your file is
-                analyzed once and permanently deleted within 10 minutes.
+                analyzed once and permanently deleted within 10 minutes. This
+                payment covers one upload scan.
               </p>
               <div className="mt-2 flex items-start gap-2">
                 <Checkbox

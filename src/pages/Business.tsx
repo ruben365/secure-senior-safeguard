@@ -459,18 +459,18 @@ function Business() {
     <PageTransition variant="fade">
       <div className="min-h-screen">
         <SEO
-          title="AI Automation & Business Solutions — Kettering & Dayton, Ohio"
-          description="Transform your Ohio business with AI receptionists, automated follow-ups, custom websites, and AI insurance. Your AI front desk runs 24/7 — never miss a call. Serving Kettering, Dayton, and Southwest Ohio."
+          title="AI Workshop Systems for Ohio Businesses — Kettering & Dayton, Ohio"
+          description="Transform your Ohio business with InVision Network's AI Workshop: AI receptionists, automated follow-ups, custom websites, and AI insurance. Your AI front desk runs 24/7 — never miss a call."
           keywords="AI receptionist Ohio, business automation Kettering, AI answering service Dayton, virtual receptionist Southwest Ohio, small business AI"
           breadcrumbs={[
             { name: "Home", url: "https://www.invisionnetwork.org/" },
-            { name: "Business", url: "https://www.invisionnetwork.org/business" },
+            { name: "AI Workshop", url: "https://www.invisionnetwork.org/ai-workshop" },
           ]}
           structuredData={{
             "@context": "https://schema.org",
             "@type": "ItemList",
-            name: "AI Services",
-            description: "Professional AI automation services",
+            name: "AI Workshop Services",
+            description: "Professional AI systems and automation services",
             itemListElement: [
             {
               "@type": "Service",
@@ -511,7 +511,7 @@ function Business() {
 
         {/* Answer summary — what we build for businesses */}
         <AnswerSummary
-          summary="InVision Network builds AI automation for Ohio businesses — AI receptionists that answer calls 24/7, automated follow-ups that nurture leads, and professional websites backed by maintenance plans. Serving Kettering, Dayton, and the Miami Valley."
+          summary="InVision Network's AI Workshop builds connected systems for Ohio businesses: AI receptionists that answer calls 24/7, automated follow-ups that nurture leads, and professional websites backed by maintenance plans. Serving Kettering, Dayton, and the Miami Valley."
           ctaHref="/contact"
           ctaLabel="Schedule a free strategy call"
           className="py-8"
@@ -707,7 +707,7 @@ function Business() {
                           </span>
                         </h3>
                         <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-8">
-                          We merged the full platform into AI to keep the story simple.
+                          We merged the full platform into AI Workshop to keep the story simple.
                           Our purpose is to help Ohio organizations grow with AI while staying safe from
                           modern fraud and operational risk. Learn more about <Link to="/about" className="text-primary hover:underline font-medium">our story</Link> and the team behind the mission.
                         </p>
@@ -874,7 +874,7 @@ function Business() {
                       name: "InVision Platform Demo",
                       price: 0,
                       tier: "Full Platform",
-                      description: "Schedule a live demo of all 9 integrated services now consolidated under AI."
+                      description: "Schedule a live demo of all 9 integrated services now consolidated under AI Workshop."
                     });
                     setInquiryDialogOpen(true);
                   }}>

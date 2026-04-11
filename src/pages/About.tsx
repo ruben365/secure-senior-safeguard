@@ -146,7 +146,7 @@ function About() {
             <Button size="heroPill" variant="heroPrimary" asChild>
               <Link to="/training">Start Training</Link>
             </Button>
-            <Button size="heroPill" variant="heroOutline" asChild>
+            <Button size="heroPill" variant="heroOutline" className="text-white hover:text-white" asChild>
               <Link to="/contact">Get in Touch</Link>
             </Button>
           </div>
@@ -463,7 +463,7 @@ function About() {
             Ready to Join Our Protected Community?
           </h2>
           <p className="text-base md:text-lg text-muted-foreground mb-5 max-w-2xl mx-auto">
-            Whether you're looking for personal training, <Link to="/business" className="text-primary underline hover:text-primary/80 font-medium">AI business solutions</Link>, or
+            Whether you're looking for personal training, <Link to="/ai-workshop" className="text-primary underline hover:text-primary/80 font-medium">AI Workshop systems</Link>, or
             want to support our mission, we'd love to connect.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
@@ -475,12 +475,12 @@ function About() {
                 Start Training
               </Link>
             </Button>
-            <Button asChild size="lg" variant="heroOutline">
+            <Button asChild size="lg" variant="outline">
               <Link
-                to="/business"
-                onClick={() => trackButtonClick("Partner With Us", "About CTA")}
+                to="/ai-workshop"
+                onClick={() => trackButtonClick("Explore AI Workshop", "About CTA")}
               >
-                Partner With Us
+                Explore AI Workshop
               </Link>
             </Button>
           </div>

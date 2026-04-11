@@ -9,8 +9,7 @@ const corsHeaders = {
 };
 
 const MB = 1024 * 1024;
-const RATE_PER_MB = 0.1;
-const MINIMUM_CHARGE = 0.5;
+const PER_UPLOAD_PRICE = 1;
 const MAX_FILE_MB = 500;
 const MIN_FILE_BYTES = 1;
 const MAX_FILE_BYTES = MAX_FILE_MB * MB;
@@ -83,12 +82,7 @@ const sanitizeFileName = (name: string) =>
 const getExtension = (name: string) =>
   name.slice(Math.max(0, name.lastIndexOf("."))).toLowerCase();
 
-const calculateAmount = (bytes: number) => {
-  const sizeMb = bytes / MB;
-  const raw = sizeMb * RATE_PER_MB;
-  const cost = Math.max(MINIMUM_CHARGE, Math.ceil(raw * 100) / 100);
-  return { sizeMb, cost };
-};
+const calculateAmount = () => PER_UPLOAD_PRICE;
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -186,7 +180,7 @@ serve(async (req) => {
       });
     }
 
-    const { cost } = calculateAmount(fileSizeNumber);
+    const cost = calculateAmount();
     const scanId = crypto.randomUUID();
     const sanitized = sanitizeFileName(fileName);
 

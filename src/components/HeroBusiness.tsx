@@ -1,7 +1,8 @@
 import { useCallback } from "react";
 import {
-  Cpu, Bot, ShieldCheck, Cog,
+  Cpu, Bot, Shield, ShieldCheck, Cog,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import businessHero from "@/assets/hero-ai-business-unified.jpg";
 
 const highPriorityImageProps = { fetchpriority: "high" } as const;
@@ -27,8 +28,16 @@ const businessFeatures = [
   {
     icon: ShieldCheck,
     label: "AI",
-    title: "Scam Protection & Insurance",
-    desc: "Forecast threats and protect your business assets.",
+    title: "Scam Protection",
+    desc: "Spot suspicious activity early and protect your team from costly fraud.",
+    target: "svc-support-bot",
+    variant: "dark" as const,
+  },
+  {
+    icon: Shield,
+    label: "AI",
+    title: "Insurance",
+    desc: "Support business continuity with coverage-aligned workflows and response plans.",
     target: "svc-support-bot",
     variant: "dark" as const,
   },
@@ -53,7 +62,7 @@ export const HeroBusiness = ({ onStrategyCall }: { onStrategyCall: () => void })
       <div className="hero-biz__bg">
         <img
           src={businessHero}
-          alt="InVision Network — AI Solutions"
+          alt="InVision Network AI Workshop team building secure automation systems"
           loading="eager"
           decoding="sync"
           {...highPriorityImageProps}
@@ -68,26 +77,32 @@ export const HeroBusiness = ({ onStrategyCall }: { onStrategyCall: () => void })
         <div className="hero-biz__copy">
 
           <h1 className="hero-biz__headline">
-            AI Solutions Build
+            AI Workshop Systems
             <br />
-            Cyberspace
+            for Modern
             <br />
-            Business Success
+            Business Teams
           </h1>
 
           <p className="hero-biz__body">
-            Build advanced AI systems to optimize processes,
-            strengthen data security, and drive growth in your digital
-            infrastructure. Scalable tools for modern business challenges.
+            Plan, deploy, and support AI receptionists, automated follow-ups,
+            and secure workflows with one connected partner. Built for Ohio
+            organizations that want cleaner operations and stronger protection.
           </p>
 
           <div className="hero-biz__ctas">
-            <button type="button" className="hero-biz__cta hero-biz__cta--primary" onClick={onStrategyCall}>
+            <Button type="button" size="heroPill" variant="heroPrimary" onClick={onStrategyCall}>
               Request Demo
-            </button>
-            <button type="button" className="hero-biz__cta hero-biz__cta--secondary" onClick={() => scrollTo("services")}>
+            </Button>
+            <Button
+              type="button"
+              size="heroPill"
+              variant="heroOutline"
+              className="text-white hover:text-white"
+              onClick={() => scrollTo("services")}
+            >
               Learn More
-            </button>
+            </Button>
           </div>
         </div>
         </div>

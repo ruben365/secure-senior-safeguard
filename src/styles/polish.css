@@ -378,13 +378,13 @@ a[href^="#"] {
    removing the glass look. */
 
 /* Light-background glass panels — strong foreground color, no shadow */
-[style*="backdrop-filter"],
-[style*="backdropFilter"],
-.backdrop-blur-sm,
-.backdrop-blur-md,
-.backdrop-blur-lg,
-.backdrop-blur-xl,
-.backdrop-blur-2xl {
+[style*="backdrop-filter"]:not(.button-link),
+[style*="backdropFilter"]:not(.button-link),
+.backdrop-blur-sm:not(.button-link),
+.backdrop-blur-md:not(.button-link),
+.backdrop-blur-lg:not(.button-link),
+.backdrop-blur-xl:not(.button-link),
+.backdrop-blur-2xl:not(.button-link) {
   color: hsl(var(--foreground));
 }
 

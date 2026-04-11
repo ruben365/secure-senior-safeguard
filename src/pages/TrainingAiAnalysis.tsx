@@ -10,12 +10,19 @@ import { usePrerenderReady } from "@/contexts/PrerenderContext";
 import { useGuestScanner } from "@/hooks/useGuestScanner";
 import { useAiChat } from "@/hooks/useAiChat";
 import { useSubscription } from "@/contexts/SubscriptionContext";
+import { useAuth } from "@/contexts/AuthContext";
+import { useScanAccess } from "@/hooks/useScanAccess";
 import { SITE } from "@/config/site";
 import {
+  BadgeCheck,
+  CreditCard,
   Download,
   Home,
+  LogIn,
   Moon,
   RefreshCw,
+  ShieldCheck,
+  Sparkles,
   Sun,
   Trash2,
   X,
@@ -23,6 +30,7 @@ import {
   Lock,
   ShieldAlert,
   Camera,
+  Wallet,
 } from "lucide-react";
 import {
   Dialog,
@@ -33,19 +41,27 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 export default function TrainingAiAnalysis() {
   usePrerenderReady(true);
   const [paymentOpen, setPaymentOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [showBookmarks, setShowBookmarks] = useState(false);
   const [paywallOpen, setPaywallOpen] = useState(false);
-  const [scanPaidThisSession, setScanPaidThisSession] = useState(false);
+  const { user } = useAuth();
 
-  // Subscription gate — active ScamShield subscribers get AI chat included
-  // with their plan. Non-subscribers must either subscribe OR pay for at least
-  // one file scan, which unlocks AI chat for the rest of their browser session.
-  // Nothing here is free — the chat is gated end-to-end.
-  const { subscriptions } = useSubscription();
+  const {
+    subscriptions,
+    loading: subscriptionsLoading,
+    refreshSubscriptions,
+  } = useSubscription();
+  const {
+    accountAccess,
+    loading: scanAccessLoading,
+    preparing: preparingAuthorizedScan,
+    refreshAccess,
+    prepareAuthorizedScan,
+  } = useScanAccess();
   const hasActiveProtection = useMemo(
     () =>
       subscriptions.some(
@@ -56,7 +72,47 @@ export default function TrainingAiAnalysis() {
       ),
     [subscriptions],
   );
-  const chatUnlocked = hasActiveProtection || scanPaidThisSession;
+  const scanAccessType = useMemo(() => {
+    if (hasActiveProtection) return "subscription" as const;
+    if (accountAccess.canScan && accountAccess.accessType !== "none") {
+      return accountAccess.accessType;
+    }
+    return null;
+  }, [accountAccess.accessType, accountAccess.canScan, hasActiveProtection]);
+  const chatUnlocked = scanAccessType !== null;
+  const isCheckingAccess =
+    !!user && (subscriptionsLoading || scanAccessLoading);
+  const loginPath = `/auth?redirect=${encodeURIComponent("/training/ai-analysis")}`;
+  const accessHeadline = useMemo(() => {
+    if (isCheckingAccess) return "Checking your scan access";
+    if (scanAccessType === "subscription") return "ScamShield access active";
+    if (scanAccessType === "balance") return "Account-linked scans available";
+    if (scanAccessType === "metered") {
+      return "Account-linked pay as you use access";
+    }
+    if (user) return "No active scan access on this account";
+    return "Already a ScamShield subscriber?";
+  }, [isCheckingAccess, scanAccessType, user]);
+  const accessDescription = useMemo(() => {
+    if (isCheckingAccess) {
+      return "We are verifying your login and subscription status before unlocking uploads.";
+    }
+    if (scanAccessType === "subscription") {
+      return "You are signed in with an active ScamShield plan. Upload one supported file, screenshot, audio clip, or video to scan immediately.";
+    }
+    if (scanAccessType === "balance") {
+      const balance = accountAccess.scanBalance ?? 0;
+      const unitLabel = balance === 1 ? "scan" : "scans";
+      return `This account has ${balance} upload ${unitLabel} remaining at $1 per scan.`;
+    }
+    if (scanAccessType === "metered") {
+      return "This account is enabled for pay-as-you-use uploads. Each completed upload scan records $1 of account usage.";
+    }
+    if (user) {
+      return "This login is not tied to an active ScamShield plan or an enabled account-based scan service.";
+    }
+    return "Log in once and we will check your ScamShield subscription automatically before you scan.";
+  }, [accountAccess.scanBalance, isCheckingAccess, scanAccessType, user]);
 
   // Set uniform background for this page
   useEffect(() => {
@@ -105,16 +161,17 @@ export default function TrainingAiAnalysis() {
 
   // Calculate full cost object with formatting
   const cost = useMemo(() => {
-    if (!file)
+    if (!file) {
       return {
-        cost: 0.5,
-        formatted: "$0.50",
-        minimumCharge: 0.5,
+        cost: 1,
+        formatted: "$1.00",
+        perUploadCharge: 1,
       };
+    }
     return {
       cost: costNumber,
       formatted: `$${costNumber.toFixed(2)}`,
-      minimumCharge: 0.5,
+      perUploadCharge: 1,
     };
   }, [file, costNumber]);
   const {
@@ -133,8 +190,6 @@ export default function TrainingAiAnalysis() {
   }) => {
     setPaymentOpen(false);
     setStatus("uploading");
-    // Unlock AI chat for the rest of this browser session as a thank-you for paying.
-    setScanPaidThisSession(true);
     startScan({
       scanId: payload.scanId,
       filePath: payload.filePath,
@@ -183,6 +238,61 @@ export default function TrainingAiAnalysis() {
     setStatus("paying");
     setPaymentOpen(true);
   };
+  const handlePayPerScan = () => {
+    if (!file || !canPay || isProcessing) {
+      toast("Upload one supported file or screenshot first.");
+      return;
+    }
+
+    setPaywallOpen(false);
+    handleRequestPayment();
+  };
+
+  const handleRefreshLoggedInAccess = async () => {
+    await Promise.all([refreshSubscriptions(), refreshAccess()]);
+  };
+
+  const handleAuthorizedScan = useCallback(async () => {
+    if (!file || !scanAccessType || isProcessing || preparingAuthorizedScan) {
+      return;
+    }
+
+    try {
+      const payload = await prepareAuthorizedScan(file);
+      await startScan({
+        scanId: payload.scanId,
+        filePath: payload.filePath,
+      });
+    } catch (err: any) {
+      setStatus(file ? "ready" : "idle");
+      toast.error(
+        err?.message || "Unable to start your account-linked upload scan.",
+      );
+    } finally {
+      await Promise.all([refreshSubscriptions(), refreshAccess()]);
+    }
+  }, [
+    file,
+    isProcessing,
+    prepareAuthorizedScan,
+    preparingAuthorizedScan,
+    refreshAccess,
+    refreshSubscriptions,
+    scanAccessType,
+    setStatus,
+    startScan,
+  ]);
+
+  const handlePrimaryScanAction = () => {
+    if (!file || status !== "ready") return;
+    if (scanAccessType) {
+      void handleAuthorizedScan();
+      return;
+    }
+
+    setPaywallOpen(true);
+  };
+
   const handlePaymentOpenChange = (open: boolean) => {
     setPaymentOpen(open);
     if (!open && status === "paying" && !isProcessing) {
@@ -326,6 +436,55 @@ export default function TrainingAiAnalysis() {
 
               {/* Enhanced AI Command Center */}
               <div className="w-full flex flex-col items-center gap-3">
+                <div className="w-full max-w-3xl mx-auto rounded-[1.75rem] border border-white/15 bg-black/30 backdrop-blur-xl px-5 py-4 shadow-xl">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="min-w-0">
+                      <div className="mb-1 flex items-center gap-2 text-white">
+                        {scanAccessType === "subscription" ? (
+                          <ShieldCheck className="h-4 w-4 text-emerald-300" />
+                        ) : scanAccessType === "balance" ? (
+                          <Wallet className="h-4 w-4 text-[#f6c7b8]" />
+                        ) : scanAccessType === "metered" ? (
+                          <CreditCard className="h-4 w-4 text-[#f6c7b8]" />
+                        ) : user ? (
+                          <ShieldAlert className="h-4 w-4 text-yellow-300" />
+                        ) : (
+                          <LogIn className="h-4 w-4 text-[#f6c7b8]" />
+                        )}
+                        <p className="text-sm font-semibold">{accessHeadline}</p>
+                      </div>
+                      <p className="text-sm leading-relaxed text-white/80">
+                        {accessDescription}
+                      </p>
+                    </div>
+
+                    {!scanAccessType && (
+                      <div className="flex flex-wrap gap-2">
+                        {!user && (
+                          <Button
+                            asChild
+                            type="button"
+                            size="sm"
+                            variant="heroPrimary"
+                            className="text-white"
+                          >
+                            <Link to={loginPath}>Log in to scan</Link>
+                          </Button>
+                        )}
+                        <Button
+                          asChild
+                          type="button"
+                          size="sm"
+                          variant="heroOutline"
+                          className="text-white hover:text-white"
+                        >
+                          <Link to="/contact">Start ScamShield</Link>
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
                 <PromptInputBox
                   onSend={handleSendMessage}
                   onFileSelect={prepareFile}
@@ -358,11 +517,15 @@ export default function TrainingAiAnalysis() {
                       <Button
                         type="button"
                         size="lg"
-                        onClick={handleRequestPayment}
-                        disabled={isProcessing}
+                        onClick={handlePrimaryScanAction}
+                        disabled={isProcessing || preparingAuthorizedScan}
                         className="rounded-full"
                       >
-                        Pay {cost.formatted} &amp; Scan
+                        {scanAccessType
+                          ? preparingAuthorizedScan
+                            ? "Preparing scan..."
+                            : "Scan this upload"
+                          : `Choose access to scan`}
                       </Button>
                     )}
                   </div>
@@ -390,9 +553,10 @@ export default function TrainingAiAnalysis() {
                         or hit{" "}
                         <FileDown className="inline h-3.5 w-3.5 -mt-0.5 mx-0.5" />{" "}
                         Save as PDF before you leave. Uploaded files are
-                        auto-deleted from our scanner in 10 minutes. $
-                        {cost.minimumCharge.toFixed(2)} minimum per scan — no
-                        free analysis.
+                        auto-deleted from our scanner in 10 minutes. Every
+                        upload scan is billed at $
+                        {cost.perUploadCharge.toFixed(2)} per file, screenshot,
+                        image, audio clip, or supported upload.
                       </p>
                     </div>
                   </div>
@@ -413,67 +577,119 @@ export default function TrainingAiAnalysis() {
 
       {/* Paywall: shown when a non-subscriber tries to chat without paying. */}
       <Dialog open={paywallOpen} onOpenChange={setPaywallOpen}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-              <Lock className="h-6 w-6 text-primary" />
-            </div>
-            <DialogTitle className="text-center">
-              AI Chat is a paid feature
-            </DialogTitle>
-            <DialogDescription className="text-center pt-2">
-              Nothing on InVision is free — including AI scam analysis. Pick
-              one of the options below to unlock chat.
-            </DialogDescription>
-          </DialogHeader>
-
-          <div className="space-y-3 py-2">
-            <div className="rounded-xl border border-primary/30 bg-primary/5 p-4">
-              <div className="flex items-center gap-2 mb-1">
-                <ShieldAlert className="h-4 w-4 text-primary" />
-                <p className="font-semibold text-sm">
-                  Subscribe to ScamShield Protection
-                </p>
+        <DialogContent className="overflow-hidden p-0 sm:max-w-lg">
+          <div className="bg-gradient-to-br from-[#12141b] via-[#171a23] to-[#1f2430] px-6 py-6 text-white">
+            <DialogHeader>
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/10">
+                <Lock className="h-6 w-6 text-[#f6c7b8]" />
               </div>
-              <p className="text-xs text-muted-foreground mb-3">
-                Active subscribers get unlimited AI chat plus 24/7 fraud
-                monitoring, identity protection, and scam insurance.
-              </p>
-              <Button asChild className="w-full">
-                <Link
-                  to="/contact"
-                  onClick={() => setPaywallOpen(false)}
+              <DialogTitle className="text-center text-xl">
+                Secure access for AI upload scans
+              </DialogTitle>
+              <DialogDescription className="pt-2 text-center text-white/70">
+                Choose the right path for this upload. Subscribers scan without
+                friction, and one-time users can pay $
+                {cost.perUploadCharge.toFixed(2)} for a single upload scan.
+              </DialogDescription>
+            </DialogHeader>
+          </div>
+
+          <div className="space-y-3 px-5 py-5">
+            <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/[0.06] p-4">
+              <div className="mb-3 flex items-start gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/12">
+                  {user ? (
+                    <BadgeCheck className="h-5 w-5 text-emerald-600" />
+                  ) : (
+                    <LogIn className="h-5 w-5 text-emerald-600" />
+                  )}
+                </div>
+                <div className="min-w-0">
+                  <p className="font-semibold text-sm text-foreground">
+                    {user ? "Current account" : "Existing subscriber"}
+                  </p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {user
+                      ? "Refresh this login if your ScamShield subscription or account-linked scan service was just activated."
+                      : "Log in once and we will verify your ScamShield subscription automatically, then send you straight into scanning if it is active."}
+                  </p>
+                </div>
+              </div>
+              {user ? (
+                <Button
+                  type="button"
+                  onClick={() => {
+                    void handleRefreshLoggedInAccess();
+                    setPaywallOpen(false);
+                  }}
+                  className="w-full"
                 >
-                  Inquire about ScamShield plans
+                  Refresh account access
+                </Button>
+              ) : (
+                <Button asChild className="w-full">
+                  <Link to={loginPath} onClick={() => setPaywallOpen(false)}>
+                    Log in to scan
+                  </Link>
+                </Button>
+              )}
+            </div>
+
+            <div className="rounded-2xl border border-primary/20 bg-primary/5 p-4">
+              <div className="mb-3 flex items-start gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
+                  <Sparkles className="h-5 w-5 text-primary" />
+                </div>
+                <div className="min-w-0">
+                  <p className="font-semibold text-sm text-foreground">
+                    New user
+                  </p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    Start ScamShield protection for subscriber access to upload
+                    scans, ongoing scam support, and account-based protection.
+                  </p>
+                </div>
+              </div>
+              <Button asChild variant="outline" className="w-full">
+                <Link to="/contact" onClick={() => setPaywallOpen(false)}>
+                  Start ScamShield subscription
                 </Link>
               </Button>
             </div>
 
-            <div className="rounded-xl border border-border p-4">
-              <div className="flex items-center gap-2 mb-1">
-                <FileDown className="h-4 w-4 text-foreground" />
-                <p className="font-semibold text-sm">
-                  Or pay per scan (${cost.minimumCharge.toFixed(2)} min)
-                </p>
+            <div className="rounded-2xl border border-border bg-muted/30 p-4">
+              <div className="mb-3 flex items-start gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#d96c4a]/12">
+                  <CreditCard className="h-5 w-5 text-[#d96c4a]" />
+                </div>
+                <div className="min-w-0">
+                  <p className="font-semibold text-sm text-foreground">
+                    One time or pay as you use user
+                  </p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    Pay $
+                    {cost.perUploadCharge.toFixed(2)} per scan. Each uploaded
+                    file, screenshot, image, or supported upload counts as one
+                    secure scan.
+                  </p>
+                </div>
               </div>
-              <p className="text-xs text-muted-foreground mb-3">
-                Upload a suspicious file or screenshot. Once you pay for the
-                scan, AI chat is unlocked for the rest of this browser session.
-              </p>
               <Button
-                variant="outline"
-                onClick={() => setPaywallOpen(false)}
-                className="w-full"
+                type="button"
+                variant="heroPrimary"
+                className="w-full text-white"
+                onClick={handlePayPerScan}
               >
-                Got it — I'll upload a file
+                Pay ${cost.perUploadCharge.toFixed(2)} per scan
               </Button>
             </div>
           </div>
 
-          <DialogFooter className="sm:justify-center">
-            <p className="text-xs text-muted-foreground text-center">
-              We never store your files or conversations. Everything is
-              auto-deleted in 10 minutes.
+          <DialogFooter className="border-t bg-muted/10 px-5 py-4 sm:justify-center">
+            <p className="text-xs text-center text-muted-foreground">
+              Subscriber scans stay tied to the signed-in account. Account-based
+              pay-as-you-use scans deduct $1 only when the upload scan is
+              processed.
             </p>
           </DialogFooter>
         </DialogContent>

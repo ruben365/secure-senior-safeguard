@@ -21,7 +21,6 @@ import {
 } from "lucide-react";
 import { z } from "zod";
 import invisionLogo from "@/assets/shield-logo.png";
-const authBackground = "/images/hero-corporate-protection.webp";
 import { Session, User as SupabaseUser } from "@supabase/supabase-js";
 import { ForgotPasswordModal } from "@/components/auth/ForgotPasswordModal";
 import { TwoFactorVerify } from "@/components/auth/TwoFactorVerify";
@@ -61,6 +60,13 @@ const passwordSchema = z
 function Auth() {
   const [searchParams] = useSearchParams();
   const defaultTab = searchParams.get("mode") === "signup" ? "signup" : "login";
+  const requestedRedirect = searchParams.get("redirect");
+  const safeRedirect =
+    requestedRedirect &&
+    requestedRedirect.startsWith("/") &&
+    !requestedRedirect.startsWith("//")
+      ? requestedRedirect
+      : null;
 
   const [activeTab, setActiveTab] = useState(defaultTab);
   const [email, setEmail] = useState("");
@@ -201,6 +207,11 @@ function Auth() {
             "Your account has been suspended. Please contact support.",
           variant: "destructive",
         });
+        return;
+      }
+
+      if (safeRedirect) {
+        navigate(safeRedirect, { replace: true });
         return;
       }
 
@@ -652,37 +663,47 @@ function Auth() {
              visible) — subtle reference to the brand band
       */}
       <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden">
-        {/* 1 — deep navy base gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0c1024] via-[#0f1530] to-[#0a0e22]" />
+        {/* 1 — ink-blue base gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#07111d] via-[#0d1830] to-[#131b2c]" />
 
-        {/* 4 — diagonal mesh: warm top-left → navy center → cool bottom-right */}
+        {/* 4 — diagonal mesh: warm top-left → calm blue lower-right */}
         <div
-          className="absolute inset-0 opacity-90"
+          className="absolute inset-0 opacity-95"
           style={{
             background:
-              "radial-gradient(ellipse 70% 55% at 12% 8%, rgba(217, 108, 74, 0.18) 0%, transparent 55%), " +
-              "radial-gradient(ellipse 60% 50% at 88% 92%, rgba(139, 116, 188, 0.22) 0%, transparent 55%), " +
-              "radial-gradient(ellipse 55% 45% at 50% 50%, rgba(30, 41, 80, 0.3) 0%, transparent 65%)",
+              "radial-gradient(ellipse 74% 58% at 10% 8%, rgba(217, 108, 74, 0.24) 0%, transparent 56%), " +
+              "radial-gradient(ellipse 68% 54% at 90% 88%, rgba(82, 132, 196, 0.18) 0%, transparent 60%), " +
+              "radial-gradient(ellipse 42% 34% at 52% 48%, rgba(255, 245, 234, 0.08) 0%, transparent 68%)",
           }}
         />
 
         {/* 3 — fine dot grid texture */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.04]">
+        <svg className="absolute inset-0 w-full h-full opacity-[0.03]">
           <defs>
-            <pattern id="auth-dots" x="0" y="0" width="26" height="26" patternUnits="userSpaceOnUse">
+            <pattern id="auth-dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
               <circle cx="1" cy="1" r="1" fill="#ffffff" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#auth-dots)" />
         </svg>
 
-        {/* 5a — decorative large glass circle, top-right */}
         <div
-          className="absolute -top-32 -right-20 w-[540px] h-[540px] rounded-full opacity-60"
+          aria-hidden="true"
+          className="absolute left-[34%] top-[-16%] h-[130%] w-56 rotate-[18deg] opacity-25"
           style={{
             background:
-              "radial-gradient(circle at 30% 30%, rgba(217, 108, 74, 0.18) 0%, rgba(217, 108, 74, 0.05) 40%, transparent 70%)",
-            filter: "blur(70px)",
+              "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.12) 48%, transparent 100%)",
+            filter: "blur(16px)",
+          }}
+        />
+
+        {/* 5a — decorative large glass circle, top-right */}
+        <div
+          className="absolute -top-32 -right-20 w-[560px] h-[560px] rounded-full opacity-55"
+          style={{
+            background:
+              "radial-gradient(circle at 30% 30%, rgba(217, 108, 74, 0.24) 0%, rgba(217, 108, 74, 0.08) 40%, transparent 72%)",
+            filter: "blur(82px)",
           }}
         />
 
@@ -691,9 +712,9 @@ function Auth() {
           className="absolute -bottom-24 -left-16 w-[480px] h-[480px] rotate-12 opacity-60"
           style={{
             background:
-              "radial-gradient(ellipse at 50% 50%, rgba(139, 116, 188, 0.2) 0%, rgba(139, 116, 188, 0.06) 40%, transparent 70%)",
+              "radial-gradient(ellipse at 50% 50%, rgba(255, 241, 228, 0.16) 0%, rgba(133, 163, 205, 0.08) 42%, transparent 74%)",
             borderRadius: "48% 52% 44% 56% / 52% 46% 54% 48%",
-            filter: "blur(80px)",
+            filter: "blur(92px)",
           }}
         />
 
@@ -702,8 +723,8 @@ function Auth() {
           className="absolute top-[15%] left-[50%] -translate-x-1/2 w-[380px] h-[380px] rounded-full opacity-40"
           style={{
             background:
-              "radial-gradient(circle, rgba(251, 191, 36, 0.1) 0%, transparent 60%)",
-            filter: "blur(90px)",
+              "radial-gradient(circle, rgba(255, 229, 180, 0.12) 0%, transparent 62%)",
+            filter: "blur(96px)",
           }}
         />
 
@@ -1336,11 +1357,11 @@ function Auth() {
             {/* Apply link — restyled for dark backdrop */}
             <div className="mt-6 text-center">
               <Link
-                to="/careers"
+                to="/careers#open-positions"
                 className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 Want to join our team?{" "}
-                <span className="text-orange-300 font-semibold">Apply here</span>
+                <span className="text-orange-300 font-semibold">Explore open roles</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
