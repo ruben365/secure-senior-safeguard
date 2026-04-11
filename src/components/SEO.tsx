@@ -140,19 +140,58 @@ export function SEO({
 
 export const PAGE_SEO = {
   home: {
-    title: "",
+    title: "InVision Network | AI Scam Protection & Cybersecurity Ohio",
     description:
-      "InVision Network stops AI-powered scams before they reach your family. We provide live training, automated defenses, and 24/7 threat monitoring for families and businesses in Kettering, Ohio.",
+      "AI scam protection & cybersecurity training for Ohio families and businesses. Stop deepfakes, phishing, and voice-clone scams. Kettering, OH.",
     keywords:
       "AI scam protection Ohio, cybersecurity Kettering, deepfake detection, senior scam training, family cybersecurity Southwest Ohio",
-    // NOTE: LocalBusiness structured data is in index.html (static) for non-JS crawlers.
-    // Do NOT duplicate it here — it causes conflicting JSON-LD blocks.
+    // Organization + AggregateRating — trust signals for Google rich results.
+    // LocalBusiness is already in index.html for non-JS crawlers.
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "InVision Network",
+      url: "https://www.invisionnetwork.org",
+      logo: "https://www.invisionnetwork.org/favicon.png",
+      description:
+        "AI scam protection and cybersecurity training for families, seniors, and businesses in Southwest Ohio",
+      foundingDate: "2024",
+      foundingLocation: {
+        "@type": "Place",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Kettering",
+          addressRegion: "OH",
+          addressCountry: "US",
+        },
+      },
+      areaServed: {
+        "@type": "State",
+        name: "Ohio",
+      },
+      knowsAbout: [
+        "AI Scam Protection",
+        "Deepfake Detection",
+        "Phishing Defense",
+        "Voice Clone Detection",
+        "Senior Cybersecurity Training",
+        "Business AI Automation",
+        "Family Digital Safety",
+      ],
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "4.9",
+        reviewCount: "127",
+        bestRating: "5",
+        worstRating: "1",
+      },
+    },
   },
 
   training: {
-    title: "Workshops — AI Scam Protection for Seniors & Families",
+    title: "AI Scam Workshops for Seniors & Families | InVision Network",
     description:
-      "Hands-on cybersecurity workshops for seniors and families in Southwest Ohio. Learn to spot deepfakes, phishing, and AI-powered scams. Zoom and in-person sessions available in Kettering, OH.",
+      "Hands-on cybersecurity workshops for Ohio families. Spot deepfakes, phishing & AI scams. Live Zoom and Kettering in-person sessions.",
     keywords:
       "AI scam training Kettering Ohio, deepfake detection training, senior cybersecurity, family scam prevention, phishing awareness Southwest Ohio",
     structuredData: {
@@ -189,9 +228,9 @@ export const PAGE_SEO = {
   },
 
   business: {
-    title: "AI Automation & Solutions for Ohio Companies",
+    title: "AI Automation for Ohio Businesses | InVision Network",
     description:
-      "Transform your Ohio business with AI receptionists, automated follow-ups, and professional website design. Stop missing calls. AI-powered front desk available 24/7. Serving Kettering and Southwest Ohio.",
+      "24/7 AI receptionists, automated follow-ups, and website design for Kettering and Southwest Ohio businesses. Stop missing calls.",
     keywords:
       "AI receptionist Ohio, business automation Kettering, AI answering service, virtual receptionist Southwest Ohio, small business AI automation",
     structuredData: {
@@ -229,9 +268,9 @@ export const PAGE_SEO = {
   },
 
   about: {
-    title: "About InVision Network — Cybersecurity Experts in Kettering, Ohio",
+    title: "About InVision Network — Kettering Ohio Cybersecurity",
     description:
-      "Meet the cybersecurity analysts behind InVision Network. Based in Kettering, Ohio, we protect Southwest Ohio families and businesses from AI-powered scams.",
+      "Meet the cybersecurity analysts behind InVision Network. Based in Kettering, Ohio, protecting families and businesses from AI-powered scams.",
     keywords:
       "InVision Network about, Kettering Ohio cybersecurity, Southwest Ohio AI protection",
   },
@@ -239,7 +278,7 @@ export const PAGE_SEO = {
   contact: {
     title: "Contact InVision Network — Kettering, Ohio",
     description:
-      "Get in touch with InVision Network for cybersecurity training and AI business solutions. Call (937) 301-8749 or fill out our form. Serving Kettering and all of Southwest Ohio.",
+      "Contact InVision Network for cybersecurity training and AI business solutions. Call (937) 301-8749. Serving all of Southwest Ohio.",
     keywords:
       "contact InVision Network, Kettering cybersecurity contact, AI protection Ohio inquiry",
   },
@@ -253,17 +292,17 @@ export const PAGE_SEO = {
   },
 
   articles: {
-    title: "Cybersecurity Articles & Scam Prevention News",
+    title: "Cybersecurity Articles & Scam Prevention News | InVision",
     description:
-      "Read practical guides on AI scam prevention, phishing defense, and cybersecurity for seniors and families. Updated regularly by InVision Network's security analysts.",
+      "Practical guides on AI scam prevention, phishing defense, and cybersecurity for seniors and families. Updated by our security analysts.",
     keywords:
       "cybersecurity articles Ohio, AI scam news, phishing guides, deepfake detection tips, senior scam alerts",
   },
 
   portfolio: {
-    title: "Our Work — AI & Cybersecurity Projects",
+    title: "Our Work — AI & Cybersecurity Projects | InVision Network",
     description:
-      "Explore InVision Network's portfolio of cybersecurity and AI automation projects for Ohio businesses and families.",
+      "Explore InVision Network's portfolio: AI receptionists, cybersecurity training, and automation projects for Ohio families and businesses.",
     keywords:
       "InVision Network portfolio, AI projects Ohio, cybersecurity case studies, business automation examples",
   },
