@@ -231,7 +231,7 @@ serve(async (req) => {
       file_size: fileSizeNumber,
       file_type: storedType,
       file_path: filePath,
-      stripe_session_id: paymentIntent.id,
+      stripe_session_id: "pending",
       amount_paid: cost,
       payment_status: "pending",
       scan_status: "pending",
@@ -296,6 +296,12 @@ serve(async (req) => {
       payment_method_types: ["card"],
       metadata: paymentMetadata,
     });
+
+    // Update the scan record with the actual payment intent ID
+    await supabase
+      .from("guest_scans")
+      .update({ stripe_session_id: paymentIntent.id })
+      .eq("id", scanId);
 
     return new Response(
       JSON.stringify({

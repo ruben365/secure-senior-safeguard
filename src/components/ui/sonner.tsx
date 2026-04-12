@@ -10,15 +10,15 @@ const Toaster = ({ ...props }: ToasterProps) => {
     <Sonner
       theme={theme as ToasterProps["theme"]}
       className="toaster group"
-      position="top-right"
+      position="bottom-right"
       duration={2500}
       toastOptions={{
         classNames: {
           toast:
-            "group toast backdrop-blur-2xl border-2 rounded-2xl px-5 py-4 " +
-            "bg-[linear-gradient(155deg,rgba(20,16,14,0.92),rgba(8,11,18,0.88)_55%,rgba(217,108,74,0.18))] " +
+            "group toast backdrop-blur-xl border rounded-2xl px-5 py-4 " +
+            "bg-[rgba(10,14,24,0.65)] " +
             "text-white border-white/20 " +
-            "shadow-[0_24px_60px_-20px_rgba(0,0,0,0.6),0_8px_24px_-12px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.22)]",
+            "shadow-[0_24px_60px_-20px_rgba(0,0,0,0.6),0_8px_24px_-12px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.15)]",
           title:
             "group-[.toast]:text-white group-[.toast]:font-semibold group-[.toast]:text-[15px] group-[.toast]:leading-tight group-[.toast]:tracking-tight",
           description:
@@ -30,17 +30,17 @@ const Toaster = ({ ...props }: ToasterProps) => {
           closeButton:
             "group-[.toast]:bg-white/10 group-[.toast]:text-white group-[.toast]:border-white/20 group-[.toast]:hover:bg-white/20",
           success:
-            "group-[.toast]:[&>svg]:text-emerald-300 group-[.toast]:border-emerald-400/40 " +
-            "group-[.toast]:bg-[linear-gradient(155deg,rgba(8,20,14,0.92),rgba(4,15,10,0.88)_55%,rgba(16,185,129,0.22))]",
+            "group-[.toast]:[&>svg]:text-emerald-300 group-[.toast]:border-emerald-400/30 " +
+            "group-[.toast]:bg-[rgba(6,18,12,0.65)]",
           error:
-            "group-[.toast]:[&>svg]:text-red-300 group-[.toast]:border-red-400/40 " +
-            "group-[.toast]:bg-[linear-gradient(155deg,rgba(20,8,10,0.95),rgba(15,4,6,0.92)_55%,rgba(220,38,38,0.24))]",
+            "group-[.toast]:[&>svg]:text-red-300 group-[.toast]:border-red-400/30 " +
+            "group-[.toast]:bg-[rgba(18,6,8,0.65)]",
           warning:
-            "group-[.toast]:[&>svg]:text-amber-300 group-[.toast]:border-amber-400/40 " +
-            "group-[.toast]:bg-[linear-gradient(155deg,rgba(22,14,4,0.95),rgba(18,10,2,0.92)_55%,rgba(245,158,11,0.22))]",
+            "group-[.toast]:[&>svg]:text-amber-300 group-[.toast]:border-amber-400/30 " +
+            "group-[.toast]:bg-[rgba(20,14,4,0.65)]",
           info:
-            "group-[.toast]:[&>svg]:text-sky-300 group-[.toast]:border-sky-400/40 " +
-            "group-[.toast]:bg-[linear-gradient(155deg,rgba(8,16,24,0.92),rgba(4,12,22,0.88)_55%,rgba(56,189,248,0.22))]",
+            "group-[.toast]:[&>svg]:text-sky-300 group-[.toast]:border-sky-400/30 " +
+            "group-[.toast]:bg-[rgba(6,14,22,0.65)]",
         },
       }}
       {...props}

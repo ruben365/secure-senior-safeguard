@@ -503,6 +503,62 @@ select {
   font-weight: 600;
 }
 
+/* ===== NAV LINK HOVER — Two-line animation ===== */
+
+/* Base: position relative for pseudo-elements */
+.nav-link-hover {
+  position: relative;
+}
+
+/* Bottom line (white) — always slides in on hover */
+.nav-link-hover::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: -2px;
+  height: 2px;
+  background: white;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Top line (current text color / orange) — slides in on hover */
+.nav-link-hover::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 1px;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0.04s;
+}
+
+/* Hover: show both lines */
+.nav-link-hover:hover::after,
+.nav-link-hover:hover::before {
+  transform: scaleX(1);
+}
+
+/* Active page: single white bottom line, always visible */
+.nav-link-active::after {
+  transform: scaleX(1);
+}
+
+/* Active page: hide top line when not hovered */
+.nav-link-active::before {
+  transform: scaleX(0);
+}
+
+/* Active page hover: show both again */
+.nav-link-active:hover::before {
+  transform: scaleX(1);
+}
+
 /* Enhanced Card Hover Effects - Clean Modern */
 .card-enhanced {
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);

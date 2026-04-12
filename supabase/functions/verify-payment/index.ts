@@ -347,7 +347,7 @@ serve(async (req) => {
       productNames.push(
         ...session.metadata.itemsDescription
           .split(",")
-          .map((value) => value.trim())
+          .map((value: string) => value.trim())
           .filter(Boolean),
       );
     }
