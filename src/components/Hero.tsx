@@ -26,6 +26,10 @@ interface HeroProps {
   showTrustIndicators?: boolean;
   /** Disable the purple overlay for homepage */
   disablePurpleOverlay?: boolean;
+  backgroundClassName?: string;
+  contentClassName?: string;
+  contentInnerClassName?: string;
+  textBlockClassName?: string;
 }
 
 const Hero = ({
@@ -41,6 +45,10 @@ const Hero = ({
   showProtectionBadge = false,
   badgeText,
   disablePurpleOverlay = false,
+  backgroundClassName,
+  contentClassName,
+  contentInnerClassName,
+  textBlockClassName,
 }: HeroProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -77,7 +85,10 @@ const Hero = ({
               playsInline
               preload="auto"
               onCanPlay={() => setVideoLoaded(true)}
-              className="absolute inset-0 w-full h-full object-cover brightness-[0.85] saturate-[0.9]"
+              className={cn(
+                "absolute inset-0 w-full h-full object-cover brightness-[0.85] saturate-[0.9]",
+                backgroundClassName,
+              )}
             >
               <source src={backgroundVideo} type="video/mp4" />
             </video>
@@ -86,7 +97,7 @@ const Hero = ({
 
         {/* Image Carousel (if no video) */}
         {!useVideo && useCarousel ? (
-          <HeroCarousel images={backgroundImages} />
+          <HeroCarousel images={backgroundImages} imageClassName={backgroundClassName} />
         ) : (
           !useVideo &&
           backgroundImage && (
@@ -98,7 +109,10 @@ const Hero = ({
               height={1080}
               loading="eager"
               decoding="async"
-              className="absolute inset-0 w-full h-full object-cover brightness-[0.85] saturate-[0.9]"
+              className={cn(
+                "absolute inset-0 w-full h-full object-cover brightness-[0.85] saturate-[0.9]",
+                backgroundClassName,
+              )}
             />
           )
         )}
@@ -115,9 +129,14 @@ const Hero = ({
       )}
 
       {/* Content — anchored left, matches HeroHomepage rhythm */}
-      <div className="w-full relative z-10 text-left">
-        <div className="max-w-[1600px] mx-auto w-full px-6 lg:px-8 py-20 sm:py-32 md:py-40 lg:py-48">
-        <div className="max-w-[640px] animate-fade-in">
+      <div className={cn("w-full relative z-10 text-left", contentClassName)}>
+        <div
+          className={cn(
+            "max-w-[1600px] mx-auto w-full px-6 lg:px-8 py-20 sm:py-32 md:py-40 lg:py-48",
+            contentInnerClassName,
+          )}
+        >
+        <div className={cn("max-w-[640px] animate-fade-in", textBlockClassName)}>
           {headline && (
             <h1 className="text-white mb-4 sm:mb-6 md:mb-10 leading-[1.1] text-[clamp(1.75rem,5.75vw,4.5rem)] font-extrabold tracking-tight text-left">
               {headline}
@@ -129,7 +148,7 @@ const Hero = ({
             </p>
           )}
           {children && (
-            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-start">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-2.5 sm:gap-4 justify-start">
               {Children.map(children, (child) =>
                 isValidElement(child) ? (
                   <MagneticWrapper strength={0.3}>{child}</MagneticWrapper>

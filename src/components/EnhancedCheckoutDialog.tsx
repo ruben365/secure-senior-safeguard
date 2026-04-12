@@ -38,8 +38,11 @@ import { QuickVeteranToggle } from "@/components/payment/QuickVeteranToggle";
 import { TrustIndicators } from "@/components/payment/TrustIndicators";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCartFeedback } from "@/contexts/CartFeedbackContext";
+import useStripeElementLifecycle from "@/hooks/useStripeElementLifecycle";
 import { useStripeKey } from "@/hooks/useStripeKey";
 import { useConfetti } from "@/hooks/useConfetti";
+import useHostedCheckoutFallback from "@/hooks/useHostedCheckoutFallback";
+import { PaymentElementPanel } from "@/components/payment/PaymentElementPanel";
 
 interface EnhancedCheckoutDialogProps {
   open: boolean;
@@ -50,14 +53,23 @@ interface EnhancedCheckoutDialogProps {
 function QRCodePayment({
   total,
   onSuccess,
+  customerName,
+  customerEmail,
+  onDetailsChange,
 }: {
   total: number;
   onSuccess: () => void;
+  customerName: string;
+  customerEmail: string;
+  onDetailsChange: (data: { name: string; email: string }) => void;
 }) {
   const [loading, setLoading] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState<string | null>(null);
   const [timeLeft, setTimeLeft] = useState(240);
-  const { items } = useCart();
+  const [sessionId, setSessionId] = useState<string | null>(null);
+  const { items, clearCart } = useCart();
+  const { triggerThankYou } = useCartFeedback();
+  const { fireCelebration } = useConfetti();
 
   useEffect(() => {
     if (qrCodeUrl && timeLeft > 0) {
@@ -65,18 +77,56 @@ function QRCodePayment({
       return () => clearTimeout(timer);
     } else if (timeLeft === 0) {
       setQrCodeUrl(null);
+      setSessionId(null);
     }
   }, [qrCodeUrl, timeLeft]);
+
+  useEffect(() => {
+    if (!sessionId || !qrCodeUrl) return;
+
+    const poll = setInterval(async () => {
+      try {
+        const { data } = await supabase.functions.invoke(
+          "verify-payment-link",
+          { body: { sessionId } },
+        );
+
+        if (data?.paid) {
+          clearInterval(poll);
+          try {
+            await supabase.functions.invoke("verify-payment", {
+              body: { session_id: data.sessionId ?? sessionId },
+            });
+          } catch (verifyError) {
+            console.error("Hosted cart verification failed:", verifyError);
+          }
+
+          fireCelebration();
+          toast.success("Payment successful!");
+          clearCart("purchase");
+          triggerThankYou();
+          onSuccess();
+        }
+      } catch (error) {
+        console.error("Hosted cart polling failed:", error);
+      }
+    }, 4000);
+
+    return () => clearInterval(poll);
+  }, [clearCart, fireCelebration, onSuccess, qrCodeUrl, sessionId, triggerThankYou]);
 
   const generateQRCode = async () => {
     setLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke(
-        "generate-payment-link",
+        "create-cart-payment-intent",
         {
           body: {
-            amount: Math.round(total * 100),
+            customerEmail,
+            customerName,
+            checkoutMode: true,
             items: items.map((item) => ({
+              id: item.id,
               name: item.name,
               quantity: item.quantity,
               price: item.price,
@@ -87,9 +137,10 @@ function QRCodePayment({
 
       if (error) throw error;
 
-      if (data?.url) {
+      if (data?.url && data?.sessionId) {
         const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(data.url)}`;
         setQrCodeUrl(qrUrl);
+        setSessionId(data.sessionId);
         setTimeLeft(240);
       }
     } catch (error: any) {
@@ -107,6 +158,31 @@ function QRCodePayment({
 
   return (
     <div className="text-center space-y-5 py-4">
+      {!customerName || !customerEmail ? (
+        <div className="space-y-3 rounded-2xl border border-border/70 bg-muted/35 p-4 text-left">
+          <p className="text-sm font-medium text-foreground">
+            Add your contact details before opening mobile checkout.
+          </p>
+          <Input
+            placeholder="Your Name *"
+            value={customerName}
+            onChange={(e) =>
+              onDetailsChange({ name: e.target.value, email: customerEmail })
+            }
+            className="h-9"
+          />
+          <Input
+            type="email"
+            placeholder="Email *"
+            value={customerEmail}
+            onChange={(e) =>
+              onDetailsChange({ name: customerName, email: e.target.value })
+            }
+            className="h-9"
+          />
+        </div>
+      ) : null}
+
       {!qrCodeUrl ? (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -123,7 +199,7 @@ function QRCodePayment({
           </div>
           <Button
             onClick={generateQRCode}
-            disabled={loading}
+            disabled={loading || !customerName || !customerEmail}
             size="sm"
             className="w-full h-9 text-sm"
           >
@@ -178,6 +254,11 @@ function CardPaymentForm({
   isVeteran,
   customerEmail,
   items,
+  onOpenHostedCheckout,
+  hostedCheckoutLoading,
+  hostedCheckoutError,
+  hostedCheckoutUrl,
+  hostedCheckoutActive,
 }: {
   onSuccess: () => void;
   clientSecret: string;
@@ -190,6 +271,11 @@ function CardPaymentForm({
     quantity: number;
     isDigital?: boolean;
   }>;
+  onOpenHostedCheckout: () => Promise<void> | void;
+  hostedCheckoutLoading: boolean;
+  hostedCheckoutError: string | null;
+  hostedCheckoutUrl: string | null;
+  hostedCheckoutActive: boolean;
 }) {
   const stripe = useStripe();
   const elements = useElements();
@@ -197,18 +283,12 @@ function CardPaymentForm({
   const { triggerThankYou } = useCartFeedback();
   const { fireCelebration } = useConfetti();
   const [loading, setLoading] = useState(false);
-  const [elementReady, setElementReady] = useState(false);
-  const [loadingTimeout, setLoadingTimeout] = useState(false);
-
-  // Timeout for PaymentElement loading
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!elementReady) {
-        setLoadingTimeout(true);
-      }
-    }, 15000);
-    return () => clearTimeout(timer);
-  }, [elementReady]);
+  const { isReady, timedOut, mountKey, handleReady, retry } =
+    useStripeElementLifecycle({
+      enabled: true,
+      resetKeys: [clientSecret],
+      timeoutMs: 15000,
+    });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -287,48 +367,32 @@ function CardPaymentForm({
     }
   };
 
-  if (loadingTimeout) {
-    return (
-      <div className="text-center p-6 space-y-4">
-        <div className="text-destructive">
-          <Lock className="w-10 h-10 mx-auto mb-2 opacity-50" />
-          <p className="font-medium">Payment form failed to load</p>
-          <p className="text-sm text-muted-foreground mt-1">
-            Please refresh the page or try again later.
-          </p>
-        </div>
-        <Button variant="outline" onClick={() => window.location.reload()}>
-          <RefreshCw className="w-4 h-4 mr-2" />
-          Refresh Page
-        </Button>
-      </div>
-    );
-  }
-
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      <div className="border border-white/10 rounded-xl p-3 bg-white/[0.04] min-h-[180px]">
-        {!elementReady && (
-          <div className="flex items-center justify-center py-8">
-            <Loader2 className="w-6 h-6 animate-spin text-primary" />
-            <span className="ml-2 text-sm text-muted-foreground">
-              Loading payment form...
-            </span>
-          </div>
-        )}
-        <div className={elementReady ? "block" : "hidden"}>
-          <PaymentElement
-            onReady={() => setElementReady(true)}
-            options={{
-              layout: "tabs",
-            }}
-          />
-        </div>
-      </div>
+      <PaymentElementPanel
+        isReady={isReady}
+        timedOut={timedOut}
+        onRetry={retry}
+        onOpenHostedCheckout={onOpenHostedCheckout}
+        hostedCheckoutLoading={hostedCheckoutLoading}
+        hostedCheckoutError={hostedCheckoutError}
+        hostedCheckoutUrl={hostedCheckoutUrl}
+        hostedCheckoutActive={hostedCheckoutActive}
+        loadingLabel="Preparing secure checkout..."
+        timeoutDescription="Retry the embedded card form or open the secure hosted checkout page if this device prefers mobile payment."
+      >
+        <PaymentElement
+          key={mountKey}
+          onReady={handleReady}
+          options={{
+            layout: "tabs",
+          }}
+        />
+      </PaymentElementPanel>
 
       <Button
         type="submit"
-        disabled={!stripe || loading || !elementReady}
+        disabled={!stripe || loading || !isReady}
         className="w-full h-9 text-sm font-semibold bg-gradient-to-b from-orange-600 to-orange-700 text-white rounded-lg"
         size="sm"
       >
@@ -362,7 +426,9 @@ function CardPaymentWrapper({
   formData: { name: string; email: string };
   setFormData: (data: { name: string; email: string }) => void;
 }) {
-  const { items } = useCart();
+  const { items, clearCart } = useCart();
+  const { triggerThankYou } = useCartFeedback();
+  const { fireCelebration } = useConfetti();
   const {
     stripePromise,
     loading: stripeLoading,
@@ -372,6 +438,34 @@ function CardPaymentWrapper({
   const [step, setStep] = useState<"contact" | "payment">("contact");
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const {
+    hostedCheckoutActive,
+    hostedCheckoutError,
+    hostedCheckoutLoading,
+    hostedCheckoutUrl,
+    openHostedCheckout,
+    resetHostedCheckout,
+  } = useHostedCheckoutFallback({
+    onPaid: async ({ sessionId }) => {
+      if (!sessionId) {
+        throw new Error("Hosted checkout finished without a session reference.");
+      }
+
+      try {
+        await supabase.functions.invoke("verify-payment", {
+          body: { session_id: sessionId },
+        });
+      } catch (verifyError) {
+        console.error("Hosted cart verification failed:", verifyError);
+      }
+
+      fireCelebration();
+      toast.success("Payment successful!");
+      clearCart("purchase");
+      triggerThankYou();
+      onSuccess();
+    },
+  });
 
   // Initialize Stripe when component mounts (dialog opens)
   useEffect(() => {
@@ -385,6 +479,12 @@ function CardPaymentWrapper({
     if (savedEmail) setFormData({ ...formData, email: savedEmail });
     if (savedName) setFormData({ ...formData, name: savedName });
   }, []);
+
+  useEffect(() => {
+    if (step !== "payment") {
+      resetHostedCheckout();
+    }
+  }, [resetHostedCheckout, step]);
 
   const handleContinue = async () => {
     if (!formData.name || !formData.email) {
@@ -565,6 +665,49 @@ function CardPaymentWrapper({
                 isVeteran={isVeteran}
                 customerEmail={formData.email}
                 items={items}
+                onOpenHostedCheckout={async () => {
+                  await openHostedCheckout(async () => {
+                    const { data, error } = await supabase.functions.invoke(
+                      "create-cart-payment-intent",
+                      {
+                        body: {
+                          customerEmail: formData.email,
+                          customerName: formData.name,
+                          isVeteran,
+                          checkoutMode: true,
+                          items: items.map((i) => ({
+                            id: i.id,
+                            name: i.name,
+                            price: i.price,
+                            quantity: i.quantity,
+                          })),
+                          metadata: {
+                            source: "cart_checkout_fallback",
+                          },
+                        },
+                      },
+                    );
+
+                    if (error) {
+                      throw new Error(
+                        error.message || "Unable to open hosted checkout.",
+                      );
+                    }
+
+                    if (!data?.url || !data?.sessionId) {
+                      throw new Error("Hosted checkout did not return a valid session.");
+                    }
+
+                    return {
+                      url: data.url,
+                      sessionId: data.sessionId,
+                    };
+                  });
+                }}
+                hostedCheckoutLoading={hostedCheckoutLoading}
+                hostedCheckoutError={hostedCheckoutError}
+                hostedCheckoutUrl={hostedCheckoutUrl}
+                hostedCheckoutActive={hostedCheckoutActive}
               />
             </Elements>
           ) : (
@@ -673,6 +816,9 @@ export function EnhancedCheckoutDialog({
                 <QRCodePayment
                   total={finalTotal}
                   onSuccess={() => onOpenChange(false)}
+                  customerName={formData.name}
+                  customerEmail={formData.email}
+                  onDetailsChange={setFormData}
                 />
               </TabsContent>
             </Tabs>

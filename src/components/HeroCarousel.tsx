@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
+import { cn } from "@/lib/utils";
+
 interface HeroImage {
   src: string;
   alt: string;
@@ -8,11 +10,13 @@ interface HeroImage {
 interface HeroCarouselProps {
   images: HeroImage[];
   interval?: number;
+  imageClassName?: string;
 }
 
 export const HeroCarousel = ({
   images,
   interval = 6000,
+  imageClassName,
 }: HeroCarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const mountedRef = useRef(true);
@@ -70,7 +74,10 @@ export const HeroCarousel = ({
           {...{ fetchpriority: "high" } as any}
           loading="eager"
           decoding="async"
-          className="absolute inset-0 w-full h-full object-cover brightness-[0.85] saturate-[0.9]"
+          className={cn(
+            "absolute inset-0 w-full h-full object-cover brightness-[0.85] saturate-[0.9]",
+            imageClassName,
+          )}
         />
       </div>
     );
@@ -88,7 +95,10 @@ export const HeroCarousel = ({
           {...{ fetchpriority: index === 0 ? "high" : "low" } as any}
           loading={index === 0 ? "eager" : "lazy"}
           decoding="async"
-          className="absolute inset-0 w-full h-full object-cover brightness-[0.85] saturate-[0.9] transition-opacity duration-700"
+          className={cn(
+            "absolute inset-0 w-full h-full object-cover brightness-[0.85] saturate-[0.9] transition-opacity duration-700",
+            imageClassName,
+          )}
           style={{
             opacity: index === currentIndex ? 1 : 0,
             zIndex: index === currentIndex ? 1 : 0,

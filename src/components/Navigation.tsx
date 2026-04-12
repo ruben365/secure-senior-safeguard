@@ -333,48 +333,60 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
             role="dialog"
             aria-modal="true"
             aria-label="Main navigation"
-            className="lg:hidden fixed top-[56px] right-0 z-[10001] overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch]"
+            className="lg:hidden fixed top-[56px] right-0 z-[10001] flex h-[calc(100svh-56px)] flex-col overflow-hidden"
             style={{
-              width: "72%",
-              maxWidth: "280px",
-              maxHeight: "calc(85vh - 56px)",
+              width: "min(86vw, 320px)",
               background: "rgba(20, 16, 14, 0.55)",
               WebkitBackdropFilter: "blur(28px) saturate(1.6)",
               backdropFilter: "blur(28px) saturate(1.6)",
               borderLeft: "1px solid rgba(255,255,255,0.18)",
-              borderBottom: "1px solid rgba(255,255,255,0.14)",
-              borderBottomLeftRadius: "16px",
+              borderBottomLeftRadius: "20px",
               boxShadow: "0 20px 50px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.12)",
               animation: "menuSlideIn 250ms ease-out",
-              paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 0.5rem)",
             }}
           >
-            <div className="p-4">
-              {allLinks.map((link) => {
-                const isActive = isActiveLink(link.href);
-                return (
-                  <Link
-                    key={link.name}
-                    to={link.href}
-                    className={`flex items-center text-[14px] font-medium px-4 py-3 rounded-md transition-colors duration-150 ${
-                      isActive
-                        ? "text-orange-400 border-l-2 border-orange-400 pl-3.5"
-                        : "text-white/85 hover:text-white hover:bg-white/[0.06]"
-                    }`}
-                    onClick={() => {
-                      setMobileMenuOpen(false);
-                      scrollToTop();
-                    }}
-                  >
-                    {link.name}
-                  </Link>
-                );
-              })}
+            <div className="flex-1 overflow-y-auto overscroll-contain px-4 pb-4 pt-4 [-webkit-overflow-scrolling:touch]">
+              <div className="mb-4 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/45">
+                  Menu
+                </p>
+                <p className="mt-1 text-sm font-medium text-white/80">
+                  Explore training, tools, support, and account access.
+                </p>
+              </div>
 
-              <div className="mt-3 pt-3 flex flex-col items-center gap-1.5 border-t border-white/[0.08]">
+              <div className="space-y-1.5">
+                {allLinks.map((link) => {
+                  const isActive = isActiveLink(link.href);
+                  return (
+                    <Link
+                      key={link.name}
+                      to={link.href}
+                      className={`flex min-h-[46px] items-center rounded-xl px-4 py-3 text-[14px] font-medium transition-colors duration-150 ${
+                        isActive
+                          ? "border border-orange-400/30 bg-orange-500/12 text-orange-300"
+                          : "text-white/85 hover:text-white hover:bg-white/[0.06]"
+                      }`}
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        scrollToTop();
+                      }}
+                    >
+                      {link.name}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div
+              className="border-t border-white/[0.08] bg-black/10 px-4 pt-4"
+              style={{ paddingBottom: "calc(1rem + env(safe-area-inset-bottom, 0px))" }}
+            >
+              <div className="flex flex-col gap-2">
                 <button
                   type="button"
-                  className="h-7 px-4 text-[11px] font-medium rounded-md flex items-center justify-center gap-1.5 transition-colors duration-150 border border-white/20 text-white/70 hover:text-white hover:border-white/30"
+                  className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-white/20 px-4 text-[13px] font-medium text-white/80 transition-colors duration-150 hover:border-white/30 hover:text-white"
                   onClick={() => {
                     setDonateOpen(true);
                     setMobileMenuOpen(false);
@@ -388,7 +400,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <Link
                     to="/admin"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="h-7 max-w-[140px] w-full text-[11px] font-semibold rounded-md text-white flex items-center justify-center gap-1.5 transition-all duration-150 bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12]"
+                    className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-[#7c2d12] bg-gradient-to-b from-[#c2410c] to-[#9a3412] px-4 text-[13px] font-semibold text-white transition-all duration-150"
                   >
                     <LayoutDashboard className="h-3 w-3" />
                     Dashboard
@@ -397,7 +409,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <Link
                     to="/portal"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="h-7 max-w-[140px] w-full text-[11px] font-semibold rounded-md text-white flex items-center justify-center transition-all duration-150 bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12]"
+                    className="inline-flex min-h-[44px] w-full items-center justify-center rounded-xl border border-[#7c2d12] bg-gradient-to-b from-[#c2410c] to-[#9a3412] px-4 text-[13px] font-semibold text-white transition-all duration-150"
                   >
                     Login
                   </Link>
@@ -405,10 +417,10 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
 
                 <a
                   href={SITE.phone.tel}
-                  className="flex items-center justify-center gap-1.5 text-[12px] text-white/50 font-medium py-1.5 transition-colors duration-150 hover:text-white/80"
+                  className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-white/12 px-4 text-[13px] font-medium text-white/70 transition-colors duration-150 hover:text-white/90"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  <Phone className="h-3 w-3" />
+                  <Phone className="h-3.5 w-3.5" />
                   {SITE.phone.display}
                 </a>
               </div>

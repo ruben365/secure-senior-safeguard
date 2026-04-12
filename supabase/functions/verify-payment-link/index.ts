@@ -136,6 +136,11 @@ serve(async (req) => {
             status: session.payment_status,
             amount: session.amount_total,
             customerEmail: session.customer_details?.email,
+            paymentIntentId:
+              typeof session.payment_intent === "string"
+                ? session.payment_intent
+                : null,
+            sessionId: session.id,
           }),
           {
             headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -177,6 +182,10 @@ serve(async (req) => {
             amount: paidSession.amount_total,
             customerEmail: paidSession.customer_details?.email,
             sessionId: paidSession.id,
+            paymentIntentId:
+              typeof paidSession.payment_intent === "string"
+                ? paidSession.payment_intent
+                : null,
           }),
           {
             headers: { ...corsHeaders, "Content-Type": "application/json" },

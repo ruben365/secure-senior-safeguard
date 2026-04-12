@@ -39,6 +39,7 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       onOpenAutoFocus={(e) => {
+        e.preventDefault();
         const target = e.currentTarget as HTMLElement;
         const firstInput = target.querySelector(
           "input, button, textarea, select",
@@ -48,16 +49,18 @@ const DialogContent = React.forwardRef<
         }
       }}
       className={cn(
-        "fixed left-[50%] top-[50%] z-50 grid w-[92%] sm:w-full max-w-[440px] max-h-[85vh] overflow-y-auto translate-x-[-50%] translate-y-[-50%] gap-2 border border-border/70 bg-background p-5 rounded-[14px] text-foreground shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
+        "fixed left-[50%] top-[50%] z-50 grid w-[calc(100vw-1rem)] sm:w-full max-w-[min(440px,calc(100vw-1rem))] max-h-[min(88svh,calc(100vh-1rem))] overflow-y-auto overscroll-contain translate-x-[-50%] translate-y-[-50%] gap-2 border border-border/70 bg-background p-4 sm:p-5 rounded-[14px] text-foreground shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
         className,
       )}
       style={{
         animationTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+        scrollbarGutter: "stable",
       }}
+      data-slot="dialog-content"
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className="absolute right-2.5 top-2.5 rounded-full p-1.5 min-w-[32px] min-h-[32px] flex items-center justify-center text-muted-foreground transition-all hover:text-foreground hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring disabled:pointer-events-none">
+      <DialogPrimitive.Close className="absolute right-3 top-3 rounded-full p-1.5 min-w-[36px] min-h-[36px] flex items-center justify-center text-muted-foreground transition-all hover:text-foreground hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring disabled:pointer-events-none">
         <X className="h-4 w-4" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>

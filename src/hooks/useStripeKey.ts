@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 let stripePromiseCache: Promise<Stripe | null> | null = null;
 let cachedKey: string | null = null;
+let stripeInitPromise: Promise<Promise<Stripe | null>> | null = null;
 let loadStripeModule:
   | (typeof import("@stripe/stripe-js"))["loadStripe"]
   | null = null;
@@ -20,6 +21,62 @@ async function getLoadStripe() {
   return loadStripeModule;
 }
 
+async function fetchPublishableKey(forceRemote = false) {
+  const envKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY?.trim();
+
+  if (!forceRemote && envKey) {
+    return envKey;
+  }
+
+  if (!forceRemote && cachedKey) {
+    return cachedKey;
+  }
+
+  const { data, error: fnError } = await supabase.functions.invoke(
+    "get-stripe-key",
+  );
+
+  if (fnError) {
+    throw fnError;
+  }
+
+  const remoteKey =
+    typeof data?.publishableKey === "string" ? data.publishableKey.trim() : "";
+
+  if (!remoteKey) {
+    throw new Error("No publishable key returned");
+  }
+
+  cachedKey = remoteKey;
+  return remoteKey;
+}
+
+async function ensureStripePromise(forceRemote = false) {
+  if (stripePromiseCache) {
+    return stripePromiseCache;
+  }
+
+  if (!stripeInitPromise) {
+    stripeInitPromise = (async () => {
+      const loadStripe = await getLoadStripe();
+      const publishableKey = await fetchPublishableKey(forceRemote);
+      const stripePromise = loadStripe(publishableKey);
+      stripePromiseCache = stripePromise;
+      return stripePromise;
+    })();
+  }
+
+  try {
+    return await stripeInitPromise;
+  } catch (error) {
+    stripePromiseCache = null;
+    stripeInitPromise = null;
+    throw error;
+  } finally {
+    stripeInitPromise = null;
+  }
+}
+
 /**
  * Hook for Stripe initialization - NOW DEMAND-DRIVEN
  * Stripe is only loaded when initializeStripe() is called, not on mount.
@@ -30,72 +87,36 @@ export function useStripeKey() {
     useState<Promise<Stripe | null> | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [initialized, setInitialized] = useState(false);
 
-  const initializeStripe = useCallback(async () => {
-    // Prevent multiple initializations
-    if (initialized || stripePromiseCache) {
-      if (stripePromiseCache) {
+  const initializeStripe = useCallback(
+    async ({ forceRemote = false }: { forceRemote?: boolean } = {}) => {
+      if (stripePromiseCache && !forceRemote) {
         setStripePromise(stripePromiseCache);
-        setLoading(false);
-      }
-      return;
-    }
-
-    setLoading(true);
-    setInitialized(true);
-
-    try {
-      const loadStripe = await getLoadStripe();
-
-      // First try VITE env variable (fastest)
-      const envKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
-
-      if (!envKey || envKey.trim() === "") {
-        // NOTE: Add VITE_STRIPE_PUBLISHABLE_KEY=pk_live_... to your .env file.
-        // Without this key the payment form will fall back to fetching from the
-        // get-stripe-key edge function. If that also fails, payments will not work.
-        console.warn(
-          "[Stripe] VITE_STRIPE_PUBLISHABLE_KEY is not set. " +
-          "Falling back to get-stripe-key edge function. " +
-          "Set this env variable to avoid the extra network round-trip."
-        );
-      }
-
-      if (envKey && envKey.trim() !== "") {
-        stripePromiseCache = loadStripe(envKey);
-        setStripePromise(stripePromiseCache);
+        setError(null);
         setLoading(false);
         return;
       }
 
-      // If cached key exists, use it
-      if (cachedKey) {
-        stripePromiseCache = loadStripe(cachedKey);
-        setStripePromise(stripePromiseCache);
+      setLoading(true);
+      setError(null);
+
+      if (forceRemote) {
+        stripePromiseCache = null;
+      }
+
+      try {
+        const promise = await ensureStripePromise(forceRemote);
+        setStripePromise(promise);
+        setError(null);
+      } catch (err: any) {
+        setStripePromise(null);
+        setError(err?.message || "Failed to initialize payment system");
+      } finally {
         setLoading(false);
-        return;
       }
-
-      // Fetch key from edge function
-      const { data, error: fnError } =
-        await supabase.functions.invoke("get-stripe-key");
-
-      if (fnError) throw fnError;
-
-      if (data?.publishableKey) {
-        cachedKey = data.publishableKey;
-        stripePromiseCache = loadStripe(data.publishableKey);
-        setStripePromise(stripePromiseCache);
-      } else {
-        throw new Error("No publishable key returned");
-      }
-    } catch (err: any) {
-      setError(err.message || "Failed to initialize payment system");
-    } finally {
-      setLoading(false);
-    }
-  }, [initialized]);
+    },
+    [],
+  );
 
   // Auto-initialize if cache already exists (fast path for subsequent uses)
   useEffect(() => {
@@ -109,46 +130,14 @@ export function useStripeKey() {
 
 // Synchronous getter for components that can't use hooks
 export async function getStripePromise(): Promise<Promise<Stripe | null> | null> {
-  const envKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
-
-  if (envKey && envKey.trim() !== "") {
-    if (!stripePromiseCache) {
-      const loadStripe = await getLoadStripe();
-      stripePromiseCache = loadStripe(envKey);
-    }
-    return stripePromiseCache;
-  }
-
-  if (cachedKey && !stripePromiseCache) {
-    const loadStripe = await getLoadStripe();
-    stripePromiseCache = loadStripe(cachedKey);
-  }
-
-  return stripePromiseCache;
+  return ensureStripePromise();
 }
 
 // Lazy pre-fetch - only triggered when user shows intent to pay
 export async function prefetchStripeKey() {
-  const envKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
-
-  const loadStripe = await getLoadStripe();
-
-  if (envKey && envKey.trim() !== "") {
-    if (!stripePromiseCache) {
-      stripePromiseCache = loadStripe(envKey);
-    }
-    return;
-  }
-
-  if (!cachedKey) {
-    try {
-      const { data } = await supabase.functions.invoke("get-stripe-key");
-      if (data?.publishableKey) {
-        cachedKey = data.publishableKey;
-        stripePromiseCache = loadStripe(data.publishableKey);
-      }
-    } catch (err) {
-      console.error("[Stripe] Pre-fetch failed:", err);
-    }
+  try {
+    await ensureStripePromise();
+  } catch (err) {
+    console.error("[Stripe] Pre-fetch failed:", err);
   }
 }

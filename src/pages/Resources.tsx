@@ -277,10 +277,11 @@ function Resources() {
               and your family safe
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-start">
+          <div className="flex w-full max-w-[20rem] flex-col gap-2.5 sm:max-w-none sm:flex-row sm:gap-4 sm:justify-start">
             <Button
               size="heroPill"
               variant="heroPrimary"
+              className="w-full max-sm:h-[44px] max-sm:px-[18px] max-sm:text-[12.5px] max-sm:tracking-[0.01em] sm:w-auto"
               onClick={() => scrollToSection("guides")}
             >
               Browse Digital Guides
@@ -288,7 +289,7 @@ function Resources() {
             <Button
               size="heroPill"
               variant="heroOutline"
-              className="text-white hover:text-white"
+              className="w-full text-white hover:text-white max-sm:h-[44px] max-sm:px-[18px] max-sm:text-[12.5px] max-sm:tracking-[0.01em] sm:w-auto"
               onClick={() => setReadBooksOpen(true)}
             >
               Open Your Reader

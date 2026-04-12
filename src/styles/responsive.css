@@ -109,20 +109,30 @@
 
   /* --- ALL buttons on phone --- */
   /* Scoped with :not() to exclude radix tabs, accordion triggers, icon-only buttons */
-  button:not([data-radix-collection-item]):not([role="tab"]):not([class*="AccordionTrigger"]):not(.icon-btn):not(.sr-only):not([aria-label*="Close"]):not([aria-label*="menu"]):not([aria-label*="Menu"]) {
-    max-height: 44px;
-    font-size: 14px;
+  button:not([data-radix-collection-item]):not([role="tab"]):not([class*="AccordionTrigger"]):not(.icon-btn):not(.sr-only):not([aria-label*="Close"]):not([aria-label*="menu"]):not([aria-label*="Menu"]),
+  .button-link:not([data-radix-collection-item]):not([role="tab"]):not(.icon-btn):not(.sr-only) {
+    max-height: 42px;
+    font-size: 13px;
+    line-height: 1.1;
   }
 
-  /* Hero CTA buttons — keep 44px touch target and pill shape on mobile */
+  /* Hero CTA buttons — compact but still easy to tap on mobile */
+  .hero-home__ctas,
+  .hero-biz__ctas,
+  .hero-ws__ctas {
+    gap: 0.75rem;
+  }
+
+  .hero-mobile .button-link,
   .hero-home__cta,
   .hero-biz__cta,
   .hero-ws__cta,
   #final-action .flex > a,
   #final-action .flex > button {
-    height: 44px;
-    max-height: 44px;
-    font-size: 13px;
+    min-height: 42px;
+    height: 42px;
+    max-height: 42px;
+    font-size: 12.5px;
     padding-left: 18px;
     padding-right: 18px;
     border-radius: 999px;
@@ -156,22 +166,44 @@
   }
 
   /* --- Dialogs on phone --- */
-  [role="dialog"],
+  [data-slot="dialog-content"],
   [role="alertdialog"] {
-    width: 94%;
-    max-width: 100%;
-    max-height: 85vh;
-    padding: 1rem;
+    width: calc(100vw - 1rem);
+    max-width: min(440px, calc(100vw - 1rem));
+    max-height: min(88svh, calc(100vh - 1rem));
+    padding: 0.875rem;
     border-radius: 1rem;
     overflow-y: auto;
+    overscroll-behavior: contain;
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Compress inputs inside dialogs */
-  [role="dialog"] input,
-  [role="dialog"] textarea {
-    height: 36px;
-    font-size: 14px;
+  /* Keep dialog forms stable on iPhone/Android keyboards */
+  [data-slot="dialog-content"] input,
+  [data-slot="dialog-content"] select,
+  [data-slot="dialog-content"] textarea,
+  [role="alertdialog"] input,
+  [role="alertdialog"] select,
+  [role="alertdialog"] textarea {
+    font-size: 16px;
+  }
+
+  [data-slot="dialog-content"] input,
+  [data-slot="dialog-content"] select,
+  [role="alertdialog"] input,
+  [role="alertdialog"] select {
+    min-height: 44px;
+    height: auto;
+  }
+
+  [data-slot="dialog-content"] textarea,
+  [role="alertdialog"] textarea {
+    min-height: 120px;
+  }
+
+  [data-slot="dialog-content"] button:not([aria-label*="Close"]),
+  [role="alertdialog"] button:not([aria-label*="Close"]) {
+    min-height: 44px;
   }
 
   /* --- Section compression --- */
@@ -188,6 +220,42 @@
   #final-action .container {
     padding-top: 2rem;
     padding-bottom: 2rem;
+  }
+
+  main > section[class~="py-24"],
+  main > div > section[class~="py-24"] {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+
+  main > section[class~="py-20"],
+  main > div > section[class~="py-20"] {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  main > section[class~="py-16"],
+  main > div > section[class~="py-16"],
+  main > section[class~="py-12"],
+  main > div > section[class~="py-12"] {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+
+  main > div[class~="h-6"] {
+    height: 0.75rem !important;
+  }
+
+  main section .mb-12 {
+    margin-bottom: 2rem !important;
+  }
+
+  main section .mb-10 {
+    margin-bottom: 1.5rem !important;
+  }
+
+  main section .mb-8 {
+    margin-bottom: 1.25rem !important;
   }
 
   /* --- Cards --- */

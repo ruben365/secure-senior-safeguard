@@ -21,6 +21,13 @@ interface QRCodePaymentSectionProps {
   customerName: string;
   onSuccess: () => void;
   onBack?: () => void;
+  paymentType?: "product" | "training" | "subscription";
+  paymentMetadata?: Record<string, unknown>;
+  checkoutFactory?: () => Promise<{
+    url: string;
+    sessionId?: string | null;
+    paymentLinkId?: string | null;
+  }>;
 }
 
 export function QRCodePaymentSection({
@@ -30,10 +37,16 @@ export function QRCodePaymentSection({
   customerName,
   onSuccess,
   onBack,
+  paymentType = "product",
+  paymentMetadata,
+  checkoutFactory,
 }: QRCodePaymentSectionProps) {
   const [isGenerating, setIsGenerating] = useState(false);
   const [qrImageUrl, setQrImageUrl] = useState<string | null>(null);
   const [paymentLinkId, setPaymentLinkId] = useState<string | null>(null);
+  const [checkoutSessionId, setCheckoutSessionId] = useState<string | null>(
+    null,
+  );
   const [paymentUrl, setPaymentUrl] = useState<string | null>(null);
   const [countdown, setCountdown] = useState(240); // 4 minutes
   const [isPaid, setIsPaid] = useState(false);
@@ -45,30 +58,52 @@ export function QRCodePaymentSection({
     setError(null);
     setQrImageUrl(null);
     setPaymentLinkId(null);
+    setCheckoutSessionId(null);
     setCountdown(240);
 
     try {
-      const { data, error: fnError } = await supabase.functions.invoke(
-        "generate-payment-link",
-        {
-          body: {
-            amount,
-            items: [{ name: productName, price: amount / 100, quantity: 1 }],
-            customerEmail,
-            customerName,
+      let data:
+        | {
+            url: string;
+            sessionId?: string | null;
+            paymentLinkId?: string | null;
+            id?: string | null;
+          }
+        | undefined;
+
+      if (checkoutFactory) {
+        data = await checkoutFactory();
+      } else {
+        const { data: fallbackData, error: fnError } = await supabase.functions.invoke(
+          "generate-payment-link",
+          {
+            body: {
+              amount,
+              items: [{ name: productName, price: amount / 100, quantity: 1 }],
+              customerEmail,
+              customerName,
+              paymentType,
+              metadata: paymentMetadata ?? {},
+            },
           },
-        },
-      );
+        );
 
-      if (fnError) throw fnError;
-      if (data.error) throw new Error(data.error);
+        if (fnError) throw fnError;
+        data = fallbackData;
+      }
 
-      const { paymentLinkId: linkId, url } = data;
+      if (!data?.url) {
+        throw new Error("No checkout URL was returned.");
+      }
+
+      const linkId = data.paymentLinkId || data.id || null;
+      const sessionId = data.sessionId || null;
       setPaymentLinkId(linkId);
-      setPaymentUrl(url);
+      setCheckoutSessionId(sessionId);
+      setPaymentUrl(data.url);
 
       // Generate QR code image
-      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
+      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(data.url)}`;
       setQrImageUrl(qrUrl);
 
       toast.success("QR code generated! Scan to pay.");
@@ -79,7 +114,7 @@ export function QRCodePaymentSection({
     } finally {
       setIsGenerating(false);
     }
-  }, [amount, productName, customerEmail, customerName]);
+  }, [amount, checkoutFactory, customerEmail, customerName, paymentMetadata, paymentType, productName]);
 
   // Countdown timer
   useEffect(() => {
@@ -91,6 +126,7 @@ export function QRCodePaymentSection({
           clearInterval(timer);
           setQrImageUrl(null);
           setPaymentLinkId(null);
+          setCheckoutSessionId(null);
           toast.info("QR code expired. Generate a new one.");
           return 0;
         }
@@ -103,14 +139,14 @@ export function QRCodePaymentSection({
 
   // Poll for payment status
   useEffect(() => {
-    if (!paymentLinkId || isPaid) return;
+    if ((!paymentLinkId && !checkoutSessionId) || isPaid) return;
 
     const pollInterval = setInterval(async () => {
       try {
         const { data, error: fnError } = await supabase.functions.invoke(
           "verify-payment-link",
           {
-            body: { paymentLinkId },
+            body: checkoutSessionId ? { sessionId: checkoutSessionId } : { paymentLinkId },
           },
         );
 
@@ -130,23 +166,21 @@ export function QRCodePaymentSection({
             origin: { y: 0.6 },
           });
 
-          // Call complete-payment to finalize and send emails
-          try {
-            await supabase.functions.invoke("complete-payment", {
-              body: {
-                paymentType: "product",
-                paymentIntentId: data.paymentIntentId,
-                customerEmail,
-                customerName,
-                amount,
-                productName,
-              },
-            });
-          } catch (completeErr) {
-            console.error(
-              "Failed to complete payment processing:",
-              completeErr,
-            );
+          if (paymentType !== "subscription") {
+            try {
+              await supabase.functions.invoke("complete-payment", {
+                body: {
+                  paymentType,
+                  paymentIntentId: data.paymentIntentId ?? undefined,
+                  sessionId: data.sessionId ?? checkoutSessionId ?? undefined,
+                },
+              });
+            } catch (completeErr) {
+              console.error(
+                "Failed to complete payment processing:",
+                completeErr,
+              );
+            }
           }
 
           toast.success("Payment received!");
@@ -158,7 +192,7 @@ export function QRCodePaymentSection({
     }, 4000);
 
     return () => clearInterval(pollInterval);
-  }, [paymentLinkId, isPaid, onSuccess]);
+  }, [checkoutSessionId, isPaid, onSuccess, paymentLinkId, paymentType]);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);

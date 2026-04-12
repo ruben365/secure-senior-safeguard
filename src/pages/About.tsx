@@ -134,7 +134,7 @@ function About() {
           subheadline=""
           showScrollIndicator={true}
         >
-          <div className="text-left mb-8">
+          <div className="text-left mb-6 sm:mb-8">
             <h1 className="font-extrabold text-white mb-4 leading-[1.05] tracking-tight text-[clamp(2.525rem,5.75vw,4.5rem)]">
               <RotatingHeadlines headlines={aboutHeadlines} className="" />
             </h1>
@@ -142,11 +142,21 @@ function About() {
               From victims to protectors. Serving families across Ohio.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-start">
-            <Button size="heroPill" variant="heroPrimary" asChild>
+          <div className="flex w-full max-w-[18rem] flex-col gap-2.5 sm:max-w-none sm:flex-row sm:gap-4 sm:justify-start">
+            <Button
+              size="heroPill"
+              variant="heroPrimary"
+              className="w-full px-[18px] text-[12.5px] tracking-[0.01em] sm:w-auto sm:px-6 sm:text-[13px] sm:tracking-[0.02em]"
+              asChild
+            >
               <Link to="/training">Start Training</Link>
             </Button>
-            <Button size="heroPill" variant="heroOutline" className="text-white hover:text-white" asChild>
+            <Button
+              size="heroPill"
+              variant="heroOutline"
+              className="w-full px-[18px] text-[12.5px] tracking-[0.01em] text-white hover:text-white sm:w-auto sm:px-6 sm:text-[13px] sm:tracking-[0.02em]"
+              asChild
+            >
               <Link to="/contact">Get in Touch</Link>
             </Button>
           </div>

@@ -43,14 +43,19 @@ import {
   Phone,
   Sparkles,
   Smartphone,
+  AlertCircle,
+  RefreshCw,
 } from "lucide-react";
 import { QRCodePaymentSection } from "@/components/payment/QRCodePaymentSection";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useStripeKey } from "@/hooks/useStripeKey";
+import useStripeElementLifecycle from "@/hooks/useStripeElementLifecycle";
+import useHostedCheckoutFallback from "@/hooks/useHostedCheckoutFallback";
 import { QuickVeteranToggle } from "@/components/payment/QuickVeteranToggle";
 import { TermsCheckbox } from "@/components/payment/TermsCheckbox";
 import { TrustIndicators } from "@/components/payment/TrustIndicators";
+import { PaymentElementPanel } from "@/components/payment/PaymentElementPanel";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { US_STATES, formatPhoneNumber } from "@/utils/formValidation";
@@ -78,6 +83,11 @@ function PaymentFormContent({
   preferredDate,
   isVeteran,
   finalAmount,
+  onOpenHostedCheckout,
+  hostedCheckoutLoading,
+  hostedCheckoutError,
+  hostedCheckoutUrl,
+  hostedCheckoutActive,
 }: {
   clientSecret: string;
   onSuccess?: () => void;
@@ -89,12 +99,22 @@ function PaymentFormContent({
   preferredDate?: string;
   isVeteran: boolean;
   finalAmount: number;
+  onOpenHostedCheckout: () => Promise<void> | void;
+  hostedCheckoutLoading: boolean;
+  hostedCheckoutError: string | null;
+  hostedCheckoutUrl: string | null;
+  hostedCheckoutActive: boolean;
 }) {
   const stripe = useStripe();
   const elements = useElements();
   const [isProcessing, setIsProcessing] = useState(false);
-  const [paymentReady, setPaymentReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { isReady, timedOut, mountKey, handleReady, retry } =
+    useStripeElementLifecycle({
+      enabled: true,
+      resetKeys: [clientSecret],
+      timeoutMs: 15000,
+    });
 
   const handleSubmit = async () => {
     if (!stripe || !elements) return;
@@ -156,12 +176,25 @@ function PaymentFormContent({
 
   return (
     <div className="space-y-4">
-      <PaymentElement
-        onReady={() => setPaymentReady(true)}
-        options={{
-          layout: "tabs",
-        }}
-      />
+      <PaymentElementPanel
+        isReady={isReady}
+        timedOut={timedOut}
+        onRetry={retry}
+        onOpenHostedCheckout={onOpenHostedCheckout}
+        hostedCheckoutLoading={hostedCheckoutLoading}
+        hostedCheckoutError={hostedCheckoutError}
+        hostedCheckoutUrl={hostedCheckoutUrl}
+        hostedCheckoutActive={hostedCheckoutActive}
+        loadingLabel="Preparing secure training checkout..."
+      >
+        <PaymentElement
+          key={mountKey}
+          onReady={handleReady}
+          options={{
+            layout: "tabs",
+          }}
+        />
+      </PaymentElementPanel>
 
       {error && (
         <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive text-sm">
@@ -171,7 +204,7 @@ function PaymentFormContent({
 
       <Button
         onClick={handleSubmit}
-        disabled={!stripe || !paymentReady || isProcessing}
+        disabled={!stripe || !isReady || isProcessing}
         className="w-full h-12 text-base font-semibold"
         size="lg"
       >
@@ -223,6 +256,32 @@ export function TrainingPaymentModal({
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const {
+    hostedCheckoutActive,
+    hostedCheckoutError,
+    hostedCheckoutLoading,
+    hostedCheckoutUrl,
+    openHostedCheckout,
+    resetHostedCheckout,
+  } = useHostedCheckoutFallback({
+    onPaid: async ({ paymentIntentId, sessionId }) => {
+      try {
+        await supabase.functions.invoke("complete-payment", {
+          body: {
+            paymentType: "training",
+            paymentIntentId: paymentIntentId ?? undefined,
+            sessionId: sessionId ?? undefined,
+          },
+        });
+      } catch (err) {
+        console.error("Training hosted checkout completion failed:", err);
+      }
+
+      toast.success("Payment Confirmed! Check your email for details.");
+      onSuccess?.();
+      handleClose();
+    },
+  });
 
   // Initialize Stripe when dialog opens
   useEffect(() => {
@@ -302,6 +361,7 @@ export function TrainingPaymentModal({
     setStep("info");
     setClientSecret(null);
     setError(null);
+    resetHostedCheckout();
     onOpenChange(false);
   };
 
@@ -637,6 +697,50 @@ export function TrainingPaymentModal({
                         }
                         isVeteran={isVeteran}
                         finalAmount={finalAmount}
+                        onOpenHostedCheckout={async () => {
+                          await openHostedCheckout(async () => {
+                            const { data, error: fnError } = await supabase.functions.invoke(
+                              "create-training-payment",
+                              {
+                                body: {
+                                  courseSlug: serviceType,
+                                  serviceTier,
+                                  customerEmail: email,
+                                  customerName: name,
+                                  isVeteran,
+                                  preferredDate: selectedDate
+                                    ? format(selectedDate, "PPP")
+                                    : undefined,
+                                  phone: phone ? formatPhoneNumber(phone) : undefined,
+                                  state,
+                                  checkoutMode: true,
+                                },
+                              },
+                            );
+
+                            if (fnError) {
+                              throw new Error(
+                                fnError.message ||
+                                  "Unable to open hosted training checkout.",
+                              );
+                            }
+
+                            if (!data?.url || !data?.sessionId) {
+                              throw new Error(
+                                "Hosted training checkout did not return a valid session.",
+                              );
+                            }
+
+                            return {
+                              url: data.url,
+                              sessionId: data.sessionId,
+                            };
+                          });
+                        }}
+                        hostedCheckoutLoading={hostedCheckoutLoading}
+                        hostedCheckoutError={hostedCheckoutError}
+                        hostedCheckoutUrl={hostedCheckoutUrl}
+                        hostedCheckoutActive={hostedCheckoutActive}
                       />
                     </Elements>
                   </TabsContent>
@@ -647,6 +751,45 @@ export function TrainingPaymentModal({
                       productName={serviceName}
                       customerEmail={email}
                       customerName={name}
+                      paymentType="training"
+                      checkoutFactory={async () => {
+                        const { data, error: fnError } = await supabase.functions.invoke(
+                          "create-training-payment",
+                          {
+                            body: {
+                              courseSlug: serviceType,
+                              serviceTier,
+                              customerEmail: email,
+                              customerName: name,
+                              isVeteran,
+                              preferredDate: selectedDate
+                                ? format(selectedDate, "PPP")
+                                : undefined,
+                              phone: phone ? formatPhoneNumber(phone) : undefined,
+                              state,
+                              checkoutMode: true,
+                            },
+                          },
+                        );
+
+                        if (fnError) {
+                          throw new Error(
+                            fnError.message ||
+                              "Unable to open hosted training checkout.",
+                          );
+                        }
+
+                        if (!data?.url || !data?.sessionId) {
+                          throw new Error(
+                            "Hosted training checkout did not return a valid session.",
+                          );
+                        }
+
+                        return {
+                          url: data.url,
+                          sessionId: data.sessionId,
+                        };
+                      }}
                       onSuccess={() => {
                         toast.success(
                           "Payment Confirmed! Check your email for booking details.",

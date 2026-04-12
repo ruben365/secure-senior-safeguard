@@ -193,7 +193,7 @@ function Contact() {
               help you choose the right next step.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-start">
+          <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-4 justify-start">
             <Button size="heroPill" variant="heroPrimary" className="text-white" asChild>
               <a href={SITE.phone.tel}>
                 <Phone className="w-5 h-5 mr-2" />

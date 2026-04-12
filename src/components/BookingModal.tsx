@@ -286,7 +286,7 @@ export const BookingModal = ({
         the dialog isn't a wall of orange. overflow-hidden + no max-h
         = no scrollbar.
       */}
-      <DialogContent className="sm:max-w-[420px] overflow-hidden p-0 rounded-2xl gap-0">
+      <DialogContent className="sm:max-w-[420px] overflow-hidden p-0 rounded-2xl gap-0 max-sm:max-h-[88vh] max-sm:overflow-y-auto">
         {/* Header — compact teal/indigo gradient strip */}
         <div className="bg-gradient-to-r from-teal-500/10 via-indigo-500/10 to-teal-500/10 px-5 pt-4 pb-3 border-b">
           <DialogHeader className="space-y-0">

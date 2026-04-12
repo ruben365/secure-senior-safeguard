@@ -37,7 +37,11 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useStripeKey } from "@/hooks/useStripeKey";
+import useStripeElementLifecycle from "@/hooks/useStripeElementLifecycle";
+import useHostedCheckoutFallback from "@/hooks/useHostedCheckoutFallback";
 import { QRCodePaymentSection } from "./QRCodePaymentSection";
+import { CheckoutCard, CheckoutDialogFrame, CheckoutTrustFooter } from "./CheckoutFrame";
+import { PaymentElementPanel } from "./PaymentElementPanel";
 
 export interface EmbeddedPaymentModalProps {
   open: boolean;
@@ -86,11 +90,29 @@ function PaymentForm({
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const {
+    hostedCheckoutActive,
+    hostedCheckoutError,
+    hostedCheckoutLoading,
+    hostedCheckoutUrl,
+    openHostedCheckout,
+    resetHostedCheckout,
+  } = useHostedCheckoutFallback({
+    onPaid: async ({ paymentIntentId, sessionId }) => {
+      await finalizeSuccess({ paymentIntentId, sessionId });
+    },
+  });
 
   // Initialize Stripe when component mounts (dialog opens)
   useEffect(() => {
     initializeStripe();
   }, [initializeStripe]);
+
+  useEffect(() => {
+    if (step !== "payment") {
+      resetHostedCheckout();
+    }
+  }, [resetHostedCheckout, step]);
 
   // Auto-fill from localStorage
   useEffect(() => {
@@ -156,7 +178,13 @@ function PaymentForm({
     }
   };
 
-  const handlePaymentSuccess = async () => {
+  const finalizeSuccess = async ({
+    paymentIntentId,
+    sessionId,
+  }: {
+    paymentIntentId?: string | null;
+    sessionId?: string | null;
+  }) => {
     setStep("success");
     toast.success("Payment successful!");
 
@@ -165,10 +193,8 @@ function PaymentForm({
       await supabase.functions.invoke("complete-payment", {
         body: {
           paymentType: mode === "subscription" ? "subscription" : "product",
-          customerEmail: email,
-          customerName: name,
-          amount: finalAmount,
-          productName,
+          paymentIntentId: paymentIntentId ?? undefined,
+          sessionId: sessionId ?? undefined,
         },
       });
     } catch (err) {
@@ -176,6 +202,40 @@ function PaymentForm({
     }
 
     onSuccess?.();
+  };
+
+  const openHostedCheckoutPage = async () => {
+    await openHostedCheckout(async () => {
+      const { data, error: fnError } = await supabase.functions.invoke(
+        "create-payment-intent",
+        {
+          body: {
+            priceId,
+            mode,
+            customerEmail: email,
+            customerName: name,
+            isVeteran,
+            metadata: {
+              productName,
+            },
+            checkoutMode: true,
+          },
+        },
+      );
+
+      if (fnError) {
+        throw new Error(fnError.message || "Unable to open hosted checkout.");
+      }
+
+      if (!data?.url || !data?.sessionId) {
+        throw new Error("Hosted checkout did not return a valid session.");
+      }
+
+      return {
+        url: data.url,
+        sessionId: data.sessionId,
+      };
+    });
   };
 
   return (
@@ -453,10 +513,17 @@ function PaymentForm({
                       }}
                     >
                       <PaymentElementWrapper
-                        onSuccess={handlePaymentSuccess}
+                        onSuccess={(paymentIntentId) =>
+                          finalizeSuccess({ paymentIntentId })
+                        }
                         amount={finalAmount / 100}
                         email={email}
                         onBack={() => setStep("info")}
+                        onOpenHostedCheckout={openHostedCheckoutPage}
+                        hostedCheckoutLoading={hostedCheckoutLoading}
+                        hostedCheckoutError={hostedCheckoutError}
+                        hostedCheckoutUrl={hostedCheckoutUrl}
+                        hostedCheckoutActive={hostedCheckoutActive}
                       />
                     </Elements>
                   )}
@@ -471,7 +538,43 @@ function PaymentForm({
                     productName={productName}
                     customerEmail={email}
                     customerName={name}
-                    onSuccess={handlePaymentSuccess}
+                    paymentType={mode === "subscription" ? "subscription" : "product"}
+                    checkoutFactory={async () => {
+                      const { data, error: fnError } = await supabase.functions.invoke(
+                        "create-payment-intent",
+                        {
+                          body: {
+                            priceId,
+                            mode,
+                            customerEmail: email,
+                            customerName: name,
+                            isVeteran,
+                            metadata: {
+                              productName,
+                            },
+                            checkoutMode: true,
+                          },
+                        },
+                      );
+
+                      if (fnError) {
+                        throw new Error(fnError.message || "Unable to start hosted checkout.");
+                      }
+
+                      if (!data?.url || !data?.sessionId) {
+                        throw new Error("Hosted checkout did not return a valid session.");
+                      }
+
+                      return {
+                        url: data.url,
+                        sessionId: data.sessionId,
+                      };
+                    }}
+                    onSuccess={() => {
+                      setStep("success");
+                      toast.success("Payment successful!");
+                      onSuccess?.();
+                    }}
                     onBack={() => setStep("info")}
                   />
                 </div>
@@ -542,17 +645,31 @@ function PaymentElementWrapper({
   amount,
   email,
   onBack,
+  onOpenHostedCheckout,
+  hostedCheckoutLoading,
+  hostedCheckoutError,
+  hostedCheckoutUrl,
+  hostedCheckoutActive,
 }: {
-  onSuccess: () => void;
+  onSuccess: (paymentIntentId?: string | null) => void;
   amount: number;
   email: string;
   onBack: () => void;
+  onOpenHostedCheckout: () => Promise<void> | void;
+  hostedCheckoutLoading: boolean;
+  hostedCheckoutError: string | null;
+  hostedCheckoutUrl: string | null;
+  hostedCheckoutActive: boolean;
 }) {
   const stripe = useStripe();
   const elements = useElements();
   const [isLoading, setIsLoading] = useState(false);
-  const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { isReady, timedOut, mountKey, handleReady, retry } =
+    useStripeElementLifecycle({
+      enabled: true,
+      resetKeys: [amount, email],
+    });
 
   const handleSubmit = async () => {
     if (!stripe || !elements) return;
@@ -580,7 +697,7 @@ function PaymentElementWrapper({
         paymentIntent?.status === "succeeded" ||
         paymentIntent?.status === "processing"
       ) {
-        onSuccess();
+        onSuccess(paymentIntent?.id);
       }
     } catch (err: unknown) {
       console.error("Payment error:", err);
@@ -597,23 +714,26 @@ function PaymentElementWrapper({
 
   return (
     <div className="space-y-4">
-      {!isReady && (
-        <div className="flex items-center justify-center py-8">
-          <Loader2 className="w-6 h-6 animate-spin text-primary" />
-          <span className="ml-2 text-sm text-muted-foreground">
-            Loading payment form...
-          </span>
-        </div>
-      )}
-      <div className={!isReady ? "opacity-0 h-0 overflow-hidden" : ""}>
+      <PaymentElementPanel
+        isReady={isReady}
+        timedOut={timedOut}
+        onRetry={retry}
+        onOpenHostedCheckout={onOpenHostedCheckout}
+        hostedCheckoutLoading={hostedCheckoutLoading}
+        hostedCheckoutError={hostedCheckoutError}
+        hostedCheckoutUrl={hostedCheckoutUrl}
+        hostedCheckoutActive={hostedCheckoutActive}
+        loadingLabel="Preparing secure payment form..."
+      >
         <PaymentElement
-          onReady={() => setIsReady(true)}
+          key={mountKey}
+          onReady={handleReady}
           options={{
             layout: "tabs",
             paymentMethodOrder: ["card", "apple_pay", "google_pay"],
           }}
         />
-      </div>
+      </PaymentElementPanel>
 
       {error && (
         <div className="p-3 bg-destructive/10 text-destructive rounded-lg text-sm">
@@ -672,38 +792,66 @@ export function EmbeddedPaymentModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[360px] overflow-hidden p-4 sm:p-4 max-sm:p-2.5 gap-2 max-sm:max-h-[85vh] max-sm:overflow-y-auto">
-        <DialogHeader className="space-y-0 pb-2.5 max-sm:pb-1.5">
-          <DialogTitle className="flex items-center gap-2.5 max-sm:gap-1.5">
-            <div className="w-8 h-8 max-sm:w-6 max-sm:h-6 bg-[#d96c4a]/12 rounded-full flex items-center justify-center flex-shrink-0">
-              <CreditCard className="w-4 h-4 max-sm:w-3 max-sm:h-3 text-[#d96c4a]" />
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-[15px] max-sm:text-[13px] font-semibold leading-none text-foreground">Secure Checkout</span>
-                <Badge variant="outline" className="text-[10px] max-sm:text-[9px] font-normal px-1.5 py-0 h-[18px] max-sm:h-4">
-                  <Lock className="w-2.5 h-2.5 mr-1" />
-                  Stripe
-                </Badge>
-              </div>
-            </div>
-          </DialogTitle>
-          <DialogDescription className="text-[11px] max-sm:text-[10px] mt-1 max-sm:mt-0.5">
-            Complete your{" "}
-            {mode === "subscription" ? "subscription" : "purchase"} securely
-          </DialogDescription>
-        </DialogHeader>
+      <DialogContent className="overflow-hidden border border-border/70 bg-transparent p-0 shadow-[0_28px_80px_rgba(15,23,42,0.24)] sm:max-w-4xl">
+        <CheckoutDialogFrame
+          icon={<CreditCard className="h-5 w-5" />}
+          title="Secure checkout"
+          description={`Complete your ${mode === "subscription" ? "subscription" : "purchase"} with a polished, encrypted payment flow.`}
+          badgeLabel="Encrypted by Stripe"
+          aside={
+            <CheckoutCard
+              eyebrow="Order summary"
+              title={productName}
+              description={description || "Instant access after payment confirmation."}
+            >
+              <div className="space-y-3">
+                <div className="rounded-2xl border border-border/60 bg-muted/30 px-4 py-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold text-foreground">
+                        {mode === "subscription" ? "Subscription" : "One-time purchase"}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        {mode === "subscription" ? "Recurring access and support" : "Immediate payment confirmation"}
+                      </p>
+                    </div>
+                    <span className="text-xl font-semibold text-[#b75539]">
+                      ${(amount / 100).toFixed(2)}
+                    </span>
+                  </div>
+                </div>
 
-        <PaymentForm
-          mode={mode}
-          priceId={priceId}
-          productName={productName}
-          amount={amount}
-          description={description}
-          features={features}
-          onSuccess={onSuccess}
-          onClose={handleClose}
-        />
+                {features && features.length > 0 ? (
+                  <div className="space-y-2">
+                    {features.slice(0, 4).map((feature, index) => (
+                      <div key={`${feature}-${index}`} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#b75539]" />
+                        <span>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            </CheckoutCard>
+          }
+          footer={
+            <CheckoutTrustFooter>
+              <Lock className="h-3.5 w-3.5" />
+              Instant digital delivery where applicable. Secure encrypted payment across phone and desktop.
+            </CheckoutTrustFooter>
+          }
+        >
+          <PaymentForm
+            mode={mode}
+            priceId={priceId}
+            productName={productName}
+            amount={amount}
+            description={description}
+            features={features}
+            onSuccess={onSuccess}
+            onClose={handleClose}
+          />
+        </CheckoutDialogFrame>
       </DialogContent>
     </Dialog>
   );
