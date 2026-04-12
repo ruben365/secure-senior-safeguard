@@ -57,9 +57,9 @@
   z-index: 1;
   background: linear-gradient(
     to right,
-    hsla(260, 18%, 8%, 0.72)   0%,
-    hsla(260, 14%, 10%, 0.48) 25%,
-    hsla(260, 10%, 12%, 0.2)  50%,
+    hsla(260, 18%, 8%, 0.42)   0%,
+    hsla(260, 14%, 10%, 0.24) 25%,
+    hsla(260, 10%, 12%, 0.08) 50%,
     transparent                70%
   );
 }
@@ -72,8 +72,8 @@
   z-index: 2;
   background: linear-gradient(
     to top,
-    hsla(260, 18%, 6%, 0.65)  0%,
-    hsla(260, 14%, 8%, 0.3)   20%,
+    hsla(260, 18%, 6%, 0.34)  0%,
+    hsla(260, 14%, 8%, 0.14)  20%,
     transparent                40%
   );
 }
@@ -84,7 +84,7 @@
   top: 0; left: 0; right: 0;
   height: 6rem;
   z-index: 3;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), transparent);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.12), transparent);
   pointer-events: none;
 }
 
@@ -127,7 +127,7 @@
 }
 
 .hero-biz__kicker-text {
-  font-size: 0.8rem;
+  font-size: 0.86rem;
   font-weight: 600;
   color: var(--biz-muted);
   text-transform: uppercase;
@@ -136,7 +136,7 @@
 
 /* Headline — matches Workshop/other pages scale */
 .hero-biz__headline {
-  font-size: clamp(2.4rem, 5.5vw, 4.25rem);
+  font-size: clamp(2.75rem, 5.9vw, 4.85rem);
   font-weight: 800;
   color: var(--biz-text);
   line-height: 1.05;
@@ -148,7 +148,7 @@
 
 /* Body — same scale as other pages */
 .hero-biz__body {
-  font-size: 1.05rem;
+  font-size: 1.125rem;
   line-height: 1.65;
   color: var(--biz-muted);
   max-width: 520px;
@@ -488,8 +488,8 @@
     text-align: center;
     letter-spacing: 0.04em;
   }
-  .hero-biz__headline { font-size: clamp(2rem, 10vw, 3.5rem); }
-  .hero-biz__body { font-size: 0.75rem; }
+  .hero-biz__headline { font-size: clamp(2.2rem, 10.6vw, 3.8rem); }
+  .hero-biz__body { font-size: 0.9rem; }
   .hero-biz__ctas { flex-direction: row; gap: 0.5rem; }
   .hero-biz__cta { width: auto; max-width: 180px; justify-content: center; height: 34px; font-size: 12px; padding: 0 14px; }
   .hero-biz__panel { padding: 0.75rem 0; }

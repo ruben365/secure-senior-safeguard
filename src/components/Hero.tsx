@@ -138,12 +138,12 @@ const Hero = ({
         >
         <div className={cn("max-w-[640px] animate-fade-in", textBlockClassName)}>
           {headline && (
-            <h1 className="text-white mb-4 sm:mb-6 md:mb-10 leading-[1.1] text-[clamp(1.75rem,5.75vw,4.5rem)] font-extrabold tracking-tight text-left">
+            <h1 className="text-white mb-4 sm:mb-6 md:mb-10 leading-[1.06] text-[clamp(2rem,6.1vw,5rem)] font-extrabold tracking-tight text-left">
               {headline}
             </h1>
           )}
           {subheadline && (
-            <p className="text-white/95 text-[15px] sm:text-lg md:text-2xl mb-8 md:mb-12 leading-relaxed text-left line-clamp-3 sm:line-clamp-none">
+            <p className="text-white text-[16px] sm:text-[1.125rem] md:text-[1.625rem] mb-8 md:mb-12 leading-relaxed text-left line-clamp-3 sm:line-clamp-none">
               {subheadline}
             </p>
           )}
