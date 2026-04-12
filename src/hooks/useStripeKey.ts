@@ -51,7 +51,7 @@ async function fetchPublishableKey(forceRemote = false) {
   return remoteKey;
 }
 
-async function ensureStripePromise(forceRemote = false) {
+async function ensureStripePromise(forceRemote = false): Promise<Promise<Stripe | null>> {
   if (stripePromiseCache) {
     return stripePromiseCache;
   }
@@ -60,14 +60,15 @@ async function ensureStripePromise(forceRemote = false) {
     stripeInitPromise = (async () => {
       const loadStripe = await getLoadStripe();
       const publishableKey = await fetchPublishableKey(forceRemote);
-      const stripePromise = loadStripe(publishableKey);
-      stripePromiseCache = stripePromise;
-      return stripePromise;
+      return loadStripe(publishableKey);
     })();
   }
 
   try {
-    return await stripeInitPromise;
+    const stripe = await stripeInitPromise;
+    const promise = Promise.resolve(stripe);
+    stripePromiseCache = promise;
+    return promise;
   } catch (error) {
     stripePromiseCache = null;
     stripeInitPromise = null;
