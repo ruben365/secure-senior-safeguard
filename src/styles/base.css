@@ -264,8 +264,8 @@
     --container-2xl:  1140px;
     --container-wide: 1280px;
     --container-max:  1440px;
-    --site-shell-max: 1600px;
-    --site-shell-gutter: clamp(1rem, 2.1vw, 2rem);
+    --site-shell-max: 1440px;
+    --site-shell-gutter: clamp(1rem, 2.2vw, 2rem);
     --panel-radius: clamp(1.2rem, 1.35vw, 1.75rem);
     --panel-radius-lg: clamp(1.5rem, 1.9vw, 2.3rem);
 
@@ -356,11 +356,19 @@
   }
 
   .site-shell,
-  .container,
-  .center-container-wide {
+  .center-container-wide,
+  .container:not([class*="max-w-"]) {
     width: 100%;
-    max-width: var(--site-shell-max);
-    margin-inline: auto;
+    max-width: var(--site-shell-max) !important;
+    margin-inline: auto !important;
+    padding-inline: var(--site-shell-gutter) !important;
+    box-sizing: border-box;
+  }
+
+  .container[class*="max-w-"] {
+    width: 100%;
+    margin-inline: auto !important;
+    padding-inline: var(--site-shell-gutter) !important;
     box-sizing: border-box;
   }
 
