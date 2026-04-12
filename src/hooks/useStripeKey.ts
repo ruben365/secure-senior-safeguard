@@ -4,15 +4,10 @@ import { supabase } from "@/integrations/supabase/client";
 
 let stripePromiseCache: Promise<Stripe | null> | null = null;
 let cachedKey: string | null = null;
-let stripeInitPromise: Promise<Stripe | null> | null = null;
 let loadStripeModule:
   | (typeof import("@stripe/stripe-js"))["loadStripe"]
   | null = null;
 
-/**
- * Dynamically load the Stripe.js module - this prevents the ~240KB library
- * from being included in the main bundle
- */
 async function getLoadStripe() {
   if (!loadStripeModule) {
     const module = await import("@stripe/stripe-js");
@@ -56,32 +51,14 @@ async function ensureStripePromise(forceRemote = false): Promise<Promise<Stripe 
     return stripePromiseCache;
   }
 
-  if (!stripeInitPromise) {
-    stripeInitPromise = (async () => {
-      const loadStripe = await getLoadStripe();
-      const publishableKey = await fetchPublishableKey(forceRemote);
-      return loadStripe(publishableKey);
-    })();
-  }
-
-  try {
-    const stripe = await stripeInitPromise;
-    const promise = Promise.resolve(stripe);
-    stripePromiseCache = promise;
-    return promise;
-  } catch (error) {
-    stripePromiseCache = null;
-    stripeInitPromise = null;
-    throw error;
-  } finally {
-    stripeInitPromise = null;
-  }
+  const loadStripe = await getLoadStripe();
+  const publishableKey = await fetchPublishableKey(forceRemote);
+  stripePromiseCache = loadStripe(publishableKey);
+  return stripePromiseCache;
 }
 
 /**
- * Hook for Stripe initialization - NOW DEMAND-DRIVEN
- * Stripe is only loaded when initializeStripe() is called, not on mount.
- * This prevents ~240KB of unused JavaScript on pages that don't need payments.
+ * Hook for Stripe initialization - DEMAND-DRIVEN
  */
 export function useStripeKey() {
   const [stripePromise, setStripePromise] =
@@ -119,7 +96,6 @@ export function useStripeKey() {
     [],
   );
 
-  // Auto-initialize if cache already exists (fast path for subsequent uses)
   useEffect(() => {
     if (stripePromiseCache && !stripePromise) {
       setStripePromise(stripePromiseCache);
@@ -129,12 +105,10 @@ export function useStripeKey() {
   return { stripePromise, loading, error, initializeStripe };
 }
 
-// Synchronous getter for components that can't use hooks
 export async function getStripePromise(): Promise<Promise<Stripe | null> | null> {
   return ensureStripePromise();
 }
 
-// Lazy pre-fetch - only triggered when user shows intent to pay
 export async function prefetchStripeKey() {
   try {
     await ensureStripePromise();
