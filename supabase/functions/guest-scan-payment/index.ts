@@ -231,7 +231,7 @@ serve(async (req) => {
       file_size: fileSizeNumber,
       file_type: storedType,
       file_path: filePath,
-      stripe_session_id: paymentIntent.id,
+      stripe_session_id: "pending",
       amount_paid: cost,
       payment_status: "pending",
       scan_status: "pending",
