@@ -3,6 +3,87 @@
    Does NOT affect hero sections or footer.
    ═══════════════════════════════════════════════════════════════════════ */
 
+/* ── Unified below-fold shell for public pages ── */
+.below-fold-premium {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(78rem 42rem at 6% 8%, rgba(217, 108, 74, 0.12) 0%, transparent 58%),
+    radial-gradient(68rem 38rem at 94% 18%, rgba(251, 171, 142, 0.12) 0%, transparent 60%),
+    radial-gradient(62rem 34rem at 24% 100%, rgba(249, 115, 22, 0.08) 0%, transparent 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 249, 244, 0.97) 48%, rgba(255, 255, 255, 0.99) 100%);
+}
+
+.below-fold-premium::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.48) 0%, rgba(255, 255, 255, 0) 22%),
+    radial-gradient(circle at 1px 1px, rgba(15, 23, 42, 0.08) 0.7px, transparent 0.9px);
+  background-size: auto, 24px 24px;
+  opacity: 0.16;
+  mask-image: linear-gradient(180deg, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+.below-fold-premium > *,
+.below-fold-premium > .mesh-gradient,
+.below-fold-premium > .mesh-gradient-animated,
+.below-fold-premium > .floating-orbs,
+.below-fold-premium > .dot-grid-bg,
+.below-fold-premium > .home-color-wash,
+.below-fold-premium > .hss-root {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Premium section shell — crisp glass panel for below-fold sections ── */
+.premium-section-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.premium-section-shell::before {
+  content: "";
+  position: absolute;
+  inset: clamp(0.75rem, 1.8vw, 1.35rem);
+  border-radius: clamp(1.35rem, 2vw, 2rem);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 249, 244, 0.76) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.96) inset,
+    0 -1px 0 rgba(255, 255, 255, 0.22) inset,
+    0 32px 88px -56px rgba(15, 23, 42, 0.26),
+    0 10px 28px -18px rgba(217, 108, 74, 0.18);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.premium-section-shell::after {
+  content: "";
+  position: absolute;
+  left: clamp(1rem, 2.25vw, 1.65rem);
+  right: clamp(1rem, 2.25vw, 1.65rem);
+  top: clamp(0.75rem, 1.8vw, 1.35rem);
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.96) 18%, rgba(255, 255, 255, 0.24) 82%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.premium-section-shell > .container,
+.premium-section-shell > .center-container-wide,
+.premium-section-shell > .mx-auto,
+.premium-section-shell > .relative.z-10 {
+  position: relative;
+  z-index: 2;
+}
+
 /* ── Section headings — subtle gradient text on hover ── */
 .container h2,
 .center-container-wide h2 {
@@ -206,6 +287,19 @@ main select:focus {
 @media (max-width: 639px) {
   [data-radix-popper-content-wrapper] {
     max-width: calc(100vw - 1rem);
+  }
+
+  .premium-section-shell::before {
+    inset: 0.55rem;
+    border-radius: 1.35rem;
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+  }
+
+  .premium-section-shell::after {
+    left: 0.9rem;
+    right: 0.9rem;
+    top: 0.55rem;
   }
 }
 

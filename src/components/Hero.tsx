@@ -132,7 +132,7 @@ const Hero = ({
       <div className={cn("w-full relative z-10 text-left", contentClassName)}>
         <div
           className={cn(
-            "max-w-[1600px] mx-auto w-full px-6 lg:px-8 py-20 sm:py-32 md:py-40 lg:py-48",
+            "site-shell w-full px-6 lg:px-8 py-20 sm:py-32 md:py-40 lg:py-48",
             contentInnerClassName,
           )}
         >

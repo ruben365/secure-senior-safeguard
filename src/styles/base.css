@@ -264,6 +264,8 @@
     --container-2xl:  1140px;
     --container-wide: 1280px;
     --container-max:  1440px;
+    --site-shell-max: 1600px;
+    --site-shell-gutter: clamp(1rem, 2.1vw, 2rem);
 
     /* Global text scale — 0.875 = 14px base (compact but readable) */
     --text-scale: 0.875;
@@ -306,6 +308,15 @@
 @layer base {
   * {
     @apply border-border;
+  }
+
+  .site-shell,
+  .container,
+  .center-container-wide {
+    width: 100%;
+    max-width: var(--site-shell-max);
+    margin-inline: auto;
+    box-sizing: border-box;
   }
 
   /* ===== SKEUOMORPHISM 2.0 - GLOBAL MATERIAL STYLES ===== */

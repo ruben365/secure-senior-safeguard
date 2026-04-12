@@ -429,7 +429,7 @@ const WebsiteDesign = () => {
                         variant="outline"
                         className="bg-white/80 dark:bg-card/80 backdrop-blur-2xl border-white/50 shadow-xl"
                       >
-                        <Link to="/ai-workshop">View All Services</Link>
+                        <Link to="/ai">View All Services</Link>
                       </Button>
                     </div>
                   </div>

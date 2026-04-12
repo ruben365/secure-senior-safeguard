@@ -169,7 +169,7 @@ function Contact() {
     <PageTransition variant="fade">
       <SEO
         title="Contact InVision Network — Kettering, Ohio"
-        description="Reach InVision Network for cybersecurity training or AI Workshop systems. Call (937) 301-8749, email us, or fill out our contact form. Serving Kettering, Dayton, and all of Southwest Ohio."
+        description="Reach InVision Network for cybersecurity training or AI systems. Call (937) 301-8749, email us, or fill out our contact form. Serving Kettering, Dayton, and all of Southwest Ohio."
         keywords="contact InVision Network, Kettering cybersecurity, AI protection Ohio, call InVision Network"
         breadcrumbs={[
           { name: "Home", url: "https://www.invisionnetwork.org/" },
@@ -210,8 +210,8 @@ function Contact() {
         </Hero>
       </div>
 
-      <MeshBackground variant="vibrant" withOrbs>
-      <div className="py-16 relative overflow-hidden">
+      <MeshBackground variant="vibrant" withOrbs className="below-fold-premium">
+      <div className="premium-section-shell py-16 relative overflow-hidden">
         <div className="container mx-auto px-6 lg:px-8 relative z-10">
           {/* Contact Methods Grid */}
           <div className="text-center mb-10">

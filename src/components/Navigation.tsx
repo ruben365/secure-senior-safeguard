@@ -18,7 +18,7 @@ import { DonationModal } from "@/components/DonationModal";
 import { AnnouncementBell } from "@/components/AnnouncementBell";
 
 const primaryLinks = [
-  { name: "AI Workshop", href: "/ai-workshop" },
+  { name: "AI", href: "/ai" },
   { name: "Workshops", href: "/training" },
   { name: "Resources", href: "/resources" },
   { name: "About", href: "/about" },
@@ -102,8 +102,9 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
   };
 
   const isActiveLink = (href: string) => {
-    if (href === "/ai-workshop") {
+    if (href === "/ai") {
       return (
+        location.pathname === "/ai" ||
         location.pathname === "/ai-workshop" ||
         location.pathname === "/business" ||
         location.pathname.startsWith("/business/")
@@ -125,7 +126,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
   return (
     <>
       <nav className={overlay ? "absolute top-0 left-0 right-0 z-[9999] bg-gradient-to-b from-black/60 to-transparent" : `sticky top-0 z-[9999] transition-all duration-300 ${scrolled ? "bg-[#080d1a]/97 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_4px_24px_-4px_rgba(0,0,0,0.3)]" : "bg-[#080d1a]/80 backdrop-blur-md"}`}>
-        <div className="max-w-[1600px] mx-auto w-full px-6 lg:px-8">
+        <div className="site-shell w-full px-6 lg:px-8">
           <div className="flex items-center justify-between h-[56px] gap-4 lg:gap-8">
             {/* Logo — identical to hero */}
             <a
@@ -156,10 +157,10 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <PrefetchLink
                     key={link.name}
                     to={link.href}
-                    className={`nav-link-hover relative text-[13px] px-3 py-2 transition-colors duration-150 ${
+                    className={`site-nav-link relative text-[13px] px-3 py-1.5 rounded-md transition-colors duration-150 ${
                       isActive
-                        ? "nav-link-active text-orange-400 font-bold"
-                        : "text-white font-semibold hover:text-orange-300"
+                        ? "site-nav-link--active text-white font-semibold"
+                        : "text-white/92 font-semibold hover:text-orange-300 hover:bg-white/[0.03]"
                     }`}
                   >
                     {link.name}
@@ -172,13 +173,14 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 <button
                   type="button"
                   onClick={() => setMoreOpen(!moreOpen)}
+                  data-open={moreOpen ? "true" : "false"}
                   aria-haspopup="menu"
                   aria-expanded={moreOpen ? "true" : "false"}
                   aria-label="More navigation links"
-                  className={`nav-link-hover flex items-center gap-1 text-[13px] px-3 py-2 transition-colors duration-150 ${
+                  className={`site-nav-trigger flex items-center gap-1 text-[13px] px-3 py-1.5 rounded-md transition-colors duration-150 ${
                     isSecondaryActive
-                      ? "nav-link-active text-orange-400 font-bold"
-                      : "text-white font-semibold hover:text-orange-300"
+                      ? "site-nav-trigger--active text-white font-semibold"
+                      : "text-white/92 font-semibold hover:text-orange-300 hover:bg-white/[0.03]"
                   }`}
                 >
                   More
@@ -191,15 +193,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <div
                     role="menu"
                     aria-label="Secondary navigation"
-                    className="absolute top-full left-0 mt-2 w-48 rounded-xl border border-white/15 py-1.5 z-50 overflow-hidden"
-                    style={{
-                      background:
-                        "linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%)",
-                      backdropFilter: "blur(20px) saturate(160%)",
-                      WebkitBackdropFilter: "blur(20px) saturate(160%)",
-                      boxShadow:
-                        "0 12px 32px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.12)",
-                    }}
+                    className="site-glass-menu absolute top-full left-0 mt-2 w-52 rounded-2xl py-1.5 z-50 overflow-hidden"
                   >
                     {secondaryLinks.map((link) => {
                       const isActive = isActiveLink(link.href);

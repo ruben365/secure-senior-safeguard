@@ -305,8 +305,9 @@ function Resources() {
       <div className="hidden lg:block h-14" />
       <div className="lg:hidden h-6" />
 
+      <div className="below-fold-premium">
       {/* Introduction Section */}
-      <section className="py-16 md:py-24 relative overflow-hidden bg-background">
+      <section className="premium-section-shell py-16 md:py-24 relative overflow-hidden bg-background">
         <div className="container mx-auto px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-10">
             <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
@@ -418,7 +419,7 @@ function Resources() {
       </section>
 
       {/* Digital Security Guides */}
-      <section id="guides" className="py-16 md:py-24 bg-muted/20 relative overflow-hidden">
+      <section id="guides" className="premium-section-shell py-16 md:py-24 bg-muted/20 relative overflow-hidden">
         <div className="container mx-auto px-6 lg:px-8">
           <div className="text-center mb-10">
             <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
@@ -635,7 +636,7 @@ function Resources() {
       <SectionDivider variant="wave" color="muted" />
 
       {/* Why Shop With Us */}
-      <section className="py-16 md:py-24 bg-muted/30 dot-grid-bg">
+      <section className="premium-section-shell py-16 md:py-24 bg-muted/30 dot-grid-bg">
         <div className="container mx-auto px-6 lg:px-8">
           <div className="text-center mb-8">
             <h2 className="text-2xl md:text-3xl font-bold mb-3">Why Trust InVision Network</h2>
@@ -658,6 +659,7 @@ function Resources() {
           </div>
         </div>
       </section>
+      </div>
 
       {/* Cart Abandonment Notification */}
       <CartAbandonmentNotification />

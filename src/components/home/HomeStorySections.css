@@ -133,15 +133,17 @@
     • Warm glow — brand-colored falloff
 */
 .hss-card {
-  background: linear-gradient(180deg, #ffffff 0%, #fefcfa 100%);
-  border: 1px solid rgba(30, 41, 59, 0.06);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.86) 0%, rgba(254, 252, 250, 0.78) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.72);
   border-radius: 1.25rem;
+  backdrop-filter: blur(18px) saturate(145%);
+  -webkit-backdrop-filter: blur(18px) saturate(145%);
   box-shadow:
     0 1px 0 0 rgba(255, 255, 255, 0.95) inset,
     0 -1px 0 0 rgba(217, 108, 74, 0.05) inset,
-    0 2px 4px -1px rgba(15, 23, 42, 0.06),
-    0 12px 28px -8px rgba(15, 23, 42, 0.14),
-    0 24px 48px -20px rgba(15, 23, 42, 0.18);
+    0 8px 20px -10px rgba(15, 23, 42, 0.12),
+    0 24px 52px -24px rgba(15, 23, 42, 0.22),
+    0 12px 26px -18px rgba(217, 108, 74, 0.16);
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
     border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
@@ -166,13 +168,15 @@
   background:
     linear-gradient(
       135deg,
-      rgba(249, 115, 22, 0.09) 0%,
+      rgba(249, 115, 22, 0.12) 0%,
       rgba(217, 108, 74, 0.14) 50%,
-      rgba(196, 181, 232, 0.10) 100%
+      rgba(251, 171, 142, 0.10) 100%
     ),
-    linear-gradient(180deg, #fff9f4 0%, #fff2e8 100%);
-  border: 1px solid rgba(217, 108, 74, 0.22);
+    linear-gradient(180deg, rgba(255, 249, 244, 0.90) 0%, rgba(255, 242, 232, 0.80) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.66);
   border-radius: 1.25rem;
+  backdrop-filter: blur(16px) saturate(145%);
+  -webkit-backdrop-filter: blur(16px) saturate(145%);
   box-shadow:
     0 1px 0 0 rgba(255, 255, 255, 0.9) inset,
     0 -1px 0 0 rgba(217, 108, 74, 0.08) inset,
@@ -246,9 +250,11 @@
   brand warm glow. Higher elevation than regular .hss-card.
 */
 .hss-dark-card {
-  background: linear-gradient(180deg, #ffffff 0%, #fefcfa 100%);
-  border: 1px solid rgba(217, 108, 74, 0.28);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.88) 0%, rgba(254, 252, 250, 0.80) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.74);
   border-radius: 1.25rem;
+  backdrop-filter: blur(16px) saturate(145%);
+  -webkit-backdrop-filter: blur(16px) saturate(145%);
   box-shadow:
     0 1px 0 0 rgba(255, 255, 255, 0.98) inset,
     0 -1px 0 0 rgba(217, 108, 74, 0.1) inset,

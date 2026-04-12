@@ -231,7 +231,7 @@ button[aria-label][data-icon-only]:hover::before {
 /* ── Nav link animated underline on hover ────────────────────
    Applies to desktop nav links. Uses a pseudo-element that scales
    from 0 to 100% width on hover with an orange underline. */
-nav a[class*="text-white"]:not([class*="rounded-full"])::after {
+nav a[class*="text-white"]:not([class*="rounded-full"]):not(.site-nav-link)::after {
   content: "";
   position: absolute;
   left: 0.875rem;    /* matches px-3.5 */
@@ -245,12 +245,12 @@ nav a[class*="text-white"]:not([class*="rounded-full"])::after {
   transition: transform 250ms var(--ease-out-std);
 }
 
-nav a[class*="text-white"]:not([class*="rounded-full"]):hover::after {
+nav a[class*="text-white"]:not([class*="rounded-full"]):not(.site-nav-link):hover::after {
   transform: scaleX(1);
 }
 
 /* Active link keeps the underline visible */
-nav a[class*="text-orange-400"]::after {
+nav a[class*="text-orange-400"]:not(.site-nav-link)::after {
   content: "";
   position: absolute;
   left: 0.875rem;

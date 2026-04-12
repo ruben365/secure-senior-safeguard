@@ -61,7 +61,7 @@ export const HeroWorkshops = () => {
 
       {/* ── Main Layout: Left Content + Right Widget ── */}
       <div className="hero-ws__content">
-        <div className="max-w-[1600px] mx-auto w-full px-6 lg:px-8">
+        <div className="site-shell w-full px-6 lg:px-8">
         <div className="hero-ws__layout">
 
           {/* Left — Copy */}
@@ -142,7 +142,7 @@ export const HeroWorkshops = () => {
 
       {/* ── Bottom Glassmorphism Cards ── */}
       <div className="hero-ws__panel">
-        <div className="max-w-[1600px] mx-auto w-full px-6 lg:px-8">
+        <div className="site-shell w-full px-6 lg:px-8">
         <div className="hero-ws__panel-inner">
           <div className="hero-ws__feature-row">
             {workshopFeatures.map((f) => (

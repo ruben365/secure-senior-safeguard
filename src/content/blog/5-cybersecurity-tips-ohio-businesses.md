@@ -110,6 +110,6 @@ We offer:
 - **24/7 monitoring** that catches attacks before they cause damage
 - **Incident response** that gets you back online fast
 
-[Talk to our team](/contact) about protecting your business, or [explore our AI Workshop systems](/ai-workshop) to see how we can help.
+[Talk to our team](/contact) about protecting your business, or [explore our AI systems](/ai) to see how we can help.
 
 Your business is worth protecting. Start today.

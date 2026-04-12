@@ -63,7 +63,7 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
             className="py-8"
           />
 
-          <div className="home-color-wash relative isolate">
+          <div className="home-color-wash below-fold-premium relative isolate">
 
           {/* 2. Story sections */}
           <section
@@ -146,7 +146,7 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
                       </Link>
                     </Button>
                     <Button asChild variant="heroOutline" size="lg" className="h-8 text-xs px-4 rounded-full text-white hover:text-white sm:h-11 sm:text-sm sm:px-6">
-                      <Link to="/ai-workshop">Explore AI Workshop</Link>
+                      <Link to="/ai">Explore AI</Link>
                     </Button>
                   </div>
 

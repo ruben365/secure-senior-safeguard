@@ -20,7 +20,7 @@ import { SITE } from "@/config/site";
 
 const popularPages = [
   { icon: Home, label: "Home", desc: "Back to the main page", path: "/" },
-  { icon: Briefcase, label: "AI Workshop", desc: "Connected AI systems and automation", path: "/ai-workshop" },
+  { icon: Briefcase, label: "AI", desc: "Connected AI systems and automation", path: "/ai" },
   { icon: Shield, label: "Family Protection", desc: "Training plans and pricing", path: "/training" },
   { icon: BookOpen, label: "Resources", desc: "Guides, e-books, and tools", path: "/resources" },
   { icon: Phone, label: "Contact Us", desc: "Talk to our team", path: "/contact" },

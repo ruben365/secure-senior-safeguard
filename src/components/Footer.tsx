@@ -91,11 +91,11 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
     {
       heading: "Services",
       links: [
-        { to: "/ai-workshop", label: "AI Workshop" },
-        { to: "/ai-workshop#svc-ai-receptionist", label: "AI Receptionist" },
-        { to: "/ai-workshop#svc-smart-scheduling", label: "Smart Scheduling" },
-        { to: "/ai-workshop#svc-website-design", label: "Website Design" },
-        { to: "/ai-workshop#svc-website-insurance", label: "Website Insurance" },
+        { to: "/ai", label: "AI" },
+        { to: "/ai#svc-ai-receptionist", label: "AI Receptionist" },
+        { to: "/ai#svc-smart-scheduling", label: "Smart Scheduling" },
+        { to: "/ai#svc-website-design", label: "Website Design" },
+        { to: "/ai#svc-website-insurance", label: "Website Insurance" },
       ],
     },
     {
@@ -147,7 +147,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
           className="footer-aura absolute right-0 top-0 w-[600px] h-full pointer-events-none opacity-50"
         />
 
-        <div className="max-w-[1600px] mx-auto w-full px-6 lg:px-8 py-8 relative z-10">
+        <div className="site-shell w-full px-6 lg:px-8 py-8 relative z-10">
 
           {/* ─────────── TOP ROW — Brand left + Newsletter card right ─────────── */}
           <div className="flex flex-col lg:flex-row justify-between w-full gap-6 lg:gap-12">

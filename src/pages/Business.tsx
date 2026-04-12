@@ -459,17 +459,17 @@ function Business() {
     <PageTransition variant="fade">
       <div className="min-h-screen">
         <SEO
-          title="AI Workshop Systems for Ohio Businesses — Kettering & Dayton, Ohio"
-          description="Transform your Ohio business with InVision Network's AI Workshop: AI receptionists, automated follow-ups, custom websites, and AI insurance. Your AI front desk runs 24/7 — never miss a call."
+          title="AI Services for Ohio Businesses — Kettering & Dayton, Ohio"
+          description="Transform your Ohio business with InVision Network's AI services: AI receptionists, automated follow-ups, custom websites, and AI insurance. Your AI front desk runs 24/7 — never miss a call."
           keywords="AI receptionist Ohio, business automation Kettering, AI answering service Dayton, virtual receptionist Southwest Ohio, small business AI"
           breadcrumbs={[
             { name: "Home", url: "https://www.invisionnetwork.org/" },
-            { name: "AI Workshop", url: "https://www.invisionnetwork.org/ai-workshop" },
+            { name: "AI", url: "https://www.invisionnetwork.org/ai" },
           ]}
           structuredData={{
             "@context": "https://schema.org",
             "@type": "ItemList",
-            name: "AI Workshop Services",
+            name: "AI Services",
             description: "Professional AI systems and automation services",
             itemListElement: [
             {
@@ -509,16 +509,17 @@ function Business() {
         <HeroBusiness onStrategyCall={openStrategyCall} />
         <TrustBar />
 
+        <div className="below-fold-premium">
         {/* Answer summary — what we build for businesses */}
         <AnswerSummary
-          summary="InVision Network's AI Workshop builds connected systems for Ohio businesses: AI receptionists that answer calls 24/7, automated follow-ups that nurture leads, and professional websites backed by maintenance plans. Serving Kettering, Dayton, and the Miami Valley."
+          summary="InVision Network's AI services build connected systems for Ohio businesses: AI receptionists that answer calls 24/7, automated follow-ups that nurture leads, and professional websites backed by maintenance plans. Serving Kettering, Dayton, and the Miami Valley."
           ctaHref="/contact"
           ctaLabel="Schedule a free strategy call"
           className="py-8"
         />
 
         {/* ═══════════════════ SERVICES ═══════════════════ */}
-        <section id="services" className="py-16 md:py-24 relative overflow-hidden">
+        <section id="services" className="premium-section-shell py-16 md:py-24 relative overflow-hidden">
           {/* Premium background */}
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
           <div className="absolute top-20 left-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
@@ -664,7 +665,7 @@ function Business() {
         <SectionDivider variant="wave" color="muted" />
 
         {/* ═══════════════════ COMPLETE PLATFORM ═══════════════════ */}
-        <section id="security" className="py-16 md:py-24 relative overflow-hidden">
+        <section id="security" className="premium-section-shell py-16 md:py-24 relative overflow-hidden">
           {/* Rich layered background */}
           <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
           
@@ -707,7 +708,7 @@ function Business() {
                           </span>
                         </h3>
                         <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-8">
-                          We merged the full platform into AI Workshop to keep the story simple.
+                          We merged the full platform into one AI offering to keep the story simple.
                           Our purpose is to help Ohio organizations grow with AI while staying safe from
                           modern fraud and operational risk. Learn more about <Link to="/about" className="text-primary hover:underline font-medium">our story</Link> and the team behind the mission.
                         </p>
@@ -874,7 +875,7 @@ function Business() {
                       name: "InVision Platform Demo",
                       price: 0,
                       tier: "Full Platform",
-                      description: "Schedule a live demo of all 9 integrated services now consolidated under AI Workshop."
+                      description: "Schedule a live demo of all 9 integrated services in our AI offering."
                     });
                     setInquiryDialogOpen(true);
                   }}>
@@ -909,7 +910,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ WEB DESIGN ═══════════════════ */}
-        <section id="website-design" className="py-16 md:py-24 relative overflow-hidden">
+        <section id="website-design" className="premium-section-shell py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
           
@@ -1075,7 +1076,7 @@ function Business() {
         <SectionDivider variant="curve" color="muted" flip />
 
         {/* ═══════════════════ WEBSITE INSURANCE ═══════════════════ */}
-        <section id="website-insurance" className="py-16 md:py-24 relative overflow-hidden">
+        <section id="website-insurance" className="premium-section-shell py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-muted/60 via-muted/40 to-muted/60" />
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
           
@@ -1158,7 +1159,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ AI AGENTS PRICING ═══════════════════ */}
-        <section id="automation-pricing" className="py-16 md:py-24 relative overflow-hidden">
+        <section id="automation-pricing" className="premium-section-shell py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
           <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           
@@ -1270,7 +1271,7 @@ function Business() {
         <SectionDivider variant="slant" color="muted" />
 
         {/* ═══════════════════ AI INSURANCE ═══════════════════ */}
-        <section id="ai-insurance" className="py-16 md:py-24 relative overflow-hidden">
+        <section id="ai-insurance" className="premium-section-shell py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent" />
           
@@ -1463,7 +1464,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ AI CONSULTING ═══════════════════ */}
-        <section id="ai-consulting" className="py-16 md:py-24 relative overflow-hidden">
+        <section id="ai-consulting" className="premium-section-shell py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
           
           <div className="container mx-auto px-6 lg:px-8 relative z-10">
@@ -1644,7 +1645,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ ILLUSTRATION & VISUAL ART ═══════════════════ */}
-        <section id="illustration" className="py-16 md:py-24 relative overflow-hidden">
+        <section id="illustration" className="premium-section-shell py-16 md:py-24 relative overflow-hidden">
           {/* Decorative background */}
           <div className="absolute inset-0 bg-gradient-to-b from-muted/40 via-background to-muted/30" />
           <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-coral-100/20 via-transparent to-transparent rounded-full blur-3xl pointer-events-none" />
@@ -1775,7 +1776,7 @@ function Business() {
 
         {/* ═══════════════════ WHY CHOOSE US ═══════════════════ */}
         <MeshBackground variant="vibrant" withOrbs>
-        <section className="py-16 md:py-24 relative overflow-hidden">
+        <section className="premium-section-shell py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
           
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
@@ -1852,7 +1853,7 @@ function Business() {
 
         {/* ═══════════════════ TESTIMONIALS ═══════════════════ */}
         {(isAdmin || businessTestimonials.length > 0) &&
-        <section className="py-16 md:py-24 relative overflow-hidden">
+        <section className="premium-section-shell py-16 md:py-24 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
             
             <div className="container mx-auto px-6 lg:px-8 relative z-10">
@@ -1933,6 +1934,7 @@ function Business() {
             15-minute scoping call. No pressure. Quoted upfront.
           </p>
         </CTASection>
+        </div>
 
         <Footer />
 

@@ -75,7 +75,7 @@ export const HeroHomepage = () => {
 
       {/* ── 2. Hero Content ── */}
       <div className="hero-home__content">
-        <div className="max-w-[1600px] mx-auto w-full px-6 lg:px-8">
+        <div className="site-shell w-full px-6 lg:px-8">
           <div className="hero-home__copy">
 
             {/* Headline */}
@@ -97,8 +97,8 @@ export const HeroHomepage = () => {
               <Link to="/training#pricing" className="hero-home__cta">
                 Get Protected
               </Link>
-              <Link to="/ai-workshop" className="hero-home__cta">
-                Explore AI Workshop
+              <Link to="/ai" className="hero-home__cta">
+                Explore AI
                 <ArrowRight />
               </Link>
             </div>
@@ -108,7 +108,7 @@ export const HeroHomepage = () => {
 
       {/* ── 3. Glassmorphism Bottom Panel ── */}
       <div className="hero-home__panel">
-        <div className="max-w-[1600px] mx-auto w-full px-6 lg:px-8">
+        <div className="site-shell w-full px-6 lg:px-8">
           <div className="hero-home__panel-inner">
 
           {/* Row 1 — Top features */}

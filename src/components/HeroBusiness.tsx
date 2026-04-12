@@ -62,7 +62,7 @@ export const HeroBusiness = ({ onStrategyCall }: { onStrategyCall: () => void })
       <div className="hero-biz__bg">
         <img
           src={businessHero}
-          alt="InVision Network AI Workshop team building secure automation systems"
+          alt="InVision Network AI team building secure automation systems"
           loading="eager"
           decoding="sync"
           {...highPriorityImageProps}
@@ -73,11 +73,11 @@ export const HeroBusiness = ({ onStrategyCall }: { onStrategyCall: () => void })
 
       {/* ── Hero Content: Left text only ── */}
       <div className="hero-biz__content">
-        <div className="max-w-[1600px] mx-auto w-full px-6 lg:px-8">
+        <div className="site-shell w-full px-6 lg:px-8">
         <div className="hero-biz__copy">
 
           <h1 className="hero-biz__headline">
-            AI Workshop Systems
+            AI Systems
             <br />
             for Modern
             <br />
@@ -110,7 +110,7 @@ export const HeroBusiness = ({ onStrategyCall }: { onStrategyCall: () => void })
 
       {/* ── Bottom Feature Cards ── */}
       <div className="hero-biz__panel">
-        <div className="max-w-[1600px] mx-auto w-full px-6 lg:px-8">
+        <div className="site-shell w-full px-6 lg:px-8">
         <div className="hero-biz__panel-inner">
           <div className="hero-biz__feature-row">
             {businessFeatures.map((f) => (

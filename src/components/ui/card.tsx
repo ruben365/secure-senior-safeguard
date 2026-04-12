@@ -9,12 +9,14 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "relative rounded-[14px] bg-card text-card-foreground",
-      "border border-border/60",
-      "shadow-[0_1px_3px_rgba(13,33,55,0.06),0_1px_2px_rgba(13,33,55,0.04)]",
-      "transition-all duration-200 ease-out",
-      "hover:border-primary/30 hover:-translate-y-0.5",
-      "hover:shadow-[0_8px_20px_rgba(13,33,55,0.10),0_3px_6px_rgba(13,33,55,0.06)]",
+      "relative isolate overflow-hidden rounded-[18px] text-card-foreground",
+      "bg-[linear-gradient(180deg,hsl(var(--card)/0.96),hsl(var(--card)/0.84))] backdrop-blur-[14px]",
+      "border border-white/65 shadow-[0_1px_0_rgba(255,255,255,0.92)_inset,0_14px_34px_-26px_rgba(15,23,42,0.30),0_6px_18px_-16px_rgba(217,108,74,0.22)]",
+      "before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/95 before:to-transparent",
+      "after:pointer-events-none after:absolute after:-right-8 after:-top-10 after:h-28 after:w-28 after:rounded-full after:bg-primary/8 after:blur-3xl after:opacity-80",
+      "transition-all duration-300 ease-out",
+      "hover:border-primary/20 hover:-translate-y-1",
+      "hover:shadow-[0_1px_0_rgba(255,255,255,0.96)_inset,0_24px_60px_-32px_rgba(15,23,42,0.34),0_12px_30px_-24px_rgba(217,108,74,0.24)]",
       className,
     )}
     {...props}

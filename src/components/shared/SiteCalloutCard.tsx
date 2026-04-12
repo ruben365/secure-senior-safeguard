@@ -32,19 +32,19 @@ const toneStyles: Record<
 > = {
   brand: {
     shell:
-      "border-primary/20 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(255,247,242,0.96))]",
+      "border-primary/15 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(255,247,242,0.78))]",
     accent: "from-primary/60 via-accent/45 to-transparent",
-    glow: "bg-primary/15",
-    eyebrow: "border-primary/15 bg-primary/10 text-primary",
+    glow: "bg-primary/14",
+    eyebrow: "border-primary/12 bg-white/72 text-primary",
     icon:
-      "bg-gradient-to-br from-primary to-accent text-white shadow-[0_16px_32px_-22px_hsl(var(--primary)/0.7)]",
+      "bg-gradient-to-br from-primary to-accent text-white shadow-[0_18px_34px_-22px_hsl(var(--primary)/0.7)]",
   },
   neutral: {
     shell:
-      "border-border/60 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(247,249,252,0.96))]",
+      "border-border/45 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(247,249,252,0.78))]",
     accent: "from-[hsl(var(--foreground)/0.18)] via-primary/20 to-transparent",
     glow: "bg-slate-900/10",
-    eyebrow: "border-border/60 bg-background/90 text-muted-foreground",
+    eyebrow: "border-border/50 bg-white/72 text-muted-foreground",
     icon:
       "bg-gradient-to-br from-slate-900 to-slate-700 text-white shadow-[0_16px_32px_-24px_rgba(15,23,42,0.45)]",
   },
@@ -69,12 +69,16 @@ export function SiteCalloutCard({
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-[28px] border backdrop-blur-sm",
-        "shadow-[0_18px_54px_-32px_rgba(15,23,42,0.32),0_1px_0_rgba(255,255,255,0.95)_inset]",
+        "relative isolate overflow-hidden rounded-[30px] border backdrop-blur-xl",
+        "shadow-[0_1px_0_rgba(255,255,255,0.96)_inset,0_-1px_0_rgba(255,255,255,0.22)_inset,0_26px_72px_-40px_rgba(15,23,42,0.28),0_10px_26px_-16px_rgba(217,108,74,0.18)]",
         styles.shell,
         className,
       )}
     >
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0))]"
+      />
       <div
         aria-hidden="true"
         className={cn(
@@ -129,7 +133,7 @@ export function SiteCalloutCard({
               )}
 
               {title && (
-                <h3 className="text-2xl font-black tracking-tight text-foreground">
+                <h3 className="text-2xl font-black tracking-tight text-foreground md:text-[1.7rem]">
                   {title}
                 </h3>
               )}

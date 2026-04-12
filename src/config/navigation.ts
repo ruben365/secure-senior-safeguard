@@ -27,9 +27,9 @@ export const MAIN_NAV_ROUTES: NavRoute[] = [
     showInNav: true,
   },
   {
-    path: "/ai-workshop",
-    name: "AI Workshop",
-    description: "AI workshop systems, automation, and secure operations",
+    path: "/ai",
+    name: "AI",
+    description: "AI systems, automation, and secure operations",
     showInNav: true,
   },
   {

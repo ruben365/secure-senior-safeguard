@@ -621,8 +621,9 @@ function LearnAndTrain() {
           className="py-8"
         />
 
+        <div className="below-fold-premium">
         {/* ══════════ SECTION 1: WHY FAMILIES TRUST US ══════════ */}
-        <section className="py-16 md:py-24 relative overflow-hidden">
+        <section className="premium-section-shell py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background dot-grid-bg" />
           
           <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
@@ -743,7 +744,7 @@ function LearnAndTrain() {
         <div className="h-1.5 bg-gradient-to-r from-primary via-accent to-primary" />
 
         {/* ══════════ SECTION 2: HOW IT WORKS ══════════ */}
-        <section id="book" className="py-10 sm:py-16 md:py-20 bg-muted/20">
+        <section id="book" className="premium-section-shell py-10 sm:py-16 md:py-20 bg-muted/20">
           <div className="container mx-auto px-6 lg:px-8">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
@@ -790,7 +791,7 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 3: SCAM PREVENTION WORKSHOPS ══════════ */}
-        <section id="training" className="py-16 md:py-24 relative overflow-hidden">
+        <section id="training" className="premium-section-shell py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
           <div className="absolute top-20 right-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-20 left-0 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-3xl pointer-events-none" />
@@ -850,7 +851,7 @@ function LearnAndTrain() {
         <InstructorShowcase />
 
         {/* ══════════ SECTION 4: SIMPLE PROTECTION IN 4 STEPS ══════════ */}
-        <section className="py-10 sm:py-16 md:py-20 bg-muted/20">
+        <section className="premium-section-shell py-10 sm:py-16 md:py-20 bg-muted/20">
           <div className="container mx-auto px-6 lg:px-8">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
@@ -912,7 +913,7 @@ function LearnAndTrain() {
 
         {/* ══════════ SECTION 5: THREAT ANALYSIS ══════════ */}
         <MeshBackground variant="subtle" withOrbs>
-        <section className="py-16 md:py-24 relative overflow-hidden">
+        <section className="premium-section-shell py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
           <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto px-6 lg:px-8 relative z-10">
@@ -979,7 +980,7 @@ function LearnAndTrain() {
         </MeshBackground>
 
         {/* ══════════ SECTION 6: AI PROFESSIONAL TRAINING ══════════ */}
-        <section id="ai-pro-training" className="py-10 sm:py-16 md:py-20 bg-muted/20">
+        <section id="ai-pro-training" className="premium-section-shell py-10 sm:py-16 md:py-20 bg-muted/20">
           <div className="container mx-auto px-6 lg:px-8">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
@@ -1031,7 +1032,7 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 7: SECURE YOUR FAMILY ══════════ */}
-        <section className="py-16 md:py-24 relative overflow-hidden">
+        <section className="premium-section-shell py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background dot-grid-bg" />
           <div className="absolute bottom-20 right-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto px-6 lg:px-8 relative z-10">
@@ -1137,7 +1138,7 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 8: SCAMS WE'VE CAUGHT ══════════ */}
-        <section className="py-10 sm:py-16 md:py-20 bg-muted/20">
+        <section className="premium-section-shell py-10 sm:py-16 md:py-20 bg-muted/20">
           <div className="container mx-auto px-6 lg:px-8">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
@@ -1189,7 +1190,7 @@ function LearnAndTrain() {
 
         {/* Training Success Stories */}
         {trainingTestimonials.length > 0 && (
-          <section className="py-10 sm:py-16 md:py-20 bg-background">
+          <section className="premium-section-shell py-10 sm:py-16 md:py-20 bg-background">
             <div className="container mx-auto px-6 lg:px-8">
               <div className="text-center mb-14">
                 <span className="inline-block text-xs uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
@@ -1236,7 +1237,7 @@ function LearnAndTrain() {
         )}
 
         {/* ══════════ FINAL CTA ══════════ */}
-        <section className="py-16 sm:py-20 md:py-24 relative overflow-hidden">
+        <section className="premium-section-shell py-16 sm:py-20 md:py-24 relative overflow-hidden">
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${seniorCouple})` }}
@@ -1329,6 +1330,7 @@ function LearnAndTrain() {
             }}
           />
         )}
+        </div>
       </div>
     </PageTransition>
   );

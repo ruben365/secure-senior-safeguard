@@ -178,9 +178,10 @@ function About() {
 
       <TrustBar />
 
+      <div className="below-fold-premium">
       {/* Our Story */}
       <MeshBackground variant="subtle" withOrbs>
-      <section className="py-10 md:py-14 bg-transparent relative overflow-hidden">
+      <section className="premium-section-shell py-10 md:py-14 bg-transparent relative overflow-hidden">
 
         <div className="container mx-auto px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-6 lg:gap-10 items-center">
@@ -238,7 +239,7 @@ function About() {
       <SectionDivider variant="wave" color="muted" />
 
       {/* Timeline */}
-      <section className="py-10 md:py-14 bg-muted/30 relative overflow-hidden">
+      <section className="premium-section-shell py-10 md:py-14 bg-muted/30 relative overflow-hidden">
 
         <div className="container mx-auto px-6 lg:px-8">
           <div className="text-center mb-8">
@@ -257,7 +258,7 @@ function About() {
       </section>
 
       {/* Founders */}
-      <section id="founders" className="py-10 md:py-14 bg-background relative overflow-hidden">
+      <section id="founders" className="premium-section-shell py-10 md:py-14 bg-background relative overflow-hidden">
 
         <div className="container mx-auto px-6 lg:px-8">
           <div className="text-center mb-8">
@@ -335,7 +336,7 @@ function About() {
 
       {/* Values */}
       <MeshBackground variant="vibrant" withDots>
-      <section className="py-10 md:py-14">
+      <section className="premium-section-shell py-10 md:py-14">
         <div className="container mx-auto px-6 lg:px-8">
           <div className="text-center mb-8">
             <span className="frosted-pill mb-3">Our Values</span>
@@ -407,7 +408,7 @@ function About() {
       <SectionDivider variant="wave" color="background" flip />
 
       {/* Who We Help */}
-      <section className="py-10 md:py-14 bg-background">
+      <section className="premium-section-shell py-10 md:py-14 bg-background">
         <div className="container mx-auto px-6 lg:px-8">
           <div className="text-center mb-8">
             <span className="inline-block text-[10px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-3 py-1 rounded-full mb-3">
@@ -466,14 +467,14 @@ function About() {
 
 
       {/* CTA with Field Background */}
-      <section className="py-10 md:py-14 relative overflow-hidden bg-muted/30" id="cta">
+      <section className="premium-section-shell py-10 md:py-14 relative overflow-hidden bg-muted/30" id="cta">
 
         <div className="container mx-auto px-6 lg:px-8 relative z-10 text-center">
           <h2 className="text-2xl md:text-4xl font-black text-foreground mb-3">
             Ready to Join Our Protected Community?
           </h2>
           <p className="text-base md:text-lg text-muted-foreground mb-5 max-w-2xl mx-auto">
-            Whether you're looking for personal training, <Link to="/ai-workshop" className="text-primary underline hover:text-primary/80 font-medium">AI Workshop systems</Link>, or
+            Whether you're looking for personal training, <Link to="/ai" className="text-primary underline hover:text-primary/80 font-medium">AI systems</Link>, or
             want to support our mission, we'd love to connect.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
@@ -487,15 +488,16 @@ function About() {
             </Button>
             <Button asChild size="lg" variant="outline">
               <Link
-                to="/ai-workshop"
-                onClick={() => trackButtonClick("Explore AI Workshop", "About CTA")}
+                to="/ai"
+                onClick={() => trackButtonClick("Explore AI", "About CTA")}
               >
-                Explore AI Workshop
+                Explore AI
               </Link>
             </Button>
           </div>
         </div>
       </section>
+      </div>
 
       <Footer />
 

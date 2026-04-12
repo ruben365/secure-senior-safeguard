@@ -54,7 +54,7 @@ const guides = [
       {
         title: "Explore our services",
         description:
-          "Browse ScamShield protection, training programs, and AI Workshop systems.",
+          "Browse ScamShield protection, training programs, and AI systems.",
       },
       {
         title: "Choose your protection level",

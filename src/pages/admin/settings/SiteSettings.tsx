@@ -33,7 +33,7 @@ interface Settings {
 
 const DEFAULTS: Settings = {
   siteName: "InVision Network",
-  tagline: "AI Scam Protection, Training & AI Workshop Systems",
+  tagline: "AI Scam Protection, Training & AI Systems",
   description:
     "Empowering seniors and businesses with cutting-edge technology solutions and cybersecurity protection.",
   phone: "(937) 301-8749",

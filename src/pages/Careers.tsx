@@ -147,8 +147,9 @@ function Careers() {
       <div className="h-6" />
       <TrustBar />
 
+      <div className="below-fold-premium">
       {/* Why InVision */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="premium-section-shell py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
         <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-20 right-0 w-[400px] h-[400px] bg-accent/[0.04] rounded-full blur-3xl pointer-events-none" />
@@ -188,7 +189,7 @@ function Careers() {
       <SectionDivider variant="wave" color="muted" />
 
       {/* Open Positions */}
-      <section id="open-positions" className="py-20 relative overflow-hidden">
+      <section id="open-positions" className="premium-section-shell py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-background to-muted/20" />
         <div className="absolute top-10 right-[20%] w-[350px] h-[350px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
         <div className="container mx-auto px-6 lg:px-8 relative z-10">
@@ -246,7 +247,7 @@ function Careers() {
 
       {/* Benefits Grid */}
       <MeshBackground variant="subtle" withDots>
-      <section className="py-20 relative overflow-hidden">
+      <section className="premium-section-shell py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
         <div className="container mx-auto px-6 lg:px-8 relative z-10">
           <div className="text-center mb-12">
@@ -285,7 +286,7 @@ function Careers() {
 
 
       {/* Application Process */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="premium-section-shell py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-muted/30" />
         <div className="absolute bottom-10 left-[15%] w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
         <div className="container mx-auto px-6 lg:px-8 relative z-10">
@@ -327,7 +328,7 @@ function Careers() {
       </section>
 
       {/* Company Culture */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="premium-section-shell py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
         <div className="container mx-auto px-6 lg:px-8 relative z-10">
           <div className="text-center mb-12">
@@ -398,6 +399,7 @@ function Careers() {
       <section className="py-12 bg-muted/20">
         <AIImageDisclaimer />
       </section>
+      </div>
 
       <Footer />
 
