@@ -297,6 +297,12 @@ serve(async (req) => {
       metadata: paymentMetadata,
     });
 
+    // Update the scan record with the actual payment intent ID
+    await supabase
+      .from("guest_scans")
+      .update({ stripe_session_id: paymentIntent.id })
+      .eq("id", scanId);
+
     return new Response(
       JSON.stringify({
         clientSecret: paymentIntent.client_secret,
