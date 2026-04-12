@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 let stripePromiseCache: Promise<Stripe | null> | null = null;
 let cachedKey: string | null = null;
-let stripeInitPromise: Promise<Promise<Stripe | null>> | null = null;
+let stripeInitPromise: Promise<Stripe | null> | null = null;
 let loadStripeModule:
   | (typeof import("@stripe/stripe-js"))["loadStripe"]
   | null = null;
