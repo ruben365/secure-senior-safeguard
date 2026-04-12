@@ -21,9 +21,9 @@ const Toaster = ({ ...props }: ToasterProps) => {
         classNames: {
           toast:
             "group toast min-h-[72px] backdrop-blur-2xl border rounded-[1.35rem] px-5 py-4 " +
-            "bg-[linear-gradient(155deg,rgba(20,16,14,0.92),rgba(8,11,18,0.88)_55%,rgba(217,108,74,0.18))] " +
-            "text-white border-white/16 " +
-            "shadow-[0_24px_60px_-20px_rgba(0,0,0,0.6),0_8px_24px_-12px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.22)]",
+            "bg-[linear-gradient(155deg,rgba(64,42,30,0.8),rgba(30,22,28,0.74)_55%,rgba(217,108,74,0.12))] " +
+            "text-white border-white/22 " +
+            "shadow-[0_24px_60px_-20px_rgba(0,0,0,0.42),0_8px_24px_-12px_rgba(0,0,0,0.22),inset_0_1px_0_rgba(255,255,255,0.24)]",
           content:
             "group-[.toast]:gap-1",
           title:

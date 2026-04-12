@@ -144,8 +144,8 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 className="w-[32px] h-[32px] object-contain flex-shrink-0 brightness-0 invert"
               />
               <div className="flex flex-col min-w-0 gap-1">
-                <span className="text-[14px] font-extrabold text-white tracking-tight leading-none">InVision Network</span>
-                <span className="text-[9px] font-bold text-white/75 hidden sm:block tracking-widest uppercase leading-none">AI Scam Protection</span>
+                <span className="text-[15px] md:text-[15.5px] font-extrabold text-white tracking-tight leading-none">InVision Network</span>
+                <span className="text-[10px] font-bold text-white/88 hidden sm:block tracking-[0.18em] uppercase leading-none">AI Scam Protection</span>
               </div>
             </a>
 
@@ -157,10 +157,10 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <PrefetchLink
                     key={link.name}
                     to={link.href}
-                    className={`site-nav-link relative text-[13px] px-3 py-1.5 rounded-md transition-colors duration-150 ${
+                    className={`site-nav-link relative text-[14px] px-3 py-1.5 rounded-md transition-colors duration-150 ${
                       isActive
                         ? "site-nav-link--active text-white font-semibold"
-                        : "text-white/92 font-semibold hover:text-orange-300 hover:bg-white/[0.03]"
+                        : "text-white font-semibold hover:text-orange-200 hover:bg-white/[0.03]"
                     }`}
                   >
                     {link.name}
@@ -177,10 +177,10 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   aria-haspopup="menu"
                   aria-expanded={moreOpen ? "true" : "false"}
                   aria-label="More navigation links"
-                  className={`site-nav-trigger flex items-center gap-1 text-[13px] px-3 py-1.5 rounded-md transition-colors duration-150 ${
+                  className={`site-nav-trigger flex items-center gap-1 text-[14px] px-3 py-1.5 rounded-md transition-colors duration-150 ${
                     isSecondaryActive
                       ? "site-nav-trigger--active text-white font-semibold"
-                      : "text-white/92 font-semibold hover:text-orange-300 hover:bg-white/[0.03]"
+                      : "text-white font-semibold hover:text-orange-200 hover:bg-white/[0.03]"
                   }`}
                 >
                   More
@@ -202,10 +202,10 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                           key={link.name}
                           to={link.href}
                           role="menuitem"
-                          className={`block px-4 py-2.5 text-[13.5px] transition-colors ${
+                          className={`block px-4 py-2.5 text-[14px] transition-colors ${
                             isActive
-                              ? "text-orange-400 font-semibold"
-                              : "text-white/90 hover:text-orange-300 hover:bg-white/[0.06]"
+                              ? "text-white font-semibold"
+                              : "text-white/94 hover:text-orange-200 hover:bg-white/[0.06]"
                           }`}
                           onClick={() => setMoreOpen(false)}
                         >
@@ -230,11 +230,11 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
               {/* Phone */}
               <a
                 href={SITE.phone.tel}
-                className="hidden lg:flex flex-none shrink-0 items-center gap-1.5 text-white/80 hover:text-orange-300 transition-colors duration-150 no-underline px-2 py-1.5 rounded-md hover:bg-white/[0.07] whitespace-nowrap"
+                className="hidden lg:flex flex-none shrink-0 items-center gap-1.5 text-white/92 hover:text-orange-200 transition-colors duration-150 no-underline px-2 py-1.5 rounded-md hover:bg-white/[0.07] whitespace-nowrap"
                 aria-label={`Call us at ${SITE.phone.display}`}
               >
                 <Phone className="w-4 h-4 shrink-0" />
-                <span className="hidden xl:inline text-[12px] font-medium whitespace-nowrap [word-break:keep-all]">
+                <span className="hidden xl:inline text-[13px] font-medium whitespace-nowrap [word-break:keep-all]">
                   {/* Non-breaking space between area code and local guarantees single line */}
                   {SITE.phone.display.replace(" ", "\u00A0")}
                 </span>
@@ -244,7 +244,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
               <button
                 type="button"
                 onClick={() => setDonateOpen(true)}
-                className="hidden lg:flex items-center gap-1.5 text-[12px] font-medium px-2.5 py-1.5 rounded-md text-white/80 hover:text-orange-400 hover:bg-orange-500/10 transition-colors"
+                className="hidden lg:flex items-center gap-1.5 text-[13px] font-medium px-2.5 py-1.5 rounded-md text-white/92 hover:text-orange-200 hover:bg-orange-500/10 transition-colors"
                 aria-label="Donate"
               >
                 <Heart className="w-4 h-4" />
@@ -330,12 +330,12 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
             className="lg:hidden fixed top-[56px] right-0 z-[10001] flex h-[calc(100svh-56px)] flex-col overflow-hidden"
             style={{
               width: "min(86vw, 320px)",
-              background: "rgba(20, 16, 14, 0.55)",
-              WebkitBackdropFilter: "blur(28px) saturate(1.6)",
-              backdropFilter: "blur(28px) saturate(1.6)",
-              borderLeft: "1px solid rgba(255,255,255,0.18)",
+              background: "linear-gradient(180deg, rgba(64, 42, 30, 0.54) 0%, rgba(33, 24, 28, 0.48) 100%)",
+              WebkitBackdropFilter: "blur(24px) saturate(1.45)",
+              backdropFilter: "blur(24px) saturate(1.45)",
+              borderLeft: "1px solid rgba(255,255,255,0.22)",
               borderBottomLeftRadius: "20px",
-              boxShadow: "0 20px 50px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.12)",
+              boxShadow: "0 20px 50px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.16)",
               animation: "menuSlideIn 250ms ease-out",
             }}
           >

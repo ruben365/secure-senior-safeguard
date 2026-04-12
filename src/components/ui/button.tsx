@@ -5,17 +5,16 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "button-link inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg font-bold ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 select-none relative overflow-hidden tracking-wide transition-all duration-150 ease-out",
+  "button-link inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[1rem] font-semibold ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 select-none relative overflow-hidden tracking-[0.015em] transition-[transform,box-shadow,background-color,border-color,color,filter] duration-200 ease-out",
   {
     variants: {
       variant: {
         default: [
-          // Primary — high contrast orange gradient with drop shadow
-          "bg-gradient-to-b from-[#c2410c] to-[#9a3412] text-white",
-          "border border-[#7c2d12]",
-          "shadow-[0_2px_8px_rgba(194,65,12,0.25),0_1px_0_rgba(255,255,255,0.15)_inset]",
-          "hover:-translate-y-[1px] hover:from-[#ea580c] hover:to-[#c2410c] hover:shadow-[0_4px_12px_rgba(194,65,12,0.35),0_1px_0_rgba(255,255,255,0.2)_inset]",
-          "active:translate-y-[0.5px] active:shadow-[0_1px_4px_rgba(194,65,12,0.2)]",
+          "bg-[linear-gradient(135deg,#d96c4a_0%,#c2410c_52%,#8f3415_100%)] text-white",
+          "border border-[#8a3a1f]",
+          "shadow-[0_1px_0_rgba(255,255,255,0.22)_inset,0_16px_32px_-18px_rgba(194,65,12,0.52),0_10px_20px_-18px_rgba(15,23,42,0.34)]",
+          "hover:-translate-y-[1px] hover:brightness-[1.04] hover:shadow-[0_1px_0_rgba(255,255,255,0.24)_inset,0_20px_38px_-18px_rgba(194,65,12,0.56),0_14px_24px_-18px_rgba(15,23,42,0.34)]",
+          "active:translate-y-[0.5px] active:shadow-[0_1px_0_rgba(255,255,255,0.18)_inset,0_10px_20px_-18px_rgba(194,65,12,0.38)]",
         ].join(" "),
         gold: [
           "bg-gradient-to-b from-accent to-[hsl(308_23%_51%)] text-white",
@@ -25,11 +24,10 @@ const buttonVariants = cva(
           "active:translate-y-[1px]",
         ].join(" "),
         outline: [
-          // Strong outline — thicker border, visible hover
-          "bg-white text-slate-900",
-          "border-2 border-slate-400",
-          "shadow-[0_1px_3px_rgba(0,0,0,0.08)]",
-          "hover:translate-y-[-1px] hover:border-primary hover:text-primary hover:bg-orange-50/50 hover:shadow-[0_4px_10px_rgba(194,65,12,0.15)]",
+          "bg-white/92 text-slate-900",
+          "border border-white/85",
+          "shadow-[0_1px_0_rgba(255,255,255,0.92)_inset,0_14px_28px_-22px_rgba(15,23,42,0.18)]",
+          "hover:-translate-y-[1px] hover:border-primary/30 hover:text-primary hover:bg-white hover:shadow-[0_1px_0_rgba(255,255,255,0.94)_inset,0_20px_38px_-22px_rgba(217,108,74,0.2)]",
           "active:translate-y-[1px]",
         ].join(" "),
         outlineGold: [
@@ -40,29 +38,26 @@ const buttonVariants = cva(
           "active:translate-y-[1px]",
         ].join(" "),
         outlineLight: [
-          "bg-primary/10 text-primary",
-          "border-2 border-primary/40",
-          "shadow-[0_1px_3px_rgba(194,65,12,0.08)]",
-          "hover:translate-y-[-1px] hover:border-primary hover:bg-primary/15 hover:shadow-[0_4px_10px_rgba(194,65,12,0.15)]",
+          "bg-primary/[0.09] text-primary",
+          "border border-primary/24",
+          "shadow-[0_1px_0_rgba(255,255,255,0.8)_inset,0_14px_26px_-24px_rgba(217,108,74,0.24)]",
+          "hover:-translate-y-[1px] hover:border-primary/36 hover:bg-primary/[0.13] hover:shadow-[0_1px_0_rgba(255,255,255,0.9)_inset,0_18px_32px_-22px_rgba(217,108,74,0.28)]",
           "active:translate-y-[1px]",
         ].join(" "),
         heroOutline: [
-          // Hero secondary — visible glass with clear white border
-          "bg-white/[0.15] backdrop-blur-sm text-white hover:text-white font-semibold",
-          "border border-white/[0.40]",
-          "shadow-[0_2px_8px_rgba(0,0,0,0.15)]",
-          "hover:-translate-y-[1px] hover:bg-white/[0.22] hover:border-white/[0.60] hover:shadow-[0_4px_12px_rgba(0,0,0,0.2)]",
+          "bg-[linear-gradient(180deg,rgba(255,255,255,0.18),rgba(255,255,255,0.1))] backdrop-blur-md text-white hover:text-white",
+          "border border-white/[0.34]",
+          "shadow-[0_1px_0_rgba(255,255,255,0.24)_inset,0_14px_28px_-22px_rgba(0,0,0,0.34)]",
+          "hover:-translate-y-[1px] hover:bg-[linear-gradient(180deg,rgba(255,255,255,0.24),rgba(255,255,255,0.14))] hover:border-white/[0.52] hover:shadow-[0_1px_0_rgba(255,255,255,0.28)_inset,0_20px_34px_-22px_rgba(0,0,0,0.4)]",
           "active:translate-y-[0.5px] active:scale-[0.98]",
           "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[rgba(249,115,22,0.7)]",
           "[transition-duration:250ms] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)]",
         ].join(" "),
         heroPrimary: [
-          // Hero primary — matches hero-home__cta exactly (135deg diagonal gradient)
-          "bg-[linear-gradient(135deg,#c2410c,#9a3412)]",
-          "text-white font-semibold",
-          "border border-[#7c2d12]",
-          "shadow-[0_2px_10px_rgba(194,65,12,0.35),0_1px_0_rgba(255,255,255,0.2)_inset]",
-          "hover:-translate-y-[1px] hover:bg-[linear-gradient(135deg,#ea580c,#c2410c)] hover:shadow-[0_4px_14px_rgba(234,88,12,0.45),0_1px_0_rgba(255,255,255,0.25)_inset]",
+          "bg-[linear-gradient(135deg,#d96c4a_0%,#c2410c_50%,#8f3415_100%)] text-white",
+          "border border-[#8a3a1f]",
+          "shadow-[0_1px_0_rgba(255,255,255,0.22)_inset,0_18px_34px_-18px_rgba(194,65,12,0.56),0_10px_20px_-18px_rgba(15,23,42,0.34)]",
+          "hover:-translate-y-[1px] hover:brightness-[1.05] hover:shadow-[0_1px_0_rgba(255,255,255,0.26)_inset,0_24px_40px_-18px_rgba(234,88,12,0.56),0_14px_24px_-18px_rgba(15,23,42,0.36)]",
           "active:translate-y-[0.5px] active:scale-[0.98]",
           "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[rgba(249,115,22,0.7)]",
           "[transition-duration:250ms] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)]",
@@ -85,12 +80,12 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline font-semibold",
       },
       size: {
-        default: "h-[42px] px-[18px] py-2 text-[12.5px] sm:h-[38px] sm:px-4 sm:py-1.5 sm:text-[13px]",
-        sm: "h-[38px] rounded-md px-[16px] text-[12px] sm:h-[34px] sm:px-3",
-        lg: "h-[42px] rounded-lg px-5 text-[13px] sm:h-[42px] sm:text-[14px]",
-        xl: "h-[44px] rounded-lg px-6 text-[14px] sm:h-[46px] sm:text-[15px]",
-        icon: "h-[44px] w-[44px] sm:h-[38px] sm:w-[38px]",
-        heroPill: "h-[42px] rounded-full px-5 text-[12.5px] tracking-[0.015em] gap-1.5 sm:h-[40px] sm:px-6 sm:text-[13px] sm:tracking-[0.02em] sm:gap-2",
+        default: "h-11 px-5 py-2 text-[13px]",
+        sm: "h-10 rounded-[0.95rem] px-4 text-[12.5px]",
+        lg: "h-12 rounded-[1rem] px-6 text-[13.5px]",
+        xl: "h-[54px] rounded-[1.1rem] px-7 text-[14.5px]",
+        icon: "h-11 w-11",
+        heroPill: "h-12 rounded-full px-6 text-[13px] tracking-[0.02em] gap-2 sm:h-[50px] sm:px-7 sm:text-[13.5px]",
       },
     },
     defaultVariants: {
