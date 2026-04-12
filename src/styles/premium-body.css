@@ -3,83 +3,6 @@
    Does NOT affect hero sections or footer.
    ═══════════════════════════════════════════════════════════════════════ */
 
-/* ── Unified below-fold shell for public pages ── */
-.below-fold-premium {
-  position: relative;
-  isolation: isolate;
-  background:
-    radial-gradient(84rem 46rem at 6% 8%, rgba(217, 108, 74, 0.14) 0%, transparent 58%),
-    radial-gradient(76rem 42rem at 94% 16%, rgba(251, 171, 142, 0.13) 0%, transparent 60%),
-    radial-gradient(66rem 38rem at 24% 100%, rgba(249, 115, 22, 0.1) 0%, transparent 62%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 249, 244, 0.98) 44%, rgba(247, 249, 252, 0.98) 100%);
-}
-
-.below-fold-premium::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.48) 0%, rgba(255, 255, 255, 0) 22%),
-    radial-gradient(circle at 1px 1px, rgba(15, 23, 42, 0.08) 0.7px, transparent 0.9px);
-  background-size: auto, 24px 24px;
-  opacity: 0.16;
-  mask-image: linear-gradient(180deg, transparent 0%, black 8%, black 92%, transparent 100%);
-}
-
-.below-fold-premium > *,
-.below-fold-premium > .mesh-gradient,
-.below-fold-premium > .mesh-gradient-animated,
-.below-fold-premium > .floating-orbs,
-.below-fold-premium > .dot-grid-bg,
-.below-fold-premium > .home-color-wash,
-.below-fold-premium > .hss-root {
-  position: relative;
-  z-index: 1;
-}
-
-/* ── Premium section shell — crisp glass panel for below-fold sections ── */
-.premium-section-shell {
-  position: relative;
-  isolation: isolate;
-  --premium-shell-inset: clamp(0.8rem, 1.75vw, 1.4rem);
-}
-
-.premium-section-shell::before {
-  content: "";
-  position: absolute;
-  inset: var(--premium-shell-inset);
-  border-radius: clamp(1.4rem, 2vw, 2.05rem);
-  background: var(--surface-shell);
-  border: 1px solid rgba(255, 255, 255, 0.76);
-  box-shadow: var(--surface-shadow);
-  backdrop-filter: blur(16px) saturate(150%);
-  -webkit-backdrop-filter: blur(16px) saturate(150%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.premium-section-shell::after {
-  content: "";
-  position: absolute;
-  left: clamp(1rem, 2.25vw, 1.65rem);
-  right: clamp(1rem, 2.25vw, 1.65rem);
-  top: var(--premium-shell-inset);
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.96) 18%, rgba(255, 255, 255, 0.24) 82%, transparent 100%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.premium-section-shell > .container,
-.premium-section-shell > .center-container-wide,
-.premium-section-shell > .mx-auto,
-.premium-section-shell > .relative.z-10 {
-  position: relative;
-  z-index: 2;
-}
-
 /* ── Section headings — subtle gradient text on hover ── */
 .container h2,
 .center-container-wide h2 {
@@ -94,7 +17,6 @@
 }
 
 .container .bg-card:hover,
-.container .ui-premium-panel:hover,
 .container [class*="glass-card"]:hover {
   transform: translateY(-4px);
   box-shadow:
@@ -269,7 +191,7 @@ main a:not([class]):hover {
 /* ── Tooltip-like elements — consistent glass style ── */
 [role="tooltip"],
 [data-radix-popper-content-wrapper] {
-  border-radius: 8px;
+  border-radius: 8px !important;
 }
 
 /* ── Input fields — premium focus state ── */
@@ -281,35 +203,31 @@ main select:focus {
 }
 
 /* ── Responsive dialog/menu sizing ── */
-@media (max-width: 639px) {
+@media (max-width: 640px) {
+  [role="dialog"] {
+    width: 94% !important;
+    max-width: 100% !important;
+    max-height: 85vh !important;
+    padding: 1.25rem !important;
+    border-radius: 1rem !important;
+    overflow-y: auto !important;
+  }
+
   [data-radix-popper-content-wrapper] {
-    max-width: calc(100vw - 1rem);
-  }
-
-  .premium-section-shell::before {
-    inset: 0.55rem;
-    border-radius: 1.35rem;
-    backdrop-filter: blur(12px) saturate(140%);
-    -webkit-backdrop-filter: blur(12px) saturate(140%);
-  }
-
-  .premium-section-shell::after {
-    left: 0.9rem;
-    right: 0.9rem;
-    top: 0.55rem;
+    max-width: calc(100vw - 1rem) !important;
   }
 }
 
-@media (min-width: 640px) and (max-width: 1024px) {
+@media (min-width: 641px) and (max-width: 1024px) {
   [role="dialog"] {
-    max-width: min(430px, calc(100vw - 2rem));
+    max-width: min(430px, calc(100vw - 2rem)) !important;
   }
 }
 
 /* ── Z-index system — prevent stacking conflicts ── */
 .fixed { z-index: 40; }
-nav { z-index: 50; }
-[role="dialog"] { z-index: 60; }
+nav { z-index: 50 !important; }
+[role="dialog"] { z-index: 60 !important; }
 
 /* ── Cookie consent banner ── */
 .cookie-banner {
@@ -318,9 +236,12 @@ nav { z-index: 50; }
 }
 
 .cookie-banner__card {
-  background: hsl(var(--background));
-  border: 1px solid hsl(var(--border) / 0.7);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  background: rgba(12, 12, 16, 0.6);
+  -webkit-backdrop-filter: blur(24px) saturate(130%);
+  backdrop-filter: blur(24px) saturate(130%);
+  border: 1px solid rgba(48, 103, 232, 0.25);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+  animation: cookieBorderGlow 4s ease-in-out infinite;
 }
 
 @keyframes cookieSlideUp {
@@ -364,52 +285,25 @@ nav { z-index: 50; }
   }
 }
 
-@media (max-width: 767px) {
-  .below-fold-premium {
-    background:
-      radial-gradient(42rem 20rem at 0% 6%, rgba(217, 108, 74, 0.12) 0%, transparent 56%),
-      radial-gradient(38rem 18rem at 100% 14%, rgba(251, 171, 142, 0.1) 0%, transparent 58%),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 249, 244, 0.98) 42%, rgba(247, 249, 252, 0.98) 100%);
-  }
-
-  .premium-section-shell {
-    --premium-shell-inset: 0.55rem;
-  }
-
-  .premium-section-shell::before {
-    border-radius: 1.3rem;
-    box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.94) inset,
-      0 -1px 0 rgba(255, 255, 255, 0.16) inset,
-      0 18px 44px -34px rgba(15, 23, 42, 0.22),
-      0 8px 18px -16px rgba(217, 108, 74, 0.14);
-  }
-
-  .premium-section-shell::after {
-    left: 1rem;
-    right: 1rem;
-  }
-}
-
 /* ── Dark dialog surface — input/label overrides ── */
 [role="dialog"] input,
 [role="dialog"] textarea,
 [role="dialog"] select {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.12);
-  color: white;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: white !important;
 }
 
 [role="dialog"] input::placeholder,
 [role="dialog"] textarea::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.4) !important;
 }
 
 [role="dialog"] input:focus,
 [role="dialog"] textarea:focus,
 [role="dialog"] select:focus {
-  border-color: rgba(184, 115, 51, 0.5);
-  box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.1);
+  border-color: rgba(184, 115, 51, 0.5) !important;
+  box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.1) !important;
 }
 
 [role="dialog"] label {

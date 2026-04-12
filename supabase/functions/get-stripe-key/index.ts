@@ -12,14 +12,12 @@ serve(async (req) => {
   }
 
   try {
-    // Accept both the frontend-style VITE_ key and a plain server secret.
-    const publishableKey =
-      Deno.env.get("VITE_STRIPE_PUBLISHABLE_KEY") ||
-      Deno.env.get("STRIPE_PUBLISHABLE_KEY");
+    // Get the publishable key from secrets
+    const publishableKey = Deno.env.get("VITE_STRIPE_PUBLISHABLE_KEY");
 
     if (!publishableKey) {
       console.error(
-        "[GET-STRIPE-KEY] No Stripe publishable key found in edge function secrets",
+        "[GET-STRIPE-KEY] VITE_STRIPE_PUBLISHABLE_KEY not found in secrets",
       );
       return new Response(
         JSON.stringify({

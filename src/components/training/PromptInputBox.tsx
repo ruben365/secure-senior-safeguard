@@ -14,8 +14,6 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { validateGuestScanFile } from "@/lib/guestScannerUtils";
-import { toast } from "sonner";
 import "./PromptInputBox.css";
 
 /* ─── Textarea ───────────────────────────────────────────────────── */
@@ -475,30 +473,20 @@ export const PromptInputBox = React.forwardRef(
 
     const handleCanvasToggle = () => setShowCanvas((prev) => !prev);
 
-    const isPreviewableImage = (file: File) => file.type.startsWith("image/");
+    const isImageFile = (file: File) => file.type.startsWith("image/");
 
     const processFile = React.useCallback(
       (file: File) => {
-        const validation = validateGuestScanFile(file);
-        if (!validation.valid) {
-          toast.error(validation.error);
-          return;
-        }
-
+        if (!isImageFile(file)) return;
+        if (file.size > 10 * 1024 * 1024) return;
         setFiles([file]);
-
-        if (isPreviewableImage(file) && file.size <= 10 * 1024 * 1024) {
-          const reader = new FileReader();
-          reader.onload = (e) =>
-            setFilePreviews({ [file.name]: e.target?.result as string });
-          reader.readAsDataURL(file);
-        } else {
-          setFilePreviews({});
-        }
-
+        const reader = new FileReader();
+        reader.onload = (e) =>
+          setFilePreviews({ [file.name]: e.target?.result as string });
+        reader.readAsDataURL(file);
         onFileSelect?.(file);
       },
-      [isPreviewableImage, onFileSelect],
+      [onFileSelect],
     );
 
     const handleDragOver = React.useCallback((e: React.DragEvent) => {
@@ -516,7 +504,8 @@ export const PromptInputBox = React.forwardRef(
         e.preventDefault();
         e.stopPropagation();
         const dropped = Array.from(e.dataTransfer.files);
-        if (dropped.length > 0) processFile(dropped[0]);
+        const imageFiles = dropped.filter((f) => isImageFile(f));
+        if (imageFiles.length > 0) processFile(imageFiles[0]);
       },
       [processFile],
     );
@@ -599,7 +588,7 @@ export const PromptInputBox = React.forwardRef(
             <div className="flex flex-wrap gap-2 p-0 pb-1 transition-all duration-300">
               {files.map((file, index) => (
                 <div key={index} className="relative group">
-                  {file.type.startsWith("image/") && filePreviews[file.name] ? (
+                  {file.type.startsWith("image/") && filePreviews[file.name] && (
                     <div
                       className="w-16 h-16 rounded-xl overflow-hidden cursor-pointer transition-all duration-300"
                       onClick={() => openImageModal(filePreviews[file.name])}
@@ -619,21 +608,6 @@ export const PromptInputBox = React.forwardRef(
                         className="absolute top-1 right-1 rounded-full bg-black/70 p-0.5 opacity-100 transition-opacity"
                       >
                         <X className="h-3 w-3 text-white" />
-                      </button>
-                    </div>
-                  ) : (
-                    <div className="relative flex min-h-16 min-w-[180px] max-w-[240px] items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-left">
-                      <Paperclip className="h-4 w-4 flex-shrink-0 text-white/75" />
-                      <span className="line-clamp-2 text-xs font-medium text-white/85">
-                        {file.name}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveFile(index)}
-                        aria-label="Remove file"
-                        className="absolute right-1.5 top-1.5 rounded-full bg-black/40 p-0.5 text-white/80 transition hover:bg-black/70"
-                      >
-                        <X className="h-3 w-3" />
                       </button>
                     </div>
                   )}
@@ -683,20 +657,20 @@ export const PromptInputBox = React.forwardRef(
                 ref={uploadInputRef}
                 type="file"
                 className="hidden"
-                aria-label="Upload supported file"
+                aria-label="Upload image file"
                 onChange={(e) => {
                   if (e.target.files && e.target.files.length > 0)
                     processFile(e.target.files[0]);
                   if (e.target) e.target.value = "";
                 }}
-                accept=".pdf,image/jpeg,image/png,video/mp4,audio/mpeg,audio/mp3,audio/wav,audio/x-wav"
+                accept="image/*"
               />
 
-              <PromptInputAction tooltip="Upload file">
+              <PromptInputAction tooltip="Upload image">
                 <button
                   type="button"
                   onClick={() => uploadInputRef.current?.click()}
-                  aria-label="Upload file"
+                  aria-label="Upload image"
                   className="pib-ghost-button flex h-8 w-8 cursor-pointer items-center justify-center rounded-full"
                   disabled={isRecording}
                 >

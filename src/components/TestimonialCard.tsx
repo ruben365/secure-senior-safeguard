@@ -22,16 +22,14 @@ const TestimonialCard = ({
   onVideoClick,
 }: TestimonialCardProps) => {
   return (
-    <div className="ui-premium-panel ui-premium-panel--soft group relative isolate overflow-hidden rounded-[28px] p-5 sm:p-6 md:p-7">
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.14),rgba(255,255,255,0))]" />
-      <div className="absolute -right-10 -top-12 h-32 w-32 rounded-full bg-primary/10 blur-3xl" />
+    <div className="glass-card rounded-2xl card-padding-lg border border-white/30 relative overflow-hidden group transition-all duration-300 hover:scale-[1.02]">
       {/* Large gradient quote mark background */}
       <div className="absolute -top-4 left-6 text-[120px] font-bold gradient-text-primary opacity-10 leading-none pointer-events-none select-none group-hover:opacity-20 transition-opacity duration-500">
         "
       </div>
 
       <div className="relative z-10">
-        <div className="mb-4 flex gap-1">
+        <div className="flex gap-1 mb-4">
           {[...Array(rating)].map((_, i) => (
             <div
               key={i}
@@ -46,11 +44,11 @@ const TestimonialCard = ({
           ))}
         </div>
 
-        <p className="mb-6 text-[1.02rem] leading-relaxed text-foreground md:text-[1.085rem]">
+        <p className="text-foreground mb-6 text-lg leading-relaxed">
           "{quote}"
         </p>
 
-        <div className="flex items-center gap-4 border-t border-border/50 pt-4">
+        <div className="flex items-center gap-4 pt-4 border-t border-border/50">
           <div className="relative">
             <img
               src={image}

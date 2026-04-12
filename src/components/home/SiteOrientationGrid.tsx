@@ -29,9 +29,9 @@ const pages = [
   {
     icon: Building2,
     title: "AI",
-    description: "AI systems, automation, and security guidance for modern organizations.",
-    link: "/ai",
-    cta: "View AI",
+    description: "Security audits, AI automation, and employee training for organizations.",
+    link: "/business",
+    cta: "Get a Quote",
     image: serviceAiBusiness,
     gradient: "from-accent/20 to-primary/10",
   },

@@ -4,16 +4,7 @@
 
 ## About
 
-InVision Network is a cybersecurity company based in Kettering, Ohio (Greater Dayton Area) that specializes in protecting families, seniors, and small businesses from AI-powered scams, deepfakes, phishing attacks, and voice-cloning fraud. We serve all of Southwest Ohio within a 50-mile radius of Kettering. Founded in 2024, we have protected over 100 families and small businesses.
-
-## Key Topics We Cover
-
-- **AI Scam Protection**: Real-time detection of AI-generated phishing, smishing, and social engineering attacks
-- **Deepfake Detection**: Identifying manipulated video, images, and voice recordings used in scams
-- **Voice Clone Defense**: Protecting against voice-cloning fraud targeting seniors and family emergency scams
-- **Senior Cybersecurity**: Age-appropriate training for older adults on safe internet use
-- **Family Digital Safety**: Protection plans for multi-generation households
-- **Business AI Automation**: AI receptionists, lead follow-up, and website design for Ohio small businesses
+InVision Network is a cybersecurity company based in Kettering, Ohio (Greater Dayton Area). Founded by Ruben Nk and Corine Mk, we specialize in protecting families and businesses from AI-powered scams, deepfakes, and phishing attacks.
 
 ## Services
 

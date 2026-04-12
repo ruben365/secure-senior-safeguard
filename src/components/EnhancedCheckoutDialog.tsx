@@ -38,11 +38,8 @@ import { QuickVeteranToggle } from "@/components/payment/QuickVeteranToggle";
 import { TrustIndicators } from "@/components/payment/TrustIndicators";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCartFeedback } from "@/contexts/CartFeedbackContext";
-import useStripeElementLifecycle from "@/hooks/useStripeElementLifecycle";
 import { useStripeKey } from "@/hooks/useStripeKey";
 import { useConfetti } from "@/hooks/useConfetti";
-import useHostedCheckoutFallback from "@/hooks/useHostedCheckoutFallback";
-import { PaymentElementPanel } from "@/components/payment/PaymentElementPanel";
 
 interface EnhancedCheckoutDialogProps {
   open: boolean;
@@ -53,23 +50,14 @@ interface EnhancedCheckoutDialogProps {
 function QRCodePayment({
   total,
   onSuccess,
-  customerName,
-  customerEmail,
-  onDetailsChange,
 }: {
   total: number;
   onSuccess: () => void;
-  customerName: string;
-  customerEmail: string;
-  onDetailsChange: (data: { name: string; email: string }) => void;
 }) {
   const [loading, setLoading] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState<string | null>(null);
   const [timeLeft, setTimeLeft] = useState(240);
-  const [sessionId, setSessionId] = useState<string | null>(null);
-  const { items, clearCart } = useCart();
-  const { triggerThankYou } = useCartFeedback();
-  const { fireCelebration } = useConfetti();
+  const { items } = useCart();
 
   useEffect(() => {
     if (qrCodeUrl && timeLeft > 0) {
@@ -77,56 +65,18 @@ function QRCodePayment({
       return () => clearTimeout(timer);
     } else if (timeLeft === 0) {
       setQrCodeUrl(null);
-      setSessionId(null);
     }
   }, [qrCodeUrl, timeLeft]);
-
-  useEffect(() => {
-    if (!sessionId || !qrCodeUrl) return;
-
-    const poll = setInterval(async () => {
-      try {
-        const { data } = await supabase.functions.invoke(
-          "verify-payment-link",
-          { body: { sessionId } },
-        );
-
-        if (data?.paid) {
-          clearInterval(poll);
-          try {
-            await supabase.functions.invoke("verify-payment", {
-              body: { session_id: data.sessionId ?? sessionId },
-            });
-          } catch (verifyError) {
-            console.error("Hosted cart verification failed:", verifyError);
-          }
-
-          fireCelebration();
-          toast.success("Payment successful!");
-          clearCart("purchase");
-          triggerThankYou();
-          onSuccess();
-        }
-      } catch (error) {
-        console.error("Hosted cart polling failed:", error);
-      }
-    }, 4000);
-
-    return () => clearInterval(poll);
-  }, [clearCart, fireCelebration, onSuccess, qrCodeUrl, sessionId, triggerThankYou]);
 
   const generateQRCode = async () => {
     setLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke(
-        "create-cart-payment-intent",
+        "generate-payment-link",
         {
           body: {
-            customerEmail,
-            customerName,
-            checkoutMode: true,
+            amount: Math.round(total * 100),
             items: items.map((item) => ({
-              id: item.id,
               name: item.name,
               quantity: item.quantity,
               price: item.price,
@@ -137,10 +87,9 @@ function QRCodePayment({
 
       if (error) throw error;
 
-      if (data?.url && data?.sessionId) {
+      if (data?.url) {
         const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(data.url)}`;
         setQrCodeUrl(qrUrl);
-        setSessionId(data.sessionId);
         setTimeLeft(240);
       }
     } catch (error: any) {
@@ -158,31 +107,6 @@ function QRCodePayment({
 
   return (
     <div className="text-center space-y-5 py-4">
-      {!customerName || !customerEmail ? (
-        <div className="space-y-3 rounded-2xl border border-border/70 bg-muted/35 p-4 text-left">
-          <p className="text-sm font-medium text-foreground">
-            Add your contact details before opening mobile checkout.
-          </p>
-          <Input
-            placeholder="Your Name *"
-            value={customerName}
-            onChange={(e) =>
-              onDetailsChange({ name: e.target.value, email: customerEmail })
-            }
-            className="h-9"
-          />
-          <Input
-            type="email"
-            placeholder="Email *"
-            value={customerEmail}
-            onChange={(e) =>
-              onDetailsChange({ name: customerName, email: e.target.value })
-            }
-            className="h-9"
-          />
-        </div>
-      ) : null}
-
       {!qrCodeUrl ? (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -199,9 +123,9 @@ function QRCodePayment({
           </div>
           <Button
             onClick={generateQRCode}
-            disabled={loading || !customerName || !customerEmail}
-            size="sm"
-            className="w-full h-9 text-sm"
+            disabled={loading}
+            size="lg"
+            className="w-full"
           >
             {loading ? (
               <Loader2 className="mr-2 h-5 w-5 animate-spin" />
@@ -234,9 +158,9 @@ function QRCodePayment({
               Expires in {formatTime(timeLeft)}
             </Badge>
           </div>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-white/70">
             Scan to pay{" "}
-            <strong className="text-foreground font-bold">${total.toFixed(2)}</strong>
+            <strong className="text-white font-bold">${total.toFixed(2)}</strong>
           </p>
           <Button variant="outline" onClick={generateQRCode} size="sm">
             Generate New Code
@@ -254,11 +178,6 @@ function CardPaymentForm({
   isVeteran,
   customerEmail,
   items,
-  onOpenHostedCheckout,
-  hostedCheckoutLoading,
-  hostedCheckoutError,
-  hostedCheckoutUrl,
-  hostedCheckoutActive,
 }: {
   onSuccess: () => void;
   clientSecret: string;
@@ -271,11 +190,6 @@ function CardPaymentForm({
     quantity: number;
     isDigital?: boolean;
   }>;
-  onOpenHostedCheckout: () => Promise<void> | void;
-  hostedCheckoutLoading: boolean;
-  hostedCheckoutError: string | null;
-  hostedCheckoutUrl: string | null;
-  hostedCheckoutActive: boolean;
 }) {
   const stripe = useStripe();
   const elements = useElements();
@@ -283,12 +197,18 @@ function CardPaymentForm({
   const { triggerThankYou } = useCartFeedback();
   const { fireCelebration } = useConfetti();
   const [loading, setLoading] = useState(false);
-  const { isReady, timedOut, mountKey, handleReady, retry } =
-    useStripeElementLifecycle({
-      enabled: true,
-      resetKeys: [clientSecret],
-      timeoutMs: 15000,
-    });
+  const [elementReady, setElementReady] = useState(false);
+  const [loadingTimeout, setLoadingTimeout] = useState(false);
+
+  // Timeout for PaymentElement loading
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!elementReady) {
+        setLoadingTimeout(true);
+      }
+    }, 15000);
+    return () => clearTimeout(timer);
+  }, [elementReady]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -367,34 +287,49 @@ function CardPaymentForm({
     }
   };
 
+  if (loadingTimeout) {
+    return (
+      <div className="text-center p-6 space-y-4">
+        <div className="text-destructive">
+          <Lock className="w-10 h-10 mx-auto mb-2 opacity-50" />
+          <p className="font-medium">Payment form failed to load</p>
+          <p className="text-sm text-muted-foreground mt-1">
+            Please refresh the page or try again later.
+          </p>
+        </div>
+        <Button variant="outline" onClick={() => window.location.reload()}>
+          <RefreshCw className="w-4 h-4 mr-2" />
+          Refresh Page
+        </Button>
+      </div>
+    );
+  }
+
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      <PaymentElementPanel
-        isReady={isReady}
-        timedOut={timedOut}
-        onRetry={retry}
-        onOpenHostedCheckout={onOpenHostedCheckout}
-        hostedCheckoutLoading={hostedCheckoutLoading}
-        hostedCheckoutError={hostedCheckoutError}
-        hostedCheckoutUrl={hostedCheckoutUrl}
-        hostedCheckoutActive={hostedCheckoutActive}
-        loadingLabel="Preparing secure checkout..."
-        timeoutDescription="Retry the embedded card form or open the secure hosted checkout page if this device prefers mobile payment."
-      >
-        <PaymentElement
-          key={mountKey}
-          onReady={handleReady}
-          options={{
-            layout: "tabs",
-          }}
-        />
-      </PaymentElementPanel>
+      <div className="border border-white/10 rounded-xl p-3 bg-white/[0.04] min-h-[180px]">
+        {!elementReady && (
+          <div className="flex items-center justify-center py-8">
+            <Loader2 className="w-6 h-6 animate-spin text-primary" />
+            <span className="ml-2 text-sm text-muted-foreground">
+              Loading payment form...
+            </span>
+          </div>
+        )}
+        <div className={elementReady ? "block" : "hidden"}>
+          <PaymentElement
+            onReady={() => setElementReady(true)}
+            options={{
+              layout: "tabs",
+            }}
+          />
+        </div>
+      </div>
 
       <Button
         type="submit"
-        disabled={!stripe || loading || !isReady}
-        className="w-full h-9 text-sm font-semibold bg-gradient-to-b from-orange-600 to-orange-700 text-white rounded-lg"
-        size="sm"
+        disabled={!stripe || loading || !elementReady}
+        className="w-full h-10 text-[14px] font-semibold bg-gradient-to-b from-orange-600 to-orange-700 text-white rounded-lg"
       >
         {loading ? (
           <>
@@ -426,9 +361,7 @@ function CardPaymentWrapper({
   formData: { name: string; email: string };
   setFormData: (data: { name: string; email: string }) => void;
 }) {
-  const { items, clearCart } = useCart();
-  const { triggerThankYou } = useCartFeedback();
-  const { fireCelebration } = useConfetti();
+  const { items } = useCart();
   const {
     stripePromise,
     loading: stripeLoading,
@@ -438,34 +371,6 @@ function CardPaymentWrapper({
   const [step, setStep] = useState<"contact" | "payment">("contact");
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const {
-    hostedCheckoutActive,
-    hostedCheckoutError,
-    hostedCheckoutLoading,
-    hostedCheckoutUrl,
-    openHostedCheckout,
-    resetHostedCheckout,
-  } = useHostedCheckoutFallback({
-    onPaid: async ({ sessionId }) => {
-      if (!sessionId) {
-        throw new Error("Hosted checkout finished without a session reference.");
-      }
-
-      try {
-        await supabase.functions.invoke("verify-payment", {
-          body: { session_id: sessionId },
-        });
-      } catch (verifyError) {
-        console.error("Hosted cart verification failed:", verifyError);
-      }
-
-      fireCelebration();
-      toast.success("Payment successful!");
-      clearCart("purchase");
-      triggerThankYou();
-      onSuccess();
-    },
-  });
 
   // Initialize Stripe when component mounts (dialog opens)
   useEffect(() => {
@@ -479,12 +384,6 @@ function CardPaymentWrapper({
     if (savedEmail) setFormData({ ...formData, email: savedEmail });
     if (savedName) setFormData({ ...formData, name: savedName });
   }, []);
-
-  useEffect(() => {
-    if (step !== "payment") {
-      resetHostedCheckout();
-    }
-  }, [resetHostedCheckout, step]);
 
   const handleContinue = async () => {
     if (!formData.name || !formData.email) {
@@ -558,11 +457,11 @@ function CardPaymentWrapper({
             <div className="w-5 h-5 rounded-full bg-orange-600 text-white text-[11px] flex items-center justify-center font-bold">
               1
             </div>
-            <h3 className="text-[14px] font-semibold text-foreground">Contact Information</h3>
+            <h3 className="text-[14px] font-semibold text-white">Contact Information</h3>
           </div>
 
           <div className="relative">
-            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground/60" />
+            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/40" />
             <Input
               placeholder="Your Name *"
               value={formData.name}
@@ -575,7 +474,7 @@ function CardPaymentWrapper({
           </div>
 
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground/60" />
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/40" />
             <Input
               type="email"
               placeholder="Email * (for receipt)"
@@ -592,8 +491,7 @@ function CardPaymentWrapper({
             type="button"
             onClick={handleContinue}
             disabled={!formData.name || !formData.email || loading}
-            className="w-full h-9 bg-gradient-to-b from-orange-600 to-orange-700 text-white text-sm font-semibold rounded-lg"
-            size="sm"
+            className="w-full h-10 bg-gradient-to-b from-orange-600 to-orange-700 text-white text-[14px] font-semibold rounded-lg"
           >
             {loading ? (
               <>
@@ -629,13 +527,13 @@ function CardPaymentWrapper({
             <div className="w-5 h-5 rounded-full bg-orange-600 text-white text-[11px] flex items-center justify-center font-bold ml-auto">
               2
             </div>
-            <h3 className="text-[14px] font-semibold text-foreground">Payment</h3>
+            <h3 className="text-[14px] font-semibold text-white">Payment</h3>
           </div>
 
-          <div className="p-2.5 bg-muted/50 rounded-lg text-[13px] flex items-center gap-2 text-muted-foreground border border-border/70">
-            <CheckCircle className="w-3.5 h-3.5 text-emerald-500" />
+          <div className="p-2.5 bg-white/[0.04] rounded-lg text-[13px] flex items-center gap-2 text-white/70 border border-white/8">
+            <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
             <span>
-              Paying as <strong className="text-foreground">{formData.email}</strong>
+              Paying as <strong className="text-white">{formData.email}</strong>
             </span>
           </div>
 
@@ -665,49 +563,6 @@ function CardPaymentWrapper({
                 isVeteran={isVeteran}
                 customerEmail={formData.email}
                 items={items}
-                onOpenHostedCheckout={async () => {
-                  await openHostedCheckout(async () => {
-                    const { data, error } = await supabase.functions.invoke(
-                      "create-cart-payment-intent",
-                      {
-                        body: {
-                          customerEmail: formData.email,
-                          customerName: formData.name,
-                          isVeteran,
-                          checkoutMode: true,
-                          items: items.map((i) => ({
-                            id: i.id,
-                            name: i.name,
-                            price: i.price,
-                            quantity: i.quantity,
-                          })),
-                          metadata: {
-                            source: "cart_checkout_fallback",
-                          },
-                        },
-                      },
-                    );
-
-                    if (error) {
-                      throw new Error(
-                        error.message || "Unable to open hosted checkout.",
-                      );
-                    }
-
-                    if (!data?.url || !data?.sessionId) {
-                      throw new Error("Hosted checkout did not return a valid session.");
-                    }
-
-                    return {
-                      url: data.url,
-                      sessionId: data.sessionId,
-                    };
-                  });
-                }}
-                hostedCheckoutLoading={hostedCheckoutLoading}
-                hostedCheckoutError={hostedCheckoutError}
-                hostedCheckoutUrl={hostedCheckoutUrl}
-                hostedCheckoutActive={hostedCheckoutActive}
               />
             </Elements>
           ) : (
@@ -753,7 +608,7 @@ export function EnhancedCheckoutDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[420px] overflow-hidden p-0 gap-0" style={{ WebkitFontSmoothing: "antialiased", MozOsxFontSmoothing: "grayscale", textRendering: "optimizeLegibility" }}>
         {/* Header */}
-        <div className="px-3 sm:px-5 py-2.5 border-b border-border/70">
+        <div className="px-3 sm:px-5 py-2.5 border-b border-white/8">
           <DialogHeader className="space-y-0">
             <div className="flex items-center gap-2 mb-0.5">
               <div className="p-1.5 bg-orange-500/15 rounded-md">
@@ -816,9 +671,6 @@ export function EnhancedCheckoutDialog({
                 <QRCodePayment
                   total={finalTotal}
                   onSuccess={() => onOpenChange(false)}
-                  customerName={formData.name}
-                  customerEmail={formData.email}
-                  onDetailsChange={setFormData}
                 />
               </TabsContent>
             </Tabs>
@@ -827,21 +679,21 @@ export function EnhancedCheckoutDialog({
           {/* Order Summary Sidebar - Compact */}
           <div className="md:col-span-2">
             <div className="space-y-3">
-              <div className="p-3 bg-muted/30 rounded-xl border border-border/70">
-                <h4 className="font-semibold text-sm mb-2 text-foreground">Order Summary</h4>
+              <div className="p-3 bg-white/[0.04] rounded-xl border border-white/8">
+                <h4 className="font-semibold text-sm mb-2 text-white">Order Summary</h4>
                 <div className="space-y-1 mb-3">
                   {items.slice(0, 3).map((item) => (
                     <div key={item.id} className="flex justify-between text-xs">
-                      <span className="text-muted-foreground truncate max-w-[120px]">
+                      <span className="text-white/60 truncate max-w-[120px]">
                         {item.name} × {item.quantity}
                       </span>
-                      <span className="font-medium text-foreground">
+                      <span className="font-medium text-white">
                         ${(item.price * item.quantity).toFixed(2)}
                       </span>
                     </div>
                   ))}
                   {items.length > 3 && (
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-white/50">
                       +{items.length - 3} more items
                     </p>
                   )}
@@ -853,14 +705,14 @@ export function EnhancedCheckoutDialog({
                   discountPercent={10}
                 />
 
-                <div className="border-t border-border/70 pt-2 mt-2">
+                <div className="border-t border-white/8 pt-2 mt-2">
                   {veteranDiscount > 0 && (
                     <div className="flex justify-between text-xs text-emerald-400 mb-1">
                       <span>Veteran Discount</span>
                       <span>-${veteranDiscount.toFixed(2)}</span>
                     </div>
                   )}
-                  <div className="flex justify-between font-bold text-foreground">
+                  <div className="flex justify-between font-bold text-white">
                     <span>Total</span>
                     <span className="text-orange-400">
                       ${finalTotal.toFixed(2)}

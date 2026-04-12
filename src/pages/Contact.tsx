@@ -169,7 +169,7 @@ function Contact() {
     <PageTransition variant="fade">
       <SEO
         title="Contact InVision Network — Kettering, Ohio"
-        description="Reach InVision Network for cybersecurity training or AI systems. Call (937) 301-8749, email us, or fill out our contact form. Serving Kettering, Dayton, and all of Southwest Ohio."
+        description="Reach InVision Network for cybersecurity training or AI business solutions. Call (937) 301-8749, email us, or fill out our contact form. Serving Kettering, Dayton, and all of Southwest Ohio."
         keywords="contact InVision Network, Kettering cybersecurity, AI protection Ohio, call InVision Network"
         breadcrumbs={[
           { name: "Home", url: "https://www.invisionnetwork.org/" },
@@ -185,22 +185,21 @@ function Contact() {
           subheadline=""
         >
           <div className="text-left mb-8">
-            <h1 className="font-extrabold text-white mb-4 leading-[1.03] tracking-tight text-[clamp(2.8rem,6.2vw,5rem)]">
+            <h1 className="font-extrabold text-white mb-4 leading-[1.05] tracking-tight text-[clamp(2.525rem,5.75vw,4.5rem)]">
               Contact Us
             </h1>
-            <p className="text-[1.05rem] md:text-[1.35rem] text-white max-w-xl">
-              Call, email, or send a secure message and our Kettering team will
-              help you choose the right next step.
+            <p className="text-lg md:text-xl text-white/90 max-w-xl">
+              We're here to help protect your family. Get in touch today.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-4 justify-start">
-            <Button size="heroPill" variant="heroPrimary" className="text-white" asChild>
+          <div className="flex flex-col sm:flex-row gap-4 justify-start">
+            <Button size="heroPill" variant="heroPrimary" asChild>
               <a href={SITE.phone.tel}>
                 <Phone className="w-5 h-5 mr-2" />
-                Contact Us
+                {SITE.phone.display}
               </a>
             </Button>
-            <Button size="heroPill" variant="heroOutline" className="text-white hover:text-white" asChild>
+            <Button size="heroPill" variant="heroOutline" asChild>
               <a href={`mailto:${SITE.emails.info}`}>
                 <Mail className="w-5 h-5 mr-2" />
                 Email Us
@@ -210,8 +209,8 @@ function Contact() {
         </Hero>
       </div>
 
-      <MeshBackground variant="vibrant" withOrbs className="below-fold-premium">
-      <div className="premium-section-shell py-16 relative overflow-hidden">
+      <MeshBackground variant="vibrant" withOrbs>
+      <div className="py-16 relative overflow-hidden">
         <div className="container mx-auto px-6 lg:px-8 relative z-10">
           {/* Contact Methods Grid */}
           <div className="text-center mb-10">
@@ -568,7 +567,7 @@ function Contact() {
                         <Button
                           type="submit"
                           disabled={isSubmitting}
-                          className="w-full h-10 sm:h-14 text-[13px] sm:text-[15px] font-semibold rounded-xl text-white bg-gradient-to-b from-[#e07a55] to-[#d05f3a] border border-[#b8552f] shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_8px_20px_-6px_rgba(217,108,74,0.5),0_16px_32px_-12px_rgba(217,108,74,0.35)] hover:from-[#e88560] hover:to-[#d96847] hover:-translate-y-[1px] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.25)_inset,0_12px_28px_-6px_rgba(217,108,74,0.6),0_20px_40px_-12px_rgba(217,108,74,0.4)] active:translate-y-[0.5px] transition-all duration-200"
+                          className="w-full h-14 text-[15px] font-semibold rounded-xl text-white bg-gradient-to-b from-[#e07a55] to-[#d05f3a] border border-[#b8552f] shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_8px_20px_-6px_rgba(217,108,74,0.5),0_16px_32px_-12px_rgba(217,108,74,0.35)] hover:from-[#e88560] hover:to-[#d96847] hover:-translate-y-[1px] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.25)_inset,0_12px_28px_-6px_rgba(217,108,74,0.6),0_20px_40px_-12px_rgba(217,108,74,0.4)] active:translate-y-[0.5px] transition-all duration-200"
                         >
                           {isSubmitting ? (
                             <>

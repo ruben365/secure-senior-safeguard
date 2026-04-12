@@ -53,19 +53,7 @@ interface TrainingPaymentRequest {
   phone?: string;
   message?: string;
   state?: string;
-  checkoutMode?: boolean;
 }
-
-const ALLOWED_ORIGINS = new Set<string>([
-  "https://www.invisionnetwork.org",
-  "https://invisionnetwork.org",
-]);
-const CANONICAL_ORIGIN = "https://www.invisionnetwork.org";
-
-const resolveOrigin = (req: Request): string => {
-  const requested = (req.headers.get("origin") || "").trim().toLowerCase();
-  return ALLOWED_ORIGINS.has(requested) ? requested : CANONICAL_ORIGIN;
-};
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -122,7 +110,6 @@ serve(async (req) => {
       phone,
       message,
       state,
-      checkoutMode = false,
     } = body;
 
     if (!customerEmail || !customerName) {
@@ -200,7 +187,6 @@ serve(async (req) => {
       veteranDiscount,
       finalAmount,
       amountInCents,
-      checkoutMode: !!checkoutMode,
     });
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2024-11-20.acacia" });
@@ -229,82 +215,27 @@ serve(async (req) => {
       logStep("Created new customer", { customerId });
     }
 
-    const paymentMetadata = {
-      paymentType: "training",
-      courseId: course.id,
-      courseSlug: course.slug || "",
-      courseTitle: String(course.title).slice(0, 480),
-      serviceTier: safeServiceTier,
-      isVeteran: isVeteran ? "true" : "false",
-      veteranDiscountCents: Math.round(veteranDiscount * 100).toString(),
-      baseAmountCents: Math.round(baseAmount * 100).toString(),
-      preferredDate: safePreferredDate,
-      customerName: safeCustomerName,
-      customerEmail: normalizedEmail,
-      phone: safePhone,
-      message: safeMessage,
-      state: safeState,
-    };
-
-    if (checkoutMode) {
-      const origin = resolveOrigin(req);
-      const session = await stripe.checkout.sessions.create({
-        mode: "payment",
-        ...(customerId ? { customer: customerId } : { customer_email: normalizedEmail }),
-        line_items: [
-          {
-            price_data: {
-              currency: "usd",
-              product_data: {
-                name: String(course.title).slice(0, 120),
-                description: safeServiceTier
-                  ? `Training session • ${safeServiceTier}`
-                  : "Training session",
-              },
-              unit_amount: amountInCents,
-            },
-            quantity: 1,
-          },
-        ],
-        success_url: `${origin}/payment-success?type=training&session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${origin}/payment-canceled`,
-        metadata: paymentMetadata,
-        payment_intent_data: {
-          metadata: paymentMetadata,
-        },
-      });
-
-      logStep("Hosted training checkout session created", {
-        sessionId: session.id,
-        courseId: course.id,
-      });
-
-      return new Response(
-        JSON.stringify({
-          url: session.url,
-          sessionId: session.id,
-          customerId,
-          amount: amountInCents,
-          baseAmount,
-          veteranDiscount,
-          finalAmount,
-          courseId: course.id,
-          courseTitle: course.title,
-          type: "checkout",
-        }),
-        {
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-          status: 200,
-        },
-      );
-    }
-
     // Create payment intent with the SERVER-COMPUTED amount
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amountInCents,
       currency: "usd",
       customer: customerId,
-      metadata: paymentMetadata,
+      metadata: {
+        paymentType: "training",
+        courseId: course.id,
+        courseSlug: course.slug || "",
+        courseTitle: String(course.title).slice(0, 480),
+        serviceTier: safeServiceTier,
+        isVeteran: isVeteran ? "true" : "false",
+        veteranDiscountCents: Math.round(veteranDiscount * 100).toString(),
+        baseAmountCents: Math.round(baseAmount * 100).toString(),
+        preferredDate: safePreferredDate,
+        customerName: safeCustomerName,
+        customerEmail: normalizedEmail,
+        phone: safePhone,
+        message: safeMessage,
+        state: safeState,
+      },
       automatic_payment_methods: {
         enabled: true,
       },

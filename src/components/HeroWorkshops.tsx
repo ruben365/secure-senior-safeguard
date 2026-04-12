@@ -4,11 +4,8 @@ import {
   Phone, ShieldCheck,
   Settings, Server, Lock,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import workshopHero from "@/assets/learn_and_train.png";
 import { SITE } from "@/config/site";
-
-const highPriorityImageProps = { fetchpriority: "high" } as const;
 
 /* ── Bottom feature cards ── */
 const workshopFeatures = [
@@ -53,7 +50,7 @@ export const HeroWorkshops = () => {
           alt="Seniors learning together in community workshop"
           loading="eager"
           decoding="sync"
-          {...highPriorityImageProps}
+          fetchPriority="high"
         />
         <div className="hero-ws__top-veil" />
         <div className="hero-ws__glow" aria-hidden="true" />
@@ -61,11 +58,15 @@ export const HeroWorkshops = () => {
 
       {/* ── Main Layout: Left Content + Right Widget ── */}
       <div className="hero-ws__content">
-        <div className="site-shell w-full px-6 lg:px-8">
         <div className="hero-ws__layout">
 
           {/* Left — Copy */}
           <div className="hero-ws__copy">
+            <div className="hero-ws__kicker">
+              <span className="hero-ws__kicker-line" />
+              <span className="hero-ws__kicker-text">Workshops &amp; Training</span>
+            </div>
+
             <h1 className="hero-ws__headline">
               Learn to Spot Scams
               <br />
@@ -79,25 +80,14 @@ export const HeroWorkshops = () => {
             </p>
 
             <div className="hero-ws__ctas">
-              <Button
-                type="button"
-                size="heroPill"
-                variant="heroPrimary"
-                onClick={() => scrollTo("training")}
-              >
+              <button type="button" className="hero-ws__cta hero-ws__cta--primary" onClick={() => scrollTo("training")}>
                 <Shield className="w-4 h-4" />
                 View Workshops
-              </Button>
-              <Button
-                type="button"
-                size="heroPill"
-                variant="heroOutline"
-                className="text-white hover:text-white"
-                onClick={() => scrollTo("pricing")}
-              >
+              </button>
+              <button type="button" className="hero-ws__cta hero-ws__cta--secondary" onClick={() => scrollTo("pricing")}>
                 See Pricing
                 <ArrowRight />
-              </Button>
+              </button>
             </div>
           </div>
 
@@ -137,12 +127,10 @@ export const HeroWorkshops = () => {
           </aside>
 
         </div>
-        </div>
       </div>
 
       {/* ── Bottom Glassmorphism Cards ── */}
       <div className="hero-ws__panel">
-        <div className="site-shell w-full px-6 lg:px-8">
         <div className="hero-ws__panel-inner">
           <div className="hero-ws__feature-row">
             {workshopFeatures.map((f) => (
@@ -162,7 +150,6 @@ export const HeroWorkshops = () => {
               </button>
             ))}
           </div>
-        </div>
         </div>
       </div>
     </section>

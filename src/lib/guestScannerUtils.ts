@@ -1,7 +1,6 @@
 export const GUEST_SCAN_PRICING = {
-  ratePerMb: 0,
-  minimumCharge: 1,
-  perUploadCharge: 1,
+  ratePerMb: 0.1,
+  minimumCharge: 0.5,
   maxFileSizeMb: 500,
 };
 
@@ -37,6 +36,8 @@ export const sanitizeFileName = (fileName: string) =>
     .replace(/_{2,}/g, "_")
     .slice(0, 120);
 
+const roundUpToCents = (value: number) => Math.ceil(value * 100) / 100;
+
 export const formatFileSize = (bytes: number) => {
   const sizeMb = bytes / MB;
   return {
@@ -47,7 +48,11 @@ export const formatFileSize = (bytes: number) => {
 
 export const calculateScanCost = (bytes: number) => {
   const { sizeMb } = formatFileSize(bytes);
-  const cost = GUEST_SCAN_PRICING.perUploadCharge;
+  const rawCost = sizeMb * GUEST_SCAN_PRICING.ratePerMb;
+  const cost = Math.max(
+    GUEST_SCAN_PRICING.minimumCharge,
+    roundUpToCents(rawCost),
+  );
   return {
     sizeMb,
     cost,

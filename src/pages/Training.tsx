@@ -61,7 +61,6 @@ import { InstructorShowcase } from "@/components/training/InstructorShowcase";
 import { SEO } from "@/components/SEO";
 import { AnswerSummary } from "@/components/AnswerSummary";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
-import { SiteCalloutCard } from "@/components/shared/SiteCalloutCard";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 import { usePrerenderBlocker } from "@/contexts/PrerenderContext";
 import { SectionDivider, MeshBackground } from "@/components/pro";
@@ -601,14 +600,14 @@ function LearnAndTrain() {
         <HeroWorkshops />
 
         {/* ══════════ LIVE THREAT TICKER ══════════ */}
-        <div className="bg-[#FAFAF8] border-b border-[#E8DDD0] text-[#2E1F1B] py-3 overflow-hidden">
+        <div className="bg-foreground text-background py-3 overflow-hidden">
           <div className="container mx-auto px-6 lg:px-8">
             <div className="flex items-center justify-center gap-4 sm:gap-8 flex-wrap text-xs sm:text-sm font-semibold">
               <span className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" /> 2,847 scams blocked this month</span>
-              <span className="hidden sm:inline text-[#8B7D75]">|</span>
-              <span className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-green-600" /> $1.2M saved for families</span>
-              <span className="hidden sm:inline text-[#8B7D75]">|</span>
-              <span className="flex items-center gap-2"><Users className="w-4 h-4 text-[#5E4B43]" /> 140,000+ students trained</span>
+              <span className="hidden sm:inline text-background/30">|</span>
+              <span className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-green-400" /> $1.2M saved for families</span>
+              <span className="hidden sm:inline text-background/30">|</span>
+              <span className="flex items-center gap-2"><Users className="w-4 h-4" /> 140,000+ students trained</span>
             </div>
           </div>
         </div>
@@ -621,9 +620,8 @@ function LearnAndTrain() {
           className="py-8"
         />
 
-        <div className="below-fold-premium">
         {/* ══════════ SECTION 1: WHY FAMILIES TRUST US ══════════ */}
-        <section className="premium-section-shell py-16 md:py-24 relative overflow-hidden">
+        <section className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background dot-grid-bg" />
           
           <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
@@ -744,7 +742,7 @@ function LearnAndTrain() {
         <div className="h-1.5 bg-gradient-to-r from-primary via-accent to-primary" />
 
         {/* ══════════ SECTION 2: HOW IT WORKS ══════════ */}
-        <section id="book" className="premium-section-shell py-10 sm:py-16 md:py-20 bg-muted/20">
+        <section id="book" className="py-10 sm:py-16 md:py-20 bg-muted/20">
           <div className="container mx-auto px-6 lg:px-8">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
@@ -791,7 +789,7 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 3: SCAM PREVENTION WORKSHOPS ══════════ */}
-        <section id="training" className="premium-section-shell py-16 md:py-24 relative overflow-hidden">
+        <section id="training" className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
           <div className="absolute top-20 right-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-20 left-0 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-3xl pointer-events-none" />
@@ -851,7 +849,7 @@ function LearnAndTrain() {
         <InstructorShowcase />
 
         {/* ══════════ SECTION 4: SIMPLE PROTECTION IN 4 STEPS ══════════ */}
-        <section className="premium-section-shell py-10 sm:py-16 md:py-20 bg-muted/20">
+        <section className="py-10 sm:py-16 md:py-20 bg-muted/20">
           <div className="container mx-auto px-6 lg:px-8">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
@@ -913,7 +911,7 @@ function LearnAndTrain() {
 
         {/* ══════════ SECTION 5: THREAT ANALYSIS ══════════ */}
         <MeshBackground variant="subtle" withOrbs>
-        <section className="premium-section-shell py-16 md:py-24 relative overflow-hidden">
+        <section className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
           <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto px-6 lg:px-8 relative z-10">
@@ -980,7 +978,7 @@ function LearnAndTrain() {
         </MeshBackground>
 
         {/* ══════════ SECTION 6: AI PROFESSIONAL TRAINING ══════════ */}
-        <section id="ai-pro-training" className="premium-section-shell py-10 sm:py-16 md:py-20 bg-muted/20">
+        <section id="ai-pro-training" className="py-10 sm:py-16 md:py-20 bg-muted/20">
           <div className="container mx-auto px-6 lg:px-8">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
@@ -1032,7 +1030,7 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 7: SECURE YOUR FAMILY ══════════ */}
-        <section className="premium-section-shell py-16 md:py-24 relative overflow-hidden">
+        <section className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background dot-grid-bg" />
           <div className="absolute bottom-20 right-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto px-6 lg:px-8 relative z-10">
@@ -1050,14 +1048,13 @@ function LearnAndTrain() {
             </div>
 
             <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto mb-14">
-              <SiteCalloutCard
-                className="h-full"
-                tone="neutral"
-                eyebrow="Risk snapshot"
-                icon={AlertTriangle}
-                title="Without Protection"
-                description="AI-enabled scams move faster than traditional warning signs and can spread risk across an entire household."
-              >
+              <div className="bg-card border-2 border-destructive/20 rounded-2xl p-6 sm:p-8 shadow-sm h-full">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-destructive/10 flex items-center justify-center">
+                    <AlertTriangle className="w-6 h-6 text-destructive" />
+                  </div>
+                  <h3 className="text-xl font-black text-destructive">Without Protection</h3>
+                </div>
                 <ul className="space-y-3">
                   {[
                     "Scammers can impersonate grandchildren using AI voice cloning",
@@ -1066,27 +1063,27 @@ function LearnAndTrain() {
                     "Personal documents and identity could be stolen",
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start gap-3 text-sm">
-                      <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-slate-900/8">
-                        <span className="text-[10px] font-bold text-slate-700">•</span>
+                      <span className="w-6 h-6 rounded-full bg-destructive/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <span className="text-destructive text-xs font-bold">✗</span>
                       </span>
                       <span className="text-muted-foreground">{item}</span>
                     </li>
                   ))}
                 </ul>
-                <div className="mt-6 rounded-2xl border border-border/60 bg-background/90 p-4 text-center">
-                  <p className="text-2xl font-black text-foreground">$28.4B</p>
+                {/* Danger stat */}
+                <div className="mt-6 p-4 bg-destructive/5 rounded-xl border border-destructive/10 text-center">
+                  <p className="text-2xl font-black text-destructive">$28.4B</p>
                   <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">Lost to scams in 2024 (FTC)</p>
                 </div>
-              </SiteCalloutCard>
+              </div>
 
-              <SiteCalloutCard
-                className="h-full"
-                tone="brand"
-                eyebrow="Protection plan"
-                icon={Shield}
-                title="With InVision Protection"
-                description="Every family gets a calmer, repeatable system for verifying urgent requests and responding before money or identity is at risk."
-              >
+              <div className="bg-card border-2 border-primary/20 rounded-2xl p-6 sm:p-8 shadow-sm h-full">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Shield className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-black text-primary">With InVision Protection</h3>
+                </div>
                 <ul className="space-y-3">
                   {[
                     "Family safe words to verify real emergencies instantly",
@@ -1095,18 +1092,19 @@ function LearnAndTrain() {
                     "Secure vault for important family documents",
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start gap-3 text-sm">
-                      <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary/10">
-                        <CheckCircle className="h-3.5 w-3.5 text-primary" />
+                      <span className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <CheckCircle className="w-3.5 h-3.5 text-primary" />
                       </span>
                       <span className="text-muted-foreground">{item}</span>
                     </li>
                   ))}
                 </ul>
-                <div className="mt-6 rounded-2xl border border-primary/10 bg-primary/5 p-4 text-center">
+                {/* Protection stat */}
+                <div className="mt-6 p-4 bg-primary/5 rounded-xl border border-primary/10 text-center">
                   <p className="text-2xl font-black text-primary">$1.2M+</p>
                   <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">Saved for our families</p>
                 </div>
-              </SiteCalloutCard>
+              </div>
             </div>
 
             {/* Family Safety Vault */}
@@ -1138,7 +1136,7 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 8: SCAMS WE'VE CAUGHT ══════════ */}
-        <section className="premium-section-shell py-10 sm:py-16 md:py-20 bg-muted/20">
+        <section className="py-10 sm:py-16 md:py-20 bg-muted/20">
           <div className="container mx-auto px-6 lg:px-8">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
@@ -1190,7 +1188,7 @@ function LearnAndTrain() {
 
         {/* Training Success Stories */}
         {trainingTestimonials.length > 0 && (
-          <section className="premium-section-shell py-10 sm:py-16 md:py-20 bg-background">
+          <section className="py-10 sm:py-16 md:py-20 bg-background">
             <div className="container mx-auto px-6 lg:px-8">
               <div className="text-center mb-14">
                 <span className="inline-block text-xs uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
@@ -1204,31 +1202,27 @@ function LearnAndTrain() {
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                {trainingTestimonials.map((testimonial, index) => {
+                {trainingTestimonials.map((testimonial) => {
                   const videoMedia = testimonial.testimonial_media?.find(
                     (m: any) => m.media_type === "video",
                   );
                   return (
-                    <div
+                    <TestimonialCard
                       key={testimonial.id}
-                      className={index >= 4 ? "hidden sm:block" : ""}
-                    >
-                      <TestimonialCard
-                        name={testimonial.name}
-                        location={testimonial.location}
-                        quote={testimonial.story}
-                        image={videoMedia?.thumbnail_url || "/placeholder.svg"}
-                        rating={testimonial.rating}
-                        videoUrl={videoMedia?.file_url}
-                        onVideoClick={() =>
-                          videoMedia &&
-                          setSelectedVideo({
-                            src: videoMedia.file_url,
-                            title: `${testimonial.name}'s Story`,
-                          })
-                        }
-                      />
-                    </div>
+                      name={testimonial.name}
+                      location={testimonial.location}
+                      quote={testimonial.story}
+                      image={videoMedia?.thumbnail_url || "/placeholder.svg"}
+                      rating={testimonial.rating}
+                      videoUrl={videoMedia?.file_url}
+                      onVideoClick={() =>
+                        videoMedia &&
+                        setSelectedVideo({
+                          src: videoMedia.file_url,
+                          title: `${testimonial.name}'s Story`,
+                        })
+                      }
+                    />
                   );
                 })}
               </div>
@@ -1237,7 +1231,7 @@ function LearnAndTrain() {
         )}
 
         {/* ══════════ FINAL CTA ══════════ */}
-        <section className="premium-section-shell py-16 sm:py-20 md:py-24 relative overflow-hidden">
+        <section className="py-16 sm:py-20 md:py-24 relative overflow-hidden">
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${seniorCouple})` }}
@@ -1330,7 +1324,6 @@ function LearnAndTrain() {
             }}
           />
         )}
-        </div>
       </div>
     </PageTransition>
   );

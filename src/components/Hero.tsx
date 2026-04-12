@@ -26,10 +26,6 @@ interface HeroProps {
   showTrustIndicators?: boolean;
   /** Disable the purple overlay for homepage */
   disablePurpleOverlay?: boolean;
-  backgroundClassName?: string;
-  contentClassName?: string;
-  contentInnerClassName?: string;
-  textBlockClassName?: string;
 }
 
 const Hero = ({
@@ -45,10 +41,6 @@ const Hero = ({
   showProtectionBadge = false,
   badgeText,
   disablePurpleOverlay = false,
-  backgroundClassName,
-  contentClassName,
-  contentInnerClassName,
-  textBlockClassName,
 }: HeroProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -60,7 +52,7 @@ const Hero = ({
   return (
     <div
       className={cn(
-        "relative w-full min-h-[100dvh] flex items-center overflow-hidden hero-mobile",
+        "relative w-full min-h-[75dvh] sm:min-h-[85dvh] md:min-h-[100dvh] lg:min-h-[110dvh] flex items-center overflow-hidden hero-mobile",
         className,
       )}
     >
@@ -85,10 +77,7 @@ const Hero = ({
               playsInline
               preload="auto"
               onCanPlay={() => setVideoLoaded(true)}
-              className={cn(
-                "absolute inset-0 w-full h-full object-cover brightness-[0.85] saturate-[0.9]",
-                backgroundClassName,
-              )}
+              className="absolute inset-0 w-full h-full object-cover brightness-[0.85] saturate-[0.9]"
             >
               <source src={backgroundVideo} type="video/mp4" />
             </video>
@@ -97,7 +86,7 @@ const Hero = ({
 
         {/* Image Carousel (if no video) */}
         {!useVideo && useCarousel ? (
-          <HeroCarousel images={backgroundImages} imageClassName={backgroundClassName} />
+          <HeroCarousel images={backgroundImages} />
         ) : (
           !useVideo &&
           backgroundImage && (
@@ -109,10 +98,7 @@ const Hero = ({
               height={1080}
               loading="eager"
               decoding="async"
-              className={cn(
-                "absolute inset-0 w-full h-full object-cover brightness-[0.85] saturate-[0.9]",
-                backgroundClassName,
-              )}
+              className="absolute inset-0 w-full h-full object-cover brightness-[0.85] saturate-[0.9]"
             />
           )
         )}
@@ -129,26 +115,20 @@ const Hero = ({
       )}
 
       {/* Content — anchored left, matches HeroHomepage rhythm */}
-      <div className={cn("w-full relative z-10 text-left", contentClassName)}>
-        <div
-          className={cn(
-            "site-shell w-full px-6 lg:px-8 py-20 sm:py-32 md:py-40 lg:py-48",
-            contentInnerClassName,
-          )}
-        >
-        <div className={cn("max-w-[640px] animate-fade-in", textBlockClassName)}>
+      <div className="w-full py-20 sm:py-32 md:py-40 lg:py-56 xl:py-64 relative z-10 text-left px-5 sm:px-8 md:px-[max(4rem,8%)]">
+        <div className="max-w-[640px] animate-fade-in">
           {headline && (
-            <h1 className="text-white mb-4 sm:mb-6 md:mb-10 leading-[1.06] text-[clamp(2rem,6.1vw,5rem)] font-extrabold tracking-tight text-left">
+            <h1 className="text-white mb-4 sm:mb-6 md:mb-10 leading-[1.1] text-[clamp(1.75rem,5.75vw,4.5rem)] font-extrabold tracking-tight text-left">
               {headline}
             </h1>
           )}
           {subheadline && (
-            <p className="text-white text-[16px] sm:text-[1.125rem] md:text-[1.625rem] mb-8 md:mb-12 leading-relaxed text-left line-clamp-3 sm:line-clamp-none">
+            <p className="text-white/95 text-[15px] sm:text-lg md:text-2xl mb-8 md:mb-12 leading-relaxed text-left line-clamp-3 sm:line-clamp-none">
               {subheadline}
             </p>
           )}
           {children && (
-            <div className="flex flex-col sm:flex-row flex-wrap gap-2.5 sm:gap-4 justify-start">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-start">
               {Children.map(children, (child) =>
                 isValidElement(child) ? (
                   <MagneticWrapper strength={0.3}>{child}</MagneticWrapper>
@@ -158,7 +138,6 @@ const Hero = ({
               )}
             </div>
           )}
-        </div>
         </div>
       </div>
 

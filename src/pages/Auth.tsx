@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { z } from "zod";
 import invisionLogo from "@/assets/shield-logo.png";
+const authBackground = "/images/hero-corporate-protection.webp";
 import { Session, User as SupabaseUser } from "@supabase/supabase-js";
 import { ForgotPasswordModal } from "@/components/auth/ForgotPasswordModal";
 import { TwoFactorVerify } from "@/components/auth/TwoFactorVerify";
@@ -60,13 +61,6 @@ const passwordSchema = z
 function Auth() {
   const [searchParams] = useSearchParams();
   const defaultTab = searchParams.get("mode") === "signup" ? "signup" : "login";
-  const requestedRedirect = searchParams.get("redirect");
-  const safeRedirect =
-    requestedRedirect &&
-    requestedRedirect.startsWith("/") &&
-    !requestedRedirect.startsWith("//")
-      ? requestedRedirect
-      : null;
 
   const [activeTab, setActiveTab] = useState(defaultTab);
   const [email, setEmail] = useState("");
@@ -207,11 +201,6 @@ function Auth() {
             "Your account has been suspended. Please contact support.",
           variant: "destructive",
         });
-        return;
-      }
-
-      if (safeRedirect) {
-        navigate(safeRedirect, { replace: true });
         return;
       }
 
@@ -511,199 +500,47 @@ function Auth() {
 
   // Premium input style — subtle bg, warm orange focus ring
   const inputClassName =
-    "h-10 pl-10 text-[14px] bg-muted/30 border-border/70 text-foreground placeholder:text-muted-foreground/60 rounded-lg transition-all duration-200 focus:bg-background focus:border-primary/50 hover:border-border";
-
-  const getAuthAccent = (accent: "orange" | "emerald" | "blue") => {
-    if (accent === "emerald") {
-      return {
-        lineClassName:
-          "bg-gradient-to-r from-transparent via-emerald-300/70 to-transparent",
-        glowBackground:
-          "radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.28) 0%, rgba(16, 185, 129, 0.1) 38%, transparent 72%)",
-        meshAccent:
-          "radial-gradient(ellipse 56% 42% at 14% 16%, rgba(16, 185, 129, 0.26) 0%, transparent 58%)",
-      };
-    }
-
-    if (accent === "blue") {
-      return {
-        lineClassName:
-          "bg-gradient-to-r from-transparent via-sky-300/70 to-transparent",
-        glowBackground:
-          "radial-gradient(circle at 50% 50%, rgba(96, 165, 250, 0.24) 0%, rgba(96, 165, 250, 0.08) 38%, transparent 72%)",
-        meshAccent:
-          "radial-gradient(ellipse 56% 42% at 14% 16%, rgba(96, 165, 250, 0.22) 0%, transparent 58%)",
-      };
-    }
-
-    return {
-      lineClassName:
-        "bg-gradient-to-r from-transparent via-orange-300/70 to-transparent",
-      glowBackground:
-        "radial-gradient(circle at 50% 50%, rgba(249, 115, 22, 0.26) 0%, rgba(249, 115, 22, 0.1) 38%, transparent 72%)",
-      meshAccent:
-        "radial-gradient(ellipse 56% 42% at 14% 16%, rgba(249, 115, 22, 0.24) 0%, transparent 58%)",
-    };
-  };
-
-  const AuthBackdrop = ({
-    accent = "orange",
-  }: {
-    accent?: "orange" | "emerald" | "blue";
-  }) => {
-    const accentStyles = getAuthAccent(accent);
-
-    return (
-      <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute inset-0 bg-[#07111d]" />
-
-        <div
-          className="absolute inset-0 opacity-[0.98]"
-          style={{
-            background:
-              `${accentStyles.meshAccent}, ` +
-              "radial-gradient(ellipse 72% 58% at 88% 18%, rgba(255, 240, 221, 0.16) 0%, transparent 58%), " +
-              "radial-gradient(ellipse 72% 64% at 82% 88%, rgba(101, 143, 204, 0.18) 0%, transparent 62%), " +
-              "linear-gradient(155deg, #08101b 0%, #0e1930 36%, #0f1b31 66%, #08111d 100%)",
-          }}
-        />
-
-        <div
-          className="absolute inset-x-4 top-4 bottom-4 rounded-[30px] border border-white/[0.06] sm:inset-x-6 sm:top-6 sm:bottom-6 lg:inset-x-8 lg:top-8 lg:bottom-8"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012))",
-            boxShadow:
-              "0 28px 100px -52px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.04)",
-          }}
-        />
-
-        <div
-          className="absolute -top-20 right-[-24%] h-[18rem] w-[18rem] rounded-full opacity-75 blur-[88px] sm:right-[-12%] sm:top-[-10%] sm:h-[26rem] sm:w-[26rem] sm:blur-[112px] lg:right-[6%] lg:top-[-6%]"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(255, 237, 214, 0.16) 0%, transparent 68%)",
-          }}
-        />
-
-        <div
-          className="absolute left-[-28%] bottom-[-14%] h-[20rem] w-[20rem] rounded-full opacity-70 blur-[96px] sm:left-[-16%] sm:h-[28rem] sm:w-[28rem] sm:blur-[120px] lg:left-[8%] lg:bottom-[-18%]"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(86, 131, 195, 0.18) 0%, transparent 72%)",
-          }}
-        />
-
-        <div
-          className="absolute right-[-12%] top-[38%] h-[14rem] w-[14rem] rounded-full opacity-60 blur-[84px] sm:h-[18rem] sm:w-[18rem] lg:right-[28%] lg:top-[26%]"
-          style={{ background: accentStyles.glowBackground }}
-        />
-
-        <div
-          className="absolute left-[32%] top-[-12%] h-[120%] w-24 rotate-[16deg] opacity-20 blur-[18px] sm:w-32 lg:left-[42%]"
-          style={{
-            background:
-              "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.16) 48%, transparent 100%)",
-          }}
-        />
-
-        <svg className="absolute inset-0 h-full w-full opacity-[0.03]">
-          <defs>
-            <pattern
-              id="auth-dots"
-              x="0"
-              y="0"
-              width="28"
-              height="28"
-              patternUnits="userSpaceOnUse"
-            >
-              <circle cx="1" cy="1" r="1" fill="#ffffff" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#auth-dots)" />
-        </svg>
-
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse at center, transparent 20%, rgba(5, 10, 18, 0.18) 56%, rgba(4, 8, 16, 0.62) 100%)",
-          }}
-        />
-
-        <div
-          className={accentStyles.lineClassName + " absolute inset-x-0 top-0 h-px"}
-        />
-      </div>
-    );
-  };
-
-  const AuthStateFrame = ({
-    children,
-    accent = "orange",
-    maxWidth = "440px",
-    textAlign = "left",
-  }: {
-    children: React.ReactNode;
-    accent?: "orange" | "emerald" | "blue";
-    maxWidth?: string;
-    textAlign?: "left" | "center";
-  }) => {
-    const accentStyles = getAuthAccent(accent);
-
-    return (
-      <div className="relative flex min-h-[100svh] w-full items-center justify-center overflow-hidden px-4 py-6 font-sans antialiased sm:px-6 sm:py-8">
-        <AuthBackdrop accent={accent} />
-
-        <div className="relative z-10 w-full" style={{ maxWidth }}>
-          <div
-            aria-hidden="true"
-            className="absolute -inset-3 rounded-[32px] opacity-90 blur-2xl"
-            style={{ background: accentStyles.glowBackground }}
-          />
-
-          <div
-            className={`relative overflow-hidden rounded-[24px] border border-white/70 p-5 shadow-[0_24px_80px_-28px_rgba(0,0,0,0.55),0_10px_24px_-12px_rgba(0,0,0,0.28)] backdrop-blur-xl sm:p-7 ${textAlign === "center" ? "text-center" : ""}`}
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(248, 244, 238, 0.95))",
-              WebkitBackdropFilter: "blur(20px)",
-            }}
-          >
-            <div
-              aria-hidden="true"
-              className={accentStyles.lineClassName + " absolute inset-x-8 top-0 h-px"}
-            />
-            <div
-              aria-hidden="true"
-              className="absolute inset-x-0 top-0 h-24 opacity-80"
-              style={{
-                background:
-                  "radial-gradient(ellipse at top, rgba(255, 245, 233, 0.88) 0%, transparent 72%)",
-              }}
-            />
-            <div className="relative">{children}</div>
-          </div>
-        </div>
-      </div>
-    );
-  };
+    "h-10 pl-10 text-[14px] bg-slate-50/70 border-slate-200 text-foreground placeholder:text-slate-400 rounded-lg transition-all duration-200 focus:bg-white focus:border-orange-500 hover:border-slate-300";
 
   if (signupSuccess) {
     return (
-      <AuthStateFrame accent="emerald" textAlign="center">
+      <div
+        className="w-full relative flex items-center justify-center p-5 md:p-8 font-sans antialiased"
+        style={{ minHeight: "100vh" }}
+      >
+        {/* Same calm dark backdrop as the main sign-in screen */}
+        <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0b1020] via-[#0e1428] to-[#0a0f1e]" />
+          <svg className="absolute inset-0 w-full h-full opacity-[0.035]">
+            <defs>
+              <pattern id="auth-success-dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+                <circle cx="1" cy="1" r="1" fill="#ffffff" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#auth-success-dots)" />
+          </svg>
+          <div className="absolute -top-40 -left-40 h-[520px] w-[520px] rounded-full bg-emerald-500/10 blur-[140px]" />
+          <div className="absolute -bottom-40 -right-40 h-[560px] w-[560px] rounded-full bg-indigo-500/12 blur-[160px]" />
+        </div>
+
+        <div className="relative z-10 w-full max-w-[440px]">
+          <div className="relative rounded-xl bg-white border border-slate-200 p-5 md:p-7 text-center">
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-slate-300/80 to-transparent"
+            />
             <div className="relative w-14 h-14 mx-auto mb-5">
               <div className="absolute inset-0 rounded-2xl bg-emerald-500/20 blur-xl" />
               <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center shadow-[0_12px_28px_-8px_rgba(16,185,129,0.5),inset_0_1px_0_0_rgba(255,255,255,0.35)] border border-white/20">
                 <CheckCircle2 className="w-7 h-7 text-white" strokeWidth={2.25} />
               </div>
             </div>
-            <h2 className="text-[1.5rem] font-bold text-foreground tracking-tight mb-2">
+            <h2 className="text-[1.5rem] font-bold text-slate-900 tracking-tight mb-2">
               Check your email
             </h2>
-            <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+            <p className="text-sm text-slate-500 leading-relaxed mb-6">
               We sent a verification link to{" "}
-              <span className="font-semibold text-foreground">{email}</span>.
+              <span className="font-semibold text-slate-800">{email}</span>.
               Click it to activate your account.
             </p>
             <Button
@@ -715,14 +552,30 @@ function Auth() {
             >
               Back to Sign In
             </Button>
-      </AuthStateFrame>
+          </div>
+        </div>
+      </div>
     );
   }
 
   // MFA verification screen — shown after password login when 2FA is enrolled
   if (showMfaVerify) {
     return (
-      <AuthStateFrame accent="orange">
+      <div
+        className="w-full relative flex items-center justify-center p-5 md:p-8 font-sans antialiased"
+        style={{ minHeight: "100vh" }}
+      >
+        <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0b1020] via-[#0e1428] to-[#0a0f1e]" />
+          <div className="absolute -top-40 -left-40 h-[520px] w-[520px] rounded-full bg-orange-500/10 blur-[140px]" />
+          <div className="absolute -bottom-40 -right-40 h-[560px] w-[560px] rounded-full bg-indigo-500/12 blur-[160px]" />
+        </div>
+        <div className="relative z-10 w-full max-w-[440px]">
+          <div className="relative rounded-xl bg-white border border-slate-200 p-5 md:p-7">
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-orange-400/50 to-transparent"
+            />
             <TwoFactorVerify
               onVerified={() => {
                 setShowMfaVerify(false);
@@ -733,14 +586,30 @@ function Auth() {
                 supabase.auth.signOut();
               }}
             />
-      </AuthStateFrame>
+          </div>
+        </div>
+      </div>
     );
   }
 
   // Password reset screen — shown when user clicks the email reset link
   if (showPasswordReset) {
     return (
-      <AuthStateFrame accent="blue">
+      <div
+        className="w-full relative flex items-center justify-center p-5 md:p-8 font-sans antialiased"
+        style={{ minHeight: "100vh" }}
+      >
+        <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0b1020] via-[#0e1428] to-[#0a0f1e]" />
+          <div className="absolute -top-40 -left-40 h-[520px] w-[520px] rounded-full bg-emerald-500/10 blur-[140px]" />
+          <div className="absolute -bottom-40 -right-40 h-[560px] w-[560px] rounded-full bg-indigo-500/12 blur-[160px]" />
+        </div>
+        <div className="relative z-10 w-full max-w-[440px]">
+          <div className="relative rounded-xl bg-white border border-slate-200 p-5 md:p-7">
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-emerald-400/50 to-transparent"
+            />
             <PasswordResetForm
               onComplete={() => {
                 setShowPasswordReset(false);
@@ -748,68 +617,120 @@ function Auth() {
                 navigate("/auth", { replace: true });
               }}
             />
-      </AuthStateFrame>
+          </div>
+        </div>
+      </div>
     );
   }
 
   return (
-    <div className="relative w-full min-h-[100svh] overflow-hidden font-sans antialiased">
+    <div
+      className="w-full relative flex items-stretch justify-center p-0 font-sans antialiased"
+      style={{ minHeight: "100vh" }}
+    >
       <SEO
         title="Sign In"
         description="Sign in to your InVision Network account to access your portal, courses, and protection tools."
         noindex
       />
 
-      <AuthBackdrop accent="orange" />
+      {/*
+        ═══════════════════════════════════════════════════════════════
+        PREMIUM BACKGROUND — layered composition
+        ═══════════════════════════════════════════════════════════════
+        Stack, bottom to top:
+          1. Deep navy base gradient (not flat black)
+          2. Soft radial vignette at the card's center
+          3. Fine dot grid at 0.04 opacity — texture, not pattern
+          4. Diagonal mesh gradient — warm coral top-left, cool
+             lavender bottom-right, navy mid — adds depth and color
+             balance without being flashy
+          5. Decorative glass shapes: a large soft circle top-right
+             and a geometric rounded-square bottom-left, both at
+             low opacity with heavy blur
+          6. Thin horizontal brand strip at the very top (barely
+             visible) — subtle reference to the brand band
+      */}
+      <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden">
+        {/* 1 — deep navy base gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0c1024] via-[#0f1530] to-[#0a0e22]" />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[1180px] items-center justify-center px-4 py-6 sm:px-6 sm:py-8 lg:px-8 xl:py-10">
-        <div className="relative w-full">
-          <div
-            aria-hidden="true"
-            className="hidden lg:block absolute inset-0 rounded-[36px] border border-white/[0.08]"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015))",
-              boxShadow:
-                "0 38px 120px -56px rgba(0, 0, 0, 0.82), inset 0 1px 0 rgba(255, 255, 255, 0.06)",
-              backdropFilter: "blur(18px)",
-              WebkitBackdropFilter: "blur(18px)",
-            }}
-          />
+        {/* 4 — diagonal mesh: warm top-left → navy center → cool bottom-right */}
+        <div
+          className="absolute inset-0 opacity-90"
+          style={{
+            background:
+              "radial-gradient(ellipse 70% 55% at 12% 8%, rgba(217, 108, 74, 0.18) 0%, transparent 55%), " +
+              "radial-gradient(ellipse 60% 50% at 88% 92%, rgba(139, 116, 188, 0.22) 0%, transparent 55%), " +
+              "radial-gradient(ellipse 55% 45% at 50% 50%, rgba(30, 41, 80, 0.3) 0%, transparent 65%)",
+          }}
+        />
 
-          <div
-            aria-hidden="true"
-            className="hidden lg:block absolute inset-y-8 right-8 w-[46%] rounded-[32px] border border-white/[0.08]"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02))",
-              boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.07)",
-            }}
-          />
+        {/* 3 — fine dot grid texture */}
+        <svg className="absolute inset-0 w-full h-full opacity-[0.04]">
+          <defs>
+            <pattern id="auth-dots" x="0" y="0" width="26" height="26" patternUnits="userSpaceOnUse">
+              <circle cx="1" cy="1" r="1" fill="#ffffff" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#auth-dots)" />
+        </svg>
 
-          <div className="relative grid w-full grid-cols-1 items-center gap-8 lg:grid-cols-[0.88fr_1fr] lg:gap-12 xl:gap-16 lg:px-8 lg:py-8 xl:px-10 xl:py-10">
+        {/* 5a — decorative large glass circle, top-right */}
+        <div
+          className="absolute -top-32 -right-20 w-[540px] h-[540px] rounded-full opacity-60"
+          style={{
+            background:
+              "radial-gradient(circle at 30% 30%, rgba(217, 108, 74, 0.18) 0%, rgba(217, 108, 74, 0.05) 40%, transparent 70%)",
+            filter: "blur(70px)",
+          }}
+        />
+
+        {/* 5b — decorative geometric rounded-square, bottom-left */}
+        <div
+          className="absolute -bottom-24 -left-16 w-[480px] h-[480px] rotate-12 opacity-60"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 50%, rgba(139, 116, 188, 0.2) 0%, rgba(139, 116, 188, 0.06) 40%, transparent 70%)",
+            borderRadius: "48% 52% 44% 56% / 52% 46% 54% 48%",
+            filter: "blur(80px)",
+          }}
+        />
+
+        {/* 5c — accent amber orb, upper-center (small, subtle) */}
+        <div
+          className="absolute top-[15%] left-[50%] -translate-x-1/2 w-[380px] h-[380px] rounded-full opacity-40"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(251, 191, 36, 0.1) 0%, transparent 60%)",
+            filter: "blur(90px)",
+          }}
+        />
+
+        {/* 2 — soft central vignette for focus around the card */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 50% 45% at 55% 50%, transparent 0%, rgba(10, 14, 34, 0.35) 85%)",
+          }}
+        />
+
+        {/* 6 — thin brand strip at the top */}
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-orange-500/40 to-transparent" />
+      </div>
+
+      {/*
+        ─── TWO-PANE LAYOUT ────────────────────────────────────────
+        LEFT (lg+ only): brand storytelling — logo, tagline, three
+        trust points, a quiet decorative shield illustration.
+        RIGHT: the clean white auth card with the existing form.
+      */}
+      <div className="relative z-10 w-full max-w-[960px] mx-auto flex items-center justify-center p-4 md:p-6 lg:p-8">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-8 lg:gap-14 items-center">
 
           {/* LEFT — brand pane (desktop only) */}
-          <aside className="hidden lg:flex">
-            <div
-              className="relative w-full overflow-hidden rounded-[28px] border border-white/[0.08] px-8 py-9 text-white"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018))",
-                boxShadow:
-                  "0 30px 80px -48px rgba(0, 0, 0, 0.88), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
-              }}
-            >
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 opacity-80"
-                style={{
-                  background:
-                    "radial-gradient(ellipse at top left, rgba(255, 231, 208, 0.14) 0%, transparent 58%), radial-gradient(ellipse at bottom right, rgba(122, 161, 220, 0.16) 0%, transparent 62%)",
-                }}
-              />
-
-              <div className="relative flex flex-col">
+          <aside className="hidden lg:flex flex-col text-white pr-2">
             <Link
               to="/"
               className="inline-flex items-center gap-3 mb-14 group w-fit"
@@ -886,12 +807,10 @@ function Auth() {
               <ShieldCheck className="w-4 h-4 text-white/60" />
               <span>Trusted by 100+ families across Ohio</span>
             </div>
-              </div>
-            </div>
           </aside>
 
           {/* RIGHT — premium auth card */}
-          <div className="relative w-full max-w-[480px] mx-auto lg:mx-0 lg:justify-self-end">
+          <div className="w-full max-w-[460px] mx-auto lg:mx-0">
             {/*
               Auth card — premium multi-layer presentation:
                 • Soft warm glow ring behind the card
@@ -901,41 +820,25 @@ function Auth() {
                 • Top hairline rim light
                 • Subtle bottom accent bar
             */}
+            {/* Warm glow ring — sits behind the card */}
             <div
               aria-hidden="true"
-              className="absolute -inset-3 rounded-[32px] bg-gradient-to-br from-orange-400/18 via-white/8 to-sky-400/16 blur-2xl pointer-events-none"
+              className="absolute -inset-4 rounded-[28px] bg-gradient-to-br from-orange-500/20 via-transparent to-purple-500/15 blur-2xl pointer-events-none"
             />
 
-            <div
-              className="relative overflow-hidden rounded-[24px] border border-white/70 p-6 shadow-[0_26px_90px_-30px_rgba(0,0,0,0.55),0_12px_32px_-18px_rgba(0,0,0,0.28)] backdrop-blur-xl sm:p-8 md:p-10"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(248, 244, 238, 0.95))",
-                WebkitBackdropFilter: "blur(20px)",
-              }}
-            >
-              <div
-                aria-hidden="true"
-                className="absolute inset-x-0 top-0 h-24 opacity-80"
-                style={{
-                  background:
-                    "radial-gradient(ellipse at top, rgba(255, 245, 233, 0.88) 0%, transparent 72%)",
-                }}
-              />
-
+            <div className="relative rounded-[20px] bg-white border border-slate-200/70 p-8 md:p-10 shadow-[0_1px_0_0_rgba(255,255,255,0.9)_inset,0_2px_4px_-1px_rgba(15,23,42,0.08),0_12px_24px_-8px_rgba(15,23,42,0.18),0_32px_64px_-20px_rgba(15,23,42,0.4),0_48px_96px_-24px_rgba(15,23,42,0.35)]">
               {/* Top hairline rim light */}
               <div
                 aria-hidden="true"
-                className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-orange-400/55 to-transparent"
+                className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-orange-400/50 to-transparent"
               />
 
               {/* Subtle bottom accent bar */}
               <div
                 aria-hidden="true"
-                className="absolute inset-x-10 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                className="absolute inset-x-10 bottom-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent"
               />
 
-              <div className="relative">
               {/* Mobile logo (desktop shows it in the left pane) */}
               <Link
                 to="/"
@@ -951,10 +854,10 @@ function Auth() {
                   height={40}
                 />
                 <div className="flex flex-col leading-tight">
-                  <span className="text-base font-bold text-foreground tracking-tight">
+                  <span className="text-base font-bold text-slate-900 tracking-tight">
                     InVision Network
                   </span>
-                  <span className="text-[10px] text-muted-foreground tracking-[0.12em] uppercase">
+                  <span className="text-[10px] text-slate-500 tracking-[0.12em] uppercase">
                     Secure Portal
                   </span>
                 </div>
@@ -962,10 +865,10 @@ function Auth() {
 
               {/* Heading — swaps between Sign In and Sign Up */}
               <div className="mb-6">
-                <h2 className="text-[1.5rem] md:text-[1.625rem] font-bold text-foreground leading-tight tracking-tight">
+                <h2 className="text-[1.5rem] md:text-[1.625rem] font-bold text-slate-900 leading-tight tracking-tight">
                   {activeTab === "signup" ? "Create your account" : "Sign in to your account"}
                 </h2>
-                <p className="text-[13px] text-muted-foreground mt-1">
+                <p className="text-[13px] text-slate-500 mt-1">
                   {activeTab === "signup"
                     ? "A few details and you're set — it takes 30 seconds."
                     : "Welcome back. Please enter your details."}
@@ -977,16 +880,16 @@ function Auth() {
             onValueChange={setActiveTab}
             className="w-full"
           >
-            <TabsList className="grid w-full grid-cols-2 mb-6 h-11 bg-muted/50 border border-border/70 rounded-lg p-1">
+            <TabsList className="grid w-full grid-cols-2 mb-6 bg-slate-100">
               <TabsTrigger
                 value="login"
-                className="h-9 text-[14px] font-semibold text-muted-foreground data-[state=active]:text-foreground data-[state=active]:bg-background data-[state=active]:shadow-sm rounded-md"
+                className="data-[state=active]:bg-white data-[state=active]:shadow-sm"
               >
                 Sign In
               </TabsTrigger>
               <TabsTrigger
                 value="signup"
-                className="h-9 text-[14px] font-semibold text-muted-foreground data-[state=active]:text-foreground data-[state=active]:bg-background data-[state=active]:shadow-sm rounded-md"
+                className="data-[state=active]:bg-white data-[state=active]:shadow-sm"
               >
                 Sign Up
               </TabsTrigger>
@@ -1000,7 +903,7 @@ function Auth() {
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full h-10 rounded-lg bg-muted/50 border border-border/70 text-foreground text-[13px] font-medium hover:bg-muted hover:border-border transition-all duration-200"
+                    className="w-full h-10 rounded-lg bg-white border border-slate-200 text-slate-700 text-[13px] font-medium hover:bg-slate-50 hover:border-slate-300 transition-all duration-200"
                     onClick={handleGoogleSignIn}
                   >
                     <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
@@ -1027,7 +930,7 @@ function Auth() {
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full h-10 rounded-lg bg-muted/50 border border-border/70 text-foreground text-[13px] font-medium hover:bg-muted hover:border-border transition-all duration-200"
+                    className="w-full h-10 rounded-lg bg-white border border-slate-200 text-slate-700 text-[13px] font-medium hover:bg-slate-50 hover:border-slate-300 transition-all duration-200"
                     onClick={handleMicrosoftSignIn}
                   >
                     <svg className="w-5 h-5 mr-3" viewBox="0 0 23 23">
@@ -1043,17 +946,17 @@ function Auth() {
                 {/* Divider */}
                 <div className="relative">
                   <div className="absolute inset-0 flex items-center">
-                    <span className="w-full border-t border-border/50" />
+                    <span className="w-full border-t border-slate-200" />
                   </div>
                   <div className="relative flex justify-center text-xs uppercase">
-                    <span className="px-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground" style={{ background: "hsl(var(--background))" }}>
+                    <span className="bg-white px-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-400">
                       or continue with email
                     </span>
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="login-email" className="text-sm font-medium text-foreground/80">
+                  <Label htmlFor="login-email" className="text-sm font-medium">
                     Email Address
                   </Label>
                   <div className="relative">
@@ -1080,7 +983,7 @@ function Auth() {
                 <div className="space-y-2">
                   <Label
                     htmlFor="login-password"
-                    className="text-sm font-medium text-foreground/80"
+                    className="text-sm font-medium"
                   >
                     Password
                   </Label>
@@ -1141,7 +1044,7 @@ function Auth() {
                   <button
                     type="button"
                     onClick={() => setShowForgotPassword(true)}
-                    className="text-sm text-orange-400 hover:text-orange-300 font-medium"
+                    className="text-sm text-primary hover:text-primary/80 font-medium"
                   >
                     Forgot password?
                   </button>
@@ -1149,7 +1052,7 @@ function Auth() {
 
                 <Button
                   type="submit"
-                  className="w-full h-11 text-[14px] font-semibold rounded-lg text-white border border-orange-700/50 hover:-translate-y-[1px] active:translate-y-[0.5px] transition-all duration-200" style={{ background: "linear-gradient(135deg, #ea580c, #c2410c)" }}
+                  className="w-full h-10 text-[14px] font-semibold rounded-lg bg-[#080d1a] text-white border border-[#1e293b] hover:bg-[#111827] hover:-translate-y-[1px] active:translate-y-[0.5px] transition-all duration-200"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -1166,9 +1069,9 @@ function Auth() {
                 </Button>
 
                 {/* Security Footer */}
-                <div className="flex items-center justify-center gap-2 pt-3 border-t border-border/50 mt-4">
-                  <ShieldCheck className="w-4 h-4 text-muted-foreground" />
-                  <span className="text-xs text-muted-foreground">
+                <div className="flex items-center justify-center gap-2 pt-3 border-t border-slate-100 mt-4">
+                  <ShieldCheck className="w-4 h-4 text-slate-400" />
+                  <span className="text-xs text-slate-400">
                     Secured by 256-bit Encryption
                   </span>
                 </div>
@@ -1183,7 +1086,7 @@ function Auth() {
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full h-10 rounded-lg bg-muted/50 border border-border/70 text-foreground text-[13px] font-medium hover:bg-muted hover:border-border transition-all duration-200"
+                    className="w-full h-10 rounded-lg bg-white border border-slate-200 text-slate-700 text-[13px] font-medium hover:bg-slate-50 hover:border-slate-300 transition-all duration-200"
                     onClick={handleGoogleSignIn}
                   >
                     <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
@@ -1210,7 +1113,7 @@ function Auth() {
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-full h-10 rounded-lg bg-muted/50 border border-border/70 text-foreground text-[13px] font-medium hover:bg-muted hover:border-border transition-all duration-200"
+                    className="w-full h-10 rounded-lg bg-white border border-slate-200 text-slate-700 text-[13px] font-medium hover:bg-slate-50 hover:border-slate-300 transition-all duration-200"
                     onClick={handleMicrosoftSignIn}
                   >
                     <svg className="w-5 h-5 mr-3" viewBox="0 0 23 23">
@@ -1226,10 +1129,10 @@ function Auth() {
                 {/* Divider */}
                 <div className="relative">
                   <div className="absolute inset-0 flex items-center">
-                    <span className="w-full border-t border-border/50" />
+                    <span className="w-full border-t border-slate-200" />
                   </div>
                   <div className="relative flex justify-center text-xs uppercase">
-                    <span className="px-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground" style={{ background: "hsl(var(--background))" }}>
+                    <span className="bg-white px-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-400">
                       or continue with email
                     </span>
                   </div>
@@ -1237,7 +1140,7 @@ function Auth() {
 
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-2">
-                    <Label htmlFor="firstName" className="text-sm font-medium text-foreground/80">
+                    <Label htmlFor="firstName" className="text-sm font-medium">
                       First Name
                     </Label>
                     <Input
@@ -1246,11 +1149,11 @@ function Auth() {
                       onChange={(e) => setFirstName(e.target.value)}
                       required
                       disabled={isLoading}
-                      className="h-10 bg-muted/30 border-border/70 text-foreground placeholder:text-muted-foreground/60 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all rounded-lg"
+                      className="h-11 bg-slate-50/50 border-slate-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="lastName" className="text-sm font-medium text-foreground/80">
+                    <Label htmlFor="lastName" className="text-sm font-medium">
                       Last Name
                     </Label>
                     <Input
@@ -1259,13 +1162,13 @@ function Auth() {
                       onChange={(e) => setLastName(e.target.value)}
                       required
                       disabled={isLoading}
-                      className="h-10 bg-muted/30 border-border/70 text-foreground placeholder:text-muted-foreground/60 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all rounded-lg"
+                      className="h-11 bg-slate-50/50 border-slate-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="signup-email" className="text-sm font-medium text-foreground/80">
+                  <Label htmlFor="signup-email" className="text-sm font-medium">
                     Email Address
                   </Label>
                   <div className="relative">
@@ -1286,7 +1189,7 @@ function Auth() {
                 <div className="space-y-2">
                   <Label
                     htmlFor="signup-password"
-                    className="text-sm font-medium text-foreground/80"
+                    className="text-sm font-medium"
                   >
                     Password
                   </Label>
@@ -1347,7 +1250,7 @@ function Auth() {
                 <div className="space-y-2">
                   <Label
                     htmlFor="confirmPassword"
-                    className="text-sm font-medium text-foreground/80"
+                    className="text-sm font-medium"
                   >
                     Confirm Password
                   </Label>
@@ -1401,7 +1304,7 @@ function Auth() {
 
                 <Button
                   type="submit"
-                  className="w-full h-11 text-[14px] font-semibold rounded-lg text-white border border-orange-700/50 hover:-translate-y-[1px] active:translate-y-[0.5px] transition-all duration-200" style={{ background: "linear-gradient(135deg, #ea580c, #c2410c)" }}
+                  className="w-full h-10 text-[14px] font-semibold rounded-lg bg-[#080d1a] text-white border border-[#1e293b] hover:bg-[#111827] hover:-translate-y-[1px] active:translate-y-[0.5px] transition-all duration-200"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -1418,55 +1321,54 @@ function Auth() {
                 </Button>
 
                 {/* Security Footer */}
-                <div className="flex items-center justify-center gap-2 pt-3 border-t border-border/50 mt-4">
-                  <ShieldCheck className="w-4 h-4 text-muted-foreground" />
-                  <span className="text-xs text-muted-foreground">
+                <div className="flex items-center justify-center gap-2 pt-3 border-t border-slate-100 mt-4">
+                  <ShieldCheck className="w-4 h-4 text-slate-400" />
+                  <span className="text-xs text-slate-400">
                     Secured by 256-bit Encryption
                   </span>
                 </div>
               </form>
             </TabsContent>
           </Tabs>
-              </div>
             </div>
             {/* /card */}
 
             {/* Apply link — restyled for dark backdrop */}
             <div className="mt-6 text-center">
               <Link
-                to="/careers#open-positions"
+                to="/careers"
                 className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
               >
                 Want to join our team?{" "}
-                <span className="text-orange-300 font-semibold">Explore open roles</span>
+                <span className="text-orange-300 font-semibold">Apply here</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
 
             {/* Bottom legal links — restyled for dark backdrop */}
-            <div className="mt-3 flex items-center justify-center gap-3 text-[11px] text-white/55">
+            <div className="mt-3 flex items-center justify-center gap-3 text-[11px] text-white/45">
               <Link
                 to="/privacy-policy"
-                className="hover:text-white/90 transition-colors"
+                className="hover:text-white/80 transition-colors"
               >
                 Privacy Policy
               </Link>
-              <span className="text-white/30">•</span>
+              <span className="text-white/25">•</span>
               <Link
                 to="/terms-of-service"
-                className="hover:text-white/90 transition-colors"
+                className="hover:text-white/80 transition-colors"
               >
                 Terms of Service
               </Link>
-              <span className="text-white/30">•</span>
+              <span className="text-white/25">•</span>
               <span>© {new Date().getFullYear()} InVision Network</span>
             </div>
           </div>
           {/* /right auth card column */}
         </div>
-          {/* /grid */}
-        </div>
+        {/* /grid */}
       </div>
+      {/* /max-w-[1100px] */}
 
       <ForgotPasswordModal
         open={showForgotPassword}

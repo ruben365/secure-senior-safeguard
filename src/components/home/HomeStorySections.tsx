@@ -31,7 +31,7 @@ function CtaPrimary({ to, children }: { to: string; children: React.ReactNode })
   return (
     <Link
       to={to}
-      className="hss-cta-primary inline-flex items-center justify-center gap-1.5 h-8 px-4 sm:h-12 sm:px-7 sm:gap-2 rounded-full text-xs sm:text-[15px] font-semibold [transition-duration:250ms] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-[2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[rgba(249,115,22,0.7)]"
+      className="hss-cta-primary inline-flex items-center justify-center gap-2 h-12 px-7 rounded-full text-[15px] font-semibold [transition-duration:250ms] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-[2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[rgba(249,115,22,0.7)]"
     >
       {children}
     </Link>
@@ -42,7 +42,7 @@ function CtaText({ to, children }: { to: string; children: React.ReactNode }) {
   return (
     <Link
       to={to}
-      className="inline-flex items-center gap-1.5 text-[#d96c4a] hover:text-[#b8552f] font-semibold text-xs sm:text-[15px] group transition-colors"
+      className="inline-flex items-center gap-2 text-[#d96c4a] hover:text-[#b8552f] font-semibold text-[15px] group transition-colors"
     >
       {children}
       <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -258,7 +258,7 @@ export const HomeStorySections = () => {
           SECTION 1 — White bg | 60/40 text + image split
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-white relative py-6 md:py-20 lg:py-24"
+        className="hss-section-white relative py-12 md:py-20 lg:py-24"
         aria-labelledby="story-section-1-heading"
       >
         <div className="container mx-auto px-6 lg:px-8">
@@ -379,7 +379,7 @@ export const HomeStorySections = () => {
           STATS STRIP — DARK BENTO
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-stats-bento py-6 md:py-20 lg:py-24"
+        className="hss-stats-bento py-12 md:py-20 lg:py-24"
         aria-labelledby="story-stats-heading"
       >
         {/* Ambient glows */}
@@ -400,7 +400,7 @@ export const HomeStorySections = () => {
           SECTION 2 — Cream bg | 45/55 wide image + stacked cards
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-tint relative py-6 md:py-20 lg:py-24"
+        className="hss-section-tint relative py-12 md:py-20 lg:py-24"
         aria-labelledby="story-section-2-heading"
       >
         <div className="container mx-auto px-6 lg:px-8">
@@ -511,7 +511,7 @@ export const HomeStorySections = () => {
           SECTION 3 — White bg | 50/50 feature list + cards
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-white relative py-6 md:py-20 lg:py-24"
+        className="hss-section-white relative py-12 md:py-20 lg:py-24"
         aria-labelledby="story-section-3-heading"
       >
         <div className="container mx-auto px-6 lg:px-8">
@@ -638,7 +638,7 @@ export const HomeStorySections = () => {
           HOW IT WORKS — Connected timeline
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-tint relative py-6 md:py-20 lg:py-24"
+        className="hss-section-tint relative py-12 md:py-20 lg:py-24"
         aria-labelledby="story-how-heading"
       >
         <div className="container mx-auto px-6 lg:px-8">
@@ -715,7 +715,7 @@ export const HomeStorySections = () => {
           SECTION 4 — White bg | CTA close | checklist + collage
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-white relative py-6 md:py-20 lg:py-24"
+        className="hss-section-white relative py-12 md:py-20 lg:py-24"
         aria-labelledby="story-section-4-heading"
       >
         <div className="container mx-auto px-6 lg:px-8">

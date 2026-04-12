@@ -27,28 +27,28 @@ html {
 /* Scope: any Radix dialog/alert-dialog/sheet content (all use role="dialog") */
 [role="dialog"] input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
 [role="alertdialog"] input:not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
-  height: 2.5rem;        /* 40px */
-  padding-top: 0.4rem;
-  padding-bottom: 0.4rem;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  border-radius: 0.5rem;
-  font-size: 0.875rem;   /* 14px */
+  height: 2.5rem !important;        /* 40px */
+  padding-top: 0.4rem !important;
+  padding-bottom: 0.4rem !important;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+  border-radius: 0.5rem !important;
+  font-size: 0.875rem !important;   /* 14px */
 }
 
 [role="dialog"] textarea,
 [role="alertdialog"] textarea {
-  min-height: 5rem;      /* 80px */
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
+  min-height: 5rem !important;      /* 80px */
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 0.5rem !important;
+  font-size: 0.875rem !important;
 }
 
 [role="dialog"] label,
 [role="alertdialog"] label {
-  font-size: 0.8125rem;  /* 13px */
-  font-weight: 600;
-  margin-bottom: 0.25rem;
+  font-size: 0.8125rem !important;  /* 13px */
+  font-weight: 600 !important;
+  margin-bottom: 0.25rem !important;
 }
 
 /* Compact the oversized Button variants inside dialogs only */
@@ -58,40 +58,40 @@ html {
 [role="dialog"] button.h-\[50px\],
 [role="alertdialog"] button.h-\[52px\],
 [role="alertdialog"] button.h-\[44px\] {
-  height: 2.5rem;        /* 40px */
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  font-size: 0.875rem;   /* 14px */
+  height: 2.5rem !important;        /* 40px */
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+  font-size: 0.875rem !important;   /* 14px */
 }
 
 /* The icon variant (52×52) becomes 40×40 */
 [role="dialog"] button.w-\[52px\].h-\[52px\],
 [role="alertdialog"] button.w-\[52px\].h-\[52px\] {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.5rem !important;
+  height: 2.5rem !important;
 }
 
 /* Select triggers */
 [role="dialog"] [role="combobox"],
 [role="alertdialog"] [role="combobox"] {
-  height: 2.5rem;
-  font-size: 0.875rem;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
+  height: 2.5rem !important;
+  font-size: 0.875rem !important;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
 }
 
 /* Checkbox/radio inside dialogs */
 [role="dialog"] [role="checkbox"],
 [role="dialog"] [role="radio"] {
-  width: 1.125rem;
-  height: 1.125rem;
+  width: 1.125rem !important;
+  height: 1.125rem !important;
 }
 
 /* Reduce large avatar / icon bubbles often used in dialog headers */
 [role="dialog"] .w-20.h-20,
 [role="dialog"] .w-16.h-16 {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3.5rem !important;
+  height: 3.5rem !important;
 }
 
 /* Cap dialog height and make internal content scrollable */
@@ -231,7 +231,7 @@ button[aria-label][data-icon-only]:hover::before {
 /* ── Nav link animated underline on hover ────────────────────
    Applies to desktop nav links. Uses a pseudo-element that scales
    from 0 to 100% width on hover with an orange underline. */
-nav a[class*="text-white"]:not([class*="rounded-full"]):not(.site-nav-link)::after {
+nav a[class*="text-white"]:not([class*="rounded-full"])::after {
   content: "";
   position: absolute;
   left: 0.875rem;    /* matches px-3.5 */
@@ -245,12 +245,12 @@ nav a[class*="text-white"]:not([class*="rounded-full"]):not(.site-nav-link)::aft
   transition: transform 250ms var(--ease-out-std);
 }
 
-nav a[class*="text-white"]:not([class*="rounded-full"]):not(.site-nav-link):hover::after {
+nav a[class*="text-white"]:not([class*="rounded-full"]):hover::after {
   transform: scaleX(1);
 }
 
 /* Active link keeps the underline visible */
-nav a[class*="text-orange-400"]:not(.site-nav-link)::after {
+nav a[class*="text-orange-400"]::after {
   content: "";
   position: absolute;
   left: 0.875rem;
@@ -378,13 +378,13 @@ a[href^="#"] {
    removing the glass look. */
 
 /* Light-background glass panels — strong foreground color, no shadow */
-[style*="backdrop-filter"]:not(.button-link),
-[style*="backdropFilter"]:not(.button-link),
-.backdrop-blur-sm:not(.button-link),
-.backdrop-blur-md:not(.button-link),
-.backdrop-blur-lg:not(.button-link),
-.backdrop-blur-xl:not(.button-link),
-.backdrop-blur-2xl:not(.button-link) {
+[style*="backdrop-filter"],
+[style*="backdropFilter"],
+.backdrop-blur-sm,
+.backdrop-blur-md,
+.backdrop-blur-lg,
+.backdrop-blur-xl,
+.backdrop-blur-2xl {
   color: hsl(var(--foreground));
 }
 
@@ -729,768 +729,5 @@ section[data-reveal]:nth-child(odd) {
   .page-transition-enter-active,
   .page-transition-exit-active {
     transition: none !important;
-  }
-}
-
-
-/* ═══════════════════════════════════════════════════════════════════
-   WEBSITE ENHANCEMENT PASS — polished details for every device
-   ═══════════════════════════════════════════════════════════════════ */
-
-/* ── Refined image treatment ──
-   Every <img> that isn't a hero background or icon gets soft rounding
-   and subtle depth, so content photos feel premium without being loud. */
-main img:not([class*="rounded-none"]):not([class*="rounded-full"]):not([aria-hidden="true"]):not([class*="hero"]):not(.no-polish) {
-  border-radius: 0.625rem;
-  transition: transform var(--dur-std) var(--ease-out-std);
-}
-
-/* ── Figure / picture polish ── */
-figure {
-  margin: 0;
-}
-
-/* ── Global smooth transitions on common interactive elements ──
-   Guarantees a consistent feel even if a component forgot to set one. */
-button,
-[role="button"],
-a,
-input,
-select,
-textarea,
-summary {
-  transition-property: color, background-color, border-color, box-shadow, transform, opacity;
-  transition-duration: var(--dur-std);
-  transition-timing-function: var(--ease-out-std);
-}
-
-/* ── Scroll progress indicator (optional, opt-in via .has-scroll-progress on body) ── */
-body.has-scroll-progress::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 3px;
-  width: var(--scroll-progress, 0%);
-  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
-  z-index: 10000;
-  transition: width 80ms linear;
-  pointer-events: none;
-}
-
-/* ── Polished scrollbars (WebKit + Firefox) ── */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: hsl(var(--primary) / 0.35) transparent;
-}
-
-*::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-*::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-*::-webkit-scrollbar-thumb {
-  background: hsl(var(--primary) / 0.25);
-  border-radius: 999px;
-  border: 2px solid transparent;
-  background-clip: padding-box;
-  transition: background var(--dur-std) var(--ease-out-std);
-}
-
-*::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--primary) / 0.5);
-  background-clip: padding-box;
-  border: 2px solid transparent;
-}
-
-/* ── Section vertical rhythm — opt-in via .section-rhythm class to avoid
-   breaking hero sections that manage their own padding. ── */
-.section-rhythm {
-  padding-top: clamp(3rem, 6vw, 5rem);
-  padding-bottom: clamp(3rem, 6vw, 5rem);
-}
-
-@media (max-width: 640px) {
-  .section-rhythm {
-    padding-top: clamp(2rem, 8vw, 3rem);
-    padding-bottom: clamp(2rem, 8vw, 3rem);
-  }
-}
-
-/* ── Polished horizontal rules ── */
-hr {
-  border: none;
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    hsl(var(--border) / 0.7) 20%,
-    hsl(var(--border) / 0.7) 80%,
-    transparent
-  );
-  margin: 2rem 0;
-}
-
-/* ── Code tag polish (inline code in content) ── */
-main p code,
-main li code {
-  background: hsl(var(--muted) / 0.7);
-  border: 1px solid hsl(var(--border) / 0.5);
-  padding: 0.125rem 0.4rem;
-  border-radius: 0.25rem;
-  font-size: 0.85em;
-  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-  color: hsl(var(--foreground));
-}
-
-/* ── Strong / emphasis treatment ── */
-main strong,
-main b {
-  color: hsl(var(--foreground));
-  font-weight: 700;
-}
-
-/* ── Blockquote polish ── */
-main blockquote {
-  border-left: 3px solid hsl(var(--primary) / 0.6);
-  padding-left: 1.25rem;
-  margin: 1.5rem 0;
-  color: hsl(var(--foreground) / 0.85);
-  font-style: italic;
-}
-
-/* ── Table polish ── */
-main table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1.5rem 0;
-  font-size: 0.9375rem;
-  border: 1px solid hsl(var(--border) / 0.6);
-  border-radius: 0.625rem;
-  overflow: hidden;
-}
-
-main thead {
-  background: hsl(var(--muted) / 0.6);
-}
-
-main th,
-main td {
-  padding: 0.625rem 1rem;
-  text-align: left;
-  border-bottom: 1px solid hsl(var(--border) / 0.4);
-}
-
-main tr:last-child td {
-  border-bottom: none;
-}
-
-main tbody tr:hover {
-  background: hsl(var(--muted) / 0.3);
-}
-
-/* ── Tap highlight removal on mobile for cleaner interactions ── */
-a,
-button,
-[role="button"],
-input,
-textarea,
-select {
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* ── Consistent active press scale on touch devices ── */
-@media (hover: none) {
-  button:active,
-  a[role="button"]:active,
-  [role="button"]:active {
-    transform: scale(0.97);
-  }
-}
-
-/* ── Prevent iOS zoom on input focus (keep 16px minimum) ── */
-@media screen and (max-width: 767px) {
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  input[type="tel"],
-  input[type="number"],
-  input[type="url"],
-  input[type="search"],
-  input[type="date"],
-  textarea,
-  select {
-    font-size: 16px !important;
-  }
-}
-
-/* ── Page wrapper min-height to keep footer at bottom ── */
-#root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-#root > * {
-  flex-shrink: 0;
-}
-
-
-/* ═══════════════════════════════════════════════════════════════════
-   EDITORIAL TRUST — distinctive aesthetic layer
-   ─────────────────────────────────────────────────────────────────
-   Serif display typography, tabular figures, kicker labels,
-   paper-grain texture. Adds craft and authority throughout.
-   ═══════════════════════════════════════════════════════════════════ */
-
-/* ── Tabular figures for data-rich areas (numbers align in columns) ── */
-.tabular-nums,
-[data-numeric],
-main table,
-.stat,
-time {
-  font-feature-settings: "tnum" 1, "lnum" 1;
-  font-variant-numeric: tabular-nums lining-nums;
-}
-
-/* ── Editorial kicker — small label above titles ──
-   Usage: <p class="kicker">Our Story</p> <h2>...</h2>
-   Style: uppercase, letter-spacing, orange accent with rule */
-.kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.6875rem;      /* 11px */
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: hsl(var(--primary));
-  margin: 0 0 0.875rem 0;
-}
-
-.kicker::before {
-  content: "";
-  display: block;
-  width: 28px;
-  height: 1.5px;
-  background: hsl(var(--primary));
-  border-radius: 1px;
-}
-
-/* ── Editorial numeral — oversized section counter ──
-   Usage: <span class="section-numeral">01</span>  */
-.section-numeral {
-  font-family: "Fraunces", serif;
-  font-optical-sizing: auto;
-  font-variation-settings: "opsz" 144, "SOFT" 100;
-  font-size: clamp(4rem, 10vw, 8rem);
-  font-weight: 300;
-  line-height: 0.85;
-  letter-spacing: -0.05em;
-  color: hsl(var(--primary) / 0.12);
-  font-feature-settings: "lnum" 1;
-  pointer-events: none;
-  -webkit-user-select: none;
-  user-select: none;
-}
-
-/* ── Paper-grain texture overlay (opt-in via .paper-grain) ── */
-.paper-grain {
-  position: relative;
-}
-
-.paper-grain::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.35'/%3E%3C/svg%3E");
-  opacity: 0.04;
-  mix-blend-mode: multiply;
-  z-index: 1;
-}
-
-/* Apply grain subtly to body for site-wide editorial texture */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.28'/%3E%3C/svg%3E");
-  opacity: 0.03;
-  mix-blend-mode: multiply;
-  z-index: 9998;
-}
-
-/* ── Editorial drop cap — first letter of a featured paragraph ──
-   Usage: <p class="drop-cap">First paragraph...</p> */
-.drop-cap::first-letter {
-  font-family: "Fraunces", serif;
-  font-variation-settings: "opsz" 144, "SOFT" 30;
-  font-size: 4.5em;
-  line-height: 0.85;
-  float: left;
-  margin: 0.05em 0.08em 0 -0.05em;
-  font-weight: 700;
-  color: hsl(var(--primary));
-}
-
-/* ── Editorial pull-quote — standout inline quote ──
-   Usage: <blockquote class="pull-quote">...</blockquote> */
-main blockquote.pull-quote {
-  border-left: none;
-  padding: 0;
-  margin: 2.5rem auto;
-  max-width: 42rem;
-  text-align: center;
-  position: relative;
-}
-
-main blockquote.pull-quote::before {
-  content: "\201C";
-  display: block;
-  font-family: "Fraunces", serif;
-  font-size: 5rem;
-  line-height: 0.6;
-  color: hsl(var(--primary) / 0.5);
-  margin-bottom: 0.5rem;
-}
-
-main blockquote.pull-quote p {
-  font-family: "Fraunces", serif;
-  font-size: clamp(1.25rem, 2.5vw, 1.625rem);
-  line-height: 1.35;
-  font-weight: 500;
-  font-style: italic;
-  letter-spacing: -0.012em;
-  color: hsl(var(--foreground));
-  max-width: none;
-  font-variation-settings: "opsz" 96, "SOFT" 50;
-}
-
-main blockquote.pull-quote cite {
-  display: block;
-  margin-top: 1rem;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.6875rem;
-  font-style: normal;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: hsl(var(--muted-foreground));
-}
-
-/* ── Editorial divider — asymmetric rule with dot ──
-   Usage: <div class="rule-divider"></div> */
-.rule-divider {
-  position: relative;
-  height: 1px;
-  background: hsl(var(--border));
-  margin: 3rem 0;
-}
-
-.rule-divider::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: hsl(var(--primary));
-  transform: translateY(-50%);
-  box-shadow: 0 0 0 4px hsl(var(--background));
-}
-
-/* ── Editorial byline / metadata row ──
-   Usage: <div class="byline"><time>...</time> · <span>...</span></div> */
-.byline {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.6875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: hsl(var(--muted-foreground));
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1rem;
-  align-items: center;
-  font-feature-settings: "tnum" 1;
-}
-
-.byline time {
-  font-feature-settings: "tnum" 1;
-}
-
-/* ── Fraunces display classes for standalone use ── */
-.display-serif {
-  font-family: "Fraunces", serif;
-  font-optical-sizing: auto;
-  font-variation-settings: "opsz" 144, "SOFT" 30;
-  letter-spacing: -0.03em;
-}
-
-.mono {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-feature-settings: "tnum" 1, "ss01" 1;
-}
-
-/* ── Subtle warm paper background for content sections ── */
-.bg-paper {
-  background:
-    radial-gradient(ellipse 800px 400px at 10% 0%, hsl(14 65% 95% / 0.5), transparent 60%),
-    radial-gradient(ellipse 600px 400px at 90% 100%, hsl(207 40% 95% / 0.4), transparent 60%),
-    hsl(var(--background));
-}
-
-/* ── Section numeral row — for section headers ── */
-.section-header {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 1.5rem;
-  align-items: start;
-  margin-bottom: 2.5rem;
-}
-
-.section-header .section-numeral {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  line-height: 0.85;
-  color: hsl(var(--primary) / 0.25);
-}
-
-@media (max-width: 640px) {
-  .section-header {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-  }
-  .section-header .section-numeral {
-    font-size: 2.5rem;
-  }
-}
-
-/* ── Respect reduced motion for editorial layer ── */
-@media (prefers-reduced-motion: reduce) {
-  body::after {
-    display: none;
-  }
-}
-
-
-/* ═══════════════════════════════════════════════════════════════════
-   PRO TOUCH — refined micro-interactions & depth
-   ─────────────────────────────────────────────────────────────────
-   The small details: spring easing, layered shadows, depth on hover,
-   link underline ease, subtle text shine on headlines.
-   ═══════════════════════════════════════════════════════════════════ */
-
-/* ── Refined spring/physics-based easing tokens ── */
-:root {
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
-  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
-}
-
-/* ── Buttons: refined depth on hover + subtle press physics ── */
-@media (hover: hover) and (pointer: fine) {
-  button:not([data-radix-collection-item]):not([class*="no-lift"]),
-  a[role="button"]:not([class*="no-lift"]),
-  [role="button"]:not([data-radix-collection-item]):not([class*="no-lift"]) {
-    transition:
-      transform 0.22s var(--ease-out-expo),
-      box-shadow 0.22s var(--ease-out-expo),
-      border-color 0.22s var(--ease-out-expo),
-      background-color 0.22s var(--ease-out-expo),
-      color 0.22s var(--ease-out-expo);
-  }
-}
-
-/* ── Card: layered depth shadow on hover (light theme) ── */
-@media (hover: hover) and (pointer: fine) {
-  [data-slot="card"]:hover,
-  .glass-card:hover {
-    transform: translateY(-3px);
-    transition-timing-function: var(--ease-out-expo);
-  }
-}
-
-/* ── Refined image reveal — when entering viewport ── */
-main img:not([class*="hero"]):not([aria-hidden="true"]):not(.no-polish) {
-  opacity: 1;
-  animation: subtleFadeIn 0.6s var(--ease-out-expo) both;
-}
-
-@keyframes subtleFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ── Pro headline letter-animation on page load (opt-in via .h-reveal) ── */
-.h-reveal {
-  display: inline-block;
-  overflow: hidden;
-}
-
-.h-reveal > span {
-  display: inline-block;
-  animation: headlineRise 0.8s var(--ease-out-expo) both;
-}
-
-@keyframes headlineRise {
-  from {
-    opacity: 0;
-    transform: translateY(110%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ── Refined link hover — animated underline with proper easing ── */
-main a:not([class*="btn"]):not([class*="button"]):not(.no-underline-anim):not([role="button"]) {
-  transition:
-    color 0.25s var(--ease-out-expo),
-    background-size 0.35s var(--ease-out-expo);
-  background-image: linear-gradient(to right, hsl(var(--primary)), hsl(var(--primary)));
-  background-size: 0% 1.5px;
-  background-repeat: no-repeat;
-  background-position: 0 100%;
-  padding-bottom: 1px;
-}
-
-main a:not([class*="btn"]):not([class*="button"]):not(.no-underline-anim):not([role="button"]):hover {
-  color: hsl(var(--primary));
-  background-size: 100% 1.5px;
-}
-
-/* ── Pro focus ring — springs in on focus ── */
-:focus-visible {
-  transition:
-    outline-offset 0.18s var(--ease-spring),
-    outline-color 0.18s var(--ease-out-expo);
-}
-
-button:focus-visible,
-[role="button"]:focus-visible,
-a:focus-visible {
-  outline-offset: 4px !important;
-}
-
-/* ── Input focus — refined glow ring ── */
-input:focus-visible:not([type="checkbox"]):not([type="radio"]),
-textarea:focus-visible,
-select:focus-visible,
-[role="combobox"]:focus-visible {
-  box-shadow:
-    0 0 0 4px hsl(var(--primary) / 0.12),
-    inset 0 2px 4px rgba(13, 33, 55, 0.04) !important;
-  border-color: hsl(var(--primary)) !important;
-}
-
-/* ── Select/Combobox chevron spin on open ── */
-[data-state="open"] > svg,
-[aria-expanded="true"] > svg.chevron,
-[data-state="open"] .chevron-icon {
-  transform: rotate(180deg);
-  transition: transform 0.22s var(--ease-out-expo);
-}
-
-/* ── Refined list marker (bullet points) ── */
-main ul:not([class]) {
-  list-style: none;
-  padding-left: 0;
-}
-
-main ul:not([class]) > li {
-  position: relative;
-  padding-left: 1.5rem;
-}
-
-main ul:not([class]) > li::before {
-  content: "";
-  position: absolute;
-  left: 0.25rem;
-  top: 0.7em;
-  width: 6px;
-  height: 6px;
-  background: hsl(var(--primary));
-  border-radius: 50%;
-  transform: translateY(-50%);
-}
-
-/* ── Number formatting: tabular figures everywhere it matters ── */
-.price,
-.stat-value,
-.metric,
-time,
-[data-tabular] {
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum" 1;
-}
-
-/* ── Pro detail: text shine on the primary heading ── */
-.text-shine {
-  background: linear-gradient(
-    120deg,
-    hsl(var(--foreground)) 0%,
-    hsl(var(--foreground)) 40%,
-    hsl(var(--primary)) 50%,
-    hsl(var(--foreground)) 60%,
-    hsl(var(--foreground)) 100%
-  );
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  animation: shine 6s ease-in-out infinite;
-}
-
-@keyframes shine {
-  0%, 100% {
-    background-position: 100% 50%;
-  }
-  50% {
-    background-position: 0% 50%;
-  }
-}
-
-/* ── Refined scroll snap for horizontal galleries ── */
-.snap-x-mandatory {
-  scroll-snap-type: x mandatory;
-  scroll-padding: 1rem;
-}
-
-.snap-x-mandatory > * {
-  scroll-snap-align: start;
-}
-
-/* ── Spring-easing utility classes (opt-in) ── */
-.ease-spring {
-  transition-timing-function: var(--ease-spring);
-}
-
-.ease-expo {
-  transition-timing-function: var(--ease-out-expo);
-}
-
-/* ── Refined container rhythm — consistent max-width system-wide ── */
-.container-editorial {
-  width: 100%;
-  max-width: 72rem;   /* 1152px — comfortable reading column */
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-
-@media (min-width: 768px) {
-  .container-editorial {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-}
-
-/* ── Pro detail: asymmetric section intro layout ── */
-.section-intro {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  max-width: 42rem;
-}
-
-@media (min-width: 768px) {
-  .section-intro {
-    grid-template-columns: auto 1fr;
-    gap: 2rem;
-    max-width: 56rem;
-    align-items: baseline;
-  }
-}
-
-.section-intro .kicker {
-  margin: 0;
-  padding-top: 0.35rem;
-  white-space: nowrap;
-}
-
-/* ── Pro card — refined depth with colored rim highlight ── */
-.pro-card {
-  position: relative;
-  background: white;
-  border: 1px solid hsl(var(--border) / 0.6);
-  border-radius: 1rem;
-  padding: 1.5rem;
-  box-shadow:
-    0 1px 2px rgba(13, 33, 55, 0.04),
-    0 1px 0 rgba(255, 255, 255, 0.8) inset;
-  transition:
-    transform 0.3s var(--ease-out-expo),
-    box-shadow 0.3s var(--ease-out-expo),
-    border-color 0.3s var(--ease-out-expo);
-}
-
-.pro-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 1rem;
-  right: 1rem;
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    hsl(var(--primary) / 0.4),
-    transparent
-  );
-  opacity: 0;
-  transition: opacity 0.3s var(--ease-out-expo);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .pro-card:hover {
-    transform: translateY(-4px);
-    border-color: hsl(var(--primary) / 0.25);
-    box-shadow:
-      0 12px 28px rgba(13, 33, 55, 0.12),
-      0 4px 8px rgba(13, 33, 55, 0.06),
-      0 1px 0 rgba(255, 255, 255, 0.8) inset;
-  }
-
-  .pro-card:hover::before {
-    opacity: 1;
-  }
-}
-
-/* ── Section anchor offset for sticky nav ── */
-section[id],
-div[id] {
-  scroll-margin-top: 5rem;
-}
-
-/* ── Reduced motion respect for pro polish ── */
-@media (prefers-reduced-motion: reduce) {
-  .text-shine {
-    animation: none;
-  }
-  .h-reveal > span {
-    animation: none;
-    transform: none;
-    opacity: 1;
-  }
-  main img:not([class*="hero"]):not([aria-hidden="true"]):not(.no-polish) {
-    animation: none;
-  }
-  .pro-card::before {
-    display: none;
   }
 }

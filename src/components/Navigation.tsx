@@ -18,7 +18,7 @@ import { DonationModal } from "@/components/DonationModal";
 import { AnnouncementBell } from "@/components/AnnouncementBell";
 
 const primaryLinks = [
-  { name: "AI", href: "/ai" },
+  { name: "AI", href: "/business" },
   { name: "Workshops", href: "/training" },
   { name: "Resources", href: "/resources" },
   { name: "About", href: "/about" },
@@ -102,14 +102,6 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
   };
 
   const isActiveLink = (href: string) => {
-    if (href === "/ai") {
-      return (
-        location.pathname === "/ai" ||
-        location.pathname === "/ai-workshop" ||
-        location.pathname === "/business" ||
-        location.pathname.startsWith("/business/")
-      );
-    }
     return location.pathname === href || location.pathname.startsWith(href + "/");
   };
 
@@ -125,8 +117,16 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
 
   return (
     <>
+      {/* Mobile backdrop */}
+      {mobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/60 z-[9998] lg:hidden"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
       <nav className={overlay ? "absolute top-0 left-0 right-0 z-[9999] bg-gradient-to-b from-black/60 to-transparent" : `sticky top-0 z-[9999] transition-all duration-300 ${scrolled ? "bg-[#080d1a]/97 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_4px_24px_-4px_rgba(0,0,0,0.3)]" : "bg-[#080d1a]/80 backdrop-blur-md"}`}>
-        <div className="site-shell w-full px-6 lg:px-8">
+        <div className="max-w-[1280px] mx-auto w-full px-6 lg:px-8">
           <div className="flex items-center justify-between h-[56px] gap-4 lg:gap-8">
             {/* Logo — identical to hero */}
             <a
@@ -144,8 +144,8 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 className="w-[32px] h-[32px] object-contain flex-shrink-0 brightness-0 invert"
               />
               <div className="flex flex-col min-w-0 gap-1">
-                <span className="text-[15px] md:text-[15.5px] font-extrabold text-white tracking-tight leading-none">InVision Network</span>
-                <span className="text-[10px] font-bold text-white/88 hidden sm:block tracking-[0.18em] uppercase leading-none">AI Scam Protection</span>
+                <span className="text-[14px] font-extrabold text-white tracking-tight leading-none">InVision Network</span>
+                <span className="text-[9px] font-bold text-white/75 hidden sm:block tracking-widest uppercase leading-none">AI Scam Protection</span>
               </div>
             </a>
 
@@ -157,10 +157,10 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <PrefetchLink
                     key={link.name}
                     to={link.href}
-                    className={`site-nav-link relative text-[14px] px-3 py-1.5 rounded-md transition-colors duration-150 ${
+                    className={`relative text-[13px] px-3 py-1.5 rounded-md transition-colors duration-150 ${
                       isActive
-                        ? "site-nav-link--active text-white font-semibold"
-                        : "text-white font-semibold hover:text-orange-200 hover:bg-white/[0.03]"
+                        ? "text-orange-400 font-bold bg-orange-500/12"
+                        : "text-white font-semibold hover:text-orange-300 hover:bg-white/[0.07]"
                     }`}
                   >
                     {link.name}
@@ -173,14 +173,13 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 <button
                   type="button"
                   onClick={() => setMoreOpen(!moreOpen)}
-                  data-open={moreOpen ? "true" : "false"}
                   aria-haspopup="menu"
                   aria-expanded={moreOpen ? "true" : "false"}
                   aria-label="More navigation links"
-                  className={`site-nav-trigger flex items-center gap-1 text-[14px] px-3 py-1.5 rounded-md transition-colors duration-150 ${
+                  className={`flex items-center gap-1 text-[13px] px-3 py-1.5 rounded-md transition-colors duration-150 ${
                     isSecondaryActive
-                      ? "site-nav-trigger--active text-white font-semibold"
-                      : "text-white font-semibold hover:text-orange-200 hover:bg-white/[0.03]"
+                      ? "text-orange-400 font-bold bg-orange-500/12"
+                      : "text-white font-semibold hover:text-orange-300 hover:bg-white/[0.07]"
                   }`}
                 >
                   More
@@ -193,7 +192,15 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <div
                     role="menu"
                     aria-label="Secondary navigation"
-                    className="site-glass-menu absolute top-full left-0 mt-2 w-52 rounded-2xl py-1.5 z-50 overflow-hidden"
+                    className="absolute top-full left-0 mt-2 w-48 rounded-xl border border-white/15 py-1.5 z-50 overflow-hidden"
+                    style={{
+                      background:
+                        "linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%)",
+                      backdropFilter: "blur(20px) saturate(160%)",
+                      WebkitBackdropFilter: "blur(20px) saturate(160%)",
+                      boxShadow:
+                        "0 12px 32px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.12)",
+                    }}
                   >
                     {secondaryLinks.map((link) => {
                       const isActive = isActiveLink(link.href);
@@ -202,10 +209,10 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                           key={link.name}
                           to={link.href}
                           role="menuitem"
-                          className={`block px-4 py-2.5 text-[14px] transition-colors ${
+                          className={`block px-4 py-2.5 text-[13.5px] transition-colors ${
                             isActive
-                              ? "text-white font-semibold"
-                              : "text-white/94 hover:text-orange-200 hover:bg-white/[0.06]"
+                              ? "text-orange-400 font-semibold"
+                              : "text-white/90 hover:text-orange-300 hover:bg-white/[0.06]"
                           }`}
                           onClick={() => setMoreOpen(false)}
                         >
@@ -230,11 +237,11 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
               {/* Phone */}
               <a
                 href={SITE.phone.tel}
-                className="hidden lg:flex flex-none shrink-0 items-center gap-1.5 text-white hover:text-orange-200 transition-colors duration-150 no-underline px-2 py-1.5 rounded-md hover:bg-white/[0.07] whitespace-nowrap"
+                className="hidden lg:flex flex-none shrink-0 items-center gap-1.5 text-white/80 hover:text-orange-300 transition-colors duration-150 no-underline px-2 py-1.5 rounded-md hover:bg-white/[0.07] whitespace-nowrap"
                 aria-label={`Call us at ${SITE.phone.display}`}
               >
-                <Phone className="w-4 h-4 shrink-0 text-current" />
-                <span className="hidden xl:inline text-[13px] font-semibold text-current whitespace-nowrap [word-break:keep-all]">
+                <Phone className="w-4 h-4 shrink-0" />
+                <span className="hidden xl:inline text-[12px] font-medium whitespace-nowrap [word-break:keep-all]">
                   {/* Non-breaking space between area code and local guarantees single line */}
                   {SITE.phone.display.replace(" ", "\u00A0")}
                 </span>
@@ -244,11 +251,11 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
               <button
                 type="button"
                 onClick={() => setDonateOpen(true)}
-                className="hidden lg:flex items-center gap-1.5 text-[13px] font-semibold px-2.5 py-1.5 rounded-md text-white hover:text-orange-200 hover:bg-orange-500/10 transition-colors"
+                className="hidden lg:flex items-center gap-1.5 text-[12px] font-medium px-2.5 py-1.5 rounded-md text-white/80 hover:text-orange-400 hover:bg-orange-500/10 transition-colors"
                 aria-label="Donate"
               >
-                <Heart className="w-4 h-4 text-current" />
-                <span className="hidden xl:inline text-current">Donate</span>
+                <Heart className="w-4 h-4" />
+                <span className="hidden xl:inline">Donate</span>
               </button>
 
               {/* Divider */}
@@ -307,94 +314,74 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
             @keyframes backdropIn   { from { opacity: 0; } to { opacity: 1; } }
           `}</style>
 
-          {/* Backdrop — click to close, starts below nav */}
+          {/* Backdrop — click to close */}
           <div
-            className="lg:hidden fixed left-0 right-0 bottom-0 z-[10000]"
-            style={{
-              top: "56px",
-              background: "rgba(0,0,0,0.4)",
-              backdropFilter: "blur(4px)",
-              WebkitBackdropFilter: "blur(4px)",
-              animation: "backdropIn 200ms ease-out",
-            }}
+            className="lg:hidden fixed inset-0 z-[10000]"
+            style={{ background: "rgba(0,0,0,0.3)", animation: "backdropIn 200ms ease-out" }}
             onClick={() => setMobileMenuOpen(false)}
             aria-hidden="true"
           />
 
-          {/* Panel — clean glassmorphism */}
+          {/* Panel */}
           <div
             id="mobile-navigation"
             role="dialog"
             aria-modal="true"
             aria-label="Main navigation"
-            className="lg:hidden fixed top-[56px] right-0 z-[10001] flex h-[calc(100svh-56px)] flex-col overflow-hidden"
+            className="lg:hidden fixed top-[56px] right-0 z-[10001] overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch]"
             style={{
-              width: "min(86vw, 320px)",
-              background: "linear-gradient(180deg, rgba(64, 42, 30, 0.54) 0%, rgba(33, 24, 28, 0.48) 100%)",
-              WebkitBackdropFilter: "blur(24px) saturate(1.45)",
-              backdropFilter: "blur(24px) saturate(1.45)",
-              borderLeft: "1px solid rgba(255,255,255,0.22)",
-              borderBottomLeftRadius: "20px",
-              boxShadow: "0 20px 50px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.16)",
+              width: "65%",
+              maxWidth: "260px",
+              maxHeight: "calc(80vh - 56px)",
+              background: "rgba(12, 10, 8, 0.92)",
+              backdropFilter: "blur(20px) saturate(1.3)",
+              WebkitBackdropFilter: "blur(20px) saturate(1.3)",
+              borderLeft: "1px solid rgba(255,255,255,0.08)",
+              borderBottomLeftRadius: "12px",
               animation: "menuSlideIn 250ms ease-out",
+              paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 0.5rem)",
             }}
           >
-            <div className="flex-1 overflow-y-auto overscroll-contain px-4 pb-4 pt-4 [-webkit-overflow-scrolling:touch]">
-              <div className="mb-4 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/45">
-                  Menu
-                </p>
-                <p className="mt-1 text-sm font-medium text-white/80">
-                  Explore training, tools, support, and account access.
-                </p>
-              </div>
+            <div className="p-4">
+              {allLinks.map((link) => {
+                const isActive = isActiveLink(link.href);
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className={`flex items-center text-[14px] font-medium px-4 py-3 rounded-md transition-colors duration-150 ${
+                      isActive
+                        ? "text-orange-400 border-l-2 border-orange-400 pl-3.5"
+                        : "text-white/85 hover:text-white hover:bg-white/[0.06]"
+                    }`}
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      scrollToTop();
+                    }}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
 
-              <div className="space-y-1.5">
-                {allLinks.map((link) => {
-                  const isActive = isActiveLink(link.href);
-                  return (
-                    <Link
-                      key={link.name}
-                      to={link.href}
-                      className={`flex min-h-[46px] items-center rounded-xl px-4 py-3 text-[14px] font-medium transition-colors duration-150 ${
-                        isActive
-                          ? "border border-orange-400/30 bg-orange-500/12 text-orange-300"
-                          : "text-white/85 hover:text-white hover:bg-white/[0.06]"
-                      }`}
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        scrollToTop();
-                      }}
-                    >
-                      {link.name}
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
-
-            <div
-              className="border-t border-white/[0.08] bg-black/10 px-4 pt-4"
-              style={{ paddingBottom: "calc(1rem + env(safe-area-inset-bottom, 0px))" }}
-            >
-              <div className="flex flex-col gap-2">
+              <div className="mt-3 pt-3 flex flex-col items-center gap-2 border-t border-white/[0.08]">
                 <button
                   type="button"
-                  className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-white/20 px-4 text-[13px] font-semibold text-white transition-colors duration-150 hover:border-white/30 hover:text-white"
+                  className="h-8 px-5 text-[12px] font-medium rounded-md flex items-center justify-center gap-1.5 transition-colors duration-150 border border-white/20 text-white/70 hover:text-white hover:border-white/30"
                   onClick={() => {
                     setDonateOpen(true);
                     setMobileMenuOpen(false);
                   }}
                 >
-                  <Heart className="h-3 w-3 text-current" />
-                  <span className="text-current">Donate</span>
+                  <Heart className="h-3 w-3" />
+                  Donate
                 </button>
 
                 {isAdminOrStaff ? (
                   <Link
                     to="/admin"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-[#7c2d12] bg-gradient-to-b from-[#c2410c] to-[#9a3412] px-4 text-[13px] font-semibold text-white transition-all duration-150"
+                    className="h-8 max-w-[160px] w-full text-[12px] font-semibold rounded-md text-white flex items-center justify-center gap-1.5 transition-all duration-150 bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12]"
                   >
                     <LayoutDashboard className="h-3 w-3" />
                     Dashboard
@@ -403,7 +390,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <Link
                     to="/portal"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="inline-flex min-h-[44px] w-full items-center justify-center rounded-xl border border-[#7c2d12] bg-gradient-to-b from-[#c2410c] to-[#9a3412] px-4 text-[13px] font-semibold text-white transition-all duration-150"
+                    className="h-8 max-w-[160px] w-full text-[12px] font-semibold rounded-md text-white flex items-center justify-center transition-all duration-150 bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12]"
                   >
                     Login
                   </Link>
@@ -411,11 +398,11 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
 
                 <a
                   href={SITE.phone.tel}
-                  className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-white/12 px-4 text-[13px] font-semibold text-white transition-colors duration-150 hover:text-white"
+                  className="flex items-center justify-center gap-1.5 text-[12px] text-white/50 font-medium py-1.5 transition-colors duration-150 hover:text-white/80"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  <Phone className="h-3.5 w-3.5 text-current" />
-                  <span className="text-current">{SITE.phone.display}</span>
+                  <Phone className="h-3 w-3" />
+                  {SITE.phone.display}
                 </a>
               </div>
             </div>

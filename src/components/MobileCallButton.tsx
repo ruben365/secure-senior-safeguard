@@ -7,10 +7,12 @@ const MobileCallButton = forwardRef<HTMLAnchorElement>((_props, ref) => {
     <a
       ref={ref}
       href={SITE.phone.tel}
-      className="fixed bottom-[calc(env(safe-area-inset-bottom,0px)+0.75rem)] right-3 z-[92] md:hidden inline-flex min-h-[44px] items-center gap-1.5 px-4 rounded-full text-[13px] font-semibold text-white bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12] shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)] hover:shadow-lg transition-all"
+      className="fixed bottom-4 left-4 right-4 max-w-[calc(100vw-2rem)] mx-auto z-fab md:hidden flex items-center justify-center gap-3 py-4 px-6 rounded-full shadow-lg shadow-orange-500/30 hover:shadow-xl transition-all font-bold text-lg text-white bg-gradient-to-br from-orange-500 to-lavender-500"
       aria-label={`Call Now: ${SITE.phone.display}`}
     >
-      <Phone className="w-3.5 h-3.5" />
+      <div className="p-2 bg-white/20 rounded-full">
+        <Phone className="w-5 h-5" />
+      </div>
       <span className="whitespace-nowrap">{SITE.phone.display}</span>
     </a>
   );

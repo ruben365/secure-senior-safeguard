@@ -269,30 +269,28 @@ function Resources() {
 
           {/* Transitioning Headlines */}
           <div className="text-left mb-8">
-            <h1 className="font-extrabold text-white mb-4 leading-[1.03] tracking-tight text-[clamp(2.8rem,6.2vw,5rem)]">
+            <h1 className="font-extrabold text-white mb-4 leading-[1.05] tracking-tight text-[clamp(2.525rem,5.75vw,4.5rem)]">
               <RotatingHeadlines headlines={heroHeadlines} className="" />
             </h1>
-            <p className="text-[1.05rem] md:text-[1.35rem] text-white max-w-xl">
+            <p className="text-lg md:text-xl text-white/90 max-w-xl">
               Expert-curated guides and tools designed to keep you
               and your family safe
             </p>
           </div>
-          <div className="flex w-full max-w-[20rem] flex-col gap-2.5 sm:max-w-none sm:flex-row sm:gap-4 sm:justify-start">
+          <div className="flex flex-col sm:flex-row gap-4 justify-start">
             <Button
               size="heroPill"
               variant="heroPrimary"
-              className="w-full max-sm:h-[44px] max-sm:px-[18px] max-sm:text-[12.5px] max-sm:tracking-[0.01em] sm:w-auto"
               onClick={() => scrollToSection("guides")}
             >
-              Browse Digital Guides
+              Shop Digital Guides
             </Button>
             <Button
               size="heroPill"
               variant="heroOutline"
-              className="w-full text-white hover:text-white max-sm:h-[44px] max-sm:px-[18px] max-sm:text-[12.5px] max-sm:tracking-[0.01em] sm:w-auto"
               onClick={() => setReadBooksOpen(true)}
             >
-              Open Your Reader
+              Read Your Books
             </Button>
           </div>
         </Hero>
@@ -305,9 +303,8 @@ function Resources() {
       <div className="hidden lg:block h-14" />
       <div className="lg:hidden h-6" />
 
-      <div className="below-fold-premium">
       {/* Introduction Section */}
-      <section className="premium-section-shell py-16 md:py-24 relative overflow-hidden bg-background">
+      <section className="py-16 md:py-24 relative overflow-hidden bg-background">
         <div className="container mx-auto px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-10">
             <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
@@ -326,9 +323,9 @@ function Resources() {
 
           {/* AI Analysis CTA - link to training */}
           <div className="text-center pb-4">
-            <Button asChild size="lg" variant="heroPrimary" className="text-white">
+            <Button asChild size="lg">
               <Link to="/training/ai-analysis">
-                Try the AI Scam Analysis Tool
+                Try Our AI Scam Analysis Tool
               </Link>
             </Button>
           </div>
@@ -419,7 +416,7 @@ function Resources() {
       </section>
 
       {/* Digital Security Guides */}
-      <section id="guides" className="premium-section-shell py-16 md:py-24 bg-muted/20 relative overflow-hidden">
+      <section id="guides" className="py-16 md:py-24 bg-muted/20 relative overflow-hidden">
         <div className="container mx-auto px-6 lg:px-8">
           <div className="text-center mb-10">
             <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
@@ -636,7 +633,7 @@ function Resources() {
       <SectionDivider variant="wave" color="muted" />
 
       {/* Why Shop With Us */}
-      <section className="premium-section-shell py-16 md:py-24 bg-muted/30 dot-grid-bg">
+      <section className="py-16 md:py-24 bg-muted/30 dot-grid-bg">
         <div className="container mx-auto px-6 lg:px-8">
           <div className="text-center mb-8">
             <h2 className="text-2xl md:text-3xl font-bold mb-3">Why Trust InVision Network</h2>
@@ -659,7 +656,6 @@ function Resources() {
           </div>
         </div>
       </section>
-      </div>
 
       {/* Cart Abandonment Notification */}
       <CartAbandonmentNotification />

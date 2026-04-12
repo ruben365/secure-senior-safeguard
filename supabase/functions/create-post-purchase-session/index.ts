@@ -67,18 +67,6 @@ const ALLOWED_PLAN_TIERS = new Set([
   "enterprise",
 ]);
 
-const resolveDashboardPath = (value: unknown) => {
-  if (typeof value !== "string") return "/portal";
-  const trimmed = value.trim();
-  if (!trimmed.startsWith("/") || trimmed.startsWith("//")) {
-    return "/portal";
-  }
-  if (trimmed.length > 200) {
-    return "/portal";
-  }
-  return trimmed;
-};
-
 async function emailMagicLink(
   resendApiKey: string,
   toEmail: string,
@@ -257,7 +245,6 @@ serve(async (req) => {
       .slice(0, 100)
       .trim();
     const isSubscription = session.mode === "subscription";
-    const dashboardPath = resolveDashboardPath(session.metadata?.return_to);
 
     // Plan tier from session metadata, allow-list-bounded
     const rawTier = (session.metadata?.plan_tier || "starter").toLowerCase();
@@ -436,7 +423,7 @@ serve(async (req) => {
         ? origin
         : "https://www.invisionnetwork.org";
 
-      const redirectTo = `${safeOrigin}${dashboardPath}`;
+      const redirectTo = `${safeOrigin}/portal`;
 
       const { data: linkData, error: linkError } =
         await supabaseAdmin.auth.admin.generateLink({
@@ -497,6 +484,8 @@ serve(async (req) => {
         }
       }
     }
+
+    const dashboardPath = "/portal";
 
     const response = {
       success: true,

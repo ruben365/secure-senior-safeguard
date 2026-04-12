@@ -16,7 +16,7 @@ const AlertDialogOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AlertDialogPrimitive.Overlay
     className={cn(
-      "fixed inset-0 z-50 bg-black/35 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 backdrop-blur-[6px]",
+      "fixed inset-0 z-50 bg-black/50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 backdrop-blur-sm",
       className,
     )}
     style={{
@@ -37,7 +37,8 @@ const AlertDialogContent = React.forwardRef<
     <AlertDialogPrimitive.Content
       ref={ref}
       className={cn(
-        "site-glass-surface fixed left-[50%] top-[50%] z-50 grid w-[92%] sm:w-full max-w-[440px] max-h-[85vh] overflow-y-auto translate-x-[-50%] translate-y-[-50%] gap-2.5 p-4 sm:p-5 rounded-2xl text-white duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
+        // Compact confirmation dialog — 420px max, tight padding
+        "fixed left-[50%] top-[50%] z-50 grid w-[92%] sm:w-full max-w-[420px] max-h-[85vh] overflow-y-auto translate-x-[-50%] translate-y-[-50%] gap-2.5 border border-border/60 bg-background/97 backdrop-blur-2xl p-4 sm:p-5 rounded-2xl shadow-[0_20px_60px_-20px_rgba(15,23,42,0.28),0_8px_20px_-8px_rgba(15,23,42,0.12),0_0_0_1px_rgba(255,255,255,0.04),inset_0_1px_0_0_rgba(255,255,255,0.6)] duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
         className,
       )}
       style={{
@@ -84,7 +85,7 @@ const AlertDialogTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AlertDialogPrimitive.Title
     ref={ref}
-    className={cn("text-[20px] font-semibold leading-tight tracking-tight text-white", className)}
+    className={cn("text-[18px] font-semibold leading-tight tracking-tight text-foreground", className)}
     {...props}
   />
 ));
@@ -96,7 +97,7 @@ const AlertDialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AlertDialogPrimitive.Description
     ref={ref}
-    className={cn("text-[13px] text-white/72 leading-snug", className)}
+    className={cn("text-[13px] text-muted-foreground leading-snug", className)}
     {...props}
   />
 ));

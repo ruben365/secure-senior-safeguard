@@ -8,7 +8,7 @@ interface PageTransitionProps {
 
 export const PageTransition = forwardRef<HTMLDivElement, PageTransitionProps>(
   ({ children, variant: _variant = "auto" }, _ref) => {
-    const { pathname, hash } = useLocation();
+    const location = useLocation();
     const wrapperRef = useRef<HTMLDivElement>(null);
     const isFirst = useRef(true);
     const [animKey, setAnimKey] = useState(0);
@@ -27,9 +27,7 @@ export const PageTransition = forwardRef<HTMLDivElement, PageTransitionProps>(
       el.style.opacity = "0";
 
       const timer = setTimeout(() => {
-        if (!hash) {
-          window.scrollTo(0, 0);
-        }
+        window.scrollTo(0, 0);
 
         // Bump key to remount children — restarts CSS animations
         setAnimKey((k) => k + 1);
@@ -40,7 +38,7 @@ export const PageTransition = forwardRef<HTMLDivElement, PageTransitionProps>(
       }, 130);
 
       return () => clearTimeout(timer);
-    }, [pathname]);
+    }, [location.pathname]);
 
     return (
       <div ref={wrapperRef} style={{ opacity: 1 }} key={animKey}>

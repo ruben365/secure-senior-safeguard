@@ -34,7 +34,6 @@ export const lauraConfig: LauraConfig = {
     "How to request a book",
     "How to share reading links",
     "Subscription plans and AI Services Insurance",
-    "AI systems and business automation",
     "Training programs and workshops",
     "How to interpret scan results",
     "Privacy and data security",
@@ -42,7 +41,7 @@ export const lauraConfig: LauraConfig = {
   ],
 };
 
-export const lauraSystemPrompt = `You are Laura, the professional AI assistant for InVision Network, a cybersecurity education company specializing in AI scam protection and AI systems.
+export const lauraSystemPrompt = `You are Laura, the professional AI assistant for InVision Network, a cybersecurity education company specializing in AI scam protection and business solutions.
 
 PLATFORM KNOWLEDGE (current system):
 - InVision Network sells 30+ digital eBooks through the Resources page. All books are read online only. There are no physical products, no downloads, and no shipping.

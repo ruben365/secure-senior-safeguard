@@ -56,18 +56,6 @@ const resolveOrigin = (req: Request): string => {
   return ALLOWED_ORIGINS.has(requested) ? requested : CANONICAL_ORIGIN;
 };
 
-const resolveReturnPath = (value: unknown) => {
-  if (typeof value !== "string") return "/portal";
-  const trimmed = value.trim();
-  if (!trimmed.startsWith("/") || trimmed.startsWith("//")) {
-    return "/portal";
-  }
-  if (trimmed.length > 200) {
-    return "/portal";
-  }
-  return trimmed;
-};
-
 // ============================================================================
 // Plan tier allow-list. The list is small and known; restrict so the client
 // can't write arbitrary values into Stripe metadata that downstream code
@@ -135,7 +123,6 @@ serve(async (req) => {
       planTier,
       customerEmail,
       customerName,
-      returnTo,
     } = body;
 
     // ====================================================================
@@ -160,7 +147,6 @@ serve(async (req) => {
 
     const safeCustomerName =
       typeof customerName === "string" ? customerName.slice(0, 100).trim() : "";
-    const safeReturnTo = resolveReturnPath(returnTo);
 
     // ====================================================================
     // Resolve the email. If a JWT is present, use the authenticated user's
@@ -182,19 +168,18 @@ serve(async (req) => {
     }
 
     if (!userEmail) {
-      if (typeof customerEmail === "string" && customerEmail.trim()) {
-        const normalized = customerEmail.toLowerCase().trim();
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(normalized) || normalized.length > 254) {
-          throw new Error("Invalid email format");
-        }
-        userEmail = normalized;
+      if (typeof customerEmail !== "string") {
+        throw new Error("Email is required for subscription checkout");
       }
+      const normalized = customerEmail.toLowerCase().trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(normalized) || normalized.length > 254) {
+        throw new Error("Invalid email format");
+      }
+      userEmail = normalized;
     }
 
-    logStep("Using email for checkout", {
-      email: userEmail || "stripe-checkout-collects-email",
-    });
+    logStep("Using email for checkout", { email: userEmail });
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2024-11-20.acacia" });
 
@@ -229,12 +214,10 @@ serve(async (req) => {
 
     // Find existing customer if any (don't create yet — Stripe Checkout
     // will create one as part of the session if customer_email is given)
-    const customers = userEmail
-      ? await stripe.customers.list({
-          email: userEmail,
-          limit: 1,
-        })
-      : { data: [] };
+    const customers = await stripe.customers.list({
+      email: userEmail,
+      limit: 1,
+    });
     let customerId: string | null = null;
     if (customers.data.length > 0) {
       customerId = customers.data[0].id;
@@ -255,9 +238,7 @@ serve(async (req) => {
     const sessionConfig: Stripe.Checkout.SessionCreateParams = {
       ...(customerId
         ? { customer: customerId }
-        : userEmail
-          ? { customer_email: userEmail }
-          : {}),
+        : { customer_email: userEmail }),
       line_items: [
         {
           price: priceId,
@@ -271,9 +252,8 @@ serve(async (req) => {
         user_id: userId || "guest",
         service_name: safeServiceName.slice(0, 480),
         plan_tier: safePlanTier,
-        customer_email: userEmail || "",
+        customer_email: userEmail,
         customer_name: safeCustomerName.slice(0, 480),
-        return_to: safeReturnTo,
       },
     };
 

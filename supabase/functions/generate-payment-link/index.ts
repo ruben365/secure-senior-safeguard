@@ -20,22 +20,6 @@ interface CartItem {
   quantity: number;
 }
 
-function sanitizeMetadata(raw: unknown): Record<string, string> {
-  const out: Record<string, string> = {};
-  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return out;
-  let count = 0;
-  for (const [key, value] of Object.entries(raw as Record<string, unknown>)) {
-    if (count >= 40) break;
-    if (typeof key !== "string" || key.length > 40) continue;
-    if (value == null) continue;
-    const stringified = typeof value === "string" ? value : JSON.stringify(value);
-    if (!stringified || stringified.length > 480) continue;
-    out[key] = stringified.slice(0, 480);
-    count++;
-  }
-  return out;
-}
-
 // ============================================================================
 // Per-IP rate limit (15 / minute) — public endpoint that creates Stripe
 // payment-link resources. Cap to prevent enumeration / spam.
@@ -142,8 +126,6 @@ serve(async (req) => {
       items: rawItems,
       customerEmail,
       customerName,
-      paymentType,
-      metadata,
     } = body;
 
     // ====================================================================
@@ -226,7 +208,6 @@ serve(async (req) => {
     }
 
     const safeName = sanitizeText(customerName, 100);
-    const safeMetadata = sanitizeMetadata(metadata);
 
     logStep(`Request ${requestId} - Validated`, {
       amountCents,
@@ -274,16 +255,6 @@ serve(async (req) => {
         item_count: String(items.length),
         amount_cents: String(amountCents),
         payment_method: "qr_code",
-        payment_type: sanitizeText(paymentType, 40),
-        ...safeMetadata,
-      },
-      payment_intent_data: {
-        metadata: {
-          customerEmail: safeEmail.slice(0, 480),
-          customerName: safeName.slice(0, 480),
-          paymentType: sanitizeText(paymentType, 40),
-          ...safeMetadata,
-        },
       },
     });
 
@@ -326,7 +297,6 @@ serve(async (req) => {
       JSON.stringify({
         url: paymentLink.url,
         id: paymentLink.id,
-        paymentLinkId: paymentLink.id,
         requestId,
       }),
       {

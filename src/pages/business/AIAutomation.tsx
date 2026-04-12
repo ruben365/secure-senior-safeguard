@@ -165,7 +165,7 @@ const AIAutomation = () => {
                 </Link>
               </Button>
               <Button asChild size="heroPill" variant="heroOutline">
-                <Link to="/ai">View All Services</Link>
+                <Link to="/business">View All Services</Link>
               </Button>
             </div>
           </Hero>

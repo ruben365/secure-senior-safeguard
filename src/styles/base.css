@@ -209,17 +209,16 @@
     --dark-text-muted:  rgba(255, 255, 255, 0.5);
     --dark-placeholder: rgba(255, 255, 255, 0.4);
 
-    /* ── Shadow System — Polished, subtle depth (light theme only) ──
-       Using low-opacity navy-tinted shadows for cohesion with brand.  */
-    --shadow-xs:  0 1px 2px rgba(13, 33, 55, 0.04);
-    --shadow-sm:  0 1px 3px rgba(13, 33, 55, 0.06), 0 1px 2px rgba(13, 33, 55, 0.04);
-    --shadow-md:  0 4px 12px rgba(13, 33, 55, 0.08), 0 2px 4px rgba(13, 33, 55, 0.04);
-    --shadow-lg:  0 10px 24px rgba(13, 33, 55, 0.10), 0 4px 8px rgba(13, 33, 55, 0.06);
+    /* ── Shadow System — DISABLED per design directive (no box-shadows anywhere) ── */
+    --shadow-xs:  none;
+    --shadow-sm:  none;
+    --shadow-md:  none;
+    --shadow-lg:  none;
 
-    --shadow-card:       0 1px 3px rgba(13, 33, 55, 0.06), 0 1px 2px rgba(13, 33, 55, 0.04);
-    --shadow-card-hover: 0 8px 20px rgba(13, 33, 55, 0.10), 0 3px 6px rgba(13, 33, 55, 0.06);
-    --shadow-elevated:   0 12px 32px rgba(13, 33, 55, 0.12), 0 4px 8px rgba(13, 33, 55, 0.06);
-    --shadow-cta:        0 4px 14px rgba(217, 108, 74, 0.30), 0 1px 0 rgba(255, 255, 255, 0.20) inset;
+    --shadow-card:       none;
+    --shadow-card-hover: none;
+    --shadow-elevated:   none;
+    --shadow-cta:        none;
 
     /* ── Sidebar (admin dark) ── */
     --sidebar-background: 215 40% 10%;
@@ -264,59 +263,12 @@
     --container-2xl:  1140px;
     --container-wide: 1280px;
     --container-max:  1440px;
-    --site-shell-max: 1440px;
-    --site-shell-gutter: clamp(1rem, 2.2vw, 2rem);
-    --panel-radius: clamp(1.2rem, 1.35vw, 1.75rem);
-    --panel-radius-lg: clamp(1.5rem, 1.9vw, 2.3rem);
-
-    /* Premium material system */
-    --surface-shell:
-      linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.95) 0%,
-        rgba(255, 249, 244, 0.86) 52%,
-        rgba(255, 255, 255, 0.92) 100%
-      );
-    --surface-shell-soft:
-      linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.9) 0%,
-        rgba(247, 250, 252, 0.82) 100%
-      );
-    --surface-shell-strong:
-      linear-gradient(
-        145deg,
-        rgba(17, 21, 33, 0.92) 0%,
-        rgba(11, 14, 24, 0.88) 54%,
-        rgba(217, 108, 74, 0.22) 100%
-      );
-    --surface-highlight:
-      linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.58) 0%,
-        rgba(255, 255, 255, 0.14) 38%,
-        rgba(255, 255, 255, 0) 100%
-      );
-    --surface-border-soft: rgba(255, 255, 255, 0.7);
-    --surface-border-strong: rgba(255, 255, 255, 0.88);
-    --surface-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.96) inset,
-      0 -1px 0 rgba(255, 255, 255, 0.18) inset,
-      0 28px 70px -42px rgba(15, 23, 42, 0.3),
-      0 14px 28px -24px rgba(217, 108, 74, 0.2);
-    --surface-shadow-hover:
-      0 1px 0 rgba(255, 255, 255, 0.98) inset,
-      0 -1px 0 rgba(255, 255, 255, 0.2) inset,
-      0 40px 96px -46px rgba(15, 23, 42, 0.34),
-      0 18px 34px -24px rgba(217, 108, 74, 0.24);
-    --surface-glow-warm: rgba(217, 108, 74, 0.2);
-    --surface-glow-cool: rgba(59, 130, 246, 0.12);
 
     /* Global text scale — 0.875 = 14px base (compact but readable) */
     --text-scale: 0.875;
 
-    /* ── Shadow XL token ── */
-    --shadow-xl: 0 20px 40px rgba(13, 33, 55, 0.14), 0 6px 12px rgba(13, 33, 55, 0.08);
+    /* ── Shadow XL token — DISABLED ── */
+    --shadow-xl: none;
   }
 
   .dark {
@@ -353,23 +305,6 @@
 @layer base {
   * {
     @apply border-border;
-  }
-
-  .site-shell,
-  .center-container-wide,
-  .container:not([class*="max-w-"]) {
-    width: 100%;
-    max-width: var(--site-shell-max) !important;
-    margin-inline: auto !important;
-    padding-inline: var(--site-shell-gutter) !important;
-    box-sizing: border-box;
-  }
-
-  .container[class*="max-w-"] {
-    width: 100%;
-    margin-inline: auto !important;
-    padding-inline: var(--site-shell-gutter) !important;
-    box-sizing: border-box;
   }
 
   /* ===== SKEUOMORPHISM 2.0 - GLOBAL MATERIAL STYLES ===== */
@@ -455,16 +390,7 @@
     overflow-x: hidden;
     width: 100%;
     position: relative;
-    background-color: #FAFAF8;
-    background-image:
-      radial-gradient(90rem 50rem at 8% -8%, rgba(217, 108, 74, 0.1) 0%, transparent 56%),
-      radial-gradient(68rem 40rem at 100% 0%, rgba(59, 130, 246, 0.08) 0%, transparent 52%),
-      linear-gradient(180deg, rgba(255, 251, 247, 1) 0%, rgba(250, 250, 248, 1) 44%, rgba(247, 249, 252, 1) 100%);
-  }
-
-  main {
-    position: relative;
-    isolation: isolate;
+    background-color: hsl(240 10% 98%);
   }
 
   @media (min-width: 768px) {
@@ -478,62 +404,6 @@
     :root {
       --text-scale: 1; /* full 16px base on mobile for readability — no shrinking */
     }
-  }
-
-  /* ═══════════════════════════════════════════════════════════════════
-     READABLE TEXT ON DARK SURFACES
-     ───────────────────────────────────────────────────────────────────
-     Only dark-background dialogs/modals/sheets get white text tokens.
-     Uses .dark-surface class + specific dark-bg selectors so light
-     popover/select/dropdown content keeps dark text.
-     Alpha-free values — let Tailwind handle opacity via /XX syntax.
-     ═══════════════════════════════════════════════════════════════════ */
-  .dark-surface,
-  [role="dialog"][class*="bg-[rgba(18"],
-  [role="dialog"][class*="bg-[rgba(15"],
-  [role="dialog"][class*="bg-[rgba(12"],
-  [role="dialog"][class*="bg-[#0f"],
-  [role="dialog"][class*="bg-[#0F"],
-  [role="alertdialog"][class*="bg-[rgba(18"],
-  [role="alertdialog"][class*="bg-[rgba(15"],
-  [role="alertdialog"][class*="bg-[rgba(12"],
-  [role="alertdialog"][class*="bg-[#0f"],
-  [role="alertdialog"][class*="bg-[#0F"],
-  [role="dialog"][class*="dark"],
-  [role="alertdialog"][class*="dark"] {
-    /* Text — solid, no embedded alpha */
-    --foreground: 0 0% 100%;               /* white */
-    --card-foreground: 0 0% 100%;
-    --popover-foreground: 0 0% 100%;
-    --muted-foreground: 0 0% 70%;          /* light gray — no alpha */
-
-    /* Surfaces — solid dark tones */
-    --muted: 0 0% 20%;
-    --card: 0 0% 15%;
-    --background: 0 0% 10%;
-
-    /* Borders & inputs — solid dark grays */
-    --border: 0 0% 25%;
-    --input: 0 0% 22%;
-    --ring: 25 95% 53%;                     /* keep accent orange ring */
-  }
-
-  /* Links inside dark dialogs: orange accent for visibility */
-  .dark-surface a:not([class*="Button"]):not([role="button"]),
-  [role="dialog"][class*="bg-[rgba(18"] a:not([class*="Button"]):not([role="button"]),
-  [role="dialog"][class*="bg-[rgba(15"] a:not([class*="Button"]):not([role="button"]),
-  [role="dialog"][class*="bg-[rgba(12"] a:not([class*="Button"]):not([role="button"]),
-  [role="dialog"][class*="bg-[#0f"] a:not([class*="Button"]):not([role="button"]),
-  [role="alertdialog"][class*="bg-[rgba(18"] a:not([class*="Button"]):not([role="button"]) {
-    color: #F97316;
-  }
-  .dark-surface a:not([class*="Button"]):not([role="button"]):hover,
-  [role="dialog"][class*="bg-[rgba(18"] a:not([class*="Button"]):not([role="button"]):hover,
-  [role="dialog"][class*="bg-[rgba(15"] a:not([class*="Button"]):not([role="button"]):hover,
-  [role="dialog"][class*="bg-[rgba(12"] a:not([class*="Button"]):not([role="button"]):hover,
-  [role="dialog"][class*="bg-[#0f"] a:not([class*="Button"]):not([role="button"]):hover,
-  [role="alertdialog"][class*="bg-[rgba(18"] a:not([class*="Button"]):not([role="button"]):hover {
-    color: #fb923c;
   }
 
   /* Accessibility - Skip to content link */
@@ -615,6 +485,12 @@
     contain: style;
     position: relative;
     z-index: 1;
+    zoom: 0.75;
+  }
+
+  /* Keep navigation at full size by counter-scaling the zoom */
+  nav {
+    zoom: calc(1 / 0.75);
   }
 
   /* Prevent image flicker and layout shift */
@@ -647,11 +523,9 @@
   h5,
   h6 {
     @apply font-bold;
-    font-family: "Fraunces", "Lora", ui-serif, Georgia, serif;
-    font-optical-sizing: auto;
-    font-variation-settings: "opsz" 96, "SOFT" 30;
-    line-height: 1.08;
-    letter-spacing: -0.025em;
+    font-family: "Lora", "Rubik", ui-serif, Georgia, serif;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
     text-wrap: balance;
     font-weight: 700;
     color: hsl(var(--foreground));
@@ -659,28 +533,27 @@
   }
 
   h1 {
-    /* Editorial display — large, tight, optically sized */
-    font-size: clamp(2rem, 5vw, 3.25rem);
-    letter-spacing: -0.032em;
-    line-height: 1.02;
-    font-weight: 800;
-    font-variation-settings: "opsz" 144, "SOFT" 30;
+    /* Compact: ~28-36px range (was 34-64px with old zoom) */
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    font-weight: 900;
   }
 
   h2 {
-    font-size: clamp(1.5rem, 3.5vw, 2.375rem);
-    letter-spacing: -0.028em;
-    line-height: 1.08;
-    font-weight: 700;
-    font-variation-settings: "opsz" 120, "SOFT" 30;
+    /* Compact: ~22-28px range */
+    font-size: clamp(1.375rem, 3vw, 2rem);
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    font-weight: 800;
   }
 
   h3 {
-    font-size: clamp(1.25rem, 2.75vw, 1.75rem);
-    letter-spacing: -0.02em;
-    line-height: 1.12;
+    /* Compact: ~18-22px range */
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
     font-weight: 700;
-    font-variation-settings: "opsz" 72, "SOFT" 30;
   }
 
   h4 {
@@ -706,19 +579,12 @@
   }
 
   p {
-    font-size: 0.9375rem; /* 15px */
+    font-size: 0.9375rem; /* 15px at 16px base, ~13px with 0.85 scale */
     line-height: 1.65;
     letter-spacing: -0.011em;
     margin: 0 0 0.75rem;
-    /* Full foreground for WCAG AA contrast; use .text-muted-foreground for secondary text */
-    color: hsl(var(--foreground));
+    color: hsl(var(--foreground) / 0.85);
     max-width: 65ch;
-  }
-
-  /* Secondary/muted paragraph text — still meets WCAG AA */
-  p.text-muted,
-  .text-secondary {
-    color: hsl(var(--muted-foreground));
   }
 
   .lead {
@@ -757,16 +623,15 @@
     line-height: 1.6;
   }
 
-  /* Tap targets — WCAG/Apple HIG/Material guidance */
+  /* Tap targets — 36px desktop, 44px mobile (no zoom to compensate for) */
   button,
   [role="button"],
   a[role="button"] {
-    min-height: 38px;
-    min-width: 38px;
+    min-height: 36px;
+    min-width: 36px;
   }
 
-  /* Mobile: enforce 44×44 minimum touch target */
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
     button,
     [role="button"],
     a[role="button"] {
@@ -777,32 +642,6 @@
 
   button {
     font-size: 1rem;
-  }
-
-  /* ===== POLISH: Consistent focus ring across interactive elements ===== */
-  :focus-visible {
-    outline: none;
-  }
-  button:focus-visible,
-  a:focus-visible,
-  [role="button"]:focus-visible,
-  input:focus-visible,
-  textarea:focus-visible,
-  select:focus-visible,
-  [tabindex]:focus-visible {
-    outline: 2px solid hsl(var(--primary) / 0.6);
-    outline-offset: 3px;
-    border-radius: inherit;
-  }
-
-  /* ===== POLISH: Respect reduced motion ===== */
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
   }
 
   /* ===== PERFORMANCE OPTIMIZATION ===== */

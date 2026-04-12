@@ -200,12 +200,6 @@ verify_jwt = false
 [functions.guest-scan-payment]
 verify_jwt = false
 
-[functions.get-scan-access]
-verify_jwt = true
-
-[functions.prepare-authenticated-scan]
-verify_jwt = true
-
 [functions.reset-book-access]
 verify_jwt = false
 

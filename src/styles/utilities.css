@@ -1,23 +1,27 @@
 /* Utility Classes */
 
-/* ===== VIEWPORT HELPERS ===== */
+/* ===== ZOOM-COMPENSATED VIEWPORT HELPERS ===== */
+/* The #root has zoom: 0.75. Inside that context:
+   - 100vh in CSS renders as 75vh visually.
+   - Use these helpers when you need a full visual viewport height. */
 
+/* Full visual viewport height (compensates for 0.75 zoom on #root) */
 .h-viewport {
-  height: 100vh;
+  height: calc(100vh / 0.75);
 }
 
 .min-h-viewport {
-  min-height: 100vh;
+  min-height: calc(100vh / 0.75);
 }
 
-/* 80vh */
+/* 80vh visual */
 .min-h-viewport-80 {
-  min-height: 80vh;
+  min-height: calc(80vh / 0.75);
 }
 
-/* 60vh */
+/* 60vh visual */
 .min-h-viewport-60 {
-  min-height: 60vh;
+  min-height: calc(60vh / 0.75);
 }
 
 /* ===== DARK HERO GRID OVERLAY ===== */
@@ -79,22 +83,22 @@
   color: transparent;
 }
 
-/* ===== GLOBAL CARD STYLE — Premium polished ===== */
+/* ===== GLOBAL CARD STYLE — Premium ===== */
 [data-slot="card"],
 .glass-card {
-  background: hsl(var(--card));
-  border: 1px solid hsl(var(--border) / 0.6) !important;
-  border-radius: 0.875rem;
+  background: hsl(0 0% 100% / 0.98);
+  border: 1px solid hsl(var(--border) / 0.7) !important;
+  border-radius: 0.75rem;
   box-shadow: var(--shadow-card);
-  transition: box-shadow 0.25s cubic-bezier(0.2, 0, 0.2, 1),
-              border-color 0.25s ease,
-              transform 0.25s cubic-bezier(0.2, 0, 0.2, 1);
+  transition: box-shadow 0.22s cubic-bezier(0.2, 0, 0.2, 1),
+              border-color 0.22s ease,
+              transform 0.22s cubic-bezier(0.2, 0, 0.2, 1);
 }
 
 [data-slot="card"]:hover,
 .glass-card:hover {
   box-shadow: var(--shadow-card-hover);
-  border-color: hsl(var(--primary) / 0.25) !important;
+  border-color: hsl(var(--primary) / 0.2) !important;
   transform: translateY(-2px);
 }
 

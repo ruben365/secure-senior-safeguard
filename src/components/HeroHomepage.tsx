@@ -6,13 +6,11 @@ import {
 } from "lucide-react";
 import corineHero from "@/assets/hero-wife-office.jpg";
 
-const highPriorityImageProps = { fetchpriority: "high" } as const;
-
 /* ── Feature items — Row 1 (top) ── */
 const featuresRow1 = [
   {
     icon: Bot,
-    title: "AI Tools",
+    title: "AI Business Tools",
     desc: "Custom software that automates your daily operations.",
   },
   {
@@ -64,10 +62,10 @@ export const HeroHomepage = () => {
       <div className="hero-home__bg">
         <img
           src={corineHero}
-          alt="InVision Network co-founder"
+          alt="Corine — InVision Network co-founder"
           loading="eager"
           decoding="async"
-          {...highPriorityImageProps}
+          fetchPriority="high"
         />
         <div className="hero-home__top-veil" />
         <div className="hero-home__glow" aria-hidden="true" />
@@ -75,7 +73,7 @@ export const HeroHomepage = () => {
 
       {/* ── 2. Hero Content ── */}
       <div className="hero-home__content">
-        <div className="site-shell w-full px-6 lg:px-8">
+        <div className="max-w-[1600px] mx-auto w-full px-6 lg:px-8">
           <div className="hero-home__copy">
 
             {/* Headline */}
@@ -97,8 +95,8 @@ export const HeroHomepage = () => {
               <Link to="/training#pricing" className="hero-home__cta">
                 Get Protected
               </Link>
-              <Link to="/ai" className="hero-home__cta">
-                Explore AI
+              <Link to="/business" className="hero-home__cta">
+                See Our Work
                 <ArrowRight />
               </Link>
             </div>
@@ -108,7 +106,7 @@ export const HeroHomepage = () => {
 
       {/* ── 3. Glassmorphism Bottom Panel ── */}
       <div className="hero-home__panel">
-        <div className="site-shell w-full px-6 lg:px-8">
+        <div className="max-w-[1600px] mx-auto w-full px-6 lg:px-8">
           <div className="hero-home__panel-inner">
 
           {/* Row 1 — Top features */}

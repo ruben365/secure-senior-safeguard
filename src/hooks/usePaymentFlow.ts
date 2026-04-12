@@ -29,9 +29,8 @@ interface CreateSubscriptionCheckoutOptions {
   priceId: string;
   serviceName: string;
   planTier?: string;
-  customerEmail?: string;
-  customerName?: string;
-  returnTo?: string;
+  customerEmail: string;
+  customerName: string;
   // discountCode field removed Phase 4.9d — `discount_codes` table was dropped
   // and the create-subscription-checkout edge function no longer reads it.
 }
@@ -182,7 +181,6 @@ export const usePaymentFlow = () => {
               planTier: options.planTier ?? options.serviceName,
               customerEmail: options.customerEmail,
               customerName: options.customerName,
-              returnTo: options.returnTo ?? null,
             },
           }),
           15000,

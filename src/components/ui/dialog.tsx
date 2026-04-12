@@ -19,7 +19,7 @@ const DialogOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      "fixed inset-0 z-50 bg-black/35 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 backdrop-blur-[6px]",
+      "fixed inset-0 z-50 bg-black/50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 backdrop-blur-sm",
       className,
     )}
     style={{
@@ -39,7 +39,6 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       onOpenAutoFocus={(e) => {
-        e.preventDefault();
         const target = e.currentTarget as HTMLElement;
         const firstInput = target.querySelector(
           "input, button, textarea, select",
@@ -49,18 +48,16 @@ const DialogContent = React.forwardRef<
         }
       }}
       className={cn(
-        "site-glass-surface fixed left-[50%] top-[50%] z-50 grid w-[calc(100vw-1rem)] sm:w-full max-w-[min(460px,calc(100vw-1rem))] max-h-[min(88svh,calc(100vh-1rem))] overflow-y-auto overscroll-contain translate-x-[-50%] translate-y-[-50%] gap-2 p-4 sm:p-5 rounded-[20px] text-white duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
+        "fixed left-[50%] top-[50%] z-50 grid w-[92%] sm:w-full max-w-[440px] max-h-[85vh] overflow-y-auto translate-x-[-50%] translate-y-[-50%] gap-2 border border-[rgba(255,255,255,0.08)] bg-[rgba(18,14,12,0.92)] backdrop-blur-[20px] p-5 rounded-[14px] text-white duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
         className,
       )}
       style={{
         animationTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-        scrollbarGutter: "stable",
       }}
-      data-slot="dialog-content"
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className="absolute right-3 top-3 rounded-full p-1.5 min-w-[36px] min-h-[36px] flex items-center justify-center text-white/68 transition-all hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/30 disabled:pointer-events-none">
+      <DialogPrimitive.Close className="absolute right-2.5 top-2.5 rounded-full p-1.5 min-w-[32px] min-h-[32px] flex items-center justify-center text-[rgba(255,255,255,0.5)] transition-all hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/30 disabled:pointer-events-none">
         <X className="h-4 w-4" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
@@ -105,7 +102,7 @@ const DialogTitle = React.forwardRef<
   <DialogPrimitive.Title
     ref={ref}
     className={cn(
-      "text-[18px] font-semibold leading-tight tracking-tight text-white",
+      "text-[16px] font-semibold leading-tight tracking-tight text-white",
       className,
     )}
     {...props}
@@ -119,7 +116,7 @@ const DialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn("text-[13px] text-white/72 leading-snug", className)}
+    className={cn("text-[13px] text-[rgba(255,255,255,0.7)] leading-snug", className)}
     {...props}
   />
 ));

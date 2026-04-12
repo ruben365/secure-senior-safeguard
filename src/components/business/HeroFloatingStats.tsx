@@ -52,11 +52,11 @@ const HeroFloatingStats = () => {
                   className="hfs-icon-glow absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 />
                 <stat.icon
-                  className="relative w-[18px] h-[18px] text-white/84 transition-colors duration-300 group-hover:text-white"
+                  className="relative w-[18px] h-[18px] text-[#0f172a] transition-colors duration-300 group-hover:text-[#d96c4a]"
                   strokeWidth={1.75}
                 />
               </div>
-              <span className="text-[14px] font-bold text-white/92 whitespace-nowrap tracking-tight">
+              <span className="text-[14px] font-bold text-[#0f172a]/90 whitespace-nowrap tracking-tight">
                 {stat.text}
               </span>
             </motion.div>

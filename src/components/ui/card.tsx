@@ -9,7 +9,10 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "ui-premium-panel ui-premium-panel--soft relative isolate overflow-hidden rounded-[22px] md:rounded-[26px] text-card-foreground",
+      "relative rounded-[14px] bg-card text-card-foreground",
+      "border border-border/70",
+      "transition-all duration-200",
+      "hover:border-primary/20 hover:-translate-y-0.5",
       className,
     )}
     {...props}
@@ -23,7 +26,7 @@ const CardHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("relative z-10 flex flex-col space-y-1.5 p-5 sm:p-6 md:p-7", className)}
+    className={cn("relative z-10 flex flex-col space-y-1.5 p-6", className)}
     {...props}
   />
 ));
@@ -36,7 +39,7 @@ const CardTitle = React.forwardRef<
   <h3
     ref={ref}
     className={cn(
-      "text-[1.05rem] font-semibold leading-tight tracking-tight md:text-[1.12rem]",
+      "text-lg font-semibold leading-tight tracking-tight",
       className,
     )}
     {...props}
@@ -60,7 +63,7 @@ const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("relative z-10 p-5 pt-0 sm:p-6 sm:pt-0 md:p-7 md:pt-0", className)} {...props} />
+  <div ref={ref} className={cn("relative z-10 p-6 pt-0", className)} {...props} />
 ));
 CardContent.displayName = "CardContent";
 
@@ -70,7 +73,7 @@ const CardFooter = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("relative z-10 flex items-center p-5 pt-0 sm:p-6 sm:pt-0 md:p-7 md:pt-0", className)}
+    className={cn("relative z-10 flex items-center p-6 pt-0", className)}
     {...props}
   />
 ));

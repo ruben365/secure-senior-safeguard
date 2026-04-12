@@ -56,7 +56,7 @@ function About() {
       year: "2023",
       title: "The Beginning",
       description:
-        "After our founders were victims of a sophisticated data breach and extortion attempt, InVision Network was born with a mission to protect families from the same trauma they experienced.",
+        "After Ruben and Corine were victims of a sophisticated data breach and extortion attempt, InVision Network was born with a mission to protect families from the same trauma they experienced.",
     },
     {
       year: "Early 2024",
@@ -117,8 +117,8 @@ function About() {
     <PageTransition variant="fade">
       <SEO
         title="About InVision Network — Cybersecurity Experts in Kettering, Ohio"
-        description="Meet the team behind InVision Network. Founded in Kettering, Ohio, we protect Southwest Ohio families and businesses from AI-powered scams, deepfakes, and digital fraud."
-        keywords="InVision Network about, cybersecurity Kettering Ohio, Southwest Ohio AI protection"
+        description="Meet the team behind InVision Network. Founded by Ruben Nk and Corine Mk in Kettering, Ohio, we protect Southwest Ohio families and businesses from AI-powered scams, deepfakes, and digital fraud."
+        keywords="InVision Network about, cybersecurity Kettering Ohio, Ruben Nk, Corine Mk, Southwest Ohio AI protection"
         breadcrumbs={[
           { name: "Home", url: "https://www.invisionnetwork.org/" },
           { name: "About", url: "https://www.invisionnetwork.org/about" },
@@ -134,29 +134,19 @@ function About() {
           subheadline=""
           showScrollIndicator={true}
         >
-          <div className="text-left mb-6 sm:mb-8">
-            <h1 className="font-extrabold text-white mb-4 leading-[1.03] tracking-tight text-[clamp(2.8rem,6.2vw,5rem)]">
+          <div className="text-left mb-8">
+            <h1 className="font-extrabold text-white mb-4 leading-[1.05] tracking-tight text-[clamp(2.525rem,5.75vw,4.5rem)]">
               <RotatingHeadlines headlines={aboutHeadlines} className="" />
             </h1>
-            <p className="text-[1.05rem] md:text-[1.35rem] text-white max-w-xl">
+            <p className="text-lg md:text-xl text-white/90 max-w-xl">
               From victims to protectors. Serving families across Ohio.
             </p>
           </div>
-          <div className="flex w-full max-w-[18rem] flex-col gap-2.5 sm:max-w-none sm:flex-row sm:gap-4 sm:justify-start">
-            <Button
-              size="heroPill"
-              variant="heroPrimary"
-              className="w-full px-[18px] text-[12.5px] tracking-[0.01em] sm:w-auto sm:px-6 sm:text-[13px] sm:tracking-[0.02em]"
-              asChild
-            >
+          <div className="flex flex-col sm:flex-row gap-4 justify-start">
+            <Button size="heroPill" variant="heroPrimary" asChild>
               <Link to="/training">Start Training</Link>
             </Button>
-            <Button
-              size="heroPill"
-              variant="heroOutline"
-              className="w-full px-[18px] text-[12.5px] tracking-[0.01em] text-white hover:text-white sm:w-auto sm:px-6 sm:text-[13px] sm:tracking-[0.02em]"
-              asChild
-            >
+            <Button size="heroPill" variant="heroOutline" asChild>
               <Link to="/contact">Get in Touch</Link>
             </Button>
           </div>
@@ -170,7 +160,7 @@ function About() {
 
       {/* Answer summary — who we are at a glance */}
       <AnswerSummary
-        summary="InVision Network is a cybersecurity company founded in Kettering, Ohio. We protect families and small businesses from AI-powered scams through hands-on training, automated defenses, and 24/7 monitoring — serving the greater Dayton area and beyond."
+        summary="InVision Network is a cybersecurity company founded by Ruben Nk and Corine Mk in Kettering, Ohio. We protect families and small businesses from AI-powered scams through hands-on training, automated defenses, and 24/7 monitoring — serving the greater Dayton area and beyond."
         ctaHref="/contact"
         ctaLabel="Get in touch with our team"
         className="py-6"
@@ -178,10 +168,9 @@ function About() {
 
       <TrustBar />
 
-      <div className="below-fold-premium">
       {/* Our Story */}
       <MeshBackground variant="subtle" withOrbs>
-      <section className="premium-section-shell py-10 md:py-14 bg-transparent relative overflow-hidden">
+      <section className="py-10 md:py-14 bg-transparent relative overflow-hidden">
 
         <div className="container mx-auto px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-6 lg:gap-10 items-center">
@@ -194,7 +183,7 @@ function About() {
               </h2>
               <div className="space-y-2.5 text-sm text-muted-foreground leading-relaxed">
                 <p>
-                  When our founders fell victim to a sophisticated data
+                  When Ruben and Corine fell victim to a sophisticated data
                   breach, their worst fears came true. All their passwords,
                   emails, and personal information were exposed. Then came the
                   chilling demand: pay thousands of dollars, or their private
@@ -204,8 +193,8 @@ function About() {
                   This traumatic experience transformed them from victims into
                   protectors. Even before entering the cybersecurity field,
                   they realized anyone can become a target. The attackers were
-                  sophisticated, relentless, and terrifying — this drove our founders
-                  to dedicate their careers to protecting others.
+                  sophisticated, relentless, and terrifying - this drove Ruben
+                  to dedicate his career to protecting others.
                 </p>
                 <p>
                   Today, InVision Network exists because of that painful
@@ -239,7 +228,7 @@ function About() {
       <SectionDivider variant="wave" color="muted" />
 
       {/* Timeline */}
-      <section className="premium-section-shell py-10 md:py-14 bg-muted/30 relative overflow-hidden">
+      <section className="py-10 md:py-14 bg-muted/30 relative overflow-hidden">
 
         <div className="container mx-auto px-6 lg:px-8">
           <div className="text-center mb-8">
@@ -258,7 +247,7 @@ function About() {
       </section>
 
       {/* Founders */}
-      <section id="founders" className="premium-section-shell py-10 md:py-14 bg-background relative overflow-hidden">
+      <section id="founders" className="py-10 md:py-14 bg-background relative overflow-hidden">
 
         <div className="container mx-auto px-6 lg:px-8">
           <div className="text-center mb-8">
@@ -286,15 +275,15 @@ function About() {
                 </div>
                 <Badge className="absolute top-3 right-3 bg-primary text-primary-foreground text-[10px]">Co-Founder & CEO</Badge>
               </div>
-              <h3 className="text-xl font-black mb-1.5 text-foreground">Co-Founder &amp; CEO</h3>
+              <h3 className="text-xl font-black mb-1.5 text-foreground">Ruben</h3>
               <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
                 Cybersecurity Analyst with 5 years of experience protecting
-                organizations and families. After falling victim to a
-                sophisticated scam that exposed passwords and emails — with
-                criminals demanding payment to delete personal data — he was
-                inspired to enter the cybersecurity field, embracing a deeper
-                mission: making enterprise-level security accessible to
-                everyone through <Link to="/training" className="text-primary hover:underline font-medium">our workshops</Link> and hands-on education.
+                organizations and families. After he and his wife Corine fell
+                victim to a sophisticated scam that exposed their passwords
+                and emails - with criminals demanding payment to delete their
+                data - Ruben was inspired to enter the cybersecurity field,
+                embracing a deeper mission: making enterprise-level security
+                accessible to everyone through <Link to="/training" className="text-primary hover:underline font-medium">our workshops</Link> and hands-on education.
               </p>
               <blockquote className="border-l-2 border-primary pl-3 italic text-xs text-muted-foreground">
                 "Everyone deserves to feel safe online, regardless of their
@@ -314,14 +303,14 @@ function About() {
                 </div>
                 <Badge className="absolute top-3 right-3 bg-primary text-primary-foreground text-[10px]">Co-Founder & COO</Badge>
               </div>
-              <h3 className="text-xl font-black mb-1.5 text-foreground">Co-Founder &amp; COO</h3>
+              <h3 className="text-xl font-black mb-1.5 text-foreground">Corine</h3>
               <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
                 Registered Nurse with 4 years of clinical experience and a
                 heart for community wellness. After experiencing identity
-                theft firsthand, she channeled her compassionate care
-                approach into designing trauma-informed cybersecurity
-                training that meets people where they are — especially
-                seniors and vulnerable populations.
+                theft alongside her husband, Corine channeled her
+                compassionate care approach into designing trauma-informed
+                cybersecurity training that meets people where they are -
+                especially seniors and vulnerable populations.
               </p>
               <blockquote className="border-l-2 border-primary pl-3 italic text-xs text-muted-foreground">
                 "Technology should empower, not intimidate. We're here to
@@ -336,7 +325,7 @@ function About() {
 
       {/* Values */}
       <MeshBackground variant="vibrant" withDots>
-      <section className="premium-section-shell py-10 md:py-14">
+      <section className="py-10 md:py-14">
         <div className="container mx-auto px-6 lg:px-8">
           <div className="text-center mb-8">
             <span className="frosted-pill mb-3">Our Values</span>
@@ -408,7 +397,7 @@ function About() {
       <SectionDivider variant="wave" color="background" flip />
 
       {/* Who We Help */}
-      <section className="premium-section-shell py-10 md:py-14 bg-background">
+      <section className="py-10 md:py-14 bg-background">
         <div className="container mx-auto px-6 lg:px-8">
           <div className="text-center mb-8">
             <span className="inline-block text-[10px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-3 py-1 rounded-full mb-3">
@@ -467,14 +456,19 @@ function About() {
 
 
       {/* CTA with Field Background */}
-      <section className="premium-section-shell py-10 md:py-14 relative overflow-hidden bg-muted/30" id="cta">
+      <section className="py-10 md:py-14 relative overflow-hidden" id="cta">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${fieldSunsetCta})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/50 to-transparent" />
 
         <div className="container mx-auto px-6 lg:px-8 relative z-10 text-center">
-          <h2 className="text-2xl md:text-4xl font-black text-foreground mb-3">
+          <h2 className="text-2xl md:text-4xl font-black text-white mb-3 drop-shadow-lg">
             Ready to Join Our Protected Community?
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground mb-5 max-w-2xl mx-auto">
-            Whether you're looking for personal training, <Link to="/ai" className="text-primary underline hover:text-primary/80 font-medium">AI systems</Link>, or
+          <p className="text-base md:text-lg text-white/95 mb-5 max-w-2xl mx-auto drop-shadow-md">
+            Whether you're looking for personal training, <Link to="/business" className="text-white/95 underline hover:text-white font-medium">AI business solutions</Link>, or
             want to support our mission, we'd love to connect.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
@@ -486,18 +480,17 @@ function About() {
                 Start Training
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline">
+            <Button asChild size="lg" variant="heroOutline">
               <Link
-                to="/ai"
-                onClick={() => trackButtonClick("Explore AI", "About CTA")}
+                to="/business"
+                onClick={() => trackButtonClick("Partner With Us", "About CTA")}
               >
-                Explore AI
+                Partner With Us
               </Link>
             </Button>
           </div>
         </div>
       </section>
-      </div>
 
       <Footer />
 

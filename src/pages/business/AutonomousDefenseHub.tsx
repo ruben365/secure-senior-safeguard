@@ -137,7 +137,7 @@ const TierCard = ({
 
     <Button
       onClick={onClick}
-      className={`w-full h-9 sm:h-12 text-sm sm:text-base font-bold rounded-xl ${
+      className={`w-full h-12 font-bold rounded-xl ${
         highlight
           ? "bg-white text-primary hover:bg-white/90"
           : "bg-primary text-white hover:bg-primary/90"
@@ -200,7 +200,7 @@ const AutonomousDefenseHub = () => {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button
                     size="lg"
-                    className="h-9 sm:h-14 px-6 sm:px-10 text-sm sm:text-base font-bold rounded-full bg-gradient-to-r from-primary to-accent text-white shadow-xl hover:opacity-90 transition-opacity"
+                    className="h-14 px-10 font-bold rounded-full bg-gradient-to-r from-primary to-accent text-white shadow-xl hover:opacity-90 transition-opacity"
                     onClick={() => openBooking("Autonomous Defense Hub — Sentinel", 297, "Sentinel")}
                   >
                     Request Early Access <ArrowRight className="ml-2 w-5 h-5" />
@@ -209,9 +209,9 @@ const AutonomousDefenseHub = () => {
                     asChild
                     variant="outline"
                     size="lg"
-                    className="h-9 sm:h-14 px-6 sm:px-10 text-sm sm:text-base font-bold rounded-full border-white/20 text-white hover:bg-white/10"
+                    className="h-14 px-10 font-bold rounded-full border-white/20 text-white hover:bg-white/10"
                   >
-                    <Link to="/ai">View All Services</Link>
+                    <Link to="/business">View All Services</Link>
                   </Button>
                 </div>
               </AnimatedSection>
@@ -748,7 +748,7 @@ const AutonomousDefenseHub = () => {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button
                     size="lg"
-                    className="h-9 sm:h-14 px-6 sm:px-10 text-sm sm:text-base font-bold rounded-full bg-gradient-to-r from-primary to-accent text-white shadow-xl hover:opacity-90 transition-opacity"
+                    className="h-14 px-10 font-bold rounded-full bg-gradient-to-r from-primary to-accent text-white shadow-xl hover:opacity-90 transition-opacity"
                     onClick={() => openBooking("Autonomous Defense Hub — Sentinel", 297, "Sentinel")}
                   >
                     Reserve My Spot <ArrowRight className="ml-2 w-5 h-5" />
@@ -757,7 +757,7 @@ const AutonomousDefenseHub = () => {
                     asChild
                     variant="outline"
                     size="lg"
-                    className="h-9 sm:h-14 px-6 sm:px-10 text-sm sm:text-base font-bold rounded-full border-white/20 text-white hover:bg-white/10"
+                    className="h-14 px-10 font-bold rounded-full border-white/20 text-white hover:bg-white/10"
                   >
                     <a href={SITE.phone.tel}>Call {SITE.phone.display}</a>
                   </Button>

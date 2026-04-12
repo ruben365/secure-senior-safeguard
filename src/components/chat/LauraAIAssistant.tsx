@@ -135,22 +135,6 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
     };
   }, [sendMessage]);
 
-  useEffect(() => {
-    window.dispatchEvent(
-      new CustomEvent("laura-assistant-open-change", {
-        detail: { isOpen },
-      }),
-    );
-
-    return () => {
-      window.dispatchEvent(
-        new CustomEvent("laura-assistant-open-change", {
-          detail: { isOpen: false },
-        }),
-      );
-    };
-  }, [isOpen]);
-
   const toggleRecording = () => {
     if (!recognitionRef.current) return;
     if (isRecording) {
@@ -173,7 +157,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
   /* ─── Closed FAB ─── */
   if (!isOpen) {
     return (
-      <div className="fixed bottom-[calc(env(safe-area-inset-bottom,0px)+4.5rem)] right-4 z-[91] sm:bottom-6 sm:right-6">
+      <div className="fixed bottom-6 right-6 z-fab">
         <button
           onClick={() => setIsOpen(true)}
           className="group relative w-14 h-14 rounded-full bg-gradient-to-br from-primary to-accent shadow-[0_4px_20px_hsl(var(--primary)/0.35),0_12px_40px_-8px_hsl(var(--primary)/0.25)] transition-all duration-300 hover:scale-110 hover:shadow-[0_8px_30px_hsl(var(--primary)/0.45)] active:scale-95 overflow-hidden ring-2 ring-white/20"
@@ -200,7 +184,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
 
   /* ─── Open Panel ─── */
   return (
-    <div className="fixed inset-x-3 bottom-[calc(env(safe-area-inset-bottom,0px)+4.75rem)] z-[91] sm:inset-x-auto sm:bottom-4 sm:right-4 sm:w-[calc(100vw-2rem)] max-w-[380px] sm:max-w-[420px]">
+    <div className="fixed bottom-4 right-4 z-fab w-[calc(100vw-2rem)] max-w-[380px] sm:max-w-[420px]">
       <div className="rounded-3xl border border-border/40 bg-card/95 backdrop-blur-2xl shadow-[0_8px_40px_hsl(var(--primary)/0.12),0_20px_60px_-12px_hsl(258_40%_20%/0.2)] overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-border/40 bg-gradient-to-r from-primary/8 to-accent/5">

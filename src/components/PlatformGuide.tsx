@@ -54,7 +54,7 @@ const guides = [
       {
         title: "Explore our services",
         description:
-          "Browse ScamShield protection, training programs, and AI systems.",
+          "Browse ScamShield protection, training programs, and business solutions.",
       },
       {
         title: "Choose your protection level",
@@ -200,7 +200,7 @@ export const PlatformGuide = ({ triggerButton }: PlatformGuideProps) => {
   const defaultTrigger = (
     <Button
       size="lg"
-      className="gap-2"
+      className="gap-2 bg-gradient-to-r from-primary to-accent hover:opacity-90"
     >
       <BookOpen className="w-5 h-5" />
       How to Use the Platform
@@ -212,10 +212,10 @@ export const PlatformGuide = ({ triggerButton }: PlatformGuideProps) => {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>{triggerButton || defaultTrigger}</DialogTrigger>
       {/* Compact: no scrollbar, teal icon accent, tight padding */}
-      <DialogContent className="sm:max-w-[450px] overflow-hidden rounded-[1.55rem] p-4 sm:p-5 gap-0">
+      <DialogContent className="sm:max-w-[420px] overflow-hidden rounded-2xl p-4 gap-0">
         <DialogHeader className="space-y-0 pb-3">
           <DialogTitle className="flex items-center gap-2 text-base font-semibold leading-tight">
-            <div className="ui-premium-chip h-8 w-8 justify-center rounded-full p-0">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-teal-500/15 to-indigo-500/15 border border-teal-500/30 flex items-center justify-center">
               <BookOpen className="w-4 h-4 text-teal-600" />
             </div>
             Platform User Guide
@@ -224,7 +224,7 @@ export const PlatformGuide = ({ triggerButton }: PlatformGuideProps) => {
 
         <div className="space-y-2.5">
           {/* Quick Tips */}
-          <Card className="p-4 border-primary/20 bg-gradient-to-br from-primary/5 to-accent/5">
+          <Card className="p-4 bg-gradient-to-br from-primary/5 to-accent/5 border-primary/20">
             <div className="flex items-center gap-2 mb-3">
               <HelpCircle className="w-5 h-5 text-primary" />
               <h4 className="font-semibold">Quick Tips</h4>
@@ -261,7 +261,7 @@ export const PlatformGuide = ({ triggerButton }: PlatformGuideProps) => {
                 <AccordionItem
                   key={guide.id}
                   value={guide.id}
-                  className="rounded-[1.1rem] border px-4 transition-colors hover:bg-muted/25"
+                  className="border rounded-lg px-4 bg-card hover:bg-muted/30 transition-colors"
                 >
                   <AccordionTrigger className="hover:no-underline py-4">
                     <div className="flex items-center gap-3 text-left">

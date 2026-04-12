@@ -91,11 +91,11 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
     {
       heading: "Services",
       links: [
-        { to: "/ai", label: "AI" },
-        { to: "/ai#svc-ai-receptionist", label: "AI Receptionist" },
-        { to: "/ai#svc-smart-scheduling", label: "Smart Scheduling" },
-        { to: "/ai#svc-website-design", label: "Website Design" },
-        { to: "/ai#svc-website-insurance", label: "Website Insurance" },
+        { to: "/business", label: "AI for Business" },
+        { to: "/business#svc-ai-receptionist", label: "AI Receptionist" },
+        { to: "/business#svc-smart-scheduling", label: "Smart Scheduling" },
+        { to: "/business#svc-website-design", label: "Website Design" },
+        { to: "/business#svc-website-insurance", label: "Website Insurance" },
       ],
     },
     {
@@ -137,6 +137,8 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
 
   return (
     <footer ref={ref} className="relative">
+      <TrustedTechLogos />
+
       <div className="footer-bg text-white relative overflow-hidden">
         {/* Subtle top edge */}
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -147,7 +149,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
           className="footer-aura absolute right-0 top-0 w-[600px] h-full pointer-events-none opacity-50"
         />
 
-        <div className="site-shell w-full px-6 lg:px-8 py-8 relative z-10">
+        <div className="max-w-[1600px] mx-auto w-full px-6 lg:px-8 py-8 relative z-10">
 
           {/* ─────────── TOP ROW — Brand left + Newsletter card right ─────────── */}
           <div className="flex flex-col lg:flex-row justify-between w-full gap-6 lg:gap-12">
@@ -313,9 +315,6 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
             Social Security numbers.
           </p>
         </div>
-
-        {/* Tech logos — inside footer dark area */}
-        <TrustedTechLogos />
       </div>
     </footer>
   );

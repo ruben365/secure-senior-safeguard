@@ -26,19 +26,18 @@ export const PurchaseThankYouNotification = forwardRef<HTMLDivElement>(function 
   return (
     <AnimatePresence>
       <motion.div
-        initial={{ y: 56 }}
-        animate={{ y: 0 }}
-        exit={{ y: 20 }}
-        transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-        className="site-notification-anchor"
+        initial={{ opacity: 0, y: 50, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 50, scale: 0.95 }}
+        className="fixed bottom-20 right-4 z-50 max-w-sm"
       >
-        <Card className="site-notification-card p-5 shadow-xl border-success/30">
+        <Card className="p-5 shadow-xl border-success/30 bg-card/95 backdrop-blur-sm overflow-hidden">
           {/* Decorative gradient top */}
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-success via-primary to-accent" />
 
           <button
             onClick={dismissAll}
-            className="absolute top-3 right-3 p-1 text-white/56 hover:text-white transition-colors"
+            className="absolute top-3 right-3 p-1 text-muted-foreground hover:text-foreground transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -55,15 +54,17 @@ export const PurchaseThankYouNotification = forwardRef<HTMLDivElement>(function 
 
             <div className="flex-1">
               <motion.h3
-                className="font-bold text-lg text-white mb-1"
-                initial={{ x: -10 }}
-                animate={{ x: 0 }}
+                className="font-bold text-lg mb-1"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
               >
                 Thank You! 🎉
               </motion.h3>
               <motion.p
-                className="text-sm text-white/78 mb-3"
+                className="text-sm text-muted-foreground mb-3"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
               >
                 Your order is being processed. Check your email for confirmation
@@ -74,7 +75,7 @@ export const PurchaseThankYouNotification = forwardRef<HTMLDivElement>(function 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                className="flex items-center gap-2 text-xs text-white/68"
+                className="flex items-center gap-2 text-xs text-muted-foreground"
               >
                 <Heart className="w-3 h-3 text-destructive" />
                 <span>We appreciate your trust in InVision Network</span>
@@ -91,7 +92,7 @@ export const PurchaseThankYouNotification = forwardRef<HTMLDivElement>(function 
             <Button
               asChild
               size="sm"
-              className="w-full text-xs bg-white/8 border-white/18 text-white hover:bg-white/14 hover:text-white"
+              className="w-full text-xs"
               variant="outline"
             >
               <Link to="/resources">
@@ -127,16 +128,15 @@ export const CartEmptyHelpNotification = forwardRef<HTMLDivElement>(function Car
   return (
     <AnimatePresence>
       <motion.div
-        initial={{ y: 56 }}
-        animate={{ y: 0 }}
-        exit={{ y: 20 }}
-        transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-        className="site-notification-anchor"
+        initial={{ opacity: 0, y: 50, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 50, scale: 0.95 }}
+        className="fixed bottom-20 right-4 z-50 max-w-sm"
       >
-        <Card className="site-notification-card p-5 shadow-xl border-primary/25">
+        <Card className="p-5 shadow-xl border-primary/20 bg-card/95 backdrop-blur-sm">
           <button
             onClick={dismissAll}
-            className="absolute top-3 right-3 p-1 text-white/56 hover:text-white transition-colors"
+            className="absolute top-3 right-3 p-1 text-muted-foreground hover:text-foreground transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -145,17 +145,17 @@ export const CartEmptyHelpNotification = forwardRef<HTMLDivElement>(function Car
             <div className="pr-6">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                  <HelpCircle className="w-5 h-5 text-white" />
+                  <HelpCircle className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <p className="font-semibold text-sm text-white">Need Help?</p>
-                  <p className="text-xs text-white/62">
+                  <p className="font-semibold text-sm">Need Help?</p>
+                  <p className="text-xs text-muted-foreground">
                     Your cart is now empty
                   </p>
                 </div>
               </div>
 
-              <p className="text-sm text-white/78 mb-4">
+              <p className="text-sm text-muted-foreground mb-4">
                 Is everything okay? Let us know if you need any assistance or
                 have questions about our products.
               </p>
@@ -165,7 +165,7 @@ export const CartEmptyHelpNotification = forwardRef<HTMLDivElement>(function Car
                   size="sm"
                   variant="outline"
                   onClick={() => setShowFeedback(true)}
-                  className="w-full text-xs justify-start bg-white/8 border-white/18 text-white hover:bg-white/14 hover:text-white"
+                  className="w-full text-xs justify-start"
                 >
                   <MessageCircle className="w-3 h-3 mr-2" />
                   Share Feedback
@@ -173,7 +173,7 @@ export const CartEmptyHelpNotification = forwardRef<HTMLDivElement>(function Car
                 <Button
                   size="sm"
                   asChild
-                  className="w-full text-xs justify-start bg-[linear-gradient(135deg,#ea580c,#c2410c)] border border-[#7c2d12] text-white hover:brightness-110"
+                  className="w-full text-xs justify-start"
                 >
                   <Link to="/contact">
                     <HelpCircle className="w-3 h-3 mr-2" />
@@ -184,7 +184,7 @@ export const CartEmptyHelpNotification = forwardRef<HTMLDivElement>(function Car
                   size="sm"
                   variant="ghost"
                   onClick={dismissAll}
-                  className="w-full text-xs text-white/72 hover:text-white hover:bg-white/8"
+                  className="w-full text-xs text-muted-foreground"
                 >
                   I'm Just Browsing
                 </Button>
@@ -192,26 +192,26 @@ export const CartEmptyHelpNotification = forwardRef<HTMLDivElement>(function Car
             </div>
           ) : (
             <div className="pr-6">
-              <p className="font-semibold text-sm text-white mb-2">How can we improve?</p>
+              <p className="font-semibold text-sm mb-2">How can we improve?</p>
               <Textarea
                 value={feedback}
                 onChange={(e) => setFeedback(e.target.value)}
                 placeholder="Tell us what would make your experience better..."
-                className="mb-3 text-sm min-h-[80px] bg-white/8 border-white/16 text-white placeholder:text-white/45"
+                className="mb-3 text-sm min-h-[80px]"
               />
               <div className="flex gap-2">
                 <Button
                   size="sm"
                   variant="outline"
                   onClick={() => setShowFeedback(false)}
-                  className="flex-1 text-xs bg-white/8 border-white/18 text-white hover:bg-white/14 hover:text-white"
+                  className="flex-1 text-xs"
                 >
                   Back
                 </Button>
                 <Button
                   size="sm"
                   onClick={handleSubmitFeedback}
-                  className="flex-1 text-xs bg-[linear-gradient(135deg,#ea580c,#c2410c)] border border-[#7c2d12] text-white hover:brightness-110"
+                  className="flex-1 text-xs"
                 >
                   <Send className="w-3 h-3 mr-1" />
                   Submit

@@ -10,14 +10,6 @@ interface GuestScanPaymentResponse {
   paymentIntentId: string;
 }
 
-interface GuestScanCheckoutResponse {
-  checkoutUrl: string;
-  sessionId: string;
-  scanId: string;
-  amount: number;
-  filePath: string;
-}
-
 /**
  * Extract the real error from a Supabase FunctionsHttpError.
  *
@@ -107,48 +99,8 @@ export const useStripePayment = () => {
     }
   }, []);
 
-  const createGuestScanCheckout = useCallback(async (file: File) => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const { data, error: fnError } = await supabase.functions.invoke(
-        "guest-scan-payment",
-        {
-          body: {
-            fileName: file.name,
-            fileSize: file.size,
-            fileType: file.type,
-            checkoutMode: true,
-          },
-        },
-      );
-
-      if (fnError) {
-        const real = await extractEdgeFunctionError(
-          fnError,
-          "Failed to initialize payment.",
-        );
-        throw new Error(real);
-      }
-
-      if (!data?.checkoutUrl || !data?.sessionId || !data?.scanId || !data?.filePath) {
-        throw new Error("Incomplete checkout response. Please try again.");
-      }
-
-      return data as GuestScanCheckoutResponse;
-    } catch (err: any) {
-      const message = err?.message || "Payment setup failed.";
-      setError(message);
-      throw err;
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
   return {
     createGuestScanPayment,
-    createGuestScanCheckout,
     loading,
     error,
     clearError: () => setError(null),

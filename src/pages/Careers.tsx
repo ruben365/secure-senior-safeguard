@@ -5,6 +5,13 @@ import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
 import { SEO } from "@/components/SEO";
 import { PageTransition } from "@/components/PageTransition";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -19,7 +26,6 @@ import {
   Shield,
   Globe,
   Sparkles,
-  ArrowRight,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AIImageDisclaimer } from "@/components/AIImageDisclaimer";
@@ -32,7 +38,6 @@ import { JobApplicationModal } from "@/components/careers/JobApplicationModal";
 import type { JobPosition } from "@/config/jobPositions";
 import teamCollaboration from "@/assets/team-collaboration.jpg";
 import supportAgent from "@/assets/support-agent.jpg";
-import { SiteCalloutCard } from "@/components/shared/SiteCalloutCard";
 
 const companyValues = [
   {
@@ -135,10 +140,10 @@ function Careers() {
           showProtectionBadge
           badgeText="We're Hiring"
         >
-          <Button size="heroPill" variant="heroPrimary" className="text-white" asChild>
-            <Link to="/careers#open-positions">Explore Open Roles</Link>
+          <Button size="heroPill" variant="heroPrimary" asChild>
+            <Link to="/contact">View Open Positions</Link>
           </Button>
-          <Button size="heroPill" variant="heroOutline" className="text-white hover:text-white" asChild>
+          <Button size="heroPill" variant="heroOutline" asChild>
             <Link to="/about">Learn About Us</Link>
           </Button>
         </Hero>
@@ -147,9 +152,8 @@ function Careers() {
       <div className="h-6" />
       <TrustBar />
 
-      <div className="below-fold-premium">
       {/* Why InVision */}
-      <section className="premium-section-shell py-20 relative overflow-hidden">
+      <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
         <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-20 right-0 w-[400px] h-[400px] bg-accent/[0.04] rounded-full blur-3xl pointer-events-none" />
@@ -189,7 +193,7 @@ function Careers() {
       <SectionDivider variant="wave" color="muted" />
 
       {/* Open Positions */}
-      <section id="open-positions" className="premium-section-shell py-20 relative overflow-hidden">
+      <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-background to-muted/20" />
         <div className="absolute top-10 right-[20%] w-[350px] h-[350px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
         <div className="container mx-auto px-6 lg:px-8 relative z-10">
@@ -225,29 +229,26 @@ function Careers() {
           </div>
 
           {/* Don't see your role CTA */}
-          <SiteCalloutCard
-            className="mt-12 max-w-3xl mx-auto"
-            tone="brand"
-            align="center"
-            eyebrow="Open application"
-            icon={Briefcase}
-            title="Don't See Your Role?"
-            description="We're always looking for talented people who care about our mission and want to help protect families."
-            action={
-              <Button size="heroPill" variant="heroPrimary" className="text-white" asChild>
-                <Link to="/contact">
-                  Send Us Your Resume
-                  <ArrowRight className="ml-1.5 h-4 w-4" />
-                </Link>
+          <Card className="mt-12 max-w-3xl mx-auto relative overflow-hidden border-primary/20 shadow-[0_8px_40px_-12px_hsl(var(--primary)/0.15)]">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10" />
+            <CardHeader className="text-center">
+              <CardTitle className="text-2xl">Don't See Your Role?</CardTitle>
+              <CardDescription className="text-base">
+                We're always looking for talented people who care about our mission
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="text-center">
+              <Button size="lg" asChild>
+                <Link to="/contact">Send Us Your Resume</Link>
               </Button>
-            }
-          />
+            </CardContent>
+          </Card>
         </div>
       </section>
 
       {/* Benefits Grid */}
       <MeshBackground variant="subtle" withDots>
-      <section className="premium-section-shell py-20 relative overflow-hidden">
+      <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
         <div className="container mx-auto px-6 lg:px-8 relative z-10">
           <div className="text-center mb-12">
@@ -286,7 +287,7 @@ function Careers() {
 
 
       {/* Application Process */}
-      <section className="premium-section-shell py-20 relative overflow-hidden">
+      <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/20 via-background to-muted/30" />
         <div className="absolute bottom-10 left-[15%] w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
         <div className="container mx-auto px-6 lg:px-8 relative z-10">
@@ -328,7 +329,7 @@ function Careers() {
       </section>
 
       {/* Company Culture */}
-      <section className="premium-section-shell py-20 relative overflow-hidden">
+      <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
         <div className="container mx-auto px-6 lg:px-8 relative z-10">
           <div className="text-center mb-12">
@@ -399,7 +400,6 @@ function Careers() {
       <section className="py-12 bg-muted/20">
         <AIImageDisclaimer />
       </section>
-      </div>
 
       <Footer />
 

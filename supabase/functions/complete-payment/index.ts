@@ -85,24 +85,12 @@ async function resolvePayment(
   sessionId?: string,
 ): Promise<ResolvedPayment | null> {
   let pi: Stripe.PaymentIntent | null = null;
-  let fallbackEmail = "";
-  let fallbackName = "";
-  let sessionMetadata: Record<string, string> = {};
 
   if (sessionId) {
     const session = await stripe.checkout.sessions.retrieve(sessionId, {
       expand: ["payment_intent", "customer_details"],
     });
     if (session.payment_status !== "paid") return null;
-    fallbackEmail = (
-      session.customer_email || session.customer_details?.email || ""
-    )
-      .toLowerCase()
-      .trim();
-    fallbackName = (
-      session.customer_details?.name || session.metadata?.customerName || ""
-    ).trim();
-    sessionMetadata = (session.metadata || {}) as Record<string, string>;
     if (typeof session.payment_intent === "string") {
       pi = await stripe.paymentIntents.retrieve(session.payment_intent);
     } else if (session.payment_intent) {
@@ -115,15 +103,8 @@ async function resolvePayment(
   if (!pi || pi.status !== "succeeded") return null;
 
   const md = (pi.metadata || {}) as Record<string, string>;
-  const mergedMetadata = { ...sessionMetadata, ...md };
-  const customerEmail = (mergedMetadata.customerEmail || fallbackEmail || "")
-    .toLowerCase()
-    .trim();
-  const customerName = (
-    mergedMetadata.customerName ||
-    fallbackName ||
-    "Customer"
-  ).trim();
+  const customerEmail = (md.customerEmail || "").toLowerCase().trim();
+  const customerName = (md.customerName || "Customer").trim();
 
   // Hard requirement: the create-* function MUST have stamped customerEmail
   // into the payment intent metadata. If it didn't, we refuse to send any
@@ -134,7 +115,7 @@ async function resolvePayment(
     paymentIntentId: pi.id,
     amount: pi.amount,
     currency: pi.currency,
-    metadata: mergedMetadata,
+    metadata: md,
     customerEmail,
     customerName,
   };

@@ -63,7 +63,7 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
             className="py-8"
           />
 
-          <div className="home-color-wash below-fold-premium relative isolate">
+          <div className="home-color-wash relative isolate">
 
           {/* 2. Story sections */}
           <section
@@ -139,14 +139,14 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
                     they are protected from AI scams. Get started in minutes.
                   </p>
 
-                  <div className="flex flex-row gap-3 mb-8">
-                    <Button asChild size="lg" className="h-8 text-xs px-4 rounded-full sm:h-11 sm:text-sm sm:px-6">
+                  <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                    <Button asChild size="lg">
                       <Link to="/training#pricing">
-                        Get Protected Today <ArrowRight className="ml-1.5 w-4 h-4 sm:ml-2 sm:w-5 sm:h-5" />
+                        Get Protected Today <ArrowRight className="ml-2 w-5 h-5" />
                       </Link>
                     </Button>
-                    <Button asChild variant="heroOutline" size="lg" className="h-8 text-xs px-4 rounded-full text-white hover:text-white sm:h-11 sm:text-sm sm:px-6">
-                      <Link to="/ai">Explore AI</Link>
+                    <Button asChild variant="heroOutline" size="lg">
+                      <Link to="/business">Business Solutions</Link>
                     </Button>
                   </div>
 

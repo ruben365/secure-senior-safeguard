@@ -1,6 +1,6 @@
 export const SITE = {
   name: "InVision Network",
-  tagline: "AI Scam Protection, Training & AI Systems",
+  tagline: "AI Scam Protection & Business Solutions",
   phone: {
     display: "(937) 301-8749",
     e164: "+19373018749",

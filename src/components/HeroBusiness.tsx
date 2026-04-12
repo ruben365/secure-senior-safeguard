@@ -1,11 +1,8 @@
 import { useCallback } from "react";
 import {
-  Cpu, Bot, Shield, ShieldCheck, Cog,
+  Cpu, Bot, ShieldCheck, Cog,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import businessHero from "@/assets/hero-ai-business-unified.jpg";
-
-const highPriorityImageProps = { fetchpriority: "high" } as const;
 
 /* ── Bottom feature cards — varied backgrounds ── */
 const businessFeatures = [
@@ -28,16 +25,8 @@ const businessFeatures = [
   {
     icon: ShieldCheck,
     label: "AI",
-    title: "Scam Protection",
-    desc: "Spot suspicious activity early and protect your team from costly fraud.",
-    target: "svc-support-bot",
-    variant: "dark" as const,
-  },
-  {
-    icon: Shield,
-    label: "AI",
-    title: "Insurance",
-    desc: "Support business continuity with coverage-aligned workflows and response plans.",
+    title: "Scam Protection & Insurance",
+    desc: "Forecast threats and protect your business assets.",
     target: "svc-support-bot",
     variant: "dark" as const,
   },
@@ -62,10 +51,10 @@ export const HeroBusiness = ({ onStrategyCall }: { onStrategyCall: () => void })
       <div className="hero-biz__bg">
         <img
           src={businessHero}
-          alt="InVision Network AI team building secure automation systems"
+          alt="InVision Network — AI Solutions"
           loading="eager"
           decoding="sync"
-          {...highPriorityImageProps}
+          fetchPriority="high"
         />
         <div className="hero-biz__top-veil" />
         <div className="hero-biz__glow" aria-hidden="true" />
@@ -73,44 +62,35 @@ export const HeroBusiness = ({ onStrategyCall }: { onStrategyCall: () => void })
 
       {/* ── Hero Content: Left text only ── */}
       <div className="hero-biz__content">
-        <div className="site-shell w-full px-6 lg:px-8">
         <div className="hero-biz__copy">
 
           <h1 className="hero-biz__headline">
-            AI Systems
+            AI Solutions Build
             <br />
-            for Modern
+            Cyberspace
             <br />
-            Business Teams
+            Business Success
           </h1>
 
           <p className="hero-biz__body">
-            Plan, deploy, and support AI receptionists, automated follow-ups,
-            and secure workflows with one connected partner. Built for Ohio
-            organizations that want cleaner operations and stronger protection.
+            Build advanced AI systems to optimize processes,
+            strengthen data security, and drive growth in your digital
+            infrastructure. Scalable tools for modern business challenges.
           </p>
 
           <div className="hero-biz__ctas">
-            <Button type="button" size="heroPill" variant="heroPrimary" onClick={onStrategyCall}>
+            <button type="button" className="hero-biz__cta hero-biz__cta--primary" onClick={onStrategyCall}>
               Request Demo
-            </Button>
-            <Button
-              type="button"
-              size="heroPill"
-              variant="heroOutline"
-              className="text-white hover:text-white"
-              onClick={() => scrollTo("services")}
-            >
+            </button>
+            <button type="button" className="hero-biz__cta hero-biz__cta--secondary" onClick={() => scrollTo("services")}>
               Learn More
-            </Button>
+            </button>
           </div>
-        </div>
         </div>
       </div>
 
       {/* ── Bottom Feature Cards ── */}
       <div className="hero-biz__panel">
-        <div className="site-shell w-full px-6 lg:px-8">
         <div className="hero-biz__panel-inner">
           <div className="hero-biz__feature-row">
             {businessFeatures.map((f) => (
@@ -134,7 +114,6 @@ export const HeroBusiness = ({ onStrategyCall }: { onStrategyCall: () => void })
               </button>
             ))}
           </div>
-        </div>
         </div>
       </div>
     </section>

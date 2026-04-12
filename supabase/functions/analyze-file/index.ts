@@ -1,10 +1,12 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import Stripe from "https://esm.sh/stripe@18.5.0";
-import { corsHeaders } from "../_shared/cors.ts";
-import {
-  createServiceRoleClient,
-  getAuthenticatedScanUser,
-} from "../_shared/scanAccess.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
+
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers":
+    "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
+};
 
 type ThreatLevel = "safe" | "warning" | "danger";
 
@@ -117,6 +119,14 @@ serve(async (req) => {
   }
 
   try {
+    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
+    const supabaseUrl = Deno.env.get("SUPABASE_URL");
+    const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+
+    if (!stripeKey || !supabaseUrl || !serviceRoleKey) {
+      throw new Error("Missing required server configuration.");
+    }
+
     const { scanId } = await req.json();
     if (!scanId || typeof scanId !== "string") {
       throw new Error("scanId is required.");
@@ -130,7 +140,9 @@ serve(async (req) => {
       throw new Error("Invalid scanId format.");
     }
 
-    const supabase = createServiceRoleClient();
+    const supabase = createClient(supabaseUrl, serviceRoleKey, {
+      auth: { persistSession: false },
+    });
     const { data: scan, error: scanError } = await supabase
       .from("guest_scans")
       .select("*")
@@ -140,27 +152,6 @@ serve(async (req) => {
 
     if (scanError || !scan) {
       throw new Error("Scan not found.");
-    }
-
-    const isAccountLinkedScan = scan.access_mode && scan.access_mode !== "guest";
-    let authenticatedUser:
-      | Awaited<ReturnType<typeof getAuthenticatedScanUser>>
-      | null = null;
-
-    if (isAccountLinkedScan) {
-      authenticatedUser = await getAuthenticatedScanUser(req);
-
-      if (!scan.user_id || authenticatedUser.id !== scan.user_id) {
-        return new Response(
-          JSON.stringify({
-            error: "This upload scan belongs to a different account.",
-          }),
-          {
-            headers: { ...corsHeaders, "Content-Type": "application/json" },
-            status: 403,
-          },
-        );
-      }
     }
 
     // Idempotency: if we already produced a result, return the cached one
@@ -177,42 +168,32 @@ serve(async (req) => {
       );
     }
 
-    if (!isAccountLinkedScan) {
-      const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
-      if (!stripeKey) {
-        throw new Error("Missing required server configuration.");
-      }
+    const stripe = new Stripe(stripeKey, { apiVersion: "2024-11-20.acacia" });
+    if (!scan.stripe_session_id) {
+      throw new Error("Scan has no associated payment.");
+    }
+    const paymentIntent = await stripe.paymentIntents.retrieve(
+      scan.stripe_session_id,
+    );
 
-      const stripe = new Stripe(stripeKey, { apiVersion: "2024-11-20.acacia" });
-      if (!scan.stripe_session_id) {
-        throw new Error("Scan has no associated payment.");
-      }
-      const paymentIntent = await stripe.paymentIntents.retrieve(
-        scan.stripe_session_id,
+    if (
+      paymentIntent.status !== "succeeded" &&
+      paymentIntent.status !== "processing"
+    ) {
+      return new Response(
+        JSON.stringify({
+          error: "Payment not completed. Please finalize payment first.",
+        }),
+        {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 402,
+        },
       );
-
-      if (
-        paymentIntent.status !== "succeeded" &&
-        paymentIntent.status !== "processing"
-      ) {
-        return new Response(
-          JSON.stringify({
-            error: "Payment not completed. Please finalize payment first.",
-          }),
-          {
-            headers: { ...corsHeaders, "Content-Type": "application/json" },
-            status: 402,
-          },
-        );
-      }
     }
 
     await supabase
       .from("guest_scans")
-      .update({
-        scan_status: "analyzing",
-        payment_status: isAccountLinkedScan ? "processing" : "paid",
-      })
+      .update({ scan_status: "analyzing", payment_status: "paid" })
       .eq("id", scanId);
 
     if (!scan.file_path) {
@@ -330,47 +311,6 @@ If evidence is limited, be conservative and note limitations.`;
       );
     }
 
-    let paymentStatus = scan.payment_status || "paid";
-
-    if (scan.access_mode === "balance" || scan.access_mode === "metered") {
-      if (!authenticatedUser) {
-        throw new Error("Please log in to use account-linked scan access.");
-      }
-
-      const { data: usageResult, error: usageError } = await supabase.rpc(
-        "consume_scan_access_usage",
-        {
-          p_user_id: authenticatedUser.id,
-          p_scan_id: scanId,
-        },
-      );
-
-      if (usageError) {
-        throw new Error(usageError.message);
-      }
-
-      if (!usageResult?.ok) {
-        return new Response(
-          JSON.stringify({
-            error:
-              usageResult?.error ||
-              "This account does not have enough upload scan access.",
-          }),
-          {
-            headers: { ...corsHeaders, "Content-Type": "application/json" },
-            status: 402,
-          },
-        );
-      }
-
-      paymentStatus =
-        scan.access_mode === "balance" ? "account_charged" : "metered_recorded";
-    } else if (scan.access_mode === "subscription") {
-      paymentStatus = "included";
-    } else {
-      paymentStatus = "paid";
-    }
-
     const expiresAt =
       scan.expires_at || new Date(Date.now() + 30 * 60 * 1000).toISOString();
 
@@ -378,7 +318,6 @@ If evidence is limited, be conservative and note limitations.`;
       .from("guest_scans")
       .update({
         scan_status: "completed",
-        payment_status: paymentStatus,
         risk_level: analysis.threatLevel,
         result: analysis,
         expires_at: expiresAt,
@@ -399,11 +338,7 @@ If evidence is limited, be conservative and note limitations.`;
     const message = error instanceof Error ? error.message : "Analysis failed.";
     return new Response(JSON.stringify({ error: message }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status:
-        message.startsWith("Authentication error") ||
-        message.startsWith("Please log in")
-          ? 401
-          : 500,
+      status: 500,
     });
   }
 });

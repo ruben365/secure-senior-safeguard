@@ -1,45 +1,48 @@
 
 
-# Plan: Enhance Below-Fold Design, Fix Build Error, Rename AI Workshop
+## Neo-Tactile Design Overhaul — Approved Implementation Plan
 
-## Summary
-Five changes: (1) fix the TypeScript build error, (2) rename "AI Workshop" to "AI" in the hero heading and navigation, (3) enhance below-fold CSS with 3D glassmorphism cards, premium badges, and responsive polish, (4) ensure Login and Get Protected buttons are consistently orange, (5) add order and professional styling to all page body sections.
+### Summary
+Apply the Neo-Tactile UI kit aesthetic site-wide, fix the persistent "Need Help" popup, redesign auth page, unify hero buttons/sizes, and switch toasts to white theme.
 
----
+### Changes
 
-## 1. Fix Build Error — `useStripeKey.ts`
-- Fix the return type of `ensureStripePromise` from `Promise<Promise<Stripe | null>>` to `Promise<Stripe | null>`
-- Restore the state type to `Promise<Stripe | null> | null` if it was changed
+**1. Global CSS Tokens** (`src/styles/base.css`)
+- Update shadow system to warm plum-tinted Neo-Tactile elevations (Lv1–Lv8)
+- Refine `.glass-card`, `.btn-primary` utilities to match kit
+- Verify `#root { zoom: 0.75 }` is applied
 
-## 2. Rename "AI Workshop" → "AI"
-- **`HeroBusiness.tsx`** line 80: Change hero `<h1>` from "AI Workshop Systems" to "AI Systems"
-- **`Navigation.tsx`** line 21: Change nav link name from "AI Workshop" to "AI"
-- **`HeroHomepage.tsx`** line 101: Change "Explore AI Workshop" CTA text to "Explore AI"
-- Only the display labels on the hero heading and navigation — no content changes, no URL changes
+**2. Button System** (`src/components/ui/button.tsx`)
+- Refine `heroPrimary` and `heroOutline` variants to match kit's pill controls
+- Ensure consistent radius, weight, and pressed states across all variants
 
-## 3. Enhance Below-Fold CSS — `premium-body.css`
-Add/update styles for all body content between hero and footer:
+**3. Propagate Hero CTAs to All Pages**
+- Files: Hero sections in About, FAQ, Contact, Careers, Resources, Training, AI pages
+- Add "Get Protected" (heroPrimary) + "See Our Work" (heroOutline) style buttons to every page hero
+- Use page-appropriate labels (e.g., "Start Learning" / "View Plans" for Workshops)
 
-- **3D Card system**: Add `transform: perspective(800px)` with subtle rotateX on hover, deeper layered box-shadows (3-level shadow stack), and smooth transitions for all `.bg-card` and card-like elements
-- **Glassmorphism badges**: Create `.glass-badge` utility — frosted `backdrop-blur-xl`, translucent warm background, white/plum border, rounded-full pill shape
-- **Section spacing and order**: Standardize vertical rhythm with consistent `py-20 md:py-28` sections, add subtle section separators
-- **Responsive polish**: Ensure cards stack cleanly on mobile (single column), touch targets are 44px+, and 3D transforms are disabled on touch devices (`@media (hover: none)`)
-- **Image frames**: Add subtle warm-tinted shadow and rounded corners with hover lift
-- **Interactive elements**: Add glow ring on focus, smooth color transitions on hover
+**4. Unify Hero Heights** (`src/components/Hero.tsx`)
+- Change from `min-h-[115dvh]` to `min-height: 100dvh` to match homepage
 
-## 4. Button Consistency — Orange Theme
-- Verify the `default` button variant in `button.tsx` already uses orange gradient (`#c2410c` to `#9a3412`) — it does
-- Ensure the `heroPrimary` variant also uses the same orange — it does
-- Check that "Get Protected" buttons across all pages use the `default` or `heroPrimary` variant consistently
-- Login button in Navigation already uses inline orange gradient — confirmed consistent
+**5. Fix "Need Help" Popup** (`src/contexts/CartFeedbackContext.tsx` + `src/components/CartFeedbackNotifications.tsx`)
+- Add `dismissed` flag persisted to `sessionStorage`
+- Block `triggerEmptyCartHelp` when dismissed
+- "I'm Just Browsing" and X button set dismissed = true
 
-## 5. Files Changed
-| File | Change |
-|------|--------|
-| `src/hooks/useStripeKey.ts` | Fix return type (build error) |
-| `src/components/HeroBusiness.tsx` | "AI Workshop Systems" → "AI Systems" |
-| `src/components/Navigation.tsx` | "AI Workshop" → "AI" in nav link |
-| `src/components/HeroHomepage.tsx` | "Explore AI Workshop" → "Explore AI" |
-| `src/styles/premium-body.css` | Major enhancements: 3D cards, glassmorphism, responsive polish, badges, section order |
-| `src/styles/components.css` | Add glass-badge utility and enhanced card depth classes if needed |
+**6. White Toast Notifications** (`src/components/ui/sonner.tsx`)
+- Background: white, text: dark slate, border: warm subtle
+- Keep colored status icons
+
+**7. Auth Page Redesign** (`src/pages/Auth.tsx`)
+- Light warm cream background, white card with plum-tinted shadow
+- Warm off-white inputs with copper/orange focus rings
+- Clean segmented tabs, SSO buttons with outline style
+- Professional, light theme matching Neo-Tactile kit
+
+**8. Audit all pages** for background consistency and visual coherence
+
+### Technical Notes
+- ~15 files modified, no database changes
+- Existing layout structures preserved
+- All pages will share unified button patterns and hero sizing
 

@@ -23,13 +23,13 @@ export const MAIN_NAV_ROUTES: NavRoute[] = [
   {
     path: "/training",
     name: "Workshops",
-    description: "Cybersecurity workshops and guided protection plans",
+    description: "Cybersecurity workshops and ScamShield protection plans",
     showInNav: true,
   },
   {
-    path: "/ai",
+    path: "/business",
     name: "AI",
-    description: "AI systems, automation, and secure operations",
+    description: "AI automation services and business solutions",
     showInNav: true,
   },
   {
