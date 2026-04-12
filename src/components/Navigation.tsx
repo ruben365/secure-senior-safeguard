@@ -230,11 +230,11 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
               {/* Phone */}
               <a
                 href={SITE.phone.tel}
-                className="hidden lg:flex flex-none shrink-0 items-center gap-1.5 text-white/92 hover:text-orange-200 transition-colors duration-150 no-underline px-2 py-1.5 rounded-md hover:bg-white/[0.07] whitespace-nowrap"
+                className="hidden lg:flex flex-none shrink-0 items-center gap-1.5 text-white hover:text-orange-200 transition-colors duration-150 no-underline px-2 py-1.5 rounded-md hover:bg-white/[0.07] whitespace-nowrap"
                 aria-label={`Call us at ${SITE.phone.display}`}
               >
-                <Phone className="w-4 h-4 shrink-0" />
-                <span className="hidden xl:inline text-[13px] font-medium whitespace-nowrap [word-break:keep-all]">
+                <Phone className="w-4 h-4 shrink-0 text-current" />
+                <span className="hidden xl:inline text-[13px] font-semibold text-current whitespace-nowrap [word-break:keep-all]">
                   {/* Non-breaking space between area code and local guarantees single line */}
                   {SITE.phone.display.replace(" ", "\u00A0")}
                 </span>
@@ -244,11 +244,11 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
               <button
                 type="button"
                 onClick={() => setDonateOpen(true)}
-                className="hidden lg:flex items-center gap-1.5 text-[13px] font-medium px-2.5 py-1.5 rounded-md text-white/92 hover:text-orange-200 hover:bg-orange-500/10 transition-colors"
+                className="hidden lg:flex items-center gap-1.5 text-[13px] font-semibold px-2.5 py-1.5 rounded-md text-white hover:text-orange-200 hover:bg-orange-500/10 transition-colors"
                 aria-label="Donate"
               >
-                <Heart className="w-4 h-4" />
-                <span className="hidden xl:inline">Donate</span>
+                <Heart className="w-4 h-4 text-current" />
+                <span className="hidden xl:inline text-current">Donate</span>
               </button>
 
               {/* Divider */}
@@ -380,14 +380,14 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
               <div className="flex flex-col gap-2">
                 <button
                   type="button"
-                  className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-white/20 px-4 text-[13px] font-medium text-white/80 transition-colors duration-150 hover:border-white/30 hover:text-white"
+                  className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-white/20 px-4 text-[13px] font-semibold text-white transition-colors duration-150 hover:border-white/30 hover:text-white"
                   onClick={() => {
                     setDonateOpen(true);
                     setMobileMenuOpen(false);
                   }}
                 >
-                  <Heart className="h-3 w-3" />
-                  Donate
+                  <Heart className="h-3 w-3 text-current" />
+                  <span className="text-current">Donate</span>
                 </button>
 
                 {isAdminOrStaff ? (
@@ -411,11 +411,11 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
 
                 <a
                   href={SITE.phone.tel}
-                  className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-white/12 px-4 text-[13px] font-medium text-white/70 transition-colors duration-150 hover:text-white/90"
+                  className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border border-white/12 px-4 text-[13px] font-semibold text-white transition-colors duration-150 hover:text-white"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  <Phone className="h-3.5 w-3.5" />
-                  {SITE.phone.display}
+                  <Phone className="h-3.5 w-3.5 text-current" />
+                  <span className="text-current">{SITE.phone.display}</span>
                 </a>
               </div>
             </div>
