@@ -185,7 +185,13 @@
     inset 0 2px 6px rgba(0, 0, 0, 0.04),
     0 0 0 3px hsl(var(--primary) / 0.1),
     0 1px 0 rgba(255, 255, 255, 0.8);
-  outline: none;
+  outline: none; /* Visual focus provided via box-shadow above */
+}
+
+/* Keyboard-only: expose an outline on top of the box-shadow ring */
+.skeuo-input:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
 }
 
 /* Skeuomorphic Panel - Raised container */
@@ -428,7 +434,13 @@ a[role="button"]:active {
 .form-input:focus {
   border: 2px solid hsl(var(--primary));
   box-shadow: 0 0 0 3px hsl(var(--primary) / 0.12);
-  outline: none;
+  outline: none; /* Visual focus provided via border + box-shadow above */
+}
+
+/* Keyboard-only: expose an outline on top of the focus ring */
+.form-input:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
 }
 
 /* All interactive inputs: prevent iOS zoom */
