@@ -20,6 +20,7 @@ export const useCartFeedback = () => {
 };
 
 const EMPTY_CART_DISMISSED_KEY = "empty_cart_help_dismissed";
+const CART_ABANDON_SHOWN_KEY = "cart-abandon-shown";
 
 export const CartFeedbackProvider = ({ children }: { children: ReactNode }) => {
   const [showThankYou, setShowThankYou] = useState(false);
@@ -34,6 +35,8 @@ export const CartFeedbackProvider = ({ children }: { children: ReactNode }) => {
 
   const triggerEmptyCartHelp = () => {
     if (sessionStorage.getItem(EMPTY_CART_DISMISSED_KEY) === "true") return;
+    if (sessionStorage.getItem(CART_ABANDON_SHOWN_KEY)) return;
+    sessionStorage.setItem(CART_ABANDON_SHOWN_KEY, "1");
     setShowThankYou(false);
     setShowEmptyCartHelp(true);
   };

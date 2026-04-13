@@ -84,7 +84,8 @@ export const CartAbandonmentNotification = () => {
         className="fixed bottom-20 right-4 z-40 max-w-sm"
       >
         <Card
-          className="p-4 shadow-xl border-primary/20 bg-card/95 backdrop-blur-sm"
+          className="p-4 rounded-[14px] border-[rgba(0,0,0,0.08)] shadow-[0_4px_24px_rgba(0,0,0,0.08)]"
+          style={{ background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(16px) saturate(1.2)', WebkitBackdropFilter: 'blur(16px) saturate(1.2)' }}
           onMouseEnter={() => { interactingRef.current = true; if (dismissTimerRef.current) clearTimeout(dismissTimerRef.current); }}
           onMouseLeave={() => { interactingRef.current = false; startDismissTimer(); }}
         >

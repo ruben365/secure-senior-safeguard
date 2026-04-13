@@ -51,12 +51,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setItems((prev) => {
       const existing = prev.find((i) => i.id === item.id);
       if (existing) {
-        toast.success("Quantity updated");
+        toast.success("Quantity updated", { id: "cart-qty-update" });
         return prev.map((i) =>
           i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i,
         );
       }
-      toast.success("Added to cart");
+      toast.success("Added to cart", { id: "cart-add" });
       return [...prev, { ...item, quantity: 1 }];
     });
     // Reset clear tracking when items are added
@@ -74,7 +74,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       }
       return newItems;
     });
-    toast.success("Removed from cart");
+    toast.success("Removed from cart", { id: "cart-remove" });
   }, []);
 
   const updateQuantity = useCallback(

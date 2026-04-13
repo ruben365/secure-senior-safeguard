@@ -15,23 +15,30 @@ const Toaster = ({ ...props }: ToasterProps) => {
       toastOptions={{
         classNames: {
           toast:
-            "group toast backdrop-blur-xl border rounded-lg " +
-            "bg-[rgba(15,15,25,0.92)] text-white border-white/10 " +
-            "dark:bg-[rgba(15,15,25,0.92)] dark:text-white dark:border-white/10",
+            "group toast border rounded-[14px] " +
+            "!bg-[rgba(255,255,255,0.92)] !text-[#1E293B] !border-[rgba(0,0,0,0.08)] " +
+            "!shadow-[0_4px_24px_rgba(0,0,0,0.08)] " +
+            "dark:!bg-[rgba(255,255,255,0.92)] dark:!text-[#1E293B] dark:!border-[rgba(0,0,0,0.08)]",
           description:
-            "group-[.toast]:text-white/70",
+            "group-[.toast]:!text-[#475569]",
           actionButton:
-            "group-[.toast]:bg-white/15 group-[.toast]:text-white group-[.toast]:border group-[.toast]:border-white/20",
+            "group-[.toast]:!bg-[#d96c4a]/10 group-[.toast]:!text-[#d96c4a] group-[.toast]:!border group-[.toast]:!border-[#d96c4a]/20",
           cancelButton:
-            "group-[.toast]:bg-white/10 group-[.toast]:text-white/70 group-[.toast]:border group-[.toast]:border-white/15",
+            "group-[.toast]:!bg-slate-100 group-[.toast]:!text-[#64748B] group-[.toast]:!border group-[.toast]:!border-slate-200",
+          closeButton:
+            "group-[.toast]:!text-[#64748B] group-[.toast]:!bg-slate-100 group-[.toast]:hover:!bg-slate-200",
           success:
-            "group-[.toast]:[&>svg]:text-emerald-400",
+            "group-[.toast]:[&>svg]:!text-[#16a34a]",
           error:
-            "group-[.toast]:[&>svg]:text-red-400",
+            "group-[.toast]:[&>svg]:!text-[#dc2626]",
           warning:
-            "group-[.toast]:[&>svg]:text-amber-400",
+            "group-[.toast]:[&>svg]:!text-[#d96c4a]",
           info:
-            "group-[.toast]:[&>svg]:text-blue-400",
+            "group-[.toast]:[&>svg]:!text-[#d96c4a]",
+        },
+        style: {
+          backdropFilter: "blur(16px) saturate(1.2)",
+          WebkitBackdropFilter: "blur(16px) saturate(1.2)",
         },
       }}
       {...props}
