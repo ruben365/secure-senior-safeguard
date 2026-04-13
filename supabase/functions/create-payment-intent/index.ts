@@ -12,6 +12,17 @@ const logStep = (step: string, details?: unknown) => {
   console.log(`[CREATE-PAYMENT-INTENT] ${step}${detailsStr}`);
 };
 
+const ALLOWED_ORIGINS = new Set<string>([
+  "https://www.invisionnetwork.org",
+  "https://invisionnetwork.org",
+]);
+const CANONICAL_ORIGIN = "https://www.invisionnetwork.org";
+
+const resolveOrigin = (req: Request): string => {
+  const requested = (req.headers.get("origin") || "").trim().toLowerCase();
+  return ALLOWED_ORIGINS.has(requested) ? requested : CANONICAL_ORIGIN;
+};
+
 // ============================================================================
 // Per-IP rate limit (15 / minute) — public endpoint that creates Stripe
 // resources. Cap to prevent enumeration / customer-creation spam.
@@ -109,6 +120,7 @@ serve(async (req) => {
       customerName,
       isVeteran = false,
       metadata = {},
+      checkoutMode = false,
     } = body;
 
     // ====================================================================
@@ -145,6 +157,7 @@ serve(async (req) => {
       mode,
       email: normalizedEmail,
       isVeteran: !!isVeteran,
+      checkoutMode: !!checkoutMode,
     });
 
     // ====================================================================
@@ -205,6 +218,59 @@ serve(async (req) => {
       logStep("Created new customer", { customerId });
     }
 
+    const stripeMetadata = {
+      ...safeMetadata,
+      priceId,
+      customerEmail: normalizedEmail,
+      customerName: safeName,
+      isVeteran: isVeteran ? "true" : "false",
+      paymentType: mode,
+    };
+
+    if (checkoutMode) {
+      const origin = resolveOrigin(req);
+      const sessionConfig: Stripe.Checkout.SessionCreateParams = {
+        ...(customerId
+          ? { customer: customerId }
+          : { customer_email: normalizedEmail }),
+        line_items: [{ price: priceId, quantity: 1 }],
+        mode: mode === "subscription" ? "subscription" : "payment",
+        success_url: `${origin}/payment-success?type=${mode}&session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${origin}/payment-canceled`,
+        metadata: stripeMetadata,
+      };
+
+      if (mode === "payment") {
+        sessionConfig.payment_intent_data = {
+          metadata: stripeMetadata,
+        };
+      } else {
+        sessionConfig.subscription_data = {
+          metadata: stripeMetadata,
+        };
+      }
+
+      const session = await stripe.checkout.sessions.create(sessionConfig);
+      logStep("Hosted checkout session created", {
+        sessionId: session.id,
+        mode,
+      });
+
+      return new Response(
+        JSON.stringify({
+          url: session.url,
+          sessionId: session.id,
+          customerId,
+          amount: price.unit_amount,
+          type: "checkout",
+        }),
+        {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 200,
+        },
+      );
+    }
+
     if (mode === "subscription") {
       const subscription = await stripe.subscriptions.create({
         customer: customerId,
@@ -214,12 +280,7 @@ serve(async (req) => {
           save_default_payment_method: "on_subscription",
         },
         expand: ["latest_invoice.payment_intent", "pending_setup_intent"],
-        metadata: {
-          ...safeMetadata,
-          customerEmail: normalizedEmail,
-          customerName: safeName,
-          isVeteran: isVeteran ? "true" : "false",
-        },
+        metadata: stripeMetadata,
       });
 
       logStep("Subscription created", { subscriptionId: subscription.id });
@@ -286,13 +347,9 @@ serve(async (req) => {
           currency: price.currency,
           automatic_payment_methods: { enabled: true },
           metadata: {
-            ...safeMetadata,
+            ...stripeMetadata,
             subscriptionId: subscription.id,
             invoiceId: invoice.id,
-            priceId,
-            customerEmail: normalizedEmail,
-            customerName: safeName,
-            isVeteran: isVeteran ? "true" : "false",
           },
         });
 
@@ -339,13 +396,7 @@ serve(async (req) => {
       amount: price.unit_amount,
       currency: price.currency,
       automatic_payment_methods: { enabled: true },
-      metadata: {
-        ...safeMetadata,
-        priceId,
-        customerEmail: normalizedEmail,
-        customerName: safeName,
-        isVeteran: isVeteran ? "true" : "false",
-      },
+      metadata: stripeMetadata,
     });
 
     logStep("PaymentIntent created", {

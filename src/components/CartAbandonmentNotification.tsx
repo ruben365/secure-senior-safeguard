@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/contexts/CartContext";
 import { Button } from "@/components/ui/button";
@@ -25,11 +25,11 @@ export const CartAbandonmentNotification = () => {
     // Don't show if already dismissed or already shown once
     if (isDismissedThisSession() || hasShownOnce) return;
 
-    let timer: ReturnType<typeof setTimeout>;
+    let showTimer: ReturnType<typeof setTimeout>;
 
     if (itemCount > 0) {
       // Show after 2 minutes of having items (longer delay, less intrusive)
-      timer = setTimeout(() => {
+      showTimer = setTimeout(() => {
         if (!isDismissedThisSession() && !hasShownOnce) {
           setShowNotification(true);
           setHasShownOnce(true);
@@ -38,9 +38,26 @@ export const CartAbandonmentNotification = () => {
     }
 
     return () => {
-      if (timer) clearTimeout(timer);
+      if (showTimer) clearTimeout(showTimer);
     };
   }, [itemCount, isDismissedThisSession, hasShownOnce]);
+
+  // Auto-dismiss after 5 seconds — clears on hover, restarts on leave
+  const dismissTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const interactingRef = useRef(false);
+
+  const startDismissTimer = useCallback(() => {
+    if (dismissTimerRef.current) clearTimeout(dismissTimerRef.current);
+    dismissTimerRef.current = setTimeout(() => {
+      if (!interactingRef.current && !showFeedback) handleDismiss();
+    }, 5000);
+  }, [showFeedback]);
+
+  useEffect(() => {
+    if (!showNotification) return;
+    startDismissTimer();
+    return () => { if (dismissTimerRef.current) clearTimeout(dismissTimerRef.current); };
+  }, [showNotification, showFeedback, startDismissTimer]);
 
   const handleSubmitFeedback = () => {
     if (feedback.trim()) {
@@ -66,7 +83,11 @@ export const CartAbandonmentNotification = () => {
         exit={{ opacity: 0, y: 50, scale: 0.95 }}
         className="fixed bottom-20 right-4 z-40 max-w-sm"
       >
-        <Card className="p-4 shadow-xl border-primary/20 bg-card/95 backdrop-blur-sm">
+        <Card
+          className="p-4 shadow-xl border-primary/20 bg-card/95 backdrop-blur-sm"
+          onMouseEnter={() => { interactingRef.current = true; if (dismissTimerRef.current) clearTimeout(dismissTimerRef.current); }}
+          onMouseLeave={() => { interactingRef.current = false; startDismissTimer(); }}
+        >
           <button
             onClick={handleDismiss}
             className="absolute top-2 right-2 p-1 text-muted-foreground hover:text-foreground transition-colors"

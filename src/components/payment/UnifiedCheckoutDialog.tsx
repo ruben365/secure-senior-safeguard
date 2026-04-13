@@ -32,9 +32,12 @@ import {
 import { useCheckout } from "@/contexts/CheckoutContext";
 import { useStripeKey } from "@/hooks/useStripeKey";
 import { usePaymentFlow } from "@/hooks/usePaymentFlow";
+import useStripeElementLifecycle from "@/hooks/useStripeElementLifecycle";
+import useHostedCheckoutFallback from "@/hooks/useHostedCheckoutFallback";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import confetti from "canvas-confetti";
+import { PaymentElementPanel } from "./PaymentElementPanel";
 
 /* ═══════════════════════════════════════════════════════════════════
    DESIGN TOKENS — dark glassmorphism checkout
@@ -295,7 +298,7 @@ const QRCodePaymentStep: React.FC<{ onSuccess: () => void }> = ({ onSuccess }) =
   const { state, total } = useCheckout();
   const [loading, setLoading] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState<string | null>(null);
-  const [paymentLinkId, setPaymentLinkId] = useState<string | null>(null);
+  const [sessionId, setSessionId] = useState<string | null>(null);
   const [timeLeft, setTimeLeft] = useState(240);
   const [checking, setChecking] = useState(false);
 
@@ -305,20 +308,27 @@ const QRCodePaymentStep: React.FC<{ onSuccess: () => void }> = ({ onSuccess }) =
       return () => clearTimeout(timer);
     } else if (timeLeft === 0) {
       setQrCodeUrl(null);
-      setPaymentLinkId(null);
+      setSessionId(null);
     }
   }, [qrCodeUrl, timeLeft]);
 
   useEffect(() => {
-    if (!paymentLinkId || !qrCodeUrl) return;
+    if (!sessionId || !qrCodeUrl) return;
     const interval = setInterval(async () => {
       setChecking(true);
       try {
         const { data } = await supabase.functions.invoke(
           "verify-payment-link",
-          { body: { paymentLinkId } },
+          { body: { sessionId } },
         );
         if (data?.paid) {
+          try {
+            await supabase.functions.invoke("verify-payment", {
+              body: { session_id: data.sessionId ?? sessionId },
+            });
+          } catch {
+            // Non-blocking
+          }
           clearInterval(interval);
           onSuccess();
         }
@@ -329,25 +339,33 @@ const QRCodePaymentStep: React.FC<{ onSuccess: () => void }> = ({ onSuccess }) =
       }
     }, 5000);
     return () => clearInterval(interval);
-  }, [paymentLinkId, qrCodeUrl, onSuccess]);
+  }, [sessionId, qrCodeUrl, onSuccess]);
 
   const generateQR = async () => {
     setLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke(
-        "create-payment-link",
+        "create-cart-payment-intent",
         {
           body: {
-            amount: Math.round(total * 100),
-            description: state.items.map((i) => i.product.name).join(", "),
+            checkoutMode: true,
+            items: state.items.map((item) => ({
+              id: item.productId,
+              name: item.product.name,
+              price: item.discountedPrice,
+              quantity: item.quantity,
+            })),
             customerEmail: state.customerInfo.email,
+            customerName: state.customerInfo.name,
+            isVeteran: state.customerInfo.isVeteran,
           },
         },
       );
       if (error) throw error;
-      if (data?.qrCodeUrl) {
-        setQrCodeUrl(data.qrCodeUrl);
-        setPaymentLinkId(data.paymentLinkId);
+      if (data?.url && data?.sessionId) {
+        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(data.url)}`;
+        setQrCodeUrl(qrUrl);
+        setSessionId(data.sessionId);
         setTimeLeft(240);
       }
     } catch {
@@ -399,6 +417,36 @@ const PaymentFormStep: React.FC<{
   const elements = useElements();
   const { state, setError, setOrderId, total } = useCheckout();
   const [processing, setProcessing] = useState(false);
+  const {
+    hostedCheckoutActive,
+    hostedCheckoutError,
+    hostedCheckoutLoading,
+    hostedCheckoutUrl,
+    openHostedCheckout,
+  } = useHostedCheckoutFallback({
+    onPaid: async ({ sessionId }) => {
+      if (!sessionId) {
+        throw new Error("Hosted checkout finished without a session reference.");
+      }
+
+      try {
+        await supabase.functions.invoke("verify-payment", {
+          body: { session_id: sessionId },
+        });
+      } catch {
+        // Non-blocking
+      }
+
+      setOrderId(sessionId);
+      onSuccess();
+    },
+  });
+  const { isReady, timedOut, mountKey, handleReady, retry } =
+    useStripeElementLifecycle({
+      enabled: true,
+      resetKeys: [state.clientSecret],
+      timeoutMs: 15000,
+    });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -458,13 +506,58 @@ const PaymentFormStep: React.FC<{
         Back to details
       </button>
 
-      <div className="rounded-xl p-3" style={{ border: `1px solid ${T.glassCardBorder}` }}>
+      <PaymentElementPanel
+        isReady={isReady}
+        timedOut={timedOut}
+        onRetry={retry}
+        onOpenHostedCheckout={async () => {
+          await openHostedCheckout(async () => {
+            const { data, error } = await supabase.functions.invoke(
+              "create-cart-payment-intent",
+              {
+                body: {
+                  checkoutMode: true,
+                  customerEmail: state.customerInfo.email,
+                  customerName: state.customerInfo.name,
+                  isVeteran: state.customerInfo.isVeteran,
+                  items: state.items.map((item) => ({
+                    id: item.productId,
+                    name: item.product.name,
+                    price: item.discountedPrice,
+                    quantity: item.quantity,
+                  })),
+                },
+              },
+            );
+
+            if (error) {
+              throw new Error(error.message || "Unable to open hosted checkout.");
+            }
+
+            if (!data?.url || !data?.sessionId) {
+              throw new Error("Hosted checkout did not return a valid session.");
+            }
+
+            return {
+              url: data.url,
+              sessionId: data.sessionId,
+            };
+          });
+        }}
+        hostedCheckoutLoading={hostedCheckoutLoading}
+        hostedCheckoutError={hostedCheckoutError}
+        hostedCheckoutUrl={hostedCheckoutUrl}
+        hostedCheckoutActive={hostedCheckoutActive}
+        loadingLabel="Preparing secure payment form..."
+      >
         <PaymentElement
+          key={mountKey}
+          onReady={handleReady}
           options={{
             layout: "tabs",
           }}
         />
-      </div>
+      </PaymentElementPanel>
 
       {state.error && (
         <div
@@ -478,7 +571,7 @@ const PaymentFormStep: React.FC<{
 
       <button
         type="submit"
-        disabled={!stripe || processing}
+        disabled={!stripe || processing || !isReady}
         className="w-full h-[48px] rounded-xl text-[15px] font-semibold text-white flex items-center justify-center gap-2 transition-all duration-200 disabled:opacity-50 hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.98]"
         style={{
           background: `linear-gradient(135deg, ${T.copper}, ${T.copperDark})`,

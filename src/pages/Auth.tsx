@@ -61,6 +61,13 @@ const passwordSchema = z
 function Auth() {
   const [searchParams] = useSearchParams();
   const defaultTab = searchParams.get("mode") === "signup" ? "signup" : "login";
+  const requestedRedirect = searchParams.get("redirect");
+  const safeRedirect =
+    requestedRedirect &&
+    requestedRedirect.startsWith("/") &&
+    !requestedRedirect.startsWith("//")
+      ? requestedRedirect
+      : null;
 
   const [activeTab, setActiveTab] = useState(defaultTab);
   const [email, setEmail] = useState("");
@@ -201,6 +208,11 @@ function Auth() {
             "Your account has been suspended. Please contact support.",
           variant: "destructive",
         });
+        return;
+      }
+
+      if (safeRedirect) {
+        navigate(safeRedirect, { replace: true });
         return;
       }
 

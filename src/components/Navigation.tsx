@@ -18,7 +18,7 @@ import { DonationModal } from "@/components/DonationModal";
 import { AnnouncementBell } from "@/components/AnnouncementBell";
 
 const primaryLinks = [
-  { name: "AI", href: "/business" },
+  { name: "AI", href: "/ai" },
   { name: "Workshops", href: "/training" },
   { name: "Resources", href: "/resources" },
   { name: "About", href: "/about" },
@@ -102,6 +102,14 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
   };
 
   const isActiveLink = (href: string) => {
+    if (href === "/ai") {
+      return (
+        location.pathname === "/ai" ||
+        location.pathname === "/ai-workshop" ||
+        location.pathname === "/business" ||
+        location.pathname.startsWith("/business/")
+      );
+    }
     return location.pathname === href || location.pathname.startsWith(href + "/");
   };
 

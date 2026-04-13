@@ -343,6 +343,22 @@ serve(async (req) => {
       }
     }
 
+    if (!productNames.length && session.metadata?.itemsDescription) {
+      productNames.push(
+        ...session.metadata.itemsDescription
+          .split(",")
+          .map((value: string) => value.trim())
+          .filter(Boolean),
+      );
+    }
+
+    if (!hasDigital && session.metadata?.hasDigital === "true") {
+      hasDigital = true;
+    }
+    if (!hasPhysical && session.metadata?.hasPhysical === "true") {
+      hasPhysical = true;
+    }
+
     // Initialize Supabase client for database updates
     const supabaseClient = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",

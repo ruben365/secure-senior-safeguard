@@ -22,7 +22,7 @@ export const SITEMAP_PAGES: SitemapPage[] = [
   // High priority pages
   { path: "/", priority: 1.0, changefreq: "daily" },
   { path: "/training", priority: 0.9, changefreq: "weekly" },
-  { path: "/business", priority: 0.9, changefreq: "weekly" },
+  { path: "/ai", priority: 0.9, changefreq: "weekly" },
 
   // Business service sub-pages (SEO critical)
   { path: "/business/ai-receptionist", priority: 0.85, changefreq: "weekly" },

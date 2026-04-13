@@ -34,6 +34,7 @@ import { toast } from "sonner";
 import { QuickVeteranToggle } from "./QuickVeteranToggle";
 import { TrustIndicators } from "./TrustIndicators";
 import { useStripeKey } from "@/hooks/useStripeKey";
+import useStripeElementLifecycle from "@/hooks/useStripeElementLifecycle";
 
 export interface PaymentItem {
   id: string;
@@ -324,8 +325,8 @@ function SmartPaymentForm({ items, onSuccess, onClose }: PaymentFormProps) {
             <Button
               onClick={handleInfoSubmit}
               disabled={isLoading || !email || !name || !termsAccepted}
-              className="w-full"
-              size="lg"
+              className="w-full h-9 text-sm"
+              size="sm"
             >
               {isLoading ? (
                 <>
@@ -494,8 +495,12 @@ function PaymentElementWrapper({
   const stripe = useStripe();
   const elements = useElements();
   const [isLoading, setIsLoading] = useState(false);
-  const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { isReady, timedOut, mountKey, handleReady, retry } =
+    useStripeElementLifecycle({
+      enabled: true,
+      resetKeys: [amount, email],
+    });
 
   const handleSubmit = async () => {
     if (!stripe || !elements) return;
@@ -565,22 +570,45 @@ function PaymentElementWrapper({
 
   return (
     <div className="space-y-4">
-      {!isReady && (
-        <div className="flex items-center justify-center py-8">
-          <Loader2 className="w-6 h-6 animate-spin text-primary" />
-          <span className="ml-2 text-sm text-muted-foreground">
-            Loading payment form...
-          </span>
-        </div>
-      )}
-      <div className={!isReady ? "opacity-0 h-0 overflow-hidden" : ""}>
-        <PaymentElement
-          onReady={() => setIsReady(true)}
-          options={{
-            layout: "tabs",
-            paymentMethodOrder: ["card", "apple_pay", "google_pay"],
-          }}
-        />
+      <div className="rounded-xl border border-border/60 bg-white/85 p-3 shadow-sm">
+        {timedOut ? (
+          <div className="space-y-3 rounded-lg border border-destructive/20 bg-destructive/5 p-3">
+            <div className="flex items-start gap-2">
+              <RefreshCw className="mt-0.5 h-4 w-4 flex-shrink-0 text-destructive" />
+              <div className="space-y-1">
+                <p className="text-sm font-semibold text-destructive">
+                  Payment form failed to load
+                </p>
+                <p className="text-xs leading-relaxed text-destructive/85">
+                  Retry the secure card form or switch to the QR payment option if your device prefers hosted checkout.
+                </p>
+              </div>
+            </div>
+            <Button type="button" variant="outline" size="sm" className="w-full h-9 text-sm" onClick={retry}>
+              <RefreshCw className="mr-2 h-4 w-4" />
+              Retry payment form
+            </Button>
+          </div>
+        ) : (
+          <div className="relative min-h-[180px]">
+            {!isReady && (
+              <div className="absolute inset-0 z-10 flex items-center justify-center gap-2 rounded-lg bg-white/90 text-sm text-muted-foreground">
+                <Loader2 className="h-5 w-5 animate-spin text-primary" />
+                Loading payment form...
+              </div>
+            )}
+            <div className={isReady ? "opacity-100" : "pointer-events-none opacity-[0.02]"}>
+              <PaymentElement
+                key={mountKey}
+                onReady={handleReady}
+                options={{
+                  layout: "tabs",
+                  paymentMethodOrder: ["card", "apple_pay", "google_pay"],
+                }}
+              />
+            </div>
+          </div>
+        )}
       </div>
 
       {error && (
@@ -594,7 +622,8 @@ function PaymentElementWrapper({
           variant="outline"
           onClick={onBack}
           disabled={isLoading}
-          className="flex-1"
+          className="flex-1 h-9 text-sm"
+          size="sm"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back
@@ -602,8 +631,8 @@ function PaymentElementWrapper({
         <Button
           onClick={handleSubmit}
           disabled={isLoading || !stripe || !elements || !isReady}
-          className="flex-1"
-          size="lg"
+          className="flex-1 h-9 text-sm"
+          size="sm"
         >
           {isLoading ? (
             <>
