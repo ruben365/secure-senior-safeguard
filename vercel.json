@@ -3,6 +3,19 @@
   "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "invisionnetwork.org" }],
+      "destination": "https://www.invisionnetwork.org/$1",
+      "permanent": true
+    },
+    {
+      "source": "/business",
+      "destination": "/ai",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ],

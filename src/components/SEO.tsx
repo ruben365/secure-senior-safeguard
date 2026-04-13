@@ -79,7 +79,12 @@ export function SEO({
   const fullTitle = title
     ? `${title} | InVision Network`
     : DEFAULT_SEO.title;
-  const url = `https://www.invisionnetwork.org${location.pathname}`;
+  // Normalize: always www + https, strip trailing slash except for root "/"
+  const rawUrl = `https://www.invisionnetwork.org${location.pathname}`;
+  const url =
+    rawUrl !== "https://www.invisionnetwork.org/" && rawUrl.endsWith("/")
+      ? rawUrl.slice(0, -1)
+      : rawUrl;
   const canonicalUrl = canonical || url;
 
   const breadcrumbSchema = breadcrumbs
