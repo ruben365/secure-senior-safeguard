@@ -16,42 +16,6 @@ const testimonials = [
     tag: "Grandparent Scam",
   },
   {
-    name: "Maria T.",
-    location: "Springfield, OH",
-    quote:
-      "The workshop was eye-opening. We've blocked 3 phishing attempts on our small business since.",
-    rating: 5,
-    avatar: instructorJames,
-    tag: "Business Owner",
-  },
-  {
-    name: "David & Linda W.",
-    location: "Centerville, OH",
-    quote:
-      "Our parents now know exactly what to do when they get suspicious calls. We sleep better.",
-    rating: 5,
-    avatar: instructorPriya,
-    tag: "Family Session",
-  },
-  {
-    name: "Harold P.",
-    location: "Kettering, OH",
-    quote:
-      "I used to panic every time the phone rang. Now I know the tricks — even caught a deepfake call last week.",
-    rating: 5,
-    avatar: instructorSarah,
-    tag: "Deepfake Caught",
-  },
-  {
-    name: "Jennifer R.",
-    location: "Beavercreek, OH",
-    quote:
-      "Their team had our practice back up in under an hour after a payroll email got spoofed. Best insurance we ever bought.",
-    rating: 5,
-    avatar: instructorPriya,
-    tag: "Business Rescue",
-  },
-  {
     name: "Eleanor B.",
     location: "Oakwood, OH",
     quote:
@@ -61,58 +25,13 @@ const testimonials = [
     tag: "Senior Training",
   },
   {
-    name: "Thomas & Anne G.",
-    location: "Miamisburg, OH",
+    name: "Jennifer R.",
+    location: "Beavercreek, OH",
     quote:
-      "A romance scammer nearly took our life savings. InVision's team spotted it in minutes when nobody else would listen.",
-    rating: 5,
-    avatar: instructorJames,
-    tag: "Romance Scam",
-  },
-  {
-    name: "Patricia H.",
-    location: "Fairborn, OH",
-    quote:
-      "My identity was stolen and I had no idea where to start. They walked me through every step until it was fully resolved.",
+      "Their team had our practice back up in under an hour after a payroll email got spoofed. Best insurance we ever bought.",
     rating: 5,
     avatar: instructorPriya,
-    tag: "Identity Theft",
-  },
-  {
-    name: "Michael S.",
-    location: "Huber Heights, OH",
-    quote:
-      "The AI receptionist they built for my barbershop pays for itself every week. Bookings are up 40%.",
-    rating: 5,
-    avatar: instructorJames,
-    tag: "AI Receptionist",
-  },
-  {
-    name: "Grace & Walter K.",
-    location: "Vandalia, OH",
-    quote:
-      "My husband has dementia and scammers target him daily. InVision set up filters that catch 99% of them before he sees them.",
-    rating: 5,
-    avatar: instructorSarah,
-    tag: "Dementia Support",
-  },
-  {
-    name: "Rev. Daniel F.",
-    location: "Troy, OH",
-    quote:
-      "They trained my entire church congregation for free. A week later a parishioner avoided a $12,000 gift-card scam.",
-    rating: 5,
-    avatar: instructorJames,
-    tag: "Community Outreach",
-  },
-  {
-    name: "Susan & James M.",
-    location: "Xenia, OH",
-    quote:
-      "After the breach at our kids' school we panicked. InVision had us locked down across every device in two evenings.",
-    rating: 5,
-    avatar: instructorPriya,
-    tag: "Family Lockdown",
+    tag: "Business Rescue",
   },
 ];
 
@@ -189,7 +108,7 @@ export const TestimonialCarousel = () => {
         <div
           data-reveal
           style={{ "--reveal-delay": "300ms" } as React.CSSProperties}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4 max-w-6xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto"
         >
           {testimonials.map((t, i) => {
             const isHovered = hoveredIdx === i;
