@@ -179,7 +179,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                 </div>
               </Link>
 
-              <p className="hidden md:block text-[14px] text-white/80 max-w-md leading-snug mb-3">
+              <p className="text-[14px] text-white/80 max-w-md leading-snug mb-3">
                 Protecting families and businesses from AI-powered scams with
                 cutting-edge technology and expert training.
               </p>
@@ -196,8 +196,8 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
               </div>
             </div>
 
-            {/* Newsletter card — pushed to far right; hidden on phone */}
-            <div className="hidden md:flex lg:justify-end lg:flex-shrink-0">
+            {/* Newsletter card — pushed to far right */}
+            <div className="lg:flex lg:justify-end lg:flex-shrink-0">
               <div className="footer-newsletter-card w-full lg:w-[440px] rounded-2xl p-5 border border-white/10">
                 <p className="text-[11px] font-bold text-orange-400/90 uppercase tracking-[0.18em] mb-1.5">
                   Stay Protected
