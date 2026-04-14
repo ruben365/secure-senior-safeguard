@@ -157,25 +157,25 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
   /* ─── Closed FAB ─── */
   if (!isOpen) {
     return (
-      <div className="fixed bottom-6 right-6 z-fab">
+      <div className="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-fab">
         <button
           onClick={() => setIsOpen(true)}
-          className="group relative w-14 h-14 rounded-full bg-gradient-to-br from-primary to-accent shadow-[0_4px_20px_hsl(var(--primary)/0.35),0_12px_40px_-8px_hsl(var(--primary)/0.25)] transition-all duration-300 hover:scale-110 hover:shadow-[0_8px_30px_hsl(var(--primary)/0.45)] active:scale-95 overflow-hidden ring-2 ring-white/20"
+          className="group relative w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary to-accent shadow-[0_2px_12px_hsl(var(--primary)/0.35),0_8px_24px_-6px_hsl(var(--primary)/0.25)] transition-all duration-300 hover:scale-110 hover:shadow-[0_4px_20px_hsl(var(--primary)/0.45)] active:scale-95 overflow-hidden ring-2 ring-white/20"
           aria-label="Open Laura AI Assistant"
           style={{ contain: "layout" }}
         >
           <img
             src={lauraAvatar}
             alt="Laura"
-            width={56}
-            height={56}
+            width={48}
+            height={48}
             loading="eager"
             className="w-full h-full object-cover object-top"
           />
           {/* Online pulse */}
-          <span className="absolute bottom-0.5 right-0.5 flex h-3 w-3">
+          <span className="absolute bottom-0.5 right-0.5 flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75" />
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-400 border-2 border-white/50" />
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400 border-2 border-white/50" />
           </span>
         </button>
       </div>
@@ -184,8 +184,8 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
 
   /* ─── Open Panel ─── */
   return (
-    <div className="fixed bottom-4 right-4 z-fab w-[calc(100vw-2rem)] max-w-[380px] sm:max-w-[420px]">
-      <div className="rounded-3xl border border-border/40 bg-card/95 backdrop-blur-2xl shadow-[0_8px_40px_hsl(var(--primary)/0.12),0_20px_60px_-12px_hsl(258_40%_20%/0.2)] overflow-hidden">
+    <div className="fixed bottom-4 right-3 sm:bottom-5 sm:right-5 z-fab w-[min(calc(100vw-1.5rem),340px)] sm:w-[360px]">
+      <div className="rounded-2xl border border-white/15 bg-white/[0.08] backdrop-blur-2xl shadow-[0_4px_24px_rgba(0,0,0,0.18),0_12px_40px_-8px_rgba(0,0,0,0.12)] overflow-hidden dark:bg-[hsl(258_20%_10%/0.88)] dark:border-white/10">
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-border/40 bg-gradient-to-r from-primary/8 to-accent/5">
           <div className="flex items-center gap-3">
@@ -244,7 +244,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
             {/* Messages */}
             <div
               ref={scrollRef}
-              className="max-h-[420px] overflow-y-auto p-4 space-y-3"
+              className="max-h-[45vh] sm:max-h-[420px] overflow-y-auto p-4 space-y-3"
               style={{
                 scrollbarWidth: "thin",
                 scrollbarColor: "hsl(var(--primary) / 0.2) transparent",

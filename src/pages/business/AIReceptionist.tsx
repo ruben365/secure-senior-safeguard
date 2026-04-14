@@ -142,6 +142,7 @@ const AIReceptionist = () => {
             ]}
             headline="Stop Missing Calls. Let AI Run Your Front Desk."
             subheadline="Our AI answers calls 24/7, sounds human, filters spam, and books appointments directly into your calendar while you sleep. Never lose another customer to voicemail."
+            disablePurpleOverlay={true}
             showScrollIndicator={true}
           >
             <div className="flex flex-col sm:flex-row gap-4 justify-start">
