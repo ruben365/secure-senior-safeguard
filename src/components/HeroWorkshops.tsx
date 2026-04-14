@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import {
-  Phone, ShieldCheck,
+  Phone, Shield, ShieldCheck,
   Settings, Server, Lock,
 } from "lucide-react";
 import workshopHero from "@/assets/learn_and_train.png";
@@ -53,11 +53,13 @@ export const HeroWorkshops = () => {
           fetchPriority="high"
         />
         <div className="hero-ws__top-veil" />
+        {/* Mobile: darken top so text is readable over photo */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/40 to-transparent sm:hidden" aria-hidden="true" />
         <div className="hero-ws__glow" aria-hidden="true" />
       </div>
 
       {/* ── Main Layout: Left Content + Right Widget ── */}
-      <div className="hero-ws__content">
+      <div className="hero-ws__content [justify-content:flex-start] sm:[justify-content:center] [padding-top:6rem] sm:[padding-top:unset]">
         <div className="hero-ws__layout">
 
           {/* Left — Copy */}
