@@ -139,7 +139,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
     <footer ref={ref} className="relative">
       <TrustedTechLogos />
 
-      <div className="footer-bg text-white relative overflow-hidden rounded-t-[24px] md:rounded-t-none">
+      <div className="footer-bg text-white relative overflow-hidden">
         {/* Subtle top edge */}
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 

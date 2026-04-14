@@ -122,7 +122,7 @@ export const TestimonialCarousel = () => {
                 onMouseLeave={() => setHoveredIdx(null)}
                 style={{ transitionDelay: anyHovered ? "0ms" : riseDelay }}
                 className={[
-                  "group relative rounded-[20px] p-3 md:p-3.5",
+                  "group relative rounded-xl p-3 md:p-3.5",
                   "bg-white/85 backdrop-blur-md border border-[#1E293B]/8",
                   "shadow-[0_6px_18px_-10px_rgba(15,23,42,0.15)]",
                   "transition-all [transition-duration:600ms]",
