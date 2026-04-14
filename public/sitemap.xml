@@ -333,6 +333,20 @@
     (or switch to a server-rendered/dynamic sitemap source).
   -->
 
+  <!-- Security & Status -->
+  <url>
+    <loc>https://www.invisionnetwork.org/security</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.invisionnetwork.org/status</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+
   <!-- Legal -->
   <url>
     <loc>https://www.invisionnetwork.org/privacy-policy</loc>
