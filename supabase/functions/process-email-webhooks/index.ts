@@ -55,6 +55,10 @@ const MAX_EMAIL_ID_LEN = 200;
 // without the secret, an attacker could pound the endpoint to burn CPU on
 // HMAC computation. 60/min absorbs Resend's normal volume comfortably.
 // ============================================================================
+// NOTE: In-memory rate limiting resets on serverless cold starts and provides no
+// protection under distributed load. For production rate limiting, replace with
+// Upstash Redis (https://upstash.com) or Supabase built-in rate limiting.
+// Until then, this provides basic protection against single-isolate abuse only.
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 const RATE_LIMIT = 60;
 const RATE_WINDOW_MS = 60 * 1000;

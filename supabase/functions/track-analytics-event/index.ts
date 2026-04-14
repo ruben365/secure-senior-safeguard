@@ -43,6 +43,10 @@ const corsHeaders = {
 
 const RATE_LIMIT = 500;
 const RATE_WINDOW_MS = 60 * 60 * 1000;
+// NOTE: In-memory rate limiting resets on serverless cold starts and provides no
+// protection under distributed load. For production rate limiting, replace with
+// Upstash Redis (https://upstash.com) or Supabase built-in rate limiting.
+// Until then, this provides basic protection against single-isolate abuse only.
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 
 function checkRateLimit(ip: string): { allowed: boolean; retryAfter?: number } {

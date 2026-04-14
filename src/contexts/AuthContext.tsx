@@ -311,6 +311,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setRoleConfig(null);
     setAdminName("Admin");
     setAdminEmail("");
+    // Clear cart data from localStorage on logout to prevent cart leakage
+    // between users on shared devices
+    localStorage.removeItem("cart");
+    localStorage.removeItem("cart-items");
   }, []);
 
   return (
