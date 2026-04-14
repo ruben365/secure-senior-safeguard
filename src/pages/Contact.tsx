@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
-import { SEO } from "@/components/SEO";
+import { SEO, PAGE_SEO } from "@/components/SEO";
 import { PageTransition } from "@/components/PageTransition";
 import {
   Card,
@@ -52,6 +52,7 @@ import { useConfetti } from "@/hooks/useConfetti";
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import heroContactBranded from "@/assets/hero-contact-unified.jpg";
 import { SITE } from "@/config/site";
+import { Link } from "react-router-dom";
 import { SectionDivider, MeshBackground } from "@/components/pro";
 import { HeroCTA } from "@/components/shared/HeroCTA";
 
@@ -172,6 +173,7 @@ function Contact() {
         title="Contact InVision Network — Kettering, Ohio"
         description="Reach InVision Network for cybersecurity training or AI business solutions. Call (937) 301-8749, email us, or fill out our contact form. Serving Kettering, Dayton, and all of Southwest Ohio."
         keywords="contact InVision Network, Kettering cybersecurity, AI protection Ohio, call InVision Network"
+        structuredData={PAGE_SEO.contact.structuredData}
         breadcrumbs={[
           { name: "Home", url: "https://www.invisionnetwork.org/" },
           { name: "Contact", url: "https://www.invisionnetwork.org/contact" },
@@ -656,6 +658,19 @@ function Contact() {
         </div>
       </div>
       </MeshBackground>
+
+      {/* Internal links — related pages */}
+      <section className="py-8 bg-muted/30">
+        <div className="container mx-auto px-6">
+          <p className="text-sm text-muted-foreground text-center max-w-2xl mx-auto">
+            Not sure where to start?{" "}
+            <Link to="/training" className="text-primary hover:underline font-medium">Browse our cybersecurity workshops</Link>{" "}
+            for seniors and families, or learn more about our{" "}
+            <Link to="/ai" className="text-primary hover:underline font-medium">AI business automation services</Link>.{" "}
+            You can also visit our <Link to="/faq" className="text-primary hover:underline font-medium">FAQ page</Link> for quick answers.
+          </p>
+        </div>
+      </section>
 
       <Footer />
     </PageTransition>

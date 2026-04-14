@@ -9,7 +9,7 @@ InVision Network is a cybersecurity company based in Kettering, Ohio (Greater Da
 ## Services
 
 - [Workshops](https://www.invisionnetwork.org/training): In-person and virtual AI scam protection workshops for seniors and families
-- [AI](https://www.invisionnetwork.org/business): AI receptionists, follow-up automation, and website design
+- [AI](https://www.invisionnetwork.org/ai): AI receptionists, follow-up automation, and website design
 - [AI Receptionist](https://www.invisionnetwork.org/business/ai-receptionist): 24/7 AI-powered phone answering for businesses
 - [AI Automation](https://www.invisionnetwork.org/business/ai-automation): Automated lead nurturing and customer follow-up
 - [Website Design](https://www.invisionnetwork.org/business/website-design): Professional website design services

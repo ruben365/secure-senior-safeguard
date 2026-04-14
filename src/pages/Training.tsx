@@ -575,23 +575,71 @@ function LearnAndTrain() {
           ]}
           structuredData={{
             "@context": "https://schema.org",
-            "@type": "EducationalOrganization",
-            name: "InVision Network Training Academy",
-            description:
-              "AI scam protection training for seniors, families, and businesses in Southwest Ohio. In-person and virtual sessions.",
-            url: "https://www.invisionnetwork.org/training",
-            telephone: SITE.phone.e164,
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "Kettering",
-              addressRegion: "OH",
-              addressCountry: "US",
-            },
-            areaServed: {
-              "@type": "GeoCircle",
-              geoMidpoint: { "@type": "GeoCoordinates", latitude: 39.6895, longitude: -84.1688 },
-              geoRadius: "80000",
-            },
+            "@graph": [
+              {
+                "@type": "EducationalOrganization",
+                name: "InVision Network Training Academy",
+                description:
+                  "AI scam protection training for seniors, families, and businesses in Southwest Ohio. In-person and virtual sessions.",
+                url: "https://www.invisionnetwork.org/training",
+                telephone: SITE.phone.e164,
+                address: {
+                  "@type": "PostalAddress",
+                  addressLocality: "Kettering",
+                  addressRegion: "OH",
+                  addressCountry: "US",
+                },
+                areaServed: {
+                  "@type": "GeoCircle",
+                  geoMidpoint: { "@type": "GeoCoordinates", latitude: 39.6895, longitude: -84.1688 },
+                  geoRadius: "80000",
+                },
+              },
+              {
+                "@type": "Course",
+                name: "AI Scam & Deepfake Detection Workshop",
+                description:
+                  "Hands-on workshop teaching seniors and families how to identify AI-generated scams, deepfake videos, voice cloning, and phishing attacks. Live demos with real examples.",
+                provider: {
+                  "@type": "Organization",
+                  name: "InVision Network",
+                  url: "https://www.invisionnetwork.org",
+                },
+                url: "https://www.invisionnetwork.org/training",
+                courseMode: ["onsite", "online"],
+                educationalLevel: "Beginner",
+                offers: {
+                  "@type": "Offer",
+                  price: "89",
+                  priceCurrency: "USD",
+                  availability: "https://schema.org/InStock",
+                },
+              },
+              {
+                "@type": "Course",
+                name: "Senior Safety Training — Digital Protection Fundamentals",
+                description:
+                  "Comprehensive cybersecurity training designed specifically for seniors. Covers password safety, online banking security, social media privacy, and how to recognize and report scams.",
+                provider: {
+                  "@type": "Organization",
+                  name: "InVision Network",
+                  url: "https://www.invisionnetwork.org",
+                },
+                url: "https://www.invisionnetwork.org/training",
+                courseMode: ["onsite", "online"],
+                educationalLevel: "Beginner",
+                audience: {
+                  "@type": "EducationalAudience",
+                  educationalRole: "Senior Adults",
+                },
+                offers: {
+                  "@type": "Offer",
+                  price: "89",
+                  priceCurrency: "USD",
+                  availability: "https://schema.org/InStock",
+                },
+              },
+            ],
           }}
         />
         <Navigation overlay />

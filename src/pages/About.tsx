@@ -33,7 +33,7 @@ import ohioNatureImpact from "@/assets/ohio-nature-impact.jpg";
 import fieldSunsetCta from "@/assets/field-sunset-cta.jpg";
 import familyGathering from "@/assets/family-gathering.jpg";
 import seniorLearning from "@/assets/senior-learning.jpg";
-import { SEO } from "@/components/SEO";
+import { SEO, PAGE_SEO } from "@/components/SEO";
 import { HeroCTA } from "@/components/shared/HeroCTA";
 import { AnswerSummary } from "@/components/AnswerSummary";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
@@ -120,6 +120,7 @@ function About() {
         title="About InVision Network — Cybersecurity Experts in Kettering, Ohio"
         description="Meet the team behind InVision Network. Founded by Ruben Nk and Corine Mk in Kettering, Ohio, we protect Southwest Ohio families and businesses from AI-powered scams, deepfakes, and digital fraud."
         keywords="InVision Network about, cybersecurity Kettering Ohio, Ruben Nk, Corine Mk, Southwest Ohio AI protection"
+        structuredData={PAGE_SEO.about.structuredData}
         breadcrumbs={[
           { name: "Home", url: "https://www.invisionnetwork.org/" },
           { name: "About", url: "https://www.invisionnetwork.org/about" },

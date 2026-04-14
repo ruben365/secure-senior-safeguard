@@ -278,6 +278,44 @@ export const PAGE_SEO = {
       "Meet the cybersecurity analysts behind InVision Network. Based in Kettering, Ohio, protecting families and businesses from AI-powered scams.",
     keywords:
       "InVision Network about, Kettering Ohio cybersecurity, Southwest Ohio AI protection",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "InVision Network",
+      url: "https://www.invisionnetwork.org",
+      logo: "https://www.invisionnetwork.org/favicon.png",
+      foundingDate: "2024",
+      founders: [
+        { "@type": "Person", name: "Ruben Nk" },
+        { "@type": "Person", name: "Corine Mk" },
+      ],
+      description:
+        "Veteran-founded cybersecurity company based in Kettering, Ohio protecting families, seniors, and businesses from AI-powered scams, deepfakes, and phishing attacks.",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Kettering",
+        addressRegion: "OH",
+        postalCode: "45429",
+        addressCountry: "US",
+      },
+      telephone: "+19373018749",
+      email: "hello@invisionnetwork.org",
+      areaServed: { "@type": "State", name: "Ohio" },
+      knowsAbout: [
+        "AI Scam Protection",
+        "Deepfake Detection",
+        "Phishing Defense",
+        "Voice Clone Detection",
+        "Senior Cybersecurity Training",
+        "Business AI Automation",
+        "Family Digital Safety",
+      ],
+      sameAs: [
+        "https://twitter.com/invisionnetwork",
+        "https://facebook.com/invisionnetwork",
+        "https://linkedin.com/company/invisionnetwork",
+      ],
+    },
   },
 
   contact: {
@@ -286,6 +324,52 @@ export const PAGE_SEO = {
       "Contact InVision Network for cybersecurity training and AI systems. Call (937) 301-8749. Serving Kettering, Dayton, and all of Southwest Ohio.",
     keywords:
       "contact InVision Network, Kettering cybersecurity contact, AI protection Ohio inquiry",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      name: "Contact InVision Network",
+      url: "https://www.invisionnetwork.org/contact",
+      description:
+        "Contact InVision Network for cybersecurity training and AI automation services in Southwest Ohio.",
+      mainEntity: {
+        "@type": "Organization",
+        name: "InVision Network",
+        telephone: "+19373018749",
+        email: "hello@invisionnetwork.org",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Kettering",
+          addressRegion: "OH",
+          postalCode: "45429",
+          addressCountry: "US",
+        },
+        contactPoint: [
+          {
+            "@type": "ContactPoint",
+            telephone: "+19373018749",
+            contactType: "Customer Service",
+            availableLanguage: ["English", "Spanish", "French"],
+            hoursAvailable: {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+              ],
+              opens: "09:00",
+              closes: "18:00",
+            },
+          },
+          {
+            "@type": "ContactPoint",
+            email: "hello@invisionnetwork.org",
+            contactType: "Customer Support",
+          },
+        ],
+      },
+    },
   },
 
   resources: {
