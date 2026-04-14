@@ -9,6 +9,7 @@ import {
   Heart,
   Mail,
   MapPin,
+  Phone,
   ArrowRight,
   Loader2,
 } from "lucide-react";
@@ -86,6 +87,9 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
         { to: "/portfolio", label: "Portfolio" },
         { to: "/articles", label: "Articles" },
         { to: "/careers", label: "Careers" },
+        { to: "/partners", label: "Partners" },
+        { to: "/events", label: "Events" },
+        { to: "/pricing", label: "Pricing" },
       ],
     },
     {
@@ -124,6 +128,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
         { to: "/cookie-policy", label: "Cookie Policy" },
         { to: "/acceptable-use", label: "Acceptable Use" },
         { to: "/disclaimer", label: "Disclaimer" },
+        { to: "/sitemap", label: "Sitemap" },
       ],
     },
   ];
@@ -184,14 +189,18 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                 cutting-edge technology and expert training.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-x-6 gap-y-2.5">
+              <div className="flex flex-col sm:flex-row gap-x-6 gap-y-2.5 flex-wrap">
                 <span className="inline-flex items-center gap-2 text-[13px] text-white/75">
                   <MapPin className="w-4 h-4 text-orange-400/80 flex-shrink-0" />
-                  {SITE.location.city}, {SITE.location.region}
+                  Serving Kettering, Dayton &amp; Montgomery County, OH
                 </span>
                 <a href={`mailto:${SITE.emails.hello}`} className="inline-flex items-center gap-2 text-[13px] text-white/75 hover:text-white transition-colors">
                   <Mail className="w-4 h-4 text-orange-400/80 flex-shrink-0" />
                   {SITE.emails.hello}
+                </a>
+                <a href={SITE.phone.tel} className="inline-flex items-center gap-2 text-[13px] text-white/75 hover:text-white transition-colors">
+                  <Phone className="w-4 h-4 text-orange-400/80 flex-shrink-0" />
+                  {SITE.phone.display}
                 </a>
               </div>
             </div>
@@ -270,9 +279,15 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                 © {new Date().getFullYear()} InVision Network. All rights reserved.
               </p>
               <span className="hidden sm:inline-block w-px h-4 bg-white/15" />
-              <span className="inline-flex items-center gap-2 text-[13px] text-white/70">
+              <a
+                href="https://www.bbb.org/search?find_text=invision+network&find_loc=Kettering%2C+OH+45429"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="InVision Network BBB Accreditation"
+                className="inline-flex items-center gap-2 text-[13px] text-white/70 hover:text-white transition-colors"
+              >
                 <Shield className="w-4 h-4 text-emerald-400/70" /> BBB Accredited
-              </span>
+              </a>
               <span className="inline-flex items-center gap-2 text-[13px] text-white/70">
                 <Shield className="w-4 h-4 text-amber-400/70" /> Veteran Owned
               </span>

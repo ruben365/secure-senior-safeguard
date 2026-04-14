@@ -8,6 +8,7 @@ import {
   LayoutDashboard,
   Heart,
   ChevronDown,
+  Search,
 } from "lucide-react";
 import { PrefetchLink } from "@/components/PrefetchLink";
 import { ShoppingCart } from "@/components/ShoppingCart";
@@ -16,6 +17,7 @@ import { SITE } from "@/config/site";
 import invisionLogo from "@/assets/shield-logo.png";
 import { DonationModal } from "@/components/DonationModal";
 import { AnnouncementBell } from "@/components/AnnouncementBell";
+import SearchDialog from "@/components/SearchDialog";
 
 const primaryLinks = [
   { name: "AI", href: "/ai" },
@@ -36,6 +38,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [donateOpen, setDonateOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const location = useLocation();
   const { user, roleConfig } = useAuth();
   const moreRef = React.useRef<HTMLDivElement>(null);
@@ -286,6 +289,16 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 </Link>
               )}
 
+              {/* Search button */}
+              <button
+                type="button"
+                onClick={() => setSearchOpen(true)}
+                className="p-2 rounded-lg hover:bg-white/10 transition-colors duration-150 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                aria-label="Search site"
+              >
+                <Search className="h-4 w-4 text-white/75" />
+              </button>
+
               {/* Mobile menu button */}
               <button
                 type="button"
@@ -415,6 +428,8 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
         onOpenChange={setDonateOpen}
         type="general"
       />
+
+      <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} />
     </>
   );
 });

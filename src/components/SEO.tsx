@@ -285,9 +285,6 @@ export const PAGE_SEO = {
       url: "https://www.invisionnetwork.org",
       logo: "https://www.invisionnetwork.org/favicon.png",
       foundingDate: "2024",
-      founders: [
-        { "@type": "Organization", name: "InVision Network" },
-      ],
       description:
         "Veteran-founded cybersecurity company based in Kettering, Ohio protecting families, seniors, and businesses from AI-powered scams, deepfakes, and phishing attacks.",
       address: {

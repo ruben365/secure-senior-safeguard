@@ -55,6 +55,7 @@ import { SITE } from "@/config/site";
 import { Link } from "react-router-dom";
 import { SectionDivider, MeshBackground } from "@/components/pro";
 import { HeroCTA } from "@/components/shared/HeroCTA";
+import BookingCalendar from "@/components/BookingCalendar";
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
@@ -658,6 +659,8 @@ function Contact() {
         </div>
       </div>
       </MeshBackground>
+
+      <BookingCalendar />
 
       {/* Internal links — related pages */}
       <section className="py-8 bg-muted/30">

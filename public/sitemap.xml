@@ -281,6 +281,32 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- New pages -->
+  <url>
+    <loc>https://www.invisionnetwork.org/pricing</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.invisionnetwork.org/events</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.invisionnetwork.org/partners</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.invisionnetwork.org/sitemap</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
   <!-- Content -->
   <url>
     <loc>https://www.invisionnetwork.org/articles</loc>

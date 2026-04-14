@@ -71,6 +71,12 @@ const BookDetail = lazy(() => import("./pages/BookDetail"));
 const LibraryPage = lazy(() => import("./pages/LibraryPage"));
 const PurchasePage = lazy(() => import("./pages/PurchasePage"));
 
+// New public pages - lazy loaded
+const Pricing = lazy(() => import("./pages/Pricing"));
+const Partners = lazy(() => import("./pages/Partners"));
+const Events = lazy(() => import("./pages/Events"));
+const Sitemap = lazy(() => import("./pages/Sitemap"));
+
 // Legal pages - lazy loaded
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
@@ -244,10 +250,14 @@ function PublicRoutes() {
         <Route path="/cookie-policy" element={<PageTransition variant="fade"><CookiePolicy /></PageTransition>} />
         <Route path="/acceptable-use" element={<PageTransition variant="fade"><AcceptableUse /></PageTransition>} />
         <Route path="/disclaimer" element={<PageTransition variant="fade"><Disclaimer /></PageTransition>} />
+        <Route path="/pricing" element={<PageTransition variant="auto"><Pricing /></PageTransition>} />
+        <Route path="/partners" element={<PageTransition variant="auto"><Partners /></PageTransition>} />
+        <Route path="/events" element={<PageTransition variant="auto"><Events /></PageTransition>} />
+        <Route path="/sitemap" element={<PageTransition variant="auto"><Sitemap /></PageTransition>} />
         <Route path="/faq" element={<PageTransition variant="auto"><FAQ /></PageTransition>} />
         <Route path="/help" element={<PageTransition variant="auto"><HelpCenter /></PageTransition>} />
 
-        {/* Admin Routes */}
+        {/* Admin routes — auth enforced by AdminShell component (checks Supabase session + admin role) */}
         <Route path="/admin/*" element={<AdminShell />}>
           <Route index element={<AdminDashboardContent />} />
           <Route path="threats" element={<ThreatMonitor />} />
