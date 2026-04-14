@@ -1,3 +1,6 @@
+# Claude Code worktrees — these contain nested .git dirs that confuse Vercel submodule detection
+.claude/worktrees/
+
 # Logs
 logs
 *.log
