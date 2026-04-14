@@ -53,6 +53,7 @@ import { usePrerenderBlocker } from "@/contexts/PrerenderContext";
 import { SectionDivider } from "@/components/pro";
 import { TranslationRequestDialog } from "@/components/resources/TranslationRequestDialog";
 import { ReadBooksDialog } from "@/components/resources/ReadBooksDialog";
+import { HeroCTA } from "@/components/shared/HeroCTA";
 
 // Rotating hero headlines
 const heroHeadlines = [
@@ -277,22 +278,12 @@ function Resources() {
               and your family safe
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-start">
-            <Button
-              size="heroPill"
-              variant="heroPrimary"
-              onClick={() => scrollToSection("guides")}
-            >
-              Shop Digital Guides
-            </Button>
-            <Button
-              size="heroPill"
-              variant="heroOutline"
-              onClick={() => setReadBooksOpen(true)}
-            >
-              Read Your Books
-            </Button>
-          </div>
+          <HeroCTA
+            primaryText="Shop Digital Guides"
+            primaryHref="/resources#shop"
+            secondaryText="Read Your Books"
+            secondaryHref="/library"
+          />
         </Hero>
 
         {/* Floating Stats Bar - Outside Hero to stay static */}

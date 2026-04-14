@@ -571,7 +571,7 @@ function LearnAndTrain() {
           keywords="AI scam training Kettering Ohio, deepfake detection workshop, senior cybersecurity class, phishing awareness Dayton Ohio, family scam prevention"
           breadcrumbs={[
             { name: "Home", url: "https://www.invisionnetwork.org/" },
-            { name: "Training", url: "https://www.invisionnetwork.org/training" },
+            { name: "Workshops", url: "https://www.invisionnetwork.org/training" },
           ]}
           structuredData={{
             "@context": "https://schema.org",

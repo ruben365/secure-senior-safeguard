@@ -34,6 +34,7 @@ import fieldSunsetCta from "@/assets/field-sunset-cta.jpg";
 import familyGathering from "@/assets/family-gathering.jpg";
 import seniorLearning from "@/assets/senior-learning.jpg";
 import { SEO } from "@/components/SEO";
+import { HeroCTA } from "@/components/shared/HeroCTA";
 import { AnswerSummary } from "@/components/AnswerSummary";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
@@ -142,14 +143,12 @@ function About() {
               From victims to protectors. Serving families across Ohio.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-start">
-            <Button size="heroPill" variant="heroPrimary" asChild>
-              <Link to="/training">Start Training</Link>
-            </Button>
-            <Button size="heroPill" variant="heroOutline" asChild>
-              <Link to="/contact">Get in Touch</Link>
-            </Button>
-          </div>
+          <HeroCTA
+            primaryText="Start Training"
+            primaryHref="/training"
+            secondaryText="Get In Touch"
+            secondaryHref="/contact"
+          />
         </Hero>
         <HeroFloatingStats />
       </div>

@@ -3,6 +3,7 @@ import {
   Cpu, Bot, ShieldCheck, Cog,
 } from "lucide-react";
 import businessHero from "@/assets/hero-ai-business-unified.jpg";
+import { HeroCTA } from "@/components/shared/HeroCTA";
 
 /* ── Bottom feature cards — varied backgrounds ── */
 const businessFeatures = [
@@ -78,14 +79,12 @@ export const HeroBusiness = ({ onStrategyCall }: { onStrategyCall: () => void })
             infrastructure. Scalable tools for modern business challenges.
           </p>
 
-          <div className="hero-biz__ctas">
-            <button type="button" className="hero-biz__cta hero-biz__cta--primary" onClick={onStrategyCall}>
-              Request Demo
-            </button>
-            <button type="button" className="hero-biz__cta hero-biz__cta--secondary" onClick={() => scrollTo("services")}>
-              Learn More
-            </button>
-          </div>
+          <HeroCTA
+            primaryText="Request Demo"
+            primaryHref="/contact"
+            secondaryText="Learn More"
+            secondaryHref="/resources"
+          />
         </div>
       </div>
 

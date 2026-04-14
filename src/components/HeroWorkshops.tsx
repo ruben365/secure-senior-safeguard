@@ -1,11 +1,11 @@
 import { useCallback } from "react";
 import {
-  ArrowRight, Shield,
   Phone, ShieldCheck,
   Settings, Server, Lock,
 } from "lucide-react";
 import workshopHero from "@/assets/learn_and_train.png";
 import { SITE } from "@/config/site";
+import { HeroCTA } from "@/components/shared/HeroCTA";
 
 /* ── Bottom feature cards ── */
 const workshopFeatures = [
@@ -79,16 +79,12 @@ export const HeroWorkshops = () => {
               live on Zoom or in person across Ohio.
             </p>
 
-            <div className="hero-ws__ctas">
-              <button type="button" className="hero-ws__cta hero-ws__cta--primary" onClick={() => scrollTo("training")}>
-                <Shield className="w-4 h-4" />
-                View Workshops
-              </button>
-              <button type="button" className="hero-ws__cta hero-ws__cta--secondary" onClick={() => scrollTo("pricing")}>
-                See Pricing
-                <ArrowRight />
-              </button>
-            </div>
+            <HeroCTA
+              primaryText="Book a Workshop"
+              primaryHref="/contact"
+              secondaryText="See Pricing"
+              secondaryHref="/training#pricing"
+            />
           </div>
 
           {/* Right — Floating Glass Card (matches reference) */}

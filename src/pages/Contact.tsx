@@ -53,6 +53,7 @@ import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import heroContactBranded from "@/assets/hero-contact-unified.jpg";
 import { SITE } from "@/config/site";
 import { SectionDivider, MeshBackground } from "@/components/pro";
+import { HeroCTA } from "@/components/shared/HeroCTA";
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
@@ -192,20 +193,12 @@ function Contact() {
               We're here to help protect your family. Get in touch today.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-start">
-            <Button size="heroPill" variant="heroPrimary" asChild>
-              <a href={SITE.phone.tel}>
-                <Phone className="w-5 h-5 mr-2" />
-                {SITE.phone.display}
-              </a>
-            </Button>
-            <Button size="heroPill" variant="heroOutline" asChild>
-              <a href={`mailto:${SITE.emails.info}`}>
-                <Mail className="w-5 h-5 mr-2" />
-                Email Us
-              </a>
-            </Button>
-          </div>
+          <HeroCTA
+            primaryText="Call (937) 301-8749"
+            primaryHref="tel:9373018749"
+            secondaryText="Send a Message"
+            secondaryHref="#contact-form"
+          />
         </Hero>
       </div>
 
@@ -261,7 +254,7 @@ function Contact() {
           </div>
 
           {/* Main Contact Form Section — premium redesign */}
-          <div className="grid lg:grid-cols-5 gap-8 max-w-7xl mx-auto">
+          <div id="contact-form" className="grid lg:grid-cols-5 gap-8 max-w-7xl mx-auto">
             {/*
               Contact form — upgraded to premium business treatment:
                 • Warm orange glow ring behind the card
@@ -335,6 +328,7 @@ function Contact() {
                                 <Input
                                   {...field}
                                   placeholder="Enter your full name"
+                                  autoComplete="name"
                                   className="h-12 bg-slate-50/70 border-slate-200/90 rounded-xl text-slate-900 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-[#d96c4a]/60 focus:ring-4 focus:ring-[#d96c4a]/10 transition-all duration-200"
                                 />
                               </FormControl>
@@ -358,6 +352,7 @@ function Contact() {
                                     {...field}
                                     type="email"
                                     placeholder="your@email.com"
+                                    autoComplete="email"
                                     className="h-12 bg-slate-50/70 border-slate-200/90 rounded-xl text-slate-900 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-[#d96c4a]/60 focus:ring-4 focus:ring-[#d96c4a]/10 transition-all duration-200"
                                   />
                                 </FormControl>
@@ -381,6 +376,7 @@ function Contact() {
                                     {...field}
                                     type="tel"
                                     placeholder="(937) 000-0000"
+                                    autoComplete="tel"
                                     className="h-12 bg-slate-50/70 border-slate-200/90 rounded-xl text-slate-900 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-[#d96c4a]/60 focus:ring-4 focus:ring-[#d96c4a]/10 transition-all duration-200"
                                   />
                                 </FormControl>
