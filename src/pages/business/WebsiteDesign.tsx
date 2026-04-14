@@ -409,29 +409,24 @@ const WebsiteDesign = () => {
 
                 <AnimatedSection animation="fade-up" delay={300}>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <div className="btn-press">
-                      <Button
-                        asChild
-                        size="xl"
-                        variant="gold"
-                        className="shadow-2xl shadow-primary/30"
-                      >
-                        <Link to="/contact">
-                          Get a Quote
-                          <ArrowRight className="ml-2 h-5 w-5" />
-                        </Link>
-                      </Button>
-                    </div>
-                    <div className="btn-press">
-                      <Button
-                        asChild
-                        size="xl"
-                        variant="outline"
-                        className="bg-white/80 dark:bg-card/80 backdrop-blur-2xl border-white/50 shadow-xl"
-                      >
-                        <Link to="/business">View All Services</Link>
-                      </Button>
-                    </div>
+                    <Button
+                      asChild
+                      size="heroPill"
+                      variant="heroPrimary"
+                    >
+                      <Link to="/contact">
+                        Get a Quote
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                    <Button
+                      asChild
+                      size="heroPill"
+                      variant="outline"
+                      className="rounded-full backdrop-blur-sm"
+                    >
+                      <Link to="/business">View All Services</Link>
+                    </Button>
                   </div>
                 </AnimatedSection>
 
@@ -725,32 +720,27 @@ const WebsiteDesign = () => {
                     quote today.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <div className="btn-press">
-                      <Button
-                        asChild
-                        size="xl"
-                        variant="gold"
-                        className="shadow-2xl shadow-primary/40"
-                      >
-                        <Link to="/contact">
-                          Request a Quote
-                          <ArrowRight className="ml-2 h-5 w-5" />
-                        </Link>
-                      </Button>
-                    </div>
-                    <div className="btn-press">
-                      <Button
-                        asChild
-                        size="xl"
-                        variant="outline"
-                        className="bg-white/70 dark:bg-card/70 backdrop-blur-2xl border-white/50 shadow-xl"
-                      >
-                        <Link to="/business/website-insurance">
-                          <Shield className="mr-2 h-5 w-5" />
-                          Add Website Insurance
-                        </Link>
-                      </Button>
-                    </div>
+                    <Button
+                      asChild
+                      size="heroPill"
+                      variant="heroPrimary"
+                    >
+                      <Link to="/contact">
+                        Request a Quote
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                    <Button
+                      asChild
+                      size="heroPill"
+                      variant="outline"
+                      className="rounded-full backdrop-blur-sm"
+                    >
+                      <Link to="/business/website-insurance">
+                        <Shield className="mr-2 h-4 w-4" />
+                        Add Website Insurance
+                      </Link>
+                    </Button>
                   </div>
                 </div>
               </AnimatedSection>

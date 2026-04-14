@@ -7,6 +7,7 @@ import TrustBar from "@/components/TrustBar";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { HeroCTA } from "@/components/shared/HeroCTA";
 import { Calendar, Clock, ArrowRight, Loader2, BookOpen } from "lucide-react";
 import heroResourcesNew from "@/assets/hero-resources-new.jpg";
 import { useArticles } from "@/hooks/useArticles";
@@ -61,7 +62,14 @@ function Articles() {
         backgroundImages={articlesHeroImages}
         headline="Scam Prevention Articles & News"
         subheadline="Stay informed about the latest scam threats and protection strategies"
-      />
+      >
+        <HeroCTA
+          primaryText="Get Protected"
+          primaryHref="/training#pricing"
+          secondaryText="Contact Us"
+          secondaryHref="/contact"
+        />
+      </Hero>
 
       <TrustBar />
 

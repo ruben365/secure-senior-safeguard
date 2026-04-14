@@ -204,13 +204,13 @@ const WebsiteInsurance = () => {
                   All in one plan.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button asChild size="xl" variant="gold">
+                  <Button asChild size="heroPill" variant="heroPrimary">
                     <Link to="/contact">
                       Get Protected Today
-                      <ArrowRight className="ml-2 h-5 w-5" />
+                      <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
-                  <Button asChild size="xl" variant="outline">
+                  <Button asChild size="heroPill" variant="outline" className="rounded-full backdrop-blur-sm">
                     <Link to="/business">View All Services</Link>
                   </Button>
                 </div>
@@ -396,13 +396,13 @@ const WebsiteInsurance = () => {
                 Protect your website today. Plans start at just $29/month.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="xl" variant="gold">
+                <Button asChild size="heroPill" variant="heroPrimary">
                   <Link to="/contact">
                     Start Protection Now
-                    <Shield className="ml-2 h-5 w-5" />
+                    <Shield className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-                <Button asChild size="xl" variant="outline">
+                <Button asChild size="heroPill" variant="outline" className="rounded-full backdrop-blur-sm">
                   <Link to="/business/website-design">Need a New Website?</Link>
                 </Button>
               </div>

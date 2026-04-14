@@ -127,9 +127,17 @@ function Security() {
           <h1 className="text-3xl md:text-5xl font-black mb-4 tracking-tight">
             Security at InVision Network
           </h1>
-          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-8">
             Enterprise-grade protection for families, seniors, and businesses.
           </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button asChild size="heroPill" variant="heroPrimary">
+              <Link to="/training#pricing">Get Protected</Link>
+            </Button>
+            <Button asChild size="heroPill" variant="heroOutline">
+              <Link to="/contact">Contact Us</Link>
+            </Button>
+          </div>
         </div>
       </section>
 

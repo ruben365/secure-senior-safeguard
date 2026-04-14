@@ -199,17 +199,16 @@ const AutonomousDefenseHub = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button
-                    size="lg"
-                    className="h-14 px-10 font-bold rounded-full bg-gradient-to-r from-primary to-accent text-white shadow-xl hover:opacity-90 transition-opacity"
+                    size="heroPill"
+                    variant="heroPrimary"
                     onClick={() => openBooking("Autonomous Defense Hub — Sentinel", 297, "Sentinel")}
                   >
-                    Request Early Access <ArrowRight className="ml-2 w-5 h-5" />
+                    Request Early Access <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                   <Button
                     asChild
-                    variant="outline"
-                    size="lg"
-                    className="h-14 px-10 font-bold rounded-full border-white/20 text-white hover:bg-white/10"
+                    size="heroPill"
+                    variant="heroOutline"
                   >
                     <Link to="/business">View All Services</Link>
                   </Button>
@@ -747,17 +746,16 @@ const AutonomousDefenseHub = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button
-                    size="lg"
-                    className="h-14 px-10 font-bold rounded-full bg-gradient-to-r from-primary to-accent text-white shadow-xl hover:opacity-90 transition-opacity"
+                    size="heroPill"
+                    variant="heroPrimary"
                     onClick={() => openBooking("Autonomous Defense Hub — Sentinel", 297, "Sentinel")}
                   >
-                    Reserve My Spot <ArrowRight className="ml-2 w-5 h-5" />
+                    Reserve My Spot <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                   <Button
                     asChild
-                    variant="outline"
-                    size="lg"
-                    className="h-14 px-10 font-bold rounded-full border-white/20 text-white hover:bg-white/10"
+                    size="heroPill"
+                    variant="heroOutline"
                   >
                     <a href={SITE.phone.tel}>Call {SITE.phone.display}</a>
                   </Button>
