@@ -3,7 +3,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
-import { SEO } from "@/components/SEO";
+import { SEO, PAGE_SEO } from "@/components/SEO";
 import { PageTransition } from "@/components/PageTransition";
 import {
   Card,
@@ -122,9 +122,10 @@ function Careers() {
   return (
     <PageTransition variant="fade">
       <SEO
-        title="Careers at InVision Network — Kettering, Ohio"
-        description="Join InVision Network's team of cybersecurity professionals and AI specialists in Kettering, Ohio. Open positions for trainers, analysts, designers, and engineers. Remote-friendly."
+        title={PAGE_SEO.careers.title}
+        description={PAGE_SEO.careers.description}
         keywords="cybersecurity careers Kettering Ohio, AI jobs Dayton, InVision Network hiring, security analyst positions"
+        structuredData={PAGE_SEO.careers.structuredData as Record<string, unknown>}
         breadcrumbs={[
           { name: "Home", url: "https://www.invisionnetwork.org/" },
           { name: "Careers", url: "https://www.invisionnetwork.org/careers" },

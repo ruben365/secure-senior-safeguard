@@ -189,10 +189,10 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                   <MapPin className="w-4 h-4 text-orange-400/80 flex-shrink-0" />
                   {SITE.location.city}, {SITE.location.region}
                 </span>
-                <span className="inline-flex items-center gap-2 text-[13px] text-white/75">
+                <a href={`mailto:${SITE.emails.hello}`} className="inline-flex items-center gap-2 text-[13px] text-white/75 hover:text-white transition-colors">
                   <Mail className="w-4 h-4 text-orange-400/80 flex-shrink-0" />
                   {SITE.emails.hello}
-                </span>
+                </a>
               </div>
             </div>
 

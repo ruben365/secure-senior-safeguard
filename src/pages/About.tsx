@@ -468,7 +468,7 @@ function About() {
             Ready to Join Our Protected Community?
           </h2>
           <p className="text-base md:text-lg text-white/95 mb-5 max-w-2xl mx-auto drop-shadow-md">
-            Whether you're looking for personal training, <Link to="/business" className="text-white/95 underline hover:text-white font-medium">AI business solutions</Link>, or
+            Whether you're looking for personal training, <Link to="/ai" className="text-white/95 underline hover:text-white font-medium">AI business solutions</Link>, or
             want to support our mission, we'd love to connect.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">

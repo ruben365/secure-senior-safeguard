@@ -197,7 +197,7 @@ function Contact() {
           </div>
           <HeroCTA
             primaryText="Call (937) 301-8749"
-            primaryHref="tel:9373018749"
+            primaryHref={SITE.phone.tel}
             secondaryText="Send a Message"
             secondaryHref="#contact-form"
           />

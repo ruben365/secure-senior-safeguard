@@ -119,7 +119,7 @@ export function PaymentElementPanel({
             <a
               href={hostedCheckoutUrl}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="mt-2 inline-flex items-center gap-1 font-medium text-[#b75539] hover:underline"
             >
               Open checkout page
