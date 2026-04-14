@@ -74,10 +74,10 @@ const AVAILABLE_CATEGORIES = [
 ];
 
 const AVAILABLE_AUTHORS = [
-  { id: "1", name: "Ruben Nkulu", avatar: "/placeholder.svg", role: "Admin" },
+  { id: "1", name: "Admin", avatar: "/placeholder.svg", role: "Admin" },
   {
     id: "2",
-    name: "Corine Miller",
+    name: "Editor",
     avatar: "/placeholder.svg",
     role: "Editor",
   },

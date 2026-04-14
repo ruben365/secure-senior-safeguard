@@ -286,8 +286,7 @@ export const PAGE_SEO = {
       logo: "https://www.invisionnetwork.org/favicon.png",
       foundingDate: "2024",
       founders: [
-        { "@type": "Person", name: "Ruben Nk" },
-        { "@type": "Person", name: "Corine Mk" },
+        { "@type": "Organization", name: "InVision Network" },
       ],
       description:
         "Veteran-founded cybersecurity company based in Kettering, Ohio protecting families, seniors, and businesses from AI-powered scams, deepfakes, and phishing attacks.",
