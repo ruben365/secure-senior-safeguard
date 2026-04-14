@@ -19,6 +19,10 @@ const logStep = (step: string, details?: unknown) => {
 // Per-IP rate limit (10 requests / minute) — this is a public endpoint that
 // triggers email sends and DB writes, so we cap it to prevent abuse.
 // ============================================================================
+// NOTE: In-memory rate limiting resets on serverless cold starts and provides no
+// protection under distributed load. For production rate limiting, replace with
+// Upstash Redis (https://upstash.com) or Supabase's built-in rate limiting.
+// Until then, this provides basic protection against single-isolate abuse only.
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 const RATE_LIMIT = 10;
 const RATE_WINDOW_MS = 60 * 1000;
@@ -85,12 +89,24 @@ async function resolvePayment(
   sessionId?: string,
 ): Promise<ResolvedPayment | null> {
   let pi: Stripe.PaymentIntent | null = null;
+  let fallbackEmail = "";
+  let fallbackName = "";
+  let sessionMetadata: Record<string, string> = {};
 
   if (sessionId) {
     const session = await stripe.checkout.sessions.retrieve(sessionId, {
       expand: ["payment_intent", "customer_details"],
     });
     if (session.payment_status !== "paid") return null;
+    fallbackEmail = (
+      session.customer_email || session.customer_details?.email || ""
+    )
+      .toLowerCase()
+      .trim();
+    fallbackName = (
+      session.customer_details?.name || session.metadata?.customerName || ""
+    ).trim();
+    sessionMetadata = (session.metadata || {}) as Record<string, string>;
     if (typeof session.payment_intent === "string") {
       pi = await stripe.paymentIntents.retrieve(session.payment_intent);
     } else if (session.payment_intent) {
@@ -103,8 +119,15 @@ async function resolvePayment(
   if (!pi || pi.status !== "succeeded") return null;
 
   const md = (pi.metadata || {}) as Record<string, string>;
-  const customerEmail = (md.customerEmail || "").toLowerCase().trim();
-  const customerName = (md.customerName || "Customer").trim();
+  const mergedMetadata = { ...sessionMetadata, ...md };
+  const customerEmail = (mergedMetadata.customerEmail || fallbackEmail || "")
+    .toLowerCase()
+    .trim();
+  const customerName = (
+    mergedMetadata.customerName ||
+    fallbackName ||
+    "Customer"
+  ).trim();
 
   // Hard requirement: the create-* function MUST have stamped customerEmail
   // into the payment intent metadata. If it didn't, we refuse to send any
@@ -115,7 +138,7 @@ async function resolvePayment(
     paymentIntentId: pi.id,
     amount: pi.amount,
     currency: pi.currency,
-    metadata: md,
+    metadata: mergedMetadata,
     customerEmail,
     customerName,
   };

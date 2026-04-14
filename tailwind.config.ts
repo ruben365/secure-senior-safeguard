@@ -41,9 +41,6 @@ export default {
       "4xl": "2560px",
     },
     extend: {
-      screens: {
-        xs: "480px",
-      },
       fontFamily: {
         outfit: ["Rubik", "sans-serif"],
         sans: ["Rubik", "sans-serif"],

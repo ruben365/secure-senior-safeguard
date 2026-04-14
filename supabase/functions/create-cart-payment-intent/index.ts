@@ -21,6 +21,17 @@ interface CartItem {
   quantity: number;
 }
 
+const ALLOWED_ORIGINS = new Set<string>([
+  "https://www.invisionnetwork.org",
+  "https://invisionnetwork.org",
+]);
+const CANONICAL_ORIGIN = "https://www.invisionnetwork.org";
+
+const resolveOrigin = (req: Request): string => {
+  const requested = (req.headers.get("origin") || "").trim().toLowerCase();
+  return ALLOWED_ORIGINS.has(requested) ? requested : CANONICAL_ORIGIN;
+};
+
 // ============================================================================
 // "House" sentinel partner. partner_orders.partner_id is NOT NULL but has no
 // FK constraint and there is no `partners` table — direct InVision sales are
@@ -42,6 +53,10 @@ function generateOrderNumber(): string {
 // resources and runs N database lookups per call. Cap to prevent
 // enumeration / customer-creation spam and DB query amplification.
 // ============================================================================
+// NOTE: In-memory rate limiting resets on serverless cold starts and provides no
+// protection under distributed load. For production rate limiting, replace with
+// Upstash Redis (https://upstash.com) or Supabase built-in rate limiting.
+// Until then, this provides basic protection against single-isolate abuse only.
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 const RATE_LIMIT = 15;
 const RATE_WINDOW_MS = 60 * 1000;
@@ -150,6 +165,7 @@ serve(async (req) => {
       isVeteran = false,
       items = [],
       metadata = {},
+      checkoutMode = false,
     } = body;
 
     // ====================================================================
@@ -181,6 +197,7 @@ serve(async (req) => {
       email: normalizedEmail,
       isVeteran: !!isVeteran,
       itemCount: items.length,
+      checkoutMode: !!checkoutMode,
     });
 
     // ====================================================================
@@ -202,6 +219,7 @@ serve(async (req) => {
     };
     const verified: Verified[] = [];
     let hasDigital = false;
+    let hasPhysical = false;
 
     for (const raw of items as CartItem[]) {
       const productId = raw.productId || raw.id;
@@ -256,6 +274,7 @@ serve(async (req) => {
 
       const productType = String(product.product_type || "physical");
       if (productType === "digital") hasDigital = true;
+      if (productType !== "digital") hasPhysical = true;
 
       verified.push({
         productId: product.id,
@@ -389,6 +408,106 @@ serve(async (req) => {
       hasDigital,
     });
 
+    const stripeMetadata = {
+      ...safeMetadata,
+      order_id: orderId,
+      order_number: orderNumber,
+      isVeteran: isVeteran ? "true" : "false",
+      customerEmail: normalizedEmail,
+      customerName: safeName,
+      itemsDescription: itemsDescription.substring(0, 480),
+      itemCount: lineSummary.length.toString(),
+      veteranDiscountCents: discountCents.toString(),
+      hasDigital: hasDigital ? "true" : "false",
+      hasPhysical: hasPhysical ? "true" : "false",
+      paymentType: "cart",
+    };
+
+    const cleanupOrder = async () => {
+      try {
+        await supabase.from("partner_orders").delete().eq("id", orderId);
+      } catch (cleanupError) {
+        logStep("WARNING: failed to clean up orphan partner_orders row", {
+          orderId,
+          error: cleanupError instanceof Error
+            ? cleanupError.message
+            : String(cleanupError),
+        });
+      }
+    };
+
+    if (checkoutMode) {
+      try {
+        const origin = resolveOrigin(req);
+        const session = await stripe.checkout.sessions.create({
+          mode: "payment",
+          ...(customerId ? { customer: customerId } : { customer_email: normalizedEmail }),
+          line_items: [
+            {
+              price_data: {
+                currency: "usd",
+                product_data: {
+                  name:
+                    lineSummary.length === 1
+                      ? lineSummary[0].name
+                      : "InVision Network Order",
+                  description: itemsDescription.slice(0, 200),
+                },
+                unit_amount: computedTotalCents,
+              },
+              quantity: 1,
+            },
+          ],
+          success_url: `${origin}/payment-success?type=cart&session_id={CHECKOUT_SESSION_ID}`,
+          cancel_url: `${origin}/payment-canceled`,
+          metadata: stripeMetadata,
+          payment_intent_data: {
+            metadata: stripeMetadata,
+          },
+        });
+
+        await supabase
+          .from("partner_orders")
+          .update({
+            payment_method: "stripe_checkout",
+            payment_transaction_id: session.id,
+          })
+          .eq("id", orderId);
+
+        logStep("Hosted checkout session created", {
+          sessionId: session.id,
+          orderId,
+          amount: computedTotalCents,
+        });
+
+        return new Response(
+          JSON.stringify({
+            url: session.url,
+            sessionId: session.id,
+            customerId,
+            amount: computedTotalCents,
+            veteranDiscountCents: discountCents,
+            orderId,
+            orderNumber,
+            type: "checkout",
+          }),
+          {
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+            status: 200,
+          },
+        );
+      } catch (stripeError) {
+        logStep("Hosted checkout session creation failed, cleaning up order", {
+          orderId,
+          error: stripeError instanceof Error
+            ? stripeError.message
+            : String(stripeError),
+        });
+        await cleanupOrder();
+        throw stripeError;
+      }
+    }
+
     // Create PaymentIntent with the SERVER-COMPUTED amount
     let paymentIntent;
     try {
@@ -397,21 +516,7 @@ serve(async (req) => {
         amount: computedTotalCents,
         currency: "usd",
         automatic_payment_methods: { enabled: true },
-        metadata: {
-          // Caller-supplied metadata FIRST so explicit fields below win on conflict.
-          ...safeMetadata,
-          // Critical: lets verify-payment locate the partner_orders row.
-          order_id: orderId,
-          order_number: orderNumber,
-          isVeteran: isVeteran ? "true" : "false",
-          customerEmail: normalizedEmail,
-          customerName: safeName,
-          itemsDescription: itemsDescription.substring(0, 480),
-          itemCount: lineSummary.length.toString(),
-          veteranDiscountCents: discountCents.toString(),
-          hasDigital: hasDigital ? "true" : "false",
-          paymentType: "cart",
-        },
+        metadata: stripeMetadata,
       });
     } catch (stripeError) {
       // Stripe failed AFTER we wrote the partner_orders row. Delete it so
@@ -422,19 +527,7 @@ serve(async (req) => {
         orderId,
         error: stripeError instanceof Error ? stripeError.message : String(stripeError),
       });
-      try {
-        await supabase
-          .from("partner_orders")
-          .delete()
-          .eq("id", orderId);
-      } catch (cleanupError) {
-        logStep("WARNING: failed to clean up orphan partner_orders row", {
-          orderId,
-          error: cleanupError instanceof Error
-            ? cleanupError.message
-            : String(cleanupError),
-        });
-      }
+      await cleanupOrder();
       throw stripeError;
     }
 

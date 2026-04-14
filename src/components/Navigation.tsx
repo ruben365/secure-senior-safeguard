@@ -8,6 +8,7 @@ import {
   LayoutDashboard,
   Heart,
   ChevronDown,
+  Search,
 } from "lucide-react";
 import { PrefetchLink } from "@/components/PrefetchLink";
 import { ShoppingCart } from "@/components/ShoppingCart";
@@ -16,9 +17,10 @@ import { SITE } from "@/config/site";
 import invisionLogo from "@/assets/shield-logo.png";
 import { DonationModal } from "@/components/DonationModal";
 import { AnnouncementBell } from "@/components/AnnouncementBell";
+import SearchDialog from "@/components/SearchDialog";
 
 const primaryLinks = [
-  { name: "AI", href: "/business" },
+  { name: "AI", href: "/ai" },
   { name: "Workshops", href: "/training" },
   { name: "Resources", href: "/resources" },
   { name: "About", href: "/about" },
@@ -36,6 +38,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [donateOpen, setDonateOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const location = useLocation();
   const { user, roleConfig } = useAuth();
   const moreRef = React.useRef<HTMLDivElement>(null);
@@ -102,6 +105,14 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
   };
 
   const isActiveLink = (href: string) => {
+    if (href === "/ai") {
+      return (
+        location.pathname === "/ai" ||
+        location.pathname === "/ai-workshop" ||
+        location.pathname === "/business" ||
+        location.pathname.startsWith("/business/")
+      );
+    }
     return location.pathname === href || location.pathname.startsWith(href + "/");
   };
 
@@ -117,14 +128,6 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
 
   return (
     <>
-      {/* Mobile backdrop */}
-      {mobileMenuOpen && (
-        <div
-          className="fixed inset-0 bg-black/60 z-[9998] lg:hidden"
-          onClick={() => setMobileMenuOpen(false)}
-        />
-      )}
-
       <nav className={overlay ? "absolute top-0 left-0 right-0 z-[9999] bg-gradient-to-b from-black/60 to-transparent" : `sticky top-0 z-[9999] transition-all duration-300 ${scrolled ? "bg-[#080d1a]/97 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_4px_24px_-4px_rgba(0,0,0,0.3)]" : "bg-[#080d1a]/80 backdrop-blur-md"}`}>
         <div className="max-w-[1280px] mx-auto w-full px-6 lg:px-8">
           <div className="flex items-center justify-between h-[56px] gap-4 lg:gap-8">
@@ -286,6 +289,16 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 </Link>
               )}
 
+              {/* Search button */}
+              <button
+                type="button"
+                onClick={() => setSearchOpen(true)}
+                className="p-2 rounded-lg hover:bg-white/10 transition-colors duration-150 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                aria-label="Search site"
+              >
+                <Search className="h-4 w-4 text-white/75" />
+              </button>
+
               {/* Mobile menu button */}
               <button
                 type="button"
@@ -314,10 +327,10 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
             @keyframes backdropIn   { from { opacity: 0; } to { opacity: 1; } }
           `}</style>
 
-          {/* Backdrop — click to close */}
+          {/* Backdrop — click to close, starts below nav */}
           <div
-            className="lg:hidden fixed inset-0 z-[10000]"
-            style={{ background: "rgba(0,0,0,0.3)", animation: "backdropIn 200ms ease-out" }}
+            className="lg:hidden fixed left-0 right-0 bottom-0 z-[10000]"
+            style={{ top: "56px", background: "rgba(0,0,0,0.3)", animation: "backdropIn 200ms ease-out" }}
             onClick={() => setMobileMenuOpen(false)}
             aria-hidden="true"
           />
@@ -415,6 +428,8 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
         onOpenChange={setDonateOpen}
         type="general"
       />
+
+      <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} />
     </>
   );
 });

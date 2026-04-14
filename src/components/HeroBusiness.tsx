@@ -3,6 +3,7 @@ import {
   Cpu, Bot, ShieldCheck, Cog,
 } from "lucide-react";
 import businessHero from "@/assets/hero-ai-business-unified.jpg";
+import { HeroCTA } from "@/components/shared/HeroCTA";
 
 /* ── Bottom feature cards — varied backgrounds ── */
 const businessFeatures = [
@@ -57,11 +58,13 @@ export const HeroBusiness = ({ onStrategyCall }: { onStrategyCall: () => void })
           fetchPriority="high"
         />
         <div className="hero-biz__top-veil" />
+        {/* Mobile: darken top so text is readable over photo */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/40 to-transparent sm:hidden" aria-hidden="true" />
         <div className="hero-biz__glow" aria-hidden="true" />
       </div>
 
       {/* ── Hero Content: Left text only ── */}
-      <div className="hero-biz__content">
+      <div className="hero-biz__content [justify-content:flex-start] sm:[justify-content:center] [padding-top:6rem] sm:[padding-top:unset]">
         <div className="hero-biz__copy">
 
           <h1 className="hero-biz__headline">
@@ -78,14 +81,12 @@ export const HeroBusiness = ({ onStrategyCall }: { onStrategyCall: () => void })
             infrastructure. Scalable tools for modern business challenges.
           </p>
 
-          <div className="hero-biz__ctas">
-            <button type="button" className="hero-biz__cta hero-biz__cta--primary" onClick={onStrategyCall}>
-              Request Demo
-            </button>
-            <button type="button" className="hero-biz__cta hero-biz__cta--secondary" onClick={() => scrollTo("services")}>
-              Learn More
-            </button>
-          </div>
+          <HeroCTA
+            primaryText="Request Demo"
+            primaryHref="/contact"
+            secondaryText="Learn More"
+            secondaryHref="/resources"
+          />
         </div>
       </div>
 

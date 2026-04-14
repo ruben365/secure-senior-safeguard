@@ -9,8 +9,7 @@ const corsHeaders = {
 };
 
 const MB = 1024 * 1024;
-const RATE_PER_MB = 0.1;
-const MINIMUM_CHARGE = 0.5;
+const PER_UPLOAD_PRICE = 1;
 const MAX_FILE_MB = 500;
 const MIN_FILE_BYTES = 1;
 const MAX_FILE_BYTES = MAX_FILE_MB * MB;
@@ -50,6 +49,10 @@ const EXTENSION_MIME_MAP: Record<string, string> = {
 // Per-IP rate limit (10 file scan intents / 10 minutes). Each call also
 // creates a Stripe payment intent so this caps Stripe spend from abuse.
 // ============================================================================
+// NOTE: In-memory rate limiting resets on serverless cold starts and provides no
+// protection under distributed load. For production rate limiting, replace with
+// Upstash Redis (https://upstash.com) or Supabase built-in rate limiting.
+// Until then, this provides basic protection against single-isolate abuse only.
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 const RATE_LIMIT = 10;
 const RATE_WINDOW_MS = 10 * 60 * 1000;
@@ -83,11 +86,17 @@ const sanitizeFileName = (name: string) =>
 const getExtension = (name: string) =>
   name.slice(Math.max(0, name.lastIndexOf("."))).toLowerCase();
 
-const calculateAmount = (bytes: number) => {
-  const sizeMb = bytes / MB;
-  const raw = sizeMb * RATE_PER_MB;
-  const cost = Math.max(MINIMUM_CHARGE, Math.ceil(raw * 100) / 100);
-  return { sizeMb, cost };
+const calculateAmount = () => PER_UPLOAD_PRICE;
+
+const ALLOWED_ORIGINS = new Set<string>([
+  "https://www.invisionnetwork.org",
+  "https://invisionnetwork.org",
+]);
+const CANONICAL_ORIGIN = "https://www.invisionnetwork.org";
+
+const resolveOrigin = (req: Request): string => {
+  const requested = (req.headers.get("origin") || "").trim().toLowerCase();
+  return ALLOWED_ORIGINS.has(requested) ? requested : CANONICAL_ORIGIN;
 };
 
 serve(async (req) => {
@@ -129,7 +138,7 @@ serve(async (req) => {
     }
 
     const body = await req.json();
-    const { fileName, fileSize, fileType } = body;
+    const { fileName, fileSize, fileType, checkoutMode = false } = body;
     const fileSizeNumber = Number(fileSize);
 
     // ====================================================================
@@ -186,7 +195,7 @@ serve(async (req) => {
       });
     }
 
-    const { cost } = calculateAmount(fileSizeNumber);
+    const cost = calculateAmount();
     const scanId = crypto.randomUUID();
     const sanitized = sanitizeFileName(fileName);
 
@@ -201,19 +210,15 @@ serve(async (req) => {
     }
 
     const filePath = `guest/${scanId}/${sanitized}`;
+    const paymentMetadata = {
+      paymentType: "guest_scan",
+      scan_id: scanId,
+      file_name: sanitized,
+      file_type: storedType,
+      file_size: fileSizeNumber.toString(),
+    };
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2024-11-20.acacia" });
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(cost * 100),
-      currency: "usd",
-      payment_method_types: ["card"],
-      metadata: {
-        scan_id: scanId,
-        file_name: sanitized,
-        file_type: storedType,
-        file_size: fileSizeNumber.toString(),
-      },
-    });
 
     const supabase = createClient(supabaseUrl, serviceRoleKey, {
       auth: { persistSession: false },
@@ -230,7 +235,7 @@ serve(async (req) => {
       file_size: fileSizeNumber,
       file_type: storedType,
       file_path: filePath,
-      stripe_session_id: paymentIntent.id,
+      stripe_session_id: "pending",
       amount_paid: cost,
       payment_status: "pending",
       scan_status: "pending",
@@ -241,6 +246,66 @@ serve(async (req) => {
     if (insertError) {
       throw new Error(insertError.message);
     }
+
+    if (checkoutMode) {
+      const origin = resolveOrigin(req);
+      const session = await stripe.checkout.sessions.create({
+        mode: "payment",
+        line_items: [
+          {
+            price_data: {
+              currency: "usd",
+              product_data: {
+                name: "AI Scam Analysis Upload",
+                description: "One secure upload scan",
+              },
+              unit_amount: Math.round(cost * 100),
+            },
+            quantity: 1,
+          },
+        ],
+        success_url: `${origin}/training/ai-analysis?session_id={CHECKOUT_SESSION_ID}#guest-scanner`,
+        cancel_url: `${origin}/training/ai-analysis#guest-scanner`,
+        metadata: paymentMetadata,
+        payment_intent_data: {
+          metadata: paymentMetadata,
+        },
+      });
+
+      await supabase
+        .from("guest_scans")
+        .update({
+          stripe_session_id: session.id,
+        })
+        .eq("id", scanId);
+
+      return new Response(
+        JSON.stringify({
+          checkoutUrl: session.url,
+          sessionId: session.id,
+          scanId,
+          amount: cost,
+          filePath,
+        }),
+        {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 200,
+        },
+      );
+    }
+
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: Math.round(cost * 100),
+      currency: "usd",
+      payment_method_types: ["card"],
+      metadata: paymentMetadata,
+    });
+
+    // Update the scan record with the actual payment intent ID
+    await supabase
+      .from("guest_scans")
+      .update({ stripe_session_id: paymentIntent.id })
+      .eq("id", scanId);
 
     return new Response(
       JSON.stringify({

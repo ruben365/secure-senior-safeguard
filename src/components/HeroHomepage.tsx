@@ -62,17 +62,19 @@ export const HeroHomepage = () => {
       <div className="hero-home__bg">
         <img
           src={corineHero}
-          alt="Corine — InVision Network co-founder"
+          alt="InVision Network co-founder in office"
           loading="eager"
           decoding="async"
           fetchPriority="high"
         />
         <div className="hero-home__top-veil" />
+        {/* Mobile: darken top so text is readable over photo */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/40 to-transparent sm:hidden" aria-hidden="true" />
         <div className="hero-home__glow" aria-hidden="true" />
       </div>
 
       {/* ── 2. Hero Content ── */}
-      <div className="hero-home__content">
+      <div className="hero-home__content [justify-content:flex-start] sm:[justify-content:center] [padding-top:6rem] sm:[padding-top:unset]">
         <div className="max-w-[1600px] mx-auto w-full px-6 lg:px-8">
           <div className="hero-home__copy">
 

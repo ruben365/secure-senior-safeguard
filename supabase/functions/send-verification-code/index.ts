@@ -15,6 +15,10 @@ const corsHeaders = {
 // Per-IP rate limit (5 / min) — verification codes are high-volume but each
 // successful issue gives an attacker a 1-in-1M shot at a 6-digit code.
 // ============================================================================
+// NOTE: In-memory rate limiting resets on serverless cold starts and provides no
+// protection under distributed load. For production rate limiting, replace with
+// Upstash Redis (https://upstash.com) or Supabase built-in rate limiting.
+// Until then, this provides basic protection against single-isolate abuse only.
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 const RATE_LIMIT = 5;
 const RATE_WINDOW_MS = 60 * 1000;

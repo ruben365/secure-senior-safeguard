@@ -7,6 +7,8 @@ const prefetchedRoutes = new Set<string>();
 // Map routes to their page keys for hero images
 const routeToPageKey: Record<string, string> = {
   "/about": "about",
+  "/ai": "business",
+  "/ai-workshop": "business",
   "/business": "business",
   "/training": "training",
   "/resources": "resources",
@@ -42,6 +44,8 @@ export const usePrefetchRoute = (path: string) => {
       const routeMap: Record<string, () => Promise<any>> = {
         "/": () => import("../pages/Index"),
         "/training": () => import("../pages/Training"),
+        "/ai": () => import("../pages/Business"),
+        "/ai-workshop": () => import("../pages/Business"),
         "/business": () => import("../pages/Business"),
         "/about": () => import("../pages/About"),
         "/resources": () => import("../pages/Resources"),

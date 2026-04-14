@@ -1,6 +1,5 @@
 import { lazy, Suspense } from "react";
 import { HelmetProvider } from "react-helmet-async";
-import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -71,6 +70,16 @@ const BookReader = lazy(() => import("./pages/BookReader"));
 const BookDetail = lazy(() => import("./pages/BookDetail"));
 const LibraryPage = lazy(() => import("./pages/LibraryPage"));
 const PurchasePage = lazy(() => import("./pages/PurchasePage"));
+
+// New public pages - lazy loaded
+const Pricing = lazy(() => import("./pages/Pricing"));
+const Partners = lazy(() => import("./pages/Partners"));
+const Events = lazy(() => import("./pages/Events"));
+const Sitemap = lazy(() => import("./pages/Sitemap"));
+
+// Security and Status pages
+const Security = lazy(() => import("./pages/Security"));
+const Status = lazy(() => import("./pages/Status"));
 
 // Legal pages - lazy loaded
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
@@ -173,13 +182,15 @@ function PublicRoutes() {
         <Route path="/" element={<PageTransition variant="auto"><Index /></PageTransition>} />
         <Route path="/training" element={<PageTransition variant="auto"><Training /></PageTransition>} />
         <Route path="/training/ai-analysis" element={<PageTransition variant="auto"><TrainingAiAnalysis /></PageTransition>} />
-        <Route path="/business" element={<PageTransition variant="auto"><Business /></PageTransition>} />
+        <Route path="/ai" element={<PageTransition variant="auto"><Business /></PageTransition>} />
+        <Route path="/ai-workshop" element={<Navigate to="/ai" replace />} />
+        <Route path="/business" element={<Navigate to="/ai" replace />} />
         <Route path="/business/ai-receptionist" element={<PageTransition variant="auto"><AIReceptionist /></PageTransition>} />
         <Route path="/business/ai-automation" element={<PageTransition variant="auto"><AIAutomation /></PageTransition>} />
         <Route path="/business/website-design" element={<PageTransition variant="auto"><WebsiteDesign /></PageTransition>} />
         <Route path="/business/website-insurance" element={<PageTransition variant="auto"><WebsiteInsurance /></PageTransition>} />
         <Route path="/business/autonomous-defense-hub" element={<PageTransition variant="auto"><AutonomousDefenseHub /></PageTransition>} />
-        <Route path="/invision-2026" element={<Navigate to="/business" replace />} />
+        <Route path="/invision-2026" element={<Navigate to="/ai" replace />} />
         {/* Legacy /services/* routes removed - redirect any stragglers to /contact for inquiry */}
         <Route path="/services/*" element={<Navigate to="/contact" replace />} />
         <Route path="/about" element={<PageTransition variant="auto"><About /></PageTransition>} />
@@ -243,10 +254,16 @@ function PublicRoutes() {
         <Route path="/cookie-policy" element={<PageTransition variant="fade"><CookiePolicy /></PageTransition>} />
         <Route path="/acceptable-use" element={<PageTransition variant="fade"><AcceptableUse /></PageTransition>} />
         <Route path="/disclaimer" element={<PageTransition variant="fade"><Disclaimer /></PageTransition>} />
+        <Route path="/pricing" element={<PageTransition variant="auto"><Pricing /></PageTransition>} />
+        <Route path="/partners" element={<PageTransition variant="auto"><Partners /></PageTransition>} />
+        <Route path="/events" element={<PageTransition variant="auto"><Events /></PageTransition>} />
+        <Route path="/sitemap" element={<PageTransition variant="auto"><Sitemap /></PageTransition>} />
         <Route path="/faq" element={<PageTransition variant="auto"><FAQ /></PageTransition>} />
         <Route path="/help" element={<PageTransition variant="auto"><HelpCenter /></PageTransition>} />
+        <Route path="/security" element={<PageTransition variant="fade"><Security /></PageTransition>} />
+        <Route path="/status" element={<PageTransition variant="fade"><Status /></PageTransition>} />
 
-        {/* Admin Routes */}
+        {/* Admin routes — auth enforced by AdminShell component (checks Supabase session + admin role) */}
         <Route path="/admin/*" element={<AdminShell />}>
           <Route index element={<AdminDashboardContent />} />
           <Route path="threats" element={<ThreatMonitor />} />
@@ -309,9 +326,12 @@ function PublicRoutes() {
   );
 }
 
-function App() {
+function AnchorScrollManager() {
   useSmoothAnchorScroll();
+  return null;
+}
 
+function App() {
   useEffect(() => {
     // Defer scroll-behavior to avoid forced reflow during initial paint
     requestAnimationFrame(() => {
@@ -326,7 +346,6 @@ function App() {
     <HelmetProvider>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-          <Toaster />
           <Sonner />
           <SubscriptionProvider>
             <CartProvider>
@@ -334,6 +353,7 @@ function App() {
                 <CartFeedbackProvider>
                   <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                     <PrerenderProvider>
+                      <AnchorScrollManager />
                       <NavigationProgress />
                       <ScrollProgress />
                       <GlobalMotionProvider />

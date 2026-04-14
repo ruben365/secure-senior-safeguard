@@ -33,7 +33,8 @@ import ohioNatureImpact from "@/assets/ohio-nature-impact.jpg";
 import fieldSunsetCta from "@/assets/field-sunset-cta.jpg";
 import familyGathering from "@/assets/family-gathering.jpg";
 import seniorLearning from "@/assets/senior-learning.jpg";
-import { SEO } from "@/components/SEO";
+import { SEO, PAGE_SEO } from "@/components/SEO";
+import { HeroCTA } from "@/components/shared/HeroCTA";
 import { AnswerSummary } from "@/components/AnswerSummary";
 import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
@@ -56,7 +57,7 @@ function About() {
       year: "2023",
       title: "The Beginning",
       description:
-        "After Ruben and Corine were victims of a sophisticated data breach and extortion attempt, InVision Network was born with a mission to protect families from the same trauma they experienced.",
+        "After our founders were victims of a sophisticated data breach and extortion attempt, InVision Network was born with a mission to protect families from the same trauma they experienced.",
     },
     {
       year: "Early 2024",
@@ -117,8 +118,9 @@ function About() {
     <PageTransition variant="fade">
       <SEO
         title="About InVision Network — Cybersecurity Experts in Kettering, Ohio"
-        description="Meet the team behind InVision Network. Founded by Ruben Nk and Corine Mk in Kettering, Ohio, we protect Southwest Ohio families and businesses from AI-powered scams, deepfakes, and digital fraud."
-        keywords="InVision Network about, cybersecurity Kettering Ohio, Ruben Nk, Corine Mk, Southwest Ohio AI protection"
+        description="Meet the team behind InVision Network. A veteran couple founded this Kettering, Ohio company to protect Southwest Ohio families and businesses from AI-powered scams, deepfakes, and digital fraud."
+        keywords="InVision Network about, cybersecurity Kettering Ohio, veteran-founded, Southwest Ohio AI protection"
+        structuredData={PAGE_SEO.about.structuredData}
         breadcrumbs={[
           { name: "Home", url: "https://www.invisionnetwork.org/" },
           { name: "About", url: "https://www.invisionnetwork.org/about" },
@@ -142,14 +144,12 @@ function About() {
               From victims to protectors. Serving families across Ohio.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-start">
-            <Button size="heroPill" variant="heroPrimary" asChild>
-              <Link to="/training">Start Training</Link>
-            </Button>
-            <Button size="heroPill" variant="heroOutline" asChild>
-              <Link to="/contact">Get in Touch</Link>
-            </Button>
-          </div>
+          <HeroCTA
+            primaryText="Start Training"
+            primaryHref="/training"
+            secondaryText="Get In Touch"
+            secondaryHref="/contact"
+          />
         </Hero>
         <HeroFloatingStats />
       </div>
@@ -160,7 +160,7 @@ function About() {
 
       {/* Answer summary — who we are at a glance */}
       <AnswerSummary
-        summary="InVision Network is a cybersecurity company founded by Ruben Nk and Corine Mk in Kettering, Ohio. We protect families and small businesses from AI-powered scams through hands-on training, automated defenses, and 24/7 monitoring — serving the greater Dayton area and beyond."
+        summary="InVision Network is a cybersecurity company founded by a veteran couple in Kettering, Ohio. We protect families and small businesses from AI-powered scams through hands-on training, automated defenses, and 24/7 monitoring — serving the greater Dayton area and beyond."
         ctaHref="/contact"
         ctaLabel="Get in touch with our team"
         className="py-6"
@@ -183,7 +183,7 @@ function About() {
               </h2>
               <div className="space-y-2.5 text-sm text-muted-foreground leading-relaxed">
                 <p>
-                  When Ruben and Corine fell victim to a sophisticated data
+                  When our founders fell victim to a sophisticated data
                   breach, their worst fears came true. All their passwords,
                   emails, and personal information were exposed. Then came the
                   chilling demand: pay thousands of dollars, or their private
@@ -193,8 +193,8 @@ function About() {
                   This traumatic experience transformed them from victims into
                   protectors. Even before entering the cybersecurity field,
                   they realized anyone can become a target. The attackers were
-                  sophisticated, relentless, and terrifying - this drove Ruben
-                  to dedicate his career to protecting others.
+                  sophisticated, relentless, and terrifying - this drove our
+                  CEO to dedicate his career to protecting others.
                 </p>
                 <p>
                   Today, InVision Network exists because of that painful
@@ -275,13 +275,13 @@ function About() {
                 </div>
                 <Badge className="absolute top-3 right-3 bg-primary text-primary-foreground text-[10px]">Co-Founder & CEO</Badge>
               </div>
-              <h3 className="text-xl font-black mb-1.5 text-foreground">Ruben</h3>
+              <h3 className="text-xl font-black mb-1.5 text-foreground">Co-Founder &amp; CEO</h3>
               <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
                 Cybersecurity Analyst with 5 years of experience protecting
-                organizations and families. After he and his wife Corine fell
+                organizations and families. After he and his wife fell
                 victim to a sophisticated scam that exposed their passwords
                 and emails - with criminals demanding payment to delete their
-                data - Ruben was inspired to enter the cybersecurity field,
+                data - our CEO was inspired to enter the cybersecurity field,
                 embracing a deeper mission: making enterprise-level security
                 accessible to everyone through <Link to="/training" className="text-primary hover:underline font-medium">our workshops</Link> and hands-on education.
               </p>
@@ -303,11 +303,11 @@ function About() {
                 </div>
                 <Badge className="absolute top-3 right-3 bg-primary text-primary-foreground text-[10px]">Co-Founder & COO</Badge>
               </div>
-              <h3 className="text-xl font-black mb-1.5 text-foreground">Corine</h3>
+              <h3 className="text-xl font-black mb-1.5 text-foreground">Co-Founder &amp; COO</h3>
               <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
                 Registered Nurse with 4 years of clinical experience and a
                 heart for community wellness. After experiencing identity
-                theft alongside her husband, Corine channeled her
+                theft alongside her husband, our COO channeled her
                 compassionate care approach into designing trauma-informed
                 cybersecurity training that meets people where they are -
                 especially seniors and vulnerable populations.
@@ -468,7 +468,7 @@ function About() {
             Ready to Join Our Protected Community?
           </h2>
           <p className="text-base md:text-lg text-white/95 mb-5 max-w-2xl mx-auto drop-shadow-md">
-            Whether you're looking for personal training, <Link to="/business" className="text-white/95 underline hover:text-white font-medium">AI business solutions</Link>, or
+            Whether you're looking for personal training, <Link to="/ai" className="text-white/95 underline hover:text-white font-medium">AI business solutions</Link>, or
             want to support our mission, we'd love to connect.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">

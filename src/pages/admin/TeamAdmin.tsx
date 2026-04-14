@@ -68,11 +68,11 @@ export default function TeamAdmin() {
     null,
   );
 
-  // Only keep Ruben Nkulu - the founder
+  // Only keep the founder
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([
     {
       id: "1",
-      name: "Ruben Nkulu",
+      name: "Founder & CEO",
       role: "Founder & CEO",
       department: "Executive",
       email: "ruben@invisionnetwork.org",

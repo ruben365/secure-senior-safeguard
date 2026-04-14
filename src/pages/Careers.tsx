@@ -3,7 +3,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
-import { SEO } from "@/components/SEO";
+import { SEO, PAGE_SEO } from "@/components/SEO";
 import { PageTransition } from "@/components/PageTransition";
 import {
   Card,
@@ -31,6 +31,7 @@ import { Link } from "react-router-dom";
 import { AIImageDisclaimer } from "@/components/AIImageDisclaimer";
 import { SectionDivider, MeshBackground } from "@/components/pro";
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
+import { HeroCTA } from "@/components/shared/HeroCTA";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 import { JOB_POSITIONS, DEPARTMENTS } from "@/config/jobPositions";
 import { JobCard } from "@/components/careers/JobCard";
@@ -121,9 +122,10 @@ function Careers() {
   return (
     <PageTransition variant="fade">
       <SEO
-        title="Careers at InVision Network — Kettering, Ohio"
-        description="Join InVision Network's team of cybersecurity professionals and AI specialists in Kettering, Ohio. Open positions for trainers, analysts, designers, and engineers. Remote-friendly."
+        title={PAGE_SEO.careers.title}
+        description={PAGE_SEO.careers.description}
         keywords="cybersecurity careers Kettering Ohio, AI jobs Dayton, InVision Network hiring, security analyst positions"
+        structuredData={PAGE_SEO.careers.structuredData as Record<string, unknown>}
         breadcrumbs={[
           { name: "Home", url: "https://www.invisionnetwork.org/" },
           { name: "Careers", url: "https://www.invisionnetwork.org/careers" },
@@ -140,12 +142,12 @@ function Careers() {
           showProtectionBadge
           badgeText="We're Hiring"
         >
-          <Button size="heroPill" variant="heroPrimary" asChild>
-            <Link to="/contact">View Open Positions</Link>
-          </Button>
-          <Button size="heroPill" variant="heroOutline" asChild>
-            <Link to="/about">Learn About Us</Link>
-          </Button>
+          <HeroCTA
+            primaryText="View Open Positions"
+            primaryHref="#positions"
+            secondaryText="Learn About Us"
+            secondaryHref="/about"
+          />
         </Hero>
         <HeroFloatingStats />
       </div>
@@ -193,7 +195,7 @@ function Careers() {
       <SectionDivider variant="wave" color="muted" />
 
       {/* Open Positions */}
-      <section className="py-20 relative overflow-hidden">
+      <section id="positions" className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-background to-muted/20" />
         <div className="absolute top-10 right-[20%] w-[350px] h-[350px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
         <div className="container mx-auto px-6 lg:px-8 relative z-10">

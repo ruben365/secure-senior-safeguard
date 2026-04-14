@@ -64,6 +64,18 @@ const Portfolio = () => {
       <SEO
         title="Design Portfolio | InVision Network"
         description="Explore our design portfolio: brand systems, digital design, typography, illustration, motion design, and UI assets."
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "name": "InVision Network Portfolio",
+          "description": "Web design, AI automation, and cybersecurity projects by InVision Network in Kettering, Ohio",
+          "url": "https://www.invisionnetwork.org/portfolio",
+          "publisher": {
+            "@type": "Organization",
+            "name": "InVision Network",
+            "url": "https://www.invisionnetwork.org"
+          }
+        }}
       />
       <Navigation overlay />
 

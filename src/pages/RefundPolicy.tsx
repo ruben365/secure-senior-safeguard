@@ -19,11 +19,7 @@ function RefundPolicy() {
             <h1 className="text-center mb-4">Refund Policy</h1>
             <p className="text-center text-muted-foreground mb-8 text-lg">
               Last Updated:{" "}
-              {new Date().toLocaleDateString("en-US", {
-                month: "long",
-                day: "numeric",
-                year: "numeric",
-              })}
+April 14, 2026
             </p>
             <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
               We want you to be completely satisfied with your purchase. This

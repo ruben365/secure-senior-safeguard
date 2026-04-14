@@ -18,6 +18,10 @@ const logStep = (step: string, details?: unknown) => {
 // Per-IP rate limit (10 / minute) — public endpoint that creates Stripe
 // checkout sessions. Cap to prevent abuse / Stripe spend exhaustion.
 // ============================================================================
+// NOTE: In-memory rate limiting resets on serverless cold starts and provides no
+// protection under distributed load. For production rate limiting, replace with
+// Upstash Redis (https://upstash.com) or Supabase built-in rate limiting.
+// Until then, this provides basic protection against single-isolate abuse only.
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 const RATE_LIMIT = 10;
 const RATE_WINDOW_MS = 60 * 1000;
@@ -54,6 +58,18 @@ const CANONICAL_ORIGIN = "https://www.invisionnetwork.org";
 const resolveOrigin = (req: Request): string => {
   const requested = (req.headers.get("origin") || "").trim().toLowerCase();
   return ALLOWED_ORIGINS.has(requested) ? requested : CANONICAL_ORIGIN;
+};
+
+const resolveReturnPath = (value: unknown) => {
+  if (typeof value !== "string") return "/portal";
+  const trimmed = value.trim();
+  if (!trimmed.startsWith("/") || trimmed.startsWith("//")) {
+    return "/portal";
+  }
+  if (trimmed.length > 200) {
+    return "/portal";
+  }
+  return trimmed;
 };
 
 // ============================================================================
@@ -123,6 +139,7 @@ serve(async (req) => {
       planTier,
       customerEmail,
       customerName,
+      returnTo,
     } = body;
 
     // ====================================================================
@@ -147,6 +164,7 @@ serve(async (req) => {
 
     const safeCustomerName =
       typeof customerName === "string" ? customerName.slice(0, 100).trim() : "";
+    const safeReturnTo = resolveReturnPath(returnTo);
 
     // ====================================================================
     // Resolve the email. If a JWT is present, use the authenticated user's
@@ -168,18 +186,19 @@ serve(async (req) => {
     }
 
     if (!userEmail) {
-      if (typeof customerEmail !== "string") {
-        throw new Error("Email is required for subscription checkout");
+      if (typeof customerEmail === "string" && customerEmail.trim()) {
+        const normalized = customerEmail.toLowerCase().trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(normalized) || normalized.length > 254) {
+          throw new Error("Invalid email format");
+        }
+        userEmail = normalized;
       }
-      const normalized = customerEmail.toLowerCase().trim();
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(normalized) || normalized.length > 254) {
-        throw new Error("Invalid email format");
-      }
-      userEmail = normalized;
     }
 
-    logStep("Using email for checkout", { email: userEmail });
+    logStep("Using email for checkout", {
+      email: userEmail || "stripe-checkout-collects-email",
+    });
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2024-11-20.acacia" });
 
@@ -214,10 +233,12 @@ serve(async (req) => {
 
     // Find existing customer if any (don't create yet — Stripe Checkout
     // will create one as part of the session if customer_email is given)
-    const customers = await stripe.customers.list({
-      email: userEmail,
-      limit: 1,
-    });
+    const customers = userEmail
+      ? await stripe.customers.list({
+          email: userEmail,
+          limit: 1,
+        })
+      : { data: [] };
     let customerId: string | null = null;
     if (customers.data.length > 0) {
       customerId = customers.data[0].id;
@@ -238,7 +259,9 @@ serve(async (req) => {
     const sessionConfig: Stripe.Checkout.SessionCreateParams = {
       ...(customerId
         ? { customer: customerId }
-        : { customer_email: userEmail }),
+        : userEmail
+          ? { customer_email: userEmail }
+          : {}),
       line_items: [
         {
           price: priceId,
@@ -252,8 +275,9 @@ serve(async (req) => {
         user_id: userId || "guest",
         service_name: safeServiceName.slice(0, 480),
         plan_tier: safePlanTier,
-        customer_email: userEmail,
+        customer_email: userEmail || "",
         customer_name: safeCustomerName.slice(0, 480),
+        return_to: safeReturnTo,
       },
     };
 

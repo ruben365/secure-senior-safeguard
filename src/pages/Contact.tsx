@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
-import { SEO } from "@/components/SEO";
+import { SEO, PAGE_SEO } from "@/components/SEO";
 import { PageTransition } from "@/components/PageTransition";
 import {
   Card,
@@ -52,7 +52,10 @@ import { useConfetti } from "@/hooks/useConfetti";
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import heroContactBranded from "@/assets/hero-contact-unified.jpg";
 import { SITE } from "@/config/site";
+import { Link } from "react-router-dom";
 import { SectionDivider, MeshBackground } from "@/components/pro";
+import { HeroCTA } from "@/components/shared/HeroCTA";
+import BookingCalendar from "@/components/BookingCalendar";
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
@@ -171,6 +174,7 @@ function Contact() {
         title="Contact InVision Network — Kettering, Ohio"
         description="Reach InVision Network for cybersecurity training or AI business solutions. Call (937) 301-8749, email us, or fill out our contact form. Serving Kettering, Dayton, and all of Southwest Ohio."
         keywords="contact InVision Network, Kettering cybersecurity, AI protection Ohio, call InVision Network"
+        structuredData={PAGE_SEO.contact.structuredData}
         breadcrumbs={[
           { name: "Home", url: "https://www.invisionnetwork.org/" },
           { name: "Contact", url: "https://www.invisionnetwork.org/contact" },
@@ -192,20 +196,12 @@ function Contact() {
               We're here to help protect your family. Get in touch today.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-start">
-            <Button size="heroPill" variant="heroPrimary" asChild>
-              <a href={SITE.phone.tel}>
-                <Phone className="w-5 h-5 mr-2" />
-                {SITE.phone.display}
-              </a>
-            </Button>
-            <Button size="heroPill" variant="heroOutline" asChild>
-              <a href={`mailto:${SITE.emails.info}`}>
-                <Mail className="w-5 h-5 mr-2" />
-                Email Us
-              </a>
-            </Button>
-          </div>
+          <HeroCTA
+            primaryText="Call (937) 301-8749"
+            primaryHref={SITE.phone.tel}
+            secondaryText="Send a Message"
+            secondaryHref="#contact-form"
+          />
         </Hero>
       </div>
 
@@ -261,7 +257,7 @@ function Contact() {
           </div>
 
           {/* Main Contact Form Section — premium redesign */}
-          <div className="grid lg:grid-cols-5 gap-8 max-w-7xl mx-auto">
+          <div id="contact-form" className="grid lg:grid-cols-5 gap-8 max-w-7xl mx-auto">
             {/*
               Contact form — upgraded to premium business treatment:
                 • Warm orange glow ring behind the card
@@ -335,6 +331,7 @@ function Contact() {
                                 <Input
                                   {...field}
                                   placeholder="Enter your full name"
+                                  autoComplete="name"
                                   className="h-12 bg-slate-50/70 border-slate-200/90 rounded-xl text-slate-900 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-[#d96c4a]/60 focus:ring-4 focus:ring-[#d96c4a]/10 transition-all duration-200"
                                 />
                               </FormControl>
@@ -358,6 +355,7 @@ function Contact() {
                                     {...field}
                                     type="email"
                                     placeholder="your@email.com"
+                                    autoComplete="email"
                                     className="h-12 bg-slate-50/70 border-slate-200/90 rounded-xl text-slate-900 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-[#d96c4a]/60 focus:ring-4 focus:ring-[#d96c4a]/10 transition-all duration-200"
                                   />
                                 </FormControl>
@@ -381,6 +379,7 @@ function Contact() {
                                     {...field}
                                     type="tel"
                                     placeholder="(937) 000-0000"
+                                    autoComplete="tel"
                                     className="h-12 bg-slate-50/70 border-slate-200/90 rounded-xl text-slate-900 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-[#d96c4a]/60 focus:ring-4 focus:ring-[#d96c4a]/10 transition-all duration-200"
                                   />
                                 </FormControl>
@@ -660,6 +659,21 @@ function Contact() {
         </div>
       </div>
       </MeshBackground>
+
+      <BookingCalendar />
+
+      {/* Internal links — related pages */}
+      <section className="py-8 bg-muted/30">
+        <div className="container mx-auto px-6">
+          <p className="text-sm text-muted-foreground text-center max-w-2xl mx-auto">
+            Not sure where to start?{" "}
+            <Link to="/training" className="text-primary hover:underline font-medium">Browse our cybersecurity workshops</Link>{" "}
+            for seniors and families, or learn more about our{" "}
+            <Link to="/ai" className="text-primary hover:underline font-medium">AI business automation services</Link>.{" "}
+            You can also visit our <Link to="/faq" className="text-primary hover:underline font-medium">FAQ page</Link> for quick answers.
+          </p>
+        </div>
+      </section>
 
       <Footer />
     </PageTransition>

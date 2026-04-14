@@ -18,6 +18,10 @@ const logStep = (step: string, details?: unknown) => {
 // auto-creates accounts. Tight cap to make session-id replay attacks
 // expensive.
 // ============================================================================
+// NOTE: In-memory rate limiting resets on serverless cold starts and provides no
+// protection under distributed load. For production rate limiting, replace with
+// Upstash Redis (https://upstash.com) or Supabase built-in rate limiting.
+// Until then, this provides basic protection against single-isolate abuse only.
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 const RATE_LIMIT = 3;
 const RATE_WINDOW_MS = 5 * 60 * 1000;
@@ -66,6 +70,18 @@ const ALLOWED_PLAN_TIERS = new Set([
   "family",
   "enterprise",
 ]);
+
+const resolveDashboardPath = (value: unknown) => {
+  if (typeof value !== "string") return "/portal";
+  const trimmed = value.trim();
+  if (!trimmed.startsWith("/") || trimmed.startsWith("//")) {
+    return "/portal";
+  }
+  if (trimmed.length > 200) {
+    return "/portal";
+  }
+  return trimmed;
+};
 
 async function emailMagicLink(
   resendApiKey: string,
@@ -245,6 +261,7 @@ serve(async (req) => {
       .slice(0, 100)
       .trim();
     const isSubscription = session.mode === "subscription";
+    const dashboardPath = resolveDashboardPath(session.metadata?.return_to);
 
     // Plan tier from session metadata, allow-list-bounded
     const rawTier = (session.metadata?.plan_tier || "starter").toLowerCase();
@@ -423,7 +440,7 @@ serve(async (req) => {
         ? origin
         : "https://www.invisionnetwork.org";
 
-      const redirectTo = `${safeOrigin}/portal`;
+      const redirectTo = `${safeOrigin}${dashboardPath}`;
 
       const { data: linkData, error: linkError } =
         await supabaseAdmin.auth.admin.generateLink({
@@ -484,8 +501,6 @@ serve(async (req) => {
         }
       }
     }
-
-    const dashboardPath = "/portal";
 
     const response = {
       success: true,

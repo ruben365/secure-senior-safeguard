@@ -34,6 +34,7 @@ import { toast } from "sonner";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
+import { HeroCTA } from "@/components/shared/HeroCTA";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 import { SITE } from "@/config/site";
 
@@ -364,12 +365,12 @@ export default function FAQ() {
             overlay={true}
             showScrollIndicator={false}
           >
-            <Button size="heroPill" variant="heroPrimary" asChild>
-              <Link to="/contact">Ask a Question</Link>
-            </Button>
-            <Button size="heroPill" variant="heroOutline" asChild>
-              <Link to="/contact">Contact Us</Link>
-            </Button>
+            <HeroCTA
+              primaryText="Ask a Question"
+              primaryHref="/contact"
+              secondaryText="Contact Us"
+              secondaryHref="/contact"
+            />
           </Hero>
           <HeroFloatingStats />
         </div>

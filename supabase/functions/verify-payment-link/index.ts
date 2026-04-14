@@ -18,6 +18,10 @@ const logStep = (step: string, details?: unknown) => {
 // payment success page so legitimate clients hit it more than once. Cap is
 // generous but still blocks enumeration of session_id values against Stripe.
 // ============================================================================
+// NOTE: In-memory rate limiting resets on serverless cold starts and provides no
+// protection under distributed load. For production rate limiting, replace with
+// Upstash Redis (https://upstash.com) or Supabase built-in rate limiting.
+// Until then, this provides basic protection against single-isolate abuse only.
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 const RATE_LIMIT = 30;
 const RATE_WINDOW_MS = 60 * 1000;
@@ -136,6 +140,11 @@ serve(async (req) => {
             status: session.payment_status,
             amount: session.amount_total,
             customerEmail: session.customer_details?.email,
+            paymentIntentId:
+              typeof session.payment_intent === "string"
+                ? session.payment_intent
+                : null,
+            sessionId: session.id,
           }),
           {
             headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -177,6 +186,10 @@ serve(async (req) => {
             amount: paidSession.amount_total,
             customerEmail: paidSession.customer_details?.email,
             sessionId: paidSession.id,
+            paymentIntentId:
+              typeof paidSession.payment_intent === "string"
+                ? paidSession.payment_intent
+                : null,
           }),
           {
             headers: { ...corsHeaders, "Content-Type": "application/json" },

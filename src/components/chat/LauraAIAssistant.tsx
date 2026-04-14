@@ -82,7 +82,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
     },
     {
       icon: BookOpen,
-      label: "Training",
+      label: "Workshops",
       description: "Learn to stay protected",
       href: "/training",
       color: "from-orange-500 to-[#d96c4a]",

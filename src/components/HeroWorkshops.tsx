@@ -1,11 +1,11 @@
 import { useCallback } from "react";
 import {
-  ArrowRight, Shield,
-  Phone, ShieldCheck,
+  Phone, Shield, ShieldCheck,
   Settings, Server, Lock,
 } from "lucide-react";
 import workshopHero from "@/assets/learn_and_train.png";
 import { SITE } from "@/config/site";
+import { HeroCTA } from "@/components/shared/HeroCTA";
 
 /* ── Bottom feature cards ── */
 const workshopFeatures = [
@@ -53,11 +53,13 @@ export const HeroWorkshops = () => {
           fetchPriority="high"
         />
         <div className="hero-ws__top-veil" />
+        {/* Mobile: darken top so text is readable over photo */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/40 to-transparent sm:hidden" aria-hidden="true" />
         <div className="hero-ws__glow" aria-hidden="true" />
       </div>
 
       {/* ── Main Layout: Left Content + Right Widget ── */}
-      <div className="hero-ws__content">
+      <div className="hero-ws__content [justify-content:flex-start] sm:[justify-content:center] [padding-top:6rem] sm:[padding-top:unset]">
         <div className="hero-ws__layout">
 
           {/* Left — Copy */}
@@ -79,16 +81,12 @@ export const HeroWorkshops = () => {
               live on Zoom or in person across Ohio.
             </p>
 
-            <div className="hero-ws__ctas">
-              <button type="button" className="hero-ws__cta hero-ws__cta--primary" onClick={() => scrollTo("training")}>
-                <Shield className="w-4 h-4" />
-                View Workshops
-              </button>
-              <button type="button" className="hero-ws__cta hero-ws__cta--secondary" onClick={() => scrollTo("pricing")}>
-                See Pricing
-                <ArrowRight />
-              </button>
-            </div>
+            <HeroCTA
+              primaryText="Book a Workshop"
+              primaryHref="/contact"
+              secondaryText="See Pricing"
+              secondaryHref="/training#pricing"
+            />
           </div>
 
           {/* Right — Floating Glass Card (matches reference) */}

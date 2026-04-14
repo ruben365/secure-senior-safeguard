@@ -464,7 +464,7 @@ function Business() {
           keywords="AI receptionist Ohio, business automation Kettering, AI answering service Dayton, virtual receptionist Southwest Ohio, small business AI"
           breadcrumbs={[
             { name: "Home", url: "https://www.invisionnetwork.org/" },
-            { name: "Business", url: "https://www.invisionnetwork.org/business" },
+            { name: "AI Services", url: "https://www.invisionnetwork.org/ai" },
           ]}
           structuredData={{
             "@context": "https://schema.org",
