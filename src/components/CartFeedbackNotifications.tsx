@@ -13,7 +13,7 @@ import {
   ArrowRight,
   Package,
 } from "lucide-react";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/sonner";
 import { Link } from "react-router-dom";
 import { useCartFeedback } from "@/contexts/CartFeedbackContext";
 

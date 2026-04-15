@@ -30,7 +30,7 @@ import {
   ArrowRight,
   X,
 } from "lucide-react";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/sonner";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";

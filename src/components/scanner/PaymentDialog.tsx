@@ -23,7 +23,7 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import { formatFileSize, getFileTypeLabel } from "@/lib/guestScannerUtils";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/sonner";
 import { CheckoutCard, CheckoutDialogFrame, CheckoutTrustFooter } from "@/components/payment/CheckoutFrame";
 import { PaymentElementPanel } from "@/components/payment/PaymentElementPanel";
 

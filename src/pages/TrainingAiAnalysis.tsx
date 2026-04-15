@@ -44,7 +44,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/sonner";
 export default function TrainingAiAnalysis() {
   usePrerenderReady(true);
   const [paymentOpen, setPaymentOpen] = useState(false);

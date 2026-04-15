@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useCallback,
 } from "react";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/sonner";
 
 interface CartItem {
   id: string;

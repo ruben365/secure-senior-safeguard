@@ -19,7 +19,7 @@ import TrustedTechLogos from "./TrustedTechLogos";
 import { SITE } from "@/config/site";
 import invisionLogo from "@/assets/shield-logo.png";
 import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/sonner";
 import { useConfetti } from "@/hooks/useConfetti";
 import { z } from "zod";
 import "./Footer.css";

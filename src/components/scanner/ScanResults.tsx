@@ -19,7 +19,7 @@ import {
   formatFileSize,
   getFileTypeLabel,
 } from "@/lib/guestScannerUtils";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/sonner";
 
 interface ScanResultsProps {
   analysis: GuestScanAnalysis;

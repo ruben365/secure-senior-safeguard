@@ -35,7 +35,7 @@ import { usePaymentFlow } from "@/hooks/usePaymentFlow";
 import useStripeElementLifecycle from "@/hooks/useStripeElementLifecycle";
 import useHostedCheckoutFallback from "@/hooks/useHostedCheckoutFallback";
 import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/sonner";
 import confetti from "canvas-confetti";
 import { PaymentElementPanel } from "./PaymentElementPanel";
 

@@ -27,7 +27,7 @@ import {
   Users,
   TrendingUp,
 } from "lucide-react";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/sonner";
 
 export default function Subscriptions() {
   const [subscriptions, setSubscriptions] = useState<any[]>([]);

@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BookOpen, ArrowLeft, ChevronLeft, ChevronRight, Lock, LogOut, Library, Link2, Clock, Bookmark } from "lucide-react";
 import { SEO } from "@/components/SEO";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/sonner";
 import { useToast } from "@/hooks/use-toast";
 import { ReadingModeToggle, MODE_CLASSES, CARD_CLASSES, FONT_SIZE_CLASSES } from "@/components/reader/ReadingModeToggle";
 import type { ReadingMode, FontSize } from "@/components/reader/ReadingModeToggle";

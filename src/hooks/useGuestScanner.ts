@@ -5,7 +5,7 @@ import {
   calculateScanCost,
   GuestScanAnalysis,
 } from "@/lib/guestScannerUtils";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/sonner";
 
 export type GuestScanStatus =
   | "idle"
