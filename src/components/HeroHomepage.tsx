@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
@@ -7,36 +6,27 @@ import {
 } from "lucide-react";
 import corineHero from "@/assets/hero-wife-office.jpg";
 
-/* ── Hero tab items ── */
-const heroTabs = [
-  { id: "summary", label: "Summary" },
-  { id: "services", label: "Services" },
-  { id: "protection", label: "Protection" },
-  { id: "training", label: "Training" },
-  { id: "contact", label: "Contact" },
-];
-
 /* ── Feature items — Row 1 (top) ── */
 const featuresRow1 = [
   {
     icon: Bot,
-    title: "AI Business & Software Services",
-    desc: "Design and build AI-powered tools and automations.",
+    title: "AI Business Tools",
+    desc: "Custom software that automates your daily operations.",
   },
   {
     icon: Globe,
-    title: "AI Business Solutions",
-    desc: "Scalable AI strategies that drive revenue.",
+    title: "Business Automation",
+    desc: "AI agents that answer calls, book appointments, follow up.",
   },
   {
     icon: Lock,
-    title: "Scam & Insurance Services",
-    desc: "Comprehensive fraud analysis and coverage.",
+    title: "Scam & Spam Detection",
+    desc: "AI-powered analysis of emails, links, files, and messages.",
   },
   {
     icon: Cpu,
-    title: "Cybersecurity Services",
-    desc: "AI-driven protection from evolving threats.",
+    title: "Cybersecurity",
+    desc: "24/7 threat monitoring with automated response.",
   },
 ];
 
@@ -44,29 +34,27 @@ const featuresRow1 = [
 const featuresRow2 = [
   {
     icon: Shield,
-    title: "Digital Estate Planning",
-    desc: "Secure your family's digital legacy.",
+    title: "Digital Estate",
+    desc: "Lock down accounts and transfer credentials to heirs.",
   },
   {
     icon: Brain,
-    title: "AI Training Programs",
-    desc: "Workshops to defend against deepfakes.",
+    title: "AI Training",
+    desc: "Live workshops on spotting deepfakes and phishing.",
   },
   {
     icon: Scan,
-    title: "Threat Detection & Analysis",
-    desc: "Real-time scanning and intelligence reports.",
+    title: "Threat Detection",
+    desc: "Real-time file scanning and risk reports.",
   },
   {
     icon: Headphones,
-    title: "24/7 Support & Monitoring",
-    desc: "Around-the-clock expert security support.",
+    title: "24/7 Support",
+    desc: "Our analysts respond day and night, no exceptions.",
   },
 ];
 
 export const HeroHomepage = () => {
-  const [activeTab, setActiveTab] = useState("services");
-
   return (
     <section className="hero-home">
 
@@ -74,68 +62,52 @@ export const HeroHomepage = () => {
       <div className="hero-home__bg">
         <img
           src={corineHero}
-          alt="Corine — InVision Network co-founder"
+          alt="InVision Network co-founder in office"
           loading="eager"
-          decoding="sync"
+          decoding="async"
           fetchPriority="high"
         />
         <div className="hero-home__top-veil" />
+        <div className="hero-home__glow" aria-hidden="true" />
       </div>
 
       {/* ── 2. Hero Content ── */}
-      <div className="hero-home__content">
-        <div className="hero-home__copy">
+      <div className="hero-home__content [justify-content:flex-start] sm:[justify-content:center] [padding-top:6rem] sm:[padding-top:unset]">
+        <div className="max-w-[1200px] mx-auto w-full px-8">
+          <div className="hero-home__copy">
 
-          {/* Kicker / Overline */}
-          <div className="hero-home__kicker">
-            <span className="hero-home__kicker-line" />
-            <span className="hero-home__kicker-text">Your Path to Safety</span>
-          </div>
+            {/* Headline */}
+            <h1 className="hero-home__headline">
+              AI Protection
+              <br />
+              for Families &amp; Business
+            </h1>
 
-          {/* Micro-Nav Tabs */}
-          <nav className="hero-home__tabs" aria-label="Hero sections">
-            {heroTabs.map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setActiveTab(tab.id)}
-                className={`hero-home__tab${activeTab === tab.id ? " hero-home__tab--active" : ""}`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </nav>
+            {/* Body */}
+            <p className="hero-home__body">
+              We stop AI-powered scams before they reach your family. Our team
+              builds automated defenses, runs live training, and monitors threats
+              around the clock so you stay safe without lifting a finger.
+            </p>
 
-          {/* Headline */}
-          <h1 className="hero-home__headline">
-            Smart Solutions
-            <br />
-            Business &amp; Security Services
-          </h1>
-
-          {/* Body */}
-          <p className="hero-home__body">
-            Discover a new era of cybersecurity solutions. We combine AI-driven
-            protection and functionality to enhance efficiency, improve processes,
-            and empower your business to achieve greater outcomes.
-          </p>
-
-          {/* Ghost CTA Buttons */}
-          <div className="hero-home__ctas">
-            <Link to="/training#pricing" className="hero-home__cta">
-              Discover Protection
-            </Link>
-            <Link to="/business" className="hero-home__cta">
-              Explore More
-              <ArrowRight />
-            </Link>
+            {/* Ghost CTA Buttons */}
+            <div className="hero-home__ctas">
+              <Link to="/training#pricing" className="hero-home__cta">
+                Get Protected
+              </Link>
+              <Link to="/business" className="hero-home__cta">
+                See Our Work
+                <ArrowRight />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
 
       {/* ── 3. Glassmorphism Bottom Panel ── */}
       <div className="hero-home__panel">
-        <div className="hero-home__panel-inner">
+        <div className="max-w-[1200px] mx-auto w-full px-8">
+          <div className="hero-home__panel-inner">
 
           {/* Row 1 — Top features */}
           <div className="hero-home__feature-row">
@@ -170,6 +142,7 @@ export const HeroHomepage = () => {
             ))}
           </div>
 
+          </div>
         </div>
       </div>
     </section>
