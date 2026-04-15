@@ -1,36 +1,64 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import {
-  ArrowRight,
   Bot, Globe, Lock, Cpu,
+  Shield, Brain, Scan, Headphones,
 } from "lucide-react";
 import corineHero from "@/assets/hero-wife-office.jpg";
 
-/* ── Feature items — Row 1 (top) ── */
+/* ── Feature items — Row 1 ── */
 const featuresRow1 = [
   {
     icon: Bot,
-    title: "AI Business Tools",
-    desc: "Custom software that automates your daily operations.",
+    title: "AI Business & Software Services",
+    desc: "Design and build AI-powered tools and automations.",
   },
   {
     icon: Globe,
-    title: "Business Automation",
-    desc: "AI agents that answer calls, book appointments, follow up.",
+    title: "AI Business Solutions",
+    desc: "Scalable AI strategies that drive revenue.",
   },
   {
     icon: Lock,
-    title: "Scam & Spam Detection",
-    desc: "AI-powered analysis of emails, links, files, and messages.",
+    title: "Scam & Insurance Services",
+    desc: "Comprehensive fraud analysis and coverage.",
   },
   {
     icon: Cpu,
-    title: "Cybersecurity",
-    desc: "24/7 threat monitoring with automated response.",
+    title: "Cybersecurity Services",
+    desc: "AI-driven protection from evolving threats.",
   },
 ];
 
+/* ── Feature items — Row 2 ── */
+const featuresRow2 = [
+  {
+    icon: Shield,
+    title: "Digital Estate Planning",
+    desc: "Secure your family's digital legacy.",
+  },
+  {
+    icon: Brain,
+    title: "AI Training Programs",
+    desc: "Workshops to defend against deepfakes.",
+  },
+  {
+    icon: Scan,
+    title: "Threat Detection & Analysis",
+    desc: "Real-time scanning and intelligence reports.",
+  },
+  {
+    icon: Headphones,
+    title: "24/7 Support & Monitoring",
+    desc: "Around-the-clock expert security support.",
+  },
+];
+
+/* ── Hero tabs ── */
+const heroTabs = ["Summary", "Services", "Protection", "Training", "Contact"];
 
 export const HeroHomepage = () => {
+  const [activeTab, setActiveTab] = useState("Services");
+
   return (
     <section className="hero-home">
 
@@ -52,30 +80,41 @@ export const HeroHomepage = () => {
         <div className="max-w-[1200px] mx-auto w-full px-8">
           <div className="hero-home__copy">
 
+            {/* Kicker */}
+            <div className="hero-home__kicker">
+              <span className="hero-home__kicker-line" />
+              <span className="hero-home__kicker-text">Your Path to Safety</span>
+            </div>
+
+            {/* Tabs */}
+            <nav className="hero-home__tabs" aria-label="Hero sections">
+              {heroTabs.map((tab) => (
+                <button
+                  key={tab}
+                  type="button"
+                  className={`hero-home__tab ${activeTab === tab ? "hero-home__tab--active" : ""}`}
+                  onClick={() => setActiveTab(tab)}
+                >
+                  {tab}
+                </button>
+              ))}
+            </nav>
+
             {/* Headline */}
             <h1 className="hero-home__headline">
-              AI Protection
+              Smart Solutions
               <br />
-              for Families &amp; Business
+              Business &amp;
+              <br />
+              Security Services
             </h1>
 
             {/* Body */}
             <p className="hero-home__body">
-              We stop AI-powered scams before they reach your family. Our team
-              builds automated defenses, runs live training, and monitors threats
-              around the clock so you stay safe without lifting a finger.
+              Discover a new era of cybersecurity solutions. We combine AI-driven
+              protection and functionality to enhance efficiency, improve processes,
+              and safeguard your digital assets.
             </p>
-
-            {/* Ghost CTA Buttons */}
-            <div className="hero-home__ctas">
-              <Link to="/training#pricing" className="hero-home__cta">
-                Get Protected
-              </Link>
-              <Link to="/business" className="hero-home__cta">
-                See Our Work
-                <ArrowRight />
-              </Link>
-            </div>
           </div>
         </div>
       </div>
@@ -85,9 +124,27 @@ export const HeroHomepage = () => {
         <div className="max-w-[1200px] mx-auto w-full px-8">
           <div className="hero-home__panel-inner">
 
-          {/* Single row of features */}
+          {/* Row 1 */}
           <div className="hero-home__feature-row">
             {featuresRow1.map((f) => (
+              <div key={f.title} className="hero-home__feature">
+                <div className="hero-home__feature-icon">
+                  <f.icon />
+                </div>
+                <div className="hero-home__feature-text">
+                  <p className="hero-home__feature-title">{f.title}</p>
+                  <p className="hero-home__feature-desc">{f.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Divider */}
+          <div className="hero-home__divider" />
+
+          {/* Row 2 */}
+          <div className="hero-home__feature-row">
+            {featuresRow2.map((f) => (
               <div key={f.title} className="hero-home__feature">
                 <div className="hero-home__feature-icon">
                   <f.icon />
