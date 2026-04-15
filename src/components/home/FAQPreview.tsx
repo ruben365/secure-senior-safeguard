@@ -79,13 +79,13 @@ export const FAQPreview = () => {
               <div className="flex flex-col gap-2.5">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-full bg-[#d96c4a] hover:bg-[#b8552f] text-white text-[14px] font-semibold transition-colors shadow-[0_4px_12px_-2px_rgba(217,108,74,0.4)]"
+                  className="inline-flex items-center justify-center gap-1.5 sm:gap-2 h-8 sm:h-11 px-3.5 sm:px-5 rounded-full bg-[#d96c4a] hover:bg-[#b8552f] text-white text-[12px] sm:text-[14px] font-semibold transition-colors shadow-[0_4px_12px_-2px_rgba(217,108,74,0.4)]"
                 >
                   Chat With Expert
                 </Link>
                 <a
                   href={`tel:${SITE.phone.e164}`}
-                  className="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-full bg-white hover:bg-[#1E293B]/[0.04] border border-[#1E293B]/12 hover:border-[#1E293B]/22 text-[#1E293B] text-[14px] font-semibold transition-colors"
+                  className="inline-flex items-center justify-center gap-1.5 sm:gap-2 h-8 sm:h-11 px-3.5 sm:px-5 rounded-full bg-white hover:bg-[#1E293B]/[0.04] border border-[#1E293B]/12 hover:border-[#1E293B]/22 text-[#1E293B] text-[12px] sm:text-[14px] font-semibold transition-colors"
                 >
                   <Phone className="w-4 h-4" /> Call Now
                 </a>

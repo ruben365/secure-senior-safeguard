@@ -227,13 +227,13 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={isSubmitting}
-                    className="h-12 flex-1 bg-white/[0.06] border-white/15 text-white text-[14px] placeholder:text-white/45 focus:bg-white/[0.10] focus:border-orange-500/50 rounded-xl disabled:opacity-50"
+                    className="h-9 sm:h-12 flex-1 bg-white/[0.06] border-white/15 text-white text-[12px] sm:text-[14px] placeholder:text-white/45 focus:bg-white/[0.10] focus:border-orange-500/50 rounded-xl disabled:opacity-50"
                     aria-label="Email address for newsletter"
                   />
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="h-12 px-6 rounded-xl bg-orange-600 hover:bg-orange-500 border-0 text-[14px] font-semibold flex-shrink-0 disabled:opacity-50 inline-flex items-center justify-center gap-2"
+                    className="h-9 sm:h-12 px-4 sm:px-6 rounded-xl bg-orange-600 hover:bg-orange-500 border-0 text-[12px] sm:text-[14px] font-semibold flex-shrink-0 disabled:opacity-50 inline-flex items-center justify-center gap-2"
                     aria-label="Subscribe to newsletter"
                   >
                     {isSubmitting ? (

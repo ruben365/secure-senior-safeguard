@@ -31,7 +31,7 @@ function CtaPrimary({ to, children }: { to: string; children: React.ReactNode })
   return (
     <Link
       to={to}
-      className="hss-cta-primary inline-flex items-center justify-center gap-2 h-12 px-7 rounded-full text-[15px] font-semibold [transition-duration:250ms] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-[2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[rgba(249,115,22,0.7)]"
+      className="hss-cta-primary inline-flex items-center justify-center gap-1.5 sm:gap-2 h-9 sm:h-12 px-4 sm:px-7 rounded-full text-[12px] sm:text-[15px] font-semibold [transition-duration:250ms] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-[2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[rgba(249,115,22,0.7)]"
     >
       {children}
     </Link>
@@ -42,7 +42,7 @@ function CtaText({ to, children }: { to: string; children: React.ReactNode }) {
   return (
     <Link
       to={to}
-      className="inline-flex items-center gap-2 text-[#d96c4a] hover:text-[#b8552f] font-semibold text-[15px] group transition-colors"
+      className="inline-flex items-center gap-1.5 sm:gap-2 text-[#d96c4a] hover:text-[#b8552f] font-semibold text-[12px] sm:text-[15px] group transition-colors"
     >
       {children}
       <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
