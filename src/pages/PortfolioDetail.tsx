@@ -78,7 +78,7 @@ const PortfolioDetail = () => {
       <Navigation overlay />
 
       <main className="pt-24 pb-16">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container mx-auto px-6 lg:px-8">
           {/* Back */}
           <Link
             to="/portfolio"

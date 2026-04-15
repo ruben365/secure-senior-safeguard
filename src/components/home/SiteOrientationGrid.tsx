@@ -76,7 +76,7 @@ export const SiteOrientationGrid = () => {
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/5 rounded-full blur-3xl pointer-events-none" />
       
-      <div className="container mx-auto px-6 md:px-6 lg:px-12 relative">
+      <div className="container mx-auto px-6 md:px-6 lg:px-8 relative">
         <div className={`text-center mb-14 transition-all duration-500 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary mb-4">
             What We Offer

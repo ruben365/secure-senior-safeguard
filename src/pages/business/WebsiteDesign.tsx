@@ -304,7 +304,7 @@ const WebsiteDesign = () => {
             <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full bg-gradient-to-br from-accent/20 to-primary/20 blur-3xl" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-primary/10 to-accent/10 blur-3xl" />
 
-            <div className="container mx-auto px-6 lg:px-12 relative z-10">
+            <div className="container mx-auto px-6 lg:px-8 relative z-10">
               <div className="max-w-5xl mx-auto text-center">
                 {/* Floating Widgets - Left Side */}
                 <div className="hidden lg:flex absolute left-4 top-1/4 flex-col gap-4">
@@ -548,7 +548,7 @@ const WebsiteDesign = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-muted/30 to-background" />
             {/* Static decorative orb */}
             <div className="absolute top-1/2 left-0 w-96 h-96 rounded-full bg-gradient-to-br from-primary/10 to-accent/10 blur-3xl -translate-x-1/2" />
-            <div className="container mx-auto px-6 lg:px-12 relative z-10">
+            <div className="container mx-auto px-6 lg:px-8 relative z-10">
               <AnimatedSection animation="fade-up" className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
                   Website Packages
@@ -626,7 +626,7 @@ const WebsiteDesign = () => {
           <section className="py-20 relative overflow-hidden">
             {/* Static decorative orb */}
             <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-gradient-to-br from-primary/15 to-accent/15 blur-3xl" />
-            <div className="container mx-auto px-6 lg:px-12 relative z-10">
+            <div className="container mx-auto px-6 lg:px-8 relative z-10">
               <AnimatedSection animation="fade-up" className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
                   Every Website Includes
@@ -669,7 +669,7 @@ const WebsiteDesign = () => {
           {/* Process Section */}
           <section className="py-20 relative">
             <div className="absolute inset-0 bg-gradient-to-t from-muted/30 to-background" />
-            <div className="container mx-auto px-6 lg:px-12 relative z-10">
+            <div className="container mx-auto px-6 lg:px-8 relative z-10">
               <AnimatedSection animation="fade-up" className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
                   Our Design Process
@@ -708,7 +708,7 @@ const WebsiteDesign = () => {
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/10" />
             {/* Static decorative orb */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-gradient-to-br from-primary/25 to-accent/25 blur-3xl opacity-40" />
-            <div className="container mx-auto px-6 lg:px-12 text-center relative z-10">
+            <div className="container mx-auto px-6 lg:px-8 text-center relative z-10">
               <AnimatedSection animation="scale-up">
                 <div className="glass-heavy glass-cursor-overlay card-shine border border-white/60 rounded-3xl p-12 shadow-2xl max-w-3xl mx-auto">
                   <h2 className="text-3xl md:text-4xl font-bold mb-6">
