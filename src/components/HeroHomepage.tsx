@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import {
   ArrowRight,
   Bot, Globe, Lock, Cpu,
-  Shield, Brain, Scan, Headphones,
 } from "lucide-react";
 import corineHero from "@/assets/hero-wife-office.jpg";
 
@@ -30,29 +29,6 @@ const featuresRow1 = [
   },
 ];
 
-/* ── Feature items — Row 2 (bottom) ── */
-const featuresRow2 = [
-  {
-    icon: Shield,
-    title: "Digital Estate",
-    desc: "Lock down accounts and transfer credentials to heirs.",
-  },
-  {
-    icon: Brain,
-    title: "AI Training",
-    desc: "Live workshops on spotting deepfakes and phishing.",
-  },
-  {
-    icon: Scan,
-    title: "Threat Detection",
-    desc: "Real-time file scanning and risk reports.",
-  },
-  {
-    icon: Headphones,
-    title: "24/7 Support",
-    desc: "Our analysts respond day and night, no exceptions.",
-  },
-];
 
 export const HeroHomepage = () => {
   return (
@@ -109,27 +85,9 @@ export const HeroHomepage = () => {
         <div className="max-w-[1200px] mx-auto w-full px-8">
           <div className="hero-home__panel-inner">
 
-          {/* Row 1 — Top features */}
+          {/* Single row of features */}
           <div className="hero-home__feature-row">
             {featuresRow1.map((f) => (
-              <div key={f.title} className="hero-home__feature">
-                <div className="hero-home__feature-icon">
-                  <f.icon />
-                </div>
-                <div className="hero-home__feature-text">
-                  <p className="hero-home__feature-title">{f.title}</p>
-                  <p className="hero-home__feature-desc">{f.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Divider */}
-          <div className="hero-home__divider" />
-
-          {/* Row 2 — Bottom features */}
-          <div className="hero-home__feature-row">
-            {featuresRow2.map((f) => (
               <div key={f.title} className="hero-home__feature">
                 <div className="hero-home__feature-icon">
                   <f.icon />

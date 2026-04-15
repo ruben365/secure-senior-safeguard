@@ -104,14 +104,14 @@
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  padding-top: clamp(110px, 12vw, 150px);
+  padding-top: clamp(100px, 12vw, 130px);
   padding-right: 2rem;
-  padding-bottom: clamp(220px, 18vw, 290px);
+  padding-bottom: clamp(160px, 14vw, 200px);
   padding-left: 2rem;
 }
 
 .hero-biz__copy {
-  max-width: 640px;
+  max-width: 540px;
   margin-left: 0;
 }
 
@@ -141,23 +141,23 @@
 
 /* Headline — matches Workshop/other pages scale */
 .hero-biz__headline {
-  font-size: clamp(2.4rem, 5.5vw, 4.25rem);
-  font-weight: 800;
+  font-size: clamp(2.25rem, 5.5vw, 3.75rem);
+  font-weight: 700;
   color: var(--biz-text);
   line-height: 1.05;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
-  margin: 1rem 0 1.75rem 0;
+  margin: 0 0 1.25rem 0;
   animation: bizFadeUp 0.5s ease-out 0.1s both;
 }
 
-/* Body — same scale as other pages */
+/* Body — matches homepage scale */
 .hero-biz__body {
-  font-size: 1.05rem;
-  line-height: 1.65;
-  color: var(--biz-muted);
-  max-width: 520px;
-  margin: 0 0 2.5rem 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.80);
+  max-width: 480px;
+  margin: 0 0 2rem 0;
   animation: bizFadeUp 0.5s ease-out 0.15s both;
 }
 
