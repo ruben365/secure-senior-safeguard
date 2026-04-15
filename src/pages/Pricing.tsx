@@ -83,11 +83,11 @@ export default function Pricing() {
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
             <span className="inline-flex items-center gap-1.5">
-              <Award className="w-4 h-4 text-orange-500" />
+              <Award className="w-4 h-4 text-primary" />
               10% veteran discount
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <Star className="w-4 h-4 text-orange-500" />
+              <Star className="w-4 h-4 text-primary" />
               30-day money-back guarantee
             </span>
           </div>
@@ -103,34 +103,34 @@ export default function Pricing() {
               return (
                 <div
                   key={plan.name}
-                  className={`rounded-2xl border p-8 flex flex-col ${
+                  className={`rounded-xl border p-8 flex flex-col ${
                     plan.highlight
-                      ? "border-orange-500 shadow-lg shadow-orange-500/10 bg-orange-50/50 dark:bg-orange-950/10"
-                      : "border-border bg-card"
+                      ? "border-primary shadow-lg shadow-primary/10 bg-primary/5 dark:bg-primary/10"
+                      : "border-gray-200 bg-white shadow-sm"
                   }`}
                 >
                   {plan.highlight && (
-                    <Badge className="w-fit mb-4 bg-orange-500 text-white">Most Popular</Badge>
+                    <Badge className="w-fit mb-4 bg-primary text-white">Most Popular</Badge>
                   )}
                   <div className="mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-3">
-                      <Icon className="w-6 h-6 text-orange-600" />
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 dark:bg-primary/20 flex items-center justify-center mb-3">
+                      <Icon className="w-6 h-6 text-primary" />
                     </div>
                     <h2 className="text-xl font-bold mb-1">{plan.name}</h2>
-                    <p className="text-2xl font-extrabold text-orange-600 mb-2">{plan.price}</p>
+                    <p className="text-3xl font-bold text-foreground mb-2">{plan.price}</p>
                     <p className="text-sm text-muted-foreground">{plan.description}</p>
                   </div>
 
                   <ul className="space-y-2 mb-8 flex-1">
                     {plan.features.map((f) => (
                       <li key={f} className="flex items-start gap-2 text-sm">
-                        <CheckCircle className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
                         {f}
                       </li>
                     ))}
                   </ul>
 
-                  <Button asChild className={plan.highlight ? "bg-orange-600 hover:bg-orange-500 text-white" : ""} variant={plan.highlight ? "default" : "outline"}>
+                  <Button asChild className={plan.highlight ? "bg-primary hover:bg-primary/90 text-white" : ""} variant={plan.highlight ? "default" : "outline"}>
                     <Link to="/contact">{plan.cta}</Link>
                   </Button>
                 </div>
@@ -145,15 +145,15 @@ export default function Pricing() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl text-center">
           <h2 className="text-2xl font-bold mb-4">Our Commitment to You</h2>
           <div className="grid sm:grid-cols-2 gap-6 text-left">
-            <div className="rounded-xl border bg-card p-6">
-              <Award className="w-7 h-7 text-orange-500 mb-2" />
+            <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
+              <Award className="w-7 h-7 text-primary mb-2" />
               <h3 className="font-semibold mb-1">Veteran Discount — 10% Off</h3>
               <p className="text-sm text-muted-foreground">
                 We proudly support those who served. Active duty military and veterans receive 10% off all plans. Contact us to verify and apply your discount.
               </p>
             </div>
-            <div className="rounded-xl border bg-card p-6">
-              <Star className="w-7 h-7 text-orange-500 mb-2" />
+            <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
+              <Star className="w-7 h-7 text-primary mb-2" />
               <h3 className="font-semibold mb-1">30-Day Money-Back Guarantee</h3>
               <p className="text-sm text-muted-foreground">
                 Not satisfied in the first 30 days? We'll refund you — no questions asked. Your trust matters more than the sale.

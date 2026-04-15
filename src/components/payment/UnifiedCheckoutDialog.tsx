@@ -54,11 +54,11 @@ const T = {
   white70: "rgba(255, 255, 255, 0.70)",
   white50: "rgba(255, 255, 255, 0.50)",
   white30: "rgba(255, 255, 255, 0.30)",
-  // Accents
-  copper: "#F97316",
-  copperDark: "#EA580C",
-  copperGlow: "rgba(249, 115, 22, 0.3)",
-  copperSoft: "rgba(249, 115, 22, 0.15)",
+  // Accents (primary — uses CSS custom property)
+  copper: "hsl(var(--primary))",
+  copperDark: "hsl(var(--primary))",
+  copperGlow: "hsl(var(--primary) / 0.3)",
+  copperSoft: "hsl(var(--primary) / 0.15)",
   // Status
   success: "#22C55E",
   successBg: "rgba(34, 197, 94, 0.12)",
@@ -75,8 +75,8 @@ const inputStyle = {
   color: T.white,
 };
 const inputFocusStyle = {
-  borderColor: T.copper,
-  boxShadow: `0 0 0 3px ${T.copperSoft}`,
+  borderColor: "#D96C4A",
+  boxShadow: "0 0 0 3px rgba(217, 108, 74, 0.15)",
 };
 
 /* ── Progress Bar ──────────────────────────────────────────────── */
@@ -119,7 +119,7 @@ const OrderSummaryCard: React.FC = () => {
 
   return (
     <div
-      className="rounded-xl p-4"
+      className="rounded-xl p-6"
       style={{
         background: T.glassCard,
         border: `1px solid ${T.glassCardBorder}`,
@@ -258,7 +258,7 @@ const CustomerInfoStep: React.FC<{ onNext: () => void }> = ({ onNext }) => {
           id="veteran-checkout"
           checked={customerInfo.isVeteran}
           onCheckedChange={(c) => setCustomerInfo({ isVeteran: !!c })}
-          className="border-white/20 data-[state=checked]:bg-[#F97316] data-[state=checked]:border-[#F97316]"
+          className="border-white/20 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
         />
         <div className="flex-1 flex items-center gap-1.5">
           <Star className="w-3.5 h-3.5" style={{ color: T.copper }} />
@@ -621,7 +621,7 @@ const SuccessStep: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         </p>
       </div>
 
-      <div className="rounded-xl p-4 space-y-2 text-[13px]" style={{ background: T.glassCard }}>
+      <div className="rounded-xl p-6 space-y-2 text-[13px]" style={{ background: T.glassCard, border: `1px solid ${T.glassCardBorder}` }}>
         <div className="flex justify-between">
           <span style={{ color: T.white50 }}>Order ID</span>
           <span className="font-mono" style={{ color: T.white70 }}>
@@ -770,7 +770,7 @@ const UnifiedCheckoutDialog = React.forwardRef<HTMLDivElement>(
                         appearance: {
                           theme: "night",
                           variables: {
-                            colorPrimary: T.copper,
+                            colorPrimary: "#D96C4A",
                             colorBackground: "rgba(15, 15, 25, 0.6)",
                             colorText: "rgba(255, 255, 255, 0.9)",
                             colorTextSecondary: "rgba(255, 255, 255, 0.5)",
@@ -784,8 +784,8 @@ const UnifiedCheckoutDialog = React.forwardRef<HTMLDivElement>(
                               color: T.white,
                             },
                             ".Input:focus": {
-                              borderColor: T.copper,
-                              boxShadow: `0 0 0 3px ${T.copperSoft}`,
+                              borderColor: "#D96C4A",
+                              boxShadow: "0 0 0 3px rgba(217, 108, 74, 0.15)",
                             },
                             ".Tab": {
                               backgroundColor: T.glassCard,
@@ -793,8 +793,8 @@ const UnifiedCheckoutDialog = React.forwardRef<HTMLDivElement>(
                               color: T.white70,
                             },
                             ".Tab--selected": {
-                              backgroundColor: T.copperSoft,
-                              borderColor: T.copper,
+                              backgroundColor: "rgba(217, 108, 74, 0.15)",
+                              borderColor: "#D96C4A",
                               color: T.white,
                             },
                             ".Label": {
