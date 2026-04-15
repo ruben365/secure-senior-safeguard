@@ -1,5 +1,14 @@
 /* Component-Specific Styles */
 
+/* ===== HERO SIZE LOCK — all heroes must be 100dvh ===== */
+.hero-home,
+.hero-biz,
+.hero-ws,
+.hero-mobile,
+[class*="hero-section"] {
+  min-height: 100dvh !important;
+}
+
 /* ===== DARK HERO CYBER THEME — Premium Cinematic ===== */
 
 .hero-dark-bg {

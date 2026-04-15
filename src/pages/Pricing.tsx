@@ -72,7 +72,7 @@ export default function Pricing() {
       <Navigation />
 
       {/* Hero */}
-      <section className="py-20 bg-background text-center">
+      <section className="min-h-[100dvh] flex items-center pt-[clamp(100px,14vw,140px)] pb-10 bg-background text-center">
         <div className="container mx-auto max-w-4xl">
           <Badge className="mb-4">Simple, Transparent Pricing</Badge>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
