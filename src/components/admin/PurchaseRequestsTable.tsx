@@ -104,7 +104,7 @@ export const PurchaseRequestsTable = () => {
       case "pending":
         return "bg-yellow-500";
       case "processing":
-        return "bg-blue-500";
+        return "bg-primary/50";
       case "shipped":
         return "bg-purple-500";
       case "completed":
@@ -121,7 +121,7 @@ export const PurchaseRequestsTable = () => {
       case "pending":
         return "bg-yellow-500";
       case "processing":
-        return "bg-blue-500";
+        return "bg-primary/50";
       case "completed":
         return "bg-green-500";
       case "failed":

@@ -122,7 +122,7 @@ function InternalMessages() {
               </Button>
               <div>
                 <h1 className="text-xl font-bold text-white flex items-center gap-2">
-                  <Mail className="w-5 h-5 text-blue-400" />
+                  <Mail className="w-5 h-5 text-orange-400" />
                   Internal Messages
                   {unreadCount > 0 && (
                     <Badge className="bg-red-500/20 text-red-400 border-red-500/30 text-xs">{unreadCount}</Badge>
@@ -238,15 +238,15 @@ function InternalMessages() {
                 <Card
                   key={msg.id}
                   onClick={() => handleSelectMessage(msg)}
-                  className={`bg-[#1F2937] border-gray-800/50 p-3 cursor-pointer transition-colors hover:border-blue-500/30 ${
-                    selectedMessage?.id === msg.id ? "border-blue-500/50 bg-blue-500/5" : ""
+                  className={`bg-[#1F2937] border-gray-800/50 p-3 cursor-pointer transition-colors hover:border-primary/30 ${
+                    selectedMessage?.id === msg.id ? "border-blue-500/50 bg-primary/50/5" : ""
                   } ${!msg.is_read && activeTab === "inbox" ? "border-l-2 border-l-blue-400" : ""}`}
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2 mb-0.5">
                         {!msg.is_read && activeTab === "inbox" ? (
-                          <Mail className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                          <Mail className="w-3.5 h-3.5 text-orange-400 shrink-0" />
                         ) : (
                           <MailOpen className="w-3.5 h-3.5 text-gray-600 shrink-0" />
                         )}
@@ -292,7 +292,7 @@ function InternalMessages() {
                     </p>
                   </div>
                   {activeTab === "inbox" && (
-                    <Button size="sm" variant="ghost" onClick={() => handleReply(selectedMessage)} className="text-blue-400 hover:bg-blue-500/10">
+                    <Button size="sm" variant="ghost" onClick={() => handleReply(selectedMessage)} className="text-orange-400 hover:bg-primary/50/10">
                       <Reply className="w-4 h-4 mr-1" />Reply
                     </Button>
                   )}

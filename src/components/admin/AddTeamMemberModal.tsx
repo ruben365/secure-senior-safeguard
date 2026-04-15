@@ -526,7 +526,7 @@ export function AddTeamMemberModal({
                   {formData.linkedin.match(
                     /^https?:\/\/(www\.)?linkedin\.com\//,
                   ) && (
-                    <Linkedin className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-blue-600" />
+                    <Linkedin className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary" />
                   )}
                 </div>
                 {errors.linkedin && (
@@ -701,7 +701,7 @@ export function AddTeamMemberModal({
                             href={formData.linkedin}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-sm text-blue-600 hover:underline justify-center"
+                            className="flex items-center gap-2 text-sm text-primary hover:underline justify-center"
                           >
                             <Linkedin className="h-4 w-4" />
                             Connect on LinkedIn

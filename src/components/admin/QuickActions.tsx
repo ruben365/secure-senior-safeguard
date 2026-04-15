@@ -30,9 +30,9 @@ const actions: QuickAction[] = [
     id: "article",
     icon: PenSquare,
     text: "Create Article",
-    background: "bg-blue-50",
-    hoverBorder: "border-blue-300",
-    iconColor: "text-blue-600",
+    background: "bg-primary/5",
+    hoverBorder: "border-primary/30",
+    iconColor: "text-primary",
     link: "/admin/content/articles/new",
   },
   {

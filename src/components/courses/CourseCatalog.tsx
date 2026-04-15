@@ -237,7 +237,7 @@ export function CourseCatalog() {
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <Play className="w-5 h-5 text-blue-500" />
+              <Play className="w-5 h-5 text-primary" />
               <span>
                 <strong>
                   {

@@ -254,7 +254,7 @@ export default function SuperAdminProductManager() {
 
   const getProductTypeBadge = (type: string | null) => {
     const types: Record<string, { color: string; icon: React.ReactNode }> = {
-      digital: { color: "bg-blue-500", icon: <FileText className="w-3 h-3" /> },
+      digital: { color: "bg-primary/50", icon: <FileText className="w-3 h-3" /> },
       book: { color: "bg-purple-500", icon: <BookOpen className="w-3 h-3" /> },
       physical: {
         color: "bg-green-500",

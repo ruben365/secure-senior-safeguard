@@ -258,7 +258,7 @@ export default function SuperAdminUserManagement() {
       active: "bg-green-500",
       past_due: "bg-yellow-500",
       canceled: "bg-red-500",
-      trialing: "bg-blue-500",
+      trialing: "bg-primary/50",
     };
 
     return (
@@ -281,7 +281,7 @@ export default function SuperAdminUserManagement() {
         <div className="flex items-center justify-between">
           <div>
             <CardTitle className="text-xl text-white flex items-center gap-2">
-              <UserCog className="w-5 h-5 text-cyan-400" />
+              <UserCog className="w-5 h-5 text-orange-400" />
               User & Client Management
             </CardTitle>
             <CardDescription className="text-gray-400">
@@ -352,7 +352,7 @@ export default function SuperAdminUserManagement() {
                   >
                     <TableCell>
                       <div className="flex items-center gap-3">
-                        <Avatar className="h-10 w-10 border-2 border-cyan-500/30">
+                        <Avatar className="h-10 w-10 border-2 border-primary/30">
                           <AvatarImage src={user.avatar_url || undefined} />
                           <AvatarFallback className="bg-gradient-to-br from-cyan-500 to-blue-600 text-white">
                             {(user.full_name || user.email || "U")
@@ -480,7 +480,7 @@ export default function SuperAdminUserManagement() {
             <div className="py-4">
               <p className="text-gray-300">
                 Are you sure you want to reset the dashboard state for{" "}
-                <span className="font-semibold text-cyan-400">
+                <span className="font-semibold text-orange-400">
                   {selectedUser?.email}
                 </span>
                 ?

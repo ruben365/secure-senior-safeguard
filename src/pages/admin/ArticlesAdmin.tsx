@@ -81,7 +81,7 @@ interface Article {
 }
 
 const categoryColors = {
-  "AI Scams": "bg-blue-100 text-blue-700",
+  "AI Scams": "bg-primary/10 text-primary",
   "Business AI": "bg-purple-100 text-purple-700",
   "Family Safety": "bg-green-100 text-green-700",
   News: "bg-teal-100 text-teal-700",
@@ -476,12 +476,12 @@ export default function ArticlesAdmin() {
 
           <Card>
             <CardContent className="p-4 flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-blue-100">
-                <TrendingUp className="h-5 w-5 text-blue-600" />
+              <div className="p-2 rounded-lg bg-primary/10">
+                <TrendingUp className="h-5 w-5 text-primary" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Total Views</p>
-                <p className="text-2xl font-bold text-blue-600">
+                <p className="text-2xl font-bold text-primary">
                   {formatViews(stats.totalViews)}
                 </p>
               </div>

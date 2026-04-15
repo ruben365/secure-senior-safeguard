@@ -34,7 +34,7 @@ April 14, 2026
                 <p className="text-xs text-muted-foreground">Required</p>
               </Card>
               <Card className="p-4 text-center">
-                <Settings className="h-8 w-8 mx-auto mb-2 text-blue-500" />
+                <Settings className="h-8 w-8 mx-auto mb-2 text-primary" />
                 <h3 className="font-semibold text-sm">Functional</h3>
                 <p className="text-xs text-muted-foreground">Optional</p>
               </Card>
@@ -141,11 +141,11 @@ April 14, 2026
 
                     <div className="border rounded-lg p-5">
                       <div className="flex items-center gap-3 mb-3">
-                        <Settings className="h-6 w-6 text-blue-500" />
+                        <Settings className="h-6 w-6 text-primary" />
                         <h3 className="text-lg font-semibold">
                           Functional Cookies
                         </h3>
-                        <span className="text-xs bg-blue-500/10 text-blue-500 px-2 py-1 rounded">
+                        <span className="text-xs bg-primary/50/10 text-primary px-2 py-1 rounded">
                           Optional
                         </span>
                       </div>

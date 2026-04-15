@@ -10,7 +10,7 @@ const priorityStyles: Record<ActionItem["priority"], { container: string; text: 
   critical: { container: "bg-red-500/10", text: "text-red-500" },
   high: { container: "bg-orange-500/10", text: "text-orange-500" },
   medium: { container: "bg-yellow-500/10", text: "text-yellow-500" },
-  low: { container: "bg-blue-500/10", text: "text-blue-500" },
+  low: { container: "bg-primary/50/10", text: "text-primary" },
 };
 
 interface ActionQueueProps {

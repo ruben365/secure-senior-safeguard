@@ -90,7 +90,7 @@ export default function Notifications() {
       case "success":
         return "from-green-500 to-emerald-500 text-green-400";
       default:
-        return "from-blue-500 to-cyan-500 text-blue-400";
+        return "from-blue-500 to-cyan-500 text-orange-400";
     }
   };
 

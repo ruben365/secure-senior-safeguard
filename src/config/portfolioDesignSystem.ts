@@ -126,7 +126,7 @@ export const TREND_AGES = {
   "trend-aware": {
     label: "Trend-Aware",
     description: "Current but with longevity built in",
-    color: "bg-blue-500/10 text-blue-700",
+    color: "bg-primary/50/10 text-primary",
   },
   "trend-led": {
     label: "Trend-Led",

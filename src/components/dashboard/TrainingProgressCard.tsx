@@ -192,7 +192,7 @@ export function TrainingProgressCard({ userId }: TrainingProgressCardProps) {
                       enrollment.progress_percentage === 100
                         ? "bg-green-500/20 text-green-600"
                         : (enrollment.progress_percentage || 0) > 0
-                          ? "bg-blue-500/20 text-blue-600"
+                          ? "bg-primary/50/20 text-primary"
                           : "bg-muted text-muted-foreground"
                     }`}
                   >

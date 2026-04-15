@@ -72,7 +72,7 @@ export function getStatusColor(status: string) {
     case "approved":
       return "bg-green-500/20 text-green-600 border-green-500/30";
     case "completed":
-      return "bg-blue-500/20 text-blue-600 border-blue-500/30";
+      return "bg-primary/50/20 text-primary border-primary/30";
     case "cancelled":
     case "rejected":
       return "bg-red-500/20 text-red-600 border-red-500/30";

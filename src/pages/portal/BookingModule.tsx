@@ -46,7 +46,7 @@ function formatDate(iso: string | null | undefined) {
 
 const STATUS_STYLES: Record<string, string> = {
   pending: "bg-amber-500/10 text-amber-600 border-amber-500/20",
-  confirmed: "bg-blue-500/10 text-blue-600 border-blue-500/20",
+  confirmed: "bg-primary/50/10 text-primary border-blue-500/20",
   completed: "bg-green-500/10 text-green-600 border-green-500/20",
   cancelled: "bg-red-500/10 text-red-600 border-red-500/20",
 };

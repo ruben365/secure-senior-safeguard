@@ -76,7 +76,7 @@ export const InquiriesTable = () => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "new":
-        return "bg-blue-500";
+        return "bg-primary/50";
       case "in_progress":
         return "bg-yellow-500";
       case "resolved":

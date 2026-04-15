@@ -110,7 +110,7 @@ export const JobApplicationsTable = () => {
       case "pending":
         return "bg-yellow-500";
       case "reviewing":
-        return "bg-blue-500";
+        return "bg-primary/50";
       case "interviewing":
         return "bg-purple-500";
       case "offered":

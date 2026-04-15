@@ -21,9 +21,9 @@ interface ModuleStats {
 }
 
 const modules = [
-  { title: "Security", icon: Shield, href: "/admin", color: "text-blue-400" },
+  { title: "Security", icon: Shield, href: "/admin", color: "text-orange-400" },
   { title: "Content", icon: FileText, href: "/admin/content/pages", color: "text-purple-400" },
-  { title: "Clients", icon: Users, href: "/admin/clients/businesses", color: "text-indigo-400" },
+  { title: "Clients", icon: Users, href: "/admin/clients/businesses", color: "text-orange-400" },
   { title: "E-Commerce", icon: ShoppingCart, href: "/admin/ecommerce/products", color: "text-emerald-400", badgeKey: "lowStockProducts" as const },
   { title: "Requests", icon: Briefcase, href: "/admin/bookings", color: "text-amber-400", badgeKey: "pendingBookings" as const },
   { title: "Comms", icon: Mail, href: "/admin/email-campaigns", color: "text-pink-400", badgeKey: "unreadMessages" as const },

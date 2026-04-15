@@ -313,8 +313,8 @@ export default function IndividualClients() {
       </div>
       <div className="space-y-6">
         {selectedClients.length > 0 && (
-          <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 flex items-center justify-between">
-            <span className="font-medium text-cyan-400">
+          <div className="bg-primary/10 border border-primary/30 rounded-lg p-4 flex items-center justify-between">
+            <span className="font-medium text-orange-400">
               {selectedClients.length} clients selected
             </span>
             <div className="flex gap-2">
@@ -452,7 +452,7 @@ export default function IndividualClients() {
                       <TableCell>
                         <a
                           href={`mailto:${client.email}`}
-                          className="text-cyan-400 hover:underline"
+                          className="text-orange-400 hover:underline"
                           onClick={(e) => e.stopPropagation()}
                         >
                           {client.email}

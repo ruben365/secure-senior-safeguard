@@ -20,8 +20,8 @@ const securityCards = [
   {
     icon: Lock,
     title: "Data Protection",
-    color: "text-blue-600",
-    bg: "bg-blue-50",
+    color: "text-primary",
+    bg: "bg-primary/5",
     items: [
       "TLS 1.3 encryption for all data in transit",
       "AES-256 encryption for all data at rest",

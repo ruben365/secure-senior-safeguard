@@ -413,14 +413,14 @@ const BookingsList = () => {
               </div>
             </CardContent>
           </Card>
-          <Card className="border-l-4 border-l-blue-500">
+          <Card className="border-l-4 border-l-primary">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground">Confirmed</p>
                   <p className="text-2xl font-bold">{confirmedCount}</p>
                 </div>
-                <CalendarClock className="h-8 w-8 text-blue-500" />
+                <CalendarClock className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -590,7 +590,7 @@ const BookingsList = () => {
                             <Button
                               size="sm"
                               variant="outline"
-                              className="border-blue-500/30 text-blue-400 hover:bg-blue-500/10"
+                              className="border-primary/30 text-orange-400 hover:bg-primary/50/10"
                               onClick={() => {
                                 setBookingToAssign(booking);
                                 setAssignDialogOpen(true);

@@ -176,7 +176,7 @@ export default function BookAccessManager() {
       <Card className="bg-[#111827] border-[#1F2937]">
         <CardHeader>
           <CardTitle className="text-[#F9FAFB] flex items-center gap-2">
-            <BookOpen className="h-5 w-5 text-blue-400" />
+            <BookOpen className="h-5 w-5 text-orange-400" />
             Book Access Records
           </CardTitle>
           <CardDescription className="text-[#9CA3AF]">

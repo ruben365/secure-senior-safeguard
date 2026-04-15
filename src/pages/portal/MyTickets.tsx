@@ -15,7 +15,7 @@ import { format } from "date-fns";
 import { TicketDetail } from "@/components/tickets/TicketDetail";
 
 const statusColors: Record<string, string> = {
-  open: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
+  open: "bg-primary/10 text-primary dark:bg-primary/15 dark:text-primary",
   in_progress: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200",
   resolved: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
   closed: "bg-muted text-muted-foreground",
@@ -23,7 +23,7 @@ const statusColors: Record<string, string> = {
 
 const priorityColors: Record<string, string> = {
   low: "bg-muted text-muted-foreground",
-  medium: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
+  medium: "bg-primary/10 text-primary dark:bg-primary/15 dark:text-primary",
   high: "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
   urgent: "bg-destructive/10 text-destructive",
 };

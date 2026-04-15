@@ -272,7 +272,7 @@ const AutonomousDefenseHub = () => {
                       <p className="text-yellow-400">
                         [02:14:38] AGENT: Initiating secondary auth challenge via Signal
                       </p>
-                      <p className="text-blue-400">
+                      <p className="text-orange-400">
                         [02:14:41] AGENT: Biometric proof requested → Employee "J. Morton"
                       </p>
                       <p className="text-red-400">
@@ -469,7 +469,7 @@ const AutonomousDefenseHub = () => {
                           {
                             time: "09:44:11",
                             msg: "Immunizing real client profile: blocking vector",
-                            color: "text-blue-400",
+                            color: "text-orange-400",
                           },
                           {
                             time: "09:44:13",

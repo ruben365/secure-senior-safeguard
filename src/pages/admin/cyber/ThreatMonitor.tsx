@@ -143,7 +143,7 @@ export default function ThreatMonitor() {
       case "active":
         return <Shield className="h-4 w-4 text-red-500" />;
       default:
-        return <Shield className="h-4 w-4 text-blue-500" />;
+        return <Shield className="h-4 w-4 text-primary" />;
     }
   };
 

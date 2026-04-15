@@ -50,7 +50,7 @@ function StatusBadge({ status }: { status: string | null }) {
     inactive: "bg-muted text-muted-foreground border-border",
     pending: "bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-950 dark:text-yellow-300 dark:border-yellow-800",
     paid: "bg-green-100 text-green-700 border-green-200 dark:bg-green-950 dark:text-green-300 dark:border-green-800",
-    approved: "bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800",
+    approved: "bg-primary/10 text-primary border-primary/20 dark:bg-primary/10 dark:text-primary dark:border-primary/30",
     rejected: "bg-red-100 text-red-700 border-red-200 dark:bg-red-950 dark:text-red-300 dark:border-red-800",
   };
   const cls = variants[status.toLowerCase()] ?? "bg-muted text-muted-foreground border-border";

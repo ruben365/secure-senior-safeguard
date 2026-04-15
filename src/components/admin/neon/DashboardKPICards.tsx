@@ -9,7 +9,7 @@ interface KPIStats {
 }
 
 const kpis = [
-  { key: "pendingBookings" as const, label: "Pending Bookings", icon: Calendar, accent: "border-l-blue-500", iconColor: "text-blue-400" },
+  { key: "pendingBookings" as const, label: "Pending Bookings", icon: Calendar, accent: "border-l-primary", iconColor: "text-orange-400" },
   { key: "unreadMessages" as const, label: "Unread Messages", icon: Mail, accent: "border-l-amber-500", iconColor: "text-amber-400" },
   { key: "totalStaff" as const, label: "Active Staff", icon: Users, accent: "border-l-emerald-500", iconColor: "text-emerald-400" },
   { key: "newsletterSubscribers" as const, label: "Subscribers", icon: Newspaper, accent: "border-l-purple-500", iconColor: "text-purple-400" },

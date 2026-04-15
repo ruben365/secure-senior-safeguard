@@ -60,7 +60,7 @@ export function NeonPendingRequests() {
   };
 
   const typeConfig: Record<string, { icon: typeof BookOpen; color: string; bg: string }> = {
-    booking: { icon: BookOpen, color: "text-blue-400", bg: "bg-blue-500/10" },
+    booking: { icon: BookOpen, color: "text-orange-400", bg: "bg-primary/50/10" },
     inquiry: { icon: MessageSquare, color: "text-green-400", bg: "bg-green-500/10" },
     application: { icon: Briefcase, color: "text-purple-400", bg: "bg-purple-500/10" },
     testimonial: { icon: Star, color: "text-amber-400", bg: "bg-amber-500/10" },
