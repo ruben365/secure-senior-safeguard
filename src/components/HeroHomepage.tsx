@@ -68,8 +68,6 @@ export const HeroHomepage = () => {
           fetchPriority="high"
         />
         <div className="hero-home__top-veil" />
-        {/* Mobile: darken top so text is readable over photo */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/40 to-transparent sm:hidden" aria-hidden="true" />
         <div className="hero-home__glow" aria-hidden="true" />
       </div>
 
