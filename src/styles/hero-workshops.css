@@ -105,10 +105,13 @@
   justify-content: center;
   width: 100%;
   margin: 0;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
   padding-top: clamp(90px, 12vw, 130px);
-  padding-right: max(4rem, 8%);
+  padding-right: 2rem;
   padding-bottom: 2rem;
-  padding-left: max(4rem, 8%);
+  padding-left: 2rem;
 }
 
 .hero-ws__layout {
@@ -566,7 +569,7 @@
 }
 
 .hero-ws__panel-inner {
-  max-width: 1400px;
+  max-width: 1200px;
   width: 100%;
   margin: 0 auto;
 }

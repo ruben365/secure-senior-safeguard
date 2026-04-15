@@ -101,10 +101,13 @@
   justify-content: center;
   width: 100%;
   margin: 0;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
   padding-top: clamp(110px, 12vw, 150px);
-  padding-right: max(4rem, 8%);
+  padding-right: 2rem;
   padding-bottom: clamp(220px, 18vw, 290px);
-  padding-left: max(4rem, 8%);
+  padding-left: 2rem;
 }
 
 .hero-biz__copy {
