@@ -31,7 +31,7 @@ interface Task {
 function StatusBadge({ status }: { status: string }) {
   const variants: Record<string, { label: string; className: string }> = {
     todo: { label: "To Do", className: "bg-muted text-muted-foreground border-border" },
-    in_progress: { label: "In Progress", className: "bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800" },
+    in_progress: { label: "In Progress", className: "bg-primary/10 text-primary border-primary/20 dark:bg-primary/10 dark:text-primary dark:border-primary/30" },
     review: { label: "Review", className: "bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-950 dark:text-yellow-300 dark:border-yellow-800" },
     done: { label: "Done", className: "bg-green-100 text-green-700 border-green-200 dark:bg-green-950 dark:text-green-300 dark:border-green-800" },
   };
@@ -43,7 +43,7 @@ function PriorityBadge({ priority }: { priority: string }) {
   const variants: Record<string, { label: string; className: string }> = {
     high: { label: "High", className: "bg-red-100 text-red-700 border-red-200 dark:bg-red-950 dark:text-red-300 dark:border-red-800" },
     medium: { label: "Medium", className: "bg-orange-100 text-orange-700 border-orange-200 dark:bg-orange-950 dark:text-orange-300 dark:border-orange-800" },
-    low: { label: "Low", className: "bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800" },
+    low: { label: "Low", className: "bg-primary/10 text-primary border-primary/20 dark:bg-primary/10 dark:text-primary dark:border-primary/30" },
   };
   const v = variants[priority] ?? { label: priority, className: "bg-muted text-muted-foreground" };
   return <Badge variant="outline" className={v.className}>{v.label}</Badge>;

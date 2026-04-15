@@ -74,7 +74,7 @@ export function UpcomingAppointmentsCard({
                         {format(new Date(apt.scheduled_start), "MMM d, h:mm a")}
                       </span>
                       {apt.is_virtual ? (
-                        <span className="flex items-center gap-1 text-blue-500">
+                        <span className="flex items-center gap-1 text-primary">
                           <Video className="w-3 h-3" />
                           Virtual
                         </span>

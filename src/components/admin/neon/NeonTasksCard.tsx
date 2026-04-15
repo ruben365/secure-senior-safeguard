@@ -8,14 +8,14 @@ const priorityDot: Record<string, string> = { high: "bg-red-500", medium: "bg-am
 const statusStyle: Record<string, string> = {
   completed: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
   pending: "bg-amber-500/15 text-amber-400 border-amber-500/30",
-  "in-progress": "bg-blue-500/15 text-blue-400 border-blue-500/30",
+  "in-progress": "bg-primary/50/15 text-orange-400 border-primary/30",
 };
 
 export function NeonTasksCard({ tasks }: { tasks: Task[] }) {
   return (
     <Card className="bg-[#1F2937] border-[#374151] p-5">
       <h2 className="text-sm font-semibold text-[#F9FAFB] flex items-center gap-2 mb-4">
-        <CheckCircle2 className="w-4 h-4 text-blue-400" />
+        <CheckCircle2 className="w-4 h-4 text-orange-400" />
         My Tasks
       </h2>
 

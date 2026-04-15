@@ -3,7 +3,7 @@ import { Wrench, Mail, Phone, Clock } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/sonner";
 import { SITE } from "@/config/site";
 import { SEO } from "@/components/SEO";
 

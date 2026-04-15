@@ -26,7 +26,7 @@ export function DashboardHeader({
 
   return (
     <header className="border-b bg-card/80 backdrop-blur-md sticky top-0 z-20">
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Avatar className="w-12 h-12 border-2 border-primary/20">

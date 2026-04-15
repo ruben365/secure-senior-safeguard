@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/sonner";
 import { KeyRound, Plus, RefreshCw, Search, Loader2, Mail, BookOpen, Trash2 } from "lucide-react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
@@ -176,7 +176,7 @@ export default function BookAccessManager() {
       <Card className="bg-[#111827] border-[#1F2937]">
         <CardHeader>
           <CardTitle className="text-[#F9FAFB] flex items-center gap-2">
-            <BookOpen className="h-5 w-5 text-blue-400" />
+            <BookOpen className="h-5 w-5 text-orange-400" />
             Book Access Records
           </CardTitle>
           <CardDescription className="text-[#9CA3AF]">

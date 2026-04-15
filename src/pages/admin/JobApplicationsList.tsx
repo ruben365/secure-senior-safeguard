@@ -225,7 +225,7 @@ const JobApplicationsList = () => {
                 <p className="text-sm text-slate-400">Total</p>
                 <p className="text-2xl font-bold text-white">{stats.total}</p>
               </div>
-              <Briefcase className="h-8 w-8 text-cyan-400" />
+              <Briefcase className="h-8 w-8 text-orange-400" />
             </div>
           </CardContent>
         </Card>
@@ -247,11 +247,11 @@ const JobApplicationsList = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-slate-400">Reviewing</p>
-                <p className="text-2xl font-bold text-blue-400">
+                <p className="text-2xl font-bold text-orange-400">
                   {stats.reviewing}
                 </p>
               </div>
-              <Eye className="h-8 w-8 text-blue-400" />
+              <Eye className="h-8 w-8 text-orange-400" />
             </div>
           </CardContent>
         </Card>
@@ -376,7 +376,7 @@ const JobApplicationsList = () => {
             {isLoading ? (
               <TableRow>
                 <TableCell colSpan={6} className="text-center py-8">
-                  <RefreshCw className="h-6 w-6 animate-spin mx-auto mb-2 text-cyan-400" />
+                  <RefreshCw className="h-6 w-6 animate-spin mx-auto mb-2 text-orange-400" />
                   <span className="text-slate-400">
                     Loading applications...
                   </span>
@@ -420,7 +420,7 @@ const JobApplicationsList = () => {
                   <TableCell>
                     <Badge
                       variant="outline"
-                      className="border-cyan-500/50 text-cyan-400"
+                      className="border-cyan-500/50 text-orange-400"
                     >
                       {app.position}
                     </Badge>
@@ -550,7 +550,7 @@ const JobApplicationsList = () => {
                   <label className="text-sm font-medium text-slate-400">
                     Email
                   </label>
-                  <p className="text-cyan-400">{selectedApplication.email}</p>
+                  <p className="text-orange-400">{selectedApplication.email}</p>
                 </div>
                 <div>
                   <label className="text-sm font-medium text-slate-400">

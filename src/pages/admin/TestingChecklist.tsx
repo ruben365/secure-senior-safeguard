@@ -288,7 +288,7 @@ export default function TestingChecklist() {
               Complete all items to launch
             </p>
           </div>
-          <div className="text-3xl font-bold text-cyan-400">
+          <div className="text-3xl font-bold text-orange-400">
             {Math.round(overallProgress)}%
           </div>
         </div>
@@ -324,7 +324,7 @@ export default function TestingChecklist() {
 
             {functionalityChecklist.map((section, sectionIndex) => (
               <div key={section.title} className="mb-6">
-                <h4 className="font-semibold mb-3 text-cyan-400">
+                <h4 className="font-semibold mb-3 text-orange-400">
                   {section.title}
                 </h4>
                 <div className="space-y-3">

@@ -166,7 +166,7 @@ const AIReceptionist = () => {
 
           {/* Stats Section */}
           <section className="py-12 bg-card border-y border-border">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 <div>
                   <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
@@ -200,7 +200,7 @@ const AIReceptionist = () => {
 
           {/* Features Grid */}
           <section className="py-20">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
                   Your AI Receptionist Does It All
@@ -236,7 +236,7 @@ const AIReceptionist = () => {
 
           {/* Benefits Section */}
           <section className="py-20 bg-card">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
                   <h2 className="text-3xl md:text-4xl font-bold mb-6">
@@ -302,7 +302,7 @@ const AIReceptionist = () => {
 
           {/* Use Cases */}
           <section className="py-20">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
                   Built for Dayton Businesses Like Yours
@@ -335,7 +335,7 @@ const AIReceptionist = () => {
 
           {/* Urgency Section */}
           <section className="py-16 bg-primary/5 border-y border-primary/20">
-            <div className="container mx-auto px-4 text-center">
+            <div className="container mx-auto text-center">
               <h3 className="text-2xl md:text-3xl font-bold mb-4">
                 While You Read This, How Many Calls Went to Voicemail?
               </h3>
@@ -349,7 +349,7 @@ const AIReceptionist = () => {
 
           {/* CTA Section */}
           <section className="py-20 bg-gradient-to-br from-primary/10 via-background to-accent/10">
-            <div className="container mx-auto px-4 text-center">
+            <div className="container mx-auto text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 Get Your AI Receptionist Running in 48 Hours
               </h2>
@@ -359,15 +359,15 @@ const AIReceptionist = () => {
                 business needs.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="xl" variant="gold">
+                <Button asChild size="heroPill" variant="heroPrimary">
                   <Link to="/contact">
                     Schedule a Demo
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-                <Button asChild size="xl" variant="outline">
+                <Button asChild size="heroPill" variant="heroOutline">
                   <a href={SITE.phone.tel}>
-                    <Phone className="mr-2 h-5 w-5" />
+                    <Phone className="mr-2 h-4 w-4" />
                     Call {SITE.phone.display} Now
                   </a>
                 </Button>

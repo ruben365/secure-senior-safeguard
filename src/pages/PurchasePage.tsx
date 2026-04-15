@@ -115,7 +115,7 @@ export default function PurchasePage() {
       <main id="main-content" tabIndex={-1} className="flex-1">
         {/* Breadcrumb */}
         <div className="border-b bg-muted/30">
-          <div className="container mx-auto px-4 py-3">
+          <div className="container mx-auto py-3">
             <nav className="flex items-center gap-2 text-sm text-muted-foreground">
               <Link to="/" className="hover:text-foreground">Home</Link>
               <span>/</span>
@@ -130,7 +130,7 @@ export default function PurchasePage() {
           </div>
         </div>
 
-        <div className="container mx-auto px-4 py-10 max-w-5xl">
+        <div className="container mx-auto py-10 max-w-5xl">
           <Button variant="ghost" size="sm" className="gap-2 mb-6" onClick={() => navigate(-1)}>
             <ArrowLeft className="h-4 w-4" />
             Back

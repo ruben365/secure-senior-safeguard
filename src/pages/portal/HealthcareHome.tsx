@@ -172,7 +172,7 @@ export default function HealthcareHome() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-6 space-y-6 max-w-7xl">
+    <div className="container mx-auto py-6 space-y-6 max-w-7xl">
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-foreground">Healthcare Dashboard</h1>

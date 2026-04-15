@@ -56,7 +56,7 @@ interface Task {
 }
 
 const statusConfig = {
-  scheduled: { label: "Scheduled", color: "bg-blue-100 text-blue-700" },
+  scheduled: { label: "Scheduled", color: "bg-primary/10 text-primary" },
   expiring: { label: "Expiring", color: "bg-yellow-100 text-yellow-700" },
   pending: { label: "Pending", color: "bg-orange-100 text-orange-700" },
   urgent: { label: "Urgent", color: "bg-red-100 text-red-700" },
@@ -331,7 +331,7 @@ export function UpcomingTasks() {
       return "text-yellow-600"; // Due today
     }
     if (isThisWeek(date, { weekStartsOn: 0 })) {
-      return "text-blue-500"; // Upcoming this week
+      return "text-primary"; // Upcoming this week
     }
     return "text-muted-foreground"; // Future
   };
@@ -344,7 +344,7 @@ export function UpcomingTasks() {
       return "text-yellow-600 bg-yellow-50"; // Due today
     }
     if (isThisWeek(date, { weekStartsOn: 0 })) {
-      return "text-blue-500 bg-blue-50"; // Upcoming this week
+      return "text-primary bg-primary/5"; // Upcoming this week
     }
     return "text-muted-foreground bg-muted/50"; // Future
   };

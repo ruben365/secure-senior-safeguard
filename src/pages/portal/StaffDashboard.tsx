@@ -59,7 +59,7 @@ const ALLOWED_ROLES = new Set([
 function TaskStatusBadge({ status }: { status: string | null }) {
   const map: Record<string, string> = {
     completed: "bg-green-500/15 text-green-600 border-green-500/30",
-    in_progress: "bg-blue-500/15 text-blue-600 border-blue-500/30",
+    in_progress: "bg-primary/50/15 text-primary border-primary/30",
     blocked: "bg-red-500/15 text-red-600 border-red-500/30",
     pending: "bg-yellow-500/15 text-yellow-600 border-yellow-500/30",
   };
@@ -75,7 +75,7 @@ function PriorityBadge({ priority }: { priority: string | null }) {
   const map: Record<string, string> = {
     high: "bg-red-500/15 text-red-600 border-red-500/30",
     medium: "bg-orange-500/15 text-orange-600 border-orange-500/30",
-    low: "bg-blue-500/15 text-blue-600 border-blue-500/30",
+    low: "bg-primary/50/15 text-primary border-primary/30",
   };
   const cls = map[priority ?? ""] ?? "bg-muted text-muted-foreground border-border";
   return (
@@ -304,7 +304,7 @@ function StaffDashboard() {
   // ── Render ───────────────────────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <main className="container mx-auto px-4 py-6 space-y-6">
+      <main className="container mx-auto py-6 space-y-6">
         {/* Stat Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {statCards.map((card) => (

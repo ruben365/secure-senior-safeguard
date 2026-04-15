@@ -95,7 +95,7 @@ export default function BusinessClients() {
 
   const getServiceBadges = (services: string[]) => {
     const colors: Record<string, string> = {
-      "AI Receptionist": "bg-blue-500/20 text-blue-400 border-blue-500/30",
+      "AI Receptionist": "bg-primary/50/20 text-orange-400 border-primary/30",
       Website: "bg-purple-500/20 text-purple-400 border-purple-500/30",
       "AI Insurance": "bg-teal-500/20 text-teal-400 border-teal-500/30",
       Training: "bg-orange-500/20 text-orange-400 border-orange-500/30",

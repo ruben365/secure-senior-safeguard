@@ -261,7 +261,7 @@ export const HomeStorySections = () => {
         className="hss-section-white relative py-12 md:py-20 lg:py-24"
         aria-labelledby="story-section-1-heading"
       >
-        <div className="container mx-auto px-6 lg:px-8">
+        <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
 
             {/* Left column — 60% */}
@@ -386,7 +386,7 @@ export const HomeStorySections = () => {
         <div aria-hidden="true" className="hss-stats-glow-left" />
         <div aria-hidden="true" className="hss-stats-glow-right" />
 
-        <div className="relative z-10 container mx-auto px-6 lg:px-8">
+        <div className="relative z-10 container mx-auto">
           <h2 id="story-stats-heading" className="sr-only">By the numbers</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
             {stats.map((stat, i) => (
@@ -403,7 +403,7 @@ export const HomeStorySections = () => {
         className="hss-section-tint relative py-12 md:py-20 lg:py-24"
         aria-labelledby="story-section-2-heading"
       >
-        <div className="container mx-auto px-6 lg:px-8">
+        <div className="container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-[45fr_55fr] gap-10 lg:gap-12 items-stretch">
 
             {/* Left — 45%: tall image with overlay caption */}
@@ -514,7 +514,7 @@ export const HomeStorySections = () => {
         className="hss-section-white relative py-12 md:py-20 lg:py-24"
         aria-labelledby="story-section-3-heading"
       >
-        <div className="container mx-auto px-6 lg:px-8">
+        <div className="container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-start">
 
             {/* Left — feature list with timeline */}
@@ -641,7 +641,7 @@ export const HomeStorySections = () => {
         className="hss-section-tint relative py-12 md:py-20 lg:py-24"
         aria-labelledby="story-how-heading"
       >
-        <div className="container mx-auto px-6 lg:px-8">
+        <div className="container mx-auto">
           <div className="max-w-3xl mb-14 lg:mb-16">
             <span data-reveal className="hss-overline mb-5">
               <span className="hss-overline-dot" />
@@ -718,7 +718,7 @@ export const HomeStorySections = () => {
         className="hss-section-white relative py-12 md:py-20 lg:py-24"
         aria-labelledby="story-section-4-heading"
       >
-        <div className="container mx-auto px-6 lg:px-8">
+        <div className="container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
 
             {/* Left — checklist + CTA */}

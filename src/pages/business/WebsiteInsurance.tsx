@@ -179,9 +179,9 @@ const WebsiteInsurance = () => {
 
         <main>
           {/* Hero Section */}
-          <section className="relative py-20 lg:py-32 overflow-hidden">
+          <section className="relative overflow-hidden min-h-[100dvh] flex items-center pt-[clamp(100px,14vw,140px)] pb-10">
             <div className="absolute inset-0 bg-gradient-to-br from-success/10 via-background to-primary/10" />
-            <div className="container mx-auto px-4 relative">
+            <div className="container mx-auto relative">
               <div className="max-w-4xl mx-auto text-center animate-fade-in">
                 <div>
                   <Badge
@@ -204,13 +204,13 @@ const WebsiteInsurance = () => {
                   All in one plan.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button asChild size="xl" variant="gold">
+                  <Button asChild size="heroPill" variant="heroPrimary">
                     <Link to="/contact">
                       Get Protected Today
-                      <ArrowRight className="ml-2 h-5 w-5" />
+                      <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
-                  <Button asChild size="xl" variant="outline">
+                  <Button asChild size="heroPill" variant="heroOutline">
                     <Link to="/business">View All Services</Link>
                   </Button>
                 </div>
@@ -220,7 +220,7 @@ const WebsiteInsurance = () => {
 
           {/* Risk Alert Section */}
           <section className="py-12 bg-destructive/5 border-y border-destructive/20">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto">
               <div className="flex items-center justify-center gap-3 mb-6">
                 <AlertTriangle className="w-6 h-6 text-destructive" />
                 <h2 className="text-xl font-bold text-destructive">
@@ -242,7 +242,7 @@ const WebsiteInsurance = () => {
 
           {/* Plans Section */}
           <section className="py-20">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
                   Choose Your Protection Level
@@ -310,7 +310,7 @@ const WebsiteInsurance = () => {
 
           {/* Coverage Details */}
           <section className="py-20 bg-card">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
                   What's Covered
@@ -345,7 +345,7 @@ const WebsiteInsurance = () => {
 
           {/* FAQ Preview */}
           <section className="py-20">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto">
               <div className="max-w-3xl mx-auto">
                 <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
                   Common Questions
@@ -388,7 +388,7 @@ const WebsiteInsurance = () => {
 
           {/* CTA Section */}
           <section className="py-20 bg-gradient-to-br from-success/10 via-background to-primary/10">
-            <div className="container mx-auto px-4 text-center">
+            <div className="container mx-auto text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 Don't Wait Until It's Too Late
               </h2>
@@ -396,13 +396,13 @@ const WebsiteInsurance = () => {
                 Protect your website today. Plans start at just $29/month.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="xl" variant="gold">
+                <Button asChild size="heroPill" variant="heroPrimary">
                   <Link to="/contact">
                     Start Protection Now
-                    <Shield className="ml-2 h-5 w-5" />
+                    <Shield className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-                <Button asChild size="xl" variant="outline">
+                <Button asChild size="heroPill" variant="heroOutline">
                   <Link to="/business/website-design">Need a New Website?</Link>
                 </Button>
               </div>

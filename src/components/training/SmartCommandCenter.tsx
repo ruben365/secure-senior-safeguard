@@ -19,7 +19,7 @@ import {
   X,
 } from "lucide-react";
 import type { GuestScanStatus } from "@/hooks/useGuestScanner";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/sonner";
 
 const ACCEPTED_FILE_TYPES =
   ".pdf,.jpg,.jpeg,.png,.mp4,.mp3,.wav,application/pdf,image/jpeg,image/png,video/mp4,audio/mpeg,audio/mp3,audio/wav,audio/x-wav";

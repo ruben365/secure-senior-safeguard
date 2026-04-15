@@ -229,7 +229,7 @@ export default function SuperAdminSalesOverview() {
                 value={salesData.activeSubscriptions}
                 growth={salesData.subscriptionGrowth}
                 icon={CreditCard}
-                color="text-blue-400"
+                color="text-orange-400"
               />
               <StatCard
                 title="Total Orders"

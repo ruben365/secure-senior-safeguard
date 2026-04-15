@@ -20,8 +20,8 @@ const securityCards = [
   {
     icon: Lock,
     title: "Data Protection",
-    color: "text-blue-600",
-    bg: "bg-blue-50",
+    color: "text-primary",
+    bg: "bg-primary/5",
     items: [
       "TLS 1.3 encryption for all data in transit",
       "AES-256 encryption for all data at rest",
@@ -117,8 +117,8 @@ function Security() {
       <Navigation />
 
       {/* Hero */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-        <div className="container mx-auto px-6 lg:px-8 text-center">
+      <section className="min-h-[100dvh] flex items-center pt-[clamp(100px,14vw,140px)] pb-10 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+        <div className="container mx-auto text-center">
           <div className="flex justify-center mb-6">
             <div className="w-16 h-16 rounded-2xl bg-primary/20 border border-primary/30 flex items-center justify-center">
               <Shield className="w-8 h-8 text-primary" />
@@ -127,15 +127,23 @@ function Security() {
           <h1 className="text-3xl md:text-5xl font-black mb-4 tracking-tight">
             Security at InVision Network
           </h1>
-          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-8">
             Enterprise-grade protection for families, seniors, and businesses.
           </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button asChild size="heroPill" variant="heroPrimary">
+              <Link to="/training#pricing">Get Protected</Link>
+            </Button>
+            <Button asChild size="heroPill" variant="heroOutline">
+              <Link to="/contact">Contact Us</Link>
+            </Button>
+          </div>
         </div>
       </section>
 
       {/* Security Cards */}
       <section className="py-12 md:py-16 bg-background">
-        <div className="container mx-auto px-6 lg:px-8">
+        <div className="container mx-auto">
           <div className="text-center mb-10">
             <span className="inline-block text-[10px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-3 py-1 rounded-full mb-3">
               How We Protect You
@@ -178,7 +186,7 @@ function Security() {
 
       {/* Trust Badges */}
       <section className="py-10 bg-muted/30 border-y border-border/40">
-        <div className="container mx-auto px-6 lg:px-8">
+        <div className="container mx-auto">
           <div className="flex flex-wrap justify-center items-center gap-8">
             {[
               { icon: Award, label: "Veteran-Founded" },
@@ -201,7 +209,7 @@ function Security() {
 
       {/* CTA */}
       <section className="py-12 md:py-16 bg-background">
-        <div className="container mx-auto px-6 lg:px-8 text-center">
+        <div className="container mx-auto text-center">
           <Mail className="w-10 h-10 text-primary mx-auto mb-4" />
           <h2 className="text-2xl md:text-3xl font-black text-foreground mb-3">
             Questions About Our Security?

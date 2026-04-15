@@ -20,7 +20,7 @@ import {
   Users,
   Clock,
 } from "lucide-react";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/sonner";
 
 interface EmailCampaign {
   id: string;

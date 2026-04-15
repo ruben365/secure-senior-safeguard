@@ -5,7 +5,7 @@ import { Eye, EyeOff, Lock, CheckCircle, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/sonner";
 import { FloatingShapes } from "@/components/FloatingShapes";
 import { SEO } from "@/components/SEO";
 

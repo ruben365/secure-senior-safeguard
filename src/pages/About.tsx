@@ -172,7 +172,7 @@ function About() {
       <MeshBackground variant="subtle" withOrbs>
       <section className="py-10 md:py-14 bg-transparent relative overflow-hidden">
 
-        <div className="container mx-auto px-6 lg:px-8">
+        <div className="container mx-auto">
           <div className="grid md:grid-cols-2 gap-6 lg:gap-10 items-center">
             <div>
               <span className="inline-block text-[10px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-3 py-1 rounded-full mb-3">
@@ -230,7 +230,7 @@ function About() {
       {/* Timeline */}
       <section className="py-10 md:py-14 bg-muted/30 relative overflow-hidden">
 
-        <div className="container mx-auto px-6 lg:px-8">
+        <div className="container mx-auto">
           <div className="text-center mb-8">
             <span className="inline-block text-[10px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-3 py-1 rounded-full mb-3">
               Our Journey
@@ -249,7 +249,7 @@ function About() {
       {/* Founders */}
       <section id="founders" className="py-10 md:py-14 bg-background relative overflow-hidden">
 
-        <div className="container mx-auto px-6 lg:px-8">
+        <div className="container mx-auto">
           <div className="text-center mb-8">
             <span className="inline-block text-[10px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-3 py-1 rounded-full mb-3">
               Meet Our Founders
@@ -291,32 +291,6 @@ function About() {
               </blockquote>
             </Card>
 
-            <Card className="p-5 sm:p-6 border border-border/40 bg-card/70 backdrop-blur-xl shadow-sm hover:shadow-lg hover:border-primary/20 transition-all duration-300 hover:-translate-y-1">
-              <div className="relative mb-4">
-                <div className="w-full aspect-[4/3] bg-gradient-to-br from-accent/10 to-primary/10 rounded-xl flex items-center justify-center border-2 border-dashed border-accent/30">
-                  <div className="text-center p-4">
-                    <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-accent/10 flex items-center justify-center">
-                      <span className="text-3xl font-bold text-accent">C</span>
-                    </div>
-                    <p className="text-xs text-muted-foreground">Photo Coming Soon</p>
-                  </div>
-                </div>
-                <Badge className="absolute top-3 right-3 bg-primary text-primary-foreground text-[10px]">Co-Founder & COO</Badge>
-              </div>
-              <h3 className="text-xl font-black mb-1.5 text-foreground">Co-Founder &amp; COO</h3>
-              <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
-                Registered Nurse with 4 years of clinical experience and a
-                heart for community wellness. After experiencing identity
-                theft alongside her husband, our COO channeled her
-                compassionate care approach into designing trauma-informed
-                cybersecurity training that meets people where they are -
-                especially seniors and vulnerable populations.
-              </p>
-              <blockquote className="border-l-2 border-primary pl-3 italic text-xs text-muted-foreground">
-                "Technology should empower, not intimidate. We're here to
-                bridge that gap."
-              </blockquote>
-            </Card>
           </div>
         </div>
       </section>
@@ -326,7 +300,7 @@ function About() {
       {/* Values */}
       <MeshBackground variant="vibrant" withDots>
       <section className="py-10 md:py-14">
-        <div className="container mx-auto px-6 lg:px-8">
+        <div className="container mx-auto">
           <div className="text-center mb-8">
             <span className="frosted-pill mb-3">Our Values</span>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-foreground mb-3">
@@ -366,7 +340,7 @@ function About() {
         />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-primary/60 to-accent/70" />
 
-        <div className="container mx-auto px-6 lg:px-8 relative z-10 text-white">
+        <div className="container mx-auto relative z-10 text-white">
           <div className="text-center mb-8">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-black mb-2 drop-shadow-lg text-white">
               Our Community Impact
@@ -398,7 +372,7 @@ function About() {
 
       {/* Who We Help */}
       <section className="py-10 md:py-14 bg-background">
-        <div className="container mx-auto px-6 lg:px-8">
+        <div className="container mx-auto">
           <div className="text-center mb-8">
             <span className="inline-block text-[10px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-3 py-1 rounded-full mb-3">
               Who We Serve
@@ -463,7 +437,7 @@ function About() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/50 to-transparent" />
 
-        <div className="container mx-auto px-6 lg:px-8 relative z-10 text-center">
+        <div className="container mx-auto relative z-10 text-center">
           <h2 className="text-2xl md:text-4xl font-black text-white mb-3 drop-shadow-lg">
             Ready to Join Our Protected Community?
           </h2>

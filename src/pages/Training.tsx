@@ -552,14 +552,14 @@ function LearnAndTrain() {
   ];
 
   const threats = [
-    { icon: Mail, title: "Phishing Emails", description: "Forward suspicious emails for analysis. We check sender authenticity, analyze links, and identify fake logos.", color: "bg-blue-500/10 text-blue-600" },
+    { icon: Mail, title: "Phishing Emails", description: "Forward suspicious emails for analysis. We check sender authenticity, analyze links, and identify fake logos.", color: "bg-primary/50/10 text-primary" },
     { icon: MessageSquare, title: "SMS Scams", description: "Screenshot suspicious texts. We trace senders and verify if messages are legitimate.", color: "bg-green-500/10 text-green-600" },
     { icon: Phone, title: "Voice Calls", description: "Describe suspicious calls. We identify voice scam patterns and AI-generated voices.", color: "bg-violet-500/10 text-violet-600" },
     { icon: FileText, title: "Voice Messages", description: "Send voicemails for AI analysis. We detect voice cloning and verify authenticity.", color: "bg-amber-500/10 text-amber-600" },
     { icon: LinkIcon, title: "Suspicious Links", description: "Send links before clicking. We safely scan for malware and verify destinations.", color: "bg-red-500/10 text-red-600" },
     { icon: QrCode, title: "QR Codes", description: "Photo us QR codes. We decode them safely and tell you where they lead.", color: "bg-pink-500/10 text-pink-600" },
     { icon: FileCheck, title: "Documents", description: "Upload suspicious PDFs. We check for malware and fake information.", color: "bg-teal-500/10 text-teal-600" },
-    { icon: ImageIcon, title: "Social Media", description: "Screenshot fake profiles. We verify authenticity and identify scam patterns.", color: "bg-indigo-500/10 text-indigo-600" },
+    { icon: ImageIcon, title: "Social Media", description: "Screenshot fake profiles. We verify authenticity and identify scam patterns.", color: "bg-indigo-500/10 text-primary" },
   ];
 
   return (
@@ -649,7 +649,7 @@ function LearnAndTrain() {
 
         {/* ══════════ LIVE THREAT TICKER ══════════ */}
         <div className="bg-foreground text-background py-3 overflow-hidden">
-          <div className="container mx-auto px-6 lg:px-8">
+          <div className="container mx-auto">
             <div className="flex items-center justify-center gap-4 sm:gap-8 flex-wrap text-xs sm:text-sm font-semibold">
               <span className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" /> 2,847 scams blocked this month</span>
               <span className="hidden sm:inline text-background/30">|</span>
@@ -673,7 +673,7 @@ function LearnAndTrain() {
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background dot-grid-bg" />
           
           <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
-          <div className="container mx-auto px-6 lg:px-8 relative z-10">
+          <div className="container mx-auto relative z-10">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Sparkles className="w-3.5 h-3.5 text-primary" />
@@ -791,7 +791,7 @@ function LearnAndTrain() {
 
         {/* ══════════ SECTION 2: HOW IT WORKS ══════════ */}
         <section id="book" className="py-10 sm:py-16 md:py-20 bg-muted/20">
-          <div className="container mx-auto px-6 lg:px-8">
+          <div className="container mx-auto">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Sparkles className="w-3.5 h-3.5 text-primary" />
@@ -841,7 +841,7 @@ function LearnAndTrain() {
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
           <div className="absolute top-20 right-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-20 left-0 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-3xl pointer-events-none" />
-          <div className="container mx-auto px-6 lg:px-8 relative z-10">
+          <div className="container mx-auto relative z-10">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Shield className="w-3.5 h-3.5 text-primary" />
@@ -898,7 +898,7 @@ function LearnAndTrain() {
 
         {/* ══════════ SECTION 4: SIMPLE PROTECTION IN 4 STEPS ══════════ */}
         <section className="py-10 sm:py-16 md:py-20 bg-muted/20">
-          <div className="container mx-auto px-6 lg:px-8">
+          <div className="container mx-auto">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Zap className="w-3.5 h-3.5 text-primary" />
@@ -962,7 +962,7 @@ function LearnAndTrain() {
         <section className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
           <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
-          <div className="container mx-auto px-6 lg:px-8 relative z-10">
+          <div className="container mx-auto relative z-10">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Shield className="w-3.5 h-3.5 text-primary" />
@@ -1027,7 +1027,7 @@ function LearnAndTrain() {
 
         {/* ══════════ SECTION 6: AI PROFESSIONAL TRAINING ══════════ */}
         <section id="ai-pro-training" className="py-10 sm:py-16 md:py-20 bg-muted/20">
-          <div className="container mx-auto px-6 lg:px-8">
+          <div className="container mx-auto">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Brain className="w-3.5 h-3.5 text-primary" />
@@ -1064,7 +1064,7 @@ function LearnAndTrain() {
 
         {/* Veterans Discount Strip */}
         <section className="py-5 bg-card border-y border-border/60">
-          <div className="container mx-auto px-6 lg:px-8">
+          <div className="container mx-auto">
             <div className="flex flex-wrap items-center justify-center gap-4 text-base">
               <span className="text-xl">🇺🇸</span>
               <span className="font-bold text-foreground">
@@ -1081,7 +1081,7 @@ function LearnAndTrain() {
         <section className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background dot-grid-bg" />
           <div className="absolute bottom-20 right-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
-          <div className="container mx-auto px-6 lg:px-8 relative z-10">
+          <div className="container mx-auto relative z-10">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Heart className="w-3.5 h-3.5 text-primary" />
@@ -1185,7 +1185,7 @@ function LearnAndTrain() {
 
         {/* ══════════ SECTION 8: SCAMS WE'VE CAUGHT ══════════ */}
         <section className="py-10 sm:py-16 md:py-20 bg-muted/20">
-          <div className="container mx-auto px-6 lg:px-8">
+          <div className="container mx-auto">
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Award className="w-3.5 h-3.5 text-primary" />
@@ -1237,7 +1237,7 @@ function LearnAndTrain() {
         {/* Training Success Stories */}
         {trainingTestimonials.length > 0 && (
           <section className="py-10 sm:py-16 md:py-20 bg-background">
-            <div className="container mx-auto px-6 lg:px-8">
+            <div className="container mx-auto">
               <div className="text-center mb-14">
                 <span className="inline-block text-xs uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
                   Testimonials
@@ -1285,7 +1285,7 @@ function LearnAndTrain() {
             style={{ backgroundImage: `url(${seniorCouple})` }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/60 to-black/70" />
-          <div className="container mx-auto px-6 lg:px-8 relative z-10 text-center">
+          <div className="container mx-auto relative z-10 text-center">
             <h2 className="text-3xl md:text-5xl font-black text-white mb-5">
               Sleep Better Tonight
             </h2>

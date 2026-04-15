@@ -225,7 +225,7 @@ export function ClientMessagesTab({ clientId }: ClientMessagesTabProps) {
                           !message.is_from_client
                             ? "bg-primary text-primary-foreground"
                             : !message.sender_id
-                              ? "bg-blue-50 text-blue-900 border border-blue-200 dark:bg-blue-950 dark:text-blue-100"
+                              ? "bg-primary/5 text-foreground border border-primary/20 dark:bg-primary/10 dark:text-white"
                               : "bg-muted"
                         }`}
                       >

@@ -44,7 +44,7 @@ import {
   Shield,
   Loader2,
 } from "lucide-react";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { contactFormSchema, formatPhoneNumber } from "@/utils/formValidation";
 import { z } from "zod";
@@ -207,7 +207,7 @@ function Contact() {
 
       <MeshBackground variant="vibrant" withOrbs>
       <div className="py-16 relative overflow-hidden">
-        <div className="container mx-auto px-6 lg:px-8 relative z-10">
+        <div className="container mx-auto relative z-10">
           {/* Contact Methods Grid */}
           <div className="text-center mb-10">
             <span className="frosted-pill mb-4">Get in Touch</span>
@@ -664,7 +664,7 @@ function Contact() {
 
       {/* Internal links — related pages */}
       <section className="py-8 bg-muted/30">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto">
           <p className="text-sm text-muted-foreground text-center max-w-2xl mx-auto">
             Not sure where to start?{" "}
             <Link to="/training" className="text-primary hover:underline font-medium">Browse our cybersecurity workshops</Link>{" "}

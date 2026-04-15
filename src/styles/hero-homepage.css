@@ -464,54 +464,53 @@
   }
 
   .hero-home__content {
-    padding-top: clamp(80px, 12vw, 120px);
-    padding-bottom: 1.5rem;
+    padding-top: clamp(72px, 10vw, 100px);
+    padding-bottom: 0.5rem;
+    justify-content: flex-start;
   }
 
   .hero-home__copy {
     padding: 0 0.25rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
   }
 
   .hero-home__headline {
     font-size: clamp(1.5rem, 6vw, 1.75rem);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.6), 0 1px 3px rgba(0,0,0,0.4);
   }
 
   .hero-home__body {
-    font-size: 0.875rem;
-    line-height: 1.5;
-    margin-bottom: 1.25rem;
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    margin-bottom: 0;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.5);
   }
 
   .hero-home__ctas {
-    flex-direction: column;
+    flex-direction: row;
     gap: 0.5rem;
+    margin-top: auto;
+    padding-bottom: 0.5rem;
   }
 
   .hero-home__cta {
-    width: 100%;
-    height: 40px;
+    flex: 1;
+    height: 36px;
     justify-content: center;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
+    padding: 0 1rem;
   }
 
-  /* Stronger gradient overlay so text doesn't blend into the person */
+  /* No heavy overlay — let the person's face show through */
   .hero-home__content::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.75) 0%,
-      rgba(0, 0, 0, 0.4) 50%,
-      rgba(0, 0, 0, 0.1) 100%
-    );
+    display: none;
   }
 
   /* Feature grid: single column, only show first row */

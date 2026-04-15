@@ -203,7 +203,7 @@ const DonationsList = () => {
                 <p className="text-sm text-slate-400">Monthly Donors</p>
                 <p className="text-2xl font-bold text-white">{monthlyDonors}</p>
               </div>
-              <RefreshCw className="h-8 w-8 text-cyan-400" />
+              <RefreshCw className="h-8 w-8 text-orange-400" />
             </div>
           </CardContent>
         </Card>
@@ -227,7 +227,7 @@ const DonationsList = () => {
                   ${avgDonation.toFixed(2)}
                 </p>
               </div>
-              <TrendingUp className="h-8 w-8 text-blue-400" />
+              <TrendingUp className="h-8 w-8 text-orange-400" />
             </div>
           </CardContent>
         </Card>
@@ -289,7 +289,7 @@ const DonationsList = () => {
             {isLoading ? (
               <TableRow>
                 <TableCell colSpan={7} className="text-center py-8">
-                  <RefreshCw className="h-6 w-6 animate-spin mx-auto mb-2 text-cyan-400" />
+                  <RefreshCw className="h-6 w-6 animate-spin mx-auto mb-2 text-orange-400" />
                   <span className="text-slate-400">Loading donations...</span>
                 </TableCell>
               </TableRow>

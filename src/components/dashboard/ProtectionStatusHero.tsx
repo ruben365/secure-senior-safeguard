@@ -131,8 +131,8 @@ export function ProtectionStatusHero({
           {/* Live Stats */}
           <div className="grid grid-cols-2 md:grid-cols-1 gap-3">
             <div className="flex items-center gap-2 bg-card/80 rounded-lg p-3">
-              <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
-                <Zap className="w-4 h-4 text-blue-500" />
+              <div className="w-8 h-8 rounded-full bg-primary/50/20 flex items-center justify-center">
+                <Zap className="w-4 h-4 text-primary" />
               </div>
               <div>
                 <p className="text-xs text-muted-foreground">Threats Blocked</p>

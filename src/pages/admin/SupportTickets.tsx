@@ -51,7 +51,7 @@ export default function SupportTickets() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
           { label: "Total", value: stats.total, color: "text-foreground" },
-          { label: "Open", value: stats.open, color: "text-blue-600" },
+          { label: "Open", value: stats.open, color: "text-primary" },
           { label: "In Progress", value: stats.in_progress, color: "text-yellow-600" },
           { label: "Resolved", value: stats.resolved, color: "text-green-600" },
         ].map((s) => (

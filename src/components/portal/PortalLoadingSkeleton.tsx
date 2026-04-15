@@ -58,7 +58,7 @@ export function PortalLoadingSkeleton() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-6">
+      <div className="container mx-auto py-6">
         {/* Stats skeleton */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           {Array.from({ length: 4 }).map((_, i) => (
@@ -100,7 +100,7 @@ export function MessagesLoadingSkeleton() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-6">
+      <div className="container mx-auto py-6">
         {/* Tabs skeleton */}
         <div className="flex gap-2 mb-6">
           <Skeleton className="h-8 w-24 rounded bg-gray-700/40" />

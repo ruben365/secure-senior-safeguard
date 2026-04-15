@@ -112,7 +112,7 @@ export function PulsingCircle() {
 
 export function HeroContent() {
   return (
-    <div className="relative z-20 container mx-auto px-6 lg:px-12">
+    <div className="relative z-20 container mx-auto">
       <div className="min-h-[calc(100vh-68px)] flex flex-col justify-center pb-24 pt-8 max-w-3xl">
         {/* Live status badge */}
         <motion.div
@@ -311,7 +311,7 @@ export function FloatingAlertCard() {
 export function TrustBar() {
   return (
     <div className="absolute bottom-0 left-0 right-0 z-20 border-t border-white/[0.06] bg-black/30 backdrop-blur-md">
-      <div className="container mx-auto px-6 lg:px-12 py-3.5">
+      <div className="container mx-auto py-3.5">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="flex gap-0.5">

@@ -64,7 +64,7 @@ const CTASection = ({
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-foreground/62 via-foreground/44 to-primary/34" />
 
-        <div className="container mx-auto px-4 text-center relative z-10">
+        <div className="container mx-auto text-center relative z-10">
           <h2
             className={cn(
               "mb-6 text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold drop-shadow-lg",
@@ -101,7 +101,7 @@ const CTASection = ({
       role="region"
       aria-label="Call to action"
     >
-      <div className="container mx-auto px-4 text-center">
+      <div className="container mx-auto text-center">
         <h2
           className={cn(
             "mb-6 text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold",

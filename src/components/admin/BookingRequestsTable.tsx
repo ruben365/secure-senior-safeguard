@@ -80,7 +80,7 @@ export const BookingRequestsTable = () => {
       case "pending":
         return "bg-yellow-500";
       case "contacted":
-        return "bg-blue-500";
+        return "bg-primary/50";
       case "confirmed":
         return "bg-green-500";
       case "completed":

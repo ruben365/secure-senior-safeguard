@@ -221,7 +221,7 @@ const InventoryManagement = () => {
                 {inventory.length}
               </p>
             </div>
-            <Package className="h-8 w-8 text-cyan-400" />
+            <Package className="h-8 w-8 text-orange-400" />
           </div>
         </Card>
         <Card className="p-4 bg-slate-800/50 border-slate-700">

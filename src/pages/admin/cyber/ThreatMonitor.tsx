@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/sonner";
 import { formatDistanceToNow } from "date-fns";
 import {
   Dialog,
@@ -143,7 +143,7 @@ export default function ThreatMonitor() {
       case "active":
         return <Shield className="h-4 w-4 text-red-500" />;
       default:
-        return <Shield className="h-4 w-4 text-blue-500" />;
+        return <Shield className="h-4 w-4 text-primary" />;
     }
   };
 

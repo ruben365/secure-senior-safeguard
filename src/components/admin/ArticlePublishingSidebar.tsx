@@ -941,7 +941,7 @@ export function ArticlePublishingSidebar({
                 <div className="text-xs text-green-700">
                   invisionnetwork.org › blog › {article.slug || "article"}
                 </div>
-                <div className="text-lg text-blue-600 hover:underline cursor-pointer line-clamp-1">
+                <div className="text-lg text-primary hover:underline cursor-pointer line-clamp-1">
                   {article.seoTitle || article.title || "Your Article Title"}
                 </div>
                 <div className="text-sm text-gray-600 line-clamp-2">

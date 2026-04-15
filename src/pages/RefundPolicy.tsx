@@ -14,7 +14,7 @@ function RefundPolicy() {
       />
       <Navigation />
       <section className="py-24 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="container mx-auto">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-center mb-4">Refund Policy</h1>
             <p className="text-center text-muted-foreground mb-8 text-lg">
@@ -40,9 +40,9 @@ April 14, 2026
                   </div>
                 </div>
               </Card>
-              <Card className="p-6 border-blue-500/20 bg-blue-500/5">
+              <Card className="p-6 border-blue-500/20 bg-primary/50/5">
                 <div className="flex items-start gap-4">
-                  <Clock className="h-6 w-6 text-blue-500 flex-shrink-0 mt-1" />
+                  <Clock className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="font-semibold mb-2">Fast Processing</h3>
                     <p className="text-sm text-muted-foreground">

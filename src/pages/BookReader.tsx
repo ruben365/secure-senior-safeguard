@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BookOpen, ArrowLeft, ChevronLeft, ChevronRight, Lock, LogOut, Library, Link2, Clock, Bookmark } from "lucide-react";
 import { SEO } from "@/components/SEO";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/sonner";
 import { useToast } from "@/hooks/use-toast";
 import { ReadingModeToggle, MODE_CLASSES, CARD_CLASSES, FONT_SIZE_CLASSES } from "@/components/reader/ReadingModeToggle";
 import type { ReadingMode, FontSize } from "@/components/reader/ReadingModeToggle";
@@ -180,7 +180,7 @@ export default function BookReader() {
         <SEO title="Book Reader — InVision Network" description="Read your purchased books securely online." />
         <Navigation overlay />
         <div className={cn("min-h-screen pt-24 pb-16 transition-colors duration-300", MODE_CLASSES[readingMode])}>
-          <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="container mx-auto">
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
               <div>
@@ -328,7 +328,7 @@ export default function BookReader() {
         className={cn("secure-reader min-h-screen pt-24 pb-16 transition-colors duration-300", MODE_CLASSES[readingMode])}
         onContextMenu={handleContextMenu}
       >
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="container mx-auto max-w-4xl">
           {/* Reader Header */}
           <div className="flex items-center gap-2 mb-4 flex-wrap">
             <Button

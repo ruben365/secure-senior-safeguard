@@ -5,7 +5,7 @@ import { Calendar, Clock, MapPin } from "lucide-react";
 interface Event { id: string; title: string; start_time: string; location?: string; event_type?: string; }
 
 const typeStyle: Record<string, string> = {
-  meeting: "bg-blue-500/15 text-blue-400 border-blue-500/30",
+  meeting: "bg-primary/50/15 text-orange-400 border-primary/30",
   training: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
   deadline: "bg-red-500/15 text-red-400 border-red-500/30",
   review: "bg-purple-500/15 text-purple-400 border-purple-500/30",

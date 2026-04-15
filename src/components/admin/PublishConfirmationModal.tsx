@@ -49,7 +49,7 @@ export function PublishConfirmationModal({
           <DialogTitle className="flex items-center gap-2 text-2xl">
             {isUpdate ? (
               <>
-                <CheckCircle className="h-6 w-6 text-blue-500" />
+                <CheckCircle className="h-6 w-6 text-primary" />
                 Update Article?
               </>
             ) : isScheduled ? (

@@ -59,7 +59,7 @@ export function RecentActivity() {
           id: `inquiry-${inquiry.id}`,
           type: "inquiry",
           icon: "💬",
-          iconBg: "bg-blue-500",
+          iconBg: "bg-primary/50",
           description: `New contact form from ${inquiry.name || inquiry.email}`,
           timestamp: new Date(inquiry.created_at),
           link: `/admin/messages`,

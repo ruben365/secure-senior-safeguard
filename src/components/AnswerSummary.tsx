@@ -53,7 +53,7 @@ export function AnswerSummary({
           }}
         />
 
-        <div className="container mx-auto px-6 lg:px-8 max-w-[1600px]">
+        <div className="container mx-auto max-w-[1200px]">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 py-5 md:py-6">
             {/* Icon */}
             <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br from-[#d96c4a] to-[#b8552f] flex items-center justify-center shadow-[0_0_20px_-4px_rgba(217,108,74,0.5)]">

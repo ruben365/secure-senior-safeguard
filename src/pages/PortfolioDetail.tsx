@@ -39,7 +39,7 @@ const PortfolioDetail = () => {
     return (
       <div className="min-h-screen">
         <Navigation overlay />
-        <div className="pt-28 pb-20 container mx-auto px-6">
+        <div className="pt-28 pb-20 container mx-auto">
           <div className="animate-pulse space-y-6">
             <div className="h-8 w-48 bg-muted rounded" />
             <div className="h-96 bg-muted rounded-2xl" />
@@ -53,7 +53,7 @@ const PortfolioDetail = () => {
     return (
       <div className="min-h-screen">
         <Navigation overlay />
-        <div className="pt-28 pb-20 container mx-auto px-6 text-center">
+        <div className="pt-28 pb-20 container mx-auto text-center">
           <h1 className="text-2xl font-bold text-foreground mb-4">
             Project not found
           </h1>
@@ -78,7 +78,7 @@ const PortfolioDetail = () => {
       <Navigation overlay />
 
       <main className="pt-24 pb-16">
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container mx-auto">
           {/* Back */}
           <Link
             to="/portfolio"

@@ -13,21 +13,19 @@ export default {
   theme: {
     container: {
       center: true,
-      // Unified gutters so every `container mx-auto` across the site
-      // matches the nav / hero / footer edges exactly.
+      // Unified gutters — 32px horizontal padding for breathing room.
       padding: {
-        DEFAULT: "1.5rem", // px-6 on mobile
-        lg: "2rem",        // px-8 from lg+
+        DEFAULT: "2rem",   // 32px on all screens
+        sm: "2rem",
+        lg: "2rem",
       },
-      // Pin container to a single 1600px cap at every breakpoint so
-      // it behaves like max-w-[1600px] instead of stepping through
-      // the smaller Tailwind defaults.
+      // Pin container to 1200px — tighter "spine" for readability.
       screens: {
-        sm: "1600px",
-        md: "1600px",
-        lg: "1600px",
-        xl: "1600px",
-        "2xl": "1600px",
+        sm: "1200px",
+        md: "1200px",
+        lg: "1200px",
+        xl: "1200px",
+        "2xl": "1200px",
       },
     },
     screens: {

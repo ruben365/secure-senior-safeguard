@@ -52,7 +52,7 @@ const Hero = ({
   return (
     <div
       className={cn(
-        "relative w-full min-h-[75dvh] sm:min-h-[85dvh] md:min-h-[100dvh] lg:min-h-[110dvh] flex items-start sm:items-center overflow-hidden hero-mobile",
+        "relative w-full min-h-[100dvh] flex items-start sm:items-center overflow-hidden hero-mobile",
         className,
       )}
     >
@@ -114,16 +114,16 @@ const Hero = ({
         </div>
       )}
 
-      {/* Content — anchored left, matches HeroHomepage rhythm */}
-      <div className="w-full pt-24 pb-6 sm:py-32 md:py-40 lg:py-56 xl:py-64 relative z-10 text-left px-5 sm:px-8 md:px-[max(4rem,8%)]">
+      {/* Content — constrained to 1200px spine */}
+      <div className="w-full max-w-[1200px] mx-auto pt-[clamp(72px,10vw,100px)] pb-2 sm:pt-[clamp(100px,14vw,140px)] sm:pb-10 relative z-10 text-left px-8">
         <div className="max-w-[640px] animate-fade-in">
           {headline && (
-            <h1 className="text-white mb-4 sm:mb-6 md:mb-10 leading-[1.1] text-[clamp(1.75rem,5.75vw,4.5rem)] font-extrabold tracking-tight text-left">
+            <h1 className="text-white mb-3 sm:mb-4 md:mb-6 leading-[1.05] text-[clamp(1.5rem,6vw,1.75rem)] sm:text-[clamp(2.25rem,5.5vw,4.5rem)] font-bold tracking-[-0.02em] text-left">
               {headline}
             </h1>
           )}
           {subheadline && (
-            <p className="text-white/95 text-[15px] sm:text-lg md:text-2xl mb-8 md:mb-12 leading-relaxed text-left line-clamp-3 sm:line-clamp-none">
+            <p className="text-white/65 text-[13px] sm:text-base md:text-[17px] mb-4 sm:mb-6 md:mb-10 leading-snug sm:leading-[1.6] text-left line-clamp-2 sm:line-clamp-none max-w-[520px]">
               {subheadline}
             </p>
           )}

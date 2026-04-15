@@ -9,7 +9,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/sonner";
 import { Shield } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ROLE_CONFIGS } from "@/hooks/useUserRole";

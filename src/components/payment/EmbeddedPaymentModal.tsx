@@ -35,7 +35,7 @@ import {
   Smartphone,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/sonner";
 import { useStripeKey } from "@/hooks/useStripeKey";
 import useStripeElementLifecycle from "@/hooks/useStripeElementLifecycle";
 import useHostedCheckoutFallback from "@/hooks/useHostedCheckoutFallback";

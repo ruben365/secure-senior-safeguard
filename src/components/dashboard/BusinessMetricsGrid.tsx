@@ -141,7 +141,7 @@ export function BusinessMetricsGrid({
       value: leadsCaptured !== null ? leadsCaptured.toLocaleString() : null,
       change: leadsCaptured !== null ? 18 : null,
       icon: Users,
-      color: "bg-blue-500",
+      color: "bg-primary/50",
     },
     {
       title: "Response Time",

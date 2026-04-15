@@ -170,7 +170,7 @@ export default function IndividualClientDetail() {
         <Card className="lg:col-span-1 bg-[#111827] border-gray-800">
           <CardContent className="p-6">
             <div className="flex flex-col items-center text-center">
-              <Avatar className="w-24 h-24 border-4 border-cyan-500/30">
+              <Avatar className="w-24 h-24 border-4 border-primary/30">
                 <AvatarFallback className="bg-gradient-to-br from-cyan-500 to-blue-600 text-white text-2xl">
                   {getInitials(client.first_name, client.last_name)}
                 </AvatarFallback>
@@ -212,7 +212,7 @@ export default function IndividualClientDetail() {
           <CardContent className="space-y-4">
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="flex items-center gap-3 p-3 bg-gray-800/50 rounded-lg">
-                <Mail className="w-5 h-5 text-cyan-400" />
+                <Mail className="w-5 h-5 text-orange-400" />
                 <div>
                   <p className="text-xs text-gray-500">Email</p>
                   <p className="text-white">{client.email}</p>
@@ -257,7 +257,7 @@ export default function IndividualClientDetail() {
 
             <div className="p-4 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg border border-cyan-500/20">
               <p className="text-xs text-gray-500 mb-1">Total Spent</p>
-              <p className="text-2xl font-bold text-cyan-400">
+              <p className="text-2xl font-bold text-orange-400">
                 $
                 {(client.total_spent || 0).toLocaleString("en-US", {
                   minimumFractionDigits: 2,

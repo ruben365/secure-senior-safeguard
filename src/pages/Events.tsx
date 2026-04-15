@@ -55,8 +55,8 @@ export default function Events() {
       <Navigation />
 
       {/* Hero */}
-      <section className="py-20 bg-background text-center">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
+      <section className="min-h-[100dvh] flex items-center pt-[clamp(100px,14vw,140px)] pb-10 bg-background text-center">
+        <div className="container mx-auto max-w-3xl">
           <Badge className="mb-4">Ohio Cybersecurity Events</Badge>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
             Upcoming Workshops &amp; Events
@@ -69,7 +69,7 @@ export default function Events() {
 
       {/* Upcoming Events */}
       <section className="pb-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+        <div className="container mx-auto max-w-5xl">
           <h2 className="text-2xl font-bold mb-8">Upcoming Events</h2>
           <div className="space-y-6">
             {upcomingEvents.map((event) => (
@@ -116,7 +116,7 @@ export default function Events() {
 
       {/* Past Events */}
       <section className="py-12 bg-muted/30">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+        <div className="container mx-auto max-w-5xl">
           <h2 className="text-2xl font-bold mb-4">Past Events</h2>
           <p className="text-muted-foreground">No past events to display yet.</p>
         </div>
@@ -124,7 +124,7 @@ export default function Events() {
 
       {/* CTA */}
       <section className="py-16 text-center">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-2xl">
+        <div className="container mx-auto max-w-2xl">
           <h2 className="text-2xl font-bold mb-3">Want to Host a Workshop?</h2>
           <p className="text-muted-foreground mb-6">
             We bring cybersecurity workshops to senior centers, libraries, businesses, and community organizations across Ohio. Reach out to discuss bringing a session to your group.

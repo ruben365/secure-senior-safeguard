@@ -4,7 +4,7 @@ import { MapPin } from "lucide-react";
 export function OhioServiceMap() {
   return (
     <section className="py-8 md:py-12 lg:py-20 xl:py-24 bg-background">
-      <div className="container mx-auto px-4 max-w-full">
+      <div className="container mx-auto max-w-full">
         <div className="text-center mb-8 md:mb-12">
           <Badge
             className="mb-3 md:mb-4 text-sm md:text-base lg:text-lg px-3 md:px-4 lg:px-6 py-1.5 md:py-2"

@@ -68,7 +68,7 @@ function MyCourses() {
         onSignOut={handleSignOut}
       />
 
-      <main className="container mx-auto px-4 py-6 space-y-6">
+      <main className="container mx-auto py-6 space-y-6">
         {/* Progress Overview */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -106,8 +106,8 @@ function MyCourses() {
           <Card className="bg-gradient-to-br from-blue-500/10 to-blue-500/5">
             <CardContent className="p-6">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
-                  <Clock className="w-6 h-6 text-blue-600" />
+                <div className="w-12 h-12 rounded-full bg-primary/50/20 flex items-center justify-center">
+                  <Clock className="w-6 h-6 text-primary" />
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">In Progress</p>

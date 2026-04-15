@@ -172,7 +172,7 @@ const AutonomousDefenseHub = () => {
 
         <main>
           {/* ── HERO ── */}
-          <section className="relative overflow-hidden py-24 md:py-32 bg-gradient-to-br from-[#0a0f1e] via-[#111827] to-[#0a1628]">
+          <section className="relative overflow-hidden min-h-[100dvh] flex items-center pt-[clamp(100px,14vw,140px)] pb-10 bg-gradient-to-br from-[#0a0f1e] via-[#111827] to-[#0a1628]">
             {/* animated grid lines */}
             <div
               className="absolute inset-0 opacity-[0.06] hero-grid-overlay"
@@ -181,7 +181,7 @@ const AutonomousDefenseHub = () => {
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[100px] pointer-events-none" />
             <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/15 rounded-full blur-[80px] pointer-events-none" />
 
-            <div className="container mx-auto px-4 relative z-10 text-center">
+            <div className="container mx-auto relative z-10 text-center">
               <AnimatedSection animation="fade-up">
                 <Badge className="mb-6 bg-primary/20 text-primary border border-primary/30 text-xs font-bold uppercase tracking-widest px-4 py-1.5">
                   InVision Network — 2026 Roadmap
@@ -199,17 +199,16 @@ const AutonomousDefenseHub = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button
-                    size="lg"
-                    className="h-14 px-10 font-bold rounded-full bg-gradient-to-r from-primary to-accent text-white shadow-xl hover:opacity-90 transition-opacity"
+                    size="heroPill"
+                    variant="heroPrimary"
                     onClick={() => openBooking("Autonomous Defense Hub — Sentinel", 297, "Sentinel")}
                   >
-                    Request Early Access <ArrowRight className="ml-2 w-5 h-5" />
+                    Request Early Access <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                   <Button
                     asChild
-                    variant="outline"
-                    size="lg"
-                    className="h-14 px-10 font-bold rounded-full border-white/20 text-white hover:bg-white/10"
+                    size="heroPill"
+                    variant="heroOutline"
                   >
                     <Link to="/business">View All Services</Link>
                   </Button>
@@ -242,7 +241,7 @@ const AutonomousDefenseHub = () => {
           {/* FEATURE 1 — AGENTIC SOC */}
           {/* ──────────────────────────────────────────────────────────────────── */}
           <section className="py-20 md:py-28 bg-background">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto">
               <SectionHeader
                 badge="Feature 01 · Agentic SOC"
                 title={
@@ -273,7 +272,7 @@ const AutonomousDefenseHub = () => {
                       <p className="text-yellow-400">
                         [02:14:38] AGENT: Initiating secondary auth challenge via Signal
                       </p>
-                      <p className="text-blue-400">
+                      <p className="text-orange-400">
                         [02:14:41] AGENT: Biometric proof requested → Employee "J. Morton"
                       </p>
                       <p className="text-red-400">
@@ -324,7 +323,7 @@ const AutonomousDefenseHub = () => {
           {/* FEATURE 2 — INVISION VALIDATOR / TRUST PORTAL */}
           {/* ──────────────────────────────────────────────────────────────────── */}
           <section className="py-20 md:py-28 bg-muted/30">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto">
               <SectionHeader
                 badge="Feature 02 · InVision Validator"
                 title={
@@ -419,7 +418,7 @@ const AutonomousDefenseHub = () => {
           {/* FEATURE 3 — HONEY-IDENTITIES */}
           {/* ──────────────────────────────────────────────────────────────────── */}
           <section className="py-20 md:py-28 bg-background">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto">
               <SectionHeader
                 badge="Feature 03 · Honey-Identity Network"
                 title={
@@ -470,7 +469,7 @@ const AutonomousDefenseHub = () => {
                           {
                             time: "09:44:11",
                             msg: "Immunizing real client profile: blocking vector",
-                            color: "text-blue-400",
+                            color: "text-orange-400",
                           },
                           {
                             time: "09:44:13",
@@ -519,7 +518,7 @@ const AutonomousDefenseHub = () => {
           {/* FEATURE 4 — SAFE-ZONE HARDWARE KEY */}
           {/* ──────────────────────────────────────────────────────────────────── */}
           <section className="py-20 md:py-28 bg-muted/30">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto">
               <SectionHeader
                 badge="Feature 04 · Safe-Zone Key"
                 title={
@@ -602,7 +601,7 @@ const AutonomousDefenseHub = () => {
           {/* SUMMARY TABLE */}
           {/* ──────────────────────────────────────────────────────────────────── */}
           <section className="py-20 md:py-24 bg-background">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto">
               <SectionHeader
                 badge="InVision 2026 Roadmap"
                 title="Your Complete Defense Stack"
@@ -663,7 +662,7 @@ const AutonomousDefenseHub = () => {
           {/* PRICING TIERS */}
           {/* ──────────────────────────────────────────────────────────────────── */}
           <section className="py-20 md:py-28 bg-muted/30">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto">
               <SectionHeader
                 badge="Pricing"
                 title={
@@ -733,7 +732,7 @@ const AutonomousDefenseHub = () => {
           {/* ──────────────────────────────────────────────────────────────────── */}
           <section className="py-20 md:py-28 relative overflow-hidden bg-gradient-to-br from-[#0a0f1e] via-[#111827] to-[#0a1628]">
             <div className="absolute top-0 left-1/3 w-80 h-80 bg-primary/20 rounded-full blur-[100px] pointer-events-none" />
-            <div className="container mx-auto px-4 relative z-10 text-center">
+            <div className="container mx-auto relative z-10 text-center">
               <AnimatedSection animation="fade-up">
                 <h2 className="text-3xl md:text-5xl font-black text-white mb-6 leading-tight">
                   Ready to become{" "}
@@ -747,17 +746,16 @@ const AutonomousDefenseHub = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button
-                    size="lg"
-                    className="h-14 px-10 font-bold rounded-full bg-gradient-to-r from-primary to-accent text-white shadow-xl hover:opacity-90 transition-opacity"
+                    size="heroPill"
+                    variant="heroPrimary"
                     onClick={() => openBooking("Autonomous Defense Hub — Sentinel", 297, "Sentinel")}
                   >
-                    Reserve My Spot <ArrowRight className="ml-2 w-5 h-5" />
+                    Reserve My Spot <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                   <Button
                     asChild
-                    variant="outline"
-                    size="lg"
-                    className="h-14 px-10 font-bold rounded-full border-white/20 text-white hover:bg-white/10"
+                    size="heroPill"
+                    variant="heroOutline"
                   >
                     <a href={SITE.phone.tel}>Call {SITE.phone.display}</a>
                   </Button>

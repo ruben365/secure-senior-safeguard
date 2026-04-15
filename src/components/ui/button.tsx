@@ -10,22 +10,22 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: [
-          // WCAG AA compliant — #c2410c (4.6:1) to #9a3412 (6.5:1) with white
-          "bg-gradient-to-b from-[#c2410c] to-[#9a3412] text-white",
-          "border border-[#7c2d12]",
-          "hover:-translate-y-[1px] hover:from-[#ea580c] hover:to-[#c2410c]",
+          // Purple primary button
+          "bg-gradient-to-b from-[#7C3AED] to-[#6D28D9] text-white",
+          "border border-[#5B21B6]",
+          "hover:-translate-y-[1px] hover:from-[#8B5CF6] hover:to-[#7C3AED]",
           "active:translate-y-[0.5px]",
         ].join(" "),
         gold: [
-          "bg-gradient-to-b from-accent to-[hsl(308_23%_51%)] text-white",
-          "border border-accent/60",
-          "hover:translate-y-[-1px]",
+          "bg-gradient-to-b from-[#7C3AED] to-[#6D28D9] text-white",
+          "border border-[#5B21B6]",
+          "hover:translate-y-[-1px] hover:from-[#8B5CF6] hover:to-[#7C3AED]",
           "active:translate-y-[1px]",
         ].join(" "),
         outline: [
           "bg-gradient-to-b from-white to-slate-50 text-slate-800",
           "border-2 border-slate-300",
-          "hover:translate-y-[-1px] hover:border-primary/50 hover:text-primary hover:bg-gradient-to-b hover:from-white hover:to-orange-50/40",
+          "hover:translate-y-[-1px] hover:border-primary/50 hover:text-primary hover:bg-gradient-to-b hover:from-white hover:to-purple-50/40",
           "active:translate-y-[1px]",
         ].join(" "),
         outlineGold: [
@@ -46,18 +46,17 @@ const buttonVariants = cva(
           "border border-white/[0.30]",
           "hover:-translate-y-[1px] hover:bg-white/[0.20] hover:border-white/[0.50]",
           "active:translate-y-[0.5px] active:scale-[0.98]",
-          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[rgba(249,115,22,0.7)]",
+          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[rgba(124,58,237,0.7)]",
           "[transition-duration:250ms] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)]",
         ].join(" "),
         heroPrimary: [
-          // Hero primary — WCAG AA compliant (4.5:1+ white on dark orange)
-          // #c2410c = 4.6:1, #9a3412 = 6.5:1 with white text
-          "bg-gradient-to-b from-[#c2410c] to-[#9a3412]",
+          // Hero primary — purple accent
+          "bg-gradient-to-b from-[#7C3AED] to-[#6D28D9]",
           "text-white font-semibold",
-          "border border-[#7c2d12]",
-          "hover:-translate-y-[1px] hover:from-[#ea580c] hover:to-[#c2410c]",
+          "border border-[#5B21B6]",
+          "hover:-translate-y-[1px] hover:from-[#8B5CF6] hover:to-[#7C3AED]",
           "active:translate-y-[0.5px] active:scale-[0.98]",
-          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[rgba(249,115,22,0.7)]",
+          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[rgba(124,58,237,0.7)]",
           "[transition-duration:250ms] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)]",
         ].join(" "),
         destructive: [

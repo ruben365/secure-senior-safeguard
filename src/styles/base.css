@@ -28,20 +28,20 @@
 @layer base {
 
   :root {
-    /* ── Core Surfaces ── */
-    --background: 210 40% 98%;       /* #F5F9FC — cool off-white */
-    --foreground: 213 60% 12%;       /* #0D2137 — deep navy text */
+    /* ── Core Surfaces — White & Clean ── */
+    --background: 0 0% 100%;         /* #FFFFFF — pure white */
+    --foreground: 240 20% 16%;       /* #1E1E2E — dark charcoal */
 
-    /* ── Primary: Warm Orange (was trust blue) ── */
-    --primary: 14 65% 57%;           /* #d96c4a — warm terracotta orange */
+    /* ── Primary: Purple ── */
+    --primary: 263 70% 58%;          /* #7C3AED — purple */
     --primary-foreground: 0 0% 100%;
 
-    /* ── Secondary: Sky Blue ── */
-    --secondary: 207 84% 94%;        /* #E0F0FC — soft blue tint */
-    --secondary-foreground: 207 89% 28%; /* deep blue text */
+    /* ── Secondary: Soft Neutral ── */
+    --secondary: 220 15% 95%;        /* #F0F1F3 — neutral gray */
+    --secondary-foreground: 240 20% 25%;
 
-    /* ── Accent / CTA: Signal Orange ── */
-    --accent: 25 95% 53%;            /* #F97316 — high-energy CTA */
+    /* ── Accent / CTA: Purple ── */
+    --accent: 263 70% 58%;           /* #7C3AED — matching purple */
     --accent-foreground: 0 0% 100%;
 
     /* ── Success: Protected Green ── */
@@ -52,21 +52,21 @@
     --destructive: 0 72% 51%;        /* #DC2626 */
     --destructive-foreground: 0 0% 100%;
 
-    /* ── Card & Popover ── */
+    /* ── Card & Popover — glass-ready ── */
     --card: 0 0% 100%;
-    --card-foreground: 213 60% 12%;
+    --card-foreground: 220 30% 14%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 213 60% 12%;
+    --popover-foreground: 220 30% 14%;
 
     /* ── Muted ── */
-    --muted: 210 30% 93%;            /* #E4EDF5 */
-    --muted-foreground: 215 20% 45%; /* #637080 */
+    --muted: 220 15% 95%;            /* #F0F1F3 — light neutral */
+    --muted-foreground: 220 9% 46%;  /* #6B7280 — gray body text */
 
     /* ── Borders & Inputs ── */
-    --border: 210 28% 86%;           /* #CAD8E6 */
-    --input: 210 30% 93%;
-    --ring: 14 65% 57%;              /* matches new primary */
+    --border: 220 13% 90%;           /* #E5E7EB */
+    --input: 220 15% 95%;
+    --ring: 263 70% 58%;             /* matches purple primary */
 
     /* ── Radius scale — use these tokens for consistent rounding ── */
     --radius-xs:   0.25rem;   /* 4px  — tight: badges, chips */
@@ -227,9 +227,9 @@
     --sidebar-border: 215 28% 18%;
     --sidebar-ring: 207 89% 50%;
 
-    /* ── Spacing scale (rem-based, zoom-agnostic) ──
-       Usage: var(--space-4) = 1rem = 16px CSS = 12px visual (with 0.75 zoom)
-       For touch targets, always use min-h-[52px] (39px visual) */
+    /* ── Spacing scale (rem-based) ──
+       Usage: var(--space-4) = 1rem = 16px
+       For touch targets, use min-h-[44px] */
     --space-1:   0.25rem;   /*  4px  */
     --space-2:   0.5rem;    /*  8px  */
     --space-3:   0.75rem;   /* 12px  */
@@ -261,37 +261,37 @@
     --container-wide: 1280px;
     --container-max:  1440px;
 
-    /* Global text scale — 0.875 = 14px base (compact but readable) */
-    --text-scale: 0.875;
+    /* Global text scale — standard 16px base */
+    --text-scale: 1;
 
   }
 
   .dark {
-    --background: 215 40% 8%;
-    --foreground: 210 20% 94%;
-    --card: 215 36% 12%;
-    --card-foreground: 210 20% 94%;
-    --popover: 215 36% 12%;
-    --popover-foreground: 210 20% 94%;
-    --primary: 14 65% 57%;
+    --background: 224 30% 8%;         /* deep dark */
+    --foreground: 220 15% 93%;        /* light text */
+    --card: 224 25% 12%;
+    --card-foreground: 220 15% 93%;
+    --popover: 224 25% 12%;
+    --popover-foreground: 220 15% 93%;
+    --primary: 263 70% 58%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 215 28% 18%;
-    --secondary-foreground: 210 20% 90%;
-    --muted: 215 24% 16%;
-    --muted-foreground: 210 16% 58%;
-    --accent: 25 95% 53%;
+    --secondary: 224 20% 18%;
+    --secondary-foreground: 220 15% 90%;
+    --muted: 224 18% 16%;
+    --muted-foreground: 220 10% 58%;
+    --accent: 263 70% 58%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 72% 55%;
     --destructive-foreground: 0 0% 100%;
-    --border: 215 24% 20%;
-    --input: 215 24% 18%;
-    --ring: 14 65% 57%;
-    --sidebar-background: 215 44% 6%;
-    --sidebar-foreground: 210 18% 92%;
-    --sidebar-primary: 207 84% 55%;
+    --border: 224 18% 20%;
+    --input: 224 18% 18%;
+    --ring: 263 70% 58%;
+    --sidebar-background: 224 30% 6%;
+    --sidebar-foreground: 220 15% 92%;
+    --sidebar-primary: 263 70% 58%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 215 32% 14%;
-    --sidebar-accent-foreground: 210 18% 90%;
+    --sidebar-accent: 224 22% 14%;
+    --sidebar-accent-foreground: 220 15% 90%;
     --sidebar-border: 215 28% 14%;
     --sidebar-ring: 207 84% 55%;
   }
@@ -358,7 +358,7 @@
     overflow-x: hidden;
     width: 100%;
     scrollbar-gutter: stable;
-    font-size: calc(16px * var(--text-scale));
+    font-size: 16px;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
   }
@@ -395,11 +395,7 @@
     }
   }
 
-  @media (max-width: 768px) {
-    :root {
-      --text-scale: 1; /* full 16px base on mobile for readability — no shrinking */
-    }
-  }
+  /* text-scale removed — standard 16px base everywhere */
 
   /* Accessibility - Skip to content link */
   .skip-to-content {
@@ -480,12 +476,6 @@
     contain: style;
     position: relative;
     z-index: 1;
-    zoom: 0.75;
-  }
-
-  /* Keep navigation at full size by counter-scaling the zoom */
-  nav {
-    zoom: calc(1 / 0.75);
   }
 
   /* Prevent image flicker and layout shift */
@@ -523,53 +513,53 @@
   }
 
   h1 {
-    /* Compact: ~28-36px range (was 34-64px with old zoom) */
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    /* Standard: 32–56px */
+    font-size: clamp(2rem, 5vw, 3.5rem);
     letter-spacing: -0.02em;
     line-height: 1.1;
     font-weight: 900;
   }
 
   h2 {
-    /* Compact: ~22-28px range */
-    font-size: clamp(1.375rem, 3vw, 2rem);
+    /* Standard: 24–40px */
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
     letter-spacing: -0.015em;
     line-height: 1.15;
     font-weight: 800;
   }
 
   h3 {
-    /* Compact: ~18-22px range */
-    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    /* Standard: 20–30px */
+    font-size: clamp(1.25rem, 3vw, 1.875rem);
     letter-spacing: -0.01em;
     line-height: 1.2;
     font-weight: 700;
   }
 
   h4 {
-    /* Compact: ~16-18px range */
-    font-size: clamp(1rem, 1.5vw + 0.25rem, 1.25rem);
+    /* Standard: 18–24px */
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
     letter-spacing: -0.008em;
     line-height: 1.25;
     font-weight: 600;
   }
 
   h5 {
-    font-size: clamp(0.9375rem, 1vw + 0.2rem, 1.125rem);
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
     letter-spacing: -0.01em;
     line-height: 1.3;
     font-weight: 600;
   }
 
   h6 {
-    font-size: clamp(0.875rem, 0.5vw + 0.2rem, 1rem);
+    font-size: clamp(0.9375rem, 1vw, 1.125rem);
     letter-spacing: -0.008em;
     line-height: 1.4;
     font-weight: 600;
   }
 
   p {
-    font-size: 0.9375rem; /* 15px at 16px base, ~13px with 0.85 scale */
+    font-size: 1rem;      /* standard 16px */
     line-height: 1.65;
     letter-spacing: -0.011em;
     margin: 0 0 0.75rem;

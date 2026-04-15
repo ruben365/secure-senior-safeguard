@@ -173,7 +173,7 @@ const AIAutomation = () => {
 
           {/* Stats Section */}
           <section className="py-12 bg-card border-y border-border">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 <div>
                   <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
@@ -205,7 +205,7 @@ const AIAutomation = () => {
 
           {/* Features Grid */}
           <section className="py-20">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
                   Complete Follow-Up Automation Suite
@@ -240,7 +240,7 @@ const AIAutomation = () => {
 
           {/* Automation Types */}
           <section className="py-20 bg-card">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
                   Ready-to-Deploy Automation Templates
@@ -275,7 +275,7 @@ const AIAutomation = () => {
 
           {/* Process Section */}
           <section className="py-20">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
                   How We Build Your Automation
@@ -305,7 +305,7 @@ const AIAutomation = () => {
 
           {/* Pricing Preview */}
           <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-accent/5">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto">
               <div className="max-w-3xl mx-auto text-center">
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">
                   Investment That Pays for Itself
@@ -334,13 +334,13 @@ const AIAutomation = () => {
                   </ul>
                   <Button
                     asChild
-                    size="xl"
-                    variant="gold"
+                    size="heroPill"
+                    variant="heroPrimary"
                     className="w-full sm:w-auto"
                   >
                     <Link to="/contact">
                       Schedule Consultation
-                      <ArrowRight className="ml-2 h-5 w-5" />
+                      <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
                 </Card>
@@ -350,7 +350,7 @@ const AIAutomation = () => {
 
           {/* CTA Section */}
           <section className="py-20 bg-card">
-            <div className="container mx-auto px-4 text-center">
+            <div className="container mx-auto text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 Ready to Automate Your Follow-Ups?
               </h2>
@@ -359,13 +359,13 @@ const AIAutomation = () => {
                 close rate.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="xl" variant="gold">
+                <Button asChild size="heroPill" variant="heroPrimary">
                   <Link to="/contact">
                     Start Your Automation Journey
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-                <Button asChild size="xl" variant="outline">
+                <Button asChild size="heroPill" variant="heroOutline">
                   <Link to="/business/ai-receptionist">
                     Explore AI Receptionist
                   </Link>

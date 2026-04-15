@@ -32,7 +32,7 @@ export const PromoStrip = () => {
       <div className="absolute top-10 left-1/3 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
       
-      <div className="container mx-auto px-4 md:px-6 lg:px-12 relative">
+      <div className="container mx-auto md:px-6 lg:px-8 relative">
         <div className="text-center mb-14">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary mb-4">
             How It Works

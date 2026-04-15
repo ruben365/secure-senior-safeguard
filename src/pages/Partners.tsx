@@ -50,8 +50,8 @@ export default function Partners() {
       <Navigation />
 
       {/* Hero */}
-      <section className="py-20 bg-background text-center">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
+      <section className="min-h-[100dvh] flex items-center pt-[clamp(100px,14vw,140px)] pb-10 bg-background text-center">
+        <div className="container mx-auto max-w-3xl">
           <Badge className="mb-4">Trust & Transparency</Badge>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
             Our Partners &amp; Certifications
@@ -64,7 +64,7 @@ export default function Partners() {
 
       {/* Technology Partners */}
       <section className="py-12">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+        <div className="container mx-auto max-w-5xl">
           <div className="flex items-center gap-3 mb-6">
             <Shield className="w-6 h-6 text-orange-500" />
             <h2 className="text-2xl font-bold">Technology Partners</h2>
@@ -87,7 +87,7 @@ export default function Partners() {
 
       {/* Community Partners */}
       <section className="py-12 bg-muted/30">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+        <div className="container mx-auto max-w-5xl">
           <div className="flex items-center gap-3 mb-6">
             <Handshake className="w-6 h-6 text-orange-500" />
             <h2 className="text-2xl font-bold">Community Partners</h2>
@@ -109,7 +109,7 @@ export default function Partners() {
 
       {/* Certifications */}
       <section className="py-12">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+        <div className="container mx-auto max-w-5xl">
           <div className="flex items-center gap-3 mb-6">
             <GraduationCap className="w-6 h-6 text-orange-500" />
             <h2 className="text-2xl font-bold">Certifications</h2>
@@ -126,7 +126,7 @@ export default function Partners() {
 
       {/* CTA */}
       <section className="py-16 bg-muted/30 text-center">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-2xl">
+        <div className="container mx-auto max-w-2xl">
           <h2 className="text-2xl font-bold mb-3">Become a Partner</h2>
           <p className="text-muted-foreground mb-6">
             Interested in partnering with InVision Network? We'd love to collaborate with organizations aligned with our mission of protecting Ohio communities.

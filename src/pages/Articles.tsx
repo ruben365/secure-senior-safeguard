@@ -7,6 +7,7 @@ import TrustBar from "@/components/TrustBar";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { HeroCTA } from "@/components/shared/HeroCTA";
 import { Calendar, Clock, ArrowRight, Loader2, BookOpen } from "lucide-react";
 import heroResourcesNew from "@/assets/hero-resources-new.jpg";
 import { useArticles } from "@/hooks/useArticles";
@@ -61,13 +62,20 @@ function Articles() {
         backgroundImages={articlesHeroImages}
         headline="Scam Prevention Articles & News"
         subheadline="Stay informed about the latest scam threats and protection strategies"
-      />
+      >
+        <HeroCTA
+          primaryText="Get Protected"
+          primaryHref="/training#pricing"
+          secondaryText="Contact Us"
+          secondaryHref="/contact"
+        />
+      </Hero>
 
       <TrustBar />
 
       {/* Articles Grid */}
       <section className="py-16 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="container mx-auto">
           {isLoading ? (
             <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
               <Loader2 className="w-8 h-8 animate-spin text-primary" />

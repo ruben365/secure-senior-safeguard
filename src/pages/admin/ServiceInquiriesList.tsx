@@ -190,7 +190,7 @@ const ServiceInquiriesList = () => {
   const getServiceBadge = (service: string) => {
     const colors: Record<string, string> = {
       "ai-automation": "bg-purple-100 text-purple-800",
-      "website-design": "bg-blue-100 text-blue-800",
+      "website-design": "bg-primary/10 text-primary",
       "ai-consultation": "bg-green-100 text-green-800",
       "ai-receptionist": "bg-orange-100 text-orange-800",
     };
@@ -230,14 +230,14 @@ const ServiceInquiriesList = () => {
       <div className="space-y-6">
         {/* Stats Cards */}
         <div className="grid gap-4 md:grid-cols-4">
-          <Card className="border-l-4 border-l-blue-500">
+          <Card className="border-l-4 border-l-primary">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground">New</p>
                   <p className="text-2xl font-bold">{newCount}</p>
                 </div>
-                <Clock className="h-8 w-8 text-blue-500" />
+                <Clock className="h-8 w-8 text-primary" />
               </div>
             </CardContent>
           </Card>
