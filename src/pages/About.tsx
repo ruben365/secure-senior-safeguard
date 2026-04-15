@@ -291,32 +291,6 @@ function About() {
               </blockquote>
             </Card>
 
-            <Card className="p-5 sm:p-6 border border-border/40 bg-card/70 backdrop-blur-xl shadow-sm hover:shadow-lg hover:border-primary/20 transition-all duration-300 hover:-translate-y-1">
-              <div className="relative mb-4">
-                <div className="w-full aspect-[4/3] bg-gradient-to-br from-accent/10 to-primary/10 rounded-xl flex items-center justify-center border-2 border-dashed border-accent/30">
-                  <div className="text-center p-4">
-                    <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-accent/10 flex items-center justify-center">
-                      <span className="text-3xl font-bold text-accent">C</span>
-                    </div>
-                    <p className="text-xs text-muted-foreground">Photo Coming Soon</p>
-                  </div>
-                </div>
-                <Badge className="absolute top-3 right-3 bg-primary text-primary-foreground text-[10px]">Co-Founder & COO</Badge>
-              </div>
-              <h3 className="text-xl font-black mb-1.5 text-foreground">Co-Founder &amp; COO</h3>
-              <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
-                Registered Nurse with 4 years of clinical experience and a
-                heart for community wellness. After experiencing identity
-                theft alongside her husband, our COO channeled her
-                compassionate care approach into designing trauma-informed
-                cybersecurity training that meets people where they are -
-                especially seniors and vulnerable populations.
-              </p>
-              <blockquote className="border-l-2 border-primary pl-3 italic text-xs text-muted-foreground">
-                "Technology should empower, not intimidate. We're here to
-                bridge that gap."
-              </blockquote>
-            </Card>
           </div>
         </div>
       </section>
