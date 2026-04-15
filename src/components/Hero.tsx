@@ -115,7 +115,7 @@ const Hero = ({
       )}
 
       {/* Content — constrained to 1200px spine */}
-      <div className="w-full max-w-[1200px] mx-auto pt-24 pb-4 sm:pt-28 sm:pb-8 md:pt-32 md:pb-10 lg:pt-36 lg:pb-10 relative z-10 text-left px-8">
+      <div className="w-full max-w-[1200px] mx-auto pt-[clamp(72px,10vw,100px)] pb-2 sm:pt-[clamp(100px,14vw,140px)] sm:pb-10 relative z-10 text-left px-8">
         <div className="max-w-[640px] animate-fade-in">
           {headline && (
             <h1 className="text-white mb-3 sm:mb-4 md:mb-6 leading-[1.05] text-[clamp(1.5rem,6vw,1.75rem)] sm:text-[clamp(2.25rem,5.5vw,4.5rem)] font-bold tracking-[-0.02em] text-left">

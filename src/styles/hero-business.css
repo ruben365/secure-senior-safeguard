@@ -104,9 +104,9 @@
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  padding-top: clamp(100px, 12vw, 130px);
+  padding-top: clamp(100px, 14vw, 140px);
   padding-right: 2rem;
-  padding-bottom: clamp(160px, 14vw, 200px);
+  padding-bottom: 2.5rem;
   padding-left: 2rem;
 }
 
