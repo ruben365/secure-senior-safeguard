@@ -189,7 +189,7 @@ function QRCodePayment({
           animate={{ opacity: 1, y: 0 }}
           className="space-y-4"
         >
-          <div className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+          <div className="p-6 bg-card border border-border rounded-xl shadow-sm">
             <Smartphone className="w-12 h-12 mx-auto mb-3 text-primary" />
             <h4 className="font-semibold mb-2">Pay with Your Phone</h4>
             <p className="text-sm text-muted-foreground">
@@ -632,7 +632,7 @@ function CardPaymentWrapper({
             <h3 className="text-[14px] font-semibold text-foreground">Payment</h3>
           </div>
 
-          <div className="p-2.5 bg-white border border-gray-200 rounded-lg text-[13px] flex items-center gap-2 text-muted-foreground shadow-sm">
+          <div className="p-2.5 bg-card border border-border rounded-lg text-[13px] flex items-center gap-2 text-muted-foreground shadow-sm">
             <CheckCircle className="w-3.5 h-3.5 text-primary" />
             <span>
               Paying as <strong className="text-foreground">{formData.email}</strong>
@@ -827,7 +827,7 @@ export function EnhancedCheckoutDialog({
           {/* Order Summary Sidebar - Compact */}
           <div className="md:col-span-2">
             <div className="space-y-3">
-              <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-4">
+              <div className="bg-card border border-border rounded-xl shadow-sm p-4">
                 <h4 className="font-semibold text-sm mb-2 text-foreground">Order Summary</h4>
                 <div className="space-y-1 mb-3">
                   {items.slice(0, 3).map((item) => (

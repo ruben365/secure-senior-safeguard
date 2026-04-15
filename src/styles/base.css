@@ -513,16 +513,16 @@
   }
 
   h1 {
-    /* Standard: 32–56px */
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    /* Phone: 26px → Desktop: 48px */
+    font-size: clamp(1.625rem, 4.5vw, 3rem);
     letter-spacing: -0.02em;
     line-height: 1.1;
     font-weight: 900;
   }
 
   h2 {
-    /* Standard: 24–40px */
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    /* Phone: 22px → Desktop: 34px */
+    font-size: clamp(1.375rem, 3.5vw, 2.125rem);
     letter-spacing: -0.015em;
     line-height: 1.15;
     font-weight: 800;

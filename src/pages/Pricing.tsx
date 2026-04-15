@@ -106,7 +106,7 @@ export default function Pricing() {
                   className={`rounded-xl border p-8 flex flex-col ${
                     plan.highlight
                       ? "border-primary shadow-lg shadow-primary/10 bg-primary/5 dark:bg-primary/10"
-                      : "border-gray-200 bg-white shadow-sm"
+                      : "border-border bg-card shadow-sm"
                   }`}
                 >
                   {plan.highlight && (
@@ -145,14 +145,14 @@ export default function Pricing() {
         <div className="container mx-auto max-w-3xl text-center">
           <h2 className="text-2xl font-bold mb-4">Our Commitment to You</h2>
           <div className="grid sm:grid-cols-2 gap-6 text-left">
-            <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
+            <div className="bg-card border border-border rounded-xl shadow-sm p-6">
               <Award className="w-7 h-7 text-primary mb-2" />
               <h3 className="font-semibold mb-1">Veteran Discount — 10% Off</h3>
               <p className="text-sm text-muted-foreground">
                 We proudly support those who served. Active duty military and veterans receive 10% off all plans. Contact us to verify and apply your discount.
               </p>
             </div>
-            <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
+            <div className="bg-card border border-border rounded-xl shadow-sm p-6">
               <Star className="w-7 h-7 text-primary mb-2" />
               <h3 className="font-semibold mb-1">30-Day Money-Back Guarantee</h3>
               <p className="text-sm text-muted-foreground">

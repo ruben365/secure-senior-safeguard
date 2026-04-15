@@ -364,7 +364,7 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
               />
 
               {/* Total bar — squeezed peach strip */}
-              <div className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg shadow-sm">
+              <div className="px-3 py-1.5 bg-card border border-border rounded-lg shadow-sm">
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-muted-foreground">
                     {donationType === "monthly" ? "Monthly" : "Total"}
