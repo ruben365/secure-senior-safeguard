@@ -181,7 +181,7 @@ const AutonomousDefenseHub = () => {
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[100px] pointer-events-none" />
             <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/15 rounded-full blur-[80px] pointer-events-none" />
 
-            <div className="container mx-auto px-4 relative z-10 text-center">
+            <div className="container mx-auto px-6 relative z-10 text-center">
               <AnimatedSection animation="fade-up">
                 <Badge className="mb-6 bg-primary/20 text-primary border border-primary/30 text-xs font-bold uppercase tracking-widest px-4 py-1.5">
                   InVision Network — 2026 Roadmap
@@ -241,7 +241,7 @@ const AutonomousDefenseHub = () => {
           {/* FEATURE 1 — AGENTIC SOC */}
           {/* ──────────────────────────────────────────────────────────────────── */}
           <section className="py-20 md:py-28 bg-background">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto px-6 lg:px-12">
               <SectionHeader
                 badge="Feature 01 · Agentic SOC"
                 title={
@@ -323,7 +323,7 @@ const AutonomousDefenseHub = () => {
           {/* FEATURE 2 — INVISION VALIDATOR / TRUST PORTAL */}
           {/* ──────────────────────────────────────────────────────────────────── */}
           <section className="py-20 md:py-28 bg-muted/30">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto px-6 lg:px-12">
               <SectionHeader
                 badge="Feature 02 · InVision Validator"
                 title={
@@ -418,7 +418,7 @@ const AutonomousDefenseHub = () => {
           {/* FEATURE 3 — HONEY-IDENTITIES */}
           {/* ──────────────────────────────────────────────────────────────────── */}
           <section className="py-20 md:py-28 bg-background">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto px-6 lg:px-12">
               <SectionHeader
                 badge="Feature 03 · Honey-Identity Network"
                 title={
@@ -518,7 +518,7 @@ const AutonomousDefenseHub = () => {
           {/* FEATURE 4 — SAFE-ZONE HARDWARE KEY */}
           {/* ──────────────────────────────────────────────────────────────────── */}
           <section className="py-20 md:py-28 bg-muted/30">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto px-6 lg:px-12">
               <SectionHeader
                 badge="Feature 04 · Safe-Zone Key"
                 title={
@@ -601,7 +601,7 @@ const AutonomousDefenseHub = () => {
           {/* SUMMARY TABLE */}
           {/* ──────────────────────────────────────────────────────────────────── */}
           <section className="py-20 md:py-24 bg-background">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto px-6 lg:px-12">
               <SectionHeader
                 badge="InVision 2026 Roadmap"
                 title="Your Complete Defense Stack"
@@ -662,7 +662,7 @@ const AutonomousDefenseHub = () => {
           {/* PRICING TIERS */}
           {/* ──────────────────────────────────────────────────────────────────── */}
           <section className="py-20 md:py-28 bg-muted/30">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="container mx-auto px-6 lg:px-12">
               <SectionHeader
                 badge="Pricing"
                 title={
@@ -732,7 +732,7 @@ const AutonomousDefenseHub = () => {
           {/* ──────────────────────────────────────────────────────────────────── */}
           <section className="py-20 md:py-28 relative overflow-hidden bg-gradient-to-br from-[#0a0f1e] via-[#111827] to-[#0a1628]">
             <div className="absolute top-0 left-1/3 w-80 h-80 bg-primary/20 rounded-full blur-[100px] pointer-events-none" />
-            <div className="container mx-auto px-4 relative z-10 text-center">
+            <div className="container mx-auto px-6 relative z-10 text-center">
               <AnimatedSection animation="fade-up">
                 <h2 className="text-3xl md:text-5xl font-black text-white mb-6 leading-tight">
                   Ready to become{" "}

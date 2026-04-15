@@ -17,7 +17,7 @@ export default function PaymentCanceled() {
       <Navigation />
 
       <div className="min-h-screen bg-gradient-to-b from-background via-secondary/20 to-background">
-        <div className="container mx-auto px-4 py-20">
+        <div className="container mx-auto px-6 py-20">
           <div className="max-w-2xl mx-auto">
             {/* Cancel Icon */}
             <div className="text-center mb-8">

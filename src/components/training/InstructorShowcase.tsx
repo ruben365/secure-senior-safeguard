@@ -105,7 +105,7 @@ export const InstructorShowcase = () => {
   return (
     <>
       <section className="py-10 sm:py-16 md:py-20 bg-muted/30">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="container mx-auto px-6 lg:px-12">
           <div className="text-center mb-14">
             <span className="inline-block text-xs uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
               Meet Your Instructors

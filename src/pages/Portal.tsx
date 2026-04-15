@@ -178,7 +178,7 @@ function Portal() {
   return (
     <div className="min-h-screen bg-[#0B1120]">
       <header className="border-b border-gray-800/60 bg-[#111827]/80 backdrop-blur-sm sticky top-0 z-10">
-        <div className="container mx-auto px-4 py-3 sm:py-4">
+        <div className="container mx-auto px-6 py-3 sm:py-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
@@ -201,7 +201,7 @@ function Portal() {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8 sm:py-12">
+      <main className="container mx-auto px-6 py-8 sm:py-12">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Select Your Dashboard</h2>

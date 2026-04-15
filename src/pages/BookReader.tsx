@@ -180,7 +180,7 @@ export default function BookReader() {
         <SEO title="Book Reader — InVision Network" description="Read your purchased books securely online." />
         <Navigation overlay />
         <div className={cn("min-h-screen pt-24 pb-16 transition-colors duration-300", MODE_CLASSES[readingMode])}>
-          <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="container mx-auto px-6 lg:px-12">
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
               <div>
@@ -328,7 +328,7 @@ export default function BookReader() {
         className={cn("secure-reader min-h-screen pt-24 pb-16 transition-colors duration-300", MODE_CLASSES[readingMode])}
         onContextMenu={handleContextMenu}
       >
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="container mx-auto px-6 max-w-4xl">
           {/* Reader Header */}
           <div className="flex items-center gap-2 mb-4 flex-wrap">
             <Button

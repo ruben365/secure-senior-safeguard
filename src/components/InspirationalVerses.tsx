@@ -142,7 +142,7 @@ export function InspirationalVerses() {
 
   return (
     <section className="py-6 md:py-10 bg-gradient-to-b from-background to-secondary/10">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-6">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-4">
             <Badge

@@ -75,7 +75,7 @@ function Articles() {
 
       {/* Articles Grid */}
       <section className="py-16 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="container mx-auto px-6 lg:px-12">
           {isLoading ? (
             <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
               <Loader2 className="w-8 h-8 animate-spin text-primary" />

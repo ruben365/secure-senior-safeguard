@@ -99,7 +99,7 @@ export default function LibraryPage() {
       <main id="main-content" tabIndex={-1} className="flex-1">
         {/* Hero */}
         <section className="bg-gradient-to-br from-primary/10 via-background to-purple-50/50 border-b py-14">
-          <div className="container mx-auto px-4 max-w-5xl text-center">
+          <div className="container mx-auto px-6 max-w-5xl text-center">
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary rounded-full px-4 py-1.5 text-sm font-medium mb-4">
               <Sparkles className="h-4 w-4" />
               AI-Updated Content
@@ -130,7 +130,7 @@ export default function LibraryPage() {
 
         {/* Filters */}
         <section className="border-b bg-background/80 sticky top-16 z-10 backdrop-blur-sm">
-          <div className="container mx-auto px-4 max-w-6xl py-3">
+          <div className="container mx-auto px-6 max-w-6xl py-3">
             <div className="flex flex-col sm:flex-row gap-3">
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -163,7 +163,7 @@ export default function LibraryPage() {
         </section>
 
         {/* Book grid */}
-        <section className="container mx-auto px-4 py-10 max-w-6xl">
+        <section className="container mx-auto px-6 py-10 max-w-6xl">
           {filtered.length === 0 ? (
             <div className="text-center py-20 text-muted-foreground">
               <BookOpen className="mx-auto mb-4 h-10 w-10 opacity-50" />
@@ -264,7 +264,7 @@ export default function LibraryPage() {
 
         {/* Bulk CTA */}
         <section className="bg-primary/5 border-t py-12">
-          <div className="container mx-auto px-4 max-w-3xl text-center">
+          <div className="container mx-auto px-6 max-w-3xl text-center">
             <Users className="mx-auto mb-4 h-10 w-10 text-primary" />
             <h2 className="text-2xl font-bold mb-3">Ordering for a Group or Organization?</h2>
             <p className="text-muted-foreground mb-6">

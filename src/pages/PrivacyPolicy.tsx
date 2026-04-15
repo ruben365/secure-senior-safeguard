@@ -21,7 +21,7 @@ function PrivacyPolicy() {
       <ReadingProgressBar />
       <Navigation />
       <section className="py-24 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-center mb-4">Privacy Policy</h1>
             <p className="text-center text-muted-foreground mb-8 text-lg">

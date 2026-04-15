@@ -69,7 +69,7 @@ export default function Sitemap() {
       <Navigation />
 
       <section className="py-20 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+        <div className="container mx-auto px-6 lg:px-8 max-w-4xl">
           <h1 className="text-4xl font-extrabold tracking-tight mb-2">Sitemap</h1>
           <p className="text-muted-foreground mb-12">All pages on InVision Network's website.</p>
 
