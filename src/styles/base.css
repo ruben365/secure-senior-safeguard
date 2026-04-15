@@ -28,20 +28,20 @@
 @layer base {
 
   :root {
-    /* ── Core Surfaces — Clean Glassmorphism ── */
-    --background: 220 20% 97%;       /* #F4F6F8 — clean light gray */
-    --foreground: 220 30% 14%;       /* #1A2332 — dark slate */
+    /* ── Core Surfaces — White & Clean ── */
+    --background: 0 0% 100%;         /* #FFFFFF — pure white */
+    --foreground: 240 20% 16%;       /* #1E1E2E — dark charcoal */
 
-    /* ── Primary: Warm Terracotta ── */
-    --primary: 14 65% 57%;           /* #d96c4a — warm terracotta orange */
+    /* ── Primary: Purple ── */
+    --primary: 263 70% 58%;          /* #7C3AED — purple */
     --primary-foreground: 0 0% 100%;
 
     /* ── Secondary: Soft Neutral ── */
-    --secondary: 220 15% 93%;        /* #EBEEF2 — neutral gray */
-    --secondary-foreground: 220 25% 25%;
+    --secondary: 220 15% 95%;        /* #F0F1F3 — neutral gray */
+    --secondary-foreground: 240 20% 25%;
 
-    /* ── Accent / CTA: Signal Orange ── */
-    --accent: 25 95% 53%;            /* #F97316 — high-energy CTA */
+    /* ── Accent / CTA: Purple ── */
+    --accent: 263 70% 58%;           /* #7C3AED — matching purple */
     --accent-foreground: 0 0% 100%;
 
     /* ── Success: Protected Green ── */
@@ -60,13 +60,13 @@
     --popover-foreground: 220 30% 14%;
 
     /* ── Muted ── */
-    --muted: 220 15% 93%;            /* #EBEEF2 — neutral */
-    --muted-foreground: 220 12% 46%; /* #6B7280 — medium gray */
+    --muted: 220 15% 95%;            /* #F0F1F3 — light neutral */
+    --muted-foreground: 220 9% 46%;  /* #6B7280 — gray body text */
 
     /* ── Borders & Inputs ── */
-    --border: 220 13% 87%;           /* #D5D9E0 */
-    --input: 220 15% 93%;
-    --ring: 14 65% 57%;              /* matches primary */
+    --border: 220 13% 90%;           /* #E5E7EB */
+    --input: 220 15% 95%;
+    --ring: 263 70% 58%;             /* matches purple primary */
 
     /* ── Radius scale — use these tokens for consistent rounding ── */
     --radius-xs:   0.25rem;   /* 4px  — tight: badges, chips */
@@ -273,22 +273,22 @@
     --card-foreground: 220 15% 93%;
     --popover: 224 25% 12%;
     --popover-foreground: 220 15% 93%;
-    --primary: 14 65% 57%;
+    --primary: 263 70% 58%;
     --primary-foreground: 0 0% 100%;
     --secondary: 224 20% 18%;
     --secondary-foreground: 220 15% 90%;
     --muted: 224 18% 16%;
     --muted-foreground: 220 10% 58%;
-    --accent: 25 95% 53%;
+    --accent: 263 70% 58%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 72% 55%;
     --destructive-foreground: 0 0% 100%;
     --border: 224 18% 20%;
     --input: 224 18% 18%;
-    --ring: 14 65% 57%;
+    --ring: 263 70% 58%;
     --sidebar-background: 224 30% 6%;
     --sidebar-foreground: 220 15% 92%;
-    --sidebar-primary: 14 65% 57%;
+    --sidebar-primary: 263 70% 58%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 224 22% 14%;
     --sidebar-accent-foreground: 220 15% 90%;
