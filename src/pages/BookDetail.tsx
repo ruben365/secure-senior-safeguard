@@ -109,7 +109,7 @@ export default function BookDetail() {
       <main id="main-content" tabIndex={-1} className="flex-1">
         {/* Breadcrumb */}
         <div className="border-b bg-muted/30">
-          <div className="container mx-auto px-6 py-3">
+          <div className="container mx-auto py-3">
             <nav className="flex items-center gap-2 text-sm text-muted-foreground">
               <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
               <span>/</span>
@@ -121,7 +121,7 @@ export default function BookDetail() {
         </div>
 
         {/* Hero section */}
-        <section className="container mx-auto px-6 py-12 max-w-6xl">
+        <section className="container mx-auto py-12 max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {/* Cover */}
             <div className="md:col-span-1">
@@ -324,7 +324,7 @@ export default function BookDetail() {
         {/* Related books */}
         {relatedBooks.length > 0 && (
           <section className="bg-muted/30 border-t py-12">
-            <div className="container mx-auto px-6 max-w-6xl">
+            <div className="container mx-auto max-w-6xl">
               <h2 className="text-2xl font-bold mb-6">You May Also Like</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {relatedBooks.map((related) => (
@@ -362,7 +362,7 @@ export default function BookDetail() {
         )}
 
         {/* Back nav */}
-        <div className="container mx-auto px-6 py-8 max-w-6xl">
+        <div className="container mx-auto py-8 max-w-6xl">
           <Button variant="ghost" asChild className="gap-2">
             <Link to="/resources">
               <ArrowLeft className="h-4 w-4" />

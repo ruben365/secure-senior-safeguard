@@ -181,7 +181,7 @@ const WebsiteInsurance = () => {
           {/* Hero Section */}
           <section className="relative py-20 lg:py-32 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-success/10 via-background to-primary/10" />
-            <div className="container mx-auto px-6 relative">
+            <div className="container mx-auto relative">
               <div className="max-w-4xl mx-auto text-center animate-fade-in">
                 <div>
                   <Badge
@@ -220,7 +220,7 @@ const WebsiteInsurance = () => {
 
           {/* Risk Alert Section */}
           <section className="py-12 bg-destructive/5 border-y border-destructive/20">
-            <div className="container mx-auto px-6 lg:px-8">
+            <div className="container mx-auto">
               <div className="flex items-center justify-center gap-3 mb-6">
                 <AlertTriangle className="w-6 h-6 text-destructive" />
                 <h2 className="text-xl font-bold text-destructive">
@@ -242,7 +242,7 @@ const WebsiteInsurance = () => {
 
           {/* Plans Section */}
           <section className="py-20">
-            <div className="container mx-auto px-6 lg:px-8">
+            <div className="container mx-auto">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
                   Choose Your Protection Level
@@ -310,7 +310,7 @@ const WebsiteInsurance = () => {
 
           {/* Coverage Details */}
           <section className="py-20 bg-card">
-            <div className="container mx-auto px-6 lg:px-8">
+            <div className="container mx-auto">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
                   What's Covered
@@ -345,7 +345,7 @@ const WebsiteInsurance = () => {
 
           {/* FAQ Preview */}
           <section className="py-20">
-            <div className="container mx-auto px-6 lg:px-8">
+            <div className="container mx-auto">
               <div className="max-w-3xl mx-auto">
                 <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
                   Common Questions
@@ -388,7 +388,7 @@ const WebsiteInsurance = () => {
 
           {/* CTA Section */}
           <section className="py-20 bg-gradient-to-br from-success/10 via-background to-primary/10">
-            <div className="container mx-auto px-6 text-center">
+            <div className="container mx-auto text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 Don't Wait Until It's Too Late
               </h2>

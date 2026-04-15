@@ -81,7 +81,7 @@ const Portfolio = () => {
 
       {/* Hero */}
       <section className="pt-28 pb-16 bg-gradient-to-b from-primary/5 to-background">
-        <div className="container mx-auto px-6 lg:px-8 text-center">
+        <div className="container mx-auto text-center">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-[0.15em] mb-6">
             <Palette className="w-3.5 h-3.5" />
             Our Work
@@ -119,7 +119,7 @@ const Portfolio = () => {
 
       {/* Primary Category Navigation */}
       <section className="sticky top-16 z-30 bg-background/95 backdrop-blur-md border-b border-border/50">
-        <div className="container mx-auto px-6 lg:px-8 py-3">
+        <div className="container mx-auto py-3">
           <div className="flex items-center gap-3 overflow-x-auto pb-1 scrollbar-hide">
             <Button
               variant={!activeCategory ? "default" : "outline"}
@@ -206,7 +206,7 @@ const Portfolio = () => {
 
       {/* Projects Grid */}
       <main className="py-12">
-        <div className="container mx-auto px-6 lg:px-8">
+        <div className="container mx-auto">
           {isLoading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {[...Array(6)].map((_, i) => (
@@ -305,7 +305,7 @@ const Portfolio = () => {
 
       {/* CTA */}
       <section className="py-16 bg-muted/30 border-t border-border/50">
-        <div className="container mx-auto px-6 text-center">
+        <div className="container mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl font-black text-foreground mb-3">
             Ready to Start Your Project?
           </h2>

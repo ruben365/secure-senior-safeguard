@@ -304,7 +304,7 @@ function StaffDashboard() {
   // ── Render ───────────────────────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <main className="container mx-auto px-6 py-6 space-y-6">
+      <main className="container mx-auto py-6 space-y-6">
         {/* Stat Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {statCards.map((card) => (

@@ -296,7 +296,7 @@ function Resources() {
 
       {/* Introduction Section */}
       <section className="py-16 md:py-24 relative overflow-hidden bg-background">
-        <div className="container mx-auto px-6 lg:px-8 relative z-10">
+        <div className="container mx-auto relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-10">
             <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
               <Sparkles className="w-3.5 h-3.5 text-primary" />
@@ -408,7 +408,7 @@ function Resources() {
 
       {/* Digital Security Guides */}
       <section id="guides" className="py-16 md:py-24 bg-muted/20 relative overflow-hidden">
-        <div className="container mx-auto px-6 lg:px-8">
+        <div className="container mx-auto">
           <div className="text-center mb-10">
             <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
               <BookOpen className="w-3.5 h-3.5 text-primary" />
@@ -625,7 +625,7 @@ function Resources() {
 
       {/* Why Shop With Us */}
       <section className="py-16 md:py-24 bg-muted/30 dot-grid-bg">
-        <div className="container mx-auto px-6 lg:px-8">
+        <div className="container mx-auto">
           <div className="text-center mb-8">
             <h2 className="text-2xl md:text-3xl font-bold mb-3">Why Trust InVision Network</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">Your security education partner — backed by expertise, integrity, and a mission to protect.</p>

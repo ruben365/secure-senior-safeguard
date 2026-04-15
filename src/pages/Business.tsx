@@ -524,7 +524,7 @@ function Business() {
           <div className="absolute top-20 left-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-20 right-0 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-3xl pointer-events-none" />
 
-          <div className="container mx-auto px-6 lg:px-8 relative z-10">
+          <div className="container mx-auto relative z-10">
             <SectionHeader
               badge="Our Services"
               title="What We Build For You"
@@ -673,7 +673,7 @@ function Business() {
           <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-primary/[0.025] rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
 
-          <div className="container mx-auto px-6 lg:px-8 relative z-10">
+          <div className="container mx-auto relative z-10">
             <SectionHeader
               badge="Complete Platform"
               title="InVision Platform, Fully Integrated"
@@ -895,7 +895,7 @@ function Business() {
 
         {/* Veterans Discount */}
         <section className="py-4 bg-gradient-to-r from-muted via-card to-muted border-y border-border/30">
-          <div className="container mx-auto px-6 lg:px-8">
+          <div className="container mx-auto">
             <div className="flex items-center justify-center gap-3 text-center">
               <span className="text-xl">🇺🇸</span>
               <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 font-bold">
@@ -914,7 +914,7 @@ function Business() {
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
           
-          <div className="container mx-auto px-6 lg:px-8 relative z-10">
+          <div className="container mx-auto relative z-10">
             <SectionHeader
               badge="Web Design"
               title="Websites That Sell For You"
@@ -1080,7 +1080,7 @@ function Business() {
           <div className="absolute inset-0 bg-gradient-to-b from-muted/60 via-muted/40 to-muted/60" />
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
           
-          <div className="container mx-auto px-6 lg:px-8 relative z-10">
+          <div className="container mx-auto relative z-10">
             <SectionHeader
               badge="Protect Your Investment"
               title="Website Insurance"
@@ -1163,7 +1163,7 @@ function Business() {
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
           <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           
-          <div className="container mx-auto px-6 lg:px-8 relative z-10">
+          <div className="container mx-auto relative z-10">
             <SectionHeader
               badge="AI Automation"
               title="AI Agents Pricing"
@@ -1275,7 +1275,7 @@ function Business() {
           <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent" />
           
-          <div className="container mx-auto px-6 lg:px-8 relative z-10">
+          <div className="container mx-auto relative z-10">
             <SectionHeader
               badge="AI Insurance"
               title="Protect Your AI Investment"
@@ -1467,7 +1467,7 @@ function Business() {
         <section id="ai-consulting" className="py-16 md:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
           
-          <div className="container mx-auto px-6 lg:px-8 relative z-10">
+          <div className="container mx-auto relative z-10">
             <SectionHeader
               badge="Expert AI Guidance"
               title="AI Consulting Services"
@@ -1651,7 +1651,7 @@ function Business() {
           <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-coral-100/20 via-transparent to-transparent rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-lavender-100/15 via-transparent to-transparent rounded-full blur-3xl pointer-events-none" />
 
-          <div className="container mx-auto px-6 lg:px-8 relative z-10">
+          <div className="container mx-auto relative z-10">
             <SectionHeader
               badge="Creative Services"
               title="Illustration & Visual Art"
@@ -1782,7 +1782,7 @@ function Business() {
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
           
-          <div className="container mx-auto px-6 lg:px-8 relative z-10">
+          <div className="container mx-auto relative z-10">
             <SectionHeader
               badge="Why Choose Us"
               title="The InVision Difference"
@@ -1856,7 +1856,7 @@ function Business() {
         <section className="py-16 md:py-24 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
             
-            <div className="container mx-auto px-6 lg:px-8 relative z-10">
+            <div className="container mx-auto relative z-10">
               <SectionHeader
               badge="Client Stories"
               title="What Our Clients Say" />

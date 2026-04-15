@@ -73,7 +73,7 @@ export const HeroHomepage = () => {
 
       {/* ── 2. Hero Content ── */}
       <div className="hero-home__content [justify-content:flex-start] sm:[justify-content:center] [padding-top:6rem] sm:[padding-top:unset]">
-        <div className="max-w-[1200px] mx-auto w-full px-6 lg:px-8">
+        <div className="max-w-[1200px] mx-auto w-full px-8">
           <div className="hero-home__copy">
 
             {/* Headline */}
@@ -106,7 +106,7 @@ export const HeroHomepage = () => {
 
       {/* ── 3. Glassmorphism Bottom Panel ── */}
       <div className="hero-home__panel">
-        <div className="max-w-[1200px] mx-auto w-full px-6 lg:px-8">
+        <div className="max-w-[1200px] mx-auto w-full px-8">
           <div className="hero-home__panel-inner">
 
           {/* Row 1 — Top features */}

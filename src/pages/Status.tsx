@@ -58,7 +58,7 @@ function Status() {
 
       {/* Hero */}
       <section className="py-12 md:py-16 bg-background border-b border-border/40">
-        <div className="container mx-auto px-6 lg:px-8 text-center">
+        <div className="container mx-auto text-center">
           <h1 className="text-3xl md:text-4xl font-black text-foreground mb-3">
             System Status
           </h1>
@@ -80,7 +80,7 @@ function Status() {
 
       {/* Services */}
       <section className="py-10 md:py-14 bg-muted/20">
-        <div className="container mx-auto px-6 lg:px-8 max-w-3xl">
+        <div className="container mx-auto max-w-3xl">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-lg font-bold text-foreground">Services</h2>
             <div className="flex items-center gap-2 text-xs text-emerald-600 font-medium">
@@ -126,7 +126,7 @@ function Status() {
 
       {/* Incident History */}
       <section className="py-10 md:py-14 bg-background">
-        <div className="container mx-auto px-6 lg:px-8 max-w-3xl">
+        <div className="container mx-auto max-w-3xl">
           <h2 className="text-lg font-bold text-foreground mb-4">Incident History</h2>
           <Card className="p-5 border border-border/40 bg-card text-center">
             <CheckCircle className="w-8 h-8 text-emerald-500 mx-auto mb-3" />
@@ -142,7 +142,7 @@ function Status() {
 
       {/* Subscribe to Status Updates */}
       <section className="py-10 md:py-14 bg-muted/20 border-t border-border/40">
-        <div className="container mx-auto px-6 lg:px-8 max-w-xl text-center">
+        <div className="container mx-auto max-w-xl text-center">
           <h2 className="text-xl font-black text-foreground mb-2">
             Subscribe to Status Updates
           </h2>

@@ -72,7 +72,7 @@ export const TestimonialCarousel = () => {
       aria-labelledby="testimonials-heading"
     >
 
-      <div className="relative z-10 container mx-auto px-6 lg:px-8">
+      <div className="relative z-10 container mx-auto">
 
         {/* Section header */}
         <div className="text-center mb-10 lg:mb-14">

@@ -114,7 +114,7 @@ function InternalMessages() {
     <div className="min-h-screen bg-[#0B1120] text-gray-100">
       {/* Header */}
       <header className="border-b border-gray-800/60 bg-[#111827]/80 backdrop-blur-sm">
-        <div className="container mx-auto px-6 py-4">
+        <div className="container mx-auto py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <Button asChild variant="ghost" size="sm" className="text-gray-400 hover:text-white hover:bg-white/5">
@@ -203,7 +203,7 @@ function InternalMessages() {
         </div>
       </header>
 
-      <main className="container mx-auto px-6 py-6">
+      <main className="container mx-auto py-6">
         {/* Tab Switcher */}
         <div className="flex gap-2 mb-6">
           <Button

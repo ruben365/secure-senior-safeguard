@@ -382,7 +382,7 @@ export default function FAQ() {
         {/* ═══════════════════════════════════════════════════════
             REDESIGNED FAQ BODY — single compressed block with
             a 2-column glass layout (left: accordion, right: ask form).
-            Aligned to the site plumb line: container mx-auto px-6 lg:px-8
+            Aligned to the site plumb line: container mx-auto
             ═══════════════════════════════════════════════════ */}
         <section
           aria-labelledby="faq-main-heading"
@@ -399,7 +399,7 @@ export default function FAQ() {
             <div className="absolute -bottom-40 left-1/3 h-[440px] w-[440px] rounded-full bg-orange-300/15 blur-[150px]" />
           </div>
 
-          <div className="container mx-auto px-6 lg:px-8">
+          <div className="container mx-auto">
             {/* Section eyebrow + heading — refined warm orange accent */}
             <div className="max-w-3xl mb-8">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50/90 backdrop-blur border border-orange-200 shadow-sm mb-4">

@@ -73,7 +73,7 @@ export default function Pricing() {
 
       {/* Hero */}
       <section className="py-20 bg-background text-center">
-        <div className="container mx-auto px-6 lg:px-8 max-w-4xl">
+        <div className="container mx-auto max-w-4xl">
           <Badge className="mb-4">Simple, Transparent Pricing</Badge>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
             Protection Plans for Every Need
@@ -96,7 +96,7 @@ export default function Pricing() {
 
       {/* Pricing Cards */}
       <section className="pb-16">
-        <div className="container mx-auto px-6 lg:px-8">
+        <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {plans.map((plan) => {
               const Icon = plan.icon;
@@ -142,7 +142,7 @@ export default function Pricing() {
 
       {/* Veteran Discount + Guarantee */}
       <section className="py-12 bg-muted/30">
-        <div className="container mx-auto px-6 lg:px-8 max-w-3xl text-center">
+        <div className="container mx-auto max-w-3xl text-center">
           <h2 className="text-2xl font-bold mb-4">Our Commitment to You</h2>
           <div className="grid sm:grid-cols-2 gap-6 text-left">
             <div className="rounded-xl border bg-card p-6">

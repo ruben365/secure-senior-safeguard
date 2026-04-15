@@ -14,7 +14,7 @@ function CookiePolicy() {
       />
       <Navigation />
       <section className="py-24 bg-background">
-        <div className="container mx-auto px-6 lg:px-8">
+        <div className="container mx-auto">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-center mb-4">Cookie Policy</h1>
             <p className="text-center text-muted-foreground mb-8 text-lg">

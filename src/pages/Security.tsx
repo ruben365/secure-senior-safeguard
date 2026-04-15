@@ -118,7 +118,7 @@ function Security() {
 
       {/* Hero */}
       <section className="py-16 md:py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-        <div className="container mx-auto px-6 lg:px-8 text-center">
+        <div className="container mx-auto text-center">
           <div className="flex justify-center mb-6">
             <div className="w-16 h-16 rounded-2xl bg-primary/20 border border-primary/30 flex items-center justify-center">
               <Shield className="w-8 h-8 text-primary" />
@@ -143,7 +143,7 @@ function Security() {
 
       {/* Security Cards */}
       <section className="py-12 md:py-16 bg-background">
-        <div className="container mx-auto px-6 lg:px-8">
+        <div className="container mx-auto">
           <div className="text-center mb-10">
             <span className="inline-block text-[10px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-3 py-1 rounded-full mb-3">
               How We Protect You
@@ -186,7 +186,7 @@ function Security() {
 
       {/* Trust Badges */}
       <section className="py-10 bg-muted/30 border-y border-border/40">
-        <div className="container mx-auto px-6 lg:px-8">
+        <div className="container mx-auto">
           <div className="flex flex-wrap justify-center items-center gap-8">
             {[
               { icon: Award, label: "Veteran-Founded" },
@@ -209,7 +209,7 @@ function Security() {
 
       {/* CTA */}
       <section className="py-12 md:py-16 bg-background">
-        <div className="container mx-auto px-6 lg:px-8 text-center">
+        <div className="container mx-auto text-center">
           <Mail className="w-10 h-10 text-primary mx-auto mb-4" />
           <h2 className="text-2xl md:text-3xl font-black text-foreground mb-3">
             Questions About Our Security?

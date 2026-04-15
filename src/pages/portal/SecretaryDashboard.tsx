@@ -340,7 +340,7 @@ function SecretaryDashboard() {
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
       <header className="border-b border-border bg-card/80 backdrop-blur-sm">
-        <div className="container mx-auto px-6 py-4">
+        <div className="container mx-auto py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <Button asChild variant="ghost" size="sm">
@@ -364,7 +364,7 @@ function SecretaryDashboard() {
         </div>
       </header>
 
-      <main className="container mx-auto px-6 py-6 space-y-6">
+      <main className="container mx-auto py-6 space-y-6">
         {/* Stat cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {statCards.map((card) => (

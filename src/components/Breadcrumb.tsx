@@ -48,7 +48,7 @@ export function Breadcrumb() {
       </script>
       <nav
         aria-label="Breadcrumb"
-        className="container mx-auto px-6 py-4 text-sm"
+        className="container mx-auto py-4 text-sm"
       >
         <ol className="flex items-center space-x-2 text-muted-foreground">
           <li>

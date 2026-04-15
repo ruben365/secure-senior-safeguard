@@ -39,7 +39,7 @@ export const FAQPreview = () => {
       className="relative z-10 py-14 md:py-20 lg:py-24"
       aria-labelledby="faq-heading"
     >
-      <div className="container mx-auto px-6 lg:px-8 max-w-6xl relative">
+      <div className="container mx-auto max-w-6xl relative">
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-10 items-start">
           {/* Left sidebar */}
           <AnimatedSection

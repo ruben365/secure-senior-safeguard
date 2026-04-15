@@ -44,7 +44,7 @@ function ArticleDetail() {
           noindex
         />
         <Navigation overlay />
-        <div className="container mx-auto px-6 py-16 max-w-4xl">
+        <div className="container mx-auto py-16 max-w-4xl">
           <Skeleton className="h-8 w-32 mb-4" />
           <Skeleton className="h-12 w-full mb-4" />
           <Skeleton className="h-6 w-48 mb-8" />
@@ -69,7 +69,7 @@ function ArticleDetail() {
           noindex
         />
         <Navigation overlay />
-        <div className="container mx-auto px-6 py-16 text-center">
+        <div className="container mx-auto py-16 text-center">
           <h1 className="text-4xl font-bold mb-4">Article Not Found</h1>
           <p className="text-muted-foreground mb-8">
             The article you're looking for doesn't exist or has been removed.
@@ -132,7 +132,7 @@ function ArticleDetail() {
       />
       <Navigation overlay />
 
-      <article className="container mx-auto px-6 py-16 max-w-4xl">
+      <article className="container mx-auto py-16 max-w-4xl">
         <div className="animate-fade-in">
           {/* Back Button */}
           <Button variant="ghost" asChild className="mb-6">
@@ -222,7 +222,7 @@ function ArticleDetail() {
       {/* Related Articles */}
       {otherArticles && otherArticles.length > 0 && (
         <section className="bg-muted/30 py-16">
-          <div className="container mx-auto px-6 lg:px-8">
+          <div className="container mx-auto">
             <h2 className="text-2xl font-bold mb-8">Related Articles</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               {otherArticles.map((related) => (
@@ -265,7 +265,7 @@ function ArticleDetail() {
 
       {/* CTA */}
       <section className="py-16">
-        <div className="container mx-auto px-6 text-center">
+        <div className="container mx-auto text-center">
           <Card className="p-8 max-w-2xl mx-auto bg-gradient-to-r from-primary/10 to-accent/10">
             <h3 className="text-2xl font-bold mb-4">
               Stay Protected from Scams

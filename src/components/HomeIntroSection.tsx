@@ -115,7 +115,7 @@ export const HomeIntroSection = () => {
       {/* Stats Counter Bar — compact */}
       <section className="py-8 md:py-12 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/40 to-background pointer-events-none" />
-        <div className="container mx-auto px-6 md:px-6 lg:px-8 relative">
+        <div className="container mx-auto md:px-6 lg:px-8 relative">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             {stats.map((stat, i) => (
               <StatCard key={stat.label} {...stat} index={i} />
@@ -126,7 +126,7 @@ export const HomeIntroSection = () => {
 
       {/* Ohio's Trusted Partner — compact two-column */}
       <section className="py-10 md:py-16" ref={introRef as any}>
-        <div className="container mx-auto px-6 md:px-6 lg:px-8">
+        <div className="container mx-auto md:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
             {/* Left — Copy */}
             <AnimatedSection animation="fade-up" className={isInView ? "opacity-100" : "opacity-0"}>
@@ -247,7 +247,7 @@ export const HomeIntroSection = () => {
 
       {/* Real Results — compact bento */}
       <section className="py-10 md:py-16 bg-muted/20 relative overflow-hidden" ref={bentoRef as any}>
-        <div className="container mx-auto px-6 md:px-6 lg:px-8 relative">
+        <div className="container mx-auto md:px-6 lg:px-8 relative">
           <div className={`text-center mb-8 transition-all duration-500 ${bentoInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-2">
               Real Results

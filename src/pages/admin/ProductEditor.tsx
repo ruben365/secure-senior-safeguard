@@ -99,7 +99,7 @@ const ProductEditor = () => {
     <div className="min-h-screen bg-background">
       {/* Top Bar */}
       <div className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container mx-auto px-6 py-4">
+        <div className="container mx-auto py-4">
           <div className="mt-4 flex items-center justify-between">
             <div className="flex items-center gap-4">
               <Button
@@ -133,7 +133,7 @@ const ProductEditor = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto py-8">
         <div className="grid gap-6 lg:grid-cols-3">
           {/* Left Column - Editor */}
           <div className="lg:col-span-2">
