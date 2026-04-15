@@ -343,28 +343,28 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
             aria-label="Main navigation"
             className="lg:hidden fixed top-[56px] right-0 z-[10001] overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch]"
             style={{
-              width: "min(52vw, 200px)",
+              width: "min(72vw, 300px)",
               maxHeight: "calc(80vh - 56px)",
-              background: "rgba(15, 18, 28, 0.78)",
-              backdropFilter: "blur(28px) saturate(1.5)",
-              WebkitBackdropFilter: "blur(28px) saturate(1.5)",
-              borderLeft: "1px solid rgba(255,255,255,0.08)",
-              borderBottomLeftRadius: "16px",
-              animation: "menuSlideIn 250ms ease-out",
-              paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 0.5rem)",
+              background: "rgba(12, 14, 22, 0.72)",
+              backdropFilter: "blur(20px) saturate(1.4)",
+              WebkitBackdropFilter: "blur(20px) saturate(1.4)",
+              borderLeft: "1px solid rgba(255,255,255,0.06)",
+              borderBottomLeftRadius: "14px",
+              animation: "menuSlideIn 200ms ease-out",
+              paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 0.25rem)",
             }}
           >
-            <div className="p-4">
+            <div className="px-3 py-2.5">
               {allLinks.map((link) => {
                 const isActive = isActiveLink(link.href);
                 return (
                   <Link
                     key={link.name}
                     to={link.href}
-                    className={`flex items-center text-[14px] font-medium px-4 py-3 rounded-md transition-colors duration-150 ${
+                    className={`flex items-center text-[12px] font-medium px-3 py-[7px] rounded-md transition-colors duration-150 ${
                       isActive
-                        ? "text-orange-400 border-l-2 border-orange-400 pl-3.5"
-                        : "text-white/85 hover:text-white hover:bg-white/[0.06]"
+                        ? "text-orange-400 border-l-2 border-orange-400 pl-2.5"
+                        : "text-white/80 hover:text-white hover:bg-white/[0.05]"
                     }`}
                     onClick={() => {
                       setMobileMenuOpen(false);
@@ -376,16 +376,16 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 );
               })}
 
-              <div className="mt-3 pt-3 flex flex-col items-center gap-2 border-t border-white/[0.08]">
+              <div className="mt-2 pt-2 flex flex-col items-center gap-1.5 border-t border-white/[0.06]">
                 <button
                   type="button"
-                  className="h-8 px-5 text-[12px] font-medium rounded-md flex items-center justify-center gap-1.5 transition-colors duration-150 border border-white/20 text-white/70 hover:text-white hover:border-white/30"
+                  className="h-7 px-4 text-[10px] font-medium rounded-md flex items-center justify-center gap-1 transition-colors duration-150 border border-white/15 text-white/60 hover:text-white hover:border-white/25"
                   onClick={() => {
                     setDonateOpen(true);
                     setMobileMenuOpen(false);
                   }}
                 >
-                  <Heart className="h-3 w-3" />
+                  <Heart className="h-2.5 w-2.5" />
                   Donate
                 </button>
 
@@ -393,16 +393,16 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <Link
                     to="/admin"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="h-8 max-w-[160px] w-full text-[12px] font-semibold rounded-md text-white flex items-center justify-center gap-1.5 transition-all duration-150 bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12]"
+                    className="h-7 max-w-[130px] w-full text-[10px] font-semibold rounded-md text-white flex items-center justify-center gap-1 transition-all duration-150 bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12]"
                   >
-                    <LayoutDashboard className="h-3 w-3" />
+                    <LayoutDashboard className="h-2.5 w-2.5" />
                     Dashboard
                   </Link>
                 ) : (
                   <Link
                     to="/portal"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="h-8 max-w-[160px] w-full text-[12px] font-semibold rounded-md text-white flex items-center justify-center transition-all duration-150 bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12]"
+                    className="h-7 max-w-[130px] w-full text-[10px] font-semibold rounded-md text-white flex items-center justify-center transition-all duration-150 bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12]"
                   >
                     Login
                   </Link>
@@ -410,10 +410,10 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
 
                 <a
                   href={SITE.phone.tel}
-                  className="flex items-center justify-center gap-1.5 text-[12px] text-white/50 font-medium py-1.5 transition-colors duration-150 hover:text-white/80"
+                  className="flex items-center justify-center gap-1 text-[10px] text-white/40 font-medium py-1 transition-colors duration-150 hover:text-white/70"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  <Phone className="h-3 w-3" />
+                  <Phone className="h-2.5 w-2.5" />
                   {SITE.phone.display}
                 </a>
               </div>
