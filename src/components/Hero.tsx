@@ -114,8 +114,8 @@ const Hero = ({
         </div>
       )}
 
-      {/* Content — anchored left, matches HeroHomepage rhythm */}
-      <div className="w-full pt-24 pb-6 sm:py-32 md:py-40 lg:py-56 xl:py-64 relative z-10 text-left px-6 lg:px-8">
+      {/* Content — constrained to 1200px spine */}
+      <div className="w-full max-w-[1200px] mx-auto pt-24 pb-6 sm:py-32 md:py-40 lg:py-56 xl:py-64 relative z-10 text-left px-8">
         <div className="max-w-[640px] animate-fade-in">
           {headline && (
             <h1 className="text-white mb-4 sm:mb-6 md:mb-10 leading-[1.1] text-[clamp(1.75rem,5.75vw,4.5rem)] font-extrabold tracking-tight text-left">
