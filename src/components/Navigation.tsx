@@ -343,12 +343,12 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
             aria-label="Main navigation"
             className="lg:hidden fixed top-[56px] right-0 z-[10001] overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch]"
             style={{
-              width: "min(50vw, 195px)",
+              width: "min(52vw, 200px)",
               maxHeight: "calc(80vh - 56px)",
-              background: "rgba(35, 22, 12, 0.90)",
-              backdropFilter: "blur(24px) saturate(1.4)",
-              WebkitBackdropFilter: "blur(24px) saturate(1.4)",
-              borderLeft: "1px solid rgba(200,150,100,0.12)",
+              background: "rgba(15, 18, 28, 0.78)",
+              backdropFilter: "blur(28px) saturate(1.5)",
+              WebkitBackdropFilter: "blur(28px) saturate(1.5)",
+              borderLeft: "1px solid rgba(255,255,255,0.08)",
               borderBottomLeftRadius: "16px",
               animation: "menuSlideIn 250ms ease-out",
               paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 0.5rem)",
