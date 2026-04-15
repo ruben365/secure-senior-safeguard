@@ -295,7 +295,7 @@ const WebsiteDesign = () => {
 
         <main>
           {/* Hero Section */}
-          <section className="relative py-24 lg:py-36 overflow-hidden min-h-[95vh] flex items-center">
+          <section className="relative py-24 lg:py-36 overflow-hidden min-h-[100dvh] flex items-center">
             {/* Background */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
 

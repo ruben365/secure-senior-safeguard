@@ -179,7 +179,7 @@ const WebsiteInsurance = () => {
 
         <main>
           {/* Hero Section */}
-          <section className="relative py-20 lg:py-32 overflow-hidden">
+          <section className="relative py-20 lg:py-32 overflow-hidden min-h-[100dvh] flex items-center">
             <div className="absolute inset-0 bg-gradient-to-br from-success/10 via-background to-primary/10" />
             <div className="container mx-auto relative">
               <div className="max-w-4xl mx-auto text-center animate-fade-in">

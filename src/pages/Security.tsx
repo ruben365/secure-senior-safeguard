@@ -117,7 +117,7 @@ function Security() {
       <Navigation />
 
       {/* Hero */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+      <section className="py-16 md:py-24 min-h-[100dvh] flex items-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
         <div className="container mx-auto text-center">
           <div className="flex justify-center mb-6">
             <div className="w-16 h-16 rounded-2xl bg-primary/20 border border-primary/30 flex items-center justify-center">

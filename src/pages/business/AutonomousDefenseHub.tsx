@@ -172,7 +172,7 @@ const AutonomousDefenseHub = () => {
 
         <main>
           {/* ── HERO ── */}
-          <section className="relative overflow-hidden py-24 md:py-32 bg-gradient-to-br from-[#0a0f1e] via-[#111827] to-[#0a1628]">
+          <section className="relative overflow-hidden py-24 md:py-32 min-h-[100dvh] flex items-center bg-gradient-to-br from-[#0a0f1e] via-[#111827] to-[#0a1628]">
             {/* animated grid lines */}
             <div
               className="absolute inset-0 opacity-[0.06] hero-grid-overlay"
