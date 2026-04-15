@@ -2,9 +2,8 @@
    RESPONSIVE SYSTEM
    Breakpoints: 374 | 640 | 768 | 1024 | 1280 | 1536 | 1920 | 2560px
    Phones (320-640) | Tablets (641-1024) | Laptops (1025-1440) | Desktops (1441-1920) | Projectors (1921+)
-   zoom: 0.75 on #root — all CSS px = visual × 1.333
-   Touch targets need ≥52px CSS (39px visual)
-   Full visual viewport: calc(100vh / 0.75)
+   Standard zoom (1.0) — no scaling hacks
+   Touch targets need ≥44px
    ===================================================== */
 
 /* ------------------------------------------------------------ */

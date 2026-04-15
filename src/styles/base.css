@@ -227,9 +227,9 @@
     --sidebar-border: 215 28% 18%;
     --sidebar-ring: 207 89% 50%;
 
-    /* ── Spacing scale (rem-based, zoom-agnostic) ──
-       Usage: var(--space-4) = 1rem = 16px CSS = 12px visual (with 0.75 zoom)
-       For touch targets, always use min-h-[52px] (39px visual) */
+    /* ── Spacing scale (rem-based) ──
+       Usage: var(--space-4) = 1rem = 16px
+       For touch targets, use min-h-[44px] */
     --space-1:   0.25rem;   /*  4px  */
     --space-2:   0.5rem;    /*  8px  */
     --space-3:   0.75rem;   /* 12px  */
