@@ -868,7 +868,8 @@ function Business() {
             <AnimatedSection animation="fade-up" delay={200} className="text-center mt-16">
               <div className="inline-flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
-                  size="xl"
+                  size="heroPill"
+                  variant="heroPrimary"
                   onClick={() => {
                     setSelectedInquiry({
                       name: "InVision Platform Demo",
@@ -878,10 +879,10 @@ function Business() {
                     });
                     setInquiryDialogOpen(true);
                   }}>
-                  
-                  Request a Platform Demo <ArrowRight className="ml-2 w-5 h-5" />
+
+                  Request a Platform Demo <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
-                <Button asChild variant="outline" size="xl">
+                <Button asChild variant="heroOutline" size="heroPill">
                   <Link to="/training">View Individual Plans</Link>
                 </Button>
               </div>
@@ -1915,12 +1916,11 @@ function Business() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               onClick={() => setModalOpen(true)}
-              size="xl"
-              className="bg-white text-primary font-black shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-[0_6px_30px_rgba(0,0,0,0.4)] transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-white text-lg tracking-wide">
-              
+              size="heroPill"
+              variant="heroPrimary">
               SCHEDULE DISCOVERY CALL
             </Button>
-            <Button asChild size="xl" className="bg-transparent text-white font-black border-[3px] border-white shadow-[0_4px_20px_rgba(255,255,255,0.2)] hover:bg-white hover:text-primary transition-all duration-300 hover:scale-105 active:scale-95 text-lg tracking-wide">
+            <Button asChild size="heroPill" variant="heroOutline">
               <Link to="/faq">View Frequently Asked Questions</Link>
             </Button>
           </div>

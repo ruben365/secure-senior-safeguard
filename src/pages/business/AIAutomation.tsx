@@ -334,13 +334,13 @@ const AIAutomation = () => {
                   </ul>
                   <Button
                     asChild
-                    size="xl"
-                    variant="gold"
+                    size="heroPill"
+                    variant="heroPrimary"
                     className="w-full sm:w-auto"
                   >
                     <Link to="/contact">
                       Schedule Consultation
-                      <ArrowRight className="ml-2 h-5 w-5" />
+                      <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
                 </Card>
@@ -359,13 +359,13 @@ const AIAutomation = () => {
                 close rate.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="xl" variant="gold">
+                <Button asChild size="heroPill" variant="heroPrimary">
                   <Link to="/contact">
                     Start Your Automation Journey
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-                <Button asChild size="xl" variant="outline">
+                <Button asChild size="heroPill" variant="heroOutline">
                   <Link to="/business/ai-receptionist">
                     Explore AI Receptionist
                   </Link>
