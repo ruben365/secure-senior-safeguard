@@ -1,11 +1,22 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
+  ArrowRight,
   Bot, Globe, Lock, Cpu,
   Shield, Brain, Scan, Headphones,
 } from "lucide-react";
 import corineHero from "@/assets/hero-wife-office.jpg";
 
-/* ── Feature items — Row 1 ── */
+/* ── Hero tab items ── */
+const heroTabs = [
+  { id: "summary", label: "Summary" },
+  { id: "services", label: "Services" },
+  { id: "protection", label: "Protection" },
+  { id: "training", label: "Training" },
+  { id: "contact", label: "Contact" },
+];
+
+/* ── Feature items — Row 1 (top) ── */
 const featuresRow1 = [
   {
     icon: Bot,
@@ -29,7 +40,7 @@ const featuresRow1 = [
   },
 ];
 
-/* ── Feature items — Row 2 ── */
+/* ── Feature items — Row 2 (bottom) ── */
 const featuresRow2 = [
   {
     icon: Shield,
@@ -53,11 +64,8 @@ const featuresRow2 = [
   },
 ];
 
-/* ── Hero tabs ── */
-const heroTabs = ["Summary", "Services", "Protection", "Training", "Contact"];
-
 export const HeroHomepage = () => {
-  const [activeTab, setActiveTab] = useState("Services");
+  const [activeTab, setActiveTab] = useState("services");
 
   return (
     <section className="hero-home">
@@ -66,65 +74,70 @@ export const HeroHomepage = () => {
       <div className="hero-home__bg">
         <img
           src={corineHero}
-          alt="InVision Network co-founder in office"
+          alt="Corine — InVision Network co-founder"
           loading="eager"
-          decoding="async"
+          decoding="sync"
           fetchPriority="high"
         />
         <div className="hero-home__top-veil" />
-        <div className="hero-home__glow" aria-hidden="true" />
       </div>
 
       {/* ── 2. Hero Content ── */}
-      <div className="hero-home__content [justify-content:flex-start] sm:[justify-content:center] [padding-top:6rem] sm:[padding-top:unset]">
-        <div className="max-w-[1200px] mx-auto w-full px-8">
-          <div className="hero-home__copy">
+      <div className="hero-home__content">
+        <div className="hero-home__copy">
 
-            {/* Kicker */}
-            <div className="hero-home__kicker">
-              <span className="hero-home__kicker-line" />
-              <span className="hero-home__kicker-text">Your Path to Safety</span>
-            </div>
+          {/* Kicker / Overline */}
+          <div className="hero-home__kicker">
+            <span className="hero-home__kicker-line" />
+            <span className="hero-home__kicker-text">Your Path to Safety</span>
+          </div>
 
-            {/* Tabs */}
-            <nav className="hero-home__tabs" aria-label="Hero sections">
-              {heroTabs.map((tab) => (
-                <button
-                  key={tab}
-                  type="button"
-                  className={`hero-home__tab ${activeTab === tab ? "hero-home__tab--active" : ""}`}
-                  onClick={() => setActiveTab(tab)}
-                >
-                  {tab}
-                </button>
-              ))}
-            </nav>
+          {/* Micro-Nav Tabs */}
+          <nav className="hero-home__tabs" aria-label="Hero sections">
+            {heroTabs.map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setActiveTab(tab.id)}
+                className={`hero-home__tab${activeTab === tab.id ? " hero-home__tab--active" : ""}`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </nav>
 
-            {/* Headline */}
-            <h1 className="hero-home__headline">
-              Smart Solutions
-              <br />
-              Business &amp;
-              <br />
-              Security Services
-            </h1>
+          {/* Headline */}
+          <h1 className="hero-home__headline">
+            Smart Solutions
+            <br />
+            Business &amp; Security Services
+          </h1>
 
-            {/* Body */}
-            <p className="hero-home__body">
-              Discover a new era of cybersecurity solutions. We combine AI-driven
-              protection and functionality to enhance efficiency, improve processes,
-              and safeguard your digital assets.
-            </p>
+          {/* Body */}
+          <p className="hero-home__body">
+            Discover a new era of cybersecurity solutions. We combine AI-driven
+            protection and functionality to enhance efficiency, improve processes,
+            and empower your business to achieve greater outcomes.
+          </p>
+
+          {/* Ghost CTA Buttons */}
+          <div className="hero-home__ctas">
+            <Link to="/training#pricing" className="hero-home__cta">
+              Discover Protection
+            </Link>
+            <Link to="/business" className="hero-home__cta">
+              Explore More
+              <ArrowRight />
+            </Link>
           </div>
         </div>
       </div>
 
       {/* ── 3. Glassmorphism Bottom Panel ── */}
       <div className="hero-home__panel">
-        <div className="max-w-[1200px] mx-auto w-full px-8">
-          <div className="hero-home__panel-inner">
+        <div className="hero-home__panel-inner">
 
-          {/* Row 1 */}
+          {/* Row 1 — Top features */}
           <div className="hero-home__feature-row">
             {featuresRow1.map((f) => (
               <div key={f.title} className="hero-home__feature">
@@ -142,7 +155,7 @@ export const HeroHomepage = () => {
           {/* Divider */}
           <div className="hero-home__divider" />
 
-          {/* Row 2 */}
+          {/* Row 2 — Bottom features */}
           <div className="hero-home__feature-row">
             {featuresRow2.map((f) => (
               <div key={f.title} className="hero-home__feature">
@@ -157,7 +170,6 @@ export const HeroHomepage = () => {
             ))}
           </div>
 
-          </div>
         </div>
       </div>
     </section>
