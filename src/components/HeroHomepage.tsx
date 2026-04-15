@@ -6,6 +6,14 @@ import {
 } from "lucide-react";
 import corineHero from "@/assets/hero-wife-office.jpg";
 
+/* ── Hero tab items — each navigates to a dedicated page ── */
+const heroTabs = [
+  { label: "Protection", to: "/training#pricing" },
+  { label: "Workshops", to: "/training" },
+  { label: "AI & Business", to: "/business" },
+  { label: "Contact", to: "/contact" },
+];
+
 /* ── Feature items — Row 1 (top) ── */
 const featuresRow1 = [
   {
@@ -62,52 +70,67 @@ export const HeroHomepage = () => {
       <div className="hero-home__bg">
         <img
           src={corineHero}
-          alt="InVision Network co-founder in office"
+          alt="Corine — InVision Network co-founder"
           loading="eager"
-          decoding="async"
+          decoding="sync"
           fetchPriority="high"
         />
         <div className="hero-home__top-veil" />
-        <div className="hero-home__glow" aria-hidden="true" />
       </div>
 
       {/* ── 2. Hero Content ── */}
-      <div className="hero-home__content [justify-content:flex-start] sm:[justify-content:center] [padding-top:6rem] sm:[padding-top:unset]">
-        <div className="max-w-[1200px] mx-auto w-full px-8">
-          <div className="hero-home__copy">
+      <div className="hero-home__content">
+        <div className="hero-home__copy">
 
-            {/* Headline */}
-            <h1 className="hero-home__headline">
-              AI Protection
-              <br />
-              for Families &amp; Business
-            </h1>
+          {/* Kicker / Overline */}
+          <div className="hero-home__kicker">
+            <span className="hero-home__kicker-line" />
+            <span className="hero-home__kicker-text">Your Path to Safety</span>
+          </div>
 
-            {/* Body */}
-            <p className="hero-home__body">
-              We stop AI-powered scams before they reach your family. Our team
-              builds automated defenses, runs live training, and monitors threats
-              around the clock so you stay safe without lifting a finger.
-            </p>
-
-            {/* Ghost CTA Buttons */}
-            <div className="hero-home__ctas">
-              <Link to="/training#pricing" className="hero-home__cta">
-                Get Protected
+          {/* Micro-Nav Tabs — navigate to dedicated pages */}
+          <nav className="hero-home__tabs" aria-label="Quick links">
+            {heroTabs.map((tab) => (
+              <Link
+                key={tab.label}
+                to={tab.to}
+                className="hero-home__tab"
+              >
+                {tab.label}
               </Link>
-              <Link to="/business" className="hero-home__cta">
-                See Our Work
-                <ArrowRight />
-              </Link>
-            </div>
+            ))}
+          </nav>
+
+          {/* Headline */}
+          <h1 className="hero-home__headline">
+            AI Protection
+            <br />
+            for Families &amp; Business
+          </h1>
+
+          {/* Body */}
+          <p className="hero-home__body">
+            We stop AI-powered scams before they reach your family. Our team
+            builds automated defenses, runs live training, and monitors threats
+            around the clock so you stay safe without lifting a finger.
+          </p>
+
+          {/* Ghost CTA Buttons */}
+          <div className="hero-home__ctas">
+            <Link to="/training#pricing" className="hero-home__cta">
+              Get Protected
+            </Link>
+            <Link to="/business" className="hero-home__cta">
+              See Our Work
+              <ArrowRight />
+            </Link>
           </div>
         </div>
       </div>
 
       {/* ── 3. Glassmorphism Bottom Panel ── */}
       <div className="hero-home__panel">
-        <div className="max-w-[1200px] mx-auto w-full px-8">
-          <div className="hero-home__panel-inner">
+        <div className="hero-home__panel-inner">
 
           {/* Row 1 — Top features */}
           <div className="hero-home__feature-row">
@@ -142,7 +165,6 @@ export const HeroHomepage = () => {
             ))}
           </div>
 
-          </div>
         </div>
       </div>
     </section>

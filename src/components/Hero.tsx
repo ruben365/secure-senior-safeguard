@@ -52,7 +52,7 @@ const Hero = ({
   return (
     <div
       className={cn(
-        "relative w-full min-h-[100dvh] flex items-start sm:items-center overflow-hidden hero-mobile",
+        "relative w-full min-h-[100dvh] flex items-center overflow-hidden hero-mobile",
         className,
       )}
     >
@@ -114,21 +114,21 @@ const Hero = ({
         </div>
       )}
 
-      {/* Content — constrained to 1200px spine */}
-      <div className="w-full max-w-[1200px] mx-auto pt-[clamp(72px,10vw,100px)] pb-2 sm:pt-[clamp(100px,14vw,140px)] sm:pb-10 relative z-10 text-left px-8">
-        <div className="max-w-[640px] animate-fade-in">
+      {/* Content - CSS animations instead of framer-motion */}
+      <div className="w-full center-container-wide py-20 sm:py-24 md:py-28 lg:py-32 relative z-10">
+        <div className="max-w-6xl animate-fade-in">
           {headline && (
-            <h1 className="text-white mb-3 sm:mb-4 md:mb-6 leading-[1.05] text-[clamp(1.5rem,6vw,1.75rem)] sm:text-[clamp(2.25rem,5.5vw,4.5rem)] font-bold tracking-[-0.02em] text-left">
+            <h1 className="text-white mb-4 sm:mb-6 md:mb-8 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight font-bold">
               {headline}
             </h1>
           )}
           {subheadline && (
-            <p className="text-white/65 text-[13px] sm:text-base md:text-[17px] mb-4 sm:mb-6 md:mb-10 leading-snug sm:leading-[1.6] text-left line-clamp-2 sm:line-clamp-none max-w-[520px]">
+            <p className="text-white/95 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl mb-8 md:mb-10 leading-relaxed max-w-3xl">
               {subheadline}
             </p>
           )}
           {children && (
-            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-start">
+            <div className="flex flex-wrap spacing-md justify-start">
               {Children.map(children, (child) =>
                 isValidElement(child) ? (
                   <MagneticWrapper strength={0.3}>{child}</MagneticWrapper>

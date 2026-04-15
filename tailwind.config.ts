@@ -13,19 +13,19 @@ export default {
   theme: {
     container: {
       center: true,
-      // Unified gutters — 32px horizontal padding for breathing room.
       padding: {
-        DEFAULT: "2rem",   // 32px on all screens
-        sm: "2rem",
+        DEFAULT: "1rem",
+        sm: "1.5rem",
         lg: "2rem",
+        xl: "2.5rem",
+        "2xl": "3rem",
       },
-      // Pin container to 1200px — tighter "spine" for readability.
       screens: {
-        sm: "1200px",
-        md: "1200px",
-        lg: "1200px",
-        xl: "1200px",
-        "2xl": "1200px",
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1400px",
       },
     },
     screens: {
@@ -165,19 +165,6 @@ export default {
           500: "hsl(var(--cyan-500))",
           400: "hsl(var(--cyan-400))",
         },
-        blue: {
-          50: "hsl(var(--blue-50))",
-          100: "hsl(var(--blue-100))",
-          200: "hsl(var(--blue-200))",
-          300: "hsl(var(--blue-300))",
-          400: "hsl(var(--blue-400))",
-          500: "hsl(var(--blue-500))",
-          600: "hsl(var(--blue-600))",
-          700: "hsl(var(--blue-700))",
-          800: "hsl(var(--blue-800))",
-          900: "hsl(var(--blue-900))",
-          950: "hsl(var(--blue-950))",
-        },
       },
       borderRadius: {
         lg: "0.5rem",
@@ -235,12 +222,11 @@ export default {
         marquee: "marquee 30s linear infinite",
       },
       boxShadow: {
-        xs: "none",
-        sm: "none",
-        md: "none",
-        lg: "none",
-        xl: "none",
-        none: "none",
+        xs: "0 1px 2px rgba(0, 0, 0, 0.04)",
+        sm: "0 1px 3px rgba(0, 0, 0, 0.05)",
+        md: "0 2px 8px -2px rgba(0, 0, 0, 0.06)",
+        lg: "0 4px 16px -4px rgba(0, 0, 0, 0.08)",
+        xl: "0 8px 24px -6px rgba(0, 0, 0, 0.1)",
       },
     },
   },

@@ -105,10 +105,10 @@ main img[class*="rounded"]:hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Browser-level smooth-scroll is intentionally NOT set here.
-   It forces wheel/touch scrolling through the smooth-scroll animator
-   which causes input delay and visible blinking against animated
-   backgrounds. Anchor links can opt in per call via JS scrollIntoView. */
+/* ── Smooth scrolling for the whole page ── */
+html {
+  scroll-behavior: smooth;
+}
 
 /* ── Premium focus ring for all interactive body elements ── */
 main button:focus-visible,
@@ -202,11 +202,30 @@ main select:focus {
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-/* Dialog sizing is handled in responsive.css (mobile) and polish.css (all sizes) */
+/* ── Responsive dialog/menu sizing ── */
+@media (max-width: 640px) {
+  [role="dialog"] {
+    max-width: calc(100vw - 1.5rem) !important;
+    max-height: 85vh !important;
+    padding: 1.25rem !important;
+    border-radius: 1rem !important;
+  }
 
-/* Z-index stacking is managed via CSS variables in base.css (--z-nav, --z-modal)
-   and the Tailwind config zIndex extension. Hardcoding z-index here was removed
-   to prevent conflicts with the token system. */
+  [data-radix-popper-content-wrapper] {
+    max-width: calc(100vw - 1rem) !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  [role="dialog"] {
+    max-width: min(480px, calc(100vw - 3rem)) !important;
+  }
+}
+
+/* ── Z-index system — prevent stacking conflicts ── */
+.fixed { z-index: 40; }
+nav { z-index: 50 !important; }
+[role="dialog"] { z-index: 60 !important; }
 
 /* ── Cookie consent banner ── */
 .cookie-banner {
@@ -233,22 +252,6 @@ main select:focus {
   50% { border-color: rgba(107, 70, 193, 0.35); box-shadow: 0 0 20px rgba(107, 70, 193, 0.1); }
 }
 
-/* ── Touch devices — disable hover lift effects ── */
-@media (hover: none) and (pointer: coarse) {
-  .hover-lift:hover {
-    transform: none;
-  }
-
-  .container .bg-card:hover,
-  .container [class*="glass-card"]:hover {
-    transform: none;
-  }
-
-  main img[class*="rounded"]:hover {
-    transform: none;
-  }
-}
-
 /* ── Reduce motion preference ── */
 @media (prefers-reduced-motion: reduce) {
   .hover-lift,
@@ -263,6 +266,3 @@ main select:focus {
     transform: none;
   }
 }
-
-/* Dark dialog surface overrides moved to components that explicitly need dark glass style.
-   Blanket white-text overrides here fought with light-background modals. */

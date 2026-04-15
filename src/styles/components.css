@@ -1,14 +1,5 @@
 /* Component-Specific Styles */
 
-/* ===== HERO SIZE LOCK — all heroes must be 100dvh ===== */
-.hero-home,
-.hero-biz,
-.hero-ws,
-.hero-mobile,
-[class*="hero-section"] {
-  min-height: 100dvh !important;
-}
-
 /* ===== DARK HERO CYBER THEME — Premium Cinematic ===== */
 
 .hero-dark-bg {
@@ -194,13 +185,7 @@
     inset 0 2px 6px rgba(0, 0, 0, 0.04),
     0 0 0 3px hsl(var(--primary) / 0.1),
     0 1px 0 rgba(255, 255, 255, 0.8);
-  outline: none; /* Visual focus provided via box-shadow above */
-}
-
-/* Keyboard-only: expose an outline on top of the box-shadow ring */
-.skeuo-input:focus-visible {
-  outline: 2px solid hsl(var(--primary));
-  outline-offset: 2px;
+  outline: none;
 }
 
 /* Skeuomorphic Panel - Raised container */
@@ -433,36 +418,15 @@ a[role="button"]:active {
 /* Form Input Animations */
 .form-input {
   border: 1px solid hsl(var(--border));
-  border-radius: var(--radius-sm);
-  transition: border-color 0.2s ease-out, box-shadow 0.2s ease-out;
+  transition: border-color 0.3s ease-out, box-shadow 0.3s ease-out;
   min-height: 44px;
-  font-size: 16px; /* Prevents iOS auto-zoom on focus */
-  padding: 0.625rem 0.875rem;
+  font-size: 16px; /* Prevents iOS zoom */
 }
 
 .form-input:focus {
   border: 2px solid hsl(var(--primary));
-  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.12);
-  outline: none; /* Visual focus provided via border + box-shadow above */
-}
-
-/* Keyboard-only: expose an outline on top of the focus ring */
-.form-input:focus-visible {
-  outline: 2px solid hsl(var(--primary));
-  outline-offset: 2px;
-}
-
-/* All interactive inputs: prevent iOS zoom */
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="tel"],
-input[type="number"],
-input[type="search"],
-input[type="url"],
-textarea,
-select {
-  font-size: 16px;
+  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+  outline: none;
 }
 
 /* Input validation states */
@@ -641,7 +605,11 @@ select {
 }
 
 
-/* Performance optimizations — canonical version is in utilities.css */
+/* Performance optimizations */
+.gpu-accelerated {
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
 
 
 /* ===== NEUMORPHISM DESIGN SYSTEM ===== */

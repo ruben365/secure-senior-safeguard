@@ -1,22 +1,5 @@
 /* Utility Classes */
 
-/* ===== VIEWPORT HELPERS ===== */
-.h-viewport {
-  height: 100vh;
-}
-
-.min-h-viewport {
-  min-height: 100vh;
-}
-
-.min-h-viewport-80 {
-  min-height: 80vh;
-}
-
-.min-h-viewport-60 {
-  min-height: 60vh;
-}
-
 /* ===== DARK HERO GRID OVERLAY ===== */
 /* Reusable blueprint/cybersecurity grid pattern for dark hero sections */
 .hero-grid-overlay {
@@ -575,7 +558,7 @@ video {
 
 /* Prevent font flash */
 .font-loaded {
-  font-family: "Rubik", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Lexend", "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
 /* Reduce CLS */

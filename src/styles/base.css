@@ -28,20 +28,20 @@
 @layer base {
 
   :root {
-    /* ── Core Surfaces — White & Clean ── */
-    --background: 0 0% 100%;         /* #FFFFFF — pure white */
-    --foreground: 240 20% 16%;       /* #1E1E2E — dark charcoal */
+    /* ── Core Surfaces ── */
+    --background: 210 40% 98%;       /* #F5F9FC — cool off-white */
+    --foreground: 213 60% 12%;       /* #0D2137 — deep navy text */
 
-    /* ── Primary: Purple ── */
-    --primary: 263 70% 58%;          /* #7C3AED — purple */
+    /* ── Primary: Security Blue ── */
+    --primary: 207 89% 34%;          /* #066DB3 — trust blue */
     --primary-foreground: 0 0% 100%;
 
-    /* ── Secondary: Soft Neutral ── */
-    --secondary: 220 15% 95%;        /* #F0F1F3 — neutral gray */
-    --secondary-foreground: 240 20% 25%;
+    /* ── Secondary: Sky Blue ── */
+    --secondary: 207 84% 94%;        /* #E0F0FC — soft blue tint */
+    --secondary-foreground: 207 89% 28%; /* deep blue text */
 
-    /* ── Accent / CTA: Purple ── */
-    --accent: 263 70% 58%;           /* #7C3AED — matching purple */
+    /* ── Accent / CTA: Signal Orange ── */
+    --accent: 25 95% 53%;            /* #F97316 — high-energy CTA */
     --accent-foreground: 0 0% 100%;
 
     /* ── Success: Protected Green ── */
@@ -52,41 +52,24 @@
     --destructive: 0 72% 51%;        /* #DC2626 */
     --destructive-foreground: 0 0% 100%;
 
-    /* ── Card & Popover — glass-ready ── */
+    /* ── Card & Popover ── */
     --card: 0 0% 100%;
-    --card-foreground: 220 30% 14%;
+    --card-foreground: 213 60% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 30% 14%;
+    --popover-foreground: 213 60% 12%;
 
     /* ── Muted ── */
-    --muted: 220 15% 95%;            /* #F0F1F3 — light neutral */
-    --muted-foreground: 220 9% 46%;  /* #6B7280 — gray body text */
+    --muted: 210 30% 93%;            /* #E4EDF5 */
+    --muted-foreground: 215 20% 45%; /* #637080 */
 
     /* ── Borders & Inputs ── */
-    --border: 220 13% 90%;           /* #E5E7EB */
-    --input: 220 15% 95%;
-    --ring: 263 70% 58%;             /* matches purple primary */
+    --border: 210 28% 86%;           /* #CAD8E6 */
+    --input: 210 30% 93%;
+    --ring: 207 89% 34%;
 
-    /* ── Radius scale — use these tokens for consistent rounding ── */
-    --radius-xs:   0.25rem;   /* 4px  — tight: badges, chips */
-    --radius-sm:   0.375rem;  /* 6px  — small: inputs, small buttons */
-    --radius:      0.5rem;    /* 8px  — default */
-    --radius-md:   0.75rem;   /* 12px — medium: cards */
-    --radius-lg:   1rem;      /* 16px — large: panels */
-    --radius-xl:   1.25rem;   /* 20px — XL: modals, heroes */
-    --radius-2xl:  1.5rem;    /* 24px — 2XL: floating cards */
-    --radius-full: 9999px;    /* pill: badges, avatars */
-
-    /* Z-index scale — use these to avoid z-index conflicts */
-    --z-base:      0;
-    --z-raised:    10;
-    --z-dropdown:  1000;
-    --z-sticky:    9000;
-    --z-nav:       9999;
-    --z-modal:     10000;
-    --z-toast:     10001;
-    --z-tooltip:   10002;
+    /* ── Radius ── */
+    --radius: 0.5rem;                /* 8px base, cards get 12-16px */
 
     /* ── Extended Blue Spectrum ── */
     --blue-950: 213 80%  8%;
@@ -184,38 +167,16 @@
     --gold-400: 42 92% 58%;
     --gold-300: 46 88% 68%;
 
-    /* ── Warm Palette — walnut/copper/cream ── */
-    --walnut-dark:   #2E1F1B;
-    --walnut-medium: #5E4B43;
-    --walnut-muted:  #8B7D75;
-    --copper:        #B87333;
-    --copper-light:  #D4956B;
-    --cream:         #FAF6F1;
-    --cream-border:  #E8DDD0;
+    /* ── Shadow System — crisp blue-tinted depth ── */
+    --shadow-xs:  0 1px 2px rgba(3, 80, 140, 0.06);
+    --shadow-sm:  0 1px 3px rgba(3, 80, 140, 0.07), 0 2px 6px rgba(3, 80, 140, 0.04);
+    --shadow-md:  0 2px 6px rgba(3, 80, 140, 0.06), 0 4px 14px -2px rgba(3, 80, 140, 0.1);
+    --shadow-lg:  0 4px 10px rgba(3, 80, 140, 0.06), 0 8px 28px -4px rgba(3, 80, 140, 0.14);
 
-    /* ── Dark Surface Tokens ── */
-    --dark-glass:       rgba(18, 14, 12, 0.92);
-    --dark-card:        rgba(255, 255, 255, 0.04);
-    --dark-border:      rgba(255, 255, 255, 0.08);
-    --dark-border-hover: rgba(255, 255, 255, 0.15);
-    --dark-input-bg:    rgba(255, 255, 255, 0.06);
-    --dark-input-border: rgba(255, 255, 255, 0.12);
-    --dark-text:        rgba(255, 255, 255, 1);
-    --dark-text-body:   rgba(255, 255, 255, 0.8);
-    --dark-text-label:  rgba(255, 255, 255, 0.7);
-    --dark-text-muted:  rgba(255, 255, 255, 0.5);
-    --dark-placeholder: rgba(255, 255, 255, 0.4);
-
-    /* ── Shadow System — DISABLED per design directive (no box-shadows anywhere) ── */
-    --shadow-xs:  none;
-    --shadow-sm:  none;
-    --shadow-md:  none;
-    --shadow-lg:  none;
-
-    --shadow-card:       none;
-    --shadow-card-hover: none;
-    --shadow-elevated:   none;
-    --shadow-cta:        none;
+    --shadow-card:       0 1px 2px rgba(3,80,140,0.05), 0 2px 8px rgba(3,80,140,0.06), 0 8px 24px -6px rgba(3,80,140,0.08);
+    --shadow-card-hover: 0 2px 4px rgba(3,80,140,0.06), 0 6px 16px rgba(3,80,140,0.08), 0 16px 36px -8px rgba(3,80,140,0.14);
+    --shadow-elevated:   0 6px 24px rgba(3,105,161,0.12), 0 2px 8px rgba(0,0,0,0.04);
+    --shadow-cta:        0 4px 14px rgba(249,115,22,0.35);
 
     /* ── Sidebar (admin dark) ── */
     --sidebar-background: 215 40% 10%;
@@ -227,71 +188,36 @@
     --sidebar-border: 215 28% 18%;
     --sidebar-ring: 207 89% 50%;
 
-    /* ── Spacing scale (rem-based) ──
-       Usage: var(--space-4) = 1rem = 16px
-       For touch targets, use min-h-[44px] */
-    --space-1:   0.25rem;   /*  4px  */
-    --space-2:   0.5rem;    /*  8px  */
-    --space-3:   0.75rem;   /* 12px  */
-    --space-4:   1rem;      /* 16px  */
-    --space-5:   1.25rem;   /* 20px  */
-    --space-6:   1.5rem;    /* 24px  */
-    --space-8:   2rem;      /* 32px  */
-    --space-10:  2.5rem;    /* 40px  */
-    --space-12:  3rem;      /* 48px  */
-    --space-16:  4rem;      /* 64px  */
-    --space-20:  5rem;      /* 80px  */
-    --space-24:  6rem;      /* 96px  */
-    --space-32:  8rem;      /* 128px */
-
-    /* Section vertical padding — compact scale */
-    --section-py-xs:  1rem;     /* tight */
-    --section-py-sm:  1.75rem;  /* compact */
-    --section-py-md:  2.75rem;  /* default */
-    --section-py-lg:  4rem;     /* spacious */
-    --section-py-xl:  5.5rem;   /* hero/feature */
-
-    /* Container widths — compact */
-    --container-xs:   400px;
-    --container-sm:   540px;
-    --container-md:   680px;
-    --container-lg:   880px;
-    --container-xl:   1040px;
-    --container-2xl:  1140px;
-    --container-wide: 1280px;
-    --container-max:  1440px;
-
-    /* Global text scale — standard 16px base */
+    /* ── Global text scale ── */
     --text-scale: 1;
-
   }
 
   .dark {
-    --background: 224 30% 8%;         /* deep dark */
-    --foreground: 220 15% 93%;        /* light text */
-    --card: 224 25% 12%;
-    --card-foreground: 220 15% 93%;
-    --popover: 224 25% 12%;
-    --popover-foreground: 220 15% 93%;
-    --primary: 263 70% 58%;
+    --background: 215 40% 8%;
+    --foreground: 210 20% 94%;
+    --card: 215 36% 12%;
+    --card-foreground: 210 20% 94%;
+    --popover: 215 36% 12%;
+    --popover-foreground: 210 20% 94%;
+    --primary: 207 84% 55%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 224 20% 18%;
-    --secondary-foreground: 220 15% 90%;
-    --muted: 224 18% 16%;
-    --muted-foreground: 220 10% 58%;
-    --accent: 263 70% 58%;
+    --secondary: 215 28% 18%;
+    --secondary-foreground: 210 20% 90%;
+    --muted: 215 24% 16%;
+    --muted-foreground: 210 16% 58%;
+    --accent: 25 95% 53%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 72% 55%;
     --destructive-foreground: 0 0% 100%;
-    --border: 224 18% 20%;
-    --input: 224 18% 18%;
-    --ring: 263 70% 58%;
-    --sidebar-background: 224 30% 6%;
-    --sidebar-foreground: 220 15% 92%;
-    --sidebar-primary: 263 70% 58%;
+    --border: 215 24% 20%;
+    --input: 215 24% 18%;
+    --ring: 207 84% 55%;
+    --sidebar-background: 215 44% 6%;
+    --sidebar-foreground: 210 18% 92%;
+    --sidebar-primary: 207 84% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 224 22% 14%;
-    --sidebar-accent-foreground: 220 15% 90%;
+    --sidebar-accent: 215 32% 14%;
+    --sidebar-accent-foreground: 210 18% 90%;
     --sidebar-border: 215 28% 14%;
     --sidebar-ring: 207 84% 55%;
   }
@@ -304,10 +230,14 @@
 
   /* ===== SKEUOMORPHISM 2.0 - GLOBAL MATERIAL STYLES ===== */
   :root {
-    /* Shadow layers — DISABLED */
-    --skeuo-shadow-raised: none;
-    --skeuo-shadow-pressed: none;
-    --skeuo-shadow-floating: none;
+    /* Modern clean shadow layers */
+    --skeuo-shadow-raised:
+      0 1px 2px rgba(0, 0, 0, 0.04),
+      0 2px 4px rgba(0, 0, 0, 0.03);
+    --skeuo-shadow-pressed: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+    --skeuo-shadow-floating:
+      0 2px 8px rgba(0, 0, 0, 0.04),
+      0 8px 24px rgba(0, 0, 0, 0.06);
     --skeuo-highlight: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0.25) 0%,
@@ -317,11 +247,25 @@
       inset 0 1px 2px rgba(0, 0, 0, 0.06),
       inset 0 -1px 1px rgba(255, 255, 255, 0.5);
 
-    /* Neutral shadows — DISABLED */
-    --skeuo-shadow-coral: none;
-    --skeuo-shadow-lavender: none;
-    --skeuo-shadow-mixed: none;
-    --skeuo-shadow-ombre: none;
+    /* Neutral modern shadows */
+    --skeuo-shadow-coral:
+      0 2px 4px rgba(0, 0, 0, 0.04),
+      0 4px 8px rgba(0, 0, 0, 0.04),
+      0 8px 16px rgba(0, 0, 0, 0.03);
+    --skeuo-shadow-lavender:
+      0 2px 4px rgba(0, 0, 0, 0.04),
+      0 4px 8px rgba(0, 0, 0, 0.04),
+      0 8px 16px rgba(0, 0, 0, 0.03);
+    --skeuo-shadow-mixed:
+      0 2px 4px rgba(0, 0, 0, 0.04),
+      0 6px 12px rgba(0, 0, 0, 0.05),
+      0 12px 24px rgba(0, 0, 0, 0.04);
+
+    /* Clean card shadow */
+    --skeuo-shadow-ombre:
+      0 1px 3px rgba(0, 0, 0, 0.04),
+      0 4px 12px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 hsl(0 0% 100% / 0.9);
 
     /* Clean glass backgrounds */
     --skeuo-glass-bg: linear-gradient(
@@ -331,7 +275,10 @@
     );
     --skeuo-glass-border: hsl(240 6% 90%);
     --skeuo-glass-blur: none;
-    --skeuo-glass-shadow: none;
+    --skeuo-glass-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.06),
+      0 1px 3px rgba(0, 0, 0, 0.04),
+      inset 0 1px 0 hsl(0 0% 100% / 0.92);
 
     /* Primary gradient for accents */
     --skeuo-gradient-accent: linear-gradient(
@@ -347,28 +294,22 @@
   }
 
   html {
-    /*
-      scroll-behavior is intentionally NOT "smooth" at the html level.
-      Forcing smooth on the root element routes every wheel/touch scroll
-      through the browser's smooth-scroll animator, which makes scrolling
-      feel delayed and causes visible blinking against animated/blurred
-      backgrounds. Anchor-link smooth jumps can be added per-call via
-      element.scrollIntoView({ behavior: "smooth" }) where needed.
-    */
+    @apply scroll-smooth;
     overflow-x: hidden;
     width: 100%;
+    scroll-behavior: smooth;
     scrollbar-gutter: stable;
-    font-size: 16px;
+    font-size: calc(16px * var(--text-scale));
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: "Inter", "Rubik", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: 1rem;        /* 16px base — no iOS zoom on inputs */
-    line-height: 1.6;
-    letter-spacing: -0.011em;
+    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    letter-spacing: -0.006em;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -385,7 +326,7 @@
     overflow-x: hidden;
     width: 100%;
     position: relative;
-    /* background-color intentionally omitted — @apply bg-background uses --background token */
+    background-color: hsl(240 10% 98%);
   }
 
   @media (min-width: 768px) {
@@ -395,7 +336,11 @@
     }
   }
 
-  /* text-scale removed — standard 16px base everywhere */
+  @media (max-width: 768px) {
+    :root {
+      --text-scale: 0.95;
+    }
+  }
 
   /* Accessibility - Skip to content link */
   .skip-to-content {
@@ -496,6 +441,11 @@
     text-decoration-skip-ink: auto;
   }
 
+  ::selection {
+    background: hsl(var(--accent) / 0.25);
+    color: hsl(var(--foreground));
+  }
+
   h1,
   h2,
   h3,
@@ -503,7 +453,7 @@
   h5,
   h6 {
     @apply font-bold;
-    font-family: "Lora", "Rubik", ui-serif, Georgia, serif;
+    font-family: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
     line-height: 1.1;
     letter-spacing: -0.02em;
     text-wrap: balance;
@@ -513,66 +463,54 @@
   }
 
   h1 {
-    /* Phone: 26px → Desktop: 48px */
-    font-size: clamp(1.625rem, 4.5vw, 3rem);
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    font-weight: 900;
-  }
-
-  h2 {
-    /* Phone: 22px → Desktop: 34px */
-    font-size: clamp(1.375rem, 3.5vw, 2.125rem);
-    letter-spacing: -0.015em;
-    line-height: 1.15;
+    font-size: clamp(2rem, 4vw + 1rem, 3.75rem);
+    letter-spacing: -0.03em;
+    line-height: 1.06;
     font-weight: 800;
   }
 
+  h2 {
+    font-size: clamp(1.625rem, 3vw + 0.5rem, 2.75rem);
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    font-weight: 700;
+  }
+
   h3 {
-    /* Standard: 20–30px */
-    font-size: clamp(1.25rem, 3vw, 1.875rem);
-    letter-spacing: -0.01em;
+    font-size: clamp(1.25rem, 2.5vw + 0.25rem, 2rem);
+    letter-spacing: -0.02em;
     line-height: 1.2;
     font-weight: 700;
   }
 
   h4 {
-    /* Standard: 18–24px */
-    font-size: clamp(1.125rem, 2vw, 1.5rem);
-    letter-spacing: -0.008em;
+    font-size: clamp(1.125rem, 1.5vw + 0.25rem, 1.5rem);
+    letter-spacing: -0.015em;
     line-height: 1.25;
     font-weight: 600;
   }
 
   h5 {
-    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    font-size: clamp(1rem, 1vw + 0.25rem, 1.25rem);
     letter-spacing: -0.01em;
     line-height: 1.3;
     font-weight: 600;
   }
 
   h6 {
-    font-size: clamp(0.9375rem, 1vw, 1.125rem);
+    font-size: clamp(0.9375rem, 0.5vw + 0.25rem, 1.125rem);
     letter-spacing: -0.008em;
     line-height: 1.4;
     font-weight: 600;
   }
 
   p {
-    font-size: 1rem;      /* standard 16px */
-    line-height: 1.65;
+    font-size: 1rem;
+    line-height: 1.7;
     letter-spacing: -0.011em;
-    margin: 0 0 0.75rem;
+    margin: 0 0 1rem;
     color: hsl(var(--foreground) / 0.85);
     max-width: 65ch;
-  }
-
-  .lead {
-    font-size: clamp(1rem, 1.25vw + 0.25rem, 1.175rem);
-    line-height: 1.6;
-    color: hsl(var(--muted-foreground));
-    font-weight: 400;
-    max-width: 70ch;
   }
 
   li {
@@ -603,25 +541,46 @@
     line-height: 1.6;
   }
 
-  /* Tap targets — 36px desktop, 44px mobile (no zoom to compensate for) */
+  /* Minimum tap targets for accessibility */
   button,
   [role="button"],
   a[role="button"] {
-    min-height: 36px;
-    min-width: 36px;
-  }
-
-  @media (max-width: 768px) {
-    button,
-    [role="button"],
-    a[role="button"] {
-      min-height: 44px;
-      min-width: 44px;
-    }
+    min-height: 44px;
+    min-width: 44px;
   }
 
   button {
     font-size: 1rem;
+  }
+
+  /* Clean background mode: remove animated/decorative background effects */
+  .aurora-bg,
+  .mesh-gradient {
+    background: none !important;
+  }
+
+  .dynamic-gradient-overlay::before,
+  .premium-aurora::before,
+  .noise-overlay::after,
+  .skeuo-ambient-coral::before,
+  .skeuo-ambient-lavender::before,
+  .skeuo-ambient-mixed::before,
+  .theme-layer-coral::before,
+  .theme-layer-lavender::before,
+  .theme-layer-navy::before,
+  .theme-layer-mixed::before {
+    content: none !important;
+    animation: none !important;
+    display: none !important;
+    background: none !important;
+  }
+
+  .premium-orb,
+  .blob {
+    animation: none !important;
+    background: transparent !important;
+    filter: none !important;
+    opacity: 0 !important;
   }
 
   /* ===== PERFORMANCE OPTIMIZATION ===== */
@@ -633,9 +592,13 @@
   }
 
   /* ===== SKEUOMORPHISM 2.0 GLOBAL EFFECTS ===== */
-  /* NOTE: skeuo-shadow-raised is applied per-component (cards, panels),
-     not globally to all rounded elements — that was too broad and
-     caused unwanted shadows on images, badges, and buttons. */
+
+  /* All cards get subtle raised effect */
+  .rounded-xl,
+  .rounded-2xl,
+  .rounded-3xl {
+    box-shadow: var(--skeuo-shadow-raised);
+  }
 
   /* Premium section backgrounds with depth */
   section {
@@ -708,9 +671,11 @@ textarea,
   transition-timing-function: cubic-bezier(0.2, 0, 0.2, 1);
 }
 
-/* Content visibility — applied selectively via .lazy-section class (see utilities.css).
-   Removed from all sections globally because it breaks IntersectionObserver-based
-   scroll animations and causes layout shifts on sections taller than 600px. */
+/* Content visibility for below-fold sections - massive perf win */
+section:not(:first-child) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
 
 /* Glassmorphism image overlay utilities */
 .glass-cursor-overlay {

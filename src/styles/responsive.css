@@ -1,10 +1,5 @@
-/* =====================================================
-   RESPONSIVE SYSTEM
-   Breakpoints: 374 | 640 | 768 | 1024 | 1280 | 1536 | 1920 | 2560px
-   Phones (320-640) | Tablets (641-1024) | Laptops (1025-1440) | Desktops (1441-1920) | Projectors (1921+)
-   Standard zoom (1.0) — no scaling hacks
-   Touch targets need ≥44px
-   ===================================================== */
+/* ===== RESPONSIVE DESIGN — All Devices ===== */
+/* Phones (320-640) | Tablets (641-1024) | Laptops (1025-1440) | Desktops (1441-1920) | Projectors (1921+) */
 
 /* ------------------------------------------------------------ */
 /*  EXTRA-SMALL PHONES (<375px) — iPhone SE, Galaxy Fold         */
@@ -44,29 +39,28 @@
 /* ------------------------------------------------------------ */
 @media (max-width: 640px) {
   .hero-mobile h1 {
-    font-size: clamp(1.75rem, 6vw, 2rem) !important;
-    line-height: 1.15 !important;
+    font-size: clamp(1.75rem, 5vw, 2.5rem) !important;
+    line-height: 1.2 !important;
   }
   .hero-mobile h2 {
-    font-size: clamp(1.25rem, 4vw, 1.5rem) !important;
+    font-size: clamp(1.25rem, 4vw, 1.75rem) !important;
   }
   .hero-mobile p {
-    font-size: 0.9375rem !important;
-    line-height: 1.6 !important;
+    font-size: clamp(0.875rem, 3vw, 1rem) !important;
   }
 
   /* Prevent horizontal overflow */
   body { overflow-x: hidden; }
 
   .container {
-    padding-left: 1.25rem !important;
-    padding-right: 1.25rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
   }
 
   /* Ensure images don't overflow */
   img { max-width: 100%; height: auto; }
 
-  /* Mobile cards — breathing room */
+  /* More compact cards */
   .card { padding: 1rem !important; }
 
   /* Stack flex items */
@@ -89,12 +83,12 @@
   .hover-scale:active { transform: scale(0.95); }
   .hover-scale:hover { transform: none; }
 
-  /* Touch targets — compact but still accessible */
+  /* Touch-friendly tap targets (WCAG 2.5.5) */
   button,
   a[role="button"],
   [role="button"] {
-    min-height: 38px;
-    min-width: 38px;
+    min-height: 44px;
+    min-width: 44px;
   }
 
   /* Admin dashboard responsive */
@@ -112,78 +106,14 @@
     border-radius: 0;
   }
 
-  /* Section spacing — compact on mobile */
+  /* Section spacing */
   .section-spacing { @apply py-6; }
-  .card-mobile { @apply p-3; }
+  .hero-mobile { min-height: 100dvh !important; }
+  .card-mobile { @apply p-4; }
 
-  /* Mobile typography — compressed, no larger than 28px */
-  h1 { font-size: 1.625rem; line-height: 1.2; }
-  h2 { font-size: 1.25rem; line-height: 1.2; }
-  h3 { font-size: 1.0625rem; line-height: 1.25; }
-
-  /* Mobile body text — scoped to content paragraphs */
-  main p, main li { font-size: 0.875rem; line-height: 1.5; }
-
-  /* Mobile containers — tighter horizontal padding */
-  .container {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-  }
-
-  /* Hide decorative floating elements on mobile */
-  .hss-float-card,
-  .hss-trust-badge,
-  [class*="float-card"],
-  [class*="floating-stat"],
-  [class*="decorative"] {
-    display: none !important;
-  }
-
-  /* Hero text overlay — stronger gradient for readability */
-  .hero-overlay,
-  [class*="hero"] [class*="overlay"] {
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.7) 0%,
-      rgba(0, 0, 0, 0.5) 50%,
-      rgba(0, 0, 0, 0.7) 100%
-    ) !important;
-  }
-
-  /* Card grid gap compression — scoped to content sections only */
-  main section .grid.gap-6 { gap: 0.75rem; }
-  main section .grid.gap-8 { gap: 1rem; }
-
-  /* Disable hover lift/translateY on mobile (no hover on touch) */
-  .hover-lift:hover,
-  .container .bg-card:hover,
-  .container [class*="glass-card"]:hover {
-    transform: none !important;
-  }
-
-  /* Force single column for bare multi-column grids on mobile.
-     Only targets grids that don't already have responsive prefixes
-     (md:grid-cols-X / lg:grid-cols-X breakpoints handle themselves). */
-  main section [class~="grid-cols-2"]:not([class*="sm:grid-cols"]):not([class*="md:grid-cols"]):not([role="tablist"]):not([class*="tabs"]),
-  main section [class~="grid-cols-3"]:not([class*="sm:grid-cols"]):not([class*="md:grid-cols"]):not([role="tablist"]):not([class*="tabs"]),
-  main section [class~="grid-cols-4"]:not([class*="sm:grid-cols"]):not([class*="md:grid-cols"]):not([role="tablist"]):not([class*="tabs"]) {
-    grid-template-columns: 1fr !important;
-  }
-
-  /* Full-width dialogs on mobile */
-  [role="dialog"] {
-    width: 94% !important;
-    max-width: 100% !important;
-    max-height: 85vh !important;
-    padding: 1.25rem !important;
-    border-radius: 1rem !important;
-    overflow-y: auto !important;
-  }
-
-  /* Inputs: prevent iOS zoom (must be ≥16px) */
-  input, select, textarea {
-    font-size: 16px !important;
-  }
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
 
   /* Performance: simplify glass effects */
   .glass,
@@ -278,13 +208,6 @@
 /*  TABLET LANDSCAPE / SMALL LAPTOP (1024-1280px)                */
 /* ------------------------------------------------------------ */
 @media (min-width: 1024px) and (max-width: 1280px) {
-  :root {
-    --text-scale: 1;
-    --section-py-md: 5rem;
-    --section-py-lg: 7rem;
-    --section-py-xl: 9rem;
-  }
-
   .container {
     max-width: 1024px;
     padding-left: 2rem !important;
