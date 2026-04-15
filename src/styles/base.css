@@ -358,7 +358,7 @@
     overflow-x: hidden;
     width: 100%;
     scrollbar-gutter: stable;
-    font-size: calc(16px * var(--text-scale));
+    font-size: 16px;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
   }
@@ -395,11 +395,7 @@
     }
   }
 
-  @media (max-width: 768px) {
-    :root {
-      --text-scale: 1; /* full 16px base on mobile for readability — no shrinking */
-    }
-  }
+  /* text-scale removed — standard 16px base everywhere */
 
   /* Accessibility - Skip to content link */
   .skip-to-content {
@@ -517,53 +513,53 @@
   }
 
   h1 {
-    /* Compact: ~28-36px range (was 34-64px with old zoom) */
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    /* Standard: 32–56px */
+    font-size: clamp(2rem, 5vw, 3.5rem);
     letter-spacing: -0.02em;
     line-height: 1.1;
     font-weight: 900;
   }
 
   h2 {
-    /* Compact: ~22-28px range */
-    font-size: clamp(1.375rem, 3vw, 2rem);
+    /* Standard: 24–40px */
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
     letter-spacing: -0.015em;
     line-height: 1.15;
     font-weight: 800;
   }
 
   h3 {
-    /* Compact: ~18-22px range */
-    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    /* Standard: 20–30px */
+    font-size: clamp(1.25rem, 3vw, 1.875rem);
     letter-spacing: -0.01em;
     line-height: 1.2;
     font-weight: 700;
   }
 
   h4 {
-    /* Compact: ~16-18px range */
-    font-size: clamp(1rem, 1.5vw + 0.25rem, 1.25rem);
+    /* Standard: 18–24px */
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
     letter-spacing: -0.008em;
     line-height: 1.25;
     font-weight: 600;
   }
 
   h5 {
-    font-size: clamp(0.9375rem, 1vw + 0.2rem, 1.125rem);
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
     letter-spacing: -0.01em;
     line-height: 1.3;
     font-weight: 600;
   }
 
   h6 {
-    font-size: clamp(0.875rem, 0.5vw + 0.2rem, 1rem);
+    font-size: clamp(0.9375rem, 1vw, 1.125rem);
     letter-spacing: -0.008em;
     line-height: 1.4;
     font-weight: 600;
   }
 
   p {
-    font-size: 0.9375rem; /* 15px at 16px base, ~13px with 0.85 scale */
+    font-size: 1rem;      /* standard 16px */
     line-height: 1.65;
     letter-spacing: -0.011em;
     margin: 0 0 0.75rem;
