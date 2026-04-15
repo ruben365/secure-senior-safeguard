@@ -188,8 +188,8 @@
     --sidebar-border: 215 28% 18%;
     --sidebar-ring: 207 89% 50%;
 
-    /* ── Global text scale ── */
-    --text-scale: 1;
+    /* ── Global text scale — 0.875 = 14px base (compact) ── */
+    --text-scale: 0.875;
   }
 
   .dark {
@@ -338,7 +338,7 @@
 
   @media (max-width: 768px) {
     :root {
-      --text-scale: 0.95;
+      --text-scale: 0.85;
     }
   }
 
