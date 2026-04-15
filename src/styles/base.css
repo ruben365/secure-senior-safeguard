@@ -28,17 +28,17 @@
 @layer base {
 
   :root {
-    /* ── Core Surfaces ── */
-    --background: 210 40% 98%;       /* #F5F9FC — cool off-white */
-    --foreground: 213 60% 12%;       /* #0D2137 — deep navy text */
+    /* ── Core Surfaces — Warm Coffee Palette ── */
+    --background: 30 30% 97%;        /* #F9F6F2 — warm cream */
+    --foreground: 25 45% 15%;        /* #3B2519 — dark coffee */
 
-    /* ── Primary: Warm Orange (was trust blue) ── */
+    /* ── Primary: Warm Terracotta ── */
     --primary: 14 65% 57%;           /* #d96c4a — warm terracotta orange */
     --primary-foreground: 0 0% 100%;
 
-    /* ── Secondary: Sky Blue ── */
-    --secondary: 207 84% 94%;        /* #E0F0FC — soft blue tint */
-    --secondary-foreground: 207 89% 28%; /* deep blue text */
+    /* ── Secondary: Chai Latte ── */
+    --secondary: 25 30% 90%;         /* #E8DBCE — warm caramel tint */
+    --secondary-foreground: 25 40% 25%;
 
     /* ── Accent / CTA: Signal Orange ── */
     --accent: 25 95% 53%;            /* #F97316 — high-energy CTA */
@@ -53,20 +53,20 @@
     --destructive-foreground: 0 0% 100%;
 
     /* ── Card & Popover ── */
-    --card: 0 0% 100%;
-    --card-foreground: 213 60% 12%;
+    --card: 30 25% 99%;              /* #FDFBF9 — warm white */
+    --card-foreground: 25 45% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 213 60% 12%;
+    --popover: 30 25% 99%;
+    --popover-foreground: 25 45% 15%;
 
     /* ── Muted ── */
-    --muted: 210 30% 93%;            /* #E4EDF5 */
-    --muted-foreground: 215 20% 45%; /* #637080 */
+    --muted: 30 20% 92%;             /* #EDE7E0 — warm beige */
+    --muted-foreground: 25 15% 45%;  /* #786A5E — coffee medium */
 
     /* ── Borders & Inputs ── */
-    --border: 210 28% 86%;           /* #CAD8E6 */
-    --input: 210 30% 93%;
-    --ring: 14 65% 57%;              /* matches new primary */
+    --border: 30 18% 85%;            /* #DDD3C7 — warm tan */
+    --input: 30 20% 92%;
+    --ring: 14 65% 57%;              /* matches primary */
 
     /* ── Radius scale — use these tokens for consistent rounding ── */
     --radius-xs:   0.25rem;   /* 4px  — tight: badges, chips */
@@ -267,31 +267,31 @@
   }
 
   .dark {
-    --background: 215 40% 8%;
-    --foreground: 210 20% 94%;
-    --card: 215 36% 12%;
-    --card-foreground: 210 20% 94%;
-    --popover: 215 36% 12%;
-    --popover-foreground: 210 20% 94%;
+    --background: 25 30% 8%;          /* dark espresso */
+    --foreground: 30 15% 92%;         /* light cream text */
+    --card: 25 25% 12%;               /* dark coffee */
+    --card-foreground: 30 15% 92%;
+    --popover: 25 25% 12%;
+    --popover-foreground: 30 15% 92%;
     --primary: 14 65% 57%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 215 28% 18%;
-    --secondary-foreground: 210 20% 90%;
-    --muted: 215 24% 16%;
-    --muted-foreground: 210 16% 58%;
+    --secondary: 25 22% 18%;
+    --secondary-foreground: 30 15% 90%;
+    --muted: 25 20% 16%;              /* medium espresso */
+    --muted-foreground: 25 12% 58%;   /* warm gray */
     --accent: 25 95% 53%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 72% 55%;
     --destructive-foreground: 0 0% 100%;
-    --border: 215 24% 20%;
-    --input: 215 24% 18%;
+    --border: 25 18% 20%;             /* coffee border */
+    --input: 25 20% 18%;
     --ring: 14 65% 57%;
-    --sidebar-background: 215 44% 6%;
-    --sidebar-foreground: 210 18% 92%;
-    --sidebar-primary: 207 84% 55%;
+    --sidebar-background: 25 30% 6%;
+    --sidebar-foreground: 30 15% 92%;
+    --sidebar-primary: 14 65% 57%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 215 32% 14%;
-    --sidebar-accent-foreground: 210 18% 90%;
+    --sidebar-accent: 25 25% 14%;
+    --sidebar-accent-foreground: 30 15% 90%;
     --sidebar-border: 215 28% 14%;
     --sidebar-ring: 207 84% 55%;
   }

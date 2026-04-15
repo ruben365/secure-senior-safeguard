@@ -16,11 +16,11 @@ const Toaster = ({ ...props }: ToasterProps) => {
         classNames: {
           toast:
             "group toast border rounded-[14px] " +
-            "!bg-[rgba(255,255,255,0.92)] !text-[#1E293B] !border-[rgba(0,0,0,0.08)] " +
-            "!shadow-[0_4px_24px_rgba(0,0,0,0.08)] " +
-            "dark:!bg-[rgba(255,255,255,0.92)] dark:!text-[#1E293B] dark:!border-[rgba(0,0,0,0.08)]",
+            "!bg-[rgba(250,247,242,0.88)] !text-[#3B2519] !border-[rgba(60,40,20,0.10)] " +
+            "!shadow-[0_4px_24px_rgba(40,25,10,0.10)] " +
+            "dark:!bg-[rgba(45,30,20,0.88)] dark:!text-[#ECE8E4] dark:!border-[rgba(200,150,100,0.12)]",
           description:
-            "group-[.toast]:!text-[#475569]",
+            "group-[.toast]:!text-[#786A5E] dark:group-[.toast]:!text-[#9A8E82]",
           actionButton:
             "group-[.toast]:!bg-[#d96c4a]/10 group-[.toast]:!text-[#d96c4a] group-[.toast]:!border group-[.toast]:!border-[#d96c4a]/20",
           cancelButton:
