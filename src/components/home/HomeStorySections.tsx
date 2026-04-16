@@ -14,6 +14,8 @@ import {
   ChevronLeft,
   ChevronRight,
   Star,
+  Phone,
+  MapPin,
 } from "lucide-react";
 import businessTeam from "@/assets/business-team-meeting-natural.jpg";
 import familyLiving from "@/assets/family-living-room-natural.jpg";
@@ -30,7 +32,18 @@ function CtaPrimary({ to, children }: { to: string; children: React.ReactNode })
   return (
     <Link
       to={to}
-      className="hss-cta-primary inline-flex items-center justify-center gap-1.5 sm:gap-2 h-10 sm:h-12 px-5 sm:px-7 rounded-full text-[13px] sm:text-[15px] font-semibold transition-all hover:-translate-y-[2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px]"
+      className="hss-cta-primary inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-6 sm:px-8 rounded-full text-[13px] sm:text-[14px] font-semibold transition-all hover:-translate-y-[2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px]"
+    >
+      {children}
+    </Link>
+  );
+}
+
+function CtaGhost({ to, children }: { to: string; children: React.ReactNode }) {
+  return (
+    <Link
+      to={to}
+      className="hss-cta-ghost inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-6 sm:px-8 rounded-full text-[13px] sm:text-[14px] font-semibold transition-all hover:-translate-y-[1px] border border-[#E0E0E0]"
     >
       {children}
     </Link>
@@ -71,6 +84,15 @@ function useCountUp(target: number, duration = 1800) {
 
 /* ─── Data ───────────────────────────────────────────────────────── */
 
+/* Trust strip items */
+const trustItems = [
+  { icon: MapPin,     label: "Kettering, Ohio based" },
+  { icon: ShieldCheck, label: "100+ families protected" },
+  { icon: Clock,       label: "24/7 live support" },
+  { icon: Award,       label: "10% veteran discount" },
+  { icon: Phone,       label: "(937) 301-8749" },
+];
+
 /* Feature strip — 3 items */
 const featureList = [
   {
@@ -81,12 +103,12 @@ const featureList = [
   {
     icon: Award,
     label: "Real human investigators",
-    desc: "Every alert is reviewed by a security analyst — never just a black-box AI guess.",
+    desc: "Every alert is reviewed by a certified security analyst — never a black-box AI guess.",
   },
   {
     icon: Users,
     label: "Family-first plans",
-    desc: "Coverage that scales from a single account to your whole household, including elders.",
+    desc: "Coverage that scales from a single account to your whole household, including elderly relatives.",
   },
 ];
 
@@ -94,25 +116,29 @@ const featureList = [
 const planTabs = ["Families", "Businesses", "Seniors"] as const;
 type PlanTab = (typeof planTabs)[number];
 
-const planCards: Record<PlanTab, { title: string; desc: string; price: string; image: string }[]> = {
+const planCards: Record<PlanTab, { title: string; desc: string; price: string; image: string; badge?: string; features: string[] }[]> = {
   Families: [
     {
       title: "Basic Shield",
       desc: "Always-on call and email screening with weekly safety briefings for your household.",
       price: "From $89/mo",
       image: familyLiving,
+      features: ["Call screening", "Email filtering", "Weekly report"],
     },
     {
       title: "Family Guard",
       desc: "All devices monitored plus dark web credential alerts for up to 5 family members.",
       price: "From $149/mo",
       image: protectionWorkshop,
+      badge: "Most Popular",
+      features: ["Everything in Basic", "Dark web monitoring", "Up to 5 members", "Instant alerts"],
     },
     {
       title: "Full Protection",
-      desc: "Everything included plus a dedicated security analyst and a reimbursement guarantee.",
+      desc: "A dedicated security analyst plus a full reimbursement guarantee if anything slips through.",
       price: "From $249/mo",
       image: businessTeam,
+      features: ["Everything in Guard", "Dedicated analyst", "Reimbursement cover", "Priority response"],
     },
   ],
   Businesses: [
@@ -121,18 +147,22 @@ const planCards: Record<PlanTab, { title: string; desc: string; price: string; i
       desc: "Email filtering, payroll protection, and one staff training session included.",
       price: "From $199/mo",
       image: consultingTeam,
+      features: ["Email filtering", "Payroll protection", "1 training session"],
     },
     {
       title: "SMB Shield",
       desc: "Full infrastructure audit, continuous monitoring, and monthly security reporting.",
       price: "From $349/mo",
       image: businessTeam,
+      badge: "Most Popular",
+      features: ["Full audit", "Continuous monitoring", "Monthly report", "Staff training"],
     },
     {
       title: "Enterprise",
       desc: "Custom security stack with on-site training and a dedicated incident response team.",
       price: "Contact us",
       image: communityWorkshop,
+      features: ["Custom stack", "On-site training", "Incident response", "SLA guarantee"],
     },
   ],
   Seniors: [
@@ -141,18 +171,22 @@ const planCards: Record<PlanTab, { title: string; desc: string; price: string; i
       desc: "One-on-one training session to recognize and block today's most common scams.",
       price: "$59 once",
       image: communityWorkshop,
+      features: ["1-on-1 session", "Scam recognition", "Safe-word setup"],
     },
     {
       title: "Senior Shield",
       desc: "Training plus 24/7 phone screening and monthly well-being check-in calls.",
       price: "From $89/mo",
       image: familyLiving,
+      badge: "Most Popular",
+      features: ["Training included", "24/7 phone screening", "Monthly check-in", "Family alert"],
     },
     {
       title: "Family Bundle",
       desc: "Covers the whole household — senior parent and adult family members together.",
       price: "From $149/mo",
       image: protectionWorkshop,
+      features: ["Full family cover", "All devices", "Shared dashboard", "10% veteran disc."],
     },
   ],
 };
@@ -190,6 +224,7 @@ const testimonials = [
       "We were about to send $5,000 to someone pretending to be our grandson. InVision's safe-word training saved us from devastation. We couldn't be more grateful.",
     rating: 5,
     avatar: instructorSarah,
+    tag: "Grandparent Scam",
   },
   {
     name: "Eleanor B.",
@@ -198,42 +233,50 @@ const testimonials = [
       "I'm 78 and felt completely lost with technology. Their patience with me was incredible — I actually feel confident now and can spot scams before they happen.",
     rating: 5,
     avatar: instructorPriya,
+    tag: "Senior Training",
   },
   {
     name: "Jennifer R.",
     location: "Beavercreek, OH",
     quote:
-      "Their team had our practice back up in under an hour after a payroll email got spoofed. Best insurance we ever bought — worth every penny and then some.",
+      "Their team had our practice back up in under an hour after a payroll email got spoofed. Best investment we ever made — worth every penny and then some.",
     rating: 5,
     avatar: instructorJames,
+    tag: "Business Rescue",
   },
 ];
 
 const testimonialImages = [familyLiving, communityWorkshop];
 
 /* Stats — 3 rows */
-type StatItem = { target: number; suffix: string; label: string; description: string };
+type StatItem = { prefix?: string; target: number; suffix: string; label: string; sublabel: string; description: string };
 const stats: StatItem[] = [
   {
-    target: 100,
-    suffix: "+",
-    label: "Families Protected",
+    prefix: "",
+    target: 10,
+    suffix: "+ Million",
+    label: "Scam Attempts Blocked",
+    sublabel: "and counting",
     description:
-      "Across Ohio, every household covered end-to-end with real human oversight and AI-powered monitoring.",
+      "Across Ohio families and small businesses, our AI and analyst team has intercepted over 10 million threat attempts since launch.",
   },
   {
-    target: 99,
-    suffix: "%",
-    label: "Scam Detection Rate",
+    prefix: "",
+    target: 8,
+    suffix: "x More",
+    label: "Effective Than Antivirus Alone",
+    sublabel: "measured over 24 months",
     description:
-      "Threats flagged before they reach the inbox, the phone, or the bank account — automatically.",
+      "Our combined AI + human model stops 8 times more social-engineering threats than traditional antivirus software on its own.",
   },
   {
-    target: 24,
-    suffix: "/7",
-    label: "Expert Support",
+    prefix: "",
+    target: 1,
+    suffix: "+ Million",
+    label: "Hours of Family Safety",
+    sublabel: "delivered since founding",
     description:
-      "Real human analysts on standby every hour, every day. No bots, no hold music, no runaround.",
+      "1 million hours of live monitoring, training, and analyst-reviewed alerts delivered to Ohio households and businesses.",
   },
 ];
 
@@ -245,6 +288,7 @@ const workshops = [
     price: "From $89",
     image: protectionWorkshop,
     href: "/training",
+    category: "Protection",
   },
   {
     title: "Family Safety Coaching",
@@ -252,6 +296,7 @@ const workshops = [
     price: "From $79",
     image: familyLiving,
     href: "/training",
+    category: "Families",
   },
   {
     title: "Business Security Audit",
@@ -259,6 +304,7 @@ const workshops = [
     price: "From $249",
     image: consultingTeam,
     href: "/ai",
+    category: "Business",
   },
   {
     title: "Senior Digital Literacy",
@@ -266,6 +312,7 @@ const workshops = [
     price: "From $59",
     image: communityWorkshop,
     href: "/training",
+    category: "Seniors",
   },
 ];
 
@@ -275,18 +322,24 @@ const services = [
     num: "01",
     title: "AI Scam\nProtection",
     desc: "Real-time monitoring across calls, texts, and email. Our AI and analyst team flag every threat before it reaches you.",
+    cta: "Learn More",
+    href: "/training",
     dark: true,
   },
   {
     num: "02",
     title: "Cybersecurity\nTraining",
     desc: "Hands-on workshops, 1-on-1 coaching, and plain-English briefings that build habits that last a lifetime.",
+    cta: "View Workshops",
+    href: "/training",
     dark: false,
   },
   {
     num: "03",
     title: "Business\nAutomation",
-    desc: "AI-powered tools that protect payroll, vendor emails, and daily operations — deployed the same day.",
+    desc: "AI-powered tools that protect payroll, vendor emails, and daily operations — deployed the same day, no IT team required.",
+    cta: "Explore AI Tools",
+    href: "/ai",
     dark: false,
   },
 ];
@@ -313,7 +366,7 @@ function useRevealObserver() {
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" },
+      { threshold: 0.10, rootMargin: "0px 0px -40px 0px" },
     );
     targets.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
@@ -321,24 +374,29 @@ function useRevealObserver() {
   return rootRef;
 }
 
-/* ─── Stat row with animated counter ────────────────────────────── */
+/* ─── Stat row ───────────────────────────────────────────────────── */
 function StatRow({ stat, index, last }: { stat: StatItem; index: number; last: boolean }) {
   const { value, ref } = useCountUp(stat.target);
   return (
     <div
       ref={ref}
       data-reveal
-      style={{ "--reveal-delay": `${index * 120}ms` } as React.CSSProperties}
-      className={`py-8 ${!last ? "border-b border-[#E0E0E0]" : ""}`}
+      style={{ "--reveal-delay": `${index * 140}ms` } as React.CSSProperties}
+      className={`py-9 ${!last ? "border-b border-[#E0E0E0]" : ""}`}
     >
-      <div className="text-[3rem] md:text-[3.5rem] font-extrabold text-[#111111] leading-none tracking-tight mb-2 tabular-nums">
-        {value.toLocaleString()}
-        <span className="text-[#d96c4a]">{stat.suffix}</span>{" "}
-        <span className="text-[1rem] md:text-[1.1rem] font-bold text-[#1E293B] align-middle">
-          {stat.label}
+      {/* Large number */}
+      <div className="flex items-baseline gap-2 mb-1">
+        <span className="text-[4rem] md:text-[5rem] font-black text-[#111111] leading-none tracking-tight tabular-nums">
+          {value}
+        </span>
+        <span className="text-[1.75rem] md:text-[2.25rem] font-black text-[#d96c4a] leading-none">
+          {stat.suffix}
         </span>
       </div>
-      <p className="text-[14px] text-[#6B7280] leading-relaxed max-w-xs">{stat.description}</p>
+      {/* Label */}
+      <div className="text-[15px] font-bold text-[#111111] mb-0.5 leading-tight">{stat.label}</div>
+      <div className="text-[11px] font-semibold text-[#9CA3AF] uppercase tracking-[0.12em] mb-3">{stat.sublabel}</div>
+      <p className="text-[13px] text-[#6B7280] leading-relaxed max-w-xs">{stat.description}</p>
     </div>
   );
 }
@@ -360,14 +418,51 @@ export const HomeStorySections = () => {
     <div ref={rootRef} className="hss-root">
 
       {/* ═══════════════════════════════════════════════════════════════
-          SECTION 1 — FEATURE STRIP (3 horizontal items)
+          TRUST STRIP — thin dark marquee-style bar
           ═══════════════════════════════════════════════════════════════ */}
-      <section
-        className="hss-section-white border-b border-[#E0E0E0]"
-        aria-label="Key protection features"
-      >
+      <div className="bg-[#111111] border-b border-white/10">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#E0E0E0]">
+          <div className="flex flex-wrap items-center justify-center md:justify-between gap-x-8 gap-y-2 py-3">
+            {trustItems.map((item) => (
+              <div key={item.label} className="flex items-center gap-2">
+                <item.icon className="w-3.5 h-3.5 text-[#d96c4a] flex-shrink-0" strokeWidth={2} />
+                <span className="text-[11px] font-semibold text-white/70 uppercase tracking-[0.1em] whitespace-nowrap">
+                  {item.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          SECTION 1 — FEATURE STRIP
+          Heading row + 3 horizontal feature items with dividers
+          ═══════════════════════════════════════════════════════════════ */}
+      <section className="hss-section-white" aria-label="Key protection features">
+        {/* Section heading */}
+        <div className="container mx-auto pt-14 pb-10 border-b border-[#F0F0F0]">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#d96c4a] mb-2">
+                Why families choose us
+              </p>
+              <h2 className="text-[1.75rem] md:text-[2rem] font-extrabold text-[#111111] tracking-tight leading-[1.1]">
+                Protection that works while you live your life.
+              </h2>
+            </div>
+            <Link
+              to="/training"
+              className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#6B7280] hover:text-[#111111] transition-colors whitespace-nowrap self-start sm:self-auto pb-1"
+            >
+              See all plans <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+        </div>
+
+        {/* 3-col feature strip */}
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#E0E0E0] pb-2">
             {featureList.map((item, i) => (
               <div
                 key={item.label}
@@ -375,8 +470,8 @@ export const HomeStorySections = () => {
                 style={{ "--reveal-delay": `${i * 100}ms` } as React.CSSProperties}
                 className="flex items-start gap-4 p-8 lg:p-10"
               >
-                <div className="w-10 h-10 rounded-full bg-[#F4F4F4] border border-[#E0E0E0] flex items-center justify-center flex-shrink-0">
-                  <item.icon className="w-5 h-5 text-[#111111]" strokeWidth={2} />
+                <div className="w-11 h-11 rounded-full bg-[#111111] flex items-center justify-center flex-shrink-0">
+                  <item.icon className="w-5 h-5 text-white" strokeWidth={2} />
                 </div>
                 <div>
                   <h3 className="text-[15px] font-bold text-[#111111] mb-1.5 leading-tight">
@@ -393,34 +488,40 @@ export const HomeStorySections = () => {
       {/* ═══════════════════════════════════════════════════════════════
           SECTION 2 — PLAN CARDS WITH TAB NAVIGATION
           ═══════════════════════════════════════════════════════════════ */}
-      <section
-        className="hss-section-tint py-[80px]"
-        aria-labelledby="plans-heading"
-      >
+      <section className="hss-section-tint py-[80px]" aria-labelledby="plans-heading">
         <div className="container mx-auto">
-          {/* Tab bar + "See All" link */}
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
-            <div className="flex items-center gap-1 bg-white border border-[#E0E0E0] rounded-full p-1 self-start shadow-[0_1px_4px_rgba(0,0,0,0.06)]">
-              {planTabs.map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`px-5 py-2 rounded-full text-[13px] font-semibold transition-all ${
-                    activeTab === tab
-                      ? "bg-[#111111] text-white shadow-sm"
-                      : "text-[#6B7280] hover:text-[#111111]"
-                  }`}
-                >
-                  {tab}
-                </button>
-              ))}
+
+          {/* Section intro */}
+          <div className="mb-8">
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#d96c4a] mb-2">Protection plans</p>
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+              <h2 id="plans-heading" className="text-[1.75rem] md:text-[2rem] font-extrabold text-[#111111] tracking-tight leading-[1.1]">
+                Built for every stage of life.
+              </h2>
+              <Link
+                to="/training"
+                className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#6B7280] hover:text-[#111111] transition-colors self-start sm:self-auto"
+              >
+                See All <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
             </div>
-            <Link
-              to="/training"
-              className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#6B7280] hover:text-[#111111] transition-colors self-start sm:self-auto"
-            >
-              See All <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
+          </div>
+
+          {/* Tab bar */}
+          <div className="flex items-center gap-1 bg-white border border-[#E0E0E0] rounded-full p-1 self-start shadow-[0_1px_4px_rgba(0,0,0,0.06)] w-fit mb-8">
+            {planTabs.map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-5 py-2 rounded-full text-[13px] font-semibold transition-all ${
+                  activeTab === tab
+                    ? "bg-[#111111] text-white shadow-sm"
+                    : "text-[#6B7280] hover:text-[#111111]"
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
           </div>
 
           {/* 3 plan cards */}
@@ -430,9 +531,9 @@ export const HomeStorySections = () => {
                 key={`${activeTab}-${i}`}
                 data-reveal="scale"
                 style={{ "--reveal-delay": `${i * 80}ms` } as React.CSSProperties}
-                className="hss-card overflow-hidden group"
+                className="hss-card overflow-hidden group flex flex-col"
               >
-                {/* Card image */}
+                {/* Card image with optional badge */}
                 <div className="relative aspect-[4/3] overflow-hidden bg-[#F4F4F4]">
                   <img
                     src={card.image}
@@ -443,15 +544,30 @@ export const HomeStorySections = () => {
                     width={600}
                     height={450}
                   />
+                  {card.badge && (
+                    <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#111111] text-white text-[10px] font-bold uppercase tracking-[0.1em]">
+                      {card.badge}
+                    </div>
+                  )}
                 </div>
                 {/* Card content */}
-                <div className="p-5">
+                <div className="p-5 flex flex-col flex-1">
                   <h3 className="text-[15px] font-bold text-[#111111] mb-1.5 leading-snug">
                     {card.title}
                   </h3>
                   <p className="text-[13px] text-[#6B7280] leading-relaxed mb-4">{card.desc}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-[15px] font-bold text-[#111111]">{card.price}</span>
+                  {/* Features */}
+                  <ul className="space-y-1.5 mb-5 flex-1">
+                    {card.features.map((f) => (
+                      <li key={f} className="flex items-center gap-2 text-[12px] text-[#374151]">
+                        <Check className="w-3.5 h-3.5 text-[#d96c4a] flex-shrink-0" strokeWidth={2.5} />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                  {/* Price + CTA */}
+                  <div className="flex items-center justify-between pt-4 border-t border-[#F0F0F0]">
+                    <span className="text-[15px] font-extrabold text-[#111111]">{card.price}</span>
                     <Link
                       to="/training"
                       className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#111111] text-white text-[12px] font-semibold hover:bg-[#333333] transition-colors"
@@ -468,7 +584,7 @@ export const HomeStorySections = () => {
 
       {/* ═══════════════════════════════════════════════════════════════
           SECTION 3 — HOW IT WORKS
-          Left: giant decorative quote + bold headline
+          Left: giant decorative quote + bold headline + CTA
           Right: 4 numbered steps with dividers
           ═══════════════════════════════════════════════════════════════ */}
       <section
@@ -476,22 +592,35 @@ export const HomeStorySections = () => {
         aria-labelledby="how-heading"
       >
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-start">
 
             {/* Left — decorative quote + headline */}
-            <div data-reveal>
+            <div data-reveal className="lg:sticky lg:top-24">
+              {/* Giant quote mark */}
               <div
                 aria-hidden="true"
-                className="text-[9rem] md:text-[11rem] leading-none text-[#111111]/[0.07] font-serif font-bold select-none pointer-events-none -mt-8 -ml-2"
+                className="text-[12rem] md:text-[16rem] leading-[0.8] text-[#111111]/[0.06] font-serif font-black select-none pointer-events-none -ml-4"
               >
                 &ldquo;
               </div>
               <h2
                 id="how-heading"
-                className="text-[2.25rem] md:text-[3rem] font-extrabold text-[#111111] leading-[1.1] tracking-tight -mt-10 max-w-sm"
+                className="text-[2rem] md:text-[2.75rem] font-extrabold text-[#111111] leading-[1.1] tracking-tight -mt-8 md:-mt-14 mb-5"
               >
-                Your guide to staying safe online.
+                Your guide to<br />staying safe online.
               </h2>
+              <p className="text-[15px] text-[#6B7280] leading-relaxed mb-8 max-w-sm">
+                No technical knowledge required. We handle the security work so
+                you stay focused on the people who matter most.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <CtaPrimary to="/training#pricing">
+                  Get Protected <ArrowRight className="w-4 h-4" />
+                </CtaPrimary>
+                <CtaGhost to="/contact">
+                  Talk to us
+                </CtaGhost>
+              </div>
             </div>
 
             {/* Right — numbered steps */}
@@ -500,12 +629,18 @@ export const HomeStorySections = () => {
                 <div
                   key={step.step}
                   data-reveal="slide-right"
-                  style={{ "--reveal-delay": `${i * 100}ms` } as React.CSSProperties}
-                  className={`py-5 ${i < howItWorks.length - 1 ? "border-b border-[#E0E0E0]" : ""}`}
+                  style={{ "--reveal-delay": `${i * 110}ms` } as React.CSSProperties}
+                  className={`flex gap-5 py-7 ${i < howItWorks.length - 1 ? "border-b border-[#E0E0E0]" : ""}`}
                 >
-                  <div className="text-[13px] font-bold text-[#111111] mb-1">{step.step}</div>
-                  <div className="text-[13px] font-semibold text-[#1E293B] mb-1">{step.title}</div>
-                  <p className="text-[13px] text-[#6B7280] leading-relaxed">{step.desc}</p>
+                  {/* Step number bubble */}
+                  <div className="w-9 h-9 rounded-full bg-[#111111] text-white flex items-center justify-center text-[12px] font-black flex-shrink-0 mt-0.5">
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
+                  <div>
+                    <div className="text-[11px] font-bold text-[#d96c4a] uppercase tracking-[0.12em] mb-1">{step.step}</div>
+                    <div className="text-[15px] font-bold text-[#111111] mb-1.5 leading-snug">{step.title}</div>
+                    <p className="text-[13px] text-[#6B7280] leading-relaxed">{step.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -516,7 +651,7 @@ export const HomeStorySections = () => {
 
       {/* ═══════════════════════════════════════════════════════════════
           SECTION 4 — TESTIMONIALS
-          Centered header | Left: 2 stacked photos | Right: single card
+          Centered header | Left: 2 stacked photos | Right: card + nav
           ═══════════════════════════════════════════════════════════════ */}
       <section
         className="hss-testimonial-theater py-[80px]"
@@ -525,25 +660,32 @@ export const HomeStorySections = () => {
         <div className="container mx-auto">
 
           {/* Centered header */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-14">
+            <p
+              data-reveal
+              className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#d96c4a] mb-3"
+            >
+              Client stories
+            </p>
             <h2
               id="testimonials-heading"
               data-reveal
-              className="text-[2rem] md:text-[2.5rem] font-extrabold text-[#111111] leading-[1.1] tracking-tight"
+              style={{ "--reveal-delay": "80ms" } as React.CSSProperties}
+              className="text-[2rem] md:text-[2.75rem] font-extrabold text-[#111111] leading-[1.1] tracking-tight"
             >
               Satisfied Clients Speak
             </h2>
             <p
               data-reveal
-              style={{ "--reveal-delay": "100ms" } as React.CSSProperties}
-              className="text-[#6B7280] text-base mt-3 max-w-md mx-auto"
+              style={{ "--reveal-delay": "160ms" } as React.CSSProperties}
+              className="text-[#6B7280] text-[15px] mt-3 max-w-md mx-auto leading-relaxed"
             >
-              Real stories from Ohio families we've helped protect.
+              Real stories from Ohio families and businesses we've helped protect.
             </p>
           </div>
 
           {/* Two-col layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-[40fr_60fr] gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[42fr_58fr] gap-8 items-center">
 
             {/* Left — 2 stacked photos */}
             <div className="hidden lg:flex flex-col gap-4">
@@ -551,8 +693,8 @@ export const HomeStorySections = () => {
                 <div
                   key={i}
                   data-reveal="slide-left"
-                  style={{ "--reveal-delay": `${i * 120}ms` } as React.CSSProperties}
-                  className={`hss-img-zoom rounded-xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.08)] ${
+                  style={{ "--reveal-delay": `${i * 140}ms` } as React.CSSProperties}
+                  className={`hss-img-zoom rounded-xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.10)] ${
                     i === 0 ? "aspect-[4/3]" : "aspect-[16/9]"
                   }`}
                 >
@@ -569,31 +711,25 @@ export const HomeStorySections = () => {
               ))}
             </div>
 
-            {/* Right — single testimonial card */}
+            {/* Right — testimonial card */}
             <div
               data-reveal="slide-right"
               style={{ "--reveal-delay": "200ms" } as React.CSSProperties}
-              className="hss-testimonial-card relative p-8 lg:p-10"
+              className="hss-testimonial-card relative p-8 lg:p-10 overflow-hidden"
             >
               {/* Giant decorative quote */}
-              <div aria-hidden="true" className="hss-giant-quote">&ldquo;</div>
+              <div
+                aria-hidden="true"
+                className="absolute -top-4 -left-2 text-[9rem] leading-none text-[#111111]/[0.05] font-serif font-black select-none pointer-events-none"
+              >
+                &ldquo;
+              </div>
 
               <div className="relative z-10">
-                {/* Avatar + name */}
-                <div className="flex items-center gap-3 mb-5">
-                  <img
-                    src={t.avatar}
-                    alt={t.name}
-                    className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm flex-shrink-0"
-                    loading="lazy"
-                    decoding="async"
-                    width={48}
-                    height={48}
-                  />
-                  <div>
-                    <div className="font-bold text-[#111111] text-[15px] leading-tight">{t.name}</div>
-                    <div className="text-[12px] text-[#6B7280]">{t.location}</div>
-                  </div>
+                {/* Tag pill */}
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#111111]/[0.06] border border-[#E0E0E0] text-[10px] font-bold uppercase tracking-[0.12em] text-[#111111] mb-5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#d96c4a]" />
+                  {t.tag}
                 </div>
 
                 {/* Stars */}
@@ -604,33 +740,70 @@ export const HomeStorySections = () => {
                 </div>
 
                 {/* Quote */}
-                <blockquote className="text-[15px] text-[#1E293B] leading-relaxed mb-6 italic">
+                <blockquote className="text-[16px] md:text-[17px] text-[#1E293B] leading-relaxed mb-7 font-medium italic">
                   &ldquo;{t.quote}&rdquo;
                 </blockquote>
+
+                {/* Author */}
+                <div className="flex items-center gap-3 mb-8 pt-5 border-t border-[#F0F0F0]">
+                  <img
+                    src={t.avatar}
+                    alt={t.name}
+                    className="w-11 h-11 rounded-full object-cover border-2 border-white shadow-md flex-shrink-0"
+                    loading="lazy"
+                    decoding="async"
+                    width={44}
+                    height={44}
+                  />
+                  <div>
+                    <div className="font-bold text-[#111111] text-[14px] leading-tight">{t.name}</div>
+                    <div className="flex items-center gap-1 text-[12px] text-[#6B7280] mt-0.5">
+                      <MapPin className="w-3 h-3 flex-shrink-0" />
+                      {t.location}
+                    </div>
+                  </div>
+                </div>
 
                 {/* "See More" + prev/next */}
                 <div className="flex items-center justify-between">
                   <Link
                     to="/about"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#111111] text-white text-[13px] font-semibold hover:bg-[#333333] transition-colors"
+                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#111111] text-white text-[13px] font-semibold hover:bg-[#333333] transition-colors"
                   >
                     See More <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={prevTesti}
-                      aria-label="Previous testimonial"
-                      className="w-9 h-9 rounded-full border border-[#E0E0E0] bg-white flex items-center justify-center text-[#111111] hover:bg-[#F4F4F4] transition-colors"
-                    >
-                      <ChevronLeft className="w-4 h-4" />
-                    </button>
-                    <button
-                      onClick={nextTesti}
-                      aria-label="Next testimonial"
-                      className="w-9 h-9 rounded-full border border-[#E0E0E0] bg-[#111111] text-white flex items-center justify-center hover:bg-[#333333] transition-colors"
-                    >
-                      <ChevronRight className="w-4 h-4" />
-                    </button>
+                  <div className="flex items-center gap-3">
+                    {/* Dot indicators */}
+                    <div className="flex gap-1.5">
+                      {testimonials.map((_, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setActiveTesti(i)}
+                          aria-label={`Go to testimonial ${i + 1}`}
+                          className={`rounded-full transition-all ${
+                            i === activeTesti
+                              ? "w-4 h-2 bg-[#111111]"
+                              : "w-2 h-2 bg-[#D1D5DB] hover:bg-[#9CA3AF]"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={prevTesti}
+                        aria-label="Previous testimonial"
+                        className="w-9 h-9 rounded-full border border-[#E0E0E0] bg-white flex items-center justify-center text-[#111111] hover:bg-[#F4F4F4] transition-colors shadow-sm"
+                      >
+                        <ChevronLeft className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={nextTesti}
+                        aria-label="Next testimonial"
+                        className="w-9 h-9 rounded-full bg-[#111111] text-white flex items-center justify-center hover:bg-[#333333] transition-colors shadow-sm"
+                      >
+                        <ChevronRight className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -641,16 +814,23 @@ export const HomeStorySections = () => {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          SECTION 5 — STATS + EDITORIAL
-          Left: 3 large stat rows | Right: image with editorial overlay
+          SECTION 5 — STATS + EDITORIAL IMAGE
+          Left: 3 large stat rows | Right: editorial image overlay
           ═══════════════════════════════════════════════════════════════ */}
       <section
         className="hss-section-white py-[80px] border-t border-[#E0E0E0]"
         aria-labelledby="stats-heading"
       >
         <div className="container mx-auto">
-          <h2 id="stats-heading" className="sr-only">By the numbers</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-[42fr_58fr] gap-10 lg:gap-16 items-start">
+          {/* Section intro */}
+          <div className="mb-2">
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#d96c4a] mb-2">By the numbers</p>
+            <h2 id="stats-heading" className="text-[1.75rem] md:text-[2rem] font-extrabold text-[#111111] tracking-tight leading-[1.1] mb-8">
+              The impact in Ohio — and growing.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-[46fr_54fr] gap-10 lg:gap-16 items-start">
 
             {/* Left — stat rows */}
             <div>
@@ -659,11 +839,11 @@ export const HomeStorySections = () => {
               ))}
             </div>
 
-            {/* Right — editorial image with text overlay */}
+            {/* Right — editorial image */}
             <div
               data-reveal="slide-right"
               style={{ "--reveal-delay": "200ms" } as React.CSSProperties}
-              className="hss-img-zoom relative rounded-xl overflow-hidden aspect-[4/3] lg:aspect-[5/4] shadow-[0_8px_32px_-12px_rgba(15,23,42,0.18)]"
+              className="hss-img-zoom relative rounded-xl overflow-hidden aspect-[4/3] lg:aspect-[5/4] shadow-[0_8px_32px_-12px_rgba(15,23,42,0.18)] lg:sticky lg:top-24"
             >
               <img
                 src={businessTeam}
@@ -674,15 +854,15 @@ export const HomeStorySections = () => {
                 width={900}
                 height={720}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[rgba(15,23,42,0.88)] via-[rgba(15,23,42,0.3)] to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[rgba(15,23,42,0.90)] via-[rgba(15,23,42,0.25)] to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-7 lg:p-8">
-                <p className="text-white/60 text-[11px] font-bold uppercase tracking-[0.15em] mb-2">
-                  Kettering, Ohio
+                <p className="text-white/55 text-[10px] font-bold uppercase tracking-[0.18em] mb-2">
+                  Kettering, Ohio. The Transformation Of Real Estate.
                 </p>
-                <h3 className="text-white text-[1.5rem] md:text-[1.75rem] font-extrabold leading-tight tracking-tight">
-                  The Defense Against Digital Threats.
+                <h3 className="text-white text-[1.5rem] md:text-[1.875rem] font-extrabold leading-tight tracking-tight mb-3">
+                  The Defense Against<br />Digital Threats.
                 </h3>
-                <p className="text-white/75 text-[14px] leading-relaxed mt-3 max-w-sm">
+                <p className="text-white/70 text-[13px] leading-relaxed max-w-xs">
                   Ohio families trust InVision Network because we combine
                   enterprise-grade AI with real human investigators — no other
                   firm does both.
@@ -695,7 +875,7 @@ export const HomeStorySections = () => {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          SECTION 6 — WORKSHOPS (4-col card grid, "blog" equivalent)
+          SECTION 6 — WORKSHOPS (4-col card grid)
           ═══════════════════════════════════════════════════════════════ */}
       <section
         className="hss-section-tint py-[80px]"
@@ -703,15 +883,18 @@ export const HomeStorySections = () => {
       >
         <div className="container mx-auto">
 
-          {/* Section header + prev/next arrows */}
-          <div className="flex items-center justify-between mb-8">
-            <h2
-              id="workshops-heading"
-              className="text-[1.75rem] font-extrabold text-[#111111] tracking-tight"
-            >
-              Our Workshops
-            </h2>
-            <div className="flex gap-2">
+          {/* Section header + prev/next */}
+          <div className="flex items-end justify-between mb-8 gap-4">
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#d96c4a] mb-2">Programs</p>
+              <h2
+                id="workshops-heading"
+                className="text-[1.75rem] md:text-[2rem] font-extrabold text-[#111111] tracking-tight"
+              >
+                Our Workshops
+              </h2>
+            </div>
+            <div className="flex gap-2 flex-shrink-0">
               <Link
                 to="/training"
                 aria-label="Previous workshops"
@@ -722,7 +905,7 @@ export const HomeStorySections = () => {
               <Link
                 to="/training"
                 aria-label="Next workshops"
-                className="w-9 h-9 rounded-full border border-[#111111] bg-[#111111] flex items-center justify-center text-white hover:bg-[#333333] transition-colors shadow-[0_1px_4px_rgba(0,0,0,0.1)]"
+                className="w-9 h-9 rounded-full bg-[#111111] flex items-center justify-center text-white hover:bg-[#333333] transition-colors shadow-[0_1px_4px_rgba(0,0,0,0.10)]"
               >
                 <ChevronRight className="w-4 h-4" />
               </Link>
@@ -730,37 +913,41 @@ export const HomeStorySections = () => {
           </div>
 
           {/* 4-col grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
             {workshops.map((ws, i) => (
               <div
                 key={ws.title}
                 data-reveal="scale"
                 style={{ "--reveal-delay": `${i * 70}ms` } as React.CSSProperties}
-                className="hss-card overflow-hidden group"
+                className="hss-card overflow-hidden group flex flex-col"
               >
-                {/* Image */}
+                {/* Image with category badge */}
                 <div className="relative aspect-[3/2] overflow-hidden bg-[#F4F4F4]">
                   <img
                     src={ws.image}
                     alt={ws.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
                     loading="lazy"
                     decoding="async"
                     width={480}
                     height={320}
                   />
+                  {/* Category pill on image */}
+                  <div className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-sm text-[10px] font-bold text-[#111111] uppercase tracking-[0.08em] shadow-sm">
+                    {ws.category}
+                  </div>
                 </div>
                 {/* Content */}
-                <div className="p-4">
+                <div className="p-4 flex flex-col flex-1">
                   <h3 className="text-[13px] font-bold text-[#111111] leading-snug mb-1">
                     {ws.title}
                   </h3>
-                  <p className="text-[11px] text-[#6B7280] mb-3">{ws.type}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-[13px] font-bold text-[#111111]">{ws.price}</span>
+                  <p className="text-[11px] text-[#9CA3AF] font-medium mb-auto pb-3">{ws.type}</p>
+                  <div className="flex items-center justify-between pt-3 border-t border-[#F0F0F0]">
+                    <span className="text-[13px] font-extrabold text-[#111111]">{ws.price}</span>
                     <Link
                       to={ws.href}
-                      className="inline-flex items-center justify-center px-3 py-1 rounded-full bg-[#111111] text-white text-[11px] font-semibold hover:bg-[#333333] transition-colors"
+                      className="inline-flex items-center justify-center px-3.5 py-1.5 rounded-full bg-[#111111] text-white text-[11px] font-semibold hover:bg-[#333333] transition-colors"
                     >
                       View
                     </Link>
@@ -768,6 +955,16 @@ export const HomeStorySections = () => {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* See All link */}
+          <div className="text-center">
+            <Link
+              to="/training"
+              className="inline-flex items-center gap-2 px-7 py-3 rounded-full border border-[#E0E0E0] bg-white text-[13px] font-semibold text-[#111111] hover:bg-[#F4F4F4] transition-colors shadow-[0_1px_4px_rgba(0,0,0,0.06)]"
+            >
+              See All Programs <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
 
         </div>
@@ -782,20 +979,27 @@ export const HomeStorySections = () => {
       >
         <div className="container mx-auto">
 
-          <h2
-            id="services-heading"
-            data-reveal
-            className="text-center text-[1.75rem] font-extrabold text-[#111111] tracking-tight mb-10"
-          >
-            Our Services
-          </h2>
+          {/* Heading */}
+          <div className="text-center mb-12">
+            <p data-reveal className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#d96c4a] mb-2">
+              What we offer
+            </p>
+            <h2
+              id="services-heading"
+              data-reveal
+              style={{ "--reveal-delay": "80ms" } as React.CSSProperties}
+              className="text-[1.75rem] md:text-[2.25rem] font-extrabold text-[#111111] tracking-tight"
+            >
+              Our Services
+            </h2>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {services.map((svc, i) => (
               <div
                 key={svc.num}
                 data-reveal
-                style={{ "--reveal-delay": `${i * 100}ms` } as React.CSSProperties}
+                style={{ "--reveal-delay": `${i * 110}ms` } as React.CSSProperties}
                 className={`rounded-[14px] p-8 lg:p-10 flex flex-col ${
                   svc.dark
                     ? "bg-[#111111]"
@@ -805,14 +1009,14 @@ export const HomeStorySections = () => {
                 {/* Number */}
                 <div
                   className={`text-[2rem] font-extrabold mb-5 tabular-nums leading-none ${
-                    svc.dark ? "text-white/20" : "text-[#E0E0E0]"
+                    svc.dark ? "text-white/15" : "text-[#E8E8E8]"
                   }`}
                 >
                   {svc.num}
                 </div>
                 {/* Title */}
                 <h3
-                  className={`text-[2rem] md:text-[2.25rem] font-extrabold leading-tight tracking-tight mb-5 whitespace-pre-line ${
+                  className={`text-[2rem] md:text-[2.25rem] font-extrabold leading-tight tracking-tight mb-4 whitespace-pre-line ${
                     svc.dark ? "text-white" : "text-[#111111]"
                   }`}
                 >
@@ -820,12 +1024,24 @@ export const HomeStorySections = () => {
                 </h3>
                 {/* Description */}
                 <p
-                  className={`text-[14px] leading-relaxed flex-1 ${
-                    svc.dark ? "text-white/55" : "text-[#6B7280]"
+                  className={`text-[14px] leading-relaxed flex-1 mb-8 ${
+                    svc.dark ? "text-white/50" : "text-[#6B7280]"
                   }`}
                 >
                   {svc.desc}
                 </p>
+                {/* CTA */}
+                <Link
+                  to={svc.href}
+                  className={`inline-flex items-center gap-2 text-[13px] font-semibold transition-colors group w-fit ${
+                    svc.dark
+                      ? "text-white/60 hover:text-white"
+                      : "text-[#111111] hover:text-[#d96c4a]"
+                  }`}
+                >
+                  {svc.cta}
+                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                </Link>
               </div>
             ))}
           </div>
