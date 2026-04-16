@@ -270,7 +270,7 @@ function Resources() {
 
           {/* Transitioning Headlines */}
           <div className="text-left mb-8">
-            <h1 className="font-extrabold text-white mb-4 leading-[1.05] tracking-tight text-[clamp(2.525rem,5.75vw,4.5rem)] lg:text-4xl xl:text-[clamp(2.525rem,5.75vw,4.5rem)]">
+            <h1 className="font-extrabold text-white mb-4 leading-[1.05] tracking-tight text-[clamp(1.75rem,3.5vw,2.5rem)]">
               <RotatingHeadlines headlines={heroHeadlines} className="" />
             </h1>
             <p className="text-base md:text-lg text-white/90 max-w-xl">

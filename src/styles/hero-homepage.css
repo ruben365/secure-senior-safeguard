@@ -234,7 +234,7 @@
 /* ── 3c. H1 Headline ──
    Massive, bold, tight. The visual anchor.  */
 .hero-home__headline {
-  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
   font-weight: 700;
   color: var(--hero-text-primary);
   line-height: 1.08;

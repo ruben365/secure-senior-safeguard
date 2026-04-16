@@ -141,7 +141,7 @@
 
 /* Headline — matches Workshop/other pages scale */
 .hero-biz__headline {
-  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
   font-weight: 700;
   color: var(--biz-text);
   line-height: 1.05;
