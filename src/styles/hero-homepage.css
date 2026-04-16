@@ -481,6 +481,17 @@
    5. RESPONSIVE — Graceful degradation
    ═══════════════════════════════════════════ */
 
+/* Laptop — reduce headline at lg: (1025px–1279px) */
+@media (min-width: 1025px) and (max-width: 1279px) {
+  .hero-home__headline {
+    font-size: 2.25rem;
+  }
+
+  .hero-home__body {
+    font-size: 0.875rem;
+  }
+}
+
 /* Tablet — 2-column feature grid */
 @media (max-width: 1024px) {
   .hero-home__feature-row {

@@ -124,10 +124,10 @@ function Security() {
               <Shield className="w-8 h-8 text-primary" />
             </div>
           </div>
-          <h1 className="text-3xl md:text-5xl font-black mb-4 tracking-tight">
+          <h1 className="text-3xl md:text-4xl xl:text-5xl font-black mb-4 tracking-tight">
             Security at InVision Network
           </h1>
-          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-8">
+          <p className="text-base md:text-lg text-white/80 max-w-2xl mx-auto mb-8">
             Enterprise-grade protection for families, seniors, and businesses.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
