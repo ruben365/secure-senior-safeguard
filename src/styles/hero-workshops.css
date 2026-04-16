@@ -153,22 +153,22 @@
 
 /* ── Headline ── */
 .hero-ws__headline {
-  font-size: clamp(2.525rem, 5.75vw, 4.5rem);
+  font-size: clamp(1.75rem, 4vw, 3rem);
   font-weight: 700;
   color: var(--ws-text-main);
-  line-height: 1.1;
+  line-height: 1.08;
   letter-spacing: -0.02em;
-  margin: 1.5rem 0;
+  margin: 1.25rem 0;
   animation: wsFadeUp 0.5s ease-out 0.1s both;
 }
 
 /* ── Body ── */
 .hero-ws__body {
-  font-size: 1.1rem;
+  font-size: 0.9375rem;
   line-height: 1.6;
   color: var(--ws-text-muted);
-  max-width: 520px;
-  margin: 0 0 2.5rem 0;
+  max-width: 480px;
+  margin: 0 0 2rem 0;
   animation: wsFadeUp 0.5s ease-out 0.15s both;
 }
 
