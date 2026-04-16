@@ -708,6 +708,17 @@
 /* ═══════════════════════════════════════════
    6. RESPONSIVE
    ═══════════════════════════════════════════ */
+/* Laptop — reduce headline at lg: (1025px–1279px) */
+@media (min-width: 1025px) and (max-width: 1279px) {
+  .hero-ws__headline {
+    font-size: 2.25rem;
+  }
+
+  .hero-ws__body {
+    font-size: 0.875rem;
+  }
+}
+
 @media (max-width: 1024px) {
   .hero-ws__layout {
     flex-direction: column;
