@@ -23,7 +23,7 @@ export function sanitizeHtml(dirty: string): string {
     ALLOW_DATA_ATTR: false,
     ADD_ATTR: ["target"],
     // Block javascript: and data: URIs in href/src attributes to prevent XSS via URI schemes
-    ALLOWED_URI_REGEXP: /^(?:(?:https?|mailto|tel):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
+    ALLOWED_URI_REGEXP: /^(?:(?:https?|mailto|tel):|[^a-z]|[a-z+.-]+(?:[^a-z+.-:]|$))/i,
     // Force all links to open safely
     FORBID_TAGS: ["script", "style", "iframe", "object", "embed", "form", "input", "textarea", "select"],
     FORBID_ATTR: ["onerror", "onload", "onclick", "onmouseover", "onfocus", "onblur"],
