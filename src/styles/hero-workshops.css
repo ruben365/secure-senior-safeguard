@@ -759,11 +759,11 @@
   }
 
   .hero-ws__headline {
-    font-size: clamp(1.75rem, 7vw, 2.25rem);
+    font-size: clamp(1.25rem, 5.5vw, 1.625rem);
   }
 
   .hero-ws__body {
-    font-size: 0.95rem;
+    font-size: 0.875rem;
   }
 
   .hero-ws__ctas {

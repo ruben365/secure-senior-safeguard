@@ -519,11 +519,12 @@
   }
 
   .hero-home__headline {
-    font-size: clamp(1.75rem, 7vw, 2.25rem);
+    font-size: clamp(1.25rem, 5.5vw, 1.625rem);
   }
 
   .hero-home__body {
-    font-size: 0.9375rem;
+    font-size: 0.875rem;
+    margin-bottom: 1.25rem;
   }
 
   .hero-home__ctas {
@@ -533,6 +534,8 @@
   .hero-home__cta {
     width: 100%;
     justify-content: center;
+    height: 42px;
+    font-size: 0.8125rem;
   }
 
   .hero-home__panel {
