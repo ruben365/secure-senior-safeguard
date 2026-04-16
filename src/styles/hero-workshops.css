@@ -709,7 +709,7 @@
    6. RESPONSIVE
    ═══════════════════════════════════════════ */
 /* Laptop — proportional headline (1024px–1440px) */
-@media (min-width: 1024px) and (max-width: 1440px) {
+@media (min-width: 1024px) and (max-width: 1439.98px) {
   .hero-ws__headline {
     font-size: 2.25rem;
   }
