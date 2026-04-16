@@ -11,7 +11,6 @@ import { SEO, PAGE_SEO } from "@/components/SEO";
 import { AnswerSummary } from "@/components/AnswerSummary";
 import seniorCoupleActive from "@/assets/senior-couple-active.jpg";
 import { SITE } from "@/config/site";
-import { TestimonialCarousel } from "@/components/home/TestimonialCarousel";
 import { ArrowRight, CheckCircle, Shield } from "lucide-react";
 
 const FAQPreview = lazy(() =>
@@ -73,12 +72,8 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
             <HomeStorySections />
           </section>
 
-          {/* 3. Testimonials + FAQ */}
+          {/* 3. FAQ */}
           <div className="hss-root relative isolate">
-            <div id="testimonials" className="relative z-10">
-              <TestimonialCarousel />
-            </div>
-
             <section
               id="faq"
               aria-label="Frequently asked questions"
