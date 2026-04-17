@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { SEO } from "@/components/SEO";
+import { SEO, PAGE_SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -44,8 +44,11 @@ export default function Partners() {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Partners & Certifications — InVision Network Ohio"
-        description="InVision Network's technology partners, community partnerships, and cybersecurity certifications. Serving Ohio families and businesses."
+        title={PAGE_SEO.partners.title}
+        description={PAGE_SEO.partners.description}
+        keywords={PAGE_SEO.partners.keywords}
+        structuredData={PAGE_SEO.partners.structuredData}
+        breadcrumbs={PAGE_SEO.partners.breadcrumbs as Array<{ name: string; url: string }>}
       />
       <Navigation />
 

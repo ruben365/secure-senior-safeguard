@@ -19,11 +19,11 @@ interface SEOProps {
   breadcrumbs?: BreadcrumbItem[];
 }
 
-const OG_IMAGE =
-  "https://storage.googleapis.com/gpt-engineer-file-uploads/UpYpYr7MTVdr1jgHmL94ALNUlk93/social-images/social-1761862743436-shield_purpleb.png";
+// Self-hosted 1200×630 social image (served from Vercel CDN)
+const OG_IMAGE = "https://www.invisionnetwork.org/images/hero-corporate-protection.webp";
 
 const DEFAULT_SEO = {
-  title: "Cybersecurity & AI Protection in Ohio | InVision Network",
+  title: "AI Scam Protection & Cybersecurity Training in Ohio | InVision Network",
   description:
     "InVision Network provides expert cybersecurity training and AI protection for Ohio families and businesses. Protect your identity and data from online scams.",
   image: OG_IMAGE,
@@ -110,6 +110,9 @@ export function SEO({
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="InVision Network — AI Scam Protection for Ohio Families" />
       <meta property="og:url" content={url} />
       <meta property="og:type" content={type} />
       <meta property="og:site_name" content="InVision Network" />
@@ -141,17 +144,17 @@ export function SEO({
 
 // ---------------------------------------------------------------------------
 // Page-specific SEO configurations
+// Titles are page-specific only — the SEO component appends "| InVision Network"
+// Target: 40–55 chars for title (component adds 18 chars, total ≤ 73)
 // ---------------------------------------------------------------------------
 
 export const PAGE_SEO = {
   home: {
-    title: "InVision Network | AI Scam Protection & Cybersecurity Training in Ohio",
+    // Full brand title for homepage — passed without title prop to use DEFAULT_SEO.title
     description:
-      "AI scam protection & cybersecurity training for Ohio families and businesses. Stop deepfakes, phishing, and voice-clone scams. Kettering, OH.",
+      "AI scam protection & cybersecurity training for Ohio families and businesses. Stop deepfakes, phishing, and voice-clone scams. Veteran-founded in Kettering, OH.",
     keywords:
       "AI scam protection Ohio, cybersecurity Kettering, deepfake detection, senior scam training, family cybersecurity Southwest Ohio",
-    // Organization + AggregateRating — trust signals for Google rich results.
-    // LocalBusiness is already in index.html for non-JS crawlers.
     structuredData: {
       "@context": "https://schema.org",
       "@type": "Organization",
@@ -194,11 +197,15 @@ export const PAGE_SEO = {
   },
 
   training: {
-    title: "AI Scam Prevention Workshops for Seniors & Families — Kettering & Dayton, Ohio",
+    title: "AI Scam Prevention Workshops in Ohio",
     description:
       "Hands-on AI scam prevention workshops for Ohio families and seniors. Stop deepfakes, phishing, and voice-clone scams. In-person Kettering and live Zoom sessions.",
     keywords:
       "AI scam training Kettering Ohio, deepfake detection training, senior cybersecurity, family scam prevention, phishing awareness Southwest Ohio",
+    breadcrumbs: [
+      { name: "Home", url: "https://www.invisionnetwork.org/" },
+      { name: "Training", url: "https://www.invisionnetwork.org/training" },
+    ],
     structuredData: {
       "@context": "https://schema.org",
       "@type": "EducationalOrganization",
@@ -233,11 +240,15 @@ export const PAGE_SEO = {
   },
 
   business: {
-    title: "AI Consulting & Business Automation — InVision Network Ohio",
+    title: "AI Solutions & Business Automation in Ohio",
     description:
       "AI receptionist, smart scheduling, website design, and business automation for Ohio small businesses. Serving Kettering, Dayton, and Southwest Ohio.",
     keywords:
       "AI services Ohio, AI receptionist Ohio, business automation Kettering, AI answering service, virtual receptionist Southwest Ohio",
+    breadcrumbs: [
+      { name: "Home", url: "https://www.invisionnetwork.org/" },
+      { name: "AI Services", url: "https://www.invisionnetwork.org/ai" },
+    ],
     structuredData: {
       "@context": "https://schema.org",
       "@type": "ItemList",
@@ -273,11 +284,15 @@ export const PAGE_SEO = {
   },
 
   about: {
-    title: "About InVision Network — Veteran-Founded Cybersecurity Experts in Kettering, Ohio",
+    title: "About — Veteran-Founded Cybersecurity in Ohio",
     description:
       "Meet the veteran-founded team behind InVision Network. Based in Kettering, Ohio, we protect families and businesses from AI-powered scams, deepfakes, and voice-clone fraud.",
     keywords:
       "InVision Network about, Kettering Ohio cybersecurity, Southwest Ohio AI protection",
+    breadcrumbs: [
+      { name: "Home", url: "https://www.invisionnetwork.org/" },
+      { name: "About", url: "https://www.invisionnetwork.org/about" },
+    ],
     structuredData: {
       "@context": "https://schema.org",
       "@type": "Organization",
@@ -315,11 +330,15 @@ export const PAGE_SEO = {
   },
 
   contact: {
-    title: "Contact InVision Network — Cybersecurity Training in Kettering, Ohio",
+    title: "Contact Us — Cybersecurity Help in Kettering, Ohio",
     description:
       "Get in touch with InVision Network. Call (937) 301-8749 or email us. Located in Kettering, OH — serving Dayton and all of Southwest Ohio.",
     keywords:
       "contact InVision Network, Kettering cybersecurity contact, AI protection Ohio inquiry",
+    breadcrumbs: [
+      { name: "Home", url: "https://www.invisionnetwork.org/" },
+      { name: "Contact", url: "https://www.invisionnetwork.org/contact" },
+    ],
     structuredData: {
       "@context": "https://schema.org",
       "@type": "ContactPage",
@@ -369,11 +388,15 @@ export const PAGE_SEO = {
   },
 
   resources: {
-    title: "Cybersecurity Guides, E-Books & Digital Safety Tools — InVision Network",
+    title: "Cybersecurity Guides & Digital Safety Resources",
     description:
       "Download expert cybersecurity guides, e-books, and digital safety toolkits. Free and premium resources for Ohio families, seniors, and small businesses.",
     keywords:
       "scam protection resources, AI security guides, cybersecurity articles, deepfake information, Ohio senior scam prevention",
+    breadcrumbs: [
+      { name: "Home", url: "https://www.invisionnetwork.org/" },
+      { name: "Resources", url: "https://www.invisionnetwork.org/resources" },
+    ],
     structuredData: {
       "@context": "https://schema.org",
       "@type": "ItemList",
@@ -410,10 +433,40 @@ export const PAGE_SEO = {
     },
   },
 
+  library: {
+    title: "Digital Cybersecurity & AI Safety Book Library",
+    description:
+      "Browse InVision Network's complete digital library. Expert cybersecurity, AI safety, scam prevention, and privacy guides written for every skill level. Instant access after purchase.",
+    keywords:
+      "cybersecurity books, AI safety guide, scam prevention ebook, digital library Ohio",
+    breadcrumbs: [
+      { name: "Home", url: "https://www.invisionnetwork.org/" },
+      { name: "Digital Library", url: "https://www.invisionnetwork.org/library" },
+    ],
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      name: "InVision Network Digital Library",
+      description: "Expert cybersecurity and AI safety digital books for Ohio families and businesses.",
+      url: "https://www.invisionnetwork.org/library",
+      publisher: {
+        "@type": "Organization",
+        name: "InVision Network",
+        url: "https://www.invisionnetwork.org",
+      },
+    },
+  },
+
   articles: {
-    title: "Cybersecurity Articles & Scam Prevention News | InVision",
+    title: "Cybersecurity Articles & Scam Prevention News",
     description:
       "Practical guides on AI scam prevention, phishing defense, and cybersecurity for seniors and families. Updated by our security analysts.",
+    keywords:
+      "cybersecurity articles Ohio, AI scam news, phishing guides, deepfake detection tips, senior scam alerts",
+    breadcrumbs: [
+      { name: "Home", url: "https://www.invisionnetwork.org/" },
+      { name: "Articles", url: "https://www.invisionnetwork.org/articles" },
+    ],
     structuredData: {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
@@ -427,22 +480,69 @@ export const PAGE_SEO = {
         url: "https://www.invisionnetwork.org",
       },
     },
-    keywords:
-      "cybersecurity articles Ohio, AI scam news, phishing guides, deepfake detection tips, senior scam alerts",
   },
 
   portfolio: {
-    title: "Our Work — AI & Cybersecurity Projects | InVision Network",
+    title: "AI & Cybersecurity Projects Portfolio",
     description:
       "Explore InVision Network's portfolio: AI receptionists, cybersecurity training, and automation projects for Ohio families and businesses.",
     keywords:
       "InVision Network portfolio, AI projects Ohio, cybersecurity case studies, business automation examples",
+    breadcrumbs: [
+      { name: "Home", url: "https://www.invisionnetwork.org/" },
+      { name: "Portfolio", url: "https://www.invisionnetwork.org/portfolio" },
+    ],
+  },
+
+  pricing: {
+    title: "AI Scam Protection Plans & Transparent Pricing",
+    description:
+      "Transparent pricing for AI scam protection, cybersecurity workshops, and business consulting. 10% veteran discount. 30-day money-back guarantee.",
+    keywords:
+      "InVision Network pricing, cybersecurity training cost, AI protection plans, family scam protection cost Ohio",
+    breadcrumbs: [
+      { name: "Home", url: "https://www.invisionnetwork.org/" },
+      { name: "Pricing", url: "https://www.invisionnetwork.org/pricing" },
+    ],
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: "InVision Network Protection Plans",
+      description: "AI scam protection and cybersecurity service plans for families and businesses in Ohio.",
+      url: "https://www.invisionnetwork.org/pricing",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Individual Training Session",
+          url: "https://www.invisionnetwork.org/pricing",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Family Protection Plan",
+          url: "https://www.invisionnetwork.org/pricing",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Business AI Package",
+          url: "https://www.invisionnetwork.org/pricing",
+        },
+      ],
+    },
   },
 
   careers: {
-    title: "Join InVision Network — Cybersecurity Careers in Dayton, Ohio",
+    title: "Cybersecurity Careers in Dayton & Kettering, Ohio",
     description:
       "Work with InVision Network's expert team. Open positions in cybersecurity training, AI development, and digital protection in Kettering, Ohio.",
+    keywords:
+      "cybersecurity careers Kettering, AI jobs Ohio, InVision Network hiring, security analyst positions",
+    breadcrumbs: [
+      { name: "Home", url: "https://www.invisionnetwork.org/" },
+      { name: "Careers", url: "https://www.invisionnetwork.org/careers" },
+    ],
     structuredData: {
       "@context": "https://schema.org",
       "@type": "EmployerAggregateRating",
@@ -462,14 +562,113 @@ export const PAGE_SEO = {
       worstRating: "1",
       ratingCount: "12",
     },
+  },
+
+  partners: {
+    title: "Technology Partners & Certifications in Ohio",
+    description:
+      "InVision Network's technology partners, community partnerships, and cybersecurity certifications. Serving Ohio families and businesses with trusted solutions.",
     keywords:
-      "cybersecurity careers Kettering, AI jobs Ohio, InVision Network hiring, security analyst positions",
+      "InVision Network partners, cybersecurity certifications Ohio, technology partnerships, trusted vendors",
+    breadcrumbs: [
+      { name: "Home", url: "https://www.invisionnetwork.org/" },
+      { name: "Partners", url: "https://www.invisionnetwork.org/partners" },
+    ],
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      name: "InVision Network Partners & Certifications",
+      url: "https://www.invisionnetwork.org/partners",
+      description: "Technology partners and certifications for InVision Network's cybersecurity and AI services.",
+      about: {
+        "@type": "Organization",
+        name: "InVision Network",
+        url: "https://www.invisionnetwork.org",
+      },
+    },
+  },
+
+  events: {
+    title: "Cybersecurity Workshops & Events in Ohio",
+    description:
+      "Upcoming AI scam prevention workshops and cybersecurity events in Kettering, Dayton, and Southwest Ohio. Free and paid sessions for seniors, families, and businesses.",
+    keywords:
+      "cybersecurity events Ohio, AI scam workshop Dayton, senior safety events Kettering, family cyber training",
+    breadcrumbs: [
+      { name: "Home", url: "https://www.invisionnetwork.org/" },
+      { name: "Events", url: "https://www.invisionnetwork.org/events" },
+    ],
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "EventSeries",
+      name: "InVision Network Cybersecurity Workshop Series",
+      description: "Regular AI scam prevention and cybersecurity workshops for Ohio families, seniors, and businesses.",
+      url: "https://www.invisionnetwork.org/events",
+      organizer: {
+        "@type": "Organization",
+        name: "InVision Network",
+        url: "https://www.invisionnetwork.org",
+      },
+      location: {
+        "@type": "Place",
+        name: "Kettering, Ohio",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Kettering",
+          addressRegion: "OH",
+          postalCode: "45429",
+          addressCountry: "US",
+        },
+      },
+    },
+  },
+
+  security: {
+    title: "Security & Data Protection Practices",
+    description:
+      "Learn how InVision Network protects your data with TLS 1.3 encryption, AES-256 at-rest encryption, MFA, and SOC 2 certified infrastructure.",
+    keywords:
+      "InVision Network security, data encryption, TLS 1.3, AES-256, SOC 2, MFA, cybersecurity",
+    breadcrumbs: [
+      { name: "Home", url: "https://www.invisionnetwork.org/" },
+      { name: "Security", url: "https://www.invisionnetwork.org/security" },
+    ],
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: "InVision Network Security Practices",
+      url: "https://www.invisionnetwork.org/security",
+      description: "Security and data protection practices for InVision Network services.",
+      about: {
+        "@type": "Organization",
+        name: "InVision Network",
+        url: "https://www.invisionnetwork.org",
+      },
+    },
+  },
+
+  status: {
+    title: "System Status & Service Health",
+    description:
+      "Real-time status of InVision Network services. Check uptime, incidents, and service health for all platforms.",
+    keywords:
+      "InVision Network status, system uptime, service health, incidents, platform status",
+    breadcrumbs: [
+      { name: "Home", url: "https://www.invisionnetwork.org/" },
+      { name: "System Status", url: "https://www.invisionnetwork.org/status" },
+    ],
   },
 
   faq: {
-    title: "Frequently Asked Questions — AI Scam Protection | InVision Network",
+    title: "FAQ — AI Scam Protection Questions Answered",
     description:
       "Answers to common questions about AI scam protection, cybersecurity training pricing, and how InVision Network keeps Ohio families safe.",
+    keywords:
+      "InVision Network FAQ, cybersecurity questions Ohio, AI scam protection FAQ, training pricing",
+    breadcrumbs: [
+      { name: "Home", url: "https://www.invisionnetwork.org/" },
+      { name: "FAQ", url: "https://www.invisionnetwork.org/faq" },
+    ],
     structuredData: {
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -516,16 +715,18 @@ export const PAGE_SEO = {
         },
       ],
     },
-    keywords:
-      "InVision Network FAQ, cybersecurity questions Ohio, AI scam protection FAQ, training pricing",
   },
 
   help: {
-    title: "Help Center — InVision Network Support",
+    title: "Help Center & Support Resources",
     description:
       "Find answers, guides, and support resources for InVision Network's cybersecurity programs and AI systems. Browse our knowledge base or contact our team.",
     keywords:
       "InVision Network help, cybersecurity support, AI FAQ, knowledge base",
+    breadcrumbs: [
+      { name: "Home", url: "https://www.invisionnetwork.org/" },
+      { name: "Help Center", url: "https://www.invisionnetwork.org/help" },
+    ],
   },
 
   notFound: {
@@ -541,5 +742,10 @@ export const PAGE_SEO = {
       "Scan a suspicious file instantly without creating an account. Pay per use ($0.50 minimum), get immediate threat analysis, and protect your family from AI-powered scams. Files auto-deleted in 10 minutes.",
     keywords:
       "file scanner, phishing detection, malware scan, deepfake detection, pay per scan",
+    breadcrumbs: [
+      { name: "Home", url: "https://www.invisionnetwork.org/" },
+      { name: "Training", url: "https://www.invisionnetwork.org/training" },
+      { name: "AI Scam Analysis", url: "https://www.invisionnetwork.org/training/ai-analysis" },
+    ],
   },
 } as const;

@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { SEO } from "@/components/SEO";
+import { SEO, PAGE_SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -62,19 +62,21 @@ const Portfolio = () => {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Design Portfolio | InVision Network"
-        description="Explore our design portfolio: brand systems, digital design, typography, illustration, motion design, and UI assets."
+        title={PAGE_SEO.portfolio.title}
+        description={PAGE_SEO.portfolio.description}
+        keywords={PAGE_SEO.portfolio.keywords}
+        breadcrumbs={PAGE_SEO.portfolio.breadcrumbs as Array<{ name: string; url: string }>}
         structuredData={{
           "@context": "https://schema.org",
           "@type": "CollectionPage",
-          "name": "InVision Network Portfolio",
-          "description": "Web design, AI automation, and cybersecurity projects by InVision Network in Kettering, Ohio",
-          "url": "https://www.invisionnetwork.org/portfolio",
-          "publisher": {
+          name: "InVision Network Portfolio",
+          description: "Web design, AI automation, and cybersecurity projects by InVision Network in Kettering, Ohio",
+          url: "https://www.invisionnetwork.org/portfolio",
+          publisher: {
             "@type": "Organization",
-            "name": "InVision Network",
-            "url": "https://www.invisionnetwork.org"
-          }
+            name: "InVision Network",
+            url: "https://www.invisionnetwork.org",
+          },
         }}
       />
       <Navigation overlay />

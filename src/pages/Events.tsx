@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { SEO } from "@/components/SEO";
+import { SEO, PAGE_SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, MapPin, Video, Users } from "lucide-react";
@@ -49,8 +49,11 @@ export default function Events() {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Workshops & Events in Ohio — InVision Network"
-        description="Upcoming AI scam prevention workshops and cybersecurity events in Kettering, Dayton, and Southwest Ohio. Free and paid sessions for seniors, families, and businesses."
+        title={PAGE_SEO.events.title}
+        description={PAGE_SEO.events.description}
+        keywords={PAGE_SEO.events.keywords}
+        structuredData={PAGE_SEO.events.structuredData}
+        breadcrumbs={PAGE_SEO.events.breadcrumbs as Array<{ name: string; url: string }>}
       />
       <Navigation />
 

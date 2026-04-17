@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { SEO } from "@/components/SEO";
+import { SEO, PAGE_SEO } from "@/components/SEO";
 
 interface SitemapGroup {
   heading: string;
@@ -62,9 +62,8 @@ export default function Sitemap() {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Sitemap — InVision Network"
+        title="Site Directory — All Pages"
         description="A complete list of all pages on InVision Network's website. Find cybersecurity training, AI services, resources, and more."
-        noindex={false}
       />
       <Navigation />
 

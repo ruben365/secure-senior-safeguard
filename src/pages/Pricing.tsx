@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { SEO } from "@/components/SEO";
+import { SEO, PAGE_SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import BookingCalendar from "@/components/BookingCalendar";
@@ -66,8 +66,11 @@ export default function Pricing() {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Pricing — AI Scam Protection Plans | InVision Network"
-        description="Transparent pricing for AI scam protection, cybersecurity workshops, and business consulting. 10% veteran discount. 30-day money-back guarantee."
+        title={PAGE_SEO.pricing.title}
+        description={PAGE_SEO.pricing.description}
+        keywords={PAGE_SEO.pricing.keywords}
+        structuredData={PAGE_SEO.pricing.structuredData}
+        breadcrumbs={PAGE_SEO.pricing.breadcrumbs as Array<{ name: string; url: string }>}
       />
       <Navigation />
 

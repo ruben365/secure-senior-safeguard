@@ -164,7 +164,7 @@ const AutonomousDefenseHub = () => {
     <PageTransition variant="fade">
       <div className="min-h-screen">
         <SEO
-          title="Autonomous Defense Hub — InVision Network 2026"
+          title="Autonomous Defense Hub — AI Cybersecurity 2026"
           description="The future of cybersecurity for Ohio businesses: Agentic SOC, Deepfake Validator, Honey-Identities, and Hardware-Bound Identity. Built by InVision Network."
           keywords="agentic SOC, deepfake detection, honey tokens, hardware security key, AI cybersecurity Ohio"
         />
