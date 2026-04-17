@@ -129,7 +129,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
   return (
     <>
       <nav className={overlay ? "absolute top-0 left-0 right-0 z-[9999] bg-gradient-to-b from-black/60 to-transparent" : `sticky top-0 z-[9999] transition-all duration-300 ${scrolled ? "bg-[#080d1a]/97 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_4px_24px_-4px_rgba(0,0,0,0.3)]" : "bg-[#080d1a]/80 backdrop-blur-md"}`}>
-        <div className="max-w-[1200px] mx-auto w-full px-8">
+        <div className="max-w-[1200px] mx-auto w-full px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-[56px] gap-4 lg:gap-8">
             {/* Logo — identical to hero */}
             <a
@@ -343,7 +343,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
             aria-label="Main navigation"
             className="lg:hidden fixed top-[56px] right-0 z-[10001] overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch]"
             style={{
-              width: "min(72vw, 300px)",
+              width: "min(88vw, 300px)",
               maxHeight: "calc(80vh - 56px)",
               background: "rgba(12, 14, 22, 0.72)",
               backdropFilter: "blur(20px) saturate(1.4)",
@@ -361,7 +361,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <Link
                     key={link.name}
                     to={link.href}
-                    className={`flex items-center text-[12px] font-medium px-3 py-[7px] rounded-md transition-colors duration-150 ${
+                    className={`flex items-center text-[13px] font-medium px-3 py-3 rounded-md transition-colors duration-150 min-h-[44px] ${
                       isActive
                         ? "text-orange-400 border-l-2 border-orange-400 pl-2.5"
                         : "text-white/80 hover:text-white hover:bg-white/[0.05]"

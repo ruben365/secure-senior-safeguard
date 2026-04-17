@@ -197,7 +197,7 @@ function PaymentFormContent({
       </PaymentElementPanel>
 
       {error && (
-        <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive text-sm">
+        <div className="p-3 bg-red-500/10 border border-red-500/25 rounded-xl text-red-300 text-sm">
           {error}
         </div>
       )}
@@ -221,7 +221,7 @@ function PaymentFormContent({
         )}
       </Button>
 
-      <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
+      <div className="flex items-center justify-center gap-2 text-xs text-white/40">
         <Shield className="w-4 h-4" />
         <span>Secure payment powered by Stripe</span>
       </div>
@@ -374,8 +374,8 @@ export function TrainingPaymentModal({
   return (
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[380px] overflow-hidden p-0 rounded-2xl gap-0">
-        {/* Header — compact, coral-tinted to match site palette */}
-        <div className="bg-gradient-to-r from-[#d96c4a]/8 via-[#fbab8e]/8 to-[#d96c4a]/8 px-5 py-3 border-b border-[#d96c4a]/15">
+        {/* Header — glass panel with coral accent */}
+        <div className="bg-gradient-to-r from-[#d96c4a]/12 via-white/[0.04] to-[#d96c4a]/8 px-5 py-3.5 border-b border-white/[0.10]">
           <DialogHeader className="space-y-0">
             <div className="flex items-center gap-2 mb-1">
               <div className="p-1.5 bg-[#d96c4a]/15 rounded-md text-[#d96c4a]">
@@ -394,7 +394,7 @@ export function TrainingPaymentModal({
               Complete the payment for {serviceName} training
             </DialogDescription>
             {duration && (
-              <p className="text-[11px] text-muted-foreground mt-0.5">{duration}</p>
+              <p className="text-[11px] text-white/50 mt-0.5">{duration}</p>
             )}
           </DialogHeader>
 
@@ -408,7 +408,7 @@ export function TrainingPaymentModal({
                     (step === "payment" && s.num <= 2) ||
                     (step === "success" && s.num <= 3)
                       ? "bg-[#d96c4a] text-white"
-                      : "bg-muted text-muted-foreground"
+                      : "bg-white/[0.12] text-white/40"
                   }`}
                 >
                   {(step === "payment" && s.num === 1) ||
@@ -424,7 +424,7 @@ export function TrainingPaymentModal({
                     (step === "payment" && s.num <= 2) ||
                     step === "success"
                       ? "text-[#d96c4a]"
-                      : "text-muted-foreground"
+                      : "text-white/35"
                   }`}
                 >
                   {s.label}
@@ -435,7 +435,7 @@ export function TrainingPaymentModal({
                       (step === "payment" && s.num === 1) ||
                       (step === "success" && s.num <= 2)
                         ? "bg-[#d96c4a]"
-                        : "bg-muted"
+                        : "bg-white/[0.15]"
                     }`}
                   />
                 )}
@@ -454,17 +454,17 @@ export function TrainingPaymentModal({
                 exit={{ opacity: 0, x: -20 }}
                 className="space-y-2.5"
               >
-                {/* Features — compact */}
+                {/* Features — compact glass panel */}
                 {features.length > 0 && (
-                  <div className="px-3 py-2 bg-muted/50 rounded-md">
-                    <h4 className="font-semibold mb-1.5 text-[11px] uppercase tracking-wide text-muted-foreground">
+                  <div className="px-3.5 py-3 bg-white/[0.07] backdrop-blur-sm border border-white/[0.12] rounded-xl">
+                    <h4 className="font-bold mb-2 text-[10px] uppercase tracking-widest text-white/50">
                       What's Included
                     </h4>
-                    <div className="grid grid-cols-1 gap-1">
+                    <div className="grid grid-cols-1 gap-1.5">
                       {features.slice(0, 4).map((feature, i) => (
                         <div
                           key={i}
-                          className="flex items-center gap-1.5 text-xs"
+                          className="flex items-center gap-2 text-xs text-white/80"
                         >
                           <CheckCircle className="w-3 h-3 text-[#d96c4a] shrink-0" />
                           <span>{feature}</span>
@@ -474,34 +474,34 @@ export function TrainingPaymentModal({
                   </div>
                 )}
 
-                {/* Contact Info — stacked full-width name + email, two-col phone/state */}
+                {/* Contact Info — glass inputs */}
                 <div className="space-y-2">
                   <Input
                     placeholder="Your Name *"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="h-8 text-sm"
+                    className="h-9 text-sm bg-white/[0.08] border-white/[0.15] text-white placeholder:text-white/40 focus:bg-white/[0.12] focus:border-white/30"
                   />
                   <Input
                     type="email"
                     placeholder="Email Address *"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="h-8 text-sm"
+                    className="h-9 text-sm bg-white/[0.08] border-white/[0.15] text-white placeholder:text-white/40 focus:bg-white/[0.12] focus:border-white/30"
                   />
                   <div className="grid grid-cols-2 gap-2">
                     <div className="relative">
-                      <Phone className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground" />
+                      <Phone className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/40" />
                       <Input
                         placeholder="Phone"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        className="h-8 pl-8 text-sm"
+                        className="h-9 pl-8 text-sm bg-white/[0.08] border-white/[0.15] text-white placeholder:text-white/40 focus:bg-white/[0.12] focus:border-white/30"
                       />
                     </div>
                     <Select value={state} onValueChange={setState}>
-                      <SelectTrigger className="h-8 text-sm">
-                        <SelectValue placeholder="State" />
+                      <SelectTrigger className="h-9 text-sm bg-white/[0.08] border-white/[0.15] text-white">
+                        <SelectValue placeholder="State" className="text-white/40" />
                       </SelectTrigger>
                       <SelectContent className="max-h-[200px]">
                         {US_STATES.map((s) => (
@@ -557,13 +557,13 @@ export function TrainingPaymentModal({
                   onCheckedChange={setTermsAccepted}
                 />
 
-                {/* Price Summary — compact peach strip */}
-                <div className="px-3 py-2 bg-gradient-to-r from-[#d96c4a]/5 to-[#fbab8e]/5 rounded-md border border-[#d96c4a]/15">
+                {/* Price Summary — glass total bar */}
+                <div className="px-3.5 py-2.5 bg-white/[0.07] backdrop-blur-sm rounded-xl border border-[#d96c4a]/25">
                   <div className="flex justify-between items-center">
-                    <span className="text-xs text-muted-foreground">Total</span>
+                    <span className="text-xs text-white/50 font-medium uppercase tracking-wider">Total</span>
                     <div className="text-right flex items-baseline gap-2">
                       {isVeteran && (
-                        <span className="text-xs line-through text-muted-foreground">
+                        <span className="text-xs line-through text-white/40">
                           ${basePrice.toFixed(2)}
                         </span>
                       )}
@@ -576,7 +576,7 @@ export function TrainingPaymentModal({
                     <div className="text-right mt-0.5">
                       <Badge
                         variant="outline"
-                        className="text-[9px] text-green-600 border-green-600 px-1.5 py-0 h-[16px]"
+                        className="text-[9px] text-emerald-400 border-emerald-500/50 px-1.5 py-0 h-[16px] bg-emerald-500/10"
                       >
                         Veteran: -${veteranDiscount.toFixed(2)}
                       </Badge>
@@ -585,7 +585,7 @@ export function TrainingPaymentModal({
                 </div>
 
                 {error && (
-                  <div className="px-3 py-2 bg-destructive/10 border border-destructive/20 rounded-md text-destructive text-xs">
+                  <div className="px-3 py-2 bg-red-500/10 border border-red-500/25 rounded-xl text-red-300 text-xs">
                     {error}
                   </div>
                 )}
@@ -630,11 +630,11 @@ export function TrainingPaymentModal({
                   Back
                 </Button>
 
-                <div className="px-3 py-2 bg-muted/50 rounded-md">
+                <div className="px-3.5 py-2.5 bg-white/[0.07] backdrop-blur-sm border border-white/[0.12] rounded-xl">
                   <div className="flex justify-between items-center">
                     <div className="min-w-0">
-                      <p className="font-semibold text-sm truncate">{serviceName}</p>
-                      <p className="text-[11px] text-muted-foreground truncate">{email}</p>
+                      <p className="font-semibold text-sm text-white truncate">{serviceName}</p>
+                      <p className="text-[11px] text-white/50 truncate">{email}</p>
                     </div>
                     <div className="text-right flex-shrink-0 ml-2">
                       <p className="text-base font-bold text-[#d96c4a] leading-none">
@@ -643,7 +643,7 @@ export function TrainingPaymentModal({
                       {isVeteran && (
                         <Badge
                           variant="outline"
-                          className="text-[9px] text-green-600 border-green-600 mt-0.5 px-1 py-0 h-[14px]"
+                          className="text-[9px] text-emerald-400 border-emerald-500/50 mt-0.5 px-1 py-0 h-[14px] bg-emerald-500/10"
                         >
                           10% Veteran
                         </Badge>

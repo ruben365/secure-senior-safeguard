@@ -159,8 +159,8 @@ function QRCodePayment({
   return (
     <div className="text-center space-y-5 py-4">
       {!customerName || !customerEmail ? (
-        <div className="space-y-3 rounded-xl border border-gray-200 bg-white p-4 text-left shadow-sm">
-          <p className="text-sm font-medium text-foreground">
+        <div className="space-y-3 rounded-xl border border-white/[0.12] bg-white/[0.07] backdrop-blur-sm p-4 text-left">
+          <p className="text-sm font-medium text-white/80">
             Add your contact details before opening mobile checkout.
           </p>
           <Input
@@ -169,7 +169,7 @@ function QRCodePayment({
             onChange={(e) =>
               onDetailsChange({ name: e.target.value, email: customerEmail })
             }
-            className="h-9 border border-border rounded-lg focus:ring-2 focus:ring-primary/30"
+            className="h-9 bg-white/[0.08] border-white/[0.15] text-white placeholder:text-white/40 focus:bg-white/[0.12] focus:border-white/30 rounded-lg"
           />
           <Input
             type="email"
@@ -178,7 +178,7 @@ function QRCodePayment({
             onChange={(e) =>
               onDetailsChange({ name: customerName, email: e.target.value })
             }
-            className="h-9 border border-border rounded-lg focus:ring-2 focus:ring-primary/30"
+            className="h-9 bg-white/[0.08] border-white/[0.15] text-white placeholder:text-white/40 focus:bg-white/[0.12] focus:border-white/30 rounded-lg"
           />
         </div>
       ) : null}
@@ -189,10 +189,10 @@ function QRCodePayment({
           animate={{ opacity: 1, y: 0 }}
           className="space-y-4"
         >
-          <div className="p-6 bg-card border border-border rounded-xl shadow-sm">
+          <div className="p-6 bg-white/[0.07] backdrop-blur-sm border border-white/[0.12] rounded-xl">
             <Smartphone className="w-12 h-12 mx-auto mb-3 text-primary" />
-            <h4 className="font-semibold mb-2">Pay with Your Phone</h4>
-            <p className="text-sm text-muted-foreground">
+            <h4 className="font-semibold mb-2 text-white/90">Pay with Your Phone</h4>
+            <p className="text-sm text-white/50">
               Scan a QR code to pay with Apple Pay, Google Pay, or any mobile
               wallet
             </p>
@@ -559,24 +559,24 @@ function CardPaymentWrapper({
             <div className="w-5 h-5 rounded-full bg-primary text-white text-[11px] flex items-center justify-center font-bold">
               1
             </div>
-            <h3 className="text-[14px] font-semibold text-foreground">Contact Information</h3>
+            <h3 className="text-[14px] font-semibold text-white/90">Contact Information</h3>
           </div>
 
           <div className="relative">
-            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground/60" />
+            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/40" />
             <Input
               placeholder="Your Name *"
               value={formData.name}
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
               }
-              className="pl-9 h-9 border border-border rounded-lg focus:ring-2 focus:ring-primary/30"
+              className="pl-9 h-9 bg-white/[0.08] border-white/[0.15] text-white placeholder:text-white/40 focus:bg-white/[0.12] focus:border-white/30 rounded-lg"
               required
             />
           </div>
 
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground/60" />
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/40" />
             <Input
               type="email"
               placeholder="Email * (for receipt)"
@@ -584,7 +584,7 @@ function CardPaymentWrapper({
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
-              className="pl-9 h-9 border border-border rounded-lg focus:ring-2 focus:ring-primary/30"
+              className="pl-9 h-9 bg-white/[0.08] border-white/[0.15] text-white placeholder:text-white/40 focus:bg-white/[0.12] focus:border-white/30 rounded-lg"
               required
             />
           </div>
@@ -630,13 +630,13 @@ function CardPaymentWrapper({
             <div className="w-5 h-5 rounded-full bg-primary text-white text-[11px] flex items-center justify-center font-bold ml-auto">
               2
             </div>
-            <h3 className="text-[14px] font-semibold text-foreground">Payment</h3>
+            <h3 className="text-[14px] font-semibold text-white/90">Payment</h3>
           </div>
 
-          <div className="p-2.5 bg-card border border-border rounded-lg text-[13px] flex items-center gap-2 text-muted-foreground shadow-sm">
+          <div className="p-2.5 bg-white/[0.07] border border-white/[0.12] rounded-lg text-[13px] flex items-center gap-2 text-white/60">
             <CheckCircle className="w-3.5 h-3.5 text-primary" />
             <span>
-              Paying as <strong className="text-foreground">{formData.email}</strong>
+              Paying as <strong className="text-white/90">{formData.email}</strong>
             </span>
           </div>
 
@@ -754,7 +754,7 @@ export function EnhancedCheckoutDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[420px] overflow-hidden p-0 gap-0" style={{ WebkitFontSmoothing: "antialiased", MozOsxFontSmoothing: "grayscale", textRendering: "optimizeLegibility" }}>
         {/* Header */}
-        <div className="px-3 sm:px-5 py-2.5 border-b border-border/70">
+        <div className="px-3 sm:px-5 py-2.5 border-b border-white/[0.10]">
           <DialogHeader className="space-y-0">
             <div className="flex items-center gap-2 mb-0.5">
               <div className="p-1.5 bg-primary/15 rounded-md">
@@ -828,21 +828,21 @@ export function EnhancedCheckoutDialog({
           {/* Order Summary Sidebar - Compact */}
           <div className="md:col-span-2">
             <div className="space-y-3">
-              <div className="bg-card border border-border rounded-xl shadow-sm p-4">
-                <h4 className="font-semibold text-sm mb-2 text-foreground">Order Summary</h4>
+              <div className="bg-white/[0.07] backdrop-blur-sm border border-white/[0.12] rounded-xl p-4">
+                <h4 className="font-semibold text-sm mb-2 text-white/90">Order Summary</h4>
                 <div className="space-y-1 mb-3">
                   {items.slice(0, 3).map((item) => (
                     <div key={item.id} className="flex justify-between text-xs">
-                      <span className="text-muted-foreground truncate max-w-[120px]">
+                      <span className="text-white/50 truncate max-w-[120px]">
                         {item.name} × {item.quantity}
                       </span>
-                      <span className="font-medium text-foreground">
+                      <span className="font-medium text-white/80">
                         ${(item.price * item.quantity).toFixed(2)}
                       </span>
                     </div>
                   ))}
                   {items.length > 3 && (
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-white/40">
                       +{items.length - 3} more items
                     </p>
                   )}
@@ -854,16 +854,16 @@ export function EnhancedCheckoutDialog({
                   discountPercent={10}
                 />
 
-                <div className="border-t border-border/70 pt-2 mt-2">
+                <div className="border-t border-white/[0.10] pt-2 mt-2">
                   {veteranDiscount > 0 && (
                     <div className="flex justify-between text-xs text-emerald-400 mb-1">
                       <span>Veteran Discount</span>
                       <span>-${veteranDiscount.toFixed(2)}</span>
                     </div>
                   )}
-                  <div className="flex justify-between font-bold text-foreground">
+                  <div className="flex justify-between font-bold text-white/90">
                     <span>Total</span>
-                    <span className="text-3xl font-bold text-foreground">
+                    <span className="text-3xl font-bold text-white">
                       ${finalTotal.toFixed(2)}
                     </span>
                   </div>

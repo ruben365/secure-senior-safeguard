@@ -288,8 +288,8 @@ export const BookingModal = ({
         = no scrollbar.
       */}
       <DialogContent className="sm:max-w-[420px] overflow-hidden p-0 rounded-2xl gap-0">
-        {/* Header — compact teal/indigo gradient strip */}
-        <div className="bg-gradient-to-r from-teal-500/10 via-indigo-500/10 to-teal-500/10 px-5 pt-4 pb-3 border-b">
+        {/* Header — glass strip */}
+        <div className="bg-gradient-to-r from-teal-500/12 via-white/[0.04] to-indigo-500/10 px-5 pt-4 pb-3 border-b border-white/[0.10]">
           <DialogHeader className="space-y-0">
             <div className="flex items-center gap-2 mb-1.5">
               <div className="p-1.5 bg-teal-500/15 border border-teal-500/30 rounded-md text-teal-600">
@@ -327,7 +327,7 @@ export const BookingModal = ({
                 </div>
                 <span
                   className={`ml-1.5 text-[10px] font-medium hidden sm:block ${
-                    step >= s.num ? "text-teal-700" : "text-muted-foreground"
+                    step >= s.num ? "text-teal-300" : "text-white/35"
                   }`}
                 >
                   {s.label}
@@ -370,16 +370,16 @@ export const BookingModal = ({
         </div>
 
         <div className="p-4">
-          {/* What's Included */}
-          <div className="mb-6 p-4 bg-muted/50 rounded-xl">
-            <h4 className="font-semibold mb-3 flex items-center gap-2">
-              <Star className="w-4 h-4 text-amber-500" />
+          {/* What's Included — glass panel */}
+          <div className="mb-5 p-4 bg-white/[0.07] backdrop-blur-sm border border-white/[0.12] rounded-xl">
+            <h4 className="font-bold mb-2.5 flex items-center gap-2 text-white/90 text-sm">
+              <Star className="w-4 h-4 text-amber-400" />
               What's Included
             </h4>
             <div className="grid grid-cols-2 gap-2">
               {info.benefits.map((benefit, i) => (
-                <div key={i} className="flex items-center gap-2 text-sm">
-                  <CheckCircle className="w-4 h-4 text-green-500 shrink-0" />
+                <div key={i} className="flex items-center gap-2 text-sm text-white/75">
+                  <CheckCircle className="w-4 h-4 text-teal-400 shrink-0" />
                   <span>{benefit}</span>
                 </div>
               ))}
@@ -393,8 +393,8 @@ export const BookingModal = ({
             >
               {/* Contact Info - Minimal */}
               <div className="space-y-4">
-                <h4 className="font-semibold flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-primary" />
+                <h4 className="font-semibold flex items-center gap-2 text-white/90">
+                  <Mail className="w-4 h-4 text-teal-400" />
                   Contact Information
                 </h4>
 
@@ -408,10 +408,10 @@ export const BookingModal = ({
                           <Input
                             {...field}
                             placeholder="Your Name *"
-                            className="h-11"
+                            className="h-11 bg-white/[0.08] border-white/[0.15] text-white placeholder:text-white/40 focus:bg-white/[0.12] focus:border-white/30"
                           />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-red-300" />
                       </FormItem>
                     )}
                   />
@@ -425,10 +425,10 @@ export const BookingModal = ({
                             {...field}
                             type="email"
                             placeholder="Email *"
-                            className="h-11"
+                            className="h-11 bg-white/[0.08] border-white/[0.15] text-white placeholder:text-white/40 focus:bg-white/[0.12] focus:border-white/30"
                           />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-red-300" />
                       </FormItem>
                     )}
                   />
@@ -442,11 +442,11 @@ export const BookingModal = ({
                       <FormItem>
                         <FormControl>
                           <div className="relative">
-                            <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                            <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
                             <Input
                               {...field}
                               placeholder="Phone *"
-                              className="h-11 pl-10"
+                              className="h-11 pl-10 bg-white/[0.08] border-white/[0.15] text-white placeholder:text-white/40 focus:bg-white/[0.12] focus:border-white/30"
                             />
                           </div>
                         </FormControl>
@@ -464,8 +464,8 @@ export const BookingModal = ({
                           defaultValue={field.value}
                         >
                           <FormControl>
-                            <SelectTrigger className="h-11">
-                              <SelectValue placeholder="Select State *" />
+                            <SelectTrigger className="h-11 bg-white/[0.08] border-white/[0.15] text-white">
+                              <SelectValue placeholder="Select State *" className="text-white/40" />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent className="max-h-[200px]">
@@ -485,8 +485,8 @@ export const BookingModal = ({
 
               {/* Schedule */}
               <div className="space-y-3">
-                <h4 className="font-semibold flex items-center gap-2">
-                  <CalendarIcon className="w-4 h-4 text-primary" />
+                <h4 className="font-semibold flex items-center gap-2 text-white/90">
+                  <CalendarIcon className="w-4 h-4 text-teal-400" />
                   Preferred Schedule
                 </h4>
 
@@ -501,8 +501,8 @@ export const BookingModal = ({
                             <Button
                               variant="outline"
                               className={cn(
-                                "w-full h-11 justify-start text-left font-normal",
-                                !selectedDate && "text-muted-foreground",
+                                "w-full h-11 justify-start text-left font-normal bg-white/[0.08] border-white/[0.15] text-white hover:bg-white/[0.12]",
+                                !selectedDate && "text-white/40",
                               )}
                             >
                               <CalendarIcon className="mr-2 h-4 w-4" />
@@ -542,12 +542,12 @@ export const BookingModal = ({
                   <FormItem>
                     <FormControl>
                       <div className="relative">
-                        <MessageSquare className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />
+                        <MessageSquare className="absolute left-3 top-3 w-4 h-4 text-white/40" />
                         <Textarea
                           {...field}
                           placeholder="Tell us about your needs (optional)"
                           rows={3}
-                          className="pl-10 resize-none"
+                          className="pl-10 resize-none bg-white/[0.08] border-white/[0.15] text-white placeholder:text-white/40 focus:bg-white/[0.12] focus:border-white/30"
                         />
                       </div>
                     </FormControl>
@@ -571,33 +571,33 @@ export const BookingModal = ({
                 onCheckedChange={setTermsAccepted}
               />
 
-              {/* Price Summary */}
+              {/* Price Summary — glass total bar */}
               {basePrice > 0 && (
-                <div className="p-4 bg-gradient-to-r from-primary/5 to-accent/5 rounded-xl border">
+                <div className="p-4 bg-white/[0.07] backdrop-blur-sm rounded-xl border border-teal-500/20">
                   <div className="flex justify-between items-center">
-                    <span className="text-muted-foreground">Service Total</span>
+                    <span className="text-white/50 text-sm font-medium">Service Total</span>
                     <div className="text-right">
                       {isVeteran && (
-                        <span className="text-sm line-through text-muted-foreground mr-2">
+                        <span className="text-sm line-through text-white/35 mr-2">
                           ${basePrice.toFixed(2)}
                         </span>
                       )}
-                      <span className="text-2xl font-bold text-primary">
+                      <span className="text-2xl font-bold text-teal-300">
                         ${finalPrice.toFixed(2)}
                       </span>
                     </div>
                   </div>
-                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-border/50">
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/[0.08]">
+                    <div className="flex items-center gap-2 text-xs text-white/45">
                       <QrCode className="w-4 h-4" />
                       <span>QR code payment available</span>
                     </div>
-                    <div className="flex items-center gap-1 text-xs text-green-600">
+                    <div className="flex items-center gap-1 text-xs text-emerald-400">
                       <Shield className="w-3 h-3" />
                       <span>Secure</span>
                     </div>
                   </div>
-                  <p className="text-xs text-muted-foreground mt-2">
+                  <p className="text-xs text-white/40 mt-2">
                     📋 Pricing is finalized after we review your request. No
                     payment is collected through this form.
                   </p>
@@ -606,19 +606,19 @@ export const BookingModal = ({
 
               {/* FAQ Accordion */}
               <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="response-time" className="border-b-0">
-                  <AccordionTrigger className="text-sm py-3 hover:no-underline">
+                <AccordionItem value="response-time" className="border-b border-white/[0.08]">
+                  <AccordionTrigger className="text-sm py-3 hover:no-underline text-white/80 hover:text-white">
                     <span className="flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-primary" />
+                      <Clock className="w-4 h-4 text-teal-400" />
                       When will I hear back?
                     </span>
                   </AccordionTrigger>
-                  <AccordionContent className="text-sm text-muted-foreground">
+                  <AccordionContent className="text-sm text-white/50">
                     We typically respond within 24 hours. For urgent requests,
                     call us at{" "}
                     <a
                       href={SITE.phone.tel}
-                      className="text-primary hover:underline"
+                      className="text-teal-300 hover:underline"
                     >
                       {SITE.phone.display}
                     </a>
@@ -626,13 +626,13 @@ export const BookingModal = ({
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="cancellation" className="border-b-0">
-                  <AccordionTrigger className="text-sm py-3 hover:no-underline">
+                  <AccordionTrigger className="text-sm py-3 hover:no-underline text-white/80 hover:text-white">
                     <span className="flex items-center gap-2">
-                      <Shield className="w-4 h-4 text-primary" />
+                      <Shield className="w-4 h-4 text-teal-400" />
                       What's your cancellation policy?
                     </span>
                   </AccordionTrigger>
-                  <AccordionContent className="text-sm text-muted-foreground">
+                  <AccordionContent className="text-sm text-white/50">
                     Free cancellation up to 24 hours before your scheduled
                     appointment.
                   </AccordionContent>

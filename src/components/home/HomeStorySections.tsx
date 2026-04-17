@@ -386,7 +386,7 @@ function StatRow({ stat, index, last }: { stat: StatItem; index: number; last: b
     >
       {/* Large number */}
       <div className="flex items-baseline gap-2 mb-1">
-        <span className="text-[4rem] md:text-[5rem] font-black text-[#111111] leading-none tracking-tight tabular-nums">
+        <span className="text-[2.75rem] sm:text-[4rem] md:text-[5rem] font-black text-[#111111] leading-none tracking-tight tabular-nums">
           {value}
         </span>
         <span className="text-[1.75rem] md:text-[2.25rem] font-black text-[#d96c4a] leading-none">
@@ -468,7 +468,7 @@ export const HomeStorySections = () => {
                 key={item.label}
                 data-reveal
                 style={{ "--reveal-delay": `${i * 100}ms` } as React.CSSProperties}
-                className="flex items-start gap-4 p-8 lg:p-10"
+                className="flex items-start gap-4 p-5 sm:p-7 lg:p-10"
               >
                 <div className="w-11 h-11 rounded-full bg-[#111111] flex items-center justify-center flex-shrink-0">
                   <item.icon className="w-5 h-5 text-white" strokeWidth={2} />
@@ -488,7 +488,7 @@ export const HomeStorySections = () => {
       {/* ═══════════════════════════════════════════════════════════════
           SECTION 2 — PLAN CARDS WITH TAB NAVIGATION
           ═══════════════════════════════════════════════════════════════ */}
-      <section className="hss-section-tint py-[80px]" aria-labelledby="plans-heading">
+      <section className="hss-section-tint py-10 sm:py-16 md:py-[80px]" aria-labelledby="plans-heading">
         <div className="container mx-auto">
 
           {/* Section intro */}
@@ -588,7 +588,7 @@ export const HomeStorySections = () => {
           Right: 4 numbered steps with dividers
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-white py-[80px] border-t border-[#E0E0E0]"
+        className="hss-section-white py-10 sm:py-16 md:py-[80px] border-t border-[#E0E0E0]"
         aria-labelledby="how-heading"
       >
         <div className="container mx-auto">
@@ -596,16 +596,16 @@ export const HomeStorySections = () => {
 
             {/* Left — decorative quote + headline */}
             <div data-reveal className="lg:sticky lg:top-24">
-              {/* Giant quote mark */}
+              {/* Giant quote mark — scaled for mobile */}
               <div
                 aria-hidden="true"
-                className="text-[12rem] md:text-[16rem] leading-[0.8] text-[#111111]/[0.06] font-serif font-black select-none pointer-events-none -ml-4"
+                className="text-[7rem] sm:text-[10rem] md:text-[16rem] leading-[0.8] text-[#111111]/[0.06] font-serif font-black select-none pointer-events-none -ml-4"
               >
                 &ldquo;
               </div>
               <h2
                 id="how-heading"
-                className="text-[2rem] md:text-[2.75rem] font-extrabold text-[#111111] leading-[1.1] tracking-tight -mt-8 md:-mt-14 mb-5"
+                className="text-[1.75rem] sm:text-[2rem] md:text-[2.75rem] font-extrabold text-[#111111] leading-[1.1] tracking-tight -mt-5 sm:-mt-8 md:-mt-14 mb-5"
               >
                 Your guide to<br />staying safe online.
               </h2>
@@ -630,7 +630,7 @@ export const HomeStorySections = () => {
                   key={step.step}
                   data-reveal="slide-right"
                   style={{ "--reveal-delay": `${i * 110}ms` } as React.CSSProperties}
-                  className={`flex gap-5 py-7 ${i < howItWorks.length - 1 ? "border-b border-[#E0E0E0]" : ""}`}
+                  className={`flex gap-4 sm:gap-5 py-5 sm:py-7 ${i < howItWorks.length - 1 ? "border-b border-[#E0E0E0]" : ""}`}
                 >
                   {/* Step number bubble */}
                   <div className="w-9 h-9 rounded-full bg-[#111111] text-white flex items-center justify-center text-[12px] font-black flex-shrink-0 mt-0.5">
@@ -654,7 +654,7 @@ export const HomeStorySections = () => {
           Centered header | Left: 2 stacked photos | Right: card + nav
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-testimonial-theater py-[80px]"
+        className="hss-testimonial-theater py-10 sm:py-16 md:py-[80px]"
         aria-labelledby="testimonials-heading"
       >
         <div className="container mx-auto">
@@ -715,7 +715,7 @@ export const HomeStorySections = () => {
             <div
               data-reveal="slide-right"
               style={{ "--reveal-delay": "200ms" } as React.CSSProperties}
-              className="hss-testimonial-card relative p-8 lg:p-10 overflow-hidden"
+              className="hss-testimonial-card relative p-5 sm:p-8 lg:p-10 overflow-hidden"
             >
               {/* Giant decorative quote */}
               <div
@@ -740,7 +740,7 @@ export const HomeStorySections = () => {
                 </div>
 
                 {/* Quote */}
-                <blockquote className="text-[16px] md:text-[17px] text-[#1E293B] leading-relaxed mb-7 font-medium italic">
+                <blockquote className="text-[14px] sm:text-[16px] md:text-[17px] text-[#1E293B] leading-relaxed mb-5 sm:mb-7 font-medium italic">
                   &ldquo;{t.quote}&rdquo;
                 </blockquote>
 
@@ -818,7 +818,7 @@ export const HomeStorySections = () => {
           Left: 3 large stat rows | Right: editorial image overlay
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-white py-[80px] border-t border-[#E0E0E0]"
+        className="hss-section-white py-10 sm:py-16 md:py-[80px] border-t border-[#E0E0E0]"
         aria-labelledby="stats-heading"
       >
         <div className="container mx-auto">
@@ -878,7 +878,7 @@ export const HomeStorySections = () => {
           SECTION 6 — WORKSHOPS (4-col card grid)
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-tint py-[80px]"
+        className="hss-section-tint py-10 sm:py-16 md:py-[80px]"
         aria-labelledby="workshops-heading"
       >
         <div className="container mx-auto">
@@ -974,7 +974,7 @@ export const HomeStorySections = () => {
           SECTION 7 — SERVICES (3-col, first col dark #111111)
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-white py-[80px] border-t border-[#E0E0E0]"
+        className="hss-section-white py-10 sm:py-16 md:py-[80px] border-t border-[#E0E0E0]"
         aria-labelledby="services-heading"
       >
         <div className="container mx-auto">
@@ -1000,7 +1000,7 @@ export const HomeStorySections = () => {
                 key={svc.num}
                 data-reveal
                 style={{ "--reveal-delay": `${i * 110}ms` } as React.CSSProperties}
-                className={`rounded-[14px] p-8 lg:p-10 flex flex-col ${
+                className={`rounded-[14px] p-5 sm:p-8 lg:p-10 flex flex-col ${
                   svc.dark
                     ? "bg-[#111111]"
                     : "bg-white border border-[#E0E0E0] shadow-[0px_2px_10px_rgba(0,0,0,0.06)]"
@@ -1016,7 +1016,7 @@ export const HomeStorySections = () => {
                 </div>
                 {/* Title */}
                 <h3
-                  className={`text-[2rem] md:text-[2.25rem] font-extrabold leading-tight tracking-tight mb-4 whitespace-pre-line ${
+                  className={`text-[1.5rem] sm:text-[2rem] md:text-[2.25rem] font-extrabold leading-tight tracking-tight mb-4 whitespace-pre-line ${
                     svc.dark ? "text-white" : "text-[#111111]"
                   }`}
                 >
