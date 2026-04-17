@@ -17,6 +17,9 @@ interface SEOProps {
   noindex?: boolean;
   structuredData?: Record<string, unknown>;
   breadcrumbs?: BreadcrumbItem[];
+  ogImageWidth?: string;
+  ogImageHeight?: string;
+  ogImageAlt?: string;
 }
 
 // Self-hosted 1200×630 social image (served from Vercel CDN)
@@ -74,6 +77,9 @@ export function SEO({
   noindex = false,
   structuredData,
   breadcrumbs,
+  ogImageWidth,
+  ogImageHeight,
+  ogImageAlt,
 }: SEOProps) {
   const location = useLocation();
   const fullTitle = title
@@ -90,6 +96,15 @@ export function SEO({
   const breadcrumbSchema = breadcrumbs
     ? buildBreadcrumbSchema(breadcrumbs)
     : null;
+
+  // Only emit og:image dimensions/alt when they are known-correct.
+  // For the default hero image the dimensions are fixed (1200×630).
+  // For custom images (article covers, book covers) callers must pass
+  // explicit props; otherwise we omit to avoid contradictory crawl data.
+  const isDefaultImage = image === OG_IMAGE;
+  const resolvedImageWidth = ogImageWidth ?? (isDefaultImage ? "1200" : undefined);
+  const resolvedImageHeight = ogImageHeight ?? (isDefaultImage ? "630" : undefined);
+  const resolvedImageAlt = ogImageAlt ?? (isDefaultImage ? "InVision Network — AI Scam Protection for Ohio Families" : undefined);
 
   return (
     <Helmet>
@@ -110,9 +125,9 @@ export function SEO({
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="InVision Network — AI Scam Protection for Ohio Families" />
+      {resolvedImageWidth && <meta property="og:image:width" content={resolvedImageWidth} />}
+      {resolvedImageHeight && <meta property="og:image:height" content={resolvedImageHeight} />}
+      {resolvedImageAlt && <meta property="og:image:alt" content={resolvedImageAlt} />}
       <meta property="og:url" content={url} />
       <meta property="og:type" content={type} />
       <meta property="og:site_name" content="InVision Network" />

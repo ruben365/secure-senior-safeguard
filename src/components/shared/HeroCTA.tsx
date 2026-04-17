@@ -41,19 +41,22 @@ export function HeroCTA({
         </Button>
       )}
 
-      {isExternal(secondaryHref) ? (
-        <Button size="heroPill" variant="heroOutline" asChild>
-          <a href={secondaryHref} aria-label={secondaryAriaLabel}>
-            {secondaryText}
-          </a>
-        </Button>
-      ) : (
-        <Button size="heroPill" variant="heroOutline" asChild>
-          <Link to={secondaryHref} aria-label={secondaryAriaLabel}>
-            {secondaryText}
-          </Link>
-        </Button>
-      )}
+      {/* Secondary CTA — hidden on mobile, one clear action per screen */}
+      <div className="hidden sm:contents">
+        {isExternal(secondaryHref) ? (
+          <Button size="heroPill" variant="heroOutline" asChild>
+            <a href={secondaryHref} aria-label={secondaryAriaLabel}>
+              {secondaryText}
+            </a>
+          </Button>
+        ) : (
+          <Button size="heroPill" variant="heroOutline" asChild>
+            <Link to={secondaryHref} aria-label={secondaryAriaLabel}>
+              {secondaryText}
+            </Link>
+          </Button>
+        )}
+      </div>
     </div>
   );
 }
