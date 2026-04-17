@@ -420,9 +420,9 @@ export const HomeStorySections = () => {
       {/* ═══════════════════════════════════════════════════════════════
           TRUST STRIP — thin dark marquee-style bar
           ═══════════════════════════════════════════════════════════════ */}
-      <div className="bg-[#111111] border-b border-white/10">
+      <div className="bg-[#111111] border-b border-white/10 overflow-x-auto sm:overflow-visible">
         <div className="container mx-auto">
-          <div className="flex flex-wrap items-center justify-center md:justify-between gap-x-8 gap-y-2 py-3">
+          <div className="flex flex-nowrap sm:flex-wrap items-center justify-start sm:justify-center md:justify-between gap-x-6 sm:gap-x-8 gap-y-2 py-3 min-w-max sm:min-w-0">
             {trustItems.map((item) => (
               <div key={item.label} className="flex items-center gap-2">
                 <item.icon className="w-3.5 h-3.5 text-[#d96c4a] flex-shrink-0" strokeWidth={2} />
@@ -765,14 +765,14 @@ export const HomeStorySections = () => {
                 </div>
 
                 {/* "See More" + prev/next */}
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                   <Link
                     to="/about"
-                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#111111] text-white text-[13px] font-semibold hover:bg-[#333333] transition-colors"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#111111] text-white text-[13px] font-semibold hover:bg-[#333333] transition-colors w-full sm:w-auto"
                   >
                     See More <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center justify-end gap-3">
                     {/* Dot indicators */}
                     <div className="flex gap-1.5">
                       {testimonials.map((_, i) => (
