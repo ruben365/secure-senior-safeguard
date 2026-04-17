@@ -27,4 +27,19 @@ export default tseslint.config(
       "@typescript-eslint/no-explicit-any": "warn",
     },
   },
+  {
+    // Contexts legitimately export both Provider components and context objects.
+    // shadcn/ui components export both components and variant helpers (e.g. buttonVariants).
+    // These patterns are intentional and do not affect production HMR behaviour.
+    files: [
+      "src/contexts/**/*.{ts,tsx}",
+      "src/components/ui/**/*.{ts,tsx}",
+      "src/components/SEO.tsx",
+      "src/components/HeroCarousel.tsx",
+      "src/components/reader/ReadingModeToggle.tsx",
+    ],
+    rules: {
+      "react-refresh/only-export-components": "off",
+    },
+  },
 );
