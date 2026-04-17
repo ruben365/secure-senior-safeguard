@@ -171,14 +171,11 @@ function Contact() {
   return (
     <PageTransition variant="fade">
       <SEO
-        title="Contact InVision Network — Kettering, Ohio"
-        description="Reach InVision Network for cybersecurity training or AI business solutions. Call (937) 301-8749, email us, or fill out our contact form. Serving Kettering, Dayton, and all of Southwest Ohio."
-        keywords="contact InVision Network, Kettering cybersecurity, AI protection Ohio, call InVision Network"
+        title={PAGE_SEO.contact.title}
+        description={PAGE_SEO.contact.description}
+        keywords={PAGE_SEO.contact.keywords}
         structuredData={PAGE_SEO.contact.structuredData}
-        breadcrumbs={[
-          { name: "Home", url: "https://www.invisionnetwork.org/" },
-          { name: "Contact", url: "https://www.invisionnetwork.org/contact" },
-        ]}
+        breadcrumbs={PAGE_SEO.contact.breadcrumbs as Array<{ name: string; url: string }>}
       />
       <Navigation overlay />
       {/* Hero */}

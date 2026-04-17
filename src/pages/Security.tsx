@@ -14,7 +14,7 @@ import {
   Award,
   Mail,
 } from "lucide-react";
-import { SEO } from "@/components/SEO";
+import { SEO, PAGE_SEO } from "@/components/SEO";
 
 const securityCards = [
   {
@@ -110,9 +110,11 @@ function Security() {
   return (
     <PageTransition variant="fade">
       <SEO
-        title="Security — How InVision Network Protects Your Data"
-        description="Learn how InVision Network protects your data with TLS 1.3 encryption, AES-256 at-rest encryption, MFA, and SOC 2 certified infrastructure."
-        keywords="InVision Network security, data encryption, TLS 1.3, AES-256, SOC 2, MFA, cybersecurity"
+        title={PAGE_SEO.security.title}
+        description={PAGE_SEO.security.description}
+        keywords={PAGE_SEO.security.keywords}
+        structuredData={PAGE_SEO.security.structuredData}
+        breadcrumbs={PAGE_SEO.security.breadcrumbs as Array<{ name: string; url: string }>}
       />
       <Navigation />
 

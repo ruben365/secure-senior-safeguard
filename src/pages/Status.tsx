@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CheckCircle, Activity } from "lucide-react";
-import { SEO } from "@/components/SEO";
+import { SEO, PAGE_SEO } from "@/components/SEO";
 
 const services = [
   {
@@ -50,9 +50,10 @@ function Status() {
   return (
     <PageTransition variant="fade">
       <SEO
-        title="System Status — InVision Network"
-        description="Real-time status of InVision Network services. Check uptime, incidents, and service health."
-        keywords="InVision Network status, system uptime, service health, incidents"
+        title={PAGE_SEO.status.title}
+        description={PAGE_SEO.status.description}
+        keywords={PAGE_SEO.status.keywords}
+        breadcrumbs={PAGE_SEO.status.breadcrumbs as Array<{ name: string; url: string }>}
       />
       <Navigation />
 

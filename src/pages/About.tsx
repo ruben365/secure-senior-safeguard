@@ -117,14 +117,11 @@ function About() {
   return (
     <PageTransition variant="fade">
       <SEO
-        title="About InVision Network — Cybersecurity Experts in Kettering, Ohio"
-        description="Meet the team behind InVision Network. A veteran couple founded this Kettering, Ohio company to protect Southwest Ohio families and businesses from AI-powered scams, deepfakes, and digital fraud."
-        keywords="InVision Network about, cybersecurity Kettering Ohio, veteran-founded, Southwest Ohio AI protection"
+        title={PAGE_SEO.about.title}
+        description={PAGE_SEO.about.description}
+        keywords={PAGE_SEO.about.keywords}
         structuredData={PAGE_SEO.about.structuredData}
-        breadcrumbs={[
-          { name: "Home", url: "https://www.invisionnetwork.org/" },
-          { name: "About", url: "https://www.invisionnetwork.org/about" },
-        ]}
+        breadcrumbs={PAGE_SEO.about.breadcrumbs as Array<{ name: string; url: string }>}
       />
       <Navigation overlay />
 

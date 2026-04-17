@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { SEO } from "@/components/SEO";
+import { SEO, PAGE_SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -77,22 +77,12 @@ export default function LibraryPage() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <SEO
-        title="Digital Library | InVision Network — Cybersecurity & AI Books"
-        description="Browse InVision Network's complete digital library. Expert cybersecurity, AI safety, scam prevention, and privacy guides written for every skill level. Instant access after purchase."
+        title={PAGE_SEO.library.title}
+        description={PAGE_SEO.library.description}
+        keywords={PAGE_SEO.library.keywords}
         canonical="https://www.invisionnetwork.org/library"
-        keywords="cybersecurity books, AI safety guide, scam prevention ebook, digital library, InVision Network"
-        structuredData={{
-          "@context": "https://schema.org",
-          "@type": "CollectionPage",
-          name: "InVision Network Digital Library",
-          description: "Expert cybersecurity and AI safety digital books",
-          url: "https://www.invisionnetwork.org/library",
-          publisher: {
-            "@type": "Organization",
-            name: "InVision Network",
-            url: "https://www.invisionnetwork.org",
-          },
-        }}
+        structuredData={PAGE_SEO.library.structuredData}
+        breadcrumbs={PAGE_SEO.library.breadcrumbs as Array<{ name: string; url: string }>}
       />
       <Navigation overlay />
 
