@@ -749,44 +749,28 @@
 }
 
 @media (max-width: 640px) {
-  .hero-ws__widget {
-    max-width: 100%;
-  }
-
-  .hero-ws__feature-row {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
-  }
+  /* Content density: hide kicker, body, widget, and feature panel */
+  .hero-ws__kicker { display: none; }
+  .hero-ws__body { display: none; }
+  .hero-ws__widget { display: none; }
+  .hero-ws__panel { display: none; }
 
   .hero-ws__headline {
     font-size: clamp(1.25rem, 5.5vw, 1.625rem);
-  }
-
-  .hero-ws__body {
-    font-size: 0.875rem;
-  }
-
-  .hero-ws__ctas {
-    flex-direction: column;
-  }
-
-  .hero-ws__cta {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .hero-ws__panel {
-    padding: 1rem;
+    margin-top: 0;
   }
 
   .hero-ws__content {
     padding-bottom: 1.5rem;
   }
 
-  .hero-ws__feature {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 0.875rem;
-    padding: 1rem;
+  /* Overlay: gentle top-to-bottom so image shows through */
+  .hero-ws__bg::before {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.06) 0%,
+      rgba(0, 0, 0, 0.18) 55%,
+      rgba(0, 0, 0, 0.48) 100%
+    );
   }
 }

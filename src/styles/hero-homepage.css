@@ -511,38 +511,56 @@
   }
 }
 
-/* Mobile — single column, stacked CTAs */
+/* Mobile — content density reduction + image-first layout */
 @media (max-width: 640px) {
-  .hero-home__feature-row {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+  /* Hide nav tabs — hamburger handles navigation on phone */
+  .hero-home__tabs { display: none; }
+
+  /* Hide kicker — reduce stacking above headline */
+  .hero-home__kicker { display: none; }
+
+  /* Hide body text — headline + one CTA is enough on phone */
+  .hero-home__body { display: none; }
+
+  /* Hide secondary CTA — one clear action per screen */
+  .hero-home__cta:last-child { display: none; }
+
+  /* Hide glassmorphism feature panel — let the hero image breathe */
+  .hero-home__panel { display: none; }
+
+  /* Push copy to lower portion so portrait fills the top */
+  .hero-home__content {
+    justify-content: flex-end;
+    padding-top: 0;
+    padding-bottom: 2.25rem;
   }
 
+  /* Scale headline to phone viewport */
   .hero-home__headline {
-    font-size: clamp(1.25rem, 5.5vw, 1.625rem);
-  }
-
-  .hero-home__body {
-    font-size: 0.875rem;
+    font-size: clamp(1.375rem, 5.5vw, 1.75rem);
     margin-bottom: 1.25rem;
   }
 
-  .hero-home__ctas {
-    flex-direction: column;
-  }
-
+  /* Primary CTA — compact pill, stays one clear action */
   .hero-home__cta {
-    width: 100%;
-    justify-content: center;
-    height: 42px;
+    height: 44px;
+    padding: 0 1.75rem;
     font-size: 0.8125rem;
   }
 
-  .hero-home__panel {
-    padding: 1.25rem 1rem;
+  /* Overlay: swap side-wall dark for gentle top-to-bottom
+     so the portrait is visible above the text block */
+  .hero-home__bg::before {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.06) 0%,
+      rgba(0, 0, 0, 0.18) 55%,
+      rgba(0, 0, 0, 0.48) 100%
+    );
   }
 
-  .hero-home__content {
-    padding-bottom: 1.5rem;
+  /* Show subject from top — face visible above the text */
+  .hero-home__bg img {
+    object-position: center 18%;
   }
 }

@@ -59,7 +59,7 @@ export const HeroBusiness = ({ onStrategyCall }: { onStrategyCall: () => void })
         />
         <div className="hero-biz__top-veil" />
         {/* Mobile: darken top so text is readable over photo */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/40 to-transparent sm:hidden" aria-hidden="true" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/20 to-transparent sm:hidden" aria-hidden="true" />
         <div className="hero-biz__glow" aria-hidden="true" />
       </div>
 
