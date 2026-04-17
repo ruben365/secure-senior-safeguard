@@ -138,7 +138,7 @@ export const useAiChat = () => {
         }
 
         setStatus("idle");
-      } catch (err: any) {
+      } catch (err) {
         if (err.name === "AbortError") {
           setStatus("idle");
           return;

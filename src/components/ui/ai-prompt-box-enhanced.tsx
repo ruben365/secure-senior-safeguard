@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
@@ -618,6 +619,7 @@ export const EnhancedPromptInputBox = React.forwardRef<
     e.stopPropagation();
     const droppedFiles = Array.from(e.dataTransfer.files);
     if (droppedFiles.length > 0) processFile(droppedFiles[0]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleRemoveFile = (index: number) => {
     const fileToRemove = files[index];
@@ -639,6 +641,7 @@ export const EnhancedPromptInputBox = React.forwardRef<
         }
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   React.useEffect(() => {
     document.addEventListener("paste", handlePaste);

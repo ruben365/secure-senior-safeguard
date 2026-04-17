@@ -104,7 +104,7 @@ export function useAnalyticsTracking() {
 
     let scrollIdleId: number | ReturnType<typeof setTimeout>;
     if ("requestIdleCallback" in window) {
-      scrollIdleId = (window as any).requestIdleCallback(addScrollListener, {
+      scrollIdleId = window.requestIdleCallback(addScrollListener, {
         timeout: 2000,
       });
     } else {
@@ -114,7 +114,7 @@ export function useAnalyticsTracking() {
     return () => {
       cancelTracking();
       if ("requestIdleCallback" in window && typeof scrollIdleId === "number") {
-        (window as any).cancelIdleCallback(scrollIdleId);
+        window.cancelIdleCallback(scrollIdleId);
       } else {
         clearTimeout(scrollIdleId as ReturnType<typeof setTimeout>);
       }

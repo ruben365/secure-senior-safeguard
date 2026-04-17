@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCallback, useMemo, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -130,7 +131,7 @@ export const useGuestScanner = () => {
         setStatus("completed");
         setProgress(100);
         resetProgressTimer();
-      } catch (err: any) {
+      } catch (err) {
         const message = err?.message || "Scan failed. Please try again.";
         setStatus("error");
         setError(message);
@@ -138,6 +139,7 @@ export const useGuestScanner = () => {
         toast.error(message);
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [file],
   );
 

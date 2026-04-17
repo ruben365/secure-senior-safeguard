@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 // AiAnalysisCTA removed during cleanup

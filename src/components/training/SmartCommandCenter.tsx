@@ -46,7 +46,7 @@ export const SmartCommandCenter = ({
   const [validationError, setValidationError] = useState<string | null>(null);
   const [isListening, setIsListening] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const recognitionRef = useRef<any>(null);
+  const recognitionRef = useRef<SpeechRecognition | null>(null);
 
   const isProcessing = status === "uploading" || status === "analyzing";
   const isPaying = status === "paying";
@@ -146,21 +146,21 @@ export const SmartCommandCenter = ({
       ("webkitSpeechRecognition" in window || "SpeechRecognition" in window)
     ) {
       const SpeechRecognition =
-        (window as any).webkitSpeechRecognition ||
-        (window as any).SpeechRecognition;
+        window.webkitSpeechRecognition ||
+        window.SpeechRecognition;
       const recognition = new SpeechRecognition();
       recognition.continuous = false;
       recognition.interimResults = false;
       recognition.lang = "en-US";
 
-      recognition.onresult = (event: any) => {
+      recognition.onresult = (event: SpeechRecognitionEvent) => {
         const transcript = event.results[0][0].transcript;
         setInput(transcript);
         setIsListening(false);
         toast.success("Voice captured successfully!");
       };
 
-      recognition.onerror = (event: any) => {
+      recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
         console.error("Speech recognition error:", event.error);
         setIsListening(false);
         toast.error("Voice recognition failed. Please try again.");

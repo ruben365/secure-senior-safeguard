@@ -89,10 +89,12 @@ export default function TestimonialsAdmin() {
 
   useEffect(() => {
     fetchTestimonials();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     applyFiltersAndSort();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [testimonials, searchQuery, filterStatus, sortBy]);
 
   const fetchTestimonials = async () => {
@@ -105,7 +107,7 @@ export default function TestimonialsAdmin() {
 
       if (error) throw error;
       setTestimonials(data || []);
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error fetching testimonials:", error);
       toast({
         title: "Error",

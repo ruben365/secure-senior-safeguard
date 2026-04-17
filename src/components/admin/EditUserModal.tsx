@@ -95,6 +95,7 @@ export function EditUserModal({
         // Insert new role
         const { error: roleError } = await supabase.from("user_roles").insert({
           user_id: user.id,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           role: selectedRole as any,
         });
 
@@ -119,7 +120,7 @@ export function EditUserModal({
 
       onSaved();
       onOpenChange(false);
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error updating user:", error);
       toast({
         title: "Error",

@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Phone, Shield, Zap, Users, Award, Lock, Eye, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -78,7 +79,7 @@ function StatCard({
   target: number;
   suffix: string;
   label: string;
-  icon: any;
+  icon: React.ComponentType<{ className?: string }>;
   index: number;
 }) {
   const { value, ref } = useCountUp(target);
@@ -125,7 +126,7 @@ export const HomeIntroSection = () => {
       </section>
 
       {/* Ohio's Trusted Partner — compact two-column */}
-      <section className="py-10 md:py-16" ref={introRef as any}>
+      <section className="py-10 md:py-16" ref={introRef as React.RefObject<HTMLElement>}>
         <div className="container mx-auto md:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
             {/* Left — Copy */}
@@ -246,7 +247,7 @@ export const HomeIntroSection = () => {
       </section>
 
       {/* Real Results — compact bento */}
-      <section className="py-10 md:py-16 bg-muted/20 relative overflow-hidden" ref={bentoRef as any}>
+      <section className="py-10 md:py-16 bg-muted/20 relative overflow-hidden" ref={bentoRef as React.RefObject<HTMLElement>}>
         <div className="container mx-auto md:px-6 lg:px-8 relative">
           <div className={`text-center mb-8 transition-all duration-500 ${bentoInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-2">

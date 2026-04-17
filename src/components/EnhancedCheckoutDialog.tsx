@@ -143,7 +143,7 @@ function QRCodePayment({
         setSessionId(data.sessionId);
         setTimeLeft(240);
       }
-    } catch (error: any) {
+    } catch (error) {
       toast.error("Failed to generate QR code");
     } finally {
       setLoading(false);
@@ -360,7 +360,7 @@ function CardPaymentForm({
       clearCart("purchase");
       triggerThankYou();
       onSuccess();
-    } catch (error: any) {
+    } catch (error) {
       toast.error(error.message || "Payment failed");
     } finally {
       setLoading(false);
@@ -478,6 +478,7 @@ function CardPaymentWrapper({
     const savedName = localStorage.getItem("checkout_name");
     if (savedEmail) setFormData({ ...formData, email: savedEmail });
     if (savedName) setFormData({ ...formData, name: savedName });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -536,7 +537,7 @@ function CardPaymentWrapper({
 
       setClientSecret(data.clientSecret);
       setStep("payment");
-    } catch (error: any) {
+    } catch (error) {
       console.error("Payment initialization error:", error);
       toast.error(error.message || "Failed to initialize payment");
     } finally {

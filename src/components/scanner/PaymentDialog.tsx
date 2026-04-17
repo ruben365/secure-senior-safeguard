@@ -97,7 +97,7 @@ const GuestPaymentForm = ({
       ) {
         onSuccess(paymentIntent.id);
       }
-    } catch (err: any) {
+    } catch (err) {
       toast.error(err?.message || "Payment failed. Please try again.");
     } finally {
       setProcessing(false);
@@ -230,7 +230,7 @@ export const PaymentDialog = ({
         setFilePath(data.filePath);
         setPaymentIntentId(data.paymentIntentId);
         setServerAmount(data.amount ?? null);
-      } catch (err: any) {
+      } catch (err) {
         // Don't fire a toast — the in-dialog error panel is clearer.
         // The hook already writes the real server message into paymentError.
         if (!isMounted) return;

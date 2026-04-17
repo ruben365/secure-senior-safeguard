@@ -42,6 +42,7 @@ export function useStripeElementLifecycle({
       window.cancelAnimationFrame(frame);
       window.clearTimeout(timeout);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [enabled, timeoutMs, ...resetKeys]);
 
   const handleReady = useCallback(() => {

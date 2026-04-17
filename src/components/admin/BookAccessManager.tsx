@@ -66,7 +66,7 @@ export default function BookAccessManager() {
       setGenName("");
       setGenBookIds("");
       queryClient.invalidateQueries({ queryKey: ["book-purchases"] });
-    } catch (err: any) {
+    } catch (err) {
       toast.error(err.message || "Failed to generate Access ID");
     } finally {
       setGenerating(false);
@@ -88,7 +88,7 @@ export default function BookAccessManager() {
       toast.success(data.message || "Access ID reset successfully.");
       setResetEmail("");
       queryClient.invalidateQueries({ queryKey: ["book-purchases"] });
-    } catch (err: any) {
+    } catch (err) {
       toast.error(err.message || "Failed to reset Access ID");
     } finally {
       setResetting(false);

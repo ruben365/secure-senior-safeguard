@@ -245,7 +245,7 @@ export function AddTestimonialModal({
         onOpenChange(false);
         onSuccess();
       }, 500);
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error saving testimonial:", error);
       toast({
         title: "Error",

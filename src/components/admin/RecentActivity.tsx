@@ -35,6 +35,7 @@ export function RecentActivity() {
     }, 30000);
 
     return () => clearInterval(interval);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchActivities = async (silent = false) => {
@@ -170,7 +171,7 @@ export function RecentActivity() {
           });
         }
       }
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error fetching activities:", error);
       if (!silent) {
         toast({

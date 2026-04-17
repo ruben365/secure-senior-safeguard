@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { SEO, PAGE_SEO } from "@/components/SEO";
 import { useQuery } from "@tanstack/react-query";

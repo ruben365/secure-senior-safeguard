@@ -213,7 +213,7 @@ export function ReadBooksDialog({ open, onOpenChange }: ReadBooksDialogProps) {
                     toast.success(data.message || "New Access ID sent to your email!");
                     setResetEmail("");
                     setShowReset(false);
-                  } catch (err: any) {
+                  } catch (err) {
                     toast.error(err.message || "Reset failed.");
                   } finally {
                     setResetting(false);

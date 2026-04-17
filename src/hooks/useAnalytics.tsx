@@ -83,7 +83,7 @@ export function useAnalytics() {
 
     let idleId: number | ReturnType<typeof setTimeout>;
     if (typeof window !== "undefined" && "requestIdleCallback" in window) {
-      idleId = (window as any).requestIdleCallback(scheduleListener, {
+      idleId = window.requestIdleCallback(scheduleListener, {
         timeout: 2000,
       });
     } else {
@@ -96,7 +96,7 @@ export function useAnalytics() {
         "requestIdleCallback" in window &&
         typeof idleId === "number"
       ) {
-        (window as any).cancelIdleCallback(idleId);
+        window.cancelIdleCallback(idleId);
       } else {
         clearTimeout(idleId as ReturnType<typeof setTimeout>);
       }

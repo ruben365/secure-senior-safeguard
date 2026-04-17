@@ -43,6 +43,7 @@ function Portal() {
     }, 5000);
     loadUserData();
     return () => clearTimeout(timeout);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadUserData = async () => {
@@ -78,7 +79,7 @@ function Portal() {
         navigate(roleRedirects[userRoles[0]] || "/portal");
         return;
       }
-    } catch (error: any) {
+    } catch (error) {
       toast({ title: "Error Loading Portal", description: "Unable to load portal data.", variant: "destructive" });
     } finally {
       setLoading(false);

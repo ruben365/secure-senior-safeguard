@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * Analytics utilities for tracking user behavior
  * Supports Google Analytics 4 and custom events

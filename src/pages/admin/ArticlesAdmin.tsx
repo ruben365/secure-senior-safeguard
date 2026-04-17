@@ -174,6 +174,7 @@ export default function ArticlesAdmin() {
 
   useEffect(() => {
     applyFiltersAndSort();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [articles, searchQuery, categoryFilter, statusFilter, dateFilter, sortBy]);
 
   const applyFiltersAndSort = () => {

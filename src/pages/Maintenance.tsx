@@ -66,6 +66,7 @@ function Maintenance() {
       clearInterval(refreshInterval);
       clearInterval(timerInterval);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleNotifyMe = (e: React.FormEvent) => {

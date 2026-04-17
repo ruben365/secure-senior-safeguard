@@ -106,7 +106,7 @@ export default function SuperAdminDashboardHealth() {
               error_message: response.ok ? null : `HTTP ${response.status}`,
             })
             .eq("id", dashboard.id);
-        } catch (error: any) {
+        } catch (error) {
           await supabase
             .from("dashboard_health")
             .update({

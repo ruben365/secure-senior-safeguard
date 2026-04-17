@@ -98,7 +98,7 @@ export const useStripePayment = () => {
       }
 
       return data as GuestScanPaymentResponse;
-    } catch (err: any) {
+    } catch (err) {
       const message = err?.message || "Payment setup failed.";
       setError(message);
       throw err;
@@ -137,7 +137,7 @@ export const useStripePayment = () => {
       }
 
       return data as GuestScanCheckoutResponse;
-    } catch (err: any) {
+    } catch (err) {
       const message = err?.message || "Payment setup failed.";
       setError(message);
       throw err;

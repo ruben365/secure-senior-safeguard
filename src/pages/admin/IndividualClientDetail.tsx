@@ -39,6 +39,7 @@ export default function IndividualClientDetail() {
 
   useEffect(() => {
     if (id) fetchClient();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const fetchClient = async () => {
@@ -51,7 +52,7 @@ export default function IndividualClientDetail() {
 
       if (error) throw error;
       setClient(data);
-    } catch (error: any) {
+    } catch (error) {
       toast({
         title: "Error",
         description: error.message || "Failed to load client",

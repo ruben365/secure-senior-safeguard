@@ -79,6 +79,7 @@ export default function SuperAdminProductManager() {
 
   useEffect(() => {
     fetchProducts();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchProducts = async () => {
@@ -239,7 +240,7 @@ export default function SuperAdminProductManager() {
       setCoverImage(null);
       setShowAddDialog(false);
       fetchProducts();
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error creating product:", error);
       toast({
         title: "Error",

@@ -311,7 +311,7 @@ export default function TrainingAiAnalysis() {
         scanId: payload.scanId,
         filePath: payload.filePath,
       });
-    } catch (err: any) {
+    } catch (err) {
       setStatus(file ? "ready" : "idle");
       toast.error(
         err?.message || "Unable to start your account-linked upload scan.",

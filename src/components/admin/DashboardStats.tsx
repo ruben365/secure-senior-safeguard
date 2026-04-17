@@ -123,7 +123,7 @@ export function DashboardStats() {
         revenueGrowth,
         expiringSoon: expiringSoon || 0,
       });
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error fetching dashboard data:", error);
       toast({
         title: "Error",

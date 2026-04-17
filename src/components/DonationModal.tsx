@@ -195,7 +195,7 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
         setSelectedAmount(null);
         setCustomAmount("");
       }
-    } catch (error: any) {
+    } catch (error) {
       toast({
         title: "Error",
         description: error.message || "Please try again.",

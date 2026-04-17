@@ -107,7 +107,7 @@ export function QRCodePaymentSection({
       setQrImageUrl(qrUrl);
 
       toast.success("QR code generated! Scan to pay.");
-    } catch (err: any) {
+    } catch (err) {
       console.error("Error generating QR code:", err);
       setError(err.message || "Failed to generate QR code");
       toast.error("Failed to generate QR code");

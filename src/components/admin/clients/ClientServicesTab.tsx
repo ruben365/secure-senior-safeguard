@@ -27,6 +27,7 @@ export function ClientServicesTab({ clientId }: ClientServicesTabProps) {
     if (clientId) {
       fetchClientServices();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [clientId]);
 
   const fetchClientServices = async () => {

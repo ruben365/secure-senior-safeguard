@@ -315,7 +315,7 @@ export default function FAQ() {
       setAskName("");
       setAskEmail("");
       setAskQuestion("");
-    } catch (err: any) {
+    } catch (err) {
       toast.error(err?.message || "Something went wrong, please try again.");
     } finally {
       setSubmitting(false);

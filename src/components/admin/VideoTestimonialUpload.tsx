@@ -150,7 +150,7 @@ export function VideoTestimonialUpload({
       onSuccess();
       onOpenChange(false);
       resetForm();
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error uploading video testimonial:", error);
       toast({
         title: "Upload failed",

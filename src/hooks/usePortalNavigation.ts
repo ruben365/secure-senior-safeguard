@@ -116,5 +116,5 @@ export function usePortalNavigation(): NavSection[] {
         ),
       }))
       .filter((section) => section.items.length > 0);
-  }, [hasPermission, roleConfig]);
+  }, [hasPermission]);
 }

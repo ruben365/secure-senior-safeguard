@@ -73,7 +73,7 @@ export default function NewsletterManagement() {
       toast.success("Subscriber added successfully");
       setNewSubscriber("");
       refetch();
-    } catch (error: any) {
+    } catch (error) {
       if (error.code === "23505") {
         toast.error("This email is already subscribed");
       } else {

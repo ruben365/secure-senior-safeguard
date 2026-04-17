@@ -46,7 +46,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
   const [input, setInput] = useState("");
   const [isRecording, setIsRecording] = useState(false);
   const [mode, setMode] = useState<"chat" | "help">("chat");
-  const recognitionRef = useRef<any>(null);
+  const recognitionRef = useRef<SpeechRecognition | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const quickHelpActions: QuickHelpAction[] = [
@@ -110,14 +110,14 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
     if (!("webkitSpeechRecognition" in window || "SpeechRecognition" in window))
       return;
     const SpeechRecognition =
-      (window as any).webkitSpeechRecognition ||
-      (window as any).SpeechRecognition;
+      window.webkitSpeechRecognition ||
+      window.SpeechRecognition;
     recognitionRef.current = new SpeechRecognition();
     recognitionRef.current.continuous = false;
     recognitionRef.current.interimResults = false;
     recognitionRef.current.lang = "en-US";
 
-    recognitionRef.current.onresult = async (event: any) => {
+    recognitionRef.current.onresult = async (event: SpeechRecognitionEvent) => {
       const transcript = event.results[0][0].transcript;
       setIsRecording(false);
       if (transcript.trim()) {

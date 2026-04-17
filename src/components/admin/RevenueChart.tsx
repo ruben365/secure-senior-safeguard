@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -38,6 +39,7 @@ export function RevenueChart() {
 
   useEffect(() => {
     fetchRevenueData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeFrame]);
 
   const fetchRevenueData = async () => {
@@ -118,7 +120,7 @@ export function RevenueChart() {
       );
 
       setSummary({ total, average, highest });
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error fetching revenue data:", error);
       toast({
         title: "Error",

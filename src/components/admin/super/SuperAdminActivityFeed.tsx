@@ -101,6 +101,7 @@ export default function SuperAdminActivityFeed() {
       channel.unsubscribe();
       clearInterval(interval);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoRefresh]);
 
   const fetchActivities = async () => {

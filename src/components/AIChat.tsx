@@ -36,7 +36,7 @@ export const AIChat = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const recognitionRef = useRef<any>(null);
+  const recognitionRef = useRef<SpeechRecognition | null>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
   const { toast } = useToast();
 
@@ -84,14 +84,14 @@ export const AIChat = () => {
   useEffect(() => {
     if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
       const SpeechRecognition =
-        (window as any).webkitSpeechRecognition ||
-        (window as any).SpeechRecognition;
+        window.webkitSpeechRecognition ||
+        window.SpeechRecognition;
       recognitionRef.current = new SpeechRecognition();
       recognitionRef.current.continuous = false;
       recognitionRef.current.interimResults = false;
       recognitionRef.current.lang = "en-US";
 
-      recognitionRef.current.onresult = async (event: any) => {
+      recognitionRef.current.onresult = async (event: SpeechRecognitionEvent) => {
         const transcript = event.results[0][0].transcript;
         setIsRecording(false);
         if (transcript.trim()) {
@@ -100,7 +100,7 @@ export const AIChat = () => {
         }
       };
 
-      recognitionRef.current.onerror = (error: any) => {
+      recognitionRef.current.onerror = (error: SpeechRecognitionErrorEvent) => {
         console.error("Speech recognition error:", error);
         setIsRecording(false);
         toast({
@@ -121,6 +121,7 @@ export const AIChat = () => {
         abortControllerRef.current.abort();
       }
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [toast]);
 
   // Immediate stop speaking - cancel all speech
@@ -305,7 +306,7 @@ export const AIChat = () => {
       if (assistantMessage && autoSpeak) {
         await speakText(assistantMessage);
       }
-    } catch (error: any) {
+    } catch (error) {
       if (error.name === "AbortError") {
         return;
       }

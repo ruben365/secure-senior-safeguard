@@ -193,6 +193,7 @@ export const BookingModal = ({
     const savedName = localStorage.getItem("checkout_name");
     if (savedEmail) form.setValue("email", savedEmail);
     if (savedName) form.setValue("fullName", savedName);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   const discountAmount =
@@ -261,7 +262,7 @@ export const BookingModal = ({
       form.reset();
       setStep(1);
       setTermsAccepted(false);
-    } catch (error: any) {
+    } catch (error) {
       toast({
         title: "Submission Failed",
         description: error.message || "Please try again.",

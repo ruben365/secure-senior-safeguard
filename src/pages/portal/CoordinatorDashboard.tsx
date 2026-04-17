@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -216,7 +217,7 @@ function CoordinatorDashboard() {
           queryKey: ["coordinator", "courses"],
         });
       }
-    } catch (err: any) {
+    } catch (err) {
       toast({
         title: "Error",
         description: err?.message ?? "An unexpected error occurred.",

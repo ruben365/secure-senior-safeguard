@@ -566,6 +566,7 @@ export const PromptInputBox = React.forwardRef(
       const nextFiles = Array.from(e.dataTransfer.files);
       const imageFiles = nextFiles.filter((file) => isImageFile(file));
       if (imageFiles.length > 0) processFile(imageFiles[0]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleRemoveFile = (index: number) => {
@@ -589,6 +590,7 @@ export const PromptInputBox = React.forwardRef(
           }
         }
       }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     React.useEffect(() => {

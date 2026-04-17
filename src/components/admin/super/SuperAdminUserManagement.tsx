@@ -86,6 +86,7 @@ export default function SuperAdminUserManagement() {
 
   useEffect(() => {
     fetchUsers();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchUsers = async () => {
@@ -169,7 +170,7 @@ export default function SuperAdminUserManagement() {
         title: "Password Reset Sent",
         description: `Password reset email sent to ${user.email}`,
       });
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error sending password reset:", error);
       toast({
         title: "Error",
@@ -211,7 +212,7 @@ export default function SuperAdminUserManagement() {
 
       setShowResetDialog(false);
       setSelectedUser(null);
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error resetting user state:", error);
       toast({
         title: "Error",
@@ -638,7 +639,7 @@ export default function SuperAdminUserManagement() {
                     setShowDeactivateDialog(false);
                     setSelectedUser(null);
                     fetchUsers();
-                  } catch (error: any) {
+                  } catch (error) {
                     toast({
                       title: "Error",
                       description:

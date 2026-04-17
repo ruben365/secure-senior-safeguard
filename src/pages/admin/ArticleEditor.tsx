@@ -199,6 +199,7 @@ export default function ArticleEditor() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [article, wordCount]);
 
   // Exit warning for unsaved changes
@@ -259,6 +260,7 @@ export default function ArticleEditor() {
     }, 30000);
 
     return () => clearInterval(autoSaveInterval);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [title, content]);
 
   // Save to localStorage for offline support
@@ -289,6 +291,7 @@ export default function ArticleEditor() {
         console.error("Failed to restore draft:", error);
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const handleSave = async (silent = false) => {

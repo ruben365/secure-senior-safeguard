@@ -113,6 +113,7 @@ export const ServiceInquiryDialog = ({
     const savedName = localStorage.getItem("checkout_name");
     if (savedEmail) form.setValue("email", savedEmail);
     if (savedName) form.setValue("fullName", savedName);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   const discountAmount = isVeteran ? Math.round(servicePrice * 0.1) : 0;
@@ -189,7 +190,7 @@ export const ServiceInquiryDialog = ({
       setStep(1);
       setTermsAccepted(false);
       setIsVeteran(false);
-    } catch (error: any) {
+    } catch (error) {
       console.error("Inquiry submission error:", error);
       toast({
         title: "Submission Failed",

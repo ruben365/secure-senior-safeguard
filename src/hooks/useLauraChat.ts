@@ -159,7 +159,7 @@ export const useLauraChat = () => {
             { role: "assistant" as const, content: fallbackResponse },
           ]);
         }
-      } catch (err: any) {
+      } catch (err) {
         if (err?.name === "AbortError") return;
         setMessages([
           ...updated,

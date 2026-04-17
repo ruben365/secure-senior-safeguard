@@ -86,7 +86,7 @@ export function useStripeKey() {
         const promise = await ensureStripePromise(forceRemote);
         setStripePromise(promise);
         setError(null);
-      } catch (err: any) {
+      } catch (err) {
         setStripePromise(null);
         setError(err?.message || "Failed to initialize payment system");
       } finally {
