@@ -1,0 +1,1364 @@
+/* ═══════════════════════════════════════════════════════════════════
+   WARM POLISH — Obsidian & Copper design system  v1.0
+   InVision Network / Secure Senior Safeguard
+
+   Drop-in override layer: imported last from index.css so it wins
+   the cascade over all prior style sheets.
+
+   Scope:
+     • Homepage story sections  (.hss-root children)
+     • Footer                   (.footer-bg)
+     • Shared public components (trust strip, nav hints)
+
+   Hard guards — these are intentionally UNTOUCHED:
+     • .admin-no-animations  → admin shell has its own dark palette
+     • .hss-final-cta        → already dark cinematic, keep it
+     • Hero sections         → full-bleed photo/video, leave alone
+     • Portal pages          → light semantic-token layout
+
+   Token families:
+     --cu-*   Copper metallic scale  (50 → 700)
+     --ob-*   Obsidian canvas, surfaces, lines, text, glass, leaks
+   ═══════════════════════════════════════════════════════════════════ */
+
+
+/* ─────────────────────────────────────────────────────────────────
+   DESIGN TOKENS
+   ───────────────────────────────────────────────────────────────── */
+:root {
+
+  /* ── Copper metallic scale ────────────────────────────────────── */
+  --cu-50:  #f7ead6;   /* cream whisper  */
+  --cu-100: #f0d5a8;   /* warm parchment */
+  --cu-200: #e4b87a;   /* antique gold   */
+  --cu-300: #d49a52;   /* polished copper */
+  --cu-400: #c47c32;   /* rich copper    */
+  --cu-500: #b06020;   /* deep copper    */
+  --cu-600: #8c4a18;   /* aged bronze    */
+  --cu-700: #6e4018;   /* dark verdigris  */
+
+  /* ── Copper semantic aliases ─────────────────────────────────── */
+  --cu-glow:        rgba(196, 124, 50, 0.22);
+  --cu-glow-lg:     rgba(196, 124, 50, 0.14);
+  --cu-glow-xl:     rgba(196, 124, 50, 0.08);
+  --cu-line:        rgba(196, 124, 50, 0.28);
+  --cu-line-strong: rgba(196, 124, 50, 0.55);
+  --cu-line-subtle: rgba(196, 124, 50, 0.14);
+
+  /* ── Obsidian canvas ─────────────────────────────────────────── */
+  --ob-bg:        #0d0d0d;   /* deepest obsidian        */
+  --ob-bg-2:      #141311;   /* section alt background  */
+  --ob-surface:   #1a1a1a;   /* raised surface          */
+  --ob-surface-2: #22201d;   /* elevated surface        */
+  --ob-surface-3: #2d2a25;   /* highest surface         */
+  --ob-surface-4: #363028;   /* hover / pressed state   */
+
+  /* ── Lines ───────────────────────────────────────────────────── */
+  --ob-line:        rgba(180, 120, 60, 0.20);   /* copper hairline  */
+  --ob-line-soft:   rgba(255, 255, 255, 0.07);  /* white whisper    */
+  --ob-line-strong: rgba(180, 120, 60, 0.45);   /* copper strong    */
+  --ob-line-bold:   rgba(180, 120, 60, 0.70);   /* copper bold      */
+
+  /* ── Text hierarchy ─────────────────────────────────────────── */
+  --ob-text:     #e8e0d8;   /* primary body — warm white  */
+  --ob-text-dim: #b8b0a8;   /* secondary — warm gray      */
+  --ob-text-sub: #887f77;   /* tertiary — muted warm      */
+  --ob-text-faint: #554e48; /* barely visible             */
+
+  /* ── Ambient light leaks (amber warmth) ─────────────────────── */
+  --ob-leak-a:  rgba(196, 124, 50, 0.14);   /* warm amber — primary   */
+  --ob-leak-b:  rgba(220, 160, 80,  0.07);  /* lighter gold — accent  */
+  --ob-leak-c:  rgba(140,  80, 20,  0.09);  /* deep bronze — shadow   */
+
+  /* ── Glass panel recipe ──────────────────────────────────────── */
+  --ob-glass-bg:     rgba(24, 22, 18, 0.75);
+  --ob-glass-bg-2:   rgba(30, 27, 22, 0.80);
+  --ob-glass-border: rgba(180, 120, 60, 0.22);
+  --ob-glass-border-hover: rgba(196, 124, 50, 0.42);
+  --ob-glass-blur:   blur(28px) saturate(1.5);
+  --ob-glass-blur-sm: blur(16px) saturate(1.4);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   1. SECTION BACKGROUNDS
+   ═══════════════════════════════════════════════════════════════════ */
+
+.hss-root .hss-section-white {
+  background: var(--ob-bg) !important;
+  position: relative;
+  isolation: isolate;
+}
+
+.hss-root .hss-section-tint,
+.hss-root .hss-stats-bento {
+  background: var(--ob-bg-2) !important;
+  position: relative;
+  isolation: isolate;
+}
+
+/* Ambient amber light leaks — one warm source per section */
+.hss-root .hss-section-white::before,
+.hss-root .hss-section-tint::before,
+.hss-root .hss-stats-bento::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 35% at 12% 0%,   var(--ob-leak-a) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 28% at 88% 100%,  var(--ob-leak-b) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 20% at 50% 50%,   var(--ob-leak-c) 0%, transparent 80%);
+  z-index: 0;
+}
+
+/* Section children sit above pseudo-element glows */
+.hss-root .hss-section-white > *,
+.hss-root .hss-section-tint > *,
+.hss-root .hss-stats-bento > * {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   2. TRUST STRIP (first child of .hss-root)
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* The trust strip div already has bg-[#111111] — deepen to ob-bg */
+.hss-root > div:first-child {
+  background: var(--ob-bg) !important;
+  border-bottom-color: var(--ob-line) !important;
+}
+
+/* Trust item icons keep the copper tint */
+.hss-root > div:first-child svg {
+  color: var(--cu-300) !important;
+}
+
+/* Trust item labels */
+.hss-root > div:first-child span {
+  color: var(--ob-text-dim) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   3. GLASS CARD SYSTEM
+   .hss-card · .hss-soft-tint · .hss-stats-tile · .hss-testimonial-card
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Primary glass card ─────────────────────────────────────────── */
+.hss-root .hss-card {
+  background: var(--ob-glass-bg) !important;
+  backdrop-filter: var(--ob-glass-blur) !important;
+  -webkit-backdrop-filter: var(--ob-glass-blur) !important;
+  border: 1px solid var(--ob-glass-border) !important;
+  box-shadow:
+    0  1px  0  0  rgba(255, 255, 255, 0.055) inset,
+    0 -1px  0  0  rgba(0,   0,   0,   0.40)  inset,
+    0  8px 48px  rgba(0,   0,   0,   0.60),
+    0  2px 12px  rgba(0,   0,   0,   0.45),
+    0  0   0  1px rgba(196, 124, 50,  0.06) !important;
+}
+
+.hss-root .hss-card:hover {
+  border-color: var(--ob-glass-border-hover) !important;
+  box-shadow:
+    0  1px  0  0  rgba(255, 255, 255, 0.075) inset,
+    0 -1px  0  0  rgba(0,   0,   0,   0.45)  inset,
+    0 16px 60px  rgba(0,   0,   0,   0.70),
+    0  4px 20px  rgba(0,   0,   0,   0.55),
+    0  0  28px   var(--cu-glow) !important;
+}
+
+/* ── Soft tint card ─────────────────────────────────────────────── */
+.hss-root .hss-soft-tint {
+  background: var(--ob-surface) !important;
+  border: 1px solid var(--ob-line) !important;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.40) !important;
+}
+
+.hss-root .hss-soft-tint:hover {
+  border-color: var(--cu-line) !important;
+  box-shadow:
+    0 6px 28px rgba(0, 0, 0, 0.55),
+    0 0   18px var(--cu-glow) !important;
+}
+
+/* ── Stats tiles ────────────────────────────────────────────────── */
+.hss-root .hss-stats-tile {
+  background: var(--ob-glass-bg-2) !important;
+  backdrop-filter: var(--ob-glass-blur-sm) !important;
+  -webkit-backdrop-filter: var(--ob-glass-blur-sm) !important;
+  border: 1px solid var(--ob-glass-border) !important;
+  box-shadow:
+    0  1px  0  0  rgba(255, 255, 255, 0.05) inset,
+    0 10px 40px  rgba(0,   0,   0,   0.55),
+    0  0   0  1px rgba(196, 124, 50,  0.05) !important;
+}
+
+.hss-root .hss-stats-tile:hover {
+  border-color: var(--ob-glass-border-hover) !important;
+  box-shadow:
+    0 14px 48px rgba(0,   0,   0,   0.65),
+    0  0   22px var(--cu-glow) !important;
+}
+
+/* ── Testimonial cards ──────────────────────────────────────────── */
+.hss-root .hss-testimonial-card {
+  background: var(--ob-glass-bg) !important;
+  backdrop-filter: var(--ob-glass-blur) !important;
+  -webkit-backdrop-filter: var(--ob-glass-blur) !important;
+  border: 1px solid var(--ob-glass-border) !important;
+  box-shadow:
+    0  1px  0  0  rgba(255, 255, 255, 0.06) inset,
+    0 12px 52px  rgba(0,   0,   0,   0.62),
+    0  0   0  1px rgba(196, 124, 50,  0.07) !important;
+}
+
+.hss-root .hss-testimonial-card:hover {
+  border-color: var(--ob-glass-border-hover) !important;
+  box-shadow:
+    0  1px  0  0  rgba(255, 255, 255, 0.08) inset,
+    0 20px 68px  rgba(0,   0,   0,   0.72),
+    0  0   32px  var(--cu-glow) !important;
+}
+
+/* ── Float card (decorative overlay cards) ──────────────────────── */
+.hss-root .hss-float-card {
+  background: var(--ob-surface-2) !important;
+  border: 1px solid var(--ob-line) !important;
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.05) inset,
+    0 8px 40px rgba(0, 0, 0, 0.65),
+    0 0   16px var(--cu-glow) !important;
+}
+
+/* ── Dark card (workshop/service dark tiles) ────────────────────── */
+.hss-root .hss-dark-card {
+  background: var(--ob-surface-2) !important;
+  border: 1px solid var(--ob-line) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.50) !important;
+}
+
+.hss-root .hss-dark-card:hover {
+  border-color: var(--cu-line) !important;
+  box-shadow:
+    0 8px 36px rgba(0, 0, 0, 0.65),
+    0 0   18px var(--cu-glow) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   4. CTA BUTTON SYSTEM — Copper gradient
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Primary CTA — copper fill ──────────────────────────────────── */
+.hss-root .hss-cta-primary {
+  background: linear-gradient(
+    160deg,
+    var(--cu-300)  0%,
+    var(--cu-400) 50%,
+    var(--cu-500) 100%
+  ) !important;
+  border: 1px solid var(--cu-line-strong) !important;
+  color: #fff !important;
+  letter-spacing: 0.012em;
+  box-shadow:
+    0  1px  0  0 rgba(255, 255, 255, 0.22) inset,
+    0 -1px  0  0 rgba(0,   0,   0,   0.32) inset,
+    0  4px 20px rgba(196, 124, 50, 0.48),
+    0  0   40px var(--ob-leak-a) !important;
+}
+
+.hss-root .hss-cta-primary:hover {
+  background: linear-gradient(
+    160deg,
+    var(--cu-200)  0%,
+    var(--cu-300) 50%,
+    var(--cu-400) 100%
+  ) !important;
+  box-shadow:
+    0  1px  0  0 rgba(255, 255, 255, 0.28) inset,
+    0 -1px  0  0 rgba(0,   0,   0,   0.38) inset,
+    0  8px 32px rgba(196, 124, 50, 0.62),
+    0  0   60px rgba(196, 124, 50, 0.24) !important;
+}
+
+/* ── Ghost CTA — frosted glass outline ──────────────────────────── */
+.hss-root .hss-cta-ghost {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid var(--ob-line) !important;
+  color: var(--ob-text) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  box-shadow: none !important;
+}
+
+.hss-root .hss-cta-ghost:hover {
+  background: rgba(196, 124, 50, 0.10) !important;
+  border-color: var(--cu-line) !important;
+  color: var(--cu-200) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   5. BRAND ORANGE → COPPER rebrand
+   Arbitrary Tailwind value classes (#d96c4a, #e07a55, #c45e3b)
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Filled orange → copper gradient */
+.hss-root [class*="bg-[#d96c4a]"],
+.hss-root [class*="bg-[#e07a55]"] {
+  background: linear-gradient(
+    135deg,
+    var(--cu-300)  0%,
+    var(--cu-400) 100%
+  ) !important;
+}
+
+.hss-root [class*="bg-[#d96c4a]"]:hover,
+.hss-root [class*="bg-[#e07a55]"]:hover,
+.hss-root [class*="hover:bg-[#c45e3b]"]:hover {
+  background: linear-gradient(
+    135deg,
+    var(--cu-200)  0%,
+    var(--cu-300) 100%
+  ) !important;
+}
+
+/* Orange text → copper warm */
+.hss-root [class*="text-[#d96c4a]"],
+.hss-root [class*="text-[#e07a55]"] {
+  color: var(--cu-300) !important;
+}
+
+/* Orange border → copper */
+.hss-root [class*="border-[#d96c4a]"],
+.hss-root [class*="border-[#e07a55]"] {
+  border-color: var(--cu-line) !important;
+}
+
+/* Check icons (copper) */
+.hss-root [class*="text-[#d96c4a]"].lucide,
+.hss-root [class*="text-[#d96c4a]"] svg {
+  color: var(--cu-300) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   6. TYPOGRAPHY — warm white on obsidian
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Section base text */
+.hss-root .hss-section-white,
+.hss-root .hss-section-tint,
+.hss-root .hss-stats-bento {
+  color: var(--ob-text);
+}
+
+/* Headlines */
+.hss-root .hss-section-white h1,
+.hss-root .hss-section-white h2,
+.hss-root .hss-section-white h3,
+.hss-root .hss-section-white h4,
+.hss-root .hss-section-tint  h1,
+.hss-root .hss-section-tint  h2,
+.hss-root .hss-section-tint  h3,
+.hss-root .hss-section-tint  h4,
+.hss-root .hss-stats-bento   h2,
+.hss-root .hss-stats-bento   h3 {
+  color: var(--ob-text) !important;
+}
+
+/* Body / secondary paragraphs */
+.hss-root .hss-section-white p,
+.hss-root .hss-section-tint  p,
+.hss-root .hss-stats-bento   p {
+  color: var(--ob-text-dim) !important;
+}
+
+/* Hardcoded dark text — warm white override */
+.hss-root [class*="text-[#111111]"],
+.hss-root [class*="text-[#111"]  {
+  color: var(--ob-text) !important;
+}
+
+/* Hardcoded medium gray — warm dim override */
+.hss-root [class*="text-[#6B7280]"],
+.hss-root [class*="text-[#374151]"],
+.hss-root [class*="text-[#47556"],
+.hss-root [class*="text-[#878787]"],
+.hss-root [class*="text-[#9CA3AF]"] {
+  color: var(--ob-text-dim) !important;
+}
+
+/* Light labels (e.g. "Mon-Fri" sub-labels) */
+.hss-root [class*="text-white\/55"],
+.hss-root [class*="text-white\/60"] {
+  color: var(--ob-text-sub) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   7. BORDERS & DIVIDERS
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Light border overrides within dark sections */
+.hss-root [class*="border-[#E0E0E0]"],
+.hss-root [class*="border-[#F0F0F0]"],
+.hss-root [class*="border-[#D8DCE3]"],
+.hss-root [class*="border-[#F4F4F"]  {
+  border-color: var(--ob-line) !important;
+}
+
+/* Horizontal rules and section dividers */
+.hss-root .hss-divider {
+  background: var(--ob-line) !important;
+}
+
+/* Feature strip inner divider */
+.hss-root .border-b.border-\[\#F0F0F0\] {
+  border-bottom-color: var(--ob-line) !important;
+}
+
+/* Vertical dividers between feature items */
+.hss-root [class*="border-r"][class*="border-[#F0F0F"] {
+  border-right-color: var(--ob-line) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   8. BACKGROUND FILLS — light panels → obsidian surfaces
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* White backgrounds within dark sections */
+.hss-root .hss-section-white .bg-white,
+.hss-root .hss-section-tint  .bg-white {
+  background: var(--ob-surface) !important;
+}
+
+/* Light tint backgrounds */
+.hss-root [class*="bg-[#F4F4F4]"],
+.hss-root [class*="bg-[#F0F2F5]"],
+.hss-root [class*="bg-[#F8F8F8]"],
+.hss-root [class*="bg-[#FAFAFA]"] {
+  background: var(--ob-surface) !important;
+}
+
+/* Very light tint (card image placeholder) */
+.hss-root .hss-card [class*="bg-[#F4F4F4]"] {
+  background: var(--ob-surface-2) !important;
+}
+
+/* Warm-white / nearly white fills */
+.hss-root [class*="bg-[#FFFFFF]"] {
+  background: var(--ob-surface) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   9. PLAN / PRICING SECTION SPECIFICS
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Tab bar wrapper: bg-white border border-[#E0E0E0] rounded-full */
+.hss-root .hss-section-white .bg-white.border.rounded-full,
+.hss-root .hss-section-white .bg-white.border.border-\[\#E0E0E0\] {
+  background: var(--ob-surface-2) !important;
+  border-color: var(--ob-line) !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.40) !important;
+}
+
+/* Inactive tab buttons — text only */
+.hss-root .hss-section-white .rounded-full .text-\[\#6B7280\] {
+  color: var(--ob-text-dim) !important;
+}
+
+.hss-root .hss-section-white .rounded-full .text-\[\#6B7280\]:hover {
+  color: var(--cu-200) !important;
+}
+
+/* Plan card "Popular" / badge label */
+.hss-root .hss-card [class*="bg-[#111111]"] {
+  background: linear-gradient(
+    135deg,
+    var(--cu-500)  0%,
+    var(--cu-700) 100%
+  ) !important;
+  color: var(--cu-50) !important;
+}
+
+/* Plan card CTA button within card */
+.hss-root .hss-card [class*="bg-[#d96c4a]"] {
+  background: linear-gradient(
+    135deg,
+    var(--cu-300)  0%,
+    var(--cu-400) 100%
+  ) !important;
+  box-shadow: 0 4px 16px rgba(196, 124, 50, 0.40) !important;
+}
+
+/* Plan feature list items */
+.hss-root .hss-card li.flex span,
+.hss-root .hss-card ul li {
+  color: var(--ob-text-dim) !important;
+}
+
+/* Plan card price */
+.hss-root .hss-card .text-\[\#111111\].font-extrabold,
+.hss-root .hss-card .text-\[\#111111\].font-bold {
+  color: var(--ob-text) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   10. WORKSHOPS SECTION SPECIFICS
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Workshop nav: back button (border only) */
+.hss-root [class*="border-[#E0E0E0]"][class*="bg-white"].rounded-full {
+  background: var(--ob-surface-2) !important;
+  border-color: var(--ob-line) !important;
+  color: var(--ob-text) !important;
+}
+
+.hss-root [class*="border-[#E0E0E0]"][class*="bg-white"].rounded-full:hover {
+  background: var(--ob-surface-3) !important;
+  border-color: var(--cu-line) !important;
+}
+
+/* Workshop image overlay — warm dark gradient */
+.hss-root .hss-card .absolute.inset-0.bg-gradient-to-t {
+  background: linear-gradient(
+    to top,
+    rgba(8, 6, 4, 0.92) 0%,
+    rgba(13, 11, 8, 0.50) 40%,
+    transparent 100%
+  ) !important;
+}
+
+/* Workshop card title (within dark card bottom) */
+.hss-root .hss-card .absolute p.text-white\/55,
+.hss-root .hss-card .absolute p[class*="text-white"] {
+  color: var(--ob-text-sub) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   11. HOW IT WORKS — Step bubbles, connector lines
+   ═══════════════════════════════════════════════════════════════════ */
+
+.hss-root .hss-step-bubble {
+  background: linear-gradient(
+    135deg,
+    var(--cu-300)  0%,
+    var(--cu-500) 100%
+  ) !important;
+  color: #fff !important;
+  box-shadow:
+    0  4px 18px rgba(196, 124, 50, 0.48),
+    0  0   0  4px rgba(196, 124, 50, 0.14) !important;
+}
+
+/* Connector line between steps */
+.hss-root .hss-feature-list::before {
+  background: var(--ob-line) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   12. OVERLINE PILLS — section eyebrows
+   ═══════════════════════════════════════════════════════════════════ */
+
+.hss-root .hss-overline {
+  background: rgba(196, 124, 50, 0.12) !important;
+  border: 1px solid var(--cu-line) !important;
+  color: var(--cu-200) !important;
+}
+
+.hss-root .hss-overline-dot {
+  background: var(--cu-300) !important;
+}
+
+/* Inline overline-style labels (not using the class, just matching pattern) */
+.hss-root [class*="text-[11px]"][class*="uppercase"][class*="tracking-"] {
+  color: var(--cu-300) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   13. ICON TILES
+   ═══════════════════════════════════════════════════════════════════ */
+
+.hss-root .hss-icon-tile {
+  background: var(--ob-surface) !important;
+  border: 1px solid var(--ob-line) !important;
+  color: var(--cu-300) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Stats section icon tiles */
+.hss-root .hss-stats-tile-icon {
+  background: var(--ob-surface) !important;
+  border: 1px solid var(--ob-line) !important;
+  color: var(--cu-300) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   14. TRUST BADGE + LIVE BADGE
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Floating trust badge */
+.hss-root .hss-trust-badge {
+  background: linear-gradient(
+    135deg,
+    var(--ob-surface-2) 0%,
+    var(--ob-surface-3) 100%
+  ) !important;
+  border: 1px solid var(--cu-line) !important;
+  color: var(--cu-100) !important;
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.06) inset,
+    0 8px 36px rgba(0, 0, 0, 0.60),
+    0 0   16px var(--cu-glow-xl) !important;
+}
+
+/* Live badge */
+.hss-root .hss-live-badge {
+  background: rgba(196, 124, 50, 0.14) !important;
+  border: 1px solid rgba(196, 124, 50, 0.38) !important;
+  color: var(--cu-200) !important;
+}
+
+.hss-root .hss-live-dot {
+  background: var(--cu-300) !important;
+  box-shadow: 0 0 6px var(--cu-glow) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   15. TESTIMONIAL SECTION EXTRAS
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Giant quote mark — copper whisper */
+.hss-root .hss-giant-quote {
+  color: rgba(196, 124, 50, 0.09) !important;
+}
+
+/* Avatar ring — copper glow */
+.hss-root .hss-avatar-ring {
+  box-shadow:
+    0 0 0 3px rgba(196, 124, 50, 0.50),
+    0 0 0 6px rgba(196, 124, 50, 0.16) !important;
+}
+
+/* Card accent bar — copper gradient stripe */
+.hss-root .hss-card-accent-bar {
+  background: linear-gradient(
+    90deg,
+    var(--cu-500)  0%,
+    var(--cu-300) 50%,
+    transparent  100%
+  ) !important;
+}
+
+/* Quote editorial left border */
+.hss-root .hss-quote-editorial {
+  border-left-color: var(--cu-400) !important;
+}
+
+/* Navigation dots (testimonial carousel) */
+.hss-root [class*="rounded-full"][class*="bg-[#111111]"] {
+  background: var(--cu-400) !important;
+}
+
+.hss-root [class*="rounded-full"][class*="bg-[#E0E0E0]"] {
+  background: var(--ob-surface-3) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   16. STATS BENTO — counter rows
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Big stat number */
+.hss-root .hss-stats-bento [class*="text-[2.75rem]"],
+.hss-root .hss-stats-bento [class*="text-[3rem]"],
+.hss-root .hss-stats-bento [class*="text-4xl"],
+.hss-root .hss-stats-bento [class*="text-5xl"] {
+  color: var(--ob-text) !important;
+}
+
+/* Stat row border */
+.hss-root .hss-stats-bento [class*="border-b"] {
+  border-bottom-color: var(--ob-line) !important;
+}
+
+/* Image vignette overlay — warm tone */
+.hss-root .hss-stats-bento .absolute.inset-0.bg-gradient-to-t {
+  background: linear-gradient(
+    to top,
+    rgba(8, 6, 4, 0.92) 0%,
+    rgba(13, 11, 8, 0.55) 40%,
+    transparent 100%
+  ) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   17. SERVICES SECTION
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Service card backgrounds (if using bg-white or light fills) */
+.hss-root .hss-section-white .rounded-2xl.bg-white,
+.hss-root .hss-section-tint  .rounded-2xl.bg-white,
+.hss-root .hss-section-white .rounded-xl.bg-white,
+.hss-root .hss-section-tint  .rounded-xl.bg-white {
+  background: var(--ob-surface) !important;
+  border: 1px solid var(--ob-line) !important;
+}
+
+/* Service icon background tiles */
+.hss-root [class*="rounded-xl"][class*="bg-[#F4F4F4]"],
+.hss-root [class*="rounded-lg"][class*="bg-[#F4F4F4]"],
+.hss-root [class*="rounded-full"][class*="bg-[#F4F4F4]"],
+.hss-root [class*="rounded-xl"][class*="bg-[#F0F2F5]"],
+.hss-root [class*="rounded-lg"][class*="bg-[#F0F2F5]"],
+.hss-root [class*="rounded-full"][class*="bg-[#F0F2F5]"] {
+  background: var(--ob-surface-2) !important;
+}
+
+/* Service "See All" link */
+.hss-root .hss-section-white a[class*="text-[#6B7280]"]:hover,
+.hss-root .hss-section-tint  a[class*="text-[#6B7280]"]:hover {
+  color: var(--cu-200) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   18. FEATURE STRIP (Section 1 — horizontal feature items)
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Feature item number labels */
+.hss-root .hss-section-tint [class*="text-[11px]"][class*="font-bold"][class*="uppercase"] {
+  color: var(--cu-300) !important;
+}
+
+/* Feature item title */
+.hss-root .hss-section-tint [class*="font-bold"][class*="text-[#111"] {
+  color: var(--ob-text) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   19. IMAGE TREATMENT — warm grade across all section images
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Subtle warmth + slight desaturation for cohesion */
+.hss-root .hss-section-white img,
+.hss-root .hss-section-tint  img,
+.hss-root .hss-stats-bento   img {
+  filter: brightness(0.87) saturate(0.88) !important;
+}
+
+/* Testimonial / avatar portraits — less aggressive grade */
+.hss-root .hss-testimonial-card img {
+  filter: brightness(0.93) saturate(0.93) !important;
+}
+
+/* Float card images */
+.hss-root .hss-float-card img {
+  filter: brightness(0.85) saturate(0.85) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   20. AVATAR STACK
+   ═══════════════════════════════════════════════════════════════════ */
+
+.hss-root .hss-avatar-stack > * {
+  border-color: var(--ob-surface-2) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.50) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   21. COLLAGE / TRUST SECTION (Section 4)
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Collage image container bg */
+.hss-root .hss-section-white .grid-rows-2,
+.hss-root .hss-section-white .grid-cols-2 {
+  color: var(--ob-text);
+}
+
+/* Image vignette overlay in collage */
+.hss-root .hss-section-white .inset-0.bg-gradient-to-b,
+.hss-root .hss-section-white .inset-0.bg-gradient-to-t {
+  background: linear-gradient(
+    to top,
+    rgba(8, 6, 4, 0.88) 0%,
+    rgba(13, 11, 8, 0.45) 50%,
+    transparent 100%
+  ) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   22. FOOTER — Obsidian with copper edge and ambient glow
+   ═══════════════════════════════════════════════════════════════════ */
+
+.footer-bg {
+  background: linear-gradient(
+    180deg,
+    var(--ob-bg-2)  0%,
+    var(--ob-bg)   55%,
+    #090806        100%
+  ) !important;
+}
+
+/* Top edge: copper hairline replacing the orange gradient */
+.footer-bg::before {
+  background: linear-gradient(
+    90deg,
+    transparent                         0%,
+    rgba(120,  80, 30, 0.20)           10%,
+    rgba(180, 120, 60, 0.28)           25%,
+    rgba(196, 131, 58, 0.60)           50%,
+    rgba(180, 120, 60, 0.28)           75%,
+    rgba(120,  80, 30, 0.20)           90%,
+    transparent                        100%
+  ) !important;
+}
+
+/* Ambient copper glow — top-left light source */
+.footer-bg::after {
+  content: "";
+  position: absolute;
+  top: -40px;
+  left: 5%;
+  width: 50%;
+  height: 280px;
+  background: radial-gradient(
+    ellipse 60% 80% at 30% 30%,
+    rgba(196, 124, 50, 0.11) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Footer newsletter card — glass */
+.footer-bg [class*="rounded-2xl"],
+.footer-bg [class*="rounded-xl"] {
+  position: relative;
+  z-index: 1;
+}
+
+/* Newsletter input field */
+.footer-bg input[type="email"] {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: var(--ob-line) !important;
+  color: var(--ob-text) !important;
+}
+
+.footer-bg input[type="email"]::placeholder {
+  color: var(--ob-text-sub) !important;
+}
+
+.footer-bg input[type="email"]:focus {
+  border-color: var(--cu-line) !important;
+  box-shadow: 0 0 0 2px rgba(196, 124, 50, 0.18) !important;
+  outline: none !important;
+}
+
+/* Newsletter submit button */
+.footer-bg button[type="submit"],
+.footer-bg [class*="bg-accent"] {
+  background: linear-gradient(
+    135deg,
+    var(--cu-300)  0%,
+    var(--cu-400) 100%
+  ) !important;
+  border-color: var(--cu-line-strong) !important;
+}
+
+/* Footer nav links */
+.footer-bg a {
+  color: var(--ob-text-dim) !important;
+  transition: color 0.18s ease;
+}
+
+.footer-bg a:hover {
+  color: var(--cu-200) !important;
+}
+
+/* Footer heading labels */
+.footer-bg [class*="font-semibold"],
+.footer-bg [class*="font-bold"] {
+  color: var(--ob-text) !important;
+}
+
+/* Footer border lines */
+.footer-bg [class*="border-"] {
+  border-color: var(--ob-line) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   23. INLINE BUTTONS (not using hss-cta classes — direct Tailwind)
+       These appear in section content, not as standalone CTAs
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Workshop "Book Now" pill button */
+.hss-root [class*="rounded-full"][class*="bg-[#d96c4a]"] {
+  background: linear-gradient(
+    135deg,
+    var(--cu-300)  0%,
+    var(--cu-400) 100%
+  ) !important;
+  box-shadow: 0 3px 14px rgba(196, 124, 50, 0.40) !important;
+}
+
+/* Outline ghost pill buttons (white bg, dark border) */
+.hss-root [class*="border-[#E0E0E0]"][class*="bg-white"].rounded-full:not(.flex.items-center.gap-1) {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-color: var(--ob-line) !important;
+  color: var(--ob-text-dim) !important;
+}
+
+/* "See All" text links */
+.hss-root a[class*="text-[#6B7280]"] {
+  color: var(--ob-text-dim) !important;
+}
+
+.hss-root a[class*="text-[#6B7280]"]:hover {
+  color: var(--cu-200) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   24. FEATURED LABEL / BADGE OVERRIDES
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* "Most Popular" or "Best Value" inline badges */
+.hss-root [class*="absolute"][class*="top-"][class*="left-"][class*="bg-[#111111]"] {
+  background: linear-gradient(
+    135deg,
+    var(--cu-600)  0%,
+    var(--cu-700) 100%
+  ) !important;
+  color: var(--cu-100) !important;
+}
+
+/* Orange badge pills (e.g. category tags) */
+.hss-root [class*="bg-[#d96c4a]"][class*="rounded-full"],
+.hss-root [class*="bg-\[#d96c4a\]"][class*="rounded-full"] {
+  background: linear-gradient(
+    135deg,
+    var(--cu-300)  0%,
+    var(--cu-400) 100%
+  ) !important;
+}
+
+/* Promo/info banners (amber-tint strip) */
+.hss-root [class*="bg-amber"],
+.hss-root [class*="bg-orange"] {
+  background: rgba(196, 124, 50, 0.12) !important;
+  border-color: var(--cu-line) !important;
+  color: var(--cu-200) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   25. SHADOW RESTORATION
+   The global index.css resets --tw-shadow to 0 for all elements.
+   Our direct box-shadow declarations above bypass this because they
+   don't use var(--tw-shadow). No action needed.
+   For Tailwind shadow utility classes on warm-polish targets, we
+   explicitly override with direct box-shadow to ensure depth renders.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Ensure cards with Tailwind shadow utilities get our glass shadows */
+.hss-root .hss-card[class*="shadow"],
+.hss-root .hss-stats-tile[class*="shadow"],
+.hss-root .hss-testimonial-card[class*="shadow"] {
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.055) inset,
+    0 8px 48px rgba(0, 0, 0, 0.60),
+    0 2px 12px rgba(0, 0, 0, 0.45) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   26. SCROLLBAR — warm obsidian
+   ═══════════════════════════════════════════════════════════════════ */
+
+.hss-root::-webkit-scrollbar,
+.hss-root *::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.hss-root::-webkit-scrollbar-track,
+.hss-root *::-webkit-scrollbar-track {
+  background: var(--ob-bg-2);
+}
+
+.hss-root::-webkit-scrollbar-thumb,
+.hss-root *::-webkit-scrollbar-thumb {
+  background: var(--ob-line);
+  border-radius: 999px;
+}
+
+.hss-root::-webkit-scrollbar-thumb:hover,
+.hss-root *::-webkit-scrollbar-thumb:hover {
+  background: var(--cu-line);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   27. MOBILE REFINEMENTS
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 640px) {
+  /* Reduce glass blur for GPU budget on mobile */
+  .hss-root .hss-card,
+  .hss-root .hss-testimonial-card,
+  .hss-root .hss-stats-tile {
+    backdrop-filter: blur(12px) saturate(1.3) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(1.3) !important;
+  }
+
+  /* Softer ambient glows on mobile */
+  .hss-root .hss-section-white::before,
+  .hss-root .hss-section-tint::before,
+  .hss-root .hss-stats-bento::before {
+    opacity: 0.55;
+  }
+
+  /* Step bubbles — slightly smaller box-shadow on mobile */
+  .hss-root .hss-step-bubble {
+    box-shadow:
+      0 3px 12px rgba(196, 124, 50, 0.40),
+      0 0   0 3px rgba(196, 124, 50, 0.12) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Remove glass blur entirely on very small / low-end devices */
+  @supports (not (backdrop-filter: blur(1px))) {
+    .hss-root .hss-card,
+    .hss-root .hss-testimonial-card,
+    .hss-root .hss-stats-tile {
+      background: var(--ob-surface-2) !important;
+    }
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   28. REDUCED MOTION
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  /* Disable ambient glow pseudo-elements */
+  .hss-root .hss-section-white::before,
+  .hss-root .hss-section-tint::before,
+  .hss-root .hss-stats-bento::before,
+  .footer-bg::after {
+    display: none;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   29. HIGH-CONTRAST ACCESSIBILITY MODE
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (forced-colors: active) {
+  .hss-root .hss-card,
+  .hss-root .hss-stats-tile,
+  .hss-root .hss-testimonial-card {
+    border: 2px solid ButtonText !important;
+    background: Canvas !important;
+  }
+
+  .hss-root .hss-cta-primary,
+  .hss-root [class*="bg-[#d96c4a]"] {
+    background: ButtonText !important;
+    color: ButtonFace !important;
+    border: 2px solid ButtonText !important;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   30. ADMIN SHELL GUARD
+   Belt-and-suspenders: ensure none of the above bleeds into the
+   admin shell (which already has its own dark obsidian palette).
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Reset warm-polish tokens inside admin context */
+.admin-no-animations {
+  --cu-glow:        initial;
+  --cu-glow-lg:     initial;
+  --ob-glass-bg:    initial;
+  --ob-glass-blur:  initial;
+}
+
+/* Ensure admin cards keep their hardcoded styles */
+.admin-no-animations .hss-card,
+.admin-no-animations .hss-stats-tile,
+.admin-no-animations .hss-testimonial-card {
+  all: revert;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   31. EXTENDED PUBLIC-PAGE DARK THEME
+   Handles pages that use .hss-root but don't have specific
+   .hss-section-white / .hss-section-tint section classes.
+   Applied to: Pricing, About, Contact, Training, AI, Business.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Any direct section child of .hss-root that doesn't already have
+   an hss-section class gets the base dark background */
+.hss-root > section:not([class*="hss-section"]),
+.hss-root > div > section:not([class*="hss-section"]) {
+  background: var(--ob-bg) !important;
+  color: var(--ob-text);
+}
+
+/* Alternating sections — slightly lifted */
+.hss-root > section:not([class*="hss-section"]):nth-child(even),
+.hss-root > div > section:not([class*="hss-section"]):nth-child(even) {
+  background: var(--ob-bg-2) !important;
+}
+
+/* Ambient glow on generic dark sections */
+.hss-root > section:not([class*="hss-section"]) {
+  position: relative;
+  isolation: isolate;
+}
+
+.hss-root > section:not([class*="hss-section"])::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 50% 30% at 15% 0%, var(--ob-leak-a) 0%, transparent 70%),
+    radial-gradient(ellipse 35% 25% at 85% 100%, var(--ob-leak-b) 0%, transparent 70%);
+  z-index: 0;
+}
+
+.hss-root > section:not([class*="hss-section"]) > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── shadcn token overrides within hss-root ─────────────────────── */
+
+/* Cards using bg-card token */
+.hss-root .bg-card {
+  background: var(--ob-surface) !important;
+}
+
+/* Shadcn Card component (compound: bg-card border-border) */
+.hss-root [class*="bg-card"],
+.hss-root .rounded-2xl.border,
+.hss-root .rounded-xl.border,
+.hss-root .rounded-lg.border {
+  background: var(--ob-glass-bg) !important;
+  border-color: var(--ob-glass-border) !important;
+  box-shadow:
+    0 1px 0 0 rgba(255,255,255,0.05) inset,
+    0 8px 40px rgba(0,0,0,0.55),
+    0 0 0 1px rgba(196,124,50,0.05) !important;
+}
+
+/* Hover state for generic cards */
+.hss-root .rounded-2xl.border:hover,
+.hss-root .rounded-xl.border:hover,
+.hss-root .rounded-lg.border:hover {
+  border-color: var(--ob-glass-border-hover) !important;
+  box-shadow:
+    0 1px 0 0 rgba(255,255,255,0.07) inset,
+    0 16px 56px rgba(0,0,0,0.65),
+    0 0 24px var(--cu-glow) !important;
+  transform: translateY(-2px);
+  transition: all 0.22s ease;
+}
+
+/* Section heading text on dark sections */
+.hss-root > section:not([class*="hss-section"]) h1,
+.hss-root > section:not([class*="hss-section"]) h2,
+.hss-root > section:not([class*="hss-section"]) h3,
+.hss-root > section:not([class*="hss-section"]) h4 {
+  color: var(--ob-text) !important;
+}
+
+/* Body text */
+.hss-root > section:not([class*="hss-section"]) p,
+.hss-root > section:not([class*="hss-section"]) li {
+  color: var(--ob-text-dim) !important;
+}
+
+/* Muted text (muted-foreground) */
+.hss-root [class*="text-muted-foreground"],
+.hss-root .text-muted-foreground {
+  color: var(--ob-text-sub) !important;
+}
+
+/* Foreground text on dark sections */
+.hss-root > section:not([class*="hss-section"]) [class*="text-foreground"] {
+  color: var(--ob-text) !important;
+}
+
+/* Borders using border-border token */
+.hss-root [class*="border-border"],
+.hss-root .border-border {
+  border-color: var(--ob-line) !important;
+}
+
+/* ── Form elements inside hss-root ──────────────────────────────── */
+
+.hss-root input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="reset"]):not([type="button"]),
+.hss-root textarea,
+.hss-root select {
+  background: rgba(255,255,255,0.06) !important;
+  border-color: rgba(255,255,255,0.10) !important;
+  color: var(--ob-text) !important;
+}
+
+.hss-root input::placeholder,
+.hss-root textarea::placeholder {
+  color: rgba(255,255,255,0.30) !important;
+}
+
+.hss-root input:focus,
+.hss-root textarea:focus,
+.hss-root select:focus {
+  border-color: var(--cu-400) !important;
+  box-shadow: 0 0 0 3px rgba(196,133,60,0.15) !important;
+  outline: none !important;
+}
+
+/* ── Pricing / plan card specifics ──────────────────────────────── */
+
+/* Featured / highlighted plan card */
+.hss-root [class*="highlight"] .rounded-2xl,
+.hss-root [class*="highlight"] .rounded-xl {
+  background: rgba(196,133,60,0.08) !important;
+  border-color: rgba(196,133,60,0.30) !important;
+  box-shadow: 0 0 60px rgba(196,133,60,0.15) !important;
+}
+
+/* Plan price — copper gradient text */
+.hss-root [class*="text-4xl"][class*="font-bold"],
+.hss-root [class*="text-5xl"][class*="font-bold"],
+.hss-root [class*="text-3xl"][class*="font-bold"] {
+  background: linear-gradient(135deg, var(--cu-300), var(--cu-400));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Feature check icons */
+.hss-root svg[data-lucide="check-circle"],
+.hss-root svg[data-lucide="check"] {
+  color: var(--cu-300) !important;
+}
+
+/* ── Badge / pill components ─────────────────────────────────────── */
+
+.hss-root .bg-muted,
+.hss-root [class*="bg-muted"] {
+  background: var(--ob-surface-2) !important;
+  color: var(--ob-text-dim) !important;
+}
+
+/* Amber/orange badge pills */
+.hss-root [class*="bg-[#d96c4a]"],
+.hss-root [class*="bg-accent"],
+.hss-root .bg-accent {
+  background: rgba(196,133,60,0.12) !important;
+  border-color: rgba(196,133,60,0.25) !important;
+  color: var(--cu-200) !important;
+}
+
+/* ── Button overrides ────────────────────────────────────────────── */
+
+/* Primary button (shadcn default variant) */
+.hss-root .bg-primary,
+.hss-root [class*="bg-primary"] {
+  background: linear-gradient(135deg, var(--cu-300), var(--cu-400)) !important;
+  border: none !important;
+  color: #fff !important;
+}
+
+.hss-root .bg-primary:hover,
+.hss-root [class*="bg-primary"]:hover {
+  background: linear-gradient(135deg, var(--cu-200), var(--cu-300)) !important;
+  box-shadow: 0 4px 20px rgba(196,133,60,0.30) !important;
+  filter: none !important;
+}
+
+/* Outline / ghost buttons */
+.hss-root .border.border-input,
+.hss-root [class*="border-input"] {
+  border-color: rgba(196,133,60,0.35) !important;
+  color: var(--cu-200) !important;
+  background: transparent !important;
+}
+
+/* ── Accordion / FAQ ─────────────────────────────────────────────── */
+
+.hss-root [class*="AccordionItem"],
+.hss-root [data-state] {
+  border-color: var(--ob-line) !important;
+}
+
+/* Accordion trigger */
+.hss-root [class*="AccordionTrigger"],
+.hss-root button[data-state] {
+  color: var(--ob-text) !important;
+}
+
+/* Accordion content */
+.hss-root [class*="AccordionContent"] {
+  color: var(--ob-text-dim) !important;
+}
+
+/* ── Section overlines (uppercase tracking labels) ───────────────── */
+.hss-root > section:not([class*="hss-section"]) [class*="text-[#d96c4a]"],
+.hss-root > section:not([class*="hss-section"]) [class*="text-primary"] {
+  color: var(--cu-300) !important;
+}
+
+/* Badge with orange/amber text */
+.hss-root [class*="text-[#c45e3b]"],
+.hss-root [class*="text-[#d96c4a]"] {
+  color: var(--cu-300) !important;
+}
+
+/* ── Trust bar icons / chips ─────────────────────────────────────── */
+.hss-root [class*="text-[#d96c4a]"] svg,
+.hss-root svg.text-\[\#d96c4a\] {
+  color: var(--cu-300) !important;
+}
+
+/* Section divider copper hairlines */
+.hss-root hr,
+.hss-root [class*="divide-"] > * + * {
+  border-color: var(--ob-line) !important;
+}
+
+/* ── Reduced motion guard for extended rules ─────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .hss-root > section:not([class*="hss-section"])::before {
+    display: none;
+  }
+}

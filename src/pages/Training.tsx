@@ -598,7 +598,7 @@ function LearnAndTrain() {
 
   return (
     <PageTransition variant="fade">
-      <div className="min-h-screen">
+      <div className="hss-root min-h-screen">
         <SEO
           title="AI Scam Protection Workshops for Seniors & Families — Kettering, Ohio"
           description="Hands-on cybersecurity workshops for seniors and families in the Dayton area. Learn to spot deepfakes, voice cloning, phishing, and AI-powered scams. In-person and Zoom sessions. Starting at $89."
