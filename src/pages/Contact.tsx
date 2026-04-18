@@ -563,7 +563,7 @@ function Contact() {
                         <Button
                           type="submit"
                           disabled={isSubmitting}
-                          className="w-full h-14 text-[15px] font-semibold rounded-xl text-white bg-gradient-to-b from-[#e07a55] to-[#d05f3a] border border-[#b8552f] shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_8px_20px_-6px_rgba(217,108,74,0.5),0_16px_32px_-12px_rgba(217,108,74,0.35)] hover:from-[#e88560] hover:to-[#d96847] hover:-translate-y-[1px] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.25)_inset,0_12px_28px_-6px_rgba(217,108,74,0.6),0_20px_40px_-12px_rgba(217,108,74,0.4)] active:translate-y-[0.5px] transition-all duration-200"
+                          className="w-full h-11 sm:h-14 text-sm sm:text-[15px] font-semibold rounded-xl text-white bg-gradient-to-b from-[#e07a55] to-[#d05f3a] border border-[#b8552f] shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_8px_20px_-6px_rgba(217,108,74,0.5),0_16px_32px_-12px_rgba(217,108,74,0.35)] hover:from-[#e88560] hover:to-[#d96847] hover:-translate-y-[1px] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.25)_inset,0_12px_28px_-6px_rgba(217,108,74,0.6),0_20px_40px_-12px_rgba(217,108,74,0.4)] active:translate-y-[0.5px] transition-all duration-200"
                         >
                           {isSubmitting ? (
                             <>

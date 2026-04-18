@@ -2,7 +2,7 @@ import { Calendar, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
-// TODO: Replace with Calendly embed when account is created. Widget src: https://calendly.com/invisionnetwork
+// Placeholder until Calendly embed is ready (https://calendly.com/invisionnetwork)
 
 export default function BookingCalendar() {
   return (

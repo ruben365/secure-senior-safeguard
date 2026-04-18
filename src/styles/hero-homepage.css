@@ -564,3 +564,12 @@
     object-position: center 18%;
   }
 }
+
+/* ═══ REDUCED MOTION ═══ */
+@media (prefers-reduced-motion: reduce) {
+  .hero-home__kicker,
+  .hero-home__headline,
+  .hero-home__body,
+  .hero-home__ctas,
+  .hero-home__tabs { animation: none; opacity: 1; transform: none; }
+}

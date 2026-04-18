@@ -43,10 +43,9 @@ export function DashboardHeader({
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" aria-label="Notifications">
               <Bell className="w-5 h-5" />
             </Button>
-            {/* TODO: Settings button placeholder - wire up onClick when settings page is available */}
             <Button variant="outline" size="sm" onClick={() => navigate("/")}>
               <Home className="w-4 h-4 mr-2" />
               Home
