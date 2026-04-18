@@ -781,3 +781,12 @@
     );
   }
 }
+
+/* ═══ 6. REDUCED MOTION ═══ */
+@media (prefers-reduced-motion: reduce) {
+  .hero-ws__kicker,
+  .hero-ws__headline,
+  .hero-ws__body,
+  .hero-ws__ctas,
+  .hero-ws__widget { animation: none; opacity: 1; transform: none; }
+}

@@ -187,7 +187,7 @@ function Portal() {
               </div>
               <div>
                 <h1 className="text-xl font-bold text-white">InVision Network</h1>
-                <p className="text-sm text-gray-500">Welcome back, {profile?.first_name || "User"}</p>
+                <p className="text-sm text-gray-400">Welcome back, {profile?.first_name || "User"}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -206,14 +206,14 @@ function Portal() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Select Your Dashboard</h2>
-            <p className="text-gray-500">Choose the workspace you want to access</p>
+            <p className="text-gray-400">Choose the workspace you want to access</p>
           </div>
 
           {availableRoles.length === 0 ? (
             <Card className="bg-[#1F2937] border-gray-800/50 p-8 sm:p-12 text-center">
-              <Shield className="w-16 h-16 mx-auto text-gray-600 mb-4" />
+              <Shield className="w-16 h-16 mx-auto text-gray-400 mb-4" />
               <h3 className="text-xl font-semibold text-white mb-2">No Role Assigned</h3>
-              <p className="text-gray-500 mb-6">Please contact your administrator to assign you a role.</p>
+              <p className="text-gray-400 mb-6">Please contact your administrator to assign you a role.</p>
               <Button asChild className="bg-purple-600 hover:bg-purple-700 text-white">
                 <Link to="/">Return to Home</Link>
               </Button>
@@ -234,7 +234,7 @@ function Portal() {
                         <Icon className="w-6 h-6 text-white" />
                       </div>
                       <h3 className="text-lg font-bold text-white mb-1">{card.title}</h3>
-                      <p className="text-sm text-gray-500 mb-4">{card.description}</p>
+                      <p className="text-sm text-gray-400 mb-4">{card.description}</p>
                       <Button className="w-full bg-white/5 border border-gray-700 text-gray-300 hover:bg-white/10 hover:text-white">
                         Access Dashboard
                       </Button>

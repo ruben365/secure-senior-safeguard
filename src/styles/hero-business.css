@@ -480,3 +480,12 @@
     object-position: center 15%;
   }
 }
+
+/* ═══ 6. REDUCED MOTION ═══ */
+@media (prefers-reduced-motion: reduce) {
+  .hero-biz__kicker,
+  .hero-biz__headline,
+  .hero-biz__body,
+  .hero-biz__ctas,
+  .hero-biz__widget { animation: none; opacity: 1; transform: none; }
+}

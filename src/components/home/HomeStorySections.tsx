@@ -512,7 +512,9 @@ export const HomeStorySections = () => {
             {planTabs.map((tab) => (
               <button
                 key={tab}
+                type="button"
                 onClick={() => setActiveTab(tab)}
+                aria-pressed={activeTab === tab}
                 className={`px-5 py-2 rounded-full text-[13px] font-semibold transition-all ${
                   activeTab === tab
                     ? "bg-[#111111] text-white shadow-sm"
@@ -778,6 +780,7 @@ export const HomeStorySections = () => {
                       {testimonials.map((_, i) => (
                         <button
                           key={i}
+                          type="button"
                           onClick={() => setActiveTesti(i)}
                           aria-label={`Go to testimonial ${i + 1}`}
                           className={`rounded-full transition-all ${
@@ -790,6 +793,7 @@ export const HomeStorySections = () => {
                     </div>
                     <div className="flex gap-2">
                       <button
+                        type="button"
                         onClick={prevTesti}
                         aria-label="Previous testimonial"
                         className="w-9 h-9 rounded-full border border-[#E0E0E0] bg-white flex items-center justify-center text-[#111111] hover:bg-[#F4F4F4] transition-colors shadow-sm"
@@ -797,6 +801,7 @@ export const HomeStorySections = () => {
                         <ChevronLeft className="w-4 h-4" />
                       </button>
                       <button
+                        type="button"
                         onClick={nextTesti}
                         aria-label="Next testimonial"
                         className="w-9 h-9 rounded-full bg-[#111111] text-white flex items-center justify-center hover:bg-[#333333] transition-colors shadow-sm"

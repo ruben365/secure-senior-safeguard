@@ -1486,7 +1486,9 @@ function Business() {
                 map((tab) =>
                 <button
                   key={tab.key}
+                  type="button"
                   onClick={() => setActiveConsultingTab(tab.key)}
+                  aria-pressed={activeConsultingTab === tab.key}
                   className={`px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 flex-1 min-w-[130px] ${
                   activeConsultingTab === tab.key ?
                   "bg-gradient-to-r from-primary to-accent text-white shadow-lg shadow-primary/20 scale-[1.02]" :
@@ -1723,6 +1725,7 @@ function Business() {
                       <p className="text-muted-foreground text-sm leading-relaxed mb-5">{service.desc}</p>
 
                       <button
+                      type="button"
                       onClick={() => {
                         setSelectedInquiry({
                           name: service.title,
