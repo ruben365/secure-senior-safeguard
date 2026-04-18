@@ -1,5 +1,16 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
+
+interface KbArticle {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt?: string | null;
+  category: string;
+  is_published: boolean;
+  display_order?: number;
+  view_count?: number;
+}
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -17,7 +28,7 @@ import { Plus, Pencil, Trash2 } from "lucide-react";
 export default function KnowledgeBaseAdmin() {
   const queryClient = useQueryClient();
   const [editOpen, setEditOpen] = useState(false);
-  const [editing, setEditing] = useState<any>(null);
+  const [editing, setEditing] = useState<KbArticle | null>(null);
   const [form, setForm] = useState({ title: "", slug: "", content: "", excerpt: "", category: "general", is_published: false });
 
   const { data: articles, isLoading } = useQuery({
@@ -25,7 +36,7 @@ export default function KnowledgeBaseAdmin() {
     queryFn: async () => {
       const { data, error } = await supabase.from("knowledge_base_articles").select("*").order("display_order");
       if (error) throw error;
-      return data;
+      return data as KbArticle[];
     },
   });
 
@@ -65,7 +76,7 @@ export default function KnowledgeBaseAdmin() {
     setForm({ title: "", slug: "", content: "", excerpt: "", category: "general", is_published: false });
   };
 
-  const openEdit = (article: any) => {
+  const openEdit = (article: KbArticle) => {
     setEditing(article);
     setForm({ title: article.title, slug: article.slug, content: article.content, excerpt: article.excerpt || "", category: article.category, is_published: article.is_published });
     setEditOpen(true);
@@ -127,7 +138,7 @@ export default function KnowledgeBaseAdmin() {
               ) : !articles?.length ? (
                 <TableRow><TableCell colSpan={5} className="text-center py-8">No articles yet</TableCell></TableRow>
               ) : (
-                articles.map((a: any) => (
+                articles.map((a) => (
                   <TableRow key={a.id}>
                     <TableCell className="font-medium">{a.title}</TableCell>
                     <TableCell><Badge variant="outline">{a.category}</Badge></TableCell>

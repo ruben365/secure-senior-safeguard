@@ -1,5 +1,15 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
+
+interface ArticlePreviewData {
+  title: string;
+  author: string;
+  excerpt?: string;
+  content: string;
+  featuredImage?: string;
+  categories?: string[];
+  tags?: string[];
+  readingTime?: string;
+}
 import { useSearchParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Monitor, Smartphone, Tablet, ArrowLeft } from "lucide-react";
@@ -13,7 +23,7 @@ export default function ArticlePreview() {
   );
 
   // Get article data from localStorage (set by editor)
-  const [articleData, setArticleData] = useState<any>(null);
+  const [articleData, setArticleData] = useState<ArticlePreviewData | null>(null);
 
   useEffect(() => {
     const data = localStorage.getItem("article-preview");

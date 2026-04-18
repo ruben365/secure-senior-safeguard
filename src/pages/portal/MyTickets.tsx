@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -64,7 +63,7 @@ export default function MyTickets() {
         subject: newTicket.subject.trim(),
         description: newTicket.description.trim(),
         category: newTicket.category,
-        priority: newTicket.priority as any,
+        priority: newTicket.priority as "low" | "medium" | "high" | "urgent",
       });
       if (error) throw error;
     },
@@ -152,7 +151,7 @@ export default function MyTickets() {
         </Card>
       ) : (
         <div className="space-y-3">
-          {tickets.map((ticket: any) => (
+          {tickets.map((ticket) => (
             <Card
               key={ticket.id}
               className="cursor-pointer hover:border-primary/30 transition-colors"

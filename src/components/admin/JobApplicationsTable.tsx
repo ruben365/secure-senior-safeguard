@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card } from "@/components/ui/card";
@@ -14,9 +13,24 @@ import {
   Briefcase,
 } from "lucide-react";
 
+interface JobApplication {
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string | null;
+  position: string;
+  status: string | null;
+  is_veteran: boolean | null;
+  created_at: string;
+  linkedin_url: string | null;
+  resume_url: string | null;
+  cover_letter: string | null;
+}
+
 export const JobApplicationsTable = () => {
   const { toast } = useToast();
-  const [applications, setApplications] = useState<any[]>([]);
+  const [applications, setApplications] = useState<JobApplication[]>([]);
   const [loading, setLoading] = useState(true);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
 

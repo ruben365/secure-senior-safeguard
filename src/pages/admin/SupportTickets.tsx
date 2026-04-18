@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -20,22 +19,22 @@ export default function SupportTickets() {
     queryKey: ["admin-tickets", statusFilter],
     queryFn: async () => {
       let query = supabase.from("support_tickets").select("*").order("created_at", { ascending: false });
-      if (statusFilter !== "all") query = query.eq("status", statusFilter as any);
+      if (statusFilter !== "all") query = query.eq("status", statusFilter as "open" | "in_progress" | "resolved" | "closed");
       const { data, error } = await query;
       if (error) throw error;
       return data;
     },
   });
 
-  const filtered = tickets?.filter((t: any) =>
+  const filtered = tickets?.filter((t) =>
     !search || t.subject.toLowerCase().includes(search.toLowerCase()) || t.ticket_number.toLowerCase().includes(search.toLowerCase())
   );
 
   const stats = {
     total: tickets?.length || 0,
-    open: tickets?.filter((t: any) => t.status === "open").length || 0,
-    in_progress: tickets?.filter((t: any) => t.status === "in_progress").length || 0,
-    resolved: tickets?.filter((t: any) => t.status === "resolved").length || 0,
+    open: tickets?.filter((t) => t.status === "open").length || 0,
+    in_progress: tickets?.filter((t) => t.status === "in_progress").length || 0,
+    resolved: tickets?.filter((t) => t.status === "resolved").length || 0,
   };
 
   if (selectedTicket) {
@@ -101,7 +100,7 @@ export default function SupportTickets() {
               ) : !filtered?.length ? (
                 <TableRow><TableCell colSpan={6} className="text-center py-8">No tickets found</TableCell></TableRow>
               ) : (
-                filtered.map((ticket: any) => (
+                filtered.map((ticket) => (
                   <TableRow key={ticket.id} className="cursor-pointer" onClick={() => setSelectedTicket(ticket.id)}>
                     <TableCell className="font-mono text-sm">{ticket.ticket_number}</TableCell>
                     <TableCell className="font-medium max-w-[200px] truncate">{ticket.subject}</TableCell>

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -22,12 +21,13 @@ import {
   useUserEnrollments,
   useEnrollInCourse,
   type Course,
+  type Enrollment,
 } from "@/hooks/useCourses";
 import { useAuth } from "@/contexts/AuthContext";
 
 interface CourseCardProps {
   course: Course;
-  enrollment?: any;
+  enrollment?: Enrollment;
   onEnroll: (courseId: string) => void;
   isEnrolling: boolean;
 }

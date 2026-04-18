@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -16,7 +15,7 @@ export interface InternalMessage {
   is_pinned: boolean | null;
   read_at: string | null;
   created_at: string;
-  attachments: any;
+  attachments: unknown;
   // joined
   sender_name?: string;
   recipient_name?: string;
@@ -111,7 +110,7 @@ export function useInternalMessages() {
       subject: payload.subject,
       body: payload.body,
       is_urgent: payload.is_urgent || false,
-      message_type: (payload.message_type || "direct") as any,
+      message_type: payload.message_type || "direct",
     });
 
     if (error) {
@@ -149,10 +148,10 @@ export function useStaffProfiles() {
   useEffect(() => {
     const load = async () => {
       const { data } = await supabase
-        .from("profiles" as any)
+        .from("profiles")
         .select("id, username, email")
         .limit(100);
-      if (data) setProfiles(data as any);
+      if (data) setProfiles(data as { id: string; username: string | null; email: string | null }[]);
     };
     load();
   }, []);

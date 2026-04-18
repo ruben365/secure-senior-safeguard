@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useRef, useEffect } from "react";
 import {
   Dialog,
@@ -30,13 +29,33 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
+interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  bio: string;
+  linkedin: string;
+  email: string;
+  phone: string;
+  avatar: string;
+  displayOrder: number;
+  showOnAbout: boolean;
+  displayEmail: boolean;
+  displayPhone: boolean;
+  status: string;
+  department: string;
+  location: string;
+  joinDate: string;
+  isFounder: boolean;
+}
+
 interface AddTeamMemberModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onAdd: (member: any) => void;
-  onUpdate?: (member: any) => void;
+  onAdd: (member: TeamMember) => void;
+  onUpdate?: (member: TeamMember) => void;
   nextOrderNumber: number;
-  editMember?: any;
+  editMember?: Partial<TeamMember>;
 }
 
 export function AddTeamMemberModal({

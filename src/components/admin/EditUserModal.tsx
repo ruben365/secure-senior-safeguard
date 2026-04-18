@@ -93,10 +93,10 @@ export function EditUserModal({
         await supabase.from("user_roles").delete().eq("user_id", user.id);
 
         // Insert new role
+        type AppRole = "user" | "staff" | "secretary" | "training_coordinator" | "business_consultant" | "support_specialist" | "admin" | "worker" | "partner";
         const { error: roleError } = await supabase.from("user_roles").insert({
           user_id: user.id,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          role: selectedRole as any,
+          role: selectedRole as AppRole,
         });
 
         if (roleError) throw roleError;
@@ -124,7 +124,7 @@ export function EditUserModal({
       console.error("Error updating user:", error);
       toast({
         title: "Error",
-        description: error.message || "Failed to update user",
+        description: (error as Error).message || "Failed to update user",
         variant: "destructive",
       });
     } finally {

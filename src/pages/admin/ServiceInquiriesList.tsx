@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -108,7 +107,7 @@ const ServiceInquiriesList = () => {
       status: string;
       notes?: string;
     }) => {
-      const updates: any = { status };
+      const updates: { status: string; admin_notes?: string } = { status };
       if (notes !== undefined) {
         updates.admin_notes = notes;
       }
@@ -162,7 +161,7 @@ const ServiceInquiriesList = () => {
   });
 
   const getStatusBadge = (status: string) => {
-    const variants: Record<string, { variant: any; label: string; icon: any }> =
+    const variants: Record<string, { variant: React.ComponentProps<typeof Badge>["variant"]; label: string; icon: React.ComponentType<{ className?: string }> }> =
       {
         new: { variant: "default", label: "New", icon: Clock },
         in_progress: {
@@ -172,7 +171,7 @@ const ServiceInquiriesList = () => {
         },
         quoted: { variant: "secondary", label: "Quoted", icon: DollarSign },
         converted: {
-          variant: "success",
+          variant: "default",
           label: "Converted",
           icon: CheckCircle,
         },

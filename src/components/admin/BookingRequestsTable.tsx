@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card } from "@/components/ui/card";
@@ -8,9 +7,26 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Calendar, Phone, Mail, Shield, Loader2 } from "lucide-react";
 
+interface BookingRequest {
+  id: string;
+  service_name: string;
+  service_tier: string | null;
+  status: string;
+  is_veteran: boolean | null;
+  request_number: number;
+  created_at: string;
+  email: string;
+  phone: string | null;
+  full_name: string;
+  base_price: number | null;
+  discount_amount: number;
+  final_price: number | null;
+  notes: string | null;
+}
+
 export const BookingRequestsTable = () => {
   const { toast } = useToast();
-  const [requests, setRequests] = useState<any[]>([]);
+  const [requests, setRequests] = useState<BookingRequest[]>([]);
   const [loading, setLoading] = useState(true);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
 

@@ -1,7 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import type { SupabaseClient } from "@supabase/supabase-js";
 import { useToast } from "@/hooks/use-toast";
+
+const gdb = supabase as unknown as SupabaseClient;
 
 // Types
 export interface GDCategory {
@@ -51,7 +53,7 @@ export const useGDCategories = () =>
   useQuery({
     queryKey: ["gd-categories"],
     queryFn: async () => {
-      const { data, error } = await (supabase as any)
+      const { data, error } = await gdb
         .from("graphic_design_categories")
         .select("*")
         .order("display_order");
@@ -65,7 +67,7 @@ export const useGDTags = (categoryId?: string) =>
   useQuery({
     queryKey: ["gd-tags", categoryId],
     queryFn: async () => {
-      let q = (supabase as any)
+      let q = gdb
         .from("graphic_design_tags")
         .select("*")
         .order("name");
@@ -86,7 +88,7 @@ export const useGDProjects = (filters?: {
   useQuery({
     queryKey: ["gd-projects", filters],
     queryFn: async () => {
-      let q = (supabase as any)
+      let q = gdb
         .from("graphic_design_projects")
         .select("*, graphic_design_categories(*)")
         .eq("status", "published")
@@ -99,30 +101,31 @@ export const useGDProjects = (filters?: {
       const { data, error } = await q;
       if (error) throw error;
 
-      let projects = data as any[];
+      type RawProject = Omit<GDProject, "category" | "tags"> & { graphic_design_categories?: GDCategory | null };
+      let projects = data as RawProject[];
 
       // Category filter
       if (filters?.categorySlug) {
         projects = projects.filter(
-          (p: any) => p.graphic_design_categories?.slug === filters.categorySlug
+          (p) => p.graphic_design_categories?.slug === filters.categorySlug
         );
       }
 
       // Fetch tags for projects
-      const projectIds = projects.map((p: any) => p.id);
+      const projectIds = projects.map((p) => p.id);
       if (projectIds.length > 0) {
-        const { data: ptData } = await (supabase as any)
+        const { data: ptData } = await gdb
           .from("graphic_design_project_tags")
           .select("project_id, graphic_design_tags(*)")
           .in("project_id", projectIds);
 
         const tagMap: Record<string, GDTag[]> = {};
-        (ptData || []).forEach((pt: any) => {
+        (ptData || []).forEach((pt) => {
           if (!tagMap[pt.project_id]) tagMap[pt.project_id] = [];
           tagMap[pt.project_id].push(pt.graphic_design_tags);
         });
 
-        projects = projects.map((p: any) => ({
+        projects = projects.map((p) => ({
           ...p,
           category: p.graphic_design_categories,
           tags: tagMap[p.id] || [],
@@ -130,7 +133,7 @@ export const useGDProjects = (filters?: {
 
         // Tag filter
         if (filters?.tagSlug) {
-          projects = projects.filter((p: any) =>
+          projects = projects.filter((p) =>
             p.tags.some((t: GDTag) => t.slug === filters.tagSlug)
           );
         }
@@ -145,7 +148,7 @@ export const useGDProject = (slug: string) =>
   useQuery({
     queryKey: ["gd-project", slug],
     queryFn: async () => {
-      const { data, error } = await (supabase as any)
+      const { data, error } = await gdb
         .from("graphic_design_projects")
         .select("*, graphic_design_categories(*)")
         .eq("slug", slug)
@@ -153,7 +156,7 @@ export const useGDProject = (slug: string) =>
       if (error) throw error;
 
       // Tags
-      const { data: ptData } = await (supabase as any)
+      const { data: ptData } = await gdb
         .from("graphic_design_project_tags")
         .select("graphic_design_tags(*)")
         .eq("project_id", data.id);
@@ -161,7 +164,7 @@ export const useGDProject = (slug: string) =>
       return {
         ...data,
         category: data.graphic_design_categories,
-        tags: (ptData || []).map((pt: any) => pt.graphic_design_tags),
+        tags: (ptData || []).map((pt) => pt.graphic_design_tags),
       } as GDProject;
     },
     enabled: !!slug,
@@ -172,12 +175,12 @@ export const useGDAdminProjects = () =>
   useQuery({
     queryKey: ["gd-admin-projects"],
     queryFn: async () => {
-      const { data, error } = await (supabase as any)
+      const { data, error } = await gdb
         .from("graphic_design_projects")
         .select("*, graphic_design_categories(name, slug)")
         .order("updated_at", { ascending: false });
       if (error) throw error;
-      return (data || []).map((p: any) => ({
+      return (data || []).map((p) => ({
         ...p,
         category: p.graphic_design_categories,
       })) as GDProject[];
@@ -197,17 +200,17 @@ export const useGDProjectMutations = () => {
       project: Partial<GDProject> & { title: string; slug: string };
       tagIds: string[];
     }) => {
-      const { category, tags, ...payload } = project as any;
+      const { category: _cat, tags: _tags, ...payload } = project as Partial<GDProject> & { title: string; slug: string };
 
       let id = project.id;
       if (id) {
-        const { error } = await (supabase as any)
+        const { error } = await gdb
           .from("graphic_design_projects")
           .update(payload)
           .eq("id", id);
         if (error) throw error;
       } else {
-        const { data, error } = await (supabase as any)
+        const { data, error } = await gdb
           .from("graphic_design_projects")
           .insert(payload)
           .select("id")
@@ -217,13 +220,13 @@ export const useGDProjectMutations = () => {
       }
 
       // Sync tags
-      await (supabase as any)
+      await gdb
         .from("graphic_design_project_tags")
         .delete()
         .eq("project_id", id);
 
       if (tagIds.length > 0) {
-        await (supabase as any)
+        await gdb
           .from("graphic_design_project_tags")
           .insert(tagIds.map((tid) => ({ project_id: id, tag_id: tid })));
       }
@@ -235,14 +238,14 @@ export const useGDProjectMutations = () => {
       qc.invalidateQueries({ queryKey: ["gd-projects"] });
       toast({ title: "Project saved" });
     },
-    onError: (err: any) => {
+    onError: (err: Error) => {
       toast({ title: "Error saving project", description: err.message, variant: "destructive" });
     },
   });
 
   const remove = useMutation({
     mutationFn: async (id: string) => {
-      const { error } = await (supabase as any)
+      const { error } = await gdb
         .from("graphic_design_projects")
         .delete()
         .eq("id", id);

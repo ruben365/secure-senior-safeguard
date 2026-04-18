@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
@@ -103,8 +102,8 @@ const DonationsList = () => {
   });
 
   const getStatusBadge = (status: string) => {
-    const variants: Record<string, { variant: any; label: string }> = {
-      completed: { variant: "success", label: "Completed" },
+    const variants: Record<string, { variant: React.ComponentProps<typeof Badge>["variant"]; label: string }> = {
+      completed: { variant: "default", label: "Completed" },
       pending: { variant: "outline", label: "Pending" },
       failed: { variant: "destructive", label: "Failed" },
     };

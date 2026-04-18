@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCallback, useMemo, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -114,8 +113,8 @@ export const useGuestScanner = () => {
         ]);
 
         const { data, error: fnError } = analysisResponse as {
-          data: any;
-          error: any;
+          data: { analysis: unknown; expiresAt?: string } | null;
+          error: Error | null;
         };
 
         if (fnError) throw fnError;
@@ -132,7 +131,7 @@ export const useGuestScanner = () => {
         setProgress(100);
         resetProgressTimer();
       } catch (err) {
-        const message = err?.message || "Scan failed. Please try again.";
+        const message = (err as Error)?.message || "Scan failed. Please try again.";
         setStatus("error");
         setError(message);
         resetProgressTimer();

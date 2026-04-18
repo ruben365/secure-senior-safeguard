@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -38,8 +37,8 @@ const OPS_PIPELINES = [
 
 export default function AdminDashboardContent() {
   const [date, setDate] = useState<Date | undefined>(new Date());
-  const [tasks, setTasks] = useState<any[]>([]);
-  const [events, setEvents] = useState<any[]>([]);
+  const [tasks, setTasks] = useState<Record<string, unknown>[]>([]);
+  const [events, setEvents] = useState<Record<string, unknown>[]>([]);
   const [loading, setLoading] = useState(true);
   const [moduleStats, setModuleStats] = useState<ModuleStats>({
     pendingBookings: 0,
@@ -64,8 +63,8 @@ export default function AdminDashboardContent() {
       const results = await Promise.all(
         OPS_PIPELINES.map(async (p) => {
           const [totalRes, healthyRes] = await Promise.all([
-            supabase.from(p.table as any).select("*", { count: "exact", head: true }),
-            supabase.from(p.table as any).select("*", { count: "exact", head: true }).eq(p.countField, p.healthyValue),
+            supabase.from(p.table as Parameters<typeof supabase.from>[0]).select("*", { count: "exact", head: true }),
+            supabase.from(p.table as Parameters<typeof supabase.from>[0]).select("*", { count: "exact", head: true }).eq(p.countField, p.healthyValue),
           ]);
           return {
             name: p.name,

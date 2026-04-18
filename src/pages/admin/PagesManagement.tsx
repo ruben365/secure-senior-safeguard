@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -110,7 +109,7 @@ export default function PagesManagement() {
       });
       toast.success("Page content updated successfully");
     },
-    onError: (e: any) => toast.error(e.message ?? "Failed to save"),
+    onError: (e: Error) => toast.error(e.message ?? "Failed to save"),
   });
 
   const handlePageChange = (page: (typeof PAGES)[0]) => {

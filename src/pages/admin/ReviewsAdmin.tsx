@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
@@ -32,7 +31,7 @@ export default function ReviewsAdmin() {
     },
   });
 
-  const pendingCount = reviews?.filter((r: any) => r.status === "pending").length || 0;
+  const pendingCount = reviews?.filter((r) => r.status === "pending").length || 0;
 
   return (
     <div className="space-y-6">
@@ -60,7 +59,7 @@ export default function ReviewsAdmin() {
               ) : !reviews?.length ? (
                 <TableRow><TableCell colSpan={6} className="text-center py-8">No reviews yet</TableCell></TableRow>
               ) : (
-                reviews.map((review: any) => (
+                reviews.map((review) => (
                   <TableRow key={review.id}>
                     <TableCell>
                       <div className="flex">

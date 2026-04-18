@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -105,7 +104,8 @@ export default function HealthcareHome() {
           .order("scheduled_start", { ascending: true })
           .limit(10);
         if (error) throw error;
-        return (data ?? []).map((d: any) => ({
+        type RawAppointment = typeof data[number] & { clients: { first_name: string; last_name: string }[] | { first_name: string; last_name: string } | null };
+        return ((data ?? []) as RawAppointment[]).map((d) => ({
           ...d,
           clients: Array.isArray(d.clients) ? d.clients[0] ?? null : d.clients ?? null,
         })) as Appointment[];

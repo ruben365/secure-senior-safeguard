@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card } from "@/components/ui/card";
@@ -7,9 +6,26 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, Phone, Shield, Loader2, Download, Package } from "lucide-react";
 
+interface PurchaseRequest {
+  id: string;
+  item_name: string;
+  item_type: string;
+  status: string;
+  payment_status: string;
+  is_veteran: boolean | null;
+  request_number: number;
+  created_at: string;
+  email: string;
+  phone: string | null;
+  full_name: string;
+  quantity: number;
+  suggested_price: number;
+  notes: string | null;
+}
+
 export const PurchaseRequestsTable = () => {
   const { toast } = useToast();
-  const [requests, setRequests] = useState<any[]>([]);
+  const [requests, setRequests] = useState<PurchaseRequest[]>([]);
   const [loading, setLoading] = useState(true);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
 

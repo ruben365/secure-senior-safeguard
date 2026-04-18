@@ -1,8 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/**
- * Analytics utilities for tracking user behavior
- * Supports Google Analytics 4 and custom events
- */
+// Analytics utilities for tracking user behavior (Google Analytics 4 + custom events)
 
 type AnalyticsEventParams = Record<string, unknown>;
 
@@ -223,7 +219,7 @@ export function trackTiming(category: string, variable: string, value: number) {
 // Type definitions
 declare global {
   interface Window {
-    gtag?: (...args: any[]) => void;
-    dataLayer?: any[];
+    gtag?: (...args: unknown[]) => void;
+    dataLayer?: unknown[];
   }
 }

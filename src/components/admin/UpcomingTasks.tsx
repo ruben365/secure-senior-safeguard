@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import {
   Calendar,
@@ -52,7 +51,7 @@ interface Task {
   status: TaskStatus;
   priority: TaskPriority;
   actionable?: boolean;
-  metadata?: any;
+  metadata?: Record<string, unknown>;
   completed?: boolean;
 }
 
@@ -390,7 +389,7 @@ export function UpcomingTasks() {
           {/* Filter Dropdown */}
           <Select
             value={filter}
-            onValueChange={(value: any) => setFilter(value)}
+            onValueChange={(value: string) => setFilter(value as typeof filter)}
           >
             <SelectTrigger className="w-[130px] h-9">
               <SelectValue />

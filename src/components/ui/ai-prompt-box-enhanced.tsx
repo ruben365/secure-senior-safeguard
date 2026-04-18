@@ -1,5 +1,18 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
+
+interface SpeechRecognitionEvent {
+  resultIndex: number;
+  results: { length: number; [i: number]: { isFinal: boolean; [j: number]: { transcript: string } } };
+}
+interface SpeechRecognitionErrorEvent { error: string }
+interface SpeechRecognitionInstance {
+  continuous: boolean; interimResults: boolean; lang: string;
+  onresult: ((e: SpeechRecognitionEvent) => void) | null;
+  onerror: ((e: SpeechRecognitionErrorEvent) => void) | null;
+  onend: (() => void) | null;
+  start(): void; stop(): void;
+  _shouldBeRecording?: boolean;
+}
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import {
@@ -498,7 +511,7 @@ export const EnhancedPromptInputBox = React.forwardRef<
   const [isRecording, setIsRecording] = React.useState(false);
   const [interimTranscript, setInterimTranscript] = React.useState("");
   const uploadInputRef = React.useRef<HTMLInputElement>(null);
-  const recognitionRef = React.useRef<any>(null);
+  const recognitionRef = React.useRef<SpeechRecognitionInstance | null>(null);
 
   // Initialize speech recognition with continuous + interim results
   React.useEffect(() => {
@@ -506,14 +519,13 @@ export const EnhancedPromptInputBox = React.forwardRef<
       typeof window !== "undefined" &&
       ("webkitSpeechRecognition" in window || "SpeechRecognition" in window)
     ) {
-      const SpeechRecognition =
-        (window as any).webkitSpeechRecognition ||
-        (window as any).SpeechRecognition;
-      const recognition = new SpeechRecognition();
+      const win = window as Window & { webkitSpeechRecognition?: new () => SpeechRecognitionInstance; SpeechRecognition?: new () => SpeechRecognitionInstance };
+      const SpeechRecognitionCtor = win.webkitSpeechRecognition || win.SpeechRecognition;
+      const recognition = new SpeechRecognitionCtor!();
       recognition.continuous = true;
       recognition.interimResults = true;
       recognition.lang = "en-US";
-      recognition.onresult = (event: any) => {
+      recognition.onresult = (event: SpeechRecognitionEvent) => {
         let interim = "";
         let final = "";
         for (let i = event.resultIndex; i < event.results.length; i++) {
@@ -531,7 +543,7 @@ export const EnhancedPromptInputBox = React.forwardRef<
           setInterimTranscript(interim);
         }
       };
-      recognition.onerror = (event: any) => {
+      recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
         console.error("Speech recognition error:", event.error);
         if (event.error !== "aborted") {
           setIsRecording(false);

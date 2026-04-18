@@ -1,5 +1,15 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
+
+interface InventoryProduct {
+  id: string;
+  name: string;
+  sku: string | null;
+  image: string;
+  currentStock: number;
+  reserved: number;
+  threshold: number;
+  lastUpdated: string;
+}
 import {
   AlertTriangle,
   Package,
@@ -50,7 +60,7 @@ import { Textarea } from "@/components/ui/textarea";
 const InventoryManagement = () => {
   const { toast } = useToast();
   const [adjustModalOpen, setAdjustModalOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [selectedProduct, setSelectedProduct] = useState<InventoryProduct | null>(null);
   const [adjustmentType, setAdjustmentType] = useState("add");
   const [adjustmentQuantity, setAdjustmentQuantity] = useState("");
   const [adjustmentReason, setAdjustmentReason] = useState("");
@@ -90,10 +100,10 @@ const InventoryManagement = () => {
       return { label: "Out of Stock", color: "destructive", icon: "✗" };
     if (available <= threshold)
       return { label: "Low Stock", color: "outline", icon: "⚠" };
-    return { label: "In Stock", color: "success", icon: "✓" };
+    return { label: "In Stock", color: "default", icon: "✓" };
   };
 
-  const openAdjustModal = (product: any) => {
+  const openAdjustModal = (product: InventoryProduct) => {
     setSelectedProduct(product);
     setAdjustModalOpen(true);
     setAdjustmentQuantity("");
@@ -101,7 +111,7 @@ const InventoryManagement = () => {
     setAdjustmentNotes("");
   };
 
-  const quickAdjust = async (product: any, amount: number) => {
+  const quickAdjust = async (product: InventoryProduct, amount: number) => {
     const newQuantity = product.currentStock + amount;
 
     const { error } = await supabase
@@ -345,7 +355,7 @@ const InventoryManagement = () => {
                     {item.threshold}
                   </TableCell>
                   <TableCell>
-                    <Badge variant={status.color as any}>
+                    <Badge variant={status.color as "default" | "secondary" | "destructive" | "outline"}>
                       {status.icon} {status.label}
                     </Badge>
                   </TableCell>

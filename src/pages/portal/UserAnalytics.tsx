@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
@@ -18,9 +17,9 @@ export default function UserAnalytics() {
         supabase.from("activity_log").select("*").eq("user_id", user!.id).order("created_at", { ascending: false }).limit(10),
       ]);
 
-      const completedCourses = enrollments.data?.filter((e: any) => e.status === "completed").length || 0;
+      const completedCourses = enrollments.data?.filter((e) => e.status === "completed").length || 0;
       const totalCourses = enrollments.data?.length || 0;
-      const avgProgress = totalCourses > 0 ? Math.round(enrollments.data!.reduce((sum: number, e: any) => sum + (e.progress_percentage || 0), 0) / totalCourses) : 0;
+      const avgProgress = totalCourses > 0 ? Math.round(enrollments.data!.reduce((sum: number, e) => sum + ((e.progress_percentage as number) || 0), 0) / totalCourses) : 0;
 
       // Simple security score based on activity
       const securityScore = Math.min(100, 50 + (scamChecks.count || 0) * 5 + completedCourses * 10);
@@ -107,7 +106,7 @@ export default function UserAnalytics() {
           <CardContent>
             {stats?.recentActivity?.length ? (
               <ul className="space-y-3">
-                {stats.recentActivity.slice(0, 5).map((a: any) => (
+                {(stats.recentActivity as { id: string; action: string; entity_type: string; created_at: string }[]).slice(0, 5).map((a) => (
                   <li key={a.id} className="flex items-center gap-3">
                     <Clock className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                     <div className="flex-1 min-w-0">

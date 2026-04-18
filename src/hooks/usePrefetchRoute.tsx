@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef } from "react";
 import { preloadRouteImages } from "./useImagePreload";
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
@@ -23,7 +22,7 @@ export const usePrefetchRoute = (path: string) => {
 
   const prefetch = () => {
     if (prefetchedRoutes.has(path)) return;
-    const connection = (navigator as any).connection;
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
     if (
       connection?.saveData ||
       ["slow-2g", "2g"].includes(connection?.effectiveType)
@@ -42,7 +41,7 @@ export const usePrefetchRoute = (path: string) => {
       }
 
       // Dynamically import the route component
-      const routeMap: Record<string, () => Promise<any>> = {
+      const routeMap: Record<string, () => Promise<unknown>> = {
         "/": () => import("../pages/Index"),
         "/training": () => import("../pages/Training"),
         "/ai": () => import("../pages/Business"),

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import { Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -37,7 +36,7 @@ export function NotificationCenter() {
       .limit(20);
     if (data) {
       setNotifications(data as Notification[]);
-      setUnreadCount(data.filter((n: any) => !n.is_read).length);
+      setUnreadCount((data as Notification[]).filter((n) => !n.is_read).length);
     }
   };
 

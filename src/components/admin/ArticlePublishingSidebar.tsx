@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
@@ -120,7 +119,7 @@ export function ArticlePublishingSidebar({
     setSectionsOpen((prev) => ({ ...prev, [section]: !prev[section] }));
   };
 
-  const handleChange = (field: keyof ArticleData, value: any) => {
+  const handleChange = (field: keyof ArticleData, value: ArticleData[keyof ArticleData]) => {
     onChange({ ...article, [field]: value });
   };
 
@@ -359,7 +358,7 @@ export function ArticlePublishingSidebar({
               <Label>Status</Label>
               <Select
                 value={article.status}
-                onValueChange={(value: any) => handleChange("status", value)}
+                onValueChange={(value: string) => handleChange("status", value)}
               >
                 <SelectTrigger>
                   <SelectValue />
@@ -443,7 +442,7 @@ export function ArticlePublishingSidebar({
               <Label>Visibility</Label>
               <RadioGroup
                 value={article.visibility || "public"}
-                onValueChange={(value: any) =>
+                onValueChange={(value: string) =>
                   handleChange("visibility", value)
                 }
               >

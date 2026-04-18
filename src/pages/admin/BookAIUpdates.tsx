@@ -118,7 +118,7 @@ export default function BookAIUpdates() {
       if (error) throw error;
 
       // Join chapter titles
-      const enriched = (data ?? []).map((log: any) => {
+      const enriched = (data ?? []).map((log: UpdateLog) => {
         const ch = chapters.find((c) => c.id === log.chapter_id);
         return { ...log, chapter_title: ch?.chapter_title ?? null };
       });
@@ -151,7 +151,7 @@ export default function BookAIUpdates() {
       setUpdateInstructions("");
       setTriggerOpen(false);
     },
-    onError: (e: any) =>
+    onError: (e: Error) =>
       toast.error(e.message ?? "Failed to trigger AI update"),
   });
 
@@ -183,7 +183,7 @@ export default function BookAIUpdates() {
       toast.success("Change approved and applied to book");
       setApproveTarget(null);
     },
-    onError: (e: any) => toast.error(e.message ?? "Failed to approve"),
+    onError: (e: Error) => toast.error(e.message ?? "Failed to approve"),
   });
 
   const rejectMutation = useMutation({

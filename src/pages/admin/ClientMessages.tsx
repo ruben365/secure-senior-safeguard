@@ -1,5 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
+
+interface ClientMessage {
+  id: string;
+  subject: string | null;
+  body: string;
+  is_from_client: boolean;
+  created_at: string;
+  clients: { first_name: string; last_name: string } | null;
+}
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
@@ -43,7 +51,7 @@ import {
 import { format, formatDistanceToNow } from "date-fns";
 
 export default function ClientMessages() {
-  const [selectedMessage, setSelectedMessage] = useState<any>(null);
+  const [selectedMessage, setSelectedMessage] = useState<ClientMessage | null>(null);
   const [newMessage, setNewMessage] = useState({
     clientId: "",
     subject: "",

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import {
   Card,
@@ -115,7 +114,7 @@ export default function Analytics() {
         )
       : 0;
 
-  const topPages = pageViews?.reduce((acc: any, pv) => {
+  const topPages = pageViews?.reduce<Record<string, number>>((acc, pv) => {
     const url = pv.page_url || "Unknown";
     acc[url] = (acc[url] || 0) + 1;
     return acc;
@@ -123,10 +122,10 @@ export default function Analytics() {
 
   const topPagesArray = Object.entries(topPages || {})
     .map(([url, count]) => ({ url, count }))
-    .sort((a: any, b: any) => b.count - a.count)
+    .sort((a, b) => (b.count as number) - (a.count as number))
     .slice(0, 10);
 
-  const pageViewsByDay = pageViews?.reduce((acc: any, pv) => {
+  const pageViewsByDay = pageViews?.reduce<Record<string, number>>((acc, pv) => {
     const day = format(new Date(pv.created_at), "MMM d");
     acc[day] = (acc[day] || 0) + 1;
     return acc;
@@ -136,7 +135,7 @@ export default function Analytics() {
     .map(([date, views]) => ({ date, views }))
     .slice(-14);
 
-  const conversionsByType = conversions?.reduce((acc: any, conv) => {
+  const conversionsByType = conversions?.reduce<Record<string, number>>((acc, conv) => {
     const type = conv.conversion_type;
     acc[type] = (acc[type] || 0) + 1;
     return acc;
@@ -377,7 +376,7 @@ export default function Analytics() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
-                  {topPagesArray.slice(0, 5).map((page: any, index) => (
+                  {topPagesArray.slice(0, 5).map((page, index) => (
                     <div
                       key={index}
                       className="flex items-center justify-between text-sm"
@@ -413,7 +412,7 @@ export default function Analytics() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {topPagesArray.map((page: any, index) => (
+                {topPagesArray.map((page, index) => (
                   <div
                     key={index}
                     className="flex items-center justify-between"

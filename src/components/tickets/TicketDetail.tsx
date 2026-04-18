@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -71,7 +70,7 @@ export function TicketDetail({ ticketId, onBack, isAdmin }: TicketDetailProps) {
 
       // If admin replies, update status to in_progress
       if (isAdmin && ticket?.status === "open") {
-        await supabase.from("support_tickets").update({ status: "in_progress" as any }).eq("id", ticketId);
+        await supabase.from("support_tickets").update({ status: "in_progress" as "open" | "in_progress" | "resolved" | "closed" }).eq("id", ticketId);
       }
     },
     onSuccess: () => {
@@ -84,7 +83,7 @@ export function TicketDetail({ ticketId, onBack, isAdmin }: TicketDetailProps) {
 
   const updateStatus = useMutation({
     mutationFn: async (status: string) => {
-      const { error } = await supabase.from("support_tickets").update({ status: status as any }).eq("id", ticketId);
+      const { error } = await supabase.from("support_tickets").update({ status: status as "open" | "in_progress" | "resolved" | "closed" }).eq("id", ticketId);
       if (error) throw error;
     },
     onSuccess: () => {
@@ -135,7 +134,7 @@ export function TicketDetail({ ticketId, onBack, isAdmin }: TicketDetailProps) {
       </Card>
 
       <div className="space-y-3 mb-6">
-        {replies?.map((r: any) => (
+        {replies?.map((r) => (
           <div key={r.id} className={`flex ${r.is_staff_reply ? "justify-start" : "justify-end"}`}>
             <div className={`max-w-[80%] rounded-lg p-3 ${r.is_staff_reply ? "bg-muted" : "bg-primary text-primary-foreground"}`}>
               <p className="text-sm font-medium mb-1">{r.is_staff_reply ? "Support Team" : "You"}</p>

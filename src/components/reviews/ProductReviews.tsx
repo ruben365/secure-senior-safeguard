@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -54,7 +53,7 @@ export function ProductReviews({ courseId, productId }: ProductReviewsProps) {
     },
   });
 
-  const avgRating = reviews?.length ? (reviews.reduce((sum: number, r: any) => sum + r.rating, 0) / reviews.length).toFixed(1) : "0";
+  const avgRating = reviews?.length ? (reviews.reduce((sum, r) => sum + (r.rating as number), 0) / reviews.length).toFixed(1) : "0";
 
   const submitReview = useMutation({
     mutationFn: async () => {
@@ -111,7 +110,7 @@ export function ProductReviews({ courseId, productId }: ProductReviewsProps) {
       )}
 
       <div className="space-y-4">
-        {reviews?.map((review: any) => (
+        {reviews?.map((review) => (
           <Card key={review.id}>
             <CardContent className="pt-4">
               <div className="flex items-center gap-2 mb-2">

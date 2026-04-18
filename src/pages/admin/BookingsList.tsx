@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -323,11 +322,11 @@ const BookingsList = () => {
   });
 
   const getStatusBadge = (status: string) => {
-    const variants: Record<string, { variant: any; label: string }> = {
+    const variants: Record<string, { variant: React.ComponentProps<typeof Badge>["variant"]; label: string }> = {
       pending: { variant: "outline", label: "Pending" },
       contacted: { variant: "secondary", label: "Contacted" },
       confirmed: { variant: "default", label: "Confirmed" },
-      completed: { variant: "success", label: "Completed" },
+      completed: { variant: "default", label: "Completed" },
       cancelled: { variant: "destructive", label: "Cancelled" },
     };
     const config = variants[status] || variants.pending;

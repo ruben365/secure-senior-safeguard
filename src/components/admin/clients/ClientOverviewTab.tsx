@@ -1,11 +1,32 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Wrench, MessageSquare, DollarSign, Pencil } from "lucide-react";
 
+interface ClientData {
+  services: number;
+  openTickets: number;
+  unpaidInvoices: number;
+  companyName: string;
+  industry: string;
+  companySize: number;
+  website: string;
+  address: string;
+  contactName: string;
+  contactTitle: string;
+  contactEmail: string;
+  contactPhone: string;
+  preferredContact: string;
+  accountId: string;
+  joinDate: string;
+  status: string;
+  lastActivity: string;
+  accountManager: string;
+  tags: string[];
+}
+
 interface ClientOverviewTabProps {
-  client: any;
+  client: ClientData;
 }
 
 export function ClientOverviewTab({ client }: ClientOverviewTabProps) {

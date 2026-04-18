@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card } from "@/components/ui/card";
@@ -7,9 +6,21 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, Phone, Loader2, MessageSquare, Calendar } from "lucide-react";
 
+interface Inquiry {
+  id: string;
+  name: string;
+  email: string;
+  phone: string | null;
+  inquiry_type: string | null;
+  status: string | null;
+  created_at: string;
+  metadata: { preferredDate?: string; language?: string } | null;
+  message: string | null;
+}
+
 export const InquiriesTable = () => {
   const { toast } = useToast();
-  const [inquiries, setInquiries] = useState<any[]>([]);
+  const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [loading, setLoading] = useState(true);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
 

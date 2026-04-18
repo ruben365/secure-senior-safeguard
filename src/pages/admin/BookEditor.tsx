@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -127,7 +126,7 @@ export default function BookEditor() {
         status: book.status ?? "draft",
       });
       setChapters(
-        chs.map((c: any) => ({
+        chs.map((c) => ({
           id: c.id,
           chapter_number: c.chapter_number,
           chapter_title: c.chapter_title ?? "",
@@ -138,7 +137,7 @@ export default function BookEditor() {
       );
       setAutoSlug(false);
     },
-  } as any);
+  });
 
   // Auto-generate slug from title
   useEffect(() => {
@@ -212,7 +211,7 @@ export default function BookEditor() {
       toast.success(isNew ? "Book created!" : "Book saved!");
       if (isNew) navigate(`/admin/books/${bookId}`);
     },
-    onError: (e: any) => toast.error(e.message ?? "Failed to save"),
+    onError: (e: Error) => toast.error(e.message ?? "Failed to save"),
   });
 
   const addChapter = () => {
@@ -250,7 +249,7 @@ export default function BookEditor() {
     toast.success("Chapter deleted");
   };
 
-  const updateChapter = (idx: number, field: keyof Chapter, value: any) => {
+  const updateChapter = (idx: number, field: keyof Chapter, value: Chapter[keyof Chapter]) => {
     setChapters((prev) =>
       prev.map((c, i) => (i === idx ? { ...c, [field]: value } : c))
     );

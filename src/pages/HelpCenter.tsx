@@ -1,5 +1,16 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
+
+interface KbArticle {
+  id: string;
+  title: string;
+  content: string;
+  excerpt?: string | null;
+  category: string;
+  helpful_yes: number;
+  helpful_no: number;
+  is_published: boolean;
+  display_order?: number;
+}
 import { SEO, PAGE_SEO } from "@/components/SEO";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -25,13 +36,13 @@ export default function HelpCenter() {
         .eq("is_published", true)
         .order("display_order", { ascending: true });
       if (error) throw error;
-      return data;
+      return data as KbArticle[];
     },
   });
 
-  const categories = [...new Set(articles?.map((a: any) => a.category) || [])];
+  const categories = [...new Set(articles?.map((a) => a.category) || [])];
 
-  const filtered = articles?.filter((a: any) => {
+  const filtered = articles?.filter((a) => {
     const matchesSearch = !search || a.title.toLowerCase().includes(search.toLowerCase()) || a.content.toLowerCase().includes(search.toLowerCase());
     const matchesCategory = !selectedCategory || a.category === selectedCategory;
     return matchesSearch && matchesCategory;
@@ -39,9 +50,9 @@ export default function HelpCenter() {
 
   const handleHelpful = async (id: string, isYes: boolean) => {
     const field = isYes ? "helpful_yes" : "helpful_no";
-    const article = articles?.find((a: any) => a.id === id);
+    const article = articles?.find((a) => a.id === id);
     if (!article) return;
-    await supabase.from("knowledge_base_articles").update({ [field]: (article as any)[field] + 1 }).eq("id", id);
+    await supabase.from("knowledge_base_articles").update({ [field]: (article[field as keyof KbArticle] as number) + 1 }).eq("id", id);
     toast.success("Thanks for your feedback!");
   };
 
@@ -81,7 +92,7 @@ export default function HelpCenter() {
                   <CardContent className="pt-6 text-center">
                     <span className="text-3xl">{categoryIcons[cat] || "📄"}</span>
                     <h3 className="font-medium mt-2 capitalize">{cat}</h3>
-                    <p className="text-sm text-muted-foreground">{articles?.filter((a: any) => a.category === cat).length} articles</p>
+                    <p className="text-sm text-muted-foreground">{articles?.filter((a) => a.category === cat).length} articles</p>
                   </CardContent>
                 </Card>
               ))}
@@ -96,7 +107,7 @@ export default function HelpCenter() {
           )}
 
           <div className="space-y-3">
-            {filtered?.map((article: any) => (
+            {filtered?.map((article) => (
               <Card key={article.id}>
                 <CardContent className="py-4">
                   <button

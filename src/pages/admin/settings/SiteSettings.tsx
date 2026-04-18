@@ -150,7 +150,7 @@ const SiteSettings = () => {
       queryClient.invalidateQueries({ queryKey: ["site-settings"] });
       toast.success("Settings saved successfully!");
     },
-    onError: (e: any) => toast.error(e.message ?? "Failed to save settings"),
+    onError: (e: Error) => toast.error(e.message ?? "Failed to save settings"),
   });
 
   const set = (field: keyof Settings, value: string) =>
