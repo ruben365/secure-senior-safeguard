@@ -279,8 +279,8 @@ const PricingCard = ({
       <div
       className={`relative rounded-2xl border backdrop-blur-xl overflow-hidden h-full flex flex-col transition-all duration-500 hover:-translate-y-3 ${
       featured ?
-      "border-primary/40 shadow-[0_8px_40px_-12px_hsl(var(--primary)/0.25)] bg-card" :
-      "border-border/50 bg-card/90 hover:border-primary/25 hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)]"}`
+      "border-primary/40 shadow-[0_8px_40px_-12px_hsl(var(--primary)/0.25)] bg-card dark:bg-white/[0.11]" :
+      "border-border/50 dark:border-white/[0.10] bg-card/90 dark:bg-white/[0.06] hover:border-primary/25 hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)]"}`
       }
       style={{ transformStyle: "preserve-3d" }}>
       
@@ -1078,7 +1078,7 @@ function Business() {
 
         {/* ═══════════════════ WEBSITE INSURANCE ═══════════════════ */}
         <section id="website-insurance" className="py-16 md:py-24 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-muted/60 via-muted/40 to-muted/60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-muted/60 via-muted/40 to-muted/60 dark:bg-none dark:bg-[#1c1917]" />
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
           
           <div className="container mx-auto relative z-10">
@@ -1273,7 +1273,7 @@ function Business() {
 
         {/* ═══════════════════ AI INSURANCE ═══════════════════ */}
         <section id="ai-insurance" className="py-16 md:py-24 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40 dark:from-[#1c1917] dark:via-[#161412] dark:to-[#161412]" />
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent" />
           
           <div className="container mx-auto relative z-10">
