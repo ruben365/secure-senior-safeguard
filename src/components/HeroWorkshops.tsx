@@ -110,17 +110,17 @@ export const HeroWorkshops = () => {
 
             {/* Mobile-only: compact trust indicators */}
             <div className="sm:hidden flex flex-wrap items-center gap-y-2 mt-5">
-              <span className="flex items-center gap-1.5 text-[11px] font-medium text-white/60">
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-white/60">
                 <Clock className="w-3 h-3 text-orange-400/75 flex-shrink-0" />
                 24/7 Monitoring
+                <span className="mx-2 text-white/25 select-none" aria-hidden="true">·</span>
               </span>
-              <span className="mx-2.5 text-white/25 select-none">·</span>
-              <span className="flex items-center gap-1.5 text-[11px] font-medium text-white/60">
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-white/60">
                 <MapPin className="w-3 h-3 text-orange-400/75 flex-shrink-0" />
                 Ohio-Based
+                <span className="mx-2 text-white/25 select-none" aria-hidden="true">·</span>
               </span>
-              <span className="mx-2.5 text-white/25 select-none">·</span>
-              <span className="flex items-center gap-1.5 text-[11px] font-medium text-white/60">
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-white/60">
                 <Award className="w-3 h-3 text-orange-400/75 flex-shrink-0" />
                 Veteran Owned
               </span>
