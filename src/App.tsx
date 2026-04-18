@@ -175,9 +175,17 @@ const queryClient = new QueryClient({
   },
 });
 
+function PageLoader() {
+  return (
+    <div className="flex min-h-[50vh] items-center justify-center">
+      <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+    </div>
+  );
+}
+
 function PublicRoutes() {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<PageLoader />}>
       <Routes>
         <Route path="/" element={<PageTransition variant="auto"><Index /></PageTransition>} />
         <Route path="/training" element={<PageTransition variant="auto"><Training /></PageTransition>} />
@@ -359,27 +367,32 @@ function App() {
                       <GlobalMotionProvider />
                       <SkipToContent />
                       <ScrollToTop />
-                      <Suspense fallback={null}>
-                        <BackToTop />
-                        <MobileCallButton />
-                        <AnalyticsTracker />
-                      </Suspense>
+                      <ErrorBoundary fallback={null}>
+                        <Suspense fallback={null}>
+                          <BackToTop />
+                          <MobileCallButton />
+                          <AnalyticsTracker />
+                        </Suspense>
+                      </ErrorBoundary>
                       <ErrorBoundary>
                         <main id="main-content" tabIndex={-1}>
                           <PublicRoutes />
                         </main>
                       </ErrorBoundary>
                       <RouteTracker />
-                      <Suspense fallback={null}>
-                        <CookieConsent />
-                      </Suspense>
-                      <Suspense fallback={null}>
-                        <MagnificentDonateButton />
-                        <LauraAIAssistant />
-                        <CartFeedbackNotifications />
-                        <UnifiedCheckoutDialog />
-
-                      </Suspense>
+                      <ErrorBoundary fallback={null}>
+                        <Suspense fallback={null}>
+                          <CookieConsent />
+                        </Suspense>
+                      </ErrorBoundary>
+                      <ErrorBoundary fallback={null}>
+                        <Suspense fallback={null}>
+                          <MagnificentDonateButton />
+                          <LauraAIAssistant />
+                          <CartFeedbackNotifications />
+                          <UnifiedCheckoutDialog />
+                        </Suspense>
+                      </ErrorBoundary>
                     </PrerenderProvider>
                   </BrowserRouter>
                 </CartFeedbackProvider>

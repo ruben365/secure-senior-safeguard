@@ -31,7 +31,7 @@ if ("requestIdleCallback" in window) {
 
     // Service worker - production only
     if ("serviceWorker" in navigator && import.meta.env.PROD) {
-      navigator.serviceWorker.register("/sw.js").catch(() => {});
+      navigator.serviceWorker.register("/sw.js").catch((err) => console.warn("SW registration failed:", err));
     }
   });
 } else {
@@ -41,7 +41,7 @@ if ("requestIdleCallback" in window) {
       m.initPerformanceOptimizations?.(),
     );
     if ("serviceWorker" in navigator && import.meta.env.PROD) {
-      navigator.serviceWorker.register("/sw.js").catch(() => {});
+      navigator.serviceWorker.register("/sw.js").catch((err) => console.warn("SW registration failed:", err));
     }
   }, 100);
 }
