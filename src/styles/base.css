@@ -188,8 +188,8 @@
     --sidebar-border: 215 28% 18%;
     --sidebar-ring: 207 89% 50%;
 
-    /* ── Global text scale — 0.875 = 14px base (compact) ── */
-    --text-scale: 0.875;
+    /* ── Global text scale — 1.0 = 16px base (accessible, senior-first) ── */
+    --text-scale: 1.0;
   }
 
   .dark {
@@ -336,11 +336,7 @@
     }
   }
 
-  @media (max-width: 768px) {
-    :root {
-      --text-scale: 0.85;
-    }
-  }
+  /* No mobile font reduction — 16px is the accessibility minimum for seniors */
 
   /* Accessibility - Skip to content link */
   .skip-to-content {
