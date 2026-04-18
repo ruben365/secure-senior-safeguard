@@ -1,32 +1,14 @@
-import React from 'react';
+import { type FC } from 'react';
 import './LoadingCard.css';
 
 interface LoadingCardProps {
-  /** Whether to show the loading overlay */
   show?: boolean;
-  /** Optional custom text (defaults to "LOADING") */
   text?: string;
-  /** Optional className for additional styling */
   className?: string;
-  /** Whether to show as fullscreen overlay or inline */
   fullscreen?: boolean;
 }
 
-/**
- * Glassmorphism Loading Widget
- *
- * A beautiful loading indicator with frosted glass effect,
- * animated concentric rings, and orbiting dots.
- *
- * @example
- * // Fullscreen overlay
- * <LoadingCard show={isLoading} />
- *
- * @example
- * // Inline loading card
- * <LoadingCard show={true} fullscreen={false} text="Processing" />
- */
-export const LoadingCard: React.FC<LoadingCardProps> = ({
+export const LoadingCard: FC<LoadingCardProps> = ({
   show = true,
   text = 'Loading',
   className = '',
