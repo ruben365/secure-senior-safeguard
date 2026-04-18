@@ -341,6 +341,19 @@ const PricingCard = ({
   </AnimatedSection>;
 
 
+interface BusinessTestimonial {
+  id: string;
+  name: string;
+  location: string;
+  story: string;
+  rating: number;
+  testimonial_media?: Array<{
+    media_type?: string;
+    thumbnail_url?: string;
+    file_url: string;
+  }>;
+}
+
 function Business() {
   const [modalOpen, setModalOpen] = useState(false);
   const [inquiryDialogOpen, setInquiryDialogOpen] = useState(false);
@@ -378,7 +391,7 @@ function Business() {
     price?: number;
   } | null>(null);
   const { isAdmin, isLoading } = useAdminStatus();
-  const [businessTestimonials, setBusinessTestimonials] = useState<any[]>([]);
+  const [businessTestimonials, setBusinessTestimonials] = useState<BusinessTestimonial[]>([]);
   const [selectedVideo, setSelectedVideo] = useState<{
     src: string;
     title: string;
