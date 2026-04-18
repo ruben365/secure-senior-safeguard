@@ -283,19 +283,16 @@
   inset: 0;
   background: linear-gradient(
     135deg,
-    hsl(var(--coral-200) / 0) 0%,
-    hsl(var(--lavender-200) / 0) 100%
+    hsl(var(--coral-200) / 0.3) 0%,
+    hsl(var(--lavender-200) / 0.3) 100%
   );
-  transition: background 0.4s ease;
+  opacity: 0;
+  transition: opacity 0.4s ease;
   z-index: 0;
 }
 
 .hover-gradient:hover::before {
-  background: linear-gradient(
-    135deg,
-    hsl(var(--coral-200) / 0.3) 0%,
-    hsl(var(--lavender-200) / 0.3) 100%
-  );
+  opacity: 1;
 }
 
 /* Border glow on hover */
@@ -1363,6 +1360,13 @@
 
   .shine-hover::after {
     display: none;
+  }
+
+  .pulse-ring::before,
+  .status-dot::before,
+  .live-indicator::before,
+  .premium-aurora::before {
+    animation: none !important;
   }
 }
 

@@ -622,7 +622,6 @@ section[data-reveal]:nth-child(odd) {
   pointer-events: none;
   transition:
     transform 200ms var(--ease-out-std),
-    font-size 200ms var(--ease-out-std),
     color 200ms var(--ease-out-std);
   transform-origin: left center;
 }

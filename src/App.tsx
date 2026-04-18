@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+import { MotionConfig } from "framer-motion";
 import { HelmetProvider } from "react-helmet-async";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -351,6 +352,7 @@ function App() {
   }, []);
 
   return (
+    <MotionConfig reducedMotion="user">
     <HelmetProvider>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
@@ -402,6 +404,7 @@ function App() {
       </AuthProvider>
     </QueryClientProvider>
     </HelmetProvider>
+    </MotionConfig>
   );
 }
 
