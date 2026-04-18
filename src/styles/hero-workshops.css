@@ -755,6 +755,13 @@
   .hero-ws__widget { display: none; }
   .hero-ws__panel { display: none; }
 
+  /* Disable entrance animations on mobile to prevent flash/flicker */
+  .hero-ws__kicker,
+  .hero-ws__headline,
+  .hero-ws__body,
+  .hero-ws__ctas,
+  .hero-ws__widget { animation: none; opacity: 1; transform: none; }
+
   .hero-ws__headline {
     font-size: clamp(1.25rem, 5.5vw, 1.625rem);
     margin-top: 0;
