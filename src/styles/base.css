@@ -6,15 +6,8 @@
 /* Premium tactile design with physical depth, realistic shadows, and material feel */
 
 /* ===== ZERO-DISTRACTION PROTOCOL - Dashboard Stability ===== */
-/* Force instant transitions - no animations anywhere in admin */
-.admin-no-animations,
-.admin-no-animations * {
-  transition-property: none !important;
-  animation: none !important;
-  animation-duration: 0ms !important;
-  transition-duration: 0ms !important;
-}
-/* Override framer-motion's JS-applied opacity:0 on mount */
+/* Suppress framer-motion JS-driven entrance animations only.
+   CSS hover/focus/loading transitions are intentionally preserved. */
 .admin-no-animations [style*="opacity: 0"],
 .admin-no-animations [style*="opacity:0"] {
   opacity: 1 !important;

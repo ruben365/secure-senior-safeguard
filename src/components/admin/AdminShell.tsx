@@ -12,7 +12,6 @@ import {
   ChevronRight,
   Settings,
   LogOut,
-  User,
   ChevronDown,
   Home,
 } from "lucide-react";
@@ -197,7 +196,7 @@ export function AdminShell() {
 
       {/* Persistent Top Header Bar */}
       <header
-        className={`fixed top-0 right-0 left-0 h-16 bg-[#111827]/95 backdrop-blur-xl border-b border-gray-800 z-40 
+        className={`fixed top-0 right-0 left-0 h-16 bg-[#111827]/95 backdrop-blur-xl border-b border-gray-800 z-40 transition-all duration-300
         ${sidebarOpen ? "md:left-[260px]" : "md:left-[70px]"}`}
       >
         <div className="flex items-center justify-between h-full px-4 lg:px-6">
@@ -300,13 +299,6 @@ export function AdminShell() {
                 align="end"
                 className="w-48 bg-[#1F2937] border-gray-800"
               >
-                <DropdownMenuItem
-                  className="text-gray-300 focus:bg-gray-800 focus:text-white cursor-pointer"
-                  onClick={() => navigate("/admin/settings")}
-                >
-                  <User className="w-4 h-4 mr-2" />
-                  Profile
-                </DropdownMenuItem>
                 <DropdownMenuItem
                   className="text-gray-300 focus:bg-gray-800 focus:text-white cursor-pointer"
                   onClick={() => navigate("/admin/settings")}
