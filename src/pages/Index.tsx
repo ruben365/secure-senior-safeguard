@@ -62,7 +62,7 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
             className="py-8"
           />
 
-          <div className="home-color-wash relative isolate">
+          <div className="relative isolate">
 
           {/* 2. Story sections */}
           <section
@@ -169,8 +169,6 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
           </section>
 
           </div>
-          {/* /home-color-wash */}
-
           <Footer />
 
           <ScamShieldSubmission

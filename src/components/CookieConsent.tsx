@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, forwardRef } from "react";
 import { X, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -246,10 +245,9 @@ export const CookieConsent = forwardRef<HTMLDivElement>(function CookieConsent(_
   );
 });
 
-// Type definitions for gtag
 declare global {
   interface Window {
-    gtag?: (...args: any[]) => void;
-    dataLayer?: any[];
+    gtag?: (command: string, ...args: unknown[]) => void;
+    dataLayer?: unknown[];
   }
 }

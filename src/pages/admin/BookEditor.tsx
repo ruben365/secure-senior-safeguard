@@ -112,6 +112,7 @@ export default function BookEditor() {
           .order("chapter_number"),
       ]);
       if (bookRes.error) throw bookRes.error;
+      if (!bookRes.data) throw new Error("Book not found");
       return { book: bookRes.data, chapters: chaptersRes.data ?? [] };
     },
     onSuccess: ({ book, chapters: chs }) => {

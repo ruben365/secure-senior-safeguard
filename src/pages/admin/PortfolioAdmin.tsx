@@ -172,7 +172,7 @@ export default function PortfolioAdmin() {
                     {p.thumbnail_url && (
                       <img
                         src={p.thumbnail_url}
-                        alt=""
+                        alt={p.title}
                         className="w-12 h-12 rounded-lg object-cover flex-shrink-0"
                       />
                     )}

@@ -449,7 +449,7 @@ const OrdersList = () => {
                               <img
                                 key={i}
                                 src={img}
-                                alt=""
+                                alt={`Order item ${i + 1}`}
                                 className="h-6 w-6 rounded-full border-2 border-background"
                               />
                             ))}

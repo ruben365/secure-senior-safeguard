@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface OptimizedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
@@ -12,7 +12,7 @@ interface OptimizedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> 
   objectFit?: "contain" | "cover" | "fill" | "none" | "scale-down";
 }
 
-export function OptimizedImage({
+export const OptimizedImage = memo(function OptimizedImage({
   src,
   alt,
   width,
@@ -23,21 +23,10 @@ export function OptimizedImage({
   objectFit = "cover",
   ...props
 }: OptimizedImageProps) {
-  const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
 
-  // Generate WebP source if original is JPG/PNG
   const webpSrc = src.replace(/\.(jpg|jpeg|png)$/i, ".webp");
   const shouldUseWebP = /\.(jpg|jpeg|png)$/i.test(src);
-
-  const handleLoad = () => {
-    setIsLoaded(true);
-  };
-
-  const handleError = () => {
-    setHasError(true);
-    setIsLoaded(true);
-  };
 
   return (
     <picture>
@@ -50,8 +39,7 @@ export function OptimizedImage({
         loading={priority ? "eager" : "lazy"}
         decoding={priority ? "sync" : "async"}
         sizes={sizes}
-        onLoad={handleLoad}
-        onError={handleError}
+        onError={() => setHasError(true)}
         className={cn(
           hasError && "bg-muted",
           objectFit === "cover" && "object-cover",
@@ -63,4 +51,4 @@ export function OptimizedImage({
       />
     </picture>
   );
-}
+});

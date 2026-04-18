@@ -321,7 +321,7 @@ export default function BooksAdmin() {
                     {book.cover_image ? (
                       <img
                         src={book.cover_image}
-                        alt=""
+                        alt={book.title}
                         className="w-full h-full object-cover"
                       />
                     ) : (

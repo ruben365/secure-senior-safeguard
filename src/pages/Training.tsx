@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useCallback, useMemo, memo } from "react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
@@ -105,15 +104,49 @@ const TRUST_PILLARS = [
   },
 ];
 
+interface TrainingPlan {
+  name: string;
+  type: string;
+  price: string;
+  priceNum: number;
+  pricePrefix?: string;
+  duration: string;
+  size: string;
+  badge: string;
+  description: string;
+  features: string[];
+  popular?: boolean;
+}
+
+interface ScamExample {
+  badge: string;
+  received: string;
+  analysis: string;
+  saved: string;
+}
+
+interface TrainingTestimonial {
+  id: string;
+  name: string;
+  location: string;
+  story: string;
+  rating: number;
+  testimonial_media?: Array<{
+    media_type?: string;
+    thumbnail_url?: string;
+    file_url: string;
+  }>;
+}
+
 const PremiumTrainingCard = memo(
   ({
     plan,
     index,
     onBook,
   }: {
-    plan: any;
+    plan: TrainingPlan;
     index: number;
-    onBook: (plan: any) => void;
+    onBook: (plan: TrainingPlan) => void;
   }) => {
     const isPopular = plan.popular;
 
@@ -271,7 +304,7 @@ const ScamExampleCard = ({
   example,
   index,
 }: {
-  example: any;
+  example: ScamExample;
   index: number;
 }) => {
   return (
@@ -334,7 +367,7 @@ function LearnAndTrain() {
     features?: string[];
     duration?: string;
   } | null>(null);
-  const [trainingTestimonials, setTrainingTestimonials] = useState<any[]>([]);
+  const [trainingTestimonials, setTrainingTestimonials] = useState<TrainingTestimonial[]>([]);
   const [isTestimonialsLoading, setIsTestimonialsLoading] = useState(true);
   const [selectedVideo, setSelectedVideo] = useState<{
     src: string;
@@ -364,7 +397,7 @@ function LearnAndTrain() {
   };
   usePrerenderBlocker(isTestimonialsLoading);
 
-  const handleBookTraining = useCallback((plan: any) => {
+  const handleBookTraining = useCallback((plan: TrainingPlan) => {
     setSelectedService({
       type: "training",
       name: plan.name,
@@ -1253,7 +1286,7 @@ function LearnAndTrain() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 {trainingTestimonials.map((testimonial) => {
                   const videoMedia = testimonial.testimonial_media?.find(
-                    (m: any) => m.media_type === "video",
+                    (m) => m.media_type === "video",
                   );
                   return (
                     <TestimonialCard

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
@@ -342,6 +341,19 @@ const PricingCard = ({
   </AnimatedSection>;
 
 
+interface BusinessTestimonial {
+  id: string;
+  name: string;
+  location: string;
+  story: string;
+  rating: number;
+  testimonial_media?: Array<{
+    media_type?: string;
+    thumbnail_url?: string;
+    file_url: string;
+  }>;
+}
+
 function Business() {
   const [modalOpen, setModalOpen] = useState(false);
   const [inquiryDialogOpen, setInquiryDialogOpen] = useState(false);
@@ -379,7 +391,7 @@ function Business() {
     price?: number;
   } | null>(null);
   const { isAdmin, isLoading } = useAdminStatus();
-  const [businessTestimonials, setBusinessTestimonials] = useState<any[]>([]);
+  const [businessTestimonials, setBusinessTestimonials] = useState<BusinessTestimonial[]>([]);
   const [selectedVideo, setSelectedVideo] = useState<{
     src: string;
     title: string;
@@ -1881,7 +1893,7 @@ function Business() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
                   {businessTestimonials.map((testimonial, i) => {
                 const videoMedia = testimonial.testimonial_media?.find(
-                  (m: any) => m.media_type === "video"
+                  (m: { media_type?: string }) => m.media_type === "video"
                 );
                 return (
                   <AnimatedSection key={testimonial.id} animation="fade-up" delay={i * 100}>
