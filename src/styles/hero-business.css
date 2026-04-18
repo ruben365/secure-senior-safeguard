@@ -455,6 +455,13 @@
   .hero-biz__body { display: none; }
   .hero-biz__panel { display: none; }
 
+  /* Disable entrance animations on mobile to prevent flash/flicker */
+  .hero-biz__kicker,
+  .hero-biz__headline,
+  .hero-biz__body,
+  .hero-biz__ctas,
+  .hero-biz__widget { animation: none; opacity: 1; transform: none; }
+
   .hero-biz__headline { font-size: clamp(1.25rem, 5.5vw, 1.625rem); }
   .hero-biz__content { padding-bottom: 1.5rem; }
 
