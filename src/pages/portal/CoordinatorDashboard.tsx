@@ -496,7 +496,6 @@ function CoordinatorDashboard() {
             </Card>
           </div>
         </div>
-      </div>
     </div>
   );
 }
