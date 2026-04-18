@@ -64,7 +64,7 @@ const plans = [
 
 export default function Pricing() {
   return (
-    <div className="min-h-screen">
+    <div className="hss-root min-h-screen">
       <SEO
         title={PAGE_SEO.pricing.title}
         description={PAGE_SEO.pricing.description}
