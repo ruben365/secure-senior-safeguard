@@ -435,8 +435,8 @@
   width: 40px;
   height: 40px;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.10);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -447,7 +447,7 @@
 .hero-home__feature-icon svg {
   width: 18px;
   height: 18px;
-  color: rgba(255, 255, 255, 0.50);
+  color: rgba(255, 255, 255, 0.72);
   stroke-width: 1.6;
   transition: color 0.25s ease;
 }
@@ -470,8 +470,8 @@
 .hero-home__feature-desc {
   font-size: 0.8125rem;
   font-weight: 400;
-  line-height: 1.45;
-  color: rgba(255, 255, 255, 0.38);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.62);
   margin: 0;
   transition: color 0.25s ease;
 }
@@ -535,18 +535,18 @@
     padding-bottom: 2.25rem;
   }
 
-  /* Scale headline to phone viewport */
+  /* Scale headline to phone viewport — minimum 32px for senior readability */
   .hero-home__headline {
-    font-size: clamp(1.75rem, 7vw, 2.25rem);
+    font-size: clamp(2rem, 8.5vw, 2.625rem);
     margin-bottom: 1.25rem;
     letter-spacing: -0.025em;
   }
 
-  /* Primary CTA — compact pill, stays one clear action */
+  /* Primary CTA — compact pill, minimum 15px font for readability */
   .hero-home__cta {
-    height: 44px;
-    padding: 0 1.75rem;
-    font-size: 0.8125rem;
+    height: 48px;
+    padding: 0 2rem;
+    font-size: 0.9375rem;
   }
 
   /* Overlay: swap side-wall dark for gentle top-to-bottom
