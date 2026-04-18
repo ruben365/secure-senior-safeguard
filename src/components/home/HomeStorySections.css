@@ -1,7 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════════
    HomeStorySections — narrative sections under the hero.
-   Gradient color story: deep black → espresso → coffee → cream → white
-   Cards, text, and glass adapt automatically to each zone.
+   Section backgrounds: white and tint alternate for visual rhythm.
    ═══════════════════════════════════════════════════════════════════ */
 
 /* ─── Design tokens ──────────────────────────────────────────────── */
@@ -22,7 +21,6 @@
 .home-color-wash {
   position: relative;
   isolation: isolate;
-  background: #0a0a0a;
 }
 
 /* Container — transparent so section backgrounds show through */
@@ -36,265 +34,13 @@
   display: none;
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   GRADIENT COLOR STORY — section backgrounds (dark → light)
-   1. near-black  (Feature strip)
-   2. espresso    (Plan cards)
-   3. coffee-dark (How It Works)
-   4. coffee-mid  (Testimonials)
-   5. coffee-warm (Stats)
-   ── gradient bridge ──
-   6. cream       (Workshops)
-   7. warm-white  (Services, FAQ)
-   ═══════════════════════════════════════════════════════════════════ */
-
-/* 1 — Feature strip */
-.hss-section-near-black {
-  background: linear-gradient(180deg, #0a0a0a 0%, #0e0e0e 100%);
-}
-
-/* 2 — Plan cards */
-.hss-section-coffee-espresso {
-  background: linear-gradient(160deg, #1a1412 0%, #2c1e17 55%, #1e1713 100%);
-  position: relative;
-  overflow: hidden;
-}
-.hss-section-coffee-espresso::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 60% 50% at 10% 20%, rgba(217,108,74,0.10) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 60% at 85% 80%, rgba(217,108,74,0.07) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
-}
-.hss-section-coffee-espresso > * { position: relative; z-index: 1; }
-
-/* 3 — How It Works */
-.hss-section-coffee-dark {
-  background: linear-gradient(160deg, #2c1e17 0%, #3d2b1f 50%, #2a1c14 100%);
-}
-
-/* 4 — Testimonials */
-.hss-section-coffee-mid {
-  background: linear-gradient(150deg, #3d2b1f 0%, #4a3728 55%, #3a2a1c 100%);
-  position: relative;
-  overflow: hidden;
-}
-.hss-section-coffee-mid::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 50% 60% at 70% 30%, rgba(217,108,74,0.09) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 50% at 20% 75%, rgba(217,108,74,0.06) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
-}
-.hss-section-coffee-mid > * { position: relative; z-index: 1; }
-
-/* 5 — Stats */
-.hss-section-coffee-warm {
-  background: linear-gradient(150deg, #4a3728 0%, #5e4636 40%, #4a3728 100%);
-  position: relative;
-  overflow: hidden;
-}
-.hss-section-coffee-warm::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 55% 45% at 80% 25%, rgba(217,108,74,0.08) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
-}
-.hss-section-coffee-warm > * { position: relative; z-index: 1; }
-
-/* Bridge — espresso/warm → cream (100px transitional strip) */
-.hss-gradient-bridge {
-  height: 100px;
-  background: linear-gradient(to bottom, #4a3728 0%, #f5f0eb 100%);
-  pointer-events: none;
-}
-
-/* 6 — Workshops */
-.hss-section-cream {
-  background: linear-gradient(160deg, #f5f0eb 0%, #faf7f4 100%);
-  position: relative;
-}
-.hss-section-cream::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 55% 40% at 8% 15%, rgba(217,108,74,0.07) 0%, transparent 65%),
-    radial-gradient(ellipse 45% 55% at 85% 80%, rgba(217,108,74,0.05) 0%, transparent 65%);
-  pointer-events: none;
-  z-index: 0;
-}
-.hss-section-cream > * { position: relative; z-index: 1; }
-
-/* 7 — Services & FAQ */
-.hss-section-warm-white {
-  background: #faf7f4;
-}
-
-/* ─── Legacy aliases (kept for any external references) ──────────── */
-.hss-section-tint {
-  background: linear-gradient(160deg, #f5f0eb 0%, #faf7f4 100%);
-  position: relative;
-}
-.hss-section-tint::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 55% 40% at 8% 15%, rgba(217,108,74,0.07) 0%, transparent 65%),
-    radial-gradient(ellipse 45% 55% at 85% 80%, rgba(217,108,74,0.05) 0%, transparent 65%);
-  pointer-events: none;
-  z-index: 0;
-}
-.hss-section-tint > * { position: relative; z-index: 1; }
-
+/* ─── Section backgrounds ────────────────────────────────────────── */
 .hss-section-white {
   background: var(--hss-bg-white);
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   DARK SECTION OVERRIDES
-   .hss-dark-section is added alongside the background class for every
-   dark zone. It flips text, borders, cards, and surfaces to work on
-   dark espresso/coffee backgrounds.
-   ═══════════════════════════════════════════════════════════════════ */
-
-/* Primary text: near-white */
-.hss-dark-section .text-\[\#111111\],
-.hss-dark-section .text-\[\#1E293B\] {
-  color: rgba(255, 255, 255, 0.95) !important;
-}
-
-/* Secondary text */
-.hss-dark-section .text-\[\#374151\] {
-  color: rgba(255, 255, 255, 0.72) !important;
-}
-
-/* Body/tertiary text */
-.hss-dark-section .text-\[\#6B7280\] {
-  color: rgba(255, 255, 255, 0.55) !important;
-}
-
-/* Muted labels */
-.hss-dark-section .text-\[\#9CA3AF\] {
-  color: rgba(255, 255, 255, 0.42) !important;
-}
-
-/* Dividers and borders */
-.hss-dark-section .border-\[\#E0E0E0\],
-.hss-dark-section .border-\[\#F0F0F0\] {
-  border-color: rgba(255, 255, 255, 0.12) !important;
-}
-
-/* Divide utilities */
-.hss-dark-section .divide-\[\#E0E0E0\] > :not([hidden]) ~ :not([hidden]) {
-  border-color: rgba(255, 255, 255, 0.12) !important;
-}
-
-/* Icon/step bubbles — bg-[#111111] on dark bg → glass white */
-.hss-dark-section .bg-\[\#111111\] {
-  background-color: rgba(255, 255, 255, 0.12) !important;
-}
-
-/* Active plan tab: brand orange overrides the glass-white above */
-.hss-dark-section button[aria-pressed="true"].rounded-full {
-  background-color: #d96c4a !important;
-  color: #ffffff !important;
-}
-
-/* Hover state for bg-[#333333] on dark */
-.hss-dark-section .hover\:bg-\[\#333333\]:hover {
-  background-color: rgba(255, 255, 255, 0.20) !important;
-}
-
-/* Hover text to dark (#111111) on dark bg → near-white */
-.hss-dark-section .hover\:text-\[\#111111\]:hover {
-  color: rgba(255, 255, 255, 0.95) !important;
-}
-
-/* bg-white (tab bar container, nav prev button) → dark glass */
-.hss-dark-section .bg-white {
-  background-color: rgba(255, 255, 255, 0.08) !important;
-}
-
-/* bg-[#F4F4F4] (card image placeholders) → subtle dark glass */
-.hss-dark-section .bg-\[\#F4F4F4\] {
-  background-color: rgba(255, 255, 255, 0.06) !important;
-}
-
-/* hover:bg-[#F4F4F4] → slightly lighter glass */
-.hss-dark-section .hover\:bg-\[\#F4F4F4\]:hover {
-  background-color: rgba(255, 255, 255, 0.14) !important;
-}
-
-/* bg-[#D1D5DB] (inactive testimonial dots) → white/25 */
-.hss-dark-section .bg-\[\#D1D5DB\] {
-  background-color: rgba(255, 255, 255, 0.28) !important;
-}
-
-/* Cards: dark glass surface on dark sections */
-.hss-dark-section .hss-card {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.11);
-  box-shadow:
-    0 4px 24px rgba(0,0,0,0.30),
-    0 16px 48px rgba(0,0,0,0.22),
-    inset 0 1px 0 rgba(255,255,255,0.10),
-    inset 0 -1px 0 rgba(0,0,0,0.06);
-}
-
-.hss-dark-section .hss-card:hover {
-  background: rgba(255, 255, 255, 0.10);
-  border-color: rgba(255, 255, 255, 0.18);
-  box-shadow:
-    0 8px 32px rgba(0,0,0,0.36),
-    0 24px 64px rgba(0,0,0,0.28),
-    inset 0 1px 0 rgba(255,255,255,0.14);
-}
-
-/* Overline pill: dark glass */
-.hss-dark-section .hss-overline {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.88);
-}
-
-.hss-dark-section .hss-overline-dot {
-  background: rgba(255, 255, 255, 0.65);
-}
-
-/* Ghost CTA: white ghost on dark backgrounds */
-.hss-dark-section .hss-cta-ghost {
-  color: rgba(255, 255, 255, 0.80);
-  border-color: rgba(255, 255, 255, 0.28);
-}
-
-.hss-dark-section .hss-cta-ghost:hover {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(255, 255, 255, 0.44);
-  color: rgba(255, 255, 255, 1);
-}
-
-/* Nav arrows (aria-label contains "Previous"/"workshops") */
-.hss-dark-section a[aria-label*="Previous"],
-.hss-dark-section a[aria-label*="workshops"] {
-  background-color: rgba(255, 255, 255, 0.10) !important;
-  border-color: rgba(255, 255, 255, 0.18) !important;
-  color: rgba(255, 255, 255, 0.80) !important;
-}
-
-/* shadow overrides for tab bar */
-.hss-dark-section .shadow-\[0_1px_4px_rgba\(0\,0\,0\,0\.06\)\] {
-  box-shadow: 0 1px 4px rgba(0,0,0,0.40) !important;
+.hss-section-tint {
+  background: var(--hss-bg-gray);
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -487,7 +233,6 @@
   transform: translateY(-4px);
 }
 
-/* Stats bento text handled by .hss-dark-section overrides */
 
 .hss-stats-tile-icon {
   width: 2.75rem;
@@ -627,7 +372,6 @@
    TESTIMONIALS
    ═══════════════════════════════════════════════════════════════════ */
 .hss-testimonial-theater {
-  /* background handled by .hss-section-coffee-mid */
   position: relative;
   overflow: hidden;
 }
@@ -669,7 +413,6 @@
   transform: translateY(-4px);
 }
 
-/* Testimonial nav buttons on dark background — handled by .hss-dark-section overrides */
 
 /* Accent bar — simple neutral */
 .hss-card-accent-bar {
@@ -911,12 +654,6 @@
 
 /* ── Phone (≤480px): additional refinements ───────────────────── */
 @media (max-width: 480px) {
-  /* Hide section blobs that cause CLS flicker on small phones */
-  .hss-section-tint::before,
-  .hss-testimonial-theater::before {
-    opacity: 0.6;
-  }
-
   /* Service card title: scale down on smallest screens */
   .hss-service-title {
     font-size: 1.5rem !important;
