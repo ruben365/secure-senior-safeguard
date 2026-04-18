@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,8 +25,8 @@ import { Badge } from "@/components/ui/badge";
 import { Search, Plus, Download, Eye, Mail, Pencil } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const mockClients: Array<{
-  id: number;
+interface BusinessClient {
+  id: string;
   logo: string;
   companyName: string;
   contactName: string;
@@ -33,7 +35,7 @@ const mockClients: Array<{
   status: string;
   mrr: number;
   joinDate: string;
-}> = [];
+}
 
 export default function BusinessClients() {
   const navigate = useNavigate();
@@ -41,9 +43,32 @@ export default function BusinessClients() {
   const [serviceFilter, setServiceFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("all");
   const [dateFilter, setDateFilter] = useState("all");
-  const [selectedClients, setSelectedClients] = useState<number[]>([]);
+  const [selectedClients, setSelectedClients] = useState<string[]>([]);
 
-  const filteredClients = mockClients.filter((client) => {
+  const { data: clients = [], isLoading } = useQuery({
+    queryKey: ["business-clients"],
+    queryFn: async (): Promise<BusinessClient[]> => {
+      const { data, error } = await supabase
+        .from("service_inquiries")
+        .select("id, company_name, full_name, email, service_name, status, service_price, created_at")
+        .order("created_at", { ascending: false })
+        .limit(100);
+      if (error) throw error;
+      return (data ?? []).map((row) => ({
+        id: row.id,
+        logo: "",
+        companyName: row.company_name || row.full_name,
+        contactName: row.full_name,
+        contactEmail: row.email,
+        services: [row.service_name],
+        status: row.status === "approved" ? "active" : row.status === "pending" ? "trial" : "inactive",
+        mrr: row.service_price ?? 0,
+        joinDate: row.created_at ?? "",
+      }));
+    },
+  });
+
+  const filteredClients = clients.filter((client) => {
     const matchesSearch =
       client.companyName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       client.contactName.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -61,7 +86,7 @@ export default function BusinessClients() {
     return matchesSearch && matchesService && matchesStatus;
   });
 
-  const toggleClientSelection = (id: number) => {
+  const toggleClientSelection = (id: string) => {
     setSelectedClients((prev) =>
       prev.includes(id) ? prev.filter((cid) => cid !== id) : [...prev, id],
     );
@@ -95,7 +120,7 @@ export default function BusinessClients() {
 
   const getServiceBadges = (services: string[]) => {
     const colors: Record<string, string> = {
-      "AI Receptionist": "bg-primary/50/20 text-orange-400 border-primary/30",
+      "AI Receptionist": "bg-orange-500/20 text-orange-400 border-orange-500/30",
       Website: "bg-purple-500/20 text-purple-400 border-purple-500/30",
       "AI Insurance": "bg-teal-500/20 text-teal-400 border-teal-500/30",
       Training: "bg-orange-500/20 text-orange-400 border-orange-500/30",
@@ -132,6 +157,16 @@ export default function BusinessClients() {
       </div>
     );
   };
+
+  if (isLoading) {
+    return (
+      <div className="p-6 max-w-7xl mx-auto space-y-4">
+        {[...Array(5)].map((_, i) => (
+          <div key={i} className="h-16 bg-[#1F2937] rounded-lg animate-pulse" />
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-6">
