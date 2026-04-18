@@ -250,7 +250,7 @@ const PremiumTrainingCard = memo(
                 onClick={() => onBook(plan)}
                 variant={isPopular ? "gold" : "outline"}
                 size="lg"
-                className={`w-full mt-auto rounded-xl h-13 text-base font-bold tracking-wide ${
+                className={`w-full mt-auto rounded-xl h-10 sm:h-12 text-sm sm:text-base font-semibold tracking-wide ${
                   isPopular
                     ? "shadow-[0_4px_24px_hsl(var(--coral-500)/0.35)]"
                     : "hover:border-primary/40 hover:text-primary"
@@ -1293,25 +1293,25 @@ function LearnAndTrain() {
             <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
               Join 100+ families who trust InVision Network for their digital safety
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 flex-wrap justify-center items-center">
               <Button
                 onClick={() =>
                   document.getElementById("training")?.scrollIntoView({ behavior: "smooth" })
                 }
                 size="lg"
-                className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-bold w-full sm:w-auto"
+                className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-5 sm:px-8 py-2.5 sm:py-4 text-sm sm:text-base font-semibold max-w-[260px] w-full sm:max-w-none sm:w-auto"
               >
                 Get Started
-                <ArrowRight className="w-5 h-5 ml-2" />
+                <ArrowRight className="w-4 h-4 ml-1.5" />
               </Button>
               <Button
                 asChild
                 size="lg"
                 variant="outline"
-                className="rounded-full bg-white/10 backdrop-blur-md text-white border-white/30 hover:bg-white/20 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-bold w-full sm:w-auto"
+                className="rounded-full bg-white/10 backdrop-blur-md text-white border-white/30 hover:bg-white/20 px-5 sm:px-8 py-2.5 sm:py-4 text-sm sm:text-base font-semibold max-w-[260px] w-full sm:max-w-none sm:w-auto"
               >
                 <Link to="/contact">
-                  <Headphones className="w-5 h-5 mr-2" />
+                  <Headphones className="w-4 h-4 mr-1.5" />
                   Talk to an Expert
                 </Link>
               </Button>
