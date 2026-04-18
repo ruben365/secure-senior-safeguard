@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Star, Play } from "lucide-react";
 
 interface TestimonialCardProps {
@@ -83,4 +84,4 @@ const TestimonialCard = ({
   );
 };
 
-export default TestimonialCard;
+export default memo(TestimonialCard);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -12,7 +12,7 @@ interface ExpandableServiceCardProps {
   image?: string;
 }
 
-export const ExpandableServiceCard = ({
+const ExpandableServiceCardBase = ({
   icon,
   title,
   summary,
@@ -79,3 +79,5 @@ export const ExpandableServiceCard = ({
     </Card>
   );
 };
+
+export const ExpandableServiceCard = memo(ExpandableServiceCardBase);

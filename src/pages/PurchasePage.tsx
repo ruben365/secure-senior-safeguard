@@ -282,7 +282,7 @@ export default function PurchasePage() {
                   <div className="flex items-start gap-3">
                     <div className="w-12 h-16 rounded overflow-hidden bg-primary/10 flex items-center justify-center shrink-0">
                       {book.cover_image ? (
-                        <img src={book.cover_image} alt={book.title} className="w-full h-full object-cover" />
+                        <img src={book.cover_image} alt={book.title} className="w-full h-full object-cover" loading="lazy" decoding="async" width={48} height={64} />
                       ) : (
                         <BookOpen className="h-5 w-5 text-primary" />
                       )}

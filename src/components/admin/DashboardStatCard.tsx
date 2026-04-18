@@ -2,7 +2,7 @@ import { ArrowRight, LucideIcon } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { useCounterAnimation } from "@/hooks/useCounterAnimation";
-import { KeyboardEvent } from "react";
+import { memo, KeyboardEvent } from "react";
 
 interface DashboardStatCardProps {
   icon: LucideIcon;
@@ -19,7 +19,7 @@ interface DashboardStatCardProps {
   prefix?: string;
 }
 
-export function DashboardStatCard({
+function DashboardStatCardBase({
   icon: Icon,
   iconBgColor,
   title,
@@ -108,3 +108,5 @@ export function DashboardStatCard({
     </div>
   );
 }
+
+export const DashboardStatCard = memo(DashboardStatCardBase);

@@ -393,7 +393,7 @@ const QRCodePaymentStep: React.FC<{ onSuccess: () => void }> = ({ onSuccess }) =
         </button>
       ) : (
         <>
-          <img src={qrCodeUrl} alt="Payment QR Code" className="w-48 h-48 mx-auto rounded-xl bg-white p-3" />
+          <img src={qrCodeUrl} alt="Payment QR Code" className="w-48 h-48 mx-auto rounded-xl bg-white p-3" loading="lazy" decoding="async" width={192} height={192} />
           <p className="text-[12px]" style={{ color: T.white50 }}>
             Scan with your phone camera · Expires in {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, "0")}
           </p>
