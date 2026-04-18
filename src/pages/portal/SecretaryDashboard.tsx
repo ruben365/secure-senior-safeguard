@@ -13,12 +13,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import {
-  ArrowLeft,
   Users,
   MessageSquare,
   CalendarDays,
   ClipboardList,
-  LogOut,
   CheckCircle,
   XCircle,
   Plus,
@@ -60,7 +58,7 @@ interface Appointment {
 function SecretaryDashboard() {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { user, roleConfig, signOut } = useAuth();
+  const { user, roleConfig } = useAuth();
   const queryClient = useQueryClient();
 
   // ── Role guard ──────────────────────────────────────────────────────────────
@@ -233,11 +231,6 @@ function SecretaryDashboard() {
     [toast, queryClient]
   );
 
-  const handleSignOut = async () => {
-    await signOut();
-    navigate("/auth");
-  };
-
   // ── Booking table columns ─────────────────────────────────────────────────────
 
   const bookingColumns: TableColumn<BookingRequest>[] = [
@@ -337,34 +330,11 @@ function SecretaryDashboard() {
   // ── Render ────────────────────────────────────────────────────────────────────
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* Header */}
-      <header className="border-b border-border bg-card/80 backdrop-blur-sm">
-        <div className="container mx-auto py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Button asChild variant="ghost" size="sm">
-                <Link to="/portal">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back
-                </Link>
-              </Button>
-              <div>
-                <h1 className="text-xl font-bold text-foreground">Office Manager</h1>
-                <p className="text-sm text-muted-foreground">
-                  Bookings · Clients · Appointments
-                </p>
-              </div>
-            </div>
-            <Button variant="ghost" size="sm" onClick={handleSignOut}>
-              <LogOut className="w-4 h-4 mr-2" />
-              Sign Out
-            </Button>
-          </div>
-        </div>
-      </header>
-
-      <main className="container mx-auto py-6 space-y-6">
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-xl font-bold text-foreground">Office Manager</h1>
+        <p className="text-sm text-muted-foreground">Bookings · Clients · Appointments</p>
+      </div>
         {/* Stat cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {statCards.map((card) => (
@@ -440,7 +410,7 @@ function SecretaryDashboard() {
             </Card>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

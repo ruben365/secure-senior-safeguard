@@ -13,12 +13,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import {
-  ArrowLeft,
   GraduationCap,
   Users,
   MessageSquare,
   BookOpen,
-  LogOut,
   CheckCircle,
   XCircle,
   Calendar,
@@ -46,7 +44,7 @@ interface ZoomClass {
 function CoordinatorDashboard() {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { roleConfig, signOut } = useAuth();
+  const { roleConfig } = useAuth();
   const queryClient = useQueryClient();
   const [submittingId, setSubmittingId] = useState<string | null>(null);
 
@@ -228,11 +226,6 @@ function CoordinatorDashboard() {
     }
   };
 
-  const handleSignOut = async () => {
-    await signOut();
-    navigate("/auth");
-  };
-
   if (isLoading) return <PortalLoadingSkeleton />;
 
   // ── Derived data ──────────────────────────────────────────────────────────
@@ -277,46 +270,11 @@ function CoordinatorDashboard() {
 
   // ── Render ────────────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* Header */}
-      <header className="border-b border-border bg-card/80 backdrop-blur-sm sticky top-0 z-10">
-        <div className="container mx-auto py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Button
-                asChild
-                variant="ghost"
-                size="sm"
-                className="text-muted-foreground"
-              >
-                <Link to="/portal">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back
-                </Link>
-              </Button>
-              <div>
-                <h1 className="text-xl font-bold text-foreground">
-                  Training Coordinator
-                </h1>
-                <p className="text-sm text-muted-foreground">
-                  Courses · Enrollments · Testimonials
-                </p>
-              </div>
-            </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleSignOut}
-              className="text-muted-foreground"
-            >
-              <LogOut className="w-4 h-4 mr-2" />
-              Sign Out
-            </Button>
-          </div>
-        </div>
-      </header>
-
-      <main className="container mx-auto py-6 space-y-6">
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-xl font-bold text-foreground">Training Coordinator</h1>
+        <p className="text-sm text-muted-foreground">Courses · Enrollments · Testimonials</p>
+      </div>
         {/* Stat Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {statCards.map((card) => (
@@ -538,7 +496,7 @@ function CoordinatorDashboard() {
             </Card>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

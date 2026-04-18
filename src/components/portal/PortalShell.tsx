@@ -107,7 +107,7 @@ export function PortalShell() {
 
       <div
         className={`flex-1 flex flex-col transition-all duration-300 ${
-          sidebarOpen ? "md:ml-64" : "md:ml-[70px]"
+          sidebarOpen ? "md:ml-[260px]" : "md:ml-[70px]"
         }`}
       >
         <PortalTopbar

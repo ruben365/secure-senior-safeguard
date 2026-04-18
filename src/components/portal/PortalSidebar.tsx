@@ -147,7 +147,7 @@ export function PortalSidebar({ isOpen, isMobileOpen, onMobileClose }: PortalSid
           {sections.map((section) => (
             <div key={section.label}>
               {isOpen && (
-                <p className="mb-1 px-3 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+                <p className="mb-1 px-3 text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
                   {section.label}
                 </p>
               )}
