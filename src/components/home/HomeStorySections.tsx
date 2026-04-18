@@ -439,7 +439,7 @@ export const HomeStorySections = () => {
           SECTION 1 — FEATURE STRIP
           Heading row + 3 horizontal feature items with dividers
           ═══════════════════════════════════════════════════════════════ */}
-      <section className="hss-section-near-black hss-dark-section" aria-label="Key protection features">
+      <section className="hss-section-white" aria-label="Key protection features">
         {/* Section heading */}
         <div className="container mx-auto pt-14 pb-10 border-b border-[#F0F0F0]">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
@@ -488,7 +488,7 @@ export const HomeStorySections = () => {
       {/* ═══════════════════════════════════════════════════════════════
           SECTION 2 — PLAN CARDS WITH TAB NAVIGATION
           ═══════════════════════════════════════════════════════════════ */}
-      <section className="hss-section-coffee-espresso hss-dark-section py-10 sm:py-16 md:py-[80px]" aria-labelledby="plans-heading">
+      <section className="hss-section-tint py-10 sm:py-16 md:py-[80px]" aria-labelledby="plans-heading">
         <div className="container mx-auto">
 
           {/* Section intro */}
@@ -590,7 +590,7 @@ export const HomeStorySections = () => {
           Right: 4 numbered steps with dividers
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-coffee-dark hss-dark-section py-10 sm:py-16 md:py-[80px]"
+        className="hss-section-white py-10 sm:py-16 md:py-[80px] border-t border-[#E0E0E0]"
         aria-labelledby="how-heading"
       >
         <div className="container mx-auto">
@@ -656,7 +656,7 @@ export const HomeStorySections = () => {
           Centered header | Left: 2 stacked photos | Right: card + nav
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-testimonial-theater hss-section-coffee-mid hss-dark-section py-10 sm:py-16 md:py-[80px]"
+        className="hss-testimonial-theater py-10 sm:py-16 md:py-[80px]"
         aria-labelledby="testimonials-heading"
       >
         <div className="container mx-auto">
@@ -823,7 +823,7 @@ export const HomeStorySections = () => {
           Left: 3 large stat rows | Right: editorial image overlay
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-coffee-warm hss-dark-section py-10 sm:py-16 md:py-[80px]"
+        className="hss-section-white py-10 sm:py-16 md:py-[80px] border-t border-[#E0E0E0]"
         aria-labelledby="stats-heading"
       >
         <div className="container mx-auto">
@@ -879,14 +879,11 @@ export const HomeStorySections = () => {
         </div>
       </section>
 
-      {/* Gradient bridge: coffee-warm → cream */}
-      <div className="hss-gradient-bridge" aria-hidden="true" />
-
       {/* ═══════════════════════════════════════════════════════════════
           SECTION 6 — WORKSHOPS (4-col card grid)
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-cream py-10 sm:py-16 md:py-[80px]"
+        className="hss-section-tint py-10 sm:py-16 md:py-[80px]"
         aria-labelledby="workshops-heading"
       >
         <div className="container mx-auto">
@@ -982,7 +979,7 @@ export const HomeStorySections = () => {
           SECTION 7 — SERVICES (3-col, first col dark #111111)
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-warm-white py-10 sm:py-16 md:py-[80px]"
+        className="hss-section-white py-10 sm:py-16 md:py-[80px] border-t border-[#E0E0E0]"
         aria-labelledby="services-heading"
       >
         <div className="container mx-auto">

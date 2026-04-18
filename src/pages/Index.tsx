@@ -73,7 +73,7 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
           </section>
 
           {/* 3. FAQ */}
-          <div className="hss-root relative isolate bg-white">
+          <div className="hss-root relative isolate">
             <section
               id="faq"
               aria-label="Frequently asked questions"
