@@ -10,22 +10,25 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: [
-          // Purple primary button
-          "bg-gradient-to-b from-[#7C3AED] to-[#6D28D9] text-white",
-          "border border-[#5B21B6]",
-          "hover:-translate-y-[1px] hover:from-[#8B5CF6] hover:to-[#7C3AED]",
+          // Brand orange primary button
+          "bg-gradient-to-b from-[#e07b52] to-[#d96c4a] text-white",
+          "border border-[#c45e3b]",
+          "shadow-[0_1px_0_0_rgba(255,255,255,0.18)_inset,0_4px_12px_-4px_rgba(217,108,74,0.4)]",
+          "hover:-translate-y-[1px] hover:from-[#ea8560] hover:to-[#e07b52]",
+          "hover:shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_8px_20px_-4px_rgba(217,108,74,0.5)]",
           "active:translate-y-[0.5px]",
         ].join(" "),
         gold: [
-          "bg-gradient-to-b from-[#7C3AED] to-[#6D28D9] text-white",
-          "border border-[#5B21B6]",
-          "hover:translate-y-[-1px] hover:from-[#8B5CF6] hover:to-[#7C3AED]",
+          "bg-gradient-to-b from-[#e07b52] to-[#d96c4a] text-white",
+          "border border-[#c45e3b]",
+          "shadow-[0_1px_0_0_rgba(255,255,255,0.18)_inset,0_4px_12px_-4px_rgba(217,108,74,0.4)]",
+          "hover:translate-y-[-1px] hover:from-[#ea8560] hover:to-[#e07b52]",
           "active:translate-y-[1px]",
         ].join(" "),
         outline: [
           "bg-gradient-to-b from-white to-slate-50 text-slate-800",
           "border-2 border-slate-300",
-          "hover:translate-y-[-1px] hover:border-primary/50 hover:text-primary hover:bg-gradient-to-b hover:from-white hover:to-purple-50/40",
+          "hover:translate-y-[-1px] hover:border-[#d96c4a]/40 hover:text-[#c45e3b] hover:from-white hover:to-orange-50/40",
           "active:translate-y-[1px]",
         ].join(" "),
         outlineGold: [
@@ -50,13 +53,14 @@ const buttonVariants = cva(
           "[transition-duration:250ms] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)]",
         ].join(" "),
         heroPrimary: [
-          // Hero primary — purple accent
-          "bg-gradient-to-b from-[#7C3AED] to-[#6D28D9]",
+          // Hero primary — brand orange accent
+          "bg-gradient-to-b from-[#e07b52] to-[#d96c4a]",
           "text-white font-semibold",
-          "border border-[#5B21B6]",
-          "hover:-translate-y-[1px] hover:from-[#8B5CF6] hover:to-[#7C3AED]",
+          "border border-[#c45e3b]",
+          "shadow-[0_1px_0_0_rgba(255,255,255,0.18)_inset,0_4px_16px_-4px_rgba(217,108,74,0.45)]",
+          "hover:-translate-y-[1px] hover:from-[#ea8560] hover:to-[#e07b52]",
           "active:translate-y-[0.5px] active:scale-[0.98]",
-          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[rgba(124,58,237,0.7)]",
+          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[rgba(217,108,74,0.7)]",
           "[transition-duration:250ms] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)]",
         ].join(" "),
         destructive: [
@@ -75,12 +79,12 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-[34px] sm:h-[38px] px-3 sm:px-4 py-1.5 text-[12px] sm:text-[13px]",
+        default: "h-[36px] sm:h-[40px] px-3.5 sm:px-5 py-1.5 text-[12px] sm:text-[13px]",
         sm: "h-[30px] sm:h-[34px] rounded-md px-2.5 sm:px-3 text-[11px] sm:text-[12px]",
-        lg: "h-[36px] sm:h-[42px] rounded-lg px-4 sm:px-5 text-[12px] sm:text-[14px]",
-        xl: "h-[38px] sm:h-[46px] rounded-lg px-4 sm:px-6 text-[13px] sm:text-[15px]",
+        lg: "h-[42px] sm:h-[48px] rounded-xl px-5 sm:px-7 text-[13px] sm:text-[15px]",
+        xl: "h-[46px] sm:h-[54px] rounded-xl px-6 sm:px-9 text-[14px] sm:text-[16px]",
         icon: "h-[38px] w-[38px]",
-        heroPill: "h-[34px] sm:h-[40px] rounded-full px-4 sm:px-6 text-[11px] sm:text-[13px] tracking-wide gap-1.5",
+        heroPill: "h-[36px] sm:h-[42px] rounded-full px-4 sm:px-6 text-[11px] sm:text-[13px] tracking-wide gap-1.5",
       },
     },
     defaultVariants: {
