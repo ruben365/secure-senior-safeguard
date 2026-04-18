@@ -234,18 +234,18 @@
 /* ── 3c. H1 Headline ──
    Massive, bold, tight. The visual anchor.  */
 .hero-home__headline {
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-  font-weight: 700;
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  font-weight: 800;
   color: var(--hero-text-primary);
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-  margin: 0 0 1.25rem 0;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  margin: 0 0 1.5rem 0;
 }
 
 /* ── 3d. Body / Description ──  */
 .hero-home__body {
-  font-size: 0.9375rem;   /* 15px */
-  line-height: 1.6;
+  font-size: 1rem;   /* 16px */
+  line-height: 1.65;
   color: var(--hero-text-secondary);
   max-width: 480px;
   margin: 0 0 2rem 0;
@@ -262,11 +262,11 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  height: 50px;
-  padding: 0 2.25rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  height: 52px;
+  padding: 0 2.5rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
   color: rgba(255, 255, 255, 0.92);
   border-radius: 50px;
   text-decoration: none;
@@ -484,11 +484,11 @@
 /* Laptop — reduce headline at lg: (1025px–1279px) */
 @media (min-width: 1025px) and (max-width: 1279px) {
   .hero-home__headline {
-    font-size: 2.25rem;
+    font-size: 2.875rem;
   }
 
   .hero-home__body {
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
   }
 }
 
@@ -507,7 +507,7 @@
 /* Laptop — proportional headline (1024px–1440px) */
 @media (min-width: 1024px) and (max-width: 1439.98px) {
   .hero-home__headline {
-    font-size: 2.25rem;
+    font-size: 2.875rem;
   }
 }
 
@@ -537,8 +537,9 @@
 
   /* Scale headline to phone viewport */
   .hero-home__headline {
-    font-size: clamp(1.375rem, 5.5vw, 1.75rem);
+    font-size: clamp(1.75rem, 7vw, 2.25rem);
     margin-bottom: 1.25rem;
+    letter-spacing: -0.025em;
   }
 
   /* Primary CTA — compact pill, stays one clear action */

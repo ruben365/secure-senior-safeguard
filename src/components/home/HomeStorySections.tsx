@@ -470,8 +470,8 @@ export const HomeStorySections = () => {
                 style={{ "--reveal-delay": `${i * 100}ms` } as React.CSSProperties}
                 className="flex items-start gap-4 p-5 sm:p-7 lg:p-10"
               >
-                <div className="w-11 h-11 rounded-full bg-[#111111] flex items-center justify-center flex-shrink-0">
-                  <item.icon className="w-5 h-5 text-white" strokeWidth={2} />
+                <div className="w-11 h-11 rounded-xl bg-[#d96c4a]/10 border border-[#d96c4a]/20 flex items-center justify-center flex-shrink-0 shadow-sm">
+                  <item.icon className="w-5 h-5 text-[#d96c4a]" strokeWidth={2} />
                 </div>
                 <div>
                   <h3 className="text-[15px] font-bold text-[#111111] mb-1.5 leading-tight">
@@ -517,7 +517,7 @@ export const HomeStorySections = () => {
                 aria-pressed={activeTab === tab}
                 className={`px-5 py-2 rounded-full text-[13px] font-semibold transition-all ${
                   activeTab === tab
-                    ? "bg-[#111111] text-white shadow-sm"
+                    ? "bg-[#d96c4a] text-white shadow-[0_2px_8px_rgba(217,108,74,0.35)]"
                     : "text-[#6B7280] hover:text-[#111111]"
                 }`}
               >
@@ -569,10 +569,10 @@ export const HomeStorySections = () => {
                   </ul>
                   {/* Price + CTA */}
                   <div className="flex items-center justify-between pt-4 border-t border-[#F0F0F0]">
-                    <span className="text-[15px] font-extrabold text-[#111111]">{card.price}</span>
+                    <span className="text-[17px] font-black text-[#111111] tracking-tight">{card.price}</span>
                     <Link
                       to="/training"
-                      className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#111111] text-white text-[12px] font-semibold hover:bg-[#333333] transition-colors"
+                      className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#d96c4a] text-white text-[12px] font-semibold hover:bg-[#c45e3b] transition-colors shadow-sm"
                     >
                       View
                     </Link>
@@ -635,7 +635,7 @@ export const HomeStorySections = () => {
                   className={`flex gap-4 sm:gap-5 py-5 sm:py-7 ${i < howItWorks.length - 1 ? "border-b border-[#E0E0E0]" : ""}`}
                 >
                   {/* Step number bubble */}
-                  <div className="w-9 h-9 rounded-full bg-[#111111] text-white flex items-center justify-center text-[12px] font-black flex-shrink-0 mt-0.5">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-b from-[#e07b52] to-[#d96c4a] text-white flex items-center justify-center text-[12px] font-black flex-shrink-0 mt-0.5 shadow-[0_2px_8px_rgba(217,108,74,0.35)]">
                     {String(i + 1).padStart(2, "0")}
                   </div>
                   <div>
@@ -770,7 +770,7 @@ export const HomeStorySections = () => {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                   <Link
                     to="/about"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#111111] text-white text-[13px] font-semibold hover:bg-[#333333] transition-colors w-full sm:w-auto"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#d96c4a] text-white text-[13px] font-semibold hover:bg-[#c45e3b] transition-colors w-full sm:w-auto shadow-sm"
                   >
                     See More <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
@@ -804,7 +804,7 @@ export const HomeStorySections = () => {
                         type="button"
                         onClick={nextTesti}
                         aria-label="Next testimonial"
-                        className="w-9 h-9 rounded-full bg-[#111111] text-white flex items-center justify-center hover:bg-[#333333] transition-colors shadow-sm"
+                        className="w-9 h-9 rounded-full bg-[#d96c4a] text-white flex items-center justify-center hover:bg-[#c45e3b] transition-colors shadow-sm"
                       >
                         <ChevronRight className="w-4 h-4" />
                       </button>
@@ -910,7 +910,7 @@ export const HomeStorySections = () => {
               <Link
                 to="/training"
                 aria-label="Next workshops"
-                className="w-9 h-9 rounded-full bg-[#111111] flex items-center justify-center text-white hover:bg-[#333333] transition-colors shadow-[0_1px_4px_rgba(0,0,0,0.10)]"
+                className="w-9 h-9 rounded-full bg-[#d96c4a] flex items-center justify-center text-white hover:bg-[#c45e3b] transition-colors shadow-[0_2px_8px_rgba(217,108,74,0.35)]"
               >
                 <ChevronRight className="w-4 h-4" />
               </Link>
@@ -952,7 +952,7 @@ export const HomeStorySections = () => {
                     <span className="text-[13px] font-extrabold text-[#111111]">{ws.price}</span>
                     <Link
                       to={ws.href}
-                      className="inline-flex items-center justify-center px-3.5 py-1.5 rounded-full bg-[#111111] text-white text-[11px] font-semibold hover:bg-[#333333] transition-colors"
+                      className="inline-flex items-center justify-center px-3.5 py-1.5 rounded-full bg-[#d96c4a] text-white text-[11px] font-semibold hover:bg-[#c45e3b] transition-colors shadow-sm"
                     >
                       View
                     </Link>
@@ -1005,10 +1005,10 @@ export const HomeStorySections = () => {
                 key={svc.num}
                 data-reveal
                 style={{ "--reveal-delay": `${i * 110}ms` } as React.CSSProperties}
-                className={`rounded-[14px] p-5 sm:p-8 lg:p-10 flex flex-col ${
+                className={`rounded-[14px] p-5 sm:p-8 lg:p-10 flex flex-col transition-all duration-300 ${
                   svc.dark
-                    ? "bg-[#111111]"
-                    : "bg-white border border-[#E0E0E0] shadow-[0px_2px_10px_rgba(0,0,0,0.06)]"
+                    ? "bg-[#111111] hover:shadow-[0_12px_32px_rgba(0,0,0,0.25)]"
+                    : "bg-white border border-[#E0E0E0] shadow-[0px_2px_10px_rgba(0,0,0,0.06)] hover:-translate-y-1 hover:shadow-[0px_8px_24px_rgba(0,0,0,0.10)] hover:border-[#d96c4a]/25"
                 }`}
               >
                 {/* Number */}

@@ -169,14 +169,16 @@
 
 /* Primary CTA pill */
 .hss-cta-primary {
-  background: var(--hss-dark);
+  background: linear-gradient(180deg, #e07b52 0%, #d96c4a 100%);
   color: #ffffff;
-  box-shadow: var(--hss-shadow-sm);
+  border: 1px solid #c45e3b;
+  box-shadow: 0 1px 0 0 rgba(255,255,255,0.18) inset, 0 4px 12px -4px rgba(217,108,74,0.4);
 }
 
 .hss-cta-primary:hover {
-  background: #333333;
-  box-shadow: var(--hss-shadow-md);
+  background: linear-gradient(180deg, #ea8560 0%, #e07b52 100%);
+  box-shadow: 0 1px 0 0 rgba(255,255,255,0.22) inset, 0 8px 20px -4px rgba(217,108,74,0.5);
+  border-color: #b85535;
 }
 
 /* Ghost CTA pill */
