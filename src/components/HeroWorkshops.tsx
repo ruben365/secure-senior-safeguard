@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import {
   Phone, Shield, ShieldCheck,
   Settings, Server, Lock,
+  Clock, MapPin, Award,
 } from "lucide-react";
 import workshopHero from "@/assets/learn_and_train.png";
 import { SITE } from "@/config/site";
@@ -58,6 +59,18 @@ export const HeroWorkshops = () => {
         <div className="hero-ws__glow" aria-hidden="true" />
       </div>
 
+      {/* Mobile status badge */}
+      <div className="sm:hidden absolute top-[88px] inset-x-0 flex justify-center z-20 px-4 pointer-events-none" aria-hidden="true">
+        <div className="inline-flex items-center gap-2.5 rounded-full px-4 py-2 border border-white/15" style={{background: "rgba(255,255,255,0.08)", backdropFilter: "blur(12px)"}}>
+          <span className="relative flex h-2 w-2 flex-shrink-0">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+          </span>
+          <Shield className="w-3.5 h-3.5 text-orange-400 flex-shrink-0" />
+          <span className="text-[11px] font-semibold text-white/90 tracking-wider uppercase">Expert Workshops · Ohio &amp; Zoom</span>
+        </div>
+      </div>
+
       {/* ── Main Layout: Left Content + Right Widget ── */}
       <div className="hero-ws__content [justify-content:flex-start] sm:[justify-content:center] [padding-top:6rem] sm:[padding-top:unset]">
         <div className="hero-ws__layout">
@@ -87,6 +100,24 @@ export const HeroWorkshops = () => {
               secondaryText="See Pricing"
               secondaryHref="/training#pricing"
             />
+
+            {/* Mobile-only: compact trust indicators */}
+            <div className="sm:hidden flex items-center mt-5">
+              <span className="flex items-center gap-1.5 text-[11px] font-medium text-white/60">
+                <Clock className="w-3 h-3 text-orange-400/75 flex-shrink-0" />
+                24/7 Monitoring
+              </span>
+              <span className="mx-2.5 text-white/25 select-none">·</span>
+              <span className="flex items-center gap-1.5 text-[11px] font-medium text-white/60">
+                <MapPin className="w-3 h-3 text-orange-400/75 flex-shrink-0" />
+                Ohio-Based
+              </span>
+              <span className="mx-2.5 text-white/25 select-none">·</span>
+              <span className="flex items-center gap-1.5 text-[11px] font-medium text-white/60">
+                <Award className="w-3 h-3 text-orange-400/75 flex-shrink-0" />
+                Veteran Owned
+              </span>
+            </div>
           </div>
 
           {/* Right — Floating Glass Card (matches reference) */}
