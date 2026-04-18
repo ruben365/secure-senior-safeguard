@@ -8,7 +8,7 @@ const priorityDot: Record<string, string> = { high: "bg-red-500", medium: "bg-am
 const statusStyle: Record<string, string> = {
   completed: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
   pending: "bg-amber-500/15 text-amber-400 border-amber-500/30",
-  "in-progress": "bg-primary/50/15 text-orange-400 border-primary/30",
+  "in-progress": "bg-orange-500/10 text-orange-400 border-orange-500/30",
 };
 
 export function NeonTasksCard({ tasks }: { tasks: Task[] }) {

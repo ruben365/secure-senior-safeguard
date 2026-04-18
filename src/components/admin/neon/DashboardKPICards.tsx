@@ -1,4 +1,3 @@
-import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { Calendar, Mail, Users, Newspaper } from "lucide-react";
 
@@ -52,17 +51,17 @@ export function DashboardKPICards({ stats }: { stats: KPIStats }) {
         const value = stats[kpi.key];
         return (
           <Link key={kpi.key} to={kpi.href}>
-            <Card
-              className={`bg-card border-border border-l-4 ${kpi.accent} p-5 hover:shadow-md transition-shadow cursor-pointer`}
+            <div
+              className={`bg-[#1F2937] border border-[#374151] border-l-4 ${kpi.accent} rounded-lg p-5 hover:border-[#4B5563] hover:bg-[#243040] transition-all cursor-pointer`}
             >
               <div className="flex items-center justify-between mb-3">
                 <Icon className={`h-5 w-5 ${kpi.iconColor}`} />
               </div>
-              <p className="text-3xl font-semibold text-foreground tracking-tight">
-                {value ?? "\u2014"}
+              <p className="text-3xl font-semibold text-[#F9FAFB] tracking-tight">
+                {value ?? 0}
               </p>
-              <p className="text-sm text-muted-foreground mt-1">{kpi.label}</p>
-            </Card>
+              <p className="text-sm text-[#9CA3AF] mt-1">{kpi.label}</p>
+            </div>
           </Link>
         );
       })}

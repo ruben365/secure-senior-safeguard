@@ -93,8 +93,13 @@ export function CyberSidebar({ isOpen, isMobileOpen, onMobileClose }: CyberSideb
     setExpandedMenus((prev) => prev.includes(title) ? prev.filter((t) => t !== title) : [...prev, title]);
   };
 
-  const isActive = (href?: string) => href && location.pathname === href;
-  const isChildActive = (children?: { href: string }[]) => children?.some((c) => location.pathname === c.href);
+  const isActive = (href?: string) => {
+    if (!href) return false;
+    if (href === "/admin") return location.pathname === "/admin";
+    return location.pathname.startsWith(href);
+  };
+  const isChildActive = (children?: { href: string }[]) =>
+    children?.some((c) => location.pathname === c.href || location.pathname.startsWith(c.href + "/"));
 
   const SidebarContent = () => (
     <div className="flex flex-col h-full bg-[#111827] border-r border-[#1F2937]">
@@ -126,6 +131,7 @@ export function CyberSidebar({ isOpen, isMobileOpen, onMobileClose }: CyberSideb
               {item.children ? (
                 <button
                   onClick={() => toggleMenu(item.title)}
+                  title={!isOpen ? item.title : undefined}
                   className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-colors text-sm
                     ${active ? "bg-[#1F2937] text-[#F9FAFB]" : "text-[#9CA3AF] hover:text-[#F9FAFB] hover:bg-[#1F2937]/50"}`}
                 >
@@ -153,7 +159,7 @@ export function CyberSidebar({ isOpen, isMobileOpen, onMobileClose }: CyberSideb
                     return (
                       <Link key={child.href} to={child.href} onClick={onMobileClose}
                         className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors
-                          ${location.pathname === child.href
+                          ${(location.pathname === child.href || location.pathname.startsWith(child.href + "/"))
                             ? "text-orange-400 bg-orange-500/10"
                             : "text-[#6B7280] hover:text-[#F9FAFB] hover:bg-[#1F2937]/50"}`}>
                         {ChildIcon && <ChildIcon className="h-3.5 w-3.5" />}

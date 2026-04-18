@@ -210,16 +210,16 @@ export default function AdminDashboardContent() {
                 ? "border-l-yellow-400"
                 : "border-l-red-500";
             return (
-              <Card
+              <div
                 key={p.name}
-                className={`flex items-center gap-2 px-3 py-2 border-l-4 ${borderColor} min-w-[110px]`}
+                className={`flex items-center gap-2 px-3 py-2 bg-[#1F2937] border border-[#374151] border-l-4 ${borderColor} rounded-lg min-w-[110px]`}
               >
                 <span className={`inline-block w-2 h-2 rounded-full shrink-0 ${dotColor}`} />
                 <div className="flex flex-col leading-tight">
-                  <span className="text-xs font-medium text-foreground">{p.name}</span>
-                  <span className="text-[11px] text-muted-foreground">{p.healthy}/{p.total}</span>
+                  <span className="text-xs font-medium text-[#F9FAFB]">{p.name}</span>
+                  <span className="text-[11px] text-[#6B7280]">{p.healthy}/{p.total}</span>
                 </div>
-              </Card>
+              </div>
             );
           })}
         </div>
