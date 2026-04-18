@@ -91,7 +91,7 @@ function Articles() {
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center">
                 <BookOpen className="w-8 h-8 text-muted-foreground" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">No Articles Yet</h3>
+              <h2 className="text-xl font-semibold mb-2">No Articles Yet</h2>
               <p className="text-muted-foreground">
                 Check back soon for new content!
               </p>

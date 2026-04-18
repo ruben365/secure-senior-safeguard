@@ -115,7 +115,7 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
             <div className="relative z-10 w-full">
               <div className="container mx-auto py-14 md:py-16 lg:py-20">
                 <div
-                  className={`max-w-xl transition-all duration-500 ease-out ${
+                  className={`max-w-xl transition-[opacity,transform] duration-500 ease-out ${
                     ctaVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                   }`}
                 >

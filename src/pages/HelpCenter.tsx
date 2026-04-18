@@ -91,7 +91,7 @@ export default function HelpCenter() {
                 >
                   <CardContent className="pt-6 text-center">
                     <span className="text-3xl">{categoryIcons[cat] || "📄"}</span>
-                    <h3 className="font-medium mt-2 capitalize">{cat}</h3>
+                    <h2 className="font-medium mt-2 capitalize">{cat}</h2>
                     <p className="text-sm text-muted-foreground">{articles?.filter((a) => a.category === cat).length} articles</p>
                   </CardContent>
                 </Card>
