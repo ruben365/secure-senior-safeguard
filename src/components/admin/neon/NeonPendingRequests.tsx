@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
@@ -13,34 +13,66 @@ interface PendingItem {
   time: string;
 }
 
+const formatTimeAgo = (dateString: string) => {
+  const diffMs = Date.now() - new Date(dateString).getTime();
+  const diffMins = Math.floor(diffMs / 60000);
+  const diffHours = Math.floor(diffMins / 60);
+  const diffDays = Math.floor(diffHours / 24);
+  if (diffMins < 60) return `${diffMins}m ago`;
+  if (diffHours < 24) return `${diffHours}h ago`;
+  return `${diffDays}d ago`;
+};
+
+const typeConfig: Record<string, { icon: typeof BookOpen; color: string; bg: string }> = {
+  booking:     { icon: BookOpen,      color: "text-orange-400", bg: "bg-orange-500/10" },
+  inquiry:     { icon: MessageSquare, color: "text-green-400",  bg: "bg-green-500/10"  },
+  application: { icon: Briefcase,     color: "text-purple-400", bg: "bg-purple-500/10" },
+  testimonial: { icon: Star,          color: "text-amber-400",  bg: "bg-amber-500/10"  },
+  order:       { icon: ShoppingCart,  color: "text-pink-400",   bg: "bg-pink-500/10"   },
+};
+
+const typeLinks: Record<string, string> = {
+  booking:     "/admin/bookings",
+  inquiry:     "/admin/service-inquiries",
+  application: "/admin/job-applications",
+  testimonial: "/admin/content/testimonials",
+  order:       "/admin/ecommerce/orders",
+};
+
 export function NeonPendingRequests() {
   const [items, setItems] = useState<PendingItem[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { fetchPendingItems(); }, []);
-
-  const fetchPendingItems = async () => {
+  const fetchPendingItems = useCallback(async () => {
     try {
+      const [bookingsRes, applicationsRes, testimonialsRes] = await Promise.all([
+        supabase.from("booking_requests")
+          .select("id, full_name, service_name, created_at")
+          .eq("status", "pending")
+          .order("created_at", { ascending: false })
+          .limit(3),
+        supabase.from("job_applications")
+          .select("id, name, position, created_at")
+          .eq("status", "pending")
+          .order("created_at", { ascending: false })
+          .limit(2),
+        supabase.from("testimonials")
+          .select("id, name, created_at")
+          .eq("status", "pending")
+          .order("created_at", { ascending: false })
+          .limit(2),
+      ]);
+
       const allItems: PendingItem[] = [];
-
-      const { data: bookings } = await supabase.from("booking_requests")
-        .select("id, full_name, service_name, created_at").eq("status", "pending")
-        .order("created_at", { ascending: false }).limit(3);
-
-      bookings?.forEach((b) => allItems.push({ id: b.id, type: "booking", title: b.service_name, subtitle: b.full_name, time: formatTimeAgo(b.created_at) }));
-
-      const { data: applications } = await supabase.from("job_applications")
-        .select("id, name, position, created_at").eq("status", "pending")
-        .order("created_at", { ascending: false }).limit(2);
-
-      applications?.forEach((a) => allItems.push({ id: a.id, type: "application", title: a.position, subtitle: a.name, time: formatTimeAgo(a.created_at) }));
-
-      const { data: testimonials } = await supabase.from("testimonials")
-        .select("id, name, created_at").eq("status", "pending")
-        .order("created_at", { ascending: false }).limit(2);
-
-      testimonials?.forEach((t) => allItems.push({ id: t.id, type: "testimonial", title: "New Testimonial", subtitle: t.name, time: formatTimeAgo(t.created_at) }));
+      bookingsRes.data?.forEach((b) =>
+        allItems.push({ id: b.id, type: "booking", title: b.service_name, subtitle: b.full_name, time: formatTimeAgo(b.created_at) })
+      );
+      applicationsRes.data?.forEach((a) =>
+        allItems.push({ id: a.id, type: "application", title: a.position, subtitle: a.name, time: formatTimeAgo(a.created_at) })
+      );
+      testimonialsRes.data?.forEach((t) =>
+        allItems.push({ id: t.id, type: "testimonial", title: "New Testimonial", subtitle: t.name, time: formatTimeAgo(t.created_at) })
+      );
 
       setItems(allItems.slice(0, 6));
     } catch (err) {
@@ -48,31 +80,9 @@ export function NeonPendingRequests() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const formatTimeAgo = (dateString: string) => {
-    const diffMs = Date.now() - new Date(dateString).getTime();
-    const diffMins = Math.floor(diffMs / 60000);
-    const diffHours = Math.floor(diffMins / 60);
-    const diffDays = Math.floor(diffHours / 24);
-    if (diffMins < 60) return `${diffMins}m ago`;
-    if (diffHours < 24) return `${diffHours}h ago`;
-    return `${diffDays}d ago`;
-  };
-
-  const typeConfig: Record<string, { icon: typeof BookOpen; color: string; bg: string }> = {
-    booking: { icon: BookOpen, color: "text-orange-400", bg: "bg-primary/50/10" },
-    inquiry: { icon: MessageSquare, color: "text-green-400", bg: "bg-green-500/10" },
-    application: { icon: Briefcase, color: "text-purple-400", bg: "bg-purple-500/10" },
-    testimonial: { icon: Star, color: "text-amber-400", bg: "bg-amber-500/10" },
-    order: { icon: ShoppingCart, color: "text-pink-400", bg: "bg-pink-500/10" },
-  };
-
-  const typeLinks: Record<string, string> = {
-    booking: "/admin/bookings", inquiry: "/admin/service-inquiries",
-    application: "/admin/job-applications", testimonial: "/admin/content/testimonials",
-    order: "/admin/ecommerce/orders",
-  };
+  useEffect(() => { fetchPendingItems(); }, [fetchPendingItems]);
 
   return (
     <Card className="bg-[#1F2937] border-[#374151] p-5">
@@ -103,15 +113,15 @@ export function NeonPendingRequests() {
             return (
               <Link key={`${item.type}-${item.id}`} to={typeLinks[item.type] || "/admin"}>
                 <div className="flex items-center gap-3 p-3 bg-[#111827] rounded-lg border border-[#374151] hover:border-[#4B5563] transition-colors group">
-                  <div className={`w-8 h-8 ${cfg.bg} rounded-lg flex items-center justify-center`}>
+                  <div className={`w-8 h-8 ${cfg.bg} rounded-lg flex items-center justify-center flex-shrink-0`}>
                     <Icon className={`w-4 h-4 ${cfg.color}`} />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-[#F9FAFB] truncate">{item.title}</p>
                     <p className="text-xs text-[#6B7280] truncate">{item.subtitle}</p>
                   </div>
-                  <span className="text-xs text-[#6B7280]">{item.time}</span>
-                  <ChevronRight className="w-4 h-4 text-[#4B5563] group-hover:text-[#9CA3AF] transition-colors" />
+                  <span className="text-xs text-[#6B7280] flex-shrink-0">{item.time}</span>
+                  <ChevronRight className="w-4 h-4 text-[#4B5563] group-hover:text-[#9CA3AF] transition-colors flex-shrink-0" />
                 </div>
               </Link>
             );

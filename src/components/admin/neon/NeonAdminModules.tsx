@@ -21,7 +21,7 @@ interface ModuleStats {
 }
 
 const modules = [
-  { title: "Security", icon: Shield, href: "/admin", color: "text-orange-400" },
+  { title: "Security", icon: Shield, href: "/admin", color: "text-red-400" },
   { title: "Content", icon: FileText, href: "/admin/content/pages", color: "text-purple-400" },
   { title: "Clients", icon: Users, href: "/admin/clients/businesses", color: "text-orange-400" },
   { title: "E-Commerce", icon: ShoppingCart, href: "/admin/ecommerce/products", color: "text-emerald-400", badgeKey: "lowStockProducts" as const },
@@ -44,7 +44,7 @@ export function NeonAdminModules({ stats }: { stats?: ModuleStats }) {
         <Layers className="w-4 h-4" />
         Modules
       </h2>
-      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {modules.map((m) => {
           const Icon = m.icon;
           const badge = getBadge(m.badgeKey);

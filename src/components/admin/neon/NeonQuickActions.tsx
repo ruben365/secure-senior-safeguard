@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 
 const actions = [
-  { label: "Add Product", icon: Package, href: "/admin/ecommerce/products" },
+  { label: "Add Product", icon: Package, href: "/admin/ecommerce/products/new" },
   { label: "Create Article", icon: FileText, href: "/admin/content/articles" },
   { label: "View Bookings", icon: Calendar, href: "/admin/bookings" },
   { label: "Email Campaign", icon: Mail, href: "/admin/email-campaigns" },
