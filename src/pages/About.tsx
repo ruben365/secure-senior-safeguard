@@ -151,7 +151,6 @@ function About() {
         <HeroFloatingStats />
       </div>
 
-      <div className="hss-root">
       {/* Spacer for floating stats bar */}
       <div className="hidden lg:block h-8" />
       <div className="lg:hidden h-4" />
@@ -465,7 +464,6 @@ function About() {
       </section>
 
       <Footer />
-      </div>{/* end .hss-root */}
 
       {isAdmin && showAdminBanner && (
         <div className="fixed bottom-4 right-4 bg-primary text-primary-foreground p-4 rounded-lg shadow-lg z-50 max-w-sm">

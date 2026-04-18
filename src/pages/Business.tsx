@@ -470,7 +470,7 @@ function Business() {
 
   return (
     <PageTransition variant="fade">
-      <div className="hss-root min-h-screen">
+      <div className="min-h-screen">
         <SEO
           title="AI Automation & Business Solutions — Kettering & Dayton, Ohio"
           description="Transform your Ohio business with AI receptionists, automated follow-ups, custom websites, and AI insurance. Your AI front desk runs 24/7 — never miss a call. Serving Kettering, Dayton, and Southwest Ohio."

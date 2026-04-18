@@ -27,9 +27,6 @@
 @import "./styles/premium-body.css";
 @import "./styles/polish.css";
 
-/* Obsidian & Copper design system — dark glassmorphism layer */
-@import "./styles/warm-polish.css";
-
 /* ═══════════════════════════════════════════════════════════════════
    GLOBAL OVERRIDES — no shadows, HD sharpness
    ═══════════════════════════════════════════════════════════════════ */

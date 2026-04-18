@@ -202,7 +202,6 @@ function Contact() {
         </Hero>
       </div>
 
-      <div className="hss-root">
       <MeshBackground variant="vibrant" withOrbs>
       <div className="py-16 relative overflow-hidden">
         <div className="container mx-auto relative z-10">
@@ -674,7 +673,6 @@ function Contact() {
       </section>
 
       <Footer />
-      </div>{/* end .hss-root */}
     </PageTransition>
   );
 }
