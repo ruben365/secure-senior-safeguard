@@ -410,7 +410,6 @@ function SecretaryDashboard() {
             </Card>
           </div>
         </div>
-      </div>
     </div>
   );
 }

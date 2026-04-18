@@ -156,7 +156,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
           className="footer-aura absolute right-0 top-0 w-[600px] h-full pointer-events-none opacity-50"
         />
 
-        <div className="max-w-[1200px] mx-auto w-full px-4 sm:px-8 py-8 relative z-10">
+        <div className="max-w-[1200px] mx-auto w-full px-4 sm:px-8 py-5 relative z-10">
 
           {/* ─────────── TOP ROW — Brand left + Newsletter card right ─────────── */}
           <div className="flex flex-col lg:flex-row justify-between w-full gap-6 lg:gap-12">
@@ -209,7 +209,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
 
             {/* Newsletter card — pushed to far right */}
             <div className="lg:flex lg:justify-end lg:flex-shrink-0">
-              <div className="footer-newsletter-card w-full lg:w-[440px] rounded-2xl p-5 border border-white/10">
+              <div className="footer-newsletter-card w-full lg:w-[440px] rounded-2xl p-4 border border-white/10">
                 <p className="text-[11px] font-bold text-orange-400/90 uppercase tracking-[0.18em] mb-1.5">
                   Stay Protected
                 </p>
@@ -251,13 +251,13 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
           </div>
 
           {/* ─────────── MIDDLE — 5 nav columns stretched across full width ─────────── */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 lg:gap-x-12 gap-y-8 w-full mt-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 lg:gap-x-12 gap-y-6 w-full mt-5">
             {navColumns.map((col) => (
               <div key={col.heading}>
                 <h4 className="font-bold text-[13px] mb-2 text-white uppercase tracking-[0.18em] leading-tight">
                   {col.heading}
                 </h4>
-                <ul className="space-y-1.5">
+                <ul className="space-y-1">
                   {col.links.map((link) => (
                     <li key={link.to}>
                       <Link
@@ -274,7 +274,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
           </div>
 
           {/* ─────────── BOTTOM — Copyright + badges + socials ─────────── */}
-          <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4 mt-8 pt-5 border-t border-gray-800">
+          <div className="flex flex-col md:flex-row justify-between items-center w-full gap-3 mt-5 pt-3 border-t border-gray-800">
             {/* Left cluster: copyright + trust badges — pushed to far left */}
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-6 gap-y-3">
               <p className="text-[13px] text-white/70">
@@ -313,7 +313,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
           </div>
 
           {/* Support statement */}
-          <div className="flex items-center justify-center gap-2 mt-4 mb-2">
+          <div className="flex items-center justify-center gap-2 mt-2 mb-1">
             <Heart className="w-3.5 h-3.5 text-orange-400/70 flex-shrink-0" />
             <p className="text-[12px] text-white/75 text-center max-w-2xl leading-snug">
               We proudly support veterans and children with cancer. A portion
@@ -322,7 +322,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
           </div>
 
           {/* Disclaimer */}
-          <p className="text-white/55 text-xs text-center leading-tight max-w-4xl mx-auto mt-4">
+          <p className="text-white/55 text-xs text-center leading-tight max-w-4xl mx-auto mt-2">
             InVision Network provides educational services only. We are not
             legal, financial, tax, or licensed cybersecurity professionals. In
             case of active fraud, identity theft, or criminal activity, contact

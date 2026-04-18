@@ -488,7 +488,7 @@ export const HomeStorySections = () => {
       {/* ═══════════════════════════════════════════════════════════════
           SECTION 2 — PLAN CARDS WITH TAB NAVIGATION
           ═══════════════════════════════════════════════════════════════ */}
-      <section className="hss-section-white py-12 sm:py-20 md:py-[96px]" aria-labelledby="plans-heading">
+      <section className="hss-section-white py-8 sm:py-14 md:py-16" aria-labelledby="plans-heading">
         <div className="container mx-auto">
 
           {/* Section intro */}
@@ -590,7 +590,7 @@ export const HomeStorySections = () => {
           Right: 4 numbered steps with dividers
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-tint py-12 sm:py-20 md:py-[96px]"
+        className="hss-section-tint py-8 sm:py-14 md:py-16"
         aria-labelledby="how-heading"
       >
         <div className="container mx-auto">
@@ -632,7 +632,7 @@ export const HomeStorySections = () => {
                   key={step.step}
                   data-reveal="slide-right"
                   style={{ "--reveal-delay": `${i * 110}ms` } as React.CSSProperties}
-                  className={`flex gap-4 sm:gap-5 py-5 sm:py-7 ${i < howItWorks.length - 1 ? "border-b border-[#E0E0E0]" : ""}`}
+                  className={`flex gap-4 sm:gap-5 py-3 sm:py-5 ${i < howItWorks.length - 1 ? "border-b border-[#E0E0E0]" : ""}`}
                 >
                   {/* Step number bubble */}
                   <div className="w-9 h-9 rounded-full bg-gradient-to-b from-[#e07b52] to-[#d96c4a] text-white flex items-center justify-center text-[12px] font-black flex-shrink-0 mt-0.5 shadow-[0_2px_8px_rgba(217,108,74,0.35)]">
@@ -656,13 +656,13 @@ export const HomeStorySections = () => {
           Centered header | Left: 2 stacked photos | Right: card + nav
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-testimonial-theater hss-section-white py-12 sm:py-20 md:py-[96px]"
+        className="hss-testimonial-theater hss-section-white py-8 sm:py-14 md:py-16"
         aria-labelledby="testimonials-heading"
       >
         <div className="container mx-auto">
 
           {/* Centered header */}
-          <div className="text-center mb-14">
+          <div className="text-center mb-8">
             <p
               data-reveal
               className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#d96c4a] mb-3"
@@ -823,14 +823,14 @@ export const HomeStorySections = () => {
           Left: 3 large stat rows | Right: editorial image overlay
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-tint py-12 sm:py-20 md:py-[96px]"
+        className="hss-section-tint py-8 sm:py-14 md:py-16"
         aria-labelledby="stats-heading"
       >
         <div className="container mx-auto">
           {/* Section intro */}
           <div className="mb-2">
             <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#d96c4a] mb-2">By the numbers</p>
-            <h2 id="stats-heading" className="text-[1.75rem] md:text-[2rem] font-extrabold text-[#111111] tracking-tight leading-[1.1] mb-8">
+            <h2 id="stats-heading" className="text-[1.75rem] md:text-[2rem] font-extrabold text-[#111111] tracking-tight leading-[1.1] mb-4">
               The impact in Ohio — and growing.
             </h2>
           </div>
@@ -883,7 +883,7 @@ export const HomeStorySections = () => {
           SECTION 6 — WORKSHOPS (4-col card grid)
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-white py-12 sm:py-20 md:py-[96px]"
+        className="hss-section-white py-8 sm:py-14 md:py-16"
         aria-labelledby="workshops-heading"
       >
         <div className="container mx-auto">
@@ -979,7 +979,7 @@ export const HomeStorySections = () => {
           SECTION 7 — SERVICES (3-col, first col dark #111111)
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-tint py-12 sm:py-20 md:py-[96px]"
+        className="hss-section-tint py-8 sm:py-14 md:py-16"
         aria-labelledby="services-heading"
       >
         <div className="container mx-auto">
