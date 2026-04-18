@@ -75,22 +75,26 @@ export default function Pricing() {
       <Navigation />
 
       {/* Hero */}
-      <section className="min-h-[100dvh] flex items-center pt-[clamp(100px,14vw,140px)] pb-10 bg-background text-center">
-        <div className="container mx-auto max-w-4xl">
-          <Badge className="mb-4">Simple, Transparent Pricing</Badge>
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-            Protection Plans for Every Need
+      <section className="relative min-h-[60dvh] flex items-center pt-[clamp(100px,14vw,140px)] pb-16 overflow-hidden text-center">
+        {/* Subtle warm background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#fff8f5] via-background to-background pointer-events-none" />
+        {/* Decorative glow */}
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#d96c4a]/6 rounded-full blur-3xl pointer-events-none" />
+        <div className="container mx-auto max-w-4xl relative z-10">
+          <Badge className="mb-4 bg-[#d96c4a]/10 text-[#c45e3b] border-[#d96c4a]/20 font-semibold tracking-wide">Simple, Transparent Pricing</Badge>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-5 leading-[1.08]">
+            Protection Plans<br className="hidden sm:block" /> for Every Need
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
             Whether you're protecting your family, hosting a workshop, or securing your business — we have a plan for you.
           </p>
-          <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
-            <span className="inline-flex items-center gap-1.5">
-              <Award className="w-4 h-4 text-primary" />
+          <div className="flex flex-wrap justify-center gap-5 text-sm text-muted-foreground">
+            <span className="inline-flex items-center gap-1.5 bg-card border border-border rounded-full px-3.5 py-1.5 shadow-sm">
+              <Award className="w-4 h-4 text-[#d96c4a]" />
               10% veteran discount
             </span>
-            <span className="inline-flex items-center gap-1.5">
-              <Star className="w-4 h-4 text-primary" />
+            <span className="inline-flex items-center gap-1.5 bg-card border border-border rounded-full px-3.5 py-1.5 shadow-sm">
+              <Star className="w-4 h-4 text-[#d96c4a]" />
               30-day money-back guarantee
             </span>
           </div>
@@ -106,34 +110,34 @@ export default function Pricing() {
               return (
                 <div
                   key={plan.name}
-                  className={`rounded-xl border p-8 flex flex-col ${
+                  className={`rounded-2xl border p-8 flex flex-col transition-all duration-300 ${
                     plan.highlight
-                      ? "border-primary shadow-lg shadow-primary/10 bg-primary/5 dark:bg-primary/10"
-                      : "border-border bg-card shadow-sm"
+                      ? "border-[#d96c4a]/40 shadow-xl shadow-[#d96c4a]/10 bg-gradient-to-b from-[#fff7f4] to-white ring-1 ring-[#d96c4a]/15 hover:-translate-y-1"
+                      : "border-border bg-card shadow-sm hover:-translate-y-0.5 hover:shadow-md"
                   }`}
                 >
                   {plan.highlight && (
-                    <Badge className="w-fit mb-4 bg-primary text-white">Most Popular</Badge>
+                    <Badge className="w-fit mb-4 bg-[#d96c4a] text-white border-0">Most Popular</Badge>
                   )}
                   <div className="mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 dark:bg-primary/20 flex items-center justify-center mb-3">
-                      <Icon className="w-6 h-6 text-primary" />
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-3 ${plan.highlight ? "bg-[#d96c4a]/10 border border-[#d96c4a]/20" : "bg-primary/10"}`}>
+                      <Icon className={`w-6 h-6 ${plan.highlight ? "text-[#d96c4a]" : "text-primary"}`} />
                     </div>
                     <h2 className="text-xl font-bold mb-1">{plan.name}</h2>
                     <p className="text-3xl font-bold text-foreground mb-2">{plan.price}</p>
                     <p className="text-sm text-muted-foreground">{plan.description}</p>
                   </div>
 
-                  <ul className="space-y-2 mb-8 flex-1">
+                  <ul className="space-y-2.5 mb-8 flex-1">
                     {plan.features.map((f) => (
                       <li key={f} className="flex items-start gap-2 text-sm">
-                        <CheckCircle className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                        <CheckCircle className={`w-4 h-4 flex-shrink-0 mt-0.5 ${plan.highlight ? "text-[#d96c4a]" : "text-primary"}`} />
                         {f}
                       </li>
                     ))}
                   </ul>
 
-                  <Button asChild className={plan.highlight ? "bg-primary hover:bg-primary/90 text-white" : ""} variant={plan.highlight ? "default" : "outline"}>
+                  <Button asChild size="lg" variant={plan.highlight ? "default" : "outline"}>
                     <Link to="/contact">{plan.cta}</Link>
                   </Button>
                 </div>

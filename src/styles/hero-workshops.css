@@ -153,11 +153,11 @@
 
 /* ── Headline ── */
 .hero-ws__headline {
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-  font-weight: 700;
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  font-weight: 800;
   color: var(--ws-text-main);
-  line-height: 1.08;
-  letter-spacing: -0.02em;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
   margin: 1.25rem 0;
   animation: wsFadeUp 0.5s ease-out 0.1s both;
 }
@@ -226,18 +226,18 @@
   outline-offset: 3px;
 }
 
-/* Primary — glass with warm orange accent glow */
+/* Primary — brand orange gradient */
 .hero-ws__cta--primary {
-  background: linear-gradient(135deg, #c2410c, #9a3412);
-  border: 1px solid rgba(249, 115, 22, 0.35);
-  box-shadow: none;
+  background: linear-gradient(180deg, #e07b52 0%, #d96c4a 100%);
+  border: 1px solid #c45e3b;
+  box-shadow: 0 1px 0 0 rgba(255,255,255,0.18) inset, 0 4px 16px -4px rgba(217,108,74,0.45);
 }
 
 .hero-ws__cta--primary:hover {
-  background: linear-gradient(135deg, #ea580c, #c2410c);
-  border-color: rgba(249, 115, 22, 0.5);
+  background: linear-gradient(180deg, #ea8560 0%, #e07b52 100%);
+  border-color: #b85535;
   transform: translateY(-2px);
-  box-shadow: none;
+  box-shadow: 0 1px 0 0 rgba(255,255,255,0.22) inset, 0 8px 20px -4px rgba(217,108,74,0.5);
 }
 
 /* Secondary — subtle glass border */
@@ -711,11 +711,11 @@
 /* Laptop — proportional headline (1024px–1440px) */
 @media (min-width: 1024px) and (max-width: 1439.98px) {
   .hero-ws__headline {
-    font-size: 2.25rem;
+    font-size: 2.875rem;
   }
 
   .hero-ws__body {
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
   }
 }
 
@@ -763,7 +763,7 @@
   .hero-ws__widget { animation: none; opacity: 1; transform: none; }
 
   .hero-ws__headline {
-    font-size: clamp(1.25rem, 5.5vw, 1.625rem);
+    font-size: clamp(1.75rem, 7vw, 2.25rem);
     margin-top: 0;
   }
 

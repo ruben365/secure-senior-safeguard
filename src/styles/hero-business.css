@@ -141,11 +141,11 @@
 
 /* Headline — matches Workshop/other pages scale */
 .hero-biz__headline {
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-  font-weight: 700;
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  font-weight: 800;
   color: var(--biz-text);
   line-height: 1.05;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   text-transform: uppercase;
   margin: 0 0 1.25rem 0;
   animation: bizFadeUp 0.5s ease-out 0.1s both;
@@ -202,15 +202,18 @@
   outline-offset: 3px;
 }
 
-/* Primary — solid orange, white text, no shadow */
+/* Primary — brand orange gradient */
 .hero-biz__cta--primary {
-  background: linear-gradient(135deg, #c2410c, #9a3412);
-  border: 1px solid #7c2d12;
+  background: linear-gradient(180deg, #e07b52 0%, #d96c4a 100%);
+  border: 1px solid #c45e3b;
+  box-shadow: 0 1px 0 0 rgba(255,255,255,0.18) inset, 0 4px 16px -4px rgba(217,108,74,0.45);
 }
 
 .hero-biz__cta--primary:hover {
-  background: linear-gradient(135deg, #ea580c, #c2410c);
+  background: linear-gradient(180deg, #ea8560 0%, #e07b52 100%);
+  border-color: #b85535;
   transform: translateY(-1px);
+  box-shadow: 0 1px 0 0 rgba(255,255,255,0.22) inset, 0 8px 20px -4px rgba(217,108,74,0.5);
 }
 
 /* Secondary — subtle glass border */
@@ -436,11 +439,11 @@
 /* Laptop — proportional headline (1024px–1440px) */
 @media (min-width: 1024px) and (max-width: 1439.98px) {
   .hero-biz__headline {
-    font-size: 2.25rem;
+    font-size: 2.875rem;
   }
 
   .hero-biz__body {
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
   }
 }
 
@@ -462,7 +465,7 @@
   .hero-biz__ctas,
   .hero-biz__widget { animation: none; opacity: 1; transform: none; }
 
-  .hero-biz__headline { font-size: clamp(1.25rem, 5.5vw, 1.625rem); }
+  .hero-biz__headline { font-size: clamp(1.75rem, 7vw, 2.25rem); }
   .hero-biz__content { padding-bottom: 1.5rem; }
 
   /* Overlay: gentle top-to-bottom so subject is visible */
