@@ -488,7 +488,7 @@ export const HomeStorySections = () => {
       {/* ═══════════════════════════════════════════════════════════════
           SECTION 2 — PLAN CARDS WITH TAB NAVIGATION
           ═══════════════════════════════════════════════════════════════ */}
-      <section className="hss-section-white py-10 sm:py-16 md:py-[80px]" aria-labelledby="plans-heading">
+      <section className="hss-section-white py-12 sm:py-20 md:py-[96px]" aria-labelledby="plans-heading">
         <div className="container mx-auto">
 
           {/* Section intro */}
@@ -590,7 +590,7 @@ export const HomeStorySections = () => {
           Right: 4 numbered steps with dividers
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-tint py-10 sm:py-16 md:py-[80px]"
+        className="hss-section-tint py-12 sm:py-20 md:py-[96px]"
         aria-labelledby="how-heading"
       >
         <div className="container mx-auto">
@@ -656,7 +656,7 @@ export const HomeStorySections = () => {
           Centered header | Left: 2 stacked photos | Right: card + nav
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-testimonial-theater hss-section-white py-10 sm:py-16 md:py-[80px]"
+        className="hss-testimonial-theater hss-section-white py-12 sm:py-20 md:py-[96px]"
         aria-labelledby="testimonials-heading"
       >
         <div className="container mx-auto">
@@ -823,7 +823,7 @@ export const HomeStorySections = () => {
           Left: 3 large stat rows | Right: editorial image overlay
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-tint py-10 sm:py-16 md:py-[80px]"
+        className="hss-section-tint py-12 sm:py-20 md:py-[96px]"
         aria-labelledby="stats-heading"
       >
         <div className="container mx-auto">
@@ -883,7 +883,7 @@ export const HomeStorySections = () => {
           SECTION 6 — WORKSHOPS (4-col card grid)
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-white py-10 sm:py-16 md:py-[80px]"
+        className="hss-section-white py-12 sm:py-20 md:py-[96px]"
         aria-labelledby="workshops-heading"
       >
         <div className="container mx-auto">
@@ -979,7 +979,7 @@ export const HomeStorySections = () => {
           SECTION 7 — SERVICES (3-col, first col dark #111111)
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-tint py-10 sm:py-16 md:py-[80px]"
+        className="hss-section-tint py-12 sm:py-20 md:py-[96px]"
         aria-labelledby="services-heading"
       >
         <div className="container mx-auto">
@@ -993,7 +993,7 @@ export const HomeStorySections = () => {
               id="services-heading"
               data-reveal
               style={{ "--reveal-delay": "80ms" } as React.CSSProperties}
-              className="text-[1.75rem] md:text-[2.25rem] font-extrabold text-[#111111] tracking-tight"
+              className="text-[1.75rem] md:text-[2rem] font-extrabold text-[#111111] tracking-tight"
             >
               Our Services
             </h2>

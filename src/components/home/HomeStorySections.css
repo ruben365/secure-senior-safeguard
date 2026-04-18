@@ -6,13 +6,13 @@
 /* ─── Design tokens ──────────────────────────────────────────────── */
 :root {
   --hss-bg-white:   #FFFFFF;
-  --hss-bg-gray:    #F4F4F4;
+  --hss-bg-gray:    #F0F2F5;
   --hss-dark:       #111111;
-  --hss-border:     #E0E0E0;
-  --hss-shadow-sm:  0px 2px 10px rgba(0, 0, 0, 0.06);
-  --hss-shadow-md:  0px 6px 20px rgba(0, 0, 0, 0.10);
-  --hss-radius:     14px;
-  --hss-section-py: 80px;
+  --hss-border:     #D8DCE3;
+  --hss-shadow-sm:  0px 2px 10px rgba(0, 0, 0, 0.07);
+  --hss-shadow-md:  0px 6px 24px rgba(0, 0, 0, 0.11);
+  --hss-radius:     16px;
+  --hss-section-py: 96px;
 }
 
 /* ═══════════════════════════════════════════════════════════════════
