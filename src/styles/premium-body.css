@@ -257,7 +257,9 @@ nav { z-index: 50 !important; }
   .hover-lift,
   .gradient-border::before,
   .section-accent-line,
-  .shimmer {
+  .shimmer,
+  .cookie-banner,
+  .cookie-banner__card {
     animation: none;
     transition: none;
   }
