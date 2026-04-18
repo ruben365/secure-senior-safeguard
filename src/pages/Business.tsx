@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
@@ -1881,7 +1880,7 @@ function Business() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
                   {businessTestimonials.map((testimonial, i) => {
                 const videoMedia = testimonial.testimonial_media?.find(
-                  (m: any) => m.media_type === "video"
+                  (m: { media_type?: string }) => m.media_type === "video"
                 );
                 return (
                   <AnimatedSection key={testimonial.id} animation="fade-up" delay={i * 100}>

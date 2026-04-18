@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactNode } from "react";
 import {
   Shield,
@@ -153,7 +152,7 @@ export function TrustBadgeInline({
   icon: Icon,
   label,
 }: {
-  icon: any;
+  icon: React.ComponentType<{ className?: string }>;
   label: string;
 }) {
   return (
