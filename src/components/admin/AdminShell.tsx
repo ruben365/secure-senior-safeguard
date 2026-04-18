@@ -52,33 +52,34 @@ export function AdminShell() {
     try {
       await signOut();
       toast({
-        title: "👋 Signed Out Successfully",
+        title: "Signed Out",
         description: "You've been securely logged out.",
       });
       navigate("/auth");
     } catch (error) {
       toast({
         title: "Error",
-        description: error.message,
+        description: error instanceof Error ? error.message : "Failed to sign out.",
         variant: "destructive",
       });
     }
   }, [signOut, navigate, toast]);
 
-  // Auto-logout after inactivity
+  // Auto-logout after inactivity — signs out quietly then shows one toast
   const resetInactivityTimer = useCallback(() => {
     if (inactivityTimerRef.current) {
       clearTimeout(inactivityTimerRef.current);
     }
-    inactivityTimerRef.current = setTimeout(() => {
+    inactivityTimerRef.current = setTimeout(async () => {
+      try { await signOut(); } catch { /* ignore errors during auto-logout */ }
       toast({
         title: "Session Expired",
         description: "You've been logged out due to inactivity.",
         variant: "destructive",
       });
-      handleSignOut();
+      navigate("/auth");
     }, INACTIVITY_TIMEOUT);
-  }, [handleSignOut, toast]);
+  }, [signOut, navigate, toast]);
 
   useEffect(() => {
     const events = [
