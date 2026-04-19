@@ -175,7 +175,7 @@ function Security() {
       </section>
 
       {/* Trust Badges */}
-      <section className="py-10 bg-muted/30 border-y border-border/40">
+      <section className="py-10 section-warm-alt border-y border-[#d96c4a]/12">
         <div className="container mx-auto">
           <div className="flex flex-wrap justify-center items-center gap-8">
             {[

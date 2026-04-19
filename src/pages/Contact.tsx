@@ -660,7 +660,7 @@ function Contact() {
       <BookingCalendar />
 
       {/* Internal links — related pages */}
-      <section className="py-8 bg-muted/30">
+      <section className="py-8 section-warm-alt">
         <div className="container mx-auto">
           <p className="text-sm text-muted-foreground text-center max-w-2xl mx-auto">
             Not sure where to start?{" "}
