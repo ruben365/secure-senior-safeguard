@@ -457,7 +457,7 @@ export const BookingModal = ({
                         >
                           <FormControl>
                             <SelectTrigger className="h-11 bg-white border-gray-200 text-gray-900">
-                              <SelectValue placeholder="Select State *" className="text-white/40" />
+                              <SelectValue placeholder="Select State *" className="text-gray-400" />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent className="max-h-[200px]">
