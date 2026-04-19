@@ -487,12 +487,12 @@ export function TrainingPaymentModal({
                         placeholder="Phone"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        className="h-9 pl-8 text-sm bg-white/[0.08] border-white/[0.15] text-white placeholder:text-white/40 focus:bg-white/[0.12] focus:border-white/30"
+                        className="h-9 pl-8 text-sm bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a]"
                       />
                     </div>
                     <Select value={state} onValueChange={setState}>
                       <SelectTrigger className="h-9 text-sm bg-white border-gray-200 text-gray-900">
-                        <SelectValue placeholder="State" className="text-white/40" />
+                        <SelectValue placeholder="State" className="text-gray-400" />
                       </SelectTrigger>
                       <SelectContent className="max-h-[200px]">
                         {US_STATES.map((s) => (
