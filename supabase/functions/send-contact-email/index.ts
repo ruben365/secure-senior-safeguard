@@ -233,7 +233,7 @@ const handler = async (req: Request): Promise<Response> => {
             <hr style="border: 1px solid #e5e5e5; margin: 20px 0;">
             <p>In the meantime, feel free to:</p>
             <ul>
-              <li>Call us: <a href="tel:9373018749">(937) 301-8749</a></li>
+              <li>Call us: <a href="(937) 749-7579">(937) 749-7579</a></li>
               <li>Email us: <a href="mailto:hello@invisionnetwork.org">hello@invisionnetwork.org</a></li>
               <li>Visit our website: <a href="https://www.invisionnetwork.org">www.invisionnetwork.org</a></li>
             </ul>
