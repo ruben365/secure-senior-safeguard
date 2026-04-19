@@ -580,15 +580,6 @@
     backdrop-filter: blur(12px);
   }
 
-  /* ===== SKEUOMORPHISM 2.0 GLOBAL EFFECTS ===== */
-
-  /* All cards get subtle raised effect */
-  .rounded-xl,
-  .rounded-2xl,
-  .rounded-3xl {
-    box-shadow: var(--skeuo-shadow-raised);
-  }
-
   /* Premium section backgrounds with depth */
   section {
     position: relative;
