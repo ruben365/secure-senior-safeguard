@@ -32,7 +32,7 @@ function CtaPrimary({ to, children }: { to: string; children: React.ReactNode })
   return (
     <Link
       to={to}
-      className="hss-cta-primary inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-6 sm:px-8 rounded-full text-[13px] sm:text-[14px] font-semibold transition-all hover:-translate-y-[2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px]"
+      className="hss-cta-primary inline-flex items-center justify-center gap-2 h-10 sm:h-12 px-5 sm:px-8 rounded-full text-[13px] sm:text-[14px] font-semibold transition-all hover:-translate-y-[2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px]"
     >
       {children}
     </Link>
@@ -43,7 +43,7 @@ function CtaGhost({ to, children }: { to: string; children: React.ReactNode }) {
   return (
     <Link
       to={to}
-      className="hss-cta-ghost inline-flex items-center justify-center gap-2 h-11 sm:h-12 px-6 sm:px-8 rounded-full text-[13px] sm:text-[14px] font-semibold transition-all hover:-translate-y-[1px] border border-[#E0E0E0]"
+      className="hss-cta-ghost inline-flex items-center justify-center gap-2 h-10 sm:h-12 px-5 sm:px-8 rounded-full text-[13px] sm:text-[14px] font-semibold transition-all hover:-translate-y-[1px] border border-[#E0E0E0]"
     >
       {children}
     </Link>
@@ -966,7 +966,7 @@ export const HomeStorySections = () => {
           <div className="text-center">
             <Link
               to="/training"
-              className="inline-flex items-center gap-2 px-7 py-3 rounded-full border border-[#E0E0E0] bg-white text-[13px] font-semibold text-[#111111] hover:bg-[#F4F4F4] transition-colors shadow-[0_1px_4px_rgba(0,0,0,0.06)]"
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#E0E0E0] bg-white text-[13px] font-semibold text-[#111111] hover:bg-[#F4F4F4] transition-colors shadow-[0_1px_4px_rgba(0,0,0,0.06)]"
             >
               See All Programs <ArrowRight className="w-3.5 h-3.5" />
             </Link>

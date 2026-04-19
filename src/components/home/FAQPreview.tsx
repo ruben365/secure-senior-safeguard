@@ -106,7 +106,7 @@ export const FAQPreview = () => {
                   value={`faq-${index}`}
                   className="hss-card rounded-2xl overflow-hidden border-0"
                 >
-                  <AccordionTrigger className="text-left font-bold text-[#1E293B] hover:no-underline px-6 py-5 [&[data-state=open]]:text-[#b8552f] [&>svg]:text-[#1E293B]/50">
+                  <AccordionTrigger className="text-left font-bold text-[#1E293B] hover:no-underline px-6 py-3 [&[data-state=open]]:text-[#b8552f] [&>svg]:text-[#1E293B]/50">
                     <span className="flex items-center gap-4 pr-4">
                       <span className="hss-icon-tile w-9 h-9 rounded-xl text-[13px] font-bold flex-shrink-0">
                         {index + 1}
