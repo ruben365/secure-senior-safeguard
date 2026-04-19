@@ -27,6 +27,9 @@
 @import "./styles/premium-body.css";
 @import "./styles/polish.css";
 
+/* Site-wide warm gradient unification — imported last to win the cascade */
+@import "./styles/site-unification.css";
+
 /* ═══════════════════════════════════════════════════════════════════
    GLOBAL OVERRIDES — no shadows, HD sharpness
    ═══════════════════════════════════════════════════════════════════ */

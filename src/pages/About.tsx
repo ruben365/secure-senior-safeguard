@@ -225,7 +225,7 @@ function About() {
       <SectionDivider variant="wave" color="muted" />
 
       {/* Timeline */}
-      <section className="py-10 md:py-14 bg-muted/30 relative overflow-hidden">
+      <section className="py-10 md:py-14 section-warm relative overflow-hidden">
 
         <div className="container mx-auto">
           <div className="text-center mb-8">
@@ -260,7 +260,7 @@ function About() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
-            <Card className="p-5 sm:p-6 border border-border/40 bg-card/70 backdrop-blur-xl shadow-sm hover:shadow-lg hover:border-primary/20 transition-all duration-300 hover:-translate-y-1">
+            <Card className="hss-card p-5 sm:p-6 border border-border/40 bg-card/70">
               <div className="relative mb-4">
                 <div className="w-full aspect-[4/3] bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl flex items-center justify-center border-2 border-dashed border-primary/30">
                   <div className="text-center p-4">

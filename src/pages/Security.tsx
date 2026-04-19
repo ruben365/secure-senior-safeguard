@@ -20,8 +20,6 @@ const securityCards = [
   {
     icon: Lock,
     title: "Data Protection",
-    color: "text-primary",
-    bg: "bg-primary/5",
     items: [
       "TLS 1.3 encryption for all data in transit",
       "AES-256 encryption for all data at rest",
@@ -32,8 +30,6 @@ const securityCards = [
   {
     icon: Shield,
     title: "Authentication",
-    color: "text-emerald-600",
-    bg: "bg-emerald-50",
     items: [
       "Multi-Factor Authentication (MFA/2FA) supported",
       "OAuth via Google and Microsoft",
@@ -44,8 +40,6 @@ const securityCards = [
   {
     icon: Server,
     title: "Infrastructure",
-    color: "text-purple-600",
-    bg: "bg-purple-50",
     items: [
       "US-hosted data centers (no overseas data transfer)",
       "Automated daily backups with 30-day retention",
@@ -56,8 +50,6 @@ const securityCards = [
   {
     icon: Eye,
     title: "Privacy",
-    color: "text-orange-600",
-    bg: "bg-orange-50",
     items: [
       "GDPR-aware data practices",
       "We never sell or share your personal data",
@@ -76,8 +68,6 @@ const securityCards = [
   {
     icon: AlertTriangle,
     title: "Incident Response",
-    color: "text-red-600",
-    bg: "bg-red-50",
     items: [
       "Dedicated security incident response team",
       "Affected users notified within 72 hours of any breach",
@@ -95,8 +85,6 @@ const securityCards = [
   {
     icon: Award,
     title: "Compliance",
-    color: "text-amber-600",
-    bg: "bg-amber-50",
     items: [
       "Aligned with Ohio cybersecurity standards",
       "Working toward SOC 2 Type II certification",
@@ -119,7 +107,7 @@ function Security() {
       <Navigation />
 
       {/* Hero */}
-      <section className="min-h-[100dvh] flex items-center pt-[clamp(100px,14vw,140px)] pb-10 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+      <section className="min-h-[60dvh] flex items-center pt-[clamp(100px,14vw,140px)] pb-16 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
         <div className="container mx-auto text-center">
           <div className="flex justify-center mb-6">
             <div className="w-16 h-16 rounded-2xl bg-primary/20 border border-primary/30 flex items-center justify-center">
@@ -164,10 +152,10 @@ function Security() {
               return (
                 <Card
                   key={card.title}
-                  className="p-5 border border-border/40 bg-card/70 hover:shadow-md hover:border-primary/20 transition-all duration-300 hover:-translate-y-1"
+                  className="hss-card p-5 border border-border/40 bg-card/70"
                 >
-                  <div className={`w-10 h-10 rounded-xl ${card.bg} flex items-center justify-center mb-4`}>
-                    <Icon className={`w-5 h-5 ${card.color}`} />
+                  <div className="hss-icon-bubble mb-4">
+                    <Icon className="w-5 h-5 text-[#d96c4a]" />
                   </div>
                   <h3 className="text-base font-bold text-foreground mb-3">{card.title}</h3>
                   <ul className="space-y-2">
@@ -187,7 +175,7 @@ function Security() {
       </section>
 
       {/* Trust Badges */}
-      <section className="py-10 bg-muted/30 border-y border-border/40">
+      <section className="py-10 section-warm-alt border-y border-[#d96c4a]/12">
         <div className="container mx-auto">
           <div className="flex flex-wrap justify-center items-center gap-8">
             {[

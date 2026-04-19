@@ -148,19 +148,23 @@ export default function Pricing() {
       </section>
 
       {/* Veteran Discount + Guarantee */}
-      <section className="py-12 bg-muted/30">
+      <section className="py-12 section-warm-alt">
         <div className="container mx-auto max-w-3xl text-center">
           <h2 className="text-2xl font-bold mb-4">Our Commitment to You</h2>
           <div className="grid sm:grid-cols-2 gap-6 text-left">
-            <div className="bg-card border border-border rounded-xl shadow-sm p-6">
-              <Award className="w-7 h-7 text-primary mb-2" />
+            <div className="hss-card bg-card border border-border/50 rounded-xl p-6">
+              <div className="hss-icon-bubble mb-3">
+                <Award className="w-5 h-5 text-[#d96c4a]" />
+              </div>
               <h3 className="font-semibold mb-1">Veteran Discount — 10% Off</h3>
               <p className="text-sm text-muted-foreground">
                 We proudly support those who served. Active duty military and veterans receive 10% off all plans. Contact us to verify and apply your discount.
               </p>
             </div>
-            <div className="bg-card border border-border rounded-xl shadow-sm p-6">
-              <Star className="w-7 h-7 text-primary mb-2" />
+            <div className="hss-card bg-card border border-border/50 rounded-xl p-6">
+              <div className="hss-icon-bubble mb-3">
+                <Star className="w-5 h-5 text-[#d96c4a]" />
+              </div>
               <h3 className="font-semibold mb-1">30-Day Money-Back Guarantee</h3>
               <p className="text-sm text-muted-foreground">
                 Not satisfied in the first 30 days? We'll refund you — no questions asked. Your trust matters more than the sale.

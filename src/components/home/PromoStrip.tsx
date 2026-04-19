@@ -28,7 +28,7 @@ const steps = [
 
 export const PromoStrip = () => {
   return (
-    <section className="py-16 md:py-28 bg-muted/30 relative overflow-hidden">
+    <section className="py-16 md:py-28 section-warm relative overflow-hidden">
       <div className="absolute top-10 left-1/3 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
       

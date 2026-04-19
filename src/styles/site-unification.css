@@ -1,0 +1,126 @@
+/* ═══════════════════════════════════════════════════════════════════
+   SITE UNIFICATION — warm gradient system
+   Adds cohesive visual depth across all public pages.
+   Import after polish.css so it wins the cascade without !important.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Warm section utility classes ──────────────────────────────── */
+.section-warm {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 248, 245, 0.7) 0%,
+    rgba(240, 234, 228, 0.35) 100%
+  );
+}
+
+.section-warm-alt {
+  background: linear-gradient(
+    180deg,
+    rgba(217, 108, 74, 0.03) 0%,
+    rgba(253, 247, 242, 0.55) 50%,
+    rgba(217, 108, 74, 0.025) 100%
+  );
+}
+
+/* ── Card depth hover system ───────────────────────────────────── */
+.hss-card {
+  transition: box-shadow 0.22s ease-out, transform 0.22s ease-out, border-color 0.22s ease-out;
+}
+
+.hss-card:hover {
+  box-shadow:
+    0 0 0 1px rgba(217, 108, 74, 0.18),
+    0 8px 32px -8px rgba(217, 108, 74, 0.14),
+    0 2px 8px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+  border-color: rgba(217, 108, 74, 0.22) !important;
+}
+
+/* ── Icon bubble — warm tint ───────────────────────────────────── */
+.hss-icon-bubble {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(217, 108, 74, 0.12) 0%, rgba(217, 108, 74, 0.06) 100%);
+  border: 1px solid rgba(217, 108, 74, 0.18);
+  flex-shrink: 0;
+}
+
+.hss-icon-bubble-lg {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(217, 108, 74, 0.14) 0%, rgba(217, 108, 74, 0.07) 100%);
+  border: 1px solid rgba(217, 108, 74, 0.2);
+  flex-shrink: 0;
+}
+
+/* ── Stats number gradient text ────────────────────────────────── */
+.hss-stat-num {
+  background: linear-gradient(135deg, #d96c4a 0%, #c2410c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Section gradient divider ──────────────────────────────────── */
+.hss-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(217, 108, 74, 0.2) 25%,
+    rgba(217, 108, 74, 0.35) 50%,
+    rgba(217, 108, 74, 0.2) 75%,
+    transparent 100%
+  );
+  margin: 0;
+  border: none;
+}
+
+/* ── Hero glow decorative ──────────────────────────────────────── */
+.hss-hero-glow {
+  position: absolute;
+  top: 33%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(600px, 90vw);
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(217, 108, 74, 0.07) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+/* ── Partner card — featured ───────────────────────────────────── */
+.hss-partner-featured {
+  background: linear-gradient(135deg, rgba(217, 108, 74, 0.06) 0%, rgba(255, 255, 255, 1) 60%);
+  border: 1px solid rgba(217, 108, 74, 0.28);
+  box-shadow:
+    0 0 0 1px rgba(217, 108, 74, 0.08),
+    0 12px 40px -12px rgba(217, 108, 74, 0.18);
+}
+
+/* ── Event card ────────────────────────────────────────────────── */
+.hss-event-card {
+  transition: box-shadow 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.hss-event-card:hover {
+  box-shadow:
+    0 0 0 1px rgba(217, 108, 74, 0.2),
+    0 12px 40px -12px rgba(217, 108, 74, 0.15);
+  transform: translateY(-2px);
+}
+
+/* ── Consistent focus ring ─────────────────────────────────────── */
+.hss-focus:focus-visible {
+  outline: 2px solid rgba(217, 108, 74, 0.7);
+  outline-offset: 2px;
+}

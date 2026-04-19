@@ -159,8 +159,8 @@ function QRCodePayment({
   return (
     <div className="text-center space-y-5 py-4">
       {!customerName || !customerEmail ? (
-        <div className="space-y-3 rounded-xl border border-white/[0.12] bg-white/[0.07] backdrop-blur-sm p-4 text-left">
-          <p className="text-sm font-medium text-white/80">
+        <div className="space-y-3 rounded-xl border border-gray-200 bg-gray-50 p-4 text-left">
+          <p className="text-sm font-medium text-gray-700">
             Add your contact details before opening mobile checkout.
           </p>
           <Input
@@ -169,7 +169,7 @@ function QRCodePayment({
             onChange={(e) =>
               onDetailsChange({ name: e.target.value, email: customerEmail })
             }
-            className="h-9 bg-white/[0.08] border-white/[0.15] text-white placeholder:text-white/40 focus:bg-white/[0.12] focus:border-white/30 rounded-lg"
+            className="h-9 bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a] rounded-lg"
           />
           <Input
             type="email"
@@ -178,7 +178,7 @@ function QRCodePayment({
             onChange={(e) =>
               onDetailsChange({ name: customerName, email: e.target.value })
             }
-            className="h-9 bg-white/[0.08] border-white/[0.15] text-white placeholder:text-white/40 focus:bg-white/[0.12] focus:border-white/30 rounded-lg"
+            className="h-9 bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a] rounded-lg"
           />
         </div>
       ) : null}
@@ -189,10 +189,10 @@ function QRCodePayment({
           animate={{ opacity: 1, y: 0 }}
           className="space-y-4"
         >
-          <div className="p-6 bg-white/[0.07] backdrop-blur-sm border border-white/[0.12] rounded-xl">
+          <div className="p-6 bg-gray-50 border border-gray-200 rounded-xl">
             <Smartphone className="w-12 h-12 mx-auto mb-3 text-primary" />
-            <h4 className="font-semibold mb-2 text-white/90">Pay with Your Phone</h4>
-            <p className="text-sm text-white/50">
+            <h4 className="font-semibold mb-2 text-gray-700">Pay with Your Phone</h4>
+            <p className="text-sm text-gray-500">
               Scan a QR code to pay with Apple Pay, Google Pay, or any mobile
               wallet
             </p>
@@ -472,14 +472,6 @@ function CardPaymentWrapper({
     initializeStripe();
   }, [initializeStripe]);
 
-  // Auto-fill from localStorage
-  useEffect(() => {
-    const savedEmail = localStorage.getItem("checkout_email");
-    const savedName = localStorage.getItem("checkout_name");
-    if (savedEmail) setFormData({ ...formData, email: savedEmail });
-    if (savedName) setFormData({ ...formData, name: savedName });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     if (step !== "payment") {
@@ -559,24 +551,24 @@ function CardPaymentWrapper({
             <div className="w-5 h-5 rounded-full bg-primary text-white text-[11px] flex items-center justify-center font-bold">
               1
             </div>
-            <h3 className="text-[14px] font-semibold text-white/90">Contact Information</h3>
+            <h3 className="text-[14px] font-semibold text-gray-700">Contact Information</h3>
           </div>
 
           <div className="relative">
-            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/40" />
+            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
             <Input
               placeholder="Your Name *"
               value={formData.name}
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
               }
-              className="pl-9 h-9 bg-white/[0.08] border-white/[0.15] text-white placeholder:text-white/40 focus:bg-white/[0.12] focus:border-white/30 rounded-lg"
+              className="pl-9 h-9 bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a] rounded-lg"
               required
             />
           </div>
 
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/40" />
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
             <Input
               type="email"
               placeholder="Email * (for receipt)"
@@ -584,7 +576,7 @@ function CardPaymentWrapper({
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
-              className="pl-9 h-9 bg-white/[0.08] border-white/[0.15] text-white placeholder:text-white/40 focus:bg-white/[0.12] focus:border-white/30 rounded-lg"
+              className="pl-9 h-9 bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a] rounded-lg"
               required
             />
           </div>
@@ -630,13 +622,13 @@ function CardPaymentWrapper({
             <div className="w-5 h-5 rounded-full bg-primary text-white text-[11px] flex items-center justify-center font-bold ml-auto">
               2
             </div>
-            <h3 className="text-[14px] font-semibold text-white/90">Payment</h3>
+            <h3 className="text-[14px] font-semibold text-gray-700">Payment</h3>
           </div>
 
-          <div className="p-2.5 bg-white/[0.07] border border-white/[0.12] rounded-lg text-[13px] flex items-center gap-2 text-white/60">
+          <div className="p-2.5 bg-gray-50 border border-gray-200 rounded-lg text-[13px] flex items-center gap-2 text-gray-500">
             <CheckCircle className="w-3.5 h-3.5 text-primary" />
             <span>
-              Paying as <strong className="text-white/90">{formData.email}</strong>
+              Paying as <strong className="text-gray-900">{formData.email}</strong>
             </span>
           </div>
 
@@ -754,7 +746,7 @@ export function EnhancedCheckoutDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[420px] overflow-hidden p-0 gap-0" style={{ WebkitFontSmoothing: "antialiased", MozOsxFontSmoothing: "grayscale", textRendering: "optimizeLegibility" }}>
         {/* Header */}
-        <div className="px-3 sm:px-5 py-2.5 border-b border-white/[0.10]">
+        <div className="px-3 sm:px-5 py-2.5 border-b border-gray-100">
           <DialogHeader className="space-y-0">
             <div className="flex items-center gap-2 mb-0.5">
               <div className="p-1.5 bg-primary/15 rounded-md">
@@ -828,21 +820,21 @@ export function EnhancedCheckoutDialog({
           {/* Order Summary Sidebar - Compact */}
           <div className="md:col-span-2">
             <div className="space-y-3">
-              <div className="bg-white/[0.07] backdrop-blur-sm border border-white/[0.12] rounded-xl p-4">
-                <h4 className="font-semibold text-sm mb-2 text-white/90">Order Summary</h4>
+              <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
+                <h4 className="font-semibold text-sm mb-2 text-gray-700">Order Summary</h4>
                 <div className="space-y-1 mb-3">
                   {items.slice(0, 3).map((item) => (
                     <div key={item.id} className="flex justify-between text-xs">
-                      <span className="text-white/50 truncate max-w-[120px]">
+                      <span className="text-gray-500 truncate max-w-[120px]">
                         {item.name} × {item.quantity}
                       </span>
-                      <span className="font-medium text-white/80">
+                      <span className="font-medium text-gray-700">
                         ${(item.price * item.quantity).toFixed(2)}
                       </span>
                     </div>
                   ))}
                   {items.length > 3 && (
-                    <p className="text-xs text-white/40">
+                    <p className="text-xs text-gray-400">
                       +{items.length - 3} more items
                     </p>
                   )}
@@ -854,16 +846,16 @@ export function EnhancedCheckoutDialog({
                   discountPercent={10}
                 />
 
-                <div className="border-t border-white/[0.10] pt-2 mt-2">
+                <div className="border-t border-gray-200 pt-2 mt-2">
                   {veteranDiscount > 0 && (
-                    <div className="flex justify-between text-xs text-emerald-400 mb-1">
+                    <div className="flex justify-between text-xs text-emerald-600 mb-1">
                       <span>Veteran Discount</span>
                       <span>-${veteranDiscount.toFixed(2)}</span>
                     </div>
                   )}
-                  <div className="flex justify-between font-bold text-white/90">
+                  <div className="flex justify-between font-bold text-gray-700">
                     <span>Total</span>
-                    <span className="text-3xl font-bold text-white">
+                    <span className="text-3xl font-bold text-gray-900">
                       ${finalTotal.toFixed(2)}
                     </span>
                   </div>
