@@ -76,4 +76,4 @@ Security reports and vulnerability disclosures:
 **security@invisionnetwork.org**
 
 General inquiries:  
-**hello@invisionnetwork.org** | **(937) 301-8749**
+**hello@invisionnetwork.org** | **(937) 749-7579**

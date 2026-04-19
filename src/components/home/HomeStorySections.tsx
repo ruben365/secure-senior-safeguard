@@ -90,7 +90,7 @@ const trustItems = [
   { icon: ShieldCheck, label: "100+ families protected" },
   { icon: Clock,       label: "24/7 live support" },
   { icon: Award,       label: "10% veteran discount" },
-  { icon: Phone,       label: "(937) 301-8749" },
+  { icon: Phone,       label: "(937) 749-7579" },
 ];
 
 /* Feature strip — 3 items */

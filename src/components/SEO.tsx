@@ -324,7 +324,7 @@ export const PAGE_SEO = {
         postalCode: "45429",
         addressCountry: "US",
       },
-      telephone: "+19373018749",
+      telephone: "+19377497579",
       email: "hello@invisionnetwork.org",
       areaServed: { "@type": "State", name: "Ohio" },
       knowsAbout: [
@@ -347,7 +347,7 @@ export const PAGE_SEO = {
   contact: {
     title: "Contact Us — Cybersecurity Help in Kettering, Ohio",
     description:
-      "Get in touch with InVision Network. Call (937) 301-8749 or email us. Located in Kettering, OH — serving Dayton and all of Southwest Ohio.",
+      "Get in touch with InVision Network. Call (937) 749-7579 or email us. Located in Kettering, OH — serving Dayton and all of Southwest Ohio.",
     keywords:
       "contact InVision Network, Kettering cybersecurity contact, AI protection Ohio inquiry",
     breadcrumbs: [
@@ -364,7 +364,7 @@ export const PAGE_SEO = {
       mainEntity: {
         "@type": "Organization",
         name: "InVision Network",
-        telephone: "+19373018749",
+        telephone: "+19377497579",
         email: "hello@invisionnetwork.org",
         address: {
           "@type": "PostalAddress",
@@ -376,7 +376,7 @@ export const PAGE_SEO = {
         contactPoint: [
           {
             "@type": "ContactPoint",
-            telephone: "+19373018749",
+            telephone: "+19377497579",
             contactType: "Customer Service",
             availableLanguage: ["English", "Spanish", "French"],
             hoursAvailable: {

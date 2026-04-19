@@ -138,7 +138,7 @@ Getting started is simple.
 2. **Choose in-person or Zoom** based on what works for your group
 3. **Book your spot** -- we'll handle the rest
 
-Want to bring a workshop to your church, workplace, or community center? We love group bookings. [Call us at (937) 301-8749](/contact) or fill out the form on our [contact page](/contact) and we'll put together a plan that fits your group.
+Want to bring a workshop to your church, workplace, or community center? We love group bookings. [Call us at (937) 749-7579](/contact) or fill out the form on our [contact page](/contact) and we'll put together a plan that fits your group.
 
 ## Your Family Deserves This
 
