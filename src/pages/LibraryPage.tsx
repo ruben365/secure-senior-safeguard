@@ -88,7 +88,7 @@ export default function LibraryPage() {
 
       <main id="main-content" tabIndex={-1} className="flex-1">
         {/* Hero */}
-        <section className="bg-gradient-to-br from-primary/10 via-background to-purple-50/50 border-b py-14">
+        <section className="bg-gradient-to-br from-[#fff8f5] via-background to-[#fdf6f2]/50 border-b py-14">
           <div className="container mx-auto max-w-5xl text-center">
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary rounded-full px-4 py-1.5 text-sm font-medium mb-4">
               <Sparkles className="h-4 w-4" />
