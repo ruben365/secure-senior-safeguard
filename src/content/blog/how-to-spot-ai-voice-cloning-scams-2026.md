@@ -90,7 +90,7 @@ Talk to your family this week. Set a safe word. And if you want structured help,
 
 We started this company because our founders were victims of a digital scam themselves. We know what it feels like. And we know how to make sure it doesn't happen to your family.
 
-**Ready to protect your family?** [Book a workshop](/training) or [call us at (937) 301-8749](/contact). Same-day booking, no contracts, 30-day money-back guarantee.
+**Ready to protect your family?** [Book a workshop](/training) or [call us at (937) 749-7579](/contact). Same-day booking, no contracts, 30-day money-back guarantee.
 
 ---
 

@@ -30,7 +30,7 @@ Response times are measured during business hours (Monday–Friday, 9am–5pm Ea
 | Channel | Contact                         | Best For                          |
 |---------|---------------------------------|-----------------------------------|
 | Email   | hello@invisionnetwork.org       | General support, billing, account |
-| Phone   | (937) 301-8749                  | Urgent issues, onboarding help    |
+| Phone   | (937) 749-7579                  | Urgent issues, onboarding help    |
 | Security| security@invisionnetwork.org    | Vulnerability reports, breaches   |
 | Website | /contact                        | Non-urgent inquiries              |
 
@@ -64,5 +64,5 @@ This SLA does not cover:
 
 ## Contact
 
-**hello@invisionnetwork.org** | **(937) 301-8749**  
+**hello@invisionnetwork.org** | **(937) 749-7579**  
 Kettering, Ohio | Serving Greater Dayton Area

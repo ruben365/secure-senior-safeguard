@@ -62,7 +62,7 @@ landing_page: "/resources/family-safety-checklist"
 - Small tagline: "Print this. Hang it on your fridge. Check off each item together."
 
 **Footer block:**
-- "Need help? Call (937) 301-8749 or visit invisionnetwork.org"
+- "Need help? Call (937) 749-7579 or visit invisionnetwork.org"
 - "Free security assessment for Ohio families"
 - InVision Network logo + website
 

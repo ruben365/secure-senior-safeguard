@@ -2,10 +2,10 @@ export const SITE = {
   name: "InVision Network",
   tagline: "AI Scam Protection & Business Solutions",
   phone: {
-    display: "(937) 301-8749",
-    e164: "+19373018749",
-    tel: "tel:+19373018749",
-    whatsapp: "19373018749",
+    display: "(937) 749-7579",
+    e164: "+19377497579",
+    tel: "tel:+19377497579",
+    whatsapp: "19377497579",
   },
   emails: {
     hello: "hello@invisionnetwork.org",
