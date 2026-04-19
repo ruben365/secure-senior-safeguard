@@ -197,7 +197,7 @@ function PaymentFormContent({
       </PaymentElementPanel>
 
       {error && (
-        <div className="p-3 bg-red-500/10 border border-red-500/25 rounded-xl text-red-300 text-sm">
+        <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm">
           {error}
         </div>
       )}
@@ -221,7 +221,7 @@ function PaymentFormContent({
         )}
       </Button>
 
-      <div className="flex items-center justify-center gap-2 text-xs text-white/40">
+      <div className="flex items-center justify-center gap-2 text-xs text-gray-400">
         <Shield className="w-4 h-4" />
         <span>Secure payment powered by Stripe</span>
       </div>
@@ -290,15 +290,6 @@ export function TrainingPaymentModal({
     }
   }, [open, initializeStripe]);
 
-  // Auto-fill from localStorage
-  useEffect(() => {
-    const savedEmail = localStorage.getItem("checkout_email");
-    const savedName = localStorage.getItem("checkout_name");
-    const savedVeteran = localStorage.getItem("is_veteran");
-    if (savedEmail) setEmail(savedEmail);
-    if (savedName) setName(savedName);
-    if (savedVeteran === "true") setIsVeteran(true);
-  }, [open]);
 
   // Calculate pricing with veteran discount
   const veteranDiscount = isVeteran ? basePrice * 0.1 : 0;
@@ -375,7 +366,7 @@ export function TrainingPaymentModal({
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[380px] overflow-hidden p-0 rounded-2xl gap-0">
         {/* Header — glass panel with coral accent */}
-        <div className="bg-gradient-to-r from-[#d96c4a]/12 via-white/[0.04] to-[#d96c4a]/8 px-5 py-3.5 border-b border-white/[0.10]">
+        <div className="bg-gradient-to-r from-[#d96c4a]/8 via-white to-[#d96c4a]/5 px-5 py-3.5 border-b border-gray-100">
           <DialogHeader className="space-y-0">
             <div className="flex items-center gap-2 mb-1">
               <div className="p-1.5 bg-[#d96c4a]/15 rounded-md text-[#d96c4a]">
@@ -394,7 +385,7 @@ export function TrainingPaymentModal({
               Complete the payment for {serviceName} training
             </DialogDescription>
             {duration && (
-              <p className="text-[11px] text-white/50 mt-0.5">{duration}</p>
+              <p className="text-[11px] text-gray-400 mt-0.5">{duration}</p>
             )}
           </DialogHeader>
 
@@ -408,7 +399,7 @@ export function TrainingPaymentModal({
                     (step === "payment" && s.num <= 2) ||
                     (step === "success" && s.num <= 3)
                       ? "bg-[#d96c4a] text-white"
-                      : "bg-white/[0.12] text-white/40"
+                      : "bg-gray-100 text-gray-400"
                   }`}
                 >
                   {(step === "payment" && s.num === 1) ||
@@ -424,7 +415,7 @@ export function TrainingPaymentModal({
                     (step === "payment" && s.num <= 2) ||
                     step === "success"
                       ? "text-[#d96c4a]"
-                      : "text-white/35"
+                      : "text-gray-400"
                   }`}
                 >
                   {s.label}
@@ -435,7 +426,7 @@ export function TrainingPaymentModal({
                       (step === "payment" && s.num === 1) ||
                       (step === "success" && s.num <= 2)
                         ? "bg-[#d96c4a]"
-                        : "bg-white/[0.15]"
+                        : "bg-gray-200"
                     }`}
                   />
                 )}
@@ -456,15 +447,15 @@ export function TrainingPaymentModal({
               >
                 {/* Features — compact glass panel */}
                 {features.length > 0 && (
-                  <div className="px-3.5 py-3 bg-white/[0.07] backdrop-blur-sm border border-white/[0.12] rounded-xl">
-                    <h4 className="font-bold mb-2 text-[10px] uppercase tracking-widest text-white/50">
+                  <div className="px-3.5 py-3 bg-gray-50 border border-gray-200 rounded-xl">
+                    <h4 className="font-bold mb-2 text-[10px] uppercase tracking-widest text-gray-400">
                       What's Included
                     </h4>
                     <div className="grid grid-cols-1 gap-1.5">
                       {features.slice(0, 4).map((feature, i) => (
                         <div
                           key={i}
-                          className="flex items-center gap-2 text-xs text-white/80"
+                          className="flex items-center gap-2 text-xs text-gray-700"
                         >
                           <CheckCircle className="w-3 h-3 text-[#d96c4a] shrink-0" />
                           <span>{feature}</span>
@@ -480,18 +471,18 @@ export function TrainingPaymentModal({
                     placeholder="Your Name *"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="h-9 text-sm bg-white/[0.08] border-white/[0.15] text-white placeholder:text-white/40 focus:bg-white/[0.12] focus:border-white/30"
+                    className="h-9 text-sm bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a]"
                   />
                   <Input
                     type="email"
                     placeholder="Email Address *"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="h-9 text-sm bg-white/[0.08] border-white/[0.15] text-white placeholder:text-white/40 focus:bg-white/[0.12] focus:border-white/30"
+                    className="h-9 text-sm bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a]"
                   />
                   <div className="grid grid-cols-2 gap-2">
                     <div className="relative">
-                      <Phone className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/40" />
+                      <Phone className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
                       <Input
                         placeholder="Phone"
                         value={phone}
@@ -500,7 +491,7 @@ export function TrainingPaymentModal({
                       />
                     </div>
                     <Select value={state} onValueChange={setState}>
-                      <SelectTrigger className="h-9 text-sm bg-white/[0.08] border-white/[0.15] text-white">
+                      <SelectTrigger className="h-9 text-sm bg-white border-gray-200 text-gray-900">
                         <SelectValue placeholder="State" className="text-white/40" />
                       </SelectTrigger>
                       <SelectContent className="max-h-[200px]">
@@ -558,12 +549,12 @@ export function TrainingPaymentModal({
                 />
 
                 {/* Price Summary — glass total bar */}
-                <div className="px-3.5 py-2.5 bg-white/[0.07] backdrop-blur-sm rounded-xl border border-[#d96c4a]/25">
+                <div className="px-3.5 py-2.5 bg-gray-50 rounded-xl border border-[#d96c4a]/30">
                   <div className="flex justify-between items-center">
-                    <span className="text-xs text-white/50 font-medium uppercase tracking-wider">Total</span>
+                    <span className="text-xs text-gray-500 font-medium uppercase tracking-wider">Total</span>
                     <div className="text-right flex items-baseline gap-2">
                       {isVeteran && (
-                        <span className="text-xs line-through text-white/40">
+                        <span className="text-xs line-through text-gray-400">
                           ${basePrice.toFixed(2)}
                         </span>
                       )}
@@ -585,7 +576,7 @@ export function TrainingPaymentModal({
                 </div>
 
                 {error && (
-                  <div className="px-3 py-2 bg-red-500/10 border border-red-500/25 rounded-xl text-red-300 text-xs">
+                  <div className="px-3 py-2 bg-red-50 border border-red-200 rounded-xl text-red-600 text-xs">
                     {error}
                   </div>
                 )}
@@ -630,11 +621,11 @@ export function TrainingPaymentModal({
                   Back
                 </Button>
 
-                <div className="px-3.5 py-2.5 bg-white/[0.07] backdrop-blur-sm border border-white/[0.12] rounded-xl">
+                <div className="px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl">
                   <div className="flex justify-between items-center">
                     <div className="min-w-0">
-                      <p className="font-semibold text-sm text-white truncate">{serviceName}</p>
-                      <p className="text-[11px] text-white/50 truncate">{email}</p>
+                      <p className="font-semibold text-sm text-gray-900 truncate">{serviceName}</p>
+                      <p className="text-[11px] text-gray-500 truncate">{email}</p>
                     </div>
                     <div className="text-right flex-shrink-0 ml-2">
                       <p className="text-base font-bold text-[#d96c4a] leading-none">
