@@ -2,7 +2,8 @@ import { useState, useMemo } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { SEO, PAGE_SEO } from "@/components/SEO";
+import { SEO } from "@/components/SEO";
+import { PAGE_SEO } from "@/config/pageSeo";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {

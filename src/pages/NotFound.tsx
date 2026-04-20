@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
-import { SEO, PAGE_SEO } from "@/components/SEO";
+import { SEO } from "@/components/SEO";
+import { PAGE_SEO } from "@/config/pageSeo";
 import { useState } from "react";
 import {
   Search,

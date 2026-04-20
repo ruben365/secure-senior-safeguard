@@ -1125,7 +1125,7 @@ function LearnAndTrain() {
                 Secure Your <span className="text-primary">Family</span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                AI-powered scammers don't just target you — they target your entire family. Explore our <Link to="/resources" className="text-primary hover:underline font-medium">scam prevention guides</Link> for additional protection.
+                AI-powered scammers don't just target you — they target your entire family. Explore our <Link to="/library" className="text-primary hover:underline font-medium">scam prevention guides</Link> for additional protection.
               </p>
             </div>
 

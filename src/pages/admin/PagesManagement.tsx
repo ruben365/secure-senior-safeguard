@@ -21,7 +21,7 @@ const PAGES = [
   { id: "about", name: "About", path: "/about" },
   { id: "training", name: "Workshops", path: "/training" },
   { id: "business", name: "Business", path: "/business" },
-  { id: "resources", name: "Resources", path: "/resources" },
+  { id: "library", name: "Library", path: "/library" },
   { id: "contact", name: "Contact", path: "/contact" },
 ];
 

@@ -31,7 +31,7 @@ export const SITEMAP_PAGES: SitemapPage[] = [
   { path: "/business/website-insurance", priority: 0.85, changefreq: "weekly" },
 
   // Medium priority pages
-  { path: "/resources", priority: 0.8, changefreq: "weekly" },
+  { path: "/library", priority: 0.8, changefreq: "weekly" },
   { path: "/contact", priority: 0.8, changefreq: "monthly" },
   { path: "/about", priority: 0.7, changefreq: "monthly" },
   { path: "/faq", priority: 0.7, changefreq: "monthly" },
