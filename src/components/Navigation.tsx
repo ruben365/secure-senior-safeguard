@@ -9,6 +9,7 @@ import {
   Heart,
   ChevronDown,
   Search,
+  ChevronRight,
 } from "lucide-react";
 import { PrefetchLink } from "@/components/PrefetchLink";
 import { ShoppingCart } from "@/components/ShoppingCart";
@@ -342,41 +343,57 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
             aria-modal="true"
             aria-label="Main navigation"
             className="lg:hidden fixed top-[56px] right-0 z-[10001] overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch]"
+            onClick={(e) => e.stopPropagation()}
             style={{
               width: "min(88vw, 300px)",
               maxHeight: "calc(80vh - 56px)",
-              background: "rgba(12, 14, 22, 0.72)",
+              background: "rgba(8, 11, 22, 0.96)",
               backdropFilter: "blur(20px) saturate(1.4)",
               WebkitBackdropFilter: "blur(20px) saturate(1.4)",
-              borderLeft: "1px solid rgba(255,255,255,0.06)",
+              borderLeft: "1px solid rgba(255,255,255,0.08)",
+              borderBottom: "1px solid rgba(255,255,255,0.06)",
               borderBottomLeftRadius: "14px",
               animation: "menuSlideIn 200ms ease-out",
               paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 0.25rem)",
             }}
           >
-            <div className="px-3 py-2.5">
+            {/* Panel header with close button */}
+            <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.06]">
+              <span className="text-[11px] font-semibold text-white/40 uppercase tracking-widest">Menu</span>
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-1.5 rounded-md hover:bg-white/10 transition-colors text-white/60 hover:text-white"
+                aria-label="Close menu"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            <div className="px-3 py-2">
               {allLinks.map((link) => {
                 const isActive = isActiveLink(link.href);
                 return (
                   <Link
                     key={link.name}
                     to={link.href}
-                    className={`flex items-center text-[13px] font-medium px-3 py-3 rounded-md transition-colors duration-150 min-h-[44px] ${
+                    className={`flex items-center justify-between text-[14px] font-medium px-3 py-3 rounded-md transition-colors duration-150 min-h-[44px] ${
                       isActive
-                        ? "text-orange-400 border-l-2 border-orange-400 pl-2.5"
-                        : "text-white/80 hover:text-white hover:bg-white/[0.05]"
+                        ? "text-orange-400 bg-orange-500/10"
+                        : "text-white/85 hover:text-white hover:bg-white/[0.06] active:bg-white/[0.10]"
                     }`}
                     onClick={() => {
                       setMobileMenuOpen(false);
                       scrollToTop();
                     }}
                   >
-                    {link.name}
+                    <span>{link.name}</span>
+                    {!isActive && <ChevronRight className="h-3.5 w-3.5 text-white/25" />}
                   </Link>
                 );
               })}
 
-              <div className="mt-2 pt-2 flex flex-col items-center gap-1.5 border-t border-white/[0.06]">
+              <div className="mt-3 pt-3 flex flex-col items-center gap-2 border-t border-white/[0.08]">
                 <button
                   type="button"
                   className="h-7 px-4 text-[10px] font-medium rounded-md flex items-center justify-center gap-1 transition-colors duration-150 border border-white/15 text-white/60 hover:text-white hover:border-white/25"
