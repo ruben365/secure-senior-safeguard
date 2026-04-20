@@ -19,7 +19,7 @@ function Disclaimer() {
             <h1 className="text-center mb-4">Disclaimer</h1>
             <p className="text-center text-muted-foreground mb-8 text-lg">
               Last Updated:{" "}
-April 14, 2026
+April 20, 2026
             </p>
             <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
               Important information about the nature of our services and

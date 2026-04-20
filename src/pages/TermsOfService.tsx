@@ -24,7 +24,7 @@ function TermsOfService() {
             <h1 className="text-center mb-4">Terms of Service</h1>
             <p className="text-center text-muted-foreground mb-8 text-lg">
               Last Updated:{" "}
-April 14, 2026
+April 20, 2026
             </p>
             <p className="text-center text-muted-foreground mb-12">
               By using InVision Network, you agree to these terms. Please read
@@ -598,20 +598,36 @@ April 14, 2026
                   <p className="text-muted-foreground mb-4">
                     Our Services may contain links to third-party websites or
                     services that are not owned or controlled by InVision
-                    Network. We use the following third-party services:
+                    Network. We use the following third-party services to power
+                    our platform:
                   </p>
                   <ul className="list-disc list-inside space-y-2 text-muted-foreground ml-4 mb-4">
                     <li>
-                      <strong>Stripe:</strong> Payment processing
+                      <strong>Stripe (stripe.com):</strong> Secure payment
+                      processing, subscription billing, and fraud prevention.
+                      Stripe is PCI-DSS Level 1 certified. We never store your
+                      full card number.
                     </li>
                     <li>
-                      <strong>Zoom:</strong> Virtual training sessions
+                      <strong>Supabase (supabase.com):</strong> Database,
+                      authentication, and cloud infrastructure. Your account
+                      credentials and personal data are stored on Supabase's
+                      secure, SOC 2 Type II certified infrastructure.
                     </li>
                     <li>
-                      <strong>Google Analytics:</strong> Website analytics
+                      <strong>Resend (resend.com):</strong> Transactional email
+                      delivery (order confirmations, account notifications,
+                      password resets) and newsletter distribution.
                     </li>
                     <li>
-                      <strong>Various AI providers:</strong> AI-powered features
+                      <strong>PostHog (posthog.com):</strong> Privacy-first
+                      product analytics, session recording (with sensitive data
+                      masked), and user experience insights. Data is anonymized
+                      after 26 months.
+                    </li>
+                    <li>
+                      <strong>Various AI providers:</strong> AI-powered scam
+                      detection and educational features
                     </li>
                   </ul>
                   <p className="text-muted-foreground">

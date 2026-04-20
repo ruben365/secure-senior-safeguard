@@ -73,7 +73,6 @@ const LibraryPage = lazy(() => import("./pages/LibraryPage"));
 const PurchasePage = lazy(() => import("./pages/PurchasePage"));
 
 // New public pages - lazy loaded
-const Pricing = lazy(() => import("./pages/Pricing"));
 const Partners = lazy(() => import("./pages/Partners"));
 const Events = lazy(() => import("./pages/Events"));
 const Sitemap = lazy(() => import("./pages/Sitemap"));
@@ -263,7 +262,6 @@ function PublicRoutes() {
         <Route path="/cookie-policy" element={<PageTransition variant="fade"><CookiePolicy /></PageTransition>} />
         <Route path="/acceptable-use" element={<PageTransition variant="fade"><AcceptableUse /></PageTransition>} />
         <Route path="/disclaimer" element={<PageTransition variant="fade"><Disclaimer /></PageTransition>} />
-        <Route path="/pricing" element={<PageTransition variant="auto"><Pricing /></PageTransition>} />
         <Route path="/partners" element={<PageTransition variant="auto"><Partners /></PageTransition>} />
         <Route path="/events" element={<PageTransition variant="auto"><Events /></PageTransition>} />
         <Route path="/sitemap" element={<PageTransition variant="auto"><Sitemap /></PageTransition>} />
