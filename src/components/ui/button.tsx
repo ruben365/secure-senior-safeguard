@@ -81,7 +81,7 @@ const buttonVariants = cva(
       size: {
         default: "h-[36px] sm:h-[40px] px-3.5 sm:px-5 py-1.5 text-[12px] sm:text-[13px]",
         sm: "h-[30px] sm:h-[34px] rounded-md px-2.5 sm:px-3 text-[11px] sm:text-[12px]",
-        lg: "h-[42px] sm:h-[48px] rounded-xl px-5 sm:px-7 text-[13px] sm:text-[15px]",
+        lg: "h-[36px] sm:h-[46px] rounded-xl px-4 sm:px-7 text-[13px] sm:text-[15px]",
         xl: "h-[46px] sm:h-[54px] rounded-xl px-6 sm:px-9 text-[14px] sm:text-[16px]",
         icon: "h-[38px] w-[38px]",
         heroPill: "h-[36px] sm:h-[42px] rounded-full px-4 sm:px-6 text-[11px] sm:text-[13px] tracking-wide gap-1.5",
