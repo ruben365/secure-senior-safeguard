@@ -54,7 +54,7 @@ export const WorkshopsPromo = () => {
 
             <div className="flex items-center gap-8 p-5 rounded-2xl backdrop-blur-xl bg-card/60 border border-border/40" style={{ boxShadow: 'var(--skeuo-shadow-ombre)' }}>
               <div>
-                <div className="text-4xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">100+</div>
+                <div className="text-4xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">500+</div>
                 <div className="text-sm text-muted-foreground">Families Protected</div>
               </div>
               <div className="h-12 w-px bg-gradient-to-b from-transparent via-border to-transparent" />

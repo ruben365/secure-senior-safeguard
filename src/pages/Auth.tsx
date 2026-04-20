@@ -818,7 +818,7 @@ function Auth() {
 
             <div className="flex items-center gap-3 text-xs text-white/50">
               <ShieldCheck className="w-4 h-4 text-white/60" />
-              <span>Trusted by 100+ families across Ohio</span>
+              <span>Trusted by 500+ families across Ohio</span>
             </div>
           </aside>
 

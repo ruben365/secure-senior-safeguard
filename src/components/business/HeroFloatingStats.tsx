@@ -4,7 +4,7 @@ import "./HeroFloatingStats.css";
 
 const HeroFloatingStats = () => {
   const stats = [
-    { icon: Shield, text: "100+ Families Protected" },
+    { icon: Shield, text: "500+ Families Protected" },
     { icon: Star, text: "Client-Reviewed" },
     { icon: Award, text: "Expert-Founded" },
     { icon: Lock, text: "Privacy-First" },
