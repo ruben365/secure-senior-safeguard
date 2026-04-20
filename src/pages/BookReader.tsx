@@ -115,7 +115,7 @@ export default function BookReader() {
       description: "Please sign in with your Access ID to read your books.",
       variant: "destructive",
     });
-    navigate("/resources");
+    navigate("/library");
   }, [adminEmail, adminName, authLoading, initialized, isAdmin, navigate, session, toastHook, user]);
 
   // Scroll to top on chapter change
@@ -128,7 +128,7 @@ export default function BookReader() {
   const handleLogout = () => {
     clearBookReaderSession();
     sessionStorage.removeItem("readerBookmarks");
-    navigate("/resources");
+    navigate("/library");
   };
 
   const handleShareLink = () => {
@@ -146,7 +146,7 @@ export default function BookReader() {
 
   const handleBuyFromLibrary = (book: BookItem) => {
     // Navigate to resources page with the book pre-selected for purchase
-    navigate("/resources");
+    navigate("/library");
     toast.info(`Visit Resources to purchase "${book.name}" — use your reader account for 5% off!`);
   };
 

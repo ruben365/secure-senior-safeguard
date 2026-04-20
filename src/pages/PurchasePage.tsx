@@ -99,7 +99,7 @@ export default function PurchasePage() {
       });
       toast({ title: "Bulk order added", description: `${quantity} copies of ${book.title} added to cart.` });
     }
-    navigate("/resources");
+    navigate("/library");
   };
 
   return (

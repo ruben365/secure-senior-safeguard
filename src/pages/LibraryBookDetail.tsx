@@ -79,9 +79,11 @@ export default function LibraryBookDetail() {
 
   const alreadyPurchased = isPurchased(book.id);
   const firstChapter = book.chapters[0];
-  const previewText = firstChapter
-    ? stripHtml(firstChapter.content_html).slice(0, 600)
-    : book.description;
+  const previewText = (() => {
+    const raw = firstChapter ? stripHtml(firstChapter.content_html) : book.description;
+    const words = raw.split(/\s+/);
+    return words.length > 200 ? words.slice(0, 200).join(" ") + "…" : raw;
+  })();
 
   const relatedBooks = LIBRARY_BOOKS.filter(
     (b) => b.slug !== book.slug && b.category === book.category
@@ -337,12 +339,12 @@ export default function LibraryBookDetail() {
                 </section>
               )}
 
-              {/* Free Preview */}
+              {/* Excerpt */}
               <section>
                 <h2 className="text-lg font-bold mb-3 flex items-center gap-2">
                   <FileText className="h-5 w-5 text-primary" />
-                  Free Preview
-                  <Badge variant="secondary" className="text-xs">Chapter 1 excerpt</Badge>
+                  Excerpt
+                  <Badge variant="secondary" className="text-xs">First 200 words</Badge>
                 </h2>
                 <Card className="bg-muted/30 border-dashed">
                   <CardContent className="p-5">
@@ -353,7 +355,6 @@ export default function LibraryBookDetail() {
                     )}
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       {previewText}
-                      {previewText.length >= 600 && "…"}
                     </p>
                     {!alreadyPurchased && (
                       <div className="mt-4 pt-4 border-t border-border/50 flex items-center gap-3">

@@ -81,7 +81,7 @@ export const HeroHomepage = () => {
 
       {/* ── 1b. Mobile status badge — only on phone, hidden sm+ ── */}
       <div className="sm:hidden absolute top-[88px] inset-x-0 flex justify-center z-20 px-4 pointer-events-none" aria-hidden="true">
-        <div className="inline-flex items-center gap-2.5 rounded-full px-4 py-2 border border-white/15" style={{background: "rgba(255,255,255,0.08)", backdropFilter: "blur(12px)"}}>
+        <div className="w-auto inline-flex items-center gap-2.5 rounded-full px-4 py-2 border border-white/15" style={{background: "rgba(255,255,255,0.08)", backdropFilter: "blur(12px)"}}>
           <span className="h-2 w-2 rounded-full bg-emerald-500 flex-shrink-0" />
           <Shield className="w-3.5 h-3.5 text-orange-400 flex-shrink-0" />
           <span className="text-[11px] font-semibold text-white/90 tracking-wider uppercase">AI Protection Active</span>

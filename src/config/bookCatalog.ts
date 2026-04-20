@@ -1,5 +1,10 @@
 import bookAiFundamentals from "@/assets/book-ai-fundamentals.jpg";
 import { AI_FUNDAMENTALS_CHAPTERS } from "@/data/aiFundamentalsContent";
+import { SENIORS_SCAM_GUIDE_CHAPTERS } from "@/data/bookSeniorsScamGuide";
+import { AI_THREATS_OHIO_CHAPTERS } from "@/data/bookAiThreatsOhio";
+import { BUSINESS_PLAYBOOK_CHAPTERS } from "@/data/bookBusinessPlaybook";
+import { VOICE_CLONING_GUIDE_CHAPTERS } from "@/data/bookVoiceCloningGuide";
+import { GRANDPARENTS_DIGITAL_CHAPTERS } from "@/data/bookGrandparentsDigital";
 import bookBeingRealAi from "@/assets/book-being-real-ai.jpg";
 import bookAuthPersonalities from "@/assets/book-auth-personalities.jpg";
 import bookAuthFriendshipV2 from "@/assets/book-auth-friendship-v2.jpg";
@@ -410,6 +415,11 @@ function createChapters(seed: BookSeed): BookChapter[] {
 /** Map of book IDs to custom full-content chapters */
 const CUSTOM_CHAPTERS: Record<string, BookChapter[]> = {
   "book-ai-fundamentals": AI_FUNDAMENTALS_CHAPTERS,
+  "book-seniors-scam-guide": SENIORS_SCAM_GUIDE_CHAPTERS,
+  "book-ai-threats-ohio": AI_THREATS_OHIO_CHAPTERS,
+  "book-business-playbook": BUSINESS_PLAYBOOK_CHAPTERS,
+  "book-voice-cloning-guide": VOICE_CLONING_GUIDE_CHAPTERS,
+  "book-grandparents-digital": GRANDPARENTS_DIGITAL_CHAPTERS,
 };
 
 function createBook(seed: BookSeed): BookItem {
@@ -2013,6 +2023,303 @@ const BOOK_SEEDS: BookSeed[] = [
       "Safer Ways to Donate and Share",
       "When a Campaign Looks Fraudulent",
       "Generosity with Better Standards",
+    ],
+  },
+
+  // ── InVision Original Books ────────────────────────────────────────────────
+
+  {
+    id: "book-seniors-scam-guide",
+    slug: "seniors-scam-guide",
+    name: "The Senior's Guide to Scam Prevention",
+    subtitle: "How to recognize, avoid, and recover from today's most dangerous frauds",
+    description: "A warm, accessible guide written specifically for adults 65+ on spotting scams before they strike.",
+    longDescription:
+      "The Senior's Guide to Scam Prevention walks through the most dangerous frauds targeting older Americans — phone scams, Medicare fraud, grandparent scams, romance scams, and more — using real Ohio case studies and practical scripts you can use the moment something feels wrong.",
+    price: 9.99,
+    total_pages: 150,
+    image: bookGrandparentScam,
+    tag: "New",
+    stripe_price_id: "price_seniors_scam_guide_placeholder",
+    category: "seniors",
+    ideal_for: "adults 65 and older, caregivers, and family members supporting elderly relatives",
+    outcomes: [
+      "Recognize the warning signs of the most common scams targeting older adults.",
+      "Use simple phone and email scripts to shut down fraud attempts immediately.",
+      "Set up a family safety net that protects you without giving up independence.",
+      "Know exactly what to do — and who to call — if something goes wrong.",
+    ],
+    risk_signals: [
+      "Caller creates urgency, panic, or secrecy about a family member or financial account.",
+      "Payment is requested via gift cards, wire transfer, or cryptocurrency.",
+      "Someone claims to be from Medicare, Social Security, or the IRS and threatens consequences.",
+      "A new online friend is asking for personal information or financial help.",
+    ],
+    controls: [
+      "Always hang up and call back using a number you find independently — not one the caller provides.",
+      "Never pay any bill or emergency request with gift cards under any circumstances.",
+      "Create a family code word for real emergencies so you can verify calls from loved ones.",
+      "Pause 24 hours before sending any money, even to people you trust.",
+    ],
+    response_plan: [
+      "Contact your bank immediately if any account information was shared or money was sent.",
+      "Report the scam to the FTC at reportfraud.ftc.gov and your local police.",
+      "Tell a trusted family member or friend what happened — you do not have to handle it alone.",
+      "Save all records of the contact: call logs, screenshots, gift card receipts.",
+    ],
+    practice_plan: [
+      "Review one new scam type each month with family or at your senior center.",
+      "Keep the family code word updated and share it with your most trusted contacts.",
+      "Check your credit report once a year at annualcreditreport.com for unfamiliar accounts.",
+      "Place your bank's fraud line number on a card by your telephone.",
+    ],
+    chapter_titles: [
+      "Why Scammers Target Seniors — and Why That's Not Your Fault",
+      "Phone Scams: The Calls That Sound Real",
+      "Email and Text Scams: Spotting Fakes",
+      "The Grandparent Scam and How to Stop It Cold",
+      "Medicare, Social Security, and Benefits Fraud",
+      "Romance Scams: When the Relationship Isn't Real",
+      "Online Shopping and Tech Support Scams",
+      "Investment and Lottery Fraud",
+      "What to Do If You've Been Scammed",
+      "Staying Safe Going Forward",
+      "Your Family Safety Network",
+    ],
+  },
+
+  {
+    id: "book-ai-threats-ohio",
+    slug: "ai-threats-ohio",
+    name: "AI Threats: What Ohio Families Need to Know",
+    subtitle: "A plain-language guide to protecting every generation from AI-powered fraud",
+    description: "From voice cloning to deepfakes, this guide helps Ohio families understand and defend against AI-powered threats.",
+    longDescription:
+      "AI Threats: What Ohio Families Need to Know cuts through the hype to explain how artificial intelligence is being used against families right now — voice cloning grandparent scams on I-75, AI-personalized phishing targeting Fifth Third Bank customers, deepfake videos spreading political misinformation across Ohio communities. It gives every generation practical tools to stay safe without living in fear.",
+    price: 14.99,
+    total_pages: 140,
+    image: bookCyberKids,
+    tag: "New",
+    stripe_price_id: "price_ai_threats_ohio_placeholder",
+    category: "family",
+    ideal_for: "families with children and elderly parents, multigenerational Ohio households",
+    outcomes: [
+      "Explain what AI is in plain language so every generation in your family understands.",
+      "Recognize voice cloning, deepfakes, and AI-powered phishing before they cause harm.",
+      "Set up a family code word system and verification protocols that work under pressure.",
+      "Protect children, teenagers, and elderly relatives from the specific AI threats targeting them.",
+    ],
+    risk_signals: [
+      "A phone call sounds exactly like a family member but something feels slightly off.",
+      "An email from your bank or employer uses your name and personal details but still asks for credentials.",
+      "A video or photo of a public figure seems real but the content is shocking or out of character.",
+      "Your child is engaging with an online contact they've never met in person.",
+    ],
+    controls: [
+      "Create a family code word that any member can request during a suspicious call to verify identity.",
+      "Always call back on a trusted number before responding to any emergency request.",
+      "Apply the SIFT method (Stop, Investigate, Find better coverage, Trace the original) to suspicious media.",
+      "Review social media privacy settings quarterly as a family.",
+    ],
+    response_plan: [
+      "Hang up immediately on any call that creates urgency before verification is complete.",
+      "Report AI-generated fraud to the FTC, FBI IC3, and Ohio Attorney General.",
+      "Preserve all evidence before deleting anything — screenshots, call logs, URLs.",
+      "Contact an elder law attorney or AARP Fraud Watch if a family member was victimized.",
+    ],
+    practice_plan: [
+      "Hold a monthly 15-minute family safety check-in to discuss new threats.",
+      "Test your family code word system every six months.",
+      "Review children's social media accounts together as part of an ongoing conversation.",
+      "Update privacy settings on all family smart home devices seasonally.",
+    ],
+    chapter_titles: [
+      "What AI Actually Is: A Plain-Language Explanation",
+      "Voice Cloning: When the Phone Call Isn't Who You Think",
+      "Deepfakes: When Seeing Is No Longer Believing",
+      "AI-Powered Phishing: Why the Scam Emails Look Real Now",
+      "Social Media Manipulation: How AI Shapes What Your Family Sees",
+      "Children's Online Safety in the Age of AI",
+      "Protecting Your Elderly Parents from AI Threats",
+      "Smart Home Privacy: Alexa, Ring, and AI in Your House",
+      "Privacy in the AI Age: What Big Tech Knows About Your Family",
+    ],
+  },
+
+  {
+    id: "book-business-playbook",
+    slug: "business-cybersecurity-playbook",
+    name: "Small Business Cybersecurity Playbook",
+    subtitle: "A practical guide to protecting your business, your customers, and your bottom line",
+    description: "The complete cybersecurity playbook for Ohio small businesses with 5–50 employees.",
+    longDescription:
+      "Small Business Cybersecurity Playbook gives Ohio business owners the exact steps, policies, and frameworks used by companies that survive cyberattacks — and the ones that prevent them in the first place. Built around ROI, real breach costs, and practical Ohio business scenarios, this book pays for itself the first time you stop a phishing email before it becomes a $180,000 ransomware recovery.",
+    price: 19.99,
+    total_pages: 170,
+    image: bookBusinessCyber,
+    tag: "New",
+    stripe_price_id: "price_business_playbook_placeholder",
+    category: "business",
+    ideal_for: "Ohio small business owners, managers, and operations leads with 5–50 employees",
+    outcomes: [
+      "Calculate your actual breach risk and build a security budget that prevents a $180K loss for $15K/year.",
+      "Set up email authentication, MFA, and password management that stops 99% of account takeovers.",
+      "Create an incident response plan your team can execute without an IT department.",
+      "Understand what cyber insurance actually covers and what it requires you to have in place.",
+    ],
+    risk_signals: [
+      "Employees share passwords or use the same credentials across business and personal accounts.",
+      "Wire transfers, payroll changes, or vendor payment updates are approved by one person via email.",
+      "Business data has not been backed up and tested in more than 30 days.",
+      "Former employees still have access to email, payroll, or company banking.",
+    ],
+    controls: [
+      "Require MFA on all business banking, email, payroll, and accounting accounts today.",
+      "Implement dual-person approval for any wire transfer or banking information change.",
+      "Run the 3-2-1 backup rule: three copies of critical data, two media types, one stored offsite.",
+      "Revoke all system access within four hours of any employee departure.",
+    ],
+    response_plan: [
+      "Isolate affected devices from your network immediately — unplug ethernet, disable Wi-Fi.",
+      "Call your cyber insurance hotline before calling IT support or paying any ransom.",
+      "Notify affected customers according to Ohio's data breach notification law within 45 days.",
+      "Preserve all system logs and communications for law enforcement and insurance claims.",
+    ],
+    practice_plan: [
+      "Test your backup restoration monthly — a backup you haven't tested is a backup you don't have.",
+      "Run a phishing simulation on your team every quarter using a free CISA or Google tool.",
+      "Review user access rights quarterly and remove permissions that are no longer needed.",
+      "Complete Ohio SBDC's free cybersecurity assessment annually to benchmark your progress.",
+    ],
+    chapter_titles: [
+      "Why Small Businesses Are Now Primary Targets",
+      "Taking Stock: Your Current Risk Profile",
+      "Email Defense: Your Biggest Vulnerability",
+      "Ransomware: What It Is, How It Spreads, How to Survive It",
+      "Passwords and Access Control: Simple Rules That Save You",
+      "Securing Your Network and Devices",
+      "Payment Card and Banking Security",
+      "Customer Data Protection and Privacy Law",
+      "Remote Work Security for Small Teams",
+      "Vendor and Supply Chain Risk",
+      "Cyber Insurance: What You Need to Know",
+      "Employee Training: Your Human Firewall",
+      "Incident Response: When Something Goes Wrong",
+      "The 90-Day Cybersecurity Roadmap",
+    ],
+  },
+
+  {
+    id: "book-voice-cloning-guide",
+    slug: "voice-cloning-deepfakes-guide",
+    name: "Voice Cloning & Deepfakes: A Family Safety Guide",
+    subtitle: "Understanding and defending against AI-generated deception",
+    description: "A narrative-driven guide to how voice cloning and deepfakes work — and how to protect your family from them.",
+    longDescription:
+      "Voice Cloning & Deepfakes: A Family Safety Guide reads like a page-turner while teaching real defense. Through compelling Ohio case studies — a Columbus woman who nearly fell for a voice-cloned grandmother call, a widower from Canton deceived by a six-month AI-generated romance — it explains exactly how synthetic media is being weaponized against families today, and builds practical protection into every chapter.",
+    price: 12.99,
+    total_pages: 130,
+    image: bookVoiceClone,
+    tag: "New",
+    stripe_price_id: "price_voice_cloning_guide_placeholder",
+    category: "ai",
+    ideal_for: "general public, families with elderly relatives, anyone who uses social media",
+    outcomes: [
+      "Understand how voice cloning and deepfakes work well enough to recognize them under pressure.",
+      "Set up a family code word system that defeats even the most convincing voice-cloned calls.",
+      "Protect elderly relatives from the grandparent scam upgraded with AI-cloned voices.",
+      "Apply the SIFT method to any suspicious audio or video before acting or sharing.",
+    ],
+    risk_signals: [
+      "A caller sounds exactly like a loved one but the request involves urgency and secrecy.",
+      "A video of a public figure includes shocking or unexpected statements.",
+      "A romantic interest you've never met is building deep emotional rapport and avoiding video calls.",
+      "Someone asks you to reduce your social media footprint because a family member's voice was harvested.",
+    ],
+    controls: [
+      "Create a family code word that any member can ask for to verify identity on any call.",
+      "Always call back on a trusted number before responding to any emergency claim.",
+      "Apply SIFT before sharing any emotionally charged audio, video, or image online.",
+      "Review privacy settings for all accounts where family members post audio or video publicly.",
+    ],
+    response_plan: [
+      "Hang up immediately when the code word test fails and call back on the real number.",
+      "Report voice cloning fraud to the FTC at reportfraud.ftc.gov and FBI IC3 at ic3.gov.",
+      "Contact AARP Fraud Watch at 1-877-908-3360 for free confidential counseling.",
+      "Preserve all evidence — call logs, screenshots, message records — before blocking the scammer.",
+    ],
+    practice_plan: [
+      "Test your family code word system every six months with a quick rehearsal call.",
+      "Review the social media footprint of elderly relatives annually and adjust privacy settings.",
+      "Share one voice cloning or deepfake story per month with family to keep awareness high.",
+      "Check in with elderly relatives after any suspicious call, even if they hung up correctly.",
+    ],
+    chapter_titles: [
+      "The Day My Grandmother Called My Phone",
+      "How Voice Cloning Works: The Technology Explained Simply",
+      "Deepfake Video and Photos: When Your Eyes Lie",
+      "The Grandparent Scam, Upgraded",
+      "How Criminals Get Your Voice — and How to Reduce Your Exposure",
+      "The Family Code Word System",
+      "Protecting Children and Teenagers from Deepfakes",
+      "Romance Scams and AI-Generated Personas",
+      "Political Deepfakes and Information Integrity",
+    ],
+  },
+
+  {
+    id: "book-grandparents-digital",
+    slug: "digital-safety-grandparents",
+    name: "Digital Safety for Grandparents",
+    subtitle: "A friendly guide to staying safe and connected online",
+    description: "A gentle, encouraging guide written specifically for adults 70+ who want to use technology confidently and safely.",
+    longDescription:
+      "Digital Safety for Grandparents is the kind, patient companion that tech manuals never are. Written in simple language with no condescension, it covers the most important safety topics for adults 70 and older: spotting phone scams, understanding why gift cards are always fraud, protecting Medicare information, and building a personal safety team. Real Ohio stories, real phone numbers, and real peace of mind.",
+    price: 9.99,
+    total_pages: 90,
+    image: bookSeniorTechSafety,
+    tag: "New",
+    stripe_price_id: "price_grandparents_digital_placeholder",
+    category: "seniors",
+    ideal_for: "adults 70 and older, and family members who want to share a resource with elderly loved ones",
+    outcomes: [
+      "Recognize the most dangerous scam types targeting older adults with confidence.",
+      "Know with certainty that gift cards are never a legitimate form of payment — ever.",
+      "Protect your Medicare and Social Security information from fraudulent callers.",
+      "Build a personal safety team so you always have someone to ask when something seems off.",
+    ],
+    risk_signals: [
+      "A caller says there's an emergency involving a grandchild and asks you not to tell anyone.",
+      "Anyone asks you to pay a bill, fine, or emergency by buying gift cards.",
+      "A caller says your Medicare or Social Security benefits are suspended and threatens consequences.",
+      "A new online friend you've never met is asking for personal information or money.",
+    ],
+    controls: [
+      "Hang up and call back on the number printed on the back of your Medicare card or bank card.",
+      "Say out loud: 'Gift cards are never real payment' — no legitimate organization will ever ask.",
+      "Do not share your Medicare number, Social Security number, or bank account with callers.",
+      "Write your family member's phone number on paper next to your telephone.",
+    ],
+    response_plan: [
+      "If you sent money or shared information, call your bank right away — even if it's embarrassing.",
+      "Call 1-877-FTC-HELP to report the scam to the Federal Trade Commission.",
+      "Tell your trusted family member or friend what happened — you did nothing wrong.",
+      "If gift cards were purchased, keep the receipts and report to the card company immediately.",
+    ],
+    practice_plan: [
+      "Keep the phone numbers for your bank and Medicare printed next to your telephone.",
+      "Call your trusted family member before sending any money anyone asks for unexpectedly.",
+      "Check your bank statement once a month for charges you don't recognize.",
+      "Remember: it is always okay to hang up and call back. Real callers will understand.",
+    ],
+    chapter_titles: [
+      "You Are Not Alone — And You Are Not Too Old",
+      "The Phone Call That Isn't Real",
+      "Email: What's Real and What's Not",
+      "Gift Cards Are Never Payment",
+      "Staying Safe on Facebook and the Internet",
+      "Your Medicare and Social Security — Protect Them",
+      "Your Computer and Phone — Basic Safety Steps",
     ],
   },
 ];
