@@ -70,6 +70,7 @@ const Maintenance = lazy(() => import("./pages/Maintenance"));
 const BookReader = lazy(() => import("./pages/BookReader"));
 const BookDetail = lazy(() => import("./pages/BookDetail"));
 const LibraryPage = lazy(() => import("./pages/LibraryPage"));
+const LibraryBookDetail = lazy(() => import("./pages/LibraryBookDetail"));
 const PurchasePage = lazy(() => import("./pages/PurchasePage"));
 
 // New public pages - lazy loaded
@@ -205,6 +206,7 @@ function PublicRoutes() {
         <Route path="/resources" element={<PageTransition variant="auto"><Resources /></PageTransition>} />
         <Route path="/resources/:slug" element={<PageTransition variant="auto"><BookDetail /></PageTransition>} />
         <Route path="/library" element={<PageTransition variant="auto"><LibraryPage /></PageTransition>} />
+        <Route path="/library/:slug" element={<PageTransition variant="auto"><LibraryBookDetail /></PageTransition>} />
         <Route path="/purchase/:slug" element={<PageTransition variant="auto"><PurchasePage /></PageTransition>} />
         <Route path="/payment-success" element={<PageTransition variant="fade"><PaymentSuccess /></PageTransition>} />
         <Route path="/payment-canceled" element={<PageTransition variant="fade"><PaymentCanceled /></PageTransition>} />
