@@ -365,7 +365,7 @@ const AIAutomation = () => {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-                <Button asChild size="heroPill" variant="heroOutline">
+                <Button asChild size="heroPill" variant="outline">
                   <Link to="/business/ai-receptionist">
                     Explore AI Receptionist
                   </Link>

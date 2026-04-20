@@ -895,7 +895,7 @@ function Business() {
 
                   Request a Platform Demo <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
-                <Button asChild variant="heroOutline" size="heroPill">
+                <Button asChild variant="outline" size="heroPill">
                   <Link to="/training">View Individual Plans</Link>
                 </Button>
               </div>

@@ -210,7 +210,7 @@ const WebsiteInsurance = () => {
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
-                  <Button asChild size="heroPill" variant="heroOutline">
+                  <Button asChild size="heroPill" variant="outline">
                     <Link to="/business">View All Services</Link>
                   </Button>
                 </div>
@@ -402,7 +402,7 @@ const WebsiteInsurance = () => {
                     <Shield className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-                <Button asChild size="heroPill" variant="heroOutline">
+                <Button asChild size="heroPill" variant="outline">
                   <Link to="/business/website-design">Need a New Website?</Link>
                 </Button>
               </div>

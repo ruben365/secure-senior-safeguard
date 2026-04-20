@@ -422,7 +422,7 @@ const WebsiteDesign = () => {
                     <Button
                       asChild
                       size="heroPill"
-                      variant="heroOutline"
+                      variant="outline"
                     >
                       <Link to="/business">View All Services</Link>
                     </Button>
@@ -732,7 +732,7 @@ const WebsiteDesign = () => {
                     <Button
                       asChild
                       size="heroPill"
-                      variant="heroOutline"
+                      variant="outline"
                     >
                       <Link to="/business/website-insurance">
                         <Shield className="mr-2 h-4 w-4" />
