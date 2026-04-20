@@ -119,6 +119,29 @@
   transform: translateY(-2px);
 }
 
+/* ── Eyebrow / overline pill — used across multiple page sections ── */
+.hss-overline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  background: rgba(17, 17, 17, 0.06);
+  border: 1px solid #D8DCE3;
+  color: #111111;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.hss-overline-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: #111111;
+}
+
 /* ── Consistent focus ring ─────────────────────────────────────── */
 .hss-focus:focus-visible {
   outline: 2px solid rgba(217, 108, 74, 0.7);
