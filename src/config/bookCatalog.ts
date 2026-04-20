@@ -2376,7 +2376,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 115,
     image: bookMedicareFraud,
     tag: "Senior Safety",
-    stripe_price_id: "price_placeholder_book_06",
+    stripe_price_id: "price_1TOQHGJ8osfwYbX7HDBfKnWN",
     category: "seniors",
     ideal_for: "Medicare beneficiaries, adults 65+, and family members helping manage benefits",
     outcomes: [
@@ -2433,7 +2433,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 95,
     image: bookRomanceScam,
     tag: "Senior Safety",
-    stripe_price_id: "price_placeholder_book_07",
+    stripe_price_id: "price_1TOQHLJ8osfwYbX7qN7rl8a6",
     category: "seniors",
     ideal_for: "adults 60+ exploring online dating, widows and widowers, and concerned family members",
     outcomes: [
@@ -2488,7 +2488,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 140,
     image: bookInvestmentFraud,
     tag: "Senior Safety",
-    stripe_price_id: "price_placeholder_book_08",
+    stripe_price_id: "price_1TOQHQJ8osfwYbX7oK5jSKv2",
     category: "finance",
     ideal_for: "pre-retirees and retirees 55+, anyone managing an IRA or 401(k), family financial decision-makers",
     outcomes: [
@@ -2549,7 +2549,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 120,
     image: bookCyberKids,
     tag: "Family",
-    stripe_price_id: "price_placeholder_book_09",
+    stripe_price_id: "price_1TOQHVJ8osfwYbX7sPMWWAgr",
     category: "family",
     ideal_for: "parents of children ages 8–18, school counselors, and pediatricians advising families",
     outcomes: [
@@ -2606,7 +2606,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 95,
     image: bookFamilySafety,
     tag: "Family",
-    stripe_price_id: "price_placeholder_book_10",
+    stripe_price_id: "price_1TOQHaJ8osfwYbX7p9gscWF3",
     category: "family",
     ideal_for: "parents, adult children, caregivers, and multigenerational Ohio families",
     outcomes: [
@@ -2661,7 +2661,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 115,
     image: bookSocialMediaSafety,
     tag: "Family",
-    stripe_price_id: "price_placeholder_book_11",
+    stripe_price_id: "price_1TOQI0J8osfwYbX7gGsOPWP7",
     category: "privacy",
     ideal_for: "parents, families with social media users of any age, and anyone concerned about their digital footprint",
     outcomes: [
@@ -2718,7 +2718,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 120,
     image: bookSmartHome,
     tag: "Family",
-    stripe_price_id: "price_placeholder_book_12",
+    stripe_price_id: "price_1TOQI8J8osfwYbX7gE54xCUL",
     category: "tech",
     ideal_for: "homeowners and renters with smart devices, parents, and anyone setting up a new connected home",
     outcomes: [
@@ -2777,7 +2777,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 175,
     image: bookBusinessCyber,
     tag: "Business",
-    stripe_price_id: "price_placeholder_book_13",
+    stripe_price_id: "price_1TOQIDJ8osfwYbX733lQhJeU",
     category: "business",
     ideal_for: "small business owners, office managers, HR directors, and operations leads responsible for team security",
     outcomes: [
@@ -2839,7 +2839,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 145,
     image: bookDigitalPrivacy,
     tag: "Business",
-    stripe_price_id: "price_placeholder_book_14",
+    stripe_price_id: "price_1TOQIyJ8osfwYbX7Tnm0fUuU",
     category: "business",
     ideal_for: "Ohio dental offices, therapy practices, chiropractors, urgent care clinics, and solo healthcare providers",
     outcomes: [
@@ -2898,7 +2898,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 115,
     image: bookBankingSafety,
     tag: "Business",
-    stripe_price_id: "price_placeholder_book_15",
+    stripe_price_id: "price_1TOQJCJ8osfwYbX7f9rm4rUh",
     category: "business",
     ideal_for: "Ohio retailers, restaurants, service businesses, and any small business that accepts credit or debit cards",
     outcomes: [
@@ -2955,7 +2955,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 120,
     image: bookMobileSecurity,
     tag: "Business",
-    stripe_price_id: "price_placeholder_book_16",
+    stripe_price_id: "price_1TOQJIJ8osfwYbX7dKGA5ovi",
     category: "business",
     ideal_for: "small business owners with remote employees, operations managers, and remote workers themselves",
     outcomes: [
@@ -3012,7 +3012,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 115,
     image: bookEmailSafety,
     tag: "Business",
-    stripe_price_id: "price_placeholder_book_17",
+    stripe_price_id: "price_1TOQJPJ8osfwYbX7tyZl9dc7",
     category: "business",
     ideal_for: "Ohio small business owners, CFOs, operations managers, and any business leader evaluating cyber coverage",
     outcomes: [
@@ -3071,7 +3071,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 115,
     image: bookAiFundamentals,
     tag: "Technology",
-    stripe_price_id: "price_placeholder_book_18",
+    stripe_price_id: "price_1TOQJTJ8osfwYbX7h7bpvG50",
     category: "ai",
     ideal_for: "non-technical adults, seniors curious about AI, and anyone who wants clarity without jargon",
     outcomes: [
@@ -3128,7 +3128,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 115,
     image: bookBeingRealAi,
     tag: "Privacy",
-    stripe_price_id: "price_placeholder_book_19",
+    stripe_price_id: "price_1TOQJdJ8osfwYbX7NaU47MXC",
     category: "privacy",
     ideal_for: "privacy-conscious adults, parents, professionals, and anyone concerned about AI data collection",
     outcomes: [
@@ -3185,7 +3185,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 140,
     image: bookCryptoDefense,
     tag: "Technology",
-    stripe_price_id: "price_placeholder_book_20",
+    stripe_price_id: "price_1TOQJjJ8osfwYbX7OxyhCOxn",
     category: "finance",
     ideal_for: "current and prospective crypto investors, retirement savers exploring alternatives, and fraud prevention advocates",
     outcomes: [
@@ -3246,7 +3246,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 95,
     image: bookPhishingDefense,
     tag: "Ohio",
-    stripe_price_id: "price_placeholder_book_21",
+    stripe_price_id: "price_1TOQJpJ8osfwYbX7s7TROrOJ",
     category: "seniors",
     ideal_for: "Ohio veterans of all ages, military spouses, and VSO staff supporting veterans",
     outcomes: [
@@ -3301,7 +3301,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 115,
     image: bookCharityScam,
     tag: "Ohio",
-    stripe_price_id: "price_placeholder_book_22",
+    stripe_price_id: "price_1TOQJvJ8osfwYbX7Qw0JRN9t",
     category: "business",
     ideal_for: "Ohio nonprofit executive directors, church administrators, board members, and volunteer leaders",
     outcomes: [
@@ -3358,7 +3358,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 120,
     image: bookOnlineShopping,
     tag: "Ohio",
-    stripe_price_id: "price_placeholder_book_23",
+    stripe_price_id: "price_1TOQK1J8osfwYbX75DuB4Qmo",
     category: "finance",
     ideal_for: "Ohio homebuyers, sellers, real estate agents, title officers, and anyone involved in a real estate transaction",
     outcomes: [
@@ -3415,7 +3415,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 115,
     image: bookIdentityTheft,
     tag: "Ohio",
-    stripe_price_id: "price_placeholder_book_24",
+    stripe_price_id: "price_1TOQK7J8osfwYbX7SQV8lt4E",
     category: "business",
     ideal_for: "Ohio small business owners, office managers, HR directors, and board members responsible for data privacy",
     outcomes: [
@@ -3472,7 +3472,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 75,
     image: bookTaxScam,
     tag: "Ohio",
-    stripe_price_id: "price_placeholder_book_25",
+    stripe_price_id: "price_1TOQKEJ8osfwYbX7rYFYvMqr",
     category: "scam",
     ideal_for: "all Ohio residents, fraud victims, community organizations, and anyone helping others navigate a cyber incident",
     outcomes: [
