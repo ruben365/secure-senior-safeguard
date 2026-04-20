@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { SEO, PAGE_SEO } from "@/components/SEO";
+import { SEO } from "@/components/SEO";
+import { PAGE_SEO } from "@/config/pageSeo";
 
 interface SitemapGroup {
   heading: string;

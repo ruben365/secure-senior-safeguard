@@ -9,9 +9,13 @@ interface Announcement {
   created_at: string;
 }
 
+// Module-level flag: once we know the table is missing, all instances skip the fetch
+let announcementsTableKnownMissing = false;
+
 export function AnnouncementBell() {
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [open, setOpen] = useState(false);
+  const [tableExists, setTableExists] = useState(!announcementsTableKnownMissing);
   const [dismissedIds, setDismissedIds] = useState<Set<string>>(() => {
     try {
       const stored = localStorage.getItem("invision_dismissed_announcements");
@@ -37,11 +41,17 @@ export function AnnouncementBell() {
   }, []);
 
   const fetchAnnouncements = async () => {
-    const { data } = await supabase
+    if (announcementsTableKnownMissing) return;
+    const { data, error } = await supabase
       .from("announcements")
       .select("id, title, content, created_at")
       .order("created_at", { ascending: false })
       .limit(10);
+    if (error) {
+      announcementsTableKnownMissing = true;
+      setTableExists(false);
+      return;
+    }
     if (data) setAnnouncements(data);
   };
 
@@ -77,6 +87,8 @@ export function AnnouncementBell() {
     if (diffD < 7) return `${diffD}d ago`;
     return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
   };
+
+  if (!tableExists) return null;
 
   return (
     <div className="relative">

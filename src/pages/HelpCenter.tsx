@@ -11,7 +11,8 @@ interface KbArticle {
   is_published: boolean;
   display_order?: number;
 }
-import { SEO, PAGE_SEO } from "@/components/SEO";
+import { SEO } from "@/components/SEO";
+import { PAGE_SEO } from "@/config/pageSeo";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";

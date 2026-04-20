@@ -4,7 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
-import { SEO, PAGE_SEO } from "@/components/SEO";
+import { SEO } from "@/components/SEO";
+import { PAGE_SEO } from "@/config/pageSeo";
 import { PageTransition } from "@/components/PageTransition";
 import {
   Card,

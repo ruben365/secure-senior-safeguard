@@ -14,7 +14,8 @@ import {
   Award,
   Mail,
 } from "lucide-react";
-import { SEO, PAGE_SEO } from "@/components/SEO";
+import { SEO } from "@/components/SEO";
+import { PAGE_SEO } from "@/config/pageSeo";
 
 const securityCards = [
   {
