@@ -153,8 +153,8 @@ function About() {
       </div>
 
       {/* Spacer for floating stats bar */}
-      <div className="hidden lg:block h-8" />
-      <div className="lg:hidden h-4" />
+      <div className="hidden lg:block h-4" />
+      <div className="lg:hidden h-2" />
 
       {/* Answer summary — who we are at a glance */}
       <AnswerSummary
@@ -168,7 +168,7 @@ function About() {
 
       {/* Our Story */}
       <MeshBackground variant="subtle" withOrbs>
-      <section className="py-10 md:py-14 bg-transparent relative overflow-hidden">
+      <section className="py-8 md:py-12 bg-transparent relative overflow-hidden">
 
         <div className="container mx-auto">
           <div className="grid md:grid-cols-2 gap-6 lg:gap-10 items-center">
@@ -226,10 +226,10 @@ function About() {
       <SectionDivider variant="wave" color="muted" />
 
       {/* Timeline */}
-      <section className="py-10 md:py-14 section-warm relative overflow-hidden">
+      <section className="py-7 md:py-10 section-warm relative overflow-hidden">
 
         <div className="container mx-auto">
-          <div className="text-center mb-8">
+          <div className="text-center mb-5">
             <span className="inline-block text-[10px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-3 py-1 rounded-full mb-3">
               Our Journey
             </span>
@@ -245,47 +245,49 @@ function About() {
       </section>
 
       {/* Founders */}
-      <section id="founders" className="py-10 md:py-14 bg-background relative overflow-hidden">
+      <section id="founders" className="py-7 md:py-10 bg-background relative overflow-hidden">
 
         <div className="container mx-auto">
-          <div className="text-center mb-8">
-            <span className="inline-block text-[10px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-3 py-1 rounded-full mb-3">
-              Meet Our Founders
+          <div className="text-center mb-5">
+            <span className="inline-block text-[10px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-3 py-1 rounded-full mb-2">
+              Meet Our Founder
             </span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-foreground mb-3">
+            <h2 className="text-2xl md:text-3xl font-black text-foreground mb-2">
               The People Behind the <span className="text-primary">Mission</span>
             </h2>
-            <p className="text-base text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
               United by experience, driven by purpose
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
-            <Card className="hss-card p-5 sm:p-6 border border-border/40 bg-card/70">
-              <div className="relative mb-4">
-                <div className="w-full aspect-[4/3] bg-gradient-to-br from-[#fff4f0] to-[#fde8dc] rounded-xl flex items-center justify-center">
-                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#d96c4a] to-[#c2410c] flex items-center justify-center shadow-lg">
-                    <span className="text-4xl font-black text-white">R</span>
+          <div className="max-w-2xl mx-auto">
+            <Card className="hss-card p-4 border border-border/40 bg-card/70">
+              <div className="flex gap-4 items-start">
+                <div className="relative flex-shrink-0">
+                  <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-[#fff4f0] to-[#fde8dc] flex items-center justify-center">
+                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#d96c4a] to-[#c2410c] flex items-center justify-center shadow-lg">
+                      <span className="text-2xl font-black text-white">R</span>
+                    </div>
                   </div>
                 </div>
-                <Badge className="absolute top-3 right-3 bg-primary text-primary-foreground text-[10px]">Co-Founder & CEO</Badge>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <h3 className="text-base font-black text-foreground">CEO &amp; Founder</h3>
+                    <Badge className="bg-primary text-primary-foreground text-[10px] shrink-0">CEO</Badge>
+                  </div>
+                  <p className="text-xs text-muted-foreground mb-2 leading-relaxed">
+                    Cybersecurity Analyst with 5 years of experience protecting
+                    organizations and families. After falling victim to a sophisticated scam that exposed
+                    passwords and emails — with criminals demanding payment to delete their
+                    data — our CEO was inspired to enter cybersecurity and make enterprise-level security
+                    accessible to everyone through <Link to="/training" className="text-primary hover:underline font-medium">our workshops</Link>.
+                  </p>
+                  <blockquote className="border-l-2 border-primary pl-3 italic text-xs text-muted-foreground">
+                    "Everyone deserves to feel safe online, regardless of their technical knowledge."
+                  </blockquote>
+                </div>
               </div>
-              <h3 className="text-xl font-black mb-1.5 text-foreground">Co-Founder &amp; CEO</h3>
-              <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
-                Cybersecurity Analyst with 5 years of experience protecting
-                organizations and families. After he and his wife fell
-                victim to a sophisticated scam that exposed their passwords
-                and emails - with criminals demanding payment to delete their
-                data - our CEO was inspired to enter the cybersecurity field,
-                embracing a deeper mission: making enterprise-level security
-                accessible to everyone through <Link to="/training" className="text-primary hover:underline font-medium">our workshops</Link> and hands-on education.
-              </p>
-              <blockquote className="border-l-2 border-primary pl-3 italic text-xs text-muted-foreground">
-                "Everyone deserves to feel safe online, regardless of their
-                technical knowledge."
-              </blockquote>
             </Card>
-
           </div>
         </div>
       </section>
@@ -294,16 +296,16 @@ function About() {
 
       {/* Values */}
       <MeshBackground variant="vibrant" withDots>
-      <section className="py-10 md:py-14">
+      <section className="py-7 md:py-10">
         <div className="container mx-auto">
-          <div className="text-center mb-8">
+          <div className="text-center mb-5">
             <span className="frosted-pill mb-3">Our Values</span>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-foreground mb-3">
               What Drives Us <span className="gradient-text-brand">Every Day</span>
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-6xl mx-auto">
             {values.map((value) => {
               const Icon = value.icon;
               return (
@@ -328,7 +330,7 @@ function About() {
       <SectionDivider variant="mountains" color="background" />
 
       {/* Community Impact */}
-      <section className="py-10 md:py-14 relative overflow-hidden">
+      <section className="py-7 md:py-10 relative overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${ohioNatureImpact})` }}
@@ -336,27 +338,27 @@ function About() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-primary/60 to-accent/70" />
 
         <div className="container mx-auto relative z-10 text-white">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black mb-2 drop-shadow-lg text-white">
+          <div className="text-center mb-5">
+            <h2 className="text-xl md:text-2xl font-black mb-1 drop-shadow-lg text-white">
               Our Community Impact
             </h2>
-            <p className="text-base max-w-2xl mx-auto drop-shadow-md text-white/95">
+            <p className="text-sm max-w-2xl mx-auto drop-shadow-md text-white/95">
               Protecting families and serving our local community
             </p>
           </div>
 
-          <div className="grid grid-cols-3 gap-3 sm:gap-4 max-w-4xl mx-auto">
+          <div className="grid grid-cols-3 gap-2 sm:gap-3 max-w-3xl mx-auto">
             {[
               { icon: MapPin, title: "Ohio-Based", desc: "Serving local communities across the Buckeye State" },
               { icon: Award, title: "Veteran-Supporting", desc: "Honoring those who served with special discounts" },
               { icon: Heart, title: "Mission-Driven", desc: "Protection over profit, always" },
             ].map((item) => (
-              <div key={item.title} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 text-center transition-all duration-300 hover:-translate-y-1 shine-hover">
-                <div className="w-10 h-10 mx-auto mb-2 rounded-xl bg-white/15 flex items-center justify-center">
-                  <item.icon className="w-5 h-5 text-white" />
+              <div key={item.title} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-3 text-center transition-all duration-300 hover:-translate-y-1 shine-hover">
+                <div className="w-8 h-8 mx-auto mb-1.5 rounded-lg bg-white/15 flex items-center justify-center">
+                  <item.icon className="w-4 h-4 text-white" />
                 </div>
-                <div className="font-bold text-sm mb-1">{item.title}</div>
-                <div className="text-[11px] text-white/95 leading-snug">{item.desc}</div>
+                <div className="font-bold text-xs mb-0.5">{item.title}</div>
+                <div className="text-[10px] text-white/90 leading-snug">{item.desc}</div>
               </div>
             ))}
           </div>
@@ -366,30 +368,30 @@ function About() {
       <SectionDivider variant="wave" color="background" flip />
 
       {/* Who We Help */}
-      <section className="py-10 md:py-14 bg-background">
+      <section className="py-7 md:py-10 bg-background">
         <div className="container mx-auto">
-          <div className="text-center mb-8">
-            <span className="inline-block text-[10px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-3 py-1 rounded-full mb-3">
+          <div className="text-center mb-5">
+            <span className="inline-block text-[10px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-3 py-1 rounded-full mb-2">
               Who We Serve
             </span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-foreground mb-3">
+            <h2 className="text-2xl md:text-3xl font-black text-foreground mb-2">
               Protecting Those Who <span className="text-primary">Matter Most</span>
             </h2>
-            <p className="text-base text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
               From multi-generational families to seniors learning new technology
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-5 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
             <div className="relative group overflow-hidden rounded-xl shadow-lg border border-border/60">
               <img
                 src={familyGathering}
                 alt="Multi-generational family enjoying time together"
-                className="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-40 object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/30 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
-                <h3 className="text-lg font-black mb-1">Family Protection</h3>
+              <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                <h3 className="text-base font-black mb-0.5">Family Protection</h3>
                 <p className="text-white/90 text-xs">
                   Keeping your loved ones safe across all generations.
                 </p>
@@ -400,11 +402,11 @@ function About() {
               <img
                 src={seniorLearning}
                 alt="Senior learning to use technology with instructor"
-                className="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-40 object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/30 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
-                <h3 className="text-lg font-black mb-1">Senior Education</h3>
+              <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                <h3 className="text-base font-black mb-0.5">Senior Education</h3>
                 <p className="text-white/90 text-xs">
                   Patient, compassionate training for seniors online.
                 </p>
@@ -425,7 +427,7 @@ function About() {
 
 
       {/* CTA with Field Background */}
-      <section className="py-10 md:py-14 relative overflow-hidden" id="cta">
+      <section className="py-8 md:py-12 relative overflow-hidden" id="cta">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${fieldSunsetCta})` }}

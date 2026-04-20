@@ -11,19 +11,19 @@ const stats = [
 
 export const AchievementsShowcase = () => {
   return (
-    <section className="py-16 bg-gradient-to-b from-background to-muted/20">
+    <section className="py-8 bg-gradient-to-b from-background to-muted/20">
       <div className="container mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-6"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-xl md:text-2xl font-bold mb-1.5">
             Our Achievements
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
             Protecting families and communities across Ohio
           </p>
         </motion.div>
@@ -41,17 +41,17 @@ export const AchievementsShowcase = () => {
             return (
               <Card
                 key={index}
-                className="p-4 text-center bg-gradient-to-br from-primary/5 to-accent/5 border-primary/10"
+                className="p-3 text-center bg-gradient-to-br from-primary/5 to-accent/5 border-primary/10"
               >
-                <div className="flex justify-center mb-2">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                    <IconComponent className="w-5 h-5 text-primary" />
+                <div className="flex justify-center mb-1.5">
+                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                    <IconComponent className="w-4 h-4 text-primary" />
                   </div>
                 </div>
-                <div className="text-2xl md:text-3xl font-bold text-primary">
+                <div className="text-xl md:text-2xl font-bold text-primary">
                   {stat.value}
                 </div>
-                <div className="text-sm text-muted-foreground">
+                <div className="text-xs text-muted-foreground">
                   {stat.label}
                 </div>
               </Card>
