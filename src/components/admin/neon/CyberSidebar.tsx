@@ -29,6 +29,7 @@ const menuItems: MenuItem[] = [
     { title: "Database", href: "/admin/database", icon: Database },
     { title: "Notifications", href: "/admin/notifications", icon: Bell },
     { title: "Security", href: "/admin/security", icon: Lock },
+    { title: "Website Scanner", href: "/admin/security-scanner", icon: Globe },
   ]},
   { title: "Content", icon: FileText, children: [
     { title: "Pages", href: "/admin/content/pages", icon: FileEdit },

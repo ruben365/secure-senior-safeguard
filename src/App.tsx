@@ -161,6 +161,7 @@ const DatabaseView = lazy(() => import("./pages/admin/cyber/DatabaseView"));
 const CyberNotifications = lazy(() => import("./pages/admin/cyber/Notifications"));
 const SecuritySettings = lazy(() => import("./pages/admin/cyber/SecuritySettings"));
 const CyberAnalytics = lazy(() => import("./pages/admin/cyber/CyberAnalytics"));
+const SecurityScanner = lazy(() => import("./pages/admin/cyber/SecurityScanner"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -280,6 +281,7 @@ function PublicRoutes() {
           <Route path="database" element={<DatabaseView />} />
           <Route path="notifications" element={<CyberNotifications />} />
           <Route path="security" element={<SecuritySettings />} />
+          <Route path="security-scanner" element={<SecurityScanner />} />
           <Route path="reports" element={<CyberAnalytics />} />
           <Route path="insights" element={<CyberAnalytics />} />
           <Route path="content/testimonials" element={<TestimonialsAdmin />} />
