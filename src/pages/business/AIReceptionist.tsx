@@ -365,7 +365,7 @@ const AIReceptionist = () => {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-                <Button asChild size="heroPill" variant="heroOutline">
+                <Button asChild size="heroPill" variant="outline">
                   <a href={SITE.phone.tel}>
                     <Phone className="mr-2 h-4 w-4" />
                     Call {SITE.phone.display} Now

@@ -46,7 +46,7 @@ function useCountUp(target: number, duration = 2000) {
 }
 
 const stats = [
-  { target: 5000, suffix: "+", label: "Families Protected", icon: Shield },
+  { target: 500, suffix: "+", label: "Families Protected", icon: Shield },
   { target: 99, suffix: "%", label: "Detection Rate", icon: Zap },
   { target: 24, suffix: "/7", label: "Expert Support", icon: Users },
   { target: 10, suffix: "%", label: "Veteran Discount", icon: Award },

@@ -54,26 +54,6 @@ const communityPartners = [
   },
 ];
 
-const placeholderPartners = [
-  {
-    name: "Healthcare Technology Alliance",
-    description:
-      "A growing coalition of regional healthcare IT providers working toward unified digital safety standards.",
-    status: "In Discussion",
-  },
-  {
-    name: "Ohio Senior Services Coalition",
-    description:
-      "Statewide network of senior service providers focused on digital literacy and fraud prevention.",
-    status: "Prospective",
-  },
-  {
-    name: "Dayton Area Chamber of Commerce",
-    description:
-      "Supporting small business cybersecurity awareness across the Greater Dayton region.",
-    status: "Prospective",
-  },
-];
 
 export default function Partners() {
   return (
@@ -196,37 +176,6 @@ export default function Partners() {
             </div>
           </div>
 
-          {/* Placeholder partner cards */}
-          <div className="grid sm:grid-cols-3 gap-5">
-            {placeholderPartners.map((p) => (
-              <div
-                key={p.name}
-                className="hss-card rounded-xl border bg-card p-6 flex flex-col gap-3"
-              >
-                <div className="flex items-center justify-between mb-1">
-                  <div className="hss-icon-bubble">
-                    <Handshake className="w-5 h-5 text-[#d96c4a]" />
-                  </div>
-                  <Badge
-                    variant="outline"
-                    className="text-[10px] text-muted-foreground"
-                  >
-                    {p.status}
-                  </Badge>
-                </div>
-                <h3 className="font-semibold leading-snug">{p.name}</h3>
-                <p className="text-sm text-muted-foreground flex-1">
-                  {p.description}
-                </p>
-                <Button asChild size="sm" variant="outline" className="w-full mt-1">
-                  <Link to="/contact" className="gap-1.5">
-                    Partner with us
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </Button>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 

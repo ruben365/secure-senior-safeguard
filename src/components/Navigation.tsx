@@ -22,7 +22,7 @@ import SearchDialog from "@/components/SearchDialog";
 const primaryLinks = [
   { name: "AI", href: "/ai" },
   { name: "Workshops", href: "/training" },
-  { name: "Resources", href: "/resources" },
+  { name: "Library", href: "/library" },
   { name: "About", href: "/about" },
 ];
 

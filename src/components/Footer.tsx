@@ -83,7 +83,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
       links: [
         { to: "/", label: "Home" },
         { to: "/about", label: "About" },
-        { to: "/resources", label: "Resources" },
+        { to: "/library", label: "Library" },
         { to: "/portfolio", label: "Portfolio" },
         { to: "/articles", label: "Articles" },
         { to: "/careers", label: "Careers" },
