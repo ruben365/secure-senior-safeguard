@@ -32,7 +32,7 @@ function CtaPrimary({ to, children }: { to: string; children: React.ReactNode })
   return (
     <Link
       to={to}
-      className="hss-cta-primary inline-flex items-center justify-center gap-2 h-10 sm:h-12 px-5 sm:px-8 rounded-full text-[13px] sm:text-[14px] font-semibold transition-all hover:-translate-y-[2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px]"
+      className="hss-cta-primary inline-flex items-center justify-center gap-2 h-8 sm:h-10 px-4 sm:px-7 rounded-full text-[11px] sm:text-[13px] font-semibold transition-all hover:-translate-y-[2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px]"
     >
       {children}
     </Link>
@@ -43,7 +43,7 @@ function CtaGhost({ to, children }: { to: string; children: React.ReactNode }) {
   return (
     <Link
       to={to}
-      className="hss-cta-ghost inline-flex items-center justify-center gap-2 h-10 sm:h-12 px-5 sm:px-8 rounded-full text-[13px] sm:text-[14px] font-semibold transition-all hover:-translate-y-[1px] border border-[#E0E0E0]"
+      className="hss-cta-ghost inline-flex items-center justify-center gap-2 h-8 sm:h-10 px-4 sm:px-7 rounded-full text-[11px] sm:text-[13px] font-semibold transition-all hover:-translate-y-[1px] border border-[#E0E0E0]"
     >
       {children}
     </Link>
