@@ -66,10 +66,10 @@ export function QuickActionsGrid({
     },
     {
       icon: FileText,
-      label: "Resources",
+      label: "Library",
       description: "Guides & tools",
       color: "from-green-500 to-emerald-600",
-      action: () => navigate("/resources"),
+      action: () => navigate("/library"),
     },
     {
       icon: MessageCircle,

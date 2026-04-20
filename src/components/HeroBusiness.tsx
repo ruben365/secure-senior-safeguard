@@ -99,7 +99,7 @@ export const HeroBusiness = ({ onStrategyCall }: { onStrategyCall: () => void })
             primaryText="Request Demo"
             primaryHref="/contact"
             secondaryText="Learn More"
-            secondaryHref="/resources"
+            secondaryHref="/library"
           />
 
           {/* Mobile fine print */}

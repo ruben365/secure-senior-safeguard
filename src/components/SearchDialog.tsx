@@ -19,7 +19,7 @@ const searchIndex: SearchPage[] = [
   { title: "Home", description: "AI scam protection and cybersecurity for Ohio families", path: "/" },
   { title: "AI Services", description: "AI receptionist, automation, and business services", path: "/ai" },
   { title: "Workshops", description: "AI scam prevention workshops for seniors and families", path: "/training" },
-  { title: "Resources", description: "Cybersecurity guides and digital safety tools", path: "/resources" },
+  { title: "Library", description: "Cybersecurity guides and digital safety tools", path: "/library" },
   { title: "Digital Library", description: "E-books and guides for digital safety", path: "/library" },
   { title: "About", description: "Veteran-founded cybersecurity team in Kettering Ohio", path: "/about" },
   { title: "Contact", description: "Get in touch with InVision Network", path: "/contact" },

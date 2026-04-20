@@ -23,7 +23,7 @@ const groups: SitemapGroup[] = [
       { label: "AI for Business", path: "/ai" },
       { label: "Workshops", path: "/training" },
       { label: "AI Scam Analysis", path: "/training/ai-analysis" },
-      { label: "Resources", path: "/resources" },
+      { label: "Library", path: "/library" },
       { label: "Digital Library", path: "/library" },
     ],
   },

@@ -121,7 +121,7 @@ export default function PurchasePage() {
               <span>/</span>
               <Link to="/library" className="hover:text-foreground">Library</Link>
               <span>/</span>
-              <Link to={`/resources/${book.slug}`} className="hover:text-foreground truncate max-w-[160px]">
+              <Link to={`/library/${book.slug}`} className="hover:text-foreground truncate max-w-[160px]">
                 {book.title}
               </Link>
               <span>/</span>

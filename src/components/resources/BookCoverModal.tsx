@@ -181,7 +181,7 @@ const BookCoverModal = ({
 
             <div className="grid sm:grid-cols-2 gap-1 mt-2">
               <Button variant="ghost" asChild className="h-8 justify-start text-[11px] text-muted-foreground hover:text-foreground">
-                <Link to={`/resources/${book.slug}`} onClick={onClose}>
+                <Link to={`/library/${book.slug}`} onClick={onClose}>
                   View full preview
                   <ArrowRight className="w-3 h-3 ml-1" />
                 </Link>
