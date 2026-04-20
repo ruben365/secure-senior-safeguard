@@ -72,6 +72,7 @@ serve(async (req) => {
       expand: ["data.items.data.price.product"],
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const subscriptionData = subscriptions.data.map((sub: any) => {
       const product = sub.items.data[0]?.price?.product;
       const planName =

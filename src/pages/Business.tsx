@@ -1501,7 +1501,7 @@ function Business() {
                   type="button"
                   onClick={() => setActiveConsultingTab(tab.key)}
                   aria-pressed={activeConsultingTab === tab.key}
-                  className={`px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 flex-1 min-w-[130px] ${
+                  className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 flex-1 min-w-[100px] sm:min-w-[130px] ${
                   activeConsultingTab === tab.key ?
                   "bg-gradient-to-r from-primary to-accent text-white shadow-lg shadow-primary/20 scale-[1.02]" :
                   "hover:bg-card text-muted-foreground hover:text-foreground"}`

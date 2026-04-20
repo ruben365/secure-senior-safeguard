@@ -542,11 +542,11 @@
     letter-spacing: -0.025em;
   }
 
-  /* Primary CTA — compact pill, minimum 15px font for readability */
+  /* Primary CTA — compact pill on mobile */
   .hero-home__cta {
-    height: 48px;
-    padding: 0 2rem;
-    font-size: 0.9375rem;
+    height: 36px;
+    padding: 0 1.25rem;
+    font-size: 0.8125rem;
   }
 
   /* Overlay: swap side-wall dark for gentle top-to-bottom
