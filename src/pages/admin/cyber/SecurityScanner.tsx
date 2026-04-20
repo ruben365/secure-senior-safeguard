@@ -19,19 +19,25 @@ import { formatDistanceToNow } from "date-fns";
 // ─── Types ───────────────────────────────────────────────────────────────────
 
 interface CheckResult {
-  status: "pass" | "warning" | "fail" | "info";
+  status: "pass" | "warn" | "warning" | "fail" | "info";
   message: string;
   detail?: string;
-  severity?: "low" | "medium" | "high" | "critical";
+  severity?: "low" | "medium" | "high" | "critical" | "info";
 }
 
 interface ScanResults {
-  ssl: { checks: CheckResult[] };
-  headers: { checks: CheckResult[] };
-  dns: { checks: CheckResult[] };
-  exposedPaths: { checks: CheckResult[] };
-  content: { checks: CheckResult[] };
-  performance?: { checks: CheckResult[] };
+  url?: string;
+  domain?: string;
+  grade?: string;
+  score?: number;
+  checkedAt?: string;
+  responseTimeMs?: number;
+  ssl: CheckResult[];
+  headers: CheckResult[];
+  dns: CheckResult[];
+  exposedPaths: CheckResult[];
+  content: CheckResult[];
+  performance?: CheckResult[];
 }
 
 interface ScanRecord {
@@ -67,6 +73,7 @@ const GRADE_BG: Record<string, string> = {
 
 const STATUS_ICON: Record<string, JSX.Element> = {
   pass: <CheckCircle className="h-4 w-4 text-emerald-400 shrink-0" />,
+  warn: <AlertTriangle className="h-4 w-4 text-yellow-400 shrink-0" />,
   warning: <AlertTriangle className="h-4 w-4 text-yellow-400 shrink-0" />,
   fail: <XCircle className="h-4 w-4 text-red-400 shrink-0" />,
   info: <Eye className="h-4 w-4 text-blue-400 shrink-0" />,
@@ -118,7 +125,7 @@ function SectionCard({
 }) {
   const [open, setOpen] = useState(true);
   const failCount = checks.filter((c) => c.status === "fail").length;
-  const warnCount = checks.filter((c) => c.status === "warning").length;
+  const warnCount = checks.filter((c) => c.status === "warning" || c.status === "warn").length;
 
   return (
     <Card className="bg-[#111827] border-[#1F2937]">
@@ -309,8 +316,6 @@ export default function SecurityScanner() {
       if (res.error) throw new Error(res.error.message);
       const payload = res.data as {
         success: boolean;
-        grade: string;
-        score: number;
         results: ScanResults;
         ai_analysis: string | null;
         duration_ms?: number;
@@ -322,15 +327,15 @@ export default function SecurityScanner() {
       setProgress(100);
       setProgressLabel("Done");
       setResult({
-        grade: payload.grade,
-        score: payload.score,
+        grade: payload.results.grade ?? "?",
+        score: payload.results.score ?? 0,
         results: payload.results,
         ai_analysis: payload.ai_analysis,
         url: trimmed,
         duration: payload.duration_ms,
       });
       void refetchHistory();
-      toast.success(`Scan complete — Grade ${payload.grade} (${payload.score}/100)`);
+      toast.success(`Scan complete — Grade ${payload.results.grade} (${payload.results.score}/100)`);
     } catch (err) {
       clearInterval(ticker);
       toast.error(err instanceof Error ? err.message : "Scan failed. Check console.");
@@ -362,13 +367,17 @@ export default function SecurityScanner() {
       "## AI Analysis",
       result.ai_analysis ?? "No AI analysis available.",
       "",
-      ...Object.entries(result.results).flatMap(([key, section]) => [
-        `## ${SECTION_LABELS[key] ?? key}`,
-        ...(section?.checks ?? []).map(
-          (c: CheckResult) => `- [${c.status.toUpperCase()}] ${c.message}${c.detail ? ` — ${c.detail}` : ""}`
-        ),
-        "",
-      ]),
+      ...["ssl", "headers", "dns", "exposedPaths", "content", "performance"].flatMap((key) => {
+        const section = (result.results as Record<string, unknown>)[key];
+        if (!Array.isArray(section) || section.length === 0) return [];
+        return [
+          `## ${SECTION_LABELS[key] ?? key}`,
+          ...(section as CheckResult[]).map(
+            (c) => `- [${c.status.toUpperCase()}] ${c.message}${c.detail ? ` — ${c.detail}` : ""}`
+          ),
+          "",
+        ];
+      }),
     ].join("\n");
 
     const blob = new Blob([report], { type: "text/plain" });
@@ -379,8 +388,12 @@ export default function SecurityScanner() {
     URL.revokeObjectURL(a.href);
   };
 
+  const SECTION_KEYS = ["ssl", "headers", "dns", "exposedPaths", "content", "performance"];
   const sectionKeys = result
-    ? Object.keys(result.results).filter((k) => (result.results as Record<string, { checks: CheckResult[] }>)[k]?.checks?.length)
+    ? SECTION_KEYS.filter((k) => {
+        const val = (result.results as Record<string, unknown>)[k];
+        return Array.isArray(val) && val.length > 0;
+      })
     : [];
 
   return (
@@ -575,7 +588,7 @@ export default function SecurityScanner() {
                   <SectionCard
                     key={key}
                     sectionKey={key}
-                    checks={(result.results as Record<string, { checks: CheckResult[] }>)[key].checks}
+                    checks={(result.results as Record<string, CheckResult[]>)[key]}
                   />
                 ))}
               </div>
