@@ -382,7 +382,7 @@ serve(async (req) => {
 
               <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 20px 0;">
                 <p style="margin: 0; font-size: 14px;">
-                  <strong>Questions?</strong> Reply to this email or call <a href="(937) 749-7579">(937) 749-7579</a>
+                  <strong>Questions?</strong> Reply to this email or call <a href="tel:+19377497579">(937) 749-7579</a>
                 </p>
               </div>
 
@@ -428,7 +428,7 @@ serve(async (req) => {
 
               <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 20px 0;">
                 <p style="margin: 0; font-size: 14px;">
-                  <strong>Questions?</strong> Reply to this email or call <a href="(937) 749-7579">(937) 749-7579</a>
+                  <strong>Questions?</strong> Reply to this email or call <a href="tel:+19377497579">(937) 749-7579</a>
                 </p>
               </div>
 
@@ -564,7 +564,7 @@ serve(async (req) => {
 
               <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 20px 0;">
                 <p style="margin: 0; font-size: 14px;">
-                  <strong>Questions?</strong> Reply to this email or call <a href="(937) 749-7579">(937) 749-7579</a>
+                  <strong>Questions?</strong> Reply to this email or call <a href="tel:+19377497579">(937) 749-7579</a>
                 </p>
               </div>
 
@@ -678,7 +678,7 @@ serve(async (req) => {
 
               <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 20px 0;">
                 <p style="margin: 0; font-size: 14px;">
-                  <strong>Questions?</strong> Reply to this email or call <a href="(937) 749-7579">(937) 749-7579</a>
+                  <strong>Questions?</strong> Reply to this email or call <a href="tel:+19377497579">(937) 749-7579</a>
                 </p>
               </div>
 

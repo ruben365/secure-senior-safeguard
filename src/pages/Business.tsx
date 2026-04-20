@@ -330,7 +330,7 @@ const PricingCard = ({
           </ul>
           <Button
           variant={featured ? "default" : "outline"}
-          className="w-full mt-auto h-10 sm:h-12 rounded-xl text-sm sm:text-base"
+          className="w-full mt-auto h-8 sm:h-10 rounded-xl text-xs sm:text-sm"
           onClick={onButtonClick}>
           
             {buttonText}
@@ -1501,7 +1501,7 @@ function Business() {
                   type="button"
                   onClick={() => setActiveConsultingTab(tab.key)}
                   aria-pressed={activeConsultingTab === tab.key}
-                  className={`px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 flex-1 min-w-[130px] ${
+                  className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 flex-1 min-w-[100px] sm:min-w-[130px] ${
                   activeConsultingTab === tab.key ?
                   "bg-gradient-to-r from-primary to-accent text-white shadow-lg shadow-primary/20 scale-[1.02]" :
                   "hover:bg-card text-muted-foreground hover:text-foreground"}`
@@ -1543,7 +1543,7 @@ function Business() {
                       setModalOpen(true);
                     }}
                     size="lg"
-                    className="h-10 sm:h-12 px-6 sm:px-10 rounded-full bg-gradient-to-r from-primary to-accent text-white text-sm sm:text-base font-semibold shadow-lg shadow-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300">
+                    className="h-8 sm:h-10 px-4 sm:px-8 rounded-full bg-gradient-to-r from-primary to-accent text-white text-xs sm:text-sm font-semibold shadow-lg shadow-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300">
 
                       Book Discovery Call ($199)
                     </Button>
@@ -1578,7 +1578,7 @@ function Business() {
                       setModalOpen(true);
                     }}
                     size="lg"
-                    className="h-10 sm:h-12 px-6 sm:px-10 rounded-full bg-gradient-to-r from-primary to-accent text-white text-sm sm:text-base font-semibold shadow-lg shadow-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300">
+                    className="h-8 sm:h-10 px-4 sm:px-8 rounded-full bg-gradient-to-r from-primary to-accent text-white text-xs sm:text-sm font-semibold shadow-lg shadow-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300">
                     
                       Get Pre-Purchase Vetting
                     </Button>
@@ -1613,7 +1613,7 @@ function Business() {
                       setModalOpen(true);
                     }}
                     size="lg"
-                    className="h-10 sm:h-12 px-6 sm:px-10 rounded-full bg-gradient-to-r from-primary to-accent text-white text-sm sm:text-base font-semibold shadow-lg shadow-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300">
+                    className="h-8 sm:h-10 px-4 sm:px-8 rounded-full bg-gradient-to-r from-primary to-accent text-white text-xs sm:text-sm font-semibold shadow-lg shadow-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300">
                     
                       Get Security Audit
                     </Button>
@@ -1648,7 +1648,7 @@ function Business() {
                       setModalOpen(true);
                     }}
                     size="lg"
-                    className="h-10 sm:h-12 px-6 sm:px-10 rounded-full bg-gradient-to-r from-primary to-accent text-white text-sm sm:text-base font-semibold shadow-lg shadow-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300">
+                    className="h-8 sm:h-10 px-4 sm:px-8 rounded-full bg-gradient-to-r from-primary to-accent text-white text-xs sm:text-sm font-semibold shadow-lg shadow-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300">
                     
                       Get Safe Exit Strategy
                     </Button>
@@ -1777,10 +1777,10 @@ function Business() {
                       setInquiryDialogOpen(true);
                     }}
                     size="lg"
-                    className="rounded-full bg-gradient-to-r from-primary to-accent text-white text-sm sm:text-base font-semibold shadow-lg hover:shadow-xl hover:scale-[1.03] transition-all">
+                    className="rounded-full bg-gradient-to-r from-primary to-accent text-white text-xs sm:text-sm font-semibold shadow-lg hover:shadow-xl hover:scale-[1.03] transition-all">
                     Request Custom Quote
                   </Button>
-                  <Button asChild variant="outline" size="lg" className="rounded-full text-sm sm:text-base font-semibold hover:scale-[1.03] transition-all">
+                  <Button asChild variant="outline" size="lg" className="rounded-full text-xs sm:text-sm font-semibold hover:scale-[1.03] transition-all">
                     <Link to="/contact">Talk to Our Design Team</Link>
                   </Button>
                 </div>

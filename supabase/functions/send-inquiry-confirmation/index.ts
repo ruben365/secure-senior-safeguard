@@ -187,7 +187,7 @@ serve(async (req) => {
             <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin: 20px 0;">
               <p style="margin: 0; font-size: 14px;">
                 <strong>Need immediate assistance?</strong><br>
-                Call: <a href="(937) 749-7579">(937) 749-7579</a><br>
+                Call: <a href="tel:+19377497579">(937) 749-7579</a><br>
                 Email: <a href="mailto:hello@invisionnetwork.org">hello@invisionnetwork.org</a>
               </p>
             </div>
