@@ -30,6 +30,9 @@
 /* Site-wide warm gradient unification — imported last to win the cascade */
 @import "./styles/site-unification.css";
 
+/* Glassmorphism utility system — imported after unification to override bg */
+@import "./styles/glassmorphism.css";
+
 /* ═══════════════════════════════════════════════════════════════════
    GLOBAL OVERRIDES — no shadows, HD sharpness
    ═══════════════════════════════════════════════════════════════════ */
