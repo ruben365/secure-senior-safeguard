@@ -2040,7 +2040,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 150,
     image: bookGrandparentScam,
     tag: "New",
-    stripe_price_id: "price_seniors_scam_guide_placeholder",
+    stripe_price_id: "price_1TOPGeJ8osfwYbX728o4KUmm", // prod_UN9YEGivYHPkpQ
     category: "seniors",
     ideal_for: "adults 65 and older, caregivers, and family members supporting elderly relatives",
     outcomes: [
@@ -2100,7 +2100,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 140,
     image: bookCyberKids,
     tag: "New",
-    stripe_price_id: "price_ai_threats_ohio_placeholder",
+    stripe_price_id: "price_1TOPH2J8osfwYbX7YWvT9VDZ", // prod_UN9Y5DfaRrMMiK
     category: "family",
     ideal_for: "families with children and elderly parents, multigenerational Ohio households",
     outcomes: [
@@ -2158,7 +2158,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 170,
     image: bookBusinessCyber,
     tag: "New",
-    stripe_price_id: "price_business_playbook_placeholder",
+    stripe_price_id: "price_1TOPHKJ8osfwYbX7WmFnVhzw", // prod_UN9YKPeBTvydAP
     category: "business",
     ideal_for: "Ohio small business owners, managers, and operations leads with 5–50 employees",
     outcomes: [
@@ -2221,7 +2221,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 130,
     image: bookVoiceClone,
     tag: "New",
-    stripe_price_id: "price_voice_cloning_guide_placeholder",
+    stripe_price_id: "price_1TOPHRJ8osfwYbX7fa0zpzXt", // prod_UN9YO1Hm6ZuzN6
     category: "ai",
     ideal_for: "general public, families with elderly relatives, anyone who uses social media",
     outcomes: [
@@ -2279,7 +2279,7 @@ const BOOK_SEEDS: BookSeed[] = [
     total_pages: 90,
     image: bookSeniorTechSafety,
     tag: "New",
-    stripe_price_id: "price_grandparents_digital_placeholder",
+    stripe_price_id: "price_1TOPHtJ8osfwYbX7SdjyFDLU", // prod_UN9Z5r3VNr3MLz
     category: "seniors",
     ideal_for: "adults 70 and older, and family members who want to share a resource with elderly loved ones",
     outcomes: [
