@@ -89,7 +89,6 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
         { to: "/careers", label: "Careers" },
         { to: "/partners", label: "Partners" },
         { to: "/events", label: "Events" },
-        { to: "/pricing", label: "Pricing" },
       ],
     },
     {
@@ -325,11 +324,15 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
           <p className="text-white/55 text-xs text-center leading-tight max-w-4xl mx-auto mt-2">
             InVision Network provides educational services only. We are not
             legal, financial, tax, or licensed cybersecurity professionals. In
-            case of active fraud, identity theft, or criminal activity, contact
-            local law enforcement (911), your bank's fraud department immediately
-            using official phone numbers, and report to FTC at IdentityTheft.gov.
-            We never request passwords, 2FA codes, bank account information, or
-            Social Security numbers.
+            case of active fraud or identity theft, contact local law enforcement
+            (911), your bank's fraud department, and report to the FTC at{" "}
+            <a href="https://IdentityTheft.gov" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white underline underline-offset-2">IdentityTheft.gov</a>.
+            We never request passwords, 2FA codes, or bank information.{" "}
+            <Link to="/disclaimer" className="text-white/70 hover:text-white underline underline-offset-2">Full Disclaimer</Link>
+            {" · "}
+            <Link to="/privacy-policy" className="text-white/70 hover:text-white underline underline-offset-2">Privacy</Link>
+            {" · "}
+            <Link to="/terms-of-service" className="text-white/70 hover:text-white underline underline-offset-2">Terms</Link>
           </p>
         </div>
       </div>

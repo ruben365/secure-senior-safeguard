@@ -52,7 +52,7 @@ function CtaGhost({ to, children }: { to: string; children: React.ReactNode }) {
 
 /* ─── Animated counter ───────────────────────────────────────────── */
 function useCountUp(target: number, duration = 1800) {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(target);
   const ref = useRef<HTMLDivElement>(null);
   const started = useRef(false);
 
@@ -87,7 +87,7 @@ function useCountUp(target: number, duration = 1800) {
 /* Trust strip items */
 const trustItems = [
   { icon: MapPin,     label: "Kettering, Ohio based" },
-  { icon: ShieldCheck, label: "100+ families protected" },
+  { icon: ShieldCheck, label: "500+ families protected" },
   { icon: Clock,       label: "24/7 live support" },
   { icon: Award,       label: "10% veteran discount" },
   { icon: Phone,       label: "(937) 749-7579" },

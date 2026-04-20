@@ -22,7 +22,6 @@ const searchIndex: SearchPage[] = [
   { title: "Resources", description: "Cybersecurity guides and digital safety tools", path: "/resources" },
   { title: "Digital Library", description: "E-books and guides for digital safety", path: "/library" },
   { title: "About", description: "Veteran-founded cybersecurity team in Kettering Ohio", path: "/about" },
-  { title: "Pricing", description: "Transparent pricing for all services", path: "/pricing" },
   { title: "Contact", description: "Get in touch with InVision Network", path: "/contact" },
   { title: "FAQ", description: "Frequently asked questions about AI scam protection", path: "/faq" },
   { title: "Events", description: "Upcoming workshops and cybersecurity events in Ohio", path: "/events" },

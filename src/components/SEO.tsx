@@ -331,6 +331,44 @@ export const PAGE_SEO = {
           worstRating: "1",
         },
       },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "How does ScamShield AI protect me?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "ScamShield uses AI to analyze incoming calls, texts, and emails in real time. When it detects suspicious patterns, known scam numbers, phishing language, or cloned voices, it alerts you and blocks the threat.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Is my personal data safe with InVision Network?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Yes. We use encryption and never sell your data. As a veteran-supporting company, we take security personally. Your information is stored securely and only used to protect you from scams.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What makes you different from other companies?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "We are Ohio-based, veteran-supporting, and focused on protecting families and seniors from AI-powered scams. We provide education, support, and a personal relationship with every client.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "I want to protect my elderly parents who are not tech-savvy. Is this for them?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Yes. That is exactly who we designed ScamShield for. Our Family plan covers up to 5 members, and we provide simple setup assistance. Many of our clients are seniors or their family members.",
+            },
+          },
+        ],
+      },
     ] as Record<string, unknown>[],
   },
 
@@ -630,45 +668,6 @@ export const PAGE_SEO = {
       { name: "Home", url: "https://www.invisionnetwork.org/" },
       { name: "Portfolio", url: "https://www.invisionnetwork.org/portfolio" },
     ],
-  },
-
-  pricing: {
-    title: "Plans & Pricing",
-    description:
-      "Simple, transparent pricing for AI scam protection and cybersecurity workshops. Plans from $19/mo. 10% veteran discount. 30-day money-back guarantee. No contracts.",
-    keywords:
-      "InVision Network pricing, cybersecurity training cost, AI protection plans, family scam protection cost Ohio",
-    breadcrumbs: [
-      { name: "Home", url: "https://www.invisionnetwork.org/" },
-      { name: "Pricing", url: "https://www.invisionnetwork.org/pricing" },
-    ],
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      name: "InVision Network Protection Plans",
-      description: "AI scam protection and cybersecurity service plans for families and businesses in Ohio.",
-      url: "https://www.invisionnetwork.org/pricing",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Individual Training Session",
-          url: "https://www.invisionnetwork.org/pricing",
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Family Protection Plan",
-          url: "https://www.invisionnetwork.org/pricing",
-        },
-        {
-          "@type": "ListItem",
-          position: 3,
-          name: "Business AI Package",
-          url: "https://www.invisionnetwork.org/pricing",
-        },
-      ],
-    },
   },
 
   careers: {

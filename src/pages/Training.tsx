@@ -1324,7 +1324,7 @@ function LearnAndTrain() {
               Sleep Better Tonight
             </h2>
             <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-              Join 100+ families who trust InVision Network for their digital safety
+              Join 500+ families who trust InVision Network for their digital safety
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 flex-wrap justify-center items-center">
               <Button

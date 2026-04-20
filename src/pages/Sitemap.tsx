@@ -14,7 +14,6 @@ const groups: SitemapGroup[] = [
     pages: [
       { label: "Home", path: "/" },
       { label: "About", path: "/about" },
-      { label: "Pricing", path: "/pricing" },
       { label: "Contact", path: "/contact" },
     ],
   },

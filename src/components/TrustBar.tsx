@@ -1,7 +1,7 @@
 import { Shield, MapPin, Award, UserCheck } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 const TrustBar = () => {
-  const [familiesCount, setFamiliesCount] = useState(0);
+  const [familiesCount, setFamiliesCount] = useState(500);
   const [isVisible, setIsVisible] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const counterRef = useRef<HTMLDivElement>(null);
@@ -29,7 +29,7 @@ const TrustBar = () => {
     if (!isVisible) return;
     const duration = 2500;
     const startTime = performance.now();
-    const end = 100;
+    const end = 500;
     const easeOutQuad = (t: number) => t * (2 - t);
     const animate = (currentTime: number) => {
       const elapsed = currentTime - startTime;
@@ -46,7 +46,7 @@ const TrustBar = () => {
   const trustIndicators = [
     {
       icon: Shield,
-      text: "100+ Families Protected",
+      text: "500+ Families Protected",
       useCounter: true,
       count: familiesCount,
     },

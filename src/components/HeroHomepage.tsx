@@ -113,7 +113,7 @@ export const HeroHomepage = () => {
 
           {/* Headline */}
           <h1 className="hero-home__headline">
-            AI Protection
+            AI Protection{" "}
             <br />
             for Families &amp; Business
           </h1>

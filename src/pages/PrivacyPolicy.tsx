@@ -26,7 +26,7 @@ function PrivacyPolicy() {
             <h1 className="text-center mb-4">Privacy Policy</h1>
             <p className="text-center text-muted-foreground mb-8 text-lg">
               Last Updated:{" "}
-April 14, 2026
+April 20, 2026
             </p>
             <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
               Your privacy matters to us. This policy explains how we collect,
@@ -243,26 +243,44 @@ April 14, 2026
                   <h3 className="text-lg font-semibold mb-2">
                     Service Providers
                   </h3>
+                  <p className="text-muted-foreground mb-3">
+                    We share information with the following service providers
+                    who process data on our behalf under data processing
+                    agreements:
+                  </p>
                   <ul className="list-disc list-inside space-y-2 text-muted-foreground ml-4 mb-4">
                     <li>
-                      <strong>Payment Processing:</strong> Stripe processes
-                      payments on our behalf
+                      <strong>Stripe (stripe.com):</strong> Payment processing,
+                      subscription management, and fraud prevention. Stripe
+                      receives your payment card data directly; we only receive
+                      a tokenized reference. Stripe is PCI-DSS Level 1
+                      certified.
                     </li>
                     <li>
-                      <strong>Email Services:</strong> Email delivery and
-                      newsletter management
+                      <strong>Supabase (supabase.com):</strong> Our primary
+                      database and authentication provider. Stores your account
+                      information, order history, and content preferences on
+                      SOC 2 Type II certified infrastructure hosted in the
+                      United States.
                     </li>
                     <li>
-                      <strong>Video Conferencing:</strong> Zoom for virtual
-                      training sessions
+                      <strong>Resend (resend.com):</strong> Transactional email
+                      delivery (order confirmations, appointment reminders,
+                      password resets) and newsletter distribution. Resend
+                      receives your email address to deliver messages on our
+                      behalf.
                     </li>
                     <li>
-                      <strong>Analytics:</strong> Website analytics providers to
-                      understand usage patterns
+                      <strong>PostHog (posthog.com):</strong> Privacy-first
+                      product analytics and session recording (sensitive inputs
+                      such as form fields are automatically masked). PostHog
+                      collects anonymized usage data to help us improve the
+                      platform. Data is anonymized after 26 months and is never
+                      sold or used for advertising.
                     </li>
                     <li>
-                      <strong>Cloud Hosting:</strong> Secure cloud
-                      infrastructure providers
+                      <strong>Various AI providers:</strong> AI-powered scam
+                      detection and educational content generation
                     </li>
                   </ul>
 
@@ -453,15 +471,18 @@ April 14, 2026
                   </ul>
 
                   <h3 className="text-lg font-semibold mb-2">
-                    Analytics Cookies
+                    Analytics Cookies (PostHog)
                   </h3>
                   <p className="text-muted-foreground mb-4">
-                    Help us understand how visitors interact with our website.
+                    We use PostHog for privacy-first analytics. PostHog
+                    automatically masks sensitive form fields and does not use
+                    your data for advertising.
                   </p>
                   <ul className="list-disc list-inside space-y-2 text-muted-foreground ml-4 mb-4">
                     <li>Page views and navigation patterns</li>
-                    <li>Time spent on pages</li>
-                    <li>Error tracking</li>
+                    <li>Time spent on pages and feature engagement</li>
+                    <li>Error tracking and performance monitoring</li>
+                    <li>Session recordings (sensitive inputs are masked)</li>
                   </ul>
 
                   <h3 className="text-lg font-semibold mb-2">

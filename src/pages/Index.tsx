@@ -19,6 +19,12 @@ const FAQPreview = lazy(() =>
   })),
 );
 
+const LatestArticles = lazy(() =>
+  import("@/components/home/LatestArticles").then((m) => ({
+    default: m.LatestArticles,
+  })),
+);
+
 const LazySection = ({ children }: { children: React.ReactNode }) => (
   <Suspense fallback={<div className="h-48" />}>{children}</Suspense>
 );
@@ -84,6 +90,11 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
               </LazySection>
             </section>
           </div>
+
+          {/* 4. Latest Articles — only renders if DB has published articles */}
+          <LazySection>
+            <LatestArticles />
+          </LazySection>
 
           {/* 9. Final CTA — full-bleed photo with text anchored left
               so the couple's faces stay visible on the right */}
