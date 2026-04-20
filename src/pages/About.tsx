@@ -81,7 +81,7 @@ function About() {
       year: "Present Day",
       title: "Growing & Protecting",
       description:
-        "Today we're protecting over 100 families across Ohio and growing our mission to create a scam-free community.",
+        "Today we're protecting over 500 families across Ohio and growing our mission to create a scam-free community.",
     },
   ];
 
@@ -210,7 +210,7 @@ function About() {
               />
               <div className="absolute -bottom-4 sm:-bottom-6 -right-4 sm:-right-6 bg-primary text-primary-foreground p-4 sm:p-6 md:p-8 rounded-xl shadow-xl">
                 <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 sm:mb-2">
-                  100+
+                  500+
                 </div>
                 <div className="text-xs sm:text-sm md:text-base">
                   Families Protected
@@ -262,12 +262,9 @@ function About() {
           <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
             <Card className="hss-card p-5 sm:p-6 border border-border/40 bg-card/70">
               <div className="relative mb-4">
-                <div className="w-full aspect-[4/3] bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl flex items-center justify-center border-2 border-dashed border-primary/30">
-                  <div className="text-center p-4">
-                    <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-primary/10 flex items-center justify-center">
-                      <span className="text-3xl font-bold text-primary">R</span>
-                    </div>
-                    <p className="text-xs text-muted-foreground">Photo Coming Soon</p>
+                <div className="w-full aspect-[4/3] bg-gradient-to-br from-[#fff4f0] to-[#fde8dc] rounded-xl flex items-center justify-center">
+                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#d96c4a] to-[#c2410c] flex items-center justify-center shadow-lg">
+                    <span className="text-4xl font-black text-white">R</span>
                   </div>
                 </div>
                 <Badge className="absolute top-3 right-3 bg-primary text-primary-foreground text-[10px]">Co-Founder & CEO</Badge>

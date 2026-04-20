@@ -129,7 +129,7 @@ export function useFeaturedArticles(limit = 3) {
         .from("articles")
         .select("*")
         .eq("status", "published")
-        .order("views", { ascending: false, nullsFirst: false })
+        .order("published_at", { ascending: false, nullsFirst: false })
         .limit(limit);
 
       if (error) {
