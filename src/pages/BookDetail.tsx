@@ -44,7 +44,7 @@ export default function BookDetail() {
             <BookOpen className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
             <h1 className="text-2xl font-bold mb-2">Book Not Found</h1>
             <p className="text-muted-foreground mb-6">We could not find the book you are looking for.</p>
-            <Button asChild><Link to="/resources">Browse All Books</Link></Button>
+            <Button asChild><Link to="/library">Browse All Books</Link></Button>
           </div>
         </main>
         <Footer />
@@ -113,7 +113,7 @@ export default function BookDetail() {
             <nav className="flex items-center gap-2 text-sm text-muted-foreground">
               <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
               <span>/</span>
-              <Link to="/resources" className="hover:text-foreground transition-colors">Resources</Link>
+              <Link to="/library" className="hover:text-foreground transition-colors">Library</Link>
               <span>/</span>
               <span className="text-foreground font-medium truncate max-w-[200px]">{book.title}</span>
             </nav>
@@ -348,7 +348,7 @@ export default function BookDetail() {
                           <div className="flex items-center justify-between">
                             <span className="text-primary font-bold">${related.price.toFixed(2)}</span>
                             <Button variant="outline" size="sm" asChild>
-                              <Link to={`/resources/${related.slug}`}>View</Link>
+                              <Link to={`/library/${related.slug}`}>View</Link>
                             </Button>
                           </div>
                         </div>
@@ -364,7 +364,7 @@ export default function BookDetail() {
         {/* Back nav */}
         <div className="container mx-auto py-8 max-w-6xl">
           <Button variant="ghost" asChild className="gap-2">
-            <Link to="/resources">
+            <Link to="/library">
               <ArrowLeft className="h-4 w-4" />
               Back to All Resources
             </Link>

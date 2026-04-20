@@ -33,8 +33,8 @@ export const MAIN_NAV_ROUTES: NavRoute[] = [
     showInNav: true,
   },
   {
-    path: "/resources",
-    name: "Resources",
+    path: "/library",
+    name: "Library",
     description: "Digital products, books, and security tools",
     showInNav: true,
   },

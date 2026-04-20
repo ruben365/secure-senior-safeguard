@@ -70,7 +70,7 @@ const guides = [
     description: "Step-by-step guide to buying products and services",
     steps: [
       {
-        title: "Browse our Resources page",
+        title: "Browse our Library",
         description:
           "Find digital guides, security products, and training materials.",
       },

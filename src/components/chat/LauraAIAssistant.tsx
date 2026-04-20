@@ -54,7 +54,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
       icon: AlertTriangle,
       label: "Report a Scam",
       description: "Encountered something suspicious?",
-      href: "/resources",
+      href: "/library",
       color: "from-rose-500 to-orange-500",
       urgent: true,
     },

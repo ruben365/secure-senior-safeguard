@@ -458,7 +458,7 @@ export default function PaymentSuccess() {
                         variant="outline"
                         className="w-full"
                       >
-                        <Link to="/resources">
+                        <Link to="/library">
                           <ShoppingBag className="w-4 h-4 mr-2" />
                           Continue Shopping
                         </Link>

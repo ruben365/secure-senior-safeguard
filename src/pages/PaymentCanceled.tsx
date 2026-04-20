@@ -107,7 +107,7 @@ export default function PaymentCanceled() {
             {/* Action Buttons */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 animate-in slide-in-from-bottom duration-500 delay-300">
               <Button asChild size="lg" className="w-full">
-                <Link to="/resources">
+                <Link to="/library">
                   <ShoppingCart className="w-4 h-4 mr-2" />
                   View Cart & Checkout
                 </Link>

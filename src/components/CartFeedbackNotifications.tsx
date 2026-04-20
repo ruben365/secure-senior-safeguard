@@ -95,7 +95,7 @@ export const PurchaseThankYouNotification = forwardRef<HTMLDivElement>(function 
               className="w-full text-xs"
               variant="outline"
             >
-              <Link to="/resources">
+              <Link to="/library">
                 <Package className="w-3 h-3 mr-1.5" />
                 Continue Shopping
                 <ArrowRight className="w-3 h-3 ml-1.5" />

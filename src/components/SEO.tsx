@@ -571,7 +571,7 @@ export const PAGE_SEO = {
       "scam protection resources, AI security guides, cybersecurity articles, deepfake information, Ohio senior scam prevention",
     breadcrumbs: [
       { name: "Home", url: "https://www.invisionnetwork.org/" },
-      { name: "Resources", url: "https://www.invisionnetwork.org/resources" },
+      { name: "Library", url: "https://www.invisionnetwork.org/library" },
     ],
     structuredData: {
       "@context": "https://schema.org",
@@ -579,31 +579,31 @@ export const PAGE_SEO = {
       name: "InVision Network Cybersecurity Resource Library",
       description:
         "Expert cybersecurity guides, e-books, and digital safety toolkits for Ohio families, seniors, and small businesses.",
-      url: "https://www.invisionnetwork.org/resources",
+      url: "https://www.invisionnetwork.org/library",
       itemListElement: [
         {
           "@type": "ListItem",
           position: 1,
           name: "AI Scam Prevention Guide",
-          url: "https://www.invisionnetwork.org/resources/scam-prevention-guide",
+          url: "https://www.invisionnetwork.org/library/scam-prevention-guide",
         },
         {
           "@type": "ListItem",
           position: 2,
           name: "Deepfake Detection Handbook",
-          url: "https://www.invisionnetwork.org/resources/deepfake-detection",
+          url: "https://www.invisionnetwork.org/library/deepfake-detection",
         },
         {
           "@type": "ListItem",
           position: 3,
           name: "Family Digital Safety Toolkit",
-          url: "https://www.invisionnetwork.org/resources/family-safety-toolkit",
+          url: "https://www.invisionnetwork.org/library/family-safety-toolkit",
         },
         {
           "@type": "ListItem",
           position: 4,
           name: "Senior Tech & Safety Handbook",
-          url: "https://www.invisionnetwork.org/resources/senior-tech-handbook",
+          url: "https://www.invisionnetwork.org/library/senior-tech-handbook",
         },
       ],
     },

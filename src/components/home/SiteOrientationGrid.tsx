@@ -47,9 +47,9 @@ const pages = [
   },
   {
     icon: BookOpen,
-    title: "Resources",
+    title: "Library",
     description: "Guides, e-books, and security tools for your family.",
-    link: "/resources",
+    link: "/library",
     cta: "Browse Library",
     image: serviceFamilySafety,
     gradient: "from-accent/15 to-primary/10",
