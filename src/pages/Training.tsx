@@ -711,7 +711,7 @@ function LearnAndTrain() {
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Sparkles className="w-3.5 h-3.5 text-primary" />
-                <span className="text-primary">Trusted by 100+ Families</span>
+                <span className="text-primary">Trusted by 500+ Families</span>
               </span>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
                 Why Families <span className="text-primary">Trust Us</span>
