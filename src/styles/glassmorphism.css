@@ -1,0 +1,156 @@
+/* ═══════════════════════════════════════════════════════════════════
+   GLASSMORPHISM — Sitewide frosted glass system
+
+   Usage: apply utility class directly on elements, or use
+   .glass-context on a parent section to auto-glass all cards within it.
+
+   Light background:  .glass-card    → white frosted glass
+   Dark background:   .glass-dark    → white tinted frost
+   Modals:            .glass-modal   → ultra-clear frosted overlay
+   Forms:             .glass-panel   → soft glass form container
+   Feature blocks:    .glass-feature → glass feature/stat card
+   Pricing:           .glass-pricing → glass plan card
+   Newsletter:        .glass-newsletter → dark glass footer panel
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Light background glass card ───────────────────────────────── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(12px) saturate(1.4);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.48);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+/* ─── Dark background glass card ────────────────────────────────── */
+.glass-dark {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* ─── Modal glass ────────────────────────────────────────────────── */
+.glass-modal {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.14),
+    0 4px 24px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+/* ─── Form / panel glass ─────────────────────────────────────────── */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(10px) saturate(1.3);
+  -webkit-backdrop-filter: blur(10px) saturate(1.3);
+  border: 1px solid rgba(255, 255, 255, 0.40);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* ─── Feature/stat card glass ───────────────────────────────────── */
+.glass-feature {
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(10px) saturate(1.3);
+  -webkit-backdrop-filter: blur(10px) saturate(1.3);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 1rem;
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: box-shadow 0.22s ease, transform 0.22s ease;
+}
+
+.glass-feature:hover {
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  transform: translateY(-2px);
+}
+
+/* ─── Pricing card glass ─────────────────────────────────────────── */
+.glass-pricing {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.50);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.glass-pricing:hover,
+.glass-pricing.featured {
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  transform: translateY(-3px);
+}
+
+/* ─── Newsletter / footer glass panel (dark) ─────────────────────── */
+.glass-newsletter {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.10);
+}
+
+/* ─── Context wrapper: auto-glass all cards inside ───────────────── */
+/*
+  Add .glass-context to a section/div to auto-apply glass to all
+  standard shadcn cards (rounded-xl/lg with border and bg-card) within it.
+  Only targets cards that haven't opted out with border-0.
+*/
+.glass-context .rounded-lg.border:not(.border-0),
+.glass-context .rounded-xl.border:not(.border-0),
+.glass-context [class~="border"][class~="rounded-lg"]:not([class~="border-0"]),
+.glass-context [class~="border"][class~="rounded-xl"]:not([class~="border-0"]) {
+  background: rgba(255, 255, 255, 0.70);
+  backdrop-filter: blur(10px) saturate(1.3);
+  -webkit-backdrop-filter: blur(10px) saturate(1.3);
+  border-color: rgba(255, 255, 255, 0.44);
+  box-shadow:
+    0 2px 16px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* ─── Sitewide: apply to HowItWorks, Why InVision, Why Trust sections ── */
+
+/* Home story section cards */
+.hss-card,
+.hss-dark-card {
+  backdrop-filter: blur(24px) saturate(1.5);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+}
+
+/* FAQ section */
+.glass-faq [data-state] {
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ─── dot-grid-bg sections: enhance card glass depth ────────────── */
+.dot-grid-bg .rounded-lg.border,
+.dot-grid-bg .rounded-xl.border,
+.dot-grid-bg [class~="border"][class~="rounded-lg"],
+.dot-grid-bg [class~="border"][class~="rounded-xl"] {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(12px) saturate(1.3);
+  -webkit-backdrop-filter: blur(12px) saturate(1.3);
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow:
+    0 2px 16px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}

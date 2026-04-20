@@ -48,8 +48,13 @@ export function AnnouncementBell() {
       .order("created_at", { ascending: false })
       .limit(10);
     if (error) {
-      announcementsTableKnownMissing = true;
-      setTableExists(false);
+      const isTableMissing =
+        (error as { code?: string }).code === "42P01" ||
+        error.message?.includes("does not exist");
+      if (isTableMissing) {
+        announcementsTableKnownMissing = true;
+        setTableExists(false);
+      }
       return;
     }
     if (data) setAnnouncements(data);

@@ -181,16 +181,17 @@
   border-color: #b85535;
 }
 
-/* Ghost CTA pill */
+/* Ghost CTA pill — dark border + dark text, visible on any light background */
 .hss-cta-ghost {
   background: transparent;
-  color: var(--hss-dark);
-  border: 1px solid var(--hss-border);
+  color: #111111;
+  border: 1.5px solid rgba(17, 17, 17, 0.35);
 }
 
 .hss-cta-ghost:hover {
-  background: var(--hss-bg-gray);
-  border-color: #CCCCCC;
+  background: rgba(17, 17, 17, 0.06);
+  border-color: rgba(17, 17, 17, 0.5);
+  color: #000000;
 }
 
 /* ═══════════════════════════════════════════════════════════════════

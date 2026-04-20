@@ -239,7 +239,7 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
         <div className="space-y-2.5">
           {/* Donation Type Toggle — lower profile */}
           {type !== "monthly" && (
-            <div className="flex gap-1 p-0.5 bg-white/[0.04] rounded-md">
+            <div className="flex gap-1 p-0.5 bg-muted/60 rounded-md border border-border/50">
               <Button
                 type="button"
                 variant={donationType === "one-time" ? "default" : "ghost"}
@@ -275,7 +275,7 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
                   className={`py-1.5 rounded-lg text-center text-xs font-semibold transition-all border ${
                     selectedAmount === amount
                       ? "bg-primary text-white border-primary shadow-sm"
-                      : "bg-white/[0.04] border-border text-foreground/80 hover:border-primary/40"
+                      : "bg-background border-border text-foreground hover:border-primary/50 hover:bg-primary/5"
                   }`}
                 >
                   ${amount}
@@ -381,7 +381,7 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
               <Button
                 type="submit"
                 disabled={loading || finalAmount < 1}
-                className="w-full h-9 text-sm"
+                className="w-full h-9 text-sm bg-gradient-to-r from-[hsl(var(--coral-500))] to-[hsl(var(--lavender-500))] text-white border-0 hover:opacity-90 disabled:opacity-50"
               >
                 {loading ? (
                   <>

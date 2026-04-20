@@ -1,8 +1,7 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import Hero from "@/components/Hero";
 import { SEO } from "@/components/SEO";
 import { PAGE_SEO } from "@/config/pageSeo";
 import { Button } from "@/components/ui/button";
@@ -35,9 +34,6 @@ import {
   Phone,
   Mail,
   Headphones,
-  Heart,
-  Zap,
-  Globe,
 } from "lucide-react";
 import { LIBRARY_BOOKS } from "@/data/libraryBooks";
 import { CATEGORY_LABELS, type BookCategory } from "@/config/bookCatalog";
@@ -46,11 +42,6 @@ import { useBookPurchase } from "@/hooks/useBookPurchase";
 import { EmbeddedPaymentModal } from "@/components/payment/EmbeddedPaymentModal";
 import { storeBookReaderSession } from "@/lib/bookReaderSession";
 import { cn } from "@/lib/utils";
-import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
-import HeroFloatingStats from "@/components/business/HeroFloatingStats";
-import { HeroCTA } from "@/components/shared/HeroCTA";
-import { SectionDivider } from "@/components/pro";
-import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -103,633 +94,288 @@ const FAQS = [
   },
 ];
 
-const heroHeadlines = [
-  "Your Digital Safety Arsenal",
-  "Premium Security Guides & Books",
-  "Expert Resources for Every Family",
-  "Guides to Protect What Matters Most",
-];
+// ─── Featured books (first 4 from catalog) ──────────────────────────────────
 
-const FEATURED_BOOKS = LIBRARY_BOOKS.filter((b) =>
-  ["Best Seller", "Featured", "New"].includes(b.tag)
-).slice(0, 4);
+const FEATURED_BOOKS = LIBRARY_BOOKS.slice(0, 4);
 
-// ─── Hero Section (shared between landing + authenticated) ────────────────────
+// ─── Landing Page (not logged in) ───────────────────────────────────────────
 
-function LibraryHero({ isLoggedIn }: { isLoggedIn: boolean }) {
+function LibraryLanding() {
   return (
-    <div className="relative">
-      <Hero
-        backgroundImages={PROFESSIONAL_HERO_IMAGES.resources}
-        headline=""
-        subheadline=""
-        showScrollIndicator={true}
-      >
-        <div className="text-left mb-8">
-          <h1 className="font-extrabold text-white mb-4 leading-[1.05] tracking-tight text-[clamp(2.25rem,5vw,4rem)]">
-            <RotatingHeadlines headlines={heroHeadlines} className="" />
+    <div className="flex-1">
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#0f0808] via-[#1c0e0e] to-[#140d18] border-b pt-[clamp(100px,14vw,140px)] pb-20">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-20 right-10 w-80 h-80 rounded-full bg-[hsl(var(--coral-500)/0.2)] blur-3xl" />
+          <div className="absolute bottom-0 left-10 w-64 h-64 rounded-full bg-[hsl(var(--lavender-400)/0.2)] blur-3xl" />
+        </div>
+        <div className="container mx-auto max-w-4xl text-center relative">
+          <Badge className="mb-5 bg-white/10 text-white border-white/20 px-5 py-2 text-xs font-bold uppercase tracking-[0.15em]">
+            <Library className="h-3.5 w-3.5 mr-2" />
+            InVision Digital Library
+          </Badge>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-5 leading-tight text-white">
+            Expert Cybersecurity Books{" "}
+            <span className="bg-gradient-to-r from-[hsl(var(--coral-400))] to-[hsl(var(--lavender-400))] bg-clip-text text-transparent">for Every Family</span>
           </h1>
-          <p className="text-base md:text-lg text-white/90 max-w-xl">
-            Expert-curated cybersecurity guides designed to keep you and your
-            family safe in the digital age
+          <p className="text-xl text-white/70 max-w-2xl mx-auto mb-8 leading-relaxed">
+            30+ premium guides on AI safety, scam prevention, digital privacy, and financial
+            defense — written for real people, not IT professionals.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Button asChild size="lg" className="gap-2 text-base h-12 px-8 bg-gradient-to-r from-[hsl(var(--coral-500))] to-[hsl(var(--lavender-500))] border-0 text-white hover:opacity-90">
+              <Link to="/auth">
+                <LogIn className="h-4 w-4" />
+                Sign In to Access Library
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="gap-2 text-base h-12 border-white/30 text-white hover:bg-white/10 hover:text-white">
+              <Link to="/auth?mode=signup">
+                Create Free Account
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+          <p className="text-sm text-white/50 mt-4">
+            Already have a book? Sign in to access your purchases.
           </p>
         </div>
-        {isLoggedIn ? (
-          <HeroCTA
-            primaryText="Browse Full Catalog"
-            primaryHref="#catalog"
-            secondaryText="My Library"
-            secondaryHref="#my-library"
-          />
-        ) : (
-          <HeroCTA
-            primaryText="Create Free Account"
-            primaryHref="/auth?mode=signup"
-            secondaryText="Sign In"
-            secondaryHref="/auth"
-          />
-        )}
-      </Hero>
-      <HeroFloatingStats />
-    </div>
-  );
-}
+      </section>
 
-// ─── Stats Bar ────────────────────────────────────────────────────────────────
-
-function LibraryStatsBar() {
-  return (
-    <>
-      <div className="hidden lg:block h-14" />
-      <div className="lg:hidden h-6" />
-      <section className="py-16 md:py-24 relative overflow-hidden bg-background">
-        <div className="container mx-auto relative z-10">
-          <div className="max-w-4xl mx-auto text-center mb-10">
-            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
-              <Sparkles className="w-3.5 h-3.5 text-primary" />
-              <span className="text-primary">Trusted Resources</span>
-            </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1]">
-              Your One-Stop Security Library
-            </h2>
-            <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground">
-              Welcome to InVision Network's digital library. Here you'll find carefully curated{" "}
-              <strong className="text-foreground">e-books and digital guides</strong> designed to
-              help you and your family stay safe. Pair these with{" "}
-              <Link to="/training" className="text-primary hover:underline font-medium">
-                our workshops
-              </Link>{" "}
-              for hands-on learning.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+      {/* Stats bar */}
+      <section className="border-b bg-background py-4">
+        <div className="container mx-auto max-w-5xl">
+          <div className="flex flex-wrap justify-center gap-8 text-sm text-muted-foreground">
             {[
-              { value: `${LIBRARY_BOOKS.length}`, label: "Digital Books", icon: BookOpen },
-              { value: `${new Set(LIBRARY_BOOKS.map((b) => b.category)).size}`, label: "Safety Tracks", icon: Shield },
-              { value: `${LIBRARY_BOOKS.reduce((s, b) => s + b.total_pages, 0)}`, label: "Library Pages", icon: Heart },
-              { value: "1", label: "Unified Reader", icon: Headphones },
-            ].map((stat) => (
-              <div
-                key={stat.label}
-                className="flex flex-col items-center gap-1 rounded-2xl bg-card border border-border/40 p-4 shadow-sm"
-              >
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-1">
-                  <stat.icon className="w-5 h-5 text-primary" />
-                </div>
-                <span className="text-2xl font-black text-foreground">{stat.value}</span>
-                <span className="text-xs text-muted-foreground">{stat.label}</span>
-              </div>
+              { icon: BookOpen, text: `${LIBRARY_BOOKS.length}+ expert titles` },
+              { icon: Star, text: "5-star rated" },
+              { icon: Users, text: "500+ protected families" },
+              { icon: Shield, text: "30-day guarantee" },
+            ].map(({ icon: Icon, text }) => (
+              <span key={text} className="flex items-center gap-1.5">
+                <Icon className="h-4 w-4 text-primary" />
+                {text}
+              </span>
             ))}
           </div>
         </div>
       </section>
-    </>
-  );
-}
 
-// ─── Featured Shelf (landing: locked preview) ─────────────────────────────────
-
-function FeaturedShelf({ onBuyClick, isPurchased, isLoggedIn }: {
-  onBuyClick?: (book: (typeof LIBRARY_BOOKS)[0]) => void;
-  isPurchased?: (id: string) => boolean;
-  isLoggedIn: boolean;
-}) {
-  return (
-    <div className="mt-2 container mx-auto pb-16">
-      <div className="flex items-center justify-between gap-3 mb-5 flex-wrap">
-        <div>
-          <h3 className="text-2xl font-bold">Featured Shelf</h3>
-          <p className="text-sm text-muted-foreground">
-            Start with the books most visitors use to build their safety baseline.
-          </p>
-        </div>
-        {isLoggedIn && (
-          <Button variant="outline" asChild>
-            <a href="#catalog">Browse Full Catalog</a>
-          </Button>
-        )}
-      </div>
-
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {FEATURED_BOOKS.map((book) => (
-          <Card key={book.id || book.slug} className="overflow-hidden border-border/50 bg-card/80">
-            <Link
-              to={`/library/${book.slug}`}
-              className="block"
-              aria-label={`View ${book.title} details`}
-            >
-              <div className="aspect-[3/4] overflow-hidden bg-muted relative">
-                <img
-                  src={book.cover_image}
-                  alt={book.title}
-                  className={cn(
-                    "w-full h-full object-cover transition-transform duration-300 hover:scale-105",
-                    !isLoggedIn && "blur-[2px] scale-105 opacity-70"
-                  )}
-                  loading="lazy"
-                />
-                {!isLoggedIn && (
-                  <div className="absolute inset-0 bg-background/40 flex items-center justify-center">
-                    <div className="bg-background/90 backdrop-blur-sm rounded-full p-4 shadow-lg">
-                      <Lock className="h-6 w-6 text-primary" />
-                    </div>
-                  </div>
-                )}
-              </div>
-            </Link>
-            <div className="p-3">
-              <div className="flex items-center gap-1.5 mb-1.5">
-                <Badge className="text-[10px] px-1.5 py-0 bg-gradient-to-r from-[hsl(var(--coral-500))] to-[hsl(var(--lavender-500))] text-white border-0">
-                  {book.tag}
-                </Badge>
-                <Badge
-                  variant="outline"
-                  className="text-[10px] px-1.5 py-0 border-[hsl(var(--coral-300))] text-[hsl(var(--coral-600))]"
-                >
-                  {CATEGORY_LABELS[book.category as BookCategory]}
-                </Badge>
-              </div>
-              <h4 className="font-semibold text-sm leading-tight line-clamp-1">{book.title}</h4>
-              <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{book.subtitle}</p>
-              <div className="flex items-center justify-between mt-3">
-                <span className="font-bold text-primary text-sm">${book.price.toFixed(2)}</span>
-              </div>
-              {isLoggedIn && onBuyClick && isPurchased ? (
-                isPurchased(book.id || book.slug) ? (
-                  <Button size="sm" className="w-full mt-2 h-8 text-xs" asChild>
-                    <Link to="/reader">
-                      <ChevronRight className="w-3 h-3 mr-1" />
-                      Read Now
-                    </Link>
-                  </Button>
-                ) : (
-                  <Button
-                    size="sm"
-                    className="w-full mt-2 h-8 text-xs bg-gradient-to-r from-[hsl(var(--coral-500))] to-[hsl(var(--lavender-500))] text-white border-0"
-                    onClick={() => onBuyClick(book)}
-                  >
-                    <Zap className="w-3 h-3 mr-1" />
-                    Buy Now
-                  </Button>
-                )
-              ) : null}
-            </div>
-          </Card>
-        ))}
-      </div>
-
-      {!isLoggedIn && (
-        <div className="text-center mt-8">
-          <Button asChild size="lg" className="gap-2">
-            <Link to="/auth?mode=signup">
-              <LogIn className="h-4 w-4" />
-              Create Free Account to Browse All {LIBRARY_BOOKS.length} Books
-            </Link>
-          </Button>
-        </div>
-      )}
-    </div>
-  );
-}
-
-// ─── Why Trust Section ────────────────────────────────────────────────────────
-
-function WhyTrustSection() {
-  return (
-    <section className="py-16 md:py-24 bg-muted/30 dot-grid-bg">
-      <div className="container mx-auto">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold mb-3">Why Trust InVision Network</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Your security education partner — backed by expertise, integrity, and a mission to protect.
-          </p>
-        </div>
-        <div className="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          {[
-            {
-              icon: Shield,
-              title: "Expert-Authored",
-              desc: "All resources created by certified cybersecurity professionals",
-            },
-            {
-              icon: Lock,
-              title: "Secure Delivery",
-              desc: "Protected digital reader — no downloads, no unauthorized sharing",
-            },
-            {
-              icon: Headphones,
-              title: "Ongoing Support",
-              desc: "Email support and regular content updates included",
-            },
-          ].map((item) => (
-            <div key={item.title} className="feature-highlight text-center">
-              <div className="icon-glow-ring w-14 h-14 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-[hsl(var(--primary)/0.1)] to-[hsl(var(--accent)/0.08)] flex items-center justify-center">
-                <item.icon className="w-7 h-7 text-[hsl(var(--accent))]" />
-              </div>
-              <h3 className="font-semibold mb-1">{item.title}</h3>
-              <p className="text-sm text-muted-foreground">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── Full Catalog (authenticated only) ───────────────────────────────────────
-
-interface CatalogProps {
-  books: (typeof LIBRARY_BOOKS);
-  isPurchased: (id: string) => boolean;
-  activeCategory: string;
-  setActiveCategory: (v: string) => void;
-  search: string;
-  setSearch: (v: string) => void;
-  sortBy: string;
-  setSortBy: (v: string) => void;
-  onBuyClick: (book: (typeof LIBRARY_BOOKS)[0]) => void;
-  onReadClick: (book: (typeof LIBRARY_BOOKS)[0]) => void;
-}
-
-function FullCatalog({
-  books,
-  isPurchased,
-  activeCategory,
-  setActiveCategory,
-  search,
-  setSearch,
-  sortBy,
-  setSortBy,
-  onBuyClick,
-  onReadClick,
-}: CatalogProps) {
-  return (
-    <section id="catalog" className="py-16 md:py-24 bg-muted/20 relative overflow-hidden">
-      <div className="container mx-auto">
-        <div className="text-center mb-10">
-          <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
-            <BookOpen className="w-3.5 h-3.5 text-primary" />
-            <span className="text-primary">Digital Library</span>
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1]">
-            Digital Security <span className="text-primary">Guides</span>
-          </h2>
-          <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground">
-            Read securely online from any device. No downloads needed.
-          </p>
-        </div>
-
-        {/* Search + filters bar */}
-        <div className="rounded-2xl border border-border/50 bg-background/80 p-4 md:p-5 mb-6">
-          <div className="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
-            <div className="relative flex-1 max-w-xl">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-              <Input
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="pl-9"
-                placeholder="Search by title, topic, audience, or learning outcome"
-              />
-            </div>
-
-            <div className="flex items-center gap-3">
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="h-9 rounded-md border border-input bg-background px-3 text-sm text-foreground"
-              >
-                {SORT_OPTIONS.map((opt) => (
-                  <option key={opt.value} value={opt.value}>
-                    {opt.label}
-                  </option>
-                ))}
-              </select>
-
-              <div className="flex flex-wrap gap-2">
-                {CATEGORIES.map((cat) => (
-                  <Button
-                    key={cat.value}
-                    type="button"
-                    size="sm"
-                    variant={activeCategory === cat.value ? "default" : "outline"}
-                    onClick={() => setActiveCategory(cat.value)}
-                    className="capitalize"
-                  >
-                    {cat.label}
-                  </Button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between gap-3 mt-4 text-sm text-muted-foreground flex-wrap">
-            <span>Showing {books.length} of {LIBRARY_BOOKS.length} books</span>
-            <span>
-              {activeCategory === "all"
-                ? "Entire library"
-                : CATEGORIES.find((c) => c.value === activeCategory)?.label}
+      {/* Featured books preview (locked) */}
+      <section className="py-16 bg-muted/20 dot-grid-bg">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-10">
+            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-5 shadow-sm border border-primary/15 bg-primary/5">
+              <BookOpen className="w-3.5 h-3.5 text-primary" />
+              <span className="text-primary">Browse Titles</span>
             </span>
+            <h2 className="text-3xl md:text-4xl font-black mb-3 tracking-tight">Featured Titles</h2>
+            <p className="text-muted-foreground">Create a free account to browse the full catalog and purchase books.</p>
           </div>
-        </div>
-
-        {/* Book grid — 5-column compact, Resources-style */}
-        <div
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4"
-          style={{ contentVisibility: "auto", containIntrinsicSize: "0 2000px" }}
-        >
-          {books.map((book, bookIndex) => {
-            const owned = isPurchased(book.id || book.slug);
-            return (
-              <div key={book.id || book.slug} className="group relative">
-                <div className="h-full rounded-2xl p-[1px] bg-gradient-to-b from-border/50 to-border/20 hover:from-primary/30 hover:to-primary/10 transition-colors duration-200 shadow-sm hover:shadow-md">
-                  <Card className="h-full rounded-[calc(1rem-1px)] p-3 border-0 bg-card flex flex-col relative overflow-hidden">
-                    <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[hsl(var(--coral-500))] via-[hsl(var(--coral-400))] to-[hsl(var(--lavender-400))]" />
-
-                    {/* Badge pill */}
-                    <div className="absolute top-2 left-2 z-10 inline-flex items-center gap-1 rounded-full bg-white/95 backdrop-blur-sm pl-1 pr-2 py-[2px] shadow-[0_2px_6px_-1px_rgba(15,23,42,0.25)] border border-[hsl(var(--coral-200))]">
-                      <span className="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-gradient-to-br from-[hsl(var(--coral-500))] to-[hsl(var(--lavender-500))] text-white text-[7px] font-black">
-                        📖
-                      </span>
-                      <span className="text-[8px] font-bold uppercase tracking-[0.05em] text-[hsl(var(--coral-600))]">
-                        eBook
-                      </span>
-                      <span className="w-px h-2.5 bg-[hsl(var(--coral-300))]" />
-                      <span className="text-[8px] font-bold text-[hsl(var(--lavender-700))]">
-                        {book.tag}
-                      </span>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
+            {FEATURED_BOOKS.map((book) => (
+              <div key={book.slug} className="group relative h-full rounded-2xl p-[1px] bg-gradient-to-b from-border/60 to-border/20 hover:from-[hsl(var(--coral-400)/0.4)] hover:to-[hsl(var(--lavender-400)/0.2)] transition-all duration-200 shadow-sm hover:shadow-md">
+                <Card className="h-full overflow-hidden rounded-[calc(1rem-1px)] border-0">
+                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[hsl(var(--coral-500))] via-[hsl(var(--coral-400))] to-[hsl(var(--lavender-400))]" />
+                  <div className="relative aspect-[3/4] bg-muted overflow-hidden">
+                    <img
+                      src={book.cover_image}
+                      alt={book.title}
+                      className="w-full h-full object-cover blur-[2px] scale-105 opacity-70"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-background/40 flex items-center justify-center">
+                      <div className="bg-background/90 backdrop-blur-sm rounded-full p-4 shadow-lg">
+                        <Lock className="h-6 w-6 text-primary" />
+                      </div>
                     </div>
-
-                    {/* Owned badge */}
-                    {owned && (
-                      <div className="absolute top-2 right-2 z-10">
-                        <div className="bg-green-500 rounded-full p-1 shadow">
-                          <CheckCircle className="h-3 w-3 text-white" />
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Cover */}
-                    <Link
-                      to={`/library/${book.slug}`}
-                      className="relative mb-3 rounded-xl overflow-hidden bg-muted/30 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-1 block"
-                      aria-label={`View ${book.title} details`}
-                    >
-                      <div className="aspect-[3/4]">
-                        <img
-                          src={book.cover_image}
-                          alt={book.title}
-                          width={240}
-                          height={320}
-                          loading={bookIndex < 10 ? "eager" : "lazy"}
-                          decoding={bookIndex < 10 ? "sync" : "async"}
-                          fetchPriority={bookIndex < 5 ? "high" : "auto"}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-150 flex items-center justify-center">
-                        <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-150 bg-card/90 text-foreground text-xs px-3 py-1.5 rounded-full font-semibold shadow-lg border border-border/30">
-                          👁️ View Details
-                        </span>
-                      </div>
-                    </Link>
-
-                    {/* Content */}
-                    <h3 className="text-xs md:text-sm font-bold mb-0.5 text-foreground group-hover:text-primary transition-colors line-clamp-2 leading-tight">
-                      {book.title}
-                    </h3>
-                    <p className="text-[9px] text-muted-foreground mb-1 line-clamp-2 min-h-[2rem]">
-                      {book.subtitle}
-                    </p>
-                    <p className="text-[10px] text-muted-foreground mb-2 line-clamp-2 flex-1">
-                      {book.description}
-                    </p>
-                    <p className="text-[9px] text-muted-foreground mb-2">
-                      {book.total_pages} pages • {book.chapters.length} chapters
-                    </p>
-
-                    {/* Rating */}
-                    <div className="flex items-center gap-1 mb-2">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-2.5 h-2.5 fill-chart-4 text-chart-4" />
-                      ))}
-                      <span className="text-[9px] text-muted-foreground ml-1">5.0</span>
+                    <Badge className="absolute top-2 left-2 text-xs bg-primary/90">
+                      {book.tag}
+                    </Badge>
+                  </div>
+                  <CardContent className="p-3">
+                    <h3 className="font-semibold text-xs leading-tight line-clamp-2 mb-1">{book.title}</h3>
+                    <p className="text-[11px] text-muted-foreground line-clamp-2 mb-2">{book.subtitle}</p>
+                    <div className="flex items-center justify-between">
+                      <span className="font-black text-sm bg-gradient-to-r from-[hsl(var(--coral-600))] via-[hsl(var(--coral-500))] to-[hsl(var(--lavender-500))] bg-clip-text text-transparent">${book.price.toFixed(2)}</span>
+                      <Badge variant="outline" className="text-[10px]">
+                        {CATEGORY_LABELS[book.category as BookCategory]}
+                      </Badge>
                     </div>
-
-                    {/* Actions */}
-                    <div className="mt-auto pt-2 border-t border-border/30">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-base md:text-lg font-black bg-gradient-to-r from-[hsl(var(--coral-600))] via-[hsl(var(--coral-500))] to-[hsl(var(--lavender-500))] bg-clip-text text-transparent">
-                          ${book.price.toFixed(2)}
-                        </span>
-                        {owned && (
-                          <span className="text-[9px] text-green-600 font-semibold flex items-center gap-0.5">
-                            <CheckCircle className="w-2.5 h-2.5" /> Owned
-                          </span>
-                        )}
-                      </div>
-                      {owned ? (
-                        <Button
-                          size="sm"
-                          className="w-full text-[10px] h-7 px-2 rounded-lg"
-                          onClick={() => onReadClick(book)}
-                        >
-                          <ChevronRight className="w-3 h-3 mr-1" />
-                          Read Now
-                        </Button>
-                      ) : (
-                        <>
-                          <div className="grid grid-cols-1 gap-1.5">
-                            <Button
-                              size="sm"
-                              onClick={() => onBuyClick(book)}
-                              className="text-[10px] h-7 px-2 rounded-lg bg-gradient-to-r from-[hsl(var(--coral-500))] to-[hsl(var(--lavender-500))] text-white border-0 hover:from-[hsl(var(--coral-600))] hover:to-[hsl(var(--lavender-600))] shadow-[0_4px_12px_-2px_hsl(var(--coral-500)/0.4)]"
-                            >
-                              <Zap className="w-3 h-3 mr-1" />
-                              Buy Now
-                            </Button>
-                          </div>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="w-full mt-1 text-[10px] h-7"
-                            asChild
-                          >
-                            <Link to={`/library/${book.slug}`}>Preview & Details</Link>
-                          </Button>
-                        </>
-                      )}
-                    </div>
-                  </Card>
-                </div>
+                  </CardContent>
+                </Card>
               </div>
-            );
-          })}
-        </div>
-
-        {books.length === 0 && (
-          <div className="text-center py-14">
-            <BookOpen className="w-10 h-10 mx-auto text-muted-foreground mb-4" />
-            <h3 className="text-lg font-semibold">No books matched that search</h3>
-            <p className="text-sm text-muted-foreground mt-2">
-              Try a broader keyword or switch back to all categories.
-            </p>
+            ))}
           </div>
-        )}
-
-        {/* Language request banner */}
-        <div className="mt-8">
-          <div className="p-4 bg-gradient-to-r from-accent/10 via-primary/5 to-accent/10 rounded-xl border border-accent/20 text-center">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <Globe className="w-4 h-4 text-accent" />
-              <span className="font-semibold text-sm">Need a Book in a Different Language?</span>
-            </div>
-            <p className="text-sm text-muted-foreground mb-3">
-              We offer translations in Spanish, French, German, Chinese, and more.
-              <br className="hidden md:block" />
-              Simply request and we'll prepare your copy within{" "}
-              <strong>1-3 business days</strong>.
-            </p>
-            <Button variant="outline" size="sm" asChild>
-              <Link to="/contact">
-                <Mail className="w-4 h-4 mr-2" />
-                Request Translation
+          <div className="text-center mt-10">
+            <Button asChild size="lg" className="gap-2">
+              <Link to="/auth?mode=signup">
+                <LogIn className="h-4 w-4" />
+                Create Free Account to Browse All {LIBRARY_BOOKS.length} Books
               </Link>
             </Button>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Why our library */}
+      <section className="py-16 bg-muted/30 dot-grid-bg border-t">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-10">
+            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-5 shadow-sm border border-primary/15 bg-primary/5">
+              <Star className="w-3.5 h-3.5 text-primary" />
+              <span className="text-primary">Why Choose Us</span>
+            </span>
+            <h2 className="text-3xl md:text-4xl font-black mb-3 tracking-tight">Why InVision Library?</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                icon: Shield,
+                title: "Expert-Verified Content",
+                desc: "Every book is written and reviewed by cybersecurity professionals with real-world experience protecting Ohio families.",
+              },
+              {
+                icon: BookOpen,
+                title: "Read Anywhere, Any Device",
+                desc: "Our in-platform reader works on phones, tablets, and computers. Day, Night, and Sepia modes for comfortable reading anytime.",
+              },
+              {
+                icon: Clock,
+                title: "Always Up to Date",
+                desc: "Books are updated as threats evolve. Your purchase includes all future updates at no additional cost.",
+              },
+            ].map(({ icon: Icon, title, desc }) => (
+              <Card key={title} className="p-6 border-border/40 hover:border-primary/25 transition-colors bg-background/80 backdrop-blur-sm">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/8 flex items-center justify-center mb-4">
+                  <Icon className="w-7 h-7 text-[hsl(var(--accent))]" />
+                </div>
+                <h3 className="font-semibold mb-2">{title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <LibraryFAQ />
+    </div>
   );
 }
 
-// ─── My Library Tab ───────────────────────────────────────────────────────────
+// ─── Book Card ───────────────────────────────────────────────────────────────
 
-function MyLibraryTab({
-  books,
-  isLoading,
-  onBuyClick,
-  onReadClick,
-  onBrowse,
-}: {
-  books: (typeof LIBRARY_BOOKS);
-  isLoading: boolean;
-  onBuyClick: (b: (typeof LIBRARY_BOOKS)[0]) => void;
-  onReadClick: (b: (typeof LIBRARY_BOOKS)[0]) => void;
-  onBrowse: () => void;
-}) {
-  if (isLoading) {
-    return (
-      <section className="container mx-auto py-16 text-center text-muted-foreground">
-        <BookOpen className="mx-auto mb-3 h-8 w-8 opacity-40 animate-pulse" />
-        <p>Loading your library…</p>
-      </section>
-    );
-  }
+interface BookCardProps {
+  book: (typeof LIBRARY_BOOKS)[0];
+  isPurchased: boolean;
+  onBuyClick: (book: (typeof LIBRARY_BOOKS)[0]) => void;
+  onReadClick: (book: (typeof LIBRARY_BOOKS)[0]) => void;
+}
 
-  if (books.length === 0) {
-    return (
-      <section className="container mx-auto py-20 text-center">
-        <Library className="mx-auto mb-4 h-12 w-12 text-muted-foreground opacity-40" />
-        <h2 className="text-xl font-semibold mb-2">Your library is empty</h2>
-        <p className="text-muted-foreground mb-6">
-          Purchase books to start reading them here. Your progress is always saved.
-        </p>
-        <Button onClick={onBrowse} className="gap-2">
-          <BookOpen className="h-4 w-4" />
-          Browse Catalog
-        </Button>
-      </section>
-    );
-  }
-
+function BookCard({ book, isPurchased, onBuyClick, onReadClick }: BookCardProps) {
   return (
-    <section
-      className="py-16 md:py-24 bg-muted/20 relative overflow-hidden"
-      id="my-library"
-    >
-      <div className="container mx-auto">
-        <div className="text-center mb-10">
-          <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
-            <Library className="w-3.5 h-3.5 text-primary" />
-            <span className="text-primary">My Library</span>
-          </span>
-          <h2 className="text-3xl md:text-4xl font-black mb-3 tracking-tight">Your Books</h2>
-          <p className="text-muted-foreground">{books.length} book{books.length !== 1 ? "s" : ""} purchased</p>
-        </div>
-        <div
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4"
-          style={{ contentVisibility: "auto", containIntrinsicSize: "0 1000px" }}
-        >
-          {books.map((book, bookIndex) => (
-            <div key={book.id || book.slug} className="group relative">
-              <div className="h-full rounded-2xl p-[1px] bg-gradient-to-b from-green-500/40 to-green-500/10 shadow-sm hover:shadow-md transition-shadow">
-                <Card className="h-full rounded-[calc(1rem-1px)] p-3 border-0 bg-card flex flex-col relative overflow-hidden">
-                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-green-400 to-emerald-500" />
-                  <div className="absolute top-2 right-2 z-10">
-                    <div className="bg-green-500 rounded-full p-1 shadow">
-                      <CheckCircle className="h-3 w-3 text-white" />
-                    </div>
-                  </div>
-                  <Link
-                    to={`/library/${book.slug}`}
-                    className="relative mb-3 rounded-xl overflow-hidden bg-muted/30 block"
-                    aria-label={`View ${book.title}`}
-                  >
-                    <div className="aspect-[3/4]">
-                      <img
-                        src={book.cover_image}
-                        alt={book.title}
-                        width={240}
-                        height={320}
-                        loading={bookIndex < 10 ? "eager" : "lazy"}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </Link>
-                  <h3 className="text-xs md:text-sm font-bold mb-0.5 text-foreground group-hover:text-primary transition-colors line-clamp-2 leading-tight">
-                    {book.title}
-                  </h3>
-                  <p className="text-[9px] text-muted-foreground mb-2 line-clamp-2 flex-1">
-                    {book.subtitle}
-                  </p>
-                  <div className="mt-auto pt-2 border-t border-border/30">
-                    <Button
-                      size="sm"
-                      className="w-full text-[10px] h-7 px-2 rounded-lg"
-                      onClick={() => onReadClick(book)}
-                    >
-                      <ChevronRight className="w-3 h-3 mr-1" />
-                      Read Now
-                    </Button>
-                  </div>
-                </Card>
-              </div>
+    <div className={cn(
+      "h-full rounded-2xl p-[1px] transition-all duration-200 shadow-sm hover:shadow-md",
+      isPurchased
+        ? "bg-gradient-to-b from-green-500/30 to-green-500/10"
+        : "bg-gradient-to-b from-border/50 to-border/20 hover:from-[hsl(var(--coral-400)/0.35)] hover:to-[hsl(var(--lavender-400)/0.2)]"
+    )}>
+    <Card className={cn(
+      "h-full flex flex-col overflow-hidden rounded-[calc(1rem-1px)] border-0 transition-all duration-200 hover:-translate-y-0.5 relative"
+    )}>
+      <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[hsl(var(--coral-500))] via-[hsl(var(--coral-400))] to-[hsl(var(--lavender-400))]" />
+      {/* Cover */}
+      <Link to={`/library/${book.slug}`} className="block relative aspect-[3/4] bg-muted overflow-hidden group">
+        <img
+          src={book.cover_image}
+          alt={book.title}
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          loading="lazy"
+        />
+        {!isPurchased && (
+          <div className="absolute top-2 right-2">
+            <div className="bg-background/80 backdrop-blur-sm rounded-full p-1.5 shadow">
+              <Lock className="h-3.5 w-3.5 text-muted-foreground" />
             </div>
-          ))}
+          </div>
+        )}
+        {isPurchased && (
+          <div className="absolute top-2 right-2">
+            <div className="bg-green-500 rounded-full p-1.5 shadow">
+              <CheckCircle className="h-3.5 w-3.5 text-white" />
+            </div>
+          </div>
+        )}
+        <Badge className="absolute top-2 left-2 text-xs bg-primary/90 text-white">
+          {book.tag}
+        </Badge>
+      </Link>
+
+      {/* Content */}
+      <CardContent className="p-3 flex flex-col gap-1.5 flex-1">
+        <div>
+          <Badge variant="secondary" className="text-[10px] capitalize mb-1.5">
+            {CATEGORY_LABELS[book.category as BookCategory]}
+          </Badge>
+          <Link to={`/library/${book.slug}`} className="block">
+            <h2 className="font-semibold text-sm leading-tight hover:text-primary transition-colors line-clamp-2">
+              {book.title}
+            </h2>
+          </Link>
+          <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{book.subtitle}</p>
         </div>
-      </div>
-    </section>
+
+        {/* Stars */}
+        <div className="flex items-center gap-0.5">
+          {[...Array(5)].map((_, i) => (
+            <Star key={i} className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+          ))}
+          <span className="text-xs text-muted-foreground ml-1">5.0</span>
+        </div>
+
+        {/* Meta */}
+        <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+          <BookOpen className="h-3.5 w-3.5" />
+          <span>{book.total_pages} pages · {book.chapters.length} chapters</span>
+        </div>
+
+        {/* Price + CTA */}
+        <div className="flex items-center justify-between mt-auto pt-2 border-t border-border/40">
+          {isPurchased ? (
+            <>
+              <span className="text-sm font-semibold text-green-600 flex items-center gap-1">
+                <CheckCircle className="h-3.5 w-3.5" />
+                Purchased
+              </span>
+              <Button size="sm" className="h-7 text-xs gap-1" onClick={() => onReadClick(book)}>
+                Read Now
+                <ChevronRight className="h-3 w-3" />
+              </Button>
+            </>
+          ) : (
+            <>
+              <span className="text-base font-black bg-gradient-to-r from-[hsl(var(--coral-600))] via-[hsl(var(--coral-500))] to-[hsl(var(--lavender-500))] bg-clip-text text-transparent">${book.price.toFixed(2)}</span>
+              <div className="flex items-center gap-1.5">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-7 text-xs gap-1 text-muted-foreground"
+                  asChild
+                >
+                  <Link to={`/library/${book.slug}`}>Preview</Link>
+                </Button>
+                <Button size="sm" className="h-7 text-xs gap-1 bg-gradient-to-r from-[hsl(var(--coral-500))] to-[hsl(var(--lavender-500))] text-white border-0 hover:opacity-90" onClick={() => onBuyClick(book)}>
+                  <ShoppingCart className="h-3 w-3" />
+                  Buy
+                </Button>
+              </div>
+            </>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+    </div>
   );
 }
 
@@ -799,13 +445,17 @@ export default function LibraryPage() {
   const navigate = useNavigate();
   const { isPurchased, purchasedBookIds, isLoading: purchaseLoading, hasAnyPurchase } = useBookPurchase();
 
+  // UI state
   const [activeTab, setActiveTab] = useState<LibraryTab>("browse");
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
   const [sortBy, setSortBy] = useState("default");
 
+  // Payment modal state
   const [paymentOpen, setPaymentOpen] = useState(false);
   const [paymentBook, setPaymentBook] = useState<(typeof LIBRARY_BOOKS)[0] | null>(null);
+
+  // ── Handlers ────────────────────────────────────────────────────────────────
 
   const handleBuyClick = (book: (typeof LIBRARY_BOOKS)[0]) => {
     setPaymentBook(book);
@@ -813,9 +463,12 @@ export default function LibraryPage() {
   };
 
   const handleReadClick = (book: (typeof LIBRARY_BOOKS)[0]) => {
-    if (!user) { navigate("/auth"); return; }
+    if (!user) {
+      navigate("/auth");
+      return;
+    }
     storeBookReaderSession({
-      bookIds: [book.id || book.slug],
+      bookIds: [book.id],
       customerName: user.user_metadata?.full_name || user.email?.split("@")[0] || "Reader",
       email: user.email ?? "",
       accessType: "purchase",
@@ -826,7 +479,7 @@ export default function LibraryPage() {
   const handlePaymentSuccess = () => {
     if (paymentBook && user) {
       storeBookReaderSession({
-        bookIds: [paymentBook.id || paymentBook.slug],
+        bookIds: [paymentBook.id],
         customerName: user.user_metadata?.full_name || user.email?.split("@")[0] || "Reader",
         email: user.email ?? "",
         accessType: "purchase",
@@ -835,6 +488,8 @@ export default function LibraryPage() {
       navigate("/reader");
     }
   };
+
+  // ── Filtered + sorted books ────────────────────────────────────────────────
 
   const browsedBooks = useMemo(() => {
     let books = LIBRARY_BOOKS.filter((book) => {
@@ -856,9 +511,11 @@ export default function LibraryPage() {
   }, [search, activeCategory, sortBy]);
 
   const myBooks = useMemo(
-    () => LIBRARY_BOOKS.filter((b) => purchasedBookIds.includes(b.id || b.slug)),
+    () => LIBRARY_BOOKS.filter((b) => purchasedBookIds.includes(b.id)),
     [purchasedBookIds]
   );
+
+  // ── Auth loading ───────────────────────────────────────────────────────────
 
   if (authLoading) {
     return (
@@ -872,147 +529,256 @@ export default function LibraryPage() {
     );
   }
 
-  const seoBlock = (
-    <SEO
-      title={PAGE_SEO.library.title}
-      description={PAGE_SEO.library.description}
-      keywords={PAGE_SEO.library.keywords}
-      canonical="https://www.invisionnetwork.org/library"
-      structuredData={PAGE_SEO.library.structuredData}
-      breadcrumbs={PAGE_SEO.library.breadcrumbs as Array<{ name: string; url: string }>}
-    />
-  );
+  // ── Not logged in: show landing ────────────────────────────────────────────
 
-  // ── Not logged in ──────────────────────────────────────────────────────────
   if (!user) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
-        {seoBlock}
+        <SEO
+          title={PAGE_SEO.library.title}
+          description={PAGE_SEO.library.description}
+          keywords={PAGE_SEO.library.keywords}
+          canonical="https://www.invisionnetwork.org/library"
+        />
         <Navigation overlay />
-        <LibraryHero isLoggedIn={false} />
-        <LibraryStatsBar />
-        <section className="bg-background border-b pb-10">
-          <div className="container mx-auto max-w-6xl">
-            <FeaturedShelf isLoggedIn={false} />
-          </div>
-        </section>
-        <SectionDivider variant="wave" color="muted" />
-        <WhyTrustSection />
-        <LibraryFAQ />
+        <LibraryLanding />
         <Footer />
       </div>
     );
   }
 
-  // ── Logged in ──────────────────────────────────────────────────────────────
+  // ── Logged in: full catalog ────────────────────────────────────────────────
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      {seoBlock}
+      <SEO
+        title={PAGE_SEO.library.title}
+        description={PAGE_SEO.library.description}
+        keywords={PAGE_SEO.library.keywords}
+        canonical="https://www.invisionnetwork.org/library"
+        structuredData={PAGE_SEO.library.structuredData}
+        breadcrumbs={PAGE_SEO.library.breadcrumbs as Array<{ name: string; url: string }>}
+      />
       <Navigation overlay />
 
-      <LibraryHero isLoggedIn={true} />
+      <main id="main-content" tabIndex={-1} className="flex-1">
+        {/* ── Page header ── */}
+        <section className="bg-gradient-to-br from-[#0f0808] via-[#1c0e0e] to-[#140d18] border-b pt-[clamp(80px,12vw,120px)] pb-12">
+          <div className="container mx-auto max-w-6xl">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+              <div>
+                <div className="inline-flex items-center gap-2 bg-white/10 text-white rounded-full px-5 py-2 text-xs font-bold uppercase tracking-[0.15em] mb-3 border border-white/20">
+                  <Sparkles className="h-3.5 w-3.5" />
+                  Digital Library
+                </div>
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-black leading-tight tracking-tight text-white">
+                  InVision Network Library
+                </h1>
+                <p className="text-white/60 mt-2 text-base">
+                  {LIBRARY_BOOKS.length} expert cybersecurity guides. Purchase once, read anywhere.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-4 text-sm text-white/60">
+                <span className="flex items-center gap-1.5">
+                  <BookOpen className="h-4 w-4 text-white/70" />
+                  {LIBRARY_BOOKS.length} titles
+                </span>
+                {hasAnyPurchase && (
+                  <span className="flex items-center gap-1.5 text-green-400 font-medium">
+                    <CheckCircle className="h-4 w-4" />
+                    {purchasedBookIds.length} owned
+                  </span>
+                )}
+              </div>
+            </div>
 
-      <LibraryStatsBar />
-
-      {/* Featured shelf */}
-      <section className="bg-background border-b pb-10">
-        <div className="container mx-auto max-w-6xl">
-          <FeaturedShelf
-            isLoggedIn={true}
-            onBuyClick={handleBuyClick}
-            isPurchased={(id) => isPurchased(id)}
-          />
-        </div>
-      </section>
-
-      <SectionDivider variant="wave" color="muted" />
-
-      {/* Tab switcher */}
-      <section className="bg-background border-b sticky top-16 z-10 backdrop-blur-sm">
-        <div className="container mx-auto max-w-6xl py-3">
-          <div className="flex gap-1 bg-muted/50 rounded-xl p-1 w-fit">
-            <button
-              onClick={() => setActiveTab("browse")}
-              className={cn(
-                "px-5 py-2 rounded-lg text-sm font-medium transition-colors",
-                activeTab === "browse"
-                  ? "bg-background shadow-sm text-foreground"
-                  : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              <span className="flex items-center gap-1.5">
-                <BookOpen className="h-3.5 w-3.5" />
-                Browse All
-              </span>
-            </button>
-            <button
-              onClick={() => setActiveTab("my-library")}
-              className={cn(
-                "px-5 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5",
-                activeTab === "my-library"
-                  ? "bg-background shadow-sm text-foreground"
-                  : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              <Library className="h-3.5 w-3.5" />
-              My Library
-              {purchasedBookIds.length > 0 && (
-                <Badge className="h-4 px-1.5 text-[10px] bg-primary text-primary-foreground ml-0.5">
-                  {purchasedBookIds.length}
-                </Badge>
-              )}
-            </button>
+            {/* Tabs */}
+            <div className="flex gap-1 mt-6 bg-white/10 rounded-xl p-1 w-fit backdrop-blur-sm">
+              <button
+                onClick={() => setActiveTab("browse")}
+                className={cn(
+                  "px-5 py-2 rounded-lg text-sm font-medium transition-colors",
+                  activeTab === "browse"
+                    ? "bg-white text-foreground shadow-sm"
+                    : "text-white/70 hover:text-white"
+                )}
+              >
+                <span className="flex items-center gap-1.5">
+                  <BookOpen className="h-3.5 w-3.5" />
+                  Browse All
+                </span>
+              </button>
+              <button
+                onClick={() => setActiveTab("my-library")}
+                className={cn(
+                  "px-5 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5",
+                  activeTab === "my-library"
+                    ? "bg-white text-foreground shadow-sm"
+                    : "text-white/70 hover:text-white"
+                )}
+              >
+                <Library className="h-3.5 w-3.5" />
+                My Library
+                {purchasedBookIds.length > 0 && (
+                  <Badge className="h-4 px-1.5 text-[10px] bg-primary text-primary-foreground ml-0.5">
+                    {purchasedBookIds.length}
+                  </Badge>
+                )}
+              </button>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Tab content */}
-      {activeTab === "my-library" ? (
-        <MyLibraryTab
-          books={myBooks}
-          isLoading={purchaseLoading}
-          onBuyClick={handleBuyClick}
-          onReadClick={handleReadClick}
-          onBrowse={() => setActiveTab("browse")}
-        />
-      ) : (
-        <FullCatalog
-          books={browsedBooks}
-          isPurchased={(id) => isPurchased(id)}
-          activeCategory={activeCategory}
-          setActiveCategory={setActiveCategory}
-          search={search}
-          setSearch={setSearch}
-          sortBy={sortBy}
-          setSortBy={setSortBy}
-          onBuyClick={handleBuyClick}
-          onReadClick={handleReadClick}
-        />
-      )}
+        {/* ── MY LIBRARY TAB ── */}
+        {activeTab === "my-library" && (
+          <section className="container mx-auto max-w-6xl py-10">
+            {purchaseLoading ? (
+              <div className="text-center py-16 text-muted-foreground">
+                <BookOpen className="mx-auto mb-3 h-8 w-8 opacity-40 animate-pulse" />
+                <p>Loading your library…</p>
+              </div>
+            ) : myBooks.length === 0 ? (
+              <div className="text-center py-20">
+                <Library className="mx-auto mb-4 h-12 w-12 text-muted-foreground opacity-40" />
+                <h2 className="text-xl font-semibold mb-2">Your library is empty</h2>
+                <p className="text-muted-foreground mb-6">
+                  Purchase books to start reading them here. Your progress is always saved.
+                </p>
+                <Button onClick={() => setActiveTab("browse")} className="gap-2">
+                  <BookOpen className="h-4 w-4" />
+                  Browse Catalog
+                </Button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
+                {myBooks.map((book) => (
+                  <BookCard
+                    key={book.slug}
+                    book={book}
+                    isPurchased={true}
+                    onBuyClick={handleBuyClick}
+                    onReadClick={handleReadClick}
+                  />
+                ))}
+              </div>
+            )}
+          </section>
+        )}
 
-      {/* Bulk CTA */}
-      <section className="bg-[#fff8f5] border-t py-12">
-        <div className="container mx-auto max-w-3xl text-center">
-          <Users className="mx-auto mb-4 h-10 w-10 text-primary" />
-          <h2 className="text-2xl font-bold mb-3">Ordering for a Group or Organization?</h2>
-          <p className="text-muted-foreground mb-6">
-            Bulk pricing starts at 5 copies — up to 25% off. Perfect for senior centers,
-            libraries, businesses, and family gift sets.
-          </p>
-          <div className="flex flex-wrap gap-3 justify-center">
-            <Button asChild size="lg">
-              <Link to="/contact">Get Bulk Pricing</Link>
-            </Button>
-            <Button variant="outline" size="lg" asChild>
-              <Link to="/training">View Training Programs</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+        {/* ── BROWSE TAB ── */}
+        {activeTab === "browse" && (
+          <>
+            {/* Filters bar */}
+            <section className="border-b bg-background/80 sticky top-16 z-10 backdrop-blur-sm">
+              <div className="container mx-auto max-w-6xl py-3">
+                <div className="flex flex-col sm:flex-row gap-3">
+                  {/* Search */}
+                  <div className="relative flex-1">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                      placeholder="Search books…"
+                      className="pl-9"
+                    />
+                  </div>
 
-      <SectionDivider variant="wave" color="muted" />
-      <WhyTrustSection />
-      <LibraryFAQ />
+                  {/* Sort */}
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    className="h-9 rounded-md border border-input bg-background px-3 text-sm text-foreground"
+                  >
+                    {SORT_OPTIONS.map((opt) => (
+                      <option key={opt.value} value={opt.value}>
+                        {opt.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Category pills */}
+                <div className="flex items-center gap-1.5 overflow-x-auto pb-1 mt-2 scrollbar-none">
+                  <Filter className="h-4 w-4 text-muted-foreground shrink-0" />
+                  {CATEGORIES.map((cat) => (
+                    <button
+                      key={cat.value}
+                      onClick={() => setActiveCategory(cat.value)}
+                      className={cn(
+                        "shrink-0 px-3 py-1 rounded-full text-xs font-medium transition-colors",
+                        activeCategory === cat.value
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-muted hover:bg-muted/80 text-foreground"
+                      )}
+                    >
+                      {cat.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* Book grid */}
+            <section className="container mx-auto max-w-6xl py-10">
+              {browsedBooks.length === 0 ? (
+                <div className="text-center py-20 text-muted-foreground">
+                  <BookOpen className="mx-auto mb-4 h-10 w-10 opacity-40" />
+                  <p className="text-lg">No books match your search.</p>
+                  <Button
+                    variant="ghost"
+                    className="mt-3"
+                    onClick={() => { setSearch(""); setActiveCategory("all"); }}
+                  >
+                    Clear filters
+                  </Button>
+                </div>
+              ) : (
+                <>
+                  <p className="text-sm text-muted-foreground mb-6">
+                    Showing {browsedBooks.length} of {LIBRARY_BOOKS.length} books
+                    {activeCategory !== "all" && ` in ${CATEGORIES.find(c => c.value === activeCategory)?.label}`}
+                  </p>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
+                    {browsedBooks.map((book) => (
+                      <BookCard
+                        key={book.slug}
+                        book={book}
+                        isPurchased={isPurchased(book.id)}
+                        onBuyClick={handleBuyClick}
+                        onReadClick={handleReadClick}
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
+            </section>
+
+            {/* Bulk CTA */}
+            <section className="bg-muted/30 dot-grid-bg border-t py-12">
+              <div className="container mx-auto max-w-3xl text-center">
+                <Users className="mx-auto mb-4 h-10 w-10 text-primary" />
+                <h2 className="text-2xl font-bold mb-3">Ordering for a Group or Organization?</h2>
+                <p className="text-muted-foreground mb-6">
+                  Bulk pricing starts at 5 copies — up to 25% off. Perfect for senior centers,
+                  libraries, businesses, and family gift sets.
+                </p>
+                <div className="flex flex-wrap gap-3 justify-center">
+                  <Button asChild size="lg">
+                    <Link to="/contact">Get Bulk Pricing</Link>
+                  </Button>
+                  <Button variant="outline" size="lg" asChild>
+                    <Link to="/training">View Training Programs</Link>
+                  </Button>
+                </div>
+              </div>
+            </section>
+          </>
+        )}
+
+        {/* FAQ — always visible */}
+        <LibraryFAQ />
+      </main>
+
       <Footer />
 
       {/* Payment modal */}
