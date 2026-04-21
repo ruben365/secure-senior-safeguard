@@ -59,6 +59,8 @@ import businessReceptionist from "@/assets/business-ai-receptionist.jpg";
 import businessScheduling from "@/assets/business-smart-scheduling.jpg";
 import businessSupportBot from "@/assets/business-support-bot.jpg";
 import businessIntake from "@/assets/business-intake-scheduling.jpg";
+import businessTeamMeeting from "@/assets/business-team-meeting-natural.jpg";
+import { SectionImage } from "@/components/layout/SectionImage";
 import { natureSummer2 } from "@/config/natureHeroImages";
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import { VideoLightbox } from "@/components/VideoLightbox";
@@ -1153,6 +1155,24 @@ function Business() {
                 }} />
 
               )}
+            </div>
+
+            {/* Supporting photography — operations in action */}
+            <div className="max-w-5xl mx-auto mt-8">
+              <SectionImage
+                src={businessTeamMeeting}
+                alt="Business team collaborating during a strategy meeting"
+                variant="split-right"
+              >
+                <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">
+                  Built around your team
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Every plan includes onboarding, monthly check-ins, and a
+                  dedicated account contact — so your AI stack stays aligned
+                  with how your business actually operates.
+                </p>
+              </SectionImage>
             </div>
 
             {/* Trust badges */}

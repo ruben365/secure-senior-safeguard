@@ -66,6 +66,8 @@ import { usePrerenderBlocker } from "@/contexts/PrerenderContext";
 import { SectionDivider, MeshBackground } from "@/components/pro";
 
 import seniorCouple from "@/assets/senior-couple-active.jpg";
+import { SectionImage } from "@/components/layout/SectionImage";
+import communityTraining from "@/assets/community-training.jpg";
 
 const trainingHeadlines = [
   "Learn How to Recognize and Stop Scams",
@@ -720,6 +722,15 @@ function LearnAndTrain() {
                 Clear teaching, privacy-first protocols, and real scripts your
                 family can use in any emergency. Have questions? Check our <Link to="/faq" className="text-primary hover:underline font-medium">common questions</Link> page.
               </p>
+            </div>
+
+            <div className="max-w-5xl mx-auto">
+              <SectionImage
+                src={communityTraining}
+                alt="Community training session in progress with engaged participants"
+                variant="wide"
+                caption="Live community training — small groups, real scenarios, lasting confidence."
+              />
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-14">

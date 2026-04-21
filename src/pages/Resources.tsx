@@ -54,6 +54,10 @@ import { SectionDivider } from "@/components/pro";
 import { TranslationRequestDialog } from "@/components/resources/TranslationRequestDialog";
 import { ReadBooksDialog } from "@/components/resources/ReadBooksDialog";
 import { HeroCTA } from "@/components/shared/HeroCTA";
+import { SectionImage } from "@/components/layout/SectionImage";
+import bookFamilySafety from "@/assets/book-family-safety.jpg";
+import bookScamPrevention from "@/assets/book-scam-prevention.jpg";
+import bookSeniorTechSafety from "@/assets/book-senior-tech-safety.jpg";
 
 // Rotating hero headlines
 const heroHeadlines = [
@@ -420,6 +424,20 @@ function Resources() {
             <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground">
               Read securely online from any device. No downloads needed.
             </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <SectionImage
+              variant="compact-trio"
+              src=""
+              alt=""
+              images={[
+                { src: bookFamilySafety, alt: "Family Safety guide cover" },
+                { src: bookScamPrevention, alt: "Scam Prevention guide cover" },
+                { src: bookSeniorTechSafety, alt: "Senior Tech Safety guide cover" },
+              ]}
+              caption="A glimpse of the library — every guide is mobile-friendly and reader-ready."
+            />
           </div>
 
           <div className="rounded-2xl border border-border/50 bg-background/80 p-4 md:p-5 mb-6">

@@ -33,6 +33,8 @@ import ohioNatureImpact from "@/assets/ohio-nature-impact.jpg";
 import fieldSunsetCta from "@/assets/field-sunset-cta.jpg";
 import familyGathering from "@/assets/family-gathering.jpg";
 import seniorLearning from "@/assets/senior-learning.jpg";
+import communityWorkshopReal from "@/assets/community-workshop-real.jpg";
+import { SectionImage } from "@/components/layout/SectionImage";
 import { SEO } from "@/components/SEO";
 import { PAGE_SEO } from "@/config/pageSeo";
 import { HeroCTA } from "@/components/shared/HeroCTA";
@@ -222,6 +224,16 @@ function About() {
         </div>
       </section>
       </MeshBackground>
+
+      {/* Mission photography break */}
+      <div className="container mx-auto max-w-5xl px-4">
+        <SectionImage
+          src={communityWorkshopReal}
+          alt="Community members at an InVision Network workshop"
+          variant="wide"
+          caption="Real workshops. Real families. Real protection — across Ohio."
+        />
+      </div>
 
       <SectionDivider variant="wave" color="muted" />
 
