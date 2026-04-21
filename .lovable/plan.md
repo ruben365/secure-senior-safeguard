@@ -1,112 +1,115 @@
 
 
-## Add Subtle Stroke Glass Widgets Sitewide
+## Normalize Button Text Color: White on Dark/Blue Backgrounds
 
-Goal: introduce a refined "Subtle Stroke" glass widget treatment to content sections sitewide (between hero and footer). Pure CSS + className additions — no new logic, no hero changes, no footer changes.
+Goal: ensure every button that has a dark or blue background already uses white text. Audit and fix any inconsistencies where dark or blue buttons render text in another color (slate, gray, primary blue on blue, etc.).
 
-### Design — "Subtle Stroke" glass widget
+### Approach
 
-A whisper-thin, premium glass surface that sits gently on the cream background. Built to layer over any section without overpowering it.
+A targeted CSS + className sweep. No logic, no layout, no new components.
 
-**Visual recipe**
-- Surface: white at 65% opacity over warm cream
-- Border: 1px hairline in warm slate at 40% opacity
-- Inner stroke: 1px inset highlight at top (white at 60%) — gives the "etched glass" feel
-- Outer ambient: soft warm shadow `0 1px 2px rgba(80,40,80,0.04), 0 12px 32px -16px rgba(80,40,80,0.08)`
-- Backdrop blur: 10px (under the 12px perf cap)
-- Radius: 16px (tight) / 20px (standard) / 24px (large)
-- Corner accent: optional 1px copper hairline on top-left corner (8px L-shape) for the "subtle stroke" signature
+### What gets changed
 
-**Variants**
-```text
-.stroke-glass            → standard 20px radius, full treatment
-.stroke-glass--tight     → 16px radius, lighter shadow (for inline cards)
-.stroke-glass--large     → 24px radius, deeper ambient (for feature blocks)
-.stroke-glass--accent    → adds copper L-corner stroke (signature variant)
-.stroke-glass--quiet     → no shadow, only border + blur (for already-busy sections)
-```
+1. **Global safety rule (CSS)** — add a low-specificity utility in `src/index.css` that forces white text on any element matching dark or blue background utility classes when text color is unspecified or inherits a non-white tone:
+   - `bg-slate-900`, `bg-slate-800`, `bg-slate-700`
+   - `bg-blue-600`, `bg-blue-700`, `bg-blue-800`, `bg-blue-900`
+   - `bg-indigo-*`, `bg-sky-700/800/900`
+   - `bg-primary` (when primary resolves to a dark/blue tone)
+   - `bg-[#1E293B]`, `bg-[#0F172A]`, `bg-[#1e3a8a]`, etc. (arbitrary dark hex backgrounds used in the codebase)
 
-### Where it gets applied
+   Rule shape:
+   ```css
+   button.bg-slate-900,
+   button.bg-slate-800,
+   button.bg-blue-600,
+   button.bg-blue-700,
+   button.bg-blue-800,
+   a.bg-slate-900,
+   a.bg-blue-600,
+   /* …etc */ {
+     color: #ffffff;
+   }
+   button.bg-slate-900 *,
+   button.bg-blue-600 *,
+   /* …etc */ {
+     color: inherit;
+   }
+   ```
 
-Strategic placement only — not blanket-wrapped. Targets containers that currently feel flat or unmoored on the cream background.
+2. **Component-level audit** — sweep button-bearing files and replace any `text-slate-*`, `text-gray-*`, `text-blue-*`, `text-foreground`, or missing text class on dark/blue buttons with `text-white`. Files known to contain such buttons:
+   - `src/components/ui/button.tsx` (verify destructive/secondary/dark variants)
+   - `src/components/Footer.tsx` — *skipped per prior rule (footer untouched)*
+   - `src/components/home/HomeStorySections.tsx`
+   - `src/components/home/FAQPreview.tsx`
+   - `src/components/home/NewsletterSection.tsx`
+   - `src/pages/About.tsx`, `Business.tsx`, `Training.tsx`, `Contact.tsx`, `Careers.tsx`, `Resources.tsx`, `Partners.tsx`, `Events.tsx`, `HelpCenter.tsx`
+   - `src/components/dashboard/QuickActionsGrid.tsx` (gradient tile buttons — confirm white labels)
+   - `src/components/pro/GlowButton.tsx` (primary variant)
+   - Auth page CTAs (`src/pages/Auth.tsx`)
+   - Any inline `<a>` styled as button with `bg-[#d96c4a]`, `bg-[#1E293B]`, `bg-blue-*`
 
-| Page | Sections receiving widget | Variant |
-|------|---------------------------|---------|
-| About | Mission card, values grid items, story timeline | `.stroke-glass--accent` on mission, `.stroke-glass--tight` on values |
-| Business | Stat band, service cards, CTA band | `.stroke-glass--large` on stats, standard on services |
-| Training | Pricing tier cards (outer wrapper only), instructor cards | `.stroke-glass--accent` on top tier, standard on rest |
-| Resources | Featured shelf wrapper, category filter bar | `.stroke-glass--quiet` on filter bar |
-| Articles | Article preview cards, featured article block | `.stroke-glass--tight` on previews |
-| Portfolio | Project cards, filter bar | `.stroke-glass--tight` on cards |
-| Events | Event cards, upcoming/past tabs container | standard on cards |
-| Partners | Partner logos grid wrapper, testimonials | `.stroke-glass--quiet` on grid |
-| Careers | Job position cards, benefits grid | standard on positions, `.stroke-glass--tight` on benefits |
-| Contact | Contact info card, form wrapper, map block | `.stroke-glass--accent` on form |
-| FAQ (preview) | Question accordion items | `.stroke-glass--tight` |
-| HelpCenter | Topic category cards, search wrapper | `.stroke-glass--quiet` on search |
-| Sitemap | Section column wrappers | `.stroke-glass--tight` |
-| Status | Service status rows, uptime block | `.stroke-glass--quiet` |
-| Legal pages (6) | Body prose wrapper | standard, single application |
-| Home (below hero) | HomeStorySections cards, FAQPreview, LatestArticles | mixed: `--tight` on previews, `--accent` on featured |
+3. **Hover/active states** — same rule extended so hover variants on dark/blue buttons stay white (e.g. `hover:bg-blue-700`, `hover:bg-slate-800`).
+
+### Detection method
+
+Search the codebase for these patterns and fix any match where text color is not `text-white`:
+- `bg-slate-(700|800|900)` without `text-white`
+- `bg-blue-(600|700|800|900)` without `text-white`
+- `bg-indigo-` without `text-white`
+- `bg-[#0F172A]`, `bg-[#1E293B]`, `bg-[#1e3a8a]`, `bg-[#0b1220]` without `text-white`
+- `bg-primary` on `<button>` / `<a>` without explicit text color
+- Gradient tiles `bg-gradient-to-* from-(blue|slate|indigo|sky|navy|cyan)-*` without `text-white`
 
 ### Files touched
 
 ```text
-EDIT  src/styles/vibrance.css                          (~90 lines added — stroke-glass utilities)
-EDIT  src/pages/About.tsx                              (className additions on section wrappers)
+EDIT  src/index.css                              (~25 lines added — global dark/blue button text rule)
+EDIT  src/components/ui/button.tsx               (verify dark variants force text-white)
+EDIT  src/components/home/HomeStorySections.tsx  (className sweep)
+EDIT  src/components/home/FAQPreview.tsx
+EDIT  src/components/home/NewsletterSection.tsx
+EDIT  src/components/pro/GlowButton.tsx
+EDIT  src/components/dashboard/QuickActionsGrid.tsx
+EDIT  src/pages/About.tsx
 EDIT  src/pages/Business.tsx
 EDIT  src/pages/Training.tsx
-EDIT  src/pages/Resources.tsx
-EDIT  src/pages/Articles.tsx
-EDIT  src/pages/Portfolio.tsx
-EDIT  src/pages/Events.tsx
-EDIT  src/pages/Partners.tsx
-EDIT  src/pages/Careers.tsx
 EDIT  src/pages/Contact.tsx
+EDIT  src/pages/Careers.tsx
+EDIT  src/pages/Resources.tsx
+EDIT  src/pages/Partners.tsx
+EDIT  src/pages/Events.tsx
 EDIT  src/pages/HelpCenter.tsx
-EDIT  src/pages/Sitemap.tsx
-EDIT  src/pages/Status.tsx
-EDIT  src/pages/PrivacyPolicy.tsx
-EDIT  src/pages/TermsOfService.tsx
-EDIT  src/pages/RefundPolicy.tsx
-EDIT  src/pages/CookiePolicy.tsx
-EDIT  src/pages/AcceptableUse.tsx
-EDIT  src/pages/Disclaimer.tsx
-EDIT  src/components/home/HomeStorySections.tsx
-EDIT  src/components/home/FAQPreview.tsx
-EDIT  src/components/home/LatestArticles.tsx
+EDIT  src/pages/Auth.tsx
 ```
 
-All edits are className-additive. No JSX restructuring, no prop changes, no logic, no new components.
+All edits are className/CSS additive. No JSX restructuring.
 
-### Untouched (per user instruction)
+### Untouched
 
-- All hero components (`HeroHomepage`, `HeroBusiness`, `HeroWorkshops`, etc.) and `hero-*` styles
-- `Footer.tsx` and footer styles
-- Auth, Admin, Portal pages (separate design systems)
-- Color tokens, typography tokens, button system
-- All routes, data flows, hooks, edge functions
+- Buttons on light, cream, white, or transparent backgrounds (their dark text is correct)
+- Outlined buttons (border only — text stays dark by design)
+- Hero components (per prior rule)
+- Footer (per prior rule)
+- Icon-only ghost buttons where the icon is already correctly colored
+- Color tokens, button sizes, spacing, radius
 
 ### Constraints respected
 
-- `backdrop-filter: blur(10px)` — under the 12px perf cap
-- No `transition: all`
-- No animation on mount (widget is static; only existing scroll-reveal observers run)
-- Decorative inner stroke is `pointer-events: none`
-- Honors `prefers-reduced-transparency: reduce` — falls back to solid white at 96%
-- WCAG AA contrast preserved (text colors unchanged)
-- Mobile-first; blur stays at 10px (mobile-safe)
+- WCAG AA contrast: white on dark/blue backgrounds passes AAA
+- No `transition: all`, no animation changes
+- No removal of existing classes — only color overrides
 - Honors existing `zoom: 0.75` root scaling
+- Plume design system preserved
 
 ### Out of scope
 
-- Hero pages and footer
-- Pre-existing build error in `HeroHomepage.tsx` line 77 (`fetchpriority` → `fetchPriority` casing) — that is a separate one-line fix, not part of this design pass
-- Internal dashboards
-- Component logic, data, hooks
-- Tailwind config (all utilities live in `vibrance.css`)
+- Buttons on light backgrounds (no change needed)
+- Disabled state styling
+- Loading spinners (already inherit color)
+- Dark-themed admin/portal panels (separate design system)
+- Any pre-existing build errors unrelated to button text color
 
 ### Estimated diff
 
-~90 lines new CSS + ~80 lines of className additions across ~23 files. Zero deletions of working content.
+~25 lines new CSS + ~30 className tweaks across ~16 files. Zero deletions.
 
