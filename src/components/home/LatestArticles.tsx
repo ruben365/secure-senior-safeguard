@@ -46,7 +46,7 @@ export function LatestArticles() {
               <Link
                 key={article.id}
                 to={`/articles/${article.slug}`}
-                className="group flex flex-col rounded-2xl border border-[#E5E7EB] bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
+                className="hss-card group flex flex-col rounded-2xl border border-[#E5E7EB] overflow-hidden"
               >
                 {article.featured_image_url && (
                   <div className="overflow-hidden h-44">

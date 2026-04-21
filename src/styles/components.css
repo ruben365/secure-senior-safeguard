@@ -239,9 +239,9 @@
 .gradient-hero-primary {
   background: linear-gradient(
     135deg,
-    hsl(var(--primary)) 0%,
-    hsl(var(--accent)) 50%,
-    hsl(var(--lavender-400)) 100%
+    #e07b52 0%,
+    #d96c4a 55%,
+    #c45e3b 100%
   );
 }
 

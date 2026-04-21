@@ -80,7 +80,7 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
           </section>
 
           {/* 3. FAQ */}
-          <div className="hss-root relative isolate bg-white">
+          <div className="hss-root relative isolate bg-[#fdfaf8]">
             <section
               id="faq"
               aria-label="Frequently asked questions"
@@ -118,9 +118,9 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
               />
               {/* Left-to-right gradient: dark on the left where the text
                   sits, fading to clear on the right where the faces are */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[hsl(260_18%_6%/0.92)] via-[hsl(260_18%_8%/0.55)] to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[rgba(14,10,8,0.93)] via-[rgba(20,14,10,0.55)] to-transparent" />
               {/* Subtle bottom vignette to seat the section */}
-              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[hsl(260_18%_6%/0.55)] to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[rgba(14,10,8,0.55)] to-transparent" />
             </div>
 
             {/* Text panel — anchored left, never centered */}
