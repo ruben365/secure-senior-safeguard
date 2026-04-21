@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { CheckCircle, XCircle, AlertTriangle } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { SITE } from "@/config/site";
+import { CompactLegalHero } from "@/components/shared/CompactLegalHero";
 
 function AcceptableUse() {
   return (
@@ -13,7 +14,12 @@ function AcceptableUse() {
         description="Review the acceptable and prohibited uses of InVision Network services."
       />
       <Navigation />
-      <section className="py-24 bg-background">
+      <CompactLegalHero
+        eyebrow="Legal"
+        title="Acceptable Use Policy"
+        lede="The rules for using our platform responsibly."
+      />
+      <section className="py-16 md:py-20 bg-background">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-center mb-4">Acceptable Use Policy</h1>

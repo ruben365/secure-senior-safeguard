@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Cookie, Settings, BarChart3, Shield } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { SITE } from "@/config/site";
+import { CompactLegalHero } from "@/components/shared/CompactLegalHero";
 
 function CookiePolicy() {
   return (
@@ -13,7 +14,12 @@ function CookiePolicy() {
         description="Learn how InVision Network uses cookies and how to manage your preferences."
       />
       <Navigation />
-      <section className="py-24 bg-background">
+      <CompactLegalHero
+        eyebrow="Legal"
+        title="Cookie Policy"
+        lede="How we use cookies and your choices."
+      />
+      <section className="py-16 md:py-20 bg-background">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-center mb-4">Cookie Policy</h1>
