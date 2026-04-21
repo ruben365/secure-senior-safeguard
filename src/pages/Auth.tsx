@@ -844,16 +844,16 @@ function Auth() {
             onValueChange={setActiveTab}
             className="w-full"
           >
-            <TabsList className="grid w-full grid-cols-2 mb-6 bg-slate-100">
+            <TabsList className="grid w-full grid-cols-2 mb-6 bg-gradient-to-br from-orange-50/60 via-slate-50 to-purple-50/40 border border-slate-200/70 rounded-xl p-1">
               <TabsTrigger
                 value="login"
-                className="data-[state=active]:bg-white data-[state=active]:shadow-sm"
+                className="rounded-lg data-[state=active]:bg-gradient-to-b data-[state=active]:from-white data-[state=active]:to-orange-50/40 data-[state=active]:shadow-[0_1px_0_rgba(255,255,255,0.9)_inset,0_2px_8px_-2px_rgba(217,108,74,0.18)] data-[state=active]:text-slate-900 text-slate-500 transition-all"
               >
                 Sign In
               </TabsTrigger>
               <TabsTrigger
                 value="signup"
-                className="data-[state=active]:bg-white data-[state=active]:shadow-sm"
+                className="rounded-lg data-[state=active]:bg-gradient-to-b data-[state=active]:from-white data-[state=active]:to-orange-50/40 data-[state=active]:shadow-[0_1px_0_rgba(255,255,255,0.9)_inset,0_2px_8px_-2px_rgba(217,108,74,0.18)] data-[state=active]:text-slate-900 text-slate-500 transition-all"
               >
                 Sign Up
               </TabsTrigger>
