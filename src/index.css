@@ -42,6 +42,9 @@
 /* Layout rhythm — sitewide spacing & disposition (mid-page sections) */
 @import "./styles/layout-rhythm.css";
 
+/* Figma sharpness — pixel-precise rendering layer (imported last to win) */
+@import "./styles/figma-sharpness.css";
+
 /* ═══════════════════════════════════════════════════════════════════
    AMBIENT VIBRANCE OPT-OUT — Auth, Admin, Portal use solid surfaces
    ═══════════════════════════════════════════════════════════════════ */
