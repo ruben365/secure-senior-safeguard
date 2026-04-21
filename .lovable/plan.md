@@ -1,136 +1,100 @@
 
 
-## Sitewide Visual Refresh — Vibrance + Glassmorphism v2
+## Auth Login Page — Beautiful Redesign
 
-Goal: elevate every section between the hero and the footer with a richer, more vibrant glassmorphism aesthetic — colorful gradients, layered overlays, more luminous widgets — without touching the homepage hero or the footer. The work is purely additive CSS + a few component class swaps; no logic changes.
+Refresh the visual layer of `/auth` with a richer, more luminous aesthetic that aligns with the recently introduced **Vibrance + Glassmorphism v2** system. Pure CSS / className changes — no logic, no form fields, no flow changes.
 
-### Scope
-
-**Will change**
-- All page mid-sections (Index after hero, About, Business, Services, Training, Portfolio, Contact, FAQ, Resources, Articles, Events, Partners, Careers, Help Center)
-- Shared widgets: cards, stat cards, pricing cards, feature blocks, CTAs, badges, dividers, icon bubbles, section backgrounds
-- Global glassmorphism utility system + new "vibrance" overlay layer
-
-**Will NOT change**
-- Homepage hero (`hero-homepage.css`) and any `hero-*.css` files
-- Footer component(s)
-- Auth, Portal, Admin dashboards (these are functional UIs, kept neutral)
-
----
-
-### 1. New CSS layer: `src/styles/vibrance.css`
-
-A new dedicated file imported last in `src/index.css` (after `glassmorphism.css`) so it wins the cascade. Adds:
-
-**Section background palette (5 themed gradients with mesh overlays)**
-- `.vibe-section--aurora` — coral → lavender → sky blue mesh
-- `.vibe-section--sunset` — peach → orange → magenta mesh
-- `.vibe-section--ocean` — sky → teal → indigo mesh
-- `.vibe-section--mint` — mint → seafoam → soft cyan mesh
-- `.vibe-section--warm` — refined version of current warm cream (default)
-
-Each renders as a `position:relative` container with two pseudo-elements:
-- `::before` — large radial gradient orbs (3 orbs, blurred 80–120px)
-- `::after` — subtle noise + grain overlay for texture depth
-
-**Glass widgets (v2, more vibrant)**
-- `.glass-vibe` — frosted glass with iridescent border (conic gradient border via mask), softer 24px blur, inner glow
-- `.glass-vibe-card` — card variant with hover lift + gradient border shimmer
-- `.glass-vibe-stat` — stat tile with gradient number + halo glow behind icon
-- `.glass-vibe-pricing` — pricing card with shimmering gradient stripe top edge, "featured" variant adds animated gradient ring
-- `.glass-vibe-feature` — feature block with floating gradient icon bubble
-
-**Decorative overlays (drop-in divs)**
-- `.vibe-orb` — reusable absolutely-positioned blurred gradient orb (sizes: sm/md/lg/xl, hues: coral/lavender/mint/sky)
-- `.vibe-mesh-overlay` — full-section mesh gradient overlay
-- `.vibe-grain` — subtle SVG noise texture overlay
-- `.vibe-shine` — diagonal sheen highlight for cards
-
-**Dividers + accents**
-- `.vibe-divider` — animated gradient hairline (coral → lavender → sky)
-- `.vibe-divider--dotted` — gradient dot row separator
-- `.vibe-pill-badge` — translucent gradient pill with subtle glow
-
-**Buttons / CTAs (glass enhancements, NOT replacing the Neo-Tactile primary buttons)**
-- `.btn-glass-vibe` — translucent secondary button with backdrop blur + gradient border
-- `.btn-glass-vibe--ghost` — outline variant for dark sections
-
-**Animations (added to `animations.css`)**
-- `@keyframes vibe-orb-drift` — slow 24s float for orbs
-- `@keyframes vibe-shimmer` — 3s gradient sweep for featured cards
-- `@keyframes vibe-pulse-glow` — soft halo pulse for stat icons
-- All respect `prefers-reduced-motion: reduce` (set to `animation: none`)
-
----
-
-### 2. Section background rotation
-
-Apply the new `.vibe-section--*` classes to the existing section wrappers across pages so consecutive sections feel visually distinct but cohesive. Pattern:
-
-```text
-[hero — untouched]
-section 1 → vibe-section--aurora
-section 2 → vibe-section--warm
-section 3 → vibe-section--ocean
-section 4 → vibe-section--warm
-section 5 → vibe-section--sunset
-[footer — untouched]
-```
-
-Done by editing the outermost `<section>` className on each page (Index, About, Business, Services, Training, Portfolio, Contact, FAQ, Resources, Articles, Events, Partners, Careers, HelpCenter). Pure className additions, no structural change.
-
----
-
-### 3. Widget upgrades (className swaps)
-
-In shared components:
-- `GlassSection.tsx` — add a `vibrant` prop that swaps `glass-card` for `glass-vibe`
-- `src/components/ui/soft-elements.tsx` — `SoftCard` gains an optional `vibrant` variant using `glass-vibe-card`
-- `src/components/pro/MeshBackground.tsx` — extend with new `aurora | sunset | ocean | mint` variants mapped to `.vibe-section--*`
-- Stat cards (e.g. `DashboardKPICards` is admin → skipped; public stat cards on Index/About get `glass-vibe-stat`)
-- Pricing cards on Business / Training pages → `glass-vibe-pricing`
-- Section dividers → `vibe-divider`
-- Section eyebrow badges → `vibe-pill-badge`
-
----
-
-### 4. Overlays inside sections
-
-Add 2–3 `<span class="vibe-orb vibe-orb--lg vibe-orb--coral" aria-hidden />` decorative spans inside each refreshed section wrapper for ambient color presence. Wrapped in a `pointer-events-none` container so they never block interaction.
-
----
-
-### 5. Accessibility & performance
-
-- All overlays use `aria-hidden="true"` and `pointer-events: none`
-- `prefers-reduced-motion` disables orb drift, shimmer, pulse
-- Backdrop blur capped at 24px to avoid mobile GPU jank
-- Mobile (<640px): orb count reduced via media query (hides `.vibe-orb--xl`), blur reduced to 16px
-- No layout shift — all overlays absolutely positioned
-
----
-
-### 6. Out of scope (explicitly preserved)
-
-- `hero-homepage.css`, `hero-business.css`, `hero-workshops.css` — untouched
-- Footer component and its styles — untouched
-- Neo-Tactile primary button system — untouched
-- Admin / Portal / Auth dashboards — untouched
-- Color tokens in `base.css` — untouched (new gradients reference existing tokens)
-
----
+### Goals
+- More vibrant, depth-rich background (aurora-style gradient mesh, animated drifting orbs)
+- Premium glass auth card with iridescent border, layered shimmer, and crisper elevation
+- More elegant SSO buttons, divider, tabs, inputs, and primary CTA
+- Same upgrade applied to the three sibling screens: signup success, MFA verify, password reset
+- Fully respects `prefers-reduced-motion` and existing accessibility
 
 ### Files touched
 
 ```text
-NEW   src/styles/vibrance.css
-EDIT  src/index.css                         (one @import line)
-EDIT  src/styles/animations.css             (3 keyframes)
-EDIT  src/components/ui/GlassSection.tsx    (vibrant prop)
-EDIT  src/components/ui/soft-elements.tsx   (vibrant variant)
-EDIT  src/components/pro/MeshBackground.tsx (new variants)
-EDIT  ~12 page files                        (className additions only)
+EDIT  src/pages/Auth.tsx              (className-only edits to all 4 screens)
+EDIT  src/styles/vibrance.css         (add ~5 auth-specific helper classes)
 ```
 
-No database, no edge function, no dependency changes. Estimated diff: ~600 lines new CSS, ~80 lines of className swaps.
+No new files. No prop signature changes. No logic changes.
+
+### Visual changes
+
+**1. Background (all 4 screens — login, signup-success, MFA, password-reset)**
+- Replace the dark navy gradient with a deeper **midnight-aurora mesh**: ink blue → plum → indigo, with three drifting blurred orbs (coral, lavender, amber) using the existing `vibe-orb-drift` keyframe
+- Add a faint top-to-bottom violet glow column behind the card
+- Keep the fine dot grid (texture) and brand hairline strip
+- Add a soft `vibe-grain` noise overlay at 4% opacity for analog warmth
+- Vignette tightened around the card center for stronger focus
+
+**2. Left brand pane (desktop only)**
+- Logo tile gains a conic-gradient iridescent border (coral → amber → lavender)
+- Headline gradient sweep slowed and widened (orange → amber → coral → orange)
+- Trust-point check tiles: switch from flat orange to a `glass-vibe` mini-tile with halo glow
+- Add a thin animated `vibe-divider` hairline above the "Trusted by 500+ families" footer
+
+**3. Auth card (the centerpiece)**
+- Apply new `.auth-card-vibe` wrapper: white surface with **iridescent gradient border** via masked conic-gradient
+- Replace the warm glow ring with a dual-layer aurora glow (coral upper-left + lavender lower-right + amber bottom)
+- Top rim hairline becomes an animated shimmer (subtle 6s sweep)
+- Shadow stack refined: tighter contact shadow + softer ambient far shadow for a true "floating glass" feel
+- Inner subtle linear sheen from top-left to mid
+
+**4. SSO buttons (Google / Microsoft)**
+- New `.btn-sso-vibe` style: white glass surface, soft inner highlight, hover lifts 1px and reveals a faint gradient border ring
+- Icon size unchanged; label weight kept at 600
+
+**5. Divider ("or continue with email")**
+- Hairline becomes a 3-stop gradient (slate → coral 5% → slate)
+- Center pill gets a translucent gradient backdrop and `vibe-pill-badge` styling
+
+**6. Tabs (Sign In / Sign Up)**
+- Active tab gets a soft warm-cream → white gradient with a 1px coral underline accent
+- Inactive tab text-slate-500 with smoother transition
+
+**7. Inputs**
+- New `.input-vibe` style: warm off-white fill, inner top highlight, copper focus ring (matches Neo-Tactile spec), icon color shifts to warm amber on focus
+- Eye toggle button gets a subtle hover background
+
+**8. Primary "Sign In" button**
+- Keep dark plum-ink base but add: subtle inner top highlight, soft amber glow on hover, arrow icon translates 2px right on hover
+- Loading spinner color unchanged
+
+**9. "Forgot password?" link**
+- Gradient text on hover (orange → coral)
+
+**10. Security footer**
+- Shield icon in a tiny gradient circle; thin animated `vibe-divider` hairline above
+
+**11. Sibling screens (signup-success, MFA, password-reset)**
+- Same background system
+- Same `.auth-card-vibe` wrapper with screen-specific accent hue (emerald for success, amber for MFA, emerald for reset)
+- Icon bubbles upgraded with halo glow + iridescent ring
+
+### New CSS helpers added to `src/styles/vibrance.css`
+
+```text
+.auth-bg-aurora        — full-bleed aurora background (used on all 4 screens)
+.auth-card-vibe        — white card with iridescent conic border + 5-layer shadow
+.auth-glow-ring        — dual-aurora glow positioned behind the card
+.btn-sso-vibe          — premium SSO button styling
+.input-vibe            — warm off-white input with copper focus ring
+```
+
+All classes are additive utilities — they do not override existing tokens or break any other page.
+
+### Accessibility & performance
+- All decorative elements keep `aria-hidden="true"` and `pointer-events: none`
+- Orb drift, shimmer, and pulse disabled under `prefers-reduced-motion: reduce`
+- Backdrop blur capped at 20px
+- Mobile (<640px): inner glow rings simplified, orb count reduced to 2
+- No layout shift, no z-index conflicts, no changes to focus order or tab order
+
+### Out of scope
+- Form logic, validation, MFA flow, OAuth handlers — untouched
+- Routing, redirects, profile/account-status checks — untouched
+- `ForgotPasswordModal`, `TwoFactorVerify`, `PasswordResetForm` internals — only their wrapper styling changes
+- All other pages — untouched
 
