@@ -1,121 +1,124 @@
 
 
-## Sitewide Text Alignment & Disposition Pass
+## Auth Page — Complete Visual Reinvention
 
-Goal: enforce consistent text alignment, line-length, and heading-to-body rhythm across **every section between the hero and the footer**, sitewide. Pure CSS + className additions — no logic, no hero changes, no footer changes.
+A full ground-up redesign of `/auth` (login, signup-success, MFA, password-reset). New background, new card, new layout, new everything. The current "Vibrance v2" treatment will be replaced with a fresh aesthetic.
 
-### Problem observed
+### New direction: "Soft Daylight" — warm, airy, premium
 
-Across pages (Resources, About, Services, Articles, Portfolio, Events, Partners, Careers, Contact, Business, Training, HelpCenter), text alignment is inconsistent:
-- Some sections use `text-center`, others `text-left` for similar content roles
-- Lede paragraphs stretch beyond comfortable reading width (some 100% wide, some `max-w-2xl`, some `max-w-3xl`, some `max-w-4xl`)
-- Eyebrow → headline → lede spacing varies (mb-3 / mb-4 / mb-6 / mb-8 mix)
-- Section-internal blocks (cards, stats, CTA bands) inherit inconsistent alignment from their parents
-- Body copy inside cards mixes `text-left` and `text-center` arbitrarily
+Departing from the current dark midnight-aurora look. The new aesthetic is **light, warm, and architectural**: a cream-and-peach atmosphere with a sculptural glass card, subtle paper texture, and refined micro-details. Mirrors the Plume design system used across the rest of the site instead of fighting against it.
 
-### Strategy — extend the rhythm system with alignment utilities
+### Background — fully rebuilt
 
-Add a small, additive layer to `src/styles/layout-rhythm.css` (no new file). All Tailwind-compatible, all opt-in.
+Replace the dark `auth-bg-aurora` with a new `auth-bg-daylight` system:
+- Base: vertical wash from cream `hsl(35 40% 97%)` → soft peach `hsl(20 50% 94%)` → warm ivory
+- Three large drifting blurred orbs in **terracotta, lavender, and amber** at low opacity (no dark navy)
+- Faint diagonal architectural grid (1px lines, 8% opacity) for structure
+- Soft paper-grain noise overlay (3% opacity)
+- Two thin animated light rays sweeping diagonally (12s loop)
+- Top and bottom hairline accents in copper gradient
+- Mobile: simplified to two orbs, no rays
 
-**1. Text alignment role classes**
-```text
-.text-section        → text-left on mobile, text-center on md+ (used for section headers above grids)
-.text-section-left   → always text-left (used for editorial/long-form blocks)
-.text-section-center → always text-center (used for CTA bands, statement blocks)
-.text-card           → text-left inside cards (locked, never inherits center)
-```
+### Card — fully rebuilt
 
-**2. Reading-width caps (line-length for legibility)**
-```text
-.lede           → max-w-prose (≈65ch) mx-auto, line-height 1.6, text-balance
-.body-rhythm    → max-w-[68ch] mx-auto, leading-7, paragraph-spacing 1em
-.headline-tight → text-balance, leading-[1.1], tracking-tight
-```
+Replace `auth-card-vibe` with new `auth-card-daylight`:
+- **Surface**: pure white with a 1px iridescent border (conic gradient: copper → lavender → cream → copper)
+- **Shape**: 20px radius, generous 2.5rem padding (3rem on desktop)
+- **Elevation**: dual-layer shadow — tight contact (0 2px 8px) + ambient soft (0 30px 80px -20px) — both warm-tinted
+- **Inner detail**: subtle linear sheen from top-left, a 1px coral accent strip on the left edge
+- **No glow ring** — replaced with a clean single warm ambient shadow
 
-**3. Heading-stack normalization** (extends existing `.head-rhythm`)
-```text
-.head-rhythm                  → text-center on md+ by default
-.head-rhythm.is-left          → forces text-left across breakpoints
-.head-rhythm > .eyebrow       → mb-3 (was inconsistent)
-.head-rhythm > h1,h2,h3       → text-balance, mb-4 md:mb-5
-.head-rhythm > .lede          → mt-4 md:mt-5, max-w-2xl mx-auto
-```
+### Layout — restructured
 
-**4. Card content alignment lock**
-```text
-.card-content-stack > *       → text-left
-.card-content-stack > h3      → mb-2
-.card-content-stack > p       → leading-6 text-[0.95rem]
-```
+- Single-column centered layout on all screen sizes (no more two-pane brand panel)
+- Logo + brand mark at top (centered, larger, with copper gradient ring)
+- Tagline directly under brand: "Your secure portal" in small caps
+- Compact heading stack
+- SSO buttons full-width
+- Refined divider
+- Tabs
+- Form fields
+- Trust footer with three small icon chips (Encrypted / Kettering team / Private)
 
-### Strategic disposition rules (applied per page)
+### SSO buttons — rebuilt
 
-| Section role | Alignment rule | Width cap |
-|---|---|---|
-| Page intro / section header above a grid | center on md+ | `max-w-2xl` lede |
-| Editorial / story block | left-aligned | `max-w-prose` body |
-| CTA band | always center | `max-w-xl` |
-| Card content (feature, pricing, article preview) | always left | full card width |
-| Stat/metric block | always center | item-level |
-| FAQ question/answer | always left | `max-w-3xl` container |
-| Legal / policy body | left, prose-styled | `max-w-prose` |
+New `btn-sso-daylight`:
+- Cream-tinted glass surface (not pure white)
+- 1px warm border that gradient-shifts to copper on hover
+- Inner top highlight (1px white sheen)
+- Hover: lifts 1px, soft amber inner glow
+- Icon + label spacing tightened
+
+### Tabs — rebuilt
+
+- Container: cream pill with 1px border
+- Active: white surface with 2px copper underline accent (no gradient fill)
+- Inactive: warm slate text
+- Smooth 200ms transition
+
+### Inputs — rebuilt
+
+New `input-daylight`:
+- Surface: warm off-white with subtle inner top shadow
+- Border: hairline warm slate
+- Focus: 2px copper ring + white surface + icon shifts to copper
+- Larger 48px height for better touch targets
+- Icon left-padding adjusted
+
+### Primary CTA — rebuilt
+
+- Full-width 52px height
+- Background: gradient from `hsl(20 80% 52%)` → `hsl(15 75% 45%)` (terracotta deepening)
+- Inner top highlight (1px white at 30% opacity)
+- Soft drop shadow in matching coral
+- Hover: brightens 4%, arrow translates 3px right
+- Loading state: copper spinner
+
+### Secondary screens (signup-success, MFA, password-reset)
+
+Same `auth-bg-daylight` background, same `auth-card-daylight` shell. Accent hue tuned per screen:
+- Signup success → emerald accent strip and icon halo
+- MFA verify → amber accent strip and icon halo
+- Password reset → lavender accent strip and icon halo
 
 ### Files touched
 
 ```text
-EDIT  src/styles/layout-rhythm.css   (~80 lines added — alignment utilities)
-EDIT  src/pages/About.tsx            (className swaps on section headers + cards)
-EDIT  src/pages/Business.tsx
-EDIT  src/pages/Services.tsx         (if exists; otherwise skip)
-EDIT  src/pages/Training.tsx
-EDIT  src/pages/Resources.tsx
-EDIT  src/pages/Portfolio.tsx
-EDIT  src/pages/Articles.tsx
-EDIT  src/pages/Events.tsx
-EDIT  src/pages/Partners.tsx
-EDIT  src/pages/Careers.tsx
-EDIT  src/pages/Contact.tsx
-EDIT  src/pages/HelpCenter.tsx
-EDIT  src/pages/Sitemap.tsx
-EDIT  src/pages/Status.tsx
-EDIT  src/pages/PrivacyPolicy.tsx
-EDIT  src/pages/TermsOfService.tsx
-EDIT  src/pages/RefundPolicy.tsx
-EDIT  src/pages/CookiePolicy.tsx
-EDIT  src/pages/AcceptableUse.tsx
-EDIT  src/pages/Disclaimer.tsx
-EDIT  src/components/home/HomeStorySections.tsx
-EDIT  src/components/home/FAQPreview.tsx
-EDIT  src/components/home/LatestArticles.tsx
+EDIT  src/styles/vibrance.css   (rewrite the auth-* utility block — ~180 lines replaced)
+EDIT  src/pages/Auth.tsx        (className replacements + remove left brand pane + restructure)
 ```
 
-All edits are className-level only. No JSX restructuring, no prop changes, no logic changes.
+No new files. No logic changes. No prop changes. No route changes. No DB.
 
-### Untouched (per user instruction)
+### CSS classes added (replaces existing auth-* set)
 
-- `HeroHomepage`, `HeroBusiness`, `HeroWorkshops`, all `hero-*` styles and components
-- `Footer.tsx` and footer styles
-- Auth, Admin, Portal pages (internal screens, separate design system)
-- Color tokens, typography tokens, button system
-- All routes, data flows, hooks, edge functions
+```text
+.auth-bg-daylight       — full-bleed warm cream gradient background
+.auth-bg-daylight::before — orb layer + diagonal grid
+.auth-card-daylight     — white card with iridescent border + warm dual shadow
+.auth-card-accent       — left edge color strip (modifier)
+.btn-sso-daylight       — cream glass SSO button
+.input-daylight         — warm off-white input with copper focus
+.auth-cta-primary       — terracotta gradient CTA button
+.auth-divider-warm      — gradient hairline + cream pill
+.auth-tabs-warm         — cream tab container + copper underline
+```
 
-### Accessibility & responsiveness
+Old classes (`auth-bg-aurora`, `auth-card-vibe`, `auth-glow-ring`, `btn-sso-vibe`, `input-vibe`) are removed in this rewrite — they are only used inside `Auth.tsx`, so no other pages are affected.
 
-- All alignment rules mobile-first; left-align on small screens by default to avoid awkward centered ragged lines on phones
-- Line-length capped at 65–68ch for body copy (WCAG comfortable reading)
-- `text-balance` on headlines for cleaner line wrapping
-- Tap-target standards untouched (≥44px stays)
-- Honors existing `zoom: 0.75` root scaling (all values relative)
-- No new animations, no `transition: all`
+### Accessibility & performance
+
+- All decorative layers `aria-hidden` and `pointer-events: none`
+- Orb drift, light rays, shimmer all disabled under `prefers-reduced-motion: reduce`
+- No `backdrop-filter` over 12px (perf rule)
+- Tap targets ≥48px
+- Color contrast: all text WCAG AA on the new cream surface (slate-900 / slate-600 only)
+- Mobile: orb count reduced, light rays disabled, padding tightened
 
 ### Out of scope
 
-- Pre-existing TypeScript build errors (Speech API, BookingRequestsTable, useStripeKey, email Record types, SEO breadcrumb readonly types) — unrelated to text alignment, predate this work
-- Hero pages and footer
-- Internal dashboards (Admin, Portal, Auth)
-- Component logic and data fetching
-
-### Estimated diff
-
-~80 lines new CSS in `layout-rhythm.css`, ~250 lines of className adjustments across ~22 files. Zero deletions of working content.
+- Form logic, validation, OAuth handlers, MFA flow — untouched
+- `ForgotPasswordModal`, `TwoFactorVerify`, `PasswordResetForm` internals — only their wrapper styling changes
+- Pre-existing TypeScript build errors (Speech API types, BookingRequestsTable schema, useStripeKey, email Record types, SEO breadcrumb readonly types) — unrelated to auth styling, predate this work
+- All other pages — untouched
 
