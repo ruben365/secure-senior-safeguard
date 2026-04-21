@@ -114,7 +114,7 @@ export default function BookEditor() {
       if (!bookRes.data) throw new Error("Book not found");
       return { book: bookRes.data, chapters: chaptersRes.data ?? [] };
     },
-    onSuccess: ({ book, chapters: chs }) => {
+    ...({ onSuccess: ({ book, chapters: chs }: { book: any; chapters: any[] }) => {
       setForm({
         title: book.title ?? "",
         slug: book.slug ?? "",

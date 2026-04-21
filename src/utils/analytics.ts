@@ -219,7 +219,7 @@ export function trackTiming(category: string, variable: string, value: number) {
 // Type definitions
 declare global {
   interface Window {
-    gtag?: (...args: unknown[]) => void;
+    gtag?: (command: string, ...args: unknown[]) => void;
     dataLayer?: unknown[];
   }
 }
