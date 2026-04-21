@@ -139,14 +139,13 @@
   letter-spacing: 0.15em;
 }
 
-/* Headline — matches Workshop/other pages scale */
+/* Headline */
 .hero-biz__headline {
-  font-size: clamp(2.25rem, 5vw, 4rem);
+  font-size: clamp(1.75rem, 3.5vw, 3rem);
   font-weight: 800;
   color: var(--biz-text);
-  line-height: 1.05;
+  line-height: 1.08;
   letter-spacing: -0.03em;
-  text-transform: uppercase;
   margin: 0 0 1.25rem 0;
   animation: bizFadeUp 0.5s ease-out 0.1s both;
 }
@@ -439,7 +438,7 @@
 /* Laptop — proportional headline (1024px–1440px) */
 @media (min-width: 1024px) and (max-width: 1439.98px) {
   .hero-biz__headline {
-    font-size: 2.875rem;
+    font-size: 2.5rem;
   }
 
   .hero-biz__body {

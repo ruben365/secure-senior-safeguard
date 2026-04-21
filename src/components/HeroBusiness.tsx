@@ -77,11 +77,9 @@ export const HeroBusiness = ({ onStrategyCall }: { onStrategyCall: () => void })
         <div className="hero-biz__copy">
 
           <h1 className="hero-biz__headline">
-            AI Solutions Build
+            AI Solutions for
             <br />
-            Cyberspace
-            <br />
-            Business Success
+            Cybersecurity &amp; Business Growth
           </h1>
 
           {/* Mobile tagline */}

@@ -234,7 +234,7 @@
 /* ── 3c. H1 Headline ──
    Massive, bold, tight. The visual anchor.  */
 .hero-home__headline {
-  font-size: clamp(2.25rem, 5vw, 4rem);
+  font-size: clamp(2rem, 4vw, 3.5rem);
   font-weight: 800;
   color: var(--hero-text-primary);
   line-height: 1.06;
@@ -513,7 +513,7 @@
 /* Laptop — reduce headline at lg: (1025px–1279px) */
 @media (min-width: 1025px) and (max-width: 1279px) {
   .hero-home__headline {
-    font-size: 2.875rem;
+    font-size: 2.5rem;
   }
 
   .hero-home__body {
@@ -536,7 +536,7 @@
 /* Laptop — proportional headline (1024px–1440px) */
 @media (min-width: 1024px) and (max-width: 1439.98px) {
   .hero-home__headline {
-    font-size: 2.875rem;
+    font-size: 2.5rem;
   }
 }
 

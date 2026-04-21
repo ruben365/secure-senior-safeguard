@@ -137,7 +137,7 @@ function About() {
           showScrollIndicator={true}
         >
           <div className="text-left mb-8">
-            <h1 className="font-extrabold text-white mb-4 leading-[1.05] tracking-tight text-[clamp(2.25rem,5vw,4rem)]">
+            <h1 className="font-extrabold text-white mb-4 leading-[1.05] tracking-tight text-[clamp(1.75rem,3.5vw,3rem)] min-h-[4.5rem] sm:min-h-[5rem]">
               <RotatingHeadlines headlines={aboutHeadlines} className="" />
             </h1>
             <p className="text-base md:text-lg text-white/90 max-w-xl">
