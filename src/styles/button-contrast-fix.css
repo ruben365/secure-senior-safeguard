@@ -1,0 +1,112 @@
+/* ═══════════════════════════════════════════════════════════════════
+   BUTTON CONTRAST FIX — light-on-light buttons get visible borders
+   Heroes and footer are excluded.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── 1. White / transparent buttons get a visible border + ink ────── */
+button[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+a[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+button[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+a[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
+  border: 1.5px solid rgba(15, 23, 42, 0.18) !important;
+  color: #1e293b !important;
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.6) inset,
+    0 1px 2px 0 rgba(15, 23, 42, 0.06),
+    0 2px 6px -1px rgba(15, 23, 42, 0.05) !important;
+  transition:
+    border-color 180ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 180ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 180ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Hover: terracotta tint borrowed from the brand palette */
+button[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):hover,
+a[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):hover,
+button[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):hover,
+a[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):hover {
+  border-color: rgba(217, 108, 74, 0.55) !important;
+  color: #c45e3b !important;
+  background-color: #fff7f2 !important;
+}
+
+/* ── 2. Unstyled <button> elements (no bg-* class at all) ─────────── */
+/* :where keeps specificity at 0 — never overrides explicit Tailwind utilities */
+:where(button:not([class*="bg-"]):not([class*="ghost"]):not([class*="link"]):not([class*="variant"]):not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *)) {
+  background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+  border: 1.5px solid rgba(15, 23, 42, 0.18);
+  color: #1e293b;
+  transition:
+    border-color 180ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 180ms cubic-bezier(0.4, 0, 0.2, 1),
+    background 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:where(button:not([class*="bg-"]):not([class*="ghost"]):not([class*="link"]):not([class*="variant"]):not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *)):hover {
+  background: linear-gradient(180deg, #fff7f2 0%, #ffe9dd 100%);
+  border-color: rgba(217, 108, 74, 0.55);
+  color: #c45e3b;
+}
+
+/* ── 3. Outline / ghost / shadcn outline buttons ──────────────────── */
+button[class*="variant-outline"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+button[class*="border-input"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+[role="button"][class*="bg-background"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
+  border-width: 1.5px !important;
+  border-color: rgba(15, 23, 42, 0.22) !important;
+  color: #1e293b !important;
+}
+
+button[class*="variant-outline"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):hover,
+button[class*="border-input"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):hover {
+  border-color: rgba(217, 108, 74, 0.55) !important;
+  color: #c45e3b !important;
+  background-color: #fff7f2 !important;
+}
+
+/* ── 4. Light-tinted Tailwind buttons (slate-50, gray-50, etc.) ───── */
+button[class*="bg-slate-50"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+button[class*="bg-slate-100"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+button[class*="bg-gray-50"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+button[class*="bg-gray-100"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+button[class*="bg-neutral-50"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+button[class*="bg-neutral-100"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+button[class*="bg-zinc-50"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+button[class*="bg-zinc-100"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+button[class*="bg-stone-50"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+button[class*="bg-stone-100"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
+  border: 1.5px solid rgba(15, 23, 42, 0.15) !important;
+  color: #1e293b !important;
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.5) inset,
+    0 1px 2px 0 rgba(15, 23, 42, 0.05) !important;
+}
+
+/* ── 5. Disabled buttons keep readable contrast ───────────────────── */
+button:disabled:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+button[aria-disabled="true"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
+  opacity: 0.7 !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  color: #475569 !important;
+}
+
+/* ── 6. Reduced motion ────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  button[class*="bg-white"],
+  a[class*="bg-white"],
+  button[class*="bg-transparent"],
+  button[class*="variant-outline"] {
+    transition: none !important;
+  }
+}
+
+/* ── 7. Print: strip decoration ──────────────────────────────────── */
+@media print {
+  button,
+  a[role="button"] {
+    border: 1px solid #000 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    color: #000 !important;
+  }
+}

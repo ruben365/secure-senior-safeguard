@@ -51,6 +51,9 @@
 /* Floating cards — heavy radius + hairline border + diffused shadow */
 @import "./styles/floating-cards.css";
 
+/* Button contrast fix — light-on-light buttons get visible borders */
+@import "./styles/button-contrast-fix.css";
+
 /* ═══════════════════════════════════════════════════════════════════
    AMBIENT VIBRANCE OPT-OUT — Auth, Admin, Portal use solid surfaces
    ═══════════════════════════════════════════════════════════════════ */
