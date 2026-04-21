@@ -484,8 +484,8 @@ export default function TeamAdmin() {
         <AddTeamMemberModal
           isOpen={addModalOpen}
           onClose={handleModalClose}
-          onAdd={handleAddMember}
-          onUpdate={handleUpdateMember}
+          onAdd={handleAddMember as any}
+          onUpdate={handleUpdateMember as any}
           nextOrderNumber={teamMembers.length + 1}
           editMember={editingMember}
         />

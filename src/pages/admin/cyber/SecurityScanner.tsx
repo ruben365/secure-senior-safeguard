@@ -368,7 +368,7 @@ export default function SecurityScanner() {
       result.ai_analysis ?? "No AI analysis available.",
       "",
       ...["ssl", "headers", "dns", "exposedPaths", "content", "performance"].flatMap((key) => {
-        const section = (result.results as Record<string, unknown>)[key];
+        const section = (result.results as unknown as Record<string, unknown>)[key];
         if (!Array.isArray(section) || section.length === 0) return [];
         return [
           `## ${SECTION_LABELS[key] ?? key}`,
@@ -391,7 +391,7 @@ export default function SecurityScanner() {
   const SECTION_KEYS = ["ssl", "headers", "dns", "exposedPaths", "content", "performance"];
   const sectionKeys = result
     ? SECTION_KEYS.filter((k) => {
-        const val = (result.results as Record<string, unknown>)[k];
+        const val = (result.results as unknown as Record<string, unknown>)[k];
         return Array.isArray(val) && val.length > 0;
       })
     : [];
@@ -588,7 +588,7 @@ export default function SecurityScanner() {
                   <SectionCard
                     key={key}
                     sectionKey={key}
-                    checks={(result.results as Record<string, CheckResult[]>)[key]}
+                    checks={(result.results as unknown as Record<string, CheckResult[]>)[key]}
                   />
                 ))}
               </div>
