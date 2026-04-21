@@ -4,10 +4,10 @@
    ═══════════════════════════════════════════════════════════════════ */
 
 /* ── 1. White / transparent buttons get a visible border + ink ────── */
-button[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
-a[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
-button[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
-a[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
+button[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):not(nav *),
+a[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):not(nav *),
+button[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):not(nav *),
+a[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):not(nav *) {
   border: 1.5px solid rgba(15, 23, 42, 0.18) !important;
   color: #1e293b !important;
   box-shadow:
@@ -21,10 +21,10 @@ a[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-wor
 }
 
 /* Hover: terracotta tint borrowed from the brand palette */
-button[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):hover,
-a[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):hover,
-button[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):hover,
-a[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):hover {
+button[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):not(nav *):hover,
+a[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):not(nav *):hover,
+button[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):not(nav *):hover,
+a[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):not(nav *):hover {
   border-color: rgba(217, 108, 74, 0.55) !important;
   color: #c45e3b !important;
   background-color: #fff7f2 !important;
@@ -32,7 +32,7 @@ a[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-wor
 
 /* ── 2. Unstyled <button> elements (no bg-* class at all) ─────────── */
 /* :where keeps specificity at 0 — never overrides explicit Tailwind utilities */
-:where(button:not([class*="bg-"]):not([class*="ghost"]):not([class*="link"]):not([class*="variant"]):not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *)) {
+:where(button:not([class*="bg-"]):not([class*="ghost"]):not([class*="link"]):not([class*="variant"]):not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):not(nav *)) {
   background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
   border: 1.5px solid rgba(15, 23, 42, 0.18);
   color: #1e293b;
@@ -42,7 +42,7 @@ a[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-wor
     background 180ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-:where(button:not([class*="bg-"]):not([class*="ghost"]):not([class*="link"]):not([class*="variant"]):not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *)):hover {
+:where(button:not([class*="bg-"]):not([class*="ghost"]):not([class*="link"]):not([class*="variant"]):not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):not(nav *)):hover {
   background: linear-gradient(180deg, #fff7f2 0%, #ffe9dd 100%);
   border-color: rgba(217, 108, 74, 0.55);
   color: #c45e3b;
