@@ -952,7 +952,7 @@ function Auth() {
                   <button
                     type="button"
                     onClick={() => setShowForgotPassword(true)}
-                    className="text-sm text-primary hover:text-primary/80 font-medium"
+                    className="text-sm font-medium bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent hover:from-rose-500 hover:to-orange-500 transition-all"
                   >
                     Forgot password?
                   </button>
