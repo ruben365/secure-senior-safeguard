@@ -353,7 +353,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
               borderLeft: "1px solid rgba(255,255,255,0.08)",
               borderBottom: "1px solid rgba(255,255,255,0.06)",
               borderBottomLeftRadius: "14px",
-              animation: "menuSlideIn 200ms ease-out",
+              animation: "menuSlideIn 200ms ease-out forwards",
               paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 0.25rem)",
             }}
           >
