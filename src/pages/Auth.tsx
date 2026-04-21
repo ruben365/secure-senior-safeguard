@@ -511,9 +511,9 @@ function Auth() {
     </div>
   );
 
-  // Premium input style — subtle bg, warm orange focus ring
+  // Premium input style — warm glass surface, copper focus ring (Neo-Tactile)
   const inputClassName =
-    "h-10 pl-10 text-[14px] bg-slate-50/70 border-slate-200 text-foreground placeholder:text-slate-400 rounded-lg transition-all duration-200 focus:bg-white focus:border-orange-500 hover:border-slate-300";
+    "input-vibe h-11 pl-10 text-[14px] text-foreground placeholder:text-slate-400 transition-all";
 
   if (signupSuccess) {
     return (
