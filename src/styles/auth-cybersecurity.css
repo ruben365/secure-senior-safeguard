@@ -1,0 +1,345 @@
+/* ═══════════════════════════════════════════════════════════════════
+   Auth Cybersecurity Theme — Clean dark portal aesthetic
+   Replaces the warm "daylight" auth background with a deep navy
+   cyber-grid + scanline + glowing accent palette.
+   Imported AFTER vibrance.css so it wins the cascade.
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  --cyber-bg-deep: #050a16;
+  --cyber-bg-mid: #0a1428;
+  --cyber-bg-soft: #0f1c36;
+  --cyber-grid: rgba(99, 179, 237, 0.06);
+  --cyber-grid-strong: rgba(99, 179, 237, 0.12);
+  --cyber-accent: #38bdf8;       /* sky-400 */
+  --cyber-accent-2: #818cf8;     /* indigo-400 */
+  --cyber-accent-3: #34d399;     /* emerald-400 */
+  --cyber-text: #e2e8f0;
+  --cyber-text-dim: #94a3b8;
+  --cyber-border: rgba(148, 163, 184, 0.18);
+  --cyber-card-bg: rgba(15, 23, 42, 0.78);
+}
+
+/* ───── Background ───── */
+.auth-bg-daylight {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(56, 189, 248, 0.10) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 60% at 85% 90%, rgba(129, 140, 248, 0.10) 0%, transparent 50%),
+    linear-gradient(180deg, var(--cyber-bg-deep) 0%, var(--cyber-bg-mid) 60%, var(--cyber-bg-deep) 100%) !important;
+}
+
+/* Cyber grid overlay (replaces .auth-bg-daylight::before noise) */
+.auth-bg-daylight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--cyber-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--cyber-grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: -1px -1px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 0%, transparent 75%);
+  opacity: 0.7;
+  pointer-events: none;
+  filter: none !important;
+}
+
+/* Subtle scanline + diagonal sweep */
+.auth-bg-daylight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(0deg, transparent 0px, transparent 3px, rgba(255,255,255,0.012) 3px, rgba(255,255,255,0.012) 4px),
+    linear-gradient(135deg, transparent 40%, rgba(56,189,248,0.04) 50%, transparent 60%);
+  pointer-events: none;
+  filter: none !important;
+}
+
+/* Hairlines — top & bottom glowing accents */
+.auth-bg-daylight .auth-hairline-top,
+.auth-bg-daylight .auth-hairline-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--cyber-accent) 50%, transparent 100%) !important;
+  opacity: 0.45;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.45);
+}
+.auth-bg-daylight .auth-hairline-top { top: 0; }
+.auth-bg-daylight .auth-hairline-bottom { bottom: 0; }
+
+/* Repurpose orbs as soft glowing nodes */
+.auth-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px) !important;
+  opacity: 0.55 !important;
+  pointer-events: none;
+  animation: cyberFloat 14s ease-in-out infinite;
+}
+.auth-orb--terracotta { background: radial-gradient(circle, rgba(56, 189, 248, 0.55) 0%, transparent 70%) !important; }
+.auth-orb--lavender   { background: radial-gradient(circle, rgba(129, 140, 248, 0.55) 0%, transparent 70%) !important; }
+.auth-orb--amber      { background: radial-gradient(circle, rgba(52, 211, 153, 0.45) 0%, transparent 70%) !important; }
+
+@keyframes cyberFloat {
+  0%, 100% { transform: translate(0, 0); }
+  50%      { transform: translate(20px, -16px); }
+}
+
+/* Repurpose rays as data-stream lines */
+.auth-ray,
+.auth-ray--2 {
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent 0%, var(--cyber-accent) 50%, transparent 100%) !important;
+  opacity: 0.30 !important;
+  filter: none !important;
+  animation: cyberPulse 6s ease-in-out infinite;
+}
+.auth-ray--2 {
+  background: linear-gradient(180deg, transparent 0%, var(--cyber-accent-2) 50%, transparent 100%) !important;
+  animation-delay: -3s;
+}
+
+@keyframes cyberPulse {
+  0%, 100% { opacity: 0.15; transform: scaleY(0.95); }
+  50%      { opacity: 0.45; transform: scaleY(1.05); }
+}
+
+/* ───── Card ───── */
+.auth-card-daylight {
+  position: relative;
+  background: var(--cyber-card-bg) !important;
+  border: 1px solid var(--cyber-border) !important;
+  border-radius: 20px !important;
+  padding: 2rem !important;
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.4) inset,
+    0 24px 60px -20px rgba(0, 0, 0, 0.6),
+    0 0 60px -10px rgba(56, 189, 248, 0.12) !important;
+  color: var(--cyber-text) !important;
+  overflow: hidden;
+}
+
+.auth-card-daylight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(56,189,248,0.4) 0%, transparent 30%, transparent 70%, rgba(129,140,248,0.4) 100%) !important;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.auth-card-daylight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 30% at 50% 0%, rgba(56,189,248,0.10) 0%, transparent 70%);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.auth-card-accent { display: none !important; }
+
+@media (min-width: 768px) {
+  .auth-card-daylight { padding: 2.5rem !important; }
+}
+
+/* ───── Card text overrides ───── */
+.auth-card-daylight h2,
+.auth-card-daylight h3 {
+  color: var(--cyber-text) !important;
+}
+.auth-card-daylight p,
+.auth-card-daylight label,
+.auth-card-daylight .text-slate-900,
+.auth-card-daylight .text-slate-800 {
+  color: var(--cyber-text) !important;
+}
+.auth-card-daylight .text-slate-500,
+.auth-card-daylight .text-slate-400,
+.auth-card-daylight .text-muted-foreground {
+  color: var(--cyber-text-dim) !important;
+}
+
+/* Brand mark badge inside card */
+.auth-card-daylight a[href="/"] > .relative > .bg-white {
+  background: linear-gradient(135deg, rgba(56,189,248,0.15) 0%, rgba(15,28,54,0.95) 100%) !important;
+  border-color: rgba(56, 189, 248, 0.45) !important;
+  box-shadow: 0 4px 16px -4px rgba(56, 189, 248, 0.45), inset 0 1px 0 rgba(255,255,255,0.08) !important;
+}
+
+/* ───── Inputs — dark cyber style ───── */
+.input-daylight,
+.auth-card-daylight input {
+  background: rgba(8, 14, 28, 0.7) !important;
+  border: 1px solid rgba(148, 163, 184, 0.22) !important;
+  color: var(--cyber-text) !important;
+  border-radius: 10px !important;
+  height: 44px !important;
+  transition: all 200ms ease !important;
+}
+.input-daylight::placeholder,
+.auth-card-daylight input::placeholder {
+  color: rgba(148, 163, 184, 0.55) !important;
+}
+.input-daylight:hover,
+.auth-card-daylight input:hover {
+  border-color: rgba(56, 189, 248, 0.35) !important;
+  background: rgba(8, 14, 28, 0.85) !important;
+}
+.input-daylight:focus,
+.input-daylight:focus-visible,
+.auth-card-daylight input:focus,
+.auth-card-daylight input:focus-visible {
+  outline: none !important;
+  border-color: var(--cyber-accent) !important;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18), 0 0 20px -4px rgba(56, 189, 248, 0.35) !important;
+  background: rgba(8, 14, 28, 0.9) !important;
+}
+
+/* ───── SSO buttons ───── */
+.btn-sso-daylight {
+  background: rgba(15, 28, 54, 0.85) !important;
+  border: 1px solid rgba(148, 163, 184, 0.20) !important;
+  color: var(--cyber-text) !important;
+  height: 44px !important;
+  border-radius: 10px !important;
+  font-weight: 500 !important;
+  transition: all 200ms ease !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset !important;
+}
+.btn-sso-daylight:hover {
+  background: rgba(15, 28, 54, 1) !important;
+  border-color: rgba(56, 189, 248, 0.45) !important;
+  box-shadow: 0 0 20px -4px rgba(56, 189, 248, 0.30), 0 1px 0 rgba(255,255,255,0.06) inset !important;
+  transform: translateY(-1px);
+}
+
+/* ───── Primary CTA ───── */
+.auth-cta-primary {
+  background: linear-gradient(135deg, var(--cyber-accent) 0%, var(--cyber-accent-2) 100%) !important;
+  color: #051026 !important;
+  font-weight: 700 !important;
+  height: 46px !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(56, 189, 248, 0.55) !important;
+  width: 100% !important;
+  letter-spacing: 0.01em;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.35) inset,
+    0 -1px 0 rgba(0,0,0,0.15) inset,
+    0 8px 24px -6px rgba(56, 189, 248, 0.55),
+    0 0 0 1px rgba(56, 189, 248, 0.15) !important;
+  transition: all 200ms ease !important;
+}
+.auth-cta-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.4) inset,
+    0 -1px 0 rgba(0,0,0,0.18) inset,
+    0 12px 32px -6px rgba(56, 189, 248, 0.7),
+    0 0 0 1px rgba(56, 189, 248, 0.25) !important;
+  filter: brightness(1.05);
+}
+.auth-cta-primary:hover:not(:disabled) .auth-cta-arrow {
+  transform: translateX(3px);
+}
+
+/* ───── Divider ───── */
+.auth-divider-warm {
+  position: relative;
+  text-align: center;
+}
+.auth-divider-warm::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.25), transparent) !important;
+}
+.auth-divider-warm > span {
+  position: relative;
+  background: var(--cyber-card-bg) !important;
+  color: var(--cyber-text-dim) !important;
+  padding: 0 0.875rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+}
+
+/* ───── Tabs ───── */
+.auth-tabs-warm {
+  background: rgba(8, 14, 28, 0.6) !important;
+  border: 1px solid rgba(148, 163, 184, 0.18) !important;
+  border-radius: 10px !important;
+  padding: 4px !important;
+  height: auto !important;
+}
+.auth-tabs-warm [role="tab"] {
+  color: var(--cyber-text-dim) !important;
+  font-weight: 600 !important;
+  border-radius: 7px !important;
+  height: 36px !important;
+  background: transparent !important;
+  transition: all 180ms ease !important;
+}
+.auth-tabs-warm [role="tab"][data-state="active"] {
+  background: linear-gradient(135deg, rgba(56,189,248,0.20) 0%, rgba(129,140,248,0.20) 100%) !important;
+  color: var(--cyber-accent) !important;
+  box-shadow: 0 0 0 1px rgba(56,189,248,0.35), 0 4px 12px -4px rgba(56,189,248,0.30) !important;
+}
+
+/* ───── Forgot-password link tweak ───── */
+.auth-card-daylight button.bg-clip-text {
+  background: linear-gradient(90deg, var(--cyber-accent), var(--cyber-accent-2)) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  font-weight: 600 !important;
+}
+
+/* ───── Security footer divider line ───── */
+.auth-card-daylight .border-slate-100 {
+  border-color: rgba(148, 163, 184, 0.15) !important;
+}
+
+/* ───── Checkbox ───── */
+.auth-card-daylight [role="checkbox"] {
+  border-color: rgba(148, 163, 184, 0.4) !important;
+  background: rgba(8, 14, 28, 0.7) !important;
+}
+.auth-card-daylight [role="checkbox"][data-state="checked"] {
+  background: var(--cyber-accent) !important;
+  border-color: var(--cyber-accent) !important;
+  color: #051026 !important;
+}
+
+/* ───── Reduced motion ───── */
+@media (prefers-reduced-motion: reduce) {
+  .auth-orb,
+  .auth-ray,
+  .auth-ray--2 {
+    animation: none !important;
+  }
+}
