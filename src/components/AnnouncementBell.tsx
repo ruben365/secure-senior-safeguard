@@ -9,8 +9,10 @@ interface Announcement {
   created_at: string;
 }
 
-// Module-level flag: once we know the table is missing, all instances skip the fetch
+// 42P01 = true missing table (permanent); set once and never retry
 let announcementsTableKnownMissing = false;
+// PGRST205 / message-based = transient schema-cache miss; retry after cooldown
+let announcementsRetryAfter = 0;
 
 export function AnnouncementBell() {
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
@@ -26,6 +28,7 @@ export function AnnouncementBell() {
   });
 
   useEffect(() => {
+    if (announcementsTableKnownMissing) return;
     fetchAnnouncements();
 
     const channel = supabase
@@ -42,20 +45,26 @@ export function AnnouncementBell() {
 
   const fetchAnnouncements = async () => {
     if (announcementsTableKnownMissing) return;
+    if (Date.now() < announcementsRetryAfter) return;
     const { data, error } = await supabase
       .from("announcements")
       .select("id, title, content, created_at")
       .order("created_at", { ascending: false })
       .limit(10);
     if (error) {
-      const isTableMissing =
-        (error as { code?: string }).code === "42P01" ||
-        (error as { code?: string }).code === "PGRST205" ||
-        error.message?.includes("does not exist") ||
-        error.message?.includes("Could not find the table");
-      if (isTableMissing) {
+      const code = (error as { code?: string }).code;
+      const msg = error.message ?? "";
+      if (code === "42P01") {
+        // True missing table — permanently disable
         announcementsTableKnownMissing = true;
         setTableExists(false);
+      } else if (
+        code === "PGRST205" ||
+        msg.includes("does not exist") ||
+        msg.includes("Could not find the table")
+      ) {
+        // Transient schema-cache miss — back off 60 s before retrying
+        announcementsRetryAfter = Date.now() + 60_000;
       }
       return;
     }
