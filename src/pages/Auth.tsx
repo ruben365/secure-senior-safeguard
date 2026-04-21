@@ -794,12 +794,12 @@ function Auth() {
                 </p>
               </div>
 
-              {/* OAuth Buttons — primary path, full width and prominent */}
+              {/* OAuth Buttons — premium glass SSO */}
               <div className="space-y-3 mb-5">
                 <Button
                   type="button"
                   variant="outline"
-                  className="w-full h-12 rounded-xl bg-white border-2 border-slate-200 text-slate-700 text-[14px] font-semibold hover:bg-slate-50 hover:border-slate-300 hover:shadow-md transition-all duration-200"
+                  className="btn-sso-vibe w-full h-12 text-[14px]"
                   onClick={handleGoogleSignIn}
                 >
                   <svg className="w-5 h-5 mr-3 flex-shrink-0" viewBox="0 0 24 24">
@@ -814,7 +814,7 @@ function Auth() {
                 <Button
                   type="button"
                   variant="outline"
-                  className="w-full h-12 rounded-xl bg-white border-2 border-slate-200 text-slate-700 text-[14px] font-semibold hover:bg-slate-50 hover:border-slate-300 hover:shadow-md transition-all duration-200"
+                  className="btn-sso-vibe w-full h-12 text-[14px]"
                   onClick={handleMicrosoftSignIn}
                 >
                   <svg className="w-5 h-5 mr-3 flex-shrink-0" viewBox="0 0 23 23">
@@ -827,13 +827,13 @@ function Auth() {
                 </Button>
               </div>
 
-              {/* Divider */}
+              {/* Divider — gradient hairline + glass pill */}
               <div className="relative mb-5">
                 <div className="absolute inset-0 flex items-center">
-                  <span className="w-full border-t border-slate-200" />
+                  <span className="w-full h-px bg-gradient-to-r from-transparent via-orange-300/40 to-transparent" />
                 </div>
-                <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-white px-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-400">
+                <div className="relative flex justify-center">
+                  <span className="vibe-pill-badge text-[10px] uppercase tracking-[0.14em] text-slate-500">
                     or continue with email
                   </span>
                 </div>
