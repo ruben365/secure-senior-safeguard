@@ -178,9 +178,9 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
   /* ─── Open Panel ─── */
   return (
     <div className="fixed bottom-4 right-3 sm:bottom-5 sm:right-5 z-fab w-[min(calc(100vw-1.5rem),340px)] sm:w-[360px]">
-      <div className="rounded-2xl border border-white/15 bg-white/[0.08] backdrop-blur-2xl shadow-[0_4px_24px_rgba(0,0,0,0.18),0_12px_40px_-8px_rgba(0,0,0,0.12)] overflow-hidden">
+      <div className="rounded-2xl border border-white/15 bg-black/30 backdrop-blur-2xl shadow-[0_4px_24px_rgba(0,0,0,0.35),0_12px_40px_-8px_rgba(0,0,0,0.25)] overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-white/[0.04]">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-black/20">
           <div className="flex items-center gap-3">
             <div className="relative w-10 h-10 rounded-full overflow-hidden ring-2 ring-primary/20">
               <img
@@ -195,8 +195,8 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
               <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-white/30" />
             </div>
             <div>
-              <p className="text-sm font-bold text-white">Laura</p>
-              <p className="text-[11px] text-white/70 font-medium">
+              <p className="text-sm font-bold text-white" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>Laura</p>
+              <p className="text-[11px] text-white/70 font-medium" style={{ textShadow: "0 1px 2px rgba(0,0,0,0.4)" }}>
                 {isLoading ? "Thinking..." : "Navigation & help"}
               </p>
             </div>
@@ -207,7 +207,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
               className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-200 ${
                 mode === "chat"
                   ? "bg-primary text-white shadow-sm"
-                  : "bg-white/10 text-white/80 hover:bg-white/20"
+                  : "bg-black/25 text-white/80 hover:bg-black/35"
               }`}
             >
               Chat
@@ -217,7 +217,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
               className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-200 ${
                 mode === "help"
                   ? "bg-primary text-white shadow-sm"
-                  : "bg-white/10 text-white/80 hover:bg-white/20"
+                  : "bg-black/25 text-white/80 hover:bg-black/35"
               }`}
             >
               Help
@@ -257,10 +257,10 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
                     />
                   </div>
                   <div className="space-y-2">
-                    <p className="text-lg font-bold text-white">
+                    <p className="text-lg font-bold text-white" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>
                       Hi, I'm Laura
                     </p>
-                    <p className="text-sm text-white/80 leading-relaxed px-2">
+                    <p className="text-sm text-white/80 leading-relaxed px-2" style={{ textShadow: "0 1px 2px rgba(0,0,0,0.4)" }}>
                       I help with scanning, pricing, privacy, and navigating
                       InVision Network.
                     </p>
@@ -270,7 +270,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
                       <button
                         key={action}
                         onClick={() => sendMessage(action)}
-                        className="px-3.5 py-2 rounded-full bg-white/10 text-xs font-semibold text-white hover:bg-white/20 transition-all border border-white/30"
+                        className="px-3.5 py-2 rounded-full bg-black/25 text-xs font-semibold text-white hover:bg-black/35 transition-all border border-white/30"
                       >
                         {action}
                       </button>
@@ -287,7 +287,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
                   <div
                     className={`rounded-2xl px-4 py-2.5 text-sm leading-relaxed max-w-[82%] ${
                       msg.role === "assistant"
-                        ? "bg-white/10 text-white border border-white/20"
+                        ? "bg-black/25 text-white border border-white/20"
                         : "bg-gradient-to-br from-primary to-accent text-white shadow-sm"
                     }`}
                   >
@@ -298,7 +298,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
 
               {isLoading && (
                 <div className="flex justify-start">
-                  <div className="rounded-2xl px-4 py-2.5 bg-white/10 text-sm text-white/70 border border-white/20 flex items-center gap-2">
+                  <div className="rounded-2xl px-4 py-2.5 bg-black/25 text-sm text-white/70 border border-white/20 flex items-center gap-2">
                     <span className="flex gap-1">
                       <span className="w-1.5 h-1.5 rounded-full bg-white/60 animate-bounce" style={{ animationDelay: "0ms" }} />
                       <span className="w-1.5 h-1.5 rounded-full bg-white/60 animate-bounce" style={{ animationDelay: "150ms" }} />
@@ -313,7 +313,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
             {/* Input */}
             <form
               onSubmit={handleSubmit}
-              className="p-3 border-t border-white/10 bg-white/[0.04] flex gap-2"
+              className="p-3 border-t border-white/10 bg-black/20 flex gap-2"
             >
               <button
                 type="button"
@@ -321,7 +321,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
                 className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
                   isRecording
                     ? "bg-rose-500 text-white shadow-lg shadow-rose-500/30 scale-110 animate-pulse"
-                    : "bg-white/10 text-white hover:bg-white/20"
+                    : "bg-black/25 text-white hover:bg-black/35"
                 }`}
                 aria-label={isRecording ? "Stop recording" : "Start voice input"}
               >
@@ -335,7 +335,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
                 placeholder="Ask Laura a question..."
-                className="flex-1 rounded-full bg-white/10 border border-white/20 px-4 py-2 text-sm text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-white/30 transition-all"
+                className="flex-1 rounded-full bg-black/25 border border-white/20 px-4 py-2 text-sm text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-white/30 transition-all"
               />
               <Button
                 type="submit"
@@ -351,12 +351,12 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
           /* Quick Help Panel */
           <div className="p-4 space-y-4">
             <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center">
+              <div className="w-7 h-7 rounded-lg bg-black/25 flex items-center justify-center">
                 <Headphones className="w-4 h-4 text-white" />
               </div>
               <div>
-                <p className="text-sm font-bold text-white">Quick Help</p>
-                <p className="text-[11px] text-white/70">
+                <p className="text-sm font-bold text-white" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>Quick Help</p>
+                <p className="text-[11px] text-white/70" style={{ textShadow: "0 1px 2px rgba(0,0,0,0.4)" }}>
                   Fast paths to support & resources
                 </p>
               </div>
@@ -366,7 +366,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
                 const ActionIcon = action.icon;
                 const content = (
                   <div
-                    className={`relative p-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 hover:border-white/30 transition-all cursor-pointer group ${
+                    className={`relative p-3 rounded-xl bg-black/25 hover:bg-black/35 border border-white/20 hover:border-white/30 transition-all cursor-pointer group ${
                       action.urgent ? "ring-1 ring-rose-400/40" : ""
                     }`}
                     onClick={() => {
@@ -384,10 +384,10 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
                     >
                       <ActionIcon className="w-4 h-4 text-white" />
                     </div>
-                    <div className="text-xs font-bold text-white">
+                    <div className="text-xs font-bold text-white" style={{ textShadow: "0 1px 2px rgba(0,0,0,0.5)" }}>
                       {action.label}
                     </div>
-                    <div className="text-[10px] text-white/70 leading-tight mt-0.5">
+                    <div className="text-[10px] text-white/70 leading-tight mt-0.5" style={{ textShadow: "0 1px 2px rgba(0,0,0,0.4)" }}>
                       {action.description}
                     </div>
                   </div>
