@@ -166,10 +166,10 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <PrefetchLink
                     key={link.name}
                     to={link.href}
-                    className={`relative text-[13px] px-3 py-1.5 rounded-md transition-colors duration-150 ${
+                    className={`relative text-[13px] transition-colors duration-150 ${
                       isActive
-                        ? "text-orange-400 font-bold bg-orange-500/12"
-                        : "text-white font-semibold hover:text-orange-300 hover:bg-white/[0.07]"
+                        ? "text-orange-400 font-bold"
+                        : "text-white font-semibold hover:text-orange-300"
                     }`}
                   >
                     {link.name}
@@ -185,10 +185,10 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   aria-haspopup="menu"
                   aria-expanded={moreOpen ? "true" : "false"}
                   aria-label="More navigation links"
-                  className={`flex items-center gap-1 text-[13px] px-3 py-1.5 rounded-md transition-colors duration-150 ${
+                  className={`flex items-center gap-1 text-[13px] transition-colors duration-150 ${
                     isSecondaryActive
-                      ? "text-orange-400 font-bold bg-orange-500/12"
-                      : "text-white font-semibold hover:text-orange-300 hover:bg-white/[0.07]"
+                      ? "text-orange-400 font-bold"
+                      : "text-white font-semibold hover:text-orange-300"
                   }`}
                 >
                   More
@@ -221,7 +221,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                           className={`block px-4 py-2.5 text-[13.5px] transition-colors ${
                             isActive
                               ? "text-orange-400 font-semibold"
-                              : "text-white/90 hover:text-orange-300 hover:bg-white/[0.06]"
+                              : "text-white/90 hover:text-orange-300"
                           }`}
                           onClick={() => setMoreOpen(false)}
                         >
