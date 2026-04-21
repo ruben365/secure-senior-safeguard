@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -162,7 +162,7 @@ function LibraryStatsBar() {
     <>
       <div className="hidden lg:block h-14" />
       <div className="lg:hidden h-6" />
-      <section className="py-16 md:py-24 relative overflow-hidden bg-background">
+      <section className="py-16 md:py-24 relative overflow-hidden bg-background glass-context">
         <div className="container mx-auto relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-10">
             <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
@@ -740,7 +740,7 @@ function MyLibraryTab({
 
 function LibraryFAQ() {
   return (
-    <section className="py-16 border-t bg-background">
+    <section className="py-16 border-t bg-background glass-faq">
       <div className="container mx-auto max-w-3xl">
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary rounded-full px-4 py-1.5 text-sm font-medium mb-4">
@@ -800,6 +800,7 @@ function LibraryFAQ() {
 export default function LibraryPage() {
   const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const { isPurchased, purchasedBookIds, isLoading: purchaseLoading, hasAnyPurchase } = useBookPurchase();
 
   const [activeTab, setActiveTab] = useState<LibraryTab>("browse");
@@ -810,20 +811,15 @@ export default function LibraryPage() {
   const [paymentOpen, setPaymentOpen] = useState(false);
   const [paymentBook, setPaymentBook] = useState<(typeof LIBRARY_BOOKS)[0] | null>(null);
 
-  // Activate "My Library" tab when the hero CTA anchor #my-library is clicked
+  // Activate "My Library" tab when the hero CTA navigates to #my-library via React Router
   useEffect(() => {
-    if (!user) return;
-    const handleHash = () => {
-      if (window.location.hash === "#my-library") {
-        setActiveTab("my-library");
-        setTimeout(() => {
-          document.getElementById("my-library")?.scrollIntoView({ behavior: "smooth" });
-        }, 50);
-      }
-    };
-    window.addEventListener("hashchange", handleHash);
-    return () => window.removeEventListener("hashchange", handleHash);
-  }, [user]);
+    if (location.hash === "#my-library" && user) {
+      setActiveTab("my-library");
+      setTimeout(() => {
+        document.getElementById("my-library")?.scrollIntoView({ behavior: "smooth" });
+      }, 50);
+    }
+  }, [location.hash, user]);
 
   const handleBuyClick = (book: (typeof LIBRARY_BOOKS)[0]) => {
     setPaymentBook(book);

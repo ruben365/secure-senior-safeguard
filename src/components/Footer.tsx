@@ -208,7 +208,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
 
             {/* Newsletter card — pushed to far right */}
             <div className="lg:flex lg:justify-end lg:flex-shrink-0">
-              <div className="footer-newsletter-card w-full lg:w-[440px] rounded-2xl p-4 border border-white/10">
+              <div className="footer-newsletter-card glass-newsletter w-full lg:w-[440px] rounded-2xl p-4">
                 <p className="text-[11px] font-bold text-orange-400/90 uppercase tracking-[0.18em] mb-1.5">
                   Stay Protected
                 </p>
