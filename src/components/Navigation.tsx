@@ -350,13 +350,12 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
             className="lg:hidden fixed top-[56px] right-0 z-[10001] overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch]"
             onClick={(e) => e.stopPropagation()}
             style={{
-              width: "min(88vw, 300px)",
+              width: "min(65vw, 260px)",
               maxHeight: "calc(80vh - 56px)",
-              background: "rgba(8, 11, 22, 0.96)",
-              backdropFilter: "blur(20px) saturate(1.4)",
-              WebkitBackdropFilter: "blur(20px) saturate(1.4)",
-              borderLeft: "1px solid rgba(255,255,255,0.08)",
-              borderBottom: "1px solid rgba(255,255,255,0.06)",
+              background: "rgba(13, 13, 13, 0.75)",
+              backdropFilter: "blur(20px) saturate(1.3)",
+              WebkitBackdropFilter: "blur(20px) saturate(1.3)",
+              borderLeft: "1px solid rgba(255, 255, 255, 0.1)",
               borderBottomLeftRadius: "14px",
               animation: "menuSlideIn 200ms ease-out forwards",
               paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 0.25rem)",
@@ -364,7 +363,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
           >
             {/* Panel header with close button */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.06]">
-              <span className="text-[11px] font-semibold text-white/40 uppercase tracking-widest">Menu</span>
+              <span className="text-[11px] font-semibold text-white/60 uppercase tracking-widest">Menu</span>
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(false)}
@@ -385,7 +384,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                     className={`block py-2 text-[15px] font-medium transition-colors duration-150 ${
                       isActive
                         ? "text-orange-400"
-                        : "text-white/80 hover:text-white"
+                        : "text-white hover:text-white/80"
                     }`}
                     onClick={() => {
                       setMobileMenuOpen(false);
@@ -402,7 +401,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <Link
                     to="/admin"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center gap-1.5 text-[12px] font-semibold text-white/70 hover:text-white transition-colors duration-150"
+                    className="flex items-center gap-1.5 text-[12px] font-semibold text-white hover:text-white/80 transition-colors duration-150"
                   >
                     <LayoutDashboard className="h-3.5 w-3.5" />
                     Dashboard
@@ -411,7 +410,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <Link
                     to="/portal"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-[12px] font-semibold text-white/70 hover:text-white transition-colors duration-150"
+                    className="text-[12px] font-semibold text-white hover:text-white/80 transition-colors duration-150"
                   >
                     Login
                   </Link>
@@ -419,7 +418,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
 
                 <a
                   href={SITE.phone.tel}
-                  className="flex items-center gap-1.5 text-[11px] text-white/35 font-medium transition-colors duration-150 hover:text-white/60"
+                  className="flex items-center gap-1.5 text-[11px] text-white/80 font-medium transition-colors duration-150 hover:text-white"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <Phone className="h-3 w-3" />
