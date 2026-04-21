@@ -22,7 +22,7 @@
 
   :root {
     /* ── Core Surfaces ── */
-    --background: 210 40% 98%;       /* #F5F9FC — cool off-white */
+    --background: 30 20% 98.5%;      /* #fdfaf8 — warm off-white */
     --foreground: 213 60% 12%;       /* #0D2137 — deep navy text */
 
     /* ── Primary: Security Blue ── */
@@ -57,9 +57,9 @@
     --muted-foreground: 215 20% 45%; /* #637080 */
 
     /* ── Borders & Inputs ── */
-    --border: 210 28% 86%;           /* #CAD8E6 */
-    --input: 210 30% 93%;
-    --ring: 207 89% 34%;
+    --border: 28 16% 85%;            /* warm gray */
+    --input: 28 18% 93%;
+    --ring: 25 95% 53%;              /* brand orange — same as --accent */
 
     /* ── Radius ── */
     --radius: 0.5rem;                /* 8px base, cards get 12-16px */
@@ -319,7 +319,7 @@
     overflow-x: hidden;
     width: 100%;
     position: relative;
-    background-color: hsl(240 10% 98%);
+    background-color: #fdfaf8;
   }
 
   @media (min-width: 768px) {

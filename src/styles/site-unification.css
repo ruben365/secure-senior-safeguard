@@ -147,3 +147,158 @@
   outline: 2px solid rgba(217, 108, 74, 0.7);
   outline-offset: 2px;
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   FINAL POLISH PASS — sitewide visual refinements
+   Imported last so these rules win the cascade.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Warm page base ─────────────────────────────────────────────── */
+body {
+  background-color: #fdfaf8;
+}
+
+/* ── All images in section content get soft rounded corners ──────── */
+section img:not([aria-hidden]):not([class*="logo"]):not([class*="brand"]):not([class*="avatar"]) {
+  border-radius: 12px;
+}
+
+/* ── Card lift: warm shadow on hover (bypasses Tailwind shadow nuke) */
+.card-lift:hover,
+.card-hover:hover {
+  box-shadow:
+    0 0 0 1px rgba(217, 108, 74, 0.12),
+    0 8px 24px -6px rgba(217, 108, 74, 0.16),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* ── .hss-card hover — ensure warm shadow on all cards ──────────── */
+.hss-card:hover {
+  box-shadow:
+    0 0 0 1px rgba(217, 108, 74, 0.18),
+    0 8px 32px -8px rgba(217, 108, 74, 0.18),
+    0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* ── skeuo-card / soft-card hover — warm shadow ─────────────────── */
+.skeuo-card:hover,
+.soft-card:hover {
+  box-shadow:
+    0 0 0 1px rgba(217, 108, 74, 0.12),
+    0 6px 20px -4px rgba(217, 108, 74, 0.14),
+    0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* ── Warm alternating section tint ─────────────────────────────── */
+.section-tint {
+  background: linear-gradient(180deg, #fff 0%, #fdf8f5 100%);
+}
+
+.section-tint-rev {
+  background: linear-gradient(180deg, #fdf8f5 0%, #fff 100%);
+}
+
+/* ── Decorative section divider — warm orange gradient line ──────── */
+.warm-divider {
+  height: 1px;
+  border: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(217, 108, 74, 0.18) 25%,
+    rgba(217, 108, 74, 0.32) 50%,
+    rgba(217, 108, 74, 0.18) 75%,
+    transparent 100%
+  );
+}
+
+/* ── Soft orange glow — use on dark CTA sections ────────────────── */
+.warm-glow-top {
+  position: relative;
+}
+.warm-glow-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 65%;
+  height: 45%;
+  background: radial-gradient(ellipse, rgba(217, 108, 74, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.warm-glow-top > * { position: relative; z-index: 1; }
+
+/* ── Dark sections: warm charcoal, not cool black ───────────────── */
+.warm-dark {
+  background: linear-gradient(180deg, #1c1917 0%, #141210 100%);
+}
+
+/* ── Button gradient utility for non-variant orange CTAs ─────────── */
+.btn-warm-cta {
+  background: linear-gradient(135deg, #e07b52 0%, #d96c4a 100%);
+  border: 1px solid #c45e3b;
+  color: white;
+  font-weight: 700;
+  border-radius: 0.75rem;
+  transition: transform 150ms ease-out, box-shadow 150ms ease-out;
+  box-shadow: 0 4px 12px -4px rgba(217, 108, 74, 0.4);
+}
+.btn-warm-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px -4px rgba(217, 108, 74, 0.5);
+}
+
+/* ── Textarea orange focus ───────────────────────────────────────── */
+textarea:focus-visible {
+  outline: 2px solid rgba(217, 108, 74, 0.65) !important;
+  outline-offset: 0 !important;
+  border-color: rgba(217, 108, 74, 0.55) !important;
+  box-shadow: 0 0 0 3px rgba(217, 108, 74, 0.10) !important;
+}
+
+/* ── Select / combobox orange focus ──────────────────────────────── */
+select:focus-visible,
+[role="combobox"]:focus-visible {
+  outline: 2px solid rgba(217, 108, 74, 0.65) !important;
+  border-color: rgba(217, 108, 74, 0.55) !important;
+}
+
+/* ── dot-grid-bg — warm orange dot tint ─────────────────────────── */
+.dot-grid-bg {
+  background-image: radial-gradient(circle, rgba(217, 108, 74, 0.09) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+
+/* ── Overline dot — ensure brand orange ────────────────────────── */
+.hss-overline-dot {
+  background: #d96c4a !important;
+}
+
+/* ── Link hover — orange in content areas ───────────────────────── */
+main a:not([class*="btn"]):not([class*="button"]):not([role="button"]):not(.no-link-color):hover {
+  color: #d96c4a;
+}
+
+/* ── Image overlay on cards — dark gradient at bottom ───────────── */
+.img-overlay-bottom {
+  position: relative;
+}
+.img-overlay-bottom::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 45%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, transparent 100%);
+  border-radius: 0 0 12px 12px;
+  pointer-events: none;
+}
+
+/* ── Consistent form label style ────────────────────────────────── */
+form label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: hsl(var(--foreground) / 0.85);
+}
