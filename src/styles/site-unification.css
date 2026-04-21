@@ -302,3 +302,54 @@ form label {
   letter-spacing: -0.005em;
   color: hsl(var(--foreground) / 0.85);
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   BRAND COLOR ENFORCEMENT
+   Remaps --primary to orange on all public + portal pages.
+   Admin shell (.admin-no-animations) explicitly restores blue.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Public content (all routes inside <main id="main-content">) */
+main#main-content {
+  --primary: 25 95% 53%;        /* = --accent (brand orange) */
+  --primary-foreground: 0 0% 100%;
+}
+
+/* Admin shell: keep professional blue */
+.admin-no-animations {
+  --primary: 207 89% 34%;
+  --primary-foreground: 0 0% 100%;
+}
+
+/* ── hss-card: soft glassmorphism on cards without explicit bg-* ─── */
+/* :not([class*="bg-"]) preserves explicit Tailwind background classes */
+.hss-card:not([class*="bg-"]) {
+  background: rgba(255, 255, 255, 0.80);
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+}
+
+/* ── Rounded corners on generic white border-cards ──────────────── */
+/* Applies warm hover to article-style cards that don't use hss-card */
+.card-warm-hover {
+  transition: box-shadow 0.22s ease-out, transform 0.22s ease-out, border-color 0.22s ease-out;
+}
+.card-warm-hover:hover {
+  box-shadow:
+    0 0 0 1px rgba(217, 108, 74, 0.18),
+    0 8px 28px -6px rgba(217, 108, 74, 0.14),
+    0 2px 8px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+  border-color: rgba(217, 108, 74, 0.22) !important;
+}
+
+/* ── Accent glow on primary-colored badges / pills ──────────────── */
+/* Now that --primary = orange on public pages, orange glow is automatic */
+.badge-primary-glow {
+  box-shadow: 0 0 0 3px rgba(217, 108, 74, 0.18);
+}
+
+/* ── Section alternate — pair section-warm / section-tint consistently */
+.section-alt {
+  background: linear-gradient(180deg, #fdf8f5 0%, #ffffff 100%);
+}

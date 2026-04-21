@@ -937,7 +937,7 @@ function Business() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mb-14" style={{ perspective: "1000px" }}>
               <PricingCard
                 tag="⚡ QUICK START"
-                tagColor="from-primary to-violet-500"
+                tagColor="from-[#e07b52] to-[#d96c4a]"
                 title="Landing Page"
                 price="$1,500"
                 priceNote="Delivered in 2 Weeks"
@@ -1198,7 +1198,7 @@ function Business() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
               <PricingCard
                 tag="🎯 START HERE"
-                tagColor="from-primary to-violet-500"
+                tagColor="from-[#e07b52] to-[#d96c4a]"
                 title="AI Receptionist & Intake Agent"
                 price="$9,500"
                 priceNote="2-Week Setup"
@@ -1407,7 +1407,7 @@ function Business() {
               {/* Enterprise */}
               <PricingCard
                 tag="🏢 ENTERPRISE"
-                tagColor="from-violet-600 to-purple-600"
+                tagColor="from-[#c45e3b] to-[#b05030]"
                 title="Customized"
                 price="Custom"
                 priceSuffix=" pricing"
@@ -1664,7 +1664,7 @@ function Business() {
           {/* Decorative background */}
           <div className="absolute inset-0 bg-gradient-to-b from-muted/40 via-background to-muted/30" />
           <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-coral-100/20 via-transparent to-transparent rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-lavender-100/15 via-transparent to-transparent rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-coral-100/15 via-transparent to-transparent rounded-full blur-3xl pointer-events-none" />
 
           <div className="container mx-auto relative z-10">
             <SectionHeader
@@ -1685,13 +1685,13 @@ function Business() {
                 icon: Shapes,
                 title: "Vector Illustration",
                 desc: "Clean, scalable vector artwork for digital and print. Perfect for logos, web assets, and marketing collateral.",
-                gradient: "from-primary to-lavender-500"
+                gradient: "from-coral-400 to-amber-500"
               },
               {
                 icon: Pen,
                 title: "Character Design",
                 desc: "Original character concepts for your brand mascot, game, or animated content. Full turnarounds and style sheets included.",
-                gradient: "from-lavender-500 to-violet-500"
+                gradient: "from-amber-500 to-coral-500"
               },
               {
                 icon: Image,
@@ -1709,7 +1709,7 @@ function Business() {
                 icon: Grid3X3,
                 title: "Pattern Design",
                 desc: "Seamless, repeatable patterns for packaging, textiles, wallpapers, and digital backgrounds. Unique to your brand.",
-                gradient: "from-coral-500 to-lavender-400"
+                gradient: "from-coral-500 to-amber-400"
               }].
               map((service, i) =>
               <div
