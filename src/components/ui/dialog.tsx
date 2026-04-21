@@ -44,7 +44,7 @@ const DialogContent = React.forwardRef<
           "input, button, textarea, select",
         );
         if (firstInput instanceof HTMLElement) {
-          firstInput.focus();
+          firstInput.focus({ preventScroll: true });
         }
       }}
       className={cn(

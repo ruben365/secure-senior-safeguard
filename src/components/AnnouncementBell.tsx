@@ -121,7 +121,7 @@ export function AnnouncementBell() {
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="flex items-center justify-center w-9 h-9 rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-colors relative"
+        className="flex items-center justify-center w-9 h-9 rounded-full bg-black/20 backdrop-blur-[8px] border border-white/15 hover:border-white/30 text-white/70 hover:text-white transition-all relative"
         aria-label={`Announcements${unreadCount > 0 ? `, ${unreadCount} new` : ""}`}
       >
         <Bell className="w-4 h-4" />

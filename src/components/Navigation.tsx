@@ -299,7 +299,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
               <button
                 type="button"
                 onClick={() => setSearchOpen(true)}
-                className="p-2 rounded-lg hover:bg-white/10 transition-colors duration-150 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                className="p-2 rounded-full bg-black/20 backdrop-blur-[8px] border border-white/15 hover:border-white/30 transition-all duration-150 min-w-[44px] min-h-[44px] flex items-center justify-center"
                 aria-label="Search site"
               >
                 <Search className="h-4 w-4 text-white/75" />
@@ -309,7 +309,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 rounded-lg hover:bg-white/10 transition-colors duration-150 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                className="lg:hidden p-2 rounded-full bg-black/20 backdrop-blur-[8px] border border-white/15 hover:border-white/30 transition-all duration-150 min-w-[44px] min-h-[44px] flex items-center justify-center"
                 aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={mobileMenuOpen ? "true" : "false"}
                 aria-controls="mobile-navigation"
