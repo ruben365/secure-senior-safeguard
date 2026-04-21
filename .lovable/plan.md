@@ -1,143 +1,163 @@
 
 
-## Fix White-Themed Buttons That Blend Into Light Surfaces
+## Expand Widget Design System: More Styles + Better Content Density
 
-Goal: make every white, transparent, or unstyled button visually distinguishable on the now-mostly-white "floating card" surfaces. Heroes and footer stay untouched.
+Goal: build on the existing layers (`figma-sharpness`, `soft-elevation`, `floating-cards`, `button-contrast-fix`) by adding a richer widget vocabulary — more visual variants, better content scaffolding (eyebrows, dividers, metrics, status pills, empty states) — so cards stop looking identical and start communicating hierarchy. Heroes and footer untouched.
 
-### The problem
+### What's missing today
 
-After the recent layers (Figma sharpness, soft elevation, floating cards), most container surfaces are bright white with subtle shadows. Buttons that use `bg-white`, `bg-transparent`, or no explicit background visually **disappear** — there is no contrast between button and surface.
-
-The existing rule in `src/index.css` only handles dark/blue backgrounds (forces white text on them). There is **no rule** for the inverse problem: light buttons on light surfaces.
+The current system gives every card the same look: 2rem radius, hairline border, soft shadow. That's a great baseline, but every widget reads identically — there's no visual difference between a KPI card, a list card, a feature card, or a metric card. Content inside also lacks scaffolding: no eyebrows, no dividers, no status chips, no compact metric rows.
 
 ### What gets added
 
 ```text
-NEW   src/styles/button-contrast-fix.css     (~120 lines, pure CSS)
-EDIT  src/index.css                           (+1 line @import — last in cascade)
+NEW   src/styles/widget-variants.css       (~220 lines, pure CSS)
+NEW   src/styles/widget-content.css        (~180 lines, pure CSS)
+EDIT  src/index.css                         (+2 lines @import — last in cascade)
 ```
 
-Zero JSX edits. Zero token changes. Zero new dependencies. Plume palette respected (uses existing terracotta `#d96c4a` and slate ink).
+Zero JSX edits. Zero new dependencies. Zero token changes. Plume palette respected.
 
-### CSS module — `button-contrast-fix.css`
+### Layer 1 — `widget-variants.css` (visual styles)
 
-#### 1. Force a visible border + soft fill on white/transparent buttons
+Six opt-in widget variants, applied via `data-variant="…"` or class. All respect hero/footer exclusions.
 
+| Variant | Look | Use case |
+|---------|------|----------|
+| `data-variant="elevated"` | Stronger shadow, no border | Hero KPIs, primary metrics |
+| `data-variant="outlined"` | 1.5px border, no shadow | Secondary panels, forms |
+| `data-variant="tinted"` | Cream/plum tint background | Featured/highlighted cards |
+| `data-variant="accent-bar"` | 4px left accent stripe | Status, alerts, categories |
+| `data-variant="gradient"` | Subtle warm-to-cream gradient | Hero metrics, CTAs |
+| `data-variant="ghost"` | Transparent, dashed border | Empty states, drop zones |
+
+Plus three accent-bar color tokens that piggyback on Plume:
+- `data-accent="terracotta"` (default brand)
+- `data-accent="plum"` (secondary)
+- `data-accent="success" | "warning" | "danger"` (status)
+
+Example rule:
 ```css
-/* Catch buttons that have no real background color set */
-button[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
-a[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
-button[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
-  border: 1.5px solid rgba(15, 23, 42, 0.18) !important;
-  color: #1e293b !important;
-  box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, 0.6) inset,
-    0 1px 2px 0 rgba(15, 23, 42, 0.06),
-    0 2px 6px -1px rgba(15, 23, 42, 0.05) !important;
+[data-variant="accent-bar"]:not(.hero-home *):not(footer *) {
+  border-left: 4px solid #d96c4a !important;
+  padding-left: 1.25rem;
 }
-
-/* Hover: terracotta tint borrow from the brand palette */
-button[class*="bg-white"]:not(.hero-home *)…:hover,
-a[class*="bg-white"]:not(.hero-home *)…:hover,
-button[class*="bg-transparent"]:not(.hero-home *)…:hover {
-  border-color: rgba(217, 108, 74, 0.55) !important;
-  color: #c45e3b !important;
-  background-color: #fff7f2 !important;
+[data-variant="accent-bar"][data-accent="success"]:not(.hero-home *):not(footer *) {
+  border-left-color: #16a34a !important;
 }
 ```
 
-#### 2. Rescue completely unstyled `<button>` elements (no `bg-*` at all)
+Also adds:
+- **`data-density="compact"`** — tighter padding (`1rem` vs `1.5rem`), smaller radius (`1.25rem`)
+- **`data-density="spacious"`** — generous padding (`2.5rem`), larger radius (`2.5rem`)
+- **`data-interactive="true"`** — adds cursor pointer + hover lift + focus ring
 
+### Layer 2 — `widget-content.css` (scaffolding inside widgets)
+
+Reusable content primitives — pure CSS, opt-in via class:
+
+**Eyebrow labels** (`.widget-eyebrow`)
 ```css
-/* Buttons with NO explicit background class get a default light-gray fill */
-button:where(:not([class*="bg-"]):not([class*="ghost"]):not([class*="link"]))
-  :not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
-  background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
-  border: 1.5px solid rgba(15, 23, 42, 0.18);
-  color: #1e293b;
+.widget-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #d96c4a;
+  margin-bottom: 0.5rem;
 }
 ```
 
-(Scoped with `:where` so specificity stays 0 — it never overrides any explicit Tailwind utility.)
+**Metric rows** (`.widget-metric`, `.widget-metric-value`, `.widget-metric-label`)
+- Big number + small caption pattern
+- Auto-sized: `2.25rem` value, `0.875rem` label, slate ink
+- Supports inline trend indicator slot
 
-#### 3. Outline / ghost buttons get a visible 1.5px border
+**Status pills** (`.widget-pill`, `.widget-pill--success | warning | danger | info | neutral`)
+- Soft tinted background, dark text, 999px radius
+- Sizes: `--sm`, default, `--lg`
 
-```css
-button[class*="variant-outline"]:not(.hero-home *)…,
-button[class*="border-input"]:not(.hero-home *)…,
-[role="button"][class*="bg-background"]:not(.hero-home *)… {
-  border-width: 1.5px !important;
-  border-color: rgba(15, 23, 42, 0.22) !important;
-  color: #1e293b !important;
-}
-```
+**Dividers** (`.widget-divider`, `.widget-divider--dashed`)
+- 1px hairline using existing `--float-border` token
+- Horizontal default, `.widget-divider--vertical` for inline use
 
-#### 4. Light-tinted buttons (bg-slate-50, bg-gray-50, bg-coral-50, etc.)
+**Section headers** (`.widget-section-title`)
+- Smaller than card title, `font-weight: 600`, slate ink
+- Optional right-aligned action slot (`.widget-section-action`)
 
-```css
-button[class*="bg-slate-50"]:not(.hero-home *)…,
-button[class*="bg-slate-100"]:not(.hero-home *)…,
-button[class*="bg-gray-50"]:not(.hero-home *)…,
-button[class*="bg-gray-100"]:not(.hero-home *)…,
-button[class*="bg-neutral-50"]:not(.hero-home *)…,
-button[class*="bg-neutral-100"]:not(.hero-home *)… {
-  border: 1.5px solid rgba(15, 23, 42, 0.15) !important;
-  color: #1e293b !important;
-}
-```
+**Empty states** (`.widget-empty`)
+- Centered layout, muted text, optional icon slot, optional CTA slot
+- Soft cream background with dashed border
 
-#### 5. Disabled / loading buttons keep readable contrast
+**Stat trio rows** (`.widget-stat-row`)
+- 3-column flex layout for compact "Total / Active / Pending"-style displays
+- Auto-divides with vertical hairlines
 
-```css
-button:disabled:not(.hero-home *)… {
-  opacity: 0.7 !important;
-  border-color: rgba(15, 23, 42, 0.12) !important;
-  color: #475569 !important;
-}
-```
+**Inline list rows** (`.widget-list-row`)
+- Hover-tinted, padded `0.75rem 1rem`, with leading icon + trailing meta slots
+- Last child has no bottom border
 
-#### 6. Honor existing rules
-
-- **Hero pages and footer fully excluded** via `:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *)` on every selector
-- **Neo-Tactile primary buttons untouched** — they already have terracotta gradient + dark border; the rules only fire on `bg-white`, `bg-transparent`, light tints, or no-bg buttons
-- **`prefers-reduced-motion`** — no animations added
-- **`zoom: 0.75`** — uses px values that survive zoom
-- **Plume palette** — uses existing `#d96c4a` (terracotta), `#c45e3b` (deep terracotta), `#fff7f2` (warm cream tint), and slate ink only
-- **WCAG AA contrast** — `#1e293b` on `#ffffff` = 16.8:1 ratio (AAA)
-- **Print mode** — strips borders/shadows
+**KPI card preset** (`.widget-kpi`)
+- Combines: eyebrow + big metric + trend + accent stripe
+- One class drops in a complete KPI surface
 
 ### Composition with existing layers
 
 | Layer | Owns |
 |-------|------|
-| `index.css` global rule (existing) | White text on dark/blue buttons |
-| `button.tsx` cva variants | Primary terracotta, hero CTAs, etc. |
-| `button-contrast-fix.css` (NEW) | **Light-on-light buttons get visible border + ink + hover tint** |
+| `figma-sharpness.css` | Hairline rendering, type smoothing |
+| `soft-elevation.css` | `el-1` … `el-5` utility shadows |
+| `floating-cards.css` | Container radius + border + base shadow |
+| `button-contrast-fix.css` | Light-on-light button visibility |
+| `widget-variants.css` (NEW) | **Per-card visual variants and density** |
+| `widget-content.css` (NEW) | **Reusable scaffolding inside widgets** |
 
-Imported last so its `!important` declarations win over Tailwind utilities.
+Variants override `floating-cards.css` defaults via higher-specificity attribute selectors (`[data-variant]`) and `!important` only where needed.
+
+### How users adopt it
+
+Existing JSX needs zero edits — every widget keeps its current look. To upgrade a card, add one or two attributes:
+
+```tsx
+// Before — generic floating card
+<div className="card p-6">…</div>
+
+// After — KPI elevated card with terracotta accent
+<div className="card p-6" data-variant="accent-bar" data-accent="terracotta">
+  <span className="widget-eyebrow">Pending</span>
+  <div className="widget-metric">
+    <span className="widget-metric-value">12</span>
+    <span className="widget-metric-label">Bookings awaiting review</span>
+  </div>
+</div>
+```
 
 ### Constraints respected
 
-- Hero pages (homepage, business, workshops) — fully excluded
-- Footer — fully excluded
-- Existing Neo-Tactile primary, gold, hero variants — untouched (they already have explicit dark backgrounds or gradients)
-- Toast notifications (white-themed standard) — untouched (they aren't `<button>`)
-- Plume tokens, Tailwind config, JSX, logic, routes, data — all untouched
+- **Hero pages and footer fully excluded** on every selector
+- No JS, no new components, no JSX edits, no dependencies
+- Honors `prefers-reduced-motion`, `zoom: 0.75`, `backdrop-filter ≤ 12px`
+- Plume palette only (terracotta `#d96c4a`, plum `#7a2e2a`, cream `#fff7f2`, slate ink `#1e293b`)
+- WCAG AA contrast preserved on all status pills and tinted variants
+- Print mode strips variant decoration
+- Coexists with Tailwind utilities — opt-in only, never auto-mutates content
 
 ### Out of scope
 
-- Dark-background buttons (already handled by the existing global rule)
-- Hero CTAs (use `heroPrimary` / `heroOutline` variants — fully styled)
-- Pre-existing TypeScript errors
+- Hero pages, footer (excluded)
+- JSX edits to existing components (variants are opt-in)
+- New React components
+- Plume tokens, Tailwind config, routes, data, logic
 
 ### Files touched
 
 ```text
-NEW   src/styles/button-contrast-fix.css     (~120 lines)
-EDIT  src/index.css                           (+1 line @import after floating-cards)
+NEW   src/styles/widget-variants.css       (~220 lines)
+NEW   src/styles/widget-content.css        (~180 lines)
+EDIT  src/index.css                         (+2 lines @import after button-contrast-fix)
 ```
 
 ### Estimated diff
 
-~120 lines new CSS + 1 line `@import`. Zero deletions, zero JSX changes, zero logic changes.
+~400 lines new CSS + 2 lines `@import`. Zero deletions, zero JSX changes, zero logic changes.
 
