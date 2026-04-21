@@ -12,7 +12,7 @@ const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
           "shadow-[inset_0_1px_2px_rgba(0,0,0,0.04),0_1px_0_rgba(255,255,255,0.8)]",
           "placeholder:text-muted-foreground/60",
           "transition-all duration-150 ease-out",
-          "focus-visible:outline-none focus-visible:border-[#d96c4a]/70 focus-visible:ring-2 focus-visible:ring-[#d96c4a]/20 focus-visible:shadow-[inset_0_1px_2px_rgba(0,0,0,0.04),0_0_0_3px_rgba(217,108,74,0.10)]",
+          "focus-visible:outline-[#d96c4a] focus-visible:outline-2 focus-visible:border-[#d96c4a] focus-visible:ring-2 focus-visible:ring-[#d96c4a] focus-visible:ring-offset-0",
           "hover:border-[#d96c4a]/25",
           "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-muted",
           "file:border-0 file:bg-transparent file:text-sm file:font-semibold file:text-primary",
