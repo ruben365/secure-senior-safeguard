@@ -109,7 +109,7 @@ export default function HelpCenter() {
 
           <div className="space-y-3">
             {filtered?.map((article) => (
-              <Card key={article.id}>
+              <Card key={article.id} className="stroke-glass--quiet">
                 <CardContent className="py-4">
                   <button
                     className="w-full text-left flex items-center justify-between"

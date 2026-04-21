@@ -232,7 +232,7 @@ function Careers() {
           </div>
 
           {/* Don't see your role CTA */}
-          <Card className="mt-12 max-w-3xl mx-auto relative overflow-hidden border-primary/20 shadow-[0_8px_40px_-12px_hsl(var(--primary)/0.15)]">
+          <Card className="stroke-glass--accent mt-12 max-w-3xl mx-auto relative overflow-hidden border-primary/20 shadow-[0_8px_40px_-12px_hsl(var(--primary)/0.15)]">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10" />
             <CardHeader className="text-center">
               <CardTitle className="text-2xl">Don't See Your Role?</CardTitle>

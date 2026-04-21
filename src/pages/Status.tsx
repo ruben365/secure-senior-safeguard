@@ -113,7 +113,7 @@ function Status() {
           </div>
 
           {/* 30-day uptime summary */}
-          <Card className="mt-6 p-4 border border-border/40 bg-card flex items-center gap-3">
+          <Card className="stroke-glass--quiet mt-6 p-4 border border-border/40 bg-card flex items-center gap-3">
             <Activity className="w-5 h-5 text-primary flex-shrink-0" />
             <div>
               <p className="font-semibold text-sm text-foreground">30-Day Uptime</p>
@@ -130,7 +130,7 @@ function Status() {
       <section className="py-10 md:py-14 bg-background">
         <div className="container mx-auto max-w-3xl">
           <h2 className="text-lg font-bold text-foreground mb-4">Incident History</h2>
-          <Card className="p-5 border border-border/40 bg-card text-center">
+          <Card className="stroke-glass--quiet p-5 border border-border/40 bg-card text-center">
             <CheckCircle className="w-8 h-8 text-emerald-500 mx-auto mb-3" />
             <p className="font-semibold text-foreground text-sm mb-1">
               No incidents in the past 30 days.

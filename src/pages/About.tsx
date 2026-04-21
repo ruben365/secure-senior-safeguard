@@ -261,7 +261,7 @@ function About() {
           </div>
 
           <div className="max-w-2xl mx-auto">
-            <Card className="hss-card p-4 border border-border/40 bg-card/70">
+            <Card className="hss-card stroke-glass--accent p-4 border border-border/40 bg-card/70">
               <div className="flex gap-4 items-start">
                 <div className="relative flex-shrink-0">
                   <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-[#fff4f0] to-[#fde8dc] flex items-center justify-center">

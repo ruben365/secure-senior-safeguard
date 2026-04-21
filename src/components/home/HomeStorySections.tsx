@@ -533,7 +533,7 @@ export const HomeStorySections = () => {
                 key={`${activeTab}-${i}`}
                 data-reveal="scale"
                 style={{ "--reveal-delay": `${i * 80}ms` } as React.CSSProperties}
-                className="hss-card overflow-hidden group flex flex-col"
+                className="hss-card stroke-glass overflow-hidden group flex flex-col"
               >
                 {/* Card image with optional badge */}
                 <div className="relative aspect-[4/3] overflow-hidden bg-[#F4F4F4]">
@@ -924,7 +924,7 @@ export const HomeStorySections = () => {
                 key={ws.title}
                 data-reveal="scale"
                 style={{ "--reveal-delay": `${i * 70}ms` } as React.CSSProperties}
-                className="hss-card overflow-hidden group flex flex-col"
+                className="hss-card stroke-glass--accent overflow-hidden group flex flex-col"
               >
                 {/* Image with category badge */}
                 <div className="relative aspect-[3/2] overflow-hidden bg-[#F4F4F4]">
