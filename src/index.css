@@ -48,6 +48,9 @@
 /* Soft elevation — low-opacity drop-shadow widget design */
 @import "./styles/soft-elevation.css";
 
+/* Floating cards — heavy radius + hairline border + diffused shadow */
+@import "./styles/floating-cards.css";
+
 /* ═══════════════════════════════════════════════════════════════════
    AMBIENT VIBRANCE OPT-OUT — Auth, Admin, Portal use solid surfaces
    ═══════════════════════════════════════════════════════════════════ */
