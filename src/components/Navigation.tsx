@@ -9,7 +9,6 @@ import {
   Heart,
   ChevronDown,
   Search,
-  ChevronRight,
 } from "lucide-react";
 import { PrefetchLink } from "@/components/PrefetchLink";
 import { ShoppingCart } from "@/components/ShoppingCart";
@@ -376,56 +375,43 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
               </button>
             </div>
 
-            <div className="px-3 py-2">
+            <div className="px-5 py-1">
               {allLinks.map((link) => {
                 const isActive = isActiveLink(link.href);
                 return (
                   <Link
                     key={link.name}
                     to={link.href}
-                    className={`flex items-center justify-between text-[14px] font-medium px-3 py-3 rounded-md transition-colors duration-150 min-h-[44px] ${
+                    className={`block py-3.5 text-[15px] font-medium border-b border-white/[0.08] transition-colors duration-150 ${
                       isActive
-                        ? "text-orange-400 bg-orange-500/10"
-                        : "text-white/85 hover:text-white hover:bg-white/[0.06] active:bg-white/[0.10]"
+                        ? "text-orange-400"
+                        : "text-white/80 hover:text-white"
                     }`}
                     onClick={() => {
                       setMobileMenuOpen(false);
                       scrollToTop();
                     }}
                   >
-                    <span>{link.name}</span>
-                    {!isActive && <ChevronRight className="h-3.5 w-3.5 text-white/25" />}
+                    {link.name}
                   </Link>
                 );
               })}
 
-              <div className="mt-3 pt-3 flex flex-col items-center gap-2 border-t border-white/[0.08]">
-                <button
-                  type="button"
-                  className="h-7 px-4 text-[10px] font-medium rounded-md flex items-center justify-center gap-1 transition-colors duration-150 border border-white/15 text-white/60 hover:text-white hover:border-white/25"
-                  onClick={() => {
-                    setDonateOpen(true);
-                    setMobileMenuOpen(false);
-                  }}
-                >
-                  <Heart className="h-2.5 w-2.5" />
-                  Donate
-                </button>
-
+              <div className="pt-5 pb-3 flex flex-col items-center gap-3">
                 {isAdminOrStaff ? (
                   <Link
                     to="/admin"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="h-7 max-w-[130px] w-full text-[10px] font-semibold rounded-md text-white flex items-center justify-center gap-1 transition-all duration-150 bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12]"
+                    className="flex items-center gap-1.5 text-[12px] font-semibold text-white/70 hover:text-white transition-colors duration-150"
                   >
-                    <LayoutDashboard className="h-2.5 w-2.5" />
+                    <LayoutDashboard className="h-3.5 w-3.5" />
                     Dashboard
                   </Link>
                 ) : (
                   <Link
                     to="/portal"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="h-7 max-w-[130px] w-full text-[10px] font-semibold rounded-md text-white flex items-center justify-center transition-all duration-150 bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12]"
+                    className="text-[12px] font-semibold text-white/70 hover:text-white transition-colors duration-150"
                   >
                     Login
                   </Link>
@@ -433,10 +419,10 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
 
                 <a
                   href={SITE.phone.tel}
-                  className="flex items-center justify-center gap-1 text-[10px] text-white/40 font-medium py-1 transition-colors duration-150 hover:text-white/70"
+                  className="flex items-center gap-1.5 text-[11px] text-white/35 font-medium transition-colors duration-150 hover:text-white/60"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  <Phone className="h-2.5 w-2.5" />
+                  <Phone className="h-3 w-3" />
                   {SITE.phone.display}
                 </a>
               </div>
