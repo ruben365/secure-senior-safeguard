@@ -84,7 +84,7 @@ export function useStripeKey() {
 
       try {
         const promise = await ensureStripePromise(forceRemote);
-        setStripePromise(promise as Promise<Stripe | null>);
+        setStripePromise(promise as unknown as Promise<Stripe | null>);
         setError(null);
       } catch (err) {
         setStripePromise(null);

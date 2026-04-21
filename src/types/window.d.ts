@@ -1,14 +1,26 @@
-// Global type augmentations
+// Global ambient declarations for browser APIs not in lib.dom.
+
+export {};
+
+interface SpeechRecognitionResultLike {
+  readonly isFinal: boolean;
+  readonly length: number;
+  [index: number]: { readonly transcript: string };
+}
+
+interface SpeechRecognitionResultListLike {
+  readonly length: number;
+  [index: number]: SpeechRecognitionResultLike;
+}
 
 interface SpeechRecognitionEventLike extends Event {
-  results: {
-    length: number;
-    [index: number]: {
-      [index: number]: { transcript: string };
-      isFinal: boolean;
-    };
-  };
-  resultIndex: number;
+  readonly results: SpeechRecognitionResultListLike;
+  readonly resultIndex: number;
+}
+
+interface SpeechRecognitionErrorEventLike extends Event {
+  readonly error: string;
+  readonly message: string;
 }
 
 interface SpeechRecognition extends EventTarget {
@@ -16,24 +28,32 @@ interface SpeechRecognition extends EventTarget {
   interimResults: boolean;
   lang: string;
   maxAlternatives: number;
-  start: () => void;
-  stop: () => void;
-  abort: () => void;
+  start(): void;
+  stop(): void;
+  abort(): void;
   onresult: ((event: SpeechRecognitionEventLike) => void) | null;
-  onerror: ((event: Event) => void) | null;
+  onerror: ((event: SpeechRecognitionErrorEventLike) => void) | null;
   onend: (() => void) | null;
   onstart: (() => void) | null;
 }
 
-declare const SpeechRecognition: {
-  prototype: SpeechRecognition;
+interface SpeechRecognitionStatic {
   new (): SpeechRecognition;
-};
+  prototype: SpeechRecognition;
+}
 
-interface Window {
-  SpeechRecognition?: new () => SpeechRecognition;
-  webkitSpeechRecognition?: new () => SpeechRecognition;
-  requestIdleCallback?: (cb: IdleRequestCallback, opts?: IdleRequestOptions) => number;
-  cancelIdleCallback?: (id: number) => void;
-  __prerenderReadyFired?: boolean;
+declare global {
+  // Bare names referenced as types/values in components
+  type SpeechRecognitionEvent = SpeechRecognitionEventLike;
+  type SpeechRecognitionErrorEvent = SpeechRecognitionErrorEventLike;
+  // eslint-disable-next-line @typescript-eslint/no-redeclare
+  const SpeechRecognition: SpeechRecognitionStatic;
+
+  interface Window {
+    SpeechRecognition?: SpeechRecognitionStatic;
+    webkitSpeechRecognition?: SpeechRecognitionStatic;
+    requestIdleCallback?: (cb: IdleRequestCallback, opts?: IdleRequestOptions) => number;
+    cancelIdleCallback?: (id: number) => void;
+    __prerenderReadyFired?: boolean;
+  }
 }
