@@ -521,30 +521,18 @@ function Auth() {
         className="w-full relative flex items-center justify-center p-5 md:p-8 font-sans antialiased"
         style={{ minHeight: "100vh" }}
       >
-        {/* Same calm dark backdrop as the main sign-in screen */}
-        <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0b1020] via-[#0e1428] to-[#0a0f1e]" />
-          <svg className="absolute inset-0 w-full h-full opacity-[0.035]">
-            <defs>
-              <pattern id="auth-success-dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
-                <circle cx="1" cy="1" r="1" fill="#ffffff" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#auth-success-dots)" />
-          </svg>
-          <div className="absolute -top-40 -left-40 h-[520px] w-[520px] rounded-full bg-emerald-500/10 blur-[140px]" />
-          <div className="absolute -bottom-40 -right-40 h-[560px] w-[560px] rounded-full bg-indigo-500/12 blur-[160px]" />
+        <div aria-hidden="true" className="auth-bg-aurora">
+          <span className="vibe-orb vibe-orb--lg vibe-orb--coral" style={{ top: "8%", left: "-6%" }} />
+          <span className="vibe-orb vibe-orb--md vibe-orb--lavender" style={{ bottom: "10%", right: "-4%", animationDelay: "-10s" }} />
+          <span className="vibe-orb vibe-orb--md vibe-orb--peach" style={{ top: "60%", left: "55%", animationDelay: "-16s", opacity: 0.35 }} />
         </div>
 
         <div className="relative z-10 w-full max-w-[440px]">
-          <div className="relative rounded-xl bg-white border border-slate-200 p-5 md:p-7 text-center">
-            <div
-              aria-hidden="true"
-              className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-slate-300/80 to-transparent"
-            />
+          <div aria-hidden="true" className="auth-glow-ring" />
+          <div className="auth-card-vibe text-center">
             <div className="relative w-14 h-14 mx-auto mb-5">
-              <div className="absolute inset-0 rounded-2xl bg-emerald-500/20 blur-xl" />
-              <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center shadow-[0_12px_28px_-8px_rgba(16,185,129,0.5),inset_0_1px_0_0_rgba(255,255,255,0.35)] border border-white/20">
+              <div className="absolute inset-0 rounded-2xl bg-emerald-500/30 blur-xl animate-pulse" />
+              <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-[0_12px_28px_-8px_rgba(16,185,129,0.55),inset_0_1px_0_0_rgba(255,255,255,0.4)] border border-white/30">
                 <CheckCircle2 className="w-7 h-7 text-white" strokeWidth={2.25} />
               </div>
             </div>
