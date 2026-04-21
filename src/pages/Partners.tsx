@@ -64,12 +64,7 @@ export default function Partners() {
         description={PAGE_SEO.partners.description}
         keywords={PAGE_SEO.partners.keywords}
         structuredData={PAGE_SEO.partners.structuredData}
-        breadcrumbs={
-          PAGE_SEO.partners.breadcrumbs as Array<{
-            name: string;
-            url: string;
-          }>
-        }
+        breadcrumbs={[...PAGE_SEO.partners.breadcrumbs]}
       />
       <Navigation />
 
