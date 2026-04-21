@@ -897,7 +897,7 @@ export default function LibraryPage() {
       keywords={PAGE_SEO.library.keywords}
       canonical="https://www.invisionnetwork.org/library"
       structuredData={PAGE_SEO.library.structuredData}
-      breadcrumbs={PAGE_SEO.library.breadcrumbs as Array<{ name: string; url: string }>}
+      breadcrumbs={[...PAGE_SEO.library.breadcrumbs]}
     />
   );
 

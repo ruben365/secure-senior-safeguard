@@ -103,7 +103,7 @@ function Security() {
         description={PAGE_SEO.security.description}
         keywords={PAGE_SEO.security.keywords}
         structuredData={PAGE_SEO.security.structuredData}
-        breadcrumbs={PAGE_SEO.security.breadcrumbs as Array<{ name: string; url: string }>}
+        breadcrumbs={[...PAGE_SEO.security.breadcrumbs]}
       />
       <Navigation />
 

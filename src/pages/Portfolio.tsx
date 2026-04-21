@@ -66,7 +66,7 @@ const Portfolio = () => {
         title={PAGE_SEO.portfolio.title}
         description={PAGE_SEO.portfolio.description}
         keywords={PAGE_SEO.portfolio.keywords}
-        breadcrumbs={PAGE_SEO.portfolio.breadcrumbs as Array<{ name: string; url: string }>}
+        breadcrumbs={[...PAGE_SEO.portfolio.breadcrumbs]}
         structuredData={{
           "@context": "https://schema.org",
           "@type": "CollectionPage",

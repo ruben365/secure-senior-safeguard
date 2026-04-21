@@ -176,7 +176,7 @@ function Contact() {
         description={PAGE_SEO.contact.description}
         keywords={PAGE_SEO.contact.keywords}
         structuredData={PAGE_SEO.contact.structuredData}
-        breadcrumbs={PAGE_SEO.contact.breadcrumbs as Array<{ name: string; url: string }>}
+        breadcrumbs={[...PAGE_SEO.contact.breadcrumbs]}
       />
       <Navigation overlay />
       {/* Hero */}
