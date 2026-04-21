@@ -1,0 +1,121 @@
+/* ═══════════════════════════════════════════════════════════════════
+   SOFT ELEVATION — low-opacity drop-shadow widget design
+   Subtle, multi-layer shadows. Heroes and footer excluded.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Elevation tokens ──────────────────────────────────────────── */
+:root {
+  --el-1:
+    0 1px 2px 0 rgba(15, 23, 42, 0.04),
+    0 1px 3px 0 rgba(15, 23, 42, 0.03);
+  --el-2:
+    0 2px 4px -1px rgba(15, 23, 42, 0.05),
+    0 4px 8px -2px rgba(15, 23, 42, 0.04);
+  --el-3:
+    0 4px 8px -2px rgba(15, 23, 42, 0.06),
+    0 12px 24px -4px rgba(15, 23, 42, 0.05);
+  --el-4:
+    0 8px 16px -4px rgba(15, 23, 42, 0.08),
+    0 24px 40px -8px rgba(15, 23, 42, 0.06);
+  --el-5:
+    0 16px 32px -8px rgba(15, 23, 42, 0.10),
+    0 40px 60px -16px rgba(15, 23, 42, 0.08);
+
+  /* Warm tint variant — uses plum from Plume palette */
+  --el-warm-2:
+    0 2px 4px -1px rgba(122, 46, 42, 0.04),
+    0 4px 8px -2px rgba(122, 46, 42, 0.03);
+  --el-warm-3:
+    0 4px 8px -2px rgba(122, 46, 42, 0.05),
+    0 12px 24px -4px rgba(122, 46, 42, 0.04);
+}
+
+/* ── 2. Utility classes (opt-in) ──────────────────────────────────── */
+/* Use !important to override the global zero-shadow reset in index.css */
+.el-1 { box-shadow: var(--el-1) !important; }
+.el-2 { box-shadow: var(--el-2) !important; }
+.el-3 { box-shadow: var(--el-3) !important; }
+.el-4 { box-shadow: var(--el-4) !important; }
+.el-5 { box-shadow: var(--el-5) !important; }
+.el-warm-2 { box-shadow: var(--el-warm-2) !important; }
+.el-warm-3 { box-shadow: var(--el-warm-3) !important; }
+
+/* Smooth elevation transitions on hover */
+.el-hover {
+  transition: box-shadow 220ms cubic-bezier(0.4, 0, 0.2, 1),
+              transform 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.el-hover:hover {
+  box-shadow: var(--el-3) !important;
+  transform: translateY(-1px);
+}
+
+/* Filter-based stacking — coexists with figma-sharpness hairline ring */
+.el-stack {
+  filter: drop-shadow(0 1px 2px rgba(15, 23, 42, 0.04))
+          drop-shadow(0 4px 12px rgba(15, 23, 42, 0.05));
+}
+
+/* ── 3. Auto-applied to widget surfaces (hero/footer excluded) ────── */
+
+/* Cards — resting el-1 */
+.card:not(.hero-home .card):not(.hero-business .card):not(.hero-workshops .card):not(footer .card):not(.site-footer .card),
+[data-widget="card"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
+  box-shadow: var(--el-1) !important;
+  transition: box-shadow 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Card hover lift */
+.card:not(.hero-home .card):not(.hero-business .card):not(.hero-workshops .card):not(footer .card):not(.site-footer .card):hover {
+  box-shadow: var(--el-2) !important;
+}
+
+/* Popovers, dropdowns, tooltips — el-3 */
+[role="menu"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+[role="listbox"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+[role="tooltip"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+[data-radix-popper-content-wrapper]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) > * {
+  box-shadow: var(--el-3) !important;
+}
+
+/* Dialogs, modals — el-4 */
+[role="dialog"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+[role="alertdialog"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
+  box-shadow: var(--el-4) !important;
+}
+
+/* Command palettes, full overlays — el-5 */
+[cmdk-root]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+[data-overlay="command"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
+  box-shadow: var(--el-5) !important;
+}
+
+/* Panels — gentle el-1 */
+[data-widget="panel"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+.panel:not(.hero-home .panel):not(.hero-business .panel):not(.hero-workshops .panel):not(footer .panel):not(.site-footer .panel) {
+  box-shadow: var(--el-1) !important;
+}
+
+/* ── 4. Reduced motion safety ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .el-hover,
+  .card:not(.hero-home .card):not(.hero-business .card):not(.hero-workshops .card):not(footer .card):not(.site-footer .card) {
+    transition: none !important;
+  }
+  .el-hover:hover {
+    transform: none !important;
+  }
+}
+
+/* ── 5. Print: strip all elevation ────────────────────────────────── */
+@media print {
+  [class*="el-"],
+  .card,
+  [role="dialog"],
+  [role="menu"],
+  [role="listbox"],
+  [role="tooltip"] {
+    box-shadow: none !important;
+    filter: none !important;
+  }
+}
