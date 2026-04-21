@@ -382,7 +382,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <Link
                     key={link.name}
                     to={link.href}
-                    className={`block py-3.5 text-[15px] font-medium border-b border-white/[0.08] transition-colors duration-150 ${
+                    className={`block py-2 text-[15px] font-medium transition-colors duration-150 ${
                       isActive
                         ? "text-orange-400"
                         : "text-white/80 hover:text-white"
