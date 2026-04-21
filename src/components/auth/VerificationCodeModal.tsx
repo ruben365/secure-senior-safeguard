@@ -230,7 +230,7 @@ export function VerificationCodeModal({
   return (
     <Dialog open={open} onOpenChange={onClose}>
       {/* Compact: no scrollbar, tight header, teal shield */}
-      <DialogContent className="sm:max-w-[440px] overflow-hidden p-5 gap-0">
+      <DialogContent className="sm:max-w-[440px] overflow-hidden p-5 gap-0 glass-modal">
         <DialogHeader className="space-y-0 pb-3">
           <DialogTitle className="flex items-center gap-2 text-base font-semibold leading-tight">
             <Shield className="w-4 h-4 text-orange-400" />
