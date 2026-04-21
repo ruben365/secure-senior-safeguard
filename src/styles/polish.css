@@ -144,8 +144,10 @@ img[data-img-reveal][data-loaded="true"] {
 }
 
 /* ── Link underline animation ─────────────────────────────────
-   Any <a> inside main content gets an animated underline on hover */
-main a:not([class*="btn"]):not([class*="button"]):not(.no-underline-anim):not([role="button"]) {
+   Any <a> inside main content gets an animated underline on hover.
+   :not([class*="inline-flex"]) excludes Button asChild renders (all have
+   inline-flex in their CVA base class) so gradient backgrounds aren't clobbered. */
+main a:not([class*="btn"]):not([class*="button"]):not(.no-underline-anim):not([role="button"]):not([class*="inline-flex"]) {
   position: relative;
   text-decoration: none;
   background-image: linear-gradient(to right, currentColor, currentColor);
@@ -155,8 +157,8 @@ main a:not([class*="btn"]):not([class*="button"]):not(.no-underline-anim):not([r
   transition: background-size var(--dur-std) var(--ease-out-std);
 }
 
-main a:not([class*="btn"]):not([class*="button"]):not(.no-underline-anim):not([role="button"]):hover,
-main a:not([class*="btn"]):not([class*="button"]):not(.no-underline-anim):not([role="button"]):focus-visible {
+main a:not([class*="btn"]):not([class*="button"]):not(.no-underline-anim):not([role="button"]):not([class*="inline-flex"]):hover,
+main a:not([class*="btn"]):not([class*="button"]):not(.no-underline-anim):not([role="button"]):not([class*="inline-flex"]):focus-visible {
   background-size: 100% 2px;
 }
 
