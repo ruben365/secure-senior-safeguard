@@ -63,7 +63,7 @@ export default function HelpCenter() {
 
   return (
     <>
-      <SEO {...PAGE_SEO.help} />
+      <SEO {...PAGE_SEO.help} breadcrumbs={[...PAGE_SEO.help.breadcrumbs]} />
       <div className="min-h-screen bg-background">
         <div className="bg-primary/5 sec-after-hero pb-12">
           <div className="sec-container-narrow text-center">

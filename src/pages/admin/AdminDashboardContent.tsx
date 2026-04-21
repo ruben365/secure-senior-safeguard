@@ -245,8 +245,8 @@ export default function AdminDashboardContent() {
 
       {/* Tasks & Events */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <NeonTasksCard tasks={tasks} />
-        <NeonEventsCard events={events} />
+        <NeonTasksCard tasks={tasks as never} />
+        <NeonEventsCard events={events as never} />
       </div>
     </div>
   );

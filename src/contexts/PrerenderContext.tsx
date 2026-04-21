@@ -18,8 +18,9 @@ const PrerenderContext = createContext<PrerenderContextValue | null>(null);
 
 const firePrerenderReady = () => {
   if (typeof document === "undefined") return;
-  if (window.__prerenderReadyFired) return;
-  window.__prerenderReadyFired = true;
+  const w = window as Window & { __prerenderReadyFired?: boolean };
+  if (w.__prerenderReadyFired) return;
+  w.__prerenderReadyFired = true;
   document.dispatchEvent(new Event("prerender-ready"));
 };
 
@@ -29,7 +30,7 @@ export function PrerenderProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     pendingRef.current = 0;
-    window.__prerenderReadyFired = false;
+    (window as Window & { __prerenderReadyFired?: boolean }).__prerenderReadyFired = false;
 
     const finalizeReady = () => {
       if (pendingRef.current === 0) {

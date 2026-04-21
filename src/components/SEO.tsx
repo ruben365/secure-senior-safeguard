@@ -16,7 +16,7 @@ interface SEOProps {
   canonical?: string;
   noindex?: boolean;
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
-  breadcrumbs?: BreadcrumbItem[];
+  breadcrumbs?: ReadonlyArray<Readonly<BreadcrumbItem>>;
   ogImageWidth?: string;
   ogImageHeight?: string;
   ogImageAlt?: string;
@@ -36,7 +36,7 @@ const DEFAULT_SEO = {
 };
 
 /** Build a BreadcrumbList JSON-LD object from an array of crumbs. */
-export function buildBreadcrumbSchema(items: BreadcrumbItem[]) {
+export function buildBreadcrumbSchema(items: ReadonlyArray<Readonly<BreadcrumbItem>>) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",

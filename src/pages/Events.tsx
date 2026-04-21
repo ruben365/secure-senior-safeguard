@@ -83,7 +83,7 @@ export default function Events() {
         keywords={PAGE_SEO.events.keywords}
         structuredData={PAGE_SEO.events.structuredData}
         breadcrumbs={
-          PAGE_SEO.events.breadcrumbs as Array<{ name: string; url: string }>
+          [...PAGE_SEO.events.breadcrumbs]
         }
       />
       <Navigation />

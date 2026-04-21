@@ -21,6 +21,13 @@ interface PurchaseRequest {
   quantity: number;
   suggested_price: number;
   notes: string | null;
+  customer_price?: number;
+  discount_amount?: number;
+  final_price?: number;
+  veteran_type?: string | null;
+  veteran_id_last4?: string | null;
+  veteran_document_url?: string | null;
+  message?: string | null;
 }
 
 export const PurchaseRequestsTable = () => {

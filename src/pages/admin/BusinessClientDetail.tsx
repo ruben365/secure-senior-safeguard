@@ -189,7 +189,7 @@ export default function BusinessClientDetail() {
         </TabsList>
 
         <TabsContent value="overview" className="mt-6">
-          <ClientOverviewTab client={client} />
+          <ClientOverviewTab client={client as any} />
         </TabsContent>
 
         <TabsContent value="services" className="mt-6">

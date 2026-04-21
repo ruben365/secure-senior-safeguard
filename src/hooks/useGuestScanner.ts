@@ -120,7 +120,7 @@ export const useGuestScanner = () => {
         if (fnError) throw fnError;
         if (!data?.analysis) throw new Error("No analysis results returned.");
 
-        setAnalysis(data.analysis);
+        setAnalysis(data.analysis as GuestScanAnalysis);
         setExpiresAt(
           data.expiresAt
             ? new Date(data.expiresAt)

@@ -122,7 +122,7 @@ function About() {
         description={PAGE_SEO.about.description}
         keywords={PAGE_SEO.about.keywords}
         structuredData={PAGE_SEO.about.structuredData}
-        breadcrumbs={PAGE_SEO.about.breadcrumbs as Array<{ name: string; url: string }>}
+        breadcrumbs={[...PAGE_SEO.about.breadcrumbs]}
       />
       <Navigation overlay />
 

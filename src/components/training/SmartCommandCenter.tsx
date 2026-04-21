@@ -46,7 +46,7 @@ export const SmartCommandCenter = ({
   const [validationError, setValidationError] = useState<string | null>(null);
   const [isListening, setIsListening] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const recognitionRef = useRef<any>(null);
 
   const isProcessing = status === "uploading" || status === "analyzing";
   const isPaying = status === "paying";
@@ -141,14 +141,14 @@ export const SmartCommandCenter = ({
 
   // Initialize speech recognition
   useEffect(() => {
+    const w = typeof window !== "undefined" ? (window as Window) : null;
     if (
-      typeof window !== "undefined" &&
-      ("webkitSpeechRecognition" in window || "SpeechRecognition" in window)
+      w &&
+      (w.webkitSpeechRecognition || w.SpeechRecognition)
     ) {
-      const SpeechRecognition =
-        window.webkitSpeechRecognition ||
-        window.SpeechRecognition;
-      const recognition = new SpeechRecognition();
+      const SpeechRecognitionCtor =
+        w.webkitSpeechRecognition || w.SpeechRecognition;
+      const recognition = new SpeechRecognitionCtor!();
       recognition.continuous = false;
       recognition.interimResults = false;
       recognition.lang = "en-US";

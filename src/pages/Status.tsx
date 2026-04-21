@@ -54,7 +54,7 @@ function Status() {
         title={PAGE_SEO.status.title}
         description={PAGE_SEO.status.description}
         keywords={PAGE_SEO.status.keywords}
-        breadcrumbs={PAGE_SEO.status.breadcrumbs as Array<{ name: string; url: string }>}
+        breadcrumbs={[...PAGE_SEO.status.breadcrumbs]}
       />
       <Navigation />
 

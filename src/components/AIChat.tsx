@@ -36,7 +36,7 @@ export const AIChat = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const recognitionRef = useRef<any>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
   const { toast } = useToast();
 
@@ -82,11 +82,11 @@ export const AIChat = () => {
 
   // Initialize speech recognition
   useEffect(() => {
-    if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
-      const SpeechRecognition =
-        window.webkitSpeechRecognition ||
-        window.SpeechRecognition;
-      recognitionRef.current = new SpeechRecognition();
+    const w = window as Window;
+    if (w.webkitSpeechRecognition || w.SpeechRecognition) {
+      const SpeechRecognitionCtor =
+        w.webkitSpeechRecognition || w.SpeechRecognition;
+      recognitionRef.current = new SpeechRecognitionCtor!();
       recognitionRef.current.continuous = false;
       recognitionRef.current.interimResults = false;
       recognitionRef.current.lang = "en-US";

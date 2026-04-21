@@ -52,6 +52,7 @@ export interface BookingConfirmationParams {
   requestNumber: string;
   preferredDate?: string;
   serviceType?: string;
+  [key: string]: unknown;
 }
 
 export async function sendBookingConfirmation(
@@ -72,6 +73,7 @@ export interface InquiryConfirmationParams {
   inquiryNumber: string;
   servicePrice?: number;
   companyName?: string;
+  [key: string]: unknown;
 }
 
 export async function sendInquiryConfirmation(
@@ -92,6 +94,7 @@ export interface CustomerWelcomeParams {
   planName: string;
   planPrice?: number;
   billingCycle?: "monthly" | "annual";
+  [key: string]: unknown;
 }
 
 export async function sendCustomerWelcome(
@@ -116,6 +119,7 @@ export interface WorkshopRegistrationParams {
   zoomLink?: string;
   registrationNumber: string;
   price?: number;
+  [key: string]: unknown;
 }
 
 export async function sendWorkshopRegistration(
@@ -135,6 +139,7 @@ export interface ContactEmailParams {
   message: string;
   subject?: string;
   serviceType?: string;
+  [key: string]: unknown;
 }
 
 export async function sendContactEmail(

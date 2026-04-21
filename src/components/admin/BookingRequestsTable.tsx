@@ -22,6 +22,10 @@ interface BookingRequest {
   discount_amount: number;
   final_price: number | null;
   notes: string | null;
+  veteran_type?: string | null;
+  veteran_id_last4?: string | null;
+  preferred_dates?: string | null;
+  message?: string | null;
 }
 
 export const BookingRequestsTable = () => {
