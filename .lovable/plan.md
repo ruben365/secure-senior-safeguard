@@ -1,117 +1,71 @@
 
 
-## Fix Excessive Vertical Voids on Homepage Body
+## Revert Header to Transparent — No Background, No Color
 
-Goal: eliminate the giant cream gaps shown in the screenshot — above and below the dark "InVision Network provides…" answer-summary band, and before the "Why families choose us" section. Hero and footer untouched.
+Goal: remove the solid `#080d1a` background and border from the navigation header so it reverts to a fully transparent overlay. Hero owns its own background; the header should sit on top without painting any color.
 
 ### Root cause
 
-Three stacked spacing layers compound:
+In the previous "remove glass" pass, `src/components/Navigation.tsx` was given a solid dark fill:
 
-1. `AnswerSummary` is rendered with `className="sec-after-hero pb-8"` — `sec-after-hero` still injects ~5rem top padding on desktop (even after recent tighten)
-2. The wrapper `<div className="relative isolate">` then opens with `<section className="sec-rhythm-lg">` (HomeStorySections) — another ~6.5rem top padding stacked immediately below
-3. `HomeStorySections` has its own internal top padding inside its first sub-section, doubling the gap before "Why families choose us"
+```tsx
+className={overlay
+  ? "absolute … bg-[#080d1a] border-b border-white/[0.06]"
+  : `sticky … ${scrolled
+      ? "bg-[#080d1a] border-b border-white/[0.08] shadow-…"
+      : "bg-[#080d1a] border-b border-white/[0.04]"}`}
+```
 
-Net effect on desktop: ~11rem of empty cream between the hero and the dark band, then another ~10rem between the dark band and the first content row.
+That hard-codes a dark band across every page — including light/cream body pages where it now looks like a foreign block.
 
-### The fix — three surgical edits
+### The fix — single file, single edit
 
 ```text
-EDIT  src/pages/Index.tsx                    (swap rhythm classes)
-EDIT  src/styles/rhythm-tighten.css          (clamp sec-after-hero + sec-rhythm-lg)
-EDIT  src/components/AnswerSummary.tsx        (remove default top spacing)
+EDIT  src/components/Navigation.tsx   (nav className only)
 ```
 
-Zero new files. Zero new dependencies. Zero hero/footer edits.
+Replace the className expression so the `<nav>` carries:
+- **No background** (no `bg-*`)
+- **No border**
+- **No shadow**
+- **No backdrop-filter**
 
-#### 1. `src/pages/Index.tsx`
-
-Remove the heavy top padding above the AnswerSummary band, and downgrade the section right after it from `sec-rhythm-lg` to `sec-rhythm-sm`:
+Keep only positioning (`sticky top-0` / `absolute top-0`) and `z-[9999]`.
 
 ```tsx
-// Before
-<AnswerSummary
-  className="sec-after-hero pb-8"
-  ...
-/>
-...
-<section id="story" className="sec-rhythm-lg">
-
-// After
-<AnswerSummary
-  className="pt-0 pb-0"
-  ...
-/>
-...
-<section id="story" className="sec-rhythm-sm pt-6 md:pt-10">
+<nav className={overlay
+  ? "absolute top-0 left-0 right-0 z-[9999]"
+  : "sticky top-0 z-[9999]"}>
 ```
 
-Result: the dark band now sits flush against the hero (no cream gap above), and the "Why families choose us" section starts ~2.5rem below the band instead of ~10rem.
+The `scrolled` state and its `useEffect` listener stay in place but no longer drive any visual change — left intact for now to avoid touching unrelated logic. Can be removed in a follow-up if desired.
 
-#### 2. `src/styles/rhythm-tighten.css` — global guard
+### Mobile menu panel — unchanged
 
-Add explicit clamps so any other page using these classes also benefits:
-
-```css
-.sec-after-hero:not(.hero-home *):not(footer *) {
-  padding-top: clamp(1rem, 2vw, 2rem) !important;
-}
-.sec-before-footer:not(.hero-home *):not(footer *) {
-  padding-bottom: clamp(2rem, 4vw, 3.5rem) !important;
-}
-.sec-rhythm-lg:not(.hero-home *):not(footer *) {
-  padding-top: clamp(2.5rem, 5vw, 4rem) !important;
-  padding-bottom: clamp(2.5rem, 5vw, 4rem) !important;
-}
-.sec-rhythm-md:not(.hero-home *):not(footer *) {
-  padding-top: clamp(2rem, 4vw, 3.25rem) !important;
-  padding-bottom: clamp(2rem, 4vw, 3.25rem) !important;
-}
-```
-
-Targets only body sections — hero and footer excluded by `:not()` guards.
-
-#### 3. `src/components/AnswerSummary.tsx` — remove default outer wrapper margin
-
-The component's outer `<div className={\`relative ${className}\`}>` adds no margin itself, but the dark strip inside has no top/bottom outer breathing room either, so it can sit flush against neighbors. Add a tiny `my-2` so it doesn't kiss the hero pixel-perfect, but stays compact:
-
-```tsx
-<div className={`relative my-2 md:my-3 ${className}`}>
-```
-
-### Visual outcome
-
-| Region | Before | After |
-|--------|--------|-------|
-| Hero → dark band gap | ~200px cream void | ~12-24px breathing |
-| Dark band → "Why families…" gap | ~180px cream void | ~40-64px clean rhythm |
-| Trust strip → "Why families…" gap | ~120px void | ~24-40px |
+The mobile slide-in panel keeps its own dark glass background (`rgba(8,11,22,0.96)`) — that's an opened dialog, not the header bar itself. Untouched.
 
 ### Constraints respected
 
 - Hero (`HeroHomepage`) untouched
-- Footer untouched (excluded via `:not(footer *)`)
+- Footer untouched
 - Plume tokens untouched
-- `zoom: 0.75`, `prefers-reduced-motion` honored
-- No JSX logic changes, no new dependencies
-- Other pages using `sec-after-hero` / `sec-rhythm-lg` benefit automatically
+- No JSX logic, no state, no new dependencies
+- Mobile menu, dropdown, search, cart, donate, login button — all untouched
 
 ### Out of scope
 
-- Hero, footer
-- Other pages (Training/Business/Resources already use SectionImage rhythm)
-- Plume tokens, Tailwind config
+- Removing the now-unused `scrolled` state (cosmetic cleanup, can follow)
+- Hero, footer, body pages
+- Auth page styling
 - Pre-existing TypeScript lints
 
 ### Files touched
 
 ```text
-EDIT  src/pages/Index.tsx                  (~3 line changes)
-EDIT  src/styles/rhythm-tighten.css        (+12 lines clamps)
-EDIT  src/components/AnswerSummary.tsx     (1 line: add my-2 md:my-3)
+EDIT  src/components/Navigation.tsx   (1 className expression, ~3 lines)
 ```
 
 ### Estimated diff
 
-~16 lines changed total. Zero deletions of meaningful content, zero new files, zero logic changes.
+~3 lines changed. Zero new files, zero deletions of meaningful logic.
 
