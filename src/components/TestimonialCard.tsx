@@ -45,8 +45,8 @@ const TestimonialCard = ({
           ))}
         </div>
 
-        <p className="text-foreground mb-6 text-lg leading-relaxed">
-          "{quote}"
+        <p className="gx-quote text-foreground mb-6 text-lg leading-relaxed">
+          {quote}
         </p>
 
         <div className="flex items-center gap-4 pt-4 border-t border-border/50">

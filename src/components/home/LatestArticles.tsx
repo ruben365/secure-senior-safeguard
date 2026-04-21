@@ -10,7 +10,7 @@ export function LatestArticles() {
   return (
     <section
       aria-label="Latest cybersecurity articles"
-      className="relative z-10 py-14 md:py-20 bg-[#F9F8F6]"
+      className="relative z-10 py-14 md:py-20 bg-[#F9F8F6] gx-section"
     >
       <div className="container mx-auto max-w-6xl">
         {/* Header */}

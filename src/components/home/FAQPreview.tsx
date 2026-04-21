@@ -36,7 +36,7 @@ const faqs = [
 export const FAQPreview = () => {
   return (
     <section
-      className="relative z-10 py-14 md:py-20 lg:py-24"
+      className="relative z-10 py-14 md:py-20 lg:py-24 gx-section"
       aria-labelledby="faq-heading"
     >
       <div className="container mx-auto max-w-6xl relative">
