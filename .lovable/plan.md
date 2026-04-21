@@ -1,102 +1,84 @@
 
 
-## Graphic Layout Enhancement — Sitewide Body Polish
+## Interactive Element Polish — "Editorial Plume v2"
 
-Goal: add a refined "Editorial Graphic" pass to every page's body content (between hero and footer). Pure CSS layer — no logic, no JSX restructuring, no content edits. Heroes and footer untouched.
+Goal: graphically enhance the six interactive surface families — **maps, floating buttons, galleries, social feeds, popups/dialogs, accordions, content carousels** — with a unified editorial styling pass. Pure CSS additions to the existing `gx-*` system. Heroes, footer, Auth, Admin, Portal untouched.
 
-### Design direction — "Editorial Plume"
+### What gets added
 
-A magazine-grade graphic system that adds depth, hierarchy, and motion accents to body sections without altering existing colors or copy. Built on the existing cream/plum/copper palette.
+**One stylesheet, seven new primitives** — appended to `src/styles/graphic-enhancement.css`:
 
-**Six new graphic primitives** (parallel to existing `.stroke-glass`, `.pay-card`, `.hss-card`)
+| Class | Target | Visual signature |
+|-------|--------|------------------|
+| `.gx-map` | Iframe map wrapper (`OhioServiceMap`) | 4px cream frame, copper inner ring, layered plum shadow, copper compass corner-mark |
+| `.gx-fab` | Floating buttons (`MobileCallButton`, `BackToTop`, `MagnificentDonateButton`) | Soft copper halo ring (idle), gentle pulse glow, 1.5px cream border, lift on hover |
+| `.gx-gallery` | Image grid wrappers (`Resources`, `Portfolio`, team grids) | Auto-applies `.gx-figure` frame to children, staggered hover lift, copper hairline divider above |
+| `.gx-feed` | Social/content feed cards (`LatestArticles`, testimonials grid) | Vertical copper rail (2px) on the left of each item, plum date stamp, consistent 14px gap rhythm |
+| `.gx-dialog` | Popups (`Dialog`, `AlertDialog` content) | Cream frame with copper top accent bar (3px), softened layered shadow, copper diamond glyph in header |
+| `.gx-accordion` | `AccordionItem` wrappers | Copper left rail on `data-state=open`, plum heading weight increase, soft cream open-state background, smooth height + opacity reveal |
+| `.gx-carousel` | `Carousel`/`HeroCarousel` content area | Copper progress dot indicators, cream-frame slides, gradient fade on left/right edges |
 
-| Class | Role | Visual signature |
-|-------|------|------------------|
-| `.gx-section` | Wraps any body `<section>` | Soft top hairline gradient, subtle bottom fade, optional grain |
-| `.gx-eyebrow` | Section eyebrow label | Copper text, 0.18em letter-spacing, 11px, with a 12px copper rule on the left |
-| `.gx-heading` | Section H2 | Larger leading, plum color, optional copper underline accent (28px wide, 3px tall, rounded) |
-| `.gx-divider` | Between sections | 1px gradient line — transparent → copper/30 → transparent, with a centered tiny diamond glyph |
-| `.gx-figure` | Image wrapper | Soft cream frame (4px), copper-tinted shadow, rounded corners, subtle inner ring |
-| `.gx-quote` | Pull-quote block | Plum vertical rail (3px), serif italic 1.25em, copper opening glyph |
+### Where each class is applied
 
-**Two card upgrades** (additive — opt-in via class, not forced)
+| File | Class added |
+|------|-------------|
+| `src/components/OhioServiceMap.tsx` | `.gx-map` on the iframe wrapper |
+| `src/components/MobileCallButton.tsx` | `.gx-fab` |
+| `src/components/BackToTop.tsx` | `.gx-fab` |
+| `src/components/MagnificentDonateButton.tsx` | `.gx-fab` (when rendered) |
+| `src/components/home/LatestArticles.tsx` | `.gx-feed` on the grid container |
+| `src/components/ui/dialog.tsx` | `.gx-dialog` baked into `DialogContent` className |
+| `src/components/ui/alert-dialog.tsx` | `.gx-dialog` baked into `AlertDialogContent` className |
+| `src/components/ui/accordion.tsx` | `.gx-accordion` baked into `AccordionItem` and `AccordionTrigger` |
+| `src/components/HeroCarousel.tsx` (body slides only, not hero overlay) | `.gx-carousel` on the dot indicator container |
+| `src/pages/Resources.tsx`, `Portfolio.tsx` | `.gx-gallery` on image grid wrappers |
 
-| Class | Role |
-|-------|------|
-| `.gx-card-elevated` | Adds layered shadow stack (3 stops) + 1px copper-on-hover ring + 4px hover lift |
-| `.gx-card-tile` | Adds top-left corner copper accent (8x8px L-shape) for editorial feel |
+### Visual specifics
 
-**Background graphic accents** (decorative, `pointer-events: none`, behind content)
-
-| Class | Role |
-|-------|------|
-| `.gx-bg-noise` | 2% SVG grain overlay — magazine paper texture |
-| `.gx-bg-rule` | Faint horizontal hairlines at 8px intervals (0.03 opacity) for editorial grid |
-| `.gx-bg-corner-mark` | Tiny copper L-bracket in top-right of section (decorative) |
-
-### Where it's applied
-
-A targeted className sweep across body sections only. Heroes, footer, dashboards, auth, and admin are excluded.
-
-| File | Treatment |
-|------|-----------|
-| `src/components/home/HomeStorySections.tsx` | Add `gx-eyebrow` + `gx-heading` to story headings, `gx-figure` to images |
-| `src/components/home/FAQPreview.tsx` | Wrap in `gx-section`, add `gx-divider` above |
-| `src/components/home/LatestArticles.tsx` | `gx-card-elevated` on article tiles, `gx-figure` on covers |
-| `src/components/AnswerSummary.tsx` | `gx-quote` styling |
-| `src/pages/About.tsx` | `gx-eyebrow` + `gx-heading` on each section, `gx-figure` on team imagery, `gx-divider` between sections |
-| `src/pages/Training.tsx` | `gx-eyebrow` on section labels, `gx-card-elevated` on instructor cards |
-| `src/pages/Business.tsx` | `gx-eyebrow` + `gx-heading`, `gx-card-tile` on service tiles |
-| `src/pages/Resources.tsx` | `gx-figure` on book covers, `gx-divider` between shelves |
-| `src/pages/Articles.tsx` + `ArticleDetail.tsx` | `gx-quote` for pull-quotes, `gx-figure` for hero images of articles |
-| `src/pages/FAQ.tsx`, `Contact.tsx`, `Careers.tsx`, `Partners.tsx`, `Portfolio.tsx`, `Events.tsx` | `gx-section` + `gx-eyebrow` + `gx-heading` pass |
-| `src/components/ExpandableServiceCard.tsx` | `gx-card-elevated` |
-| `src/components/TestimonialCard.tsx` | `gx-quote` styling for body |
-| `src/components/TrustedTechLogos.tsx` | `gx-bg-rule` background |
-
-### CSS file plan
-
-```text
-NEW   src/styles/graphic-enhancement.css      (~220 lines — all gx-* primitives)
-EDIT  src/index.css                           (1 line — import new file after polish.css)
-EDIT  ~14 component/page files                (className additions only — no JSX changes)
-```
-
-### Distinguishability checklist
-
-- Section headings now read with copper eyebrow + plum H2 + copper underline accent (3-tier hierarchy)
-- Cards opt into elevated or tile variants — not forced, no regressions
-- Images get a unified editorial frame across the site
-- Section transitions use the `gx-divider` glyph for premium pacing
-- Pull-quotes get serif italic treatment for editorial weight
-- All decorative accents are behind content, `pointer-events: none`
+- **Map**: cream 4px frame, `box-shadow: 0 8px 28px -10px rgba(90,42,90,0.22)`, inner copper ring at 0.18 opacity, top-right corner L-bracket
+- **FAB halo**: `box-shadow: 0 0 0 4px rgba(217,108,74,0.10), 0 8px 22px -8px rgba(217,108,74,0.35)`, hover scale 1.04, soft 2.4s pulse using existing keyframes
+- **Dialog**: 3px copper bar pinned to top, 16px corner radius, layered shadow `0 24px 48px -16px rgba(26,19,32,0.18)`, cream background reinforced
+- **Accordion open state**: 3px copper left rail slides in (200ms), background tints to `rgba(217,108,74,0.04)`, heading color shifts plum
+- **Carousel dots**: copper filled active, plum/30 idle, 8px size with 200ms morph
+- **Gallery**: every direct child `<img>` or `<a>` gets the `.gx-figure` styling via descendant selector
 
 ### Constraints respected
 
-- Heroes — untouched (no edits to `Hero*.tsx` or `hero-*.css`)
-- Footer — untouched
-- Auth, Admin, Portal — untouched
-- No color token changes — uses existing copper `#d96c4a`, plum `#5a2a5a`, cream `--background`
-- No `transition: all`, no framer-motion
-- No `backdrop-filter` (none of the new utilities use it)
-- Honors `zoom: 0.75` root scaling
-- No em-dashes, no semicolons in copy
-- Existing `.stroke-glass`, `.pay-card`, `.hss-card`, `.ambient-vibrance-bg` systems untouched
-- Touch targets ≥44px on mobile preserved
-- No JSX restructuring, no prop changes, no logic, no new components
-- Honors `prefers-reduced-motion` (lift/glow disabled)
+- No JSX restructuring beyond className additions on three `ui/*` primitives (dialog, alert-dialog, accordion)
+- No new components, no logic, no props, no dependencies
+- No color token changes — uses existing copper `#d96c4a`, plum `#5a2a5a`, cream
+- No `transition: all`, no framer-motion, no `backdrop-filter`
+- Honors `prefers-reduced-motion` (pulse + lift disabled)
+- Honors `zoom: 0.75`, mobile touch targets ≥44px preserved
+- Heroes (`Hero*.tsx`, `hero-*.css`), Footer, Auth, Admin, Portal — untouched
+- Existing `.stroke-glass`, `.pay-card`, `.hss-card`, `.gx-card-elevated`, `.ambient-vibrance-bg` systems untouched
+
+### Files touched
+
+```text
+EDIT  src/styles/graphic-enhancement.css     (~190 lines appended)
+EDIT  src/components/OhioServiceMap.tsx      (1 className)
+EDIT  src/components/MobileCallButton.tsx    (1 className)
+EDIT  src/components/BackToTop.tsx           (1 className)
+EDIT  src/components/ui/dialog.tsx           (1 className addition to DialogContent)
+EDIT  src/components/ui/alert-dialog.tsx     (1 className addition to AlertDialogContent)
+EDIT  src/components/ui/accordion.tsx        (2 className additions)
+EDIT  src/components/HeroCarousel.tsx        (dot container only, hero visuals untouched)
+EDIT  src/components/home/LatestArticles.tsx (1 className on grid)
+EDIT  src/pages/Resources.tsx                (1 className on gallery wrapper)
+EDIT  src/pages/Portfolio.tsx                (1 className on gallery wrapper)
+```
 
 ### Out of scope
 
-- Hero components and hero CSS
-- Footer
-- Auth, Admin, Portal pages
-- Color palette, fonts, typography tokens
-- Tailwind config
+- Hero components and hero CSS (only the carousel dot indicator container, which is non-hero chrome, is touched on `HeroCarousel`)
+- Footer, Auth, Admin, Portal pages
+- Color palette, typography tokens, Tailwind config
 - New components, new logic, new dependencies
 - Database, edge functions, routes
+- Pre-existing TypeScript build errors
 
 ### Estimated diff
 
-~220 lines new CSS + ~80 className tweaks across ~14 files. Zero deletions of working content.
+~190 lines new CSS + ~12 className additions across ~10 files. Zero deletions.
 
