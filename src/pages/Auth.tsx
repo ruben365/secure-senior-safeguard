@@ -511,9 +511,22 @@ function Auth() {
     </div>
   );
 
-  // Premium input style — warm glass surface, copper focus ring (Neo-Tactile)
+  // Soft Daylight input style
   const inputClassName =
-    "input-vibe h-11 pl-10 text-[14px] text-foreground placeholder:text-slate-400 transition-all";
+    "input-daylight pl-10 text-[14px] text-slate-900 placeholder:text-slate-400";
+
+  // Shared daylight background block (used across all auth screens)
+  const DaylightBackground = () => (
+    <div aria-hidden="true" className="auth-bg-daylight">
+      <div className="auth-hairline-top" />
+      <span className="auth-orb auth-orb--terracotta" style={{ width: 520, height: 520, top: "-10%", left: "-12%" }} />
+      <span className="auth-orb auth-orb--lavender" style={{ width: 460, height: 460, bottom: "-8%", right: "-10%", animationDelay: "-9s" }} />
+      <span className="auth-orb auth-orb--amber hidden md:block" style={{ width: 360, height: 360, top: "55%", left: "55%", animationDelay: "-15s", opacity: 0.4 }} />
+      <span className="auth-ray hidden md:block" style={{ left: "30%" }} />
+      <span className="auth-ray auth-ray--2 hidden md:block" style={{ left: "70%" }} />
+      <div className="auth-hairline-bottom" />
+    </div>
+  );
 
   if (signupSuccess) {
     return (
@@ -521,18 +534,13 @@ function Auth() {
         className="w-full relative flex items-center justify-center p-5 md:p-8 font-sans antialiased"
         style={{ minHeight: "100vh" }}
       >
-        <div aria-hidden="true" className="auth-bg-aurora">
-          <span className="vibe-orb vibe-orb--lg vibe-orb--coral" style={{ top: "8%", left: "-6%" }} />
-          <span className="vibe-orb vibe-orb--md vibe-orb--lavender" style={{ bottom: "10%", right: "-4%", animationDelay: "-10s" }} />
-          <span className="vibe-orb vibe-orb--md vibe-orb--peach" style={{ top: "60%", left: "55%", animationDelay: "-16s", opacity: 0.35 }} />
-        </div>
-
+        <DaylightBackground />
         <div className="relative z-10 w-full max-w-[440px]">
-          <div aria-hidden="true" className="auth-glow-ring" />
-          <div className="auth-card-vibe text-center">
+          <div className="auth-card-daylight text-center">
+            <div className="auth-card-accent auth-card-accent--emerald" />
             <div className="relative w-14 h-14 mx-auto mb-5">
-              <div className="absolute inset-0 rounded-2xl bg-emerald-500/30 blur-xl animate-pulse" />
-              <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-[0_12px_28px_-8px_rgba(16,185,129,0.55),inset_0_1px_0_0_rgba(255,255,255,0.4)] border border-white/30">
+              <div className="absolute inset-0 rounded-2xl bg-emerald-500/20 blur-xl" />
+              <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-[0_12px_28px_-8px_rgba(16,185,129,0.45),inset_0_1px_0_0_rgba(255,255,255,0.4)] border border-white/30">
                 <CheckCircle2 className="w-7 h-7 text-white" strokeWidth={2.25} />
               </div>
             </div>
@@ -549,7 +557,7 @@ function Auth() {
                 setSignupSuccess(false);
                 setActiveTab("login");
               }}
-              className="w-full h-11"
+              className="auth-cta-primary"
             >
               Back to Sign In
             </Button>
@@ -559,20 +567,17 @@ function Auth() {
     );
   }
 
-  // MFA verification screen — shown after password login when 2FA is enrolled
+  // MFA verification screen
   if (showMfaVerify) {
     return (
       <div
         className="w-full relative flex items-center justify-center p-5 md:p-8 font-sans antialiased"
         style={{ minHeight: "100vh" }}
       >
-        <div aria-hidden="true" className="auth-bg-aurora">
-          <span className="vibe-orb vibe-orb--lg vibe-orb--peach" style={{ top: "10%", left: "-5%" }} />
-          <span className="vibe-orb vibe-orb--md vibe-orb--lavender" style={{ bottom: "8%", right: "-4%", animationDelay: "-12s" }} />
-        </div>
+        <DaylightBackground />
         <div className="relative z-10 w-full max-w-[440px]">
-          <div aria-hidden="true" className="auth-glow-ring" />
-          <div className="auth-card-vibe">
+          <div className="auth-card-daylight">
+            <div className="auth-card-accent auth-card-accent--amber" />
             <TwoFactorVerify
               onVerified={() => {
                 setShowMfaVerify(false);
@@ -589,20 +594,17 @@ function Auth() {
     );
   }
 
-  // Password reset screen — shown when user clicks the email reset link
+  // Password reset screen
   if (showPasswordReset) {
     return (
       <div
         className="w-full relative flex items-center justify-center p-5 md:p-8 font-sans antialiased"
         style={{ minHeight: "100vh" }}
       >
-        <div aria-hidden="true" className="auth-bg-aurora">
-          <span className="vibe-orb vibe-orb--lg vibe-orb--mint" style={{ top: "8%", left: "-5%" }} />
-          <span className="vibe-orb vibe-orb--md vibe-orb--lavender" style={{ bottom: "10%", right: "-4%", animationDelay: "-14s" }} />
-        </div>
+        <DaylightBackground />
         <div className="relative z-10 w-full max-w-[440px]">
-          <div aria-hidden="true" className="auth-glow-ring" />
-          <div className="auth-card-vibe">
+          <div className="auth-card-daylight">
+            <div className="auth-card-accent auth-card-accent--lavender" />
             <PasswordResetForm
               onComplete={() => {
                 setShowPasswordReset(false);
@@ -627,65 +629,27 @@ function Auth() {
         noindex
       />
 
-      {/*
-        ═══════════════════════════════════════════════════════════════
-        PREMIUM BACKGROUND — Vibrance v2 midnight aurora
-        ═══════════════════════════════════════════════════════════════
-        Layered: deep ink-blue → plum → indigo mesh, drifting orbs
-        (coral, lavender, amber), violet center column, fine dot
-        grid, grain noise overlay, and a thin brand hairline.
-      */}
-      <div aria-hidden="true" className="auth-bg-aurora">
-        {/* Drifting aurora orbs */}
-        <span className="vibe-orb vibe-orb--xl vibe-orb--coral" style={{ top: "-8%", left: "-8%" }} />
-        <span className="vibe-orb vibe-orb--lg vibe-orb--lavender" style={{ bottom: "-6%", right: "-6%", animationDelay: "-10s" }} />
-        <span className="vibe-orb vibe-orb--md vibe-orb--peach" style={{ top: "55%", left: "48%", animationDelay: "-18s", opacity: 0.4 }} />
+      {/* SOFT DAYLIGHT BACKGROUND */}
+      <DaylightBackground />
 
-        {/* Fine dot grid texture */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.04]">
-          <defs>
-            <pattern id="auth-dots" x="0" y="0" width="26" height="26" patternUnits="userSpaceOnUse">
-              <circle cx="1" cy="1" r="1" fill="#ffffff" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#auth-dots)" />
-        </svg>
+      {/* Single-column centered layout */}
+      <div className="relative z-10 w-full max-w-[480px] mx-auto flex flex-col items-center justify-center p-4 md:p-6 lg:p-8">
+        <div className="w-full relative">
+          <div className="auth-card-daylight relative">
+            <div className="auth-card-accent" />
 
-        {/* Soft vignette tightened around the card */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse 45% 40% at 60% 50%, transparent 0%, rgba(8, 10, 28, 0.4) 90%)",
-          }}
-        />
-
-        {/* Thin brand hairline at the very top */}
-        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-orange-400/50 to-transparent" />
-      </div>
-
-      {/*
-        ─── TWO-PANE LAYOUT ────────────────────────────────────────
-        LEFT (lg+ only): brand storytelling — logo, tagline, three
-        trust points, a quiet decorative shield illustration.
-        RIGHT: the clean white auth card with the existing form.
-      */}
-      <div className="relative z-10 w-full max-w-[960px] mx-auto flex items-center justify-center p-4 md:p-6 lg:p-8">
-        <div className="w-full grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-8 lg:gap-14 items-center">
-
-          {/* LEFT — brand pane (desktop only) */}
-          <aside className="hidden lg:flex flex-col text-white pr-2">
+            {/* Centered brand mark */}
             <Link
               to="/"
-              className="inline-flex items-center gap-3 mb-14 group w-fit"
+              className="flex items-center justify-center gap-3 mb-5 group"
             >
               <div className="relative">
-                <div className="absolute inset-0 rounded-2xl bg-orange-500/20 blur-xl group-hover:bg-orange-500/30 transition-colors" />
-                <div className="relative w-12 h-12 rounded-2xl bg-white/[0.06] border border-white/15 backdrop-blur-sm flex items-center justify-center">
+                <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-orange-400/40 to-amber-300/30 blur-md" />
+                <div className="relative w-12 h-12 rounded-2xl bg-white border border-orange-200 flex items-center justify-center shadow-[0_4px_12px_-2px_hsl(20_60%_40%/0.15)]">
                   <img
                     src={invisionLogo}
                     alt="InVision Network"
-                    className="w-7 h-7 brightness-0 invert drop-shadow-md"
+                    className="w-7 h-7"
                     loading="eager"
                     decoding="sync"
                     width={28}
@@ -694,167 +658,80 @@ function Auth() {
                 </div>
               </div>
               <div className="flex flex-col leading-tight">
-                <span className="text-[15px] font-bold text-white tracking-tight">
+                <span className="text-[15px] font-bold text-slate-900 tracking-tight">
                   InVision Network
                 </span>
-                <span className="text-[10px] font-medium text-white/55 tracking-[0.15em] uppercase mt-0.5">
-                  Secure Member Portal
+                <span className="text-[10px] font-medium text-slate-500 tracking-[0.18em] uppercase mt-0.5">
+                  Your Secure Portal
                 </span>
               </div>
             </Link>
 
-            <h1 className="text-[2.25rem] xl:text-[2.625rem] font-bold text-white leading-[1.08] tracking-tight mb-5">
-              Welcome back to a{" "}
-              <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-orange-400 bg-clip-text text-transparent">
-                quieter
-              </span>
-              ,<br />
-              safer digital life.
-            </h1>
-            <p className="text-white/65 text-base leading-relaxed mb-10 max-w-md">
-              Sign in to access your training, monitoring dashboard, bookings,
-              and family protection settings — all in one place.
-            </p>
-
-            <ul className="space-y-4 mb-10 max-w-md">
-              {[
-                {
-                  title: "End-to-end encrypted",
-                  body: "256-bit encryption on every session, every request.",
-                },
-                {
-                  title: "Kettering-based humans",
-                  body: "Real support from real people when something goes wrong.",
-                },
-                {
-                  title: "Private by design",
-                  body: "We never sell your data. We never share it. We protect it.",
-                },
-              ].map((f) => (
-                <li key={f.title} className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-md bg-gradient-to-br from-orange-400/25 to-orange-500/15 border border-orange-400/30 flex items-center justify-center mt-0.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-orange-300" strokeWidth={2.25} />
-                  </div>
-                  <div>
-                    <div className="text-white text-sm font-semibold">
-                      {f.title}
-                    </div>
-                    <div className="text-white/55 text-[13px] leading-relaxed">
-                      {f.body}
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-
-            <div className="flex items-center gap-3 text-xs text-white/50">
-              <ShieldCheck className="w-4 h-4 text-white/60" />
-              <span>Trusted by 500+ families across Ohio</span>
+            {/* Page heading */}
+            <div className="mb-5 text-center">
+              <h2 className="text-[1.5rem] md:text-[1.625rem] font-bold text-slate-900 leading-tight tracking-tight">
+                Welcome back
+              </h2>
+              <p className="text-[13px] text-slate-500 mt-1">
+                Sign in or create an account to continue.
+              </p>
             </div>
-          </aside>
 
-          {/* RIGHT — premium auth card */}
-          <div className="w-full max-w-[460px] mx-auto lg:mx-0 relative">
-            {/* Dual-aurora glow ring — sits behind the card */}
-            <div aria-hidden="true" className="auth-glow-ring" />
-
-            <div className="auth-card-vibe relative">
-
-              {/* Mobile logo (desktop shows it in the left pane) */}
-              <Link
-                to="/"
-                className="flex lg:hidden items-center justify-center gap-3 mb-6 group"
+            {/* OAuth Buttons — Soft Daylight SSO */}
+            <div className="space-y-3 mb-5">
+              <Button
+                type="button"
+                variant="outline"
+                className="btn-sso-daylight w-full text-[14px]"
+                onClick={handleGoogleSignIn}
               >
-                <img
-                  src={invisionLogo}
-                  alt="InVision Network"
-                  className="w-10 h-10 drop-shadow-sm"
-                  loading="eager"
-                  decoding="sync"
-                  width={40}
-                  height={40}
-                />
-                <div className="flex flex-col leading-tight">
-                  <span className="text-base font-bold text-slate-900 tracking-tight">
-                    InVision Network
-                  </span>
-                  <span className="text-[10px] text-slate-500 tracking-[0.12em] uppercase">
-                    Secure Portal
-                  </span>
-                </div>
-              </Link>
+                <svg className="w-5 h-5 mr-3 flex-shrink-0" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                </svg>
+                Continue with Google
+              </Button>
 
-              {/* Page heading */}
-              <div className="mb-5 text-center">
-                <h2 className="text-[1.5rem] md:text-[1.625rem] font-bold text-slate-900 leading-tight tracking-tight">
-                  Welcome to InVision Network
-                </h2>
-                <p className="text-[13px] text-slate-500 mt-1">
-                  Sign in or create an account to get started.
-                </p>
-              </div>
+              <Button
+                type="button"
+                variant="outline"
+                className="btn-sso-daylight w-full text-[14px]"
+                onClick={handleMicrosoftSignIn}
+              >
+                <svg className="w-5 h-5 mr-3 flex-shrink-0" viewBox="0 0 23 23">
+                  <path fill="#f35325" d="M1 1h10v10H1z" />
+                  <path fill="#81bc06" d="M12 1h10v10H12z" />
+                  <path fill="#05a6f0" d="M1 12h10v10H1z" />
+                  <path fill="#ffba08" d="M12 12h10v10H12z" />
+                </svg>
+                Continue with Microsoft
+              </Button>
+            </div>
 
-              {/* OAuth Buttons — premium glass SSO */}
-              <div className="space-y-3 mb-5">
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="btn-sso-vibe w-full h-12 text-[14px]"
-                  onClick={handleGoogleSignIn}
+            {/* Divider — warm gradient hairline + cream pill */}
+            <div className="auth-divider-warm mb-5">
+              <span>or continue with email</span>
+            </div>
+
+            <Tabs
+              value={activeTab}
+              onValueChange={setActiveTab}
+              className="w-full"
+            >
+              <TabsList className="auth-tabs-warm grid w-full grid-cols-2 mb-6">
+                <TabsTrigger
+                  value="login"
+                  className="rounded-md transition-all"
                 >
-                  <svg className="w-5 h-5 mr-3 flex-shrink-0" viewBox="0 0 24 24">
-                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                  </svg>
-                  Continue with Google
-                </Button>
-
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="btn-sso-vibe w-full h-12 text-[14px]"
-                  onClick={handleMicrosoftSignIn}
+                  Sign In
+                </TabsTrigger>
+                <TabsTrigger
+                  value="signup"
+                  className="rounded-md transition-all"
                 >
-                  <svg className="w-5 h-5 mr-3 flex-shrink-0" viewBox="0 0 23 23">
-                    <path fill="#f35325" d="M1 1h10v10H1z" />
-                    <path fill="#81bc06" d="M12 1h10v10H12z" />
-                    <path fill="#05a6f0" d="M1 12h10v10H1z" />
-                    <path fill="#ffba08" d="M12 12h10v10H12z" />
-                  </svg>
-                  Continue with Microsoft
-                </Button>
-              </div>
 
-              {/* Divider — gradient hairline + glass pill */}
-              <div className="relative mb-5">
-                <div className="absolute inset-0 flex items-center">
-                  <span className="w-full h-px bg-gradient-to-r from-transparent via-orange-300/40 to-transparent" />
-                </div>
-                <div className="relative flex justify-center">
-                  <span className="vibe-pill-badge text-[10px] uppercase tracking-[0.14em] text-slate-500">
-                    or continue with email
-                  </span>
-                </div>
-              </div>
-
-          <Tabs
-            value={activeTab}
-            onValueChange={setActiveTab}
-            className="w-full"
-          >
-            <TabsList className="grid w-full grid-cols-2 mb-6 bg-gradient-to-br from-orange-50/60 via-slate-50 to-purple-50/40 border border-slate-200/70 rounded-xl p-1">
-              <TabsTrigger
-                value="login"
-                className="rounded-lg data-[state=active]:bg-gradient-to-b data-[state=active]:from-white data-[state=active]:to-orange-50/40 data-[state=active]:shadow-[0_1px_0_rgba(255,255,255,0.9)_inset,0_2px_8px_-2px_rgba(217,108,74,0.18)] data-[state=active]:text-slate-900 text-slate-500 transition-all"
-              >
-                Sign In
-              </TabsTrigger>
-              <TabsTrigger
-                value="signup"
-                className="rounded-lg data-[state=active]:bg-gradient-to-b data-[state=active]:from-white data-[state=active]:to-orange-50/40 data-[state=active]:shadow-[0_1px_0_rgba(255,255,255,0.9)_inset,0_2px_8px_-2px_rgba(217,108,74,0.18)] data-[state=active]:text-slate-900 text-slate-500 transition-all"
-              >
                 Sign Up
               </TabsTrigger>
             </TabsList>
@@ -960,7 +837,7 @@ function Auth() {
 
                 <Button
                   type="submit"
-                  className="w-full h-10 text-[14px] font-semibold rounded-lg bg-[#080d1a] text-white border border-[#1e293b] hover:bg-[#111827] hover:-translate-y-[1px] active:translate-y-[0.5px] transition-all duration-200"
+                  className="auth-cta-primary"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -971,7 +848,7 @@ function Auth() {
                   ) : (
                     <>
                       Sign In
-                      <ArrowRight className="ml-2 w-4 h-4" />
+                      <ArrowRight className="ml-2 w-4 h-4 auth-cta-arrow" />
                     </>
                   )}
                 </Button>
@@ -1156,7 +1033,7 @@ function Auth() {
 
                 <Button
                   type="submit"
-                  className="w-full h-10 text-[14px] font-semibold rounded-lg bg-[#080d1a] text-white border border-[#1e293b] hover:bg-[#111827] hover:-translate-y-[1px] active:translate-y-[0.5px] transition-all duration-200"
+                  className="auth-cta-primary"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -1167,7 +1044,7 @@ function Auth() {
                   ) : (
                     <>
                       Create Account
-                      <ArrowRight className="ml-2 w-4 h-4" />
+                      <ArrowRight className="ml-2 w-4 h-4 auth-cta-arrow" />
                     </>
                   )}
                 </Button>
@@ -1182,45 +1059,54 @@ function Auth() {
               </form>
             </TabsContent>
           </Tabs>
-            </div>
-            {/* /card */}
 
-            {/* Apply link — restyled for dark backdrop */}
-            <div className="mt-6 text-center">
-              <Link
-                to="/careers"
-                className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
-              >
-                Want to join our team?{" "}
-                <span className="text-orange-300 font-semibold">Apply here</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-
-            {/* Bottom legal links — restyled for dark backdrop */}
-            <div className="mt-3 flex items-center justify-center gap-3 text-[11px] text-white/45">
-              <Link
-                to="/privacy-policy"
-                className="hover:text-white/80 transition-colors"
-              >
-                Privacy Policy
-              </Link>
-              <span className="text-white/25">•</span>
-              <Link
-                to="/terms-of-service"
-                className="hover:text-white/80 transition-colors"
-              >
-                Terms of Service
-              </Link>
-              <span className="text-white/25">•</span>
-              <span>© {new Date().getFullYear()} InVision Network</span>
+            {/* Trust footer chips */}
+            <div className="mt-6 grid grid-cols-3 gap-2">
+              {[
+                { icon: ShieldCheck, label: "Encrypted" },
+                { icon: CheckCircle2, label: "Kettering team" },
+                { icon: Lock, label: "Private" },
+              ].map(({ icon: Icon, label }) => (
+                <div
+                  key={label}
+                  className="flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg bg-[hsl(35_40%_97%)] border border-[hsl(28_25%_88%)] text-[11px] text-slate-600 font-medium"
+                >
+                  <Icon className="w-3.5 h-3.5 text-[hsl(20_70%_50%)]" />
+                  <span>{label}</span>
+                </div>
+              ))}
             </div>
           </div>
-          {/* /right auth card column */}
+          {/* /card */}
+
+          {/* Apply link */}
+          <div className="mt-6 text-center">
+            <Link
+              to="/careers"
+              className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 transition-colors"
+            >
+              Want to join our team?{" "}
+              <span className="text-[hsl(20_75%_45%)] font-semibold">Apply here</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+
+          {/* Bottom legal links */}
+          <div className="mt-3 flex items-center justify-center gap-3 text-[11px] text-slate-500">
+            <Link to="/privacy-policy" className="hover:text-slate-800 transition-colors">
+              Privacy Policy
+            </Link>
+            <span className="text-slate-300">•</span>
+            <Link to="/terms-of-service" className="hover:text-slate-800 transition-colors">
+              Terms of Service
+            </Link>
+            <span className="text-slate-300">•</span>
+            <span>© {new Date().getFullYear()} InVision Network</span>
+          </div>
         </div>
-        {/* /grid */}
+        {/* /inner wrapper */}
       </div>
-      {/* /max-w-[1100px] */}
+      {/* /max-w-[480px] */}
 
       <ForgotPasswordModal
         open={showForgotPassword}
