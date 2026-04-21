@@ -4,6 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { HeroHomepage } from "@/components/HeroHomepage";
 import HomeStorySections from "@/components/home/HomeStorySections";
+import EnterpriseBentoSection from "@/components/home/EnterpriseBentoSection";
 import { ScamShieldSubmission } from "@/components/ScamShieldSubmission";
 import { PageTransition } from "@/components/PageTransition";
 import { Button } from "@/components/ui/button";
@@ -79,6 +80,9 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
           >
             <HomeStorySections />
           </section>
+
+          {/* 2.5 Enterprise Bento */}
+          <EnterpriseBentoSection />
 
           {/* 3. FAQ */}
           <div className="hss-root relative isolate bg-[#fdfaf8]">
