@@ -141,7 +141,6 @@ export const SmartCommandCenter = ({
 
   // Initialize speech recognition
   useEffect(() => {
-    if (
     const w = typeof window !== "undefined" ? (window as Window) : null;
     if (
       w &&
