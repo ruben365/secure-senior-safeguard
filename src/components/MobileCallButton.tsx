@@ -7,7 +7,7 @@ const MobileCallButton = forwardRef<HTMLAnchorElement>((_props, ref) => {
     <a
       ref={ref}
       href={SITE.phone.tel}
-      className="fixed bottom-4 left-1/2 -translate-x-1/2 z-fab md:hidden flex items-center justify-center gap-2 py-1.5 px-5 rounded-full shadow-md shadow-orange-500/25 hover:shadow-lg transition-all font-bold text-xs text-white bg-gradient-to-br from-[#e07b52] to-[#d96c4a]"
+      className="gx-fab fixed bottom-4 left-1/2 -translate-x-1/2 z-fab md:hidden flex items-center justify-center gap-2 py-1.5 px-5 rounded-full font-bold text-xs text-white bg-gradient-to-br from-[#e07b52] to-[#d96c4a]"
       style={{ width: "260px", maxWidth: "260px", boxSizing: "border-box" }}
       aria-label={`Call Now: ${SITE.phone.display}`}
     >

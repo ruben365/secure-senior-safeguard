@@ -23,7 +23,7 @@ export function OhioServiceMap() {
 
         {/* Full-width Google Maps Embed */}
         <div className="w-full">
-          <div className="relative w-full aspect-[21/9] md:aspect-[3/1] lg:aspect-[4/1] border-y-2 border-primary/20 overflow-hidden">
+          <div className="gx-map relative w-full aspect-[21/9] md:aspect-[3/1] lg:aspect-[4/1] border-y-2 border-primary/20 overflow-hidden">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1489535.8524929!2d-83.5!3d40.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8836e97ab7aeb4c9%3A0x9423c880d8d6dbc0!2sOhio!5e0!3m2!1sen!2sus!4v1234567890"
               width="100%"

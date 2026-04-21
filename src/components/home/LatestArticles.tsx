@@ -38,7 +38,7 @@ export function LatestArticles() {
         </div>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="gx-feed grid md:grid-cols-3 gap-6">
           {articles.map((article) => {
             const date = article.published_at || article.created_at;
             const readMin = Math.max(1, Math.ceil((article.content?.length || 0) / 1000));

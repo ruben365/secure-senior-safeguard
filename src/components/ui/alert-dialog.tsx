@@ -38,7 +38,7 @@ const AlertDialogContent = React.forwardRef<
       ref={ref}
       className={cn(
         // Compact confirmation dialog — 420px max, tight padding
-        "fixed left-[50%] top-[50%] z-50 grid w-[92%] sm:w-full max-w-[420px] max-h-[85vh] overflow-y-auto translate-x-[-50%] translate-y-[-50%] gap-2.5 border border-border/60 bg-background/97 backdrop-blur-2xl p-4 sm:p-5 rounded-2xl shadow-[0_20px_60px_-20px_rgba(15,23,42,0.28),0_8px_20px_-8px_rgba(15,23,42,0.12),0_0_0_1px_rgba(255,255,255,0.04),inset_0_1px_0_0_rgba(255,255,255,0.6)] duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
+        "gx-dialog fixed left-[50%] top-[50%] z-50 grid w-[92%] sm:w-full max-w-[420px] max-h-[85vh] overflow-y-auto translate-x-[-50%] translate-y-[-50%] gap-2.5 border border-border/60 bg-background/97 backdrop-blur-2xl p-4 sm:p-5 rounded-2xl shadow-[0_20px_60px_-20px_rgba(15,23,42,0.28),0_8px_20px_-8px_rgba(15,23,42,0.12),0_0_0_1px_rgba(255,255,255,0.04),inset_0_1px_0_0_rgba(255,255,255,0.6)] duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
         className,
       )}
       style={{
