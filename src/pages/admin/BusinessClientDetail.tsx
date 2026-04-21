@@ -189,6 +189,7 @@ export default function BusinessClientDetail() {
         </TabsList>
 
         <TabsContent value="overview" className="mt-6">
+          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
           <ClientOverviewTab client={client as any} />
         </TabsContent>
 

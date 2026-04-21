@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -98,7 +98,7 @@ export default function BookEditor() {
   const [autoSlug, setAutoSlug] = useState(isNew);
 
   // Load existing book
-  const { isLoading } = useQuery({
+  const { isLoading, data: bookData } = useQuery({
     queryKey: ["admin-book", id],
     enabled: !isNew,
     queryFn: async () => {
@@ -114,32 +114,35 @@ export default function BookEditor() {
       if (!bookRes.data) throw new Error("Book not found");
       return { book: bookRes.data, chapters: chaptersRes.data ?? [] };
     },
-    ...({
-      onSuccess: ({ book, chapters: chs }: { book: any; chapters: any[] }) => {
-        setForm({
-          title: book.title ?? "",
-          slug: book.slug ?? "",
-          description: book.description ?? "",
-          cover_image: book.cover_image ?? "",
-          total_pages: book.total_pages ?? "",
-          price: book.price ?? "",
-          bulk_price: book.bulk_price ?? "",
-          status: book.status ?? "draft",
-        });
-        setChapters(
-          chs.map((c) => ({
-            id: c.id,
-            chapter_number: c.chapter_number,
-            chapter_title: c.chapter_title ?? "",
-            content_html: c.content_html ?? "",
-            page_start: c.page_start ?? "",
-            page_end: c.page_end ?? "",
-          }))
-        );
-        setAutoSlug(false);
-      },
-    } as any),
   });
+
+  const bookDataInitialized = useRef(false);
+  useEffect(() => {
+    if (!bookData || bookDataInitialized.current) return;
+    bookDataInitialized.current = true;
+    const { book, chapters: chs } = bookData;
+    setForm({
+      title: book.title ?? "",
+      slug: book.slug ?? "",
+      description: book.description ?? "",
+      cover_image: book.cover_image ?? "",
+      total_pages: book.total_pages ?? "",
+      price: book.price ?? "",
+      bulk_price: book.bulk_price ?? "",
+      status: book.status ?? "draft",
+    });
+    setChapters(
+      chs.map((c) => ({
+        id: c.id,
+        chapter_number: c.chapter_number,
+        chapter_title: c.chapter_title ?? "",
+        content_html: c.content_html ?? "",
+        page_start: c.page_start ?? "",
+        page_end: c.page_end ?? "",
+      }))
+    );
+    setAutoSlug(false);
+  }, [bookData]);
 
   // Auto-generate slug from title
   useEffect(() => {

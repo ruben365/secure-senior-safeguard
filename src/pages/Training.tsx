@@ -588,7 +588,7 @@ function LearnAndTrain() {
   ];
 
   const threats = [
-    { icon: Mail, title: "Phishing Emails", description: "Forward suspicious emails for analysis. We check sender authenticity, analyze links, and identify fake logos.", color: "bg-primary/50/10 text-primary" },
+    { icon: Mail, title: "Phishing Emails", description: "Forward suspicious emails for analysis. We check sender authenticity, analyze links, and identify fake logos.", color: "bg-primary/10 text-primary" },
     { icon: MessageSquare, title: "SMS Scams", description: "Screenshot suspicious texts. We trace senders and verify if messages are legitimate.", color: "bg-green-500/10 text-green-600" },
     { icon: Phone, title: "Voice Calls", description: "Describe suspicious calls. We identify voice scam patterns and AI-generated voices.", color: "bg-orange-500/10 text-orange-600" },
     { icon: FileText, title: "Voice Messages", description: "Send voicemails for AI analysis. We detect voice cloning and verify authenticity.", color: "bg-amber-500/10 text-amber-600" },

@@ -484,7 +484,9 @@ export default function TeamAdmin() {
         <AddTeamMemberModal
           isOpen={addModalOpen}
           onClose={handleModalClose}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onAdd={handleAddMember as any}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onUpdate={handleUpdateMember as any}
           nextOrderNumber={teamMembers.length + 1}
           editMember={editingMember}

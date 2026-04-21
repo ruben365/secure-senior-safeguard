@@ -293,7 +293,7 @@ Deno.serve(async (req) => {
                   </div>
                   <p style="color: #555; font-size: 14px;">
                     <strong>How to read your books:</strong><br/>
-                    1. Visit <a href="https://www.invisionnetwork.org/resources">www.invisionnetwork.org/resources</a><br/>
+                    1. Visit <a href="https://www.invisionnetwork.org/library">www.invisionnetwork.org/library</a><br/>
                     2. Click <strong>"Read Your Books"</strong><br/>
                     3. Enter your email and Access ID<br/>
                     4. Start reading

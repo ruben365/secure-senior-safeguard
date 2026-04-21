@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Bell, Megaphone, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -28,26 +28,7 @@ export function AnnouncementBell() {
     }
   });
 
-  useEffect(() => {
-    if (announcementsTableKnownMissing) return;
-    fetchAnnouncements();
-
-    const channel = supabase
-      .channel("public-announcements")
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "announcements" },
-        fetchAnnouncements,
-      )
-      .subscribe();
-
-    return () => {
-      if (retryTimeoutRef.current) clearTimeout(retryTimeoutRef.current);
-      supabase.removeChannel(channel);
-    };
-  }, []);
-
-  const fetchAnnouncements = async () => {
+  const fetchAnnouncements = useCallback(async () => {
     if (announcementsTableKnownMissing) return;
     if (Date.now() < announcementsRetryAfter) return;
     const { data, error } = await supabase
@@ -78,7 +59,26 @@ export function AnnouncementBell() {
       return;
     }
     if (data) setAnnouncements(data);
-  };
+  }, []);
+
+  useEffect(() => {
+    if (announcementsTableKnownMissing) return;
+    fetchAnnouncements();
+
+    const channel = supabase
+      .channel("public-announcements")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "announcements" },
+        fetchAnnouncements,
+      )
+      .subscribe();
+
+    return () => {
+      if (retryTimeoutRef.current) clearTimeout(retryTimeoutRef.current);
+      supabase.removeChannel(channel);
+    };
+  }, [fetchAnnouncements]);
 
   const unreadCount = announcements.filter((a) => !dismissedIds.has(a.id)).length;
 

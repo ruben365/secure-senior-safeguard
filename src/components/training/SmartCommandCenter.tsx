@@ -46,7 +46,7 @@ export const SmartCommandCenter = ({
   const [validationError, setValidationError] = useState<string | null>(null);
   const [isListening, setIsListening] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const recognitionRef = useRef<any>(null);
+  const recognitionRef = useRef<SpeechRecognition | null>(null);
 
   const isProcessing = status === "uploading" || status === "analyzing";
   const isPaying = status === "paying";
