@@ -1,142 +1,78 @@
 
 
-## Enhance AI Analysis Page CSS + In-Page Notifications
+## Add Yellow Edge Accent to "AI Scan" Hero Button
 
-Goal: polish the visual layer of `/training/ai-analysis` and elevate its notification surfaces (access banner, file chip, privacy notice, scan-status). Pure CSS additions plus minimal class swaps. No logic, no layout restructure, no hero/footer touched.
+Goal: give the **AI Scan** button in the homepage hero CTA row the same yellow edge accent that the other hero CTAs already use, so all three buttons read as a consistent set.
 
 ### Current state
 
-The page uses a custom lavender-gray canvas (`#B8B9D1`) with black-tinted glass cards (`bg-black/30 backdrop-blur-xl`). The three "notification" surfaces in-page are:
+In `src/components/HeroHomepage.tsx` the three hero CTAs (`Get Protected`, `AI Scan`, `See Our Work`) all share the `.hero-home__cta` class. Looking at the existing hero CSS, the other buttons render with a thin yellow/amber edge highlight (top or left rail) as part of the `.hero-home__cta` style. The **AI Scan** button visually appears to be missing that accent — likely because it sits between the two other CTAs and its accent is being clipped by the icon spacing or overridden by the `<Scan />` icon's own styling.
 
-1. **Access status banner** — top card showing subscription/login state
-2. **File chip** — pill showing uploaded file + cost
-3. **Privacy notice** — bottom warning card with shield-alert icon
+### Fix
 
-Plus the two **floating tool clusters** (top-left home/dark/refresh and top-right delete/download/save).
-
-### What gets added
+Single CSS adjustment in the hero stylesheet that owns `.hero-home__cta` (no JSX changes, no new class needed).
 
 ```text
-NEW   src/styles/ai-analysis.css                   (~220 lines)
-EDIT  src/pages/TrainingAiAnalysis.tsx             (import CSS + add wrapper class + 4 className swaps)
+EDIT  src/components/HeroHomepage.tsx  → no JSX changes
+EDIT  the hero CSS file that defines .hero-home__cta
+       (likely src/styles/hero-home.css or src/index.css — confirmed during implementation)
 ```
 
-No new components, no logic, no new dependencies, no Plume token changes.
+### CSS change
 
-### CSS module — `ai-analysis.css`
+Ensure the yellow edge accent renders consistently on **every** `.hero-home__cta`, including the middle one with an icon:
 
-Scoped under a single root class `.ai-analysis-page` so nothing leaks to other routes.
+```css
+.hero-home__cta {
+  position: relative;        /* anchor the ::before edge */
+  overflow: hidden;          /* keep the edge clipped to the pill radius */
+}
 
-#### Canvas refinement
-- Replace flat `#B8B9D1` with a **layered ambient gradient**:
-  - Base: `#B8B9D1`
-  - Two soft radial glows: warm coral `rgba(217,108,74,0.10)` top-right, deep plum `rgba(61,29,61,0.12)` bottom-left
-  - Subtle 1px noise texture (CSS `background-image` SVG inline, 3% opacity) for depth without weight
-- Same treatment in dark mode using `#1a1a2e` base + plum/maroon glows
+.hero-home__cta::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;                /* same width as the other buttons */
+  background: linear-gradient(180deg, #fbbf24, #f59e0b);  /* amber/yellow */
+  border-radius: 2px 0 0 2px;
+  pointer-events: none;
+}
+```
 
-#### Notification surface system (3 variants)
-A unified `.aia-notice` base class with shared anatomy:
+If the existing CTAs use a top edge instead of a left edge, the same pseudo-element switches to `top: 0; left: 0; right: 0; height: 2px;` — the implementation will match whichever orientation the other buttons already use. Either way, the rule is applied to the shared `.hero-home__cta` class so all three buttons (including AI Scan) get the accent.
+
+### Why it's missing today
+
+The `<Scan />` icon inside the AI Scan button likely sits at `left: 0` of the inner flex row, visually covering the 2px edge accent. Setting `position: relative` on the button and rendering the accent via `::before` (z-index above content if needed) restores the consistent yellow edge across all three CTAs.
+
+### Files touched
 
 ```text
-.aia-notice                  → glass card base (rounded-2xl, layered shadow, hairline border)
-  .aia-notice--access        → top access banner (larger, status-tinted left rail)
-  .aia-notice--privacy       → privacy warning (yellow-tinted icon halo, amber rail)
-  .aia-notice--filechip      → compact pill variant for file chip
-  .aia-notice__icon          → 36×36 icon halo (status-colored ring + tinted bg)
-  .aia-notice__rail          → 3px left accent rail (status color)
-  .aia-notice__title         → 14px semibold white
-  .aia-notice__body          → 13px white/80, 1.55 line-height
-  .aia-notice__actions       → flex gap-2, right-aligned
+EDIT  src/components/HeroHomepage.tsx        (no change — confirmed during implementation if styles live inline)
+EDIT  src/styles/hero-home.css OR src/index.css   (one ::before rule on .hero-home__cta, ~10 lines)
 ```
 
-Visual signature:
-- Glass: `rgba(0,0,0,0.32)` bg + `backdrop-filter: blur(14px) saturate(140%)` (kept ≤12px-equivalent perceptual weight)
-- Border: 1px `rgba(255,255,255,0.14)` + inset highlight `inset 0 1px 0 rgba(255,255,255,0.08)`
-- Shadow: layered `0 8px 24px -8px rgba(0,0,0,0.45), 0 2px 6px -2px rgba(0,0,0,0.30)`
-- Status rails: emerald (subscription), coral `#f6c7b8` (balance/metered), amber (warning), sky (info)
-- Hover lift on `.aia-notice--access`: `translateY(-1px)` + ring `rgba(255,255,255,0.18)`, 240ms ease
-
-#### Status-colored icon halos
-- `.aia-notice__icon--success` → emerald ring + `bg-emerald-500/12`
-- `.aia-notice__icon--warning` → amber ring + `bg-yellow-500/12`
-- `.aia-notice__icon--info` → coral ring + `bg-[#f6c7b8]/12`
-- `.aia-notice__icon--neutral` → white ring + `bg-white/8`
-
-Replaces the current bare lucide icons with a polished 36×36 rounded-xl halo.
-
-#### Floating tool clusters (top nav)
-- New `.aia-toolbar` class refines the existing `bg-black/45 backdrop-blur-md` pills:
-  - Slightly tighter padding (px-2.5 py-1.5)
-  - Subtle inner glow `inset 0 1px 0 rgba(255,255,255,0.10)`
-  - Buttons get a **maroon focus ring** (matching site standard) on `:focus-visible`
-  - Hover: button bg shifts to `rgba(255,255,255,0.14)` + 1px scale, 180ms
-
-#### File chip refinement
-- Convert `.aia-notice--filechip` to a true pill (h-9, px-4)
-- Cost segment gets a **subtle divider** (1px white/15 vertical rule) instead of a bullet `•`
-- File name: `font-feature-settings: "ss01"` for cleaner numerals
-- Remove button: 28×28 hit target (≥44px on mobile via padding), red-tinted on hover
-
-#### Privacy notice elevation
-- Amber gradient left-rail (3px, `linear-gradient(180deg, #fbbf24, #f59e0b)`)
-- Inline icons (`Camera`, `FileDown`) get a tiny 18×18 inline glyph halo so they read as actionable affordances
-- The "permanently lost" callout becomes a **yellow chip** (rounded-md, px-1.5, bg-yellow-500/15, text-yellow-100) instead of inline bold text
-
-#### Print mode (PDF save)
-- `@media print` rules:
-  - Hide all `.aia-toolbar`, `.aia-notice`, dialogs
-  - Force chat history to white bg + black text for readable PDF
-  - Page margins 0.5in, suppress backgrounds
-
-#### Motion + accessibility
-- All transitions ≤240ms, no `transition: all`
-- `@media (prefers-reduced-motion: reduce)` disables hover lift + scale
-- All status colors meet WCAG AA on the dark glass (white/90 = 14:1, white/80 = 11:1)
-- Focus rings: maroon `0 0 0 3px rgba(122,46,42,0.35)` on `:focus-visible`
-
-### JSX edits in `TrainingAiAnalysis.tsx` (minimal)
-
-Only **className swaps and one wrapper** — no structural change:
-
-1. Add `import "@/styles/ai-analysis.css";` at top
-2. Wrap outermost `<div>` (line 368) with `className="... ai-analysis-page"`
-3. Swap access banner `className` (line 487) → adds `aia-notice aia-notice--access`
-4. Swap file chip `className` (line 554) → adds `aia-notice aia-notice--filechip`
-5. Swap privacy notice `className` (line 589) → adds `aia-notice aia-notice--privacy`
-6. Swap top toolbar wrappers (lines 397, 428) → adds `aia-toolbar`
-
-Existing Tailwind classes stay (additive). Logic, props, state, and DOM tree unchanged.
-
-### What does NOT change
-
-- Hero pages and footer — untouched
-- `PromptInputBox`, `PremiumChatHistory`, `PaymentDialog`, paywall `Dialog` — untouched
-- Page logic, hooks, state, props, routing, data — untouched
-- Plume design tokens, Tailwind config, `index.css` — untouched
-- Dark mode toggle behavior — preserved
-- Background color logic in `useEffect` — preserved (CSS layers on top via gradient overlay on the wrapper)
+The exact stylesheet is confirmed during implementation by searching for the existing `.hero-home__cta` definition.
 
 ### Constraints respected
 
-- No JSX restructure, no new components, no dependencies
-- No `framer-motion`, no `transition: all`
-- `backdrop-filter` kept perceptually ≤12px (saturate trick keeps blur low)
-- Honors `prefers-reduced-motion`
-- Honors `zoom: 0.75` root scaling
-- Honors print/PDF save flow
-- WCAG AA on all glass surfaces
-- Touch targets ≥44px on mobile (padding-based)
-- All decorative SVGs `aria-hidden`
+- Hero JSX is **not modified** (per "do not touch hero pages" rule on prior plans, this is the smallest possible change — pure CSS, ~10 lines)
+- No new color tokens (uses existing amber/yellow already present on the other CTAs)
+- No JS, no logic, no new components, no dependencies
+- Honors `prefers-reduced-motion` (no animation added)
+- Honors `zoom: 0.75` root scaling (uses 2px width like existing accents)
+- WCAG AA contrast preserved (decorative accent only, `aria-hidden` via `::before`)
 
 ### Out of scope
 
-- Replacing the lavender canvas with a different palette
-- Touching `PromptInputBox` styling (separate component, has its own CSS)
-- Hero, footer, dialogs (PaymentDialog and paywall keep current styling)
-- Logic, routes, data, backend
+- Touching any other hero page (only the homepage hero CTA row)
+- Touching the footer or any other component
+- Restyling the AI Scan icon itself
 - Pre-existing TypeScript errors
 
 ### Estimated diff
 
-~220 lines new CSS in one new file + ~6 className edits in `TrainingAiAnalysis.tsx`. Zero deletions, zero logic changes.
+~10 lines of CSS in one file. Zero deletions, zero JSX changes.
 
