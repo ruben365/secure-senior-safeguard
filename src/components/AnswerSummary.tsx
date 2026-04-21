@@ -23,7 +23,7 @@ export function AnswerSummary({
   className = "",
 }: AnswerSummaryProps) {
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative my-2 md:my-3 ${className}`}>
       {/* Full-width dark glass strip */}
       <div
         className="relative overflow-hidden"

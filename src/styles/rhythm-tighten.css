@@ -57,6 +57,26 @@ section:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(foote
   margin-top: 0.5rem;
 }
 
+/* ───── 4b. Clamp legacy rhythm helpers (sec-after-hero, sec-rhythm-*) ───── */
+.sec-after-hero:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) {
+  padding-top: clamp(1rem, 2vw, 2rem) !important;
+}
+.sec-before-footer:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) {
+  padding-bottom: clamp(2rem, 4vw, 3.5rem) !important;
+}
+.sec-rhythm-lg:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) {
+  padding-top: clamp(2.5rem, 5vw, 4rem) !important;
+  padding-bottom: clamp(2.5rem, 5vw, 4rem) !important;
+}
+.sec-rhythm-md:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) {
+  padding-top: clamp(2rem, 4vw, 3.25rem) !important;
+  padding-bottom: clamp(2rem, 4vw, 3.25rem) !important;
+}
+.sec-rhythm-sm:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) {
+  padding-top: clamp(1.5rem, 3vw, 2.5rem) !important;
+  padding-bottom: clamp(1.5rem, 3vw, 2.5rem) !important;
+}
+
 /* ───── 5. Mobile reset — keep tight on small screens ───── */
 @media (max-width: 767px) {
   section[class*="py-24"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *),
