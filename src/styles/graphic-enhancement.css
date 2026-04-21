@@ -370,7 +370,6 @@
 
 /* ─── .gx-fab ─ Floating action button halo ───────────────── */
 .gx-fab {
-  position: relative;
   box-shadow:
     0 0 0 4px rgba(122, 46, 42, 0.12),
     0 8px 22px -8px rgba(122, 46, 42, 0.40),
