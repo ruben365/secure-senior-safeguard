@@ -142,8 +142,8 @@ export const usePortfolioProjects = (filters?: {
       const { data, error } = await q;
       if (error) throw error;
 
-      type RawProject = Omit<PortfolioProject, "category" | "tags"> & { portfolio_categories?: PortfolioCategory | null };
-      let projects = data as RawProject[];
+      type RawProject = Omit<PortfolioProject, "category" | "tags"> & { portfolio_categories?: PortfolioCategory | null; tags?: PortfolioTag[] };
+      let projects = data as unknown as RawProject[];
 
       if (filters?.categorySlug) {
         projects = projects.filter(
@@ -162,7 +162,7 @@ export const usePortfolioProjects = (filters?: {
         const tagMap: Record<string, PortfolioTag[]> = {};
         (ptData || []).forEach((pt) => {
           if (!tagMap[pt.project_id]) tagMap[pt.project_id] = [];
-          tagMap[pt.project_id].push(pt.portfolio_tags);
+          tagMap[pt.project_id].push(pt.portfolio_tags as unknown as PortfolioTag);
         });
 
         projects = projects.map((p) => ({
@@ -173,7 +173,7 @@ export const usePortfolioProjects = (filters?: {
 
         if (filters?.tagSlug) {
           projects = projects.filter((p) =>
-            p.tags.some((t: PortfolioTag) => t.slug === filters.tagSlug)
+            (p.tags ?? []).some((t: PortfolioTag) => t.slug === filters.tagSlug)
           );
         }
       }

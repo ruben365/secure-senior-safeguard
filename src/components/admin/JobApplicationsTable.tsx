@@ -26,6 +26,8 @@ interface JobApplication {
   linkedin_url: string | null;
   resume_url: string | null;
   cover_letter: string | null;
+  availability?: string | null;
+  veteran_document_url?: string | null;
 }
 
 export const JobApplicationsTable = () => {

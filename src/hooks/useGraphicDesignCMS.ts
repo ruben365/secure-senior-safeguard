@@ -101,8 +101,8 @@ export const useGDProjects = (filters?: {
       const { data, error } = await q;
       if (error) throw error;
 
-      type RawProject = Omit<GDProject, "category" | "tags"> & { graphic_design_categories?: GDCategory | null };
-      let projects = data as RawProject[];
+      type RawProject = Omit<GDProject, "category" | "tags"> & { graphic_design_categories?: GDCategory | null; tags?: GDTag[] };
+      let projects = data as unknown as RawProject[];
 
       // Category filter
       if (filters?.categorySlug) {
@@ -122,7 +122,7 @@ export const useGDProjects = (filters?: {
         const tagMap: Record<string, GDTag[]> = {};
         (ptData || []).forEach((pt) => {
           if (!tagMap[pt.project_id]) tagMap[pt.project_id] = [];
-          tagMap[pt.project_id].push(pt.graphic_design_tags);
+          tagMap[pt.project_id].push(pt.graphic_design_tags as unknown as GDTag);
         });
 
         projects = projects.map((p) => ({
@@ -134,7 +134,7 @@ export const useGDProjects = (filters?: {
         // Tag filter
         if (filters?.tagSlug) {
           projects = projects.filter((p) =>
-            p.tags.some((t: GDTag) => t.slug === filters.tagSlug)
+            (p.tags ?? []).some((t: GDTag) => t.slug === filters.tagSlug)
           );
         }
       }
