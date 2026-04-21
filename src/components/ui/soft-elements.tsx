@@ -16,24 +16,36 @@ const SoftCard = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & {
     hover?: boolean;
+    vibrant?: boolean;
   }
->(({ className, hover = true, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "bg-white rounded-3xl p-8",
-      "shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)]",
-      "border border-white/50",
-      hover && [
-        "transition-all duration-400 ease-out",
-        "hover:translate-y-[-8px] hover:scale-[1.02]",
-        "hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12)]",
-      ],
-      className,
-    )}
-    {...props}
-  />
-));
+>(({ className, hover = true, vibrant = false, ...props }, ref) => {
+  if (vibrant) {
+    return (
+      <div
+        ref={ref}
+        className={cn("glass-vibe-card", className)}
+        {...props}
+      />
+    );
+  }
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "bg-white rounded-3xl p-8",
+        "shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)]",
+        "border border-white/50",
+        hover && [
+          "transition-all duration-400 ease-out",
+          "hover:translate-y-[-8px] hover:scale-[1.02]",
+          "hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12)]",
+        ],
+        className,
+      )}
+      {...props}
+    />
+  );
+});
 SoftCard.displayName = "SoftCard";
 
 // Soft Image - Physical photo effect with depth

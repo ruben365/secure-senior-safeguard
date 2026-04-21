@@ -33,6 +33,9 @@
 /* Glassmorphism utility system — imported after unification to override bg */
 @import "./styles/glassmorphism.css";
 
+/* Vibrance v2 — colorful glass overlay system (imported last to win) */
+@import "./styles/vibrance.css";
+
 /* ═══════════════════════════════════════════════════════════════════
    GLOBAL OVERRIDES — no shadows, HD sharpness
    ═══════════════════════════════════════════════════════════════════ */
