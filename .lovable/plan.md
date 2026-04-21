@@ -1,100 +1,103 @@
 
 
-## Auth Login Page — Beautiful Redesign
+## Below-the-Fold Layout & Margin Refinement
 
-Refresh the visual layer of `/auth` with a richer, more luminous aesthetic that aligns with the recently introduced **Vibrance + Glassmorphism v2** system. Pure CSS / className changes — no logic, no form fields, no flow changes.
+Goal: tighten and re-balance the spacing, margins, and content disposition across every section that sits **below the hero and above the footer** sitewide. Pure layout/spacing/typography polish — no new features, no hero touches, no footer touches.
 
-### Goals
-- More vibrant, depth-rich background (aurora-style gradient mesh, animated drifting orbs)
-- Premium glass auth card with iridescent border, layered shimmer, and crisper elevation
-- More elegant SSO buttons, divider, tabs, inputs, and primary CTA
-- Same upgrade applied to the three sibling screens: signup success, MFA verify, password reset
-- Fully respects `prefers-reduced-motion` and existing accessibility
+### Scope
+
+**Touched**
+- Section vertical rhythm (top/bottom padding) on all mid-page sections
+- Container widths and inner gutters
+- Grid column gaps and item spacing on cards, stats, pricing, FAQ, articles
+- Heading-to-body spacing, eyebrow-to-headline rhythm
+- Asymmetric/strategic disposition for visual interest (offset grids, staggered reveals)
+
+**Untouched**
+- All `hero-*` sections and `HeroHomepage`, `HeroBusiness`, `HeroWorkshops`
+- `Footer.tsx` and footer styles
+- Admin / Portal / Auth dashboards
+- Logic, props, routes, data
+
+### Strategy — a unified rhythm system
+
+Introduce three CSS utility scales applied via class additions only. No tokens renamed, no breaking changes.
+
+**1. Section vertical rhythm (`.sec-rhythm-*`)**
+```text
+.sec-rhythm-sm  → py-12  md:py-16  lg:py-20    (compact: FAQ, articles, partners)
+.sec-rhythm-md  → py-16  md:py-24  lg:py-28    (default: most content sections)
+.sec-rhythm-lg  → py-20  md:py-28  lg:py-36    (statement: pricing, story sections)
+```
+
+**2. Container disposition (`.sec-container-*`)**
+```text
+.sec-container-narrow  → max-w-3xl   mx-auto px-5 md:px-8    (text-heavy: FAQ, articles)
+.sec-container-default → max-w-6xl   mx-auto px-5 md:px-8    (most grids)
+.sec-container-wide    → max-w-7xl   mx-auto px-5 md:px-10   (pricing, full grids)
+.sec-container-bleed   → max-w-[1400px] mx-auto px-5 md:px-12 (showcase rows)
+```
+
+**3. Heading rhythm (`.head-rhythm`)**
+```text
+.head-rhythm > .eyebrow + h2     → mt-3
+.head-rhythm > h2                → mb-4 md:mb-5
+.head-rhythm > h2 + p.lede       → mt-4 md:mt-5 max-w-2xl mx-auto
+.head-rhythm                     → mb-12 md:mb-16
+```
+
+### Strategic disposition rules
+
+- **Section breathing**: enforce a minimum 96px gap between consecutive content sections on desktop (currently inconsistent: 48–144px range).
+- **Asymmetric grids**: on 3-column feature rows, offset the middle card by `lg:translate-y-3` for subtle staircase rhythm.
+- **Edge gutters**: bump mobile side-padding from 16px → 20px (more breathing on phones), keep desktop at 32px.
+- **Card grid gaps**: standardize `gap-6 md:gap-8` (was a mix of 4/6/8/10).
+- **Eyebrow → headline → lede** stack: consistent `mt-3 / mb-5 / mt-5` triad everywhere.
+- **CTA bands** (mid-page, not the final hero CTA): center with `max-w-2xl`, `py-16 md:py-20`.
+- **First section after hero**: gains a `pt-20 md:pt-28` start so it does not crowd the hero's bottom edge.
+- **Last section before footer**: gains a `pb-24 md:pb-32` to lift the footer cleanly.
 
 ### Files touched
 
 ```text
-EDIT  src/pages/Auth.tsx              (className-only edits to all 4 screens)
-EDIT  src/styles/vibrance.css         (add ~5 auth-specific helper classes)
+NEW   src/styles/layout-rhythm.css           (~120 lines of utility classes)
+EDIT  src/index.css                          (one @import line, last)
+EDIT  src/pages/Index.tsx                    (className additions on mid sections)
+EDIT  src/pages/About.tsx
+EDIT  src/pages/Business.tsx
+EDIT  src/pages/Services.tsx
+EDIT  src/pages/Training.tsx
+EDIT  src/pages/Portfolio.tsx
+EDIT  src/pages/Contact.tsx
+EDIT  src/pages/Resources.tsx
+EDIT  src/pages/Articles.tsx
+EDIT  src/pages/Events.tsx
+EDIT  src/pages/Partners.tsx
+EDIT  src/pages/Careers.tsx
+EDIT  src/pages/HelpCenter.tsx
+EDIT  src/components/home/HomeStorySections.tsx
+EDIT  src/components/home/FAQPreview.tsx
+EDIT  src/components/home/LatestArticles.tsx
 ```
 
-No new files. No prop signature changes. No logic changes.
+All page edits are pure className additions on existing `<section>` wrappers and inner containers. No JSX restructuring. No prop changes. No logic changes.
 
-### Visual changes
+### Accessibility & responsiveness
 
-**1. Background (all 4 screens — login, signup-success, MFA, password-reset)**
-- Replace the dark navy gradient with a deeper **midnight-aurora mesh**: ink blue → plum → indigo, with three drifting blurred orbs (coral, lavender, amber) using the existing `vibe-orb-drift` keyframe
-- Add a faint top-to-bottom violet glow column behind the card
-- Keep the fine dot grid (texture) and brand hairline strip
-- Add a soft `vibe-grain` noise overlay at 4% opacity for analog warmth
-- Vignette tightened around the card center for stronger focus
-
-**2. Left brand pane (desktop only)**
-- Logo tile gains a conic-gradient iridescent border (coral → amber → lavender)
-- Headline gradient sweep slowed and widened (orange → amber → coral → orange)
-- Trust-point check tiles: switch from flat orange to a `glass-vibe` mini-tile with halo glow
-- Add a thin animated `vibe-divider` hairline above the "Trusted by 500+ families" footer
-
-**3. Auth card (the centerpiece)**
-- Apply new `.auth-card-vibe` wrapper: white surface with **iridescent gradient border** via masked conic-gradient
-- Replace the warm glow ring with a dual-layer aurora glow (coral upper-left + lavender lower-right + amber bottom)
-- Top rim hairline becomes an animated shimmer (subtle 6s sweep)
-- Shadow stack refined: tighter contact shadow + softer ambient far shadow for a true "floating glass" feel
-- Inner subtle linear sheen from top-left to mid
-
-**4. SSO buttons (Google / Microsoft)**
-- New `.btn-sso-vibe` style: white glass surface, soft inner highlight, hover lifts 1px and reveals a faint gradient border ring
-- Icon size unchanged; label weight kept at 600
-
-**5. Divider ("or continue with email")**
-- Hairline becomes a 3-stop gradient (slate → coral 5% → slate)
-- Center pill gets a translucent gradient backdrop and `vibe-pill-badge` styling
-
-**6. Tabs (Sign In / Sign Up)**
-- Active tab gets a soft warm-cream → white gradient with a 1px coral underline accent
-- Inactive tab text-slate-500 with smoother transition
-
-**7. Inputs**
-- New `.input-vibe` style: warm off-white fill, inner top highlight, copper focus ring (matches Neo-Tactile spec), icon color shifts to warm amber on focus
-- Eye toggle button gets a subtle hover background
-
-**8. Primary "Sign In" button**
-- Keep dark plum-ink base but add: subtle inner top highlight, soft amber glow on hover, arrow icon translates 2px right on hover
-- Loading spinner color unchanged
-
-**9. "Forgot password?" link**
-- Gradient text on hover (orange → coral)
-
-**10. Security footer**
-- Shield icon in a tiny gradient circle; thin animated `vibe-divider` hairline above
-
-**11. Sibling screens (signup-success, MFA, password-reset)**
-- Same background system
-- Same `.auth-card-vibe` wrapper with screen-specific accent hue (emerald for success, amber for MFA, emerald for reset)
-- Icon bubbles upgraded with halo glow + iridescent ring
-
-### New CSS helpers added to `src/styles/vibrance.css`
-
-```text
-.auth-bg-aurora        — full-bleed aurora background (used on all 4 screens)
-.auth-card-vibe        — white card with iridescent conic border + 5-layer shadow
-.auth-glow-ring        — dual-aurora glow positioned behind the card
-.btn-sso-vibe          — premium SSO button styling
-.input-vibe            — warm off-white input with copper focus ring
-```
-
-All classes are additive utilities — they do not override existing tokens or break any other page.
-
-### Accessibility & performance
-- All decorative elements keep `aria-hidden="true"` and `pointer-events: none`
-- Orb drift, shimmer, and pulse disabled under `prefers-reduced-motion: reduce`
-- Backdrop blur capped at 20px
-- Mobile (<640px): inner glow rings simplified, orb count reduced to 2
-- No layout shift, no z-index conflicts, no changes to focus order or tab order
+- All spacing scales mobile-first; no fixed pixel values that break on narrow screens.
+- Contrast and tap-target standards untouched (≥44px stays).
+- No `transition: all`, no new animations.
+- Respects existing `zoom: 0.75` root scaling — all values are relative.
 
 ### Out of scope
-- Form logic, validation, MFA flow, OAuth handlers — untouched
-- Routing, redirects, profile/account-status checks — untouched
-- `ForgotPasswordModal`, `TwoFactorVerify`, `PasswordResetForm` internals — only their wrapper styling changes
-- All other pages — untouched
+
+- Hero homepage, hero business, hero workshops — untouched
+- Footer component and styles — untouched
+- Auth, Admin, Portal — untouched
+- Color tokens, typography tokens, button system — untouched
+- Component internals (only outer wrappers get className additions)
+
+### Estimated diff
+
+~120 lines new CSS, ~150 lines of className additions across ~16 files.
 
