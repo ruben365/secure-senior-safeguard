@@ -32,7 +32,7 @@ export const BackToTop = forwardRef<HTMLButtonElement>((_props, ref) => {
       ref={ref}
       onClick={scrollToTop}
       style={{ minHeight: "auto", minWidth: "auto" }}
-      className={`gx-fab fixed bottom-24 right-4 md:bottom-8 md:right-8 z-fab w-8 h-8 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background ${
+      className={`gx-fab fixed bottom-24 right-4 md:bottom-20 md:right-8 z-fab w-8 h-8 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background ${
         isVisible
           ? "opacity-100 translate-y-0 pointer-events-auto"
           : "opacity-0 translate-y-4 pointer-events-none"

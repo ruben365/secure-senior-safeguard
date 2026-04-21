@@ -101,6 +101,8 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  /* Prevents layout jump when Radix Dialog adds overflow:hidden to body */
+  scrollbar-gutter: stable;
 }
 
 /* HD image rendering */

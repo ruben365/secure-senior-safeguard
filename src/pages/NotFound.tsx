@@ -41,7 +41,7 @@ function NotFound() {
   return (
     <>
       <SEO {...PAGE_SEO.notFound} />
-      <div className="min-h-screen flex flex-col bg-background">
+      <div className="min-h-screen flex flex-col bg-background" data-page="not-found">
       <Navigation />
 
       <div className="flex-1 flex items-center justify-center px-4 py-20 relative">

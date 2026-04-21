@@ -195,8 +195,8 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
               <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-white/30" />
             </div>
             <div>
-              <p className="text-sm font-bold text-white" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>Laura</p>
-              <p className="text-[11px] text-white/70 font-medium" style={{ textShadow: "0 1px 2px rgba(0,0,0,0.4)" }}>
+              <p className="text-sm font-bold text-white laura-shadow-lg">Laura</p>
+              <p className="text-[11px] text-white/70 font-medium laura-shadow-md">
                 {isLoading ? "Thinking..." : "Navigation & help"}
               </p>
             </div>
@@ -257,10 +257,10 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
                     />
                   </div>
                   <div className="space-y-2">
-                    <p className="text-lg font-bold text-white" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>
+                    <p className="text-lg font-bold text-white laura-shadow-lg">
                       Hi, I'm Laura
                     </p>
-                    <p className="text-sm text-white/80 leading-relaxed px-2" style={{ textShadow: "0 1px 2px rgba(0,0,0,0.4)" }}>
+                    <p className="text-sm text-white/80 leading-relaxed px-2 laura-shadow-md">
                       I help with scanning, pricing, privacy, and navigating
                       InVision Network.
                     </p>
@@ -355,8 +355,8 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
                 <Headphones className="w-4 h-4 text-white" />
               </div>
               <div>
-                <p className="text-sm font-bold text-white" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>Quick Help</p>
-                <p className="text-[11px] text-white/70" style={{ textShadow: "0 1px 2px rgba(0,0,0,0.4)" }}>
+                <p className="text-sm font-bold text-white laura-shadow-lg">Quick Help</p>
+                <p className="text-[11px] text-white/70 laura-shadow-md">
                   Fast paths to support & resources
                 </p>
               </div>
@@ -384,10 +384,10 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
                     >
                       <ActionIcon className="w-4 h-4 text-white" />
                     </div>
-                    <div className="text-xs font-bold text-white" style={{ textShadow: "0 1px 2px rgba(0,0,0,0.5)" }}>
+                    <div className="text-xs font-bold text-white laura-shadow-lg">
                       {action.label}
                     </div>
-                    <div className="text-[10px] text-white/70 leading-tight mt-0.5" style={{ textShadow: "0 1px 2px rgba(0,0,0,0.4)" }}>
+                    <div className="text-[10px] text-white/70 leading-tight mt-0.5 laura-shadow-md">
                       {action.description}
                     </div>
                   </div>

@@ -110,3 +110,56 @@ button[aria-disabled="true"]:not(.hero-home *):not(.hero-business *):not(.hero-w
     color: #000 !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   GLASS BUTTON SYSTEM — sitewide glassmorphism treatment
+   Applies everywhere except the 404 page (data-page="not-found").
+   Rules placed after the contrast-fix rules so they win the cascade
+   when specificity is equal (same selector shape + same !important).
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Primary / orange buttons: warm glass border + backdrop blur ── */
+/* Keeps the opaque gradient fill, adds an amber glow edge + blur     */
+button[class*="bg-primary"]:not([data-page="not-found"] *):not(nav *):not(:disabled),
+a[class*="bg-primary"]:not([data-page="not-found"] *):not(nav *) {
+  border: 1.5px solid rgba(255, 200, 150, 0.3) !important;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* ── Outline / secondary buttons: dark frosted glass ── */
+/* Converts the light-mode outline treatment to dark glass + white text */
+button[class*="variant-outline"]:not([data-page="not-found"] *):not(nav *),
+button[class*="border-input"]:not([data-page="not-found"] *):not(nav *),
+[role="button"][class*="bg-background"]:not([data-page="not-found"] *):not(nav *),
+button[class*="bg-secondary"]:not([data-page="not-found"] *):not(nav *),
+a[class*="variant-outline"]:not([data-page="not-found"] *):not(nav *) {
+  background: rgba(0, 0, 0, 0.25) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.28) !important;
+  color: white !important;
+}
+
+button[class*="variant-outline"]:not([data-page="not-found"] *):not(nav *):hover,
+button[class*="border-input"]:not([data-page="not-found"] *):not(nav *):hover,
+button[class*="bg-secondary"]:not([data-page="not-found"] *):not(nav *):hover,
+a[class*="variant-outline"]:not([data-page="not-found"] *):not(nav *):hover {
+  background: rgba(0, 0, 0, 0.38) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  color: white !important;
+}
+
+/* ── Ghost buttons: glass tint on hover ── */
+button[class*="ghost"]:not([data-page="not-found"] *):not(nav *):hover,
+button[class*="variant-ghost"]:not([data-page="not-found"] *):not(nav *):hover {
+  background: rgba(0, 0, 0, 0.2) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+/* ── Laura widget: text-shadow utilities ─────────────────────────── */
+/* Class selector (0,1,0) beats the global * { text-shadow: none !important }
+   at (0,0,0), so these rules win despite the global override.         */
+.laura-shadow-lg { text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important; }
+.laura-shadow-md { text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important; }
