@@ -707,3 +707,96 @@
 .auth-tabs-warm [data-state="inactive"] {
   color: hsl(220 15% 50%) !important;
 }
+
+/* ============================================================
+   Subtle Stroke Glass Widgets — sitewide content treatment
+   Whisper-thin glass that sits gently on the cream background.
+   ============================================================ */
+
+.stroke-glass,
+.stroke-glass--tight,
+.stroke-glass--large,
+.stroke-glass--accent,
+.stroke-glass--quiet {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.65);
+  border: 1px solid hsl(28 18% 78% / 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow:
+    0 1px 2px rgba(80, 40, 80, 0.04),
+    0 12px 32px -16px rgba(80, 40, 80, 0.08);
+  border-radius: 20px;
+  isolation: isolate;
+}
+
+/* Inner top highlight — etched glass feel */
+.stroke-glass::before,
+.stroke-glass--tight::before,
+.stroke-glass--large::before,
+.stroke-glass--accent::before,
+.stroke-glass--quiet::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
+  z-index: 0;
+}
+
+/* Ensure children render above decorative stroke */
+.stroke-glass > *,
+.stroke-glass--tight > *,
+.stroke-glass--large > *,
+.stroke-glass--accent > *,
+.stroke-glass--quiet > * {
+  position: relative;
+  z-index: 1;
+}
+
+.stroke-glass--tight {
+  border-radius: 16px;
+  box-shadow:
+    0 1px 2px rgba(80, 40, 80, 0.03),
+    0 8px 24px -16px rgba(80, 40, 80, 0.07);
+}
+
+.stroke-glass--large {
+  border-radius: 24px;
+  box-shadow:
+    0 2px 4px rgba(80, 40, 80, 0.05),
+    0 24px 56px -20px rgba(80, 40, 80, 0.12);
+}
+
+.stroke-glass--quiet {
+  box-shadow: none;
+}
+
+/* Signature copper L-corner stroke (top-left) */
+.stroke-glass--accent::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border-top: 1px solid hsl(20 75% 52% / 0.7);
+  border-left: 1px solid hsl(20 75% 52% / 0.7);
+  border-top-left-radius: inherit;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Reduced-transparency fallback */
+@media (prefers-reduced-transparency: reduce) {
+  .stroke-glass,
+  .stroke-glass--tight,
+  .stroke-glass--large,
+  .stroke-glass--accent,
+  .stroke-glass--quiet {
+    background-color: rgba(255, 255, 255, 0.96);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
