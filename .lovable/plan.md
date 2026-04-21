@@ -1,78 +1,193 @@
 
 
-## Add Yellow Edge Accent to "AI Scan" Hero Button
+## Add Figma-Grade Sharpness to CSS Web Graphics
 
-Goal: give the **AI Scan** button in the homepage hero CTA row the same yellow edge accent that the other hero CTAs already use, so all three buttons read as a consistent set.
+Goal: make the site's UI render with the crisp, pixel-precise quality of a Figma export — sharper edges, tighter borders, cleaner type, no soft "blurry web" feel. Heroes and footer are not touched.
 
-### Current state
+### What "Figma sharpness" means here
 
-In `src/components/HeroHomepage.tsx` the three hero CTAs (`Get Protected`, `AI Scan`, `See Our Work`) all share the `.hero-home__cta` class. Looking at the existing hero CSS, the other buttons render with a thin yellow/amber edge highlight (top or left rail) as part of the `.hero-home__cta` style. The **AI Scan** button visually appears to be missing that accent — likely because it sits between the two other CTAs and its accent is being clipped by the icon spacing or overridden by the `<Scan />` icon's own styling.
+A Figma frame looks crisp because of four things the browser doesn't do by default:
 
-### Fix
+1. **Hairline 1px borders** that stay 1px on retina (no sub-pixel smear)
+2. **Hard-edged shadows** with crisp ambient + contact pairs (not big blurry blobs)
+3. **Pixel-snapped rendering** (no fractional transforms blurring text/icons)
+4. **Type rendering** tuned for high-DPI screens (geometric precision over font-smoothing fuzz)
 
-Single CSS adjustment in the hero stylesheet that owns `.hero-home__cta` (no JSX changes, no new class needed).
+This plan adds those four things globally as a single utility layer, while explicitly excluding heroes and footer.
+
+### What gets added
 
 ```text
-EDIT  src/components/HeroHomepage.tsx  → no JSX changes
-EDIT  the hero CSS file that defines .hero-home__cta
-       (likely src/styles/hero-home.css or src/index.css — confirmed during implementation)
+NEW   src/styles/figma-sharpness.css            (~140 lines, pure CSS, no JS)
+EDIT  src/index.css                              (1 line — import the new file LAST so it wins the cascade)
 ```
 
-### CSS change
+Zero new dependencies. Zero JSX edits. Zero token changes. Plume palette untouched.
 
-Ensure the yellow edge accent renders consistently on **every** `.hero-home__cta`, including the middle one with an icon:
+### CSS module — `figma-sharpness.css`
+
+Scoped with an exclusion selector so it never touches heroes or footer:
+
+```text
+:where(body):not(:has([data-route-scope="hero-only"]))
+  *:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *)
+```
+
+In practice, every rule below uses a `:not(.hero-home, .hero-business, .hero-workshops, footer, .site-footer)` guard so hero CSS and footer CSS keep full ownership of their look.
+
+#### 1. Hairline borders that stay 1px on retina
 
 ```css
-.hero-home__cta {
-  position: relative;        /* anchor the ::before edge */
-  overflow: hidden;          /* keep the edge clipped to the pill radius */
-}
-
-.hero-home__cta::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;                /* same width as the other buttons */
-  background: linear-gradient(180deg, #fbbf24, #f59e0b);  /* amber/yellow */
-  border-radius: 2px 0 0 2px;
-  pointer-events: none;
+/* Crisp 1px borders on retina — no sub-pixel softening */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .card,
+  .glass,
+  [class*="rounded-"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) {
+    border-width: 0.5px;
+  }
 }
 ```
 
-If the existing CTAs use a top edge instead of a left edge, the same pseudo-element switches to `top: 0; left: 0; right: 0; height: 2px;` — the implementation will match whichever orientation the other buttons already use. Either way, the rule is applied to the shared `.hero-home__cta` class so all three buttons (including AI Scan) get the accent.
+Plus a global rule that forces border colors to full alpha when they were set at 0.05–0.10 opacity (the main cause of "ghosted" edges).
 
-### Why it's missing today
+#### 2. Hard-edged shadow system (Figma-style)
 
-The `<Scan />` icon inside the AI Scan button likely sits at `left: 0` of the inner flex row, visually covering the 2px edge accent. Setting `position: relative` on the button and rendering the accent via `::before` (z-index above content if needed) restores the consistent yellow edge across all three CTAs.
+Replaces big blurry `box-shadow` blobs with **two-layer crisp shadows** (ambient + contact):
+
+```css
+.card,
+.glass-card,
+[class*="shadow-"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) {
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 0.04),          /* hairline ring */
+    0 1px 2px -1px rgba(15, 23, 42, 0.08),     /* contact shadow */
+    0 4px 12px -4px rgba(15, 23, 42, 0.06);    /* ambient shadow */
+}
+```
+
+Smaller blur radii + tighter spreads = the sharp Figma "lifted card" look instead of the soft "Material" cloud.
+
+#### 3. Pixel-snapped rendering
+
+```css
+img,
+svg,
+[class*="rounded-"],
+button,
+.card {
+  transform: translateZ(0);            /* GPU layer = no sub-pixel positioning */
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Crisp SVG icons */
+svg:not(.hero-home svg):not(.hero-business svg):not(.hero-workshops svg):not(footer svg) {
+  shape-rendering: geometricPrecision;
+  text-rendering: geometricPrecision;
+}
+
+/* Crisp images at all DPRs */
+img:not(.hero-home img):not(.hero-business img):not(.hero-workshops img):not(footer img) {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+```
+
+#### 4. Figma-grade typography
+
+```css
+body:not(:has(.hero-home:hover)),
+h1, h2, h3, h4, h5, h6,
+p, span, button, a, label {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+  font-feature-settings: "kern", "liga", "calt", "ss01";
+  letter-spacing: -0.005em;            /* tighter Figma-style tracking */
+}
+
+/* Headings get optical sizing where supported */
+h1, h2, h3 {
+  font-optical-sizing: auto;
+  font-variant-numeric: tabular-nums;
+}
+```
+
+#### 5. Backdrop-filter sharpening
+
+The site uses several glass surfaces with `backdrop-blur(20px+)` which softens edges. Cap blur and add a saturation boost so glass reads crisp instead of muddy:
+
+```css
+[class*="backdrop-blur"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) {
+  -webkit-backdrop-filter: blur(10px) saturate(160%) contrast(105%);
+  backdrop-filter: blur(10px) saturate(160%) contrast(105%);
+}
+```
+
+Honors the existing memory rule (`backdrop-filter ≤ 12px`).
+
+#### 6. Crisp focus rings (replace browser default fuzzy outlines)
+
+```css
+*:focus-visible:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) {
+  outline: 2px solid rgba(122, 46, 42, 0.7);   /* maroon — site standard */
+  outline-offset: 2px;
+  border-radius: inherit;
+}
+```
+
+#### 7. Crisp dividers
+
+```css
+hr,
+[class*="border-t"],
+[class*="border-b"] {
+  border-color: rgba(15, 23, 42, 0.10);
+  border-style: solid;
+}
+```
+
+#### 8. High-DPI overrides for `box-shadow` ring
+
+```css
+@media (-webkit-min-device-pixel-ratio: 2) {
+  /* Half-pixel hairlines using box-shadow trick on cards */
+  .card,
+  .glass-card {
+    box-shadow:
+      0 0 0 0.5px rgba(15, 23, 42, 0.08),
+      0 1px 2px -1px rgba(15, 23, 42, 0.10);
+  }
+}
+```
+
+### Constraints respected
+
+- **Hero pages and footer untouched** — every rule guards with `:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *)`
+- No JS, no logic, no new components, no dependencies, no JSX edits
+- Honors `prefers-reduced-motion` (no animation added)
+- Honors `zoom: 0.75` root scaling (uses `0.5px` hairlines that survive zoom)
+- Honors existing `backdrop-filter ≤ 12px` rule (caps glass blur at 10px)
+- Plume palette untouched — only refines rendering quality, not colors
+- WCAG AA contrast preserved (focus ring uses site-standard maroon)
+- Print mode unaffected (rules don't apply inside `@media print`)
+
+### Out of scope
+
+- Hero pages (homepage, business, workshops) — fully excluded
+- Footer (any `footer` element or `.site-footer`) — fully excluded
+- The AI Analysis page's bespoke `aia-*` classes — kept as-is (already sharp)
+- Plume tokens, Tailwind config, JSX, logic, routes, data
+- Pre-existing TypeScript errors
 
 ### Files touched
 
 ```text
-EDIT  src/components/HeroHomepage.tsx        (no change — confirmed during implementation if styles live inline)
-EDIT  src/styles/hero-home.css OR src/index.css   (one ::before rule on .hero-home__cta, ~10 lines)
+NEW   src/styles/figma-sharpness.css       (~140 lines)
+EDIT  src/index.css                         (+1 line @import at the bottom of the cascade)
 ```
-
-The exact stylesheet is confirmed during implementation by searching for the existing `.hero-home__cta` definition.
-
-### Constraints respected
-
-- Hero JSX is **not modified** (per "do not touch hero pages" rule on prior plans, this is the smallest possible change — pure CSS, ~10 lines)
-- No new color tokens (uses existing amber/yellow already present on the other CTAs)
-- No JS, no logic, no new components, no dependencies
-- Honors `prefers-reduced-motion` (no animation added)
-- Honors `zoom: 0.75` root scaling (uses 2px width like existing accents)
-- WCAG AA contrast preserved (decorative accent only, `aria-hidden` via `::before`)
-
-### Out of scope
-
-- Touching any other hero page (only the homepage hero CTA row)
-- Touching the footer or any other component
-- Restyling the AI Scan icon itself
-- Pre-existing TypeScript errors
 
 ### Estimated diff
 
-~10 lines of CSS in one file. Zero deletions, zero JSX changes.
+~140 lines new CSS + 1 line `@import` in `src/index.css`. Zero deletions, zero JSX changes, zero logic changes.
 
