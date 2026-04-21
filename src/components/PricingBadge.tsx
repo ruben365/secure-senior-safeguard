@@ -127,23 +127,34 @@ export function PricingBadge({
     lg: "px-6 py-2 text-sm",
   };
 
+  const solidBg: Record<string, string> = {
+    popular: "bg-gradient-to-r from-orange-500 to-[#d96c4a] text-white border-orange-400/30 shadow-[0_4px_16px_rgba(217,108,74,0.4)]",
+    recommended: "bg-gradient-to-r from-amber-500 to-orange-500 text-white border-amber-400/30 shadow-[0_4px_12px_rgba(245,158,11,0.35)]",
+    "best-value": "bg-gradient-to-r from-emerald-500 to-teal-500 text-white border-emerald-400/30 shadow-[0_4px_12px_rgba(16,185,129,0.35)]",
+    limited: "bg-gradient-to-r from-red-500 to-pink-500 text-white border-red-400/30 shadow-[0_4px_12px_rgba(239,68,68,0.35)]",
+    trusted: "bg-gradient-to-r from-blue-500 to-indigo-500 text-white border-blue-400/30 shadow-[0_4px_12px_rgba(59,130,246,0.35)]",
+    secure: "bg-gradient-to-r from-green-500 to-emerald-500 text-white border-green-400/30 shadow-[0_4px_12px_rgba(34,197,94,0.35)]",
+    fast: "bg-gradient-to-r from-yellow-500 to-amber-500 text-white border-yellow-400/30 shadow-[0_4px_12px_rgba(234,179,8,0.35)]",
+    guaranteed: "bg-gradient-to-r from-orange-500 to-amber-500 text-white border-orange-400/30 shadow-[0_4px_12px_rgba(249,115,22,0.35)]",
+    premium: "bg-gradient-to-r from-orange-600 to-[#d96c4a] text-white border-orange-500/30 shadow-[0_4px_16px_rgba(217,108,74,0.4)]",
+    new: "bg-gradient-to-r from-cyan-500 to-blue-500 text-white border-cyan-400/30 shadow-[0_4px_12px_rgba(6,182,212,0.35)]",
+    hot: "bg-gradient-to-r from-orange-500 to-red-500 text-white border-orange-400/30 shadow-[0_4px_12px_rgba(249,115,22,0.35)]",
+    save: "bg-gradient-to-r from-green-500 to-teal-500 text-white border-green-400/30 shadow-[0_4px_12px_rgba(34,197,94,0.35)]",
+    veteran: "bg-gradient-to-r from-blue-700 via-red-500 to-blue-700 text-white border-blue-400/30 shadow-[0_4px_12px_rgba(59,130,246,0.35)]",
+  };
+
   return (
     <div
       className={cn(
         "inline-flex items-center gap-1.5",
-        "bg-background/70 backdrop-blur-xl border border-border/30",
-        "font-bold tracking-wider rounded-full",
-        "shadow-[0_1px_3px_hsl(var(--coral-300)/0.1),0_2px_6px_hsl(var(--lavender-300)/0.08)]",
+        "border font-bold tracking-wider rounded-full",
+        solidBg[type] ?? solidBg.popular,
         sizeClasses[size],
         className,
       )}
     >
-      <span className="text-sm">{config.emoji}</span>
-      <span
-        className={`bg-gradient-to-r ${config.gradient} bg-clip-text text-transparent`}
-      >
-        {config.label}
-      </span>
+      <span className="text-sm leading-none">{config.emoji}</span>
+      <span>{config.label}</span>
     </div>
   );
 }

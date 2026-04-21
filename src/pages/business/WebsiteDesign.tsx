@@ -136,7 +136,7 @@ const WebsiteDesign = () => {
   const packages = [
     {
       name: "Landing Page",
-      price: "$2,500",
+      price: "$2,997",
       description: "Perfect for campaigns and lead generation",
       features: [
         "Single page design",
@@ -167,7 +167,7 @@ const WebsiteDesign = () => {
     },
     {
       name: "E-Commerce",
-      price: "$10,000",
+      price: "$12,500",
       description: "Full online store with payment processing",
       features: [
         "Unlimited products",
@@ -257,7 +257,7 @@ const WebsiteDesign = () => {
       <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-background">
         <SEO
           title="Professional Website Design Services"
-          description="Custom website design for businesses in Dayton, Ohio. Landing pages from $2,500, business websites from $5,000, e-commerce from $10,000. Mobile-responsive, SEO-optimized."
+          description="Custom website design for businesses in Dayton, Ohio. Landing pages from $2,997, business websites from $5,000, e-commerce from $12,500. Mobile-responsive, SEO-optimized."
           keywords="website design Dayton Ohio, web development, business website, e-commerce website, landing page design, responsive web design, preload animation, navbar interactions, webflow cms, cms gallery, ecommerce design, UI portfolio, UX portfolio, video portfolio"
           structuredData={{
             "@context": "https://schema.org",
@@ -273,7 +273,7 @@ const WebsiteDesign = () => {
               {
                 "@type": "Offer",
                 name: "Landing Page",
-                price: "2500",
+                price: "2997",
                 priceCurrency: "USD",
               },
               {
@@ -285,7 +285,7 @@ const WebsiteDesign = () => {
               {
                 "@type": "Offer",
                 name: "E-Commerce Website",
-                price: "10000",
+                price: "12500",
                 priceCurrency: "USD",
               },
             ],

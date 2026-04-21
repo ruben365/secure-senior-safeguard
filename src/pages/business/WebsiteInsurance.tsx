@@ -30,7 +30,7 @@ const WebsiteInsurance = () => {
   const plans = [
     {
       name: "Essential",
-      price: "$29",
+      price: "$39",
       period: "/month",
       description: "Basic protection for small websites",
       features: [
@@ -44,7 +44,7 @@ const WebsiteInsurance = () => {
     },
     {
       name: "Professional",
-      price: "$49",
+      price: "$79",
       period: "/month",
       description: "Complete protection for business sites",
       features: [
@@ -60,7 +60,7 @@ const WebsiteInsurance = () => {
     },
     {
       name: "Enterprise",
-      price: "$99",
+      price: "$149",
       period: "/month",
       description: "Maximum protection for critical sites",
       features: [
@@ -128,7 +128,7 @@ const WebsiteInsurance = () => {
       <div className="min-h-screen bg-background">
         <SEO
           title="Website Insurance & Protection Plans"
-          description="Protect your website from hackers, malware, and downtime. Website insurance plans starting at $29/month. Daily backups, security monitoring, and expert support."
+          description="Protect your website from hackers, malware, and downtime. Website insurance plans starting at $39/month. Daily backups, security monitoring, and expert support."
           keywords="website insurance, website security, malware protection, website backup, DDoS protection, website monitoring Dayton Ohio"
           structuredData={{
             "@context": "https://schema.org",
@@ -145,7 +145,7 @@ const WebsiteInsurance = () => {
               {
                 "@type": "Offer",
                 name: "Essential Plan",
-                price: "29",
+                price: "39",
                 priceCurrency: "USD",
                 priceSpecification: {
                   "@type": "UnitPriceSpecification",
@@ -155,7 +155,7 @@ const WebsiteInsurance = () => {
               {
                 "@type": "Offer",
                 name: "Professional Plan",
-                price: "49",
+                price: "79",
                 priceCurrency: "USD",
                 priceSpecification: {
                   "@type": "UnitPriceSpecification",
@@ -165,7 +165,7 @@ const WebsiteInsurance = () => {
               {
                 "@type": "Offer",
                 name: "Enterprise Plan",
-                price: "99",
+                price: "149",
                 priceCurrency: "USD",
                 priceSpecification: {
                   "@type": "UnitPriceSpecification",
@@ -393,7 +393,7 @@ const WebsiteInsurance = () => {
                 Don't Wait Until It's Too Late
               </h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Protect your website today. Plans start at just $29/month.
+                Protect your website today. Plans start at just $39/month.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="heroPill" variant="heroPrimary">
