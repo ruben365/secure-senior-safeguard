@@ -16,7 +16,7 @@ const techPartners = [
 
 const TrustedTechLogos = forwardRef<HTMLDivElement>(function TrustedTechLogos(_props, ref) {
   return (
-    <section ref={ref} className="relative overflow-hidden">
+    <section ref={ref} className="relative overflow-hidden gx-bg-rule">
       <div className="py-3 border-t border-border/15">
         <div className="relative overflow-hidden">
           {/* Gradient Edges */}
