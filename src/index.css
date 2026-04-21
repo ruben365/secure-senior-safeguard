@@ -40,6 +40,20 @@
 @import "./styles/layout-rhythm.css";
 
 /* ═══════════════════════════════════════════════════════════════════
+   AMBIENT VIBRANCE OPT-OUT — Auth, Admin, Portal use solid surfaces
+   ═══════════════════════════════════════════════════════════════════ */
+body:has([data-route-scope="auth"]),
+body:has([data-route-scope="admin"]),
+body:has([data-route-scope="portal"]) {
+  /* Hide the global ambient layer on internal/auth surfaces */
+}
+body:has([data-route-scope="auth"]) .ambient-vibrance-bg,
+body:has([data-route-scope="admin"]) .ambient-vibrance-bg,
+body:has([data-route-scope="portal"]) .ambient-vibrance-bg {
+  display: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
    GLOBAL OVERRIDES — no shadows, HD sharpness
    ═══════════════════════════════════════════════════════════════════ */
 
