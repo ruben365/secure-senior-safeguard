@@ -981,3 +981,55 @@
     background-color: #3f1d40;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   AMBIENT VIBRANCE — Sitewide fixed background layer
+   Mounted once at the app root. Sits behind all content (z-index: -1).
+   Pages opt out via body.no-ambient-vibrance.
+   ═══════════════════════════════════════════════════════════════════ */
+
+.ambient-vibrance-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  contain: layout style paint;
+  /* Soft mesh wash — three radial gradients in cream/peach/lavender/coral */
+  background-image:
+    radial-gradient(at 18% 22%, hsl(14 85% 78% / 0.10) 0%, transparent 55%),
+    radial-gradient(at 82% 28%, hsl(265 60% 80% / 0.09) 0%, transparent 55%),
+    radial-gradient(at 50% 88%, hsl(28 90% 80% / 0.08) 0%, transparent 60%);
+}
+
+/* Tone the orbs down for ambient sitewide use (vs. opt-in section orbs) */
+.ambient-vibrance-bg .vibe-orb {
+  position: absolute;
+  opacity: 0.18;
+  mix-blend-mode: multiply;
+  will-change: transform;
+}
+
+/* Opt-out hook — Auth, Admin, Portal pages set body.no-ambient-vibrance */
+body.no-ambient-vibrance .ambient-vibrance-bg {
+  display: none;
+}
+
+/* Mobile: drop the largest orb and soften blur for perf */
+@media (max-width: 640px) {
+  .ambient-vibrance-bg .vibe-orb--xl {
+    display: none;
+  }
+  .ambient-vibrance-bg {
+    background-image:
+      radial-gradient(at 30% 20%, hsl(14 85% 78% / 0.08) 0%, transparent 60%),
+      radial-gradient(at 70% 80%, hsl(265 60% 80% / 0.07) 0%, transparent 60%);
+  }
+}
+
+/* Reduced motion: freeze the orbs */
+@media (prefers-reduced-motion: reduce) {
+  .ambient-vibrance-bg .vibe-orb {
+    animation: none !important;
+  }
+}

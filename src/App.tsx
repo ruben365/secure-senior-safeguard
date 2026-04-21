@@ -31,6 +31,7 @@ import { PrerenderProvider } from "./contexts/PrerenderContext";
 import { NavigationProgress } from "./components/NavigationProgress";
 import ScrollProgress from "./components/ScrollProgress";
 import { GlobalMotionProvider } from "./components/GlobalMotionProvider";
+import { AmbientVibranceBackground } from "./components/backgrounds/AmbientVibranceBackground";
 
 // Admin Shell
 const AdminShell = lazy(() => import("./components/admin/AdminShell").then(m => ({ default: m.AdminShell })));
@@ -368,6 +369,7 @@ function App() {
                 <CartFeedbackProvider>
                   <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                     <PrerenderProvider>
+                      <AmbientVibranceBackground />
                       <AnchorScrollManager />
                       <NavigationProgress />
                       <ScrollProgress />
