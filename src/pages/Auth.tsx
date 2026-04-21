@@ -837,7 +837,7 @@ function Auth() {
 
                 <Button
                   type="submit"
-                  className="w-full h-10 text-[14px] font-semibold rounded-lg bg-[#080d1a] text-white border border-[#1e293b] hover:bg-[#111827] hover:-translate-y-[1px] active:translate-y-[0.5px] transition-all duration-200"
+                  className="auth-cta-primary"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -848,7 +848,7 @@ function Auth() {
                   ) : (
                     <>
                       Sign In
-                      <ArrowRight className="ml-2 w-4 h-4" />
+                      <ArrowRight className="ml-2 w-4 h-4 auth-cta-arrow" />
                     </>
                   )}
                 </Button>
@@ -1033,7 +1033,7 @@ function Auth() {
 
                 <Button
                   type="submit"
-                  className="w-full h-10 text-[14px] font-semibold rounded-lg bg-[#080d1a] text-white border border-[#1e293b] hover:bg-[#111827] hover:-translate-y-[1px] active:translate-y-[0.5px] transition-all duration-200"
+                  className="auth-cta-primary"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -1044,7 +1044,7 @@ function Auth() {
                   ) : (
                     <>
                       Create Account
-                      <ArrowRight className="ml-2 w-4 h-4" />
+                      <ArrowRight className="ml-2 w-4 h-4 auth-cta-arrow" />
                     </>
                   )}
                 </Button>
@@ -1059,45 +1059,54 @@ function Auth() {
               </form>
             </TabsContent>
           </Tabs>
-            </div>
-            {/* /card */}
 
-            {/* Apply link — restyled for dark backdrop */}
-            <div className="mt-6 text-center">
-              <Link
-                to="/careers"
-                className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
-              >
-                Want to join our team?{" "}
-                <span className="text-orange-300 font-semibold">Apply here</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-
-            {/* Bottom legal links — restyled for dark backdrop */}
-            <div className="mt-3 flex items-center justify-center gap-3 text-[11px] text-white/45">
-              <Link
-                to="/privacy-policy"
-                className="hover:text-white/80 transition-colors"
-              >
-                Privacy Policy
-              </Link>
-              <span className="text-white/25">•</span>
-              <Link
-                to="/terms-of-service"
-                className="hover:text-white/80 transition-colors"
-              >
-                Terms of Service
-              </Link>
-              <span className="text-white/25">•</span>
-              <span>© {new Date().getFullYear()} InVision Network</span>
+            {/* Trust footer chips */}
+            <div className="mt-6 grid grid-cols-3 gap-2">
+              {[
+                { icon: ShieldCheck, label: "Encrypted" },
+                { icon: CheckCircle2, label: "Kettering team" },
+                { icon: Lock, label: "Private" },
+              ].map(({ icon: Icon, label }) => (
+                <div
+                  key={label}
+                  className="flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg bg-[hsl(35_40%_97%)] border border-[hsl(28_25%_88%)] text-[11px] text-slate-600 font-medium"
+                >
+                  <Icon className="w-3.5 h-3.5 text-[hsl(20_70%_50%)]" />
+                  <span>{label}</span>
+                </div>
+              ))}
             </div>
           </div>
-          {/* /right auth card column */}
+          {/* /card */}
+
+          {/* Apply link */}
+          <div className="mt-6 text-center">
+            <Link
+              to="/careers"
+              className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 transition-colors"
+            >
+              Want to join our team?{" "}
+              <span className="text-[hsl(20_75%_45%)] font-semibold">Apply here</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+
+          {/* Bottom legal links */}
+          <div className="mt-3 flex items-center justify-center gap-3 text-[11px] text-slate-500">
+            <Link to="/privacy-policy" className="hover:text-slate-800 transition-colors">
+              Privacy Policy
+            </Link>
+            <span className="text-slate-300">•</span>
+            <Link to="/terms-of-service" className="hover:text-slate-800 transition-colors">
+              Terms of Service
+            </Link>
+            <span className="text-slate-300">•</span>
+            <span>© {new Date().getFullYear()} InVision Network</span>
+          </div>
         </div>
-        {/* /grid */}
+        {/* /inner wrapper */}
       </div>
-      {/* /max-w-[1100px] */}
+      {/* /max-w-[480px] */}
 
       <ForgotPasswordModal
         open={showForgotPassword}
