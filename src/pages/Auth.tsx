@@ -566,17 +566,13 @@ function Auth() {
         className="w-full relative flex items-center justify-center p-5 md:p-8 font-sans antialiased"
         style={{ minHeight: "100vh" }}
       >
-        <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0b1020] via-[#0e1428] to-[#0a0f1e]" />
-          <div className="absolute -top-40 -left-40 h-[520px] w-[520px] rounded-full bg-orange-500/10 blur-[140px]" />
-          <div className="absolute -bottom-40 -right-40 h-[560px] w-[560px] rounded-full bg-indigo-500/12 blur-[160px]" />
+        <div aria-hidden="true" className="auth-bg-aurora">
+          <span className="vibe-orb vibe-orb--lg vibe-orb--peach" style={{ top: "10%", left: "-5%" }} />
+          <span className="vibe-orb vibe-orb--md vibe-orb--lavender" style={{ bottom: "8%", right: "-4%", animationDelay: "-12s" }} />
         </div>
         <div className="relative z-10 w-full max-w-[440px]">
-          <div className="relative rounded-xl bg-white border border-slate-200 p-5 md:p-7">
-            <div
-              aria-hidden="true"
-              className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-orange-400/50 to-transparent"
-            />
+          <div aria-hidden="true" className="auth-glow-ring" />
+          <div className="auth-card-vibe">
             <TwoFactorVerify
               onVerified={() => {
                 setShowMfaVerify(false);
@@ -600,17 +596,13 @@ function Auth() {
         className="w-full relative flex items-center justify-center p-5 md:p-8 font-sans antialiased"
         style={{ minHeight: "100vh" }}
       >
-        <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0b1020] via-[#0e1428] to-[#0a0f1e]" />
-          <div className="absolute -top-40 -left-40 h-[520px] w-[520px] rounded-full bg-emerald-500/10 blur-[140px]" />
-          <div className="absolute -bottom-40 -right-40 h-[560px] w-[560px] rounded-full bg-indigo-500/12 blur-[160px]" />
+        <div aria-hidden="true" className="auth-bg-aurora">
+          <span className="vibe-orb vibe-orb--lg vibe-orb--mint" style={{ top: "8%", left: "-5%" }} />
+          <span className="vibe-orb vibe-orb--md vibe-orb--lavender" style={{ bottom: "10%", right: "-4%", animationDelay: "-14s" }} />
         </div>
         <div className="relative z-10 w-full max-w-[440px]">
-          <div className="relative rounded-xl bg-white border border-slate-200 p-5 md:p-7">
-            <div
-              aria-hidden="true"
-              className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-emerald-400/50 to-transparent"
-            />
+          <div aria-hidden="true" className="auth-glow-ring" />
+          <div className="auth-card-vibe">
             <PasswordResetForm
               onComplete={() => {
                 setShowPasswordReset(false);
