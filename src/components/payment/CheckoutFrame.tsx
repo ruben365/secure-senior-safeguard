@@ -118,7 +118,7 @@ export function CheckoutCard({
   return (
     <section
       className={cn(
-        "rounded-[24px] border border-border/70 bg-white/95 p-4 shadow-[0_18px_45px_rgba(15,23,42,0.08)] sm:p-5",
+        "pay-card p-4 sm:p-5",
         className,
       )}
     >

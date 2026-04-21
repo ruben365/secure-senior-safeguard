@@ -24,25 +24,25 @@ export const OrderSummary = ({
   className,
 }: OrderSummaryProps) => {
   return (
-    <Card className={className}>
+    <Card className={`pay-card pay-card--summary border-0 ${className ?? ""}`}>
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-lg">
           <ShoppingCart className="w-5 h-5" />
           Order Summary
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-3">
         {/* Items */}
-        <div className="space-y-3">
+        <div>
           {items.map((item, index) => (
-            <div key={index} className="flex justify-between items-start">
+            <div key={index} className="pay-card__row">
               <div className="flex-1">
                 <p className="font-medium text-sm">{item.name}</p>
                 <p className="text-xs text-muted-foreground">
                   Qty: {item.quantity}
                 </p>
               </div>
-              <p className="font-medium">
+              <p className="font-medium tabular-nums">
                 ${(item.price * item.quantity).toFixed(2)}
               </p>
             </div>
@@ -52,25 +52,25 @@ export const OrderSummary = ({
         <Separator />
 
         {/* Subtotal */}
-        <div className="flex justify-between text-sm">
+        <div className="pay-card__row text-sm">
           <span className="text-muted-foreground">Subtotal</span>
-          <span className="font-medium">${subtotal.toFixed(2)}</span>
+          <span className="font-medium tabular-nums">${subtotal.toFixed(2)}</span>
         </div>
 
         {/* Discount */}
         {discount > 0 && (
-          <div className="flex justify-between text-sm text-green-600">
+          <div className="pay-card__row text-sm text-green-600">
             <span>Discount</span>
-            <span className="font-medium">-${discount.toFixed(2)}</span>
+            <span className="font-medium tabular-nums">-${discount.toFixed(2)}</span>
           </div>
         )}
 
         <Separator />
 
         {/* Total */}
-        <div className="flex justify-between text-lg font-bold">
-          <span>Total</span>
-          <span className="text-primary">${total.toFixed(2)}</span>
+        <div className="flex justify-between items-baseline">
+          <span className="text-base font-semibold">Total</span>
+          <span className="pay-card__total text-xl">${total.toFixed(2)}</span>
         </div>
 
         {/* Security note */}

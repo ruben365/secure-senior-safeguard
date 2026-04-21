@@ -76,14 +76,11 @@ export function SavedPaymentMethods({
         {cards.map((card) => (
           <button
             key={card.id}
+            data-selected={selectedCardId === card.id}
             onClick={() =>
               onSelectCard(card.id === selectedCardId ? null : card.id)
             }
-            className={`w-full flex items-center justify-between p-3 rounded-xl border transition-all ${
-              selectedCardId === card.id
-                ? "border-primary bg-primary/5 ring-1 ring-primary/20"
-                : "border-border/50 bg-muted/30 hover:border-border"
-            }`}
+            className="pay-card pay-card--method w-full flex items-center justify-between"
           >
             <div className="flex items-center gap-3">
               <img
@@ -106,8 +103,8 @@ export function SavedPaymentMethods({
             </div>
 
             {selectedCardId === card.id && (
-              <div className="p-1 bg-primary rounded-full">
-                <Check className="h-3 w-3 text-primary-foreground" />
+              <div className="p-1 rounded-full" style={{ background: "#d96c4a" }}>
+                <Check className="h-3 w-3 text-white" />
               </div>
             )}
           </button>

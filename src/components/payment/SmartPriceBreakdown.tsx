@@ -29,12 +29,12 @@ export function SmartPriceBreakdown({
 
   return (
     <motion.div
-      className="bg-muted/50 rounded-xl p-4 border border-border/50"
+      className="pay-card pay-card--summary p-4"
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="space-y-2">
+      <div className="space-y-1">
         {items.map((item, index) => {
           const displayLabel = item.label || item.name || "Item";
           const displayAmount =
@@ -94,7 +94,7 @@ export function SmartPriceBreakdown({
         <div className="flex justify-between items-center">
           <span className="font-semibold text-foreground">Total</span>
           <motion.span
-            className="text-xl font-bold text-foreground"
+            className="pay-card__total text-xl"
             key={total}
             initial={{ scale: 1.1 }}
             animate={{ scale: 1 }}
