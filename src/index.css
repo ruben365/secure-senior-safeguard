@@ -36,6 +36,9 @@
 /* Vibrance v2 — colorful glass overlay system (imported last to win) */
 @import "./styles/vibrance.css";
 
+/* Layout rhythm — sitewide spacing & disposition (mid-page sections) */
+@import "./styles/layout-rhythm.css";
+
 /* ═══════════════════════════════════════════════════════════════════
    GLOBAL OVERRIDES — no shadows, HD sharpness
    ═══════════════════════════════════════════════════════════════════ */

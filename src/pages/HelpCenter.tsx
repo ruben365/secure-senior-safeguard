@@ -65,10 +65,10 @@ export default function HelpCenter() {
     <>
       <SEO {...PAGE_SEO.help} />
       <div className="min-h-screen bg-background">
-        <div className="bg-primary/5 py-16">
-          <div className="container mx-auto max-w-3xl text-center px-4">
+        <div className="bg-primary/5 sec-after-hero pb-12">
+          <div className="sec-container-narrow text-center">
             <h1 className="text-4xl font-bold mb-4">Help Center</h1>
-            <p className="text-lg text-muted-foreground mb-8">Find answers to your questions</p>
+            <p className="text-lg text-muted-foreground mb-8 lede">Find answers to your questions</p>
             <div className="relative max-w-xl mx-auto">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
               <Input
@@ -81,7 +81,7 @@ export default function HelpCenter() {
           </div>
         </div>
 
-        <div className="container mx-auto max-w-4xl py-12 px-4">
+        <div className="sec-container-default sec-rhythm-md sec-before-footer max-w-4xl">
           {!search && !selectedCategory && (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12">
               {categories.map((cat) => (
