@@ -107,12 +107,11 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
   }, [messages, isLoading]);
 
   useEffect(() => {
-    if (!("webkitSpeechRecognition" in window || "SpeechRecognition" in window))
-      return;
-    const SpeechRecognition =
-      window.webkitSpeechRecognition ||
-      window.SpeechRecognition;
-    recognitionRef.current = new SpeechRecognition();
+    const w = window as Window;
+    if (!(w.webkitSpeechRecognition || w.SpeechRecognition)) return;
+    const SpeechRecognitionCtor =
+      w.webkitSpeechRecognition || w.SpeechRecognition;
+    recognitionRef.current = new SpeechRecognitionCtor!();
     recognitionRef.current.continuous = false;
     recognitionRef.current.interimResults = false;
     recognitionRef.current.lang = "en-US";
