@@ -152,18 +152,18 @@ const PremiumTrainingCard = memo(
 
     return (
       <div className="relative h-full pt-6 group/card" style={{ perspective: '1000px' }}>
-        {/* Floating badge */}
-        <div className="absolute -top-0 left-1/2 -translate-x-1/2 z-30">
-          <span
-            className={`inline-flex items-center gap-1.5 px-5 py-2 rounded-full text-xs font-black uppercase tracking-[0.15em] whitespace-nowrap border shadow-lg ${
-              isPopular
-                ? "bg-gradient-to-r from-primary via-accent to-primary text-white border-primary/40 shadow-[0_4px_20px_hsl(var(--primary)/0.35)]"
-                : "bg-card text-primary border-primary/25 shadow-md"
-            }`}
-          >
-            {plan.badge}
-          </span>
-        </div>
+        {/* Floating premium badge */}
+        {plan.badge && (
+          <div className="absolute -top-1 left-1/2 -translate-x-1/2 z-30">
+            <span
+              className={`price-badge-pro ${
+                isPopular ? "price-badge-pro--popular" : "price-badge-pro--standard"
+              }`}
+            >
+              {plan.badge}
+            </span>
+          </div>
+        )}
 
         {/* Outer glow wrapper for popular */}
         <div
