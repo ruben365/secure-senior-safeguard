@@ -511,9 +511,22 @@ function Auth() {
     </div>
   );
 
-  // Premium input style — warm glass surface, copper focus ring (Neo-Tactile)
+  // Soft Daylight input style
   const inputClassName =
-    "input-vibe h-11 pl-10 text-[14px] text-foreground placeholder:text-slate-400 transition-all";
+    "input-daylight pl-10 text-[14px] text-slate-900 placeholder:text-slate-400";
+
+  // Shared daylight background block (used across all auth screens)
+  const DaylightBackground = () => (
+    <div aria-hidden="true" className="auth-bg-daylight">
+      <div className="auth-hairline-top" />
+      <span className="auth-orb auth-orb--terracotta" style={{ width: 520, height: 520, top: "-10%", left: "-12%" }} />
+      <span className="auth-orb auth-orb--lavender" style={{ width: 460, height: 460, bottom: "-8%", right: "-10%", animationDelay: "-9s" }} />
+      <span className="auth-orb auth-orb--amber hidden md:block" style={{ width: 360, height: 360, top: "55%", left: "55%", animationDelay: "-15s", opacity: 0.4 }} />
+      <span className="auth-ray hidden md:block" style={{ left: "30%" }} />
+      <span className="auth-ray auth-ray--2 hidden md:block" style={{ left: "70%" }} />
+      <div className="auth-hairline-bottom" />
+    </div>
+  );
 
   if (signupSuccess) {
     return (
@@ -521,18 +534,13 @@ function Auth() {
         className="w-full relative flex items-center justify-center p-5 md:p-8 font-sans antialiased"
         style={{ minHeight: "100vh" }}
       >
-        <div aria-hidden="true" className="auth-bg-aurora">
-          <span className="vibe-orb vibe-orb--lg vibe-orb--coral" style={{ top: "8%", left: "-6%" }} />
-          <span className="vibe-orb vibe-orb--md vibe-orb--lavender" style={{ bottom: "10%", right: "-4%", animationDelay: "-10s" }} />
-          <span className="vibe-orb vibe-orb--md vibe-orb--peach" style={{ top: "60%", left: "55%", animationDelay: "-16s", opacity: 0.35 }} />
-        </div>
-
+        <DaylightBackground />
         <div className="relative z-10 w-full max-w-[440px]">
-          <div aria-hidden="true" className="auth-glow-ring" />
-          <div className="auth-card-vibe text-center">
+          <div className="auth-card-daylight text-center">
+            <div className="auth-card-accent auth-card-accent--emerald" />
             <div className="relative w-14 h-14 mx-auto mb-5">
-              <div className="absolute inset-0 rounded-2xl bg-emerald-500/30 blur-xl animate-pulse" />
-              <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-[0_12px_28px_-8px_rgba(16,185,129,0.55),inset_0_1px_0_0_rgba(255,255,255,0.4)] border border-white/30">
+              <div className="absolute inset-0 rounded-2xl bg-emerald-500/20 blur-xl" />
+              <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-[0_12px_28px_-8px_rgba(16,185,129,0.45),inset_0_1px_0_0_rgba(255,255,255,0.4)] border border-white/30">
                 <CheckCircle2 className="w-7 h-7 text-white" strokeWidth={2.25} />
               </div>
             </div>
@@ -549,7 +557,7 @@ function Auth() {
                 setSignupSuccess(false);
                 setActiveTab("login");
               }}
-              className="w-full h-11"
+              className="auth-cta-primary"
             >
               Back to Sign In
             </Button>
@@ -559,20 +567,17 @@ function Auth() {
     );
   }
 
-  // MFA verification screen — shown after password login when 2FA is enrolled
+  // MFA verification screen
   if (showMfaVerify) {
     return (
       <div
         className="w-full relative flex items-center justify-center p-5 md:p-8 font-sans antialiased"
         style={{ minHeight: "100vh" }}
       >
-        <div aria-hidden="true" className="auth-bg-aurora">
-          <span className="vibe-orb vibe-orb--lg vibe-orb--peach" style={{ top: "10%", left: "-5%" }} />
-          <span className="vibe-orb vibe-orb--md vibe-orb--lavender" style={{ bottom: "8%", right: "-4%", animationDelay: "-12s" }} />
-        </div>
+        <DaylightBackground />
         <div className="relative z-10 w-full max-w-[440px]">
-          <div aria-hidden="true" className="auth-glow-ring" />
-          <div className="auth-card-vibe">
+          <div className="auth-card-daylight">
+            <div className="auth-card-accent auth-card-accent--amber" />
             <TwoFactorVerify
               onVerified={() => {
                 setShowMfaVerify(false);
@@ -589,20 +594,17 @@ function Auth() {
     );
   }
 
-  // Password reset screen — shown when user clicks the email reset link
+  // Password reset screen
   if (showPasswordReset) {
     return (
       <div
         className="w-full relative flex items-center justify-center p-5 md:p-8 font-sans antialiased"
         style={{ minHeight: "100vh" }}
       >
-        <div aria-hidden="true" className="auth-bg-aurora">
-          <span className="vibe-orb vibe-orb--lg vibe-orb--mint" style={{ top: "8%", left: "-5%" }} />
-          <span className="vibe-orb vibe-orb--md vibe-orb--lavender" style={{ bottom: "10%", right: "-4%", animationDelay: "-14s" }} />
-        </div>
+        <DaylightBackground />
         <div className="relative z-10 w-full max-w-[440px]">
-          <div aria-hidden="true" className="auth-glow-ring" />
-          <div className="auth-card-vibe">
+          <div className="auth-card-daylight">
+            <div className="auth-card-accent auth-card-accent--lavender" />
             <PasswordResetForm
               onComplete={() => {
                 setShowPasswordReset(false);
