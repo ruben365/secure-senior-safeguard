@@ -5,9 +5,14 @@
    ═══════════════════════════════════════════════════════════════════ */
 
 :root {
-  --gx-copper: #d96c4a;
-  --gx-copper-soft: rgba(217, 108, 74, 0.3);
-  --gx-copper-faint: rgba(217, 108, 74, 0.08);
+  /* Maroon — new primary editorial accent (warm, grounded) */
+  --gx-maroon: #7a2e2a;
+  --gx-maroon-soft: rgba(122, 46, 42, 0.18);
+  --gx-maroon-faint: rgba(122, 46, 42, 0.08);
+  /* Copper — muted terracotta, retained as secondary highlight only */
+  --gx-copper: #b85a3e;
+  --gx-copper-soft: rgba(184, 90, 62, 0.22);
+  --gx-copper-faint: rgba(184, 90, 62, 0.06);
   --gx-plum: #5a2a5a;
   --gx-plum-soft: rgba(90, 42, 90, 0.18);
   --gx-cream: #faf7f2;
