@@ -1,0 +1,221 @@
+/* ═══════════════════════════════════════════════════════════════════
+   AI ANALYSIS PAGE — Scoped polish layer
+   Scope: .ai-analysis-page (no leak to other routes)
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Ambient canvas overlay ─────────────────────────────────────── */
+.ai-analysis-page {
+  position: relative;
+  isolation: isolate;
+}
+
+.ai-analysis-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(900px 600px at 92% 8%, rgba(217, 108, 74, 0.10), transparent 60%),
+    radial-gradient(800px 700px at 8% 92%, rgba(61, 29, 61, 0.12), transparent 60%);
+}
+
+.ai-analysis-page::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+.ai-analysis-page > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Floating toolbar refinement ────────────────────────────────── */
+.ai-analysis-page .aia-toolbar {
+  padding: 6px 10px;
+  box-shadow:
+    0 8px 24px -8px rgba(0, 0, 0, 0.45),
+    0 2px 6px -2px rgba(0, 0, 0, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.ai-analysis-page .aia-toolbar button,
+.ai-analysis-page .aia-toolbar a {
+  transition: background-color 180ms ease, transform 180ms ease, color 180ms ease;
+}
+
+.ai-analysis-page .aia-toolbar button:hover:not(:disabled),
+.ai-analysis-page .aia-toolbar a:hover {
+  background-color: rgba(255, 255, 255, 0.14) !important;
+  transform: scale(1.04);
+}
+
+.ai-analysis-page .aia-toolbar button:focus-visible,
+.ai-analysis-page .aia-toolbar a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(122, 46, 42, 0.45);
+}
+
+/* ─── Notification surface system ────────────────────────────────── */
+.ai-analysis-page .aia-notice {
+  position: relative;
+  background: rgba(0, 0, 0, 0.32) !important;
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow:
+    0 8px 24px -8px rgba(0, 0, 0, 0.45),
+    0 2px 6px -2px rgba(0, 0, 0, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  transition: transform 240ms ease, box-shadow 240ms ease, border-color 240ms ease;
+}
+
+/* Status accent rail (left edge) */
+.ai-analysis-page .aia-notice::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+  border-radius: 3px 0 0 3px;
+}
+
+.ai-analysis-page .aia-notice--access::before {
+  background: linear-gradient(180deg, #34d399, #10b981);
+}
+
+.ai-analysis-page .aia-notice--privacy::before {
+  background: linear-gradient(180deg, #fbbf24, #f59e0b);
+}
+
+.ai-analysis-page .aia-notice--filechip::before {
+  background: linear-gradient(180deg, #f6c7b8, #d96c4a);
+  width: 2px;
+}
+
+/* Hover lift on access banner */
+.ai-analysis-page .aia-notice--access:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  box-shadow:
+    0 12px 32px -10px rgba(0, 0, 0, 0.55),
+    0 4px 10px -2px rgba(0, 0, 0, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10);
+}
+
+/* ─── File chip refinement ───────────────────────────────────────── */
+.ai-analysis-page .aia-notice--filechip {
+  height: 40px;
+  padding: 0 16px !important;
+  font-feature-settings: "ss01", "tnum";
+}
+
+.ai-analysis-page .aia-notice--filechip > span:nth-of-type(2) {
+  /* the bullet • separator */
+  color: transparent !important;
+  position: relative;
+  width: 1px;
+  margin: 0 4px;
+}
+
+.ai-analysis-page .aia-notice--filechip > span:nth-of-type(2)::after {
+  content: "";
+  position: absolute;
+  inset: 6px 0;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.18);
+  left: 0;
+}
+
+.ai-analysis-page .aia-notice--filechip button {
+  min-width: 28px;
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.ai-analysis-page .aia-notice--filechip button:hover {
+  background-color: rgba(239, 68, 68, 0.18) !important;
+  color: #fecaca !important;
+}
+
+/* ─── Privacy notice elevation ───────────────────────────────────── */
+.ai-analysis-page .aia-notice--privacy svg.lucide-shield-alert {
+  filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.35));
+}
+
+.ai-analysis-page .aia-notice--privacy svg.inline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px;
+  border-radius: 4px;
+  background: rgba(251, 191, 36, 0.15);
+  color: #fde68a;
+}
+
+/* Focus rings sitewide for buttons inside aia-notice */
+.ai-analysis-page .aia-notice button:focus-visible,
+.ai-analysis-page .aia-notice a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(122, 46, 42, 0.45);
+  border-radius: 9999px;
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .ai-analysis-page .aia-notice,
+  .ai-analysis-page .aia-toolbar button,
+  .ai-analysis-page .aia-toolbar a {
+    transition: none !important;
+  }
+  .ai-analysis-page .aia-notice--access:hover,
+  .ai-analysis-page .aia-toolbar button:hover,
+  .ai-analysis-page .aia-toolbar a:hover {
+    transform: none !important;
+  }
+}
+
+/* ─── Print mode (Save as PDF) ───────────────────────────────────── */
+@media print {
+  .ai-analysis-page::before,
+  .ai-analysis-page::after {
+    display: none !important;
+  }
+  .ai-analysis-page .aia-toolbar,
+  .ai-analysis-page .aia-notice--privacy,
+  .ai-analysis-page .aia-notice--filechip,
+  .ai-analysis-page [role="dialog"] {
+    display: none !important;
+  }
+  .ai-analysis-page,
+  .ai-analysis-page main {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .ai-analysis-page .aia-notice {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #e5e7eb !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+  .ai-analysis-page .aia-notice * {
+    color: #000000 !important;
+  }
+  @page {
+    margin: 0.5in;
+  }
+}
