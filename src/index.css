@@ -36,6 +36,9 @@
 /* Vibrance v2 — colorful glass overlay system (imported last to win) */
 @import "./styles/vibrance.css";
 
+/* Editorial Plume — graphic enhancement layer (gx-* primitives) */
+@import "./styles/graphic-enhancement.css";
+
 /* Layout rhythm — sitewide spacing & disposition (mid-page sections) */
 @import "./styles/layout-rhythm.css";
 

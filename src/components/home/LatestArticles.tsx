@@ -10,7 +10,7 @@ export function LatestArticles() {
   return (
     <section
       aria-label="Latest cybersecurity articles"
-      className="relative z-10 py-14 md:py-20 bg-[#F9F8F6]"
+      className="relative z-10 py-14 md:py-20 bg-[#F9F8F6] gx-section"
     >
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
@@ -46,7 +46,7 @@ export function LatestArticles() {
               <Link
                 key={article.id}
                 to={`/articles/${article.slug}`}
-                className="hss-card stroke-glass--tight group flex flex-col rounded-2xl border border-[#E5E7EB] overflow-hidden"
+                className="hss-card stroke-glass--tight gx-card-elevated group flex flex-col rounded-2xl border border-[#E5E7EB] overflow-hidden"
               >
                 {article.featured_image_url && (
                   <div className="overflow-hidden h-44">

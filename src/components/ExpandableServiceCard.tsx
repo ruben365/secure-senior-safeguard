@@ -24,7 +24,7 @@ const ExpandableServiceCardBase = ({
   return (
     <Card
       className={cn(
-        "bg-card rounded-2xl border border-border/60 hover:border-primary/30 hover:shadow-lg transition-all duration-300 overflow-hidden cursor-pointer",
+        "bg-card rounded-2xl border border-border/60 hover:border-primary/30 hover:shadow-lg transition-all duration-300 overflow-hidden cursor-pointer gx-card-elevated",
         isExpanded && "border-primary/40 shadow-lg",
       )}
       onClick={() => setIsExpanded(!isExpanded)}
