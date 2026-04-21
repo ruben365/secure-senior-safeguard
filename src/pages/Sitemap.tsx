@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import Hero from "@/components/Hero";
 import { SEO } from "@/components/SEO";
 import { PAGE_SEO } from "@/config/pageSeo";
+import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 
 interface SitemapGroup {
   heading: string;
@@ -67,10 +69,22 @@ export default function Sitemap() {
       />
       <Navigation />
 
-      <section className="py-20 bg-background">
+      <Hero
+        backgroundImages={PROFESSIONAL_HERO_IMAGES.resources}
+        headline="Find every page in one place"
+        subheadline="Browse the complete map of InVision Network."
+        className="min-h-[55dvh]"
+        overlay
+      />
+
+      <section className="py-16 md:py-20 bg-background">
         <div className="container mx-auto max-w-4xl">
-          <h1 className="text-4xl font-extrabold tracking-tight mb-2">Sitemap</h1>
-          <p className="text-muted-foreground mb-12">All pages on InVision Network's website.</p>
+          <div className="text-center mb-12">
+            <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] text-primary mb-3">
+              Site Directory
+            </span>
+            <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight">All Pages</h2>
+          </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {groups.map((group) => (

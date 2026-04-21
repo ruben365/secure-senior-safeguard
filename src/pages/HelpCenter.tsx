@@ -22,6 +22,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Search, BookOpen, ChevronRight, ThumbsUp, ThumbsDown } from "lucide-react";
 import { toast } from "@/components/ui/sonner";
+import Hero from "@/components/Hero";
+import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 
 export default function HelpCenter() {
   const [search, setSearch] = useState("");
@@ -65,10 +67,15 @@ export default function HelpCenter() {
     <>
       <SEO {...PAGE_SEO.help} breadcrumbs={[...PAGE_SEO.help.breadcrumbs]} />
       <div className="min-h-screen bg-background">
-        <div className="bg-primary/5 sec-after-hero pb-12">
+        <Hero
+          backgroundImages={PROFESSIONAL_HERO_IMAGES.faq}
+          headline="How can we help you today?"
+          subheadline="Search our knowledge base or browse by topic."
+          className="min-h-[55dvh]"
+          overlay
+        />
+        <div className="bg-primary/5 sec-after-hero pb-12 pt-10">
           <div className="sec-container-narrow text-center">
-            <h1 className="text-4xl font-bold mb-4">Help Center</h1>
-            <p className="text-lg text-muted-foreground mb-8 lede">Find answers to your questions</p>
             <div className="relative max-w-xl mx-auto">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
               <Input
