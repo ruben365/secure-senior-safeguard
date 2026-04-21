@@ -224,7 +224,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
             </button>
             <button
               onClick={() => setIsOpen(false)}
-              className="p-2 rounded-full hover:bg-white/10 text-white/70 hover:text-white transition-all"
+              className="p-2 rounded-full hover:bg-black/25 text-white/70 hover:text-white transition-all"
               aria-label="Close Laura"
             >
               <X className="w-4 h-4" />
