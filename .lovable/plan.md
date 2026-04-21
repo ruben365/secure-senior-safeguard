@@ -1,103 +1,104 @@
 
 
-## Below-the-Fold Layout & Margin Refinement
+## Add Unified Hero Sections to Header-Less Pages
 
-Goal: tighten and re-balance the spacing, margins, and content disposition across every section that sits **below the hero and above the footer** sitewide. Pure layout/spacing/typography polish — no new features, no hero touches, no footer touches.
+Several public pages outside the main header navigation lack a proper hero section, making them feel inconsistent with the rest of the site (FAQ, Careers, About all use the unified `Hero` component with branded imagery). This plan adds a polished, on-brand hero to each of those pages.
 
-### Scope
+### Pages targeted (9 total — all NOT in main header)
 
-**Touched**
-- Section vertical rhythm (top/bottom padding) on all mid-page sections
-- Container widths and inner gutters
-- Grid column gaps and item spacing on cards, stats, pricing, FAQ, articles
-- Heading-to-body spacing, eyebrow-to-headline rhythm
-- Asymmetric/strategic disposition for visual interest (offset grids, staggered reveals)
-
-**Untouched**
-- All `hero-*` sections and `HeroHomepage`, `HeroBusiness`, `HeroWorkshops`
-- `Footer.tsx` and footer styles
-- Admin / Portal / Auth dashboards
-- Logic, props, routes, data
-
-### Strategy — a unified rhythm system
-
-Introduce three CSS utility scales applied via class additions only. No tokens renamed, no breaking changes.
-
-**1. Section vertical rhythm (`.sec-rhythm-*`)**
 ```text
-.sec-rhythm-sm  → py-12  md:py-16  lg:py-20    (compact: FAQ, articles, partners)
-.sec-rhythm-md  → py-16  md:py-24  lg:py-28    (default: most content sections)
-.sec-rhythm-lg  → py-20  md:py-28  lg:py-36    (statement: pricing, story sections)
+✗ MISSING HERO              →  WILL GAIN ONE
+─────────────────────────────────────────────
+src/pages/Sitemap.tsx          (Site Directory)
+src/pages/Status.tsx           (System Status)
+src/pages/HelpCenter.tsx       (Help & Support)
+src/pages/PrivacyPolicy.tsx
+src/pages/TermsOfService.tsx
+src/pages/RefundPolicy.tsx
+src/pages/CookiePolicy.tsx
+src/pages/AcceptableUse.tsx
+src/pages/Disclaimer.tsx
 ```
 
-**2. Container disposition (`.sec-container-*`)**
+### Pages explicitly NOT touched (per user request)
+
 ```text
-.sec-container-narrow  → max-w-3xl   mx-auto px-5 md:px-8    (text-heavy: FAQ, articles)
-.sec-container-default → max-w-6xl   mx-auto px-5 md:px-8    (most grids)
-.sec-container-wide    → max-w-7xl   mx-auto px-5 md:px-10   (pricing, full grids)
-.sec-container-bleed   → max-w-[1400px] mx-auto px-5 md:px-12 (showcase rows)
+✓ Header-nav pages — UNTOUCHED
+─────────────────────────────
+Index (Home)         - has hero
+AI / Business        - has hero
+Workshops/Training   - has hero
+Library              - has hero
+About                - has hero
+Careers              - has hero
+FAQ                  - has hero
+Contact              - has hero
 ```
 
-**3. Heading rhythm (`.head-rhythm`)**
+Also untouched: Footer, hero on existing pages, all logic, all routes, all data flows.
+
+### Design approach
+
+Two hero patterns matched to page personality:
+
+**Pattern A — Branded photo hero (Sitemap, Status, HelpCenter)**
+Same `<Hero>` component the rest of the site uses, with branded imagery from `PROFESSIONAL_HERO_IMAGES`. Compact variant: `min-h-[55dvh]` instead of `100dvh` (these are utility pages, not landing pages).
+
+**Pattern B — Compact gradient hero (6 legal pages)**
+Lightweight, professional gradient-only hero (no image) — fits the formal nature of legal copy. Uses the existing `auth-bg-aurora` ambience tokens at low intensity, with eyebrow + headline + lede stack.
+
+### Per-page details
+
+| Page | Pattern | Eyebrow | Headline | Lede |
+|------|---------|---------|----------|------|
+| Sitemap | A — `resources` image | Site Directory | Find every page in one place | Browse the complete map of InVision Network. |
+| Status | A — `business` image | System Health | Live platform status & uptime | Real-time monitoring of every service we operate. |
+| HelpCenter | A — `faq` image | Support | How can we help you today? | Search our knowledge base or browse by topic. |
+| PrivacyPolicy | B | Legal | Privacy Policy | How we collect, use, and protect your information. |
+| TermsOfService | B | Legal | Terms of Service | The agreement between you and InVision Network. |
+| RefundPolicy | B | Legal | Refund Policy | Our commitment to fair refunds and digital fulfillment. |
+| CookiePolicy | B | Legal | Cookie Policy | How we use cookies and your choices. |
+| AcceptableUse | B | Legal | Acceptable Use Policy | The rules for using our platform responsibly. |
+| Disclaimer | B | Legal | Disclaimer | Important notices about our content and services. |
+
+### New shared component
+
 ```text
-.head-rhythm > .eyebrow + h2     → mt-3
-.head-rhythm > h2                → mb-4 md:mb-5
-.head-rhythm > h2 + p.lede       → mt-4 md:mt-5 max-w-2xl mx-auto
-.head-rhythm                     → mb-12 md:mb-16
+NEW   src/components/shared/CompactLegalHero.tsx   (~50 lines)
+        Props: eyebrow, title, lede, accentColor?
+        Uses: gradient bg + soft aurora orbs + dot grid
+        Height: min-h-[40dvh] sm:min-h-[45dvh]
+        Respects reduced motion, no animations on critical path
 ```
-
-### Strategic disposition rules
-
-- **Section breathing**: enforce a minimum 96px gap between consecutive content sections on desktop (currently inconsistent: 48–144px range).
-- **Asymmetric grids**: on 3-column feature rows, offset the middle card by `lg:translate-y-3` for subtle staircase rhythm.
-- **Edge gutters**: bump mobile side-padding from 16px → 20px (more breathing on phones), keep desktop at 32px.
-- **Card grid gaps**: standardize `gap-6 md:gap-8` (was a mix of 4/6/8/10).
-- **Eyebrow → headline → lede** stack: consistent `mt-3 / mb-5 / mt-5` triad everywhere.
-- **CTA bands** (mid-page, not the final hero CTA): center with `max-w-2xl`, `py-16 md:py-20`.
-- **First section after hero**: gains a `pt-20 md:pt-28` start so it does not crowd the hero's bottom edge.
-- **Last section before footer**: gains a `pb-24 md:pb-32` to lift the footer cleanly.
 
 ### Files touched
 
 ```text
-NEW   src/styles/layout-rhythm.css           (~120 lines of utility classes)
-EDIT  src/index.css                          (one @import line, last)
-EDIT  src/pages/Index.tsx                    (className additions on mid sections)
-EDIT  src/pages/About.tsx
-EDIT  src/pages/Business.tsx
-EDIT  src/pages/Services.tsx
-EDIT  src/pages/Training.tsx
-EDIT  src/pages/Portfolio.tsx
-EDIT  src/pages/Contact.tsx
-EDIT  src/pages/Resources.tsx
-EDIT  src/pages/Articles.tsx
-EDIT  src/pages/Events.tsx
-EDIT  src/pages/Partners.tsx
-EDIT  src/pages/Careers.tsx
-EDIT  src/pages/HelpCenter.tsx
-EDIT  src/components/home/HomeStorySections.tsx
-EDIT  src/components/home/FAQPreview.tsx
-EDIT  src/components/home/LatestArticles.tsx
+NEW   src/components/shared/CompactLegalHero.tsx
+EDIT  src/pages/Sitemap.tsx           (replace bare h1 with <Hero>)
+EDIT  src/pages/Status.tsx            (replace py-12 hero with <Hero>)
+EDIT  src/pages/HelpCenter.tsx        (replace bg-primary/5 block with <Hero>)
+EDIT  src/pages/PrivacyPolicy.tsx     (add <CompactLegalHero> above body)
+EDIT  src/pages/TermsOfService.tsx    (add <CompactLegalHero>)
+EDIT  src/pages/RefundPolicy.tsx      (add <CompactLegalHero>)
+EDIT  src/pages/CookiePolicy.tsx      (add <CompactLegalHero>)
+EDIT  src/pages/AcceptableUse.tsx     (add <CompactLegalHero>)
+EDIT  src/pages/Disclaimer.tsx        (add <CompactLegalHero>)
 ```
 
-All page edits are pure className additions on existing `<section>` wrappers and inner containers. No JSX restructuring. No prop changes. No logic changes.
+No DB, no edge function, no dependency, no route changes.
 
-### Accessibility & responsiveness
+### Constraints respected
 
-- All spacing scales mobile-first; no fixed pixel values that break on narrow screens.
-- Contrast and tap-target standards untouched (≥44px stays).
-- No `transition: all`, no new animations.
-- Respects existing `zoom: 0.75` root scaling — all values are relative.
-
-### Out of scope
-
-- Hero homepage, hero business, hero workshops — untouched
-- Footer component and styles — untouched
-- Auth, Admin, Portal — untouched
-- Color tokens, typography tokens, button system — untouched
-- Component internals (only outer wrappers get className additions)
+- No edits to header navigation, header pages, or Footer
+- All headlines remain copy-rule compliant: no em-dashes, no semicolons, no banned words
+- Veteran/AI naming standards untouched
+- Mobile-first sizing with explicit `min-h-[Xdvh]`
+- All decorative orbs `aria-hidden` and `pointer-events: none`
+- `prefers-reduced-motion` respected (no orb drift)
+- The pre-existing TypeScript errors in `BookingRequestsTable`, `LauraAIAssistant`, `useStripeKey`, etc. are out of scope — they predate this plan and concern unrelated database/types issues.
 
 ### Estimated diff
 
-~120 lines new CSS, ~150 lines of className additions across ~16 files.
+~50 lines new component + ~150 lines of hero JSX additions across 9 pages. Zero deletions of working content.
 
