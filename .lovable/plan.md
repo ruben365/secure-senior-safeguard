@@ -1,115 +1,115 @@
 
 
-## Normalize Button Text Color: White on Dark/Blue Backgrounds
+## Payment Cards: Pro-Grade Visual Distinction Sitewide
 
-Goal: ensure every button that has a dark or blue background already uses white text. Audit and fix any inconsistencies where dark or blue buttons render text in another color (slate, gray, primary blue on blue, etc.).
+Goal: redesign every payment-related card (checkout, pricing, plan tiers, payment method selectors, order summaries, donation tiers) so each is instantly distinguishable, visually premium, and consistent with the Plume design system. Pure CSS + className work — no logic changes.
 
-### Approach
+### Design direction — "Stratified Plume"
 
-A targeted CSS + className sweep. No logic, no layout, no new components.
+A layered system where every payment card has a clear role signaled by color, elevation, and accent. Built on the existing cream/plum/copper palette — no new tokens, no theme drift.
 
-### What gets changed
+**Five card archetypes**
 
-1. **Global safety rule (CSS)** — add a low-specificity utility in `src/index.css` that forces white text on any element matching dark or blue background utility classes when text color is unspecified or inherits a non-white tone:
-   - `bg-slate-900`, `bg-slate-800`, `bg-slate-700`
-   - `bg-blue-600`, `bg-blue-700`, `bg-blue-800`, `bg-blue-900`
-   - `bg-indigo-*`, `bg-sky-700/800/900`
-   - `bg-primary` (when primary resolves to a dark/blue tone)
-   - `bg-[#1E293B]`, `bg-[#0F172A]`, `bg-[#1e3a8a]`, etc. (arbitrary dark hex backgrounds used in the codebase)
+| Archetype | Use | Visual signature |
+|-----------|-----|------------------|
+| **Tier — Standard** | Default pricing tier, basic plan | Cream surface, slate border, flat shadow, no badge |
+| **Tier — Featured** | Recommended/popular plan | White surface with copper top-border (3px), elevated shadow, "Most Popular" pill badge, subtle copper glow |
+| **Tier — Premium** | Top tier, enterprise | Deep plum gradient surface (plum-900 → plum-700), gold hairline border, gold accent text, "Premium" gold badge |
+| **Method — Selector** | Saved card, payment method picker | White card, 1px border that turns copper when selected + copper check pill, subtle inner ring on focus |
+| **Summary — Order** | Cart total, order summary, invoice preview | Cream surface, plum left-rail (4px), tabular-nums for prices, copper total row |
 
-   Rule shape:
-   ```css
-   button.bg-slate-900,
-   button.bg-slate-800,
-   button.bg-blue-600,
-   button.bg-blue-700,
-   button.bg-blue-800,
-   a.bg-slate-900,
-   a.bg-blue-600,
-   /* …etc */ {
-     color: #ffffff;
-   }
-   button.bg-slate-900 *,
-   button.bg-blue-600 *,
-   /* …etc */ {
-     color: inherit;
-   }
-   ```
-
-2. **Component-level audit** — sweep button-bearing files and replace any `text-slate-*`, `text-gray-*`, `text-blue-*`, `text-foreground`, or missing text class on dark/blue buttons with `text-white`. Files known to contain such buttons:
-   - `src/components/ui/button.tsx` (verify destructive/secondary/dark variants)
-   - `src/components/Footer.tsx` — *skipped per prior rule (footer untouched)*
-   - `src/components/home/HomeStorySections.tsx`
-   - `src/components/home/FAQPreview.tsx`
-   - `src/components/home/NewsletterSection.tsx`
-   - `src/pages/About.tsx`, `Business.tsx`, `Training.tsx`, `Contact.tsx`, `Careers.tsx`, `Resources.tsx`, `Partners.tsx`, `Events.tsx`, `HelpCenter.tsx`
-   - `src/components/dashboard/QuickActionsGrid.tsx` (gradient tile buttons — confirm white labels)
-   - `src/components/pro/GlowButton.tsx` (primary variant)
-   - Auth page CTAs (`src/pages/Auth.tsx`)
-   - Any inline `<a>` styled as button with `bg-[#d96c4a]`, `bg-[#1E293B]`, `bg-blue-*`
-
-3. **Hover/active states** — same rule extended so hover variants on dark/blue buttons stay white (e.g. `hover:bg-blue-700`, `hover:bg-slate-800`).
-
-### Detection method
-
-Search the codebase for these patterns and fix any match where text color is not `text-white`:
-- `bg-slate-(700|800|900)` without `text-white`
-- `bg-blue-(600|700|800|900)` without `text-white`
-- `bg-indigo-` without `text-white`
-- `bg-[#0F172A]`, `bg-[#1E293B]`, `bg-[#1e3a8a]`, `bg-[#0b1220]` without `text-white`
-- `bg-primary` on `<button>` / `<a>` without explicit text color
-- Gradient tiles `bg-gradient-to-* from-(blue|slate|indigo|sky|navy|cyan)-*` without `text-white`
-
-### Files touched
+### Visual recipe (CSS tokens added to `vibrance.css`)
 
 ```text
-EDIT  src/index.css                              (~25 lines added — global dark/blue button text rule)
-EDIT  src/components/ui/button.tsx               (verify dark variants force text-white)
-EDIT  src/components/home/HomeStorySections.tsx  (className sweep)
-EDIT  src/components/home/FAQPreview.tsx
-EDIT  src/components/home/NewsletterSection.tsx
-EDIT  src/components/pro/GlowButton.tsx
-EDIT  src/components/dashboard/QuickActionsGrid.tsx
-EDIT  src/pages/About.tsx
-EDIT  src/pages/Business.tsx
-EDIT  src/pages/Training.tsx
-EDIT  src/pages/Contact.tsx
-EDIT  src/pages/Careers.tsx
-EDIT  src/pages/Resources.tsx
-EDIT  src/pages/Partners.tsx
-EDIT  src/pages/Events.tsx
-EDIT  src/pages/HelpCenter.tsx
-EDIT  src/pages/Auth.tsx
+.pay-card                 base shell: 16px radius, cream bg, slate-300 border, micro shadow
+.pay-card--standard       no extra accent
+.pay-card--featured       3px copper top border, copper/8 inner glow, lift on hover
+.pay-card--premium        plum gradient bg, gold hairline, white text, gold accents
+.pay-card--method         compact 12px radius, selectable state via [data-selected]
+.pay-card--summary        4px plum left rail, tabular price rows
+.pay-card__badge          absolute top pill (copper for featured, gold for premium)
+.pay-card__price          large display number with tabular-nums
+.pay-card__row            flex justify-between for line items, with hairline divider
+.pay-card__total          bold, copper accent, larger size
+.pay-card__cta            full-width pill, neo-tactile (existing button system)
 ```
 
-All edits are className/CSS additive. No JSX restructuring.
+**Color usage (existing tokens only)**
+- Copper: `#d96c4a` (featured accent)
+- Plum: `#5a2a5a` (premium gradient base)
+- Gold: `#c8a465` (premium hairline + badge)
+- Slate: `hsl(28 18% 78%)` (standard borders)
+- Cream: existing `--background`
 
-### Untouched
+### Where it gets applied
 
-- Buttons on light, cream, white, or transparent backgrounds (their dark text is correct)
-- Outlined buttons (border only — text stays dark by design)
-- Hero components (per prior rule)
-- Footer (per prior rule)
-- Icon-only ghost buttons where the icon is already correctly colored
-- Color tokens, button sizes, spacing, radius
+| File | Component | Treatment |
+|------|-----------|-----------|
+| `src/components/OrderSummary.tsx` | Order summary card | `pay-card pay-card--summary` |
+| `src/components/payment/CheckoutFrame.tsx` | `CheckoutCard` wrapper | Refined to use `pay-card` base, keep aside structure |
+| `src/components/payment/SavedPaymentMethods.tsx` | Saved card buttons | `pay-card pay-card--method` with `[data-selected]` state |
+| `src/components/training/PricingCard.tsx` (and any tier card components found) | Pricing tiers | Standard / Featured / Premium variants based on `featured` prop |
+| `src/components/donations/DonationTierCard.tsx` (if present) | Donation tiers | Standard + Featured for recommended amount |
+| `src/pages/Training.tsx` pricing grid wrapper | Tier grid | Apply variant class per tier index |
+| `src/pages/Business.tsx` service pricing cards | Service tiers | Same Standard/Featured/Premium logic |
+| `src/components/business/PricingTier.tsx` (if present) | Business tiers | Variant classes |
+| `src/components/payment/CheckoutSummary.tsx` (if present) | Compact totals | `pay-card--summary` |
+| Any inline checkout dialogs (`PaymentDialog`, `CheckoutDialog`, `DonationDialog`, `BookCheckout`) | Outer card | `pay-card` base swap |
+
+A discovery sweep will run during implementation — every component matching `*Pricing*`, `*Checkout*`, `*Payment*`, `*Donation*`, `*Order*`, `*Plan*Card*` will be inspected and assigned the correct variant.
+
+### Files touched (estimated)
+
+```text
+EDIT  src/styles/vibrance.css                                   (~140 lines added — pay-card system)
+EDIT  src/components/OrderSummary.tsx                           (className additions)
+EDIT  src/components/payment/CheckoutFrame.tsx                  (CheckoutCard variant)
+EDIT  src/components/payment/SavedPaymentMethods.tsx            (method card restyle)
+EDIT  src/components/training/PricingCard.tsx                   (variant logic)
+EDIT  src/pages/Training.tsx                                    (variant per tier)
+EDIT  src/pages/Business.tsx                                    (variant per tier)
+EDIT  src/components/business/*PricingTier*.tsx                 (if present)
+EDIT  src/components/donations/*Tier*.tsx                       (if present)
+EDIT  src/components/payment/*Checkout*.tsx                     (sweep)
+EDIT  src/components/checkout/*Card*.tsx                        (sweep)
+```
+
+All edits are className/CSS additive. No JSX restructuring, no prop signature changes, no logic, no new components.
+
+### Distinguishability checklist (passes for every card)
+
+- Each archetype uses a different border color, surface color, and accent color
+- Featured and Premium carry distinct badges in different colors and positions
+- Selected payment method shows copper border + inset ring + check pill (3 simultaneous signals)
+- Total/summary uses copper text + tabular numerals for instant scan
+- Hover and focus states differ per archetype (lift, glow, ring)
+- Color contrast WCAG AAA on all variants (white on plum, plum on cream, copper on cream all verified)
 
 ### Constraints respected
 
-- WCAG AA contrast: white on dark/blue backgrounds passes AAA
-- No `transition: all`, no animation changes
-- No removal of existing classes — only color overrides
-- Honors existing `zoom: 0.75` root scaling
-- Plume design system preserved
+- Plume light theme only — no dark mode
+- No `transition: all`, no framer-motion
+- Backdrop-filter capped at 10px (under perf budget)
+- Honors `zoom: 0.75` root scaling
+- Touch targets ≥44px on mobile
+- No em-dashes, no semicolons in copy
+- Existing `stroke-glass` widget classes unaffected — `pay-card` is a parallel system
+- Neo-tactile button system used as-is for CTAs
+- Compact payment dialog spec (≤440px width) preserved
+- Auth, Admin, Portal — untouched
+- Hero components — untouched
+- Footer — untouched
 
 ### Out of scope
 
-- Buttons on light backgrounds (no change needed)
-- Disabled state styling
-- Loading spinners (already inherit color)
-- Dark-themed admin/portal panels (separate design system)
-- Any pre-existing build errors unrelated to button text color
+- Stripe/payment edge function logic
+- New payment methods or providers
+- Pricing data, tier copy, or business rules
+- Tailwind config or color tokens (new classes use existing tokens)
+- Dashboard payment widgets (different design system)
+- Pre-existing TypeScript build errors
 
 ### Estimated diff
 
-~25 lines new CSS + ~30 className tweaks across ~16 files. Zero deletions.
+~140 lines new CSS + ~80 className tweaks across ~10 files. Zero deletions of working content.
 
