@@ -166,10 +166,10 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <PrefetchLink
                     key={link.name}
                     to={link.href}
-                    className={`relative text-[13px] px-3 py-1.5 rounded-md transition-colors duration-150 ${
+                    className={`relative text-[13px] font-semibold transition-colors duration-150 ${
                       isActive
-                        ? "text-orange-400 font-bold bg-orange-500/12"
-                        : "text-white font-semibold hover:text-orange-300 hover:bg-white/[0.07]"
+                        ? "text-orange-400"
+                        : "text-white hover:text-orange-400"
                     }`}
                   >
                     {link.name}
@@ -185,10 +185,10 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   aria-haspopup="menu"
                   aria-expanded={moreOpen ? "true" : "false"}
                   aria-label="More navigation links"
-                  className={`flex items-center gap-1 text-[13px] px-3 py-1.5 rounded-md transition-colors duration-150 ${
+                  className={`flex items-center gap-1 text-[13px] font-semibold transition-colors duration-150 ${
                     isSecondaryActive
-                      ? "text-orange-400 font-bold bg-orange-500/12"
-                      : "text-white font-semibold hover:text-orange-300 hover:bg-white/[0.07]"
+                      ? "text-orange-400"
+                      : "text-white hover:text-orange-400"
                   }`}
                 >
                   More
@@ -350,42 +350,41 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
             className="lg:hidden fixed top-[56px] right-0 z-[10001] overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch]"
             onClick={(e) => e.stopPropagation()}
             style={{
-              width: "min(88vw, 300px)",
+              width: "min(50vw, 200px)",
               maxHeight: "calc(80vh - 56px)",
-              background: "rgba(8, 11, 22, 0.96)",
-              backdropFilter: "blur(20px) saturate(1.4)",
-              WebkitBackdropFilter: "blur(20px) saturate(1.4)",
-              borderLeft: "1px solid rgba(255,255,255,0.08)",
-              borderBottom: "1px solid rgba(255,255,255,0.06)",
-              borderBottomLeftRadius: "14px",
+              background: "rgba(80, 50, 30, 0.65)",
+              backdropFilter: "blur(24px) saturate(1.5)",
+              WebkitBackdropFilter: "blur(24px) saturate(1.5)",
+              borderLeft: "1px solid rgba(255, 200, 150, 0.15)",
+              borderBottomLeftRadius: "16px",
               animation: "menuSlideIn 200ms ease-out forwards",
               paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 0.25rem)",
             }}
           >
             {/* Panel header with close button */}
-            <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.06]">
-              <span className="text-[11px] font-semibold text-white/40 uppercase tracking-widest">Menu</span>
+            <div className="flex items-center justify-between px-3 py-2 border-b border-white/[0.06]">
+              <span className="text-xs font-semibold text-white/60 uppercase tracking-widest">Menu</span>
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-1.5 rounded-md hover:bg-white/10 transition-colors text-white/60 hover:text-white"
+                className="p-1 rounded-md hover:bg-white/10 transition-colors text-white/60 hover:text-white"
                 aria-label="Close menu"
               >
-                <X className="h-4 w-4" />
+                <X className="h-3.5 w-3.5" />
               </button>
             </div>
 
-            <div className="px-5 py-1">
+            <div className="px-3 py-1">
               {allLinks.map((link) => {
                 const isActive = isActiveLink(link.href);
                 return (
                   <Link
                     key={link.name}
                     to={link.href}
-                    className={`block py-2 text-[15px] font-medium transition-colors duration-150 ${
+                    className={`block py-1.5 text-sm font-medium transition-colors duration-150 ${
                       isActive
                         ? "text-orange-400"
-                        : "text-white/80 hover:text-white"
+                        : "text-white hover:text-white/80"
                     }`}
                     onClick={() => {
                       setMobileMenuOpen(false);
@@ -397,12 +396,12 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 );
               })}
 
-              <div className="pt-5 pb-3 flex flex-col items-center gap-3">
+              <div className="pt-4 pb-2 flex flex-col items-center gap-2">
                 {isAdminOrStaff ? (
                   <Link
                     to="/admin"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center gap-1.5 text-[12px] font-semibold text-white/70 hover:text-white transition-colors duration-150"
+                    className="flex items-center gap-1.5 text-sm font-semibold text-white hover:text-white/80 transition-colors duration-150"
                   >
                     <LayoutDashboard className="h-3.5 w-3.5" />
                     Dashboard
@@ -411,7 +410,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <Link
                     to="/portal"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-[12px] font-semibold text-white/70 hover:text-white transition-colors duration-150"
+                    className="text-sm font-semibold text-white hover:text-white/80 transition-colors duration-150"
                   >
                     Login
                   </Link>
@@ -419,7 +418,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
 
                 <a
                   href={SITE.phone.tel}
-                  className="flex items-center gap-1.5 text-[11px] text-white/35 font-medium transition-colors duration-150 hover:text-white/60"
+                  className="flex items-center gap-1.5 text-sm text-white/80 font-medium transition-colors duration-150 hover:text-white"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <Phone className="h-3 w-3" />

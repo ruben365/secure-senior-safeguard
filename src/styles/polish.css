@@ -236,9 +236,9 @@ button[aria-label][data-icon-only]:hover::before {
 nav a[class*="text-white"]:not([class*="rounded-full"])::after {
   content: "";
   position: absolute;
-  left: 0.875rem;    /* matches px-3.5 */
-  right: 0.875rem;
-  bottom: 0.25rem;
+  left: 0;
+  right: 0;
+  bottom: -2px;
   height: 2px;
   background: #F97316;
   border-radius: 1px;
@@ -255,9 +255,9 @@ nav a[class*="text-white"]:not([class*="rounded-full"]):hover::after {
 nav a[class*="text-orange-400"]::after {
   content: "";
   position: absolute;
-  left: 0.875rem;
-  right: 0.875rem;
-  bottom: 0.25rem;
+  left: 0;
+  right: 0;
+  bottom: -2px;
   height: 2px;
   background: #F97316;
   border-radius: 1px;

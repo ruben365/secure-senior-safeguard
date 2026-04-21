@@ -367,7 +367,10 @@ main#main-content {
   z-index: 10001 !important;
   max-width: none !important;
   padding: 0 !important;
-  border-radius: 0 0 0 14px !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 16px !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
 }
 
 /* ── Mobile call CTA — guarantee pill width on all browsers ── */
