@@ -276,6 +276,21 @@
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: inherit;
   position: relative;
+  overflow: hidden;
+}
+
+/* Shared yellow/amber edge accent — consistent across all 3 CTAs */
+.hero-home__cta::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, #fbbf24, #f59e0b);
+  border-radius: 3px 0 0 3px;
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* Primary CTA — glass with purple accent glow */
