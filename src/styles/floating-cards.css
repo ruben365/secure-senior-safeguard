@@ -1,0 +1,101 @@
+/* ═══════════════════════════════════════════════════════════════════
+   FLOATING CARDS — heavy rounded corners + subtle stroke + soft shadow
+   Heroes and footer are excluded.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Tokens ────────────────────────────────────────────────────── */
+:root {
+  --float-radius: 2rem;                              /* 32px heavy rounding */
+  --float-radius-sm: 1.25rem;                        /* 20px nested/small */
+  --float-border: 1px solid rgba(15, 23, 42, 0.06);  /* subtle hairline */
+  --float-shadow:
+    0 1px 2px 0 rgba(15, 23, 42, 0.04),
+    0 4px 12px -2px rgba(15, 23, 42, 0.05),
+    0 16px 32px -8px rgba(15, 23, 42, 0.06);
+  --float-shadow-hover:
+    0 2px 4px 0 rgba(15, 23, 42, 0.05),
+    0 8px 20px -4px rgba(15, 23, 42, 0.07),
+    0 24px 48px -12px rgba(15, 23, 42, 0.08);
+}
+
+/* ── 2. Container surfaces (heroes + footer excluded) ─────────────── */
+.card:not(.hero-home .card):not(.hero-business .card):not(.hero-workshops .card):not(footer .card):not(.site-footer .card),
+.glass:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+.glass-card:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+.glass-vibe:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+.glass-vibe-card:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+.panel:not(.hero-home .panel):not(.hero-business .panel):not(.hero-workshops .panel):not(footer .panel):not(.site-footer .panel),
+[data-widget="panel"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+[data-widget="card"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
+  border-radius: var(--float-radius) !important;
+  border: var(--float-border) !important;
+  box-shadow: var(--float-shadow) !important;
+  transition:
+    box-shadow 220ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 220ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 220ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* ── 3. Hover lift ────────────────────────────────────────────────── */
+.card:not(.hero-home .card):not(.hero-business .card):not(.hero-workshops .card):not(footer .card):not(.site-footer .card):hover,
+.glass:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):hover,
+.glass-card:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):hover,
+.glass-vibe:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):hover,
+.glass-vibe-card:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):hover,
+[data-widget="card"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):hover,
+[data-widget="panel"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):hover {
+  box-shadow: var(--float-shadow-hover) !important;
+  border-color: rgba(15, 23, 42, 0.10) !important;
+}
+
+/* ── 4. Radix surfaces (dialogs, popovers, menus, tooltips) ───────── */
+[role="dialog"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+[role="alertdialog"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+[data-radix-popper-content-wrapper]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) > *,
+[role="menu"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+[role="listbox"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+[role="tooltip"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
+  border-radius: var(--float-radius) !important;
+  border: var(--float-border) !important;
+  box-shadow: var(--float-shadow) !important;
+}
+
+/* Tooltips stay smaller */
+[role="tooltip"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
+  border-radius: var(--float-radius-sm) !important;
+}
+
+/* ── 5. Reduced motion ────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .card:not(.hero-home .card):not(.hero-business .card):not(.hero-workshops .card):not(footer .card):not(.site-footer .card),
+  .glass:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+  [data-widget="card"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
+    transition: none !important;
+  }
+  .card:hover,
+  .glass:hover,
+  [data-widget="card"]:hover {
+    transform: none !important;
+  }
+}
+
+/* ── 6. Print: strip decoration ──────────────────────────────────── */
+@media print {
+  .card,
+  .glass,
+  .glass-card,
+  .glass-vibe,
+  .glass-vibe-card,
+  .panel,
+  [data-widget="card"],
+  [data-widget="panel"],
+  [role="dialog"],
+  [role="alertdialog"],
+  [role="menu"],
+  [role="listbox"],
+  [role="tooltip"] {
+    border-radius: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+}
