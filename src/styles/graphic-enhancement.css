@@ -1,0 +1,321 @@
+/* ═══════════════════════════════════════════════════════════════════
+   Editorial Plume — Graphic Enhancement Layer
+   Magazine-grade primitives for body sections (heroes & footer untouched)
+   Built on existing cream/plum/copper palette
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  --gx-copper: #d96c4a;
+  --gx-copper-soft: rgba(217, 108, 74, 0.3);
+  --gx-copper-faint: rgba(217, 108, 74, 0.08);
+  --gx-plum: #5a2a5a;
+  --gx-plum-soft: rgba(90, 42, 90, 0.18);
+  --gx-cream: #faf7f2;
+  --gx-ink: #1a1320;
+}
+
+/* ─── Section wrapper ───────────────────────────────────────── */
+.gx-section {
+  position: relative;
+  isolation: isolate;
+}
+.gx-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--gx-copper-soft) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+.gx-section::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.015) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Eyebrow label ────────────────────────────────────────── */
+.gx-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gx-copper);
+  margin-bottom: 14px;
+}
+.gx-eyebrow::before {
+  content: "";
+  width: 12px;
+  height: 1.5px;
+  background: var(--gx-copper);
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+/* ─── Heading with copper accent ──────────────────────────── */
+.gx-heading {
+  position: relative;
+  color: var(--gx-plum);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+}
+.gx-heading::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 28px;
+  height: 3px;
+  background: var(--gx-copper);
+  border-radius: 2px;
+}
+.gx-heading.gx-heading--center {
+  text-align: center;
+}
+.gx-heading.gx-heading--center::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ─── Divider with diamond glyph ──────────────────────────── */
+.gx-divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 48px auto;
+  max-width: 600px;
+  height: 12px;
+}
+.gx-divider::before,
+.gx-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--gx-copper-soft) 100%
+  );
+}
+.gx-divider::after {
+  background: linear-gradient(
+    90deg,
+    var(--gx-copper-soft) 0%,
+    transparent 100%
+  );
+}
+.gx-divider > span,
+.gx-divider {
+  position: relative;
+}
+.gx-divider::before {
+  margin-right: 14px;
+}
+.gx-divider::after {
+  margin-left: 14px;
+}
+/* Diamond glyph via centered pseudo */
+.gx-divider {
+  background-image: none;
+}
+.gx-divider-glyph {
+  width: 8px;
+  height: 8px;
+  background: var(--gx-copper);
+  transform: rotate(45deg);
+  display: inline-block;
+  border-radius: 1px;
+}
+
+/* ─── Figure (image frame) ────────────────────────────────── */
+.gx-figure {
+  position: relative;
+  display: block;
+  padding: 4px;
+  background: var(--gx-cream);
+  border-radius: 14px;
+  box-shadow:
+    0 1px 2px rgba(217, 108, 74, 0.08),
+    0 8px 24px -8px rgba(90, 42, 90, 0.18),
+    0 24px 48px -16px rgba(26, 19, 32, 0.12);
+  overflow: hidden;
+}
+.gx-figure::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 11px;
+  box-shadow: inset 0 0 0 1px rgba(217, 108, 74, 0.12);
+  pointer-events: none;
+  z-index: 2;
+}
+.gx-figure img,
+.gx-figure > * {
+  display: block;
+  border-radius: 10px;
+  width: 100%;
+  height: auto;
+}
+
+/* ─── Pull quote ──────────────────────────────────────────── */
+.gx-quote {
+  position: relative;
+  padding: 18px 20px 18px 28px;
+  border-left: 3px solid var(--gx-plum);
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: 1.15em;
+  line-height: 1.55;
+  color: var(--gx-ink);
+  background: linear-gradient(
+    90deg,
+    rgba(90, 42, 90, 0.04) 0%,
+    transparent 100%
+  );
+  border-radius: 0 8px 8px 0;
+}
+.gx-quote::before {
+  content: "\201C";
+  position: absolute;
+  top: -8px;
+  left: 14px;
+  font-size: 48px;
+  line-height: 1;
+  color: var(--gx-copper);
+  font-family: Georgia, serif;
+  font-style: normal;
+  opacity: 0.55;
+}
+
+/* ─── Card: elevated variant ──────────────────────────────── */
+.gx-card-elevated {
+  position: relative;
+  transition: transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow:
+    0 1px 2px rgba(26, 19, 32, 0.04),
+    0 6px 14px -6px rgba(90, 42, 90, 0.10),
+    0 18px 36px -18px rgba(26, 19, 32, 0.16);
+}
+.gx-card-elevated::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px transparent;
+  transition: box-shadow 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+}
+.gx-card-elevated:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 2px 4px rgba(26, 19, 32, 0.06),
+    0 12px 24px -8px rgba(90, 42, 90, 0.18),
+    0 28px 56px -20px rgba(26, 19, 32, 0.22);
+}
+.gx-card-elevated:hover::after {
+  box-shadow: inset 0 0 0 1px var(--gx-copper-soft);
+}
+
+/* ─── Card: tile with corner mark ─────────────────────────── */
+.gx-card-tile {
+  position: relative;
+}
+.gx-card-tile::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid var(--gx-copper);
+  border-left: 2px solid var(--gx-copper);
+  border-radius: 1px 0 0 0;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.7;
+}
+
+/* ─── Background accents (decorative) ─────────────────────── */
+.gx-bg-noise {
+  position: relative;
+}
+.gx-bg-noise::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 0.55  0 0 0 0 0.45  0 0 0 0 0.4  0 0 0 0.45 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/></svg>");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: multiply;
+}
+
+.gx-bg-rule {
+  position: relative;
+}
+.gx-bg-rule::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    180deg,
+    transparent 0px,
+    transparent 7px,
+    rgba(90, 42, 90, 0.04) 7px,
+    rgba(90, 42, 90, 0.04) 8px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gx-bg-corner-mark {
+  position: relative;
+}
+.gx-bg-corner-mark::after {
+  content: "";
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 18px;
+  height: 18px;
+  border-top: 1.5px solid var(--gx-copper);
+  border-right: 1.5px solid var(--gx-copper);
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─── Reduced motion ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .gx-card-elevated,
+  .gx-card-elevated::after {
+    transition: none !important;
+  }
+  .gx-card-elevated:hover {
+    transform: none !important;
+  }
+}
