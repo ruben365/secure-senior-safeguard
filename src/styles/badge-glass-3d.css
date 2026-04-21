@@ -1,0 +1,313 @@
+/* ═══════════════════════════════════════════════════════════════════
+   BADGE GLASS 3D — Premium refractive glass treatment for all badges
+   Targets: shadcn Badge, PricingBadge, TrustBadgeInline, GuaranteeBadge,
+            SecurityBadges, ProtectionBadge, FloatingBadge, Checkout pills
+   Excludes: hero pages and footer
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  --bg3d-radius: 999px;
+  --bg3d-radius-square: 0.875rem;
+  --bg3d-blur: 10px;
+
+  --bg3d-glass-white: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 0.74) 100%);
+  --bg3d-glass-cream: linear-gradient(180deg, #ffffff 0%, #fff7f2 100%);
+  --bg3d-glass-terracotta: linear-gradient(180deg, #ffe8dc 0%, #ffd1bd 100%);
+  --bg3d-glass-success: linear-gradient(180deg, #dcfce7 0%, #bbf7d0 100%);
+  --bg3d-glass-info: linear-gradient(180deg, #dbeafe 0%, #bfdbfe 100%);
+  --bg3d-glass-amber: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
+  --bg3d-glass-danger: linear-gradient(180deg, #fee2e2 0%, #fecaca 100%);
+  --bg3d-glass-mint: linear-gradient(180deg, #d1fae5 0%, #a7f3d0 100%);
+  --bg3d-glass-coral: linear-gradient(180deg, #ffe4e6 0%, #fecdd3 100%);
+  --bg3d-glass-ice: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%);
+  --bg3d-glass-sun: linear-gradient(180deg, #fef9c3 0%, #fde68a 100%);
+  --bg3d-glass-patriot: linear-gradient(180deg, #dbeafe 0%, #fecaca 50%, #dbeafe 100%);
+
+  --bg3d-shadow-base:
+    0 1px 0 rgba(255, 255, 255, 0.85) inset,
+    0 -1px 0 rgba(15, 23, 42, 0.06) inset,
+    0 1px 2px rgba(15, 23, 42, 0.06),
+    0 4px 12px -2px rgba(15, 23, 42, 0.08);
+
+  --bg3d-shadow-hover:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 -1px 0 rgba(15, 23, 42, 0.08) inset,
+    0 2px 4px rgba(15, 23, 42, 0.08),
+    0 8px 20px -4px rgba(15, 23, 42, 0.12);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   BASE — every pill/badge surface gets the refractive glass treatment
+   ───────────────────────────────────────────────────────────────── */
+.badge:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+[class*="rounded-full"][class*="border"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):not(button):not(a):not(input):not(.avatar):not([class*="avatar"]),
+.floating-badge:not(.hero-home *):not(footer *) {
+  background: var(--bg3d-glass-white) !important;
+  border: 1px solid rgba(255, 255, 255, 0.55) !important;
+  backdrop-filter: blur(var(--bg3d-blur)) saturate(1.4);
+  -webkit-backdrop-filter: blur(var(--bg3d-blur)) saturate(1.4);
+  box-shadow: var(--bg3d-shadow-base) !important;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0.04em;
+  transition:
+    box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover lift — only for non-interactive badges (don't double-up on buttons/links) */
+.floating-badge:not(.hero-home *):not(footer *):hover {
+  transform: translateY(-1px);
+  box-shadow: var(--bg3d-shadow-hover) !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   COLOR-AWARE VARIANTS — map PricingBadge gradient classes
+   The badge container holds a `from-X to-Y` gradient inside .bg-clip-text;
+   we tint the OUTER pill based on sibling gradient classes.
+   ───────────────────────────────────────────────────────────────── */
+
+/* Amber (recommended) */
+[class*="rounded-full"]:has(.from-amber-500.to-orange-500):not(.hero-home *):not(footer *) {
+  background: var(--bg3d-glass-amber) !important;
+  border-color: rgba(245, 158, 11, 0.30) !important;
+  box-shadow:
+    var(--bg3d-shadow-base),
+    0 6px 16px -4px rgba(245, 158, 11, 0.22) !important;
+}
+
+/* Emerald (best-value) */
+[class*="rounded-full"]:has(.from-emerald-500.to-teal-500):not(.hero-home *):not(footer *) {
+  background: var(--bg3d-glass-mint) !important;
+  border-color: rgba(16, 185, 129, 0.30) !important;
+  box-shadow:
+    var(--bg3d-shadow-base),
+    0 6px 16px -4px rgba(16, 185, 129, 0.22) !important;
+}
+
+/* Red/Pink (limited) */
+[class*="rounded-full"]:has(.from-red-500.to-pink-500):not(.hero-home *):not(footer *) {
+  background: var(--bg3d-glass-coral) !important;
+  border-color: rgba(239, 68, 68, 0.30) !important;
+  box-shadow:
+    var(--bg3d-shadow-base),
+    0 6px 16px -4px rgba(239, 68, 68, 0.22) !important;
+}
+
+/* Blue/Indigo (trusted) */
+[class*="rounded-full"]:has(.from-blue-500.to-indigo-500):not(.hero-home *):not(footer *) {
+  background: var(--bg3d-glass-info) !important;
+  border-color: rgba(59, 130, 246, 0.30) !important;
+  box-shadow:
+    var(--bg3d-shadow-base),
+    0 6px 16px -4px rgba(59, 130, 246, 0.22) !important;
+}
+
+/* Green/Emerald (secure) */
+[class*="rounded-full"]:has(.from-green-500.to-emerald-500):not(.hero-home *):not(footer *) {
+  background: var(--bg3d-glass-success) !important;
+  border-color: rgba(34, 197, 94, 0.30) !important;
+  box-shadow:
+    var(--bg3d-shadow-base),
+    0 6px 16px -4px rgba(34, 197, 94, 0.22) !important;
+}
+
+/* Yellow/Amber (fast) */
+[class*="rounded-full"]:has(.from-yellow-500.to-amber-500):not(.hero-home *):not(footer *) {
+  background: var(--bg3d-glass-sun) !important;
+  border-color: rgba(234, 179, 8, 0.30) !important;
+  box-shadow:
+    var(--bg3d-shadow-base),
+    0 6px 16px -4px rgba(234, 179, 8, 0.22) !important;
+}
+
+/* Orange/Brand (guaranteed, premium) */
+[class*="rounded-full"]:has(.from-orange-500.to-amber-500):not(.hero-home *):not(footer *),
+[class*="rounded-full"]:has(.from-orange-600):not(.hero-home *):not(footer *) {
+  background: var(--bg3d-glass-terracotta) !important;
+  border-color: rgba(217, 108, 74, 0.32) !important;
+  box-shadow:
+    var(--bg3d-shadow-base),
+    0 6px 16px -4px rgba(217, 108, 74, 0.25) !important;
+}
+
+/* Cyan/Blue (new) */
+[class*="rounded-full"]:has(.from-cyan-500.to-blue-500):not(.hero-home *):not(footer *) {
+  background: var(--bg3d-glass-ice) !important;
+  border-color: rgba(6, 182, 212, 0.30) !important;
+  box-shadow:
+    var(--bg3d-shadow-base),
+    0 6px 16px -4px rgba(6, 182, 212, 0.22) !important;
+}
+
+/* Orange/Red (hot) */
+[class*="rounded-full"]:has(.from-orange-500.to-red-500):not(.hero-home *):not(footer *) {
+  background: var(--bg3d-glass-coral) !important;
+  border-color: rgba(249, 115, 22, 0.32) !important;
+  box-shadow:
+    var(--bg3d-shadow-base),
+    0 6px 16px -4px rgba(249, 115, 22, 0.25) !important;
+}
+
+/* Green/Teal (save) */
+[class*="rounded-full"]:has(.from-green-500.to-teal-500):not(.hero-home *):not(footer *) {
+  background: var(--bg3d-glass-mint) !important;
+  border-color: rgba(20, 184, 166, 0.30) !important;
+  box-shadow:
+    var(--bg3d-shadow-base),
+    0 6px 16px -4px rgba(20, 184, 166, 0.22) !important;
+}
+
+/* Patriotic (veteran) */
+[class*="rounded-full"]:has(.from-blue-600.via-red-500):not(.hero-home *):not(footer *) {
+  background: var(--bg3d-glass-patriot) !important;
+  border-color: rgba(37, 99, 235, 0.32) !important;
+  box-shadow:
+    var(--bg3d-shadow-base),
+    0 4px 10px -2px rgba(220, 38, 38, 0.18),
+    0 8px 20px -6px rgba(37, 99, 235, 0.20) !important;
+}
+
+/* Primary brand (popular) */
+[class*="rounded-full"]:has(.from-primary):not(.hero-home *):not(footer *) {
+  background: var(--bg3d-glass-terracotta) !important;
+  border-color: rgba(217, 108, 74, 0.32) !important;
+  box-shadow:
+    var(--bg3d-shadow-base),
+    0 6px 16px -4px rgba(217, 108, 74, 0.25) !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   GRADIENT TEXT — sharper rendering on bg-clip-text labels
+   ───────────────────────────────────────────────────────────────── */
+[class*="rounded-full"] .bg-clip-text:not(.hero-home *):not(footer *) {
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.08em !important;
+  font-weight: 700;
+}
+
+/* Emoji icon depth */
+[class*="rounded-full"] > .text-sm:first-child:not(.hero-home *):not(footer *) {
+  filter: drop-shadow(0 1px 2px rgba(15, 23, 42, 0.18));
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   shadcn Badge cva variants
+   ───────────────────────────────────────────────────────────────── */
+.badge:not(.hero-home *):not(footer *) {
+  border-radius: var(--bg3d-radius);
+}
+
+/* Premium variant */
+.bg-gradient-to-r.from-primary\/10.to-accent\/10:not(.hero-home *):not(footer *) {
+  background: var(--bg3d-glass-terracotta) !important;
+  border-color: rgba(217, 108, 74, 0.32) !important;
+  color: #8e3e22 !important;
+  box-shadow:
+    var(--bg3d-shadow-base),
+    0 6px 16px -4px rgba(217, 108, 74, 0.22) !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   FORM BADGES — TrustBadgeInline, ProtectionBadge, Checkout pills
+   Stronger "wet glass" pop over white form surfaces
+   ───────────────────────────────────────────────────────────────── */
+
+/* Success-tinted trust pills (TrustBadgeInline) */
+.bg-success\/10.text-success.border-success\/20:not(.hero-home *):not(footer *) {
+  background: var(--bg3d-glass-success) !important;
+  border: 1px solid rgba(34, 197, 94, 0.32) !important;
+  backdrop-filter: blur(var(--bg3d-blur)) saturate(1.6);
+  -webkit-backdrop-filter: blur(var(--bg3d-blur)) saturate(1.6);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 -1px 0 rgba(15, 23, 42, 0.06) inset,
+    0 2px 6px rgba(34, 197, 94, 0.12),
+    0 6px 14px -4px rgba(34, 197, 94, 0.18) !important;
+}
+
+/* Icons inside form badges get matching depth */
+.bg-success\/10.text-success svg:not(.hero-home *):not(footer *),
+[class*="rounded-full"]:has(svg) svg:not(.hero-home *):not(footer *):not(button svg):not(a svg) {
+  filter: drop-shadow(0 1px 1.5px rgba(15, 23, 42, 0.18));
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   SECURITY BADGES ROW — TLS / Privacy / Protected
+   ───────────────────────────────────────────────────────────────── */
+.flex:has(> .bg-background\/70):not(.hero-home *):not(footer *) > .bg-background\/70 {
+  background: var(--bg3d-glass-white) !important;
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(var(--bg3d-blur)) saturate(1.5);
+  -webkit-backdrop-filter: blur(var(--bg3d-blur)) saturate(1.5);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 -1px 0 rgba(15, 23, 42, 0.05) inset,
+    0 2px 6px rgba(15, 23, 42, 0.06),
+    0 6px 16px -4px rgba(15, 23, 42, 0.10) !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   FLOATING BADGE — corner labels with deeper float
+   ───────────────────────────────────────────────────────────────── */
+.floating-badge:not(.hero-home *):not(footer *) {
+  background: var(--bg3d-glass-white) !important;
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(var(--bg3d-blur)) saturate(1.5);
+  -webkit-backdrop-filter: blur(var(--bg3d-blur)) saturate(1.5);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.92) inset,
+    0 -1px 0 rgba(15, 23, 42, 0.06) inset,
+    0 2px 6px rgba(15, 23, 42, 0.08),
+    0 12px 32px -8px rgba(15, 23, 42, 0.18) !important;
+  transform: translateZ(0);
+}
+
+.floating-badge:not(.hero-home *):not(footer *):hover {
+  transform: translateY(-1px) translateZ(0);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 -1px 0 rgba(15, 23, 42, 0.08) inset,
+    0 4px 10px rgba(15, 23, 42, 0.10),
+    0 18px 44px -10px rgba(15, 23, 42, 0.22) !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   GUARANTEE BADGE — terracotta-cream glass with success accent
+   ───────────────────────────────────────────────────────────────── */
+.flex.items-center.justify-center.gap-2.p-3.bg-background\/70:not(.hero-home *):not(footer *) {
+  background: var(--bg3d-glass-cream) !important;
+  border: 1px solid rgba(217, 108, 74, 0.20) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 -1px 0 rgba(15, 23, 42, 0.06) inset,
+    0 2px 6px rgba(217, 108, 74, 0.10),
+    0 8px 20px -6px rgba(34, 197, 94, 0.15) !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   ACCESSIBILITY & PRINT
+   ───────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .badge,
+  [class*="rounded-full"][class*="border"],
+  .floating-badge {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+@media print {
+  .badge,
+  [class*="rounded-full"][class*="border"],
+  .floating-badge {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
