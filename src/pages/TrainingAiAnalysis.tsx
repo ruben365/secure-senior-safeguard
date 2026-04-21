@@ -45,6 +45,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/sonner";
+import "@/styles/ai-analysis.css";
 export default function TrainingAiAnalysis() {
   usePrerenderReady(true);
   const [paymentOpen, setPaymentOpen] = useState(false);
@@ -366,7 +367,7 @@ export default function TrainingAiAnalysis() {
   return (
     <PageTransition variant="fade">
       <div
-        className={`min-h-screen transition-colors duration-300 ${darkMode ? "bg-[#1a1a2e] text-slate-200" : "bg-[#B8B9D1] text-foreground"}`}
+        className={`ai-analysis-page min-h-screen transition-colors duration-300 ${darkMode ? "bg-[#1a1a2e] text-slate-200" : "bg-[#B8B9D1] text-foreground"}`}
       >
         <SEO
           title="AI Analysis & Secure File Scan"
@@ -394,7 +395,7 @@ export default function TrainingAiAnalysis() {
             {/* Top Navigation Bar */}
             <div className="w-full flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2 rounded-full bg-black/45 backdrop-blur-md border border-white/10 px-3 py-2 shadow-xl">
+                <div className="aia-toolbar flex items-center gap-2 rounded-full bg-black/45 backdrop-blur-md border border-white/10 px-3 py-2 shadow-xl">
                   <Link
                     to="/"
                     className="h-8 w-8 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 transition"
@@ -425,7 +426,7 @@ export default function TrainingAiAnalysis() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 rounded-full bg-black/45 backdrop-blur-md border border-white/10 px-3 py-2 shadow-xl">
+              <div className="aia-toolbar flex items-center gap-2 rounded-full bg-black/45 backdrop-blur-md border border-white/10 px-3 py-2 shadow-xl">
                 <button
                   type="button"
                   onClick={() => {
@@ -484,7 +485,7 @@ export default function TrainingAiAnalysis() {
 
               {/* Enhanced AI Command Center */}
               <div className="w-full flex flex-col items-center gap-3">
-                <div className="w-full max-w-3xl mx-auto rounded-[1.75rem] border border-white/15 bg-black/30 backdrop-blur-xl px-5 py-4 shadow-xl">
+                <div className="aia-notice aia-notice--access w-full max-w-3xl mx-auto rounded-[1.75rem] border border-white/15 bg-black/30 backdrop-blur-xl px-5 py-4 shadow-xl">
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div className="min-w-0">
                       <div className="mb-1 flex items-center gap-2 text-white">
@@ -551,7 +552,7 @@ export default function TrainingAiAnalysis() {
                 {file && (
                   <div className="flex flex-wrap items-center justify-center gap-3">
                     {/* File chip */}
-                    <div className="flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 shadow-xl">
+                    <div className="aia-notice aia-notice--filechip flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 shadow-xl">
                       <span className="text-sm text-white/90 font-medium truncate max-w-[200px]">
                         {file.name}
                       </span>
@@ -586,7 +587,7 @@ export default function TrainingAiAnalysis() {
                     )}
                   </div>
                 )}
-                <div className="w-full max-w-3xl mx-auto rounded-2xl border border-white/15 bg-black/35 backdrop-blur-md px-5 py-4 shadow-xl">
+                <div className="aia-notice aia-notice--privacy w-full max-w-3xl mx-auto rounded-2xl border border-white/15 bg-black/35 backdrop-blur-md px-5 py-4 shadow-xl">
                   <div className="flex items-start gap-3">
                     <ShieldAlert className="h-5 w-5 text-yellow-400 mt-0.5 flex-shrink-0" />
                     <div className="flex-1 text-sm text-white/90 leading-relaxed">
