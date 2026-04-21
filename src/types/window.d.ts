@@ -46,6 +46,22 @@ declare global {
   // Bare names referenced as types/values in components
   type SpeechRecognitionEvent = SpeechRecognitionEventLike;
   type SpeechRecognitionErrorEvent = SpeechRecognitionErrorEventLike;
+  // Re-expose the interface as a global type so `useRef<SpeechRecognition | null>` works
+  // (the interface is also exposed as a value via the const below)
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface SpeechRecognition extends EventTarget {
+    continuous: boolean;
+    interimResults: boolean;
+    lang: string;
+    maxAlternatives: number;
+    start(): void;
+    stop(): void;
+    abort(): void;
+    onresult: ((event: SpeechRecognitionEventLike) => void) | null;
+    onerror: ((event: SpeechRecognitionErrorEventLike) => void) | null;
+    onend: (() => void) | null;
+    onstart: (() => void) | null;
+  }
   // eslint-disable-next-line @typescript-eslint/no-redeclare
   const SpeechRecognition: SpeechRecognitionStatic;
 
