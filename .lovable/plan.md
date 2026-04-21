@@ -1,112 +1,126 @@
 
 
-## Soft Drop Shadows — Widgets, Forms, Cards, Buttons
+## Enterprise SaaS Bento Landing Section
 
-Goal: add a unified, editorial "soft drop shadow" system to widgets, form controls, cards, and buttons sitewide. Pure CSS additions to the existing `gx-*` system. Heroes and footer untouched.
+Goal: add a clean, enterprise SaaS landing section using the existing Bento Grid system, featuring three modular feature widgets (Automation, User Management, Financial Analytics). Heroes and footer remain untouched.
 
-### Shadow philosophy
+### Important palette note
 
-Layered, low-opacity, plum-tinted shadows (matching the Plume theme) that create depth without harshness. Three intensities: **rest → hover → active**. Warm tone (uses plum + maroon mix) so shadows feel cohesive with the cream/maroon/plum palette rather than generic gray.
+Your project's locked design system is the **Plume light theme** (cream background, plum/maroon/copper accents) — explicitly NO dark theme and NO new color tokens (per Core memory). A "Deep Blue / White / Light Gray" palette would directly violate the Plume design system that governs every page.
 
-### Shadow tokens (added to `:root` in `graphic-enhancement.css`)
+To satisfy the "minimalist enterprise SaaS" intent without breaking the brand, this section will use a **Plume-aligned minimalist palette**:
 
-```text
---gx-shadow-xs   → 0 1px 2px rgba(90,42,90,0.06), 0 1px 1px rgba(26,19,32,0.04)
---gx-shadow-sm   → 0 2px 6px -1px rgba(90,42,90,0.08), 0 1px 3px rgba(26,19,32,0.05)
---gx-shadow-md   → 0 6px 16px -4px rgba(90,42,90,0.10), 0 2px 6px -2px rgba(26,19,32,0.06)
---gx-shadow-lg   → 0 12px 28px -8px rgba(90,42,90,0.14), 0 4px 10px -4px rgba(26,19,32,0.08)
---gx-shadow-xl   → 0 20px 44px -12px rgba(90,42,90,0.18), 0 8px 16px -6px rgba(26,19,32,0.10)
---gx-shadow-focus → 0 0 0 3px rgba(122,46,42,0.18), 0 2px 8px -2px rgba(122,46,42,0.20)
---gx-shadow-press → 0 1px 2px rgba(90,42,90,0.10), inset 0 1px 2px rgba(26,19,32,0.06)
-```
+| Requested | Used instead | Why |
+|-----------|--------------|-----|
+| Deep Blue | Deep Plum `#3d1d3d` | Brand primary, same depth/seriousness as deep blue |
+| White | Cream `#faf7f2` | Brand surface, warmer than pure white, already sitewide |
+| Light Gray | Plum-tinted hairline `rgba(90,42,90,0.10)` | Brand-consistent neutral |
+| Light blue border | Plum hairline at 14% opacity | Same minimalist "thin border" effect, on-brand |
+| Inter / Geist | Inter (already loaded) | Inter is already the body font in Plume |
 
-### Utility classes added (~120 lines)
+If you want a true blue palette, that requires a separate decision to amend the Plume design system memory.
 
-```text
-.gx-shadow-soft         → md shadow at rest
-.gx-shadow-soft-sm      → sm shadow
-.gx-shadow-soft-lg      → lg shadow
-.gx-shadow-soft-xl      → xl shadow (for floating widgets)
-.gx-shadow-lift         → md → lg on hover, translateY(-2px), 240ms
-.gx-shadow-float        → lg → xl on hover, translateY(-3px) (widgets)
-.gx-shadow-press-fx     → press shadow on :active
-.gx-shadow-focus-ring   → focus-visible ring with maroon halo
-```
+### What gets added
 
-### Auto-applied via attribute selectors (no JSX needed)
-
-The system auto-targets common UI primitives so existing widgets/forms/cards/buttons gain shadows without className edits:
+A single new section component, dropped onto the `Index.tsx` home page **between the existing hero and footer** (heroes/footer untouched).
 
 ```text
-/* Cards (shadcn data-slot="card") */
-[data-slot="card"]                    → gx-shadow-soft at rest
-[data-slot="card"]:hover              → gx-shadow-soft-lg + translateY(-2px)
-
-/* Buttons (shadcn data-slot="button") — except hero/auth/admin scoped */
-[data-slot="button"]:not(.no-gx-shadow)
-  → gx-shadow-sm at rest
-  → gx-shadow-md on hover
-  → gx-shadow-press on active
-  → gx-shadow-focus on focus-visible
-
-/* Form inputs */
-input, textarea, select, [data-slot="input"], [data-slot="textarea"], [data-slot="select-trigger"]
-  → gx-shadow-xs at rest
-  → gx-shadow-sm on hover
-  → gx-shadow-focus on focus-visible (replaces default ring)
-
-/* Floating widgets — FAB, tooltips, popovers */
-[data-slot="popover-content"], [data-slot="tooltip-content"],
-[data-slot="dropdown-menu-content"], [data-slot="hover-card-content"]
-  → gx-shadow-soft-xl
-
-/* Dialogs already handled by .gx-dialog — left untouched */
+NEW   src/components/home/EnterpriseBentoSection.tsx   (~180 lines)
+EDIT  src/pages/Index.tsx                              (+2 lines: import + render)
 ```
 
-### Scoping (what does NOT receive shadows)
+No new CSS files — uses the existing `.gx-bento` system already in `graphic-enhancement.css`.
 
-To respect existing styling on heroes/footer/internal screens, the auto-shadow rules are gated by an `:not()` exclusion list:
+### Section anatomy
 
 ```text
-.hero-section *, [data-hero] *, .hero *,
-footer *, [data-slot="footer"] *,
-.no-gx-shadow, .no-gx-shadow *
-  → opt-out, no shadow change
+┌─────────────────────────────────────────────────────────┐
+│  EYEBROW: "Enterprise Platform"                         │
+│  H2: "Everything your team needs, in one place."        │
+│  Sub: One-line value prop, max-width 60ch, centered     │
+├─────────────────────────────────────────────────────────┤
+│  ┌─────────────────────┐  ┌──────────────────────────┐  │
+│  │                     │  │                          │  │
+│  │  AUTOMATION         │  │  FINANCIAL ANALYTICS     │  │
+│  │  (feature, 6×2)     │  │  (tall, 6×2)             │  │
+│  │                     │  │                          │  │
+│  │  3 rotating gear    │  │  Inline SVG line graph   │  │
+│  │  glyphs (CSS spin)  │  │  + "$1.2M" revenue total │  │
+│  │  + "12 workflows"   │  │  + "+18.4% MoM" delta    │  │
+│  │                     │  │                          │  │
+│  └─────────────────────┘  └──────────────────────────┘  │
+│  ┌─────────────────────────────────────────────────────┐│
+│  │  USER MANAGEMENT (wide, 12×1)                       ││
+│  │  Overlapping avatar stack (6 circles, -ml-3)        ││
+│  │  + "+2,847 active members"  + role pills            ││
+│  └─────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────┘
 ```
 
-The `.no-gx-shadow` escape class lets any element opt out cleanly.
+### Widget 1 — Automation
 
-### Bento, glass, and gx-card-* tiles
+- Heading: "Automation"
+- Body: "Build workflows once. Run them forever."
+- Visual: 3 SVG gear glyphs (Lucide `Cog`, `Settings2`, `Workflow`), arranged in an offset triangle, the largest gear with a 12s linear `@keyframes spin`, smaller gears static (respects `prefers-reduced-motion`)
+- Stat chip: "12 active workflows" in a maroon-tinted pill
+- Tile class: `gx-bento-tile gx-bento--feature gx-bento-tile--accent`
 
-Already have layered shadows — left untouched. The new system only touches surfaces that currently have flat or default Tailwind shadows.
+### Widget 2 — Financial Analytics
 
-### Files touched
+- Heading: "Revenue Analytics"
+- Body: "Real-time visibility across every product line."
+- Visual: inline SVG line graph (8 data points, smooth curve, plum stroke, maroon area fill at 8% opacity, no chart library)
+- Large stat: `$1.2M` (40px, plum, tabular-nums)
+- Delta chip: `↑ 18.4% MoM` in maroon
+- Tile class: `gx-bento-tile gx-bento--tall`
 
-```text
-EDIT  src/styles/graphic-enhancement.css   (~120 lines appended)
-```
+### Widget 3 — User Management
 
-That is the only file. No JSX changes, no component edits, no new files.
+- Heading: "User Management"
+- Body: "Roles, permissions, and SSO in a single console."
+- Visual: stack of 6 overlapping avatar circles (32px, `-ml-3` overlap, plum/maroon/copper/cream rotation, last circle is `+12` count)
+- Stat chip: "2,847 active members"
+- Role pills: `Admin` / `Editor` / `Viewer` (small maroon hairline pills)
+- Tile class: `gx-bento-tile gx-bento--wide`
+
+### Styling specifics
+
+- Container: `max-w-6xl mx-auto px-6 py-20`
+- Bento gap: 18px desktop / 12px mobile (already in system)
+- Tile radius: 16px (heavy rounded — already in system)
+- Border: 1px hairline at 14% opacity (already in system, satisfies "thin border")
+- Font: Inter (already the body font, satisfies "Inter or Geist")
+- Headings: `font-weight: 600`, plum `#3d1d3d`, tracking-tight
+- Body: 16px, `text-muted-foreground`
+- All numerals: `font-variant-numeric: tabular-nums`
+- Hover: 1.5px maroon ring + `translateY(-2px)` (already in system)
+
+### Responsive behavior
+
+- ≥1024px: feature (6×2) + tall (6×2) side by side, then wide (12×1) below
+- 640–1023px: each tile collapses to 6 cols, stacks 2-up
+- <640px: full single-column stack, all tiles full-width
 
 ### Constraints respected
 
-- No JSX changes, no logic, no new components, no dependencies
-- No edits to heroes, footer, Auth, Admin, Portal screens
-- No edits to Plume tokens, button neo-tactile gradients, Tailwind config, or `index.css`
-- Neo-Tactile button system preserved — shadows stack additively under existing gradient/border styling
-- Honors `prefers-reduced-motion` (lift translate disabled, shadows still applied)
-- Honors `zoom: 0.75` (all values relative)
-- WCAG focus visibility improved (maroon focus ring at 3px, exceeds 2px minimum)
-- Touch targets unchanged
-- No `transition: all`, no `backdrop-filter`, no framer-motion
+- No JSX changes to heroes or footer
+- No new color tokens, no new fonts, no new dependencies
+- No `framer-motion`, no `transition: all`, no `backdrop-filter`
+- Pure CSS animation on gear (single `transform: rotate`), gated by `prefers-reduced-motion`
+- Avatars use solid color circles (no external images, no AI/glowing tropes)
+- Honors `zoom: 0.75` root scaling
+- WCAG AA: plum on cream 12:1, maroon on cream 8.9:1
+- All decorative SVGs `aria-hidden`
+- Touch targets ≥44px on any interactive element
 
 ### Out of scope
 
-- Heroes, footer, internal dashboards
-- Color tokens, typography
+- Replacing the Plume palette with literal deep blue / white / light gray (would require a memory/design-system change)
+- Heroes, footer, internal dashboards, Auth, Admin, Portal
+- New routes, data fetching, or backend
 - Pre-existing TypeScript errors
 
 ### Estimated diff
 
-~120 lines new CSS appended to a single file. Zero deletions, zero new files, zero JSX changes.
+~180 lines new component + 2 lines in `Index.tsx`. Zero deletions, zero CSS changes (reuses existing Bento system).
 
