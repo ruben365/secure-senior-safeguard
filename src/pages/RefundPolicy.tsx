@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { CheckCircle, Clock, XCircle, AlertCircle } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { SITE } from "@/config/site";
+import { CompactLegalHero } from "@/components/shared/CompactLegalHero";
 
 function RefundPolicy() {
   return (
@@ -13,7 +14,12 @@ function RefundPolicy() {
         description="Understand refund eligibility, timelines, and the 30-day satisfaction guarantee."
       />
       <Navigation />
-      <section className="py-24 bg-background">
+      <CompactLegalHero
+        eyebrow="Legal"
+        title="Refund Policy"
+        lede="Our commitment to fair refunds and digital fulfillment."
+      />
+      <section className="py-16 md:py-20 bg-background">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-center mb-4">Refund Policy</h1>

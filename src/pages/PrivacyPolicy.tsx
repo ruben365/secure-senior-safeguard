@@ -6,6 +6,7 @@ import { Download } from "lucide-react";
 import ReadingProgressBar from "@/components/ReadingProgressBar";
 import { SEO } from "@/components/SEO";
 import { SITE } from "@/config/site";
+import { CompactLegalHero } from "@/components/shared/CompactLegalHero";
 
 function PrivacyPolicy() {
   const scrollToSection = (id: string) => {
@@ -20,7 +21,12 @@ function PrivacyPolicy() {
       />
       <ReadingProgressBar />
       <Navigation />
-      <section className="py-24 bg-background">
+      <CompactLegalHero
+        eyebrow="Legal"
+        title="Privacy Policy"
+        lede="How we collect, use, and protect your information."
+      />
+      <section className="py-16 md:py-20 bg-background">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-center mb-4">Privacy Policy</h1>

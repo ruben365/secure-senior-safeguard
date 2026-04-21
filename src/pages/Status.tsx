@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import Hero from "@/components/Hero";
 import { PageTransition } from "@/components/PageTransition";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { CheckCircle, Activity } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { PAGE_SEO } from "@/config/pageSeo";
+import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 
 const services = [
   {
@@ -58,17 +60,17 @@ function Status() {
       />
       <Navigation />
 
-      {/* Hero */}
-      <section className="py-12 md:py-16 bg-background border-b border-border/40">
-        <div className="container mx-auto text-center">
-          <h1 className="text-3xl md:text-4xl font-black text-foreground mb-3">
-            System Status
-          </h1>
-          <p className="text-muted-foreground mb-6 max-w-xl mx-auto text-sm">
-            Real-time status of all InVision Network services.
-          </p>
+      <Hero
+        backgroundImages={PROFESSIONAL_HERO_IMAGES.business}
+        headline="Live platform status & uptime"
+        subheadline="Real-time monitoring of every service we operate."
+        className="min-h-[55dvh]"
+        overlay
+      />
 
-          {/* All Systems Operational Banner */}
+      {/* Status banner */}
+      <section className="py-10 md:py-12 bg-background border-b border-border/40">
+        <div className="container mx-auto text-center">
           <div className="inline-flex items-center gap-3 bg-emerald-50 border border-emerald-200 text-emerald-800 px-5 py-3 rounded-xl font-semibold text-sm">
             <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" />
             All Systems Operational

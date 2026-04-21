@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { AlertTriangle, Shield, Phone, ExternalLink } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { SITE } from "@/config/site";
+import { CompactLegalHero } from "@/components/shared/CompactLegalHero";
 
 function Disclaimer() {
   return (
@@ -13,7 +14,12 @@ function Disclaimer() {
         description="Important information about the nature and limitations of InVision Network services."
       />
       <Navigation />
-      <section className="py-24 bg-background">
+      <CompactLegalHero
+        eyebrow="Legal"
+        title="Disclaimer"
+        lede="Important notices about our content and services."
+      />
+      <section className="py-16 md:py-20 bg-background">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-center mb-4">Disclaimer</h1>
