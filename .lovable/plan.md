@@ -1,163 +1,236 @@
 
 
-## Expand Widget Design System: More Styles + Better Content Density
+## Redesign All Badges on Pricing Cards and Forms — 3D Glass + Sharp
 
-Goal: build on the existing layers (`figma-sharpness`, `soft-elevation`, `floating-cards`, `button-contrast-fix`) by adding a richer widget vocabulary — more visual variants, better content scaffolding (eyebrows, dividers, metrics, status pills, empty states) — so cards stop looking identical and start communicating hierarchy. Heroes and footer untouched.
+Goal: redesign every badge across pricing cards and form surfaces with a premium 3D glass aesthetic — multi-layer highlights, refractive glass fills, sharp hairline strokes, and crisp typography. Heroes and footer untouched.
 
-### What's missing today
+### Badges in scope
 
-The current system gives every card the same look: 2rem radius, hairline border, soft shadow. That's a great baseline, but every widget reads identically — there's no visual difference between a KPI card, a list card, a feature card, or a metric card. Content inside also lacks scaffolding: no eyebrows, no dividers, no status chips, no compact metric rows.
+Found across the codebase:
+
+| Component | File | Used in |
+|-----------|------|---------|
+| `Badge` (shadcn cva variants) | `src/components/ui/badge.tsx` | Forms, dialogs, pricing meta |
+| `PricingBadge` (12 types) | `src/components/PricingBadge.tsx` | Pricing cards (popular, best-value, premium, veteran, etc.) |
+| `TrustBadgeInline` | `src/components/PricingBadge.tsx` | Inline trust signals on forms/checkouts |
+| `GuaranteeBadge` | `src/components/PricingBadge.tsx` | Money-back guarantee block |
+| `SecurityBadges` | `src/components/PricingBadge.tsx` | TLS / Privacy / Protected row |
+| `ProtectionBadge` | `src/components/ProtectionBadge.tsx` | Family Protected pill |
+| `FloatingBadge` | `src/components/pro/FloatingBadge.tsx` | Floating corner labels on cards |
+| Checkout frame badges | `src/components/payment/CheckoutFrame.tsx` | Secure checkout label |
+
+### What "3D Glass + Sharp" means here
+
+A premium glass treatment with four stacked layers, applied via pure CSS — zero JSX/logic edits.
+
+| Layer | Property | Purpose |
+|-------|----------|---------|
+| Base fill | Multi-stop linear gradient (white → tint) | Refractive glass body |
+| Top highlight | `inset 0 1px 0 rgba(255,255,255,0.85)` | Glossy upper edge |
+| Bottom shadow | `inset 0 -1px 0 rgba(15,23,42,0.06)` | Depth recess |
+| Outer glow | Multi-layer drop shadow with brand tint | Floating depth |
+
+Plus:
+- **1px hairline border** with `0.5` subpixel rendering
+- **Backdrop blur 8-10px** (within the project's ≤12px rule)
+- **Crisp text** via `text-rendering: geometricPrecision` + `-webkit-font-smoothing: antialiased`
+- **Letter-spacing 0.06-0.08em** on uppercase labels for sharpness
+- **Hover lift** with stronger glow (200ms cubic-bezier)
 
 ### What gets added
 
 ```text
-NEW   src/styles/widget-variants.css       (~220 lines, pure CSS)
-NEW   src/styles/widget-content.css        (~180 lines, pure CSS)
-EDIT  src/index.css                         (+2 lines @import — last in cascade)
+NEW   src/styles/badge-glass-3d.css        (~280 lines, pure CSS)
+EDIT  src/index.css                         (+1 line @import — last in cascade)
 ```
 
 Zero JSX edits. Zero new dependencies. Zero token changes. Plume palette respected.
 
-### Layer 1 — `widget-variants.css` (visual styles)
+### CSS module — `badge-glass-3d.css`
 
-Six opt-in widget variants, applied via `data-variant="…"` or class. All respect hero/footer exclusions.
-
-| Variant | Look | Use case |
-|---------|------|----------|
-| `data-variant="elevated"` | Stronger shadow, no border | Hero KPIs, primary metrics |
-| `data-variant="outlined"` | 1.5px border, no shadow | Secondary panels, forms |
-| `data-variant="tinted"` | Cream/plum tint background | Featured/highlighted cards |
-| `data-variant="accent-bar"` | 4px left accent stripe | Status, alerts, categories |
-| `data-variant="gradient"` | Subtle warm-to-cream gradient | Hero metrics, CTAs |
-| `data-variant="ghost"` | Transparent, dashed border | Empty states, drop zones |
-
-Plus three accent-bar color tokens that piggyback on Plume:
-- `data-accent="terracotta"` (default brand)
-- `data-accent="plum"` (secondary)
-- `data-accent="success" | "warning" | "danger"` (status)
-
-Example rule:
+#### 1. Design tokens
 ```css
-[data-variant="accent-bar"]:not(.hero-home *):not(footer *) {
-  border-left: 4px solid #d96c4a !important;
-  padding-left: 1.25rem;
-}
-[data-variant="accent-bar"][data-accent="success"]:not(.hero-home *):not(footer *) {
-  border-left-color: #16a34a !important;
+:root {
+  --bg3d-radius: 999px;
+  --bg3d-radius-square: 0.875rem;
+  --bg3d-blur: 10px;
+  --bg3d-border: 1px solid rgba(255, 255, 255, 0.55);
+  --bg3d-border-dark: 1px solid rgba(15, 23, 42, 0.10);
+
+  --bg3d-glass-white: linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.72) 100%);
+  --bg3d-glass-cream: linear-gradient(180deg, #ffffff 0%, #fff7f2 100%);
+  --bg3d-glass-terracotta: linear-gradient(180deg, #ffe8dc 0%, #ffd1bd 100%);
+  --bg3d-glass-success: linear-gradient(180deg, #dcfce7 0%, #bbf7d0 100%);
+  --bg3d-glass-info: linear-gradient(180deg, #dbeafe 0%, #bfdbfe 100%);
+  --bg3d-glass-amber: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
+  --bg3d-glass-danger: linear-gradient(180deg, #fee2e2 0%, #fecaca 100%);
+
+  --bg3d-shadow-base:
+    0 1px 0 rgba(255,255,255,0.85) inset,
+    0 -1px 0 rgba(15,23,42,0.06) inset,
+    0 1px 2px rgba(15,23,42,0.06),
+    0 4px 12px -2px rgba(15,23,42,0.08);
+  --bg3d-shadow-hover:
+    0 1px 0 rgba(255,255,255,0.95) inset,
+    0 -1px 0 rgba(15,23,42,0.08) inset,
+    0 2px 4px rgba(15,23,42,0.08),
+    0 8px 20px -4px rgba(15,23,42,0.12);
 }
 ```
 
-Also adds:
-- **`data-density="compact"`** — tighter padding (`1rem` vs `1.5rem`), smaller radius (`1.25rem`)
-- **`data-density="spacious"`** — generous padding (`2.5rem`), larger radius (`2.5rem`)
-- **`data-interactive="true"`** — adds cursor pointer + hover lift + focus ring
-
-### Layer 2 — `widget-content.css` (scaffolding inside widgets)
-
-Reusable content primitives — pure CSS, opt-in via class:
-
-**Eyebrow labels** (`.widget-eyebrow`)
+#### 2. Base 3D glass mixin (applied via class targeting)
 ```css
-.widget-eyebrow {
-  font-size: 0.6875rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #d96c4a;
-  margin-bottom: 0.5rem;
+.badge,
+[class*="badge"]:not(.hero-home *):not(footer *):not(.site-footer *) {
+  background: var(--bg3d-glass-white) !important;
+  border: var(--bg3d-border) !important;
+  backdrop-filter: blur(var(--bg3d-blur)) saturate(1.4);
+  -webkit-backdrop-filter: blur(var(--bg3d-blur)) saturate(1.4);
+  box-shadow: var(--bg3d-shadow-base) !important;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: 0.04em;
+  transition: box-shadow 200ms cubic-bezier(0.4,0,0.2,1), transform 200ms cubic-bezier(0.4,0,0.2,1);
 }
 ```
 
-**Metric rows** (`.widget-metric`, `.widget-metric-value`, `.widget-metric-label`)
-- Big number + small caption pattern
-- Auto-sized: `2.25rem` value, `0.875rem` label, slate ink
-- Supports inline trend indicator slot
+#### 3. Color-aware variants
 
-**Status pills** (`.widget-pill`, `.widget-pill--success | warning | danger | info | neutral`)
-- Soft tinted background, dark text, 999px radius
-- Sizes: `--sm`, default, `--lg`
+Maps to existing badge gradient classes used in `PricingBadge.tsx`:
 
-**Dividers** (`.widget-divider`, `.widget-divider--dashed`)
-- 1px hairline using existing `--float-border` token
-- Horizontal default, `.widget-divider--vertical` for inline use
+| Source class | New 3D glass treatment |
+|--------------|------------------------|
+| `from-amber-500.to-orange-500` | Amber glass + warm shadow |
+| `from-emerald-500.to-teal-500` | Mint glass + green shadow |
+| `from-red-500.to-pink-500` | Coral glass + pink shadow |
+| `from-blue-500.to-indigo-500` | Ice blue glass + indigo shadow |
+| `from-green-500.to-emerald-500` | Success glass + green shadow |
+| `from-yellow-500.to-amber-500` | Sun glass + amber shadow |
+| `from-orange-600.to-[#d96c4a]` | Brand terracotta glass |
+| `from-blue-600.via-red-500` (veteran) | Patriotic glass with red+blue dual stops |
 
-**Section headers** (`.widget-section-title`)
-- Smaller than card title, `font-weight: 600`, slate ink
-- Optional right-aligned action slot (`.widget-section-action`)
+Each gets:
+- Color-tinted base gradient
+- Matching 8% opacity color glow on the outer shadow layer
+- Strong 0.7 saturation backdrop for richness
+- Text gradient kept (already crisp)
 
-**Empty states** (`.widget-empty`)
-- Centered layout, muted text, optional icon slot, optional CTA slot
-- Soft cream background with dashed border
+#### 4. Pricing card badge variants (PricingBadge component)
+```css
+/* Gradient text receives crisper rendering */
+.bg-clip-text {
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+  letter-spacing: 0.08em !important;
+}
 
-**Stat trio rows** (`.widget-stat-row`)
-- 3-column flex layout for compact "Total / Active / Pending"-style displays
-- Auto-divides with vertical hairlines
+/* Emoji icon gets a soft drop-shadow for depth */
+.badge .text-sm:first-child,
+[class*="rounded-full"] > .text-sm:first-child {
+  filter: drop-shadow(0 1px 2px rgba(15,23,42,0.15));
+}
+```
 
-**Inline list rows** (`.widget-list-row`)
-- Hover-tinted, padded `0.75rem 1rem`, with leading icon + trailing meta slots
-- Last child has no bottom border
+#### 5. shadcn Badge cva variants (badge.tsx)
+```css
+/* default / secondary / outline / success / premium */
+[data-variant="premium"],
+.badge-premium {
+  background: var(--bg3d-glass-terracotta) !important;
+  border-color: rgba(217,108,74,0.30) !important;
+  color: #8e3e22 !important;
+  box-shadow:
+    var(--bg3d-shadow-base),
+    0 6px 16px -4px rgba(217,108,74,0.25) !important;
+}
+```
 
-**KPI card preset** (`.widget-kpi`)
-- Combines: eyebrow + big metric + trend + accent stripe
-- One class drops in a complete KPI surface
+#### 6. Form badges (TrustBadgeInline, ProtectionBadge, checkout frame badge)
+- Stronger backdrop saturation (1.6) for forms over white
+- Inset highlight made brighter (`rgba(255,255,255,0.95)`) for "wet glass" pop
+- Shield/lock icons get matching `drop-shadow` for 3D consistency
+
+#### 7. FloatingBadge corner labels
+```css
+.floating-badge {
+  background: var(--bg3d-glass-white) !important;
+  border: var(--bg3d-border) !important;
+  box-shadow:
+    var(--bg3d-shadow-base),
+    0 12px 32px -8px rgba(15,23,42,0.18) !important;
+  transform: translateZ(0);
+}
+.floating-badge:hover {
+  transform: translateY(-1px) translateZ(0);
+  box-shadow:
+    var(--bg3d-shadow-hover),
+    0 18px 44px -10px rgba(15,23,42,0.22) !important;
+}
+```
+
+#### 8. SecurityBadges row + GuaranteeBadge
+- Row becomes a unified glass strip with consistent height
+- Guarantee badge gets a 3D pill with terracotta-tinted glass and emerald success accent
+
+#### 9. Hover + reduced motion + print
+```css
+.badge:hover, [class*="badge"]:not(.hero-home *):hover {
+  box-shadow: var(--bg3d-shadow-hover) !important;
+  transform: translateY(-1px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .badge, [class*="badge"] { transition: none !important; transform: none !important; }
+}
+@media print {
+  .badge, [class*="badge"], .floating-badge {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+}
+```
 
 ### Composition with existing layers
 
 | Layer | Owns |
 |-------|------|
-| `figma-sharpness.css` | Hairline rendering, type smoothing |
-| `soft-elevation.css` | `el-1` … `el-5` utility shadows |
-| `floating-cards.css` | Container radius + border + base shadow |
-| `button-contrast-fix.css` | Light-on-light button visibility |
-| `widget-variants.css` (NEW) | **Per-card visual variants and density** |
-| `widget-content.css` (NEW) | **Reusable scaffolding inside widgets** |
+| `figma-sharpness.css` | Hairline rendering |
+| `soft-elevation.css` | Utility shadows |
+| `floating-cards.css` | Container surfaces |
+| `button-contrast-fix.css` | Light buttons |
+| `widget-variants.css` + `widget-content.css` | Widget vocabulary |
+| `badge-glass-3d.css` (NEW) | **3D glass badges across pricing + forms** |
 
-Variants override `floating-cards.css` defaults via higher-specificity attribute selectors (`[data-variant]`) and `!important` only where needed.
-
-### How users adopt it
-
-Existing JSX needs zero edits — every widget keeps its current look. To upgrade a card, add one or two attributes:
-
-```tsx
-// Before — generic floating card
-<div className="card p-6">…</div>
-
-// After — KPI elevated card with terracotta accent
-<div className="card p-6" data-variant="accent-bar" data-accent="terracotta">
-  <span className="widget-eyebrow">Pending</span>
-  <div className="widget-metric">
-    <span className="widget-metric-value">12</span>
-    <span className="widget-metric-label">Bookings awaiting review</span>
-  </div>
-</div>
-```
+Imported last so its `!important` declarations win on badge surfaces.
 
 ### Constraints respected
 
-- **Hero pages and footer fully excluded** on every selector
-- No JS, no new components, no JSX edits, no dependencies
-- Honors `prefers-reduced-motion`, `zoom: 0.75`, `backdrop-filter ≤ 12px`
-- Plume palette only (terracotta `#d96c4a`, plum `#7a2e2a`, cream `#fff7f2`, slate ink `#1e293b`)
-- WCAG AA contrast preserved on all status pills and tinted variants
-- Print mode strips variant decoration
-- Coexists with Tailwind utilities — opt-in only, never auto-mutates content
+- **Hero pages and footer fully excluded** via `:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *)` on every selector
+- No JSX edits, no logic, no new dependencies
+- Honors `prefers-reduced-motion`, `zoom: 0.75`, `backdrop-filter ≤ 12px` (uses 10px)
+- Plume palette respected (terracotta `#d96c4a`, deep `#8e3e22`, cream `#fff7f2`)
+- WCAG AA contrast preserved on all variants
+- Toast notifications and primary CTA buttons untouched
+- Print mode strips glass + shadows for clean output
 
 ### Out of scope
 
 - Hero pages, footer (excluded)
-- JSX edits to existing components (variants are opt-in)
-- New React components
-- Plume tokens, Tailwind config, routes, data, logic
+- Buttons (already handled by `button-contrast-fix.css`)
+- Card containers (already handled by `floating-cards.css`)
+- Plume tokens, Tailwind config, JSX, logic, routes, data
+- Pre-existing TypeScript errors
 
 ### Files touched
 
 ```text
-NEW   src/styles/widget-variants.css       (~220 lines)
-NEW   src/styles/widget-content.css        (~180 lines)
-EDIT  src/index.css                         (+2 lines @import after button-contrast-fix)
+NEW   src/styles/badge-glass-3d.css        (~280 lines)
+EDIT  src/index.css                         (+1 line @import after widget-content.css)
 ```
 
 ### Estimated diff
 
-~400 lines new CSS + 2 lines `@import`. Zero deletions, zero JSX changes, zero logic changes.
+~280 lines new CSS + 1 line `@import`. Zero deletions, zero JSX changes, zero logic changes.
 
