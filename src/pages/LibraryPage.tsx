@@ -210,10 +210,11 @@ function LibraryStatsBar() {
 
 // ─── Featured Shelf (landing: locked preview) ─────────────────────────────────
 
-function FeaturedShelf({ onBuyClick, isPurchased, isLoggedIn }: {
+function FeaturedShelf({ onBuyClick, isPurchased, isLoggedIn, onReadClick }: {
   onBuyClick?: (book: (typeof LIBRARY_BOOKS)[0]) => void;
   isPurchased?: (id: string) => boolean;
   isLoggedIn: boolean;
+  onReadClick?: (book: (typeof LIBRARY_BOOKS)[0]) => void;
 }) {
   return (
     <div className="mt-2 container mx-auto pb-16">
@@ -277,11 +278,13 @@ function FeaturedShelf({ onBuyClick, isPurchased, isLoggedIn }: {
               </div>
               {isLoggedIn && onBuyClick && isPurchased ? (
                 isPurchased(book.id || book.slug) ? (
-                  <Button size="sm" className="w-full mt-2 h-8 text-xs" asChild>
-                    <Link to="/reader">
-                      <ChevronRight className="w-3 h-3 mr-1" />
-                      Read Now
-                    </Link>
+                  <Button
+                    size="sm"
+                    className="w-full mt-2 h-8 text-xs"
+                    onClick={() => onReadClick?.(book)}
+                  >
+                    <ChevronRight className="w-3 h-3 mr-1" />
+                    Read Now
                   </Button>
                 ) : (
                   <Button
@@ -807,6 +810,21 @@ export default function LibraryPage() {
   const [paymentOpen, setPaymentOpen] = useState(false);
   const [paymentBook, setPaymentBook] = useState<(typeof LIBRARY_BOOKS)[0] | null>(null);
 
+  // Activate "My Library" tab when the hero CTA anchor #my-library is clicked
+  useEffect(() => {
+    if (!user) return;
+    const handleHash = () => {
+      if (window.location.hash === "#my-library") {
+        setActiveTab("my-library");
+        setTimeout(() => {
+          document.getElementById("my-library")?.scrollIntoView({ behavior: "smooth" });
+        }, 50);
+      }
+    };
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, [user]);
+
   const handleBuyClick = (book: (typeof LIBRARY_BOOKS)[0]) => {
     setPaymentBook(book);
     setPaymentOpen(true);
@@ -921,6 +939,7 @@ export default function LibraryPage() {
             isLoggedIn={true}
             onBuyClick={handleBuyClick}
             isPurchased={(id) => isPurchased(id)}
+            onReadClick={handleReadClick}
           />
         </div>
       </section>
