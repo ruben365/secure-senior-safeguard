@@ -66,7 +66,7 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
             summary="InVision Network provides AI scam protection, cybersecurity training, and business automation for families and companies in Kettering, Dayton, and across Ohio. We stop deepfakes, phishing, and voice-clone scams before they reach you."
             ctaHref="/training"
             ctaLabel="Explore our workshops and protection plans"
-            className="py-8"
+            className="sec-after-hero pb-8"
           />
 
           <div className="relative isolate">
@@ -75,6 +75,7 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
           <section
             id="story"
             aria-label="Who we are, what we offer, how we train you"
+            className="sec-rhythm-lg"
           >
             <HomeStorySections />
           </section>
@@ -84,7 +85,7 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
             <section
               id="faq"
               aria-label="Frequently asked questions"
-              className="relative z-10"
+              className="relative z-10 sec-rhythm-md"
             >
               <LazySection>
                 <FAQPreview />
