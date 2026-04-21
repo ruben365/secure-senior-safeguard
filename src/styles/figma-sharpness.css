@@ -1,0 +1,107 @@
+/* ═══════════════════════════════════════════════════════════════════
+   FIGMA SHARPNESS — pixel-precise rendering layer
+   Excludes hero pages and footer (they keep full ownership of look).
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Hairline borders that stay 1px on retina ──────────────────── */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .card:not(.hero-home .card):not(.hero-business .card):not(.hero-workshops .card):not(footer .card),
+  .glass:not(.hero-home .glass):not(.hero-business .glass):not(.hero-workshops .glass):not(footer .glass) {
+    border-width: 0.5px;
+  }
+}
+
+/* ── 2. Hard-edged Figma-style shadow system ──────────────────────── */
+.card:not(.hero-home .card):not(.hero-business .card):not(.hero-workshops .card):not(footer .card),
+.glass-card:not(.hero-home .glass-card):not(.hero-business .glass-card):not(.hero-workshops .glass-card):not(footer .glass-card) {
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 0.04),
+    0 1px 2px -1px rgba(15, 23, 42, 0.08),
+    0 4px 12px -4px rgba(15, 23, 42, 0.06);
+}
+
+/* ── 3. Pixel-snapped rendering ───────────────────────────────────── */
+img:not(.hero-home img):not(.hero-business img):not(.hero-workshops img):not(footer img),
+svg:not(.hero-home svg):not(.hero-business svg):not(.hero-workshops svg):not(footer svg),
+button:not(.hero-home button):not(.hero-business button):not(.hero-workshops button):not(footer button),
+.card:not(.hero-home .card):not(.hero-business .card):not(.hero-workshops .card):not(footer .card) {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Crisp SVG icons */
+svg:not(.hero-home svg):not(.hero-business svg):not(.hero-workshops svg):not(footer svg) {
+  shape-rendering: geometricPrecision;
+  text-rendering: geometricPrecision;
+}
+
+/* Crisp images at all DPRs */
+img:not(.hero-home img):not(.hero-business img):not(.hero-workshops img):not(footer img) {
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* ── 4. Figma-grade typography ────────────────────────────────────── */
+h1:not(.hero-home h1):not(.hero-business h1):not(.hero-workshops h1):not(footer h1),
+h2:not(.hero-home h2):not(.hero-business h2):not(.hero-workshops h2):not(footer h2),
+h3:not(.hero-home h3):not(.hero-business h3):not(.hero-workshops h3):not(footer h3),
+h4:not(.hero-home h4):not(.hero-business h4):not(.hero-workshops h4):not(footer h4),
+h5:not(.hero-home h5):not(.hero-business h5):not(.hero-workshops h5):not(footer h5),
+h6:not(.hero-home h6):not(.hero-business h6):not(.hero-workshops h6):not(footer h6),
+p:not(.hero-home p):not(.hero-business p):not(.hero-workshops p):not(footer p),
+span:not(.hero-home span):not(.hero-business span):not(.hero-workshops span):not(footer span),
+button:not(.hero-home button):not(.hero-business button):not(.hero-workshops button):not(footer button),
+a:not(.hero-home a):not(.hero-business a):not(.hero-workshops a):not(footer a),
+label {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+  font-feature-settings: "kern", "liga", "calt";
+  letter-spacing: -0.005em;
+}
+
+/* Headings get optical sizing where supported */
+h1:not(.hero-home h1):not(.hero-business h1):not(.hero-workshops h1):not(footer h1),
+h2:not(.hero-home h2):not(.hero-business h2):not(.hero-workshops h2):not(footer h2),
+h3:not(.hero-home h3):not(.hero-business h3):not(.hero-workshops h3):not(footer h3) {
+  font-optical-sizing: auto;
+}
+
+/* ── 5. Backdrop-filter sharpening (cap blur for crisp glass) ─────── */
+[class*="backdrop-blur"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) {
+  -webkit-backdrop-filter: blur(10px) saturate(160%) contrast(105%);
+  backdrop-filter: blur(10px) saturate(160%) contrast(105%);
+}
+
+/* ── 6. Crisp focus rings ─────────────────────────────────────────── */
+*:focus-visible:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) {
+  outline: 2px solid rgba(122, 46, 42, 0.7);
+  outline-offset: 2px;
+  border-radius: inherit;
+}
+
+/* ── 7. Crisp dividers ────────────────────────────────────────────── */
+hr:not(.hero-home hr):not(.hero-business hr):not(.hero-workshops hr):not(footer hr) {
+  border-color: rgba(15, 23, 42, 0.10);
+  border-style: solid;
+}
+
+/* ── 8. High-DPI half-pixel hairlines on cards ────────────────────── */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .card:not(.hero-home .card):not(.hero-business .card):not(.hero-workshops .card):not(footer .card),
+  .glass-card:not(.hero-home .glass-card):not(.hero-business .glass-card):not(.hero-workshops .glass-card):not(footer .glass-card) {
+    box-shadow:
+      0 0 0 0.5px rgba(15, 23, 42, 0.08),
+      0 1px 2px -1px rgba(15, 23, 42, 0.10),
+      0 4px 12px -4px rgba(15, 23, 42, 0.06);
+  }
+}
+
+/* Print mode: keep defaults, no sharpness overrides */
+@media print {
+  * {
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
