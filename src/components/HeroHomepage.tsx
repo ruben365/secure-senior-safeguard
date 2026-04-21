@@ -135,6 +135,10 @@ export const HeroHomepage = () => {
             <Link to="/training#pricing" className="hero-home__cta">
               Get Protected
             </Link>
+            <Link to="/training/ai-analysis" className="hero-home__cta">
+              <Scan />
+              AI Scan
+            </Link>
             <Link to="/business" className="hero-home__cta">
               See Our Work
               <ArrowRight />
