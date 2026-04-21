@@ -129,7 +129,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
 
   return (
     <>
-      <nav className={overlay ? "absolute top-0 left-0 right-0 z-[9999] bg-[#080d1a] border-b border-white/[0.06]" : `sticky top-0 z-[9999] transition-all duration-300 ${scrolled ? "bg-[#080d1a] border-b border-white/[0.08] shadow-[0_2px_12px_-2px_rgba(0,0,0,0.4)]" : "bg-[#080d1a] border-b border-white/[0.04]"}`}>
+      <nav className={overlay ? "absolute top-0 left-0 right-0 z-[9999]" : "sticky top-0 z-[9999]"}>
         <div className="max-w-[1200px] mx-auto w-full px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-[56px] gap-4 lg:gap-8">
             {/* Logo — identical to hero */}
