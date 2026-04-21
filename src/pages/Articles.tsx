@@ -101,7 +101,7 @@ function Articles() {
               {articles.map((article) => (
                 <Card
                   key={article.id}
-                  className="overflow-hidden hover:shadow-strong transition-all duration-500 rounded-2xl"
+                  className="stroke-glass--tight overflow-hidden hover:shadow-strong transition-all duration-500 rounded-2xl"
                 >
                   {article.featured_image_url && (
                     <img

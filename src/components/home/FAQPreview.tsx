@@ -104,7 +104,7 @@ export const FAQPreview = () => {
                 <AccordionItem
                   key={index}
                   value={`faq-${index}`}
-                  className="hss-card rounded-2xl overflow-hidden border-0"
+                  className="hss-card stroke-glass--tight rounded-2xl overflow-hidden border-0"
                 >
                   <AccordionTrigger className="text-left font-bold text-[#1E293B] hover:no-underline px-6 py-3 [&[data-state=open]]:text-[#b8552f] [&>svg]:text-[#1E293B]/50">
                     <span className="flex items-center gap-4 pr-4">
