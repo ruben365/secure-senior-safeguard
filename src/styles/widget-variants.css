@@ -1,0 +1,148 @@
+/* ═══════════════════════════════════════════════════════════════════
+   WIDGET VARIANTS — opt-in visual styles via data-variant attribute
+   Heroes and footer excluded.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Tokens ────────────────────────────────────────────────────── */
+:root {
+  --wv-radius-compact: 1.25rem;
+  --wv-radius-default: 2rem;
+  --wv-radius-spacious: 2.5rem;
+
+  --wv-pad-compact: 1rem;
+  --wv-pad-default: 1.5rem;
+  --wv-pad-spacious: 2.5rem;
+
+  --wv-terracotta: #d96c4a;
+  --wv-terracotta-deep: #c45e3b;
+  --wv-plum: #7a2e2a;
+  --wv-cream: #fff7f2;
+  --wv-cream-deep: #fdebe0;
+  --wv-ink: #1e293b;
+  --wv-ink-muted: #475569;
+
+  --wv-success: #16a34a;
+  --wv-warning: #d97706;
+  --wv-danger: #dc2626;
+  --wv-info: #2563eb;
+
+  --wv-shadow-elevated:
+    0 2px 4px 0 rgba(15, 23, 42, 0.04),
+    0 12px 24px -6px rgba(15, 23, 42, 0.08),
+    0 32px 64px -16px rgba(15, 23, 42, 0.10);
+  --wv-shadow-elevated-hover:
+    0 4px 8px 0 rgba(15, 23, 42, 0.05),
+    0 20px 40px -8px rgba(15, 23, 42, 0.10),
+    0 48px 96px -24px rgba(15, 23, 42, 0.12);
+}
+
+/* ── 2. Variant: elevated — stronger shadow, no border ────────────── */
+[data-variant="elevated"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
+  border: none !important;
+  box-shadow: var(--wv-shadow-elevated) !important;
+}
+[data-variant="elevated"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):hover {
+  box-shadow: var(--wv-shadow-elevated-hover) !important;
+}
+
+/* ── 3. Variant: outlined — visible border, no shadow ─────────────── */
+[data-variant="outlined"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
+  border: 1.5px solid rgba(15, 23, 42, 0.18) !important;
+  box-shadow: none !important;
+  background-color: #ffffff !important;
+}
+
+/* ── 4. Variant: tinted — cream highlight surface ─────────────────── */
+[data-variant="tinted"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
+  background: linear-gradient(180deg, var(--wv-cream) 0%, var(--wv-cream-deep) 100%) !important;
+  border: 1px solid rgba(217, 108, 74, 0.18) !important;
+}
+[data-variant="tinted"][data-accent="plum"]:not(.hero-home *):not(footer *):not(.site-footer *) {
+  background: linear-gradient(180deg, #faf5f7 0%, #f3e6ec 100%) !important;
+  border-color: rgba(122, 46, 42, 0.18) !important;
+}
+
+/* ── 5. Variant: accent-bar — 4px left stripe ─────────────────────── */
+[data-variant="accent-bar"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
+  border-left: 4px solid var(--wv-terracotta) !important;
+  padding-left: 1.25rem;
+}
+[data-variant="accent-bar"][data-accent="plum"]:not(.hero-home *):not(footer *):not(.site-footer *) {
+  border-left-color: var(--wv-plum) !important;
+}
+[data-variant="accent-bar"][data-accent="success"]:not(.hero-home *):not(footer *):not(.site-footer *) {
+  border-left-color: var(--wv-success) !important;
+}
+[data-variant="accent-bar"][data-accent="warning"]:not(.hero-home *):not(footer *):not(.site-footer *) {
+  border-left-color: var(--wv-warning) !important;
+}
+[data-variant="accent-bar"][data-accent="danger"]:not(.hero-home *):not(footer *):not(.site-footer *) {
+  border-left-color: var(--wv-danger) !important;
+}
+[data-variant="accent-bar"][data-accent="info"]:not(.hero-home *):not(footer *):not(.site-footer *) {
+  border-left-color: var(--wv-info) !important;
+}
+
+/* ── 6. Variant: gradient — warm-to-cream subtle gradient ─────────── */
+[data-variant="gradient"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
+  background: linear-gradient(135deg, #ffffff 0%, var(--wv-cream) 60%, var(--wv-cream-deep) 100%) !important;
+  border: 1px solid rgba(217, 108, 74, 0.14) !important;
+}
+
+/* ── 7. Variant: ghost — transparent + dashed border ──────────────── */
+[data-variant="ghost"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
+  background-color: transparent !important;
+  border: 1.5px dashed rgba(15, 23, 42, 0.20) !important;
+  box-shadow: none !important;
+}
+
+/* ── 8. Density: compact ──────────────────────────────────────────── */
+[data-density="compact"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
+  border-radius: var(--wv-radius-compact) !important;
+  padding: var(--wv-pad-compact) !important;
+}
+
+/* ── 9. Density: spacious ─────────────────────────────────────────── */
+[data-density="spacious"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
+  border-radius: var(--wv-radius-spacious) !important;
+  padding: var(--wv-pad-spacious) !important;
+}
+
+/* ── 10. Interactive — hover lift + cursor + focus ring ───────────── */
+[data-interactive="true"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
+  cursor: pointer;
+  transition:
+    transform 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 200ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+[data-interactive="true"]:not(.hero-home *):not(footer *):not(.site-footer *):hover {
+  transform: translateY(-2px);
+  border-color: rgba(217, 108, 74, 0.35) !important;
+}
+[data-interactive="true"]:not(.hero-home *):not(footer *):not(.site-footer *):focus-visible {
+  outline: 2px solid var(--wv-terracotta);
+  outline-offset: 3px;
+}
+
+/* ── 11. Reduced motion ───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  [data-interactive="true"] {
+    transition: none !important;
+  }
+  [data-interactive="true"]:hover {
+    transform: none !important;
+  }
+}
+
+/* ── 12. Print: strip variant decoration ──────────────────────────── */
+@media print {
+  [data-variant],
+  [data-density],
+  [data-interactive] {
+    background: #ffffff !important;
+    border: 1px solid #e5e7eb !important;
+    box-shadow: none !important;
+    border-left-width: 1px !important;
+  }
+}

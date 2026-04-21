@@ -54,6 +54,12 @@
 /* Button contrast fix — light-on-light buttons get visible borders */
 @import "./styles/button-contrast-fix.css";
 
+/* Widget variants — opt-in visual styles via data-variant */
+@import "./styles/widget-variants.css";
+
+/* Widget content — eyebrows, metrics, pills, dividers, empty states */
+@import "./styles/widget-content.css";
+
 /* ═══════════════════════════════════════════════════════════════════
    AMBIENT VIBRANCE OPT-OUT — Auth, Admin, Portal use solid surfaces
    ═══════════════════════════════════════════════════════════════════ */
