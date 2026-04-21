@@ -166,10 +166,10 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <PrefetchLink
                     key={link.name}
                     to={link.href}
-                    className={`relative text-[13px] px-3 py-1.5 rounded-md transition-colors duration-150 ${
+                    className={`relative text-[13px] font-semibold transition-colors duration-150 ${
                       isActive
-                        ? "text-orange-400 font-bold bg-orange-500/12"
-                        : "text-white font-semibold hover:text-orange-300 hover:bg-white/[0.07]"
+                        ? "text-orange-400"
+                        : "text-white hover:text-orange-400"
                     }`}
                   >
                     {link.name}
@@ -185,10 +185,10 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   aria-haspopup="menu"
                   aria-expanded={moreOpen ? "true" : "false"}
                   aria-label="More navigation links"
-                  className={`flex items-center gap-1 text-[13px] px-3 py-1.5 rounded-md transition-colors duration-150 ${
+                  className={`flex items-center gap-1 text-[13px] font-semibold transition-colors duration-150 ${
                     isSecondaryActive
-                      ? "text-orange-400 font-bold bg-orange-500/12"
-                      : "text-white font-semibold hover:text-orange-300 hover:bg-white/[0.07]"
+                      ? "text-orange-400"
+                      : "text-white hover:text-orange-400"
                   }`}
                 >
                   More
@@ -350,14 +350,13 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
             className="lg:hidden fixed top-[56px] right-0 z-[10001] overflow-y-auto overscroll-contain [-webkit-overflow-scrolling:touch]"
             onClick={(e) => e.stopPropagation()}
             style={{
-              width: "min(55vw, 220px)",
+              width: "min(50vw, 200px)",
               maxHeight: "calc(80vh - 56px)",
-              background: "rgba(13, 13, 13, 0.55)",
+              background: "rgba(80, 50, 30, 0.65)",
               backdropFilter: "blur(24px) saturate(1.5)",
               WebkitBackdropFilter: "blur(24px) saturate(1.5)",
-              borderLeft: "1px solid rgba(255, 255, 255, 0.15)",
+              borderLeft: "1px solid rgba(255, 200, 150, 0.15)",
               borderBottomLeftRadius: "16px",
-              borderTopLeftRadius: "0px",
               animation: "menuSlideIn 200ms ease-out forwards",
               paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 0.25rem)",
             }}
