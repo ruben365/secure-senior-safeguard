@@ -46,7 +46,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
   const [input, setInput] = useState("");
   const [isRecording, setIsRecording] = useState(false);
   const [mode, setMode] = useState<"chat" | "help">("chat");
-  const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const recognitionRef = useRef<any>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const quickHelpActions: QuickHelpAction[] = [
