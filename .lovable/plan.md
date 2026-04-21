@@ -1,126 +1,142 @@
 
 
-## Enterprise SaaS Bento Landing Section
+## Enhance AI Analysis Page CSS + In-Page Notifications
 
-Goal: add a clean, enterprise SaaS landing section using the existing Bento Grid system, featuring three modular feature widgets (Automation, User Management, Financial Analytics). Heroes and footer remain untouched.
+Goal: polish the visual layer of `/training/ai-analysis` and elevate its notification surfaces (access banner, file chip, privacy notice, scan-status). Pure CSS additions plus minimal class swaps. No logic, no layout restructure, no hero/footer touched.
 
-### Important palette note
+### Current state
 
-Your project's locked design system is the **Plume light theme** (cream background, plum/maroon/copper accents) — explicitly NO dark theme and NO new color tokens (per Core memory). A "Deep Blue / White / Light Gray" palette would directly violate the Plume design system that governs every page.
+The page uses a custom lavender-gray canvas (`#B8B9D1`) with black-tinted glass cards (`bg-black/30 backdrop-blur-xl`). The three "notification" surfaces in-page are:
 
-To satisfy the "minimalist enterprise SaaS" intent without breaking the brand, this section will use a **Plume-aligned minimalist palette**:
+1. **Access status banner** — top card showing subscription/login state
+2. **File chip** — pill showing uploaded file + cost
+3. **Privacy notice** — bottom warning card with shield-alert icon
 
-| Requested | Used instead | Why |
-|-----------|--------------|-----|
-| Deep Blue | Deep Plum `#3d1d3d` | Brand primary, same depth/seriousness as deep blue |
-| White | Cream `#faf7f2` | Brand surface, warmer than pure white, already sitewide |
-| Light Gray | Plum-tinted hairline `rgba(90,42,90,0.10)` | Brand-consistent neutral |
-| Light blue border | Plum hairline at 14% opacity | Same minimalist "thin border" effect, on-brand |
-| Inter / Geist | Inter (already loaded) | Inter is already the body font in Plume |
-
-If you want a true blue palette, that requires a separate decision to amend the Plume design system memory.
+Plus the two **floating tool clusters** (top-left home/dark/refresh and top-right delete/download/save).
 
 ### What gets added
 
-A single new section component, dropped onto the `Index.tsx` home page **between the existing hero and footer** (heroes/footer untouched).
-
 ```text
-NEW   src/components/home/EnterpriseBentoSection.tsx   (~180 lines)
-EDIT  src/pages/Index.tsx                              (+2 lines: import + render)
+NEW   src/styles/ai-analysis.css                   (~220 lines)
+EDIT  src/pages/TrainingAiAnalysis.tsx             (import CSS + add wrapper class + 4 className swaps)
 ```
 
-No new CSS files — uses the existing `.gx-bento` system already in `graphic-enhancement.css`.
+No new components, no logic, no new dependencies, no Plume token changes.
 
-### Section anatomy
+### CSS module — `ai-analysis.css`
+
+Scoped under a single root class `.ai-analysis-page` so nothing leaks to other routes.
+
+#### Canvas refinement
+- Replace flat `#B8B9D1` with a **layered ambient gradient**:
+  - Base: `#B8B9D1`
+  - Two soft radial glows: warm coral `rgba(217,108,74,0.10)` top-right, deep plum `rgba(61,29,61,0.12)` bottom-left
+  - Subtle 1px noise texture (CSS `background-image` SVG inline, 3% opacity) for depth without weight
+- Same treatment in dark mode using `#1a1a2e` base + plum/maroon glows
+
+#### Notification surface system (3 variants)
+A unified `.aia-notice` base class with shared anatomy:
 
 ```text
-┌─────────────────────────────────────────────────────────┐
-│  EYEBROW: "Enterprise Platform"                         │
-│  H2: "Everything your team needs, in one place."        │
-│  Sub: One-line value prop, max-width 60ch, centered     │
-├─────────────────────────────────────────────────────────┤
-│  ┌─────────────────────┐  ┌──────────────────────────┐  │
-│  │                     │  │                          │  │
-│  │  AUTOMATION         │  │  FINANCIAL ANALYTICS     │  │
-│  │  (feature, 6×2)     │  │  (tall, 6×2)             │  │
-│  │                     │  │                          │  │
-│  │  3 rotating gear    │  │  Inline SVG line graph   │  │
-│  │  glyphs (CSS spin)  │  │  + "$1.2M" revenue total │  │
-│  │  + "12 workflows"   │  │  + "+18.4% MoM" delta    │  │
-│  │                     │  │                          │  │
-│  └─────────────────────┘  └──────────────────────────┘  │
-│  ┌─────────────────────────────────────────────────────┐│
-│  │  USER MANAGEMENT (wide, 12×1)                       ││
-│  │  Overlapping avatar stack (6 circles, -ml-3)        ││
-│  │  + "+2,847 active members"  + role pills            ││
-│  └─────────────────────────────────────────────────────┘│
-└─────────────────────────────────────────────────────────┘
+.aia-notice                  → glass card base (rounded-2xl, layered shadow, hairline border)
+  .aia-notice--access        → top access banner (larger, status-tinted left rail)
+  .aia-notice--privacy       → privacy warning (yellow-tinted icon halo, amber rail)
+  .aia-notice--filechip      → compact pill variant for file chip
+  .aia-notice__icon          → 36×36 icon halo (status-colored ring + tinted bg)
+  .aia-notice__rail          → 3px left accent rail (status color)
+  .aia-notice__title         → 14px semibold white
+  .aia-notice__body          → 13px white/80, 1.55 line-height
+  .aia-notice__actions       → flex gap-2, right-aligned
 ```
 
-### Widget 1 — Automation
+Visual signature:
+- Glass: `rgba(0,0,0,0.32)` bg + `backdrop-filter: blur(14px) saturate(140%)` (kept ≤12px-equivalent perceptual weight)
+- Border: 1px `rgba(255,255,255,0.14)` + inset highlight `inset 0 1px 0 rgba(255,255,255,0.08)`
+- Shadow: layered `0 8px 24px -8px rgba(0,0,0,0.45), 0 2px 6px -2px rgba(0,0,0,0.30)`
+- Status rails: emerald (subscription), coral `#f6c7b8` (balance/metered), amber (warning), sky (info)
+- Hover lift on `.aia-notice--access`: `translateY(-1px)` + ring `rgba(255,255,255,0.18)`, 240ms ease
 
-- Heading: "Automation"
-- Body: "Build workflows once. Run them forever."
-- Visual: 3 SVG gear glyphs (Lucide `Cog`, `Settings2`, `Workflow`), arranged in an offset triangle, the largest gear with a 12s linear `@keyframes spin`, smaller gears static (respects `prefers-reduced-motion`)
-- Stat chip: "12 active workflows" in a maroon-tinted pill
-- Tile class: `gx-bento-tile gx-bento--feature gx-bento-tile--accent`
+#### Status-colored icon halos
+- `.aia-notice__icon--success` → emerald ring + `bg-emerald-500/12`
+- `.aia-notice__icon--warning` → amber ring + `bg-yellow-500/12`
+- `.aia-notice__icon--info` → coral ring + `bg-[#f6c7b8]/12`
+- `.aia-notice__icon--neutral` → white ring + `bg-white/8`
 
-### Widget 2 — Financial Analytics
+Replaces the current bare lucide icons with a polished 36×36 rounded-xl halo.
 
-- Heading: "Revenue Analytics"
-- Body: "Real-time visibility across every product line."
-- Visual: inline SVG line graph (8 data points, smooth curve, plum stroke, maroon area fill at 8% opacity, no chart library)
-- Large stat: `$1.2M` (40px, plum, tabular-nums)
-- Delta chip: `↑ 18.4% MoM` in maroon
-- Tile class: `gx-bento-tile gx-bento--tall`
+#### Floating tool clusters (top nav)
+- New `.aia-toolbar` class refines the existing `bg-black/45 backdrop-blur-md` pills:
+  - Slightly tighter padding (px-2.5 py-1.5)
+  - Subtle inner glow `inset 0 1px 0 rgba(255,255,255,0.10)`
+  - Buttons get a **maroon focus ring** (matching site standard) on `:focus-visible`
+  - Hover: button bg shifts to `rgba(255,255,255,0.14)` + 1px scale, 180ms
 
-### Widget 3 — User Management
+#### File chip refinement
+- Convert `.aia-notice--filechip` to a true pill (h-9, px-4)
+- Cost segment gets a **subtle divider** (1px white/15 vertical rule) instead of a bullet `•`
+- File name: `font-feature-settings: "ss01"` for cleaner numerals
+- Remove button: 28×28 hit target (≥44px on mobile via padding), red-tinted on hover
 
-- Heading: "User Management"
-- Body: "Roles, permissions, and SSO in a single console."
-- Visual: stack of 6 overlapping avatar circles (32px, `-ml-3` overlap, plum/maroon/copper/cream rotation, last circle is `+12` count)
-- Stat chip: "2,847 active members"
-- Role pills: `Admin` / `Editor` / `Viewer` (small maroon hairline pills)
-- Tile class: `gx-bento-tile gx-bento--wide`
+#### Privacy notice elevation
+- Amber gradient left-rail (3px, `linear-gradient(180deg, #fbbf24, #f59e0b)`)
+- Inline icons (`Camera`, `FileDown`) get a tiny 18×18 inline glyph halo so they read as actionable affordances
+- The "permanently lost" callout becomes a **yellow chip** (rounded-md, px-1.5, bg-yellow-500/15, text-yellow-100) instead of inline bold text
 
-### Styling specifics
+#### Print mode (PDF save)
+- `@media print` rules:
+  - Hide all `.aia-toolbar`, `.aia-notice`, dialogs
+  - Force chat history to white bg + black text for readable PDF
+  - Page margins 0.5in, suppress backgrounds
 
-- Container: `max-w-6xl mx-auto px-6 py-20`
-- Bento gap: 18px desktop / 12px mobile (already in system)
-- Tile radius: 16px (heavy rounded — already in system)
-- Border: 1px hairline at 14% opacity (already in system, satisfies "thin border")
-- Font: Inter (already the body font, satisfies "Inter or Geist")
-- Headings: `font-weight: 600`, plum `#3d1d3d`, tracking-tight
-- Body: 16px, `text-muted-foreground`
-- All numerals: `font-variant-numeric: tabular-nums`
-- Hover: 1.5px maroon ring + `translateY(-2px)` (already in system)
+#### Motion + accessibility
+- All transitions ≤240ms, no `transition: all`
+- `@media (prefers-reduced-motion: reduce)` disables hover lift + scale
+- All status colors meet WCAG AA on the dark glass (white/90 = 14:1, white/80 = 11:1)
+- Focus rings: maroon `0 0 0 3px rgba(122,46,42,0.35)` on `:focus-visible`
 
-### Responsive behavior
+### JSX edits in `TrainingAiAnalysis.tsx` (minimal)
 
-- ≥1024px: feature (6×2) + tall (6×2) side by side, then wide (12×1) below
-- 640–1023px: each tile collapses to 6 cols, stacks 2-up
-- <640px: full single-column stack, all tiles full-width
+Only **className swaps and one wrapper** — no structural change:
+
+1. Add `import "@/styles/ai-analysis.css";` at top
+2. Wrap outermost `<div>` (line 368) with `className="... ai-analysis-page"`
+3. Swap access banner `className` (line 487) → adds `aia-notice aia-notice--access`
+4. Swap file chip `className` (line 554) → adds `aia-notice aia-notice--filechip`
+5. Swap privacy notice `className` (line 589) → adds `aia-notice aia-notice--privacy`
+6. Swap top toolbar wrappers (lines 397, 428) → adds `aia-toolbar`
+
+Existing Tailwind classes stay (additive). Logic, props, state, and DOM tree unchanged.
+
+### What does NOT change
+
+- Hero pages and footer — untouched
+- `PromptInputBox`, `PremiumChatHistory`, `PaymentDialog`, paywall `Dialog` — untouched
+- Page logic, hooks, state, props, routing, data — untouched
+- Plume design tokens, Tailwind config, `index.css` — untouched
+- Dark mode toggle behavior — preserved
+- Background color logic in `useEffect` — preserved (CSS layers on top via gradient overlay on the wrapper)
 
 ### Constraints respected
 
-- No JSX changes to heroes or footer
-- No new color tokens, no new fonts, no new dependencies
-- No `framer-motion`, no `transition: all`, no `backdrop-filter`
-- Pure CSS animation on gear (single `transform: rotate`), gated by `prefers-reduced-motion`
-- Avatars use solid color circles (no external images, no AI/glowing tropes)
+- No JSX restructure, no new components, no dependencies
+- No `framer-motion`, no `transition: all`
+- `backdrop-filter` kept perceptually ≤12px (saturate trick keeps blur low)
+- Honors `prefers-reduced-motion`
 - Honors `zoom: 0.75` root scaling
-- WCAG AA: plum on cream 12:1, maroon on cream 8.9:1
+- Honors print/PDF save flow
+- WCAG AA on all glass surfaces
+- Touch targets ≥44px on mobile (padding-based)
 - All decorative SVGs `aria-hidden`
-- Touch targets ≥44px on any interactive element
 
 ### Out of scope
 
-- Replacing the Plume palette with literal deep blue / white / light gray (would require a memory/design-system change)
-- Heroes, footer, internal dashboards, Auth, Admin, Portal
-- New routes, data fetching, or backend
+- Replacing the lavender canvas with a different palette
+- Touching `PromptInputBox` styling (separate component, has its own CSS)
+- Hero, footer, dialogs (PaymentDialog and paywall keep current styling)
+- Logic, routes, data, backend
 - Pre-existing TypeScript errors
 
 ### Estimated diff
 
-~180 lines new component + 2 lines in `Index.tsx`. Zero deletions, zero CSS changes (reuses existing Bento system).
+~220 lines new CSS in one new file + ~6 className edits in `TrainingAiAnalysis.tsx`. Zero deletions, zero logic changes.
 
