@@ -299,31 +299,46 @@
   z-index: 1;
 }
 
-/* Primary CTA — glass with subtle orange accent (no hover color shift) */
+/* Primary CTA (Get Protected) — orange gradient glass, warm amber border */
 .hero-home__cta:first-child {
-  background: linear-gradient(135deg, rgba(249, 115, 22, 0.2) 0%, rgba(255, 255, 255, 0.08) 100%);
-  border: 1px solid rgba(249, 115, 22, 0.35);
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%);
+  border: 1.5px solid rgba(255, 200, 150, 0.5);
   box-shadow:
-    0 0 20px rgba(249, 115, 22, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 0 20px rgba(249, 115, 22, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-/* Secondary CTA — subtle glass border */
+/* Middle CTA (AI Scan) — matching Laura's frosted glass */
+.hero-home__cta:nth-child(2) {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Last CTA (See Our Work) — matching Laura's frosted glass */
 .hero-home__cta:last-child {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-/* Hover — keep original colors, no orange/maroon shift, no lift */
-.hero-home__cta:hover,
-.hero-home__cta:first-child:hover,
-.hero-home__cta:last-child:hover {
-  background: inherit;
-  border-color: inherit;
-  transform: none;
-  box-shadow: inherit;
+/* Hover — border brightens, slight lift and glow */
+.hero-home__cta:hover {
   color: #ffffff !important;
+  transform: translateY(-1px);
+}
+.hero-home__cta:first-child:hover {
+  border-color: rgba(255, 200, 150, 0.75);
+  box-shadow:
+    0 0 28px rgba(249, 115, 22, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.hero-home__cta:nth-child(2):hover,
+.hero-home__cta:last-child:hover {
+  border-color: rgba(255, 255, 255, 0.65);
+  box-shadow:
+    0 0 20px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 /* Active press — minimal feedback */

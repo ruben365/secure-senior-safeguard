@@ -12,9 +12,7 @@ import {
   Phone,
   Send,
   Shield,
-  Sparkles,
   X,
-  Bot,
   Headphones,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -98,7 +96,6 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
 
   useEffect(() => {
     if (!scrollRef.current) return;
-    // Wrap in rAF to avoid forced reflow from reading scrollHeight
     requestAnimationFrame(() => {
       if (scrollRef.current) {
         scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -109,19 +106,18 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
   useEffect(() => {
     const w = window as Window;
     if (!(w.webkitSpeechRecognition || w.SpeechRecognition)) return;
-    const SpeechRecognitionCtor =
-      w.webkitSpeechRecognition || w.SpeechRecognition;
+    const SpeechRecognitionCtor = w.webkitSpeechRecognition || w.SpeechRecognition;
     recognitionRef.current = new SpeechRecognitionCtor!();
     recognitionRef.current.continuous = false;
     recognitionRef.current.interimResults = false;
     recognitionRef.current.lang = "en-US";
 
-    recognitionRef.current.onresult = async (event: SpeechRecognitionEvent) => {
+    recognitionRef.current.onresult = (event: SpeechRecognitionEvent) => {
       const transcript = event.results[0][0].transcript;
       setIsRecording(false);
       if (transcript.trim()) {
-        setInput("");
-        await sendMessage(transcript.trim());
+        // Put transcript in input for review — don't auto-send
+        setInput(transcript.trim());
       }
     };
 
@@ -171,9 +167,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
             loading="eager"
             className="w-full h-full object-cover object-top"
           />
-          {/* Online pulse */}
           <span className="absolute bottom-0.5 right-0.5 flex h-2.5 w-2.5">
-            
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400 border-2 border-white/50" />
           </span>
         </button>
@@ -184,9 +178,9 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
   /* ─── Open Panel ─── */
   return (
     <div className="fixed bottom-4 right-3 sm:bottom-5 sm:right-5 z-fab w-[min(calc(100vw-1.5rem),340px)] sm:w-[360px]">
-      <div className="rounded-2xl border border-white/15 bg-white/[0.08] backdrop-blur-2xl shadow-[0_4px_24px_rgba(0,0,0,0.18),0_12px_40px_-8px_rgba(0,0,0,0.12)] overflow-hidden dark:bg-[hsl(258_20%_10%/0.88)] dark:border-white/10">
+      <div className="rounded-2xl border border-white/15 bg-white/[0.08] backdrop-blur-2xl shadow-[0_4px_24px_rgba(0,0,0,0.18),0_12px_40px_-8px_rgba(0,0,0,0.12)] overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-border/40 bg-gradient-to-r from-primary/8 to-accent/5">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-white/[0.04]">
           <div className="flex items-center gap-3">
             <div className="relative w-10 h-10 rounded-full overflow-hidden ring-2 ring-primary/20">
               <img
@@ -198,11 +192,11 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
                 width={40}
                 height={40}
               />
-              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-card" />
+              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-white/30" />
             </div>
             <div>
-              <p className="text-sm font-bold text-foreground">Laura</p>
-              <p className="text-[11px] text-muted-foreground font-medium">
+              <p className="text-sm font-bold text-white">Laura</p>
+              <p className="text-[11px] text-white/70 font-medium">
                 {isLoading ? "Thinking..." : "Navigation & help"}
               </p>
             </div>
@@ -213,7 +207,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
               className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-200 ${
                 mode === "chat"
                   ? "bg-primary text-white shadow-sm"
-                  : "bg-muted text-foreground hover:bg-muted/80"
+                  : "bg-white/10 text-white/80 hover:bg-white/20"
               }`}
             >
               Chat
@@ -223,14 +217,14 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
               className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all duration-200 ${
                 mode === "help"
                   ? "bg-primary text-white shadow-sm"
-                  : "bg-muted text-foreground hover:bg-muted/80"
+                  : "bg-white/10 text-white/80 hover:bg-white/20"
               }`}
             >
               Help
             </button>
             <button
               onClick={() => setIsOpen(false)}
-              className="p-2 rounded-full hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-all"
+              className="p-2 rounded-full hover:bg-white/10 text-white/70 hover:text-white transition-all"
               aria-label="Close Laura"
             >
               <X className="w-4 h-4" />
@@ -246,7 +240,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
               className="max-h-[45vh] sm:max-h-[420px] overflow-y-auto p-4 space-y-3"
               style={{
                 scrollbarWidth: "thin",
-                scrollbarColor: "hsl(var(--primary) / 0.2) transparent",
+                scrollbarColor: "rgba(255,255,255,0.2) transparent",
               }}
             >
               {messages.length === 0 && (
@@ -263,10 +257,10 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
                     />
                   </div>
                   <div className="space-y-2">
-                    <p className="text-lg font-bold text-foreground">
+                    <p className="text-lg font-bold text-white">
                       Hi, I'm Laura
                     </p>
-                    <p className="text-sm text-muted-foreground leading-relaxed px-2">
+                    <p className="text-sm text-white/80 leading-relaxed px-2">
                       I help with scanning, pricing, privacy, and navigating
                       InVision Network.
                     </p>
@@ -276,7 +270,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
                       <button
                         key={action}
                         onClick={() => sendMessage(action)}
-                        className="px-3.5 py-2 rounded-full bg-primary/10 text-xs font-semibold text-primary hover:bg-primary/18 transition-all border border-primary/15"
+                        className="px-3.5 py-2 rounded-full bg-white/10 text-xs font-semibold text-white hover:bg-white/20 transition-all border border-white/30"
                       >
                         {action}
                       </button>
@@ -293,7 +287,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
                   <div
                     className={`rounded-2xl px-4 py-2.5 text-sm leading-relaxed max-w-[82%] ${
                       msg.role === "assistant"
-                        ? "bg-muted/80 text-foreground border border-border/30"
+                        ? "bg-white/10 text-white border border-white/20"
                         : "bg-gradient-to-br from-primary to-accent text-white shadow-sm"
                     }`}
                   >
@@ -304,11 +298,11 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
 
               {isLoading && (
                 <div className="flex justify-start">
-                  <div className="rounded-2xl px-4 py-2.5 bg-muted/80 text-sm text-muted-foreground border border-border/30 flex items-center gap-2">
+                  <div className="rounded-2xl px-4 py-2.5 bg-white/10 text-sm text-white/70 border border-white/20 flex items-center gap-2">
                     <span className="flex gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary/60 animate-bounce" style={{ animationDelay: "0ms" }} />
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary/60 animate-bounce" style={{ animationDelay: "150ms" }} />
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary/60 animate-bounce" style={{ animationDelay: "300ms" }} />
+                      <span className="w-1.5 h-1.5 rounded-full bg-white/60 animate-bounce" style={{ animationDelay: "0ms" }} />
+                      <span className="w-1.5 h-1.5 rounded-full bg-white/60 animate-bounce" style={{ animationDelay: "150ms" }} />
+                      <span className="w-1.5 h-1.5 rounded-full bg-white/60 animate-bounce" style={{ animationDelay: "300ms" }} />
                     </span>
                     Laura is typing
                   </div>
@@ -319,17 +313,17 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
             {/* Input */}
             <form
               onSubmit={handleSubmit}
-              className="p-3 border-t border-border/40 flex gap-2 bg-card/80"
+              className="p-3 border-t border-white/10 bg-white/[0.04] flex gap-2"
             >
               <button
                 type="button"
                 onClick={toggleRecording}
                 className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
                   isRecording
-                    ? "bg-rose-500 text-white shadow-lg shadow-rose-500/30 scale-110"
-                    : "bg-muted text-foreground hover:bg-primary/10 hover:text-primary"
+                    ? "bg-rose-500 text-white shadow-lg shadow-rose-500/30 scale-110 animate-pulse"
+                    : "bg-white/10 text-white hover:bg-white/20"
                 }`}
-                aria-label="Voice input"
+                aria-label={isRecording ? "Stop recording" : "Start voice input"}
               >
                 {isRecording ? (
                   <MicOff className="w-4 h-4" />
@@ -341,7 +335,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
                 placeholder="Ask Laura a question..."
-                className="flex-1 rounded-full bg-muted/60 border border-border/40 px-4 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/30 transition-all"
+                className="flex-1 rounded-full bg-white/10 border border-white/20 px-4 py-2 text-sm text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-white/30 transition-all"
               />
               <Button
                 type="submit"
@@ -357,12 +351,12 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
           /* Quick Help Panel */
           <div className="p-4 space-y-4">
             <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
-                <Headphones className="w-4 h-4 text-primary" />
+              <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center">
+                <Headphones className="w-4 h-4 text-white" />
               </div>
               <div>
-                <p className="text-sm font-bold text-foreground">Quick Help</p>
-                <p className="text-[11px] text-muted-foreground">
+                <p className="text-sm font-bold text-white">Quick Help</p>
+                <p className="text-[11px] text-white/70">
                   Fast paths to support & resources
                 </p>
               </div>
@@ -372,7 +366,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
                 const ActionIcon = action.icon;
                 const content = (
                   <div
-                    className={`relative p-3 rounded-xl bg-card hover:bg-muted/50 border border-border/50 hover:border-primary/20 transition-all cursor-pointer group ${
+                    className={`relative p-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 hover:border-white/30 transition-all cursor-pointer group ${
                       action.urgent ? "ring-1 ring-rose-400/40" : ""
                     }`}
                     onClick={() => {
@@ -390,10 +384,10 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
                     >
                       <ActionIcon className="w-4 h-4 text-white" />
                     </div>
-                    <div className="text-xs font-bold text-foreground">
+                    <div className="text-xs font-bold text-white">
                       {action.label}
                     </div>
-                    <div className="text-[10px] text-muted-foreground leading-tight mt-0.5">
+                    <div className="text-[10px] text-white/70 leading-tight mt-0.5">
                       {action.description}
                     </div>
                   </div>
@@ -417,7 +411,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
           </div>
         )}
       </div>
-      <p className="mt-1.5 text-[10px] text-muted-foreground text-right pr-2 opacity-60">
+      <p className="mt-1.5 text-[10px] text-white/50 text-right pr-2 opacity-60">
         Laura only answers InVision Network questions
       </p>
     </div>
