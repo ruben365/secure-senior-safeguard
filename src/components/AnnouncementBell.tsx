@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Bell, Megaphone, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -15,6 +15,7 @@ let announcementsTableKnownMissing = false;
 let announcementsRetryAfter = 0;
 
 export function AnnouncementBell() {
+  const retryTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [open, setOpen] = useState(false);
   const [tableExists, setTableExists] = useState(!announcementsTableKnownMissing);
@@ -40,7 +41,10 @@ export function AnnouncementBell() {
       )
       .subscribe();
 
-    return () => { supabase.removeChannel(channel); };
+    return () => {
+      if (retryTimeoutRef.current) clearTimeout(retryTimeoutRef.current);
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   const fetchAnnouncements = async () => {
@@ -65,7 +69,7 @@ export function AnnouncementBell() {
       ) {
         // Transient schema-cache miss — back off 60 s then retry once
         announcementsRetryAfter = Date.now() + 60_000;
-        setTimeout(() => {
+        retryTimeoutRef.current = setTimeout(() => {
           if (!announcementsTableKnownMissing && Date.now() >= announcementsRetryAfter) {
             fetchAnnouncements();
           }

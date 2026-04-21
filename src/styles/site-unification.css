@@ -353,3 +353,26 @@ main#main-content {
 .section-alt {
   background: linear-gradient(180deg, #fdf8f5 0%, #ffffff 100%);
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE NAV PANEL ISOLATION
+   premium-body.css applies [role="dialog"] { z-index: 60 !important }
+   and a <640px media query that force-applies padding/border-radius to
+   ALL role=dialog elements.  #mobile-navigation must be excluded so it
+   sits above its own backdrop (z-[10000]) and keeps its own layout.
+   ID selector specificity (1,0,0) beats attribute selector (0,1,0)
+   even when both carry !important.
+   ═══════════════════════════════════════════════════════════════════ */
+#mobile-navigation {
+  z-index: 10001 !important;
+  max-width: none !important;
+  padding: 0 !important;
+  border-radius: 0 0 0 14px !important;
+}
+
+/* ── Mobile call CTA — guarantee pill width on all browsers ── */
+a[aria-label^="Call Now"] {
+  width: 260px !important;
+  max-width: 260px !important;
+  box-sizing: border-box !important;
+}
