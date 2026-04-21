@@ -50,9 +50,7 @@ export function AnnouncementBell() {
     if (error) {
       const isTableMissing =
         (error as { code?: string }).code === "42P01" ||
-        (error as { code?: string }).code === "PGRST205" ||
-        error.message?.includes("does not exist") ||
-        error.message?.includes("Could not find the table");
+        error.message?.includes("does not exist");
       if (isTableMissing) {
         announcementsTableKnownMissing = true;
         setTableExists(false);

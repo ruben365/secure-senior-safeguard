@@ -109,15 +109,13 @@
 /* ─── Context wrapper: auto-glass all cards inside ───────────────── */
 /*
   Add .glass-context to a section/div to auto-apply glass to all
-  standard shadcn cards (rounded-xl/lg/2xl with border and bg-card) within it.
+  standard shadcn cards (rounded-xl/lg with border and bg-card) within it.
   Only targets cards that haven't opted out with border-0.
 */
 .glass-context .rounded-lg.border:not(.border-0),
 .glass-context .rounded-xl.border:not(.border-0),
-.glass-context .rounded-2xl.border:not(.border-0),
 .glass-context [class~="border"][class~="rounded-lg"]:not([class~="border-0"]),
-.glass-context [class~="border"][class~="rounded-xl"]:not([class~="border-0"]),
-.glass-context [class~="border"][class~="rounded-2xl"]:not([class~="border-0"]) {
+.glass-context [class~="border"][class~="rounded-xl"]:not([class~="border-0"]) {
   background: rgba(255, 255, 255, 0.70);
   backdrop-filter: blur(10px) saturate(1.3);
   -webkit-backdrop-filter: blur(10px) saturate(1.3);
@@ -146,10 +144,8 @@
 /* ─── dot-grid-bg sections: enhance card glass depth ────────────── */
 .dot-grid-bg .rounded-lg.border,
 .dot-grid-bg .rounded-xl.border,
-.dot-grid-bg .rounded-2xl.border,
 .dot-grid-bg [class~="border"][class~="rounded-lg"],
-.dot-grid-bg [class~="border"][class~="rounded-xl"],
-.dot-grid-bg [class~="border"][class~="rounded-2xl"] {
+.dot-grid-bg [class~="border"][class~="rounded-xl"] {
   background: rgba(255, 255, 255, 0.72);
   backdrop-filter: blur(12px) saturate(1.3);
   -webkit-backdrop-filter: blur(12px) saturate(1.3);
