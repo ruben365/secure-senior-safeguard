@@ -501,7 +501,7 @@ function Resources() {
                           height={320}
                           loading={bookIndex < 10 ? "eager" : "lazy"}
                           decoding={bookIndex < 10 ? "sync" : "async"}
-                          fetchpriority={bookIndex < 5 ? "high" : "auto"}
+                          fetchPriority={bookIndex < 5 ? "high" : "auto"}
                           className="w-full h-full object-cover"
                         />
                       </div>
