@@ -1,115 +1,93 @@
 
 
-## Payment Cards: Pro-Grade Visual Distinction Sitewide
+## Sitewide Animated Vibrance Background
 
-Goal: redesign every payment-related card (checkout, pricing, plan tiers, payment method selectors, order summaries, donation tiers) so each is instantly distinguishable, visually premium, and consistent with the Plume design system. Pure CSS + className work — no logic changes.
+Goal: lift the existing `vibe-orb` + `vibe-mesh` animation system from opt-in section wrappers into a global, fixed background that lives behind the entire site. Colors stay exactly as they are today (cream base, plum/copper/peach/lavender accents) — only the motion and presence change.
 
-### Design direction — "Stratified Plume"
+### What changes
 
-A layered system where every payment card has a clear role signaled by color, elevation, and accent. Built on the existing cream/plum/copper palette — no new tokens, no theme drift.
+A single fixed-position background layer mounted once at the app root. It sits behind every page (z-index: -1) and animates softly across the whole viewport. Hero sections and footer keep their existing treatments and will visually layer on top without alteration.
 
-**Five card archetypes**
+### Design — "Ambient Vibrance"
 
-| Archetype | Use | Visual signature |
-|-----------|-----|------------------|
-| **Tier — Standard** | Default pricing tier, basic plan | Cream surface, slate border, flat shadow, no badge |
-| **Tier — Featured** | Recommended/popular plan | White surface with copper top-border (3px), elevated shadow, "Most Popular" pill badge, subtle copper glow |
-| **Tier — Premium** | Top tier, enterprise | Deep plum gradient surface (plum-900 → plum-700), gold hairline border, gold accent text, "Premium" gold badge |
-| **Method — Selector** | Saved card, payment method picker | White card, 1px border that turns copper when selected + copper check pill, subtle inner ring on focus |
-| **Summary — Order** | Cart total, order summary, invoice preview | Cream surface, plum left-rail (4px), tabular-nums for prices, copper total row |
+**Layer stack (bottom to top, all `position: fixed; inset: 0; z-index: -1`)**
 
-### Visual recipe (CSS tokens added to `vibrance.css`)
+1. **Cream base** — existing `--background` (hsl 30 25% 97%), unchanged
+2. **Mesh wash** — three soft radial gradients in peach (hsl 28 90% 78%), lavender (hsl 265 60% 75%), and warm coral (hsl 14 85% 70%), all at 8–12% opacity, blended with `mix-blend-mode: multiply`
+3. **Drifting orbs** — 4 large blurred orbs (peach, lavender, coral, sky) at 320–480px, blur 80px, opacity 0.18, animated with the existing `vibe-orb-drift` keyframes at 28–36s loops with staggered delays
+4. **Optional grain** — existing `vibe-grain` SVG noise at 2% opacity for premium depth
 
-```text
-.pay-card                 base shell: 16px radius, cream bg, slate-300 border, micro shadow
-.pay-card--standard       no extra accent
-.pay-card--featured       3px copper top border, copper/8 inner glow, lift on hover
-.pay-card--premium        plum gradient bg, gold hairline, white text, gold accents
-.pay-card--method         compact 12px radius, selectable state via [data-selected]
-.pay-card--summary        4px plum left rail, tabular price rows
-.pay-card__badge          absolute top pill (copper for featured, gold for premium)
-.pay-card__price          large display number with tabular-nums
-.pay-card__row            flex justify-between for line items, with hairline divider
-.pay-card__total          bold, copper accent, larger size
-.pay-card__cta            full-width pill, neo-tactile (existing button system)
-```
+**Motion**
+- Orbs drift on existing `vibe-orb-drift` (already defined, 24s ease-in-out infinite) — no new keyframes
+- Each orb uses a different `animation-delay` (-4s, -10s, -18s, -26s) so the field never feels in sync
+- `prefers-reduced-motion: reduce` → orbs become static, no animation
+- `pointer-events: none` on every layer so clicks pass through
 
-**Color usage (existing tokens only)**
-- Copper: `#d96c4a` (featured accent)
-- Plum: `#5a2a5a` (premium gradient base)
-- Gold: `#c8a465` (premium hairline + badge)
-- Slate: `hsl(28 18% 78%)` (standard borders)
-- Cream: existing `--background`
+**Colors — strictly preserved**
+- No new color tokens. Reuses the same HSL values already in `vibrance.css`
+- All pages keep their current backgrounds; this layer sits *behind* everything
+- Pages with existing solid backgrounds (Auth, Admin) opt out via a body class
 
-### Where it gets applied
-
-| File | Component | Treatment |
-|------|-----------|-----------|
-| `src/components/OrderSummary.tsx` | Order summary card | `pay-card pay-card--summary` |
-| `src/components/payment/CheckoutFrame.tsx` | `CheckoutCard` wrapper | Refined to use `pay-card` base, keep aside structure |
-| `src/components/payment/SavedPaymentMethods.tsx` | Saved card buttons | `pay-card pay-card--method` with `[data-selected]` state |
-| `src/components/training/PricingCard.tsx` (and any tier card components found) | Pricing tiers | Standard / Featured / Premium variants based on `featured` prop |
-| `src/components/donations/DonationTierCard.tsx` (if present) | Donation tiers | Standard + Featured for recommended amount |
-| `src/pages/Training.tsx` pricing grid wrapper | Tier grid | Apply variant class per tier index |
-| `src/pages/Business.tsx` service pricing cards | Service tiers | Same Standard/Featured/Premium logic |
-| `src/components/business/PricingTier.tsx` (if present) | Business tiers | Variant classes |
-| `src/components/payment/CheckoutSummary.tsx` (if present) | Compact totals | `pay-card--summary` |
-| Any inline checkout dialogs (`PaymentDialog`, `CheckoutDialog`, `DonationDialog`, `BookCheckout`) | Outer card | `pay-card` base swap |
-
-A discovery sweep will run during implementation — every component matching `*Pricing*`, `*Checkout*`, `*Payment*`, `*Donation*`, `*Order*`, `*Plan*Card*` will be inspected and assigned the correct variant.
-
-### Files touched (estimated)
+### Files touched
 
 ```text
-EDIT  src/styles/vibrance.css                                   (~140 lines added — pay-card system)
-EDIT  src/components/OrderSummary.tsx                           (className additions)
-EDIT  src/components/payment/CheckoutFrame.tsx                  (CheckoutCard variant)
-EDIT  src/components/payment/SavedPaymentMethods.tsx            (method card restyle)
-EDIT  src/components/training/PricingCard.tsx                   (variant logic)
-EDIT  src/pages/Training.tsx                                    (variant per tier)
-EDIT  src/pages/Business.tsx                                    (variant per tier)
-EDIT  src/components/business/*PricingTier*.tsx                 (if present)
-EDIT  src/components/donations/*Tier*.tsx                       (if present)
-EDIT  src/components/payment/*Checkout*.tsx                     (sweep)
-EDIT  src/components/checkout/*Card*.tsx                        (sweep)
+NEW   src/components/backgrounds/AmbientVibranceBackground.tsx   (~50 lines — fixed orb container)
+EDIT  src/styles/vibrance.css                                    (~60 lines added — .ambient-vibrance-bg utilities, opacity tuning for global use)
+EDIT  src/App.tsx                                                (mount <AmbientVibranceBackground /> once inside the providers, before <main>)
+EDIT  src/index.css                                              (~10 lines — body class hook to disable on opt-out routes)
 ```
 
-All edits are className/CSS additive. No JSX restructuring, no prop signature changes, no logic, no new components.
+### Implementation specifics
 
-### Distinguishability checklist (passes for every card)
+**`AmbientVibranceBackground.tsx`** — pure presentational component, no props, no state, no effects. Mounts once. Reads `prefers-reduced-motion` via CSS only. Uses existing `.vibe-orb`, `.vibe-orb--lg`, `.vibe-orb--xl`, `.vibe-orb--coral`, `.vibe-orb--lavender`, `.vibe-orb--peach`, `.vibe-orb--sky` classes wrapped in a new `.ambient-vibrance-bg` fixed container.
 
-- Each archetype uses a different border color, surface color, and accent color
-- Featured and Premium carry distinct badges in different colors and positions
-- Selected payment method shows copper border + inset ring + check pill (3 simultaneous signals)
-- Total/summary uses copper text + tabular numerals for instant scan
-- Hover and focus states differ per archetype (lift, glow, ring)
-- Color contrast WCAG AAA on all variants (white on plum, plum on cream, copper on cream all verified)
+**`App.tsx`** — single line addition inside the root provider, before `<main>`. No route logic, no conditional rendering at the React level.
+
+**`vibrance.css` additions**
+```css
+.ambient-vibrance-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  /* base mesh wash */
+  background-image:
+    radial-gradient(at 18% 22%, hsl(14 85% 78% / 0.10) 0%, transparent 55%),
+    radial-gradient(at 82% 28%, hsl(265 60% 80% / 0.09) 0%, transparent 55%),
+    radial-gradient(at 50% 88%, hsl(28 90% 80% / 0.08) 0%, transparent 60%);
+}
+.ambient-vibrance-bg .vibe-orb { opacity: 0.18; }
+body.no-ambient-vibrance .ambient-vibrance-bg { display: none; }
+```
+
+**Opt-out** (via body class set in route components, not the background itself)
+- `/auth/*` — keep its own dedicated background
+- `/admin/*`, `/portal/*` — internal dashboards have their own solid surfaces
 
 ### Constraints respected
 
-- Plume light theme only — no dark mode
-- No `transition: all`, no framer-motion
-- Backdrop-filter capped at 10px (under perf budget)
-- Honors `zoom: 0.75` root scaling
-- Touch targets ≥44px on mobile
-- No em-dashes, no semicolons in copy
-- Existing `stroke-glass` widget classes unaffected — `pay-card` is a parallel system
-- Neo-tactile button system used as-is for CTAs
-- Compact payment dialog spec (≤440px width) preserved
-- Auth, Admin, Portal — untouched
-- Hero components — untouched
-- Footer — untouched
+- Colors unchanged — same HSL values already in the codebase
+- No new tokens, no token edits
+- `pointer-events: none` on every layer
+- Honors `prefers-reduced-motion: reduce` — orbs freeze
+- `backdrop-filter` not used (orbs use `filter: blur` only — already in spec)
+- Honors existing `zoom: 0.75` root scaling
+- No `transition: all`
+- Hero sections, footer, `stroke-glass` widgets, `pay-card` system — all untouched
+- Performance: only 4 fixed orbs total for the entire site (vs. 3 per `MeshBackground` instance previously) — net reduction in animated nodes
 
 ### Out of scope
 
-- Stripe/payment edge function logic
-- New payment methods or providers
-- Pricing data, tier copy, or business rules
-- Tailwind config or color tokens (new classes use existing tokens)
-- Dashboard payment widgets (different design system)
+- Hero components and hero CSS
+- Footer
+- Auth, Admin, Portal pages (opt out via body class)
+- Color palette changes
+- Existing `MeshBackground`, `GlassmorphismBackground`, `vibe-section` wrappers — kept as-is for components that explicitly use them; the global layer simply adds ambient motion behind them
+- Any logic, data, hooks, routes, edge functions
 - Pre-existing TypeScript build errors
 
 ### Estimated diff
 
-~140 lines new CSS + ~80 className tweaks across ~10 files. Zero deletions of working content.
+~50 lines new component + ~60 lines CSS + 2 lines in App.tsx + 10 lines in index.css. Zero deletions.
 
