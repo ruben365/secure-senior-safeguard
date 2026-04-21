@@ -125,5 +125,19 @@
       "puppeteer",
       "sharp"
     ]
+  },
+  "overrides": {
+    "@types/react": "^18.3.23",
+    "@types/react-dom": "^18.3.7"
+  },
+  "resolutions": {
+    "@types/react": "^18.3.23",
+    "@types/react-dom": "^18.3.7"
+  },
+  "bun": {
+    "overrides": {
+      "@types/react": "^18.3.23",
+      "@types/react-dom": "^18.3.7"
+    }
   }
 }
