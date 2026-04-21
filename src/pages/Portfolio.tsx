@@ -95,7 +95,7 @@ const Portfolio = () => {
               Portfolio
             </span>
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto lede">
             From brand identity to motion graphics, explore our work across
             every design discipline.
           </p>

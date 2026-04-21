@@ -229,14 +229,14 @@ function About() {
       <section className="py-7 md:py-10 section-warm relative overflow-hidden">
 
         <div className="container mx-auto">
-          <div className="text-center mb-5">
+          <div className="head-rhythm text-center mb-5">
             <span className="inline-block text-[10px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-3 py-1 rounded-full mb-3">
               Our Journey
             </span>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-foreground mb-3">
               Milestones That <span className="text-primary">Matter</span>
             </h2>
-            <p className="text-base text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-base text-muted-foreground max-w-2xl mx-auto lede">
               From a personal scare to protecting hundreds of families
             </p>
           </div>
@@ -248,7 +248,7 @@ function About() {
       <section id="founders" className="py-7 md:py-10 bg-background relative overflow-hidden">
 
         <div className="container mx-auto">
-          <div className="text-center mb-5">
+          <div className="head-rhythm text-center mb-5">
             <span className="inline-block text-[10px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-3 py-1 rounded-full mb-2">
               Meet Our Founder
             </span>
@@ -298,7 +298,7 @@ function About() {
       <MeshBackground variant="vibrant" withDots>
       <section className="py-7 md:py-10">
         <div className="container mx-auto">
-          <div className="text-center mb-5">
+          <div className="head-rhythm text-center mb-5">
             <span className="frosted-pill mb-3">Our Values</span>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-foreground mb-3">
               What Drives Us <span className="gradient-text-brand">Every Day</span>
@@ -338,7 +338,7 @@ function About() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-primary/60 to-accent/70" />
 
         <div className="container mx-auto relative z-10 text-white">
-          <div className="text-center mb-5">
+          <div className="head-rhythm text-center mb-5">
             <h2 className="text-xl md:text-2xl font-black mb-1 drop-shadow-lg text-white">
               Our Community Impact
             </h2>
@@ -370,7 +370,7 @@ function About() {
       {/* Who We Help */}
       <section className="py-7 md:py-10 bg-background">
         <div className="container mx-auto">
-          <div className="text-center mb-5">
+          <div className="head-rhythm text-center mb-5">
             <span className="inline-block text-[10px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-3 py-1 rounded-full mb-2">
               Who We Serve
             </span>

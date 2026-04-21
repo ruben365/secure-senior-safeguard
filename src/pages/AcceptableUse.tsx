@@ -22,7 +22,7 @@ function AcceptableUse() {
       <section className="py-16 md:py-20 bg-background">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-center mb-4">Acceptable Use Policy</h1>
+            <h1 className="sr-only">Acceptable Use Policy</h1>
             <p className="text-center text-muted-foreground mb-8 text-lg">
               Last Updated:{" "}
 April 14, 2026
