@@ -1,124 +1,112 @@
 
 
-## Auth Page — Complete Visual Reinvention
+## Add Subtle Stroke Glass Widgets Sitewide
 
-A full ground-up redesign of `/auth` (login, signup-success, MFA, password-reset). New background, new card, new layout, new everything. The current "Vibrance v2" treatment will be replaced with a fresh aesthetic.
+Goal: introduce a refined "Subtle Stroke" glass widget treatment to content sections sitewide (between hero and footer). Pure CSS + className additions — no new logic, no hero changes, no footer changes.
 
-### New direction: "Soft Daylight" — warm, airy, premium
+### Design — "Subtle Stroke" glass widget
 
-Departing from the current dark midnight-aurora look. The new aesthetic is **light, warm, and architectural**: a cream-and-peach atmosphere with a sculptural glass card, subtle paper texture, and refined micro-details. Mirrors the Plume design system used across the rest of the site instead of fighting against it.
+A whisper-thin, premium glass surface that sits gently on the cream background. Built to layer over any section without overpowering it.
 
-### Background — fully rebuilt
+**Visual recipe**
+- Surface: white at 65% opacity over warm cream
+- Border: 1px hairline in warm slate at 40% opacity
+- Inner stroke: 1px inset highlight at top (white at 60%) — gives the "etched glass" feel
+- Outer ambient: soft warm shadow `0 1px 2px rgba(80,40,80,0.04), 0 12px 32px -16px rgba(80,40,80,0.08)`
+- Backdrop blur: 10px (under the 12px perf cap)
+- Radius: 16px (tight) / 20px (standard) / 24px (large)
+- Corner accent: optional 1px copper hairline on top-left corner (8px L-shape) for the "subtle stroke" signature
 
-Replace the dark `auth-bg-aurora` with a new `auth-bg-daylight` system:
-- Base: vertical wash from cream `hsl(35 40% 97%)` → soft peach `hsl(20 50% 94%)` → warm ivory
-- Three large drifting blurred orbs in **terracotta, lavender, and amber** at low opacity (no dark navy)
-- Faint diagonal architectural grid (1px lines, 8% opacity) for structure
-- Soft paper-grain noise overlay (3% opacity)
-- Two thin animated light rays sweeping diagonally (12s loop)
-- Top and bottom hairline accents in copper gradient
-- Mobile: simplified to two orbs, no rays
+**Variants**
+```text
+.stroke-glass            → standard 20px radius, full treatment
+.stroke-glass--tight     → 16px radius, lighter shadow (for inline cards)
+.stroke-glass--large     → 24px radius, deeper ambient (for feature blocks)
+.stroke-glass--accent    → adds copper L-corner stroke (signature variant)
+.stroke-glass--quiet     → no shadow, only border + blur (for already-busy sections)
+```
 
-### Card — fully rebuilt
+### Where it gets applied
 
-Replace `auth-card-vibe` with new `auth-card-daylight`:
-- **Surface**: pure white with a 1px iridescent border (conic gradient: copper → lavender → cream → copper)
-- **Shape**: 20px radius, generous 2.5rem padding (3rem on desktop)
-- **Elevation**: dual-layer shadow — tight contact (0 2px 8px) + ambient soft (0 30px 80px -20px) — both warm-tinted
-- **Inner detail**: subtle linear sheen from top-left, a 1px coral accent strip on the left edge
-- **No glow ring** — replaced with a clean single warm ambient shadow
+Strategic placement only — not blanket-wrapped. Targets containers that currently feel flat or unmoored on the cream background.
 
-### Layout — restructured
-
-- Single-column centered layout on all screen sizes (no more two-pane brand panel)
-- Logo + brand mark at top (centered, larger, with copper gradient ring)
-- Tagline directly under brand: "Your secure portal" in small caps
-- Compact heading stack
-- SSO buttons full-width
-- Refined divider
-- Tabs
-- Form fields
-- Trust footer with three small icon chips (Encrypted / Kettering team / Private)
-
-### SSO buttons — rebuilt
-
-New `btn-sso-daylight`:
-- Cream-tinted glass surface (not pure white)
-- 1px warm border that gradient-shifts to copper on hover
-- Inner top highlight (1px white sheen)
-- Hover: lifts 1px, soft amber inner glow
-- Icon + label spacing tightened
-
-### Tabs — rebuilt
-
-- Container: cream pill with 1px border
-- Active: white surface with 2px copper underline accent (no gradient fill)
-- Inactive: warm slate text
-- Smooth 200ms transition
-
-### Inputs — rebuilt
-
-New `input-daylight`:
-- Surface: warm off-white with subtle inner top shadow
-- Border: hairline warm slate
-- Focus: 2px copper ring + white surface + icon shifts to copper
-- Larger 48px height for better touch targets
-- Icon left-padding adjusted
-
-### Primary CTA — rebuilt
-
-- Full-width 52px height
-- Background: gradient from `hsl(20 80% 52%)` → `hsl(15 75% 45%)` (terracotta deepening)
-- Inner top highlight (1px white at 30% opacity)
-- Soft drop shadow in matching coral
-- Hover: brightens 4%, arrow translates 3px right
-- Loading state: copper spinner
-
-### Secondary screens (signup-success, MFA, password-reset)
-
-Same `auth-bg-daylight` background, same `auth-card-daylight` shell. Accent hue tuned per screen:
-- Signup success → emerald accent strip and icon halo
-- MFA verify → amber accent strip and icon halo
-- Password reset → lavender accent strip and icon halo
+| Page | Sections receiving widget | Variant |
+|------|---------------------------|---------|
+| About | Mission card, values grid items, story timeline | `.stroke-glass--accent` on mission, `.stroke-glass--tight` on values |
+| Business | Stat band, service cards, CTA band | `.stroke-glass--large` on stats, standard on services |
+| Training | Pricing tier cards (outer wrapper only), instructor cards | `.stroke-glass--accent` on top tier, standard on rest |
+| Resources | Featured shelf wrapper, category filter bar | `.stroke-glass--quiet` on filter bar |
+| Articles | Article preview cards, featured article block | `.stroke-glass--tight` on previews |
+| Portfolio | Project cards, filter bar | `.stroke-glass--tight` on cards |
+| Events | Event cards, upcoming/past tabs container | standard on cards |
+| Partners | Partner logos grid wrapper, testimonials | `.stroke-glass--quiet` on grid |
+| Careers | Job position cards, benefits grid | standard on positions, `.stroke-glass--tight` on benefits |
+| Contact | Contact info card, form wrapper, map block | `.stroke-glass--accent` on form |
+| FAQ (preview) | Question accordion items | `.stroke-glass--tight` |
+| HelpCenter | Topic category cards, search wrapper | `.stroke-glass--quiet` on search |
+| Sitemap | Section column wrappers | `.stroke-glass--tight` |
+| Status | Service status rows, uptime block | `.stroke-glass--quiet` |
+| Legal pages (6) | Body prose wrapper | standard, single application |
+| Home (below hero) | HomeStorySections cards, FAQPreview, LatestArticles | mixed: `--tight` on previews, `--accent` on featured |
 
 ### Files touched
 
 ```text
-EDIT  src/styles/vibrance.css   (rewrite the auth-* utility block — ~180 lines replaced)
-EDIT  src/pages/Auth.tsx        (className replacements + remove left brand pane + restructure)
+EDIT  src/styles/vibrance.css                          (~90 lines added — stroke-glass utilities)
+EDIT  src/pages/About.tsx                              (className additions on section wrappers)
+EDIT  src/pages/Business.tsx
+EDIT  src/pages/Training.tsx
+EDIT  src/pages/Resources.tsx
+EDIT  src/pages/Articles.tsx
+EDIT  src/pages/Portfolio.tsx
+EDIT  src/pages/Events.tsx
+EDIT  src/pages/Partners.tsx
+EDIT  src/pages/Careers.tsx
+EDIT  src/pages/Contact.tsx
+EDIT  src/pages/HelpCenter.tsx
+EDIT  src/pages/Sitemap.tsx
+EDIT  src/pages/Status.tsx
+EDIT  src/pages/PrivacyPolicy.tsx
+EDIT  src/pages/TermsOfService.tsx
+EDIT  src/pages/RefundPolicy.tsx
+EDIT  src/pages/CookiePolicy.tsx
+EDIT  src/pages/AcceptableUse.tsx
+EDIT  src/pages/Disclaimer.tsx
+EDIT  src/components/home/HomeStorySections.tsx
+EDIT  src/components/home/FAQPreview.tsx
+EDIT  src/components/home/LatestArticles.tsx
 ```
 
-No new files. No logic changes. No prop changes. No route changes. No DB.
+All edits are className-additive. No JSX restructuring, no prop changes, no logic, no new components.
 
-### CSS classes added (replaces existing auth-* set)
+### Untouched (per user instruction)
 
-```text
-.auth-bg-daylight       — full-bleed warm cream gradient background
-.auth-bg-daylight::before — orb layer + diagonal grid
-.auth-card-daylight     — white card with iridescent border + warm dual shadow
-.auth-card-accent       — left edge color strip (modifier)
-.btn-sso-daylight       — cream glass SSO button
-.input-daylight         — warm off-white input with copper focus
-.auth-cta-primary       — terracotta gradient CTA button
-.auth-divider-warm      — gradient hairline + cream pill
-.auth-tabs-warm         — cream tab container + copper underline
-```
+- All hero components (`HeroHomepage`, `HeroBusiness`, `HeroWorkshops`, etc.) and `hero-*` styles
+- `Footer.tsx` and footer styles
+- Auth, Admin, Portal pages (separate design systems)
+- Color tokens, typography tokens, button system
+- All routes, data flows, hooks, edge functions
 
-Old classes (`auth-bg-aurora`, `auth-card-vibe`, `auth-glow-ring`, `btn-sso-vibe`, `input-vibe`) are removed in this rewrite — they are only used inside `Auth.tsx`, so no other pages are affected.
+### Constraints respected
 
-### Accessibility & performance
-
-- All decorative layers `aria-hidden` and `pointer-events: none`
-- Orb drift, light rays, shimmer all disabled under `prefers-reduced-motion: reduce`
-- No `backdrop-filter` over 12px (perf rule)
-- Tap targets ≥48px
-- Color contrast: all text WCAG AA on the new cream surface (slate-900 / slate-600 only)
-- Mobile: orb count reduced, light rays disabled, padding tightened
+- `backdrop-filter: blur(10px)` — under the 12px perf cap
+- No `transition: all`
+- No animation on mount (widget is static; only existing scroll-reveal observers run)
+- Decorative inner stroke is `pointer-events: none`
+- Honors `prefers-reduced-transparency: reduce` — falls back to solid white at 96%
+- WCAG AA contrast preserved (text colors unchanged)
+- Mobile-first; blur stays at 10px (mobile-safe)
+- Honors existing `zoom: 0.75` root scaling
 
 ### Out of scope
 
-- Form logic, validation, OAuth handlers, MFA flow — untouched
-- `ForgotPasswordModal`, `TwoFactorVerify`, `PasswordResetForm` internals — only their wrapper styling changes
-- Pre-existing TypeScript build errors (Speech API types, BookingRequestsTable schema, useStripeKey, email Record types, SEO breadcrumb readonly types) — unrelated to auth styling, predate this work
-- All other pages — untouched
+- Hero pages and footer
+- Pre-existing build error in `HeroHomepage.tsx` line 77 (`fetchpriority` → `fetchPriority` casing) — that is a separate one-line fix, not part of this design pass
+- Internal dashboards
+- Component logic, data, hooks
+- Tailwind config (all utilities live in `vibrance.css`)
+
+### Estimated diff
+
+~90 lines new CSS + ~80 lines of className additions across ~23 files. Zero deletions of working content.
 
