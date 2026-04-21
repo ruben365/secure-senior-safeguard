@@ -63,8 +63,13 @@ export function AnnouncementBell() {
         msg.includes("does not exist") ||
         msg.includes("Could not find the table")
       ) {
-        // Transient schema-cache miss — back off 60 s before retrying
+        // Transient schema-cache miss — back off 60 s then retry once
         announcementsRetryAfter = Date.now() + 60_000;
+        setTimeout(() => {
+          if (!announcementsTableKnownMissing && Date.now() >= announcementsRetryAfter) {
+            fetchAnnouncements();
+          }
+        }, 60_000);
       }
       return;
     }
