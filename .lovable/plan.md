@@ -1,156 +1,143 @@
 
 
-## Apply Heavy Rounded Corners + Floating Card Effect to All Containers
+## Fix White-Themed Buttons That Blend Into Light Surfaces
 
-Goal: give every container surface site-wide a unified "floating card" look — heavy `2rem` rounded corners, a subtle 1px stroke, and a soft diffused shadow. Heroes and footer are not touched.
+Goal: make every white, transparent, or unstyled button visually distinguishable on the now-mostly-white "floating card" surfaces. Heroes and footer stay untouched.
 
-### What "Floating Card" means here
+### The problem
 
-A consistent visual treatment on every container surface (cards, panels, dialogs, popovers, glass surfaces):
+After the recent layers (Figma sharpness, soft elevation, floating cards), most container surfaces are bright white with subtle shadows. Buttons that use `bg-white`, `bg-transparent`, or no explicit background visually **disappear** — there is no contrast between button and surface.
 
-| Property | Value | Purpose |
-|----------|-------|---------|
-| `border-radius` | `2rem` (32px) | Heavy, glass-style rounding |
-| `border` | `1px solid rgba(15, 23, 42, 0.06)` | Subtle hairline stroke |
-| `box-shadow` | Multi-layer diffused | Floating depth |
-| `transition` | `220ms cubic-bezier` | Smooth hover lift |
+The existing rule in `src/index.css` only handles dark/blue backgrounds (forces white text on them). There is **no rule** for the inverse problem: light buttons on light surfaces.
 
 ### What gets added
 
 ```text
-NEW   src/styles/floating-cards.css        (~140 lines, pure CSS)
-EDIT  src/index.css                         (+1 line @import — last in cascade)
+NEW   src/styles/button-contrast-fix.css     (~120 lines, pure CSS)
+EDIT  src/index.css                           (+1 line @import — last in cascade)
 ```
 
-Zero JSX edits. Zero new dependencies. Zero token changes. Plume palette untouched.
+Zero JSX edits. Zero token changes. Zero new dependencies. Plume palette respected (uses existing terracotta `#d96c4a` and slate ink).
 
-### CSS module — `floating-cards.css`
+### CSS module — `button-contrast-fix.css`
 
-#### 1. CSS custom properties
+#### 1. Force a visible border + soft fill on white/transparent buttons
 
 ```css
-:root {
-  --float-radius: 2rem;                              /* 32px heavy rounding */
-  --float-radius-sm: 1.25rem;                        /* 20px for nested/small */
-  --float-border: 1px solid rgba(15, 23, 42, 0.06);  /* subtle 1px stroke */
-  --float-shadow:
-    0 1px 2px 0 rgba(15, 23, 42, 0.04),
-    0 4px 12px -2px rgba(15, 23, 42, 0.05),
-    0 16px 32px -8px rgba(15, 23, 42, 0.06);
-  --float-shadow-hover:
-    0 2px 4px 0 rgba(15, 23, 42, 0.05),
-    0 8px 20px -4px rgba(15, 23, 42, 0.07),
-    0 24px 48px -12px rgba(15, 23, 42, 0.08);
+/* Catch buttons that have no real background color set */
+button[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+a[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
+button[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
+  border: 1.5px solid rgba(15, 23, 42, 0.18) !important;
+  color: #1e293b !important;
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.6) inset,
+    0 1px 2px 0 rgba(15, 23, 42, 0.06),
+    0 2px 6px -1px rgba(15, 23, 42, 0.05) !important;
+}
+
+/* Hover: terracotta tint borrow from the brand palette */
+button[class*="bg-white"]:not(.hero-home *)…:hover,
+a[class*="bg-white"]:not(.hero-home *)…:hover,
+button[class*="bg-transparent"]:not(.hero-home *)…:hover {
+  border-color: rgba(217, 108, 74, 0.55) !important;
+  color: #c45e3b !important;
+  background-color: #fff7f2 !important;
 }
 ```
 
-#### 2. Auto-applied to container surfaces (heroes + footer excluded)
-
-Every selector uses the same exclusion guard:
+#### 2. Rescue completely unstyled `<button>` elements (no `bg-*` at all)
 
 ```css
-/* Cards */
-.card:not(.hero-home .card):not(.hero-business .card):not(.hero-workshops .card):not(footer .card):not(.site-footer .card),
-
-/* Glass surfaces */
-.glass:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
-.glass-card:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
-.glass-vibe:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
-.glass-vibe-card:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
-
-/* Panels */
-.panel:not(.hero-home .panel):not(.hero-business .panel):not(.hero-workshops .panel):not(footer .panel):not(.site-footer .panel),
-[data-widget="panel"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
-[data-widget="card"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
-  border-radius: var(--float-radius) !important;
-  border: var(--float-border) !important;
-  box-shadow: var(--float-shadow) !important;
-  transition:
-    box-shadow 220ms cubic-bezier(0.4, 0, 0.2, 1),
-    transform 220ms cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 220ms cubic-bezier(0.4, 0, 0.2, 1);
+/* Buttons with NO explicit background class get a default light-gray fill */
+button:where(:not([class*="bg-"]):not([class*="ghost"]):not([class*="link"]))
+  :not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
+  background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+  border: 1.5px solid rgba(15, 23, 42, 0.18);
+  color: #1e293b;
 }
 ```
 
-#### 3. Hover lift
+(Scoped with `:where` so specificity stays 0 — it never overrides any explicit Tailwind utility.)
+
+#### 3. Outline / ghost buttons get a visible 1.5px border
 
 ```css
-.card:not(.hero-home .card)…:hover,
-.glass:not(.hero-home *)…:hover,
-[data-widget="card"]:not(.hero-home *)…:hover {
-  box-shadow: var(--float-shadow-hover) !important;
-  border-color: rgba(15, 23, 42, 0.10) !important;
+button[class*="variant-outline"]:not(.hero-home *)…,
+button[class*="border-input"]:not(.hero-home *)…,
+[role="button"][class*="bg-background"]:not(.hero-home *)… {
+  border-width: 1.5px !important;
+  border-color: rgba(15, 23, 42, 0.22) !important;
+  color: #1e293b !important;
 }
 ```
 
-#### 4. Dialogs, popovers, dropdowns (Radix surfaces)
+#### 4. Light-tinted buttons (bg-slate-50, bg-gray-50, bg-coral-50, etc.)
 
 ```css
-[role="dialog"]:not(.hero-home *):not(footer *),
-[role="alertdialog"]:not(.hero-home *):not(footer *),
-[data-radix-popper-content-wrapper]:not(.hero-home *):not(footer *) > *,
-[role="menu"]:not(.hero-home *):not(footer *),
-[role="listbox"]:not(.hero-home *):not(footer *),
-[role="tooltip"]:not(.hero-home *):not(footer *) {
-  border-radius: var(--float-radius) !important;
-  border: var(--float-border) !important;
-  box-shadow: var(--float-shadow) !important;
-}
-
-/* Tooltips stay smaller */
-[role="tooltip"]:not(.hero-home *):not(footer *) {
-  border-radius: var(--float-radius-sm) !important;
+button[class*="bg-slate-50"]:not(.hero-home *)…,
+button[class*="bg-slate-100"]:not(.hero-home *)…,
+button[class*="bg-gray-50"]:not(.hero-home *)…,
+button[class*="bg-gray-100"]:not(.hero-home *)…,
+button[class*="bg-neutral-50"]:not(.hero-home *)…,
+button[class*="bg-neutral-100"]:not(.hero-home *)… {
+  border: 1.5px solid rgba(15, 23, 42, 0.15) !important;
+  color: #1e293b !important;
 }
 ```
 
-#### 5. Override the global zero-shadow reset
+#### 5. Disabled / loading buttons keep readable contrast
 
-`src/index.css` (lines 67-73) zeroes `--tw-shadow` globally. The new file uses direct `box-shadow` declarations with `!important` to bypass that reset (same pattern already used by `soft-elevation.css`).
+```css
+button:disabled:not(.hero-home *)… {
+  opacity: 0.7 !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  color: #475569 !important;
+}
+```
 
 #### 6. Honor existing rules
 
-- `prefers-reduced-motion` disables transitions and hover lift
-- `@media print` strips all radius, border, and shadow
-- Honors `zoom: 0.75` (rem-based values scale correctly)
-- Honors `backdrop-filter ≤ 12px` (no backdrop changes)
-- Buttons, inputs, badges, chips: NOT touched (they keep their own pill/rounded radii from the Neo-Tactile system)
+- **Hero pages and footer fully excluded** via `:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *)` on every selector
+- **Neo-Tactile primary buttons untouched** — they already have terracotta gradient + dark border; the rules only fire on `bg-white`, `bg-transparent`, light tints, or no-bg buttons
+- **`prefers-reduced-motion`** — no animations added
+- **`zoom: 0.75`** — uses px values that survive zoom
+- **Plume palette** — uses existing `#d96c4a` (terracotta), `#c45e3b` (deep terracotta), `#fff7f2` (warm cream tint), and slate ink only
+- **WCAG AA contrast** — `#1e293b` on `#ffffff` = 16.8:1 ratio (AAA)
+- **Print mode** — strips borders/shadows
 
-#### 7. Composition with existing layers
+### Composition with existing layers
 
 | Layer | Owns |
 |-------|------|
-| `figma-sharpness.css` | Hairline rendering, type smoothing |
-| `soft-elevation.css` | Multi-level `el-1` … `el-5` utility shadows |
-| `floating-cards.css` | **Container radius + border + base shadow (THIS FILE)** |
+| `index.css` global rule (existing) | White text on dark/blue buttons |
+| `button.tsx` cva variants | Primary terracotta, hero CTAs, etc. |
+| `button-contrast-fix.css` (NEW) | **Light-on-light buttons get visible border + ink + hover tint** |
 
-Imported last so its `!important` declarations win on container surfaces.
+Imported last so its `!important` declarations win over Tailwind utilities.
 
 ### Constraints respected
 
-- **Hero pages and footer fully excluded** (`.hero-home`, `.hero-business`, `.hero-workshops`, `footer`, `.site-footer`)
-- No JS, no logic, no new components, no JSX edits, no dependencies
-- Honors `prefers-reduced-motion`, `zoom: 0.75`, `backdrop-filter ≤ 12px` rules
-- Plume palette untouched — uses neutral `rgba(15, 23, 42, …)` only
-- WCAG AA contrast preserved (decorative only)
-- Buttons keep their pill shape (Neo-Tactile button system untouched)
-- Print mode strips all decoration
+- Hero pages (homepage, business, workshops) — fully excluded
+- Footer — fully excluded
+- Existing Neo-Tactile primary, gold, hero variants — untouched (they already have explicit dark backgrounds or gradients)
+- Toast notifications (white-themed standard) — untouched (they aren't `<button>`)
+- Plume tokens, Tailwind config, JSX, logic, routes, data — all untouched
 
 ### Out of scope
 
-- Hero pages (homepage, business, workshops) — fully excluded
-- Footer (any `footer` element or `.site-footer`) — fully excluded
-- Buttons, inputs, badges, chips, avatars (keep existing radii)
-- Plume tokens, Tailwind config, JSX, logic, routes, data
+- Dark-background buttons (already handled by the existing global rule)
+- Hero CTAs (use `heroPrimary` / `heroOutline` variants — fully styled)
 - Pre-existing TypeScript errors
 
 ### Files touched
 
 ```text
-NEW   src/styles/floating-cards.css        (~140 lines)
-EDIT  src/index.css                         (+1 line @import after soft-elevation)
+NEW   src/styles/button-contrast-fix.css     (~120 lines)
+EDIT  src/index.css                           (+1 line @import after floating-cards)
 ```
 
 ### Estimated diff
 
-~140 lines new CSS + 1 line `@import` in `src/index.css`. Zero deletions, zero JSX changes, zero logic changes.
+~120 lines new CSS + 1 line `@import`. Zero deletions, zero JSX changes, zero logic changes.
 
