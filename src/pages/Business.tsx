@@ -862,7 +862,7 @@ function Business() {
                 animation="fade-up"
                 delay={i * 120}>
                 
-                  <Card className="group p-8 rounded-2xl border-border/40 bg-card/95 backdrop-blur-sm text-center h-full hover:shadow-[0_20px_50px_-15px_hsl(var(--primary)/0.12)] hover:border-primary/25 transition-all duration-500 overflow-hidden relative">
+                  <Card className="stroke-glass--large group p-8 rounded-2xl border-border/40 bg-card/95 backdrop-blur-sm text-center h-full hover:shadow-[0_20px_50px_-15px_hsl(var(--primary)/0.12)] hover:border-primary/25 transition-all duration-500 overflow-hidden relative">
                     <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/30 via-accent/20 to-primary/30 opacity-0 group-hover:opacity-100 transition-opacity" />
                     <div
                     className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center mx-auto mb-5 shadow-inner group-hover:scale-110 transition-transform duration-300"

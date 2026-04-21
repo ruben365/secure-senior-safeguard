@@ -354,7 +354,7 @@ function Resources() {
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {featuredBooks.map((book) => (
-                <Card key={book.id} className="overflow-hidden border-border/50 bg-card/80">
+                <Card key={book.id} className="stroke-glass--tight overflow-hidden border-border/50 bg-card/80">
                   <button
                     onClick={() => handleBookClick(book)}
                     className="w-full text-left"
