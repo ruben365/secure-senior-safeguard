@@ -708,7 +708,7 @@ function LearnAndTrain() {
           
           <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto relative z-10">
-            <div className="text-center mb-14">
+            <div className="head-rhythm text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Sparkles className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">Trusted by 500+ Families</span>
@@ -826,7 +826,7 @@ function LearnAndTrain() {
         {/* ══════════ SECTION 2: HOW IT WORKS ══════════ */}
         <section id="book" className="py-10 sm:py-16 md:py-20 bg-muted/20">
           <div className="container mx-auto">
-            <div className="text-center mb-14">
+            <div className="head-rhythm text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Sparkles className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">Getting Started</span>
@@ -876,7 +876,7 @@ function LearnAndTrain() {
           <div className="absolute top-20 right-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-20 left-0 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto relative z-10">
-            <div className="text-center mb-14">
+            <div className="head-rhythm text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Shield className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">Protecting Families Together</span>
@@ -933,7 +933,7 @@ function LearnAndTrain() {
         {/* ══════════ SECTION 4: SIMPLE PROTECTION IN 4 STEPS ══════════ */}
         <section className="py-10 sm:py-16 md:py-20 bg-muted/20">
           <div className="container mx-auto">
-            <div className="text-center mb-14">
+            <div className="head-rhythm text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Zap className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">Easy as 1-2-3-4</span>
@@ -997,7 +997,7 @@ function LearnAndTrain() {
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
           <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto relative z-10">
-            <div className="text-center mb-14">
+            <div className="head-rhythm text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Shield className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">Comprehensive Protection</span>
@@ -1062,7 +1062,7 @@ function LearnAndTrain() {
         {/* ══════════ SECTION 6: AI PROFESSIONAL TRAINING ══════════ */}
         <section id="ai-pro-training" className="py-10 sm:py-16 md:py-20 bg-muted/20">
           <div className="container mx-auto">
-            <div className="text-center mb-14">
+            <div className="head-rhythm text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Brain className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">For Professionals & Entrepreneurs</span>
@@ -1116,7 +1116,7 @@ function LearnAndTrain() {
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background dot-grid-bg" />
           <div className="absolute bottom-20 right-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto relative z-10">
-            <div className="text-center mb-14">
+            <div className="head-rhythm text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Heart className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">Family Protection</span>
@@ -1220,7 +1220,7 @@ function LearnAndTrain() {
         {/* ══════════ SECTION 8: SCAMS WE'VE CAUGHT ══════════ */}
         <section className="py-10 sm:py-16 md:py-20 bg-muted/20">
           <div className="container mx-auto">
-            <div className="text-center mb-14">
+            <div className="head-rhythm text-center mb-14">
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
                 <Award className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">Success Stories</span>
@@ -1272,14 +1272,14 @@ function LearnAndTrain() {
         {trainingTestimonials.length > 0 && (
           <section className="py-10 sm:py-16 md:py-20 bg-background">
             <div className="container mx-auto">
-              <div className="text-center mb-14">
+              <div className="head-rhythm text-center mb-14">
                 <span className="inline-block text-xs uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
                   Testimonials
                 </span>
                 <h2 className="text-3xl md:text-4xl font-black text-foreground mb-3">
                   Workshop <span className="text-primary">Success Stories</span>
                 </h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto">
+                <p className="text-muted-foreground max-w-2xl mx-auto lede">
                   Hear from families who have completed our workshops
                 </p>
               </div>

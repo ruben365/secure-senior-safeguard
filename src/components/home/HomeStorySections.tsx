@@ -662,7 +662,7 @@ export const HomeStorySections = () => {
         <div className="container mx-auto">
 
           {/* Centered header */}
-          <div className="text-center mb-8">
+          <div className="head-rhythm text-center mb-8">
             <p
               data-reveal
               className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#d96c4a] mb-3"
@@ -985,7 +985,7 @@ export const HomeStorySections = () => {
         <div className="container mx-auto">
 
           {/* Heading */}
-          <div className="text-center mb-12">
+          <div className="head-rhythm text-center mb-12">
             <p data-reveal className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#d96c4a] mb-2">
               What we offer
             </p>

@@ -223,7 +223,7 @@ const SectionHeader = ({
 
 
 }: {badge: string;title: string;subtitle?: string;children?: React.ReactNode;light?: boolean;}) =>
-<AnimatedSection animation="fade-up" className="text-center mb-16">
+<AnimatedSection animation="fade-up" className="head-rhythm text-center mb-16">
     <span className="inline-flex items-center gap-2 px-5 py-2 glass-subtle rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15">
       <Sparkles className="w-3.5 h-3.5 text-primary" />
       <span className={light ? "text-white/90" : "text-primary"}>{badge}</span>
@@ -1030,7 +1030,7 @@ function Business() {
 
             {/* Website Add-Ons */}
             <AnimatedSection animation="fade-up" delay={100} className="max-w-5xl mx-auto">
-              <div className="text-center mb-8">
+              <div className="head-rhythm text-center mb-8">
                 <span className="inline-flex items-center gap-2 px-4 py-1.5 glass-subtle rounded-full text-xs font-bold text-accent uppercase tracking-[0.18em] mb-4 border border-accent/15">
                   <Sparkles className="w-3 h-3" />
                   Enhance Your Project
@@ -1440,7 +1440,7 @@ function Business() {
                   <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary" />
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] to-accent/[0.01] pointer-events-none" />
                   
-                  <div className="text-center mb-8 relative z-10">
+                  <div className="head-rhythm text-center mb-8 relative z-10">
                     <span className="inline-flex items-center gap-2 px-4 py-1.5 glass-subtle rounded-full text-xs font-bold text-primary uppercase tracking-[0.18em] mb-4 border border-primary/15">
                       <Globe className="w-3.5 h-3.5" />
                       Universal AI Support

@@ -207,7 +207,7 @@ function Contact() {
       <div className="py-16 relative overflow-hidden">
         <div className="container mx-auto relative z-10">
           {/* Contact Methods Grid */}
-          <div className="text-center mb-10">
+          <div className="head-rhythm text-center mb-10">
             <span className="frosted-pill mb-4">Get in Touch</span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
               How Can We <span className="text-primary">Help?</span>

@@ -79,7 +79,7 @@ export default function Sitemap() {
 
       <section className="py-16 md:py-20 bg-background">
         <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-12">
+          <div className="head-rhythm text-center mb-12">
             <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] text-primary mb-3">
               Site Directory
             </span>
