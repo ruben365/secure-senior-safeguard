@@ -162,6 +162,48 @@ export const usePaymentFlow = () => {
   // delivery architectural gap.
   // ============================================================================
 
+  // Create an embedded subscription PaymentIntent — no redirect.
+  // Calls create-payment-intent with mode:'subscription', advances dialog to step 2.
+  const createSubscriptionIntent = useCallback(
+    async (options: {
+      priceId: string;
+      customerEmail?: string;
+      customerName?: string;
+    }): Promise<{ clientSecret: string; subscriptionId: string } | null> => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const { data, error } = await withTimeout(
+          supabase.functions.invoke("create-payment-intent", {
+            body: {
+              priceId: options.priceId,
+              mode: "subscription",
+              customerEmail: options.customerEmail ?? "guest@invisionnetwork.org",
+              customerName: options.customerName ?? "Guest",
+            },
+          }),
+          15000,
+        );
+
+        if (error) throw new Error(error.message || "Failed to create subscription intent");
+        if (!data?.clientSecret) throw new Error("No client secret received");
+
+        setPaymentDetails(data.subscriptionId ?? "", data.clientSecret);
+        setStep("payment");
+        setLoading(false);
+        return { clientSecret: data.clientSecret, subscriptionId: data.subscriptionId ?? "" };
+      } catch (err) {
+        const message = err instanceof Error ? err.message : "Subscription initialization failed";
+        setError(message);
+        toast.error(message);
+        setLoading(false);
+        return null;
+      }
+    },
+    [setPaymentDetails, setLoading, setError, setStep],
+  );
+
   // Create a Stripe Checkout Session for SUBSCRIPTION products.
   // Returns a hosted Stripe Checkout URL the caller should redirect to.
   // The in-dialog Stripe Elements (PaymentIntent) flow does NOT support recurring
@@ -217,6 +259,7 @@ export const usePaymentFlow = () => {
 
   return {
     createPaymentIntent,
+    createSubscriptionIntent,
     createSubscriptionCheckout,
     verifyPayment,
   };

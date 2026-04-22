@@ -10,7 +10,7 @@ import { useAiChat } from "@/hooks/useAiChat";
 import { useSubscription } from "@/contexts/SubscriptionContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useScanAccess } from "@/hooks/useScanAccess";
-import { usePaymentFlow } from "@/hooks/usePaymentFlow";
+import { useCheckout } from "@/contexts/CheckoutContext";
 import { SITE } from "@/config/site";
 import { SCAMSHIELD_PLANS } from "@/config/products";
 import {
@@ -90,7 +90,6 @@ export default function TrainingAiAnalysis() {
   const [isRecording, setIsRecording]         = useState(false);
   const [passwordResult, setPasswordResult]   = useState<{ score: number; breaches: string; suggestions: string[] } | null>(null);
   const [checkingPassword, setCheckingPassword] = useState(false);
-  const [subscriptionCheckoutLoading, setSubscriptionCheckoutLoading] = useState(false);
   const [settings, setSettings] = useState({
     darkMode:    false,
     sendOnEnter: true,
@@ -106,7 +105,7 @@ export default function TrainingAiAnalysis() {
 
   // — Auth / subscription hooks —
   const { user } = useAuth();
-  const { createSubscriptionCheckout } = usePaymentFlow();
+  const { openCheckout } = useCheckout();
   const { subscriptions, loading: subscriptionsLoading, refreshSubscriptions } = useSubscription();
   const {
     accountAccess, loading: scanAccessLoading,
@@ -129,7 +128,7 @@ export default function TrainingAiAnalysis() {
   const loginPath        = `/auth?redirect=${encodeURIComponent("/training/ai-analysis")}`;
 
   const featuredPlan = useMemo(() => SCAMSHIELD_PLANS.find(p => p.popular) ?? SCAMSHIELD_PLANS[0], []);
-  const featuredTier = useMemo(() => { const s = featuredPlan.id.split("-"); return s[s.length - 1] ?? "family"; }, [featuredPlan.id]);
+
 
   const accessLabel = useMemo(() => {
     if (isCheckingAccess)                    return "Checking access…";
@@ -337,25 +336,10 @@ export default function TrainingAiAnalysis() {
     setPaywallOpen(true);
   };
 
-  const handleStartSubscription = useCallback(async () => {
-    if (subscriptionCheckoutLoading) return;
-    setSubscriptionCheckoutLoading(true);
-    try {
-      const result = await createSubscriptionCheckout({
-        priceId:       featuredPlan.stripePriceId,
-        serviceName:   featuredPlan.name,
-        planTier:      featuredTier,
-        customerEmail: user?.email ?? undefined,
-        customerName:  (user?.user_metadata?.full_name as string | undefined)
-                    ?? (user?.user_metadata?.name as string | undefined)
-                    ?? undefined,
-        returnTo: "/training/ai-analysis",
-      });
-      if (result?.url) { setPaywallOpen(false); window.location.href = result.url; }
-    } finally {
-      setSubscriptionCheckoutLoading(false);
-    }
-  }, [createSubscriptionCheckout, featuredTier, featuredPlan.name, featuredPlan.stripePriceId, subscriptionCheckoutLoading, user?.email, user?.user_metadata]);
+  const handleStartSubscription = useCallback(() => {
+    setPaywallOpen(false);
+    openCheckout(featuredPlan.id, "subscription");
+  }, [openCheckout, featuredPlan.id]);
 
   const handleRefreshAccess = async () => {
     await Promise.all([refreshSubscriptions(), refreshAccess()]);
@@ -483,8 +467,8 @@ export default function TrainingAiAnalysis() {
                     </Button>
                   )}
                   <Button size="sm" variant="heroOutline" className="text-white hover:text-white h-6 px-3 text-[11px]"
-                    onClick={() => void handleStartSubscription()} disabled={subscriptionCheckoutLoading}>
-                    {subscriptionCheckoutLoading ? <Loader2 className="w-3 h-3 animate-spin" /> : "Subscribe"}
+                    onClick={handleStartSubscription}>
+                    Subscribe
                   </Button>
                 </>
               )}
@@ -866,10 +850,8 @@ export default function TrainingAiAnalysis() {
                 </div>
               </div>
               <Button variant="heroPrimary" className="w-full text-white h-10"
-                onClick={() => void handleStartSubscription()} disabled={subscriptionCheckoutLoading}>
-                {subscriptionCheckoutLoading
-                  ? <><Loader2 className="w-4 h-4 animate-spin" /> Starting…</>
-                  : "Start Subscription"}
+                onClick={handleStartSubscription}>
+                Start Subscription
               </Button>
             </div>
             <div className="rounded-2xl border p-4">

@@ -167,7 +167,7 @@ const OrderSummaryCard: React.FC = () => {
 /* ── Step 1: Customer Info ─────────────────────────────────────── */
 const CustomerInfoStep: React.FC<{ onNext: () => void }> = ({ onNext }) => {
   const { state, setCustomerInfo, total } = useCheckout();
-  const { createPaymentIntent, createSubscriptionCheckout } = usePaymentFlow();
+  const { createPaymentIntent, createSubscriptionIntent } = usePaymentFlow();
   const { customerInfo, items, isLoading } = state;
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -183,14 +183,11 @@ const CustomerInfoStep: React.FC<{ onNext: () => void }> = ({ onNext }) => {
         toast.error("This subscription is not available for direct checkout.");
         return;
       }
-      const result = await createSubscriptionCheckout({
+      await createSubscriptionIntent({
         priceId: sub.product.stripePriceId,
-        serviceName: sub.product.name,
-        planTier: sub.product.id,
         customerEmail: customerInfo.email,
         customerName: customerInfo.name,
       });
-      if (result?.url) window.location.href = result.url;
       return;
     }
 
