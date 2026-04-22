@@ -18,8 +18,8 @@ import {
   Sparkles, Sun, X, Lock, ShieldAlert, Camera,
   Wallet, Loader2, Mail, ExternalLink, Phone, Image as ImageIcon,
   Mic, MessageCircle, FileText as FileTextIcon, QrCode, UserCircle,
-  KeyRound, Globe, StopCircle, Paperclip,
-  Folder, Minimize2, RotateCcw,
+  KeyRound, Globe, StopCircle, Paperclip, Settings,
+  Folder, Minimize2, RotateCcw, CheckSquare, Square,
 } from "lucide-react";
 import {
   Dialog,
@@ -81,6 +81,7 @@ export default function TrainingAiAnalysis() {
   // — UI state —
   const [paymentOpen, setPaymentOpen]         = useState(false);
   const [paywallOpen, setPaywallOpen]         = useState(false);
+  const [settingsOpen, setSettingsOpen]       = useState(false);
   const [minimize, setMinimize]               = useState(false);
   const [darkMode, setDarkMode]               = useState(false);
   const [webSearch, setWebSearch]             = useState(false);
@@ -90,11 +91,18 @@ export default function TrainingAiAnalysis() {
   const [passwordResult, setPasswordResult]   = useState<{ score: number; breaches: string; suggestions: string[] } | null>(null);
   const [checkingPassword, setCheckingPassword] = useState(false);
   const [subscriptionCheckoutLoading, setSubscriptionCheckoutLoading] = useState(false);
+  const [settings, setSettings] = useState({
+    darkMode:    false,
+    sendOnEnter: true,
+    webSearch:   false,
+  });
 
   // — Refs —
-  const textareaRef     = useRef<HTMLTextAreaElement>(null);
-  const recognitionRef  = useRef<SpeechRecognition | null>(null);
-  const fileInputRef    = useRef<HTMLInputElement>(null);
+  const textareaRef        = useRef<HTMLTextAreaElement>(null);
+  const recognitionRef     = useRef<SpeechRecognition | null>(null);
+  const mediaRecorderRef   = useRef<MediaRecorder | null>(null);
+  const fileInputRef       = useRef<HTMLInputElement>(null);
+  const micBtnRef          = useRef<HTMLButtonElement>(null);
 
   // — Auth / subscription hooks —
   const { user } = useAuth();
@@ -157,6 +165,7 @@ export default function TrainingAiAnalysis() {
         textareaRef.current?.focus();
       }
       if (e.key === 'Escape') {
+        setSettingsOpen(false);
         if (isRecording) stopRecording();
       }
     };
@@ -176,26 +185,77 @@ export default function TrainingAiAnalysis() {
     return () => window.removeEventListener('beforeunload', handler);
   }, [messages.length]);
 
-  // — Speech recognition —
-  const startRecording = useCallback(() => {
-    const SR = (window as Window & typeof globalThis).SpeechRecognition
-            || (window as Window & typeof globalThis & { webkitSpeechRecognition: typeof SpeechRecognition }).webkitSpeechRecognition;
-    if (!SR) { toast.error("Speech recognition not supported in this browser."); return; }
-    const rec = new SR();
-    rec.continuous = false;
-    rec.interimResults = true;
-    rec.lang = 'en-US';
-    rec.onresult = (e: SpeechRecognitionEvent) => {
-      setTextInput(Array.from(e.results).map(r => r[0].transcript).join(''));
-    };
-    rec.onend   = () => setIsRecording(false);
-    rec.onerror = () => setIsRecording(false);
-    recognitionRef.current = rec;
-    rec.start();
-    setIsRecording(true);
+  // — Speech recognition / MediaRecorder fallback —
+  const stopRecording = useCallback(() => {
+    recognitionRef.current?.stop();
+    if (mediaRecorderRef.current?.state === 'recording') mediaRecorderRef.current.stop();
+    setIsRecording(false);
+    micBtnRef.current?.classList.remove('recording');
   }, []);
 
-  const stopRecording = useCallback(() => { recognitionRef.current?.stop(); setIsRecording(false); }, []);
+  const startRecording = useCallback(() => {
+    // Check secure context (HTTPS or localhost)
+    if (!window.isSecureContext) {
+      toast.error("Microphone requires a secure (HTTPS) connection.");
+      return;
+    }
+
+    const win = window as Window & typeof globalThis & {
+      SpeechRecognition?: typeof SpeechRecognition;
+      webkitSpeechRecognition?: typeof SpeechRecognition;
+    };
+    const SR = win.SpeechRecognition ?? win.webkitSpeechRecognition;
+
+    if (SR) {
+      // ── SpeechRecognition path ──────────────────────────────────────
+      const rec = new SR();
+      rec.continuous = false;
+      rec.interimResults = true;
+      rec.lang = 'en-US';
+      rec.onresult = (e: SpeechRecognitionEvent) => {
+        setTextInput(Array.from(e.results).map(r => r[0].transcript).join(''));
+      };
+      rec.onend = () => {
+        setIsRecording(false);
+        micBtnRef.current?.classList.remove('recording');
+      };
+      rec.onerror = (e: SpeechRecognitionErrorEvent) => {
+        setIsRecording(false);
+        micBtnRef.current?.classList.remove('recording');
+        const msg = e.error === 'not-allowed'
+          ? 'Microphone access denied. Please allow mic in your browser settings.'
+          : e.error === 'no-speech'
+          ? 'No speech detected. Try again.'
+          : `Voice error: ${e.error}`;
+        toast.error(msg);
+      };
+      recognitionRef.current = rec;
+      rec.start();
+      setIsRecording(true);
+      micBtnRef.current?.classList.add('recording');
+    } else {
+      // ── MediaRecorder fallback ──────────────────────────────────────
+      navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+        const chunks: BlobPart[] = [];
+        const mr = new MediaRecorder(stream);
+        mr.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
+        mr.onstop = () => {
+          stream.getTracks().forEach(t => t.stop());
+          const blob = new Blob(chunks, { type: 'audio/webm' });
+          const kb = (blob.size / 1024).toFixed(1);
+          toast.success(`Voice note recorded (${kb} KB)`);
+          setIsRecording(false);
+          micBtnRef.current?.classList.remove('recording');
+        };
+        mediaRecorderRef.current = mr;
+        mr.start();
+        setIsRecording(true);
+        micBtnRef.current?.classList.add('recording');
+      }).catch(() => {
+        toast.error('Microphone access denied.');
+      });
+    }
+  }, []);
   const toggleRecording = () => isRecording ? stopRecording() : startRecording();
 
   // — Handlers —
@@ -542,6 +602,20 @@ export default function TrainingAiAnalysis() {
               {/* Separator */}
               <div style={{ width: '1px', height: '18px', background: '#3a3a3d', flexShrink: 0 }} />
 
+              {/* Settings */}
+              <button type="button" title="Settings" style={{
+                ...toolBtn,
+                color: settingsOpen ? '#4da3ff' : '#c9c9cd',
+                background: settingsOpen ? 'rgba(77,163,255,0.12)' : 'transparent',
+              }}
+                className="hover:!text-white hover:!bg-[rgba(255,255,255,0.06)]"
+                onClick={() => setSettingsOpen(s => !s)}>
+                <Settings style={{ width: '16px', height: '16px' }} />
+              </button>
+
+              {/* Separator */}
+              <div style={{ width: '1px', height: '18px', background: '#3a3a3d', flexShrink: 0 }} />
+
               {/* Project / folder */}
               <button type="button" title="Project" style={toolBtn}
                 className="hover:!text-white hover:!bg-[rgba(255,255,255,0.06)]"
@@ -592,7 +666,9 @@ export default function TrainingAiAnalysis() {
 
               {/* Mic / Send for text modes */}
               {currentMode.inputType === 'text' && (
-                <button type="button"
+                <button
+                  ref={micBtnRef}
+                  type="button"
                   onClick={() => textInput.trim()
                     ? (scanMode === 'default' ? handleSendMessage(textInput) : handleTextScan())
                     : toggleRecording()}
@@ -605,9 +681,8 @@ export default function TrainingAiAnalysis() {
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     boxShadow: isRecording ? '0 0 0 0 rgba(255,59,48,0.4)' : '0 2px 8px rgba(0,0,0,0.15)',
                     transition: 'transform 0.15s, background 0.2s',
-                    animation: isRecording ? 'micPulse 1.5s ease-in-out infinite' : 'none',
                   }}
-                  className="hover:scale-105">
+                  className={`hover:scale-105${isRecording ? ' recording' : ''}`}>
                   {isRecording
                     ? <StopCircle style={{ width: '16px', height: '16px' }} />
                     : textInput.trim()
@@ -698,6 +773,47 @@ export default function TrainingAiAnalysis() {
           </div>
         </main>
       </div>
+
+      {/* ── Settings modal ───────────────────────────────────────────────────── */}
+      <Dialog open={settingsOpen} onOpenChange={setSettingsOpen}>
+        <DialogContent style={{ background: '#1c1c1e', borderRadius: '18px', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', maxWidth: '380px', boxShadow: '0 30px 60px rgba(0,0,0,0.6)', padding: '24px' }}>
+          <DialogHeader>
+            <DialogTitle style={{ color: '#fff', fontSize: '16px', fontWeight: 600 }}>Settings</DialogTitle>
+            <DialogDescription style={{ color: '#8a8a8f', fontSize: '13px' }}>Configure your AI scanner preferences</DialogDescription>
+          </DialogHeader>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '12px 0' }}>
+            {(Object.entries(settings) as [keyof typeof settings, boolean][]).map(([key, val]) => {
+              const labels: Record<keyof typeof settings, string> = {
+                darkMode:    'Dark mode',
+                sendOnEnter: 'Send on Enter',
+                webSearch:   'Web search enabled',
+              };
+              return (
+                <button key={key} type="button"
+                  onClick={() => {
+                    setSettings(s => ({ ...s, [key]: !s[key] }));
+                    if (key === 'darkMode') setDarkMode(d => !d);
+                    if (key === 'webSearch') setWebSearch(w => !w);
+                  }}
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '11px 16px', borderRadius: '10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', color: '#e5e5e7', fontSize: '14px', cursor: 'pointer', textAlign: 'left' }}
+                  className="hover:!bg-[rgba(255,255,255,0.09)] transition">
+                  <span>{labels[key]}</span>
+                  {val
+                    ? <CheckSquare style={{ width: '18px', height: '18px', color: '#ff7a45', flexShrink: 0 }} />
+                    : <Square style={{ width: '18px', height: '18px', color: '#5a5a5e', flexShrink: 0 }} />}
+                </button>
+              );
+            })}
+          </div>
+          <DialogFooter>
+            <Button
+              onClick={() => setSettingsOpen(false)}
+              style={{ width: '100%', background: '#fff', color: '#1c1c1e', fontWeight: 600, borderRadius: '10px' }}>
+              Close
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* ── Paywall dialog ───────────────────────────────────────────────────── */}
       <Dialog open={paywallOpen} onOpenChange={setPaywallOpen}>
