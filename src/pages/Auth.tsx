@@ -14,7 +14,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { z } from "zod";
-import invisionLogo from "@/assets/shield-logo.png";
+import heroPhoto from "@/assets/hero-family-protected.jpg";
 import { Session, User as SupabaseUser } from "@supabase/supabase-js";
 import { ForgotPasswordModal } from "@/components/auth/ForgotPasswordModal";
 import { TwoFactorVerify } from "@/components/auth/TwoFactorVerify";
@@ -641,17 +641,15 @@ function Auth() {
             </div>
           </div>
 
-          {/* Skewed hero frame with L-outline */}
+          {/* Full-bleed hero photo */}
           <div className="ap-hero-wrap">
             <div className="ap-hero-outline" aria-hidden="true" />
             <div className="ap-hero-frame">
               <img
-                src={invisionLogo}
-                alt="InVision Network"
+                src={heroPhoto}
+                alt="Family protected by InVision Network"
                 loading="eager"
                 decoding="sync"
-                width={240}
-                height={320}
               />
             </div>
 
