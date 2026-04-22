@@ -37,10 +37,12 @@
 /* ─── Section backgrounds ────────────────────────────────────────── */
 .hss-section-white {
   background: var(--hss-bg-white);
+  overflow-x: clip;
 }
 
 .hss-section-tint {
   background: var(--hss-bg-gray);
+  overflow-x: clip;
 }
 
 /* ─────────────────────────────────────────────────────────────────
