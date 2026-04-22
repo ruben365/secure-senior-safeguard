@@ -62,13 +62,6 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
           {/* Color-wash wrapper — layered overlay of dark 10%, purple 10%,
               white 6%, brown 10%, yellow 7%, burgundy 6%, maroon 3%, red 1%.
               Hero and Footer sit OUTSIDE this wrapper so they stay untouched. */}
-          {/* Answer summary — visible to users and AI search engines */}
-          <AnswerSummary
-            summary="InVision Network provides AI scam protection, cybersecurity training, and business automation for families and companies in Kettering, Dayton, and across Ohio. We stop deepfakes, phishing, and voice-clone scams before they reach you."
-            ctaHref="/training"
-            ctaLabel="Explore our workshops and protection plans"
-            className="pt-0 pb-0"
-          />
 
           <div className="relative isolate">
 
