@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Scan } from "lucide-react";
 
 interface HeroCTAProps {
   primaryText: string;
   primaryHref: string;
   secondaryText: string;
   secondaryHref: string;
+  aiScan?: boolean;
   primaryAriaLabel?: string;
   secondaryAriaLabel?: string;
 }
@@ -19,6 +21,7 @@ export function HeroCTA({
   primaryHref,
   secondaryText,
   secondaryHref,
+  aiScan,
   primaryAriaLabel,
   secondaryAriaLabel,
 }: HeroCTAProps) {
@@ -26,7 +29,7 @@ export function HeroCTA({
     href.startsWith("tel:") || href.startsWith("mailto:") || href.startsWith("http");
 
   return (
-    <div className="flex flex-col sm:flex-row gap-4 justify-start">
+    <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-start items-center">
       {isExternal(primaryHref) ? (
         <Button size="heroPill" variant="heroPrimary" asChild>
           <a href={primaryHref} aria-label={primaryAriaLabel}>
@@ -57,6 +60,19 @@ export function HeroCTA({
           </Button>
         )}
       </div>
+
+      {aiScan && (
+        <div className="hidden sm:contents">
+          <Link
+            to="/training/ai-analysis"
+            aria-label="Try our AI scanner"
+            className="inline-flex items-center gap-1.5 h-[28px] sm:h-[40px] px-3 sm:px-4 rounded-full text-[10px] sm:text-[12px] font-semibold text-white/75 border border-white/20 bg-white/[0.07] backdrop-blur-sm hover:bg-white/[0.13] hover:text-white transition-all"
+          >
+            <Scan className="w-3 h-3 flex-shrink-0" />
+            AI Scan
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

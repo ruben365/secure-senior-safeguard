@@ -14,6 +14,7 @@ import {
   ArrowRight,
   CalendarDays,
   Clock,
+  Scan,
 } from "lucide-react";
 
 interface Event {
@@ -112,6 +113,14 @@ export default function Events() {
               <CalendarDays className="w-4 h-4 text-[#d96c4a]" />
               4 upcoming events
             </span>
+            <Link
+              to="/training/ai-analysis"
+              aria-label="Try our AI scanner"
+              className="hidden sm:inline-flex items-center gap-1.5 bg-card border border-[#d96c4a]/30 rounded-full px-3.5 py-1.5 shadow-sm text-[#c45e3b] font-semibold hover:bg-[#d96c4a]/10 transition-colors"
+            >
+              <Scan className="w-4 h-4 flex-shrink-0" />
+              AI Scan
+            </Link>
           </div>
         </div>
       </section>

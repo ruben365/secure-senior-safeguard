@@ -207,6 +207,7 @@ function Contact() {
             primaryHref={SITE.phone.tel}
             secondaryText="Send a Message"
             secondaryHref="#contact-form"
+            aiScan
           />
         </Hero>
       </div>

@@ -132,6 +132,7 @@ function LibraryHero({ isLoggedIn }: { isLoggedIn: boolean }) {
               primaryHref="#catalog"
               secondaryText="My Library"
               secondaryHref="#my-library"
+              aiScan
             />
           ) : (
             <HeroCTA
@@ -139,6 +140,7 @@ function LibraryHero({ isLoggedIn }: { isLoggedIn: boolean }) {
               primaryHref="/auth?mode=signup"
               secondaryText="Sign In"
               secondaryHref="/auth"
+              aiScan
             />
           )}
         </div>
