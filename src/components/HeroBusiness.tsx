@@ -55,7 +55,6 @@ export const HeroBusiness = ({ onStrategyCall }: { onStrategyCall: () => void })
           alt="InVision Network — AI Solutions"
           loading="eager"
           decoding="sync"
-          fetchPriority="high"
         />
         <div className="hero-biz__top-veil" />
         {/* Mobile: darken top so text is readable over photo */}

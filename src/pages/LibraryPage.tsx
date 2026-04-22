@@ -501,7 +501,6 @@ function FullCatalog({
                           height={320}
                           loading={bookIndex < 10 ? "eager" : "lazy"}
                           decoding={bookIndex < 10 ? "sync" : "async"}
-                          fetchPriority={bookIndex < 5 ? "high" : "auto"}
                           className="w-full h-full object-cover"
                         />
                       </div>

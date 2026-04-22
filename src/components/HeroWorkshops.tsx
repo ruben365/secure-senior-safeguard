@@ -51,7 +51,6 @@ export const HeroWorkshops = () => {
           alt="Seniors learning together in community workshop"
           loading="eager"
           decoding="sync"
-          fetchPriority="high"
         />
         <div className="hero-ws__top-veil" />
         {/* Mobile: darken top so text is readable over photo */}
