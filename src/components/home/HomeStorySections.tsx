@@ -417,23 +417,6 @@ export const HomeStorySections = () => {
   return (
     <div ref={rootRef} className="hss-root">
 
-      {/* ═══════════════════════════════════════════════════════════════
-          TRUST STRIP — thin dark marquee-style bar
-          ═══════════════════════════════════════════════════════════════ */}
-      <div className="bg-[#111111] border-b border-white/10 overflow-x-auto sm:overflow-visible">
-        <div className="container mx-auto">
-          <div className="flex flex-nowrap sm:flex-wrap items-center justify-start sm:justify-center md:justify-between gap-x-6 sm:gap-x-8 gap-y-2 py-3 min-w-max sm:min-w-0">
-            {trustItems.map((item) => (
-              <div key={item.label} className="flex items-center gap-2">
-                <item.icon className="w-3.5 h-3.5 text-[#d96c4a] flex-shrink-0" strokeWidth={2} />
-                <span className="text-[11px] font-semibold text-white/70 uppercase tracking-[0.1em] whitespace-nowrap">
-                  {item.label}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
 
       {/* ═══════════════════════════════════════════════════════════════
           SECTION 1 — FEATURE STRIP
