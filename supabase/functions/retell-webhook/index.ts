@@ -11,15 +11,39 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-retell-signature",
 };
 
-// Retell sends a signature header for webhook verification.
-// If RETELL_WEBHOOK_SECRET is configured, reject requests that don't match.
-function verifySignature(req: Request, body: string): boolean {
-  if (!retellWebhookSecret) return true; // skip verification if secret not set
+// Constant-time byte comparison to prevent timing attacks.
+function timingSafeEqual(a: Uint8Array, b: Uint8Array): boolean {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a[i] ^ b[i];
+  return diff === 0;
+}
+
+// Verify Retell's HMAC-SHA256 signature.
+// Retell signs the raw request body with the webhook secret and sends the
+// result as a lowercase hex string in x-retell-signature.
+async function verifySignature(req: Request, body: string): Promise<boolean> {
+  if (!retellWebhookSecret) return true; // skip if secret not configured
   const signature = req.headers.get("x-retell-signature");
   if (!signature) return false;
-  // Retell uses HMAC-SHA256: signature = base64(hmac(secret, body))
-  // We compare as a constant-time check
-  return signature === retellWebhookSecret;
+
+  const encoder = new TextEncoder();
+  const key = await crypto.subtle.importKey(
+    "raw",
+    encoder.encode(retellWebhookSecret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"],
+  );
+  const computed = await crypto.subtle.sign("HMAC", key, encoder.encode(body));
+  const computedHex = Array.from(new Uint8Array(computed))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+
+  return timingSafeEqual(
+    encoder.encode(computedHex),
+    encoder.encode(signature),
+  );
 }
 
 interface RetellCallAnalysis {
@@ -29,9 +53,7 @@ interface RetellCallAnalysis {
 
 interface RetellCall {
   call_id?: string;
-  agent_id?: string;
   from_number?: string;
-  to_number?: string;
   duration_ms?: number;
   transcript?: string;
   call_analysis?: RetellCallAnalysis;
@@ -65,7 +87,7 @@ const handler = async (req: Request): Promise<Response> => {
     });
   }
 
-  if (!verifySignature(req, body)) {
+  if (!(await verifySignature(req, body))) {
     return new Response(JSON.stringify({ error: "Invalid signature" }), {
       status: 401,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -82,7 +104,6 @@ const handler = async (req: Request): Promise<Response> => {
     });
   }
 
-  // Only store completed calls
   if (payload.event !== "call_ended" && payload.event !== "call_analyzed") {
     return new Response(JSON.stringify({ received: true, stored: false }), {
       status: 200,
