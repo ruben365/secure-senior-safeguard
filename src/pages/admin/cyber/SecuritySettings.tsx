@@ -48,6 +48,8 @@ export default function SecuritySettings() {
         isOpen={sidebarOpen}
         isMobileOpen={mobileSidebarOpen}
         onMobileClose={() => setMobileSidebarOpen(false)}
+        adminName="Admin"
+        onSignOut={() => {}}
       />
 
       <header

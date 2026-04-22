@@ -217,8 +217,8 @@ export default function TrainingAiAnalysis() {
       return;
     }
     const win = window as Window & typeof globalThis & {
-      SpeechRecognition?: typeof SpeechRecognition;
-      webkitSpeechRecognition?: typeof SpeechRecognition;
+      SpeechRecognition?: any;
+      webkitSpeechRecognition?: any;
     };
     const SR = win.SpeechRecognition ?? win.webkitSpeechRecognition;
 
