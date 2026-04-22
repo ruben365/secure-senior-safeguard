@@ -153,6 +153,8 @@ const BookAccessAdmin = lazy(() => import("./pages/admin/BookAccessAdmin"));
 const BooksAdmin = lazy(() => import("./pages/admin/BooksAdmin"));
 const BookEditor = lazy(() => import("./pages/admin/BookEditor"));
 const BookAIUpdates = lazy(() => import("./pages/admin/BookAIUpdates"));
+const AdminForms = lazy(() => import("./pages/admin/AdminForms"));
+const AdminModeration = lazy(() => import("./pages/admin/AdminModeration"));
 
 // Cyber dashboard pages - lazy loaded
 const ThreatMonitor = lazy(() => import("./pages/admin/cyber/ThreatMonitor"));
@@ -332,6 +334,8 @@ function PublicRoutes() {
           <Route path="books/:id" element={<BookEditor />} />
           <Route path="books/:id/chapters" element={<BookEditor />} />
           <Route path="books/:id/ai-updates" element={<BookAIUpdates />} />
+          <Route path="forms" element={<AdminForms />} />
+          <Route path="moderation" element={<AdminModeration />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

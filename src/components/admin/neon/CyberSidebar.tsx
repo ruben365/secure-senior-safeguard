@@ -74,6 +74,12 @@ const menuItems: MenuItem[] = [
     { title: "Add Book", href: "/admin/books/new", icon: Layers },
     { title: "Book Access IDs", href: "/admin/ecommerce/book-access", icon: KeyRound },
   ]},
+  { title: "Forms", icon: ClipboardList, children: [
+    { title: "All Forms", href: "/admin/forms", icon: FileText },
+  ]},
+  { title: "Moderation", icon: MessageSquare, children: [
+    { title: "Comments", href: "/admin/moderation", icon: MessageSquare },
+  ]},
   { title: "Testing", icon: TestTube, children: [
     { title: "System Health", href: "/admin/testing", icon: HeartHandshake },
     { title: "Launch Checklist", href: "/admin/testing/checklist", icon: Rocket },

@@ -118,12 +118,12 @@ const Hero = ({
       <div className="w-full center-container-wide py-20 sm:py-24 md:py-28 lg:py-32 relative z-10">
         <div className="max-w-6xl animate-fade-in">
           {headline && (
-            <h1 className="text-white mb-4 sm:mb-5 md:mb-6 text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl leading-tight font-bold">
+            <h1 className="text-white mb-4 sm:mb-5 md:mb-6 text-2xl sm:text-3xl md:text-[2rem] lg:text-[2.25rem] xl:text-[2.5rem] leading-tight font-bold">
               {headline}
             </h1>
           )}
           {subheadline && (
-            <p className="text-white/90 text-sm sm:text-base md:text-lg mb-6 md:mb-8 leading-relaxed max-w-2xl">
+            <p className="text-white/90 text-sm sm:text-base mb-6 md:mb-8 leading-relaxed max-w-2xl">
               {subheadline}
             </p>
           )}

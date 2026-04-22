@@ -234,7 +234,7 @@
 /* ── 3c. H1 Headline ──
    Massive, bold, tight. The visual anchor.  */
 .hero-home__headline {
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
   font-weight: 800;
   color: var(--hero-text-primary);
   line-height: 1.06;
@@ -262,9 +262,9 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  height: 52px;
-  padding: 0 2.5rem;
-  font-size: 0.9375rem;
+  height: 44px;
+  padding: 0 1.75rem;
+  font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.01em;
   color: #ffffff !important;
@@ -513,7 +513,7 @@
 /* Laptop — reduce headline at lg: (1025px–1279px) */
 @media (min-width: 1025px) and (max-width: 1279px) {
   .hero-home__headline {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
   }
 
   .hero-home__body {
@@ -536,7 +536,7 @@
 /* Laptop — proportional headline (1024px–1440px) */
 @media (min-width: 1024px) and (max-width: 1439.98px) {
   .hero-home__headline {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
   }
 }
 
@@ -564,18 +564,18 @@
     padding-bottom: 2.25rem;
   }
 
-  /* Scale headline to phone viewport — minimum 32px for senior readability */
+  /* Scale headline to phone viewport */
   .hero-home__headline {
-    font-size: clamp(2rem, 8.5vw, 2.625rem);
+    font-size: clamp(1.5rem, 6.5vw, 2rem);
     margin-bottom: 1.25rem;
     letter-spacing: -0.025em;
   }
 
   /* Primary CTA — compact pill on mobile */
   .hero-home__cta {
-    height: 36px;
-    padding: 0 1.25rem;
-    font-size: 0.8125rem;
+    height: 34px;
+    padding: 0 1rem;
+    font-size: 0.75rem;
   }
 
   /* Overlay: swap side-wall dark for gentle top-to-bottom
