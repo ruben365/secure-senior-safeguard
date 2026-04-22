@@ -114,14 +114,18 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    const { error: insertError } = await supabase
+    const { data: inserted, error: insertError } = await supabase
       .from("newsletter_subscribers")
       .insert({
         email: normalizedEmail,
         subscribed_at: new Date().toISOString(),
-      });
+      })
+      .select("unsubscribe_token")
+      .single();
 
     if (insertError) throw insertError;
+
+    const unsubscribeUrl = `${supabaseUrl}/functions/v1/newsletter-unsubscribe?token=${inserted?.unsubscribe_token ?? ""}`;
 
     const emailResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -156,7 +160,7 @@ const handler = async (req: Request): Promise<Response> => {
             <hr style="border: 1px solid #e5e5e5; margin: 20px 0;">
             <div style="text-align: center; color: #666; font-size: 12px;">
               <p>Need help? Contact us at <a href="mailto:hello@invisionnetwork.org" style="color: #6D28D9;">hello@invisionnetwork.org</a></p>
-              <p>Didn't subscribe? <a href="mailto:hello@invisionnetwork.org?subject=Unsubscribe" style="color: #6D28D9;">Unsubscribe here</a></p>
+              <p style="font-size:11px;color:#999;">Don't want these emails? <a href="${unsubscribeUrl}" style="color: #9CA3AF;">Unsubscribe</a></p>
             </div>
           </div>
         `,

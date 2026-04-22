@@ -67,6 +67,7 @@ const menuItems: MenuItem[] = [
     { title: "Email Campaigns", href: "/admin/email-campaigns",          icon: Mail      },
     { title: "Inbox",           href: "/admin/communications/inbox",     icon: Inbox     },
     { title: "Newsletter",      href: "/admin/communications/newsletter",icon: Newspaper },
+    { title: "Call Logs",       href: "/admin/call-logs",                icon: Smartphone },
   ]},
   { title: "Settings", icon: Settings, children: [
     { title: "Site Settings", href: "/admin/settings/site",    icon: Settings  },
@@ -77,12 +78,6 @@ const menuItems: MenuItem[] = [
     { title: "All Books",      href: "/admin/books",                   icon: BookOpen },
     { title: "Add Book",       href: "/admin/books/new",               icon: Layers   },
     { title: "Book Access IDs",href: "/admin/ecommerce/book-access",   icon: KeyRound },
-  ]},
-  { title: "Forms", icon: ClipboardList, children: [
-    { title: "All Forms", href: "/admin/forms", icon: FileText },
-  ]},
-  { title: "Moderation", icon: MessageSquare, children: [
-    { title: "Comments", href: "/admin/moderation", icon: MessageSquare },
   ]},
   { title: "Forms", icon: ClipboardList, children: [
     { title: "All Forms", href: "/admin/forms", icon: FileText },
