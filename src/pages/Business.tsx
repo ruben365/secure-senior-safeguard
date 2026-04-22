@@ -66,16 +66,8 @@ import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import { VideoLightbox } from "@/components/VideoLightbox";
 import { SEO } from "@/components/SEO";
 import { AnswerSummary } from "@/components/AnswerSummary";
-import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 import { SectionDivider, MeshBackground } from "@/components/pro";
-
-
-const businessHeadlines = [
-"Your AI Front Desk, Running 24/7",
-"Websites That Turn Visitors Into Customers",
-"AI Automation Built for Ohio Businesses",
-"Stop Missing Calls. Start Closing Deals."];
 
 
 const platformSnapshotStats = [

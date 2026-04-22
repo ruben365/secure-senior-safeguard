@@ -31,6 +31,8 @@ const WebsiteInsurance = () => {
     {
       name: "Essential",
       price: "$39",
+      discountedPrice: "$35.10",
+      couponCode: "Na9r2ncn",
       period: "/month",
       description: "Basic protection for small websites",
       features: [
@@ -45,6 +47,8 @@ const WebsiteInsurance = () => {
     {
       name: "Professional",
       price: "$79",
+      discountedPrice: null,
+      couponCode: null,
       period: "/month",
       description: "Complete protection for business sites",
       features: [
@@ -61,6 +65,8 @@ const WebsiteInsurance = () => {
     {
       name: "Enterprise",
       price: "$149",
+      discountedPrice: null,
+      couponCode: null,
       period: "/month",
       description: "Maximum protection for critical sites",
       features: [
@@ -261,19 +267,53 @@ const WebsiteInsurance = () => {
                         Recommended
                       </Badge>
                     )}
+                    {plan.discountedPrice && (
+                      <Badge className="absolute -top-1 left-1/2 -translate-x-1/2 z-10 bg-gradient-to-r from-success to-emerald-500 text-white border-0 px-4 py-1 whitespace-nowrap">
+                        <Zap className="w-3 h-3 mr-1 fill-current" />
+                        10% OFF this month
+                      </Badge>
+                    )}
                     <Card
-                      className={`h-full ${plan.popular ? "border-primary/50 shadow-lg pt-6" : "border-border/50 pt-6"}`}
+                      className={`h-full ${plan.popular ? "border-primary/50 shadow-lg pt-6" : plan.discountedPrice ? "border-success/50 shadow-lg shadow-success/10 pt-6" : "border-border/50 pt-6"}`}
                     >
                       <CardHeader className="text-center">
                         <CardTitle className="text-2xl">{plan.name}</CardTitle>
                         <div className="mt-2">
-                          <span className="text-4xl font-bold text-primary">
-                            {plan.price}
-                          </span>
-                          <span className="text-muted-foreground">
-                            {plan.period}
-                          </span>
+                          {plan.discountedPrice ? (
+                            <div className="space-y-1">
+                              <div className="flex items-center justify-center gap-2">
+                                <span className="text-2xl text-muted-foreground line-through">
+                                  {plan.price}
+                                </span>
+                                <span className="text-4xl font-bold text-success">
+                                  {plan.discountedPrice}
+                                </span>
+                              </div>
+                              <span className="text-muted-foreground text-sm">{plan.period} · first month</span>
+                            </div>
+                          ) : (
+                            <>
+                              <span className="text-4xl font-bold text-primary">
+                                {plan.price}
+                              </span>
+                              <span className="text-muted-foreground">
+                                {plan.period}
+                              </span>
+                            </>
+                          )}
                         </div>
+                        {plan.couponCode && (
+                          <div className="mt-2 flex items-center justify-center gap-2">
+                            <span className="text-xs text-muted-foreground">Use code</span>
+                            <code className="text-xs font-mono bg-success/10 text-success border border-success/20 px-2 py-0.5 rounded">
+                              {plan.couponCode}
+                            </code>
+                            <span className="text-xs text-muted-foreground">at checkout</span>
+                          </div>
+                        )}
+                        {plan.discountedPrice && (
+                          <p className="text-xs text-success/80 mt-1 font-medium">Limited time offer · then $39/mo</p>
+                        )}
                         <CardDescription className="mt-2">
                           {plan.description}
                         </CardDescription>
@@ -293,9 +333,11 @@ const WebsiteInsurance = () => {
                         <Button
                           asChild
                           className="w-full"
-                          variant={plan.popular ? "gold" : "outline"}
+                          variant={plan.popular ? "gold" : plan.discountedPrice ? "default" : "outline"}
                         >
-                          <Link to="/contact">Get {plan.name}</Link>
+                          <Link to={plan.couponCode ? `/contact?coupon=${plan.couponCode}` : "/contact"}>
+                            Get {plan.name}
+                          </Link>
                         </Button>
                       </CardContent>
                     </Card>
