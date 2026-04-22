@@ -44,6 +44,11 @@ import {
   CheckCircle,
   Shield,
   Loader2,
+  ExternalLink,
+  Image as ImageScanIcon,
+  Mic,
+  UserCircle,
+  KeyRound,
 } from "lucide-react";
 import { toast } from "@/components/ui/sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -666,6 +671,53 @@ function Contact() {
           </p>
         </div>
         <BookingCalendar />
+      </section>
+
+      {/* Complimentary Security Scan Callout */}
+      <section className="py-12 bg-muted/20">
+        <div className="container mx-auto max-w-4xl">
+          <div className="rounded-2xl border border-border/60 bg-card p-6 sm:p-8 shadow-sm">
+            <div className="flex items-start gap-4 mb-6">
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <Shield className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <h2 className="text-xl font-black text-foreground mb-2">
+                  Complimentary Scan Included with Your Free Consultation
+                </h2>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  During your free consultation, we'll run a complimentary scan of your digital presence using our{" "}
+                  <strong className="text-foreground">10-point security scanning suite</strong> — covering every major threat vector from phishing emails to deepfake images.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              {[
+                { icon: Mail, label: "Email Scanner" },
+                { icon: Phone, label: "Phone Lookup" },
+                { icon: ImageScanIcon, label: "Deepfake Detector" },
+                { icon: Mic, label: "Voice Clone Detector" },
+                { icon: UserCircle, label: "Profile Checker" },
+              ].map(({ icon: Icon, label }) => (
+                <div
+                  key={label}
+                  className="flex items-center gap-2 px-3 py-2 rounded-full bg-muted/60 border border-border/50 text-sm font-medium text-foreground"
+                >
+                  <Icon className="w-4 h-4 text-primary" />
+                  {label}
+                </div>
+              ))}
+              <Link
+                to="/training/ai-analysis"
+                className="flex items-center gap-2 px-3 py-2 rounded-full bg-primary/10 border border-primary/20 text-sm font-semibold text-primary hover:bg-primary/20 transition-colors"
+              >
+                + 5 more tools — Try them now
+                <ExternalLink className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Internal links — related pages */}
