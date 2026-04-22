@@ -384,9 +384,7 @@ function StaffDashboard() {
                 <Button
                   variant="outline"
                   className="w-full justify-start gap-2"
-                  onClick={() => {
-                    /* placeholder — log time */
-                  }}
+                  onClick={() => {}}
                 >
                   <Clock className="h-4 w-4" />
                   Log Time

@@ -319,9 +319,7 @@ export default function HealthcareHome() {
               <Button
                 variant="outline"
                 className="w-full justify-start gap-2"
-                onClick={() => {
-                  /* placeholder */
-                }}
+                onClick={() => {}}
               >
                 <FileText className="h-4 w-4" />
                 Submit Report
@@ -329,9 +327,7 @@ export default function HealthcareHome() {
               <Button
                 variant="outline"
                 className="w-full justify-start gap-2"
-                onClick={() => {
-                  /* placeholder */
-                }}
+                onClick={() => {}}
               >
                 <Award className="h-4 w-4" />
                 View Certifications
