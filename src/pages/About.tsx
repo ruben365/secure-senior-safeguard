@@ -161,6 +161,7 @@ function About() {
             primaryHref="/training"
             secondaryText="Get In Touch"
             secondaryHref="/contact"
+            aiScan
           />
         </Hero>
         <HeroFloatingStats />

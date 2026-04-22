@@ -101,6 +101,7 @@ export const HeroWorkshops = () => {
               primaryHref="/contact"
               secondaryText="See Pricing"
               secondaryHref="/training#pricing"
+              aiScan
             />
 
             {/* Mobile fine print */}

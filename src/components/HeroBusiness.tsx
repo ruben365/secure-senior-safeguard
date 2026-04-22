@@ -98,6 +98,7 @@ export const HeroBusiness = ({ onStrategyCall }: { onStrategyCall: () => void })
             primaryHref="/contact"
             secondaryText="Learn More"
             secondaryHref="/library"
+            aiScan
           />
 
           {/* Mobile fine print */}
