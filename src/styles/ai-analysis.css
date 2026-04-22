@@ -7,17 +7,18 @@
 .ai-analysis-page {
   position: relative;
   isolation: isolate;
-  /* Warm sunset gradient: coral/orange horizon → peach → pink sky → deep lavender-dusk */
-  background:
-    radial-gradient(
-      ellipse 130% 90% at 50% 110%,
-      #d96c4a 0%,
-      #e8996a 12%,
-      #f0c4a0 30%,
-      #e8a0bf 56%,
-      #c4b0d9 74%,
-      #1a0f18 100%
-    );
+  /* Warm coral → peach → lavender → sky blue gradient */
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 110%,
+    #ff7a45 0%,
+    #ff9b5a 18%,
+    #ffb784 35%,
+    #e8a7b8 55%,
+    #c8a8d6 72%,
+    #a8b3e8 88%,
+    #9fb5ec 100%
+  );
+  background-attachment: fixed;
   min-height: 100vh;
 }
 

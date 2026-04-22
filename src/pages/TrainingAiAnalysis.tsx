@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { PageTransition } from "@/components/PageTransition";
@@ -35,6 +35,16 @@ import {
   Camera,
   Wallet,
   Loader2,
+  Mail,
+  ExternalLink,
+  Phone,
+  Image as ImageIcon,
+  Mic,
+  MessageCircle,
+  FileText as FileTextIcon,
+  QrCode,
+  UserCircle,
+  KeyRound,
 } from "lucide-react";
 import {
   Dialog,
@@ -53,6 +63,11 @@ export default function TrainingAiAnalysis() {
   const [darkMode, setDarkMode] = useState(false);
   const [showBookmarks, setShowBookmarks] = useState(false);
   const [paywallOpen, setPaywallOpen] = useState(false);
+  type ScanMode = 'default' | 'email' | 'url' | 'phone' | 'image' | 'voice' | 'text-message' | 'document' | 'qr' | 'social' | 'password';
+  const [scanMode, setScanMode] = useState<ScanMode>('default');
+  const [textInput, setTextInput] = useState('');
+  const [passwordResult, setPasswordResult] = useState<{ score: number; breaches: string; suggestions: string[] } | null>(null);
+  const [checkingPassword, setCheckingPassword] = useState(false);
   const [subscriptionCheckoutLoading, setSubscriptionCheckoutLoading] =
     useState(false);
   const { user } = useAuth();
@@ -331,6 +346,83 @@ export default function TrainingAiAnalysis() {
   const toggleBookmarks = () => {
     setShowBookmarks(!showBookmarks);
   };
+
+  const SCAN_MODES: Array<{ id: ScanMode; label: string; icon: React.ElementType; placeholder: string; inputType: 'text' | 'file' | 'password' }> = [
+    { id: 'default', label: 'Chat', icon: Sparkles, placeholder: 'Ask anything or drop a file to analyze...', inputType: 'text' },
+    { id: 'email', label: 'Email', icon: Mail, placeholder: 'Paste a suspicious email here...', inputType: 'text' },
+    { id: 'url', label: 'URL', icon: ExternalLink, placeholder: 'Enter a URL or link to check safety...', inputType: 'text' },
+    { id: 'phone', label: 'Phone', icon: Phone, placeholder: 'Enter a phone number to look up...', inputType: 'text' },
+    { id: 'image', label: 'Image', icon: ImageIcon, placeholder: 'Upload an image to check for deepfakes...', inputType: 'file' },
+    { id: 'voice', label: 'Voice', icon: Mic, placeholder: 'Upload an audio clip to analyze...', inputType: 'file' },
+    { id: 'text-message', label: 'SMS', icon: MessageCircle, placeholder: 'Paste a suspicious text message or DM...', inputType: 'text' },
+    { id: 'document', label: 'Document', icon: FileTextIcon, placeholder: 'Upload a PDF or Word document...', inputType: 'file' },
+    { id: 'qr', label: 'QR', icon: QrCode, placeholder: 'Upload a QR code image...', inputType: 'file' },
+    { id: 'social', label: 'Social', icon: UserCircle, placeholder: 'Paste a social media profile URL...', inputType: 'text' },
+    { id: 'password', label: 'Password', icon: KeyRound, placeholder: 'Enter a password to check...', inputType: 'password' },
+  ];
+
+  const currentMode = SCAN_MODES.find(m => m.id === scanMode) ?? SCAN_MODES[0];
+
+  const getModePromptPrefix = (mode: ScanMode): string => {
+    const prefixes: Partial<Record<ScanMode, string>> = {
+      email: 'Analyze this email for phishing indicators, fake sender detection, malicious links, and urgency manipulation. Rate threat level and list red flags:\n\n',
+      url: 'Check this URL for safety. Analyze for malicious domains, redirect chains, SSL validity, domain age, and scam patterns. Rate threat level:\n\n',
+      phone: 'Look up this phone number and check if it is associated with known scam operations, robocall patterns, or fraud reports:\n\n',
+      'text-message': 'Analyze this text message for scam patterns, social engineering, urgency manipulation, and red flags:\n\n',
+      social: 'Analyze this social media profile URL for signs of a fake account (AI-generated photos, suspicious activity, catfishing):\n\n',
+    };
+    return prefixes[mode] ?? '';
+  };
+
+  const handleTextScan = () => {
+    if (!textInput.trim()) return;
+    const prefix = getModePromptPrefix(scanMode);
+    handleSendMessage(prefix + textInput);
+    setTextInput('');
+  };
+
+  const handlePasswordCheck = async () => {
+    if (!textInput.trim()) return;
+    setCheckingPassword(true);
+    try {
+      const pw = textInput;
+      const score = [
+        pw.length >= 8,
+        pw.length >= 12,
+        /[A-Z]/.test(pw),
+        /[a-z]/.test(pw),
+        /\d/.test(pw),
+        /[^a-zA-Z0-9]/.test(pw),
+      ].filter(Boolean).length;
+
+      let breachCount = 'unknown';
+      try {
+        const encoder = new TextEncoder();
+        const hashBuffer = await crypto.subtle.digest('SHA-1', encoder.encode(pw));
+        const hashHex = Array.from(new Uint8Array(hashBuffer))
+          .map(b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+        const prefix = hashHex.slice(0, 5);
+        const suffix = hashHex.slice(5);
+        const res = await fetch(`https://api.pwnedpasswords.com/range/${prefix}`, { headers: { 'Add-Padding': 'true' } });
+        const text = await res.text();
+        const match = text.split('\r\n').find(line => line.startsWith(suffix));
+        breachCount = match ? (match.split(':')[1]?.trim() ?? '0') : '0';
+      } catch { /* network error — show unknown */ }
+
+      const suggestions: string[] = [];
+      if (pw.length < 12) suggestions.push('Use at least 12 characters');
+      if (!/[A-Z]/.test(pw)) suggestions.push('Add uppercase letters (A–Z)');
+      if (!/[a-z]/.test(pw)) suggestions.push('Add lowercase letters (a–z)');
+      if (!/\d/.test(pw)) suggestions.push('Add numbers (0–9)');
+      if (!/[^a-zA-Z0-9]/.test(pw)) suggestions.push('Add special characters (!@#$%)');
+      if (suggestions.length === 0) suggestions.push('Great password! Store it in a password manager.');
+
+      setPasswordResult({ score, breaches: breachCount, suggestions });
+    } finally {
+      setCheckingPassword(false);
+    }
+  };
+
   return (
     <PageTransition variant="fade">
       <div
@@ -356,237 +448,226 @@ export default function TrainingAiAnalysis() {
           }}
         />
 
-        <main
-          className="relative min-h-screen overflow-hidden flex flex-col transition-colors duration-300 pt-[clamp(80px,10vw,100px)]"
-        >
-          <div className="relative flex-1 flex flex-col px-6 py-6">
-            {/* Top Navigation Bar */}
-            <div className="w-full flex items-center justify-between mb-6">
-              <div className="flex items-center gap-3">
-                <div className="aia-toolbar flex items-center gap-2 rounded-full bg-black/45 backdrop-blur-md border border-white/10 px-3 py-2 shadow-xl">
-                  <Link
-                    to="/"
-                    className="h-8 w-8 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 transition"
-                    title="Go home"
-                  >
-                    <Home className="h-4 w-4" />
-                  </Link>
-                  <button
-                    type="button"
-                    onClick={toggleDarkMode}
-                    className="h-8 w-8 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 transition"
-                    title="Toggle dark mode"
-                  >
-                    {darkMode ? (
-                      <Sun className="h-4 w-4" />
-                    ) : (
-                      <Moon className="h-4 w-4" />
-                    )}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleRefresh}
-                    className="h-8 w-8 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 transition"
-                    title="Refresh page"
-                  >
-                    <RefreshCw className="h-4 w-4" />
-                  </button>
+        <main className="relative flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] px-4 py-8 z-10">
+
+          {/* Floating utility toolbar */}
+          <div className="fixed top-20 right-4 z-50 flex flex-col gap-1.5">
+            {[
+              { icon: Trash2, title: "Clear chat", onClick: () => { clearChat(); clearFile(); }, disabled: messages.length === 0 && !file },
+              { icon: Download, title: "Download", onClick: () => {
+                const blob = new Blob([messages.map(m => `[${m.role}]: ${m.content}`).join("\n\n") || "No data."], { type: "text/plain" });
+                const a = Object.assign(document.createElement("a"), { href: URL.createObjectURL(blob), download: `ai-analysis-${Date.now()}.txt` });
+                a.click();
+              }, disabled: messages.length === 0 },
+              { icon: FileDown, title: "Save as PDF", onClick: handleSaveAsPdf, disabled: messages.length === 0 },
+            ].map(({ icon: Icon, title, onClick, disabled }) => (
+              <button key={title} type="button" title={title} onClick={onClick} disabled={disabled}
+                className="aia-toolbar w-8 h-8 rounded-full flex items-center justify-center bg-black/50 backdrop-blur-md border border-white/10 text-white/70 hover:text-white transition disabled:opacity-30 disabled:cursor-not-allowed">
+                <Icon className="h-3.5 w-3.5" />
+              </button>
+            ))}
+          </div>
+
+          {/* Chat history — above chatbox */}
+          {messages.length > 0 && (
+            <div className="w-full mb-4" style={{ maxWidth: 'min(640px, 92vw)' }}>
+              <PremiumChatHistory messages={messages} status={chatStatus} />
+            </div>
+          )}
+
+          {/* Access banner */}
+          <div className="aia-notice aia-notice--access mb-3 rounded-2xl border border-white/15 bg-black/30 backdrop-blur-xl px-4 py-3 shadow-xl" style={{ width: 'min(640px, 92vw)' }}>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="min-w-0 flex items-start gap-2">
+                {scanAccessType === "subscription" ? <ShieldCheck className="h-4 w-4 text-emerald-300 mt-0.5 flex-shrink-0" />
+                  : scanAccessType === "balance" ? <Wallet className="h-4 w-4 text-orange-300 mt-0.5 flex-shrink-0" />
+                  : scanAccessType === "metered" ? <CreditCard className="h-4 w-4 text-orange-300 mt-0.5 flex-shrink-0" />
+                  : user ? <ShieldAlert className="h-4 w-4 text-yellow-300 mt-0.5 flex-shrink-0" />
+                  : <LogIn className="h-4 w-4 text-orange-200 mt-0.5 flex-shrink-0" />}
+                <div>
+                  <p className="text-xs font-semibold text-white">{accessHeadline}</p>
+                  <p className="text-xs text-white/70 leading-relaxed mt-0.5">{accessDescription}</p>
                 </div>
               </div>
+              {!scanAccessType && (
+                <div className="flex flex-wrap gap-2 flex-shrink-0">
+                  {!user && (
+                    <Button asChild type="button" size="sm" variant="heroPrimary" className="text-white text-xs h-7 px-3">
+                      <Link to={loginPath}>Log in</Link>
+                    </Button>
+                  )}
+                  <Button type="button" size="sm" variant="heroOutline" className="text-white hover:text-white text-xs h-7 px-3"
+                    onClick={() => void handleStartSubscription()} disabled={subscriptionCheckoutLoading}>
+                    {subscriptionCheckoutLoading ? <><Loader2 className="h-3 w-3 animate-spin" /> Starting...</> : "Start ScamShield"}
+                  </Button>
+                </div>
+              )}
+            </div>
+          </div>
 
-              <div className="aia-toolbar flex items-center gap-2 rounded-full bg-black/45 backdrop-blur-md border border-white/10 px-3 py-2 shadow-xl">
-                <button
-                  type="button"
-                  onClick={() => {
-                    clearChat();
-                    clearFile();
-                  }}
-                  className="h-8 w-8 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 transition disabled:opacity-40 disabled:cursor-not-allowed"
-                  title="Delete data"
-                  disabled={messages.length === 0 && !file}
-                >
-                  <Trash2 className="h-4 w-4" />
+          {/* Scan mode tab bar */}
+          <div className="flex items-center gap-1 flex-wrap justify-center mb-3" style={{ maxWidth: 'min(640px, 92vw)', width: '100%' }}>
+            {SCAN_MODES.map((mode) => {
+              const Icon = mode.icon;
+              const active = scanMode === mode.id;
+              return (
+                <button key={mode.id} type="button"
+                  onClick={() => { setScanMode(mode.id); setTextInput(''); setPasswordResult(null); }}
+                  className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium transition-all border ${
+                    active
+                      ? 'bg-[rgba(255,122,69,0.35)] border-[rgba(255,122,69,0.55)] text-white shadow-sm'
+                      : 'bg-[rgba(28,28,30,0.65)] border-[rgba(255,255,255,0.1)] text-[#c9c9cd] hover:text-white hover:bg-[rgba(255,255,255,0.08)]'
+                  }`}>
+                  <Icon className="w-3 h-3" />
+                  {mode.label}
                 </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    const chatText = messages
-                      .map((m) => `[${m.role}]: ${m.content}`)
-                      .join("\n\n");
-                    const blob = new Blob(
-                      [chatText || "No data to download."],
-                      {
-                        type: "text/plain",
-                      },
-                    );
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement("a");
-                    a.href = url;
-                    a.download = `ai-analysis-${Date.now()}.txt`;
-                    a.click();
-                    URL.revokeObjectURL(url);
-                  }}
-                  className="h-8 w-8 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 transition disabled:opacity-40 disabled:cursor-not-allowed"
-                  title="Download as text"
-                  disabled={messages.length === 0}
-                >
-                  <Download className="h-4 w-4" />
+              );
+            })}
+          </div>
+
+          {/* Main chatbox */}
+          <div style={{ width: 'min(640px, 92vw)', background: '#1c1c1e', borderRadius: '22px', padding: '18px 20px 14px', boxShadow: '0 20px 50px rgba(0,0,0,0.18)' }}>
+
+            {/* Text/password input area */}
+            {(currentMode.inputType === 'text' || currentMode.inputType === 'password') && (
+              <textarea
+                value={textInput}
+                onChange={(e) => setTextInput(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey && scanMode !== 'default') { e.preventDefault(); handleTextScan(); } }}
+                placeholder={currentMode.placeholder}
+                rows={scanMode === 'default' ? 2 : 4}
+                style={{ width: '100%', background: 'transparent', border: 'none', outline: 'none', color: '#fff', fontSize: '15px', padding: '6px 2px 16px', resize: 'none', fontFamily: 'inherit' }}
+                className="placeholder:text-[#8a8a8f]"
+              />
+            )}
+
+            {/* File mode placeholder text */}
+            {currentMode.inputType === 'file' && (
+              <p style={{ color: '#8a8a8f', fontSize: '15px', padding: '6px 2px 16px' }}>
+                {currentMode.placeholder}
+              </p>
+            )}
+
+            {/* Tool icons row */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '14px', color: '#c9c9cd' }}>
+              {/* File/image triggers for file modes */}
+              {currentMode.inputType === 'file' && (
+                <>
+                  <label title="Upload file" style={{ cursor: 'pointer', background: 'transparent', color: '#c9c9cd', padding: '4px', borderRadius: '6px' }}
+                    className="hover:text-white hover:bg-[rgba(255,255,255,0.06)] transition">
+                    <input type="file" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) prepareFile(f); }} />
+                    <Camera className="w-4 h-4" />
+                  </label>
+                  <label title="Upload image" style={{ cursor: 'pointer', background: 'transparent', color: '#c9c9cd', padding: '4px', borderRadius: '6px' }}
+                    className="hover:text-white hover:bg-[rgba(255,255,255,0.06)] transition">
+                    <input type="file" accept="image/*,audio/*,.pdf,.doc,.docx" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) prepareFile(f); }} />
+                    <ImageIcon className="w-4 h-4" />
+                  </label>
+                </>
+              )}
+
+              {/* Default mode chat icons */}
+              {scanMode === 'default' && (
+                <label title="Attach file" style={{ cursor: 'pointer', background: 'transparent', color: '#c9c9cd', padding: '4px', borderRadius: '6px' }}
+                  className="hover:text-white hover:bg-[rgba(255,255,255,0.06)] transition">
+                  <input type="file" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) prepareFile(f); }} />
+                  <Camera className="w-4 h-4" />
+                </label>
+              )}
+
+              {/* Separator */}
+              <div style={{ width: '1px', height: '18px', background: '#3a3a3d' }} />
+
+              <span className="flex-1" />
+
+              {/* Password check button */}
+              {currentMode.inputType === 'password' && (
+                <button type="button" onClick={handlePasswordCheck} disabled={!textInput.trim() || checkingPassword}
+                  style={{ width: '36px', height: '36px', borderRadius: '50%', background: textInput.trim() ? '#ff7a45' : '#3a3a3d', color: '#fff', border: 'none', cursor: textInput.trim() ? 'pointer' : 'not-allowed', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'transform 0.2s, background 0.2s' }}
+                  className="hover:scale-105">
+                  {checkingPassword ? <Loader2 className="w-4 h-4 animate-spin" /> : <KeyRound className="w-4 h-4" />}
                 </button>
-                <button
-                  type="button"
-                  onClick={handleSaveAsPdf}
-                  className="h-8 w-8 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 transition disabled:opacity-40 disabled:cursor-not-allowed"
-                  title="Save as PDF (print dialog)"
-                  disabled={messages.length === 0}
-                >
-                  <FileDown className="h-4 w-4" />
+              )}
+
+              {/* Send/Analyze button for text modes */}
+              {(currentMode.inputType === 'text') && (
+                <button type="button"
+                  onClick={scanMode === 'default' ? () => handleSendMessage(textInput) : handleTextScan}
+                  disabled={!textInput.trim() || isProcessing}
+                  style={{ width: '36px', height: '36px', borderRadius: '50%', background: textInput.trim() ? '#fff' : '#3a3a3d', color: '#1c1c1e', border: 'none', cursor: textInput.trim() ? 'pointer' : 'not-allowed', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.15)', transition: 'transform 0.2s, background 0.2s' }}
+                  className="hover:scale-105">
+                  <Mic className="w-4 h-4" />
+                </button>
+              )}
+
+              {/* Scan button for file modes */}
+              {currentMode.inputType === 'file' && file && status === 'ready' && (
+                <button type="button" onClick={handlePrimaryScanAction} disabled={isProcessing || preparingAuthorizedScan}
+                  style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#ff7a45', color: '#fff', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(255,122,69,0.4)', transition: 'transform 0.2s' }}
+                  className="hover:scale-105">
+                  {preparingAuthorizedScan ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* File chip (when file attached) */}
+          {file && (
+            <div className="flex flex-wrap items-center gap-2 mt-3" style={{ maxWidth: 'min(640px, 92vw)' }}>
+              <div className="aia-notice aia-notice--filechip flex items-center gap-2 rounded-full bg-[#1c1c1e]/80 border border-white/15 px-4 py-2">
+                <span className="text-sm text-white/90 font-medium truncate max-w-[180px]">{file.name}</span>
+                <span className="text-white/40">·</span>
+                <span className="text-sm text-white/70">{cost.formatted}</span>
+                <button type="button" onClick={clearFile} className="ml-1 rounded-full p-1 text-white/50 hover:text-white hover:bg-white/10 transition" aria-label="Remove file">
+                  <X className="h-3.5 w-3.5" />
                 </button>
               </div>
             </div>
+          )}
 
-            {/* Main Chat Area - Expanded */}
-            <div className="flex-1 w-full flex flex-col items-center justify-center gap-8 max-w-7xl mx-auto">
-              {/* AI Chat History */}
-              {messages.length > 0 && (
-                <PremiumChatHistory messages={messages} status={chatStatus} />
-              )}
-
-              {/* Enhanced AI Command Center */}
-              <div className="w-full flex flex-col items-center gap-3">
-                <div className="aia-notice aia-notice--access w-full max-w-3xl mx-auto rounded-[1.75rem] border border-white/15 bg-black/30 backdrop-blur-xl px-5 py-4 shadow-xl">
-                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                    <div className="min-w-0">
-                      <div className="mb-1 flex items-center gap-2 text-white">
-                        {scanAccessType === "subscription" ? (
-                          <ShieldCheck className="h-4 w-4 text-emerald-300" />
-                        ) : scanAccessType === "balance" ? (
-                          <Wallet className="h-4 w-4 text-[#f6c7b8]" />
-                        ) : scanAccessType === "metered" ? (
-                          <CreditCard className="h-4 w-4 text-[#f6c7b8]" />
-                        ) : user ? (
-                          <ShieldAlert className="h-4 w-4 text-yellow-300" />
-                        ) : (
-                          <LogIn className="h-4 w-4 text-[#f6c7b8]" />
-                        )}
-                        <p className="text-sm font-semibold">{accessHeadline}</p>
-                      </div>
-                      <p className="text-sm leading-relaxed text-white/80">
-                        {accessDescription}
-                      </p>
-                    </div>
-
-                    {!scanAccessType && (
-                      <div className="flex flex-wrap gap-2">
-                        {!user && (
-                          <Button
-                            asChild
-                            type="button"
-                            size="sm"
-                            variant="heroPrimary"
-                            className="text-white"
-                          >
-                            <Link to={loginPath}>Log in to scan</Link>
-                          </Button>
-                        )}
-                        <Button
-                          type="button"
-                          size="sm"
-                          variant="heroOutline"
-                          className="text-white hover:text-white"
-                          onClick={() => void handleStartSubscription()}
-                          disabled={subscriptionCheckoutLoading}
-                        >
-                          {subscriptionCheckoutLoading ? (
-                            <>
-                              <Loader2 className="h-4 w-4 animate-spin" />
-                              Starting checkout...
-                            </>
-                          ) : (
-                            "Start ScamShield"
-                          )}
-                        </Button>
-                      </div>
-                    )}
-                  </div>
+          {/* Password result card */}
+          {passwordResult && (
+            <div className="mt-3" style={{ width: 'min(640px, 92vw)', background: '#1c1c1e', borderRadius: '16px', padding: '16px 20px' }}>
+              <p className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-3">Password Analysis</p>
+              {/* Strength bar */}
+              <div className="mb-3">
+                <div className="flex justify-between text-xs mb-1.5" style={{ color: '#c9c9cd' }}>
+                  <span>Strength</span>
+                  <span className="font-medium">{['Very Weak', 'Weak', 'Fair', 'Good', 'Strong', 'Very Strong'][Math.min(passwordResult.score, 5)]}</span>
                 </div>
-
-                <PromptInputBox
-                  onSend={handleSendMessage}
-                  onFileSelect={prepareFile}
-                  isLoading={status === "uploading" || status === "analyzing"}
-                  placeholder="Drop file to scan or type a message..."
-                  className="max-w-3xl"
-                />
-                {file && (
-                  <div className="flex flex-wrap items-center justify-center gap-3">
-                    {/* File chip */}
-                    <div className="aia-notice aia-notice--filechip flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 shadow-xl">
-                      <span className="text-sm text-white/90 font-medium truncate max-w-[200px]">
-                        {file.name}
-                      </span>
-                      <span className="text-white/60">•</span>
-                      <span className="text-sm text-white/80 whitespace-nowrap">
-                        {cost.formatted}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={clearFile}
-                        className="ml-2 rounded-full p-1 text-white/60 hover:text-white hover:bg-white/10 transition"
-                        aria-label="Remove file"
-                      >
-                        <X className="h-4 w-4" />
-                      </button>
-                    </div>
-                    {/* Pay & Scan button — only when file is ready */}
-                    {status === "ready" && (
-                      <Button
-                        type="button"
-                        size="lg"
-                        onClick={handlePrimaryScanAction}
-                        disabled={isProcessing || preparingAuthorizedScan}
-                        className="rounded-full"
-                      >
-                        {scanAccessType
-                          ? preparingAuthorizedScan
-                            ? "Preparing scan..."
-                            : "Scan this upload"
-                          : `Choose access to scan`}
-                      </Button>
-                    )}
-                  </div>
-                )}
-                <div className="aia-notice aia-notice--privacy w-full max-w-3xl mx-auto rounded-2xl border border-white/15 bg-black/35 backdrop-blur-md px-5 py-4 shadow-xl">
-                  <div className="flex items-start gap-3">
-                    <ShieldAlert className="h-5 w-5 text-yellow-400 mt-0.5 flex-shrink-0" />
-                    <div className="flex-1 text-sm text-white/90 leading-relaxed">
-                      <p className="font-semibold mb-1 text-white">
-                        Privacy notice — read this before you start
-                      </p>
-                      <p className="text-white/80">
-                        We do{" "}
-                        <span className="font-semibold text-white">not</span>{" "}
-                        store your files and we do{" "}
-                        <span className="font-semibold text-white">not</span>{" "}
-                        save your AI conversations. Everything you see here
-                        lives only in your browser.{" "}
-                        <span className="font-semibold text-yellow-300">
-                          If you reload or close this tab, your conversation is
-                          permanently lost.
-                        </span>{" "}
-                        Take a screenshot{" "}
-                        <Camera className="inline h-3.5 w-3.5 -mt-0.5 mx-0.5" />{" "}
-                        or hit{" "}
-                        <FileDown className="inline h-3.5 w-3.5 -mt-0.5 mx-0.5" />{" "}
-                        Save as PDF before you leave. Uploaded files are
-                        auto-deleted from our scanner in 10 minutes. Every
-                        upload scan is billed at $
-                        {cost.perUploadCharge.toFixed(2)} per file, screenshot,
-                        image, audio clip, or supported upload.
-                      </p>
-                    </div>
-                  </div>
+                <div className="h-1.5 rounded-full" style={{ background: '#3a3a3d' }}>
+                  <div className="h-full rounded-full transition-all" style={{
+                    width: `${(passwordResult.score / 6) * 100}%`,
+                    background: passwordResult.score <= 1 ? '#ef4444' : passwordResult.score <= 2 ? '#f97316' : passwordResult.score <= 3 ? '#eab308' : '#22c55e',
+                  }} />
                 </div>
               </div>
+              {/* Breach status */}
+              <div className={`flex items-center gap-2 text-xs rounded-lg px-3 py-2 mb-3 ${passwordResult.breaches === '0' ? 'bg-green-500/15 text-green-300' : passwordResult.breaches === 'unknown' ? 'bg-yellow-500/15 text-yellow-300' : 'bg-red-500/15 text-red-300'}`}>
+                {passwordResult.breaches === '0' ? <ShieldCheck className="w-3.5 h-3.5" /> : <ShieldAlert className="w-3.5 h-3.5" />}
+                {passwordResult.breaches === '0' ? 'Not found in known data breaches ✓'
+                  : passwordResult.breaches === 'unknown' ? 'Could not check breach database (check your connection)'
+                  : `Found in ${parseInt(passwordResult.breaches).toLocaleString()} known data breach(es) — change this password`}
+              </div>
+              {/* Suggestions */}
+              <ul className="space-y-1">
+                {passwordResult.suggestions.map((s, i) => (
+                  <li key={i} className="flex items-center gap-2 text-xs" style={{ color: '#c9c9cd' }}>
+                    <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: '#ff7a45' }} />
+                    {s}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Privacy notice */}
+          <div className="aia-notice aia-notice--privacy mt-3 rounded-2xl border border-white/10 bg-black/25 backdrop-blur-md px-4 py-3" style={{ width: 'min(640px, 92vw)' }}>
+            <div className="flex items-start gap-2">
+              <ShieldAlert className="h-4 w-4 text-yellow-400 mt-0.5 flex-shrink-0" />
+              <p className="text-xs text-white/70 leading-relaxed">
+                Files auto-deleted in 10 min · Conversations not saved · Each upload scan ${cost.perUploadCharge.toFixed(2)} · Take a <Camera className="inline h-3 w-3 mx-0.5 -mt-0.5" /> screenshot before leaving
+              </p>
             </div>
           </div>
         </main>
