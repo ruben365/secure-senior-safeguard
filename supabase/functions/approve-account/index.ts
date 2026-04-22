@@ -50,6 +50,8 @@ const handler = async (req: Request): Promise<Response> => {
     .from("user_roles")
     .select("role")
     .eq("user_id", user.id)
+    .eq("role", "admin")
+    .limit(1)
     .maybeSingle();
 
   if (roleRow?.role !== "admin") {

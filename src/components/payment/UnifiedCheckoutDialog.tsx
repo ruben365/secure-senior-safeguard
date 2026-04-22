@@ -742,14 +742,14 @@ const UnifiedCheckoutDialog = React.forwardRef<HTMLDivElement>(
                 >
                   <TabsTrigger
                     value="card"
-                    className="flex items-center gap-1.5 text-[12px] rounded-md data-[state=active]:bg-white/10 data-[state=active]:text-white text-white/50 h-8"
+                    className="flex items-center gap-1.5 text-[12px] rounded-md data-[state=active]:bg-black/8 data-[state=active]:text-[#1a1a1c] text-[#6b6b70] h-8"
                   >
                     <CreditCard className="w-3.5 h-3.5" />
                     Card
                   </TabsTrigger>
                   <TabsTrigger
                     value="qr"
-                    className="flex items-center gap-1.5 text-[12px] rounded-md data-[state=active]:bg-white/10 data-[state=active]:text-white text-white/50 h-8"
+                    className="flex items-center gap-1.5 text-[12px] rounded-md data-[state=active]:bg-black/8 data-[state=active]:text-[#1a1a1c] text-[#6b6b70] h-8"
                   >
                     <Smartphone className="w-3.5 h-3.5" />
                     QR Code
