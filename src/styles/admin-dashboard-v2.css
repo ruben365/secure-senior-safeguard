@@ -1,0 +1,742 @@
+/* ═══════════════════════════════════════════════════════════════════
+   ADMIN DASHBOARD V2 — Warm glass / neumorphic redesign
+   Scope: .admin-v2 (zero bleed to public routes)
+   Tokens match reference design exactly.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Design tokens (light) ──────────────────────────────────── */
+.admin-v2 {
+  --bg-1:          #dcdcde;
+  --bg-2:          #a9a9ad;
+  --accent:        #d4684a;
+  --accent-deep:   #bf553a;
+  --accent-soft:   #f6dccf;
+  --sidebar-top:   #3d3d40;
+  --sidebar-mid:   #2e2e31;
+  --sidebar-bot:   #252528;
+  --dark:          #2e2e31;
+  --panel:         rgba(255,255,255,0.62);
+  --panel-solid:   #ffffff;
+  --panel-soft:    #f6f6f7;
+  --text:          #1a1a1c;
+  --muted:         #8e8e94;
+  --line:          rgba(0,0,0,0.05);
+  --shadow-out:    8px 8px 22px rgba(0,0,0,0.06), -8px -8px 22px rgba(255,255,255,0.7);
+  --shadow-card:   0 6px 16px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.03);
+  --shadow-soft:   0 8px 20px rgba(0,0,0,0.04);
+  --radius-xl:     28px;
+  --radius-lg:     20px;
+  --radius-md:     14px;
+  --radius-sm:     10px;
+}
+
+/* ─── Dark mode tokens ───────────────────────────────────────── */
+.admin-v2[data-theme="dark"] {
+  --bg-1:        #1a1a1d;
+  --bg-2:        #0c0c0e;
+  --panel:       rgba(40,40,44,0.6);
+  --panel-solid: #2a2a2e;
+  --panel-soft:  #232326;
+  --text:        #f2f2f2;
+  --muted:       #a0a0a8;
+  --line:        rgba(255,255,255,0.08);
+  --shadow-out:  8px 8px 22px rgba(0,0,0,0.35), -8px -8px 22px rgba(255,255,255,0.03);
+  --shadow-card: 0 6px 16px rgba(0,0,0,0.25), 0 2px 4px rgba(0,0,0,0.12);
+}
+
+/* ─── Shell grid layout ──────────────────────────────────────── */
+.admin-v2 {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 22px;
+  padding: 22px;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-1);
+  color: var(--text);
+  box-sizing: border-box;
+}
+
+/* ─── Sidebar ────────────────────────────────────────────────── */
+.admin-v2 .adm-sidebar {
+  background: linear-gradient(180deg, var(--sidebar-top) 0%, var(--sidebar-mid) 55%, var(--sidebar-bot) 100%);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  height: calc(100vh - 44px);
+}
+
+/* Radial glow at bottom-right */
+.admin-v2 .adm-sidebar::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle at 70% 80%, rgba(212,104,74,0.22) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Logo row */
+.admin-v2 .adm-sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 16px 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.admin-v2 .adm-sidebar-logo-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(212,104,74,0.35);
+}
+
+.admin-v2 .adm-sidebar-brand {
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: -0.015em;
+}
+
+/* Profile chip */
+.admin-v2 .adm-sidebar-profile {
+  margin: 4px 12px 10px;
+  padding: 9px 12px;
+  background: rgba(255,255,255,0.055);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  transition: background 150ms;
+}
+
+.admin-v2 .adm-sidebar-profile:hover {
+  background: rgba(255,255,255,0.09);
+}
+
+.admin-v2 .adm-sidebar-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}
+
+.admin-v2 .adm-sidebar-profile-name {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.88);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+
+.admin-v2 .adm-sidebar-profile-role {
+  font-size: 10.5px;
+  color: rgba(255,255,255,0.38);
+  line-height: 1;
+}
+
+/* Nav container */
+.admin-v2 .adm-sidebar-nav {
+  flex: 1;
+  padding: 2px 10px 8px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  position: relative;
+  z-index: 1;
+}
+
+.admin-v2 .adm-sidebar-nav::-webkit-scrollbar { display: none; }
+
+/* Section label */
+.admin-v2 .adm-nav-section {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.22);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 10px 10px 3px;
+}
+
+/* Nav parent button */
+.admin-v2 .adm-nav-parent {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.52);
+  transition: background 140ms, color 140ms;
+  text-align: left;
+  margin-bottom: 1px;
+}
+
+.admin-v2 .adm-nav-parent:hover {
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.82);
+}
+
+.admin-v2 .adm-nav-parent.active {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.92);
+}
+
+/* Icon circle */
+.admin-v2 .adm-nav-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.45);
+  transition: background 140ms, color 140ms;
+}
+
+.admin-v2 .adm-nav-parent.active .adm-nav-icon,
+.admin-v2 .adm-nav-parent:hover .adm-nav-icon {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(212,104,74,0.3);
+}
+
+/* Chevron */
+.admin-v2 .adm-nav-chevron {
+  margin-left: auto;
+  opacity: 0.4;
+  transition: transform 200ms;
+  flex-shrink: 0;
+}
+
+.admin-v2 .adm-nav-chevron.open { transform: rotate(180deg); }
+
+/* Child nav items */
+.admin-v2 .adm-nav-children {
+  padding-left: 14px;
+  margin-bottom: 2px;
+}
+
+.admin-v2 .adm-nav-child {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.38);
+  text-decoration: none;
+  transition: background 130ms, color 130ms;
+  margin-bottom: 1px;
+}
+
+.admin-v2 .adm-nav-child:hover {
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.72);
+}
+
+.admin-v2 .adm-nav-child.active {
+  color: var(--accent);
+  background: rgba(212,104,74,0.13);
+}
+
+/* Pending badge */
+.admin-v2 .adm-badge {
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 100px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  line-height: 1;
+}
+
+/* Promo card */
+.admin-v2 .adm-sidebar-promo {
+  margin: 6px 12px 16px;
+  padding: 13px 14px;
+  background: rgba(212,104,74,0.13);
+  border: 1px solid rgba(212,104,74,0.22);
+  border-radius: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+.admin-v2 .adm-sidebar-promo-title {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 4px;
+}
+
+.admin-v2 .adm-sidebar-promo-text {
+  font-size: 10.5px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 10px;
+  line-height: 1.55;
+}
+
+.admin-v2 .adm-sidebar-promo-btn {
+  display: block;
+  width: 100%;
+  padding: 7px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  transition: opacity 140ms;
+  text-decoration: none;
+}
+
+.admin-v2 .adm-sidebar-promo-btn:hover { opacity: 0.88; }
+
+/* Collapsed sidebar (icon-only mode) */
+.admin-v2.sidebar-collapsed {
+  grid-template-columns: 72px 1fr;
+}
+
+.admin-v2.sidebar-collapsed .adm-sidebar-brand,
+.admin-v2.sidebar-collapsed .adm-sidebar-profile-name,
+.admin-v2.sidebar-collapsed .adm-sidebar-profile-role,
+.admin-v2.sidebar-collapsed .adm-nav-parent > span,
+.admin-v2.sidebar-collapsed .adm-nav-chevron,
+.admin-v2.sidebar-collapsed .adm-nav-children,
+.admin-v2.sidebar-collapsed .adm-badge,
+.admin-v2.sidebar-collapsed .adm-nav-section,
+.admin-v2.sidebar-collapsed .adm-sidebar-promo { display: none; }
+
+.admin-v2.sidebar-collapsed .adm-sidebar-profile {
+  margin: 4px 8px 10px;
+  padding: 8px;
+  justify-content: center;
+}
+
+.admin-v2.sidebar-collapsed .adm-sidebar-logo {
+  padding: 18px 10px 10px;
+  justify-content: center;
+}
+
+.admin-v2.sidebar-collapsed .adm-nav-parent {
+  padding: 8px;
+  justify-content: center;
+}
+
+.admin-v2.sidebar-collapsed .adm-nav-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+}
+
+/* ─── Main content column ────────────────────────────────────── */
+.admin-v2 .adm-main {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 44px);
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  background: var(--bg-1);
+}
+
+/* Topbar */
+.admin-v2 .adm-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 18px;
+  background: var(--panel);
+  backdrop-filter: blur(30px) saturate(140%);
+  -webkit-backdrop-filter: blur(30px) saturate(140%);
+  border-bottom: 1px solid var(--line);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  flex-shrink: 0;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+.admin-v2 .adm-topbar-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  max-width: 380px;
+  padding: 8px 14px;
+  background: rgba(0,0,0,0.04);
+  border-radius: 100px;
+  border: 1px solid var(--line);
+}
+
+.admin-v2 .adm-topbar-search input {
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  color: var(--text);
+  width: 100%;
+}
+
+.admin-v2 .adm-topbar-search input::placeholder { color: var(--muted); }
+
+.admin-v2 .adm-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-v2 .adm-topbar-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: var(--panel-solid);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--muted);
+  transition: transform 140ms, box-shadow 140ms;
+}
+
+.admin-v2 .adm-topbar-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-out);
+  color: var(--text);
+}
+
+.admin-v2 .adm-topbar-profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px 4px 4px;
+  border-radius: 100px;
+  background: var(--panel-solid);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  border: none;
+  transition: box-shadow 140ms;
+}
+
+.admin-v2 .adm-topbar-profile:hover { box-shadow: var(--shadow-out); }
+
+.admin-v2 .adm-topbar-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.admin-v2 .adm-topbar-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+/* Scrollable page content */
+.admin-v2 .adm-page-scroll {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,0.1) transparent;
+}
+
+.admin-v2 .adm-page-scroll::-webkit-scrollbar { width: 4px; }
+.admin-v2 .adm-page-scroll::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.1);
+  border-radius: 4px;
+}
+
+/* ─── Glass panel ────────────────────────────────────────────── */
+.admin-v2 .adm-panel {
+  background: var(--panel);
+  backdrop-filter: blur(30px) saturate(140%);
+  -webkit-backdrop-filter: blur(30px) saturate(140%);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255,255,255,0.5);
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-v2 .adm-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: rgba(255,255,255,0.6);
+  pointer-events: none;
+}
+
+.admin-v2 .adm-panel-solid {
+  background: var(--panel-solid);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--line);
+}
+
+.admin-v2 .adm-panel-soft {
+  background: var(--panel-soft);
+  border-radius: 18px;
+  box-shadow: var(--shadow-soft);
+}
+
+/* ─── Neumorphic relief ──────────────────────────────────────── */
+.admin-v2 .adm-neumorph {
+  box-shadow: var(--shadow-out);
+  background: var(--bg-1);
+  border-radius: 16px;
+}
+
+.admin-v2 .adm-neumorph-inset {
+  box-shadow: inset 4px 4px 12px rgba(0,0,0,0.07), inset -4px -4px 12px rgba(255,255,255,0.65);
+  border-radius: 10px;
+}
+
+/* ─── Quick action circles ───────────────────────────────────── */
+.admin-v2 .adm-quick {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 140ms ease, box-shadow 140ms ease;
+  border: none;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.admin-v2 .adm-quick:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+.admin-v2 .adm-quick.primary {
+  background: radial-gradient(circle at 35% 35%, var(--accent), var(--accent-deep));
+  box-shadow: 0 6px 18px rgba(212,104,74,0.38);
+  color: #fff;
+}
+
+.admin-v2 .adm-quick.secondary {
+  background: var(--panel-solid);
+  box-shadow: var(--shadow-out);
+  color: var(--muted);
+}
+
+/* ─── Progress bar ───────────────────────────────────────────── */
+.admin-v2 .adm-progress {
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(0,0,0,0.07);
+  overflow: hidden;
+}
+
+.admin-v2 .adm-progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--accent-soft), var(--accent));
+  transition: width 500ms ease;
+}
+
+/* ─── Segmented control ──────────────────────────────────────── */
+.admin-v2 .adm-seg {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  background: rgba(0,0,0,0.06);
+  border-radius: 10px;
+}
+
+.admin-v2 .adm-seg-btn {
+  padding: 5px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: all 140ms;
+}
+
+.admin-v2 .adm-seg-btn.active {
+  background: var(--panel-solid);
+  color: var(--text);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* ─── Stat chip ──────────────────────────────────────────────── */
+.admin-v2 .adm-chip-up {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(52,199,89,0.12);
+  color: #22a349;
+}
+
+.admin-v2 .adm-chip-down {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(255,59,48,0.12);
+  color: #d93025;
+}
+
+/* ─── Dark traffic card ──────────────────────────────────────── */
+.admin-v2 .adm-dark-card {
+  background: linear-gradient(135deg, var(--sidebar-mid), var(--sidebar-bot));
+  border-radius: var(--radius-lg);
+  color: rgba(255,255,255,0.9);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ─── Mic pulse ──────────────────────────────────────────────── */
+@keyframes adm-mic-pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(212,104,74,0.55); }
+  50%      { box-shadow: 0 0 0 12px rgba(212,104,74,0); }
+}
+
+.admin-v2 .adm-mic-active { animation: adm-mic-pulse 1.4s ease infinite; }
+
+/* ─── Page content backgrounds (reset dark Tailwind overrides) ─ */
+.admin-v2 .adm-page-scroll > * {
+  min-height: 0;
+}
+
+/* Existing admin pages use explicit dark bg — allow them to show
+   their own card surfaces on the new gray shell background.
+   We only reset the outermost page wrapper bg so it doesn't clash. */
+.admin-v2 .adm-page-scroll .min-h-screen {
+  min-height: 0 !important;
+  background: transparent !important;
+}
+
+/* ─── Mobile ─────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .admin-v2 {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+    gap: 0;
+  }
+
+  .admin-v2 .adm-sidebar {
+    display: none;
+    height: 100dvh;
+    border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+  }
+
+  .admin-v2 .adm-sidebar.mob-open {
+    display: flex;
+    position: fixed;
+    top: 0; left: 0;
+    width: 270px;
+    z-index: 100;
+  }
+
+  .admin-v2 .adm-main {
+    height: auto;
+    min-height: 100dvh;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .admin-v2 .adm-topbar {
+    border-radius: 0;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .admin-v2 .adm-page-scroll {
+    overflow: visible;
+    height: auto;
+  }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .admin-v2 .adm-quick,
+  .admin-v2 .adm-progress-fill,
+  .admin-v2 .adm-topbar-btn,
+  .admin-v2 .adm-topbar-profile { transition: none !important; }
+  .admin-v2 .adm-mic-active { animation: none !important; }
+}
+
+/* ─── Print ──────────────────────────────────────────────────── */
+@media print {
+  .admin-v2 {
+    display: block !important;
+    padding: 0 !important;
+    background: #fff !important;
+  }
+  .admin-v2 .adm-sidebar,
+  .admin-v2 .adm-topbar { display: none !important; }
+  .admin-v2 .adm-main {
+    height: auto !important;
+    border-radius: 0 !important;
+  }
+}
