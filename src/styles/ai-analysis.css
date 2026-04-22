@@ -201,6 +201,21 @@
     radial-gradient(ellipse 50% 40% at 70% 70%, rgba(217, 108, 74, 0.15) 0%, transparent 50%) !important;
 }
 
+/* ─── Keyframe animations ────────────────────────────────────────── */
+@keyframes micPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.5); }
+  50%       { box-shadow: 0 0 0 10px rgba(255, 59, 48, 0); }
+}
+
+@keyframes aia-slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.aia-slide-up {
+  animation: aia-slide-up 240ms ease forwards;
+}
+
 /* ─── Reduced motion ─────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .ai-analysis-page .aia-notice,
