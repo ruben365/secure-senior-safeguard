@@ -997,76 +997,121 @@ export default function TrainingAiAnalysis() {
 
       {/* ── Paywall dialog ───────────────────────────────────────────────────── */}
       <Dialog open={paywallOpen} onOpenChange={setPaywallOpen}>
-        <DialogContent className="max-h-[90svh] overflow-y-auto border border-border/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(250,247,244,0.98))] p-0 shadow-[0_28px_80px_rgba(15,23,42,0.24)] sm:max-w-md">
-          <div className="border-b border-border/60 bg-[radial-gradient(circle_at_top,rgba(217,108,74,0.12),transparent_62%)] px-5 py-5">
-            <DialogHeader className="space-y-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#d96c4a]/15 bg-[#d96c4a]/10 text-[#b75539]">
-                <Lock className="h-5 w-5" />
+        <DialogContent className="max-h-[90svh] overflow-y-auto border border-[#e5e5e5] bg-white text-[#1a1a1c] backdrop-blur-none p-0 shadow-[0_28px_80px_rgba(15,23,42,0.12)] rounded-[20px] sm:max-w-lg">
+          {/* Header */}
+          <div style={{ padding: '22px 24px 18px', borderBottom: '1px solid #f0f0f0', background: 'radial-gradient(circle at top left, rgba(217,108,74,0.07), transparent 60%)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '4px' }}>
+              <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'rgba(217,108,74,0.1)', border: '1px solid rgba(217,108,74,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <Lock style={{ width: '18px', height: '18px', color: '#b75539' }} />
               </div>
               <div>
-                <DialogTitle className="text-xl font-semibold text-foreground">Access AI Scanner</DialogTitle>
-                <DialogDescription className="text-sm text-muted-foreground mt-1">Choose how you'd like to start scanning.</DialogDescription>
+                <DialogTitle style={{ color: '#1a1a1c', fontSize: '18px', fontWeight: 700, lineHeight: 1.2 }}>Unlock AI Scanner</DialogTitle>
+                <DialogDescription style={{ color: '#6b6b70', fontSize: '13px', marginTop: '2px' }}>Choose a plan to start scanning</DialogDescription>
               </div>
-            </DialogHeader>
+            </div>
           </div>
-          <div className="space-y-3 px-4 py-5">
-            {user ? (
-              <div className="rounded-2xl border p-4">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-9 h-9 rounded-xl bg-emerald-500/10 flex items-center justify-center">
-                    <BadgeCheck className="w-4 h-4 text-emerald-600" />
-                  </div>
+
+          {/* Plan cards */}
+          <div style={{ padding: '16px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+            {/* Starter plan */}
+            {SCAMSHIELD_PLANS.slice(0, 2).map((plan) => {
+              const isPopular = plan.popular;
+              return (
+                <div
+                  key={plan.id}
+                  style={{
+                    border: isPopular ? '2px solid #d96c4a' : '1px solid #e5e5e5',
+                    borderRadius: '14px',
+                    padding: '16px',
+                    position: 'relative',
+                    background: isPopular ? 'rgba(217,108,74,0.03)' : '#fff',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '12px',
+                  }}
+                >
+                  {isPopular && (
+                    <div style={{ position: 'absolute', top: '-11px', left: '50%', transform: 'translateX(-50%)', background: '#d96c4a', color: '#fff', fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em', padding: '2px 10px', borderRadius: '999px', whiteSpace: 'nowrap' }}>
+                      MOST POPULAR
+                    </div>
+                  )}
                   <div>
-                    <p className="text-sm font-medium">Refresh access</p>
-                    <p className="text-xs text-muted-foreground">Already subscribed? Re-verify your account.</p>
+                    <p style={{ fontSize: '13px', fontWeight: 700, color: '#1a1a1c', marginBottom: '2px' }}>{plan.name}</p>
+                    <p style={{ fontSize: '22px', fontWeight: 800, color: '#1a1a1c', lineHeight: 1 }}>
+                      ${plan.price}<span style={{ fontSize: '12px', fontWeight: 500, color: '#6b6b70' }}>/mo</span>
+                    </p>
                   </div>
+                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '5px', flex: 1 }}>
+                    {plan.features.map((f) => (
+                      <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: '6px', fontSize: '12px', color: '#3a3a3c' }}>
+                        <span style={{ color: '#d96c4a', fontWeight: 700, flexShrink: 0, marginTop: '1px' }}>✓</span>
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <button
+                    type="button"
+                    onClick={() => { setPaywallOpen(false); openCheckout(plan.id, "subscription"); }}
+                    style={{ width: '100%', padding: '9px', borderRadius: '10px', background: isPopular ? '#d96c4a' : '#1a1a1c', color: '#fff', border: 'none', fontSize: '13px', fontWeight: 600, cursor: 'pointer', transition: 'opacity 0.15s' }}
+                    onMouseEnter={e => (e.currentTarget.style.opacity = '0.88')}
+                    onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+                  >
+                    Subscribe · ${plan.price}/mo
+                  </button>
                 </div>
-                <Button variant="heroPrimary" className="w-full text-white h-10"
-                  onClick={() => { void handleRefreshAccess(); setPaywallOpen(false); }}>
-                  Refresh & Unlock
-                </Button>
-              </div>
-            ) : (
-              <div className="rounded-2xl border p-4">
-                <p className="text-sm font-medium mb-1">Existing subscriber</p>
-                <p className="text-xs text-muted-foreground mb-3">Log in to verify your ScamShield subscription.</p>
-                <Button asChild variant="heroPrimary" className="w-full text-white h-10">
-                  <Link to={loginPath} onClick={() => setPaywallOpen(false)}>Log in to scan</Link>
-                </Button>
-              </div>
-            )}
-            <div className="rounded-2xl border p-4">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-primary" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium">ScamShield subscription</p>
-                  <p className="text-xs text-muted-foreground">Unlimited scans + family protection.</p>
-                </div>
-              </div>
-              <Button variant="heroPrimary" className="w-full text-white h-10" onClick={handleStartSubscription}>
-                Start Subscription
-              </Button>
-            </div>
-            <div className="rounded-2xl border p-4">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-9 h-9 rounded-xl bg-[#d96c4a]/10 flex items-center justify-center">
-                  <CreditCard className="w-4 h-4 text-[#b75539]" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium">One-time scan</p>
-                  <p className="text-xs text-muted-foreground">${cost.perUploadCharge.toFixed(2)} per file or image.</p>
-                </div>
-              </div>
-              <Button variant="heroPrimary" className="w-full text-white h-10" onClick={handlePayPerScan}>
-                Pay ${cost.perUploadCharge.toFixed(2)} per scan
-              </Button>
-            </div>
+              );
+            })}
           </div>
-          <DialogFooter className="border-t px-5 py-3">
-            <p className="text-center text-xs text-muted-foreground w-full">Secure payments via Stripe · Cancel anytime</p>
-          </DialogFooter>
+
+          {/* Pay-per-scan + login */}
+          <div style={{ padding: '0 16px 16px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            {/* Pay per scan */}
+            <div style={{ border: '1px solid #e5e5e5', borderRadius: '12px', padding: '12px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
+              <div>
+                <p style={{ fontSize: '13px', fontWeight: 600, color: '#1a1a1c', marginBottom: '1px' }}>One-Time Scan</p>
+                <p style={{ fontSize: '12px', color: '#6b6b70' }}>${cost.perUploadCharge.toFixed(2)} per file upload · no subscription</p>
+              </div>
+              <button
+                type="button"
+                onClick={handlePayPerScan}
+                style={{ flexShrink: 0, padding: '8px 14px', borderRadius: '8px', background: '#d96c4a', color: '#fff', border: 'none', fontSize: '13px', fontWeight: 600, cursor: 'pointer', transition: 'opacity 0.15s', whiteSpace: 'nowrap' }}
+                onMouseEnter={e => (e.currentTarget.style.opacity = '0.88')}
+                onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+              >
+                Pay ${cost.perUploadCharge.toFixed(2)}
+              </button>
+            </div>
+
+            {/* Login / refresh */}
+            {user ? (
+              <button
+                type="button"
+                onClick={() => { void handleRefreshAccess(); setPaywallOpen(false); }}
+                style={{ width: '100%', padding: '10px', borderRadius: '10px', background: 'transparent', border: '1px solid #e5e5e5', color: '#3a3a3c', fontSize: '13px', fontWeight: 500, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', transition: 'border-color 0.15s' }}
+                onMouseEnter={e => (e.currentTarget.style.borderColor = '#aaa')}
+                onMouseLeave={e => (e.currentTarget.style.borderColor = '#e5e5e5')}
+              >
+                <BadgeCheck style={{ width: '14px', height: '14px', color: '#30a46c' }} />
+                Already subscribed? Refresh access
+              </button>
+            ) : (
+              <Link
+                to={loginPath}
+                onClick={() => setPaywallOpen(false)}
+                style={{ width: '100%', padding: '10px', borderRadius: '10px', background: 'transparent', border: '1px solid #e5e5e5', color: '#3a3a3c', fontSize: '13px', fontWeight: 500, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', textDecoration: 'none', transition: 'border-color 0.15s' }}
+                onMouseEnter={e => (e.currentTarget.style.borderColor = '#aaa')}
+                onMouseLeave={e => (e.currentTarget.style.borderColor = '#e5e5e5')}
+              >
+                Already a subscriber? Log in
+              </Link>
+            )}
+          </div>
+
+          {/* Footer */}
+          <div style={{ borderTop: '1px solid #f0f0f0', padding: '10px 20px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+            <Lock style={{ width: '11px', height: '11px', color: '#aeaeb2' }} />
+            <p style={{ fontSize: '11px', color: '#aeaeb2', textAlign: 'center' }}>Secure payments via Stripe · Cancel anytime · 30-day guarantee</p>
+          </div>
         </DialogContent>
       </Dialog>
 

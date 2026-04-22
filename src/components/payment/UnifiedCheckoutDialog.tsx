@@ -40,20 +40,21 @@ import confetti from "canvas-confetti";
 import { PaymentElementPanel } from "./PaymentElementPanel";
 
 /* ═══════════════════════════════════════════════════════════════════
-   DESIGN TOKENS — dark glassmorphism checkout
+   DESIGN TOKENS — white / light checkout
+   Payment dialogs are always white for readability and trust.
    ═══════════════════════════════════════════════════════════════════ */
 const T = {
   // Surfaces
-  glass: "rgba(15, 15, 25, 0.88)",
-  glassCard: "rgba(255, 255, 255, 0.04)",
-  glassCardBorder: "rgba(255, 255, 255, 0.08)",
-  glassInput: "rgba(255, 255, 255, 0.05)",
-  glassInputBorder: "rgba(255, 255, 255, 0.10)",
+  glass: "#ffffff",
+  glassCard: "rgba(0, 0, 0, 0.03)",
+  glassCardBorder: "#e5e5e5",
+  glassInput: "#f5f5f7",
+  glassInputBorder: "#d0d0d5",
   // Text
-  white: "rgba(255, 255, 255, 0.95)",
-  white70: "rgba(255, 255, 255, 0.70)",
-  white50: "rgba(255, 255, 255, 0.50)",
-  white30: "rgba(255, 255, 255, 0.30)",
+  white: "#1a1a1c",
+  white70: "#3a3a3c",
+  white50: "#6b6b70",
+  white30: "#aeaeb2",
   // Accents (primary — uses CSS custom property)
   copper: "hsl(var(--primary))",
   copperDark: "hsl(var(--primary))",
@@ -68,7 +69,7 @@ const T = {
 
 /* ── Shared input class ────────────────────────────────────────── */
 const inputClass =
-  "w-full h-[44px] rounded-lg border px-3 text-[14px] placeholder:text-white/30 transition-colors duration-200 focus:outline-none focus:ring-0";
+  "w-full h-[44px] rounded-lg border px-3 text-[14px] placeholder:text-[#aeaeb2] transition-colors duration-200 focus:outline-none focus:ring-0";
 const inputStyle = {
   background: T.glassInput,
   borderColor: T.glassInputBorder,
@@ -685,15 +686,12 @@ const UnifiedCheckoutDialog = React.forwardRef<HTMLDivElement>(
       <Dialog open={state.isOpen} onOpenChange={handleClose}>
         {/* Custom dark glass overlay with bokeh effect */}
         <DialogContent
-          className="border-0 p-0 gap-0 overflow-hidden"
+          className="border-0 p-0 gap-0 overflow-hidden text-[#1a1a1c] backdrop-blur-none"
           style={{
             background: T.glass,
-            backdropFilter: "blur(28px) saturate(180%)",
-            WebkitBackdropFilter: "blur(28px) saturate(180%)",
             border: `1px solid ${T.glassCardBorder}`,
             borderRadius: "1.25rem",
-            boxShadow:
-              "0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
+            boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.12), 0 4px 16px -4px rgba(0, 0, 0, 0.08)",
             maxWidth: "440px",
             width: "92%",
           }}
