@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import {
   Loader2,
@@ -14,7 +9,6 @@ import {
   Eye,
   EyeOff,
   ArrowRight,
-  User,
   CheckCircle2,
   XCircle,
   ShieldCheck,
@@ -26,6 +20,7 @@ import { ForgotPasswordModal } from "@/components/auth/ForgotPasswordModal";
 import { TwoFactorVerify } from "@/components/auth/TwoFactorVerify";
 import { PasswordResetForm } from "@/components/auth/PasswordResetForm";
 import { SEO } from "@/components/SEO";
+import "@/styles/auth-page.css";
 
 // ============================================================================
 // Phase 13: hard-pinned canonical origin for OAuth redirects.
@@ -56,6 +51,18 @@ const passwordSchema = z
   .regex(/[a-z]/, "Must contain lowercase letter")
   .regex(/[0-9]/, "Must contain number")
   .regex(/[^A-Za-z0-9]/, "Must contain special character");
+
+function AuthOrbs() {
+  return (
+    <>
+      <span aria-hidden="true" className="ap-orb ap-orb--gold" />
+      <span aria-hidden="true" className="ap-orb ap-orb--purple" />
+      <span aria-hidden="true" className="ap-orb ap-orb--pink" />
+      <span aria-hidden="true" className="ap-orb ap-orb--blue" />
+      <div aria-hidden="true" className="ap-curves" />
+    </>
+  );
+}
 
 function Auth() {
   const [searchParams] = useSearchParams();
@@ -544,621 +551,481 @@ function Auth() {
     }
   };
 
-  const PasswordStrengthIndicator = ({
-    met,
-    label,
-  }: {
-    met: boolean;
-    label: string;
-  }) => (
-    <div
-      className={`flex items-center gap-2 text-xs ${met ? "text-green-600" : "text-muted-foreground"}`}
-    >
-      {met ? (
-        <CheckCircle2 className="w-3 h-3" />
-      ) : (
-        <XCircle className="w-3 h-3" />
-      )}
+  const PasswordStrengthItem = ({ met, label }: { met: boolean; label: string }) => (
+    <div className={`ap-strength-item ${met ? "ap-strength-item--met" : "ap-strength-item--unmet"}`}>
+      {met ? <CheckCircle2 className="w-3 h-3 flex-shrink-0" /> : <XCircle className="w-3 h-3 flex-shrink-0" />}
       {label}
     </div>
   );
 
-  // Soft Daylight input style
-  const inputClassName =
-    "input-daylight pl-10 text-[14px] text-slate-900 placeholder:text-slate-400";
-
-  // Shared daylight background block (used across all auth screens)
-  const DaylightBackground = () => (
-    <div aria-hidden="true" className="auth-bg-daylight">
-      <div className="auth-hairline-top" />
-      <span className="auth-orb auth-orb--terracotta" style={{ width: 520, height: 520, top: "-10%", left: "-12%" }} />
-      <span className="auth-orb auth-orb--lavender" style={{ width: 460, height: 460, bottom: "-8%", right: "-10%", animationDelay: "-9s" }} />
-      <span className="auth-orb auth-orb--amber hidden md:block" style={{ width: 360, height: 360, top: "55%", left: "55%", animationDelay: "-15s", opacity: 0.4 }} />
-      <span className="auth-ray hidden md:block" style={{ left: "30%" }} />
-      <span className="auth-ray auth-ray--2 hidden md:block" style={{ left: "70%" }} />
-      <div className="auth-hairline-bottom" />
-    </div>
-  );
+  // ── Special screens ──────────────────────────────────────────────────────
 
   if (signupSuccess) {
     return (
-      <div
-        className="w-full relative flex items-center justify-center p-5 md:p-8 font-sans antialiased"
-        style={{ minHeight: "100vh" }}
-      >
-        <DaylightBackground />
-        <div className="relative z-10 w-full max-w-[440px]">
-          <div className="auth-card-daylight text-center">
-            <div className="auth-card-accent auth-card-accent--emerald" />
-            <div className="relative w-14 h-14 mx-auto mb-5">
-              <div className="absolute inset-0 rounded-2xl bg-emerald-500/20 blur-xl" />
-              <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-[0_12px_28px_-8px_rgba(16,185,129,0.45),inset_0_1px_0_0_rgba(255,255,255,0.4)] border border-white/30">
-                <CheckCircle2 className="w-7 h-7 text-white" strokeWidth={2.25} />
-              </div>
+      <div className="ap-simple">
+        <AuthOrbs />
+        <div className="ap-simple-card" style={{ textAlign: "center" }}>
+          <div style={{ position: "relative", width: 56, height: 56, margin: "0 auto 20px" }}>
+            <div style={{ position: "absolute", inset: 0, borderRadius: 16, background: "rgba(74,222,128,0.15)", filter: "blur(16px)" }} />
+            <div style={{
+              position: "relative", width: 56, height: 56, borderRadius: 16,
+              background: "linear-gradient(135deg,#4ade80,#16a34a)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              boxShadow: "0 12px 28px -8px rgba(74,222,128,0.4)",
+            }}>
+              <CheckCircle2 className="w-7 h-7" style={{ color: "#fff" }} strokeWidth={2.25} />
             </div>
-            <h2 className="text-[1.5rem] font-bold text-slate-900 tracking-tight mb-2">
-              Check your email
-            </h2>
-            <p className="text-sm text-slate-500 leading-relaxed mb-6">
-              We sent a verification link to{" "}
-              <span className="font-semibold text-slate-800">{email}</span>.
-              Click it to activate your account.
-            </p>
-            <Button
-              onClick={() => {
-                setSignupSuccess(false);
-                setActiveTab("login");
-              }}
-              className="auth-cta-primary"
-            >
-              Back to Sign In
-            </Button>
           </div>
+          <h2 style={{ fontSize: 24, fontWeight: 700, color: "var(--ap-text)", marginBottom: 8 }}>
+            Check your email
+          </h2>
+          <p style={{ fontSize: 13, color: "var(--ap-muted)", lineHeight: 1.6, marginBottom: 24 }}>
+            We sent a verification link to{" "}
+            <strong style={{ color: "var(--ap-text)" }}>{email}</strong>.
+            Click it to activate your account.
+          </p>
+          <button
+            type="button"
+            className="ap-btn"
+            onClick={() => { setSignupSuccess(false); setActiveTab("login"); }}
+          >
+            Back to Sign In
+          </button>
         </div>
       </div>
     );
   }
 
-  // MFA verification screen
   if (showMfaVerify) {
     return (
-      <div
-        className="w-full relative flex items-center justify-center p-5 md:p-8 font-sans antialiased"
-        style={{ minHeight: "100vh" }}
-      >
-        <DaylightBackground />
-        <div className="relative z-10 w-full max-w-[440px]">
-          <div className="auth-card-daylight">
-            <div className="auth-card-accent auth-card-accent--amber" />
-            <TwoFactorVerify
-              onVerified={() => {
-                setShowMfaVerify(false);
-                if (user) handlePostLoginRedirect(user.id);
-              }}
-              onCancel={() => {
-                setShowMfaVerify(false);
-                supabase.auth.signOut();
-              }}
-            />
-          </div>
+      <div className="ap-simple">
+        <AuthOrbs />
+        <div className="ap-simple-card">
+          <TwoFactorVerify
+            onVerified={() => {
+              setShowMfaVerify(false);
+              if (user) handlePostLoginRedirect(user.id);
+            }}
+            onCancel={() => {
+              setShowMfaVerify(false);
+              supabase.auth.signOut();
+            }}
+          />
         </div>
       </div>
     );
   }
 
-  // Password reset screen
   if (showPasswordReset) {
     return (
-      <div
-        className="w-full relative flex items-center justify-center p-5 md:p-8 font-sans antialiased"
-        style={{ minHeight: "100vh" }}
-      >
-        <DaylightBackground />
-        <div className="relative z-10 w-full max-w-[440px]">
-          <div className="auth-card-daylight">
-            <div className="auth-card-accent auth-card-accent--lavender" />
-            <PasswordResetForm
-              onComplete={() => {
-                setShowPasswordReset(false);
-                setActiveTab("login");
-                navigate("/auth", { replace: true });
-              }}
-            />
-          </div>
+      <div className="ap-simple">
+        <AuthOrbs />
+        <div className="ap-simple-card">
+          <PasswordResetForm
+            onComplete={() => {
+              setShowPasswordReset(false);
+              setActiveTab("login");
+              navigate("/auth", { replace: true });
+            }}
+          />
         </div>
       </div>
     );
   }
 
+  // ── Main two-column layout ───────────────────────────────────────────────
+
   return (
-    <div
-      className="w-full relative flex items-stretch justify-center p-0 font-sans antialiased"
-      style={{ minHeight: "100vh" }}
-    >
+    <div className="ap-page">
       <SEO
         title="Sign In"
         description="Sign in to your InVision Network account to access your portal, courses, and protection tools."
         noindex
       />
 
-      {/* SOFT DAYLIGHT BACKGROUND */}
-      <DaylightBackground />
+      <AuthOrbs />
 
-      {/* Single-column centered layout */}
-      <div className="relative z-10 w-full max-w-[480px] mx-auto flex flex-col items-center justify-center p-4 md:p-6 lg:p-8">
-        <div className="w-full relative">
-          <div className="auth-card-daylight relative">
-            <div className="auth-card-accent" />
+      <div className="ap-card">
+        {/* ── LEFT COLUMN ── */}
+        <div className="ap-left">
+          {/* Flipping badge */}
+          <div className="ap-badge-flip">
+            <div className="ap-badge-inner">
+              <div className="ap-badge-face ap-badge-front">
+                <ShieldCheck style={{ width: 14, height: 14 }} />
+                24/7 Support
+              </div>
+              <div className="ap-badge-face ap-badge-back">
+                Invision.
+              </div>
+            </div>
+          </div>
 
-            {/* Centered brand mark */}
-            <Link
-              to="/"
-              className="flex items-center justify-center gap-3 mb-5 group"
+          {/* Parallelogram hero frame */}
+          <div className="ap-para">
+            <div className="ap-para-grid" />
+            <div className="ap-para-shimmer" />
+            <div className="ap-para-content">
+              <img
+                src={invisionLogo}
+                alt="InVision Network"
+                className="ap-para-logo"
+                loading="eager"
+                decoding="sync"
+                width={44}
+                height={44}
+              />
+              <p className="ap-para-headline">Protect What Matters</p>
+              <p className="ap-para-sub">InVision Network · EST. 2021</p>
+            </div>
+          </div>
+
+          {/* Testimonials */}
+          <div className="ap-testimonials">
+            <div className="ap-testi">
+              <div className="ap-testi-stars">★★★★★</div>
+              <p className="ap-testi-text">
+                "InVision gave our family real peace of mind. The 24/7 monitoring is incredible."
+              </p>
+              <p className="ap-testi-name">— Margaret T., Client since 2022</p>
+            </div>
+            <div className="ap-testi">
+              <div className="ap-testi-stars">★★★★★</div>
+              <p className="ap-testi-text">
+                "The team is always responsive. Best senior care network I've worked with."
+              </p>
+              <p className="ap-testi-name">— James R., Healthcare Partner</p>
+            </div>
+          </div>
+        </div>
+
+        {/* ── RIGHT COLUMN ── */}
+        <div className="ap-right">
+          {/* Brand mark */}
+          <Link to="/" className="ap-brand">
+            Invision<span className="ap-brand-dot">.</span>
+          </Link>
+
+          {/* Heading */}
+          <h1 className="ap-headline">Welcome</h1>
+          <p className="ap-sub">Sign in or create an account to continue.</p>
+
+          {/* SSO buttons */}
+          <div className="ap-sso">
+            <button type="button" className="ap-sso-btn" onClick={handleGoogleSignIn}>
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+              </svg>
+              Google
+            </button>
+            <button type="button" className="ap-sso-btn" onClick={handleMicrosoftSignIn}>
+              <svg width="18" height="18" viewBox="0 0 23 23" aria-hidden="true">
+                <path fill="#f35325" d="M1 1h10v10H1z" />
+                <path fill="#81bc06" d="M12 1h10v10H12z" />
+                <path fill="#05a6f0" d="M1 12h10v10H1z" />
+                <path fill="#ffba08" d="M12 12h10v10H12z" />
+              </svg>
+              Microsoft
+            </button>
+          </div>
+
+          {/* Divider */}
+          <div className="ap-divider">or continue with email</div>
+
+          {/* Tab switcher */}
+          <div className="ap-tabs" role="tablist">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeTab === "login"}
+              className={`ap-tab${activeTab === "login" ? " ap-tab--on" : ""}`}
+              onClick={() => setActiveTab("login")}
             >
-              <div className="relative">
-                <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-orange-400/40 to-amber-300/30 blur-md" />
-                <div className="relative w-12 h-12 rounded-2xl bg-white border border-orange-200 flex items-center justify-center shadow-[0_4px_12px_-2px_hsl(20_60%_40%/0.15)]">
-                  <img
-                    src={invisionLogo}
-                    alt="InVision Network"
-                    className="w-7 h-7"
-                    loading="eager"
-                    decoding="sync"
-                    width={28}
-                    height={28}
+              Sign In
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeTab === "signup"}
+              className={`ap-tab${activeTab === "signup" ? " ap-tab--on" : ""}`}
+              onClick={() => setActiveTab("signup")}
+            >
+              Sign Up
+            </button>
+          </div>
+
+          {/* ── LOGIN FORM ── */}
+          {activeTab === "login" && (
+            <form onSubmit={handleLogin}>
+              {/* Email */}
+              <div className="ap-field">
+                <label htmlFor="login-email" className="ap-label">Email Address</label>
+                <div className="ap-input-wrap">
+                  <Mail className="ap-input-icon" aria-hidden="true" />
+                  <input
+                    id="login-email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => { setEmail(e.target.value); setEmailError(""); }}
+                    required
+                    disabled={isLoading}
+                    autoComplete="email"
+                    placeholder="you@example.com"
+                    className={`ap-input${emailError ? " is-error" : ""}`}
+                  />
+                </div>
+                {emailError && <p className="ap-error-msg">{emailError}</p>}
+              </div>
+
+              {/* Password */}
+              <div className="ap-field">
+                <label htmlFor="login-password" className="ap-label">Password</label>
+                <div className="ap-input-wrap">
+                  <Lock className="ap-input-icon" aria-hidden="true" />
+                  <input
+                    id="login-password"
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => { setPassword(e.target.value); setPasswordError(""); }}
+                    required
+                    disabled={isLoading}
+                    placeholder="••••••••"
+                    autoComplete="current-password"
+                    minLength={8}
+                    className={`ap-input with-toggle${passwordError ? " is-error" : ""}`}
+                  />
+                  <button
+                    type="button"
+                    className="ap-toggle"
+                    onClick={() => setShowPassword(!showPassword)}
+                    tabIndex={-1}
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+                {passwordError && <p className="ap-error-msg">{passwordError}</p>}
+              </div>
+
+              {/* Remember me + forgot password */}
+              <div className="ap-check-row">
+                <label className="ap-check-label">
+                  <input
+                    type="checkbox"
+                    className="ap-check"
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                  />
+                  <span className="ap-check-text">Remember me</span>
+                </label>
+                <button
+                  type="button"
+                  className="ap-forgot"
+                  onClick={() => setShowForgotPassword(true)}
+                >
+                  Forgot password?
+                </button>
+              </div>
+
+              {/* Submit */}
+              <button type="submit" className="ap-btn" disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Signing in…
+                  </>
+                ) : (
+                  <>
+                    Sign In
+                    <span className="ap-btn-arrow">
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
+                  </>
+                )}
+              </button>
+
+              {/* Security footer */}
+              <div className="ap-security">
+                <ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" />
+                Secured by 256-bit Encryption
+              </div>
+            </form>
+          )}
+
+          {/* ── SIGNUP FORM ── */}
+          {activeTab === "signup" && (
+            <form onSubmit={handleSignup}>
+              {/* Name row */}
+              <div className="ap-field-row">
+                <div>
+                  <label htmlFor="firstName" className="ap-label">First Name</label>
+                  <input
+                    id="firstName"
+                    type="text"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    required
+                    disabled={isLoading}
+                    autoComplete="given-name"
+                    placeholder="Jane"
+                    className="ap-input no-icon"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="lastName" className="ap-label">Last Name</label>
+                  <input
+                    id="lastName"
+                    type="text"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    required
+                    disabled={isLoading}
+                    autoComplete="family-name"
+                    placeholder="Smith"
+                    className="ap-input no-icon"
                   />
                 </div>
               </div>
-              <div className="flex flex-col leading-tight">
-                <span className="text-[15px] font-bold text-slate-900 tracking-tight">
-                  InVision Network
-                </span>
-                <span className="text-[10px] font-medium text-slate-500 tracking-[0.18em] uppercase mt-0.5">
-                  Your Secure Portal
-                </span>
+
+              {/* Email */}
+              <div className="ap-field">
+                <label htmlFor="signup-email" className="ap-label">Email Address</label>
+                <div className="ap-input-wrap">
+                  <Mail className="ap-input-icon" aria-hidden="true" />
+                  <input
+                    id="signup-email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    disabled={isLoading}
+                    autoComplete="email"
+                    placeholder="you@example.com"
+                    className="ap-input"
+                  />
+                </div>
               </div>
-            </Link>
 
-            {/* Page heading */}
-            <div className="mb-5 text-center">
-              <h2 className="text-[1.5rem] md:text-[1.625rem] font-bold text-slate-900 leading-tight tracking-tight">
-                Welcome back
-              </h2>
-              <p className="text-[13px] text-slate-500 mt-1">
-                Sign in or create an account to continue.
-              </p>
-            </div>
-
-            {/* OAuth Buttons — Soft Daylight SSO */}
-            <div className="space-y-3 mb-5">
-              <Button
-                type="button"
-                variant="outline"
-                className="btn-sso-daylight w-full text-[14px]"
-                onClick={handleGoogleSignIn}
-              >
-                <svg className="w-5 h-5 mr-3 flex-shrink-0" viewBox="0 0 24 24">
-                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                </svg>
-                Continue with Google
-              </Button>
-
-              <Button
-                type="button"
-                variant="outline"
-                className="btn-sso-daylight w-full text-[14px]"
-                onClick={handleMicrosoftSignIn}
-              >
-                <svg className="w-5 h-5 mr-3 flex-shrink-0" viewBox="0 0 23 23">
-                  <path fill="#f35325" d="M1 1h10v10H1z" />
-                  <path fill="#81bc06" d="M12 1h10v10H12z" />
-                  <path fill="#05a6f0" d="M1 12h10v10H1z" />
-                  <path fill="#ffba08" d="M12 12h10v10H12z" />
-                </svg>
-                Continue with Microsoft
-              </Button>
-            </div>
-
-            {/* Divider — warm gradient hairline + cream pill */}
-            <div className="auth-divider-warm mb-5">
-              <span>or continue with email</span>
-            </div>
-
-            <Tabs
-              value={activeTab}
-              onValueChange={setActiveTab}
-              className="w-full"
-            >
-              <TabsList className="auth-tabs-warm grid w-full grid-cols-2 mb-6">
-                <TabsTrigger
-                  value="login"
-                  className="rounded-md transition-all"
-                >
-                  Sign In
-                </TabsTrigger>
-                <TabsTrigger
-                  value="signup"
-                  className="rounded-md transition-all"
-                >
-
-                Sign Up
-              </TabsTrigger>
-            </TabsList>
-
-            {/* Login Tab */}
-            <TabsContent value="login">
-              <form onSubmit={handleLogin} className="space-y-5">
-
-                <div className="space-y-2">
-                  <Label htmlFor="login-email" className="text-sm font-medium">
-                    Email Address
-                  </Label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                    <Input
-                      id="login-email"
-                      type="email"
-                      value={email}
-                      onChange={(e) => {
-                        setEmail(e.target.value);
-                        setEmailError("");
-                      }}
-                      required
-                      disabled={isLoading}
-                      className={`${inputClassName} ${emailError ? "border-destructive focus:border-destructive" : ""}`}
-                      autoComplete="email"
-                    />
-                  </div>
-                  {emailError && (
-                    <p className="text-xs text-destructive">{emailError}</p>
-                  )}
-                </div>
-
-                <div className="space-y-2">
-                  <Label
-                    htmlFor="login-password"
-                    className="text-sm font-medium"
-                  >
-                    Password
-                  </Label>
-                  <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                    <Input
-                      id="login-password"
-                      type={showPassword ? "text" : "password"}
-                      value={password}
-                      onChange={(e) => {
-                        setPassword(e.target.value);
-                        setPasswordError("");
-                      }}
-                      required
-                      disabled={isLoading}
-                      placeholder="••••••••"
-                      className={`${inputClassName} pr-11 ${passwordError ? "border-destructive focus:border-destructive" : ""}`}
-                      autoComplete="current-password"
-                      minLength={8}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-0 top-0 h-full px-3 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-                      tabIndex={-1}
-                      aria-label={
-                        showPassword ? "Hide password" : "Show password"
-                      }
-                    >
-                      {showPassword ? (
-                        <EyeOff className="w-4 h-4" />
-                      ) : (
-                        <Eye className="w-4 h-4" />
-                      )}
-                    </button>
-                  </div>
-                  {passwordError && (
-                    <p className="text-xs text-destructive">{passwordError}</p>
-                  )}
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="remember"
-                    className="flex items-center gap-2 cursor-pointer"
-                  >
-                    <Checkbox
-                      id="remember"
-                      checked={rememberMe}
-                      onCheckedChange={(checked) =>
-                        setRememberMe(checked as boolean)
-                      }
-                    />
-                    <span className="text-sm text-muted-foreground select-none">
-                      Remember me
-                    </span>
-                  </label>
+              {/* Password */}
+              <div className="ap-field">
+                <label htmlFor="signup-password" className="ap-label">Password</label>
+                <div className="ap-input-wrap">
+                  <Lock className="ap-input-icon" aria-hidden="true" />
+                  <input
+                    id="signup-password"
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    disabled={isLoading}
+                    placeholder="••••••••"
+                    autoComplete="new-password"
+                    minLength={8}
+                    className="ap-input with-toggle"
+                  />
                   <button
                     type="button"
-                    onClick={() => setShowForgotPassword(true)}
-                    className="text-sm font-medium bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent hover:from-rose-500 hover:to-orange-500 transition-all"
+                    className="ap-toggle"
+                    onClick={() => setShowPassword(!showPassword)}
+                    tabIndex={-1}
+                    aria-label={showPassword ? "Hide password" : "Show password"}
                   >
-                    Forgot password?
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
                 </div>
-
-                <Button
-                  type="submit"
-                  className="auth-cta-primary"
-                  disabled={isLoading}
-                >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                      Signing in...
-                    </>
-                  ) : (
-                    <>
-                      Sign In
-                      <ArrowRight className="ml-2 w-4 h-4 auth-cta-arrow" />
-                    </>
-                  )}
-                </Button>
-
-                {/* Security Footer */}
-                <div className="flex items-center justify-center gap-2 pt-3 border-t border-slate-100 mt-4">
-                  <ShieldCheck className="w-4 h-4 text-slate-400" />
-                  <span className="text-xs text-slate-400">
-                    Secured by 256-bit Encryption
-                  </span>
+                <div className="ap-strength-grid">
+                  <PasswordStrengthItem met={passwordHasLength}    label="8+ characters" />
+                  <PasswordStrengthItem met={passwordHasUppercase} label="Uppercase" />
+                  <PasswordStrengthItem met={passwordHasLowercase} label="Lowercase" />
+                  <PasswordStrengthItem met={passwordHasNumber}    label="Number" />
+                  <PasswordStrengthItem met={passwordHasSpecial}   label="Special char" />
                 </div>
-              </form>
-            </TabsContent>
+              </div>
 
-            {/* Signup Tab */}
-            <TabsContent value="signup">
-              <form onSubmit={handleSignup} className="space-y-4">
-
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="space-y-2">
-                    <Label htmlFor="firstName" className="text-sm font-medium">
-                      First Name
-                    </Label>
-                    <Input
-                      id="firstName"
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                      required
-                      disabled={isLoading}
-                      className="h-11 bg-slate-50/50 border-slate-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="lastName" className="text-sm font-medium">
-                      Last Name
-                    </Label>
-                    <Input
-                      id="lastName"
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                      required
-                      disabled={isLoading}
-                      className="h-11 bg-slate-50/50 border-slate-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="signup-email" className="text-sm font-medium">
-                    Email Address
-                  </Label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                    <Input
-                      id="signup-email"
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      disabled={isLoading}
-                      className={inputClassName}
-                      autoComplete="email"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label
-                    htmlFor="signup-password"
-                    className="text-sm font-medium"
+              {/* Confirm password */}
+              <div className="ap-field">
+                <label htmlFor="confirmPassword" className="ap-label">Confirm Password</label>
+                <div className="ap-input-wrap">
+                  <Lock className="ap-input-icon" aria-hidden="true" />
+                  <input
+                    id="confirmPassword"
+                    type={showConfirmPassword ? "text" : "password"}
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                    disabled={isLoading}
+                    placeholder="••••••••"
+                    autoComplete="new-password"
+                    minLength={8}
+                    className="ap-input with-toggle"
+                  />
+                  <button
+                    type="button"
+                    className="ap-toggle"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    tabIndex={-1}
+                    aria-label={showConfirmPassword ? "Hide password" : "Show password"}
                   >
-                    Password
-                  </Label>
-                  <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                    <Input
-                      id="signup-password"
-                      type={showPassword ? "text" : "password"}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                      disabled={isLoading}
-                      placeholder="••••••••"
-                      className={`${inputClassName} pr-11`}
-                      autoComplete="new-password"
-                      minLength={8}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-0 top-0 h-full px-3 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-                      tabIndex={-1}
-                      aria-label={
-                        showPassword ? "Hide password" : "Show password"
-                      }
-                    >
-                      {showPassword ? (
-                        <EyeOff className="w-4 h-4" />
-                      ) : (
-                        <Eye className="w-4 h-4" />
-                      )}
-                    </button>
-                  </div>
-                  <div className="grid grid-cols-2 gap-2 pt-1">
-                    <PasswordStrengthIndicator
-                      met={passwordHasLength}
-                      label="8+ characters"
-                    />
-                    <PasswordStrengthIndicator
-                      met={passwordHasUppercase}
-                      label="Uppercase"
-                    />
-                    <PasswordStrengthIndicator
-                      met={passwordHasLowercase}
-                      label="Lowercase"
-                    />
-                    <PasswordStrengthIndicator
-                      met={passwordHasNumber}
-                      label="Number"
-                    />
-                    <PasswordStrengthIndicator
-                      met={passwordHasSpecial}
-                      label="Special char"
-                    />
-                  </div>
+                    {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
                 </div>
-
-                <div className="space-y-2">
-                  <Label
-                    htmlFor="confirmPassword"
-                    className="text-sm font-medium"
+                {confirmPassword && (
+                  <div className={`ap-strength-item ${passwordsMatch ? "ap-strength-item--met" : ""}`}
+                    style={{ marginTop: 6, fontSize: 11, color: passwordsMatch ? "#4ade80" : "#fca5a5" }}
                   >
-                    Confirm Password
-                  </Label>
-                  <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                    <Input
-                      id="confirmPassword"
-                      type={showConfirmPassword ? "text" : "password"}
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                      required
-                      disabled={isLoading}
-                      placeholder="••••••••"
-                      className={`${inputClassName} pr-11`}
-                      autoComplete="new-password"
-                      minLength={8}
-                    />
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setShowConfirmPassword(!showConfirmPassword)
-                      }
-                      className="absolute right-0 top-0 h-full px-3 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-                      tabIndex={-1}
-                      aria-label={
-                        showConfirmPassword ? "Hide password" : "Show password"
-                      }
-                    >
-                      {showConfirmPassword ? (
-                        <EyeOff className="w-4 h-4" />
-                      ) : (
-                        <Eye className="w-4 h-4" />
-                      )}
-                    </button>
+                    {passwordsMatch
+                      ? <CheckCircle2 className="w-3 h-3 flex-shrink-0" />
+                      : <XCircle className="w-3 h-3 flex-shrink-0" />}
+                    {passwordsMatch ? "Passwords match" : "Passwords do not match"}
                   </div>
-                  {confirmPassword && (
-                    <div
-                      className={`flex items-center gap-2 text-xs ${passwordsMatch ? "text-green-600" : "text-destructive"}`}
-                    >
-                      {passwordsMatch ? (
-                        <CheckCircle2 className="w-3 h-3" />
-                      ) : (
-                        <XCircle className="w-3 h-3" />
-                      )}
-                      {passwordsMatch
-                        ? "Passwords match"
-                        : "Passwords do not match"}
-                    </div>
-                  )}
-                </div>
+                )}
+              </div>
 
-                <Button
-                  type="submit"
-                  className="auth-cta-primary"
-                  disabled={isLoading}
-                >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                      Creating account...
-                    </>
-                  ) : (
-                    <>
-                      Create Account
-                      <ArrowRight className="ml-2 w-4 h-4 auth-cta-arrow" />
-                    </>
-                  )}
-                </Button>
+              {/* Submit */}
+              <button type="submit" className="ap-btn" disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Creating account…
+                  </>
+                ) : (
+                  <>
+                    Create Account
+                    <span className="ap-btn-arrow">
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
+                  </>
+                )}
+              </button>
 
-                {/* Security Footer */}
-                <div className="flex items-center justify-center gap-2 pt-3 border-t border-slate-100 mt-4">
-                  <ShieldCheck className="w-4 h-4 text-slate-400" />
-                  <span className="text-xs text-slate-400">
-                    Secured by 256-bit Encryption
-                  </span>
-                </div>
-              </form>
-            </TabsContent>
-          </Tabs>
-
-            {/* Trust footer chips */}
-            <div className="mt-6 grid grid-cols-3 gap-2">
-              {[
-                { icon: ShieldCheck, label: "Encrypted" },
-                { icon: CheckCircle2, label: "Kettering team" },
-                { icon: Lock, label: "Private" },
-              ].map(({ icon: Icon, label }) => (
-                <div
-                  key={label}
-                  className="flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg bg-[hsl(35_40%_97%)] border border-[hsl(28_25%_88%)] text-[11px] text-slate-600 font-medium"
-                >
-                  <Icon className="w-3.5 h-3.5 text-[hsl(20_70%_50%)]" />
-                  <span>{label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          {/* /card */}
-
-          {/* Apply link */}
-          <div className="mt-6 text-center">
-            <Link
-              to="/careers"
-              className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 transition-colors"
-            >
-              Want to join our team?{" "}
-              <span className="text-[hsl(20_75%_45%)] font-semibold">Apply here</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-
-          {/* Bottom legal links */}
-          <div className="mt-3 flex items-center justify-center gap-3 text-[11px] text-slate-500">
-            <Link to="/privacy-policy" className="hover:text-slate-800 transition-colors">
-              Privacy Policy
-            </Link>
-            <span className="text-slate-300">•</span>
-            <Link to="/terms-of-service" className="hover:text-slate-800 transition-colors">
-              Terms of Service
-            </Link>
-            <span className="text-slate-300">•</span>
-            <span>© {new Date().getFullYear()} InVision Network</span>
-          </div>
+              {/* Security footer */}
+              <div className="ap-security">
+                <ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" />
+                Secured by 256-bit Encryption
+              </div>
+            </form>
+          )}
         </div>
-        {/* /inner wrapper */}
       </div>
-      {/* /max-w-[480px] */}
+
+      {/* Below-card footer */}
+      <div className="ap-footer">
+        <Link to="/careers" className="ap-footer-apply">
+          Want to join our team?{" "}
+          <span>Apply here</span>
+          <ArrowRight style={{ width: 13, height: 13 }} />
+        </Link>
+        <div className="ap-footer-legal">
+          <Link to="/privacy-policy">Privacy Policy</Link>
+          <span>•</span>
+          <Link to="/terms-of-service">Terms of Service</Link>
+          <span>•</span>
+          <span>© {new Date().getFullYear()} InVision Network</span>
+        </div>
+      </div>
 
       <ForgotPasswordModal
         open={showForgotPassword}
