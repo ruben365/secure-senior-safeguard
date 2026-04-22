@@ -10,6 +10,8 @@ import {
   Library, Layers,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 interface MenuItem {
   title: string;
@@ -96,6 +98,19 @@ export function CyberSidebar({ isOpen, isMobileOpen, onMobileClose }: CyberSideb
   const location = useLocation();
   const [expandedMenus, setExpandedMenus] = useState<string[]>(["Dashboard"]);
 
+  const { data: pendingComments = 0 } = useQuery({
+    queryKey: ["sidebar-pending-comments"],
+    queryFn: async () => {
+      const { count } = await supabase
+        .from("comments")
+        .select("*", { count: "exact", head: true })
+        .eq("status", "pending");
+      return count ?? 0;
+    },
+    refetchInterval: 60_000,
+    staleTime: 30_000,
+  });
+
   const toggleMenu = (title: string) => {
     setExpandedMenus((prev) => prev.includes(title) ? prev.filter((t) => t !== title) : [...prev, title]);
   };
@@ -163,6 +178,7 @@ export function CyberSidebar({ isOpen, isMobileOpen, onMobileClose }: CyberSideb
                 <div className="pl-4 mt-0.5 space-y-0.5">
                   {item.children.map((child) => {
                     const ChildIcon = child.icon;
+                    const isModeration = child.href === "/admin/moderation";
                     return (
                       <Link key={child.href} to={child.href} onClick={onMobileClose}
                         className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors
@@ -170,7 +186,12 @@ export function CyberSidebar({ isOpen, isMobileOpen, onMobileClose }: CyberSideb
                             ? "text-orange-400 bg-orange-500/10"
                             : "text-[#6B7280] hover:text-[#F9FAFB] hover:bg-[#1F2937]/50"}`}>
                         {ChildIcon && <ChildIcon className="h-3.5 w-3.5" />}
-                        {child.title}
+                        <span className="flex-1">{child.title}</span>
+                        {isModeration && pendingComments > 0 && (
+                          <span className="min-w-[18px] h-[18px] px-1 rounded-full bg-orange-500 text-white text-[10px] font-bold flex items-center justify-center leading-none">
+                            {pendingComments > 99 ? "99+" : pendingComments}
+                          </span>
+                        )}
                       </Link>
                     );
                   })}
