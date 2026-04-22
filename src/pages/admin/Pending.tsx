@@ -44,10 +44,12 @@ export default function Pending() {
   const handleAccountAction = async (userId: string, action: "active" | "rejected") => {
     setUpdatingId(userId);
     try {
-      const { error } = await supabase
-        .from("profiles")
-        .update({ account_status: action })
-        .eq("id", userId);
+      // Route through the approve-account edge function so the update runs
+      // with service-role privileges. Direct client updates are blocked by
+      // the profiles RLS policy (users can only update their own row).
+      const { error } = await supabase.functions.invoke("approve-account", {
+        body: { targetUserId: userId, status: action },
+      });
       if (error) throw error;
       toast.success(action === "active" ? "Account approved" : "Account rejected");
       refetchAccounts();
