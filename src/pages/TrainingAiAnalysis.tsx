@@ -14,9 +14,9 @@ import { useCheckout } from "@/contexts/CheckoutContext";
 import { SITE } from "@/config/site";
 import { SCAMSHIELD_PLANS } from "@/config/products";
 import {
-  BadgeCheck, Bookmark, CreditCard, FileDown, LogIn, Minimize2,
-  MoreHorizontal, Moon, ShieldCheck, Sparkles, Sun, X, Lock,
-  ShieldAlert, Wallet, Loader2, Mic, KeyRound, Globe, StopCircle,
+  BadgeCheck, CreditCard, Home, Info, Minimize2,
+  Moon, ShieldCheck, Sparkles, Sun, X, Lock,
+  ShieldAlert, Loader2, Mic, KeyRound, Globe, StopCircle,
   Paperclip, Settings, Folder, RotateCcw, CheckSquare, Square,
 } from "lucide-react";
 import {
@@ -78,8 +78,9 @@ export default function TrainingAiAnalysis() {
   const [paymentOpen, setPaymentOpen]           = useState(false);
   const [paywallOpen, setPaywallOpen]           = useState(false);
   const [settingsOpen, setSettingsOpen]         = useState(false);
-  const [menuOpen, setMenuOpen]                 = useState(false);
-  const [minimize, setMinimize]                 = useState(false);
+  const [aboutOpen, setAboutOpen]               = useState(false);
+  const [isCompact, setIsCompact]               = useState(false);
+  const [showFirstVisit, setShowFirstVisit]     = useState(false);
   const [darkMode, setDarkMode]                 = useState(false);
   const [webSearch, setWebSearch]               = useState(false);
   const [textInput, setTextInput]               = useState('');
@@ -98,7 +99,6 @@ export default function TrainingAiAnalysis() {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const fileInputRef     = useRef<HTMLInputElement>(null);
   const micBtnRef        = useRef<HTMLButtonElement>(null);
-  const menuRef          = useRef<HTMLDivElement>(null);
 
   // — Auth / subscription hooks —
   const { user } = useAuth();
@@ -120,20 +120,10 @@ export default function TrainingAiAnalysis() {
     return null;
   }, [accountAccess.accessType, accountAccess.canScan, hasActiveProtection]);
 
-  const chatUnlocked     = scanAccessType !== null;
-  const isCheckingAccess = !!user && (subscriptionsLoading || scanAccessLoading);
-  const loginPath        = `/auth?redirect=${encodeURIComponent("/training/ai-analysis")}`;
+  const chatUnlocked = scanAccessType !== null;
+  const loginPath    = `/auth?redirect=${encodeURIComponent("/training/ai-analysis")}`;
 
   const featuredPlan = useMemo(() => SCAMSHIELD_PLANS.find(p => p.popular) ?? SCAMSHIELD_PLANS[0], []);
-
-  const accessLabel = useMemo(() => {
-    if (isCheckingAccess)                    return "Checking access…";
-    if (scanAccessType === "subscription")   return "ScamShield active ✓";
-    if (scanAccessType === "balance")        return `${accountAccess.scanBalance ?? 0} scan(s) remaining`;
-    if (scanAccessType === "metered")        return "Pay-per-scan enabled";
-    if (user)                                return "No active scan access";
-    return "Log in to scan";
-  }, [accountAccess.scanBalance, isCheckingAccess, scanAccessType, user]);
 
   // — Scanner hook —
   const {
@@ -170,7 +160,7 @@ export default function TrainingAiAnalysis() {
       }
       if (e.key === 'Escape') {
         setSettingsOpen(false);
-        setMenuOpen(false);
+        setAboutOpen(false);
         if (isRecording) stopRecording();
       }
     };
@@ -178,17 +168,7 @@ export default function TrainingAiAnalysis() {
     return () => window.removeEventListener('keydown', handler);
   }, [isRecording]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Close menu on outside click
-  useEffect(() => {
-    if (!menuOpen) return;
-    const handler = (e: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        setMenuOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
-  }, [menuOpen]);
+  // (About dialog is handled by Dialog component's own close logic)
 
   // — Beforeunload warning —
   useEffect(() => {
@@ -201,6 +181,23 @@ export default function TrainingAiAnalysis() {
     window.addEventListener('beforeunload', handler);
     return () => window.removeEventListener('beforeunload', handler);
   }, [messages.length]);
+
+  // — First-visit notification —
+  useEffect(() => {
+    if (!localStorage.getItem('ai-scanner-visited')) {
+      setShowFirstVisit(true);
+      const timer = setTimeout(() => {
+        setShowFirstVisit(false);
+        localStorage.setItem('ai-scanner-visited', 'true');
+      }, 8000);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  const dismissFirstVisit = () => {
+    setShowFirstVisit(false);
+    localStorage.setItem('ai-scanner-visited', 'true');
+  };
 
   // — Speech recognition / MediaRecorder fallback —
   const stopRecording = useCallback(() => {
@@ -410,9 +407,6 @@ export default function TrainingAiAnalysis() {
           background: darkMode ? DARK_BG : LIGHT_BG,
           backgroundAttachment: 'fixed',
           color: '#fff',
-          transform: minimize ? 'scale(0.9)' : 'scale(1)',
-          transformOrigin: 'top center',
-          transition: 'transform 0.25s ease',
         }}
       >
         <SEO
@@ -422,31 +416,33 @@ export default function TrainingAiAnalysis() {
           structuredData={{ "@context": "https://schema.org", "@type": "WebPage", name: "AI Security Scanner", url: "https://www.invisionnetwork.org/training/ai-analysis", publisher: { "@type": "Organization", name: SITE.name } }}
         />
 
-        {/* ── Home link (unobtrusive, top-left) ───────────────────────────────── */}
-        <Link
-          to="/"
-          style={{ position: 'absolute', top: '14px', left: '16px', fontSize: '12px', color: 'rgba(255,255,255,0.38)', textDecoration: 'none', zIndex: 30, transition: 'color 0.15s' }}
-          onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.75)')}
-          onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.38)')}
-        >
-          ← Home
-        </Link>
-
-        {/* ── Floating top pills (top-right) ──────────────────────────────────── */}
-        <div style={{ position: 'absolute', top: '10px', right: '16px', display: 'flex', gap: '6px', zIndex: 30 }}>
-
-          {/* Left pill: minimize / theme / refresh */}
+        {/* ── Left pill: Home / Minimize / Theme / Clear / Login / Subscribe ─── */}
+        <div style={{ position: 'absolute', top: '10px', left: '16px', zIndex: 30 }}>
           <div style={pillBase}>
+            {/* Home */}
+            <Link
+              to="/"
+              title="Home"
+              style={{ ...toolBtn, textDecoration: 'none', color: '#c9c9cd' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+              onMouseLeave={e => (e.currentTarget.style.color = '#c9c9cd')}
+            >
+              <Home className="w-3 h-3" />
+            </Link>
+
+            {/* Minimize */}
             <button
               type="button"
-              title={minimize ? 'Restore' : 'Minimize'}
-              onClick={() => setMinimize(m => !m)}
+              title={isCompact ? 'Restore' : 'Minimize'}
+              onClick={() => setIsCompact(c => !c)}
               style={toolBtn}
               onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
               onMouseLeave={e => (e.currentTarget.style.color = '#c9c9cd')}
             >
               <Minimize2 className="w-3 h-3" />
             </button>
+
+            {/* Theme */}
             <button
               type="button"
               title={darkMode ? 'Light mode' : 'Dark mode'}
@@ -457,6 +453,8 @@ export default function TrainingAiAnalysis() {
             >
               {darkMode ? <Sun className="w-3 h-3" /> : <Moon className="w-3 h-3" />}
             </button>
+
+            {/* Clear */}
             <button
               type="button"
               title="Clear messages"
@@ -467,81 +465,65 @@ export default function TrainingAiAnalysis() {
             >
               <RotateCcw className="w-3 h-3" />
             </button>
-          </div>
 
-          {/* Right pill: export / save / menu */}
-          <div style={{ ...pillBase, position: 'relative' }} ref={menuRef}>
-            <button
-              type="button"
-              title="Export chat"
-              onClick={handleDownload}
-              style={toolBtn}
-              onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-              onMouseLeave={e => (e.currentTarget.style.color = '#c9c9cd')}
-            >
-              <FileDown className="w-3 h-3" />
-            </button>
-            <button
-              type="button"
-              title="Save as PDF"
-              onClick={handleSaveAsPdf}
-              style={toolBtn}
-              onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-              onMouseLeave={e => (e.currentTarget.style.color = '#c9c9cd')}
-            >
-              <Bookmark className="w-3 h-3" />
-            </button>
-            <button
-              type="button"
-              title="Menu"
-              onClick={e => { e.stopPropagation(); setMenuOpen(m => !m); }}
-              style={{ ...toolBtn, color: menuOpen ? '#fff' : '#c9c9cd' }}
-            >
-              <MoreHorizontal className="w-3 h-3" />
-            </button>
+            {/* Divider */}
+            <div style={{ width: '1px', height: '14px', background: 'rgba(255,255,255,0.15)', margin: '0 2px', flexShrink: 0 }} />
 
-            {/* Dropdown menu */}
-            {menuOpen && (
-              <div style={{
-                position: 'absolute', top: 'calc(100% + 8px)', right: 0,
-                background: 'rgba(20,20,22,0.96)', backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
-                borderRadius: '12px', border: '1px solid rgba(255,255,255,0.1)',
-                padding: '6px', minWidth: '164px', zIndex: 50,
-                boxShadow: '0 12px 32px rgba(0,0,0,0.45)',
-              }}>
-                {([
-                  {
-                    label: 'Clear messages',
-                    action: () => { clearChat(); clearFile(); setPasswordResult(null); setTextInput(''); setMenuOpen(false); },
-                  },
-                  {
-                    label: 'Export chat',
-                    action: () => { handleDownload(); setMenuOpen(false); },
-                  },
-                  {
-                    label: 'About',
-                    action: () => { toast('ScamShield AI — Auto-detect security scanner'); setMenuOpen(false); },
-                  },
-                ] as { label: string; action: () => void }[]).map(item => (
-                  <button
-                    key={item.label}
-                    type="button"
-                    onClick={item.action}
-                    style={{ display: 'block', width: '100%', textAlign: 'left', padding: '8px 12px', borderRadius: '8px', background: 'none', border: 'none', color: '#c9c9cd', fontSize: '13px', cursor: 'pointer', transition: 'background 0.12s, color 0.12s' }}
-                    onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = '#fff'; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.color = '#c9c9cd'; }}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
+            {/* Login (only when not logged in) */}
+            {!user && (
+              <Link
+                to={loginPath}
+                style={{ ...toolBtn, textDecoration: 'none', color: 'rgba(255,255,255,0.75)', fontSize: '11px', fontWeight: 500, padding: '4px 6px' }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.75)')}
+              >
+                Login
+              </Link>
+            )}
+
+            {/* Subscribe */}
+            {!scanAccessType && (
+              <button
+                type="button"
+                onClick={handleStartSubscription}
+                style={{ ...toolBtn, color: '#ff7a45', fontSize: '11px', fontWeight: 600, padding: '4px 6px' }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#ff9b6a')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#ff7a45')}
+              >
+                Subscribe
+              </button>
             )}
           </div>
         </div>
 
+        {/* ── Right pill: About ────────────────────────────────────────────────── */}
+        <div style={{ position: 'absolute', top: '10px', right: '16px', zIndex: 30 }}>
+          <div style={pillBase}>
+            <button
+              type="button"
+              title="About this scanner"
+              onClick={() => setAboutOpen(true)}
+              style={{ ...toolBtn, color: aboutOpen ? '#fff' : '#c9c9cd' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+              onMouseLeave={e => (e.currentTarget.style.color = aboutOpen ? '#fff' : '#c9c9cd')}
+            >
+              <Info className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
+
+        {/* ── Scalable content wrapper (background + pills excluded) ──────────── */}
+        <div
+          className="flex-1 flex flex-col"
+          style={{
+            transform: isCompact ? 'scale(0.85)' : 'scale(1)',
+            transformOrigin: 'top center',
+            transition: 'transform 0.3s ease',
+          }}
+        >
+
         {/* ── Main content ─────────────────────────────────────────────────────── */}
-        <main className="flex-1 flex flex-col items-center justify-center px-4 pb-8 pt-14 relative z-10">
+        <main className="flex-1 flex flex-col items-center justify-center px-4 pb-16 pt-14 relative z-10">
 
           {/* Chat history */}
           {messages.length > 0 && (
@@ -549,53 +531,6 @@ export default function TrainingAiAnalysis() {
               <PremiumChatHistory messages={messages} status={chatStatus} />
             </div>
           )}
-
-          {/* Compact access banner */}
-          <div
-            className="flex items-center justify-between gap-3 flex-wrap mb-3 px-4 py-2.5 rounded-2xl"
-            style={{ width: 'min(640px, 92vw)', background: 'rgba(20,20,22,0.78)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.1)' }}
-          >
-            <div className="flex items-center gap-2">
-              {scanAccessType === "subscription"
-                ? <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
-                : scanAccessType
-                ? <Wallet className="w-3.5 h-3.5 text-orange-300 flex-shrink-0" />
-                : user
-                ? <ShieldAlert className="w-3.5 h-3.5 text-yellow-300 flex-shrink-0" />
-                : <LogIn className="w-3.5 h-3.5 flex-shrink-0" style={{ color: '#c9c9cd' }} />}
-              <span className="text-xs" style={{ color: '#c9c9cd' }}>{accessLabel}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              {scanAccessType ? (
-                <button
-                  type="button"
-                  onClick={handleRefreshAccess}
-                  className="text-xs transition"
-                  style={{ color: 'rgba(255,255,255,0.35)', background: 'none', border: 'none', cursor: 'pointer' }}
-                  onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.7)')}
-                  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.35)')}
-                >
-                  Refresh
-                </button>
-              ) : (
-                <>
-                  {!user && (
-                    <Button asChild size="sm" variant="heroPrimary" className="text-white h-6 px-3 text-[11px]">
-                      <Link to={loginPath}>Log in</Link>
-                    </Button>
-                  )}
-                  <Button
-                    size="sm"
-                    variant="heroOutline"
-                    className="text-white hover:text-white h-6 px-3 text-[11px]"
-                    onClick={handleStartSubscription}
-                  >
-                    Subscribe
-                  </Button>
-                </>
-              )}
-            </div>
-          </div>
 
           {/* ── Chatbox ─────────────────────────────────────────────────────────── */}
           <div style={{
@@ -860,14 +795,20 @@ export default function TrainingAiAnalysis() {
             </div>
           )}
 
-          {/* Hint bar */}
-          <div className="flex items-center gap-1.5 mt-3">
-            <ShieldAlert style={{ width: '11px', height: '11px', color: 'rgba(255,255,255,0.25)', flexShrink: 0 }} />
-            <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)', lineHeight: 1.4 }}>
-              Files auto-deleted in 10 min · Chat not saved · ${cost.perUploadCharge.toFixed(2)}/upload · <kbd style={{ fontFamily: 'inherit' }}>Ctrl+K</kbd> to focus
-            </p>
-          </div>
         </main>
+        </div>{/* end scalable wrapper */}
+
+        {/* ── Bottom info bar — fixed at very bottom ───────────────────────────── */}
+        <div style={{
+          position: 'fixed', bottom: 0, left: 0, right: 0,
+          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
+          padding: '8px 16px', zIndex: 20, pointerEvents: 'none',
+        }}>
+          <ShieldAlert style={{ width: '10px', height: '10px', color: 'rgba(255,255,255,0.28)', flexShrink: 0 }} />
+          <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', lineHeight: 1, letterSpacing: '0.01em' }}>
+            Files auto-deleted in 10 min · Chat not saved · ${cost.perUploadCharge.toFixed(2)}/upload · <kbd style={{ fontFamily: 'inherit', fontSize: '10px' }}>Ctrl+K</kbd> to focus
+          </p>
+        </div>
       </div>
 
       {/* ── Settings modal ───────────────────────────────────────────────────── */}
@@ -915,6 +856,144 @@ export default function TrainingAiAnalysis() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* ── About modal ─────────────────────────────────────────────────────── */}
+      <Dialog open={aboutOpen} onOpenChange={setAboutOpen}>
+        <DialogContent style={{ background: '#1c1c1e', borderRadius: '18px', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', maxWidth: '480px', maxHeight: '85svh', overflowY: 'auto', boxShadow: '0 32px 64px rgba(0,0,0,0.7)', padding: '0' }}>
+          {/* Header */}
+          <div style={{ padding: '22px 24px 16px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+            <DialogTitle style={{ color: '#fff', fontSize: '16px', fontWeight: 700, marginBottom: '4px' }}>InVision AI Security Scanner</DialogTitle>
+            <DialogDescription style={{ color: '#8a8a8f', fontSize: '12px' }}>Powered by Claude AI (Anthropic)</DialogDescription>
+          </div>
+
+          {/* Body */}
+          <div style={{ padding: '20px 24px 24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+
+            {/* How it works */}
+            <section>
+              <p style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '10px' }}>How it works</p>
+              {[
+                'Paste any text, email, URL, phone number, or message into the input bar',
+                'Upload files (images, documents, audio) using the attach button',
+                'Our AI automatically detects the content type and runs the right scan',
+                'Results appear above the input bar in real-time',
+              ].map((s, i) => (
+                <div key={i} style={{ display: 'flex', gap: '10px', marginBottom: '7px' }}>
+                  <span style={{ width: '18px', height: '18px', borderRadius: '50%', background: 'rgba(255,122,69,0.2)', color: '#ff7a45', fontSize: '10px', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '1px' }}>{i + 1}</span>
+                  <p style={{ fontSize: '13px', color: '#c9c9cd', lineHeight: 1.5 }}>{s}</p>
+                </div>
+              ))}
+            </section>
+
+            {/* What we scan */}
+            <section>
+              <p style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '10px' }}>What we scan</p>
+              {[
+                ['Emails', 'Phishing detection, fake sender analysis, malicious link detection'],
+                ['URLs', 'Safe browsing check, redirect chain analysis, SSL verification'],
+                ['Phone numbers', 'Scam number lookup, known fraud database check'],
+                ['Images', 'AI-generated/deepfake detection, manipulation analysis'],
+                ['Voice / Audio', 'Voice clone detection, authenticity verification'],
+                ['Text messages', 'SMS/WhatsApp scam pattern detection'],
+                ['Documents', 'Malicious macro detection, hidden link analysis'],
+                ['QR Codes', 'Decode and verify destination before scanning'],
+                ['Social profiles', 'Fake account detection, catfish identification'],
+                ['Passwords', 'Strength analysis, breach exposure check'],
+              ].map(([label, desc]) => (
+                <div key={label} style={{ display: 'flex', gap: '10px', marginBottom: '8px', alignItems: 'flex-start' }}>
+                  <span style={{ fontSize: '12px', color: '#ff7a45', fontWeight: 600, minWidth: '110px', flexShrink: 0 }}>{label}</span>
+                  <span style={{ fontSize: '12px', color: '#8a8a8f', lineHeight: 1.45 }}>{desc}</span>
+                </div>
+              ))}
+            </section>
+
+            {/* Pricing */}
+            <section>
+              <p style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '10px' }}>Pricing</p>
+              {[
+                ['Subscribers', 'Unlimited scans included with any ScamShield plan'],
+                ['Pay-per-scan', '$1.00 per file upload'],
+                ['Text / URL / Phone', 'Included free for logged-in users'],
+              ].map(([label, desc]) => (
+                <div key={label} style={{ display: 'flex', gap: '10px', marginBottom: '7px', alignItems: 'flex-start' }}>
+                  <span style={{ fontSize: '12px', color: '#c9c9cd', fontWeight: 600, minWidth: '110px', flexShrink: 0 }}>{label}</span>
+                  <span style={{ fontSize: '12px', color: '#8a8a8f' }}>{desc}</span>
+                </div>
+              ))}
+            </section>
+
+            {/* Privacy */}
+            <section>
+              <p style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '10px' }}>Privacy & Security</p>
+              {[
+                'All uploaded files are auto-deleted after 10 minutes',
+                'Chat history is not saved between sessions',
+                'Analysis runs through encrypted channels',
+                'Your data is never shared or stored permanently',
+                'Powered by Claude AI (Anthropic)',
+              ].map((s, i) => (
+                <div key={i} style={{ display: 'flex', gap: '8px', marginBottom: '6px', alignItems: 'flex-start' }}>
+                  <span style={{ color: '#30d158', flexShrink: 0, marginTop: '2px', fontSize: '11px' }}>✓</span>
+                  <p style={{ fontSize: '12px', color: '#c9c9cd', lineHeight: 1.45 }}>{s}</p>
+                </div>
+              ))}
+            </section>
+
+            {/* Keyboard shortcuts */}
+            <section>
+              <p style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '10px' }}>Keyboard Shortcuts</p>
+              {[
+                ['Ctrl+K', 'Focus the input bar'],
+                ['Enter', 'Send / analyze'],
+                ['Escape', 'Close menus'],
+              ].map(([key, desc]) => (
+                <div key={key} style={{ display: 'flex', gap: '10px', marginBottom: '6px', alignItems: 'center' }}>
+                  <kbd style={{ fontSize: '11px', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '5px', padding: '2px 7px', color: '#e5e5e7', fontFamily: 'inherit', flexShrink: 0 }}>{key}</kbd>
+                  <span style={{ fontSize: '12px', color: '#8a8a8f' }}>{desc}</span>
+                </div>
+              ))}
+            </section>
+
+            {/* Need help */}
+            <section style={{ paddingTop: '4px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+              <p style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '10px' }}>Need Help?</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <a href={`tel:${SITE.phone.e164}`} style={{ fontSize: '13px', color: '#ff7a45', textDecoration: 'none' }}>📞 {SITE.phone.display}</a>
+                <a href={`https://${SITE.name.toLowerCase().replace(/\s+/g, '')}.org`} style={{ fontSize: '13px', color: '#4da3ff', textDecoration: 'none' }}>🌐 invisionnetwork.org</a>
+                <a href={`mailto:${SITE.emails.support}`} style={{ fontSize: '13px', color: '#c9c9cd', textDecoration: 'none' }}>✉️ {SITE.emails.support}</a>
+              </div>
+            </section>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* ── First-visit notification bubble ──────────────────────────────────── */}
+      {showFirstVisit && (
+        <div style={{
+          position: 'fixed', bottom: '32px', right: '16px', zIndex: 60,
+          background: 'rgba(28,28,30,0.92)', backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          borderRadius: '12px', border: '1px solid rgba(255,255,255,0.12)',
+          padding: '12px 14px 12px 16px',
+          display: 'flex', alignItems: 'center', gap: '10px',
+          maxWidth: '300px', boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
+          animation: 'slideUp 0.3s ease',
+        }}>
+          <p style={{ fontSize: '12px', color: '#c9c9cd', lineHeight: 1.45, flex: 1 }}>
+            New here? Tap <strong style={{ color: '#fff' }}>About</strong> (top right) to learn how this scanner works.
+          </p>
+          <button
+            type="button"
+            onClick={dismissFirstVisit}
+            style={{ background: 'none', border: 'none', color: '#8a8a8f', cursor: 'pointer', padding: '2px', flexShrink: 0, display: 'flex' }}
+            onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+            onMouseLeave={e => (e.currentTarget.style.color = '#8a8a8f')}
+            title="Dismiss"
+          >
+            <X style={{ width: '14px', height: '14px' }} />
+          </button>
+        </div>
+      )}
 
       {/* ── Paywall dialog ───────────────────────────────────────────────────── */}
       <Dialog open={paywallOpen} onOpenChange={setPaywallOpen}>
