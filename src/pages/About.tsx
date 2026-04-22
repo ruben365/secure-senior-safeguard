@@ -416,59 +416,6 @@ function About() {
         </div>
       </section>
 
-      {/* AI-Powered Scanning Platform */}
-      <section id="scan-platform" className="py-16 md:py-24 relative overflow-hidden bg-foreground">
-        <div className="absolute inset-0 bg-gradient-to-b from-foreground via-foreground/95 to-foreground pointer-events-none" />
-        <div className="container mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 border border-white/20 bg-white/10 text-white/80">
-              <Sparkles className="w-3.5 h-3.5 text-[#fbab8e]" />
-              Our Technology
-            </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-4 tracking-tight">
-              AI-Powered Scanning Platform
-            </h2>
-            <p className="text-lg text-white/70 max-w-2xl mx-auto">
-              Our platform covers <strong className="text-white">10 critical security checkpoints</strong> — giving families and businesses comprehensive protection against every form of modern digital fraud.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-3 max-w-6xl mx-auto mb-10">
-            {[
-              { icon: Mail, title: "Email Scanner", desc: "Detect phishing attempts before they reach your inbox" },
-              { icon: ExternalLink, title: "Link Checker", desc: "Verify any link is safe before clicking" },
-              { icon: Phone, title: "Phone Lookup", desc: "Check if a caller is associated with known scams" },
-              { icon: ImageScanIcon, title: "Deepfake Detector", desc: "Spot AI-generated and manipulated images" },
-              { icon: Mic, title: "Voice Clone Detector", desc: "Verify if a voice recording is authentic or cloned" },
-              { icon: MessageCircle, title: "Message Analyzer", desc: "Scan SMS and social media messages for scam patterns" },
-              { icon: FileText, title: "Document Scanner", desc: "Check PDFs and documents for hidden threats" },
-              { icon: QrCode, title: "QR Code Scanner", desc: "Decode and verify QR codes before scanning" },
-              { icon: UserCircle, title: "Profile Checker", desc: "Identify fake accounts and catfish profiles" },
-              { icon: KeyRound, title: "Password Checker", desc: "Test your passwords against known breaches" },
-            ].map(({ icon: Icon, title, desc }) => (
-              <div
-                key={title}
-                className="flex flex-col items-center text-center p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-orange-500/40 hover:bg-orange-500/5 transition-all duration-300 group"
-              >
-                <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center mb-3 group-hover:bg-orange-500/20 transition-colors duration-300">
-                  <Icon className="w-5 h-5 text-[#fbab8e]" />
-                </div>
-                <h3 className="text-xs font-bold text-white mb-1 leading-tight">{title}</h3>
-                <p className="text-[11px] text-white/55 leading-snug hidden md:block">{desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center">
-            <Link
-              to="/training/ai-analysis"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#d96c4a] hover:bg-[#c25e3e] text-white font-semibold text-sm transition-colors duration-200 shadow-lg"
-            >
-              Try Our AI Scanner <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
 
       {/* Inspirational Verses */}
       <InspirationalVerses />
