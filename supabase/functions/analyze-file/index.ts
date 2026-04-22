@@ -69,16 +69,8 @@ const fallbackAnalysis = (
     findings.push("Potential phishing language detected.");
   if (suspiciousLinks.length)
     findings.push("Suspicious links were found in the file.");
-
-  if (
-    fileType.startsWith("video/") ||
-    fileType.startsWith("audio/") ||
-    fileType.startsWith("image/")
-  ) {
-    findings.push(
-      "Media file received. Deepfake/voice clone checks are preliminary.",
-    );
-  }
+  if (fileType.startsWith("video/") || fileType.startsWith("audio/") || fileType.startsWith("image/"))
+    findings.push("Media file received. Deepfake/voice clone checks are preliminary.");
 
   const threatLevel: ThreatLevel =
     phishingIndicators.length || suspiciousLinks.length ? "warning" : "safe";
@@ -111,6 +103,28 @@ const fallbackAnalysis = (
   };
 };
 
+const SYSTEM_PROMPT = `You are a cybersecurity analyst at InVision Network, specializing in scam detection for seniors and families.
+
+Analyze the provided file metadata and text sample to identify phishing, malware, deepfake, and voice-clone indicators.
+
+Respond with ONLY a valid JSON object — no extra text, no markdown, no code fences:
+{
+  "threatLevel": "safe" | "warning" | "danger",
+  "confidence": 0.0-1.0,
+  "summary": "short 1-2 sentence summary",
+  "findings": ["specific bullet findings"],
+  "recommendations": ["actionable recommendations"],
+  "indicators": {
+    "phishing": ["specific phishing signals found"],
+    "malware": ["malware signals found"],
+    "deepfake": ["deepfake signals found"],
+    "voiceClone": ["voice clone signals found"],
+    "suspiciousLinks": ["suspicious URLs found"]
+  }
+}
+
+If evidence is limited, be conservative and note limitations clearly.`;
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -121,12 +135,7 @@ serve(async (req) => {
     if (!scanId || typeof scanId !== "string") {
       throw new Error("scanId is required.");
     }
-    // UUID format check
-    if (
-      !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
-        scanId,
-      )
-    ) {
+    if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(scanId)) {
       throw new Error("Invalid scanId format.");
     }
 
@@ -149,60 +158,34 @@ serve(async (req) => {
 
     if (isAccountLinkedScan) {
       authenticatedUser = await getAuthenticatedScanUser(req);
-
       if (!scan.user_id || authenticatedUser.id !== scan.user_id) {
         return new Response(
-          JSON.stringify({
-            error: "This upload scan belongs to a different account.",
-          }),
-          {
-            headers: { ...corsHeaders, "Content-Type": "application/json" },
-            status: 403,
-          },
+          JSON.stringify({ error: "This upload scan belongs to a different account." }),
+          { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 403 }
         );
       }
     }
 
-    // Idempotency: if we already produced a result, return the cached one
+    // Idempotency: return cached result if already completed
     if (scan.scan_status === "completed" && scan.result) {
       return new Response(
-        JSON.stringify({
-          analysis: scan.result,
-          expiresAt: scan.expires_at,
-        }),
-        {
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-          status: 200,
-        },
+        JSON.stringify({ analysis: scan.result, expiresAt: scan.expires_at }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200 }
       );
     }
 
     if (!isAccountLinkedScan) {
       const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
-      if (!stripeKey) {
-        throw new Error("Missing required server configuration.");
-      }
+      if (!stripeKey) throw new Error("Missing required server configuration.");
 
       const stripe = new Stripe(stripeKey, { apiVersion: "2024-11-20.acacia" });
-      if (!scan.stripe_session_id) {
-        throw new Error("Scan has no associated payment.");
-      }
-      const paymentIntent = await stripe.paymentIntents.retrieve(
-        scan.stripe_session_id,
-      );
+      if (!scan.stripe_session_id) throw new Error("Scan has no associated payment.");
 
-      if (
-        paymentIntent.status !== "succeeded" &&
-        paymentIntent.status !== "processing"
-      ) {
+      const paymentIntent = await stripe.paymentIntents.retrieve(scan.stripe_session_id);
+      if (paymentIntent.status !== "succeeded" && paymentIntent.status !== "processing") {
         return new Response(
-          JSON.stringify({
-            error: "Payment not completed. Please finalize payment first.",
-          }),
-          {
-            headers: { ...corsHeaders, "Content-Type": "application/json" },
-            status: 402,
-          },
+          JSON.stringify({ error: "Payment not completed. Please finalize payment first." }),
+          { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 402 }
         );
       }
     }
@@ -215,49 +198,23 @@ serve(async (req) => {
       })
       .eq("id", scanId);
 
-    if (!scan.file_path) {
-      throw new Error("Scan has no associated file path.");
-    }
+    if (!scan.file_path) throw new Error("Scan has no associated file path.");
 
     const { data: fileData, error: fileError } = await supabase.storage
       .from("guest-scans")
       .download(scan.file_path);
 
-    if (fileError || !fileData) {
-      throw new Error("Unable to access uploaded file.");
-    }
+    if (fileError || !fileData) throw new Error("Unable to access uploaded file.");
 
     const arrayBuffer = await fileData.arrayBuffer();
     const sampleSize = Math.min(arrayBuffer.byteLength, 50000);
-    const sampleText = new TextDecoder().decode(
-      arrayBuffer.slice(0, sampleSize),
-    );
+    const sampleText = new TextDecoder().decode(arrayBuffer.slice(0, sampleSize));
     const urls = extractUrls(sampleText);
 
     let analysis: GuestScanAnalysis | null = null;
-    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
 
-    if (LOVABLE_API_KEY) {
-      const systemPrompt = `You are a cybersecurity analyst. Analyze the provided file metadata and text sample to identify phishing, malware, deepfake, and voice-clone indicators.
-
-Return a valid JSON object with this exact schema:
-{
-  "threatLevel": "safe" | "warning" | "danger",
-  "confidence": 0.0-1.0,
-  "summary": "short summary",
-  "findings": ["bullet findings"],
-  "recommendations": ["actionable recommendations"],
-  "indicators": {
-    "phishing": ["signals"],
-    "malware": ["signals"],
-    "deepfake": ["signals"],
-    "voiceClone": ["signals"],
-    "suspiciousLinks": ["links"]
-  }
-}
-
-If evidence is limited, be conservative and note limitations.`;
-
+    const ANTHROPIC_API_KEY = Deno.env.get("ANTHROPIC_API_KEY");
+    if (ANTHROPIC_API_KEY) {
       const userPrompt = JSON.stringify({
         fileName: scan.file_name,
         fileType: scan.file_type,
@@ -266,35 +223,41 @@ If evidence is limited, be conservative and note limitations.`;
         textSample: sampleText.slice(0, 4000),
       });
 
-      const response = await fetch(
-        "https://ai.gateway.lovable.dev/v1/chat/completions",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${LOVABLE_API_KEY}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            model: "google/gemini-2.5-flash",
-            messages: [
-              { role: "system", content: systemPrompt },
-              { role: "user", content: userPrompt },
-            ],
-            temperature: 0.2,
-            response_format: { type: "json_object" },
-          }),
-        },
-      );
+      console.log(`[analyze-file] Sending to Claude Haiku: scanId=${scanId} fileType=${scan.file_type}`);
 
-      if (response.ok) {
-        const data = await response.json();
-        const content = data?.choices?.[0]?.message?.content || "{}";
+      const anthropicRes = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: {
+          "x-api-key": ANTHROPIC_API_KEY,
+          "anthropic-version": "2023-06-01",
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          model: "claude-haiku-4-5-20251001",
+          max_tokens: 768,
+          system: SYSTEM_PROMPT,
+          messages: [{ role: "user", content: userPrompt }],
+          temperature: 0.2,
+        }),
+        signal: AbortSignal.timeout(25_000),
+      });
+
+      if (anthropicRes.ok) {
+        const data = await anthropicRes.json();
+        const responseText = data?.content?.[0]?.text ?? "";
+        // Extract JSON — Claude may occasionally wrap in markdown fences
+        const jsonMatch = responseText.match(/\{[\s\S]*\}/);
         try {
-          analysis = JSON.parse(content);
+          analysis = JSON.parse(jsonMatch?.[0] ?? responseText);
         } catch {
+          console.error("[analyze-file] Failed to parse Claude response:", responseText);
           analysis = null;
         }
+      } else {
+        console.error(`[analyze-file] Anthropic error ${anthropicRes.status}`);
       }
+    } else {
+      console.warn("[analyze-file] ANTHROPIC_API_KEY not set — using fallback analysis");
     }
 
     if (!analysis) {
@@ -324,42 +287,27 @@ If evidence is limited, be conservative and note limitations.`;
 
     if (!analysis.findings.length)
       analysis.findings.push("No immediate threats detected.");
-    if (!analysis.recommendations.length) {
-      analysis.recommendations.push(
-        "If in doubt, contact InVision Network support.",
-      );
-    }
+    if (!analysis.recommendations.length)
+      analysis.recommendations.push("If in doubt, contact InVision Network support.");
 
     let paymentStatus = scan.payment_status || "paid";
 
     if (scan.access_mode === "balance" || scan.access_mode === "metered") {
-      if (!authenticatedUser) {
-        throw new Error("Please log in to use account-linked scan access.");
-      }
+      if (!authenticatedUser) throw new Error("Please log in to use account-linked scan access.");
 
       const { data: usageResult, error: usageError } = await supabase.rpc(
         "consume_scan_access_usage",
-        {
-          p_user_id: authenticatedUser.id,
-          p_scan_id: scanId,
-        },
+        { p_user_id: authenticatedUser.id, p_scan_id: scanId }
       );
 
-      if (usageError) {
-        throw new Error(usageError.message);
-      }
+      if (usageError) throw new Error(usageError.message);
 
       if (!usageResult?.ok) {
         return new Response(
           JSON.stringify({
-            error:
-              usageResult?.error ||
-              "This account does not have enough upload scan access.",
+            error: usageResult?.error || "This account does not have enough upload scan access.",
           }),
-          {
-            headers: { ...corsHeaders, "Content-Type": "application/json" },
-            status: 402,
-          },
+          { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 402 }
         );
       }
 
@@ -385,23 +333,17 @@ If evidence is limited, be conservative and note limitations.`;
       })
       .eq("id", scanId);
 
-    // Per-detection logging deliberately omitted: scam_statistics is a
-    // daily-aggregate table (stat_date, total_scans, threats_detected,
-    // threats_blocked, new_users) and does not accept per-event inserts.
-    // The full analysis result is persisted on guest_scans.result above
-    // and can be rolled up by a scheduled job.
-
     return new Response(JSON.stringify({ analysis, expiresAt }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Analysis failed.";
+    console.error("[analyze-file] Error:", message);
     return new Response(JSON.stringify({ error: message }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status:
-        message.startsWith("Authentication error") ||
-        message.startsWith("Please log in")
+        message.startsWith("Authentication error") || message.startsWith("Please log in")
           ? 401
           : 500,
     });
