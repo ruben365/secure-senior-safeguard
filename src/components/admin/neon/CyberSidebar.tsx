@@ -115,13 +115,14 @@ export function CyberSidebar({ isOpen, isMobileOpen, onMobileClose, adminName, o
   const [expandedMenus, setExpandedMenus] = useState<string[]>(["Dashboard"]);
 
   // Pending comment badge
-  const { data: pendingComments = 0 } = useQuery({
+  const { data: pendingComments = 0, isError: pendingCommentsError } = useQuery({
     queryKey: ["sidebar-pending-comments"],
     queryFn: async () => {
-      const { count } = await supabase
+      const { count, error } = await supabase
         .from("comments")
         .select("*", { count: "exact", head: true })
         .eq("status", "pending");
+      if (error) throw error;
       return count ?? 0;
     },
     refetchInterval: 60_000,
@@ -233,7 +234,10 @@ export function CyberSidebar({ isOpen, isMobileOpen, onMobileClose, adminName, o
                       >
                         {ChildIcon && <ChildIcon className="h-3 w-3 flex-shrink-0" />}
                         <span style={{ flex: 1 }}>{child.title}</span>
-                        {isModeration && pendingComments > 0 && (
+                        {isModeration && pendingCommentsError && (
+                          <span className="adm-badge" style={{ background: "rgba(239,68,68,0.7)" }} title="Failed to load comment count">!</span>
+                        )}
+                        {isModeration && !pendingCommentsError && pendingComments > 0 && (
                           <span className="adm-badge">
                             {pendingComments > 99 ? "99+" : pendingComments}
                           </span>

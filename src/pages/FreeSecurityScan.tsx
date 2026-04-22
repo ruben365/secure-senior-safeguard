@@ -91,21 +91,22 @@ async function runBasicScan(url: string): Promise<ScanResult> {
     sslDetail = "Site did not respond over HTTPS. SSL certificate may be missing or expired.";
   }
 
-  // Header check: infer from URL — we can't read response headers cross-origin.
-  // We use the presence of HTTPS as a proxy and flag best-practice headers as "needs review".
-  const headerPass = sslPass; // HTTPS presence implies some baseline config
+  // Header check: cannot read response headers cross-origin regardless of SSL.
+  // headerPass is evaluated independently — SSL reachability does not imply
+  // headers are present, so sites with HTTPS don't get an inflated grade.
+  const headerPass = false;
   const headerDetail = sslPass
-    ? "Site uses HTTPS. Full security header audit (HSTS, CSP, X-Frame-Options) requires a complete scan."
+    ? "Security headers (HSTS, CSP, X-Frame-Options) cannot be inspected cross-origin — a full server-side audit is required."
     : "Cannot verify security headers — site does not appear to use HTTPS.";
 
-  // Grade logic
+  // Grade logic — SSL and headers are independent axes
   let grade: ScanResult["grade"];
   if (sslPass && headerPass) {
-    grade = "B"; // Basic pass — still flagging need for full audit
+    grade = "B"; // Full pass (requires server-side scan; headerPass is always false here)
   } else if (sslPass) {
-    grade = "C";
+    grade = "C"; // SSL present but headers unverified
   } else {
-    grade = "D";
+    grade = "D"; // No SSL
   }
 
   const finding = sslPass

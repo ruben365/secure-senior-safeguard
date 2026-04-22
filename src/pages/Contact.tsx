@@ -58,7 +58,7 @@ import { useConfetti } from "@/hooks/useConfetti";
 import { PROFESSIONAL_HERO_IMAGES } from "@/config/professionalHeroImages";
 import heroContactBranded from "@/assets/hero-contact-unified.jpg";
 import { SITE } from "@/config/site";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { SectionDivider, MeshBackground } from "@/components/pro";
 import { HeroCTA } from "@/components/shared/HeroCTA";
 import BookingCalendar from "@/components/BookingCalendar";
@@ -111,6 +111,8 @@ const contactMethods = [
 function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { fireCelebration } = useConfetti();
+  const [searchParams] = useSearchParams();
+  const couponFromUrl = searchParams.get("coupon") ?? "";
 
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
@@ -143,6 +145,7 @@ function Contact() {
             message: data.message,
             hearAbout: data.hearAbout || "",
             contactMethod: data.contactMethod,
+            ...(couponFromUrl ? { couponCode: couponFromUrl } : {}),
           },
         },
       );

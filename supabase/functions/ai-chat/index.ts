@@ -117,8 +117,15 @@ function getSystemPrompt(type: string): string {
 // Translate Anthropic SSE stream → OpenAI-compatible SSE stream.
 // Frontend hooks parse: parsed.choices[0].delta.content
 // Anthropic emits: {"type":"content_block_delta","delta":{"type":"text_delta","text":"..."}}
+//
+// abortController is wired to the Anthropic fetch so that when the client
+// disconnects (stream cancel), the upstream Anthropic request is also aborted
+// and stops burning paid tokens.
 // ============================================================================
-function translateAnthropicStream(anthropicStream: ReadableStream<Uint8Array>): ReadableStream<Uint8Array> {
+function translateAnthropicStream(
+  anthropicStream: ReadableStream<Uint8Array>,
+  abortController: AbortController,
+): ReadableStream<Uint8Array> {
   const encoder = new TextEncoder();
   const decoder = new TextDecoder();
   let buffer = "";
@@ -126,6 +133,7 @@ function translateAnthropicStream(anthropicStream: ReadableStream<Uint8Array>): 
   return new ReadableStream({
     async start(controller) {
       const reader = anthropicStream.getReader();
+      let errored = false;
       try {
         while (true) {
           const { done, value } = await reader.read();
@@ -173,11 +181,20 @@ function translateAnthropicStream(anthropicStream: ReadableStream<Uint8Array>): 
         // Ensure DONE is always sent
         controller.enqueue(encoder.encode("data: [DONE]\n\n"));
       } catch (err) {
+        // Mark errored before calling controller.error() so the finally block
+        // does NOT call controller.close() — closing an errored controller
+        // throws a TypeError.
+        errored = true;
         controller.error(err);
       } finally {
         reader.releaseLock();
-        controller.close();
+        if (!errored) controller.close();
       }
+    },
+    cancel() {
+      // Client disconnected — abort the upstream Anthropic fetch so we stop
+      // consuming tokens on an abandoned stream.
+      abortController.abort();
     },
   });
 }
@@ -298,6 +315,7 @@ serve(async (req) => {
     const systemPrompt = getSystemPrompt(type);
     console.log(`[ai-chat] type=${type} messages=${sanitized.length} ip=${clientIp}`);
 
+    const anthropicAbort = new AbortController();
     const anthropicRes = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: {
@@ -312,6 +330,7 @@ serve(async (req) => {
         messages: sanitized,
         stream: true,
       }),
+      signal: anthropicAbort.signal,
     });
 
     if (!anthropicRes.ok) {
@@ -338,7 +357,7 @@ serve(async (req) => {
     }
 
     // Translate Anthropic stream → OpenAI-compatible SSE for frontend hooks
-    const translatedStream = translateAnthropicStream(anthropicRes.body);
+    const translatedStream = translateAnthropicStream(anthropicRes.body, anthropicAbort);
 
     return new Response(translatedStream, {
       headers: {

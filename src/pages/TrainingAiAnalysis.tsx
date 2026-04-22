@@ -73,6 +73,9 @@ const MODE_PROMPTS: Partial<Record<ScanMode, string>> = {
 const LIGHT_BG = `radial-gradient(ellipse 80% 60% at 50% 110%, #ff7a45 0%, #ff9b5a 18%, #ffb784 35%, #e8a7b8 55%, #c8a8d6 72%, #a8b3e8 88%, #9fb5ec 100%)`;
 const DARK_BG  = `radial-gradient(ellipse 80% 60% at 50% 110%, #3a1a0a 0%, #4a2010 20%, #3a1a2a 45%, #1f1530 70%, #0a0a1f 100%)`;
 
+// Anchored to full hostname (after :// and before /) to prevent lookalike domains
+const SOCIAL_RE = /^https?:\/\/(?:www\.)?(?:facebook\.com|instagram\.com|linkedin\.com|tiktok\.com|reddit\.com|pinterest\.com|snapchat\.com|twitter\.com|x\.com|youtube\.com)\//i;
+
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function TrainingAiAnalysis() {
@@ -266,16 +269,22 @@ export default function TrainingAiAnalysis() {
 
   const handleTextScan = useCallback(() => {
     if (!textInput.trim()) return;
+    if (scanMode === 'social' && !SOCIAL_RE.test(textInput.trim())) {
+      toast.error("Please enter a full social media profile URL (e.g. https://facebook.com/username)");
+      return;
+    }
     const prefix = MODE_PROMPTS[scanMode] ?? '';
     handleSendMessage(prefix + textInput);
     setTextInput('');
   }, [textInput, scanMode, handleSendMessage]);
 
   const handlePasswordCheck = async () => {
-    if (!textInput.trim()) return;
+    const trimmed = textInput.trim();
+    if (!trimmed) return;
+    const pw = trimmed.replace(/^check\s+password:\s*/i, "");
+    if (!pw) return;
     setCheckingPassword(true);
     try {
-      const pw = textInput;
       const score = [
         pw.length >= 8, pw.length >= 12,
         /[A-Z]/.test(pw), /[a-z]/.test(pw),
@@ -402,7 +411,8 @@ export default function TrainingAiAnalysis() {
         />
 
         {/* ── Top bar ─────────────────────────────────────────────────────── */}
-        <div className="flex items-center justify-between px-4 pt-2 pb-1 relative z-20">
+        <div className="flex items-center justify-between px-4 pt-2 pb-1 relative z-20"
+          style={{ background: 'rgba(15,10,8,0.55)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)' }}>
           {/* Left: back to site */}
           <Link to="/" style={{ ...pillBase, textDecoration: 'none' }} className="hover:!text-white">
             ← Home
