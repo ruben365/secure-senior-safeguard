@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { PageTransition } from "@/components/PageTransition";
+import Navigation from "@/components/Navigation";
 import { PaymentDialog } from "@/components/scanner/PaymentDialog";
 import { PromptInputBox } from "@/components/training/PromptInputBox";
 import { PremiumChatHistory } from "@/components/training/PremiumChatHistory";
@@ -129,35 +130,6 @@ export default function TrainingAiAnalysis() {
     return "Log in once and we will check your ScamShield subscription automatically before you scan.";
   }, [accountAccess.scanBalance, isCheckingAccess, scanAccessType, user]);
 
-  // Set uniform background for this page
-  useEffect(() => {
-    const originalBodyBg = document.body.style.backgroundColor;
-    const originalBodyBgImage = document.body.style.backgroundImage;
-    const originalHtmlBg = document.documentElement.style.backgroundColor;
-    const originalBodyMargin = document.body.style.margin;
-    const originalBodyPadding = document.body.style.padding;
-    const originalHtmlMargin = document.documentElement.style.margin;
-    const originalHtmlPadding = document.documentElement.style.padding;
-
-    // Apply uniform background
-    document.body.style.backgroundColor = "#B8B9D1";
-    document.body.style.backgroundImage = "none";
-    document.documentElement.style.backgroundColor = "#B8B9D1";
-    document.body.style.margin = "0";
-    document.body.style.padding = "0";
-    document.documentElement.style.margin = "0";
-    document.documentElement.style.padding = "0";
-    return () => {
-      // Restore original styles on unmount
-      document.body.style.backgroundColor = originalBodyBg;
-      document.body.style.backgroundImage = originalBodyBgImage;
-      document.documentElement.style.backgroundColor = originalHtmlBg;
-      document.body.style.margin = originalBodyMargin;
-      document.body.style.padding = originalBodyPadding;
-      document.documentElement.style.margin = originalHtmlMargin;
-      document.documentElement.style.padding = originalHtmlPadding;
-    };
-  }, []);
   const {
     file,
     cost: costNumber,
@@ -352,11 +324,6 @@ export default function TrainingAiAnalysis() {
     const next = !darkMode;
     setDarkMode(next);
     document.documentElement.classList.toggle("dark", next);
-    const bg = next ? "#1a1a2e" : "#B8B9D1";
-    const textColor = next ? "#e2e8f0" : "";
-    document.body.style.backgroundColor = bg;
-    document.documentElement.style.backgroundColor = bg;
-    document.body.style.color = textColor;
   };
   const handleRefresh = () => {
     window.location.reload();
@@ -367,8 +334,9 @@ export default function TrainingAiAnalysis() {
   return (
     <PageTransition variant="fade">
       <div
-        className={`ai-analysis-page min-h-screen transition-colors duration-300 ${darkMode ? "bg-[#1a1a2e] text-slate-200" : "bg-[#B8B9D1] text-foreground"}`}
+        className={`ai-analysis-page min-h-screen transition-colors duration-300 ${darkMode ? "dark bg-[#1a1a2e] text-slate-200" : "bg-background text-foreground"}`}
       >
+        <Navigation />
         <SEO
           title="AI Analysis & Secure File Scan"
           description="Run instant AI analysis on suspicious files, messages, and screenshots. Secure guest scan workflow with automatic deletion in 10 minutes."
@@ -389,7 +357,7 @@ export default function TrainingAiAnalysis() {
         />
 
         <main
-          className={`relative min-h-screen overflow-hidden flex flex-col transition-colors duration-300 ${darkMode ? "bg-[#1a1a2e]" : "bg-[#B8B9D1]"}`}
+          className={`relative min-h-screen overflow-hidden flex flex-col transition-colors duration-300 pt-[clamp(80px,10vw,100px)] ${darkMode ? "bg-[#1a1a2e]" : "bg-background"}`}
         >
           <div className="relative flex-1 flex flex-col px-6 py-6">
             {/* Top Navigation Bar */}

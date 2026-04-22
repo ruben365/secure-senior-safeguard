@@ -268,7 +268,8 @@ function PublicRoutes() {
         <Route path="/events" element={<PageTransition variant="auto"><Events /></PageTransition>} />
         <Route path="/sitemap" element={<PageTransition variant="auto"><Sitemap /></PageTransition>} />
         <Route path="/faq" element={<PageTransition variant="auto"><FAQ /></PageTransition>} />
-        <Route path="/help" element={<PageTransition variant="auto"><HelpCenter /></PageTransition>} />
+        <Route path="/help" element={<Navigate to="/faq" replace />} />
+        <Route path="/workshops" element={<Navigate to="/training" replace />} />
         <Route path="/security" element={<PageTransition variant="fade"><Security /></PageTransition>} />
         <Route path="/status" element={<PageTransition variant="fade"><Status /></PageTransition>} />
 

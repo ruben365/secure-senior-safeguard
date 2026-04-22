@@ -21,6 +21,61 @@ import {
 } from "lucide-react";
 import { TREND_AGES } from "@/config/portfolioDesignSystem";
 
+const STATIC_PROJECTS = [
+  {
+    id: "exodus-health",
+    slug: "exodus-health-couriers",
+    title: "Exodus Health Couriers",
+    short_description: "Full brand identity and HIPAA-compliant website for a healthcare logistics company serving the Dayton region. Clean, trustworthy design built for compliance and conversion.",
+    thumbnail_url: null,
+    featured: true,
+    category: { name: "Web Design" },
+    project_date: "2025-10-01",
+    tags: [{ name: "Healthcare" }, { name: "Branding" }, { name: "Web Design" }],
+    external_url: "https://exodushealthcouriers.com",
+    gradient: "from-teal-500/20 to-emerald-500/20",
+  },
+  {
+    id: "invision-network",
+    slug: "invision-network-site",
+    title: "InVision Network",
+    short_description: "End-to-end design and development of the InVision Network platform — AI scam protection, training portal, client dashboard, and multi-role staff tools built on React and Supabase.",
+    thumbnail_url: null,
+    featured: true,
+    category: { name: "Full-Stack Development" },
+    project_date: "2025-12-01",
+    tags: [{ name: "React" }, { name: "AI" }, { name: "Cybersecurity" }],
+    external_url: "https://www.invisionnetwork.org",
+    gradient: "from-orange-500/20 to-primary/20",
+  },
+  {
+    id: "ai-scam-scanner",
+    slug: "ai-scam-scanner",
+    title: "AI Scam Scanner",
+    short_description: "Real-time AI analysis tool that scans uploaded files, screenshots, and messages for phishing, deepfakes, and social engineering. Built with GPT-4 Vision and Supabase Edge Functions.",
+    thumbnail_url: null,
+    featured: false,
+    category: { name: "AI Development" },
+    project_date: "2026-01-01",
+    tags: [{ name: "AI" }, { name: "Security" }, { name: "Edge Functions" }],
+    external_url: "/training/ai-analysis",
+    gradient: "from-violet-500/20 to-blue-500/20",
+  },
+  {
+    id: "cybersecurity-training",
+    slug: "cybersecurity-training-portal",
+    title: "Cybersecurity Training Portal",
+    short_description: "Interactive learning platform with workshops, live sessions, and a member portal for seniors and families. Features Zoom integration, booking calendar, and role-based access control.",
+    thumbnail_url: null,
+    featured: false,
+    category: { name: "Web Application" },
+    project_date: "2026-02-01",
+    tags: [{ name: "Training" }, { name: "React" }, { name: "Supabase" }],
+    external_url: "/training",
+    gradient: "from-amber-500/20 to-orange-500/20",
+  },
+];
+
 const Portfolio = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeCategory = searchParams.get("category") || "";
@@ -216,11 +271,74 @@ const Portfolio = () => {
                 <div key={i} className="rounded-2xl bg-muted animate-pulse h-72" />
               ))}
             </div>
+          ) : !projects?.length && !hasFilters ? (
+            <div>
+              <p className="text-sm text-muted-foreground text-center mb-8">
+                More projects coming soon — here's a look at our featured work.
+              </p>
+              <div className="gx-gallery grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {STATIC_PROJECTS.map((project) => (
+                  <a
+                    key={project.id}
+                    href={project.external_url}
+                    target={project.external_url.startsWith("http") ? "_blank" : undefined}
+                    rel={project.external_url.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className="group block rounded-2xl border border-border/60 bg-card overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                  >
+                    <div className={`aspect-[4/3] overflow-hidden relative bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
+                      <Palette className="w-12 h-12 text-muted-foreground/30" />
+                      {project.featured && (
+                        <div className="absolute top-3 left-3">
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/90 text-white text-[10px] font-bold uppercase tracking-wider">
+                            <Star className="w-2.5 h-2.5 fill-current" />
+                            Featured
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-5">
+                      <div className="flex items-center gap-2 mb-2">
+                        {project.category && (
+                          <Badge variant="secondary" className="text-[10px]">
+                            {project.category.name}
+                          </Badge>
+                        )}
+                        {project.project_date && (
+                          <span className="text-[10px] text-muted-foreground">
+                            {new Date(project.project_date).getFullYear()}
+                          </span>
+                        )}
+                      </div>
+                      <h3 className="font-bold text-foreground mb-1 group-hover:text-primary transition-colors">
+                        {project.title}
+                      </h3>
+                      {project.short_description && (
+                        <p className="text-xs text-muted-foreground line-clamp-2 mb-3">
+                          {project.short_description}
+                        </p>
+                      )}
+                      <div className="flex flex-wrap gap-1 mb-3">
+                        {project.tags.slice(0, 3).map((tag) => (
+                          <span key={tag.name} className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
+                            {tag.name}
+                          </span>
+                        ))}
+                      </div>
+                      <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary group-hover:gap-2 transition-all">
+                        <Eye className="w-3.5 h-3.5" />
+                        View Project
+                        <ArrowRight className="w-3 h-3" />
+                      </span>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
           ) : !projects?.length ? (
             <div className="text-center py-20">
               <Palette className="w-12 h-12 mx-auto text-muted-foreground/50 mb-4" />
               <p className="text-lg font-medium text-muted-foreground">
-                No projects found
+                No projects found for this filter
               </p>
               {hasFilters && (
                 <Button variant="outline" className="mt-4" onClick={clearFilters}>
