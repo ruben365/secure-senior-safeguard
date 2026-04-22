@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
-import TrustBar from "@/components/TrustBar";
+
 import CTASection from "@/components/CTASection";
 import { PageTransition } from "@/components/PageTransition";
 import { Button } from "@/components/ui/button";
@@ -178,8 +178,6 @@ function About() {
         ctaLabel="Get in touch with our team"
         className="py-6"
       />
-
-      <TrustBar />
 
       {/* Our Story */}
       <MeshBackground variant="subtle" withOrbs>

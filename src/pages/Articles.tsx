@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
-import TrustBar from "@/components/TrustBar";
+
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -70,8 +70,6 @@ function Articles() {
           secondaryHref="/contact"
         />
       </Hero>
-
-      <TrustBar />
 
       {/* Articles Grid */}
       <section className="py-16 bg-background">

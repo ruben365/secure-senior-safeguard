@@ -2,7 +2,7 @@ import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
-import TrustBar from "@/components/TrustBar";
+
 import { SEO } from "@/components/SEO";
 import { PAGE_SEO } from "@/config/pageSeo";
 import { PageTransition } from "@/components/PageTransition";
@@ -153,7 +153,6 @@ function Careers() {
         <HeroFloatingStats />
       </div>
       <div className="h-6" />
-      <TrustBar />
 
       {/* Why InVision */}
       <section className="py-20 relative overflow-hidden">

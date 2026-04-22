@@ -5,7 +5,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import { HeroBusiness } from "@/components/HeroBusiness";
-import TrustBar from "@/components/TrustBar";
+
 import TestimonialCard from "@/components/TestimonialCard";
 import CTASection from "@/components/CTASection";
 import { PageTransition } from "@/components/PageTransition";
@@ -520,7 +520,6 @@ function Business() {
 
         {/* Hero — Dark cinematic theme */}
         <HeroBusiness onStrategyCall={openStrategyCall} />
-        <TrustBar />
 
         {/* Answer summary — what we build for businesses */}
         <AnswerSummary
