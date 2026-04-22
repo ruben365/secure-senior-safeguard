@@ -14,12 +14,12 @@ import { usePaymentFlow } from "@/hooks/usePaymentFlow";
 import { SITE } from "@/config/site";
 import { SCAMSHIELD_PLANS } from "@/config/products";
 import {
-  BadgeCheck, CreditCard, Download, LogIn, Moon, ShieldCheck,
-  Sparkles, Sun, Trash2, X, FileDown, Lock, ShieldAlert,
+  BadgeCheck, CreditCard, LogIn, Moon, ShieldCheck,
+  Sparkles, Sun, X, Lock, ShieldAlert, Camera,
   Wallet, Loader2, Mail, ExternalLink, Phone, Image as ImageIcon,
   Mic, MessageCircle, FileText as FileTextIcon, QrCode, UserCircle,
-  KeyRound, Settings, Globe, ChevronDown, CheckSquare,
-  Square, StopCircle, Paperclip,
+  KeyRound, Globe, StopCircle, Paperclip,
+  Folder, Minimize2, RotateCcw,
 } from "lucide-react";
 import {
   Dialog,
@@ -73,26 +73,6 @@ const MODE_PROMPTS: Partial<Record<ScanMode, string>> = {
 const LIGHT_BG = `radial-gradient(ellipse 80% 60% at 50% 110%, #ff7a45 0%, #ff9b5a 18%, #ffb784 35%, #e8a7b8 55%, #c8a8d6 72%, #a8b3e8 88%, #9fb5ec 100%)`;
 const DARK_BG  = `radial-gradient(ellipse 80% 60% at 50% 110%, #3a1a0a 0%, #4a2010 20%, #3a1a2a 45%, #1f1530 70%, #0a0a1f 100%)`;
 
-const SOCIAL_RE = /^https?:\/\/(www\.)?(facebook|instagram|twitter|x|linkedin|tiktok)\.com/i;
-const PHONE_RE  = /^(\+\d{1,3}[\s.-]?)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
-const EMAIL_BODY_RE = /\S+@\S+\.\S+/;
-
-function detectScanMode(text: string, uploadedFile?: File | null): ScanMode {
-  if (uploadedFile) {
-    if (/^image/.test(uploadedFile.type)) return 'image';
-    if (/^audio/.test(uploadedFile.type)) return 'voice';
-    return 'document';
-  }
-  const t = text.trim();
-  if (!t) return 'default';
-  if (/^check password:\s*/i.test(t)) return 'password';
-  if (SOCIAL_RE.test(t)) return 'social';
-  if (/^https?:\/\//i.test(t)) return 'url';
-  if (EMAIL_BODY_RE.test(t) && (t.includes('\n') || t.length > 80 || /^(from:|to:|subject:|dear |hi |hello )/i.test(t))) return 'email';
-  if (PHONE_RE.test(t.replace(/\s+/g, ' ').trim())) return 'phone';
-  return 'default';
-}
-
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function TrainingAiAnalysis() {
@@ -100,27 +80,20 @@ export default function TrainingAiAnalysis() {
 
   // — UI state —
   const [paymentOpen, setPaymentOpen]         = useState(false);
-  const [darkMode, setDarkMode]               = useState(false);
   const [paywallOpen, setPaywallOpen]         = useState(false);
-  const [settingsOpen, setSettingsOpen]       = useState(false);
-  const [menuOpen, setMenuOpen]               = useState(false);
-  // scanMode is auto-detected — no manual selection
+  const [minimize, setMinimize]               = useState(false);
+  const [darkMode, setDarkMode]               = useState(false);
+  const [webSearch, setWebSearch]             = useState(false);
+  const [scanMode, setScanMode]               = useState<ScanMode>('default');
   const [textInput, setTextInput]             = useState('');
   const [isRecording, setIsRecording]         = useState(false);
   const [passwordResult, setPasswordResult]   = useState<{ score: number; breaches: string; suggestions: string[] } | null>(null);
   const [checkingPassword, setCheckingPassword] = useState(false);
   const [subscriptionCheckoutLoading, setSubscriptionCheckoutLoading] = useState(false);
-  const [settings, setSettings] = useState({
-    autoAnalyze:   true,
-    saveHistory:   false,
-    notifications: true,
-    compactMode:   false,
-  });
 
   // — Refs —
   const textareaRef     = useRef<HTMLTextAreaElement>(null);
   const recognitionRef  = useRef<SpeechRecognition | null>(null);
-  const menuRef         = useRef<HTMLDivElement>(null);
   const fileInputRef    = useRef<HTMLInputElement>(null);
 
   // — Auth / subscription hooks —
@@ -174,7 +147,7 @@ export default function TrainingAiAnalysis() {
   const { messages, status: chatStatus, sendMessage, clearChat } = useAiChat();
   const isProcessing = status === "uploading" || status === "analyzing";
   const canPay       = file && status === "ready";
-  const scanMode     = useMemo(() => detectScanMode(textInput, file), [textInput, file]);
+  const currentMode  = SCAN_MODES.find(m => m.id === scanMode) ?? SCAN_MODES[0];
 
   // — Keyboard shortcuts —
   useEffect(() => {
@@ -184,23 +157,12 @@ export default function TrainingAiAnalysis() {
         textareaRef.current?.focus();
       }
       if (e.key === 'Escape') {
-        setSettingsOpen(false);
-        setMenuOpen(false);
         if (isRecording) stopRecording();
       }
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
   }, [isRecording]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // — Close menu on outside click —
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) setMenuOpen(false);
-    };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
-  }, []);
 
   // — Beforeunload warning —
   useEffect(() => {
@@ -251,10 +213,10 @@ export default function TrainingAiAnalysis() {
   }, [textInput, scanMode, handleSendMessage]);
 
   const handlePasswordCheck = async () => {
-    const pw = textInput.replace(/^check password:\s*/i, '').trim();
-    if (!pw) return;
+    if (!textInput.trim()) return;
     setCheckingPassword(true);
     try {
+      const pw = textInput;
       const score = [
         pw.length >= 8, pw.length >= 12,
         /[A-Z]/.test(pw), /[a-z]/.test(pw),
@@ -386,7 +348,7 @@ export default function TrainingAiAnalysis() {
     <PageTransition variant="fade">
       <div
         className="ai-analysis-page min-h-screen flex flex-col"
-        style={{ background: darkMode ? DARK_BG : LIGHT_BG, backgroundAttachment: 'fixed', color: '#fff' }}
+        style={{ background: darkMode ? DARK_BG : LIGHT_BG, backgroundAttachment: 'fixed', color: '#fff', transform: minimize ? 'scale(0.9)' : 'scale(1)', transformOrigin: 'top center', transition: 'transform 0.25s ease' }}
       >
         <SEO
           title="AI Security Scanner — 10 Scan Modes"
@@ -395,52 +357,32 @@ export default function TrainingAiAnalysis() {
           structuredData={{ "@context": "https://schema.org", "@type": "WebPage", name: "AI Security Scanner", url: "https://www.invisionnetwork.org/training/ai-analysis", publisher: { "@type": "Organization", name: SITE.name } }}
         />
 
-        {/* ── Top window-control bar ──────────────────────────────────────── */}
+        {/* ── Top bar ─────────────────────────────────────────────────────── */}
         <div className="flex items-center justify-between px-4 pt-2 pb-1 relative z-20">
-          {/* Traffic lights */}
-          <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-full" style={{ background: '#ff5f57' }} />
-            <span className="w-3 h-3 rounded-full" style={{ background: '#febc2e' }} />
-            <span className="w-3 h-3 rounded-full" style={{ background: '#28c840' }} />
-          </div>
+          {/* Left: back to site */}
+          <Link to="/" style={{ ...pillBase, textDecoration: 'none' }} className="hover:!text-white">
+            ← Home
+          </Link>
 
           {/* Title */}
           <p className="absolute left-1/2 -translate-x-1/2 text-xs font-medium pointer-events-none" style={{ color: 'rgba(255,255,255,0.45)' }}>
             ScamShield AI Scanner
           </p>
 
-          {/* Right controls */}
-          <div className="flex items-center gap-2">
-            <button type="button" onClick={() => setDarkMode(d => !d)} style={pillBase} className="hover:!text-white">
-              {darkMode ? <Sun className="w-3 h-3" /> : <Moon className="w-3 h-3" />}
-              {darkMode ? 'Light' : 'Dark'}
+          {/* Right: minimize + theme + clear */}
+          <div style={{ ...pillBase, gap: '2px', padding: '4px 8px' }}>
+            <button type="button" title={minimize ? 'Restore' : 'Minimize'} onClick={() => setMinimize(m => !m)}
+              style={{ ...toolBtn, padding: '4px 6px' }} className="hover:!text-white">
+              <Minimize2 className="w-3 h-3" />
             </button>
-
-            <div className="relative" ref={menuRef}>
-              <button type="button" onClick={() => setMenuOpen(m => !m)} style={pillBase} className="hover:!text-white">
-                <ChevronDown className="w-3 h-3" />
-                Menu
-              </button>
-
-              {menuOpen && (
-                <div className="aia-dropdown absolute right-0 mt-2 z-50"
-                  style={{ background: 'rgba(20,20,22,0.95)', backdropFilter: 'blur(20px)', borderRadius: '14px', border: '1px solid rgba(255,255,255,0.1)', padding: '6px', minWidth: '190px', boxShadow: '0 20px 50px rgba(0,0,0,0.5)' }}>
-                  {[
-                    { label: 'Clear conversation', icon: Trash2,   onClick: () => { clearChat(); clearFile(); setMenuOpen(false); } },
-                    { label: 'Download transcript', icon: Download,  onClick: () => { handleDownload(); setMenuOpen(false); } },
-                    { label: 'Save as PDF',          icon: FileDown,  onClick: () => { handleSaveAsPdf(); setMenuOpen(false); } },
-                    { label: 'Settings',             icon: Settings,  onClick: () => { setSettingsOpen(true); setMenuOpen(false); } },
-                  ].map(item => (
-                    <button key={item.label} type="button" onClick={item.onClick}
-                      style={{ display: 'flex', alignItems: 'center', gap: '10px', width: '100%', padding: '8px 12px', borderRadius: '8px', border: 'none', background: 'transparent', color: '#c9c9cd', cursor: 'pointer', fontSize: '13px', textAlign: 'left' }}
-                      className="hover:!bg-[rgba(255,255,255,0.07)] hover:!text-white transition">
-                      <item.icon className="w-3.5 h-3.5 flex-shrink-0" />
-                      {item.label}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
+            <button type="button" title={darkMode ? 'Light mode' : 'Dark mode'} onClick={() => setDarkMode(d => !d)}
+              style={{ ...toolBtn, padding: '4px 6px' }} className="hover:!text-white">
+              {darkMode ? <Sun className="w-3 h-3" /> : <Moon className="w-3 h-3" />}
+            </button>
+            <button type="button" title="Clear messages" onClick={() => { clearChat(); clearFile(); }}
+              style={{ ...toolBtn, padding: '4px 6px' }} className="hover:!text-white">
+              <RotateCcw className="w-3 h-3" />
+            </button>
           </div>
         </div>
 
@@ -489,6 +431,32 @@ export default function TrainingAiAnalysis() {
             </div>
           </div>
 
+          {/* Scan mode tabs */}
+          <div className="flex flex-wrap justify-center gap-1 mb-3" style={{ maxWidth: 'min(640px, 92vw)', width: '100%' }}>
+            {SCAN_MODES.map(mode => {
+              const Icon  = mode.icon;
+              const active = scanMode === mode.id;
+              return (
+                <button key={mode.id} type="button"
+                  onClick={() => { setScanMode(mode.id); setTextInput(''); setPasswordResult(null); }}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: '4px',
+                    padding: '4px 10px', borderRadius: '999px',
+                    fontSize: '11px', fontWeight: 500,
+                    background: active ? 'rgba(255,122,69,0.3)' : 'rgba(20,20,22,0.78)',
+                    backdropFilter: 'blur(10px)',
+                    border: `1px solid ${active ? 'rgba(255,122,69,0.55)' : 'rgba(255,255,255,0.1)'}`,
+                    color: active ? '#fff' : '#c9c9cd',
+                    cursor: 'pointer', transition: 'all 0.15s ease',
+                  }}
+                  className="hover:!text-white">
+                  <Icon style={{ width: '11px', height: '11px', flexShrink: 0 }} />
+                  {mode.label}
+                </button>
+              );
+            })}
+          </div>
+
           {/* ── Chatbox ─────────────────────────────────────────────────────── */}
           <div style={{
             width: 'min(640px, 92vw)',
@@ -498,28 +466,55 @@ export default function TrainingAiAnalysis() {
             boxShadow: '0 20px 50px rgba(0,0,0,0.18)',
           }}>
 
-            {/* Unified text input — mode is auto-detected from content */}
-            <textarea
-              ref={textareaRef}
-              value={textInput}
-              onChange={e => setTextInput(e.target.value)}
-              onKeyDown={e => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                  e.preventDefault();
-                  if (scanMode === 'password') void handlePasswordCheck();
-                  else if (textInput.trim()) scanMode === 'default' ? handleSendMessage(textInput) : handleTextScan();
-                }
-              }}
-              placeholder="Ask anything, paste a link, email, phone number, or attach a file…"
-              rows={3}
-              style={{
-                width: '100%', background: 'transparent', border: 'none',
-                outline: 'none', color: '#fff', fontSize: '15px',
-                padding: '6px 2px 16px', resize: 'none',
-                fontFamily: 'inherit', lineHeight: 1.5,
-              }}
-              className="placeholder:text-[#8a8a8f]"
-            />
+            {/* Text textarea */}
+            {(currentMode.inputType === 'text' || currentMode.inputType === 'password') && (
+              <textarea
+                ref={textareaRef}
+                value={textInput}
+                onChange={e => setTextInput(e.target.value)}
+                onKeyDown={e => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    if (currentMode.inputType === 'password') void handlePasswordCheck();
+                    else if (textInput.trim()) scanMode === 'default' ? handleSendMessage(textInput) : handleTextScan();
+                  }
+                }}
+                placeholder={currentMode.placeholder}
+                rows={scanMode === 'default' ? 2 : 4}
+                style={{
+                  width: '100%', background: 'transparent', border: 'none',
+                  outline: 'none', color: '#fff', fontSize: '15px',
+                  padding: '6px 2px 16px', resize: 'none',
+                  fontFamily: 'inherit', lineHeight: 1.5,
+                }}
+                className="placeholder:text-[#8a8a8f]"
+              />
+            )}
+
+            {/* File drop zone */}
+            {currentMode.inputType === 'file' && (
+              <div
+                onClick={() => fileInputRef.current?.click()}
+                style={{
+                  cursor: 'pointer', padding: '20px', textAlign: 'center',
+                  borderRadius: '14px', border: '1.5px dashed rgba(255,255,255,0.12)',
+                  marginBottom: '14px', color: '#8a8a8f', fontSize: '14px',
+                  transition: 'border-color 0.2s, color 0.2s',
+                }}
+                className="hover:!border-white/30 hover:!text-white/70"
+              >
+                <Camera style={{ width: '22px', height: '22px', margin: '0 auto 8px', opacity: 0.45 }} />
+                <p>{file ? <span style={{ color: '#fff' }}>{file.name}</span> : currentMode.placeholder}</p>
+                {file && <p style={{ fontSize: '12px', marginTop: '4px', color: '#c9c9cd' }}>{cost.formatted} / scan</p>}
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  className="hidden"
+                  accept={currentMode.accept}
+                  onChange={e => { const f = e.target.files?.[0]; if (f) prepareFile(f); }}
+                />
+              </div>
+            )}
 
             {/* Tool icon row */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
@@ -532,30 +527,32 @@ export default function TrainingAiAnalysis() {
                 <Paperclip style={{ width: '16px', height: '16px' }} />
               </label>
 
-              {/* Web search */}
-              <button type="button" title="Web search via AI" style={toolBtn}
+              {/* Web search toggle */}
+              <button type="button" title={webSearch ? 'Web search on' : 'Web search off'}
+                style={{
+                  ...toolBtn,
+                  color: webSearch ? '#4da3ff' : '#c9c9cd',
+                  background: webSearch ? 'rgba(77,163,255,0.15)' : 'transparent',
+                }}
                 className="hover:!text-white hover:!bg-[rgba(255,255,255,0.06)]"
-                onClick={() => { if (textInput.trim()) handleSendMessage(`Search the web and summarize: ${textInput}`); }}>
+                onClick={() => setWebSearch(w => !w)}>
                 <Globe style={{ width: '16px', height: '16px' }} />
-              </button>
-
-              {/* Settings */}
-              <button type="button" title="Settings" style={{
-                ...toolBtn,
-                color: settingsOpen ? '#4da3ff' : '#c9c9cd',
-                background: settingsOpen ? 'rgba(77,163,255,0.12)' : 'transparent',
-              }}
-                className="hover:!text-white hover:!bg-[rgba(255,255,255,0.06)]"
-                onClick={() => setSettingsOpen(true)}>
-                <Settings style={{ width: '16px', height: '16px' }} />
               </button>
 
               {/* Separator */}
               <div style={{ width: '1px', height: '18px', background: '#3a3a3d', flexShrink: 0 }} />
+
+              {/* Project / folder */}
+              <button type="button" title="Project" style={toolBtn}
+                className="hover:!text-white hover:!bg-[rgba(255,255,255,0.06)]"
+                onClick={() => toast('No project selected.')}>
+                <Folder style={{ width: '16px', height: '16px' }} />
+              </button>
+
               <div style={{ flex: 1 }} />
 
               {/* File scan trigger */}
-              {file && status === 'ready' && (
+              {currentMode.inputType === 'file' && file && status === 'ready' && (
                 <button type="button" onClick={handlePrimaryScanAction}
                   disabled={isProcessing || preparingAuthorizedScan}
                   style={{
@@ -574,7 +571,7 @@ export default function TrainingAiAnalysis() {
               )}
 
               {/* Password check trigger */}
-              {scanMode === 'password' && (
+              {currentMode.inputType === 'password' && (
                 <button type="button" onClick={handlePasswordCheck}
                   disabled={!textInput.trim() || checkingPassword}
                   style={{
@@ -593,8 +590,8 @@ export default function TrainingAiAnalysis() {
                 </button>
               )}
 
-              {/* Mic / Send (always visible when no file attached and not password mode) */}
-              {!file && scanMode !== 'password' && (
+              {/* Mic / Send for text modes */}
+              {currentMode.inputType === 'text' && (
                 <button type="button"
                   onClick={() => textInput.trim()
                     ? (scanMode === 'default' ? handleSendMessage(textInput) : handleTextScan())
@@ -621,8 +618,8 @@ export default function TrainingAiAnalysis() {
             </div>
           </div>
 
-          {/* File chip — shown whenever a file is attached */}
-          {file && (
+          {/* File chip (shown outside chatbox when a file is attached in text modes) */}
+          {file && currentMode.inputType !== 'file' && (
             <div className="flex items-center gap-2 mt-2"
               style={{ background: 'rgba(28,28,30,0.85)', backdropFilter: 'blur(8px)', borderRadius: '999px', padding: '6px 14px', border: '1px solid rgba(255,255,255,0.1)' }}>
               <Paperclip style={{ width: '12px', height: '12px', color: '#8a8a8f' }} />
@@ -702,123 +699,81 @@ export default function TrainingAiAnalysis() {
         </main>
       </div>
 
-      {/* ── Settings modal ───────────────────────────────────────────────────── */}
-      <Dialog open={settingsOpen} onOpenChange={setSettingsOpen}>
-        <DialogContent style={{ background: '#1c1c1e', borderRadius: '18px', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', maxWidth: '380px', boxShadow: '0 30px 60px rgba(0,0,0,0.6)', padding: '24px' }}>
-          <DialogHeader>
-            <DialogTitle style={{ color: '#fff', fontSize: '16px', fontWeight: 600 }}>Settings</DialogTitle>
-            <DialogDescription style={{ color: '#8a8a8f', fontSize: '13px' }}>Configure your AI scanner preferences</DialogDescription>
-          </DialogHeader>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '12px 0' }}>
-            {(Object.entries(settings) as [keyof typeof settings, boolean][]).map(([key, val]) => {
-              const labels: Record<keyof typeof settings, string> = {
-                autoAnalyze:   'Auto-analyze on paste',
-                saveHistory:   'Save scan history locally',
-                notifications: 'Browser notifications',
-                compactMode:   'Compact message view',
-              };
-              return (
-                <button key={key} type="button"
-                  onClick={() => setSettings(s => ({ ...s, [key]: !s[key] }))}
-                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '11px 16px', borderRadius: '10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', color: '#e5e5e7', fontSize: '14px', cursor: 'pointer', textAlign: 'left' }}
-                  className="hover:!bg-[rgba(255,255,255,0.09)] transition">
-                  <span>{labels[key]}</span>
-                  {val
-                    ? <CheckSquare style={{ width: '18px', height: '18px', color: '#ff7a45', flexShrink: 0 }} />
-                    : <Square style={{ width: '18px', height: '18px', color: '#5a5a5e', flexShrink: 0 }} />}
-                </button>
-              );
-            })}
-          </div>
-          <DialogFooter>
-            <Button variant="ghost" onClick={() => setSettingsOpen(false)} style={{ color: '#8a8a8f' }}>Done</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-
       {/* ── Paywall dialog ───────────────────────────────────────────────────── */}
       <Dialog open={paywallOpen} onOpenChange={setPaywallOpen}>
-        <DialogContent className="dialog-white-card max-h-[90svh] overflow-y-auto max-w-[380px] p-6">
-          {/* Header — lock icon centered, title, subtitle */}
-          <DialogHeader className="items-center text-center space-y-3 mb-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 text-gray-500">
-              <Lock className="h-5 w-5" />
-            </div>
-            <div>
-              <DialogTitle className="text-[18px] font-bold text-gray-900">Access AI Scanner</DialogTitle>
-              <DialogDescription className="text-[14px] text-gray-500 mt-1">Choose how you'd like to start scanning.</DialogDescription>
-            </div>
-          </DialogHeader>
-
-          {/* Option cards */}
-          <div className="space-y-3">
+        <DialogContent className="max-h-[90svh] overflow-y-auto border border-border/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(250,247,244,0.98))] p-0 shadow-[0_28px_80px_rgba(15,23,42,0.24)] sm:max-w-md">
+          <div className="border-b border-border/60 bg-[radial-gradient(circle_at_top,rgba(217,108,74,0.12),transparent_62%)] px-5 py-5">
+            <DialogHeader className="space-y-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#d96c4a]/15 bg-[#d96c4a]/10 text-[#b75539]">
+                <Lock className="h-5 w-5" />
+              </div>
+              <div>
+                <DialogTitle className="text-xl font-semibold text-foreground">Access AI Scanner</DialogTitle>
+                <DialogDescription className="text-sm text-muted-foreground mt-1">Choose how you'd like to start scanning.</DialogDescription>
+              </div>
+            </DialogHeader>
+          </div>
+          <div className="space-y-3 px-4 py-5">
             {user ? (
-              <div className="dialog-option-card">
+              <div className="rounded-2xl border p-4">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0">
+                  <div className="w-9 h-9 rounded-xl bg-emerald-500/10 flex items-center justify-center">
                     <BadgeCheck className="w-4 h-4 text-emerald-600" />
                   </div>
                   <div>
-                    <p className="text-[15px] font-semibold text-gray-900">Refresh access</p>
-                    <p className="text-[13px] text-gray-500">Already subscribed? Re-verify your account.</p>
+                    <p className="text-sm font-medium">Refresh access</p>
+                    <p className="text-xs text-muted-foreground">Already subscribed? Re-verify your account.</p>
                   </div>
                 </div>
-                <Button className="w-full h-9 text-white text-[13px] font-semibold rounded-lg" style={{ background: '#d96c4a' }}
+                <Button variant="heroPrimary" className="w-full text-white h-10"
                   onClick={() => { void handleRefreshAccess(); setPaywallOpen(false); }}>
                   Refresh & Unlock
                 </Button>
               </div>
             ) : (
-              <div className="dialog-option-card">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
-                    <LogIn className="w-4 h-4 text-gray-600" />
-                  </div>
-                  <div>
-                    <p className="text-[15px] font-semibold text-gray-900">Existing subscriber</p>
-                    <p className="text-[13px] text-gray-500">Log in to verify your ScamShield subscription.</p>
-                  </div>
-                </div>
-                <Button asChild className="w-full h-9 text-white text-[13px] font-semibold rounded-lg" style={{ background: '#d96c4a' }}>
+              <div className="rounded-2xl border p-4">
+                <p className="text-sm font-medium mb-1">Existing subscriber</p>
+                <p className="text-xs text-muted-foreground mb-3">Log in to verify your ScamShield subscription.</p>
+                <Button asChild variant="heroPrimary" className="w-full text-white h-10">
                   <Link to={loginPath} onClick={() => setPaywallOpen(false)}>Log in to scan</Link>
                 </Button>
               </div>
             )}
-            <div className="dialog-option-card">
+            <div className="rounded-2xl border p-4">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-8 h-8 rounded-full bg-orange-50 flex items-center justify-center flex-shrink-0">
-                  <Sparkles className="w-4 h-4 text-[#d96c4a]" />
+                <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <Sparkles className="w-4 h-4 text-primary" />
                 </div>
                 <div>
-                  <p className="text-[15px] font-semibold text-gray-900">ScamShield subscription</p>
-                  <p className="text-[13px] text-gray-500">Unlimited scans + family protection.</p>
+                  <p className="text-sm font-medium">ScamShield subscription</p>
+                  <p className="text-xs text-muted-foreground">Unlimited scans + family protection.</p>
                 </div>
               </div>
-              <Button className="w-full h-9 text-white text-[13px] font-semibold rounded-lg" style={{ background: '#d96c4a' }}
+              <Button variant="heroPrimary" className="w-full text-white h-10"
                 onClick={() => void handleStartSubscription()} disabled={subscriptionCheckoutLoading}>
                 {subscriptionCheckoutLoading
                   ? <><Loader2 className="w-4 h-4 animate-spin" /> Starting…</>
                   : "Start Subscription"}
               </Button>
             </div>
-            <div className="dialog-option-card" style={{ borderColor: '#d96c4a33' }}>
+            <div className="rounded-2xl border p-4">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-8 h-8 rounded-full bg-orange-50 flex items-center justify-center flex-shrink-0">
-                  <CreditCard className="w-4 h-4 text-[#d96c4a]" />
+                <div className="w-9 h-9 rounded-xl bg-[#d96c4a]/10 flex items-center justify-center">
+                  <CreditCard className="w-4 h-4 text-[#b75539]" />
                 </div>
                 <div>
-                  <p className="text-[15px] font-semibold text-gray-900">One-time scan</p>
-                  <p className="text-[13px] text-gray-500">${cost.perUploadCharge.toFixed(2)} per file or image.</p>
+                  <p className="text-sm font-medium">One-time scan</p>
+                  <p className="text-xs text-muted-foreground">${cost.perUploadCharge.toFixed(2)} per file or image.</p>
                 </div>
               </div>
-              <Button className="w-full h-9 text-[13px] font-semibold rounded-lg" style={{ background: 'transparent', border: '1.5px solid #d96c4a', color: '#d96c4a' }}
-                onClick={handlePayPerScan}>
+              <Button variant="heroPrimary" className="w-full text-white h-10" onClick={handlePayPerScan}>
                 Pay ${cost.perUploadCharge.toFixed(2)} per scan
               </Button>
             </div>
           </div>
-
-          <p className="text-center text-[12px] text-gray-400 mt-4">Secure payments via Stripe · Cancel anytime</p>
+          <DialogFooter className="border-t px-5 py-3">
+            <p className="text-center text-xs text-muted-foreground w-full">Secure payments via Stripe · Cancel anytime</p>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
 

@@ -84,6 +84,12 @@ const menuItems: MenuItem[] = [
   { title: "Moderation", icon: MessageSquare, children: [
     { title: "Comments", href: "/admin/moderation", icon: MessageSquare },
   ]},
+  { title: "Forms", icon: ClipboardList, children: [
+    { title: "All Forms", href: "/admin/forms", icon: FileText },
+  ]},
+  { title: "Moderation", icon: MessageSquare, children: [
+    { title: "Comments", href: "/admin/moderation", icon: MessageSquare },
+  ]},
   { title: "Testing", icon: TestTube, children: [
     { title: "System Health",    href: "/admin/testing",          icon: HeartHandshake },
     { title: "Launch Checklist", href: "/admin/testing/checklist",icon: Rocket         },
