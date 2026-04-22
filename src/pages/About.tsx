@@ -238,16 +238,6 @@ function About() {
       </section>
       </MeshBackground>
 
-      {/* Mission photography break */}
-      <div className="container mx-auto max-w-5xl px-4">
-        <SectionImage
-          src={communityWorkshopReal}
-          alt="Community members at an InVision Network workshop"
-          variant="wide"
-          caption="Real workshops. Real families. Real protection — across Ohio."
-        />
-      </div>
-
       <SectionDivider variant="wave" color="muted" />
 
       {/* Timeline */}
