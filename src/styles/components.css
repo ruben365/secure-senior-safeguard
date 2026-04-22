@@ -267,8 +267,8 @@
 /* Scroll Reveal Base State */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(20px);
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .reveal.visible {
@@ -398,12 +398,12 @@ a[role="button"]:active {
 }
 
 .card-enhanced img {
-  transition: transform 0.5s ease-out;
+  transition: transform 0.3s ease-out;
   border-radius: 1rem;
 }
 
 .card-enhanced:hover img {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .card-enhanced button {
@@ -425,10 +425,10 @@ a[role="button"]:active {
 /* Scroll-triggered animations */
 .animate-on-scroll {
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(24px);
   transition:
-    opacity 0.6s ease-out,
-    transform 0.6s ease-out;
+    opacity 0.4s ease-out,
+    transform 0.4s ease-out;
 }
 
 .animate-on-scroll.visible {
@@ -495,7 +495,7 @@ a[role="button"]:active {
 }
 
 .image-zoom-container:hover .image-zoom {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 

@@ -379,7 +379,7 @@
               box-shadow 240ms cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 .gx-fab:hover {
-  transform: scale(1.04) translateY(-1px);
+  transform: scale(1.02) translateY(-1px);
   box-shadow:
     0 0 0 5px rgba(122, 46, 42, 0.16),
     0 12px 28px -8px rgba(122, 46, 42, 0.48),
