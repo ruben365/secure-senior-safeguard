@@ -73,12 +73,7 @@ h3:not(.hero-home h3):not(.hero-business h3):not(.hero-workshops h3):not(footer 
   backdrop-filter: blur(10px) saturate(160%) contrast(105%);
 }
 
-/* ── 6. Crisp focus rings ─────────────────────────────────────────── */
-*:focus-visible:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) {
-  outline: 2px solid rgba(122, 46, 42, 0.7);
-  outline-offset: 2px;
-  border-radius: inherit;
-}
+/* ── 6. Crisp focus rings — handled by polish.css with brand orange ── */
 
 /* ── 7. Crisp dividers ────────────────────────────────────────────── */
 hr:not(.hero-home hr):not(.hero-business hr):not(.hero-workshops hr):not(footer hr) {

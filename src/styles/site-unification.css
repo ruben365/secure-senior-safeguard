@@ -159,7 +159,8 @@ body {
 }
 
 /* ── All images in section content get soft rounded corners ──────── */
-section img:not([aria-hidden]):not([class*="logo"]):not([class*="brand"]):not([class*="avatar"]) {
+/* Excludes absolute/fixed-position images (hero backdrops, overlays) */
+section img:not([aria-hidden]):not([class*="logo"]):not([class*="brand"]):not([class*="avatar"]):not([class*="absolute"]):not([class*="fixed"]):not([class*="object-cover"]) {
   border-radius: 12px;
 }
 

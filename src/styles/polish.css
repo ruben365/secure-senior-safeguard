@@ -166,7 +166,7 @@ main a:not([class*="btn"]):not([class*="button"]):not(.no-underline-anim):not([r
 *:focus-visible {
   outline: 2px solid #d96c4a;
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: inherit;
   transition: outline-offset 120ms var(--ease-out-std);
 }
 
@@ -372,6 +372,13 @@ a[href^="#"] {
 [role="dialog"] button {
   min-height: 34px;
   font-size: 13px;
+}
+
+/* Restore WCAG touch target on mobile (overrides the compact 34px above) */
+@media (max-width: 768px) {
+  [role="dialog"] button {
+    min-height: 44px;
+  }
 }
 
 /* ── Glass panel text readability ──────────────────────────────

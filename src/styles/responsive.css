@@ -50,7 +50,7 @@
   }
 
   /* Prevent horizontal overflow */
-  body { overflow-x: hidden; }
+  html, body { overflow-x: hidden; }
 
   .container {
     padding-left: 1rem !important;

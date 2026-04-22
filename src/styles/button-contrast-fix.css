@@ -47,22 +47,7 @@ a[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-wor
   color: #c45e3b;
 }
 
-/* ── 3. Outline / ghost / shadcn outline buttons ──────────────────── */
-button[class*="variant-outline"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
-button[class*="border-input"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
-[role="button"][class*="bg-background"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
-  border-width: 1.5px !important;
-  border-color: rgba(15, 23, 42, 0.22) !important;
-  color: #1e293b !important;
-}
-
-button[class*="variant-outline"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):hover,
-button[class*="border-input"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):hover {
-  border-color: rgba(217, 108, 74, 0.55) !important;
-  color: #c45e3b !important;
-}
-
-/* ── 4. Light-tinted Tailwind buttons (slate-50, gray-50, etc.) ───── */
+/* ── 3. Light-tinted Tailwind buttons (slate-50, gray-50, etc.) ───── */
 button[class*="bg-slate-50"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
 button[class*="bg-slate-100"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
 button[class*="bg-gray-50"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
@@ -118,20 +103,21 @@ button[aria-disabled="true"]:not(.hero-home *):not(.hero-business *):not(.hero-w
 
 /* ── Primary / orange buttons: warm glass border + backdrop blur ── */
 /* Keeps the opaque gradient fill, adds an amber glow edge + blur     */
-button[class*="bg-primary"]:not([data-page="not-found"] *):not(nav *):not(:disabled),
-a[class*="bg-primary"]:not([data-page="not-found"] *):not(nav *) {
+button[class*="bg-primary"]:not([data-page="not-found"] *):not(nav *):not(.admin-no-animations *):not(:disabled),
+a[class*="bg-primary"]:not([data-page="not-found"] *):not(nav *):not(.admin-no-animations *) {
   border: 1.5px solid rgba(255, 200, 150, 0.3) !important;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
 
 /* ── Outline / secondary buttons: dark frosted glass ── */
-/* Converts the light-mode outline treatment to dark glass + white text */
-button[class*="variant-outline"]:not([data-page="not-found"] *):not(nav *),
-button[class*="border-input"]:not([data-page="not-found"] *):not(nav *),
-[role="button"][class*="bg-background"]:not([data-page="not-found"] *):not(nav *),
-button[class*="bg-secondary"]:not([data-page="not-found"] *):not(nav *),
-a[class*="variant-outline"]:not([data-page="not-found"] *):not(nav *) {
+/* Converts the light-mode outline treatment to dark glass + white text.
+   Excluded from admin shell (.admin-no-animations) where blue UI is canonical. */
+button[class*="variant-outline"]:not([data-page="not-found"] *):not(nav *):not(.admin-no-animations *),
+button[class*="border-input"]:not([data-page="not-found"] *):not(nav *):not(.admin-no-animations *),
+[role="button"][class*="bg-background"]:not([data-page="not-found"] *):not(nav *):not(.admin-no-animations *),
+button[class*="bg-secondary"]:not([data-page="not-found"] *):not(nav *):not(.admin-no-animations *),
+a[class*="variant-outline"]:not([data-page="not-found"] *):not(nav *):not(.admin-no-animations *) {
   background: rgba(0, 0, 0, 0.25) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
@@ -139,18 +125,18 @@ a[class*="variant-outline"]:not([data-page="not-found"] *):not(nav *) {
   color: white !important;
 }
 
-button[class*="variant-outline"]:not([data-page="not-found"] *):not(nav *):hover,
-button[class*="border-input"]:not([data-page="not-found"] *):not(nav *):hover,
-button[class*="bg-secondary"]:not([data-page="not-found"] *):not(nav *):hover,
-a[class*="variant-outline"]:not([data-page="not-found"] *):not(nav *):hover {
+button[class*="variant-outline"]:not([data-page="not-found"] *):not(nav *):not(.admin-no-animations *):hover,
+button[class*="border-input"]:not([data-page="not-found"] *):not(nav *):not(.admin-no-animations *):hover,
+button[class*="bg-secondary"]:not([data-page="not-found"] *):not(nav *):not(.admin-no-animations *):hover,
+a[class*="variant-outline"]:not([data-page="not-found"] *):not(nav *):not(.admin-no-animations *):hover {
   background: rgba(0, 0, 0, 0.38) !important;
   border-color: rgba(255, 255, 255, 0.4) !important;
   color: white !important;
 }
 
 /* ── Ghost buttons: glass tint on hover ── */
-button[class*="ghost"]:not([data-page="not-found"] *):not(nav *):hover,
-button[class*="variant-ghost"]:not([data-page="not-found"] *):not(nav *):hover {
+button[class*="ghost"]:not([data-page="not-found"] *):not(nav *):not(.admin-no-animations *):hover,
+button[class*="variant-ghost"]:not([data-page="not-found"] *):not(nav *):not(.admin-no-animations *):hover {
   background: rgba(0, 0, 0, 0.2) !important;
   backdrop-filter: blur(8px) !important;
   -webkit-backdrop-filter: blur(8px) !important;

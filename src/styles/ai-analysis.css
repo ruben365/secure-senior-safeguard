@@ -18,7 +18,7 @@
     #a8b3e8 88%,
     #9fb5ec 100%
   );
-  background-attachment: fixed;
+  background-attachment: fixed; /* falls back to scroll on mobile via @media below */
   min-height: 100vh;
 }
 
@@ -151,6 +151,13 @@
 .ai-analysis-page .aia-notice--filechip button:hover {
   background-color: rgba(239, 68, 68, 0.2) !important;
   color: #fecaca !important;
+}
+
+/* ─── Mobile: disable fixed background-attachment (broken on iOS/Chrome) ── */
+@media (max-width: 768px) {
+  .ai-analysis-page {
+    background-attachment: scroll;
+  }
 }
 
 /* ─── Privacy notice elevation ───────────────────────────────────── */

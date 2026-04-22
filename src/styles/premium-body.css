@@ -62,7 +62,11 @@ main .bg-gradient-to-br:hover {
 }
 
 /* ── Section dividers — premium gradient line ── */
-.h-px {
+/* Scoped to hr elements and explicit divider roles to avoid affecting height utilities */
+hr.h-px,
+[role="separator"].h-px,
+.divider.h-px,
+section .h-px:not(img):not(button):not(a):not(input) {
   background: linear-gradient(90deg, transparent 5%, hsl(var(--border)) 50%, transparent 95%) !important;
 }
 
