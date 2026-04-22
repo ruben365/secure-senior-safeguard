@@ -521,13 +521,6 @@ function Business() {
         {/* Hero — Dark cinematic theme */}
         <HeroBusiness onStrategyCall={openStrategyCall} />
 
-        {/* Answer summary — what we build for businesses */}
-        <AnswerSummary
-          summary="InVision Network builds AI automation for Ohio businesses — AI receptionists that answer calls 24/7, automated follow-ups that nurture leads, and professional websites backed by maintenance plans. Serving Kettering, Dayton, and the Miami Valley."
-          ctaHref="/contact"
-          ctaLabel="Schedule a free strategy call"
-          className="py-8"
-        />
 
         {/* ═══════════════════ SERVICES ═══════════════════ */}
         <section id="services" className="py-16 md:py-24 relative overflow-hidden">
