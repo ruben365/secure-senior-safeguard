@@ -278,6 +278,7 @@ function PublicRoutes() {
         <Route path="/status" element={<PageTransition variant="fade"><Status /></PageTransition>} />
         <Route path="/free-scan" element={<PageTransition variant="fade"><FreeSecurityScan /></PageTransition>} />
         <Route path="/security-check" element={<Navigate to="/free-scan" replace />} />
+        <Route path="/security" element={<Navigate to="/status" replace />} />
 
         {/* Admin routes — auth enforced by AdminShell component (checks Supabase session + admin role) */}
         <Route path="/admin/*" element={<AdminShell />}>

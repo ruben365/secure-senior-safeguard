@@ -4,10 +4,10 @@
    ═══════════════════════════════════════════════════════════════════ */
 
 /* ── 1. White / transparent buttons get a visible border + ink ────── */
-button[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]),
-a[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]),
-button[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]),
-a[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]) {
+button[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]):not(.gx-dialog-close),
+a[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]):not(.gx-dialog-close),
+button[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]):not(.gx-dialog-close),
+a[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]):not(.gx-dialog-close) {
   border: 1.5px solid rgba(15, 23, 42, 0.18) !important;
   color: #1e293b !important;
   box-shadow:
@@ -21,10 +21,10 @@ a[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-wor
 }
 
 /* Hover: terracotta tint borrowed from the brand palette */
-button[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]):hover,
-a[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]):hover,
-button[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]):hover,
-a[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]):hover {
+button[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]):not(.gx-dialog-close):hover,
+a[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]):not(.gx-dialog-close):hover,
+button[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]):not(.gx-dialog-close):hover,
+a[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]):not(.gx-dialog-close):hover {
   border-color: rgba(217, 108, 74, 0.55) !important;
   color: #c45e3b !important;
 }

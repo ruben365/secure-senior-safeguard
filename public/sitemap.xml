@@ -327,13 +327,7 @@
     (or switch to a server-rendered/dynamic sitemap source).
   -->
 
-  <!-- Security & Status -->
-  <url>
-    <loc>https://www.invisionnetwork.org/security</loc>
-    <lastmod>2026-04-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
+  <!-- Status -->
   <url>
     <loc>https://www.invisionnetwork.org/status</loc>
     <lastmod>2026-04-20</lastmod>

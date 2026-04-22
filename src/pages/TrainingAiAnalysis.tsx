@@ -151,7 +151,7 @@ export default function TrainingAiAnalysis() {
     if (/^https?:\/\//i.test(t)) return false;
     if (/^[+\d\s\-()]{7,15}$/.test(t)) return false;
     if (/^@/.test(t)) return false;
-    if (/\.[a-z]{2,}(\/|$)/i.test(t)) return false;
+    if (/^[a-z0-9][a-z0-9.\-]*\.[a-z]{2,}(\/[^\s]*)?$/i.test(t)) return false;
     return true;
   }, [textInput]);
 
