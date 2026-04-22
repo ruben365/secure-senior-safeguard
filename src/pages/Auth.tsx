@@ -60,6 +60,7 @@ function AuthOrbs() {
       <span aria-hidden="true" className="ap-orb ap-orb--pink" />
       <span aria-hidden="true" className="ap-orb ap-orb--blue" />
       <div aria-hidden="true" className="ap-curves" />
+      <div aria-hidden="true" className="ap-curves ap-curves--outer" />
     </>
   );
 }
@@ -648,41 +649,53 @@ function Auth() {
       <div className="ap-card">
         {/* ── LEFT COLUMN ── */}
         <div className="ap-left">
-          {/* Flipping badge */}
-          <div className="ap-badge-flip">
-            <div className="ap-badge-inner">
-              <div className="ap-badge-face ap-badge-front">
-                <ShieldCheck style={{ width: 14, height: 14 }} />
-                24/7 Support
-              </div>
-              <div className="ap-badge-face ap-badge-back">
-                Invision.
+          {/* Badge with orbiting rings + flip */}
+          <div className="ap-badge-wrap">
+            <div className="ap-badge-rings" aria-hidden="true">
+              <div className="ap-badge-arc ap-badge-arc--a" />
+              <div className="ap-badge-arc ap-badge-arc--b" />
+              <div className="ap-badge-arc ap-badge-arc--c" />
+              <div className="ap-orbit-dot" />
+            </div>
+            <div className="ap-badge-flip">
+              <div className="ap-badge-inner">
+                <div className="ap-badge-face ap-badge-front">
+                  <ShieldCheck style={{ width: 13, height: 13 }} />
+                  24/7 Support
+                </div>
+                <div className="ap-badge-face ap-badge-back">
+                  Invision.
+                </div>
               </div>
             </div>
           </div>
 
           {/* Parallelogram hero frame */}
-          <div className="ap-para">
-            <div className="ap-para-grid" />
-            <div className="ap-para-shimmer" />
-            <div className="ap-para-content">
-              <img
-                src={invisionLogo}
-                alt="InVision Network"
-                className="ap-para-logo"
-                loading="eager"
-                decoding="sync"
-                width={44}
-                height={44}
-              />
-              <p className="ap-para-headline">Protect What Matters</p>
-              <p className="ap-para-sub">InVision Network · EST. 2021</p>
+          <div className="ap-para-wrap">
+            <div className="ap-hero-outline" aria-hidden="true" />
+            <div className="ap-para">
+              <div className="ap-para-grid" />
+              <div className="ap-para-shimmer" />
+              <div className="ap-para-content">
+                <img
+                  src={invisionLogo}
+                  alt="InVision Network"
+                  className="ap-para-logo"
+                  loading="eager"
+                  decoding="sync"
+                  width={44}
+                  height={44}
+                />
+                <p className="ap-para-headline">Protect What Matters</p>
+                <p className="ap-para-sub">InVision Network · EST. 2021</p>
+              </div>
             </div>
           </div>
 
           {/* Testimonials */}
           <div className="ap-testimonials">
             <div className="ap-testi">
+              <div className="ap-testi-avatar" aria-hidden="true">MT</div>
               <div className="ap-testi-stars">★★★★★</div>
               <p className="ap-testi-text">
                 "InVision gave our family real peace of mind. The 24/7 monitoring is incredible."
@@ -690,6 +703,7 @@ function Auth() {
               <p className="ap-testi-name">— Margaret T., Client since 2022</p>
             </div>
             <div className="ap-testi">
+              <div className="ap-testi-avatar" aria-hidden="true">JR</div>
               <div className="ap-testi-stars">★★★★★</div>
               <p className="ap-testi-text">
                 "The team is always responsive. Best senior care network I've worked with."
@@ -705,10 +719,14 @@ function Auth() {
           <Link to="/" className="ap-brand">
             Invision<span className="ap-brand-dot">.</span>
           </Link>
+          <div className="ap-brand-bar" aria-hidden="true" />
+          <p className="ap-brand-tag">Network · Creative Community</p>
 
           {/* Heading */}
           <h1 className="ap-headline">Welcome</h1>
-          <p className="ap-sub">Sign in or create an account to continue.</p>
+          <p className="ap-sub">
+            Sign in to <span className="ap-sub-gold">Invision Network</span>
+          </p>
 
           {/* SSO buttons */}
           <div className="ap-sso">
@@ -763,7 +781,7 @@ function Auth() {
               {/* Email */}
               <div className="ap-field">
                 <label htmlFor="login-email" className="ap-label">Email Address</label>
-                <div className="ap-input-wrap">
+                <div className={`ap-input-wrap${emailError ? " is-error" : ""}`}>
                   <Mail className="ap-input-icon" aria-hidden="true" />
                   <input
                     id="login-email"
@@ -774,7 +792,7 @@ function Auth() {
                     disabled={isLoading}
                     autoComplete="email"
                     placeholder="you@example.com"
-                    className={`ap-input${emailError ? " is-error" : ""}`}
+                    className="ap-input"
                   />
                 </div>
                 {emailError && <p className="ap-error-msg">{emailError}</p>}
@@ -783,7 +801,7 @@ function Auth() {
               {/* Password */}
               <div className="ap-field">
                 <label htmlFor="login-password" className="ap-label">Password</label>
-                <div className="ap-input-wrap">
+                <div className={`ap-input-wrap${passwordError ? " is-error" : ""}`}>
                   <Lock className="ap-input-icon" aria-hidden="true" />
                   <input
                     id="login-password"
@@ -795,7 +813,7 @@ function Auth() {
                     placeholder="••••••••"
                     autoComplete="current-password"
                     minLength={8}
-                    className={`ap-input with-toggle${passwordError ? " is-error" : ""}`}
+                    className="ap-input with-toggle"
                   />
                   <button
                     type="button"
@@ -831,21 +849,28 @@ function Auth() {
               </div>
 
               {/* Submit */}
-              <button type="submit" className="ap-btn" disabled={isLoading}>
-                {isLoading ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    Signing in…
-                  </>
-                ) : (
-                  <>
-                    Sign In
-                    <span className="ap-btn-arrow">
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </span>
-                  </>
-                )}
-              </button>
+              <div className="ap-btn-wrap">
+                <span className="ap-q ap-q--tl" aria-hidden="true" />
+                <span className="ap-q ap-q--tr" aria-hidden="true" />
+                <span className="ap-q ap-q--bl" aria-hidden="true" />
+                <span className="ap-q ap-q--br" aria-hidden="true" />
+                <button type="submit" className="ap-btn" disabled={isLoading}>
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Signing in…
+                    </>
+                  ) : (
+                    <>
+                      <span className="ap-btn-dot" aria-hidden="true" />
+                      Sign In
+                      <span className="ap-btn-arrow">
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </span>
+                    </>
+                  )}
+                </button>
+              </div>
 
               {/* Security footer */}
               <div className="ap-security">
@@ -862,31 +887,35 @@ function Auth() {
               <div className="ap-field-row">
                 <div>
                   <label htmlFor="firstName" className="ap-label">First Name</label>
-                  <input
-                    id="firstName"
-                    type="text"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    required
-                    disabled={isLoading}
-                    autoComplete="given-name"
-                    placeholder="Jane"
-                    className="ap-input no-icon"
-                  />
+                  <div className="ap-input-wrap">
+                    <input
+                      id="firstName"
+                      type="text"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      required
+                      disabled={isLoading}
+                      autoComplete="given-name"
+                      placeholder="Jane"
+                      className="ap-input no-icon"
+                    />
+                  </div>
                 </div>
                 <div>
                   <label htmlFor="lastName" className="ap-label">Last Name</label>
-                  <input
-                    id="lastName"
-                    type="text"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    required
-                    disabled={isLoading}
-                    autoComplete="family-name"
-                    placeholder="Smith"
-                    className="ap-input no-icon"
-                  />
+                  <div className="ap-input-wrap">
+                    <input
+                      id="lastName"
+                      type="text"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      required
+                      disabled={isLoading}
+                      autoComplete="family-name"
+                      placeholder="Smith"
+                      className="ap-input no-icon"
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -985,21 +1014,28 @@ function Auth() {
               </div>
 
               {/* Submit */}
-              <button type="submit" className="ap-btn" disabled={isLoading}>
-                {isLoading ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    Creating account…
-                  </>
-                ) : (
-                  <>
-                    Create Account
-                    <span className="ap-btn-arrow">
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </span>
-                  </>
-                )}
-              </button>
+              <div className="ap-btn-wrap">
+                <span className="ap-q ap-q--tl" aria-hidden="true" />
+                <span className="ap-q ap-q--tr" aria-hidden="true" />
+                <span className="ap-q ap-q--bl" aria-hidden="true" />
+                <span className="ap-q ap-q--br" aria-hidden="true" />
+                <button type="submit" className="ap-btn" disabled={isLoading}>
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Creating account…
+                    </>
+                  ) : (
+                    <>
+                      <span className="ap-btn-dot" aria-hidden="true" />
+                      Create Account
+                      <span className="ap-btn-arrow">
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </span>
+                    </>
+                  )}
+                </button>
+              </div>
 
               {/* Security footer */}
               <div className="ap-security">
