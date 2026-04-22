@@ -722,15 +722,6 @@ function LearnAndTrain() {
               </p>
             </div>
 
-            <div className="max-w-5xl mx-auto">
-              <SectionImage
-                src={communityTraining}
-                alt="Community training session in progress with engaged participants"
-                variant="wide"
-                caption="Live community training — small groups, real scenarios, lasting confidence."
-              />
-            </div>
-
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-14">
               {TRUST_PILLARS.map((item, index) => (
                 <div key={index} className="relative rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl overflow-hidden p-6 text-center shadow-sm hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/25 hover:-translate-y-2 transition-all duration-500 h-full">
