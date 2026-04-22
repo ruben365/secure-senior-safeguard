@@ -14,7 +14,7 @@ import { useCheckout } from "@/contexts/CheckoutContext";
 import { SITE } from "@/config/site";
 import { SCAMSHIELD_PLANS } from "@/config/products";
 import {
-  BadgeCheck, CreditCard, Home, Info, Minimize2,
+  BadgeCheck, CreditCard, Download, FileText, Home, Info, Minimize2,
   Moon, ShieldCheck, Sparkles, Sun, X, Lock,
   ShieldAlert, Loader2, Mic, KeyRound, Globe, StopCircle,
   Paperclip, Settings, Folder, RotateCcw, CheckSquare, Square,
@@ -144,12 +144,16 @@ export default function TrainingAiAnalysis() {
   // Auto-detect scan mode from current input
   const autoDetectedMode = useMemo(() => detectScanMode(textInput, file), [textInput, file]);
 
-  // Show password check UI for short inputs with no spaces
-  const looksLikePassword = useMemo(() =>
-    textInput.trim().length > 0 &&
-    textInput.trim().length <= 50 &&
-    !/\s/.test(textInput.trim()),
-  [textInput]);
+  // Show password check UI only for plausible passwords — not URLs, phone numbers, handles, or domain paths
+  const looksLikePassword = useMemo(() => {
+    const t = textInput.trim();
+    if (!t || t.length > 50 || /\s/.test(t)) return false;
+    if (/^https?:\/\//i.test(t)) return false;
+    if (/^[+\d\s\-()]{7,15}$/.test(t)) return false;
+    if (/^@/.test(t)) return false;
+    if (/\.[a-z]{2,}(\/|$)/i.test(t)) return false;
+    return true;
+  }, [textInput]);
 
   // — Keyboard shortcuts —
   useEffect(() => {
@@ -465,6 +469,32 @@ export default function TrainingAiAnalysis() {
             >
               <RotateCcw className="w-3 h-3" />
             </button>
+
+            {/* Export chat — only when there are messages */}
+            {messages.length > 0 && (
+              <>
+                <button
+                  type="button"
+                  title="Download chat as text"
+                  onClick={handleDownload}
+                  style={toolBtn}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+                  onMouseLeave={e => (e.currentTarget.style.color = '#c9c9cd')}
+                >
+                  <Download className="w-3 h-3" />
+                </button>
+                <button
+                  type="button"
+                  title="Save chat as PDF"
+                  onClick={handleSaveAsPdf}
+                  style={toolBtn}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+                  onMouseLeave={e => (e.currentTarget.style.color = '#c9c9cd')}
+                >
+                  <FileText className="w-3 h-3" />
+                </button>
+              </>
+            )}
 
             {/* Divider */}
             <div style={{ width: '1px', height: '14px', background: 'rgba(255,255,255,0.15)', margin: '0 2px', flexShrink: 0 }} />
