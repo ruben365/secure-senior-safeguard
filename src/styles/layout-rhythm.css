@@ -25,9 +25,14 @@
 }
 
 @media (min-width: 1024px) {
-  .sec-rhythm-sm { padding-top: 3.5rem;  padding-bottom: 3.5rem; }
-  .sec-rhythm-md { padding-top: 5rem;    padding-bottom: 5rem; }
-  .sec-rhythm-lg { padding-top: 6.5rem;  padding-bottom: 6.5rem; }
+  .sec-rhythm-sm { padding-top: 4rem;    padding-bottom: 4rem; }
+  .sec-rhythm-md { padding-top: 6rem;    padding-bottom: 6rem; }
+  .sec-rhythm-lg { padding-top: 8rem;    padding-bottom: 8rem; }
+}
+
+@media (min-width: 1280px) {
+  .sec-rhythm-md { padding-top: 7rem;    padding-bottom: 7rem; }
+  .sec-rhythm-lg { padding-top: 10rem;   padding-bottom: 10rem; }
 }
 
 /* ───── 2. Container disposition ───── */
@@ -214,8 +219,26 @@
 }
 .headline-tight {
   text-wrap: balance;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+}
+
+/* Display headlines — 64–96px desktop */
+.headline-display {
+  font-size: clamp(2.5rem, 6vw, 6rem);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+/* Section headings — 40–56px desktop */
+.headline-section {
+  font-size: clamp(1.75rem, 3.5vw, 3.5rem);
+  font-weight: 700;
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 
 /* ─── Heading-stack normalization (extends .head-rhythm) ──── */

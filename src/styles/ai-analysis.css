@@ -57,7 +57,7 @@
 .ai-analysis-page .aia-toolbar button:hover:not(:disabled),
 .ai-analysis-page .aia-toolbar a:hover {
   background-color: rgba(255, 255, 255, 0.18) !important;
-  transform: scale(1.04);
+  transform: scale(1.02);
 }
 
 .ai-analysis-page .aia-toolbar button:focus-visible,

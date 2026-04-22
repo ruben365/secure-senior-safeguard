@@ -105,10 +105,10 @@ html {
    We only add .reveal-on-scroll as a separate class for new components. */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translate3d(0, 24px, 0);
+  transform: translate3d(0, 20px, 0);
   transition:
-    opacity 650ms var(--ease-out-emph),
-    transform 650ms var(--ease-out-emph);
+    opacity 400ms var(--ease-out-emph),
+    transform 400ms var(--ease-out-emph);
   transition-delay: var(--reveal-delay, 0ms);
   will-change: opacity, transform;
 }
@@ -130,11 +130,11 @@ section[data-anim] > *:nth-child(6) { --reveal-delay: 400ms; }
 /* ── Image blur-to-sharp reveal ───────────────────────────────
    Any <img data-img-reveal> loads blurred then sharpens. */
 img[data-img-reveal] {
-  filter: blur(14px);
-  transform: scale(1.03);
+  filter: blur(8px);
+  transform: scale(1.01);
   transition:
-    filter 800ms var(--ease-out-emph),
-    transform 800ms var(--ease-out-emph);
+    filter 500ms var(--ease-out-emph),
+    transform 500ms var(--ease-out-emph);
 }
 
 img[data-img-reveal].is-visible,

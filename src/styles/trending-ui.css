@@ -228,7 +228,7 @@
 }
 
 .micro-scale:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
 .micro-scale:active {
@@ -331,7 +331,7 @@
 }
 
 .hover-img-zoom:hover img {
-  transform: scale(1.08);
+  transform: scale(1.04);
 }
 
 /* ===== 3D VISUALIZATIONS & SHADOWS ===== */
@@ -1485,14 +1485,14 @@
 .premium-3d-card {
   transform-style: preserve-3d;
   transition:
-    transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
-    box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    transform 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   will-change: transform;
 }
 
 .premium-3d-card:hover {
   transform: perspective(1000px) rotateX(4deg) rotateY(-4deg) translateZ(20px)
-    scale(1.03);
+    scale(1.02);
   box-shadow:
     0 25px 50px -12px rgba(0, 0, 0, 0.15),
     0 12px 24px -8px rgba(0, 0, 0, 0.1),
@@ -1590,7 +1590,7 @@
     0 8px 16px hsl(220 20% 20% / 0.05),
     0 16px 32px hsl(220 20% 20% / 0.06),
     0 32px 64px hsl(220 20% 20% / 0.04);
-  transition: box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: box-shadow 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .premium-shadow-depth:hover {
