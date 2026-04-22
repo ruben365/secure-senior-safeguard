@@ -16,10 +16,10 @@ import { SITE } from "@/config/site";
 import { SCAMSHIELD_PLANS } from "@/config/products";
 import {
   BadgeCheck, CreditCard, Download, LogIn, Moon, ShieldCheck,
-  Sparkles, Sun, Trash2, X, FileDown, Lock, ShieldAlert, Camera,
+  Sparkles, Sun, Trash2, X, FileDown, Lock, ShieldAlert,
   Wallet, Loader2, Mail, ExternalLink, Phone, Image as ImageIcon,
   Mic, MessageCircle, FileText as FileTextIcon, QrCode, UserCircle,
-  KeyRound, Settings, Globe, FolderOpen, ChevronDown, CheckSquare,
+  KeyRound, Settings, Globe, ChevronDown, CheckSquare,
   Square, StopCircle, Paperclip,
 } from "lucide-react";
 import {
@@ -74,6 +74,26 @@ const MODE_PROMPTS: Partial<Record<ScanMode, string>> = {
 const LIGHT_BG = `radial-gradient(ellipse 80% 60% at 50% 110%, #ff7a45 0%, #ff9b5a 18%, #ffb784 35%, #e8a7b8 55%, #c8a8d6 72%, #a8b3e8 88%, #9fb5ec 100%)`;
 const DARK_BG  = `radial-gradient(ellipse 80% 60% at 50% 110%, #3a1a0a 0%, #4a2010 20%, #3a1a2a 45%, #1f1530 70%, #0a0a1f 100%)`;
 
+const SOCIAL_RE = /^https?:\/\/(www\.)?(facebook|instagram|twitter|x|linkedin|tiktok)\.com/i;
+const PHONE_RE  = /^(\+\d{1,3}[\s.-]?)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
+const EMAIL_BODY_RE = /\S+@\S+\.\S+/;
+
+function detectScanMode(text: string, uploadedFile?: File | null): ScanMode {
+  if (uploadedFile) {
+    if (/^image/.test(uploadedFile.type)) return 'image';
+    if (/^audio/.test(uploadedFile.type)) return 'voice';
+    return 'document';
+  }
+  const t = text.trim();
+  if (!t) return 'default';
+  if (/^check password:\s*/i.test(t)) return 'password';
+  if (SOCIAL_RE.test(t)) return 'social';
+  if (/^https?:\/\//i.test(t)) return 'url';
+  if (EMAIL_BODY_RE.test(t) && (t.includes('\n') || t.length > 80 || /^(from:|to:|subject:|dear |hi |hello )/i.test(t))) return 'email';
+  if (PHONE_RE.test(t.replace(/\s+/g, ' ').trim())) return 'phone';
+  return 'default';
+}
+
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function TrainingAiAnalysis() {
@@ -85,7 +105,7 @@ export default function TrainingAiAnalysis() {
   const [paywallOpen, setPaywallOpen]         = useState(false);
   const [settingsOpen, setSettingsOpen]       = useState(false);
   const [menuOpen, setMenuOpen]               = useState(false);
-  const [scanMode, setScanMode]               = useState<ScanMode>('default');
+  // scanMode is auto-detected — no manual selection
   const [textInput, setTextInput]             = useState('');
   const [isRecording, setIsRecording]         = useState(false);
   const [passwordResult, setPasswordResult]   = useState<{ score: number; breaches: string; suggestions: string[] } | null>(null);
@@ -155,7 +175,7 @@ export default function TrainingAiAnalysis() {
   const { messages, status: chatStatus, sendMessage, clearChat } = useAiChat();
   const isProcessing = status === "uploading" || status === "analyzing";
   const canPay       = file && status === "ready";
-  const currentMode  = SCAN_MODES.find(m => m.id === scanMode) ?? SCAN_MODES[0];
+  const scanMode     = useMemo(() => detectScanMode(textInput, file), [textInput, file]);
 
   // — Keyboard shortcuts —
   useEffect(() => {
@@ -232,10 +252,10 @@ export default function TrainingAiAnalysis() {
   }, [textInput, scanMode, handleSendMessage]);
 
   const handlePasswordCheck = async () => {
-    if (!textInput.trim()) return;
+    const pw = textInput.replace(/^check password:\s*/i, '').trim();
+    if (!pw) return;
     setCheckingPassword(true);
     try {
-      const pw = textInput;
       const score = [
         pw.length >= 8, pw.length >= 12,
         /[A-Z]/.test(pw), /[a-z]/.test(pw),
@@ -472,32 +492,6 @@ export default function TrainingAiAnalysis() {
             </div>
           </div>
 
-          {/* Scan mode tabs */}
-          <div className="flex flex-wrap justify-center gap-1 mb-3" style={{ maxWidth: 'min(640px, 92vw)', width: '100%' }}>
-            {SCAN_MODES.map(mode => {
-              const Icon  = mode.icon;
-              const active = scanMode === mode.id;
-              return (
-                <button key={mode.id} type="button"
-                  onClick={() => { setScanMode(mode.id); setTextInput(''); setPasswordResult(null); }}
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: '4px',
-                    padding: '4px 10px', borderRadius: '999px',
-                    fontSize: '11px', fontWeight: 500,
-                    background: active ? 'rgba(255,122,69,0.3)' : 'rgba(20,20,22,0.78)',
-                    backdropFilter: 'blur(10px)',
-                    border: `1px solid ${active ? 'rgba(255,122,69,0.55)' : 'rgba(255,255,255,0.1)'}`,
-                    color: active ? '#fff' : '#c9c9cd',
-                    cursor: 'pointer', transition: 'all 0.15s ease',
-                  }}
-                  className="hover:!text-white">
-                  <Icon style={{ width: '11px', height: '11px', flexShrink: 0 }} />
-                  {mode.label}
-                </button>
-              );
-            })}
-          </div>
-
           {/* ── Chatbox ─────────────────────────────────────────────────────── */}
           <div style={{
             width: 'min(640px, 92vw)',
@@ -507,55 +501,28 @@ export default function TrainingAiAnalysis() {
             boxShadow: '0 20px 50px rgba(0,0,0,0.18)',
           }}>
 
-            {/* Text textarea */}
-            {(currentMode.inputType === 'text' || currentMode.inputType === 'password') && (
-              <textarea
-                ref={textareaRef}
-                value={textInput}
-                onChange={e => setTextInput(e.target.value)}
-                onKeyDown={e => {
-                  if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    if (currentMode.inputType === 'password') void handlePasswordCheck();
-                    else if (textInput.trim()) scanMode === 'default' ? handleSendMessage(textInput) : handleTextScan();
-                  }
-                }}
-                placeholder={currentMode.placeholder}
-                rows={scanMode === 'default' ? 2 : 4}
-                style={{
-                  width: '100%', background: 'transparent', border: 'none',
-                  outline: 'none', color: '#fff', fontSize: '15px',
-                  padding: '6px 2px 16px', resize: 'none',
-                  fontFamily: 'inherit', lineHeight: 1.5,
-                }}
-                className="placeholder:text-[#8a8a8f]"
-              />
-            )}
-
-            {/* File drop zone */}
-            {currentMode.inputType === 'file' && (
-              <div
-                onClick={() => fileInputRef.current?.click()}
-                style={{
-                  cursor: 'pointer', padding: '20px', textAlign: 'center',
-                  borderRadius: '14px', border: '1.5px dashed rgba(255,255,255,0.12)',
-                  marginBottom: '14px', color: '#8a8a8f', fontSize: '14px',
-                  transition: 'border-color 0.2s, color 0.2s',
-                }}
-                className="hover:!border-white/30 hover:!text-white/70"
-              >
-                <Camera style={{ width: '22px', height: '22px', margin: '0 auto 8px', opacity: 0.45 }} />
-                <p>{file ? <span style={{ color: '#fff' }}>{file.name}</span> : currentMode.placeholder}</p>
-                {file && <p style={{ fontSize: '12px', marginTop: '4px', color: '#c9c9cd' }}>{cost.formatted} / scan</p>}
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  className="hidden"
-                  accept={currentMode.accept}
-                  onChange={e => { const f = e.target.files?.[0]; if (f) prepareFile(f); }}
-                />
-              </div>
-            )}
+            {/* Unified text input — mode is auto-detected from content */}
+            <textarea
+              ref={textareaRef}
+              value={textInput}
+              onChange={e => setTextInput(e.target.value)}
+              onKeyDown={e => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  if (scanMode === 'password') void handlePasswordCheck();
+                  else if (textInput.trim()) scanMode === 'default' ? handleSendMessage(textInput) : handleTextScan();
+                }
+              }}
+              placeholder="Ask anything, paste a link, email, phone number, or attach a file…"
+              rows={3}
+              style={{
+                width: '100%', background: 'transparent', border: 'none',
+                outline: 'none', color: '#fff', fontSize: '15px',
+                padding: '6px 2px 16px', resize: 'none',
+                fontFamily: 'inherit', lineHeight: 1.5,
+              }}
+              className="placeholder:text-[#8a8a8f]"
+            />
 
             {/* Tool icon row */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
@@ -586,22 +553,12 @@ export default function TrainingAiAnalysis() {
                 <Settings style={{ width: '16px', height: '16px' }} />
               </button>
 
-              {/* Cycle mode */}
-              <button type="button" title="Next scan mode" style={toolBtn}
-                className="hover:!text-white hover:!bg-[rgba(255,255,255,0.06)]"
-                onClick={() => {
-                  const idx = SCAN_MODES.findIndex(m => m.id === scanMode);
-                  setScanMode(SCAN_MODES[(idx + 1) % SCAN_MODES.length].id);
-                }}>
-                <FolderOpen style={{ width: '16px', height: '16px' }} />
-              </button>
-
               {/* Separator */}
               <div style={{ width: '1px', height: '18px', background: '#3a3a3d', flexShrink: 0 }} />
               <div style={{ flex: 1 }} />
 
               {/* File scan trigger */}
-              {currentMode.inputType === 'file' && file && status === 'ready' && (
+              {file && status === 'ready' && (
                 <button type="button" onClick={handlePrimaryScanAction}
                   disabled={isProcessing || preparingAuthorizedScan}
                   style={{
@@ -620,7 +577,7 @@ export default function TrainingAiAnalysis() {
               )}
 
               {/* Password check trigger */}
-              {currentMode.inputType === 'password' && (
+              {scanMode === 'password' && (
                 <button type="button" onClick={handlePasswordCheck}
                   disabled={!textInput.trim() || checkingPassword}
                   style={{
@@ -639,8 +596,8 @@ export default function TrainingAiAnalysis() {
                 </button>
               )}
 
-              {/* Mic / Send for text modes */}
-              {currentMode.inputType === 'text' && (
+              {/* Mic / Send (always visible when no file attached and not password mode) */}
+              {!file && scanMode !== 'password' && (
                 <button type="button"
                   onClick={() => textInput.trim()
                     ? (scanMode === 'default' ? handleSendMessage(textInput) : handleTextScan())
@@ -667,8 +624,8 @@ export default function TrainingAiAnalysis() {
             </div>
           </div>
 
-          {/* File chip (shown outside chatbox when a file is attached in text modes) */}
-          {file && currentMode.inputType !== 'file' && (
+          {/* File chip — shown whenever a file is attached */}
+          {file && (
             <div className="flex items-center gap-2 mt-2"
               style={{ background: 'rgba(28,28,30,0.85)', backdropFilter: 'blur(8px)', borderRadius: '999px', padding: '6px 14px', border: '1px solid rgba(255,255,255,0.1)' }}>
               <Paperclip style={{ width: '12px', height: '12px', color: '#8a8a8f' }} />
