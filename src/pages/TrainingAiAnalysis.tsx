@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, useMemo, useCallback } from "react"
 import { Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { PageTransition } from "@/components/PageTransition";
-import Navigation from "@/components/Navigation";
 import { PaymentDialog } from "@/components/scanner/PaymentDialog";
 import { PremiumChatHistory } from "@/components/training/PremiumChatHistory";
 import { usePrerenderReady } from "@/contexts/PrerenderContext";
@@ -389,8 +388,6 @@ export default function TrainingAiAnalysis() {
         className="ai-analysis-page min-h-screen flex flex-col"
         style={{ background: darkMode ? DARK_BG : LIGHT_BG, backgroundAttachment: 'fixed', color: '#fff' }}
       >
-        <Navigation />
-
         <SEO
           title="AI Security Scanner — 10 Scan Modes"
           description="Scan emails, links, phone numbers, images, voice clips, documents and more with AI-powered analysis."
