@@ -701,13 +701,6 @@ function LearnAndTrain() {
           </div>
         </div>
 
-        {/* Answer summary — what training is at a glance */}
-        <AnswerSummary
-          summary="InVision Network runs hands-on cybersecurity workshops for seniors, families, and small teams in the Kettering and Dayton area. Sessions cover deepfake detection, phishing defense, voice-clone scams, and safe online banking — available in person or on Zoom, starting at $89."
-          ctaHref="/contact"
-          ctaLabel="Book a workshop for your family or team"
-          className="py-8"
-        />
 
         {/* ══════════ SECTION 1: WHY FAMILIES TRUST US ══════════ */}
         <section className="py-16 md:py-24 relative overflow-hidden">
