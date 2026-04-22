@@ -4,15 +4,15 @@
 /* ── Custom properties ────────────────────────────────────────────────────── */
 :root {
   --ap-gold:          #f5c543;
-  --ap-gold-dark:     #e0a800;
-  --ap-gold-glow:     rgba(245, 197, 67, 0.35);
+  --ap-gold-dark:     #d4a634;
+  --ap-gold-glow:     rgba(245, 197, 67, 0.25);
   --ap-bg:            #0a0c10;
-  --ap-card:          rgba(20, 23, 30, 0.45);
+  --ap-card:          rgba(255, 255, 255, 0.04);
   --ap-card-border:   rgba(255, 255, 255, 0.08);
-  --ap-input-bg:      rgba(255, 255, 255, 0.06);
-  --ap-input-border:  rgba(255, 255, 255, 0.13);
-  --ap-text:          #f0f0f5;
-  --ap-muted:         rgba(240, 240, 245, 0.52);
+  --ap-input-bg:      rgba(255, 255, 255, 0.04);
+  --ap-input-border:  rgba(255, 255, 255, 0.08);
+  --ap-text:          #e2e8f0;
+  --ap-muted:         #94a3b8;
 }
 
 /* ── Page wrapper ─────────────────────────────────────────────────────────── */
@@ -33,30 +33,29 @@
 .ap-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(90px);
+  filter: blur(120px);
   pointer-events: none;
   will-change: transform;
-  animation: ap-drift 28s ease-in-out infinite alternate;
+  animation: ap-float 20s ease-in-out infinite alternate;
 }
-.ap-orb--gold   { width: 520px; height: 520px; top: -15%; right: -8%;
-                  background: radial-gradient(circle, rgba(245,197,67,0.28) 0%, transparent 68%);
-                  animation-duration: 28s; }
-.ap-orb--purple { width: 480px; height: 480px; top: -5%;  left: -14%;
-                  background: radial-gradient(circle, rgba(139,92,246,0.22) 0%, transparent 68%);
-                  animation-duration: 22s; animation-delay: -8s; }
-.ap-orb--pink   { width: 420px; height: 420px; bottom: -8%; right: 4%;
-                  background: radial-gradient(circle, rgba(236,72,153,0.18) 0%, transparent 68%);
-                  animation-duration: 34s; animation-delay: -16s; }
-.ap-orb--blue   { width: 460px; height: 460px; bottom: -6%; left: -8%;
-                  background: radial-gradient(circle, rgba(59,130,246,0.18) 0%, transparent 68%);
-                  animation-duration: 26s; animation-delay: -22s; }
+.ap-orb--gold   { width: 380px; height: 380px; top: -10%; right: -5%;
+                  background: radial-gradient(circle, rgba(245,197,67,0.06) 0%, transparent 70%);
+                  animation-duration: 22s; }
+.ap-orb--purple { width: 340px; height: 340px; top: -5%;  left: -10%;
+                  background: radial-gradient(circle, rgba(139,92,246,0.06) 0%, transparent 70%);
+                  animation-duration: 18s; animation-delay: -6s; }
+.ap-orb--pink   { width: 300px; height: 300px; bottom: -5%; right: 5%;
+                  background: radial-gradient(circle, rgba(236,72,153,0.05) 0%, transparent 70%);
+                  animation-duration: 21s; animation-delay: -12s; }
+.ap-orb--blue   { width: 360px; height: 360px; bottom: -5%; left: -6%;
+                  background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+                  animation-duration: 19s; animation-delay: -18s; }
 
-@keyframes ap-drift {
+@keyframes ap-float {
   0%   { transform: translate(0px, 0px)   scale(1); }
-  25%  { transform: translate(30px, -20px) scale(1.05); }
-  50%  { transform: translate(-15px, 25px) scale(0.97); }
-  75%  { transform: translate(20px, 10px)  scale(1.03); }
-  100% { transform: translate(-10px, -15px) scale(1.01); }
+  33%  { transform: translate(20px, -15px) scale(1.04); }
+  66%  { transform: translate(-12px, 18px) scale(0.97); }
+  100% { transform: translate(8px, -8px)  scale(1.02); }
 }
 
 /* ── Background ring curves ───────────────────────────────────────────────── */
@@ -86,8 +85,8 @@
   display: grid;
   grid-template-columns: 44% 56%;
   background: var(--ap-card);
-  backdrop-filter: blur(30px) saturate(160%);
-  -webkit-backdrop-filter: blur(30px) saturate(160%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--ap-card-border);
   border-radius: 24px;
   overflow: hidden;
@@ -107,7 +106,7 @@
 .ap-left {
   position: relative;
   padding: 44px 36px;
-  background: rgba(8,10,18,0.35);
+  background: rgba(8,10,18,0.55);
   border-right: 1px solid rgba(255,255,255,0.055);
   display: flex;
   flex-direction: column;
@@ -182,7 +181,7 @@
   position: relative;
   width: 100%;
   height: 196px;
-  clip-path: polygon(6% 0%, 100% 0%, 94% 100%, 0% 100%);
+  clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%);
   background: rgba(255,255,255,0.03);
   overflow: hidden;
 }
@@ -521,8 +520,8 @@
 .ap-btn {
   width: 100%;
   height: 50px;
-  background: linear-gradient(135deg, #f5c543 0%, #e0a800 100%);
-  color: #1a1200;
+  background: linear-gradient(135deg, var(--ap-gold) 0%, var(--ap-gold-dark) 100%);
+  color: #0a0c10;
   border: none;
   border-radius: 100px;
   font-size: 15px;
@@ -636,9 +635,9 @@
   z-index: 10;
   width: 100%;
   max-width: 440px;
-  background: rgba(20,23,30,0.6);
-  backdrop-filter: blur(30px) saturate(160%);
-  -webkit-backdrop-filter: blur(30px) saturate(160%);
+  background: rgba(20,23,30,0.72);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 24px;
   padding: 40px 36px;
