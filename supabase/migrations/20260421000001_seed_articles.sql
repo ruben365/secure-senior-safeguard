@@ -254,4 +254,6 @@ Call us at (937) 749-7579 or contact us through our website to schedule a no-cos
   '60% of small businesses close after a cyberattack. Ohio small business owners need cybersecurity insurance and a protection plan in 2026. Learn what''s covered and why it matters.'
 )
 
-ON CONFLICT (id) DO NOTHING;
+-- ON CONFLICT DO NOTHING (no target) handles all unique constraints,
+-- including both (id) and (slug), so re-running the migration never errors.
+ON CONFLICT DO NOTHING;
