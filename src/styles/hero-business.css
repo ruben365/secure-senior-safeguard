@@ -141,7 +141,7 @@
 
 /* Headline */
 .hero-biz__headline {
-  font-size: clamp(1.75rem, 3.5vw, 3rem);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
   font-weight: 800;
   color: var(--biz-text);
   line-height: 1.08;
@@ -174,8 +174,8 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  height: 50px;
-  padding: 0 2.25rem;
+  height: 44px;
+  padding: 0 1.5rem;
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -438,7 +438,7 @@
 /* Laptop — proportional headline (1024px–1440px) */
 @media (min-width: 1024px) and (max-width: 1439.98px) {
   .hero-biz__headline {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
   }
 
   .hero-biz__body {
@@ -464,7 +464,7 @@
   .hero-biz__ctas,
   .hero-biz__widget { animation: none; opacity: 1; transform: none; }
 
-  .hero-biz__headline { font-size: clamp(1.75rem, 7vw, 2.25rem); }
+  .hero-biz__headline { font-size: clamp(1.5rem, 6vw, 2rem); }
   .hero-biz__content { padding-bottom: 1.5rem; }
 
   /* Overlay: gentle top-to-bottom so subject is visible */
