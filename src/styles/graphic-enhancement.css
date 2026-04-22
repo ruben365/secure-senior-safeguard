@@ -449,7 +449,6 @@
 
 /* ─── .gx-dialog ─ Premium popup chrome ───────────────────── */
 .gx-dialog {
-  position: relative;
   border-radius: 16px !important;
   box-shadow:
     0 24px 48px -16px rgba(26, 19, 32, 0.28),
