@@ -269,7 +269,7 @@ export const PaymentDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="overflow-hidden border border-border/70 bg-transparent p-0 shadow-[0_28px_80px_rgba(15,23,42,0.24)] sm:max-w-3xl">
+      <DialogContent className="overflow-hidden border border-[#e5e5e5] bg-white text-[#1a1a1c] backdrop-blur-none p-0 shadow-[0_28px_80px_rgba(15,23,42,0.12)] sm:max-w-3xl">
         <CheckoutDialogFrame
           icon={<ShieldCheck className="h-5 w-5" />}
           title="Secure upload checkout"
