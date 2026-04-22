@@ -4,10 +4,10 @@
    ═══════════════════════════════════════════════════════════════════ */
 
 /* ── 1. White / transparent buttons get a visible border + ink ────── */
-button[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):not(nav *),
-a[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):not(nav *),
-button[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):not(nav *),
-a[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):not(nav *) {
+button[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]),
+a[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]),
+button[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]),
+a[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]) {
   border: 1.5px solid rgba(15, 23, 42, 0.18) !important;
   color: #1e293b !important;
   box-shadow:
@@ -21,13 +21,12 @@ a[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-wor
 }
 
 /* Hover: terracotta tint borrowed from the brand palette */
-button[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):not(nav *):hover,
-a[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):not(nav *):hover,
-button[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):not(nav *):hover,
-a[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):not(nav *):hover {
+button[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]):hover,
+a[class*="bg-white"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]):hover,
+button[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]):hover,
+a[class*="bg-transparent"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):not(nav *):not([class*="text-white"]):hover {
   border-color: rgba(217, 108, 74, 0.55) !important;
   color: #c45e3b !important;
-  background-color: #fff7f2 !important;
 }
 
 /* ── 2. Unstyled <button> elements (no bg-* class at all) ─────────── */
@@ -57,11 +56,10 @@ button[class*="border-input"]:not(.hero-home *):not(.hero-business *):not(.hero-
   color: #1e293b !important;
 }
 
-button[class*="variant-outline"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):hover,
-button[class*="border-input"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):hover {
+button[class*="variant-outline"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):hover,
+button[class*="border-input"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(.hero-biz *):not(.hero-ws *):not(footer *):not(.site-footer *):hover {
   border-color: rgba(217, 108, 74, 0.55) !important;
   color: #c45e3b !important;
-  background-color: #fff7f2 !important;
 }
 
 /* ── 4. Light-tinted Tailwind buttons (slate-50, gray-50, etc.) ───── */

@@ -46,7 +46,6 @@ import { useBookPurchase } from "@/hooks/useBookPurchase";
 import { EmbeddedPaymentModal } from "@/components/payment/EmbeddedPaymentModal";
 import { storeBookReaderSession } from "@/lib/bookReaderSession";
 import { cn } from "@/lib/utils";
-import { RotatingHeadlines } from "@/components/shared/RotatingHeadlines";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 import { HeroCTA } from "@/components/shared/HeroCTA";
 import { SectionDivider } from "@/components/pro";
@@ -103,12 +102,6 @@ const FAQS = [
   },
 ];
 
-const heroHeadlines = [
-  "Your Digital Safety Arsenal",
-  "Premium Security Guides & Books",
-  "Expert Resources for Every Family",
-  "Guides to Protect What Matters Most",
-];
 
 const FEATURED_BOOKS = LIBRARY_BOOKS.filter((b) =>
   ["Best Seller", "Featured", "New"].includes(b.tag)
@@ -125,30 +118,30 @@ function LibraryHero({ isLoggedIn }: { isLoggedIn: boolean }) {
         subheadline=""
         showScrollIndicator={true}
       >
-        <div className="text-left mb-8">
+        <div className="text-left max-w-2xl">
           <h1 className="font-extrabold text-white mb-4 leading-[1.05] tracking-tight text-[clamp(2.25rem,5vw,4rem)]">
-            <RotatingHeadlines headlines={heroHeadlines} className="" />
+            Your Digital Safety Arsenal
           </h1>
-          <p className="text-base md:text-lg text-white/90 max-w-xl">
+          <p className="text-base md:text-lg text-white/90 max-w-xl mb-8">
             Expert-curated cybersecurity guides designed to keep you and your
             family safe in the digital age
           </p>
+          {isLoggedIn ? (
+            <HeroCTA
+              primaryText="Browse Full Catalog"
+              primaryHref="#catalog"
+              secondaryText="My Library"
+              secondaryHref="#my-library"
+            />
+          ) : (
+            <HeroCTA
+              primaryText="Create Free Account"
+              primaryHref="/auth?mode=signup"
+              secondaryText="Sign In"
+              secondaryHref="/auth"
+            />
+          )}
         </div>
-        {isLoggedIn ? (
-          <HeroCTA
-            primaryText="Browse Full Catalog"
-            primaryHref="#catalog"
-            secondaryText="My Library"
-            secondaryHref="#my-library"
-          />
-        ) : (
-          <HeroCTA
-            primaryText="Create Free Account"
-            primaryHref="/auth?mode=signup"
-            secondaryText="Sign In"
-            secondaryHref="/auth"
-          />
-        )}
       </Hero>
       <HeroFloatingStats />
     </div>
