@@ -362,21 +362,6 @@ function About() {
             </p>
           </div>
 
-          <div className="grid grid-cols-3 gap-2 sm:gap-3 max-w-3xl mx-auto">
-            {[
-              { icon: MapPin, title: "Ohio-Based", desc: "Serving local communities across the Buckeye State" },
-              { icon: Award, title: "Veteran-Supporting", desc: "Honoring those who served with special discounts" },
-              { icon: Heart, title: "Mission-Driven", desc: "Protection over profit, always" },
-            ].map((item) => (
-              <div key={item.title} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-3 text-center transition-all duration-300 hover:-translate-y-1 shine-hover">
-                <div className="w-8 h-8 mx-auto mb-1.5 rounded-lg bg-white/15 flex items-center justify-center">
-                  <item.icon className="w-4 h-4 text-white" />
-                </div>
-                <div className="font-bold text-xs mb-0.5">{item.title}</div>
-                <div className="text-[10px] text-white/90 leading-snug">{item.desc}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
