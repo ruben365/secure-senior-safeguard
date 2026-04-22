@@ -870,16 +870,23 @@
 
 /* ── Mobile ───────────────────────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .ap-left  { display: none; }
-  .ap-card  { grid-template-columns: 1fr; max-width: 520px; border-radius: 20px; }
-  .ap-right { padding: 36px 28px 32px; }
-  .ap-brand { font-size: 40px; }
-  .ap-headline { font-size: 32px; }
-  .ap-sso { flex-direction: column; }
+  .ap-left    { display: none; }
+  .ap-card    { grid-template-columns: 1fr; max-width: 480px; border-radius: 20px; }
+  .ap-right   { padding: 36px 28px 32px; }
+  .ap-brand   { font-size: 44px; }
+  .ap-brand-bar { width: 32px; }
+  .ap-headline  { font-size: 32px; font-weight: 300; }
+  .ap-sso     { flex-direction: column; }
+  .ap-btn-wrap { margin-bottom: 12px; }
+  .ap-security { flex-direction: column; gap: 4px; text-align: center; }
 }
 @media (max-width: 480px) {
-  .ap-right { padding: 28px 20px 24px; }
-  .ap-brand { font-size: 34px; }
-  .ap-headline { font-size: 28px; }
+  .ap-card    { max-width: 100%; border-radius: 16px; }
+  .ap-right   { padding: 24px 18px 20px; }
+  .ap-brand   { font-size: 36px; }
+  .ap-headline  { font-size: 26px; }
+  .ap-sub     { font-size: 13px; }
   .ap-field-row { grid-template-columns: 1fr; gap: 0; }
+  .ap-sso-btn { height: 40px; font-size: 12px; }
+  .ap-btn     { height: 46px; font-size: 13px; }
 }
