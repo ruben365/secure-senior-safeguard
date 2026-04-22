@@ -77,8 +77,7 @@ const Partners = lazy(() => import("./pages/Partners"));
 const Events = lazy(() => import("./pages/Events"));
 const Sitemap = lazy(() => import("./pages/Sitemap"));
 
-// Security and Status pages
-const Security = lazy(() => import("./pages/Security"));
+// Status page
 const Status = lazy(() => import("./pages/Status"));
 const FreeSecurityScan = lazy(() => import("./pages/FreeSecurityScan"));
 
@@ -276,10 +275,10 @@ function PublicRoutes() {
         <Route path="/faq" element={<PageTransition variant="auto"><FAQ /></PageTransition>} />
         <Route path="/help" element={<Navigate to="/faq" replace />} />
         <Route path="/workshops" element={<Navigate to="/training" replace />} />
-        <Route path="/security" element={<PageTransition variant="fade"><Security /></PageTransition>} />
         <Route path="/status" element={<PageTransition variant="fade"><Status /></PageTransition>} />
         <Route path="/free-scan" element={<PageTransition variant="fade"><FreeSecurityScan /></PageTransition>} />
         <Route path="/security-check" element={<Navigate to="/free-scan" replace />} />
+        <Route path="/security" element={<Navigate to="/status" replace />} />
 
         {/* Admin routes — auth enforced by AdminShell component (checks Supabase session + admin role) */}
         <Route path="/admin/*" element={<AdminShell />}>

@@ -30,7 +30,6 @@ const searchIndex: SearchPage[] = [
   { title: "Articles", description: "Cybersecurity news and guides", path: "/articles" },
   { title: "Help Center", description: "Knowledge base and support", path: "/help" },
   { title: "Privacy Policy", description: "How we protect your data", path: "/privacy-policy" },
-  { title: "Security", description: "TLS encryption, MFA, SOC 2 infrastructure, and privacy practices", path: "/security" },
   { title: "System Status", description: "Real-time status of InVision Network services", path: "/status" },
 ];
 
