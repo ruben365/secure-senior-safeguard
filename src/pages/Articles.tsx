@@ -177,13 +177,13 @@ function Articles() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild variant="default" size="lg">
-                  <Link to="/training#training">
+                  <Link to="/training">
                     Learn About ScamShield
                     <ArrowRight className="ml-2 w-4 h-4 arrow-icon" />
                   </Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <Link to="/training#training">View Workshops</Link>
+                  <Link to="/training">View Workshops</Link>
                 </Button>
               </div>
             </Card>

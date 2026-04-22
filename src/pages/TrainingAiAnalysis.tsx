@@ -334,7 +334,7 @@ export default function TrainingAiAnalysis() {
   return (
     <PageTransition variant="fade">
       <div
-        className={`ai-analysis-page min-h-screen transition-colors duration-300 ${darkMode ? "dark bg-[#1a1a2e] text-slate-200" : "bg-background text-foreground"}`}
+        className={`ai-analysis-page min-h-screen transition-colors duration-300 bg-[#100c0a] text-slate-200 ${darkMode ? "dark" : ""}`}
       >
         <Navigation />
         <SEO
@@ -357,7 +357,7 @@ export default function TrainingAiAnalysis() {
         />
 
         <main
-          className={`relative min-h-screen overflow-hidden flex flex-col transition-colors duration-300 pt-[clamp(80px,10vw,100px)] ${darkMode ? "bg-[#1a1a2e]" : "bg-background"}`}
+          className="relative min-h-screen overflow-hidden flex flex-col transition-colors duration-300 pt-[clamp(80px,10vw,100px)] bg-[#100c0a]"
         >
           <div className="relative flex-1 flex flex-col px-6 py-6">
             {/* Top Navigation Bar */}

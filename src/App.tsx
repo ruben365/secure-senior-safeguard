@@ -80,6 +80,7 @@ const Sitemap = lazy(() => import("./pages/Sitemap"));
 // Security and Status pages
 const Security = lazy(() => import("./pages/Security"));
 const Status = lazy(() => import("./pages/Status"));
+const FreeSecurityScan = lazy(() => import("./pages/FreeSecurityScan"));
 
 // Legal pages - lazy loaded
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
@@ -272,6 +273,8 @@ function PublicRoutes() {
         <Route path="/workshops" element={<Navigate to="/training" replace />} />
         <Route path="/security" element={<PageTransition variant="fade"><Security /></PageTransition>} />
         <Route path="/status" element={<PageTransition variant="fade"><Status /></PageTransition>} />
+        <Route path="/free-scan" element={<PageTransition variant="fade"><FreeSecurityScan /></PageTransition>} />
+        <Route path="/security-check" element={<Navigate to="/free-scan" replace />} />
 
         {/* Admin routes — auth enforced by AdminShell component (checks Supabase session + admin role) */}
         <Route path="/admin/*" element={<AdminShell />}>

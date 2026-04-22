@@ -658,7 +658,15 @@ function Contact() {
       </div>
       </MeshBackground>
 
-      <BookingCalendar />
+      <section className="py-4">
+        <div className="container mx-auto text-center mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold mb-2">Book a Free Consultation</h2>
+          <p className="text-muted-foreground max-w-xl mx-auto">
+            Pick a time that works for you — our team will reach out to confirm your appointment.
+          </p>
+        </div>
+        <BookingCalendar />
+      </section>
 
       {/* Internal links — related pages */}
       <section className="py-8 section-warm-alt">
