@@ -364,7 +364,7 @@ export function TrainingPaymentModal({
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[380px] overflow-hidden p-0 rounded-2xl gap-0">
+      <DialogContent className="dialog-white-card sm:max-w-[380px] overflow-hidden p-0 rounded-2xl gap-0">
         {/* Header — glass panel with coral accent */}
         <div className="bg-gradient-to-r from-[#d96c4a]/8 via-white to-[#d96c4a]/5 px-5 py-3.5 border-b border-gray-100">
           <DialogHeader className="space-y-0">

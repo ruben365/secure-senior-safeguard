@@ -741,79 +741,87 @@ export default function TrainingAiAnalysis() {
 
       {/* ── Paywall dialog ───────────────────────────────────────────────────── */}
       <Dialog open={paywallOpen} onOpenChange={setPaywallOpen}>
-        <DialogContent className="max-h-[90svh] overflow-y-auto border border-border/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(250,247,244,0.98))] p-0 shadow-[0_28px_80px_rgba(15,23,42,0.24)] sm:max-w-md">
-          <div className="border-b border-border/60 bg-[radial-gradient(circle_at_top,rgba(217,108,74,0.12),transparent_62%)] px-5 py-5">
-            <DialogHeader className="space-y-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#d96c4a]/15 bg-[#d96c4a]/10 text-[#b75539]">
-                <Lock className="h-5 w-5" />
-              </div>
-              <div>
-                <DialogTitle className="text-xl font-semibold text-foreground">Access AI Scanner</DialogTitle>
-                <DialogDescription className="text-sm text-muted-foreground mt-1">Choose how you'd like to start scanning.</DialogDescription>
-              </div>
-            </DialogHeader>
-          </div>
-          <div className="space-y-3 px-4 py-5">
+        <DialogContent className="dialog-white-card max-h-[90svh] overflow-y-auto max-w-[380px] p-6">
+          {/* Header — lock icon centered, title, subtitle */}
+          <DialogHeader className="items-center text-center space-y-3 mb-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 text-gray-500">
+              <Lock className="h-5 w-5" />
+            </div>
+            <div>
+              <DialogTitle className="text-[18px] font-bold text-gray-900">Access AI Scanner</DialogTitle>
+              <DialogDescription className="text-[14px] text-gray-500 mt-1">Choose how you'd like to start scanning.</DialogDescription>
+            </div>
+          </DialogHeader>
+
+          {/* Option cards */}
+          <div className="space-y-3">
             {user ? (
-              <div className="rounded-2xl border p-4">
+              <div className="dialog-option-card">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-9 h-9 rounded-xl bg-emerald-500/10 flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0">
                     <BadgeCheck className="w-4 h-4 text-emerald-600" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium">Refresh access</p>
-                    <p className="text-xs text-muted-foreground">Already subscribed? Re-verify your account.</p>
+                    <p className="text-[15px] font-semibold text-gray-900">Refresh access</p>
+                    <p className="text-[13px] text-gray-500">Already subscribed? Re-verify your account.</p>
                   </div>
                 </div>
-                <Button variant="heroPrimary" className="w-full text-white h-10"
+                <Button className="w-full h-9 text-white text-[13px] font-semibold rounded-lg" style={{ background: '#d96c4a' }}
                   onClick={() => { void handleRefreshAccess(); setPaywallOpen(false); }}>
                   Refresh & Unlock
                 </Button>
               </div>
             ) : (
-              <div className="rounded-2xl border p-4">
-                <p className="text-sm font-medium mb-1">Existing subscriber</p>
-                <p className="text-xs text-muted-foreground mb-3">Log in to verify your ScamShield subscription.</p>
-                <Button asChild variant="heroPrimary" className="w-full text-white h-10">
+              <div className="dialog-option-card">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
+                    <LogIn className="w-4 h-4 text-gray-600" />
+                  </div>
+                  <div>
+                    <p className="text-[15px] font-semibold text-gray-900">Existing subscriber</p>
+                    <p className="text-[13px] text-gray-500">Log in to verify your ScamShield subscription.</p>
+                  </div>
+                </div>
+                <Button asChild className="w-full h-9 text-white text-[13px] font-semibold rounded-lg" style={{ background: '#d96c4a' }}>
                   <Link to={loginPath} onClick={() => setPaywallOpen(false)}>Log in to scan</Link>
                 </Button>
               </div>
             )}
-            <div className="rounded-2xl border p-4">
+            <div className="dialog-option-card">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-primary" />
+                <div className="w-8 h-8 rounded-full bg-orange-50 flex items-center justify-center flex-shrink-0">
+                  <Sparkles className="w-4 h-4 text-[#d96c4a]" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium">ScamShield subscription</p>
-                  <p className="text-xs text-muted-foreground">Unlimited scans + family protection.</p>
+                  <p className="text-[15px] font-semibold text-gray-900">ScamShield subscription</p>
+                  <p className="text-[13px] text-gray-500">Unlimited scans + family protection.</p>
                 </div>
               </div>
-              <Button variant="heroPrimary" className="w-full text-white h-10"
+              <Button className="w-full h-9 text-white text-[13px] font-semibold rounded-lg" style={{ background: '#d96c4a' }}
                 onClick={() => void handleStartSubscription()} disabled={subscriptionCheckoutLoading}>
                 {subscriptionCheckoutLoading
                   ? <><Loader2 className="w-4 h-4 animate-spin" /> Starting…</>
                   : "Start Subscription"}
               </Button>
             </div>
-            <div className="rounded-2xl border p-4">
+            <div className="dialog-option-card" style={{ borderColor: '#d96c4a33' }}>
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-9 h-9 rounded-xl bg-[#d96c4a]/10 flex items-center justify-center">
-                  <CreditCard className="w-4 h-4 text-[#b75539]" />
+                <div className="w-8 h-8 rounded-full bg-orange-50 flex items-center justify-center flex-shrink-0">
+                  <CreditCard className="w-4 h-4 text-[#d96c4a]" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium">One-time scan</p>
-                  <p className="text-xs text-muted-foreground">${cost.perUploadCharge.toFixed(2)} per file or image.</p>
+                  <p className="text-[15px] font-semibold text-gray-900">One-time scan</p>
+                  <p className="text-[13px] text-gray-500">${cost.perUploadCharge.toFixed(2)} per file or image.</p>
                 </div>
               </div>
-              <Button variant="heroPrimary" className="w-full text-white h-10" onClick={handlePayPerScan}>
+              <Button className="w-full h-9 text-[13px] font-semibold rounded-lg" style={{ background: 'transparent', border: '1.5px solid #d96c4a', color: '#d96c4a' }}
+                onClick={handlePayPerScan}>
                 Pay ${cost.perUploadCharge.toFixed(2)} per scan
               </Button>
             </div>
           </div>
-          <DialogFooter className="border-t px-5 py-3">
-            <p className="text-center text-xs text-muted-foreground w-full">Secure payments via Stripe · Cancel anytime</p>
-          </DialogFooter>
+
+          <p className="text-center text-[12px] text-gray-400 mt-4">Secure payments via Stripe · Cancel anytime</p>
         </DialogContent>
       </Dialog>
 

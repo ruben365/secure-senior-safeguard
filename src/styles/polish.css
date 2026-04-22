@@ -697,6 +697,54 @@ section[data-reveal]:nth-child(odd) {
   100% { background-position: -200% 0; }
 }
 
+/* ═══════════════════════════════════════════════════════════════════
+   PAYMENT / ACCESS DIALOG — white card spec
+   Apply .dialog-white-card to any DialogContent that should be a
+   clean white card (max-w 380px, 20px radius, soft shadow).
+   ═══════════════════════════════════════════════════════════════════ */
+.dialog-white-card {
+  background: #ffffff !important;
+  color: #1a1a1a !important;
+  border: 1px solid rgba(0,0,0,0.06) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Close button — gray on white card */
+.dialog-white-card .gx-dialog-close {
+  color: #9ca3af !important;
+}
+.dialog-white-card .gx-dialog-close:hover {
+  color: #374151 !important;
+  background: rgba(0,0,0,0.05) !important;
+}
+
+/* Title & description — dark on white */
+.dialog-white-card [data-radix-dialog-title],
+.dialog-white-card h2 {
+  color: #1a1a1a !important;
+}
+.dialog-white-card [data-radix-dialog-description] {
+  color: #6b7280 !important;
+}
+
+/* Option cards inside white-card dialog */
+.dialog-white-card .dialog-option-card {
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 16px;
+  background: #ffffff;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .dialog-white-card {
+    animation: none !important;
+  }
+}
+
 /* ── Prefers reduced motion — disable ALL motion ─────────────── */
 @media (prefers-reduced-motion: reduce) {
   /* cta-pulse removed — no glow animations to disable */
