@@ -69,6 +69,9 @@
 /* Auth cybersecurity theme — clean dark portal aesthetic for /auth */
 @import "./styles/auth-cybersecurity.css";
 
+/* Admin Dashboard V2 — warm glass/neumorphic shell design */
+@import "./styles/admin-dashboard-v2.css";
+
 /* ═══════════════════════════════════════════════════════════════════
    AMBIENT VIBRANCE OPT-OUT — Auth, Admin, Portal use solid surfaces
    ═══════════════════════════════════════════════════════════════════ */
