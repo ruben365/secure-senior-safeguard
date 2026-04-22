@@ -116,7 +116,6 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
         { to: "/faq", label: "FAQ" },
         { to: "/help", label: "Help Center" },
         { to: "/contact", label: "Contact Us" },
-        { to: "/security", label: "Security" },
         { to: "/status", label: "System Status" },
       ],
     },
