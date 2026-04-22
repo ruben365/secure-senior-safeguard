@@ -617,7 +617,18 @@
   font-size: 13px; color: var(--ap-text);
   cursor: pointer; user-select: none;
 }
-.ap-check { display: none; }
+.ap-check {
+  appearance: none;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.ap-check:focus-visible + .ap-check-box {
+  outline: 2px solid var(--ap-gold);
+  outline-offset: 2px;
+}
 .ap-check-box {
   width: 18px; height: 18px; border-radius: 5px;
   border: 1px solid rgba(255,255,255,0.18);

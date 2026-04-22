@@ -594,30 +594,6 @@ export const PAGE_SEO = {
     },
   },
 
-  security: {
-    title: "Security & Data Protection Practices",
-    description:
-      "Learn how InVision Network protects your data with TLS 1.3 encryption, AES-256 at-rest encryption, MFA, and SOC 2 certified infrastructure.",
-    keywords:
-      "InVision Network security, data encryption, TLS 1.3, AES-256, SOC 2, MFA, cybersecurity",
-    breadcrumbs: [
-      { name: "Home", url: "https://www.invisionnetwork.org/" },
-      { name: "Security", url: "https://www.invisionnetwork.org/security" },
-    ],
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      name: "InVision Network Security Practices",
-      url: "https://www.invisionnetwork.org/security",
-      description: "Security and data protection practices for InVision Network services.",
-      about: {
-        "@type": "Organization",
-        name: "InVision Network",
-        url: "https://www.invisionnetwork.org",
-      },
-    },
-  },
-
   status: {
     title: "System Status & Service Health",
     description:
