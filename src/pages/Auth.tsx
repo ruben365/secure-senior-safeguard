@@ -24,19 +24,11 @@ import "@/styles/auth-page.css";
 
 // ============================================================================
 // Phase 13: hard-pinned canonical origin for OAuth redirects.
-// Previously the code used `${window.location.origin}/auth` for the OAuth
-// callback URL, which an attacker could spoof by hosting a clone of the site
-// at a similar-looking domain. The OAuth provider would happily redirect to
-// the spoofed domain because that's what we asked for. Now the redirect URL
-// is hard-pinned to the canonical origin in production, and only falls back
-// to window.location.origin for localhost development.
 // ============================================================================
 const CANONICAL_ORIGIN = "https://www.invisionnetwork.org";
 function getAuthRedirectUrl(): string {
   if (typeof window === "undefined") return `${CANONICAL_ORIGIN}/auth`;
   const o = window.location.origin;
-  // Only allow localhost dev origins to use the live origin — anything else
-  // gets redirected through the canonical production URL.
   if (o.startsWith("http://localhost:") || o.startsWith("http://127.0.0.1:")) {
     return `${o}/auth`;
   }
@@ -59,8 +51,25 @@ function AuthOrbs() {
       <span aria-hidden="true" className="ap-orb ap-orb--purple" />
       <span aria-hidden="true" className="ap-orb ap-orb--pink" />
       <span aria-hidden="true" className="ap-orb ap-orb--blue" />
-      <div aria-hidden="true" className="ap-curves" />
+      <div aria-hidden="true" className="ap-curve ap-curve--1" />
+      <div aria-hidden="true" className="ap-curve ap-curve--2" />
+      <div aria-hidden="true" className="ap-curve ap-curve--3" />
+      <div aria-hidden="true" className="ap-curve ap-curve--4" />
     </>
+  );
+}
+
+function QuadrantBtn({ children, disabled }: { children: React.ReactNode; disabled?: boolean }) {
+  return (
+    <div className="ap-btn-wrap">
+      <span className="ap-q ap-q--tl" aria-hidden="true" />
+      <span className="ap-q ap-q--tr" aria-hidden="true" />
+      <span className="ap-q ap-q--bl" aria-hidden="true" />
+      <span className="ap-q ap-q--br" aria-hidden="true" />
+      <button type="submit" className="ap-btn" disabled={disabled}>
+        {children}
+      </button>
+    </div>
   );
 }
 
@@ -94,7 +103,6 @@ function Auth() {
   const [showMfaVerify, setShowMfaVerify] = useState(false);
   const [showPasswordReset, setShowPasswordReset] = useState(false);
 
-  // Password strength indicators
   const [passwordHasLength, setPasswordHasLength] = useState(false);
   const [passwordHasUppercase, setPasswordHasUppercase] = useState(false);
   const [passwordHasLowercase, setPasswordHasLowercase] = useState(false);
@@ -112,21 +120,18 @@ function Auth() {
       setSession(currentSession);
       setUser(currentSession?.user ?? null);
 
-      // Password recovery flow — Supabase redirects back with this event
       if (event === "PASSWORD_RECOVERY") {
         setShowPasswordReset(true);
         return;
       }
 
       if (event === "SIGNED_IN" && currentSession?.user) {
-        // Check if MFA is required before redirecting
         supabase.auth.mfa.getAuthenticatorAssuranceLevel().then(({ data }) => {
           if (
             data &&
             data.currentLevel === "aal1" &&
             data.nextLevel === "aal2"
           ) {
-            // User has MFA enrolled but hasn't verified yet this session
             setShowMfaVerify(true);
           } else {
             handlePostLoginRedirect(currentSession.user.id);
@@ -135,7 +140,6 @@ function Auth() {
       }
     });
 
-    // Detect ?type=reset in URL (fallback for the PASSWORD_RECOVERY event)
     const typeParam = searchParams.get("type");
     if (typeParam === "reset") {
       supabase.auth.getSession().then(({ data: { session: s } }) => {
@@ -152,7 +156,6 @@ function Auth() {
           setSession(existingSession);
           setUser(existingSession?.user ?? null);
           if (existingSession?.user) {
-            // Check MFA assurance level on session restore
             const { data: mfaData } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
             if (mfaData && mfaData.currentLevel === "aal1" && mfaData.nextLevel === "aal2") {
               setShowMfaVerify(true);
@@ -167,7 +170,6 @@ function Auth() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Password validation
   useEffect(() => {
     setPasswordHasLength(password.length >= 8);
     setPasswordHasUppercase(/[A-Z]/.test(password));
@@ -179,7 +181,6 @@ function Auth() {
 
   const handlePostLoginRedirect = async (userId: string) => {
     try {
-      // Phase 13: .maybeSingle() so a missing profile row doesn't throw
       const { data: profileData } = await supabase
         .from("profiles")
         .select("account_status, application_reference")
@@ -200,8 +201,7 @@ function Auth() {
         await supabase.auth.signOut();
         toast({
           title: "Account Rejected",
-          description:
-            "Your application was not approved. Please contact support.",
+          description: "Your application was not approved. Please contact support.",
           variant: "destructive",
         });
         return;
@@ -211,8 +211,7 @@ function Auth() {
         await supabase.auth.signOut();
         toast({
           title: "Account Suspended",
-          description:
-            "Your account has been suspended. Please contact support.",
+          description: "Your account has been suspended. Please contact support.",
           variant: "destructive",
         });
         return;
@@ -327,9 +326,7 @@ function Auth() {
 
   // ============================================================================
   // Client-side rate limiting: 5 failed attempts → 15 min lockout per email.
-  // Uses localStorage so it persists across page refreshes.
-  // NOTE: This is a UX measure only — server-side auth rate limits are the
-  // true enforcement layer. Do not rely on this alone.
+  // NOTE: UX measure only — server-side auth rate limits are the true enforcement.
   // ============================================================================
   const MAX_ATTEMPTS = 5;
   const LOCKOUT_MS = 15 * 60 * 1000;
@@ -396,20 +393,7 @@ function Auth() {
         });
       }
     } catch (error: unknown) {
-      // ====================================================================
-      // Phase 13: GENERIC error messages for login failures.
-      //
-      // The previous version surfaced "Invalid login credentials" vs
-      // "Email not confirmed" vs raw error.message, which lets an attacker
-      // distinguish "this email exists but the password is wrong" from
-      // "this email doesn't exist". That's email enumeration via error
-      // disclosure.
-      //
-      // Now we collapse every credential-related failure into the same
-      // generic message. The only special-cased error is the rate-limit
-      // case, which is safe to disclose because it doesn't reveal whether
-      // the email exists.
-      // ====================================================================
+      // Phase 13: generic error messages — no email enumeration via error disclosure
       const message = error instanceof Error ? error.message : String(error);
 
       let errorMessage = "Email or password is incorrect. Please try again.";
@@ -450,7 +434,6 @@ function Auth() {
         email: email.trim().toLowerCase(),
         password,
         options: {
-          // Phase 13: hard-pinned canonical origin in production
           emailRedirectTo: getAuthRedirectUrl(),
           data: {
             first_name: firstName.trim(),
@@ -463,7 +446,6 @@ function Auth() {
       if (error) throw error;
 
       if (data.user) {
-        // Create profile
         await supabase.from("profiles").upsert({
           id: data.user.id,
           first_name: firstName.trim(),
@@ -472,7 +454,6 @@ function Auth() {
           account_status: "pending",
         });
 
-        // Assign default user role
         await supabase.from("user_roles").insert({
           user_id: data.user.id,
           role: "user",
@@ -485,19 +466,10 @@ function Auth() {
         });
       }
     } catch (error: unknown) {
-      // ====================================================================
-      // Phase 13: GENERIC signup error messages.
-      // We do NOT disclose "already registered" because that's an email
-      // enumeration vector. Instead we show the same generic success toast
-      // and rely on the email verification step to actually deliver to a
-      // real user. (For an attacker probing the signup endpoint with a
-      // random email, the response is identical regardless of whether the
-      // email is taken.)
-      // ====================================================================
+      // Phase 13: generic signup errors — no email enumeration via error disclosure
       const message = error instanceof Error ? error.message : String(error);
       console.warn("[auth] signup failure:", message);
 
-      // Special-cased benign errors that are safe to surface
       let errorMessage =
         "Unable to complete signup. Please verify your information and try again.";
       if (message.toLowerCase().includes("too many requests")) {
@@ -517,10 +489,7 @@ function Auth() {
   const handleGoogleSignIn = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: {
-        // Phase 13: hard-pinned canonical origin in production
-        redirectTo: getAuthRedirectUrl(),
-      },
+      options: { redirectTo: getAuthRedirectUrl() },
     });
     if (error) {
       console.warn("[auth] google oauth failure:", error.message);
@@ -535,11 +504,7 @@ function Auth() {
   const handleMicrosoftSignIn = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "azure",
-      options: {
-        // Phase 13: hard-pinned canonical origin in production
-        redirectTo: getAuthRedirectUrl(),
-        scopes: "email",
-      },
+      options: { redirectTo: getAuthRedirectUrl(), scopes: "email" },
     });
     if (error) {
       console.warn("[auth] microsoft oauth failure:", error.message);
@@ -589,7 +554,9 @@ function Auth() {
             className="ap-btn"
             onClick={() => { setSignupSuccess(false); setActiveTab("login"); }}
           >
+            <span className="ap-btn-dot" aria-hidden="true" />
             Back to Sign In
+            <span className="ap-btn-arrow"><ArrowRight className="w-3 h-3" /></span>
           </button>
         </div>
       </div>
@@ -646,69 +613,99 @@ function Auth() {
       <AuthOrbs />
 
       <div className="ap-card">
+
         {/* ── LEFT COLUMN ── */}
         <div className="ap-left">
-          {/* Flipping badge */}
-          <div className="ap-badge-flip">
-            <div className="ap-badge-inner">
+
+          {/* Orbital support badge */}
+          <div className="ap-badge" aria-label="24/7 Support">
+            <span className="ap-arc ap-arc--a" aria-hidden="true" />
+            <span className="ap-arc ap-arc--b" aria-hidden="true" />
+            <span className="ap-arc ap-arc--c" aria-hidden="true" />
+            <span className="ap-orbit" aria-hidden="true" />
+            <div className="ap-badge-flip">
               <div className="ap-badge-face ap-badge-front">
-                <ShieldCheck style={{ width: 14, height: 14 }} />
-                24/7 Support
+                <div>
+                  <div className="ap-badge-num">24/7</div>
+                  <div className="ap-badge-lbl">Support</div>
+                </div>
               </div>
               <div className="ap-badge-face ap-badge-back">
-                Invision.
+                <div>
+                  <div className="ap-badge-mark">
+                    Invision<span className="ap-badge-dot">.</span>
+                  </div>
+                  <div className="ap-badge-tag">Always On</div>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Parallelogram hero frame */}
-          <div className="ap-para">
-            <div className="ap-para-grid" />
-            <div className="ap-para-shimmer" />
-            <div className="ap-para-content">
+          {/* Skewed hero frame with L-outline */}
+          <div className="ap-hero-wrap">
+            <div className="ap-hero-outline" aria-hidden="true" />
+            <div className="ap-hero-frame">
               <img
                 src={invisionLogo}
                 alt="InVision Network"
-                className="ap-para-logo"
                 loading="eager"
                 decoding="sync"
-                width={44}
-                height={44}
+                width={240}
+                height={320}
               />
-              <p className="ap-para-headline">Protect What Matters</p>
-              <p className="ap-para-sub">InVision Network · EST. 2021</p>
             </div>
-          </div>
 
-          {/* Testimonials */}
-          <div className="ap-testimonials">
-            <div className="ap-testi">
-              <div className="ap-testi-stars">★★★★★</div>
-              <p className="ap-testi-text">
-                "InVision gave our family real peace of mind. The 24/7 monitoring is incredible."
-              </p>
-              <p className="ap-testi-name">— Margaret T., Client since 2022</p>
+            {/* Floating testimonials inside hero-wrap */}
+            <div className="ap-testi ap-testi--1">
+              <div className="ap-testi-avatar ap-testi-avatar--brand" aria-hidden="true">M</div>
+              <div className="ap-testi-body">
+                <div className="ap-testi-meta">
+                  <span className="ap-testi-name">
+                    Margaret T.
+                    <span className="ap-testi-tag">Client</span>
+                  </span>
+                  <span className="ap-testi-time">2022</span>
+                </div>
+                <p className="ap-testi-msg">
+                  "InVision gave our family real peace of mind."
+                </p>
+              </div>
             </div>
-            <div className="ap-testi">
-              <div className="ap-testi-stars">★★★★★</div>
-              <p className="ap-testi-text">
-                "The team is always responsive. Best senior care network I've worked with."
-              </p>
-              <p className="ap-testi-name">— James R., Healthcare Partner</p>
+
+            <div className="ap-testi ap-testi--2">
+              <div className="ap-testi-avatar" aria-hidden="true">J</div>
+              <div className="ap-testi-body">
+                <div className="ap-testi-meta">
+                  <span className="ap-testi-name">
+                    James R.
+                    <span className="ap-testi-tag">Partner</span>
+                  </span>
+                  <span className="ap-testi-time">2023</span>
+                </div>
+                <p className="ap-testi-msg">
+                  "Best senior care network I've worked with."
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
         {/* ── RIGHT COLUMN ── */}
         <div className="ap-right">
+
           {/* Brand mark */}
-          <Link to="/" className="ap-brand">
-            Invision<span className="ap-brand-dot">.</span>
-          </Link>
+          <div className="ap-brand-wrap">
+            <Link to="/" className="ap-brand-link">
+              <span className="ap-brand-mark">
+                Invision<span className="ap-brand-accent">.</span>
+              </span>
+            </Link>
+            <p className="ap-brand-tag">INVISION NETWORK</p>
+          </div>
 
           {/* Heading */}
           <h1 className="ap-headline">Welcome</h1>
-          <p className="ap-sub">Sign in or create an account to continue.</p>
+          <p className="ap-sub-line">Sign in or create an account to continue.</p>
 
           {/* SSO buttons */}
           <div className="ap-sso">
@@ -759,11 +756,10 @@ function Auth() {
 
           {/* ── LOGIN FORM ── */}
           {activeTab === "login" && (
-            <form onSubmit={handleLogin}>
-              {/* Email */}
+            <form className="ap-form" onSubmit={handleLogin}>
               <div className="ap-field">
-                <label htmlFor="login-email" className="ap-label">Email Address</label>
-                <div className="ap-input-wrap">
+                <label htmlFor="login-email" className="ap-field-label">Email Address</label>
+                <div className={`ap-input-wrap${emailError ? " is-error" : ""}`}>
                   <Mail className="ap-input-icon" aria-hidden="true" />
                   <input
                     id="login-email"
@@ -774,16 +770,15 @@ function Auth() {
                     disabled={isLoading}
                     autoComplete="email"
                     placeholder="you@example.com"
-                    className={`ap-input${emailError ? " is-error" : ""}`}
+                    className="ap-input"
                   />
                 </div>
                 {emailError && <p className="ap-error-msg">{emailError}</p>}
               </div>
 
-              {/* Password */}
               <div className="ap-field">
-                <label htmlFor="login-password" className="ap-label">Password</label>
-                <div className="ap-input-wrap">
+                <label htmlFor="login-password" className="ap-field-label">Password</label>
+                <div className={`ap-input-wrap${passwordError ? " is-error" : ""}`}>
                   <Lock className="ap-input-icon" aria-hidden="true" />
                   <input
                     id="login-password"
@@ -795,7 +790,7 @@ function Auth() {
                     placeholder="••••••••"
                     autoComplete="current-password"
                     minLength={8}
-                    className={`ap-input with-toggle${passwordError ? " is-error" : ""}`}
+                    className="ap-input with-toggle"
                   />
                   <button
                     type="button"
@@ -810,15 +805,16 @@ function Auth() {
                 {passwordError && <p className="ap-error-msg">{passwordError}</p>}
               </div>
 
-              {/* Remember me + forgot password */}
-              <div className="ap-check-row">
-                <label className="ap-check-label">
+              {/* Remember me + forgot */}
+              <div className="ap-check-forgot">
+                <label className="ap-check-row">
                   <input
                     type="checkbox"
                     className="ap-check"
                     checked={rememberMe}
                     onChange={(e) => setRememberMe(e.target.checked)}
                   />
+                  <span className="ap-check-box" aria-hidden="true" />
                   <span className="ap-check-text">Remember me</span>
                 </label>
                 <button
@@ -830,24 +826,22 @@ function Auth() {
                 </button>
               </div>
 
-              {/* Submit */}
-              <button type="submit" className="ap-btn" disabled={isLoading}>
-                {isLoading ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    Signing in…
-                  </>
-                ) : (
-                  <>
-                    Sign In
-                    <span className="ap-btn-arrow">
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </span>
-                  </>
-                )}
-              </button>
+              {/* Action row */}
+              <div className="ap-action-row">
+                <span className="ap-action-text">
+                  No account?
+                  <button type="button" onClick={() => setActiveTab("signup")}>Sign up</button>
+                </span>
+                <div className="ap-divider-v" aria-hidden="true" />
+                <QuadrantBtn disabled={isLoading}>
+                  {isLoading
+                    ? <Loader2 className="w-4 h-4 animate-spin" />
+                    : <span className="ap-btn-dot" aria-hidden="true" />}
+                  <span>{isLoading ? "Signing in…" : "Continue"}</span>
+                  {!isLoading && <span className="ap-btn-arrow"><ArrowRight className="w-3 h-3" /></span>}
+                </QuadrantBtn>
+              </div>
 
-              {/* Security footer */}
               <div className="ap-security">
                 <ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" />
                 Secured by 256-bit Encryption
@@ -857,42 +851,45 @@ function Auth() {
 
           {/* ── SIGNUP FORM ── */}
           {activeTab === "signup" && (
-            <form onSubmit={handleSignup}>
+            <form className="ap-form" onSubmit={handleSignup}>
               {/* Name row */}
               <div className="ap-field-row">
                 <div>
-                  <label htmlFor="firstName" className="ap-label">First Name</label>
-                  <input
-                    id="firstName"
-                    type="text"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    required
-                    disabled={isLoading}
-                    autoComplete="given-name"
-                    placeholder="Jane"
-                    className="ap-input no-icon"
-                  />
+                  <label htmlFor="firstName" className="ap-field-label">First Name</label>
+                  <div className="ap-input-wrap">
+                    <input
+                      id="firstName"
+                      type="text"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      required
+                      disabled={isLoading}
+                      autoComplete="given-name"
+                      placeholder="Jane"
+                      className="ap-input no-icon"
+                    />
+                  </div>
                 </div>
                 <div>
-                  <label htmlFor="lastName" className="ap-label">Last Name</label>
-                  <input
-                    id="lastName"
-                    type="text"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    required
-                    disabled={isLoading}
-                    autoComplete="family-name"
-                    placeholder="Smith"
-                    className="ap-input no-icon"
-                  />
+                  <label htmlFor="lastName" className="ap-field-label">Last Name</label>
+                  <div className="ap-input-wrap">
+                    <input
+                      id="lastName"
+                      type="text"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      required
+                      disabled={isLoading}
+                      autoComplete="family-name"
+                      placeholder="Smith"
+                      className="ap-input no-icon"
+                    />
+                  </div>
                 </div>
               </div>
 
-              {/* Email */}
               <div className="ap-field">
-                <label htmlFor="signup-email" className="ap-label">Email Address</label>
+                <label htmlFor="signup-email" className="ap-field-label">Email Address</label>
                 <div className="ap-input-wrap">
                   <Mail className="ap-input-icon" aria-hidden="true" />
                   <input
@@ -909,9 +906,8 @@ function Auth() {
                 </div>
               </div>
 
-              {/* Password */}
               <div className="ap-field">
-                <label htmlFor="signup-password" className="ap-label">Password</label>
+                <label htmlFor="signup-password" className="ap-field-label">Password</label>
                 <div className="ap-input-wrap">
                   <Lock className="ap-input-icon" aria-hidden="true" />
                   <input
@@ -945,9 +941,8 @@ function Auth() {
                 </div>
               </div>
 
-              {/* Confirm password */}
               <div className="ap-field">
-                <label htmlFor="confirmPassword" className="ap-label">Confirm Password</label>
+                <label htmlFor="confirmPassword" className="ap-field-label">Confirm Password</label>
                 <div className="ap-input-wrap">
                   <Lock className="ap-input-icon" aria-hidden="true" />
                   <input
@@ -973,7 +968,8 @@ function Auth() {
                   </button>
                 </div>
                 {confirmPassword && (
-                  <div className={`ap-strength-item ${passwordsMatch ? "ap-strength-item--met" : ""}`}
+                  <div
+                    className={`ap-strength-item ${passwordsMatch ? "ap-strength-item--met" : ""}`}
                     style={{ marginTop: 6, fontSize: 11, color: passwordsMatch ? "#4ade80" : "#fca5a5" }}
                   >
                     {passwordsMatch
@@ -984,24 +980,22 @@ function Auth() {
                 )}
               </div>
 
-              {/* Submit */}
-              <button type="submit" className="ap-btn" disabled={isLoading}>
-                {isLoading ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    Creating account…
-                  </>
-                ) : (
-                  <>
-                    Create Account
-                    <span className="ap-btn-arrow">
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </span>
-                  </>
-                )}
-              </button>
+              {/* Action row */}
+              <div className="ap-action-row">
+                <span className="ap-action-text">
+                  Have account?
+                  <button type="button" onClick={() => setActiveTab("login")}>Sign in</button>
+                </span>
+                <div className="ap-divider-v" aria-hidden="true" />
+                <QuadrantBtn disabled={isLoading}>
+                  {isLoading
+                    ? <Loader2 className="w-4 h-4 animate-spin" />
+                    : <span className="ap-btn-dot" aria-hidden="true" />}
+                  <span>{isLoading ? "Creating account…" : "Create Account"}</span>
+                  {!isLoading && <span className="ap-btn-arrow"><ArrowRight className="w-3 h-3" /></span>}
+                </QuadrantBtn>
+              </div>
 
-              {/* Security footer */}
               <div className="ap-security">
                 <ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" />
                 Secured by 256-bit Encryption
