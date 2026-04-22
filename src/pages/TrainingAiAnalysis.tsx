@@ -14,12 +14,10 @@ import { useCheckout } from "@/contexts/CheckoutContext";
 import { SITE } from "@/config/site";
 import { SCAMSHIELD_PLANS } from "@/config/products";
 import {
-  BadgeCheck, CreditCard, LogIn, Moon, ShieldCheck,
-  Sparkles, Sun, X, Lock, ShieldAlert, Camera,
-  Wallet, Loader2, Mail, ExternalLink, Phone, Image as ImageIcon,
-  Mic, MessageCircle, FileText as FileTextIcon, QrCode, UserCircle,
-  KeyRound, Globe, StopCircle, Paperclip, Settings,
-  Folder, Minimize2, RotateCcw, CheckSquare, Square,
+  BadgeCheck, Bookmark, CreditCard, FileDown, LogIn, Minimize2,
+  MoreHorizontal, Moon, ShieldCheck, Sparkles, Sun, X, Lock,
+  ShieldAlert, Wallet, Loader2, Mic, KeyRound, Globe, StopCircle,
+  Paperclip, Settings, Folder, RotateCcw, CheckSquare, Square,
 } from "lucide-react";
 import {
   Dialog,
@@ -39,28 +37,7 @@ type ScanMode =
   | 'default' | 'email' | 'url' | 'phone' | 'image'
   | 'voice' | 'text-message' | 'document' | 'qr' | 'social' | 'password';
 
-// ─── Constants (outside component to avoid re-creation) ───────────────────────
-
-const SCAN_MODES: Array<{
-  id: ScanMode;
-  label: string;
-  icon: React.ElementType;
-  placeholder: string;
-  inputType: 'text' | 'file' | 'password';
-  accept?: string;
-}> = [
-  { id: 'default',      label: 'Chat',     icon: Sparkles,      placeholder: 'Ask anything or drop a file to analyze...', inputType: 'text' },
-  { id: 'email',        label: 'Email',    icon: Mail,          placeholder: 'Paste a suspicious email here...', inputType: 'text' },
-  { id: 'url',          label: 'URL',      icon: ExternalLink,  placeholder: 'Enter a URL or link to check safety...', inputType: 'text' },
-  { id: 'phone',        label: 'Phone',    icon: Phone,         placeholder: 'Enter a phone number to look up...', inputType: 'text' },
-  { id: 'image',        label: 'Image',    icon: ImageIcon,     placeholder: 'Upload an image to check for deepfakes...', inputType: 'file', accept: 'image/*' },
-  { id: 'voice',        label: 'Voice',    icon: Mic,           placeholder: 'Upload an audio clip to analyze...', inputType: 'file', accept: 'audio/*' },
-  { id: 'text-message', label: 'SMS',      icon: MessageCircle, placeholder: 'Paste a suspicious text message or DM...', inputType: 'text' },
-  { id: 'document',     label: 'Document', icon: FileTextIcon,  placeholder: 'Upload a PDF or Word document...', inputType: 'file', accept: '.pdf,.doc,.docx' },
-  { id: 'qr',           label: 'QR',       icon: QrCode,        placeholder: 'Upload a QR code image...', inputType: 'file', accept: 'image/*' },
-  { id: 'social',       label: 'Social',   icon: UserCircle,    placeholder: 'Paste a social media profile URL...', inputType: 'text' },
-  { id: 'password',     label: 'Password', icon: KeyRound,      placeholder: 'Enter a password to check...', inputType: 'password' },
-];
+// ─── Constants ────────────────────────────────────────────────────────────────
 
 const MODE_PROMPTS: Partial<Record<ScanMode, string>> = {
   email: 'Analyze this email for phishing indicators, fake sender detection, malicious links, and urgency manipulation. Rate threat level and list red flags:\n\n',
@@ -73,8 +50,24 @@ const MODE_PROMPTS: Partial<Record<ScanMode, string>> = {
 const LIGHT_BG = `radial-gradient(ellipse 80% 60% at 50% 110%, #ff7a45 0%, #ff9b5a 18%, #ffb784 35%, #e8a7b8 55%, #c8a8d6 72%, #a8b3e8 88%, #9fb5ec 100%)`;
 const DARK_BG  = `radial-gradient(ellipse 80% 60% at 50% 110%, #3a1a0a 0%, #4a2010 20%, #3a1a2a 45%, #1f1530 70%, #0a0a1f 100%)`;
 
-// Anchored to full hostname (after :// and before /) to prevent lookalike domains
+// Anchored to full hostname to prevent lookalike domains
 const SOCIAL_RE = /^https?:\/\/(?:www\.)?(?:facebook\.com|instagram\.com|linkedin\.com|tiktok\.com|reddit\.com|pinterest\.com|snapchat\.com|twitter\.com|x\.com|youtube\.com)\//i;
+
+function detectScanMode(text: string, file: File | null): ScanMode {
+  if (file) {
+    if (file.type.startsWith('audio/')) return 'voice';
+    if (file.type.startsWith('image/')) return 'image';
+    return 'document';
+  }
+  const t = text.trim();
+  if (!t) return 'default';
+  if (SOCIAL_RE.test(t)) return 'social';
+  if (/^https?:\/\//i.test(t)) return 'url';
+  if (/^[+\d\s\-()]{7,15}$/.test(t)) return 'phone';
+  if (t.split('\n').length > 2 && /@[^\s]+\.[a-z]{2,}/i.test(t)) return 'email';
+  if (t.split('\n').length > 1 && t.length > 80) return 'text-message';
+  return 'default';
+}
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
@@ -82,16 +75,16 @@ export default function TrainingAiAnalysis() {
   usePrerenderReady(true);
 
   // — UI state —
-  const [paymentOpen, setPaymentOpen]         = useState(false);
-  const [paywallOpen, setPaywallOpen]         = useState(false);
-  const [settingsOpen, setSettingsOpen]       = useState(false);
-  const [minimize, setMinimize]               = useState(false);
-  const [darkMode, setDarkMode]               = useState(false);
-  const [webSearch, setWebSearch]             = useState(false);
-  const [scanMode, setScanMode]               = useState<ScanMode>('default');
-  const [textInput, setTextInput]             = useState('');
-  const [isRecording, setIsRecording]         = useState(false);
-  const [passwordResult, setPasswordResult]   = useState<{ score: number; breaches: string; suggestions: string[] } | null>(null);
+  const [paymentOpen, setPaymentOpen]           = useState(false);
+  const [paywallOpen, setPaywallOpen]           = useState(false);
+  const [settingsOpen, setSettingsOpen]         = useState(false);
+  const [menuOpen, setMenuOpen]                 = useState(false);
+  const [minimize, setMinimize]                 = useState(false);
+  const [darkMode, setDarkMode]                 = useState(false);
+  const [webSearch, setWebSearch]               = useState(false);
+  const [textInput, setTextInput]               = useState('');
+  const [isRecording, setIsRecording]           = useState(false);
+  const [passwordResult, setPasswordResult]     = useState<{ score: number; breaches: string; suggestions: string[] } | null>(null);
   const [checkingPassword, setCheckingPassword] = useState(false);
   const [settings, setSettings] = useState({
     darkMode:    false,
@@ -100,11 +93,12 @@ export default function TrainingAiAnalysis() {
   });
 
   // — Refs —
-  const textareaRef        = useRef<HTMLTextAreaElement>(null);
-  const recognitionRef     = useRef<SpeechRecognition | null>(null);
-  const mediaRecorderRef   = useRef<MediaRecorder | null>(null);
-  const fileInputRef       = useRef<HTMLInputElement>(null);
-  const micBtnRef          = useRef<HTMLButtonElement>(null);
+  const textareaRef      = useRef<HTMLTextAreaElement>(null);
+  const recognitionRef   = useRef<SpeechRecognition | null>(null);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const fileInputRef     = useRef<HTMLInputElement>(null);
+  const micBtnRef        = useRef<HTMLButtonElement>(null);
+  const menuRef          = useRef<HTMLDivElement>(null);
 
   // — Auth / subscription hooks —
   const { user } = useAuth();
@@ -132,7 +126,6 @@ export default function TrainingAiAnalysis() {
 
   const featuredPlan = useMemo(() => SCAMSHIELD_PLANS.find(p => p.popular) ?? SCAMSHIELD_PLANS[0], []);
 
-
   const accessLabel = useMemo(() => {
     if (isCheckingAccess)                    return "Checking access…";
     if (scanAccessType === "subscription")   return "ScamShield active ✓";
@@ -157,7 +150,16 @@ export default function TrainingAiAnalysis() {
   const { messages, status: chatStatus, sendMessage, clearChat } = useAiChat();
   const isProcessing = status === "uploading" || status === "analyzing";
   const canPay       = file && status === "ready";
-  const currentMode  = SCAN_MODES.find(m => m.id === scanMode) ?? SCAN_MODES[0];
+
+  // Auto-detect scan mode from current input
+  const autoDetectedMode = useMemo(() => detectScanMode(textInput, file), [textInput, file]);
+
+  // Show password check UI for short inputs with no spaces
+  const looksLikePassword = useMemo(() =>
+    textInput.trim().length > 0 &&
+    textInput.trim().length <= 50 &&
+    !/\s/.test(textInput.trim()),
+  [textInput]);
 
   // — Keyboard shortcuts —
   useEffect(() => {
@@ -168,12 +170,25 @@ export default function TrainingAiAnalysis() {
       }
       if (e.key === 'Escape') {
         setSettingsOpen(false);
+        setMenuOpen(false);
         if (isRecording) stopRecording();
       }
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
   }, [isRecording]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Close menu on outside click
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [menuOpen]);
 
   // — Beforeunload warning —
   useEffect(() => {
@@ -196,12 +211,10 @@ export default function TrainingAiAnalysis() {
   }, []);
 
   const startRecording = useCallback(() => {
-    // Check secure context (HTTPS or localhost)
     if (!window.isSecureContext) {
       toast.error("Microphone requires a secure (HTTPS) connection.");
       return;
     }
-
     const win = window as Window & typeof globalThis & {
       SpeechRecognition?: typeof SpeechRecognition;
       webkitSpeechRecognition?: typeof SpeechRecognition;
@@ -209,7 +222,6 @@ export default function TrainingAiAnalysis() {
     const SR = win.SpeechRecognition ?? win.webkitSpeechRecognition;
 
     if (SR) {
-      // ── SpeechRecognition path ──────────────────────────────────────
       const rec = new SR();
       rec.continuous = false;
       rec.interimResults = true;
@@ -236,7 +248,6 @@ export default function TrainingAiAnalysis() {
       setIsRecording(true);
       micBtnRef.current?.classList.add('recording');
     } else {
-      // ── MediaRecorder fallback ──────────────────────────────────────
       navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
         const chunks: BlobPart[] = [];
         const mr = new MediaRecorder(stream);
@@ -258,25 +269,18 @@ export default function TrainingAiAnalysis() {
       });
     }
   }, []);
-  const toggleRecording = () => isRecording ? stopRecording() : startRecording();
+  const toggleRecording = () => { if (isRecording) stopRecording(); else startRecording(); };
 
   // — Handlers —
-  const handleSendMessage = useCallback((message: string) => {
-    if (!message.trim()) return;
+  const handleSend = useCallback((text: string) => {
+    if (!text.trim()) return;
     if (!chatUnlocked) { setPaywallOpen(true); return; }
-    sendMessage(message);
-  }, [chatUnlocked, sendMessage]);
-
-  const handleTextScan = useCallback(() => {
-    if (!textInput.trim()) return;
-    if (scanMode === 'social' && !SOCIAL_RE.test(textInput.trim())) {
-      toast.error("Please enter a full social media profile URL (e.g. https://facebook.com/username)");
-      return;
-    }
-    const prefix = MODE_PROMPTS[scanMode] ?? '';
-    handleSendMessage(prefix + textInput);
+    const mode = detectScanMode(text, file);
+    const prefix = MODE_PROMPTS[mode] ?? '';
+    sendMessage(prefix + text);
     setTextInput('');
-  }, [textInput, scanMode, handleSendMessage]);
+    setPasswordResult(null);
+  }, [chatUnlocked, file, sendMessage]);
 
   const handlePasswordCheck = async () => {
     const trimmed = textInput.trim();
@@ -301,12 +305,12 @@ export default function TrainingAiAnalysis() {
       } catch { /* offline */ }
 
       const suggestions: string[] = [];
-      if (pw.length < 12)          suggestions.push('Use at least 12 characters');
-      if (!/[A-Z]/.test(pw))       suggestions.push('Add uppercase letters');
-      if (!/[a-z]/.test(pw))       suggestions.push('Add lowercase letters');
-      if (!/\d/.test(pw))          suggestions.push('Add numbers');
-      if (!/[^a-zA-Z0-9]/.test(pw)) suggestions.push('Add special characters');
-      if (!suggestions.length)     suggestions.push('Strong password! Store it in a password manager.');
+      if (pw.length < 12)            suggestions.push('Use at least 12 characters');
+      if (!/[A-Z]/.test(pw))         suggestions.push('Add uppercase letters');
+      if (!/[a-z]/.test(pw))         suggestions.push('Add lowercase letters');
+      if (!/\d/.test(pw))            suggestions.push('Add numbers');
+      if (!/[^a-zA-Z0-9]/.test(pw))  suggestions.push('Add special characters');
+      if (!suggestions.length)       suggestions.push('Strong password! Store it in a password manager.');
       setPasswordResult({ score, breaches: breachCount, suggestions });
     } finally {
       setCheckingPassword(false);
@@ -359,89 +363,185 @@ export default function TrainingAiAnalysis() {
 
   const handleDownload = () => {
     const txt = messages.map(m => `[${m.role}]: ${m.content}`).join('\n\n') || 'No data.';
-    const a   = Object.assign(document.createElement('a'), {
+    const a = Object.assign(document.createElement('a'), {
       href:     URL.createObjectURL(new Blob([txt], { type: 'text/plain' })),
       download: `scan-${Date.now()}.txt`,
     });
     a.click();
   };
 
-  // ─── Pill style helpers ───────────────────────────────────────────────────
+  // ─── Style helpers ────────────────────────────────────────────────────────
 
   const pillBase: React.CSSProperties = {
-    background:    'rgba(20,20,22,0.85)',
+    background:     'rgba(20,20,22,0.85)',
     backdropFilter: 'blur(10px)',
-    borderRadius:  '999px',
-    border:        '1px solid rgba(255,255,255,0.12)',
-    color:         '#c9c9cd',
-    cursor:        'pointer',
-    display:       'flex',
-    alignItems:    'center',
-    gap:           '5px',
-    fontSize:      '12px',
-    padding:       '5px 10px',
+    WebkitBackdropFilter: 'blur(10px)',
+    borderRadius:   '999px',
+    border:         '1px solid rgba(255,255,255,0.12)',
+    color:          '#c9c9cd',
+    display:        'flex',
+    alignItems:     'center',
+    gap:            '2px',
+    padding:        '4px 8px',
   };
 
   const toolBtn: React.CSSProperties = {
-    background:   'transparent',
-    border:       'none',
-    color:        '#c9c9cd',
-    padding:      '4px',
-    borderRadius: '6px',
-    cursor:       'pointer',
-    display:      'flex',
-    alignItems:   'center',
-    justifyContent: 'center',
-    transition:   'color 0.15s, background 0.15s',
+    background:    'transparent',
+    border:        'none',
+    color:         '#c9c9cd',
+    padding:       '4px 6px',
+    borderRadius:  '999px',
+    cursor:        'pointer',
+    display:       'flex',
+    alignItems:    'center',
+    justifyContent:'center',
+    transition:    'color 0.15s, background 0.15s',
   };
+
+  const sepStyle: React.CSSProperties = { width: '1px', height: '18px', background: '#3a3a3d', flexShrink: 0 };
 
   // ─── Render ───────────────────────────────────────────────────────────────
 
   return (
     <PageTransition variant="fade">
       <div
-        className="ai-analysis-page min-h-screen flex flex-col"
-        style={{ background: darkMode ? DARK_BG : LIGHT_BG, backgroundAttachment: 'fixed', color: '#fff', transform: minimize ? 'scale(0.9)' : 'scale(1)', transformOrigin: 'top center', transition: 'transform 0.25s ease' }}
+        className="ai-analysis-page min-h-screen flex flex-col relative"
+        style={{
+          background: darkMode ? DARK_BG : LIGHT_BG,
+          backgroundAttachment: 'fixed',
+          color: '#fff',
+          transform: minimize ? 'scale(0.9)' : 'scale(1)',
+          transformOrigin: 'top center',
+          transition: 'transform 0.25s ease',
+        }}
       >
         <SEO
-          title="AI Security Scanner — 10 Scan Modes"
-          description="Scan emails, links, phone numbers, images, voice clips, documents and more with AI-powered analysis."
+          title="AI Security Scanner — Auto-Detect Scan"
+          description="Paste suspicious emails, links, phone numbers, or attach files. AI auto-detects and analyzes threats instantly."
           keywords="AI scanner, phishing detector, deepfake checker, scam detection"
           structuredData={{ "@context": "https://schema.org", "@type": "WebPage", name: "AI Security Scanner", url: "https://www.invisionnetwork.org/training/ai-analysis", publisher: { "@type": "Organization", name: SITE.name } }}
         />
 
-        {/* ── Top bar ─────────────────────────────────────────────────────── */}
-        <div className="flex items-center justify-between px-4 pt-2 pb-1 relative z-20"
-          style={{ background: 'rgba(15,10,8,0.55)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)' }}>
-          {/* Left: back to site */}
-          <Link to="/" style={{ ...pillBase, textDecoration: 'none' }} className="hover:!text-white">
-            ← Home
-          </Link>
+        {/* ── Home link (unobtrusive, top-left) ───────────────────────────────── */}
+        <Link
+          to="/"
+          style={{ position: 'absolute', top: '14px', left: '16px', fontSize: '12px', color: 'rgba(255,255,255,0.38)', textDecoration: 'none', zIndex: 30, transition: 'color 0.15s' }}
+          onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.75)')}
+          onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.38)')}
+        >
+          ← Home
+        </Link>
 
-          {/* Title */}
-          <p className="absolute left-1/2 -translate-x-1/2 text-xs font-medium pointer-events-none" style={{ color: 'rgba(255,255,255,0.45)' }}>
-            ScamShield AI Scanner
-          </p>
+        {/* ── Floating top pills (top-right) ──────────────────────────────────── */}
+        <div style={{ position: 'absolute', top: '10px', right: '16px', display: 'flex', gap: '6px', zIndex: 30 }}>
 
-          {/* Right: minimize + theme + clear */}
-          <div style={{ ...pillBase, gap: '2px', padding: '4px 8px' }}>
-            <button type="button" title={minimize ? 'Restore' : 'Minimize'} onClick={() => setMinimize(m => !m)}
-              style={{ ...toolBtn, padding: '4px 6px' }} className="hover:!text-white">
+          {/* Left pill: minimize / theme / refresh */}
+          <div style={pillBase}>
+            <button
+              type="button"
+              title={minimize ? 'Restore' : 'Minimize'}
+              onClick={() => setMinimize(m => !m)}
+              style={toolBtn}
+              onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+              onMouseLeave={e => (e.currentTarget.style.color = '#c9c9cd')}
+            >
               <Minimize2 className="w-3 h-3" />
             </button>
-            <button type="button" title={darkMode ? 'Light mode' : 'Dark mode'} onClick={() => setDarkMode(d => !d)}
-              style={{ ...toolBtn, padding: '4px 6px' }} className="hover:!text-white">
+            <button
+              type="button"
+              title={darkMode ? 'Light mode' : 'Dark mode'}
+              onClick={() => { setDarkMode(d => !d); setSettings(s => ({ ...s, darkMode: !s.darkMode })); }}
+              style={toolBtn}
+              onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+              onMouseLeave={e => (e.currentTarget.style.color = '#c9c9cd')}
+            >
               {darkMode ? <Sun className="w-3 h-3" /> : <Moon className="w-3 h-3" />}
             </button>
-            <button type="button" title="Clear messages" onClick={() => { clearChat(); clearFile(); }}
-              style={{ ...toolBtn, padding: '4px 6px' }} className="hover:!text-white">
+            <button
+              type="button"
+              title="Clear messages"
+              onClick={() => { clearChat(); clearFile(); setPasswordResult(null); setTextInput(''); }}
+              style={toolBtn}
+              onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+              onMouseLeave={e => (e.currentTarget.style.color = '#c9c9cd')}
+            >
               <RotateCcw className="w-3 h-3" />
             </button>
           </div>
+
+          {/* Right pill: export / save / menu */}
+          <div style={{ ...pillBase, position: 'relative' }} ref={menuRef}>
+            <button
+              type="button"
+              title="Export chat"
+              onClick={handleDownload}
+              style={toolBtn}
+              onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+              onMouseLeave={e => (e.currentTarget.style.color = '#c9c9cd')}
+            >
+              <FileDown className="w-3 h-3" />
+            </button>
+            <button
+              type="button"
+              title="Save as PDF"
+              onClick={handleSaveAsPdf}
+              style={toolBtn}
+              onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+              onMouseLeave={e => (e.currentTarget.style.color = '#c9c9cd')}
+            >
+              <Bookmark className="w-3 h-3" />
+            </button>
+            <button
+              type="button"
+              title="Menu"
+              onClick={e => { e.stopPropagation(); setMenuOpen(m => !m); }}
+              style={{ ...toolBtn, color: menuOpen ? '#fff' : '#c9c9cd' }}
+            >
+              <MoreHorizontal className="w-3 h-3" />
+            </button>
+
+            {/* Dropdown menu */}
+            {menuOpen && (
+              <div style={{
+                position: 'absolute', top: 'calc(100% + 8px)', right: 0,
+                background: 'rgba(20,20,22,0.96)', backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                borderRadius: '12px', border: '1px solid rgba(255,255,255,0.1)',
+                padding: '6px', minWidth: '164px', zIndex: 50,
+                boxShadow: '0 12px 32px rgba(0,0,0,0.45)',
+              }}>
+                {([
+                  {
+                    label: 'Clear messages',
+                    action: () => { clearChat(); clearFile(); setPasswordResult(null); setTextInput(''); setMenuOpen(false); },
+                  },
+                  {
+                    label: 'Export chat',
+                    action: () => { handleDownload(); setMenuOpen(false); },
+                  },
+                  {
+                    label: 'About',
+                    action: () => { toast('ScamShield AI — Auto-detect security scanner'); setMenuOpen(false); },
+                  },
+                ] as { label: string; action: () => void }[]).map(item => (
+                  <button
+                    key={item.label}
+                    type="button"
+                    onClick={item.action}
+                    style={{ display: 'block', width: '100%', textAlign: 'left', padding: '8px 12px', borderRadius: '8px', background: 'none', border: 'none', color: '#c9c9cd', fontSize: '13px', cursor: 'pointer', transition: 'background 0.12s, color 0.12s' }}
+                    onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = '#fff'; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.color = '#c9c9cd'; }}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* ── Main content ─────────────────────────────────────────────────── */}
-        <main className="flex-1 flex flex-col items-center justify-center px-4 pb-8 relative z-10">
+        {/* ── Main content ─────────────────────────────────────────────────────── */}
+        <main className="flex-1 flex flex-col items-center justify-center px-4 pb-8 pt-14 relative z-10">
 
           {/* Chat history */}
           {messages.length > 0 && (
@@ -451,22 +551,30 @@ export default function TrainingAiAnalysis() {
           )}
 
           {/* Compact access banner */}
-          <div className="flex items-center justify-between gap-3 flex-wrap mb-3 px-4 py-2.5 rounded-2xl"
-            style={{ width: 'min(640px, 92vw)', background: 'rgba(20,20,22,0.78)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.1)' }}>
+          <div
+            className="flex items-center justify-between gap-3 flex-wrap mb-3 px-4 py-2.5 rounded-2xl"
+            style={{ width: 'min(640px, 92vw)', background: 'rgba(20,20,22,0.78)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.1)' }}
+          >
             <div className="flex items-center gap-2">
               {scanAccessType === "subscription"
                 ? <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
-                : scanAccessType ? <Wallet className="w-3.5 h-3.5 text-orange-300 flex-shrink-0" />
-                : user ? <ShieldAlert className="w-3.5 h-3.5 text-yellow-300 flex-shrink-0" />
+                : scanAccessType
+                ? <Wallet className="w-3.5 h-3.5 text-orange-300 flex-shrink-0" />
+                : user
+                ? <ShieldAlert className="w-3.5 h-3.5 text-yellow-300 flex-shrink-0" />
                 : <LogIn className="w-3.5 h-3.5 flex-shrink-0" style={{ color: '#c9c9cd' }} />}
               <span className="text-xs" style={{ color: '#c9c9cd' }}>{accessLabel}</span>
             </div>
             <div className="flex items-center gap-2">
               {scanAccessType ? (
-                <button type="button" onClick={handleRefreshAccess}
-                  className="text-xs transition" style={{ color: 'rgba(255,255,255,0.35)', background: 'none', border: 'none', cursor: 'pointer' }}
+                <button
+                  type="button"
+                  onClick={handleRefreshAccess}
+                  className="text-xs transition"
+                  style={{ color: 'rgba(255,255,255,0.35)', background: 'none', border: 'none', cursor: 'pointer' }}
                   onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.7)')}
-                  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.35)')}>
+                  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.35)')}
+                >
                   Refresh
                 </button>
               ) : (
@@ -476,8 +584,12 @@ export default function TrainingAiAnalysis() {
                       <Link to={loginPath}>Log in</Link>
                     </Button>
                   )}
-                  <Button size="sm" variant="heroOutline" className="text-white hover:text-white h-6 px-3 text-[11px]"
-                    onClick={handleStartSubscription}>
+                  <Button
+                    size="sm"
+                    variant="heroOutline"
+                    className="text-white hover:text-white h-6 px-3 text-[11px]"
+                    onClick={handleStartSubscription}
+                  >
                     Subscribe
                   </Button>
                 </>
@@ -485,33 +597,7 @@ export default function TrainingAiAnalysis() {
             </div>
           </div>
 
-          {/* Scan mode tabs */}
-          <div className="flex flex-wrap justify-center gap-1 mb-3" style={{ maxWidth: 'min(640px, 92vw)', width: '100%' }}>
-            {SCAN_MODES.map(mode => {
-              const Icon  = mode.icon;
-              const active = scanMode === mode.id;
-              return (
-                <button key={mode.id} type="button"
-                  onClick={() => { setScanMode(mode.id); setTextInput(''); setPasswordResult(null); }}
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: '4px',
-                    padding: '4px 10px', borderRadius: '999px',
-                    fontSize: '11px', fontWeight: 500,
-                    background: active ? 'rgba(255,122,69,0.3)' : 'rgba(20,20,22,0.78)',
-                    backdropFilter: 'blur(10px)',
-                    border: `1px solid ${active ? 'rgba(255,122,69,0.55)' : 'rgba(255,255,255,0.1)'}`,
-                    color: active ? '#fff' : '#c9c9cd',
-                    cursor: 'pointer', transition: 'all 0.15s ease',
-                  }}
-                  className="hover:!text-white">
-                  <Icon style={{ width: '11px', height: '11px', flexShrink: 0 }} />
-                  {mode.label}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* ── Chatbox ─────────────────────────────────────────────────────── */}
+          {/* ── Chatbox ─────────────────────────────────────────────────────────── */}
           <div style={{
             width: 'min(640px, 92vw)',
             background: '#1c1c1e',
@@ -519,109 +605,98 @@ export default function TrainingAiAnalysis() {
             padding: '18px 20px 14px',
             boxShadow: '0 20px 50px rgba(0,0,0,0.18)',
           }}>
-
-            {/* Text textarea */}
-            {(currentMode.inputType === 'text' || currentMode.inputType === 'password') && (
-              <textarea
-                ref={textareaRef}
-                value={textInput}
-                onChange={e => setTextInput(e.target.value)}
-                onKeyDown={e => {
-                  if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    if (currentMode.inputType === 'password') void handlePasswordCheck();
-                    else if (textInput.trim()) scanMode === 'default' ? handleSendMessage(textInput) : handleTextScan();
-                  }
-                }}
-                placeholder={currentMode.placeholder}
-                rows={scanMode === 'default' ? 2 : 4}
-                style={{
-                  width: '100%', background: 'transparent', border: 'none',
-                  outline: 'none', color: '#fff', fontSize: '15px',
-                  padding: '6px 2px 16px', resize: 'none',
-                  fontFamily: 'inherit', lineHeight: 1.5,
-                }}
-                className="placeholder:text-[#8a8a8f]"
-              />
-            )}
-
-            {/* File drop zone */}
-            {currentMode.inputType === 'file' && (
-              <div
-                onClick={() => fileInputRef.current?.click()}
-                style={{
-                  cursor: 'pointer', padding: '20px', textAlign: 'center',
-                  borderRadius: '14px', border: '1.5px dashed rgba(255,255,255,0.12)',
-                  marginBottom: '14px', color: '#8a8a8f', fontSize: '14px',
-                  transition: 'border-color 0.2s, color 0.2s',
-                }}
-                className="hover:!border-white/30 hover:!text-white/70"
-              >
-                <Camera style={{ width: '22px', height: '22px', margin: '0 auto 8px', opacity: 0.45 }} />
-                <p>{file ? <span style={{ color: '#fff' }}>{file.name}</span> : currentMode.placeholder}</p>
-                {file && <p style={{ fontSize: '12px', marginTop: '4px', color: '#c9c9cd' }}>{cost.formatted} / scan</p>}
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  className="hidden"
-                  accept={currentMode.accept}
-                  onChange={e => { const f = e.target.files?.[0]; if (f) prepareFile(f); }}
-                />
-              </div>
-            )}
+            {/* Textarea — always visible */}
+            <textarea
+              ref={textareaRef}
+              value={textInput}
+              onChange={e => { setTextInput(e.target.value); setPasswordResult(null); }}
+              onKeyDown={e => {
+                if (e.key === 'Enter' && !e.shiftKey && settings.sendOnEnter) {
+                  e.preventDefault();
+                  if (textInput.trim()) handleSend(textInput);
+                }
+              }}
+              placeholder={
+                autoDetectedMode === 'email'        ? 'Paste a suspicious email to analyze...' :
+                autoDetectedMode === 'url'          ? 'Analyzing URL...' :
+                autoDetectedMode === 'phone'        ? 'Checking phone number...' :
+                autoDetectedMode === 'text-message' ? 'Analyzing message...' :
+                autoDetectedMode === 'social'       ? 'Analyzing social profile...' :
+                'Ask anything, paste suspicious content, or attach a file...'
+              }
+              rows={3}
+              style={{
+                width: '100%', background: 'transparent', border: 'none',
+                outline: 'none', color: '#fff', fontSize: '15px',
+                padding: '6px 2px 16px', resize: 'none',
+                fontFamily: 'inherit', lineHeight: 1.5,
+              }}
+              className="placeholder:text-[#8a8a8f]"
+            />
 
             {/* Tool icon row */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
 
               {/* Attach */}
-              <label title="Attach file" style={{ ...toolBtn, cursor: 'pointer' }}
-                className="hover:!text-white hover:!bg-[rgba(255,255,255,0.06)]">
-                <input type="file" className="hidden"
-                  onChange={e => { const f = e.target.files?.[0]; if (f) prepareFile(f); }} />
+              <label
+                title="Attach file"
+                style={{ ...toolBtn, cursor: 'pointer' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#fff'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#c9c9cd'; }}
+              >
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  className="hidden"
+                  accept="image/*,audio/*,.pdf,.doc,.docx"
+                  onChange={e => { const f = e.target.files?.[0]; if (f) prepareFile(f); }}
+                />
                 <Paperclip style={{ width: '16px', height: '16px' }} />
               </label>
 
               {/* Web search toggle */}
-              <button type="button" title={webSearch ? 'Web search on' : 'Web search off'}
-                style={{
-                  ...toolBtn,
-                  color: webSearch ? '#4da3ff' : '#c9c9cd',
-                  background: webSearch ? 'rgba(77,163,255,0.15)' : 'transparent',
-                }}
-                className="hover:!text-white hover:!bg-[rgba(255,255,255,0.06)]"
-                onClick={() => setWebSearch(w => !w)}>
+              <button
+                type="button"
+                title={webSearch ? 'Web search on' : 'Web search off'}
+                style={{ ...toolBtn, color: webSearch ? '#4da3ff' : '#c9c9cd', background: webSearch ? 'rgba(77,163,255,0.15)' : 'transparent' }}
+                onClick={() => { setWebSearch(w => !w); setSettings(s => ({ ...s, webSearch: !s.webSearch })); }}
+              >
                 <Globe style={{ width: '16px', height: '16px' }} />
               </button>
 
-              {/* Separator */}
-              <div style={{ width: '1px', height: '18px', background: '#3a3a3d', flexShrink: 0 }} />
+              <div style={sepStyle} />
 
               {/* Settings */}
-              <button type="button" title="Settings" style={{
-                ...toolBtn,
-                color: settingsOpen ? '#4da3ff' : '#c9c9cd',
-                background: settingsOpen ? 'rgba(77,163,255,0.12)' : 'transparent',
-              }}
-                className="hover:!text-white hover:!bg-[rgba(255,255,255,0.06)]"
-                onClick={() => setSettingsOpen(s => !s)}>
+              <button
+                type="button"
+                title="Settings"
+                style={{ ...toolBtn, color: settingsOpen ? '#4da3ff' : '#c9c9cd', background: settingsOpen ? 'rgba(77,163,255,0.12)' : 'transparent' }}
+                onClick={() => setSettingsOpen(s => !s)}
+              >
                 <Settings style={{ width: '16px', height: '16px' }} />
               </button>
 
-              {/* Separator */}
-              <div style={{ width: '1px', height: '18px', background: '#3a3a3d', flexShrink: 0 }} />
+              <div style={sepStyle} />
 
               {/* Project / folder */}
-              <button type="button" title="Project" style={toolBtn}
-                className="hover:!text-white hover:!bg-[rgba(255,255,255,0.06)]"
-                onClick={() => toast('No project selected.')}>
+              <button
+                type="button"
+                title="Project"
+                style={toolBtn}
+                onClick={() => toast('No project selected.')}
+                onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#c9c9cd')}
+              >
                 <Folder style={{ width: '16px', height: '16px' }} />
               </button>
 
               <div style={{ flex: 1 }} />
 
               {/* File scan trigger */}
-              {currentMode.inputType === 'file' && file && status === 'ready' && (
-                <button type="button" onClick={handlePrimaryScanAction}
+              {file && status === 'ready' && (
+                <button
+                  type="button"
+                  onClick={handlePrimaryScanAction}
                   disabled={isProcessing || preparingAuthorizedScan}
                   style={{
                     padding: '6px 16px', borderRadius: '999px',
@@ -631,41 +706,46 @@ export default function TrainingAiAnalysis() {
                     boxShadow: '0 2px 8px rgba(255,122,69,0.4)',
                     transition: 'transform 0.15s',
                   }}
-                  className="hover:scale-105 disabled:opacity-50">
+                  className="hover:scale-105 disabled:opacity-50"
+                >
                   {preparingAuthorizedScan
                     ? <><Loader2 style={{ width: '13px', height: '13px' }} className="animate-spin" /> Preparing…</>
                     : <><Sparkles style={{ width: '13px', height: '13px' }} /> Scan</>}
                 </button>
               )}
 
-              {/* Password check trigger */}
-              {currentMode.inputType === 'password' && (
-                <button type="button" onClick={handlePasswordCheck}
-                  disabled={!textInput.trim() || checkingPassword}
+              {/* Password check (when input looks like a password) */}
+              {looksLikePassword && !file && (
+                <button
+                  type="button"
+                  title="Check password strength"
+                  onClick={handlePasswordCheck}
+                  disabled={checkingPassword}
                   style={{
                     width: '36px', height: '36px', borderRadius: '50%',
-                    background: textInput.trim() ? '#ff7a45' : '#3a3a3d',
-                    color: '#fff', border: 'none',
-                    cursor: textInput.trim() ? 'pointer' : 'not-allowed',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    boxShadow: textInput.trim() ? '0 2px 8px rgba(255,122,69,0.4)' : 'none',
-                    transition: 'transform 0.15s, background 0.2s',
+                    background: '#ff7a45', color: '#fff', border: 'none',
+                    cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    boxShadow: '0 2px 8px rgba(255,122,69,0.4)',
+                    transition: 'transform 0.15s',
+                    opacity: checkingPassword ? 0.6 : 1,
                   }}
-                  className="hover:scale-105">
+                  className="hover:scale-105"
+                >
                   {checkingPassword
                     ? <Loader2 style={{ width: '16px', height: '16px' }} className="animate-spin" />
                     : <KeyRound style={{ width: '16px', height: '16px' }} />}
                 </button>
               )}
 
-              {/* Mic / Send for text modes */}
-              {currentMode.inputType === 'text' && (
+              {/* Mic / Send */}
+              {!looksLikePassword && (
                 <button
                   ref={micBtnRef}
                   type="button"
-                  onClick={() => textInput.trim()
-                    ? (scanMode === 'default' ? handleSendMessage(textInput) : handleTextScan())
-                    : toggleRecording()}
+                  onClick={() => {
+                    if (textInput.trim()) handleSend(textInput);
+                    else toggleRecording();
+                  }}
                   title={textInput.trim() ? 'Send' : isRecording ? 'Stop recording' : 'Voice input'}
                   style={{
                     width: '36px', height: '36px', borderRadius: '50%',
@@ -676,7 +756,8 @@ export default function TrainingAiAnalysis() {
                     boxShadow: isRecording ? '0 0 0 0 rgba(255,59,48,0.4)' : '0 2px 8px rgba(0,0,0,0.15)',
                     transition: 'transform 0.15s, background 0.2s',
                   }}
-                  className={`hover:scale-105${isRecording ? ' recording' : ''}`}>
+                  className={`hover:scale-105${isRecording ? ' recording' : ''}`}
+                >
                   {isRecording
                     ? <StopCircle style={{ width: '16px', height: '16px' }} />
                     : textInput.trim()
@@ -687,22 +768,31 @@ export default function TrainingAiAnalysis() {
             </div>
           </div>
 
-          {/* File chip (shown outside chatbox when a file is attached in text modes) */}
-          {file && currentMode.inputType !== 'file' && (
-            <div className="flex items-center gap-2 mt-2"
-              style={{ background: 'rgba(28,28,30,0.85)', backdropFilter: 'blur(8px)', borderRadius: '999px', padding: '6px 14px', border: '1px solid rgba(255,255,255,0.1)' }}>
+          {/* File chip */}
+          {file && (
+            <div
+              className="flex items-center gap-2 mt-2"
+              style={{ background: 'rgba(28,28,30,0.85)', backdropFilter: 'blur(8px)', borderRadius: '999px', padding: '6px 14px', border: '1px solid rgba(255,255,255,0.1)' }}
+            >
               <Paperclip style={{ width: '12px', height: '12px', color: '#8a8a8f' }} />
               <span style={{ fontSize: '13px', maxWidth: '180px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{file.name}</span>
               <span style={{ fontSize: '12px', color: '#8a8a8f' }}>{cost.formatted}</span>
               {status === 'ready' && (
-                <button type="button" onClick={handlePrimaryScanAction}
-                  style={{ fontSize: '11px', padding: '2px 8px', borderRadius: '999px', background: '#ff7a45', border: 'none', color: '#fff', cursor: 'pointer' }}>
+                <button
+                  type="button"
+                  onClick={handlePrimaryScanAction}
+                  style={{ fontSize: '11px', padding: '2px 8px', borderRadius: '999px', background: '#ff7a45', border: 'none', color: '#fff', cursor: 'pointer' }}
+                >
                   Scan
                 </button>
               )}
-              <button type="button" onClick={clearFile}
+              <button
+                type="button"
+                onClick={clearFile}
                 style={{ background: 'none', border: 'none', color: '#8a8a8f', cursor: 'pointer', display: 'flex', padding: '2px' }}
-                className="hover:!text-white">
+                onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#8a8a8f')}
+              >
                 <X style={{ width: '13px', height: '13px' }} />
               </button>
             </div>
@@ -710,15 +800,17 @@ export default function TrainingAiAnalysis() {
 
           {/* Password result */}
           {passwordResult && (
-            <div className="aia-slide-up mt-3"
-              style={{ width: 'min(640px, 92vw)', background: 'rgba(28,28,30,0.9)', backdropFilter: 'blur(8px)', borderRadius: '16px', padding: '16px 20px', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <div
+              className="aia-slide-up mt-3"
+              style={{ width: 'min(640px, 92vw)', background: 'rgba(28,28,30,0.9)', backdropFilter: 'blur(8px)', borderRadius: '16px', padding: '16px 20px', border: '1px solid rgba(255,255,255,0.08)' }}
+            >
               <p style={{ fontSize: '11px', fontWeight: 600, color: '#8a8a8f', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '12px' }}>Password Analysis</p>
 
               <div style={{ marginBottom: '10px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: '#c9c9cd', marginBottom: '6px' }}>
                   <span>Strength</span>
                   <span style={{ fontWeight: 600 }}>
-                    {['Very Weak','Weak','Fair','Good','Strong','Very Strong'][Math.min(passwordResult.score, 5)]}
+                    {['Very Weak', 'Weak', 'Fair', 'Good', 'Strong', 'Very Strong'][Math.min(passwordResult.score, 5)]}
                   </span>
                 </div>
                 <div style={{ height: '4px', borderRadius: '2px', background: '#3a3a3d' }}>
@@ -755,6 +847,16 @@ export default function TrainingAiAnalysis() {
                   </li>
                 ))}
               </ul>
+
+              <button
+                type="button"
+                onClick={() => setPasswordResult(null)}
+                style={{ marginTop: '12px', fontSize: '11px', color: '#8a8a8f', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#8a8a8f')}
+              >
+                Dismiss
+              </button>
             </div>
           )}
 
@@ -783,14 +885,18 @@ export default function TrainingAiAnalysis() {
                 webSearch:   'Web search enabled',
               };
               return (
-                <button key={key} type="button"
+                <button
+                  key={key}
+                  type="button"
                   onClick={() => {
                     setSettings(s => ({ ...s, [key]: !s[key] }));
                     if (key === 'darkMode') setDarkMode(d => !d);
                     if (key === 'webSearch') setWebSearch(w => !w);
                   }}
-                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '11px 16px', borderRadius: '10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', color: '#e5e5e7', fontSize: '14px', cursor: 'pointer', textAlign: 'left' }}
-                  className="hover:!bg-[rgba(255,255,255,0.09)] transition">
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '11px 16px', borderRadius: '10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', color: '#e5e5e7', fontSize: '14px', cursor: 'pointer', textAlign: 'left', transition: 'background 0.15s' }}
+                  onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.09)')}
+                  onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.05)')}
+                >
                   <span>{labels[key]}</span>
                   {val
                     ? <CheckSquare style={{ width: '18px', height: '18px', color: '#ff7a45', flexShrink: 0 }} />
@@ -802,7 +908,8 @@ export default function TrainingAiAnalysis() {
           <DialogFooter>
             <Button
               onClick={() => setSettingsOpen(false)}
-              style={{ width: '100%', background: '#fff', color: '#1c1c1e', fontWeight: 600, borderRadius: '10px' }}>
+              style={{ width: '100%', background: '#fff', color: '#1c1c1e', fontWeight: 600, borderRadius: '10px' }}
+            >
               Close
             </Button>
           </DialogFooter>
@@ -859,8 +966,7 @@ export default function TrainingAiAnalysis() {
                   <p className="text-xs text-muted-foreground">Unlimited scans + family protection.</p>
                 </div>
               </div>
-              <Button variant="heroPrimary" className="w-full text-white h-10"
-                onClick={handleStartSubscription}>
+              <Button variant="heroPrimary" className="w-full text-white h-10" onClick={handleStartSubscription}>
                 Start Subscription
               </Button>
             </div>

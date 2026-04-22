@@ -7,7 +7,7 @@ export interface LauraMessage {
 }
 
 const fallbackResponse =
-  "I can only help with questions about using InVision Network. For other assistance, please contact support@invisionnetwork.com";
+  "I can only help with questions about using InVision Network. For other assistance, please contact support@invisionnetwork.org";
 
 const containsUrl = (text: string) => /https?:\/\/\S+/i.test(text);
 
