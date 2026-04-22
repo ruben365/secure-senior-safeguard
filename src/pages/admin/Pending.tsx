@@ -17,8 +17,46 @@ import {
 } from "@/components/ui/table";
 import { format } from "date-fns";
 
+interface PendingAccount {
+  id: string;
+  email: string | null;
+  first_name: string | null;
+  last_name: string | null;
+  created_at: string | null;
+}
+
 export default function Pending() {
   const [updatingId, setUpdatingId] = useState<string | null>(null);
+
+  const { data: pendingAccounts, refetch: refetchAccounts } = useQuery<PendingAccount[]>({
+    queryKey: ["pending-accounts"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("id, email, first_name, last_name, created_at")
+        .eq("account_status", "pending")
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      return data ?? [];
+    },
+  });
+
+  const handleAccountAction = async (userId: string, action: "active" | "rejected") => {
+    setUpdatingId(userId);
+    try {
+      const { error } = await supabase
+        .from("profiles")
+        .update({ account_status: action })
+        .eq("id", userId);
+      if (error) throw error;
+      toast.success(action === "active" ? "Account approved" : "Account rejected");
+      refetchAccounts();
+    } catch {
+      toast.error("Failed to update account");
+    } finally {
+      setUpdatingId(null);
+    }
+  };
 
   const { data: pendingTestimonials, refetch: refetchTestimonials } = useQuery({
     queryKey: ["pending-testimonials"],
@@ -159,8 +197,16 @@ export default function Pending() {
         </p>
       </div>
 
-      <Tabs defaultValue="testimonials" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 bg-[#111827]">
+      <Tabs defaultValue="accounts" className="w-full">
+        <TabsList className="grid w-full grid-cols-4 bg-[#111827]">
+          <TabsTrigger value="accounts">
+            Accounts
+            {pendingAccounts && pendingAccounts.length > 0 && (
+              <Badge variant="destructive" className="ml-2">
+                {pendingAccounts.length}
+              </Badge>
+            )}
+          </TabsTrigger>
           <TabsTrigger value="testimonials">
             Testimonials
             {pendingTestimonials && pendingTestimonials.length > 0 && (
@@ -186,6 +232,74 @@ export default function Pending() {
             )}
           </TabsTrigger>
         </TabsList>
+
+        <TabsContent value="accounts">
+          <Card className="bg-[#111827] border-gray-800">
+            <CardHeader>
+              <CardTitle className="text-[#F9FAFB]">Account Approvals</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {!pendingAccounts ? (
+                <div className="flex justify-center p-8">
+                  <Loader2 className="h-8 w-8 animate-spin text-[#9CA3AF]" />
+                </div>
+              ) : pendingAccounts.length === 0 ? (
+                <p className="text-center text-[#9CA3AF] py-8">No pending accounts</p>
+              ) : (
+                <Table>
+                  <TableHeader>
+                    <TableRow className="border-gray-700">
+                      <TableHead className="text-[#9CA3AF]">Name</TableHead>
+                      <TableHead className="text-[#9CA3AF]">Email</TableHead>
+                      <TableHead className="text-[#9CA3AF]">Registered</TableHead>
+                      <TableHead className="text-[#9CA3AF]">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {pendingAccounts.map((account) => (
+                      <TableRow key={account.id} className="border-gray-700">
+                        <TableCell className="font-medium text-[#F9FAFB]">
+                          {[account.first_name, account.last_name].filter(Boolean).join(" ") || "—"}
+                        </TableCell>
+                        <TableCell className="text-[#9CA3AF]">{account.email}</TableCell>
+                        <TableCell className="text-[#9CA3AF]">
+                          {account.created_at
+                            ? format(new Date(account.created_at), "MMM dd, yyyy")
+                            : "—"}
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex gap-2">
+                            <Button
+                              size="sm"
+                              onClick={() => handleAccountAction(account.id, "active")}
+                              disabled={updatingId === account.id}
+                            >
+                              {updatingId === account.id ? (
+                                <Loader2 className="h-4 w-4 animate-spin" />
+                              ) : (
+                                <CheckCircle className="h-4 w-4 mr-1" />
+                              )}
+                              Approve
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="destructive"
+                              onClick={() => handleAccountAction(account.id, "rejected")}
+                              disabled={updatingId === account.id}
+                            >
+                              <XCircle className="h-4 w-4 mr-1" />
+                              Reject
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
 
         <TabsContent value="testimonials">
           <Card className="bg-[#111827] border-gray-800">

@@ -318,20 +318,69 @@ function Auth() {
     return true;
   };
 
+  // ============================================================================
+  // Client-side rate limiting: 5 failed attempts → 15 min lockout per email.
+  // Uses localStorage so it persists across page refreshes.
+  // NOTE: This is a UX measure only — server-side auth rate limits are the
+  // true enforcement layer. Do not rely on this alone.
+  // ============================================================================
+  const MAX_ATTEMPTS = 5;
+  const LOCKOUT_MS = 15 * 60 * 1000;
+
+  const getRateLimitKey = (e: string) => `login_attempts_${e}`;
+  const getLockoutKey = (e: string) => `login_lockout_${e}`;
+
+  const checkRateLimit = (normalizedEmail: string): { blocked: boolean; minutesLeft?: number } => {
+    const lockoutUntil = Number(localStorage.getItem(getLockoutKey(normalizedEmail)) ?? 0);
+    if (lockoutUntil && Date.now() < lockoutUntil) {
+      const minutesLeft = Math.ceil((lockoutUntil - Date.now()) / 60_000);
+      return { blocked: true, minutesLeft };
+    }
+    return { blocked: false };
+  };
+
+  const recordFailedAttempt = (normalizedEmail: string) => {
+    const key = getRateLimitKey(normalizedEmail);
+    const attempts = Number(localStorage.getItem(key) ?? 0) + 1;
+    localStorage.setItem(key, String(attempts));
+    if (attempts >= MAX_ATTEMPTS) {
+      localStorage.setItem(getLockoutKey(normalizedEmail), String(Date.now() + LOCKOUT_MS));
+      localStorage.removeItem(key);
+    }
+  };
+
+  const clearRateLimit = (normalizedEmail: string) => {
+    localStorage.removeItem(getRateLimitKey(normalizedEmail));
+    localStorage.removeItem(getLockoutKey(normalizedEmail));
+  };
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!validateLoginForm()) return;
 
+    const normalizedEmail = email.trim().toLowerCase();
+    const rl = checkRateLimit(normalizedEmail);
+    if (rl.blocked) {
+      toast({
+        title: "Too Many Attempts",
+        description: `Account temporarily locked. Try again in ${rl.minutesLeft} minute${rl.minutesLeft === 1 ? "" : "s"}.`,
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsLoading(true);
 
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
-        email: email.trim().toLowerCase(),
+        email: normalizedEmail,
         password,
       });
 
       if (error) throw error;
+
+      clearRateLimit(normalizedEmail);
 
       if (data.session && data.user) {
         toast({
@@ -356,16 +405,20 @@ function Auth() {
       // ====================================================================
       const message = error instanceof Error ? error.message : String(error);
 
-      let errorMessage =
-        "Email or password is incorrect. Please try again.";
+      let errorMessage = "Email or password is incorrect. Please try again.";
       let errorTitle = "Sign In Failed";
 
       if (message.toLowerCase().includes("too many requests")) {
         errorTitle = "Too Many Attempts";
         errorMessage = "Please wait a moment before trying again.";
+      } else {
+        recordFailedAttempt(normalizedEmail);
+        const attemptsLeft = MAX_ATTEMPTS - Number(localStorage.getItem(getRateLimitKey(normalizedEmail)) ?? 0);
+        if (attemptsLeft > 0 && attemptsLeft <= 2) {
+          errorMessage += ` ${attemptsLeft} attempt${attemptsLeft === 1 ? "" : "s"} remaining before lockout.`;
+        }
       }
 
-      // Log the real reason server-side for support, but never show it.
       console.warn("[auth] login failure:", message);
 
       toast({
@@ -409,7 +462,7 @@ function Auth() {
           first_name: firstName.trim(),
           last_name: lastName.trim(),
           email: email.trim().toLowerCase(),
-          account_status: "active",
+          account_status: "pending",
         });
 
         // Assign default user role
@@ -421,7 +474,7 @@ function Auth() {
         setSignupSuccess(true);
         toast({
           title: "Account Created!",
-          description: "Please check your email to verify your account.",
+          description: "Please verify your email. Once approved by our team, you'll be able to sign in.",
         });
       }
     } catch (error: unknown) {
