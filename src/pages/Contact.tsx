@@ -193,6 +193,7 @@ function Contact() {
           backgroundImage={heroContactBranded}
           headline=""
           subheadline=""
+          darkOverlay
         >
           <div className="text-left mb-8">
             <h1 className="font-extrabold text-white mb-4 leading-[1.05] tracking-tight text-[clamp(1.75rem,3.5vw,3rem)]">
@@ -205,8 +206,8 @@ function Contact() {
           <HeroCTA
             primaryText="Call (937) 749-7579"
             primaryHref={SITE.phone.tel}
-            secondaryText="Send a Message"
-            secondaryHref="#contact-form"
+            secondaryText="Email Us"
+            secondaryHref="mailto:hello@invisionnetwork.org"
             aiScan
           />
         </Hero>

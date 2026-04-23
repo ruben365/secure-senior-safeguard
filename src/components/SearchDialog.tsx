@@ -60,7 +60,7 @@ export default function SearchDialog({ open, onOpenChange }: SearchDialogProps) 
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-lg">
+      <DialogContent className="w-[calc(100vw-32px)] sm:w-full sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>Search</DialogTitle>
         </DialogHeader>

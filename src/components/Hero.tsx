@@ -26,6 +26,8 @@ interface HeroProps {
   showTrustIndicators?: boolean;
   /** Disable the purple overlay for homepage */
   disablePurpleOverlay?: boolean;
+  /** Extra dark veil — use when background image has text/logos to hide */
+  darkOverlay?: boolean;
 }
 
 const Hero = ({
@@ -41,6 +43,7 @@ const Hero = ({
   showProtectionBadge = false,
   badgeText,
   disablePurpleOverlay = false,
+  darkOverlay = false,
 }: HeroProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -106,6 +109,11 @@ const Hero = ({
         {/* Navy-purple tint for visual consistency */}
         {!disablePurpleOverlay && <HeroPurpleOverlay />}
       </div>
+
+      {/* Extra dark veil for background images with text or logos */}
+      {darkOverlay && (
+        <div className="absolute inset-0 bg-black/60 z-[2]" />
+      )}
 
       {/* Protection Badge (if enabled) */}
       {showProtectionBadge && (

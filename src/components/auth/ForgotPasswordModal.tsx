@@ -87,7 +87,7 @@ export function ForgotPasswordModal({
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[440px] glass-modal">
+      <DialogContent className="w-[calc(100vw-32px)] sm:w-full sm:max-w-[440px] max-h-[85svh] overflow-y-auto glass-modal">
         <DialogHeader>
           <DialogTitle className="text-center text-2xl">
             {emailSent ? "Check Your Email" : "Reset Your Password"}

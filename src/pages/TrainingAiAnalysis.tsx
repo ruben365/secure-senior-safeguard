@@ -1121,7 +1121,7 @@ export default function TrainingAiAnalysis() {
 
       {/* ── Paywall dialog ───────────────────────────────────────────────────── */}
       <Dialog open={paywallOpen} onOpenChange={setPaywallOpen}>
-        <DialogContent className="max-h-[90svh] overflow-y-auto border border-[#e5e5e5] bg-white text-[#1a1a1c] backdrop-blur-none p-0 shadow-[0_28px_80px_rgba(15,23,42,0.12)] rounded-[20px] sm:max-w-lg">
+        <DialogContent className="max-h-[85svh] overflow-y-auto border border-[#e5e5e5] bg-white text-[#1a1a1c] backdrop-blur-none p-0 shadow-[0_28px_80px_rgba(15,23,42,0.12)] rounded-[20px] w-[calc(100vw-32px)] sm:w-full sm:max-w-xl">
           {/* Header */}
           <div style={{ padding: '22px 24px 18px', borderBottom: '1px solid #f0f0f0', background: 'radial-gradient(circle at top left, rgba(217,108,74,0.07), transparent 60%)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '4px' }}>
@@ -1136,9 +1136,8 @@ export default function TrainingAiAnalysis() {
           </div>
 
           {/* Plan cards */}
-          <div style={{ padding: '16px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-            {/* Starter plan */}
-            {SCAMSHIELD_PLANS.slice(0, 2).map((plan) => {
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-[10px]" style={{ padding: '16px' }}>
+            {SCAMSHIELD_PLANS.map((plan) => {
               const isPopular = plan.popular;
               return (
                 <div

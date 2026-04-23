@@ -792,7 +792,7 @@ export function EmbeddedPaymentModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="overflow-hidden border border-border/70 bg-transparent p-0 shadow-[0_28px_80px_rgba(15,23,42,0.24)] sm:max-w-4xl">
+      <DialogContent className="overflow-y-auto border border-border/70 bg-transparent p-0 shadow-[0_28px_80px_rgba(15,23,42,0.24)] w-[calc(100vw-32px)] sm:w-full sm:max-w-4xl max-h-[85svh]">
         <CheckoutDialogFrame
           icon={<CreditCard className="h-5 w-5" />}
           title="Secure checkout"

@@ -91,7 +91,7 @@ export default function MyTickets() {
           <DialogTrigger asChild>
             <Button><Plus className="h-4 w-4 mr-2" /> New Ticket</Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[480px] p-5 gap-3">
+          <DialogContent className="w-[calc(100vw-32px)] sm:w-full sm:max-w-[480px] max-h-[85svh] overflow-y-auto p-5 gap-3">
             <DialogHeader>
               <DialogTitle>Create Support Ticket</DialogTitle>
             </DialogHeader>

@@ -299,7 +299,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
               <button
                 type="button"
                 onClick={() => setSearchOpen(true)}
-                className="p-2 rounded-full bg-black/20 backdrop-blur-[8px] border border-white/15 hover:border-white/30 transition-all duration-150 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                className="p-2 rounded-full bg-black/40 backdrop-blur-[8px] border border-white/25 hover:border-white/40 transition-all duration-150 min-w-[44px] min-h-[44px] flex items-center justify-center"
                 aria-label="Search site"
               >
                 <Search className="h-4 w-4 text-white/75" />
@@ -309,7 +309,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 rounded-full bg-black/20 backdrop-blur-[8px] border border-white/15 hover:border-white/30 transition-all duration-150 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                className="lg:hidden p-2 rounded-full bg-black/40 backdrop-blur-[8px] border border-white/25 hover:border-white/40 transition-all duration-150 min-w-[44px] min-h-[44px] flex items-center justify-center"
                 aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={mobileMenuOpen ? "true" : "false"}
                 aria-controls="mobile-navigation"
@@ -396,7 +396,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 );
               })}
 
-              <div className="pt-4 pb-2 flex flex-col items-center gap-2">
+              <div className="border-t border-white/[0.08] mt-2 pt-4 pb-2 flex flex-col items-center gap-2 w-full px-0">
                 {isAdminOrStaff ? (
                   <Link
                     to="/admin"
@@ -410,7 +410,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <Link
                     to="/portal"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-sm font-semibold text-white hover:text-white/80 transition-colors duration-150"
+                    className="w-full inline-flex items-center justify-center py-3 px-6 text-[13px] font-bold rounded-full text-[#0a0c10] bg-gradient-to-r from-[#f5c543] to-[#d4a634] shadow-[0_0_20px_rgba(245,197,67,0.3)] hover:shadow-[0_0_28px_rgba(245,197,67,0.45)] hover:brightness-105 active:scale-[0.98] transition-all duration-200"
                   >
                     Login
                   </Link>

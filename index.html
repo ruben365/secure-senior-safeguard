@@ -252,8 +252,9 @@
 
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/shield-logo-192.png" />
-    <!-- Canonical URL for homepage — per-page canonical injected by SEO component -->
-    <link rel="canonical" href="https://www.invisionnetwork.org/" />
+    <!-- Canonical URL is set per-page by react-helmet-async (SEO component).
+         No static canonical here — index.html is served for all SPA routes,
+         so a hardcoded canonical would incorrectly claim every page is the homepage. -->
     <title>InVision Network | AI Scam Protection & Cybersecurity Training in Ohio</title>
     <meta
       name="description"

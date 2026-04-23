@@ -667,7 +667,7 @@ export function SmartPaymentDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[360px] overflow-hidden p-4 gap-2">
+      <DialogContent className="w-[calc(100vw-32px)] sm:w-full sm:max-w-[360px] max-h-[85svh] overflow-y-auto p-4 gap-2">
         <DialogHeader className="space-y-0 pb-2.5">
           <DialogTitle className="flex items-center gap-2.5">
             <div className="w-8 h-8 bg-[#d96c4a]/12 rounded-full flex items-center justify-center flex-shrink-0">

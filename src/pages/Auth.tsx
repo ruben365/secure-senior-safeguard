@@ -74,6 +74,16 @@ function QuadrantBtn({ children, disabled }: { children: React.ReactNode; disabl
 }
 
 function Auth() {
+  useEffect(() => {
+    const prev = document.body.style.backgroundColor;
+    document.body.style.backgroundColor = "#0a0c10";
+    document.body.style.overscrollBehavior = "none";
+    return () => {
+      document.body.style.backgroundColor = prev;
+      document.body.style.overscrollBehavior = "";
+    };
+  }, []);
+
   const [searchParams] = useSearchParams();
   const defaultTab = searchParams.get("mode") === "signup" ? "signup" : "login";
   const requestedRedirect = searchParams.get("redirect");

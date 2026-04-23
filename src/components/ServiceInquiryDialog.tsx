@@ -224,7 +224,7 @@ export const ServiceInquiryDialog = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       {/* Compact: no scrollbar, teal badge accent, tight header */}
-      <DialogContent className="sm:max-w-[400px] overflow-hidden rounded-2xl p-4 gap-0">
+      <DialogContent className="w-[calc(100vw-32px)] sm:w-full sm:max-w-[400px] max-h-[85svh] overflow-y-auto rounded-2xl p-4 gap-0">
         <DialogHeader className="space-y-0 pb-3">
           <div className="flex items-center gap-1.5 mb-1.5">
             <Badge variant="secondary" className="text-[10px] h-[18px] px-1.5 py-0 bg-teal-500/10 text-teal-700 border-teal-500/30">

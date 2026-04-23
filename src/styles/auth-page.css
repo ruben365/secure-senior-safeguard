@@ -782,6 +782,8 @@
   .ap-action-text { text-align: center; }
   .ap-btn-wrap { display: flex; justify-content: center; }
   .ap-sso, .ap-tabs, .ap-form, .ap-divider { max-width: 100%; }
+  /* Hide oversized bracket corners on mobile */
+  .ap-q { display: none; }
 }
 @media (max-width: 480px) {
   .ap-right { padding: 48px 20px 24px; }

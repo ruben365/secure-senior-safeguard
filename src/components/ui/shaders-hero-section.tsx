@@ -176,7 +176,7 @@ export function HeroContent() {
             className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-white text-black font-semibold text-sm transition-all duration-200 hover:bg-white/90 hover:scale-[1.02] shadow-lg shadow-white/10"
           >
             <Shield className="mr-2 w-4 h-4" />
-            Start Protection — From $79
+            Start Protection — From $9.99
             <ArrowRight className="ml-2 w-4 h-4" />
           </Link>
           <a

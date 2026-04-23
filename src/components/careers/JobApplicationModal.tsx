@@ -114,7 +114,7 @@ export function JobApplicationModal({ job, open, onOpenChange }: JobApplicationM
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[420px] overflow-hidden rounded-2xl p-0 gap-0">
+      <DialogContent className="w-[calc(100vw-32px)] sm:w-full sm:max-w-[420px] max-h-[85svh] overflow-y-auto rounded-2xl p-0 gap-0">
         {submitted ? (
           <div className="space-y-3 px-5 py-6 text-center sm:px-6">
             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-teal-500/15 to-indigo-500/15 border border-teal-500/30 flex items-center justify-center mx-auto">

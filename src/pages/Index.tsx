@@ -132,7 +132,7 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
                   <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/25 bg-white/10 backdrop-blur-md mb-6 shadow-[0_4px_16px_-4px_rgba(0,0,0,0.5)]">
                     <Shield className="w-4 h-4 text-[#fbab8e]" strokeWidth={2.25} />
                     <span className="text-xs font-bold uppercase tracking-[0.18em] text-white">
-                      Protected Community
+                      Ohio's Trusted Cybersecurity Partner
                     </span>
                   </div>
 
@@ -140,8 +140,9 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
                     Start Protecting Your Family Today
                   </h2>
                   <p className="text-base md:text-lg text-white/90 mb-8 max-w-md leading-relaxed">
-                    Join families across Ohio who live confidently, knowing
-                    they are protected from AI scams. Get started in minutes.
+                    Join families in Dayton, Columbus, Cincinnati, Cleveland
+                    and across Ohio who live confidently, knowing they are
+                    protected from AI scams. Get started in minutes.
                   </p>
 
                   <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-4 mb-8">
@@ -161,10 +162,11 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
                       "Privacy-First",
                       `${SITE.moneyBackGuaranteeDays}-Day Guarantee`,
                       "24/7 Support",
+                      "Kettering, Ohio HQ",
                     ].map((item) => (
                       <div
                         key={item}
-                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm"
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md"
                       >
                         <CheckCircle className="w-3.5 h-3.5 text-[#fbab8e]" />
                         <span className="text-xs font-medium text-white/90">

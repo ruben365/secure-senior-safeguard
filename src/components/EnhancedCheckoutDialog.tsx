@@ -744,7 +744,7 @@ export function EnhancedCheckoutDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[420px] overflow-hidden p-0 gap-0" style={{ WebkitFontSmoothing: "antialiased", MozOsxFontSmoothing: "grayscale", textRendering: "optimizeLegibility" }}>
+      <DialogContent className="w-[calc(100vw-32px)] sm:w-full sm:max-w-[420px] max-h-[85svh] overflow-y-auto p-0 gap-0" style={{ WebkitFontSmoothing: "antialiased", MozOsxFontSmoothing: "grayscale", textRendering: "optimizeLegibility" }}>
         {/* Header */}
         <div className="px-3 sm:px-5 py-2.5 border-b border-gray-100">
           <DialogHeader className="space-y-0">

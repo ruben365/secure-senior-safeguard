@@ -380,7 +380,7 @@ export const WebsiteInsuranceDialog = ({
           if (!isOpen) resetDialog();
         }}
       >
-        <DialogContent className="sm:max-w-[400px] overflow-hidden rounded-2xl p-4 gap-0">
+        <DialogContent className="w-[calc(100vw-32px)] sm:w-full sm:max-w-[400px] max-h-[85svh] overflow-y-auto rounded-2xl p-4 gap-0">
           <DialogHeader className="space-y-0 pb-2.5">
             <div className="flex items-center gap-1.5 mb-1">
               <Badge
