@@ -225,10 +225,11 @@ const AutonomousDefenseHub = () => {
                   traps, and responds autonomously. Built for Ohio businesses ready to operate in
                   2026 and beyond.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mt-2">
                   <Button
                     size="heroPill"
                     variant="heroPrimary"
+                    className="w-full sm:w-auto min-h-[44px] text-sm"
                     onClick={() => openBooking("Autonomous Defense Hub — Sentinel", 297, "Sentinel")}
                   >
                     Request Early Access <ArrowRight className="ml-2 w-4 h-4" />
@@ -237,6 +238,7 @@ const AutonomousDefenseHub = () => {
                     asChild
                     size="heroPill"
                     variant="heroOutline"
+                    className="w-full sm:w-auto min-h-[44px] text-sm"
                   >
                     <Link to="/business">View All Services</Link>
                   </Button>
