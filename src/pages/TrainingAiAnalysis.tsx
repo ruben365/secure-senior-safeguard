@@ -952,7 +952,7 @@ export default function TrainingAiAnalysis() {
         }}>
           <ShieldAlert style={{ width: '10px', height: '10px', color: 'rgba(255,255,255,0.28)', flexShrink: 0 }} />
           <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', lineHeight: 1, letterSpacing: '0.01em' }}>
-            Files auto-deleted in 10 min · Chat not saved · ${cost.perUploadCharge.toFixed(2)}/upload · <kbd style={{ fontFamily: 'inherit', fontSize: '10px' }}>Ctrl+K</kbd> to focus
+            Files auto-deleted in 10 min · Chat not saved · ${cost.perUploadCharge.toFixed(2)}/scan or subscribe from $9.99/mo · <kbd style={{ fontFamily: 'inherit', fontSize: '10px' }}>Ctrl+K</kbd> to focus
           </p>
         </div>
       </div>
@@ -1092,12 +1092,14 @@ export default function TrainingAiAnalysis() {
                 <section>
                   <p style={{ fontSize: '11px', fontWeight: 700, color: mTheme.label, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '10px' }}>Pricing</p>
                   {[
-                    ['Subscribers', 'Unlimited scans included with any ScamShield plan'],
-                    ['Pay-per-scan', '$1.00 per file upload'],
+                    ['Basic — $9.99/mo', '25 scans/mo · email reports · 24/7 AI chat'],
+                    ['Pro — $19.99/mo', '100 scans/mo · priority queue · phone support · 10% off courses'],
+                    ['Enterprise — $29.99/mo', 'Unlimited scans · deepScan · dedicated manager · family coverage'],
+                    ['Pay-per-scan', '$1.00 per file upload · no extras, no reports'],
                     ['Text / URL / Phone', 'Included free for logged-in users'],
                   ].map(([label, desc]) => (
                     <div key={label} style={{ display: 'flex', gap: '10px', marginBottom: '7px', alignItems: 'flex-start' }}>
-                      <span style={{ fontSize: '12px', color: mTheme.body, fontWeight: 600, minWidth: '110px', flexShrink: 0 }}>{label}</span>
+                      <span style={{ fontSize: '12px', color: mTheme.body, fontWeight: 600, minWidth: '130px', flexShrink: 0 }}>{label}</span>
                       <span style={{ fontSize: '12px', color: mTheme.muted }}>{desc}</span>
                     </div>
                   ))}
@@ -1194,10 +1196,17 @@ export default function TrainingAiAnalysis() {
             </div>
           </div>
 
-          {/* Plan cards */}
-          <div style={{ padding: '16px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-            {/* Starter plan */}
-            {SCAMSHIELD_PLANS.slice(0, 2).map((plan) => {
+          {/* Value prop vs pay-per-scan */}
+          <div style={{ padding: '0 16px 12px', background: 'rgba(217,108,74,0.04)', borderBottom: '1px solid #f0f0f0' }}>
+            <p style={{ fontSize: '11px', fontWeight: 700, color: '#d96c4a', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>Why subscribe?</p>
+            <p style={{ fontSize: '12px', color: '#3a3a3c', lineHeight: 1.5, margin: 0 }}>
+              A single Basic plan gives you <strong>25 scans</strong> — worth <strong>$25</strong> at pay-per-scan rates — for just <strong>$9.99/mo</strong>. Pro subscribers get 100 scans ($100 value) for $19.99. Enterprise gets <em>unlimited</em> scans plus a dedicated account manager for $29.99.
+            </p>
+          </div>
+
+          {/* Plan cards — all 3 tiers */}
+          <div style={{ padding: '16px', display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px' }}>
+            {SCAMSHIELD_PLANS.map((plan) => {
               const isPopular = plan.popular;
               return (
                 <div
@@ -1205,28 +1214,28 @@ export default function TrainingAiAnalysis() {
                   style={{
                     border: isPopular ? '2px solid #d96c4a' : '1px solid #e5e5e5',
                     borderRadius: '14px',
-                    padding: '16px',
+                    padding: '14px 12px',
                     position: 'relative',
                     background: isPopular ? 'rgba(217,108,74,0.03)' : '#fff',
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '12px',
+                    gap: '10px',
                   }}
                 >
                   {isPopular && (
-                    <div style={{ position: 'absolute', top: '-11px', left: '50%', transform: 'translateX(-50%)', background: '#d96c4a', color: '#fff', fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em', padding: '2px 10px', borderRadius: '999px', whiteSpace: 'nowrap' }}>
-                      MOST POPULAR
+                    <div style={{ position: 'absolute', top: '-11px', left: '50%', transform: 'translateX(-50%)', background: '#d96c4a', color: '#fff', fontSize: '9px', fontWeight: 700, letterSpacing: '0.08em', padding: '2px 8px', borderRadius: '999px', whiteSpace: 'nowrap' }}>
+                      BEST VALUE
                     </div>
                   )}
                   <div>
-                    <p style={{ fontSize: '13px', fontWeight: 700, color: '#1a1a1c', marginBottom: '2px' }}>{plan.name}</p>
-                    <p style={{ fontSize: '22px', fontWeight: 800, color: '#1a1a1c', lineHeight: 1 }}>
-                      ${plan.price}<span style={{ fontSize: '12px', fontWeight: 500, color: '#6b6b70' }}>/mo</span>
+                    <p style={{ fontSize: '12px', fontWeight: 700, color: '#1a1a1c', marginBottom: '2px' }}>{plan.name.replace('ScamShield ', '')}</p>
+                    <p style={{ fontSize: '20px', fontWeight: 800, color: '#1a1a1c', lineHeight: 1 }}>
+                      ${plan.price}<span style={{ fontSize: '11px', fontWeight: 500, color: '#6b6b70' }}>/mo</span>
                     </p>
                   </div>
-                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '5px', flex: 1 }}>
+                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '4px', flex: 1 }}>
                     {plan.features.map((f) => (
-                      <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: '6px', fontSize: '12px', color: '#3a3a3c' }}>
+                      <li key={f} style={{ display: 'flex', alignItems: 'flex-start', gap: '5px', fontSize: '11px', color: '#3a3a3c' }}>
                         <span style={{ color: '#d96c4a', fontWeight: 700, flexShrink: 0, marginTop: '1px' }}>✓</span>
                         {f}
                       </li>
@@ -1235,11 +1244,11 @@ export default function TrainingAiAnalysis() {
                   <button
                     type="button"
                     onClick={() => { setPaywallOpen(false); openCheckout(plan.id, "subscription"); }}
-                    style={{ width: '100%', padding: '9px', borderRadius: '10px', background: isPopular ? '#d96c4a' : '#1a1a1c', color: '#fff', border: 'none', fontSize: '13px', fontWeight: 600, cursor: 'pointer', transition: 'opacity 0.15s' }}
+                    style={{ width: '100%', padding: '8px', borderRadius: '9px', background: isPopular ? '#d96c4a' : '#1a1a1c', color: '#fff', border: 'none', fontSize: '12px', fontWeight: 600, cursor: 'pointer', transition: 'opacity 0.15s' }}
                     onMouseEnter={e => (e.currentTarget.style.opacity = '0.88')}
                     onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
                   >
-                    Subscribe · ${plan.price}/mo
+                    ${plan.price}/mo
                   </button>
                 </div>
               );

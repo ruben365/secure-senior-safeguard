@@ -72,6 +72,14 @@ serve(async (req) => {
       expand: ["data.items.data.price.product"],
     });
 
+    // Map unit_amount (cents) → plan tier + monthly scan limit.
+    // $9.99 = 999 cents → basic (25 scans), $19.99 = 1999 → pro (100), $29.99 = 2999 → enterprise (unlimited).
+    function derivePlanTier(unitAmount: number): { planTier: string; monthlyScanLimit: number } {
+      if (unitAmount >= 2999) return { planTier: "enterprise", monthlyScanLimit: -1 };
+      if (unitAmount >= 1999) return { planTier: "pro", monthlyScanLimit: 100 };
+      return { planTier: "basic", monthlyScanLimit: 25 };
+    }
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const subscriptionData = subscriptions.data.map((sub: any) => {
       const product = sub.items.data[0]?.price?.product;
@@ -83,6 +91,9 @@ serve(async (req) => {
           ? product.name
           : "Unknown";
 
+      const unitAmount: number = sub.items.data[0]?.price?.unit_amount || 0;
+      const { planTier, monthlyScanLimit } = derivePlanTier(unitAmount);
+
       return {
         id: sub.id,
         status: sub.status,
@@ -91,7 +102,9 @@ serve(async (req) => {
         ).toISOString(),
         cancel_at_period_end: sub.cancel_at_period_end,
         plan_name: planName,
-        amount: sub.items.data[0]?.price?.unit_amount || 0,
+        plan_tier: planTier,
+        monthly_scan_limit: monthlyScanLimit,
+        amount: unitAmount,
       };
     });
 

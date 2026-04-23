@@ -148,10 +148,21 @@ serve(async (req: Request) => {
           userId = profileByEmail?.id ?? null;
         }
 
+        // Derive plan tier + monthly scan limit from the subscription's unit_amount.
+        // Amounts are in cents: 999 = $9.99 Basic, 1999 = $19.99 Pro, 2999 = $29.99 Enterprise.
+        const items = subscription.items as { data: Array<{ price?: { unit_amount?: number } }> } | undefined;
+        const unitAmount = items?.data?.[0]?.price?.unit_amount ?? 0;
+        let planTier = "basic";
+        let monthlyScanLimit = 25;
+        if (unitAmount >= 2999) { planTier = "enterprise"; monthlyScanLimit = -1; } // -1 = unlimited
+        else if (unitAmount >= 1999) { planTier = "pro"; monthlyScanLimit = 100; }
+
         const upsertPayload: Record<string, unknown> = {
           stripe_subscription_id: subscription.id,
           stripe_customer_id: customerId,
           status: subscription.status,
+          plan_tier: planTier,
+          monthly_scan_limit: monthlyScanLimit,
           updated_at: new Date().toISOString(),
         };
         if (userId) upsertPayload.user_id = userId;

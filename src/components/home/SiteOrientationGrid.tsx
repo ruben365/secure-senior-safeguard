@@ -39,7 +39,7 @@ const pages = [
     icon: Shield,
     title: "ScamShield AI",
     description:
-      "Real-time AI-powered scanning for calls, texts, and emails. Pay-per-scan from $0.50.",
+      "Real-time AI-powered scanning for calls, texts, emails, and files. Plans from $9.99/mo — or pay $1.00 per scan.",
     link: "/training/ai-analysis",
     cta: "Start a Scan",
     image: serviceScamshield,

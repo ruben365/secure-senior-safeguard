@@ -78,12 +78,16 @@ const resolveReturnPath = (value: unknown) => {
 // might trust as a routing key.
 // ============================================================================
 const ALLOWED_PLAN_TIERS = new Set<string>([
+  // Current tiers
+  "basic",
+  "pro",
+  "enterprise",
+  // Legacy tiers (kept for backward compatibility)
   "starter",
   "essential",
   "professional",
   "premium",
   "family",
-  "enterprise",
 ]);
 
 serve(async (req) => {
