@@ -32,6 +32,7 @@ import { NavigationProgress } from "./components/NavigationProgress";
 import ScrollProgress from "./components/ScrollProgress";
 import { GlobalMotionProvider } from "./components/GlobalMotionProvider";
 import { AmbientVibranceBackground } from "./components/backgrounds/AmbientVibranceBackground";
+import { Breadcrumb } from "./components/Breadcrumb";
 
 // Admin Shell
 const AdminShell = lazy(() => import("./components/admin/AdminShell").then(m => ({ default: m.AdminShell })));
@@ -396,6 +397,7 @@ function App() {
                       </ErrorBoundary>
                       <ErrorBoundary>
                         <main id="main-content" tabIndex={-1}>
+                          <Breadcrumb />
                           <PublicRoutes />
                         </main>
                       </ErrorBoundary>
