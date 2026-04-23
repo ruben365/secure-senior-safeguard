@@ -290,27 +290,31 @@
   display: none;
 }
 
-/* Primary CTA (Get Protected) — orange gradient glass, warm amber border */
+/* Primary CTA (Get Protected) — warm amber-orange glass */
 .hero-home__cta:first-child {
-  background: linear-gradient(135deg, rgba(249, 115, 22, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%);
-  border: 1.5px solid rgba(255, 200, 150, 0.5);
+  background: linear-gradient(135deg, rgba(217, 108, 74, 0.35) 0%, rgba(10, 8, 18, 0.45) 100%);
+  border: 1.5px solid rgba(255, 180, 120, 0.45);
   box-shadow:
-    0 0 20px rgba(249, 115, 22, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    0 0 24px rgba(249, 115, 22, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
-/* Middle CTA (AI Scan) — matching Laura's frosted glass */
+/* Middle CTA (AI Scan) — dark frosted glass */
 .hero-home__cta:nth-child(2) {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1.5px solid rgba(255, 255, 255, 0.4);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: rgba(8, 8, 20, 0.42);
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
-/* Last CTA (See Our Work) — matching Laura's frosted glass */
+/* Last CTA (See Our Work) — dark frosted glass */
 .hero-home__cta:last-child {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1.5px solid rgba(255, 255, 255, 0.4);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: rgba(8, 8, 20, 0.42);
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
 /* Hover — border brightens, slight lift and glow */
@@ -319,17 +323,19 @@
   transform: translateY(-1px);
 }
 .hero-home__cta:first-child:hover {
-  border-color: rgba(255, 200, 150, 0.75);
+  background: linear-gradient(135deg, rgba(217, 108, 74, 0.48) 0%, rgba(10, 8, 18, 0.55) 100%);
+  border-color: rgba(255, 180, 120, 0.65);
   box-shadow:
-    0 0 28px rgba(249, 115, 22, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    0 0 32px rgba(249, 115, 22, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
 }
 .hero-home__cta:nth-child(2):hover,
 .hero-home__cta:last-child:hover {
-  border-color: rgba(255, 255, 255, 0.65);
+  background: rgba(8, 8, 20, 0.58);
+  border-color: rgba(255, 255, 255, 0.40);
   box-shadow:
-    0 0 20px rgba(255, 255, 255, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
 /* Active press — minimal feedback */
