@@ -139,27 +139,27 @@ const handler = async (req: Request): Promise<Response> => {
         to: [normalizedEmail],
         subject: "Welcome to InVision Network Newsletter",
         html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-            <div style="text-align: center; margin-bottom: 30px;">
-              <h1 style="color: #6D28D9; margin-bottom: 10px;">Welcome to InVision Network!</h1>
-              <p style="color: #666; font-size: 16px;">Thank you for subscribing to our newsletter</p>
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background: #ffffff;">
+            <div style="text-align: center; margin-bottom: 30px; padding: 24px; background: #0D2137; border-radius: 12px;">
+              <h1 style="color: #F97316; margin: 0 0 8px 0; font-size: 24px;">InVision Network</h1>
+              <p style="color: #ffffff; font-size: 16px; margin: 0;">You're protected. Welcome aboard.</p>
             </div>
-            <div style="background: #f5f3ff; padding: 20px; border-radius: 10px; margin: 20px 0;">
-              <h2 style="color: #6D28D9; margin-top: 0;">What You'll Receive:</h2>
-              <ul style="color: #333; line-height: 1.8;">
-                <li>Monthly scam alerts and warnings</li>
+            <div style="background: #FEF3E8; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid #F97316;">
+              <h2 style="color: #0D2137; margin-top: 0;">What You'll Receive:</h2>
+              <ul style="color: #374151; line-height: 1.8;">
+                <li>Monthly AI scam alerts and warnings</li>
                 <li>AI security tips and best practices</li>
-                <li>Business automation insights</li>
+                <li>Deepfake and voice-clone detection guides</li>
                 <li>Exclusive offers and early access</li>
-                <li>Training updates and webinar invites</li>
+                <li>Workshop updates and webinar invites</li>
               </ul>
             </div>
             <div style="margin: 30px 0;">
-              <p style="color: #333;">Stay safe and informed with our expert team!</p>
+              <p style="color: #374151;">Stay safe and informed with our expert team in Kettering, Ohio.</p>
             </div>
             <hr style="border: 1px solid #e5e5e5; margin: 20px 0;">
             <div style="text-align: center; color: #666; font-size: 12px;">
-              <p>Need help? Contact us at <a href="mailto:hello@invisionnetwork.org" style="color: #6D28D9;">hello@invisionnetwork.org</a></p>
+              <p>Need help? Contact us at <a href="mailto:hello@invisionnetwork.org" style="color: #F97316;">hello@invisionnetwork.org</a></p>
               <p style="font-size:11px;color:#999;">Don't want these emails? <a href="${unsubscribeUrl}" style="color: #9CA3AF;">Unsubscribe</a></p>
             </div>
           </div>
