@@ -164,7 +164,7 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
                     ].map((item) => (
                       <div
                         key={item}
-                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm"
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md"
                       >
                         <CheckCircle className="w-3.5 h-3.5 text-[#fbab8e]" />
                         <span className="text-xs font-medium text-white/90">

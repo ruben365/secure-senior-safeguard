@@ -38,14 +38,14 @@ const buttonVariants = cva(
           "active:translate-y-[1px]",
         ].join(" "),
         outlineLight: [
-          "bg-gradient-to-b from-primary/5 to-primary/10 text-primary",
-          "border border-primary/20",
-          "hover:translate-y-[-1px] hover:border-primary/30",
+          "bg-white/[0.08] backdrop-blur-md text-white",
+          "border border-white/[0.22]",
+          "hover:translate-y-[-1px] hover:bg-white/[0.14] hover:border-white/[0.32]",
           "active:translate-y-[1px]",
         ].join(" "),
         heroOutline: [
-          // Hero secondary — visible glass with clear white border
-          "bg-white/[0.12] backdrop-blur-sm text-white font-semibold",
+          // Hero secondary — glass with backdrop-blur-md (12 px) for visible glassmorphism
+          "bg-white/10 backdrop-blur-md text-white font-semibold",
           "border border-white/[0.30]",
           "hover:-translate-y-[1px] hover:bg-white/[0.20] hover:border-white/[0.50]",
           "active:translate-y-[0.5px] active:scale-[0.98]",
