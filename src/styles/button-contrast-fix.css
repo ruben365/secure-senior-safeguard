@@ -156,6 +156,20 @@ button[class*="variant-ghost"]:not([data-page="not-found"] *):not(nav *):hover {
   -webkit-backdrop-filter: blur(8px) !important;
 }
 
+/* ── 8. heroOutline / glass CTA buttons — always white text ──────── */
+/* These render as <a> with bg-white/[0.12] + backdrop-blur-sm + text-white.
+   The attribute selector [class*="bg-white"] in rule 1 can match them;
+   this rule sits later in the cascade and re-asserts white at higher
+   specificity so contrast-fix never darkens glass CTA text.           */
+button[class*="bg-white"][class*="backdrop-blur"],
+a[class*="bg-white"][class*="backdrop-blur"] {
+  color: white !important;
+}
+button[class*="bg-white"][class*="backdrop-blur"]:hover,
+a[class*="bg-white"][class*="backdrop-blur"]:hover {
+  color: white !important;
+}
+
 /* ── Laura widget: text-shadow utilities ─────────────────────────── */
 /* Class selector (0,1,0) beats the global * { text-shadow: none !important }
    at (0,0,0), so these rules win despite the global override.         */
