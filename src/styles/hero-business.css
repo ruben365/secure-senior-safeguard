@@ -457,6 +457,9 @@
   .hero-biz__body { display: none; }
   .hero-biz__panel { display: none; }
 
+  /* Full-width copy so w-full buttons fill the hero column */
+  .hero-biz__copy { width: 100%; max-width: 100%; }
+
   /* Disable entrance animations on mobile to prevent flash/flicker */
   .hero-biz__kicker,
   .hero-biz__headline,
