@@ -143,7 +143,7 @@ export function HeroContent() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.35 }}
-          className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-black text-white leading-[1.05] mb-6 tracking-tight"
+          className="text-4xl sm:text-5xl md:text-5xl font-black text-white leading-[1.05] mb-6 tracking-tight"
         >
           AI-Powered{" "}
           <span className="bg-gradient-to-r from-blue-300 via-sky-300 to-blue-300 bg-clip-text text-transparent">

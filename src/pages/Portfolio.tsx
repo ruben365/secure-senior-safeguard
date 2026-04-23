@@ -144,7 +144,7 @@ const Portfolio = () => {
             <Palette className="w-3.5 h-3.5" />
             Our Work
           </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground leading-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl font-black text-foreground leading-tight mb-4">
             Design{" "}
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Portfolio

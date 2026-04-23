@@ -91,7 +91,7 @@ export default function HeroSection() {
 
             {/* Heading */}
             <h1
-              className="animate-fade-in delay-200 text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-medium tracking-tighter leading-[0.9]"
+              className="animate-fade-in delay-200 text-4xl sm:text-5xl lg:text-5xl font-medium tracking-tighter leading-[0.9]"
               style={{
                 maskImage:
                   "linear-gradient(180deg, black 0%, black 80%, transparent 100%)",

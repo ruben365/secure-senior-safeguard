@@ -214,7 +214,7 @@ const AutonomousDefenseHub = () => {
                 <Badge className="mb-6 bg-primary/20 text-primary border border-primary/30 text-xs font-bold uppercase tracking-widest px-4 py-1.5">
                   InVision Network — 2026 Roadmap
                 </Badge>
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-tight">
+                <h1 className="text-4xl md:text-5xl lg:text-5xl font-black text-white mb-6 leading-tight">
                   Autonomous{" "}
                   <span className="gradient-text-fire">
                     Defense Hub

@@ -382,7 +382,7 @@ const WebsiteDesign = () => {
                 </AnimatedSection>
 
                 <AnimatedSection animation="fade-up" delay={100}>
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                  <h1 className="text-4xl md:text-5xl font-bold mb-6">
                     <span
                       className="bg-clip-text text-transparent"
                       style={{

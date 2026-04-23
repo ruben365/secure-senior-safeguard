@@ -198,7 +198,7 @@ const WebsiteInsurance = () => {
                     Website Protection
                   </Badge>
                 </div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                <h1 className="text-4xl md:text-5xl font-bold mb-6">
                   <span className="gradient-text-primary">
                     Website Insurance
                   </span>

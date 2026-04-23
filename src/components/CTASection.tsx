@@ -67,7 +67,7 @@ const CTASection = ({
         <div className="container mx-auto text-center relative z-10">
           <h2
             className={cn(
-              "mb-6 text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold drop-shadow-lg",
+              "mb-6 text-3xl md:text-4xl lg:text-5xl font-bold drop-shadow-lg",
               textClass,
             )}
           >
@@ -104,7 +104,7 @@ const CTASection = ({
       <div className="container mx-auto text-center">
         <h2
           className={cn(
-            "mb-6 text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold",
+            "mb-6 text-3xl md:text-4xl lg:text-5xl font-bold",
             textClass,
           )}
         >

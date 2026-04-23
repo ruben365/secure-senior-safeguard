@@ -169,7 +169,7 @@ export default function FreeSecurityScan() {
                 <Shield className="w-4 h-4 mr-2" />
                 Free Security Check
               </Badge>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">
                 <span className="gradient-text-primary">How Secure</span>
                 <br />Is Your Website?
               </h1>
