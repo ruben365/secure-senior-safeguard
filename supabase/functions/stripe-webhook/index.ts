@@ -63,26 +63,53 @@ serve(async (req: Request) => {
     switch (event.type) {
       case "checkout.session.completed": {
         const session = event.data.object as Record<string, unknown>;
-        const userId = (session.metadata as Record<string, string>)?.user_id;
-        const productType = (session.metadata as Record<string, string>)?.product_type;
+        const metadata = (session.metadata as Record<string, string>) ?? {};
+        const orderId = metadata.order_id;
 
-        if (userId) {
-          await supabase.from("orders").insert({
-            user_id: userId,
-            stripe_session_id: session.id,
-            amount: (session.amount_total as number) / 100,
-            currency: session.currency,
-            status: "completed",
-            product_type: productType ?? "unknown",
-          });
+        if (orderId) {
+          // Row was created by create-cart-payment-intent; promote it to confirmed.
+          const updates: Record<string, unknown> = {
+            status: "confirmed",
+            payment_status: "completed",
+          };
+          if (session.payment_intent && typeof session.payment_intent === "string") {
+            updates.payment_method = "stripe";
+            updates.payment_transaction_id = session.payment_intent;
+          }
+          const { error } = await supabase
+            .from("partner_orders")
+            .update(updates)
+            .eq("id", orderId);
+          if (error) {
+            console.error("Error updating partner_orders (checkout.session.completed):", error.message);
+          } else {
+            console.log("partner_orders confirmed via webhook", { orderId });
+          }
+        } else {
+          // Subscription or payment-link checkout with no pre-created order row.
+          console.log("checkout.session.completed: no order_id in metadata, skipping partner_orders update", { sessionId: session.id });
         }
         break;
       }
 
       case "payment_intent.succeeded": {
         const paymentIntent = event.data.object as Record<string, unknown>;
-        console.log("Payment intent succeeded:", paymentIntent.id);
-        // TODO: Update order status for one-time payments
+        const piMetadata = (paymentIntent.metadata as Record<string, string>) ?? {};
+        const orderId = piMetadata.order_id;
+
+        if (orderId) {
+          const { error } = await supabase
+            .from("partner_orders")
+            .update({ status: "confirmed", payment_status: "completed" })
+            .eq("id", orderId);
+          if (error) {
+            console.error("Error updating partner_orders (payment_intent.succeeded):", error.message);
+          } else {
+            console.log("partner_orders confirmed via webhook (PI)", { orderId });
+          }
+        } else {
+          console.log("payment_intent.succeeded: no order_id in metadata", { piId: paymentIntent.id });
+        }
         break;
       }
 
@@ -90,19 +117,32 @@ serve(async (req: Request) => {
       case "customer.subscription.updated": {
         const subscription = event.data.object as Record<string, unknown>;
         const customerId = subscription.customer as string;
+
+        // Try to find a matching user profile by stripe_customer_id.
+        // This may return null if the column doesn't exist on profiles — that's
+        // OK, we still write the subscription record with whatever we know.
         const { data: profile } = await supabase
           .from("profiles")
           .select("id")
           .eq("stripe_customer_id", customerId)
-          .single();
+          .maybeSingle();
 
-        if (profile) {
-          await supabase.from("subscriptions").upsert({
-            user_id: profile.id,
-            stripe_subscription_id: subscription.id,
-            status: subscription.status,
-            updated_at: new Date().toISOString(),
-          });
+        const upsertPayload: Record<string, unknown> = {
+          stripe_subscription_id: subscription.id,
+          stripe_customer_id: customerId,
+          status: subscription.status,
+          updated_at: new Date().toISOString(),
+        };
+        if (profile?.id) upsertPayload.user_id = profile.id;
+
+        const { error: upsertError } = await supabase
+          .from("subscriptions")
+          .upsert(upsertPayload, { onConflict: "stripe_subscription_id" });
+
+        if (upsertError) {
+          console.error("Error upserting subscription:", upsertError.message);
+        } else {
+          console.log("Subscription upserted", { subscriptionId: subscription.id, userId: profile?.id ?? "unknown" });
         }
         break;
       }
