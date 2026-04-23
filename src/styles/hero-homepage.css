@@ -592,6 +592,33 @@
   }
 }
 
+/* ═══ 375 px — iPhone SE / tight phones ═══
+   Sit inside the 640px block but override values that squeeze at 375.  */
+@media (max-width: 390px) {
+  .hero-home__headline {
+    font-size: clamp(1.35rem, 7vw, 1.75rem);
+    letter-spacing: -0.03em;
+    word-break: break-word;
+  }
+
+  .hero-home__content {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 1.75rem;
+  }
+
+  .hero-home__cta {
+    height: 32px;
+    padding: 0 0.875rem;
+    font-size: 0.7rem;
+  }
+
+  .hero-home__ctas {
+    gap: 0.625rem;
+  }
+}
+
+
 /* ═══ REDUCED MOTION ═══ */
 @media (prefers-reduced-motion: reduce) {
   .hero-home__kicker,

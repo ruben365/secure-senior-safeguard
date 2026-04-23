@@ -483,6 +483,21 @@
   }
 }
 
+/* ═══ 375 px — compact phone pass ═══ */
+@media (max-width: 390px) {
+  .hero-biz__headline {
+    font-size: clamp(1.35rem, 7vw, 1.75rem);
+    letter-spacing: -0.03em;
+    word-break: break-word;
+  }
+
+  .hero-biz__content {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 1.5rem;
+  }
+}
+
 /* ═══ 6. REDUCED MOTION ═══ */
 @media (prefers-reduced-motion: reduce) {
   .hero-biz__kicker,
