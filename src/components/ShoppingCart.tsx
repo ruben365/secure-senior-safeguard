@@ -23,7 +23,7 @@ export function ShoppingCart() {
         <button
           type="button"
           onClick={() => setOpen(!open)}
-          className="flex items-center justify-center w-9 h-9 rounded-full bg-black/20 backdrop-blur-[8px] border border-white/15 hover:border-white/30 text-white/70 hover:text-white transition-all relative"
+          className="flex items-center justify-center min-w-[44px] min-h-[44px] w-9 h-9 rounded-full bg-black/20 backdrop-blur-[8px] border border-white/15 hover:border-white/30 text-white/70 hover:text-white transition-all relative"
           aria-label={`Shopping cart, ${itemCount} items`}
         >
           <CartIcon className="w-4 h-4" />
@@ -39,7 +39,7 @@ export function ShoppingCart() {
           <>
             <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
             <div
-              className="absolute right-0 top-full mt-2 z-50 w-[min(320px,calc(100vw-2rem))] rounded-xl overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+              className="absolute right-0 top-full mt-2 z-50 w-[min(320px,calc(100vw-2rem))] rounded-xl overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] max-sm:fixed max-sm:right-4 max-sm:top-16 max-sm:mt-0"
               style={{
                 background: "rgba(15, 15, 20, 0.92)",
                 backdropFilter: "blur(20px) saturate(120%)",
@@ -60,7 +60,7 @@ export function ShoppingCart() {
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
-                  className="p-1 text-gray-400 hover:text-white rounded-md hover:bg-white/8 transition-colors"
+                  className="min-w-[44px] min-h-[44px] flex items-center justify-center text-gray-400 hover:text-white rounded-md hover:bg-white/8 transition-colors"
                   aria-label="Close cart"
                 >
                   <X className="w-3.5 h-3.5" />

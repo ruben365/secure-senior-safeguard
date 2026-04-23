@@ -144,7 +144,7 @@ export const CookieConsent = forwardRef<HTMLDivElement>(function CookieConsent(_
               <button
                 type="button"
                 onClick={acceptEssential}
-                className="p-1 text-[#64748B] hover:text-[#1E293B] rounded transition-colors"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center -mr-2 text-[#64748B] hover:text-[#1E293B] rounded transition-colors"
                 aria-label="Close cookie banner"
               >
                 <X className="w-3.5 h-3.5" />
