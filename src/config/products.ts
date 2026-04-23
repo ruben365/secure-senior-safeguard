@@ -32,7 +32,7 @@ export interface Product {
 export const SCAMSHIELD_PLANS: Product[] = [
   {
     id: "scamshield-basic",
-    name: "Basic",
+    name: "ScamShield Basic",
     description: "Essential AI protection for individuals",
     category: "scamshield",
     paymentType: "subscription",
@@ -50,7 +50,7 @@ export const SCAMSHIELD_PLANS: Product[] = [
   },
   {
     id: "scamshield-pro",
-    name: "Pro",
+    name: "ScamShield Pro",
     description: "Advanced protection for you and your family",
     category: "scamshield",
     paymentType: "subscription",
@@ -69,7 +69,7 @@ export const SCAMSHIELD_PLANS: Product[] = [
   },
   {
     id: "scamshield-enterprise",
-    name: "Enterprise",
+    name: "ScamShield Enterprise",
     description: "Unlimited protection for your whole household",
     category: "scamshield",
     paymentType: "subscription",
