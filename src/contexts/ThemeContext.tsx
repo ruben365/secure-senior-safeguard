@@ -11,13 +11,13 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>(() => {
-    const saved = localStorage.getItem('wedding-theme');
+    const saved = localStorage.getItem('invision-theme');
     return (saved === 'dark' || saved === 'light') ? saved : 'light';
   });
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark');
-    localStorage.setItem('wedding-theme', theme);
+    localStorage.setItem('invision-theme', theme);
   }, [theme]);
 
   const toggleTheme = () => setTheme(prev => prev === 'light' ? 'dark' : 'light');
