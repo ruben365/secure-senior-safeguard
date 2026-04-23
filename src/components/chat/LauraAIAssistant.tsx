@@ -44,6 +44,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
   const [input, setInput] = useState("");
   const [isRecording, setIsRecording] = useState(false);
   const [mode, setMode] = useState<"chat" | "help">("chat");
+  const [toastVisible, setToastVisible] = useState(false);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -104,6 +105,24 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
   }, [messages, isLoading]);
 
   useEffect(() => {
+    let observer: MutationObserver | null = null;
+    const setup = () => {
+      const toaster = document.querySelector("[data-sonner-toaster]");
+      if (!toaster) return false;
+      observer = new MutationObserver(() => {
+        setToastVisible(toaster.children.length > 0);
+      });
+      observer.observe(toaster, { childList: true });
+      return true;
+    };
+    if (!setup()) {
+      const timer = setTimeout(setup, 500);
+      return () => clearTimeout(timer);
+    }
+    return () => observer?.disconnect();
+  }, []);
+
+  useEffect(() => {
     const w = window as Window;
     if (!(w.webkitSpeechRecognition || w.SpeechRecognition)) return;
     const SpeechRecognitionCtor = w.webkitSpeechRecognition || w.SpeechRecognition;
@@ -152,7 +171,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
   /* ─── Closed FAB ─── */
   if (!isOpen) {
     return (
-      <div className="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-fab">
+      <div className={`fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-fab transition-all duration-200 ${toastVisible ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
         <button
           onClick={() => setIsOpen(true)}
           className="group relative w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary to-accent shadow-[0_2px_12px_hsl(var(--primary)/0.35),0_8px_24px_-6px_hsl(var(--primary)/0.25)] transition-all duration-300 hover:scale-110 hover:shadow-[0_4px_20px_hsl(var(--primary)/0.45)] active:scale-95 overflow-hidden ring-2 ring-white/20"

@@ -36,6 +36,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
       className="toaster group"
       position="bottom-right"
       duration={2500}
+      style={{ "--z-index": "99999" } as React.CSSProperties}
       toastOptions={{
         classNames: {
           toast:
