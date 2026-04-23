@@ -136,9 +136,11 @@ export function SEO({
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@invisionnetwork" />
+      <meta name="twitter:creator" content="@invisionnetwork" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
+      {resolvedImageAlt && <meta name="twitter:image:alt" content={resolvedImageAlt} />}
 
       {/* Structured Data — supports single object or array of schemas */}
       {structuredData &&
