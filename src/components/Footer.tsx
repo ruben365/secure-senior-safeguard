@@ -97,8 +97,8 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
         { to: "/ai", label: "AI for Business" },
         { to: "/ai#svc-ai-receptionist", label: "AI Receptionist" },
         { to: "/ai#svc-smart-scheduling", label: "Smart Scheduling" },
-        { to: "/ai#svc-website-design", label: "Website Design" },
-        { to: "/ai#svc-website-insurance", label: "Website Insurance" },
+        { to: "/ai#website-design", label: "Website Design" },
+        { to: "/ai#website-insurance", label: "Website Insurance" },
       ],
     },
     {
