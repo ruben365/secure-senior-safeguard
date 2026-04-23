@@ -1,0 +1,134 @@
+/* ═══════════════════════════════════════════════════════════════
+   PRINT STYLESHEET — clean, readable layout for printed pages
+   ═══════════════════════════════════════════════════════════════ */
+
+@media print {
+
+  /* ── 1. Page setup ───────────────────────────────────────────── */
+  @page {
+    margin: 2cm 2.5cm;
+    size: A4 portrait;
+  }
+
+  /* Force light background and dark text regardless of theme */
+  html, body {
+    background: #ffffff !important;
+    color: #111111 !important;
+    font-size: 11pt;
+    line-height: 1.55;
+  }
+
+  /* ── 2. Hide chrome & interactive elements ───────────────────── */
+  /* Navigation */
+  nav[aria-label="Main navigation"],
+  nav[aria-label="Breadcrumb"],
+  header nav,
+  .navigation,
+  [class*="nav-"],
+  [class*="Navigation"],
+
+  /* Footer */
+  footer,
+  [class*="footer"],
+  [class*="Footer"],
+
+  /* Floating buttons: back-to-top, Laura, call, donate, cookie banner */
+  [class*="BackToTop"],
+  [class*="back-to-top"],
+  [class*="Laura"],
+  [class*="laura"],
+  [class*="MobileCallButton"],
+  [class*="DonateButton"],
+  [class*="CookieConsent"],
+  [class*="cookie"],
+
+  /* Progress bars, ambient backgrounds, overlays */
+  [class*="ScrollProgress"],
+  [class*="NavigationProgress"],
+  [class*="AmbientVibranceBackground"],
+  [class*="ambient"],
+
+  /* Modals, dialogs, toasts */
+  [role="dialog"],
+  [data-sonner-toaster],
+  [class*="Toast"],
+  [class*="toast"],
+  [class*="Modal"],
+
+  /* Sliders, carousels, video players */
+  [class*="carousel"],
+  [class*="slider"],
+  video,
+
+  /* Chat widget */
+  [class*="chat-"],
+  [class*="Chat"],
+
+  /* Misc interactive UI */
+  button:not([aria-label="Print"]),
+  [class*="cta-"],
+  [class*="hero-home__ctas"],
+  [class*="hero-home__tabs"] {
+    display: none !important;
+  }
+
+  /* ── 3. Reset glassmorphism & dark surfaces ──────────────────── */
+  [class*="glass"],
+  [class*="backdrop"],
+  [class*="dark"],
+  .bg-background,
+  .bg-card {
+    background: #ffffff !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-color: #d1d5db !important;
+    box-shadow: none !important;
+  }
+
+  /* ── 4. Typography ───────────────────────────────────────────── */
+  h1 { font-size: 22pt; margin-bottom: 8pt; }
+  h2 { font-size: 17pt; margin-bottom: 6pt; }
+  h3 { font-size: 13pt; margin-bottom: 4pt; }
+  h4, h5, h6 { font-size: 11pt; margin-bottom: 3pt; }
+
+  p, li { orphans: 3; widows: 3; }
+
+  /* Avoid breaking headings from their following content */
+  h1, h2, h3, h4 { page-break-after: avoid; }
+
+  /* ── 5. Links ────────────────────────────────────────────────── */
+  /* Show full URL after links that aren't just anchors */
+  a[href^="http"]:not([href*="invisionnetwork.org"])::after {
+    content: " (" attr(href) ")";
+    font-size: 8pt;
+    color: #6b7280;
+  }
+
+  /* ── 6. Images ───────────────────────────────────────────────── */
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  /* Hero images — constrain so they don't eat the whole page */
+  [class*="hero"] img,
+  [class*="Hero"] img {
+    max-height: 30vh !important;
+    object-fit: cover;
+  }
+
+  /* ── 7. Layout cleanup ───────────────────────────────────────── */
+  .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  /* Single-column grid for print */
+  [class*="grid"],
+  [class*="columns"] {
+    display: block !important;
+  }
+
+  /* Keep table rows together */
+  tr { page-break-inside: avoid; }
+}

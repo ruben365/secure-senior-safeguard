@@ -72,6 +72,9 @@
 /* Admin Dashboard V2 — warm glass/neumorphic shell design */
 @import "./styles/admin-dashboard-v2.css";
 
+/* Print — hides nav, footer, floating widgets; readable layout */
+@import "./styles/print.css";
+
 /* ═══════════════════════════════════════════════════════════════════
    AMBIENT VIBRANCE OPT-OUT — Auth, Admin, Portal use solid surfaces
    ═══════════════════════════════════════════════════════════════════ */
