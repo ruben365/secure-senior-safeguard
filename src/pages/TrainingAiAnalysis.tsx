@@ -145,13 +145,17 @@ export default function TrainingAiAnalysis() {
   // Auto-detect scan mode from current input
   const autoDetectedMode = useMemo(() => detectScanMode(textInput, file), [textInput, file]);
 
-  // Show password check UI only for plausible passwords — not URLs, phone numbers, handles, or domain paths
+  // Show password check UI only for plausible passwords — not URLs, emails,
+  // phone numbers, handles, or bare domain/path strings.
   const looksLikePassword = useMemo(() => {
     const t = textInput.trim();
     if (!t || t.length > 50 || /\s/.test(t)) return false;
     if (/^https?:\/\//i.test(t)) return false;
     if (/^[+\d\s\-()]{7,15}$/.test(t)) return false;
     if (/^@/.test(t)) return false;
+    // Email addresses contain @ and would otherwise pass the domain-path guard below.
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(t)) return false;
+    // Bare domain or host/path strings (no @).
     if (/^[a-z0-9][a-z0-9.\-]*\.[a-z]{2,}(\/[^\s]*)?$/i.test(t)) return false;
     return true;
   }, [textInput]);

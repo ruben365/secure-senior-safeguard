@@ -118,14 +118,35 @@ serve(async (req: Request) => {
         const subscription = event.data.object as Record<string, unknown>;
         const customerId = subscription.customer as string;
 
-        // Try to find a matching user profile by stripe_customer_id.
-        // This may return null if the column doesn't exist on profiles — that's
-        // OK, we still write the subscription record with whatever we know.
-        const { data: profile } = await supabase
+        // Fetch Stripe customer to get email — needed for both the email field
+        // and as a fallback key to locate the matching profile row.
+        let customerEmail: string | null = null;
+        try {
+          const customer = await stripeClient.customers.retrieve(customerId);
+          if (customer && !("deleted" in customer) && customer.email) {
+            customerEmail = customer.email;
+          }
+        } catch (err) {
+          console.error("Error fetching Stripe customer:", err);
+        }
+
+        // 1. Try to find profile by stripe_customer_id.
+        const { data: profileById } = await supabase
           .from("profiles")
           .select("id")
           .eq("stripe_customer_id", customerId)
           .maybeSingle();
+
+        // 2. Fall back to email lookup if no profile found by customer ID.
+        let userId = profileById?.id ?? null;
+        if (!userId && customerEmail) {
+          const { data: profileByEmail } = await supabase
+            .from("profiles")
+            .select("id")
+            .eq("email", customerEmail)
+            .maybeSingle();
+          userId = profileByEmail?.id ?? null;
+        }
 
         const upsertPayload: Record<string, unknown> = {
           stripe_subscription_id: subscription.id,
@@ -133,7 +154,8 @@ serve(async (req: Request) => {
           status: subscription.status,
           updated_at: new Date().toISOString(),
         };
-        if (profile?.id) upsertPayload.user_id = profile.id;
+        if (userId) upsertPayload.user_id = userId;
+        if (customerEmail) upsertPayload.email = customerEmail;
 
         const { error: upsertError } = await supabase
           .from("subscriptions")
@@ -142,7 +164,7 @@ serve(async (req: Request) => {
         if (upsertError) {
           console.error("Error upserting subscription:", upsertError.message);
         } else {
-          console.log("Subscription upserted", { subscriptionId: subscription.id, userId: profile?.id ?? "unknown" });
+          console.log("Subscription upserted", { subscriptionId: subscription.id, userId: userId ?? "unknown" });
         }
         break;
       }

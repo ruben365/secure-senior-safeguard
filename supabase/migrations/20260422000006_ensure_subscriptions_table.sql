@@ -42,13 +42,27 @@ ALTER TABLE public.subscriptions
   ADD COLUMN IF NOT EXISTS updated_at             TIMESTAMPTZ DEFAULT NOW();
 
 -- ── 3. Unique constraint on stripe_subscription_id (needed for webhook upsert) ──
+-- Deduplicate first: keep the most-recently-updated row per stripe_subscription_id.
 DO $$
 BEGIN
-  IF NOT EXISTS (
+  IF EXISTS (
     SELECT 1 FROM pg_constraint
     WHERE conname = 'subscriptions_stripe_subscription_id_key'
       AND conrelid = 'public.subscriptions'::regclass
   ) THEN
+    -- Constraint already exists; nothing to do.
+    NULL;
+  ELSE
+    -- Remove duplicate stripe_subscription_id rows, keeping the latest updated_at.
+    DELETE FROM public.subscriptions s
+    WHERE s.stripe_subscription_id IS NOT NULL
+      AND s.id <> (
+        SELECT id FROM public.subscriptions s2
+        WHERE s2.stripe_subscription_id = s.stripe_subscription_id
+        ORDER BY COALESCE(s2.updated_at, s2.created_at) DESC NULLS LAST, s2.id DESC
+        LIMIT 1
+      );
+
     ALTER TABLE public.subscriptions
       ADD CONSTRAINT subscriptions_stripe_subscription_id_key
       UNIQUE (stripe_subscription_id);
