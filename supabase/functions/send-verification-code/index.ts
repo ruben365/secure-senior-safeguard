@@ -149,7 +149,28 @@ serve(async (req) => {
         from: "InVision Network <noreply@invisionnetwork.org>",
         to: [normalizedEmail],
         subject: "Your InVision Network Verification Code",
-        html: `<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;"><h1 style="color: #1a1a2e;">Your Verification Code</h1><div style="background: #f7fafc; border: 2px dashed #4a90d9; border-radius: 8px; padding: 20px; text-align: center; margin: 20px 0;"><span style="font-size: 32px; font-weight: bold; letter-spacing: 8px; color: #1a1a2e; font-family: monospace;">${code}</span></div><p style="color: #555;">This code expires in 10 minutes.</p><p style="color: #999; font-size: 12px;">If you didn't request this code, please ignore this email.</p></div>`,
+        html: `
+<div style="font-family:'Helvetica Neue',Arial,sans-serif;background:#f7f4f0;padding:32px 16px;">
+  <div style="max-width:600px;margin:0 auto;">
+    <div style="background:#0D2137;border-radius:12px 12px 0 0;padding:28px 40px;text-align:center;">
+      <div style="color:#F97316;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;">InVision Network</div>
+      <div style="color:#ffffff;font-size:22px;font-weight:600;">Your Verification Code</div>
+    </div>
+    <div style="background:#ffffff;padding:40px;border-left:1px solid #e8e3dc;border-right:1px solid #e8e3dc;">
+      <p style="color:#374151;font-size:15px;line-height:1.6;margin:0 0 24px;">Enter the code below to verify your identity. This code is valid for <strong>10 minutes</strong>.</p>
+      <div style="background:#f7f4f0;border:2px solid #F97316;border-radius:12px;padding:28px;text-align:center;margin:0 0 24px;">
+        <span style="font-size:40px;font-weight:700;letter-spacing:12px;color:#0D2137;font-family:'Courier New',monospace;">${code}</span>
+      </div>
+      <p style="color:#6b7280;font-size:13px;text-align:center;margin:0;">If you didn't request this code, you can safely ignore this email.</p>
+    </div>
+    <div style="background:#0D2137;border-radius:0 0 12px 12px;padding:20px 40px;text-align:center;">
+      <div style="color:rgba(255,255,255,0.45);font-size:12px;line-height:1.7;">
+        &copy; 2024 InVision Network &middot; AI Scam Protection for Ohio Families<br>
+        <a href="https://www.invisionnetwork.org" style="color:#F97316;text-decoration:none;">www.invisionnetwork.org</a>
+      </div>
+    </div>
+  </div>
+</div>`,
       }),
     });
 

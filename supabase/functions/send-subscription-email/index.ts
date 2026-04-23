@@ -87,6 +87,27 @@ function safeDate(value: unknown): Date | null {
   return Number.isFinite(d.getTime()) ? d : null;
 }
 
+function brandedEmail(title: string, content: string): string {
+  return `
+<div style="font-family:'Helvetica Neue',Arial,sans-serif;background:#f7f4f0;padding:32px 16px;">
+  <div style="max-width:600px;margin:0 auto;">
+    <div style="background:#0D2137;border-radius:12px 12px 0 0;padding:28px 40px;text-align:center;">
+      <div style="color:#F97316;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;">InVision Network</div>
+      <div style="color:#ffffff;font-size:22px;font-weight:600;">${title}</div>
+    </div>
+    <div style="background:#ffffff;padding:40px;border-left:1px solid #e8e3dc;border-right:1px solid #e8e3dc;">
+      ${content}
+    </div>
+    <div style="background:#0D2137;border-radius:0 0 12px 12px;padding:20px 40px;text-align:center;">
+      <div style="color:rgba(255,255,255,0.45);font-size:12px;line-height:1.7;">
+        &copy; 2024 InVision Network &middot; AI Scam Protection for Ohio Families<br>
+        <a href="https://www.invisionnetwork.org" style="color:#F97316;text-decoration:none;">www.invisionnetwork.org</a>
+      </div>
+    </div>
+  </div>
+</div>`;
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -185,30 +206,27 @@ serve(async (req) => {
     switch (type) {
       case "subscription_created":
         subject = `Welcome to ${safeServiceName}`;
-        html = `
-          <h1>Subscription Confirmed</h1>
-          <p>Thank you for subscribing to ${safeServiceName}${safePlanTier ? ` - ${safePlanTier}` : ""}!</p>
-          <p><strong>Amount:</strong> $${amountDollars}/month</p>
-          ${
-            nextBillingDate
-              ? `<p><strong>Next billing date:</strong> ${nextBillingDate.toLocaleDateString()}</p>`
-              : ""
-          }
-          <p>You can manage your subscription anytime from your portal.</p>
-        `;
+        html = brandedEmail("Subscription Confirmed", `
+          <p style="color:#374151;font-size:15px;line-height:1.6;margin:0 0 20px;">Thank you for subscribing to <strong>${safeServiceName}</strong>${safePlanTier ? ` &mdash; ${safePlanTier}` : ""}! Your account is now active.</p>
+          <div style="background:#f7f4f0;border-radius:8px;padding:20px 24px;margin:0 0 20px;">
+            <table style="width:100%;border-collapse:collapse;">
+              <tr><td style="color:#6b7280;font-size:13px;padding:6px 0;">Plan amount</td><td style="color:#111827;font-size:14px;font-weight:600;text-align:right;">$${amountDollars}/month</td></tr>
+              ${nextBillingDate ? `<tr><td style="color:#6b7280;font-size:13px;padding:6px 0;">Next billing date</td><td style="color:#111827;font-size:14px;font-weight:600;text-align:right;">${nextBillingDate.toLocaleDateString()}</td></tr>` : ""}
+            </table>
+          </div>
+          <p style="color:#6b7280;font-size:13px;margin:0;">You can manage your subscription anytime from your <a href="https://www.invisionnetwork.org/portal" style="color:#F97316;text-decoration:none;">member portal</a>.</p>
+        `);
         break;
 
       case "payment_success":
         subject = "Payment Successful";
-        html = `
-          <h1>Payment Received</h1>
-          <p>Your payment of $${amountDollars} has been successfully processed.</p>
-          ${
-            nextBillingDate
-              ? `<p><strong>Next billing date:</strong> ${nextBillingDate.toLocaleDateString()}</p>`
-              : ""
-          }
-        `;
+        html = brandedEmail("Payment Received", `
+          <p style="color:#374151;font-size:15px;line-height:1.6;margin:0 0 20px;">Your payment has been successfully processed. Thank you!</p>
+          <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:16px 20px;margin:0 0 20px;">
+            <p style="color:#166534;font-size:15px;font-weight:600;margin:0;">&#10003; $${amountDollars} charged successfully</p>
+          </div>
+          ${nextBillingDate ? `<p style="color:#6b7280;font-size:13px;margin:0;">Your next billing date is <strong>${nextBillingDate.toLocaleDateString()}</strong>.</p>` : ""}
+        `);
         break;
 
       case "payment_failed": {
@@ -218,26 +236,25 @@ serve(async (req) => {
           ? data.updatePaymentUrl
           : `${ALLOWED_URL_PREFIX}billing`;
         const escUpdateUrl = escapeHtml(safeUpdateUrl);
-        html = `
-          <h1>Payment Failed</h1>
-          <p>We were unable to process your payment of $${amountDollars}.</p>
-          <p>Please update your payment method to avoid service interruption.</p>
-          <p><a href="${escUpdateUrl}">Update Payment Method</a></p>
-        `;
+        html = brandedEmail("Payment Failed", `
+          <p style="color:#374151;font-size:15px;line-height:1.6;margin:0 0 20px;">We were unable to process your payment of <strong>$${amountDollars}</strong>. Please update your payment method to avoid interruption to your service.</p>
+          <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:16px 20px;margin:0 0 24px;">
+            <p style="color:#991b1b;font-size:13px;margin:0;">&#9888; Your subscription may be paused if payment is not updated.</p>
+          </div>
+          <div style="text-align:center;">
+            <a href="${escUpdateUrl}" style="display:inline-block;background:#F97316;color:#ffffff;font-size:15px;font-weight:600;padding:14px 36px;border-radius:8px;text-decoration:none;">Update Payment Method</a>
+          </div>
+        `);
         break;
       }
 
       case "subscription_cancelled":
         subject = "Subscription Cancelled";
-        html = `
-          <h1>Subscription Cancelled</h1>
-          <p>Your subscription to ${safeServiceName} has been cancelled.</p>
-          ${
-            endDate
-              ? `<p>You will continue to have access until ${endDate.toLocaleDateString()}.</p>`
-              : ""
-          }
-        `;
+        html = brandedEmail("Subscription Cancelled", `
+          <p style="color:#374151;font-size:15px;line-height:1.6;margin:0 0 20px;">Your subscription to <strong>${safeServiceName}</strong> has been cancelled.</p>
+          ${endDate ? `<div style="background:#f7f4f0;border-radius:8px;padding:16px 20px;margin:0 0 20px;"><p style="color:#374151;font-size:14px;margin:0;">You will continue to have access until <strong>${endDate.toLocaleDateString()}</strong>.</p></div>` : ""}
+          <p style="color:#6b7280;font-size:13px;margin:0;">If you change your mind, you can resubscribe anytime at <a href="https://www.invisionnetwork.org" style="color:#F97316;text-decoration:none;">invisionnetwork.org</a>.</p>
+        `);
         break;
     }
 

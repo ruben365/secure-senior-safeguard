@@ -201,7 +201,30 @@ serve(async (req) => {
         from: "InVision Network <hello@invisionnetwork.org>",
         to: [normalizedEmail],
         subject: "Password Reset - InVision Network",
-        html: `<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;"><h1 style="color: #1a1a2e;">Reset Your Password</h1><p>Click the link below to reset your InVision Network password:</p><p><a href="${resetUrl}" style="display: inline-block; background: #4a90d9; color: #ffffff; padding: 12px 24px; border-radius: 6px; text-decoration: none;">Reset Password</a></p><p style="color: #555; font-size: 14px;">This link expires in 1 hour.</p><p style="color: #999; font-size: 12px;">If you didn't request this reset, please ignore this email — your password will stay the same.</p></div>`,
+        html: `
+<div style="font-family:'Helvetica Neue',Arial,sans-serif;background:#f7f4f0;padding:32px 16px;">
+  <div style="max-width:600px;margin:0 auto;">
+    <div style="background:#0D2137;border-radius:12px 12px 0 0;padding:28px 40px;text-align:center;">
+      <div style="color:#F97316;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;">InVision Network</div>
+      <div style="color:#ffffff;font-size:22px;font-weight:600;">Reset Your Password</div>
+    </div>
+    <div style="background:#ffffff;padding:40px;border-left:1px solid #e8e3dc;border-right:1px solid #e8e3dc;">
+      <p style="color:#374151;font-size:15px;line-height:1.6;margin:0 0 20px;">We received a request to reset the password for your InVision Network account. Click the button below to set a new password.</p>
+      <div style="text-align:center;margin:32px 0;">
+        <a href="${resetUrl}" style="display:inline-block;background:#F97316;color:#ffffff;font-size:15px;font-weight:600;padding:14px 36px;border-radius:8px;text-decoration:none;letter-spacing:0.3px;">Reset Password</a>
+      </div>
+      <div style="background:#fef9f5;border:1px solid #fed7aa;border-radius:8px;padding:16px 20px;margin:24px 0;">
+        <p style="color:#92400e;font-size:13px;margin:0;line-height:1.5;">&#9203; This link expires in <strong>1 hour</strong>. If you didn't request a password reset, you can safely ignore this email &mdash; your password will remain unchanged.</p>
+      </div>
+    </div>
+    <div style="background:#0D2137;border-radius:0 0 12px 12px;padding:20px 40px;text-align:center;">
+      <div style="color:rgba(255,255,255,0.45);font-size:12px;line-height:1.7;">
+        &copy; 2024 InVision Network &middot; AI Scam Protection for Ohio Families<br>
+        <a href="https://www.invisionnetwork.org" style="color:#F97316;text-decoration:none;">www.invisionnetwork.org</a>
+      </div>
+    </div>
+  </div>
+</div>`,
       }),
     });
 
