@@ -374,29 +374,41 @@ export default function TrainingAiAnalysis() {
   // ─── Style helpers ────────────────────────────────────────────────────────
 
   const pillBase: React.CSSProperties = {
-    background:     'rgba(20,20,22,0.85)',
-    backdropFilter: 'blur(10px)',
-    WebkitBackdropFilter: 'blur(10px)',
-    borderRadius:   '999px',
-    border:         '1px solid rgba(255,255,255,0.12)',
-    color:          '#c9c9cd',
-    display:        'flex',
-    alignItems:     'center',
-    gap:            '2px',
-    padding:        '4px 8px',
+    background:         'rgba(10,10,12,0.9)',
+    backdropFilter:     'blur(20px) saturate(180%)',
+    WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+    borderRadius:       '999px',
+    border:             '1px solid rgba(255,255,255,0.08)',
+    boxShadow:          '0 2px 16px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)',
+    color:              '#a0a0a8',
+    display:            'flex',
+    alignItems:         'center',
+    gap:                '1px',
+    padding:            '5px 10px',
   };
 
   const toolBtn: React.CSSProperties = {
-    background:    'transparent',
-    border:        'none',
-    color:         '#c9c9cd',
-    padding:       '4px 6px',
-    borderRadius:  '999px',
-    cursor:        'pointer',
-    display:       'flex',
-    alignItems:    'center',
-    justifyContent:'center',
-    transition:    'color 0.15s, background 0.15s',
+    background:     'transparent',
+    border:         'none',
+    color:          '#7e7e88',
+    padding:        '5px 6px',
+    borderRadius:   '999px',
+    cursor:         'pointer',
+    display:        'flex',
+    alignItems:     'center',
+    justifyContent: 'center',
+    transition:     'color 0.22s ease, background 0.22s ease, transform 0.22s ease',
+  };
+
+  const toolBtnHover = (e: React.MouseEvent<HTMLElement>) => {
+    e.currentTarget.style.color = '#e5e5ea';
+    e.currentTarget.style.background = 'rgba(255,255,255,0.07)';
+    e.currentTarget.style.transform = 'scale(1.02)';
+  };
+  const toolBtnLeave = (e: React.MouseEvent<HTMLElement>) => {
+    e.currentTarget.style.color = '#7e7e88';
+    e.currentTarget.style.background = 'transparent';
+    e.currentTarget.style.transform = 'scale(1)';
   };
 
   const sepStyle: React.CSSProperties = { width: '1px', height: '18px', background: '#3a3a3d', flexShrink: 0 };
@@ -427,9 +439,9 @@ export default function TrainingAiAnalysis() {
             <Link
               to="/"
               title="Home"
-              style={{ ...toolBtn, textDecoration: 'none', color: '#c9c9cd' }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-              onMouseLeave={e => (e.currentTarget.style.color = '#c9c9cd')}
+              style={{ ...toolBtn, textDecoration: 'none' }}
+              onMouseEnter={toolBtnHover}
+              onMouseLeave={toolBtnLeave}
             >
               <Home className="w-3 h-3" />
             </Link>
@@ -440,8 +452,8 @@ export default function TrainingAiAnalysis() {
               title={isCompact ? 'Restore' : 'Minimize'}
               onClick={() => setIsCompact(c => !c)}
               style={toolBtn}
-              onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-              onMouseLeave={e => (e.currentTarget.style.color = '#c9c9cd')}
+              onMouseEnter={toolBtnHover}
+              onMouseLeave={toolBtnLeave}
             >
               <Minimize2 className="w-3 h-3" />
             </button>
@@ -452,8 +464,8 @@ export default function TrainingAiAnalysis() {
               title={darkMode ? 'Light mode' : 'Dark mode'}
               onClick={() => { setDarkMode(d => !d); setSettings(s => ({ ...s, darkMode: !s.darkMode })); }}
               style={toolBtn}
-              onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-              onMouseLeave={e => (e.currentTarget.style.color = '#c9c9cd')}
+              onMouseEnter={toolBtnHover}
+              onMouseLeave={toolBtnLeave}
             >
               {darkMode ? <Sun className="w-3 h-3" /> : <Moon className="w-3 h-3" />}
             </button>
@@ -464,8 +476,8 @@ export default function TrainingAiAnalysis() {
               title="Clear messages"
               onClick={() => { clearChat(); clearFile(); setPasswordResult(null); setTextInput(''); }}
               style={toolBtn}
-              onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-              onMouseLeave={e => (e.currentTarget.style.color = '#c9c9cd')}
+              onMouseEnter={toolBtnHover}
+              onMouseLeave={toolBtnLeave}
             >
               <RotateCcw className="w-3 h-3" />
             </button>
@@ -478,8 +490,8 @@ export default function TrainingAiAnalysis() {
                   title="Download chat as text"
                   onClick={handleDownload}
                   style={toolBtn}
-                  onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-                  onMouseLeave={e => (e.currentTarget.style.color = '#c9c9cd')}
+                  onMouseEnter={toolBtnHover}
+                  onMouseLeave={toolBtnLeave}
                 >
                   <Download className="w-3 h-3" />
                 </button>
@@ -488,8 +500,8 @@ export default function TrainingAiAnalysis() {
                   title="Save chat as PDF"
                   onClick={handleSaveAsPdf}
                   style={toolBtn}
-                  onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-                  onMouseLeave={e => (e.currentTarget.style.color = '#c9c9cd')}
+                  onMouseEnter={toolBtnHover}
+                  onMouseLeave={toolBtnLeave}
                 >
                   <FileText className="w-3 h-3" />
                 </button>
@@ -497,29 +509,73 @@ export default function TrainingAiAnalysis() {
             )}
 
             {/* Divider */}
-            <div style={{ width: '1px', height: '14px', background: 'rgba(255,255,255,0.15)', margin: '0 2px', flexShrink: 0 }} />
+            <div style={{ width: '1px', height: '14px', background: 'rgba(255,255,255,0.08)', margin: '0 4px', flexShrink: 0 }} />
 
-
-            {/* Login (only when not logged in) */}
+            {/* Login — glass pill */}
             {!user && (
               <Link
                 to={loginPath}
-                style={{ ...toolBtn, textDecoration: 'none', color: 'rgba(255,255,255,0.75)', fontSize: '11px', fontWeight: 500, padding: '4px 6px' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.75)')}
+                style={{
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  fontSize: '11px',
+                  fontWeight: 600,
+                  letterSpacing: '0.02em',
+                  padding: '4px 11px',
+                  borderRadius: '999px',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  background: 'rgba(255,255,255,0.06)',
+                  color: 'rgba(255,255,255,0.75)',
+                  transition: 'color 0.22s ease, background 0.22s ease, border-color 0.22s ease, transform 0.22s ease',
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.color = '#fff';
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.11)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)';
+                  e.currentTarget.style.transform = 'scale(1.02)';
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.color = 'rgba(255,255,255,0.75)';
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
+                  e.currentTarget.style.transform = 'scale(1)';
+                }}
               >
                 Login
               </Link>
             )}
 
-            {/* Subscribe */}
+            {/* Subscribe — gold accent pill */}
             {!scanAccessType && (
               <button
                 type="button"
                 onClick={handleStartSubscription}
-                style={{ ...toolBtn, color: '#ff7a45', fontSize: '11px', fontWeight: 600, padding: '4px 6px' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#ff9b6a')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#ff7a45')}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  letterSpacing: '0.02em',
+                  padding: '4px 12px',
+                  borderRadius: '999px',
+                  border: 'none',
+                  background: 'linear-gradient(135deg, #f5c543 0%, #e0a312 100%)',
+                  color: '#1a1200',
+                  cursor: 'pointer',
+                  boxShadow: '0 1px 0 rgba(255,255,255,0.22) inset, 0 3px 10px rgba(245,197,67,0.28)',
+                  transition: 'background 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease',
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.background = 'linear-gradient(135deg, #f7cf5e 0%, #ebb82a 100%)';
+                  e.currentTarget.style.boxShadow = '0 1px 0 rgba(255,255,255,0.28) inset, 0 5px 16px rgba(245,197,67,0.42)';
+                  e.currentTarget.style.transform = 'scale(1.02)';
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.background = 'linear-gradient(135deg, #f5c543 0%, #e0a312 100%)';
+                  e.currentTarget.style.boxShadow = '0 1px 0 rgba(255,255,255,0.22) inset, 0 3px 10px rgba(245,197,67,0.28)';
+                  e.currentTarget.style.transform = 'scale(1)';
+                }}
               >
                 Subscribe
               </button>
@@ -534,9 +590,9 @@ export default function TrainingAiAnalysis() {
               type="button"
               title="About this scanner"
               onClick={() => setAboutOpen(true)}
-              style={{ ...toolBtn, color: aboutOpen ? '#fff' : '#c9c9cd' }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-              onMouseLeave={e => (e.currentTarget.style.color = aboutOpen ? '#fff' : '#c9c9cd')}
+              style={{ ...toolBtn, color: aboutOpen ? '#e5e5ea' : '#7e7e88', background: aboutOpen ? 'rgba(255,255,255,0.07)' : 'transparent' }}
+              onMouseEnter={e => { e.currentTarget.style.color = '#e5e5ea'; e.currentTarget.style.background = 'rgba(255,255,255,0.07)'; e.currentTarget.style.transform = 'scale(1.02)'; }}
+              onMouseLeave={e => { e.currentTarget.style.color = aboutOpen ? '#e5e5ea' : '#7e7e88'; e.currentTarget.style.background = aboutOpen ? 'rgba(255,255,255,0.07)' : 'transparent'; e.currentTarget.style.transform = 'scale(1)'; }}
             >
               <Info className="w-3.5 h-3.5" />
             </button>
@@ -607,8 +663,8 @@ export default function TrainingAiAnalysis() {
               <label
                 title="Attach file"
                 style={{ ...toolBtn, cursor: 'pointer' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#fff'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#c9c9cd'; }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#e5e5ea'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.07)'; (e.currentTarget as HTMLElement).style.transform = 'scale(1.02)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#7e7e88'; (e.currentTarget as HTMLElement).style.background = 'transparent'; (e.currentTarget as HTMLElement).style.transform = 'scale(1)'; }}
               >
                 <input
                   ref={fileInputRef}
@@ -650,8 +706,8 @@ export default function TrainingAiAnalysis() {
                 title="Project"
                 style={toolBtn}
                 onClick={() => toast('No project selected.')}
-                onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#c9c9cd')}
+                onMouseEnter={toolBtnHover}
+                onMouseLeave={toolBtnLeave}
               >
                 <Folder style={{ width: '16px', height: '16px' }} />
               </button>
