@@ -258,91 +258,142 @@ const WebsiteInsurance = () => {
                   more comprehensive coverage.
                 </p>
               </div>
-              <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                {plans.map((plan, index) => (
-                  <div key={index} className="relative pt-4">
-                    {plan.popular && (
-                      <Badge className="absolute -top-1 left-1/2 -translate-x-1/2 z-10 bg-gradient-to-r from-primary to-accent text-white border-0 px-4 py-1">
-                        <Star className="w-3 h-3 mr-1 fill-current" />
-                        Recommended
-                      </Badge>
-                    )}
-                    {plan.discountedPrice && (
-                      <Badge className="absolute -top-1 left-1/2 -translate-x-1/2 z-10 bg-gradient-to-r from-success to-emerald-500 text-white border-0 px-4 py-1 whitespace-nowrap">
-                        <Zap className="w-3 h-3 mr-1 fill-current" />
-                        10% OFF this month
-                      </Badge>
-                    )}
-                    <Card
-                      className={`h-full ${plan.popular ? "border-primary/50 shadow-lg pt-6" : plan.discountedPrice ? "border-success/50 shadow-lg shadow-success/10 pt-6" : "border-border/50 pt-6"}`}
-                    >
-                      <CardHeader className="text-center">
-                        <CardTitle className="text-2xl">{plan.name}</CardTitle>
-                        <div className="mt-2">
-                          {plan.discountedPrice ? (
-                            <div className="space-y-1">
-                              <div className="flex items-center justify-center gap-2">
-                                <span className="text-2xl text-muted-foreground line-through">
+              <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto items-stretch">
+                {plans.map((plan, index) => {
+                  const isPopular = plan.popular;
+                  const hasDiscount = !!plan.discountedPrice;
+                  return (
+                    <div key={index} className="relative pt-5 flex flex-col">
+                      {/* Badge */}
+                      {isPopular && (
+                        <div className="absolute -top-0.5 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap">
+                          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold shadow-[0_4px_12px_rgba(245,197,67,0.35)]" style={{ background: 'linear-gradient(135deg,#f5c543,#e0a312)', color: '#1a1200' }}>
+                            <Star className="w-3 h-3 fill-current" />
+                            Recommended
+                          </span>
+                        </div>
+                      )}
+                      {hasDiscount && !isPopular && (
+                        <div className="absolute -top-0.5 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap">
+                          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-emerald-500 to-green-600 text-white shadow-[0_4px_12px_rgba(16,185,129,0.35)]">
+                            <Zap className="w-3 h-3 fill-current" />
+                            10% OFF this month
+                          </span>
+                        </div>
+                      )}
+
+                      {/* Card */}
+                      <div
+                        className="relative flex flex-col flex-1 rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1"
+                        style={isPopular ? {
+                          background: 'linear-gradient(135deg,#1a1200 0%,#221900 50%,#1a1200 100%)',
+                          border: '1px solid rgba(245,197,67,0.25)',
+                          boxShadow: '0 8px 32px rgba(245,197,67,0.15), 0 0 0 1px rgba(245,197,67,0.1)',
+                        } : {
+                          background: 'var(--card)',
+                          border: '1px solid rgba(255,255,255,0.08)',
+                          boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
+                        }}
+                      >
+                        {/* Top accent bar */}
+                        <div className="h-[2px] flex-shrink-0" style={{
+                          background: isPopular
+                            ? 'linear-gradient(90deg,#f5c543,#e0a312)'
+                            : hasDiscount
+                            ? 'linear-gradient(90deg,#10b981,#059669)'
+                            : 'linear-gradient(90deg,transparent,rgba(99,102,241,0.3),transparent)',
+                        }} />
+
+                        <div className="p-7 flex flex-col flex-1">
+                          {/* Name */}
+                          <h3 className="text-xl font-black tracking-tight mb-1" style={isPopular ? { color: '#f5c543' } : {}}>
+                            {plan.name}
+                          </h3>
+                          <p className={`text-sm mb-5 ${isPopular ? "" : "text-muted-foreground"}`} style={isPopular ? { color: 'rgba(255,255,255,0.6)' } : {}}>
+                            {plan.description}
+                          </p>
+
+                          {/* Price */}
+                          <div className="mb-6">
+                            {hasDiscount ? (
+                              <div>
+                                <div className="flex items-baseline gap-2 mb-1">
+                                  <span className={`text-sm line-through ${isPopular ? "" : "text-muted-foreground"}`} style={isPopular ? { color: 'rgba(255,255,255,0.35)' } : {}}>
+                                    {plan.price}
+                                  </span>
+                                  <span className="text-5xl font-black tracking-tight text-emerald-500">
+                                    {plan.discountedPrice}
+                                  </span>
+                                </div>
+                                <p className={`text-xs ${isPopular ? "" : "text-muted-foreground"}`} style={isPopular ? { color: 'rgba(255,255,255,0.45)' } : {}}>
+                                  /month · first month
+                                </p>
+                              </div>
+                            ) : (
+                              <div className="flex items-baseline gap-1">
+                                <span className="text-5xl font-black tracking-tight" style={isPopular ? { color: '#f5c543' } : {}}>
                                   {plan.price}
                                 </span>
-                                <span className="text-4xl font-bold text-success">
-                                  {plan.discountedPrice}
+                                <span className={`text-sm ml-0.5 ${isPopular ? "" : "text-muted-foreground"}`} style={isPopular ? { color: 'rgba(255,255,255,0.5)' } : {}}>
+                                  {plan.period}
                                 </span>
                               </div>
-                              <span className="text-muted-foreground text-sm">{plan.period} · first month</span>
-                            </div>
+                            )}
+                            {plan.couponCode && (
+                              <div className="mt-3 flex items-center gap-2">
+                                <span className="text-xs text-muted-foreground">Code:</span>
+                                <code className="text-xs font-mono bg-emerald-500/15 text-emerald-600 border border-emerald-500/20 px-2 py-0.5 rounded">
+                                  {plan.couponCode}
+                                </code>
+                              </div>
+                            )}
+                            {hasDiscount && (
+                              <p className="text-xs text-emerald-600 font-medium mt-1">
+                                Limited time · then $39/mo
+                              </p>
+                            )}
+                          </div>
+
+                          {/* Features */}
+                          <ul className="space-y-3 flex-1 mb-7">
+                            {plan.features.map((feature, fIndex) => (
+                              <li key={fIndex} className="flex items-start gap-2.5">
+                                <CheckCircle2
+                                  className="w-4 h-4 mt-0.5 flex-shrink-0"
+                                  style={{ color: isPopular ? '#f5c543' : '#10b981' }}
+                                />
+                                <span className="text-sm" style={{ color: isPopular ? 'rgba(255,255,255,0.85)' : undefined }}>
+                                  {feature}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+
+                          {/* CTA */}
+                          {isPopular ? (
+                            <Link
+                              to="/contact"
+                              className="w-full flex items-center justify-center py-3 px-6 rounded-xl font-bold text-sm tracking-wide transition-all duration-200 hover:opacity-90"
+                              style={{
+                                background: 'linear-gradient(135deg,#f5c543 0%,#e0a312 100%)',
+                                color: '#1a1200',
+                                boxShadow: '0 1px 0 rgba(255,255,255,0.22) inset, 0 3px 10px rgba(245,197,67,0.28)',
+                              }}
+                            >
+                              Get {plan.name}
+                            </Link>
                           ) : (
-                            <>
-                              <span className="text-4xl font-bold text-primary">
-                                {plan.price}
-                              </span>
-                              <span className="text-muted-foreground">
-                                {plan.period}
-                              </span>
-                            </>
+                            <Button asChild variant="outline" className="w-full rounded-xl">
+                              <Link to={plan.couponCode ? `/contact?coupon=${plan.couponCode}` : "/contact"}>
+                                Get {plan.name}
+                              </Link>
+                            </Button>
                           )}
                         </div>
-                        {plan.couponCode && (
-                          <div className="mt-2 flex items-center justify-center gap-2">
-                            <span className="text-xs text-muted-foreground">Use code</span>
-                            <code className="text-xs font-mono bg-success/10 text-success border border-success/20 px-2 py-0.5 rounded">
-                              {plan.couponCode}
-                            </code>
-                            <span className="text-xs text-muted-foreground">at checkout</span>
-                          </div>
-                        )}
-                        {plan.discountedPrice && (
-                          <p className="text-xs text-success/80 mt-1 font-medium">Limited time offer · then $39/mo</p>
-                        )}
-                        <CardDescription className="mt-2">
-                          {plan.description}
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <ul className="space-y-3 mb-6">
-                          {plan.features.map((feature, fIndex) => (
-                            <li
-                              key={fIndex}
-                              className="flex items-center gap-2"
-                            >
-                              <CheckCircle2 className="w-5 h-5 text-success flex-shrink-0" />
-                              <span className="text-sm">{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
-                        <Button
-                          asChild
-                          className="w-full"
-                          variant={plan.popular ? "gold" : plan.discountedPrice ? "default" : "outline"}
-                        >
-                          <Link to={plan.couponCode ? `/contact?coupon=${plan.couponCode}` : "/contact"}>
-                            Get {plan.name}
-                          </Link>
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  </div>
-                ))}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
               <p className="text-center text-muted-foreground mt-8">
                 All plans include a 30-day money-back guarantee. Cancel anytime.

@@ -174,11 +174,11 @@ const PremiumTrainingCard = memo(
 
         {/* Outer glow wrapper for popular */}
         <div
-          className={`relative h-full rounded-[20px] ${
-            isPopular
-              ? "p-[2px] bg-gradient-to-b from-primary/60 via-accent/30 to-primary/10 shadow-[0_0_60px_-15px_hsl(var(--primary)/0.4)]"
-              : ""
-          }`}
+          className={`relative h-full rounded-[20px] ${isPopular ? "p-[2px]" : ""}`}
+          style={isPopular ? {
+            background: 'linear-gradient(180deg,rgba(245,197,67,0.55) 0%,rgba(224,163,18,0.25) 50%,rgba(245,197,67,0.08) 100%)',
+            boxShadow: '0 0 60px -15px rgba(245,197,67,0.45)',
+          } : {}}
         >
           <div
             className={`relative overflow-hidden rounded-[18px] bg-card backdrop-blur-xl h-full flex flex-col transition-all duration-500 group-hover/card:-translate-y-1.5 ${
@@ -190,18 +190,19 @@ const PremiumTrainingCard = memo(
           >
             {/* Top accent bar */}
             <div
-              className={`h-1 ${
-                isPopular
-                  ? "bg-gradient-to-r from-primary via-accent to-primary"
-                  : "bg-gradient-to-r from-transparent via-primary/40 to-transparent"
-              }`}
+              className="h-1"
+              style={{
+                background: isPopular
+                  ? 'linear-gradient(90deg,#f5c543,#e0a312,#f5c543)'
+                  : 'linear-gradient(90deg,transparent,rgba(var(--primary)/0.4),transparent)',
+              }}
             />
 
             {/* Ambient glow */}
             {isPopular && (
               <>
-                <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-48 h-48 bg-primary/8 rounded-full blur-3xl pointer-events-none" />
-                <div className="absolute -bottom-16 right-0 w-32 h-32 bg-accent/6 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full blur-3xl pointer-events-none" style={{ background: 'rgba(245,197,67,0.07)' }} />
+                <div className="absolute -bottom-16 right-0 w-32 h-32 rounded-full blur-3xl pointer-events-none" style={{ background: 'rgba(224,163,18,0.05)' }} />
               </>
             )}
 
@@ -235,19 +236,17 @@ const PremiumTrainingCard = memo(
               <div
                 className={`text-center mb-6 py-5 px-4 rounded-2xl border backdrop-blur-sm relative overflow-hidden ${
                   isPopular
-                    ? "bg-gradient-to-br from-primary/10 via-accent/5 to-primary/8 border-primary/20 shadow-[inset_0_1px_0_hsl(0_0%_100%/0.15)]"
+                    ? "border-[rgba(245,197,67,0.2)] shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]"
                     : "bg-gradient-to-br from-muted/50 via-card to-muted/30 border-border/40 shadow-inner"
                 }`}
+                style={isPopular ? { background: 'rgba(245,197,67,0.07)' } : {}}
               >
                 {isPopular && (
-                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.08),transparent_70%)] pointer-events-none" />
+                  <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at top,rgba(245,197,67,0.08),transparent 70%)' }} />
                 )}
                 <p
-                  className={`text-4xl font-black relative z-10 ${
-                    isPopular
-                      ? "bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent"
-                      : "text-foreground"
-                  }`}
+                  className={`text-4xl font-black relative z-10 ${isPopular ? "" : "text-foreground"}`}
+                  style={isPopular ? { color: '#f5c543' } : {}}
                 >
                   {plan.price}
                   {plan.pricePrefix && (
@@ -266,16 +265,12 @@ const PremiumTrainingCard = memo(
                 {plan.features.slice(0, 5).map((feature: string, idx: number) => (
                   <li key={idx} className="flex items-start gap-2.5">
                     <span
-                      className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
-                        isPopular
-                          ? "bg-primary/15"
-                          : "bg-muted"
-                      }`}
+                      className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${isPopular ? "" : "bg-muted"}`}
+                      style={isPopular ? { background: 'rgba(245,197,67,0.15)' } : {}}
                     >
                       <CheckCircle
-                        className={`w-3.5 h-3.5 ${
-                          isPopular ? "text-primary" : "text-primary/70"
-                        }`}
+                        className={`w-3.5 h-3.5 ${isPopular ? "" : "text-primary/70"}`}
+                        style={isPopular ? { color: '#f5c543' } : {}}
                       />
                     </span>
                     <span className="text-sm text-muted-foreground leading-snug">

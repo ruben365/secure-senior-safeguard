@@ -94,57 +94,85 @@ const TierCard = ({
   onClick?: () => void;
 }) => (
   <div
-    className={`relative rounded-2xl border p-8 flex flex-col ${
-      highlight
-        ? "border-primary bg-primary text-white shadow-2xl shadow-primary/30 scale-[1.02]"
-        : "border-border bg-card"
-    }`}
+    className="relative rounded-2xl flex flex-col transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1"
+    style={highlight ? {
+      background: 'linear-gradient(135deg,#1a1200 0%,#221900 50%,#1a1200 100%)',
+      border: '1px solid rgba(245,197,67,0.28)',
+      boxShadow: '0 8px 32px rgba(245,197,67,0.18), 0 0 0 1px rgba(245,197,67,0.1)',
+    } : {
+      background: 'var(--card)',
+      border: '1px solid rgba(255,255,255,0.08)',
+      boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
+    }}
   >
+    {/* Top accent line */}
+    <div className="h-[2px] rounded-t-2xl" style={{
+      background: highlight
+        ? 'linear-gradient(90deg,#f5c543,#e0a312)'
+        : 'linear-gradient(90deg,transparent,rgba(99,102,241,0.35),transparent)',
+    }} />
+
     {highlight && (
-      <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-        <Badge className="bg-accent text-white text-xs px-3 py-1 font-bold shadow">
+      <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
+        <span
+          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold shadow-[0_4px_12px_rgba(245,197,67,0.4)]"
+          style={{ background: 'linear-gradient(135deg,#f5c543,#e0a312)', color: '#1a1200' }}
+        >
           Most Popular
-        </Badge>
+        </span>
       </div>
     )}
-    <div className="mb-6">
-      <p className={`text-xs font-bold uppercase tracking-widest mb-2 ${highlight ? "text-white/70" : "text-primary"}`}>
-        {tier}
-      </p>
-      <div className="flex items-baseline gap-1 mb-2">
-        <span className={`text-4xl font-black ${highlight ? "text-white" : "text-foreground"}`}>
-          {price}
-        </span>
-        <span className={`text-sm ${highlight ? "text-white/70" : "text-muted-foreground"}`}>
-          /{period}
-        </span>
+
+    <div className="p-8 flex flex-col flex-1">
+      <div className="mb-6 mt-1">
+        <p className={`text-xs font-bold uppercase tracking-widest mb-2 ${highlight ? "" : "text-primary"}`} style={highlight ? { color: 'rgba(245,197,67,0.8)' } : {}}>
+          {tier}
+        </p>
+        <div className="flex items-baseline gap-1 mb-2">
+          <span className="text-5xl font-black tracking-tight" style={highlight ? { color: '#f5c543' } : {}}>
+            {price}
+          </span>
+          <span className={`text-sm ${highlight ? "" : "text-muted-foreground"}`} style={highlight ? { color: 'rgba(255,255,255,0.55)' } : {}}>
+            /{period}
+          </span>
+        </div>
+        <p className={`text-sm ${highlight ? "" : "text-muted-foreground"}`} style={highlight ? { color: 'rgba(255,255,255,0.65)' } : {}}>
+          {description}
+        </p>
       </div>
-      <p className={`text-sm ${highlight ? "text-white/80" : "text-muted-foreground"}`}>
-        {description}
-      </p>
+
+      <ul className="space-y-3 flex-1 mb-8">
+        {features.map((f) => (
+          <li key={f} className="flex items-start gap-2 text-sm">
+            <CheckCircle2
+              className={`w-4 h-4 mt-0.5 flex-shrink-0 ${highlight ? "" : "text-primary"}`}
+              style={highlight ? { color: '#f5c543' } : {}}
+            />
+            <span style={highlight ? { color: 'rgba(255,255,255,0.88)' } : {}}>
+              {f}
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      {highlight ? (
+        <button
+          onClick={onClick}
+          className="w-full h-12 font-bold rounded-xl transition-all duration-200 hover:opacity-90"
+          style={{
+            background: 'linear-gradient(135deg,#f5c543 0%,#e0a312 100%)',
+            color: '#1a1200',
+            boxShadow: '0 1px 0 rgba(255,255,255,0.22) inset, 0 3px 10px rgba(245,197,67,0.28)',
+          }}
+        >
+          {cta}
+        </button>
+      ) : (
+        <Button onClick={onClick} className="w-full h-12 font-bold rounded-xl" variant="outline">
+          {cta}
+        </Button>
+      )}
     </div>
-
-    <ul className="space-y-3 flex-1 mb-8">
-      {features.map((f) => (
-        <li key={f} className="flex items-start gap-2 text-sm">
-          <CheckCircle2
-            className={`w-4 h-4 mt-0.5 flex-shrink-0 ${highlight ? "text-white/80" : "text-primary"}`}
-          />
-          <span className={highlight ? "text-white/90" : "text-foreground"}>{f}</span>
-        </li>
-      ))}
-    </ul>
-
-    <Button
-      onClick={onClick}
-      className={`w-full h-12 font-bold rounded-xl ${
-        highlight
-          ? "bg-white text-primary hover:bg-white/90"
-          : "bg-primary text-white hover:bg-primary/90"
-      }`}
-    >
-      {cta}
-    </Button>
   </div>
 );
 
