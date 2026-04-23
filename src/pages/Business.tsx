@@ -74,6 +74,7 @@ import { SEO } from "@/components/SEO";
 import { AnswerSummary } from "@/components/AnswerSummary";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 import { SectionDivider, MeshBackground } from "@/components/pro";
+import { WebsitePricingCards } from "@/components/business/WebsitePricingCards";
 
 
 const platformSnapshotStats = [
@@ -926,99 +927,38 @@ function Business() {
               subtitle="Your website works around the clock. We build fast, secure sites that turn visitors into paying customers." />
             
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mb-14" style={{ perspective: "1000px" }}>
-              <PricingCard
-                tag="⚡ QUICK START"
-                tagColor="from-[#e07b52] to-[#d96c4a]"
-                title="Landing Page"
-                price="$1,500"
-                priceNote="Delivered in 2 Weeks"
-                delay={0}
-                badges={[
-                { text: "🎨 Custom Design", color: "bg-primary/10 text-primary" },
-                { text: "📱 Mobile-First", color: "bg-primary/10 text-primary" }]
-                }
-                features={[
-                "Custom responsive design",
-                "Contact form integration",
-                "Basic SEO setup",
-                "1 month hosting included"]
-                }
-                buttonText="GET STARTED"
-                onButtonClick={() => {
-                  trackButtonClick("Get Started - Landing Page", "Business Website");
-                  setSelectedInquiry({
-                    name: "Landing Page",
-                    price: 1500,
-                    tier: "Quick Start",
-                    description: "Single-page website for campaigns or business presence. Delivered in 2 weeks."
-                  });
-                  setInquiryDialogOpen(true);
-                }} />
-              
-
-              <PricingCard
-                tag="⭐ MOST POPULAR"
-                featured
-                title="Business Website"
-                price="$3,500"
-                priceNote="Delivered in 3 to 4 Weeks"
-                delay={150}
-                badges={[
-                { text: "🚀 Full SEO", color: "bg-primary/10 text-primary" },
-                { text: "💬 AI Chat", color: "bg-primary/10 text-primary" }]
-                }
-                features={[
-                "Multi-page website (up to 8 pages)",
-                "Advanced SEO optimization",
-                "Blog or news section",
-                "Analytics dashboard",
-                "3 months hosting included"]
-                }
-                buttonText="GET STARTED"
-                onButtonClick={() => {
-                  trackButtonClick("Get Started - Business Website", "Business Website");
-                  setSelectedInquiry({
-                    name: "Business Website",
-                    price: 3500,
-                    tier: "Most Popular",
-                    description: "Full business website with SEO, blog, and analytics. Delivered in 3 to 4 weeks."
-                  });
-                  setInquiryDialogOpen(true);
-                }} />
-              
-
-              <PricingCard
-                tag="👑 PREMIUM"
-                tagColor="from-amber-500 to-orange-500"
-                title="E-Commerce"
-                price="$7,500"
-                priceNote="Delivered in 4 to 6 Weeks"
-                delay={300}
-                badges={[
-                { text: "🛒 Full Store", color: "bg-primary/10 text-primary" },
-                { text: "💳 Payments", color: "bg-primary/10 text-primary" }]
-                }
-                features={[
-                "Full online store",
-                "Payment processing",
-                "Inventory management",
-                "Customer accounts",
-                "6 months hosting included"]
-                }
-                buttonText="GET STARTED"
-                onButtonClick={() => {
-                  trackButtonClick("Get Started - E-Commerce", "Business Website");
-                  setSelectedInquiry({
-                    name: "E-Commerce Website",
-                    price: 7500,
-                    tier: "Premium",
-                    description: "Full e-commerce website with payment processing. Delivered in 4 to 6 weeks."
-                  });
-                  setInquiryDialogOpen(true);
-                }} />
-              
-            </div>
+            <WebsitePricingCards
+              onStarterClick={() => {
+                trackButtonClick("Get Started - Landing Page", "Business Website");
+                setSelectedInquiry({
+                  name: "Landing Page",
+                  price: 1500,
+                  tier: "Quick Start",
+                  description: "Single-page website for campaigns or business presence. Delivered in 2 weeks."
+                });
+                setInquiryDialogOpen(true);
+              }}
+              onBusinessClick={() => {
+                trackButtonClick("Get Started - Business Website", "Business Website");
+                setSelectedInquiry({
+                  name: "Business Website",
+                  price: 3500,
+                  tier: "Most Popular",
+                  description: "Full business website with SEO, blog, and analytics. Delivered in 3 to 4 weeks."
+                });
+                setInquiryDialogOpen(true);
+              }}
+              onEliteClick={() => {
+                trackButtonClick("Get Started - E-Commerce", "Business Website");
+                setSelectedInquiry({
+                  name: "E-Commerce Website",
+                  price: 7500,
+                  tier: "Premium",
+                  description: "Full e-commerce website with payment processing. Delivered in 4 to 6 weeks."
+                });
+                setInquiryDialogOpen(true);
+              }}
+            />
 
             {/* Website Add-Ons */}
             <AnimatedSection animation="fade-up" delay={100} className="max-w-5xl mx-auto">
