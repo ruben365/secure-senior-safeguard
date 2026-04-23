@@ -5,9 +5,9 @@
   "outputDirectory": "dist",
   "redirects": [
     {
-      "source": "/(.*)",
+      "source": "/:path*",
       "has": [{ "type": "host", "value": "invisionnetwork.org" }],
-      "destination": "https://www.invisionnetwork.org/$1",
+      "destination": "https://www.invisionnetwork.org/:path*",
       "permanent": true
     },
     {
