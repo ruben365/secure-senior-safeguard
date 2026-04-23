@@ -781,10 +781,71 @@ section[data-reveal]:nth-child(odd) {
   }
 }
 
-/* ── About-modal scrollbar suppression ──────────────────────── */
-.aia-about-modal {
+/* ═══════════════════════════════════════════════════════════════════
+   SCROLLBAR SUPPRESSION — dialogs, sheets, popups, dropdowns
+   Hides the scrollbar track on all modal/popup containers site-wide
+   while keeping them scrollable (overflow is not changed).
+   Covers Radix primitives, role="dialog", popper wrappers, and any
+   class-based dialog/sheet/popover/select/dropdown content.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Firefox + IE/Edge legacy */
+[role="dialog"],
+[role="alertdialog"],
+[data-radix-popper-content-wrapper],
+[data-radix-dialog-content],
+[data-radix-alert-dialog-content],
+[data-radix-sheet-content],
+[data-radix-popover-content],
+[data-radix-select-content],
+[data-radix-dropdown-menu-content],
+[data-radix-context-menu-content],
+[data-radix-tooltip-content],
+[data-radix-command-list],
+[data-radix-scroll-area-viewport],
+.dialog-content,
+.aia-about-modal,
+[class*="DialogContent"],
+[class*="SheetContent"],
+[class*="PopoverContent"],
+[class*="SelectContent"],
+[class*="DropdownMenuContent"],
+[class*="ContextMenuContent"],
+[class*="CommandList"],
+[class*="TooltipContent"],
+[class*="HoverCardContent"],
+[class*="ScrollAreaViewport"] {
   scrollbar-width: none;
+  -ms-overflow-style: none;
 }
-.aia-about-modal::-webkit-scrollbar {
+
+/* WebKit (Chrome, Safari, Edge Chromium) */
+[role="dialog"]::-webkit-scrollbar,
+[role="alertdialog"]::-webkit-scrollbar,
+[data-radix-popper-content-wrapper]::-webkit-scrollbar,
+[data-radix-dialog-content]::-webkit-scrollbar,
+[data-radix-alert-dialog-content]::-webkit-scrollbar,
+[data-radix-sheet-content]::-webkit-scrollbar,
+[data-radix-popover-content]::-webkit-scrollbar,
+[data-radix-select-content]::-webkit-scrollbar,
+[data-radix-dropdown-menu-content]::-webkit-scrollbar,
+[data-radix-context-menu-content]::-webkit-scrollbar,
+[data-radix-tooltip-content]::-webkit-scrollbar,
+[data-radix-command-list]::-webkit-scrollbar,
+[data-radix-scroll-area-viewport]::-webkit-scrollbar,
+.dialog-content::-webkit-scrollbar,
+.aia-about-modal::-webkit-scrollbar,
+[class*="DialogContent"]::-webkit-scrollbar,
+[class*="SheetContent"]::-webkit-scrollbar,
+[class*="PopoverContent"]::-webkit-scrollbar,
+[class*="SelectContent"]::-webkit-scrollbar,
+[class*="DropdownMenuContent"]::-webkit-scrollbar,
+[class*="ContextMenuContent"]::-webkit-scrollbar,
+[class*="CommandList"]::-webkit-scrollbar,
+[class*="TooltipContent"]::-webkit-scrollbar,
+[class*="HoverCardContent"]::-webkit-scrollbar,
+[class*="ScrollAreaViewport"]::-webkit-scrollbar {
   display: none;
+  width: 0;
+  height: 0;
 }
