@@ -134,17 +134,17 @@ export const CookieConsent = forwardRef<HTMLDivElement>(function CookieConsent(_
     <>
       <div className="cookie-banner fixed bottom-4 left-4 right-4 sm:bottom-6 sm:left-auto sm:right-6 z-50">
         <div
-          className="cookie-banner__card sm:w-[360px] rounded-[14px] overflow-hidden border border-[rgba(0,0,0,0.08)] shadow-[0_4px_24px_rgba(0,0,0,0.08)]"
-          style={{ background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(16px) saturate(1.2)', WebkitBackdropFilter: 'blur(16px) saturate(1.2)' }}
+          className="cookie-banner__card sm:w-[360px] rounded-[14px] overflow-hidden border border-[rgba(255,190,90,0.18)] shadow-[0_8px_32px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.06)]"
+          style={{ background: 'rgba(10,22,40,0.88)', backdropFilter: 'blur(20px) saturate(1.4)', WebkitBackdropFilter: 'blur(20px) saturate(1.4)' }}
         >
           <div className="p-4">
             {/* Header row */}
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-sm font-bold text-[#1E293B]">We Value Your Privacy</h3>
+              <h3 className="text-sm font-bold text-white/90">We Value Your Privacy</h3>
               <button
                 type="button"
                 onClick={acceptEssential}
-                className="p-1 text-[#64748B] hover:text-[#1E293B] rounded transition-colors"
+                className="p-1 text-white/40 hover:text-white/80 rounded transition-colors"
                 aria-label="Close cookie banner"
               >
                 <X className="w-3.5 h-3.5" />
@@ -152,7 +152,7 @@ export const CookieConsent = forwardRef<HTMLDivElement>(function CookieConsent(_
             </div>
 
             {/* Description */}
-            <p className="text-xs text-[#475569] leading-relaxed mb-3">
+            <p className="text-xs text-white/55 leading-relaxed mb-3">
               We use cookies to improve your experience, analyze site traffic,
               and provide personalized content.
             </p>
@@ -162,24 +162,24 @@ export const CookieConsent = forwardRef<HTMLDivElement>(function CookieConsent(_
               <button
                 type="button"
                 onClick={acceptAll}
-                className="h-8 px-4 text-xs font-semibold text-white rounded-lg transition-all duration-200 hover:brightness-110"
-                style={{ background: 'var(--ws-blue, #3067e8)' }}
+                className="h-8 px-4 text-xs font-semibold text-white rounded-lg transition-all duration-200 hover:brightness-110 active:scale-95"
+                style={{ background: '#F97316' }}
               >
                 Accept All
               </button>
               <button
                 type="button"
                 onClick={acceptEssential}
-                className="h-8 px-4 text-xs font-semibold text-[#475569] rounded-lg border border-[rgba(0,0,0,0.1)] hover:border-[rgba(0,0,0,0.2)] hover:text-[#1E293B] transition-all duration-200"
-                style={{ background: 'rgba(0,0,0,0.03)' }}
+                className="h-8 px-4 text-xs font-semibold text-white/60 rounded-lg border border-white/10 hover:border-white/25 hover:text-white/80 transition-all duration-200"
+                style={{ background: 'rgba(255,255,255,0.05)' }}
               >
                 Essential Only
               </button>
               <button
                 type="button"
                 onClick={() => setShowSettings(true)}
-                className="h-8 w-8 flex items-center justify-center text-[#64748B] rounded-lg border border-[rgba(0,0,0,0.08)] hover:border-[rgba(0,0,0,0.15)] hover:text-[#1E293B] transition-all duration-200 ml-auto"
-                style={{ background: 'rgba(0,0,0,0.03)' }}
+                className="h-8 w-8 flex items-center justify-center text-white/40 rounded-lg border border-white/10 hover:border-white/25 hover:text-white/70 transition-all duration-200 ml-auto"
+                style={{ background: 'rgba(255,255,255,0.05)' }}
                 aria-label="Cookie settings"
               >
                 <Settings className="w-3.5 h-3.5" />
