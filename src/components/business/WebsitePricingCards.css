@@ -1,17 +1,17 @@
 /* ─── WebsitePricingCards ─── */
 
 @keyframes wsp-rise-in {
-  from { opacity: 0; transform: translateY(36px) scale(0.97); }
-  to   { opacity: 1; transform: translateY(0)   scale(1);    }
+  from { opacity: 0; transform: translateY(24px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);   }
 }
 @keyframes wsp-shimmer {
   from { transform: translateX(-130%); }
   to   { transform: translateX(130%);  }
 }
 @keyframes wsp-wiggle {
-  0%,100% { transform: rotate(0deg);   }
-  25%     { transform: rotate(-10deg); }
-  75%     { transform: rotate(10deg);  }
+  0%,100% { transform: rotate(0deg);  }
+  25%     { transform: rotate(-8deg); }
+  75%     { transform: rotate(8deg);  }
 }
 @keyframes wsp-sheen-spin {
   to { transform: rotate(360deg); }
@@ -24,81 +24,83 @@
   to   { transform: scaleY(1); }
 }
 
-/* Grid */
+/* ── Wrapper */
+.wsp-wrap {
+  max-width: 940px;
+  margin: 0 auto;
+}
+
+/* ── Grid */
 .wsp-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
-  max-width: 64rem;
-  margin: 0 auto 3.5rem;
+  gap: 14px;
   align-items: center;
 }
 @media (min-width: 1024px) {
   .wsp-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* Column entrance */
+/* ── Column entrance */
 .wsp-col {
   opacity: 0;
-  animation: wsp-rise-in 0.65s cubic-bezier(0.23, 1, 0.32, 1) both;
+  animation: wsp-rise-in 0.55s cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 .wsp-col:nth-child(1) { animation-delay:   0ms; }
-.wsp-col:nth-child(2) { animation-delay: 150ms; }
-.wsp-col:nth-child(3) { animation-delay: 300ms; }
+.wsp-col:nth-child(2) { animation-delay: 120ms; }
+.wsp-col:nth-child(3) { animation-delay: 240ms; }
 
-/* Card */
+/* ── Card */
 .wsp-card {
   position: relative;
-  border-radius: 20px;
-  background: hsl(var(--card) / 0.88);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  border-radius: 16px;
+  background: hsl(var(--card) / 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   height: 100%;
-  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
-              box-shadow 0.4s ease;
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+              box-shadow 0.35s ease;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    0 0 0 1px color-mix(in srgb, var(--wsp-a) 30%, transparent),
-    inset 0 0 24px color-mix(in srgb, var(--wsp-a) 6%, transparent),
-    0 4px 16px rgba(0, 0, 0, 0.18),
-    0 16px 48px rgba(0, 0, 0, 0.28);
+    0 0 0 1px color-mix(in srgb, var(--wsp-a) 28%, transparent),
+    inset 0 0 18px color-mix(in srgb, var(--wsp-a) 5%, transparent),
+    0 3px 12px rgba(0, 0, 0, 0.16),
+    0 12px 36px rgba(0, 0, 0, 0.24);
 }
 .wsp-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-5px);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.24),
-    0 0 0 1px color-mix(in srgb, var(--wsp-a) 60%, transparent),
-    inset 0 0 30px color-mix(in srgb, var(--wsp-a) 10%, transparent),
-    0 8px 24px rgba(0, 0, 0, 0.22),
-    0 24px 60px rgba(0, 0, 0, 0.36);
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 0 0 1px color-mix(in srgb, var(--wsp-a) 55%, transparent),
+    inset 0 0 22px color-mix(in srgb, var(--wsp-a) 9%, transparent),
+    0 6px 18px rgba(0, 0, 0, 0.2),
+    0 18px 48px rgba(0, 0, 0, 0.3);
 }
 .wsp-card--featured {
   transform: translateY(-10px);
 }
 .wsp-card--featured:hover {
-  transform: translateY(-16px);
+  transform: translateY(-14px);
 }
 
-/* ── Edge rim — top white highlight line */
+/* ── Edge rim */
 .wsp-edge-rim {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.72) 50%, transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7) 50%, transparent);
   z-index: 4;
   pointer-events: none;
 }
 
-/* ── Edge ring — gradient border visible on hover */
+/* ── Edge ring */
 .wsp-edge-ring {
   position: absolute;
   inset: 0;
-  border-radius: 20px;
+  border-radius: 16px;
   padding: 1px;
   background: linear-gradient(135deg, var(--wsp-a), var(--wsp-b) 50%, var(--wsp-c));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -106,45 +108,39 @@
   -webkit-mask-composite: destination-out;
           mask-composite: exclude;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.35s ease;
   z-index: 3;
   pointer-events: none;
 }
-.wsp-card:hover .wsp-edge-ring {
-  opacity: 1;
-}
+.wsp-card:hover .wsp-edge-ring { opacity: 1; }
 
-/* ── Edge sheen — rotating conic behind card */
+/* ── Edge sheen */
 .wsp-edge-sheen-clip {
   position: absolute;
   inset: 0;
-  border-radius: 20px;
+  border-radius: 16px;
   overflow: hidden;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.35s ease;
   z-index: 0;
   pointer-events: none;
 }
-.wsp-card:hover .wsp-edge-sheen-clip {
-  opacity: 1;
-}
+.wsp-card:hover .wsp-edge-sheen-clip { opacity: 1; }
 .wsp-edge-sheen {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 200%;
-  height: 200%;
+  top: 50%; left: 50%;
+  width: 200%; height: 200%;
   transform: translate(-50%, -50%);
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
-    color-mix(in srgb, var(--wsp-a) 16%, transparent) 60deg,
+    color-mix(in srgb, var(--wsp-a) 14%, transparent) 60deg,
     transparent 120deg
   );
   animation: wsp-sheen-spin 5s linear infinite;
 }
 
-/* ── Grain overlay */
+/* ── Grain */
 .wsp-grain {
   position: absolute;
   inset: 0;
@@ -154,21 +150,21 @@
   mix-blend-mode: multiply;
 }
 
-/* ── Top gradient strip */
+/* ── Top strip */
 .wsp-strip {
-  height: 3px;
+  height: 2px;
   background: linear-gradient(90deg, var(--wsp-a), var(--wsp-b) 55%, var(--wsp-c));
   flex-shrink: 0;
   position: relative;
   z-index: 5;
 }
 
-/* ── Content area */
+/* ── Content */
 .wsp-content {
-  padding: 1.4rem 1.4rem 1.2rem;
+  padding: 18px 14px 14px;
   display: flex;
   flex-direction: column;
-  gap: 0.95rem;
+  gap: 8px;
   flex: 1;
   position: relative;
   z-index: 5;
@@ -183,71 +179,69 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.32rem 0.9rem;
+  gap: 3px;
+  padding: 3px 10px;
   border-radius: 999px;
   background: linear-gradient(135deg, var(--wsp-a), var(--wsp-b) 55%, var(--wsp-c));
   color: #fff;
-  font-size: 10.5px;
+  font-size: 8.5px;
   font-weight: 800;
   letter-spacing: 0.1em;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.28);
-  box-shadow: 0 2px 14px color-mix(in srgb, var(--wsp-a) 42%, transparent);
+  box-shadow: 0 1px 10px color-mix(in srgb, var(--wsp-a) 40%, transparent);
 }
 .wsp-badge-shimmer {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 40%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.34), transparent);
-  animation: wsp-shimmer 2.6s ease infinite;
+  top: 0; left: 0;
+  width: 40%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.32), transparent);
+  animation: wsp-shimmer 2.8s ease infinite;
   pointer-events: none;
 }
 .wsp-badge-icon {
   display: inline-flex;
-  animation: wsp-wiggle 2.2s ease infinite;
+  font-size: 9px;
+  animation: wsp-wiggle 2.4s ease infinite;
 }
 
 /* ── Title */
 .wsp-title {
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 16px;
   font-weight: 800;
   color: hsl(var(--foreground));
   letter-spacing: -0.02em;
   margin: 0;
+  line-height: 1.2;
 }
 
-/* ── Price holder */
+/* ── Price holder (metric row) */
 .wsp-price-hold {
   position: relative;
   overflow: hidden;
-  padding: 0.55rem 0.8rem;
-  border-radius: 14px;
+  padding: 8px 10px;
+  border-radius: 10px;
   background: color-mix(in srgb, var(--wsp-a) 8%, transparent);
-  border: 1px solid color-mix(in srgb, var(--wsp-a) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--wsp-a) 20%, transparent);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    inset 0 -2px 10px color-mix(in srgb, var(--wsp-a) 10%, transparent);
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    inset 0 -1px 8px color-mix(in srgb, var(--wsp-a) 8%, transparent);
   text-align: center;
 }
 .wsp-price-hold:hover .wsp-price-shimmer {
-  animation: wsp-shimmer 0.65s ease forwards;
+  animation: wsp-shimmer 0.6s ease forwards;
 }
 .wsp-price-shimmer {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  top: 0; left: 0;
+  width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.13), transparent);
   transform: translateX(-130%);
   pointer-events: none;
 }
 .wsp-price {
-  font-size: 2.2rem;
+  font-size: 32px;
   font-weight: 900;
   letter-spacing: -0.03em;
   line-height: 1;
@@ -257,73 +251,95 @@
   -webkit-text-fill-color: transparent;
 }
 .wsp-delivery {
-  font-size: 0.74rem;
+  font-size: 10px;
   color: hsl(var(--muted-foreground));
-  margin-top: 0.28rem;
+  margin-top: 2px;
+}
+
+/* ── Feature list with check marks */
+.wsp-features {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.wsp-feature {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: hsl(var(--foreground) / 0.82);
+  font-weight: 500;
+}
+.wsp-check {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  color: var(--wsp-a);
 }
 
 /* ── Glass chips */
 .wsp-chips {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.45rem;
+  gap: 5px;
 }
 .wsp-chip {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.42rem 0.65rem;
-  border-radius: 10px;
+  gap: 4px;
+  padding: 3px 6px;
+  border-radius: 7px;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  font-size: 11.5px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  font-size: 9.5px;
   font-weight: 600;
-  color: hsl(var(--foreground) / 0.85);
+  color: hsl(var(--foreground) / 0.82);
   overflow: hidden;
-  box-shadow: 0 1px 4px color-mix(in srgb, var(--wsp-a) 12%, transparent);
+  box-shadow: 0 1px 3px color-mix(in srgb, var(--wsp-a) 10%, transparent);
 }
 .wsp-chip::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.38), transparent);
 }
 .wsp-chip-disc {
-  width: 22px;
-  height: 22px;
-  border-radius: 6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
   background: linear-gradient(135deg, var(--wsp-a), var(--wsp-b));
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 10px;
   flex-shrink: 0;
-  box-shadow: 0 1px 5px color-mix(in srgb, var(--wsp-a) 38%, transparent);
+  box-shadow: 0 1px 4px color-mix(in srgb, var(--wsp-a) 35%, transparent);
 }
 
-/* ── CTA button */
+/* ── CTA */
 .wsp-btn {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 0.58rem 0.65rem 0.58rem 1.1rem;
+  padding: 8px 10px 8px 16px;
   border-radius: 999px;
-  font-size: 12.5px;
+  font-size: 9.5px;
   font-weight: 800;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.08em;
   color: #fff;
   overflow: hidden;
   border: none;
   cursor: pointer;
   background: linear-gradient(135deg, var(--wsp-a), var(--wsp-b));
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 16px color-mix(in srgb, var(--wsp-a) 38%, transparent);
+  box-shadow: 0 3px 12px color-mix(in srgb, var(--wsp-a) 36%, transparent);
   margin-top: auto;
 }
 .wsp-btn::before {
@@ -332,16 +348,14 @@
   inset: 0;
   background: linear-gradient(135deg, var(--wsp-b), var(--wsp-c));
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.28s ease;
 }
-.wsp-btn:hover::before {
-  opacity: 1;
-}
+.wsp-btn:hover::before { opacity: 1; }
 .wsp-btn:hover {
-  transform: scale(1.02);
+  transform: scale(1.015);
   box-shadow:
-    0 6px 24px color-mix(in srgb, var(--wsp-a) 55%, transparent),
-    0 0 0 2px color-mix(in srgb, var(--wsp-a) 28%, transparent);
+    0 5px 18px color-mix(in srgb, var(--wsp-a) 50%, transparent),
+    0 0 0 1.5px color-mix(in srgb, var(--wsp-a) 26%, transparent);
 }
 .wsp-btn-label {
   position: relative;
@@ -350,57 +364,52 @@
 .wsp-btn-arrow {
   position: relative;
   z-index: 1;
-  width: 28px;
-  height: 28px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--wsp-b), var(--wsp-c));
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 15px;
+  font-size: 12px;
   flex-shrink: 0;
   transition: transform 0.2s ease;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
 }
-.wsp-btn:hover .wsp-btn-arrow {
-  transform: translateX(3px);
-}
+.wsp-btn:hover .wsp-btn-arrow { transform: translateX(2px); }
 
 /* ── SVG graphs */
 .wsp-graph {
   display: block;
   width: 100%;
-  height: 56px;
+  height: 72px;
   position: relative;
   z-index: 5;
   flex-shrink: 0;
 }
 
-/* Line path enter */
 .wsp-line-path {
   stroke-dasharray: 280;
   stroke-dashoffset: 280;
-  animation: wsp-stroke-in 1.3s ease forwards 0.7s;
+  animation: wsp-stroke-in 1.2s ease forwards 0.6s;
 }
 
-/* Bar grow */
 .wsp-bar {
   transform-box: fill-box;
   transform-origin: center bottom;
   transform: scaleY(0);
-  animation: wsp-bar-grow 0.5s cubic-bezier(0.23, 1, 0.32, 1) both;
+  animation: wsp-bar-grow 0.45s cubic-bezier(0.23, 1, 0.32, 1) both;
 }
-.wsp-bar:nth-child(1) { animation-delay: 0.05s; }
-.wsp-bar:nth-child(2) { animation-delay: 0.15s; }
-.wsp-bar:nth-child(3) { animation-delay: 0.25s; }
-.wsp-bar:nth-child(4) { animation-delay: 0.35s; }
-.wsp-bar:nth-child(5) { animation-delay: 0.45s; }
+.wsp-bar:nth-child(1) { animation-delay: 0.04s; }
+.wsp-bar:nth-child(2) { animation-delay: 0.13s; }
+.wsp-bar:nth-child(3) { animation-delay: 0.22s; }
+.wsp-bar:nth-child(4) { animation-delay: 0.31s; }
+.wsp-bar:nth-child(5) { animation-delay: 0.40s; }
 
-/* Area path enter */
 .wsp-area-path {
   stroke-dasharray: 320;
   stroke-dashoffset: 320;
-  animation: wsp-stroke-in 1.4s ease forwards 0.6s;
+  animation: wsp-stroke-in 1.3s ease forwards 0.55s;
 }
 
 /* ── Reduced motion */
@@ -413,10 +422,10 @@
   .wsp-bar,
   .wsp-area-path { animation: none !important; }
 
-  .wsp-col { opacity: 1 !important; }
-  .wsp-line-path  { stroke-dashoffset: 0 !important; }
-  .wsp-bar        { transform: scaleY(1) !important;  }
-  .wsp-area-path  { stroke-dashoffset: 0 !important; }
+  .wsp-col       { opacity: 1 !important;              }
+  .wsp-line-path { stroke-dashoffset: 0 !important;    }
+  .wsp-bar       { transform: scaleY(1) !important;    }
+  .wsp-area-path { stroke-dashoffset: 0 !important;    }
 
   .wsp-card,
   .wsp-card:hover,
