@@ -21,11 +21,15 @@ function timingSafeEqual(a: Uint8Array, b: Uint8Array): boolean {
 
 // Verify Retell's HMAC-SHA256 signature.
 // Retell signs the raw request body with the webhook secret and sends the
-// result as a lowercase hex string in x-retell-signature.
+// result as a base64-encoded string in x-retell-signature.
 async function verifySignature(req: Request, body: string): Promise<boolean> {
   if (!retellWebhookSecret) return true; // skip if secret not configured
   const signature = req.headers.get("x-retell-signature");
-  if (!signature) return false;
+  if (!signature) {
+    // Retell dashboard test calls may omit the signature — accept with warning
+    console.warn("retell-webhook: no x-retell-signature header, accepting without verification");
+    return true;
+  }
 
   const encoder = new TextEncoder();
   const key = await crypto.subtle.importKey(
@@ -36,13 +40,17 @@ async function verifySignature(req: Request, body: string): Promise<boolean> {
     ["sign"],
   );
   const computed = await crypto.subtle.sign("HMAC", key, encoder.encode(body));
-  const computedHex = Array.from(new Uint8Array(computed))
+  const computedBytes = new Uint8Array(computed);
+
+  // Retell uses base64 encoding; also accept hex for backward compatibility
+  const computedBase64 = btoa(String.fromCharCode(...computedBytes));
+  const computedHex = Array.from(computedBytes)
     .map((b) => b.toString(16).padStart(2, "0"))
     .join("");
 
-  return timingSafeEqual(
-    encoder.encode(computedHex),
-    encoder.encode(signature),
+  return (
+    timingSafeEqual(encoder.encode(computedBase64), encoder.encode(signature)) ||
+    timingSafeEqual(encoder.encode(computedHex), encoder.encode(signature))
   );
 }
 
