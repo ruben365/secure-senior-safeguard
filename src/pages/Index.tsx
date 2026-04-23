@@ -10,7 +10,6 @@ import { PageTransition } from "@/components/PageTransition";
 import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/SEO";
 import { PAGE_SEO } from "@/config/pageSeo";
-import { AnswerSummary } from "@/components/AnswerSummary";
 import seniorCoupleActive from "@/assets/senior-couple-active.jpg";
 import { SITE } from "@/config/site";
 import { ArrowRight, CheckCircle, Shield } from "lucide-react";
