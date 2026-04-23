@@ -284,12 +284,12 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="InVision Network BBB Accreditation"
-                className="inline-flex items-center gap-2 text-[13px] text-white/70 hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 text-[13px] text-white/70 hover:text-white focus-visible:outline-none focus-visible:text-white rounded transition-colors"
               >
-                <Shield className="w-4 h-4 text-emerald-400/70" /> BBB Accredited
+                <Shield className="w-4 h-4 text-emerald-400/70" aria-hidden="true" /> BBB Accredited
               </a>
               <span className="inline-flex items-center gap-2 text-[13px] text-white/70">
-                <Shield className="w-4 h-4 text-amber-400/70" /> Veteran Owned
+                <Shield className="w-4 h-4 text-amber-400/70" aria-hidden="true" /> Veteran Owned
               </span>
             </div>
 
@@ -302,9 +302,9 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="w-11 h-11 sm:w-9 sm:h-9 rounded-xl bg-white/[0.05] hover:bg-orange-500/15 border border-white/10 hover:border-orange-500/40 transition-all duration-200 flex items-center justify-center group"
+                  className="w-11 h-11 sm:w-9 sm:h-9 rounded-xl bg-white/[0.05] hover:bg-orange-500/15 border border-white/10 hover:border-orange-500/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent transition-all duration-200 flex items-center justify-center group"
                 >
-                  <s.icon className="w-5 h-5 sm:w-4 sm:h-4 text-white/75 group-hover:text-orange-300 transition-colors" />
+                  <s.icon className="w-5 h-5 sm:w-4 sm:h-4 text-white/75 group-hover:text-orange-300 transition-colors" aria-hidden="true" />
                 </a>
               ))}
             </div>
@@ -312,7 +312,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
 
           {/* Support statement */}
           <div className="flex items-center justify-center gap-2 mt-2 mb-1">
-            <Heart className="w-3.5 h-3.5 text-orange-400/70 flex-shrink-0" />
+            <Heart className="w-3.5 h-3.5 text-orange-400/70 flex-shrink-0" aria-hidden="true" />
             <p className="text-[12px] text-white/75 text-center max-w-2xl leading-snug">
               We proudly support veterans and children with cancer. A portion
               of every service goes toward these causes.
