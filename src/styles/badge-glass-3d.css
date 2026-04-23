@@ -39,9 +39,9 @@
 /* ─────────────────────────────────────────────────────────────────
    BASE — every pill/badge surface gets the refractive glass treatment
    ───────────────────────────────────────────────────────────────── */
-.badge:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
-[class*="rounded-full"][class*="border"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):not(button):not(a):not(input):not(.avatar):not([class*="avatar"]),
-.floating-badge:not(.hero-home *):not(footer *) {
+.badge:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):not(#final-action *):not(.ent-bento *),
+[class*="rounded-full"][class*="border"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *):not(#final-action *):not(.ent-bento *):not(button):not(a):not(input):not(.avatar):not([class*="avatar"]),
+.floating-badge:not(.hero-home *):not(footer *):not(#final-action *):not(.ent-bento *) {
   background: var(--bg3d-glass-white) !important;
   border: 1px solid rgba(255, 255, 255, 0.55) !important;
   backdrop-filter: blur(var(--bg3d-blur)) saturate(1.4);

@@ -15,6 +15,7 @@ interface HeroCTAProps {
 /**
  * Shared hero CTA button pair used across public-facing pages.
  * Uses internal Link for relative paths and <a> for tel: hrefs.
+ * All buttons stack vertically on mobile (full-width) and row on sm+.
  */
 export function HeroCTA({
   primaryText,
@@ -29,49 +30,44 @@ export function HeroCTA({
     href.startsWith("tel:") || href.startsWith("mailto:") || href.startsWith("http");
 
   return (
-    <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-start items-center">
+    <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-start items-stretch sm:items-center">
       {isExternal(primaryHref) ? (
-        <Button size="heroPill" variant="heroPrimary" asChild>
+        <Button size="heroPill" variant="heroPrimary" asChild className="w-full sm:w-auto justify-center">
           <a href={primaryHref} aria-label={primaryAriaLabel}>
             {primaryText}
           </a>
         </Button>
       ) : (
-        <Button size="heroPill" variant="heroPrimary" asChild>
+        <Button size="heroPill" variant="heroPrimary" asChild className="w-full sm:w-auto justify-center">
           <Link to={primaryHref} aria-label={primaryAriaLabel}>
             {primaryText}
           </Link>
         </Button>
       )}
 
-      {/* Secondary CTA — hidden on mobile, one clear action per screen */}
-      <div className="hidden sm:contents">
-        {isExternal(secondaryHref) ? (
-          <Button size="heroPill" variant="heroOutline" asChild>
-            <a href={secondaryHref} aria-label={secondaryAriaLabel}>
-              {secondaryText}
-            </a>
-          </Button>
-        ) : (
-          <Button size="heroPill" variant="heroOutline" asChild>
-            <Link to={secondaryHref} aria-label={secondaryAriaLabel}>
-              {secondaryText}
-            </Link>
-          </Button>
-        )}
-      </div>
+      {isExternal(secondaryHref) ? (
+        <Button size="heroPill" variant="heroOutline" asChild className="w-full sm:w-auto justify-center">
+          <a href={secondaryHref} aria-label={secondaryAriaLabel}>
+            {secondaryText}
+          </a>
+        </Button>
+      ) : (
+        <Button size="heroPill" variant="heroOutline" asChild className="w-full sm:w-auto justify-center">
+          <Link to={secondaryHref} aria-label={secondaryAriaLabel}>
+            {secondaryText}
+          </Link>
+        </Button>
+      )}
 
       {aiScan && (
-        <div className="hidden sm:contents">
-          <Link
-            to="/training/ai-analysis"
-            aria-label="Try our AI scanner"
-            className="inline-flex items-center gap-1.5 h-[28px] sm:h-[40px] px-3 sm:px-4 rounded-full text-[10px] sm:text-[12px] font-semibold text-white/75 border border-white/20 bg-white/[0.07] backdrop-blur-sm hover:bg-white/[0.13] hover:text-white transition-all"
-          >
-            <Scan className="w-3 h-3 flex-shrink-0" />
-            AI Scan
-          </Link>
-        </div>
+        <Link
+          to="/training/ai-analysis"
+          aria-label="Try our AI scanner"
+          className="inline-flex items-center justify-center gap-1.5 h-[40px] px-4 rounded-full text-[12px] font-semibold text-white/75 border border-white/20 bg-white/[0.07] backdrop-blur-sm hover:bg-white/[0.13] hover:text-white transition-all w-full sm:w-auto"
+        >
+          <Scan className="w-3 h-3 flex-shrink-0" />
+          AI Scan
+        </Link>
       )}
     </div>
   );

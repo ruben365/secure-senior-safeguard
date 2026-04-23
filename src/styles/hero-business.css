@@ -453,7 +453,7 @@
 }
 
 @media (max-width: 640px) {
-  /* Hide body text and feature panel — one headline + one CTA on mobile */
+  /* Hide body text and feature panel on mobile */
   .hero-biz__body { display: none; }
   .hero-biz__panel { display: none; }
 
@@ -465,7 +465,11 @@
   .hero-biz__widget { animation: none; opacity: 1; transform: none; }
 
   .hero-biz__headline { font-size: clamp(1.5rem, 6vw, 2rem); }
-  .hero-biz__content { padding-bottom: 1.5rem; }
+  .hero-biz__content {
+    padding-bottom: 1.5rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
 
   /* Overlay: gentle top-to-bottom so subject is visible */
   .hero-biz__bg::before {

@@ -144,15 +144,24 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
                     they are protected from AI scams. Get started in minutes.
                   </p>
 
-                  <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-4 mb-8">
-                    <Button asChild size="lg" className="w-full max-w-[260px] sm:max-w-none sm:w-auto">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-start gap-3 sm:gap-4 mb-8">
+                    <Button asChild size="lg" className="w-full sm:w-auto justify-center">
                       <Link to="/training#pricing">
                         Get Protected Today <ArrowRight className="ml-2 w-4 h-4" />
                       </Link>
                     </Button>
-                    <Button asChild variant="heroOutline" size="lg" className="w-full max-w-[260px] sm:max-w-none sm:w-auto">
-                      <Link to="/ai">Business AI Solutions</Link>
-                    </Button>
+                    <Link
+                      to="/ai"
+                      className="inline-flex items-center justify-center whitespace-nowrap rounded-xl font-bold tracking-wide h-[32px] sm:h-[44px] px-3.5 sm:px-7 text-[12px] sm:text-[15px] w-full sm:w-auto border border-white/30 transition-all duration-150 ease-out hover:-translate-y-[1px] hover:border-white/50"
+                      style={{
+                        background: "rgba(255,255,255,0.10)",
+                        backdropFilter: "blur(12px)",
+                        WebkitBackdropFilter: "blur(12px)",
+                        color: "#ffffff",
+                      }}
+                    >
+                      Business AI Solutions
+                    </Link>
                   </div>
 
                   <div className="flex flex-wrap gap-2.5">
@@ -164,10 +173,10 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
                     ].map((item) => (
                       <div
                         key={item}
-                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm"
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/20 backdrop-blur-md bg-white/10"
                       >
                         <CheckCircle className="w-3.5 h-3.5 text-[#fbab8e]" />
-                        <span className="text-xs font-medium text-white/90">
+                        <span className="text-xs font-medium text-white">
                           {item}
                         </span>
                       </div>

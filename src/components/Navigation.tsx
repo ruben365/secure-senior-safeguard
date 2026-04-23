@@ -401,7 +401,12 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <Link
                     to="/admin"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center gap-1.5 text-sm font-semibold text-white hover:text-white/80 transition-colors duration-150"
+                    className="inline-flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-full text-[11px] font-bold transition-all duration-200"
+                    style={{
+                      color: "#1a1200",
+                      background: "linear-gradient(135deg, #f5c543 0%, #e0a312 100%)",
+                      boxShadow: "0 1px 0 rgba(255,255,255,0.22) inset, 0 3px 10px rgba(245,197,67,0.28)",
+                    }}
                   >
                     <LayoutDashboard className="h-3.5 w-3.5" />
                     Dashboard
@@ -410,7 +415,12 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <Link
                     to="/portal"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-sm font-semibold text-white hover:text-white/80 transition-colors duration-150"
+                    className="inline-flex items-center justify-center px-5 py-1.5 rounded-full text-[11px] font-bold transition-all duration-200"
+                    style={{
+                      color: "#1a1200",
+                      background: "linear-gradient(135deg, #f5c543 0%, #e0a312 100%)",
+                      boxShadow: "0 1px 0 rgba(255,255,255,0.22) inset, 0 3px 10px rgba(245,197,67,0.28)",
+                    }}
                   >
                     Login
                   </Link>
