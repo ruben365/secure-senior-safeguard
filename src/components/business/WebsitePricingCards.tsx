@@ -9,13 +9,15 @@ import { toast } from "sonner";
 
 interface Package {
   id: string;
-  badge: { icon: string; label: string };
+  tier: string;
+  badge: { icon: React.ReactNode; label: string; anim: "wiggle" | "spin" | "none" };
   title: string;
+  sub: string;
   price: number;
   priceDisplay: string;
   delivery: string;
-  deliveryWeeks: string;
-  chips: { icon: string; label: string }[];
+  metrics: { label: string; value: string; trend?: boolean }[];
+  chips: { icon: React.ReactNode; label: string }[];
   features: string[];
   colorA: string;
   colorB: string;
@@ -24,29 +26,112 @@ interface Package {
   featured: boolean;
 }
 
+const BoltIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+  </svg>
+);
+const StarIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="12 2 15 8.5 22 9.5 17 14.5 18.2 21.5 12 18 5.8 21.5 7 14.5 2 9.5 9 8.5 12 2" />
+  </svg>
+);
+const ShoppingBagIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" /><line x1="3" y1="6" x2="21" y2="6" /><path d="M16 10a4 4 0 01-8 0" />
+  </svg>
+);
+const MobileIcon = () => (
+  <svg className="wsp-chip-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="6" y="2" width="12" height="20" rx="2.5" />
+  </svg>
+);
+const DomainIcon = () => (
+  <svg className="wsp-chip-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="9" /><ellipse cx="12" cy="12" rx="4" ry="9" /><line x1="3" y1="12" x2="21" y2="12" />
+  </svg>
+);
+const SearchIcon = () => (
+  <svg className="wsp-chip-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="11" cy="11" r="7" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+  </svg>
+);
+const CMSIcon = () => (
+  <svg className="wsp-chip-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="3" width="18" height="4" rx="1" /><rect x="3" y="10" width="18" height="11" rx="1" /><line x1="8" y1="14" x2="16" y2="14" /><line x1="8" y1="17" x2="14" y2="17" />
+  </svg>
+);
+const CartIcon = () => (
+  <svg className="wsp-chip-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" /><path d="M1 1h4l2.68 13.39a2 2 0 001.99 1.61h9.72a2 2 0 001.99-1.61L23 6H6" />
+  </svg>
+);
+const AdminIcon = () => (
+  <svg className="wsp-chip-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" />
+  </svg>
+);
+const TrendUpIcon = () => (
+  <svg className="wsp-trend-icon" viewBox="0 0 24 24">
+    <path d="M3 17l6-6 4 4 8-8v6h2V3h-10v2h6l-6 6-4-4-8 8z" />
+  </svg>
+);
+const CheckSmIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="20 6 9 17 4 12" />
+  </svg>
+);
+const ArrowRightIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+  </svg>
+);
+const CloseIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+    <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+  </svg>
+);
+const ShieldIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="#5be5a0" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+  </svg>
+);
+const GreenCheckIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="#5be5a0" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="20 6 9 17 4 12" />
+  </svg>
+);
+const ClockIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="#5be5a0" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="9" /><polyline points="12 7 12 12 15 15" />
+  </svg>
+);
+
 const PACKAGES: Package[] = [
   {
     id: "landing",
-    badge: { icon: "⚡", label: "QUICK START" },
+    tier: "Starter",
+    badge: { icon: <BoltIcon />, label: "QUICK START", anim: "wiggle" },
     title: "Landing Page",
+    sub: "One focused page built to convert",
     price: 1200,
-    priceDisplay: "$1,200",
+    priceDisplay: "1,200",
     delivery: "Delivered in 2 weeks",
-    deliveryWeeks: "2 weeks",
+    metrics: [
+      { label: "Conversion", value: "+28%", trend: true },
+      { label: "Load", value: "0.9s" },
+    ],
     chips: [
-      { icon: "📱", label: "Mobile-First" },
-      { icon: "🔍", label: "Basic SEO" },
-      { icon: "📋", label: "Contact Form" },
-      { icon: "📊", label: "Analytics" },
+      { icon: <MobileIcon />, label: "Mobile" },
+      { icon: <DomainIcon />, label: "Domain" },
     ],
     features: [
-      "1 professionally designed page",
-      "Mobile responsive design",
+      "1 page responsive design",
       "Basic SEO setup",
       "1-year domain included",
-      "1 business email address",
+      "1 business email (1 year)",
       "Contact form integration",
-      "Google Analytics setup",
+      "Basic analytics setup",
     ],
     colorA: "#e08a4a",
     colorB: "#e8b070",
@@ -56,26 +141,28 @@ const PACKAGES: Package[] = [
   },
   {
     id: "business",
-    badge: { icon: "⭐", label: "MOST POPULAR" },
+    tier: "Business",
+    badge: { icon: <StarIcon />, label: "MOST POPULAR", anim: "spin" },
     title: "Business Website",
+    sub: "Everything a growing brand needs",
     price: 2900,
-    priceDisplay: "$2,900",
+    priceDisplay: "2,900",
     delivery: "Delivered in 3–4 weeks",
-    deliveryWeeks: "3–4 weeks",
+    metrics: [
+      { label: "Traffic", value: "+62%", trend: true },
+      { label: "Pages", value: "5–10" },
+    ],
     chips: [
-      { icon: "🚀", label: "Full SEO" },
-      { icon: "📝", label: "CMS" },
-      { icon: "📅", label: "Booking" },
-      { icon: "⚡", label: "Performance" },
+      { icon: <SearchIcon />, label: "SEO" },
+      { icon: <CMSIcon />, label: "CMS" },
     ],
     features: [
-      "5–10 custom pages",
-      "Mobile responsive design",
+      "5–10 pages, mobile responsive",
       "Full SEO optimization",
       "2-year domain included",
-      "Business email accounts",
-      "Content management system",
-      "Booking / scheduling system",
+      "Business emails (1 year)",
+      "Editable CMS system",
+      "Booking or contact system",
       "Performance optimization",
     ],
     colorA: "#7c6fd0",
@@ -86,17 +173,20 @@ const PACKAGES: Package[] = [
   },
   {
     id: "ecommerce",
-    badge: { icon: "👑", label: "FULL STORE" },
+    tier: "Elite",
+    badge: { icon: <ShoppingBagIcon />, label: "FULL STORE", anim: "none" },
     title: "E-Commerce",
+    sub: "Full online store with Stripe payments",
     price: 6500,
-    priceDisplay: "$6,500",
+    priceDisplay: "6,500",
     delivery: "Delivered in 4–6 weeks",
-    deliveryWeeks: "4–6 weeks",
+    metrics: [
+      { label: "Revenue", value: "+95%", trend: true },
+      { label: "Products", value: "∞" },
+    ],
     chips: [
-      { icon: "🛒", label: "Products" },
-      { icon: "💳", label: "Stripe Pay" },
-      { icon: "📦", label: "Inventory" },
-      { icon: "📊", label: "Admin" },
+      { icon: <CartIcon />, label: "Stripe" },
+      { icon: <AdminIcon />, label: "Admin" },
     ],
     features: [
       "Full product catalog system",
@@ -127,13 +217,13 @@ interface AddOn {
 }
 
 const ADD_ONS: AddOn[] = [
-  { id: "logo",        icon: "🎨", label: "Logo Design",          note: "Custom professional brand mark",         price: 500 },
-  { id: "content",     icon: "✍️", label: "Content Writing",       note: "$200 per page — we write it for you",    price: 200, hasQty: true, maxQty: 20 },
-  { id: "extra-pages", icon: "📄", label: "Additional Pages",      note: "$300 per extra page added to package",   price: 300, hasQty: true, maxQty: 20 },
-  { id: "chatbot",     icon: "🤖", label: "AI Chatbot",            note: "Conversational assistant on your site",  price: 800 },
-  { id: "seo",         icon: "🔍", label: "Advanced SEO",          note: "Full keyword & backlink campaign",       price: 600 },
-  { id: "email",       icon: "📧", label: "Business Email Setup",  note: "Professional domain email for your team",price: 150 },
-  { id: "maintenance", icon: "🔧", label: "Maintenance Plan",      note: "$200/month — updates, backups & support",price: 200 },
+  { id: "logo",        icon: "🎨", label: "Logo Design",         note: "Custom professional brand mark",          price: 500 },
+  { id: "content",     icon: "✍️", label: "Content Writing",      note: "$200 per page — we write it for you",     price: 200, hasQty: true, maxQty: 20 },
+  { id: "extra-pages", icon: "📄", label: "Additional Pages",     note: "$300 per extra page added to package",    price: 300, hasQty: true, maxQty: 20 },
+  { id: "chatbot",     icon: "🤖", label: "AI Chatbot",           note: "Conversational assistant on your site",   price: 800 },
+  { id: "seo",         icon: "🔍", label: "Advanced SEO",         note: "Full keyword & backlink campaign",        price: 600 },
+  { id: "email",       icon: "📧", label: "Business Email Setup", note: "Professional domain email for your team", price: 150 },
+  { id: "maintenance", icon: "🔧", label: "Maintenance Plan",     note: "$200/month — updates, backups & support", price: 200 },
 ];
 
 /* ═══════════════════════════════════════════
@@ -157,72 +247,57 @@ interface QuoteForm {
   notes: string;
 }
 
-/* ═══════════════════════════════════════════
-   HELPERS
-═══════════════════════════════════════════ */
-
-const fmt = (n: number) =>
-  "$" + n.toLocaleString("en-US", { minimumFractionDigits: 0 });
+const fmt = (n: number) => "$" + n.toLocaleString("en-US", { minimumFractionDigits: 0 });
 
 /* ═══════════════════════════════════════════
-   SVG GRAPHS (unchanged)
+   SVG GRAPHS
 ═══════════════════════════════════════════ */
 
-const GrainTexture = () => (
-  <svg className="wsp-grain" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" aria-hidden="true">
-    <filter id="wsp-noise">
-      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
-      <feColorMatrix type="saturate" values="0" />
-    </filter>
-    <rect width="100%" height="100%" filter="url(#wsp-noise)" opacity="1" />
-  </svg>
-);
-
-const CheckIcon = () => (
-  <svg className="wsp-check" viewBox="0 0 15 15" fill="none" aria-hidden="true">
-    <circle cx="7.5" cy="7.5" r="7" fill="currentColor" fillOpacity="0.15" />
-    <path d="M4.5 7.5l2 2 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-
-const LineGraph = ({ a, b, uid }: { a: string; b: string; uid: string }) => (
-  <svg className="wsp-graph" viewBox="0 0 200 72" preserveAspectRatio="none" aria-hidden="true">
+const LineGraph = ({ a, uid }: { a: string; uid: string }) => (
+  <svg className="wsp-graph" viewBox="0 0 300 100" preserveAspectRatio="none" aria-hidden="true">
     <defs>
-      <linearGradient id={`wsp-fill-${uid}`} x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stopColor={a} stopOpacity="0.36" />
+      <linearGradient id={`wsp-fill-${uid}`} x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0%" stopColor={a} stopOpacity="0.45" />
         <stop offset="100%" stopColor={a} stopOpacity="0" />
       </linearGradient>
     </defs>
-    <path d="M0,66 L30,56 L65,46 L95,34 L130,22 L165,11 L200,5 L200,72 L0,72 Z" fill={`url(#wsp-fill-${uid})`} />
-    <path className="wsp-line-path" d="M0,66 L30,56 L65,46 L95,34 L130,22 L165,11 L200,5" stroke={a} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-    <circle cx="95" cy="34" r="3.5" fill={b} opacity="0.85" />
-    <circle cx="200" cy="5" r="4" fill={a} />
+    <line className="wsp-grid-line" x1="0" y1="30" x2="300" y2="30" stroke={a} />
+    <line className="wsp-grid-line" x1="0" y1="60" x2="300" y2="60" stroke={a} />
+    <path className="wsp-area-fill" d="M0,85 L30,70 L60,72 L90,55 L120,58 L150,40 L180,45 L210,30 L240,32 L270,20 L300,18 L300,100 L0,100 Z" fill={`url(#wsp-fill-${uid})`} />
+    <path className="wsp-line-path" d="M0,85 L30,70 L60,72 L90,55 L120,58 L150,40 L180,45 L210,30 L240,32 L270,20 L300,18" stroke={a} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    <circle className="wsp-graph-dot" cx="270" cy="20" r="3.5" fill="#fff" stroke={a} strokeWidth="2" style={{ animationDelay: "2.6s" }} />
+    <circle className="wsp-graph-dot" cx="150" cy="40" r="2.5" fill="#fff" stroke={a} strokeWidth="2" style={{ animationDelay: "2.4s" }} />
   </svg>
 );
 
-const BarGraph = ({ a, b, c }: { a: string; b: string; c: string }) => (
-  <svg className="wsp-graph" viewBox="0 0 200 72" preserveAspectRatio="none" aria-hidden="true">
-    <rect className="wsp-bar" x="8"   y="50" width="28" height="22" rx="3" fill={a} opacity="0.52" />
-    <rect className="wsp-bar" x="47"  y="40" width="28" height="32" rx="3" fill={b} opacity="0.63" />
-    <rect className="wsp-bar" x="86"  y="27" width="28" height="45" rx="3" fill={a} opacity="0.75" />
-    <rect className="wsp-bar" x="125" y="14" width="28" height="58" rx="3" fill={c} opacity="0.86" />
-    <rect className="wsp-bar" x="164" y="4"  width="28" height="68" rx="3" fill={b} opacity="0.96" />
+const BarGraph = ({ a }: { a: string }) => (
+  <svg className="wsp-graph" viewBox="0 0 300 100" preserveAspectRatio="none" aria-hidden="true">
+    <line className="wsp-grid-line" x1="0" y1="30" x2="300" y2="30" stroke={a} />
+    <line className="wsp-grid-line" x1="0" y1="60" x2="300" y2="60" stroke={a} />
+    <rect className="wsp-bar" x="15"  y="65" width="22" height="35" rx="3" fill={a} style={{ animationDelay: "0.8s" }} />
+    <rect className="wsp-bar" x="55"  y="55" width="22" height="45" rx="3" fill={a} style={{ animationDelay: "0.95s" }} />
+    <rect className="wsp-bar" x="95"  y="40" width="22" height="60" rx="3" fill={a} style={{ animationDelay: "1.10s" }} />
+    <rect className="wsp-bar" x="135" y="48" width="22" height="52" rx="3" fill={a} style={{ animationDelay: "1.25s" }} />
+    <rect className="wsp-bar" x="175" y="30" width="22" height="70" rx="3" fill={a} style={{ animationDelay: "1.40s" }} />
+    <rect className="wsp-bar" x="215" y="22" width="22" height="78" rx="3" fill={a} style={{ animationDelay: "1.55s" }} />
+    <rect className="wsp-bar" x="255" y="10" width="22" height="90" rx="3" fill={a} style={{ animationDelay: "1.70s" }} />
   </svg>
 );
 
-const AreaGraph = ({ a, b, c, uid }: { a: string; b: string; c: string; uid: string }) => (
-  <svg className="wsp-graph" viewBox="0 0 200 72" preserveAspectRatio="none" aria-hidden="true">
+const AreaGraph = ({ a, uid }: { a: string; uid: string }) => (
+  <svg className="wsp-graph" viewBox="0 0 300 100" preserveAspectRatio="none" aria-hidden="true">
     <defs>
-      <linearGradient id={`wsp-fill-${uid}`} x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stopColor={a} stopOpacity="0.40" />
+      <linearGradient id={`wsp-fill-${uid}`} x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0%" stopColor={a} stopOpacity="0.50" />
         <stop offset="100%" stopColor={a} stopOpacity="0" />
       </linearGradient>
     </defs>
-    <path d="M0,64 C25,56 50,20 100,15 C150,10 170,38 200,13 L200,72 L0,72 Z" fill={`url(#wsp-fill-${uid})`} />
-    <path className="wsp-area-path" d="M0,64 C25,56 50,20 100,15 C150,10 170,38 200,13" stroke={a} strokeWidth="2" strokeLinecap="round" fill="none" />
-    <circle cx="100" cy="15" r="4" fill={b} />
-    <circle cx="0" cy="64" r="2.5" fill={a} opacity="0.6" />
-    <circle cx="200" cy="13" r="4" fill={c} />
+    <line className="wsp-grid-line" x1="0" y1="30" x2="300" y2="30" stroke={a} />
+    <line className="wsp-grid-line" x1="0" y1="60" x2="300" y2="60" stroke={a} />
+    <path className="wsp-area-fill" d="M0,75 C30,68 60,30 100,25 C140,18 180,50 220,35 C260,20 280,55 300,22 L300,100 L0,100 Z" fill={`url(#wsp-fill-${uid})`} />
+    <path className="wsp-area-path" d="M0,75 C30,68 60,30 100,25 C140,18 180,50 220,35 C260,20 280,55 300,22" stroke={a} strokeWidth="2" strokeLinecap="round" fill="none" />
+    <circle className="wsp-graph-dot" cx="100" cy="25" r="3.5" fill="#fff" stroke={a} strokeWidth="2" style={{ animationDelay: "2.5s" }} />
+    <circle className="wsp-graph-dot" cx="300" cy="22" r="3.5" fill="#fff" stroke={a} strokeWidth="2" style={{ animationDelay: "2.7s" }} />
   </svg>
 );
 
@@ -231,12 +306,7 @@ const AreaGraph = ({ a, b, c, uid }: { a: string; b: string; c: string; uid: str
 ═══════════════════════════════════════════ */
 
 function CheckoutModal({
-  open,
-  pkg,
-  addonQtys,
-  addonTotal,
-  grandTotal,
-  onClose,
+  open, pkg, addonQtys, addonTotal, grandTotal, onClose,
 }: {
   open: boolean;
   pkg: Package | null;
@@ -255,59 +325,37 @@ function CheckoutModal({
   const selectedAddons = ADD_ONS.filter((a) => (addonQtys[a.id] ?? 0) > 0);
 
   const handleProceed = async () => {
-    if (!form.name.trim() || !form.email.trim()) {
-      toast.error("Please enter your name and email.");
-      return;
-    }
-    if (!/\S+@\S+\.\S+/.test(form.email)) {
-      toast.error("Please enter a valid email address.");
-      return;
-    }
+    if (!form.name.trim() || !form.email.trim()) { toast.error("Please enter your name and email."); return; }
+    if (!/\S+@\S+\.\S+/.test(form.email)) { toast.error("Please enter a valid email address."); return; }
     if (!pkg) return;
     setLoading(true);
     try {
       const orderNumber = `WDO-${Date.now().toString().slice(-8)}`;
       const addonsPayload = selectedAddons.map((a) => ({
-        id: a.id,
-        label: a.label,
-        price: a.price,
-        qty: addonQtys[a.id] ?? 1,
-        subtotal: a.price * (addonQtys[a.id] ?? 1),
+        id: a.id, label: a.label, price: a.price,
+        qty: addonQtys[a.id] ?? 1, subtotal: a.price * (addonQtys[a.id] ?? 1),
       }));
 
       await (supabase as any).from("web_design_orders").insert([{
-        order_number: orderNumber,
-        package_name: pkg.id,
-        package_price: pkg.price * 100,
-        add_ons: addonsPayload,
-        add_ons_total: addonTotal * 100,
-        total_amount: grandTotal * 100,
-        customer_name: form.name,
-        customer_email: form.email,
-        payment_status: "pending",
-        status: "new",
+        order_number: orderNumber, package_name: pkg.id, package_price: pkg.price * 100,
+        add_ons: addonsPayload, add_ons_total: addonTotal * 100, total_amount: grandTotal * 100,
+        customer_name: form.name, customer_email: form.email,
+        payment_status: "pending", status: "new",
         metadata: { phone: form.phone, company: form.company },
       }]);
 
       const { data, error } = await supabase.functions.invoke("create-webdesign-checkout", {
         body: {
-          packageName: pkg.title,
-          packageType: pkg.id,
-          totalAmount: grandTotal,
-          addOns: addonsPayload,
-          customerName: form.name,
-          customerEmail: form.email,
+          packageName: pkg.title, packageType: pkg.id, totalAmount: grandTotal,
+          addOns: addonsPayload, customerName: form.name, customerEmail: form.email,
           successUrl: `${window.location.origin}/ai?payment=success`,
           cancelUrl: `${window.location.origin}/ai`,
         },
       });
 
       if (error) throw error;
-      if (data?.url) {
-        window.location.href = data.url;
-      } else {
-        throw new Error("No checkout URL returned");
-      }
+      if (data?.url) { window.location.href = data.url; }
+      else throw new Error("No checkout URL returned");
     } catch {
       toast.error("Checkout failed — please try again or contact us.");
     } finally {
@@ -318,147 +366,138 @@ function CheckoutModal({
   if (!open || !pkg) return null;
 
   return (
-    <div className="wsp-modal-backdrop" onClick={(e) => e.target === e.currentTarget && onClose()}>
-      <div className="wsp-modal wsp-modal--checkout">
-        {/* Left — Order summary */}
-        <div className="wsp-modal-left" style={{ "--wsp-a": pkg.colorA, "--wsp-b": pkg.colorB, "--wsp-c": pkg.colorC } as React.CSSProperties}>
-          <div className="wsp-modal-left-inner">
-            <div className="wsp-modal-pkg-badge">
-              <span>{pkg.badge.icon}</span> {pkg.badge.label}
+    <div className="wsp-modal-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
+      <div className="wsp-modal wsp-modal-checkout">
+        <div className="wsp-checkout-layout">
+          {/* ── Left: dark hero panel ── */}
+          <div className="wsp-checkout-hero">
+            <div className="wsp-hero-brand">
+              <span className="wsp-brand-dot" />
+              SECURE SENIOR SAFEGUARD
             </div>
-            <h3 className="wsp-modal-pkg-title">{pkg.title}</h3>
-            <p className="wsp-modal-pkg-delivery">⏱ {pkg.delivery}</p>
+            <p className="wsp-hero-title">{pkg.tier} Package — Order Total</p>
+            <div className="wsp-hero-total">{fmt(grandTotal)}</div>
+            <div className="wsp-hero-divider" />
 
-            <div className="wsp-modal-divider" />
-
-            <div className="wsp-modal-line-item">
-              <span>Base package</span>
-              <span>{fmt(pkg.price)}</span>
-            </div>
-
-            {selectedAddons.map((a) => {
-              const qty = addonQtys[a.id] ?? 1;
-              return (
-                <div key={a.id} className="wsp-modal-line-item wsp-modal-line-item--addon">
-                  <span>{a.icon} {a.label}{qty > 1 ? ` ×${qty}` : ""}</span>
-                  <span>+{fmt(a.price * qty)}</span>
-                </div>
-              );
-            })}
-
-            {selectedAddons.length === 0 && (
-              <p className="wsp-modal-no-addons">No add-ons selected</p>
-            )}
-
-            <div className="wsp-modal-divider" />
-
-            <div className="wsp-modal-total-row">
-              <span>Total</span>
-              <span className="wsp-modal-total-price">{fmt(grandTotal)}</span>
+            <div className="wsp-hero-lines">
+              <div className="wsp-hero-line wsp-hero-line--base">
+                <span className="wsp-hl-name">{pkg.title}</span>
+                <span className="wsp-hl-price">{fmt(pkg.price)}</span>
+              </div>
+              {selectedAddons.length === 0 && (
+                <p className="wsp-hero-empty">No add-ons selected</p>
+              )}
+              {selectedAddons.map((a) => {
+                const qty = addonQtys[a.id] ?? 1;
+                return (
+                  <div key={a.id} className="wsp-hero-line">
+                    <span className="wsp-hl-name">
+                      {a.icon} {a.label}
+                      {qty > 1 && <span className="wsp-hl-qty">×{qty}</span>}
+                    </span>
+                    <span className="wsp-hl-price">+{fmt(a.price * qty)}</span>
+                  </div>
+                );
+              })}
             </div>
 
-            <div className="wsp-modal-trust-items">
-              <div className="wsp-modal-trust-item">🔒 Secure checkout via Stripe</div>
-              <div className="wsp-modal-trust-item">📞 24hr response guarantee</div>
-              <div className="wsp-modal-trust-item">✅ 30-day satisfaction guarantee</div>
+            <div className="wsp-hero-trust">
+              <div className="wsp-hero-trust-item"><ShieldIcon /> Secure checkout via Stripe</div>
+              <div className="wsp-hero-trust-item"><GreenCheckIcon /> 30-day satisfaction guarantee</div>
+              <div className="wsp-hero-trust-item"><ClockIcon /> 24hr response guarantee</div>
             </div>
           </div>
-        </div>
 
-        {/* Right — Form */}
-        <div className="wsp-modal-right">
-          <button className="wsp-modal-close" type="button" onClick={onClose} aria-label="Close">✕</button>
+          {/* ── Right: form panel ── */}
+          <div className="wsp-checkout-form-panel">
+            <button className="wsp-modal-close" type="button" onClick={onClose} aria-label="Close"><CloseIcon /></button>
 
-          <div className="wsp-modal-right-inner">
-            <div className="wsp-modal-steps">
-              <div className={`wsp-modal-step${step >= 1 ? " wsp-modal-step--active" : ""}`}>
-                <span>1</span> Contact
-              </div>
-              <div className="wsp-modal-step-line" />
-              <div className={`wsp-modal-step${step >= 2 ? " wsp-modal-step--active" : ""}`}>
-                <span>2</span> Checkout
+            <div className="wsp-checkout-form-header">
+              <h2 className="wsp-modal-title">Complete Your Order</h2>
+              <div className="wsp-checkout-steps">
+                <div className={`wsp-step${step >= 1 ? " wsp-step--active" : step > 1 ? " wsp-step--done" : ""}`}>
+                  <span className="wsp-dot-s">1</span> Contact
+                </div>
+                <div className="wsp-steps-sep" />
+                <div className={`wsp-step${step >= 2 ? " wsp-step--active" : ""}`}>
+                  <span className="wsp-dot-s">2</span> Checkout
+                </div>
               </div>
             </div>
 
-            {step === 1 && (
-              <div className="wsp-modal-form-body">
-                <h3 className="wsp-modal-form-title">Your Details</h3>
-                <p className="wsp-modal-form-sub">We'll send your order confirmation here.</p>
+            <div className="wsp-checkout-form-body">
+              {step === 1 && (
+                <>
+                  <div className="wsp-form-section-title has-num">
+                    <span className="wsp-num">1</span>
+                    YOUR DETAILS
+                  </div>
+                  <div className="wsp-form-row">
+                    <div className="wsp-form-group">
+                      <label className="wsp-form-label">Full Name <span className="wsp-req">*</span></label>
+                      <input className="wsp-form-input" type="text" placeholder="Jane Smith" value={form.name} onChange={setField("name")} />
+                    </div>
+                    <div className="wsp-form-group">
+                      <label className="wsp-form-label">Email <span className="wsp-req">*</span></label>
+                      <input className="wsp-form-input" type="email" placeholder="you@example.com" value={form.email} onChange={setField("email")} />
+                    </div>
+                  </div>
+                  <div className="wsp-form-row">
+                    <div className="wsp-form-group">
+                      <label className="wsp-form-label">Phone <span className="wsp-hint">optional</span></label>
+                      <input className="wsp-form-input" type="tel" placeholder="(555) 000-0000" value={form.phone} onChange={setField("phone")} />
+                    </div>
+                    <div className="wsp-form-group">
+                      <label className="wsp-form-label">Company <span className="wsp-hint">optional</span></label>
+                      <input className="wsp-form-input" type="text" placeholder="Acme Inc." value={form.company} onChange={setField("company")} />
+                    </div>
+                  </div>
+                </>
+              )}
 
-                <div className="wsp-form-group">
-                  <label className="wsp-form-label">Full Name *</label>
-                  <input className="wsp-form-input" type="text" placeholder="Jane Smith" value={form.name} onChange={setField("name")} />
-                </div>
-                <div className="wsp-form-group">
-                  <label className="wsp-form-label">Email Address *</label>
-                  <input className="wsp-form-input" type="email" placeholder="you@example.com" value={form.email} onChange={setField("email")} />
-                </div>
-                <div className="wsp-form-group">
-                  <label className="wsp-form-label">Phone (optional)</label>
-                  <input className="wsp-form-input" type="tel" placeholder="(937) 555-0100" value={form.phone} onChange={setField("phone")} />
-                </div>
-                <div className="wsp-form-group">
-                  <label className="wsp-form-label">Company (optional)</label>
-                  <input className="wsp-form-input" type="text" placeholder="Acme Inc." value={form.company} onChange={setField("company")} />
-                </div>
+              {step === 2 && (
+                <>
+                  <div className="wsp-form-section-title has-num">
+                    <span className="wsp-num">2</span>
+                    ORDER REVIEW
+                  </div>
+                  <div className="wsp-order-review">
+                    <div className="wsp-review-row"><span>Name</span><span>{form.name}</span></div>
+                    <div className="wsp-review-row"><span>Email</span><span>{form.email}</span></div>
+                    <div className="wsp-review-row"><span>Package</span><span>{pkg.title}</span></div>
+                    {selectedAddons.length > 0 && (
+                      <div className="wsp-review-row">
+                        <span>Add-ons</span>
+                        <span>{selectedAddons.length} selected (+{fmt(addonTotal)})</span>
+                      </div>
+                    )}
+                    <div className="wsp-review-row wsp-review-row--total"><span>Total</span><span>{fmt(grandTotal)}</span></div>
+                  </div>
+                </>
+              )}
+            </div>
 
-                <button
-                  className="wsp-modal-submit-btn"
-                  type="button"
-                  onClick={() => {
-                    if (!form.name.trim() || !form.email.trim()) {
-                      toast.error("Name and email are required.");
-                      return;
-                    }
-                    setStep(2);
-                  }}
-                >
-                  Continue to Checkout →
+            <div className="wsp-modal-footer">
+              <span className="wsp-footer-note">
+                <ShieldIcon /> Payments secured by Stripe
+              </span>
+              {step === 1 ? (
+                <button className="wsp-btn-primary" type="button" onClick={() => {
+                  if (!form.name.trim() || !form.email.trim()) { toast.error("Name and email are required."); return; }
+                  if (!/\S+@\S+\.\S+/.test(form.email)) { toast.error("Please enter a valid email."); return; }
+                  setStep(2);
+                }}>
+                  Continue →
                 </button>
-              </div>
-            )}
-
-            {step === 2 && (
-              <div className="wsp-modal-form-body">
-                <h3 className="wsp-modal-form-title">Complete Your Order</h3>
-                <p className="wsp-modal-form-sub">
-                  You'll be redirected to our secure Stripe checkout to complete payment.
-                </p>
-
-                <div className="wsp-modal-order-review">
-                  <div className="wsp-modal-review-row">
-                    <span>Name</span><span>{form.name}</span>
-                  </div>
-                  <div className="wsp-modal-review-row">
-                    <span>Email</span><span>{form.email}</span>
-                  </div>
-                  <div className="wsp-modal-review-row">
-                    <span>Package</span><span>{pkg.title}</span>
-                  </div>
-                  <div className="wsp-modal-review-row wsp-modal-review-row--total">
-                    <span>Total</span><span>{fmt(grandTotal)}</span>
-                  </div>
-                </div>
-
-                <div className="wsp-modal-btn-row">
-                  <button className="wsp-modal-back-btn" type="button" onClick={() => setStep(1)}>
-                    ← Back
-                  </button>
-                  <button
-                    className="wsp-modal-submit-btn"
-                    type="button"
-                    onClick={handleProceed}
-                    disabled={loading}
-                  >
+              ) : (
+                <>
+                  <button className="wsp-btn-ghost" type="button" onClick={() => setStep(1)}>← Back</button>
+                  <button className="wsp-btn-primary" type="button" onClick={handleProceed} disabled={loading}>
                     {loading ? "Redirecting…" : `Pay ${fmt(grandTotal)} →`}
                   </button>
-                </div>
-
-                <p className="wsp-modal-stripe-note">
-                  🔒 Powered by Stripe — your card details are never stored by us.
-                </p>
-              </div>
-            )}
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -471,61 +510,50 @@ function CheckoutModal({
 ═══════════════════════════════════════════ */
 
 const WEBSITE_TYPES = [
-  { id: "landing",  icon: "⚡", label: "Landing Page",      desc: "Single page, campaign-ready" },
-  { id: "business", icon: "🏢", label: "Business Site",     desc: "Multi-page, professional presence" },
-  { id: "ecommerce",icon: "🛒", label: "E-Commerce",        desc: "Full online store with payments" },
-  { id: "portfolio",icon: "🎨", label: "Portfolio",         desc: "Showcase your work beautifully" },
-  { id: "booking",  icon: "📅", label: "Booking / Appts",   desc: "Scheduling & appointment system" },
-  { id: "other",    icon: "✨", label: "Other / Custom",    desc: "Something unique — let's talk" },
+  { id: "landing",   icon: "⚡", label: "Landing Page",    desc: "Single page, campaign-ready" },
+  { id: "business",  icon: "🏢", label: "Business Site",   desc: "Multi-page, professional presence" },
+  { id: "ecommerce", icon: "🛒", label: "E-Commerce",      desc: "Full online store with payments" },
+  { id: "portfolio", icon: "🎨", label: "Portfolio",       desc: "Showcase your work beautifully" },
+  { id: "booking",   icon: "📅", label: "Booking / Appts", desc: "Scheduling & appointment system" },
+  { id: "other",     icon: "✨", label: "Other / Custom",  desc: "Something unique — let's talk" },
 ];
 
-const BUDGET_PILLS = [
-  "Under $2,000", "$2,000–$5,000", "$5,000–$10,000", "$10,000+", "Need a Quote"
+const BUDGET_PILLS = ["Under $2,000", "$2,000–$5,000", "$5,000–$10,000", "$10,000+", "Need a Quote"];
+
+const TIMELINE_STEPS = [
+  { title: "We review your request", desc: "Usually within a few hours during business hours." },
+  { title: "Send detailed proposal", desc: "Itemized quote with timeline and deliverables." },
+  { title: "Free scoping call", desc: "30-min call to align on goals and requirements." },
+  { title: "Build begins", desc: "Your project kicks off within 3 business days." },
 ];
 
 function QuoteModal({
-  open,
-  preselectedType,
-  onClose,
+  open, preselectedType, onClose,
 }: {
   open: boolean;
   preselectedType: string;
   onClose: () => void;
 }) {
   const [form, setForm] = useState<QuoteForm>({
-    name: "", email: "",
-    websiteType: preselectedType || "",
-    budget: "",
-    notes: "",
+    name: "", email: "", websiteType: preselectedType || "", budget: "", notes: "",
   });
   const [loading, setLoading] = useState(false);
 
-  const setField = (k: keyof QuoteForm) => (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => setForm((p) => ({ ...p, [k]: e.target.value }));
+  const setField = (k: keyof QuoteForm) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      setForm((p) => ({ ...p, [k]: e.target.value }));
 
   const handleSubmit = async () => {
-    if (!form.name.trim() || !form.email.trim()) {
-      toast.error("Name and email are required.");
-      return;
-    }
-    if (!/\S+@\S+\.\S+/.test(form.email)) {
-      toast.error("Please enter a valid email.");
-      return;
-    }
+    if (!form.name.trim() || !form.email.trim()) { toast.error("Name and email are required."); return; }
+    if (!/\S+@\S+\.\S+/.test(form.email)) { toast.error("Please enter a valid email."); return; }
     setLoading(true);
     try {
       const quoteNumber = `WDQ-${Date.now().toString().slice(-8)}`;
       await (supabase as any).from("web_design_quotes").insert([{
-        quote_number: quoteNumber,
-        name: form.name,
-        email: form.email,
-        website_type: form.websiteType || null,
-        budget_range: form.budget || null,
-        additional_notes: form.notes || null,
-        status: "new",
+        quote_number: quoteNumber, name: form.name, email: form.email,
+        website_type: form.websiteType || null, budget_range: form.budget || null,
+        additional_notes: form.notes || null, status: "new",
       }]);
-
       toast.success("Quote request sent! We'll reach out within 24 hours.");
       onClose();
       setForm({ name: "", email: "", websiteType: preselectedType || "", budget: "", notes: "" });
@@ -538,59 +566,45 @@ function QuoteModal({
 
   if (!open) return null;
 
-  const STATS = [
-    { value: "2–6 wks", label: "Build Time" },
-    { value: "30 day", label: "Guarantee" },
-    { value: "24 hr", label: "Quote Response" },
-  ];
-
   return (
-    <div className="wsp-modal-backdrop" onClick={(e) => e.target === e.currentTarget && onClose()}>
-      <div className="wsp-modal wsp-modal--quote">
-        {/* Left — Hero panel */}
-        <div className="wsp-modal-left wsp-modal-left--quote">
-          <div className="wsp-modal-left-inner">
-            <div className="wsp-quote-hero-icon">💬</div>
-            <h3 className="wsp-quote-hero-title">Let's Build Something Great</h3>
-            <p className="wsp-quote-hero-desc">
-              Tell us what you need and we'll send a custom proposal — free, with no obligation.
-            </p>
+    <div className="wsp-modal-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
+      <div className="wsp-modal wsp-modal-quote">
+        <div className="wsp-quote-layout">
+          {/* ── Left: dark hero ── */}
+          <div className="wsp-quote-hero">
+            <p className="wsp-hero-kicker">Free, no-obligation proposal</p>
+            <h3 className="wsp-quote-headline">Let's Build Something Great</h3>
 
-            <div className="wsp-modal-divider" />
-
-            <div className="wsp-quote-stats">
-              {STATS.map((s) => (
-                <div key={s.label} className="wsp-quote-stat">
-                  <div className="wsp-quote-stat-value">{s.value}</div>
-                  <div className="wsp-quote-stat-label">{s.label}</div>
+            <div className="wsp-hero-timeline">
+              {TIMELINE_STEPS.map((step, i) => (
+                <div key={step.title} className="wsp-tl-item">
+                  <div className="wsp-tl-dot">{i + 1}</div>
+                  <div className="wsp-tl-content">
+                    <h4>{step.title}</h4>
+                    <p>{step.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
 
-            <div className="wsp-modal-divider" />
-
-            <div className="wsp-quote-timeline">
-              {["We review your request", "Send detailed proposal", "Free scoping call", "Build begins"].map((step, i) => (
-                <div key={step} className="wsp-quote-timeline-item">
-                  <div className="wsp-quote-timeline-dot">{i + 1}</div>
-                  <span>{step}</span>
-                </div>
-              ))}
+            <div className="wsp-hero-stats">
+              <div><div className="wsp-hero-stat-num">2–6 wks</div><div className="wsp-hero-stat-label">Build Time</div></div>
+              <div><div className="wsp-hero-stat-num">30 day</div><div className="wsp-hero-stat-label">Guarantee</div></div>
+              <div><div className="wsp-hero-stat-num">24 hr</div><div className="wsp-hero-stat-label">Quote Response</div></div>
+              <div><div className="wsp-hero-stat-num">100%</div><div className="wsp-hero-stat-label">Satisfaction</div></div>
             </div>
           </div>
-        </div>
 
-        {/* Right — Form */}
-        <div className="wsp-modal-right">
-          <button className="wsp-modal-close" type="button" onClick={onClose} aria-label="Close">✕</button>
+          {/* ── Right: form ── */}
+          <div className="wsp-quote-form-panel">
+            <button className="wsp-modal-close" type="button" onClick={onClose} aria-label="Close"><CloseIcon /></button>
 
-          <div className="wsp-modal-right-inner">
-            <h3 className="wsp-modal-form-title">Get a Free Quote</h3>
-            <p className="wsp-modal-form-sub">We respond within 24 hours.</p>
+            <div className="wsp-modal-body">
+              <div className="wsp-modal-eyebrow">GET A FREE QUOTE</div>
+              <h2 className="wsp-modal-title">Tell Us About Your Project</h2>
+              <p className="wsp-modal-sub">We respond within 24 hours with a detailed proposal.</p>
 
-            {/* Website type radio cards */}
-            <div className="wsp-form-group">
-              <label className="wsp-form-label">Website Type</label>
+              <div className="wsp-form-section-title">WEBSITE TYPE</div>
               <div className="wsp-radio-cards">
                 {WEBSITE_TYPES.map((wt) => (
                   <div
@@ -603,59 +617,61 @@ function QuoteModal({
                     onKeyDown={(e) => e.key === " " && setForm((p) => ({ ...p, websiteType: wt.id }))}
                   >
                     <span className="wsp-radio-card-icon">{wt.icon}</span>
-                    <div>
+                    <div className="wsp-radio-card-body">
                       <div className="wsp-radio-card-label">{wt.label}</div>
-                      <div className="wsp-radio-card-desc">{wt.desc}</div>
+                      <div className="wsp-radio-card-sub">{wt.desc}</div>
                     </div>
+                    <span className="wsp-radio-card-check"><CheckSmIcon /></span>
                   </div>
                 ))}
               </div>
-            </div>
 
-            {/* Budget pills */}
-            <div className="wsp-form-group">
-              <label className="wsp-form-label">Budget Range</label>
-              <div className="wsp-budget-pills">
+              <div className="wsp-form-section-title" style={{ marginTop: 16 }}>BUDGET RANGE</div>
+              <div className="wsp-pill-selector">
                 {BUDGET_PILLS.map((pill) => (
                   <button
                     key={pill}
                     type="button"
-                    className={`wsp-budget-pill${form.budget === pill ? " wsp-budget-pill--selected" : ""}`}
+                    className={`wsp-pill-opt${form.budget === pill ? " wsp-pill-opt--active" : ""}`}
                     onClick={() => setForm((p) => ({ ...p, budget: pill }))}
                   >
                     {pill}
                   </button>
                 ))}
               </div>
+
+              <div className="wsp-form-row" style={{ marginTop: 16 }}>
+                <div className="wsp-form-group">
+                  <label className="wsp-form-label">Full Name <span className="wsp-req">*</span></label>
+                  <input className="wsp-form-input" type="text" placeholder="Jane Smith" value={form.name} onChange={setField("name")} />
+                </div>
+                <div className="wsp-form-group">
+                  <label className="wsp-form-label">Email <span className="wsp-req">*</span></label>
+                  <input className="wsp-form-input" type="email" placeholder="you@example.com" value={form.email} onChange={setField("email")} />
+                </div>
+              </div>
+
+              <div className="wsp-form-group">
+                <label className="wsp-form-label">Additional Notes <span className="wsp-hint">optional</span></label>
+                <textarea
+                  className="wsp-form-input wsp-form-textarea"
+                  placeholder="Tell us about your project, goals, or any specific requirements…"
+                  value={form.notes}
+                  onChange={setField("notes")}
+                  rows={3}
+                />
+              </div>
             </div>
 
-            <div className="wsp-form-group">
-              <label className="wsp-form-label">Full Name *</label>
-              <input className="wsp-form-input" type="text" placeholder="Jane Smith" value={form.name} onChange={setField("name")} />
+            <div className="wsp-modal-footer">
+              <span className="wsp-footer-note">
+                <GreenCheckIcon /> No commitment required
+              </span>
+              <button className="wsp-btn-ghost" type="button" onClick={onClose}>Cancel</button>
+              <button className="wsp-btn-primary wsp-btn-wide" type="button" onClick={handleSubmit} disabled={loading}>
+                {loading ? "Sending…" : "Send Quote Request →"}
+              </button>
             </div>
-            <div className="wsp-form-group">
-              <label className="wsp-form-label">Email Address *</label>
-              <input className="wsp-form-input" type="email" placeholder="you@example.com" value={form.email} onChange={setField("email")} />
-            </div>
-            <div className="wsp-form-group">
-              <label className="wsp-form-label">Additional Notes</label>
-              <textarea
-                className="wsp-form-input wsp-form-textarea"
-                placeholder="Tell us about your project, goals, or any specific requirements…"
-                value={form.notes}
-                onChange={setField("notes")}
-                rows={3}
-              />
-            </div>
-
-            <button
-              className="wsp-modal-submit-btn"
-              type="button"
-              onClick={handleSubmit}
-              disabled={loading}
-            >
-              {loading ? "Sending…" : "Send Quote Request →"}
-            </button>
           </div>
         </div>
       </div>
@@ -668,14 +684,9 @@ function QuoteModal({
 ═══════════════════════════════════════════ */
 
 const PremiumCard = ({
-  pkg,
-  active,
-  checkoutLoading,
-  onGetStarted,
-  onGetQuote,
+  pkg, checkoutLoading, onGetStarted, onGetQuote,
 }: {
   pkg: Package;
-  active: boolean;
   checkoutLoading: boolean;
   onGetStarted: () => void;
   onGetQuote: () => void;
@@ -687,85 +698,102 @@ const PremiumCard = ({
   } as React.CSSProperties;
 
   return (
-    <div className={`wsp-col${active ? " wsp-col--active" : ""}`}>
-      <div className={`wsp-card${pkg.featured ? " wsp-card--featured" : ""}`} style={cssVars}>
-        <GrainTexture />
-        <div className="wsp-edge-rim" />
-        <div className="wsp-edge-ring" />
-        <div className="wsp-edge-sheen-clip">
-          <div className="wsp-edge-sheen" />
+    <div className="wsp-col" style={{ animationDelay: pkg.id === "landing" ? "0.15s" : pkg.id === "business" ? "0.25s" : "0.35s" }}>
+      <article
+        className={`wsp-card${pkg.featured ? " wsp-card--pro" : ""} wsp-card--${pkg.id}`}
+        style={cssVars}
+      >
+        <span className="wsp-edge-sheen" aria-hidden="true" />
+        <span className="wsp-edge-ring" aria-hidden="true" />
+        <span className="wsp-edge-rim" aria-hidden="true" />
+
+        {pkg.graph === "line" && <LineGraph a={pkg.colorA} uid={pkg.id} />}
+        {pkg.graph === "bar"  && <BarGraph  a={pkg.colorA} />}
+        {pkg.graph === "area" && <AreaGraph a={pkg.colorA} uid={pkg.id} />}
+
+        <div className="wsp-header-row">
+          <div className="wsp-tier-name">{pkg.tier}</div>
+          <span className={`wsp-badge${pkg.badge.anim !== "none" ? ` wsp-badge--${pkg.badge.anim}` : ""}`}>
+            {pkg.badge.icon}
+            {pkg.badge.label}
+          </span>
         </div>
-        <div className="wsp-strip" />
-        <div className="wsp-content">
-          <div className="wsp-badge-row">
-            <span className="wsp-badge">
-              <span className="wsp-badge-icon">{pkg.badge.icon}</span>
-              {pkg.badge.label}
-              <span className="wsp-badge-shimmer" />
+
+        <div className="wsp-tier-title">{pkg.title}</div>
+        <div className="wsp-tier-sub">{pkg.sub}</div>
+
+        <div className="wsp-price-holder">
+          <span className="wsp-currency">$</span>
+          <span className="wsp-price">{pkg.priceDisplay}</span>
+        </div>
+        <div className="wsp-delivery">{pkg.delivery}</div>
+
+        <div className="wsp-metric-row">
+          {pkg.metrics.map((m) => (
+            <div key={m.label} className="wsp-metric">
+              <span className="wsp-metric-label">{m.label}</span>
+              <span className="wsp-metric-value">
+                {m.trend && <TrendUpIcon />}
+                {m.value}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div className="wsp-chips">
+          {pkg.chips.map((chip, i) => (
+            <span key={i} className="wsp-chip">
+              <span className="wsp-chip-icon-wrap">{chip.icon}</span>
+              {chip.label}
             </span>
-          </div>
-          <h3 className="wsp-title">{pkg.title}</h3>
-          <div className="wsp-price-hold">
-            <span className="wsp-price-shimmer" />
-            <div className="wsp-price">{pkg.priceDisplay}</div>
-            <div className="wsp-delivery">{pkg.delivery}</div>
-          </div>
-          <div className="wsp-chips">
-            {pkg.chips.map((chip, i) => (
-              <div key={i} className="wsp-chip">
-                <span className="wsp-chip-disc">{chip.icon}</span>
-                <span>{chip.label}</span>
-              </div>
-            ))}
-          </div>
-          <ul className="wsp-features">
-            {pkg.features.map((f, i) => (
-              <li key={i} className="wsp-feature">
-                <CheckIcon />
-                <span>{f}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="wsp-ctas">
-            <button className="wsp-btn" type="button" onClick={onGetStarted} disabled={checkoutLoading}>
-              <span className="wsp-btn-label">{checkoutLoading ? "LOADING…" : "GET STARTED"}</span>
-              <span className="wsp-btn-arrow" aria-hidden="true">→</span>
-            </button>
-            <button className="wsp-btn-quote" type="button" onClick={onGetQuote}>
-              GET CUSTOM QUOTE
-            </button>
-          </div>
+          ))}
         </div>
-        {pkg.graph === "line" && <LineGraph a={pkg.colorA} b={pkg.colorB} uid={pkg.id} />}
-        {pkg.graph === "bar"  && <BarGraph  a={pkg.colorA} b={pkg.colorB} c={pkg.colorC} />}
-        {pkg.graph === "area" && <AreaGraph a={pkg.colorA} b={pkg.colorB} c={pkg.colorC} uid={pkg.id} />}
-      </div>
+
+        <ul className="wsp-features">
+          {pkg.features.map((f, i) => (
+            <li key={i} className="wsp-feature">
+              <span className="wsp-check"><CheckSmIcon /></span>
+              {f}
+            </li>
+          ))}
+        </ul>
+
+        <div className="wsp-cta-wrap">
+          <button
+            className="wsp-cta"
+            type="button"
+            onClick={onGetStarted}
+            disabled={checkoutLoading}
+          >
+            <span>{checkoutLoading ? "LOADING…" : "GET STARTED"}</span>
+            <span className="wsp-cta-arrow"><ArrowRightIcon /></span>
+          </button>
+          <button className="wsp-quote-link" type="button" onClick={onGetQuote}>
+            Get Custom Quote
+          </button>
+        </div>
+      </article>
     </div>
   );
 };
 
 /* ═══════════════════════════════════════════
-   PUBLIC COMPONENT — fully self-contained
+   PUBLIC COMPONENT
 ═══════════════════════════════════════════ */
 
 export const WebsitePricingCards = () => {
-  const [activePackageId, setActivePackageId] = useState<string>("business");
   const [addonQtys, setAddonQtys] = useState<AddonQtys>({});
+  const [activePackageId, setActivePackageId] = useState("business");
   const [checkoutLoading, setCheckoutLoading] = useState<string | null>(null);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [checkoutPkg, setCheckoutPkg] = useState<Package | null>(null);
   const [quoteOpen, setQuoteOpen] = useState(false);
   const [quoteType, setQuoteType] = useState("");
 
-  /* ── Add-on helpers ── */
   const toggleAddon = useCallback((id: string) => {
     setAddonQtys((prev) => {
       const next = { ...prev };
-      if ((next[id] ?? 0) > 0) {
-        delete next[id];
-      } else {
-        next[id] = 1;
-      }
+      if ((next[id] ?? 0) > 0) { delete next[id]; } else { next[id] = 1; }
       return next;
     });
   }, []);
@@ -773,88 +801,75 @@ export const WebsitePricingCards = () => {
   const setQty = useCallback((id: string, qty: number) => {
     setAddonQtys((prev) => {
       const next = { ...prev };
-      if (qty <= 0) {
-        delete next[id];
-      } else {
-        next[id] = qty;
-      }
+      if (qty <= 0) { delete next[id]; } else { next[id] = qty; }
       return next;
     });
   }, []);
 
-  /* ── Price calculation ── */
-  const addonTotal = ADD_ONS.reduce((sum, a) => {
-    const qty = addonQtys[a.id] ?? 0;
-    return sum + a.price * qty;
-  }, 0);
-
+  const addonTotal = ADD_ONS.reduce((sum, a) => sum + a.price * (addonQtys[a.id] ?? 0), 0);
   const activePkg = PACKAGES.find((p) => p.id === activePackageId) ?? PACKAGES[1];
   const grandTotal = activePkg.price + addonTotal;
+  const selectedAddonCount = Object.values(addonQtys).filter((q) => q > 0).length;
 
-  /* ── Checkout ── */
   const handleGetStarted = useCallback((pkg: Package) => {
     setCheckoutPkg(pkg);
     setActivePackageId(pkg.id);
     setCheckoutLoading(pkg.id);
-    setTimeout(() => {
-      setCheckoutLoading(null);
-      setCheckoutOpen(true);
-    }, 300);
+    setTimeout(() => { setCheckoutLoading(null); setCheckoutOpen(true); }, 300);
   }, []);
 
-  /* ── Quote ── */
   const handleGetQuote = useCallback((pkg: Package) => {
     setQuoteType(pkg.id);
     setQuoteOpen(true);
   }, []);
 
-  const selectedAddonCount = Object.values(addonQtys).filter((q) => q > 0).length;
-
   return (
-    <>
-      {/* ── Package selector pills ── */}
-      <div className="wsp-pkg-pills">
-        {PACKAGES.map((p) => (
-          <button
-            key={p.id}
-            type="button"
-            className={`wsp-pkg-pill${activePackageId === p.id ? " wsp-pkg-pill--active" : ""}`}
-            style={{ "--wsp-a": p.colorA, "--wsp-b": p.colorB } as React.CSSProperties}
-            onClick={() => setActivePackageId(p.id)}
-          >
-            <span>{p.badge.icon}</span>
-            {p.title}
-            <span className="wsp-pkg-pill-price">{p.priceDisplay}</span>
-          </button>
+    <div className="wsp-root">
+      {/* ── Pricing cards ── */}
+      <div className="wsp-grid">
+        {PACKAGES.map((pkg) => (
+          <PremiumCard
+            key={pkg.id}
+            pkg={pkg}
+            checkoutLoading={checkoutLoading === pkg.id}
+            onGetStarted={() => handleGetStarted(pkg)}
+            onGetQuote={() => handleGetQuote(pkg)}
+          />
         ))}
       </div>
 
-      {/* ── Pricing cards grid ── */}
-      <div className="wsp-wrap">
-        <div className="wsp-grid">
-          {PACKAGES.map((pkg) => (
-            <PremiumCard
-              key={pkg.id}
-              pkg={pkg}
-              active={activePackageId === pkg.id}
-              checkoutLoading={checkoutLoading === pkg.id}
-              onGetStarted={() => handleGetStarted(pkg)}
-              onGetQuote={() => handleGetQuote(pkg)}
-            />
-          ))}
-        </div>
+      {/* ── Market note ── */}
+      <div className="wsp-market-note">
+        <span className="wsp-dot-ohio" />
+        Ohio-based pricing · <b>All packages include hosting for year 1</b> · No hidden fees
       </div>
 
-      {/* ── Add-on section ── */}
+      {/* ── Add-ons section ── */}
       <div className="wsp-addons-section">
         <div className="wsp-addons-header">
-          <span className="wsp-addons-badge">✨ Enhance Your Project</span>
-          <h3 className="wsp-addons-title">Premium Add-Ons</h3>
-          <p className="wsp-addons-sub">
-            Check what you need — your total updates instantly below.
-          </p>
+          <span className="wsp-addons-eyebrow">POWER-UPS</span>
+          <h2 className="wsp-addons-title">Enhance Your Package</h2>
+          <p className="wsp-addons-sub">Select your active package below, then pick any add-ons — your total updates instantly.</p>
         </div>
 
+        {/* Package selector */}
+        <div className="wsp-package-selector">
+          {PACKAGES.map((p) => (
+            <button
+              key={p.id}
+              type="button"
+              className={`wsp-pkg-option${activePackageId === p.id ? " wsp-pkg-option--active" : ""}`}
+              onClick={() => setActivePackageId(p.id)}
+            >
+              <input type="radio" name="wsp-pkg" value={p.id} readOnly checked={activePackageId === p.id} />
+              {p.badge.icon}
+              {p.title}
+              <span className="wsp-pkg-price">{p.priceDisplay}</span>
+            </button>
+          ))}
+        </div>
+
+        {/* Add-on cards grid */}
         <div className="wsp-addons-grid">
           {ADD_ONS.map((addon) => {
             const qty = addonQtys[addon.id] ?? 0;
@@ -863,32 +878,33 @@ export const WebsitePricingCards = () => {
               <div
                 key={addon.id}
                 className={`wsp-addon-card${checked ? " wsp-addon-card--checked" : ""}`}
+                onClick={() => toggleAddon(addon.id)}
               >
-                <div className="wsp-addon-card-top" onClick={() => toggleAddon(addon.id)} role="checkbox" aria-checked={checked} tabIndex={0} onKeyDown={(e) => e.key === " " && toggleAddon(addon.id)}>
-                  <div className="wsp-addon-checkbox-wrap">
-                    <div className={`wsp-addon-checkbox${checked ? " wsp-addon-checkbox--on" : ""}`}>
-                      {checked && <span>✓</span>}
-                    </div>
-                  </div>
-                  <span className="wsp-addon-icon">{addon.icon}</span>
-                  <div className="wsp-addon-info">
-                    <div className="wsp-addon-label">{addon.label}</div>
-                    <div className="wsp-addon-note">{addon.note}</div>
-                  </div>
-                  <div className="wsp-addon-price">+{fmt(addon.price)}</div>
+                <div className={`wsp-addon-check${checked ? " wsp-addon-check--on" : ""}`}>
+                  {checked && <CheckSmIcon />}
                 </div>
-
-                {checked && addon.hasQty && (
-                  <div className="wsp-addon-qty-row">
-                    <span className="wsp-addon-qty-label">Quantity:</span>
-                    <div className="wsp-addon-qty-ctrl">
-                      <button type="button" className="wsp-qty-btn" onClick={() => setQty(addon.id, qty - 1)} aria-label="Decrease">−</button>
-                      <span className="wsp-qty-val">{qty}</span>
-                      <button type="button" className="wsp-qty-btn" onClick={() => setQty(addon.id, Math.min(qty + 1, addon.maxQty ?? 20))} aria-label="Increase">+</button>
+                <div className="wsp-addon-body">
+                  <div className="wsp-addon-name">{addon.icon} {addon.label}</div>
+                  <div className="wsp-addon-desc">{addon.note}</div>
+                  {checked && addon.hasQty && (
+                    <div className="wsp-addon-qty" onClick={(e) => e.stopPropagation()}>
+                      <button
+                        type="button"
+                        className="wsp-qty-btn"
+                        onClick={() => setQty(addon.id, qty - 1)}
+                        disabled={qty <= 1}
+                      >−</button>
+                      <span className="wsp-qty-value">{qty}</span>
+                      <button
+                        type="button"
+                        className="wsp-qty-btn"
+                        onClick={() => setQty(addon.id, Math.min(qty + 1, addon.maxQty ?? 20))}
+                        disabled={qty >= (addon.maxQty ?? 20)}
+                      >+</button>
                     </div>
-                    <span className="wsp-addon-qty-sub">= {fmt(addon.price * qty)}</span>
-                  </div>
-                )}
+                  )}
+                </div>
+                <div className="wsp-addon-price">+{fmt(addon.price)}{addon.hasQty && qty > 1 ? ` ×${qty}` : ""}</div>
               </div>
             );
           })}
@@ -896,33 +912,22 @@ export const WebsitePricingCards = () => {
 
         {/* Summary bar */}
         <div className="wsp-summary-bar">
-          <div className="wsp-summary-bar-left">
-            <div className="wsp-summary-bar-pkg">
-              <span className="wsp-summary-bar-pkg-icon">{activePkg.badge.icon}</span>
-              <div>
-                <div className="wsp-summary-bar-pkg-name">{activePkg.title}</div>
-                <div className="wsp-summary-bar-pkg-note">{activePkg.delivery}</div>
-              </div>
+          <div className="wsp-summary-text">
+            <div className="wsp-summary-label">YOUR ESTIMATE</div>
+            <div className="wsp-summary-breakdown">
+              {activePkg.title} {selectedAddonCount > 0 ? `+ ${selectedAddonCount} add-on${selectedAddonCount > 1 ? "s" : ""}` : ""}
             </div>
-            {selectedAddonCount > 0 && (
-              <div className="wsp-summary-bar-addons">
-                + {selectedAddonCount} add-on{selectedAddonCount > 1 ? "s" : ""} (+{fmt(addonTotal)})
-              </div>
-            )}
           </div>
-          <div className="wsp-summary-bar-right">
-            <div className="wsp-summary-bar-total-label">Total</div>
-            <div className="wsp-summary-bar-total">{fmt(grandTotal)}</div>
+          <div className="wsp-summary-total">
+            <div className="wsp-summary-price">{fmt(grandTotal)}</div>
           </div>
           <button
-            className="wsp-summary-bar-cta"
+            className="wsp-summary-btn"
             type="button"
-            onClick={() => {
-              setCheckoutPkg(activePkg);
-              setCheckoutOpen(true);
-            }}
+            onClick={() => { setCheckoutPkg(activePkg); setCheckoutOpen(true); }}
           >
-            Get Started →
+            Get Started
+            <ArrowRightIcon />
           </button>
         </div>
       </div>
@@ -942,6 +947,6 @@ export const WebsitePricingCards = () => {
         preselectedType={quoteType}
         onClose={() => setQuoteOpen(false)}
       />
-    </>
+    </div>
   );
 };
