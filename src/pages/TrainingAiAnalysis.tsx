@@ -83,6 +83,7 @@ export default function TrainingAiAnalysis() {
   const [showFirstVisit, setShowFirstVisit]     = useState(false);
   const [darkMode, setDarkMode]                 = useState(false);
   const [webSearch, setWebSearch]               = useState(false);
+  const [thinkMode, setThinkMode]               = useState<'Normal' | 'DeepScan'>('Normal');
   const [textInput, setTextInput]               = useState('');
   const [isRecording, setIsRecording]           = useState(false);
   const [passwordResult, setPasswordResult]     = useState<{ score: number; breaches: string; suggestions: string[] } | null>(null);
@@ -620,13 +621,57 @@ export default function TrainingAiAnalysis() {
           )}
 
           {/* ── Chatbox ─────────────────────────────────────────────────────────── */}
-          <div style={{
-            width: 'min(640px, 92vw)',
-            background: '#1c1c1e',
-            borderRadius: '22px',
-            padding: '18px 20px 14px',
-            boxShadow: '0 20px 50px rgba(0,0,0,0.18)',
-          }}>
+          <div className="aia-chatbox-wrapper" style={{ width: 'min(640px, 92vw)' }}>
+          <div className="aia-chatbox-inner" style={{ padding: '16px 20px 13px' }}>
+
+            {/* Mode selector pills */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '12px', flexWrap: 'wrap' }}>
+              {(['Normal', 'DeepScan'] as const).map(m => (
+                <button
+                  key={m}
+                  type="button"
+                  className="aia-mode-pill"
+                  onClick={() => setThinkMode(m)}
+                  style={{
+                    background: thinkMode === m
+                      ? m === 'DeepScan'
+                        ? 'linear-gradient(135deg,#f5c543 0%,#e0a312 100%)'
+                        : 'rgba(99,102,241,0.85)'
+                      : 'rgba(255,255,255,0.07)',
+                    color: thinkMode === m
+                      ? m === 'DeepScan' ? '#1a1200' : '#fff'
+                      : 'rgba(255,255,255,0.55)',
+                    boxShadow: thinkMode === m
+                      ? m === 'DeepScan'
+                        ? '0 2px 10px rgba(245,197,67,0.35)'
+                        : '0 2px 10px rgba(99,102,241,0.35)'
+                      : 'none',
+                  }}
+                >
+                  {m === 'DeepScan' ? '⚡ DeepScan' : '◎ Normal'}
+                </button>
+              ))}
+              {autoDetectedMode && (
+                <span style={{
+                  marginLeft: 'auto',
+                  padding: '3px 10px',
+                  borderRadius: '999px',
+                  fontSize: '10px',
+                  fontWeight: 600,
+                  background: 'rgba(77,163,255,0.12)',
+                  color: '#6da8ff',
+                  border: '1px solid rgba(77,163,255,0.2)',
+                  lineHeight: 1.6,
+                }}>
+                  {autoDetectedMode === 'email' ? '✉ Email' :
+                   autoDetectedMode === 'url' ? '🔗 URL' :
+                   autoDetectedMode === 'phone' ? '📞 Phone' :
+                   autoDetectedMode === 'text-message' ? '💬 SMS' :
+                   autoDetectedMode === 'social' ? '👤 Social' : null}
+                </span>
+              )}
+            </div>
+
             {/* Textarea — always visible */}
             <textarea
               ref={textareaRef}
@@ -650,7 +695,7 @@ export default function TrainingAiAnalysis() {
               style={{
                 width: '100%', background: 'transparent', border: 'none',
                 outline: 'none', color: '#fff', fontSize: '15px',
-                padding: '6px 2px 16px', resize: 'none',
+                padding: '6px 2px 14px', resize: 'none',
                 fontFamily: 'inherit', lineHeight: 1.5,
               }}
               className="placeholder:text-[#8a8a8f]"
@@ -771,12 +816,21 @@ export default function TrainingAiAnalysis() {
                   title={textInput.trim() ? 'Send' : isRecording ? 'Stop recording' : 'Voice input'}
                   style={{
                     width: '36px', height: '36px', borderRadius: '50%',
-                    background: isRecording ? '#ff3b30' : '#fff',
-                    color: isRecording ? '#fff' : '#1c1c1e',
-                    border: 'none', cursor: 'pointer',
+                    background: isRecording
+                      ? '#ff3b30'
+                      : textInput.trim()
+                      ? 'linear-gradient(135deg,#f5c543 0%,#e0a312 100%)'
+                      : 'rgba(255,255,255,0.12)',
+                    color: isRecording ? '#fff' : textInput.trim() ? '#1a1200' : 'rgba(255,255,255,0.8)',
+                    border: textInput.trim() || isRecording ? 'none' : '1px solid rgba(255,255,255,0.15)',
+                    cursor: 'pointer',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    boxShadow: isRecording ? '0 0 0 0 rgba(255,59,48,0.4)' : '0 2px 8px rgba(0,0,0,0.15)',
-                    transition: 'transform 0.15s, background 0.2s',
+                    boxShadow: isRecording
+                      ? '0 0 0 0 rgba(255,59,48,0.4)'
+                      : textInput.trim()
+                      ? '0 3px 12px rgba(245,197,67,0.45)'
+                      : '0 2px 6px rgba(0,0,0,0.2)',
+                    transition: 'transform 0.15s, background 0.2s, box-shadow 0.2s',
                   }}
                   className={`hover:scale-105${isRecording ? ' recording' : ''}`}
                 >
@@ -788,6 +842,7 @@ export default function TrainingAiAnalysis() {
                 </button>
               )}
             </div>
+          </div>
           </div>
 
           {/* File chip */}
