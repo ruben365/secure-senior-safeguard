@@ -55,7 +55,7 @@ PLATFORM KNOWLEDGE (current system):
 - The Book Request feature lets users suggest new topics they want covered.
 - Veterans receive a 10% discount on all purchases.
 - Payment methods include credit/debit cards, Apple Pay, Google Pay, and QR code payments.
-- Subscription plans: Starter ($39/mo), Family ($79/mo), Premium ($129/mo), and Custom ($229+/mo).
+- Subscription plans: Basic ($9.99/mo, 25 scans), Pro ($19.99/mo, 100 scans, most popular), Enterprise ($29.99/mo, unlimited scans).
 - AI Services Insurance tiers: Basic Care, Standard Care, and Premium Care.
 - Training programs include workshops, the 60-Second Pause Protocol, and family safety courses.
 - ScamShield provides AI-powered scam analysis and risk assessments.

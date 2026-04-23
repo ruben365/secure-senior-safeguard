@@ -145,22 +145,18 @@ const guides = [
     description: "Understanding our protection plans",
     steps: [
       {
-        title: "Starter Plan ($39/mo)",
-        description: "Basic protection with monthly alerts and scam analysis.",
+        title: "Basic Plan ($9.99/mo)",
+        description: "25 scans/month with AI threat detection and email reports.",
       },
       {
-        title: "Family Plan ($79/mo)",
+        title: "Pro Plan ($19.99/mo)",
         description:
-          "Protection for the whole family with vault storage and training.",
+          "100 scans/month with priority AI analysis, real-time alerts, and family sharing.",
       },
       {
-        title: "Premium Plan ($129/mo)",
+        title: "Enterprise Plan ($29.99/mo)",
         description:
-          "24/7 priority support, consultations, and advanced features.",
-      },
-      {
-        title: "Custom Plan ($229+/mo)",
-        description: "Tailored solutions for businesses and organizations.",
+          "Unlimited scans, unlimited users, and 24/7 dedicated support.",
       },
     ],
   },
@@ -212,7 +208,7 @@ export const PlatformGuide = ({ triggerButton }: PlatformGuideProps) => {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>{triggerButton || defaultTrigger}</DialogTrigger>
       {/* Compact: no scrollbar, teal icon accent, tight padding */}
-      <DialogContent className="sm:max-w-[420px] overflow-hidden rounded-2xl p-4 gap-0">
+      <DialogContent className="w-[calc(100vw-32px)] sm:w-full sm:max-w-[420px] max-h-[85svh] overflow-y-auto rounded-2xl p-4 gap-0">
         <DialogHeader className="space-y-0 pb-3">
           <DialogTitle className="flex items-center gap-2 text-base font-semibold leading-tight">
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-teal-500/15 to-indigo-500/15 border border-teal-500/30 flex items-center justify-center">
