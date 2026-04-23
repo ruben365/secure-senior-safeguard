@@ -147,9 +147,9 @@
   width: 100%;
   margin: 0 auto;
   padding: clamp(100px, 14vw, 140px)   /* top */
-           clamp(20px, 4vw, 64px)       /* right */
+           clamp(16px, 4vw, 64px)       /* right */
            2.5rem                        /* bottom — space before panel */
-           clamp(20px, 4vw, 64px);      /* left */
+           clamp(16px, 4vw, 64px);      /* left */
 }
 
 .hero-home__copy {
@@ -562,11 +562,19 @@
     letter-spacing: -0.025em;
   }
 
-  /* Primary CTA — compact pill on mobile */
+  /* Primary CTA — compact full-width pill on mobile */
   .hero-home__cta {
-    height: 34px;
+    height: 44px;
     padding: 0 1rem;
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
+    width: 100%;
+    justify-content: center;
+  }
+  .hero-home__ctas {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 320px;
   }
 
   /* Overlay: swap side-wall dark for gentle top-to-bottom

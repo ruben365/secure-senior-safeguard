@@ -441,8 +441,8 @@ function About() {
             Whether you're looking for personal training, <Link to="/ai" className="text-white/95 underline hover:text-white font-medium">AI business solutions</Link>, or
             want to support our mission, we'd love to connect.
           </p>
-          <div className="flex flex-wrap gap-3 justify-center">
-            <Button asChild size="lg">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center items-stretch sm:items-center">
+            <Button asChild size="lg" className="w-full sm:w-auto">
               <Link
                 to="/training"
                 onClick={() => trackButtonClick("Start Training", "About CTA")}
@@ -450,7 +450,7 @@ function About() {
                 Start Training
               </Link>
             </Button>
-            <Button asChild size="lg" variant="heroOutline">
+            <Button asChild size="lg" variant="heroOutline" className="w-full sm:w-auto">
               <Link
                 to="/business"
                 onClick={() => trackButtonClick("Partner With Us", "About CTA")}
