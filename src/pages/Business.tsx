@@ -341,12 +341,26 @@ const PricingCard = ({
   </AnimatedSection>;
 
 
+const TESTIMONIAL_AVATARS = [
+  "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=128&h=128&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=128&h=128&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=128&h=128&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=128&h=128&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=128&h=128&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1554151228-14d9def656e4?w=128&h=128&fit=crop&crop=face",
+];
+function getTestimonialAvatar(id: string) {
+  const hash = id.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0);
+  return TESTIMONIAL_AVATARS[hash % TESTIMONIAL_AVATARS.length];
+}
+
 interface BusinessTestimonial {
   id: string;
   name: string;
   location: string;
   story: string;
   rating: number;
+  primary_media_url?: string;
   testimonial_media?: Array<{
     media_type?: string;
     thumbnail_url?: string;
@@ -1913,7 +1927,7 @@ function Business() {
                       name={testimonial.name}
                       location={testimonial.location}
                       quote={testimonial.story.substring(0, 120) + "..."}
-                      image={videoMedia?.thumbnail_url || "/placeholder.svg"}
+                      image={testimonial.primary_media_url || videoMedia?.thumbnail_url || getTestimonialAvatar(testimonial.id)}
                       rating={testimonial.rating}
                       videoUrl={videoMedia?.file_url}
                       onVideoClick={() =>
