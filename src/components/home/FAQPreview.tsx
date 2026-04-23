@@ -29,7 +29,7 @@ const faqs = [
     question:
       "I want to protect my elderly parents who are not tech-savvy. Is this for them?",
     answer:
-      "Yes. That is exactly who we designed ScamShield for. Our Family plan covers up to 5 members, and we provide simple setup assistance. Many of our clients are seniors or their family members.",
+      "Yes. That is exactly who we designed ScamShield for. Our Pro plan includes family sharing for up to 3 users, and we provide simple setup assistance. Many of our clients are seniors or their family members.",
   },
 ];
 

@@ -59,7 +59,7 @@ const guides = [
       {
         title: "Choose your protection level",
         description:
-          "Select from Starter, Family, or Premium plans based on your needs.",
+          "Select from Basic, Pro, or Enterprise plans based on your needs.",
       },
     ],
   },

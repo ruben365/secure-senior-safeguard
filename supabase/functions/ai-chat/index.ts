@@ -75,7 +75,7 @@ const LAURA_SYSTEM_PROMPT = `You are Laura, the friendly AI assistant at InVisio
 
 ABOUT INVISION NETWORK:
 - Cybersecurity education and AI scam protection for families and small businesses
-- ScamShield AI: Starter $39/mo, Family $79/mo, Premium $129/mo
+- ScamShield AI: Basic $9.99/mo (25 scans), Pro $19.99/mo (100 scans, most popular), Enterprise $29.99/mo (unlimited scans)
 - Website Insurance: Essential $39/mo (10% off first month with code Na9r2ncn), Professional $79/mo, Enterprise $149/mo
 - Website Design: Landing Page $2,997, Business Website $5,000, E-Commerce $12,500
 - AI Receptionist: $9,500 one-time · AI Follow-Up Automation: $12,500 · Custom AI: $25,000+

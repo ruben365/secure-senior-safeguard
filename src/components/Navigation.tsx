@@ -135,7 +135,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
           transition: "background 250ms ease",
         }}
       >
-        <div className="max-w-[1200px] mx-auto w-full px-4 sm:px-6 lg:px-8">
+        <div className="container">
           <div className="flex items-center justify-between h-[56px] gap-4 lg:gap-8">
             {/* Logo — identical to hero */}
             <a
