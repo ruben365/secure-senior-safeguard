@@ -565,23 +565,26 @@ const WebsiteDesign = () => {
                     animation="fade-up"
                     delay={index * 100}
                   >
-                    <div className="relative pt-4 hover-lift">
+                    <div className="relative pt-4 hover-lift transition-transform duration-300 hover:scale-[1.02]">
                       {pkg.popular && (
-                        <Badge className="absolute top-0 left-1/2 -translate-x-1/2 z-20 bg-gradient-to-r from-primary to-accent text-white border-0 px-4 py-1.5 shadow-2xl shadow-primary/40">
-                          <Star className="w-3 h-3 mr-1.5 fill-current" />
-                          Most Popular
-                        </Badge>
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 whitespace-nowrap">
+                          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold shadow-[0_4px_12px_rgba(245,197,67,0.35)]" style={{ background: 'linear-gradient(135deg,#f5c543,#e0a312)', color: '#1a1200' }}>
+                            <Star className="w-3 h-3 fill-current" />
+                            Most Popular
+                          </span>
+                        </div>
                       )}
                       <Card
-                        className={`flex flex-col h-[460px] glass-heavy glass-cursor-overlay card-shine border-white/60 shadow-2xl transition-all duration-300 ${pkg.popular ? "ring-2 ring-primary/40 shadow-primary/20" : ""}`}
+                        className={`flex flex-col h-[460px] glass-heavy glass-cursor-overlay card-shine border-white/60 shadow-2xl transition-all duration-300 ${pkg.popular ? "ring-2 ring-[#f5c543]/30 shadow-[0_8px_32px_rgba(245,197,67,0.1)]" : ""}`}
                       >
                         <CardHeader className="text-center pt-6 pb-3">
                           <CardTitle className="text-lg">{pkg.name}</CardTitle>
                           <div
-                            className="text-2xl font-bold mt-2 bg-clip-text text-transparent"
+                            className="text-5xl font-black tracking-tight mt-3 mb-1 bg-clip-text text-transparent"
                             style={{
-                              background:
-                                "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 50%, hsl(var(--primary)) 100%)",
+                              background: pkg.popular
+                                ? "linear-gradient(135deg,#f5c543 0%,#e0a312 100%)"
+                                : "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 50%, hsl(var(--primary)) 100%)",
                               WebkitBackgroundClip: "text",
                               WebkitTextFillColor: "transparent",
                             }}

@@ -52,7 +52,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
       icon: AlertTriangle,
       label: "Report a Scam",
       description: "Encountered something suspicious?",
-      href: "/library",
+      href: "/training-ai-analysis",
       color: "from-rose-500 to-orange-500",
       urgent: true,
     },
@@ -89,7 +89,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
       icon: Mail,
       label: "Email Support",
       description: "We respond within 24 hours",
-      action: () => window.open(`mailto:${SITE.emails.hello}`, "_self"),
+      action: () => window.open(`mailto:${SITE.emails.support}`, "_self"),
       color: "from-amber-500 to-yellow-500",
     },
   ];
