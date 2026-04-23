@@ -396,12 +396,16 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                 );
               })}
 
-              <div className="pt-4 pb-2 flex flex-col items-center gap-2">
+              <div className="pt-4 pb-2 flex flex-col items-center gap-2.5 w-full px-4">
                 {isAdminOrStaff ? (
                   <Link
                     to="/admin"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center gap-1.5 text-sm font-semibold text-white hover:text-white/80 transition-colors duration-150"
+                    className="w-full flex items-center justify-center gap-1.5 py-2.5 rounded-full text-sm font-semibold"
+                    style={{
+                      background: "linear-gradient(135deg, #f5c543 0%, #d4a634 100%)",
+                      color: "#1a1200",
+                    }}
                   >
                     <LayoutDashboard className="h-3.5 w-3.5" />
                     Dashboard
@@ -410,7 +414,11 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <Link
                     to="/portal"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-sm font-semibold text-white hover:text-white/80 transition-colors duration-150"
+                    className="w-full flex items-center justify-center py-2.5 rounded-full text-sm font-semibold"
+                    style={{
+                      background: "linear-gradient(135deg, #f5c543 0%, #d4a634 100%)",
+                      color: "#1a1200",
+                    }}
                   >
                     Login
                   </Link>
@@ -418,7 +426,13 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
 
                 <a
                   href={SITE.phone.tel}
-                  className="flex items-center gap-1.5 text-sm text-white/80 font-medium transition-colors duration-150 hover:text-white"
+                  className="w-full flex items-center justify-center gap-1.5 py-2 rounded-full text-sm text-white font-medium transition-colors duration-150 hover:bg-[rgba(255,255,255,0.16)]"
+                  style={{
+                    background: "rgba(255,255,255,0.10)",
+                    backdropFilter: "blur(12px)",
+                    WebkitBackdropFilter: "blur(12px)",
+                    border: "1px solid rgba(255,255,255,0.15)",
+                  }}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <Phone className="h-3 w-3" />
