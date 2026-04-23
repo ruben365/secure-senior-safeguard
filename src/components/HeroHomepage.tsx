@@ -74,7 +74,7 @@ export const HeroHomepage = () => {
           alt="Corine — InVision Network co-founder"
           loading="eager"
           decoding="sync"
-          fetchpriority="high"
+          fetchPriority="high"
         />
         <div className="hero-home__top-veil" />
       </div>
