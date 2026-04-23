@@ -135,7 +135,7 @@ export default function BookDetail() {
                       height={427}
                       loading="eager"
                       decoding="async"
-                      fetchPriority="high"
+                      fetchpriority="high"
                       className="w-full h-full object-cover"
                       onError={(e) => {
                         (e.target as HTMLImageElement).style.display = "none";
