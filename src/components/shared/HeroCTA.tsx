@@ -29,37 +29,35 @@ export function HeroCTA({
     href.startsWith("tel:") || href.startsWith("mailto:") || href.startsWith("http");
 
   return (
-    <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-start items-center">
+    <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-start items-stretch sm:items-center">
       {isExternal(primaryHref) ? (
-        <Button size="heroPill" variant="heroPrimary" asChild>
+        <Button size="heroPill" variant="heroPrimary" asChild className="w-full sm:w-auto justify-center">
           <a href={primaryHref} aria-label={primaryAriaLabel}>
             {primaryText}
           </a>
         </Button>
       ) : (
-        <Button size="heroPill" variant="heroPrimary" asChild>
+        <Button size="heroPill" variant="heroPrimary" asChild className="w-full sm:w-auto justify-center">
           <Link to={primaryHref} aria-label={primaryAriaLabel}>
             {primaryText}
           </Link>
         </Button>
       )}
 
-      {/* Secondary CTA — hidden on mobile, one clear action per screen */}
-      <div className="hidden sm:contents">
-        {isExternal(secondaryHref) ? (
-          <Button size="heroPill" variant="heroOutline" asChild>
-            <a href={secondaryHref} aria-label={secondaryAriaLabel}>
-              {secondaryText}
-            </a>
-          </Button>
-        ) : (
-          <Button size="heroPill" variant="heroOutline" asChild>
-            <Link to={secondaryHref} aria-label={secondaryAriaLabel}>
-              {secondaryText}
-            </Link>
-          </Button>
-        )}
-      </div>
+      {/* Secondary CTA — stacks vertically on mobile */}
+      {isExternal(secondaryHref) ? (
+        <Button size="heroPill" variant="heroOutline" asChild className="w-full sm:w-auto justify-center">
+          <a href={secondaryHref} aria-label={secondaryAriaLabel}>
+            {secondaryText}
+          </a>
+        </Button>
+      ) : (
+        <Button size="heroPill" variant="heroOutline" asChild className="w-full sm:w-auto justify-center">
+          <Link to={secondaryHref} aria-label={secondaryAriaLabel}>
+            {secondaryText}
+          </Link>
+        </Button>
+      )}
 
       {aiScan && (
         <div className="hidden sm:contents">
