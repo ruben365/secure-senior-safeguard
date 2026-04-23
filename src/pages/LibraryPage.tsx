@@ -136,10 +136,10 @@ function LibraryHero({ isLoggedIn }: { isLoggedIn: boolean }) {
             />
           ) : (
             <HeroCTA
-              primaryText="Create Free Account"
-              primaryHref="/auth?mode=signup"
-              secondaryText="Sign In"
-              secondaryHref="/auth"
+              primaryText="Browse Library"
+              primaryHref="#catalog"
+              secondaryText="Create Free Account"
+              secondaryHref="/auth?mode=signup"
               aiScan
             />
           )}

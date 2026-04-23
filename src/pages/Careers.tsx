@@ -148,6 +148,7 @@ function Careers() {
             primaryHref="#positions"
             secondaryText="Learn About Us"
             secondaryHref="/about"
+            aiScan
           />
         </Hero>
         <HeroFloatingStats />
