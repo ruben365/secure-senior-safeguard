@@ -29,7 +29,7 @@ export function HeroCTA({
     href.startsWith("tel:") || href.startsWith("mailto:") || href.startsWith("http");
 
   return (
-    <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-start items-center">
+    <div className="flex flex-col sm:flex-row flex-wrap gap-2.5 sm:gap-3 justify-start items-start sm:items-center">
       {isExternal(primaryHref) ? (
         <Button size="heroPill" variant="heroPrimary" asChild>
           <a href={primaryHref} aria-label={primaryAriaLabel}>
@@ -44,34 +44,30 @@ export function HeroCTA({
         </Button>
       )}
 
-      {/* Secondary CTA — hidden on mobile, one clear action per screen */}
-      <div className="hidden sm:contents">
-        {isExternal(secondaryHref) ? (
-          <Button size="heroPill" variant="heroOutline" asChild>
-            <a href={secondaryHref} aria-label={secondaryAriaLabel}>
-              {secondaryText}
-            </a>
-          </Button>
-        ) : (
-          <Button size="heroPill" variant="heroOutline" asChild>
-            <Link to={secondaryHref} aria-label={secondaryAriaLabel}>
-              {secondaryText}
-            </Link>
-          </Button>
-        )}
-      </div>
+      {/* Secondary CTA — stacks below primary on mobile, inline on sm+ */}
+      {isExternal(secondaryHref) ? (
+        <Button size="heroPill" variant="heroOutline" asChild>
+          <a href={secondaryHref} aria-label={secondaryAriaLabel}>
+            {secondaryText}
+          </a>
+        </Button>
+      ) : (
+        <Button size="heroPill" variant="heroOutline" asChild>
+          <Link to={secondaryHref} aria-label={secondaryAriaLabel}>
+            {secondaryText}
+          </Link>
+        </Button>
+      )}
 
       {aiScan && (
-        <div className="hidden sm:contents">
-          <Link
-            to="/training/ai-analysis"
-            aria-label="Try our AI scanner"
-            className="inline-flex items-center gap-1.5 h-[28px] sm:h-[40px] px-3 sm:px-4 rounded-full text-[10px] sm:text-[12px] font-semibold text-white/75 border border-white/20 bg-white/[0.07] backdrop-blur-sm hover:bg-white/[0.13] hover:text-white transition-all"
-          >
-            <Scan className="w-3 h-3 flex-shrink-0" />
-            AI Scan
-          </Link>
-        </div>
+        <Link
+          to="/training/ai-analysis"
+          aria-label="Try our AI scanner"
+          className="inline-flex items-center gap-1.5 h-[28px] sm:h-[40px] px-3 sm:px-4 rounded-full text-[10px] sm:text-[12px] font-semibold text-white/75 border border-white/20 bg-white/[0.07] backdrop-blur-sm hover:bg-white/[0.13] hover:text-white transition-all"
+        >
+          <Scan className="w-3 h-3 flex-shrink-0" />
+          AI Scan
+        </Link>
       )}
     </div>
   );
