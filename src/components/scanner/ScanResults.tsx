@@ -291,7 +291,7 @@ export const ScanResults = ({
               Closing this tab will permanently delete your results.
             </p>
           </div>
-          <Button variant="ghost" onClick={onRestart} className="text-primary">
+          <Button variant="ghost" onClick={onRestart} className="text-white">
             Run another scan
           </Button>
         </div>
