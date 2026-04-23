@@ -780,3 +780,11 @@ section[data-reveal]:nth-child(odd) {
     transition: none !important;
   }
 }
+
+/* ── About-modal scrollbar suppression ──────────────────────── */
+.aia-about-modal {
+  scrollbar-width: none;
+}
+.aia-about-modal::-webkit-scrollbar {
+  display: none;
+}

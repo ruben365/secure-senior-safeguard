@@ -889,114 +889,151 @@ export default function TrainingAiAnalysis() {
       </Dialog>
 
       {/* ── About modal ─────────────────────────────────────────────────────── */}
-      <Dialog open={aboutOpen} onOpenChange={setAboutOpen}>
-        <DialogContent style={{ background: '#1c1c1e', borderRadius: '18px', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', maxWidth: '480px', maxHeight: '85svh', overflowY: 'auto', boxShadow: '0 32px 64px rgba(0,0,0,0.7)', padding: '0' }}>
-          {/* Header */}
-          <div style={{ padding: '22px 24px 16px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-            <DialogTitle style={{ color: '#fff', fontSize: '16px', fontWeight: 700, marginBottom: '4px' }}>InVision AI Security Scanner</DialogTitle>
-            <DialogDescription style={{ color: '#8a8a8f', fontSize: '12px' }}>Powered by Claude AI (Anthropic)</DialogDescription>
-          </div>
-
-          {/* Body */}
-          <div style={{ padding: '20px 24px 24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-
-            {/* How it works */}
-            <section>
-              <p style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '10px' }}>How it works</p>
-              {[
-                'Paste any text, email, URL, phone number, or message into the input bar',
-                'Upload files (images, documents, audio) using the attach button',
-                'Our AI automatically detects the content type and runs the right scan',
-                'Results appear above the input bar in real-time',
-              ].map((s, i) => (
-                <div key={i} style={{ display: 'flex', gap: '10px', marginBottom: '7px' }}>
-                  <span style={{ width: '18px', height: '18px', borderRadius: '50%', background: 'rgba(255,122,69,0.2)', color: '#ff7a45', fontSize: '10px', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '1px' }}>{i + 1}</span>
-                  <p style={{ fontSize: '13px', color: '#c9c9cd', lineHeight: 1.5 }}>{s}</p>
-                </div>
-              ))}
-            </section>
-
-            {/* What we scan */}
-            <section>
-              <p style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '10px' }}>What we scan</p>
-              {[
-                ['Emails', 'Phishing detection, fake sender analysis, malicious link detection'],
-                ['URLs', 'Safe browsing check, redirect chain analysis, SSL verification'],
-                ['Phone numbers', 'Scam number lookup, known fraud database check'],
-                ['Images', 'AI-generated/deepfake detection, manipulation analysis'],
-                ['Voice / Audio', 'Voice clone detection, authenticity verification'],
-                ['Text messages', 'SMS/WhatsApp scam pattern detection'],
-                ['Documents', 'Malicious macro detection, hidden link analysis'],
-                ['QR Codes', 'Decode and verify destination before scanning'],
-                ['Social profiles', 'Fake account detection, catfish identification'],
-                ['Passwords', 'Strength analysis, breach exposure check'],
-              ].map(([label, desc]) => (
-                <div key={label} style={{ display: 'flex', gap: '10px', marginBottom: '8px', alignItems: 'flex-start' }}>
-                  <span style={{ fontSize: '12px', color: '#ff7a45', fontWeight: 600, minWidth: '110px', flexShrink: 0 }}>{label}</span>
-                  <span style={{ fontSize: '12px', color: '#8a8a8f', lineHeight: 1.45 }}>{desc}</span>
-                </div>
-              ))}
-            </section>
-
-            {/* Pricing */}
-            <section>
-              <p style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '10px' }}>Pricing</p>
-              {[
-                ['Subscribers', 'Unlimited scans included with any ScamShield plan'],
-                ['Pay-per-scan', '$1.00 per file upload'],
-                ['Text / URL / Phone', 'Included free for logged-in users'],
-              ].map(([label, desc]) => (
-                <div key={label} style={{ display: 'flex', gap: '10px', marginBottom: '7px', alignItems: 'flex-start' }}>
-                  <span style={{ fontSize: '12px', color: '#c9c9cd', fontWeight: 600, minWidth: '110px', flexShrink: 0 }}>{label}</span>
-                  <span style={{ fontSize: '12px', color: '#8a8a8f' }}>{desc}</span>
-                </div>
-              ))}
-            </section>
-
-            {/* Privacy */}
-            <section>
-              <p style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '10px' }}>Privacy & Security</p>
-              {[
-                'All uploaded files are auto-deleted after 10 minutes',
-                'Chat history is not saved between sessions',
-                'Analysis runs through encrypted channels',
-                'Your data is never shared or stored permanently',
-                'Powered by Claude AI (Anthropic)',
-              ].map((s, i) => (
-                <div key={i} style={{ display: 'flex', gap: '8px', marginBottom: '6px', alignItems: 'flex-start' }}>
-                  <span style={{ color: '#30d158', flexShrink: 0, marginTop: '2px', fontSize: '11px' }}>✓</span>
-                  <p style={{ fontSize: '12px', color: '#c9c9cd', lineHeight: 1.45 }}>{s}</p>
-                </div>
-              ))}
-            </section>
-
-            {/* Keyboard shortcuts */}
-            <section>
-              <p style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '10px' }}>Keyboard Shortcuts</p>
-              {[
-                ['Ctrl+K', 'Focus the input bar'],
-                ['Enter', 'Send / analyze'],
-                ['Escape', 'Close menus'],
-              ].map(([key, desc]) => (
-                <div key={key} style={{ display: 'flex', gap: '10px', marginBottom: '6px', alignItems: 'center' }}>
-                  <kbd style={{ fontSize: '11px', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '5px', padding: '2px 7px', color: '#e5e5e7', fontFamily: 'inherit', flexShrink: 0 }}>{key}</kbd>
-                  <span style={{ fontSize: '12px', color: '#8a8a8f' }}>{desc}</span>
-                </div>
-              ))}
-            </section>
-
-            {/* Need help */}
-            <section style={{ paddingTop: '4px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-              <p style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '10px' }}>Need Help?</p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                <a href={`tel:${SITE.phone.e164}`} style={{ fontSize: '13px', color: '#ff7a45', textDecoration: 'none' }}>📞 {SITE.phone.display}</a>
-                <a href={`https://${SITE.name.toLowerCase().replace(/\s+/g, '')}.org`} style={{ fontSize: '13px', color: '#4da3ff', textDecoration: 'none' }}>🌐 invisionnetwork.org</a>
-                <a href={`mailto:${SITE.emails.support}`} style={{ fontSize: '13px', color: '#c9c9cd', textDecoration: 'none' }}>✉️ {SITE.emails.support}</a>
+      {(() => {
+        const mTheme = darkMode ? {
+          bg:        '#1c1c1e',
+          border:    'rgba(255,255,255,0.1)',
+          shadow:    '0 32px 64px rgba(0,0,0,0.7)',
+          divider:   'rgba(255,255,255,0.08)',
+          title:     '#fff',
+          desc:      '#8a8a8f',
+          label:     'rgba(255,255,255,0.35)',
+          body:      '#c9c9cd',
+          muted:     '#8a8a8f',
+          accent:    '#ff7a45',
+          accentBg:  'rgba(255,122,69,0.2)',
+          link:      '#4da3ff',
+          kbdBg:     'rgba(255,255,255,0.1)',
+          kbdBorder: 'rgba(255,255,255,0.15)',
+          kbdText:   '#e5e5e7',
+        } : {
+          bg:        '#ffffff',
+          border:    'rgba(0,0,0,0.1)',
+          shadow:    '0 32px 64px rgba(0,0,0,0.18)',
+          divider:   'rgba(0,0,0,0.07)',
+          title:     '#111',
+          desc:      '#6b7280',
+          label:     'rgba(0,0,0,0.35)',
+          body:      '#374151',
+          muted:     '#6b7280',
+          accent:    '#e05a20',
+          accentBg:  'rgba(224,90,32,0.12)',
+          link:      '#2563eb',
+          kbdBg:     'rgba(0,0,0,0.06)',
+          kbdBorder: 'rgba(0,0,0,0.15)',
+          kbdText:   '#374151',
+        };
+        return (
+          <Dialog open={aboutOpen} onOpenChange={setAboutOpen}>
+            <DialogContent className="aia-about-modal" style={{ background: mTheme.bg, borderRadius: '18px', border: `1px solid ${mTheme.border}`, color: mTheme.title, maxWidth: '480px', maxHeight: '85svh', overflowY: 'auto', boxShadow: mTheme.shadow, padding: '0' }}>
+              {/* Header */}
+              <div style={{ padding: '22px 24px 16px', borderBottom: `1px solid ${mTheme.divider}` }}>
+                <DialogTitle style={{ color: mTheme.title, fontSize: '16px', fontWeight: 700, marginBottom: '4px' }}>InVision AI Security Scanner</DialogTitle>
+                <DialogDescription style={{ color: mTheme.desc, fontSize: '12px' }}>Powered by Claude AI (Anthropic)</DialogDescription>
               </div>
-            </section>
-          </div>
-        </DialogContent>
-      </Dialog>
+
+              {/* Body */}
+              <div style={{ padding: '20px 24px 24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+
+                {/* How it works */}
+                <section>
+                  <p style={{ fontSize: '11px', fontWeight: 700, color: mTheme.label, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '10px' }}>How it works</p>
+                  {[
+                    'Paste any text, email, URL, phone number, or message into the input bar',
+                    'Upload files (images, documents, audio) using the attach button',
+                    'Our AI automatically detects the content type and runs the right scan',
+                    'Results appear above the input bar in real-time',
+                  ].map((s, i) => (
+                    <div key={i} style={{ display: 'flex', gap: '10px', marginBottom: '7px' }}>
+                      <span style={{ width: '18px', height: '18px', borderRadius: '50%', background: mTheme.accentBg, color: mTheme.accent, fontSize: '10px', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '1px' }}>{i + 1}</span>
+                      <p style={{ fontSize: '13px', color: mTheme.body, lineHeight: 1.5 }}>{s}</p>
+                    </div>
+                  ))}
+                </section>
+
+                {/* What we scan */}
+                <section>
+                  <p style={{ fontSize: '11px', fontWeight: 700, color: mTheme.label, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '10px' }}>What we scan</p>
+                  {[
+                    ['Emails', 'Phishing detection, fake sender analysis, malicious link detection'],
+                    ['URLs', 'Safe browsing check, redirect chain analysis, SSL verification'],
+                    ['Phone numbers', 'Scam number lookup, known fraud database check'],
+                    ['Images', 'AI-generated/deepfake detection, manipulation analysis'],
+                    ['Voice / Audio', 'Voice clone detection, authenticity verification'],
+                    ['Text messages', 'SMS/WhatsApp scam pattern detection'],
+                    ['Documents', 'Malicious macro detection, hidden link analysis'],
+                    ['QR Codes', 'Decode and verify destination before scanning'],
+                    ['Social profiles', 'Fake account detection, catfish identification'],
+                    ['Passwords', 'Strength analysis, breach exposure check'],
+                  ].map(([label, desc]) => (
+                    <div key={label} style={{ display: 'flex', gap: '10px', marginBottom: '8px', alignItems: 'flex-start' }}>
+                      <span style={{ fontSize: '12px', color: mTheme.accent, fontWeight: 600, minWidth: '110px', flexShrink: 0 }}>{label}</span>
+                      <span style={{ fontSize: '12px', color: mTheme.muted, lineHeight: 1.45 }}>{desc}</span>
+                    </div>
+                  ))}
+                </section>
+
+                {/* Pricing */}
+                <section>
+                  <p style={{ fontSize: '11px', fontWeight: 700, color: mTheme.label, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '10px' }}>Pricing</p>
+                  {[
+                    ['Subscribers', 'Unlimited scans included with any ScamShield plan'],
+                    ['Pay-per-scan', '$1.00 per file upload'],
+                    ['Text / URL / Phone', 'Included free for logged-in users'],
+                  ].map(([label, desc]) => (
+                    <div key={label} style={{ display: 'flex', gap: '10px', marginBottom: '7px', alignItems: 'flex-start' }}>
+                      <span style={{ fontSize: '12px', color: mTheme.body, fontWeight: 600, minWidth: '110px', flexShrink: 0 }}>{label}</span>
+                      <span style={{ fontSize: '12px', color: mTheme.muted }}>{desc}</span>
+                    </div>
+                  ))}
+                </section>
+
+                {/* Privacy */}
+                <section>
+                  <p style={{ fontSize: '11px', fontWeight: 700, color: mTheme.label, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '10px' }}>Privacy & Security</p>
+                  {[
+                    'All uploaded files are auto-deleted after 10 minutes',
+                    'Chat history is not saved between sessions',
+                    'Analysis runs through encrypted channels',
+                    'Your data is never shared or stored permanently',
+                    'Powered by Claude AI (Anthropic)',
+                  ].map((s, i) => (
+                    <div key={i} style={{ display: 'flex', gap: '8px', marginBottom: '6px', alignItems: 'flex-start' }}>
+                      <span style={{ color: '#30d158', flexShrink: 0, marginTop: '2px', fontSize: '11px' }}>✓</span>
+                      <p style={{ fontSize: '12px', color: mTheme.body, lineHeight: 1.45 }}>{s}</p>
+                    </div>
+                  ))}
+                </section>
+
+                {/* Keyboard shortcuts */}
+                <section>
+                  <p style={{ fontSize: '11px', fontWeight: 700, color: mTheme.label, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '10px' }}>Keyboard Shortcuts</p>
+                  {[
+                    ['Ctrl+K', 'Focus the input bar'],
+                    ['Enter', 'Send / analyze'],
+                    ['Escape', 'Close menus'],
+                  ].map(([key, desc]) => (
+                    <div key={key} style={{ display: 'flex', gap: '10px', marginBottom: '6px', alignItems: 'center' }}>
+                      <kbd style={{ fontSize: '11px', background: mTheme.kbdBg, border: `1px solid ${mTheme.kbdBorder}`, borderRadius: '5px', padding: '2px 7px', color: mTheme.kbdText, fontFamily: 'inherit', flexShrink: 0 }}>{key}</kbd>
+                      <span style={{ fontSize: '12px', color: mTheme.muted }}>{desc}</span>
+                    </div>
+                  ))}
+                </section>
+
+                {/* Need help */}
+                <section style={{ paddingTop: '4px', borderTop: `1px solid ${mTheme.divider}` }}>
+                  <p style={{ fontSize: '11px', fontWeight: 700, color: mTheme.label, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '10px' }}>Need Help?</p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <a href={`tel:${SITE.phone.e164}`} style={{ fontSize: '13px', color: mTheme.accent, textDecoration: 'none' }}>📞 {SITE.phone.display}</a>
+                    <a href={`https://${SITE.name.toLowerCase().replace(/\s+/g, '')}.org`} style={{ fontSize: '13px', color: mTheme.link, textDecoration: 'none' }}>🌐 invisionnetwork.org</a>
+                    <a href={`mailto:${SITE.emails.support}`} style={{ fontSize: '13px', color: mTheme.body, textDecoration: 'none' }}>✉️ {SITE.emails.support}</a>
+                  </div>
+                </section>
+              </div>
+            </DialogContent>
+          </Dialog>
+        );
+      })()}
 
       {/* ── First-visit notification bubble ──────────────────────────────────── */}
       {showFirstVisit && (
