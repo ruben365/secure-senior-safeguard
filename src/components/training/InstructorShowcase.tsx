@@ -179,7 +179,7 @@ export const InstructorShowcase = () => {
         layered header + body. No full-screen container.
       */}
       <Dialog open={!!selectedInstructor} onOpenChange={() => setSelectedInstructor(null)}>
-        <DialogContent className="sm:max-w-[460px] p-0 overflow-hidden bg-card border border-border/60 gap-0">
+        <DialogContent className="w-[calc(100vw-32px)] sm:w-full sm:max-w-[460px] max-h-[85svh] overflow-y-auto p-0 bg-card border border-border/60 gap-0">
           <DialogTitle className="sr-only">
             {selectedInstructor?.name} - Instructor Profile
           </DialogTitle>

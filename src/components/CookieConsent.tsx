@@ -190,7 +190,7 @@ export const CookieConsent = forwardRef<HTMLDivElement>(function CookieConsent(_
       </div>
 
       <Dialog open={showSettings} onOpenChange={setShowSettings}>
-        <DialogContent className="sm:max-w-md rounded-2xl glass-modal">
+        <DialogContent className="w-[calc(100vw-32px)] sm:w-full sm:max-w-md max-h-[85svh] overflow-y-auto rounded-2xl glass-modal">
           <DialogHeader>
             <DialogTitle>Cookie Preferences</DialogTitle>
             <DialogDescription>

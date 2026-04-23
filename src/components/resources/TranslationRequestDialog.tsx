@@ -96,7 +96,7 @@ export const TranslationRequestDialog = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md p-0 overflow-hidden">
+      <DialogContent className="w-[calc(100vw-32px)] sm:w-full max-w-md max-h-[85svh] overflow-y-auto p-0">
         <div className="h-1.5 bg-gradient-to-r from-primary via-accent to-primary" />
         <div className="p-6">
           <DialogTitle className="text-xl font-black flex items-center gap-2 mb-1">

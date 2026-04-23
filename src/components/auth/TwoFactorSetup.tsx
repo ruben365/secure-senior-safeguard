@@ -111,7 +111,7 @@ export function TwoFactorSetup({ open, onClose, onSuccess }: TwoFactorSetupProps
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[420px] rounded-2xl p-5 gap-0">
+      <DialogContent className="w-[calc(100vw-32px)] sm:w-full sm:max-w-[420px] max-h-[85svh] overflow-y-auto rounded-2xl p-5 gap-0">
         <DialogHeader className="space-y-0 pb-4">
           <DialogTitle className="flex items-center gap-2 text-base font-semibold">
             <Shield className="w-4 h-4 text-orange-500" />
