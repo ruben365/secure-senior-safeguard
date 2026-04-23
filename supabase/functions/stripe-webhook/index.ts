@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import Stripe from "https://esm.sh/stripe@18.5.0";
 
 // TODO: Set STRIPE_WEBHOOK_SECRET in Supabase project secrets
 // TODO: Set STRIPE_SECRET_KEY in Supabase project secrets
@@ -36,12 +37,8 @@ serve(async (req: Request) => {
 
     const body = await req.text();
 
-    // Verify webhook signature using Stripe's library
-    // NOTE: Deno-compatible Stripe signature verification
-    const stripe = (await import("https://esm.sh/stripe@14?target=deno")).default;
-    const stripeClient = stripe(Deno.env.get("STRIPE_SECRET_KEY") ?? "", {
-      apiVersion: "2024-04-10",
-      httpClient: stripe.createFetchHttpClient(),
+    const stripeClient = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") ?? "", {
+      apiVersion: "2024-11-20.acacia",
     });
 
     let event;
@@ -163,6 +160,7 @@ serve(async (req: Request) => {
           status: subscription.status,
           plan_tier: planTier,
           monthly_scan_limit: monthlyScanLimit,
+          amount: unitAmount,
           updated_at: new Date().toISOString(),
         };
         if (userId) upsertPayload.user_id = userId;
@@ -176,6 +174,19 @@ serve(async (req: Request) => {
           console.error("Error upserting subscription:", upsertError.message);
         } else {
           console.log("Subscription upserted", { subscriptionId: subscription.id, userId: userId ?? "unknown" });
+          if (event.type === "customer.subscription.created" && customerEmail) {
+            try {
+              await supabase.functions.invoke("send-subscription-email", {
+                body: {
+                  email: customerEmail,
+                  type: "subscription_created",
+                  data: { planTier, serviceName: "ScamShield", amount: unitAmount },
+                },
+              });
+            } catch (emailErr) {
+              console.error("Failed to send subscription welcome email:", emailErr);
+            }
+          }
         }
         break;
       }
