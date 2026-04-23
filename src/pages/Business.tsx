@@ -927,38 +927,7 @@ function Business() {
               subtitle="Your website works around the clock. We build fast, secure sites that turn visitors into paying customers." />
             
 
-            <WebsitePricingCards
-              onStarterClick={() => {
-                trackButtonClick("Get Started - Landing Page", "Business Website");
-                setSelectedInquiry({
-                  name: "Landing Page",
-                  price: 1500,
-                  tier: "Quick Start",
-                  description: "Single-page website for campaigns or business presence. Delivered in 2 weeks."
-                });
-                setInquiryDialogOpen(true);
-              }}
-              onBusinessClick={() => {
-                trackButtonClick("Get Started - Business Website", "Business Website");
-                setSelectedInquiry({
-                  name: "Business Website",
-                  price: 3500,
-                  tier: "Most Popular",
-                  description: "Full business website with SEO, blog, and analytics. Delivered in 3 to 4 weeks."
-                });
-                setInquiryDialogOpen(true);
-              }}
-              onEliteClick={() => {
-                trackButtonClick("Get Started - E-Commerce", "Business Website");
-                setSelectedInquiry({
-                  name: "E-Commerce Website",
-                  price: 7500,
-                  tier: "Premium",
-                  description: "Full e-commerce website with payment processing. Delivered in 4 to 6 weeks."
-                });
-                setInquiryDialogOpen(true);
-              }}
-            />
+            <WebsitePricingCards />
 
             {/* Website Add-Ons */}
             <AnimatedSection animation="fade-up" delay={100} className="max-w-5xl mx-auto">
