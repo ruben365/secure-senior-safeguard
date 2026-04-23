@@ -305,6 +305,31 @@ function About() {
         </div>
       </section>
 
+      {/* Community in action */}
+      <section className="py-4 bg-background">
+        <div className="container mx-auto">
+          <SectionImage
+            src={communityWorkshopReal}
+            alt="InVision Network team running a community cybersecurity workshop"
+            variant="split-right"
+            caption="Real workshops. Real people. Real results."
+          >
+            <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">
+              Learning that sticks
+            </h3>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+              Our hands-on workshops bring cybersecurity out of the boardroom and into
+              the community — senior centers, churches, schools, and libraries.
+              No jargon, just practical skills.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Each session is followed up with personal support so attendees feel
+              confident long after the workshop ends.
+            </p>
+          </SectionImage>
+        </div>
+      </section>
+
       <SectionDivider variant="curve" color="muted" flip />
 
       {/* Values */}
@@ -364,6 +389,18 @@ function About() {
       </section>
 
       <SectionDivider variant="wave" color="background" flip />
+
+      {/* Team collaboration photo */}
+      <section className="py-4 bg-background">
+        <div className="container mx-auto">
+          <SectionImage
+            src={businessCollaboration}
+            alt="InVision Network security analysts collaborating on client protection strategies"
+            variant="wide"
+            caption="Our analysts work as a unified team so every client gets the full depth of our expertise."
+          />
+        </div>
+      </section>
 
       {/* Who We Help */}
       <section className="py-7 md:py-10 bg-background">
