@@ -77,7 +77,7 @@ export function ProductReviews({ courseId, productId }: ProductReviewsProps) {
   });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <span className="text-3xl font-bold">{avgRating}</span>
@@ -95,7 +95,7 @@ export function ProductReviews({ courseId, productId }: ProductReviewsProps) {
 
       {showForm && (
         <Card>
-          <CardContent className="pt-6 space-y-4">
+          <CardContent className="pt-4 space-y-4">
             <div>
               <p className="text-sm font-medium mb-2">Your Rating</p>
               <StarRating rating={newReview.rating} onRate={(r) => setNewReview({ ...newReview, rating: r })} interactive />

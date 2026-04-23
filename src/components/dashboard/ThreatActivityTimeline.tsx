@@ -143,7 +143,7 @@ export function ThreatActivityTimeline({
           <div className="space-y-3">
             {[1, 2, 3].map((i) => (
               <div key={i} className="flex items-start gap-3 p-3 animate-pulse">
-                <div className="w-9 h-9 rounded-lg bg-muted" />
+                <div className="w-6 h-6 rounded-lg bg-muted" />
                 <div className="flex-1 space-y-2">
                   <div className="h-4 bg-muted rounded w-3/4" />
                   <div className="h-3 bg-muted rounded w-1/2" />
@@ -152,9 +152,9 @@ export function ThreatActivityTimeline({
             ))}
           </div>
         ) : threats.length === 0 ? (
-          <div className="text-center py-8">
-            <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-green-500/10 flex items-center justify-center">
-              <ShieldCheck className="w-6 h-6 text-green-600" />
+          <div className="text-center py-5">
+            <div className="w-7 h-7 mx-auto mb-3 rounded-full bg-green-500/10 flex items-center justify-center">
+              <ShieldCheck className="w-4 h-4 text-green-600" />
             </div>
             <p className="font-medium text-sm">No Threats Detected</p>
             <p className="text-xs text-muted-foreground mt-1">
@@ -171,7 +171,7 @@ export function ThreatActivityTimeline({
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 <div
-                  className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 ${getSeverityColor(threat.severity)}`}
+                  className={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 ${getSeverityColor(threat.severity)}`}
                 >
                   <Icon className="w-4 h-4" />
                 </div>

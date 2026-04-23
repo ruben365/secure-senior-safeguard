@@ -81,7 +81,7 @@ export const CartAbandonmentNotification = () => {
         initial={{ opacity: 0, y: 50, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 50, scale: 0.95 }}
-        className="fixed bottom-20 right-4 z-40 max-w-sm"
+        className="fixed bottom-12 right-4 z-40 max-w-sm"
       >
         <Card
           className="p-4 rounded-[14px] border-[rgba(0,0,0,0.08)] shadow-[0_4px_24px_rgba(0,0,0,0.08)]"
@@ -97,9 +97,9 @@ export const CartAbandonmentNotification = () => {
           </button>
 
           {!showFeedback ? (
-            <div className="pr-6">
+            <div className="pr-4">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
                   <ShoppingCart className="w-5 h-5 text-primary" />
                 </div>
                 <div>
@@ -136,7 +136,7 @@ export const CartAbandonmentNotification = () => {
               </div>
             </div>
           ) : (
-            <div className="pr-6">
+            <div className="pr-4">
               <p className="font-semibold text-sm mb-2">How can we improve?</p>
               <Textarea
                 value={feedback}

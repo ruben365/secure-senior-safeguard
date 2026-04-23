@@ -44,44 +44,44 @@ export default function UserAnalytics() {
   };
 
   return (
-    <div className="container mx-auto max-w-4xl py-8 px-4">
-      <div className="mb-8">
+    <div className="container mx-auto max-w-4xl py-5 px-4">
+      <div className="mb-5">
         <h1 className="text-2xl font-bold">My Dashboard</h1>
         <p className="text-muted-foreground">Your personal activity and security overview</p>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-5">
         <Card>
-          <CardContent className="pt-6 text-center">
-            <Shield className={`h-8 w-8 mx-auto mb-2 ${getScoreColor(stats?.securityScore || 0)}`} />
+          <CardContent className="pt-4 text-center">
+            <Shield className={`h-5 w-5 mx-auto mb-2 ${getScoreColor(stats?.securityScore || 0)}`} />
             <p className={`text-3xl font-bold ${getScoreColor(stats?.securityScore || 0)}`}>{stats?.securityScore || 0}</p>
             <p className="text-xs text-muted-foreground">Security Score</p>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="pt-6 text-center">
-            <Activity className="h-8 w-8 mx-auto mb-2 text-primary" />
+          <CardContent className="pt-4 text-center">
+            <Activity className="h-5 w-5 mx-auto mb-2 text-primary" />
             <p className="text-3xl font-bold">{stats?.scamChecks || 0}</p>
             <p className="text-xs text-muted-foreground">Scam Checks</p>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="pt-6 text-center">
-            <BookOpen className="h-8 w-8 mx-auto mb-2 text-primary" />
+          <CardContent className="pt-4 text-center">
+            <BookOpen className="h-5 w-5 mx-auto mb-2 text-primary" />
             <p className="text-3xl font-bold">{stats?.completedCourses || 0}/{stats?.totalCourses || 0}</p>
             <p className="text-xs text-muted-foreground">Courses Done</p>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="pt-6 text-center">
-            <TrendingUp className="h-8 w-8 mx-auto mb-2 text-primary" />
+          <CardContent className="pt-4 text-center">
+            <TrendingUp className="h-5 w-5 mx-auto mb-2 text-primary" />
             <p className="text-3xl font-bold">{stats?.avgProgress || 0}%</p>
             <p className="text-xs text-muted-foreground">Avg Progress</p>
           </CardContent>
         </Card>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid md:grid-cols-2 gap-4">
         <Card>
           <CardHeader><CardTitle className="text-lg">Security Tips</CardTitle></CardHeader>
           <CardContent>

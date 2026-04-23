@@ -28,8 +28,8 @@ export function NeonEventsCard({ events }: { events: Event[] }) {
       </h2>
 
       {events.length === 0 ? (
-        <div className="text-center py-10">
-          <Calendar className="w-8 h-8 text-[#374151] mx-auto mb-2" />
+        <div className="text-center py-6">
+          <Calendar className="w-5 h-5 text-[#374151] mx-auto mb-2" />
           <p className="text-[#6B7280] text-sm">No upcoming events</p>
         </div>
       ) : (
@@ -38,7 +38,7 @@ export function NeonEventsCard({ events }: { events: Event[] }) {
             const { date, time } = fmt(event.start_time);
             return (
               <div key={event.id} className="flex items-start gap-3 p-3 bg-[#111827] rounded-lg border border-[#374151] hover:border-[#4B5563] transition-colors">
-                <div className="flex-shrink-0 w-12 h-12 bg-purple-500/10 rounded-lg flex flex-col items-center justify-center">
+                <div className="flex-shrink-0 w-7 h-7 bg-purple-500/10 rounded-lg flex flex-col items-center justify-center">
                   <span className="text-[10px] text-purple-400 uppercase">{date.split(" ")[0]}</span>
                   <span className="text-base font-semibold text-[#F9FAFB]">{date.split(" ")[1]}</span>
                 </div>

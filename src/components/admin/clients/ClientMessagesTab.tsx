@@ -123,7 +123,7 @@ export function ClientMessagesTab({ clientId }: ClientMessagesTabProps) {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center py-12">
+      <div className="flex items-center justify-center py-7">
         <div className="animate-pulse text-muted-foreground">
           Loading messages...
         </div>
@@ -132,7 +132,7 @@ export function ClientMessagesTab({ clientId }: ClientMessagesTabProps) {
   }
 
   return (
-    <div className="grid gap-6">
+    <div className="grid gap-4">
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
@@ -163,7 +163,7 @@ export function ClientMessagesTab({ clientId }: ClientMessagesTabProps) {
             <div className="h-[400px] overflow-y-auto space-y-4 p-4 bg-muted/20 rounded-lg">
               {filteredMessages.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-muted-foreground">
-                  <MessageSquare className="w-12 h-12 mb-4 opacity-30" />
+                  <MessageSquare className="w-7 h-7 mb-4 opacity-30" />
                   <p>No messages yet</p>
                   <p className="text-sm">
                     Start a conversation with this client
@@ -175,7 +175,7 @@ export function ClientMessagesTab({ clientId }: ClientMessagesTabProps) {
                     key={message.id}
                     className={`flex gap-3 ${!message.is_from_client ? "flex-row-reverse" : ""}`}
                   >
-                    <Avatar className="h-10 w-10">
+                    <Avatar className="h-6 w-6">
                       <AvatarFallback className="bg-primary/10 text-primary">
                         {message.is_from_client
                           ? "CL"

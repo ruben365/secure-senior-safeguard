@@ -33,7 +33,7 @@ export const GlassSection = ({
       {glass ? (
         <div
           className={cn(
-            "relative z-10 mx-4 md:mx-8 lg:mx-12 my-4",
+            "relative z-10 mx-4 md:mx-5 lg:mx-7 my-4",
             vibrant
               ? "glass-vibe"
               : "rounded-3xl border border-border/40 bg-card/60 backdrop-blur-xl shadow-lg",

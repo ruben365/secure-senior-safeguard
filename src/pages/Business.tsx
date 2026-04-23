@@ -224,12 +224,12 @@ const SectionHeader = ({
 
 
 }: {badge: string;title: string;subtitle?: string;children?: React.ReactNode;light?: boolean;}) =>
-<AnimatedSection animation="fade-up" className="head-rhythm text-center mb-16">
-    <span className="inline-flex items-center gap-2 px-5 py-2 glass-subtle rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15">
+<AnimatedSection animation="fade-up" className="head-rhythm text-center mb-10">
+    <span className="inline-flex items-center gap-2 px-5 py-2 glass-subtle rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm border border-primary/15">
       <Sparkles className="w-3.5 h-3.5 text-primary" />
       <span className={light ? "text-white/90" : "text-primary"}>{badge}</span>
     </span>
-    <h2 className={`text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1] ${light ? "text-white" : ""}`}>
+    <h2 className={`text-3xl md:text-2xl lg:text-3xl font-black mb-5 tracking-tight leading-[1.1] ${light ? "text-white" : ""}`}>
       {title}
     </h2>
     {subtitle &&
@@ -292,10 +292,10 @@ const PricingCard = ({
       <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.04] via-transparent to-accent/[0.02] pointer-events-none" />
       }
 
-        <div className="p-6 pt-8 text-center flex-1 flex flex-col relative z-10">
+        <div className="p-4 pt-5 text-center flex-1 flex flex-col relative z-10">
           <h3 className="text-xl font-bold mb-3">{title}</h3>
           <div className="relative mb-2">
-            <p className="text-4xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <p className="text-2xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               {price}
               {priceSuffix &&
             <span className="text-sm text-muted-foreground font-normal bg-none text-muted-foreground" style={{ WebkitTextFillColor: 'initial' }}>
@@ -319,7 +319,7 @@ const PricingCard = ({
           )}
             </div>
         }
-          <ul className="space-y-3 mb-6 text-sm text-left flex-1">
+          <ul className="space-y-3 mb-4 text-sm text-left flex-1">
             {features.map((f, i) =>
           <li key={i} className="flex items-start gap-3">
                 <div className="w-5 h-5 rounded-full bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -331,7 +331,7 @@ const PricingCard = ({
           </ul>
           <Button
           variant={featured ? "default" : "outline"}
-          className="w-full mt-auto h-8 sm:h-10 rounded-xl text-xs sm:text-sm"
+          className="w-full mt-auto h-5 sm:h-6 rounded-xl text-xs sm:text-sm"
           onClick={onButtonClick}>
           
             {buttonText}
@@ -524,11 +524,11 @@ function Business() {
 
 
         {/* ═══════════════════ SERVICES ═══════════════════ */}
-        <section id="services" className="py-16 md:py-24 relative overflow-hidden">
+        <section id="services" className="py-10 md:py-16 relative overflow-hidden">
           {/* Premium background */}
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
-          <div className="absolute top-20 left-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-20 right-0 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-12 left-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-12 right-0 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-3xl pointer-events-none" />
 
           <div className="container mx-auto relative z-10">
             <SectionHeader
@@ -539,7 +539,7 @@ function Business() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl mx-auto" style={{ perspective: "1200px" }}>
               <AnimatedSection animation="fade-left" delay={0} id="svc-ai-receptionist">
                 <ExpandableServiceCard
-                  icon={<Phone className="w-7 h-7 text-primary" />}
+                  icon={<Phone className="w-4 h-4 text-primary" />}
                   title="AI Receptionist"
                   image={businessReceptionist}
                   summary="Your phone gets answered 24/7. Calls are routed, appointments booked, FAQs handled. You never lose a lead.">
@@ -571,7 +571,7 @@ function Business() {
 
               <AnimatedSection animation="fade-right" delay={100} id="svc-smart-scheduling">
                 <ExpandableServiceCard
-                  icon={<Calendar className="w-7 h-7 text-primary" />}
+                  icon={<Calendar className="w-4 h-4 text-primary" />}
                   title="Smart Scheduling"
                   image={businessScheduling}
                   summary="Appointments book themselves. Reminders go out. Calendars stay in sync. No more back-and-forth emails.">
@@ -588,7 +588,7 @@ function Business() {
                       { icon: CheckCircle, label: "Calendar Sync", desc: "Works with Google, Outlook, and more." }].
                       map((item, i) =>
                       <Card key={i} className="p-3 text-center border-border/60 hover:border-primary/30 transition-colors duration-300">
-                          <div className="w-9 h-9 mx-auto mb-2 bg-gradient-to-br from-primary/15 to-accent/10 rounded-lg flex items-center justify-center">
+                          <div className="w-6 h-6 mx-auto mb-2 bg-gradient-to-br from-primary/15 to-accent/10 rounded-lg flex items-center justify-center">
                             <item.icon className="w-4.5 h-4.5 text-primary" />
                           </div>
                           <h4 className="font-bold text-sm mb-1">{item.label}</h4>
@@ -602,7 +602,7 @@ function Business() {
 
               <AnimatedSection animation="fade-left" delay={200} id="svc-support-bot">
                 <ExpandableServiceCard
-                  icon={<MessageSquare className="w-7 h-7 text-primary" />}
+                  icon={<MessageSquare className="w-4 h-4 text-primary" />}
                   title="Customer Support Bot"
                   image={businessSupportBot}
                   summary="Answers customer questions 24/7 on your website, SMS, or WhatsApp. Your team focuses on high-value work.">
@@ -634,7 +634,7 @@ function Business() {
 
               <AnimatedSection animation="fade-right" delay={300} id="svc-intake-automation">
                 <ExpandableServiceCard
-                  icon={<Calendar className="w-7 h-7 text-primary" />}
+                  icon={<Calendar className="w-4 h-4 text-primary" />}
                   title="Intake & Scheduling"
                   image={businessIntake}
                   summary="Collect client details, score leads, and book meetings automatically. Save hours of admin work each week.">
@@ -670,7 +670,7 @@ function Business() {
         <SectionDivider variant="wave" color="muted" />
 
         {/* ═══════════════════ COMPLETE PLATFORM ═══════════════════ */}
-        <section id="security" className="py-16 md:py-24 relative overflow-hidden">
+        <section id="security" className="py-10 md:py-16 relative overflow-hidden">
           {/* Rich layered background */}
           <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
           
@@ -687,32 +687,32 @@ function Business() {
             
 
             {/* Hero overview card — Premium glassmorphism */}
-            <AnimatedSection animation="scale-up" className="max-w-6xl mx-auto mb-20">
+            <AnimatedSection animation="scale-up" className="max-w-6xl mx-auto mb-12">
               <div className="relative rounded-3xl overflow-hidden glass-heavy shadow-3d-lg">
                 {/* Animated gradient border */}
                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/10 via-transparent to-accent/10 pointer-events-none" />
                 
                 {/* Corner accents */}
-                <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-primary/12 to-transparent" />
-                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-accent/10 to-transparent" />
+                <div className="absolute top-0 left-0 w-20 h-20 bg-gradient-to-br from-primary/12 to-transparent" />
+                <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-accent/10 to-transparent" />
                 <div className="absolute bottom-0 right-0 w-40 h-40 bg-gradient-to-tl from-primary/8 to-transparent" />
 
-                <div className="relative p-8 md:p-12 lg:p-16">
-                  <div className="grid gap-12 lg:grid-cols-[1.3fr_0.7fr] items-center relative z-10">
+                <div className="relative p-5 md:p-7 lg:p-10">
+                  <div className="grid gap-7 lg:grid-cols-[1.3fr_0.7fr] items-center relative z-10">
                     <div>
                       <div>
-                        <div className="inline-flex items-center gap-2 px-4 py-2 glass-subtle rounded-full text-xs font-bold text-primary uppercase tracking-wider mb-6 border border-primary/15">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 glass-subtle rounded-full text-xs font-bold text-primary uppercase tracking-wider mb-4 border border-primary/15">
                           <Shield className="w-3.5 h-3.5" />
                           Unified Defense
                         </div>
-                        <h3 className="text-2xl md:text-3xl lg:text-4xl font-black mb-5 leading-tight">
+                        <h3 className="text-2xl md:text-3xl lg:text-2xl font-black mb-5 leading-tight">
                           One Platform. Clear Mission.
                           <br />
                           <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                             Practical Outcomes.
                           </span>
                         </h3>
-                        <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-8">
+                        <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-5">
                           We merged the full platform into AI to keep the story simple.
                           Our purpose is to help Ohio organizations grow with AI while staying safe from
                           modern fraud and operational risk. Learn more about <Link to="/about" className="text-primary hover:underline font-medium">our story</Link> and the team behind the mission.
@@ -727,7 +727,7 @@ function Business() {
                             key={item}
                             className="flex items-start gap-3 text-sm group">
                             
-                              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform duration-300 shadow-sm">
+                              <div className="w-4 h-4 rounded-lg bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform duration-300 shadow-sm">
                                 <CheckCircle className="w-3.5 h-3.5 text-primary" />
                               </div>
                               <p className="text-foreground leading-relaxed">{item}</p>
@@ -749,10 +749,10 @@ function Business() {
                             <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.04] to-accent/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             
                             <div className="relative z-10">
-                              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/12 to-accent/8 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
+                              <div className="w-6 h-6 rounded-xl bg-gradient-to-br from-primary/12 to-accent/8 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
                                 <stat.icon className="w-5 h-5 text-primary" />
                               </div>
-                              <p className="text-3xl md:text-4xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-1">
+                              <p className="text-3xl md:text-2xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-1">
                                 {stat.value}
                               </p>
                               <p className="text-[11px] md:text-xs uppercase tracking-wider text-muted-foreground font-semibold">
@@ -769,7 +769,7 @@ function Business() {
             </AnimatedSection>
 
             {/* Service groups — Premium cards with 3D hover */}
-            <div className="max-w-6xl mx-auto space-y-20">
+            <div className="max-w-6xl mx-auto space-y-12">
               {platformGroups.map((group, gi) =>
               <AnimatedSection key={group.key} animation="fade-up" delay={gi * 120}>
                   <div>
@@ -848,20 +848,20 @@ function Business() {
             </div>
 
             {/* Platform integration pillars — 3D cards */}
-            <div className="mt-24 grid md:grid-cols-3 gap-6 max-w-5xl mx-auto" style={{ perspective: "1200px" }}>
+            <div className="mt-16 grid md:grid-cols-3 gap-4 max-w-5xl mx-auto" style={{ perspective: "1200px" }}>
               {platformPillars.map((pillar, i) =>
               <AnimatedSection
                 key={pillar.title}
                 animation="fade-up"
                 delay={i * 120}>
                 
-                  <Card className="stroke-glass--large group p-8 rounded-2xl border-border/40 bg-card/95 backdrop-blur-sm text-center h-full hover:shadow-[0_20px_50px_-15px_hsl(var(--primary)/0.12)] hover:border-primary/25 transition-all duration-500 overflow-hidden relative">
+                  <Card className="stroke-glass--large group p-5 rounded-2xl border-border/40 bg-card/95 backdrop-blur-sm text-center h-full hover:shadow-[0_20px_50px_-15px_hsl(var(--primary)/0.12)] hover:border-primary/25 transition-all duration-500 overflow-hidden relative">
                     <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/30 via-accent/20 to-primary/30 opacity-0 group-hover:opacity-100 transition-opacity" />
                     <div
-                    className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center mx-auto mb-5 shadow-inner group-hover:scale-110 transition-transform duration-300"
+                    className="w-10 h-10 rounded-2xl bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center mx-auto mb-5 shadow-inner group-hover:scale-110 transition-transform duration-300"
                     style={{ transform: "translateZ(15px)" }}>
                     
-                      <pillar.icon className="w-7 h-7 text-primary" />
+                      <pillar.icon className="w-4 h-4 text-primary" />
                     </div>
                     <h3 className="font-bold text-base mb-3">{pillar.title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">{pillar.desc}</p>
@@ -871,7 +871,7 @@ function Business() {
             </div>
 
             {/* Demo CTA */}
-            <AnimatedSection animation="fade-up" delay={200} className="text-center mt-16">
+            <AnimatedSection animation="fade-up" delay={200} className="text-center mt-10">
               <div className="inline-flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
                   size="heroPill"
@@ -916,7 +916,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ WEB DESIGN ═══════════════════ */}
-        <section id="website-design" className="py-16 md:py-24 relative overflow-hidden">
+        <section id="website-design" className="py-10 md:py-16 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
           
@@ -931,7 +931,7 @@ function Business() {
 
             {/* Website Add-Ons */}
             <AnimatedSection animation="fade-up" delay={100} className="max-w-5xl mx-auto">
-              <div className="head-rhythm text-center mb-8">
+              <div className="head-rhythm text-center mb-5">
                 <span className="inline-flex items-center gap-2 px-4 py-1.5 glass-subtle rounded-full text-xs font-bold text-accent uppercase tracking-[0.18em] mb-4 border border-accent/15">
                   <Sparkles className="w-3 h-3" />
                   Enhance Your Project
@@ -966,7 +966,7 @@ function Business() {
                   </div>
                 )}
               </div>
-              <div className="mt-8 text-center">
+              <div className="mt-5 text-center">
                 <Button
                   variant="outline"
                   size="lg"
@@ -990,7 +990,7 @@ function Business() {
         <SectionDivider variant="curve" color="muted" flip />
 
         {/* ═══════════════════ WEBSITE INSURANCE ═══════════════════ */}
-        <section id="website-insurance" className="py-16 md:py-24 relative overflow-hidden">
+        <section id="website-insurance" className="py-10 md:py-16 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-muted/60 via-muted/40 to-muted/60 dark:bg-none dark:bg-[#1c1917]" />
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
           
@@ -1057,7 +1057,7 @@ function Business() {
             </div>
 
             {/* Supporting photography — operations in action */}
-            <div className="max-w-5xl mx-auto mt-8">
+            <div className="max-w-5xl mx-auto mt-5">
               <SectionImage
                 src={businessTeamMeeting}
                 alt="Business team collaborating during a strategy meeting"
@@ -1075,7 +1075,7 @@ function Business() {
             </div>
 
             {/* Trust badges */}
-            <AnimatedSection animation="fade-up" delay={200} className="mt-10 flex flex-wrap items-center justify-center gap-4">
+            <AnimatedSection animation="fade-up" delay={200} className="mt-6 flex flex-wrap items-center justify-center gap-4">
               {[
               { icon: Lock, text: "Secure Payment" },
               { icon: Shield, text: "30-Day Guarantee" },
@@ -1091,7 +1091,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ AI AGENTS PRICING ═══════════════════ */}
-        <section id="automation-pricing" className="py-16 md:py-24 relative overflow-hidden">
+        <section id="automation-pricing" className="py-10 md:py-16 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
           <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           
@@ -1114,7 +1114,7 @@ function Business() {
               </div>
             </SectionHeader>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
               <PricingCard
                 tag="🎯 START HERE"
                 tagColor="from-[#e07b52] to-[#d96c4a]"
@@ -1203,7 +1203,7 @@ function Business() {
         <SectionDivider variant="slant" color="muted" />
 
         {/* ═══════════════════ AI INSURANCE ═══════════════════ */}
-        <section id="ai-insurance" className="py-16 md:py-24 relative overflow-hidden">
+        <section id="ai-insurance" className="py-10 md:py-16 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40 dark:from-[#1c1917] dark:via-[#161412] dark:to-[#161412]" />
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent" />
           
@@ -1213,7 +1213,7 @@ function Business() {
               title="Protect Your AI Investment"
               subtitle="Your AI tools break, get hacked, or underperform. Our insurance plans keep your business running and your AI optimized.">
               
-              <div className="flex items-center justify-center gap-4 mt-5 bg-card/80 backdrop-blur-sm border border-border/50 rounded-full px-6 py-3 shadow-sm mx-auto w-fit">
+              <div className="flex items-center justify-center gap-4 mt-5 bg-card/80 backdrop-blur-sm border border-border/50 rounded-full px-4 py-3 shadow-sm mx-auto w-fit">
                 <Label
                   htmlFor="billing-toggle"
                   className={`text-sm font-bold transition-colors cursor-pointer ${!isYearly ? "text-primary" : "text-muted-foreground"}`}>
@@ -1236,7 +1236,7 @@ function Business() {
               </div>
             </SectionHeader>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
               {/* Starter */}
               <PricingCard
                 tag="🌱 STARTER"
@@ -1354,12 +1354,12 @@ function Business() {
 
             {/* Universal Support */}
             <AnimatedSection animation="scale-up" delay={200}>
-              <div className="max-w-4xl mx-auto mt-14">
-                <Card className="relative p-10 border-border/40 rounded-3xl bg-card/95 backdrop-blur-sm shadow-3d overflow-hidden">
+              <div className="max-w-4xl mx-auto mt-9">
+                <Card className="relative p-6 border-border/40 rounded-3xl bg-card/95 backdrop-blur-sm shadow-3d overflow-hidden">
                   <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary" />
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] to-accent/[0.01] pointer-events-none" />
                   
-                  <div className="head-rhythm text-center mb-8 relative z-10">
+                  <div className="head-rhythm text-center mb-5 relative z-10">
                     <span className="inline-flex items-center gap-2 px-4 py-1.5 glass-subtle rounded-full text-xs font-bold text-primary uppercase tracking-[0.18em] mb-4 border border-primary/15">
                       <Globe className="w-3.5 h-3.5" />
                       Universal AI Support
@@ -1371,20 +1371,20 @@ function Business() {
                       It does not matter where you bought your AI. We fix, optimize, secure, and develop AI systems from any platform worldwide. We also offer <Link to="/training" className="text-primary hover:underline font-medium">cybersecurity workshops</Link> to keep your team sharp.
                     </p>
                   </div>
-                  <div className="flex flex-wrap justify-center gap-6 mb-8 relative z-10">
+                  <div className="flex flex-wrap justify-center gap-4 mb-5 relative z-10">
                     {["🔧 Resuscitate", "⚡ Optimize", "🛡️ Secure", "🚀 Develop"].map((item, i) =>
                     <div
                       key={i}
                       className="flex items-center gap-2 text-sm group hover-scale">
                       
-                        <div className="w-10 h-10 bg-gradient-to-br from-primary/12 to-accent/8 rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-all duration-300">
+                        <div className="w-6 h-6 bg-gradient-to-br from-primary/12 to-accent/8 rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-all duration-300">
                           <span className="text-lg">{item.split(" ")[0]}</span>
                         </div>
                         <span className="font-semibold">{item.split(" ")[1]}</span>
                       </div>
                     )}
                   </div>
-                  <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground relative z-10">
+                  <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground relative z-10">
                     <span><strong className="text-foreground">No Contracts</strong> · Cancel anytime</span>
                     <span><strong className="text-foreground">Any Platform</strong> · Worldwide support</span>
                     <span><strong className="text-foreground">24 to 48hr Response</strong> · Fast turnaround</span>
@@ -1396,7 +1396,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ AI CONSULTING ═══════════════════ */}
-        <section id="ai-consulting" className="py-16 md:py-24 relative overflow-hidden">
+        <section id="ai-consulting" className="py-10 md:py-16 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
           
           <div className="container mx-auto relative z-10">
@@ -1408,7 +1408,7 @@ function Business() {
 
             <AnimatedSection animation="fade-up" className="max-w-4xl mx-auto">
               {/* Tab Group — Premium pill design */}
-              <div className="flex flex-wrap justify-center gap-2 p-2 glass-subtle rounded-2xl border border-border/40 mb-10 shadow-sm">
+              <div className="flex flex-wrap justify-center gap-2 p-2 glass-subtle rounded-2xl border border-border/40 mb-6 shadow-sm">
                 {[
                 { key: "thinking" as const, label: "💭 Thinking About AI" },
                 { key: "buying" as const, label: "🔍 Buying AI" },
@@ -1432,7 +1432,7 @@ function Business() {
               </div>
 
               {/* Content — 3D card */}
-              <Card className="relative p-10 border-border/40 rounded-3xl overflow-hidden shadow-3d">
+              <Card className="relative p-6 border-border/40 rounded-3xl overflow-hidden shadow-3d">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] via-transparent to-accent/[0.01] pointer-events-none" />
                 
                 {activeConsultingTab === "thinking" &&
@@ -1442,10 +1442,10 @@ function Business() {
                     </div>
                     <h3 className="text-2xl font-black mb-3">Thinking About AI</h3>
                     <Badge className="bg-primary/10 text-primary border-0 mb-5 font-bold">$199 Discovery Call</Badge>
-                    <p className="text-muted-foreground max-w-2xl mx-auto mb-7 leading-relaxed">
+                    <p className="text-muted-foreground max-w-2xl mx-auto mb-4 leading-relaxed">
                       Not sure if AI fits your business? In a paid 30-minute discovery call ($199, credited toward any project you book), we help you explore your options, understand costs, and figure out if AI will drive real growth for you. <Link to="/contact" className="text-primary hover:underline font-medium">Schedule a call</Link> to get started.
                     </p>
-                    <ul className="text-left max-w-md mx-auto space-y-3 mb-8">
+                    <ul className="text-left max-w-md mx-auto space-y-3 mb-5">
                       {["30-minute discovery call", "Business needs assessment", "AI opportunity identification", "Credit applied to any project"].map((item, i) =>
                     <li key={i} className="flex items-center gap-3 text-sm">
                           <div className="w-5 h-5 rounded-full bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center flex-shrink-0">
@@ -1462,7 +1462,7 @@ function Business() {
                       setModalOpen(true);
                     }}
                     size="lg"
-                    className="h-8 sm:h-10 px-4 sm:px-8 rounded-full bg-gradient-to-r from-primary to-accent text-white text-xs sm:text-sm font-semibold shadow-lg shadow-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300">
+                    className="h-5 sm:h-6 px-4 sm:px-5 rounded-full bg-gradient-to-r from-primary to-accent text-white text-xs sm:text-sm font-semibold shadow-lg shadow-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300">
 
                       Book Discovery Call ($199)
                     </Button>
@@ -1476,10 +1476,10 @@ function Business() {
                     </div>
                     <h3 className="text-2xl font-black mb-3">Buying AI</h3>
                     <Badge className="bg-primary/10 text-primary border-0 mb-5 font-bold">$1,799 - Pre-Purchase Vetting</Badge>
-                    <p className="text-muted-foreground max-w-2xl mx-auto mb-7 leading-relaxed">
+                    <p className="text-muted-foreground max-w-2xl mx-auto mb-4 leading-relaxed">
                       Before you spend, let us check the tool first. We look for hidden costs, security gaps, data privacy risks, and whether the ROI claims hold up.
                     </p>
-                    <ul className="text-left max-w-md mx-auto space-y-3 mb-8">
+                    <ul className="text-left max-w-md mx-auto space-y-3 mb-5">
                       {["Full vendor security assessment", "Hidden cost analysis", "ROI projection review", "Data privacy compliance check", "Written report with recommendations"].map((item, i) =>
                     <li key={i} className="flex items-center gap-3 text-sm">
                           <div className="w-5 h-5 rounded-full bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center flex-shrink-0">
@@ -1497,7 +1497,7 @@ function Business() {
                       setModalOpen(true);
                     }}
                     size="lg"
-                    className="h-8 sm:h-10 px-4 sm:px-8 rounded-full bg-gradient-to-r from-primary to-accent text-white text-xs sm:text-sm font-semibold shadow-lg shadow-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300">
+                    className="h-5 sm:h-6 px-4 sm:px-5 rounded-full bg-gradient-to-r from-primary to-accent text-white text-xs sm:text-sm font-semibold shadow-lg shadow-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300">
                     
                       Get Pre-Purchase Vetting
                     </Button>
@@ -1511,10 +1511,10 @@ function Business() {
                     </div>
                     <h3 className="text-2xl font-black mb-3">Already Bought AI</h3>
                     <Badge className="bg-primary/10 text-primary border-0 mb-5 font-bold">From $3,499 - Security Audit</Badge>
-                    <p className="text-muted-foreground max-w-2xl mx-auto mb-7 leading-relaxed">
+                    <p className="text-muted-foreground max-w-2xl mx-auto mb-4 leading-relaxed">
                       Already running AI but unsure if your system is secure or performing well? We audit your setup to find vulnerabilities and speed up performance.
                     </p>
-                    <ul className="text-left max-w-md mx-auto space-y-3 mb-8">
+                    <ul className="text-left max-w-md mx-auto space-y-3 mb-5">
                       {["Full security vulnerability scan", "Performance optimization review", "Data handling audit", "Compliance verification", "Detailed remediation plan"].map((item, i) =>
                     <li key={i} className="flex items-center gap-3 text-sm">
                           <div className="w-5 h-5 rounded-full bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center flex-shrink-0">
@@ -1532,7 +1532,7 @@ function Business() {
                       setModalOpen(true);
                     }}
                     size="lg"
-                    className="h-8 sm:h-10 px-4 sm:px-8 rounded-full bg-gradient-to-r from-primary to-accent text-white text-xs sm:text-sm font-semibold shadow-lg shadow-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300">
+                    className="h-5 sm:h-6 px-4 sm:px-5 rounded-full bg-gradient-to-r from-primary to-accent text-white text-xs sm:text-sm font-semibold shadow-lg shadow-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300">
                     
                       Get Security Audit
                     </Button>
@@ -1546,10 +1546,10 @@ function Business() {
                     </div>
                     <h3 className="text-2xl font-black mb-3">Want to Leave AI</h3>
                     <Badge className="bg-primary/10 text-primary border-0 mb-5 font-bold">$2,499 - Safe Exit Strategy</Badge>
-                    <p className="text-muted-foreground max-w-2xl mx-auto mb-7 leading-relaxed">
+                    <p className="text-muted-foreground max-w-2xl mx-auto mb-4 leading-relaxed">
                       Stuck with an AI tool that is not delivering? We help you exit safely, move your data, and find a better fit.
                     </p>
-                    <ul className="text-left max-w-md mx-auto space-y-3 mb-8">
+                    <ul className="text-left max-w-md mx-auto space-y-3 mb-5">
                       {["Contract review and exit strategy", "Data migration planning", "Alternative solution research", "Transition support", "30 days post-exit monitoring"].map((item, i) =>
                     <li key={i} className="flex items-center gap-3 text-sm">
                           <div className="w-5 h-5 rounded-full bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center flex-shrink-0">
@@ -1567,7 +1567,7 @@ function Business() {
                       setModalOpen(true);
                     }}
                     size="lg"
-                    className="h-8 sm:h-10 px-4 sm:px-8 rounded-full bg-gradient-to-r from-primary to-accent text-white text-xs sm:text-sm font-semibold shadow-lg shadow-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300">
+                    className="h-5 sm:h-6 px-4 sm:px-5 rounded-full bg-gradient-to-r from-primary to-accent text-white text-xs sm:text-sm font-semibold shadow-lg shadow-primary/20 hover:shadow-xl hover:scale-[1.03] transition-all duration-300">
                     
                       Get Safe Exit Strategy
                     </Button>
@@ -1579,7 +1579,7 @@ function Business() {
         </section>
 
         {/* ═══════════════════ ILLUSTRATION & VISUAL ART ═══════════════════ */}
-        <section id="illustration" className="py-16 md:py-24 relative overflow-hidden">
+        <section id="illustration" className="py-10 md:py-16 relative overflow-hidden">
           {/* Decorative background */}
           <div className="absolute inset-0 bg-gradient-to-b from-muted/40 via-background to-muted/30" />
           <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-coral-100/20 via-transparent to-transparent rounded-full blur-3xl pointer-events-none" />
@@ -1592,7 +1592,7 @@ function Business() {
               subtitle="Professional illustration and visual design services that give your brand a distinctive, memorable identity." />
             
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto" style={{ perspective: "1200px" }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto" style={{ perspective: "1200px" }}>
               {[
               {
                 icon: Palette,
@@ -1642,12 +1642,12 @@ function Business() {
                     {/* Hover glow */}
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] to-accent/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-                    <div className="relative z-10 p-6">
+                    <div className="relative z-10 p-4">
                       <div
-                      className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}
+                      className={`w-9 h-9 rounded-xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}
                       style={{ transform: "translateZ(15px)" }}>
                       
-                        <service.icon className="w-7 h-7 text-white" />
+                        <service.icon className="w-4 h-4 text-white" />
                       </div>
 
                       <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors duration-300">
@@ -1677,11 +1677,11 @@ function Business() {
             </div>
 
             {/* Bottom CTA */}
-            <AnimatedSection animation="fade-up" delay={300} className="text-center mt-14">
-              <Card className="glass-light max-w-3xl mx-auto p-10 rounded-3xl shadow-3d relative overflow-hidden">
+            <AnimatedSection animation="fade-up" delay={300} className="text-center mt-9">
+              <Card className="glass-light max-w-3xl mx-auto p-6 rounded-3xl shadow-3d relative overflow-hidden">
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary" />
                 <h3 className="text-xl font-black mb-3 relative z-10">Need a Custom Visual Package?</h3>
-                <p className="text-muted-foreground text-sm mb-6 max-w-xl mx-auto leading-relaxed relative z-10">
+                <p className="text-muted-foreground text-sm mb-4 max-w-xl mx-auto leading-relaxed relative z-10">
                   We build complete visual identity systems. Illustrations, icons, patterns, and brand assets, all designed to work together.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
@@ -1710,7 +1710,7 @@ function Business() {
 
         {/* ═══════════════════ WHY CHOOSE US ═══════════════════ */}
         <MeshBackground variant="vibrant" withOrbs>
-        <section className="py-16 md:py-24 relative overflow-hidden">
+        <section className="py-10 md:py-16 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-muted/40" />
           
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
@@ -1723,7 +1723,7 @@ function Business() {
               subtitle="What makes us different from other AI vendors." />
             
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mb-14" style={{ perspective: "1200px" }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto mb-9" style={{ perspective: "1200px" }}>
               {[
               { icon: Shield, title: "Security-First", desc: "Every solution ships with enterprise-grade encryption, monitoring, and data protection built in." },
               { icon: Lock, title: "No Vendor Lock-In", desc: "We build on open standards. You own your AI and your data. Move in-house whenever you want." },
@@ -1736,7 +1736,7 @@ function Business() {
                 key={i}
                 className="hover-lift">
                 
-                  <Card className="group relative p-7 border-border/40 rounded-2xl bg-card/95 backdrop-blur-sm overflow-hidden h-full hover:shadow-[0_20px_50px_-15px_hsl(var(--primary)/0.12)] hover:border-primary/25 transition-all duration-500">
+                  <Card className="group relative p-4 border-border/40 rounded-2xl bg-card/95 backdrop-blur-sm overflow-hidden h-full hover:shadow-[0_20px_50px_-15px_hsl(var(--primary)/0.12)] hover:border-primary/25 transition-all duration-500">
                     {/* Top accent */}
                     <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     {/* Hover glow */}
@@ -1746,7 +1746,7 @@ function Business() {
                     className="w-13 h-13 bg-gradient-to-br from-primary/15 to-accent/10 rounded-xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/10 relative z-10"
                     style={{ transform: "translateZ(15px)" }}>
                     
-                      <item.icon className="w-6 h-6 text-primary" />
+                      <item.icon className="w-4 h-4 text-primary" />
                     </div>
                     <h3 className="text-base font-bold mb-2 relative z-10">{item.title}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed relative z-10">{item.desc}</p>
@@ -1757,9 +1757,9 @@ function Business() {
 
             {/* Stats Bar */}
             <AnimatedSection animation="fade-up" delay={200}>
-              <Card className="max-w-4xl mx-auto p-10 border-border/40 rounded-3xl bg-card/95 backdrop-blur-sm shadow-3d relative overflow-hidden">
+              <Card className="max-w-4xl mx-auto p-6 border-border/40 rounded-3xl bg-card/95 backdrop-blur-sm shadow-3d relative overflow-hidden">
                 <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/30 via-accent/20 to-primary/30" />
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center relative z-10">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-5 text-center relative z-10">
                   {[
                   { value: "15+", label: "Businesses Served" },
                   { value: "99%+", label: "Uptime Guarantee" },
@@ -1770,7 +1770,7 @@ function Business() {
                     key={i}
                     className="group hover-scale">
                     
-                      <p className="text-3xl md:text-4xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-1">
+                      <p className="text-3xl md:text-2xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-1">
                         {stat.value}
                       </p>
                       <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">{stat.label}</p>
@@ -1789,7 +1789,7 @@ function Business() {
 
         {/* ═══════════════════ TESTIMONIALS ═══════════════════ */}
         {(isAdmin || businessTestimonials.length > 0) &&
-        <section className="py-16 md:py-24 relative overflow-hidden">
+        <section className="py-10 md:py-16 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
             
             <div className="container mx-auto relative z-10">
@@ -1800,8 +1800,8 @@ function Business() {
 
               {isAdmin && !isLoading && businessTestimonials.length === 0 &&
             <div className="max-w-2xl mx-auto">
-                  <Card className="p-10 border-2 border-dashed border-primary/30 text-center rounded-3xl">
-                    <span className="text-4xl mb-4 block">💼</span>
+                  <Card className="p-6 border-2 border-dashed border-primary/30 text-center rounded-3xl">
+                    <span className="text-2xl mb-4 block">💼</span>
                     <h3 className="text-xl font-bold mb-2">Business Testimonials</h3>
                     <p className="text-muted-foreground text-sm">
                       Add client testimonials via Admin Dashboard

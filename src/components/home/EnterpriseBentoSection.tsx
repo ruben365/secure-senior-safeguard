@@ -8,7 +8,7 @@ export const EnterpriseBentoSection = () => {
   return (
     <section
       aria-label="Enterprise platform features"
-      className="relative w-full py-20"
+      className="relative w-full py-12"
       style={{ background: "linear-gradient(135deg, #080608 0%, #0c0814 100%)" }}
     >
       <style>{`
@@ -58,9 +58,9 @@ export const EnterpriseBentoSection = () => {
         }
       `}</style>
 
-      <div id="enterprise-bento" className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div id="enterprise-bento" className="max-w-6xl mx-auto px-4 sm:px-4">
         {/* Header */}
-        <div className="text-center mb-12 max-w-2xl mx-auto">
+        <div className="text-center mb-7 max-w-2xl mx-auto">
           <p
             className="inline-block text-[0.7rem] font-semibold uppercase mb-4"
             style={{ letterSpacing: "0.18em", color: GOLD }}
@@ -68,7 +68,7 @@ export const EnterpriseBentoSection = () => {
             Enterprise Platform
           </p>
           <h2
-            className="text-3xl md:text-4xl lg:text-[2.75rem] font-semibold tracking-tight text-white mb-4 leading-[1.1]"
+            className="text-3xl md:text-2xl lg:text-[2.75rem] font-semibold tracking-tight text-white mb-4 leading-[1.1]"
             style={{ fontFamily: "Inter, system-ui, sans-serif" }}
           >
             Everything your team needs, in one place.
@@ -178,7 +178,7 @@ export const EnterpriseBentoSection = () => {
 
           {/* Card 3 — User Management */}
           <article className="gx-bento-tile gx-bento--wide">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 w-full">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 w-full">
               <div className="flex-1 min-w-0">
                 <p className="gx-bento-tile__eyebrow">Identity</p>
                 <h3 className="gx-bento-tile__title">User Management</h3>

@@ -78,8 +78,8 @@ export default function Subscriptions() {
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="mb-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="mb-4">
         <h1 className="text-2xl font-bold text-[#F9FAFB]">
           Subscription Management
         </h1>
@@ -147,7 +147,7 @@ export default function Subscriptions() {
                   placeholder="Search by email or customer ID..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 bg-[#1F2937] border-gray-700 text-[#F9FAFB]"
+                  className="pl-6 bg-[#1F2937] border-gray-700 text-[#F9FAFB]"
                 />
               </div>
             </div>
@@ -188,8 +188,8 @@ export default function Subscriptions() {
         </CardHeader>
         <CardContent>
           {loading ? (
-            <div className="flex items-center justify-center py-8">
-              <Loader2 className="w-6 h-6 animate-spin text-[#9CA3AF]" />
+            <div className="flex items-center justify-center py-5">
+              <Loader2 className="w-4 h-4 animate-spin text-[#9CA3AF]" />
             </div>
           ) : (
             <Table>

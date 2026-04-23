@@ -114,7 +114,7 @@
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.65);
-  border-radius: 1.25rem;
+  border-radius: 0.88rem;
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.9) inset,
     0 12px 40px -12px rgba(80, 40, 80, 0.18),
@@ -127,8 +127,8 @@
   backdrop-filter: blur(20px) saturate(170%);
   -webkit-backdrop-filter: blur(20px) saturate(170%);
   border: 1px solid rgba(255, 255, 255, 0.7);
-  border-radius: 1.5rem;
-  padding: 1.75rem;
+  border-radius: 1.05rem;
+  padding: 1.09rem;
   overflow: hidden;
   transition:
     transform 0.4s cubic-bezier(0.2, 0, 0.2, 1),
@@ -169,8 +169,8 @@
   backdrop-filter: blur(20px) saturate(170%);
   -webkit-backdrop-filter: blur(20px) saturate(170%);
   border: 1px solid rgba(255, 255, 255, 0.75);
-  border-radius: 1.25rem;
-  padding: 1.5rem;
+  border-radius: 0.88rem;
+  padding: 0.94rem;
   overflow: hidden;
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.95) inset,
@@ -205,8 +205,8 @@
   backdrop-filter: blur(22px) saturate(180%);
   -webkit-backdrop-filter: blur(22px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.75);
-  border-radius: 1.5rem;
-  padding: 2rem;
+  border-radius: 1.05rem;
+  padding: 1.25rem;
   overflow: hidden;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   box-shadow:
@@ -219,7 +219,7 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
+  height: 2px;
   background: linear-gradient(90deg, hsl(14 85% 65%), hsl(265 60% 70%), hsl(195 75% 70%), hsl(14 85% 65%));
   background-size: 200% 100%;
   animation: vibe-shimmer 4s linear infinite;
@@ -256,8 +256,8 @@
   backdrop-filter: blur(18px) saturate(160%);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 1.25rem;
-  padding: 1.5rem;
+  border-radius: 0.88rem;
+  padding: 0.94rem;
   transition: transform 0.3s ease;
 }
 .glass-vibe-feature:hover {
@@ -267,13 +267,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 1rem;
+  width: 1.88rem;
+  height: 1.88rem;
+  border-radius: 0.7rem;
   background: linear-gradient(135deg, hsl(14 85% 75%), hsl(265 60% 80%));
   color: white;
-  box-shadow: 0 8px 20px -6px hsl(14 85% 60% / 0.4);
-  margin-bottom: 1rem;
+  box-shadow: 0 8px 20px -4px hsl(14 85% 60% / 0.4);
+  margin-bottom: 0.62rem;
 }
 
 /* ───────────────────────────────────────────────────────────────────
@@ -289,10 +289,10 @@
   animation: vibe-orb-drift 24s ease-in-out infinite;
   z-index: 0;
 }
-.vibe-orb--sm { width: 120px; height: 120px; }
-.vibe-orb--md { width: 220px; height: 220px; }
-.vibe-orb--lg { width: 340px; height: 340px; }
-.vibe-orb--xl { width: 480px; height: 480px; filter: blur(80px); }
+.vibe-orb--sm { width: 75px; height: 75px; }
+.vibe-orb--md { width: 138px; height: 138px; }
+.vibe-orb--lg { width: 212px; height: 212px; }
+.vibe-orb--xl { width: 300px; height: 300px; filter: blur(80px); }
 
 .vibe-orb--coral    { background: radial-gradient(circle, hsl(14 85% 70% / 0.7), transparent 70%); }
 .vibe-orb--lavender { background: radial-gradient(circle, hsl(265 60% 75% / 0.65), transparent 70%); }
@@ -358,25 +358,25 @@
   background: linear-gradient(90deg, transparent, hsl(14 85% 65% / 0.5), hsl(265 60% 70% / 0.5), hsl(195 75% 70% / 0.5), transparent);
   background-size: 200% 100%;
   animation: vibe-shimmer 8s linear infinite;
-  margin: 2rem 0;
+  margin: 1.25rem 0;
 }
 
 .vibe-divider--dotted {
-  height: 4px;
+  height: 2px;
   background-image: radial-gradient(circle, hsl(14 85% 65% / 0.6) 1px, transparent 1.5px);
   background-size: 12px 4px;
   background-repeat: repeat-x;
   background-position: center;
   border: none;
-  margin: 2rem 0;
+  margin: 1.25rem 0;
 }
 
 .vibe-pill-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.4rem 1rem;
-  border-radius: 9999px;
+  gap: 0.31rem;
+  padding: 0.25rem 0.62rem;
+  border-radius: 6999px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
   backdrop-filter: blur(12px) saturate(160%);
   -webkit-backdrop-filter: blur(12px) saturate(160%);
@@ -398,9 +398,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.625rem 1.5rem;
-  border-radius: 9999px;
+  gap: 0.31rem;
+  padding: 0.39rem 0.94rem;
+  border-radius: 6999px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.55));
   backdrop-filter: blur(16px) saturate(170%);
   -webkit-backdrop-filter: blur(16px) saturate(170%);
@@ -494,7 +494,7 @@
 
 .auth-orb {
   position: absolute;
-  border-radius: 9999px;
+  border-radius: 6999px;
   filter: blur(80px);
   pointer-events: none;
   opacity: 0.55;
@@ -535,10 +535,10 @@
 
 .auth-card-daylight {
   position: relative;
-  border-radius: 20px;
+  border-radius: 14px;
   background: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.9);
-  padding: 2.5rem;
+  padding: 1.56rem;
   overflow: hidden;
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 1) inset,
@@ -576,11 +576,11 @@
 
 .auth-card-accent {
   position: absolute;
-  top: 1rem;
-  bottom: 1rem;
+  top: 0.62rem;
+  bottom: 0.62rem;
   left: 0;
-  width: 3px;
-  border-radius: 0 3px 3px 0;
+  width: 2px;
+  border-radius: 0 2px 2px 0;
   background: linear-gradient(180deg, hsl(14 80% 60%), hsl(20 75% 50%));
   pointer-events: none;
   z-index: 1;
@@ -590,10 +590,10 @@
 .auth-card-accent--lavender { background: linear-gradient(180deg, hsl(265 65% 70%), hsl(255 60% 60%)); }
 
 @media (min-width: 768px) {
-  .auth-card-daylight { padding: 3rem; }
+  .auth-card-daylight { padding: 1.88rem; }
 }
 @media (max-width: 640px) {
-  .auth-card-daylight { padding: 1.5rem; border-radius: 16px; }
+  .auth-card-daylight { padding: 0.94rem; border-radius: 11px; }
   .auth-ray { display: none; }
 }
 
@@ -603,8 +603,8 @@
   border: 1px solid hsl(28 25% 88%);
   color: hsl(220 25% 22%);
   font-weight: 600;
-  border-radius: 12px;
-  height: 48px;
+  border-radius: 8px;
+  height: 30px;
   transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.25s ease;
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 1) inset,
@@ -622,8 +622,8 @@
 .input-daylight {
   background: hsl(35 40% 98%) !important;
   border: 1px solid hsl(28 20% 86%) !important;
-  border-radius: 10px !important;
-  height: 48px !important;
+  border-radius: 7px !important;
+  height: 30px !important;
   box-shadow: inset 0 1px 2px hsl(20 40% 30% / 0.04) !important;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
 }
@@ -643,8 +643,8 @@
 .auth-cta-primary {
   position: relative;
   width: 100%;
-  height: 52px;
-  border-radius: 12px;
+  height: 32px;
+  border-radius: 8px;
   font-weight: 600;
   color: #fff;
   background: linear-gradient(180deg, hsl(20 80% 52%) 0%, hsl(15 75% 45%) 100%);
@@ -682,8 +682,8 @@
   position: relative;
   background: hsl(35 40% 97%);
   border: 1px solid hsl(28 25% 88%);
-  border-radius: 9999px;
-  padding: 0.25rem 0.85rem;
+  border-radius: 6999px;
+  padding: 0.25rem 0.53rem;
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -693,8 +693,8 @@
 .auth-tabs-warm {
   background: hsl(35 40% 96%);
   border: 1px solid hsl(28 25% 88%);
-  border-radius: 12px;
-  padding: 4px;
+  border-radius: 8px;
+  padding: 2px;
 }
 .auth-tabs-warm [data-state="active"] {
   background: #ffffff !important;
@@ -726,7 +726,7 @@
   box-shadow:
     0 1px 2px rgba(80, 40, 80, 0.04),
     0 12px 32px -16px rgba(80, 40, 80, 0.08);
-  border-radius: 20px;
+  border-radius: 14px;
   isolation: isolate;
 }
 
@@ -756,14 +756,14 @@
 }
 
 .stroke-glass--tight {
-  border-radius: 16px;
+  border-radius: 11px;
   box-shadow:
     0 1px 2px rgba(80, 40, 80, 0.03),
     0 8px 24px -16px rgba(80, 40, 80, 0.07);
 }
 
 .stroke-glass--large {
-  border-radius: 24px;
+  border-radius: 17px;
   box-shadow:
     0 2px 4px rgba(80, 40, 80, 0.05),
     0 24px 56px -20px rgba(80, 40, 80, 0.12);
@@ -779,8 +779,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 14px;
-  height: 14px;
+  width: 9px;
+  height: 9px;
   border-top: 1px solid hsl(20 75% 52% / 0.7);
   border-left: 1px solid hsl(20 75% 52% / 0.7);
   border-top-left-radius: inherit;
@@ -809,7 +809,7 @@
 
 .pay-card {
   position: relative;
-  border-radius: 16px;
+  border-radius: 11px;
   background: linear-gradient(180deg, #fffaf4 0%, #fcf5ec 100%);
   border: 1px solid hsl(28 18% 78%);
   box-shadow:
@@ -869,11 +869,11 @@
 
 /* ── Method selector ── */
 .pay-card--method {
-  border-radius: 12px;
+  border-radius: 8px;
   background: #ffffff;
   border: 1px solid hsl(28 18% 82%);
-  padding: 12px 14px;
-  min-height: 56px;
+  padding: 8px 9px;
+  min-height: 36px;
   cursor: pointer;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
@@ -903,7 +903,7 @@
 .pay-card--summary {
   background: linear-gradient(180deg, #fffaf4 0%, #faf1e4 100%);
   border-left: 4px solid #5a2a5a;
-  border-radius: 14px;
+  border-radius: 10px;
 }
 
 .pay-card--summary .pay-card__total {
@@ -913,14 +913,14 @@
 /* ── Premium badge system v2 ── */
 .pay-card__badge {
   position: absolute;
-  top: -14px;
+  top: -9px;
   left: 50%;
   transform: translateX(-50%);
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 7px 16px 7px 14px;
-  border-radius: 999px;
+  gap: 4px;
+  padding: 4px 10px 4px 9px;
+  border-radius: 699px;
   font-size: 10.5px;
   font-weight: 800;
   letter-spacing: 0.16em;
@@ -1025,15 +1025,15 @@
 
 .pay-card__badge svg,
 .pay-card__badge .pay-card__badge-icon {
-  width: 12px;
-  height: 12px;
+  width: 8px;
+  height: 8px;
   flex-shrink: 0;
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.18));
 }
 
 .pay-card__badge--corner {
-  top: 12px;
-  right: 12px;
+  top: 8px;
+  right: 8px;
   left: auto;
   transform: none;
 }
@@ -1052,9 +1052,9 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 7px 16px;
-  border-radius: 999px;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 699px;
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.16em;
@@ -1107,8 +1107,8 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 12px;
-  padding: 8px 0;
+  gap: 8px;
+  padding: 5px 0;
   font-variant-numeric: tabular-nums;
   border-bottom: 1px solid rgba(90, 42, 90, 0.08);
 }
@@ -1119,7 +1119,7 @@
 
 .pay-card__total {
   font-weight: 800;
-  font-size: 1.125rem;
+  font-size: 0.84rem;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.01em;
   color: #b75539;

@@ -145,9 +145,9 @@ export const WebDesignQuoteDialog = ({
         </DialogHeader>
 
         {submitted ? (
-          <div className="py-6 text-center space-y-4">
-            <div className="w-14 h-14 rounded-full bg-green-500/10 flex items-center justify-center mx-auto">
-              <CheckCircle2 className="w-7 h-7 text-green-500" />
+          <div className="py-4 text-center space-y-4">
+            <div className="w-9 h-9 rounded-full bg-green-500/10 flex items-center justify-center mx-auto">
+              <CheckCircle2 className="w-4 h-4 text-green-500" />
             </div>
             <p className="text-sm text-muted-foreground max-w-xs mx-auto">
               We&apos;ll review your project and reach out within 1 business day
@@ -168,7 +168,7 @@ export const WebDesignQuoteDialog = ({
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Jane Smith"
-                  className="h-9 text-sm"
+                  className="h-6 text-sm"
                 />
               </div>
               <div className="space-y-1.5">
@@ -180,7 +180,7 @@ export const WebDesignQuoteDialog = ({
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="jane@example.com"
-                  className="h-9 text-sm"
+                  className="h-6 text-sm"
                 />
               </div>
             </div>
@@ -188,7 +188,7 @@ export const WebDesignQuoteDialog = ({
             <div className="space-y-1.5">
               <Label className="text-xs font-semibold">Business Type</Label>
               <Select value={businessType} onValueChange={setBusinessType}>
-                <SelectTrigger className="h-9 text-sm">
+                <SelectTrigger className="h-6 text-sm">
                   <SelectValue placeholder="Select your industry…" />
                 </SelectTrigger>
                 <SelectContent>
@@ -208,7 +208,7 @@ export const WebDesignQuoteDialog = ({
                   value={websiteType}
                   onChange={(e) => setWebsiteType(e.target.value)}
                   placeholder="e.g. Landing page"
-                  className="h-9 text-sm"
+                  className="h-6 text-sm"
                 />
               </div>
               <div className="space-y-1.5">
@@ -220,7 +220,7 @@ export const WebDesignQuoteDialog = ({
                   value={numPages}
                   onChange={(e) => setNumPages(e.target.value)}
                   placeholder="5"
-                  className="h-9 text-sm"
+                  className="h-6 text-sm"
                 />
               </div>
             </div>
@@ -256,7 +256,7 @@ export const WebDesignQuoteDialog = ({
             <div className="space-y-1.5">
               <Label className="text-xs font-semibold">Budget Range</Label>
               <Select value={budgetRange} onValueChange={setBudgetRange}>
-                <SelectTrigger className="h-9 text-sm">
+                <SelectTrigger className="h-6 text-sm">
                   <SelectValue placeholder="Select a range…" />
                 </SelectTrigger>
                 <SelectContent>
@@ -280,7 +280,7 @@ export const WebDesignQuoteDialog = ({
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Describe your project goals, timeline, or anything else…"
-                className="text-sm resize-none h-20"
+                className="text-sm resize-none h-12"
               />
             </div>
 

@@ -307,7 +307,7 @@ export default function SuperAdminUserManagement() {
             placeholder="Search users by email, username, or name..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 bg-[#1F2937] border-gray-700 text-white"
+            className="pl-6 bg-[#1F2937] border-gray-700 text-white"
           />
         </div>
       </CardHeader>
@@ -319,14 +319,14 @@ export default function SuperAdminUserManagement() {
                 key={i}
                 className="flex items-center gap-4 p-4 border-b border-gray-800"
               >
-                <div className="h-10 w-10 rounded-full bg-gray-800 animate-pulse" />
+                <div className="h-6 w-6 rounded-full bg-gray-800 animate-pulse" />
                 <div className="flex-1 space-y-2">
                   <div className="h-4 w-1/3 bg-gray-800 rounded animate-pulse" />
                   <div className="h-3 w-1/4 bg-gray-800 rounded animate-pulse" />
                 </div>
-                <div className="h-6 w-20 bg-gray-800 rounded-full animate-pulse" />
-                <div className="h-6 w-24 bg-gray-800 rounded animate-pulse" />
-                <div className="h-8 w-8 bg-gray-800 rounded animate-pulse" />
+                <div className="h-4 w-12 bg-gray-800 rounded-full animate-pulse" />
+                <div className="h-4 w-16 bg-gray-800 rounded animate-pulse" />
+                <div className="h-5 w-5 bg-gray-800 rounded animate-pulse" />
               </div>
             ))}
           </div>
@@ -353,7 +353,7 @@ export default function SuperAdminUserManagement() {
                   >
                     <TableCell>
                       <div className="flex items-center gap-3">
-                        <Avatar className="h-10 w-10 border-2 border-primary/30">
+                        <Avatar className="h-6 w-6 border-2 border-primary/30">
                           <AvatarImage src={user.avatar_url || undefined} />
                           <AvatarFallback className="bg-gradient-to-br from-cyan-500 to-blue-600 text-white">
                             {(user.full_name || user.email || "U")
@@ -461,7 +461,7 @@ export default function SuperAdminUserManagement() {
               </TableBody>
             </Table>
             {filteredUsers.length === 0 && (
-              <div className="text-center py-8 text-gray-400">
+              <div className="text-center py-5 text-gray-400">
                 No users found matching your search
               </div>
             )}
@@ -518,7 +518,7 @@ export default function SuperAdminUserManagement() {
             {selectedUser && (
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
-                  <Avatar className="h-16 w-16 border-2 border-cyan-500">
+                  <Avatar className="h-10 w-10 border-2 border-cyan-500">
                     <AvatarImage src={selectedUser.avatar_url || undefined} />
                     <AvatarFallback className="bg-gradient-to-br from-cyan-500 to-blue-600 text-white text-xl">
                       {(selectedUser.full_name || selectedUser.email || "U")

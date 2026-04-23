@@ -34,7 +34,7 @@ export function SectionImage({
 }: SectionImageProps) {
   if (variant === "compact-trio" && images && images.length > 0) {
     return (
-      <div className={cn("my-8 md:my-10", className)}>
+      <div className={cn("my-5 md:my-6", className)}>
         <div className="grid grid-cols-3 gap-3 md:gap-4">
           {images.slice(0, 3).map((img, i) => (
             <figure
@@ -66,10 +66,10 @@ export function SectionImage({
   if (variant === "split-left" || variant === "split-right") {
     const imageOnRight = variant === "split-right";
     return (
-      <div className={cn("my-8 md:my-12", className)}>
+      <div className={cn("my-5 md:my-7", className)}>
         <div
           className={cn(
-            "grid gap-6 md:gap-8 items-center",
+            "grid gap-4 md:gap-5 items-center",
             "grid-cols-1 md:grid-cols-5",
           )}
         >
@@ -110,7 +110,7 @@ export function SectionImage({
 
   // wide (default)
   return (
-    <figure className={cn("my-8 md:my-10", className)}>
+    <figure className={cn("my-5 md:my-6", className)}>
       <div
         className="relative overflow-hidden rounded-2xl border border-border/40 bg-card shadow-[0_16px_40px_-16px_rgba(15,23,42,0.20)]"
         style={{ aspectRatio: "16 / 9" }}

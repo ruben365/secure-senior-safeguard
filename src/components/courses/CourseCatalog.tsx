@@ -160,18 +160,18 @@ function CourseCard({
 
 function CourseCatalogSkeleton() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {[1, 2, 3].map((i) => (
         <Card key={i} className="h-full">
           <div className="h-3 bg-muted" />
           <CardHeader>
-            <Skeleton className="h-6 w-3/4" />
+            <Skeleton className="h-4 w-3/4" />
           </CardHeader>
           <CardContent>
             <Skeleton className="h-4 w-full mb-2" />
             <Skeleton className="h-4 w-2/3 mb-4" />
-            <Skeleton className="h-8 w-24 mb-4" />
-            <Skeleton className="h-10 w-full" />
+            <Skeleton className="h-5 w-16 mb-4" />
+            <Skeleton className="h-6 w-full" />
           </CardContent>
         </Card>
       ))}
@@ -203,8 +203,8 @@ export function CourseCatalog() {
 
   if (!courses || courses.length === 0) {
     return (
-      <Card className="p-8 text-center">
-        <GraduationCap className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
+      <Card className="p-5 text-center">
+        <GraduationCap className="w-7 h-7 mx-auto mb-4 text-muted-foreground" />
         <h3 className="text-xl font-semibold mb-2">No Courses Available</h3>
         <p className="text-muted-foreground">
           New courses are being prepared. Check back soon!
@@ -214,11 +214,11 @@ export function CourseCatalog() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Stats Summary */}
       {enrollments && enrollments.length > 0 && (
         <Card className="p-4 bg-gradient-to-r from-primary/10 to-accent/10">
-          <div className="flex flex-wrap gap-6">
+          <div className="flex flex-wrap gap-4">
             <div className="flex items-center gap-2">
               <BookOpen className="w-5 h-5 text-primary" />
               <span>
@@ -257,7 +257,7 @@ export function CourseCatalog() {
       )}
 
       {/* Course Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {courses.map((course) => {
           const enrollment = enrollments?.find(
             (e) => e.course_id === course.id,

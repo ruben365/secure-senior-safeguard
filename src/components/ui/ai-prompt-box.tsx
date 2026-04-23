@@ -159,10 +159,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       ghost: "bg-transparent hover:bg-[#3A3A40]",
     };
     const sizeClasses = {
-      default: "h-10 px-4 py-2",
-      sm: "h-8 px-3 text-sm",
-      lg: "h-12 px-6",
-      icon: "h-8 w-8 rounded-full aspect-[1/1]",
+      default: "h-6 px-4 py-2",
+      sm: "h-5 px-3 text-sm",
+      lg: "h-7 px-4",
+      icon: "h-5 w-5 rounded-full aspect-[1/1]",
     };
     return (
       <button
@@ -254,7 +254,7 @@ const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
           {formatTime(time)}
         </span>
       </div>
-      <div className="w-full h-10 flex items-center justify-center gap-0.5 px-4">
+      <div className="w-full h-6 flex items-center justify-center gap-0.5 px-4">
         {[...Array(visualizerBars)].map((_, i) => (
           <div
             key={i}
@@ -480,7 +480,7 @@ const PromptInputAction: React.FC<PromptInputActionProps> = ({
 
 // Custom Divider Component
 const CustomDivider: React.FC = () => (
-  <div className="relative h-6 w-[1.5px] mx-1">
+  <div className="relative h-4 w-[1.5px] mx-1">
     <div
       className="absolute inset-0 bg-gradient-to-t from-transparent via-[#9b87f5]/70 to-transparent rounded-full"
       style={{
@@ -632,14 +632,14 @@ export const PromptInputBox = React.forwardRef(
       className,
     );
     const iconButtonClass = cn(
-      "flex h-8 w-8 items-center justify-center rounded-full transition-colors",
+      "flex h-5 w-5 items-center justify-center rounded-full transition-colors",
       isMinimal
         ? "text-white/70 hover:text-white hover:bg-white/10"
         : "text-[#9CA3AF] hover:bg-gray-600/30 hover:text-[#D1D5DB]",
     );
     const toggleButtonBase = isMinimal
-      ? "rounded-full transition-all flex items-center gap-1 px-2 py-1 border h-8 border-transparent text-white/70 hover:text-white"
-      : "rounded-full transition-all flex items-center gap-1 px-2 py-1 border h-8";
+      ? "rounded-full transition-all flex items-center gap-1 px-2 py-1 border h-5 border-transparent text-white/70 hover:text-white"
+      : "rounded-full transition-all flex items-center gap-1 px-2 py-1 border h-5";
 
     return (
       <>
@@ -662,7 +662,7 @@ export const PromptInputBox = React.forwardRef(
                   {file.type.startsWith("image/") &&
                     filePreviews[file.name] && (
                       <div
-                        className="w-16 h-16 rounded-xl overflow-hidden cursor-pointer transition-all duration-300"
+                        className="w-10 h-10 rounded-xl overflow-hidden cursor-pointer transition-all duration-300"
                         onClick={() => openImageModal(filePreviews[file.name])}
                       >
                         <img
@@ -948,7 +948,7 @@ export const PromptInputBox = React.forwardRef(
                 variant="default"
                 size="icon"
                 className={cn(
-                  "h-8 w-8 rounded-full transition-all duration-200",
+                  "h-5 w-5 rounded-full transition-all duration-200",
                   isRecording
                     ? "bg-transparent hover:bg-gray-600/30 text-red-500 hover:text-red-400"
                     : hasContent

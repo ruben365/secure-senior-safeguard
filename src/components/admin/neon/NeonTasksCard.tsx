@@ -20,8 +20,8 @@ export function NeonTasksCard({ tasks }: { tasks: Task[] }) {
       </h2>
 
       {tasks.length === 0 ? (
-        <div className="text-center py-10">
-          <CheckCircle2 className="w-8 h-8 text-[#374151] mx-auto mb-2" />
+        <div className="text-center py-6">
+          <CheckCircle2 className="w-5 h-5 text-[#374151] mx-auto mb-2" />
           <p className="text-[#6B7280] text-sm">No tasks yet</p>
         </div>
       ) : (

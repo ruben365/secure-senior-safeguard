@@ -36,15 +36,15 @@ const faqs = [
 export const FAQPreview = () => {
   return (
     <section
-      className="relative z-10 py-14 md:py-20 lg:py-24 gx-section"
+      className="relative z-10 py-9 md:py-12 lg:py-16 gx-section"
       aria-labelledby="faq-heading"
     >
       <div className="container mx-auto max-w-6xl relative">
-        <div className="grid lg:grid-cols-5 gap-8 lg:gap-10 items-start">
+        <div className="grid lg:grid-cols-5 gap-5 lg:gap-6 items-start">
           {/* Left sidebar */}
           <AnimatedSection
             animation="fade-up"
-            className="lg:col-span-2 space-y-6"
+            className="lg:col-span-2 space-y-4"
           >
             <div>
               <span className="hss-overline mb-4">
@@ -53,7 +53,7 @@ export const FAQPreview = () => {
               </span>
               <h2
                 id="faq-heading"
-                className="text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold text-[#1E293B] leading-[1.05] tracking-tight mb-3 mt-4"
+                className="text-2xl md:text-3xl lg:text-[3.25rem] font-extrabold text-[#1E293B] leading-[1.05] tracking-tight mb-3 mt-4"
               >
                 Got questions?
               </h2>
@@ -64,9 +64,9 @@ export const FAQPreview = () => {
             </div>
 
             {/* Support card — warm soft tint */}
-            <div className="hss-soft-tint rounded-3xl p-6 lg:p-7 relative overflow-hidden">
+            <div className="hss-soft-tint rounded-3xl p-4 lg:p-4 relative overflow-hidden">
               <div className="flex items-center gap-3 mb-1">
-                <div className="hss-icon-tile w-10 h-10 rounded-xl">
+                <div className="hss-icon-tile w-6 h-6 rounded-xl">
                   <MessageCircle className="w-4 h-4" strokeWidth={2.25} />
                 </div>
                 <h3 className="font-bold text-[#1E293B] text-base">
@@ -79,13 +79,13 @@ export const FAQPreview = () => {
               <div className="flex flex-col gap-2.5">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-1.5 sm:gap-2 h-8 sm:h-11 px-3.5 sm:px-5 rounded-full bg-[#d96c4a] hover:bg-[#b8552f] text-white text-[12px] sm:text-[14px] font-semibold transition-colors shadow-[0_4px_12px_-2px_rgba(217,108,74,0.4)]"
+                  className="inline-flex items-center justify-center gap-1.5 sm:gap-2 h-5 sm:h-7 px-3.5 sm:px-5 rounded-full bg-[#d96c4a] hover:bg-[#b8552f] text-white text-[12px] sm:text-[14px] font-semibold transition-colors shadow-[0_4px_12px_-2px_rgba(217,108,74,0.4)]"
                 >
                   Chat With Expert
                 </Link>
                 <a
                   href={`tel:${SITE.phone.e164}`}
-                  className="inline-flex items-center justify-center gap-1.5 sm:gap-2 h-8 sm:h-11 px-3.5 sm:px-5 rounded-full bg-white hover:bg-[#1E293B]/[0.04] border border-[#1E293B]/12 hover:border-[#1E293B]/22 text-[#1E293B] text-[12px] sm:text-[14px] font-semibold transition-colors"
+                  className="inline-flex items-center justify-center gap-1.5 sm:gap-2 h-5 sm:h-7 px-3.5 sm:px-5 rounded-full bg-white hover:bg-[#1E293B]/[0.04] border border-[#1E293B]/12 hover:border-[#1E293B]/22 text-[#1E293B] text-[12px] sm:text-[14px] font-semibold transition-colors"
                 >
                   <Phone className="w-4 h-4" /> Call Now
                 </a>
@@ -106,9 +106,9 @@ export const FAQPreview = () => {
                   value={`faq-${index}`}
                   className="hss-card stroke-glass--tight rounded-2xl overflow-hidden border-0"
                 >
-                  <AccordionTrigger className="text-left font-bold text-[#1E293B] hover:no-underline px-6 py-3 [&[data-state=open]]:text-[#b8552f] [&>svg]:text-[#1E293B]/50">
+                  <AccordionTrigger className="text-left font-bold text-[#1E293B] hover:no-underline px-4 py-3 [&[data-state=open]]:text-[#b8552f] [&>svg]:text-[#1E293B]/50">
                     <span className="flex items-center gap-4 pr-4">
-                      <span className="hss-icon-tile w-9 h-9 rounded-xl text-[13px] font-bold flex-shrink-0">
+                      <span className="hss-icon-tile w-6 h-6 rounded-xl text-[13px] font-bold flex-shrink-0">
                         {index + 1}
                       </span>
                       <span className="text-[15px] leading-snug">
@@ -116,7 +116,7 @@ export const FAQPreview = () => {
                       </span>
                     </span>
                   </AccordionTrigger>
-                  <AccordionContent className="text-[14px] text-[#6B7280] leading-relaxed pb-5 px-6 pl-[4.5rem]">
+                  <AccordionContent className="text-[14px] text-[#6B7280] leading-relaxed pb-5 px-4 pl-[4.5rem]">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>

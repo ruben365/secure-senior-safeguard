@@ -77,16 +77,16 @@ export default function Sitemap() {
         overlay
       />
 
-      <section className="py-16 md:py-20 bg-background">
+      <section className="py-10 md:py-12 bg-background">
         <div className="container mx-auto max-w-4xl">
-          <div className="head-rhythm text-center mb-12">
+          <div className="head-rhythm text-center mb-7">
             <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] text-primary mb-3">
               Site Directory
             </span>
             <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight">All Pages</h2>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {groups.map((group) => (
               <div key={group.heading}>
                 <h2 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-3 border-b pb-2">

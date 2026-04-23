@@ -40,9 +40,9 @@ const PortfolioDetail = () => {
     return (
       <div className="min-h-screen">
         <Navigation overlay />
-        <div className="pt-28 pb-20 container mx-auto">
-          <div className="animate-pulse space-y-6">
-            <div className="h-8 w-48 bg-muted rounded" />
+        <div className="pt-18 pb-12 container mx-auto">
+          <div className="animate-pulse space-y-4">
+            <div className="h-5 w-48 bg-muted rounded" />
             <div className="h-96 bg-muted rounded-2xl" />
           </div>
         </div>
@@ -54,7 +54,7 @@ const PortfolioDetail = () => {
     return (
       <div className="min-h-screen">
         <Navigation overlay />
-        <div className="pt-28 pb-20 container mx-auto text-center">
+        <div className="pt-18 pb-12 container mx-auto text-center">
           <h1 className="text-2xl font-bold text-foreground mb-4">
             Project not found
           </h1>
@@ -78,19 +78,19 @@ const PortfolioDetail = () => {
       />
       <Navigation overlay />
 
-      <main className="pt-24 pb-16">
+      <main className="pt-16 pb-10">
         <div className="container mx-auto">
           {/* Back */}
           <Link
             to="/portfolio"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition mb-8"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition mb-5"
           >
             <ArrowLeft className="w-4 h-4" /> Back to Portfolio
           </Link>
 
           {/* Hero Image */}
           {project.hero_image_url && (
-            <div className="rounded-2xl overflow-hidden mb-10 aspect-[16/9] bg-muted">
+            <div className="rounded-2xl overflow-hidden mb-6 aspect-[16/9] bg-muted">
               <img
                 src={project.hero_image_url}
                 alt={project.title}
@@ -100,7 +100,7 @@ const PortfolioDetail = () => {
           )}
 
           {/* Header */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
             <div className="lg:col-span-2 space-y-4">
               <div className="flex items-center gap-3 flex-wrap">
                 {project.category && (
@@ -112,7 +112,7 @@ const PortfolioDetail = () => {
                   </Badge>
                 )}
               </div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground">
+              <h1 className="text-3xl sm:text-2xl lg:text-3xl font-black text-foreground">
                 {project.title}
               </h1>
               {project.short_description && (
@@ -137,7 +137,7 @@ const PortfolioDetail = () => {
 
             {/* Sidebar */}
             <div className="space-y-4">
-              <div className="rounded-2xl border border-border bg-card p-6 space-y-4">
+              <div className="rounded-2xl border border-border bg-card p-4 space-y-4">
                 <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">
                   Project Details
                 </h3>
@@ -182,7 +182,7 @@ const PortfolioDetail = () => {
 
           {/* ═══ Case Study Sections ═══ */}
           {sections.length > 0 && (
-            <div className="space-y-16 max-w-4xl">
+            <div className="space-y-10 max-w-4xl">
               {CASE_STUDY_SECTIONS.map((sectionDef) => {
                 const section = sectionMap[sectionDef.type];
                 if (!section || (!section.content && (!section.media_urls || section.media_urls.length === 0))) return null;
@@ -192,7 +192,7 @@ const PortfolioDetail = () => {
                 return (
                   <div key={sectionDef.type} className="scroll-mt-24">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                      <div className="w-6 h-6 rounded-xl bg-primary/10 flex items-center justify-center">
                         <Icon className="w-5 h-5 text-primary" />
                       </div>
                       <div>
@@ -214,7 +214,7 @@ const PortfolioDetail = () => {
                     )}
 
                     {section.media_urls && section.media_urls.length > 0 && (
-                      <div className={`mt-6 pl-[52px] grid gap-4 ${
+                      <div className={`mt-4 pl-[52px] grid gap-4 ${
                         section.media_urls.length === 1
                           ? "grid-cols-1"
                           : "grid-cols-1 sm:grid-cols-2"
@@ -234,8 +234,8 @@ const PortfolioDetail = () => {
 
           {/* ═══ Gallery ═══ */}
           {project.gallery && project.gallery.length > 0 && (
-            <div className="mt-20">
-              <h2 className="text-2xl font-black text-foreground mb-6">Gallery</h2>
+            <div className="mt-12">
+              <h2 className="text-2xl font-black text-foreground mb-4">Gallery</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {project.gallery.map((img) => (
                   <div key={img.id} className="rounded-xl overflow-hidden bg-muted aspect-[4/3]">
@@ -250,20 +250,20 @@ const PortfolioDetail = () => {
           )}
 
           {/* CTA */}
-          <div className="mt-20 text-center bg-card border border-border/60 rounded-2xl p-8 sm:p-12 max-w-3xl mx-auto">
+          <div className="mt-12 text-center bg-card border border-border/60 rounded-2xl p-5 sm:p-7 max-w-3xl mx-auto">
             <h2 className="text-2xl font-black text-foreground mb-3">
               Want Something Similar?
             </h2>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-muted-foreground mb-4">
               We bring the same level of craft and attention to every project.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Button asChild size="lg" className="rounded-full font-bold px-8">
+              <Button asChild size="lg" className="rounded-full font-bold px-5">
                 <Link to="/contact">
                   Start a Project <ArrowRight className="w-4 h-4 ml-2" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="rounded-full font-bold px-8">
+              <Button asChild variant="outline" size="lg" className="rounded-full font-bold px-5">
                 <Link to="/portfolio">
                   View More Work
                 </Link>

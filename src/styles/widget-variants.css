@@ -65,7 +65,7 @@
 /* ── 5. Variant: accent-bar — 4px left stripe ─────────────────────── */
 [data-variant="accent-bar"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
   border-left: 4px solid var(--wv-terracotta) !important;
-  padding-left: 1.25rem;
+  padding-left: 0.78rem;
 }
 [data-variant="accent-bar"][data-accent="plum"]:not(.hero-home *):not(footer *):not(.site-footer *) {
   border-left-color: var(--wv-plum) !important;

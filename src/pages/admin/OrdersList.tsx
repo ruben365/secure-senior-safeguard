@@ -189,8 +189,8 @@ const OrdersList = () => {
   const avgOrderValue = orders.length > 0 ? todaysRevenue / todaysOrders : 0;
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="flex items-center justify-between mb-4">
         <div>
           <h1 className="text-2xl font-bold text-[#F9FAFB]">Orders</h1>
           <p className="text-[#9CA3AF]">Manage and fulfill customer orders</p>
@@ -200,9 +200,9 @@ const OrdersList = () => {
           Create Manual Order
         </Button>
       </div>
-      <div className="space-y-6">
+      <div className="space-y-4">
         {/* Low Stock Alert */}
-        <Alert className="mb-6 border-yellow-500">
+        <Alert className="mb-4 border-yellow-500">
           <AlertTriangle className="h-4 w-4 text-yellow-500" />
           <AlertDescription className="flex items-center justify-between">
             <div>
@@ -221,14 +221,14 @@ const OrdersList = () => {
         </Alert>
 
         {/* Quick Stats */}
-        <div className="mb-6 grid gap-4 md:grid-cols-4">
+        <div className="mb-4 grid gap-4 md:grid-cols-4">
           <Card className="p-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Today's Orders</p>
                 <p className="text-2xl font-bold">{todaysOrders}</p>
               </div>
-              <ShoppingCart className="h-8 w-8 text-primary" />
+              <ShoppingCart className="h-5 w-5 text-primary" />
             </div>
           </Card>
           <Card className="p-4">
@@ -239,7 +239,7 @@ const OrdersList = () => {
                   ${todaysRevenue.toFixed(2)}
                 </p>
               </div>
-              <DollarSign className="h-8 w-8 text-success" />
+              <DollarSign className="h-5 w-5 text-success" />
             </div>
           </Card>
           <Card className="p-4">
@@ -250,7 +250,7 @@ const OrdersList = () => {
                   ${avgOrderValue.toFixed(2)}
                 </p>
               </div>
-              <TrendingUp className="h-8 w-8 text-accent" />
+              <TrendingUp className="h-5 w-5 text-accent" />
             </div>
           </Card>
           <Card className="p-4">
@@ -261,13 +261,13 @@ const OrdersList = () => {
                   {unfulfilledCount}
                 </p>
               </div>
-              <Package className="h-8 w-8 text-yellow-500" />
+              <Package className="h-5 w-5 text-yellow-500" />
             </div>
           </Card>
         </div>
 
         {/* Controls */}
-        <div className="mb-6 flex flex-wrap items-center gap-4">
+        <div className="mb-4 flex flex-wrap items-center gap-4">
           <div className="flex-1">
             <Input
               placeholder="Search orders by #, customer, email..."
@@ -361,12 +361,12 @@ const OrdersList = () => {
             <TabsTrigger value="pending">Pending Payment</TabsTrigger>
           </TabsList>
 
-          <TabsContent value={activeTab} className="mt-6">
+          <TabsContent value={activeTab} className="mt-4">
             <Card>
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="w-12">
+                    <TableHead className="w-7">
                       <Checkbox
                         checked={
                           selectedOrders.length === filteredOrders.length
@@ -418,7 +418,7 @@ const OrdersList = () => {
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center gap-3">
-                          <Avatar className="h-8 w-8">
+                          <Avatar className="h-5 w-5">
                             <AvatarImage
                               src={order.customer.avatar || undefined}
                             />
@@ -450,7 +450,7 @@ const OrdersList = () => {
                                 key={i}
                                 src={img}
                                 alt={`Order item ${i + 1}`}
-                                className="h-6 w-6 rounded-full border-2 border-background"
+                                className="h-4 w-4 rounded-full border-2 border-background"
                               />
                             ))}
                           </div>
@@ -527,8 +527,8 @@ const OrdersList = () => {
             </Card>
 
             {filteredOrders.length === 0 && (
-              <div className="flex flex-col items-center justify-center py-12">
-                <Package className="h-16 w-16 text-muted-foreground" />
+              <div className="flex flex-col items-center justify-center py-7">
+                <Package className="h-10 w-10 text-muted-foreground" />
                 <h3 className="mt-4 text-lg font-semibold">No Orders Found</h3>
                 <p className="text-muted-foreground">
                   Orders from customers will appear here

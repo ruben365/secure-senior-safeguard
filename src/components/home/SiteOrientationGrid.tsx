@@ -72,16 +72,16 @@ export const SiteOrientationGrid = () => {
   }, []);
 
   return (
-    <section className="py-16 md:py-28 relative overflow-hidden" ref={ref}>
+    <section className="py-10 md:py-18 relative overflow-hidden" ref={ref}>
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/5 rounded-full blur-3xl pointer-events-none" />
       
-      <div className="container mx-auto md:px-6 lg:px-8 relative">
-        <div className={`text-center mb-14 transition-all duration-500 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+      <div className="container mx-auto md:px-4 lg:px-5 relative">
+        <div className={`text-center mb-9 transition-all duration-500 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary mb-4">
             What We Offer
           </p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+          <h2 className="text-3xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-4">
             Explore Our Services
           </h2>
           <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
@@ -119,7 +119,7 @@ export const SiteOrientationGrid = () => {
                     </span>
                   )}
                   {/* Floating icon overlay */}
-                  <div className="absolute bottom-3 right-3 w-10 h-10 rounded-xl glass flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute bottom-3 right-3 w-6 h-6 rounded-xl glass flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <page.icon className="w-5 h-5 text-primary" />
                   </div>
                 </div>
@@ -127,7 +127,7 @@ export const SiteOrientationGrid = () => {
                 <div className="p-5 relative">
                   <div className={`absolute inset-0 bg-gradient-to-br ${page.gradient} opacity-30 pointer-events-none`} />
                   <div className="relative">
-                    <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-primary/20 to-accent/15 flex items-center justify-center mb-3 shadow-[0_2px_8px_hsl(var(--primary)/0.15)] border border-primary/15 group-hover:shadow-[0_4px_16px_hsl(var(--primary)/0.25)] group-hover:scale-110 transition-all duration-300">
+                    <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-primary/20 to-accent/15 flex items-center justify-center mb-3 shadow-[0_2px_8px_hsl(var(--primary)/0.15)] border border-primary/15 group-hover:shadow-[0_4px_16px_hsl(var(--primary)/0.25)] group-hover:scale-110 transition-all duration-300">
                       <page.icon className="w-5 h-5 text-primary" />
                     </div>
                     <h3 className="text-lg font-bold text-foreground mb-2">
@@ -146,7 +146,7 @@ export const SiteOrientationGrid = () => {
           ))}
         </div>
 
-        <div className={`mt-12 flex flex-col sm:flex-row gap-4 justify-center transition-all duration-500 delay-500 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+        <div className={`mt-7 flex flex-col sm:flex-row gap-4 justify-center transition-all duration-500 delay-500 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
           <Button asChild size="lg">
             <Link to="/contact">
               Talk to an Expert <ArrowRight className="ml-2 w-4 h-4" />

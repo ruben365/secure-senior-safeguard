@@ -212,13 +212,13 @@ const JobApplicationsList = () => {
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="mb-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="mb-4">
         <h1 className="text-2xl font-bold text-[#F9FAFB]">Job Applications</h1>
         <p className="text-[#9CA3AF]">Review and manage job applications</p>
       </div>
       {/* Stats Cards */}
-      <div className="grid gap-4 md:grid-cols-6 mb-6">
+      <div className="grid gap-4 md:grid-cols-6 mb-4">
         <Card className="bg-slate-800/50 border-slate-700">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
@@ -226,7 +226,7 @@ const JobApplicationsList = () => {
                 <p className="text-sm text-slate-400">Total</p>
                 <p className="text-2xl font-bold text-white">{stats.total}</p>
               </div>
-              <Briefcase className="h-8 w-8 text-orange-400" />
+              <Briefcase className="h-5 w-5 text-orange-400" />
             </div>
           </CardContent>
         </Card>
@@ -239,7 +239,7 @@ const JobApplicationsList = () => {
                   {stats.new}
                 </p>
               </div>
-              <Star className="h-8 w-8 text-yellow-400" />
+              <Star className="h-5 w-5 text-yellow-400" />
             </div>
           </CardContent>
         </Card>
@@ -252,7 +252,7 @@ const JobApplicationsList = () => {
                   {stats.reviewing}
                 </p>
               </div>
-              <Eye className="h-8 w-8 text-orange-400" />
+              <Eye className="h-5 w-5 text-orange-400" />
             </div>
           </CardContent>
         </Card>
@@ -265,7 +265,7 @@ const JobApplicationsList = () => {
                   {stats.interviewed}
                 </p>
               </div>
-              <CheckCircle className="h-8 w-8 text-purple-400" />
+              <CheckCircle className="h-5 w-5 text-purple-400" />
             </div>
           </CardContent>
         </Card>
@@ -278,7 +278,7 @@ const JobApplicationsList = () => {
                   {stats.hired}
                 </p>
               </div>
-              <CheckCircle className="h-8 w-8 text-green-400" />
+              <CheckCircle className="h-5 w-5 text-green-400" />
             </div>
           </CardContent>
         </Card>
@@ -291,14 +291,14 @@ const JobApplicationsList = () => {
                   {stats.rejected}
                 </p>
               </div>
-              <XCircle className="h-8 w-8 text-red-400" />
+              <XCircle className="h-5 w-5 text-red-400" />
             </div>
           </CardContent>
         </Card>
       </div>
 
       {/* Filters */}
-      <div className="flex flex-wrap items-center gap-4 mb-6">
+      <div className="flex flex-wrap items-center gap-4 mb-4">
         <div className="flex-1 min-w-[250px]">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
@@ -306,7 +306,7 @@ const JobApplicationsList = () => {
               placeholder="Search by name, email, or position..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 bg-slate-800/50 border-slate-700 text-white"
+              className="pl-6 bg-slate-800/50 border-slate-700 text-white"
             />
           </div>
         </div>
@@ -376,8 +376,8 @@ const JobApplicationsList = () => {
           <TableBody>
             {isLoading ? (
               <TableRow>
-                <TableCell colSpan={6} className="text-center py-8">
-                  <RefreshCw className="h-6 w-6 animate-spin mx-auto mb-2 text-orange-400" />
+                <TableCell colSpan={6} className="text-center py-5">
+                  <RefreshCw className="h-4 w-4 animate-spin mx-auto mb-2 text-orange-400" />
                   <span className="text-slate-400">
                     Loading applications...
                   </span>
@@ -387,9 +387,9 @@ const JobApplicationsList = () => {
               <TableRow>
                 <TableCell
                   colSpan={6}
-                  className="text-center py-8 text-slate-400"
+                  className="text-center py-5 text-slate-400"
                 >
-                  <Briefcase className="h-12 w-12 mx-auto mb-2 opacity-50" />
+                  <Briefcase className="h-7 w-7 mx-auto mb-2 opacity-50" />
                   No applications found
                 </TableCell>
               </TableRow>
@@ -533,7 +533,7 @@ const JobApplicationsList = () => {
             </DialogDescription>
           </DialogHeader>
           {selectedApplication && (
-            <div className="space-y-6">
+            <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="text-sm font-medium text-slate-400">

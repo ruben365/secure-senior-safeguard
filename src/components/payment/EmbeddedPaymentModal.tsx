@@ -245,7 +245,7 @@ function PaymentForm({
         {["info", "payment", "success"].map((s, i) => (
           <div key={s} className="flex items-center gap-2 max-sm:gap-1">
             <div
-              className={`w-6 h-6 max-sm:w-4 max-sm:h-4 rounded-full flex items-center justify-center text-[11px] max-sm:text-[9px] font-bold transition-all ${
+              className={`w-4 h-4 max-sm:w-4 max-sm:h-4 rounded-full flex items-center justify-center text-[11px] max-sm:text-[9px] font-bold transition-all ${
                 step === s
                   ? "bg-primary text-primary-foreground"
                   : ["info", "payment", "success"].indexOf(step) > i
@@ -261,7 +261,7 @@ function PaymentForm({
             </div>
             {i < 2 && (
               <div
-                className={`w-8 max-sm:w-5 h-0.5 rounded ${
+                className={`w-5 max-sm:w-5 h-0.5 rounded ${
                   ["info", "payment", "success"].indexOf(step) > i
                     ? "bg-primary"
                     : "bg-muted"
@@ -342,7 +342,7 @@ function PaymentForm({
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="your@email.com"
-                  className="mt-1 max-sm:mt-0.5 max-sm:h-9 max-sm:text-[13px]"
+                  className="mt-1 max-sm:mt-0.5 max-sm:h-6 max-sm:text-[13px]"
                 />
               </div>
 
@@ -354,12 +354,12 @@ function PaymentForm({
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Your full name"
-                  className="mt-1 max-sm:mt-0.5 max-sm:h-9 max-sm:text-[13px]"
+                  className="mt-1 max-sm:mt-0.5 max-sm:h-6 max-sm:text-[13px]"
                 />
               </div>
 
               {/* Veteran Discount Toggle */}
-              <div className="flex items-center justify-between p-3 max-sm:py-1.5 max-sm:px-3 bg-muted/50 rounded-xl border max-sm:h-9">
+              <div className="flex items-center justify-between p-3 max-sm:py-1.5 max-sm:px-3 bg-muted/50 rounded-xl border max-sm:h-6">
                 <div className="flex items-center gap-3 max-sm:gap-2">
                   <Shield className="w-5 h-5 max-sm:w-4 max-sm:h-4 text-primary" />
                   <div>
@@ -407,7 +407,7 @@ function PaymentForm({
             <Button
               onClick={handleInfoSubmit}
               disabled={isLoading || !email || !name || !termsAccepted}
-              className="w-full h-9 text-sm"
+              className="w-full h-6 text-sm"
               size="sm"
             >
               {isLoading ? (
@@ -457,8 +457,8 @@ function PaymentForm({
 
             {/* Payment Method Tabs — QR hidden on mobile */}
             <Tabs defaultValue="card" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 sm:grid-cols-2 max-sm:grid-cols-1 mb-2 h-9 max-sm:h-7">
-                <TabsTrigger value="card" className="flex items-center gap-2 max-sm:text-[11px] max-sm:h-6">
+              <TabsList className="grid w-full grid-cols-2 sm:grid-cols-2 max-sm:grid-cols-1 mb-2 h-6 max-sm:h-4">
+                <TabsTrigger value="card" className="flex items-center gap-2 max-sm:text-[11px] max-sm:h-4">
                   <CreditCard className="w-4 h-4 max-sm:w-3 max-sm:h-3" />
                   Card
                 </TabsTrigger>
@@ -472,15 +472,15 @@ function PaymentForm({
               <TabsContent value="card" className="mt-0">
                 <div className="bg-background rounded-lg p-3 max-sm:p-2 border">
                   {stripeLoading ? (
-                    <div className="flex items-center justify-center py-8">
-                      <Loader2 className="w-6 h-6 animate-spin text-primary" />
+                    <div className="flex items-center justify-center py-5">
+                      <Loader2 className="w-4 h-4 animate-spin text-primary" />
                       <span className="ml-2 text-sm text-muted-foreground">
                         Initializing payment...
                       </span>
                     </div>
                   ) : !stripePromise || stripeError ? (
                     <div className="p-4 bg-destructive/10 text-destructive rounded-lg text-center">
-                      <CreditCard className="w-8 h-8 mx-auto mb-2 opacity-50" />
+                      <CreditCard className="w-5 h-5 mx-auto mb-2 opacity-50" />
                       <p className="font-medium">Payment system unavailable</p>
                       <p className="text-sm mt-1">
                         {stripeError ||
@@ -603,13 +603,13 @@ function PaymentForm({
             animate={{ opacity: 1, scale: 1 }}
             className="text-center py-4"
           >
-            <div className="w-14 h-14 bg-success/20 rounded-full flex items-center justify-center mx-auto mb-3">
+            <div className="w-9 h-9 bg-success/20 rounded-full flex items-center justify-center mx-auto mb-3">
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring" }}
               >
-                <CheckCircle className="w-7 h-7 text-success" />
+                <CheckCircle className="w-4 h-4 text-success" />
               </motion.div>
             </div>
 
@@ -628,7 +628,7 @@ function PaymentForm({
                 </p>
               </div>
 
-              <Button onClick={onClose} className="w-full h-9 text-sm" size="sm">
+              <Button onClick={onClose} className="w-full h-6 text-sm" size="sm">
                 Close
               </Button>
             </div>
@@ -746,7 +746,7 @@ function PaymentElementWrapper({
           variant="outline"
           onClick={onBack}
           disabled={isLoading}
-          className="flex-1 h-9 text-sm"
+          className="flex-1 h-6 text-sm"
           size="sm"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
@@ -755,7 +755,7 @@ function PaymentElementWrapper({
         <Button
           onClick={handleSubmit}
           disabled={isLoading || !stripe || !elements || !isReady}
-          className="flex-1 h-9 text-sm"
+          className="flex-1 h-6 text-sm"
           size="sm"
         >
           {isLoading ? (

@@ -355,7 +355,7 @@ export function UpcomingTasks() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.6 }}
-      className="bg-background rounded-xl border border-border shadow-sm p-5 mt-8"
+      className="bg-background rounded-xl border border-border shadow-sm p-5 mt-5"
     >
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
@@ -368,7 +368,7 @@ export function UpcomingTasks() {
           {/* Sort Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm" className="h-9">
+              <Button variant="outline" size="sm" className="h-6">
                 <ArrowUpDown className="h-4 w-4 mr-2" />
                 Sort
               </Button>
@@ -391,7 +391,7 @@ export function UpcomingTasks() {
             value={filter}
             onValueChange={(value: string) => setFilter(value as typeof filter)}
           >
-            <SelectTrigger className="w-[130px] h-9">
+            <SelectTrigger className="w-[130px] h-6">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -413,7 +413,7 @@ export function UpcomingTasks() {
                 key={i}
                 className="flex items-start gap-3 py-3 border-b border-border"
               >
-                <div className="w-8 h-8 rounded-full bg-muted shimmer" />
+                <div className="w-5 h-5 rounded-full bg-muted shimmer" />
                 <div className="flex-1 space-y-2">
                   <div className="h-4 bg-muted rounded w-3/4 shimmer" />
                   <div className="h-3 bg-muted rounded w-1/4 shimmer" />
@@ -450,7 +450,7 @@ export function UpcomingTasks() {
 
                   {/* Icon */}
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${getIconColor(task.date)}`}
+                    className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${getIconColor(task.date)}`}
                   >
                     <Icon className="h-4 w-4" />
                   </div>
@@ -485,7 +485,7 @@ export function UpcomingTasks() {
                           size="sm"
                           variant="default"
                           onClick={() => handleApprove(task)}
-                          className="h-7 text-xs"
+                          className="h-4 text-xs"
                         >
                           Approve
                         </Button>
@@ -493,7 +493,7 @@ export function UpcomingTasks() {
                           size="sm"
                           variant="outline"
                           onClick={() => handleDeny(task)}
-                          className="h-7 text-xs"
+                          className="h-4 text-xs"
                         >
                           Deny
                         </Button>
@@ -507,7 +507,7 @@ export function UpcomingTasks() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="h-7 w-7 p-0 md:w-auto md:px-2"
+                        className="h-4 w-4 p-0 md:w-auto md:px-2"
                         onClick={() => handleSnooze(task)}
                       >
                         <Clock className="h-3.5 w-3.5" />
@@ -518,7 +518,7 @@ export function UpcomingTasks() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="h-7 w-7 p-0 md:w-auto md:px-2 text-red-500 hover:text-red-600"
+                        className="h-4 w-4 p-0 md:w-auto md:px-2 text-red-500 hover:text-red-600"
                         onClick={() => handleDelete(task)}
                       >
                         <Trash2 className="h-3.5 w-3.5" />
@@ -533,8 +533,8 @@ export function UpcomingTasks() {
             })}
           </AnimatePresence>
         ) : (
-          <div className="text-center py-12">
-            <div className="text-5xl mb-3">🎉</div>
+          <div className="text-center py-7">
+            <div className="text-3xl mb-3">🎉</div>
             <p className="text-sm font-medium text-foreground mb-1">
               All done!
             </p>

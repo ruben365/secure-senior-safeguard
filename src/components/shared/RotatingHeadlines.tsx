@@ -10,7 +10,7 @@ interface RotatingHeadlinesProps {
 export const RotatingHeadlines = ({
   headlines,
   interval = 4000,
-  className = "text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4",
+  className = "text-3xl md:text-3xl lg:text-4xl font-bold text-white mb-4",
 }: RotatingHeadlinesProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);

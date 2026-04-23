@@ -69,7 +69,7 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
           <section
             id="story"
             aria-label="Who we are, what we offer, how we train you"
-            className="sec-rhythm-sm pt-6 md:pt-10"
+            className="sec-rhythm-sm pt-4 md:pt-6"
           >
             <HomeStorySections />
           </section>
@@ -123,29 +123,29 @@ const Index = forwardRef<HTMLDivElement>(function Index(_props, _ref) {
 
             {/* Text panel — anchored left, never centered */}
             <div className="relative z-10 w-full">
-              <div className="container mx-auto py-14 md:py-16 lg:py-20">
+              <div className="container mx-auto py-9 md:py-10 lg:py-12">
                 <div
                   className={`max-w-xl transition-[opacity,transform] duration-500 ease-out ${
                     ctaVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                   }`}
                 >
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/25 bg-white/10 backdrop-blur-md mb-6 shadow-[0_4px_16px_-4px_rgba(0,0,0,0.5)]">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/25 bg-white/10 backdrop-blur-md mb-4 shadow-[0_4px_16px_-4px_rgba(0,0,0,0.5)]">
                     <Shield className="w-4 h-4 text-[#fbab8e]" strokeWidth={2.25} />
                     <span className="text-xs font-bold uppercase tracking-[0.18em] text-white">
                       Ohio's Trusted Cybersecurity Partner
                     </span>
                   </div>
 
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-[3.25rem] font-extrabold text-white mb-5 leading-[1.1] tracking-tight">
+                  <h2 className="text-3xl md:text-2xl lg:text-3xl xl:text-[3.25rem] font-extrabold text-white mb-5 leading-[1.1] tracking-tight">
                     Start Protecting Your Family Today
                   </h2>
-                  <p className="text-base md:text-lg text-white/90 mb-8 max-w-md leading-relaxed">
+                  <p className="text-base md:text-lg text-white/90 mb-5 max-w-md leading-relaxed">
                     Join families in Dayton, Columbus, Cincinnati, Cleveland
                     and across Ohio who live confidently, knowing they are
                     protected from AI scams. Get started in minutes.
                   </p>
 
-                  <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-4 mb-8">
+                  <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-4 mb-5">
                     <Button asChild size="lg" className="w-full max-w-[260px] sm:max-w-none sm:w-auto">
                       <Link to="/training#pricing">
                         Get Protected Today <ArrowRight className="ml-2 w-4 h-4" />

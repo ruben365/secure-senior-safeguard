@@ -42,7 +42,7 @@ export default function SupportTickets() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <div>
         <h1 className="text-2xl font-bold">Support Tickets</h1>
         <p className="text-muted-foreground">Manage customer support requests</p>
@@ -67,7 +67,7 @@ export default function SupportTickets() {
       <div className="flex gap-3">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input placeholder="Search tickets..." className="pl-9" value={search} onChange={(e) => setSearch(e.target.value)} />
+          <Input placeholder="Search tickets..." className="pl-6" value={search} onChange={(e) => setSearch(e.target.value)} />
         </div>
         <Select value={statusFilter} onValueChange={setStatusFilter}>
           <SelectTrigger className="w-40"><SelectValue /></SelectTrigger>
@@ -96,9 +96,9 @@ export default function SupportTickets() {
             </TableHeader>
             <TableBody>
               {isLoading ? (
-                <TableRow><TableCell colSpan={6} className="text-center py-8">Loading...</TableCell></TableRow>
+                <TableRow><TableCell colSpan={6} className="text-center py-5">Loading...</TableCell></TableRow>
               ) : !filtered?.length ? (
-                <TableRow><TableCell colSpan={6} className="text-center py-8">No tickets found</TableCell></TableRow>
+                <TableRow><TableCell colSpan={6} className="text-center py-5">No tickets found</TableCell></TableRow>
               ) : (
                 filtered.map((ticket) => (
                   <TableRow key={ticket.id} className="cursor-pointer" onClick={() => setSelectedTicket(ticket.id)}>

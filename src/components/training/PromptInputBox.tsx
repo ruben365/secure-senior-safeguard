@@ -122,10 +122,10 @@ const InlineButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
       ghost: "bg-transparent hover:bg-[#3A3A40]",
     };
     const sizeClasses = {
-      default: "h-10 px-4 py-2",
-      sm: "h-8 px-3 text-sm",
-      lg: "h-12 px-6",
-      icon: "h-8 w-8 rounded-full aspect-[1/1]",
+      default: "h-6 px-4 py-2",
+      sm: "h-5 px-3 text-sm",
+      lg: "h-7 px-4",
+      icon: "h-5 w-5 rounded-full aspect-[1/1]",
     };
     return (
       <button
@@ -207,7 +207,7 @@ const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
         <div className="pib-recorder-dot h-2 w-2 rounded-full animate-pulse" />
         <span className="font-mono text-sm text-white/80">{formatTime(time)}</span>
       </div>
-      <div className="w-full h-10 flex items-center justify-center gap-0.5 px-4">
+      <div className="w-full h-6 flex items-center justify-center gap-0.5 px-4">
         {bars.map((bar, i) => (
           <div
             key={i}
@@ -590,7 +590,7 @@ export const PromptInputBox = React.forwardRef(
                 <div key={index} className="relative group">
                   {file.type.startsWith("image/") && filePreviews[file.name] && (
                     <div
-                      className="w-16 h-16 rounded-xl overflow-hidden cursor-pointer transition-all duration-300"
+                      className="w-10 h-10 rounded-xl overflow-hidden cursor-pointer transition-all duration-300"
                       onClick={() => openImageModal(filePreviews[file.name])}
                     >
                       <img
@@ -671,7 +671,7 @@ export const PromptInputBox = React.forwardRef(
                   type="button"
                   onClick={() => uploadInputRef.current?.click()}
                   aria-label="Upload image"
-                  className="pib-ghost-button flex h-8 w-8 cursor-pointer items-center justify-center rounded-full"
+                  className="pib-ghost-button flex h-5 w-5 cursor-pointer items-center justify-center rounded-full"
                   disabled={isRecording}
                 >
                   <Paperclip className="h-5 w-5 transition-colors" />
@@ -683,7 +683,7 @@ export const PromptInputBox = React.forwardRef(
                   type="button"
                   onClick={() => handleToggleChange("search")}
                   className={cn(
-                    "pib-toggle rounded-full flex items-center gap-1 px-2 py-1 h-8",
+                    "pib-toggle rounded-full flex items-center gap-1 px-2 py-1 h-5",
                     showSearch && "is-active",
                   )}
                 >
@@ -721,7 +721,7 @@ export const PromptInputBox = React.forwardRef(
                   type="button"
                   onClick={() => handleToggleChange("think")}
                   className={cn(
-                    "pib-toggle rounded-full flex items-center gap-1 px-2 py-1 h-8",
+                    "pib-toggle rounded-full flex items-center gap-1 px-2 py-1 h-5",
                     showThink && "is-active",
                   )}
                 >
@@ -759,7 +759,7 @@ export const PromptInputBox = React.forwardRef(
                   type="button"
                   onClick={handleCanvasToggle}
                   className={cn(
-                    "pib-toggle rounded-full flex items-center gap-1 px-2 py-1 h-8",
+                    "pib-toggle rounded-full flex items-center gap-1 px-2 py-1 h-5",
                     showCanvas && "is-active",
                   )}
                 >
@@ -808,7 +808,7 @@ export const PromptInputBox = React.forwardRef(
                 variant="default"
                 size="icon"
                 className={cn(
-                  "pib-send-button h-9 w-9 rounded-full",
+                  "pib-send-button h-6 w-6 rounded-full",
                   !hasContent && !isRecording && "is-mic",
                   isRecording && "is-recording",
                 )}

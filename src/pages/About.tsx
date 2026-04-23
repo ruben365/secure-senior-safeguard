@@ -148,7 +148,7 @@ function About() {
           subheadline=""
           showScrollIndicator={true}
         >
-          <div className="text-left mb-8">
+          <div className="text-left mb-5">
             <h1 className="font-extrabold text-white mb-4 leading-[1.05] tracking-tight text-[clamp(1.75rem,3.5vw,3rem)] min-h-[4.5rem] sm:min-h-[5rem]">
               <RotatingHeadlines headlines={aboutHeadlines} className="" />
             </h1>
@@ -176,20 +176,20 @@ function About() {
         summary="InVision Network is a cybersecurity company founded by a veteran couple in Kettering, Ohio. We protect families and small businesses from AI-powered scams through hands-on training, automated defenses, and 24/7 monitoring — serving the greater Dayton area and beyond."
         ctaHref="/contact"
         ctaLabel="Get in touch with our team"
-        className="py-6"
+        className="py-4"
       />
 
       {/* Our Story */}
       <MeshBackground variant="subtle" withOrbs>
-      <section className="py-8 md:py-12 bg-transparent relative overflow-hidden">
+      <section className="py-5 md:py-4 bg-transparent relative overflow-hidden">
 
         <div className="container mx-auto">
-          <div className="grid md:grid-cols-2 gap-6 lg:gap-10 items-center">
+          <div className="grid md:grid-cols-2 gap-4 lg:gap-4 items-center">
             <div>
               <span className="inline-block text-[10px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-3 py-1 rounded-full mb-3">
                 Our Story
               </span>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-foreground mb-3">
+              <h2 className="text-2xl md:text-3xl lg:text-2xl font-black text-foreground mb-3">
                 It Started With a <span className="text-primary">Breach</span>
               </h2>
               <div className="space-y-2.5 text-sm text-muted-foreground leading-relaxed">
@@ -216,14 +216,14 @@ function About() {
                 </p>
               </div>
             </div>
-            <div className="relative mt-8 md:mt-0">
+            <div className="relative mt-5 md:mt-0">
               <img
                 src={teamDiverse1}
                 alt="InVision Network team working together"
                 className="rounded-2xl shadow-2xl w-full h-auto border-4 border-primary/20"
               />
-              <div className="absolute -bottom-4 sm:-bottom-6 -right-4 sm:-right-6 bg-primary text-primary-foreground p-4 sm:p-6 md:p-8 rounded-xl shadow-xl">
-                <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 sm:mb-2">
+              <div className="absolute -bottom-4 sm:-bottom-6 -right-4 sm:-right-6 bg-primary text-primary-foreground p-4 sm:p-4 md:p-5 rounded-xl shadow-xl">
+                <div className="text-3xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2">
                   500+
                 </div>
                 <div className="text-xs sm:text-sm md:text-base">
@@ -239,14 +239,14 @@ function About() {
       <SectionDivider variant="wave" color="muted" />
 
       {/* Timeline */}
-      <section className="py-7 md:py-10 section-warm relative overflow-hidden">
+      <section className="py-4 md:py-4 section-warm relative overflow-hidden">
 
         <div className="container mx-auto">
           <div className="head-rhythm text-center mb-5">
             <span className="inline-block text-[10px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-3 py-1 rounded-full mb-3">
               Our Journey
             </span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-foreground mb-3">
+            <h2 className="text-2xl md:text-3xl lg:text-2xl font-black text-foreground mb-3">
               Milestones That <span className="text-primary">Matter</span>
             </h2>
             <p className="text-base text-muted-foreground max-w-2xl mx-auto lede">
@@ -258,7 +258,7 @@ function About() {
       </section>
 
       {/* Founders */}
-      <section id="founders" className="py-7 md:py-10 bg-background relative overflow-hidden">
+      <section id="founders" className="py-4 md:py-4 bg-background relative overflow-hidden">
 
         <div className="container mx-auto">
           <div className="head-rhythm text-center mb-5">
@@ -277,8 +277,8 @@ function About() {
             <Card className="hss-card stroke-glass--accent p-4 border border-border/40 bg-card/70">
               <div className="flex gap-4 items-start">
                 <div className="relative flex-shrink-0">
-                  <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-[#fff4f0] to-[#fde8dc] flex items-center justify-center">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#d96c4a] to-[#c2410c] flex items-center justify-center shadow-lg">
+                  <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-[#fff4f0] to-[#fde8dc] flex items-center justify-center">
+                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#d96c4a] to-[#c2410c] flex items-center justify-center shadow-lg">
                       <span className="text-2xl font-black text-white">R</span>
                     </div>
                   </div>
@@ -309,11 +309,11 @@ function About() {
 
       {/* Values */}
       <MeshBackground variant="vibrant" withDots>
-      <section className="py-7 md:py-10">
+      <section className="py-4 md:py-4">
         <div className="container mx-auto">
           <div className="head-rhythm text-center mb-5">
             <span className="frosted-pill mb-3">Our Values</span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-foreground mb-3">
+            <h2 className="text-2xl md:text-3xl lg:text-2xl font-black text-foreground mb-3">
               What Drives Us <span className="gradient-text-brand">Every Day</span>
             </h2>
           </div>
@@ -323,7 +323,7 @@ function About() {
               const Icon = value.icon;
               return (
                 <GlowCard key={value.title} className="text-center h-full p-4">
-                  <div className="icon-glow-ring w-11 h-11 rounded-xl bg-gradient-to-br from-[hsl(var(--primary)/0.1)] to-[hsl(var(--accent)/0.08)] flex items-center justify-center mx-auto mb-3">
+                  <div className="icon-glow-ring w-4 h-4 rounded-xl bg-gradient-to-br from-[hsl(var(--primary)/0.1)] to-[hsl(var(--accent)/0.08)] flex items-center justify-center mx-auto mb-3">
                     <Icon className="w-5 h-5 text-[hsl(var(--accent))]" />
                   </div>
                   <h3 className="text-sm font-bold text-foreground mb-1.5">
@@ -343,7 +343,7 @@ function About() {
       <SectionDivider variant="mountains" color="background" />
 
       {/* Community Impact */}
-      <section className="py-7 md:py-10 relative overflow-hidden">
+      <section className="py-4 md:py-4 relative overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${ohioNatureImpact})` }}
@@ -366,7 +366,7 @@ function About() {
       <SectionDivider variant="wave" color="background" flip />
 
       {/* Who We Help */}
-      <section className="py-7 md:py-10 bg-background">
+      <section className="py-4 md:py-4 bg-background">
         <div className="container mx-auto">
           <div className="head-rhythm text-center mb-5">
             <span className="inline-block text-[10px] uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-3 py-1 rounded-full mb-2">
@@ -426,7 +426,7 @@ function About() {
 
 
       {/* CTA with Field Background */}
-      <section className="py-8 md:py-12 relative overflow-hidden" id="cta">
+      <section className="py-5 md:py-4 relative overflow-hidden" id="cta">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${fieldSunsetCta})` }}
@@ -434,7 +434,7 @@ function About() {
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/50 to-transparent" />
 
         <div className="container mx-auto relative z-10 text-center">
-          <h2 className="text-2xl md:text-4xl font-black text-white mb-3 drop-shadow-lg">
+          <h2 className="text-2xl md:text-2xl font-black text-white mb-3 drop-shadow-lg">
             Ready to Join Our Protected Community?
           </h2>
           <p className="text-base md:text-lg text-white/95 mb-5 max-w-2xl mx-auto drop-shadow-md">

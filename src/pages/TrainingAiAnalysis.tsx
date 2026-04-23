@@ -610,7 +610,7 @@ export default function TrainingAiAnalysis() {
         >
 
         {/* ── Main content ─────────────────────────────────────────────────────── */}
-        <main className="flex-1 flex flex-col items-center justify-center px-4 pb-16 pt-14 relative z-10">
+        <main className="flex-1 flex flex-col items-center justify-center px-4 pb-10 pt-9 relative z-10">
 
           {/* Chat history */}
           {messages.length > 0 && (

@@ -87,14 +87,14 @@ function Maintenance() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-background flex items-center justify-center px-4 py-16">
+    <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-background flex items-center justify-center px-4 py-10">
       <SEO
         title="Site Maintenance"
         description="InVision Network is temporarily down for scheduled maintenance. We will be back online shortly."
         noindex
       />
       <div className="max-w-2xl w-full">
-        <Card className="p-8 md:p-12 text-center space-y-8">
+        <Card className="p-5 md:p-7 text-center space-y-5">
           {/* Logo */}
           <div className="mb-4">
             <h1 className="text-2xl font-bold text-primary">
@@ -104,10 +104,10 @@ function Maintenance() {
 
           {/* Icon & Headline */}
           <div className="space-y-4">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-accent/10">
-              <Wrench className="w-10 h-10 text-accent animate-pulse" />
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-accent/10">
+              <Wrench className="w-6 h-6 text-accent animate-pulse" />
             </div>
-            <h2 className="text-4xl font-bold text-foreground">
+            <h2 className="text-2xl font-bold text-foreground">
               We'll Be Right Back!
             </h2>
           </div>
@@ -119,7 +119,7 @@ function Maintenance() {
           </p>
 
           {/* Expected Completion */}
-          <Card className="p-6 bg-primary/5 border-primary/20">
+          <Card className="p-4 bg-primary/5 border-primary/20">
             <div className="space-y-2">
               <div className="text-sm font-semibold text-muted-foreground">
                 Expected Completion:
@@ -195,7 +195,7 @@ function Maintenance() {
           )}
 
           {/* Contact Information */}
-          <Card className="p-6 bg-muted/50 space-y-3">
+          <Card className="p-4 bg-muted/50 space-y-3">
             <h3 className="font-semibold text-foreground">
               Need Immediate Help?
             </h3>

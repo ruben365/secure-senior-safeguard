@@ -324,9 +324,9 @@ export function AddTeamMemberModal({
         </DialogHeader>
 
         <div className="flex-1 overflow-y-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 p-4">
             {/* Left Side - Form */}
-            <div className="space-y-6">
+            <div className="space-y-4">
               {/* Profile Photo */}
               <div className="space-y-3">
                 <Label>Profile Photo</Label>
@@ -366,7 +366,7 @@ export function AddTeamMemberModal({
                           )}
                         >
                           <div className="flex flex-col items-center gap-2 text-center">
-                            <Camera className="h-16 w-16 text-muted-foreground" />
+                            <Camera className="h-10 w-10 text-muted-foreground" />
                             <div className="text-xs text-muted-foreground px-4">
                               <p className="font-medium">Drag & drop</p>
                               <p>or click to upload</p>
@@ -540,7 +540,7 @@ export function AddTeamMemberModal({
                       errors.linkedin && "border-destructive",
                       formData.linkedin.match(
                         /^https?:\/\/(www\.)?linkedin\.com\//,
-                      ) && "pr-10",
+                      ) && "pr-6",
                     )}
                   />
                   {formData.linkedin.match(
@@ -676,10 +676,10 @@ export function AddTeamMemberModal({
                 </p>
 
                 <Card className="overflow-hidden">
-                  <CardContent className="p-6">
+                  <CardContent className="p-4">
                     <div className="flex flex-col items-center text-center space-y-4">
                       {/* Avatar */}
-                      <Avatar className="h-32 w-32 border-4 border-background ring-2 ring-border">
+                      <Avatar className="h-20 w-20 border-4 border-background ring-2 ring-border">
                         {photo ? (
                           <AvatarImage
                             src={photo}
@@ -756,7 +756,7 @@ export function AddTeamMemberModal({
         </div>
 
         {/* Footer Actions */}
-        <div className="flex justify-end gap-3 px-6 py-4 border-t">
+        <div className="flex justify-end gap-3 px-4 py-4 border-t">
           <Button variant="outline" onClick={handleClose} disabled={isSaving}>
             Cancel
           </Button>

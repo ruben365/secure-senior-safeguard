@@ -108,7 +108,7 @@ export const TestimonialsTable = () => {
   };
 
   if (isLoading) {
-    return <div className="text-center py-8">Loading testimonials...</div>;
+    return <div className="text-center py-5">Loading testimonials...</div>;
   }
 
   return (
@@ -130,7 +130,7 @@ export const TestimonialsTable = () => {
               <TableRow>
                 <TableCell
                   colSpan={6}
-                  className="text-center text-muted-foreground py-8"
+                  className="text-center text-muted-foreground py-5"
                 >
                   No testimonials found
                 </TableCell>

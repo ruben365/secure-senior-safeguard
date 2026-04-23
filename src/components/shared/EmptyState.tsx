@@ -21,9 +21,9 @@ export function EmptyState({
   className,
 }: EmptyStateProps) {
   return (
-    <div className={cn("flex flex-col items-center justify-center gap-4 py-12 px-6 text-center", className)}>
+    <div className={cn("flex flex-col items-center justify-center gap-4 py-7 px-4 text-center", className)}>
       <div className="rounded-full bg-muted p-4">
-        <Icon className="h-8 w-8 text-muted-foreground" />
+        <Icon className="h-5 w-5 text-muted-foreground" />
       </div>
       <div className="flex flex-col gap-1.5">
         <p className="text-lg font-medium text-foreground">{title}</p>

@@ -22,8 +22,8 @@ const Settings = () => {
   const currentTab = location.pathname.split("/").pop() || "site";
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="mb-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="mb-4">
         <h1 className="text-2xl font-bold text-[#F9FAFB]">Settings</h1>
         <p className="text-[#9CA3AF]">
           Manage your site configuration and preferences
@@ -42,7 +42,7 @@ const Settings = () => {
         </TabsList>
       </Tabs>
 
-      <div className="bg-[#111827] border border-gray-800 rounded-lg shadow-sm p-6">
+      <div className="bg-[#111827] border border-gray-800 rounded-lg shadow-sm p-4">
         <Routes>
           <Route
             index

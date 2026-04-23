@@ -290,7 +290,7 @@ export function ArticlePublishingSidebar({
   };
 
   return (
-    <div className="sticky top-4 space-y-4 bg-[#F9FAFB] border-l border-[#E5E7EB] p-6 h-[calc(100vh-2rem)] overflow-y-auto">
+    <div className="sticky top-4 space-y-4 bg-[#F9FAFB] border-l border-[#E5E7EB] p-4 h-[calc(100vh-2rem)] overflow-y-auto">
       {/* Publishing Checklist */}
       {publishingChecklist.length > 0 && (
         <Card className="border-2 border-primary/20">
@@ -472,7 +472,7 @@ export function ArticlePublishingSidebar({
                     placeholder="Enter password"
                     value={article.password || ""}
                     onChange={(e) => handleChange("password", e.target.value)}
-                    className="ml-6 mt-2"
+                    className="ml-4 mt-2"
                   />
                 )}
                 <div className="flex items-center space-x-2">
@@ -519,7 +519,7 @@ export function ArticlePublishingSidebar({
                 {AVAILABLE_AUTHORS.map((author) => (
                   <SelectItem key={author.id} value={author.name}>
                     <div className="flex items-center gap-2">
-                      <Avatar className="h-6 w-6">
+                      <Avatar className="h-4 w-4">
                         <AvatarImage src={author.avatar} />
                         <AvatarFallback>
                           {author.name
@@ -632,8 +632,8 @@ export function ArticlePublishingSidebar({
               </div>
             ) : (
               <div className="space-y-2">
-                <div className="border-2 border-dashed border-muted rounded-lg p-6 text-center hover:border-primary/50 transition-colors cursor-pointer">
-                  <Upload className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
+                <div className="border-2 border-dashed border-muted rounded-lg p-4 text-center hover:border-primary/50 transition-colors cursor-pointer">
+                  <Upload className="h-5 w-5 mx-auto mb-2 text-muted-foreground" />
                   <p className="text-sm font-medium">Set Featured Image</p>
                   <p className="text-xs text-muted-foreground mt-1">
                     Click to browse or drag & drop
@@ -786,7 +786,7 @@ export function ArticlePublishingSidebar({
                 getSeoScoreColor(seoScore),
               )}
             >
-              <div className="text-4xl font-bold mb-1">{seoScore}</div>
+              <div className="text-2xl font-bold mb-1">{seoScore}</div>
               <div className="text-sm font-medium">
                 {getSeoScoreLabel(seoScore)}
               </div>
@@ -1040,7 +1040,7 @@ export function ArticlePublishingSidebar({
                   <img
                     src={article.featuredImage}
                     alt="Preview"
-                    className="w-full h-32 object-cover"
+                    className="w-full h-20 object-cover"
                   />
                 )}
                 <div className="p-3 space-y-1 bg-white">

@@ -158,7 +158,7 @@ const SiteSettings = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center gap-2 p-8 text-[#9CA3AF]">
+      <div className="flex items-center gap-2 p-5 text-[#9CA3AF]">
         <RefreshCw className="h-4 w-4 animate-spin" />
         Loading settings…
       </div>
@@ -166,7 +166,7 @@ const SiteSettings = () => {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-5">
       {/* General Information */}
       <div className="space-y-4">
         <h3 className="text-xl font-semibold">General Information</h3>
@@ -283,7 +283,7 @@ const SiteSettings = () => {
         <div className="space-y-3">
           {Object.entries(businessHours).map(([day, hours]) => (
             <div key={day} className="flex items-center gap-4">
-              <div className="w-28 font-medium capitalize">{day}</div>
+              <div className="w-18 font-medium capitalize">{day}</div>
               <div className="flex items-center gap-2 flex-1">
                 {!hours.closed ? (
                   <>
@@ -296,7 +296,7 @@ const SiteSettings = () => {
                           [day]: { ...hours, open: e.target.value },
                         })
                       }
-                      className="w-32"
+                      className="w-20"
                     />
                     <span>to</span>
                     <Input
@@ -308,7 +308,7 @@ const SiteSettings = () => {
                           [day]: { ...hours, close: e.target.value },
                         })
                       }
-                      className="w-32"
+                      className="w-20"
                     />
                   </>
                 ) : (
@@ -358,7 +358,7 @@ const SiteSettings = () => {
         </div>
       </div>
 
-      <div className="flex justify-end pt-6">
+      <div className="flex justify-end pt-4">
         <Button
           onClick={() => saveMutation.mutate()}
           disabled={saveMutation.isPending}

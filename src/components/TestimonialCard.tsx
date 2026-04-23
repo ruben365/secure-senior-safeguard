@@ -25,7 +25,7 @@ const TestimonialCard = ({
   return (
     <div className="glass-card rounded-2xl card-padding-lg border border-white/30 relative overflow-hidden group transition-all duration-300 hover:scale-[1.02]">
       {/* Large gradient quote mark background */}
-      <div className="absolute -top-4 left-6 text-[120px] font-bold gradient-text-primary opacity-10 leading-none pointer-events-none select-none group-hover:opacity-20 transition-opacity duration-500">
+      <div className="absolute -top-4 left-4 text-[120px] font-bold gradient-text-primary opacity-10 leading-none pointer-events-none select-none group-hover:opacity-20 transition-opacity duration-500">
         "
       </div>
 
@@ -45,7 +45,7 @@ const TestimonialCard = ({
           ))}
         </div>
 
-        <p className="gx-quote text-foreground mb-6 text-lg leading-relaxed">
+        <p className="gx-quote text-foreground mb-4 text-lg leading-relaxed">
           {quote}
         </p>
 
@@ -54,7 +54,7 @@ const TestimonialCard = ({
             <img
               src={image}
               alt={`${name}'s testimonial`}
-              className="w-16 h-16 rounded-full object-cover ring-4 ring-accent/20 group-hover:ring-accent/40 transition-all duration-500 premium-4k-image"
+              className="w-10 h-10 rounded-full object-cover ring-4 ring-accent/20 group-hover:ring-accent/40 transition-all duration-500 premium-4k-image"
               loading="lazy"
               decoding="async"
             />
@@ -65,7 +65,7 @@ const TestimonialCard = ({
                 aria-label="Play video testimonial"
               >
                 <Play
-                  className="w-6 h-6 text-white group-hover/play:scale-110 transition-transform"
+                  className="w-4 h-4 text-white group-hover/play:scale-110 transition-transform"
                   fill="white"
                 />
               </button>

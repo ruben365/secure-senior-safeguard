@@ -122,7 +122,7 @@ function LibraryHero({ isLoggedIn }: { isLoggedIn: boolean }) {
           <h1 className="font-extrabold text-white mb-4 leading-[1.05] tracking-tight text-[clamp(2.25rem,5vw,4rem)]">
             Your Digital Safety Arsenal
           </h1>
-          <p className="text-base md:text-lg text-white/90 max-w-xl mb-8">
+          <p className="text-base md:text-lg text-white/90 max-w-xl mb-5">
             Expert-curated cybersecurity guides designed to keep you and your
             family safe in the digital age
           </p>
@@ -155,16 +155,16 @@ function LibraryHero({ isLoggedIn }: { isLoggedIn: boolean }) {
 function LibraryStatsBar() {
   return (
     <>
-      <div className="hidden lg:block h-14" />
-      <div className="lg:hidden h-6" />
-      <section className="py-16 md:py-24 relative overflow-hidden bg-background glass-context">
+      <div className="hidden lg:block h-9" />
+      <div className="lg:hidden h-4" />
+      <section className="py-10 md:py-16 relative overflow-hidden bg-background glass-context">
         <div className="container mx-auto relative z-10">
-          <div className="max-w-4xl mx-auto text-center mb-10">
-            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+          <div className="max-w-4xl mx-auto text-center mb-6">
+            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm border border-primary/15 bg-primary/5">
               <Sparkles className="w-3.5 h-3.5 text-primary" />
               <span className="text-primary">Trusted Resources</span>
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1]">
+            <h2 className="text-3xl md:text-2xl lg:text-3xl font-black mb-5 tracking-tight leading-[1.1]">
               Your One-Stop Security Library
             </h2>
             <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground">
@@ -189,7 +189,7 @@ function LibraryStatsBar() {
                 key={stat.label}
                 className="flex flex-col items-center gap-1 rounded-2xl bg-card border border-border/40 p-4 shadow-sm"
               >
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-1">
+                <div className="w-6 h-6 rounded-xl bg-primary/10 flex items-center justify-center mb-1">
                   <stat.icon className="w-5 h-5 text-primary" />
                 </div>
                 <span className="text-2xl font-black text-foreground">{stat.value}</span>
@@ -212,7 +212,7 @@ function FeaturedShelf({ onBuyClick, isPurchased, isLoggedIn, onReadClick }: {
   onReadClick?: (book: (typeof LIBRARY_BOOKS)[0]) => void;
 }) {
   return (
-    <div className="mt-2 container mx-auto pb-16">
+    <div className="mt-2 container mx-auto pb-10">
       <div className="flex items-center justify-between gap-3 mb-5 flex-wrap">
         <div>
           <h3 className="text-2xl font-bold">Featured Shelf</h3>
@@ -248,7 +248,7 @@ function FeaturedShelf({ onBuyClick, isPurchased, isLoggedIn, onReadClick }: {
                 {!isLoggedIn && (
                   <div className="absolute inset-0 bg-background/40 flex items-center justify-center">
                     <div className="bg-background/90 backdrop-blur-sm rounded-full p-4 shadow-lg">
-                      <Lock className="h-6 w-6 text-primary" />
+                      <Lock className="h-4 w-4 text-primary" />
                     </div>
                   </div>
                 )}
@@ -275,7 +275,7 @@ function FeaturedShelf({ onBuyClick, isPurchased, isLoggedIn, onReadClick }: {
                 isPurchased(book.id || book.slug) ? (
                   <Button
                     size="sm"
-                    className="w-full mt-2 h-8 text-xs"
+                    className="w-full mt-2 h-5 text-xs"
                     onClick={() => onReadClick?.(book)}
                   >
                     <ChevronRight className="w-3 h-3 mr-1" />
@@ -284,7 +284,7 @@ function FeaturedShelf({ onBuyClick, isPurchased, isLoggedIn, onReadClick }: {
                 ) : (
                   <Button
                     size="sm"
-                    className="w-full mt-2 h-8 text-xs bg-gradient-to-r from-[hsl(var(--coral-500))] to-[hsl(var(--lavender-500))] text-white border-0"
+                    className="w-full mt-2 h-5 text-xs bg-gradient-to-r from-[hsl(var(--coral-500))] to-[hsl(var(--lavender-500))] text-white border-0"
                     onClick={() => onBuyClick(book)}
                   >
                     <Zap className="w-3 h-3 mr-1" />
@@ -298,7 +298,7 @@ function FeaturedShelf({ onBuyClick, isPurchased, isLoggedIn, onReadClick }: {
       </div>
 
       {!isLoggedIn && (
-        <div className="text-center mt-8">
+        <div className="text-center mt-5">
           <Button asChild size="lg" className="gap-2">
             <Link to="/auth?mode=signup">
               <LogIn className="h-4 w-4" />
@@ -315,15 +315,15 @@ function FeaturedShelf({ onBuyClick, isPurchased, isLoggedIn, onReadClick }: {
 
 function WhyTrustSection() {
   return (
-    <section className="py-16 md:py-24 bg-muted/30 dot-grid-bg">
+    <section className="py-10 md:py-16 bg-muted/30 dot-grid-bg">
       <div className="container mx-auto">
-        <div className="text-center mb-8">
+        <div className="text-center mb-5">
           <h2 className="text-2xl md:text-3xl font-bold mb-3">Why Trust InVision Network</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Your security education partner — backed by expertise, integrity, and a mission to protect.
           </p>
         </div>
-        <div className="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div className="grid sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
           {[
             {
               icon: Shield,
@@ -342,8 +342,8 @@ function WhyTrustSection() {
             },
           ].map((item) => (
             <div key={item.title} className="feature-highlight text-center">
-              <div className="icon-glow-ring w-14 h-14 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-[hsl(var(--primary)/0.1)] to-[hsl(var(--accent)/0.08)] flex items-center justify-center">
-                <item.icon className="w-7 h-7 text-[hsl(var(--accent))]" />
+              <div className="icon-glow-ring w-9 h-9 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-[hsl(var(--primary)/0.1)] to-[hsl(var(--accent)/0.08)] flex items-center justify-center">
+                <item.icon className="w-4 h-4 text-[hsl(var(--accent))]" />
               </div>
               <h3 className="font-semibold mb-1">{item.title}</h3>
               <p className="text-sm text-muted-foreground">{item.desc}</p>
@@ -383,14 +383,14 @@ function FullCatalog({
   onReadClick,
 }: CatalogProps) {
   return (
-    <section id="catalog" className="py-16 md:py-24 bg-muted/20 relative overflow-hidden">
+    <section id="catalog" className="py-10 md:py-16 bg-muted/20 relative overflow-hidden">
       <div className="container mx-auto">
-        <div className="text-center mb-10">
-          <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+        <div className="text-center mb-6">
+          <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm border border-primary/15 bg-primary/5">
             <BookOpen className="w-3.5 h-3.5 text-primary" />
             <span className="text-primary">Digital Library</span>
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1]">
+          <h2 className="text-3xl md:text-2xl lg:text-3xl font-black mb-5 tracking-tight leading-[1.1]">
             Digital Security <span className="text-primary">Guides</span>
           </h2>
           <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground">
@@ -399,14 +399,14 @@ function FullCatalog({
         </div>
 
         {/* Search + filters bar */}
-        <div className="rounded-2xl border border-border/50 bg-background/80 p-4 md:p-5 mb-6">
+        <div className="rounded-2xl border border-border/50 bg-background/80 p-4 md:p-5 mb-4">
           <div className="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
             <div className="relative flex-1 max-w-xl">
               <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
               <Input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="pl-9"
+                className="pl-6"
                 placeholder="Search by title, topic, audience, or learning outcome"
               />
             </div>
@@ -415,7 +415,7 @@ function FullCatalog({
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="h-9 rounded-md border border-input bg-background px-3 text-sm text-foreground"
+                className="h-6 rounded-md border border-input bg-background px-3 text-sm text-foreground"
               >
                 {SORT_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>
@@ -549,7 +549,7 @@ function FullCatalog({
                       {owned ? (
                         <Button
                           size="sm"
-                          className="w-full text-[10px] h-7 px-2 rounded-lg"
+                          className="w-full text-[10px] h-4 px-2 rounded-lg"
                           onClick={() => onReadClick(book)}
                         >
                           <ChevronRight className="w-3 h-3 mr-1" />
@@ -561,7 +561,7 @@ function FullCatalog({
                             <Button
                               size="sm"
                               onClick={() => onBuyClick(book)}
-                              className="text-[10px] h-7 px-2 rounded-lg bg-gradient-to-r from-[hsl(var(--coral-500))] to-[hsl(var(--lavender-500))] text-white border-0 hover:from-[hsl(var(--coral-600))] hover:to-[hsl(var(--lavender-600))] shadow-[0_4px_12px_-2px_hsl(var(--coral-500)/0.4)]"
+                              className="text-[10px] h-4 px-2 rounded-lg bg-gradient-to-r from-[hsl(var(--coral-500))] to-[hsl(var(--lavender-500))] text-white border-0 hover:from-[hsl(var(--coral-600))] hover:to-[hsl(var(--lavender-600))] shadow-[0_4px_12px_-2px_hsl(var(--coral-500)/0.4)]"
                             >
                               <Zap className="w-3 h-3 mr-1" />
                               Buy Now
@@ -570,7 +570,7 @@ function FullCatalog({
                           <Button
                             variant="ghost"
                             size="sm"
-                            className="w-full mt-1 text-[10px] h-7"
+                            className="w-full mt-1 text-[10px] h-4"
                             asChild
                           >
                             <Link to={`/library/${book.slug}`}>Preview & Details</Link>
@@ -586,8 +586,8 @@ function FullCatalog({
         </div>
 
         {books.length === 0 && (
-          <div className="text-center py-14">
-            <BookOpen className="w-10 h-10 mx-auto text-muted-foreground mb-4" />
+          <div className="text-center py-9">
+            <BookOpen className="w-6 h-6 mx-auto text-muted-foreground mb-4" />
             <h3 className="text-lg font-semibold">No books matched that search</h3>
             <p className="text-sm text-muted-foreground mt-2">
               Try a broader keyword or switch back to all categories.
@@ -596,7 +596,7 @@ function FullCatalog({
         )}
 
         {/* Language request banner */}
-        <div className="mt-8">
+        <div className="mt-5">
           <div className="p-4 bg-gradient-to-r from-accent/10 via-primary/5 to-accent/10 rounded-xl border border-accent/20 text-center">
             <div className="flex items-center justify-center gap-2 mb-2">
               <Globe className="w-4 h-4 text-accent" />
@@ -638,8 +638,8 @@ function MyLibraryTab({
 }) {
   if (isLoading) {
     return (
-      <section className="container mx-auto py-16 text-center text-muted-foreground">
-        <BookOpen className="mx-auto mb-3 h-8 w-8 opacity-40 animate-pulse" />
+      <section className="container mx-auto py-10 text-center text-muted-foreground">
+        <BookOpen className="mx-auto mb-3 h-5 w-5 opacity-40 animate-pulse" />
         <p>Loading your library…</p>
       </section>
     );
@@ -647,10 +647,10 @@ function MyLibraryTab({
 
   if (books.length === 0) {
     return (
-      <section className="container mx-auto py-20 text-center">
-        <Library className="mx-auto mb-4 h-12 w-12 text-muted-foreground opacity-40" />
+      <section className="container mx-auto py-12 text-center">
+        <Library className="mx-auto mb-4 h-7 w-7 text-muted-foreground opacity-40" />
         <h2 className="text-xl font-semibold mb-2">Your library is empty</h2>
-        <p className="text-muted-foreground mb-6">
+        <p className="text-muted-foreground mb-4">
           Purchase books to start reading them here. Your progress is always saved.
         </p>
         <Button onClick={onBrowse} className="gap-2">
@@ -663,16 +663,16 @@ function MyLibraryTab({
 
   return (
     <section
-      className="py-16 md:py-24 bg-muted/20 relative overflow-hidden"
+      className="py-10 md:py-16 bg-muted/20 relative overflow-hidden"
       id="my-library"
     >
       <div className="container mx-auto">
-        <div className="text-center mb-10">
-          <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+        <div className="text-center mb-6">
+          <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm border border-primary/15 bg-primary/5">
             <Library className="w-3.5 h-3.5 text-primary" />
             <span className="text-primary">My Library</span>
           </span>
-          <h2 className="text-3xl md:text-4xl font-black mb-3 tracking-tight">Your Books</h2>
+          <h2 className="text-3xl md:text-2xl font-black mb-3 tracking-tight">Your Books</h2>
           <p className="text-muted-foreground">{books.length} book{books.length !== 1 ? "s" : ""} purchased</p>
         </div>
         <div
@@ -714,7 +714,7 @@ function MyLibraryTab({
                   <div className="mt-auto pt-2 border-t border-border/30">
                     <Button
                       size="sm"
-                      className="w-full text-[10px] h-7 px-2 rounded-lg"
+                      className="w-full text-[10px] h-4 px-2 rounded-lg"
                       onClick={() => onReadClick(book)}
                     >
                       <ChevronRight className="w-3 h-3 mr-1" />
@@ -735,9 +735,9 @@ function MyLibraryTab({
 
 function LibraryFAQ() {
   return (
-    <section className="py-16 border-t bg-background glass-faq">
+    <section className="py-10 border-t bg-background glass-faq">
       <div className="container mx-auto max-w-3xl">
-        <div className="text-center mb-10">
+        <div className="text-center mb-6">
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary rounded-full px-4 py-1.5 text-sm font-medium mb-4">
             <HelpCircle className="h-4 w-4" />
             Frequently Asked Questions
@@ -762,7 +762,7 @@ function LibraryFAQ() {
           ))}
         </Accordion>
 
-        <div className="mt-10 text-center">
+        <div className="mt-6 text-center">
           <p className="text-sm text-muted-foreground mb-4">Still have questions? We're happy to help.</p>
           <div className="flex flex-wrap gap-3 justify-center">
             <Button asChild variant="outline" className="gap-2">
@@ -904,7 +904,7 @@ export default function LibraryPage() {
         <Navigation overlay />
         <LibraryHero isLoggedIn={false} />
         <LibraryStatsBar />
-        <section className="bg-background border-b pb-10">
+        <section className="bg-background border-b pb-6">
           <div className="container mx-auto max-w-6xl">
             <FeaturedShelf isLoggedIn={false} />
           </div>
@@ -928,7 +928,7 @@ export default function LibraryPage() {
       <LibraryStatsBar />
 
       {/* Featured shelf */}
-      <section className="bg-background border-b pb-10">
+      <section className="bg-background border-b pb-6">
         <div className="container mx-auto max-w-6xl">
           <FeaturedShelf
             isLoggedIn={true}
@@ -942,7 +942,7 @@ export default function LibraryPage() {
       <SectionDivider variant="wave" color="muted" />
 
       {/* Tab switcher */}
-      <section className="bg-background border-b sticky top-16 z-10 backdrop-blur-sm">
+      <section className="bg-background border-b sticky top-10 z-10 backdrop-blur-sm">
         <div className="container mx-auto max-w-6xl py-3">
           <div className="flex gap-1 bg-muted/50 rounded-xl p-1 w-fit">
             <button
@@ -1005,11 +1005,11 @@ export default function LibraryPage() {
       )}
 
       {/* Bulk CTA */}
-      <section className="bg-[#fff8f5] border-t py-12">
+      <section className="bg-[#fff8f5] border-t py-7">
         <div className="container mx-auto max-w-3xl text-center">
-          <Users className="mx-auto mb-4 h-10 w-10 text-primary" />
+          <Users className="mx-auto mb-4 h-6 w-6 text-primary" />
           <h2 className="text-2xl font-bold mb-3">Ordering for a Group or Organization?</h2>
-          <p className="text-muted-foreground mb-6">
+          <p className="text-muted-foreground mb-4">
             Bulk pricing starts at 5 copies — up to 25% off. Perfect for senior centers,
             libraries, businesses, and family gift sets.
           </p>

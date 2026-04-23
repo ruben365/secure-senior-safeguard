@@ -273,7 +273,7 @@ function Resources() {
           showScrollIndicator={true}>
 
           {/* Transitioning Headlines */}
-          <div className="text-left mb-8">
+          <div className="text-left mb-5">
             <h1 className="font-extrabold text-white mb-4 leading-[1.05] tracking-tight text-[clamp(2.25rem,5vw,4rem)]">
               <RotatingHeadlines headlines={heroHeadlines} className="" />
             </h1>
@@ -295,18 +295,18 @@ function Resources() {
       </div>
 
       {/* Spacer for floating stats bar */}
-      <div className="hidden lg:block h-14" />
-      <div className="lg:hidden h-6" />
+      <div className="hidden lg:block h-9" />
+      <div className="lg:hidden h-4" />
 
       {/* Introduction Section */}
-      <section className="py-16 md:py-24 relative overflow-hidden bg-background">
+      <section className="py-10 md:py-16 relative overflow-hidden bg-background">
         <div className="container mx-auto relative z-10">
-          <div className="head-rhythm max-w-4xl mx-auto text-center mb-10">
-            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+          <div className="head-rhythm max-w-4xl mx-auto text-center mb-6">
+            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm border border-primary/15 bg-primary/5">
               <Sparkles className="w-3.5 h-3.5 text-primary" />
               <span className="text-primary">Trusted Resources</span>
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1]">
+            <h2 className="text-3xl md:text-2xl lg:text-3xl font-black mb-5 tracking-tight leading-[1.1]">
               Your One-Stop Security Shop
             </h2>
             <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground">
@@ -326,7 +326,7 @@ function Resources() {
           </div>
 
           {/* Quick Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center mt-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center mt-6">
             {[
               { value: `${BOOK_CATALOG.length}`, label: "Digital Books", icon: BookOpen },
               { value: `${new Set(BOOK_CATALOG.map((book) => book.category)).size}`, label: "Safety Tracks", icon: Shield },
@@ -334,7 +334,7 @@ function Resources() {
               { value: "1", label: "Unified Reader", icon: Headphones },
             ].map((stat, index) => (
               <div key={index} className="flex flex-col items-center gap-1 rounded-2xl bg-card border border-border/40 p-4 shadow-sm">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-1">
+                <div className="w-6 h-6 rounded-xl bg-primary/10 flex items-center justify-center mb-1">
                   <stat.icon className="w-5 h-5 text-primary" />
                 </div>
                 <span className="text-2xl font-black text-foreground">{stat.value}</span>
@@ -343,7 +343,7 @@ function Resources() {
             ))}
           </div>
 
-          <div className="mt-12">
+          <div className="mt-7">
             <div className="flex items-center justify-between gap-3 mb-5 flex-wrap">
               <div>
                 <h3 className="text-2xl font-bold">Featured Shelf</h3>
@@ -387,7 +387,7 @@ function Resources() {
                       <Button
                         size="sm"
                         variant="outline"
-                        className="h-8 text-xs"
+                        className="h-5 text-xs"
                         onClick={(e) => { e.stopPropagation(); handleAddToCart(book); }}
                       >
                         <ShoppingCart className="w-3 h-3 mr-1" />
@@ -395,7 +395,7 @@ function Resources() {
                       </Button>
                       <Button
                         size="sm"
-                        className="h-8 text-xs"
+                        className="h-5 text-xs"
                         onClick={(e) => { e.stopPropagation(); handleBuyNow(book); }}
                       >
                         <Zap className="w-3 h-3 mr-1" />
@@ -411,14 +411,14 @@ function Resources() {
       </section>
 
       {/* Digital Security Guides */}
-      <section id="guides" className="py-16 md:py-24 bg-muted/20 relative overflow-hidden">
+      <section id="guides" className="py-10 md:py-16 bg-muted/20 relative overflow-hidden">
         <div className="container mx-auto">
-          <div className="head-rhythm text-center mb-10">
-            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+          <div className="head-rhythm text-center mb-6">
+            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm border border-primary/15 bg-primary/5">
               <BookOpen className="w-3.5 h-3.5 text-primary" />
               <span className="text-primary">Digital Library</span>
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-5 tracking-tight leading-[1.1]">
+            <h2 className="text-3xl md:text-2xl lg:text-3xl font-black mb-5 tracking-tight leading-[1.1]">
               Digital Security <span className="text-primary">Guides</span>
             </h2>
             <p className="text-base md:text-lg max-w-3xl mx-auto leading-relaxed text-muted-foreground">
@@ -440,14 +440,14 @@ function Resources() {
             />
           </div>
 
-          <div className="rounded-2xl border border-border/50 bg-background/80 p-4 md:p-5 mb-6">
+          <div className="rounded-2xl border border-border/50 bg-background/80 p-4 md:p-5 mb-4">
             <div className="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
               <div className="relative flex-1 max-w-xl">
                 <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   value={catalogSearch}
                   onChange={(e) => setCatalogSearch(e.target.value)}
-                  className="pl-9"
+                  className="pl-6"
                   placeholder="Search by title, topic, audience, or learning outcome"
                 />
               </div>
@@ -575,7 +575,7 @@ function Resources() {
                           variant="outline"
                           size="sm"
                           onClick={() => handleAddToCart(book)}
-                          className="text-[10px] h-7 px-2 rounded-lg border-[hsl(var(--coral-300))] hover:border-[hsl(var(--coral-500))] hover:bg-[hsl(var(--coral-100))]"
+                          className="text-[10px] h-4 px-2 rounded-lg border-[hsl(var(--coral-300))] hover:border-[hsl(var(--coral-500))] hover:bg-[hsl(var(--coral-100))]"
                         >
                           <ShoppingCart className="w-3 h-3 mr-1" />
                           Cart
@@ -583,7 +583,7 @@ function Resources() {
                         <Button
                           size="sm"
                           onClick={() => handleBuyNow(book)}
-                          className="text-[10px] h-7 px-2 rounded-lg bg-gradient-to-r from-[hsl(var(--coral-500))] to-[hsl(var(--lavender-500))] text-white border-0 hover:from-[hsl(var(--coral-600))] hover:to-[hsl(var(--lavender-600))] hover:opacity-100 shadow-[0_4px_12px_-2px_hsl(var(--coral-500)/0.4)]"
+                          className="text-[10px] h-4 px-2 rounded-lg bg-gradient-to-r from-[hsl(var(--coral-500))] to-[hsl(var(--lavender-500))] text-white border-0 hover:from-[hsl(var(--coral-600))] hover:to-[hsl(var(--lavender-600))] hover:opacity-100 shadow-[0_4px_12px_-2px_hsl(var(--coral-500)/0.4)]"
                         >
                           <Zap className="w-3 h-3 mr-1" />
                           Buy
@@ -592,7 +592,7 @@ function Resources() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="w-full mt-1 text-[10px] h-7"
+                        className="w-full mt-1 text-[10px] h-4"
                         asChild
                       >
                         <Link to={`/resources/${book.slug}`}>Preview & Details</Link>
@@ -605,8 +605,8 @@ function Resources() {
           </div>
 
           {filteredBooks.length === 0 && (
-            <div className="text-center py-14">
-              <BookOpen className="w-10 h-10 mx-auto text-muted-foreground mb-4" />
+            <div className="text-center py-9">
+              <BookOpen className="w-6 h-6 mx-auto text-muted-foreground mb-4" />
               <h3 className="text-lg font-semibold">No books matched that search</h3>
               <p className="text-sm text-muted-foreground mt-2">
                 Try a broader keyword or switch back to all categories.
@@ -615,7 +615,7 @@ function Resources() {
           )}
 
           {/* Bundle Info Banner */}
-          <div className="mt-8 space-y-4">
+          <div className="mt-5 space-y-4">
               {/* Language Request Note */}
               <div className="p-4 bg-gradient-to-r from-accent/10 via-primary/5 to-accent/10 rounded-xl border border-accent/20 text-center">
                 <div className="flex items-center justify-center gap-2 mb-2">
@@ -642,21 +642,21 @@ function Resources() {
       <SectionDivider variant="wave" color="muted" />
 
       {/* Why Shop With Us */}
-      <section className="py-16 md:py-24 bg-muted/30 dot-grid-bg">
+      <section className="py-10 md:py-16 bg-muted/30 dot-grid-bg">
         <div className="container mx-auto">
-          <div className="head-rhythm text-center mb-8">
+          <div className="head-rhythm text-center mb-5">
             <h2 className="text-2xl md:text-3xl font-bold mb-3">Why Trust InVision Network</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto lede">Your security education partner — backed by expertise, integrity, and a mission to protect.</p>
           </div>
-          <div className="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div className="grid sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
             {[
               { icon: Shield, title: "Expert-Authored", desc: "All resources created by certified cybersecurity professionals" },
               { icon: Lock, title: "Secure Delivery", desc: "Protected digital reader — no downloads, no unauthorized sharing" },
               { icon: Headphones, title: "Ongoing Support", desc: "Email support and regular content updates included" },
             ].map((item) => (
               <div key={item.title} className="feature-highlight text-center">
-                <div className="icon-glow-ring w-14 h-14 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-[hsl(var(--primary)/0.1)] to-[hsl(var(--accent)/0.08)] flex items-center justify-center">
-                  <item.icon className="w-7 h-7 text-[hsl(var(--accent))]" />
+                <div className="icon-glow-ring w-9 h-9 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-[hsl(var(--primary)/0.1)] to-[hsl(var(--accent)/0.08)] flex items-center justify-center">
+                  <item.icon className="w-4 h-4 text-[hsl(var(--accent))]" />
                 </div>
                 <h3 className="font-semibold mb-1">{item.title}</h3>
                 <p className="text-sm text-muted-foreground">{item.desc}</p>

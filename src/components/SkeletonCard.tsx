@@ -17,7 +17,7 @@ export function SkeletonCard({
         <Skeleton className="w-full h-48 rounded-lg" />
         <Skeleton className="h-4 w-3/4" />
         <Skeleton className="h-4 w-1/2" />
-        <Skeleton className="h-10 w-full rounded-md" />
+        <Skeleton className="h-6 w-full rounded-md" />
       </Card>
     );
   }
@@ -26,7 +26,7 @@ export function SkeletonCard({
     return (
       <Card className={cn("p-4 space-y-4", className)}>
         <div className="flex items-start gap-3">
-          <Skeleton className="w-12 h-12 rounded-md" />
+          <Skeleton className="w-7 h-7 rounded-md" />
           <div className="flex-1 space-y-2">
             <Skeleton className="h-4 w-3/4" />
             <Skeleton className="h-3 w-1/2" />
@@ -37,8 +37,8 @@ export function SkeletonCard({
           <Skeleton className="h-3 w-4/5" />
         </div>
         <div className="flex gap-2">
-          <Skeleton className="h-9 w-full" />
-          <Skeleton className="h-9 w-full" />
+          <Skeleton className="h-6 w-full" />
+          <Skeleton className="h-6 w-full" />
         </div>
       </Card>
     );
@@ -48,14 +48,14 @@ export function SkeletonCard({
     return (
       <Card className={cn("p-4 space-y-3", className)}>
         <div className="flex justify-between items-start">
-          <Skeleton className="h-5 w-32" />
-          <Skeleton className="h-6 w-20 rounded-full" />
+          <Skeleton className="h-5 w-20" />
+          <Skeleton className="h-4 w-12 rounded-full" />
         </div>
         <Skeleton className="h-4 w-2/3" />
         <Skeleton className="h-4 w-1/2" />
         <div className="flex gap-2 pt-2">
-          <Skeleton className="h-8 w-16" />
-          <Skeleton className="h-8 w-16" />
+          <Skeleton className="h-5 w-10" />
+          <Skeleton className="h-5 w-10" />
         </div>
       </Card>
     );
@@ -63,13 +63,13 @@ export function SkeletonCard({
 
   if (variant === "stat") {
     return (
-      <Card className={cn("p-6 space-y-3", className)}>
+      <Card className={cn("p-4 space-y-3", className)}>
         <div className="flex justify-between items-start">
-          <Skeleton className="h-4 w-24" />
-          <Skeleton className="h-10 w-10 rounded-full" />
+          <Skeleton className="h-4 w-16" />
+          <Skeleton className="h-6 w-6 rounded-full" />
         </div>
-        <Skeleton className="h-8 w-20" />
-        <Skeleton className="h-3 w-32" />
+        <Skeleton className="h-5 w-12" />
+        <Skeleton className="h-3 w-20" />
       </Card>
     );
   }
@@ -79,12 +79,12 @@ export function SkeletonCard({
       <Card className={cn("overflow-hidden", className)}>
         <Skeleton className="w-full h-48" />
         <div className="p-4 space-y-3">
-          <Skeleton className="h-6 w-3/4" />
+          <Skeleton className="h-4 w-3/4" />
           <Skeleton className="h-4 w-full" />
           <Skeleton className="h-4 w-5/6" />
           <div className="flex gap-2 items-center pt-2">
-            <Skeleton className="h-8 w-8 rounded-full" />
-            <Skeleton className="h-3 w-24" />
+            <Skeleton className="h-5 w-5 rounded-full" />
+            <Skeleton className="h-3 w-16" />
           </div>
         </div>
       </Card>
@@ -137,7 +137,7 @@ export function SkeletonGrid({
   return (
     <div
       className={cn(
-        "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6",
+        "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4",
         className,
       )}
     >

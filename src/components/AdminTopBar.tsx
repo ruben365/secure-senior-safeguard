@@ -98,14 +98,14 @@ export function AdminTopBar({ sidebarOpen, toggleSidebar }: AdminTopBarProps) {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 h-16 bg-card/95 backdrop-blur-xl border-b border-border z-[100] shadow-sm">
+    <div className="fixed top-0 left-0 right-0 h-10 bg-card/95 backdrop-blur-xl border-b border-border z-[100] shadow-sm">
       <div className="flex items-center justify-between h-full px-2 sm:px-4">
         <div className="flex items-center gap-2 sm:gap-4 min-w-0">
           <Button
             variant="ghost"
             size="icon"
             onClick={toggleSidebar}
-            className="h-10 w-10 flex-shrink-0"
+            className="h-6 w-6 flex-shrink-0"
           >
             <Menu className="h-5 w-5" />
           </Button>
@@ -116,7 +116,7 @@ export function AdminTopBar({ sidebarOpen, toggleSidebar }: AdminTopBarProps) {
               variant="ghost"
               size="icon"
               onClick={handleBack}
-              className="h-11 w-11 md:h-9 md:w-9"
+              className="h-7 w-7 md:h-6 md:w-6"
             >
               <ChevronLeft className="h-5 w-5" />
             </Button>
@@ -124,7 +124,7 @@ export function AdminTopBar({ sidebarOpen, toggleSidebar }: AdminTopBarProps) {
               variant="ghost"
               size="icon"
               onClick={handleForward}
-              className="h-11 w-11 md:h-9 md:w-9"
+              className="h-7 w-7 md:h-6 md:w-6"
             >
               <ChevronRight className="h-5 w-5" />
             </Button>
@@ -134,7 +134,7 @@ export function AdminTopBar({ sidebarOpen, toggleSidebar }: AdminTopBarProps) {
             <img
               src={invisionLogo}
               alt="InVision Network Logo"
-              className="h-7 w-7 sm:h-8 sm:w-8 flex-shrink-0"
+              className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0"
             />
             <span className="text-base sm:text-lg font-semibold hidden sm:inline truncate">
               InVision Network
@@ -148,7 +148,7 @@ export function AdminTopBar({ sidebarOpen, toggleSidebar }: AdminTopBarProps) {
             <Input
               type="search"
               placeholder="Search..."
-              className="pl-10 rounded-full"
+              className="pl-6 rounded-full"
             />
           </div>
         </div>
@@ -159,10 +159,10 @@ export function AdminTopBar({ sidebarOpen, toggleSidebar }: AdminTopBarProps) {
           <div className="relative" ref={profileRef}>
             <Button
               variant="ghost"
-              className="flex items-center gap-2 h-10"
+              className="flex items-center gap-2 h-6"
               onClick={() => setProfileOpen(!profileOpen)}
             >
-              <Avatar className="h-8 w-8">
+              <Avatar className="h-5 w-5">
                 <AvatarFallback className="bg-primary text-primary-foreground">
                   {getInitials(adminName)}
                 </AvatarFallback>

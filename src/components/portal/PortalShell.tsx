@@ -13,26 +13,26 @@ function PortalShellSkeleton() {
     <div className="flex min-h-screen bg-background">
       {/* Sidebar placeholder */}
       <div className="hidden md:flex w-64 border-r border-border bg-card flex-col gap-3 p-4">
-        <Skeleton className="h-10 w-full rounded-lg" />
-        <Skeleton className="h-8 w-3/4 rounded" />
+        <Skeleton className="h-6 w-full rounded-lg" />
+        <Skeleton className="h-5 w-3/4 rounded" />
         {Array.from({ length: 6 }).map((_, i) => (
-          <Skeleton key={i} className="h-9 w-full rounded-md" />
+          <Skeleton key={i} className="h-6 w-full rounded-md" />
         ))}
       </div>
 
       <div className="flex-1 flex flex-col">
         {/* Topbar / header placeholder */}
-        <div className="h-14 border-b border-border bg-card/80 flex items-center px-4 gap-3">
-          <Skeleton className="h-8 w-8 rounded-md" />
-          <Skeleton className="h-6 w-40 rounded" />
+        <div className="h-9 border-b border-border bg-card/80 flex items-center px-4 gap-3">
+          <Skeleton className="h-5 w-5 rounded-md" />
+          <Skeleton className="h-4 w-40 rounded" />
           <div className="ml-auto flex items-center gap-2">
-            <Skeleton className="h-8 w-8 rounded-full" />
-            <Skeleton className="h-8 w-24 rounded-md" />
+            <Skeleton className="h-5 w-5 rounded-full" />
+            <Skeleton className="h-5 w-16 rounded-md" />
           </div>
         </div>
 
         {/* Content: 4 pulse boxes */}
-        <div className="p-4 md:p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="p-4 md:p-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
           {Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className="h-40 rounded-xl bg-muted animate-pulse" />
           ))}
@@ -118,8 +118,8 @@ export function PortalShell() {
           }
         />
 
-        <main className="flex-1 pt-14">
-          <div className="min-h-[calc(100vh-3.5rem)] p-4 md:p-6">
+        <main className="flex-1 pt-9">
+          <div className="min-h-[calc(100vh-3.5rem)] p-4 md:p-4">
             <Outlet />
           </div>
         </main>

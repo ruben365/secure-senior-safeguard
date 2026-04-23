@@ -44,7 +44,7 @@ const EmailSettings = () => {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-5">
       {/* SMTP Configuration */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
@@ -222,7 +222,7 @@ const EmailSettings = () => {
         </div>
       </div>
 
-      <div className="flex justify-end pt-6">
+      <div className="flex justify-end pt-4">
         <Button onClick={handleSave} size="lg">
           Save Email Settings
         </Button>

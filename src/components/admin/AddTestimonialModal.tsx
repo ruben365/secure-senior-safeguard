@@ -288,7 +288,7 @@ export function AddTestimonialModal({
             </DialogTitle>
           </DialogHeader>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mt-4">
             {/* Customer Name */}
             <div className="space-y-2">
               <Label htmlFor="name" className="text-sm font-medium">
@@ -373,7 +373,7 @@ export function AddTestimonialModal({
                   <Label
                     htmlFor="text"
                     className={cn(
-                      "flex flex-col items-center justify-center gap-3 p-6 border-2 rounded-xl cursor-pointer transition-all duration-200",
+                      "flex flex-col items-center justify-center gap-3 p-4 border-2 rounded-xl cursor-pointer transition-all duration-200",
                       testimonialType === "text"
                         ? "border-primary bg-primary/10"
                         : "border-border hover:border-primary/50",
@@ -386,7 +386,7 @@ export function AddTestimonialModal({
                     />
                     <FileText
                       className={cn(
-                        "h-8 w-8 transition-colors",
+                        "h-5 w-5 transition-colors",
                         testimonialType === "text"
                           ? "text-primary"
                           : "text-muted-foreground",
@@ -403,7 +403,7 @@ export function AddTestimonialModal({
                   <Label
                     htmlFor="video"
                     className={cn(
-                      "flex flex-col items-center justify-center gap-3 p-6 border-2 rounded-xl cursor-pointer transition-all duration-200",
+                      "flex flex-col items-center justify-center gap-3 p-4 border-2 rounded-xl cursor-pointer transition-all duration-200",
                       testimonialType === "video"
                         ? "border-primary bg-primary/10"
                         : "border-border hover:border-primary/50",
@@ -416,7 +416,7 @@ export function AddTestimonialModal({
                     />
                     <Video
                       className={cn(
-                        "h-8 w-8 transition-colors",
+                        "h-5 w-5 transition-colors",
                         testimonialType === "video"
                           ? "text-primary"
                           : "text-muted-foreground",
@@ -437,7 +437,7 @@ export function AddTestimonialModal({
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="space-y-6"
+                  className="space-y-4"
                 >
                   {/* Testimonial Text */}
                   <div className="space-y-2">
@@ -494,7 +494,7 @@ export function AddTestimonialModal({
                           >
                             <Star
                               className={cn(
-                                "h-8 w-8 transition-all duration-200",
+                                "h-5 w-5 transition-all duration-200",
                                 star <= (hoverRating || rating)
                                   ? "fill-yellow-400 text-yellow-400"
                                   : "text-gray-300",
@@ -519,14 +519,14 @@ export function AddTestimonialModal({
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="space-y-6"
+                  className="space-y-4"
                 >
                   {/* Upload Video */}
                   <div className="space-y-2">
                     <Label className="text-sm font-medium">Upload Video</Label>
                     <div
                       className={cn(
-                        "border-2 border-dashed rounded-xl p-8 text-center transition-all duration-200",
+                        "border-2 border-dashed rounded-xl p-5 text-center transition-all duration-200",
                         videoFile
                           ? "border-primary bg-primary/5"
                           : "border-border hover:border-primary/50",
@@ -534,7 +534,7 @@ export function AddTestimonialModal({
                     >
                       {videoFile ? (
                         <div className="space-y-3">
-                          <Check className="h-12 w-12 text-green-500 mx-auto" />
+                          <Check className="h-7 w-7 text-green-500 mx-auto" />
                           <p className="text-sm font-medium">
                             {videoFile.name}
                           </p>
@@ -555,7 +555,7 @@ export function AddTestimonialModal({
                             onChange={handleVideoChange}
                             className="sr-only"
                           />
-                          <Upload className="h-12 w-12 text-muted-foreground mx-auto mb-3" />
+                          <Upload className="h-7 w-7 text-muted-foreground mx-auto mb-3" />
                           <p className="text-sm font-medium mb-1">
                             Drop video here or click to browse
                           </p>
@@ -592,14 +592,14 @@ export function AddTestimonialModal({
               <div className="flex items-center gap-4">
                 {photoPreview ? (
                   <div className="relative">
-                    <Avatar className="h-20 w-20 border-2 border-border">
+                    <Avatar className="h-12 w-12 border-2 border-border">
                       <AvatarImage src={photoPreview} alt="Preview" />
                     </Avatar>
                     <Button
                       type="button"
                       variant="destructive"
                       size="sm"
-                      className="absolute -top-2 -right-2 h-6 w-6 rounded-full p-0"
+                      className="absolute -top-2 -right-2 h-4 w-4 rounded-full p-0"
                       onClick={() => {
                         setPhotoFile(null);
                         setPhotoPreview(null);
@@ -609,9 +609,9 @@ export function AddTestimonialModal({
                     </Button>
                   </div>
                 ) : (
-                  <Avatar className="h-20 w-20 border-2 border-dashed border-border">
+                  <Avatar className="h-12 w-12 border-2 border-dashed border-border">
                     <AvatarFallback>
-                      <ImageIcon className="h-8 w-8 text-muted-foreground" />
+                      <ImageIcon className="h-5 w-5 text-muted-foreground" />
                     </AvatarFallback>
                   </Avatar>
                 )}

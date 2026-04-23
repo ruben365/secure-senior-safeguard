@@ -17,12 +17,12 @@ function ColumnSkeleton() {
     <div className="flex-shrink-0 w-64 space-y-3">
       <div className="flex items-center gap-2 px-1">
         <Skeleton className="h-2.5 w-2.5 rounded-full" />
-        <Skeleton className="h-4 w-24" />
-        <Skeleton className="h-5 w-7 rounded-full ml-auto" />
+        <Skeleton className="h-4 w-16" />
+        <Skeleton className="h-5 w-4 rounded-full ml-auto" />
       </div>
       <div className="space-y-2">
         {Array.from({ length: 3 }).map((_, i) => (
-          <Skeleton key={i} className="h-20 w-full rounded-lg" />
+          <Skeleton key={i} className="h-12 w-full rounded-lg" />
         ))}
       </div>
     </div>
@@ -77,7 +77,7 @@ export function PipelineBoard({ columns, isLoading = false, className }: Pipelin
               {column.items.length === 0 ? (
                 <EmptyState
                   title="No items"
-                  className="py-6"
+                  className="py-4"
                 />
               ) : (
                 column.items.map((item) => (

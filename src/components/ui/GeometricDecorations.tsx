@@ -51,9 +51,9 @@ export const HexagonIcon = ({
   animated?: boolean;
 }) => {
   const sizeClasses = {
-    sm: "w-14 h-14",
-    md: "w-20 h-20",
-    lg: "w-28 h-28",
+    sm: "w-9 h-9",
+    md: "w-12 h-12",
+    lg: "w-18 h-18",
   };
 
   return (
@@ -145,14 +145,14 @@ export const GeometricCorner = ({
   if (variant === "lines") {
     return (
       <div
-        className={`absolute ${positionClasses[position]} w-24 h-24 pointer-events-none`}
+        className={`absolute ${positionClasses[position]} w-16 h-16 pointer-events-none`}
       >
-        <div className="absolute top-4 right-0 w-16 h-0.5 bg-primary/20" />
-        <div className="absolute top-8 right-0 w-12 h-0.5 bg-primary/15" />
-        <div className="absolute top-12 right-0 w-8 h-0.5 bg-primary/10" />
-        <div className="absolute top-0 right-4 w-0.5 h-16 bg-primary/20" />
-        <div className="absolute top-0 right-8 w-0.5 h-12 bg-primary/15" />
-        <div className="absolute top-0 right-12 w-0.5 h-8 bg-primary/10" />
+        <div className="absolute top-4 right-0 w-10 h-0.5 bg-primary/20" />
+        <div className="absolute top-5 right-0 w-7 h-0.5 bg-primary/15" />
+        <div className="absolute top-7 right-0 w-5 h-0.5 bg-primary/10" />
+        <div className="absolute top-0 right-4 w-0.5 h-10 bg-primary/20" />
+        <div className="absolute top-0 right-5 w-0.5 h-7 bg-primary/15" />
+        <div className="absolute top-0 right-7 w-0.5 h-5 bg-primary/10" />
       </div>
     );
   }
@@ -160,7 +160,7 @@ export const GeometricCorner = ({
   if (variant === "dots") {
     return (
       <div
-        className={`absolute ${positionClasses[position]} w-20 h-20 pointer-events-none`}
+        className={`absolute ${positionClasses[position]} w-12 h-12 pointer-events-none`}
       >
         {[0, 1, 2].map((row) => (
           <div
@@ -182,7 +182,7 @@ export const GeometricCorner = ({
 
   return (
     <div
-      className={`absolute ${positionClasses[position]} w-16 h-16 pointer-events-none`}
+      className={`absolute ${positionClasses[position]} w-10 h-10 pointer-events-none`}
     >
       <div
         className="absolute top-0 right-0 w-0 h-0"
@@ -299,10 +299,10 @@ export const FloatingShapes = ({ className = "" }: { className?: string }) => {
       </div>
 
       {/* Square */}
-      <div className="absolute top-1/3 right-[15%] w-6 h-6 border-2 border-accent/20 rotate-45" />
+      <div className="absolute top-1/3 right-[15%] w-4 h-4 border-2 border-accent/20 rotate-45" />
 
       {/* Circle */}
-      <div className="absolute bottom-1/4 left-[20%] w-8 h-8 rounded-full border-2 border-primary/15" />
+      <div className="absolute bottom-1/4 left-[20%] w-5 h-5 rounded-full border-2 border-primary/15" />
 
       {/* Plus sign */}
       <div className="absolute top-1/2 right-[25%]">

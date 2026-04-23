@@ -615,7 +615,7 @@ export const WebsiteInsuranceDialog = ({
                     placeholder="your@email.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="h-9"
+                    className="h-6"
                     required
                   />
                 </div>
@@ -629,7 +629,7 @@ export const WebsiteInsuranceDialog = ({
                     placeholder="Your full name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="h-9"
+                    className="h-6"
                   />
                 </div>
               </div>
@@ -707,7 +707,7 @@ export const WebsiteInsuranceDialog = ({
 
               {/* Subscribe Button */}
               <Button
-                className="w-full h-9 text-sm font-semibold mt-2"
+                className="w-full h-6 text-sm font-semibold mt-2"
                 onClick={handleSubscribe}
                 disabled={loading || !email || !termsAccepted}
               >

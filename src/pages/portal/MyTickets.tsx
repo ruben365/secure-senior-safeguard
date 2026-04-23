@@ -81,8 +81,8 @@ export default function MyTickets() {
   }
 
   return (
-    <div className="container mx-auto max-w-4xl py-8 px-4">
-      <div className="flex items-center justify-between mb-6">
+    <div className="container mx-auto max-w-4xl py-5 px-4">
+      <div className="flex items-center justify-between mb-4">
         <div>
           <h1 className="text-2xl font-bold text-foreground">My Support Tickets</h1>
           <p className="text-muted-foreground">Track and manage your support requests</p>
@@ -139,11 +139,11 @@ export default function MyTickets() {
       </div>
 
       {isLoading ? (
-        <div className="text-center py-12 text-muted-foreground">Loading tickets...</div>
+        <div className="text-center py-7 text-muted-foreground">Loading tickets...</div>
       ) : !tickets?.length ? (
         <Card>
-          <CardContent className="py-12 text-center">
-            <MessageSquare className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+          <CardContent className="py-7 text-center">
+            <MessageSquare className="h-7 w-7 mx-auto text-muted-foreground mb-4" />
             <h3 className="text-lg font-medium mb-2">No tickets yet</h3>
             <p className="text-muted-foreground mb-4">Create a support ticket to get help from our team.</p>
             <Button onClick={() => setCreateOpen(true)}><Plus className="h-4 w-4 mr-2" /> Create Ticket</Button>

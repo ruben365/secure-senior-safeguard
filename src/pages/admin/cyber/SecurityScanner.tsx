@@ -187,8 +187,8 @@ function SectionCard({
 
 function GradeDisplay({ grade, score }: { grade: string; score: number }) {
   return (
-    <div className={`flex flex-col items-center justify-center rounded-xl border p-6 ${GRADE_BG[grade] ?? "bg-gray-500/10 border-gray-500/30"}`}>
-      <span className={`text-7xl font-black leading-none ${GRADE_COLORS[grade] ?? "text-gray-400"}`}>
+    <div className={`flex flex-col items-center justify-center rounded-xl border p-4 ${GRADE_BG[grade] ?? "bg-gray-500/10 border-gray-500/30"}`}>
+      <span className={`text-4xl font-black leading-none ${GRADE_COLORS[grade] ?? "text-gray-400"}`}>
         {grade}
       </span>
       <span className="text-[#9CA3AF] text-sm mt-1">Security Grade</span>
@@ -228,7 +228,7 @@ function HistoryRow({
         <Button
           size="sm"
           variant="ghost"
-          className="h-7 text-xs text-[#9CA3AF] hover:text-[#F9FAFB]"
+          className="h-4 text-xs text-[#9CA3AF] hover:text-[#F9FAFB]"
           onClick={() => onLoad(scan)}
         >
           Load
@@ -397,11 +397,11 @@ export default function SecurityScanner() {
     : [];
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
       {/* Header */}
       <div className="mb-2">
         <h1 className="text-2xl font-bold text-[#F9FAFB] flex items-center gap-2">
-          <Shield className="h-6 w-6 text-cyan-400" />
+          <Shield className="h-4 w-4 text-cyan-400" />
           Website Vulnerability Scanner
         </h1>
         <p className="text-[#9CA3AF] text-sm mt-1">
@@ -409,7 +409,7 @@ export default function SecurityScanner() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
         {/* Left panel — input + history */}
         <div className="space-y-4">
           <Card className="bg-[#111827] border-[#1F2937]">
@@ -502,7 +502,7 @@ export default function SecurityScanner() {
         <div className="xl:col-span-2 space-y-4">
           {!result && !scanning && (
             <div className="flex flex-col items-center justify-center h-72 rounded-xl border border-dashed border-[#1F2937] text-center">
-              <Shield className="h-12 w-12 text-[#374151] mb-3" />
+              <Shield className="h-7 w-7 text-[#374151] mb-3" />
               <p className="text-[#6B7280] text-sm">Enter a URL and click Run Security Scan.</p>
               <p className="text-[#4B5563] text-xs mt-1">Results will appear here with full AI analysis.</p>
             </div>
@@ -510,7 +510,7 @@ export default function SecurityScanner() {
 
           {scanning && !result && (
             <div className="flex flex-col items-center justify-center h-72 rounded-xl border border-dashed border-cyan-900/40 text-center">
-              <RefreshCw className="h-10 w-10 text-cyan-500 animate-spin mb-3" />
+              <RefreshCw className="h-6 w-6 text-cyan-500 animate-spin mb-3" />
               <p className="text-[#9CA3AF] text-sm">{progressLabel || "Initializing scan…"}</p>
               <p className="text-[#6B7280] text-xs mt-1">This typically takes 15–30 seconds.</p>
             </div>

@@ -257,12 +257,12 @@ export default function SuperAdminActivityFeed() {
       </CardHeader>
       <CardContent>
         {loading && activities.length === 0 ? (
-          <div className="flex items-center justify-center py-8">
-            <Loader2 className="w-8 h-8 animate-spin text-green-400" />
+          <div className="flex items-center justify-center py-5">
+            <Loader2 className="w-5 h-5 animate-spin text-green-400" />
           </div>
         ) : activities.length === 0 ? (
-          <div className="text-center py-8 text-gray-400">
-            <Activity className="w-12 h-12 mx-auto mb-4 opacity-50" />
+          <div className="text-center py-5 text-gray-400">
+            <Activity className="w-7 h-7 mx-auto mb-4 opacity-50" />
             <p>No activity recorded yet</p>
           </div>
         ) : (

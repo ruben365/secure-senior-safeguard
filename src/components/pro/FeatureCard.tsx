@@ -20,7 +20,7 @@ export function FeatureCard({
     <div className={cn("feature-highlight group", className)}>
       <div className="flex items-start gap-4">
         <div className="flex-shrink-0 p-3 rounded-xl bg-gradient-to-br from-[hsl(var(--primary)/0.1)] to-[hsl(var(--accent)/0.06)] group-hover:from-[hsl(var(--primary)/0.15)] group-hover:to-[hsl(var(--accent)/0.1)] transition-colors">
-          <Icon className="w-6 h-6 text-[hsl(var(--accent))]" />
+          <Icon className="w-4 h-4 text-[hsl(var(--accent))]" />
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-2">

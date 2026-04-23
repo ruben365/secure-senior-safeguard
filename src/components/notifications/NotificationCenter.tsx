@@ -97,7 +97,7 @@ export function NotificationCenter() {
         <DropdownMenuSeparator />
         <ScrollArea className="max-h-80">
           {notifications.length === 0 ? (
-            <div className="py-8 text-center text-sm text-muted-foreground">No notifications</div>
+            <div className="py-5 text-center text-sm text-muted-foreground">No notifications</div>
           ) : (
             notifications.map((n) => (
               <button

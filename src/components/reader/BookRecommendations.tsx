@@ -19,7 +19,7 @@ export function BookRecommendations({ ownedBookIds, onBuy }: BookRecommendations
   if (recommendations.length === 0) return null;
 
   return (
-    <div className="mt-10">
+    <div className="mt-6">
       <div className="flex items-center gap-2 mb-4">
         <Sparkles className="h-5 w-5 text-primary" />
         <h2 className="text-xl font-bold text-foreground">Recommended for You</h2>
@@ -52,7 +52,7 @@ export function BookRecommendations({ ownedBookIds, onBuy }: BookRecommendations
                 <Button
                   size="sm"
                   variant="outline"
-                  className="w-full mt-2 text-xs h-8"
+                  className="w-full mt-2 text-xs h-5"
                   onClick={() => onBuy(book)}
                 >
                   <ShoppingCart className="h-3 w-3 mr-1" />

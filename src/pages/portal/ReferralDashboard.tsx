@@ -72,9 +72,9 @@ export default function ReferralDashboard() {
 
   if (isErrorCode) {
     return (
-      <div className="container mx-auto max-w-4xl py-8 px-4">
+      <div className="container mx-auto max-w-4xl py-5 px-4">
         <Card>
-          <CardContent className="pt-6 text-center">
+          <CardContent className="pt-4 text-center">
             <p className="text-destructive">Failed to load referral data. Please try again later.</p>
           </CardContent>
         </Card>
@@ -83,21 +83,21 @@ export default function ReferralDashboard() {
   }
 
   return (
-    <div className="container mx-auto max-w-4xl py-8 px-4">
-      <div className="mb-8">
+    <div className="container mx-auto max-w-4xl py-5 px-4">
+      <div className="mb-5">
         <h1 className="text-2xl font-bold">Referral Program</h1>
         <p className="text-muted-foreground">Earn rewards by referring friends and colleagues</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
         <Card>
-          <CardContent className="pt-6 flex items-center gap-4">
-            <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
-              <Users className="h-6 w-6 text-primary" />
+          <CardContent className="pt-4 flex items-center gap-4">
+            <div className="h-7 w-7 rounded-full bg-primary/10 flex items-center justify-center">
+              <Users className="h-4 w-4 text-primary" />
             </div>
             <div>
               {isLoadingCode ? (
-                <Skeleton className="h-8 w-16" />
+                <Skeleton className="h-5 w-10" />
               ) : (
                 <p className="text-2xl font-bold">{referralCode?.total_referrals || 0}</p>
               )}
@@ -106,13 +106,13 @@ export default function ReferralDashboard() {
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="pt-6 flex items-center gap-4">
-            <div className="h-12 w-12 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
-              <Gift className="h-6 w-6 text-green-600" />
+          <CardContent className="pt-4 flex items-center gap-4">
+            <div className="h-7 w-7 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
+              <Gift className="h-4 w-4 text-green-600" />
             </div>
             <div>
               {isLoadingCode ? (
-                <Skeleton className="h-8 w-16" />
+                <Skeleton className="h-5 w-10" />
               ) : (
                 <p className="text-2xl font-bold">{referralCode?.successful_referrals || 0}</p>
               )}
@@ -121,13 +121,13 @@ export default function ReferralDashboard() {
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="pt-6 flex items-center gap-4">
-            <div className="h-12 w-12 rounded-full bg-yellow-100 dark:bg-yellow-900 flex items-center justify-center">
-              <DollarSign className="h-6 w-6 text-yellow-600" />
+          <CardContent className="pt-4 flex items-center gap-4">
+            <div className="h-7 w-7 rounded-full bg-yellow-100 dark:bg-yellow-900 flex items-center justify-center">
+              <DollarSign className="h-4 w-4 text-yellow-600" />
             </div>
             <div>
               {isLoadingCode ? (
-                <Skeleton className="h-8 w-16" />
+                <Skeleton className="h-5 w-10" />
               ) : (
                 <p className="text-2xl font-bold">${Number(referralCode?.total_earnings ?? 0).toFixed(2)}</p>
               )}
@@ -137,7 +137,7 @@ export default function ReferralDashboard() {
         </Card>
       </div>
 
-      <Card className="mb-8">
+      <Card className="mb-5">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Share2 className="h-5 w-5" /> Your Referral Link
@@ -145,14 +145,14 @@ export default function ReferralDashboard() {
         </CardHeader>
         <CardContent>
           {isLoadingCode ? (
-            <Skeleton className="h-10 w-full" />
+            <Skeleton className="h-6 w-full" />
           ) : referralCode ? (
             <div className="flex gap-2">
               <Input readOnly value={`${window.location.origin}?ref=${referralCode.code}`} className="font-mono" />
               <Button onClick={copyCode}><Copy className="h-4 w-4 mr-2" /> Copy</Button>
             </div>
           ) : (
-            <div className="text-center py-6">
+            <div className="text-center py-4">
               <p className="text-muted-foreground mb-4">Generate your unique referral code to start earning rewards.</p>
               <Button onClick={() => createCode.mutate()} disabled={createCode.isPending}>
                 {createCode.isPending ? "Creating..." : "Generate Referral Code"}
@@ -164,7 +164,7 @@ export default function ReferralDashboard() {
 
       {isErrorReferrals && (
         <Card>
-          <CardContent className="pt-6 text-center">
+          <CardContent className="pt-4 text-center">
             <p className="text-destructive">Failed to load referral history.</p>
           </CardContent>
         </Card>
@@ -176,7 +176,7 @@ export default function ReferralDashboard() {
           <CardContent>
             <div className="space-y-3">
               {[1, 2, 3].map((i) => (
-                <Skeleton key={i} className="h-12 w-full" />
+                <Skeleton key={i} className="h-7 w-full" />
               ))}
             </div>
           </CardContent>

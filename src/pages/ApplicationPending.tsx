@@ -30,10 +30,10 @@ function ApplicationPending() {
 
       {/* Main Content */}
       <div className="relative z-10 w-full max-w-2xl mx-auto">
-        <Card className="p-10 lg:p-12 shadow-2xl border-2 bg-card/80 backdrop-blur-2xl text-center">
-          <div className="mb-8 flex justify-center">
-            <div className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center shadow-glow-purple animate-pulse">
-              <CheckCircle2 className="w-10 h-10 text-white" />
+        <Card className="p-6 lg:p-7 shadow-2xl border-2 bg-card/80 backdrop-blur-2xl text-center">
+          <div className="mb-5 flex justify-center">
+            <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center shadow-glow-purple animate-pulse">
+              <CheckCircle2 className="w-6 h-6 text-white" />
             </div>
           </div>
 
@@ -46,13 +46,13 @@ function ApplicationPending() {
             been received and is pending admin approval.
           </p>
 
-          <p className="text-sm text-primary font-semibold mb-8">
+          <p className="text-sm text-primary font-semibold mb-5">
             All applications require admin authorization before account
             activation
           </p>
 
           {/* Application Reference */}
-          <div className="mb-8 p-6 bg-primary/5 rounded-lg border border-primary/20">
+          <div className="mb-5 p-4 bg-primary/5 rounded-lg border border-primary/20">
             <div className="flex items-center justify-center gap-2 mb-2">
               <Shield className="w-5 h-5 text-primary" />
               <h2 className="font-semibold text-lg">
@@ -68,7 +68,7 @@ function ApplicationPending() {
           </div>
 
           {/* What's Next */}
-          <div className="mb-8 text-left">
+          <div className="mb-5 text-left">
             <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
               <Clock className="w-5 h-5 text-primary" />
               What Happens Next?
@@ -112,7 +112,7 @@ function ApplicationPending() {
           </div>
 
           {/* Estimated Time */}
-          <div className="mb-8 p-4 bg-accent/5 rounded-lg border border-accent/20">
+          <div className="mb-5 p-4 bg-accent/5 rounded-lg border border-accent/20">
             <p className="font-semibold">Estimated Review Time: 24-48 hours</p>
             <p className="text-sm text-muted-foreground mt-1">
               We'll do our best to review your application as quickly as
@@ -121,7 +121,7 @@ function ApplicationPending() {
           </div>
 
           {/* Important Note */}
-          <div className="mb-8 p-4 bg-muted/30 rounded-lg text-left">
+          <div className="mb-5 p-4 bg-muted/30 rounded-lg text-left">
             <p className="font-semibold mb-2">Important:</p>
             <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
               <li>Anyone can apply for any role in our network</li>
@@ -164,7 +164,7 @@ function ApplicationPending() {
         </Card>
 
         {/* Footer */}
-        <div className="text-center mt-6">
+        <div className="text-center mt-4">
           <p className="text-sm text-muted-foreground">
             Need help?{" "}
             <Link to="/contact" className="text-primary hover:underline">

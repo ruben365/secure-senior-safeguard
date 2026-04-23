@@ -211,7 +211,7 @@ export const PlatformGuide = ({ triggerButton }: PlatformGuideProps) => {
       <DialogContent className="w-[calc(100vw-32px)] sm:w-full sm:max-w-[420px] max-h-[85svh] overflow-y-auto rounded-2xl p-4 gap-0">
         <DialogHeader className="space-y-0 pb-3">
           <DialogTitle className="flex items-center gap-2 text-base font-semibold leading-tight">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-teal-500/15 to-indigo-500/15 border border-teal-500/30 flex items-center justify-center">
+            <div className="w-5 h-5 rounded-full bg-gradient-to-br from-teal-500/15 to-indigo-500/15 border border-teal-500/30 flex items-center justify-center">
               <BookOpen className="w-4 h-4 text-teal-600" />
             </div>
             Platform User Guide
@@ -261,7 +261,7 @@ export const PlatformGuide = ({ triggerButton }: PlatformGuideProps) => {
                 >
                   <AccordionTrigger className="hover:no-underline py-4">
                     <div className="flex items-center gap-3 text-left">
-                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                         <IconComponent className="w-5 h-5 text-primary" />
                       </div>
                       <div>
@@ -282,7 +282,7 @@ export const PlatformGuide = ({ triggerButton }: PlatformGuideProps) => {
                           transition={{ delay: index * 0.1 }}
                           className="flex items-start gap-3 p-3 rounded-lg bg-muted/30"
                         >
-                          <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 text-xs font-bold text-primary">
+                          <div className="w-4 h-4 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 text-xs font-bold text-primary">
                             {index + 1}
                           </div>
                           <div>

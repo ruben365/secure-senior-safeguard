@@ -82,8 +82,8 @@ export default function CallLogs() {
     : 0;
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="mb-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="mb-4">
         <h1 className="text-2xl font-bold text-[#F9FAFB]">Call Logs</h1>
         <p className="text-[#9CA3AF]">Retell AI voice agent call history</p>
       </div>
@@ -92,7 +92,7 @@ export default function CallLogs() {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Card className="bg-[#111827] border-gray-800">
           <CardContent className="p-4 flex items-center gap-3">
-            <Phone className="h-8 w-8 text-violet-400" />
+            <Phone className="h-5 w-5 text-violet-400" />
             <div>
               <div className="text-2xl font-bold text-[#F9FAFB]">{totalCalls}</div>
               <div className="text-xs text-[#9CA3AF]">Total Calls</div>
@@ -101,7 +101,7 @@ export default function CallLogs() {
         </Card>
         <Card className="bg-[#111827] border-gray-800">
           <CardContent className="p-4 flex items-center gap-3">
-            <Clock className="h-8 w-8 text-blue-400" />
+            <Clock className="h-5 w-5 text-blue-400" />
             <div>
               <div className="text-2xl font-bold text-[#F9FAFB]">{formatDuration(avgDuration)}</div>
               <div className="text-xs text-[#9CA3AF]">Avg Duration</div>
@@ -110,7 +110,7 @@ export default function CallLogs() {
         </Card>
         <Card className="bg-[#111827] border-gray-800">
           <CardContent className="p-4 flex items-center gap-3">
-            <TrendingUp className="h-8 w-8 text-green-400" />
+            <TrendingUp className="h-5 w-5 text-green-400" />
             <div>
               <div className="text-2xl font-bold text-[#F9FAFB]">{positiveRate}%</div>
               <div className="text-xs text-[#9CA3AF]">Positive Sentiment</div>
@@ -129,15 +129,15 @@ export default function CallLogs() {
               placeholder="Search phone or summary…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="pl-8 bg-[#1F2937] border-gray-700 text-[#F9FAFB] w-56"
+              className="pl-5 bg-[#1F2937] border-gray-700 text-[#F9FAFB] w-56"
             />
           </div>
         </CardHeader>
         <CardContent>
           {isLoading ? (
-            <p className="text-center text-[#9CA3AF] py-8">Loading…</p>
+            <p className="text-center text-[#9CA3AF] py-5">Loading…</p>
           ) : filtered.length === 0 ? (
-            <p className="text-center text-[#9CA3AF] py-8">No call logs yet.</p>
+            <p className="text-center text-[#9CA3AF] py-5">No call logs yet.</p>
           ) : (
             <Table>
               <TableHeader>

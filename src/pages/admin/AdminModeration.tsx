@@ -192,12 +192,12 @@ export default function AdminModeration() {
   ];
 
   return (
-    <div className="p-6 space-y-6 min-h-screen bg-[#0F1117]">
+    <div className="p-4 space-y-4 min-h-screen bg-[#0F1117]">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-[#F9FAFB] flex items-center gap-2">
-            <MessageSquare className="w-6 h-6 text-orange-400" />
+            <MessageSquare className="w-4 h-4 text-orange-400" />
             Comment Moderation
           </h1>
           <p className="text-[#6B7280] text-sm mt-0.5">Review, approve, and moderate user-submitted comments</p>
@@ -237,7 +237,7 @@ export default function AdminModeration() {
             placeholder="Search author, content..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-9 bg-[#111827] border-[#1F2937] text-[#F9FAFB] placeholder:text-[#6B7280]"
+            className="pl-4 bg-[#111827] border-[#1F2937] text-[#F9FAFB] placeholder:text-[#6B7280]"
           />
         </div>
         <Select value={statusFilter} onValueChange={setStatusFilter}>
@@ -258,15 +258,15 @@ export default function AdminModeration() {
           <div className="flex gap-2 flex-wrap">
             <span className="text-[#6B7280] text-sm self-center">{selected.size} selected:</span>
             <Button size="sm" variant="ghost" onClick={() => bulkUpdateStatus("approved")}
-              className="text-green-400 hover:bg-green-500/10 gap-1 h-8 text-xs">
+              className="text-green-400 hover:bg-green-500/10 gap-1 h-5 text-xs">
               <CheckCircle className="w-3.5 h-3.5" /> Approve
             </Button>
             <Button size="sm" variant="ghost" onClick={() => bulkUpdateStatus("rejected")}
-              className="text-red-400 hover:bg-red-500/10 gap-1 h-8 text-xs">
+              className="text-red-400 hover:bg-red-500/10 gap-1 h-5 text-xs">
               <XCircle className="w-3.5 h-3.5" /> Reject
             </Button>
             <Button size="sm" variant="ghost" onClick={() => bulkUpdateStatus("flagged")}
-              className="text-orange-400 hover:bg-orange-500/10 gap-1 h-8 text-xs">
+              className="text-orange-400 hover:bg-orange-500/10 gap-1 h-5 text-xs">
               <Flag className="w-3.5 h-3.5" /> Flag
             </Button>
           </div>
@@ -277,13 +277,13 @@ export default function AdminModeration() {
       <Card className="bg-[#111827] border-[#1F2937]">
         <CardContent className="p-0">
           {isLoading ? (
-            <div className="flex items-center justify-center py-16 gap-3">
+            <div className="flex items-center justify-center py-6 gap-3">
               <RefreshCw className="w-5 h-5 animate-spin text-[#6B7280]" />
               <span className="text-[#6B7280] text-sm">Loading comments...</span>
             </div>
           ) : filtered.length === 0 ? (
-            <div className="text-center py-16">
-              <MessageSquare className="w-10 h-10 text-[#374151] mx-auto mb-3" />
+            <div className="text-center py-6">
+              <MessageSquare className="w-4 h-4 text-[#374151] mx-auto mb-3" />
               <p className="text-[#6B7280] text-sm">No comments found.</p>
             </div>
           ) : (
@@ -291,7 +291,7 @@ export default function AdminModeration() {
               <Table>
                 <TableHeader>
                   <TableRow className="border-[#1F2937]">
-                    <TableHead className="w-10">
+                    <TableHead className="w-4">
                       <input
                         type="checkbox"
                         checked={selected.size === filtered.length && filtered.length > 0}
@@ -348,7 +348,7 @@ export default function AdminModeration() {
                             <Button
                               size="icon"
                               variant="ghost"
-                              className="h-7 w-7 text-[#6B7280] hover:text-[#F9FAFB] hover:bg-[#1F2937]"
+                              className="h-4 w-4 text-[#6B7280] hover:text-[#F9FAFB] hover:bg-[#1F2937]"
                               onClick={() => setPreviewComment(comment)}
                               title="View full comment"
                             >
@@ -358,7 +358,7 @@ export default function AdminModeration() {
                               <Button
                                 size="icon"
                                 variant="ghost"
-                                className="h-7 w-7 text-green-400 hover:bg-green-500/10"
+                                className="h-4 w-4 text-green-400 hover:bg-green-500/10"
                                 onClick={() => updateStatus.mutate({ id: comment.id, status: "approved" })}
                                 title="Approve"
                               >
@@ -369,7 +369,7 @@ export default function AdminModeration() {
                               <Button
                                 size="icon"
                                 variant="ghost"
-                                className="h-7 w-7 text-red-400 hover:bg-red-500/10"
+                                className="h-4 w-4 text-red-400 hover:bg-red-500/10"
                                 onClick={() => updateStatus.mutate({ id: comment.id, status: "rejected" })}
                                 title="Reject"
                               >
@@ -380,7 +380,7 @@ export default function AdminModeration() {
                               <Button
                                 size="icon"
                                 variant="ghost"
-                                className="h-7 w-7 text-orange-400 hover:bg-orange-500/10"
+                                className="h-4 w-4 text-orange-400 hover:bg-orange-500/10"
                                 onClick={() => updateStatus.mutate({ id: comment.id, status: "flagged" })}
                                 title="Flag"
                               >
@@ -390,7 +390,7 @@ export default function AdminModeration() {
                             <Button
                               size="icon"
                               variant="ghost"
-                              className="h-7 w-7 text-[#6B7280] hover:text-red-400 hover:bg-red-500/10"
+                              className="h-4 w-4 text-[#6B7280] hover:text-red-400 hover:bg-red-500/10"
                               onClick={() => setDeleteTarget(comment)}
                               title="Delete"
                             >

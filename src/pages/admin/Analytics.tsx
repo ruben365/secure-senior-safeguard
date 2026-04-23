@@ -146,8 +146,8 @@ export default function Analytics() {
   );
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="mb-6 flex items-center justify-between flex-wrap gap-4">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="mb-4 flex items-center justify-between flex-wrap gap-4">
         <div>
           <h1 className="text-2xl font-bold text-[#F9FAFB]">
             Analytics Dashboard
@@ -189,8 +189,8 @@ export default function Analytics() {
           <CardContent>
             {isLoading ? (
               <div className="space-y-2">
-                <Skeleton className="h-7 w-20 bg-gray-700" />
-                <Skeleton className="h-3 w-24 bg-gray-700" />
+                <Skeleton className="h-4 w-12 bg-gray-700" />
+                <Skeleton className="h-3 w-16 bg-gray-700" />
               </div>
             ) : (
               <>
@@ -213,8 +213,8 @@ export default function Analytics() {
           <CardContent>
             {isLoading ? (
               <div className="space-y-2">
-                <Skeleton className="h-7 w-20 bg-gray-700" />
-                <Skeleton className="h-3 w-24 bg-gray-700" />
+                <Skeleton className="h-4 w-12 bg-gray-700" />
+                <Skeleton className="h-3 w-16 bg-gray-700" />
               </div>
             ) : (
               <>
@@ -237,8 +237,8 @@ export default function Analytics() {
           <CardContent>
             {isLoading ? (
               <div className="space-y-2">
-                <Skeleton className="h-7 w-16 bg-gray-700" />
-                <Skeleton className="h-3 w-24 bg-gray-700" />
+                <Skeleton className="h-4 w-10 bg-gray-700" />
+                <Skeleton className="h-3 w-16 bg-gray-700" />
               </div>
             ) : (
               <>
@@ -263,8 +263,8 @@ export default function Analytics() {
           <CardContent>
             {isLoading ? (
               <div className="space-y-2">
-                <Skeleton className="h-7 w-20 bg-gray-700" />
-                <Skeleton className="h-3 w-24 bg-gray-700" />
+                <Skeleton className="h-4 w-12 bg-gray-700" />
+                <Skeleton className="h-3 w-16 bg-gray-700" />
               </div>
             ) : (
               <>
@@ -321,7 +321,7 @@ export default function Analytics() {
               ) : (
                 <div className="flex items-center justify-center h-[300px] text-[#9CA3AF]">
                   <div className="text-center">
-                    <Activity className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                    <Activity className="w-7 h-7 mx-auto mb-4 opacity-50" />
                     <p>No traffic data yet</p>
                     <p className="text-sm">
                       Data will appear as users visit your site
@@ -424,7 +424,7 @@ export default function Analytics() {
                       <span className="text-sm text-[#9CA3AF]">
                         {page.count} views
                       </span>
-                      <div className="w-32 bg-gray-700 rounded-full h-2">
+                      <div className="w-20 bg-gray-700 rounded-full h-2">
                         <div
                           className="bg-[#06B6D4] h-2 rounded-full"
                           style={{
@@ -501,7 +501,7 @@ export default function Analytics() {
               ) : (
                 <div className="flex items-center justify-center h-[300px] text-[#9CA3AF]">
                   <div className="text-center">
-                    <TrendingUp className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                    <TrendingUp className="w-7 h-7 mx-auto mb-4 opacity-50" />
                     <p>No conversions yet</p>
                     <p className="text-sm">
                       Conversions will appear as users complete actions

@@ -23,7 +23,7 @@ export function ShoppingCart() {
         <button
           type="button"
           onClick={() => setOpen(!open)}
-          className="flex items-center justify-center min-w-[44px] min-h-[44px] w-9 h-9 rounded-full bg-black/20 backdrop-blur-[8px] border border-white/15 hover:border-white/30 text-white/70 hover:text-white transition-all relative"
+          className="flex items-center justify-center min-w-[44px] min-h-[44px] w-6 h-6 rounded-full bg-black/20 backdrop-blur-[8px] border border-white/15 hover:border-white/30 text-white/70 hover:text-white transition-all relative"
           aria-label={`Shopping cart, ${itemCount} items`}
         >
           <CartIcon className="w-4 h-4" />
@@ -39,7 +39,7 @@ export function ShoppingCart() {
           <>
             <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
             <div
-              className="absolute right-0 top-full mt-2 z-50 w-[min(320px,calc(100vw-2rem))] rounded-xl overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] max-sm:fixed max-sm:right-4 max-sm:top-16 max-sm:mt-0"
+              className="absolute right-0 top-full mt-2 z-50 w-[min(320px,calc(100vw-2rem))] rounded-xl overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] max-sm:fixed max-sm:right-4 max-sm:top-10 max-sm:mt-0"
               style={{
                 background: "rgba(15, 15, 20, 0.92)",
                 backdropFilter: "blur(20px) saturate(120%)",
@@ -70,8 +70,8 @@ export function ShoppingCart() {
               {/* Items */}
               <div className="max-h-64 overflow-y-auto overscroll-contain">
                 {items.length === 0 ? (
-                  <div className="px-4 py-8 text-center">
-                    <CartIcon className="w-6 h-6 text-gray-600 mx-auto mb-2" />
+                  <div className="px-4 py-5 text-center">
+                    <CartIcon className="w-4 h-4 text-gray-600 mx-auto mb-2" />
                     <p className="text-sm text-gray-500">Your cart is empty</p>
                   </div>
                 ) : (
@@ -79,7 +79,7 @@ export function ShoppingCart() {
                     <div key={item.id} className="px-4 py-3 border-b border-white/5 hover:bg-white/[0.03] transition-colors">
                       <div className="flex items-start gap-3">
                         {item.image && (
-                          <img src={item.image} alt={item.name} className="w-10 h-10 rounded-md object-cover flex-shrink-0" loading="lazy" decoding="async" width={40} height={40} />
+                          <img src={item.image} alt={item.name} className="w-6 h-6 rounded-md object-cover flex-shrink-0" loading="lazy" decoding="async" width={40} height={40} />
                         )}
                         <div className="flex-1 min-w-0">
                           <h4 className="text-sm font-semibold text-white truncate">{item.name}</h4>
@@ -89,7 +89,7 @@ export function ShoppingCart() {
                           <button
                             type="button"
                             onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                            className="w-6 h-6 flex items-center justify-center rounded bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-white/20 transition-colors"
+                            className="w-4 h-4 flex items-center justify-center rounded bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-white/20 transition-colors"
                             aria-label="Decrease"
                           >
                             <Minus className="w-3 h-3" />
@@ -98,7 +98,7 @@ export function ShoppingCart() {
                           <button
                             type="button"
                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            className="w-6 h-6 flex items-center justify-center rounded bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-white/20 transition-colors"
+                            className="w-4 h-4 flex items-center justify-center rounded bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-white/20 transition-colors"
                             aria-label="Increase"
                           >
                             <Plus className="w-3 h-3" />
@@ -106,7 +106,7 @@ export function ShoppingCart() {
                           <button
                             type="button"
                             onClick={() => removeItem(item.id)}
-                            className="w-6 h-6 flex items-center justify-center rounded text-gray-500 hover:text-red-400 hover:bg-red-500/10 transition-colors ml-1"
+                            className="w-4 h-4 flex items-center justify-center rounded text-gray-500 hover:text-red-400 hover:bg-red-500/10 transition-colors ml-1"
                             aria-label="Remove"
                           >
                             <Trash2 className="w-3 h-3" />
@@ -128,7 +128,7 @@ export function ShoppingCart() {
                   <button
                     type="button"
                     onClick={() => { setOpen(false); setCheckoutOpen(true); }}
-                    className="w-full h-10 flex items-center justify-center gap-2 rounded-lg bg-orange-600 hover:bg-orange-500 text-white text-sm font-semibold transition-colors"
+                    className="w-full h-6 flex items-center justify-center gap-2 rounded-lg bg-orange-600 hover:bg-orange-500 text-white text-sm font-semibold transition-colors"
                   >
                     <Lock className="w-3.5 h-3.5" />
                     Checkout

@@ -35,7 +35,7 @@ export default function BillingSettings() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-xl font-bold text-[#F9FAFB]">Billing Settings</h2>
@@ -52,7 +52,7 @@ export default function BillingSettings() {
         </Button>
       </div>
 
-      <div className="grid gap-6">
+      <div className="grid gap-4">
         {/* Company Information */}
         <Card className="bg-[#1F2937] border-gray-700">
           <CardHeader>

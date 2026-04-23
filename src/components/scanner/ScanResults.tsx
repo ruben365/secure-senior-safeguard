@@ -139,12 +139,12 @@ export const ScanResults = ({
 
   return (
     <Card className="border border-border/60 bg-white/90 backdrop-blur-xl shadow-xl">
-      <div className="p-6 md:p-8 space-y-6">
+      <div className="p-4 md:p-5 space-y-4">
         <div className={`rounded-2xl border p-5 ${config.panel}`}>
           <div className="flex flex-wrap items-start gap-4 justify-between">
             <div className="flex items-start gap-3">
-              <div className="w-12 h-12 rounded-xl bg-white/80 flex items-center justify-center border border-border/60">
-                <ThreatIcon className={`w-6 h-6 ${config.color}`} />
+              <div className="w-7 h-7 rounded-xl bg-white/80 flex items-center justify-center border border-border/60">
+                <ThreatIcon className={`w-4 h-4 ${config.color}`} />
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-foreground">

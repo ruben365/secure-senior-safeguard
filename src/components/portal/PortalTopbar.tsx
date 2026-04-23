@@ -54,7 +54,7 @@ export function PortalTopbar({
   return (
     <header
       className={cn(
-        "fixed top-0 right-0 z-30 h-14 flex items-center gap-2 px-4 bg-card border-b border-border transition-all duration-200",
+        "fixed top-0 right-0 z-30 h-9 flex items-center gap-2 px-4 bg-card border-b border-border transition-all duration-200",
         /* Desktop: offset by sidebar width */
         sidebarOpen ? "md:left-[260px]" : "md:left-[70px]",
         /* Mobile: full width */
@@ -67,7 +67,7 @@ export function PortalTopbar({
         <Button
           variant="ghost"
           size="icon"
-          className="hidden md:inline-flex h-8 w-8"
+          className="hidden md:inline-flex h-5 w-5"
           onClick={onToggleSidebar}
           aria-label="Toggle sidebar"
         >
@@ -78,7 +78,7 @@ export function PortalTopbar({
         <Button
           variant="ghost"
           size="icon"
-          className="inline-flex md:hidden h-8 w-8"
+          className="inline-flex md:hidden h-5 w-5"
           onClick={onToggleMobileSidebar}
           aria-label="Open sidebar"
         >
@@ -89,7 +89,7 @@ export function PortalTopbar({
         <Button
           variant="ghost"
           size="icon"
-          className="h-8 w-8"
+          className="h-5 w-5"
           onClick={() => window.history.back()}
           aria-label="Go back"
         >
@@ -98,7 +98,7 @@ export function PortalTopbar({
         <Button
           variant="ghost"
           size="icon"
-          className="h-8 w-8"
+          className="h-5 w-5"
           onClick={() => window.history.forward()}
           aria-label="Go forward"
         >
@@ -109,7 +109,7 @@ export function PortalTopbar({
         <div className="relative hidden sm:block">
           <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
           <Input
-            className="h-8 w-48 lg:w-64 pl-8 text-sm bg-muted/50 border-border"
+            className="h-5 w-48 lg:w-64 pl-5 text-sm bg-muted/50 border-border"
             placeholder="Search... (Ctrl+K)"
           />
         </div>
@@ -121,7 +121,7 @@ export function PortalTopbar({
         <Button
           variant="ghost"
           size="icon"
-          className="h-8 w-8"
+          className="h-5 w-5"
           onClick={() => navigate("/")}
           aria-label="Go to home"
         >
@@ -136,10 +136,10 @@ export function PortalTopbar({
           <DropdownMenuTrigger asChild>
             <Button
               variant="ghost"
-              className="h-8 gap-2 px-2"
+              className="h-5 gap-2 px-2"
               aria-label="Open profile menu"
             >
-              <Avatar className="h-7 w-7">
+              <Avatar className="h-4 w-4">
                 <AvatarFallback className="text-xs bg-primary/10 text-primary">
                   {initials}
                 </AvatarFallback>

@@ -97,8 +97,8 @@ export default function Notifications() {
   const unreadCount = notifications.filter((n) => !n.is_read).length;
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="flex items-center justify-between mb-4">
         <div>
           <h1 className="text-2xl font-bold text-[#F9FAFB]">Notifications</h1>
           <p className="text-[#9CA3AF]">
@@ -130,12 +130,12 @@ export default function Notifications() {
         </CardHeader>
         <CardContent>
           {isLoading ? (
-            <div className="text-center py-8 text-[#9CA3AF]">
+            <div className="text-center py-5 text-[#9CA3AF]">
               Loading notifications...
             </div>
           ) : notifications.length === 0 ? (
-            <div className="text-center py-12">
-              <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
+            <div className="text-center py-7">
+              <CheckCircle className="h-10 w-10 text-green-500 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-[#F9FAFB] mb-2">
                 All caught up!
               </h3>

@@ -18,9 +18,9 @@ export function ErrorState({
   className,
 }: ErrorStateProps) {
   return (
-    <div className={cn("flex flex-col items-center justify-center gap-4 py-12 px-6 text-center", className)}>
+    <div className={cn("flex flex-col items-center justify-center gap-4 py-7 px-4 text-center", className)}>
       <div className="rounded-full bg-destructive/10 p-4">
-        <AlertTriangle className="h-8 w-8 text-destructive" />
+        <AlertTriangle className="h-5 w-5 text-destructive" />
       </div>
       <div className="flex flex-col gap-1.5">
         <p className="text-lg font-medium text-foreground">{title}</p>

@@ -32,7 +32,7 @@ function CtaPrimary({ to, children }: { to: string; children: React.ReactNode })
   return (
     <Link
       to={to}
-      className="hss-cta-primary inline-flex items-center justify-center gap-2 h-8 sm:h-10 px-4 sm:px-7 rounded-full text-[11px] sm:text-[13px] font-semibold transition-all hover:-translate-y-[2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px]"
+      className="hss-cta-primary inline-flex items-center justify-center gap-2 h-5 sm:h-6 px-4 sm:px-4 rounded-full text-[11px] sm:text-[13px] font-semibold transition-all hover:-translate-y-[2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px]"
     >
       {children}
     </Link>
@@ -43,7 +43,7 @@ function CtaGhost({ to, children }: { to: string; children: React.ReactNode }) {
   return (
     <Link
       to={to}
-      className="hss-cta-ghost inline-flex items-center justify-center gap-2 h-8 sm:h-10 px-4 sm:px-7 rounded-full text-[11px] sm:text-[13px] font-semibold transition-all hover:-translate-y-[1px] border border-[#E0E0E0]"
+      className="hss-cta-ghost inline-flex items-center justify-center gap-2 h-5 sm:h-6 px-4 sm:px-4 rounded-full text-[11px] sm:text-[13px] font-semibold transition-all hover:-translate-y-[1px] border border-[#E0E0E0]"
     >
       {children}
     </Link>
@@ -382,7 +382,7 @@ function StatRow({ stat, index, last }: { stat: StatItem; index: number; last: b
       ref={ref}
       data-reveal
       style={{ "--reveal-delay": `${index * 140}ms` } as React.CSSProperties}
-      className={`py-9 ${!last ? "border-b border-[#E0E0E0]" : ""}`}
+      className={`py-6 ${!last ? "border-b border-[#E0E0E0]" : ""}`}
     >
       {/* Large number */}
       <div className="flex items-baseline gap-2 mb-1">
@@ -424,7 +424,7 @@ export const HomeStorySections = () => {
           ═══════════════════════════════════════════════════════════════ */}
       <section className="hss-section-tint" aria-label="Key protection features">
         {/* Section heading */}
-        <div className="container mx-auto pt-14 pb-10 border-b border-[#F0F0F0]">
+        <div className="container mx-auto pt-9 pb-6 border-b border-[#F0F0F0]">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
             <div>
               <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#d96c4a] mb-2">
@@ -451,9 +451,9 @@ export const HomeStorySections = () => {
                 key={item.label}
                 data-reveal
                 style={{ "--reveal-delay": `${i * 100}ms` } as React.CSSProperties}
-                className="flex items-start gap-4 p-5 sm:p-7 lg:p-10"
+                className="flex items-start gap-4 p-5 sm:p-4 lg:p-6"
               >
-                <div className="w-11 h-11 rounded-xl bg-[#d96c4a]/10 border border-[#d96c4a]/20 flex items-center justify-center flex-shrink-0 shadow-sm">
+                <div className="w-7 h-7 rounded-xl bg-[#d96c4a]/10 border border-[#d96c4a]/20 flex items-center justify-center flex-shrink-0 shadow-sm">
                   <item.icon className="w-5 h-5 text-[#d96c4a]" strokeWidth={2} />
                 </div>
                 <div>
@@ -471,11 +471,11 @@ export const HomeStorySections = () => {
       {/* ═══════════════════════════════════════════════════════════════
           SECTION 2 — PLAN CARDS WITH TAB NAVIGATION
           ═══════════════════════════════════════════════════════════════ */}
-      <section className="hss-section-white py-8 sm:py-14 md:py-16" aria-labelledby="plans-heading">
+      <section className="hss-section-white py-5 sm:py-9 md:py-10" aria-labelledby="plans-heading">
         <div className="container mx-auto">
 
           {/* Section intro */}
-          <div className="mb-8">
+          <div className="mb-5">
             <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#d96c4a] mb-2">Protection plans</p>
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
               <h2 id="plans-heading" className="text-[1.75rem] md:text-[2rem] font-extrabold text-[#111111] tracking-tight leading-[1.1]">
@@ -491,7 +491,7 @@ export const HomeStorySections = () => {
           </div>
 
           {/* Tab bar */}
-          <div className="flex items-center gap-1 bg-white border border-[#E0E0E0] rounded-full p-1 self-start shadow-[0_1px_4px_rgba(0,0,0,0.06)] w-fit mb-8">
+          <div className="flex items-center gap-1 bg-white border border-[#E0E0E0] rounded-full p-1 self-start shadow-[0_1px_4px_rgba(0,0,0,0.06)] w-fit mb-5">
             {planTabs.map((tab) => (
               <button
                 key={tab}
@@ -573,14 +573,14 @@ export const HomeStorySections = () => {
           Right: 4 numbered steps with dividers
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-tint py-8 sm:py-14 md:py-16"
+        className="hss-section-tint py-5 sm:py-9 md:py-10"
         aria-labelledby="how-heading"
       >
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-start">
 
             {/* Left — decorative quote + headline */}
-            <div data-reveal className="lg:sticky lg:top-24">
+            <div data-reveal className="lg:sticky lg:top-16">
               {/* Giant quote mark — scaled for mobile */}
               <div
                 aria-hidden="true"
@@ -590,11 +590,11 @@ export const HomeStorySections = () => {
               </div>
               <h2
                 id="how-heading"
-                className="text-[1.75rem] sm:text-[2rem] md:text-[2.75rem] font-extrabold text-[#111111] leading-[1.1] tracking-tight -mt-5 sm:-mt-8 md:-mt-14 mb-5"
+                className="text-[1.75rem] sm:text-[2rem] md:text-[2.75rem] font-extrabold text-[#111111] leading-[1.1] tracking-tight -mt-5 sm:-mt-5 md:-mt-9 mb-5"
               >
                 Your guide to<br />staying safe online.
               </h2>
-              <p className="text-[15px] text-[#6B7280] leading-relaxed mb-8 max-w-sm">
+              <p className="text-[15px] text-[#6B7280] leading-relaxed mb-5 max-w-sm">
                 No technical knowledge required. We handle the security work so
                 you stay focused on the people who matter most.
               </p>
@@ -618,7 +618,7 @@ export const HomeStorySections = () => {
                   className={`flex gap-4 sm:gap-5 py-3 sm:py-5 ${i < howItWorks.length - 1 ? "border-b border-[#E0E0E0]" : ""}`}
                 >
                   {/* Step number bubble */}
-                  <div className="w-9 h-9 rounded-full bg-gradient-to-b from-[#e07b52] to-[#d96c4a] text-white flex items-center justify-center text-[12px] font-black flex-shrink-0 mt-0.5 shadow-[0_2px_8px_rgba(217,108,74,0.35)]">
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-b from-[#e07b52] to-[#d96c4a] text-white flex items-center justify-center text-[12px] font-black flex-shrink-0 mt-0.5 shadow-[0_2px_8px_rgba(217,108,74,0.35)]">
                     {String(i + 1).padStart(2, "0")}
                   </div>
                   <div>
@@ -639,13 +639,13 @@ export const HomeStorySections = () => {
           Centered header | Left: 2 stacked photos | Right: card + nav
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-testimonial-theater hss-section-white py-8 sm:py-14 md:py-16"
+        className="hss-testimonial-theater hss-section-white py-5 sm:py-9 md:py-10"
         aria-labelledby="testimonials-heading"
       >
         <div className="container mx-auto">
 
           {/* Centered header */}
-          <div className="head-rhythm text-center mb-8">
+          <div className="head-rhythm text-center mb-5">
             <p
               data-reveal
               className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#d96c4a] mb-3"
@@ -670,7 +670,7 @@ export const HomeStorySections = () => {
           </div>
 
           {/* Two-col layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-[42fr_58fr] gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[42fr_58fr] gap-5 items-center">
 
             {/* Left — 2 stacked photos */}
             <div className="hidden lg:flex flex-col gap-4">
@@ -700,7 +700,7 @@ export const HomeStorySections = () => {
             <div
               data-reveal="slide-right"
               style={{ "--reveal-delay": "200ms" } as React.CSSProperties}
-              className="hss-testimonial-card relative p-5 sm:p-8 lg:p-10 overflow-hidden"
+              className="hss-testimonial-card relative p-5 sm:p-5 lg:p-6 overflow-hidden"
             >
               {/* Giant decorative quote */}
               <div
@@ -725,16 +725,16 @@ export const HomeStorySections = () => {
                 </div>
 
                 {/* Quote */}
-                <blockquote className="text-[14px] sm:text-[16px] md:text-[17px] text-[#1E293B] leading-relaxed mb-5 sm:mb-7 font-medium italic">
+                <blockquote className="text-[14px] sm:text-[16px] md:text-[17px] text-[#1E293B] leading-relaxed mb-5 sm:mb-4 font-medium italic">
                   &ldquo;{t.quote}&rdquo;
                 </blockquote>
 
                 {/* Author */}
-                <div className="flex items-center gap-3 mb-8 pt-5 border-t border-[#F0F0F0]">
+                <div className="flex items-center gap-3 mb-5 pt-5 border-t border-[#F0F0F0]">
                   <img
                     src={t.avatar}
                     alt={t.name}
-                    className="w-11 h-11 rounded-full object-cover border-2 border-white shadow-md flex-shrink-0"
+                    className="w-7 h-7 rounded-full object-cover border-2 border-white shadow-md flex-shrink-0"
                     loading="lazy"
                     decoding="async"
                     width={44}
@@ -753,7 +753,7 @@ export const HomeStorySections = () => {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                   <Link
                     to="/about"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#d96c4a] text-white text-[13px] font-semibold hover:bg-[#c45e3b] transition-colors w-full sm:w-auto shadow-sm"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-[#d96c4a] text-white text-[13px] font-semibold hover:bg-[#c45e3b] transition-colors w-full sm:w-auto shadow-sm"
                   >
                     See More <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
@@ -779,7 +779,7 @@ export const HomeStorySections = () => {
                         type="button"
                         onClick={prevTesti}
                         aria-label="Previous testimonial"
-                        className="w-9 h-9 rounded-full border border-[#E0E0E0] bg-white flex items-center justify-center text-[#111111] hover:bg-[#F4F4F4] transition-colors shadow-sm"
+                        className="w-6 h-6 rounded-full border border-[#E0E0E0] bg-white flex items-center justify-center text-[#111111] hover:bg-[#F4F4F4] transition-colors shadow-sm"
                       >
                         <ChevronLeft className="w-4 h-4" />
                       </button>
@@ -787,7 +787,7 @@ export const HomeStorySections = () => {
                         type="button"
                         onClick={nextTesti}
                         aria-label="Next testimonial"
-                        className="w-9 h-9 rounded-full bg-[#d96c4a] text-white flex items-center justify-center hover:bg-[#c45e3b] transition-colors shadow-sm"
+                        className="w-6 h-6 rounded-full bg-[#d96c4a] text-white flex items-center justify-center hover:bg-[#c45e3b] transition-colors shadow-sm"
                       >
                         <ChevronRight className="w-4 h-4" />
                       </button>
@@ -806,7 +806,7 @@ export const HomeStorySections = () => {
           Left: 3 large stat rows | Right: editorial image overlay
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-tint py-8 sm:py-14 md:py-16"
+        className="hss-section-tint py-5 sm:py-9 md:py-10"
         aria-labelledby="stats-heading"
       >
         <div className="container mx-auto">
@@ -818,7 +818,7 @@ export const HomeStorySections = () => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[46fr_54fr] gap-10 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[46fr_54fr] gap-6 lg:gap-10 items-start">
 
             {/* Left — stat rows */}
             <div>
@@ -831,7 +831,7 @@ export const HomeStorySections = () => {
             <div
               data-reveal="slide-right"
               style={{ "--reveal-delay": "200ms" } as React.CSSProperties}
-              className="hss-img-zoom relative rounded-xl overflow-hidden aspect-[4/3] lg:aspect-[5/4] shadow-[0_8px_32px_-12px_rgba(15,23,42,0.18)] lg:sticky lg:top-24"
+              className="hss-img-zoom relative rounded-xl overflow-hidden aspect-[4/3] lg:aspect-[5/4] shadow-[0_8px_32px_-12px_rgba(15,23,42,0.18)] lg:sticky lg:top-16"
             >
               <img
                 src={businessTeam}
@@ -843,7 +843,7 @@ export const HomeStorySections = () => {
                 height={720}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[rgba(15,23,42,0.90)] via-[rgba(15,23,42,0.25)] to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-7 lg:p-8">
+              <div className="absolute inset-x-0 bottom-0 p-4 lg:p-5">
                 <p className="text-white/55 text-[10px] font-bold uppercase tracking-[0.18em] mb-2">
                   Kettering, Ohio. The Transformation Of Real Estate.
                 </p>
@@ -866,13 +866,13 @@ export const HomeStorySections = () => {
           SECTION 6 — WORKSHOPS (4-col card grid)
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-white py-8 sm:py-14 md:py-16"
+        className="hss-section-white py-5 sm:py-9 md:py-10"
         aria-labelledby="workshops-heading"
       >
         <div className="container mx-auto">
 
           {/* Section header + prev/next */}
-          <div className="flex items-end justify-between mb-8 gap-4">
+          <div className="flex items-end justify-between mb-5 gap-4">
             <div>
               <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#d96c4a] mb-2">Programs</p>
               <h2
@@ -886,14 +886,14 @@ export const HomeStorySections = () => {
               <Link
                 to="/training"
                 aria-label="Previous workshops"
-                className="w-9 h-9 rounded-full border border-[#E0E0E0] bg-white flex items-center justify-center text-[#111111] hover:bg-[#F4F4F4] transition-colors shadow-[0_1px_4px_rgba(0,0,0,0.06)]"
+                className="w-6 h-6 rounded-full border border-[#E0E0E0] bg-white flex items-center justify-center text-[#111111] hover:bg-[#F4F4F4] transition-colors shadow-[0_1px_4px_rgba(0,0,0,0.06)]"
               >
                 <ChevronLeft className="w-4 h-4" />
               </Link>
               <Link
                 to="/training"
                 aria-label="Next workshops"
-                className="w-9 h-9 rounded-full bg-[#d96c4a] flex items-center justify-center text-white hover:bg-[#c45e3b] transition-colors shadow-[0_2px_8px_rgba(217,108,74,0.35)]"
+                className="w-6 h-6 rounded-full bg-[#d96c4a] flex items-center justify-center text-white hover:bg-[#c45e3b] transition-colors shadow-[0_2px_8px_rgba(217,108,74,0.35)]"
               >
                 <ChevronRight className="w-4 h-4" />
               </Link>
@@ -901,7 +901,7 @@ export const HomeStorySections = () => {
           </div>
 
           {/* 4-col grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-5">
             {workshops.map((ws, i) => (
               <div
                 key={ws.title}
@@ -962,13 +962,13 @@ export const HomeStorySections = () => {
           SECTION 7 — SERVICES (3-col, first col dark #111111)
           ═══════════════════════════════════════════════════════════════ */}
       <section
-        className="hss-section-tint py-8 sm:py-14 md:py-16"
+        className="hss-section-tint py-5 sm:py-9 md:py-10"
         aria-labelledby="services-heading"
       >
         <div className="container mx-auto">
 
           {/* Heading */}
-          <div className="head-rhythm text-center mb-12">
+          <div className="head-rhythm text-center mb-7">
             <p data-reveal className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#d96c4a] mb-2">
               What we offer
             </p>
@@ -988,7 +988,7 @@ export const HomeStorySections = () => {
                 key={svc.num}
                 data-reveal
                 style={{ "--reveal-delay": `${i * 110}ms` } as React.CSSProperties}
-                className={`rounded-[14px] p-5 sm:p-8 lg:p-10 flex flex-col transition-all duration-300 ${
+                className={`rounded-[14px] p-5 sm:p-5 lg:p-6 flex flex-col transition-all duration-300 ${
                   svc.dark
                     ? "bg-[#111111] hover:shadow-[0_12px_32px_rgba(0,0,0,0.25)]"
                     : "bg-white border border-[#E0E0E0] shadow-[0px_2px_10px_rgba(0,0,0,0.06)] hover:-translate-y-1 hover:shadow-[0px_8px_24px_rgba(0,0,0,0.10)] hover:border-[#d96c4a]/25"
@@ -1012,7 +1012,7 @@ export const HomeStorySections = () => {
                 </h3>
                 {/* Description */}
                 <p
-                  className={`text-[14px] leading-relaxed flex-1 mb-8 ${
+                  className={`text-[14px] leading-relaxed flex-1 mb-5 ${
                     svc.dark ? "text-white/50" : "text-[#6B7280]"
                   }`}
                 >

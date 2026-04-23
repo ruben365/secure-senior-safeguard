@@ -20,13 +20,13 @@ const TrustedTechLogos = forwardRef<HTMLDivElement>(function TrustedTechLogos(_p
       <div className="py-3 border-t border-border/15">
         <div className="relative overflow-hidden">
           {/* Gradient Edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[hsl(213_28%_10%)] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[hsl(213_28%_10%)] to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-10 bg-gradient-to-r from-[hsl(213_28%_10%)] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-[hsl(213_28%_10%)] to-transparent z-10 pointer-events-none" />
 
           <div className="flex animate-marquee items-center" style={{ willChange: "transform" }}>
             {[...techPartners, ...techPartners, ...techPartners].map(
               (name, index) => (
-                <div key={index} className="flex-shrink-0 mx-8 flex items-center gap-2">
+                <div key={index} className="flex-shrink-0 mx-5 flex items-center gap-2">
                   <span className="text-xs font-bold text-white/35 whitespace-nowrap tracking-widest uppercase">
                     {name}
                   </span>

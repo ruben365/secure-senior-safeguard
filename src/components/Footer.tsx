@@ -154,10 +154,10 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
           className="footer-aura absolute right-0 top-0 w-[600px] h-full pointer-events-none opacity-50"
         />
 
-        <div className="max-w-[1200px] mx-auto w-full px-4 sm:px-8 py-5 relative z-10">
+        <div className="max-w-[1200px] mx-auto w-full px-4 sm:px-5 py-5 relative z-10">
 
           {/* ─────────── TOP ROW — Brand left + Newsletter card right ─────────── */}
-          <div className="flex flex-col lg:flex-row justify-between w-full gap-6 lg:gap-12">
+          <div className="flex flex-col lg:flex-row justify-between w-full gap-4 lg:gap-7">
             {/* Brand cluster — pushed to far left */}
             <div className="flex flex-col flex-1 max-w-xl">
               <Link
@@ -169,7 +169,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                   <img
                     src={invisionLogo}
                     alt="InVision Network Shield Logo"
-                    className="h-9 w-9 object-contain brightness-0 invert"
+                    className="h-6 w-6 object-contain brightness-0 invert"
                     loading="eager"
                     decoding="sync"
                     width={36}
@@ -189,7 +189,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                 cutting-edge technology and expert training.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-x-6 gap-y-2.5 flex-wrap">
+              <div className="flex flex-col sm:flex-row gap-x-4 gap-y-2.5 flex-wrap">
                 <span className="inline-flex items-center gap-2 text-[13px] text-white/75">
                   <MapPin className="w-4 h-4 text-orange-400/80 flex-shrink-0" />
                   Serving Kettering, Dayton &amp; Montgomery County, OH
@@ -225,13 +225,13 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={isSubmitting}
-                    className="h-9 sm:h-12 flex-1 bg-white/[0.06] border-white/15 text-white text-[12px] sm:text-[14px] placeholder:text-white/45 focus:bg-white/[0.10] focus:border-orange-500/50 rounded-xl disabled:opacity-50"
+                    className="h-6 sm:h-7 flex-1 bg-white/[0.06] border-white/15 text-white text-[12px] sm:text-[14px] placeholder:text-white/45 focus:bg-white/[0.10] focus:border-orange-500/50 rounded-xl disabled:opacity-50"
                     aria-label="Email address for newsletter"
                   />
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="h-9 sm:h-12 px-4 sm:px-6 rounded-xl bg-accent hover:bg-accent/90 text-accent-foreground border-0 text-[12px] sm:text-[14px] font-semibold flex-shrink-0 disabled:opacity-50 inline-flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2"
+                    className="h-6 sm:h-7 px-4 sm:px-4 rounded-xl bg-accent hover:bg-accent/90 text-accent-foreground border-0 text-[12px] sm:text-[14px] font-semibold flex-shrink-0 disabled:opacity-50 inline-flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2"
                     aria-label="Subscribe to newsletter"
                   >
                     {isSubmitting ? (
@@ -249,7 +249,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
           </div>
 
           {/* ─────────── MIDDLE — 5 nav columns stretched across full width ─────────── */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 lg:gap-x-12 gap-y-6 w-full mt-5">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-5 lg:gap-x-7 gap-y-4 w-full mt-5">
             {navColumns.map((col) => (
               <div key={col.heading}>
                 <h4 className="font-bold text-[13px] mb-2 text-white uppercase tracking-[0.18em] leading-tight">
@@ -274,7 +274,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
           {/* ─────────── BOTTOM — Copyright + badges + socials ─────────── */}
           <div className="flex flex-col md:flex-row justify-between items-center w-full gap-3 mt-5 pt-3 border-t border-gray-800">
             {/* Left cluster: copyright + trust badges — pushed to far left */}
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-6 gap-y-3">
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-3">
               <p className="text-[13px] text-white/70">
                 © {new Date().getFullYear()} InVision Network. All rights reserved.
               </p>
@@ -302,7 +302,7 @@ const Footer = forwardRef<HTMLElement>(function Footer(_props, ref) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="w-11 h-11 sm:w-9 sm:h-9 rounded-xl bg-white/[0.05] hover:bg-orange-500/15 border border-white/10 hover:border-orange-500/40 transition-all duration-200 flex items-center justify-center group"
+                  className="w-7 h-7 sm:w-6 sm:h-6 rounded-xl bg-white/[0.05] hover:bg-orange-500/15 border border-white/10 hover:border-orange-500/40 transition-all duration-200 flex items-center justify-center group"
                 >
                   <s.icon className="w-5 h-5 sm:w-4 sm:h-4 text-white/75 group-hover:text-orange-300 transition-colors" />
                 </a>

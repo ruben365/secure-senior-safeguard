@@ -44,19 +44,19 @@ function statusVariant(status: string | null): "default" | "secondary" | "destru
 
 function DashboardSkeleton() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {Array.from({ length: 4 }).map((_, i) => (
-          <Skeleton key={i} className="h-32 rounded-lg" />
+          <Skeleton key={i} className="h-20 rounded-lg" />
         ))}
       </div>
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-3 gap-4">
         <div className="md:col-span-2 space-y-4">
           <Skeleton className="h-64 rounded-lg" />
-          <Skeleton className="h-32 rounded-lg" />
+          <Skeleton className="h-20 rounded-lg" />
         </div>
         <div className="space-y-4">
-          <Skeleton className="h-32 rounded-lg" />
+          <Skeleton className="h-20 rounded-lg" />
           <Skeleton className="h-40 rounded-lg" />
         </div>
       </div>
@@ -195,14 +195,14 @@ export default function SeniorHome() {
 
   if (isLoading) {
     return (
-      <div className="container mx-auto py-6">
+      <div className="container mx-auto py-4">
         <DashboardSkeleton />
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto py-6 space-y-6">
+    <div className="container mx-auto py-4 space-y-4">
       {/* Stat Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {statCards.map((card) => (
@@ -211,9 +211,9 @@ export default function SeniorHome() {
       </div>
 
       {/* Main grid */}
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-3 gap-4">
         {/* Left column — 2/3 width */}
-        <div className="md:col-span-2 space-y-6">
+        <div className="md:col-span-2 space-y-4">
           {/* Recent Alerts */}
           <Card>
             <CardHeader>
@@ -221,12 +221,12 @@ export default function SeniorHome() {
             </CardHeader>
             <CardContent className="p-0">
               {!submissionsData || submissionsData.length === 0 ? (
-                <div className="px-6 pb-6">
+                <div className="px-4 pb-4">
                   <EmptyState
                     icon={AlertTriangle}
                     title="No recent alerts"
                     description="You have not submitted any scam reports yet."
-                    className="py-8"
+                    className="py-5"
                   />
                 </div>
               ) : (
@@ -234,7 +234,7 @@ export default function SeniorHome() {
                   {submissionsData.map((submission) => (
                     <li
                       key={submission.id}
-                      className="flex items-start gap-3 px-6 py-3"
+                      className="flex items-start gap-3 px-4 py-3"
                     >
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-foreground truncate">

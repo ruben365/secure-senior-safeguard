@@ -38,22 +38,22 @@ export function AcceptedCards() {
       <img
         src="https://js.stripe.com/v3/fingerprinted/img/visa-729c05c240c4bdb47b03ac81d9945bfe.svg"
         alt="Visa"
-        className="h-6"
+        className="h-4"
       />
       <img
         src="https://js.stripe.com/v3/fingerprinted/img/mastercard-4d8844094130711885b5e41b28c9848f.svg"
         alt="Mastercard"
-        className="h-6"
+        className="h-4"
       />
       <img
         src="https://js.stripe.com/v3/fingerprinted/img/amex-a49b82f46c5cd6a96a6e418a6ca1717c.svg"
         alt="Amex"
-        className="h-6"
+        className="h-4"
       />
       <img
         src="https://js.stripe.com/v3/fingerprinted/img/discover-ac52cd46f89fa40a29a0bfb954e33173.svg"
         alt="Discover"
-        className="h-6"
+        className="h-4"
       />
     </div>
   );

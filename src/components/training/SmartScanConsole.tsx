@@ -132,7 +132,7 @@ export const SmartScanConsole = ({
     <div className="relative">
       <div
         className={cn(
-          "relative premium-frosted-dark rounded-[28px] border border-white/10 p-4 md:p-6 shadow-[0_35px_80px_rgba(3,8,20,0.55)]",
+          "relative premium-frosted-dark rounded-[28px] border border-white/10 p-4 md:p-4 shadow-[0_35px_80px_rgba(3,8,20,0.55)]",
           isDragging && "ring-2 ring-cyan-300/60",
         )}
         onDragOver={(event) => {
@@ -156,7 +156,7 @@ export const SmartScanConsole = ({
         >
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="h-11 w-11 rounded-2xl bg-white/10 flex items-center justify-center border border-white/10">
+              <div className="h-7 w-7 rounded-2xl bg-white/10 flex items-center justify-center border border-white/10">
                 <ShieldCheck className="h-5 w-5 text-emerald-300" />
               </div>
               <div>
@@ -193,7 +193,7 @@ export const SmartScanConsole = ({
 
           {file && fileMeta && (
             <div className="mt-4 flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3">
-              <div className="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center">
+              <div className="h-6 w-6 rounded-xl bg-white/10 flex items-center justify-center">
                 <FileText className="h-5 w-5 text-white/70" />
               </div>
               <div className="min-w-0 flex-1">
@@ -207,7 +207,7 @@ export const SmartScanConsole = ({
               <button
                 type="button"
                 onClick={handleClearFile}
-                className="h-9 w-9 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition"
+                className="h-6 w-6 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition"
                 aria-label="Remove file"
               >
                 <X className="h-4 w-4" />
@@ -244,7 +244,7 @@ export const SmartScanConsole = ({
                 type="button"
                 variant="outlineLight"
                 size="sm"
-                className="h-10 px-4 text-white/90 border-white/15 bg-white/5 hover:bg-white/10"
+                className="h-6 px-4 text-white/90 border-white/15 bg-white/5 hover:bg-white/10"
                 onClick={openFileDialog}
                 disabled={isProcessing}
               >
@@ -255,7 +255,7 @@ export const SmartScanConsole = ({
                 type="button"
                 size="sm"
                 className={cn(
-                  "h-10 px-4 text-slate-950 shadow-[0_10px_25px_rgba(8,15,35,0.35)]",
+                  "h-6 px-4 text-slate-950 shadow-[0_10px_25px_rgba(8,15,35,0.35)]",
                   file
                     ? "bg-emerald-300 hover:bg-emerald-200"
                     : "bg-white hover:bg-white/90",

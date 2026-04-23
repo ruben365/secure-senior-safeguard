@@ -159,8 +159,8 @@ export default function ThreatMonitor() {
   const resolved = threats.filter((t) => t.status === "resolved").length;
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="flex items-center justify-between mb-4">
         <div>
           <h1 className="text-2xl font-bold text-[#F9FAFB]">Threat Monitor</h1>
           <p className="text-[#9CA3AF]">
@@ -269,7 +269,7 @@ export default function ThreatMonitor() {
           },
         ].map((stat) => (
           <Card key={stat.label} className="bg-[#111827] border-gray-800">
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               <p className="text-[#9CA3AF] text-sm">{stat.label}</p>
               <p
                 className={`text-3xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}
@@ -298,13 +298,13 @@ export default function ThreatMonitor() {
         </CardHeader>
         <CardContent>
           {isLoading ? (
-            <div className="text-center py-12">
-              <RefreshCw className="h-8 w-8 animate-spin mx-auto text-[#06B6D4] mb-4" />
+            <div className="text-center py-7">
+              <RefreshCw className="h-5 w-5 animate-spin mx-auto text-[#06B6D4] mb-4" />
               <p className="text-[#9CA3AF]">Loading threats...</p>
             </div>
           ) : threats.length === 0 ? (
-            <div className="text-center py-12">
-              <Shield className="h-16 w-16 mx-auto text-green-500/50 mb-4" />
+            <div className="text-center py-7">
+              <Shield className="h-10 w-10 mx-auto text-green-500/50 mb-4" />
               <h3 className="text-xl font-semibold text-[#F9FAFB] mb-2">
                 All Clear!
               </h3>

@@ -40,10 +40,10 @@ export default function BookDetail() {
         <SEO title="Book Not Found" description="The requested book was not found." noindex />
         <Navigation overlay />
         <main className="flex-1 flex items-center justify-center">
-          <div className="text-center py-20">
-            <BookOpen className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+          <div className="text-center py-12">
+            <BookOpen className="mx-auto mb-4 h-7 w-7 text-muted-foreground" />
             <h1 className="text-2xl font-bold mb-2">Book Not Found</h1>
-            <p className="text-muted-foreground mb-6">We could not find the book you are looking for.</p>
+            <p className="text-muted-foreground mb-4">We could not find the book you are looking for.</p>
             <Button asChild><Link to="/library">Browse All Books</Link></Button>
           </div>
         </main>
@@ -121,11 +121,11 @@ export default function BookDetail() {
         </div>
 
         {/* Hero section */}
-        <section className="container mx-auto py-12 max-w-6xl">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <section className="container mx-auto py-7 max-w-6xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Cover */}
             <div className="md:col-span-1">
-              <div className="sticky top-24">
+              <div className="sticky top-16">
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[3/4] bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
                   {book.cover_image ? (
                     <img
@@ -142,8 +142,8 @@ export default function BookDetail() {
                       }}
                     />
                   ) : (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-gradient-to-br from-primary/80 to-purple-800/80 text-white text-center">
-                      <BookOpen className="h-16 w-16 mb-4 opacity-80" />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center p-4 bg-gradient-to-br from-primary/80 to-purple-800/80 text-white text-center">
+                      <BookOpen className="h-10 w-10 mb-4 opacity-80" />
                       <h2 className="text-xl font-bold leading-tight">{book.title}</h2>
                       <p className="text-sm mt-2 opacity-80">{book.subtitle}</p>
                     </div>
@@ -151,7 +151,7 @@ export default function BookDetail() {
                 </div>
 
                 {/* Purchase box */}
-                <Card className="mt-6 border-primary/20 shadow-lg">
+                <Card className="mt-4 border-primary/20 shadow-lg">
                   <CardContent className="p-5 space-y-4">
                     <div className="flex items-baseline justify-between">
                       <span className="text-3xl font-bold text-primary">${book.price.toFixed(2)}</span>
@@ -162,7 +162,7 @@ export default function BookDetail() {
                       )}
                     </div>
 
-                    <Button className="w-full gap-2 text-base h-11" onClick={handleBuyNow}>
+                    <Button className="w-full gap-2 text-base h-7" onClick={handleBuyNow}>
                       <ShoppingCart className="h-4 w-4" />
                       Buy Now — Instant Access
                     </Button>
@@ -205,7 +205,7 @@ export default function BookDetail() {
             </div>
 
             {/* Details */}
-            <div className="md:col-span-2 space-y-8">
+            <div className="md:col-span-2 space-y-5">
               <div>
                 <div className="flex flex-wrap items-center gap-2 mb-3">
                   <Badge variant="secondary" className="capitalize">{book.category}</Badge>
@@ -213,7 +213,7 @@ export default function BookDetail() {
                 </div>
                 <h1 className="font-bold mb-2">{book.title}</h1>
                 <p className="text-xl text-muted-foreground mb-4">{book.subtitle}</p>
-                <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
+                <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
                   <span className="flex items-center gap-1">
                     <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                     <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
@@ -253,7 +253,7 @@ export default function BookDetail() {
 
               {/* Sample chapter — marketing preview, not a free product */}
               <Card className="border-primary/20 bg-primary/5">
-                <CardContent className="p-6">
+                <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="text-lg font-semibold">Sample — Chapter 1</h2>
                     <Badge variant="outline" className="border-primary/30 text-primary">Preview</Badge>
@@ -284,7 +284,7 @@ export default function BookDetail() {
                         }
                       >
                         <div className="flex items-center gap-3">
-                          <span className="text-sm font-mono text-muted-foreground w-6">
+                          <span className="text-sm font-mono text-muted-foreground w-4">
                             {String(chapter.chapter_number).padStart(2, "0")}
                           </span>
                           <span className="font-medium">{chapter.chapter_title}</span>
@@ -323,15 +323,15 @@ export default function BookDetail() {
 
         {/* Related books */}
         {relatedBooks.length > 0 && (
-          <section className="bg-muted/30 border-t py-12">
+          <section className="bg-muted/30 border-t py-7">
             <div className="container mx-auto max-w-6xl">
-              <h2 className="text-2xl font-bold mb-6">You May Also Like</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <h2 className="text-2xl font-bold mb-4">You May Also Like</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {relatedBooks.map((related) => (
                   <Card key={related.slug} className="hover:shadow-md transition-shadow">
                     <CardContent className="p-5">
                       <div className="flex items-start gap-4">
-                      <div className="w-16 h-20 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                      <div className="w-10 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                         {related.cover_image ? (
                           <img
                             src={related.cover_image}
@@ -339,7 +339,7 @@ export default function BookDetail() {
                             className="w-full h-full object-cover rounded-lg"
                           />
                         ) : (
-                          <BookOpen className="h-6 w-6 text-primary" />
+                          <BookOpen className="h-4 w-4 text-primary" />
                         )}
                       </div>
                         <div className="flex-1 min-w-0">
@@ -362,7 +362,7 @@ export default function BookDetail() {
         )}
 
         {/* Back nav */}
-        <div className="container mx-auto py-8 max-w-6xl">
+        <div className="container mx-auto py-5 max-w-6xl">
           <Button variant="ghost" asChild className="gap-2">
             <Link to="/library">
               <ArrowLeft className="h-4 w-4" />

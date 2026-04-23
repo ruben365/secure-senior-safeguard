@@ -86,7 +86,7 @@ export function SavedPaymentMethods({
               <img
                 src={CARD_ICONS[card.brand.toLowerCase()] || ""}
                 alt={card.brand}
-                className="h-6 w-auto"
+                className="h-4 w-auto"
               />
               <div className="text-left">
                 <p className="text-sm font-medium">•••• {card.last4}</p>
@@ -113,7 +113,7 @@ export function SavedPaymentMethods({
         <Button
           variant="outline"
           onClick={onAddNewCard}
-          className="w-full h-11 border-dashed"
+          className="w-full h-7 border-dashed"
         >
           <Plus className="h-4 w-4 mr-2" />
           Add New Card

@@ -136,7 +136,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
         }}
       >
         <div className="container">
-          <div className="flex items-center justify-between h-[56px] gap-4 lg:gap-8">
+          <div className="flex items-center justify-between h-[56px] gap-4 lg:gap-5">
             {/* Logo — identical to hero */}
             <a
               href="/"
@@ -159,7 +159,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
             </a>
 
             {/* Desktop Links — identical to hero */}
-            <div className="hidden lg:flex items-center gap-3 xl:gap-5 lg:ml-6 xl:ml-10">
+            <div className="hidden lg:flex items-center gap-3 xl:gap-5 lg:ml-4 xl:ml-6">
               {primaryLinks.map((link) => {
                 const isActive = isActiveLink(link.href);
                 return (
@@ -268,7 +268,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
               </button>
 
               {/* Divider */}
-              <div className="hidden lg:block w-px h-6 bg-gray-700 mx-1" />
+              <div className="hidden lg:block w-px h-4 bg-gray-700 mx-1" />
 
               {/*
                 Login / Dashboard — strong brand orange pill.
@@ -410,7 +410,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <Link
                     to="/portal"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="w-full inline-flex items-center justify-center py-3 px-6 text-[13px] font-bold rounded-full text-[#0a0c10] bg-gradient-to-r from-[#f5c543] to-[#d4a634] shadow-[0_0_20px_rgba(245,197,67,0.3)] hover:shadow-[0_0_28px_rgba(245,197,67,0.45)] hover:brightness-105 active:scale-[0.98] transition-all duration-200"
+                    className="w-full inline-flex items-center justify-center py-3 px-4 text-[13px] font-bold rounded-full text-[#0a0c10] bg-gradient-to-r from-[#f5c543] to-[#d4a634] shadow-[0_0_20px_rgba(245,197,67,0.3)] hover:shadow-[0_0_28px_rgba(245,197,67,0.45)] hover:brightness-105 active:scale-[0.98] transition-all duration-200"
                   >
                     Login
                   </Link>

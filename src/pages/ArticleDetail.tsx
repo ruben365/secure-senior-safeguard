@@ -44,11 +44,11 @@ function ArticleDetail() {
           noindex
         />
         <Navigation overlay />
-        <div className="container mx-auto py-16 max-w-4xl">
-          <Skeleton className="h-8 w-32 mb-4" />
-          <Skeleton className="h-12 w-full mb-4" />
-          <Skeleton className="h-6 w-48 mb-8" />
-          <Skeleton className="h-96 w-full mb-8" />
+        <div className="container mx-auto py-10 max-w-4xl">
+          <Skeleton className="h-5 w-20 mb-4" />
+          <Skeleton className="h-7 w-full mb-4" />
+          <Skeleton className="h-4 w-48 mb-5" />
+          <Skeleton className="h-96 w-full mb-5" />
           <div className="space-y-4">
             <Skeleton className="h-4 w-full" />
             <Skeleton className="h-4 w-full" />
@@ -69,9 +69,9 @@ function ArticleDetail() {
           noindex
         />
         <Navigation overlay />
-        <div className="container mx-auto py-16 text-center">
-          <h1 className="text-4xl font-bold mb-4">Article Not Found</h1>
-          <p className="text-muted-foreground mb-8">
+        <div className="container mx-auto py-10 text-center">
+          <h1 className="text-2xl font-bold mb-4">Article Not Found</h1>
+          <p className="text-muted-foreground mb-5">
             The article you're looking for doesn't exist or has been removed.
           </p>
           <Button asChild>
@@ -132,10 +132,10 @@ function ArticleDetail() {
       />
       <Navigation overlay />
 
-      <article className="container mx-auto py-16 max-w-4xl">
+      <article className="container mx-auto py-10 max-w-4xl">
         <div className="animate-fade-in">
           {/* Back Button */}
-          <Button variant="ghost" asChild className="mb-6">
+          <Button variant="ghost" asChild className="mb-4">
             <Link to="/articles">
               <ArrowLeft className="mr-2 w-4 h-4" />
               Back to Articles
@@ -143,7 +143,7 @@ function ArticleDetail() {
           </Button>
 
           {/* Header */}
-          <header className="mb-8">
+          <header className="mb-5">
             <Badge variant="secondary" className="mb-4">
               {article.category}
             </Badge>
@@ -179,7 +179,7 @@ function ArticleDetail() {
             <img
               src={article.featured_image_url}
               alt={article.title}
-              className="w-full h-auto rounded-2xl mb-8 object-cover max-h-[500px]"
+              className="w-full h-auto rounded-2xl mb-5 object-cover max-h-[500px]"
               loading="lazy"
               decoding="async"
               width={1200}
@@ -189,7 +189,7 @@ function ArticleDetail() {
 
           {/* Excerpt */}
           {article.excerpt && (
-            <p className="text-xl text-muted-foreground mb-8 font-medium leading-relaxed">
+            <p className="text-xl text-muted-foreground mb-5 font-medium leading-relaxed">
               {article.excerpt}
             </p>
           )}
@@ -205,7 +205,7 @@ function ArticleDetail() {
 
           {/* Tags */}
           {article.tags && article.tags.length > 0 && (
-            <div className="mt-8 pt-8 border-t">
+            <div className="mt-5 pt-5 border-t">
               <h3 className="text-sm font-medium mb-2">Tags</h3>
               <div className="flex flex-wrap gap-2">
                 {article.tags.map((tag) => (
@@ -221,10 +221,10 @@ function ArticleDetail() {
 
       {/* Related Articles */}
       {otherArticles && otherArticles.length > 0 && (
-        <section className="bg-muted/30 py-16">
+        <section className="bg-muted/30 py-10">
           <div className="container mx-auto">
-            <h2 className="text-2xl font-bold mb-8">Related Articles</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <h2 className="text-2xl font-bold mb-5">Related Articles</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
               {otherArticles.map((related) => (
                 <Link
                   key={related.id}
@@ -244,7 +244,7 @@ function ArticleDetail() {
                         decoding="async"
                       />
                     )}
-                    <div className="p-6">
+                    <div className="p-4">
                       <Badge variant="secondary" className="mb-2">
                         {related.category}
                       </Badge>
@@ -264,13 +264,13 @@ function ArticleDetail() {
       )}
 
       {/* CTA */}
-      <section className="py-16">
+      <section className="py-10">
         <div className="container mx-auto text-center">
-          <Card className="p-8 max-w-2xl mx-auto bg-gradient-to-r from-primary/10 to-accent/10">
+          <Card className="p-5 max-w-2xl mx-auto bg-gradient-to-r from-primary/10 to-accent/10">
             <h3 className="text-2xl font-bold mb-4">
               Stay Protected from Scams
             </h3>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-muted-foreground mb-4">
               Get expert analysis of suspicious messages, calls, and links with
               ScamShield protection.
             </p>

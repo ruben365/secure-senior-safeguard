@@ -135,16 +135,16 @@ export default function BusinessClientDetail() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        <Loader2 className="w-5 h-5 animate-spin text-primary" />
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
-      <div className="sticky top-0 z-10 bg-background border-b pb-6">
-        <div className="flex items-start gap-6">
-          <Avatar className="h-20 w-20 rounded-lg">
+    <div className="space-y-4">
+      <div className="sticky top-0 z-10 bg-background border-b pb-4">
+        <div className="flex items-start gap-4">
+          <Avatar className="h-12 w-12 rounded-lg">
             <AvatarImage src={client.logo} />
             <AvatarFallback className="rounded-lg bg-primary/10 text-primary text-2xl">
               {client.companyName.substring(0, 2).toUpperCase()}
@@ -188,28 +188,28 @@ export default function BusinessClientDetail() {
           <TabsTrigger value="notes">Notes</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="overview" className="mt-6">
+        <TabsContent value="overview" className="mt-4">
           {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
           <ClientOverviewTab client={client as any} />
         </TabsContent>
 
-        <TabsContent value="services" className="mt-6">
+        <TabsContent value="services" className="mt-4">
           <ClientServicesTab clientId={client.id} />
         </TabsContent>
 
-        <TabsContent value="billing" className="mt-6">
+        <TabsContent value="billing" className="mt-4">
           <ClientBillingTab clientId={parseInt(client.id) || 0} />
         </TabsContent>
 
-        <TabsContent value="messages" className="mt-6">
+        <TabsContent value="messages" className="mt-4">
           <ClientMessagesTab clientId={client.id} />
         </TabsContent>
 
-        <TabsContent value="portal" className="mt-6">
+        <TabsContent value="portal" className="mt-4">
           <ClientPortalAccessTab clientId={parseInt(client.id) || 0} />
         </TabsContent>
 
-        <TabsContent value="notes" className="mt-6">
+        <TabsContent value="notes" className="mt-4">
           <ClientNotesTab clientId={client.id} />
         </TabsContent>
       </Tabs>

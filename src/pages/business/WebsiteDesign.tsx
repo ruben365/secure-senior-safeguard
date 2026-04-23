@@ -295,13 +295,13 @@ const WebsiteDesign = () => {
 
         <main>
           {/* Hero Section */}
-          <section className="relative overflow-hidden min-h-[100dvh] flex items-center pt-[clamp(100px,14vw,140px)] pb-10">
+          <section className="relative overflow-hidden min-h-[100dvh] flex items-center pt-[clamp(100px,14vw,140px)] pb-6">
             {/* Background */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
 
             {/* Static Glass Orbs (replaced animated) */}
-            <div className="absolute top-20 left-10 w-72 h-72 rounded-full bg-gradient-to-br from-primary/25 to-accent/25 blur-3xl" />
-            <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full bg-gradient-to-br from-accent/20 to-primary/20 blur-3xl" />
+            <div className="absolute top-12 left-6 w-72 h-72 rounded-full bg-gradient-to-br from-primary/25 to-accent/25 blur-3xl" />
+            <div className="absolute bottom-12 right-6 w-96 h-96 rounded-full bg-gradient-to-br from-accent/20 to-primary/20 blur-3xl" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-primary/10 to-accent/10 blur-3xl" />
 
             <div className="container mx-auto relative z-10">
@@ -310,7 +310,7 @@ const WebsiteDesign = () => {
                 <div className="hidden lg:flex absolute left-4 top-1/4 flex-col gap-4">
                   <div className="bg-white/80 dark:bg-card/80 backdrop-blur-2xl border border-white/50 rounded-2xl p-4 shadow-2xl transform -rotate-6 hover-scale">
                     <div className="flex items-center gap-2">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg">
+                      <div className="w-6 h-6 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg">
                         <Users className="w-5 h-5 text-white" />
                       </div>
                       <div>
@@ -322,7 +322,7 @@ const WebsiteDesign = () => {
 
                   <div className="bg-white/80 dark:bg-card/80 backdrop-blur-2xl border border-white/50 rounded-2xl p-4 shadow-2xl transform rotate-3 hover-scale">
                     <div className="flex items-center gap-2">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg">
+                      <div className="w-6 h-6 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg">
                         <TrendingUp className="w-5 h-5 text-white" />
                       </div>
                       <div>
@@ -344,7 +344,7 @@ const WebsiteDesign = () => {
                 <div className="hidden lg:flex absolute right-4 top-1/3 flex-col gap-4">
                   <div className="bg-white/80 dark:bg-card/80 backdrop-blur-2xl border border-white/50 rounded-2xl p-4 shadow-2xl transform rotate-6 hover-scale">
                     <div className="flex items-center gap-2">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg">
+                      <div className="w-6 h-6 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg">
                         <Award className="w-5 h-5 text-white" />
                       </div>
                       <div>
@@ -356,7 +356,7 @@ const WebsiteDesign = () => {
 
                   <div className="bg-white/80 dark:bg-card/80 backdrop-blur-2xl border border-white/50 rounded-2xl p-4 shadow-2xl transform -rotate-3 hover-scale">
                     <div className="flex items-center gap-2">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg">
+                      <div className="w-6 h-6 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg">
                         <Rocket className="w-5 h-5 text-white" />
                       </div>
                       <div>
@@ -374,7 +374,7 @@ const WebsiteDesign = () => {
                 <AnimatedSection animation="fade-up">
                   <Badge
                     variant="outline"
-                    className="mb-6 px-4 py-2 text-sm border-primary/30 bg-white/80 dark:bg-card/80 backdrop-blur-2xl shadow-lg"
+                    className="mb-4 px-4 py-2 text-sm border-primary/30 bg-white/80 dark:bg-card/80 backdrop-blur-2xl shadow-lg"
                   >
                     <Globe className="w-4 h-4 mr-2" />
                     Web Design & Development
@@ -382,7 +382,7 @@ const WebsiteDesign = () => {
                 </AnimatedSection>
 
                 <AnimatedSection animation="fade-up" delay={100}>
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                  <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
                     <span
                       className="bg-clip-text text-transparent"
                       style={{
@@ -400,7 +400,7 @@ const WebsiteDesign = () => {
                 </AnimatedSection>
 
                 <AnimatedSection animation="fade-up" delay={200}>
-                  <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+                  <p className="text-xl text-muted-foreground mb-5 max-w-2xl mx-auto">
                     Beautiful, fast, and effective websites that turn visitors
                     into customers. Built in Dayton, Ohio for businesses
                     nationwide.
@@ -431,7 +431,7 @@ const WebsiteDesign = () => {
 
                 {/* Bottom Stats Bar */}
                 <AnimatedSection animation="fade-up" delay={400}>
-                  <div className="mt-16 flex flex-wrap justify-center gap-6">
+                  <div className="mt-10 flex flex-wrap justify-center gap-4">
                     {[
                       {
                         icon: HeartHandshake,
@@ -443,10 +443,10 @@ const WebsiteDesign = () => {
                     ].map((stat, index) => (
                       <div
                         key={index}
-                        className="bg-white/80 dark:bg-card/80 backdrop-blur-2xl border border-white/50 rounded-2xl px-6 py-4 shadow-2xl hover-lift"
+                        className="bg-white/80 dark:bg-card/80 backdrop-blur-2xl border border-white/50 rounded-2xl px-4 py-4 shadow-2xl hover-lift"
                       >
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center shadow-lg">
+                          <div className="w-6 h-6 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center shadow-lg">
                             <stat.icon className="w-5 h-5 text-primary" />
                           </div>
                           <div className="text-left">
@@ -467,17 +467,17 @@ const WebsiteDesign = () => {
           </section>
 
           {/* Specialty Categories */}
-          <section className="relative overflow-hidden py-16">
+          <section className="relative overflow-hidden py-10">
             <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
             <div className="container relative z-10 mx-auto px-4">
-              <AnimatedSection animation="fade-up" className="mx-auto mb-10 max-w-3xl text-center">
+              <AnimatedSection animation="fade-up" className="mx-auto mb-6 max-w-3xl text-center">
                 <Badge
                   variant="outline"
                   className="border-primary/30 bg-white/80 px-4 py-1.5 text-xs dark:bg-card/80"
                 >
                   Build Categories
                 </Badge>
-                <h2 className="mt-4 text-3xl font-bold md:text-4xl">
+                <h2 className="mt-4 text-3xl font-bold md:text-2xl">
                   Animation, Interactions, CMS, Ecommerce, Portfolio
                 </h2>
                 <p className="mt-3 text-muted-foreground">
@@ -486,7 +486,7 @@ const WebsiteDesign = () => {
                 </p>
               </AnimatedSection>
 
-              <div className="mb-8 flex flex-wrap justify-center gap-2">
+              <div className="mb-5 flex flex-wrap justify-center gap-2">
                 {specialtyFilters.map((filter) => {
                   const isActive = activeSpecialty === filter.key;
                   return (
@@ -544,13 +544,13 @@ const WebsiteDesign = () => {
           </section>
 
           {/* Packages Section */}
-          <section className="py-20 relative">
+          <section className="py-12 relative">
             <div className="absolute inset-0 bg-gradient-to-b from-muted/30 to-background" />
             {/* Static decorative orb */}
             <div className="absolute top-1/2 left-0 w-96 h-96 rounded-full bg-gradient-to-br from-primary/10 to-accent/10 blur-3xl -translate-x-1/2" />
             <div className="container mx-auto relative z-10">
-              <AnimatedSection animation="fade-up" className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <AnimatedSection animation="fade-up" className="text-center mb-10">
+                <h2 className="text-3xl md:text-2xl font-bold mb-4">
                   Website Packages
                 </h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -558,7 +558,7 @@ const WebsiteDesign = () => {
                   fits your needs.
                 </p>
               </AnimatedSection>
-              <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              <div className="grid md:grid-cols-3 gap-4 max-w-5xl mx-auto">
                 {packages.map((pkg, index) => (
                   <AnimatedSection
                     key={index}
@@ -577,10 +577,10 @@ const WebsiteDesign = () => {
                       <Card
                         className={`flex flex-col h-[460px] glass-heavy glass-cursor-overlay card-shine border-white/60 shadow-2xl transition-all duration-300 ${pkg.popular ? "ring-2 ring-[#f5c543]/30 shadow-[0_8px_32px_rgba(245,197,67,0.1)]" : ""}`}
                       >
-                        <CardHeader className="text-center pt-6 pb-3">
+                        <CardHeader className="text-center pt-4 pb-3">
                           <CardTitle className="text-lg">{pkg.name}</CardTitle>
                           <div
-                            className="text-5xl font-black tracking-tight mt-3 mb-1 bg-clip-text text-transparent"
+                            className="text-3xl font-black tracking-tight mt-3 mb-1 bg-clip-text text-transparent"
                             style={{
                               background: pkg.popular
                                 ? "linear-gradient(135deg,#f5c543 0%,#e0a312 100%)"
@@ -626,12 +626,12 @@ const WebsiteDesign = () => {
           </section>
 
           {/* Features Grid */}
-          <section className="py-20 relative overflow-hidden">
+          <section className="py-12 relative overflow-hidden">
             {/* Static decorative orb */}
             <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-gradient-to-br from-primary/15 to-accent/15 blur-3xl" />
             <div className="container mx-auto relative z-10">
-              <AnimatedSection animation="fade-up" className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <AnimatedSection animation="fade-up" className="text-center mb-10">
+                <h2 className="text-3xl md:text-2xl font-bold mb-4">
                   Every Website Includes
                 </h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -639,7 +639,7 @@ const WebsiteDesign = () => {
                   extra cost.
                 </p>
               </AnimatedSection>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {features.map((feature, index) => (
                   <AnimatedSection
                     key={index}
@@ -649,8 +649,8 @@ const WebsiteDesign = () => {
                     <div className="hover-lift h-full">
                       <Card className="glass-heavy glass-cursor-overlay card-shine border-white/60 shadow-2xl transition-all duration-300 h-full">
                         <CardHeader>
-                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/25 to-accent/25 flex items-center justify-center mb-4 shadow-xl">
-                            <feature.icon className="w-6 h-6 text-primary" />
+                          <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-primary/25 to-accent/25 flex items-center justify-center mb-4 shadow-xl">
+                            <feature.icon className="w-4 h-4 text-primary" />
                           </div>
                           <CardTitle className="text-xl">
                             {feature.title}
@@ -670,11 +670,11 @@ const WebsiteDesign = () => {
           </section>
 
           {/* Process Section */}
-          <section className="py-20 relative">
+          <section className="py-12 relative">
             <div className="absolute inset-0 bg-gradient-to-t from-muted/30 to-background" />
             <div className="container mx-auto relative z-10">
-              <AnimatedSection animation="fade-up" className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <AnimatedSection animation="fade-up" className="text-center mb-10">
+                <h2 className="text-3xl md:text-2xl font-bold mb-4">
                   Our Design Process
                 </h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -682,15 +682,15 @@ const WebsiteDesign = () => {
                   step of the way.
                 </p>
               </AnimatedSection>
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {process.map((item, index) => (
                   <AnimatedSection
                     key={index}
                     animation="scale-up"
                     delay={index * 100}
                   >
-                    <div className="text-center glass-heavy glass-cursor-overlay card-shine border border-white/60 rounded-2xl p-6 shadow-2xl hover-lift">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center mx-auto mb-4 shadow-2xl shadow-primary/40">
+                    <div className="text-center glass-heavy glass-cursor-overlay card-shine border border-white/60 rounded-2xl p-4 shadow-2xl hover-lift">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center mx-auto mb-4 shadow-2xl shadow-primary/40">
                         <span className="text-2xl font-bold text-white">
                           {item.step}
                         </span>
@@ -707,17 +707,17 @@ const WebsiteDesign = () => {
           </section>
 
           {/* CTA Section */}
-          <section className="py-20 relative overflow-hidden">
+          <section className="py-12 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/10" />
             {/* Static decorative orb */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-gradient-to-br from-primary/25 to-accent/25 blur-3xl opacity-40" />
             <div className="container mx-auto text-center relative z-10">
               <AnimatedSection animation="scale-up">
-                <div className="glass-heavy glass-cursor-overlay card-shine border border-white/60 rounded-3xl p-12 shadow-2xl max-w-3xl mx-auto">
-                  <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                <div className="glass-heavy glass-cursor-overlay card-shine border border-white/60 rounded-3xl p-7 shadow-2xl max-w-3xl mx-auto">
+                  <h2 className="text-3xl md:text-2xl font-bold mb-4">
                     Ready for a Website That Works?
                   </h2>
-                  <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+                  <p className="text-xl text-muted-foreground mb-5 max-w-2xl mx-auto">
                     Let's build something amazing together. Request a custom
                     quote today.
                   </p>

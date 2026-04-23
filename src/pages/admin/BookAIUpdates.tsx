@@ -212,7 +212,7 @@ export default function BookAIUpdates() {
   const pendingCount = logs.filter((l) => l.status === "pending").length;
 
   return (
-    <div className="p-6 max-w-5xl mx-auto space-y-6">
+    <div className="p-4 max-w-5xl mx-auto space-y-4">
       {/* Header */}
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div className="flex items-center gap-3">
@@ -354,10 +354,10 @@ export default function BookAIUpdates() {
         </CardHeader>
         <CardContent className="p-0">
           {isLoading ? (
-            <div className="p-8 text-center text-[#9CA3AF]">Loading…</div>
+            <div className="p-5 text-center text-[#9CA3AF]">Loading…</div>
           ) : filteredLogs.length === 0 ? (
-            <div className="p-10 text-center">
-              <Clock className="h-10 w-10 mx-auto mb-2 text-gray-700" />
+            <div className="p-6 text-center">
+              <Clock className="h-6 w-6 mx-auto mb-2 text-gray-700" />
               <p className="text-[#9CA3AF]">No update history yet</p>
               <p className="text-xs text-[#6B7280] mt-1">
                 Trigger an AI update above to get started
@@ -420,7 +420,7 @@ export default function BookAIUpdates() {
                     </div>
 
                     {expanded && (
-                      <div className="mt-3 ml-8 space-y-3">
+                      <div className="mt-3 ml-5 space-y-3">
                         {log.proposed_content && (
                           <div className="space-y-1">
                             <p className="text-xs text-[#6B7280] font-medium uppercase tracking-wide">

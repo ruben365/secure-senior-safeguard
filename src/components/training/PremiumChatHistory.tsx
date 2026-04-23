@@ -26,7 +26,7 @@ export const PremiumChatHistory = ({
   return (
     <div
       ref={containerRef}
-      className="relative w-full max-w-6xl mx-auto h-[700px] overflow-y-auto px-4 py-6 space-y-6 scroll-smooth premium-custom-scrollbar"
+      className="relative w-full max-w-6xl mx-auto h-[700px] overflow-y-auto px-4 py-4 space-y-4 scroll-smooth premium-custom-scrollbar"
     >
       {messages.length === 0 && !isThinking && (
         <motion.div
@@ -36,7 +36,7 @@ export const PremiumChatHistory = ({
           className="flex flex-col items-center justify-center h-full gap-4"
         >
           <motion.div
-            className="w-20 h-20 rounded-full premium-aurora premium-3d-card flex items-center justify-center"
+            className="w-12 h-12 rounded-full premium-aurora premium-3d-card flex items-center justify-center"
             animate={{
               rotateY: [0, 360],
             }}
@@ -46,7 +46,7 @@ export const PremiumChatHistory = ({
               ease: "linear",
             }}
           >
-            <Bot className="w-10 h-10 text-primary" />
+            <Bot className="w-6 h-6 text-primary" />
           </motion.div>
           <div className="text-center space-y-2">
             <h3 className="text-xl font-semibold premium-gradient-text premium-hd-text">
@@ -78,7 +78,7 @@ export const PremiumChatHistory = ({
           exit={{ opacity: 0, y: -10 }}
           className="flex gap-3 items-start"
         >
-          <div className="shrink-0 w-9 h-9 rounded-full premium-3d-card flex items-center justify-center bg-gradient-to-br from-primary to-accent shadow-lg">
+          <div className="shrink-0 w-6 h-6 rounded-full premium-3d-card flex items-center justify-center bg-gradient-to-br from-primary to-accent shadow-lg">
             <Loader2 className="w-5 h-5 text-white animate-spin" />
           </div>
           <div className="premium-glass-refraction px-5 py-3.5 rounded-2xl shadow-md">

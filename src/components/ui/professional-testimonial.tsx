@@ -41,8 +41,8 @@ export const ProfessionalTestimonial = ({
 
   const cardStyles =
     variant === "card"
-      ? "bg-white border border-gray-100 shadow-md hover:shadow-xl p-8 rounded-2xl"
-      : "bg-transparent p-6";
+      ? "bg-white border border-gray-100 shadow-md hover:shadow-xl p-5 rounded-2xl"
+      : "bg-transparent p-4";
 
   return (
     <motion.div
@@ -61,7 +61,7 @@ export const ProfessionalTestimonial = ({
       )}
     >
       {/* Quote Icon */}
-      <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-gradient-to-br from-coral-100 to-lavender-100 flex items-center justify-center opacity-50">
+      <div className="absolute top-4 right-4 w-6 h-6 rounded-full bg-gradient-to-br from-coral-100 to-lavender-100 flex items-center justify-center opacity-50">
         <Quote className="w-5 h-5 text-coral-500" />
       </div>
 
@@ -81,14 +81,14 @@ export const ProfessionalTestimonial = ({
       </div>
 
       {/* Quote Text */}
-      <p className="font-body text-base md:text-lg text-gray-700 leading-relaxed mb-6 italic">
+      <p className="font-body text-base md:text-lg text-gray-700 leading-relaxed mb-4 italic">
         "{quote}"
       </p>
 
       {/* User Info */}
       <div className="flex items-center gap-4">
         {/* Avatar */}
-        <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-coral-200 shadow-sm flex-shrink-0">
+        <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-coral-200 shadow-sm flex-shrink-0">
           <img
             src={avatar}
             alt={name}
@@ -135,7 +135,7 @@ export const TestimonialsGrid = ({
       : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
 
   return (
-    <div className={cn("grid gap-8", gridCols, className)}>{children}</div>
+    <div className={cn("grid gap-5", gridCols, className)}>{children}</div>
   );
 };
 
@@ -185,20 +185,20 @@ export const TestimonialsCarousel = ({
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -20 }}
         transition={{ duration: 0.5 }}
-        className="bg-white border border-gray-100 shadow-xl rounded-3xl p-12"
+        className="bg-white border border-gray-100 shadow-xl rounded-3xl p-7"
       >
         {/* Quote Icon */}
-        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-coral-100 to-lavender-100 flex items-center justify-center mb-6 mx-auto">
-          <Quote className="w-7 h-7 text-coral-500" />
+        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-coral-100 to-lavender-100 flex items-center justify-center mb-4 mx-auto">
+          <Quote className="w-4 h-4 text-coral-500" />
         </div>
 
         {/* Star Rating */}
-        <div className="flex items-center justify-center gap-1 mb-6">
+        <div className="flex items-center justify-center gap-1 mb-4">
           {Array.from({ length: 5 }, (_, i) => (
             <Star
               key={i}
               className={cn(
-                "w-6 h-6",
+                "w-4 h-4",
                 i < current.rating
                   ? "text-amber-400 fill-amber-400"
                   : "text-gray-300 fill-gray-300",
@@ -208,13 +208,13 @@ export const TestimonialsCarousel = ({
         </div>
 
         {/* Quote */}
-        <p className="font-body text-xl md:text-2xl text-gray-700 text-center leading-relaxed mb-8 italic">
+        <p className="font-body text-xl md:text-2xl text-gray-700 text-center leading-relaxed mb-5 italic">
           "{current.quote}"
         </p>
 
         {/* User Info */}
         <div className="flex flex-col items-center gap-4">
-          <div className="w-20 h-20 rounded-full overflow-hidden border-3 border-coral-200 shadow-md">
+          <div className="w-12 h-12 rounded-full overflow-hidden border-3 border-coral-200 shadow-md">
             <img
               src={current.avatar}
               alt={current.name}
@@ -235,7 +235,7 @@ export const TestimonialsCarousel = ({
       </motion.div>
 
       {/* Carousel Indicators */}
-      <div className="flex items-center justify-center gap-2 mt-8">
+      <div className="flex items-center justify-center gap-2 mt-5">
         {testimonials.map((_, index) => (
           <button
             key={index}
@@ -243,7 +243,7 @@ export const TestimonialsCarousel = ({
             className={cn(
               "w-2 h-2 rounded-full transition-all duration-300",
               index === currentIndex
-                ? "bg-coral-500 w-8"
+                ? "bg-coral-500 w-5"
                 : "bg-gray-300 hover:bg-gray-400",
             )}
             aria-label={`Go to testimonial ${index + 1}`}

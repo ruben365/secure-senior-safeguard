@@ -53,7 +53,7 @@ const PaymentSettings = () => {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-5">
       {/* Payment Gateway */}
       <div className="space-y-4">
         <h3 className="text-xl font-semibold">Payment Gateway</h3>
@@ -274,7 +274,7 @@ const PaymentSettings = () => {
         )}
       </div>
 
-      <div className="flex justify-end pt-6">
+      <div className="flex justify-end pt-4">
         <Button onClick={handleSave} size="lg">
           Save Payment Settings
         </Button>

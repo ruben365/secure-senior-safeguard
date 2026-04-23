@@ -138,13 +138,13 @@ const Portfolio = () => {
       <Navigation overlay />
 
       {/* Hero */}
-      <section className="pt-28 pb-16 bg-gradient-to-b from-primary/5 to-background">
+      <section className="pt-18 pb-10 bg-gradient-to-b from-primary/5 to-background">
         <div className="container mx-auto text-center">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-[0.15em] mb-6">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-[0.15em] mb-4">
             <Palette className="w-3.5 h-3.5" />
             Our Work
           </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground leading-tight mb-4">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-foreground leading-tight mb-4">
             Design{" "}
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Portfolio
@@ -156,17 +156,17 @@ const Portfolio = () => {
           </p>
 
           {/* Quick stats */}
-          <div className="flex items-center justify-center gap-6 sm:gap-10 mt-8">
+          <div className="flex items-center justify-center gap-4 sm:gap-6 mt-5">
             <div className="text-center">
               <p className="text-2xl font-black text-primary">{projects?.length || 0}</p>
               <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Projects</p>
             </div>
-            <div className="w-px h-8 bg-border" />
+            <div className="w-px h-5 bg-border" />
             <div className="text-center">
               <p className="text-2xl font-black text-primary">{primaryCategories?.length || 0}</p>
               <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Disciplines</p>
             </div>
-            <div className="w-px h-8 bg-border" />
+            <div className="w-px h-5 bg-border" />
             <div className="text-center">
               <p className="text-2xl font-black text-primary">{projects?.filter(p => p.featured).length || 0}</p>
               <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Featured</p>
@@ -176,7 +176,7 @@ const Portfolio = () => {
       </section>
 
       {/* Primary Category Navigation */}
-      <section className="sticky top-16 z-30 bg-background/95 backdrop-blur-md border-b border-border/50">
+      <section className="sticky top-10 z-30 bg-background/95 backdrop-blur-md border-b border-border/50">
         <div className="container mx-auto py-3">
           <div className="flex items-center gap-3 overflow-x-auto pb-1 scrollbar-hide">
             <Button
@@ -214,7 +214,7 @@ const Portfolio = () => {
             <div className="pt-3 pb-1 space-y-2">
               {Object.entries(tagGroups).map(([type, tags]) => (
                 <div key={type} className="flex items-center gap-2 flex-wrap">
-                  <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold w-16 flex-shrink-0 capitalize">
+                  <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold w-10 flex-shrink-0 capitalize">
                     {type}
                   </span>
                   {tags.map((tag) => (
@@ -263,20 +263,20 @@ const Portfolio = () => {
       </section>
 
       {/* Projects Grid */}
-      <main className="py-12">
+      <main className="py-7">
         <div className="container mx-auto">
           {isLoading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {[...Array(6)].map((_, i) => (
                 <div key={i} className="rounded-2xl bg-muted animate-pulse h-72" />
               ))}
             </div>
           ) : !projects?.length && !hasFilters ? (
             <div>
-              <p className="text-sm text-muted-foreground text-center mb-8">
+              <p className="text-sm text-muted-foreground text-center mb-5">
                 More projects coming soon — here's a look at our featured work.
               </p>
-              <div className="gx-gallery grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="gx-gallery grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {STATIC_PROJECTS.map((project) => (
                   <a
                     key={project.id}
@@ -286,7 +286,7 @@ const Portfolio = () => {
                     className="group block rounded-2xl border border-border/60 bg-card overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
                   >
                     <div className={`aspect-[4/3] overflow-hidden relative bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
-                      <Palette className="w-12 h-12 text-muted-foreground/30" />
+                      <Palette className="w-7 h-7 text-muted-foreground/30" />
                       {project.featured && (
                         <div className="absolute top-3 left-3">
                           <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/90 text-white text-[10px] font-bold uppercase tracking-wider">
@@ -335,8 +335,8 @@ const Portfolio = () => {
               </div>
             </div>
           ) : !projects?.length ? (
-            <div className="text-center py-20">
-              <Palette className="w-12 h-12 mx-auto text-muted-foreground/50 mb-4" />
+            <div className="text-center py-12">
+              <Palette className="w-7 h-7 mx-auto text-muted-foreground/50 mb-4" />
               <p className="text-lg font-medium text-muted-foreground">
                 No projects found for this filter
               </p>
@@ -347,7 +347,7 @@ const Portfolio = () => {
               )}
             </div>
           ) : (
-            <div className="gx-gallery grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="gx-gallery grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {projects.map((project) => (
                 <Link
                   key={project.id}
@@ -363,7 +363,7 @@ const Portfolio = () => {
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/10 to-accent/10">
-                        <Palette className="w-10 h-10 text-muted-foreground/30" />
+                        <Palette className="w-6 h-6 text-muted-foreground/30" />
                       </div>
                     )}
                     {project.featured && (
@@ -425,15 +425,15 @@ const Portfolio = () => {
       </main>
 
       {/* CTA */}
-      <section className="py-16 bg-muted/30 border-t border-border/50">
+      <section className="py-10 bg-muted/30 border-t border-border/50">
         <div className="container mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl font-black text-foreground mb-3">
             Ready to Start Your Project?
           </h2>
-          <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
+          <p className="text-muted-foreground mb-4 max-w-xl mx-auto">
             We bring the same level of craft and attention to every client engagement.
           </p>
-          <Button asChild size="lg" className="rounded-full font-bold px-8">
+          <Button asChild size="lg" className="rounded-full font-bold px-5">
             <Link to="/contact">
               Get in Touch <ArrowRight className="w-4 h-4 ml-2" />
             </Link>

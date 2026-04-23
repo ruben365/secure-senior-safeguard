@@ -179,10 +179,10 @@ export default function BookReader() {
       <>
         <SEO title="Book Reader — InVision Network" description="Read your purchased books securely online." />
         <Navigation overlay />
-        <div className={cn("min-h-screen pt-24 pb-16 transition-colors duration-300", MODE_CLASSES[readingMode])}>
+        <div className={cn("min-h-screen pt-16 pb-10 transition-colors duration-300", MODE_CLASSES[readingMode])}>
           <div className="container mx-auto">
             {/* Header */}
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center justify-between mb-4">
               <div>
                 <h1 className="text-3xl font-bold">
                   {session.accessType === "admin" ? "Admin Library" : "Your Library"}
@@ -215,7 +215,7 @@ export default function BookReader() {
 
             {/* Tabs: My Books / Browse Library */}
             <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="mb-6">
+              <TabsList className="mb-4">
                 <TabsTrigger value="my-books" className="gap-1.5">
                   <BookOpen className="h-4 w-4" />
                   My Books ({availableBooks.length})
@@ -228,8 +228,8 @@ export default function BookReader() {
 
               <TabsContent value="my-books">
                 {availableBooks.length === 0 ? (
-                  <Card className={cn("p-12 text-center", CARD_CLASSES[readingMode])}>
-                    <Lock className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                  <Card className={cn("p-7 text-center", CARD_CLASSES[readingMode])}>
+                    <Lock className="h-7 w-7 mx-auto text-muted-foreground mb-4" />
                     <p className="text-lg font-medium">No books found for this purchase.</p>
                     <p className="text-muted-foreground mt-2">Please contact support if you believe this is an error.</p>
                   </Card>
@@ -325,7 +325,7 @@ export default function BookReader() {
       `}</style>
       <Navigation overlay />
       <div
-        className={cn("secure-reader min-h-screen pt-24 pb-16 transition-colors duration-300", MODE_CLASSES[readingMode])}
+        className={cn("secure-reader min-h-screen pt-16 pb-10 transition-colors duration-300", MODE_CLASSES[readingMode])}
         onContextMenu={handleContextMenu}
       >
         <div className="container mx-auto max-w-4xl">
@@ -367,7 +367,7 @@ export default function BookReader() {
           </div>
 
           {/* Chapter Navigation Tabs */}
-          <div className="flex gap-1 mb-6 overflow-x-auto pb-2">
+          <div className="flex gap-1 mb-4 overflow-x-auto pb-2">
             {selectedBook.chapters.map((ch, i) => (
               <Button
                 key={i}
@@ -394,20 +394,20 @@ export default function BookReader() {
           </div>
 
           {/* Reader Content */}
-          <Card className={cn("p-6 md:p-10 min-h-[60vh]", CARD_CLASSES[readingMode])}>
+          <Card className={cn("p-4 md:p-6 min-h-[60vh]", CARD_CLASSES[readingMode])}>
             <div className="flex items-center gap-2 mb-2 opacity-50">
               <Lock className="h-3 w-3" />
               <span className="text-[10px] uppercase tracking-wider font-medium">Protected Content — InVision Network</span>
             </div>
-            <h3 className="text-2xl font-bold mb-6">{chapter.chapter_title}</h3>
+            <h3 className="text-2xl font-bold mb-4">{chapter.chapter_title}</h3>
             <div
               className={cn(
-                "prose max-w-none [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mb-6 [&_h3]:font-semibold [&_h3]:mt-6 [&_h3]:mb-3 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5",
+                "prose max-w-none [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mb-4 [&_h3]:font-semibold [&_h3]:mt-4 [&_h3]:mb-3 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5",
                 FONT_SIZE_CLASSES[fontSize],
               )}
               dangerouslySetInnerHTML={{ __html: sanitizeHtml(chapter.content_html) }}
             />
-            <div className="mt-8 pt-6 border-t border-border/50 text-center">
+            <div className="mt-5 pt-4 border-t border-border/50 text-center">
               <p className="text-xs text-muted-foreground">
                 © InVision Network • Department of Literature • All Rights Reserved
               </p>
@@ -415,7 +415,7 @@ export default function BookReader() {
           </Card>
 
           {/* Chapter Navigation */}
-          <div className="flex justify-between mt-6">
+          <div className="flex justify-between mt-4">
             <Button
               variant="outline"
               disabled={currentChapter === 0}

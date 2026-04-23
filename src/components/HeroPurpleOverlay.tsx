@@ -14,7 +14,7 @@ const HeroPurpleOverlay = memo(() => {
       {/* All sizes: bottom lift */}
       <div className="absolute inset-0 bg-gradient-to-t from-[rgba(14,10,8,0.55)] via-transparent to-transparent" />
       {/* Top strip for nav legibility */}
-      <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/40 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-18 bg-gradient-to-b from-black/40 to-transparent" />
     </div>
   );
 });

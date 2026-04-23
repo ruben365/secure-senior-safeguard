@@ -53,7 +53,7 @@ const impactInfo: Record<
   }
 > = {
   children: {
-    icon: <Heart className="w-6 h-6" />,
+    icon: <Heart className="w-4 h-4" />,
     title: "Support Children with Cancer",
     impacts: [
       { amount: 25, description: "Provides art therapy supplies for 1 child" },
@@ -67,7 +67,7 @@ const impactInfo: Record<
     color: "from-rose-500/20 to-pink-500/20",
   },
   sponsor: {
-    icon: <Users className="w-6 h-6" />,
+    icon: <Users className="w-4 h-4" />,
     title: "Sponsor a Seat",
     impacts: [
       { amount: 50, description: "Sponsors 1 senior for training" },
@@ -78,7 +78,7 @@ const impactInfo: Record<
     color: "from-blue-500/20 to-cyan-500/20",
   },
   monthly: {
-    icon: <Calendar className="w-6 h-6" />,
+    icon: <Calendar className="w-4 h-4" />,
     title: "Monthly Ally Program",
     impacts: [
       { amount: 10, description: "Provides ongoing scam alerts" },
@@ -89,7 +89,7 @@ const impactInfo: Record<
     color: "from-emerald-500/20 to-teal-500/20",
   },
   general: {
-    icon: <Gift className="w-6 h-6" />,
+    icon: <Gift className="w-4 h-4" />,
     title: "Make a Difference",
     impacts: [
       { amount: 1, description: "Every dollar helps protect a senior" },
@@ -221,7 +221,7 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
         {/* Header — very tight */}
         <DialogHeader className="space-y-0 pb-3">
           <DialogTitle className="flex items-center gap-2.5">
-            <div className="w-9 h-9 bg-primary/15 rounded-full flex items-center justify-center flex-shrink-0">
+            <div className="w-6 h-6 bg-primary/15 rounded-full flex items-center justify-center flex-shrink-0">
               <Heart className="w-4 h-4 text-primary" />
             </div>
             <div className="flex-1 min-w-0">
@@ -243,7 +243,7 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
               <Button
                 type="button"
                 variant={donationType === "one-time" ? "default" : "ghost"}
-                className="flex-1 h-7 text-xs px-2"
+                className="flex-1 h-4 text-xs px-2"
                 onClick={() => setDonationType("one-time")}
               >
                 <Gift className="w-3 h-3 mr-1" />
@@ -252,7 +252,7 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
               <Button
                 type="button"
                 variant={donationType === "monthly" ? "default" : "ghost"}
-                className="flex-1 h-7 text-xs px-2"
+                className="flex-1 h-4 text-xs px-2"
                 onClick={() => setDonationType("monthly")}
               >
                 <Calendar className="w-3 h-3 mr-1" />
@@ -289,7 +289,7 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
                 placeholder="Custom amount"
                 value={customAmount}
                 onChange={(e) => handleCustomAmount(e.target.value)}
-                className="pl-8 h-8 text-sm border border-border rounded-lg focus:ring-2 focus:ring-primary/30"
+                className="pl-5 h-5 text-sm border border-border rounded-lg focus:ring-2 focus:ring-primary/30"
                 min={1}
               />
             </div>
@@ -320,7 +320,7 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
                 render={({ field }) => (
                   <FormItem className="space-y-0.5">
                     <FormControl>
-                      <Input {...field} placeholder="Your Name *" className="h-8 text-sm w-full border border-border rounded-lg focus:ring-2 focus:ring-primary/30" />
+                      <Input {...field} placeholder="Your Name *" className="h-5 text-sm w-full border border-border rounded-lg focus:ring-2 focus:ring-primary/30" />
                     </FormControl>
                     <FormMessage className="text-[10px]" />
                   </FormItem>
@@ -332,7 +332,7 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
                 render={({ field }) => (
                   <FormItem className="space-y-0.5">
                     <FormControl>
-                      <Input {...field} type="email" placeholder="Email Address *" className="h-8 text-sm w-full border border-border rounded-lg focus:ring-2 focus:ring-primary/30" />
+                      <Input {...field} type="email" placeholder="Email Address *" className="h-5 text-sm w-full border border-border rounded-lg focus:ring-2 focus:ring-primary/30" />
                     </FormControl>
                     <FormMessage className="text-[10px]" />
                   </FormItem>
@@ -381,7 +381,7 @@ export const DonationModal = forwardRef<HTMLDivElement, DonationModalProps>(func
               <Button
                 type="submit"
                 disabled={loading || finalAmount < 1}
-                className="w-full h-9 text-sm bg-gradient-to-r from-[hsl(var(--coral-500))] to-[hsl(var(--lavender-500))] text-white border-0 hover:opacity-90 disabled:opacity-50"
+                className="w-full h-6 text-sm bg-gradient-to-r from-[hsl(var(--coral-500))] to-[hsl(var(--lavender-500))] text-white border-0 hover:opacity-90 disabled:opacity-50"
               >
                 {loading ? (
                   <>

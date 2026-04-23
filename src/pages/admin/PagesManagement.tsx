@@ -118,8 +118,8 @@ export default function PagesManagement() {
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="flex items-center justify-between mb-4">
         <div>
           <h1 className="text-2xl font-bold text-[#F9FAFB]">
             Pages Management
@@ -157,7 +157,7 @@ export default function PagesManagement() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
         <Card className="lg:col-span-1 bg-[#111827] border-gray-800">
           <CardHeader>
             <CardTitle className="text-gray-100">Pages</CardTitle>
@@ -190,7 +190,7 @@ export default function PagesManagement() {
           </CardHeader>
           <CardContent>
             {isLoading ? (
-              <div className="flex items-center gap-2 py-8 text-[#9CA3AF]">
+              <div className="flex items-center gap-2 py-5 text-[#9CA3AF]">
                 <RefreshCw className="h-4 w-4 animate-spin" />
                 Loading…
               </div>

@@ -548,7 +548,7 @@ function Auth() {
               display: "flex", alignItems: "center", justifyContent: "center",
               boxShadow: "0 12px 28px -8px rgba(74,222,128,0.4)",
             }}>
-              <CheckCircle2 className="w-7 h-7" style={{ color: "#fff" }} strokeWidth={2.25} />
+              <CheckCircle2 className="w-4 h-4" style={{ color: "#fff" }} strokeWidth={2.25} />
             </div>
           </div>
           <h2 style={{ fontSize: 24, fontWeight: 700, color: "var(--ap-text)", marginBottom: 8 }}>

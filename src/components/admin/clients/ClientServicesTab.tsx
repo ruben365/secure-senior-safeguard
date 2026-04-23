@@ -69,18 +69,18 @@ export function ClientServicesTab({ clientId }: ClientServicesTabProps) {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[200px]">
-        <Loader2 className="w-6 h-6 animate-spin text-primary" />
+        <Loader2 className="w-4 h-4 animate-spin text-primary" />
       </div>
     );
   }
 
   if (services.length === 0) {
     return (
-      <div className="space-y-6">
-        <Card className="p-12 text-center">
+      <div className="space-y-4">
+        <Card className="p-7 text-center">
           <div className="flex flex-col items-center gap-4">
-            <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center">
-              <Package className="w-8 h-8 text-muted-foreground" />
+            <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
+              <Package className="w-5 h-5 text-muted-foreground" />
             </div>
             <div>
               <h3 className="text-lg font-semibold mb-1">No Active Services</h3>
@@ -99,8 +99,8 @@ export function ClientServicesTab({ clientId }: ClientServicesTabProps) {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div className="space-y-4">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {services.map((service) => (
           <Card key={service.id} className="hover:shadow-lg transition-shadow">
             <CardHeader>

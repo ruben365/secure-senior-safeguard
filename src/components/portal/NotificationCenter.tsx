@@ -61,7 +61,7 @@ export function NotificationCenter() {
             <Button
               variant="ghost"
               size="sm"
-              className="h-7 gap-1.5 text-xs text-muted-foreground hover:text-foreground"
+              className="h-4 gap-1.5 text-xs text-muted-foreground hover:text-foreground"
               onClick={() => markAllAsRead()}
             >
               <CheckCheck className="h-3.5 w-3.5" />
@@ -82,8 +82,8 @@ export function NotificationCenter() {
             ))}
           </div>
         ) : notifications.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-10 px-4 text-center gap-2">
-            <Bell className="h-8 w-8 text-muted-foreground" />
+          <div className="flex flex-col items-center justify-center py-6 px-4 text-center gap-2">
+            <Bell className="h-5 w-5 text-muted-foreground" />
             <p className="text-sm font-medium text-foreground">No notifications</p>
             <p className="text-xs text-muted-foreground">You're all caught up!</p>
           </div>

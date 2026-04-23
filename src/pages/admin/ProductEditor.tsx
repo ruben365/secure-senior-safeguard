@@ -133,13 +133,13 @@ const ProductEditor = () => {
         </div>
       </div>
 
-      <div className="container mx-auto py-8">
-        <div className="grid gap-6 lg:grid-cols-3">
+      <div className="container mx-auto py-5">
+        <div className="grid gap-4 lg:grid-cols-3">
           {/* Left Column - Editor */}
           <div className="lg:col-span-2">
-            <div className="space-y-6">
+            <div className="space-y-4">
               {/* Basic Information */}
-              <Card className="p-6">
+              <Card className="p-4">
                 <h2 className="mb-4 text-xl font-semibold">
                   Basic Information
                 </h2>
@@ -196,7 +196,7 @@ const ProductEditor = () => {
               </Card>
 
               {/* Product Images */}
-              <Card className="p-6">
+              <Card className="p-4">
                 <h2 className="mb-4 text-xl font-semibold">Product Images</h2>
                 <div className="space-y-4">
                   <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
@@ -225,7 +225,7 @@ const ProductEditor = () => {
                     ))}
                     {images.length < 5 && (
                       <label className="flex aspect-square cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed hover:border-primary">
-                        <Upload className="mb-2 h-8 w-8 text-muted-foreground" />
+                        <Upload className="mb-2 h-5 w-5 text-muted-foreground" />
                         <span className="text-sm text-muted-foreground">
                           Upload Image
                         </span>
@@ -247,7 +247,7 @@ const ProductEditor = () => {
               </Card>
 
               {/* Product Type */}
-              <Card className="p-6">
+              <Card className="p-4">
                 <h2 className="mb-4 text-xl font-semibold">Product Type</h2>
                 <div className="space-y-4">
                   <div className="flex gap-4">
@@ -296,7 +296,7 @@ const ProductEditor = () => {
               </Card>
 
               {/* Pricing & Inventory */}
-              <Card className="p-6">
+              <Card className="p-4">
                 <h2 className="mb-4 text-xl font-semibold">
                   Pricing & Inventory
                 </h2>
@@ -480,7 +480,7 @@ const ProductEditor = () => {
                               }
                             />
                           </div>
-                          <div className="w-24">
+                          <div className="w-16">
                             <Label htmlFor="weightUnit">Unit</Label>
                             <Select
                               value={productData.weightUnit}
@@ -582,7 +582,7 @@ const ProductEditor = () => {
                       <div>
                         <Label htmlFor="downloadFile">Download File</Label>
                         <div className="mt-2 flex flex-col gap-2">
-                          <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border-2 border-dashed p-6 hover:border-primary">
+                          <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border-2 border-dashed p-4 hover:border-primary">
                             <Upload className="h-5 w-5" />
                             <span>Upload File or Click to Browse</span>
                             <input type="file" className="hidden" />
@@ -622,8 +622,8 @@ const ProductEditor = () => {
           </div>
 
           {/* Right Sidebar - Publishing Options */}
-          <div className="space-y-6">
-            <Card className="p-6">
+          <div className="space-y-4">
+            <Card className="p-4">
               <h2 className="mb-4 text-lg font-semibold">Product Status</h2>
               <div className="space-y-4">
                 <div>
@@ -667,7 +667,7 @@ const ProductEditor = () => {
               </div>
             </Card>
 
-            <Card className="p-6">
+            <Card className="p-4">
               <h2 className="mb-4 text-lg font-semibold">Organization</h2>
               <div className="space-y-4">
                 <div>
@@ -736,7 +736,7 @@ const ProductEditor = () => {
               </div>
             </Card>
 
-            <Card className="p-6">
+            <Card className="p-4">
               <h2 className="mb-4 text-lg font-semibold">SEO</h2>
               <div className="space-y-4">
                 <div>
@@ -796,7 +796,7 @@ const ProductEditor = () => {
               </div>
             </Card>
 
-            <Card className="p-6">
+            <Card className="p-4">
               <h2 className="mb-4 text-lg font-semibold">
                 Publishing Checklist
               </h2>

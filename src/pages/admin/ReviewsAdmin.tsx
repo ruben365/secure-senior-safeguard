@@ -34,7 +34,7 @@ export default function ReviewsAdmin() {
   const pendingCount = reviews?.filter((r) => r.status === "pending").length || 0;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <div>
         <h1 className="text-2xl font-bold">Reviews & Ratings</h1>
         <p className="text-muted-foreground">{pendingCount} pending reviews need moderation</p>
@@ -55,9 +55,9 @@ export default function ReviewsAdmin() {
             </TableHeader>
             <TableBody>
               {isLoading ? (
-                <TableRow><TableCell colSpan={6} className="text-center py-8">Loading...</TableCell></TableRow>
+                <TableRow><TableCell colSpan={6} className="text-center py-5">Loading...</TableCell></TableRow>
               ) : !reviews?.length ? (
-                <TableRow><TableCell colSpan={6} className="text-center py-8">No reviews yet</TableCell></TableRow>
+                <TableRow><TableCell colSpan={6} className="text-center py-5">No reviews yet</TableCell></TableRow>
               ) : (
                 reviews.map((review) => (
                   <TableRow key={review.id}>

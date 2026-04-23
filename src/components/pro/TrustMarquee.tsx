@@ -38,14 +38,14 @@ export function TrustMarquee({ className }: TrustMarqueeProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={item.text}
-              className="flex items-center gap-2 px-6 py-2 rounded-full bg-[hsl(var(--primary)/0.04)] border border-[hsl(var(--primary)/0.08)] whitespace-nowrap hover:border-[hsl(var(--primary)/0.2)] transition-colors"
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-[hsl(var(--primary)/0.04)] border border-[hsl(var(--primary)/0.08)] whitespace-nowrap hover:border-[hsl(var(--primary)/0.2)] transition-colors"
             >
               {inner}
             </a>
           ) : (
             <div
               key={i}
-              className="flex items-center gap-2 px-6 py-2 rounded-full bg-[hsl(var(--primary)/0.04)] border border-[hsl(var(--primary)/0.08)] whitespace-nowrap"
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-[hsl(var(--primary)/0.04)] border border-[hsl(var(--primary)/0.08)] whitespace-nowrap"
             >
               {inner}
             </div>

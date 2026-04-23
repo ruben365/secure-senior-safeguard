@@ -132,7 +132,7 @@ export function TwoFactorSetup({ open, onClose, onSuccess }: TwoFactorSetupProps
             <Button
               onClick={handleEnroll}
               disabled={isLoading}
-              className="w-full h-11 bg-[#080d1a] text-white hover:bg-[#111827]"
+              className="w-full h-7 bg-[#080d1a] text-white hover:bg-[#111827]"
             >
               {isLoading ? (
                 <Loader2 className="w-4 h-4 animate-spin mr-2" />
@@ -179,7 +179,7 @@ export function TwoFactorSetup({ open, onClose, onSuccess }: TwoFactorSetupProps
 
             <Button
               onClick={() => setStep("verify")}
-              className="w-full h-11 bg-[#080d1a] text-white hover:bg-[#111827]"
+              className="w-full h-7 bg-[#080d1a] text-white hover:bg-[#111827]"
             >
               I've Scanned It
             </Button>
@@ -200,7 +200,7 @@ export function TwoFactorSetup({ open, onClose, onSuccess }: TwoFactorSetupProps
                 value={code}
                 onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
                 placeholder="000000"
-                className="w-48 h-14 text-center text-2xl font-bold tracking-[0.3em] border-2 rounded-xl focus:border-orange-500"
+                className="w-48 h-9 text-center text-2xl font-bold tracking-[0.3em] border-2 rounded-xl focus:border-orange-500"
                 autoFocus
               />
             </div>
@@ -208,7 +208,7 @@ export function TwoFactorSetup({ open, onClose, onSuccess }: TwoFactorSetupProps
             <Button
               onClick={handleVerify}
               disabled={isLoading || code.length !== 6}
-              className="w-full h-11 bg-[#080d1a] text-white hover:bg-[#111827]"
+              className="w-full h-7 bg-[#080d1a] text-white hover:bg-[#111827]"
             >
               {isLoading ? (
                 <Loader2 className="w-4 h-4 animate-spin mr-2" />
@@ -229,8 +229,8 @@ export function TwoFactorSetup({ open, onClose, onSuccess }: TwoFactorSetupProps
         {step === "done" && (
           <div className="space-y-4 text-center">
             <div className="flex justify-center">
-              <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
-                <CheckCircle2 className="w-7 h-7 text-green-600" />
+              <div className="w-9 h-9 bg-green-100 rounded-full flex items-center justify-center">
+                <CheckCircle2 className="w-4 h-4 text-green-600" />
               </div>
             </div>
             <div>
@@ -241,7 +241,7 @@ export function TwoFactorSetup({ open, onClose, onSuccess }: TwoFactorSetupProps
                 You'll need your authenticator app each time you sign in.
               </p>
             </div>
-            <Button onClick={handleClose} className="w-full h-11">
+            <Button onClick={handleClose} className="w-full h-7">
               Done
             </Button>
           </div>

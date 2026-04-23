@@ -64,7 +64,7 @@ export const ProfessionalCard = ({
       }}
       viewport={{ once: true, margin: "-50px" }}
       className={cn(
-        "relative rounded-2xl p-6 md:p-8 transition-all duration-300",
+        "relative rounded-2xl p-4 md:p-5 transition-all duration-300",
         cardVariants[variant],
         className,
       )}
@@ -79,7 +79,7 @@ export const ProfessionalCard = ({
       {/* Icon Section */}
       {Icon && (
         <div
-          className="w-14 h-14 md:w-16 md:h-16 rounded-xl flex items-center justify-center mb-5 shadow-md"
+          className="w-9 h-9 md:w-10 md:h-10 rounded-xl flex items-center justify-center mb-5 shadow-md"
           style={
             iconGradient
               ? { background: iconGradient }
@@ -87,7 +87,7 @@ export const ProfessionalCard = ({
           }
         >
           <Icon
-            className="w-7 h-7 md:w-8 md:h-8"
+            className="w-4 h-4 md:w-5 md:h-5"
             style={{ color: iconGradient ? "white" : iconColor }}
           />
         </div>
@@ -99,7 +99,7 @@ export const ProfessionalCard = ({
       </h3>
 
       {/* Description */}
-      <p className="font-body text-base text-gray-600 leading-relaxed mb-6">
+      <p className="font-body text-base text-gray-600 leading-relaxed mb-4">
         {description}
       </p>
 
@@ -157,8 +157,8 @@ export const CardGrid = ({
 
   const gridGap = {
     sm: "gap-4",
-    md: "gap-6 md:gap-8",
-    lg: "gap-8 md:gap-10 lg:gap-12",
+    md: "gap-4 md:gap-5",
+    lg: "gap-5 md:gap-6 lg:gap-7",
   };
 
   return (
@@ -195,9 +195,9 @@ export const SectionContainer = ({
   };
 
   const paddings = {
-    sm: "py-12 md:py-16",
-    md: "py-16 md:py-24",
-    lg: "py-20 md:py-32",
+    sm: "py-7 md:py-10",
+    md: "py-10 md:py-16",
+    lg: "py-12 md:py-20",
   };
 
   return (
@@ -209,7 +209,7 @@ export const SectionContainer = ({
         className,
       )}
     >
-      <div className="container mx-auto md:px-6 lg:px-8 max-w-7xl">
+      <div className="container mx-auto md:px-4 lg:px-5 max-w-7xl">
         {children}
       </div>
     </section>
@@ -245,7 +245,7 @@ export const SectionHeader = ({
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
       viewport={{ once: true }}
-      className={cn(alignment, "max-w-3xl mb-12 md:mb-16", className)}
+      className={cn(alignment, "max-w-3xl mb-7 md:mb-10", className)}
     >
       {badge && (
         <span className="inline-block bg-gradient-to-r from-coral-100 to-lavender-100 text-coral-600 text-sm font-bold px-4 py-2 rounded-full mb-4">
@@ -253,7 +253,7 @@ export const SectionHeader = ({
         </span>
       )}
 
-      <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-black text-[#18305A] leading-tight mb-4">
+      <h2 className="font-display text-3xl md:text-2xl lg:text-3xl font-black text-[#18305A] leading-tight mb-4">
         {title}
       </h2>
 

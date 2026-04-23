@@ -78,7 +78,7 @@
 /* Repurpose orbs as soft glowing nodes */
 .auth-orb {
   position: absolute;
-  border-radius: 9999px;
+  border-radius: 6999px;
   filter: blur(70px) !important;
   opacity: 0.55 !important;
   pointer-events: none;
@@ -120,8 +120,8 @@
   position: relative;
   background: var(--cyber-card-bg) !important;
   border: 1px solid var(--cyber-border) !important;
-  border-radius: 20px !important;
-  padding: 2rem !important;
+  border-radius: 14px !important;
+  padding: 1.25rem !important;
   backdrop-filter: blur(12px) saturate(140%);
   -webkit-backdrop-filter: blur(12px) saturate(140%);
   box-shadow:
@@ -159,7 +159,7 @@
 .auth-card-accent { display: none !important; }
 
 @media (min-width: 768px) {
-  .auth-card-daylight { padding: 2.5rem !important; }
+  .auth-card-daylight { padding: 1.56rem !important; }
 }
 
 /* ───── Card text overrides ───── */
@@ -183,7 +183,7 @@
 .auth-card-daylight a[href="/"] > .relative > .bg-white {
   background: linear-gradient(135deg, rgba(56,189,248,0.15) 0%, rgba(15,28,54,0.95) 100%) !important;
   border-color: rgba(56, 189, 248, 0.45) !important;
-  box-shadow: 0 4px 16px -4px rgba(56, 189, 248, 0.45), inset 0 1px 0 rgba(255,255,255,0.08) !important;
+  box-shadow: 0 4px 16px -3px rgba(56, 189, 248, 0.45), inset 0 1px 0 rgba(255,255,255,0.08) !important;
 }
 
 /* ───── Inputs — dark cyber style ───── */
@@ -192,8 +192,8 @@
   background: rgba(8, 14, 28, 0.7) !important;
   border: 1px solid rgba(148, 163, 184, 0.22) !important;
   color: var(--cyber-text) !important;
-  border-radius: 10px !important;
-  height: 44px !important;
+  border-radius: 7px !important;
+  height: 28px !important;
   transition: all 200ms ease !important;
 }
 .input-daylight::placeholder,
@@ -220,8 +220,8 @@
   background: rgba(15, 28, 54, 0.85) !important;
   border: 1px solid rgba(148, 163, 184, 0.20) !important;
   color: var(--cyber-text) !important;
-  height: 44px !important;
-  border-radius: 10px !important;
+  height: 28px !important;
+  border-radius: 7px !important;
   font-weight: 500 !important;
   transition: all 200ms ease !important;
   box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset !important;
@@ -238,8 +238,8 @@
   background: linear-gradient(135deg, var(--cyber-accent) 0%, var(--cyber-accent-2) 100%) !important;
   color: #051026 !important;
   font-weight: 700 !important;
-  height: 46px !important;
-  border-radius: 10px !important;
+  height: 29px !important;
+  border-radius: 7px !important;
   border: 1px solid rgba(56, 189, 248, 0.55) !important;
   width: 100% !important;
   letter-spacing: 0.01em;
@@ -281,7 +281,7 @@
   position: relative;
   background: var(--cyber-card-bg) !important;
   color: var(--cyber-text-dim) !important;
-  padding: 0 0.875rem;
+  padding: 0 0.55rem;
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -292,22 +292,22 @@
 .auth-tabs-warm {
   background: rgba(8, 14, 28, 0.6) !important;
   border: 1px solid rgba(148, 163, 184, 0.18) !important;
-  border-radius: 10px !important;
-  padding: 4px !important;
+  border-radius: 7px !important;
+  padding: 2px !important;
   height: auto !important;
 }
 .auth-tabs-warm [role="tab"] {
   color: var(--cyber-text-dim) !important;
   font-weight: 600 !important;
-  border-radius: 7px !important;
-  height: 36px !important;
+  border-radius: 5px !important;
+  height: 22px !important;
   background: transparent !important;
   transition: all 180ms ease !important;
 }
 .auth-tabs-warm [role="tab"][data-state="active"] {
   background: linear-gradient(135deg, rgba(56,189,248,0.20) 0%, rgba(129,140,248,0.20) 100%) !important;
   color: var(--cyber-accent) !important;
-  box-shadow: 0 0 0 1px rgba(56,189,248,0.35), 0 4px 12px -4px rgba(56,189,248,0.30) !important;
+  box-shadow: 0 0 0 1px rgba(56,189,248,0.35), 0 4px 12px -3px rgba(56,189,248,0.30) !important;
 }
 
 /* ───── Forgot-password link tweak ───── */

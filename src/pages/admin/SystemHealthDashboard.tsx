@@ -30,8 +30,8 @@ class SystemHealthErrorBoundary extends Component<ErrorBoundaryProps, ErrorBound
     if (this.state.hasError) {
       return (
         this.props.fallback ?? (
-          <div className="p-6 max-w-7xl mx-auto">
-            <div className="rounded-lg border border-red-500/30 bg-red-500/10 p-6 text-center">
+          <div className="p-4 max-w-7xl mx-auto">
+            <div className="rounded-lg border border-red-500/30 bg-red-500/10 p-4 text-center">
               <h2 className="text-lg font-semibold text-red-400 mb-2">
                 Failed to load System Health Dashboard
               </h2>
@@ -57,8 +57,8 @@ class SystemHealthErrorBoundary extends Component<ErrorBoundaryProps, ErrorBound
 export default function SystemHealthDashboard() {
   return (
     <SystemHealthErrorBoundary>
-      <div className="p-6 max-w-7xl mx-auto space-y-6">
-        <div className="mb-6">
+      <div className="p-4 max-w-7xl mx-auto space-y-4">
+        <div className="mb-4">
           <h1 className="text-2xl font-bold text-[#F9FAFB]">
             System Health & Monitoring
           </h1>
@@ -66,7 +66,7 @@ export default function SystemHealthDashboard() {
             Monitor backend services and platform activity
           </p>
         </div>
-        <div className="space-y-6">
+        <div className="space-y-4">
           <SuperAdminDashboardHealth />
           <SuperAdminActivityFeed />
         </div>

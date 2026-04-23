@@ -132,7 +132,7 @@ export const CookieConsent = forwardRef<HTMLDivElement>(function CookieConsent(_
 
   return (
     <>
-      <div className="cookie-banner fixed bottom-4 left-4 right-4 sm:bottom-6 sm:left-auto sm:right-6 z-50">
+      <div className="cookie-banner fixed bottom-4 left-4 right-4 sm:bottom-4 sm:left-auto sm:right-4 z-50">
         <div
           className="cookie-banner__card sm:w-[360px] rounded-[14px] overflow-hidden border border-[rgba(0,0,0,0.08)] shadow-[0_4px_24px_rgba(0,0,0,0.08)]"
           style={{ background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(16px) saturate(1.2)', WebkitBackdropFilter: 'blur(16px) saturate(1.2)' }}
@@ -162,7 +162,7 @@ export const CookieConsent = forwardRef<HTMLDivElement>(function CookieConsent(_
               <button
                 type="button"
                 onClick={acceptAll}
-                className="h-8 px-4 text-xs font-semibold text-white rounded-lg transition-all duration-200 hover:brightness-110"
+                className="h-5 px-4 text-xs font-semibold text-white rounded-lg transition-all duration-200 hover:brightness-110"
                 style={{ background: 'var(--ws-blue, #3067e8)' }}
               >
                 Accept All
@@ -170,7 +170,7 @@ export const CookieConsent = forwardRef<HTMLDivElement>(function CookieConsent(_
               <button
                 type="button"
                 onClick={acceptEssential}
-                className="h-8 px-4 text-xs font-semibold text-[#475569] rounded-lg border border-[rgba(0,0,0,0.1)] hover:border-[rgba(0,0,0,0.2)] hover:text-[#1E293B] transition-all duration-200"
+                className="h-5 px-4 text-xs font-semibold text-[#475569] rounded-lg border border-[rgba(0,0,0,0.1)] hover:border-[rgba(0,0,0,0.2)] hover:text-[#1E293B] transition-all duration-200"
                 style={{ background: 'rgba(0,0,0,0.03)' }}
               >
                 Essential Only
@@ -178,7 +178,7 @@ export const CookieConsent = forwardRef<HTMLDivElement>(function CookieConsent(_
               <button
                 type="button"
                 onClick={() => setShowSettings(true)}
-                className="h-8 w-8 flex items-center justify-center text-[#64748B] rounded-lg border border-[rgba(0,0,0,0.08)] hover:border-[rgba(0,0,0,0.15)] hover:text-[#1E293B] transition-all duration-200 ml-auto"
+                className="h-5 w-5 flex items-center justify-center text-[#64748B] rounded-lg border border-[rgba(0,0,0,0.08)] hover:border-[rgba(0,0,0,0.15)] hover:text-[#1E293B] transition-all duration-200 ml-auto"
                 style={{ background: 'rgba(0,0,0,0.03)' }}
                 aria-label="Cookie settings"
               >

@@ -241,7 +241,7 @@ function StaffDashboard() {
   if (roleConfig && !ALLOWED_ROLES.has(roleConfig.role)) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
-        <Card className="max-w-sm w-full text-center p-8">
+        <Card className="max-w-sm w-full text-center p-5">
           <h2 className="text-xl font-bold text-foreground mb-2">Access Denied</h2>
           <p className="text-muted-foreground mb-4">You do not have staff privileges.</p>
           <Button asChild variant="outline">
@@ -304,7 +304,7 @@ function StaffDashboard() {
   // ── Render ───────────────────────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <main className="container mx-auto py-6 space-y-6">
+      <main className="container mx-auto py-4 space-y-4">
         {/* Stat Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {statCards.map((card) => (
@@ -313,9 +313,9 @@ function StaffDashboard() {
         </div>
 
         {/* Two-column layout */}
-        <div className="grid lg:grid-cols-3 gap-6">
+        <div className="grid lg:grid-cols-3 gap-4">
           {/* Left: 2/3 */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-4">
             {/* My Tasks */}
             <Card>
               <CardHeader>
@@ -368,7 +368,7 @@ function StaffDashboard() {
           </div>
 
           {/* Right: 1/3 */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* Calendar */}
             <RealCalendar
               events={calendarEvents}

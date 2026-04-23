@@ -69,8 +69,8 @@ export function ClientBillingTab({ clientId }: ClientBillingTabProps) {
     .reduce((sum, i) => sum + i.amount, 0);
 
   return (
-    <div className="space-y-6">
-      <div className="grid gap-6 md:grid-cols-3">
+    <div className="space-y-4">
+      <div className="grid gap-4 md:grid-cols-3">
         <Card>
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium">Total Paid</CardTitle>
@@ -117,7 +117,7 @@ export function ClientBillingTab({ clientId }: ClientBillingTabProps) {
         </CardHeader>
         <CardContent>
           <div className="flex items-center gap-4">
-            <CreditCard className="h-8 w-8 text-muted-foreground" />
+            <CreditCard className="h-5 w-5 text-muted-foreground" />
             <div>
               <p className="font-semibold">•••• •••• •••• 4242</p>
               <p className="text-sm text-muted-foreground">Expires: 12/2026</p>

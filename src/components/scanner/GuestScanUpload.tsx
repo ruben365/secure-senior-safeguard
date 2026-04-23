@@ -53,9 +53,9 @@ export const GuestScanUpload = ({
   return (
     <Card className="relative overflow-hidden border border-border/60 bg-white/80 backdrop-blur-xl shadow-xl">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/10 pointer-events-none" />
-      <div className="relative p-6 md:p-8">
+      <div className="relative p-4 md:p-5">
         <div
-          className={`border-2 border-dashed rounded-2xl p-8 md:p-10 transition-all ${
+          className={`border-2 border-dashed rounded-2xl p-5 md:p-6 transition-all ${
             isDragging
               ? "border-primary bg-primary/5"
               : "border-border/60 bg-background/60"
@@ -68,8 +68,8 @@ export const GuestScanUpload = ({
           onDrop={onDrop}
         >
           <div className="flex flex-col items-center gap-4 text-center">
-            <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center">
-              <UploadCloud className="w-8 h-8 text-primary" />
+            <div className="w-10 h-10 rounded-2xl bg-primary/10 flex items-center justify-center">
+              <UploadCloud className="w-5 h-5 text-primary" />
             </div>
 
             <div className="space-y-2">
@@ -107,10 +107,10 @@ export const GuestScanUpload = ({
         </div>
 
         {file && (
-          <div className="mt-6 grid gap-4 md:grid-cols-[1.5fr_1fr]">
+          <div className="mt-4 grid gap-4 md:grid-cols-[1.5fr_1fr]">
             <div className="flex items-center gap-4 p-4 rounded-2xl bg-muted/50 border border-border/60">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                <FileText className="w-6 h-6 text-primary" />
+              <div className="w-7 h-7 rounded-xl bg-primary/10 flex items-center justify-center">
+                <FileText className="w-4 h-4 text-primary" />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="font-semibold text-foreground truncate">

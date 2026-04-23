@@ -45,12 +45,12 @@ export function ProtectionStatusHero({
         />
       )}
 
-      <div className="relative p-6 md:p-8">
-        <div className="flex flex-col md:flex-row md:items-center gap-6">
+      <div className="relative p-4 md:p-5">
+        <div className="flex flex-col md:flex-row md:items-center gap-4">
           {/* Shield Icon with Status Ring */}
           <div className="relative">
             <motion.div
-              className={`w-20 h-20 rounded-full flex items-center justify-center ${
+              className={`w-12 h-12 rounded-full flex items-center justify-center ${
                 isActive
                   ? "bg-gradient-to-br from-green-500 to-emerald-600"
                   : isPending
@@ -60,11 +60,11 @@ export function ProtectionStatusHero({
               animate={isActive ? { scale: [1, 1.05, 1] } : {}}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
-              <Shield className="w-10 h-10 text-white" />
+              <Shield className="w-6 h-6 text-white" />
             </motion.div>
             {isActive && (
               <motion.div
-                className="absolute -top-1 -right-1 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center border-2 border-background"
+                className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full flex items-center justify-center border-2 border-background"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.3 }}
@@ -74,7 +74,7 @@ export function ProtectionStatusHero({
             )}
             {isPending && (
               <motion.div
-                className="absolute -top-1 -right-1 w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center border-2 border-background"
+                className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-500 rounded-full flex items-center justify-center border-2 border-background"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.3 }}
@@ -131,7 +131,7 @@ export function ProtectionStatusHero({
           {/* Live Stats */}
           <div className="grid grid-cols-2 md:grid-cols-1 gap-3">
             <div className="flex items-center gap-2 bg-card/80 rounded-lg p-3">
-              <div className="w-8 h-8 rounded-full bg-primary/50/20 flex items-center justify-center">
+              <div className="w-5 h-5 rounded-full bg-primary/50/20 flex items-center justify-center">
                 <Zap className="w-4 h-4 text-primary" />
               </div>
               <div>
@@ -140,7 +140,7 @@ export function ProtectionStatusHero({
               </div>
             </div>
             <div className="flex items-center gap-2 bg-card/80 rounded-lg p-3">
-              <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <div className="w-5 h-5 rounded-full bg-purple-500/20 flex items-center justify-center">
                 <Shield className="w-4 h-4 text-purple-500" />
               </div>
               <div>

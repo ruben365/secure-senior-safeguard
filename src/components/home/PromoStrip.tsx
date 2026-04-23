@@ -28,16 +28,16 @@ const steps = [
 
 export const PromoStrip = () => {
   return (
-    <section className="py-16 md:py-28 section-warm relative overflow-hidden">
-      <div className="absolute top-10 left-1/3 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
+    <section className="py-10 md:py-18 section-warm relative overflow-hidden">
+      <div className="absolute top-6 left-1/3 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-6 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
       
-      <div className="container mx-auto md:px-6 lg:px-8 relative">
-        <div className="text-center mb-14">
+      <div className="container mx-auto md:px-4 lg:px-5 relative">
+        <div className="text-center mb-9">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary mb-4">
             How It Works
           </p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+          <h2 className="text-3xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-4">
             Three Steps to Safety
           </h2>
           <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
@@ -45,27 +45,27 @@ export const PromoStrip = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-14">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto mb-9">
           {steps.map((step, i) => (
             <div key={step.num} className="relative">
               {/* Connector line */}
               {i < steps.length - 1 && (
-                <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-px z-10">
+                <div className="hidden md:block absolute top-1/2 -right-4 w-5 h-px z-10">
                   <div className="w-full h-px border-t-2 border-dashed border-primary/30" />
                   <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-primary/40" />
                 </div>
               )}
-              <div className="relative rounded-2xl border border-border/50 bg-card p-8 text-center overflow-hidden h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+              <div className="relative rounded-2xl border border-border/50 bg-card p-5 text-center overflow-hidden h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                 <div className={`absolute inset-0 bg-gradient-to-br ${step.gradient} opacity-50 pointer-events-none`} />
                 <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/25 to-transparent" />
 
                 <div className="relative">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center mx-auto mb-4 shadow-md">
+                  <div className="w-5 h-5 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center mx-auto mb-4 shadow-md">
                     <span className="text-xs font-black text-primary-foreground">{step.num}</span>
                   </div>
                   
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/5 flex items-center justify-center mx-auto mb-5 shadow-sm border border-primary/20">
-                    <step.icon className="w-7 h-7 text-foreground" />
+                  <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/5 flex items-center justify-center mx-auto mb-5 shadow-sm border border-primary/20">
+                    <step.icon className="w-4 h-4 text-foreground" />
                   </div>
                   <h3 className="text-lg font-bold text-foreground mb-3">
                     {step.title}

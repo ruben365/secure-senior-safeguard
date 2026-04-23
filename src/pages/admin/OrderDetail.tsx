@@ -155,7 +155,7 @@ const OrderDetail = () => {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-7 w-7 border-b-2 border-primary mx-auto mb-4"></div>
           <p className="text-muted-foreground">Loading order...</p>
         </div>
       </div>
@@ -245,12 +245,12 @@ const OrderDetail = () => {
         </div>
       </div>
 
-      <div className="container mx-auto py-8">
-        <div className="grid gap-6 lg:grid-cols-3">
+      <div className="container mx-auto py-5">
+        <div className="grid gap-4 lg:grid-cols-3">
           {/* Left Column - Main Content */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-4">
             {/* Order Items */}
-            <Card className="p-6">
+            <Card className="p-4">
               <h2 className="mb-4 text-xl font-semibold">Order Items</h2>
               <div className="space-y-4">
                 {order.items.map((item) => (
@@ -261,7 +261,7 @@ const OrderDetail = () => {
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="h-20 w-20 rounded object-cover"
+                      className="h-12 w-12 rounded object-cover"
                     />
                     <div className="flex-1">
                       <h3 className="font-medium">{item.name}</h3>
@@ -303,7 +303,7 @@ const OrderDetail = () => {
                                 className="text-sm"
                               />
                               <Select>
-                                <SelectTrigger className="w-32">
+                                <SelectTrigger className="w-20">
                                   <SelectValue placeholder="Carrier" />
                                 </SelectTrigger>
                                 <SelectContent>
@@ -333,13 +333,13 @@ const OrderDetail = () => {
             </Card>
 
             {/* Order Timeline */}
-            <Card className="p-6">
+            <Card className="p-4">
               <h2 className="mb-4 text-xl font-semibold">Order Timeline</h2>
               <div className="space-y-4">
                 {order.timeline.map((event, index) => (
                   <div key={index} className="flex gap-4">
                     <div className="flex flex-col items-center">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
+                      <div className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/10">
                         <div className="h-2 w-2 rounded-full bg-primary" />
                       </div>
                       {index < order.timeline.length - 1 && (
@@ -359,7 +359,7 @@ const OrderDetail = () => {
             </Card>
 
             {/* Internal Notes */}
-            <Card className="p-6">
+            <Card className="p-4">
               <h2 className="mb-4 text-xl font-semibold">Internal Notes</h2>
               <div className="space-y-4">
                 {order.notes.map((note) => (
@@ -381,7 +381,7 @@ const OrderDetail = () => {
           </div>
 
           {/* Right Column - Sidebar */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* Customer Information */}
             <Card className="p-4">
               <h3 className="mb-3 font-semibold">Customer Information</h3>

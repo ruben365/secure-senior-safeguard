@@ -98,11 +98,11 @@ export function NeonPendingRequests() {
 
       {loading ? (
         <div className="space-y-2">
-          {[...Array(3)].map((_, i) => <div key={i} className="h-14 bg-[#111827] rounded-lg animate-pulse" />)}
+          {[...Array(3)].map((_, i) => <div key={i} className="h-9 bg-[#111827] rounded-lg animate-pulse" />)}
         </div>
       ) : items.length === 0 ? (
-        <div className="text-center py-8">
-          <AlertCircle className="w-8 h-8 text-[#374151] mx-auto mb-2" />
+        <div className="text-center py-5">
+          <AlertCircle className="w-5 h-5 text-[#374151] mx-auto mb-2" />
           <p className="text-[#6B7280] text-sm">No pending requests</p>
         </div>
       ) : (
@@ -113,7 +113,7 @@ export function NeonPendingRequests() {
             return (
               <Link key={`${item.type}-${item.id}`} to={typeLinks[item.type] || "/admin"}>
                 <div className="flex items-center gap-3 p-3 bg-[#111827] rounded-lg border border-[#374151] hover:border-[#4B5563] transition-colors group">
-                  <div className={`w-8 h-8 ${cfg.bg} rounded-lg flex items-center justify-center flex-shrink-0`}>
+                  <div className={`w-5 h-5 ${cfg.bg} rounded-lg flex items-center justify-center flex-shrink-0`}>
                     <Icon className={`w-4 h-4 ${cfg.color}`} />
                   </div>
                   <div className="flex-1 min-w-0">

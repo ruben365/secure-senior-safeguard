@@ -88,12 +88,12 @@ export function InternalLibrary({ ownedBookIds, onBuy, onRead, email, customerNa
   }, []);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <Library className="h-6 w-6 text-primary" />
+            <Library className="h-4 w-4 text-primary" />
             <h2 className="text-2xl font-bold text-foreground">Reader Library</h2>
           </div>
           <p className="text-sm text-muted-foreground">
@@ -108,7 +108,7 @@ export function InternalLibrary({ ownedBookIds, onBuy, onRead, email, customerNa
               placeholder="Search books..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="pl-9"
+              className="pl-6"
             />
           </div>
           <Button variant="outline" size="sm" onClick={() => setRequestOpen(true)} className="shrink-0">
@@ -143,7 +143,7 @@ export function InternalLibrary({ ownedBookIds, onBuy, onRead, email, customerNa
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {HOW_IT_WORKS.map((step, i) => (
             <div key={step.title} className="flex items-start gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+              <div className="w-5 h-5 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                 <step.icon className="w-4 h-4 text-primary" />
               </div>
               <div>
@@ -266,7 +266,7 @@ export function InternalLibrary({ ownedBookIds, onBuy, onRead, email, customerNa
                   <Button
                     size="sm"
                     variant="default"
-                    className="w-full mt-2 text-xs h-8"
+                    className="w-full mt-2 text-xs h-5"
                     onClick={() => onRead(book.id)}
                   >
                     <BookOpen className="h-3 w-3 mr-1" />
@@ -281,7 +281,7 @@ export function InternalLibrary({ ownedBookIds, onBuy, onRead, email, customerNa
                     <Button
                       size="sm"
                       variant="outline"
-                      className="w-full mt-1.5 text-xs h-8 hover:bg-primary hover:text-primary-foreground transition-colors"
+                      className="w-full mt-1.5 text-xs h-5 hover:bg-primary hover:text-primary-foreground transition-colors"
                       onClick={() => onBuy(book)}
                     >
                       <ShoppingCart className="h-3 w-3 mr-1" />
@@ -297,9 +297,9 @@ export function InternalLibrary({ ownedBookIds, onBuy, onRead, email, customerNa
 
       {/* Empty State */}
       {filtered.length === 0 && (
-        <div className="text-center py-16">
-          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center">
-            <BookOpen className="h-8 w-8 text-muted-foreground" />
+        <div className="text-center py-10">
+          <div className="w-10 h-10 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center">
+            <BookOpen className="h-5 w-5 text-muted-foreground" />
           </div>
           <h3 className="font-semibold text-foreground mb-1">No books found</h3>
           <p className="text-sm text-muted-foreground">Try a different search term or category.</p>

@@ -43,7 +43,7 @@ export function CompactLegalHero({
         }}
       />
 
-      <div className="container mx-auto px-4 relative z-10 py-16 md:py-20">
+      <div className="container mx-auto px-4 relative z-10 py-10 md:py-12">
         <div className="max-w-3xl mx-auto text-center">
           <div
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-[0.18em] mb-5 border border-border/60 bg-card/60"
@@ -56,7 +56,7 @@ export function CompactLegalHero({
             />
             {eyebrow}
           </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-foreground mb-4 leading-[1.1]">
+          <h1 className="text-3xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-foreground mb-4 leading-[1.1]">
             {title}
           </h1>
           {lede && (

@@ -93,8 +93,8 @@ export const TestimonialForm = () => {
   const rating = form.watch("rating");
 
   return (
-    <Card className="p-6 max-w-2xl mx-auto bg-gradient-to-br from-card to-card/50 border-border/50">
-      <div className="mb-6 text-center">
+    <Card className="p-4 max-w-2xl mx-auto bg-gradient-to-br from-card to-card/50 border-border/50">
+      <div className="mb-4 text-center">
         <h3 className="text-2xl font-bold mb-2">Share Your Story</h3>
         <p className="text-muted-foreground">
           Help others by sharing your experience with InVision Network
@@ -102,7 +102,7 @@ export const TestimonialForm = () => {
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FormField
               control={form.control}
@@ -169,7 +169,7 @@ export const TestimonialForm = () => {
                         className="transition-transform hover:scale-110"
                       >
                         <Star
-                          className={`w-8 h-8 ${
+                          className={`w-5 h-5 ${
                             star <= (hoveredStar || rating)
                               ? "fill-primary text-primary"
                               : "text-muted-foreground"

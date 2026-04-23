@@ -151,7 +151,7 @@ export default function BookingModule() {
   const hasError = listError || pipelineError;
 
   return (
-    <div className="flex flex-col gap-6 p-6">
+    <div className="flex flex-col gap-4 p-4">
       {/* Header */}
       <div className="flex items-center gap-3">
         <div className="rounded-lg bg-primary/10 p-2">

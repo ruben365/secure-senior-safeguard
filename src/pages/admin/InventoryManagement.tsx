@@ -161,8 +161,8 @@ const InventoryManagement = () => {
   );
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="flex items-center justify-between mb-4">
         <div>
           <h1 className="text-2xl font-bold text-[#F9FAFB]">
             Inventory Management
@@ -190,7 +190,7 @@ const InventoryManagement = () => {
       </div>
       {/* Low Stock Alert */}
       {lowStockProducts.length > 0 && (
-        <Alert className="mb-6 border-yellow-500/50 bg-yellow-500/10">
+        <Alert className="mb-4 border-yellow-500/50 bg-yellow-500/10">
           <AlertTriangle className="h-4 w-4 text-yellow-500" />
           <AlertDescription>
             <div className="flex items-center justify-between">
@@ -223,7 +223,7 @@ const InventoryManagement = () => {
       )}
 
       {/* Stats */}
-      <div className="mb-6 grid gap-4 md:grid-cols-4">
+      <div className="mb-4 grid gap-4 md:grid-cols-4">
         <Card className="p-4 bg-slate-800/50 border-slate-700">
           <div className="flex items-center justify-between">
             <div>
@@ -232,7 +232,7 @@ const InventoryManagement = () => {
                 {inventory.length}
               </p>
             </div>
-            <Package className="h-8 w-8 text-orange-400" />
+            <Package className="h-5 w-5 text-orange-400" />
           </div>
         </Card>
         <Card className="p-4 bg-slate-800/50 border-slate-700">
@@ -247,7 +247,7 @@ const InventoryManagement = () => {
                 }
               </p>
             </div>
-            <TrendingUp className="h-8 w-8 text-green-400" />
+            <TrendingUp className="h-5 w-5 text-green-400" />
           </div>
         </Card>
         <Card className="p-4 bg-slate-800/50 border-slate-700">
@@ -258,7 +258,7 @@ const InventoryManagement = () => {
                 {lowStockProducts.length}
               </p>
             </div>
-            <AlertTriangle className="h-8 w-8 text-yellow-400" />
+            <AlertTriangle className="h-5 w-5 text-yellow-400" />
           </div>
         </Card>
         <Card className="p-4 bg-slate-800/50 border-slate-700">
@@ -269,20 +269,20 @@ const InventoryManagement = () => {
                 {outOfStockProducts.length}
               </p>
             </div>
-            <TrendingDown className="h-8 w-8 text-red-400" />
+            <TrendingDown className="h-5 w-5 text-red-400" />
           </div>
         </Card>
       </div>
 
       {/* Search and Filters */}
-      <div className="mb-6 flex gap-4">
+      <div className="mb-4 flex gap-4">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
           <Input
             placeholder="Search products by name or SKU..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 bg-slate-800/50 border-slate-700 text-white"
+            className="pl-6 bg-slate-800/50 border-slate-700 text-white"
           />
         </div>
         <Select>
@@ -328,7 +328,7 @@ const InventoryManagement = () => {
                       <img
                         src={item.image}
                         alt={item.name}
-                        className="h-10 w-10 rounded object-cover"
+                        className="h-6 w-6 rounded object-cover"
                       />
                       <span className="font-medium text-white">
                         {item.name}

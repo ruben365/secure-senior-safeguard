@@ -206,7 +206,7 @@ export const SmartCommandCenter = ({
       <div
         className={cn(
           "relative w-full max-w-[600px] rounded-2xl border border-white/10 bg-[#121212] shadow-[0_20px_50px_rgba(0,0,0,0.3)]",
-          "h-16 sm:h-20 px-4 py-2 sm:px-5 sm:py-3",
+          "h-10 sm:h-12 px-4 py-2 sm:px-5 sm:py-3",
           "flex flex-col justify-between",
           isDragging &&
             "ring-2 ring-[#4ADE80] shadow-[0_0_18px_rgba(74,222,128,0.45)]",
@@ -251,7 +251,7 @@ export const SmartCommandCenter = ({
             <button
               type="button"
               className={cn(
-                "relative h-10 w-10 rounded-full flex items-center justify-center transition-all duration-300",
+                "relative h-6 w-6 rounded-full flex items-center justify-center transition-all duration-300",
                 isListening
                   ? "bg-gradient-to-br from-red-500 to-rose-600 shadow-[0_0_20px_rgba(239,68,68,0.6)] animate-pulse scale-110"
                   : "bg-gradient-to-br from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 shadow-[0_0_15px_rgba(16,185,129,0.4)] hover:shadow-[0_0_25px_rgba(16,185,129,0.6)] hover:scale-105",
@@ -319,7 +319,7 @@ export const SmartCommandCenter = ({
             onClick={handlePrimaryAction}
             disabled={isBusy || (file ? !canAnalyze : !hasText)}
             className={cn(
-              "h-9 w-9 rounded-full bg-[#4ADE80] text-[#121212] flex items-center justify-center",
+              "h-6 w-6 rounded-full bg-[#4ADE80] text-[#121212] flex items-center justify-center",
               "shadow-[0_0_18px_rgba(74,222,128,0.55)] transition-transform",
               "disabled:opacity-60 disabled:cursor-not-allowed",
             )}

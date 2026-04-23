@@ -376,8 +376,8 @@ export default function FAQ() {
         </div>
 
         {/* Spacer for floating stats bar */}
-        <div className="hidden lg:block h-14" />
-        <div className="lg:hidden h-6" />
+        <div className="hidden lg:block h-9" />
+        <div className="lg:hidden h-4" />
 
         {/* ═══════════════════════════════════════════════════════
             REDESIGNED FAQ BODY — single compressed block with
@@ -386,7 +386,7 @@ export default function FAQ() {
             ═══════════════════════════════════════════════════ */}
         <section
           aria-labelledby="faq-main-heading"
-          className="relative isolate py-12 md:py-16 overflow-hidden"
+          className="relative isolate py-7 md:py-10 overflow-hidden"
         >
           {/* Ambient backdrop orbs — warm coral / amber / peach
               Was teal + indigo + violet which fought the brand orange. */}
@@ -401,7 +401,7 @@ export default function FAQ() {
 
           <div className="container mx-auto">
             {/* Section eyebrow + heading — refined warm orange accent */}
-            <div className="max-w-3xl mb-8">
+            <div className="max-w-3xl mb-5">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50/90 backdrop-blur border border-orange-200 shadow-sm mb-4">
                 <HelpCircle className="w-3.5 h-3.5 text-[#d96c4a]" />
                 <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#b8552f]">
@@ -425,7 +425,7 @@ export default function FAQ() {
             </div>
 
             {/* Two-column grid: accordion (lg:col-span-8) + sticky form (lg:col-span-4) */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-5">
               {/* ─────────────────────────────────────────────
                   LEFT — search + categories + accordion
                   ───────────────────────────────────────── */}
@@ -441,7 +441,7 @@ export default function FAQ() {
                       placeholder="Search answers..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-9 pr-9 h-11 text-sm rounded-xl border-slate-200 bg-white/80 focus-visible:border-[#d96c4a] focus-visible:ring-[#d96c4a]/20"
+                      className="pl-6 pr-6 h-7 text-sm rounded-xl border-slate-200 bg-white/80 focus-visible:border-[#d96c4a] focus-visible:ring-[#d96c4a]/20"
                     />
                     {searchQuery && (
                       <button
@@ -503,7 +503,7 @@ export default function FAQ() {
                   {filteredFAQs.length > 0 ? (
                     activeCategory === "All" && !searchQuery ? (
                       // Grouped rendering — one Accordion per category
-                      <div className="space-y-8">
+                      <div className="space-y-5">
                         {(Object.keys(categoryMeta) as FAQCategory[])
                           .filter((cat) =>
                             filteredFAQs.some((f) => f.category === cat),
@@ -518,7 +518,7 @@ export default function FAQ() {
                               <section key={cat} aria-labelledby={`faq-cat-${cat}`}>
                                 <header className="flex items-center gap-3 mb-3 px-1">
                                   <div
-                                    className={`flex-shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br ${meta.accent} flex items-center justify-center shadow-[0_6px_16px_-6px_rgba(15,23,42,0.25),inset_0_1px_0_0_rgba(255,255,255,0.4)] border border-white/40`}
+                                    className={`flex-shrink-0 w-6 h-6 rounded-xl bg-gradient-to-br ${meta.accent} flex items-center justify-center shadow-[0_6px_16px_-6px_rgba(15,23,42,0.25),inset_0_1px_0_0_rgba(255,255,255,0.4)] border border-white/40`}
                                   >
                                     <CatIcon
                                       className="w-4 h-4 text-white"
@@ -554,7 +554,7 @@ export default function FAQ() {
                                         <AccordionTrigger className="px-4 py-3 hover:no-underline group">
                                           <div className="flex items-center gap-3 flex-1 text-left min-w-0">
                                             <div
-                                              className={`flex-shrink-0 w-8 h-8 rounded-xl bg-gradient-to-br ${meta.accent} flex items-center justify-center shadow-[0_6px_16px_-6px_rgba(15,23,42,0.25),inset_0_1px_0_0_rgba(255,255,255,0.4)] border border-white/40`}
+                                              className={`flex-shrink-0 w-5 h-5 rounded-xl bg-gradient-to-br ${meta.accent} flex items-center justify-center shadow-[0_6px_16px_-6px_rgba(15,23,42,0.25),inset_0_1px_0_0_rgba(255,255,255,0.4)] border border-white/40`}
                                             >
                                               <Icon
                                                 className="w-4 h-4 text-white"
@@ -567,7 +567,7 @@ export default function FAQ() {
                                           </div>
                                         </AccordionTrigger>
                                         <AccordionContent className="px-4 pb-4">
-                                          <div className="pl-11">
+                                          <div className="pl-7">
                                             <p className="text-[14px] leading-relaxed text-slate-600 whitespace-pre-line">
                                               {faq.answer}
                                             </p>
@@ -596,7 +596,7 @@ export default function FAQ() {
                               <AccordionTrigger className="px-4 py-3 hover:no-underline group">
                                 <div className="flex items-center gap-3 flex-1 text-left min-w-0">
                                   <div
-                                    className={`flex-shrink-0 w-8 h-8 rounded-xl bg-gradient-to-br ${meta.accent} flex items-center justify-center shadow-[0_6px_16px_-6px_rgba(15,23,42,0.25),inset_0_1px_0_0_rgba(255,255,255,0.4)] border border-white/40`}
+                                    className={`flex-shrink-0 w-5 h-5 rounded-xl bg-gradient-to-br ${meta.accent} flex items-center justify-center shadow-[0_6px_16px_-6px_rgba(15,23,42,0.25),inset_0_1px_0_0_rgba(255,255,255,0.4)] border border-white/40`}
                                   >
                                     <Icon
                                       className="w-4 h-4 text-white"
@@ -609,7 +609,7 @@ export default function FAQ() {
                                 </div>
                               </AccordionTrigger>
                               <AccordionContent className="px-4 pb-4">
-                                <div className="pl-11">
+                                <div className="pl-7">
                                   <p className="text-[14px] leading-relaxed text-slate-600 whitespace-pre-line">
                                     {faq.answer}
                                   </p>
@@ -629,8 +629,8 @@ export default function FAQ() {
                       </Accordion>
                     )
                   ) : (
-                    <div className="rounded-2xl bg-white/75 backdrop-blur-xl border border-white/70 shadow-[0_12px_40px_-16px_rgba(15,23,42,0.18)] p-8 text-center">
-                      <Search className="w-10 h-10 mx-auto mb-3 text-slate-300" />
+                    <div className="rounded-2xl bg-white/75 backdrop-blur-xl border border-white/70 shadow-[0_12px_40px_-16px_rgba(15,23,42,0.18)] p-5 text-center">
+                      <Search className="w-6 h-6 mx-auto mb-3 text-slate-300" />
                       <h3 className="text-base font-semibold text-slate-900 mb-1">
                         No matches for that search
                       </h3>
@@ -659,7 +659,7 @@ export default function FAQ() {
                   + contact card. Sticky on desktop.
                   ───────────────────────────────────────── */}
               <aside className="lg:col-span-4">
-                <div className="lg:sticky lg:top-24 space-y-4">
+                <div className="lg:sticky lg:top-16 space-y-4">
                   {/* Ask form card */}
                   <form
                     onSubmit={handleAskSubmit}
@@ -678,14 +678,14 @@ export default function FAQ() {
 
                     <div className="relative">
                       <div className="flex items-center gap-2 mb-1">
-                        <div className="w-8 h-8 rounded-xl bg-gradient-to-b from-[#e07a55] to-[#d05f3a] border border-[#b8552f] flex items-center justify-center shadow-[0_6px_16px_-4px_rgba(217,108,74,0.5),inset_0_1px_0_0_rgba(255,255,255,0.35)]">
+                        <div className="w-5 h-5 rounded-xl bg-gradient-to-b from-[#e07a55] to-[#d05f3a] border border-[#b8552f] flex items-center justify-center shadow-[0_6px_16px_-4px_rgba(217,108,74,0.5),inset_0_1px_0_0_rgba(255,255,255,0.35)]">
                           <Sparkles className="w-4 h-4 text-white" strokeWidth={2} />
                         </div>
                         <h3 className="text-base font-bold text-slate-900 leading-none">
                           Ask your own question
                         </h3>
                       </div>
-                      <p className="text-[12px] text-slate-600 mb-3 ml-10">
+                      <p className="text-[12px] text-slate-600 mb-3 ml-6">
                         We reply within 1 business day, from a real person in
                         Kettering. Or explore our <Link to="/training" className="text-primary hover:underline font-medium">training sessions</Link> and <Link to="/business" className="text-primary hover:underline font-medium">AI business tools</Link>.
                       </p>
@@ -695,7 +695,7 @@ export default function FAQ() {
                           value={askName}
                           onChange={(e) => setAskName(e.target.value)}
                           placeholder="Your name"
-                          className="h-9 text-sm rounded-lg border-slate-200 bg-white/90 focus-visible:border-[#d96c4a] focus-visible:ring-[#d96c4a]/20"
+                          className="h-6 text-sm rounded-lg border-slate-200 bg-white/90 focus-visible:border-[#d96c4a] focus-visible:ring-[#d96c4a]/20"
                           required
                         />
                         <Input
@@ -703,7 +703,7 @@ export default function FAQ() {
                           onChange={(e) => setAskEmail(e.target.value)}
                           type="email"
                           placeholder="Email address"
-                          className="h-9 text-sm rounded-lg border-slate-200 bg-white/90 focus-visible:border-[#d96c4a] focus-visible:ring-[#d96c4a]/20"
+                          className="h-6 text-sm rounded-lg border-slate-200 bg-white/90 focus-visible:border-[#d96c4a] focus-visible:ring-[#d96c4a]/20"
                           required
                         />
                         <Textarea
@@ -719,7 +719,7 @@ export default function FAQ() {
                       <Button
                         type="submit"
                         disabled={submitting}
-                        className="w-full mt-3 h-10 text-sm rounded-xl text-white border border-[#b8552f] bg-gradient-to-b from-[#e07a55] to-[#d05f3a] hover:from-[#e88560] hover:to-[#d96847] shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_8px_20px_-6px_rgba(217,108,74,0.5)]"
+                        className="w-full mt-3 h-6 text-sm rounded-xl text-white border border-[#b8552f] bg-gradient-to-b from-[#e07a55] to-[#d05f3a] hover:from-[#e88560] hover:to-[#d96847] shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_8px_20px_-6px_rgba(217,108,74,0.5)]"
                       >
                         {submitting ? (
                           <>Sending...</>
@@ -757,7 +757,7 @@ export default function FAQ() {
                           href={SITE.phone.tel}
                           className="flex items-center gap-2.5 text-sm text-slate-800 hover:text-[#b8552f] transition-colors group"
                         >
-                          <div className="w-8 h-8 rounded-lg bg-white border border-[#d96c4a]/25 flex items-center justify-center flex-shrink-0 group-hover:bg-[#d96c4a]/10 group-hover:border-[#d96c4a]/45 transition-colors">
+                          <div className="w-5 h-5 rounded-lg bg-white border border-[#d96c4a]/25 flex items-center justify-center flex-shrink-0 group-hover:bg-[#d96c4a]/10 group-hover:border-[#d96c4a]/45 transition-colors">
                             <Phone className="w-3.5 h-3.5 text-[#d96c4a]" />
                           </div>
                           <span className="font-semibold whitespace-nowrap">
@@ -768,7 +768,7 @@ export default function FAQ() {
                           href={`mailto:${SITE.emails.support}`}
                           className="flex items-center gap-2.5 text-sm text-slate-800 hover:text-[#b8552f] transition-colors group"
                         >
-                          <div className="w-8 h-8 rounded-lg bg-white border border-[#d96c4a]/25 flex items-center justify-center flex-shrink-0 group-hover:bg-[#d96c4a]/10 group-hover:border-[#d96c4a]/45 transition-colors">
+                          <div className="w-5 h-5 rounded-lg bg-white border border-[#d96c4a]/25 flex items-center justify-center flex-shrink-0 group-hover:bg-[#d96c4a]/10 group-hover:border-[#d96c4a]/45 transition-colors">
                             <Mail className="w-3.5 h-3.5 text-[#d96c4a]" />
                           </div>
                           <span className="font-semibold truncate">
@@ -781,7 +781,7 @@ export default function FAQ() {
                         asChild
                         size="sm"
                         variant="outline"
-                        className="mt-4 w-full h-9 text-xs rounded-lg bg-white border-[#d96c4a]/30 text-[#b8552f] hover:bg-[#d96c4a]/5 hover:border-[#d96c4a]/50"
+                        className="mt-4 w-full h-6 text-xs rounded-lg bg-white border-[#d96c4a]/30 text-[#b8552f] hover:bg-[#d96c4a]/5 hover:border-[#d96c4a]/50"
                       >
                         <Link to="/contact">
                           Full contact page

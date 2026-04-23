@@ -95,17 +95,17 @@ const AccordionItemComponent = ({
       {/* Question Button */}
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors duration-200"
+        className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 transition-colors duration-200"
         aria-expanded={isOpen}
       >
-        <span className="font-display text-lg md:text-xl font-bold text-[#18305A] pr-8">
+        <span className="font-display text-lg md:text-xl font-bold text-[#18305A] pr-5">
           {question}
         </span>
 
         {/* Toggle Icon */}
         <div
           className={cn(
-            "flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300",
+            "flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300",
             isOpen
               ? "bg-coral-500 text-white rotate-180"
               : "bg-gray-100 text-gray-600",
@@ -128,7 +128,7 @@ const AccordionItemComponent = ({
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            <div className="px-6 pb-6 pt-0">
+            <div className="px-4 pb-4 pt-0">
               <p className="font-body text-base text-gray-600 leading-relaxed">
                 {answer}
               </p>
@@ -156,7 +156,7 @@ export const TwoColumnFAQ = ({
   className,
 }: TwoColumnFAQProps) => {
   return (
-    <div className={cn("grid md:grid-cols-2 gap-6 md:gap-8", className)}>
+    <div className={cn("grid md:grid-cols-2 gap-4 md:gap-5", className)}>
       <ProfessionalAccordion items={leftColumn} />
       <ProfessionalAccordion items={rightColumn} />
     </div>

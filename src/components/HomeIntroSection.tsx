@@ -91,7 +91,7 @@ function StatCard({
       >
         {/* Abstract ombre background */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.04] via-transparent to-accent/[0.06] pointer-events-none" />
-        <div className="absolute -top-8 -right-8 w-20 h-20 bg-primary/[0.06] rounded-full blur-2xl pointer-events-none" />
+        <div className="absolute -top-8 -right-8 w-12 h-12 bg-primary/[0.06] rounded-full blur-2xl pointer-events-none" />
         <div className="relative">
           <Icon className="w-5 h-5 text-primary/60 mx-auto mb-2" />
           <div className="text-2xl md:text-3xl font-black text-foreground leading-none mb-1">
@@ -114,9 +114,9 @@ export const HomeIntroSection = () => {
   return (
     <>
       {/* Stats Counter Bar — compact */}
-      <section className="py-8 md:py-12 relative overflow-hidden">
+      <section className="py-5 md:py-7 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-muted/40 to-background pointer-events-none" />
-        <div className="container mx-auto md:px-6 lg:px-8 relative">
+        <div className="container mx-auto md:px-4 lg:px-5 relative">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             {stats.map((stat, i) => (
               <StatCard key={stat.label} {...stat} index={i} />
@@ -126,15 +126,15 @@ export const HomeIntroSection = () => {
       </section>
 
       {/* Ohio's Trusted Partner — compact two-column */}
-      <section className="py-10 md:py-16" ref={introRef as React.RefObject<HTMLElement>}>
-        <div className="container mx-auto md:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+      <section className="py-6 md:py-10" ref={introRef as React.RefObject<HTMLElement>}>
+        <div className="container mx-auto md:px-4 lg:px-5">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-9 items-center">
             {/* Left — Copy */}
             <AnimatedSection animation="fade-up" className={isInView ? "opacity-100" : "opacity-0"}>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">
                 Who We Are
               </p>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-[1.15] mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-2xl font-bold text-foreground leading-[1.15] mb-4">
                 Ohio's Trusted Partner in{" "}
                 <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Cybersecurity</span>
               </h2>
@@ -143,12 +143,12 @@ export const HomeIntroSection = () => {
                 target seniors. We give families and businesses the tools,
                 training, and support to fight back.
               </p>
-              <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+              <p className="text-muted-foreground text-sm leading-relaxed mb-4">
                 <strong className="text-foreground">Veteran-founded and community-driven</strong>, we've helped over 5,000 families across Ohio stay safe.
               </p>
 
               {/* Trust points — compact grid */}
-              <div className="grid grid-cols-2 gap-2 mb-6">
+              <div className="grid grid-cols-2 gap-2 mb-4">
                 {[
                   { icon: Shield, text: "AI-Powered Detection" },
                   { icon: Users, text: "Family Plans" },
@@ -156,7 +156,7 @@ export const HomeIntroSection = () => {
                   { icon: Eye, text: "24/7 Monitoring" },
                 ].map((item) => (
                   <div key={item.text} className="flex items-center gap-2 p-2 rounded-lg bg-muted/40 border border-border/30">
-                    <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary/10 to-accent/5 flex items-center justify-center flex-shrink-0">
+                    <div className="w-4 h-4 rounded-lg bg-gradient-to-br from-primary/10 to-accent/5 flex items-center justify-center flex-shrink-0">
                       <item.icon className="w-3.5 h-3.5 text-primary" />
                     </div>
                     <span className="text-xs font-medium text-foreground">{item.text}</span>
@@ -203,7 +203,7 @@ export const HomeIntroSection = () => {
                   <img
                     src={familyGathering}
                     alt="Family gathering for safety training"
-                    className="w-full h-28 md:h-36 object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-18 md:h-36 object-cover group-hover:scale-110 transition-transform duration-700"
                     loading="lazy"
                     decoding="async"
                   />
@@ -216,7 +216,7 @@ export const HomeIntroSection = () => {
                   <img
                     src={communityWorkshop}
                     alt="Community workshop"
-                    className="w-full h-28 md:h-36 object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-18 md:h-36 object-cover group-hover:scale-110 transition-transform duration-700"
                     loading="lazy"
                     decoding="async"
                   />
@@ -231,7 +231,7 @@ export const HomeIntroSection = () => {
               <div className={`absolute -top-3 -right-3 z-10 transition-all duration-500 ${isInView ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
                 <div className="rounded-xl p-2.5 bg-card/95 backdrop-blur-md border border-border/40 shadow-lg">
                   <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center">
+                    <div className="w-4 h-4 rounded-lg bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center">
                       <Shield className="w-3.5 h-3.5 text-primary" />
                     </div>
                     <div>
@@ -247,9 +247,9 @@ export const HomeIntroSection = () => {
       </section>
 
       {/* Real Results — compact bento */}
-      <section className="py-10 md:py-16 bg-muted/20 relative overflow-hidden" ref={bentoRef as React.RefObject<HTMLElement>}>
-        <div className="container mx-auto md:px-6 lg:px-8 relative">
-          <div className={`text-center mb-8 transition-all duration-500 ${bentoInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+      <section className="py-6 md:py-10 bg-muted/20 relative overflow-hidden" ref={bentoRef as React.RefObject<HTMLElement>}>
+        <div className="container mx-auto md:px-4 lg:px-5 relative">
+          <div className={`text-center mb-5 transition-all duration-500 ${bentoInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-2">
               Real Results
             </p>
@@ -274,7 +274,7 @@ export const HomeIntroSection = () => {
               {/* Abstract ombre gradient */}
               <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--primary)/0.7)] via-[hsl(var(--primary)/0.3)] to-transparent" />
               <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--foreground)/0.4)] via-transparent to-transparent" />
-              <div className="relative p-6 flex flex-col justify-end h-full">
+              <div className="relative p-4 flex flex-col justify-end h-full">
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/15 backdrop-blur-xl border border-white/20 text-xs font-bold text-white w-fit mb-2">
                   <Shield className="w-3 h-3" /> Success Story
                 </span>
@@ -289,9 +289,9 @@ export const HomeIntroSection = () => {
             <div className={`rounded-xl border border-border/40 bg-card p-5 flex flex-col justify-between overflow-hidden relative hover:-translate-y-1 transition-all duration-400 ${bentoInView ? 'opacity-100' : 'opacity-0'}`}>
               {/* Abstract ombre */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.04] via-transparent to-accent/[0.06] pointer-events-none" />
-              <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-accent/[0.08] rounded-full blur-2xl pointer-events-none" />
+              <div className="absolute -bottom-6 -right-6 w-16 h-16 bg-accent/[0.08] rounded-full blur-2xl pointer-events-none" />
               <div className="relative">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center mb-3">
+                <div className="w-6 h-6 rounded-xl bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center mb-3">
                   <Zap className="w-5 h-5 text-primary" />
                 </div>
                 <h3 className="text-sm font-bold text-foreground mb-1">Instant Threat Analysis</h3>
@@ -310,9 +310,9 @@ export const HomeIntroSection = () => {
             {/* Two small cards */}
             <div className={`rounded-xl border border-border/40 bg-card p-4 overflow-hidden relative hover:-translate-y-1 transition-all duration-400 ${bentoInView ? 'opacity-100' : 'opacity-0'}`}>
               <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.04] to-primary/[0.04] pointer-events-none" />
-              <div className="absolute -top-6 -left-6 w-20 h-20 bg-accent/[0.06] rounded-full blur-2xl pointer-events-none" />
+              <div className="absolute -top-6 -left-6 w-12 h-12 bg-accent/[0.06] rounded-full blur-2xl pointer-events-none" />
               <div className="relative flex items-center gap-2.5 mb-2">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-accent/15 to-primary/10 flex items-center justify-center">
+                <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-accent/15 to-primary/10 flex items-center justify-center">
                   <Award className="w-4 h-4 text-accent" />
                 </div>
                 <div>
@@ -325,9 +325,9 @@ export const HomeIntroSection = () => {
 
             <div className={`rounded-xl border border-border/40 bg-card p-4 overflow-hidden relative hover:-translate-y-1 transition-all duration-400 ${bentoInView ? 'opacity-100' : 'opacity-0'}`}>
               <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.04] to-accent/[0.04] pointer-events-none" />
-              <div className="absolute -bottom-6 -right-6 w-20 h-20 bg-primary/[0.06] rounded-full blur-2xl pointer-events-none" />
+              <div className="absolute -bottom-6 -right-6 w-12 h-12 bg-primary/[0.06] rounded-full blur-2xl pointer-events-none" />
               <div className="relative flex items-center gap-2.5 mb-2">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center">
+                <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center">
                   <Lock className="w-4 h-4 text-primary" />
                 </div>
                 <div>
@@ -350,7 +350,7 @@ export const HomeIntroSection = () => {
                   "InVision Network saved my mother from a $8,000 grandparent scam. The AI detected the voice clone instantly."
                 </blockquote>
                 <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-primary/25 to-accent/15 flex items-center justify-center">
+                  <div className="w-4 h-4 rounded-full bg-gradient-to-br from-primary/25 to-accent/15 flex items-center justify-center">
                     <span className="text-[10px] font-bold text-primary">JM</span>
                   </div>
                   <div>

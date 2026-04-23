@@ -203,9 +203,9 @@ function InternalMessages() {
         </div>
       </header>
 
-      <main className="container mx-auto py-6">
+      <main className="container mx-auto py-4">
         {/* Tab Switcher */}
-        <div className="flex gap-2 mb-6">
+        <div className="flex gap-2 mb-4">
           <Button
             size="sm"
             variant={activeTab === "inbox" ? "default" : "ghost"}
@@ -224,11 +224,11 @@ function InternalMessages() {
           </Button>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-6">
+        <div className="grid lg:grid-cols-5 gap-4">
           {/* Message List */}
           <div className="lg:col-span-2 space-y-2 max-h-[calc(100vh-220px)] overflow-y-auto pr-1">
             {messages.length === 0 ? (
-              <Card className="bg-[#1F2937] border-gray-800/50 p-8">
+              <Card className="bg-[#1F2937] border-gray-800/50 p-5">
                 <p className="text-center text-gray-500">
                   {activeTab === "inbox" ? "No messages in your inbox" : "No sent messages"}
                 </p>
@@ -275,7 +275,7 @@ function InternalMessages() {
           {/* Message Detail */}
           <div className="lg:col-span-3">
             {selectedMessage ? (
-              <Card className="bg-[#1F2937] border-gray-800/50 p-6">
+              <Card className="bg-[#1F2937] border-gray-800/50 p-4">
                 <div className="flex items-start justify-between mb-4">
                   <div>
                     <div className="flex items-center gap-2 mb-1">
@@ -305,9 +305,9 @@ function InternalMessages() {
                 )}
               </Card>
             ) : (
-              <Card className="bg-[#1F2937] border-gray-800/50 p-12">
+              <Card className="bg-[#1F2937] border-gray-800/50 p-7">
                 <div className="text-center text-gray-500">
-                  <MailOpen className="w-12 h-12 mx-auto mb-3 opacity-30" />
+                  <MailOpen className="w-7 h-7 mx-auto mb-3 opacity-30" />
                   <p>Select a message to read</p>
                 </div>
               </Card>

@@ -165,8 +165,8 @@ export default function TeamAdmin() {
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="flex items-center justify-between mb-4">
         <div>
           <h1 className="text-2xl font-bold text-[#F9FAFB]">Team Members</h1>
           <p className="text-[#9CA3AF]">
@@ -182,7 +182,7 @@ export default function TeamAdmin() {
           Add Team Member
         </Button>
       </div>
-      <div className="space-y-6">
+      <div className="space-y-4">
         {/* Controls Bar */}
         <div className="flex items-center justify-between gap-4">
           {/* Search */}
@@ -192,7 +192,7 @@ export default function TeamAdmin() {
               placeholder="Search team members..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 bg-[#1F2937] border-gray-700"
+              className="pl-6 bg-[#1F2937] border-gray-700"
             />
           </div>
 
@@ -220,9 +220,9 @@ export default function TeamAdmin() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <Card className="bg-[#111827] border-gray-800">
-            <CardContent className="pt-6">
+            <CardContent className="pt-4">
               <div className="text-2xl font-bold text-gray-100">
                 {teamMembers.length}
               </div>
@@ -230,7 +230,7 @@ export default function TeamAdmin() {
             </CardContent>
           </Card>
           <Card className="bg-[#111827] border-gray-800">
-            <CardContent className="pt-6">
+            <CardContent className="pt-4">
               <div className="text-2xl font-bold text-green-500">
                 {teamMembers.filter((m) => m.status === "active").length}
               </div>
@@ -238,7 +238,7 @@ export default function TeamAdmin() {
             </CardContent>
           </Card>
           <Card className="bg-[#111827] border-gray-800">
-            <CardContent className="pt-6">
+            <CardContent className="pt-4">
               <div className="text-2xl font-bold text-gray-100">
                 {new Set(teamMembers.map((m) => m.department)).size}
               </div>
@@ -246,7 +246,7 @@ export default function TeamAdmin() {
             </CardContent>
           </Card>
           <Card className="bg-[#111827] border-gray-800">
-            <CardContent className="pt-6">
+            <CardContent className="pt-4">
               <div className="text-2xl font-bold text-gray-100">5</div>
               <p className="text-sm text-muted-foreground">Years Active</p>
             </CardContent>
@@ -256,10 +256,10 @@ export default function TeamAdmin() {
         {/* Team Members */}
         {filteredMembers.length === 0 ? (
           <Card className="border-2 border-dashed">
-            <CardContent className="py-24 text-center">
+            <CardContent className="py-16 text-center">
               <div className="flex flex-col items-center gap-4 text-muted-foreground">
-                <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center">
-                  <Users className="h-10 w-10" />
+                <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center">
+                  <Users className="h-6 w-6" />
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-foreground mb-2">
@@ -285,7 +285,7 @@ export default function TeamAdmin() {
             axis="y"
             values={filteredMembers}
             onReorder={handleReorder}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
           >
             {filteredMembers.map((member) => (
               <Reorder.Item
@@ -300,7 +300,7 @@ export default function TeamAdmin() {
                       "animate-pulse ring-2 ring-primary",
                   )}
                 >
-                  <CardContent className="p-6 flex flex-col items-center text-center relative">
+                  <CardContent className="p-4 flex flex-col items-center text-center relative">
                     {/* Drag Handle */}
                     <div className="absolute top-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity">
                       <GripVertical className="h-5 w-5 text-muted-foreground" />
@@ -395,7 +395,7 @@ export default function TeamAdmin() {
                       <GripVertical className="h-5 w-5 text-muted-foreground cursor-move opacity-0 group-hover:opacity-100 transition-opacity" />
                     </TableCell>
                     <TableCell>
-                      <Avatar className="h-10 w-10">
+                      <Avatar className="h-6 w-6">
                         <AvatarImage src={member.avatar} alt={member.name} />
                         <AvatarFallback>
                           {member.name

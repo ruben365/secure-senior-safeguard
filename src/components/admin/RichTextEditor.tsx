@@ -155,7 +155,7 @@ export function RichTextEditor({
       size="sm"
       onClick={onClick}
       className={cn(
-        "h-8 w-8 p-0",
+        "h-5 w-5 p-0",
         active && "bg-accent text-accent-foreground",
       )}
       title={title}
@@ -393,8 +393,8 @@ export function RichTextEditor({
               <TabsTrigger value="url">URL</TabsTrigger>
             </TabsList>
             <TabsContent value="upload" className="space-y-4">
-              <div className="border-2 border-dashed rounded-lg p-8 text-center">
-                <ImageIcon className="h-12 w-12 text-muted-foreground mx-auto mb-3" />
+              <div className="border-2 border-dashed rounded-lg p-5 text-center">
+                <ImageIcon className="h-7 w-7 text-muted-foreground mx-auto mb-3" />
                 <p className="text-sm font-medium mb-1">
                   Drop image here or click to browse
                 </p>

@@ -19,7 +19,7 @@ export const SectionNav = () => {
   const { activeSection, scrollToSection } = useSectionNavigation(sections);
 
   return (
-    <nav className="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col gap-3 animate-fade-in">
+    <nav className="fixed right-4 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col gap-3 animate-fade-in">
       {sections.map((section) => (
         <button
           key={section.id}

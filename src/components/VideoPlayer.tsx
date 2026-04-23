@@ -99,7 +99,7 @@ export function VideoPlayer({
 
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/50">
-          <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+          <div className="w-7 h-7 border-4 border-primary border-t-transparent rounded-full animate-spin" />
         </div>
       )}
 
@@ -146,7 +146,7 @@ export function VideoPlayer({
               onValueChange={handleVolumeChange}
               max={1}
               step={0.01}
-              className="w-20"
+              className="w-12"
             />
           </div>
 

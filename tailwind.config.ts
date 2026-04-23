@@ -14,11 +14,11 @@ export default {
     container: {
       center: true,
       padding: {
-        DEFAULT: "1rem",
-        sm: "1.5rem",
-        lg: "2rem",
-        xl: "2.5rem",
-        "2xl": "3rem",
+        DEFAULT: "0.625rem",
+        sm: "1rem",
+        lg: "1.25rem",
+        xl: "1.5rem",
+        "2xl": "2rem",
       },
       screens: {
         sm: "640px",
@@ -167,12 +167,12 @@ export default {
         },
       },
       borderRadius: {
-        lg: "0.5rem",
-        md: "0.375rem",
-        sm: "0.25rem",
-        xl: "0.75rem",
-        "2xl": "1rem",
-        "3xl": "1.25rem",
+        lg: "0.375rem",
+        md: "0.25rem",
+        sm: "0.125rem",
+        xl: "0.5rem",
+        "2xl": "0.75rem",
+        "3xl": "0.875rem",
       },
       transitionDuration: {
         "150": "150ms",

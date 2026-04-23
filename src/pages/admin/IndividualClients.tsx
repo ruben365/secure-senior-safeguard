@@ -207,8 +207,8 @@ export default function IndividualClients() {
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="flex items-center justify-between mb-4">
         <div>
           <h1 className="text-2xl font-bold text-[#F9FAFB]">
             Individual Clients
@@ -311,7 +311,7 @@ export default function IndividualClients() {
           </DialogContent>
         </Dialog>
       </div>
-      <div className="space-y-6">
+      <div className="space-y-4">
         {selectedClients.length > 0 && (
           <div className="bg-primary/10 border border-primary/30 rounded-lg p-4 flex items-center justify-between">
             <span className="font-medium text-orange-400">
@@ -354,7 +354,7 @@ export default function IndividualClients() {
                 placeholder="Search name, email, phone..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 bg-[#1F2937] border-gray-700 text-white"
+                className="pl-6 bg-[#1F2937] border-gray-700 text-white"
               />
             </div>
           </div>
@@ -376,24 +376,24 @@ export default function IndividualClients() {
                 key={i}
                 className="flex items-center gap-4 p-4 bg-[#111827] rounded-lg border border-gray-800"
               >
-                <Skeleton className="h-10 w-10 rounded-full bg-gray-800" />
+                <Skeleton className="h-6 w-6 rounded-full bg-gray-800" />
                 <div className="flex-1 space-y-2">
                   <Skeleton className="h-4 w-1/3 bg-gray-800" />
                   <Skeleton className="h-3 w-1/4 bg-gray-800" />
                 </div>
-                <Skeleton className="h-6 w-20 bg-gray-800" />
+                <Skeleton className="h-4 w-12 bg-gray-800" />
               </div>
             ))}
           </div>
         ) : filteredClients.length === 0 ? (
-          <div className="text-center py-16 bg-[#111827] rounded-lg border border-gray-800">
-            <div className="w-16 h-16 mx-auto mb-4 bg-gray-800 rounded-full flex items-center justify-center">
-              <Users className="w-8 h-8 text-gray-600" />
+          <div className="text-center py-10 bg-[#111827] rounded-lg border border-gray-800">
+            <div className="w-10 h-10 mx-auto mb-4 bg-gray-800 rounded-full flex items-center justify-center">
+              <Users className="w-5 h-5 text-gray-600" />
             </div>
             <h3 className="text-xl font-semibold mb-2 text-white">
               No Individual Clients Yet
             </h3>
-            <p className="text-gray-400 mb-6">
+            <p className="text-gray-400 mb-4">
               Add your first Family Shield subscriber
             </p>
             <Button
@@ -410,7 +410,7 @@ export default function IndividualClients() {
               <Table>
                 <TableHeader>
                   <TableRow className="border-gray-800 hover:bg-transparent">
-                    <TableHead className="w-12 text-gray-400">
+                    <TableHead className="w-7 text-gray-400">
                       <Checkbox
                         checked={
                           selectedClients.length === filteredClients.length &&

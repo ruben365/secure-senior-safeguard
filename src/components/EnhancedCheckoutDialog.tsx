@@ -169,7 +169,7 @@ function QRCodePayment({
             onChange={(e) =>
               onDetailsChange({ name: e.target.value, email: customerEmail })
             }
-            className="h-9 bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a] rounded-lg"
+            className="h-6 bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a] rounded-lg"
           />
           <Input
             type="email"
@@ -178,7 +178,7 @@ function QRCodePayment({
             onChange={(e) =>
               onDetailsChange({ name: customerName, email: e.target.value })
             }
-            className="h-9 bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a] rounded-lg"
+            className="h-6 bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a] rounded-lg"
           />
         </div>
       ) : null}
@@ -189,8 +189,8 @@ function QRCodePayment({
           animate={{ opacity: 1, y: 0 }}
           className="space-y-4"
         >
-          <div className="p-6 bg-gray-50 border border-gray-200 rounded-xl">
-            <Smartphone className="w-12 h-12 mx-auto mb-3 text-primary" />
+          <div className="p-4 bg-gray-50 border border-gray-200 rounded-xl">
+            <Smartphone className="w-7 h-7 mx-auto mb-3 text-primary" />
             <h4 className="font-semibold mb-2 text-gray-700">Pay with Your Phone</h4>
             <p className="text-sm text-gray-500">
               Scan a QR code to pay with Apple Pay, Google Pay, or any mobile
@@ -201,7 +201,7 @@ function QRCodePayment({
             onClick={generateQRCode}
             disabled={loading || !customerName || !customerEmail}
             size="sm"
-            className="w-full h-9 text-sm"
+            className="w-full h-6 text-sm"
           >
             {loading ? (
               <Loader2 className="mr-2 h-5 w-5 animate-spin" />
@@ -393,7 +393,7 @@ function CardPaymentForm({
       <Button
         type="submit"
         disabled={!stripe || loading || !isReady}
-        className="w-full h-9 text-sm font-semibold bg-primary text-white rounded-lg shadow-sm hover:bg-primary/90"
+        className="w-full h-6 text-sm font-semibold bg-primary text-white rounded-lg shadow-sm hover:bg-primary/90"
         size="sm"
       >
         {loading ? (
@@ -562,7 +562,7 @@ function CardPaymentWrapper({
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
               }
-              className="pl-9 h-9 bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a] rounded-lg"
+              className="pl-6 h-6 bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a] rounded-lg"
               required
             />
           </div>
@@ -576,7 +576,7 @@ function CardPaymentWrapper({
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
-              className="pl-9 h-9 bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a] rounded-lg"
+              className="pl-6 h-6 bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a] rounded-lg"
               required
             />
           </div>
@@ -585,7 +585,7 @@ function CardPaymentWrapper({
             type="button"
             onClick={handleContinue}
             disabled={!formData.name || !formData.email || loading}
-            className="w-full h-9 bg-primary text-white text-sm font-semibold rounded-lg shadow-sm hover:bg-primary/90"
+            className="w-full h-6 bg-primary text-white text-sm font-semibold rounded-lg shadow-sm hover:bg-primary/90"
             size="sm"
           >
             {loading ? (
@@ -633,8 +633,8 @@ function CardPaymentWrapper({
           </div>
 
           {stripeLoading ? (
-            <div className="flex items-center justify-center py-8">
-              <Loader2 className="w-6 h-6 animate-spin text-primary" />
+            <div className="flex items-center justify-center py-5">
+              <Loader2 className="w-4 h-4 animate-spin text-primary" />
               <span className="ml-2 text-sm text-muted-foreground">
                 Initializing payment...
               </span>
@@ -704,8 +704,8 @@ function CardPaymentWrapper({
               />
             </Elements>
           ) : (
-            <div className="text-center p-6 space-y-3">
-              <Lock className="w-10 h-10 mx-auto text-destructive opacity-50" />
+            <div className="text-center p-4 space-y-3">
+              <Lock className="w-6 h-6 mx-auto text-destructive opacity-50" />
               <p className="text-destructive font-medium">
                 Payment system unavailable
               </p>

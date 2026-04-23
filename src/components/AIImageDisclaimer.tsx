@@ -21,10 +21,10 @@ export const AIImageDisclaimer = () => {
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.4 }}
         >
-          <Card className="p-6 bg-gradient-to-br from-muted/50 to-muted/20 border-border/50 backdrop-blur-sm">
+          <Card className="p-4 bg-gradient-to-br from-muted/50 to-muted/20 border-border/50 backdrop-blur-sm">
             <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                <Camera className="w-6 h-6 text-primary" />
+              <div className="flex-shrink-0 w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center">
+                <Camera className="w-4 h-4 text-primary" />
               </div>
               <div className="flex-1">
                 <h4 className="text-lg font-semibold mb-2 flex items-center gap-2">

@@ -70,17 +70,17 @@ export default function Partners() {
       <Navigation />
 
       {/* Hero */}
-      <section className="relative min-h-[60dvh] flex items-center pt-[clamp(100px,14vw,140px)] pb-16 overflow-hidden text-center">
+      <section className="relative min-h-[60dvh] flex items-center pt-[clamp(100px,14vw,140px)] pb-10 overflow-hidden text-center">
         <div className="absolute inset-0 bg-gradient-to-b from-[#fff8f5] via-background to-background pointer-events-none" />
         <div className="hss-hero-glow" />
         <div className="container mx-auto max-w-4xl relative z-10">
           <Badge className="mb-4 bg-[#d96c4a]/10 text-[#c45e3b] border-[#d96c4a]/20 font-semibold tracking-wide">
             Trust &amp; Transparency
           </Badge>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-5 leading-[1.08]">
+          <h1 className="text-3xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight mb-5 leading-[1.08]">
             Partners &amp; Certifications
           </h1>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-5 leading-relaxed">
             We work with leading technology platforms, healthcare logistics
             providers, community organizations, and pursue industry-recognized
             certifications — so you can trust the protection we provide.
@@ -107,7 +107,7 @@ export default function Partners() {
       </section>
 
       {/* ── Strategic Partners ──────────────────────────────────── */}
-      <section className="py-16 section-warm-alt">
+      <section className="py-10 section-warm-alt">
         <div className="container mx-auto max-w-5xl">
           <div className="flex items-center gap-3 mb-3">
             <div className="hss-icon-bubble">
@@ -115,16 +115,16 @@ export default function Partners() {
             </div>
             <h2 className="text-2xl font-bold">Strategic Partners</h2>
           </div>
-          <p className="text-muted-foreground mb-10 ml-[calc(3rem+0.75rem)]">
+          <p className="text-muted-foreground mb-6 ml-[calc(3rem+0.75rem)]">
             Trusted organizations we collaborate with to extend our mission into
             healthcare, logistics, and community services.
           </p>
 
           {/* Featured: Exodus Health Couriers */}
-          <div className="hss-partner-featured rounded-2xl p-8 mb-8">
-            <div className="flex flex-col sm:flex-row sm:items-start gap-6">
-              <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-[#d96c4a]/10 border border-[#d96c4a]/25 flex-shrink-0">
-                <HeartPulse className="w-8 h-8 text-[#d96c4a]" />
+          <div className="hss-partner-featured rounded-2xl p-5 mb-5">
+            <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+              <div className="flex items-center justify-center w-10 h-10 rounded-2xl bg-[#d96c4a]/10 border border-[#d96c4a]/25 flex-shrink-0">
+                <HeartPulse className="w-5 h-5 text-[#d96c4a]" />
               </div>
               <div className="flex-1">
                 <div className="flex flex-wrap items-center gap-3 mb-2">
@@ -187,7 +187,7 @@ export default function Partners() {
       <hr className="hss-divider" />
 
       {/* ── Technology Partners ─────────────────────────────────── */}
-      <section className="py-16">
+      <section className="py-10">
         <div className="container mx-auto max-w-5xl">
           <div className="flex items-center gap-3 mb-3">
             <div className="hss-icon-bubble">
@@ -195,7 +195,7 @@ export default function Partners() {
             </div>
             <h2 className="text-2xl font-bold">Technology Partners</h2>
           </div>
-          <p className="text-muted-foreground mb-8 ml-[calc(3rem+0.75rem)]">
+          <p className="text-muted-foreground mb-5 ml-[calc(3rem+0.75rem)]">
             InVision Network builds on best-in-class AI and cloud infrastructure
             to deliver reliable scam protection and business automation.
           </p>
@@ -215,7 +215,7 @@ export default function Partners() {
       <hr className="hss-divider" />
 
       {/* ── Community Partners ──────────────────────────────────── */}
-      <section className="py-16 section-warm">
+      <section className="py-10 section-warm">
         <div className="container mx-auto max-w-5xl">
           <div className="flex items-center gap-3 mb-3">
             <div className="hss-icon-bubble">
@@ -223,17 +223,17 @@ export default function Partners() {
             </div>
             <h2 className="text-2xl font-bold">Community Partners</h2>
           </div>
-          <p className="text-muted-foreground mb-8 ml-[calc(3rem+0.75rem)]">
+          <p className="text-muted-foreground mb-5 ml-[calc(3rem+0.75rem)]">
             We're proud to collaborate with educational institutions, government
             programs, and local organizations serving Ohio communities.
           </p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {communityPartners.map((partner) => {
               const Icon = partner.icon;
               return (
                 <div
                   key={partner.name}
-                  className="hss-card rounded-xl border bg-card p-6"
+                  className="hss-card rounded-xl border bg-card p-4"
                 >
                   <div className="hss-icon-bubble mb-4">
                     <Icon className="w-5 h-5 text-[#d96c4a]" />
@@ -252,7 +252,7 @@ export default function Partners() {
       <hr className="hss-divider" />
 
       {/* ── Certifications ──────────────────────────────────────── */}
-      <section className="py-16">
+      <section className="py-10">
         <div className="container mx-auto max-w-5xl">
           <div className="flex items-center gap-3 mb-3">
             <div className="hss-icon-bubble">
@@ -260,14 +260,14 @@ export default function Partners() {
             </div>
             <h2 className="text-2xl font-bold">Certifications</h2>
           </div>
-          <p className="text-muted-foreground mb-8 ml-[calc(3rem+0.75rem)]">
+          <p className="text-muted-foreground mb-5 ml-[calc(3rem+0.75rem)]">
             Our team is committed to maintaining the highest professional
             standards in cybersecurity.
           </p>
-          <div className="rounded-2xl border border-[#d96c4a]/20 bg-gradient-to-br from-[#fff8f5] to-white p-8">
+          <div className="rounded-2xl border border-[#d96c4a]/20 bg-gradient-to-br from-[#fff8f5] to-white p-5">
             <div className="flex items-start gap-4">
               <div className="hss-icon-bubble-lg">
-                <Award className="w-6 h-6 text-[#d96c4a]" />
+                <Award className="w-4 h-4 text-[#d96c4a]" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold mb-2">
@@ -300,13 +300,13 @@ export default function Partners() {
       </section>
 
       {/* ── CTA ────────────────────────────────────────────────── */}
-      <section className="py-16 section-warm-alt text-center">
+      <section className="py-10 section-warm-alt text-center">
         <div className="container mx-auto max-w-2xl">
           <div className="hss-icon-bubble-lg mx-auto mb-5">
-            <Handshake className="w-6 h-6 text-[#d96c4a]" />
+            <Handshake className="w-4 h-4 text-[#d96c4a]" />
           </div>
           <h2 className="text-2xl font-bold mb-3">Become a Partner</h2>
-          <p className="text-muted-foreground mb-6 leading-relaxed">
+          <p className="text-muted-foreground mb-4 leading-relaxed">
             Interested in partnering with InVision Network? We'd love to
             collaborate with organizations aligned with our mission of
             protecting Ohio communities through technology and education.

@@ -158,7 +158,7 @@ const PremiumTrainingCard = memo(
     const isPopular = plan.popular;
 
     return (
-      <div className="relative h-full pt-6 group/card" style={{ perspective: '1000px' }}>
+      <div className="relative h-full pt-4 group/card" style={{ perspective: '1000px' }}>
         {/* Floating premium badge */}
         {plan.badge && (
           <div className="absolute -top-1 left-1/2 -translate-x-1/2 z-30">
@@ -202,11 +202,11 @@ const PremiumTrainingCard = memo(
             {isPopular && (
               <>
                 <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full blur-3xl pointer-events-none" style={{ background: 'rgba(245,197,67,0.07)' }} />
-                <div className="absolute -bottom-16 right-0 w-32 h-32 rounded-full blur-3xl pointer-events-none" style={{ background: 'rgba(224,163,18,0.05)' }} />
+                <div className="absolute -bottom-16 right-0 w-20 h-20 rounded-full blur-3xl pointer-events-none" style={{ background: 'rgba(224,163,18,0.05)' }} />
               </>
             )}
 
-            <div className="p-6 flex flex-col flex-1 relative z-10">
+            <div className="p-4 flex flex-col flex-1 relative z-10">
               {/* Spacer for badge */}
               <div className="h-3" />
 
@@ -234,7 +234,7 @@ const PremiumTrainingCard = memo(
 
               {/* Price block — premium glassmorphic */}
               <div
-                className={`text-center mb-6 py-5 px-4 rounded-2xl border backdrop-blur-sm relative overflow-hidden ${
+                className={`text-center mb-4 py-5 px-4 rounded-2xl border backdrop-blur-sm relative overflow-hidden ${
                   isPopular
                     ? "border-[rgba(245,197,67,0.2)] shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]"
                     : "bg-gradient-to-br from-muted/50 via-card to-muted/30 border-border/40 shadow-inner"
@@ -245,7 +245,7 @@ const PremiumTrainingCard = memo(
                   <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at top,rgba(245,197,67,0.08),transparent 70%)' }} />
                 )}
                 <p
-                  className={`text-4xl font-black relative z-10 ${isPopular ? "" : "text-foreground"}`}
+                  className={`text-2xl font-black relative z-10 ${isPopular ? "" : "text-foreground"}`}
                   style={isPopular ? { color: '#f5c543' } : {}}
                 >
                   {plan.price}
@@ -261,7 +261,7 @@ const PremiumTrainingCard = memo(
               </div>
 
               {/* Features */}
-              <ul className="space-y-2.5 mb-6 flex-1">
+              <ul className="space-y-2.5 mb-4 flex-1">
                 {plan.features.slice(0, 5).map((feature: string, idx: number) => (
                   <li key={idx} className="flex items-start gap-2.5">
                     <span
@@ -285,7 +285,7 @@ const PremiumTrainingCard = memo(
                 onClick={() => onBook(plan)}
                 variant={isPopular ? "gold" : "outline"}
                 size="lg"
-                className={`w-full mt-auto rounded-xl h-10 sm:h-12 text-sm sm:text-base font-semibold tracking-wide ${
+                className={`w-full mt-auto rounded-xl h-6 sm:h-7 text-sm sm:text-base font-semibold tracking-wide ${
                   isPopular
                     ? "shadow-[0_4px_24px_hsl(var(--coral-500)/0.35)]"
                     : "hover:border-primary/40 hover:text-primary"
@@ -312,7 +312,7 @@ const ScamExampleCard = ({
   return (
     <div className="h-full overflow-hidden rounded-2xl bg-card border border-border/60 shadow-sm hover:shadow-lg hover:border-primary/20 transition-all duration-300 hover:-translate-y-1">
       <div className="h-1.5 bg-gradient-to-r from-primary via-accent to-primary" />
-      <div className="p-6">
+      <div className="p-4">
         <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20 mb-4">
           {example.badge}
         </span>
@@ -686,7 +686,7 @@ function LearnAndTrain() {
         {/* ══════════ LIVE THREAT TICKER ══════════ */}
         <div className="bg-foreground text-background py-3 overflow-hidden">
           <div className="container mx-auto">
-            <div className="flex items-center justify-center gap-4 sm:gap-8 flex-wrap text-xs sm:text-sm font-semibold">
+            <div className="flex items-center justify-center gap-4 sm:gap-5 flex-wrap text-xs sm:text-sm font-semibold">
               <span className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" /> 2,847 scams blocked this month</span>
               <span className="hidden sm:inline text-background/30">|</span>
               <span className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-green-400" /> $1.2M saved for families</span>
@@ -698,17 +698,17 @@ function LearnAndTrain() {
 
 
         {/* ══════════ SECTION 1: WHY FAMILIES TRUST US ══════════ */}
-        <section className="py-16 md:py-24 relative overflow-hidden">
+        <section className="py-10 md:py-16 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background dot-grid-bg" />
           
-          <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-12 left-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto relative z-10">
-            <div className="head-rhythm text-center mb-14">
-              <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+            <div className="head-rhythm text-center mb-9">
+              <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm border border-primary/15 bg-primary/5">
                 <Sparkles className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">Trusted by 500+ Families</span>
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
+              <h2 className="text-3xl md:text-2xl lg:text-3xl font-black text-foreground mb-4">
                 Why Families <span className="text-primary">Trust Us</span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -717,12 +717,12 @@ function LearnAndTrain() {
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-14">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto mb-9">
               {TRUST_PILLARS.map((item, index) => (
-                <div key={index} className="relative rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl overflow-hidden p-6 text-center shadow-sm hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/25 hover:-translate-y-2 transition-all duration-500 h-full">
+                <div key={index} className="relative rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl overflow-hidden p-4 text-center shadow-sm hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/25 hover:-translate-y-2 transition-all duration-500 h-full">
                   <div className="h-1 w-full bg-gradient-to-r from-primary to-accent absolute top-0 left-0 right-0" />
-                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                    <item.icon className="w-7 h-7 text-primary" />
+                  <div className="w-9 h-9 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                    <item.icon className="w-4 h-4 text-primary" />
                   </div>
                   <h3 className="text-lg font-bold text-foreground mb-2">{item.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed mb-3">
@@ -738,12 +738,12 @@ function LearnAndTrain() {
             </div>
 
             {/* Emergency Protocol + Identity Verification */}
-            <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-              <div className="relative rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl overflow-hidden p-6 sm:p-8 shadow-sm hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/25 transition-all duration-500 h-full">
+            <div className="grid lg:grid-cols-2 gap-5 max-w-6xl mx-auto">
+              <div className="relative rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl overflow-hidden p-4 sm:p-5 shadow-sm hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/25 transition-all duration-500 h-full">
                 <div className="h-1 w-full bg-gradient-to-r from-destructive/60 to-primary absolute top-0 left-0 right-0" />
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-destructive/10 flex items-center justify-center">
-                    <AlertTriangle className="w-6 h-6 text-destructive" />
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-7 h-7 rounded-xl bg-destructive/10 flex items-center justify-center">
+                    <AlertTriangle className="w-4 h-4 text-destructive" />
                   </div>
                   <div>
                     <h3 className="text-xl font-black text-foreground">
@@ -761,7 +761,7 @@ function LearnAndTrain() {
                     { step: "Report and document", detail: "the attempt (we provide templates).", icon: "📝" },
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start gap-3">
-                      <span className="w-10 h-10 bg-primary/10 text-primary rounded-xl flex items-center justify-center font-bold text-lg flex-shrink-0">
+                      <span className="w-6 h-6 bg-primary/10 text-primary rounded-xl flex items-center justify-center font-bold text-lg flex-shrink-0">
                         {item.icon}
                       </span>
                       <div className="text-sm pt-1">
@@ -773,11 +773,11 @@ function LearnAndTrain() {
                 </ol>
               </div>
 
-              <div className="relative rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl overflow-hidden p-6 sm:p-8 shadow-sm hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/25 transition-all duration-500 h-full">
+              <div className="relative rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl overflow-hidden p-4 sm:p-5 shadow-sm hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/25 transition-all duration-500 h-full">
                 <div className="h-1 w-full bg-gradient-to-r from-primary to-accent absolute top-0 left-0 right-0" />
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                    <Fingerprint className="w-6 h-6 text-primary" />
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-7 h-7 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Fingerprint className="w-4 h-4 text-primary" />
                   </div>
                   <div>
                     <h3 className="text-xl font-black text-foreground">
@@ -794,7 +794,7 @@ function LearnAndTrain() {
                     { action: "Forward suspicious items", detail: "to our help line for expert review.", icon: "📨" },
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start gap-3">
-                      <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0 text-lg">
+                      <div className="w-6 h-6 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0 text-lg">
                         {item.icon}
                       </div>
                       <div className="text-sm pt-1">
@@ -805,7 +805,7 @@ function LearnAndTrain() {
                   ))}
                 </ul>
                 {/* Visual callout */}
-                <div className="mt-6 p-4 bg-primary/5 rounded-xl border border-primary/10 text-center">
+                <div className="mt-4 p-4 bg-primary/5 rounded-xl border border-primary/10 text-center">
                   <p className="text-sm font-bold text-primary">💡 Pro Tip: Print this card and keep it by your phone</p>
                 </div>
               </div>
@@ -819,14 +819,14 @@ function LearnAndTrain() {
         <div className="h-1.5 bg-gradient-to-r from-primary via-accent to-primary" />
 
         {/* ══════════ SECTION 2: HOW IT WORKS ══════════ */}
-        <section id="book" className="py-10 sm:py-16 md:py-20 bg-muted/20">
+        <section id="book" className="py-6 sm:py-10 md:py-12 bg-muted/20">
           <div className="container mx-auto">
-            <div className="head-rhythm text-center mb-14">
-              <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+            <div className="head-rhythm text-center mb-9">
+              <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm border border-primary/15 bg-primary/5">
                 <Sparkles className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">Getting Started</span>
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
+              <h2 className="text-3xl md:text-2xl lg:text-3xl font-black text-foreground mb-4">
                 How It <span className="text-primary">Works</span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -834,21 +834,21 @@ function LearnAndTrain() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
               {[
                 { step: "01", icon: Calendar, title: "Book Your Session", desc: "Choose a convenient Zoom class time, request a Priority Group session, or schedule private in-person coaching.", color: "from-blue-500/20 to-primary/20" },
                 { step: "02", icon: GraduationCap, title: "Learn & Practice", desc: "Master identity verification, spot deepfakes, and handle urgent messages with confidence.", color: "from-green-500/20 to-primary/20" },
                 { step: "03", icon: Shield, title: "Get Ongoing Support", desc: "Add our monthly help line to forward suspicious messages for expert review.", color: "from-violet-500/20 to-primary/20" },
               ].map((item, index) => (
-                <div key={index} className="relative rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl p-8 text-center shadow-sm hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/25 hover:-translate-y-2 transition-all duration-500 h-full overflow-hidden">
+                <div key={index} className="relative rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl p-5 text-center shadow-sm hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/25 hover:-translate-y-2 transition-all duration-500 h-full overflow-hidden">
                   {/* Background gradient accent */}
-                  <div className={`absolute top-0 left-0 right-0 h-24 bg-gradient-to-b ${item.color} to-transparent opacity-50`} />
+                  <div className={`absolute top-0 left-0 right-0 h-16 bg-gradient-to-b ${item.color} to-transparent opacity-50`} />
                   <div className="relative">
-                    <div className="absolute top-0 right-0 text-5xl font-black text-primary/10">
+                    <div className="absolute top-0 right-0 text-3xl font-black text-primary/10">
                       {item.step}
                     </div>
-                    <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
-                      <item.icon className="w-8 h-8 text-primary" />
+                    <div className="w-10 h-10 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
+                      <item.icon className="w-5 h-5 text-primary" />
                     </div>
                     <h3 className="text-xl font-black text-foreground mb-3">{item.title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
@@ -856,7 +856,7 @@ function LearnAndTrain() {
                   {/* Connecting arrow for desktop */}
                   {index < 2 && (
                     <div className="hidden md:flex absolute -right-5 top-1/2 -translate-y-1/2 z-10">
-                      <ArrowRight className="w-6 h-6 text-primary/30" />
+                      <ArrowRight className="w-4 h-4 text-primary/30" />
                     </div>
                   )}
                 </div>
@@ -866,17 +866,17 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 3: SCAM PREVENTION WORKSHOPS ══════════ */}
-        <section id="training" className="py-16 md:py-24 relative overflow-hidden">
+        <section id="training" className="py-10 md:py-16 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
-          <div className="absolute top-20 right-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-20 left-0 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-12 right-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-12 left-0 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto relative z-10">
-            <div className="head-rhythm text-center mb-14">
-              <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+            <div className="head-rhythm text-center mb-9">
+              <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm border border-primary/15 bg-primary/5">
                 <Shield className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">Protecting Families Together</span>
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
+              <h2 className="text-3xl md:text-2xl lg:text-3xl font-black text-foreground mb-4">
                 Scam Prevention <span className="text-primary">Workshops</span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -886,8 +886,8 @@ function LearnAndTrain() {
             </div>
 
             {/* Veterans banner */}
-            <div className="flex justify-center mb-8 sm:mb-10 px-2">
-              <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2.5 sm:py-3 bg-card border border-border/60 rounded-full shadow-sm text-center flex-wrap justify-center">
+            <div className="flex justify-center mb-5 sm:mb-6 px-2">
+              <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-4 py-2.5 sm:py-3 bg-card border border-border/60 rounded-full shadow-sm text-center flex-wrap justify-center">
                 <span className="text-lg sm:text-xl">🇺🇸</span>
                 <span className="font-bold text-foreground text-xs sm:text-sm">
                   Veterans & First Responders Save 10%
@@ -898,14 +898,14 @@ function LearnAndTrain() {
               </div>
             </div>
 
-            <div id="pricing" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1400px] mx-auto">
+            <div id="pricing" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-[1400px] mx-auto">
               {trainingPlans.map((plan, index) => (
                 <PremiumTrainingCard key={index} plan={plan} index={index} onBook={handleBookTraining} />
               ))}
             </div>
 
             {/* Comparison quick-stat bar */}
-            <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-4xl mx-auto">
+            <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-4xl mx-auto">
               {[
                 { icon: Users, value: "25+", label: "Group Size Options" },
                 { icon: GraduationCap, value: "4", label: "Workshop Tiers" },
@@ -926,14 +926,14 @@ function LearnAndTrain() {
         <InstructorShowcase />
 
         {/* ══════════ SECTION 4: SIMPLE PROTECTION IN 4 STEPS ══════════ */}
-        <section className="py-10 sm:py-16 md:py-20 bg-muted/20">
+        <section className="py-6 sm:py-10 md:py-12 bg-muted/20">
           <div className="container mx-auto">
-            <div className="head-rhythm text-center mb-14">
-              <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+            <div className="head-rhythm text-center mb-9">
+              <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm border border-primary/15 bg-primary/5">
                 <Zap className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">Easy as 1-2-3-4</span>
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
+              <h2 className="text-3xl md:text-2xl lg:text-3xl font-black text-foreground mb-4">
                 Simple Protection in <span className="text-primary">4 Steps</span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -941,21 +941,21 @@ function LearnAndTrain() {
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
               {[
                 { step: "01", icon: Eye, title: "Something Suspicious", subtitle: "Spot it", desc: "You receive a suspicious email, text, call, or link that doesn't feel right.", color: "from-amber-500/15" },
                 { step: "02", icon: Forward, title: "Forward to Us", subtitle: "Send it", desc: "Simply forward the message, screenshot, or file to our secure analysis line.", color: "from-blue-500/15" },
                 { step: "03", icon: Brain, title: "Expert Analysis", subtitle: "We check it", desc: "Our AI and human experts analyze the threat and verify authenticity.", color: "from-violet-500/15" },
                 { step: "04", icon: ShieldCheck, title: "Clear Guidance", subtitle: "You're safe", desc: "You get a clear, simple answer: safe or dangerous, with next steps.", color: "from-green-500/15" },
               ].map((item, index) => (
-                <div key={index} className="relative rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl p-6 text-center shadow-sm hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/25 hover:-translate-y-2 transition-all duration-500 h-full overflow-hidden">
+                <div key={index} className="relative rounded-2xl border border-border/50 bg-card/90 backdrop-blur-xl p-4 text-center shadow-sm hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.15)] hover:border-primary/25 hover:-translate-y-2 transition-all duration-500 h-full overflow-hidden">
                   <div className={`absolute inset-0 bg-gradient-to-b ${item.color} to-transparent opacity-40`} />
                   <div className="relative">
-                    <div className="absolute top-0 right-0 text-4xl font-black text-primary/10">
+                    <div className="absolute top-0 right-0 text-2xl font-black text-primary/10">
                       {item.step}
                     </div>
-                    <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                      <item.icon className="w-7 h-7 text-primary" />
+                    <div className="w-9 h-9 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                      <item.icon className="w-4 h-4 text-primary" />
                     </div>
                     <h3 className="text-lg font-black text-foreground mb-1">{item.title}</h3>
                     <p className="text-sm font-semibold text-primary mb-3">{item.subtitle}</p>
@@ -966,11 +966,11 @@ function LearnAndTrain() {
             </div>
 
             {/* Visual response time graphic */}
-            <div className="mt-10 max-w-2xl mx-auto bg-card border border-border/60 rounded-2xl p-5 sm:p-6 shadow-sm">
+            <div className="mt-6 max-w-2xl mx-auto bg-card border border-border/60 rounded-2xl p-5 sm:p-4 shadow-sm">
               <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center">
-                    <Zap className="w-6 h-6 text-green-600" />
+                  <div className="w-7 h-7 rounded-xl bg-green-500/10 flex items-center justify-center">
+                    <Zap className="w-4 h-4 text-green-600" />
                   </div>
                   <div>
                     <p className="font-black text-foreground">Average Response Time</p>
@@ -978,7 +978,7 @@ function LearnAndTrain() {
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-3xl sm:text-4xl font-black text-primary">{'<'}2 min</p>
+                  <p className="text-3xl sm:text-2xl font-black text-primary">{'<'}2 min</p>
                   <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">AI-Powered Speed</p>
                 </div>
               </div>
@@ -988,16 +988,16 @@ function LearnAndTrain() {
 
         {/* ══════════ SECTION 5: THREAT ANALYSIS ══════════ */}
         <MeshBackground variant="subtle" withOrbs>
-        <section className="py-16 md:py-24 relative overflow-hidden">
+        <section className="py-10 md:py-16 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
-          <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-12 left-0 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto relative z-10">
-            <div className="head-rhythm text-center mb-14">
-              <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+            <div className="head-rhythm text-center mb-9">
+              <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm border border-primary/15 bg-primary/5">
                 <Shield className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">Comprehensive Protection</span>
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
+              <h2 className="text-3xl md:text-2xl lg:text-3xl font-black text-foreground mb-4">
                 We Analyze <span className="text-primary">All Types</span> of Threats
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -1017,8 +1017,8 @@ function LearnAndTrain() {
                   }`}
                 >
                   <div className="flex flex-col items-center text-center">
-                    <div className={`w-12 h-12 rounded-xl ${threat.color.split(' ')[0]} flex items-center justify-center mb-3`}>
-                      <threat.icon className={`w-6 h-6 ${threat.color.split(' ')[1]}`} />
+                    <div className={`w-7 h-7 rounded-xl ${threat.color.split(' ')[0]} flex items-center justify-center mb-3`}>
+                      <threat.icon className={`w-4 h-4 ${threat.color.split(' ')[1]}`} />
                     </div>
                     <h3 className="font-bold text-sm text-foreground mb-1">{threat.title}</h3>
                     <p className="text-xs text-muted-foreground">Click to learn more</p>
@@ -1037,7 +1037,7 @@ function LearnAndTrain() {
             </div>
 
             {/* Threat coverage stat */}
-            <div className="mt-10 grid grid-cols-3 gap-4 max-w-3xl mx-auto">
+            <div className="mt-6 grid grid-cols-3 gap-4 max-w-3xl mx-auto">
               {[
                 { value: "8", label: "Threat Types Covered" },
                 { value: "99.7%", label: "Detection Accuracy" },
@@ -1055,15 +1055,15 @@ function LearnAndTrain() {
         </MeshBackground>
 
         {/* ══════════ SECTION 5.5: 10-POINT SECURITY SCANNING SUITE ══════════ */}
-        <section id="scan-suite" className="py-16 md:py-24 relative overflow-hidden">
+        <section id="scan-suite" className="py-10 md:py-16 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
           <div className="container mx-auto relative z-10">
-            <div className="head-rhythm text-center mb-12">
-              <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+            <div className="head-rhythm text-center mb-7">
+              <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm border border-primary/15 bg-primary/5">
                 <Sparkles className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">Hands-On Tools</span>
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
+              <h2 className="text-3xl md:text-2xl lg:text-3xl font-black text-foreground mb-4">
                 Hands-on Training with Our{" "}
                 <span className="text-primary">10-Point Scanning Suite</span>
               </h2>
@@ -1072,7 +1072,7 @@ function LearnAndTrain() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3 max-w-6xl mx-auto mb-10">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-3 max-w-6xl mx-auto mb-6">
               {[
                 { icon: Mail, title: "Email Scanner", desc: "Detect phishing attempts before they reach your inbox" },
                 { icon: ExternalLink, title: "Link Checker", desc: "Verify any link is safe before clicking" },
@@ -1089,7 +1089,7 @@ function LearnAndTrain() {
                   key={title}
                   className="flex flex-col items-center text-center p-4 rounded-2xl bg-muted/30 border border-border hover:border-orange-500/40 hover:bg-orange-500/5 transition-all duration-300 group"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-3 group-hover:bg-orange-500/20 transition-colors duration-300">
+                  <div className="w-6 h-6 rounded-xl bg-primary/10 flex items-center justify-center mb-3 group-hover:bg-orange-500/20 transition-colors duration-300">
                     <Icon className="w-5 h-5 text-primary" />
                   </div>
                   <h3 className="text-xs font-bold text-foreground mb-1 leading-tight">{title}</h3>
@@ -1101,7 +1101,7 @@ function LearnAndTrain() {
             <div className="text-center">
               <Link
                 to="/training/ai-analysis"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-sm transition-colors duration-200 shadow-lg"
+                className="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-sm transition-colors duration-200 shadow-lg"
               >
                 Try Our AI Scanner <ArrowRight className="w-4 h-4" />
               </Link>
@@ -1110,14 +1110,14 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 6: AI PROFESSIONAL TRAINING ══════════ */}
-        <section id="ai-pro-training" className="py-10 sm:py-16 md:py-20 bg-muted/20">
+        <section id="ai-pro-training" className="py-6 sm:py-10 md:py-12 bg-muted/20">
           <div className="container mx-auto">
-            <div className="head-rhythm text-center mb-14">
-              <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+            <div className="head-rhythm text-center mb-9">
+              <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm border border-primary/15 bg-primary/5">
                 <Brain className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">For Professionals & Entrepreneurs</span>
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
+              <h2 className="text-3xl md:text-2xl lg:text-3xl font-black text-foreground mb-4">
                 AI Professional <span className="text-primary">Training</span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-4xl mx-auto mb-2">
@@ -1129,14 +1129,14 @@ function LearnAndTrain() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1400px] mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-[1400px] mx-auto">
               {aiProPlans.map((plan, index) => (
                 <PremiumTrainingCard key={index} plan={plan} index={index} onBook={handleBookTraining} />
               ))}
             </div>
 
-            <div className="text-center mt-10">
-              <div className="inline-flex items-center gap-3 bg-card border border-border/60 rounded-full px-6 py-3 shadow-sm">
+            <div className="text-center mt-6">
+              <div className="inline-flex items-center gap-3 bg-card border border-border/60 rounded-full px-4 py-3 shadow-sm">
                 <Lock className="w-4 h-4 text-primary" />
                 <p className="text-sm text-muted-foreground">
                   Secure payment required · 10% veteran discount available
@@ -1162,16 +1162,16 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 7: SECURE YOUR FAMILY ══════════ */}
-        <section className="py-16 md:py-24 relative overflow-hidden">
+        <section className="py-10 md:py-16 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background dot-grid-bg" />
-          <div className="absolute bottom-20 right-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-12 right-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
           <div className="container mx-auto relative z-10">
-            <div className="head-rhythm text-center mb-14">
-              <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+            <div className="head-rhythm text-center mb-9">
+              <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm border border-primary/15 bg-primary/5">
                 <Heart className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">Family Protection</span>
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
+              <h2 className="text-3xl md:text-2xl lg:text-3xl font-black text-foreground mb-4">
                 Secure Your <span className="text-primary">Family</span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -1179,11 +1179,11 @@ function LearnAndTrain() {
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto mb-14">
-              <div className="bg-card border-2 border-destructive/20 rounded-2xl p-6 sm:p-8 shadow-sm h-full">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-destructive/10 flex items-center justify-center">
-                    <AlertTriangle className="w-6 h-6 text-destructive" />
+            <div className="grid lg:grid-cols-2 gap-5 max-w-6xl mx-auto mb-9">
+              <div className="bg-card border-2 border-destructive/20 rounded-2xl p-4 sm:p-5 shadow-sm h-full">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-7 h-7 rounded-xl bg-destructive/10 flex items-center justify-center">
+                    <AlertTriangle className="w-4 h-4 text-destructive" />
                   </div>
                   <h3 className="text-xl font-black text-destructive">Without Protection</h3>
                 </div>
@@ -1195,7 +1195,7 @@ function LearnAndTrain() {
                     "Personal documents and identity could be stolen",
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start gap-3 text-sm">
-                      <span className="w-6 h-6 rounded-full bg-destructive/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="w-4 h-4 rounded-full bg-destructive/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                         <span className="text-destructive text-xs font-bold">✗</span>
                       </span>
                       <span className="text-muted-foreground">{item}</span>
@@ -1203,16 +1203,16 @@ function LearnAndTrain() {
                   ))}
                 </ul>
                 {/* Danger stat */}
-                <div className="mt-6 p-4 bg-destructive/5 rounded-xl border border-destructive/10 text-center">
+                <div className="mt-4 p-4 bg-destructive/5 rounded-xl border border-destructive/10 text-center">
                   <p className="text-2xl font-black text-destructive">$28.4B</p>
                   <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">Lost to scams in 2024 (FTC)</p>
                 </div>
               </div>
 
-              <div className="bg-card border-2 border-primary/20 rounded-2xl p-6 sm:p-8 shadow-sm h-full">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                    <Shield className="w-6 h-6 text-primary" />
+              <div className="bg-card border-2 border-primary/20 rounded-2xl p-4 sm:p-5 shadow-sm h-full">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-7 h-7 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Shield className="w-4 h-4 text-primary" />
                   </div>
                   <h3 className="text-xl font-black text-primary">With InVision Protection</h3>
                 </div>
@@ -1224,7 +1224,7 @@ function LearnAndTrain() {
                     "Secure vault for important family documents",
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start gap-3 text-sm">
-                      <span className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="w-4 h-4 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                         <CheckCircle className="w-3.5 h-3.5 text-primary" />
                       </span>
                       <span className="text-muted-foreground">{item}</span>
@@ -1232,7 +1232,7 @@ function LearnAndTrain() {
                   ))}
                 </ul>
                 {/* Protection stat */}
-                <div className="mt-6 p-4 bg-primary/5 rounded-xl border border-primary/10 text-center">
+                <div className="mt-4 p-4 bg-primary/5 rounded-xl border border-primary/10 text-center">
                   <p className="text-2xl font-black text-primary">$1.2M+</p>
                   <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">Saved for our families</p>
                 </div>
@@ -1240,13 +1240,13 @@ function LearnAndTrain() {
             </div>
 
             {/* Family Safety Vault */}
-            <div className="max-w-4xl mx-auto bg-card border border-border/60 rounded-2xl p-5 sm:p-8 md:p-10 shadow-sm">
+            <div className="max-w-4xl mx-auto bg-card border border-border/60 rounded-2xl p-5 sm:p-5 md:p-6 shadow-sm">
               <div className="text-center">
-                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
-                  <Lock className="w-8 h-8 text-primary" />
+                <div className="w-10 h-10 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
+                  <Lock className="w-5 h-5 text-primary" />
                 </div>
                 <h3 className="text-2xl font-black text-foreground mb-3">Family Safety Vault</h3>
-                <p className="text-muted-foreground mb-6">Included with Family & Premium Plans</p>
+                <p className="text-muted-foreground mb-4">Included with Family & Premium Plans</p>
                 <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-3 max-w-2xl mx-auto">
                   {[
                     { icon: "🔑", feature: "Family safe words" },
@@ -1268,14 +1268,14 @@ function LearnAndTrain() {
         </section>
 
         {/* ══════════ SECTION 8: SCAMS WE'VE CAUGHT ══════════ */}
-        <section className="py-10 sm:py-16 md:py-20 bg-muted/20">
+        <section className="py-6 sm:py-10 md:py-12 bg-muted/20">
           <div className="container mx-auto">
-            <div className="head-rhythm text-center mb-14">
-              <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-6 shadow-sm border border-primary/15 bg-primary/5">
+            <div className="head-rhythm text-center mb-9">
+              <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm border border-primary/15 bg-primary/5">
                 <Award className="w-3.5 h-3.5 text-primary" />
                 <span className="text-primary">Success Stories</span>
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
+              <h2 className="text-3xl md:text-2xl lg:text-3xl font-black text-foreground mb-4">
                 Scams We've <span className="text-primary">Caught</span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -1283,27 +1283,27 @@ function LearnAndTrain() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
               {scamExamples.map((example, index) => (
                 <ScamExampleCard key={index} example={example} index={index} />
               ))}
             </div>
 
             {/* Total saved banner */}
-            <div className="mt-10 bg-card border border-primary/20 rounded-2xl p-6 max-w-3xl mx-auto text-center">
+            <div className="mt-6 bg-card border border-primary/20 rounded-2xl p-4 max-w-3xl mx-auto text-center">
               <p className="text-sm uppercase tracking-widest text-muted-foreground font-bold mb-2">Total Saved Across All Members</p>
-              <p className="text-4xl sm:text-5xl font-black text-primary">$1,200,000+</p>
+              <p className="text-2xl sm:text-3xl font-black text-primary">$1,200,000+</p>
               <p className="text-sm text-muted-foreground mt-2">and counting — since our founding</p>
             </div>
 
             {isAdmin && (
-              <div className="mt-12">
-                <h3 className="text-xl font-black text-center text-foreground mb-6">Video Testimonials</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              <div className="mt-7">
+                <h3 className="text-xl font-black text-center text-foreground mb-4">Video Testimonials</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
                   {[1, 2, 3].map((i) => (
-                    <div key={i} className="p-6 text-center border-2 border-dashed border-primary/30 hover:border-primary/50 transition-all rounded-2xl bg-card">
+                    <div key={i} className="p-4 text-center border-2 border-dashed border-primary/30 hover:border-primary/50 transition-all rounded-2xl bg-card">
                       <div className="aspect-video bg-muted/30 rounded-xl mb-4 flex flex-col items-center justify-center gap-3">
-                        <Video className="w-12 h-12 text-primary/50" />
+                        <Video className="w-7 h-7 text-primary/50" />
                         <p className="text-sm font-semibold text-muted-foreground">Upload Success Stories</p>
                       </div>
                       <Button variant="default" size="sm" className="w-full rounded-full">
@@ -1320,20 +1320,20 @@ function LearnAndTrain() {
 
         {/* Training Success Stories */}
         {trainingTestimonials.length > 0 && (
-          <section className="py-10 sm:py-16 md:py-20 bg-background">
+          <section className="py-6 sm:py-10 md:py-12 bg-background">
             <div className="container mx-auto">
-              <div className="head-rhythm text-center mb-14">
+              <div className="head-rhythm text-center mb-9">
                 <span className="inline-block text-xs uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
                   Testimonials
                 </span>
-                <h2 className="text-3xl md:text-4xl font-black text-foreground mb-3">
+                <h2 className="text-3xl md:text-2xl font-black text-foreground mb-3">
                   Workshop <span className="text-primary">Success Stories</span>
                 </h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto lede">
                   Hear from families who have completed our workshops
                 </p>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-6xl mx-auto">
                 {trainingTestimonials.map((testimonial) => {
                   const videoMedia = testimonial.testimonial_media?.find(
                     (m) => m.media_type === "video",
@@ -1363,17 +1363,17 @@ function LearnAndTrain() {
         )}
 
         {/* ══════════ FINAL CTA ══════════ */}
-        <section className="py-16 sm:py-20 md:py-24 relative overflow-hidden">
+        <section className="py-10 sm:py-12 md:py-16 relative overflow-hidden">
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${seniorCouple})` }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/60 to-black/70" />
           <div className="container mx-auto relative z-10 text-center">
-            <h2 className="text-3xl md:text-5xl font-black text-white mb-5">
+            <h2 className="text-3xl md:text-3xl font-black text-white mb-5">
               Sleep Better Tonight
             </h2>
-            <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg text-white/90 mb-5 max-w-2xl mx-auto">
               Join 500+ families who trust InVision Network for their digital safety
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 flex-wrap justify-center items-center">
@@ -1382,7 +1382,7 @@ function LearnAndTrain() {
                   document.getElementById("training")?.scrollIntoView({ behavior: "smooth" })
                 }
                 size="lg"
-                className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-5 sm:px-8 py-2.5 sm:py-4 text-sm sm:text-base font-semibold max-w-[260px] w-full sm:max-w-none sm:w-auto"
+                className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-5 sm:px-5 py-2.5 sm:py-4 text-sm sm:text-base font-semibold max-w-[260px] w-full sm:max-w-none sm:w-auto"
               >
                 Get Started
                 <ArrowRight className="w-4 h-4 ml-1.5" />
@@ -1391,7 +1391,7 @@ function LearnAndTrain() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="rounded-full bg-white/10 backdrop-blur-md text-white border-white/30 hover:bg-white/20 px-5 sm:px-8 py-2.5 sm:py-4 text-sm sm:text-base font-semibold max-w-[260px] w-full sm:max-w-none sm:w-auto"
+                className="rounded-full bg-white/10 backdrop-blur-md text-white border-white/30 hover:bg-white/20 px-5 sm:px-5 py-2.5 sm:py-4 text-sm sm:text-base font-semibold max-w-[260px] w-full sm:max-w-none sm:w-auto"
               >
                 <Link to="/contact">
                   <Headphones className="w-4 h-4 mr-1.5" />

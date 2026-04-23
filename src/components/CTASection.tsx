@@ -50,7 +50,7 @@ const CTASection = ({
     return (
       <section
         className={cn(
-          "py-20 md:py-28 lg:py-36 relative overflow-hidden",
+          "py-12 md:py-18 lg:py-36 relative overflow-hidden",
           className,
         )}
         role="region"
@@ -67,7 +67,7 @@ const CTASection = ({
         <div className="container mx-auto text-center relative z-10">
           <h2
             className={cn(
-              "mb-6 text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold drop-shadow-lg",
+              "mb-4 text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-bold drop-shadow-lg",
               textClass,
             )}
           >
@@ -76,7 +76,7 @@ const CTASection = ({
           {description && (
             <p
               className={cn(
-                "text-xl md:text-2xl lg:text-3xl mb-10 max-w-3xl mx-auto leading-relaxed font-medium",
+                "text-xl md:text-2xl lg:text-3xl mb-6 max-w-3xl mx-auto leading-relaxed font-medium",
                 textClass,
               )}
             >
@@ -94,7 +94,7 @@ const CTASection = ({
   return (
     <section
       className={cn(
-        "py-16 md:py-20 lg:py-24 rounded-3xl mx-4 my-8",
+        "py-10 md:py-12 lg:py-16 rounded-3xl mx-4 my-5",
         bgClass,
         className,
       )}
@@ -104,7 +104,7 @@ const CTASection = ({
       <div className="container mx-auto text-center">
         <h2
           className={cn(
-            "mb-6 text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold",
+            "mb-4 text-3xl md:text-2xl lg:text-3xl xl:text-4xl font-bold",
             textClass,
           )}
         >
@@ -113,7 +113,7 @@ const CTASection = ({
         {description && (
           <p
             className={cn(
-              "text-xl md:text-2xl lg:text-3xl mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed font-medium",
+              "text-xl md:text-2xl lg:text-3xl mb-5 md:mb-6 max-w-3xl mx-auto leading-relaxed font-medium",
               textClass,
             )}
           >

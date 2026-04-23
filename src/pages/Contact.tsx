@@ -195,7 +195,7 @@ function Contact() {
           subheadline=""
           darkOverlay
         >
-          <div className="text-left mb-8">
+          <div className="text-left mb-5">
             <h1 className="font-extrabold text-white mb-4 leading-[1.05] tracking-tight text-[clamp(1.75rem,3.5vw,3rem)]">
               Contact Us
             </h1>
@@ -214,12 +214,12 @@ function Contact() {
       </div>
 
       <MeshBackground variant="vibrant" withOrbs>
-      <div className="py-16 relative overflow-hidden">
+      <div className="py-10 relative overflow-hidden">
         <div className="container mx-auto relative z-10">
           {/* Contact Methods Grid */}
-          <div className="head-rhythm text-center mb-10">
+          <div className="head-rhythm text-center mb-6">
             <span className="frosted-pill mb-4">Get in Touch</span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
+            <h2 className="text-3xl md:text-2xl lg:text-3xl font-black text-foreground mb-4">
               How Can We <span className="text-primary">Help?</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -227,14 +227,14 @@ function Contact() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-7">
             {contactMethods.map((method, index) => {
               const IconComponent = method.icon;
               return (
-                <div key={index} className="glow-card shine-hover p-6 h-full relative overflow-hidden">
+                <div key={index} className="glow-card shine-hover p-4 h-full relative overflow-hidden">
                   <div className="relative z-10">
-                  <div className="icon-glow-ring w-14 h-14 rounded-2xl bg-gradient-to-br from-[hsl(var(--primary)/0.1)] to-[hsl(var(--accent)/0.08)] flex items-center justify-center mb-4">
-                    <IconComponent className="w-7 h-7 text-[hsl(var(--accent))]" />
+                  <div className="icon-glow-ring w-9 h-9 rounded-2xl bg-gradient-to-br from-[hsl(var(--primary)/0.1)] to-[hsl(var(--accent)/0.08)] flex items-center justify-center mb-4">
+                    <IconComponent className="w-4 h-4 text-[hsl(var(--accent))]" />
                   </div>
                   <h3 className="text-lg font-bold text-foreground mb-2">{method.title}</h3>
                   <p className="font-semibold text-foreground mb-1 text-sm">
@@ -265,7 +265,7 @@ function Contact() {
           </div>
 
           {/* Main Contact Form Section — premium redesign */}
-          <div id="contact-form" className="grid lg:grid-cols-5 gap-8 max-w-7xl mx-auto">
+          <div id="contact-form" className="grid lg:grid-cols-5 gap-5 max-w-7xl mx-auto">
             {/*
               Contact form — upgraded to premium business treatment:
                 • Warm orange glow ring behind the card
@@ -286,8 +286,8 @@ function Contact() {
                 {/* Crisp warm orange accent strip at top */}
                 <div className="h-1 bg-gradient-to-r from-transparent via-[#d96c4a] to-transparent" />
 
-                <div className="p-8 md:p-10">
-                  <div className="flex items-start justify-between gap-4 mb-7">
+                <div className="p-5 md:p-6">
+                  <div className="flex items-start justify-between gap-4 mb-4">
                     <div>
                       <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 mb-3">
                         <MessageCircle className="w-3.5 h-3.5 text-[#d96c4a]" />
@@ -312,9 +312,9 @@ function Contact() {
                   </div>
 
                   {isSubmitted ? (
-                    <div className="text-center py-16">
-                      <div className="w-20 h-20 bg-gradient-to-br from-success/20 to-success/5 rounded-full flex items-center justify-center mx-auto mb-6 animate-scale-in">
-                        <CheckCircle className="w-10 h-10 text-success" />
+                    <div className="text-center py-10">
+                      <div className="w-12 h-12 bg-gradient-to-br from-success/20 to-success/5 rounded-full flex items-center justify-center mx-auto mb-4 animate-scale-in">
+                        <CheckCircle className="w-6 h-6 text-success" />
                       </div>
                       <h3 className="text-2xl font-bold mb-3">
                         Message Sent Successfully!
@@ -325,7 +325,7 @@ function Contact() {
                     </div>
                   ) : (
                     <Form {...form}>
-                      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
+                      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
                         {/* Full Name */}
                         <FormField
                           control={form.control}
@@ -340,7 +340,7 @@ function Contact() {
                                   {...field}
                                   placeholder="Enter your full name"
                                   autoComplete="name"
-                                  className="h-12 bg-slate-50/70 border-slate-200/90 rounded-xl text-slate-900 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-[#d96c4a]/60 focus:ring-4 focus:ring-[#d96c4a]/10 transition-all duration-200"
+                                  className="h-7 bg-slate-50/70 border-slate-200/90 rounded-xl text-slate-900 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-[#d96c4a]/60 focus:ring-4 focus:ring-[#d96c4a]/10 transition-all duration-200"
                                 />
                               </FormControl>
                               <FormMessage />
@@ -364,7 +364,7 @@ function Contact() {
                                     type="email"
                                     placeholder="your@email.com"
                                     autoComplete="email"
-                                    className="h-12 bg-slate-50/70 border-slate-200/90 rounded-xl text-slate-900 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-[#d96c4a]/60 focus:ring-4 focus:ring-[#d96c4a]/10 transition-all duration-200"
+                                    className="h-7 bg-slate-50/70 border-slate-200/90 rounded-xl text-slate-900 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-[#d96c4a]/60 focus:ring-4 focus:ring-[#d96c4a]/10 transition-all duration-200"
                                   />
                                 </FormControl>
                                 <FormMessage />
@@ -388,7 +388,7 @@ function Contact() {
                                     type="tel"
                                     placeholder="(937) 000-0000"
                                     autoComplete="tel"
-                                    className="h-12 bg-slate-50/70 border-slate-200/90 rounded-xl text-slate-900 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-[#d96c4a]/60 focus:ring-4 focus:ring-[#d96c4a]/10 transition-all duration-200"
+                                    className="h-7 bg-slate-50/70 border-slate-200/90 rounded-xl text-slate-900 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-[#d96c4a]/60 focus:ring-4 focus:ring-[#d96c4a]/10 transition-all duration-200"
                                   />
                                 </FormControl>
                                 <FormMessage />
@@ -411,7 +411,7 @@ function Contact() {
                                 onValueChange={field.onChange}
                               >
                                 <FormControl>
-                                  <SelectTrigger className="h-12 bg-slate-50/70 border-slate-200/90 rounded-xl text-slate-900 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-[#d96c4a]/60 focus:ring-4 focus:ring-[#d96c4a]/10 transition-all duration-200">
+                                  <SelectTrigger className="h-7 bg-slate-50/70 border-slate-200/90 rounded-xl text-slate-900 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-[#d96c4a]/60 focus:ring-4 focus:ring-[#d96c4a]/10 transition-all duration-200">
                                     <SelectValue placeholder="What can we help you with?" />
                                   </SelectTrigger>
                                 </FormControl>
@@ -494,7 +494,7 @@ function Contact() {
                                 onValueChange={field.onChange}
                               >
                                 <FormControl>
-                                  <SelectTrigger className="h-12 bg-slate-50/70 border-slate-200/90 rounded-xl text-slate-900 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-[#d96c4a]/60 focus:ring-4 focus:ring-[#d96c4a]/10 transition-all duration-200">
+                                  <SelectTrigger className="h-7 bg-slate-50/70 border-slate-200/90 rounded-xl text-slate-900 placeholder:text-slate-400 hover:border-slate-300 focus:bg-white focus:border-[#d96c4a]/60 focus:ring-4 focus:ring-[#d96c4a]/10 transition-all duration-200">
                                     <SelectValue placeholder="Select an option" />
                                   </SelectTrigger>
                                 </FormControl>
@@ -574,7 +574,7 @@ function Contact() {
                         <Button
                           type="submit"
                           disabled={isSubmitting}
-                          className="w-full h-11 sm:h-14 text-sm sm:text-[15px] font-semibold rounded-xl text-white bg-gradient-to-b from-[#e07a55] to-[#d05f3a] border border-[#b8552f] shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_8px_20px_-6px_rgba(217,108,74,0.5),0_16px_32px_-12px_rgba(217,108,74,0.35)] hover:from-[#e88560] hover:to-[#d96847] hover:-translate-y-[1px] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.25)_inset,0_12px_28px_-6px_rgba(217,108,74,0.6),0_20px_40px_-12px_rgba(217,108,74,0.4)] active:translate-y-[0.5px] transition-all duration-200"
+                          className="w-full h-7 sm:h-9 text-sm sm:text-[15px] font-semibold rounded-xl text-white bg-gradient-to-b from-[#e07a55] to-[#d05f3a] border border-[#b8552f] shadow-[0_1px_0_0_rgba(255,255,255,0.22)_inset,0_8px_20px_-6px_rgba(217,108,74,0.5),0_16px_32px_-12px_rgba(217,108,74,0.35)] hover:from-[#e88560] hover:to-[#d96847] hover:-translate-y-[1px] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.25)_inset,0_12px_28px_-6px_rgba(217,108,74,0.6),0_20px_40px_-12px_rgba(217,108,74,0.4)] active:translate-y-[0.5px] transition-all duration-200"
                         >
                           {isSubmitting ? (
                             <>
@@ -603,13 +603,13 @@ function Contact() {
             </div>
 
             {/* Contact Info Sidebar - 40% with Premium Styling */}
-            <div className="lg:col-span-2 space-y-6">
+            <div className="lg:col-span-2 space-y-4">
               {/* Response Promise with Premium Card */}
               <div className="relative bg-card/90 backdrop-blur-md rounded-2xl border border-border/30 shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-500">
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-success via-accent to-success" />
-                <div className="p-6">
+                <div className="p-4">
                   <h3 className="text-lg font-bold flex items-center gap-2 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-success/20 to-success/5 flex items-center justify-center">
+                    <div className="w-6 h-6 rounded-xl bg-gradient-to-br from-success/20 to-success/5 flex items-center justify-center">
                       <CheckCircle className="w-5 h-5 text-success" />
                     </div>
                     Our Response Promise
@@ -643,9 +643,9 @@ function Contact() {
               */}
               <div className="relative bg-card/90 backdrop-blur-md rounded-2xl border border-border/30 shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-500">
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary" />
-                <div className="p-6">
+                <div className="p-4">
                   <h3 className="text-lg font-bold flex items-center gap-2 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                    <div className="w-6 h-6 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
                       <MapPin className="w-5 h-5 text-primary" />
                     </div>
                     Service Area
@@ -679,12 +679,12 @@ function Contact() {
       </section>
 
       {/* Complimentary Security Scan Callout */}
-      <section className="py-12 bg-muted/20">
+      <section className="py-7 bg-muted/20">
         <div className="container mx-auto max-w-4xl">
-          <div className="rounded-2xl border border-border/60 bg-card p-6 sm:p-8 shadow-sm">
-            <div className="flex items-start gap-4 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <Shield className="w-6 h-6 text-primary" />
+          <div className="rounded-2xl border border-border/60 bg-card p-4 sm:p-5 shadow-sm">
+            <div className="flex items-start gap-4 mb-4">
+              <div className="w-7 h-7 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <Shield className="w-4 h-4 text-primary" />
               </div>
               <div>
                 <h2 className="text-xl font-black text-foreground mb-2">
@@ -726,7 +726,7 @@ function Contact() {
       </section>
 
       {/* Internal links — related pages */}
-      <section className="py-8 section-warm-alt">
+      <section className="py-5 section-warm-alt">
         <div className="container mx-auto">
           <p className="text-sm text-muted-foreground text-center max-w-2xl mx-auto">
             Not sure where to start?{" "}

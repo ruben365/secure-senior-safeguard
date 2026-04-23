@@ -62,7 +62,7 @@ export default function ArticlePreview() {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Preview Mode Banner */}
-      <div className="bg-yellow-100 border-b-2 border-yellow-300 px-6 py-3 sticky top-0 z-50">
+      <div className="bg-yellow-100 border-b-2 border-yellow-300 px-4 py-3 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
             <span className="font-semibold text-yellow-900">Preview Mode</span>
@@ -109,7 +109,7 @@ export default function ArticlePreview() {
       </div>
 
       {/* Preview Content */}
-      <div className="py-8 flex justify-center">
+      <div className="py-5 flex justify-center">
         <div
           className={cn(
             "bg-white shadow-lg transition-all duration-300",
@@ -118,18 +118,18 @@ export default function ArticlePreview() {
           )}
           style={{ width: getViewportWidth() }}
         >
-          <div className="p-8 md:p-12 lg:p-16">
+          <div className="p-5 md:p-7 lg:p-10">
             {/* Featured Image */}
             {articleData.featuredImage && (
               <img
                 src={articleData.featuredImage}
                 alt={articleData.title}
-                className="w-full h-64 md:h-96 object-cover rounded-lg mb-8"
+                className="w-full h-64 md:h-96 object-cover rounded-lg mb-5"
               />
             )}
 
             {/* Article Header */}
-            <header className="mb-8">
+            <header className="mb-5">
               {/* Category badges */}
               {articleData.categories && articleData.categories.length > 0 && (
                 <div className="flex gap-2 mb-4">
@@ -145,7 +145,7 @@ export default function ArticlePreview() {
               )}
 
               {/* Title */}
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              <h1 className="text-2xl md:text-3xl font-bold mb-4">
                 {articleData.title}
               </h1>
 
@@ -161,7 +161,7 @@ export default function ArticlePreview() {
 
             {/* Excerpt */}
             {articleData.excerpt && (
-              <div className="text-lg text-muted-foreground mb-8 italic border-l-4 border-primary pl-4">
+              <div className="text-lg text-muted-foreground mb-5 italic border-l-4 border-primary pl-4">
                 {articleData.excerpt}
               </div>
             )}
@@ -174,7 +174,7 @@ export default function ArticlePreview() {
 
             {/* Tags */}
             {articleData.tags && articleData.tags.length > 0 && (
-              <div className="mt-12 pt-8 border-t">
+              <div className="mt-7 pt-5 border-t">
                 <h3 className="text-sm font-semibold text-muted-foreground mb-3">
                   TAGS
                 </h3>

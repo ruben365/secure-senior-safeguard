@@ -93,16 +93,16 @@ export function TicketDetail({ ticketId, onBack, isAdmin }: TicketDetailProps) {
     },
   });
 
-  if (!ticket) return <div className="text-center py-12 text-muted-foreground">Loading...</div>;
+  if (!ticket) return <div className="text-center py-7 text-muted-foreground">Loading...</div>;
 
   return (
-    <div className="max-w-3xl mx-auto py-8 px-4">
+    <div className="max-w-3xl mx-auto py-5 px-4">
       <Button variant="ghost" onClick={onBack} className="mb-4">
         <ArrowLeft className="h-4 w-4 mr-2" /> Back to Tickets
       </Button>
 
-      <Card className="mb-6">
-        <CardContent className="pt-6">
+      <Card className="mb-4">
+        <CardContent className="pt-4">
           <div className="flex items-start justify-between mb-4">
             <div>
               <h2 className="text-xl font-bold">{ticket.subject}</h2>
@@ -133,7 +133,7 @@ export function TicketDetail({ ticketId, onBack, isAdmin }: TicketDetailProps) {
         </CardContent>
       </Card>
 
-      <div className="space-y-3 mb-6">
+      <div className="space-y-3 mb-4">
         {replies?.map((r) => (
           <div key={r.id} className={`flex ${r.is_staff_reply ? "justify-start" : "justify-end"}`}>
             <div className={`max-w-[80%] rounded-lg p-3 ${r.is_staff_reply ? "bg-muted" : "bg-primary text-primary-foreground"}`}>

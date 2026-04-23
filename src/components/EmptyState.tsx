@@ -24,9 +24,9 @@ export function EmptyState({
   className,
 }: EmptyStateProps) {
   return (
-    <Card className={cn("py-16", className)}>
+    <Card className={cn("py-10", className)}>
       <div className="text-center px-4">
-        {emoji && <div className="text-6xl mb-4 animate-bounce">{emoji}</div>}
+        {emoji && <div className="text-4xl mb-4 animate-bounce">{emoji}</div>}
         {icon && (
           <div className="flex justify-center mb-4 text-muted-foreground">
             {icon}
@@ -34,7 +34,7 @@ export function EmptyState({
         )}
         <h3 className="text-xl font-semibold mb-2 text-foreground">{title}</h3>
         {description && (
-          <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+          <p className="text-muted-foreground mb-4 max-w-md mx-auto">
             {description}
           </p>
         )}
@@ -58,11 +58,11 @@ export function ErrorState({
   className,
 }: ErrorStateProps) {
   return (
-    <Card className={cn("py-16 border-destructive/50", className)}>
+    <Card className={cn("py-10 border-destructive/50", className)}>
       <div className="text-center px-4">
-        <div className="text-6xl mb-4">⚠️</div>
+        <div className="text-4xl mb-4">⚠️</div>
         <h3 className="text-xl font-semibold mb-2 text-destructive">{title}</h3>
-        <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+        <p className="text-muted-foreground mb-4 max-w-md mx-auto">
           {description}
         </p>
         {onRetry && (

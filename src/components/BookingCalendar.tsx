@@ -6,14 +6,14 @@ import { Button } from "@/components/ui/button";
 
 export default function BookingCalendar() {
   return (
-    <section className="py-12 px-4">
+    <section className="py-7 px-4">
       <div className="max-w-2xl mx-auto text-center">
         <div className="flex justify-center gap-3 mb-4">
-          <Calendar className="w-8 h-8 text-orange-500" />
-          <Clock className="w-8 h-8 text-orange-500" />
+          <Calendar className="w-5 h-5 text-orange-500" />
+          <Clock className="w-5 h-5 text-orange-500" />
         </div>
         <h2 className="text-2xl font-bold mb-3">Schedule a Free Call</h2>
-        <p className="text-muted-foreground mb-6">
+        <p className="text-muted-foreground mb-4">
           Book a free 15-minute assessment call — we'll review your situation and recommend the best protection plan.
         </p>
         <Button asChild size="lg">

@@ -64,7 +64,7 @@ export function AnimatedStatCard({
     <div ref={ref} className={cn("stat-card-pro", className)}>
       <div className="flex items-start justify-between mb-4">
         <div className="icon-glow-ring p-3 rounded-xl bg-gradient-to-br from-[hsl(var(--primary)/0.1)] to-[hsl(var(--accent)/0.08)]">
-          <Icon className="w-6 h-6 text-[hsl(var(--accent))]" />
+          <Icon className="w-4 h-4 text-[hsl(var(--accent))]" />
         </div>
       </div>
       <div className="stat-number mb-1">

@@ -121,7 +121,7 @@ export function AnnouncementBell() {
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="flex items-center justify-center w-9 h-9 rounded-full bg-black/20 backdrop-blur-[8px] border border-white/15 hover:border-white/30 text-white/70 hover:text-white transition-all relative"
+        className="flex items-center justify-center w-6 h-6 rounded-full bg-black/20 backdrop-blur-[8px] border border-white/15 hover:border-white/30 text-white/70 hover:text-white transition-all relative"
         aria-label={`Announcements${unreadCount > 0 ? `, ${unreadCount} new` : ""}`}
       >
         <Bell className="w-4 h-4" />
@@ -184,8 +184,8 @@ export function AnnouncementBell() {
             {/* List */}
             <div className="max-h-80 overflow-y-auto overscroll-contain">
               {announcements.length === 0 ? (
-                <div className="px-4 py-8 text-center">
-                  <Megaphone className="w-6 h-6 text-gray-600 mx-auto mb-2" />
+                <div className="px-4 py-5 text-center">
+                  <Megaphone className="w-4 h-4 text-gray-600 mx-auto mb-2" />
                   <p className="text-sm text-gray-500">No announcements yet</p>
                 </div>
               ) : (
