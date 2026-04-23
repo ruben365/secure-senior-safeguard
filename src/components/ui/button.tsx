@@ -44,10 +44,10 @@ const buttonVariants = cva(
           "active:translate-y-[1px]",
         ].join(" "),
         heroOutline: [
-          // Hero secondary — visible glass with clear white border
-          "bg-white/[0.12] backdrop-blur-sm text-white font-semibold",
-          "border border-white/[0.30]",
-          "hover:-translate-y-[1px] hover:bg-white/[0.20] hover:border-white/[0.50]",
+          // Hero secondary — glassmorphism pill
+          "bg-[rgba(255,255,255,0.10)] backdrop-blur-[12px] text-white font-semibold",
+          "border border-[rgba(255,255,255,0.15)]",
+          "hover:-translate-y-[1px] hover:bg-[rgba(255,255,255,0.18)] hover:border-[rgba(255,255,255,0.28)]",
           "active:translate-y-[0.5px] active:scale-[0.98]",
           "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[rgba(124,58,237,0.7)]",
           "[transition-duration:250ms] [transition-timing-function:cubic-bezier(0.4,0,0.2,1)]",
