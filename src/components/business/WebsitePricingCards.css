@@ -597,3 +597,776 @@
   .wsp-card--featured,
   .wsp-card--featured:hover { transform: none !important; }
 }
+
+/* ════════════════════════════════════════════
+   PACKAGE SELECTOR PILLS
+════════════════════════════════════════════ */
+
+.wsp-pkg-pills {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.wsp-pkg-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: hsl(var(--foreground) / 0.7);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+.wsp-pkg-pill:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.22);
+  color: hsl(var(--foreground));
+}
+.wsp-pkg-pill--active {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--wsp-a) 20%, transparent), color-mix(in srgb, var(--wsp-b) 12%, transparent));
+  border-color: color-mix(in srgb, var(--wsp-a) 55%, transparent);
+  color: hsl(var(--foreground));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--wsp-a) 22%, transparent),
+              0 2px 12px color-mix(in srgb, var(--wsp-a) 18%, transparent);
+}
+.wsp-pkg-pill-price {
+  font-size: 10px;
+  font-weight: 600;
+  opacity: 0.7;
+  margin-left: 2px;
+}
+
+/* ════════════════════════════════════════════
+   ADD-ON SECTION — HEADER
+════════════════════════════════════════════ */
+
+.wsp-addons-header {
+  text-align: center;
+  margin-bottom: 18px;
+}
+.wsp-addons-badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  background: linear-gradient(135deg, rgba(124, 111, 208, 0.22), rgba(195, 130, 184, 0.16));
+  border: 1px solid rgba(124, 111, 208, 0.3);
+  color: #c382b8;
+  margin-bottom: 8px;
+}
+.wsp-addons-sub {
+  font-size: 11.5px;
+  color: hsl(var(--muted-foreground));
+  margin: 0;
+}
+
+/* ════════════════════════════════════════════
+   ADD-ON CARDS (new design)
+════════════════════════════════════════════ */
+
+.wsp-addon-card {
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+.wsp-addon-card--checked {
+  background: rgba(124, 111, 208, 0.08);
+  border-color: rgba(124, 111, 208, 0.32);
+}
+
+.wsp-addon-card-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+  user-select: none;
+}
+.wsp-addon-card-top:hover { background: rgba(255, 255, 255, 0.03); }
+
+.wsp-addon-checkbox-wrap {
+  flex-shrink: 0;
+}
+.wsp-addon-checkbox {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #fff;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+.wsp-addon-checkbox--on {
+  background: linear-gradient(135deg, #7c6fd0, #c382b8);
+  border-color: transparent;
+}
+
+.wsp-addon-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.wsp-addon-info {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Qty controls ── */
+.wsp-addon-qty-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px 10px 40px;
+  border-top: 1px solid rgba(124, 111, 208, 0.18);
+  background: rgba(124, 111, 208, 0.06);
+}
+.wsp-addon-qty-label {
+  font-size: 10px;
+  color: hsl(var(--muted-foreground));
+  font-weight: 600;
+}
+.wsp-addon-qty-ctrl {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 7px;
+  overflow: hidden;
+}
+.wsp-qty-btn {
+  width: 26px;
+  height: 26px;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: hsl(var(--foreground) / 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+  line-height: 1;
+}
+.wsp-qty-btn:hover { background: rgba(255, 255, 255, 0.12); }
+.wsp-qty-val {
+  min-width: 28px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: hsl(var(--foreground));
+  padding: 0 2px;
+}
+.wsp-addon-qty-sub {
+  font-size: 10px;
+  font-weight: 700;
+  color: #c382b8;
+  margin-left: auto;
+}
+
+/* ════════════════════════════════════════════
+   SUMMARY BAR
+════════════════════════════════════════════ */
+
+.wsp-summary-bar {
+  margin-top: 16px;
+  border-radius: 14px;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, rgba(124, 111, 208, 0.14), rgba(195, 130, 184, 0.10));
+  border: 1px solid rgba(124, 111, 208, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.wsp-summary-bar-left {
+  flex: 1;
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.wsp-summary-bar-pkg {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.wsp-summary-bar-pkg-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+.wsp-summary-bar-pkg-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: hsl(var(--foreground));
+}
+.wsp-summary-bar-pkg-note {
+  font-size: 10px;
+  color: hsl(var(--muted-foreground));
+}
+.wsp-summary-bar-addons {
+  font-size: 10.5px;
+  color: #c382b8;
+  font-weight: 600;
+}
+.wsp-summary-bar-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.wsp-summary-bar-total-label {
+  font-size: 10px;
+  color: hsl(var(--muted-foreground));
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.wsp-summary-bar-total {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #7c6fd0, #c382b8);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+}
+.wsp-summary-bar-cta {
+  padding: 10px 22px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #7c6fd0, #c382b8);
+  border: none;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 3px 14px rgba(124, 111, 208, 0.38);
+}
+.wsp-summary-bar-cta:hover {
+  transform: scale(1.03);
+  box-shadow: 0 5px 20px rgba(124, 111, 208, 0.52);
+}
+
+/* ════════════════════════════════════════════
+   MODAL — BACKDROP + CONTAINER
+════════════════════════════════════════════ */
+
+.wsp-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.wsp-modal {
+  position: relative;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  width: 100%;
+  max-width: 780px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: hsl(var(--card));
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 24px 80px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  max-height: 90vh;
+}
+
+@media (max-width: 640px) {
+  .wsp-modal { grid-template-columns: 1fr; }
+}
+
+/* ── Left panel ── */
+.wsp-modal-left {
+  background: linear-gradient(160deg,
+    color-mix(in srgb, var(--wsp-a) 22%, hsl(var(--card))),
+    color-mix(in srgb, var(--wsp-b) 14%, hsl(var(--card))) 55%,
+    color-mix(in srgb, var(--wsp-c) 10%, hsl(var(--card)))
+  );
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  overflow-y: auto;
+}
+.wsp-modal-left--quote {
+  background: linear-gradient(160deg,
+    rgba(124, 111, 208, 0.22),
+    rgba(195, 130, 184, 0.14) 55%,
+    rgba(111, 179, 201, 0.10)
+  );
+}
+.wsp-modal-left-inner {
+  padding: 28px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 100%;
+}
+@media (max-width: 640px) {
+  .wsp-modal-left { display: none; }
+}
+
+/* ── Right panel ── */
+.wsp-modal-right {
+  position: relative;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+.wsp-modal-right-inner {
+  padding: 32px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ── Close button ── */
+.wsp-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: hsl(var(--foreground) / 0.7);
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+.wsp-modal-close:hover { background: rgba(255, 255, 255, 0.14); }
+
+/* ── Left panel content — checkout ── */
+.wsp-modal-pkg-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  background: color-mix(in srgb, var(--wsp-a) 20%, transparent);
+  border: 1px solid color-mix(in srgb, var(--wsp-a) 35%, transparent);
+  color: color-mix(in srgb, var(--wsp-a) 90%, white);
+  width: fit-content;
+}
+.wsp-modal-pkg-title {
+  font-size: 20px;
+  font-weight: 900;
+  color: hsl(var(--foreground));
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+.wsp-modal-pkg-delivery {
+  font-size: 11px;
+  color: hsl(var(--muted-foreground));
+  margin: 0;
+}
+.wsp-modal-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 4px 0;
+}
+.wsp-modal-line-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  gap: 8px;
+}
+.wsp-modal-line-item--addon {
+  font-size: 11px;
+  font-weight: 500;
+  color: hsl(var(--foreground) / 0.75);
+  padding-left: 8px;
+}
+.wsp-modal-no-addons {
+  font-size: 10.5px;
+  color: hsl(var(--muted-foreground));
+  font-style: italic;
+  margin: 0;
+}
+.wsp-modal-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 800;
+  color: hsl(var(--foreground));
+}
+.wsp-modal-total-price {
+  font-size: 22px;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--wsp-a), var(--wsp-b));
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.wsp-modal-trust-items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+.wsp-modal-trust-item {
+  font-size: 10.5px;
+  color: hsl(var(--muted-foreground));
+}
+
+/* ── Quote modal left hero ── */
+.wsp-quote-hero-icon {
+  font-size: 32px;
+  line-height: 1;
+}
+.wsp-quote-hero-title {
+  font-size: 18px;
+  font-weight: 900;
+  color: hsl(var(--foreground));
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+.wsp-quote-hero-desc {
+  font-size: 11.5px;
+  color: hsl(var(--muted-foreground));
+  margin: 0;
+  line-height: 1.5;
+}
+.wsp-quote-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.wsp-quote-stat {
+  text-align: center;
+  padding: 8px 6px;
+  border-radius: 10px;
+  background: rgba(124, 111, 208, 0.12);
+  border: 1px solid rgba(124, 111, 208, 0.2);
+}
+.wsp-quote-stat-value {
+  font-size: 13px;
+  font-weight: 900;
+  color: #c382b8;
+  letter-spacing: -0.02em;
+}
+.wsp-quote-stat-label {
+  font-size: 9px;
+  color: hsl(var(--muted-foreground));
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 1px;
+}
+.wsp-quote-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.wsp-quote-timeline-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  color: hsl(var(--foreground) / 0.8);
+  font-weight: 500;
+}
+.wsp-quote-timeline-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7c6fd0, #c382b8);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ════════════════════════════════════════════
+   CHECKOUT FORM — STEPS + FORM BODY
+════════════════════════════════════════════ */
+
+.wsp-modal-steps {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.wsp-modal-step {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: hsl(var(--muted-foreground));
+  transition: color 0.2s ease;
+}
+.wsp-modal-step span {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 800;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.wsp-modal-step--active {
+  color: hsl(var(--foreground));
+}
+.wsp-modal-step--active span {
+  background: linear-gradient(135deg, #7c6fd0, #c382b8);
+  border-color: transparent;
+  color: #fff;
+}
+.wsp-modal-step-line {
+  flex: 1;
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+.wsp-modal-form-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.wsp-modal-form-title {
+  font-size: 18px;
+  font-weight: 900;
+  color: hsl(var(--foreground));
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+.wsp-modal-form-sub {
+  font-size: 11.5px;
+  color: hsl(var(--muted-foreground));
+  margin: 0;
+}
+
+/* ── Order review box ── */
+.wsp-modal-order-review {
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+.wsp-modal-review-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 9px 14px;
+  font-size: 11.5px;
+  color: hsl(var(--foreground) / 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.wsp-modal-review-row:last-child { border-bottom: none; }
+.wsp-modal-review-row--total {
+  font-weight: 800;
+  font-size: 13px;
+  color: hsl(var(--foreground));
+  background: rgba(124, 111, 208, 0.08);
+}
+
+/* ── Button row (back + submit) ── */
+.wsp-modal-btn-row {
+  display: flex;
+  gap: 8px;
+}
+.wsp-modal-back-btn {
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
+  color: hsl(var(--foreground) / 0.7);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+.wsp-modal-back-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.26);
+}
+.wsp-modal-submit-btn {
+  flex: 1;
+  padding: 11px 20px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #7c6fd0, #c382b8);
+  border: none;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+  box-shadow: 0 3px 14px rgba(124, 111, 208, 0.38);
+}
+.wsp-modal-submit-btn:hover:not(:disabled) {
+  transform: scale(1.02);
+  box-shadow: 0 5px 20px rgba(124, 111, 208, 0.52);
+}
+.wsp-modal-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.wsp-modal-stripe-note {
+  font-size: 10px;
+  color: hsl(var(--muted-foreground));
+  text-align: center;
+  margin: 0;
+}
+
+/* ════════════════════════════════════════════
+   FORM CONTROLS (shared by both modals)
+════════════════════════════════════════════ */
+
+.wsp-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.wsp-form-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: hsl(var(--foreground) / 0.75);
+  letter-spacing: 0.02em;
+}
+.wsp-form-input {
+  width: 100%;
+  padding: 9px 13px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1.5px solid rgba(255, 255, 255, 0.10);
+  color: hsl(var(--foreground));
+  font-size: 12px;
+  outline: none;
+  transition: border-color 0.18s ease, background 0.18s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+.wsp-form-input::placeholder { color: hsl(var(--muted-foreground) / 0.5); }
+.wsp-form-input:focus {
+  border-color: rgba(124, 111, 208, 0.55);
+  background: rgba(124, 111, 208, 0.06);
+}
+.wsp-form-textarea {
+  resize: vertical;
+  min-height: 72px;
+}
+
+/* ════════════════════════════════════════════
+   RADIO CARDS (website type selector)
+════════════════════════════════════════════ */
+
+.wsp-radio-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.wsp-radio-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 11px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: border-color 0.18s ease, background 0.18s ease;
+  user-select: none;
+  outline: none;
+}
+.wsp-radio-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+.wsp-radio-card--selected {
+  background: rgba(124, 111, 208, 0.12);
+  border-color: rgba(124, 111, 208, 0.45);
+}
+.wsp-radio-card-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.wsp-radio-card-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: hsl(var(--foreground));
+  line-height: 1.2;
+}
+.wsp-radio-card-desc {
+  font-size: 9.5px;
+  color: hsl(var(--muted-foreground));
+  margin-top: 1px;
+}
+
+/* ════════════════════════════════════════════
+   BUDGET PILLS
+════════════════════════════════════════════ */
+
+.wsp-budget-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.wsp-budget-pill {
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  color: hsl(var(--foreground) / 0.7);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.wsp-budget-pill:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: hsl(var(--foreground));
+}
+.wsp-budget-pill--selected {
+  background: rgba(124, 111, 208, 0.18);
+  border-color: rgba(124, 111, 208, 0.5);
+  color: #c382b8;
+}
