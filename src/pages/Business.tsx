@@ -74,7 +74,7 @@ import { SEO } from "@/components/SEO";
 import { AnswerSummary } from "@/components/AnswerSummary";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 import { SectionDivider, MeshBackground } from "@/components/pro";
-import { WebsitePricingCards } from "@/components/business/WebsitePricingCards";
+import { WebsitePricingCards, WebsiteInsuranceCards } from "@/components/business/WebsitePricingCards";
 
 
 const platformSnapshotStats = [
@@ -928,62 +928,6 @@ function Business() {
             
 
             <WebsitePricingCards />
-
-            {/* Website Add-Ons */}
-            <AnimatedSection animation="fade-up" delay={100} className="max-w-5xl mx-auto">
-              <div className="head-rhythm text-center mb-5">
-                <span className="inline-flex items-center gap-2 px-4 py-1.5 glass-subtle rounded-full text-xs font-bold text-accent uppercase tracking-[0.18em] mb-4 border border-accent/15">
-                  <Sparkles className="w-3 h-3" />
-                  Enhance Your Project
-                </span>
-                <h3 className="text-2xl font-bold mb-2">Premium Add-Ons</h3>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                {[
-                { name: "Logo Design", price: "$500", note: "Starting price", color: "text-primary" },
-                { name: "Content Writing", price: "$150", note: "Per page", color: "text-accent" },
-                { name: "Business Email", price: "$200", note: "One-time setup", color: "text-primary" },
-                { name: "AI Chatbot", price: "$1,200", note: "Full integration", color: "text-primary", tag: "POPULAR" },
-                { name: "Domain & Hosting", price: "Included", note: "With any website build", color: "text-primary", tag: "BUNDLED" }].
-                map((addon, i) =>
-                <div
-                  key={i}
-                  className="hover-lift">
-                  
-                    <Card className="p-4 text-center border-border/50 hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.12)] transition-all duration-500 hover:border-primary/30 relative group overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] to-accent/[0.01] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-                      {addon.tag &&
-                    <span className="absolute top-2 right-2 px-2 py-0.5 bg-primary/10 text-primary text-[11px] font-bold rounded-full">
-                          {addon.tag}
-                        </span>
-                    }
-                      <h4 className="font-bold text-sm mb-1 relative z-10">{addon.name}</h4>
-                      <div className={`text-xl font-black ${addon.color} mb-0.5 relative z-10`}>
-                        {addon.price}
-                      </div>
-                      <div className="text-xs text-muted-foreground relative z-10">{addon.note}</div>
-                    </Card>
-                  </div>
-                )}
-              </div>
-              <div className="mt-5 text-center">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  onClick={() => {
-                    setSelectedInquiry({
-                      name: "Custom Website Package",
-                      price: 0,
-                      tier: "Custom Bundle",
-                      description: "We build a custom package with your chosen add-ons and services."
-                    });
-                    setInquiryDialogOpen(true);
-                  }}>
-                  
-                  Get Custom Quote <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </div>
-            </AnimatedSection>
           </div>
         </section>
 
@@ -1001,60 +945,10 @@ function Business() {
               subtitle="Security monitoring, backups, support, and performance optimization. Your site stays fast, safe, and online." />
             
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
-              {[
-              {
-                tag: "ESSENTIAL",
-                tagColor: "from-emerald-500 to-teal-500",
-                title: "Essential",
-                price: "$29",
-                note: "Basic protection",
-                features: ["SSL Management", "Weekly Backups", "Email Support", "Basic Monitoring"]
-              },
-              {
-                tag: "⭐ MOST POPULAR",
-                featured: true,
-                title: "Professional",
-                price: "$49",
-                note: "Full protection",
-                features: ["All Essential features", "24/7 Monitoring", "Daily Backups", "Priority Support", "Malware Scanning"]
-              },
-              {
-                tag: "👑 ENTERPRISE",
-                tagColor: "from-amber-500 to-orange-500",
-                title: "Enterprise",
-                price: "$99",
-                note: "Maximum protection",
-                features: ["All Professional features", "Real-Time Backups", "DDoS Protection", "24/7 Dedicated Support", "Global CDN"]
-              },
-              {
-                tag: "✨ CUSTOM",
-                tagColor: "from-primary via-accent to-primary",
-                title: "Customizable",
-                price: "$29-500",
-                note: "Build your own",
-                features: ["Choose your features", "Flexible pricing", "Custom support level", "Upgrade anytime"]
-              }].
-              map((plan, i) =>
-              <PricingCard
-                key={i}
-                tag={plan.tag}
-                tagColor={plan.tagColor}
-                featured={plan.featured}
-                title={plan.title}
-                price={plan.price}
-                priceSuffix="/mo"
-                priceNote={plan.note}
-                features={plan.features}
-                delay={i * 100}
-                buttonText={i === 3 ? "Build Your Plan" : "Subscribe Now"}
-                onButtonClick={() => {
-                  trackButtonClick(`Subscribe Now - Website Insurance ${plan.title}`, "Website Insurance");
-                  setWebsiteInsuranceOpen(true);
-                }} />
-
-              )}
-            </div>
+            <WebsiteInsuranceCards onSubscribe={() => {
+                trackButtonClick("Subscribe Now - Website Insurance", "Website Insurance");
+                setWebsiteInsuranceOpen(true);
+              }} />
 
             {/* Supporting photography — operations in action */}
             <div className="max-w-5xl mx-auto mt-5">

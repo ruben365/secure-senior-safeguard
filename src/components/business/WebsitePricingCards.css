@@ -1753,6 +1753,55 @@
 }
 
 /* ════════════════════════════════════════════
+   INSURANCE CARDS
+════════════════════════════════════════════ */
+
+.wsp-ins-root {
+  width: 100%;
+}
+
+.wsp-ins-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.wsp-ins-price {
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--wsp-a);
+  line-height: 1;
+}
+
+.wsp-ins-period {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #888;
+  margin-left: 2px;
+  align-self: flex-end;
+  padding-bottom: 3px;
+}
+
+.wsp-ins-features {
+  flex: 1;
+}
+
+@media (max-width: 860px) {
+  .wsp-ins-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .wsp-ins-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ════════════════════════════════════════════
    REDUCED MOTION
 ════════════════════════════════════════════ */
 

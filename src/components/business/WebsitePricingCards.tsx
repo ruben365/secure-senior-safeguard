@@ -778,6 +778,125 @@ const PremiumCard = ({
 };
 
 /* ═══════════════════════════════════════════
+   WEBSITE INSURANCE CARDS
+═══════════════════════════════════════════ */
+
+const INSURANCE_PLANS = [
+  {
+    id: "essential",
+    tier: "Essential",
+    badge: { icon: <GreenCheckIcon />, label: "BASIC COVER", anim: "none" as const },
+    title: "Essential",
+    sub: "Basic protection",
+    price: "$29",
+    period: "/mo",
+    features: ["SSL Management", "Weekly Backups", "Email Support", "Basic Monitoring"],
+    colorA: "#22c55e", colorB: "#4ade80", colorC: "#86efac",
+    featured: false,
+    btnText: "Subscribe Now",
+  },
+  {
+    id: "professional",
+    tier: "Popular",
+    badge: { icon: <StarIcon />, label: "MOST POPULAR", anim: "spin" as const },
+    title: "Professional",
+    sub: "Full protection",
+    price: "$49",
+    period: "/mo",
+    features: ["All Essential features", "24/7 Monitoring", "Daily Backups", "Priority Support", "Malware Scanning"],
+    colorA: "#7c6fd0", colorB: "#c382b8", colorC: "#6fb3c9",
+    featured: true,
+    btnText: "Subscribe Now",
+  },
+  {
+    id: "enterprise",
+    tier: "Enterprise",
+    badge: { icon: <ShieldIcon />, label: "MAXIMUM", anim: "wiggle" as const },
+    title: "Enterprise",
+    sub: "Maximum protection",
+    price: "$99",
+    period: "/mo",
+    features: ["All Professional features", "Real-Time Backups", "DDoS Protection", "24/7 Dedicated Support", "Global CDN"],
+    colorA: "#e08a4a", colorB: "#e8b070", colorC: "#d47a8e",
+    featured: false,
+    btnText: "Subscribe Now",
+  },
+  {
+    id: "custom",
+    tier: "Custom",
+    badge: { icon: <BoltIcon />, label: "CUSTOM", anim: "wiggle" as const },
+    title: "Customizable",
+    sub: "Build your own",
+    price: "$29–500",
+    period: "/mo",
+    features: ["Choose your features", "Flexible pricing", "Custom support level", "Upgrade anytime"],
+    colorA: "#6d5bff", colorB: "#a78bfa", colorC: "#818cf8",
+    featured: false,
+    btnText: "Build Your Plan",
+  },
+];
+
+export const WebsiteInsuranceCards = ({ onSubscribe }: { onSubscribe: () => void }) => (
+  <div className="wsp-ins-root">
+    <div className="wsp-ins-grid">
+      {INSURANCE_PLANS.map((plan, i) => {
+        const cssVars = {
+          "--wsp-a": plan.colorA,
+          "--wsp-b": plan.colorB,
+          "--wsp-c": plan.colorC,
+        } as React.CSSProperties;
+        return (
+          <div key={plan.id} className="wsp-col" style={{ animationDelay: `${0.1 + i * 0.1}s` }}>
+            <article className={`wsp-card${plan.featured ? " wsp-card--pro" : ""}`} style={cssVars}>
+              <span className="wsp-edge-sheen" aria-hidden="true" />
+              <span className="wsp-edge-ring" aria-hidden="true" />
+              <span className="wsp-edge-rim" aria-hidden="true" />
+
+              <div className="wsp-header-row">
+                <div className="wsp-tier-name">{plan.tier}</div>
+                <span className={`wsp-badge${plan.badge.anim !== "none" ? ` wsp-badge--${plan.badge.anim}` : ""}`}>
+                  {plan.badge.icon}
+                  {plan.badge.label}
+                </span>
+              </div>
+
+              <div className="wsp-tier-title">{plan.title}</div>
+              <div className="wsp-tier-sub">{plan.sub}</div>
+
+              <div className="wsp-price-holder">
+                <span className="wsp-ins-price">{plan.price}</span>
+                <span className="wsp-ins-period">{plan.period}</span>
+              </div>
+
+              <ul className="wsp-features wsp-ins-features">
+                {plan.features.map((f, fi) => (
+                  <li key={fi} className="wsp-feature">
+                    <span className="wsp-check"><CheckSmIcon /></span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="wsp-cta-wrap">
+                <button className="wsp-cta" type="button" onClick={onSubscribe}>
+                  <span>{plan.btnText}</span>
+                  <span className="wsp-cta-arrow"><ArrowRightIcon /></span>
+                </button>
+              </div>
+            </article>
+          </div>
+        );
+      })}
+    </div>
+
+    <div className="wsp-market-note" style={{ marginTop: 16 }}>
+      <span className="wsp-dot-ohio" />
+      All plans include onboarding · <b>Cancel anytime</b> · 30-day guarantee
+    </div>
+  </div>
+);
+
+/* ═══════════════════════════════════════════
    PUBLIC COMPONENT
 ═══════════════════════════════════════════ */
 
