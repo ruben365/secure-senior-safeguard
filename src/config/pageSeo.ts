@@ -4,9 +4,9 @@ export const PAGE_SEO = {
   home: {
     // Full brand title for homepage — passed without title prop to use DEFAULT_SEO.title
     description:
-      "InVision Network protects Ohio families and businesses from AI scams, deepfakes, and phishing. Expert cybersecurity training in Kettering + 24/7 AI defense.",
+      "Ohio's trusted AI cybersecurity for families and businesses. Serving Dayton, Columbus, Cincinnati, Cleveland and all of Southwest Ohio. Expert protection headquartered in Kettering.",
     keywords:
-      "AI scam protection Ohio, cybersecurity Kettering, deepfake detection, senior scam training, family cybersecurity Southwest Ohio",
+      "AI scam protection Ohio, cybersecurity Kettering Ohio, deepfake detection Dayton, senior scam training Columbus, family cybersecurity Cleveland Cincinnati Southwest Ohio",
     structuredData: [
       {
         "@context": "https://schema.org",
@@ -22,6 +22,7 @@ export const PAGE_SEO = {
         description:
           "AI scam protection and cybersecurity training for families, seniors, and businesses in Southwest Ohio. Veteran-founded in Kettering, Ohio.",
         foundingDate: "2024",
+        founder: { "@type": "Person", name: "Ruben Mukala Nkulu" },
         telephone: "+19377497579",
         email: "hello@invisionnetwork.org",
         address: {
@@ -33,9 +34,18 @@ export const PAGE_SEO = {
           addressCountry: "US",
         },
         areaServed: [
+          { "@type": "Country", name: "United States" },
           { "@type": "State", name: "Ohio" },
           { "@type": "City", name: "Dayton" },
+          { "@type": "City", name: "Columbus" },
+          { "@type": "City", name: "Cincinnati" },
+          { "@type": "City", name: "Cleveland" },
+          { "@type": "City", name: "Toledo" },
+          { "@type": "City", name: "Akron" },
           { "@type": "City", name: "Kettering" },
+          { "@type": "City", name: "Springfield" },
+          { "@type": "City", name: "Youngstown" },
+          { "@type": "City", name: "Canton" },
         ],
         contactPoint: [
           {
@@ -106,7 +116,7 @@ export const PAGE_SEO = {
         telephone: "+19377497579",
         email: "hello@invisionnetwork.org",
         description:
-          "Veteran-founded AI scam protection and cybersecurity training for families, seniors, and businesses in Kettering and the Dayton, Ohio area.",
+          "Ohio's trusted veteran-founded AI scam protection and cybersecurity training for families, seniors, and businesses. Headquartered in Kettering, Ohio — serving Dayton, Columbus, Cincinnati, Cleveland, Toledo, Akron, Springfield, Youngstown, Canton, and nationwide.",
         address: {
           "@type": "PostalAddress",
           addressLocality: "Kettering",
@@ -114,6 +124,20 @@ export const PAGE_SEO = {
           postalCode: "45429",
           addressCountry: "US",
         },
+        areaServed: [
+          { "@type": "Country", name: "United States" },
+          { "@type": "State", name: "Ohio" },
+          { "@type": "City", name: "Dayton" },
+          { "@type": "City", name: "Columbus" },
+          { "@type": "City", name: "Cincinnati" },
+          { "@type": "City", name: "Cleveland" },
+          { "@type": "City", name: "Toledo" },
+          { "@type": "City", name: "Akron" },
+          { "@type": "City", name: "Kettering" },
+          { "@type": "City", name: "Springfield" },
+          { "@type": "City", name: "Youngstown" },
+          { "@type": "City", name: "Canton" },
+        ],
         geo: {
           "@type": "GeoCoordinates",
           latitude: 39.6887,
@@ -133,8 +157,7 @@ export const PAGE_SEO = {
             closes: "15:00",
           },
         ],
-        priceRange: "$",
-        servesCuisine: null,
+        priceRange: "$$",
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: "Cybersecurity & AI Protection Services",
@@ -143,8 +166,16 @@ export const PAGE_SEO = {
               "@type": "Offer",
               itemOffered: {
                 "@type": "Service",
+                name: "ScamShield AI Protection",
+                description: "AI-powered scam detection subscription for Ohio families and seniors — Basic $9.99/mo, Pro $19.99/mo, Enterprise $29.99/mo",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
                 name: "AI Scam Protection Training",
-                description: "1-hour hands-on cybersecurity workshop for families and seniors",
+                description: "1-hour hands-on cybersecurity workshop for families and seniors in Kettering and Dayton, Ohio",
               },
             },
             {
@@ -152,7 +183,15 @@ export const PAGE_SEO = {
               itemOffered: {
                 "@type": "Service",
                 name: "AI Receptionist & Business Automation",
-                description: "24/7 AI phone agent and business automation for Ohio small businesses",
+                description: "24/7 AI phone agent and business automation for Ohio small businesses in Dayton, Columbus, Cincinnati, and Cleveland",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Cybersecurity Consulting",
+                description: "Expert cybersecurity assessment and strategy for Ohio businesses and families",
               },
             },
           ],
@@ -209,9 +248,9 @@ export const PAGE_SEO = {
   training: {
     title: "Cybersecurity Workshops",
     description:
-      "Hands-on AI scam prevention workshops for Ohio families, seniors, and businesses. Spot deepfakes, phishing, and voice-clone scams. In-person in Kettering or live on Zoom.",
+      "Cybersecurity training and workshops in Dayton, Ohio. Protect your family from AI scams, deepfakes, and voice-clone fraud. In-person in Kettering or live on Zoom — serving all of Ohio.",
     keywords:
-      "AI scam training Kettering Ohio, deepfake detection training, senior cybersecurity, family scam prevention, phishing awareness Southwest Ohio",
+      "AI scam training Dayton Ohio, cybersecurity workshops Kettering, deepfake detection training Columbus, senior cybersecurity Cincinnati, family scam prevention Southwest Ohio",
     breadcrumbs: [
       { name: "Home", url: "https://www.invisionnetwork.org/" },
       { name: "Training", url: "https://www.invisionnetwork.org/training" },
@@ -252,9 +291,9 @@ export const PAGE_SEO = {
   business: {
     title: "AI Protection",
     description:
-      "AI receptionist, smart scheduling, automation, and cybersecurity for Ohio small businesses. Book more clients and stop scams 24/7. Serving Kettering and Dayton.",
+      "AI-powered threat detection and scam protection for Ohio residents and businesses. AI receptionist, automation, and 24/7 cybersecurity. Serving Dayton, Columbus, Cincinnati, Cleveland and businesses nationwide.",
     keywords:
-      "AI services Ohio, AI receptionist Ohio, business automation Kettering, AI answering service, virtual receptionist Southwest Ohio",
+      "AI scam protection Ohio, AI receptionist Dayton Columbus, business automation Cincinnati Cleveland, cybersecurity Ohio businesses, AI services Southwest Ohio",
     breadcrumbs: [
       { name: "Home", url: "https://www.invisionnetwork.org/" },
       { name: "AI Services", url: "https://www.invisionnetwork.org/ai" },
@@ -296,9 +335,9 @@ export const PAGE_SEO = {
   about: {
     title: "About Us",
     description:
-      "Veteran-founded in Kettering, Ohio. InVision Network protects families, seniors, and businesses from AI-powered scams, deepfakes, and voice-clone fraud. Meet our team.",
+      "Veteran-owned cybersecurity firm headquartered in Kettering, Ohio. Serving families and businesses across Dayton, Columbus, Cincinnati, Cleveland and the United States with AI scam protection.",
     keywords:
-      "InVision Network about, Kettering Ohio cybersecurity, Southwest Ohio AI protection",
+      "InVision Network about, veteran-owned cybersecurity Kettering Ohio, Southwest Ohio AI protection, Ruben Mukala Nkulu cybersecurity",
     breadcrumbs: [
       { name: "Home", url: "https://www.invisionnetwork.org/" },
       { name: "About", url: "https://www.invisionnetwork.org/about" },
@@ -310,8 +349,9 @@ export const PAGE_SEO = {
       url: "https://www.invisionnetwork.org",
       logo: "https://www.invisionnetwork.org/favicon.png",
       foundingDate: "2024",
+      founder: { "@type": "Person", name: "Ruben Mukala Nkulu" },
       description:
-        "Veteran-founded cybersecurity company based in Kettering, Ohio protecting families, seniors, and businesses from AI-powered scams, deepfakes, and phishing attacks.",
+        "Veteran-owned cybersecurity company headquartered in Kettering, Ohio. Protecting families, seniors, and businesses in Dayton, Columbus, Cincinnati, Cleveland, and across the United States from AI-powered scams, deepfakes, and phishing attacks.",
       address: {
         "@type": "PostalAddress",
         addressLocality: "Kettering",
@@ -321,7 +361,20 @@ export const PAGE_SEO = {
       },
       telephone: "+19377497579",
       email: "hello@invisionnetwork.org",
-      areaServed: { "@type": "State", name: "Ohio" },
+      areaServed: [
+        { "@type": "Country", name: "United States" },
+        { "@type": "State", name: "Ohio" },
+        { "@type": "City", name: "Dayton" },
+        { "@type": "City", name: "Columbus" },
+        { "@type": "City", name: "Cincinnati" },
+        { "@type": "City", name: "Cleveland" },
+        { "@type": "City", name: "Toledo" },
+        { "@type": "City", name: "Akron" },
+        { "@type": "City", name: "Kettering" },
+        { "@type": "City", name: "Springfield" },
+        { "@type": "City", name: "Youngstown" },
+        { "@type": "City", name: "Canton" },
+      ],
       knowsAbout: [
         "AI Scam Protection",
         "Deepfake Detection",
