@@ -1042,6 +1042,7 @@ export default function LibraryPage() {
           productName={paymentBook.title}
           amount={Math.round(paymentBook.price * 100)}
           description={paymentBook.subtitle}
+          metadata={{ bookId: paymentBook.id, bookSlug: paymentBook.slug }}
           onSuccess={handlePaymentSuccess}
         />
       )}

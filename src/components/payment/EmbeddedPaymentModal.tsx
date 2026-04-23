@@ -52,6 +52,7 @@ export interface EmbeddedPaymentModalProps {
   amount: number; // in cents
   description?: string;
   features?: string[];
+  metadata?: Record<string, string>;
   onSuccess?: () => void;
 }
 
@@ -62,6 +63,7 @@ interface PaymentFormProps {
   amount: number;
   description?: string;
   features?: string[];
+  metadata?: Record<string, string>;
   onSuccess?: () => void;
   onClose: () => void;
 }
@@ -73,6 +75,7 @@ function PaymentForm({
   amount,
   description,
   features,
+  metadata: extraMetadata,
   onSuccess,
   onClose,
 }: PaymentFormProps) {
@@ -158,7 +161,7 @@ function PaymentForm({
             customerEmail: email,
             customerName: name,
             isVeteran,
-            metadata: { productName },
+            metadata: { productName, ...extraMetadata },
           },
         },
       );
@@ -215,9 +218,7 @@ function PaymentForm({
             customerEmail: email,
             customerName: name,
             isVeteran,
-            metadata: {
-              productName,
-            },
+            metadata: { productName, ...extraMetadata },
             checkoutMode: true,
           },
         },
@@ -784,6 +785,7 @@ export function EmbeddedPaymentModal({
   amount,
   description,
   features,
+  metadata,
   onSuccess,
 }: EmbeddedPaymentModalProps) {
   const handleClose = () => {
@@ -848,6 +850,7 @@ export function EmbeddedPaymentModal({
             amount={amount}
             description={description}
             features={features}
+            metadata={metadata}
             onSuccess={onSuccess}
             onClose={handleClose}
           />

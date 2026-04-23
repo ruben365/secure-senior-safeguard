@@ -441,11 +441,34 @@ serve(async (req) => {
       }
 
       case "product": {
-        // Product payments are handled by create-cart-payment-intent +
-        // verify-payment. (process-payment was retired as a tombstone in
-        // Phase 4.10.) This branch exists only so callers can use a single
-        // completion endpoint for any payment type without crashing.
-        logStep("Product payment - handled separately");
+        const bookId = (metadata.bookId || "").slice(0, 200);
+        const bookSlug = (metadata.bookSlug || bookId).slice(0, 200);
+
+        if (bookId) {
+          // Idempotency: refuse to grant access twice for the same payment intent.
+          const { data: existingPurchase } = await supabaseClient
+            .from("book_purchases")
+            .select("id")
+            .eq("stripe_session_id", stripePI)
+            .maybeSingle();
+
+          if (!existingPurchase) {
+            const accessId = `BK-${stripePI.slice(-8).toUpperCase()}-${Date.now().toString(36).toUpperCase()}`;
+            await supabaseClient.from("book_purchases").insert({
+              access_id: accessId,
+              customer_email: customerEmail,
+              customer_name: customerName.slice(0, 100),
+              book_ids: [bookId, ...(bookSlug && bookSlug !== bookId ? [bookSlug] : [])],
+              stripe_session_id: stripePI,
+              amount_paid: stripeAmountCents,
+            });
+            logStep("Created book_purchases record", { bookId, customerEmail });
+          } else {
+            logStep("book_purchases record already exists - skipping", { stripePI });
+          }
+        } else {
+          logStep("Product payment — no bookId in metadata, skipping book_purchases insert");
+        }
         break;
       }
 
