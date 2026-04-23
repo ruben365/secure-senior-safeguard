@@ -14,6 +14,8 @@ interface Subscription {
   current_period_end: string;
   cancel_at_period_end: boolean;
   plan_name: string;
+  plan_tier: string;
+  monthly_scan_limit: number;
   amount: number;
 }
 
