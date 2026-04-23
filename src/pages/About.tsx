@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -20,7 +20,6 @@ import {
   Mail,
   ExternalLink,
   Phone,
-  Image as ImageScanIcon,
   Mic,
   MessageCircle,
   FileText,
