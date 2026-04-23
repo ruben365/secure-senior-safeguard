@@ -410,7 +410,7 @@ const Navigation = React.memo(({ overlay = false }: { overlay?: boolean }) => {
                   <Link
                     to="/portal"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-sm font-semibold text-white hover:text-white/80 transition-colors duration-150"
+                    className="inline-flex items-center justify-center h-[34px] px-5 text-[12px] font-semibold rounded-full text-white bg-gradient-to-b from-[#c2410c] to-[#9a3412] border border-[#7c2d12] shadow-[0_1px_0_0_rgba(255,255,255,0.18)_inset,0_4px_12px_-4px_rgba(217,108,74,0.4)] hover:-translate-y-[1px] hover:from-[#ea580c] hover:to-[#c2410c] active:translate-y-[0.5px] transition-all duration-200"
                   >
                     Login
                   </Link>
