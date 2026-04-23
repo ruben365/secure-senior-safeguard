@@ -24,20 +24,20 @@ function TermsOfService() {
         title="Terms of Service"
         lede="The agreement between you and InVision Network."
       />
-      <section className="py-16 md:py-20 bg-background">
+      <section className="py-10 md:py-12 bg-background">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto">
             <h1 className="sr-only">Terms of Service</h1>
-            <p className="text-center text-muted-foreground mb-8 text-lg">
+            <p className="text-center text-muted-foreground mb-5 text-lg">
               Last Updated:{" "}
 April 20, 2026
             </p>
-            <p className="text-center text-muted-foreground mb-12">
+            <p className="text-center text-muted-foreground mb-7">
               By using InVision Network, you agree to these terms. Please read
               them carefully.
             </p>
 
-            <Card className="p-6 mb-8">
+            <Card className="p-4 mb-5">
               <h2 className="text-xl font-bold mb-4">Table of Contents</h2>
               <div className="grid md:grid-cols-2 gap-2 text-sm">
                 {[
@@ -73,8 +73,8 @@ April 20, 2026
               </div>
             </Card>
 
-            <Card className="p-8 mb-8">
-              <div className="space-y-12 text-foreground">
+            <Card className="p-5 mb-5">
+              <div className="space-y-7 text-foreground">
                 <section id="tos-section-1">
                   <h2 className="text-2xl font-bold mb-4">
                     1. Acceptance of Terms

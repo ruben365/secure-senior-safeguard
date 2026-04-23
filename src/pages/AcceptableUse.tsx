@@ -19,21 +19,21 @@ function AcceptableUse() {
         title="Acceptable Use Policy"
         lede="The rules for using our platform responsibly."
       />
-      <section className="py-16 md:py-20 bg-background">
+      <section className="py-6 md:py-7 bg-background">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto">
             <h1 className="sr-only">Acceptable Use Policy</h1>
-            <p className="text-center text-muted-foreground mb-8 text-lg">
+            <p className="text-center text-muted-foreground mb-5 text-lg">
               Last Updated:{" "}
 April 14, 2026
             </p>
-            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            <p className="text-center text-muted-foreground mb-4 max-w-2xl mx-auto">
               This policy outlines the acceptable and prohibited uses of
               InVision Network's services and website.
             </p>
 
-            <Card className="p-8 mb-8">
-              <div className="space-y-10 text-foreground">
+            <Card className="p-5 mb-5">
+              <div className="space-y-4 text-foreground">
                 <section>
                   <h2 className="text-2xl font-bold mb-4">Purpose</h2>
                   <p className="text-muted-foreground">
@@ -47,7 +47,7 @@ April 14, 2026
 
                 <section>
                   <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-                    <CheckCircle className="h-6 w-6 text-green-500" />
+                    <CheckCircle className="h-4 w-4 text-green-500" />
                     Permitted Uses
                   </h2>
                   <p className="text-muted-foreground mb-4">
@@ -86,14 +86,14 @@ April 14, 2026
 
                 <section>
                   <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-                    <XCircle className="h-6 w-6 text-red-500" />
+                    <XCircle className="h-4 w-4 text-red-500" />
                     Prohibited Activities
                   </h2>
                   <p className="text-muted-foreground mb-4">
                     The following activities are strictly prohibited:
                   </p>
 
-                  <h3 className="text-lg font-semibold mb-2 mt-6">
+                  <h3 className="text-lg font-semibold mb-2 mt-4">
                     Illegal Activities
                   </h3>
                   <ul className="list-disc list-inside space-y-2 text-muted-foreground ml-4 mb-4">
@@ -219,7 +219,7 @@ April 14, 2026
 
                 <section>
                   <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-                    <AlertTriangle className="h-6 w-6 text-amber-500" />
+                    <AlertTriangle className="h-4 w-4 text-amber-500" />
                     Content Guidelines
                   </h2>
                   <p className="text-muted-foreground mb-4">

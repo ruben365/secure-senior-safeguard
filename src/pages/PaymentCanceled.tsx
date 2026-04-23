@@ -17,14 +17,14 @@ export default function PaymentCanceled() {
       <Navigation />
 
       <div className="min-h-screen bg-gradient-to-b from-background via-secondary/20 to-background">
-        <div className="container mx-auto py-20">
+        <div className="container mx-auto py-12">
           <div className="max-w-2xl mx-auto">
             {/* Cancel Icon */}
-            <div className="text-center mb-8">
-              <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-destructive/10 mb-6 animate-in zoom-in duration-500">
-                <XCircle className="w-12 h-12 text-destructive" />
+            <div className="text-center mb-5">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-destructive/10 mb-4 animate-in zoom-in duration-500">
+                <XCircle className="w-7 h-7 text-destructive" />
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-in slide-in-from-bottom duration-500">
+              <h1 className="text-2xl md:text-3xl font-bold mb-4 animate-in slide-in-from-bottom duration-500">
                 Payment Canceled
               </h1>
               <p className="text-lg text-muted-foreground animate-in slide-in-from-bottom duration-500 delay-100">
@@ -34,8 +34,8 @@ export default function PaymentCanceled() {
             </div>
 
             {/* Information Card */}
-            <Card className="p-8 mb-8 animate-in slide-in-from-bottom duration-500 delay-200">
-              <div className="space-y-6">
+            <Card className="p-5 mb-5 animate-in slide-in-from-bottom duration-500 delay-200">
+              <div className="space-y-4">
                 <div>
                   <h3 className="font-semibold mb-3 flex items-center gap-2">
                     <HelpCircle className="w-5 h-5 text-primary" />
@@ -48,7 +48,7 @@ export default function PaymentCanceled() {
                   </p>
                 </div>
 
-                <div className="border-t pt-6">
+                <div className="border-t pt-4">
                   <h3 className="font-semibold mb-3">Need help?</h3>
                   <div className="space-y-2 text-sm text-muted-foreground">
                     <p>
@@ -96,7 +96,7 @@ export default function PaymentCanceled() {
                   </div>
                 </div>
 
-                <div className="border-t pt-6 bg-muted/30 -m-8 mt-6 p-6 rounded-b-lg">
+                <div className="border-t pt-4 bg-muted/30 -m-5 mt-4 p-4 rounded-b-lg">
                   <p className="text-sm text-center text-muted-foreground">
                     Your items are safe in your cart. Ready to try again?
                   </p>

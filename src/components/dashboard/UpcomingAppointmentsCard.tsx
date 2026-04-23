@@ -38,9 +38,9 @@ export function UpcomingAppointmentsCard({
       </CardHeader>
       <CardContent>
         {appointments.length === 0 ? (
-          <div className="text-center py-8 space-y-4 animate-fade-in">
-            <div className="w-16 h-16 mx-auto rounded-full bg-muted flex items-center justify-center">
-              <Calendar className="w-8 h-8 text-muted-foreground" />
+          <div className="text-center py-5 space-y-4 animate-fade-in">
+            <div className="w-10 h-10 mx-auto rounded-full bg-muted flex items-center justify-center">
+              <Calendar className="w-5 h-5 text-muted-foreground" />
             </div>
             <div>
               <p className="font-medium text-muted-foreground">

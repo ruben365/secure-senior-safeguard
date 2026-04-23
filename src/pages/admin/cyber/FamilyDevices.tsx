@@ -158,8 +158,8 @@ export default function FamilyDevices() {
   ).length;
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="flex items-center justify-between mb-4">
         <div>
           <h1 className="text-2xl font-bold text-[#F9FAFB]">Family Devices</h1>
           <p className="text-[#9CA3AF]">
@@ -228,12 +228,12 @@ export default function FamilyDevices() {
 
       <div className="grid gap-4 md:grid-cols-3">
         <Card className="bg-[#111827] border-gray-800">
-          <CardContent className="p-6 text-center">
+          <CardContent className="p-4 text-center">
             {isLoading ? (
-              <Skeleton className="h-10 w-16 mx-auto bg-gray-700" />
+              <Skeleton className="h-6 w-10 mx-auto bg-gray-700" />
             ) : (
               <>
-                <p className="text-4xl font-bold text-[#06B6D4]">
+                <p className="text-2xl font-bold text-[#06B6D4]">
                   {totalDevices}
                 </p>
                 <p className="text-[#9CA3AF]">Total Devices</p>
@@ -242,12 +242,12 @@ export default function FamilyDevices() {
           </CardContent>
         </Card>
         <Card className="bg-[#111827] border-gray-800">
-          <CardContent className="p-6 text-center">
+          <CardContent className="p-4 text-center">
             {isLoading ? (
-              <Skeleton className="h-10 w-16 mx-auto bg-gray-700" />
+              <Skeleton className="h-6 w-10 mx-auto bg-gray-700" />
             ) : (
               <>
-                <p className="text-4xl font-bold text-green-500">
+                <p className="text-2xl font-bold text-green-500">
                   {fullyProtected}
                 </p>
                 <p className="text-[#9CA3AF]">Fully Protected</p>
@@ -256,12 +256,12 @@ export default function FamilyDevices() {
           </CardContent>
         </Card>
         <Card className="bg-[#111827] border-gray-800">
-          <CardContent className="p-6 text-center">
+          <CardContent className="p-4 text-center">
             {isLoading ? (
-              <Skeleton className="h-10 w-16 mx-auto bg-gray-700" />
+              <Skeleton className="h-6 w-10 mx-auto bg-gray-700" />
             ) : (
               <>
-                <p className="text-4xl font-bold text-red-500">
+                <p className="text-2xl font-bold text-red-500">
                   {needsAttention}
                 </p>
                 <p className="text-[#9CA3AF]">Needs Attention</p>
@@ -290,16 +290,16 @@ export default function FamilyDevices() {
           {isLoading ? (
             <div className="space-y-4">
               {[1, 2, 3].map((i) => (
-                <Skeleton key={i} className="h-20 w-full bg-gray-700" />
+                <Skeleton key={i} className="h-12 w-full bg-gray-700" />
               ))}
             </div>
           ) : devices.length === 0 ? (
-            <div className="text-center py-12">
-              <Wifi className="h-16 w-16 mx-auto text-[#3B82F6]/50 mb-4" />
+            <div className="text-center py-7">
+              <Wifi className="h-10 w-10 mx-auto text-[#3B82F6]/50 mb-4" />
               <h3 className="text-xl font-semibold text-[#F9FAFB] mb-2">
                 No devices connected
               </h3>
-              <p className="text-[#9CA3AF] mb-6">
+              <p className="text-[#9CA3AF] mb-4">
                 Add your first device to get started.
               </p>
               <Button
@@ -321,7 +321,7 @@ export default function FamilyDevices() {
                   >
                     <div className="flex items-center gap-4">
                       <div className="p-3 rounded-lg bg-gradient-to-br from-[#3B82F6]/20 to-[#06B6D4]/20">
-                        <Icon className="h-6 w-6 text-[#06B6D4]" />
+                        <Icon className="h-4 w-4 text-[#06B6D4]" />
                       </div>
                       <div>
                         <p className="font-medium text-[#F9FAFB]">
@@ -337,8 +337,8 @@ export default function FamilyDevices() {
                         </p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-6">
-                      <div className="w-32">
+                    <div className="flex items-center gap-4">
+                      <div className="w-20">
                         <div className="flex justify-between text-xs mb-1">
                           <span className="text-[#9CA3AF]">Protection</span>
                           <span className="text-[#F9FAFB]">

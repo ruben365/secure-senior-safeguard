@@ -98,7 +98,7 @@ export const TranslationRequestDialog = ({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="w-[calc(100vw-32px)] sm:w-full max-w-md max-h-[85svh] overflow-y-auto p-0">
         <div className="h-1.5 bg-gradient-to-r from-primary via-accent to-primary" />
-        <div className="p-6">
+        <div className="p-4">
           <DialogTitle className="text-xl font-black flex items-center gap-2 mb-1">
             <Globe className="w-5 h-5 text-primary" />
             Request a Translation
@@ -109,9 +109,9 @@ export const TranslationRequestDialog = ({
           </DialogDescription>
 
           {isSubmitted ? (
-            <div className="text-center py-8">
-              <div className="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <CheckCircle className="w-8 h-8 text-success" />
+            <div className="text-center py-5">
+              <div className="w-10 h-10 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <CheckCircle className="w-5 h-5 text-success" />
               </div>
               <h3 className="text-lg font-bold mb-2">Request Sent!</h3>
               <p className="text-sm text-muted-foreground">
@@ -129,7 +129,7 @@ export const TranslationRequestDialog = ({
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder="Your name"
                   required
-                  className="mt-1 h-11 rounded-xl bg-background/50 border-border/50"
+                  className="mt-1 h-7 rounded-xl bg-background/50 border-border/50"
                 />
               </div>
 
@@ -143,7 +143,7 @@ export const TranslationRequestDialog = ({
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="your@email.com"
                   required
-                  className="mt-1 h-11 rounded-xl bg-background/50 border-border/50"
+                  className="mt-1 h-7 rounded-xl bg-background/50 border-border/50"
                 />
               </div>
 
@@ -152,7 +152,7 @@ export const TranslationRequestDialog = ({
                   Language <span className="text-primary">*</span>
                 </Label>
                 <Select value={language} onValueChange={setLanguage}>
-                  <SelectTrigger className="mt-1 h-11 rounded-xl bg-background/50 border-border/50">
+                  <SelectTrigger className="mt-1 h-7 rounded-xl bg-background/50 border-border/50">
                     <SelectValue placeholder="Select language" />
                   </SelectTrigger>
                   <SelectContent>
@@ -176,7 +176,7 @@ export const TranslationRequestDialog = ({
                   value={bookTitle}
                   onChange={(e) => setBookTitle(e.target.value)}
                   placeholder="Specific book or 'All available'"
-                  className="mt-1 h-11 rounded-xl bg-background/50 border-border/50"
+                  className="mt-1 h-7 rounded-xl bg-background/50 border-border/50"
                 />
               </div>
 
@@ -198,7 +198,7 @@ export const TranslationRequestDialog = ({
 
               <Button
                 type="submit"
-                className="w-full h-12"
+                className="w-full h-7"
                 disabled={isSubmitting || !fullName || !email || !language}
               >
                 {isSubmitting ? (

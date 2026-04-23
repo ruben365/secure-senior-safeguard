@@ -117,21 +117,21 @@ const Hero = ({
 
       {/* Protection Badge (if enabled) */}
       {showProtectionBadge && (
-        <div className="absolute top-4 right-4 md:top-8 md:right-8 z-20">
+        <div className="absolute top-4 right-4 md:top-5 md:right-5 z-20">
           <ProtectionBadge text={badgeText || "Family Protected"} size="md" />
         </div>
       )}
 
       {/* Content - CSS animations instead of framer-motion */}
-      <div className="w-full center-container-wide py-20 sm:py-24 md:py-28 lg:py-32 relative z-10">
+      <div className="w-full center-container-wide py-12 sm:py-16 md:py-18 lg:py-20 relative z-10">
         <div className="max-w-6xl animate-fade-in">
           {headline && (
-            <h1 className="text-white mb-4 sm:mb-5 md:mb-6 text-2xl sm:text-3xl md:text-[2rem] lg:text-[2.25rem] xl:text-[2.5rem] leading-tight font-bold">
+            <h1 className="text-white mb-4 sm:mb-5 md:mb-4 text-2xl sm:text-3xl md:text-[2rem] lg:text-[2.25rem] xl:text-[2.5rem] leading-tight font-bold">
               {headline}
             </h1>
           )}
           {subheadline && (
-            <p className="text-white/90 text-sm sm:text-base mb-6 md:mb-8 leading-relaxed max-w-2xl">
+            <p className="text-white/90 text-sm sm:text-base mb-4 md:mb-5 leading-relaxed max-w-2xl">
               {subheadline}
             </p>
           )}

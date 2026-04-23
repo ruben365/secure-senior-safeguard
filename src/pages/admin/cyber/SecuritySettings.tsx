@@ -53,10 +53,10 @@ export default function SecuritySettings() {
       />
 
       <header
-        className={`fixed top-0 right-0 left-0 h-16 bg-[#111827]/95 backdrop-blur-xl border-b border-gray-800 z-40 
+        className={`fixed top-0 right-0 left-0 h-10 bg-[#111827]/95 backdrop-blur-xl border-b border-gray-800 z-40 
         transition-all duration-300 ${sidebarOpen ? "md:left-[260px]" : "md:left-[70px]"}`}
       >
-        <div className="flex items-center justify-between h-full px-4 lg:px-6">
+        <div className="flex items-center justify-between h-full px-4 lg:px-4">
           <div className="flex items-center gap-4 flex-1">
             <Button
               variant="ghost"
@@ -76,7 +76,7 @@ export default function SecuritySettings() {
                 variant="ghost"
                 size="icon"
                 onClick={() => window.history.back()}
-                className="text-[#9CA3AF] hover:text-[#F9FAFB] hover:bg-gray-800 h-9 w-9"
+                className="text-[#9CA3AF] hover:text-[#F9FAFB] hover:bg-gray-800 h-6 w-6"
               >
                 <ChevronLeft className="h-5 w-5" />
               </Button>
@@ -84,7 +84,7 @@ export default function SecuritySettings() {
                 variant="ghost"
                 size="icon"
                 onClick={() => window.history.forward()}
-                className="text-[#9CA3AF] hover:text-[#F9FAFB] hover:bg-gray-800 h-9 w-9"
+                className="text-[#9CA3AF] hover:text-[#F9FAFB] hover:bg-gray-800 h-6 w-6"
               >
                 <ChevronRight className="h-5 w-5" />
               </Button>
@@ -95,7 +95,7 @@ export default function SecuritySettings() {
               <Input
                 type="text"
                 placeholder="Search settings..."
-                className="pl-10 bg-[#374151] border-gray-700 text-[#F9FAFB] placeholder:text-[#9CA3AF] h-10 rounded-lg"
+                className="pl-6 bg-[#374151] border-gray-700 text-[#F9FAFB] placeholder:text-[#9CA3AF] h-6 rounded-lg"
               />
             </div>
           </div>
@@ -113,10 +113,10 @@ export default function SecuritySettings() {
       </header>
 
       <main
-        className={`flex-1 transition-all duration-300 pt-16 w-full ${sidebarOpen ? "md:ml-[260px]" : "md:ml-[70px]"}`}
+        className={`flex-1 transition-all duration-300 pt-10 w-full ${sidebarOpen ? "md:ml-[260px]" : "md:ml-[70px]"}`}
       >
-        <div className="p-6 lg:p-8">
-          <div className="flex items-center justify-between mb-8">
+        <div className="p-4 lg:p-5">
+          <div className="flex items-center justify-between mb-5">
             <div>
               <h1 className="text-3xl font-bold text-[#F9FAFB]">
                 Security Settings
@@ -132,7 +132,7 @@ export default function SecuritySettings() {
             </Link>
           </div>
 
-          <div className="grid gap-6 lg:grid-cols-2">
+          <div className="grid gap-4 lg:grid-cols-2">
             <Card className="bg-[#111827] border-gray-800">
               <CardHeader>
                 <CardTitle className="text-[#F9FAFB] flex items-center gap-2">
@@ -143,7 +143,7 @@ export default function SecuritySettings() {
                   Configure how users authenticate
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-6">
+              <CardContent className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
                     <Label className="text-[#F9FAFB]">
@@ -204,7 +204,7 @@ export default function SecuritySettings() {
                   Configure threat protection settings
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-6">
+              <CardContent className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
                     <Label className="text-[#F9FAFB]">Threat Alerts</Label>
@@ -265,7 +265,7 @@ export default function SecuritySettings() {
                       <Input
                         type={showPassword ? "text" : "password"}
                         placeholder="Enter current password"
-                        className="bg-[#1F2937] border-gray-700 text-[#F9FAFB] pr-10"
+                        className="bg-[#1F2937] border-gray-700 text-[#F9FAFB] pr-6"
                       />
                       <Button
                         type="button"

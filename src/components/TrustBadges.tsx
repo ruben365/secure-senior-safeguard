@@ -50,17 +50,17 @@ const TrustBadges = () => {
 
   return (
     <section
-      className="py-16 bg-background/50 backdrop-blur-sm border-y border-border/50 relative overflow-hidden"
+      className="py-10 bg-background/50 backdrop-blur-sm border-y border-border/50 relative overflow-hidden"
       role="region"
       aria-label="Trust and certifications"
     >
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 left-20 w-64 h-64 bg-primary/30 rounded-full blur-3xl" />
-        <div className="absolute bottom-10 right-20 w-72 h-72 bg-accent/30 rounded-full blur-3xl" />
+        <div className="absolute top-6 left-12 w-64 h-64 bg-primary/30 rounded-full blur-3xl" />
+        <div className="absolute bottom-6 right-12 w-72 h-72 bg-accent/30 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto relative z-10">
-        <div className="text-center mb-12">
+        <div className="text-center mb-7">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-success/10 text-success border border-success/20 rounded-full text-sm font-medium mb-4">
             <CheckCircle className="w-4 h-4" />
             Trusted & Verified
@@ -71,18 +71,18 @@ const TrustBadges = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 max-w-7xl mx-auto">
           {badges.map((badge, index) => (
             <div
               key={index}
-              className="flex flex-col items-center text-center p-6 rounded-2xl bg-gradient-to-br from-card to-card/50 backdrop-blur-sm border border-border/50 hover:border-accent/50 hover:shadow-strong transition-all duration-500 hover:-translate-y-2 hover:scale-105 group animate-fade-in-up"
+              className="flex flex-col items-center text-center p-4 rounded-2xl bg-gradient-to-br from-card to-card/50 backdrop-blur-sm border border-border/50 hover:border-accent/50 hover:shadow-strong transition-all duration-500 hover:-translate-y-2 hover:scale-105 group animate-fade-in-up"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div
-                className={`w-16 h-16 rounded-full bg-gradient-to-br ${badge.gradient} flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 relative`}
+                className={`w-10 h-10 rounded-full bg-gradient-to-br ${badge.gradient} flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 relative`}
               >
                 <badge.icon
-                  className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300"
+                  className="w-5 h-5 text-primary group-hover:scale-110 transition-transform duration-300"
                   aria-hidden="true"
                 />
                 <span className="absolute -top-1 -right-1 text-lg">
@@ -106,7 +106,7 @@ const TrustBadges = () => {
         </div>
 
         {/* Additional Trust Row */}
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground">
           <span className="inline-flex items-center gap-1.5">
             <Zap className="w-4 h-4 text-amber-500" />
             Fast Response

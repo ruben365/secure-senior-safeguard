@@ -70,18 +70,18 @@ export const FloatingGraphics = ({
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-          className={`absolute top-[15%] left-[20%] w-16 h-16 border-2 border-primary/10 rounded-lg ${baseOpacity}`}
+          className={`absolute top-[15%] left-[20%] w-10 h-10 border-2 border-primary/10 rounded-lg ${baseOpacity}`}
         />
         <motion.div
           animate={{ rotate: -360 }}
           transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
-          className={`absolute bottom-[25%] right-[15%] w-12 h-12 border-2 border-accent/10 rounded-lg ${baseOpacity}`}
+          className={`absolute bottom-[25%] right-[15%] w-7 h-7 border-2 border-accent/10 rounded-lg ${baseOpacity}`}
         />
         {/* Floating circles */}
         <motion.div
           animate={{ y: [-10, 10, -10] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className={`absolute top-[40%] right-[25%] w-8 h-8 rounded-full border-2 border-primary/10 ${baseOpacity}`}
+          className={`absolute top-[40%] right-[25%] w-5 h-5 rounded-full border-2 border-primary/10 ${baseOpacity}`}
         />
         {/* Triangle */}
         <motion.div
@@ -102,7 +102,7 @@ export const FloatingGraphics = ({
         <motion.div
           animate={{ scale: [1, 1.2, 1], rotate: 45 }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className={`absolute top-[30%] right-[40%] w-10 h-10 bg-gradient-to-br from-primary/10 to-accent/10 ${baseOpacity}`}
+          className={`absolute top-[30%] right-[40%] w-6 h-6 bg-gradient-to-br from-primary/10 to-accent/10 ${baseOpacity}`}
         />
       </div>
     );
@@ -184,7 +184,7 @@ export const FloatingGraphics = ({
             ease: "linear",
             repeatType: "reverse",
           }}
-          className={`absolute top-[10%] right-[10%] w-32 h-32 ${baseOpacity}`}
+          className={`absolute top-[10%] right-[10%] w-20 h-20 ${baseOpacity}`}
           style={{
             clipPath:
               "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
@@ -200,7 +200,7 @@ export const FloatingGraphics = ({
             ease: "linear",
             repeatType: "reverse",
           }}
-          className={`absolute bottom-[15%] left-[8%] w-24 h-24 ${baseOpacity}`}
+          className={`absolute bottom-[15%] left-[8%] w-16 h-16 ${baseOpacity}`}
           style={{
             clipPath:
               "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
@@ -212,7 +212,7 @@ export const FloatingGraphics = ({
         <motion.div
           animate={{ rotate: 60, scale: [1, 1.1, 1] }}
           transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-          className={`absolute top-[50%] right-[30%] w-16 h-16 ${baseOpacity}`}
+          className={`absolute top-[50%] right-[30%] w-10 h-10 ${baseOpacity}`}
           style={{
             clipPath:
               "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
@@ -307,7 +307,7 @@ export const FloatingGraphics = ({
           className="absolute top-[45%] right-[40%]"
         >
           <div
-            className={`w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 via-transparent to-accent/20 ${baseOpacity}`}
+            className={`w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 via-transparent to-accent/20 ${baseOpacity}`}
             style={{
               boxShadow:
                 "inset -4px -4px 20px rgba(0,0,0,0.1), inset 4px 4px 20px rgba(255,255,255,0.1)",
@@ -566,7 +566,7 @@ export const FloatingGraphics = ({
           />
         </svg>
         <svg
-          className={`absolute bottom-0 left-0 w-full h-32 ${baseOpacity}`}
+          className={`absolute bottom-0 left-0 w-full h-20 ${baseOpacity}`}
           viewBox="0 0 1200 100"
           preserveAspectRatio="none"
         >

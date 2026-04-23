@@ -29,7 +29,7 @@ export function DashboardHeader({
       <div className="container mx-auto py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Avatar className="w-12 h-12 border-2 border-primary/20">
+            <Avatar className="w-7 h-7 border-2 border-primary/20">
               <AvatarImage src={avatarUrl} alt={firstName && lastName ? `${firstName} ${lastName}` : "User avatar"} />
               <AvatarFallback className="bg-gradient-to-br from-primary to-primary/60 text-white font-semibold">
                 {initials}

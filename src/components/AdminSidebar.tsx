@@ -195,7 +195,7 @@ export const AdminSidebar = ({
     children?.some((child) => location.pathname === child.href);
 
   const SidebarContent = () => (
-    <div className="flex flex-col h-full pt-16">
+    <div className="flex flex-col h-full pt-10">
       {/* Menu Items */}
       <nav className="flex-1 overflow-y-auto py-4">
         {filteredMenuItems.map((item) => {
@@ -277,7 +277,7 @@ export const AdminSidebar = ({
                       key={child.href}
                       to={child.href}
                       className={cn(
-                        "flex items-center gap-3 pl-12 pr-4 py-2 mx-2 rounded-lg transition-all duration-300 ease-out",
+                        "flex items-center gap-3 pl-7 pr-4 py-2 mx-2 rounded-lg transition-all duration-300 ease-out",
                         "hover:bg-[#2A2540] relative",
                         isActive(child.href) && "bg-[#2A2540]",
                       )}

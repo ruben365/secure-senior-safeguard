@@ -202,9 +202,9 @@ export function QRCodePaymentSection({
 
   if (isPaid) {
     return (
-      <div className="text-center py-6 animate-scale-in">
-        <div className="w-16 h-16 bg-success/20 rounded-full flex items-center justify-center mx-auto mb-4">
-          <CheckCircle className="w-8 h-8 text-success" />
+      <div className="text-center py-4 animate-scale-in">
+        <div className="w-10 h-10 bg-success/20 rounded-full flex items-center justify-center mx-auto mb-4">
+          <CheckCircle className="w-5 h-5 text-success" />
         </div>
         <h3 className="text-xl font-bold mb-2">Payment Confirmed!</h3>
         <p className="text-sm text-muted-foreground">
@@ -218,8 +218,8 @@ export function QRCodePaymentSection({
     <div className="space-y-4">
       {/* Instructions */}
       <div className="text-center">
-        <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-          <Smartphone className="w-6 h-6 text-primary" />
+        <div className="w-7 h-7 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+          <Smartphone className="w-4 h-4 text-primary" />
         </div>
         <h3 className="font-semibold mb-1">Pay with your phone</h3>
         <p className="text-sm text-muted-foreground">
@@ -279,7 +279,7 @@ export function QRCodePaymentSection({
       ) : (
         <div className="flex flex-col items-center gap-4">
           <div className="w-48 h-48 bg-muted/50 rounded-xl border-2 border-dashed border-muted-foreground/30 flex items-center justify-center">
-            <QrCode className="w-16 h-16 text-muted-foreground/40" />
+            <QrCode className="w-10 h-10 text-muted-foreground/40" />
           </div>
 
           <Button

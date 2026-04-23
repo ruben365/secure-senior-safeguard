@@ -22,7 +22,7 @@ const HeroFloatingStats = () => {
         initial={{ opacity: 0, y: 30, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ delay: 0.8, duration: 0.7, type: "spring", stiffness: 90 }}
-        className="hfs-card relative pointer-events-auto rounded-full py-5 px-12 overflow-hidden"
+        className="hfs-card relative pointer-events-auto rounded-full py-5 px-7 overflow-hidden"
       >
         {/* Top specular highlight — gives the card a glassy "polished" feel */}
         <div
@@ -33,10 +33,10 @@ const HeroFloatingStats = () => {
         {/* Subtle bottom shadow band for depth */}
         <div
           aria-hidden="true"
-          className="hfs-bottom-line absolute inset-x-6 bottom-0 h-px pointer-events-none"
+          className="hfs-bottom-line absolute inset-x-4 bottom-0 h-px pointer-events-none"
         />
 
-        <div className="relative flex items-center gap-10">
+        <div className="relative flex items-center gap-6">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
@@ -45,7 +45,7 @@ const HeroFloatingStats = () => {
               transition={{ delay: 1 + index * 0.12, duration: 0.5, type: "spring" }}
               className="flex items-center gap-3 group cursor-default"
             >
-              <div className="hfs-icon-tile relative w-11 h-11 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:-translate-y-0.5">
+              <div className="hfs-icon-tile relative w-7 h-7 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:-translate-y-0.5">
                 {/* Inner glow on hover */}
                 <div
                   aria-hidden="true"

@@ -69,10 +69,10 @@ export default function IndividualClientDetail() {
 
   if (loading) {
     return (
-      <div className="p-6 max-w-7xl mx-auto space-y-6">
-        <div className="flex items-center justify-between mb-6">
+      <div className="p-4 max-w-7xl mx-auto space-y-4">
+        <div className="flex items-center justify-between mb-4">
           <div>
-            <Skeleton className="h-8 w-48 bg-gray-800" />
+            <Skeleton className="h-5 w-48 bg-gray-800" />
             <Skeleton className="h-4 w-64 mt-2 bg-gray-800" />
           </div>
           <Link to="/admin/clients/individuals">
@@ -85,20 +85,20 @@ export default function IndividualClientDetail() {
             </Button>
           </Link>
         </div>
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid gap-4 lg:grid-cols-3">
           <Card className="lg:col-span-1 bg-[#111827] border-gray-800">
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               <div className="flex flex-col items-center">
-                <Skeleton className="w-24 h-24 rounded-full bg-gray-800" />
-                <Skeleton className="h-6 w-40 mt-4 bg-gray-800" />
-                <Skeleton className="h-4 w-32 mt-2 bg-gray-800" />
+                <Skeleton className="w-16 h-16 rounded-full bg-gray-800" />
+                <Skeleton className="h-4 w-40 mt-4 bg-gray-800" />
+                <Skeleton className="h-4 w-20 mt-2 bg-gray-800" />
               </div>
             </CardContent>
           </Card>
           <Card className="lg:col-span-2 bg-[#111827] border-gray-800">
-            <CardContent className="p-6 space-y-4">
+            <CardContent className="p-4 space-y-4">
               {[...Array(4)].map((_, i) => (
-                <Skeleton key={i} className="h-12 w-full bg-gray-800" />
+                <Skeleton key={i} className="h-7 w-full bg-gray-800" />
               ))}
             </CardContent>
           </Card>
@@ -109,8 +109,8 @@ export default function IndividualClientDetail() {
 
   if (!client) {
     return (
-      <div className="p-6 max-w-7xl mx-auto space-y-6">
-        <div className="flex items-center justify-between mb-6">
+      <div className="p-4 max-w-7xl mx-auto space-y-4">
+        <div className="flex items-center justify-between mb-4">
           <div>
             <h1 className="text-2xl font-bold text-[#F9FAFB]">
               Client Not Found
@@ -129,7 +129,7 @@ export default function IndividualClientDetail() {
             </Button>
           </Link>
         </div>
-        <Card className="bg-[#111827] border-gray-800 p-8 text-center">
+        <Card className="bg-[#111827] border-gray-800 p-5 text-center">
           <p className="text-gray-400">
             This client does not exist or has been removed.
           </p>
@@ -139,8 +139,8 @@ export default function IndividualClientDetail() {
   }
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="flex items-center justify-between mb-4">
         <div>
           <h1 className="text-2xl font-bold text-[#F9FAFB]">
             {client.first_name} {client.last_name}
@@ -166,12 +166,12 @@ export default function IndividualClientDetail() {
         </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-4 lg:grid-cols-3">
         {/* Profile Card */}
         <Card className="lg:col-span-1 bg-[#111827] border-gray-800">
-          <CardContent className="p-6">
+          <CardContent className="p-4">
             <div className="flex flex-col items-center text-center">
-              <Avatar className="w-24 h-24 border-4 border-primary/30">
+              <Avatar className="w-16 h-16 border-4 border-primary/30">
                 <AvatarFallback className="bg-gradient-to-br from-cyan-500 to-blue-600 text-white text-2xl">
                   {getInitials(client.first_name, client.last_name)}
                 </AvatarFallback>

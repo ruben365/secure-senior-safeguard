@@ -41,11 +41,11 @@ export function ActionQueue({
       </CardHeader>
       <CardContent className="p-0">
         {items.length === 0 ? (
-          <div className="px-6 pb-6">
+          <div className="px-4 pb-4">
             <EmptyState
               title="No items"
               description="There are no action items at the moment."
-              className="py-8"
+              className="py-5"
             />
           </div>
         ) : (
@@ -57,7 +57,7 @@ export function ActionQueue({
                 <div
                   key={item.id}
                   className={cn(
-                    "group flex items-center gap-3 px-6 py-3 transition-colors hover:bg-muted/50",
+                    "group flex items-center gap-3 px-4 py-3 transition-colors hover:bg-muted/50",
                     item.href && "cursor-pointer"
                   )}
                   onClick={item.onAction}
@@ -90,7 +90,7 @@ export function ActionQueue({
               return row;
             })}
             {remainingCount > 0 && onViewAll && (
-              <div className="px-6 py-3 border-t">
+              <div className="px-4 py-3 border-t">
                 <Button
                   variant="ghost"
                   size="sm"

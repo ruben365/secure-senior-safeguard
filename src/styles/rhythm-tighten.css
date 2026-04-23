@@ -8,43 +8,43 @@ section[class*="py-32"]:not(.hero-home *):not(.hero-business *):not(.hero-worksh
 section[class*="py-28"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
 section[class*="py-24"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *),
 section[class*="py-20"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
-  padding-top: clamp(2.5rem, 5vw, 4rem) !important;
-  padding-bottom: clamp(2.5rem, 5vw, 4rem) !important;
+  padding-top: clamp(1.56rem, 5vw, 2.5rem) !important;
+  padding-bottom: clamp(1.56rem, 5vw, 2.5rem) !important;
 }
 
 section[class*="py-16"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
-  padding-top: clamp(2rem, 4vw, 3rem) !important;
-  padding-bottom: clamp(2rem, 4vw, 3rem) !important;
+  padding-top: clamp(1.25rem, 4vw, 1.88rem) !important;
+  padding-bottom: clamp(1.25rem, 4vw, 1.88rem) !important;
 }
 
 section[class*="py-12"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *):not(.site-footer *) {
-  padding-top: clamp(1.5rem, 3vw, 2.25rem) !important;
-  padding-bottom: clamp(1.5rem, 3vw, 2.25rem) !important;
+  padding-top: clamp(0.94rem, 3vw, 1.41rem) !important;
+  padding-bottom: clamp(0.94rem, 3vw, 1.41rem) !important;
 }
 
 /* ───── 2. Vertical stack spacing ───── */
 section:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) .space-y-20 > * + *,
 main .space-y-20:not(.hero-home *):not(footer *) > * + * {
-  margin-top: 2.75rem !important;
+  margin-top: 1.72rem !important;
 }
 section:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) .space-y-16 > * + *,
 main .space-y-16:not(.hero-home *):not(footer *) > * + * {
-  margin-top: 2.25rem !important;
+  margin-top: 1.41rem !important;
 }
 section:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) .space-y-12 > * + *,
 main .space-y-12:not(.hero-home *):not(footer *) > * + * {
-  margin-top: 1.75rem !important;
+  margin-top: 1.09rem !important;
 }
 section:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) .space-y-10 > * + *,
 main .space-y-10:not(.hero-home *):not(footer *) > * + * {
-  margin-top: 1.5rem !important;
+  margin-top: 0.94rem !important;
 }
 
 /* ───── 3. Heading-cluster bottom margin (mb-14, mb-16, mb-20) ───── */
 section:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) .mb-20,
 section:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) .mb-16,
 section:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) .mb-14 {
-  margin-bottom: clamp(1.75rem, 3vw, 2.5rem) !important;
+  margin-bottom: clamp(1.09rem, 3vw, 1.56rem) !important;
 }
 
 /* ───── 4. Heading-to-paragraph gap inside cards ───── */
@@ -54,27 +54,27 @@ section:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(foote
 [class*="rounded-2xl"] h2 + p,
 [class*="rounded-2xl"] h3 + p,
 [class*="rounded-2xl"] h4 + p {
-  margin-top: 0.5rem;
+  margin-top: 0.31rem;
 }
 
 /* ───── 4b. Clamp legacy rhythm helpers (sec-after-hero, sec-rhythm-*) ───── */
 .sec-after-hero:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) {
-  padding-top: clamp(1rem, 2vw, 2rem) !important;
+  padding-top: clamp(0.62rem, 2vw, 1.25rem) !important;
 }
 .sec-before-footer:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) {
-  padding-bottom: clamp(2rem, 4vw, 3.5rem) !important;
+  padding-bottom: clamp(1.25rem, 4vw, 2.19rem) !important;
 }
 .sec-rhythm-lg:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) {
-  padding-top: clamp(2.5rem, 5vw, 4rem) !important;
-  padding-bottom: clamp(2.5rem, 5vw, 4rem) !important;
+  padding-top: clamp(1.56rem, 5vw, 2.5rem) !important;
+  padding-bottom: clamp(1.56rem, 5vw, 2.5rem) !important;
 }
 .sec-rhythm-md:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) {
-  padding-top: clamp(2rem, 4vw, 3.25rem) !important;
-  padding-bottom: clamp(2rem, 4vw, 3.25rem) !important;
+  padding-top: clamp(1.25rem, 4vw, 2.03rem) !important;
+  padding-bottom: clamp(1.25rem, 4vw, 2.03rem) !important;
 }
 .sec-rhythm-sm:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) {
-  padding-top: clamp(1.5rem, 3vw, 2.5rem) !important;
-  padding-bottom: clamp(1.5rem, 3vw, 2.5rem) !important;
+  padding-top: clamp(0.94rem, 3vw, 1.56rem) !important;
+  padding-bottom: clamp(0.94rem, 3vw, 1.56rem) !important;
 }
 
 /* ───── 5. Mobile reset — keep tight on small screens ───── */
@@ -82,7 +82,7 @@ section:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(foote
   section[class*="py-24"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *),
   section[class*="py-20"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *),
   section[class*="py-16"]:not(.hero-home *):not(.hero-business *):not(.hero-workshops *):not(footer *) {
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
+    padding-top: 1.25rem !important;
+    padding-bottom: 1.25rem !important;
   }
 }

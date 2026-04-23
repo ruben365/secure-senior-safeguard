@@ -3,17 +3,17 @@ import { MapPin } from "lucide-react";
 
 export function OhioServiceMap() {
   return (
-    <section className="py-8 md:py-12 lg:py-20 xl:py-24 bg-background">
+    <section className="py-5 md:py-7 lg:py-12 xl:py-16 bg-background">
       <div className="container mx-auto max-w-full">
-        <div className="text-center mb-8 md:mb-12">
+        <div className="text-center mb-5 md:mb-7">
           <Badge
-            className="mb-3 md:mb-4 text-sm md:text-base lg:text-lg px-3 md:px-4 lg:px-6 py-1.5 md:py-2"
+            className="mb-3 md:mb-4 text-sm md:text-base lg:text-lg px-3 md:px-4 lg:px-4 py-1.5 md:py-2"
             variant="secondary"
           >
             <MapPin className="w-3 h-3 md:w-4 md:h-4 mr-2" />
             Service Areas
           </Badge>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 md:mb-4 px-2">
+          <h2 className="text-2xl md:text-3xl lg:text-2xl xl:text-3xl font-bold mb-3 md:mb-4 px-2">
             Proudly Serving Ohio Families
           </h2>
           <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto px-2">

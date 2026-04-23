@@ -156,8 +156,8 @@ const DonationsList = () => {
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="flex items-center justify-between mb-4">
         <div>
           <h1 className="text-2xl font-bold text-[#F9FAFB]">Donations</h1>
           <p className="text-[#9CA3AF]">Manage and track all donations</p>
@@ -182,7 +182,7 @@ const DonationsList = () => {
         </div>
       </div>
       {/* Stats Cards */}
-      <div className="mb-6 grid gap-4 md:grid-cols-4">
+      <div className="mb-4 grid gap-4 md:grid-cols-4">
         <Card className="bg-slate-800/50 border-slate-700">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
@@ -192,7 +192,7 @@ const DonationsList = () => {
                   ${totalDonations.toFixed(2)}
                 </p>
               </div>
-              <DollarSign className="h-8 w-8 text-green-400" />
+              <DollarSign className="h-5 w-5 text-green-400" />
             </div>
           </CardContent>
         </Card>
@@ -203,7 +203,7 @@ const DonationsList = () => {
                 <p className="text-sm text-slate-400">Monthly Donors</p>
                 <p className="text-2xl font-bold text-white">{monthlyDonors}</p>
               </div>
-              <RefreshCw className="h-8 w-8 text-orange-400" />
+              <RefreshCw className="h-5 w-5 text-orange-400" />
             </div>
           </CardContent>
         </Card>
@@ -214,7 +214,7 @@ const DonationsList = () => {
                 <p className="text-sm text-slate-400">One-time Donors</p>
                 <p className="text-2xl font-bold text-white">{oneTimeDonors}</p>
               </div>
-              <Users className="h-8 w-8 text-purple-400" />
+              <Users className="h-5 w-5 text-purple-400" />
             </div>
           </CardContent>
         </Card>
@@ -227,14 +227,14 @@ const DonationsList = () => {
                   ${avgDonation.toFixed(2)}
                 </p>
               </div>
-              <TrendingUp className="h-8 w-8 text-orange-400" />
+              <TrendingUp className="h-5 w-5 text-orange-400" />
             </div>
           </CardContent>
         </Card>
       </div>
 
       {/* Filters */}
-      <div className="mb-6 flex flex-wrap items-center gap-4">
+      <div className="mb-4 flex flex-wrap items-center gap-4">
         <div className="flex-1 min-w-[250px]">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
@@ -242,7 +242,7 @@ const DonationsList = () => {
               placeholder="Search by name or email..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 bg-slate-800/50 border-slate-700 text-white"
+              className="pl-6 bg-slate-800/50 border-slate-700 text-white"
             />
           </div>
         </div>
@@ -288,8 +288,8 @@ const DonationsList = () => {
           <TableBody>
             {isLoading ? (
               <TableRow>
-                <TableCell colSpan={7} className="text-center py-8">
-                  <RefreshCw className="h-6 w-6 animate-spin mx-auto mb-2 text-orange-400" />
+                <TableCell colSpan={7} className="text-center py-5">
+                  <RefreshCw className="h-4 w-4 animate-spin mx-auto mb-2 text-orange-400" />
                   <span className="text-slate-400">Loading donations...</span>
                 </TableCell>
               </TableRow>
@@ -297,9 +297,9 @@ const DonationsList = () => {
               <TableRow>
                 <TableCell
                   colSpan={7}
-                  className="text-center py-8 text-slate-400"
+                  className="text-center py-5 text-slate-400"
                 >
-                  <Heart className="h-12 w-12 mx-auto mb-2 opacity-50" />
+                  <Heart className="h-7 w-7 mx-auto mb-2 opacity-50" />
                   No donations found
                 </TableCell>
               </TableRow>

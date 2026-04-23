@@ -90,17 +90,17 @@ export default function Events() {
       <Navigation />
 
       {/* Hero */}
-      <section className="relative min-h-[60dvh] flex items-center pt-[clamp(100px,14vw,140px)] pb-16 overflow-hidden text-center">
+      <section className="relative min-h-[60dvh] flex items-center pt-[clamp(100px,14vw,140px)] pb-10 overflow-hidden text-center">
         <div className="absolute inset-0 bg-gradient-to-b from-[#fff8f5] via-background to-background pointer-events-none" />
         <div className="hss-hero-glow" />
         <div className="container mx-auto max-w-4xl relative z-10">
           <Badge className="mb-4 bg-[#d96c4a]/10 text-[#c45e3b] border-[#d96c4a]/20 font-semibold tracking-wide">
             Ohio Cybersecurity Events
           </Badge>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-5 leading-[1.08]">
+          <h1 className="text-3xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight mb-5 leading-[1.08]">
             Upcoming Workshops<br className="hidden sm:block" /> &amp; Events
           </h1>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto mb-5 leading-relaxed">
             Join us in-person across Southwest Ohio or online from anywhere.
             Sessions designed for seniors, families, and businesses.
           </p>
@@ -126,9 +126,9 @@ export default function Events() {
       </section>
 
       {/* Upcoming Events */}
-      <section className="py-16">
+      <section className="py-10">
         <div className="container mx-auto max-w-4xl">
-          <h2 className="text-2xl font-bold mb-8">Upcoming Events</h2>
+          <h2 className="text-2xl font-bold mb-5">Upcoming Events</h2>
           <div className="space-y-5">
             {upcomingEvents.map((event) => (
               <div
@@ -137,17 +137,17 @@ export default function Events() {
               >
                 <div className="flex flex-col sm:flex-row">
                   {/* Date column */}
-                  <div className="sm:w-28 flex-shrink-0 bg-gradient-to-b from-[#fff8f5] to-[#fdf3ee] border-b sm:border-b-0 sm:border-r border-[#d96c4a]/15 flex flex-row sm:flex-col items-center justify-center gap-3 sm:gap-1 px-6 py-4 sm:py-6">
+                  <div className="sm:w-18 flex-shrink-0 bg-gradient-to-b from-[#fff8f5] to-[#fdf3ee] border-b sm:border-b-0 sm:border-r border-[#d96c4a]/15 flex flex-row sm:flex-col items-center justify-center gap-3 sm:gap-1 px-4 py-4 sm:py-4">
                     <span className="text-[11px] font-bold tracking-widest text-[#d96c4a] uppercase">
                       {event.month}
                     </span>
-                    <span className="text-4xl font-extrabold text-foreground leading-none">
+                    <span className="text-2xl font-extrabold text-foreground leading-none">
                       {event.day}
                     </span>
                   </div>
 
                   {/* Content */}
-                  <div className="flex-1 p-6">
+                  <div className="flex-1 p-4">
                     <div className="flex flex-wrap items-start gap-2 mb-2">
                       <h3 className="text-lg font-bold flex-1">{event.title}</h3>
                       <Badge
@@ -197,13 +197,13 @@ export default function Events() {
       </section>
 
       {/* Host CTA */}
-      <section className="py-16 section-warm-alt text-center">
+      <section className="py-10 section-warm-alt text-center">
         <div className="container mx-auto max-w-2xl">
           <div className="hss-icon-bubble-lg mx-auto mb-5">
-            <Calendar className="w-6 h-6 text-[#d96c4a]" />
+            <Calendar className="w-4 h-4 text-[#d96c4a]" />
           </div>
           <h2 className="text-2xl font-bold mb-3">Want to Host a Workshop?</h2>
-          <p className="text-muted-foreground mb-6 leading-relaxed">
+          <p className="text-muted-foreground mb-4 leading-relaxed">
             We bring cybersecurity workshops to senior centers, libraries,
             businesses, and community organizations across Ohio. Reach out to
             discuss bringing a session to your group.

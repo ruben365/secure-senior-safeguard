@@ -12,12 +12,12 @@ const services = [
 
 export const WorkshopsPromo = () => {
   return (
-    <section className="py-16 lg:py-24 relative overflow-hidden" aria-labelledby="workshops-heading">
+    <section className="py-10 lg:py-16 relative overflow-hidden" aria-labelledby="workshops-heading">
       <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-primary/8 to-accent/5 blur-[120px] pointer-events-none" />
       <div className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-gradient-to-br from-accent/6 to-primary/4 blur-[100px] pointer-events-none" />
 
       <div className="container mx-auto max-w-6xl relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-7 lg:gap-10 items-center">
           {/* Media - Left */}
           <div className="relative">
             <div className="relative aspect-[4/3] rounded-3xl overflow-hidden group">
@@ -28,7 +28,7 @@ export const WorkshopsPromo = () => {
 
             <div className="absolute -bottom-5 -right-3 lg:-right-6 backdrop-blur-xl bg-card/80 rounded-2xl border border-white/40 p-4" style={{ boxShadow: 'var(--skeuo-shadow-ombre)' }}>
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-[0_4px_15px_hsl(var(--primary)/0.4)]">
+                <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-[0_4px_15px_hsl(var(--primary)/0.4)]">
                   <span className="text-white font-black text-sm">99%</span>
                 </div>
                 <div>
@@ -40,10 +40,10 @@ export const WorkshopsPromo = () => {
           </div>
 
           {/* Content - Right */}
-          <div className="space-y-8">
+          <div className="space-y-5">
             <div>
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/8 backdrop-blur-sm border border-primary/15 text-xs font-bold uppercase tracking-[0.2em] text-primary mb-4">Workshops</span>
-              <h2 id="workshops-heading" className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] mb-4">
+              <h2 id="workshops-heading" className="text-3xl md:text-2xl lg:text-3xl font-black text-foreground leading-[1.1] mb-4">
                 Why Families Choose Our{" "}
                 <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Protection Training</span>
               </h2>
@@ -52,14 +52,14 @@ export const WorkshopsPromo = () => {
               </p>
             </div>
 
-            <div className="flex items-center gap-8 p-5 rounded-2xl backdrop-blur-xl bg-card/60 border border-border/40" style={{ boxShadow: 'var(--skeuo-shadow-ombre)' }}>
+            <div className="flex items-center gap-5 p-5 rounded-2xl backdrop-blur-xl bg-card/60 border border-border/40" style={{ boxShadow: 'var(--skeuo-shadow-ombre)' }}>
               <div>
-                <div className="text-4xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">500+</div>
+                <div className="text-2xl font-black bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">500+</div>
                 <div className="text-sm text-muted-foreground">Families Protected</div>
               </div>
-              <div className="h-12 w-px bg-gradient-to-b from-transparent via-border to-transparent" />
+              <div className="h-7 w-px bg-gradient-to-b from-transparent via-border to-transparent" />
               <div>
-                <div className="text-4xl font-black bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">100%</div>
+                <div className="text-2xl font-black bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">100%</div>
                 <div className="text-sm text-muted-foreground">Satisfaction</div>
               </div>
             </div>
@@ -72,7 +72,7 @@ export const WorkshopsPromo = () => {
                       background: 'radial-gradient(circle at 30% 30%, hsl(var(--primary) / 0.08) 0%, transparent 70%)'
                     }} />
                     <div className="flex items-start gap-3 relative z-10">
-                      <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/15 to-accent/10 backdrop-blur-sm border border-primary/10 flex items-center justify-center flex-shrink-0">
+                      <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-primary/15 to-accent/10 backdrop-blur-sm border border-primary/10 flex items-center justify-center flex-shrink-0">
                         <service.icon className="w-[18px] h-[18px] text-primary" />
                       </div>
                       <div>

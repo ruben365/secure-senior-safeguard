@@ -68,7 +68,7 @@ function MyCourses() {
         onSignOut={handleSignOut}
       />
 
-      <main className="container mx-auto py-6 space-y-6">
+      <main className="container mx-auto py-4 space-y-4">
         {/* Progress Overview */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -76,10 +76,10 @@ function MyCourses() {
           className="grid grid-cols-1 md:grid-cols-4 gap-4"
         >
           <Card className="bg-gradient-to-br from-primary/10 to-primary/5">
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                  <BookOpen className="w-6 h-6 text-primary" />
+                <div className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center">
+                  <BookOpen className="w-4 h-4 text-primary" />
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Enrolled</p>
@@ -90,10 +90,10 @@ function MyCourses() {
           </Card>
 
           <Card className="bg-gradient-to-br from-green-500/10 to-green-500/5">
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center">
-                  <Trophy className="w-6 h-6 text-green-600" />
+                <div className="w-7 h-7 rounded-full bg-green-500/20 flex items-center justify-center">
+                  <Trophy className="w-4 h-4 text-green-600" />
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Completed</p>
@@ -104,10 +104,10 @@ function MyCourses() {
           </Card>
 
           <Card className="bg-gradient-to-br from-blue-500/10 to-blue-500/5">
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/50/20 flex items-center justify-center">
-                  <Clock className="w-6 h-6 text-primary" />
+                <div className="w-7 h-7 rounded-full bg-primary/50/20 flex items-center justify-center">
+                  <Clock className="w-4 h-4 text-primary" />
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">In Progress</p>
@@ -118,10 +118,10 @@ function MyCourses() {
           </Card>
 
           <Card className="bg-gradient-to-br from-purple-500/10 to-purple-500/5">
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center">
-                  <GraduationCap className="w-6 h-6 text-purple-600" />
+                <div className="w-7 h-7 rounded-full bg-purple-500/20 flex items-center justify-center">
+                  <GraduationCap className="w-4 h-4 text-purple-600" />
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Avg Progress</p>
@@ -136,7 +136,7 @@ function MyCourses() {
         {isLoading ? (
           <Card>
             <CardHeader>
-              <Skeleton className="h-6 w-48" />
+              <Skeleton className="h-4 w-48" />
             </CardHeader>
             <CardContent className="space-y-4">
               {[1, 2].map((i) => (
@@ -144,7 +144,7 @@ function MyCourses() {
                   key={i}
                   className="flex items-center gap-4 p-4 border rounded-lg"
                 >
-                  <Skeleton className="w-16 h-16 rounded" />
+                  <Skeleton className="w-10 h-10 rounded" />
                   <div className="flex-1">
                     <Skeleton className="h-5 w-3/4 mb-2" />
                     <Skeleton className="h-3 w-full" />
@@ -175,8 +175,8 @@ function MyCourses() {
                       navigate(`/portal/courses/${enrollment.course_id}`)
                     }
                   >
-                    <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center">
-                      <GraduationCap className="w-8 h-8 text-white" />
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center">
+                      <GraduationCap className="w-5 h-5 text-white" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold truncate">

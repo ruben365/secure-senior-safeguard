@@ -16,12 +16,12 @@ export const SkeletonCard = ({
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className={`bg-card rounded-2xl p-6 border border-border/30 ${className}`}
+      className={`bg-card rounded-2xl p-4 border border-border/30 ${className}`}
     >
       {showImage && (
         <Skeleton className="w-full h-48 rounded-xl mb-4 shimmer" />
       )}
-      <Skeleton className="h-6 w-3/4 mb-3 shimmer" />
+      <Skeleton className="h-4 w-3/4 mb-3 shimmer" />
       {Array.from({ length: lines }).map((_, i) => (
         <Skeleton
           key={i}
@@ -42,7 +42,7 @@ export const SkeletonGrid = ({
 }) => {
   return (
     <div
-      className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-${columns} gap-6`}
+      className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-${columns} gap-4`}
     >
       {Array.from({ length: count }).map((_, i) => (
         <SkeletonCard key={i} />

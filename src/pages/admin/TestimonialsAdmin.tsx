@@ -317,8 +317,8 @@ export default function TestimonialsAdmin() {
   );
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="flex items-center justify-between mb-4">
         <div>
           <h1 className="text-2xl font-bold text-[#F9FAFB]">Testimonials</h1>
           <p className="text-[#9CA3AF]">
@@ -333,8 +333,8 @@ export default function TestimonialsAdmin() {
           Add New Testimonial
         </Button>
       </div>
-      <div className="space-y-6">
-        <div className="bg-background border rounded-lg p-4 mb-6">
+      <div className="space-y-4">
+        <div className="bg-background border rounded-lg p-4 mb-4">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
               <div className="relative">
@@ -343,7 +343,7 @@ export default function TestimonialsAdmin() {
                   placeholder="Search testimonials..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10"
+                  className="pl-6"
                 />
               </div>
             </div>
@@ -378,7 +378,7 @@ export default function TestimonialsAdmin() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="bg-primary/10 border border-primary/20 rounded-lg p-4 mb-6 flex items-center justify-between"
+              className="bg-primary/10 border border-primary/20 rounded-lg p-4 mb-4 flex items-center justify-between"
             >
               <div className="flex items-center gap-4">
                 <span className="font-medium text-foreground">
@@ -428,14 +428,14 @@ export default function TestimonialsAdmin() {
 
         {/* Table */}
         {loading ? (
-          <div className="bg-background border rounded-lg p-8 text-center">
+          <div className="bg-background border rounded-lg p-5 text-center">
             <div className="animate-pulse">Loading testimonials...</div>
           </div>
         ) : filteredTestimonials.length === 0 ? (
-          <div className="bg-background border rounded-lg p-12 text-center">
-            <MessageSquare className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+          <div className="bg-background border rounded-lg p-7 text-center">
+            <MessageSquare className="h-10 w-10 text-muted-foreground mx-auto mb-4" />
             <h3 className="text-xl font-semibold mb-2">No Testimonials Yet</h3>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-muted-foreground mb-4">
               Add your first testimonial to showcase customer feedback
             </p>
             <div className="flex gap-2">
@@ -458,7 +458,7 @@ export default function TestimonialsAdmin() {
               <Table>
                 <TableHeader>
                   <TableRow className="bg-muted/50">
-                    <TableHead className="w-12">
+                    <TableHead className="w-7">
                       <Checkbox
                         checked={
                           paginatedTestimonials.length > 0 &&
@@ -469,7 +469,7 @@ export default function TestimonialsAdmin() {
                         onCheckedChange={handleSelectAll}
                       />
                     </TableHead>
-                    <TableHead className="w-12"></TableHead>
+                    <TableHead className="w-7"></TableHead>
                     <TableHead>Customer Name</TableHead>
                     <TableHead>Rating</TableHead>
                     <TableHead>Status</TableHead>
@@ -502,7 +502,7 @@ export default function TestimonialsAdmin() {
                           />
                         </TableCell>
                         <TableCell>
-                          <Avatar className="h-10 w-10">
+                          <Avatar className="h-6 w-6">
                             <AvatarFallback className="bg-primary/10 text-primary font-semibold">
                               {testimonial.name.charAt(0)}
                             </AvatarFallback>
@@ -564,7 +564,7 @@ export default function TestimonialsAdmin() {
             </div>
 
             {/* Pagination */}
-            <div className="mt-6 flex items-center justify-between">
+            <div className="mt-4 flex items-center justify-between">
               <div className="text-sm text-muted-foreground">
                 Showing {startIndex + 1}-
                 {Math.min(endIndex, filteredTestimonials.length)} of{" "}

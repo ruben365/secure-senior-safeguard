@@ -135,8 +135,8 @@ export default function NewsletterManagement() {
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="flex items-center justify-between mb-4">
         <div>
           <h1 className="text-2xl font-bold text-[#F9FAFB]">
             Newsletter Management
@@ -190,12 +190,12 @@ export default function NewsletterManagement() {
         </div>
       </div>
       {/* Stats Cards */}
-      <div className="grid gap-4 md:grid-cols-3 mb-8">
+      <div className="grid gap-4 md:grid-cols-3 mb-5">
         <Card className="bg-[#111827] border-gray-800">
-          <CardContent className="p-6">
+          <CardContent className="p-4">
             <div className="flex items-center gap-4">
               <div className="p-3 rounded-lg bg-gradient-to-br from-[#3B82F6]/20 to-[#06B6D4]/20">
-                <Users className="h-6 w-6 text-[#06B6D4]" />
+                <Users className="h-4 w-4 text-[#06B6D4]" />
               </div>
               <div>
                 <p className="text-3xl font-bold text-[#F9FAFB]">
@@ -207,10 +207,10 @@ export default function NewsletterManagement() {
           </CardContent>
         </Card>
         <Card className="bg-[#111827] border-gray-800">
-          <CardContent className="p-6">
+          <CardContent className="p-4">
             <div className="flex items-center gap-4">
               <div className="p-3 rounded-lg bg-gradient-to-br from-[#10B981]/20 to-[#06B6D4]/20">
-                <Mail className="h-6 w-6 text-[#10B981]" />
+                <Mail className="h-4 w-4 text-[#10B981]" />
               </div>
               <div>
                 <p className="text-3xl font-bold text-[#F9FAFB]">
@@ -222,10 +222,10 @@ export default function NewsletterManagement() {
           </CardContent>
         </Card>
         <Card className="bg-[#111827] border-gray-800">
-          <CardContent className="p-6">
+          <CardContent className="p-4">
             <div className="flex items-center gap-4">
               <div className="p-3 rounded-lg bg-gradient-to-br from-[#8B5CF6]/20 to-[#06B6D4]/20">
-                <TrendingUp className="h-6 w-6 text-[#8B5CF6]" />
+                <TrendingUp className="h-4 w-4 text-[#8B5CF6]" />
               </div>
               <div>
                 <p className="text-3xl font-bold text-[#F9FAFB]">
@@ -259,12 +259,12 @@ export default function NewsletterManagement() {
         </div>
         <CardContent className="p-0">
           {isLoading ? (
-            <div className="flex justify-center p-12">
-              <RefreshCw className="h-8 w-8 animate-spin text-[#06B6D4]" />
+            <div className="flex justify-center p-7">
+              <RefreshCw className="h-5 w-5 animate-spin text-[#06B6D4]" />
             </div>
           ) : !filteredSubscribers || filteredSubscribers.length === 0 ? (
-            <div className="text-center py-12">
-              <Mail className="h-16 w-16 mx-auto text-[#3B82F6]/50 mb-4" />
+            <div className="text-center py-7">
+              <Mail className="h-10 w-10 mx-auto text-[#3B82F6]/50 mb-4" />
               <h3 className="text-xl font-semibold text-[#F9FAFB] mb-2">
                 No Subscribers Yet
               </h3>

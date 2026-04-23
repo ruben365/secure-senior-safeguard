@@ -273,10 +273,10 @@ export function VideoTestimonialUpload({
                   id="video-upload"
                 />
                 <label htmlFor="video-upload">
-                  <div className="border-2 border-dashed rounded-lg p-6 text-center cursor-pointer hover:border-primary">
+                  <div className="border-2 border-dashed rounded-lg p-4 text-center cursor-pointer hover:border-primary">
                     {videoPreview ? (
                       <div>
-                        <Video className="mx-auto h-12 w-12 text-primary mb-2" />
+                        <Video className="mx-auto h-7 w-7 text-primary mb-2" />
                         <p className="text-sm font-medium">{videoFile?.name}</p>
                         <p className="text-xs text-muted-foreground">
                           {(videoFile!.size / (1024 * 1024)).toFixed(2)} MB
@@ -284,7 +284,7 @@ export function VideoTestimonialUpload({
                       </div>
                     ) : (
                       <div>
-                        <Upload className="mx-auto h-12 w-12 text-muted-foreground mb-2" />
+                        <Upload className="mx-auto h-7 w-7 text-muted-foreground mb-2" />
                         <p className="text-sm">Click to upload video</p>
                       </div>
                     )}
@@ -307,12 +307,12 @@ export function VideoTestimonialUpload({
                   <div className="border-2 border-dashed rounded-lg p-4 text-center cursor-pointer hover:border-primary">
                     {thumbnailFile ? (
                       <div>
-                        <ImageIcon className="mx-auto h-8 w-8 text-primary mb-1" />
+                        <ImageIcon className="mx-auto h-5 w-5 text-primary mb-1" />
                         <p className="text-xs">{thumbnailFile.name}</p>
                       </div>
                     ) : (
                       <div>
-                        <ImageIcon className="mx-auto h-8 w-8 text-muted-foreground mb-1" />
+                        <ImageIcon className="mx-auto h-5 w-5 text-muted-foreground mb-1" />
                         <p className="text-xs">Add custom thumbnail</p>
                       </div>
                     )}

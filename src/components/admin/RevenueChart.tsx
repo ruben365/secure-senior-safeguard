@@ -178,9 +178,9 @@ export function RevenueChart() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.4 }}
     >
-      <Card className="p-4 sm:p-6 mt-4 sm:mt-8 rounded-xl shadow-sm">
+      <Card className="p-4 sm:p-4 mt-4 sm:mt-5 rounded-xl shadow-sm">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
           <h2 className="text-xl sm:text-2xl font-bold text-foreground">
             Revenue Overview
           </h2>
@@ -228,7 +228,7 @@ export function RevenueChart() {
         {/* Chart */}
         {loading ? (
           <div className="h-64 sm:h-80 admin-chart flex items-center justify-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            <div className="animate-spin rounded-full h-7 w-7 border-b-2 border-primary"></div>
           </div>
         ) : chartData.length > 0 ? (
           <motion.div
@@ -307,8 +307,8 @@ export function RevenueChart() {
             </ResponsiveContainer>
           </motion.div>
         ) : (
-          <div className="h-80 flex flex-col items-center justify-center text-center p-8">
-            <span className="text-4xl mb-4">📊</span>
+          <div className="h-80 flex flex-col items-center justify-center text-center p-5">
+            <span className="text-2xl mb-4">📊</span>
             <h3 className="text-lg font-semibold text-foreground mb-2">
               No Revenue Data
             </h3>
@@ -324,7 +324,7 @@ export function RevenueChart() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-6 pt-6 border-t border-border grid grid-cols-1 sm:grid-cols-3 gap-4"
+            className="mt-4 pt-4 border-t border-border grid grid-cols-1 sm:grid-cols-3 gap-4"
           >
             <div>
               <p className="text-sm text-muted-foreground mb-1">

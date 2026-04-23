@@ -48,8 +48,8 @@
 .admin-v2 {
   display: grid;
   grid-template-columns: 260px 1fr;
-  gap: 22px;
-  padding: 22px;
+  gap: 14px;
+  padding: 14px;
   height: 100vh;
   overflow: hidden;
   background: var(--bg-1);
@@ -65,7 +65,7 @@
   flex-direction: column;
   overflow: hidden;
   position: relative;
-  height: calc(100vh - 44px);
+  height: calc(100vh - 28px);
 }
 
 /* Radial glow at bottom-right */
@@ -74,8 +74,8 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 220px;
-  height: 220px;
+  width: 138px;
+  height: 138px;
   background: radial-gradient(circle at 70% 80%, rgba(212,104,74,0.22) 0%, transparent 65%);
   pointer-events: none;
   z-index: 0;
@@ -85,16 +85,16 @@
 .admin-v2 .adm-sidebar-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 18px 16px 10px;
+  gap: 6px;
+  padding: 11px 10px 6px;
   position: relative;
   z-index: 1;
 }
 
 .admin-v2 .adm-sidebar-logo-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
   display: flex;
   align-items: center;
@@ -112,14 +112,14 @@
 
 /* Profile chip */
 .admin-v2 .adm-sidebar-profile {
-  margin: 4px 12px 10px;
-  padding: 9px 12px;
+  margin: 2px 8px 6px;
+  padding: 6px 8px;
   background: rgba(255,255,255,0.055);
   border: 1px solid rgba(255,255,255,0.07);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 6px;
   position: relative;
   z-index: 1;
   cursor: pointer;
@@ -131,8 +131,8 @@
 }
 
 .admin-v2 .adm-sidebar-avatar {
-  width: 34px;
-  height: 34px;
+  width: 21px;
+  height: 21px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--accent), var(--accent-deep));
   display: flex;
@@ -164,7 +164,7 @@
 /* Nav container */
 .admin-v2 .adm-sidebar-nav {
   flex: 1;
-  padding: 2px 10px 8px;
+  padding: 2px 6px 5px;
   overflow-y: auto;
   scrollbar-width: none;
   position: relative;
@@ -180,17 +180,17 @@
   color: rgba(255,255,255,0.22);
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  padding: 10px 10px 3px;
+  padding: 6px 6px 2px;
 }
 
 /* Nav parent button */
 .admin-v2 .adm-nav-parent {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 6px;
   width: 100%;
-  padding: 8px 10px;
-  border-radius: 12px;
+  padding: 5px 6px;
+  border-radius: 8px;
   border: none;
   background: none;
   cursor: pointer;
@@ -214,9 +214,9 @@
 
 /* Icon circle */
 .admin-v2 .adm-nav-icon {
-  width: 30px;
-  height: 30px;
-  border-radius: 9px;
+  width: 19px;
+  height: 19px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -245,16 +245,16 @@
 
 /* Child nav items */
 .admin-v2 .adm-nav-children {
-  padding-left: 14px;
+  padding-left: 9px;
   margin-bottom: 2px;
 }
 
 .admin-v2 .adm-nav-child {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 10px;
-  border-radius: 9px;
+  gap: 5px;
+  padding: 4px 6px;
+  border-radius: 6px;
   font-size: 12px;
   font-weight: 500;
   color: rgba(255,255,255,0.38);
@@ -276,9 +276,9 @@
 /* Pending badge */
 .admin-v2 .adm-badge {
   min-width: 18px;
-  height: 18px;
-  padding: 0 4px;
-  border-radius: 100px;
+  height: 11px;
+  padding: 0 2px;
+  border-radius: 70px;
   background: var(--accent);
   color: #fff;
   font-size: 10px;
@@ -292,11 +292,11 @@
 
 /* Promo card */
 .admin-v2 .adm-sidebar-promo {
-  margin: 6px 12px 16px;
-  padding: 13px 14px;
+  margin: 4px 8px 10px;
+  padding: 8px 9px;
   background: rgba(212,104,74,0.13);
   border: 1px solid rgba(212,104,74,0.22);
-  border-radius: 18px;
+  border-radius: 13px;
   position: relative;
   z-index: 1;
 }
@@ -305,22 +305,22 @@
   font-size: 11.5px;
   font-weight: 700;
   color: rgba(255,255,255,0.85);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .admin-v2 .adm-sidebar-promo-text {
   font-size: 10.5px;
   color: rgba(255,255,255,0.4);
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   line-height: 1.55;
 }
 
 .admin-v2 .adm-sidebar-promo-btn {
   display: block;
   width: 100%;
-  padding: 7px;
+  padding: 4px;
   background: linear-gradient(135deg, var(--accent), var(--accent-deep));
-  border-radius: 10px;
+  border-radius: 7px;
   font-size: 12px;
   font-weight: 600;
   color: #fff;
@@ -349,32 +349,32 @@
 .admin-v2.sidebar-collapsed .adm-sidebar-promo { display: none; }
 
 .admin-v2.sidebar-collapsed .adm-sidebar-profile {
-  margin: 4px 8px 10px;
-  padding: 8px;
+  margin: 2px 5px 6px;
+  padding: 5px;
   justify-content: center;
 }
 
 .admin-v2.sidebar-collapsed .adm-sidebar-logo {
-  padding: 18px 10px 10px;
+  padding: 11px 6px 6px;
   justify-content: center;
 }
 
 .admin-v2.sidebar-collapsed .adm-nav-parent {
-  padding: 8px;
+  padding: 5px;
   justify-content: center;
 }
 
 .admin-v2.sidebar-collapsed .adm-nav-icon {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
+  width: 21px;
+  height: 21px;
+  border-radius: 7px;
 }
 
 /* ─── Main content column ────────────────────────────────────── */
 .admin-v2 .adm-main {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 44px);
+  height: calc(100vh - 28px);
   overflow: hidden;
   border-radius: var(--radius-xl);
   background: var(--bg-1);
@@ -385,8 +385,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 12px 18px;
+  gap: 8px;
+  padding: 8px 11px;
   background: var(--panel);
   backdrop-filter: blur(30px) saturate(140%);
   -webkit-backdrop-filter: blur(30px) saturate(140%);
@@ -399,12 +399,12 @@
 .admin-v2 .adm-topbar-search {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 5px;
   flex: 1;
   max-width: 380px;
-  padding: 8px 14px;
+  padding: 5px 9px;
   background: rgba(0,0,0,0.04);
-  border-radius: 100px;
+  border-radius: 70px;
   border: 1px solid var(--line);
 }
 
@@ -422,12 +422,12 @@
 .admin-v2 .adm-topbar-actions {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 
 .admin-v2 .adm-topbar-btn {
-  width: 36px;
-  height: 36px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   border: none;
   background: var(--panel-solid);
@@ -449,9 +449,9 @@
 .admin-v2 .adm-topbar-profile {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 4px 10px 4px 4px;
-  border-radius: 100px;
+  gap: 5px;
+  padding: 2px 6px 2px 2px;
+  border-radius: 70px;
   background: var(--panel-solid);
   box-shadow: var(--shadow-card);
   cursor: pointer;
@@ -462,8 +462,8 @@
 .admin-v2 .adm-topbar-profile:hover { box-shadow: var(--shadow-out); }
 
 .admin-v2 .adm-topbar-avatar {
-  width: 28px;
-  height: 28px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--accent), var(--accent-deep));
   display: flex;
@@ -490,10 +490,10 @@
   scrollbar-color: rgba(0,0,0,0.1) transparent;
 }
 
-.admin-v2 .adm-page-scroll::-webkit-scrollbar { width: 4px; }
+.admin-v2 .adm-page-scroll::-webkit-scrollbar { width: 2px; }
 .admin-v2 .adm-page-scroll::-webkit-scrollbar-thumb {
   background: rgba(0,0,0,0.1);
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 /* ─── Glass panel ────────────────────────────────────────────── */
@@ -526,7 +526,7 @@
 
 .admin-v2 .adm-panel-soft {
   background: var(--panel-soft);
-  border-radius: 18px;
+  border-radius: 13px;
   box-shadow: var(--shadow-soft);
 }
 
@@ -534,18 +534,18 @@
 .admin-v2 .adm-neumorph {
   box-shadow: var(--shadow-out);
   background: var(--bg-1);
-  border-radius: 16px;
+  border-radius: 11px;
 }
 
 .admin-v2 .adm-neumorph-inset {
-  box-shadow: inset 4px 4px 12px rgba(0,0,0,0.07), inset -4px -4px 12px rgba(255,255,255,0.65);
-  border-radius: 10px;
+  box-shadow: inset 4px 4px 9px rgba(0,0,0,0.07), inset -4px -4px 9px rgba(255,255,255,0.65);
+  border-radius: 7px;
 }
 
 /* ─── Quick action circles ───────────────────────────────────── */
 .admin-v2 .adm-quick {
-  width: 68px;
-  height: 68px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -554,7 +554,7 @@
   transition: transform 140ms ease, box-shadow 140ms ease;
   border: none;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
 }
 
 .admin-v2 .adm-quick:hover {
@@ -576,15 +576,15 @@
 
 /* ─── Progress bar ───────────────────────────────────────────── */
 .admin-v2 .adm-progress {
-  height: 8px;
-  border-radius: 4px;
+  height: 5px;
+  border-radius: 3px;
   background: rgba(0,0,0,0.07);
   overflow: hidden;
 }
 
 .admin-v2 .adm-progress-fill {
   height: 100%;
-  border-radius: 4px;
+  border-radius: 3px;
   background: linear-gradient(90deg, var(--accent-soft), var(--accent));
   transition: width 500ms ease;
 }
@@ -593,14 +593,14 @@
 .admin-v2 .adm-seg {
   display: flex;
   gap: 2px;
-  padding: 3px;
+  padding: 2px;
   background: rgba(0,0,0,0.06);
-  border-radius: 10px;
+  border-radius: 7px;
 }
 
 .admin-v2 .adm-seg-btn {
-  padding: 5px 14px;
-  border-radius: 8px;
+  padding: 3px 9px;
+  border-radius: 6px;
   font-size: 12px;
   font-weight: 600;
   color: var(--muted);
@@ -620,9 +620,9 @@
 .admin-v2 .adm-chip-up {
   display: inline-flex;
   align-items: center;
-  gap: 3px;
-  padding: 2px 8px;
-  border-radius: 100px;
+  gap: 2px;
+  padding: 2px 5px;
+  border-radius: 70px;
   font-size: 11px;
   font-weight: 600;
   background: rgba(52,199,89,0.12);
@@ -632,9 +632,9 @@
 .admin-v2 .adm-chip-down {
   display: inline-flex;
   align-items: center;
-  gap: 3px;
-  padding: 2px 8px;
-  border-radius: 100px;
+  gap: 2px;
+  padding: 2px 5px;
+  border-radius: 70px;
   font-size: 11px;
   font-weight: 600;
   background: rgba(255,59,48,0.12);
@@ -693,7 +693,7 @@
     display: flex;
     position: fixed;
     top: 0; left: 0;
-    width: 270px;
+    width: 169px;
     z-index: 100;
   }
 

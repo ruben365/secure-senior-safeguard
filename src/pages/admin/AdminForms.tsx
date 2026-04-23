@@ -373,9 +373,9 @@ function FormRenderer({ form, onClose }: { form: FormDef; onClose: () => void })
 
   if (submitted) {
     return (
-      <div className="flex flex-col items-center justify-center py-12 gap-4">
-        <div className="w-14 h-14 rounded-full bg-green-500/20 flex items-center justify-center">
-          <Send className="w-7 h-7 text-green-400" />
+      <div className="flex flex-col items-center justify-center py-4 gap-4">
+        <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center">
+          <Send className="w-4 h-4 text-green-400" />
         </div>
         <h3 className="text-lg font-semibold text-[#F9FAFB]">Form Submitted</h3>
         <p className="text-[#6B7280] text-sm">Saved to Supabase form_submissions table.</p>
@@ -426,7 +426,7 @@ function FormRenderer({ form, onClose }: { form: FormDef; onClose: () => void })
                 </SelectContent>
               </Select>
             ) : field.type === "checkbox" ? (
-              <div className="flex items-center gap-3 h-10">
+              <div className="flex items-center gap-3 h-4">
                 <input
                   type="checkbox"
                   id={field.name}
@@ -563,7 +563,7 @@ export default function AdminForms() {
   );
 
   return (
-    <div className="p-6 space-y-6 min-h-screen bg-[#0F1117]">
+    <div className="p-4 space-y-4 min-h-screen bg-[#0F1117]">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
@@ -587,7 +587,7 @@ export default function AdminForms() {
             <CardTitle className="text-[#F9FAFB] text-base">Recent Submissions</CardTitle>
             <div className="flex items-center gap-2">
               <Select value={filterFormType || "__all__"} onValueChange={(v) => setFilterFormType(v === "__all__" ? null : v)}>
-                <SelectTrigger className="w-44 bg-[#1F2937] border-[#374151] text-[#9CA3AF] h-8 text-xs">
+                <SelectTrigger className="w-44 bg-[#1F2937] border-[#374151] text-[#9CA3AF] h-5 text-xs">
                   <SelectValue placeholder="All forms" />
                 </SelectTrigger>
                 <SelectContent className="bg-[#1F2937] border-[#374151]">
@@ -597,7 +597,7 @@ export default function AdminForms() {
                   ))}
                 </SelectContent>
               </Select>
-              <Button variant="ghost" size="icon" className="h-8 w-8 text-[#6B7280] hover:text-[#F9FAFB]">
+              <Button variant="ghost" size="icon" className="h-5 w-5 text-[#6B7280] hover:text-[#F9FAFB]">
                 <RefreshCw className="w-3.5 h-3.5" />
               </Button>
             </div>
@@ -632,7 +632,7 @@ export default function AdminForms() {
           placeholder="Search forms..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="pl-9 bg-[#111827] border-[#1F2937] text-[#F9FAFB] placeholder:text-[#6B7280]"
+          className="pl-4 bg-[#111827] border-[#1F2937] text-[#F9FAFB] placeholder:text-[#6B7280]"
         />
       </div>
 
@@ -648,7 +648,7 @@ export default function AdminForms() {
             >
               <CardContent className="p-5">
                 <div className="flex items-start gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-lg bg-orange-500/15 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-500/25 transition-colors">
+                  <div className="w-4 h-4 rounded-lg bg-orange-500/15 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-500/25 transition-colors">
                     <Icon className="w-5 h-5 text-orange-400" />
                   </div>
                   <div className="min-w-0">
@@ -665,7 +665,7 @@ export default function AdminForms() {
           );
         })}
         {filtered.length === 0 && (
-          <p className="col-span-full text-center text-[#6B7280] py-10 text-sm">No forms found.</p>
+          <p className="col-span-full text-center text-[#6B7280] py-4 text-sm">No forms found.</p>
         )}
       </div>
 

@@ -37,7 +37,7 @@ function MetricCard({
         <CardContent className="p-4">
           <div className="flex items-center justify-between">
             <div
-              className={`w-10 h-10 rounded-lg bg-muted flex items-center justify-center`}
+              className={`w-6 h-6 rounded-lg bg-muted flex items-center justify-center`}
             >
               <Icon className="w-5 h-5 text-muted-foreground" />
             </div>
@@ -55,12 +55,12 @@ function MetricCard({
   return (
     <Card className="relative overflow-hidden">
       <div
-        className={`absolute top-0 right-0 w-20 h-20 rounded-full -mr-10 -mt-10 opacity-10 ${color}`}
+        className={`absolute top-0 right-0 w-12 h-12 rounded-full -mr-6 -mt-6 opacity-10 ${color}`}
       />
       <CardContent className="p-4">
         <div className="flex items-center justify-between">
           <div
-            className={`w-10 h-10 rounded-lg ${color} flex items-center justify-center`}
+            className={`w-6 h-6 rounded-lg ${color} flex items-center justify-center`}
           >
             <Icon className="w-5 h-5 text-white" />
           </div>
@@ -109,9 +109,9 @@ export function BusinessMetricsGrid({
   if (!hasActiveAutomation) {
     return (
       <Card className="border-dashed border-muted-foreground/30">
-        <CardContent className="p-8 text-center">
-          <div className="w-16 h-16 mx-auto rounded-2xl bg-muted flex items-center justify-center mb-4">
-            <AlertCircle className="w-8 h-8 text-muted-foreground" />
+        <CardContent className="p-5 text-center">
+          <div className="w-10 h-10 mx-auto rounded-2xl bg-muted flex items-center justify-center mb-4">
+            <AlertCircle className="w-5 h-5 text-muted-foreground" />
           </div>
           <h3 className="text-lg font-semibold mb-2">
             No Automation Configured

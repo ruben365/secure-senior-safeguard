@@ -41,13 +41,13 @@ function getRiskIcon(riskLevel: string | null) {
   switch (riskLevel?.toLowerCase()) {
     case "critical":
     case "high":
-      return <ShieldAlert className="w-6 h-6 text-red-500" />;
+      return <ShieldAlert className="w-4 h-4 text-red-500" />;
     case "medium":
-      return <AlertTriangle className="w-6 h-6 text-yellow-500" />;
+      return <AlertTriangle className="w-4 h-4 text-yellow-500" />;
     case "low":
-      return <ShieldCheck className="w-6 h-6 text-green-500" />;
+      return <ShieldCheck className="w-4 h-4 text-green-500" />;
     default:
-      return <Clock className="w-6 h-6 text-muted-foreground" />;
+      return <Clock className="w-4 h-4 text-muted-foreground" />;
   }
 }
 
@@ -63,7 +63,7 @@ export default function ScamCheckResult() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-background via-violet-500/5 to-purple-500/10 flex items-center justify-center">
         <div className="text-center space-y-4">
-          <div className="w-16 h-16 mx-auto rounded-full bg-violet-500/20 animate-pulse" />
+          <div className="w-10 h-10 mx-auto rounded-full bg-violet-500/20 animate-pulse" />
           <p className="text-muted-foreground">Loading analysis results...</p>
         </div>
       </div>
@@ -72,11 +72,11 @@ export default function ScamCheckResult() {
 
   if (error || !submission) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background via-violet-500/5 to-purple-500/10 p-6">
+      <div className="min-h-screen bg-gradient-to-br from-background via-violet-500/5 to-purple-500/10 p-4">
         <div className="container max-w-3xl mx-auto">
           <Card className="border-destructive/50">
-            <CardContent className="p-8 text-center">
-              <AlertCircle className="w-12 h-12 mx-auto text-destructive mb-4" />
+            <CardContent className="p-5 text-center">
+              <AlertCircle className="w-7 h-7 mx-auto text-destructive mb-4" />
               <h2 className="text-xl font-bold mb-2">Analysis Not Found</h2>
               <p className="text-muted-foreground mb-4">
                 We couldn't find this scam analysis. It may have been removed or
@@ -95,8 +95,8 @@ export default function ScamCheckResult() {
   const isPending = submission.status === "pending" || !submission.analyzed_at;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-violet-500/5 to-purple-500/10 p-6">
-      <div className="container max-w-3xl mx-auto space-y-6">
+    <div className="min-h-screen bg-gradient-to-br from-background via-violet-500/5 to-purple-500/10 p-4">
+      <div className="container max-w-3xl mx-auto space-y-4">
         {/* Header */}
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="icon" asChild>
@@ -119,9 +119,9 @@ export default function ScamCheckResult() {
             animate={{ opacity: 1, y: 0 }}
           >
             <Card>
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 mx-auto rounded-full bg-violet-500/20 flex items-center justify-center mb-4">
-                  <Clock className="w-8 h-8 text-violet-500 animate-pulse" />
+              <CardContent className="p-5 text-center">
+                <div className="w-10 h-10 mx-auto rounded-full bg-violet-500/20 flex items-center justify-center mb-4">
+                  <Clock className="w-5 h-5 text-violet-500 animate-pulse" />
                 </div>
                 <h2 className="text-xl font-bold mb-2">Analysis in Progress</h2>
                 <p className="text-muted-foreground mb-4">
@@ -143,9 +143,9 @@ export default function ScamCheckResult() {
               <Card
                 className={`border-2 ${getRiskColor(submission.risk_level)}`}
               >
-                <CardContent className="p-6">
+                <CardContent className="p-4">
                   <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 rounded-2xl bg-card flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-2xl bg-card flex items-center justify-center">
                       {getRiskIcon(submission.risk_level)}
                     </div>
                     <div className="flex-1">
@@ -162,7 +162,7 @@ export default function ScamCheckResult() {
                           <span>AI Confidence:</span>
                           <Progress
                             value={submission.ai_confidence}
-                            className="w-24 h-2"
+                            className="w-16 h-2"
                           />
                           <span>{submission.ai_confidence}%</span>
                         </div>

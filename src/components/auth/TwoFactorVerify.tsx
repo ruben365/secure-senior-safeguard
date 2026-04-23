@@ -116,8 +116,8 @@ export function TwoFactorVerify({ onVerified, onCancel }: TwoFactorVerifyProps) 
     <div className="space-y-5">
       <div className="text-center space-y-2">
         <div className="flex justify-center mb-3">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500/20 to-orange-600/10 border border-orange-500/20 flex items-center justify-center">
-            <Shield className="w-6 h-6 text-orange-500" />
+          <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-orange-500/20 to-orange-600/10 border border-orange-500/20 flex items-center justify-center">
+            <Shield className="w-4 h-4 text-orange-500" />
           </div>
         </div>
         <h3 className="text-lg font-bold text-slate-900">
@@ -156,7 +156,7 @@ export function TwoFactorVerify({ onVerified, onCancel }: TwoFactorVerifyProps) 
       <Button
         onClick={() => handleVerify()}
         disabled={isVerifying || code.some((d) => !d)}
-        className="w-full h-11 bg-[#080d1a] text-white hover:bg-[#111827]"
+        className="w-full h-7 bg-[#080d1a] text-white hover:bg-[#111827]"
       >
         {isVerifying ? (
           <>

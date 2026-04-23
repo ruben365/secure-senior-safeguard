@@ -46,10 +46,10 @@ export function CheckoutDialogFrame({
 
       <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[radial-gradient(circle_at_top,rgba(217,108,74,0.14),transparent_62%)]" />
 
-      <div className="relative border-b border-border/60 px-5 py-5 sm:px-6">
+      <div className="relative border-b border-border/60 px-5 py-5 sm:px-4">
         <div className="flex items-start justify-between gap-4">
           <div className="flex min-w-0 items-start gap-3">
-            <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl border border-[#d96c4a]/15 bg-[#d96c4a]/10 text-[#b75539] shadow-sm">
+            <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-2xl border border-[#d96c4a]/15 bg-[#d96c4a]/10 text-[#b75539] shadow-sm">
               {icon}
             </div>
             <div className="min-w-0 space-y-1">
@@ -65,7 +65,7 @@ export function CheckoutDialogFrame({
           {badgeLabel ? (
             <Badge
               variant={badgeTone}
-              className="h-8 flex-shrink-0 rounded-full border-[#d96c4a]/20 bg-white/70 px-3 text-[11px] font-medium text-[#8e462f] shadow-sm"
+              className="h-5 flex-shrink-0 rounded-full border-[#d96c4a]/20 bg-white/70 px-3 text-[11px] font-medium text-[#8e462f] shadow-sm"
             >
               {badgeLabel}
             </Badge>
@@ -75,7 +75,7 @@ export function CheckoutDialogFrame({
 
       <div
         className={cn(
-          "relative max-h-[calc(90svh-108px)] overflow-y-auto px-4 py-4 sm:px-6 sm:py-5",
+          "relative max-h-[calc(90svh-108px)] overflow-y-auto px-4 py-4 sm:px-4 sm:py-5",
           bodyClassName,
         )}
       >
@@ -90,7 +90,7 @@ export function CheckoutDialogFrame({
       </div>
 
       {footer ? (
-        <div className="relative border-t border-border/60 bg-white/75 px-5 py-3 text-xs text-muted-foreground sm:px-6">
+        <div className="relative border-t border-border/60 bg-white/75 px-5 py-3 text-xs text-muted-foreground sm:px-4">
           {footer}
         </div>
       ) : null}

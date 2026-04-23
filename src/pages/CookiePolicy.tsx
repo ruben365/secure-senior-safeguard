@@ -19,45 +19,45 @@ function CookiePolicy() {
         title="Cookie Policy"
         lede="How we use cookies and your choices."
       />
-      <section className="py-16 md:py-20 bg-background">
+      <section className="py-10 md:py-12 bg-background">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto">
             <h1 className="sr-only">Cookie Policy</h1>
-            <p className="text-center text-muted-foreground mb-8 text-lg">
+            <p className="text-center text-muted-foreground mb-5 text-lg">
               Last Updated:{" "}
 April 14, 2026
             </p>
-            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            <p className="text-center text-muted-foreground mb-7 max-w-2xl mx-auto">
               This policy explains how InVision Network uses cookies and similar
               technologies when you visit our website.
             </p>
 
             {/* Cookie Types Overview */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-7">
               <Card className="p-4 text-center">
-                <Shield className="h-8 w-8 mx-auto mb-2 text-primary" />
+                <Shield className="h-5 w-5 mx-auto mb-2 text-primary" />
                 <h3 className="font-semibold text-sm">Essential</h3>
                 <p className="text-xs text-muted-foreground">Required</p>
               </Card>
               <Card className="p-4 text-center">
-                <Settings className="h-8 w-8 mx-auto mb-2 text-primary" />
+                <Settings className="h-5 w-5 mx-auto mb-2 text-primary" />
                 <h3 className="font-semibold text-sm">Functional</h3>
                 <p className="text-xs text-muted-foreground">Optional</p>
               </Card>
               <Card className="p-4 text-center">
-                <BarChart3 className="h-8 w-8 mx-auto mb-2 text-green-500" />
+                <BarChart3 className="h-5 w-5 mx-auto mb-2 text-green-500" />
                 <h3 className="font-semibold text-sm">Analytics</h3>
                 <p className="text-xs text-muted-foreground">Optional</p>
               </Card>
               <Card className="p-4 text-center">
-                <Cookie className="h-8 w-8 mx-auto mb-2 text-amber-500" />
+                <Cookie className="h-5 w-5 mx-auto mb-2 text-amber-500" />
                 <h3 className="font-semibold text-sm">Marketing</h3>
                 <p className="text-xs text-muted-foreground">Optional</p>
               </Card>
             </div>
 
-            <Card className="p-8 mb-8">
-              <div className="space-y-10 text-foreground">
+            <Card className="p-5 mb-5">
+              <div className="space-y-6 text-foreground">
                 <section>
                   <h2 className="text-2xl font-bold mb-4">What Are Cookies?</h2>
                   <p className="text-muted-foreground mb-4">
@@ -78,10 +78,10 @@ April 14, 2026
                     Types of Cookies We Use
                   </h2>
 
-                  <div className="space-y-6">
+                  <div className="space-y-4">
                     <div className="border rounded-lg p-5">
                       <div className="flex items-center gap-3 mb-3">
-                        <Shield className="h-6 w-6 text-primary" />
+                        <Shield className="h-4 w-4 text-primary" />
                         <h3 className="text-lg font-semibold">
                           Essential Cookies
                         </h3>
@@ -147,7 +147,7 @@ April 14, 2026
 
                     <div className="border rounded-lg p-5">
                       <div className="flex items-center gap-3 mb-3">
-                        <Settings className="h-6 w-6 text-primary" />
+                        <Settings className="h-4 w-4 text-primary" />
                         <h3 className="text-lg font-semibold">
                           Functional Cookies
                         </h3>
@@ -195,7 +195,7 @@ April 14, 2026
 
                     <div className="border rounded-lg p-5">
                       <div className="flex items-center gap-3 mb-3">
-                        <BarChart3 className="h-6 w-6 text-green-500" />
+                        <BarChart3 className="h-4 w-4 text-green-500" />
                         <h3 className="text-lg font-semibold">
                           Analytics Cookies
                         </h3>
@@ -257,7 +257,7 @@ April 14, 2026
 
                     <div className="border rounded-lg p-5">
                       <div className="flex items-center gap-3 mb-3">
-                        <Cookie className="h-6 w-6 text-amber-500" />
+                        <Cookie className="h-4 w-4 text-amber-500" />
                         <h3 className="text-lg font-semibold">
                           Marketing Cookies
                         </h3>

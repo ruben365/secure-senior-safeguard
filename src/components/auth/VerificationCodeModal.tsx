@@ -296,7 +296,7 @@ export function VerificationCodeModal({
               variant="outline"
               onClick={handleResend}
               disabled={!canResend || resendCountdown > 0}
-              className="min-h-[48px] px-6"
+              className="min-h-[48px] px-4"
             >
               {resendCountdown > 0
                 ? `Resend in ${resendCountdown}s`

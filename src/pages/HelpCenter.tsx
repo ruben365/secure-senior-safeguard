@@ -74,13 +74,13 @@ export default function HelpCenter() {
           className="min-h-[55dvh]"
           overlay
         />
-        <div className="bg-primary/5 sec-after-hero pb-12 pt-10">
+        <div className="bg-primary/5 sec-after-hero pb-7 pt-6">
           <div className="sec-container-narrow text-center">
             <div className="relative max-w-xl mx-auto">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
               <Input
                 placeholder="Search for help..."
-                className="pl-12 h-12 text-base"
+                className="pl-7 h-7 text-base"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
@@ -90,14 +90,14 @@ export default function HelpCenter() {
 
         <div className="sec-container-default sec-rhythm-md sec-before-footer max-w-4xl">
           {!search && !selectedCategory && (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-7">
               {categories.map((cat) => (
                 <Card
                   key={cat}
                   className="cursor-pointer hover:border-primary/30 transition-colors"
                   onClick={() => setSelectedCategory(cat)}
                 >
-                  <CardContent className="pt-6 text-center">
+                  <CardContent className="pt-4 text-center">
                     <span className="text-3xl">{categoryIcons[cat] || "📄"}</span>
                     <h2 className="font-medium mt-2 capitalize">{cat}</h2>
                     <p className="text-sm text-muted-foreground">{articles?.filter((a) => a.category === cat).length} articles</p>
@@ -108,7 +108,7 @@ export default function HelpCenter() {
           )}
 
           {selectedCategory && (
-            <div className="mb-6">
+            <div className="mb-4">
               <Button variant="ghost" onClick={() => setSelectedCategory(null)}>← All Categories</Button>
               <h2 className="text-xl font-bold mt-2 capitalize">{selectedCategory}</h2>
             </div>
@@ -137,7 +137,7 @@ export default function HelpCenter() {
                   {expandedArticle === article.id && (
                     <div className="mt-4 pt-4 border-t">
                       <div className="prose prose-sm max-w-none text-foreground" dangerouslySetInnerHTML={{ __html: sanitizeHtml(article.content) }} />
-                      <div className="flex items-center gap-4 mt-6 pt-4 border-t">
+                      <div className="flex items-center gap-4 mt-4 pt-4 border-t">
                         <span className="text-sm text-muted-foreground">Was this helpful?</span>
                         <Button variant="outline" size="sm" onClick={() => handleHelpful(article.id, true)}>
                           <ThumbsUp className="h-4 w-4 mr-1" /> Yes ({article.helpful_yes})
@@ -152,7 +152,7 @@ export default function HelpCenter() {
               </Card>
             ))}
             {filtered?.length === 0 && (
-              <div className="text-center py-12 text-muted-foreground">
+              <div className="text-center py-7 text-muted-foreground">
                 <p>No articles found. Try a different search term.</p>
               </div>
             )}

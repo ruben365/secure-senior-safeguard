@@ -25,8 +25,8 @@ export function GlowButton({
     variant === "primary" && "btn-premium",
     variant === "outline" &&
       "inline-flex items-center gap-2 font-semibold border-2 border-[hsl(var(--primary)/0.3)] text-[hsl(var(--primary))] bg-transparent hover:bg-[hsl(var(--primary)/0.05)] hover:border-[hsl(var(--primary)/0.5)] transition-all rounded-xl cursor-pointer",
-    size === "default" && "px-6 py-3 text-sm",
-    size === "lg" && "px-8 py-4 text-base",
+    size === "default" && "px-4 py-3 text-sm",
+    size === "lg" && "px-5 py-4 text-base",
     className,
   );
 

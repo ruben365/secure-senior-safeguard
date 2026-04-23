@@ -74,10 +74,10 @@ export function AdminShell() {
         </aside>
         <div className="adm-main">
           <div className="adm-topbar">
-            <div className="h-8 w-64 bg-black/10 rounded-full animate-pulse" />
-            <div className="h-8 w-32 bg-black/10 rounded-full animate-pulse" />
+            <div className="h-5 w-64 bg-black/10 rounded-full animate-pulse" />
+            <div className="h-5 w-20 bg-black/10 rounded-full animate-pulse" />
           </div>
-          <div className="adm-page-scroll p-6">
+          <div className="adm-page-scroll p-4">
             <PageSkeleton />
           </div>
         </div>
@@ -91,9 +91,9 @@ export function AdminShell() {
     return (
       <div className="min-h-screen flex items-center justify-center p-4 bg-[#dcdcde]">
         <Card className="max-w-md w-full bg-white border-gray-200 shadow-lg">
-          <CardContent className="pt-6">
+          <CardContent className="pt-4">
             <div className="flex flex-col items-center text-center space-y-4">
-              <ShieldAlert className="h-12 w-12 text-red-500" />
+              <ShieldAlert className="h-7 w-7 text-red-500" />
               <h2 className="text-xl font-semibold text-gray-900">Access Denied</h2>
               <p className="text-gray-500">Your account does not have permission to access the admin portal.</p>
               <Button onClick={() => navigate("/")} variant="outline">Return to Homepage</Button>

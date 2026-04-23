@@ -124,7 +124,7 @@ export function PricingBadge({
   const sizeClasses = {
     sm: "px-2 py-0.5 text-[10px]",
     md: "px-4 py-1.5 text-xs",
-    lg: "px-6 py-2 text-sm",
+    lg: "px-4 py-2 text-sm",
   };
 
   const solidBg: Record<string, string> = {

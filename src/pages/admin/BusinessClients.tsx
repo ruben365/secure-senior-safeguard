@@ -160,16 +160,16 @@ export default function BusinessClients() {
 
   if (isLoading) {
     return (
-      <div className="p-6 max-w-7xl mx-auto space-y-4">
+      <div className="p-4 max-w-7xl mx-auto space-y-4">
         {[...Array(5)].map((_, i) => (
-          <div key={i} className="h-16 bg-[#1F2937] rounded-lg animate-pulse" />
+          <div key={i} className="h-10 bg-[#1F2937] rounded-lg animate-pulse" />
         ))}
       </div>
     );
   }
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-[#F9FAFB]">
@@ -220,7 +220,7 @@ export default function BusinessClients() {
               placeholder="Search company, contact, email..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 bg-[#1F2937] border-gray-700 text-[#F9FAFB]"
+              className="pl-6 bg-[#1F2937] border-gray-700 text-[#F9FAFB]"
             />
           </div>
         </div>
@@ -269,12 +269,12 @@ export default function BusinessClients() {
       </div>
 
       {filteredClients.length === 0 ? (
-        <div className="text-center py-16">
-          <div className="text-6xl mb-4">🏢</div>
+        <div className="text-center py-10">
+          <div className="text-4xl mb-4">🏢</div>
           <h3 className="text-xl font-semibold mb-2 text-[#F9FAFB]">
             No Business Clients Yet
           </h3>
-          <p className="text-[#9CA3AF] mb-6">Add your first business client</p>
+          <p className="text-[#9CA3AF] mb-4">Add your first business client</p>
           <Button disabled title="Create flow not yet available">
             <Plus className="mr-2 h-4 w-4" />
             Add Client
@@ -287,7 +287,7 @@ export default function BusinessClients() {
             <Table>
               <TableHeader>
                 <TableRow className="border-gray-700 hover:bg-transparent">
-                  <TableHead className="w-12 text-[#9CA3AF]">
+                  <TableHead className="w-7 text-[#9CA3AF]">
                     <Checkbox
                       checked={
                         selectedClients.length === filteredClients.length
@@ -295,7 +295,7 @@ export default function BusinessClients() {
                       onCheckedChange={toggleSelectAll}
                     />
                   </TableHead>
-                  <TableHead className="w-16 text-[#9CA3AF]">Logo</TableHead>
+                  <TableHead className="w-10 text-[#9CA3AF]">Logo</TableHead>
                   <TableHead className="text-[#9CA3AF]">Company Name</TableHead>
                   <TableHead className="text-[#9CA3AF]">
                     Contact Person
@@ -325,7 +325,7 @@ export default function BusinessClients() {
                       />
                     </TableCell>
                     <TableCell>
-                      <Avatar className="h-10 w-10 rounded-md">
+                      <Avatar className="h-6 w-6 rounded-md">
                         <AvatarImage src={client.logo} />
                         <AvatarFallback className="rounded-md bg-primary/10 text-primary">
                           {client.companyName.substring(0, 2).toUpperCase()}

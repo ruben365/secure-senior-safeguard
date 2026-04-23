@@ -107,7 +107,7 @@ export default function BookAccessManager() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Generate New Access */}
       <Card className="bg-[#111827] border-[#1F2937]">
         <CardHeader>
@@ -188,17 +188,17 @@ export default function BookAccessManager() {
               placeholder="Search by email, name, or Access ID..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9 bg-[#1F2937] border-[#374151] text-[#F9FAFB]"
+              className="pl-6 bg-[#1F2937] border-[#374151] text-[#F9FAFB]"
             />
           </div>
         </CardHeader>
         <CardContent>
           {isLoading ? (
-            <div className="flex justify-center py-8">
-              <Loader2 className="h-6 w-6 animate-spin text-[#9CA3AF]" />
+            <div className="flex justify-center py-5">
+              <Loader2 className="h-4 w-4 animate-spin text-[#9CA3AF]" />
             </div>
           ) : !filteredPurchases?.length ? (
-            <p className="text-[#6B7280] text-center py-8">No records found.</p>
+            <p className="text-[#6B7280] text-center py-5">No records found.</p>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
@@ -232,7 +232,7 @@ export default function BookAccessManager() {
                         <Button
                           size="sm"
                           variant="ghost"
-                          className="text-red-400 hover:text-red-300 hover:bg-red-500/10 h-7 w-7 p-0"
+                          className="text-red-400 hover:text-red-300 hover:bg-red-500/10 h-4 w-4 p-0"
                           onClick={() => handleDelete(p.id)}
                         >
                           <Trash2 className="h-3.5 w-3.5" />

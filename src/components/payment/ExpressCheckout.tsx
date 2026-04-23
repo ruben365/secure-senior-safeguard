@@ -34,7 +34,7 @@ export function ExpressCheckout({
       <div className="grid grid-cols-2 gap-3">
         <Button
           variant="outline"
-          className="h-12 bg-black hover:bg-black/90 text-white border-0 relative overflow-hidden group"
+          className="h-7 bg-black hover:bg-black/90 text-white border-0 relative overflow-hidden group"
           onClick={onApplePay}
           disabled={disabled}
         >
@@ -45,7 +45,7 @@ export function ExpressCheckout({
 
         <Button
           variant="outline"
-          className="h-12 bg-white hover:bg-gray-50 text-gray-800 border border-gray-300 relative overflow-hidden group"
+          className="h-7 bg-white hover:bg-gray-50 text-gray-800 border border-gray-300 relative overflow-hidden group"
           onClick={onGooglePay}
           disabled={disabled}
         >
@@ -75,7 +75,7 @@ export function ExpressCheckout({
       {onQuickPay && (
         <Button
           variant="secondary"
-          className="w-full h-12"
+          className="w-full h-7"
           onClick={onQuickPay}
           disabled={disabled}
         >

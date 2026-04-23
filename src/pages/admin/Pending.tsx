@@ -191,8 +191,8 @@ export default function Pending() {
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="mb-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="mb-4">
         <h1 className="text-2xl font-bold text-[#F9FAFB]">Pending Actions</h1>
         <p className="text-[#9CA3AF]">
           Review and manage items requiring attention
@@ -242,11 +242,11 @@ export default function Pending() {
             </CardHeader>
             <CardContent>
               {!pendingAccounts ? (
-                <div className="flex justify-center p-8">
-                  <Loader2 className="h-8 w-8 animate-spin text-[#9CA3AF]" />
+                <div className="flex justify-center p-5">
+                  <Loader2 className="h-5 w-5 animate-spin text-[#9CA3AF]" />
                 </div>
               ) : pendingAccounts.length === 0 ? (
-                <p className="text-center text-[#9CA3AF] py-8">No pending accounts</p>
+                <p className="text-center text-[#9CA3AF] py-5">No pending accounts</p>
               ) : (
                 <Table>
                   <TableHeader>
@@ -312,11 +312,11 @@ export default function Pending() {
             </CardHeader>
             <CardContent>
               {!pendingTestimonials ? (
-                <div className="flex justify-center p-8">
-                  <Loader2 className="h-8 w-8 animate-spin text-[#9CA3AF]" />
+                <div className="flex justify-center p-5">
+                  <Loader2 className="h-5 w-5 animate-spin text-[#9CA3AF]" />
                 </div>
               ) : pendingTestimonials.length === 0 ? (
-                <p className="text-center text-[#9CA3AF] py-8">
+                <p className="text-center text-[#9CA3AF] py-5">
                   No pending testimonials
                 </p>
               ) : (
@@ -398,11 +398,11 @@ export default function Pending() {
             </CardHeader>
             <CardContent>
               {!pendingBookings ? (
-                <div className="flex justify-center p-8">
-                  <Loader2 className="h-8 w-8 animate-spin text-[#9CA3AF]" />
+                <div className="flex justify-center p-5">
+                  <Loader2 className="h-5 w-5 animate-spin text-[#9CA3AF]" />
                 </div>
               ) : pendingBookings.length === 0 ? (
-                <p className="text-center text-[#9CA3AF] py-8">
+                <p className="text-center text-[#9CA3AF] py-5">
                   No pending bookings
                 </p>
               ) : (
@@ -480,11 +480,11 @@ export default function Pending() {
             </CardHeader>
             <CardContent>
               {!pendingInquiries ? (
-                <div className="flex justify-center p-8">
-                  <Loader2 className="h-8 w-8 animate-spin text-[#9CA3AF]" />
+                <div className="flex justify-center p-5">
+                  <Loader2 className="h-5 w-5 animate-spin text-[#9CA3AF]" />
                 </div>
               ) : pendingInquiries.length === 0 ? (
-                <p className="text-center text-[#9CA3AF] py-8">
+                <p className="text-center text-[#9CA3AF] py-5">
                   No pending inquiries
                 </p>
               ) : (

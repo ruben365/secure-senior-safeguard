@@ -116,8 +116,8 @@ export const BookingRequestsTable = () => {
 
   if (loading) {
     return (
-      <Card className="p-8 flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      <Card className="p-5 flex items-center justify-center">
+        <Loader2 className="w-5 h-5 animate-spin text-primary" />
       </Card>
     );
   }
@@ -134,12 +134,12 @@ export const BookingRequestsTable = () => {
       </div>
 
       {requests.length === 0 ? (
-        <Card className="p-8 text-center text-muted-foreground">
+        <Card className="p-5 text-center text-muted-foreground">
           No booking requests yet
         </Card>
       ) : (
         requests.map((request) => (
-          <Card key={request.id} className="p-6 space-y-4">
+          <Card key={request.id} className="p-4 space-y-4">
             <div className="flex items-start justify-between">
               <div className="space-y-2">
                 <div className="flex items-center gap-3">

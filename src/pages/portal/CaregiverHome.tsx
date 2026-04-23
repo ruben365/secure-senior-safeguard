@@ -63,20 +63,20 @@ function formatDateTime(iso: string): string {
 
 function DashboardSkeleton() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {Array.from({ length: 4 }).map((_, i) => (
-          <Skeleton key={i} className="h-32 rounded-lg" />
+          <Skeleton key={i} className="h-20 rounded-lg" />
         ))}
       </div>
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-3 gap-4">
         <div className="md:col-span-2 space-y-4">
           <Skeleton className="h-64 rounded-lg" />
           <Skeleton className="h-64 rounded-lg" />
         </div>
         <div className="space-y-4">
           <Skeleton className="h-96 rounded-lg" />
-          <Skeleton className="h-28 rounded-lg" />
+          <Skeleton className="h-18 rounded-lg" />
         </div>
       </div>
     </div>
@@ -229,14 +229,14 @@ export default function CaregiverHome() {
 
   if (isLoading) {
     return (
-      <div className="container mx-auto py-6">
+      <div className="container mx-auto py-4">
         <DashboardSkeleton />
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto py-6 space-y-6">
+    <div className="container mx-auto py-4 space-y-4">
       {/* Stat Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {statCards.map((card) => (
@@ -245,9 +245,9 @@ export default function CaregiverHome() {
       </div>
 
       {/* Main grid */}
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-3 gap-4">
         {/* Left column */}
-        <div className="md:col-span-2 space-y-6">
+        <div className="md:col-span-2 space-y-4">
           {/* My Clients */}
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
@@ -258,12 +258,12 @@ export default function CaregiverHome() {
             </CardHeader>
             <CardContent className="p-0">
               {clientCount === 0 ? (
-                <div className="px-6 pb-6">
+                <div className="px-4 pb-4">
                   <EmptyState
                     icon={Users}
                     title="No clients assigned"
                     description="You have no clients assigned to you yet."
-                    className="py-8"
+                    className="py-5"
                   />
                 </div>
               ) : (
@@ -271,7 +271,7 @@ export default function CaregiverHome() {
                   {clients!.map((client) => (
                     <li
                       key={client.id}
-                      className="flex items-center justify-between px-6 py-3 cursor-pointer hover:bg-muted/50 transition-colors"
+                      className="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-muted/50 transition-colors"
                       onClick={() => navigate(`/portal/clients/${client.id}`)}
                     >
                       <span className="text-sm font-medium text-foreground">
@@ -300,12 +300,12 @@ export default function CaregiverHome() {
             </CardHeader>
             <CardContent className="p-0">
               {upcomingFive.length === 0 ? (
-                <div className="px-6 pb-6">
+                <div className="px-4 pb-4">
                   <EmptyState
                     icon={CalendarDays}
                     title="No upcoming appointments"
                     description="Your schedule is clear for now."
-                    className="py-8"
+                    className="py-5"
                   />
                 </div>
               ) : (
@@ -316,7 +316,7 @@ export default function CaregiverHome() {
                       ? [client.first_name, client.last_name].filter(Boolean).join(" ")
                       : null;
                     return (
-                      <li key={appt.id} className="px-6 py-3">
+                      <li key={appt.id} className="px-4 py-3">
                         <p className="text-sm font-medium text-foreground">
                           {appt.title ?? "Appointment"}
                         </p>

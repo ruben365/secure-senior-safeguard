@@ -163,8 +163,8 @@ function Portal() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#0B1120]">
-        <div className="text-center space-y-6">
-          <Shield className="w-16 h-16 text-purple-400 mx-auto animate-pulse" />
+        <div className="text-center space-y-4">
+          <Shield className="w-10 h-10 text-purple-400 mx-auto animate-pulse" />
           <h3 className="text-xl font-semibold text-white">Loading Your Dashboard</h3>
           <div className="flex justify-center gap-2">
             <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
@@ -182,8 +182,8 @@ function Portal() {
         <div className="container mx-auto py-3 sm:py-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
-                <Shield className="w-6 h-6 text-white" />
+              <div className="w-6 h-6 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
+                <Shield className="w-4 h-4 text-white" />
               </div>
               <div>
                 <h1 className="text-xl font-bold text-white">InVision Network</h1>
@@ -202,24 +202,24 @@ function Portal() {
         </div>
       </header>
 
-      <main className="container mx-auto py-8 sm:py-12">
+      <main className="container mx-auto py-5 sm:py-7">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-8 sm:mb-12">
+          <div className="text-center mb-5 sm:mb-7">
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Select Your Dashboard</h2>
             <p className="text-gray-400">Choose the workspace you want to access</p>
           </div>
 
           {availableRoles.length === 0 ? (
-            <Card className="bg-[#1F2937] border-gray-800/50 p-8 sm:p-12 text-center">
-              <Shield className="w-16 h-16 mx-auto text-gray-400 mb-4" />
+            <Card className="bg-[#1F2937] border-gray-800/50 p-5 sm:p-7 text-center">
+              <Shield className="w-10 h-10 mx-auto text-gray-400 mb-4" />
               <h3 className="text-xl font-semibold text-white mb-2">No Role Assigned</h3>
-              <p className="text-gray-400 mb-6">Please contact your administrator to assign you a role.</p>
+              <p className="text-gray-400 mb-4">Please contact your administrator to assign you a role.</p>
               <Button asChild className="bg-purple-600 hover:bg-purple-700 text-white">
                 <Link to="/">Return to Home</Link>
               </Button>
             </Card>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-4">
               {availableRoles.map((card) => {
                 const Icon = card.icon;
                 return (
@@ -229,9 +229,9 @@ function Portal() {
                     onClick={() => navigate(card.path)}
                   >
                     <div className={`h-1.5 bg-gradient-to-r ${card.color}`} />
-                    <div className="p-6">
-                      <div className={`w-12 h-12 bg-gradient-to-br ${card.color} rounded-lg flex items-center justify-center mb-4 group-hover:scale-105 transition-transform`}>
-                        <Icon className="w-6 h-6 text-white" />
+                    <div className="p-4">
+                      <div className={`w-7 h-7 bg-gradient-to-br ${card.color} rounded-lg flex items-center justify-center mb-4 group-hover:scale-105 transition-transform`}>
+                        <Icon className="w-4 h-4 text-white" />
                       </div>
                       <h3 className="text-lg font-bold text-white mb-1">{card.title}</h3>
                       <p className="text-sm text-gray-400 mb-4">{card.description}</p>

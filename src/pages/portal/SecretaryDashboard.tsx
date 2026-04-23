@@ -276,7 +276,7 @@ function SecretaryDashboard() {
             <Button
               size="sm"
               variant="ghost"
-              className="h-7 w-7 p-0 text-green-600 hover:text-green-700 hover:bg-green-500/10"
+              className="h-4 w-4 p-0 text-green-600 hover:text-green-700 hover:bg-green-500/10"
               onClick={(e) => {
                 e.stopPropagation();
                 handleBookingAction(b.id, "confirmed");
@@ -287,7 +287,7 @@ function SecretaryDashboard() {
             <Button
               size="sm"
               variant="ghost"
-              className="h-7 w-7 p-0 text-destructive hover:text-destructive hover:bg-destructive/10"
+              className="h-4 w-4 p-0 text-destructive hover:text-destructive hover:bg-destructive/10"
               onClick={(e) => {
                 e.stopPropagation();
                 handleBookingAction(b.id, "denied");
@@ -305,7 +305,7 @@ function SecretaryDashboard() {
   if (roleConfig && !isAuthorized) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
-        <Card className="p-8 text-center max-w-sm">
+        <Card className="p-5 text-center max-w-sm">
           <CardHeader>
             <CardTitle>Access Denied</CardTitle>
           </CardHeader>
@@ -330,7 +330,7 @@ function SecretaryDashboard() {
   // ── Render ────────────────────────────────────────────────────────────────────
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <div>
         <h1 className="text-xl font-bold text-foreground">Office Manager</h1>
         <p className="text-sm text-muted-foreground">Bookings · Clients · Appointments</p>
@@ -343,9 +343,9 @@ function SecretaryDashboard() {
         </div>
 
         {/* Main layout */}
-        <div className="grid lg:grid-cols-3 gap-6">
+        <div className="grid lg:grid-cols-3 gap-4">
           {/* Left 2/3 */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-4">
             {/* Action required */}
             <ActionQueue
               title="Action Required"
@@ -377,7 +377,7 @@ function SecretaryDashboard() {
           </div>
 
           {/* Right 1/3 */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* Real calendar with today's appointments */}
             <RealCalendar
               title="Today's Schedule"

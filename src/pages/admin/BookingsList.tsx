@@ -370,8 +370,8 @@ const BookingsList = () => {
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="flex items-center justify-between mb-4">
         <div>
           <h1 className="text-2xl font-bold text-[#F9FAFB]">
             Booking Requests
@@ -399,7 +399,7 @@ const BookingsList = () => {
           </Button>
         </div>
       </div>
-      <div className="space-y-6">
+      <div className="space-y-4">
         {/* Stats Cards */}
         <div className="grid gap-4 md:grid-cols-4">
           <Card className="border-l-4 border-l-yellow-500">
@@ -409,7 +409,7 @@ const BookingsList = () => {
                   <p className="text-sm text-muted-foreground">Pending</p>
                   <p className="text-2xl font-bold">{pendingCount}</p>
                 </div>
-                <Clock className="h-8 w-8 text-yellow-500" />
+                <Clock className="h-5 w-5 text-yellow-500" />
               </div>
             </CardContent>
           </Card>
@@ -420,7 +420,7 @@ const BookingsList = () => {
                   <p className="text-sm text-muted-foreground">Confirmed</p>
                   <p className="text-2xl font-bold">{confirmedCount}</p>
                 </div>
-                <CalendarClock className="h-8 w-8 text-primary" />
+                <CalendarClock className="h-5 w-5 text-primary" />
               </div>
             </CardContent>
           </Card>
@@ -431,7 +431,7 @@ const BookingsList = () => {
                   <p className="text-sm text-muted-foreground">Completed</p>
                   <p className="text-2xl font-bold">{completedCount}</p>
                 </div>
-                <CheckCircle className="h-8 w-8 text-green-500" />
+                <CheckCircle className="h-5 w-5 text-green-500" />
               </div>
             </CardContent>
           </Card>
@@ -444,14 +444,14 @@ const BookingsList = () => {
                     ${totalRevenue.toFixed(0)}
                   </p>
                 </div>
-                <DollarSign className="h-8 w-8 text-primary" />
+                <DollarSign className="h-5 w-5 text-primary" />
               </div>
             </CardContent>
           </Card>
         </div>
 
         {/* Filters */}
-        <div className="mb-6 flex flex-wrap items-center gap-4">
+        <div className="mb-4 flex flex-wrap items-center gap-4">
           <div className="flex-1 min-w-[250px]">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -459,7 +459,7 @@ const BookingsList = () => {
                 placeholder="Search by name, email, reference, or service..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
+                className="pl-6"
               />
             </div>
           </div>
@@ -497,8 +497,8 @@ const BookingsList = () => {
             <TableBody>
               {isLoading ? (
                 <TableRow>
-                  <TableCell colSpan={8} className="text-center py-8">
-                    <RefreshCw className="h-6 w-6 animate-spin mx-auto mb-2" />
+                  <TableCell colSpan={8} className="text-center py-5">
+                    <RefreshCw className="h-4 w-4 animate-spin mx-auto mb-2" />
                     Loading bookings...
                   </TableCell>
                 </TableRow>
@@ -506,7 +506,7 @@ const BookingsList = () => {
                 <TableRow>
                   <TableCell
                     colSpan={8}
-                    className="text-center py-8 text-muted-foreground"
+                    className="text-center py-5 text-muted-foreground"
                   >
                     No booking requests found
                   </TableCell>

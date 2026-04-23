@@ -104,13 +104,13 @@ export const InstructorShowcase = () => {
 
   return (
     <>
-      <section className="py-10 sm:py-16 md:py-20 section-warm">
+      <section className="py-6 sm:py-10 md:py-12 section-warm">
         <div className="container mx-auto">
-          <div className="text-center mb-14">
+          <div className="text-center mb-9">
             <span className="inline-block text-xs uppercase tracking-[0.15em] font-bold text-primary bg-primary/10 px-4 py-1.5 rounded-full mb-4">
               Meet Your Instructors
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground mb-4">
+            <h2 className="text-3xl md:text-2xl lg:text-3xl font-black text-foreground mb-4">
               Learn From Industry <span className="text-primary">Experts</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -118,14 +118,14 @@ export const InstructorShowcase = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-4 max-w-6xl mx-auto">
             {instructors.map((instructor) => (
               <div
                 key={instructor.id}
                 className="group p-5 text-center cursor-pointer bg-card border border-border/60 rounded-2xl shadow-sm hover:shadow-lg hover:border-primary/20 transition-all duration-300 hover:-translate-y-1"
                 onClick={() => setSelectedInstructor(instructor)}
               >
-                <div className="relative w-20 h-20 md:w-24 md:h-24 mx-auto mb-3 rounded-full overflow-hidden ring-2 ring-border group-hover:ring-primary/40 transition-all">
+                <div className="relative w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 rounded-full overflow-hidden ring-2 ring-border group-hover:ring-primary/40 transition-all">
                   <img
                     src={instructor.image}
                     alt={instructor.name}
@@ -152,18 +152,18 @@ export const InstructorShowcase = () => {
             ))}
           </div>
 
-          <div className="mt-10 text-center">
-            <div className="inline-flex items-center gap-6 sm:gap-10 bg-card border border-border/60 rounded-2xl px-6 sm:px-10 py-4 shadow-sm">
+          <div className="mt-6 text-center">
+            <div className="inline-flex items-center gap-4 sm:gap-6 bg-card border border-border/60 rounded-2xl px-4 sm:px-6 py-4 shadow-sm">
               <div className="text-center">
                 <p className="text-2xl font-black text-primary">80+</p>
                 <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">Years Combined</p>
               </div>
-              <div className="w-px h-10 bg-border/60" />
+              <div className="w-px h-6 bg-border/60" />
               <div className="text-center">
                 <p className="text-2xl font-black text-primary">140K+</p>
                 <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">Students Helped</p>
               </div>
-              <div className="w-px h-10 bg-border/60" />
+              <div className="w-px h-6 bg-border/60" />
               <div className="text-center">
                 <p className="text-2xl font-black text-primary">5</p>
                 <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">Specialists</p>
@@ -189,7 +189,7 @@ export const InstructorShowcase = () => {
 
           <button
             onClick={() => setSelectedInstructor(null)}
-            className="absolute top-2.5 right-2.5 z-50 w-7 h-7 rounded-full bg-muted/80 hover:bg-muted flex items-center justify-center transition-colors"
+            className="absolute top-2.5 right-2.5 z-50 w-4 h-4 rounded-full bg-muted/80 hover:bg-muted flex items-center justify-center transition-colors"
             aria-label="Close"
           >
             <X className="w-3.5 h-3.5" />
@@ -203,7 +203,7 @@ export const InstructorShowcase = () => {
             >
               {/* Header — smaller avatar + tighter rhythm */}
               <div className="bg-gradient-to-b from-muted/60 to-muted/20 px-5 pt-5 pb-4 text-center border-b border-border/50">
-                <div className="w-16 h-16 mx-auto mb-2.5 rounded-full overflow-hidden ring-2 ring-primary/30 ring-offset-2 ring-offset-card">
+                <div className="w-10 h-10 mx-auto mb-2.5 rounded-full overflow-hidden ring-2 ring-primary/30 ring-offset-2 ring-offset-card">
                   <img
                     src={selectedInstructor.image}
                     alt={selectedInstructor.name}
@@ -273,7 +273,7 @@ export const InstructorShowcase = () => {
 
                 <Button
                   size="sm"
-                  className="w-full rounded-full font-bold h-9 text-xs"
+                  className="w-full rounded-full font-bold h-6 text-xs"
                   onClick={() => setSelectedInstructor(null)}
                 >
                   Book a Session with {selectedInstructor.name.split(" ")[0]}

@@ -205,7 +205,7 @@ function PaymentFormContent({
       <Button
         onClick={handleSubmit}
         disabled={!stripe || !isReady || isProcessing}
-        className="w-full h-12 text-base font-semibold"
+        className="w-full h-7 text-base font-semibold"
         size="lg"
       >
         {isProcessing ? (
@@ -422,7 +422,7 @@ export function TrainingPaymentModal({
                 </span>
                 {i < steps.length - 1 && (
                   <div
-                    className={`w-5 sm:w-8 h-0.5 mx-1.5 ${
+                    className={`w-5 sm:w-5 h-0.5 mx-1.5 ${
                       (step === "payment" && s.num === 1) ||
                       (step === "success" && s.num <= 2)
                         ? "bg-[#d96c4a]"
@@ -471,14 +471,14 @@ export function TrainingPaymentModal({
                     placeholder="Your Name *"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="h-9 text-sm bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a]"
+                    className="h-6 text-sm bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a]"
                   />
                   <Input
                     type="email"
                     placeholder="Email Address *"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="h-9 text-sm bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a]"
+                    className="h-6 text-sm bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a]"
                   />
                   <div className="grid grid-cols-2 gap-2">
                     <div className="relative">
@@ -487,11 +487,11 @@ export function TrainingPaymentModal({
                         placeholder="Phone"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        className="h-9 pl-8 text-sm bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a]"
+                        className="h-6 pl-5 text-sm bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a]"
                       />
                     </div>
                     <Select value={state} onValueChange={setState}>
-                      <SelectTrigger className="h-9 text-sm bg-white border-gray-200 text-gray-900">
+                      <SelectTrigger className="h-6 text-sm bg-white border-gray-200 text-gray-900">
                         <SelectValue placeholder="State" className="text-gray-400" />
                       </SelectTrigger>
                       <SelectContent className="max-h-[200px]">
@@ -511,7 +511,7 @@ export function TrainingPaymentModal({
                     <Button
                       variant="outline"
                       className={cn(
-                        "w-full h-8 justify-start text-left font-normal text-sm",
+                        "w-full h-5 justify-start text-left font-normal text-sm",
                         !selectedDate && "text-muted-foreground",
                       )}
                     >
@@ -584,7 +584,7 @@ export function TrainingPaymentModal({
                 <Button
                   onClick={handleInfoSubmit}
                   disabled={!email || !name || !termsAccepted || isLoading}
-                  className="w-full h-9 text-sm font-semibold"
+                  className="w-full h-6 text-sm font-semibold"
                 >
                   {isLoading ? (
                     <>
@@ -615,7 +615,7 @@ export function TrainingPaymentModal({
                   variant="ghost"
                   size="sm"
                   onClick={() => setStep("info")}
-                  className="h-7 text-xs px-2"
+                  className="h-4 text-xs px-2"
                 >
                   <ArrowLeft className="mr-1 h-3 w-3" />
                   Back
@@ -644,15 +644,15 @@ export function TrainingPaymentModal({
                 </div>
 
                 <Tabs defaultValue="card" className="w-full">
-                  <TabsList className="grid w-full grid-cols-2 mb-2 h-8">
+                  <TabsList className="grid w-full grid-cols-2 mb-2 h-5">
                     <TabsTrigger
                       value="card"
-                      className="flex items-center gap-1.5 text-xs h-6"
+                      className="flex items-center gap-1.5 text-xs h-4"
                     >
                       <CreditCard className="w-3 h-3" />
                       Card
                     </TabsTrigger>
-                    <TabsTrigger value="qr" className="flex items-center gap-1.5 text-xs h-6">
+                    <TabsTrigger value="qr" className="flex items-center gap-1.5 text-xs h-4">
                       <Smartphone className="w-3 h-3" />
                       QR Code
                     </TabsTrigger>

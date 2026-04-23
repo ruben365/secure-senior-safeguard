@@ -32,8 +32,8 @@ const categoryData = [
 
 export default function CyberAnalytics() {
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="mb-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="mb-4">
         <h1 className="text-2xl font-bold text-[#F9FAFB]">
           Analytics Overview
         </h1>
@@ -61,7 +61,7 @@ export default function CyberAnalytics() {
           { label: "Response Time", value: "32ms", change: "-8ms", up: true },
         ].map((stat) => (
           <Card key={stat.label} className="bg-[#111827] border-gray-800">
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               <p className="text-[#9CA3AF] text-sm">{stat.label}</p>
               <div className="flex items-end justify-between mt-2">
                 <p className="text-3xl font-bold text-[#F9FAFB]">
@@ -84,7 +84,7 @@ export default function CyberAnalytics() {
       </div>
 
       {/* Charts */}
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-4 lg:grid-cols-2">
         <Card className="bg-[#111827] border-gray-800">
           <CardHeader>
             <CardTitle className="text-[#F9FAFB]">

@@ -62,7 +62,7 @@ export default function CourseDetail() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-background via-violet-500/5 to-purple-500/10 flex items-center justify-center">
         <div className="text-center space-y-4">
-          <div className="w-16 h-16 mx-auto rounded-full bg-violet-500/20 animate-pulse" />
+          <div className="w-10 h-10 mx-auto rounded-full bg-violet-500/20 animate-pulse" />
           <p className="text-muted-foreground">Loading course...</p>
         </div>
       </div>
@@ -71,11 +71,11 @@ export default function CourseDetail() {
 
   if (!course) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background via-violet-500/5 to-purple-500/10 p-6">
+      <div className="min-h-screen bg-gradient-to-br from-background via-violet-500/5 to-purple-500/10 p-4">
         <div className="container max-w-4xl mx-auto">
           <Card>
-            <CardContent className="p-8 text-center">
-              <BookOpen className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
+            <CardContent className="p-5 text-center">
+              <BookOpen className="w-7 h-7 mx-auto text-muted-foreground mb-4" />
               <h2 className="text-xl font-bold mb-2">Course Not Found</h2>
               <p className="text-muted-foreground mb-4">
                 This course doesn't exist or has been removed.
@@ -108,8 +108,8 @@ export default function CourseDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-violet-500/5 to-purple-500/10 p-6">
-      <div className="container max-w-4xl mx-auto space-y-6">
+    <div className="min-h-screen bg-gradient-to-br from-background via-violet-500/5 to-purple-500/10 p-4">
+      <div className="container max-w-4xl mx-auto space-y-4">
         {/* Header */}
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="icon" asChild>
@@ -133,11 +133,11 @@ export default function CourseDetail() {
             animate={{ opacity: 1, y: 0 }}
           >
             <Card className="border-violet-500/20 bg-gradient-to-br from-violet-500/10 to-purple-500/5">
-              <CardContent className="p-6">
+              <CardContent className="p-4">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-violet-500/20 flex items-center justify-center">
-                      <GraduationCap className="w-6 h-6 text-violet-500" />
+                    <div className="w-7 h-7 rounded-xl bg-violet-500/20 flex items-center justify-center">
+                      <GraduationCap className="w-4 h-4 text-violet-500" />
                     </div>
                     <div>
                       <h3 className="font-semibold">Your Progress</h3>
@@ -168,9 +168,9 @@ export default function CourseDetail() {
           </motion.div>
         )}
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-4">
           {/* Course Info */}
-          <div className="md:col-span-2 space-y-6">
+          <div className="md:col-span-2 space-y-4">
             {/* Modules */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -194,8 +194,8 @@ export default function CourseDetail() {
                 </CardHeader>
                 <CardContent className="space-y-3">
                   {modules.length === 0 ? (
-                    <div className="text-center py-6 text-muted-foreground">
-                      <BookOpen className="w-8 h-8 mx-auto mb-2 opacity-50" />
+                    <div className="text-center py-4 text-muted-foreground">
+                      <BookOpen className="w-5 h-5 mx-auto mb-2 opacity-50" />
                       <p>Course content coming soon</p>
                     </div>
                   ) : (
@@ -217,7 +217,7 @@ export default function CourseDetail() {
                           }`}
                         >
                           <div
-                            className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                            className={`w-5 h-5 rounded-full flex items-center justify-center ${
                               isCompleted
                                 ? "bg-green-500 text-white"
                                 : isEnrolled
@@ -259,7 +259,7 @@ export default function CourseDetail() {
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* Course Details */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -273,7 +273,7 @@ export default function CourseDetail() {
                 <CardContent className="space-y-4">
                   {course.price && (
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+                      <div className="w-6 h-6 rounded-lg bg-emerald-500/20 flex items-center justify-center">
                         <DollarSign className="w-5 h-5 text-emerald-500" />
                       </div>
                       <div>
@@ -285,7 +285,7 @@ export default function CourseDetail() {
 
                   {course.duration_hours && (
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-primary/50/20 flex items-center justify-center">
+                      <div className="w-6 h-6 rounded-lg bg-primary/50/20 flex items-center justify-center">
                         <Clock className="w-5 h-5 text-primary" />
                       </div>
                       <div>
@@ -301,7 +301,7 @@ export default function CourseDetail() {
 
                   {course.max_students && (
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-violet-500/20 flex items-center justify-center">
+                      <div className="w-6 h-6 rounded-lg bg-violet-500/20 flex items-center justify-center">
                         <Users className="w-5 h-5 text-violet-500" />
                       </div>
                       <div>
@@ -317,7 +317,7 @@ export default function CourseDetail() {
 
                   {course.level && (
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center">
+                      <div className="w-6 h-6 rounded-lg bg-orange-500/20 flex items-center justify-center">
                         <Layers className="w-5 h-5 text-orange-500" />
                       </div>
                       <div>
@@ -331,7 +331,7 @@ export default function CourseDetail() {
 
                   {course.category && (
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center">
+                      <div className="w-6 h-6 rounded-lg bg-pink-500/20 flex items-center justify-center">
                         <BookOpen className="w-5 h-5 text-pink-500" />
                       </div>
                       <div>

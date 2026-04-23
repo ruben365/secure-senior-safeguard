@@ -114,7 +114,7 @@ export function ClientNotesTab({ clientId }: ClientNotesTabProps) {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center py-12">
+      <div className="flex items-center justify-center py-7">
         <div className="animate-pulse text-muted-foreground">
           Loading notes...
         </div>
@@ -123,7 +123,7 @@ export function ClientNotesTab({ clientId }: ClientNotesTabProps) {
   }
 
   return (
-    <div className="grid gap-6 md:grid-cols-5">
+    <div className="grid gap-4 md:grid-cols-5">
       {/* Note List - Left Panel */}
       <Card className="md:col-span-2">
         <CardHeader>
@@ -139,7 +139,7 @@ export function ClientNotesTab({ clientId }: ClientNotesTabProps) {
               <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="Search notes..."
-                className="pl-8"
+                className="pl-5"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -177,8 +177,8 @@ export function ClientNotesTab({ clientId }: ClientNotesTabProps) {
         </CardHeader>
         <CardContent className="space-y-2">
           {filteredNotes.length === 0 ? (
-            <div className="text-center py-8 text-muted-foreground">
-              <FileText className="w-8 h-8 mx-auto mb-2 opacity-50" />
+            <div className="text-center py-5 text-muted-foreground">
+              <FileText className="w-5 h-5 mx-auto mb-2 opacity-50" />
               <p>No notes found</p>
               <p className="text-sm">
                 Add a note to track important information
@@ -345,8 +345,8 @@ export function ClientNotesTab({ clientId }: ClientNotesTabProps) {
               </div>
             </div>
           ) : (
-            <div className="text-center py-12 text-muted-foreground">
-              <FileText className="w-12 h-12 mx-auto mb-4 opacity-30" />
+            <div className="text-center py-7 text-muted-foreground">
+              <FileText className="w-7 h-7 mx-auto mb-4 opacity-30" />
               <p>Select a note to view details</p>
             </div>
           )}

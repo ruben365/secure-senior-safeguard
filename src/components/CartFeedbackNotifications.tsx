@@ -29,7 +29,7 @@ export const PurchaseThankYouNotification = forwardRef<HTMLDivElement>(function 
         initial={{ opacity: 0, y: 50, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 50, scale: 0.95 }}
-        className="fixed bottom-20 right-4 z-50 max-w-sm"
+        className="fixed bottom-12 right-4 z-50 max-w-sm"
       >
         <Card className="p-5 shadow-xl border-success/30 bg-card/95 backdrop-blur-sm overflow-hidden">
           {/* Decorative gradient top */}
@@ -44,12 +44,12 @@ export const PurchaseThankYouNotification = forwardRef<HTMLDivElement>(function 
 
           <div className="flex items-start gap-4">
             <motion.div
-              className="w-12 h-12 rounded-full bg-success/10 flex items-center justify-center flex-shrink-0"
+              className="w-7 h-7 rounded-full bg-success/10 flex items-center justify-center flex-shrink-0"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ type: "spring", delay: 0.2 }}
             >
-              <CheckCircle className="w-6 h-6 text-success" />
+              <CheckCircle className="w-4 h-4 text-success" />
             </motion.div>
 
             <div className="flex-1">
@@ -131,7 +131,7 @@ export const CartEmptyHelpNotification = forwardRef<HTMLDivElement>(function Car
         initial={{ opacity: 0, y: 50, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 50, scale: 0.95 }}
-        className="fixed bottom-20 right-4 z-50 max-w-sm"
+        className="fixed bottom-12 right-4 z-50 max-w-sm"
       >
         <Card className="p-5 shadow-xl border-primary/20 bg-card/95 backdrop-blur-sm">
           <button
@@ -142,9 +142,9 @@ export const CartEmptyHelpNotification = forwardRef<HTMLDivElement>(function Car
           </button>
 
           {!showFeedback ? (
-            <div className="pr-6">
+            <div className="pr-4">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
                   <HelpCircle className="w-5 h-5 text-primary" />
                 </div>
                 <div>
@@ -191,7 +191,7 @@ export const CartEmptyHelpNotification = forwardRef<HTMLDivElement>(function Car
               </div>
             </div>
           ) : (
-            <div className="pr-6">
+            <div className="pr-4">
               <p className="font-semibold text-sm mb-2">How can we improve?</p>
               <Textarea
                 value={feedback}

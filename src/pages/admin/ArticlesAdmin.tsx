@@ -403,8 +403,8 @@ export default function ArticlesAdmin() {
   const categoryCounts = getCategoryCounts();
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="flex items-center justify-between mb-4">
         <div>
           <h1 className="text-2xl font-bold text-[#F9FAFB]">Blog Articles</h1>
           <p className="text-[#9CA3AF]">Manage and publish blog content</p>
@@ -418,7 +418,7 @@ export default function ArticlesAdmin() {
           Create Article
         </Button>
       </div>
-      <div className="space-y-6">
+      <div className="space-y-4">
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
           <Card>
@@ -491,7 +491,7 @@ export default function ArticlesAdmin() {
         </div>
 
         {/* Filters & Search */}
-        <div className="bg-background border rounded-lg p-4 mb-6">
+        <div className="bg-background border rounded-lg p-4 mb-4">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
               <div className="relative">
@@ -500,7 +500,7 @@ export default function ArticlesAdmin() {
                   placeholder="Search articles..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10"
+                  className="pl-6"
                 />
               </div>
             </div>
@@ -597,7 +597,7 @@ export default function ArticlesAdmin() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="bg-primary/10 border border-primary/20 rounded-lg p-4 mb-6 flex items-center justify-between sticky top-20 z-10"
+              className="bg-primary/10 border border-primary/20 rounded-lg p-4 mb-4 flex items-center justify-between sticky top-12 z-10"
             >
               <div className="flex items-center gap-4">
                 <span className="font-medium text-foreground">
@@ -605,7 +605,7 @@ export default function ArticlesAdmin() {
                 </span>
                 <div className="flex gap-2">
                   <Select onValueChange={() => {}}>
-                    <SelectTrigger className="w-[180px] h-9">
+                    <SelectTrigger className="w-[180px] h-6">
                       <SelectValue placeholder="Change Category" />
                     </SelectTrigger>
                     <SelectContent>
@@ -662,20 +662,20 @@ export default function ArticlesAdmin() {
 
         {/* Table */}
         {loading ? (
-          <div className="bg-background border rounded-lg p-8 text-center">
+          <div className="bg-background border rounded-lg p-5 text-center">
             <div className="animate-pulse">Loading articles...</div>
           </div>
         ) : filteredArticles.length === 0 ? (
-          <div className="bg-background border rounded-lg p-12 text-center">
+          <div className="bg-background border rounded-lg p-7 text-center">
             {searchQuery ||
             categoryFilter !== "all" ||
             statusFilter !== "all" ? (
               <>
-                <Search className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+                <Search className="h-10 w-10 text-muted-foreground mx-auto mb-4" />
                 <h3 className="text-xl font-semibold mb-2">
                   No articles found
                 </h3>
-                <p className="text-muted-foreground mb-6">
+                <p className="text-muted-foreground mb-4">
                   Try different keywords
                 </p>
                 <Button
@@ -692,9 +692,9 @@ export default function ArticlesAdmin() {
               </>
             ) : (
               <>
-                <FileText className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+                <FileText className="h-10 w-10 text-muted-foreground mx-auto mb-4" />
                 <h3 className="text-xl font-semibold mb-2">No Articles Yet</h3>
-                <p className="text-muted-foreground mb-6">
+                <p className="text-muted-foreground mb-4">
                   Create your first article to share with your audience
                 </p>
                 <Button onClick={() => navigate("/admin/content/articles/new")}>
@@ -710,7 +710,7 @@ export default function ArticlesAdmin() {
               <Table>
                 <TableHeader>
                   <TableRow className="bg-muted/50">
-                    <TableHead className="w-12">
+                    <TableHead className="w-7">
                       <Checkbox
                         checked={
                           paginatedArticles.length > 0 &&
@@ -719,7 +719,7 @@ export default function ArticlesAdmin() {
                         onCheckedChange={handleSelectAll}
                       />
                     </TableHead>
-                    <TableHead className="w-16">Image</TableHead>
+                    <TableHead className="w-10">Image</TableHead>
                     <TableHead>Title</TableHead>
                     <TableHead>Author</TableHead>
                     <TableHead>Category</TableHead>
@@ -775,7 +775,7 @@ export default function ArticlesAdmin() {
                         </TableCell>
                         <TableCell>
                           <div className="flex items-center gap-2">
-                            <Avatar className="h-6 w-6">
+                            <Avatar className="h-4 w-4">
                               <AvatarImage src={article.author.avatar} />
                               <AvatarFallback className="text-xs">
                                 {article.author.name.charAt(0)}
@@ -860,7 +860,7 @@ export default function ArticlesAdmin() {
             </div>
 
             {/* Pagination */}
-            <div className="mt-6 flex items-center justify-between">
+            <div className="mt-4 flex items-center justify-between">
               <div className="text-sm text-muted-foreground">
                 Showing {startIndex + 1}-
                 {Math.min(endIndex, filteredArticles.length)} of{" "}

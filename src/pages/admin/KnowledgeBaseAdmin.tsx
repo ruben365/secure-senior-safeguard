@@ -83,7 +83,7 @@ export default function KnowledgeBaseAdmin() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold">Knowledge Base</h1>
@@ -134,9 +134,9 @@ export default function KnowledgeBaseAdmin() {
             </TableHeader>
             <TableBody>
               {isLoading ? (
-                <TableRow><TableCell colSpan={5} className="text-center py-8">Loading...</TableCell></TableRow>
+                <TableRow><TableCell colSpan={5} className="text-center py-5">Loading...</TableCell></TableRow>
               ) : !articles?.length ? (
-                <TableRow><TableCell colSpan={5} className="text-center py-8">No articles yet</TableCell></TableRow>
+                <TableRow><TableCell colSpan={5} className="text-center py-5">No articles yet</TableCell></TableRow>
               ) : (
                 articles.map((a) => (
                   <TableRow key={a.id}>

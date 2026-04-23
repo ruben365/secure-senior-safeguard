@@ -173,7 +173,7 @@ export default function HealthcareHome() {
   ];
 
   return (
-    <div className="container mx-auto py-6 space-y-6 max-w-7xl">
+    <div className="container mx-auto py-4 space-y-4 max-w-7xl">
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-foreground">Healthcare Dashboard</h1>
@@ -190,9 +190,9 @@ export default function HealthcareHome() {
       </div>
 
       {/* Main layout */}
-      <div className="grid lg:grid-cols-3 gap-6">
+      <div className="grid lg:grid-cols-3 gap-4">
         {/* Left column — 2/3 */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-4">
           {/* My Patients */}
           <Card>
             <CardHeader className="pb-3">
@@ -203,11 +203,11 @@ export default function HealthcareHome() {
             </CardHeader>
             <CardContent className="p-0">
               {loadingClients ? (
-                <div className="px-6 pb-6 space-y-3">
+                <div className="px-4 pb-4 space-y-3">
                   {Array.from({ length: 4 }).map((_, i) => (
                     <div key={i} className="flex items-center justify-between">
                       <Skeleton className="h-4 w-40" />
-                      <Skeleton className="h-5 w-16 rounded-full" />
+                      <Skeleton className="h-5 w-10 rounded-full" />
                     </div>
                   ))}
                 </div>
@@ -216,7 +216,7 @@ export default function HealthcareHome() {
                   icon={Users}
                   title="No patients assigned"
                   description="Patients will appear here once they are assigned to you."
-                  className="py-10"
+                  className="py-6"
                 />
               ) : (
                 <ul className="divide-y divide-border">
@@ -224,7 +224,7 @@ export default function HealthcareHome() {
                     <li
                       key={client.id}
                       onClick={() => navigate(`/admin/clients/${client.id}`)}
-                      className="flex items-center justify-between px-6 py-3 cursor-pointer hover:bg-muted/50 transition-colors"
+                      className="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-muted/50 transition-colors"
                     >
                       <span className="text-sm font-medium text-foreground">
                         {client.first_name} {client.last_name}
@@ -249,10 +249,10 @@ export default function HealthcareHome() {
             </CardHeader>
             <CardContent className="p-0">
               {loadingAppointments ? (
-                <div className="px-6 pb-6 space-y-3">
+                <div className="px-4 pb-4 space-y-3">
                   {Array.from({ length: 3 }).map((_, i) => (
                     <div key={i} className="flex items-center gap-4">
-                      <Skeleton className="h-4 w-16" />
+                      <Skeleton className="h-4 w-10" />
                       <Skeleton className="h-4 w-48" />
                     </div>
                   ))}
@@ -262,7 +262,7 @@ export default function HealthcareHome() {
                   icon={CalendarOff}
                   title="No appointments today"
                   description="Your schedule is clear for today."
-                  className="py-10"
+                  className="py-6"
                 />
               ) : (
                 <ul className="divide-y divide-border">
@@ -275,8 +275,8 @@ export default function HealthcareHome() {
                       ? `${apt.clients.first_name} ${apt.clients.last_name}`
                       : "Unknown patient";
                     return (
-                      <li key={apt.id} className="flex items-center gap-4 px-6 py-3">
-                        <span className="text-xs font-mono text-muted-foreground w-16 shrink-0">
+                      <li key={apt.id} className="flex items-center gap-4 px-4 py-3">
+                        <span className="text-xs font-mono text-muted-foreground w-10 shrink-0">
                           {time}
                         </span>
                         <div className="min-w-0 flex-1">
@@ -297,12 +297,12 @@ export default function HealthcareHome() {
         </div>
 
         {/* Right column — 1/3 */}
-        <div className="space-y-6">
+        <div className="space-y-4">
           {/* Calendar */}
           {loadingAppointments ? (
             <Card>
               <CardContent className="p-4 space-y-3">
-                <Skeleton className="h-6 w-32" />
+                <Skeleton className="h-4 w-20" />
                 <Skeleton className="h-64 w-full rounded-md" />
               </CardContent>
             </Card>

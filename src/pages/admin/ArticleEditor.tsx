@@ -421,12 +421,12 @@ export default function ArticleEditor() {
       />
 
       <main
-        className={`flex-1 transition-all duration-300 pt-16 ${
+        className={`flex-1 transition-all duration-300 pt-10 ${
           sidebarOpen ? "md:ml-[260px]" : "md:ml-[70px]"
         }`}
       >
         {/* Top Action Bar */}
-        <div className="sticky top-16 z-10 bg-background border-b px-8 py-4">
+        <div className="sticky top-10 z-10 bg-background border-b px-5 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               {/* Auto-save Indicator */}
@@ -527,16 +527,16 @@ export default function ArticleEditor() {
         </div>
 
         {/* Two Column Layout */}
-        <div className="flex gap-8 p-8">
+        <div className="flex gap-5 p-5">
           {/* Left Column - Editor */}
-          <div className="flex-1 max-w-[70%] space-y-6">
+          <div className="flex-1 max-w-[70%] space-y-4">
             {/* Title Input */}
             <div className="space-y-2">
               <Input
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Enter article title..."
-                className="text-4xl font-bold border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+                className="text-2xl font-bold border-0 px-0 focus-visible:ring-0 focus-visible:ring-offset-0"
                 maxLength={100}
                 autoFocus
               />

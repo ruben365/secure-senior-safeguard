@@ -10,17 +10,17 @@ export function LatestArticles() {
   return (
     <section
       aria-label="Latest cybersecurity articles"
-      className="relative z-10 py-14 md:py-20 bg-[#F9F8F6] gx-section"
+      className="relative z-10 py-9 md:py-12 bg-[#F9F8F6] gx-section"
     >
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
-        <div className="flex items-end justify-between mb-10">
+        <div className="flex items-end justify-between mb-6">
           <div>
             <span className="hss-overline mb-4">
               <span className="hss-overline-dot" />
               Resource Hub
             </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#111111] tracking-tight leading-tight mt-4">
+            <h2 className="text-3xl md:text-2xl font-extrabold text-[#111111] tracking-tight leading-tight mt-4">
               Latest Security Articles
             </h2>
             <p className="text-[#6B7280] mt-2 max-w-xl">
@@ -38,7 +38,7 @@ export function LatestArticles() {
         </div>
 
         {/* Cards */}
-        <div className="gx-feed grid md:grid-cols-3 gap-6">
+        <div className="gx-feed grid md:grid-cols-3 gap-4">
           {articles.map((article) => {
             const date = article.published_at || article.created_at;
             const readMin = Math.max(1, Math.ceil((article.content?.length || 0) / 1000));
@@ -95,7 +95,7 @@ export function LatestArticles() {
           })}
         </div>
 
-        <div className="mt-8 text-center sm:hidden">
+        <div className="mt-5 text-center sm:hidden">
           <Link
             to="/articles"
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#d96c4a] hover:text-[#c45e3b] transition-colors"

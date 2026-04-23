@@ -155,7 +155,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
       <div className="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-fab">
         <button
           onClick={() => setIsOpen(true)}
-          className="group relative w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary to-accent shadow-[0_2px_12px_hsl(var(--primary)/0.35),0_8px_24px_-6px_hsl(var(--primary)/0.25)] transition-all duration-300 hover:scale-110 hover:shadow-[0_4px_20px_hsl(var(--primary)/0.45)] active:scale-95 overflow-hidden ring-2 ring-white/20"
+          className="group relative w-7 h-7 sm:w-7 sm:h-7 rounded-full bg-gradient-to-br from-primary to-accent shadow-[0_2px_12px_hsl(var(--primary)/0.35),0_8px_24px_-6px_hsl(var(--primary)/0.25)] transition-all duration-300 hover:scale-110 hover:shadow-[0_4px_20px_hsl(var(--primary)/0.45)] active:scale-95 overflow-hidden ring-2 ring-white/20"
           aria-label="Open Laura AI Assistant"
           style={{ contain: "layout" }}
         >
@@ -182,7 +182,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-black/20">
           <div className="flex items-center gap-3">
-            <div className="relative w-10 h-10 rounded-full overflow-hidden ring-2 ring-primary/20">
+            <div className="relative w-6 h-6 rounded-full overflow-hidden ring-2 ring-primary/20">
               <img
                 src={lauraAvatar}
                 alt="Laura"
@@ -245,7 +245,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
             >
               {messages.length === 0 && (
                 <div className="space-y-5 text-center py-4">
-                  <div className="relative inline-flex items-center justify-center w-20 h-20 rounded-full overflow-hidden ring-4 ring-primary/10 mx-auto">
+                  <div className="relative inline-flex items-center justify-center w-12 h-12 rounded-full overflow-hidden ring-4 ring-primary/10 mx-auto">
                     <img
                       src={lauraAvatar}
                       alt="Laura"
@@ -318,7 +318,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
               <button
                 type="button"
                 onClick={toggleRecording}
-                className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
+                className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
                   isRecording
                     ? "bg-rose-500 text-white shadow-lg shadow-rose-500/30 scale-110 animate-pulse"
                     : "bg-black/25 text-white hover:bg-black/35"
@@ -341,7 +341,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
                 type="submit"
                 size="icon"
                 disabled={!input.trim() || isLoading}
-                className="rounded-full w-10 h-10 flex-shrink-0"
+                className="rounded-full w-6 h-6 flex-shrink-0"
               >
                 <Send className="w-4 h-4" />
               </Button>
@@ -351,7 +351,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
           /* Quick Help Panel */
           <div className="p-4 space-y-4">
             <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-lg bg-black/25 flex items-center justify-center">
+              <div className="w-4 h-4 rounded-lg bg-black/25 flex items-center justify-center">
                 <Headphones className="w-4 h-4 text-white" />
               </div>
               <div>
@@ -380,7 +380,7 @@ export const LauraAIAssistant = forwardRef<HTMLDivElement>(function LauraAIAssis
                       <span className="absolute -top-1 -right-1 w-3 h-3 bg-rose-500 rounded-full animate-pulse" />
                     )}
                     <div
-                      className={`w-9 h-9 rounded-xl bg-gradient-to-br ${action.color} flex items-center justify-center mb-2 shadow-sm group-hover:shadow-md group-hover:scale-105 transition-all`}
+                      className={`w-6 h-6 rounded-xl bg-gradient-to-br ${action.color} flex items-center justify-center mb-2 shadow-sm group-hover:shadow-md group-hover:scale-105 transition-all`}
                     >
                       <ActionIcon className="w-4 h-4 text-white" />
                     </div>

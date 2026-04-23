@@ -172,29 +172,29 @@ const AIAutomation = () => {
           </Hero>
 
           {/* Stats Section */}
-          <section className="py-12 bg-card border-y border-border">
+          <section className="py-7 bg-card border-y border-border">
             <div className="container mx-auto">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-5 text-center">
                 <div>
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
+                  <div className="text-3xl md:text-2xl font-bold text-primary mb-2">
                     35%
                   </div>
                   <div className="text-muted-foreground">Higher Close Rate</div>
                 </div>
                 <div>
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
+                  <div className="text-3xl md:text-2xl font-bold text-primary mb-2">
                     60%
                   </div>
                   <div className="text-muted-foreground">Fewer No-Shows</div>
                 </div>
                 <div>
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
+                  <div className="text-3xl md:text-2xl font-bold text-primary mb-2">
                     15hrs
                   </div>
                   <div className="text-muted-foreground">Saved Weekly</div>
                 </div>
                 <div>
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
+                  <div className="text-3xl md:text-2xl font-bold text-primary mb-2">
                     4x
                   </div>
                   <div className="text-muted-foreground">More Reviews</div>
@@ -204,10 +204,10 @@ const AIAutomation = () => {
           </section>
 
           {/* Features Grid */}
-          <section className="py-20">
+          <section className="py-12">
             <div className="container mx-auto">
-              <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <div className="text-center mb-10">
+                <h2 className="text-3xl md:text-2xl font-bold mb-4">
                   Complete Follow-Up Automation Suite
                 </h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -215,15 +215,15 @@ const AIAutomation = () => {
                   never let a lead slip through the cracks.
                 </p>
               </div>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {features.map((feature, index) => (
                   <Card
                     key={index}
                     className="border-border/50 bg-card/50 hover:shadow-lg transition-shadow"
                   >
                     <CardHeader>
-                      <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
-                        <feature.icon className="w-6 h-6 text-accent" />
+                      <div className="w-7 h-7 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
+                        <feature.icon className="w-4 h-4 text-accent" />
                       </div>
                       <CardTitle className="text-xl">{feature.title}</CardTitle>
                     </CardHeader>
@@ -239,10 +239,10 @@ const AIAutomation = () => {
           </section>
 
           {/* Automation Types */}
-          <section className="py-20 bg-card">
+          <section className="py-12 bg-card">
             <div className="container mx-auto">
-              <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <div className="text-center mb-10">
+                <h2 className="text-3xl md:text-2xl font-bold mb-4">
                   Ready-to-Deploy Automation Templates
                 </h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -250,10 +250,10 @@ const AIAutomation = () => {
                   from day one.
                 </p>
               </div>
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-2 gap-4">
                 {automationTypes.map((type, index) => (
                   <Card key={index} className="border-border/50">
-                    <CardContent className="p-6">
+                    <CardContent className="p-4">
                       <div className="flex justify-between items-start mb-4">
                         <h3 className="text-xl font-bold">{type.title}</h3>
                         <Badge
@@ -274,10 +274,10 @@ const AIAutomation = () => {
           </section>
 
           {/* Process Section */}
-          <section className="py-20">
+          <section className="py-12">
             <div className="container mx-auto">
-              <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <div className="text-center mb-10">
+                <h2 className="text-3xl md:text-2xl font-bold mb-4">
                   How We Build Your Automation
                 </h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -285,10 +285,10 @@ const AIAutomation = () => {
                   your business.
                 </p>
               </div>
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {process.map((item, index) => (
                   <div key={index} className="text-center">
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center mx-auto mb-4">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center mx-auto mb-4">
                       <span className="text-2xl font-bold text-white">
                         {item.step}
                       </span>
@@ -304,20 +304,20 @@ const AIAutomation = () => {
           </section>
 
           {/* Pricing Preview */}
-          <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-accent/5">
+          <section className="py-12 bg-gradient-to-br from-primary/5 via-background to-accent/5">
             <div className="container mx-auto">
               <div className="max-w-3xl mx-auto text-center">
-                <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                <h2 className="text-3xl md:text-2xl font-bold mb-4">
                   Investment That Pays for Itself
                 </h2>
-                <Card className="p-8 border-primary/20">
-                  <div className="text-5xl font-bold text-primary mb-2">
+                <Card className="p-5 border-primary/20">
+                  <div className="text-3xl font-bold text-primary mb-2">
                     $12,500
                   </div>
-                  <p className="text-muted-foreground mb-6">
+                  <p className="text-muted-foreground mb-4">
                     One-time implementation fee
                   </p>
-                  <ul className="space-y-3 text-left max-w-md mx-auto mb-8">
+                  <ul className="space-y-3 text-left max-w-md mx-auto mb-5">
                     {[
                       "Custom automation workflow design",
                       "Integration with your existing tools",
@@ -349,12 +349,12 @@ const AIAutomation = () => {
           </section>
 
           {/* CTA Section */}
-          <section className="py-20 bg-card">
+          <section className="py-12 bg-card">
             <div className="container mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              <h2 className="text-3xl md:text-2xl font-bold mb-4">
                 Ready to Automate Your Follow-Ups?
               </h2>
-              <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              <p className="text-xl text-muted-foreground mb-5 max-w-2xl mx-auto">
                 Let's discuss how automation can save you time and increase your
                 close rate.
               </p>

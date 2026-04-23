@@ -109,8 +109,8 @@ export function PublishSuccessModal({
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader className="text-center">
           <div className="flex justify-center mb-4">
-            <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center">
-              <CheckCircle className="w-12 h-12 text-green-600" />
+            <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
+              <CheckCircle className="w-7 h-7 text-green-600" />
             </div>
           </div>
           <DialogTitle className="text-3xl font-bold text-center">

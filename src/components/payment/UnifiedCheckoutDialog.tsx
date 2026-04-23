@@ -97,7 +97,7 @@ const ProgressBar: React.FC<{ step: number }> = ({ step }) => (
           />
         )}
         <div
-          className="w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold transition-all duration-300"
+          className="w-4 h-4 rounded-full flex items-center justify-center text-[11px] font-bold transition-all duration-300"
           style={{
             background: step >= n ? T.copper : "transparent",
             border: `2px solid ${step >= n ? T.copper : T.white30}`,
@@ -120,7 +120,7 @@ const OrderSummaryCard: React.FC = () => {
 
   return (
     <div
-      className="rounded-xl p-6"
+      className="rounded-xl p-4"
       style={{
         background: T.glassCard,
         border: `1px solid ${T.glassCardBorder}`,
@@ -604,10 +604,10 @@ const SuccessStep: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   return (
     <div className="text-center space-y-4 py-2">
       <div
-        className="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center"
+        className="w-10 h-10 mx-auto rounded-2xl flex items-center justify-center"
         style={{ background: T.successBg }}
       >
-        <PartyPopper className="w-8 h-8" style={{ color: T.success }} />
+        <PartyPopper className="w-5 h-5" style={{ color: T.success }} />
       </div>
 
       <div>
@@ -619,7 +619,7 @@ const SuccessStep: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         </p>
       </div>
 
-      <div className="rounded-xl p-6 space-y-2 text-[13px]" style={{ background: T.glassCard, border: `1px solid ${T.glassCardBorder}` }}>
+      <div className="rounded-xl p-4 space-y-2 text-[13px]" style={{ background: T.glassCard, border: `1px solid ${T.glassCardBorder}` }}>
         <div className="flex justify-between">
           <span style={{ color: T.white50 }}>Order ID</span>
           <span className="font-mono" style={{ color: T.white70 }}>
@@ -737,19 +737,19 @@ const UnifiedCheckoutDialog = React.forwardRef<HTMLDivElement>(
             {state.step === "payment" && (
               <Tabs defaultValue="card" className="w-full">
                 <TabsList
-                  className="grid w-full grid-cols-2 mb-4 rounded-lg h-9 p-0.5"
+                  className="grid w-full grid-cols-2 mb-4 rounded-lg h-6 p-0.5"
                   style={{ background: T.glassCard }}
                 >
                   <TabsTrigger
                     value="card"
-                    className="flex items-center gap-1.5 text-[12px] rounded-md data-[state=active]:bg-black/8 data-[state=active]:text-[#1a1a1c] text-[#6b6b70] h-8"
+                    className="flex items-center gap-1.5 text-[12px] rounded-md data-[state=active]:bg-black/8 data-[state=active]:text-[#1a1a1c] text-[#6b6b70] h-5"
                   >
                     <CreditCard className="w-3.5 h-3.5" />
                     Card
                   </TabsTrigger>
                   <TabsTrigger
                     value="qr"
-                    className="flex items-center gap-1.5 text-[12px] rounded-md data-[state=active]:bg-black/8 data-[state=active]:text-[#1a1a1c] text-[#6b6b70] h-8"
+                    className="flex items-center gap-1.5 text-[12px] rounded-md data-[state=active]:bg-black/8 data-[state=active]:text-[#1a1a1c] text-[#6b6b70] h-5"
                   >
                     <Smartphone className="w-3.5 h-3.5" />
                     QR Code
@@ -806,7 +806,7 @@ const UnifiedCheckoutDialog = React.forwardRef<HTMLDivElement>(
                       />
                     </Elements>
                   ) : (
-                    <div className="flex items-center justify-center py-8 gap-2">
+                    <div className="flex items-center justify-center py-5 gap-2">
                       <Loader2 className="w-5 h-5 animate-spin" style={{ color: T.copper }} />
                       <span className="text-[13px]" style={{ color: T.white50 }}>
                         Loading payment...

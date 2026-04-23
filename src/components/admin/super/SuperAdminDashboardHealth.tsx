@@ -184,11 +184,11 @@ export default function SuperAdminDashboardHealth() {
       </CardHeader>
       <CardContent>
         {loading ? (
-          <div className="flex items-center justify-center py-8">
-            <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          <div className="flex items-center justify-center py-5">
+            <Loader2 className="w-5 h-5 animate-spin text-primary" />
           </div>
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* Overall Health */}
             <div className="p-4 rounded-lg bg-muted/50">
               <div className="flex items-center justify-between mb-2">
@@ -256,8 +256,8 @@ export default function SuperAdminDashboardHealth() {
             </div>
 
             {dashboards.length === 0 && (
-              <div className="text-center py-8 text-muted-foreground">
-                <Monitor className="w-12 h-12 mx-auto mb-4 opacity-50" />
+              <div className="text-center py-5 text-muted-foreground">
+                <Monitor className="w-7 h-7 mx-auto mb-4 opacity-50" />
                 <p>No dashboards configured</p>
               </div>
             )}

@@ -199,7 +199,7 @@ const VoiceListeningIndicator: React.FC<VoiceListeningIndicatorProps> = ({
           <div className="flex items-center gap-3">
             <div className="relative flex items-center justify-center">
               <motion.div
-                className="absolute w-10 h-10 rounded-full bg-red-500/20"
+                className="absolute w-6 h-6 rounded-full bg-red-500/20"
                 animate={{ scale: [1, 1.8, 1], opacity: [0.6, 0, 0.6] }}
                 transition={{
                   duration: 1.5,
@@ -208,7 +208,7 @@ const VoiceListeningIndicator: React.FC<VoiceListeningIndicatorProps> = ({
                 }}
               />
               <motion.div
-                className="absolute w-7 h-7 rounded-full bg-red-500/30"
+                className="absolute w-4 h-4 rounded-full bg-red-500/30"
                 animate={{ scale: [1, 1.5, 1], opacity: [0.8, 0.2, 0.8] }}
                 transition={{
                   duration: 1.5,
@@ -228,7 +228,7 @@ const VoiceListeningIndicator: React.FC<VoiceListeningIndicatorProps> = ({
           </div>
 
           {/* Sound wave bars */}
-          <div className="w-full h-8 flex items-center justify-center gap-[3px] px-8">
+          <div className="w-full h-5 flex items-center justify-center gap-[3px] px-5">
             {[...Array(24)].map((_, i) => (
               <motion.div
                 key={i}
@@ -696,7 +696,7 @@ export const EnhancedPromptInputBox = React.forwardRef<
               <div key={index} className="relative group">
                 {file.type.startsWith("image/") && filePreviews[file.name] && (
                   <div
-                    className="w-16 h-16 rounded-xl overflow-hidden cursor-pointer transition-all duration-300"
+                    className="w-10 h-10 rounded-xl overflow-hidden cursor-pointer transition-all duration-300"
                     onClick={() => openImageModal(filePreviews[file.name])}
                   >
                     <img
@@ -748,7 +748,7 @@ export const EnhancedPromptInputBox = React.forwardRef<
             <PromptInputAction tooltip="Attach file">
               <button
                 onClick={() => uploadInputRef.current?.click()}
-                className="flex h-8 w-8 text-white/60 cursor-pointer items-center justify-center rounded-full transition-colors hover:bg-white/10 hover:text-white/90"
+                className="flex h-5 w-5 text-white/60 cursor-pointer items-center justify-center rounded-full transition-colors hover:bg-white/10 hover:text-white/90"
                 disabled={isRecording}
                 type="button"
               >
@@ -771,7 +771,7 @@ export const EnhancedPromptInputBox = React.forwardRef<
             <PromptInputAction tooltip="Web search (coming soon)">
               <button
                 type="button"
-                className="text-white/60 hover:text-white/90 hover:bg-white/10 transition h-8 w-8 rounded-full flex items-center justify-center"
+                className="text-white/60 hover:text-white/90 hover:bg-white/10 transition h-5 w-5 rounded-full flex items-center justify-center"
                 onClick={() => toast.info("Web search feature coming soon!")}
                 disabled={isRecording}
               >
@@ -783,7 +783,7 @@ export const EnhancedPromptInputBox = React.forwardRef<
             <PromptInputAction tooltip="Settings (coming soon)">
               <button
                 type="button"
-                className="text-white/60 hover:text-white/90 hover:bg-white/10 transition h-8 w-8 rounded-full flex items-center justify-center"
+                className="text-white/60 hover:text-white/90 hover:bg-white/10 transition h-5 w-5 rounded-full flex items-center justify-center"
                 onClick={() => toast.info("Settings panel coming soon!")}
                 disabled={isRecording}
               >
@@ -801,7 +801,7 @@ export const EnhancedPromptInputBox = React.forwardRef<
                 type="button"
                 onClick={toggleVoiceInput}
                 className={cn(
-                  "flex h-9 w-9 cursor-pointer items-center justify-center rounded-full transition-all duration-200",
+                  "flex h-6 w-6 cursor-pointer items-center justify-center rounded-full transition-all duration-200",
                   isRecording
                     ? "bg-red-500/20 text-red-400 hover:bg-red-500/30 ring-2 ring-red-500/50"
                     : "text-white/60 hover:bg-white/10 hover:text-white/90",
@@ -836,7 +836,7 @@ export const EnhancedPromptInputBox = React.forwardRef<
                   }}
                   disabled={!hasContent && !isLoading}
                   className={cn(
-                    "h-9 w-9 rounded-full transition-all duration-200 flex items-center justify-center",
+                    "h-6 w-6 rounded-full transition-all duration-200 flex items-center justify-center",
                     hasContent
                       ? "bg-[#4ADE80] text-[#121212] shadow-[0_0_18px_rgba(74,222,128,0.55)]"
                       : "bg-transparent text-white/30 cursor-not-allowed",

@@ -59,10 +59,10 @@ export default function LibraryBookDetail() {
         <SEO title="Book Not Found" description="The requested book was not found." noindex />
         <Navigation overlay />
         <main className="flex-1 flex items-center justify-center">
-          <div className="text-center py-20">
-            <BookOpen className="mx-auto mb-4 h-12 w-12 text-muted-foreground opacity-40" />
+          <div className="text-center py-12">
+            <BookOpen className="mx-auto mb-4 h-7 w-7 text-muted-foreground opacity-40" />
             <h1 className="text-2xl font-bold mb-2">Book Not Found</h1>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-muted-foreground mb-4">
               We couldn't find the book you're looking for.
             </p>
             <Button asChild>
@@ -163,12 +163,12 @@ export default function LibraryBookDetail() {
         </div>
 
         {/* ── Main layout ── */}
-        <div className="container mx-auto max-w-6xl py-10 px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="container mx-auto max-w-6xl py-6 px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
             {/* ── LEFT: Cover + Purchase Box (sticky) ── */}
             <aside className="md:col-span-1">
-              <div className="sticky top-24 space-y-5">
+              <div className="sticky top-16 space-y-5">
                 {/* Cover image */}
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[3/4] bg-gradient-to-br from-primary/20 to-primary/5">
                   {book.cover_image ? (
@@ -179,8 +179,8 @@ export default function LibraryBookDetail() {
                       loading="eager"
                     />
                   ) : (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-gradient-to-br from-primary/80 to-purple-800/80 text-white text-center">
-                      <BookOpen className="h-16 w-16 mb-4 opacity-80" />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center p-4 bg-gradient-to-br from-primary/80 to-purple-800/80 text-white text-center">
+                      <BookOpen className="h-10 w-10 mb-4 opacity-80" />
                       <h2 className="text-xl font-bold leading-tight">{book.title}</h2>
                     </div>
                   )}
@@ -198,7 +198,7 @@ export default function LibraryBookDetail() {
                           <CheckCircle className="h-5 w-5" />
                           You own this book
                         </div>
-                        <Button className="w-full gap-2 h-11 text-base" onClick={handleReadNow}>
+                        <Button className="w-full gap-2 h-7 text-base" onClick={handleReadNow}>
                           <BookOpen className="h-4 w-4" />
                           Read Now
                         </Button>
@@ -222,7 +222,7 @@ export default function LibraryBookDetail() {
                         {user ? (
                           <>
                             <Button
-                              className="w-full gap-2 text-base h-11"
+                              className="w-full gap-2 text-base h-7"
                               onClick={() => setPaymentOpen(true)}
                             >
                               <ShoppingCart className="h-4 w-4" />
@@ -237,7 +237,7 @@ export default function LibraryBookDetail() {
                           </>
                         ) : (
                           <>
-                            <Button className="w-full gap-2 text-base h-11" asChild>
+                            <Button className="w-full gap-2 text-base h-7" asChild>
                               <Link to="/auth">
                                 <LogIn className="h-4 w-4" />
                                 Sign In to Purchase
@@ -275,9 +275,9 @@ export default function LibraryBookDetail() {
             </aside>
 
             {/* ── RIGHT: Book content ── */}
-            <div className="md:col-span-2 space-y-8">
+            <div className="md:col-span-2 space-y-5">
               {/* Back link */}
-              <Button variant="ghost" asChild className="gap-2 -ml-2 mb-2 h-8 text-sm">
+              <Button variant="ghost" asChild className="gap-2 -ml-2 mb-2 h-5 text-sm">
                 <Link to="/library">
                   <ArrowLeft className="h-3.5 w-3.5" />
                   Back to Library
@@ -290,7 +290,7 @@ export default function LibraryBookDetail() {
                   <Badge>{CATEGORY_LABELS[book.category as BookCategory]}</Badge>
                   <Badge variant="secondary">{book.tag}</Badge>
                 </div>
-                <h1 className="text-3xl md:text-4xl font-black leading-tight mb-2">
+                <h1 className="text-3xl md:text-2xl font-black leading-tight mb-2">
                   {book.title}
                 </h1>
                 <p className="text-lg text-muted-foreground">{book.subtitle}</p>
@@ -363,12 +363,12 @@ export default function LibraryBookDetail() {
                           Full content requires purchase
                         </div>
                         {user ? (
-                          <Button size="sm" className="ml-auto gap-1.5 h-7 text-xs" onClick={() => setPaymentOpen(true)}>
+                          <Button size="sm" className="ml-auto gap-1.5 h-4 text-xs" onClick={() => setPaymentOpen(true)}>
                             <ShoppingCart className="h-3 w-3" />
                             Buy Now — ${book.price.toFixed(2)}
                           </Button>
                         ) : (
-                          <Button size="sm" className="ml-auto gap-1.5 h-7 text-xs" asChild>
+                          <Button size="sm" className="ml-auto gap-1.5 h-4 text-xs" asChild>
                             <Link to="/auth">
                               <LogIn className="h-3 w-3" />
                               Sign In to Purchase
@@ -402,7 +402,7 @@ export default function LibraryBookDetail() {
                       key={chapter.chapter_number}
                       className="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-muted/50 transition-colors text-sm"
                     >
-                      <span className="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center shrink-0">
+                      <span className="w-4 h-4 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center shrink-0">
                         {chapter.chapter_number}
                       </span>
                       <span className="flex-1">{chapter.chapter_title}</span>
@@ -425,10 +425,10 @@ export default function LibraryBookDetail() {
               </section>
 
               {/* About the Author */}
-              <section className="bg-muted/30 rounded-2xl p-6">
+              <section className="bg-muted/30 rounded-2xl p-4">
                 <h2 className="text-lg font-bold mb-3">About the Author</h2>
                 <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shrink-0 shadow-md">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shrink-0 shadow-md">
                     <span className="text-xl font-black text-white">IN</span>
                   </div>
                   <div>
@@ -447,13 +447,13 @@ export default function LibraryBookDetail() {
 
           {/* ── Related Books ── */}
           {relatedBooks.length > 0 && (
-            <section className="mt-16 pt-10 border-t">
-              <h2 className="text-xl font-bold mb-6">You Might Also Like</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <section className="mt-10 pt-6 border-t">
+              <h2 className="text-xl font-bold mb-4">You Might Also Like</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {relatedBooks.map((related) => (
                   <Link key={related.slug} to={`/library/${related.slug}`} className="group block">
                     <Card className="h-full flex gap-4 p-4 hover:shadow-md transition-all hover:-translate-y-0.5 border-border/60">
-                      <div className="w-16 h-20 rounded-lg overflow-hidden shrink-0 bg-muted">
+                      <div className="w-10 h-12 rounded-lg overflow-hidden shrink-0 bg-muted">
                         <img
                           src={related.cover_image}
                           alt={related.title}

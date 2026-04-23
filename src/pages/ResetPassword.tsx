@@ -180,7 +180,7 @@ export default function ResetPassword() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-7 w-7 border-b-2 border-purple-600 mx-auto"></div>
           <p className="mt-4 text-gray-600">Validating reset link...</p>
         </div>
       </div>
@@ -191,11 +191,11 @@ export default function ResetPassword() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center max-w-md">
-          <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <X className="w-8 h-8 text-red-600" />
+          <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <X className="w-5 h-5 text-red-600" />
           </div>
           <h1 className="text-2xl font-bold mb-2">Invalid Reset Link</h1>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 mb-4">
             This reset link is invalid or has expired. Please request a new
             password reset.
           </p>
@@ -209,12 +209,12 @@ export default function ResetPassword() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center max-w-md">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <CheckCircle className="w-8 h-8 text-green-600" />
+          <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <CheckCircle className="w-5 h-5 text-green-600" />
           </div>
           <h1 className="text-2xl font-bold mb-2">Password Reset Successful</h1>
           <p className="text-gray-600 mb-2">Your password has been updated.</p>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 mb-4">
             You can now sign in with your new password.
           </p>
           <p className="text-sm text-gray-500 mb-4">
@@ -236,8 +236,8 @@ export default function ResetPassword() {
       <FloatingShapes />
 
       <div className="w-full max-w-md relative z-10">
-        <div className="bg-white rounded-2xl shadow-2xl p-8 border border-purple-100">
-          <div className="text-center mb-8">
+        <div className="bg-white rounded-2xl shadow-2xl p-5 border border-purple-100">
+          <div className="text-center mb-5">
             <h1 className="text-3xl font-bold text-gray-900">
               Create New Password
             </h1>
@@ -246,7 +246,7 @@ export default function ResetPassword() {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4">
             {/* New Password */}
             <div className="space-y-2">
               <Label htmlFor="password">New Password</Label>
@@ -257,7 +257,7 @@ export default function ResetPassword() {
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="pl-10 pr-10"
+                  className="pl-6 pr-6"
                   required
                   autoComplete="new-password"
                   maxLength={128}
@@ -344,7 +344,7 @@ export default function ResetPassword() {
                   type={showConfirmPassword ? "text" : "password"}
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="pl-10 pr-10"
+                  className="pl-6 pr-6"
                   required
                   autoComplete="new-password"
                   maxLength={128}

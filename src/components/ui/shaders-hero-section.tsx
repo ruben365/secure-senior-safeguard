@@ -68,8 +68,8 @@ export function ShaderBackground({ children }: ShaderBackgroundProps) {
 
 export function PulsingCircle() {
   return (
-    <div className="absolute bottom-24 right-8 z-30 hidden md:block">
-      <div className="relative w-20 h-20 flex items-center justify-center">
+    <div className="absolute bottom-16 right-5 z-30 hidden md:block">
+      <div className="relative w-12 h-12 flex items-center justify-center">
         <PulsingBorder
           colors={["#93c5fd", "#60a5fa", "#3b82f6", "#10b981", "#f59e0b", "#818cf8", "#6366f1"]}
           colorBack="#00000000"
@@ -113,13 +113,13 @@ export function PulsingCircle() {
 export function HeroContent() {
   return (
     <div className="relative z-20 container mx-auto">
-      <div className="min-h-[calc(100vh-68px)] flex flex-col justify-center pb-24 pt-8 max-w-3xl">
+      <div className="min-h-[calc(100vh-68px)] flex flex-col justify-center pb-16 pt-5 max-w-3xl">
         {/* Live status badge */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-8"
+          className="mb-5"
         >
           <div
             className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/[0.06] backdrop-blur-md border border-white/[0.08] relative"
@@ -143,7 +143,7 @@ export function HeroContent() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.35 }}
-          className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-black text-white leading-[1.05] mb-6 tracking-tight"
+          className="text-2xl sm:text-3xl md:text-4xl xl:text-4xl font-black text-white leading-[1.05] mb-4 tracking-tight"
         >
           AI-Powered{" "}
           <span className="bg-gradient-to-r from-blue-300 via-sky-300 to-blue-300 bg-clip-text text-transparent">
@@ -158,7 +158,7 @@ export function HeroContent() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="text-lg md:text-xl text-white/60 leading-relaxed max-w-2xl mb-10"
+          className="text-lg md:text-xl text-white/60 leading-relaxed max-w-2xl mb-6"
         >
           Real-time deepfake detection, voice clone analysis, and phishing prevention.
           Veteran-founded in Ohio — protecting 500+ families and counting.
@@ -169,11 +169,11 @@ export function HeroContent() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.65 }}
-          className="flex flex-col sm:flex-row gap-4 mb-12"
+          className="flex flex-col sm:flex-row gap-4 mb-7"
         >
           <Link
             to="/training#pricing"
-            className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-white text-black font-semibold text-sm transition-all duration-200 hover:bg-white/90 hover:scale-[1.02] shadow-lg shadow-white/10"
+            className="inline-flex items-center justify-center px-5 py-3.5 rounded-full bg-white text-black font-semibold text-sm transition-all duration-200 hover:bg-white/90 hover:scale-[1.02] shadow-lg shadow-white/10"
           >
             <Shield className="mr-2 w-4 h-4" />
             Start Protection — From $9.99
@@ -181,7 +181,7 @@ export function HeroContent() {
           </Link>
           <a
             href={SITE.phone.tel}
-            className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-white/[0.06] backdrop-blur-sm border border-white/20 text-white font-semibold text-sm transition-all duration-200 hover:bg-white/10 hover:border-white/30"
+            className="inline-flex items-center justify-center px-5 py-3.5 rounded-full bg-white/[0.06] backdrop-blur-sm border border-white/20 text-white font-semibold text-sm transition-all duration-200 hover:bg-white/10 hover:border-white/30"
           >
             <Phone className="mr-2 w-4 h-4" />
             Call {SITE.phone.display}
@@ -232,7 +232,7 @@ export function FloatingShieldCard() {
       <div className="px-5 py-4 rounded-2xl bg-white/[0.05] backdrop-blur-2xl border border-white/[0.08] shadow-2xl max-w-[220px]">
         <div className="absolute top-0 left-2 right-2 h-px bg-gradient-to-r from-transparent via-blue-400/20 to-transparent" />
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-9 h-9 rounded-xl bg-emerald-500/10 flex items-center justify-center">
+          <div className="w-6 h-6 rounded-xl bg-emerald-500/10 flex items-center justify-center">
             <Shield className="w-5 h-5 text-emerald-400" />
           </div>
           <div>
@@ -294,7 +294,7 @@ export function FloatingAlertCard() {
     >
       <div className="px-4 py-3 rounded-xl bg-white/[0.05] backdrop-blur-2xl border border-white/[0.08] shadow-2xl">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-red-500/10 flex items-center justify-center">
+          <div className="w-5 h-5 rounded-lg bg-red-500/10 flex items-center justify-center">
             <AlertTriangle className="w-4 h-4 text-red-400" />
           </div>
           <div>

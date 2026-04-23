@@ -95,7 +95,7 @@ export function ForgotPasswordModal({
         </DialogHeader>
 
         {!emailSent ? (
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div className="text-center text-sm text-white/70">
               Enter your authorized email address and we'll send you a reset
               link.
@@ -111,7 +111,7 @@ export function ForgotPasswordModal({
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="pl-10"
+                  className="pl-6"
                   required
                   autoComplete="email"
                   maxLength={254}
@@ -133,10 +133,10 @@ export function ForgotPasswordModal({
             </Button>
           </form>
         ) : (
-          <div className="space-y-6 text-center">
+          <div className="space-y-4 text-center">
             <div className="flex justify-center">
-              <div className="w-16 h-16 bg-emerald-500/15 rounded-full flex items-center justify-center">
-                <CheckCircle className="w-8 h-8 text-emerald-400" />
+              <div className="w-10 h-10 bg-emerald-500/15 rounded-full flex items-center justify-center">
+                <CheckCircle className="w-5 h-5 text-emerald-400" />
               </div>
             </div>
 

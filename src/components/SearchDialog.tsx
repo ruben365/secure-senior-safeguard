@@ -69,7 +69,7 @@ export default function SearchDialog({ open, onOpenChange }: SearchDialogProps) 
             placeholder="Search pages..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="pl-9 bg-white/[0.06] border-white/15 text-white placeholder:text-white/40"
+            className="pl-6 bg-white/[0.06] border-white/15 text-white placeholder:text-white/40"
             autoFocus
           />
         </div>

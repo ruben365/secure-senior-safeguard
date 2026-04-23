@@ -72,22 +72,22 @@ function Articles() {
       </Hero>
 
       {/* Articles Grid */}
-      <section className="py-16 bg-background">
+      <section className="py-10 bg-background">
         <div className="container mx-auto">
           {isLoading ? (
             <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
-              <Loader2 className="w-8 h-8 animate-spin text-primary" />
+              <Loader2 className="w-5 h-5 animate-spin text-primary" />
               <p className="text-muted-foreground">Loading articles...</p>
             </div>
           ) : isError ? (
-            <div className="text-center py-16">
+            <div className="text-center py-10">
               <p className="text-destructive mb-4">Failed to load articles</p>
               <Button onClick={() => refetch()}>Try Again</Button>
             </div>
           ) : !articles || articles.length === 0 ? (
-            <div className="text-center py-16">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center">
-                <BookOpen className="w-8 h-8 text-muted-foreground" />
+            <div className="text-center py-10">
+              <div className="w-10 h-10 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center">
+                <BookOpen className="w-5 h-5 text-muted-foreground" />
               </div>
               <h2 className="text-xl font-semibold mb-2">No Articles Yet</h2>
               <p className="text-muted-foreground">
@@ -95,7 +95,7 @@ function Articles() {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 gap-5 max-w-4xl mx-auto">
               {articles.map((article) => (
                 <Card
                   key={article.id}
@@ -110,7 +110,7 @@ function Articles() {
                       decoding="async"
                     />
                   )}
-                  <div className="p-8">
+                  <div className="p-5">
                     <div className="flex items-center gap-4 mb-4">
                       <Badge variant="secondary">{article.category}</Badge>
                       <div className="flex items-center gap-4 text-sm text-muted-foreground">
@@ -134,7 +134,7 @@ function Articles() {
 
                     <h2 className="text-3xl font-bold mb-4">{article.title}</h2>
 
-                    <p className="text-muted-foreground text-lg mb-6">
+                    <p className="text-muted-foreground text-lg mb-4">
                       {article.excerpt ||
                         article.content?.slice(0, 200) + "..."}
                     </p>
@@ -150,7 +150,7 @@ function Articles() {
               ))}
 
               {articles.length >= pageSize && (
-                <div className="text-center pt-8">
+                <div className="text-center pt-5">
                   <Button
                     variant="outline"
                     size="lg"
@@ -164,12 +164,12 @@ function Articles() {
           )}
 
           {/* CTA */}
-          <div className="text-center mt-16">
-            <Card className="p-8 max-w-2xl mx-auto bg-gradient-to-r from-primary/10 to-accent/10">
+          <div className="text-center mt-10">
+            <Card className="p-5 max-w-2xl mx-auto bg-gradient-to-r from-primary/10 to-accent/10">
               <h3 className="text-2xl font-bold mb-4">
                 Stay Protected from Scams
               </h3>
-              <p className="text-muted-foreground mb-6">
+              <p className="text-muted-foreground mb-4">
                 Get expert analysis of suspicious messages, calls, and links
                 with ScamShield protection.
               </p>

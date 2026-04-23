@@ -358,10 +358,10 @@ export const AIChat = () => {
   // Closed state - just show floating button
   if (!isOpen) {
     return (
-      <div className="fixed bottom-6 right-6 z-[9998] group">
+      <div className="fixed bottom-4 right-4 z-[9998] group">
         <button
           onClick={openChat}
-          className="relative w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden ring-2 ring-primary/20"
+          className="relative w-9 h-9 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden ring-2 ring-primary/20"
         >
           <img
             src={lauraAvatar}
@@ -387,13 +387,13 @@ export const AIChat = () => {
   }
 
   return (
-    <div className="fixed bottom-4 right-2 z-[9998] sm:bottom-6 sm:right-6">
+    <div className="fixed bottom-4 right-2 z-[9998] sm:bottom-4 sm:right-4">
       {/* Enhanced chat panel with better dimensions */}
       <div className="bg-card rounded-2xl shadow-2xl w-[calc(100vw-1rem)] max-w-[360px] sm:w-[400px] sm:max-w-none h-[560px] flex flex-col overflow-hidden border border-border">
         {/* Header */}
         <div className="flex items-center justify-between p-3 border-b border-border bg-card shrink-0">
           <div className="flex items-center gap-2">
-            <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
+            <div className="relative w-6 h-6 rounded-full overflow-hidden flex-shrink-0">
               <img
                 src={lauraAvatar}
                 alt="Laura"
@@ -476,8 +476,8 @@ export const AIChat = () => {
           }}
         >
           {messages.length === 0 && (
-            <div className="text-center py-6 space-y-3">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full overflow-hidden ring-2 ring-primary/20">
+            <div className="text-center py-4 space-y-3">
+              <div className="inline-flex items-center justify-center w-10 h-10 rounded-full overflow-hidden ring-2 ring-primary/20">
                 <img
                   src={lauraAvatar}
                   alt="Laura"
@@ -531,7 +531,7 @@ export const AIChat = () => {
               className={`flex gap-2 ${msg.role === "assistant" ? "justify-start" : "justify-end"}`}
             >
               {msg.role === "assistant" && (
-                <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+                <div className="w-5 h-5 rounded-full overflow-hidden flex-shrink-0">
                   <img
                     src={lauraAvatar}
                     alt="Laura"
@@ -583,7 +583,7 @@ export const AIChat = () => {
 
           {isLoading && (
             <div className="flex gap-2 justify-start">
-              <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+              <div className="w-5 h-5 rounded-full overflow-hidden flex-shrink-0">
                 <img
                   src={lauraAvatar}
                   alt="Laura"
@@ -620,7 +620,7 @@ export const AIChat = () => {
         {showScrollButton && (
           <button
             onClick={() => scrollToBottom()}
-            className="absolute bottom-24 left-1/2 -translate-x-1/2 p-2 rounded-full bg-primary text-primary-foreground shadow-lg hover:bg-primary/90 transition-all"
+            className="absolute bottom-16 left-1/2 -translate-x-1/2 p-2 rounded-full bg-primary text-primary-foreground shadow-lg hover:bg-primary/90 transition-all"
           >
             <ChevronDown className="w-4 h-4" />
           </button>
@@ -670,7 +670,7 @@ export const AIChat = () => {
             <button
               type="button"
               onClick={toggleVoiceRecording}
-              className={`h-11 w-11 flex-shrink-0 rounded-full flex items-center justify-center transition-all ${
+              className={`h-7 w-7 flex-shrink-0 rounded-full flex items-center justify-center transition-all ${
                 isRecording
                   ? "bg-destructive text-destructive-foreground animate-pulse"
                   : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
@@ -704,7 +704,7 @@ export const AIChat = () => {
             <button
               type="submit"
               disabled={!input.trim() || isLoading}
-              className="h-11 w-11 flex-shrink-0 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="h-7 w-7 flex-shrink-0 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <Loader2 className="h-5 w-5 animate-spin" />

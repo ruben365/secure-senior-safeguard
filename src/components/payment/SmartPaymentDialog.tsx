@@ -190,7 +190,7 @@ function SmartPaymentForm({ items, onSuccess, onClose }: PaymentFormProps) {
         {["info", "payment", "success"].map((s, i) => (
           <div key={s} className="flex items-center gap-1.5">
             <div
-              className={`w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold transition-all ${
+              className={`w-4 h-4 rounded-full flex items-center justify-center text-[11px] font-bold transition-all ${
                 step === s
                   ? "bg-primary text-primary-foreground"
                   : ["info", "payment", "success"].indexOf(step) > i
@@ -206,7 +206,7 @@ function SmartPaymentForm({ items, onSuccess, onClose }: PaymentFormProps) {
             </div>
             {i < 2 && (
               <div
-                className={`w-8 h-0.5 rounded ${
+                className={`w-5 h-0.5 rounded ${
                   ["info", "payment", "success"].indexOf(step) > i
                     ? "bg-primary"
                     : "bg-muted"
@@ -325,7 +325,7 @@ function SmartPaymentForm({ items, onSuccess, onClose }: PaymentFormProps) {
             <Button
               onClick={handleInfoSubmit}
               disabled={isLoading || !email || !name || !termsAccepted}
-              className="w-full h-9 text-sm"
+              className="w-full h-6 text-sm"
               size="sm"
             >
               {isLoading ? (
@@ -373,15 +373,15 @@ function SmartPaymentForm({ items, onSuccess, onClose }: PaymentFormProps) {
             {/* Stripe Payment Element */}
             <div className="bg-background rounded-lg p-3 border">
               {stripeLoading ? (
-                <div className="flex items-center justify-center py-8">
-                  <Loader2 className="w-6 h-6 animate-spin text-primary" />
+                <div className="flex items-center justify-center py-5">
+                  <Loader2 className="w-4 h-4 animate-spin text-primary" />
                   <span className="ml-2 text-sm text-muted-foreground">
                     Initializing payment...
                   </span>
                 </div>
               ) : !stripePromise || stripeError ? (
                 <div className="p-4 bg-destructive/10 text-destructive rounded-lg text-center">
-                  <CreditCard className="w-8 h-8 mx-auto mb-2 opacity-50" />
+                  <CreditCard className="w-5 h-5 mx-auto mb-2 opacity-50" />
                   <p className="font-medium">Payment system unavailable</p>
                   <p className="text-sm mt-1">
                     {stripeError || "Please refresh the page and try again."}
@@ -444,13 +444,13 @@ function SmartPaymentForm({ items, onSuccess, onClose }: PaymentFormProps) {
             animate={{ opacity: 1, scale: 1 }}
             className="text-center py-4"
           >
-            <div className="w-14 h-14 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+            <div className="w-9 h-9 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring" }}
               >
-                <CheckCircle className="w-7 h-7 text-green-500" />
+                <CheckCircle className="w-4 h-4 text-green-500" />
               </motion.div>
             </div>
 
@@ -584,7 +584,7 @@ function PaymentElementWrapper({
                 </p>
               </div>
             </div>
-            <Button type="button" variant="outline" size="sm" className="w-full h-9 text-sm" onClick={retry}>
+            <Button type="button" variant="outline" size="sm" className="w-full h-6 text-sm" onClick={retry}>
               <RefreshCw className="mr-2 h-4 w-4" />
               Retry payment form
             </Button>
@@ -622,7 +622,7 @@ function PaymentElementWrapper({
           variant="outline"
           onClick={onBack}
           disabled={isLoading}
-          className="flex-1 h-9 text-sm"
+          className="flex-1 h-6 text-sm"
           size="sm"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
@@ -631,7 +631,7 @@ function PaymentElementWrapper({
         <Button
           onClick={handleSubmit}
           disabled={isLoading || !stripe || !elements || !isReady}
-          className="flex-1 h-9 text-sm"
+          className="flex-1 h-6 text-sm"
           size="sm"
         >
           {isLoading ? (
@@ -670,7 +670,7 @@ export function SmartPaymentDialog({
       <DialogContent className="w-[calc(100vw-32px)] sm:w-full sm:max-w-[360px] max-h-[85svh] overflow-y-auto p-4 gap-2">
         <DialogHeader className="space-y-0 pb-2.5">
           <DialogTitle className="flex items-center gap-2.5">
-            <div className="w-8 h-8 bg-[#d96c4a]/12 rounded-full flex items-center justify-center flex-shrink-0">
+            <div className="w-5 h-5 bg-[#d96c4a]/12 rounded-full flex items-center justify-center flex-shrink-0">
               <CreditCard className="w-4 h-4 text-[#d96c4a]" />
             </div>
             <div className="flex-1 min-w-0">

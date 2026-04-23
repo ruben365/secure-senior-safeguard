@@ -116,9 +116,9 @@ export function JobApplicationModal({ job, open, onOpenChange }: JobApplicationM
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="w-[calc(100vw-32px)] sm:w-full sm:max-w-[420px] max-h-[85svh] overflow-y-auto rounded-2xl p-0 gap-0">
         {submitted ? (
-          <div className="space-y-3 px-5 py-6 text-center sm:px-6">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-teal-500/15 to-indigo-500/15 border border-teal-500/30 flex items-center justify-center mx-auto">
-              <CheckCircle2 className="w-6 h-6 text-teal-600" />
+          <div className="space-y-3 px-5 py-4 text-center sm:px-4">
+            <div className="w-7 h-7 rounded-full bg-gradient-to-br from-teal-500/15 to-indigo-500/15 border border-teal-500/30 flex items-center justify-center mx-auto">
+              <CheckCircle2 className="w-4 h-4 text-teal-600" />
             </div>
             <DialogHeader className="space-y-0">
               <DialogTitle className="text-base font-semibold leading-tight">Application Received!</DialogTitle>

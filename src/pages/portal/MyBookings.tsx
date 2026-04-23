@@ -78,7 +78,7 @@ function MyBookings() {
         onSignOut={handleSignOut}
       />
 
-      <main className="container mx-auto py-6 space-y-6">
+      <main className="container mx-auto py-4 space-y-4">
         {/* Stats Overview */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -86,10 +86,10 @@ function MyBookings() {
           className="grid grid-cols-1 md:grid-cols-3 gap-4"
         >
           <Card className="bg-gradient-to-br from-yellow-500/10 to-yellow-500/5">
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-yellow-500/20 flex items-center justify-center">
-                  <Clock className="w-6 h-6 text-yellow-600" />
+                <div className="w-7 h-7 rounded-full bg-yellow-500/20 flex items-center justify-center">
+                  <Clock className="w-4 h-4 text-yellow-600" />
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Pending</p>
@@ -100,10 +100,10 @@ function MyBookings() {
           </Card>
 
           <Card className="bg-gradient-to-br from-green-500/10 to-green-500/5">
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center">
-                  <CheckCircle className="w-6 h-6 text-green-600" />
+                <div className="w-7 h-7 rounded-full bg-green-500/20 flex items-center justify-center">
+                  <CheckCircle className="w-4 h-4 text-green-600" />
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Confirmed</p>
@@ -114,10 +114,10 @@ function MyBookings() {
           </Card>
 
           <Card className="bg-gradient-to-br from-blue-500/10 to-blue-500/5">
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/50/20 flex items-center justify-center">
-                  <FileText className="w-6 h-6 text-primary" />
+                <div className="w-7 h-7 rounded-full bg-primary/50/20 flex items-center justify-center">
+                  <FileText className="w-4 h-4 text-primary" />
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Completed</p>
@@ -148,12 +148,12 @@ function MyBookings() {
                     key={i}
                     className="flex items-center gap-4 p-4 border rounded-lg"
                   >
-                    <Skeleton className="w-12 h-12 rounded" />
+                    <Skeleton className="w-7 h-7 rounded" />
                     <div className="flex-1">
                       <Skeleton className="h-5 w-3/4 mb-2" />
                       <Skeleton className="h-4 w-1/2" />
                     </div>
-                    <Skeleton className="h-6 w-24" />
+                    <Skeleton className="h-4 w-16" />
                   </div>
                 ))}
               </div>
@@ -225,10 +225,10 @@ function MyBookings() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-12">
-                <Calendar className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
+              <div className="text-center py-7">
+                <Calendar className="w-7 h-7 mx-auto mb-4 text-muted-foreground" />
                 <h3 className="text-xl font-semibold mb-2">No Bookings Yet</h3>
-                <p className="text-muted-foreground mb-6">
+                <p className="text-muted-foreground mb-4">
                   You haven't made any service requests yet.
                 </p>
                 <Button onClick={() => navigate("/business")}>

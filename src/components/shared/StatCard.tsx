@@ -33,7 +33,7 @@ export function StatCard({ data, className }: StatCardProps) {
 
   const cardContent = (
     <Card className={cn("transition-colors", href && "hover:bg-muted/50 cursor-pointer", className)}>
-      <CardContent className="p-6">
+      <CardContent className="p-4">
         <div className="flex items-start justify-between gap-4">
           <div className="flex flex-col gap-1 min-w-0">
             <span className="text-sm font-medium text-muted-foreground truncate">{title}</span>

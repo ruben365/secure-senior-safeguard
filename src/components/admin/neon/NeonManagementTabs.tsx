@@ -17,9 +17,9 @@ const tabItems = [
 
 export function NeonManagementTabs() {
   return (
-    <Card className="bg-[#1F2937] border-[#374151] p-6">
+    <Card className="bg-[#1F2937] border-[#374151] p-4">
       <Tabs defaultValue="bookings" className="w-full">
-        <TabsList className="w-full bg-[#111827] border border-[#374151] p-1 rounded-lg grid grid-cols-5 gap-1 mb-6">
+        <TabsList className="w-full bg-[#111827] border border-[#374151] p-1 rounded-lg grid grid-cols-5 gap-1 mb-4">
           {tabItems.map((item) => {
             const Icon = item.icon;
             return (

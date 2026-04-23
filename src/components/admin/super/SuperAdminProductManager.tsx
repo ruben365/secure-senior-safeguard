@@ -342,7 +342,7 @@ export default function SuperAdminProductManager() {
                         onChange={(e) =>
                           setFormData({ ...formData, price: e.target.value })
                         }
-                        className="bg-gray-800 border-gray-700 pl-10"
+                        className="bg-gray-800 border-gray-700 pl-6"
                       />
                     </div>
                   </div>
@@ -399,7 +399,7 @@ export default function SuperAdminProductManager() {
                         id="cover-upload"
                       />
                       <label htmlFor="cover-upload" className="cursor-pointer">
-                        <Image className="w-8 h-8 mx-auto text-gray-500 mb-2" />
+                        <Image className="w-5 h-5 mx-auto text-gray-500 mb-2" />
                         <p className="text-sm text-gray-400">
                           {coverImage
                             ? coverImage.name
@@ -421,7 +421,7 @@ export default function SuperAdminProductManager() {
                         id="file-upload"
                       />
                       <label htmlFor="file-upload" className="cursor-pointer">
-                        <Upload className="w-8 h-8 mx-auto text-gray-500 mb-2" />
+                        <Upload className="w-5 h-5 mx-auto text-gray-500 mb-2" />
                         <p className="text-sm text-gray-400">
                           {productFile
                             ? productFile.name
@@ -465,12 +465,12 @@ export default function SuperAdminProductManager() {
       </CardHeader>
       <CardContent>
         {loading ? (
-          <div className="flex items-center justify-center py-8">
-            <Loader2 className="w-8 h-8 animate-spin text-purple-400" />
+          <div className="flex items-center justify-center py-5">
+            <Loader2 className="w-5 h-5 animate-spin text-purple-400" />
           </div>
         ) : products.length === 0 ? (
-          <div className="text-center py-12">
-            <Package className="w-16 h-16 mx-auto text-gray-600 mb-4" />
+          <div className="text-center py-7">
+            <Package className="w-10 h-10 mx-auto text-gray-600 mb-4" />
             <h3 className="text-lg font-medium text-gray-300">
               No Products Yet
             </h3>
@@ -500,7 +500,7 @@ export default function SuperAdminProductManager() {
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <BookOpen className="w-12 h-12 text-purple-400" />
+                    <BookOpen className="w-7 h-7 text-purple-400" />
                   )}
                 </div>
                 <div className="p-4">

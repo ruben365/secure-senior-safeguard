@@ -81,10 +81,10 @@ const buttonVariants = cva(
       size: {
         default: "h-[28px] sm:h-[38px] px-3 sm:px-5 py-1 text-[11px] sm:text-[13px]",
         sm: "h-[30px] sm:h-[34px] rounded-md px-2.5 sm:px-3 text-[11px] sm:text-[12px]",
-        lg: "h-[32px] sm:h-[44px] rounded-xl px-3.5 sm:px-7 text-[12px] sm:text-[15px]",
-        xl: "h-[36px] sm:h-[52px] rounded-xl px-5 sm:px-9 text-[12px] sm:text-[16px]",
+        lg: "h-[32px] sm:h-[44px] rounded-xl px-3.5 sm:px-4 text-[12px] sm:text-[15px]",
+        xl: "h-[36px] sm:h-[52px] rounded-xl px-5 sm:px-6 text-[12px] sm:text-[16px]",
         icon: "h-[38px] w-[38px]",
-        heroPill: "h-[28px] sm:h-[40px] rounded-full px-3.5 sm:px-6 text-[10px] sm:text-[13px] tracking-wide gap-1",
+        heroPill: "h-[28px] sm:h-[40px] rounded-full px-3.5 sm:px-4 text-[10px] sm:text-[13px] tracking-wide gap-1",
       },
     },
     defaultVariants: {

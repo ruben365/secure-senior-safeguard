@@ -209,11 +209,11 @@ export default function SuperAdminSalesOverview() {
       </CardHeader>
       <CardContent>
         {loading ? (
-          <div className="flex items-center justify-center py-8">
-            <Loader2 className="w-8 h-8 animate-spin text-green-400" />
+          <div className="flex items-center justify-center py-5">
+            <Loader2 className="w-5 h-5 animate-spin text-green-400" />
           </div>
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* Stats Grid */}
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               <StatCard

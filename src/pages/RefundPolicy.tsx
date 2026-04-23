@@ -19,24 +19,24 @@ function RefundPolicy() {
         title="Refund Policy"
         lede="Our commitment to fair refunds and digital fulfillment."
       />
-      <section className="py-16 md:py-20 bg-background">
+      <section className="py-10 md:py-12 bg-background">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto">
             <h1 className="sr-only">Refund Policy</h1>
-            <p className="text-center text-muted-foreground mb-8 text-lg">
+            <p className="text-center text-muted-foreground mb-5 text-lg">
               Last Updated:{" "}
 April 14, 2026
             </p>
-            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            <p className="text-center text-muted-foreground mb-7 max-w-2xl mx-auto">
               We want you to be completely satisfied with your purchase. This
               policy outlines our refund and return procedures.
             </p>
 
             {/* Quick Overview Cards */}
-            <div className="grid md:grid-cols-2 gap-4 mb-12">
-              <Card className="p-6 border-green-500/20 bg-green-500/5">
+            <div className="grid md:grid-cols-2 gap-4 mb-7">
+              <Card className="p-4 border-green-500/20 bg-green-500/5">
                 <div className="flex items-start gap-4">
-                  <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0 mt-1" />
+                  <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="font-semibold mb-2">30-Day Money Back</h3>
                     <p className="text-sm text-muted-foreground">
@@ -46,9 +46,9 @@ April 14, 2026
                   </div>
                 </div>
               </Card>
-              <Card className="p-6 border-blue-500/20 bg-primary/50/5">
+              <Card className="p-4 border-blue-500/20 bg-primary/50/5">
                 <div className="flex items-start gap-4">
-                  <Clock className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
+                  <Clock className="h-4 w-4 text-primary flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="font-semibold mb-2">Fast Processing</h3>
                     <p className="text-sm text-muted-foreground">
@@ -60,8 +60,8 @@ April 14, 2026
               </Card>
             </div>
 
-            <Card className="p-8 mb-8">
-              <div className="space-y-10 text-foreground">
+            <Card className="p-5 mb-5">
+              <div className="space-y-6 text-foreground">
                 <section>
                   <h2 className="text-2xl font-bold mb-4">Digital Products</h2>
                   <p className="text-muted-foreground mb-4">
@@ -301,7 +301,7 @@ April 14, 2026
                     </ul>
                   </div>
 
-                  <div className="mt-6 p-6 bg-primary/5 rounded-lg border border-primary/20">
+                  <div className="mt-4 p-4 bg-primary/5 rounded-lg border border-primary/20">
                     <h3 className="font-semibold mb-2">Contact Information</h3>
                     <p className="text-muted-foreground mb-2">
                       <strong>Email:</strong>{" "}

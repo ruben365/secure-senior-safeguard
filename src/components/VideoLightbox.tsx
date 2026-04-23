@@ -53,7 +53,7 @@ export function VideoLightbox({
           onClick={onClose}
           className="absolute -top-12 right-0 text-white hover:bg-white/20"
         >
-          <X className="w-6 h-6" />
+          <X className="w-4 h-4" />
         </Button>
 
         {title && (

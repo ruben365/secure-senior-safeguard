@@ -91,7 +91,7 @@
 
 .bento-grid {
   display: grid;
-  gap: 1rem;
+  gap: 0.62rem;
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: minmax(120px, auto);
 }
@@ -150,8 +150,8 @@
 /* Bento cell styling */
 .bento-cell {
   position: relative;
-  padding: 1.5rem;
-  border-radius: 1.25rem;
+  padding: 0.94rem;
+  border-radius: 0.88rem;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -460,8 +460,8 @@
 /* Premium widget card */
 .widget-premium {
   position: relative;
-  padding: 1.5rem;
-  border-radius: 1.25rem;
+  padding: 0.94rem;
+  border-radius: 0.88rem;
   background:
     linear-gradient(
       135deg,
@@ -494,7 +494,7 @@
 
 /* Hero bento cell */
 .bento-hero {
-  min-height: 280px;
+  min-height: 175px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -504,11 +504,11 @@
 .widget-stat {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.31rem;
 }
 
 .widget-stat .stat-value {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
   line-height: 1;
   background: linear-gradient(
@@ -555,7 +555,7 @@
 .gradient-border {
   position: relative;
   background: hsl(var(--card));
-  border-radius: 1rem;
+  border-radius: 0.7rem;
 }
 
 .gradient-border::before {
@@ -666,8 +666,8 @@
 .spotlight::before {
   content: "";
   position: absolute;
-  width: 200px;
-  height: 200px;
+  width: 125px;
+  height: 125px;
   background: radial-gradient(circle, hsl(0 0% 100% / 0.3) 0%, transparent 70%);
   opacity: 0;
   pointer-events: none;
@@ -791,7 +791,7 @@
 /* ── Animated Gradient Border ── */
 .animated-gradient-border {
   position: relative;
-  border-radius: 1rem;
+  border-radius: 0.7rem;
   background: hsl(var(--card));
   z-index: 0;
 }
@@ -830,7 +830,7 @@
 /* ── Glow Card ── */
 .glow-card {
   position: relative;
-  border-radius: 1rem;
+  border-radius: 0.7rem;
   background: hsl(var(--card));
   border: 1px solid hsl(var(--border));
   overflow: hidden;
@@ -944,19 +944,19 @@
 }
 
 .floating-orbs::before {
-  width: 400px;
-  height: 400px;
-  top: -100px;
-  right: -100px;
+  width: 250px;
+  height: 250px;
+  top: -62px;
+  right: -62px;
   background: hsl(var(--accent) / 0.15);
   animation: orb-float-1 15s ease-in-out infinite;
 }
 
 .floating-orbs::after {
-  width: 350px;
-  height: 350px;
-  bottom: -80px;
-  left: -80px;
+  width: 219px;
+  height: 219px;
+  bottom: -50px;
+  left: -50px;
   background: hsl(var(--primary) / 0.12);
   animation: orb-float-2 18s ease-in-out infinite;
 }
@@ -1047,9 +1047,9 @@
 .frosted-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.375rem 1rem;
-  border-radius: 9999px;
+  gap: 0.31rem;
+  padding: 0.25rem 0.62rem;
+  border-radius: 6999px;
   background: hsl(var(--primary) / 0.08);
   border: 1px solid hsl(var(--primary) / 0.15);
   font-size: 0.8125rem;
@@ -1077,8 +1077,8 @@
 /* ── Premium Stat Card ── */
 .stat-card-pro {
   position: relative;
-  padding: 1.5rem;
-  border-radius: 1rem;
+  padding: 0.94rem;
+  border-radius: 0.7rem;
   background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--card) / 0.95) 100%);
   border: 1px solid hsl(var(--border));
   overflow: hidden;
@@ -1090,8 +1090,8 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 120px;
-  height: 120px;
+  width: 75px;
+  height: 75px;
   background: radial-gradient(circle at top right, hsl(var(--accent) / 0.1) 0%, transparent 70%);
   pointer-events: none;
 }
@@ -1105,7 +1105,7 @@
 }
 
 .stat-card-pro .stat-number {
-  font-size: 2.5rem;
+  font-size: 1.88rem;
   font-weight: 800;
   line-height: 1;
   background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
@@ -1119,9 +1119,9 @@
   position: absolute;
   display: inline-flex;
   align-items: center;
-  gap: 0.375rem;
-  padding: 0.5rem 1rem;
-  border-radius: 9999px;
+  gap: 0.25rem;
+  padding: 0.31rem 0.62rem;
+  border-radius: 6999px;
   background: hsl(var(--card));
   border: 1px solid hsl(var(--border));
   box-shadow: var(--shadow-elevated);
@@ -1139,8 +1139,8 @@
 /* ── Feature Highlight Card ── */
 .feature-highlight {
   position: relative;
-  padding: 2rem;
-  border-radius: 1.25rem;
+  padding: 1.25rem;
+  border-radius: 0.88rem;
   background: hsl(var(--card));
   border: 1px solid hsl(var(--border));
   transition: all 0.3s ease;
@@ -1153,7 +1153,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 3px;
+  height: 2px;
   background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
   transform: scaleX(0);
   transform-origin: left;
@@ -1178,7 +1178,7 @@
 
 .marquee-track {
   display: flex;
-  gap: 2rem;
+  gap: 1.25rem;
   width: max-content;
   animation: marquee-scroll 30s linear infinite;
 }
@@ -1205,7 +1205,7 @@
 .glass-pro {
   background: hsl(0 0% 100% / 0.7);
   border: 1px solid hsl(0 0% 100% / 0.8);
-  border-radius: 1.25rem;
+  border-radius: 0.88rem;
   box-shadow:
     0 8px 32px hsl(var(--primary) / 0.08),
     0 2px 8px hsl(var(--primary) / 0.04),
@@ -1224,8 +1224,8 @@
 /* ── Number Counter Highlight ── */
 .counter-highlight {
   display: inline-block;
-  padding: 0.25rem 0.75rem;
-  border-radius: 0.5rem;
+  padding: 0.25rem 0.47rem;
+  border-radius: 0.35rem;
   background: linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--accent) / 0.1));
   border: 1px solid hsl(var(--primary) / 0.15);
 }
@@ -1235,9 +1235,9 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.875rem 2rem;
-  border-radius: 0.75rem;
+  gap: 0.31rem;
+  padding: 0.55rem 1.25rem;
+  border-radius: 0.52rem;
   background: linear-gradient(135deg, hsl(var(--primary)), hsl(280 40% 28%));
   color: hsl(var(--primary-foreground));
   font-weight: 600;
@@ -1278,8 +1278,8 @@
 /* ── Testimonial Card Pro ── */
 .testimonial-pro {
   position: relative;
-  padding: 2rem;
-  border-radius: 1.25rem;
+  padding: 1.25rem;
+  border-radius: 0.88rem;
   background: hsl(var(--card));
   border: 1px solid hsl(var(--border));
   transition: all 0.3s ease;
@@ -1288,9 +1288,9 @@
 .testimonial-pro::before {
   content: "\201C";
   position: absolute;
-  top: 1rem;
-  left: 1.5rem;
-  font-size: 4rem;
+  top: 0.62rem;
+  left: 0.94rem;
+  font-size: 3rem;
   line-height: 1;
   font-family: Georgia, serif;
   color: hsl(var(--accent) / 0.15);
@@ -1412,8 +1412,8 @@
 /* Status dot with pulse */
 .status-dot {
   position: relative;
-  width: 8px;
-  height: 8px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: currentColor;
 }
@@ -1443,11 +1443,11 @@
 .live-indicator {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 4px 12px;
+  gap: 4px;
+  padding: 2px 8px;
   background: hsl(var(--destructive) / 0.1);
   border: 1px solid hsl(var(--destructive) / 0.2);
-  border-radius: 9999px;
+  border-radius: 6999px;
   font-size: 0.75rem;
   font-weight: 600;
   color: hsl(var(--destructive));
@@ -1455,8 +1455,8 @@
 
 .live-indicator::before {
   content: "";
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: hsl(var(--destructive));
   animation: live-blink 1s ease-in-out infinite;
@@ -1713,7 +1713,7 @@
 /* Premium animated border gradient */
 .premium-border-glow {
   position: relative;
-  border-radius: 1.5rem;
+  border-radius: 1.05rem;
 }
 
 .premium-border-glow::before {

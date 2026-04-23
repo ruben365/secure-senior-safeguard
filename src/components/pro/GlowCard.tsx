@@ -24,7 +24,7 @@ export function GlowCard({
   return (
     <div
       className={cn(
-        "glow-card p-6",
+        "glow-card p-4",
         hover && "shine-hover",
         className,
       )}

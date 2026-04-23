@@ -260,8 +260,8 @@ export default function TestingChecklist() {
     4;
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="mb-6 flex items-center justify-between">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="mb-4 flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-[#F9FAFB]">
             Pre-Launch Testing Checklist
@@ -278,7 +278,7 @@ export default function TestingChecklist() {
       </div>
 
       {/* Overall Progress */}
-      <Card className="p-6 bg-[#111827] border-gray-800">
+      <Card className="p-4 bg-[#111827] border-gray-800">
         <div className="flex items-center justify-between mb-4">
           <div>
             <h3 className="text-lg font-semibold text-[#F9FAFB]">
@@ -302,7 +302,7 @@ export default function TestingChecklist() {
       </Card>
 
       {/* Tabs */}
-      <Tabs defaultValue="functionality" className="space-y-6">
+      <Tabs defaultValue="functionality" className="space-y-4">
         <TabsList className="grid grid-cols-4 w-full max-w-2xl bg-[#111827]">
           <TabsTrigger value="functionality">Functionality</TabsTrigger>
           <TabsTrigger value="responsive">Responsive</TabsTrigger>
@@ -311,7 +311,7 @@ export default function TestingChecklist() {
         </TabsList>
 
         <TabsContent value="functionality" className="space-y-4">
-          <Card className="p-6 bg-[#111827] border-gray-800">
+          <Card className="p-4 bg-[#111827] border-gray-800">
             <div className="mb-4">
               <h3 className="text-lg font-semibold mb-2 text-[#F9FAFB]">
                 Functionality Testing
@@ -323,7 +323,7 @@ export default function TestingChecklist() {
             </div>
 
             {functionalityChecklist.map((section, sectionIndex) => (
-              <div key={section.title} className="mb-6">
+              <div key={section.title} className="mb-4">
                 <h4 className="font-semibold mb-3 text-orange-400">
                   {section.title}
                 </h4>
@@ -357,7 +357,7 @@ export default function TestingChecklist() {
         </TabsContent>
 
         <TabsContent value="responsive" className="space-y-4">
-          <Card className="p-6 bg-[#111827] border-gray-800">
+          <Card className="p-4 bg-[#111827] border-gray-800">
             <div className="mb-4">
               <h3 className="text-lg font-semibold mb-2 text-[#F9FAFB]">
                 Responsive Testing
@@ -395,7 +395,7 @@ export default function TestingChecklist() {
         </TabsContent>
 
         <TabsContent value="seo" className="space-y-4">
-          <Card className="p-6 bg-[#111827] border-gray-800">
+          <Card className="p-4 bg-[#111827] border-gray-800">
             <div className="mb-4">
               <h3 className="text-lg font-semibold mb-2 text-[#F9FAFB]">
                 SEO Testing
@@ -429,7 +429,7 @@ export default function TestingChecklist() {
         </TabsContent>
 
         <TabsContent value="performance" className="space-y-4">
-          <Card className="p-6 bg-[#111827] border-gray-800">
+          <Card className="p-4 bg-[#111827] border-gray-800">
             <div className="mb-4">
               <h3 className="text-lg font-semibold mb-2 text-[#F9FAFB]">
                 Performance Testing

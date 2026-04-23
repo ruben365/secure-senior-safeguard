@@ -262,12 +262,12 @@ export default function BookEditor() {
 
   if (!isNew && isLoading) {
     return (
-      <div className="p-8 text-center text-[#9CA3AF]">Loading book…</div>
+      <div className="p-5 text-center text-[#9CA3AF]">Loading book…</div>
     );
   }
 
   return (
-    <div className="p-6 max-w-5xl mx-auto space-y-6">
+    <div className="p-4 max-w-5xl mx-auto space-y-4">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -338,7 +338,7 @@ export default function BookEditor() {
 
         {/* Metadata Tab */}
         <TabsContent value="metadata">
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-3">
             <Card className="md:col-span-2 bg-[#111827] border-gray-800">
               <CardHeader>
                 <CardTitle className="text-[#F9FAFB]">Book Details</CardTitle>
@@ -413,7 +413,7 @@ export default function BookEditor() {
                     <img
                       src={form.cover_image}
                       alt="Cover preview"
-                      className="mt-2 h-32 w-auto rounded border border-gray-700 object-contain"
+                      className="mt-2 h-20 w-auto rounded border border-gray-700 object-contain"
                     />
                   )}
                 </div>
@@ -534,8 +534,8 @@ export default function BookEditor() {
             </CardHeader>
             <CardContent className="space-y-3">
               {chapters.length === 0 && (
-                <div className="py-10 text-center text-[#9CA3AF]">
-                  <Layers className="h-10 w-10 mx-auto mb-2 text-gray-700" />
+                <div className="py-6 text-center text-[#9CA3AF]">
+                  <Layers className="h-6 w-6 mx-auto mb-2 text-gray-700" />
                   <p>No chapters yet.</p>
                   <Button
                     variant="outline"
@@ -560,7 +560,7 @@ export default function BookEditor() {
                     }
                   >
                     <GripVertical className="h-4 w-4 text-gray-600 flex-shrink-0" />
-                    <span className="text-xs font-mono text-[#06B6D4] w-8 flex-shrink-0">
+                    <span className="text-xs font-mono text-[#06B6D4] w-5 flex-shrink-0">
                       {String(ch.chapter_number).padStart(2, "0")}
                     </span>
                     <span className="flex-1 text-[#F9FAFB] text-sm font-medium">

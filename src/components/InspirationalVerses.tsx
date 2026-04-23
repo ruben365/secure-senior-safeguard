@@ -141,7 +141,7 @@ export function InspirationalVerses() {
   const currentVerse = verses[currentIndex];
 
   return (
-    <section className="py-6 md:py-10 bg-gradient-to-b from-background to-secondary/10">
+    <section className="py-4 md:py-6 bg-gradient-to-b from-background to-secondary/10">
       <div className="container mx-auto">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-4">
@@ -154,7 +154,7 @@ export function InspirationalVerses() {
             </Badge>
           </div>
 
-          <Card className="p-3 sm:p-4 md:p-6 bg-gradient-to-br from-primary/5 to-accent/5 border border-primary/20 relative overflow-hidden">
+          <Card className="p-3 sm:p-4 md:p-4 bg-gradient-to-br from-primary/5 to-accent/5 border border-primary/20 relative overflow-hidden">
             <div
               className="transition-opacity duration-1000"
               style={{ opacity: isVisible ? 1 : 0 }}

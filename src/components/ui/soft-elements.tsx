@@ -32,7 +32,7 @@ const SoftCard = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "bg-white rounded-3xl p-8",
+        "bg-white rounded-3xl p-5",
         "shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)]",
         "border border-white/50",
         hover && [
@@ -83,7 +83,7 @@ const SoftSection = React.forwardRef<
   <section
     ref={ref}
     className={cn(
-      "bg-white rounded-3xl p-8 md:p-10",
+      "bg-white rounded-3xl p-5 md:p-6",
       "shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)]",
       className,
     )}

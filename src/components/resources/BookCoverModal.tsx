@@ -49,7 +49,7 @@ const BookCoverModal = ({
 
         <button
           onClick={onClose}
-          className="absolute top-2.5 right-2.5 z-50 w-7 h-7 rounded-full bg-background/85 backdrop-blur-sm hover:bg-background flex items-center justify-center transition-colors"
+          className="absolute top-2.5 right-2.5 z-50 w-4 h-4 rounded-full bg-background/85 backdrop-blur-sm hover:bg-background flex items-center justify-center transition-colors"
           aria-label="Close"
         >
           <X className="w-3.5 h-3.5" />
@@ -162,7 +162,7 @@ const BookCoverModal = ({
                   onAddToCart(book);
                   onClose();
                 }}
-                className="h-9 text-xs border-[hsl(var(--coral-300))] hover:border-[hsl(var(--coral-500))] hover:bg-[hsl(var(--coral-100))]"
+                className="h-6 text-xs border-[hsl(var(--coral-300))] hover:border-[hsl(var(--coral-500))] hover:bg-[hsl(var(--coral-100))]"
               >
                 <ShoppingCart className="w-3.5 h-3.5 mr-1.5" />
                 Add to Cart
@@ -172,7 +172,7 @@ const BookCoverModal = ({
                   onBuyNow(book);
                   onClose();
                 }}
-                className="h-9 text-xs bg-gradient-to-r from-[hsl(var(--coral-500))] to-[hsl(var(--lavender-500))] text-white border-0 hover:from-[hsl(var(--coral-600))] hover:to-[hsl(var(--lavender-600))] hover:opacity-100 shadow-[0_4px_12px_-2px_hsl(var(--coral-500)/0.45)]"
+                className="h-6 text-xs bg-gradient-to-r from-[hsl(var(--coral-500))] to-[hsl(var(--lavender-500))] text-white border-0 hover:from-[hsl(var(--coral-600))] hover:to-[hsl(var(--lavender-600))] hover:opacity-100 shadow-[0_4px_12px_-2px_hsl(var(--coral-500)/0.45)]"
               >
                 <Zap className="w-3.5 h-3.5 mr-1.5" />
                 Buy Now
@@ -180,13 +180,13 @@ const BookCoverModal = ({
             </div>
 
             <div className="grid sm:grid-cols-2 gap-1 mt-2">
-              <Button variant="ghost" asChild className="h-8 justify-start text-[11px] text-muted-foreground hover:text-foreground">
+              <Button variant="ghost" asChild className="h-5 justify-start text-[11px] text-muted-foreground hover:text-foreground">
                 <Link to={`/library/${book.slug}`} onClick={onClose}>
                   View full preview
                   <ArrowRight className="w-3 h-3 ml-1" />
                 </Link>
               </Button>
-              <Button variant="ghost" asChild className="h-8 justify-start text-[11px] text-muted-foreground hover:text-foreground">
+              <Button variant="ghost" asChild className="h-5 justify-start text-[11px] text-muted-foreground hover:text-foreground">
                 <Link to={`/purchase/${book.slug}`} onClick={onClose}>
                   Bulk / group orders
                   <ArrowRight className="w-3 h-3 ml-1" />

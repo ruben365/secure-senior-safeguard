@@ -112,7 +112,7 @@ export default function PortfolioAdmin() {
   );
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-foreground">Portfolio CMS</h1>
@@ -151,14 +151,14 @@ export default function PortfolioAdmin() {
               placeholder="Search projects..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10"
+              className="pl-6"
             />
           </div>
 
           {isLoading ? (
             <div className="space-y-3">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="h-16 bg-muted animate-pulse rounded-xl" />
+                <div key={i} className="h-10 bg-muted animate-pulse rounded-xl" />
               ))}
             </div>
           ) : (
@@ -173,7 +173,7 @@ export default function PortfolioAdmin() {
                       <img
                         src={p.thumbnail_url}
                         alt={p.title}
-                        className="w-12 h-12 rounded-lg object-cover flex-shrink-0"
+                        className="w-7 h-7 rounded-lg object-cover flex-shrink-0"
                       />
                     )}
                     <div className="min-w-0">
@@ -216,7 +216,7 @@ export default function PortfolioAdmin() {
                 </div>
               ))}
               {filteredProjects?.length === 0 && (
-                <p className="text-center text-muted-foreground py-8">No projects found</p>
+                <p className="text-center text-muted-foreground py-5">No projects found</p>
               )}
             </div>
           )}

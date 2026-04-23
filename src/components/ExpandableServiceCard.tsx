@@ -46,7 +46,7 @@ const ExpandableServiceCardBase = ({
 
       <div className="p-5 min-h-[120px] flex items-center">
         <div className="flex items-center gap-4 w-full">
-          <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
+          <div className="w-7 h-7 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
             {icon}
           </div>
           <div className="flex-1 min-w-0">

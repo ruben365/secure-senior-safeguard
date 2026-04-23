@@ -70,7 +70,7 @@ export function AlertPreferences() {
           <Shield className="h-5 w-5" /> Security Alert Preferences
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Bell className="h-5 w-5 text-primary" />
@@ -94,7 +94,7 @@ export function AlertPreferences() {
         </div>
 
         {prefs.sms_enabled && (
-          <div className="ml-8">
+          <div className="ml-5">
             <Label>Phone Number</Label>
             <Input
               type="tel"

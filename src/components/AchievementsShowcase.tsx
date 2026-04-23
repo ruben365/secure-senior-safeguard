@@ -11,14 +11,14 @@ const stats = [
 
 export const AchievementsShowcase = () => {
   return (
-    <section className="py-8 bg-gradient-to-b from-background to-muted/20">
+    <section className="py-5 bg-gradient-to-b from-background to-muted/20">
       <div className="container mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-6"
+          className="text-center mb-4"
         >
           <h2 className="text-xl md:text-2xl font-bold mb-1.5">
             Our Achievements
@@ -44,7 +44,7 @@ export const AchievementsShowcase = () => {
                 className="p-3 text-center bg-gradient-to-br from-primary/5 to-accent/5 border-primary/10"
               >
                 <div className="flex justify-center mb-1.5">
-                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center">
                     <IconComponent className="w-4 h-4 text-primary" />
                   </div>
                 </div>
@@ -59,7 +59,7 @@ export const AchievementsShowcase = () => {
           })}
         </motion.div>
 
-        <p className="text-xs text-muted-foreground text-center mt-6">
+        <p className="text-xs text-muted-foreground text-center mt-4">
           Metrics are updated periodically and reflect internal tracking.
         </p>
       </div>

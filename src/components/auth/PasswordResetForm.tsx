@@ -78,7 +78,7 @@ export function PasswordResetForm({ onComplete }: PasswordResetFormProps) {
   );
 
   const inputClassName =
-    "h-10 pl-10 text-[14px] bg-slate-50/70 border-slate-200 text-foreground placeholder:text-slate-400 rounded-lg transition-all duration-200 focus:bg-white focus:border-orange-500 hover:border-slate-300";
+    "h-6 pl-6 text-[14px] bg-slate-50/70 border-slate-200 text-foreground placeholder:text-slate-400 rounded-lg transition-all duration-200 focus:bg-white focus:border-orange-500 hover:border-slate-300";
 
   return (
     <div className="space-y-5">
@@ -104,7 +104,7 @@ export function PasswordResetForm({ onComplete }: PasswordResetFormProps) {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className={`${inputClassName} pr-11`}
+              className={`${inputClassName} pr-7`}
               autoComplete="new-password"
               minLength={8}
               required
@@ -140,7 +140,7 @@ export function PasswordResetForm({ onComplete }: PasswordResetFormProps) {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="••••••••"
-              className={`${inputClassName} pr-11`}
+              className={`${inputClassName} pr-7`}
               autoComplete="new-password"
               minLength={8}
               required
@@ -165,7 +165,7 @@ export function PasswordResetForm({ onComplete }: PasswordResetFormProps) {
         <Button
           type="submit"
           disabled={isLoading || !allMet}
-          className="w-full h-11 bg-[#080d1a] text-white hover:bg-[#111827]"
+          className="w-full h-7 bg-[#080d1a] text-white hover:bg-[#111827]"
         >
           {isLoading ? (
             <>

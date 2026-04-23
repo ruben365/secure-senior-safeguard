@@ -137,7 +137,7 @@ export function RecentActivityFeed() {
         <CardContent className="space-y-3">
           {[...Array(5)].map((_, i) => (
             <div key={i} className="flex items-start gap-3 p-3">
-              <Skeleton className="w-9 h-9 rounded-lg" />
+              <Skeleton className="w-6 h-6 rounded-lg" />
               <div className="flex-1 space-y-2">
                 <Skeleton className="h-4 w-3/4" />
                 <Skeleton className="h-3 w-1/2" />
@@ -162,8 +162,8 @@ export function RecentActivityFeed() {
       </CardHeader>
       <CardContent className="space-y-1">
         {activities.length === 0 ? (
-          <div className="text-center py-8 text-muted-foreground">
-            <Bot className="w-12 h-12 mx-auto mb-3 opacity-50" />
+          <div className="text-center py-5 text-muted-foreground">
+            <Bot className="w-7 h-7 mx-auto mb-3 opacity-50" />
             <p>No recent activity</p>
           </div>
         ) : (
@@ -176,7 +176,7 @@ export function RecentActivityFeed() {
                 key={item.id}
                 className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors"
               >
-                <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                <div className="w-6 h-6 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                   <Icon className="w-4 h-4 text-primary" />
                 </div>
 

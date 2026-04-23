@@ -68,14 +68,14 @@ export const TestimonialCarousel = () => {
   return (
     <section
       ref={sectionRef}
-      className="hss-testimonial-theater relative z-10 py-16 md:py-22 lg:py-24"
+      className="hss-testimonial-theater relative z-10 py-10 md:py-22 lg:py-16"
       aria-labelledby="testimonials-heading"
     >
 
       <div className="relative z-10 container mx-auto">
 
         {/* Section header */}
-        <div className="text-center mb-10 lg:mb-14">
+        <div className="text-center mb-6 lg:mb-9">
           <span
             data-reveal
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#1E293B]/12 bg-white/70 mb-5 backdrop-blur-sm"
@@ -89,7 +89,7 @@ export const TestimonialCarousel = () => {
             id="testimonials-heading"
             data-reveal
             style={{ "--reveal-delay": "100ms" } as React.CSSProperties}
-            className="text-4xl md:text-5xl lg:text-[3rem] font-extrabold text-[#1E293B] leading-[1.05] tracking-tight mb-3 mt-4"
+            className="text-2xl md:text-3xl lg:text-[3rem] font-extrabold text-[#1E293B] leading-[1.05] tracking-tight mb-3 mt-4"
           >
             What families are saying
           </h2>
@@ -108,7 +108,7 @@ export const TestimonialCarousel = () => {
         <div
           data-reveal
           style={{ "--reveal-delay": "300ms" } as React.CSSProperties}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-4 max-w-4xl mx-auto"
         >
           {testimonials.map((t, i) => {
             const isHovered = hoveredIdx === i;
@@ -141,7 +141,7 @@ export const TestimonialCarousel = () => {
                 <div
                   aria-hidden="true"
                   className={[
-                    "absolute -top-2 -left-2 w-7 h-7 rounded-lg bg-gradient-to-br from-[#d96c4a] to-[#b8552f]",
+                    "absolute -top-2 -left-2 w-4 h-4 rounded-lg bg-gradient-to-br from-[#d96c4a] to-[#b8552f]",
                     "flex items-center justify-center shadow-[0_4px_12px_-4px_rgba(217,108,74,0.5)] border border-white/30",
                     "transition-all [transition-duration:600ms] ease-out",
                     isHovered ? "rotate-[-8deg] scale-110" : "rotate-0 scale-100",
@@ -151,7 +151,7 @@ export const TestimonialCarousel = () => {
                 </div>
 
                 {/* Stars row */}
-                <div className="flex gap-0.5 mb-1.5 mt-0.5 ml-6">
+                <div className="flex gap-0.5 mb-1.5 mt-0.5 ml-4">
                   {Array.from({ length: t.rating }).map((_, idx) => (
                     <Star
                       key={idx}
@@ -170,7 +170,7 @@ export const TestimonialCarousel = () => {
                   <img
                     src={t.avatar}
                     alt={t.name}
-                    className="w-7 h-7 rounded-full object-cover border border-white shadow-sm flex-shrink-0"
+                    className="w-4 h-4 rounded-full object-cover border border-white shadow-sm flex-shrink-0"
                     loading="lazy"
                     decoding="async"
                     width={28}

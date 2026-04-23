@@ -36,12 +36,12 @@ export function AutomationStatusHero({
   if (isSetupRequired) {
     return (
       <Card className="relative overflow-hidden bg-gradient-to-br from-muted/50 via-background to-muted/30 border-dashed border-muted-foreground/30">
-        <div className="p-6 md:p-8">
-          <div className="flex flex-col md:flex-row md:items-center gap-6">
+        <div className="p-4 md:p-5">
+          <div className="flex flex-col md:flex-row md:items-center gap-4">
             {/* Bot Icon */}
             <div className="relative">
-              <div className="w-20 h-20 rounded-2xl flex items-center justify-center bg-muted">
-                <Bot className="w-10 h-10 text-muted-foreground" />
+              <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-muted">
+                <Bot className="w-6 h-6 text-muted-foreground" />
               </div>
             </div>
 
@@ -73,7 +73,7 @@ export function AutomationStatusHero({
             {/* Empty Stats */}
             <div className="grid grid-cols-2 md:grid-cols-1 gap-3">
               <div className="flex items-center gap-2 bg-card/80 rounded-lg p-3 border-dashed border">
-                <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
+                <div className="w-5 h-5 rounded-full bg-muted flex items-center justify-center">
                   <TrendingUp className="w-4 h-4 text-muted-foreground" />
                 </div>
                 <div>
@@ -84,7 +84,7 @@ export function AutomationStatusHero({
                 </div>
               </div>
               <div className="flex items-center gap-2 bg-card/80 rounded-lg p-3 border-dashed border">
-                <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
+                <div className="w-5 h-5 rounded-full bg-muted flex items-center justify-center">
                   <Clock className="w-4 h-4 text-muted-foreground" />
                 </div>
                 <div>
@@ -110,12 +110,12 @@ export function AutomationStatusHero({
         />
       )}
 
-      <div className="relative p-6 md:p-8">
-        <div className="flex flex-col md:flex-row md:items-center gap-6">
+      <div className="relative p-4 md:p-5">
+        <div className="flex flex-col md:flex-row md:items-center gap-4">
           {/* Bot Icon */}
           <div className="relative">
             <motion.div
-              className={`w-20 h-20 rounded-2xl flex items-center justify-center ${
+              className={`w-12 h-12 rounded-2xl flex items-center justify-center ${
                 isActive
                   ? "bg-gradient-to-br from-violet-500 to-purple-600"
                   : "bg-muted"
@@ -123,11 +123,11 @@ export function AutomationStatusHero({
               animate={isActive ? { rotate: [0, 5, -5, 0] } : {}}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >
-              <Bot className="w-10 h-10 text-white" />
+              <Bot className="w-6 h-6 text-white" />
             </motion.div>
             {isActive && (
               <motion.div
-                className="absolute -top-1 -right-1 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center border-2 border-background"
+                className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full flex items-center justify-center border-2 border-background"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.3 }}
@@ -182,7 +182,7 @@ export function AutomationStatusHero({
           {/* Live Stats */}
           <div className="grid grid-cols-2 md:grid-cols-1 gap-3">
             <div className="flex items-center gap-2 bg-card/80 rounded-lg p-3">
-              <div className="w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center">
+              <div className="w-5 h-5 rounded-full bg-violet-500/20 flex items-center justify-center">
                 <TrendingUp className="w-4 h-4 text-violet-500" />
               </div>
               <div>
@@ -195,7 +195,7 @@ export function AutomationStatusHero({
               </div>
             </div>
             <div className="flex items-center gap-2 bg-card/80 rounded-lg p-3">
-              <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center">
                 <Clock className="w-4 h-4 text-emerald-500" />
               </div>
               <div>

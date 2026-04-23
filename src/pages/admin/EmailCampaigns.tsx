@@ -141,8 +141,8 @@ const EmailCampaigns = () => {
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="flex items-center justify-between mb-4">
         <div>
           <h1 className="text-2xl font-bold text-[#F9FAFB]">Email Campaigns</h1>
           <p className="text-[#9CA3AF]">
@@ -157,9 +157,9 @@ const EmailCampaigns = () => {
           New Campaign
         </Button>
       </div>
-      <div className="space-y-6">
+      <div className="space-y-4">
         {/* Stats Cards */}
-        <div className="grid gap-6 md:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-4">
           <Card>
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
@@ -221,14 +221,14 @@ const EmailCampaigns = () => {
           </CardHeader>
           <CardContent>
             {loading ? (
-              <div className="text-center py-8 text-muted-foreground">
+              <div className="text-center py-5 text-muted-foreground">
                 Loading campaigns...
               </div>
             ) : campaigns.length === 0 ? (
-              <div className="text-center py-12">
-                <Mail className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+              <div className="text-center py-7">
+                <Mail className="h-7 w-7 mx-auto text-muted-foreground mb-4" />
                 <h3 className="text-lg font-semibold mb-2">No campaigns yet</h3>
-                <p className="text-muted-foreground mb-6">
+                <p className="text-muted-foreground mb-4">
                   Create your first email campaign to start engaging with your
                   audience
                 </p>
@@ -259,7 +259,7 @@ const EmailCampaigns = () => {
                           {campaign.description}
                         </p>
                       )}
-                      <div className="flex items-center gap-6 text-sm text-muted-foreground">
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
                         <span className="flex items-center gap-1">
                           <Send className="h-4 w-4" />
                           {campaign.sent_count} sent

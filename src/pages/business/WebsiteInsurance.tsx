@@ -185,26 +185,26 @@ const WebsiteInsurance = () => {
 
         <main>
           {/* Hero Section */}
-          <section className="relative overflow-hidden min-h-[100dvh] flex items-center pt-[clamp(100px,14vw,140px)] pb-10">
+          <section className="relative overflow-hidden min-h-[100dvh] flex items-center pt-[clamp(100px,14vw,140px)] pb-6">
             <div className="absolute inset-0 bg-gradient-to-br from-success/10 via-background to-primary/10" />
             <div className="container mx-auto relative">
               <div className="max-w-4xl mx-auto text-center animate-fade-in">
                 <div>
                   <Badge
                     variant="outline"
-                    className="mb-6 px-4 py-2 text-sm border-success/30 bg-success/5"
+                    className="mb-4 px-4 py-2 text-sm border-success/30 bg-success/5"
                   >
                     <Shield className="w-4 h-4 mr-2" />
                     Website Protection
                   </Badge>
                 </div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
                   <span className="gradient-text-primary">
                     Website Insurance
                   </span>
                   <br />& Protection Plans
                 </h1>
-                <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+                <p className="text-xl text-muted-foreground mb-5 max-w-2xl mx-auto">
                   Sleep soundly knowing your website is protected 24/7.
                   Automatic backups, security monitoring, and expert support.
                   All in one plan.
@@ -225,10 +225,10 @@ const WebsiteInsurance = () => {
           </section>
 
           {/* Risk Alert Section */}
-          <section className="py-12 bg-destructive/5 border-y border-destructive/20">
+          <section className="py-7 bg-destructive/5 border-y border-destructive/20">
             <div className="container mx-auto">
-              <div className="flex items-center justify-center gap-3 mb-6">
-                <AlertTriangle className="w-6 h-6 text-destructive" />
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <AlertTriangle className="w-4 h-4 text-destructive" />
                 <h2 className="text-xl font-bold text-destructive">
                   The Risks Are Real
                 </h2>
@@ -247,10 +247,10 @@ const WebsiteInsurance = () => {
           </section>
 
           {/* Plans Section */}
-          <section className="py-20">
+          <section className="py-12">
             <div className="container mx-auto">
-              <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <div className="text-center mb-10">
+                <h2 className="text-3xl md:text-2xl font-bold mb-4">
                   Choose Your Protection Level
                 </h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -258,7 +258,7 @@ const WebsiteInsurance = () => {
                   more comprehensive coverage.
                 </p>
               </div>
-              <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto items-stretch">
+              <div className="grid md:grid-cols-3 gap-4 max-w-5xl mx-auto items-stretch">
                 {plans.map((plan, index) => {
                   const isPopular = plan.popular;
                   const hasDiscount = !!plan.discountedPrice;
@@ -304,7 +304,7 @@ const WebsiteInsurance = () => {
                             : 'linear-gradient(90deg,transparent,rgba(99,102,241,0.3),transparent)',
                         }} />
 
-                        <div className="p-7 flex flex-col flex-1">
+                        <div className="p-4 flex flex-col flex-1">
                           {/* Name */}
                           <h3 className="text-xl font-black tracking-tight mb-1" style={isPopular ? { color: '#f5c543' } : {}}>
                             {plan.name}
@@ -314,14 +314,14 @@ const WebsiteInsurance = () => {
                           </p>
 
                           {/* Price */}
-                          <div className="mb-6">
+                          <div className="mb-4">
                             {hasDiscount ? (
                               <div>
                                 <div className="flex items-baseline gap-2 mb-1">
                                   <span className={`text-sm line-through ${isPopular ? "" : "text-muted-foreground"}`} style={isPopular ? { color: 'rgba(255,255,255,0.35)' } : {}}>
                                     {plan.price}
                                   </span>
-                                  <span className="text-5xl font-black tracking-tight text-emerald-500">
+                                  <span className="text-3xl font-black tracking-tight text-emerald-500">
                                     {plan.discountedPrice}
                                   </span>
                                 </div>
@@ -331,7 +331,7 @@ const WebsiteInsurance = () => {
                               </div>
                             ) : (
                               <div className="flex items-baseline gap-1">
-                                <span className="text-5xl font-black tracking-tight" style={isPopular ? { color: '#f5c543' } : {}}>
+                                <span className="text-3xl font-black tracking-tight" style={isPopular ? { color: '#f5c543' } : {}}>
                                   {plan.price}
                                 </span>
                                 <span className={`text-sm ml-0.5 ${isPopular ? "" : "text-muted-foreground"}`} style={isPopular ? { color: 'rgba(255,255,255,0.5)' } : {}}>
@@ -355,7 +355,7 @@ const WebsiteInsurance = () => {
                           </div>
 
                           {/* Features */}
-                          <ul className="space-y-3 flex-1 mb-7">
+                          <ul className="space-y-3 flex-1 mb-4">
                             {plan.features.map((feature, fIndex) => (
                               <li key={fIndex} className="flex items-start gap-2.5">
                                 <CheckCircle2
@@ -373,7 +373,7 @@ const WebsiteInsurance = () => {
                           {isPopular ? (
                             <Link
                               to="/contact"
-                              className="w-full flex items-center justify-center py-3 px-6 rounded-xl font-bold text-sm tracking-wide transition-all duration-200 hover:opacity-90"
+                              className="w-full flex items-center justify-center py-3 px-4 rounded-xl font-bold text-sm tracking-wide transition-all duration-200 hover:opacity-90"
                               style={{
                                 background: 'linear-gradient(135deg,#f5c543 0%,#e0a312 100%)',
                                 color: '#1a1200',
@@ -395,17 +395,17 @@ const WebsiteInsurance = () => {
                   );
                 })}
               </div>
-              <p className="text-center text-muted-foreground mt-8">
+              <p className="text-center text-muted-foreground mt-5">
                 All plans include a 30-day money-back guarantee. Cancel anytime.
               </p>
             </div>
           </section>
 
           {/* Coverage Details */}
-          <section className="py-20 bg-card">
+          <section className="py-12 bg-card">
             <div className="container mx-auto">
-              <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <div className="text-center mb-10">
+                <h2 className="text-3xl md:text-2xl font-bold mb-4">
                   What's Covered
                 </h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -413,15 +413,15 @@ const WebsiteInsurance = () => {
                   health and security.
                 </p>
               </div>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {coverage.map((item, index) => (
                   <Card
                     key={index}
                     className="border-border/50 bg-card/50 hover:shadow-lg transition-shadow"
                   >
                     <CardHeader>
-                      <div className="w-12 h-12 rounded-lg bg-success/10 flex items-center justify-center mb-4">
-                        <item.icon className="w-6 h-6 text-success" />
+                      <div className="w-7 h-7 rounded-lg bg-success/10 flex items-center justify-center mb-4">
+                        <item.icon className="w-4 h-4 text-success" />
                       </div>
                       <CardTitle className="text-xl">{item.title}</CardTitle>
                     </CardHeader>
@@ -437,10 +437,10 @@ const WebsiteInsurance = () => {
           </section>
 
           {/* FAQ Preview */}
-          <section className="py-20">
+          <section className="py-12">
             <div className="container mx-auto">
               <div className="max-w-3xl mx-auto">
-                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
+                <h2 className="text-3xl md:text-2xl font-bold mb-5 text-center">
                   Common Questions
                 </h2>
                 <div className="space-y-4">
@@ -463,14 +463,14 @@ const WebsiteInsurance = () => {
                     },
                   ].map((faq, index) => (
                     <Card key={index} className="border-border/50">
-                      <CardContent className="p-6">
+                      <CardContent className="p-4">
                         <h3 className="font-bold mb-2">{faq.q}</h3>
                         <p className="text-muted-foreground">{faq.a}</p>
                       </CardContent>
                     </Card>
                   ))}
                 </div>
-                <div className="text-center mt-8">
+                <div className="text-center mt-5">
                   <Button asChild variant="outline">
                     <Link to="/faq">View All FAQs</Link>
                   </Button>
@@ -480,12 +480,12 @@ const WebsiteInsurance = () => {
           </section>
 
           {/* CTA Section */}
-          <section className="py-20 bg-gradient-to-br from-success/10 via-background to-primary/10">
+          <section className="py-12 bg-gradient-to-br from-success/10 via-background to-primary/10">
             <div className="container mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              <h2 className="text-3xl md:text-2xl font-bold mb-4">
                 Don't Wait Until It's Too Late
               </h2>
-              <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              <p className="text-xl text-muted-foreground mb-5 max-w-2xl mx-auto">
                 Protect your website today. Plans start at just $39/month.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

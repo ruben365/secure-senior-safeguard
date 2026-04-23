@@ -159,7 +159,7 @@ function CoordinatorDashboard() {
   if (!isAuthorized) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <Card className="p-8 text-center max-w-sm">
+        <Card className="p-5 text-center max-w-sm">
           <h2 className="text-xl font-bold text-foreground mb-2">
             Access Denied
           </h2>
@@ -270,7 +270,7 @@ function CoordinatorDashboard() {
 
   // ── Render ────────────────────────────────────────────────────────────────
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <div>
         <h1 className="text-xl font-bold text-foreground">Training Coordinator</h1>
         <p className="text-sm text-muted-foreground">Courses · Enrollments · Testimonials</p>
@@ -283,9 +283,9 @@ function CoordinatorDashboard() {
         </div>
 
         {/* Main grid */}
-        <div className="grid lg:grid-cols-3 gap-6">
+        <div className="grid lg:grid-cols-3 gap-4">
           {/* ── Left column (2/3) ── */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-4">
             {/* Pending Reviews via ActionQueue */}
             {testimonialsError ? (
               <ErrorState
@@ -305,17 +305,17 @@ function CoordinatorDashboard() {
                 </CardHeader>
                 <CardContent className="p-0">
                   {(testimonials ?? []).length === 0 ? (
-                    <div className="px-6 pb-6">
+                    <div className="px-4 pb-4">
                       <EmptyState
                         title="No pending testimonials"
                         description="All testimonials have been reviewed."
-                        className="py-8"
+                        className="py-5"
                       />
                     </div>
                   ) : (
                     <div className="flex flex-col divide-y divide-border">
                       {(testimonials ?? []).map((t) => (
-                        <div key={t.id} className="px-6 py-4">
+                        <div key={t.id} className="px-4 py-4">
                           <div className="flex items-start justify-between gap-3">
                             <div className="min-w-0 flex-1">
                               <p className="text-sm font-medium text-foreground">
@@ -329,7 +329,7 @@ function CoordinatorDashboard() {
                               <Button
                                 size="sm"
                                 variant="ghost"
-                                className="h-7 w-7 p-0 text-green-500 hover:bg-green-500/10"
+                                className="h-4 w-4 p-0 text-green-500 hover:bg-green-500/10"
                                 disabled={submittingId === t.id}
                                 onClick={() =>
                                   handleTestimonialAction(t.id, "approved")
@@ -341,7 +341,7 @@ function CoordinatorDashboard() {
                               <Button
                                 size="sm"
                                 variant="ghost"
-                                className="h-7 w-7 p-0 text-destructive hover:bg-destructive/10"
+                                className="h-4 w-4 p-0 text-destructive hover:bg-destructive/10"
                                 disabled={submittingId === t.id}
                                 onClick={() =>
                                   handleTestimonialAction(t.id, "rejected")
@@ -371,11 +371,11 @@ function CoordinatorDashboard() {
               <CardContent className="p-0">
                 {loadingSessions ? null : (upcomingSessions ?? []).length ===
                   0 ? (
-                  <div className="px-6 pb-6">
+                  <div className="px-4 pb-4">
                     <EmptyState
                       title="No upcoming sessions"
                       description="There are no scheduled Zoom classes in the near future."
-                      className="py-8"
+                      className="py-5"
                     />
                   </div>
                 ) : (
@@ -394,7 +394,7 @@ function CoordinatorDashboard() {
                       return (
                         <div
                           key={session.id}
-                          className="flex items-center justify-between px-6 py-3 hover:bg-muted/50 transition-colors"
+                          className="flex items-center justify-between px-4 py-3 hover:bg-muted/50 transition-colors"
                         >
                           <div className="min-w-0 flex-1">
                             <p className="text-sm font-medium text-foreground truncate">
@@ -420,7 +420,7 @@ function CoordinatorDashboard() {
           </div>
 
           {/* ── Right column (1/3) ── */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* Training Pipeline mini stats */}
             <Card>
               <CardHeader className="pb-3">

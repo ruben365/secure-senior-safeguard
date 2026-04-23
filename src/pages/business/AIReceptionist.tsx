@@ -159,23 +159,23 @@ const AIReceptionist = () => {
                 </a>
               </Button>
             </div>
-            <p className="text-sm text-white/80 mt-6 text-left">
+            <p className="text-sm text-white/80 mt-4 text-left">
               ✓ Setup in 48 hours ✓ No contracts ✓ Cancel anytime
             </p>
           </Hero>
 
           {/* Stats Section */}
-          <section className="py-12 bg-card border-y border-border">
+          <section className="py-7 bg-card border-y border-border">
             <div className="container mx-auto">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-5 text-center">
                 <div>
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
+                  <div className="text-3xl md:text-2xl font-bold text-primary mb-2">
                     24/7
                   </div>
                   <div className="text-muted-foreground">Availability</div>
                 </div>
                 <div>
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
+                  <div className="text-3xl md:text-2xl font-bold text-primary mb-2">
                     40%
                   </div>
                   <div className="text-muted-foreground">
@@ -183,13 +183,13 @@ const AIReceptionist = () => {
                   </div>
                 </div>
                 <div>
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
+                  <div className="text-3xl md:text-2xl font-bold text-primary mb-2">
                     $5K
                   </div>
                   <div className="text-muted-foreground">Monthly Savings</div>
                 </div>
                 <div>
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
+                  <div className="text-3xl md:text-2xl font-bold text-primary mb-2">
                     99.9%
                   </div>
                   <div className="text-muted-foreground">Uptime</div>
@@ -199,10 +199,10 @@ const AIReceptionist = () => {
           </section>
 
           {/* Features Grid */}
-          <section className="py-20">
+          <section className="py-12">
             <div className="container mx-auto">
-              <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <div className="text-center mb-10">
+                <h2 className="text-3xl md:text-2xl font-bold mb-4">
                   Your AI Receptionist Does It All
                 </h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -211,15 +211,15 @@ const AIReceptionist = () => {
                   vacation.
                 </p>
               </div>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {features.map((feature, index) => (
                   <Card
                     key={index}
                     className="border-border/50 bg-card/50 hover:shadow-lg transition-shadow"
                   >
                     <CardHeader>
-                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                        <feature.icon className="w-6 h-6 text-primary" />
+                      <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                        <feature.icon className="w-4 h-4 text-primary" />
                       </div>
                       <CardTitle className="text-xl">{feature.title}</CardTitle>
                     </CardHeader>
@@ -235,14 +235,14 @@ const AIReceptionist = () => {
           </section>
 
           {/* Benefits Section */}
-          <section className="py-20 bg-card">
+          <section className="py-12 bg-card">
             <div className="container mx-auto">
-              <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="grid lg:grid-cols-2 gap-7 items-center">
                 <div>
-                  <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                  <h2 className="text-3xl md:text-2xl font-bold mb-4">
                     The Math is Simple: You're Losing Money Right Now
                   </h2>
-                  <p className="text-muted-foreground mb-8">
+                  <p className="text-muted-foreground mb-5">
                     Every missed call is a missed customer. Research shows 80%
                     of callers who reach voicemail hang up and call your
                     competitor instead. How many calls did you miss last month?
@@ -250,20 +250,20 @@ const AIReceptionist = () => {
                   <ul className="space-y-4">
                     {benefits.map((benefit, index) => (
                       <li key={index} className="flex items-start gap-3">
-                        <CheckCircle2 className="w-6 h-6 text-success flex-shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
                         <span className="text-foreground">{benefit}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
                 <div className="relative">
-                  <Card className="p-8 bg-gradient-to-br from-primary/5 to-accent/5 border-primary/20">
+                  <Card className="p-5 bg-gradient-to-br from-primary/5 to-accent/5 border-primary/20">
                     <div className="text-center">
-                      <TrendingUp className="w-16 h-16 text-primary mx-auto mb-4" />
+                      <TrendingUp className="w-10 h-10 text-primary mx-auto mb-4" />
                       <h3 className="text-2xl font-bold mb-2">
                         Your Savings Calculator
                       </h3>
-                      <p className="text-muted-foreground mb-6">
+                      <p className="text-muted-foreground mb-4">
                         What a Dayton business owner saves annually
                       </p>
                       <div className="space-y-4 text-left">
@@ -301,10 +301,10 @@ const AIReceptionist = () => {
           </section>
 
           {/* Use Cases */}
-          <section className="py-20">
+          <section className="py-12">
             <div className="container mx-auto">
-              <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <div className="text-center mb-10">
+                <h2 className="text-3xl md:text-2xl font-bold mb-4">
                   Built for Dayton Businesses Like Yours
                 </h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -313,7 +313,7 @@ const AIReceptionist = () => {
                   to your best employee.
                 </p>
               </div>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {useCases.map((useCase, index) => (
                   <Card
                     key={index}
@@ -334,12 +334,12 @@ const AIReceptionist = () => {
           </section>
 
           {/* Urgency Section */}
-          <section className="py-16 bg-primary/5 border-y border-primary/20">
+          <section className="py-10 bg-primary/5 border-y border-primary/20">
             <div className="container mx-auto text-center">
               <h3 className="text-2xl md:text-3xl font-bold mb-4">
                 While You Read This, How Many Calls Went to Voicemail?
               </h3>
-              <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
+              <p className="text-muted-foreground max-w-2xl mx-auto mb-4">
                 The average small business misses 6 calls per day. At $200 per
                 new customer, that's $36,000 in lost revenue every month walking
                 straight to your competitors.
@@ -348,12 +348,12 @@ const AIReceptionist = () => {
           </section>
 
           {/* CTA Section */}
-          <section className="py-20 bg-gradient-to-br from-primary/10 via-background to-accent/10">
+          <section className="py-12 bg-gradient-to-br from-primary/10 via-background to-accent/10">
             <div className="container mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              <h2 className="text-3xl md:text-2xl font-bold mb-4">
                 Get Your AI Receptionist Running in 48 Hours
               </h2>
-              <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              <p className="text-xl text-muted-foreground mb-5 max-w-2xl mx-auto">
                 Call us right now. Our AI will answer (so you can hear it for
                 yourself), then a real human will call you back to discuss your
                 business needs.
@@ -372,7 +372,7 @@ const AIReceptionist = () => {
                   </a>
                 </Button>
               </div>
-              <p className="text-sm text-muted-foreground mt-6">
+              <p className="text-sm text-muted-foreground mt-4">
                 Serving Dayton, Columbus, Cincinnati & all of Ohio
               </p>
             </div>

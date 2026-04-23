@@ -285,7 +285,7 @@ export const PaymentDialog = ({
                 >
                   <div className="space-y-3">
                     <div className="flex items-center gap-3 rounded-2xl border border-border/60 bg-muted/35 px-3 py-3">
-                      <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl bg-[#d96c4a]/12 text-[#b75539]">
+                      <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-2xl bg-[#d96c4a]/12 text-[#b75539]">
                         <FileText className="h-4 w-4" />
                       </div>
                       <div className="min-w-0 flex-1">

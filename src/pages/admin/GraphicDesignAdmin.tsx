@@ -94,7 +94,7 @@ const GraphicDesignAdmin = () => {
     );
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-foreground">
@@ -136,13 +136,13 @@ const GraphicDesignAdmin = () => {
             <tbody>
               {isLoading ? (
                 <tr>
-                  <td colSpan={5} className="px-4 py-8 text-center text-muted-foreground">
+                  <td colSpan={5} className="px-4 py-5 text-center text-muted-foreground">
                     Loading...
                   </td>
                 </tr>
               ) : !projects?.length ? (
                 <tr>
-                  <td colSpan={5} className="px-4 py-8 text-center text-muted-foreground">
+                  <td colSpan={5} className="px-4 py-5 text-center text-muted-foreground">
                     No projects yet. Create your first one.
                   </td>
                 </tr>
@@ -155,10 +155,10 @@ const GraphicDesignAdmin = () => {
                           <img
                             src={p.thumbnail_url}
                             alt={p.title}
-                            className="w-10 h-10 rounded-lg object-cover"
+                            className="w-6 h-6 rounded-lg object-cover"
                           />
                         ) : (
-                          <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center">
+                          <div className="w-6 h-6 rounded-lg bg-muted flex items-center justify-center">
                             <ImageIcon className="w-4 h-4 text-muted-foreground" />
                           </div>
                         )}

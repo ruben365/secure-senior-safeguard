@@ -46,7 +46,7 @@ export function PaymentElementPanel({
         {timedOut ? (
           <div className="space-y-3 rounded-[18px] border border-[#d96c4a]/18 bg-[#fff7f4] p-4">
             <div className="flex items-start gap-3">
-              <div className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-2xl bg-[#d96c4a]/10 text-[#b75539]">
+              <div className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-2xl bg-[#d96c4a]/10 text-[#b75539]">
                 <AlertCircle className="h-4 w-4" />
               </div>
               <div className="space-y-1">

@@ -45,10 +45,10 @@ export default function PurchasePage() {
         <SEO title="Book Not Found" description="The requested book was not found." noindex />
         <Navigation />
         <main className="flex-1 flex items-center justify-center">
-          <div className="text-center py-20">
-            <BookOpen className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+          <div className="text-center py-12">
+            <BookOpen className="mx-auto mb-4 h-7 w-7 text-muted-foreground" />
             <h1 className="text-2xl font-bold mb-2">Book Not Found</h1>
-            <p className="text-muted-foreground mb-6">We could not find the book you are looking for.</p>
+            <p className="text-muted-foreground mb-4">We could not find the book you are looking for.</p>
             <Button asChild><Link to="/library">Browse Library</Link></Button>
           </div>
         </main>
@@ -130,18 +130,18 @@ export default function PurchasePage() {
           </div>
         </div>
 
-        <div className="container mx-auto py-10 max-w-5xl">
-          <Button variant="ghost" size="sm" className="gap-2 mb-6" onClick={() => navigate(-1)}>
+        <div className="container mx-auto py-6 max-w-5xl">
+          <Button variant="ghost" size="sm" className="gap-2 mb-4" onClick={() => navigate(-1)}>
             <ArrowLeft className="h-4 w-4" />
             Back
           </Button>
 
           <h1 className="text-2xl md:text-3xl font-bold mb-2">Complete Your Purchase</h1>
-          <p className="text-muted-foreground mb-8">{book.title} — {book.subtitle}</p>
+          <p className="text-muted-foreground mb-5">{book.title} — {book.subtitle}</p>
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-5">
             {/* Purchase form */}
-            <div className="md:col-span-3 space-y-6">
+            <div className="md:col-span-3 space-y-4">
               {/* Purchase type */}
               <Card>
                 <CardHeader>
@@ -221,7 +221,7 @@ export default function PurchasePage() {
                         >
                           <Minus className="h-4 w-4" />
                         </Button>
-                        <span className="w-12 text-center text-lg font-semibold">{quantity}</span>
+                        <span className="w-7 text-center text-lg font-semibold">{quantity}</span>
                         <Button
                           variant="outline"
                           size="icon"
@@ -274,13 +274,13 @@ export default function PurchasePage() {
 
             {/* Order summary */}
             <div className="md:col-span-2">
-              <Card className="sticky top-24">
+              <Card className="sticky top-16">
                 <CardHeader>
                   <CardTitle className="text-base">Order Summary</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <div className="w-12 h-16 rounded overflow-hidden bg-primary/10 flex items-center justify-center shrink-0">
+                    <div className="w-7 h-10 rounded overflow-hidden bg-primary/10 flex items-center justify-center shrink-0">
                       {book.cover_image ? (
                         <img src={book.cover_image} alt={book.title} className="w-full h-full object-cover" loading="lazy" decoding="async" width={48} height={64} />
                       ) : (
@@ -324,7 +324,7 @@ export default function PurchasePage() {
                     <span className="text-primary">${totalPrice.toFixed(2)}</span>
                   </div>
 
-                  <Button className="w-full gap-2 h-11 text-base" onClick={handleCheckout}>
+                  <Button className="w-full gap-2 h-7 text-base" onClick={handleCheckout}>
                     <ShoppingCart className="h-4 w-4" />
                     {purchaseType === "single" ? "Buy Now" : `Order ${quantity} Copies`}
                   </Button>
@@ -350,7 +350,7 @@ export default function PurchasePage() {
             </div>
           </div>
 
-          <div className="mt-8 text-center text-sm text-muted-foreground">
+          <div className="mt-5 text-center text-sm text-muted-foreground">
             Questions about bulk orders?{" "}
             <Link to="/contact" className="text-primary underline underline-offset-2">
               Contact us

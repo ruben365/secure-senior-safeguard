@@ -6,33 +6,33 @@
 
 /* ───── 1. Section vertical rhythm ───── */
 .sec-rhythm-sm {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
 }
 .sec-rhythm-md {
-  padding-top: 2.75rem;
-  padding-bottom: 2.75rem;
+  padding-top: 1.72rem;
+  padding-bottom: 1.72rem;
 }
 .sec-rhythm-lg {
-  padding-top: 3.5rem;
-  padding-bottom: 3.5rem;
+  padding-top: 2.19rem;
+  padding-bottom: 2.19rem;
 }
 
 @media (min-width: 768px) {
-  .sec-rhythm-sm { padding-top: 2.75rem; padding-bottom: 2.75rem; }
-  .sec-rhythm-md { padding-top: 4rem;    padding-bottom: 4rem; }
-  .sec-rhythm-lg { padding-top: 5rem;    padding-bottom: 5rem; }
+  .sec-rhythm-sm { padding-top: 1.72rem; padding-bottom: 1.72rem; }
+  .sec-rhythm-md { padding-top: 2.5rem;    padding-bottom: 2.5rem; }
+  .sec-rhythm-lg { padding-top: 3.12rem;    padding-bottom: 3.12rem; }
 }
 
 @media (min-width: 1024px) {
-  .sec-rhythm-sm { padding-top: 4rem;    padding-bottom: 4rem; }
-  .sec-rhythm-md { padding-top: 6rem;    padding-bottom: 6rem; }
-  .sec-rhythm-lg { padding-top: 8rem;    padding-bottom: 8rem; }
+  .sec-rhythm-sm { padding-top: 2.5rem;    padding-bottom: 2.5rem; }
+  .sec-rhythm-md { padding-top: 3.75rem;    padding-bottom: 3.75rem; }
+  .sec-rhythm-lg { padding-top: 5rem;    padding-bottom: 5rem; }
 }
 
 @media (min-width: 1280px) {
-  .sec-rhythm-md { padding-top: 7rem;    padding-bottom: 7rem; }
-  .sec-rhythm-lg { padding-top: 10rem;   padding-bottom: 10rem; }
+  .sec-rhythm-md { padding-top: 4.38rem;    padding-bottom: 4.38rem; }
+  .sec-rhythm-lg { padding-top: 6.25rem;   padding-bottom: 6.25rem; }
 }
 
 /* ───── 2. Container disposition ───── */
@@ -42,8 +42,8 @@
 .sec-container-bleed {
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-left: 0.78rem;
+  padding-right: 0.78rem;
   width: 100%;
 }
 
@@ -56,39 +56,39 @@
   .sec-container-narrow,
   .sec-container-default,
   .sec-container-wide {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
   .sec-container-bleed {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
+    padding-left: 1.56rem;
+    padding-right: 1.56rem;
   }
 }
 
 /* ───── 3. Heading rhythm cluster ───── */
 .head-rhythm {
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
 }
 @media (min-width: 768px) {
-  .head-rhythm { margin-bottom: 2.5rem; }
+  .head-rhythm { margin-bottom: 1.56rem; }
 }
 
 .head-rhythm > .eyebrow + h1,
 .head-rhythm > .eyebrow + h2,
 .head-rhythm > .eyebrow + h3 {
-  margin-top: 0.75rem;
+  margin-top: 0.47rem;
 }
 
 .head-rhythm > h1,
 .head-rhythm > h2,
 .head-rhythm > h3 {
-  margin-bottom: 1rem;
+  margin-bottom: 0.62rem;
 }
 @media (min-width: 768px) {
   .head-rhythm > h1,
   .head-rhythm > h2,
   .head-rhythm > h3 {
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.78rem;
   }
 }
 
@@ -98,7 +98,7 @@
 .head-rhythm > h1 + .lede,
 .head-rhythm > h2 + .lede,
 .head-rhythm > h3 + .lede {
-  margin-top: 1rem;
+  margin-top: 0.62rem;
   max-width: 42rem;
   margin-left: auto;
   margin-right: auto;
@@ -110,7 +110,7 @@
   .head-rhythm > h1 + .lede,
   .head-rhythm > h2 + .lede,
   .head-rhythm > h3 + .lede {
-    margin-top: 1.25rem;
+    margin-top: 0.78rem;
   }
 }
 
@@ -118,26 +118,26 @@
 
 /* First content section after hero — moderated top breathing */
 .sec-after-hero {
-  padding-top: 3rem;
+  padding-top: 1.88rem;
 }
 @media (min-width: 768px) {
-  .sec-after-hero { padding-top: 5rem; }
+  .sec-after-hero { padding-top: 3.12rem; }
 }
 
 /* Last content section before footer — moderated bottom lift */
 .sec-before-footer {
-  padding-bottom: 3.5rem;
+  padding-bottom: 2.19rem;
 }
 @media (min-width: 768px) {
-  .sec-before-footer { padding-bottom: 5.5rem; }
+  .sec-before-footer { padding-bottom: 3.44rem; }
 }
 
 /* Standardized card grid gap */
 .grid-rhythm {
-  gap: 1.25rem;
+  gap: 0.78rem;
 }
 @media (min-width: 768px) {
-  .grid-rhythm { gap: 1.5rem; }
+  .grid-rhythm { gap: 0.94rem; }
 }
 
 /* Asymmetric staircase — middle item offset on lg+ */
@@ -152,14 +152,14 @@
   max-width: 42rem;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 2.25rem;
-  padding-bottom: 2.25rem;
+  padding-top: 1.41rem;
+  padding-bottom: 1.41rem;
   text-align: center;
 }
 @media (min-width: 768px) {
   .cta-band {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+    padding-top: 1.88rem;
+    padding-bottom: 1.88rem;
   }
 }
 
@@ -215,7 +215,7 @@
   line-height: 1.75;
 }
 .body-rhythm > * + * {
-  margin-top: 1em;
+  margin-top: 0.62em;
 }
 .headline-tight {
   text-wrap: balance;
@@ -225,7 +225,7 @@
 
 /* Display headlines — 64–96px desktop */
 .headline-display {
-  font-size: clamp(2.5rem, 6vw, 6rem);
+  font-size: clamp(1.88rem, 6vw, 4.5rem);
   font-weight: 800;
   line-height: 1.0;
   letter-spacing: -0.04em;
@@ -234,7 +234,7 @@
 
 /* Section headings — 40–56px desktop */
 .headline-section {
-  font-size: clamp(1.75rem, 3.5vw, 3.5rem);
+  font-size: clamp(1.31rem, 3.5vw, 2.62rem);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.025em;
@@ -255,30 +255,30 @@
   text-align: left !important;
 }
 .head-rhythm > .eyebrow {
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.47rem;
 }
 .head-rhythm > h1,
 .head-rhythm > h2,
 .head-rhythm > h3 {
   text-wrap: balance;
-  margin-bottom: 1rem;
+  margin-bottom: 0.62rem;
 }
 @media (min-width: 768px) {
   .head-rhythm > h1,
   .head-rhythm > h2,
   .head-rhythm > h3 {
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.78rem;
   }
 }
 .head-rhythm > .lede {
-  margin-top: 1rem;
+  margin-top: 0.62rem;
   max-width: 42rem;
   margin-left: auto;
   margin-right: auto;
 }
 @media (min-width: 768px) {
   .head-rhythm > .lede {
-    margin-top: 1.25rem;
+    margin-top: 0.78rem;
   }
 }
 
@@ -290,12 +290,12 @@
 .card-content-stack > h2,
 .card-content-stack > h3,
 .card-content-stack > h4 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.31rem;
 }
 .card-content-stack > p {
   line-height: 1.6;
   font-size: 0.95rem;
 }
 .card-content-stack > * + * {
-  margin-top: 0.5rem;
+  margin-top: 0.31rem;
 }

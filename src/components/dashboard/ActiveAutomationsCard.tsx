@@ -115,7 +115,7 @@ export function ActiveAutomationsCard() {
             >
               <div className="flex items-center gap-4">
                 <div
-                  className={`w-10 h-10 rounded-xl bg-gradient-to-br ${getGradient(automation.type)} flex items-center justify-center`}
+                  className={`w-6 h-6 rounded-xl bg-gradient-to-br ${getGradient(automation.type)} flex items-center justify-center`}
                 >
                   <Icon className="w-5 h-5 text-white" />
                 </div>
@@ -146,7 +146,7 @@ export function ActiveAutomationsCard() {
 
                 <div className="flex items-center gap-2">
                   <Switch checked={isActive} />
-                  <Button variant="ghost" size="icon" className="h-8 w-8">
+                  <Button variant="ghost" size="icon" className="h-5 w-5">
                     <MoreVertical className="w-4 h-4" />
                   </Button>
                 </div>

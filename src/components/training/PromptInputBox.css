@@ -44,7 +44,7 @@
 }
 
 .pib-textarea::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
 
 .pib-textarea::-webkit-scrollbar-track {
@@ -53,7 +53,7 @@
 
 .pib-textarea::-webkit-scrollbar-thumb {
   background-color: rgba(255, 255, 255, 0.18);
-  border-radius: 3px;
+  border-radius: 2px;
 }
 
 .pib-textarea::-webkit-scrollbar-thumb:hover {
@@ -72,7 +72,7 @@
   -webkit-backdrop-filter: blur(16px) saturate(140%);
   backdrop-filter: blur(16px) saturate(140%);
   color: #ffffff;
-  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 12px 32px -6px rgba(0, 0, 0, 0.55);
 }
 
 /* ─── Mode toggle button — base ───────────────────────────────────── */
@@ -150,20 +150,20 @@
 /* ─── Subtle divider between toggle buttons ───────────────────────── */
 .pib-divider {
   width: 1px;
-  height: 18px;
+  height: 11px;
   background: linear-gradient(
     180deg,
     transparent 0%,
     rgba(255, 255, 255, 0.16) 50%,
     transparent 100%
   );
-  margin: 0 4px;
+  margin: 0 2px;
 }
 
 /* ─── Image preview thumbnail ─────────────────────────────────────── */
 .pib-thumb {
   border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 4px 12px -3px rgba(0, 0, 0, 0.45);
   transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 

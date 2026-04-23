@@ -49,8 +49,8 @@ export class ErrorBoundary extends Component<Props, State> {
 
           <div className="relative max-w-lg w-full text-center animate-fade-in">
             {/* Icon badge */}
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/8 border border-primary/15 mb-8 shadow-[0_8px_32px_-8px_hsl(var(--primary)/0.12)]">
-              <ShieldAlert className="w-10 h-10 text-primary" />
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/8 border border-primary/15 mb-5 shadow-[0_8px_32px_-8px_hsl(var(--primary)/0.12)]">
+              <ShieldAlert className="w-6 h-6 text-primary" />
             </div>
 
             {/* Badge pill */}
@@ -58,15 +58,15 @@ export class ErrorBoundary extends Component<Props, State> {
               Something went wrong
             </span>
 
-            <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3 leading-tight">
+            <h1 className="text-3xl md:text-2xl font-bold text-foreground mb-3 leading-tight">
               We Hit a Snag
             </h1>
-            <p className="text-muted-foreground text-base max-w-sm mx-auto leading-relaxed mb-8">
+            <p className="text-muted-foreground text-base max-w-sm mx-auto leading-relaxed mb-5">
               An unexpected error occurred. Don't worry — your data is safe. Try reloading or head back home.
             </p>
 
             {this.state.error && (
-              <div className="mb-8 p-4 rounded-2xl bg-card/80 backdrop-blur-sm border border-border/50 text-left shadow-sm">
+              <div className="mb-5 p-4 rounded-2xl bg-card/80 backdrop-blur-sm border border-border/50 text-left shadow-sm">
                 <p className="text-[11px] font-mono text-muted-foreground break-all leading-relaxed">
                   {this.state.error.toString()}
                 </p>
@@ -86,7 +86,7 @@ export class ErrorBoundary extends Component<Props, State> {
               </Button>
             </div>
 
-            <p className="text-sm text-muted-foreground mt-8">
+            <p className="text-sm text-muted-foreground mt-5">
               If this keeps happening, please{" "}
               <Link to="/contact" className="text-primary font-medium hover:underline">
                 contact our support team

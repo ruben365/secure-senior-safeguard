@@ -44,16 +44,16 @@ function NotFound() {
       <div className="min-h-screen flex flex-col bg-background" data-page="not-found">
       <Navigation />
 
-      <div className="flex-1 flex items-center justify-center px-4 py-20 relative">
+      <div className="flex-1 flex items-center justify-center px-4 py-12 relative">
         {/* Ambient glows */}
         <div className="absolute top-[10%] right-[15%] w-72 h-72 rounded-full bg-primary/[0.04] blur-[120px] pointer-events-none" />
         <div className="absolute bottom-[15%] left-[10%] w-60 h-60 rounded-full bg-accent/[0.04] blur-[100px] pointer-events-none" />
 
         <div className="max-w-2xl w-full animate-fade-in">
-          <div className="text-center mb-10">
+          <div className="text-center mb-6">
             {/* Shield icon */}
-            <div className="relative inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-gradient-to-br from-primary/12 to-accent/8 border border-primary/15 mb-8 shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.12)]">
-              <Shield className="w-12 h-12 text-primary" />
+            <div className="relative inline-flex items-center justify-center w-16 h-16 rounded-3xl bg-gradient-to-br from-primary/12 to-accent/8 border border-primary/15 mb-5 shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.12)]">
+              <Shield className="w-7 h-7 text-primary" />
             </div>
 
             {/* Badge pill */}
@@ -64,7 +64,7 @@ function NotFound() {
               </span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 leading-tight">
+            <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-4 leading-tight">
               Page Not Found
             </h1>
             <p className="text-muted-foreground text-lg max-w-md mx-auto leading-relaxed">
@@ -73,19 +73,19 @@ function NotFound() {
           </div>
 
           {/* Search */}
-          <form onSubmit={handleSearch} className="relative mb-10">
+          <form onSubmit={handleSearch} className="relative mb-6">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <Input
               type="text"
               placeholder="Search InVision Network..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="h-14 pl-12 pr-4 text-base rounded-2xl border-2 border-border bg-card/80 backdrop-blur-sm shadow-sm focus:border-primary"
+              className="h-9 pl-7 pr-4 text-base rounded-2xl border-2 border-border bg-card/80 backdrop-blur-sm shadow-sm focus:border-primary"
             />
           </form>
 
           {/* Quick Links */}
-          <div className="space-y-3 mb-10">
+          <div className="space-y-3 mb-6">
             <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">Quick Navigation</p>
             {popularPages.map((page) => (
               <Link
@@ -93,7 +93,7 @@ function NotFound() {
                 to={page.path}
                 className="flex items-center gap-4 p-4 rounded-2xl border border-border/50 bg-card/80 backdrop-blur-sm hover:border-primary/30 hover:bg-primary/[0.03] transition-all group"
               >
-                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-primary/10 to-accent/8 border border-primary/10 flex items-center justify-center flex-shrink-0 group-hover:shadow-sm transition-shadow">
+                <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-primary/10 to-accent/8 border border-primary/10 flex items-center justify-center flex-shrink-0 group-hover:shadow-sm transition-shadow">
                   <page.icon className="w-5 h-5 text-primary" />
                 </div>
                 <div className="flex-1">
@@ -121,7 +121,7 @@ function NotFound() {
             </Button>
           </div>
 
-          <p className="text-center text-sm text-muted-foreground mt-6">
+          <p className="text-center text-sm text-muted-foreground mt-4">
             Or call us at{" "}
             <a href={SITE.phone.tel} className="text-primary font-medium hover:underline">
               {SITE.phone.display}

@@ -107,8 +107,8 @@ export default function DatabaseView() {
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
+      <div className="flex items-center justify-between mb-4">
         <div>
           <h1 className="text-2xl font-bold text-[#F9FAFB]">Database</h1>
           <p className="text-[#9CA3AF]">
@@ -124,7 +124,7 @@ export default function DatabaseView() {
       {/* Stats Cards */}
       <div className="grid gap-4 md:grid-cols-3">
         <Card className="bg-[#111827] border-gray-800">
-          <CardContent className="p-6">
+          <CardContent className="p-4">
             <div className="flex items-center gap-3 mb-2">
               <HardDrive className="h-5 w-5 text-[#06B6D4]" />
               <span className="text-[#9CA3AF]">Total Storage</span>
@@ -138,7 +138,7 @@ export default function DatabaseView() {
           </CardContent>
         </Card>
         <Card className="bg-[#111827] border-gray-800">
-          <CardContent className="p-6">
+          <CardContent className="p-4">
             <div className="flex items-center gap-3 mb-2">
               <Database className="h-5 w-5 text-[#10B981]" />
               <span className="text-[#9CA3AF]">Total Records</span>
@@ -149,7 +149,7 @@ export default function DatabaseView() {
           </CardContent>
         </Card>
         <Card className="bg-[#111827] border-gray-800">
-          <CardContent className="p-6">
+          <CardContent className="p-4">
             <div className="flex items-center gap-3 mb-2">
               <RefreshCw className="h-5 w-5 text-[#F59E0B]" />
               <span className="text-[#9CA3AF]">Last Full Sync</span>

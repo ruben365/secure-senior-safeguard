@@ -131,13 +131,13 @@ export function TrainingProgressCard({ userId }: TrainingProgressCardProps) {
       <CardContent className="space-y-4">
         {loading ? (
           <div className="space-y-3">
-            <div className="p-4 rounded-xl bg-muted animate-pulse h-16" />
+            <div className="p-4 rounded-xl bg-muted animate-pulse h-10" />
             {[1, 2, 3].map((i) => (
               <div
                 key={i}
                 className="flex items-center gap-3 p-3 animate-pulse"
               >
-                <div className="w-8 h-8 rounded-full bg-muted" />
+                <div className="w-5 h-5 rounded-full bg-muted" />
                 <div className="flex-1 space-y-2">
                   <div className="h-4 bg-muted rounded w-3/4" />
                   <div className="h-1 bg-muted rounded w-full" />
@@ -146,9 +146,9 @@ export function TrainingProgressCard({ userId }: TrainingProgressCardProps) {
             ))}
           </div>
         ) : enrollments.length === 0 ? (
-          <div className="text-center py-6">
-            <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-primary/10 flex items-center justify-center">
-              <BookOpen className="w-6 h-6 text-primary" />
+          <div className="text-center py-4">
+            <div className="w-7 h-7 mx-auto mb-3 rounded-full bg-primary/10 flex items-center justify-center">
+              <BookOpen className="w-4 h-4 text-primary" />
             </div>
             <p className="font-medium text-sm mb-1">No Courses Yet</p>
             <p className="text-xs text-muted-foreground mb-4">
@@ -188,7 +188,7 @@ export function TrainingProgressCard({ userId }: TrainingProgressCardProps) {
                   onClick={() => navigate("/portal/my-courses")}
                 >
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm ${
+                    className={`w-5 h-5 rounded-full flex items-center justify-center text-sm ${
                       enrollment.progress_percentage === 100
                         ? "bg-green-500/20 text-green-600"
                         : (enrollment.progress_percentage || 0) > 0

@@ -95,7 +95,7 @@ export function SiteCalloutCard({
 
       <div
         className={cn(
-          "relative z-10 p-5 sm:p-6 md:p-8",
+          "relative z-10 p-5 sm:p-4 md:p-5",
           isCentered && "text-center",
           contentClassName,
         )}
@@ -110,7 +110,7 @@ export function SiteCalloutCard({
             {Icon && (
               <div
                 className={cn(
-                  "flex h-12 w-12 items-center justify-center rounded-2xl",
+                  "flex h-7 w-7 items-center justify-center rounded-2xl",
                   styles.icon,
                   iconClassName,
                 )}
@@ -151,7 +151,7 @@ export function SiteCalloutCard({
         {action && (
           <div
             className={cn(
-              "mt-6 flex flex-wrap gap-3",
+              "mt-4 flex flex-wrap gap-3",
               isCentered ? "justify-center" : "justify-start",
             )}
           >

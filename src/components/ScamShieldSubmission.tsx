@@ -250,7 +250,7 @@ export const ScamShieldSubmission = ({
       <DialogContent className="w-[calc(100vw-32px)] sm:w-full sm:max-w-[420px] max-h-[85svh] overflow-y-auto rounded-2xl p-4 gap-0">
         <DialogHeader className="space-y-0 pb-3">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 bg-gradient-to-br from-teal-500/15 to-indigo-500/15 border border-teal-500/30 rounded-full flex items-center justify-center flex-shrink-0">
+            <div className="w-6 h-6 bg-gradient-to-br from-teal-500/15 to-indigo-500/15 border border-teal-500/30 rounded-full flex items-center justify-center flex-shrink-0">
               <Shield className="w-4 h-4 text-teal-600" />
             </div>
             <div className="flex-1 min-w-0">
@@ -492,7 +492,7 @@ export const ScamShieldSubmission = ({
             </form>
           </Form>
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-4">
             <Alert
               className={`border-2 ${getRiskColor(analysisResult.riskLevel)}`}
             >

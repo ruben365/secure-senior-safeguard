@@ -97,7 +97,7 @@ export function DataTable<T extends { id: string }>({
             value={search}
             onChange={handleSearchChange}
             placeholder={searchPlaceholder}
-            className="pl-9"
+            className="pl-6"
           />
         </div>
       )}
@@ -176,7 +176,7 @@ export function DataTable<T extends { id: string }>({
               <Button
                 variant="outline"
                 size="icon"
-                className="h-7 w-7"
+                className="h-4 w-4"
                 onClick={() => setPage((p) => Math.max(0, p - 1))}
                 disabled={page === 0}
               >
@@ -188,7 +188,7 @@ export function DataTable<T extends { id: string }>({
               <Button
                 variant="outline"
                 size="icon"
-                className="h-7 w-7"
+                className="h-4 w-4"
                 onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
                 disabled={page === totalPages - 1}
               >

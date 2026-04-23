@@ -117,12 +117,12 @@ export function PortalSidebar({ isOpen, isMobileOpen, onMobileClose }: PortalSid
       {/* Logo header */}
       <div
         className={cn(
-          "flex h-14 shrink-0 items-center border-b border-border px-3",
+          "flex h-9 shrink-0 items-center border-b border-border px-3",
           isOpen ? "justify-between" : "justify-center",
         )}
       >
         <div className="flex items-center gap-2 min-w-0">
-          <Shield className="h-6 w-6 shrink-0 text-primary" />
+          <Shield className="h-4 w-4 shrink-0 text-primary" />
           {isOpen && (
             <span className="font-semibold text-foreground truncate text-sm">
               {SITE.name}
@@ -133,7 +133,7 @@ export function PortalSidebar({ isOpen, isMobileOpen, onMobileClose }: PortalSid
         <Button
           variant="ghost"
           size="icon"
-          className="h-8 w-8 md:hidden"
+          className="h-5 w-5 md:hidden"
           onClick={onMobileClose}
           aria-label="Close sidebar"
         >

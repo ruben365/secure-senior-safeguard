@@ -188,12 +188,12 @@ export default function BooksAdmin() {
   const draftCount = books.filter((b) => b.status === "draft").length;
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6">
+    <div className="p-4 max-w-7xl mx-auto space-y-4">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-[#F9FAFB] flex items-center gap-2">
-            <BookOpen className="h-6 w-6 text-[#06B6D4]" />
+            <BookOpen className="h-4 w-4 text-[#06B6D4]" />
             Digital Library
           </h1>
           <p className="text-[#9CA3AF] text-sm mt-1">
@@ -249,7 +249,7 @@ export default function BooksAdmin() {
         ].map((s) => (
           <Card key={s.label} className="bg-[#111827] border-gray-800">
             <CardContent className="p-4 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center flex-shrink-0">
+              <div className="w-6 h-6 rounded-lg bg-gray-800 flex items-center justify-center flex-shrink-0">
                 <s.icon className={`h-5 w-5 ${s.color}`} />
               </div>
               <div>
@@ -269,7 +269,7 @@ export default function BooksAdmin() {
             placeholder="Search books…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-9 bg-[#111827] border-gray-700 text-[#F9FAFB] placeholder:text-[#6B7280]"
+            className="pl-6 bg-[#111827] border-gray-700 text-[#F9FAFB] placeholder:text-[#6B7280]"
           />
         </div>
         <Select value={statusFilter} onValueChange={setStatusFilter}>
@@ -294,10 +294,10 @@ export default function BooksAdmin() {
         </CardHeader>
         <CardContent className="p-0">
           {isLoading ? (
-            <div className="p-8 text-center text-[#9CA3AF]">Loading…</div>
+            <div className="p-5 text-center text-[#9CA3AF]">Loading…</div>
           ) : filtered.length === 0 ? (
-            <div className="p-12 text-center">
-              <BookOpen className="h-12 w-12 text-gray-700 mx-auto mb-3" />
+            <div className="p-7 text-center">
+              <BookOpen className="h-7 w-7 text-gray-700 mx-auto mb-3" />
               <p className="text-[#9CA3AF]">No books found</p>
               <Button
                 variant="outline"
@@ -317,7 +317,7 @@ export default function BooksAdmin() {
                   className="flex items-center gap-4 p-4 hover:bg-gray-800/30 transition-colors"
                 >
                   {/* Cover */}
-                  <div className="w-12 h-16 rounded bg-gray-800 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                  <div className="w-7 h-10 rounded bg-gray-800 flex items-center justify-center flex-shrink-0 overflow-hidden">
                     {book.cover_image ? (
                       <img
                         src={book.cover_image}
@@ -325,7 +325,7 @@ export default function BooksAdmin() {
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <BookOpen className="h-6 w-6 text-gray-600" />
+                      <BookOpen className="h-4 w-4 text-gray-600" />
                     )}
                   </div>
 

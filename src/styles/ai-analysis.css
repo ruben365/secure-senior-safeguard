@@ -41,7 +41,7 @@
 
 /* ─── Floating toolbar refinement ────────────────────────────────── */
 .ai-analysis-page .aia-toolbar {
-  padding: 6px 10px;
+  padding: 4px 6px;
   box-shadow:
     0 8px 24px -8px rgba(0, 0, 0, 0.45),
     0 2px 6px -2px rgba(0, 0, 0, 0.30),
@@ -88,9 +88,9 @@
   left: 0;
   top: 0;
   bottom: 0;
-  width: 3px;
+  width: 2px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
-  border-radius: 3px 0 0 3px;
+  border-radius: 2px 0 0 2px;
 }
 
 .ai-analysis-page .aia-notice--access::before {
@@ -118,8 +118,8 @@
 
 /* ─── File chip refinement ───────────────────────────────────────── */
 .ai-analysis-page .aia-notice--filechip {
-  height: 40px;
-  padding: 0 16px !important;
+  height: 25px;
+  padding: 0 10px !important;
   font-feature-settings: "ss01", "tnum";
 }
 
@@ -127,7 +127,7 @@
   color: transparent !important;
   position: relative;
   width: 1px;
-  margin: 0 4px;
+  margin: 0 2px;
 }
 
 .ai-analysis-page .aia-notice--filechip > span:nth-of-type(2)::after {
@@ -141,7 +141,7 @@
 
 .ai-analysis-page .aia-notice--filechip button {
   min-width: 28px;
-  min-height: 28px;
+  min-height: 36px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -163,7 +163,7 @@
   align-items: center;
   justify-content: center;
   padding: 1px;
-  border-radius: 4px;
+  border-radius: 3px;
   background: rgba(251, 191, 36, 0.18);
   color: #fde68a;
 }
@@ -173,7 +173,7 @@
 .ai-analysis-page .aia-notice a:focus-visible {
   outline: none;
   box-shadow: 0 0 0 3px rgba(217, 108, 74, 0.55);
-  border-radius: 9999px;
+  border-radius: 6999px;
 }
 
 /* ─── Brand-correct overrides for global premium classes ─────────── */

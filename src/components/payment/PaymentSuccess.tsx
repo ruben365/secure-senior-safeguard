@@ -25,9 +25,9 @@ export function PaymentSuccess({
   }, []);
 
   return (
-    <div className="text-center py-6 space-y-6 animate-fade-in">
-      <div className="mx-auto w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center animate-scale-in">
-        <Check className="h-10 w-10 text-green-600 dark:text-green-400" />
+    <div className="text-center py-4 space-y-4 animate-fade-in">
+      <div className="mx-auto w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center animate-scale-in">
+        <Check className="h-6 w-6 text-green-600 dark:text-green-400" />
       </div>
 
       <div className="space-y-2">

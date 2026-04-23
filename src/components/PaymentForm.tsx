@@ -123,9 +123,9 @@ function CardForm({
 
   if (status === "success") {
     return (
-      <div className="flex flex-col items-center gap-4 py-6 text-center">
-        <div className="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center">
-          <CheckCircle className="w-7 h-7 text-emerald-500" />
+      <div className="flex flex-col items-center gap-4 py-4 text-center">
+        <div className="w-9 h-9 rounded-full bg-emerald-50 flex items-center justify-center">
+          <CheckCircle className="w-4 h-4 text-emerald-500" />
         </div>
         <div>
           <p className="text-base font-semibold text-gray-900">Payment successful!</p>
@@ -136,7 +136,7 @@ function CardForm({
         {onClose && (
           <button
             onClick={onClose}
-            className="mt-2 px-6 py-2 rounded-full bg-[#d96c4a] text-white text-sm font-medium hover:bg-[#c25e3e] transition-colors"
+            className="mt-2 px-4 py-2 rounded-full bg-[#d96c4a] text-white text-sm font-medium hover:bg-[#c25e3e] transition-colors"
           >
             Done
           </button>
@@ -234,7 +234,7 @@ function PaymentFormLoader(props: PaymentFormProps) {
 
   if (loadError) {
     return (
-      <div className="text-center py-6">
+      <div className="text-center py-4">
         <p className="text-sm text-red-500">{loadError}</p>
         <button onClick={() => { fetchedRef.current = false; setLoadError(null); }}
           className="mt-3 text-xs text-[#d96c4a] underline">
@@ -246,7 +246,7 @@ function PaymentFormLoader(props: PaymentFormProps) {
 
   if (!clientSecret) {
     return (
-      <div className="flex items-center justify-center py-8 gap-2 text-gray-400">
+      <div className="flex items-center justify-center py-5 gap-2 text-gray-400">
         <Loader2 className="w-5 h-5 animate-spin" />
         <span className="text-sm">Preparing secure checkout…</span>
       </div>
@@ -255,7 +255,7 @@ function PaymentFormLoader(props: PaymentFormProps) {
 
   const stripePromise = getStripePromise();
   if (!stripePromise) {
-    return <p className="text-sm text-red-500 text-center py-6">Stripe key not configured.</p>;
+    return <p className="text-sm text-red-500 text-center py-4">Stripe key not configured.</p>;
   }
 
   return (
@@ -279,11 +279,11 @@ function PaymentFormLoader(props: PaymentFormProps) {
 export function PaymentForm(props: PaymentFormProps) {
   return (
     <div
-      className="w-full max-w-sm mx-auto bg-white rounded-[20px] shadow-xl border border-gray-100 p-6"
+      className="w-full max-w-sm mx-auto bg-white rounded-[20px] shadow-xl border border-gray-100 p-4"
     >
       {/* Header */}
       <div className="flex flex-col items-center gap-1 mb-5">
-        <div className="w-10 h-10 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center">
+        <div className="w-6 h-6 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center">
           <Lock className="w-5 h-5 text-[#d96c4a]" />
         </div>
         <h3 className="text-base font-semibold text-gray-900">Secure Checkout</h3>
@@ -314,7 +314,7 @@ export function PaymentFormModal({
           {/* Modal header */}
           <div className="flex items-center justify-between px-5 pt-5 pb-0">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-xl bg-orange-50 border border-orange-100 flex items-center justify-center">
+              <div className="w-5 h-5 rounded-xl bg-orange-50 border border-orange-100 flex items-center justify-center">
                 <Lock className="w-4 h-4 text-[#d96c4a]" />
               </div>
               <span className="text-sm font-semibold text-gray-900">Secure Checkout</span>

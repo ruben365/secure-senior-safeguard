@@ -6,7 +6,7 @@ export const AIFooter = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="relative w-full py-6 px-6 mt-auto"
+      className="relative w-full py-4 px-4 mt-auto"
     >
       <div className="max-w-7xl mx-auto space-y-4">
         {/* Disclaimer */}
@@ -20,14 +20,14 @@ export const AIFooter = () => {
           </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5">
           {/* Anthropic */}
           <motion.div
             whileHover={{ scale: 1.05 }}
             className="flex items-center gap-2 px-4 py-2 rounded-full bg-black/30 backdrop-blur-sm border border-white/20"
           >
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center">
+              <div className="w-4 h-4 rounded-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center">
                 <span className="text-white text-xs font-bold">A</span>
               </div>
               <span className="text-sm font-medium text-white/90">
@@ -38,7 +38,7 @@ export const AIFooter = () => {
           </motion.div>
 
           {/* Separator */}
-          <div className="hidden sm:block w-px h-6 bg-white/20" />
+          <div className="hidden sm:block w-px h-4 bg-white/20" />
 
           {/* Malwarebytes */}
           <motion.div
@@ -46,7 +46,7 @@ export const AIFooter = () => {
             className="flex items-center gap-2 px-4 py-2 rounded-full bg-black/30 backdrop-blur-sm border border-white/20"
           >
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center">
+              <div className="w-4 h-4 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center">
                 <span className="text-white text-xs font-bold">M</span>
               </div>
               <span className="text-sm font-medium text-white/90">

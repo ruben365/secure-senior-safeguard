@@ -26,21 +26,21 @@ function PrivacyPolicy() {
         title="Privacy Policy"
         lede="How we collect, use, and protect your information."
       />
-      <section className="py-16 md:py-20 bg-background">
+      <section className="py-10 md:py-12 bg-background">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto">
             <h1 className="sr-only">Privacy Policy</h1>
-            <p className="text-center text-muted-foreground mb-8 text-lg">
+            <p className="text-center text-muted-foreground mb-5 text-lg">
               Last Updated:{" "}
 April 20, 2026
             </p>
-            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            <p className="text-center text-muted-foreground mb-7 max-w-2xl mx-auto">
               Your privacy matters to us. This policy explains how we collect,
               use, and protect your information when you use InVision Network's
               services.
             </p>
 
-            <Card className="p-6 mb-8">
+            <Card className="p-4 mb-5">
               <h2 className="text-xl font-bold mb-4">Table of Contents</h2>
               <div className="grid md:grid-cols-2 gap-2 text-sm">
                 {[
@@ -70,14 +70,14 @@ April 20, 2026
               </div>
             </Card>
 
-            <Card className="p-8 mb-8">
-              <div className="space-y-12 text-foreground">
+            <Card className="p-5 mb-5">
+              <div className="space-y-7 text-foreground">
                 <section id="privacy-section-1">
                   <h2 className="text-2xl font-bold mb-4">
                     1. Information We Collect
                   </h2>
 
-                  <h3 className="text-xl font-semibold mb-3 mt-6">
+                  <h3 className="text-xl font-semibold mb-3 mt-4">
                     Information You Provide Directly
                   </h3>
                   <ul className="list-disc list-inside space-y-2 text-muted-foreground ml-4">
@@ -117,7 +117,7 @@ April 20, 2026
                     </li>
                   </ul>
 
-                  <h3 className="text-xl font-semibold mb-3 mt-6">
+                  <h3 className="text-xl font-semibold mb-3 mt-4">
                     Information Collected Automatically
                   </h3>
                   <ul className="list-disc list-inside space-y-2 text-muted-foreground ml-4">
@@ -144,7 +144,7 @@ April 20, 2026
                     </li>
                   </ul>
 
-                  <h3 className="text-xl font-semibold mb-3 mt-6">
+                  <h3 className="text-xl font-semibold mb-3 mt-4">
                     Information from Third Parties
                   </h3>
                   <ul className="list-disc list-inside space-y-2 text-muted-foreground ml-4">

@@ -95,7 +95,7 @@ export const AccentDecoration = ({
     return (
       <div className={`absolute ${posClass} pointer-events-none ${className}`}>
         <div
-          className="w-32 h-32 border-2 border-dashed border-primary/10 rounded-full animate-spin"
+          className="w-20 h-20 border-2 border-dashed border-primary/10 rounded-full animate-spin"
           style={{ animationDuration: "30s" }}
         />
       </div>

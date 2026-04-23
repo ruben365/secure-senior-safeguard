@@ -19,23 +19,23 @@ function Disclaimer() {
         title="Disclaimer"
         lede="Important notices about our content and services."
       />
-      <section className="py-16 md:py-20 bg-background">
+      <section className="py-10 md:py-12 bg-background">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto">
             <h1 className="sr-only">Disclaimer</h1>
-            <p className="text-center text-muted-foreground mb-8 text-lg">
+            <p className="text-center text-muted-foreground mb-5 text-lg">
               Last Updated:{" "}
 April 20, 2026
             </p>
-            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            <p className="text-center text-muted-foreground mb-7 max-w-2xl mx-auto">
               Important information about the nature of our services and
               limitations.
             </p>
 
             {/* Important Notice */}
-            <Card className="p-6 mb-8 border-amber-500/30 bg-amber-500/5">
+            <Card className="p-4 mb-5 border-amber-500/30 bg-amber-500/5">
               <div className="flex items-start gap-4">
-                <AlertTriangle className="h-8 w-8 text-amber-500 flex-shrink-0" />
+                <AlertTriangle className="h-5 w-5 text-amber-500 flex-shrink-0" />
                 <div>
                   <h2 className="text-xl font-bold mb-2">Important Notice</h2>
                   <p className="text-muted-foreground">
@@ -48,8 +48,8 @@ April 20, 2026
               </div>
             </Card>
 
-            <Card className="p-8 mb-8">
-              <div className="space-y-10 text-foreground">
+            <Card className="p-5 mb-5">
+              <div className="space-y-6 text-foreground">
                 <section>
                   <h2 className="text-2xl font-bold mb-4">
                     Educational Services Only
@@ -97,10 +97,10 @@ April 20, 2026
 
                 <section>
                   <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-                    <Phone className="h-6 w-6 text-red-500" />
+                    <Phone className="h-4 w-4 text-red-500" />
                     Emergency Situations
                   </h2>
-                  <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-6">
+                  <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
                     <p className="text-muted-foreground mb-4">
                       <strong>
                         If you are experiencing active fraud, identity theft, or
@@ -150,9 +150,9 @@ April 20, 2026
 
                 <section>
                   <h2 className="text-2xl font-bold mb-4">Security Warning</h2>
-                  <div className="bg-primary/5 border border-primary/20 rounded-lg p-6">
+                  <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
                     <div className="flex items-start gap-3 mb-4">
-                      <Shield className="h-6 w-6 text-primary flex-shrink-0" />
+                      <Shield className="h-4 w-4 text-primary flex-shrink-0" />
                       <p className="text-muted-foreground">
                         <strong>
                           InVision Network will NEVER ask you for:

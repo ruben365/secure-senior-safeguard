@@ -69,7 +69,7 @@ function Status() {
       />
 
       {/* Status banner */}
-      <section className="py-10 md:py-12 bg-background border-b border-border/40">
+      <section className="py-6 md:py-7 bg-background border-b border-border/40">
         <div className="container mx-auto text-center">
           <div className="inline-flex items-center gap-3 bg-emerald-50 border border-emerald-200 text-emerald-800 px-5 py-3 rounded-xl font-semibold text-sm">
             <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" />
@@ -83,9 +83,9 @@ function Status() {
       </section>
 
       {/* Services */}
-      <section className="py-10 md:py-14 bg-muted/20">
+      <section className="py-6 md:py-9 bg-muted/20">
         <div className="container mx-auto max-w-3xl">
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-bold text-foreground">Services</h2>
             <div className="flex items-center gap-2 text-xs text-emerald-600 font-medium">
               <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -115,7 +115,7 @@ function Status() {
           </div>
 
           {/* 30-day uptime summary */}
-          <Card className="stroke-glass--quiet mt-6 p-4 border border-border/40 bg-card flex items-center gap-3">
+          <Card className="stroke-glass--quiet mt-4 p-4 border border-border/40 bg-card flex items-center gap-3">
             <Activity className="w-5 h-5 text-primary flex-shrink-0" />
             <div>
               <p className="font-semibold text-sm text-foreground">30-Day Uptime</p>
@@ -129,11 +129,11 @@ function Status() {
       </section>
 
       {/* Incident History */}
-      <section className="py-10 md:py-14 bg-background">
+      <section className="py-6 md:py-9 bg-background">
         <div className="container mx-auto max-w-3xl">
           <h2 className="text-lg font-bold text-foreground mb-4">Incident History</h2>
           <Card className="stroke-glass--quiet p-5 border border-border/40 bg-card text-center">
-            <CheckCircle className="w-8 h-8 text-emerald-500 mx-auto mb-3" />
+            <CheckCircle className="w-5 h-5 text-emerald-500 mx-auto mb-3" />
             <p className="font-semibold text-foreground text-sm mb-1">
               No incidents in the past 30 days.
             </p>
@@ -145,7 +145,7 @@ function Status() {
       </section>
 
       {/* Subscribe to Status Updates */}
-      <section className="py-10 md:py-14 bg-muted/20 border-t border-border/40">
+      <section className="py-6 md:py-9 bg-muted/20 border-t border-border/40">
         <div className="container mx-auto max-w-xl text-center">
           <h2 className="text-xl font-black text-foreground mb-2">
             Subscribe to Status Updates

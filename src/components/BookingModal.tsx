@@ -309,7 +309,7 @@ export const BookingModal = ({
             {steps.map((s, i) => (
               <div key={s.num} className="flex items-center">
                 <div
-                  className={`flex items-center justify-center w-6 h-6 rounded-full text-[11px] font-bold transition-colors ${
+                  className={`flex items-center justify-center w-4 h-4 rounded-full text-[11px] font-bold transition-colors ${
                     step >= s.num
                       ? "bg-[#d96c4a] text-white"
                       : "bg-gray-100 text-gray-400"
@@ -326,7 +326,7 @@ export const BookingModal = ({
                 </span>
                 {i < steps.length - 1 && (
                   <div
-                    className={`w-6 sm:w-10 h-px mx-1.5 ${
+                    className={`w-4 sm:w-6 h-px mx-1.5 ${
                       step > s.num ? "bg-[#d96c4a]" : "bg-gray-200"
                     }`}
                   />
@@ -400,7 +400,7 @@ export const BookingModal = ({
                           <Input
                             {...field}
                             placeholder="Your Name *"
-                            className="h-11 bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a]"
+                            className="h-7 bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a]"
                           />
                         </FormControl>
                         <FormMessage className="text-red-600" />
@@ -417,7 +417,7 @@ export const BookingModal = ({
                             {...field}
                             type="email"
                             placeholder="Email *"
-                            className="h-11 bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a]"
+                            className="h-7 bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a]"
                           />
                         </FormControl>
                         <FormMessage className="text-red-600" />
@@ -438,7 +438,7 @@ export const BookingModal = ({
                             <Input
                               {...field}
                               placeholder="Phone *"
-                              className="h-11 pl-10 bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a]"
+                              className="h-7 pl-6 bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a]"
                             />
                           </div>
                         </FormControl>
@@ -456,7 +456,7 @@ export const BookingModal = ({
                           defaultValue={field.value}
                         >
                           <FormControl>
-                            <SelectTrigger className="h-11 bg-white border-gray-200 text-gray-900">
+                            <SelectTrigger className="h-7 bg-white border-gray-200 text-gray-900">
                               <SelectValue placeholder="Select State *" className="text-gray-400" />
                             </SelectTrigger>
                           </FormControl>
@@ -493,7 +493,7 @@ export const BookingModal = ({
                             <Button
                               variant="outline"
                               className={cn(
-                                "w-full h-11 justify-start text-left font-normal bg-white border-gray-200 text-gray-900 hover:bg-gray-50",
+                                "w-full h-7 justify-start text-left font-normal bg-white border-gray-200 text-gray-900 hover:bg-gray-50",
                                 !selectedDate && "text-gray-400",
                               )}
                             >
@@ -539,7 +539,7 @@ export const BookingModal = ({
                           {...field}
                           placeholder="Tell us about your needs (optional)"
                           rows={3}
-                          className="pl-10 resize-none bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a]"
+                          className="pl-6 resize-none bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-[#d96c4a]"
                         />
                       </div>
                     </FormControl>
@@ -635,7 +635,7 @@ export const BookingModal = ({
               <Button
                 type="submit"
                 disabled={loading || !termsAccepted}
-                className="w-full h-12 text-base font-semibold"
+                className="w-full h-7 text-base font-semibold"
                 size="lg"
               >
                 {loading ? (

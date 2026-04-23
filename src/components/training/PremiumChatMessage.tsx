@@ -22,7 +22,7 @@ export const PremiumChatMessage = ({
       style={{ animationDelay: `${index * 50}ms` }}
     >
       {!isUser && (
-        <div className="shrink-0 w-9 h-9 rounded-full premium-3d-card flex items-center justify-center bg-gradient-to-br from-primary to-accent shadow-lg">
+        <div className="shrink-0 w-6 h-6 rounded-full premium-3d-card flex items-center justify-center bg-gradient-to-br from-primary to-accent shadow-lg">
           <Sparkles className="w-5 h-5 text-white" />
         </div>
       )}
@@ -78,7 +78,7 @@ export const PremiumChatMessage = ({
       </div>
 
       {isUser && (
-        <div className="shrink-0 w-9 h-9 rounded-full premium-3d-card flex items-center justify-center bg-gradient-to-br from-slate-700 to-slate-900 shadow-lg">
+        <div className="shrink-0 w-6 h-6 rounded-full premium-3d-card flex items-center justify-center bg-gradient-to-br from-slate-700 to-slate-900 shadow-lg">
           <User className="w-5 h-5 text-white" />
         </div>
       )}
