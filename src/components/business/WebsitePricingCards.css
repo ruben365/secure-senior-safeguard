@@ -1778,3 +1778,610 @@
   .wsp-card--pro,
   .wsp-card--pro:hover { transform: none !important; }
 }
+
+/* ════════════════════════════════════════════
+   ADDONS SECTION — override for new structure
+════════════════════════════════════════════ */
+
+.wsp-addons-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.wsp-addons-section-noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wsp-addons-section > * { position: relative; z-index: 1; }
+
+/* ════════════════════════════════════════════
+   MODE TABS
+════════════════════════════════════════════ */
+
+.wsp-mode-tabs {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  margin: 0 0 16px;
+  padding: 3px;
+  background: rgba(15, 23, 36, 0.04);
+  border-radius: 699px;
+  border: 1px solid rgba(15, 23, 36, 0.07);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wsp-mode-tab {
+  appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 5px 16px;
+  border-radius: 699px;
+  border: none;
+  background: transparent;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--wsp-muted);
+  transition: all 0.25s var(--wsp-ease);
+}
+.wsp-mode-tab:hover { color: var(--wsp-ink2); }
+.wsp-mode-tab.active {
+  background: #fff;
+  color: var(--wsp-ink);
+  box-shadow: 0 2px 8px rgba(15, 23, 36, 0.1), 0 1px 0 rgba(255,255,255,0.9) inset;
+}
+
+/* ════════════════════════════════════════════
+   MODE GROUP
+════════════════════════════════════════════ */
+
+.wsp-mode-group { animation: wsp-rise-in 0.4s var(--wsp-ease) both; }
+
+/* ════════════════════════════════════════════
+   PKG OPTION — active alias for new class usage
+════════════════════════════════════════════ */
+
+.wsp-pkg-option.active {
+  background: linear-gradient(135deg, #ef6b1a, #ff8a3d);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 6px 14px rgba(239, 107, 26, 0.3);
+}
+.wsp-pkg-option.active .wsp-pkg-price { background: rgba(255,255,255,0.25); color: #fff; }
+
+.wsp-pkg-accent {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #ef6b1a, #ff8a3d);
+  opacity: 0;
+  transition: opacity 0.3s var(--wsp-ease);
+  z-index: -1;
+}
+.wsp-pkg-option.active .wsp-pkg-accent { opacity: 1; }
+
+/* ════════════════════════════════════════════
+   BUILDER TABS (category sub-tabs)
+════════════════════════════════════════════ */
+
+.wsp-builder-tabs {
+  display: flex;
+  gap: 3px;
+  margin: 12px 0 4px;
+  border-bottom: 1px solid var(--wsp-line);
+  padding-bottom: 0;
+}
+
+.wsp-builder-tab {
+  appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 5px 12px;
+  border: none;
+  background: transparent;
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--wsp-muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: all 0.2s var(--wsp-ease);
+  border-radius: 4px 4px 0 0;
+}
+.wsp-builder-tab:hover { color: var(--wsp-ink2); }
+.wsp-builder-tab.active {
+  color: #ef6b1a;
+  border-bottom-color: #ef6b1a;
+  background: rgba(239, 107, 26, 0.04);
+}
+
+.wsp-cat-note {
+  font-size: 11px;
+  color: var(--wsp-muted);
+  margin: 6px 0 10px;
+  font-weight: 500;
+}
+
+/* ════════════════════════════════════════════
+   CATEGORY GROUPS
+════════════════════════════════════════════ */
+
+.wsp-category-group { display: none; }
+.wsp-category-group.active { display: block; animation: wsp-rise-in 0.3s var(--wsp-ease) both; }
+
+/* ════════════════════════════════════════════
+   CARD EDGE GLOW (addon cards)
+════════════════════════════════════════════ */
+
+.wsp-card-edge-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg,
+    rgba(239, 107, 26, 0.5),
+    rgba(109, 91, 255, 0.3) 50%,
+    rgba(239, 107, 26, 0.4));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s var(--wsp-ease);
+  pointer-events: none;
+}
+.wsp-addon-card:hover .wsp-card-edge-glow { opacity: 0.5; }
+.wsp-addon-card--checked .wsp-card-edge-glow { opacity: 1; }
+
+/* ════════════════════════════════════════════
+   ADDON GRID VARIANTS
+════════════════════════════════════════════ */
+
+.wsp-addons-grid--teal .wsp-addon-card:hover {
+  border-color: rgba(74, 143, 144, 0.45);
+}
+.wsp-addons-grid--teal .wsp-addon-card--checked {
+  border-color: #4a8f90;
+  background: linear-gradient(135deg, rgba(74, 143, 144, 0.04), rgba(111, 179, 201, 0.03));
+}
+.wsp-addons-grid--teal .wsp-addon-check--on {
+  background: linear-gradient(135deg, #4a8f90, #6fb3c9);
+  border-color: #4a8f90;
+}
+.wsp-addons-grid--teal .wsp-addon-price { color: #4a8f90; }
+.wsp-addons-grid--teal .wsp-card-edge-glow {
+  background: linear-gradient(135deg, rgba(74, 143, 144, 0.5), rgba(111, 179, 201, 0.3) 50%, rgba(74, 143, 144, 0.4));
+}
+
+.wsp-addons-grid--purple .wsp-addon-card:hover {
+  border-color: rgba(109, 91, 255, 0.45);
+}
+.wsp-addons-grid--purple .wsp-addon-card--checked {
+  border-color: #6d5bff;
+  background: linear-gradient(135deg, rgba(109, 91, 255, 0.04), rgba(195, 130, 184, 0.03));
+}
+.wsp-addons-grid--purple .wsp-addon-check--on {
+  background: linear-gradient(135deg, #6d5bff, #c382b8);
+  border-color: #6d5bff;
+}
+.wsp-addons-grid--purple .wsp-addon-price { color: #6d5bff; }
+.wsp-addons-grid--purple .wsp-card-edge-glow {
+  background: linear-gradient(135deg, rgba(109, 91, 255, 0.5), rgba(195, 130, 184, 0.3) 50%, rgba(109, 91, 255, 0.4));
+}
+
+/* ════════════════════════════════════════════
+   INSURANCE GRID + CARDS
+════════════════════════════════════════════ */
+
+.wsp-insurance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.wsp-ins-card {
+  position: relative;
+  padding: 14px 12px 12px;
+  border-radius: 10px;
+  background: #fff;
+  border: 1.5px solid var(--wsp-line);
+  cursor: pointer;
+  transition: all 0.3s var(--wsp-ease);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  overflow: hidden;
+  user-select: none;
+}
+.wsp-ins-card:hover {
+  border-color: rgba(109, 91, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(109, 91, 255, 0.08);
+}
+.wsp-ins-card.selected {
+  border-color: #6d5bff;
+  background: linear-gradient(135deg, rgba(109, 91, 255, 0.04), rgba(195, 130, 184, 0.03));
+  box-shadow: 0 4px 12px rgba(109, 91, 255, 0.14);
+}
+.wsp-ins-card.selected .wsp-ins-accent-bar { opacity: 1; }
+
+.wsp-ins-accent-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #6d5bff, #c382b8);
+  opacity: 0.3;
+  transition: opacity 0.3s var(--wsp-ease);
+  border-radius: 10px 10px 0 0;
+}
+
+.wsp-ins-flag {
+  position: absolute;
+  top: 8px; right: 8px;
+  padding: 2px 5px;
+  border-radius: 699px;
+  background: linear-gradient(135deg, #6d5bff, #c382b8);
+  color: #fff;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.wsp-ins-tier {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--wsp-muted);
+}
+.wsp-ins-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--wsp-ink);
+  letter-spacing: -0.01em;
+}
+.wsp-ins-price {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: #6d5bff;
+  line-height: 1;
+  margin: 4px 0 6px;
+}
+.wsp-ins-per {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--wsp-muted);
+}
+.wsp-ins-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.wsp-ins-features li {
+  font-size: 10.5px;
+  color: var(--wsp-ink2);
+  padding-left: 10px;
+  position: relative;
+  line-height: 1.35;
+}
+.wsp-ins-features li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #6d5bff;
+  font-size: 9px;
+  font-weight: 800;
+  top: 0;
+}
+
+/* ════════════════════════════════════════════
+   INSURANCE CUSTOM BUILDER
+════════════════════════════════════════════ */
+
+.wsp-ins-custom-builder {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s var(--wsp-ease), opacity 0.4s var(--wsp-ease);
+  opacity: 0;
+}
+.wsp-ins-custom-builder.open {
+  max-height: 600px;
+  opacity: 1;
+}
+
+.wsp-ins-custom-head {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--wsp-muted);
+  margin: 10px 0 8px;
+}
+
+/* ════════════════════════════════════════════
+   SUMMARY BAR — updated layout
+════════════════════════════════════════════ */
+
+/* Override old 3-col grid with flex */
+.wsp-summary-bar {
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  grid-template-columns: unset;
+}
+.wsp-summary-total {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.wsp-summary-monthly {
+  font-size: 10px;
+  font-weight: 700;
+  opacity: 0.7;
+  margin-left: 3px;
+}
+
+/* ════════════════════════════════════════════
+   FOOTNOTE
+════════════════════════════════════════════ */
+
+.wsp-footnote {
+  text-align: center;
+  font-size: 12px;
+  color: var(--wsp-muted);
+  margin: 14px 0 0;
+  font-weight: 500;
+}
+.wsp-footnote strong { color: var(--wsp-ink2); font-weight: 700; }
+
+/* ════════════════════════════════════════════
+   CHECKOUT HERO — updates
+════════════════════════════════════════════ */
+
+.wsp-hero-monthly-note {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  opacity: 0.7;
+  margin-top: 2px;
+}
+.wsp-hl-monthly {
+  font-size: 8.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  background: rgba(109, 91, 255, 0.15);
+  color: #a491ff;
+  padding: 1px 3px;
+  border-radius: 3px;
+  margin-left: 3px;
+  vertical-align: middle;
+}
+.wsp-hero-line--insurance .wsp-hl-name { color: #a491ff; }
+.wsp-hero-line--enhance .wsp-hl-name  { color: #6fb3c9; }
+
+.wsp-hero-edit {
+  appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  margin-top: 10px;
+  padding: 5px 10px;
+  border-radius: 699px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.75);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  transition: all 0.2s var(--wsp-ease);
+  align-self: flex-start;
+}
+.wsp-hero-edit:hover {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border-color: rgba(255,255,255,0.35);
+}
+
+/* ════════════════════════════════════════════
+   FORM SELECT
+════════════════════════════════════════════ */
+
+.wsp-form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 12px;
+  padding-right: 28px !important;
+  cursor: pointer;
+}
+
+/* ════════════════════════════════════════════
+   DIALOG SYSTEM
+════════════════════════════════════════════ */
+
+@keyframes wsp-dialog-in {
+  from { opacity: 0; transform: scale(0.94) translateY(12px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);    }
+}
+
+.wsp-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 36, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  animation: wsp-overlay-in 0.25s var(--wsp-ease);
+}
+
+.wsp-dialog {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 40px 80px -20px rgba(15, 23, 36, 0.45), 0 16px 32px -12px rgba(15, 23, 36, 0.3);
+  animation: wsp-dialog-in 0.35s var(--wsp-ease);
+  position: relative;
+  width: 100%;
+}
+.wsp-dialog--sm { max-width: 380px; }
+.wsp-dialog--md { max-width: 520px; }
+
+.wsp-dialog-body {
+  padding: 24px;
+}
+.wsp-dialog-body--center {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.wsp-dialog-icon {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin-bottom: 4px;
+}
+.wsp-dialog-icon--ink {
+  background: linear-gradient(135deg, rgba(15, 23, 36, 0.08), rgba(15, 23, 36, 0.04));
+  border: 1px solid rgba(15, 23, 36, 0.1);
+}
+.wsp-dialog-icon--success {
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.12), rgba(5, 150, 105, 0.06));
+  border: 1px solid rgba(5, 150, 105, 0.2);
+}
+.wsp-dialog-icon--error {
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(220, 38, 38, 0.05));
+  border: 1px solid rgba(220, 38, 38, 0.2);
+}
+.wsp-dialog-icon svg { width: 20px; height: 20px; }
+.wsp-dialog-icon--success svg { stroke: #059669; }
+.wsp-dialog-icon--error svg   { stroke: #dc2626; }
+.wsp-dialog-icon--ink svg     { stroke: var(--wsp-ink); }
+
+.wsp-dialog-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--wsp-ink);
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+.wsp-dialog-sub {
+  font-size: 13px;
+  color: var(--wsp-muted);
+  margin: 2px 0 14px;
+  line-height: 1.5;
+}
+
+.wsp-dialog-card {
+  border-radius: 8px;
+  border: 1px solid rgba(15, 23, 36, 0.08);
+  background: rgba(15, 23, 36, 0.02);
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+.wsp-dialog-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 7px 10px;
+  font-size: 11.5px;
+  border-bottom: 1px solid rgba(15, 23, 36, 0.05);
+}
+.wsp-dialog-row:last-child { border-bottom: none; }
+.wsp-dialog-row span:first-child { color: var(--wsp-muted); font-weight: 600; flex-shrink: 0; }
+.wsp-dialog-row span:last-child  { color: var(--wsp-ink2); font-weight: 700; text-align: right; }
+.wsp-dialog-row--total { background: rgba(239, 107, 26, 0.04); }
+.wsp-dialog-row--total span { font-weight: 800; font-size: 13px; color: var(--wsp-ink) !important; }
+.wsp-dialog-divider {
+  height: 1px;
+  background: rgba(15, 23, 36, 0.08);
+  margin: 0;
+}
+
+.wsp-dialog-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  align-items: center;
+}
+.wsp-dialog-body--center .wsp-dialog-actions { justify-content: center; }
+
+/* Processing spinner */
+@keyframes wsp-spin {
+  to { transform: rotate(360deg); }
+}
+.wsp-dialog-spinner {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 3px solid rgba(239, 107, 26, 0.15);
+  border-top-color: #ef6b1a;
+  animation: wsp-spin 0.9s linear infinite;
+  margin: 0 auto 8px;
+}
+
+/* Processing steps */
+.wsp-dialog-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+  width: 100%;
+  margin-top: 8px;
+}
+.wsp-ds-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: rgba(15, 23, 36, 0.35);
+  transition: color 0.3s var(--wsp-ease);
+}
+.wsp-ds-item.active { color: #ef6b1a; }
+.wsp-ds-item.done   { color: #059669; }
+.wsp-ds-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  transition: all 0.3s var(--wsp-ease);
+  flex-shrink: 0;
+}
+.wsp-ds-item.active .wsp-ds-dot { background: #ef6b1a; border-color: #ef6b1a; }
+.wsp-ds-item.done .wsp-ds-dot   { background: #059669; border-color: #059669; }
+
+/* ════════════════════════════════════════════
+   QUOTE HERO — 2-col stats
+════════════════════════════════════════════ */
+
+.wsp-quote-hero .wsp-hero-stats {
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ════════════════════════════════════════════
+   INSURANCE GRID RESPONSIVE
+════════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+  .wsp-insurance-grid { grid-template-columns: repeat(2, 1fr); }
+  .wsp-mode-tabs { width: 100%; }
+  .wsp-mode-tab { flex: 1; text-align: center; }
+  .wsp-summary-bar { flex-direction: column; align-items: stretch; }
+  .wsp-summary-total { justify-content: space-between; }
+}
