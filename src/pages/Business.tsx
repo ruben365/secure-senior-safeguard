@@ -927,6 +927,124 @@ function Business() {
           <WebsitePricingCards />
         </section>
 
+        {/* ═══════════════════ WEBSITE INSURANCE ═══════════════════ */}
+        <section id="website-insurance" className="py-10 md:py-16 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-3xl pointer-events-none" />
+
+          <div className="container mx-auto relative z-10">
+            <SectionHeader
+              badge="Website Insurance"
+              title="Keep Your Website Safe, Fast, and Online"
+              subtitle="Backups, monitoring, and threat protection that keep your site running 24/7. Cancel anytime." />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+              {/* Basic */}
+              <PricingCard
+                tag="🌐 BASIC"
+                tagColor="from-slate-500 to-slate-600"
+                title="Basic Protection"
+                price="$29"
+                priceSuffix="/month"
+                priceNote="Essential coverage"
+                delay={0}
+                features={[
+                  "SSL management",
+                  "Weekly backups",
+                  "Email support"]
+                }
+                buttonText="Get Started"
+                onButtonClick={() => {
+                  trackButtonClick("Subscribe - Website Insurance Basic", "Website Insurance");
+                  setSelectedInquiry({
+                    name: "Website Insurance - Basic",
+                    price: 29,
+                    tier: "Basic",
+                    description: "SSL management, weekly backups, and email support."
+                  });
+                  setInquiryDialogOpen(true);
+                }} />
+
+              {/* Professional */}
+              <PricingCard
+                tag="⭐ POPULAR"
+                featured
+                title="Professional Protection"
+                price="$79"
+                priceSuffix="/month"
+                priceNote="Full coverage"
+                delay={100}
+                features={[
+                  "Daily backups",
+                  "24/7 monitoring",
+                  "Priority support",
+                  "Malware scanning",
+                  "Data leak scanning",
+                  "AI threat detection"]
+                }
+                buttonText="Get Started"
+                onButtonClick={() => {
+                  trackButtonClick("Subscribe - Website Insurance Professional", "Website Insurance");
+                  setSelectedInquiry({
+                    name: "Website Insurance - Professional",
+                    price: 79,
+                    tier: "Professional",
+                    description: "Daily backups, 24/7 monitoring, priority support, malware and data-leak scanning, AI threat detection."
+                  });
+                  setInquiryDialogOpen(true);
+                }} />
+
+              {/* Enterprise */}
+              <PricingCard
+                tag="🏢 ENTERPRISE"
+                tagColor="from-amber-500 to-orange-500"
+                title="Enterprise Protection"
+                price="$199"
+                priceSuffix="/month"
+                priceNote="Maximum coverage"
+                delay={200}
+                features={[
+                  "Real-time backups",
+                  "DDoS protection",
+                  "Global CDN",
+                  "Dedicated support",
+                  "Advanced AI monitoring"]
+                }
+                buttonText="Get Started"
+                onButtonClick={() => {
+                  trackButtonClick("Subscribe - Website Insurance Enterprise", "Website Insurance");
+                  setSelectedInquiry({
+                    name: "Website Insurance - Enterprise",
+                    price: 199,
+                    tier: "Enterprise",
+                    description: "Real-time backups, DDoS protection, global CDN, dedicated support, advanced AI monitoring."
+                  });
+                  setInquiryDialogOpen(true);
+                }} />
+
+              {/* Custom */}
+              <PricingCard
+                tag="🧩 CUSTOM"
+                tagColor="from-[#6d5bff] to-[#a088ff]"
+                title="Custom Protection"
+                price="$99+"
+                priceSuffix="/month"
+                priceNote="Build your own plan"
+                delay={300}
+                features={[
+                  "Pick the features you need",
+                  "Flexible pricing",
+                  "Upgrade or downgrade anytime"]
+                }
+                buttonText="Build My Plan"
+                onButtonClick={() => {
+                  trackButtonClick("Open - Website Insurance Custom Builder", "Website Insurance");
+                  setWebsiteInsuranceOpen(true);
+                }} />
+            </div>
+          </div>
+        </section>
+
         {/* ═══════════════════ AI AGENTS PRICING ═══════════════════ */}
         <section id="automation-pricing" className="py-10 md:py-16 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
