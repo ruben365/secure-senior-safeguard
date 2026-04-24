@@ -1121,6 +1121,7 @@ export const WebsitePricingCards = () => {
           Need something custom? <strong>Let's talk.</strong> Every project gets a free strategy call.
         </p>
       </div>
+      </div>{/* /wsp-section */}
 
       {/* Modals */}
       <CheckoutModal
