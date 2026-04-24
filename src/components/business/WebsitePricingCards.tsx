@@ -226,6 +226,41 @@ const ADD_ONS: AddOn[] = [
   { id: "maintenance", icon: "🔧", label: "Maintenance Plan",     note: "$200/month — updates, backups & support", price: 200 },
 ];
 
+interface InsurancePlan {
+  id: string;
+  tier: string;
+  name: string;
+  price: number;
+  popular?: boolean;
+  isCustom?: boolean;
+  features: string[];
+}
+
+const INSURANCE_PLANS: InsurancePlan[] = [
+  { id: "basic", tier: "Starter", name: "Basic", price: 29,
+    features: ["SSL certificate management", "Weekly backups", "Uptime monitoring", "Basic firewall"] },
+  { id: "professional", tier: "Business", name: "Professional", price: 59, popular: true,
+    features: ["Everything in Basic", "Daily backups", "Malware scanning", "DDoS protection", "Priority support"] },
+  { id: "enterprise", tier: "Enterprise", name: "Enterprise", price: 99,
+    features: ["Everything in Professional", "Real-time monitoring", "CDN acceleration", "Custom firewall rules", "Dedicated account manager"] },
+  { id: "custom", tier: "Custom", name: "Custom", price: 0, isCustom: true, features: [] },
+];
+
+const CUSTOM_INS_FEATURES = [
+  { id: "ssl",              label: "SSL certificate",           price: 5  },
+  { id: "backups-weekly",   label: "Weekly backups",            price: 5  },
+  { id: "backups-daily",    label: "Daily backups",             price: 10 },
+  { id: "uptime",           label: "Uptime monitoring",         price: 5  },
+  { id: "malware",          label: "Malware scanning",          price: 10 },
+  { id: "ddos",             label: "DDoS protection",           price: 15 },
+  { id: "cdn",              label: "CDN acceleration",          price: 15 },
+  { id: "firewall-basic",   label: "Basic firewall",            price: 5  },
+  { id: "firewall-custom",  label: "Custom firewall rules",     price: 20 },
+  { id: "realtime",         label: "Real-time monitoring",      price: 15 },
+  { id: "support-priority", label: "Priority support",          price: 10 },
+  { id: "account-manager",  label: "Dedicated account manager", price: 25 },
+];
+
 /* ═══════════════════════════════════════════
    TYPES
 ═══════════════════════════════════════════ */
@@ -306,13 +341,15 @@ const AreaGraph = ({ a, uid }: { a: string; uid: string }) => (
 ═══════════════════════════════════════════ */
 
 function CheckoutModal({
-  open, pkg, addonQtys, addonTotal, grandTotal, onClose,
+  open, pkg, addonQtys, addonTotal, grandTotal, insurancePlan, insurancePrice, onClose,
 }: {
   open: boolean;
   pkg: Package | null;
   addonQtys: AddonQtys;
   addonTotal: number;
   grandTotal: number;
+  insurancePlan?: InsurancePlan | null;
+  insurancePrice?: number;
   onClose: () => void;
 }) {
   const [step, setStep] = useState(1);
@@ -341,7 +378,7 @@ function CheckoutModal({
         add_ons: addonsPayload, add_ons_total: addonTotal * 100, total_amount: grandTotal * 100,
         customer_name: form.name, customer_email: form.email,
         payment_status: "pending", status: "new",
-        metadata: { phone: form.phone, company: form.company },
+        metadata: { phone: form.phone, company: form.company, insurancePlan: insurancePlan?.id ?? null, insurancePrice: insurancePrice ?? 0 },
       }]);
 
       const { data, error } = await supabase.functions.invoke("create-webdesign-checkout", {
@@ -469,6 +506,12 @@ function CheckoutModal({
                       <div className="wsp-review-row">
                         <span>Add-ons</span>
                         <span>{selectedAddons.length} selected (+{fmt(addonTotal)})</span>
+                      </div>
+                    )}
+                    {insurancePlan && (insurancePrice ?? 0) > 0 && (
+                      <div className="wsp-review-row">
+                        <span>Insurance</span>
+                        <span>{insurancePlan.name} Plan (+${insurancePrice}/mo)</span>
                       </div>
                     )}
                     <div className="wsp-review-row wsp-review-row--total"><span>Total</span><span>{fmt(grandTotal)}</span></div>
@@ -789,6 +832,8 @@ export const WebsitePricingCards = () => {
   const [checkoutPkg, setCheckoutPkg] = useState<Package | null>(null);
   const [quoteOpen, setQuoteOpen] = useState(false);
   const [quoteType, setQuoteType] = useState("");
+  const [selectedInsuranceId, setSelectedInsuranceId] = useState<string | null>(null);
+  const [customInsFeatures, setCustomInsFeatures] = useState<Record<string, boolean>>({});
 
   const toggleAddon = useCallback((id: string) => {
     setAddonQtys((prev) => {
@@ -810,6 +855,9 @@ export const WebsitePricingCards = () => {
   const activePkg = PACKAGES.find((p) => p.id === activePackageId) ?? PACKAGES[1];
   const grandTotal = activePkg.price + addonTotal;
   const selectedAddonCount = Object.values(addonQtys).filter((q) => q > 0).length;
+  const selectedInsurance = INSURANCE_PLANS.find((p) => p.id === selectedInsuranceId) ?? null;
+  const customInsTotal = CUSTOM_INS_FEATURES.reduce((sum, f) => sum + (customInsFeatures[f.id] ? f.price : 0), 0);
+  const insuranceMonthlyPrice = selectedInsurance?.isCustom ? customInsTotal : (selectedInsurance?.price ?? 0);
 
   const handleGetStarted = useCallback((pkg: Package) => {
     setCheckoutPkg(pkg);
@@ -932,6 +980,100 @@ export const WebsitePricingCards = () => {
         </div>
       </div>
 
+      {/* ── Insurance Section ── */}
+      <div className="wsp-insurance-section">
+        <div className="wsp-insurance-header">
+          <span className="wsp-addons-eyebrow wsp-addons-eyebrow--purple">WEBSITE INSURANCE</span>
+          <h2 className="wsp-addons-title">Protect Your Investment</h2>
+          <p className="wsp-addons-sub">Add monthly security monitoring, backups, and support to keep your site fast, safe, and online.</p>
+        </div>
+
+        <div className="wsp-insurance-grid">
+          {INSURANCE_PLANS.map((plan) => (
+            <div
+              key={plan.id}
+              className={`wsp-ins-card${selectedInsuranceId === plan.id ? " selected" : ""}`}
+              onClick={() => setSelectedInsuranceId(selectedInsuranceId === plan.id ? null : plan.id)}
+            >
+              {plan.popular && <span className="wsp-ins-flag">POPULAR</span>}
+              <div className="wsp-ins-tier">{plan.tier}</div>
+              <div className="wsp-ins-name">{plan.name}</div>
+              {!plan.isCustom ? (
+                <div className="wsp-ins-price">
+                  ${plan.price}<span className="per">/mo</span>
+                </div>
+              ) : (
+                <div className="wsp-ins-price">
+                  {customInsTotal > 0 ? `$${customInsTotal}` : "Custom"}<span className="per">{customInsTotal > 0 ? "/mo" : ""}</span>
+                </div>
+              )}
+              {plan.features.length > 0 && (
+                <ul className="wsp-ins-features">
+                  {plan.features.map((f, i) => (
+                    <li key={i}>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6d5bff" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 1 }}>
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {plan.isCustom && selectedInsuranceId === plan.id && (
+                <div className="wsp-ins-custom-features" onClick={(e) => e.stopPropagation()}>
+                  {CUSTOM_INS_FEATURES.map((f) => (
+                    <label key={f.id} className="wsp-ins-custom-feature">
+                      <input
+                        type="checkbox"
+                        checked={customInsFeatures[f.id] ?? false}
+                        onChange={() => setCustomInsFeatures((prev) => ({ ...prev, [f.id]: !prev[f.id] }))}
+                      />
+                      <span>{f.label}</span>
+                      <span className="wsp-ins-custom-price">+${f.price}/mo</span>
+                    </label>
+                  ))}
+                </div>
+              )}
+              {plan.isCustom && selectedInsuranceId !== plan.id && (
+                <ul className="wsp-ins-features">
+                  <li>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6d5bff" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 1 }}>
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    Pick exactly what you need
+                  </li>
+                  <li>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6d5bff" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 1 }}>
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    Pay only for features you use
+                  </li>
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {selectedInsurance && insuranceMonthlyPrice > 0 && (
+          <div className="wsp-ins-summary-bar">
+            <div className="wsp-ins-summary-text">
+              <div className="wsp-ins-summary-label">INSURANCE SELECTED</div>
+              <div className="wsp-ins-summary-plan">{selectedInsurance.name} Plan</div>
+            </div>
+            <div className="wsp-ins-summary-price">
+              ${insuranceMonthlyPrice}<span className="per">/mo</span>
+            </div>
+            <button
+              className="wsp-ins-add-btn"
+              type="button"
+              onClick={() => { setCheckoutPkg(activePkg); setCheckoutOpen(true); }}
+            >
+              Add to Order →
+            </button>
+          </div>
+        )}
+      </div>
+
       {/* ── Modals ── */}
       <CheckoutModal
         open={checkoutOpen}
@@ -939,6 +1081,8 @@ export const WebsitePricingCards = () => {
         addonQtys={addonQtys}
         addonTotal={addonTotal}
         grandTotal={checkoutPkg ? checkoutPkg.price + addonTotal : grandTotal}
+        insurancePlan={selectedInsurance}
+        insurancePrice={insuranceMonthlyPrice}
         onClose={() => setCheckoutOpen(false)}
       />
 

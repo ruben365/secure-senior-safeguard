@@ -15,7 +15,6 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { BookingModal } from "@/components/BookingModal";
 import { ServiceInquiryDialog } from "@/components/ServiceInquiryDialog";
-import { WebsiteInsuranceDialog } from "@/components/WebsiteInsuranceDialog";
 import { EmbeddedPaymentModal } from "@/components/payment/EmbeddedPaymentModal";
 import { AnimatedSection } from "@/components/AnimatedSection";
 
@@ -358,7 +357,6 @@ interface BusinessTestimonial {
 function Business() {
   const [modalOpen, setModalOpen] = useState(false);
   const [inquiryDialogOpen, setInquiryDialogOpen] = useState(false);
-  const [websiteInsuranceOpen, setWebsiteInsuranceOpen] = useState(false);
   const [selectedInquiry, setSelectedInquiry] = useState<{
     name: string;
     price: number;
@@ -983,109 +981,6 @@ function Business() {
                   Get Custom Quote <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </div>
-            </AnimatedSection>
-          </div>
-        </section>
-
-        <SectionDivider variant="curve" color="muted" flip />
-
-        {/* ═══════════════════ WEBSITE INSURANCE ═══════════════════ */}
-        <section id="website-insurance" className="py-10 md:py-16 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-muted/60 via-muted/40 to-muted/60 dark:bg-none dark:bg-[#1c1917]" />
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-          
-          <div className="container mx-auto relative z-10">
-            <SectionHeader
-              badge="Protect Your Investment"
-              title="Website Insurance"
-              subtitle="Security monitoring, backups, support, and performance optimization. Your site stays fast, safe, and online." />
-            
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
-              {[
-              {
-                tag: "ESSENTIAL",
-                tagColor: "from-emerald-500 to-teal-500",
-                title: "Essential",
-                price: "$29",
-                note: "Basic protection",
-                features: ["SSL Management", "Weekly Backups", "Email Support", "Basic Monitoring"]
-              },
-              {
-                tag: "⭐ MOST POPULAR",
-                featured: true,
-                title: "Professional",
-                price: "$49",
-                note: "Full protection",
-                features: ["All Essential features", "24/7 Monitoring", "Daily Backups", "Priority Support", "Malware Scanning"]
-              },
-              {
-                tag: "👑 ENTERPRISE",
-                tagColor: "from-amber-500 to-orange-500",
-                title: "Enterprise",
-                price: "$99",
-                note: "Maximum protection",
-                features: ["All Professional features", "Real-Time Backups", "DDoS Protection", "24/7 Dedicated Support", "Global CDN"]
-              },
-              {
-                tag: "✨ CUSTOM",
-                tagColor: "from-primary via-accent to-primary",
-                title: "Customizable",
-                price: "$29-500",
-                note: "Build your own",
-                features: ["Choose your features", "Flexible pricing", "Custom support level", "Upgrade anytime"]
-              }].
-              map((plan, i) =>
-              <PricingCard
-                key={i}
-                tag={plan.tag}
-                tagColor={plan.tagColor}
-                featured={plan.featured}
-                title={plan.title}
-                price={plan.price}
-                priceSuffix="/mo"
-                priceNote={plan.note}
-                features={plan.features}
-                delay={i * 100}
-                buttonText={i === 3 ? "Build Your Plan" : "Subscribe Now"}
-                onButtonClick={() => {
-                  trackButtonClick(`Subscribe Now - Website Insurance ${plan.title}`, "Website Insurance");
-                  setWebsiteInsuranceOpen(true);
-                }} />
-
-              )}
-            </div>
-
-            {/* Supporting photography — operations in action */}
-            <div className="max-w-5xl mx-auto mt-5">
-              <SectionImage
-                src={businessTeamMeeting}
-                alt="Business team collaborating during a strategy meeting"
-                variant="split-right"
-              >
-                <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">
-                  Built around your team
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Every plan includes onboarding, monthly check-ins, and a
-                  dedicated account contact — so your AI stack stays aligned
-                  with how your business actually operates.
-                </p>
-              </SectionImage>
-            </div>
-
-            {/* Trust badges */}
-            <AnimatedSection animation="fade-up" delay={200} className="mt-6 flex flex-wrap items-center justify-center gap-4">
-              {[
-              { icon: Lock, text: "Secure Payment" },
-              { icon: Shield, text: "30-Day Guarantee" },
-              { icon: CheckCircle, text: "Cancel Anytime" }].
-              map((item, i) =>
-              <div key={i} className="flex items-center gap-2 px-4 py-2 glass-subtle rounded-full text-xs hover:border-primary/30 transition-colors duration-300">
-                  <item.icon className="w-3.5 h-3.5 text-primary" />
-                  <span className="font-semibold">{item.text}</span>
-                </div>
-              )}
             </AnimatedSection>
           </div>
         </section>
@@ -1899,11 +1794,6 @@ function Business() {
           serviceDescription={selectedInquiry.description} />
 
         }
-
-        <WebsiteInsuranceDialog
-          open={websiteInsuranceOpen}
-          onOpenChange={setWebsiteInsuranceOpen} />
-        
 
         {embeddedPaymentConfig &&
         <EmbeddedPaymentModal
