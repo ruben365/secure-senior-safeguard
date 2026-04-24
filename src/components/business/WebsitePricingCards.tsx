@@ -906,17 +906,30 @@ export const WebsitePricingCards = () => {
 
   return (
     <div className="wsp-root">
-      {/* Pricing cards */}
-      <div className="wsp-grid">
-        {PACKAGES.map(p => (
-          <PremiumCard
-            key={p.id}
-            pkg={p}
-            onGetStarted={() => { setBasePackage(p.id); setCheckoutOpen(true); }}
-            onGetQuote={() => { setQuoteType(p.id); setQuoteOpen(true); }}
-          />
-        ))}
-      </div>
+      {/* Floating blobs (decorative) */}
+      <div className="wsp-blob wsp-blob--1" aria-hidden="true" />
+      <div className="wsp-blob wsp-blob--2" aria-hidden="true" />
+      <div className="wsp-blob wsp-blob--3" aria-hidden="true" />
+
+      <div className="wsp-section">
+        {/* Heading */}
+        <div className="wsp-heading-wrap">
+          <span className="wsp-eyebrow"><span className="wsp-eyebrow-dot" /> WEB DESIGN</span>
+          <h1 className="wsp-h1">Websites That <span className="wsp-h1-accent">Sell For You</span></h1>
+          <p className="wsp-subhead">Fast, secure sites that turn visitors into paying customers. Ohio-based pricing, built to scale.</p>
+        </div>
+
+        {/* Pricing cards */}
+        <div className="wsp-grid">
+          {PACKAGES.map(p => (
+            <PremiumCard
+              key={p.id}
+              pkg={p}
+              onGetStarted={() => { setBasePackage(p.id); setCheckoutOpen(true); }}
+              onGetQuote={() => { setQuoteType(p.id); setQuoteOpen(true); }}
+            />
+          ))}
+        </div>
 
       {/* Market note */}
       <div className="wsp-market-note">
