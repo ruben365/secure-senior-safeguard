@@ -307,7 +307,14 @@ const AddonCard = ({ name, desc, price, priceLabel = "", checked, onToggle, qty,
   checked: boolean; onToggle: () => void;
   qty?: number; onDec?: () => void; onInc?: () => void; showQty?: boolean;
 }) => (
-  <div className={`wsp-addon-card${checked ? " wsp-addon-card--checked" : ""}`} onClick={onToggle}>
+  <div
+    className={`wsp-addon-card${checked ? " wsp-addon-card--checked" : ""}`}
+    onClick={onToggle}
+    role="checkbox"
+    aria-checked={checked}
+    tabIndex={0}
+    onKeyDown={e => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); onToggle(); } }}
+  >
     <span className="wsp-card-edge-glow" aria-hidden="true" />
     <div className={`wsp-addon-check${checked ? " wsp-addon-check--on" : ""}`}>
       <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg>
@@ -365,47 +372,66 @@ function CheckoutModal({ open, basePackage, selected, enhancementsMap, insurance
     setProcessingOpen(true);
     setProcStep(0);
     try {
+      // Use `label` to match the edge function's AddOn interface (issue 7)
       const addonsPayload = Object.entries(selected).map(([id, qty]) => {
         const a = BUILD_ADDONS.find(x => x.id === id)!;
-        return { id, qty, name: a.name, price: a.price, category: a.category, monthly: !!a.monthly };
+        return { id, qty, label: a.name, price: a.price, category: a.category, monthly: !!a.monthly };
       });
       const enhancementsPayload = Object.entries(enhancementsMap).map(([id, qty]) => {
         const e = ENHANCEMENTS.find(x => x.id === id)!;
-        return { id, qty, name: e.name, price: e.price };
+        return { id, qty, label: e.name, price: e.price };
       });
+
+      // Include custom insurance features in persisted metadata (issue 8)
       let insurancePayload = null;
       if (insurance) {
         const plan = INSURANCE_PLANS.find(p => p.id === insurance)!;
-        const customFeatures = (plan as any).isCustom
+        const customInsFeatures = (plan as any).isCustom
           ? Object.keys(insuranceCustom).map(fid => {
               const f = INS_CUSTOM_FEATURES.find(x => x.id === fid)!;
               return { id: f.id, name: f.name, price: f.price };
             })
           : [];
-        const planMonthly = plan.price + customFeatures.reduce((s, f) => s + f.price, 0);
-        insurancePayload = { id: plan.id, tier: plan.tier, name: plan.name, basePrice: plan.price, monthly: planMonthly, customFeatures };
+        const planMonthly = plan.price + customInsFeatures.reduce((s, f) => s + f.price, 0);
+        insurancePayload = { id: plan.id, tier: plan.tier, name: plan.name, basePrice: plan.price, monthly: planMonthly, customInsFeatures };
       }
 
-      const payload = {
-        customer: { ...form, budget },
-        package: basePackage,
-        packagePriceId: pkg.priceId,
-        addons: addonsPayload,
-        enhancements: enhancementsPayload,
-        insurance: insurancePayload,
-        total, monthlyTotal: monthly, lines,
-        source: "ai_page_checkout",
-        timestamp: new Date().toISOString(),
-      };
+      // Insert order directly via Supabase client (issue 5)
+      const { data: orderRow, error: insertErr } = await supabase
+        .from("web_design_orders")
+        .insert({
+          user_email: form.email,
+          package_type: basePackage,
+          package_price: pkg.price,
+          add_ons: { addons: addonsPayload, enhancements: enhancementsPayload, insurance: insurancePayload },
+          total_price: total,
+          status: "pending",
+        })
+        .select("id")
+        .single();
 
-      await Promise.allSettled([
-        fetch("/api/supabase/orders", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }),
-        fetch("/api/supabase/custom-builds", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }),
-      ]);
+      if (insertErr) {
+        console.warn("Order insert warning:", insertErr.message);
+      }
 
       setProcStep(1);
+
+      // Pass build addons + enhancements to edge function for Stripe line-item description
+      const stripeAddOns = [
+        ...addonsPayload,
+        ...enhancementsPayload,
+      ];
+
       const { data, error } = await supabase.functions.invoke("create-webdesign-checkout", {
-        body: { packageName: pkg.name, packageType: basePackage, totalAmount: total, addOns: addonsPayload, customerName: form.name, customerEmail: form.email, successUrl: `${window.location.origin}/ai?payment=success`, cancelUrl: `${window.location.origin}/ai` },
+        body: {
+          packageName: pkg.name,
+          packageType: basePackage,
+          addOns: stripeAddOns,
+          orderId: orderRow?.id,
+          customerEmail: form.email,
+          successUrl: `${window.location.origin}/ai?payment=success`,
+          cancelUrl: `${window.location.origin}/ai`,
+        },
       });
       if (error) throw error;
       setProcStep(2);
@@ -680,13 +706,22 @@ function QuoteModal({ open, preselectedType, onClose }: { open: boolean; presele
     if (!/\S+@\S+\.\S+/.test(email)) return;
     setLoading(true);
     try {
-      const quoteNumber = `WDQ-${Date.now().toString().slice(-8)}`;
-      await (supabase as any).from("web_design_quotes").insert([{
-        quote_number: quoteNumber, name, email,
-        website_type: websiteType || null, budget_range: budget || null,
-        additional_notes: features || null, status: "new",
-        metadata: { phone, company, businessType, pageCount },
-      }]);
+      // Use actual schema columns (issue 6): quote_number, additional_notes, metadata don't exist
+      const messageLines = [
+        features || null,
+        phone ? `Phone: ${phone}` : null,
+        company ? `Company: ${company}` : null,
+        pageCount ? `Pages: ${pageCount}` : null,
+      ].filter(Boolean);
+      await supabase.from("web_design_quotes").insert({
+        name, email,
+        business_type: businessType || null,
+        website_type: websiteType || null,
+        features_needed: [],
+        budget_range: budget || null,
+        message: messageLines.join("\n") || null,
+        status: "new",
+      });
       onClose();
     } catch {
       /* non-blocking */
