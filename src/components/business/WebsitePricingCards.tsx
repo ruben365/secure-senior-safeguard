@@ -1003,7 +1003,7 @@ export const WebsitePricingCards = () => {
             {/* Category groups */}
             {["core", "growth", "maintenance"].map(cat => (
               <div key={cat} className={`wsp-category-group${activeCategory === cat ? " active" : ""}`}>
-                <div className="wsp-addons-grid">
+                <div className="wsp-addons-grid wsp-addons-grid--orange">
                   {BUILD_ADDONS.filter(a => a.category === cat).map(a => {
                     const qty = selected[a.id] ?? 0;
                     const checked = qty > 0;
