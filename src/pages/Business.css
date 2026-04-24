@@ -1,0 +1,98 @@
+/* ============================================================
+   /ai page — global design canvas
+   Cream background, floating blobs, subtle noise grain.
+   Applied to everything BETWEEN the hero and the footer.
+   ============================================================ */
+
+.ai-page-canvas {
+  --aip-bg: #f7f6f3;
+  --aip-line: #ece9e2;
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(700px 400px at 10% -2%, #ffe7d1 0%, transparent 60%),
+    radial-gradient(800px 460px at 100% 8%, #e6dcff 0%, transparent 60%),
+    radial-gradient(700px 500px at 50% 100%, #d9f3ec 0%, transparent 60%),
+    var(--aip-bg);
+  color: #0f1724;
+  overflow: hidden;
+}
+
+/* Subtle film-grain noise — locked to the canvas, not the viewport */
+.ai-page-canvas::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.30 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity: 0.45;
+  mix-blend-mode: multiply;
+}
+
+/* Floating blobs */
+.ai-page-canvas .aip-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+.ai-page-canvas .aip-blob.b1 {
+  width: 320px; height: 320px;
+  top: 4%; left: -80px;
+  background: radial-gradient(circle, #ffb36b, transparent 60%);
+  animation: aip-float1 14s ease-in-out infinite;
+}
+.ai-page-canvas .aip-blob.b2 {
+  width: 360px; height: 360px;
+  top: 28%; right: -100px;
+  background: radial-gradient(circle, #b8a7ff, transparent 60%);
+  animation: aip-float2 18s ease-in-out infinite;
+}
+.ai-page-canvas .aip-blob.b3 {
+  width: 320px; height: 320px;
+  top: 60%; left: 25%;
+  background: radial-gradient(circle, #a8f0e6, transparent 60%);
+  animation: aip-float3 16s ease-in-out infinite;
+}
+.ai-page-canvas .aip-blob.b4 {
+  width: 280px; height: 280px;
+  bottom: 8%; right: 10%;
+  background: radial-gradient(circle, #ffc7d9, transparent 60%);
+  animation: aip-float1 20s ease-in-out infinite reverse;
+}
+
+@keyframes aip-float1 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, 20px); }
+}
+@keyframes aip-float2 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-40px, 30px); }
+}
+@keyframes aip-float3 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(20px, -25px); }
+}
+
+/* Make sure all real content sits above the blobs/noise */
+.ai-page-canvas > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Soften pre-existing dark/gradient section backgrounds so the
+   warm cream canvas reads through consistently. */
+.ai-page-canvas section {
+  background-color: transparent;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ai-page-canvas .aip-blob {
+    animation: none !important;
+  }
+}

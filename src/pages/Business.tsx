@@ -75,6 +75,7 @@ import { AnswerSummary } from "@/components/AnswerSummary";
 import HeroFloatingStats from "@/components/business/HeroFloatingStats";
 import { SectionDivider, MeshBackground } from "@/components/pro";
 import { WebsitePricingCards } from "@/components/business/WebsitePricingCards";
+import "./Business.css";
 
 
 const platformSnapshotStats = [
